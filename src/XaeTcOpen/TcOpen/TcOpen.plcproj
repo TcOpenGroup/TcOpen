@@ -15,6 +15,10 @@
     <Implicit_KindOfTask>{ea3b4140-3035-47f7-afac-349d22ca2c13}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{257502dc-3e78-4a8d-ad9f-50eefb5da7c7}</Implicit_Jitter_Distribution>
     <LibraryReferences>{63ef891a-acd0-47a4-b208-b6a50fa2d7d9}</LibraryReferences>
+    <Released>false</Released>
+    <Title>TcOpen</Title>
+    <ProjectVersion>0.0.0.1</ProjectVersion>
+    <Author>Dustin Hullett</Author>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
@@ -29,7 +33,13 @@
     <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\ST_AnalogSensorStatusWord.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Version\Global_Version.TcGVL">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -39,6 +49,7 @@
     <Folder Include="POUs\Cylinders" />
     <Folder Include="POUs\Cylinders\ITFs" />
     <Folder Include="POUs\Cylinders\FBs" />
+    <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -57,21 +68,13 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <SubObject Include="FB_Cylinder.bAtHome" />
-    <SubObject Include="FB_Cylinder.bAtHome.Get" />
-    <SubObject Include="FB_Cylinder.bAtWork" />
-    <SubObject Include="FB_Cylinder.bAtWork.Get" />
-    <SubObject Include="FB_Cylinder.MoveToHome" />
-    <SubObject Include="FB_Cylinder.MoveToWork" />
-    <SubObject Include="FB_Cylinder.StateMachine" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.bAnalogErr" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.bAnalogErr.Get" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.bAtPressure" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.bAtPressure.Get" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.nTargetPressure" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.nTargetPressure.Get" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.nTargetPressure.Set" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.StateMachine" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.AnalogError" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.AnalogError.Get" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.AtPressure" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.AtPressure.Get" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.TargetPressure" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.TargetPressure.Get" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.TargetPressure.Set" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TcOpen.tmc">
