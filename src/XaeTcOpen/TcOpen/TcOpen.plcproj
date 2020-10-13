@@ -36,6 +36,9 @@
     <Compile Include="POUs\Cylinders\ST_AnalogSensorStatusWord.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,7 @@
     <Folder Include="POUs\Cylinders" />
     <Folder Include="POUs\Cylinders\ITFs" />
     <Folder Include="POUs\Cylinders\FBs" />
+    <Folder Include="POUs\Cylinders\Test FBs" />
     <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
@@ -66,15 +70,10 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
-  </ItemGroup>
-  <ItemGroup>
-    <SubObject Include="FB_CylinderWithPressureFeedback.AnalogError" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.AnalogError.Get" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.AtPressure" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.AtPressure.Get" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.TargetPressure" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.TargetPressure.Get" />
-    <SubObject Include="FB_CylinderWithPressureFeedback.TargetPressure.Set" />
+    <PlaceholderReference Include="TcUnit">
+      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
+      <Namespace>TcUnit</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcOpen.tmc">

@@ -1,13 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{f20f72a3-44bd-4b01-bab9-6aeb1376a30d}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="MAIN" Id="{f20f72a3-44bd-4b01-bab9-6aeb1376a30d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbCylinderTest : FB_CylinderTest;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[IF NOT TcUnit.GVL_TcUnit.TcUnitRunner.AllTestSuitesFinished THEN
+	fbCylinderTest.CycleCylinder();
+END_IF
+tcUnit.RUN();
+]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
