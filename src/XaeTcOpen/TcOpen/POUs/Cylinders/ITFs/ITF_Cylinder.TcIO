@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <Itf Name="ITF_Cylinder" Id="{d67e700f-f4ae-4803-bb24-213c42f7b180}">
+    <Declaration><![CDATA[INTERFACE ITF_Cylinder EXTENDS __System.IQueryInterface
+]]></Declaration>
+    <Property Name="bAtHome" Id="{de61584f-b4cf-4cc1-9dae-bfa15f41af2a}">
+      <Declaration><![CDATA[PROPERTY bAtHome : bool]]></Declaration>
+      <Get Name="Get" Id="{dee60c83-dbdf-4df2-9d01-cb15f4a035a3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="bAtWork" Id="{86608e1a-db36-448a-ab9b-c98dba75f077}">
+      <Declaration><![CDATA[PROPERTY bAtWork : bool]]></Declaration>
+      <Get Name="Get" Id="{c885c12e-772c-4067-b1a8-f3eeab530dd2}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="MoveToHome" Id="{8e4809ef-bb6b-4b80-ac93-e8ed0d61f227}">
+      <Declaration><![CDATA[METHOD MoveToHome
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MoveToWork" Id="{ea959bff-fd62-4b67-bd52-9c1b6742dba9}">
+      <Declaration><![CDATA[METHOD MoveToWork
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

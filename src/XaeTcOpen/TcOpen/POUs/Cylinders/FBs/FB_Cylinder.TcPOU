@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="FB_Cylinder" Id="{79cb4f40-31ce-4693-b0f1-1fa888becb2d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Cylinder IMPLEMENTS ITF_Cylinder
+VAR_INPUT
+	bAtHomePos AT %I* : BOOL; // Link With Home Position Sensor
+	bAtWorkPos AT %I* : BOOL; // Link With Work Position Sensor
+	bSimulate : BOOL := TRUE;
+END_VAR
+VAR_OUTPUT
+	bToHomePos AT %Q* : BOOL;
+	bToWorkPos AT %Q* : BOOL;
+END_VAR
+VAR
+	{attribute 'hide_all_locals'}
+	m_bMoveToWork : BOOL;
+	m_bMoveToHome : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="bAtHome" Id="{b76a1268-949d-4228-9da2-7c7b6bbd5982}">
+      <Declaration><![CDATA[PROPERTY bAtHome : bool]]></Declaration>
+      <Get Name="Get" Id="{21b23d6b-1a5e-4bd0-9195-5dea43f3a39d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bAtHome := bAtHomePos OR (bSimulate AND bToHomePos);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="bAtWork" Id="{d9865af3-fdb6-41a6-ba21-cc9674f79445}">
+      <Declaration><![CDATA[PROPERTY bAtWork : bool]]></Declaration>
+      <Get Name="Get" Id="{fe844e25-b218-4a05-8ab3-8ab50d225f67}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bAtwork := bAtWorkPos OR (bSimulate AND bToWorkPos);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveToHome" Id="{27bb39b7-35d2-4604-906c-fed7be11cae8}">
+      <Declaration><![CDATA[METHOD MoveToHome
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[m_bMoveToHome := TRUE;
+m_bMoveToWork := FALSE;
+THIS^.StateMachine();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToWork" Id="{a201b25b-b1ba-444b-af52-d980dc092ed7}">
+      <Declaration><![CDATA[/// Move To Work Position
+METHOD MoveToWork
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[m_bMoveToHome := FALSE;
+m_bMoveToWork := TRUE;
+THIS^.StateMachine();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StateMachine" Id="{a532bc11-6dfa-49f6-b998-ff0085d72875}">
+      <Declaration><![CDATA[METHOD PROTECTED StateMachine
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[/// Simple Cylinder Control Holding the last state
+
+IF m_bMoveToWork AND (NOT m_bMoveToHome) THEN
+	bToWorkPos := TRUE;
+	bToHomePos := FALSE;
+ELSIF m_bMoveToHome THEN
+	bToWorkPos := FALSE;
+	bToHomePos := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Cylinder">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.bAtHome.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.bAtWork.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.MoveToHome">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.MoveToWork">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.StateMachine">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

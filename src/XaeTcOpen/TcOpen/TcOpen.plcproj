@@ -20,6 +20,15 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\FBs\FB_Cylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\FBs\FB_CylinderWithPressureFeedback.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -27,6 +36,9 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Cylinders" />
+    <Folder Include="POUs\Cylinders\ITFs" />
+    <Folder Include="POUs\Cylinders\FBs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -44,11 +56,33 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
   </ItemGroup>
+  <ItemGroup>
+    <SubObject Include="FB_Cylinder.bAtHome" />
+    <SubObject Include="FB_Cylinder.bAtHome.Get" />
+    <SubObject Include="FB_Cylinder.bAtWork" />
+    <SubObject Include="FB_Cylinder.bAtWork.Get" />
+    <SubObject Include="FB_Cylinder.MoveToHome" />
+    <SubObject Include="FB_Cylinder.MoveToWork" />
+    <SubObject Include="FB_Cylinder.StateMachine" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.bAnalogErr" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.bAnalogErr.Get" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.bAtPressure" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.bAtPressure.Get" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.nTargetPressure" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.nTargetPressure.Get" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.nTargetPressure.Set" />
+    <SubObject Include="FB_CylinderWithPressureFeedback.StateMachine" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TcOpen.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
@@ -69,13 +103,13 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>
