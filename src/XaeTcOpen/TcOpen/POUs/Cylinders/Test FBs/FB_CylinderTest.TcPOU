@@ -8,6 +8,7 @@ VAR
 	masterMoveState, prevState : (
 		init,
 		runMoveToHomeTest,
+		runPauseState,
 		runMoveToWorkTest,
 		cycleComplete,
 		errorCycle
@@ -30,7 +31,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[CycleCylinder();]]></ST>
     </Implementation>
     <Method Name="CycleCylinder" Id="{2f755462-1437-4939-92cb-0ec93d8f7e06}">
       <Declaration><![CDATA[METHOD CycleCylinder : int
@@ -38,7 +39,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE masterMoveState OF
+        <ST><![CDATA[TEST('CycleCylinder');
+CASE masterMoveState OF
 	
 	init:
 
@@ -49,8 +51,12 @@ END_VAR
 
 		prevState := masterMoveState;
 		IF MoveCylinderToHome() THEN
-			masterMoveState := runMoveToWorkTest;
+			masterMoveState := runPauseState;
 		END_IF
+		
+	runPauseState:
+		prevState := masterMoveState;
+		masterMoveState := runMoveToWorkTest;
 		
 	runMoveToWorkTest :
 	
@@ -62,6 +68,7 @@ END_VAR
 		
 	cycleComplete :
 		IF prevState <> masterMoveState THEN
+			TEST_FINISHED_NAMED('CycleCylinder');
 			prevState := masterMoveState;
 		END_IF
 		
@@ -76,7 +83,8 @@ VAR_INST
 	timeoutTimer : TON := (PT := fbCylinder.CYLINDER_MOVE_TIME + fbCylinder.CYLINDER_MOVE_TIME ); // allow twice the required time
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE moveHomeTestState OF
+        <ST><![CDATA[
+CASE moveHomeTestState OF
 	
 	init:
 		TEST('MoveCylinderToHome');
@@ -107,18 +115,16 @@ END_VAR]]></Declaration>
 		ELSIF fbCylinder.AtHome THEN
 			AssertTrue( TRUE , '' );
 			moveHomeTestState := completeToHome;
-			MoveCylinderToHome := TRUE;
+			
 			
 		END_IF
 		
 	completeToHome :
-	
 		TEST_FINISHED_NAMED('MoveCylinderToHome');
-
+		MoveCylinderToHome := TRUE;
 END_CASE
 
 timeoutTimer( IN := fbCylinder.MovingToHomePosition );
-MoveCylinderToHome := moveHomeTestState = completeToHome;
 ]]></ST>
       </Implementation>
     </Method>
@@ -129,14 +135,15 @@ VAR_INST
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE moveToWorkTestState OF
+        <ST><![CDATA[
+CASE moveToWorkTestState OF
 	
 	init:
 		TEST('MoveCylinderToWork');
 		moveToWorkTestState := requestCylinderMoveToWork;
 		
 	requestCylinderMoveToWork :
-		fbCylinder.MoveToHome();
+		fbCylinder.MoveToWork();
 		
 		moveToWorkTestState := seeMovingToWorkStatus;
 		
@@ -160,20 +167,46 @@ END_VAR
 		ELSIF fbCylinder.AtWork THEN
 			AssertTrue( TRUE , '' );
 			moveToWorkTestState := completeToWork;
-			MoveCylinderToWork := TRUE;
-			
+		
 		END_IF
 		
 	completeToWork :
-	
 		TEST_FINISHED_NAMED('MoveCylinderToWork');
-
+		MoveCylinderToWork := TRUE;
 END_CASE
 
-timeoutTimer( IN := fbCylinder.MovingToWorkPosition );
-MoveCylinderToWork := moveToWorkTestState = completeToWork;
-]]></ST>
+timeoutTimer( IN := fbCylinder.MovingToWorkPosition );]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="FB_CylinderTest">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CylinderTest.CycleCylinder">
+      <LineId Id="39" Count="0" />
+      <LineId Id="3" Count="13" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="1" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="17" Count="9" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="27" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CylinderTest.MoveCylinderToHome">
+      <LineId Id="50" Count="0" />
+      <LineId Id="3" Count="35" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="42" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CylinderTest.MoveCylinderToWork">
+      <LineId Id="51" Count="0" />
+      <LineId Id="3" Count="30" />
+      <LineId Id="35" Count="3" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="42" Count="2" />
+    </LineIds>
   </POU>
 </TcPlcObject>

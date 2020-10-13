@@ -7,16 +7,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT TcUnit.GVL_TcUnit.TcUnitRunner.AllTestSuitesFinished THEN
-	fbCylinderTest.CycleCylinder();
-END_IF
-tcUnit.RUN();
+      <ST><![CDATA[tcUnit.RUN();
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="10" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
