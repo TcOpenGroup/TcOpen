@@ -5,7 +5,7 @@
 VAR
 	_rawPressureValue AT %I* : INT; // Link with analog pressure feedback device
 	_statusWord  AT %I* : ST_AnalogSensorStatusWord; // Link with Analog Status Word;
-	_targetPressure: INT;
+	_targetPressure : INT;
 END_VAR
 VAR CONSTANT
 	ANALOG_MAX : INT := 32765;
@@ -32,7 +32,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtPressure := (_rawPressureValue >= TargetPressure) OR (AtWork AND _simulate) ;]]></ST>
+          <ST><![CDATA[AtPressure := ( _rawPressureValue >= TargetPressure) OR (AtWork AND _simulate) ;]]></ST>
         </Implementation>
       </Get>
     </Property>

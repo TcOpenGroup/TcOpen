@@ -4,7 +4,29 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CylinderTest EXTENDS FB_TestSuite
 VAR
 	fbCylinder : FB_Cylinder;
-	_state : INT;
+	
+	masterMoveState, prevState : (
+		init,
+		runMoveToHomeTest,
+		runMoveToWorkTest,
+		cycleComplete,
+		errorCycle
+	);
+	
+	moveHomeTestState : (
+		initToHome,
+		requestCylinderMoveToHome,
+		seeMovingToHomeStatus,
+		waitForCylinderAtHome,
+		completeToHome
+	);
+	moveToWorkTestState : (
+		initToWork,
+		requestCylinderMoveToWork,
+		seeMovingToWorkStatus,
+		waitForCylinderAtWork,
+		completeToWork
+	);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -16,148 +38,142 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('CycleCylinder');
-IF _state = 0 THEN
-	//TEST('MoveToHomeComplete');
-	fbCylinder.MoveToHome();
-	_state := 1;
-END_IF
+        <ST><![CDATA[CASE masterMoveState OF
+	
+	init:
 
-IF _state = 1 THEN
-	IF THIS^.MoveCylinderToHome() THEN
+		prevState := masterMoveState;
+		masterMoveState := runMoveToHomeTest;
 		
-		AssertEquals_BOOL(Actual:=fbCylinder.AtHome, 
-					Expected:=TRUE, 
-					Message := 'fbCylinder.AtHome was not true after calling move to home and sim timer elapsed'); 
-		_state := 2;
-		//TEST_FINISHED_NAMED('MoveToHomeComplete');
-	END_IF
-END_IF
+	runMoveToHomeTest :
 
-
-IF _state = 2 THEN
-	//TEST('MoveToWorkComplete');
-	fbCylinder.MoveToWork();
-	_state := 3;
-END_IF
-
-IF _state = 3 THEN
-	IF THIS^.MoveCylinderToWork() THEN
-		AssertEquals_BOOL(Actual:=fbCylinder.AtWork, 
-					Expected:=TRUE, 
-					Message := 'fbCylinder.AtWork was not true after calling move to home and sim timer elapsed'); 
-		_state := 4;
-		//TEST_FINISHED_NAMED('MoveToWorkComplete');		
-	END_IF
-END_IF
-
-IF _state = 4 THEN
-	TEST_FINISHED_NAMED('CycleCylinder');
-END_IF
+		prevState := masterMoveState;
+		IF MoveCylinderToHome() THEN
+			masterMoveState := runMoveToWorkTest;
+		END_IF
+		
+	runMoveToWorkTest :
+	
+		prevState := masterMoveState;
+		IF MoveCylinderToWork() THEN
+			masterMoveState := cycleComplete;
+			
+		END_IF
+		
+	cycleComplete :
+		IF prevState <> masterMoveState THEN
+			prevState := masterMoveState;
+		END_IF
+		
+END_CASE
 
 ]]></ST>
       </Implementation>
     </Method>
     <Method Name="MoveCylinderToHome" Id="{d1670a49-1575-44f3-8e2b-e20c2cb1c3ba}">
       <Declaration><![CDATA[METHOD MoveCylinderToHome : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
+VAR_INST
+	timeoutTimer : TON := (PT := fbCylinder.CYLINDER_MOVE_TIME + fbCylinder.CYLINDER_MOVE_TIME ); // allow twice the required time
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('MoveCylinderToHome');
+        <ST><![CDATA[CASE moveHomeTestState OF
+	
+	init:
+		TEST('MoveCylinderToHome');
+		moveHomeTestState := requestCylinderMoveToHome;
+		
+	requestCylinderMoveToHome :
+		fbCylinder.MoveToHome();
+		
+		moveHomeTestState := seeMovingToHomeStatus;
+		
+	seeMovingToHomeStatus :
+ 
+		AssertTrue( fbCylinder.MovingToHomePosition, 'fbCylinder.MovingToHome was not true');
+		AssertTrue( fbCylinder.toHomePos, 'fbCylinder.toHomePos was not true');
+		
+		IF NOT ( fbCylinder.MovingToHomePosition AND fbCylinder.toHomePos ) THEN
+			moveHomeTestState := waitForCylinderAtHome;
+		ELSE
+			moveHomeTestState := completeToHome;
+		END_IF
+		
+	waitForCylinderAtHome :
+	
+		IF timeoutTimer.Q THEN
+			moveHomeTestState := completeToHome;
+			AssertTrue( FALSE , 'fbCylinder timed out moving to home.' );	
+	
+		ELSIF fbCylinder.AtHome THEN
+			AssertTrue( TRUE , '' );
+			moveHomeTestState := completeToHome;
+			MoveCylinderToHome := TRUE;
+			
+		END_IF
+		
+	completeToHome :
+	
+		TEST_FINISHED_NAMED('MoveCylinderToHome');
 
+END_CASE
 
-// Check that Moving to home goes high
-AssertEquals_BOOL(Expected := TRUE, Actual:=fbCylinder.MovingToHomePosition, Message := 'fbCylinder.MovingToHome was not true');
-AssertEquals_BOOL(Expected := TRUE, Actual:=fbCylinder.toHomePos, Message := 'fbCylinder.toHomePos was not true');
-
-// Return true for another test to check that we are at home
-IF fbCylinder.AtHome THEN
-	MoveCylinderToHome := TRUE;
-	TEST_FINISHED();
-ELSE
-	MoveCylinderToHome := FALSE;
-END_IF]]></ST>
+timeoutTimer( IN := fbCylinder.MovingToHomePosition );
+MoveCylinderToHome := moveHomeTestState = completeToHome;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="MoveCylinderToWork" Id="{ac164537-900c-4f94-aea7-aab467983538}">
       <Declaration><![CDATA[METHOD MoveCylinderToWork : BOOL
-VAR_INPUT
+VAR_INST
+	timeoutTimer : TON := (PT := fbCylinder.CYLINDER_MOVE_TIME + fbCylinder.CYLINDER_MOVE_TIME ); // allow twice the required time
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('MoveCylinderToWork');
+        <ST><![CDATA[CASE moveToWorkTestState OF
+	
+	init:
+		TEST('MoveCylinderToWork');
+		moveToWorkTestState := requestCylinderMoveToWork;
+		
+	requestCylinderMoveToWork :
+		fbCylinder.MoveToHome();
+		
+		moveToWorkTestState := seeMovingToWorkStatus;
+		
+	seeMovingToWorkStatus :
+ 
+		AssertTrue( fbCylinder.MovingToWorkPosition, 'fbCylinder.MovingToWorkPosition was not true');
+		AssertTrue( fbCylinder.toWorkPos, 'fbCylinder.toWorkPos was not true');
+		
+		IF NOT ( fbCylinder.MovingToHomePosition AND fbCylinder.toHomePos ) THEN
+			moveToWorkTestState := waitForCylinderAtWork;
+		ELSE
+			moveToWorkTestState := completeToWork;
+		END_IF
+		
+	waitForCylinderAtWork :
+	
+		IF timeoutTimer.Q THEN
+			moveToWorkTestState := completeToWork;
+			AssertTrue( FALSE , 'fbCylinder timed out moving to work.' );	
+	
+		ELSIF fbCylinder.AtWork THEN
+			AssertTrue( TRUE , '' );
+			moveToWorkTestState := completeToWork;
+			MoveCylinderToWork := TRUE;
+			
+		END_IF
+		
+	completeToWork :
+	
+		TEST_FINISHED_NAMED('MoveCylinderToWork');
 
+END_CASE
 
-// Check that Moving to home goes high
-AssertEquals_BOOL(Expected := TRUE, Actual:=fbCylinder.MovingToWorkPosition, Message := 'fbCylinder.MovingToWork was not true');
-AssertEquals_BOOL(Expected := TRUE, Actual:=fbCylinder.toWorkPos, Message := 'fbCylinder.toWorkPos was not true');
-
-// Return true for another test to check that we are at home
-IF fbCylinder.AtWork THEN
-	MoveCylinderToWork := TRUE;
-	TEST_FINISHED();
-ELSE
-	MoveCylinderToWork := FALSE;
-END_IF]]></ST>
+timeoutTimer( IN := fbCylinder.MovingToWorkPosition );
+MoveCylinderToWork := moveToWorkTestState = completeToWork;
+]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_CylinderTest">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CylinderTest.CycleCylinder">
-      <LineId Id="21" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="6" Count="1" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="19" Count="1" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="34" Count="3" />
-      <LineId Id="32" Count="1" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="41" Count="1" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CylinderTest.MoveCylinderToHome">
-      <LineId Id="6" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="15" Count="1" />
-      <LineId Id="14" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CylinderTest.MoveCylinderToWork">
-      <LineId Id="6" Count="12" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
