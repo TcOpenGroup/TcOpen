@@ -21,12 +21,13 @@ My first reccomendation would be to follow the Backhoff TwinCAT naming conventio
 Class (FB) member variables should begin with 'm_' followd by the type identifier and then the variable name i.e. m_<TypeIdentifier><VariableName> 
 ex. m_bTrigger, m_stAnalogStatus.
     
-```ST
+```Pascal
     VAR
         m_bTrigger : BOOL;
         m_nCounter : INT;
         m_stAnalogStatus : AnalogStatus;
     END_VAR
+```
 =======
 Coding conventions serve the following purposes:
 <br/>_Adapted from MSDN_
