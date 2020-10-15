@@ -8,6 +8,8 @@ Open Source Twincat 3.1 code by Automation Professionals for Automation Professi
 See [Introduction](/docs/Introduction.md)
 
 ## Contributing
+Awesome! See [Conventions](/docs/Conventions.md) for a style guide. Clone the library, and sumbit a PR.
+Consider joining the slack channel ... //TODO slack URL
 
-
-## 
+## Suggestions? Issues?
+Open an issue here and / or join the slack channel for discussion // TODO slack URL.
