@@ -102,8 +102,8 @@ Methods names should clearly state the intent. Method name should not have any p
 
 The methods **MUST** return BOOL value where ```true``` indicates the process was completed. (?? or complex return type that would provide information about the state of the component??).
 
-```
-// Simple example of state driven by return values from components. Piston return true when _work or _home position sensor are reached respectively.
+```Pascal
+ // Simple example of state driven by return values from components. Piston return true when _work or _home position sensor are reached respectively.
  CASE state OF
  0:
     IF(verticalPiston.MoveToHome() 
