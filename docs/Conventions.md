@@ -48,7 +48,8 @@ Where sizing of types may change depending on the use of the library, a [Paramet
 
 i.e. 
 ```Pascal
- drives : ARRAY[1..DrivesParams.NumberOfDrives] : FB_Drive; // DrivesParams is a Parameter List, as array size needs to be flexible
+// DrivesParams is a Parameter List, as array size needs to be flexible
+drives : ARRAY[1..DrivesParams.NumberOfDrives] OF FB_Drive; 
 ```
 
 ## FB/Class features naming.
@@ -57,12 +58,12 @@ This section covers the naming features of classes, such as methods and properti
 ### Member Variables // MLAZ: can we not just make some rules for naming variables in general?
 Class (FB) member variables should begin with 'm_' followd by the type identifier and then the variable name i.e. m_<TypeIdentifier><VariableName> 
 ex. m_bTrigger, m_stAnalogStatus.
-```ST
-    VAR
-        m_bTrigger : BOOL;
-        m_nCounter : INT;
-        m_stAnalogStatus : AnalogStatus;
-    END_VAR
+```Pascal
+VAR
+    m_bTrigger : BOOL;
+    m_nCounter : INT;
+    m_stAnalogStatus : AnalogStatus;
+END_VAR
 ```
     
 ### Properties
