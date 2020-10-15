@@ -84,12 +84,14 @@ This section covers the naming features of classes, such as methods and properti
 ### Member Variables // MLAZ: can we not just make some rules for naming variables in general?
 Class (FB) member variables should begin with 'm_' followd by the type identifier and then the variable name i.e. m_<TypeIdentifier><VariableName> 
 ex. m_bTrigger, m_stAnalogStatus.
+    
 ```Pascal
 VAR
     m_bTrigger : BOOL;
     m_nCounter : INT;
     m_stAnalogStatus : AnalogStatus;
 END_VAR
+```    
    
 ## Methods
 Methods names should clearly state the intent. Method name should not have any prefix (??some exceptions for testing methods??). Methods in components should be used to perfrom an action (Movement, Measurement, Trigger etc.)
