@@ -39,12 +39,17 @@ Functions shall be prefixed with "F_"
 // TODO
 Generally, global scope should be avoided where possible.
 GVLs and Parameter lists must specify `{attribute 'qualified_only'} ` to ensure access is fully scoped in the code. [Beckhoff Infosys Doc here](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/9007201784510091.html&id=8098035924341237087).
-GVLs should generally not be generally accessible from outside the library. Setting of modifying GVL variables should be done through static helpers or functions.
+GVLs should generally not be accessible from outside the library. Setting / modifying GVL variables should be done through static helpers or functions.
 
 #### Constants
 Where magic numbers are required for low level domain specific operation, these should be managed in the highest level block that makes sense without breaking an abstraction layer. I.e. Do not add `SiemensTempSensorModBusStatusWordRegister : WORD:= 3;` to a GVL of constants. Add this to the appropriate class that handles that device.
 
 Where sizing of types may change depending on the use of the library, a [Parameter List](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/18014401980319499.html&id=6895410617442004539) is preferred. This allows the library to be design-time condfigured without modification of the library. Keep the parameterlist as tightly scoped as possible, and as close (in the solution hierarchy) as possible.
+
+i.e. 
+```Pascal
+ drives : ARRAY[1..DrivesParams.NumberOfDrives] : FB_Drive; // DrivesParams is a Parameter List, as array size needs to be flexible
+```
 
 ## FB/Class features naming.
 This section covers the naming features of classes, such as methods and properties. For naming of FBs/Class, see above.
