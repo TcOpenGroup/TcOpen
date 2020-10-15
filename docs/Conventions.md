@@ -94,7 +94,7 @@ END_VAR
 ## Methods
 Methods names should clearly state the intent. Method name should not have any prefix (??some exceptions for testing methods??). Methods in components should be used to perfrom an action (Movement, Measurement, Trigger etc.)
 
-```
+```Pascal
     piston.MoveToWork();
     laser.Measure();
     dmcReader.Trigger();    
