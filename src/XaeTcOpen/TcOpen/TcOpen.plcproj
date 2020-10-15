@@ -15,18 +15,45 @@
     <Implicit_KindOfTask>{ea3b4140-3035-47f7-afac-349d22ca2c13}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{257502dc-3e78-4a8d-ad9f-50eefb5da7c7}</Implicit_Jitter_Distribution>
     <LibraryReferences>{63ef891a-acd0-47a4-b208-b6a50fa2d7d9}</LibraryReferences>
+    <Released>false</Released>
+    <Title>TcOpen</Title>
+    <ProjectVersion>0.0.0.1</ProjectVersion>
+    <Author>Dustin Hullett</Author>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\FBs\FB_Cylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\FBs\FB_CylinderWithPressureFeedback.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\ST_AnalogSensorStatusWord.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Version\Global_Version.TcGVL">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Cylinders" />
+    <Folder Include="POUs\Cylinders\ITFs" />
+    <Folder Include="POUs\Cylinders\FBs" />
+    <Folder Include="POUs\Cylinders\Test FBs" />
+    <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -43,12 +70,21 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcUnit">
+      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
+      <Namespace>TcUnit</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TcOpen.tmc">
+      <SubType>Content</SubType>
+    </None>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
@@ -69,13 +105,13 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>
