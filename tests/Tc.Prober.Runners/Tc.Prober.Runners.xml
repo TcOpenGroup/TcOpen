@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tc.Prober.Runners</name>
+    </assembly>
+    <members>
+        <member name="T:Tc.Prober.Runners.TaskRunners">
+            <summary>
+            Contains series of helper methods for executing RPC plc methods.
+            </summary>
+        </member>
+        <member name="M:Tc.Prober.Runners.TaskRunners.Run``1(``0,System.Func{``0,System.Boolean})">
+            <summary>
+            Runs the test method until it returns true.
+            </summary>
+            <typeparam name="T">Type of subject under test. Must be of <see cref="T:Vortex.Connector.IVortexObject"/></typeparam>
+            <param name="sut">Subject under test.</param>
+            <param name="testMethod"></param>
+        </member>
+        <member name="M:Tc.Prober.Runners.TaskRunners.Run``2(``0,System.Func{``0,``1},System.Int32)">
+            <summary>
+            Runs the unit test given number of times.
+            </summary>
+            <typeparam name="T">Type of subject under test. Must be of <see cref="T:Vortex.Connector.IVortexObject"/></typeparam>
+            <typeparam name="R">Type of return value.</typeparam>
+            <param name="sut">Subject under test</param>
+            <param name="testMethod">Test method.</param>
+            <param name="numberOfRuns">Number of runs.</param>
+            <returns>Return value of the test method</returns>
+        </member>
+    </members>
+</doc>

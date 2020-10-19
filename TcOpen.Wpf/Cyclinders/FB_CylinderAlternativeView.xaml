@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="TcOpen.FB_CylinderAlternativeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:TcOpen"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcopen="clr-namespace:TcOpen;assembly=TcOpenConnector"
+    xmlns:vortex="http://vortex.mts/xaml"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <d:UserControl.DataContext>
+        <local:FB_CylinderAlternativeViewModel />
+    </d:UserControl.DataContext>
+    <GroupBox Header="{Binding Component.AttributeName}" Padding="10">
+        <UniformGrid Rows="1" Columns="2">
+            <Button Template="{DynamicResource PrimaryButtonControlTemplate}" Command="{Binding MoveToHomeCommand, Mode=OneWay}"
+                    Background="{Binding Component.toHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}">
+                <Button.Content>
+                    <iconPacks:PackIconRemixIcon
+                        Width="32"
+                        Height="32"
+                        Kind="Home4Line"
+                        Foreground="{Binding Component._atHomePos.Cyclic, 
+                        Converter={local:SensorToBrushConverter}}"/>
+                </Button.Content>
+            </Button>
+            <Button Template="{DynamicResource PrimaryButtonControlTemplate}" Command="{Binding MoveToWorkCommand, Mode=OneWay}"
+                    Background="{Binding Component.toWorkPos.Cyclic, Converter={local:ActuatorToBrushConverter}}">
+                <Button.Content>
+                    <iconPacks:PackIconBoxIcons
+                        Width="32"
+                        Height="32"
+                        Kind="RegularAngry"
+                        Foreground="{Binding Component._atWorkPos.Cyclic, 
+                        Converter={local:SensorToBrushConverter}}"/>
+                </Button.Content>
+            </Button>
+        </UniformGrid>
+    </GroupBox>
+</UserControl>

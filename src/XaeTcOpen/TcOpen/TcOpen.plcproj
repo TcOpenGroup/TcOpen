@@ -21,6 +21,9 @@
     <Author>Dustin Hullett</Author>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ComponentsBase\fbComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -30,13 +33,22 @@
     <Compile Include="POUs\Cylinders\FBs\FB_CylinderWithPressureFeedback.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\FBs\FB_CylinderAlternative.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\ITFs\ITF_CylinderAlternative.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\ST_AnalogSensorStatusWord.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTestAlternative.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -49,6 +61,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="ComponentsBase" />
     <Folder Include="POUs\Cylinders" />
     <Folder Include="POUs\Cylinders\ITFs" />
     <Folder Include="POUs\Cylinders\FBs" />

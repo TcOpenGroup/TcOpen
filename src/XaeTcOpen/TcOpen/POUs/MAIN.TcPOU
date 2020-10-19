@@ -1,17 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="MAIN" Id="{f20f72a3-44bd-4b01-bab9-6aeb1376a30d}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+    <Declaration><![CDATA[{attribute wpf [Container(Layout.Tabs)]}
+PROGRAM MAIN
 VAR
-	fbCylinderTest : FB_CylinderTest;
+	{attribute wpf [Container(Layout.Stack)]}
+	{attribute addProperty Name "Cyclinder test"}
+	fbCylinderTest : FB_CylinderTest;	
+	
+	
+	// This is Internal => not available in wpf rendering 
+	cylinderTestAlternative : FB_CylinderTestAlternative;	
+	
+	{attribute wpf [Container(Layout.Stack)]}	
+	{attribute addProperty Name "WPF cyclinder"}
+	_wpfCyclinder : FB_CylinderAlternative;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[tcUnit.RUN();
+_wpfCyclinder.Manual();
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
+      <LineId Id="16" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>
