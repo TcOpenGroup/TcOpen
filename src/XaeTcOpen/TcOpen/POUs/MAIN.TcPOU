@@ -20,11 +20,23 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[tcUnit.RUN();
+
+
+_wpfCyclinder(_atHomePos := IO.A1[0], 
+			  _atWorkPos := IO.A1[1], 
+			   toHomePos := IO.A2[0], 
+			   toWorkPos := IO.A2[0]);
+
 _wpfCyclinder.Manual();
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="2" />
+      <LineId Id="33" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
