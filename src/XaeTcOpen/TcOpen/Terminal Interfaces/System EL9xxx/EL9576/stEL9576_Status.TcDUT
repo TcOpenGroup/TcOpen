@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stEL9576_Status" Id="{f08238c8-6647-461a-b852-91842d11f745}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
+TYPE stEL9576_Status :
+STRUCT
+	TermOvertemp 	: BIT;
+	I2T_Err 		: BIT;
+	I2T_Warning 	: BIT; 
+	Overvoltage 	: BIT; 
+	Undervoltage 	: BIT; 
+	ChopperOn 		: BIT;
+	{attribute 'hide'}
+	pack0_6		: BIT;
+	{attribute 'hide'}
+	pack0_7		: BIT;
+	{attribute 'hide'}
+	pack1_0		: BIT;
+	{attribute 'hide'}
+	pack1_1	 	: BIT;
+	{attribute 'hide'}
+	pack1_2	 	: BIT;
+	{attribute 'hide'}
+	pack1_3	 	: BIT;
+	{attribute 'hide'}
+	pack1_4	 	: BIT;
+	{attribute 'hide'}
+	pack1_5	 	: BIT;
+	InputCycCnt_0	: BIT;
+	InputCycCnt_1	: BIT;
+	DcLinkVoltage	: UDINT;
+	ResistorCurrent	: DINT;
+	DutyCycle 		: USINT;
+	I2T_LoadFactor 	: USINT;
+END_STRUCT
+END_TYPE;
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

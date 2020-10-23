@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stEL3152_ChannelStatus" Id="{893884d2-b629-45c0-b0af-31b5dc7dbc34}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
+TYPE stEL3152_ChannelStatus:
+STRUCT
+	Underrange 	: BIT;
+	Overrange 	: BIT;
+	LT_Lim1 	: BIT; // Less Than Limit 1
+	GT_Lim1 	: BIT; // Greater Than Limit 1
+	LT_Lim2 	: BIT; // Less Than Limit 2
+	GT_Lim2 	: BIT; // Greater Than Limit 2
+	Error		: BIT;
+	{attribute 'hide'}
+	pack0_7		: BIT;	
+	{attribute 'hide'}
+	pack1_0		: BIT;
+	{attribute 'hide'}
+	pack1_1	 	: BIT;
+	{attribute 'hide'}
+	pack1_2	 	: BIT;
+	{attribute 'hide'}
+	pack1_3	 	: BIT;
+	{attribute 'hide'}
+	pack1_4	 	: BIT;
+	SyncError	: BIT;
+	TxPDOState	: BIT;
+	TxPDOToggle : BIT;
+END_STRUCT
+END_TYPE;
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
