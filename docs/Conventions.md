@@ -5,22 +5,22 @@ My first reccomendation would be to follow the Backhoff TwinCAT naming conventio
 
 ## Naming overview
 
-| Object Name               | Notation   | Plural | Prefix | Suffix | Char Mask          | Underscores |  Prefix   |  Example                                               |
-|:--------------------------|:-----------|:-------|:-------|:-------|:-------------------|:------------|:----------|:-------------------------------------------------------|
-| FB/Block name Definition  | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | FB_?||fb? | FB_Cylinder || fbCyclinder                             |
-| FB/Block name Declaration | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | FB_?||fb? | FB_AdvancedCylinder || fbAdvancedCyclinder             |
-| Method name               | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |   No||n?  | MoveToWork()                                           |
-| Method arguments          | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |     No    | targetPosition  : LREAL                                |
-| Local variables           | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |     _     | _ actualPosition  : LREAL                              |
-| Constants name            | PascalCase | No     | No     | No     | [A-z][0-9]         | Yes         |     No    | MAX_747_CRUISING_ALTIDUDE                              |
-| Properties name           | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |           | IsEnabled                                              |
-| ENUM type name            | PascalCase | Yes    | No     | No     | [A-z]              | No          | E_? ||no? | E_MachineState.Start ||  MachineState.Start            |
-| Interface name Definition | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | I_?||I?   | I_Cylinder || ICyclinder                               |
-| Interface Declaration     | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | No?||ip?  | Cylinder || ipCyclinder                                |
-| Reference name Declaration| camelCase  | No     | No     | Yes    | [A-z][0-9]         | No          | _ ?||ref? | _ drive || refDrive                                    |
-| Pointer Declaration       | camelCase  | No     | No     | Yes    | [A-z][0-9]         | No          | p? ||_ ?  | Cylinder || ipCyclinder                                |
-| FUNCTION name Declaration | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | F? ||no?  | F_Add() || Add()                                       |
-| STRUCT name Declaration   | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | ST_? ||no?  | ST_Data || Data                                      |
+| Object Name               | Notation   |  Prefix   |  Example                                               |
+|:--------------------------|:-----------|:----------|:-------------------------------------------------------|
+| FB/Block name Definition  | PascalCase | FB_?||fb? | FB_Cylinder || fbCyclinder                             |
+| FB/Block name Declaration | PascalCase | FB_?||fb? | FB_AdvancedCylinder || fbAdvancedCyclinder             |
+| Method name               | PascalCase |   No||n?  | MoveToWork()                                           |
+| Method arguments          | camelCase  |     No    | targetPosition  : LREAL                                |
+| Local variables           | camelCase  |     _     | _ actualPosition  : LREAL                              |
+| Constants name            | PascalCase |     No    | MAX_747_CRUISING_ALTIDUDE                              |
+| Properties name           | PascalCase |           | IsEnabled                                              |
+| ENUM type name            | PascalCase | E_? ||no? | E_MachineState.Start ||  MachineState.Start            |
+| Interface name Definition | PascalCase | I_?||I?   | I_Cylinder || ICyclinder                               |
+| Interface Declaration     | PascalCase | No?||ip?  | Cylinder || ipCyclinder                                |
+| Reference name Declaration| camelCase  | _ ?||ref? | _ drive || refDrive                                    |
+| Pointer Declaration       | camelCase  | p? ||_ ?  | Cylinder || ipCyclinder                                |
+| FUNCTION name Declaration | PascalCase | F? ||no?  | F_Add() || Add()                                       |
+| STRUCT name Declaration   | PascalCase | ST_? ||no?  | ST_Data || Data                                      |
 
 
 
