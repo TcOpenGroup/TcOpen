@@ -5,16 +5,44 @@ My first reccomendation would be to follow the Backhoff TwinCAT naming conventio
 
 ## Naming overview
 
-| Object Name               | Notation   | Plural | Prefix | Suffix | Char Mask          | Underscores |
-|:--------------------------|:-----------|:-------|:-------|:-------|:-------------------|:------------|
-| FB/Block name             | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          |
-| Method name               | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Method arguments          | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Local variables           | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Constants name            | PascalCase | No     | No     | No     | [A-z][0-9]         | No          |
-| Field name                | camelCase  | Yes    | No     | No     | [A-z][0-9]         | Yes         |
-| Properties name           | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Enum type name            | PascalCase | Yes    | No     | No     | [A-z]              | No          |
+| Object Name               | Notation   | Plural | Prefix | Suffix | Char Mask          | Underscores |  Prefix   |  Example                                               |
+|:--------------------------|:-----------|:-------|:-------|:-------|:-------------------|:------------|:----------|:-------------------------------------------------------|
+| FB/Block name Definition  | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | FB_?||fb? | FB_Cylinder || fbCyclinder                             |
+| FB/Block name Declaration | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | FB_?||fb? | FB_AdvancedCylinder || fbAdvancedCyclinder             |
+| Method name               | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |   No||n?  | MoveToWork()                                           |
+| Method arguments          | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |     No    | targetPosition  : LREAL                                |
+| Local variables           | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |     _     | _ actualPosition  : LREAL                              |
+| Constants name            | PascalCase | No     | No     | No     | [A-z][0-9]         | Yes         |     No    | MAX_747_CRUISING_ALTIDUDE                              |
+| Properties name           | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |           | IsEnabled                                              |
+| ENUM type name            | PascalCase | Yes    | No     | No     | [A-z]              | No          | E_? ||no? | E_MachineState.Start ||  MachineState.Start            |
+| Interface name Definition | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | I_?||I?   | I_Cylinder || ICyclinder                               |
+| Interface Declaration     | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | No?||ip?  | Cylinder || ipCyclinder                                |
+| Reference name Declaration| camelCase  | No     | No     | Yes    | [A-z][0-9]         | No          | _ ?||ref? | _ drive || refDrive                                    |
+| Pointer Declaration       | camelCase  | No     | No     | Yes    | [A-z][0-9]         | No          | p? ||_ ?  | Cylinder || ipCyclinder                                |
+| FUNCTION name Declaration | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | F? ||no?  | F_Add() || Add()                                       |
+| STRUCT name Declaration   | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          | ST_? ||no?  | ST_Data || Data                                      |
+
+
+
+## Cyclic call?
+
+Each component MUST implment abstractFB ```Component``` (abstract method Cyclic)
+
+## Function Block parameter transfer
+
+FB_Init || Properties || VAR_INPUT/OUTPUT/IN_OUT
+
+## Static classes?
+
+Use PROGAM || Use FUNCTION_BLOCK in a GVL
+
+## Pointers
+
+Pointer are || are not allowed?
+
+## Allocated variables (AT %I* %Q*)
+
+Same as other variables? || Specificly marked? || Should be defined only in GVL
 
 
 ## Member Variables
