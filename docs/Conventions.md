@@ -12,7 +12,7 @@ My first reccomendation would be to follow the Backhoff TwinCAT naming conventio
 | Method name               | PascalCase |   No or n?  | MoveToWork()                                           |
 | Method arguments          | camelCase  |     No    | targetPosition  : LREAL                                |
 | Local variables           | camelCase  |     _     | _ actualPosition  : LREAL                              |
-| Constants name            | PascalCase |     No    | MAX_747_CRUISING_ALTIDUDE                              |
+| Constants name            | UpprerCase |     No    | MAX_747_CRUISING_ALTIDUDE                              |
 | Properties name           | PascalCase |           | IsEnabled                                              |
 | ENUM type name            | PascalCase | E_? or no? | E_MachineState.Start or  MachineState.Start            |
 | Interface name Definition | PascalCase | I_? or I?   | I_Cylinder or ICyclinder                               |
