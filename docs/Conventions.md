@@ -7,20 +7,20 @@ My first reccomendation would be to follow the Backhoff TwinCAT naming conventio
 
 | Object Name               | Notation   |  Prefix   |  Example                                               |
 |:--------------------------|:-----------|:----------|:-------------------------------------------------------|
-| FB/Block name Definition  | PascalCase | FB_?||fb? | FB_Cylinder || fbCyclinder                             |
-| FB/Block name Declaration | PascalCase | FB_?||fb? | FB_AdvancedCylinder || fbAdvancedCyclinder             |
-| Method name               | PascalCase |   No||n?  | MoveToWork()                                           |
+| FB/Block name Definition  | PascalCase | FB_?or fb? | FB_Cylinder or fbCyclinder                             |
+| FB/Block name Declaration | PascalCase | FB_?or fb? | FB_AdvancedCylinder or fbAdvancedCyclinder             |
+| Method name               | PascalCase |   No or n?  | MoveToWork()                                           |
 | Method arguments          | camelCase  |     No    | targetPosition  : LREAL                                |
 | Local variables           | camelCase  |     _     | _ actualPosition  : LREAL                              |
 | Constants name            | PascalCase |     No    | MAX_747_CRUISING_ALTIDUDE                              |
 | Properties name           | PascalCase |           | IsEnabled                                              |
-| ENUM type name            | PascalCase | E_? ||no? | E_MachineState.Start ||  MachineState.Start            |
-| Interface name Definition | PascalCase | I_?||I?   | I_Cylinder || ICyclinder                               |
-| Interface Declaration     | PascalCase | No?||ip?  | Cylinder || ipCyclinder                                |
-| Reference name Declaration| camelCase  | _ ?||ref? | _ drive || refDrive                                    |
-| Pointer Declaration       | camelCase  | p? ||_ ?  | Cylinder || ipCyclinder                                |
-| FUNCTION name Declaration | PascalCase | F? ||no?  | F_Add() || Add()                                       |
-| STRUCT name Declaration   | PascalCase | ST_? ||no?  | ST_Data || Data                                      |
+| ENUM type name            | PascalCase | E_? or no? | E_MachineState.Start or  MachineState.Start            |
+| Interface name Definition | PascalCase | I_? or I?   | I_Cylinder or ICyclinder                               |
+| Interface Declaration     | PascalCase | No? or ip?  | Cylinder or ipCyclinder                                |
+| Reference name Declaration| camelCase  | _ ?or ref? | _ drive or refDrive                                    |
+| Pointer Declaration       | camelCase  | p? or _ ?  | Cylinder or ipCyclinder                                |
+| FUNCTION name Declaration | PascalCase | F? or no?  | F_Add() or Add()                                       |
+| STRUCT name Declaration   | PascalCase | ST_? or no?  | ST_Data or Data                                      |
 
 
 
