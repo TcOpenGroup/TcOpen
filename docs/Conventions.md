@@ -5,16 +5,44 @@ My first reccomendation would be to follow the Backhoff TwinCAT naming conventio
 
 ## Naming overview
 
-| Object Name               | Notation   | Plural | Prefix | Suffix | Char Mask          | Underscores |
-|:--------------------------|:-----------|:-------|:-------|:-------|:-------------------|:------------|
-| FB/Block name             | PascalCase | No     | No     | Yes    | [A-z][0-9]         | No          |
-| Method name               | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Method arguments          | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Local variables           | camelCase  | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Constants name            | PascalCase | No     | No     | No     | [A-z][0-9]         | No          |
-| Field name                | camelCase  | Yes    | No     | No     | [A-z][0-9]         | Yes         |
-| Properties name           | PascalCase | Yes    | No     | No     | [A-z][0-9]         | No          |
-| Enum type name            | PascalCase | Yes    | No     | No     | [A-z]              | No          |
+| Object Name               | Notation   |  Prefix   |  Example                                               |
+|:--------------------------|:-----------|:----------|:-------------------------------------------------------|
+| FB/Block name Definition  | PascalCase | FB_?or fb? | FB_Cylinder or fbCyclinder                             |
+| FB/Block name Declaration | PascalCase | FB_?or fb? | FB_AdvancedCylinder or fbAdvancedCyclinder             |
+| Method name               | PascalCase |   No or n?  | MoveToWork()                                           |
+| Method arguments          | camelCase  |     No    | targetPosition  : LREAL                                |
+| Local variables           | camelCase  |     _     | _ actualPosition  : LREAL                              |
+| Constants name            | UpprerCase |     No    | MAX_747_CRUISING_ALTIDUDE                              |
+| Properties name           | PascalCase |           | IsEnabled                                              |
+| ENUM type name            | PascalCase | E_? or no? | E_MachineState.Start or  MachineState.Start            |
+| Interface name Definition | PascalCase | I_? or I?   | I_Cylinder or ICyclinder                               |
+| Interface Declaration     | PascalCase | No? or ip?  | Cylinder or ipCyclinder                                |
+| Reference name Declaration| camelCase  | _ ?or ref? | _ drive or refDrive                                    |
+| Pointer Declaration       | camelCase  | p? or _ ?  | Cylinder or ipCyclinder                                |
+| FUNCTION name Declaration | PascalCase | F? or no?  | F_Add() or Add()                                       |
+| STRUCT name Declaration   | PascalCase | ST_? or no?  | ST_Data or Data                                      |
+
+
+
+## Cyclic call?
+
+Each component MUST implment abstractFB ```Component``` (abstract method Cyclic)
+
+## Function Block parameter transfer
+
+FB_Init || Properties || VAR_INPUT/OUTPUT/IN_OUT
+
+## Static classes?
+
+Use PROGAM || Use FUNCTION_BLOCK in a GVL
+
+## Pointers
+
+Pointer are || are not allowed?
+
+## Allocated variables (AT %I* %Q*)
+
+Same as other variables? || Specificly marked? || Should be defined only in GVL
 
 
 ## Member Variables
