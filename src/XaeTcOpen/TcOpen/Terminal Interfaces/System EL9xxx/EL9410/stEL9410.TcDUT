@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stEL9410" Id="{cc93f896-e3c8-45b7-ba50-84ee95b8cf4a}">
+    <Declaration><![CDATA[TYPE stEL9410 :
+STRUCT
+	Us_Undervoltage  AT%I* : BIT; 
+	Up_Undervoltage AT %I* : BIT; 
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

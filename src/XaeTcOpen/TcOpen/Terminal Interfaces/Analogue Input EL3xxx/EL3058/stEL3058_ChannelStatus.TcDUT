@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stEL3058_ChannelStatus" Id="{8af472bd-80ee-4601-a380-2d8076409a00}">
+    <Declaration><![CDATA[TYPE stEL3058_ChannelStatus :
+STRUCT
+	Underrange 	: BIT;
+	Overrange	: BIT;
+	Limit1_0	: BIT; // Value <= limit 1
+	Limit1_1 	: BIT; // Value >= limit 1
+	Limit2_0	: BIT; // Value <= limit 2
+	Limit2_1	: BIT; // Value >= limit 2
+	Error		: BIT; // TRUE when Over or under range.
+	{attribute 'hide'}
+	padding_0_7	: BIT;
+	{attribute 'hide'}
+	padding_1_0 : BIT;
+	{attribute 'hide'}
+	padding_1_1 : BIT;
+	{attribute 'hide'}
+	padding_1_2 : BIT;
+	{attribute 'hide'}
+	padding_1_3 : BIT;
+	{attribute 'hide'}
+	padding_1_4 : BIT;
+	{attribute 'hide'}
+	padding_1_5 : BIT;
+	TxPDO_State : BIT; // TRUE when PDO NOT valid
+	TxPDO_Toddle: BIT; // toggles when new value available
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

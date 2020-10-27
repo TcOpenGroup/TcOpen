@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stInfoData" Id="{b6a6ce2d-e3fc-4743-987b-cde97d1a7d4e}">
+    <Declaration><![CDATA[TYPE stInfoData :
+STRUCT
+	State 		AT %I* : WORD;
+	InfoData 	AT %I* : AMSADDR;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
