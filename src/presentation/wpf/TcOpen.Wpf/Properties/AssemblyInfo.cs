@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Reflection;
 using Vortex.Presentation.Wpf;
 
@@ -12,3 +12,6 @@ using Vortex.Presentation.Wpf;
 )]
 
 [assembly:RenderableAssembly]
+[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyInformationalVersion("0.1.0-alpha.53+Branch.dev.Sha.6662dd7e1d36d938cbbe3105fbe0c73e099111d0")]
