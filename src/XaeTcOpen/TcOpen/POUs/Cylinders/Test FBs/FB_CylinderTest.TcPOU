@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CylinderTest EXTENDS FB_TestSuite
 VAR
 	fbCylinder : FB_Cylinder;
-	
+	//~
 	masterMoveState, prevState : (
 		init,
 		runMoveToHomeTest,
@@ -28,13 +28,14 @@ VAR
 		waitForCylinderAtWork,
 		completeToWork
 	);
+	//~
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[CycleCylinder();]]></ST>
     </Implementation>
     <Method Name="CycleCylinder" Id="{2f755462-1437-4939-92cb-0ec93d8f7e06}">
-      <Declaration><![CDATA[METHOD CycleCylinder : int
+      <Declaration><![CDATA[METHOD CycleCylinder : INT
 VAR_INPUT
 END_VAR
 ]]></Declaration>

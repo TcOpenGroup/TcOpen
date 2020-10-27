@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\fbComponent.g.cs" Link="_generated\TcOpen\fbComponent.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\fbCylinder.g.cs" Link="_generated\TcOpen\fbCylinder.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_Cylinder.g.cs" Link="_generated\TcOpen\FB_Cylinder.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_CylinderTest.g.cs" Link="_generated\TcOpen\FB_CylinderTest.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_CylinderTestAlternative.g.cs" Link="_generated\TcOpen\FB_CylinderTestAlternative.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_CylinderWithPressureFeedback.g.cs" Link="_generated\TcOpen\FB_CylinderWithPressureFeedback.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\Global_Version.g.cs" Link="_generated\TcOpen\Global_Version.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\IO.g.cs" Link="_generated\TcOpen\IO.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\MAIN.g.cs" Link="_generated\TcOpen\MAIN.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\ST_AnalogSensorStatusWord.g.cs" Link="_generated\TcOpen\ST_AnalogSensorStatusWord.g.cs" />
+    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\TcOpen.g.cs" Link="_generated\TcOpen\TcOpen.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_generated\TcOpen\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.6.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Localizations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Localizations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Localizations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

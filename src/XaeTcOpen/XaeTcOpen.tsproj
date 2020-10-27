@@ -1,5 +1,16 @@
 <?xml version="1.0"?>
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.10">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
 	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
@@ -25,6 +36,10 @@
 							<Comment><![CDATA[ Link With Work Position Sensor]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
+						<Var>
+							<Name>IO.A1</Name>
+							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
@@ -35,6 +50,10 @@
 						<Var>
 							<Name>MAIN.fbCylinderTest.fbCylinder.toWorkPos</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2</Name>
+							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Contexts>

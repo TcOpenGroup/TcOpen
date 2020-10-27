@@ -21,6 +21,13 @@
     <Author>Dustin Hullett</Author>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ComponentsBase\fbComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -30,13 +37,22 @@
     <Compile Include="POUs\Cylinders\FBs\FB_CylinderWithPressureFeedback.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\FBs\fbCylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\ITFs\ITF_CylinderAlternative.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\ST_AnalogSensorStatusWord.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTestAlternative.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -49,6 +65,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="ComponentsBase" />
     <Folder Include="POUs\Cylinders" />
     <Folder Include="POUs\Cylinders\ITFs" />
     <Folder Include="POUs\Cylinders\FBs" />
@@ -71,7 +88,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcUnit">
-      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
+      <DefaultResolution>TcUnit, * (Vortex.Library)</DefaultResolution>
       <Namespace>TcUnit</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -79,6 +96,11 @@
     <None Include="TcOpen.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcUnit">
+      <Resolution>TcUnit, 1.10.1.0 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

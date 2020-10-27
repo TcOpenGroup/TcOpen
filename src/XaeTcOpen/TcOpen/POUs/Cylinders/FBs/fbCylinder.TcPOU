@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="fbCylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbCylinder EXTENDS fbComponent IMPLEMENTS ITF_CylinderAlternative
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Home position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute wpf [Container(Layout.UniformGrid)]}
+	{attribute wpf [Group(Layout.GroupBox, "Inputs")]}	
+	{attribute addProperty Name "Home position sensor"}
+	inAtHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Working position sensor.
+			</summary>	
+		</docu>
+	~*) 
+	{attribute addProperty Name "Work position sensor"}
+	inAtWorkPos : BOOL; 
+END_VAR
+VAR_OUTPUT
+	(*~
+		<docu>
+			<summary>
+				Move to working home position signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute wpf [Container(Layout.UniformGrid)]}
+	{attribute wpf [Group(Layout.GroupBox, "Outputs")]}	
+	{attribute addProperty Name "Move to home position actuator"}
+	outToHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working posistion signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "Move to work position actuator"}
+	outToWorkPos : BOOL;
+END_VAR
+
+VAR
+	{attribute wpf [Container(Layout.UniformGrid)]}
+	{attribute wpf [Group(Layout.GroupBox, "Manual controls")]}
+	{attribute addProperty Name "Manual move to work position"}
+	_manualMoveToWork : BOOL;
+	{attribute addProperty Name "Manual move to home position"}
+	_manualMoveToHome : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="_tests" Id="{2cbd4d6b-2a4a-49b8-b437-ed7c5a45b843}" />
+    <Method Name="_MoveToHomeTest" Id="{9ef39d14-16a3-4bc8-b330-33d879f1f7f9}" FolderPath="_tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL _MoveToHomeTest : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_MoveToHomeTest := MoveToHome();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_MoveToWorkTest" Id="{7ebcdca4-683e-48c8-8052-33f48bfaaa19}" FolderPath="_tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL _MoveToWorkTest : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_MoveToWorkTest := MoveToWork();
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AtHome" Id="{d06903a0-9230-4f9a-9ffc-ed1726b8d4b9}">
+      <Declaration><![CDATA[PROPERTY AtHome : bool]]></Declaration>
+      <Get Name="Get" Id="{2309dcb2-6c63-44cf-85e0-e6e2754836eb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AtHome := inAtHomePos;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="AtWork" Id="{c484892b-8ab6-4a33-a377-7a200a12d81a}">
+      <Declaration><![CDATA[PROPERTY AtWork : bool]]></Declaration>
+      <Get Name="Get" Id="{b963dd74-98d0-4492-a086-b714bde49f51}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AtWork := inAtWorkPos;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ManualControl" Id="{94b70f4e-af12-4cab-8a9f-9a3da438ebd4}">
+      <Declaration><![CDATA[METHOD PROTECTED  ManualControl
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_manualMoveToWork) AND_THEN THIS^.MoveToWork() THEN _manualMoveToWork := FALSE; END_IF
+IF(_manualMoveToHome) AND_THEN THIS^.MoveToHome() THEN _manualMoveToHome := FALSE; END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToHome" Id="{40560f4f-3063-47a8-8b62-1f2968f73b89}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Moves the piston into home position.
+		</summary>
+		<returns>True when home position sensor is reached.</returns>
+	</docu>
+~*)
+METHOD MoveToHome : BOOL]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outToHomePos := TRUE;
+outToWorkPos := FALSE; 
+MoveToHome := inAtHomePos;
+Info('Moving home');
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToWork" Id="{d11735f5-ce5f-4a7f-8109-144749721e33}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Moves the piston into working position.
+		</summary>
+		<returns>True when working position sensor is reached.</returns>
+	</docu>
+~*)
+METHOD MoveToWork : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outToWorkPos := TRUE; 
+outToHomePos := FALSE;
+MoveToWork := inAtWorkPos;
+Info('Moving to work');]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="MovingToHomePosition" Id="{c94ca31b-f1a7-4e9c-924a-99c283b9e845}">
+      <Declaration><![CDATA[PROPERTY MovingToHomePosition : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{d3fba5fc-adab-4ae3-98d6-53a9febdae02}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MovingToHomePosition := outToHomePos AND NOT AtHome;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MovingToWorkPosition" Id="{d72e3e24-913b-428d-b64e-1186d58c9b4e}">
+      <Declaration><![CDATA[PROPERTY MovingToWorkPosition : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{e36869bb-201c-4364-9d52-ab9f51852e16}">
+        <Declaration><![CDATA[
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MovingToWorkPosition := outToWorkPos AND NOT AtWork;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="fbCylinder">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder._MoveToHomeTest">
+      <LineId Id="55" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder._MoveToWorkTest">
+      <LineId Id="51" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="44" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder.AtHome.Get">
+      <LineId Id="3" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder.AtWork.Get">
+      <LineId Id="3" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder.ManualControl">
+      <LineId Id="4" Count="1" />
+    </LineIds>
+    <LineIds Name="fbCylinder.MoveToHome">
+      <LineId Id="3" Count="2" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder.MoveToWork">
+      <LineId Id="3" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder.MovingToHomePosition.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="fbCylinder.MovingToWorkPosition.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
