@@ -7,17 +7,17 @@ using Vortex.Presentation.Wpf;
 
 namespace TcOpen
 {
-    public class FB_CylinderAlternativeViewModel : RenderableViewModel
+    public class fbCylinderViewModel : RenderableViewModel
     {
-        public FB_CylinderAlternativeViewModel()
+        public fbCylinderViewModel()
         {
             MoveToWorkCommand = new RelayCommand(a => { this.Component._manualMoveToWork.Cyclic = true; this.Component._manualMoveToHome.Cyclic = false; });
             MoveToHomeCommand = new RelayCommand(a => { this.Component._manualMoveToHome.Cyclic = true; this.Component._manualMoveToWork.Cyclic = false; });
         }
 
-        public FB_CylinderAlternative Component { get; private set; }
+        public fbCylinder Component { get; private set; }
 
-        public override object Model { get => this.Component; set { this.Component = value as FB_CylinderAlternative; } }
+        public override object Model { get => this.Component; set { this.Component = value as fbCylinder; } }
 
         public RelayCommand MoveToWorkCommand { get; }
         public RelayCommand MoveToHomeCommand { get; }

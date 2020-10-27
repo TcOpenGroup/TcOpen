@@ -20,9 +20,9 @@ namespace TcOpen
     /// <summary>
     /// Interaction logic for FB_CylinderAlternativeView.xaml
     /// </summary>
-    public partial class FB_CylinderAlternativeView : UserControl
+    public partial class fbCylinderView : UserControl
     {
-        public FB_CylinderAlternativeView()
+        public fbCylinderView()
         {
             InitializeComponent();
         }

@@ -3,7 +3,7 @@
   <POU Name="FB_CylinderTestAlternative" Id="{721255ca-134a-4131-8eee-ee5e15e5be2f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL FB_CylinderTestAlternative
 VAR
-	fbCylinder : FB_CylinderAlternative;
+	fbCylinder : fbCylinder;
 END_VAR
 ]]></Declaration>
     <Implementation>

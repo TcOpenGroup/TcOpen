@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
-  <POU Name="FB_CylinderAlternative" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_CylinderAlternative EXTENDS fbComponent IMPLEMENTS ITF_CylinderAlternative
+  <POU Name="fbCylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbCylinder EXTENDS fbComponent IMPLEMENTS ITF_CylinderAlternative
 VAR_INPUT
 	(*~
 		<docu>
@@ -13,7 +13,7 @@ VAR_INPUT
 	{attribute wpf [Container(Layout.UniformGrid)]}
 	{attribute wpf [Group(Layout.GroupBox, "Inputs")]}	
 	{attribute addProperty Name "Home position sensor"}
-	_atHomePos : BOOL;
+	inAtHomePos : BOOL;
 	(*~
 		<docu>
 			<summary>
@@ -22,7 +22,7 @@ VAR_INPUT
 		</docu>
 	~*) 
 	{attribute addProperty Name "Work position sensor"}
-	_atWorkPos : BOOL; 
+	inAtWorkPos : BOOL; 
 END_VAR
 VAR_OUTPUT
 	(*~
@@ -35,7 +35,7 @@ VAR_OUTPUT
 	{attribute wpf [Container(Layout.UniformGrid)]}
 	{attribute wpf [Group(Layout.GroupBox, "Outputs")]}	
 	{attribute addProperty Name "Move to home position actuator"}
-	toHomePos : BOOL;
+	outToHomePos : BOOL;
 	(*~
 		<docu>
 			<summary>
@@ -44,7 +44,7 @@ VAR_OUTPUT
 		</docu>
 	~*)
 	{attribute addProperty Name "Move to work position actuator"}
-	toWorkPos : BOOL;
+	outToWorkPos : BOOL;
 END_VAR
 
 VAR
@@ -65,8 +65,6 @@ METHOD INTERNAL _MoveToHomeTest : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_MoveToHomeTest := MoveToHome();
-_atHomePos := TRUE;
-_atWorkPos := FALSE;
 ]]></ST>
       </Implementation>
     </Method>
@@ -77,8 +75,6 @@ METHOD INTERNAL _MoveToWorkTest : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_MoveToWorkTest := MoveToWork();
-_atHomePos := FALSE;
-_atWorkPos := TRUE;
 
 ]]></ST>
       </Implementation>
@@ -90,7 +86,7 @@ _atWorkPos := TRUE;
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtHome := _atHomePos;]]></ST>
+          <ST><![CDATA[AtHome := inAtHomePos;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -101,7 +97,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtWork := _atWorkPos;]]></ST>
+          <ST><![CDATA[AtWork := inAtWorkPos;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -125,10 +121,13 @@ IF(_manualMoveToHome) AND_THEN THIS^.MoveToHome() THEN _manualMoveToHome := FALS
 ~*)
 METHOD MoveToHome : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[toHomePos := TRUE;
-toWorkPos := FALSE; 
-MoveToHome := _atHomePos;
-Info('Moving home');]]></ST>
+        <ST><![CDATA[outToHomePos := TRUE;
+outToWorkPos := FALSE; 
+MoveToHome := inAtHomePos;
+Info('Moving home');
+
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="MoveToWork" Id="{d11735f5-ce5f-4a7f-8109-144749721e33}">
@@ -143,9 +142,9 @@ Info('Moving home');]]></ST>
 METHOD MoveToWork : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[toWorkPos := TRUE; 
-toHomePos := FALSE;
-MoveToWork := _atWorkPos;
+        <ST><![CDATA[outToWorkPos := TRUE; 
+outToHomePos := FALSE;
+MoveToWork := inAtWorkPos;
 Info('Moving to work');]]></ST>
       </Implementation>
     </Method>
@@ -157,7 +156,7 @@ Info('Moving to work');]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[MovingToHomePosition := toHomePos AND NOT AtHome;]]></ST>
+          <ST><![CDATA[MovingToHomePosition := outToHomePos AND NOT AtHome;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -168,48 +167,47 @@ END_VAR
         <Declaration><![CDATA[
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[MovingToWorkPosition := toWorkPos AND NOT AtWork;]]></ST>
+          <ST><![CDATA[MovingToWorkPosition := outToWorkPos AND NOT AtWork;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_CylinderAlternative">
+    <LineIds Name="fbCylinder">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative._MoveToHomeTest">
+    <LineIds Name="fbCylinder._MoveToHomeTest">
       <LineId Id="55" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="61" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative._MoveToWorkTest">
+    <LineIds Name="fbCylinder._MoveToWorkTest">
       <LineId Id="51" Count="0" />
-      <LineId Id="60" Count="0" />
-      <LineId Id="55" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="44" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.AtHome.Get">
+    <LineIds Name="fbCylinder.AtHome.Get">
       <LineId Id="3" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.AtWork.Get">
+    <LineIds Name="fbCylinder.AtWork.Get">
       <LineId Id="3" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.ManualControl">
+    <LineIds Name="fbCylinder.ManualControl">
       <LineId Id="4" Count="1" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.MoveToHome">
+    <LineIds Name="fbCylinder.MoveToHome">
       <LineId Id="3" Count="2" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="0" />
       <LineId Id="14" Count="0" />
+      <LineId Id="23" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.MoveToWork">
+    <LineIds Name="fbCylinder.MoveToWork">
       <LineId Id="3" Count="1" />
       <LineId Id="7" Count="0" />
       <LineId Id="17" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.MovingToHomePosition.Get">
+    <LineIds Name="fbCylinder.MovingToHomePosition.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CylinderAlternative.MovingToWorkPosition.Get">
+    <LineIds Name="fbCylinder.MovingToWorkPosition.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

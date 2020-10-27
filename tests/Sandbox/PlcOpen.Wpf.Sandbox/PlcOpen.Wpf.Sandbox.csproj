@@ -4,6 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\connectors\TcOpenConnector\TcOpenConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcOpen.Wpf\TcOpen.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\src\presentation\wpf\TcOpen.Wpf\TcOpen.Wpf.csproj" />
   </ItemGroup>
 
 </Project>

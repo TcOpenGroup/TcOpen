@@ -37,7 +37,7 @@
     <Compile Include="POUs\Cylinders\FBs\FB_CylinderWithPressureFeedback.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\FBs\FB_CylinderAlternative.TcPOU">
+    <Compile Include="POUs\Cylinders\FBs\fbCylinder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
@@ -88,7 +88,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcUnit">
-      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
+      <DefaultResolution>TcUnit, * (Vortex.Library)</DefaultResolution>
       <Namespace>TcUnit</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -96,6 +96,11 @@
     <None Include="TcOpen.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcUnit">
+      <Resolution>TcUnit, 1.10.1.0 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
