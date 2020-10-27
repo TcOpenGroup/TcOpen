@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stEL3318_ChannelStatus" Id="{acdced5e-50bb-4dba-af0f-a225fe470439}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
+TYPE stEL3318_ChannelStatus:
+STRUCT
+	Underrange 	: BIT;
+	Overrange 	: BIT;
+	{attribute 'hide'}
+	pack_0_2	: BIT;
+	{attribute 'hide'}
+	pack_0_3	: BIT;
+	{attribute 'hide'}
+	pack_0_4	: BIT;
+	{attribute 'hide'}
+	pack_0_5	: BIT;
+	Error		: BIT;
+	{attribute 'hide'}	
+	pack_0_7	: BIT;
+	{attribute 'hide'}
+	pack_1_0 	: BIT;
+	{attribute 'hide'}
+	pack_1_1 	: BIT;
+	{attribute 'hide'}
+	pack_1_2	: BIT;
+	{attribute 'hide'}
+	pack_1_3	: BIT;
+	{attribute 'hide'}
+	pack_1_4	: BIT;
+	{attribute 'hide'}
+	pack_1_5	: BIT;
+	TxPDOState	: BIT;
+	TxPDOToggle : BIT;
+
+END_STRUCT
+END_TYPE;
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
