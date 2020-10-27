@@ -37,6 +37,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nUnitTcOpenTests", "tests\nUnitTcOpenTests\nUnitTcOpenTests.csproj", "{9F429021-ED22-41F0-B9D2-EA7B7253AA20}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{2F807C41-9462-47B4-B278-4B6C1907AA36}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GitVersion.yml = GitVersion.yml
+		publish.ps1 = publish.ps1
+		README.md = README.md
+		restore.ps1 = restore.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
