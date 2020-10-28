@@ -8,22 +8,17 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
     <RepositoryType>git</RepositoryType>   
-  </PropertyGroup>  
-  <ItemGroup>
-    <Content IncludeInPackage="true" Pack="true" Include="bin/$(Configuration)/$(TargetFramework)/TcOpen.library" PackagePath="lib/$(TargetFramework)" />
-  </ItemGroup>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\fbComponent.g.cs" Link="_generated\TcOpen\fbComponent.g.cs" />
     <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\fbCylinder.g.cs" Link="_generated\TcOpen\fbCylinder.g.cs" />
-    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_Cylinder.g.cs" Link="_generated\TcOpen\FB_Cylinder.g.cs" />
-    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_CylinderTest.g.cs" Link="_generated\TcOpen\FB_CylinderTest.g.cs" />
-    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_CylinderTestAlternative.g.cs" Link="_generated\TcOpen\FB_CylinderTestAlternative.g.cs" />
-    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\FB_CylinderWithPressureFeedback.g.cs" Link="_generated\TcOpen\FB_CylinderWithPressureFeedback.g.cs" />
     <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\Global_Version.g.cs" Link="_generated\TcOpen\Global_Version.g.cs" />
     <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\IO.g.cs" Link="_generated\TcOpen\IO.g.cs" />
     <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\MAIN.g.cs" Link="_generated\TcOpen\MAIN.g.cs" />
-    <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\ST_AnalogSensorStatusWord.g.cs" Link="_generated\TcOpen\ST_AnalogSensorStatusWord.g.cs" />
     <Compile Include="..\..\..\_Vortex\out\TcOpen\src\singles\TcOpen.g.cs" Link="_generated\TcOpen\TcOpen.g.cs" />
+  </ItemGroup>  
+  <ItemGroup>
+    <Content IncludeInPackage="true" Pack="true" Include="bin/$(Configuration)/$(TargetFramework)/TcOpen.library" PackagePath="lib/$(TargetFramework)" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_generated\TcOpen\" />

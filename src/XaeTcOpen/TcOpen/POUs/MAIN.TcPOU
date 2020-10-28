@@ -1,34 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="MAIN" Id="{f20f72a3-44bd-4b01-bab9-6aeb1376a30d}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute wpf [Container(Layout.Tabs)]}
-PROGRAM MAIN
+    <Declaration><![CDATA[PROGRAM MAIN
 VAR	
 	{attribute wpf [Container(Layout.Stack)]}	
 	{attribute addProperty Name "WPF cyclinder"}
 	_wpfCyclinder : fbCylinder;	
+	{attribute wpf [Container(Layout.Stack)]}	
+	{attribute addProperty Name "WPF cyclinder 1"}
+	_wpfCyclinder_1 : fbCylinder;
+	{attribute wpf [Container(Layout.Stack)]}	
+	{attribute addProperty Name "WPF cyclinder 2"}
+	_wpfCyclinder_2 : fbCylinder;
+	{attribute wpf [Container(Layout.Stack)]}	
+	{attribute addProperty Name "WPF cyclinder 3"}
+	_wpfCyclinder_3 : fbCylinder;	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-
-
-//_wpfCyclinder(_atHomePos := IO.A1[0], 
-//			  _atWorkPos := IO.A1[1], 
-//			   toHomePos => IO.A2[0], 
-//			   toWorkPos => IO.A2[0]);
-
-_wpfCyclinder.Manual();
+      <ST><![CDATA[_wpfCyclinder.Manual();
+_wpfCyclinder_1.Manual();
+_wpfCyclinder_2.Manual();
+_wpfCyclinder_3.Manual();
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="2" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="37" Count="2" />
-      <LineId Id="33" Count="0" />
       <LineId Id="16" Count="0" />
+      <LineId Id="68" Count="2" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>
