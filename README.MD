@@ -1,15 +1,15 @@
+# TcOpen
+Open Source Twincat 3.1 code by Automation Professionals for Automation Professionals.  This is intended to be a continuous development project aimed providing standard classes to start building any real deployable application.
 
-Created by namecheap.com/logo-maker/app/
+## More Details
+// TOC?
 
-font name: Questrial-Regular
+## Docs
+See [Introduction](/docs/Introduction.md)
 
-font link: https://fonts.google.com/specimen/Questrial
+## Contributing
+Awesome! See [Conventions](/docs/Conventions.md) for a style guide. Clone the library, and sumbit a PR.
+Consider joining the slack channel ... //TODO slack URL
 
-font author: Joe Prince
-
-font author site: https://dribbble.com/joeprince
-```css
-fontColor: {"gradient-0":"#FF0000","gradient-1":"#0F0F0F"}
-bgColor: {"hex":"#FFFFFF"}
-```
-
+## Suggestions? Issues?
+Open an issue here and / or join the slack channel for discussion // TODO slack URL.
