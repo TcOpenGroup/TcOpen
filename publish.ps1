@@ -1,6 +1,3 @@
-git add .
-git commit -m $semVer;
-
 .\_toolz\gitversion.exe /updateassemblyinfo
 
 

@@ -1,4 +1,5 @@
 mkdir _toolz -ErrorAction SilentlyContinue
+mkdir nugets -ErrorAction SilentlyContinue
 $gitVersion = Get-ChildItem .\_toolz\ -Filter 'gitversion.exe'
 
 
