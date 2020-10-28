@@ -3,23 +3,14 @@
   <POU Name="MAIN" Id="{f20f72a3-44bd-4b01-bab9-6aeb1376a30d}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Tabs)]}
 PROGRAM MAIN
-VAR
-	{attribute wpf [Container(Layout.Stack)]}
-	{attribute addProperty Name "Cyclinder test"}
-	fbCylinderTest : FB_CylinderTest;	
-	
-	
-	// This is Internal => not available in wpf rendering 
-	cylinderTestAlternative : FB_CylinderTestAlternative;	
-	
+VAR	
 	{attribute wpf [Container(Layout.Stack)]}	
 	{attribute addProperty Name "WPF cyclinder"}
-	_wpfCyclinder : fbCylinder;
-	
+	_wpfCyclinder : fbCylinder;	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[tcUnit.RUN();
+      <ST><![CDATA[
 
 
 //_wpfCyclinder(_atHomePos := IO.A1[0], 

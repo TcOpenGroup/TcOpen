@@ -1,38 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
-  <Itf Name="ITF_CylinderAlternative" Id="{28b5305d-a8c1-4475-95a4-835ffbf4e8d5}">
-    <Declaration><![CDATA[INTERFACE ITF_CylinderAlternative EXTENDS __System.IQueryInterface
+  <Itf Name="ICylinder" Id="{f5fb744e-8a3c-4ca5-afc7-036cd2bd31fb}">
+    <Declaration><![CDATA[INTERFACE ICylinder EXTENDS __System.IQueryInterface
 ]]></Declaration>
-    <Property Name="AtHome" Id="{818b6abc-3d02-43c3-a7b6-282f666b7167}">
+    <Property Name="AtHome" Id="{692c9f1a-d5e3-4f4a-9a9a-282429eb8537}">
       <Declaration><![CDATA[PROPERTY AtHome : bool]]></Declaration>
-      <Get Name="Get" Id="{1c2c0520-581b-41b0-9086-16bdbdd52dfe}">
+      <Get Name="Get" Id="{e9381276-183c-4554-9e0d-6f5dae55cf75}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Property Name="AtWork" Id="{a8ce92ed-e8ae-4654-8956-7814d59d6f7f}">
+    <Property Name="AtWork" Id="{659097f8-ff2d-44da-ad8a-231bc9f0b243}">
       <Declaration><![CDATA[PROPERTY AtWork : bool]]></Declaration>
-      <Get Name="Get" Id="{acdae20b-7eac-4473-9a83-34e5ae412ab8}">
+      <Get Name="Get" Id="{835540d8-d675-47f7-a931-ab492f87d3c7}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Method Name="MoveToHome" Id="{bd33d903-d1c3-48d4-b6c4-a88c899be813}">
+    <Method Name="MoveToHome" Id="{d6e3c3c7-b7b1-4768-b83a-9594a0e909ac}">
       <Declaration><![CDATA[METHOD MoveToHome : BOOL
 
 ]]></Declaration>
     </Method>
-    <Method Name="MoveToWork" Id="{4ec405ec-c89b-463c-ada3-74ef2d58dcae}">
+    <Method Name="MoveToWork" Id="{dd77db31-fa7d-47a7-90b5-c7891872d98e}">
       <Declaration><![CDATA[METHOD MoveToWork : BOOL
 ]]></Declaration>
     </Method>
-    <Property Name="MovingToHomePosition" Id="{486b0f4e-4af5-4cc0-b5a8-cd9b4f777ef9}">
+    <Property Name="MovingToHomePosition" Id="{b6761128-8506-4c26-abb8-858156b7d17a}">
       <Declaration><![CDATA[PROPERTY MovingToHomePosition : BOOL]]></Declaration>
-      <Get Name="Get" Id="{559d5b7b-2a82-4140-80ef-10ec5e4003f1}">
+      <Get Name="Get" Id="{42cf0e5a-60dc-4bd6-8884-342668178fda}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Property Name="MovingToWorkPosition" Id="{2782f4a3-7f8e-4428-9f65-5a306b8b630e}">
+    <Property Name="MovingToWorkPosition" Id="{3048e18e-9228-43da-96f7-0a9368ee7049}">
       <Declaration><![CDATA[PROPERTY MovingToWorkPosition : BOOL]]></Declaration>
-      <Get Name="Get" Id="{4351720a-14db-40a5-9c90-103469fee8d5}">
+      <Get Name="Get" Id="{f17df437-7fe7-4cb3-9c4d-2a1ed457fda4}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>

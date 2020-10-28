@@ -16,7 +16,7 @@
     <Implicit_KindOfTask>{ea3b4140-3035-47f7-afac-349d22ca2c13}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{257502dc-3e78-4a8d-ad9f-50eefb5da7c7}</Implicit_Jitter_Distribution>
     <LibraryReferences>{63ef891a-acd0-47a4-b208-b6a50fa2d7d9}</LibraryReferences>
-    <Released>true</Released>
+    <Released>false</Released>
     <Title>TcOpen</Title>
     <ProjectVersion>0.1.0.54</ProjectVersion>
     <Author>Dustin Hullett</Author>
@@ -34,28 +34,10 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\FBs\FB_Cylinder.TcPOU">
+    <Compile Include="POUs\Cylinders\fbCylinder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\FBs\FB_CylinderWithPressureFeedback.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Cylinders\FBs\fbCylinder.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Cylinders\ITFs\ITF_Cylinder.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Cylinders\ITFs\ITF_CylinderAlternative.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Cylinders\ST_AnalogSensorStatusWord.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTest.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Cylinders\Test FBs\FB_CylinderTestAlternative.TcPOU">
+    <Compile Include="POUs\Cylinders\ICylinder.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -70,9 +52,6 @@
     <Folder Include="GVLs" />
     <Folder Include="ComponentsBase" />
     <Folder Include="POUs\Cylinders" />
-    <Folder Include="POUs\Cylinders\ITFs" />
-    <Folder Include="POUs\Cylinders\FBs" />
-    <Folder Include="POUs\Cylinders\Test FBs" />
     <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
@@ -90,20 +69,11 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="TcUnit">
-      <DefaultResolution>TcUnit, * (Vortex.Library)</DefaultResolution>
-      <Namespace>TcUnit</Namespace>
-    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcOpen.tmc">
       <SubType>Content</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <PlaceholderResolution Include="TcUnit">
-      <Resolution>TcUnit, 1.10.1.0 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
