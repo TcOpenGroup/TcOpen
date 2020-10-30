@@ -18,7 +18,11 @@ namespace PlcOpen.Wpf.Sandbox
         public App()
         {          
             Entry.TcOpen.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
-            fbComponent.SimulateComponents();
+
+            Entry.TcOpen.MAIN._wpfCyclinder.TimeToReachPosition = 100;
+            Entry.TcOpen.MAIN._wpfCyclinder_1.TimeToReachPosition = 5000;
+            Entry.TcOpen.MAIN._wpfCyclinder_2.TimeToReachPosition = 250;
+            Entry.TcOpen.MAIN._wpfCyclinder_3.TimeToReachPosition = 50;           
         }
     }
 }

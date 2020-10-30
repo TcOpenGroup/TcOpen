@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="fbCylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK fbCylinder EXTENDS fbComponent IMPLEMENTS ITF_CylinderAlternative
+    <Declaration><![CDATA[FUNCTION_BLOCK fbCylinder EXTENDS fbComponent IMPLEMENTS ICylinder
 VAR_INPUT
 	(*~
 		<docu>

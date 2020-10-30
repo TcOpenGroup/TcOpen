@@ -27,30 +27,12 @@
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>MAIN.fbCylinderTest.fbCylinder._atHomePos</Name>
-							<Comment><![CDATA[ Link With Home Position Sensor]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.fbCylinderTest.fbCylinder._atWorkPos</Name>
-							<Comment><![CDATA[ Link With Work Position Sensor]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>IO.A1</Name>
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>MAIN.fbCylinderTest.fbCylinder.toHomePos</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.fbCylinderTest.fbCylinder.toWorkPos</Name>
-							<Type>BOOL</Type>
-						</Var>
 						<Var>
 							<Name>IO.A2</Name>
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>

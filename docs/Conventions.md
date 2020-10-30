@@ -1,134 +1,181 @@
+# !!!WORK IN PROGRESS!!!
+
 # TcOpen Naming Conventions
-*First Draft of Naming Conventions*
 
-My first reccomendation would be to follow the Backhoff TwinCAT naming conventions but with some modifications and extensions.  see <https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/54043198675164555.html&id=>
+This documents modifies recommendations from [Beckhoff TwinCAT conventions](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/54043198675164555.html&id=) for the purpose of TcOpen project(s).
 
-## Naming overview
+## Introduction
 
-| Object Name               | Notation   |  Prefix   |  Example                                               |
-|:--------------------------|:-----------|:----------|:-------------------------------------------------------|
-| FB/Block name Definition  | PascalCase | FB_?or fb? | FB_Cylinder or fbCyclinder                             |
-| FB/Block name Declaration | PascalCase | FB_?or fb? | FB_AdvancedCylinder or fbAdvancedCyclinder             |
-| Method name               | PascalCase |   No or n?  | MoveToWork()                                           |
-| Method arguments          | camelCase  |     No    | targetPosition  : LREAL                                |
-| Local variables           | camelCase  |     _     | _ actualPosition  : LREAL                              |
-| Constants name            | UpprerCase |     No    | MAX_747_CRUISING_ALTIDUDE                              |
-| Properties name           | PascalCase |           | IsEnabled                                              |
-| ENUM type name            | PascalCase | E_? or no? | E_MachineState.Start or  MachineState.Start            |
-| Interface name Definition | PascalCase | I_? or I?   | I_Cylinder or ICyclinder                               |
-| Interface Declaration     | PascalCase | No? or ip?  | Cylinder or ipCyclinder                                |
-| Reference name Declaration| camelCase  | _ ?or ref? | _ drive or refDrive                                    |
-| Pointer Declaration       | camelCase  | p? or _ ?  | Cylinder or ipCyclinder                                |
-| FUNCTION name Declaration | PascalCase | F? or no?  | F_Add() or Add()                                       |
-| STRUCT name Declaration   | PascalCase | ST_? or no?  | ST_Data or Data                                      |
+Thanks for taking time to read this document. Here we aim to outline a set of rules that will helps us all to write consistent libraries that will serve us its other consumers.
 
+### Why do we need agree on conventions
 
-
-## Cyclic call?
-
-Each component MUST implment abstractFB ```Component``` (abstract method Cyclic)
-
-## Function Block parameter transfer
-
-FB_Init || Properties || VAR_INPUT/OUTPUT/IN_OUT
-
-## Static classes?
-
-Use PROGAM || Use FUNCTION_BLOCK in a GVL
-
-## Pointers
-
-Pointer are || are not allowed?
-
-## Allocated variables (AT %I* %Q*)
-
-Same as other variables? || Specificly marked? || Should be defined only in GVL
-
-
-## Member Variables
-Class (FB) member variables should begin with 'm_' followd by the type identifier and then the variable name i.e. m_<TypeIdentifier><VariableName> 
-ex. m_bTrigger, m_stAnalogStatus.
-    
-```Pascal
-    VAR
-        m_bTrigger : BOOL;
-        m_nCounter : INT;
-        m_stAnalogStatus : AnalogStatus;
-    END_VAR
-```
-=======
-Coding conventions serve the following purposes:
-<br/>_Adapted from MSDN_
 * They create a consistent look to the code, so that readers can focus on content, not layout.
 * They enable readers to understand the code more quickly by making assumptions based on previous experience.
 * They facilitate copying, changing, and maintaining the code.
 * They demonstrate Structured Text best practices.
 
-## A General note on naming
-// TODO Elegant. Self Describing. Readable. considered in calling context. 
-<br/>
+### Terminology
 
-## Type Naming
-These convention shall be followed for creating any new instantiable, extensible or invokeable type (Structures, FBs, Interfaces, Functions, Enums etc).
-<br/>
-### Structures
-// TODO
-<br/>
-### FBs & Classes
-// TODO Classic FB (VAR_IN / VAR_OUT) vs Classes (method and prop access) differences? FB_ & T_?
-<br/>
+For the purpose of this document are terms ```Function block``` and ```class``` **interchangeable**.
 
-### Interfaces
-// TODO
-<br/>
+### A General note on naming
 
-### Functions
-Functions shall be prefixed with "F_"
+Names should be self-describing, readable considered in calling context.
 
-### Enums
-// TODO
-<br/>
+### General not on use of PLC-Language
 
-### GVLs and Parameter Lists
-// TODO
-Generally, global scope should be avoided where possible.
-GVLs and Parameter lists must specify `{attribute 'qualified_only'} ` to ensure access is fully scoped in the code. [Beckhoff Infosys Doc here](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/9007201784510091.html&id=8098035924341237087).
-GVLs should generally not be accessible from outside the library. Setting / modifying GVL variables should be done through static helpers or functions.
+These library projects use exclusively Structured Test (ST) language.
 
-#### Constants
-Where magic numbers are required for low level domain specific operation, these should be managed in the highest level block that makes sense without breaking an abstraction layer. I.e. Do not add `SiemensTempSensorModBusStatusWordRegister : WORD:= 3;` to a GVL of constants. Add this to the appropriate class that handles that device.
+## Naming overview
+
+> **Type Naming**
+
+--------
+|   Block type   |  Notation  |    Prefix     |                       Example                        |
+| :------------- | :--------- | :------------ | :--------------------------------------------------- |
+| FB/CLASS name  | PascalCase | ```fb```      | ```fbCyclinder```                                    |
+| ENUM type name | PascalCase | ```e, enum``` | ```enumMachineState.Start or  eMachineState.Start``` |
+| INTERFACE name | PascalCase | ```I```       | ```ICyclinder```                                     |
+| FUNCTION name  | PascalCase | ```f```       | ```fAdd()```                                         |
+| STRUCT name    | PascalCase | ```st```      | ```stData```                                         |
+| UNION name     | PascalCase | ```u```       | ```uControl```                                         |
+
+
+
+> **Member naming**
+
+|      Variable section      |  Notation  |  Prefix   |            Example            |
+| :------------------------- | :--------- | :-------- | :---------------------------- |
+| METHOD name                | PascalCase | NoPrefix  | ```MoveToWork()```            |
+| METHOD arguments           | camelCase  | NoPrefix  | ```targetPosition  : LREAL``` |
+| PROPERTY name              | PascalCase | NoPrefix  | ```IsEnabled```               |
+| INTERFACE name             | PascalCase | ```ip```  | ```ipCyclinder```             |
+| REFERENCE name Declaration | camelCase  | ```ref``` | ```refDrive```                |
+| POINTER Declaration        | camelCase  | ```p```   | ```pCyclinder```              |
+
+> **Variable naming**
+
+| Variable section | Notation  |  Prefix   |                                  Example                                  |
+| :--------------- | :-------- | :-------- | :------------------------------------------------------------------------ |
+| VAR_INPUT        | camelCase | ```in```  | ```inActualPosition  : LREAL``` , ```_advancedCyclinder : fbCyclinder```  |
+| VAR_OUTPUT       | camelCase | ```out``` | ```outActualPosition  : LREAL``` , ```_advancedCyclinder : fbCyclinder``` |
+| VAR_IN_OUT       | camelCase | ```ino``` | ```inoActualPosition  : LREAL``` , ```_advancedCyclinder : fbCyclinder``` |
+| VAR              | camelCase | ```_```   | ```_actualPosition  : LREAL```, ```_advancedCyclinder : fbCyclinder```    |
+| VAR_STAT         | camelCase | ```_```   | ```_actualPosition  : LREAL```, ```_advancedCyclinder : fbCyclinder```    |
+| VAR_INST         | camelCase | ```_```   | ```_actualPosition  : LREAL``` , ```_advancedCyclinder : fbCyclinder```   |
+| VAR CONSTANT     | UpperCase | NoPrefix  | ```MAX_747_CRUISING_ALTITUDE```                                           |
+
+> **Features to avoid**
+
+| Avoid  | Use instead |
+| :----- | :---------- |
+| ACTION | METHOD      |
+
+## Scope
+
+### GVLs, PRGs and Parameters lists
+
+Generally, global scope should be avoided where possible. 
+GVLs, PRGs and Parameter lists must specify ```{attribute 'qualified_only'}``` to ensure access is fully scoped in the code. [Beckhoff Infosys Doc here](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/9007201784510091.html&id=8098035924341237087).
+
+GVLs, PRGs must not be accessible from outside the library and must use access modifier ```INTERNAL```.
+Setting / modifying GVL variables should be done through static helpers or functions.
+
+### Constants
+
+Where magic numbers are required for low level domain specific operation, these should be managed in the highest level block that makes sense without breaking an abstraction layer. I.e. Do not add ```SiemensTempSensorModBusStatusWordRegister : WORD:= 3;``` to a GVL of constants. Add this to the appropriate class that handles that device.
 
 Where sizing of types may change depending on the use of the library, a [Parameter List](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/18014401980319499.html&id=6895410617442004539) is preferred. This allows the library to be design-time condfigured without modification of the library. Keep the parameterlist as tightly scoped as possible, and as close (in the solution hierarchy) as possible.
 
 i.e. 
 ```Pascal
 // DrivesParams is a Parameter List, as array size needs to be flexible
-drives : ARRAY[1..DrivesParams.NumberOfDrives] OF FB_Drive; 
+drives : ARRAY[1..DrivesParams.NumberOfDrives] OF FB_Drive;
 ```
 
-## FB/Class features naming.
-This section covers the naming features of classes, such as methods and properties. For naming of FBs/Class, see above.
+## Namespaces
 
-### Member Variables // MLAZ: can we not just make some rules for naming variables in general?
-Class (FB) member variables should begin with 'm_' followd by the type identifier and then the variable name i.e. m_<TypeIdentifier><VariableName> 
-ex. m_bTrigger, m_stAnalogStatus.
-    
-```Pascal
+Variables defined in referenced libraries must be declared using fully qualified name with namespace.
+
+~~~ Pascal
 VAR
-    m_bTrigger : BOOL;
-    m_nCounter : INT;
-    m_stAnalogStatus : AnalogStatus;
+    _mixer : fbMixer; // AVOID!
+    _mixer : Mixers.fbMixer; // Like this
 END_VAR
-```    
-   
+~~~
+
 ## Methods
-Methods names should clearly state the intent. Method name should not have any prefix (??some exceptions for testing methods??). Methods in components should be used to perfrom an action (Movement, Measurement, Trigger etc.)
+
+Methods names should clearly state the intent. Method name should not have any prefix (with exception for testing methods). Methods in components should be used to perform an action (Movement, Measurement, Trigger etc.)
 
 ```Pascal
     piston.MoveToWork();
     laser.Measure();
-    dmcReader.Trigger();    
+    dmcReader.Trigger();
 ```
+
+### Properties
+
+Property name should clearly describe intent. In general the name
+
+Properties should **NOT** begin with prop like Beckhoff sample code demonstrates.  We already know that these objects are properties in the way they are exposed.  
+// TODO talk with the group about property naming
+ex. bBooleanProperty, BooleanProperty p_BooleanProperty
+
+## Fluent Interfaces
+
+It is possible in TwinCAT to create classes with fluent interfaces by returning an instance of the class (THIS^ in TwinCAT) in each method.  This allows chaining method calls together.  An example of this can be seen in Gerhard Barteling's blog post <https://www.plccoder.com/fluent-code/>.  This offers a very clean interface and usage pattern, especially in utility classes.
+
+
+## Function Block parameter transfer
+
+Whenever a parameter transfer is required during construction of a class use ```FB_Init``` method
+For cyclical update of parameters VAR_INPUT/OUTPUT/IN_OUT that are called.
+
+## Static classes
+
+For entry point of static classes and function use PROGRAMs or GVLs.
+
+## Pointers
+
+In general avoid use of pointers, use REFERENCE TO whenever possible. However, pointers are allowed in specific instances. The use of pointers must be approved and reviewed by the owners of the repository.
+
+## Allocated variables (```AT %I* %Q*```)
+
+All allocated variables should be defined in GVL (typically named ```IO```). GVL containing allocated variable should be used exclusively for the variables that are intended to map physical hardware. Such GVL should be structured in a way that resembles distribution and topology of actual hardware.
+
+## Member Variables
+
+Class (FB) member variables should begin with underscore ```_``` followed the variable name.
+
+~~~Pascal
+    VAR
+        _Trigger : BOOL;
+        _Counter : INT;
+        _AnalogStatus : AnalogStatus;
+    END_VAR
+~~~
+
+## Components
+
+Component is any class of which the purpose is to control and describe a physical (Robot, Piston, Drive) or virtual (Operator, Warehouse) component.
+
+Component must not contain application specific code to be reusable by other consumers. Components must also allow to be extended by the consumers.
+
+* Component must inherit from ```fbComponent```
+* Component must not be marked FINAL (sealed)
+* Component should implement appropriate ```INTERFACE``` for public contract
+* Component members must explicitly state access modifier (```PUBLIC```, ```INTERNAL```, ```PROTECTED```, or ```PRIVATE```)
+* Component should properly hide implementation details by marking methods preferably ```PROTECTED```.
+* Consider use of ```PRIVATE``` access modifier to prevent any access to that member if you deem it necessary, be aware though that private members cannot be overridden by the class that inherits your component and consumers will not be able to change
+* Component's testing methods must be marked ```INTERNAL```. Testing classes/members that are in a separate testing project can be ```PUBLIC```.
+
+## Cyclic call
+
+Each component implements logic that is required to run cyclically in the *body* of the function block.
+
+### Components methods
 
 The methods **MUST** return BOOL value where ```true``` indicates the process was completed. (?? or complex return type that would provide information about the state of the component??).
 
@@ -136,10 +183,10 @@ The methods **MUST** return BOOL value where ```true``` indicates the process wa
  // Simple example of state driven by return values from components. Piston return true when _work or _home position sensor are reached respectively.
  CASE state OF
  0:
-    IF(verticalPiston.MoveToHome() 
+    IF(verticalPiston.MoveToHome()
     AND_THEN horizontalPiston.MoveToHome()
-    AND_THEN gripper.MoveToHome()) 
-    ) 
+    AND_THEN gripper.MoveToHome())
+    )
     THEN
         state := state + 1;
     END_IF;
@@ -156,11 +203,3 @@ The methods **MUST** return BOOL value where ```true``` indicates the process wa
         state := state + 1;
     END_IF;
 ```
-    
-### Properties
-Properties should **NOT** begin with prop like Beckhoff sample code demonstrates.  We already know that these objects are properties in the way they are exposed.  
-// TODO talk with the group about property naming
-ex. bBooleanProperty, BooleanProperty p_BooleanProperty
-
-## Fluent Interfaces
-It is possible in TwinCAT to create classes with fluent interfaces by returning an instance of the class (THIS^ in TwinCAT) in each method.  This allows chaining method calls together.  An example of this can be seen in Gerhard Barteling's blog post <https://www.plccoder.com/fluent-code/>.  This offers a very clean interface and usage pattern, especially in utility classes.
