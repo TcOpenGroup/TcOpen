@@ -49,7 +49,7 @@ These library projects use exclusively Structured Test (ST) language.
 | :------------------------- | :--------- | :-------- | :---------------------------- |
 | METHOD name                | PascalCase | NoPrefix  | ```MoveToWork()```            |
 | METHOD arguments           | camelCase  | NoPrefix  | ```targetPosition  : LREAL``` |
-| PROPERTY name              | PascalCase |           | ```IsEnabled```               |
+| PROPERTY name              | PascalCase | NoPrefix  | ```IsEnabled```               |
 | INTERFACE name             | PascalCase | ```ip```  | ```ipCyclinder```             |
 | REFERENCE name Declaration | camelCase  | ```ref``` | ```refDrive```                |
 | POINTER Declaration        | camelCase  | ```p```   | ```pCyclinder```              |
