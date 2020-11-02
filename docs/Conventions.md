@@ -34,12 +34,12 @@ These library projects use exclusively Structured Test (ST) language.
 --------
 |   Block type   |  Notation  |    Prefix     |                       Example                        |
 | :------------- | :--------- | :------------ | :--------------------------------------------------- |
-| FB/CLASS name  | PascalCase | ```fb```      | ```fbCyclinder```                                    |
-| ENUM type name | PascalCase | ```e, enum``` | ```enumMachineState.Start or  eMachineState.Start``` |
+| FB/CLASS name  | PascalCase | NoPrefix      | ```Cyclinder```                                    |
+| ENUM type name | PascalCase | NoPrefix      | ```MachineState.Start``` |
 | INTERFACE name | PascalCase | ```I```       | ```ICyclinder```                                     |
-| FUNCTION name  | PascalCase | ```f```       | ```fAdd()```                                         |
-| STRUCT name    | PascalCase | ```st```      | ```stData```                                         |
-| UNION name     | PascalCase | ```u```       | ```uControl```                                         |
+| FUNCTION name  | PascalCase | NoPrefix      | ```Add()```                                         |
+| STRUCT name    | PascalCase | NoPrefix      | ```Data```                                         |
+| UNION name     | PascalCase | NoPrefix      | ```Control```                                         |
 
 
 
@@ -50,7 +50,7 @@ These library projects use exclusively Structured Test (ST) language.
 | METHOD name                | PascalCase | NoPrefix  | ```MoveToWork()```            |
 | METHOD arguments           | camelCase  | NoPrefix  | ```targetPosition  : LREAL``` |
 | PROPERTY name              | PascalCase | NoPrefix  | ```IsEnabled```               |
-| INTERFACE name             | PascalCase | ```ip```  | ```ipCyclinder```             |
+| INTERFACE name             | PascalCase | NoPrefix  | ```Cyclinder```             |
 | REFERENCE name Declaration | camelCase  | ```ref``` | ```refDrive```                |
 | POINTER Declaration        | camelCase  | ```p```   | ```pCyclinder```              |
 
