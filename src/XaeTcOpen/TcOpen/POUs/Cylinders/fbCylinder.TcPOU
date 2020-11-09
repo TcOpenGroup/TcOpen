@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <POU Name="fbCylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbCylinder EXTENDS fbComponent IMPLEMENTS ICylinder
 VAR_INPUT
@@ -47,16 +47,38 @@ VAR_OUTPUT
 	outToWorkPos : BOOL;
 END_VAR
 
-VAR
+VAR	
 	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute wpf [Group(Layout.GroupBox, "Manual controls")]}
-	{attribute addProperty Name "Manual move to work position"}
-	_manualMoveToWork : BOOL;
-	{attribute addProperty Name "Manual move to home position"}
-	_manualMoveToHome : BOOL;
+	{attribute addProperty Name "Request move to Home position"}	
+	_moveHomeTask : fbTask(THIS^);
+	{attribute addProperty Name "Request move to Work position"}
+	_moveWorkTask : fbTask(THIS^);
+	{attribute addProperty Name "Request Stop"}
+	_stopTask : fbTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[IF(_moveHomeTask.Execute(1)) THEN
+	outToHomePos := TRUE;
+	outToWorkPos := FALSE; 		
+	_moveHomeTask.DoneWhen(inAtHomePos);			
+END_IF
+
+IF(_moveWorkTask.Execute(2)) THEN
+	outToWorkPos := TRUE; 
+	outToHomePos := FALSE;
+	_moveWorkTask.DoneWhen(inAtWorkPos);
+END_IF;	 
+
+IF(_stopTask.Execute(0)) THEN	
+	outToWorkPos := FALSE; 
+	outToHomePos := FALSE;
+	_moveWorkTask.Reset();
+	_moveHomeTask.Reset();
+	_stopTask.Reset();
+	_stopTask.DoneWhen(TRUE);	
+END_IF
+
+]]></ST>
     </Implementation>
     <Folder Name="_tests" Id="{2cbd4d6b-2a4a-49b8-b437-ed7c5a45b843}" />
     <Method Name="_MoveToHomeTest" Id="{9ef39d14-16a3-4bc8-b330-33d879f1f7f9}" FolderPath="_tests\">
@@ -64,7 +86,7 @@ END_VAR]]></Declaration>
 METHOD INTERNAL _MoveToHomeTest : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_MoveToHomeTest := MoveToHome();
+        <ST><![CDATA[_MoveToHomeTest := MoveToHome().Done;
 ]]></ST>
       </Implementation>
     </Method>
@@ -74,8 +96,17 @@ METHOD INTERNAL _MoveToWorkTest : BOOL
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_MoveToWorkTest := MoveToWork();
+        <ST><![CDATA[_MoveToWorkTest := MoveToWork().Done;
 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_StopTest" Id="{28dff165-f4ab-484d-9c26-93aee0eaf841}" FolderPath="_tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL _StopTest : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_StopTest := Stop().Done;
 ]]></ST>
       </Implementation>
     </Method>
@@ -106,8 +137,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_manualMoveToWork) AND_THEN THIS^.MoveToWork() THEN _manualMoveToWork := FALSE; END_IF
-IF(_manualMoveToHome) AND_THEN THIS^.MoveToHome() THEN _manualMoveToHome := FALSE; END_IF]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="MoveToHome" Id="{40560f4f-3063-47a8-8b62-1f2968f73b89}">
@@ -119,12 +149,10 @@ IF(_manualMoveToHome) AND_THEN THIS^.MoveToHome() THEN _manualMoveToHome := FALS
 		<returns>True when home position sensor is reached.</returns>
 	</docu>
 ~*)
-METHOD MoveToHome : BOOL]]></Declaration>
+METHOD MoveToHome : ITask]]></Declaration>
       <Implementation>
-        <ST><![CDATA[outToHomePos := TRUE;
-outToWorkPos := FALSE; 
-MoveToHome := inAtHomePos;
-Info('Moving home');
+        <ST><![CDATA[THIS^._moveHomeTask.Invoke();
+MoveToHome := THIS^._moveHomeTask;
 
 
 ]]></ST>
@@ -139,40 +167,38 @@ Info('Moving home');
 		<returns>True when working position sensor is reached.</returns>
 	</docu>
 ~*)
-METHOD MoveToWork : BOOL
+METHOD MoveToWork : ITask
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[outToWorkPos := TRUE; 
-outToHomePos := FALSE;
-MoveToWork := inAtWorkPos;
-Info('Moving to work');]]></ST>
+        <ST><![CDATA[THIS^._moveWorkTask.Invoke();
+MoveToWork := THIS^._moveWorkTask;
+
+]]></ST>
       </Implementation>
     </Method>
-    <Property Name="MovingToHomePosition" Id="{c94ca31b-f1a7-4e9c-924a-99c283b9e845}">
-      <Declaration><![CDATA[PROPERTY MovingToHomePosition : BOOL
+    <Method Name="Stop" Id="{9e32cbb8-ba72-4463-bbd6-9f7b9b0e82cd}">
+      <Declaration><![CDATA[METHOD Stop : REFERENCE TO fbTask
+
 ]]></Declaration>
-      <Get Name="Get" Id="{d3fba5fc-adab-4ae3-98d6-53a9febdae02}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[MovingToHomePosition := outToHomePos AND NOT AtHome;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="MovingToWorkPosition" Id="{d72e3e24-913b-428d-b64e-1186d58c9b4e}">
-      <Declaration><![CDATA[PROPERTY MovingToWorkPosition : BOOL
-]]></Declaration>
-      <Get Name="Get" Id="{e36869bb-201c-4364-9d52-ab9f51852e16}">
-        <Declaration><![CDATA[
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[MovingToWorkPosition := outToWorkPos AND NOT AtWork;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
+      <Implementation>
+        <ST><![CDATA[_stopTask.Invoke();
+Stop REF= _stopTask;]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="fbCylinder">
-      <LineId Id="2" Count="0" />
+      <LineId Id="216" Count="4" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="222" Count="4" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="189" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="193" Count="0" />
+      <LineId Id="197" Count="1" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="124" Count="0" />
     </LineIds>
     <LineIds Name="fbCylinder._MoveToHomeTest">
       <LineId Id="55" Count="0" />
@@ -183,6 +209,10 @@ END_VAR
       <LineId Id="59" Count="0" />
       <LineId Id="44" Count="0" />
     </LineIds>
+    <LineIds Name="fbCylinder._StopTest">
+      <LineId Id="55" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="fbCylinder.AtHome.Get">
       <LineId Id="3" Count="0" />
     </LineIds>
@@ -190,25 +220,23 @@ END_VAR
       <LineId Id="3" Count="0" />
     </LineIds>
     <LineIds Name="fbCylinder.ManualControl">
-      <LineId Id="4" Count="1" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="fbCylinder.MoveToHome">
-      <LineId Id="3" Count="2" />
       <LineId Id="26" Count="0" />
+      <LineId Id="35" Count="0" />
       <LineId Id="25" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="23" Count="0" />
     </LineIds>
     <LineIds Name="fbCylinder.MoveToWork">
-      <LineId Id="3" Count="1" />
-      <LineId Id="7" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="27" Count="1" />
       <LineId Id="17" Count="0" />
     </LineIds>
-    <LineIds Name="fbCylinder.MovingToHomePosition.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="fbCylinder.MovingToWorkPosition.Get">
-      <LineId Id="2" Count="0" />
+    <LineIds Name="fbCylinder.Stop">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

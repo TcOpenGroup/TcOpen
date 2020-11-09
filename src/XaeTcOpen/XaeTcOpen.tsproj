@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.10">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.11">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
@@ -13,6 +13,9 @@
 	</DataTypes>
 	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
+			<Settings MaxCpus="8" NonWinCpus="1">
+				<Cpu CpuId="7"/>
+			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -31,7 +34,7 @@
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2">
+					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>IO.A2</Name>

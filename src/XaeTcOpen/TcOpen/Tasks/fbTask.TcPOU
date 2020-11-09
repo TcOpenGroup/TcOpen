@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="fbTask" Id="{24034ee3-475d-4338-b4dc-23478f0974a9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbTask IMPLEMENTS ITask
+VAR
+	_taskState : eTaskState;
+	_component : IComponent;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <CFC>
+        <XmlArchive>
+          <Data>
+            <o xml:space="preserve" t="CFCImplementationObject">
+              <o n="Items" t="CFCItemList">
+                <l2 n="InnerList" />
+              </o>
+              <n n="ParameterInitializationMethodGenerator" />
+              <o n="RoutingPathTable" t="CFCRoutingPathTable">
+                <d2 n="InnerDictionary" />
+              </o>
+              <v n="AutoSizeCanvas">true</v>
+              <v n="CanvasWidth">1</v>
+              <v n="CanvasHeight">1</v>
+            </o>
+          </Data>
+          <TypeList>
+            <Type n="Boolean">System.Boolean</Type>
+            <Type n="CFCImplementationObject">{32d3375e-c010-41e2-9e43-b2fbf4f2b374}</Type>
+            <Type n="CFCItemList">{cd57ba20-558b-4b98-96c1-73c6000c3087}</Type>
+            <Type n="CFCRoutingPathTable">{4b8bcc79-5980-4868-b49e-005a8148859b}</Type>
+            <Type n="Int32">System.Int32</Type>
+          </TypeList>
+        </XmlArchive>
+      </CFC>
+    </Implementation>
+    <Property Name="Done" Id="{e3ea205b-eb06-42b9-b3d8-63efd5ed6521}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Done := THIS^._taskState = eTaskState.Done;
+
+IF(Done) THEN
+	THIS^._taskState := eTaskState.Idle;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="DoneWhen" Id="{0e4bb473-b258-4a3f-95b9-bb9741040e56}">
+      <Declaration><![CDATA[METHOD DoneWhen 
+VAR_INPUT
+	Condition : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Condition) THEN
+	THIS^._taskState := eTaskState.Done;
+	_component.Lock := 0;
+END_IF;	
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{d0212bb0-ffcc-4ef5-806d-394cf6e951a4}">
+      <Declaration><![CDATA[METHOD Execute : BOOL
+VAR_INPUT
+	lockKey : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Execute := (_component.Lock = 0 OR lockKey = _component.Lock) AND_THEN THIS^._taskState = eTaskState.Request;
+
+IF(Execute) THEN
+	THIS^._taskState := eTaskState.Executing;
+	_component.Lock := lockKey;
+ELSE
+	THIS^._taskState := eTaskState.Idle;
+END_IF;	
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{a5b60cba-9da0-4e51-9e99-230c8717014e}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	component : IComponent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_component := component;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Invoke" Id="{cc03409d-e0bf-43b3-af7b-1069055f0385}">
+      <Declaration><![CDATA[METHOD Invoke
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(THIS^._taskState < eTaskState.Error) THEN
+	THIS^._taskState := eTaskState.Request;
+END_IF;	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{afacd00c-5569-431f-be3c-22a90381057d}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._taskState := eTaskState.Idle;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="fbTask.Done.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="1" />
+    </LineIds>
+    <LineIds Name="fbTask.DoneWhen">
+      <LineId Id="10" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTask.Execute">
+      <LineId Id="9" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTask.FB_init">
+      <LineId Id="7" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTask.Invoke">
+      <LineId Id="9" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTask.Reset">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

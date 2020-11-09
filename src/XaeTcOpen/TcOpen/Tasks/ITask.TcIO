@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <Itf Name="ITask" Id="{12f0ee69-8b2e-45a9-8407-04acf1a7e096}">
+    <Declaration><![CDATA[INTERFACE ITask
+]]></Declaration>
+    <Property Name="Done" Id="{75d26d18-3e85-4883-bef6-c3e9611690cb}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{dfebaec5-8940-4c3a-81d7-c329021bada1}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

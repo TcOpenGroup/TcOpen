@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <POU Name="fbComponent" Id="{3a3f5739-2f9b-4ddf-a7b9-4efe8f16c6da}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT fbComponent
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT fbComponent IMPLEMENTS IComponent
 VAR
 	{attribute addProperty Name "Components' message"}
 	{attribute clr [ReadOnly()]}
 	_message : STRING(255);
+	{attribute 'hide'}
+	_lock : INT;		
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -45,6 +47,26 @@ END_VAR
         <ST><![CDATA[_message := inMessage;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Lock" Id="{894ca00a-deca-4836-9aec-96c7e557d980}">
+      <Declaration><![CDATA[PROPERTY Lock : INT]]></Declaration>
+      <Get Name="Get" Id="{d89713ca-8085-4f32-87d3-2686281caaa1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Lock := _lock;
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{706a0668-cc90-458b-a90d-1300a332f7f5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_lock := Lock;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="Manual" Id="{ebaeaa1d-acc8-400b-b205-2722550bd13c}">
       <Declaration><![CDATA[METHOD PUBLIC Manual
 
@@ -63,6 +85,13 @@ END_VAR
     </Method>
     <LineIds Name="fbComponent.Info">
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbComponent.Lock.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbComponent.Lock.Set">
+      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="fbComponent.Manual">
       <LineId Id="5" Count="0" />

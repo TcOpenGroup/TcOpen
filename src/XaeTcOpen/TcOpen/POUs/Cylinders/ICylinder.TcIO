@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <Itf Name="ICylinder" Id="{f5fb744e-8a3c-4ca5-afc7-036cd2bd31fb}">
     <Declaration><![CDATA[INTERFACE ICylinder EXTENDS __System.IQueryInterface
 ]]></Declaration>
@@ -16,25 +16,13 @@
       </Get>
     </Property>
     <Method Name="MoveToHome" Id="{d6e3c3c7-b7b1-4768-b83a-9594a0e909ac}">
-      <Declaration><![CDATA[METHOD MoveToHome : BOOL
+      <Declaration><![CDATA[METHOD MoveToHome : ITask
 
 ]]></Declaration>
     </Method>
     <Method Name="MoveToWork" Id="{dd77db31-fa7d-47a7-90b5-c7891872d98e}">
-      <Declaration><![CDATA[METHOD MoveToWork : BOOL
+      <Declaration><![CDATA[METHOD MoveToWork : ITask
 ]]></Declaration>
     </Method>
-    <Property Name="MovingToHomePosition" Id="{b6761128-8506-4c26-abb8-858156b7d17a}">
-      <Declaration><![CDATA[PROPERTY MovingToHomePosition : BOOL]]></Declaration>
-      <Get Name="Get" Id="{42cf0e5a-60dc-4bd6-8884-342668178fda}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
-    <Property Name="MovingToWorkPosition" Id="{3048e18e-9228-43da-96f7-0a9368ee7049}">
-      <Declaration><![CDATA[PROPERTY MovingToWorkPosition : BOOL]]></Declaration>
-      <Get Name="Get" Id="{f17df437-7fe7-4cb3-9c4d-2a1ed457fda4}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
   </Itf>
 </TcPlcObject>

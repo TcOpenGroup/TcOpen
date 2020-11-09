@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <Itf Name="IComponent" Id="{1d4a5c73-6248-441d-aaab-9bd8b4ee3caf}">
+    <Declaration><![CDATA[INTERFACE IComponent
+]]></Declaration>
+    <Property Name="Lock" Id="{e00a820b-feed-4fbe-9eb9-03dbb5f0f825}">
+      <Declaration><![CDATA[PROPERTY Lock : INT]]></Declaration>
+      <Get Name="Get" Id="{95b9a86e-3519-468c-91ee-bd964e77bfe1}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{9097b4fa-f009-4534-a3db-e3ad0723b86c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

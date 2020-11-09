@@ -18,7 +18,7 @@
         <UniformGrid Columns="2" Rows="1">
             <Button
                 Background="{Binding Component.outToHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
-                Command="{Binding MoveToHomeCommand, Mode=OneWay}"
+                Command="{Binding Component._moveHomeTask, Mode=OneWay}"
                 Template="{DynamicResource PrimaryButtonControlTemplate}">
                 <Button.Content>
                     <iconPacks:PackIconRemixIcon

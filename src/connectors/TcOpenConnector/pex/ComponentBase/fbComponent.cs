@@ -14,7 +14,5 @@ namespace TcOpen
         {
             ComponentsCollector.Get.AddComponent(this);
         }
-
-        internal virtual bool Simulate() { return true; }
     }
 }

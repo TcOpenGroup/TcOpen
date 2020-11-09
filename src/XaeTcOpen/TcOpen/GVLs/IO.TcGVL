@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <GVL Name="IO" Id="{fa9f344e-05bf-4ebb-872e-4e733cbd3fe1}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
-VAR_GLOBAL INTERNAL
+VAR_GLOBAL 
 	A1 AT %I* : ARRAY[0..7] OF BOOL;
 	A2 AT %Q* : ARRAY[0..7] OF BOOL;
 END_VAR]]></Declaration>
