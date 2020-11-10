@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="MAIN_TESTS" Id="{eacdc333-c1f6-40c7-b492-980a45633e39}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM INTERNAL MAIN_TESTS
+VAR
+	_taskTests : fbTaskTests;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_taskTests();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN_TESTS">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

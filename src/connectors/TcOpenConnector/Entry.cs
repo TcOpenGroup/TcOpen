@@ -9,6 +9,6 @@ namespace TcOpen
 {
     public class Entry
     {
-        public static TcOpen.TcOpenTwinController TcOpen { get; } = new TcOpenTwinController(Tc3ConnectorAdapter.Create(851, true));        
+        public static TcOpen.TcOpenTwinController TcOpen { get; } = new TcOpenTwinController(Tc3ConnectorAdapter.Create("172.20.10.2.1.1",851, true));        
     }
 }

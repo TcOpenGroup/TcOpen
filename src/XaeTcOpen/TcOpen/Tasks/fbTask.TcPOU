@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK fbTask IMPLEMENTS ITask
 VAR
 	_taskState : eTaskState;
-	_component : IComponent;	
+	_ipComponent : IComponent;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -57,8 +57,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (Condition) THEN
-	THIS^._taskState := eTaskState.Done;
-	_component.Lock := 0;
+	THIS^._taskState := eTaskState.Done;			
 END_IF;	
 
 ]]></ST>
@@ -66,18 +65,13 @@ END_IF;
     </Method>
     <Method Name="Execute" Id="{d0212bb0-ffcc-4ef5-806d-394cf6e951a4}">
       <Declaration><![CDATA[METHOD Execute : BOOL
-VAR_INPUT
-	lockKey : INT;
-END_VAR
+
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Execute := (_component.Lock = 0 OR lockKey = _component.Lock) AND_THEN THIS^._taskState = eTaskState.Request;
+        <ST><![CDATA[Execute := (THIS^._taskState = eTaskState.Executing); 
 
-IF(Execute) THEN
+IF(THIS^._taskState = eTaskState.Request) THEN
 	THIS^._taskState := eTaskState.Executing;
-	_component.Lock := lockKey;
-ELSE
-	THIS^._taskState := eTaskState.Idle;
 END_IF;	
 	]]></ST>
       </Implementation>
@@ -91,7 +85,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_component := component;
+        <ST><![CDATA[_ipComponent := component;
 ]]></ST>
       </Implementation>
     </Method>
@@ -114,6 +108,18 @@ END_VAR
         <ST><![CDATA[THIS^._taskState := eTaskState.Idle;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="ThrowWhen" Id="{3db7eb61-336b-4d38-9d05-026d143c48aa}">
+      <Declaration><![CDATA[METHOD ThrowWhen
+VAR_INPUT
+	condition : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (condition) THEN
+	THIS^._taskState := eTaskState.Error;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="fbTask.Done.Get">
       <LineId Id="2" Count="0" />
       <LineId Id="6" Count="0" />
@@ -123,18 +129,15 @@ END_VAR
     <LineIds Name="fbTask.DoneWhen">
       <LineId Id="10" Count="0" />
       <LineId Id="5" Count="0" />
-      <LineId Id="18" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="16" Count="0" />
     </LineIds>
     <LineIds Name="fbTask.Execute">
       <LineId Id="9" Count="0" />
-      <LineId Id="22" Count="0" />
+      <LineId Id="35" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="28" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="29" Count="1" />
       <LineId Id="23" Count="0" />
       <LineId Id="15" Count="0" />
     </LineIds>
@@ -150,6 +153,10 @@ END_VAR
     </LineIds>
     <LineIds Name="fbTask.Reset">
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTask.ThrowWhen">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

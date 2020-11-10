@@ -57,19 +57,19 @@ VAR
 	_stopTask : fbTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(_moveHomeTask.Execute(1)) THEN
+      <ST><![CDATA[IF(_moveHomeTask.Execute()) THEN
 	outToHomePos := TRUE;
 	outToWorkPos := FALSE; 		
 	_moveHomeTask.DoneWhen(inAtHomePos);			
 END_IF
 
-IF(_moveWorkTask.Execute(2)) THEN
+IF(_moveWorkTask.Execute()) THEN
 	outToWorkPos := TRUE; 
 	outToHomePos := FALSE;
 	_moveWorkTask.DoneWhen(inAtWorkPos);
 END_IF;	 
 
-IF(_stopTask.Execute(0)) THEN	
+IF(_stopTask.Execute()) THEN	
 	outToWorkPos := FALSE; 
 	outToHomePos := FALSE;
 	_moveWorkTask.Reset();
