@@ -72,6 +72,14 @@ These library projects use exclusively Structured Test (ST) language.
 | :----- | :---------- |
 | ACTION | METHOD      |
 
+## Identifiers
+
+Any identifier (variable, methods, properies...) should have an identifier that clearly express intent. Identifiers with less then 4 characters should be avoided (unless they express well known acronyms or expressions); there is no formal constraint on maximum number of characters, however about 25 characters should suffice.
+
+### Constants
+
+Constants should be ALLCAPS...
+
 ## Scope
 
 ### GVLs, PRGs and Parameters lists
