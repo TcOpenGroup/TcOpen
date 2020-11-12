@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <POU Name="fbComponent" Id="{3a3f5739-2f9b-4ddf-a7b9-4efe8f16c6da}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT fbComponent IMPLEMENTS IComponent
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT fbComponent IMPLEMENTS ITaskContainer
 VAR	
 	{attribute addProperty Name "Components' message"}
 	{attribute clr [ReadOnly()]}

@@ -3,19 +3,19 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{56ab7f71-51a3-4c51-9c85-895354286a89}</ProjectGuid>
+    <ProjectGuid>{37585681-c225-40e0-832c-eb8e077a5ce7}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcOpen</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
-    <Application>{508644f2-9163-43aa-868f-f604a851a5e3}</Application>
-    <TypeSystem>{bb197368-279a-4365-ad91-9f269ebfb039}</TypeSystem>
-    <Implicit_Task_Info>{799fe358-d610-4a1f-a052-ccce4692e4d7}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{ea3b4140-3035-47f7-afac-349d22ca2c13}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{257502dc-3e78-4a8d-ad9f-50eefb5da7c7}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{63ef891a-acd0-47a4-b208-b6a50fa2d7d9}</LibraryReferences>
+    <Application>{a6f8ed7f-e7e3-4811-955b-5569ea53cd76}</Application>
+    <TypeSystem>{b4ff68b0-5459-4480-a3fc-b5c87caf0803}</TypeSystem>
+    <Implicit_Task_Info>{063a9dae-ae25-4e93-b1f3-32e600abe5f7}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{9ca49489-d582-4b15-b81c-8c91e2ae4264}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{e1584a23-2a93-492d-9bb4-45ddfdc72fa9}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{6041bb0d-625b-4e6f-a92c-90179c0efe88}</LibraryReferences>
     <Released>false</Released>
     <Title>TcOpen</Title>
     <ProjectVersion>0.1.0.54</ProjectVersion>
@@ -25,9 +25,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ComponentsBase\fbComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ComponentsBase\IComponent.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\IO.TcGVL">
@@ -52,7 +49,10 @@
     <Compile Include="Tasks\fbTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tasks\ITask.TcIO">
+    <Compile Include="Tasks\ITaskContainer.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tasks\ITaskStatus.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Version\Global_Version.TcGVL">

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <POU Name="fbTask" Id="{24034ee3-475d-4338-b4dc-23478f0974a9}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK fbTask IMPLEMENTS ITask
+    <Declaration><![CDATA[FUNCTION_BLOCK fbTask IMPLEMENTS ITaskStatus
 VAR
 	_taskState : eTaskState;
-	_ipComponent : IComponent;	
+	_ipComponent : ITaskContainer;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -34,6 +34,24 @@ END_VAR
         </XmlArchive>
       </CFC>
     </Implementation>
+    <Method Name="Abort" Id="{ca8e41d1-2cb9-48d5-bdcd-86aa4ca0697f}">
+      <Declaration><![CDATA[METHOD Abort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Reset();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Busy" Id="{450a4d36-cfe9-44d8-90b2-f94e09dcf72c}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{8f8c846a-c9aa-466c-935b-9e12824ad3d1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := THIS^._taskState = eTaskState.Executing;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Done" Id="{e3ea205b-eb06-42b9-b3d8-63efd5ed6521}">
       <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
@@ -57,22 +75,40 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (Condition) THEN
-	THIS^._taskState := eTaskState.Done;			
+	THIS^._taskState := eTaskState.Done;
+	THIS^._ipComponent.Lock := 0;			
 END_IF;	
 
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Error" Id="{b63e90bb-bf6b-4594-8c1e-b294c810b03f}">
+      <Declaration><![CDATA[PROPERTY Error : BOOL]]></Declaration>
+      <Get Name="Get" Id="{eb85279c-0a0c-4237-8276-5bfcb6048a3c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Error := THIS^._taskState = eTaskState.Error;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Execute" Id="{d0212bb0-ffcc-4ef5-806d-394cf6e951a4}">
       <Declaration><![CDATA[METHOD Execute : BOOL
-
+VAR_INPUT
+	key : INT := 0;
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Execute := (THIS^._taskState = eTaskState.Executing); 
-
-IF(THIS^._taskState = eTaskState.Request) THEN
+        <ST><![CDATA[IF(THIS^._taskState = eTaskState.Request 
+  AND_THEN (THIS^._ipComponent.Lock = 0 
+  OR THIS^._ipComponent.Lock = key)) 
+  THEN
 	THIS^._taskState := eTaskState.Executing;
-END_IF;	
+	THIS^._ipComponent.Lock := key;
+END_IF;
+	
+Execute := (THIS^._taskState = eTaskState.Executing); 
 	]]></ST>
       </Implementation>
     </Method>
@@ -81,7 +117,7 @@ END_IF;
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	component : IComponent;
+	component : ITaskContainer;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -120,6 +156,12 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="fbTask.Abort">
+      <LineId Id="3" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTask.Busy.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="fbTask.Done.Get">
       <LineId Id="2" Count="0" />
       <LineId Id="6" Count="0" />
@@ -129,16 +171,22 @@ END_IF]]></ST>
     <LineIds Name="fbTask.DoneWhen">
       <LineId Id="10" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="22" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="16" Count="0" />
     </LineIds>
+    <LineIds Name="fbTask.Error.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="fbTask.Execute">
-      <LineId Id="9" Count="0" />
-      <LineId Id="35" Count="0" />
       <LineId Id="21" Count="0" />
+      <LineId Id="45" Count="2" />
       <LineId Id="28" Count="0" />
+      <LineId Id="42" Count="0" />
       <LineId Id="23" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
       <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="fbTask.FB_init">

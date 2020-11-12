@@ -5,7 +5,7 @@
 VAR			
 	_task_index : UINT;
 	_tasks : ARRAY[0..NUMBER_OF_TASKS] OF fbTask(THIS^); 
-	_task_groups : ARRAY[0..NUMBER_OF_TASKS] OF UINT;
+	_task_lock_group : ARRAY[0..NUMBER_OF_TASKS] OF UINT;
 	_task_done_condition : ARRAY[0..NUMBER_OF_TASKS] OF BOOL;	
 	_task_fail_condition : ARRAY[0..NUMBER_OF_TASKS] OF BOOL; 	
 END_VAR
@@ -16,32 +16,32 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_task_index := 0;
-IF(_tasks[_task_index].Execute()) THEN
+IF(_tasks[_task_index].Execute(_task_lock_group[_task_index])) THEN
 	_tasks[_task_index].DoneWhen(_task_done_condition[_task_index]);
 	_tasks[_task_index].ThrowWhen(_task_fail_condition[_task_index]);
 END_IF
 
 
 _task_index := _task_index + 1;
-IF(_tasks[_task_index].Execute()) THEN
+IF(_tasks[_task_index].Execute(_task_lock_group[_task_index])) THEN
 	_tasks[_task_index].DoneWhen(_task_done_condition[_task_index]);
 	_tasks[_task_index].ThrowWhen(_task_fail_condition[_task_index]);
 END_IF
 
 _task_index := _task_index + 1;
-IF(_tasks[_task_index].Execute()) THEN
+IF(_tasks[_task_index].Execute(_task_lock_group[_task_index])) THEN
 	_tasks[_task_index].DoneWhen(_task_done_condition[_task_index]);
 	_tasks[_task_index].ThrowWhen(_task_fail_condition[_task_index]);
 END_IF
 
 _task_index := _task_index + 1;
-IF(_tasks[_task_index].Execute()) THEN
+IF(_tasks[_task_index].Execute(_task_lock_group[_task_index])) THEN
 	_tasks[_task_index].DoneWhen(_task_done_condition[_task_index]);
 	_tasks[_task_index].ThrowWhen(_task_fail_condition[_task_index]);
 END_IF
 
 _task_index := _task_index + 1;
-IF(_tasks[_task_index].Execute()) THEN
+IF(_tasks[_task_index].Execute(_task_lock_group[_task_index])) THEN
 	_tasks[_task_index].DoneWhen(_task_done_condition[_task_index]);
 	_tasks[_task_index].ThrowWhen(_task_fail_condition[_task_index]);
 END_IF
@@ -49,8 +49,52 @@ END_IF
 ]]></ST>
     </Implementation>
     <Folder Name="tests" Id="{5613e13c-336e-4006-bf2b-04853f5c1b8c}" />
+    <Method Name="AbortTest" Id="{01635d81-a339-4f63-b04f-fc70f4821b30}" FolderPath="tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AbortTest
+VAR_INPUT
+	taskIndex : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._tasks[taskIndex].Reset();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetBusyTest" Id="{1c9c4af6-7170-4e64-8cd6-b2e233bd0762}" FolderPath="tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetBusyTest : BOOL;
+VAR_INPUT
+	taskIndex : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetBusyTest := THIS^._tasks[taskIndex].Busy;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDoneTest" Id="{d11d4342-3b60-4195-b764-2b40f7d485c7}" FolderPath="tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetDoneTest : BOOL;
+VAR_INPUT
+	taskIndex : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetDoneTest := THIS^._tasks[taskIndex].Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetErrorTest" Id="{a30dda01-48b0-4614-9f64-c034c3bf354d}" FolderPath="tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetErrorTest : BOOL;
+VAR_INPUT
+	taskIndex : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetErrorTest := THIS^._tasks[taskIndex].Error;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="InvokeTask" Id="{4de76c8f-d566-4f35-b3c1-8f71883427b8}">
-      <Declaration><![CDATA[METHOD InvokeTask : ITask
+      <Declaration><![CDATA[METHOD InvokeTask : ITaskStatus
 VAR_INPUT
 	taskIndex : UINT;
 END_VAR
@@ -90,6 +134,16 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="ResetComponent" Id="{ae7b6d78-2fd1-47fe-bfc1-401d4f5d519a}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD ResetComponent
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Lock := 0;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="ResetTask" Id="{e2d6ab32-afce-4087-9c2e-1f46ce3d408d}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD ResetTask
@@ -115,6 +169,18 @@ END_VAR
       <LineId Id="116" Count="0" />
       <LineId Id="45" Count="0" />
     </LineIds>
+    <LineIds Name="fbTaskTests.AbortTest">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTaskTests.GetBusyTest">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTaskTests.GetDoneTest">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTaskTests.GetErrorTest">
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="fbTaskTests.InvokeTask">
       <LineId Id="12" Count="0" />
       <LineId Id="7" Count="0" />
@@ -127,6 +193,9 @@ END_VAR
     </LineIds>
     <LineIds Name="fbTaskTests.ManualControl">
       <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="fbTaskTests.ResetComponent">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="fbTaskTests.ResetTask">
       <LineId Id="5" Count="0" />
