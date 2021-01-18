@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="IFuseChannelExtended" Id="{d2c49c59-03b0-44d1-99b3-0cc29f98dfeb}">
+    <Declaration><![CDATA[INTERFACE IFuseChannelExtended EXTENDS __SYSTEM.IQueryInterface 
+]]></Declaration>
+    <Property Name="DisabledByDI" Id="{1d894dd9-209f-41ca-b855-ada7f2370002}">
+      <Declaration><![CDATA[PROPERTY DisabledByDI : BOOL]]></Declaration>
+      <Get Name="Get" Id="{49e16f94-f706-4ad4-99c7-a3d103a5d9b9}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="DisabledByOutput" Id="{5c0ba219-2865-4f06-8cc3-d53366bd72b2}">
+      <Declaration><![CDATA[PROPERTY DisabledByOutput : BOOL]]></Declaration>
+      <Get Name="Get" Id="{aa397a5c-924d-458b-b0c0-6901be7afaa3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="DisabledBySwitch" Id="{8a128019-b55d-4aab-8e72-9590d734b315}">
+      <Declaration><![CDATA[PROPERTY DisabledBySwitch : BOOL]]></Declaration>
+      <Get Name="Get" Id="{85226086-73b4-4c29-9ca8-5c10b2da0e43}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Overload" Id="{2a8def1a-da3a-48a9-b5f8-c3f7a44b423a}">
+      <Declaration><![CDATA[PROPERTY Overload : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ce6412ca-9711-4e52-afd7-4064c1e03e08}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Overvoltage" Id="{dd0790d9-a789-426d-8dab-1188b04b7afa}">
+      <Declaration><![CDATA[PROPERTY Overvoltage : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c3ec43e9-7343-4e6c-9343-3392605bea73}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="ShortCircuit" Id="{3d020cb0-c459-40af-b6f5-e3d5449e23d0}">
+      <Declaration><![CDATA[PROPERTY ShortCircuit : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d25e91cb-c571-4071-9048-f12eeab091d6}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="StateDeviceSwitch" Id="{4840d0ef-412e-4470-99c8-99b9ceabef32}">
+      <Declaration><![CDATA[PROPERTY StateDeviceSwitch : BOOL]]></Declaration>
+      <Get Name="Get" Id="{65a09fdc-eb72-4af0-bcb2-1f96d622d72f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="StateDigitalInput" Id="{d8e42e34-6b77-425f-a616-b48b8392efdc}">
+      <Declaration><![CDATA[PROPERTY StateDigitalInput : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2d46ead4-3f93-4c62-b203-eab4111e70d8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Undervoltage" Id="{7eabbe88-9bb1-4a49-a242-501e3d49ab15}">
+      <Declaration><![CDATA[PROPERTY Undervoltage : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f4dcd84c-af8b-4bf2-b3f1-2328d1038771}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

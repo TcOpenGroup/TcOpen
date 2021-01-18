@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="EL922x_ChannelExtended" Id="{6d74edf6-7f49-4973-820c-49d572e4802a}">
+    <Declaration><![CDATA[TYPE EL922x_ChannelExtended :
+STRUCT
+	Status AT%I* : StatusStructExtended;
+	Load AT%I* : UINT;
+	Current AT%I* : UINT;
+	VoltageIn AT%I* : UINT;
+	VoltageOut AT%I* : UINT;
+	Control AT%q* : OutputStruct;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

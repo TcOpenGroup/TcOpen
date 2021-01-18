@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stEL3152_Channel" Id="{d1374e5f-a9aa-4021-a0d0-930e192f843c}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
+TYPE stEL3152_Channel:
+STRUCT
+	Status 	AT %I* : stEL3152_ChannelStatus;	
+	Value 	AT %I* : WORD;  
+END_STRUCT
+END_TYPE;
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

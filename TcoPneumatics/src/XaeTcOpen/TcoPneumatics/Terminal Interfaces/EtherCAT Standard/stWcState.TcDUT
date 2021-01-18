@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stWcState" Id="{21699693-6744-4ed7-b029-7d682fdeb6b7}">
+    <Declaration><![CDATA[TYPE stWcState :
+STRUCT
+	WcState		AT %I* : BOOL; // FALSE = data valid, TRUE = data not valid
+	InputToggle	AT %I* : BOOL; // toggles every scan.
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

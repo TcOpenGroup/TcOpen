@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <GVL Name="IO" Id="{86db31ba-4472-4fa2-bd0f-07826bbe8eb4}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL 
+	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 2 (EL3001)"'}
+	_EL3001 : AI_1_Module;
+	
+	
+	_channel_1 : FuseChannelBasic;
+	_channel_2 : FuseChannelBasic;
+	
+	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 3 (EL9221-4030)"'}
+	_EL922x : FuseModuleEL922x(_channel_1, _channel_2);
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

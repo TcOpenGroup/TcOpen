@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="EL922x_ChannelBasic" Id="{502421a1-7e8a-4313-921b-84d6aac4ad1a}">
+    <Declaration><![CDATA[TYPE EL922x_ChannelBasic :
+STRUCT
+	Status AT%I* : StatusStructBasic;
+	Control AT%q* : OutputStruct;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

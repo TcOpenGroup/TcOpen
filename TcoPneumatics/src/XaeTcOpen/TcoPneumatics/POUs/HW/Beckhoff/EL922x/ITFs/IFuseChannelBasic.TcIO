@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="IFuseChannelBasic" Id="{7103bcc3-8451-4f79-98e1-5e6cfa305d23}">
+    <Declaration><![CDATA[INTERFACE IFuseChannelBasic EXTENDS __SYSTEM.IQueryInterface 
+]]></Declaration>
+    <Property Name="CoolDownLock" Id="{b1d417c3-423e-44ef-b643-f33c47c7f09d}">
+      <Declaration><![CDATA[PROPERTY CoolDownLock  : bool]]></Declaration>
+      <Get Name="Get" Id="{ca4851fb-648b-4448-b724-c6b9b7cbd7be}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="CurrentLevelWarning" Id="{f07fc940-b0af-4df5-839e-5f41f6e4d6a3}">
+      <Declaration><![CDATA[PROPERTY CurrentLevelWarning  : bool]]></Declaration>
+      <Get Name="Get" Id="{24502174-5c12-4dfa-9708-8d3bab2b553c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Diag" Id="{37b496c3-caff-4fff-a2fb-134a05867066}">
+      <Declaration><![CDATA[PROPERTY Diag  : bool]]></Declaration>
+      <Get Name="Get" Id="{75103b0d-e69a-4e16-a310-32eb1390eb23}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Enabled" Id="{bd933298-6b1b-4d72-9f6c-9f804dfef166}">
+      <Declaration><![CDATA[PROPERTY Enabled : bool]]></Declaration>
+      <Get Name="Get" Id="{d6d092c8-c845-4f4c-a197-e9315299834d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Error" Id="{f2ed4433-d5dc-4cd4-a97a-dc8960d6bc38}">
+      <Declaration><![CDATA[PROPERTY Error  : bool]]></Declaration>
+      <Get Name="Get" Id="{8db2ef0e-d88e-4f8e-8a2a-2210b4600580}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="HardwareProtection" Id="{b4d4d363-ceeb-42f4-86b5-082ed04486c9}">
+      <Declaration><![CDATA[PROPERTY HardwareProtection : bool]]></Declaration>
+      <Get Name="Get" Id="{361a1f32-bfe9-4e42-910b-fec9724e3076}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="ResetFuse" Id="{b805691e-3c17-48c8-a026-8d60eb100362}">
+      <Declaration><![CDATA[METHOD ResetFuse : BOOL
+]]></Declaration>
+    </Method>
+    <Property Name="StateReset" Id="{2321444f-4a54-403c-8b72-7ffdf6603036}">
+      <Declaration><![CDATA[PROPERTY StateReset : bool]]></Declaration>
+      <Get Name="Get" Id="{3f47ab45-5de3-4b35-a88e-36341d3a6c87}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="StateSwitch" Id="{03496e87-1965-45a1-ac52-89d2428afae9}">
+      <Declaration><![CDATA[PROPERTY StateSwitch : bool]]></Declaration>
+      <Get Name="Get" Id="{5323f810-fdb9-4ede-b3e5-f56b4fe78bdd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="SwitchFuse" Id="{3f803776-9e28-44ed-8210-828282c51c88}">
+      <Declaration><![CDATA[METHOD SwitchFuse : BOOL
+]]></Declaration>
+    </Method>
+    <Property Name="Tripped" Id="{09cc707d-1ac5-4948-8856-5481eb82e5b5}">
+      <Declaration><![CDATA[PROPERTY Tripped : bool]]></Declaration>
+      <Get Name="Get" Id="{fcddf3db-256f-4fe1-9a0b-20647e5453b5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="TxPDOState" Id="{ee9ec970-e0c3-4c4f-8ea6-ee09f32731cd}">
+      <Declaration><![CDATA[PROPERTY TxPDOState  : bool]]></Declaration>
+      <Get Name="Get" Id="{02836cb3-0772-4a0c-a66b-a6d8acf2c580}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

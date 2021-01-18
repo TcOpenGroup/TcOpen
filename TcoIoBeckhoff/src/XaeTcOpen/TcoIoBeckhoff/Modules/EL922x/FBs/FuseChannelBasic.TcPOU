@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="FuseChannelBasic" Id="{d54f22cb-62e2-484b-a2d3-39cc584ea793}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FuseChannelBasic IMPLEMENTS IFuseChannelBasic
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_Chn : EL922x_ChannelBasic;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="CoolDownLock" Id="{ce2f647a-40e5-469b-b1a8-ab6cdd4ef83b}">
+      <Declaration><![CDATA[
+PROPERTY CoolDownLock : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{07ab9f42-2eaa-4756-9a8b-a21903609f9e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CoolDownLock := _Chn.Status.CoolDownLock;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CurrentLevelWarning" Id="{733055b8-a014-436e-910e-c19d75f15312}">
+      <Declaration><![CDATA[
+PROPERTY CurrentLevelWarning : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{e7a54a38-e723-4d63-b892-60c796392ca5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CurrentLevelWarning := _Chn.Status.CurrentLevelWarning;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Diag" Id="{af198614-c8e7-43d5-8256-2eb45569d607}">
+      <Declaration><![CDATA[
+PROPERTY Diag : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{ff61bbcf-2ad6-448b-90e9-89cc7c92a56a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Diag := _Chn.Status.Diag;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Enabled" Id="{afd86398-de34-427e-9feb-0712f5266325}">
+      <Declaration><![CDATA[
+PROPERTY Enabled : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{8c14ddd4-9d1f-4bc8-9bda-d151dec9e176}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Enabled := _Chn.Status.Enabled;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Error" Id="{b814054a-66aa-464e-bb78-697e7b864ab1}">
+      <Declaration><![CDATA[
+PROPERTY Error : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{77305731-2c13-4f34-a5e1-91fd5764466a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Error := _Chn.Status.Error;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HardwareProtection" Id="{1a4abbe7-af31-4bbb-a692-d9ec14cfbe49}">
+      <Declaration><![CDATA[
+PROPERTY HardwareProtection : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{e2cfb2c8-4071-44ca-bdbc-4630236eb124}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HardwareProtection := _Chn.Status.HWProtection;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ResetFuse" Id="{2adfb21e-387b-4e40-b7ec-5c377e84d804}">
+      <Declaration><![CDATA[
+METHOD ResetFuse : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Chn.Control.Reset := NOT _Chn.Control.Reset;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StateReset" Id="{2eaf1dbe-80ca-446d-9489-893b79426514}">
+      <Declaration><![CDATA[
+PROPERTY StateReset : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{078e5e4d-980e-4334-b496-1b567d509f1d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StateReset := _Chn.Status.StateReset;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StateSwitch" Id="{a8e36af3-b3fe-4e88-b37b-0db9ff417d4b}">
+      <Declaration><![CDATA[
+PROPERTY StateSwitch : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{ea637677-dd58-4d45-a2bd-e31e382ef2cc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StateSwitch := _Chn.Status.StateSwitch;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SwitchFuse" Id="{cbcaac99-468f-421a-9d94-6987dd01e5b3}">
+      <Declaration><![CDATA[METHOD SwitchFuse : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Chn.Control.Switch := NOT _Chn.Control.Switch;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Tripped" Id="{dd417a43-8269-4a66-8f64-3e1c43f241d1}">
+      <Declaration><![CDATA[
+PROPERTY Tripped : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{c9d14ced-676d-4023-9cea-b4463caf6e42}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Tripped := _Chn.Status.Tripped;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TxPDOState" Id="{da352eef-1c3e-4929-88e8-92f054693d99}">
+      <Declaration><![CDATA[
+PROPERTY TxPDOState : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{cf37f417-1b97-47b5-bacd-07a0543b8dc5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TxPDOState := _Chn.Status.TxPDOState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FuseChannelBasic">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.CoolDownLock.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.CurrentLevelWarning.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.Diag.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.Enabled.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.Error.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.HardwareProtection.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.ResetFuse">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.StateReset.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.StateSwitch.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.SwitchFuse">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.Tripped.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FuseChannelBasic.TxPDOState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

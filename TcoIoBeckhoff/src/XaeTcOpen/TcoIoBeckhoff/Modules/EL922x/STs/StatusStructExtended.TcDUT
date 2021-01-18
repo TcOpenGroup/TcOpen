@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="StatusStructExtended" Id="{80b5038c-30e8-4046-b7c1-7dfd4978243f}">
+    <Declaration><![CDATA[TYPE StatusStructExtended :
+STRUCT
+	Enabled: BIT;
+	Tripped : BIT;
+	ShortCircuit : BIT;
+	Overload : BIT;
+	HWProtection : BIT;
+	Overvoltage : BIT;
+	Undervoltage : BIT;
+	CurrentLevelWarning : BIT;
+	
+	CoolDownLock : BIT;
+	DisabledBySwitch : BIT;
+	DisabledByDI : BIT;
+	DisabledByOutput : BIT;
+	Diag : BIT;
+	TxPDOState : BIT;
+	InputCycleCount : BIT;
+	InputCycleCount2 : BIT;
+	
+	StateDeviceSwitch : BIT;
+	StateDigitalInput : BIT;
+	Error : BIT;
+	StateReset : BIT;
+	StateSwitch : BIT;
+	{attribute 'hide'}
+	_hidden_bit_0: BIT;
+	{attribute 'hide'}
+	_hidden_bit_1: BIT;
+	{attribute 'hide'}
+	_hidden_bit_2: BIT;
+	{attribute 'hide'}
+	_hidden_byte_0: BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

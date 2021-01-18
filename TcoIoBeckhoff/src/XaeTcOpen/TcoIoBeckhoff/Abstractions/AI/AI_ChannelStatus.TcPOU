@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="AI_ChannelStatus" Id="{4ba1bdec-761c-4800-b97a-c42a7cc8af14}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK AI_ChannelStatus
+VAR
+	{attribute addProperty Name  "<#Under Range#>"}
+	UnderRange AT %I* : BIT;
+	{attribute addProperty Name  "<#Over Range#>"}
+	OverRange AT %I* : BIT;
+	{attribute addProperty Name  "<#Value greater then limit 1#>"}
+	Limit_1_Greater AT %I* : BIT;
+	{attribute addProperty Name  "<#Value smaller then limit 1#>"}
+	Limit_1_Smaller AT %I* : BIT;
+	{attribute addProperty Name  "<#Value greater then limit 2#>"}
+	Limit_2_Greater AT %I* : BIT;
+	{attribute addProperty Name  "<#Value smaller then limit 2#>"}
+	Limit_2_Smaller AT %I* : BIT;
+	{attribute addProperty Name  "<#Error"}
+	Error AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_1_7 AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_2_0 AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_2_1 AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_2_2 AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_2_3 AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_2_4 AT %I* : BIT;
+	{attribute 'hide'}
+	Reserved_2_5 AT %I* : BIT;
+	{attribute addProperty Name  "<#TXPDO State#>"}
+	TxPdoState AT %I* : BIT;
+	{attribute addProperty Name  "<#TXPDO Toggle#>"}
+	TxPdoToggle AT %I* : BIT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <CFC>
+        <XmlArchive>
+          <Data>
+            <o xml:space="preserve" t="CFCImplementationObject">
+              <o n="Items" t="CFCItemList">
+                <l2 n="InnerList" />
+              </o>
+              <n n="ParameterInitializationMethodGenerator" />
+              <o n="RoutingPathTable" t="CFCRoutingPathTable">
+                <d2 n="InnerDictionary" />
+              </o>
+              <v n="AutoSizeCanvas">true</v>
+              <v n="CanvasWidth">1</v>
+              <v n="CanvasHeight">1</v>
+            </o>
+          </Data>
+          <TypeList>
+            <Type n="Boolean">System.Boolean</Type>
+            <Type n="CFCImplementationObject">{32d3375e-c010-41e2-9e43-b2fbf4f2b374}</Type>
+            <Type n="CFCItemList">{cd57ba20-558b-4b98-96c1-73c6000c3087}</Type>
+            <Type n="CFCRoutingPathTable">{4b8bcc79-5980-4868-b49e-005a8148859b}</Type>
+            <Type n="Int32">System.Int32</Type>
+          </TypeList>
+        </XmlArchive>
+      </CFC>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="StatusStructBasic" Id="{0eeba986-f028-4b01-9a96-b48c0a26a8b7}">
+    <Declaration><![CDATA[TYPE StatusStructBasic :
+STRUCT
+		Enabled: BIT;
+		Tripped : BIT;
+		{attribute 'hide'}
+		_hidden_bit_0: BIT;
+		{attribute 'hide'}
+		_hidden_bit_1: BIT;
+		HWProtection : BIT;
+		{attribute 'hide'}
+		_hidden_bit_2: BIT;
+		{attribute 'hide'}
+		_hidden_bit_3: BIT;
+		CurrentLevelWarning : BIT;
+		
+		CoolDownLock : BIT;
+		{attribute 'hide'}
+		_hidden_bit_4: BIT;
+		{attribute 'hide'}
+		_hidden_bit_5: BIT;
+		{attribute 'hide'}
+		_hidden_bit_6: BIT;
+		Diag : BIT;
+		TxPDOState : BIT;
+		{attribute 'hide'}
+		_hidden_bit_7: BIT;
+		{attribute 'hide'}
+		_hidden_bit_8: BIT;
+		
+		{attribute 'hide'}
+		_hidden_bit_9: BIT;
+		{attribute 'hide'}
+		_hidden_bit_10: BIT;
+		Error : BIT;
+		StateReset : BIT;
+		StateSwitch : BIT;
+		{attribute 'hide'}
+		_hidden_bit_11: BIT;
+		{attribute 'hide'}
+		_hidden_bit_12: BIT;
+		{attribute 'hide'}
+		_hidden_bit_13: BIT;
+		{attribute 'hide'}
+		_hidden_byte_14: BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

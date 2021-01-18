@@ -1,0 +1,53 @@
+﻿<Window
+    x:Class="TcoPneumatics.Wpf.Sandbox.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PlcOpen.Wpf.Sandbox"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcopen="clr-namespace:TcoPneumatics;assembly=TcoPneumaticsConnector"
+    xmlns:vortex="http://vortex.mts/xaml"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    DataContext="{x:Static tcopen:Entry.TcoPneumaticsPlc}"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/VortexStyle.xaml" />
+    </Window.Resources>
+    <TabControl>
+        <TabItem Header="Standard">
+            <UniformGrid Columns="1" Rows="2">
+                <GroupBox Header="Control">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfCyclinder}" PresentationType="Control" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Display">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfCyclinder}" PresentationType="Display" />
+                    </Grid>
+                </GroupBox>
+            </UniformGrid>
+        </TabItem>
+        <TabItem Header="Slim">
+            <UniformGrid Columns="1" Rows="2">
+                <GroupBox Header="Control">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfCyclinder}" PresentationType="ControlSlim" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Display">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfCyclinder}" PresentationType="DisplaySlim" />
+                    </Grid>
+                </GroupBox>
+            </UniformGrid>
+        </TabItem>
+        <TabItem Header="Customized">
+            <Grid IsSharedSizeScope="true">
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfCyclinder}" PresentationType="Base-ControlSlim" />
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
