@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoComponent" Id="{8eb0512f-b833-4c04-bec5-9d60e2cb723b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoComponent EXTENDS TcoObject IMPLEMENTS ITcoRestorable
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Maintenance" Id="{c320b900-ed98-4dbe-a90b-28679bad227e}">
+      <Declaration><![CDATA[METHOD PUBLIC FINAL Maintenance ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Manual();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Manual" Id="{68a60f6a-9b62-45e9-a23f-6251b47fa211}">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT Manual
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{d0c02f91-fc49-4476-8612-b6c1e2ed01ac}">
+      <Declaration><![CDATA[METHOD ABSTRACT Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoComponent">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoComponent.Maintenance">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoComponent.Manual">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoComponent.Restore">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

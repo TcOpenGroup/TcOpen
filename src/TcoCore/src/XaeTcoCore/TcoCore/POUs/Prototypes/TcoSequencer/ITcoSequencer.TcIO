@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <Itf Name="ITcoSequencer" Id="{a8c5aaea-ce66-4699-94d6-6fc2b0db7583}">
+    <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITCoState
+]]></Declaration>
+    <Method Name="GoTo" Id="{a244bce3-185f-46eb-9036-dc127d26bd08}">
+      <Declaration><![CDATA[METHOD GoTo
+VAR_INPUT
+	Step : INT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MoveToNext" Id="{87266e09-a85e-45fc-bcc5-e3bf32501bbd}">
+      <Declaration><![CDATA[METHOD MoveToNext : REFERENCE TO ITcoResetable
+]]></Declaration>
+    </Method>
+    <Method Name="StepBackward" Id="{681ee00d-31c9-4717-8a4f-6c756dfb644e}">
+      <Declaration><![CDATA[METHOD StepBackward
+]]></Declaration>
+    </Method>
+    <Method Name="StepForward" Id="{e42d91dc-e4a6-4639-a3ad-03d2d977e251}">
+      <Declaration><![CDATA[METHOD StepForward
+]]></Declaration>
+    </Method>
+    <Method Name="StepIn" Id="{a6cd8de1-6571-4c77-9297-440aa85f6f9a}">
+      <Declaration><![CDATA[METHOD StepIn
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

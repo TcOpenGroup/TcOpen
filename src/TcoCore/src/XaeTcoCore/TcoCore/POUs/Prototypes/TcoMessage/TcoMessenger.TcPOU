@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoMessenger" Id="{bb89b26f-ec79-4812-bab7-3579b2b6d1be}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Provides mechanism for delivering messages to the HMI.				 
+			</summary>			
+		</docu>
+~*)
+FUNCTION_BLOCK PUBLIC TcoMessenger IMPLEMENTS ITcoMessenger
+VAR			
+	(*~
+		<docu>
+			<summary>
+				Most important message of this instance of messenger.			 
+			</summary>			
+		</docu>
+	~*)
+	_mime : TcoMessage;
+	_Parent : ITcoObject;
+	_contextIdentity : ULINT;				
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Messages" Id="{56442304-2644-4fe1-b5d1-eb5248dd12e5}" />
+    <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
+      <Declaration><![CDATA[METHOD PRIVATE Compose 
+VAR_INPUT
+	Text : STRING(255);
+	Category : eMessageCategory;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
+	// _tmpMessage.TimeStamp :=  // TODO Implement rtc on context
+	_mime.Text := Text;
+	_mime.Identity := _Parent.Context.Identity;
+	_mime.Category := Category;
+	_mime.Cycle := _Parent.Context.StartCycleCount;
+END_IF;
+
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Debug" Id="{bd0230f7-b5de-4707-ba4a-f8b17cc23976}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'debug' category to the message queue.				 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC Debug
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Error" Id="{dc14c403-f11e-4200-ac36-567c3d997bf6}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'error' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD PUBLIC Error
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{23bbd1ba-9be3-4c0b-a177-bc9de93be447}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Parent := Parent;
+_contextIdentity := Parent.Identity;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Info" Id="{d1f4840f-86c5-482b-8fb7-443b9b1c585c}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'information' category to the message queue.				 
+			</summary>			
+		</docu>
+~*)
+METHOD PUBLIC Info 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Notify" Id="{1595dfe7-5719-459e-bdf2-0e7976c85511}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'notification' category to the message queue.				 
+			</summary>				
+		</docu>
+~*)
+METHOD Notify 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Notification);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Post" Id="{7e1c7e2b-5612-469e-9139-08754fd973ea}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of given category to the message queue.				 
+			</summary>	
+			<returns>Message index.</returns>		
+		</docu>
+~*)
+METHOD PUBLIC Post 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Same cycle filter for most important messge.
+IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN 
+	IF(Category > _mime.Category) THEN	 
+		Compose(Message, Category);
+	END_IF;
+ELSE
+// Different cycle	
+	Compose(Message, Category);
+END_IF;	
+	
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostConditionally" Id="{5a93fc7f-864e-455f-88a3-d2cd66bdee59}">
+      <Declaration><![CDATA[METHOD PostConditionally
+VAR_INPUT
+	Condition : BOOL;
+	Message : STRING(255);
+	Category : eMessageCategory;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Condition) THEN
+	THIS^.Post(Message, Category);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Programming" Id="{1f1b6a21-6158-44a7-b79e-b3fcea42c4e1}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'programming error' category to the message queue.				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Programming
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.ProgrammingError);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Trace" Id="{5a17dee2-c171-4127-9ee1-30d4a06a53bf}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'trace' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD PUBLIC Trace : INT
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Warning" Id="{dd00674c-7475-44d4-8400-894897951e0b}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'warning' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD PUBLIC Warning 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoMessenger">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Compose">
+      <LineId Id="154" Count="0" />
+      <LineId Id="86" Count="3" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Debug">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Error">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.FB_init">
+      <LineId Id="7" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Info">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Notify">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Post">
+      <LineId Id="155" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="152" Count="1" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="72" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.PostConditionally">
+      <LineId Id="7" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Programming">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Trace">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Warning">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

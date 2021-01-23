@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoObjectTest" Id="{e84228ff-9c33-47a4-a38e-640688a82a88}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoObjectTest EXTENDS TcoObject
+VAR
+	_MyIdentity				:	ULINT;
+	_MyContextIdentity		:	ULINT;
+	_MyContextStartCount 	:	ULINT;
+	_MyContextEndCount		:	ULINT;
+	_MyParentIdentity		:	ULINT;
+	_TcoTaskTest_A			:	TcoTaskTest(THIS^);
+	_TcoTaskTest_B			:	TcoTaskTest(THIS^);
+	_TcoStateTest_A			:	TcoStateTest(THIS^,TRUE);
+	_TcoStateTest_B			:	TcoStateTest(THIS^,FALSE);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CallTaskInstancies" Id="{ca9ba4d2-6103-4337-95bc-465f8f83317e}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL CallTaskInstancies]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TcoTaskTest_A();
+
+_TcoTaskTest_B();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutIdentities" Id="{b42bfa48-43e7-40ad-83bf-1125b1638f9d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutIdentities]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_MyIdentity			:=	THIS^.Identity;
+
+_MyContextIdentity	:=	THIS^.Context.Identity;
+		
+_MyContextStartCount :=	THIS^.Context.StartCycleCount;
+
+_MyContextEndCount	:=	THIS^.Context.EndCycleCount;
+
+_MyParentIdentity	:=	THIS^._Parent.Identity;
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoObjectTest">
+      <LineId Id="22" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObjectTest.CallTaskInstancies">
+      <LineId Id="32" Count="2" />
+      <LineId Id="20" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObjectTest.ReadOutIdentities">
+      <LineId Id="7" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="20" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

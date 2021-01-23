@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoContext" Id="{403f0fe8-301c-472b-9683-fcc2c906813c}">
+    <Declaration><![CDATA[INTERFACE ITcoContext EXTENDS ITcoObject
+]]></Declaration>
+    <Property Name="EndCycleCount" Id="{0ef1070c-3626-47f3-b7ff-b49194a10cb0}">
+      <Declaration><![CDATA[PROPERTY EndCycleCount : ULINT]]></Declaration>
+      <Get Name="Get" Id="{178bc67c-e591-409d-b72b-c8116e29fd92}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="StartCycleCount" Id="{07375695-36dd-4eef-96de-a19ffb2e7fb5}">
+      <Declaration><![CDATA[PROPERTY StartCycleCount : ULINT]]></Declaration>
+      <Get Name="Get" Id="{777fb9d8-cfe2-4a4e-8b02-06212d36a736}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

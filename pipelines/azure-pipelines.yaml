@@ -1,0 +1,33 @@
+﻿resources:
+- repo: self
+queue:
+  name: InxtonPlcBound105
+
+steps:
+- powershell : > 
+    ./pipeline/runbuild.ps1 -properties @{
+     "msbuild"="`"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe`"";
+     "nugetToken"="$(AzureNugetToken)";
+     "publishNugets"=$true;
+     "updateAssemblyInfo" = $true
+     "testTargetAmsId" = "172.20.10.105.1.1"
+     }   
+  displayName: 'Psake build'
+  
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: .\nugets
+    artifactName: artifacts_mts
+  displayName: 'Publish artifacts mts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: .\releaseArtifacts
+    artifactName: artifacts
+  displayName: 'Publish artifacts release'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: .\pipeline
+    artifactName: pipeline
+  displayName: 'Publish pipeline_utils'

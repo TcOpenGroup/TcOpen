@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <Itf Name="ITcoSelector" Id="{8b8caf52-afbd-4335-9286-252c4dc67aa2}">
+    <Declaration><![CDATA[INTERFACE ITcoSelector EXTENDS ITcoState
+]]></Declaration>
+    <Method Name="RequestState" Id="{447295ce-7b18-4f8f-a16f-4797226f59b0}">
+      <Declaration><![CDATA[METHOD RequestState
+VAR_INPUT
+	State : INT;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbContext" Id="{d233a5a2-db40-465e-a632-646d6d0f5be7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbContext EXTENDS TcoCore.TcoContext
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{a8a64ca8-4dd3-4467-8956-c3b678a22f7c}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="fbContext">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="fbContext.Main">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

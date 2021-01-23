@@ -6,7 +6,7 @@ This documents modifies recommendations from [Beckhoff TwinCAT conventions](http
 
 ## Introduction
 
-Thanks for taking time to read this document. Here we aim to outline a set of rules that will helps us all to write consistent libraries that will serve us its other consumers.
+Thanks for taking time to read this document. Here we aim to outline a set of rules that will help us all to write consistent libraries that will serve us and its other consumers.
 
 ### Why do we need agree on conventions
 
@@ -23,9 +23,9 @@ For the purpose of this document are terms ```Function block``` and ```class``` 
 
 Names should be self-describing, readable considered in calling context.
 
-### General not on use of PLC-Language
+### General note on use of PLC-Language
 
-These library projects use exclusively Structured Test (ST) language.
+These library projects use exclusively Structured Test (ST) language and OOP extensions.
 
 ## Naming overview
 
@@ -74,7 +74,7 @@ These library projects use exclusively Structured Test (ST) language.
 
 ## Identifiers
 
-Any identifier (variable, methods, properies...) should have an identifier that clearly express intent. Identifiers with less then 4 characters should be avoided (unless they express well known acronyms or expressions); there is no formal constraint on maximum number of characters, however about 25 characters should suffice.
+Any identifier (variable, methods, properties...) should have an identifier that clearly express intent. Identifiers with less then 4 characters should be avoided (unless they express well known acronyms or expressions); there is no formal constraint on maximum number of characters, however about 25 characters should suffice.
 
 ### Constants
 
@@ -84,7 +84,7 @@ Constants should be ALLCAPS...
 
 ### GVLs, PRGs and Parameters lists
 
-Generally, global scope should be avoided where possible. 
+Generally, global scope should be avoided where possible.
 GVLs, PRGs and Parameter lists must specify ```{attribute 'qualified_only'}``` to ensure access is fully scoped in the code. [Beckhoff Infosys Doc here](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/9007201784510091.html&id=8098035924341237087).
 
 GVLs, PRGs must not be accessible from outside the library and must use access modifier ```INTERNAL```.
@@ -135,7 +135,6 @@ ex. bBooleanProperty, BooleanProperty p_BooleanProperty
 
 It is possible in TwinCAT to create classes with fluent interfaces by returning an instance of the class (THIS^ in TwinCAT) in each method.  This allows chaining method calls together.  An example of this can be seen in Gerhard Barteling's blog post <https://www.plccoder.com/fluent-code/>.  This offers a very clean interface and usage pattern, especially in utility classes.
 
-
 ## Function Block parameter transfer
 
 Whenever a parameter transfer is required during construction of a class use ```FB_Init``` method
@@ -171,43 +170,43 @@ Component is any class of which the purpose is to control and describe a physica
 
 Component must not contain application specific code to be reusable by other consumers. Components must also allow to be extended by the consumers.
 
-* Component must inherit from ```fbComponent```
+* Component must inherit from ```TcoCore.fbComponent```
 * Component must not be marked FINAL (sealed)
 * Component should implement appropriate ```INTERFACE``` for public contract
-* Component members must explicitly state access modifier (```PUBLIC```, ```INTERNAL```, ```PROTECTED```, or ```PRIVATE```)
+* Component members must explicitly state access modifier for methods and properties (```PUBLIC```, ```INTERNAL```, ```PROTECTED```, or ```PRIVATE```)
 * Component should properly hide implementation details by marking methods preferably ```PROTECTED```.
 * Consider use of ```PRIVATE``` access modifier to prevent any access to that member if you deem it necessary, be aware though that private members cannot be overridden by the class that inherits your component and consumers will not be able to change
 * Component's testing methods must be marked ```INTERNAL```. Testing classes/members that are in a separate testing project can be ```PUBLIC```.
 
-## Cyclic call
+### Cyclic call
 
 Each component implements logic that is required to run cyclically in the *body* of the function block.
 
 ### Components methods
 
-The methods **MUST** return BOOL value where ```true``` indicates the process was completed. (?? or complex return type that would provide information about the state of the component??).
+The methods that perform actions **MUST** return TcoCore.ITcoTask. Particular implementation of ```TcoCore.ITcoTask.Execute()``` must be called in the body of the function block.
 
 ```Pascal
  // Simple example of state driven by return values from components. Piston return true when _work or _home position sensor are reached respectively.
  CASE state OF
  0:
-    IF(verticalPiston.MoveToHome()
-    AND_THEN horizontalPiston.MoveToHome()
-    AND_THEN gripper.MoveToHome())
+    IF(verticalPiston.MoveToHome().Done
+    AND_THEN horizontalPiston.MoveToHome().Done
+    AND_THEN gripper.MoveToHome().Done)
     )
     THEN
         state := state + 1;
     END_IF;
  1:
-    IF(horizontalPiston.MoveToWork()) THEN
+    IF(horizontalPiston.MoveToWork().Done) THEN
         state := state + 1;
     END_IF;
  1:
-    IF(verticalPiston.MoveToWork()) THEN
+    IF(verticalPiston.MoveToWork().Done) THEN
         state := state + 1;
     END_IF;
  2:
-    IF(gripper.MoveToWork()) THEN
+    IF(gripper.MoveToWork().Done) THEN
         state := state + 1;
     END_IF;
 ```

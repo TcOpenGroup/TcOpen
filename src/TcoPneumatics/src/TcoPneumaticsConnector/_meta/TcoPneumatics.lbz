@@ -1,0 +1,20 @@
+{
+  "AliasBlocks": [],
+  "EnumBlocks": [],
+  "FunctionBlocks": [
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "fbCylinder",
+      "DeclarationText": "[NS : 'TcoPneumatics' NAME : 'fbCylinder']\nFUNCTION_BLOCK fbCylinder EXTENDS TcoCore.TcoComponent IMPLEMENTS ICylinder\nVAR_INPUT\n\t(*~\n\t\t<docu>\n\t\t\t<summary>\n\t\t\t\tHome position sensor.\n\t\t\t</summary>\t\n\t\t</docu>\n\t~*)\n\t{attribute wpf [Container(Layout.UniformGrid)]}\n\t{attribute wpf [Group(Layout.GroupBox, \"Inputs\")]}\t\n\t{attribute addProperty Name \"Home position sensor\"}\n\tinAtHomePos : BOOL;\n\t(*~\n\t\t<docu>\n\t\t\t<summary>\n\t\t\t\tWorking position sensor.\n\t\t\t</summary>\t\n\t\t</docu>\n\t~*) \n\t{attribute addProperty Name \"Work position sensor\"}\n\tinAtWorkPos : BOOL; \nEND_VAR\nVAR_OUTPUT\n\t(*~\n\t\t<docu>\n\t\t\t<summary>\n\t\t\t\tMove to working home position signal.\n\t\t\t</summary>\t\n\t\t</docu>\n\t~*)\n\t{attribute wpf [Container(Layout.UniformGrid)]}\n\t{attribute wpf [Group(Layout.GroupBox, \"Outputs\")]}\t\n\t{attribute addProperty Name \"Move to home position actuator\"}\n\toutToHomePos : BOOL;\n\t(*~\n\t\t<docu>\n\t\t\t<summary>\n\t\t\t\tMove to working posistion signal.\n\t\t\t</summary>\t\n\t\t</docu>\n\t~*)\n\t{attribute addProperty Name \"Move to work position actuator\"}\n\toutToWorkPos : BOOL;\nEND_VAR\n\nVAR\t\n\t{attribute wpf [Container(Layout.UniformGrid)]}\n\t{attribute addProperty Name \"Request move to Home position\"}\t\n\t_moveHomeTask : TcoCore.TcoTask(THIS^);\n\t{attribute addProperty Name \"Request move to Work position\"}\n\t_moveWorkTask : TcoCore.TcoTask(THIS^);\n\t{attribute addProperty Name \"Request Stop\"}\n\t_stopTask : TcoCore.TcoTask(THIS^);\nEND_VAR",
+      "MirrorFiles": null
+    }
+  ],
+  "GlobalVariableTables": [],
+  "Name": "TcoPneumatics",
+  "Namespace": "TcoPneumatics",
+  "ProgramBlocks": [],
+  "StructBlocks": [],
+  "UnionBlocks": []
+}

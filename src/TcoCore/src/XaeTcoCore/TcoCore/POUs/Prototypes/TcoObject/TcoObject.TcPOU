@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoObject" Id="{ead5f617-b47e-4906-ac53-e73d5d26a62b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject
+VAR
+	{attribute clr [RenderIgnore()]}
+	{attribute clr [ReadOnly()]}
+	_Identity : ULINT;
+	{attribute 'hide'}
+	_Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Context" Id="{e9fccf88-109e-4118-831f-0290f859ab39}">
+      <Declaration><![CDATA[PROPERTY Context : ITcoContext]]></Declaration>
+      <Get Name="Get" Id="{6c6cf6e8-01f1-4c58-9a7c-25846f41a746}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{2172d94e-c218-46fa-950d-f8cdb30a05bd}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Identity := ADR(THIS^);
+_Parent := Parent;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Identity" Id="{3abfda68-92f0-402b-a0bc-b8b6f55297fc}">
+      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{d5a72207-d08f-4264-ba61-5f9bc3c2c475}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Identity := _Identity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="TcoObject">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObject.Context.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObject.FB_init">
+      <LineId Id="33" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObject.Identity.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

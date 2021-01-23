@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoContext_App_1" Id="{4453eacb-a9a5-41b5-b0f4-727cecf60f7b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContext_App_1 EXTENDS TcoContext
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	ResetToZero : BOOL := TRUE;
+	C1	:	LINT	:= 100;
+	C2	:	LINT	:= 200;
+	TcoObject_Counter_1 : TcoObject_Counter(THIS^);
+	TcoObject_Counter_2 : TcoObject_Counter(THIS^);
+	Cycle	:	LINT:=-1;
+	TcoTask_DownCounter_1	: TcoTask_DownCounter(THIS^);
+	TcoTask_DownCounter_2	: TcoTask_DownCounter(THIS^);
+	TcoObject_Counter_1_CountUp_Done_RTRIG : R_TRIG;
+	TcoObject_Counter_1_CountDown_Done_RTRIG : R_TRIG;
+	TcoObject_Counter_2_CountUp_Done_RTRIG : R_TRIG;
+	TcoObject_Counter_2_CountDown_Done_RTRIG : R_TRIG;
+	TcoObject_Counter_1_CountUp_Reset : BOOL;
+	TcoObject_Counter_1_CountDown_Reset : BOOL;
+	TcoObject_Counter_2_CountUp_Reset : BOOL;
+	TcoObject_Counter_2_CountDown_Reset : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{5016e8d2-ba57-4ab2-8cd2-2579f738e57b}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main
+//VAR
+//	state : TcoState(THIS^,false); 
+//END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//TcoTaskInvokeLevel();
+//TcoTaskInvokeImpulse();
+TcoTaskInvokeReset();
+//state.Restore(TcoObject_Counter_1.TcoTask_CountUp).Restore(TcoObject_Counter_2.TcoTask_CountUp);
+
+TcoTaskImplementation();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TcoTaskImplementation" Id="{dafc2e8f-8fa8-481c-af67-05d32184381c}">
+      <Declaration><![CDATA[METHOD TcoTaskImplementation
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.TcoTask_DownCounter_1();
+//Init Invoke
+IF THIS^.TcoTask_DownCounter_1.CounterValue = -1 THEN
+	THIS^.TcoTask_DownCounter_1.SetUpValue := C1;
+	THIS^.TcoTask_DownCounter_1.Invoke();
+END_IF
+//Next Invoke during execution
+IF	THIS^.TcoTask_DownCounter_1.InTheMiddle THEN
+	THIS^.TcoTask_DownCounter_1.SetUpValue := 2 * THIS^.TcoTask_DownCounter_1.SetUpValue;
+	THIS^.TcoTask_DownCounter_1.Invoke();
+END_IF
+//Done and Invoke again
+IF THIS^.TcoTask_DownCounter_1.Done THEN
+	THIS^.TcoTask_DownCounter_1.SetUpValue := C1;
+	THIS^.TcoTask_DownCounter_1.Invoke();
+END_IF
+
+THIS^.TcoTask_DownCounter_2();
+//Init Invoke
+IF THIS^.TcoTask_DownCounter_2.CounterValue = -1 THEN
+	THIS^.TcoTask_DownCounter_2.SetUpValue := C2;
+	THIS^.TcoTask_DownCounter_2.Invoke();
+END_IF
+//Next Invoke during execution
+IF	THIS^.TcoTask_DownCounter_2.InTheMiddle THEN
+	THIS^.TcoTask_DownCounter_2.SetUpValue := 2 * THIS^.TcoTask_DownCounter_2.SetUpValue;
+	THIS^.TcoTask_DownCounter_2.Invoke();
+END_IF
+//Done and Invoke again
+IF THIS^.TcoTask_DownCounter_2.Done THEN
+	THIS^.TcoTask_DownCounter_2.SetUpValue := C2;
+	THIS^.TcoTask_DownCounter_2.Invoke();
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TcoTaskInvokeImpulse" Id="{2d7a306c-08a8-4b1c-b614-8726f75ef05c}">
+      <Declaration><![CDATA[METHOD TcoTaskInvokeImpulse
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TcoObject_Counter_1();
+
+TcoObject_Counter_2();
+
+TcoObject_Counter_1_CountUp_Done_RTRIG(CLK := THIS^.TcoObject_Counter_1.TcoTask_CountUp.Done );
+TcoObject_Counter_1_CountDown_Done_RTRIG(CLK := THIS^.TcoObject_Counter_1.TcoTask_CountDown.Done );
+TcoObject_Counter_2_CountUp_Done_RTRIG(CLK := THIS^.TcoObject_Counter_2.TcoTask_CountUp.Done );
+TcoObject_Counter_2_CountDown_Done_RTRIG(CLK := THIS^.TcoObject_Counter_2.TcoTask_CountDown.Done );
+
+
+IF ResetToZero THEN
+	THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Invoke();
+	THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Invoke();
+	ResetToZero := FALSE;
+END_IF
+
+IF THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Done THEN
+	THIS^.TcoObject_Counter_1.StartCountUp(C1);
+	THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Reset();	//ResetToZeroTask has to be reseted, otherwise StartCountUp is called cyclically
+END_IF;
+
+IF THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Done THEN
+	THIS^.TcoObject_Counter_2.StartCountUp(C2);
+	THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Reset(); //ResetToZeroTask has to be reseted, otherwise StartCountUp is called cyclically
+END_IF;
+
+IF TcoObject_Counter_1_CountUp_Done_RTRIG.Q THEN
+	THIS^.TcoObject_Counter_1.StartCountDown(-C1);
+END_IF;
+
+IF TcoObject_Counter_2_CountUp_Done_RTRIG.Q THEN
+	THIS^.TcoObject_Counter_2.StartCountDown(-C2);
+END_IF;
+
+IF THIS^.TcoObject_Counter_1.TcoTask_CountDown.Done AND NOT THIS^.TcoObject_Counter_1.TcoTask_CountUp.Busy
+	AND THIS^.TcoObject_Counter_2.TcoTask_CountDown.Done AND NOT THIS^.TcoObject_Counter_2.TcoTask_CountUp.Busy THEN
+	THIS^.TcoObject_Counter_1.StartCountUp(C1);
+	THIS^.TcoObject_Counter_2.StartCountUp(C2);
+END_IF
+
+Cycle	:= THIS^.TcoObject_Counter_2.Cycle ;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TcoTaskInvokeLevel" Id="{dc70d169-5114-4e96-8922-96973420284b}">
+      <Declaration><![CDATA[METHOD TcoTaskInvokeLevel
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TcoObject_Counter_1();
+
+TcoObject_Counter_2();
+
+IF ResetToZero THEN
+	THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Invoke();
+	THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Invoke();
+	ResetToZero := FALSE;
+END_IF
+
+IF THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Done THEN
+	THIS^.TcoObject_Counter_1.StartCountUp(C1);
+	THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Reset();	//ResetToZeroTask has to be reseted, otherwise StartCountUp is called cyclically
+END_IF;
+
+IF THIS^.TcoObject_Counter_1.TcoTask_CountUp.Done THEN
+	THIS^.TcoObject_Counter_1.StartCountDown(-C1);
+END_IF;
+
+IF THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Done THEN
+	THIS^.TcoObject_Counter_2.StartCountUp(C2);
+	THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Reset(); //ResetToZeroTask has to be reseted, otherwise StartCountUp is called cyclically
+END_IF;
+
+IF THIS^.TcoObject_Counter_2.TcoTask_CountUp.Done THEN
+	THIS^.TcoObject_Counter_2.StartCountDown(-C2);
+END_IF;
+
+IF THIS^.TcoObject_Counter_1.TcoTask_CountDown.Done AND THIS^.TcoObject_Counter_2.TcoTask_CountDown.Done THEN
+	THIS^.TcoObject_Counter_1.StartCountUp(C1);
+	THIS^.TcoObject_Counter_2.StartCountUp(C2);
+END_IF
+
+Cycle	:= THIS^.TcoObject_Counter_2.Cycle ;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TcoTaskInvokeReset" Id="{22abd949-3f5f-4a27-8dcb-dad4f646b374}">
+      <Declaration><![CDATA[METHOD TcoTaskInvokeReset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TcoObject_Counter_1();
+
+TcoObject_Counter_2();
+
+TcoObject_Counter_1_CountUp_Reset 	:= FALSE;
+TcoObject_Counter_1_CountDown_Reset := False;
+TcoObject_Counter_2_CountUp_Reset 	:= False;
+TcoObject_Counter_2_CountDown_Reset := False;
+
+THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Invoke();
+THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Invoke();
+THIS^.TcoObject_Counter_1.StartCountUp(C1);
+THIS^.TcoObject_Counter_1.StartCountDown(-C1);
+THIS^.TcoObject_Counter_2.StartCountUp(C2);
+THIS^.TcoObject_Counter_2.StartCountDown(-C2);
+
+IF THIS^.TcoObject_Counter_1.TcoTask_CountUp.Busy THEN
+	THIS^.TcoObject_Counter_1.TcoTask_CountDown.Reset();
+	TcoObject_Counter_1_CountDown_Reset := TRUE;
+END_IF
+
+IF THIS^.TcoObject_Counter_2.TcoTask_CountUp.Busy THEN
+	THIS^.TcoObject_Counter_2.TcoTask_CountDown.Reset();
+	TcoObject_Counter_2_CountDown_Reset := TRUE;
+END_IF
+
+IF THIS^.TcoObject_Counter_2.TcoTask_CountDown.Busy THEN
+	THIS^.TcoObject_Counter_1.TcoTask_CountUp.Reset();
+	TcoObject_Counter_1_CountUp_Reset := TRUE;
+END_IF
+
+
+IF THIS^.TcoObject_Counter_2.TcoTask_CountDown.Busy THEN
+	THIS^.TcoObject_Counter_2.TcoTask_CountUp.Reset();
+	TcoObject_Counter_2_CountUp_Reset := TRUE;
+END_IF
+
+Cycle	:= THIS^.TcoObject_Counter_2.Cycle ;
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoContext_App_1">
+      <LineId Id="20" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoContext_App_1.Main">
+      <LineId Id="225" Count="0" />
+      <LineId Id="233" Count="1" />
+      <LineId Id="228" Count="1" />
+      <LineId Id="100" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoContext_App_1.TcoTaskImplementation">
+      <LineId Id="6" Count="33" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoContext_App_1.TcoTaskInvokeImpulse">
+      <LineId Id="6" Count="2" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="98" Count="3" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="10" Count="7" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="91" Count="3" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="103" Count="3" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoContext_App_1.TcoTaskInvokeLevel">
+      <LineId Id="6" Count="11" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="18" Count="7" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="26" Count="6" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoContext_App_1.TcoTaskInvokeReset">
+      <LineId Id="6" Count="2" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="94" Count="3" />
+      <LineId Id="60" Count="2" />
+      <LineId Id="64" Count="3" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="75" Count="1" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="77" Count="3" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="81" Count="1" />
+      <LineId Id="91" Count="2" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="85" Count="3" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

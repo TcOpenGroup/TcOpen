@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eMessageCategory" Id="{0dbef8f9-4da7-450e-a58c-60eab75cfcb1}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Enumerator of message categories.
+		</summary>
+	</docu>	
+~*)
+
+// ATTENTION: Values must be multiply of 100
+{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eMessageCategory :
+(	
+	None := 0,
+	(*~
+	<docu>
+		<summary>
+			Debug message to be used for debugging purpose only.
+		</summary>
+	</docu>	
+	~*)	
+	Debug := 100,
+	(*~
+	<docu>
+		<summary>
+			Trace message to be used for tracing purpose.
+		</summary>
+	</docu>	
+	~*)	
+	Trace := 200,
+	(*~
+	<docu>
+		<summary>
+			Info message
+		</summary>
+	</docu>	
+	~*)	
+	Info := 300,
+	(*~
+	<docu>
+		<summary>
+			Time-out message.
+		</summary>
+	</docu>	
+	~*)
+	TimedOut := 400,
+	(*~
+	<docu>
+		<summary>
+			Notification message.
+		</summary>
+	</docu>	
+	~*)
+	Notification := 500,
+	(*~
+	<docu>
+		<summary>
+			Warning message.
+		</summary>
+	</docu>	
+	~*)
+	Warning := 600,
+	(*~
+	<docu>
+		<summary>
+			Error message.
+		</summary>
+	</docu>	
+	~*)
+	Error := 700,
+	(*~
+	<docu>
+		<summary>
+			To be used when wrong setting have been provided by the user.
+		</summary>
+	</docu>	
+	~*)
+	WrongSettings := 800,
+	(*~
+	<docu>
+		<summary>
+			Programming issue. 
+		</summary>
+	</docu>	
+	~*)
+	ProgrammingError := 900,
+	(*~
+	<docu>
+		<summary>
+			Critical error. 
+		</summary>
+	</docu>	
+	~*)	
+	Critical := 1000,		
+	(*~
+	<docu>
+		<summary>
+			Catastrophic error. 
+		</summary>
+	</docu>	
+	~*)
+	Catastrophic := 1100
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

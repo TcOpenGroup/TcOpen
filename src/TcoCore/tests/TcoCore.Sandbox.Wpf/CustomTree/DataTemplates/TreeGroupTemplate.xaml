@@ -1,0 +1,65 @@
+﻿<ResourceDictionary
+    x:Class="Tco.Wpf.CustomTree.DataTemplates.TreeGroupTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sandbox="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox"
+    xmlns:vortex="http://vortex.mts/xaml">
+
+    <DataTemplate x:Key="RenderableContent">
+        <ContentControl Background="Transparent">
+            <Grid>
+                <Button
+                    Margin="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="10"
+                    Command="{Binding DataContext.RemoveFavouriteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    CommandParameter="{Binding}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <TextBlock
+                                FontWeight="Bold"
+                                Foreground="LightGray"
+                                Tag="{Binding ItemsSource, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
+                                Text="x" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <vortex:RenderableContentControl DataContext="{Binding}" PresentationType="Control" />
+            </Grid>
+        </ContentControl>
+    </DataTemplate>
+
+    <ItemsPanelTemplate x:Key="ItemsPanelWrap">
+        <WrapPanel />
+    </ItemsPanelTemplate>
+
+    <HierarchicalDataTemplate DataType="{x:Type sandbox:TreeGroup}" ItemsSource="{Binding Path=Children}">
+        <StackPanel
+            VerticalAlignment="Center"
+            AllowDrop="True"
+            Background="Transparent"
+            DragEnter="DragEnter"
+            Drop="DragDrop"
+            Orientation="Horizontal">
+            <TextBlock
+                x:Name="GroupItemHeader"
+                VerticalAlignment="Center"
+                Text="{Binding Path=Header}">
+                <TextBlock.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding AddGroupCommand}" Header="Add subgroup" />
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
+            <Separator />
+            <ItemsControl
+                ItemTemplate="{StaticResource RenderableContent}"
+                ItemsPanel="{StaticResource ItemsPanelWrap}"
+                ItemsSource="{Binding Path=Favourites}" />
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+
+</ResourceDictionary>
