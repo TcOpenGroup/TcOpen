@@ -1,0 +1,34 @@
+﻿<Window
+    x:Class="TcoCore.Sandbox.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCore.Sandbox.Wpf"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sandbox="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox"
+    xmlns:vortex="http://vortex.mts/xaml"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    DataContext="{x:Static local:App.PlcTcoCoreTests}"
+    mc:Ignorable="d">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Object tree">
+                <ScrollViewer>
+                    <sandbox:DynamicTreeView DataContext="{Binding MANIPULATOR, Mode=OneWay}" />
+                    <!--<vortex:RenderableContentControl DataContext="{Binding MANIPULATOR}" PresentationType="Base-Control" />-->
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Manipulator">
+                <ScrollViewer>
+                    <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR}" PresentationType="Base-Display" />
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Messages">
+                <DataGrid ItemsSource="{Binding MANIPULATOR._context.Messages}" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

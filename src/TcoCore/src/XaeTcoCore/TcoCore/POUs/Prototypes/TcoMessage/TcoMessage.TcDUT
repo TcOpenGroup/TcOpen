@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
+    <Declaration><![CDATA[TYPE TcoMessage :
+STRUCT
+	{attribute clr [ReadOnly()]}
+	TimeStamp : DT;
+	{attribute clr [ReadOnly()]}		
+	Text : STRING(255);
+	{attribute clr [ReadOnly()]}	
+	Identity : ULINT;	
+	Category : eMessageCategory;
+	{attribute clr [ReadOnly()]}
+	Cycle : ULINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

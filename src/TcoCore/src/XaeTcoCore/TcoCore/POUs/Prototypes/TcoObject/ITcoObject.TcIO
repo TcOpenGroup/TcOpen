@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoObject" Id="{23caff12-ced5-4482-b750-087e4e453b79}">
+    <Declaration><![CDATA[INTERFACE ITcoObject EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Property Name="Context" Id="{02fcb32b-7113-4674-b89a-f6974d243c58}">
+      <Declaration><![CDATA[{attribute 'hide'}
+PROPERTY Context : ITcoContext]]></Declaration>
+      <Get Name="Get" Id="{4408d60f-27dd-4547-b759-df6566bc3f65}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Identity" Id="{e24e6aab-d37c-4251-a2f9-c1cd4070513a}">
+      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{4f5fda5b-34c0-4185-ba6e-77c2c887aef7}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbManipulatorContext" Id="{fea94ac3-4856-422d-b18c-1c08797d1ff1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbManipulatorContext  EXTENDS TcoCore.TcoContext
+VAR
+	_automat : fbManipulatorAutomat(THIS^, true); 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cf5d8b8e-71ea-4109-8bb9-cf892a386f2d}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_automat();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="fbManipulatorContext">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="fbManipulatorContext.Main">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

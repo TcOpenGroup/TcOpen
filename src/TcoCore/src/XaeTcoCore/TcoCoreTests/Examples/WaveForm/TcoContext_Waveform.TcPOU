@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="TcoContext_Waveform" Id="{75ef8a24-aecd-4e0a-addd-347a92f690b1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContext_Waveform EXTENDS TcoContext
+VAR
+	_TcoObject_Waveform		:	TcoObject_Waveform(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{247c75f9-f2be-4116-80b6-fa8029df4445}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TcoObject_Waveform();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoContext_Waveform">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoContext_Waveform.Main">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

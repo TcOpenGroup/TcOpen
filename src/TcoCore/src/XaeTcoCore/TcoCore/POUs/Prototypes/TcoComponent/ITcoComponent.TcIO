@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoComponent" Id="{226fd2d6-401e-4c29-97f4-f7e58b55d445}">
+    <Declaration><![CDATA[INTERFACE ITcoComponent EXTENDS ITcoObject,ITcoRestorable
+]]></Declaration>
+    <Method Name="Maintenance" Id="{b2fe216f-37ab-46ad-9d62-c3f8870418e6}">
+      <Declaration><![CDATA[METHOD PUBLIC Maintenance ]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbPiston" Id="{df7086e3-24fe-4034-ba31-b05bb5ffe13c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoComponent
+VAR_INPUT
+	iHomePositionSensor : BOOL;
+	iWorkPositionSensor : BOOL;	
+END_VAR
+
+VAR_OUTPUT
+	qHomePositionActuator : BOOL;
+	qWorkPositionActuator : BOOL;		
+END_VAR
+
+VAR
+	_moveHomeTask : fbPistonMoveTask(THIS^);
+	_moveWorkTask : fbPistonMoveTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_moveHomeTask(PositionSensor := iHomePositionSensor, MoveToPositionSignal := qHomePositionActuator, InverseSignal := qWorkPositionActuator);
+_moveWorkTask(PositionSensor := iWorkPositionSensor, MoveToPositionSignal := qWorkPositionActuator, InverseSignal := qHomePositionActuator);]]></ST>
+    </Implementation>
+    <Method Name="Manual" Id="{07a3a813-6109-4bbf-8965-f34f5d38a661}">
+      <Declaration><![CDATA[METHOD PROTECTED Manual
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveHome" Id="{4e7fadb5-1a48-4a7b-80f7-ff4252ecf17a}">
+      <Declaration><![CDATA[METHOD MoveHome : TcoCore.ITcoTask
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveHome := THIS^._moveHomeTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveWork" Id="{5fe891ea-5923-4779-be52-a85d819af426}">
+      <Declaration><![CDATA[METHOD MoveWork : TcoCore.ITcoTask]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveWork := THIS^._moveWorkTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{b6ea9502-7703-4515-a330-5f9f26abdfef}">
+      <Declaration><![CDATA[METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._moveHomeTask.Restore();
+THIS^._moveWorkTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="fbPiston">
+      <LineId Id="9" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="fbPiston.Manual">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbPiston.MoveHome">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbPiston.MoveWork">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="fbPiston.Restore">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ValueTag.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <DataTemplate x:Key="ArrayMemberTemplate" x:Name="ArrayMemberTemplate">
+        <TreeViewItem Header="{Binding ., Converter={local:ArraySymbolToHeaderConverter}}">
+            <ScrollViewer Height="100">
+                <ItemsControl ItemTemplate="{StaticResource ValueTagTemplate}" ItemsSource="{Binding}" />
+            </ScrollViewer>
+        </TreeViewItem>
+    </DataTemplate>
+</ResourceDictionary>

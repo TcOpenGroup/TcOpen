@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoStateAutoRestoreTest" Id="{635180e2-b2d9-4213-a2a6-8bd32b517b3b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoStateAutoRestoreTest EXTENDS TcoState
+VAR
+	_MyState						:	INT;	
+	_OnStateChangeCounter			:	INT;	
+	_RestoreCounter					:	INT;	
+	_AutoRestoreToMyChildsEnabled	: 	BOOL;
+	_AutoRestoreByMyParentEnabled	: 	BOOL;	
+	_CountsPerStep					:	ULINT;
+	_CounterValue					:	ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CleanUp" Id="{081b5928-de47-4761-be4d-83ea89a64bf4}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL CleanUp]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ChangeState(0);
+_MyState := State;	
+_OnStateChangeCounter			:= 0;
+_RestoreCounter					:= 0;
+_AutoRestoreToMyChildsEnabled	:= FALSE;
+_AutoRestoreByMyParentEnabled	:= FALSE;
+_CountsPerStep					:= 0;
+_CounterValue					:= 0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ExecutionBody" Id="{680585de-c3db-4af0-b280-e5ea8b43e2b4}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ExecutionBody]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF State =-1 THEN
+	_CounterValue := 0;	
+	ChangeState(0);
+END_IF
+
+IF State = 0 THEN
+	_CounterValue := _CounterValue + 1;	
+	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+		ChangeState(State + 10);
+	END_IF
+END_IF
+
+IF State = 10 THEN
+	_CounterValue := _CounterValue + 1;	
+	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+		ChangeState(State + 10);
+	END_IF
+END_IF
+
+IF State = 20 THEN
+	_CounterValue := _CounterValue + 1;	
+	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+		ChangeState(State + 10);
+	END_IF
+END_IF
+
+IF State = 30 THEN
+	_CounterValue := _CounterValue + 1;	
+	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+		ChangeState(State + 10);
+	END_IF
+END_IF
+
+IF State = 40 THEN
+	_CounterValue := _CounterValue + 1;	
+	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+		ChangeState(State + 10);
+	END_IF
+END_IF
+
+IF State = 50 THEN
+	_CounterValue := _CounterValue + 1;	
+	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+		ChangeState(State + 10);
+	END_IF
+END_IF
+
+IF State = 60 THEN
+	ChangeState(-1);
+END_IF
+
+_MyState := State;
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{de76d52f-5157-49e1-8531-4b05abb17ada}">
+      <Declaration><![CDATA[METHOD OnStateChange 
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_OnStateChangeCounter	:=	_OnStateChangeCounter + 1;
+
+SUPER^.OnStateChange(PreviousState,NewState);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutAutoRestoreProperties" Id="{fa3f5405-9438-4099-9edf-95c6d9998cd8}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_AutoRestoreToMyChildsEnabled	:= THIS^.EnableAutoRestore;
+_AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{8a149d97-03d1-42be-b1ec-fe88428a36b7}">
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_RestoreCounter	:=	_RestoreCounter + 1;
+
+SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerRestore" Id="{c5028e48-ff1c-497f-9f19-1a366dc1e69a}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerRestore
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Restore();
+
+_MyState := State;
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoStateAutoRestoreTest">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateAutoRestoreTest.CleanUp">
+      <LineId Id="100" Count="0" />
+      <LineId Id="93" Count="6" />
+      <LineId Id="92" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateAutoRestoreTest.ExecutionBody">
+      <LineId Id="20" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="96" Count="3" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="53" Count="26" />
+      <LineId Id="83" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateAutoRestoreTest.OnStateChange">
+      <LineId Id="35" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateAutoRestoreTest.ReadOutAutoRestoreProperties">
+      <LineId Id="37" Count="1" />
+      <LineId Id="20" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateAutoRestoreTest.Restore">
+      <LineId Id="35" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateAutoRestoreTest.TriggerRestore">
+      <LineId Id="43" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="52" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

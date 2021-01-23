@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/PTKu/TcOpen</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
+    <RepositoryType>MIT</RepositoryType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.9.1-alpha.37" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj" />
+  </ItemGroup>
+
+</Project>

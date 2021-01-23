@@ -131,6 +131,7 @@ publish/
 
 # NuGet Packages Directory
 packages/*
+.nuget/*
 ## TODO: If the tool you use requires repositories.config
 ## uncomment the next line
 #!packages/repositories.config
@@ -208,21 +209,20 @@ _Libraries/
 *.project.~u
 *.tsproj.bak
 *.xti.bak
+LineIDs.dbg
 
 # Inxton.Vortex.Framework 
 _Vortex/
+CompilerCache.md
+log.txt
+pal.txt
 
-# Documentation
-
-docs/TcOpen.Docs/_site/
-
-# Tools
-
+# IVF Tools
 _toolz/
-
 nugets/
 
+# CodeRush
 .cr/
 
-docs/TcOpen.Docs/log.txt
+
 
