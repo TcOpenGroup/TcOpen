@@ -5,8 +5,7 @@ queue:
 
 steps:
 - powershell : > 
-    ./pipelines/runbuild.ps1 -properties @{
-     "msbuild"="`"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe`"";     
+    ./pipelines/runbuild.ps1 -properties @{     
      "publishNugets"=$false;
      "updateAssemblyInfo" = $true;
      "testTargetAmsId" = "172.20.10.2.1.1"
