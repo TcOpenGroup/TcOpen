@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net48</TargetFramework>
+     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.1-alpha.37" />
@@ -11,7 +12,7 @@
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Localizations.resx</DependentUpon>
+      <DependentUpon>Localizations.resx</DependentUpon>     
     </Compile>
   </ItemGroup>
   <ItemGroup>

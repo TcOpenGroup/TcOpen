@@ -1,6 +1,6 @@
 ﻿properties {
   $buildConfig = "Release"
-  $isTestingEnabled = $true
+  $isTestingEnabled = $false
   $msbuildVerbosity = "minimal"
   $baseDir  = resolve-path ..
   $solutionDir = "$baseDir\"
@@ -11,11 +11,10 @@
   $gitVersion
   $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
   $dotnet = '"C:\Program Files\dotnet\dotnet.exe"'
-  $testTargetAmsId = "172.20.10.2.1.1"
+  $testTargetAmsId = ""
 }
 
-#task default -depends Build, Finish
-task default -depends CreatePackages, Finish
+task default -depends CloseVs, Tests, CreatePackages, Finish
 
 FormatTaskName (("="*25) + " [ {0} ] " + ("="*25))
 
