@@ -8,6 +8,7 @@ steps:
     ./pipelines/runbuild.ps1 -properties @{     
      "publishNugets"=$false;
      "updateAssemblyInfo" = $true;
-     "testTargetAmsId" = "172.20.10.2.1.1"
+     "testTargetAmsId" = "172.20.10.2.1.1",
+     "isTestingEnabled" = $true
      }   
   displayName: 'Psake build'
