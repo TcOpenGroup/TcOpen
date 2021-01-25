@@ -55,15 +55,32 @@ task NugetRestore -depends Clean {
    exec{
        cmd /c $command
    }
+   
+   # To Restore IVC into _Vortex directory
+   $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
+   Write-Host $command
+   exec{
+       cmd /c $command
+   }   
 } 
 
 task GitVersion -depends NugetRestore {
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
+  $updateAssemblyInfoFlag
   $script:gitVersion =  & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/nofetch" "/config" "$baseDir" |  ConvertFrom-Json 
   $buildNumber =$script:gitVersion.SemVer
   Write-Host "##vso[build.updatebuildnumber]$buildNumber" 
-  $plcversion = $script:gitVersion.Major.ToString() + "." + $script:gitVersion.Minor.ToString() + "." + $script:gitVersion.Patch.ToString() +"." + $script:gitVersion.PreReleaseNumber.ToString()
+ 
+  if($script:gitVersion.BuildMetaData -ne "")
+  {
+    $v = $script:gitVersion.BuildMetaData.ToString();
+  }
+  else 
+  {
+    $v = $script:gitVersion.PreReleaseNumber.ToString();
+  } 
+  $plcversion = $script:gitVersion.Major.ToString() + "." + $script:gitVersion.Minor.ToString() + "." + $script:gitVersion.Patch.ToString() +"." +  $v
   if($updateAssemblyInfo) {.\_Vortex\builder\uvn.exe -v $plcversion}
 }
 
