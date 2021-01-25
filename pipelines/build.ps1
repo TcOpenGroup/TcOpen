@@ -103,9 +103,7 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
     Write-Host $command
     exec { 
       cmd /c $command
-    }    
-
-    & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com" $project /Rebuild "$buildConfig|TwinCAT RT (x64)"
+    }       
   }
 
 }
@@ -128,6 +126,8 @@ task CloseVs -depends Build {
 
 
 task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
+
+  & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com" .\TcOpen.plc.slnf /Rebuild "$buildConfig|TwinCAT RT (x64)"
 
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId .\src\TcoCore\src\XaeTcoCore\
   exec{   
