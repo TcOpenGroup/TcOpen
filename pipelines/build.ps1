@@ -98,14 +98,14 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
    )
 
    foreach($project in $projects)
-  {
-    & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com" $project /Rebuild "Release|TwinCAT RT (x64)"
-    
+  {   
     $command = ".\_Vortex\builder\vortex.compiler.console.exe -s " + $project
     Write-Host $command
     exec { 
       cmd /c $command
     }    
+
+    & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com" $project /Rebuild "$buildConfig|TwinCAT RT (x64)"
   }
 
 }
