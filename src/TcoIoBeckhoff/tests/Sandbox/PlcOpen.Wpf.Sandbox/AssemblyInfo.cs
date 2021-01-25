@@ -12,5 +12,5 @@ using System.Windows;
 
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-azure-pipelines.1+106.Branch.azure-pipelines.Sha.159aa5a1b7c560de94178a2c001121326d3502e6")]
+[assembly: AssemblyInformationalVersion("0.1.0-alpha.115+Branch.dev.Sha.ebf34b2b9f1732969e5053230f12ca12a2c39a8d")]
 
