@@ -5,7 +5,7 @@ queue:
 
 steps:
 - powershell : > 
-    ./pipeline/runbuild.ps1 -properties @{
+    ./pipelines/runbuild.ps1 -properties @{
      "msbuild"="`"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe`"";     
      "publishNugets"=$false;
      "updateAssemblyInfo" = $true;
