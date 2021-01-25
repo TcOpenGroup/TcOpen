@@ -21,7 +21,4 @@
       <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)_Vortex\builder\vortex.compiler.console.exe -s $(SolutionDir)tco.core\tco.core.slnf" />
-  </Target>
 </Project>
