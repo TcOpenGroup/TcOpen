@@ -18,10 +18,11 @@
     <LibraryReferences>{6041bb0d-625b-4e6f-a92c-90179c0efe88}</LibraryReferences>
     <Released>false</Released>
     <Title>TcoPneumatics</Title>
-    <ProjectVersion>0.1.0.89</ProjectVersion>
+    <ProjectVersion>0.1.0.91</ProjectVersion>
     <Author>Dustin Hullett</Author>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoPneumatics</DefaultNamespace>
+    <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="POUs\Cylinders\fbCylinder.TcPOU">
@@ -54,7 +55,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.0.0.0 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.1.0.91 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -65,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.0.0.0 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.1.0.91 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
@@ -100,7 +101,62 @@
             <v>Rules</v>
             <o>
               <v n="Name">"Rules"</v>
-              <d n="SubKeys" t="Hashtable" />
+              <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+                <v>167</v>
+                <o>
+                  <v n="Name">"167"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>4</v>
+                <o>
+                  <v n="Name">"4"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>33</v>
+                <o>
+                  <v n="Name">"33"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>6</v>
+                <o>
+                  <v n="Name">"6"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>27</v>
+                <o>
+                  <v n="Name">"27"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>28</v>
+                <o>
+                  <v n="Name">"28"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+              </d>
               <d n="Values" t="Hashtable" />
             </o>
           </d>
