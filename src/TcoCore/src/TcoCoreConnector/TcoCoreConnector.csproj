@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.1-alpha.37" />
+    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.9.1-alpha.37" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
@@ -21,7 +22,4 @@
       <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)_Vortex\builder\vortex.compiler.console.exe -s $(SolutionDir)tco.core\tco.core.slnf" />
-  </Target>
 </Project>
