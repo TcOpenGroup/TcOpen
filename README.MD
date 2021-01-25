@@ -5,7 +5,7 @@
 [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/TcOpenGroup/TcOpen)
 [![TcOpen Slack ](https://img.shields.io/badge/Slack-channel-ff69b4.svg)](https://tcopendevelopment.slack.com/)
 [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/TcOpenGroup/TcOpen#awesome-twincat-3-projects-)
-![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/petokurhajec0964/tc3/TcOpenGroup.TcOpen/dev?style=plastic)
+![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/petokurhajec0964/tc3/TcOpenGroup.TcOpen/dev)
 
 # TcOpen
 
