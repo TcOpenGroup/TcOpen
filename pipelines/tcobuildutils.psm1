@@ -161,7 +161,42 @@ function CleanObjBin {
     }
 }
 
+function RemoveTcBins {
+    GetRootDirectoryOf "*.tsproj" | ForEach-Object { 
+        Push-Location ($_)
 
+        $removeFolders = @( ".\_Boot",".\_Config")
+        # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
+
+        $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+
+        foreach($item in ($removeFolders)){
+            Write-Host "In $folder trying to remove $item"
+            Remove-Item -r $item  -ErrorAction SilentlyContinue
+        }
+
+        Pop-Location
+    }
+}
+
+
+function RemoveTcProjBins {
+    GetRootDirectoryOf "*.plcproj" | ForEach-Object { 
+        Push-Location ($_)
+
+        $removeFolders = @( ".\_CompileInfo")
+        # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
+
+        $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+
+        foreach($item in ($removeFolders)){
+            Write-Host "In $folder trying to remove $item"
+            Remove-Item -r $item  -ErrorAction SilentlyContinue
+        }
+
+        Pop-Location
+    }
+}
 
 function GitVersionToPlcVersion{
     param($gitVersion)
