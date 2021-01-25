@@ -55,6 +55,13 @@ task NugetRestore -depends Clean {
    exec{
        cmd /c $command
    }
+   
+   # To Restore IVC into _Vortex directory
+   $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
+   Write-Host $command
+   exec{
+       cmd /c $command
+   }   
 } 
 
 task GitVersion -depends NugetRestore {
