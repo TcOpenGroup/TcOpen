@@ -12,3 +12,8 @@ steps:
      "isTestingEnabled" = $true
      }   
   displayName: 'Psake build'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    testRunTitle: 'TcoUnitTests'
