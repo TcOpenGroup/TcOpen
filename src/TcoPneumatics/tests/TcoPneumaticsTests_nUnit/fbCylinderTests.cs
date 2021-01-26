@@ -10,13 +10,13 @@ namespace TcoPneumaticsTests
 {
     public class fbCylinderTests
     {
-        fbCylinder sut;
+        fbCylinder sut=ConnectorFixture.Connector.MAIN._defaultContext._wpfCyclinder;
 
         [OneTimeSetUp()]
         public void OneTimeSetUp()
         {
-            Entry.TcoPneumaticsTestsPlc.Connector.BuildAndStart();
-            sut = Entry.TcoPneumaticsTestsPlc.MAIN._defaultContext._wpfCyclinder;
+            //Entry.TcoPneumaticsTestsPlc.Connector.BuildAndStart();
+            //sut = Entry.TcoPneumaticsTestsPlc.MAIN._defaultContext._wpfCyclinder;
             var executingAssembly = new FileInfo(Assembly.GetExecutingAssembly().Location);
             Runner.RecordingsShell = Path.GetFullPath(Path.Combine(executingAssembly.DirectoryName, @"..\..\..\recodrings"));            
         }
@@ -34,8 +34,10 @@ namespace TcoPneumaticsTests
             sut.Run(a =>
             {
                 var done = a._MoveToHomeTest();
-                Entry.TcoPneumaticsTestsPlc.IO.A1[0].Synchron = true;
-                Entry.TcoPneumaticsTestsPlc.IO.A1[1].Synchron = false;
+                //Entry.TcoPneumaticsTestsPlc.IO.A1[0].Synchron = true;
+                //Entry.TcoPneumaticsTestsPlc.IO.A1[1].Synchron = false;
+                ConnectorFixture.Connector.IO.A1[0].Synchron = true;
+                ConnectorFixture.Connector.IO.A1[1].Synchron = false;
                 return done;
             });
 
@@ -54,8 +56,10 @@ namespace TcoPneumaticsTests
             sut.Run(a =>
             {
                 var done = a._MoveToWorkTest();
-                Entry.TcoPneumaticsTestsPlc.IO.A1[0].Synchron = false;
-                Entry.TcoPneumaticsTestsPlc.IO.A1[1].Synchron = true;
+                //Entry.TcoPneumaticsTestsPlc.IO.A1[0].Synchron = false;
+                //Entry.TcoPneumaticsTestsPlc.IO.A1[1].Synchron = true;
+                ConnectorFixture.Connector.IO.A1[0].Synchron = false;
+                ConnectorFixture.Connector.IO.A1[1].Synchron = true;
                 return done;
             });
             Assert.IsTrue(sut.inAtWorkPos.Synchron);
@@ -84,8 +88,9 @@ namespace TcoPneumaticsTests
         [Test]
         [Timeout(10000)]
         public void MoveCylinderToWorkTestWithRecording()
-        {                      
-            var actor = new Recorder<IO, PlainIO>(Entry.TcoPneumaticsTestsPlc.IO, mode, 1).Actor;
+        {
+            //var actor = new Recorder<IO, PlainIO>(Entry.TcoPneumaticsTestsPlc.IO, mode, 1).Actor;
+            var actor = new Recorder<IO, PlainIO>(ConnectorFixture.Connector.IO, mode, 1).Actor;
             var done = false;
 
             sut.Run(() => { done = sut._MoveToWorkTest(); return done; },
@@ -105,7 +110,8 @@ namespace TcoPneumaticsTests
         [Timeout(10000)]
         public void MoveCylinderToHomeTestWithRecording()
         {
-            var actor = new Recorder<IO, PlainIO>(Entry.TcoPneumaticsTestsPlc.IO, mode, 1).Actor;
+            //var actor = new Recorder<IO, PlainIO>(Entry.TcoPneumaticsTestsPlc.IO, mode, 1).Actor;
+            var actor = new Recorder<IO, PlainIO>(ConnectorFixture.Connector.IO, mode, 1).Actor;
             var done = false;
 
             sut.Run(() => { done = sut._MoveToHomeTest(); return done; },

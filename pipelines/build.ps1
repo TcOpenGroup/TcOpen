@@ -129,20 +129,25 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
 
   & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com" .\TcOpen.plc.slnf /Rebuild "$buildConfig|TwinCAT RT (x64)"
 
-  .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId .\src\TcoCore\src\XaeTcoCore\
+  $BootDir = $solutionDir +"\src\TcoCore\src\XaeTcoCore\"
+  .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoCore\TcoCore.slnf -c $buildConfig -f net48
+    dotnet test .\src\TcoCore\TcoCore.slnf -c $buildConfig -f net48 -v $msbuildVerbosity
   }
 
-  .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId .\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\
+  $BootDir = $solutionDir +"\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\"
+  .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf -c $buildConfig -f net48
+    dotnet test .\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf -c $buildConfig -f net48 -v $msbuildVerbosity
   }
 
-  .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId .\src\TcoPneumatics\src\XaeTcoPneumatics\
+  $BootDir = $solutionDir +"src\TcoPneumatics\src\XaeTcoPneumatics\"
+  .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoPneumatics\TcoPneumatics.slnf -c $buildConfig -f net48
+    dotnet test .\src\TcoPneumatics\TcoPneumatics.slnf -c $buildConfig -f net48 -v $msbuildVerbosity
   }
+  .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId
+
 } 
 
 
