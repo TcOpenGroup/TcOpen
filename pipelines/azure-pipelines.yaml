@@ -14,7 +14,7 @@ steps:
   displayName: 'Psake build'
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)\nugets\**'
+    targetPath: '$(Pipeline.Workspace)'
     artifact: 'PublishArtifacts'
     publishLocation: 'pipeline'
 - task: PublishTestResults@2
