@@ -1,10 +1,6 @@
 ﻿param( [Parameter(Mandatory=$True, Position=0, ValueFromPipeline=$false)]
        [string]
-       $TargetAmsId, 
-       [Parameter(Mandatory=$True, Position=1, ValueFromPipeline=$false)]
-       [string]
-       $XaeProjectPath
-       )
+       $TargetAmsId)
 
 #-------------------------------------------
 # Imports
@@ -75,56 +71,3 @@ while($Pos -lt $Path.Count)
 
 #Start remote process on target
 $Retv = $Session | Write-TcValue -IndexGroup 0x1f4 -IndexOffset 0x0 -Value $Data -Force
-
-
-#-------------------------------------------
-#Copying files to the target
-#-------------------------------------------
-Start-Sleep -Milliseconds 1000
-
-    Write-Host "Uploading boot projects files from '$XaeProjectPath' " 
-
-    $PlcBootPath = Join-Path -Path $XaeProjectPath -ChildPath "_Boot\TwinCAT RT (x64)"
-    $PlcProjectPath = Join-Path -Path $PlcBootPath -ChildPath "\Plc"
-    $ConfigFiles = Get-ChildItem -Path $PlcBootPath -Name -Filter *.xml
-    
-    $ConfigFiles| ForEach-Object{
-        $FileSource = ($PlcBootPath + "\" + $_).Replace('\\','\')
-        $FileDestination = "C:\TwinCAT\3.1\Boot\"+$_
-        try {
-            Copy-AdsFile -SessionId $Session.Id -Upload -Path $FileSource -Destination $FileDestination -Directory Generic -Force -ErrorAction Ignore    
-        }
-        catch {
-            Write-Host "Error copying file: $FileSource"
-            Write-Host $_
-            
-        }
-        
-    }
-    
-    #Copy files of all PLC projects
-    $PlcProjectFiles = Get-ChildItem -Path $PlcProjectPath -Name 
-    $PlcProjectFiles| ForEach-Object{
-        $FileSource = ($PlcProjectPath + "\" + $_).Replace('\\','\')
-        $FileDestination = "C:\TwinCAT\3.1\Boot\Plc\"+$_
-        $FileSource
-        $FileDestination 
-        try {
-            Copy-AdsFile -SessionId $Session.Id -Upload -Path $FileSource -Destination $FileDestination -Directory Generic -Force -ErrorAction Ignore
-        }
-        catch {
-            
-        }
-        
-    }
-    Close-TcSession -InputObject $session    
-
-
-
-
-#-------------------------------------------
-#Set target state into the Run mode
-#-------------------------------------------
-
-Write-Host "Switching target '$TargetAmsId' into the Run mode" -ForegroundColor Green
-Set-AdsState -NetId $TargetAmsId -State Run -Force 
