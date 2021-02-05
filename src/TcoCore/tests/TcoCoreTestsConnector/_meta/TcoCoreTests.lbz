@@ -1,0 +1,193 @@
+{
+  "AliasBlocks": [],
+  "EnumBlocks": [
+    {
+      "Name": "eTransitionType",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'eTransitionType']\n{attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE eTransitionType :\n(\n\tNone \t\t:=\t 0,\n\tLinear \t\t:=\t 1,\n\tExponential :=\t 2,\n\tS_Type \t\t:=\t 3\n);\nEND_TYPE\n",
+      "MirrorFiles": null
+    }
+  ],
+  "FunctionBlocks": [
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "fbContext",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'fbContext']\nFUNCTION_BLOCK fbContext EXTENDS TcoCore.TcoContext\nVAR\n\t\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoContext_App_1",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoContext_App_1']\nFUNCTION_BLOCK TcoContext_App_1 EXTENDS TcoContext\nVAR_INPUT\nEND_VAR\nVAR_OUTPUT\nEND_VAR\nVAR\n\tResetToZero : BOOL := TRUE;\n\tC1\t:\tLINT\t:= 100;\n\tC2\t:\tLINT\t:= 200;\n\tTcoObject_Counter_1 : TcoObject_Counter(THIS^);\n\tTcoObject_Counter_2 : TcoObject_Counter(THIS^);\n\tCycle\t:\tLINT:=-1;\n\tTcoTask_DownCounter_1\t: TcoTask_DownCounter(THIS^);\n\tTcoTask_DownCounter_2\t: TcoTask_DownCounter(THIS^);\n\tTcoObject_Counter_1_CountUp_Done_RTRIG : R_TRIG;\n\tTcoObject_Counter_1_CountDown_Done_RTRIG : R_TRIG;\n\tTcoObject_Counter_2_CountUp_Done_RTRIG : R_TRIG;\n\tTcoObject_Counter_2_CountDown_Done_RTRIG : R_TRIG;\n\tTcoObject_Counter_1_CountUp_Reset : BOOL;\n\tTcoObject_Counter_1_CountDown_Reset : BOOL;\n\tTcoObject_Counter_2_CountUp_Reset : BOOL;\n\tTcoObject_Counter_2_CountDown_Reset : BOOL;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoObject_Counter",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoObject_Counter']\nFUNCTION_BLOCK TcoObject_Counter EXTENDS TcoObject\nVAR\n\tCounterValue : LINT;\n\tUpperLimit : LINT;\n\tLowerLimit : LINT;\n\tTcoTask_CountUp : TcoTask(THIS^);\n\tTcoTask_CountDown : TcoTask(THIS^);\n\tTcoTask_ResetToZero : TcoTask(THIS^);\n\tCountUp_InvokeTrigCounter : LINT;\n\tCountUp_DoneTrigCounter : LINT;\n\tCountDown_InvokeTrigCounter : LINT;\n\tCountDown_DoneTrigCounter : LINT;\n\tResetToZero_InvokeTrigCounter : LINT;\n\tResetToZero_DoneTrigCounter : LINT;\n\tCountUp_PreviousState : eTaskState;\n\tCountDown_PreviousState : eTaskState;\n\tResetToZero_PreviousState : eTaskState;\n\tCountUp_Execute : BOOL;\n\tCountDown_Execute : BOOL;\n\tResetToZero_Execute : BOOL;\n\tCountUp_Busy : BOOL;\n\tCountDown_Busy : BOOL;\n\tResetToZero_Busy : BOOL;\n\tCountUp_Done : BOOL;\n\tCountDown_Done : BOOL;\n\tResetToZero_Done : BOOL;\n\tCycle\t:LINT ;\n\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoContext_App_2",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoContext_App_2']\nFUNCTION_BLOCK TcoContext_App_2 EXTENDS TcoContext\nVAR\n\tResetToZero : BOOL := TRUE;\n\tC1\t:\tLINT\t:= 100;\n\tC2\t:\tLINT\t:= 200;\n\tTcoObject_Counter_1 : TcoObject_Counter(THIS^);\n\tTcoObject_Counter_2 : TcoObject_Counter(THIS^);\n\tTcoState_1\t: TcoState(THIS^,TRUE);\n//\tTcoState_Counter_2\t: TcoState(THIS^,TRUE);\n\nEND_VAR",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoTask_DownCounter",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoTask_DownCounter']\nFUNCTION_BLOCK TcoTask_DownCounter EXTENDS TcoTask\nVAR\n\t_SetUpValue\t\t:\tLINT;\n\t_CounterValue\t:\tLINT := -1;\n\t_InvokeCounter\t: LINT;\n\t_DoneCounter\t: LINT;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "fbPiston",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'fbPiston']\nFUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoComponent\nVAR_INPUT\n\tiHomePositionSensor : BOOL;\n\tiWorkPositionSensor : BOOL;\t\nEND_VAR\n\nVAR_OUTPUT\n\tqHomePositionActuator : BOOL;\n\tqWorkPositionActuator : BOOL;\t\t\nEND_VAR\n\nVAR\n\t_moveHomeTask : fbPistonMoveTask(THIS^);\n\t_moveWorkTask : fbPistonMoveTask(THIS^);\nEND_VAR",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "fbPistonMoveTask",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'fbPistonMoveTask']\nFUNCTION_BLOCK fbPistonMoveTask EXTENDS TcoCore.TcoTask\nVAR_INPUT\n\tPositionSensor : BOOL;\nEND_VAR\nVAR_IN_OUT\n\tMoveToPositionSignal : BOOL;\n\tInverseSignal : BOOL;\t\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "fbManipulatorAutomat",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'fbManipulatorAutomat']\nFUNCTION_BLOCK fbManipulatorAutomat EXTENDS TcoCore.TcoState\nVAR\n\t_horizontalPiston : fbPiston(THIS^);\n\t_verticalPiston : fbPiston(THIS^);\n\t_gripperPiston : fbPiston(THIS^);\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "fbManipulatorContext",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'fbManipulatorContext']\nFUNCTION_BLOCK fbManipulatorContext  EXTENDS TcoCore.TcoContext\nVAR\n\t_automat : fbManipulatorAutomat(THIS^, true); \nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoContext_Waveform",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoContext_Waveform']\nFUNCTION_BLOCK TcoContext_Waveform EXTENDS TcoContext\nVAR\n\t_TcoObject_Waveform\t\t:\tTcoObject_Waveform(THIS^);\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoObject_Waveform",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoObject_Waveform']\nFUNCTION_BLOCK TcoObject_Waveform EXTENDS TcoObject\nVAR\n\t_TcoTask_Waveform\t\t\t\t:\tTcoTask(THIS^);\t\t\t\t\t\t\t\t\n\t_TcoState_Waveform\t\t\t\t:\tTcoState(THIS^,TRUE);\t\n\t_TcoState_WaveformSequence_1\t:\tTcoState_WaveformSequence(THIS^,TRUE);\n\t_TcoState_WaveformSequence_2\t:\tTcoState_WaveformSequence(THIS^,FALSE);\n\t_Value1\t\t\t\t\t\t\t:\tLREAL;\n\t_Value2\t\t\t\t\t\t\t:\tLREAL;\n\t_Value\t\t\t\t\t\t\t:\tLREAL;\n\t_X\t\t\t\t\t\t\t\t:\tULINT;\n\t_PlcCycleOffset\t\t\t\t\t:\tULINT;\n\t_PlcCycle\t\t\t\t\t\t:\tULINT;\n\t_Reset\t\t\t\t\t\t\t:\tBOOL:=TRUE;\n\t_Start\t\t\t\t\t\t\t:\tBOOL:=TRUE;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoState_WaveformSequence",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoState_WaveformSequence']\nFUNCTION_BLOCK TcoState_WaveformSequence EXTENDS TcoState\nVAR\n\t_TcoTask_Transition_1\t:\tTcoTask_Transition(THIS^);\n\t_TcoTask_Transition_2\t:\tTcoTask_Transition(THIS^);\n\t_WaveformPointTable\t\t:\tARRAY[0..10]\tOF \tWaveformPoint;\n\t_WaveformPointsCount\t:\tUINT;\n\t_ActualTransitionNumber\t:\tUINT;\nEND_VAR\nVAR_IN_OUT\n\t\nEND_VAR",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoTask_Transition",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoTask_Transition']\nFUNCTION_BLOCK TcoTask_Transition EXTENDS TcoTask\nVAR\n\t_TransitionType\t\t:\teTransitionType;\t//Type of transition\n\t_k0\t\t\t\t\t:\tLREAL;\t\t\t\t//Linear constant\n\t_StartValue\t\t\t:\tLREAL;\t\t\t\t//Value before transition has been started\n\t_TargetValue\t\t:\tLREAL;\t\t\t\t//Value need to be reached after transition is finished\n\t_Elapsed\t\t\t:\tUINT;\t\t\t\t//Elapsed \"time\" (number of PLC cycles) from start of the transition \n\t_TransitionDuration\t:\tUINT;\t\t\t\t//Number of PLC cycles during which the \"_TargetValue\" must be reached\n\t_t0\t\t\t\t\t:\tLREAL;\t\t\t\t//Time constant\n\t_x0\t\t\t\t\t:\tLREAL;\t\t\t\t//offset\n\t_k1\t\t\t\t\t:\tLREAL;\t\t\t\t//Nonlinear constant\n\t_k2\t\t\t\t\t:\tLREAL;\t\t\t\t//Nonlinear constant\n\t_k3\t\t\t\t\t:\tLREAL;\t\t\t\t//Nonlinear constant\n\t_k4\t\t\t\t\t:\tLREAL;\t\t\t\t//Nonlinear constant\n\t_ImmediateChange\t:\tBOOL;\t\t\t\t//Immediate start new transition, even if previous has not yet been completed\nEND_VAR\nVAR_IN_OUT \n\tValue\t:\tLREAL;\nEND_VAR",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoContextTest",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoContextTest']\nFUNCTION_BLOCK TcoContextTest EXTENDS TcoContext\nVAR\n\t_CallMyPlcInstance \t\t:\tBOOL := FALSE;\n\t_startCycles\t\t\t:\tULINT;\n\t_endCycles\t\t\t\t:\tULINT;\t\n\t_mainCycles\t\t\t\t:\tULINT;\n\t_TcoObjectTest_A\t\t:\tTcoObjectTest(THIS^);\n\t_TcoObjectTest_B\t\t:\tTcoObjectTest(THIS^);\n\t_MyIdentity\t\t\t\t:\tULINT;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoObjectTest",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoObjectTest']\nFUNCTION_BLOCK TcoObjectTest EXTENDS TcoObject\nVAR\n\t_MyIdentity\t\t\t\t:\tULINT;\n\t_MyContextIdentity\t\t:\tULINT;\n\t_MyContextStartCount \t:\tULINT;\n\t_MyContextEndCount\t\t:\tULINT;\n\t_MyParentIdentity\t\t:\tULINT;\n\t_TcoTaskTest_A\t\t\t:\tTcoTaskTest(THIS^);\n\t_TcoTaskTest_B\t\t\t:\tTcoTaskTest(THIS^);\n\t_TcoStateTest_A\t\t\t:\tTcoStateTest(THIS^,TRUE);\n\t_TcoStateTest_B\t\t\t:\tTcoStateTest(THIS^,FALSE);\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoStateTest",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoStateTest']\nFUNCTION_BLOCK TcoStateTest EXTENDS TcoState\nVAR\n\t_MyIdentity\t\t\t\t\t\t:\tULINT;\n\t_MyContextIdentity\t\t\t\t:\tULINT;\n\t_MyContextStartCount \t\t\t:\tULINT;\n\t_MyContextEndCount\t\t\t\t:\tULINT;\n\t_MyParentIdentity\t\t\t\t:\tULINT;\n\t_MyState\t\t\t\t\t\t:\tINT;\t\n\t_TcoTaskTest_A\t\t\t\t\t:\tTcoTaskTest(THIS^);\n\t_TcoTaskTest_B\t\t\t\t\t:\tTcoTaskTest(THIS^);\n\t_TcoStateTest_A\t\t\t\t\t:\tTcoStateAutoRestoreTest(THIS^,FALSE);\n\t_TcoStateTest_B\t\t\t\t\t:\tTcoStateAutoRestoreTest(THIS^,FALSE);\n\t_OnStateChangeCounter\t\t\t:\tINT;\t\n\t_AutoRestoreToMyChildsEnabled\t: \tBOOL;\n\t_AutoRestoreByMyParentEnabled\t: \tBOOL;\t\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoStateAutoRestoreTest",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoStateAutoRestoreTest']\nFUNCTION_BLOCK TcoStateAutoRestoreTest EXTENDS TcoState\nVAR\n\t_MyState\t\t\t\t\t\t:\tINT;\t\n\t_OnStateChangeCounter\t\t\t:\tINT;\t\n\t_RestoreCounter\t\t\t\t\t:\tINT;\t\n\t_AutoRestoreToMyChildsEnabled\t: \tBOOL;\n\t_AutoRestoreByMyParentEnabled\t: \tBOOL;\t\n\t_CountsPerStep\t\t\t\t\t:\tULINT;\n\t_CounterValue\t\t\t\t\t:\tULINT;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoTaskTest",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'TcoTaskTest']\nFUNCTION_BLOCK TcoTaskTest EXTENDS TcoTask\nVAR\n\t_IsBusy\t\t\t\t\t\t:\tBOOL;\t\n\t_IsError\t\t\t\t\t:\tBOOL;\t\n\t_IsDone\t\t\t\t\t\t:\tBOOL;\t\n\t_CounterSetValue\t\t\t:\tULINT;\n\t_CounterValue\t\t\t\t:\tULINT;\n\t_InvokeCounter\t\t\t\t:\tULINT;\n\t_ExecuteCounter\t\t\t\t:\tULINT;\n\t_DoneCounter\t\t\t\t:\tULINT;\t\n\t_InvokeRisingEdgeCounter\t:\tULINT;\n\t_ExecuteRisingEdgeCounter\t:\tULINT;\n\t_DoneRisingEdgeCounter\t\t:\tULINT;\t\n\t_PreviousState\t\t\t\t:\teTaskState;\n\t_CounterValuePV\t\t\t\t:\tULINT;\n\t_MyIdentity\t\t\t\t\t:\tULINT;\n\t_MyContextIdentity\t\t\t:\tULINT;\n\t_MyContextStartCount \t\t:\tULINT;\n\t_MyContextEndCount\t\t\t:\tULINT;\t\n\t_MyParentIdentity\t\t\t:\tULINT;\n\t_AutoRestoreByMyParentEnabled\t: BOOL;\t\nEND_VAR\n",
+      "MirrorFiles": null
+    }
+  ],
+  "GlobalVariableTables": [],
+  "Name": "TcoCoreTests",
+  "Namespace": "TcoCoreTests",
+  "ProgramBlocks": [
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "EXAMPLES_PRG",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'EXAMPLES_PRG']\nPROGRAM EXAMPLES_PRG\nVAR\n\t_context : fbContext;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "MANIPULATOR",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'MANIPULATOR']\nPROGRAM MANIPULATOR\nVAR\n\t_context : fbManipulatorContext;\nEND_VAR\n",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "MAIN",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'MAIN']\nPROGRAM MAIN\nVAR\n\t_TcoContext_Waveform\t:\tTcoContext_Waveform;\n\t_TcoContextTest_A\t\t:\tTcoContextTest;\n\t_TcoContextTest_B\t\t:\tTcoContextTest;\nEND_VAR\n",
+      "MirrorFiles": null
+    }
+  ],
+  "StructBlocks": [
+    {
+      "Name": "WaveformPoint",
+      "DeclarationText": "[NS : 'TcoCoreTests' NAME : 'WaveformPoint'] [STRUCT]\nTYPE WaveformPoint :\nSTRUCT\n\tTransitionType\t\t:\teTransitionType;\t\n\tTargetValue\t\t\t:\tLREAL;\t\t\t\t//Value to be reached in \"Duration\" PLC cycles\n\tDuration\t\t\t:\tUINT;\t\t\t\t//Number of PLC cycles during which the \"TargetValue\" must be reached\n\tShape\t\t\t\t:\tLREAL;\t\t\t\t//Define curve shape\nEND_STRUCT\nEND_TYPE\n",
+      "MirrorFiles": null
+    }
+  ],
+  "UnionBlocks": []
+}

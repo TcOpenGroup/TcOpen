@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net48</TargetFramework>
-     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <InformationalVersion>0.1.0-alpha.127+Branch.dev.Sha.7736419c76b7aae56a35adc825432235226668a2</InformationalVersion>
+    <Version>0.1.0-alpha0127</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.1-alpha.37" />
@@ -13,7 +15,7 @@
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Localizations.resx</DependentUpon>     
+      <DependentUpon>Localizations.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
