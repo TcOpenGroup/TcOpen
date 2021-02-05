@@ -85,6 +85,7 @@ task GitVersion -depends NugetRestore {
     $v = $script:gitVersion.PreReleaseNumber.ToString();
   } 
   $plcversion = $script:gitVersion.Major.ToString() + "." + $script:gitVersion.Minor.ToString() + "." + $script:gitVersion.Patch.ToString() +"." +  $v
+  
   if($updateAssemblyInfo) {.\_Vortex\builder\uvn.exe -v $plcversion}
 }
 
