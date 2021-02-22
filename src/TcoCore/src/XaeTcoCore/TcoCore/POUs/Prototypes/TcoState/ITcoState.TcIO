@@ -21,6 +21,12 @@ END_VAR
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="LastChangeState" Id="{d7f49349-dcb2-0003-35b2-44fb772e2dd5}">
+      <Declaration><![CDATA[PROPERTY LastChangeState : INT]]></Declaration>
+      <Get Name="Get" Id="{dbb0a716-7e74-0b51-3177-f946af2212d2}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Method Name="OnStateChange" Id="{93559809-93bd-434a-8b11-9eed96ecef32}">
       <Declaration><![CDATA[METHOD OnStateChange
 VAR_INPUT

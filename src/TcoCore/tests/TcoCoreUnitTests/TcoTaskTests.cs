@@ -112,8 +112,8 @@ namespace TcoCoreUnitTests
         }
 
 
-        [Test, Order(001)]
-        public void T001_TaskInvokeAndWaitForDone()
+        [Test, Order(300)]
+        public void T300_TaskInvokeAndWaitForDone()
         {
             Assert.Greater(cycles_B, cycles_A);
 
@@ -162,8 +162,8 @@ namespace TcoCoreUnitTests
             CheckBothTaskDoneRECount(1);
         }
 
-        [Test, Order(002)]
-        public void T002_TaskInvokeAfterDoneWithNoEmptyCycles()
+        [Test, Order(301)]
+        public void T301_TaskInvokeAfterDoneWithNoEmptyCycles()
         {
             tc.RunUntilEndConditionIsMet(() =>
             {
@@ -196,8 +196,8 @@ namespace TcoCoreUnitTests
             CheckBothTaskDoneRECount(0);
         }
 
-        [Test, Order(003)]
-        public void T003_TaskInvokeAfterDoneWithOneEmptyCycle()
+        [Test, Order(302)]
+        public void T302_TaskInvokeAfterDoneWithOneEmptyCycle()
         {
             tc.AddEmptyCycle();
 
@@ -235,8 +235,8 @@ namespace TcoCoreUnitTests
             CheckBothTaskDoneRECount(1);
         }
 
-        [Test, Order(004)]
-        public void T004_TaskInvokeAfterDoneWithAbortCall()
+        [Test, Order(303)]
+        public void T303_TaskInvokeAfterDoneWithAbortCall()
         {
             tc._TcoObjectTest_A._TcoTaskTest_A.TriggerAbort();
             tc._TcoObjectTest_A._TcoTaskTest_B.TriggerAbort();
@@ -276,8 +276,8 @@ namespace TcoCoreUnitTests
             CheckBothTaskDoneRECount(0);
         }
 
-        [Test, Order(005)]
-        public void T005_TaskInvokeAfterDoneWithRestoreCall()
+        [Test, Order(304)]
+        public void T304_TaskInvokeAfterDoneWithRestoreCall()
         {
             tc._TcoObjectTest_A._TcoTaskTest_A.TriggerRestore();
             tc._TcoObjectTest_A._TcoTaskTest_B.TriggerRestore();
@@ -316,8 +316,8 @@ namespace TcoCoreUnitTests
             CheckBothTaskDoneRECount(1);
         }
 
-        [Test, Order(006)]
-        public void T006_TaskAbortDuringExecutionAndInvoke()
+        [Test, Order(305)]
+        public void T305_TaskAbortDuringExecutionAndInvoke()
         {
             bool AtaskDone = false;
 
@@ -371,8 +371,8 @@ namespace TcoCoreUnitTests
             CheckBothTaskDoneRECount(1);
         }
 
-        [Test, Order(010)]
-        public void T010_TaskError()
+        [Test, Order(310)]
+        public void T310_TaskError()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
@@ -410,8 +410,8 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt._IsDone.Synchron);
         }
 
-        [Test, Order(011)]
-        public void T011_TaskInvokeAfterErrorNoRestoreNoEmptyCycles()
+        [Test, Order(311)]
+        public void T311_TaskInvokeAfterErrorNoRestoreNoEmptyCycles()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
@@ -433,8 +433,8 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt._IsDone.Synchron);
         }
 
-        [Test, Order(012)]
-        public void T012_TaskInvokeAfterErrorNoRestoreOneEmptyCycle()
+        [Test, Order(312)]
+        public void T312_TaskInvokeAfterErrorNoRestoreOneEmptyCycle()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
@@ -458,8 +458,8 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt._IsDone.Synchron);
         }
 
-        [Test, Order(013)]
-        public void T013_TaskInvokeAfterErrorWithRestore()
+        [Test, Order(313)]
+        public void T313_TaskInvokeAfterErrorWithRestore()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
@@ -478,8 +478,8 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt._IsDone.Synchron);
         }
 
-        [Test, Order(014)]
-        public void T014_TaskAbortDuringExecution()
+        [Test, Order(314)]
+        public void T314_TaskAbortDuringExecution()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
@@ -511,8 +511,8 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt._IsDone.Synchron);
         }
 
-        [Test, Order(015)]
-        public void T015_TaskMessage()
+        [Test, Order(315)]
+        public void T315_TaskMessage()
         {
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
 
@@ -523,8 +523,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(message , tt.GetMessage());
         }
 
-        [Test, Order(016)]
-        public void T016_IdentitiesTest()
+        [Test, Order(316)]
+        public void T316_IdentitiesTest()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
@@ -553,8 +553,8 @@ namespace TcoCoreUnitTests
 
         }
 
-        [Test, Order(017)]
-        public void T017_CheckAutoRestoreProperties()
+        [Test, Order(317)]
+        public void T317_CheckAutoRestoreProperties()
         {
             TcoStateTest ts;
             bool ParentEnableAutoRestore;
@@ -603,8 +603,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(ParentEnableAutoRestore, tt_b._AutoRestoreByMyParentEnabled.Synchron);
         }
 
-        [Test, Order(018)]
-        public void T018_AutoRestoreOnStateChange()
+        [Test, Order(318)]
+        public void T318_AutoRestoreOnStateChange()
         {
             TcoStateTest ts_a,ts_b;
             TcoTaskTest tt_a, tt_b;
@@ -696,7 +696,5 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt_a._IsBusy.Synchron);
             Assert.IsTrue(tt_b._IsBusy.Synchron);
         }
-
-
     }
 }

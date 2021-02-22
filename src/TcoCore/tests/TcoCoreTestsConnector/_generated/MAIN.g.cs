@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoCoreTests
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "MAIN", "TcoCoreTests", TypeComplexityEnum.Complex)]
 	public partial class MAIN : Vortex.Connector.IVortexObject, IMAIN, IShadowMAIN, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{
@@ -105,11 +106,63 @@ namespace TcoCoreTests
 			}
 		}
 
+		TcoSequencerAutoRestorableTest __TcoSequencerAutoRestorableTest;
+		public TcoSequencerAutoRestorableTest _TcoSequencerAutoRestorableTest
+		{
+			get
+			{
+				return __TcoSequencerAutoRestorableTest;
+			}
+		}
+
+		ITcoSequencerAutoRestorableTest IMAIN._TcoSequencerAutoRestorableTest
+		{
+			get
+			{
+				return _TcoSequencerAutoRestorableTest;
+			}
+		}
+
+		IShadowTcoSequencerAutoRestorableTest IShadowMAIN._TcoSequencerAutoRestorableTest
+		{
+			get
+			{
+				return _TcoSequencerAutoRestorableTest;
+			}
+		}
+
+		TcoSequencerNonAutoRestorableTest __TcoSequencerNonAutoRestorableTest;
+		public TcoSequencerNonAutoRestorableTest _TcoSequencerNonAutoRestorableTest
+		{
+			get
+			{
+				return __TcoSequencerNonAutoRestorableTest;
+			}
+		}
+
+		ITcoSequencerNonAutoRestorableTest IMAIN._TcoSequencerNonAutoRestorableTest
+		{
+			get
+			{
+				return _TcoSequencerNonAutoRestorableTest;
+			}
+		}
+
+		IShadowTcoSequencerNonAutoRestorableTest IShadowMAIN._TcoSequencerNonAutoRestorableTest
+		{
+			get
+			{
+				return _TcoSequencerNonAutoRestorableTest;
+			}
+		}
+
 		public void LazyOnlineToShadow()
 		{
 			_TcoContext_Waveform.LazyOnlineToShadow();
 			_TcoContextTest_A.LazyOnlineToShadow();
 			_TcoContextTest_B.LazyOnlineToShadow();
+			_TcoSequencerAutoRestorableTest.LazyOnlineToShadow();
+			_TcoSequencerNonAutoRestorableTest.LazyOnlineToShadow();
 		}
 
 		public void LazyShadowToOnline()
@@ -117,6 +170,8 @@ namespace TcoCoreTests
 			_TcoContext_Waveform.LazyShadowToOnline();
 			_TcoContextTest_A.LazyShadowToOnline();
 			_TcoContextTest_B.LazyShadowToOnline();
+			_TcoSequencerAutoRestorableTest.LazyShadowToOnline();
+			_TcoSequencerNonAutoRestorableTest.LazyShadowToOnline();
 		}
 
 		public PlainMAIN CreatePlainerType()
@@ -125,6 +180,8 @@ namespace TcoCoreTests
 			cloned._TcoContext_Waveform = _TcoContext_Waveform.CreatePlainerType();
 			cloned._TcoContextTest_A = _TcoContextTest_A.CreatePlainerType();
 			cloned._TcoContextTest_B = _TcoContextTest_B.CreatePlainerType();
+			cloned._TcoSequencerAutoRestorableTest = _TcoSequencerAutoRestorableTest.CreatePlainerType();
+			cloned._TcoSequencerNonAutoRestorableTest = _TcoSequencerNonAutoRestorableTest.CreatePlainerType();
 			return cloned;
 		}
 
@@ -133,24 +190,13 @@ namespace TcoCoreTests
 			cloned._TcoContext_Waveform = _TcoContext_Waveform.CreatePlainerType();
 			cloned._TcoContextTest_A = _TcoContextTest_A.CreatePlainerType();
 			cloned._TcoContextTest_B = _TcoContextTest_B.CreatePlainerType();
+			cloned._TcoSequencerAutoRestorableTest = _TcoSequencerAutoRestorableTest.CreatePlainerType();
+			cloned._TcoSequencerNonAutoRestorableTest = _TcoSequencerNonAutoRestorableTest.CreatePlainerType();
 			return cloned;
 		}
 
 		partial void PexPreConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
 		partial void PexPreConstructorParameterless();
-		partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
-		partial void PexConstructorParameterless();
-		protected Vortex.Connector.IVortexObject @Parent
-		{
-			get;
-			set;
-		}
-
-		public Vortex.Connector.IVortexObject GetParent()
-		{
-			return this.@Parent;
-		}
-
 		private System.Collections.Generic.List<Vortex.Connector.IVortexObject> @Children
 		{
 			get;
@@ -165,6 +211,35 @@ namespace TcoCoreTests
 		public void AddChild(Vortex.Connector.IVortexObject vortexObject)
 		{
 			this.@Children.Add(vortexObject);
+		}
+
+		private System.Collections.Generic.List<Vortex.Connector.IVortexElement> Kids
+		{
+			get;
+			set;
+		}
+
+		public System.Collections.Generic.IEnumerable<Vortex.Connector.IVortexElement> GetKids()
+		{
+			return this.Kids;
+		}
+
+		public void AddKid(Vortex.Connector.IVortexElement vortexElement)
+		{
+			this.Kids.Add(vortexElement);
+		}
+
+		partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
+		partial void PexConstructorParameterless();
+		protected Vortex.Connector.IVortexObject @Parent
+		{
+			get;
+			set;
+		}
+
+		public Vortex.Connector.IVortexObject GetParent()
+		{
+			return this.@Parent;
 		}
 
 		private System.Collections.Generic.List<Vortex.Connector.IValueTag> @ValueTags
@@ -258,17 +333,21 @@ namespace TcoCoreTests
 			this.@SymbolTail = symbolTail;
 			this.@Connector = parent.GetConnector();
 			this.@ValueTags = new System.Collections.Generic.List<Vortex.Connector.IValueTag>();
-			this.@Children = new System.Collections.Generic.List<Vortex.Connector.IVortexObject>();
 			this.@Parent = parent;
 			_humanReadable = Vortex.Connector.IConnector.CreateSymbol(parent.HumanReadable, readableTail);
+			this.Kids = new System.Collections.Generic.List<Vortex.Connector.IVortexElement>();
+			this.@Children = new System.Collections.Generic.List<Vortex.Connector.IVortexObject>();
 			PexPreConstructor(parent, readableTail, symbolTail);
 			Symbol = Vortex.Connector.IConnector.CreateSymbol(parent.Symbol, symbolTail);
 			__TcoContext_Waveform = new TcoContext_Waveform(this, "", "_TcoContext_Waveform");
 			__TcoContextTest_A = new TcoContextTest(this, "", "_TcoContextTest_A");
 			__TcoContextTest_B = new TcoContextTest(this, "", "_TcoContextTest_B");
+			__TcoSequencerAutoRestorableTest = new TcoSequencerAutoRestorableTest(this, "", "_TcoSequencerAutoRestorableTest");
+			__TcoSequencerNonAutoRestorableTest = new TcoSequencerNonAutoRestorableTest(this, "", "_TcoSequencerNonAutoRestorableTest");
 			AttributeName = "";
-			PexConstructor(parent, readableTail, symbolTail);
 			parent.AddChild(this);
+			parent.AddKid(this);
+			PexConstructor(parent, readableTail, symbolTail);
 		}
 
 		public MAIN()
@@ -277,6 +356,8 @@ namespace TcoCoreTests
 			__TcoContext_Waveform = new TcoContext_Waveform();
 			__TcoContextTest_A = new TcoContextTest();
 			__TcoContextTest_B = new TcoContextTest();
+			__TcoSequencerAutoRestorableTest = new TcoSequencerAutoRestorableTest();
+			__TcoSequencerNonAutoRestorableTest = new TcoSequencerNonAutoRestorableTest();
 			AttributeName = "";
 			PexConstructorParameterless();
 		}
@@ -313,6 +394,16 @@ namespace TcoCoreTests
 			get;
 		}
 
+		ITcoSequencerAutoRestorableTest _TcoSequencerAutoRestorableTest
+		{
+			get;
+		}
+
+		ITcoSequencerNonAutoRestorableTest _TcoSequencerNonAutoRestorableTest
+		{
+			get;
+		}
+
 		System.String AttributeName
 		{
 			get;
@@ -342,6 +433,16 @@ namespace TcoCoreTests
 		}
 
 		IShadowTcoContextTest _TcoContextTest_B
+		{
+			get;
+		}
+
+		IShadowTcoSequencerAutoRestorableTest _TcoSequencerAutoRestorableTest
+		{
+			get;
+		}
+
+		IShadowTcoSequencerNonAutoRestorableTest _TcoSequencerNonAutoRestorableTest
 		{
 			get;
 		}
@@ -417,11 +518,49 @@ namespace TcoCoreTests
 			}
 		}
 
+		PlainTcoSequencerAutoRestorableTest __TcoSequencerAutoRestorableTest;
+		public PlainTcoSequencerAutoRestorableTest _TcoSequencerAutoRestorableTest
+		{
+			get
+			{
+				return __TcoSequencerAutoRestorableTest;
+			}
+
+			set
+			{
+				if (__TcoSequencerAutoRestorableTest != value)
+				{
+					__TcoSequencerAutoRestorableTest = value;
+					PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(nameof(_TcoSequencerAutoRestorableTest)));
+				}
+			}
+		}
+
+		PlainTcoSequencerNonAutoRestorableTest __TcoSequencerNonAutoRestorableTest;
+		public PlainTcoSequencerNonAutoRestorableTest _TcoSequencerNonAutoRestorableTest
+		{
+			get
+			{
+				return __TcoSequencerNonAutoRestorableTest;
+			}
+
+			set
+			{
+				if (__TcoSequencerNonAutoRestorableTest != value)
+				{
+					__TcoSequencerNonAutoRestorableTest = value;
+					PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(nameof(_TcoSequencerNonAutoRestorableTest)));
+				}
+			}
+		}
+
 		public void CopyPlainToCyclic(TcoCoreTests.MAIN target)
 		{
 			_TcoContext_Waveform.CopyPlainToCyclic(target._TcoContext_Waveform);
 			_TcoContextTest_A.CopyPlainToCyclic(target._TcoContextTest_A);
 			_TcoContextTest_B.CopyPlainToCyclic(target._TcoContextTest_B);
+			_TcoSequencerAutoRestorableTest.CopyPlainToCyclic(target._TcoSequencerAutoRestorableTest);
+			_TcoSequencerNonAutoRestorableTest.CopyPlainToCyclic(target._TcoSequencerNonAutoRestorableTest);
 		}
 
 		public void CopyPlainToCyclic(TcoCoreTests.IMAIN target)
@@ -434,6 +573,8 @@ namespace TcoCoreTests
 			_TcoContext_Waveform.CopyPlainToShadow(target._TcoContext_Waveform);
 			_TcoContextTest_A.CopyPlainToShadow(target._TcoContextTest_A);
 			_TcoContextTest_B.CopyPlainToShadow(target._TcoContextTest_B);
+			_TcoSequencerAutoRestorableTest.CopyPlainToShadow(target._TcoSequencerAutoRestorableTest);
+			_TcoSequencerNonAutoRestorableTest.CopyPlainToShadow(target._TcoSequencerNonAutoRestorableTest);
 		}
 
 		public void CopyPlainToShadow(TcoCoreTests.IShadowMAIN target)
@@ -446,6 +587,8 @@ namespace TcoCoreTests
 			_TcoContext_Waveform.CopyCyclicToPlain(source._TcoContext_Waveform);
 			_TcoContextTest_A.CopyCyclicToPlain(source._TcoContextTest_A);
 			_TcoContextTest_B.CopyCyclicToPlain(source._TcoContextTest_B);
+			_TcoSequencerAutoRestorableTest.CopyCyclicToPlain(source._TcoSequencerAutoRestorableTest);
+			_TcoSequencerNonAutoRestorableTest.CopyCyclicToPlain(source._TcoSequencerNonAutoRestorableTest);
 		}
 
 		public void CopyCyclicToPlain(TcoCoreTests.IMAIN source)
@@ -458,6 +601,8 @@ namespace TcoCoreTests
 			_TcoContext_Waveform.CopyShadowToPlain(source._TcoContext_Waveform);
 			_TcoContextTest_A.CopyShadowToPlain(source._TcoContextTest_A);
 			_TcoContextTest_B.CopyShadowToPlain(source._TcoContextTest_B);
+			_TcoSequencerAutoRestorableTest.CopyShadowToPlain(source._TcoSequencerAutoRestorableTest);
+			_TcoSequencerNonAutoRestorableTest.CopyShadowToPlain(source._TcoSequencerNonAutoRestorableTest);
 		}
 
 		public void CopyShadowToPlain(TcoCoreTests.IShadowMAIN source)
@@ -471,6 +616,8 @@ namespace TcoCoreTests
 			__TcoContext_Waveform = new PlainTcoContext_Waveform();
 			__TcoContextTest_A = new PlainTcoContextTest();
 			__TcoContextTest_B = new PlainTcoContextTest();
+			__TcoSequencerAutoRestorableTest = new PlainTcoSequencerAutoRestorableTest();
+			__TcoSequencerNonAutoRestorableTest = new PlainTcoSequencerNonAutoRestorableTest();
 		}
 	}
 }

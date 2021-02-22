@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="StepDetails" Id="{5d8168b6-e19a-4ceb-92ec-34998fec170b}">
+    <Declaration><![CDATA[TYPE StepDetails :
+STRUCT
+	{attribute addProperty Name "<#Step ID#>"}
+	ID: INT;
+	{attribute addProperty Name "<#Step Order#>"}
+	Order: UINT;
+	{attribute addProperty Name "<#Enabled#>"}
+	Enabled: BOOL;
+	{attribute addProperty Name "<#Step description#>"}
+	Description: STRING(254);
+	{attribute addProperty Name "<#Step status#>"}
+	Status : eStepStatus;
+	{attribute addProperty Name "<#Step duration#>"}
+	Duration : TIME;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

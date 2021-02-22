@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stAllTypes" Id="{2ccd18ff-a7bc-483b-ac31-d6a6de7b72fa}">
+    <Declaration><![CDATA[{attribute addProperty Interpolated "|[[2]AttributeName]|-|[[1]AttributeName]|-|[AttributeName]||[BOOL_val.AttributeName]|"}
+{attribute addProperty Name "ALL BASE TYPES"}
+TYPE stAllTypes :
+STRUCT	
+	{attribute addProperty Name "BOOL"}
+	BOOL_val : BOOL;
+	{attribute addProperty Name "BYTE"}
+	BYTE_val : BYTE; //   0-255 8 bit
+	{attribute addProperty Name "WORD"}
+	WORD_val : WORD; //   0-65535 16 bit
+	{attribute addProperty Name "DWORD"}
+	DWORD_val : DWORD; //   0-4294967295 32 bit
+	{attribute addProperty Name "LWORD"}
+	LWORD_val : LWORD; //   0-264-1 64 bit
+	{attribute addProperty Name "SINT"}
+	SINT_val : SINT; //   -128-127 8 bit
+	{attribute addProperty Name "USINT"}
+	USINT_val : USINT; //   0-255 8 bit
+	{attribute addProperty Name "INT"}
+	INT_val : INT; //   -32768-32767 16 bit
+	{attribute addProperty Name "UINT"}
+	UINT_val : UINT; //   0-65535 16 bit
+	{attribute addProperty Name "DINT"}
+	DINT_val : DINT; //   -2147483648-2147483647 32 bit
+	{attribute addProperty Name "UDINT"}
+	UDINT_val : UDINT; //   0-4294967295 32 bit
+	{attribute addProperty Name "LINT"}
+	LINT_val : LINT; //   -263-263-1 64 bit
+	{attribute addProperty Name "ULINT"}
+	ULINT_val : ULINT; //   0-264-1 64 bit
+	{attribute addProperty Name "REAL"}
+	REAL_val : REAL; //   -3.402823E+38-3.402823E+38 32 bit
+	{attribute addProperty Name "LREAL"}
+	LREAL_val : LREAL; //   -1.7976931348623158e+308-1.7976931348623158e+308 64 bit
+	{attribute addProperty Name "STRING(82)"}
+	STRING_val : STRING; //   - 
+	{attribute addProperty Name "WSTRING(82)"}
+	WSTRING_val : WSTRING; //   - 
+	{attribute addProperty Name "TIME"}
+	TIME_val : TIME; //   0-4294967295 32 bit
+	{attribute addProperty Name "TIME OF DAY"}
+	TIME_OF_DAY_val : TIME_OF_DAY; //   0 (00:00:00:000)-4294967295 (23:59:59:999) 32 bit
+	{attribute addProperty Name "DATE"}
+	DATE_val : DATE; //   0 (01.01.1970)-4294967295 (7 February 2106) 32 bit
+	{attribute addProperty Name "DATE TIME"}
+	DATE_AND_TIME_val : DATE_AND_TIME; //   0 (01.01.1970, 00:00)-4294967295 (7 February 2106, 6:28:15) 32 bit
+	{attribute addProperty Name "TOD"}
+	TOD_val : TOD; //   0 (00:00:00:000)-4294967295 (23:59:59:999) 32 bit
+	{attribute addProperty Name "DT"}
+	DT_val : DT; //   0 (01.01.1970, 00:00)-4294967295 (7 February 2106, 6:28:15) 32 bit
+	{attribute addProperty Name "LTIME"}
+	LTIME_val : LTIME; //   0-213503d23h34m33s709ms551us615ns 64 bit
+	{attribute addProperty Name "ARRAY OF BASE TYPES"}
+	ValueTypeArray : ARRAY[0..5,0..3,0..2] OF INT;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

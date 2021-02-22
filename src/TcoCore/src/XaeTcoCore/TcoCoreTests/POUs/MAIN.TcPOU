@@ -3,9 +3,11 @@
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_TcoContext_Waveform	:	TcoContext_Waveform;
-	_TcoContextTest_A		:	TcoContextTest;
-	_TcoContextTest_B		:	TcoContextTest;
+	_TcoContext_Waveform				:	TcoContext_Waveform;
+	_TcoContextTest_A					:	TcoContextTest;
+	_TcoContextTest_B					:	TcoContextTest;
+	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
+	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -14,15 +16,11 @@ END_VAR
 _TcoContextTest_A();
 
 _TcoContextTest_B();
+
+_TcoSequencerAutoRestorableTest();
+
+_TcoSequencerNonAutoRestorableTest();
 ]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="2" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="68" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

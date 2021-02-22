@@ -75,6 +75,8 @@ namespace inxton.vortex.framework.dynamictreeview.wpf.sandbox
 
         public string HumanReadable => _obj.HumanReadable;
 
+        public IList<IVortexElement> Kids => new List<IVortexElement>();
+
         public IEnumerable<IVortexObject> GetChildren()
         {
             return _obj.GetChildren();
@@ -108,6 +110,11 @@ namespace inxton.vortex.framework.dynamictreeview.wpf.sandbox
         public string GetSymbolTail()
         {
             return _obj.GetSymbolTail();
+        }
+
+        public void AddKid(IVortexElement kid)
+        {
+            this.Kids.Add(kid);
         }
     }
 }

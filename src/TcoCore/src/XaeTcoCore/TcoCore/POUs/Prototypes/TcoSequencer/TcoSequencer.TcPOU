@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoSequencer" Id="{514f2b6e-7953-4563-938a-20f12ff8b327}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoState IMPLEMENTS ITcoSequencer
+VAR
+	{attribute addProperty Name "<#Current step#>"}
+	_currentStep : StepDetails;
+	{attribute addProperty Name "<#Sequencer error#>"}
+	{attribute clr [ReadOnly()]}
+	_sequencerHasError : BOOL;
+	{attribute addProperty Name "<#Sequencer error ID#>"}
+	{attribute clr [ReadOnly()]}
+	_sequencerErrorId : eSequencerError := eSequencerError.noError;
+	{attribute 'hide'}
+	_isFirstStepEntry : BOOL;
+	{attribute 'hide'}
+	_theOrderOfTheCurrentlyEvaluatedStep : UINT;	
+	{attribute 'hide'}
+	_theOrderOfTheCurrentlyExecutedStep : UINT;	
+	{attribute 'hide'}
+	_theOrderOfThePreviouslyExecutedStep : UINT;
+	 {attribute 'hide'}
+	_IdOfThePreviouslyExecutedStep : INT;
+	{attribute 'hide'}
+	_numberOfStepsInSequence : UINT;
+	{attribute 'hide'}
+	_previousNumberOfStepsInSequence : UINT;
+	{attribute 'hide'}
+	_stepCounter : UINT;	
+	{attribute 'hide'}
+	_requestStepActive : BOOL;	
+	{attribute 'hide'}
+	_requestedStepId : INT;	
+	{attribute 'hide'}
+	_cycleTimer : TON;   
+	{attribute 'hide'}
+	_StepTimer : TON;
+	_SequenceElapsedTime : TIME;
+	_StepElapsedTime : TIME;
+	_LastCycleTime: TIME;
+	{attribute 'hide'}
+	_requestStepCycle: UINT;
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_StepIdChanged : BOOL;
+	{attribute 'hide'}
+	_StepOrderChanged : BOOL;
+	{attribute 'hide'}
+	_ChangeStepIdFrom : INT;
+	{attribute 'hide'}
+	_ChangeStepIdTo : INT;
+	{attribute 'hide'}
+	_ChangeStepOrderFrom : UINT;
+	{attribute 'hide'}
+	_ChangeStepOrderTo : UINT;
+	{attribute 'hide'}
+	_stepIdUniquenessChecked : BOOL := FALSE;
+END_VAR
+
+VAR
+	{attribute 'hide'}
+    _pPreviusSteps : POINTER TO INT;
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_stepModeControler : TcoStepModeControler(THIS^,FALSE);
+	{attribute 'hide'}
+	_checkStepIdRequestedInStepMode : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CheckStepId" Id="{1a28ae7e-3f08-026b-3c6f-6ecb440861d3}">
+      <Declaration><![CDATA[METHOD PROTECTED FINAL CheckStepId : BOOL
+VAR_INPUT
+	inStepID : INT;
+	inStepModeActive : BOOL;
+	inStepInRunning : BOOL;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CheckStepID := TRUE;
+
+IF((_IdOfThePreviouslyExecutedStep <> inStepID) AND NOT _isFirstStepEntry AND (NOT inStepModeActive OR inStepInRunning)) THEN
+	IF (_theOrderOfTheCurrentlyExecutedStep =0) AND (_theOrderOfTheCurrentlyEvaluatedStep = 0) AND (_IdOfThePreviouslyExecutedStep =0) THEN
+		_IdOfThePreviouslyExecutedStep := inStepID;
+	ELSIF NOT _StepIdChanged AND NOT _StepOrderChanged THEN	 
+		_StepIdChanged := TRUE;
+		_ChangeStepIdFrom := _IdOfThePreviouslyExecutedStep;
+		_ChangeStepIdTo := inStepID;
+		CheckStepID := FALSE;
+	END_IF;		
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Close" Id="{6f2b0e9e-4363-07a8-0cc7-9827a477dd85}">
+      <Declaration><![CDATA[METHOD PROTECTED Close
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_previousNumberOfStepsInSequence := _numberOfStepsInSequence;
+
+IF _stepModeControler._stepIn.Done THEN
+	_stepModeControler._stepIn.Restore();	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{f2880318-c67a-0c39-0ff2-3dbccb0e13f7}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	DoEnableAutoRestore : BOOL; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent, DoEnableAutoRestore);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="IsStepIdUnique" Id="{2d2ec03e-06c8-0428-1481-3570b6299e7b}">
+      <Declaration><![CDATA[METHOD PROTECTED FINAL IsStepIdUnique
+VAR_INPUT
+	inStepID : INT;
+END_VAR
+VAR
+	_i	: UINT;
+	_hiIndex : UINT;
+	_pUid : INT;
+    _pNewSteps : POINTER TO INT;		
+	_message : STRING(254);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ((_numberOfStepsInSequence <> _previousNumberOfStepsInSequence) AND _previousNumberOfStepsInSequence > 0) AND _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
+	_stepIdUniquenessChecked := FALSE;
+	_previousNumberOfStepsInSequence := 0;
+	_stepCounter := 0;
+	_numberOfStepsInSequence := 0;
+END_IF
+
+IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
+
+	// Increment order of the currently controlled step
+	_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
+	
+	IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
+		_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
+		_stepCounter := _stepCounter - 1; 
+	END_IF
+	
+	_numberOfStepsInSequence := _stepCounter;
+	
+	IF (_numberOfStepsInSequence = _previousNumberOfStepsInSequence) AND (_numberOfStepsInSequence > 0) AND NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
+		IF (_pPreviusSteps <> 0) THEN
+			__DELETE(_pPreviusSteps);
+		END_IF
+		IF (_pNewSteps <> 0) THEN
+			__DELETE(_pNewSteps);
+		END_IF	
+		_stepIdUniquenessChecked := TRUE;
+		_theOrderOfTheCurrentlyEvaluatedStep := 0;
+		_theOrderOfTheCurrentlyExecutedStep := 0;
+		RETURN;		
+	END_IF
+	
+	//Stores first StepId		
+	IF (_numberOfStepsInSequence = 0) THEN
+		//It should not exists, if yes delete and create again
+		IF (_pPreviusSteps <> 0) THEN
+			__DELETE(_pPreviusSteps);
+		END_IF
+		_pPreviusSteps := __NEW(UINT, 1);
+		_pPreviusSteps[0] := inStepID;
+	ELSE
+		IF (_pNewSteps <> 0) THEN
+			__DELETE(_pNewSteps);
+		END_IF
+		_pNewSteps := __NEW(UINT, (_numberOfStepsInSequence+1));
+
+		//Compare with previous Steps and copy previous Steps to new array
+		_hiIndex := _numberOfStepsInSequence-1;
+		FOR _i := 0 TO _hiIndex DO
+			_pUid := _pPreviusSteps[_i];
+			IF inStepID = _pUid THEN
+				IF NOT _sequencerHasError THEN
+					IF (_pPreviusSteps <> 0) THEN
+						__DELETE(_pPreviusSteps);
+					END_IF	
+					IF (_pNewSteps <> 0) THEN
+						__DELETE(_pNewSteps);
+					END_IF
+					_sequencerHasError := TRUE;
+					_sequencerErrorId := eSequencerError.NotUniqueStepId;
+					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));
+					_currentStep.Description := _message;
+					_currentStep.Status := eStepStatus.Error;
+					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+					RETURN;					
+				END_IF
+			ELSE
+				_pNewSteps[_i] := _pPreviusSteps[_i];
+			END_IF
+		END_FOR
+		//Store new StepId
+		_pNewSteps[_numberOfStepsInSequence] := inStepID;
+		//Delete and create again
+		IF (_pPreviusSteps <> 0) THEN
+			__DELETE(_pPreviusSteps);
+		END_IF		
+		_pPreviusSteps :=  __NEW(UINT, (_numberOfStepsInSequence+1));
+		//Copy
+		_hiIndex := _hiIndex+1;
+		FOR _i := 0 TO _hiIndex DO
+			_pPreviusSteps[_i] := _pNewSteps[_i];			
+		END_FOR
+
+		IF (_pNewSteps <> 0) THEN
+			__DELETE(_pNewSteps);
+		END_IF
+	END_IF	
+END_IF
+IF _stepIdUniquenessChecked THEN
+	IF (_pPreviusSteps <> 0) THEN
+		__DELETE(_pPreviusSteps);
+	END_IF
+	IF (_pNewSteps <> 0) THEN
+		__DELETE(_pNewSteps);
+	END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{01b00980-fd7a-0b03-1d6e-84d1519f2b7c}">
+      <Declaration><![CDATA[METHOD ABSTRACT Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Mode" Id="{c447bb7a-289b-0f16-18ea-989d80a4b381}">
+      <Declaration><![CDATA[PROPERTY Mode : eSequencerMode]]></Declaration>
+      <Get Name="Get" Id="{43259608-0866-0860-1707-21893efe0528}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Mode := _stepModeControler.Mode;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d47926e6-ebdc-0ee0-0c28-4ca99a38b7fd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_stepModeControler.Mode := Mode;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="OnlineChange" Id="{a5a4982d-e04b-07ef-2655-37dd53a95e28}">
+      <Declaration><![CDATA[{attribute 'call_after_online_change_slot' := '200'}
+METHOD OnlineChange
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepIdUniquenessChecked := FALSE;
+
+_stepCounter := 0;
+_numberOfStepsInSequence := 0;
+_previousNumberOfStepsInSequence := 0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Open" Id="{033e4fa5-91ce-065f-3430-c26513896e04}">
+      <Declaration><![CDATA[METHOD PROTECTED Open
+VAR
+	_message	:	STRING(254);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_theOrderOfTheCurrentlyEvaluatedStep := 0;
+
+IF _requestStepActive AND _requestedStepId <> 0 AND (_stepModeControler.Mode <> eSequencerMode.StepMode OR _stepModeControler._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
+	_requestStepCycle := _requestStepCycle +1;
+ELSE
+	_requestStepCycle := 0;
+END_IF
+
+IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
+	_sequencerHasError := TRUE;
+	_sequencerErrorId := eSequencerError.StepWithRequestedIdDoesNotExists;
+	_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(_requestedStepId));
+	_message := CONCAT(_message, ' DOES NOT EXIST');
+	_currentStep.Description := _message;
+	_currentStep.Status := eStepStatus.Error;
+	THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+END_IF
+
+IF _sequencerHasError AND (_sequencerErrorId = eSequencerError.NotUniqueStepId) THEN
+	_sequencerErrorId := eSequencerError.noerror;	
+	_sequencerHasError := FALSE;
+	_stepIdUniquenessChecked := FALSE;
+	_numberOfStepsInSequence := 0;
+	_stepCounter := 0;
+	_previousNumberOfStepsInSequence := 0;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostSequenceComplete" Id="{ece7cad8-a719-0e69-011e-e99ad08fec8c}">
+      <Declaration><![CDATA[METHOD PUBLIC PostSequenceComplete
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostStepComplete" Id="{cab5a213-2239-02e3-2d1d-fa93e3282a76}">
+      <Declaration><![CDATA[METHOD PUBLIC PostStepComplete
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RequestStep" Id="{f5b32562-7ec0-0e5a-3a0b-f7f89e25628d}">
+      <Declaration><![CDATA[METHOD PUBLIC RequestStep : ITcoSequencer
+VAR_INPUT
+	inRequestedStepID : UINT;
+END_VAR
+VAR
+	_message : STRING(254);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepModeControler._stepIn.Restore();
+
+_checkStepIdRequestedInStepMode := TRUE;
+
+IF(inRequestedStepID <> 0) THEN
+	IF _requestedStepId <> 0 THEN
+		IF NOT  _sequencerHasError THEN
+			_sequencerHasError := TRUE;
+			_sequencerErrorId := eSequencerError.SeveralRequestStep;
+			_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(inRequestedStepID));
+			_message := CONCAT(_message, ' HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: ');
+			_message := CONCAT(_message,UINT_TO_STRING(_requestedStepId));
+			_message := CONCAT(_message, ' HAS NOT BEEN YET PERFORMED!');
+			_currentStep.Description := _message;
+			_currentStep.Status := eStepStatus.Error;
+			THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+		END_IF
+	ELSE
+		_requestStepCycle := 0;
+		_requestedStepId := inRequestedStepID;
+		_requestStepActive := TRUE;
+	END_IF
+END_IF;	
+
+RequestStep := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{c1b128e5-ca0c-090a-3e6c-0771a5360650}">
+      <Declaration><![CDATA[METHOD PUBLIC Reset
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StepChanged(0);
+
+_requestStepActive := FALSE;	
+_requestedStepId := 0;
+_requestStepCycle := 0;
+_sequencerHasError := FALSE;
+_sequencerErrorId := eSequencerError.noError;
+_currentStep.Description := '--------------------------';
+_currentStep.ID := 0;
+_currentStep.Order := 0;
+_currentStep.Status := eStepStatus.None;
+_currentStep.Duration := T#0S;
+
+_stepCounter := 0;
+_IdOfThePreviouslyExecutedStep := 0;
+_numberOfStepsInSequence := 0;
+_previousNumberOfStepsInSequence := 0;
+_theOrderOfTheCurrentlyExecutedStep := 0;
+_theOrderOfThePreviouslyExecutedStep := 0;
+_stepIdUniquenessChecked := FALSE;
+_sequencerHasError := FALSE;
+
+_StepIdChanged := FALSE;
+_StepOrderChanged := FALSE;
+_ChangeStepIdFrom := 0;
+_ChangeStepIdTo := 0;
+_ChangeStepOrderFrom := 0;
+_ChangeStepOrderTo := 0;
+
+_StepTimer(IN:= FALSE);
+
+
+//TODO
+_stepModeControler._stepForward.Restore();
+_stepModeControler._stepBackward.Restore();
+_stepModeControler._stepIn.Restore(); 	
+_checkStepIdRequestedInStepMode := FALSE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Run" Id="{e641c1fe-2b61-0e34-01e2-8c735794af62}">
+      <Declaration><![CDATA[METHOD PUBLIC FINAL Run]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Open();
+THIS^.Main();
+THIS^.Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SequenceComplete" Id="{63fdaabf-b24b-030e-1bee-11a67adf5170}">
+      <Declaration><![CDATA[METHOD PUBLIC FINAL SequenceComplete
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_theOrderOfTheCurrentlyExecutedStep := 0;
+_LastCycleTime := _SequenceElapsedTime;
+_cycleTimer(IN:= FALSE, PT:= T#0S);	
+
+_currentStep.Status := eStepStatus.Done;
+
+_stepModeControler._stepForward.Restore();
+_stepModeControler._stepBackward.Restore();
+_stepModeControler._stepIn.Restore(); 	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Step" Id="{23d4c2b7-11f1-0472-2e0b-5b173a789c7c}">
+      <Declaration><![CDATA[METHOD PUBLIC Step : BOOL
+VAR_INPUT
+	inStepID				: 	INT;
+	inEnabled				: 	BOOL;
+	inStepDescription		: 	STRING(254);		
+END_VAR
+VAR
+	_message 				:	STRING(254);	
+	_isInOrderOfExecution 	:	BOOL;	
+	_stepModeActive 		: 	BOOL;
+	_stepInExecuting 		: 	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//-----------------------------------------------
+//     		MULTIPLE CALL REGION
+//-----------------------------------------------
+// Initialize
+Step := FALSE;
+_isFirstStepEntry := FALSE;
+//-------------------------------------------------------------------------------------------------
+//     		Check uniqueness of the StepId
+//			If there are even two same StepIds or sequence has not been yet 
+//			checked, method return FALSE, so no entrance to the step will be executed
+//-------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
+IsStepIDUnique(inStepID);
+IF NOT _stepIdUniquenessChecked THEN
+	_theOrderOfThePreviouslyExecutedStep := -1;
+	RETURN;
+END_IF
+//-------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
+// Cycle time measurement
+_cycleTimer(IN:= TRUE, PT:= T#48D40H62M47S295MS);	
+_SequenceElapsedTime  := _cycleTimer.ET;
+// Step changed
+IF(_theOrderOfTheCurrentlyExecutedStep <> _theOrderOfThePreviouslyExecutedStep) THEN
+	_theOrderOfThePreviouslyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;
+	StepChanged(inStepID);
+END_IF;
+// Specific step request
+IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurrentlyEvaluatedStep <> 0) THEN
+	_currentStep.Status := eStepStatus.Done;
+	_theOrderOfTheCurrentlyExecutedStep 	:=	_theOrderOfTheCurrentlyEvaluatedStep;
+	_theOrderOfThePreviouslyExecutedStep	:=	_theOrderOfTheCurrentlyExecutedStep;
+	_requestedStepId := 0;
+	_requestStepCycle := 0;
+	_requestStepActive := FALSE;
+	StepChanged(_requestedStepId);
+END_IF
+IF(_requestStepActive) THEN
+	_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
+	RETURN;
+END_IF
+
+// STEP MODE COORDINATION
+_stepModeActive := _stepModeControler.Mode = eSequencerMode.StepMode;
+_stepInExecuting := _stepModeControler._stepIn.Busy;
+_stepModeControler._stepForward.Execute();
+_stepModeControler._stepBackward.Execute();
+_stepModeControler._stepIn.Execute();
+_stepModeControler(inCurrentStepRunning := _currentStep.Status = eStepStatus.Running);
+
+IF(_stepModeActive) THEN			
+	// StepForward
+	IF _stepModeControler._stepForward.Execute() THEN
+		IF _theOrderOfTheCurrentlyExecutedStep < _numberOfStepsInSequence THEN
+			_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;
+			_stepModeControler._stepForward.DoneWhen(TRUE);
+			_stepModeControler._stepIn.Restore();
+		ELSE
+			_stepModeControler._stepForward.Restore();
+		END_IF			
+	END_IF
+
+	// Step Backward
+	IF _stepModeControler._stepBackward.Execute() THEN
+		IF _theOrderOfTheCurrentlyExecutedStep > 0 THEN
+			_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep - 1;
+			_stepModeControler._stepBackward.DoneWhen(TRUE);
+			_stepModeControler._stepIn.Restore();
+		ELSE
+			_stepModeControler._stepForward.Restore();
+		END_IF			
+	END_IF
+END_IF;
+
+// Determine the step is in order of execution
+_isInOrderOfExecution := (_theOrderOfTheCurrentlyExecutedStep =_theOrderOfTheCurrentlyEvaluatedStep);
+
+//-----------------------------------------------
+//     		SINGLE PER STEP CALL REGION
+//-----------------------------------------------
+//Check if the order of the last executed step, has been changed  
+IF(NOT _isInOrderOfExecution AND inStepID = _IdOfThePreviouslyExecutedStep) THEN
+	IF _theOrderOfThePreviouslyExecutedStep <>_theOrderOfTheCurrentlyEvaluatedStep AND NOT _StepOrderChanged THEN
+		_StepOrderChanged := TRUE;
+		_ChangeStepOrderFrom := _theOrderOfThePreviouslyExecutedStep;
+		_ChangeStepOrderTo := _theOrderOfTheCurrentlyEvaluatedStep;
+	END_IF
+END_IF
+
+//Distinguish if StepId or step order has been changed 
+IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR _StepOrderChanged THEN
+	_sequencerHasError := TRUE;
+	IF _StepOrderChanged AND NOT _StepIdChanged THEN
+		_message := CONCAT('ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepOrderFrom));
+		_message := CONCAT(_message , '=>');
+		_message := CONCAT(_message , UINT_TO_STRING(_ChangeStepOrderTo));
+		_currentStep.Description := _message;
+		_currentStep.Status := eStepStatus.Error;
+		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
+		_sequencerErrorId := eSequencerError.OrderOfTheStepHasBeenChanged;
+	ELSIF _StepOrderChanged AND _StepIdChanged AND (_ChangeStepOrderFrom = _ChangeStepIdTo)  AND (_ChangeStepOrderTo = _ChangeStepIdFrom) THEN
+		_message := CONCAT('ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepOrderFrom));
+		_message := CONCAT(_message, '=>');
+		_message := CONCAT(_message, UINT_TO_STRING(_ChangeStepOrderTo));
+		_currentStep.Description := _message;
+		_currentStep.Status := eStepStatus.Error;
+
+		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
+		_sequencerErrorId := eSequencerError.OrderOfTheStepHasBeenChanged;
+	ELSIF NOT _StepOrderChanged AND _StepIdChanged THEN
+		_message := CONCAT('ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepIdFrom));
+		_message := CONCAT(_message, '=>');
+		_message := CONCAT(_message, UINT_TO_STRING(_ChangeStepIdTo));
+		_currentStep.Description := _message;
+		_currentStep.Status := eStepStatus.Error;
+
+		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
+		_sequencerErrorId := eSequencerError.StepIdHasBeenChanged;
+	ELSIF _StepOrderChanged AND _StepIdChanged AND (_ChangeStepOrderFrom = _ChangeStepIdFrom)  AND (_ChangeStepOrderTo = _ChangeStepIdTo) THEN
+		_message := CONCAT('ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepIdFrom));
+		_message := CONCAT(_message, '=>');
+		_message := CONCAT(_message, UINT_TO_STRING(_ChangeStepIdTo));
+		_currentStep.Description := _message;
+		_currentStep.Status := eStepStatus.Error;
+
+		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
+		_sequencerErrorId := eSequencerError.StepIdHasBeenChanged;
+	END_IF
+END_IF
+
+IF NOT _isInOrderOfExecution AND _StepIdChanged THEN
+	_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
+END_IF
+
+
+IF (_StepOrderChanged OR _StepIdChanged OR _sequencerHasError) THEN
+	RETURN;
+END_IF
+
+IF(_isInOrderOfExecution) THEN
+	_currentStep.Status := eStepStatus.ReadyToRun;
+	// Step is in the order of the execution, but it is disabled 
+	IF NOT inEnabled THEN
+		_currentStep.Status := eStepStatus.Disabled;
+	END_IF
+
+	IF(NOT inEnabled AND NOT _stepInExecuting AND NOT _stepModeActive) THEN				
+		_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;		
+	END_IF					
+
+	IF _stepModeActive THEN
+		IF _stepModeControler._stepIn.Execute() THEN
+			IF(NOT _stepInExecuting) THEN
+				_theOrderOfThePreviouslyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;
+				StepChanged(inStepID);
+			END_IF;			
+			_stepInExecuting := TRUE;			
+			// Skips the step when not enabled
+			IF(NOT inEnabled) THEN
+				_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;
+				_stepModeControler._stepIn.Restore();
+			END_IF
+		END_IF	
+		_currentStep.ID := inStepID;
+		_currentStep.Enabled := inEnabled;
+		IF NOT inEnabled THEN
+			_currentStep.Description := CONCAT('(*',inStepDescription);		
+			_currentStep.Description := CONCAT(_currentStep.Description,'*)');		
+		ELSE
+			_currentStep.Description := CONCAT('(>',inStepDescription);		
+			_currentStep.Description := CONCAT(_currentStep.Description,'<)');		
+		END_IF
+	END_IF	
+	Step := (NOT _stepModeActive OR _stepInExecuting) AND inEnabled;
+	
+	IF(Step) THEN
+	// First entry to step production
+		IF(_theOrderOfThePreviouslyExecutedStep <> _theOrderOfTheCurrentlyExecutedStep) THEN
+			_isFirstStepEntry := TRUE;
+		END_IF;	
+
+		IF NOT CheckStepID(inStepID,_stepModeActive,_stepInExecuting) THEN
+			Step := FALSE;
+			_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
+			_currentStep.Status := eStepStatus.Error;
+			RETURN;
+		END_IF
+		_StepTimer(IN:= Step, PT:= T#48D);		
+		_StepElapsedTime := _StepTimer.ET;
+
+		_currentStep.ID := inStepID;
+		_currentStep.Enabled := inEnabled;
+		_currentStep.Description := inStepDescription;
+		_currentStep.Duration:= _StepElapsedTime;
+		
+		_IdOfThePreviouslyExecutedStep := inStepID;
+		_theOrderOfThePreviouslyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;
+		
+		_currentStep.Status := eStepStatus.Running; 
+		_currentStep.Order := _theOrderOfTheCurrentlyExecutedStep;
+	END_IF
+END_IF
+//-----------------------------------------------
+//     		CONTINUOUS CALL REGION
+//-----------------------------------------------
+// Increment flow number
+_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
+
+IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
+	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
+	_stepCounter := _stepCounter - 1; 
+END_IF
+
+_numberOfStepsInSequence := _stepCounter;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepBackward" Id="{692f6172-ea5a-0471-05a3-9c9a7c79d4c1}">
+      <Declaration><![CDATA[METHOD StepBackward
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepModeControler._stepBackward.Invoke();
+_stepModeControler._stepForward.Restore();
+_stepModeControler._stepIn.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepChanged" Id="{f13ff82b-328d-0743-26e3-1e5008c59f70}">
+      <Declaration><![CDATA[METHOD PROTECTED StepChanged
+VAR_INPUT
+	newState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isFirstStepEntry := TRUE;
+_theOrderOfThePreviouslyExecutedStep := 0;
+_IdOfThePreviouslyExecutedStep := 0;
+
+_StepTimer(IN:= FALSE);
+
+SUPER^.ChangeState(newState);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepCompleteWhen" Id="{af227b6a-d14b-0fdc-29d3-1bc81be87cc9}">
+      <Declaration><![CDATA[METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
+VAR_INPUT
+	inCondition : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(inCondition) THEN
+	_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;
+	
+	_currentStep.Status := eStepStatus.Done;
+
+	PostStepComplete();
+
+	_stepModeControler._stepIn.DoneWhen(_stepModeControler._stepIn.Execute());
+
+END_IF
+
+StepCompleteWhen := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepForward" Id="{94db3f77-b48c-045b-2839-79f6b0c18fbd}">
+      <Declaration><![CDATA[METHOD StepForward
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepModeControler._stepForward.Invoke();
+_stepModeControler._stepBackward.Restore();
+_stepModeControler._stepIn.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepIn" Id="{3d4da130-4eed-0f78-333d-391fb53a6ee8}">
+      <Declaration><![CDATA[METHOD StepIn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepModeControler._stepIn.Invoke();
+_stepModeControler._stepForward.Restore();
+_stepModeControler._stepBackward.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

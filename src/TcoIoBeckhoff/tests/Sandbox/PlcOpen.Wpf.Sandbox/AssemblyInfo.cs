@@ -10,7 +10,7 @@ using System.Windows;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-alpha.127+Branch.dev.Sha.7736419c76b7aae56a35adc825432235226668a2")]
+[assembly: AssemblyVersion("1.9.1.0")]
+[assembly: AssemblyFileVersion("1.9.1.0")]
+[assembly: AssemblyInformationalVersion("1.9.1-tcopen-implementation.1+32.Branch.feature-tcopen-implementation.Sha.c12c4ccf75e412f00bed825157a05c161a4394f2")]
 

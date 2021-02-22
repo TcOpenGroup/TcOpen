@@ -16,6 +16,10 @@ VAR
 	_MyParentsChangeStateCycle	: ULINT;
 	{attribute 'hide'}
 	_ChangeStateCycle	: ULINT;
+	{attribute 'hide'}
+	_LastChangeState	: INT;
+	{attribute 'hide'}
+	_MyParentsLastChangeState	: INT;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -37,6 +41,7 @@ END_VAR
 VAR 
 	_MyParent_TcoState	: ITcoState := 0;
 	_MyParent_ChangeStateCycle : ULINT;
+	_MyParent_LastChangeState : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -47,6 +52,7 @@ END_VAR
 IF _AutoRestorable THEN		
 	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
+		_MyParent_LastChangeState := _MyParent_TcoState.LastChangeState;
 	END_IF;	
 	//If OnStateChange event of the parent has occured, the value of the parent's 
 	//StartCycleCount property is stored into its ChangeStateCycle property.
@@ -56,6 +62,10 @@ IF _AutoRestorable THEN
 	IF _MyParent_ChangeStateCycle <> _MyParentsChangeStateCycle THEN
 		Restore();
 		_MyParentsChangeStateCycle := _MyParent_ChangeStateCycle;
+	END_IF
+	IF _MyParent_LastChangeState <> _MyParentsLastChangeState THEN
+		Restore();
+		_MyParentsLastChangeState := _MyParent_LastChangeState;
 	END_IF
 END_IF]]></ST>
       </Implementation>
@@ -179,6 +189,15 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="LastChangeState" Id="{de25d1df-a6dd-0e2e-177b-8473daeac0ce}">
+      <Declaration><![CDATA[PROPERTY LastChangeState : INT]]></Declaration>
+      <Get Name="Get" Id="{5d3b3d1c-7d34-0aa9-2f0d-d5bb49fbd5b1}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastChangeState := _LastChangeState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Messenger" Id="{02d36905-f8ae-4dea-bf23-89a7433116c2}">
       <Declaration><![CDATA[PROPERTY Messenger : ITcoMessenger]]></Declaration>
       <Get Name="Get" Id="{246aabb9-e93d-476e-8c94-2fc6547c9bbb}">
@@ -191,14 +210,15 @@ END_VAR
       </Get>
     </Property>
     <Method Name="OnStateChange" Id="{e2059991-ec6a-4e02-ab7f-f71179312086}">
-      <Declaration><![CDATA[METHOD OnStateChange 
+      <Declaration><![CDATA[METHOD OnStateChange
 VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_ChangeStateCycle := THIS^.Context.StartCycleCount;]]></ST>
+        <ST><![CDATA[_ChangeStateCycle := THIS^.Context.StartCycleCount;
+_LastChangeState  := NewState;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{9e542c5a-7a1b-472b-a8dc-08d24bf1a56e}">
@@ -237,92 +257,5 @@ State := _State;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="TcoState">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.AutoRestorable.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.AutoRestore">
-      <LineId Id="15" Count="3" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="26" Count="2" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="33" Count="1" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.ChangeState">
-      <LineId Id="24" Count="1" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="28" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.ChangeStateCycle.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.CheckIfAutoRestoreEnabledByParent">
-      <LineId Id="7" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="17" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.CheckIfCalledCyclically">
-      <LineId Id="15" Count="3" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="13" Count="1" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.Context.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.EnableAutoRestore.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.FB_init">
-      <LineId Id="69" Count="2" />
-      <LineId Id="113" Count="0" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="13" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.Identity.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.Messenger.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.OnStateChange">
-      <LineId Id="6" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.Restore">
-      <LineId Id="5" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.RestoreObject">
-      <LineId Id="5" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoState.State.Get">
-      <LineId Id="8" Count="1" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

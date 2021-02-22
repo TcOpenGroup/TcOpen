@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoIoBeckhoff
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "FuseChannelExtended", "TcoIoBeckhoff", TypeComplexityEnum.Complex)]
 	public partial class FuseChannelExtended : FuseChannelBasic, Vortex.Connector.IVortexObject, IFuseChannelExtended, IShadowFuseChannelExtended, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{

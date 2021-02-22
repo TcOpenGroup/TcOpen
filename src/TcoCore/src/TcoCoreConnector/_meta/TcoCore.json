@@ -8,6 +8,24 @@
     },
     {
       "TypeAttributes": "",
+      "TypeName": "eSequencerMode",
+      "Namespace": "TcoCore",
+      "TypeMetaInfo": 5
+    },
+    {
+      "TypeAttributes": "",
+      "TypeName": "eStepStatus",
+      "Namespace": "TcoCore",
+      "TypeMetaInfo": 5
+    },
+    {
+      "TypeAttributes": "",
+      "TypeName": "eSequencerError",
+      "Namespace": "TcoCore",
+      "TypeMetaInfo": 5
+    },
+    {
+      "TypeAttributes": "",
       "TypeName": "eTaskState",
       "Namespace": "TcoCore",
       "TypeMetaInfo": 5
@@ -38,6 +56,18 @@
     },
     {
       "TypeAttributes": "\n{attribute addProperty Name \"\" }",
+      "TypeName": "TcoStepModeControler",
+      "Namespace": "TcoCore",
+      "TypeMetaInfo": 4
+    },
+    {
+      "TypeAttributes": "\n{attribute addProperty Name \"\" }",
+      "TypeName": "TcoSequencer",
+      "Namespace": "TcoCore",
+      "TypeMetaInfo": 4
+    },
+    {
+      "TypeAttributes": "\n{attribute addProperty Name \"\" }",
       "TypeName": "TcoState",
       "Namespace": "TcoCore",
       "TypeMetaInfo": 4
@@ -51,6 +81,12 @@
     {
       "TypeAttributes": "\n{attribute addProperty Name \"\" }",
       "TypeName": "TcoMessage",
+      "Namespace": "TcoCore",
+      "TypeMetaInfo": 1
+    },
+    {
+      "TypeAttributes": "\n{attribute addProperty Name \"\" }",
+      "TypeName": "StepDetails",
       "Namespace": "TcoCore",
       "TypeMetaInfo": 1
     },

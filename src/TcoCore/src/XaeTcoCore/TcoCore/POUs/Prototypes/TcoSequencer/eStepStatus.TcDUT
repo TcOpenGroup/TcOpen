@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eStepStatus" Id="{06e3f1be-90df-4a49-be95-caa6a15c597d}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eStepStatus :
+(
+	None := 0,
+	Disabled := 10,
+	ReadyToRun := 20,
+	Running := 30,	
+	Done := 40,
+	Error := 50
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

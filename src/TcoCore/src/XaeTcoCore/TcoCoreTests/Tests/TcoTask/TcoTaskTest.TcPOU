@@ -3,25 +3,25 @@
   <POU Name="TcoTaskTest" Id="{9aa8db61-0cc6-40c6-9397-95033027855c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTest EXTENDS TcoTask
 VAR
-	_IsBusy						:	BOOL;	
-	_IsError					:	BOOL;	
-	_IsDone						:	BOOL;	
-	_CounterSetValue			:	ULINT;
-	_CounterValue				:	ULINT;
-	_InvokeCounter				:	ULINT;
-	_ExecuteCounter				:	ULINT;
-	_DoneCounter				:	ULINT;	
-	_InvokeRisingEdgeCounter	:	ULINT;
-	_ExecuteRisingEdgeCounter	:	ULINT;
-	_DoneRisingEdgeCounter		:	ULINT;	
-	_PreviousState				:	eTaskState;
-	_CounterValuePV				:	ULINT;
-	_MyIdentity					:	ULINT;
-	_MyContextIdentity			:	ULINT;
-	_MyContextStartCount 		:	ULINT;
-	_MyContextEndCount			:	ULINT;	
-	_MyParentIdentity			:	ULINT;
-	_AutoRestoreByMyParentEnabled	: BOOL;	
+	_IsBusy							:	BOOL;	
+	_IsError						:	BOOL;	
+	_IsDone							:	BOOL;	
+	_CounterSetValue				:	ULINT;
+	_CounterValue					:	ULINT;
+	_InvokeCounter					:	ULINT;
+	_ExecuteCounter					:	ULINT;
+	_DoneCounter					:	ULINT;	
+	_InvokeRisingEdgeCounter		:	ULINT;
+	_ExecuteRisingEdgeCounter		:	ULINT;
+	_DoneRisingEdgeCounter			:	ULINT;	
+	_PreviousState					:	eTaskState;
+	_CounterValuePV					:	ULINT;
+	_MyIdentity						:	ULINT;
+	_MyContextIdentity				:	ULINT;
+	_MyContextStartCount 			:	ULINT;
+	_MyContextEndCount				:	ULINT;	
+	_MyParentIdentity				:	ULINT;
+	_AutoRestoreByMyParentEnabled	:	BOOL;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -146,45 +146,5 @@ METHOD INTERNAL TriggerRestore]]></Declaration>
         <ST><![CDATA[THIS^.Restore();]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoTaskTest">
-      <LineId Id="103" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ExecutionBody">
-      <LineId Id="46" Count="31" />
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.GetMessage">
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.PostMessage">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ReadOutAutoRestoreProperties">
-      <LineId Id="38" Count="0" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ReadOutIdentities">
-      <LineId Id="32" Count="6" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="41" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ReadOutState">
-      <LineId Id="29" Count="2" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.SetPreviousStateToIdle">
-      <LineId Id="22" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.TriggerAbort">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.TriggerInvoke">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.TriggerRestore">
-      <LineId Id="20" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

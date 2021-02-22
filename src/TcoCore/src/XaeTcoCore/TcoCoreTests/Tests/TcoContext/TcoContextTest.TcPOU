@@ -9,7 +9,7 @@ VAR
 	_mainCycles				:	ULINT;
 	_TcoObjectTest_A		:	TcoObjectTest(THIS^);
 	_TcoObjectTest_B		:	TcoObjectTest(THIS^);
-	_MyIdentity				:	ULINT;
+	_MyIdentity				:	ULINT;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -70,34 +70,5 @@ _endCycles			:=		THIS^.EndCycleCount;
 _MyIdentity			:= 		THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoContextTest">
-      <LineId Id="9" Count="0" />
-      <LineId Id="14" Count="1" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="18" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContextTest.CallMainFromUnitTest">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContextTest.CallRunFromUnitTest">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContextTest.ContextClose">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContextTest.ContextOpen">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContextTest.Main">
-      <LineId Id="4" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="14" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContextTest.ReadOutCycleCounters">
-      <LineId Id="3" Count="1" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="6" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

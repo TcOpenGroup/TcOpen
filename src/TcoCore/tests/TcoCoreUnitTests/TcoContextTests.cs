@@ -16,8 +16,8 @@ namespace TcoCoreUnitTests
         {
         }
 
-        [Test, Order(001)]
-        public void T001_Plc_ContextADoesNotAffectContextB()
+        [Test, Order(100)]
+        public void T100_Plc_ContextADoesNotAffectContextB()
         {
             tc_A._CallMyPlcInstance.Synchron = false;
             tc_B._CallMyPlcInstance.Synchron = false;
@@ -59,8 +59,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(BendCycles__0, tc_B._endCycles.Synchron);
         }
 
-        [Test, Order(002)]
-        public void T002_Plc_SoAsContextBDoesNotAffectContextA()
+        [Test, Order(101)]
+        public void T101_Plc_SoAsContextBDoesNotAffectContextA()
         {
             tc_A._CallMyPlcInstance.Synchron = false;
             tc_B._CallMyPlcInstance.Synchron = false;
@@ -102,8 +102,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(AendCycles__0, tc_A._endCycles.Synchron);
         }
 
-        [Test, Order(003)]
-        public void T003_NoPlcLogicIsRunning()
+        [Test, Order(102)]
+        public void T102_NoPlcLogicIsRunning()
         {
             tc_A._CallMyPlcInstance.Synchron = false;
             tc_B._CallMyPlcInstance.Synchron = false;
@@ -133,8 +133,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(BendCycles__0, tc_B._endCycles.Synchron);
         }
 
-        [Test, Order(004)]
-        public void T004_ContextDotMainCall()
+        [Test, Order(103)]
+        public void T103_ContextDotMainCall()
         {
             tc_A._CallMyPlcInstance.Synchron = false;
 
@@ -153,8 +153,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(AendCycles__0 , tc_A._endCycles.Synchron);
         }
 
-        [Test, Order(005)]
-        public void T005_ContextDotRunCall()
+        [Test, Order(104)]
+        public void T104_ContextDotRunCall()
         {
             tc_A._CallMyPlcInstance.Synchron = false;
 
@@ -173,8 +173,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(AendCycles__0 + 1, tc_A._endCycles.Synchron);
         }
 
-        [Test, Order(006)]
-        public void T006_MultipleContextDotMainCallUsingTestRunner()
+        [Test, Order(105)]
+        public void T105_MultipleContextDotMainCallUsingTestRunner()
         {
             ushort cycles = 10;
             ushort i = 0;

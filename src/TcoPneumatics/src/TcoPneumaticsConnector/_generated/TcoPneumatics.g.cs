@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 using TcoPneumaticsConnector.Properties;
 
 [assembly: Vortex.Connector.Attributes.AssemblyPlcCounterPart("{\r\n  \"Types\": [\r\n    {\r\n      \"TypeAttributes\": \"\\n{attribute addProperty Name \\\"\\\" }\",\r\n      \"TypeName\": \"fbCylinder\",\r\n      \"Namespace\": \"TcoPneumatics\",\r\n      \"TypeMetaInfo\": 4\r\n    },\r\n    {\r\n      \"TypeAttributes\": \"\\n{attribute addProperty Name \\\"\\\" }\",\r\n      \"TypeName\": \"Global_Version\",\r\n      \"Namespace\": \"TcoPneumatics\",\r\n      \"TypeMetaInfo\": 0\r\n    }\r\n  ],\r\n  \"Name\": \"TcoPneumatics\",\r\n  \"Namespace\": \"TcoPneumatics\"\r\n}")]
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 namespace TcoPneumatics
 {
 	public partial class TcoPneumaticsTwinController : Vortex.Connector.ITwinController, ITcoPneumaticsTwinController, IShadowTcoPneumaticsTwinController

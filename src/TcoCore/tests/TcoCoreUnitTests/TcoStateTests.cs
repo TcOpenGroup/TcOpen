@@ -16,8 +16,8 @@ namespace TcoCoreUnitTests
         }
 
 
-        [Test, Order(001)]
-        public void T001_IdentitiesTest()
+        [Test, Order(400)]
+        public void T400_IdentitiesTest()
         {
             TcoObjectTest to = tc._TcoObjectTest_A;
             TcoStateTest ts = to._TcoStateTest_A;
@@ -49,8 +49,8 @@ namespace TcoCoreUnitTests
             Assert.AreNotEqual(to._MyIdentity.Synchron, tt._MyIdentity.Synchron);
         }
 
-        [Test, Order(002)]
-        public void T002_StateMessage()
+        [Test, Order(401)]
+        public void T401_StateMessage()
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
             string message = TestHelpers.RandomString(20);
@@ -62,8 +62,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(message, ts.GetMessage());
         }
 
-        [Test, Order(003)]
-        public void T003_ChangeState()
+        [Test, Order(402)]
+        public void T402_ChangeState()
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
 
@@ -87,8 +87,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual("My state has been change from " + prevState.ToString() + " to the new state " + newState.ToString() + ".", ts.GetMessage());
         }
 
-        [Test, Order(004)]
-        public void T004_OnStateChange()
+        [Test, Order(403)]
+        public void T403_OnStateChange()
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
             string message = TestHelpers.RandomString(20);
@@ -127,8 +127,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual("My state has been change from " + prevState.ToString() + " to the new state " + newState.ToString() + ".", ts.GetMessage());
         }
 
-        [Test, Order(005)]
-        public void T005_Restore()
+        [Test, Order(404)]
+        public void T404_Restore()
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
 
@@ -146,8 +146,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(-1, ts._MyState.Synchron);
         }
 
-        [Test, Order(006)]
-        public void T006_ChangeStateWithObjectRestore()
+        [Test, Order(405)]
+        public void T405_ChangeStateWithObjectRestore()
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
             short prevState;
@@ -180,7 +180,7 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(ts._TcoTaskTest_B._IsBusy.Synchron);
 
             prevState = ts._MyState.Synchron;
-            newState = TestHelpers.RandomNumber(20, 100);
+            newState = TestHelpers.RandomNumber(101, 200);
 
             tc.SingleCycleRun(() =>
             {
@@ -197,8 +197,8 @@ namespace TcoCoreUnitTests
 
         }
 
-        [Test, Order(007)]
-        public void T007_CheckAutoRestoreProperties()
+        [Test, Order(406)]
+        public void T406_CheckAutoRestoreProperties()
         {
             TcoStateTest ts;
             TcoTaskTest tt_a;
@@ -250,8 +250,8 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt_b._AutoRestoreByMyParentEnabled.Synchron);
         }
 
-        [Test, Order(008)]
-        public void T008_AutoRestoreOnStateChange()
+        [Test, Order(407)]
+        public void T407_AutoRestoreOnStateChange()
         {
             TcoStateTest ts_a, ts_b;
             TcoStateAutoRestoreTest tst_a, tst_b;
@@ -426,6 +426,5 @@ namespace TcoCoreUnitTests
                 tst_b.CleanUp();
             });
         }
-
     }
 }

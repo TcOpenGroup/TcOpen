@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoCoreTests
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "fbManipulatorContext", "TcoCoreTests", TypeComplexityEnum.Complex)]
 	public partial class fbManipulatorContext : TcoCore.TcoContext, Vortex.Connector.IVortexObject, IfbManipulatorContext, IShadowfbManipulatorContext, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{

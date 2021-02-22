@@ -68,11 +68,9 @@ task NugetRestore -depends Clean {
 
 task GitVersion -depends NugetRestore {
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
-  $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateprojectfiles"} else {""}
+  $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
   $updateAssemblyInfoFlag
   $script:gitVersion =  & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/nofetch" "/config" "$baseDir" |  ConvertFrom-Json 
-  # & ".\_toolz\gitversion.exe" "/updateprojectfiles" "/nofetch" "/config"
-
   $buildNumber =$script:gitVersion.SemVer
   Write-Host "##vso[build.updatebuildnumber]$buildNumber" 
  
@@ -85,7 +83,6 @@ task GitVersion -depends NugetRestore {
     $v = $script:gitVersion.PreReleaseNumber.ToString();
   } 
   $plcversion = $script:gitVersion.Major.ToString() + "." + $script:gitVersion.Minor.ToString() + "." + $script:gitVersion.Patch.ToString() +"." +  $v
-  
   if($updateAssemblyInfo) {.\_Vortex\builder\uvn.exe -v $plcversion}
 }
 

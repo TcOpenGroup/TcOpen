@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoPneumaticsTests
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "DefaultContext", "TcoPneumaticsTests", TypeComplexityEnum.Complex)]
 	public partial class DefaultContext : TcoCore.TcoContext, Vortex.Connector.IVortexObject, IDefaultContext, IShadowDefaultContext, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{

@@ -9,11 +9,14 @@ namespace TcoCoreUnitTests
 {
     public static class TestRunners
     {
+
+        //TcoContext
         public static void AddEmptyCycle(this ITestTcoContext context)
         {
             context.ContextOpen();
             context.ContextClose();
         }
+
         public static void SingleCycleRun(this ITestTcoContext context, Action action)
         {
             context.ContextOpen();
@@ -50,6 +53,128 @@ namespace TcoCoreUnitTests
                 context.ContextOpen();
                 actionDone = action();
                 context.ContextClose();
+            }
+        }
+
+        //TcoSequencerAutoRestorable
+        public static void AddEmptyCycle(this ITestTcoSequencerAutoRestorable sequencer)
+        {
+            sequencer.ContextOpen();
+            sequencer.ContextClose();
+        }
+        public static void SingleCycleRun(this ITestTcoSequencerAutoRestorable sequencer, Action action)
+        {
+            sequencer.ContextOpen();
+            action();
+            sequencer.ContextClose();
+        }
+
+        public static void SequencerSingleCycleRun(this ITestTcoSequencerAutoRestorable sequencer, Action action)
+        {
+            sequencer.ContextOpen();
+            sequencer.SequencerOpen();
+            action();
+            sequencer.SequencerClose();
+            sequencer.ContextClose();
+        }
+        
+        public static void SequencerMultipleCyclesRun(this ITestTcoSequencerAutoRestorable sequencer, Action action, ushort cycles)
+        {
+            ushort i = 0;
+            while (i < cycles)
+            {
+                sequencer.ContextOpen();
+                sequencer.SequencerOpen();
+                action();
+                sequencer.SequencerClose();
+                sequencer.ContextClose();
+                i++;
+            }
+        }
+
+        public static void SequencerRunUntilEndConditionIsMet(this ITestTcoSequencerAutoRestorable sequencer, Action action, Func<bool> endCondition)
+        {
+            while (!endCondition())
+            {
+                sequencer.ContextOpen();
+                sequencer.SequencerOpen();
+                action();
+                sequencer.SequencerClose();
+                sequencer.ContextClose();
+            }
+        }
+
+        public static void SequencerRunUntilActionDone(this ITestTcoSequencerAutoRestorable sequencer, Func<bool> action)
+        {
+            bool actionDone = false;
+            while (!actionDone)
+            {
+                sequencer.ContextOpen();
+                sequencer.SequencerOpen();
+                action();
+                sequencer.SequencerClose();
+                sequencer.ContextClose();
+            }
+        }
+
+        //TcoSequencerNonAutoRestorable
+        public static void AddEmptyCycle(this ITestTcoSequencerNonAutoRestorable sequencer)
+        {
+            sequencer.ContextOpen();
+            sequencer.ContextClose();
+        }
+        public static void SingleCycleRun(this ITestTcoSequencerNonAutoRestorable sequencer, Action action)
+        {
+            sequencer.ContextOpen();
+            action();
+            sequencer.ContextClose();
+        }
+
+        public static void SequencerSingleCycleRun(this ITestTcoSequencerNonAutoRestorable sequencer, Action action)
+        {
+            sequencer.ContextOpen();
+            sequencer.SequencerOpen();
+            action();
+            sequencer.SequencerClose();
+            sequencer.ContextClose();
+        }
+
+        public static void SequencerMultipleCyclesRun(this ITestTcoSequencerNonAutoRestorable sequencer, Action action, ushort cycles)
+        {
+            ushort i = 0;
+            while (i < cycles)
+            {
+                sequencer.ContextOpen();
+                sequencer.SequencerOpen();
+                action();
+                sequencer.SequencerClose();
+                sequencer.ContextClose();
+                i++;
+            }
+        }
+
+        public static void SequencerRunUntilEndConditionIsMet(this ITestTcoSequencerNonAutoRestorable sequencer, Action action, Func<bool> endCondition)
+        {
+            while (!endCondition())
+            {
+                sequencer.ContextOpen();
+                sequencer.SequencerOpen();
+                action();
+                sequencer.SequencerClose();
+                sequencer.ContextClose();
+            }
+        }
+
+        public static void SequencerRunUntilActionDone(this ITestTcoSequencerNonAutoRestorable sequencer, Func<bool> action)
+        {
+            bool actionDone = false;
+            while (!actionDone)
+            {
+                sequencer.ContextOpen();
+                sequencer.SequencerOpen();
+                action();
+                sequencer.SequencerClose();
+                sequencer.ContextClose();
             }
         }
     }

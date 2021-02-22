@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoCore
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "TcoState", "TcoCore", TypeComplexityEnum.Complex)]
 	public partial class TcoState : TcoObject, Vortex.Connector.IVortexObject, ITcoState, IShadowTcoState, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{

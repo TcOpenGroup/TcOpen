@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoIoBeckhoff
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "WcState", "TcoIoBeckhoff", TypeComplexityEnum.Complex)]
 	public partial class WcState : Vortex.Connector.IVortexObject, IWcState, IShadowWcState, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{
@@ -111,19 +112,6 @@ namespace TcoIoBeckhoff
 
 		partial void PexPreConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
 		partial void PexPreConstructorParameterless();
-		partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
-		partial void PexConstructorParameterless();
-		protected Vortex.Connector.IVortexObject @Parent
-		{
-			get;
-			set;
-		}
-
-		public Vortex.Connector.IVortexObject GetParent()
-		{
-			return this.@Parent;
-		}
-
 		private System.Collections.Generic.List<Vortex.Connector.IVortexObject> @Children
 		{
 			get;
@@ -138,6 +126,35 @@ namespace TcoIoBeckhoff
 		public void AddChild(Vortex.Connector.IVortexObject vortexObject)
 		{
 			this.@Children.Add(vortexObject);
+		}
+
+		private System.Collections.Generic.List<Vortex.Connector.IVortexElement> Kids
+		{
+			get;
+			set;
+		}
+
+		public System.Collections.Generic.IEnumerable<Vortex.Connector.IVortexElement> GetKids()
+		{
+			return this.Kids;
+		}
+
+		public void AddKid(Vortex.Connector.IVortexElement vortexElement)
+		{
+			this.Kids.Add(vortexElement);
+		}
+
+		partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
+		partial void PexConstructorParameterless();
+		protected Vortex.Connector.IVortexObject @Parent
+		{
+			get;
+			set;
+		}
+
+		public Vortex.Connector.IVortexObject GetParent()
+		{
+			return this.@Parent;
 		}
 
 		private System.Collections.Generic.List<Vortex.Connector.IValueTag> @ValueTags
@@ -231,9 +248,10 @@ namespace TcoIoBeckhoff
 			this.@SymbolTail = symbolTail;
 			this.@Connector = parent.GetConnector();
 			this.@ValueTags = new System.Collections.Generic.List<Vortex.Connector.IValueTag>();
-			this.@Children = new System.Collections.Generic.List<Vortex.Connector.IVortexObject>();
 			this.@Parent = parent;
 			_humanReadable = Vortex.Connector.IConnector.CreateSymbol(parent.HumanReadable, readableTail);
+			this.Kids = new System.Collections.Generic.List<Vortex.Connector.IVortexElement>();
+			this.@Children = new System.Collections.Generic.List<Vortex.Connector.IVortexObject>();
 			PexPreConstructor(parent, readableTail, symbolTail);
 			Symbol = Vortex.Connector.IConnector.CreateSymbol(parent.Symbol, symbolTail);
 			__WcState = @Connector.Online.Adapter.CreateBOOL(this, "<#EC Working Counter State (1=Data Invalid)#>", "_WcState");
@@ -241,8 +259,9 @@ namespace TcoIoBeckhoff
 			__InputToggle = @Connector.Online.Adapter.CreateBOOL(this, "<#EC Togle bit#>", "_InputToggle");
 			_InputToggle.AttributeName = "<#EC Togle bit#>";
 			AttributeName = "";
-			PexConstructor(parent, readableTail, symbolTail);
 			parent.AddChild(this);
+			parent.AddKid(this);
+			PexConstructor(parent, readableTail, symbolTail);
 		}
 
 		public WcState()

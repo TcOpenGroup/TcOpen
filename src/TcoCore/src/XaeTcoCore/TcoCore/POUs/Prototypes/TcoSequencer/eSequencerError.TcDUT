@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eSequencerError" Id="{d003a61e-aba3-097a-339c-fbaf7db1eb91}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eSequencerError :
+(
+	noError := 0,
+	NotUniqueStepId := 10,
+	StepIdHasBeenChanged := 20,
+	OrderOfTheStepHasBeenChanged := 40,
+	StepWithRequestedIdDoesNotExists := 50,
+	SeveralRequestStep := 60
+);
+END_TYPE
+ ]]></Declaration>
+  </DUT>
+</TcPlcObject>

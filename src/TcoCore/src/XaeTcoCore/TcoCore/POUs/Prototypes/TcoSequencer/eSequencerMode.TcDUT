@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eSequencerMode" Id="{9c78ac12-3375-08f9-0d3a-52cf2b5cf218}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eSequencerMode :
+(
+	Invalid := -10,
+	CyclicMode := 0,
+	StepMode := 10
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

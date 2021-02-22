@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TcoCoreConnector.Properties {
+namespace Inxton.TcoCoreConnector.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TcoCoreConnector.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcoCoreConnector.Properties.Localizations", typeof(Localizations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Inxton.TcoCoreConnector.Properties.Localizations", typeof(Localizations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

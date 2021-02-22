@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoPneumatics
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "fbCylinder", "TcoPneumatics", TypeComplexityEnum.Complex)]
 	public partial class fbCylinder : TcoCore.TcoComponent, Vortex.Connector.IVortexObject, IfbCylinder, IShadowfbCylinder, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{

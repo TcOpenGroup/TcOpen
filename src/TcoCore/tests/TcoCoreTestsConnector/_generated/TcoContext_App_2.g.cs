@@ -7,6 +7,7 @@ using Vortex.Connector.Identity;
 
 namespace TcoCoreTests
 {
+#pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "TcoContext_App_2", "TcoCoreTests", TypeComplexityEnum.Complex)]
 	public partial class TcoContext_App_2 : Vortex.Connector.IVortexObject, ITcoContext_App_2, IShadowTcoContext_App_2, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{
@@ -190,19 +191,6 @@ namespace TcoCoreTests
 
 		partial void PexPreConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
 		partial void PexPreConstructorParameterless();
-		partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
-		partial void PexConstructorParameterless();
-		protected Vortex.Connector.IVortexObject @Parent
-		{
-			get;
-			set;
-		}
-
-		public Vortex.Connector.IVortexObject GetParent()
-		{
-			return this.@Parent;
-		}
-
 		private System.Collections.Generic.List<Vortex.Connector.IVortexObject> @Children
 		{
 			get;
@@ -217,6 +205,35 @@ namespace TcoCoreTests
 		public void AddChild(Vortex.Connector.IVortexObject vortexObject)
 		{
 			this.@Children.Add(vortexObject);
+		}
+
+		private System.Collections.Generic.List<Vortex.Connector.IVortexElement> Kids
+		{
+			get;
+			set;
+		}
+
+		public System.Collections.Generic.IEnumerable<Vortex.Connector.IVortexElement> GetKids()
+		{
+			return this.Kids;
+		}
+
+		public void AddKid(Vortex.Connector.IVortexElement vortexElement)
+		{
+			this.Kids.Add(vortexElement);
+		}
+
+		partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
+		partial void PexConstructorParameterless();
+		protected Vortex.Connector.IVortexObject @Parent
+		{
+			get;
+			set;
+		}
+
+		public Vortex.Connector.IVortexObject GetParent()
+		{
+			return this.@Parent;
 		}
 
 		private System.Collections.Generic.List<Vortex.Connector.IValueTag> @ValueTags
@@ -310,9 +327,10 @@ namespace TcoCoreTests
 			this.@SymbolTail = symbolTail;
 			this.@Connector = parent.GetConnector();
 			this.@ValueTags = new System.Collections.Generic.List<Vortex.Connector.IValueTag>();
-			this.@Children = new System.Collections.Generic.List<Vortex.Connector.IVortexObject>();
 			this.@Parent = parent;
 			_humanReadable = Vortex.Connector.IConnector.CreateSymbol(parent.HumanReadable, readableTail);
+			this.Kids = new System.Collections.Generic.List<Vortex.Connector.IVortexElement>();
+			this.@Children = new System.Collections.Generic.List<Vortex.Connector.IVortexObject>();
 			PexPreConstructor(parent, readableTail, symbolTail);
 			Symbol = Vortex.Connector.IConnector.CreateSymbol(parent.Symbol, symbolTail);
 			_ResetToZero = @Connector.Online.Adapter.CreateBOOL(this, "", "ResetToZero");
@@ -321,8 +339,9 @@ namespace TcoCoreTests
 			_TcoObject_Counter_1 = new TcoObject_Counter(this, "", "TcoObject_Counter_1");
 			_TcoObject_Counter_2 = new TcoObject_Counter(this, "", "TcoObject_Counter_2");
 			AttributeName = "";
-			PexConstructor(parent, readableTail, symbolTail);
 			parent.AddChild(this);
+			parent.AddKid(this);
+			PexConstructor(parent, readableTail, symbolTail);
 		}
 
 		public TcoContext_App_2()

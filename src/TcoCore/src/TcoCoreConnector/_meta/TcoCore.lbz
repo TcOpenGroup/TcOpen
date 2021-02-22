@@ -7,6 +7,21 @@
       "MirrorFiles": null
     },
     {
+      "Name": "eSequencerMode",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'eSequencerMode']\n{attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE eSequencerMode :\n(\n\tInvalid := -10,\n\tCyclicMode := 0,\n\tStepMode := 10\n);\nEND_TYPE\n",
+      "MirrorFiles": null
+    },
+    {
+      "Name": "eStepStatus",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'eStepStatus']\n{attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE eStepStatus :\n(\n\tNone := 0,\n\tDisabled := 10,\n\tReadyToRun := 20,\n\tRunning := 30,\t\n\tDone := 40,\n\tError := 50\n);\nEND_TYPE\n",
+      "MirrorFiles": null
+    },
+    {
+      "Name": "eSequencerError",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'eSequencerError']\n{attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE eSequencerError :\n(\n\tnoError := 0,\n\tNotUniqueStepId := 10,\n\tStepIdHasBeenChanged := 20,\n\tOrderOfTheStepHasBeenChanged := 40,\n\tStepWithRequestedIdDoesNotExists := 50,\n\tSeveralRequestStep := 60\n);\nEND_TYPE\n ",
+      "MirrorFiles": null
+    },
+    {
       "Name": "eTaskState",
       "DeclarationText": "[NS : 'TcoCore' NAME : 'eTaskState']\n{attribute 'qualified_only'}\n{attribute 'strict'}\nTYPE eTaskState :\n(\n\tIdle := 0,\n\tRequest := 10,\n\tExecuting := 20,\n\tError := 30,\n\tDone := 40\n);\nEND_TYPE\n",
       "MirrorFiles": null
@@ -49,8 +64,24 @@
       "ImplementationText": "",
       "Methods": [],
       "Properties": [],
+      "Name": "TcoStepModeControler",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoStepModeControler']\nFUNCTION_BLOCK TcoStepModeControler EXTENDS TcoState\nVAR_INPUT\n\tinCurrentStepRunning : BOOL;\nEND_VAR\nVAR\n\t{attribute 'hide'}\n\t_stepBackward : TcoTask(THIS^);\n\t{attribute 'hide'}\n\t_stepIn : TcoTask(THIS^);\n\t{attribute 'hide'}\n\t_stepForward : TcoTask(THIS^);\nEND_VAR",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
+      "Name": "TcoSequencer",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoSequencer']\nFUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoState IMPLEMENTS ITcoSequencer\nVAR\n\t{attribute addProperty Name \"<#Current step#>\"}\n\t_currentStep : StepDetails;\n\t{attribute addProperty Name \"<#Sequencer error#>\"}\n\t{attribute clr [ReadOnly()]}\n\t_sequencerHasError : BOOL;\n\t{attribute addProperty Name \"<#Sequencer error ID#>\"}\n\t{attribute clr [ReadOnly()]}\n\t_sequencerErrorId : eSequencerError := eSequencerError.noError;\n\t{attribute 'hide'}\n\t_isFirstStepEntry : BOOL;\n\t{attribute 'hide'}\n\t_theOrderOfTheCurrentlyEvaluatedStep : UINT;\t\n\t{attribute 'hide'}\n\t_theOrderOfTheCurrentlyExecutedStep : UINT;\t\n\t{attribute 'hide'}\n\t_theOrderOfThePreviouslyExecutedStep : UINT;\n\t {attribute 'hide'}\n\t_IdOfThePreviouslyExecutedStep : INT;\n\t{attribute 'hide'}\n\t_numberOfStepsInSequence : UINT;\n\t{attribute 'hide'}\n\t_previousNumberOfStepsInSequence : UINT;\n\t{attribute 'hide'}\n\t_stepCounter : UINT;\t\n\t{attribute 'hide'}\n\t_requestStepActive : BOOL;\t\n\t{attribute 'hide'}\n\t_requestedStepId : INT;\t\n\t{attribute 'hide'}\n\t_cycleTimer : TON;   \n\t{attribute 'hide'}\n\t_StepTimer : TON;\n\t_SequenceElapsedTime : TIME;\n\t_StepElapsedTime : TIME;\n\t_LastCycleTime: TIME;\n\t{attribute 'hide'}\n\t_requestStepCycle: UINT;\nEND_VAR\n\nVAR\n\t{attribute 'hide'}\n\t_StepIdChanged : BOOL;\n\t{attribute 'hide'}\n\t_StepOrderChanged : BOOL;\n\t{attribute 'hide'}\n\t_ChangeStepIdFrom : INT;\n\t{attribute 'hide'}\n\t_ChangeStepIdTo : INT;\n\t{attribute 'hide'}\n\t_ChangeStepOrderFrom : UINT;\n\t{attribute 'hide'}\n\t_ChangeStepOrderTo : UINT;\n\t{attribute 'hide'}\n\t_stepIdUniquenessChecked : BOOL := FALSE;\nEND_VAR\n\nVAR\n\t{attribute 'hide'}\n    _pPreviusSteps : POINTER TO INT;\nEND_VAR\n\nVAR\n\t{attribute 'hide'}\n\t_stepModeControler : TcoStepModeControler(THIS^,FALSE);\n\t{attribute 'hide'}\n\t_checkStepIdRequestedInStepMode : BOOL;\nEND_VAR",
+      "MirrorFiles": null
+    },
+    {
+      "ImplementationText": "",
+      "Methods": [],
+      "Properties": [],
       "Name": "TcoState",
-      "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoState']\nFUNCTION_BLOCK TcoState EXTENDS TcoObject IMPLEMENTS ITcoState\nVAR\n\t_State : INT; \t\n\t{attribute clr [RenderIgnore()]}\n\t{attribute clr [ReadOnly()]}\n\t_enableAutoRestore : BOOL;\n\t_messenger : TcoMessenger(THIS^);\n\t{attribute 'hide'}\n\t_AutoRestorable : BOOL;\n\t{attribute 'hide'}\n\t_StartCycleCount\t: ULINT;\n\t{attribute 'hide'}\n\t_MyParentsChangeStateCycle\t: ULINT;\n\t{attribute 'hide'}\n\t_ChangeStateCycle\t: ULINT;\nEND_VAR\n",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoState']\nFUNCTION_BLOCK TcoState EXTENDS TcoObject IMPLEMENTS ITcoState\nVAR\n\t_State : INT; \t\n\t{attribute clr [RenderIgnore()]}\n\t{attribute clr [ReadOnly()]}\n\t_enableAutoRestore : BOOL;\n\t_messenger : TcoMessenger(THIS^);\n\t{attribute 'hide'}\n\t_AutoRestorable : BOOL;\n\t{attribute 'hide'}\n\t_StartCycleCount\t: ULINT;\n\t{attribute 'hide'}\n\t_MyParentsChangeStateCycle\t: ULINT;\n\t{attribute 'hide'}\n\t_ChangeStateCycle\t: ULINT;\n\t{attribute 'hide'}\n\t_LastChangeState\t: INT;\n\t{attribute 'hide'}\n\t_MyParentsLastChangeState\t: INT;\t\nEND_VAR\n",
       "MirrorFiles": null
     },
     {
@@ -58,7 +89,7 @@
       "Methods": [],
       "Properties": [],
       "Name": "TcoTask",
-      "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoTask']\n{attribute 'initialize_on_call'}\nFUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask\nVAR\n\t_taskState : eTaskState;\n\t{attribute clr [RenderIgnore()]}\n\t{attribute clr [ReadOnly()]}\n\t_nextExpectedCycle : ULINT;\n\t_messenger : TcoMessenger(THIS^);\n\t{attribute 'hide'}\n\t_AutoRestorable : BOOL;\n\t{attribute 'hide'}\n\t_StartCycleCount\t: ULINT;\n\t{attribute 'hide'}\n\t_MyParentsChangeStateCycle\t: ULINT;\nEND_VAR",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoTask']\n{attribute 'initialize_on_call'}\nFUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask\nVAR\n\t_taskState : eTaskState;\n\t{attribute clr [RenderIgnore()]}\n\t{attribute clr [ReadOnly()]}\n\t_nextExpectedCycle : ULINT;\n\t_messenger : TcoMessenger(THIS^);\n\t{attribute 'hide'}\n\t_AutoRestorable : BOOL;\n\t{attribute 'hide'}\n\t_StartCycleCount\t: ULINT;\n\t{attribute 'hide'}\n\t_MyParentsChangeStateCycle\t: ULINT;\n\t{attribute 'hide'}\n\t_MyParentsLastChangeState\t: INT;\t\nEND_VAR",
       "MirrorFiles": null
     }
   ],
@@ -79,6 +110,11 @@
     {
       "Name": "TcoMessage",
       "DeclarationText": "[NS : 'TcoCore' NAME : 'TcoMessage'] [STRUCT]\nTYPE TcoMessage :\nSTRUCT\n\t{attribute clr [ReadOnly()]}\n\tTimeStamp : DT;\n\t{attribute clr [ReadOnly()]}\t\t\n\tText : STRING(255);\n\t{attribute clr [ReadOnly()]}\t\n\tIdentity : ULINT;\t\n\tCategory : eMessageCategory;\n\t{attribute clr [ReadOnly()]}\n\tCycle : ULINT;\nEND_STRUCT\nEND_TYPE\n",
+      "MirrorFiles": null
+    },
+    {
+      "Name": "StepDetails",
+      "DeclarationText": "[NS : 'TcoCore' NAME : 'StepDetails'] [STRUCT]\nTYPE StepDetails :\nSTRUCT\n\t{attribute addProperty Name \"<#Step ID#>\"}\n\tID: INT;\n\t{attribute addProperty Name \"<#Step Order#>\"}\n\tOrder: UINT;\n\t{attribute addProperty Name \"<#Enabled#>\"}\n\tEnabled: BOOL;\n\t{attribute addProperty Name \"<#Step description#>\"}\n\tDescription: STRING(254);\n\t{attribute addProperty Name \"<#Step status#>\"}\n\tStatus : eStepStatus;\n\t{attribute addProperty Name \"<#Step duration#>\"}\n\tDuration : TIME;\nEND_STRUCT\nEND_TYPE\n",
       "MirrorFiles": null
     }
   ],

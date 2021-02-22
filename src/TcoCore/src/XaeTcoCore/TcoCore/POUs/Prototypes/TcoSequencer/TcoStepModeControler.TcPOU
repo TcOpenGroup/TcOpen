@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoStepModeControler" Id="{bae82854-ce0e-0ab9-12e4-0141c7944f2d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoStepModeControler EXTENDS TcoState
+VAR_INPUT
+	inCurrentStepRunning : BOOL;
+END_VAR
+VAR
+	{attribute 'hide'}
+	_stepBackward : TcoTask(THIS^);
+	{attribute 'hide'}
+	_stepIn : TcoTask(THIS^);
+	{attribute 'hide'}
+	_stepForward : TcoTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Mode" Id="{8d4cb1af-ba19-0bb8-1400-30d988d71fba}">
+      <Declaration><![CDATA[PROPERTY Mode : eSequencerMode]]></Declaration>
+      <Get Name="Get" Id="{895df049-a71d-0d24-2a10-6f8bfd7b53fa}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CASE SUPER^._State OF
+	eSequencerMode.CyclicMode:
+		Mode := eSequencerMode.CyclicMode;
+	eSequencerMode.StepMode:
+		Mode := eSequencerMode.StepMode;
+	ELSE
+		Mode := eSequencerMode.Invalid;
+END_CASE
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{de205606-d241-09de-0ee5-ac8cb916bc40}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SUPER^.ChangeState(Mode);
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="OnStateChange" Id="{b7c60afe-dc93-0d5b-2752-c7f3e19a3b5e}">
+      <Declaration><![CDATA[METHOD OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF PreviousState = eSequencerMode.CyclicMode AND NewState = eSequencerMode.StepMode THEN
+	_stepForward.Restore();
+	_stepBackward.Restore();
+	_stepIn.Restore(); 	
+
+	IF inCurrentStepRunning THEN
+		_stepIn.Invoke(); 	
+	END_IF
+END_IF
+
+IF PreviousState = eSequencerMode.StepMode AND NewState = eSequencerMode.CyclicMode THEN
+	_stepForward.Restore();
+	_stepBackward.Restore();
+	_stepIn.Restore(); 	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -16,8 +16,8 @@ namespace TcoCoreUnitTests
         {
         }
 
-        [Test, Order(001)]
-        public void T001_IdentitiesTest()
+        [Test, Order(200)]
+        public void T200_IdentitiesTest()
         {
             tc_A._CallMyPlcInstance.Synchron = true;
             tc_B._CallMyPlcInstance.Synchron = true;
