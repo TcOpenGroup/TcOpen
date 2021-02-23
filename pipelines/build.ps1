@@ -11,6 +11,7 @@
   $gitVersion
   $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
   $dotnet = '"C:\Program Files\dotnet\dotnet.exe"'
+  $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
   $testTargetAmsId = ""
 }
 
@@ -90,6 +91,7 @@ task OpenVisualStudio -depends GitVersion {
   Start-Process .\TcOpen.plc.slnf
 }
 
+
 task BuildWithInxtonBuilder -depends OpenVisualStudio {
   $projects = @(     
      "src\TcoCore\TcoCore.slnf",
@@ -127,7 +129,7 @@ task CloseVs -depends Build {
 
 task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
 
-  & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com" .\TcOpen.plc.slnf /Rebuild "$buildConfig|TwinCAT RT (x64)"
+  & $devenv .\TcOpen.plc.slnf /Rebuild "$buildConfig|TwinCAT RT (x64)"
 
   $BootDir = $solutionDir +"\src\TcoCore\src\XaeTcoCore\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
