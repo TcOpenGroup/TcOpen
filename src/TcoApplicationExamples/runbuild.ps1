@@ -1,0 +1,1 @@
+..\..\_Vortex\builder\vortex.compiler.console.exe -s .\TcoApplicationExamples.slnf

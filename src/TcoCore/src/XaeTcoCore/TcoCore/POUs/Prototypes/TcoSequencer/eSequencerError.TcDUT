@@ -1,15 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="eSequencerError" Id="{d003a61e-aba3-097a-339c-fbaf7db1eb91}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Describes cause of the sequencer error.
+		</summary>				
+	</docu>	
+~*)
+{attribute 'qualified_only'}
 {attribute 'strict'}
 TYPE eSequencerError :
 (
+(*~
+	<docu>
+		<summary>
+			No error.
+		</summary>				
+	</docu>	
+~*)	
 	noError := 0,
+(*~
+	<docu>
+		<summary>
+			Some of the StepId in the sequence is not unique.
+		</summary>				
+	</docu>	
+~*)	
 	NotUniqueStepId := 10,
+(*~
+	<docu>
+		<summary>
+			StepId of the actually executed step has been changed during its execution.
+		</summary>				
+	</docu>	
+~*)
 	StepIdHasBeenChanged := 20,
+(*~
+	<docu>
+		<summary>
+			Order of the actually executed step has been changed during its execution.
+		</summary>				
+	</docu>	
+~*)
 	OrderOfTheStepHasBeenChanged := 40,
+(*~
+	<docu>
+		<summary>
+			Method RequestStep has been called with nonexisting StepId in the sequence.
+		</summary>				
+	</docu>	
+~*)
 	StepWithRequestedIdDoesNotExists := 50,
+(*~
+	<docu>
+		<summary>
+			Method RequestStep has been called while previous RequestStep call has not yet been completed.
+		</summary>				
+	</docu>	
+~*)
 	SeveralRequestStep := 60
 );
 END_TYPE

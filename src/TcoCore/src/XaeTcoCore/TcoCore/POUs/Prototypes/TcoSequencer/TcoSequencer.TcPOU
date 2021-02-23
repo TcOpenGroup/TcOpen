@@ -1,13 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoSequencer" Id="{514f2b6e-7953-4563-938a-20f12ff8b327}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoState IMPLEMENTS ITcoSequencer
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Provides basic sequential control, including step mode, which allows to run the sequence step-by step, step forward and step backward.
+			</summary>
+		</docu>
+~*)
+FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoState IMPLEMENTS ITcoSequencer
 VAR
+(*~
+	<docu>
+		<summary>
+			Holds the status and internal variables of the current step.
+		</summary>			
+		<remarks>			
+			<para>
+				See <see cref="StepDetails"/> for detailed description.
+			</para>
+		</remarks>		
+	</docu>	
+~*)
 	{attribute addProperty Name "<#Current step#>"}
 	_currentStep : StepDetails;
+(*~
+	<docu>
+		<summary>
+			True if an error occurs in the sequence. Detailed cause of this error is described by the _sequencerErrorId.		
+		</summary>				
+		<remarks>			
+			<para>
+				See <see cref="TcoSequencer._sequencerErrorId"/> for detailed description.
+			</para>
+		</remarks>	
+	</docu>	
+~*)	
 	{attribute addProperty Name "<#Sequencer error#>"}
 	{attribute clr [ReadOnly()]}
 	_sequencerHasError : BOOL;
+(*~
+	<docu>
+		<summary>
+			Describes cause of the sequencer error.
+		</summary>		
+		<remarks>			
+			<para>
+				See <see cref="eSequencerError"/> for detailed description.
+			</para>
+		</remarks>			
+	</docu>	
+~*)	
 	{attribute addProperty Name "<#Sequencer error ID#>"}
 	{attribute clr [ReadOnly()]}
 	_sequencerErrorId : eSequencerError := eSequencerError.noError;
@@ -74,7 +117,15 @@ END_VAR]]></Declaration>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="CheckStepId" Id="{1a28ae7e-3f08-026b-3c6f-6ecb440861d3}">
-      <Declaration><![CDATA[METHOD PROTECTED FINAL CheckStepId : BOOL
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method performs control of the StepId of the currently executed step.
+			The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+		</summary>			
+	</docu>	
+~*)
+METHOD PRIVATE CheckStepId : BOOL
 VAR_INPUT
 	inStepID : INT;
 	inStepModeActive : BOOL;
@@ -97,7 +148,14 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="Close" Id="{6f2b0e9e-4363-07a8-0cc7-9827a477dd85}">
-      <Declaration><![CDATA[METHOD PROTECTED Close
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called at the end of the sequence.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED FINAL Close
 
 ]]></Declaration>
       <Implementation>
@@ -122,8 +180,23 @@ END_VAR]]></Declaration>
       </Implementation>
     </Method>
     <Method Name="IsStepIdUnique" Id="{2d2ec03e-06c8-0428-1481-3570b6299e7b}">
-      <Declaration><![CDATA[METHOD PROTECTED FINAL IsStepIdUnique
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method performs the control of the uniqueness of each StepId in the whole sequence.
+			The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+		</summary>				
+	</docu>	
+~*)
+METHOD PRIVATE IsStepIdUnique
 VAR_INPUT
+(*~
+	<docu>
+		<summary>
+			StepId to be checked for uniqueness.
+		</summary>				
+	</docu>	
+~*)
 	inStepID : INT;
 END_VAR
 VAR
@@ -234,14 +307,35 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="Main" Id="{01b00980-fd7a-0b03-1d6e-84d1519f2b7c}">
-      <Declaration><![CDATA[METHOD ABSTRACT Main : BOOL
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end should be ensured by calling the InstanceName.Run() method.
+			This method is abstract, so each derived type has to implement its own implementation of this method
+		</summary>
+	</docu>
+~*)
+METHOD ABSTRACT Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Property Name="Mode" Id="{c447bb7a-289b-0f16-18ea-989d80a4b381}">
-      <Declaration><![CDATA[PROPERTY Mode : eSequencerMode]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This property allows to set required mode to sequencer.
+			Also it returns the actual selected mode.
+		</summary>			
+		<remarks>			
+			<para>
+				See <see cref="eSequencerMode"/> for detailed description.
+			</para>
+		</remarks>		
+	</docu>	
+~*)
+PROPERTY Mode : eSequencerMode]]></Declaration>
       <Get Name="Get" Id="{43259608-0866-0860-1707-21893efe0528}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -260,8 +354,15 @@ END_VAR
       </Set>
     </Property>
     <Method Name="OnlineChange" Id="{a5a4982d-e04b-07ef-2655-37dd53a95e28}">
-      <Declaration><![CDATA[{attribute 'call_after_online_change_slot' := '200'}
-METHOD OnlineChange
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method ensures that after each download, StepId uniqueness control is going to be performed again 
+		</summary>			
+	</docu>	
+~*)
+{attribute 'call_after_online_change_slot' := '200'}
+METHOD INTERNAL OnlineChange
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIdUniquenessChecked := FALSE;
@@ -273,7 +374,14 @@ _previousNumberOfStepsInSequence := 0;
       </Implementation>
     </Method>
     <Method Name="Open" Id="{033e4fa5-91ce-065f-3430-c26513896e04}">
-      <Declaration><![CDATA[METHOD PROTECTED Open
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called at the beginning of the sequence.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED FINAL Open
 VAR
 	_message	:	STRING(254);
 END_VAR
@@ -308,7 +416,14 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="PostSequenceComplete" Id="{ece7cad8-a719-0e69-011e-e99ad08fec8c}">
-      <Declaration><![CDATA[METHOD PUBLIC PostSequenceComplete
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called at the end of the sequence. It is public, so it should be overloaded and customized.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC PostSequenceComplete
 
 ]]></Declaration>
       <Implementation>
@@ -316,15 +431,44 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="PostStepComplete" Id="{cab5a213-2239-02e3-2d1d-fa93e3282a76}">
-      <Declaration><![CDATA[METHOD PUBLIC PostStepComplete
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called at the end of each step. It is public, so it should be overloaded and customized.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC PostStepComplete
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="RequestStep" Id="{f5b32562-7ec0-0e5a-3a0b-f7f89e25628d}">
-      <Declaration><![CDATA[METHOD PUBLIC RequestStep : ITcoSequencer
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method finish the currently executed step and initiate to start the step with StepId equals to the value of the inRequestedStepID.
+			In case that the order of the requested step is higher than the order of the currently finished step (the requested step is "after" the current one)
+			the requested step is started in the same PLC cycle.
+			In case that the order of the requested step is lower than the order of the currently finished step (the requested step is "before" the current one)
+			the requested step is started in the next PLC cycle.
+			If the requested step is not found even in the next PLC cycle, sequencer returns error StepWithRequestedIdDoesNotExists.
+			<para>
+				See <see cref="eSequencerError"/> for detailed description.
+			</para>
+		</summary>
+	</docu>
+~*)
+METHOD PUBLIC FINAL RequestStep : ITcoSequencer
 VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				StepId of the step to be executed.
+			</summary>
+		</docu>
+	~*)
 	inRequestedStepID : UINT;
 END_VAR
 VAR
@@ -359,7 +503,17 @@ RequestStep := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Reset" Id="{c1b128e5-ca0c-090a-3e6c-0771a5360650}">
-      <Declaration><![CDATA[METHOD PUBLIC Reset
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				This method resets the sequencer. 
+				Method is typically called before starting the sequence or after error has been occured in the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC Reset
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[StepChanged(0);
@@ -411,7 +565,17 @@ THIS^.Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequenceComplete" Id="{63fdaabf-b24b-030e-1bee-11a67adf5170}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL SequenceComplete
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Complete the sequencer.
+				Method is typically called inside the last step of the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL SequenceComplete
 
 ]]></Declaration>
       <Implementation>
@@ -427,8 +591,32 @@ _stepModeControler._stepIn.Restore(); 	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Step" Id="{23d4c2b7-11f1-0472-2e0b-5b173a789c7c}">
-      <Declaration><![CDATA[METHOD PUBLIC Step : BOOL
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+				Basic step of the sequence. 
+		</summary>			
+		<returns>
+			True in case if step with given StepId is in order of the execution, the step is enabled and the sequencer is in the cyclic mode.
+			True in case if step with given StepId is in order of the execution, the step is enabled, the sequencer is in the step mode and StepIn() method was triggered.  
+			False in all the other cases.
+		</returns>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL Step : BOOL
 VAR_INPUT
+(*~
+	<docu>
+		<summary>
+			StepId of the current step.
+			<remarks>			
+				<note type="important">
+					This number must be unique throughout the complete sequence.
+				</note>
+			</remarks>
+		</summary>		
+	</docu>	
+~*)
 	inStepID				: 	INT;
 	inEnabled				: 	BOOL;
 	inStepDescription		: 	STRING(254);		
@@ -617,7 +805,7 @@ IF(_isInOrderOfExecution) THEN
 	Step := (NOT _stepModeActive OR _stepInExecuting) AND inEnabled;
 	
 	IF(Step) THEN
-	// First entry to step production
+		//First entry to step production
 		IF(_theOrderOfThePreviouslyExecutedStep <> _theOrderOfTheCurrentlyExecutedStep) THEN
 			_isFirstStepEntry := TRUE;
 		END_IF;	
@@ -660,7 +848,14 @@ _numberOfStepsInSequence := _stepCounter;
       </Implementation>
     </Method>
     <Method Name="StepBackward" Id="{692f6172-ea5a-0471-05a3-9c9a7c79d4c1}">
-      <Declaration><![CDATA[METHOD StepBackward
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepBackward task, that decrement current step (variable <see cref="TcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), in case the sequencer is in step mode, and the current step is greather than zero.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepBackward
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepModeControler._stepBackward.Invoke();
@@ -669,7 +864,14 @@ _stepModeControler._stepIn.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepChanged" Id="{f13ff82b-328d-0743-26e3-1e5008c59f70}">
-      <Declaration><![CDATA[METHOD PROTECTED StepChanged
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called at each change of the current step and changes the sequencer property State derived from the TcoState function block to the StepId of the current step. 
+		</summary>			
+	</docu>	
+~*)
+METHOD PRIVATE StepChanged
 VAR_INPUT
 	newState : INT;
 END_VAR
@@ -686,7 +888,15 @@ SUPER^.ChangeState(newState);
       </Implementation>
     </Method>
     <Method Name="StepCompleteWhen" Id="{af227b6a-d14b-0fdc-29d3-1bc81be87cc9}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Complete the actually running step, in the case the inCondition is met.
+			Method is typically called inside the step as the transition method.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
 VAR_INPUT
 	inCondition : BOOL;
 END_VAR
@@ -707,7 +917,16 @@ StepCompleteWhen := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepForward" Id="{94db3f77-b48c-045b-2839-79f6b0c18fbd}">
-      <Declaration><![CDATA[METHOD StepForward
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepForward task, that increment current step (variable <see cref="TcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), 
+			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable <see cref="TcoSequencer._numberOfStepsInSequence"/> ).
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepForward
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepModeControler._stepForward.Invoke();
@@ -716,7 +935,15 @@ _stepModeControler._stepIn.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepIn" Id="{3d4da130-4eed-0f78-333d-391fb53a6ee8}">
-      <Declaration><![CDATA[METHOD StepIn
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+			This causes starting the execution of the body of the current step.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepIn
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepModeControler._stepIn.Invoke();

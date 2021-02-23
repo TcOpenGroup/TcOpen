@@ -3,6 +3,9 @@
   <POU Name="TcoState" Id="{df9d36ba-623c-435a-bfc9-1eb05ad1eb71}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoState EXTENDS TcoObject IMPLEMENTS ITcoState
 VAR
+	(*<docu><summary>
+	Variable holds curren state identifier.
+    </summary></docu>*)
 	_State : INT; 	
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}

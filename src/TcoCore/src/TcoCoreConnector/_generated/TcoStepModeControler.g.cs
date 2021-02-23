@@ -7,6 +7,11 @@ using Vortex.Connector.Identity;
 
 namespace TcoCore
 {
+	
+///			<summary>
+///				Provides switching between sequencer modes so as handling stepping tasks in th step mode.
+///			</summary>
+///<seealso cref="PlcTcoStepModeControler"/>
 #pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "TcoStepModeControler", "TcoCore", TypeComplexityEnum.Complex)]
 	public partial class TcoStepModeControler : TcoState, Vortex.Connector.IVortexObject, ITcoStepModeControler, IShadowTcoStepModeControler, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
@@ -114,6 +119,11 @@ namespace TcoCore
 			AttributeName = "";
 			PexConstructorParameterless();
 		}
+
+		
+///			<summary>
+///				Provides switching between sequencer modes so as handling stepping tasks in th step mode.
+///			</summary>
 
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoStepModeControler : TcoCore.TcoState.PlcTcoState

@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoStepModeControler" Id="{bae82854-ce0e-0ab9-12e4-0141c7944f2d}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoStepModeControler EXTENDS TcoState
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Provides switching between sequencer modes so as handling stepping tasks in th step mode.
+			</summary>
+		</docu>
+~*)
+FUNCTION_BLOCK TcoStepModeControler EXTENDS TcoState
 VAR_INPUT
 	inCurrentStepRunning : BOOL;
 END_VAR
@@ -41,7 +48,7 @@ END_CASE
       </Set>
     </Property>
     <Method Name="OnStateChange" Id="{b7c60afe-dc93-0d5b-2752-c7f3e19a3b5e}">
-      <Declaration><![CDATA[METHOD OnStateChange
+      <Declaration><![CDATA[METHOD PRIVATE OnStateChange
 VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;
