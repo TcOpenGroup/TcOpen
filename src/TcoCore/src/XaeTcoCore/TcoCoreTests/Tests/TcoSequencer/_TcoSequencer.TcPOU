@@ -95,11 +95,11 @@ _previousNumberOfStepsInSequence := 0;
         <ST><![CDATA[IsAutoRestorable := SUPER^.AutoRestorable;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="IsNewTier" Id="{d3d3417d-8a38-0e5b-2ac2-e9712c087b0c}">
-      <Declaration><![CDATA[METHOD INTERNAL IsNewTier : BOOL
+    <Method Name="IsFirstStepEntry" Id="{4f006540-c701-07be-1eb3-95b9c8a360ee}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD INTERNAL IsFirstStepEntry : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//IsNewTier := _tier.ProbeIsNewTier();]]></ST>
+        <ST><![CDATA[IsFirstStepEntry := _isFirstStepEntry;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{3a6cbc53-5690-0480-174f-e4140d338a45}">
@@ -8309,20 +8309,6 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ProbeIsNewTier" Id="{3514aaea-adf6-054c-3670-f3371b6f84ec}">
-      <Declaration><![CDATA[METHOD INTERNAL ProbeIsNewTier : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//ProbeIsNewTier := _tier.ProbeIsNewTier();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ProbeRealNewTier" Id="{68752191-dd34-05e3-39c5-8d43649432f7}">
-      <Declaration><![CDATA[METHOD INTERNAL ProbeRealNewTier : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//ProbeRealNewTier := _tier.ProbeRealNewTier();]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="RequestStepCycle" Id="{c2da0157-c6b1-052f-064f-3e3f6d17de69}" FolderPath="_Tests\">
       <Declaration><![CDATA[PROPERTY INTERNAL RequestStepCycle : UINT
 ]]></Declaration>
@@ -8413,7 +8399,7 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
         <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetTestParams" Id="{7a624c26-ee8b-0b24-15f9-09fad6ccc521}">
+    <Method Name="SetTestParams" Id="{7a624c26-ee8b-0b24-15f9-09fad6ccc521}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD INTERNAL SetTestParams
 VAR_INPUT
 	inRunOneStep		:	BOOL;

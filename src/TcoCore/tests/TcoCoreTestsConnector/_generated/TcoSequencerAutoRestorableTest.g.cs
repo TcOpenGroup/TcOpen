@@ -671,29 +671,14 @@ namespace TcoCoreTests
 			return (System.Boolean)Connector.InvokeRpc(this.Symbol, "IsAutoRestorable", new object[]{});
 		}
 
-		public System.Boolean IsFirstCycle()
+		public System.Boolean IsFirstStepEntry()
 		{
-			return (System.Boolean)Connector.InvokeRpc(this.Symbol, "IsFirstCycle", new object[]{});
-		}
-
-		public System.Boolean IsNewTier()
-		{
-			return (System.Boolean)Connector.InvokeRpc(this.Symbol, "IsNewTier", new object[]{});
+			return (System.Boolean)Connector.InvokeRpc(this.Symbol, "IsFirstStepEntry", new object[]{});
 		}
 
 		public void PLCinstanceRun(System.UInt16 inStepId, System.Boolean inEnabled, System.String inStepDescription)
 		{
 			Connector.InvokeRpc(this.Symbol, "PLCinstanceRun", new object[]{inStepId, inEnabled, inStepDescription});
-		}
-
-		public System.Boolean ProbeIsNewTier()
-		{
-			return (System.Boolean)Connector.InvokeRpc(this.Symbol, "ProbeIsNewTier", new object[]{});
-		}
-
-		public System.Boolean ProbeRealNewTier()
-		{
-			return (System.Boolean)Connector.InvokeRpc(this.Symbol, "ProbeRealNewTier", new object[]{});
 		}
 
 		public void RequestStep(System.Int16 inRequestedStepId)
