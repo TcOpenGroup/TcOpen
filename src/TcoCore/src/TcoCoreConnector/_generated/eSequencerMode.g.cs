@@ -29,9 +29,9 @@ namespace TcoCore
 		CyclicMode = 0,
 		
 ///		<summary>
-///			If step mode is selected, when current step has been finished next step has to be started by calling method StepIn().
+///			If step mode is selected, when current step has been finished next step has to be started by calling method <c>StepIn()</c>.
 ///			<para>
-///				See <see cref="TcoSequencer.StepIn"/> for detailed description.
+///				See <see cref="TcoSequencer.PlcTcoSequencer.StepIn()"/> for detailed description.
 ///			</para>
 ///		</summary>				
 

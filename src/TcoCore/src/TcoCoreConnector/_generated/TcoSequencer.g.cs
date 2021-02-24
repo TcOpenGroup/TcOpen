@@ -321,14 +321,14 @@ namespace TcoCore
 		{
 			
 ///		<summary>
-///			This property allows to set required mode to sequencer.
+///			Allows to set required mode to sequencer.
 ///			Also it returns the actual selected mode.
+///			<remarks>			
+///				<para>
+///					See <see cref="eSequencerMode"/> for detailed description.
+///				</para>
+///			</remarks>		
 ///		</summary>			
-///		<remarks>			
-///			<para>
-///				See <see cref="eSequencerMode"/> for detailed description.
-///			</para>
-///		</remarks>		
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type eSequencerMode; Twin type: <see cref="eSequencerMode"/></returns>
 
@@ -348,8 +348,12 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method performs control of the StepId of the currently executed step.
-///			The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+///			Performs the control of the StepId of the currently executed step.
+///			<remarks>			
+///				<note type="important">
+///					The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+///				</note>
+///			</remarks>			
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<param name="inStepID">
@@ -377,7 +381,12 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method is called at the end of the sequence.
+///			This method is called at the end of the sequence. Implicit calling of this method is ensured by calling the method Run().
+///			<remarks>			
+///				<note type="important">
+///					Do not call this method explicitly.
+///				</note>
+///			</remarks>
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
@@ -390,8 +399,12 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method performs the control of the uniqueness of each StepId in the whole sequence.
-///			The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+///			Performs the control of the uniqueness of each StepId in the whole sequence.
+///			<remarks>			
+///				<note type="important">
+///					The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+///				</note>
+///			</remarks>			
 ///		</summary>				
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<param name="inStepID">
@@ -413,8 +426,8 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end should be ensured by calling the InstanceName.Run() method.
-///			This method is abstract, so each derived type has to implement its own implementation of this method
+///			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end is ensured by calling the InstanceName.Run() method.
+///			This method is abstract, so each derived type has to implement its own implementation of this method.
 ///		</summary>
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type BOOL; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></returns>
@@ -427,7 +440,12 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method ensures that after each download, StepId uniqueness control is going to be performed again 
+///			Ensures that after each download, StepId uniqueness control is going to be performed again. 
+///			<remarks>			
+///				<note type="important">
+///					Do not call this method explicitly.
+///				</note>
+///			</remarks>		
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
@@ -440,7 +458,12 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method is called at the beginning of the sequence.
+///			This method is called at the beginning of the sequence. Implicit calling of this method is ensured by calling the method Run().
+///			<remarks>			
+///				<note type="important">
+///					Do not call this method explicitly.
+///				</note>
+///			</remarks>
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
@@ -479,12 +502,12 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method finish the currently executed step and initiate to start the step with StepId equals to the value of the inRequestedStepID.
+///			Finishes the currently executed step and initiates to start the step with StepId equals to the value of the inRequestedStepID.
 ///			In case that the order of the requested step is higher than the order of the currently finished step (the requested step is "after" the current one)
 ///			the requested step is started in the same PLC cycle.
 ///			In case that the order of the requested step is lower than the order of the currently finished step (the requested step is "before" the current one)
 ///			the requested step is started in the next PLC cycle.
-///			If the requested step is not found even in the next PLC cycle, sequencer returns error StepWithRequestedIdDoesNotExists.
+///			If the requested step is not found even in the next PLC cycle, the sequencer returns the error StepWithRequestedIdDoesNotExists.
 ///			<para>
 ///				See <see cref="eSequencerError"/> for detailed description.
 ///			</para>
@@ -519,6 +542,22 @@ namespace TcoCore
 
 			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
 			public void Reset()
+			{
+				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+			}
+
+			
+///		<summary>
+///			<para>
+///				Ensures calling the Open(), Main() and Close() methods in the desired order.
+///				This method is final, so it cannot be overloaded. The InstanceName.Run() needs to be called cyclically inside the appropriate context.
+///			</para>
+///		</summary>			
+///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
+///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			public void Run()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
 			}
@@ -565,12 +604,20 @@ namespace TcoCore
 
 ///<param name="inEnabled">
 ///<para>Plc type : BOOL [VAR_INPUT]; Twin type : <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></para>
-///<para></para>
+///<para>
+///		<summary>
+///			If this value is false, step body is not executed and execution is moved to the next enabled step.
+///		</summary>				
+///	</para>
 ///</param>
 
 ///<param name="inStepDescription">
 ///<para>Plc type : STRING [VAR_INPUT]; Twin type : <see cref="Vortex.Connector.ValueTypes.OnlinerString"/></para>
-///<para></para>
+///<para>
+///		<summary>
+///			Step description text.
+///		</summary>				
+///	</para>
 ///</param>
 
 ///<returns>Plc type BOOL; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></returns>
@@ -583,7 +630,7 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method triggers StepBackward task, that decrement current step (variable <see cref="TcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), in case the sequencer is in step mode, and the current step is greather than zero.
+///			This method triggers StepBackward task, that decrement current step (variable: <see cref="TcoSequencer.PlcTcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), in case the sequencer is in step mode, and the current step is greather than zero.
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
@@ -620,7 +667,11 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<param name="inCondition">
 ///<para>Plc type : BOOL [VAR_INPUT]; Twin type : <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></para>
-///<para></para>
+///<para>
+///		<summary>
+///			The condition under which the step is completed.
+///		</summary>			
+///	</para>
 ///</param>
 
 ///<returns>Plc type ITcoSequencer; Twin type: <see cref="ITcoSequencer"/></returns>
@@ -633,8 +684,8 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method triggers StepForward task, that increment current step (variable <see cref="TcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), 
-///			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable <see cref="TcoSequencer._numberOfStepsInSequence"/> ).
+///			This method triggers StepForward task, that increment current step (variable: <see cref="TcoSequencer.PlcTcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), 
+///			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <see cref="TcoSequencer.PlcTcoSequencer._numberOfStepsInSequence"/> ).
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
@@ -647,7 +698,7 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+///			Triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
 ///			This causes starting the execution of the body of the current step.
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>

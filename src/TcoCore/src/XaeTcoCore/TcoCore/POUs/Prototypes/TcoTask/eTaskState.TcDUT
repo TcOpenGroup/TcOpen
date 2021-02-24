@@ -1,12 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="eTaskState" Id="{8ea1a889-abc5-49bb-b218-0957533cf8b5}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Describes the state of the respective task.
+		</summary>				
+	</docu>	
+~*)
+{attribute 'qualified_only'}
 {attribute 'strict'}
 TYPE eTaskState :
 (
+(*~
+	<docu>
+		<summary>
+			Task is in Idle state, the Execute() method returns FALSE. 
+			Task can be satrted by calling the Invoke() method. 
+		</summary>				
+	</docu>	
+~*)
 	Idle := 0,
+(*~
+	<docu>
+		<summary>
+			Task is in Request state, if Invoke() method has been called and the Execute() method has not been called yet. 
+			The first following call of the method Execute() change the task state to Executing and returns TRUE, until Done or Error state is reached.
+			Invoking the task is possible from Idle state.
+			Moreover it could be possible also from Done state in the following cases:
+			1.) The Invoke() method was not called in that PLC cycle in which the Done state was reached. 
+			2.) 
+		</summary>				
+	</docu>	
+~*)
 	Request := 10,
+(*~
+	<docu>
+		<summary>
+			When the task is in Executing state, Execute() method returns TRUE. Leaving this state is 
+		</summary>				
+	</docu>	
+~*)
 	Executing := 20,
 	Error := 30,
 	Done := 40
