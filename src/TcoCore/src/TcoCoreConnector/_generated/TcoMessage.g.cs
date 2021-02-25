@@ -105,7 +105,7 @@ namespace TcoCore
 		Vortex.Connector.ValueTypes.OnlinerULInt _Identity;
 		
 ///		<summary>
-///			Identity of the message provider. 
+///			Identity of the TcoObject that posted this message. 
 ///		</summary>				
 
 		[ReadOnly()]
@@ -136,6 +136,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerInt _Category;
+		
+///		<summary>
+///			Message category of this message. See <see cref="eMessageCategory"/> for detailed informations. 
+///		</summary>				
+
 		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eMessageCategory))]
 		public Vortex.Connector.ValueTypes.OnlinerInt Category
 		{
@@ -164,6 +169,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerULInt _Cycle;
+		
+///		<summary>
+///			Number of the PLC cycle in which the message was posted.
+///		</summary>				
+
 		[ReadOnly()]
 		public Vortex.Connector.ValueTypes.OnlinerULInt Cycle
 		{

@@ -9,7 +9,7 @@ namespace TcoCore
 {
 	
 ///		<summary>
-///			Basic construction block encapsulating TcoObjects provides possibility to detect if its child member is called cyclically.
+///			Basic construction container encapsulating TcoObjects, provides possibility to detect if its child member is called cyclically.
 ///			This function block is abstract so it cannot be instantiated and must be extended. The <see cref="TcoContext.PlcTcoContext.Run()"/> of the extended instance must be 
 ///			called only once per plc cycle inside one Twincat PlcTask.
 ///			Several TcoContext instances could be called inside one Twincat PlcTask, but only once per plc cycle. One instance must not be called inside several Twincat PlcTask.
@@ -51,6 +51,12 @@ namespace TcoCore
 
 		protected string _humanReadable;
 		Vortex.Connector.ValueTypes.OnlinerULInt __Identity;
+		
+///		<summary>
+///			The own identity of the TcoContext.
+///			This variable is used in the higher level packages.  
+///		</summary>			
+
 		[RenderIgnore(), ReadOnly()]
 		public Vortex.Connector.ValueTypes.OnlinerULInt _Identity
 		{
@@ -261,7 +267,7 @@ namespace TcoCore
 
 		
 ///		<summary>
-///			Basic construction block encapsulating TcoObjects provides possibility to detect if its child member is called cyclically.
+///			Basic construction container encapsulating TcoObjects, provides possibility to detect if its child member is called cyclically.
 ///			This function block is abstract so it cannot be instantiated and must be extended. The <see cref="TcoContext.PlcTcoContext.Run()"/> of the extended instance must be 
 ///			called only once per plc cycle inside one Twincat PlcTask.
 ///			Several TcoContext instances could be called inside one Twincat PlcTask, but only once per plc cycle. One instance must not be called inside several Twincat PlcTask.
@@ -283,11 +289,7 @@ namespace TcoCore
 		{
 			
 ///		<summary>
-///			<remarks>			
-///				<note type="caution">
-///					Returns reference to the TcoContext to which it belongs to.
-///				</note>
-///			</remarks>			
+///			Returns the reference to this instance of the <see cref="TcoContext.PlcTcoContext()"/>.
 ///		</summary>			
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
@@ -303,7 +305,7 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			Value of this property is set at the end of the <c>TcoContext</c>, in the method <see cref="TcoContext.PlcTcoContext.Close()"/> to the value of <see cref="TcoContext.PlcTcoContext.StartCycleCount"/> property.
+///			Value of this property is set at the end of the <see cref="TcoContext.PlcTcoContext()"/>, in the method <see cref="TcoContext.PlcTcoContext.Close()"/> to the value of <see cref="TcoContext.PlcTcoContext.StartCycleCount"/> property.
 ///		</summary>			
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
@@ -319,12 +321,8 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			<remarks>			
-///				<note type="caution">
-///					Returns the own identity of the TcoContext.
-///					This variable is used in the higher level packages.  
-///				</note>
-///			</remarks>			
+///			Returns the own identity of the <see cref ="TcoContext.PlcTcoContext()"/>. This value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///			This variable is used in the higher level packages.  
 ///		</summary>			
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
@@ -340,7 +338,7 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			Value of this property is incremented at the beginning of the <c>TcoContext</c>, in the method <see cref="TcoContext.PlcTcoContext.Open()"/>.
+///			Value of this property is incremented at the beginning of the <see cref="TcoContext.PlcTcoContext()"/>, in the method <see cref="TcoContext.PlcTcoContext.Open()"/>.
 ///			By comparing this value with the internal values of the child members they are able to determine if they were called in the previous plc cycle. 
 ///			Depending on their settings they could provide AutoRestorable mechanism on themselves or on theirs child members.
 ///		</summary>			

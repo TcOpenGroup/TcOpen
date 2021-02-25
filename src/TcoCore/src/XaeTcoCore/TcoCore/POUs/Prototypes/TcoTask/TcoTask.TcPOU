@@ -124,7 +124,15 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{89ed1df2-40b6-4665-987f-6393770d5c32}">
-      <Declaration><![CDATA[PROPERTY Context : ITcoContext]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the context of the parent object, that this object is assigned to.
+			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{f1e70fbb-551e-45b2-82da-a9b2ed85bad0}">
         <Declaration><![CDATA[VAR
 END_VAR

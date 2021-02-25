@@ -7,6 +7,73 @@ using Vortex.Connector.Identity;
 
 namespace TcoCore
 {
+	
+///		<summary>
+///			Basic construction block from which all the others block except TcoContext are derived. This function block is abstract so it cannot be instantiated and must be extended.
+///			It must be assigned to some TcoContext. Each TcoObject can have only one context. This context is assigned in the declaration part using implicit method <c>FB_init()</c>.
+///			The TcoObject provides this context to all its members, so all objects in the TcoContext has the same context.
+///			<para>
+///				<example>
+///				<note type="Example">
+///				<para>
+///					All the variables _myContext, _ContextTcoObjectA, _ContextTcoObjectB, _ContextChildTcoObject should have all the same value.
+///				</para>
+///				<para>
+///					All the variables _myIdentity, _TcoObjectAidentity, _TcoObjectBidentity, _ChildTcoObjectidentity should have uniques values.
+///				</para>
+///					<code>
+///	//Declaration of the myTcoObject 
+///	FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
+///	VAR
+///		  _myChildTcoObject	:	myChildTcoObject(THIS^);
+///	END_VAR
+///	//Declaration of the myTcoContext 
+///	FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
+///	VAR
+///		  _myTcoObjectA		:	myTcoObject(THIS^);					
+///		  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context); 
+///		  _myContext		:	ITcoContext;
+///		  _ContextTcoObjectA	:	ITcoContext;
+///		  _ContextTcoObjectB	:	ITcoContext;
+///		  _ContextChildTcoObject	:	ITcoContext;
+///		  _myIdentity		:	ULINT;
+///		  _TcoObjectAidentity	: 	ULINT;
+///		  _TcoObjectBidentity	: 	ULINT;
+///		  _ChildTcoObjectidentity	: 	ULINT;							
+///	END_VAR
+///	//Plc code of the myTcoContext 
+///	_myContext		:= 		THIS^.Context;
+///	_ContextTcoObjectA	:=		_myTcoObjectA.Context;
+///	_ContextTcoObjectB	:=		_myTcoObjectB.Context;
+///	_ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
+///	_myIdentity		:=		THIS^.Identity;
+///	_TcoObjectAidentity	:=		_myTcoObjectA.Identity;
+///	_TcoObjectBidentity	:=		_myTcoObjectB.Identity;
+///	_ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
+///					</code>
+///					 <note type="Explanation">
+///						<para>
+///							The context of the myTcoContext instance is assigned to itself. As the _myTcoObjectA context is assigned to this instance of the myTcoContext, it is assigned to the same context,
+///							and the value of the _ContextTcoObjectA will be the same as the value of the _myContext.
+///						</para>					
+///						<para>
+///							The context of the _myTcoObjectB instance is assigned to the _myTcoObjectA, that has already assigned context to this instance of the myTcoContext.
+///							So the value of the _ContextTcoObjectB will be the same as the values of the _ContextTcoObjectA and _myContext.
+///						</para>					
+///						<para>
+///							The context of the _myTcoObjectB._myChildTcoObject instance is assigned to the _myTcoObjectB, that has already assigned context to _myTcoObjectA, 
+///							that has already assigned its context to this instance of the myTcoContext.
+///							So the value of the _ContextChildTcoObject wile be the same as the values _ContextTcoObjectB,_ContextTcoObjectA and _myContext.
+///						</para>
+///						<para>
+///							As the Identities of all objects points to the themselves, all identities will have different values, as all objects are unique.
+///						</para>					
+///					 </note>
+///				 </note>
+///				</example>
+///			</para>
+/// 		</summary>			
+///<seealso cref="PlcTcoObject"/>
 #pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "TcoObject", "TcoCore", TypeComplexityEnum.Complex)]
 	public partial class TcoObject : Vortex.Connector.IVortexObject, ITcoObject, IShadowTcoObject, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
@@ -240,9 +307,127 @@ namespace TcoCore
 			PexConstructorParameterless();
 		}
 
+		
+///		<summary>
+///			Basic construction block from which all the others block except TcoContext are derived. This function block is abstract so it cannot be instantiated and must be extended.
+///			It must be assigned to some TcoContext. Each TcoObject can have only one context. This context is assigned in the declaration part using implicit method <c>FB_init()</c>.
+///			The TcoObject provides this context to all its members, so all objects in the TcoContext has the same context.
+///			<para>
+///				<example>
+///				<note type="Example">
+///				<para>
+///					All the variables _myContext, _ContextTcoObjectA, _ContextTcoObjectB, _ContextChildTcoObject should have all the same value.
+///				</para>
+///				<para>
+///					All the variables _myIdentity, _TcoObjectAidentity, _TcoObjectBidentity, _ChildTcoObjectidentity should have uniques values.
+///				</para>
+///					<code>
+///	//Declaration of the myTcoObject 
+///	FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
+///	VAR
+///		  _myChildTcoObject	:	myChildTcoObject(THIS^);
+///	END_VAR
+///	//Declaration of the myTcoContext 
+///	FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
+///	VAR
+///		  _myTcoObjectA		:	myTcoObject(THIS^);					
+///		  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context); 
+///		  _myContext		:	ITcoContext;
+///		  _ContextTcoObjectA	:	ITcoContext;
+///		  _ContextTcoObjectB	:	ITcoContext;
+///		  _ContextChildTcoObject	:	ITcoContext;
+///		  _myIdentity		:	ULINT;
+///		  _TcoObjectAidentity	: 	ULINT;
+///		  _TcoObjectBidentity	: 	ULINT;
+///		  _ChildTcoObjectidentity	: 	ULINT;							
+///	END_VAR
+///	//Plc code of the myTcoContext 
+///	_myContext		:= 		THIS^.Context;
+///	_ContextTcoObjectA	:=		_myTcoObjectA.Context;
+///	_ContextTcoObjectB	:=		_myTcoObjectB.Context;
+///	_ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
+///	_myIdentity		:=		THIS^.Identity;
+///	_TcoObjectAidentity	:=		_myTcoObjectA.Identity;
+///	_TcoObjectBidentity	:=		_myTcoObjectB.Identity;
+///	_ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
+///					</code>
+///					 <note type="Explanation">
+///						<para>
+///							The context of the myTcoContext instance is assigned to itself. As the _myTcoObjectA context is assigned to this instance of the myTcoContext, it is assigned to the same context,
+///							and the value of the _ContextTcoObjectA will be the same as the value of the _myContext.
+///						</para>					
+///						<para>
+///							The context of the _myTcoObjectB instance is assigned to the _myTcoObjectA, that has already assigned context to this instance of the myTcoContext.
+///							So the value of the _ContextTcoObjectB will be the same as the values of the _ContextTcoObjectA and _myContext.
+///						</para>					
+///						<para>
+///							The context of the _myTcoObjectB._myChildTcoObject instance is assigned to the _myTcoObjectB, that has already assigned context to _myTcoObjectA, 
+///							that has already assigned its context to this instance of the myTcoContext.
+///							So the value of the _ContextChildTcoObject wile be the same as the values _ContextTcoObjectB,_ContextTcoObjectA and _myContext.
+///						</para>
+///						<para>
+///							As the Identities of all objects points to the themselves, all identities will have different values, as all objects are unique.
+///						</para>					
+///					 </note>
+///				 </note>
+///				</example>
+///			</para>
+/// 		</summary>			
+
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoObject
 		{
+			
+///		<summary>
+///			Returns the context of the parent object, that this object is assigned to.
+///			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			public dynamic Context
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			Returns the own identity of the <see cref ="TcoObject.PlcTcoObject()"/>. This value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///			This variable is used in the higher level packages.  
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			public dynamic Identity
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///			<summary>
+///				Returns current messenger that is part of this object.
+///				See <see cref="TcoMessenger.PlcTcoMessenger()"/> for more details.
+///			</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ITcoMessenger; Twin type: <see cref="ITcoMessenger"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			public dynamic Messenger
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoObject()
 			{

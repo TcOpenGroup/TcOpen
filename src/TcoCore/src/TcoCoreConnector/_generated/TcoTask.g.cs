@@ -89,6 +89,23 @@ namespace TcoCore
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoTask : TcoCore.TcoObject.PlcTcoObject
 		{
+			
+///		<summary>
+///			Returns the context of the parent object, that this object is assigned to.
+///			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			public dynamic Context
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoTask()
 			{

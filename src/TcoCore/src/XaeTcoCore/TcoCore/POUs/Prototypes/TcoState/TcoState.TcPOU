@@ -146,7 +146,15 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{8da19f4d-3318-4817-a4d5-6aa094e367e9}">
-      <Declaration><![CDATA[PROPERTY Context : ITcoContext]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the context of the parent object, that this object is assigned to.
+			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{11383faf-e461-45e4-9174-77cffa93662f}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -185,7 +193,15 @@ CheckIfAutoRestoreEnabledByParent();
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{c46c20f0-abc3-443d-aff6-2491bd671e91}">
-      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the own identity of the <see cref ="TcoState.PlcTcoState()"/>. This value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level packages.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{482264ad-71c6-4062-87a6-0e6e15884bb1}">
         <Declaration><![CDATA[VAR
 END_VAR

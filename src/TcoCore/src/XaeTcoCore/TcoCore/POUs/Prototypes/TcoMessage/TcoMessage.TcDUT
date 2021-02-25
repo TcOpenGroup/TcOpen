@@ -31,13 +31,27 @@ STRUCT
 (*~
 	<docu>
 		<summary>
-			Identity of the message provider. 
+			Identity of the TcoObject that posted this message. 
 		</summary>				
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}	
 	Identity : ULINT;	
+(*~
+	<docu>
+		<summary>
+			Message category of this message. See <see cref="eMessageCategory"/> for detailed informations. 
+		</summary>				
+	</docu>	
+~*)
 	Category : eMessageCategory;
+(*~
+	<docu>
+		<summary>
+			Number of the PLC cycle in which the message was posted.
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}
 	Cycle : ULINT;
 END_STRUCT
