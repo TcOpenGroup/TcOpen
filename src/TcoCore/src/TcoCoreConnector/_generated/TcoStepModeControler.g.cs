@@ -128,6 +128,22 @@ namespace TcoCore
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoStepModeControler : TcoCore.TcoState.PlcTcoState
 		{
+			
+///		<summary>
+///			Provides access to the mode of the sequencer. 
+///		</summary>		
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type eSequencerMode; Twin type: <see cref="eSequencerMode"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			public dynamic Mode
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoStepModeControler()
 			{

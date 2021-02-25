@@ -58,7 +58,7 @@ namespace TcoCore
 ///		</summary>				
 ///		<remarks>			
 ///			<para>
-///				See <see cref="TcoSequencer._sequencerErrorId"/> for detailed description.
+///				See <see cref="TcoSequencer.PlcTcoSequencer._sequencerErrorId"/> for detailed description.
 ///			</para>
 ///		</remarks>	
 
@@ -630,7 +630,7 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method triggers StepBackward task, that decrement current step (variable: <see cref="TcoSequencer.PlcTcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), in case the sequencer is in step mode, and the current step is greather than zero.
+///			This method triggers StepBackward task, that decrement current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
@@ -684,8 +684,8 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			This method triggers StepForward task, that increment current step (variable: <see cref="TcoSequencer.PlcTcoSequencer._theOrderOfTheCurrentlyExecutedStep"/> ), 
-///			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <see cref="TcoSequencer.PlcTcoSequencer._numberOfStepsInSequence"/> ).
+///			This method triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), 
+///			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <c>TcoSequencer._numberOfStepsInSequence</c> ).
 ///		</summary>			
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>

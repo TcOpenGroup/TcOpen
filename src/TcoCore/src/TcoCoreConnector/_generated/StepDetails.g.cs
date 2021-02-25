@@ -46,7 +46,7 @@ namespace TcoCore
 ///				This number must be unique throughout the complete sequence as it is used as identificator in case of jumping to the required step.
 ///			</note>
 ///			<para>
-///				The <see cref="TcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+///				The <see cref="TcoSequencer.PlcTcoSequencer.RequestStep"/> method is using this number to jump to the required step.
 ///			</para>
 ///		</remarks>
 

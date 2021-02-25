@@ -1,12 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
-    <Declaration><![CDATA[TYPE TcoMessage :
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Complete message details including time stamp, message text, message category, identity of the message provider, PLC cycle in which the message was posted.
+		</summary>				
+	</docu>	
+~*)
+TYPE TcoMessage :
 STRUCT
+(*~
+	<docu>
+		<summary>
+			Time when the message was posted.
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}
 	TimeStamp : DT;
+(*~
+	<docu>
+		<summary>
+			Text of the message.
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}		
 	Text : STRING(255);
+(*~
+	<docu>
+		<summary>
+			Identity of the message provider. 
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}	
 	Identity : ULINT;	
 	Category : eMessageCategory;

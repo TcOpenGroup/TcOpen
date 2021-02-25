@@ -4,11 +4,10 @@
     <Declaration><![CDATA[{attribute 'initialize_on_call'}
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
 VAR
+	{attribute 'hide'}
 	_taskState : eTaskState;
-	{attribute clr [RenderIgnore()]}
-	{attribute clr [ReadOnly()]}
+	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
-	_messenger : TcoMessenger(THIS^);
 	{attribute 'hide'}
 	_AutoRestorable : BOOL;
 	{attribute 'hide'}
@@ -136,8 +135,7 @@ END_VAR
       </Get>
     </Property>
     <Property Name="Done" Id="{e3ea205b-eb06-42b9-b3d8-63efd5ed6521}">
-      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
-PROPERTY Done : BOOL]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -240,17 +238,6 @@ Invoke := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Messenger" Id="{36d45dc2-ab29-470b-aad4-0c94c377063f}">
-      <Declaration><![CDATA[PROPERTY Messenger : ITcoMessenger]]></Declaration>
-      <Get Name="Get" Id="{f3e7fc70-cd2c-46ec-8f82-c407d1175c48}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="Restore" Id="{afacd00c-5569-431f-be3c-22a90381057d}">
       <Declaration><![CDATA[METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

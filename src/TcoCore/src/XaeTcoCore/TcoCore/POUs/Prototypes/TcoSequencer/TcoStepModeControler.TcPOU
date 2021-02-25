@@ -24,7 +24,14 @@ END_VAR]]></Declaration>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Mode" Id="{8d4cb1af-ba19-0bb8-1400-30d988d71fba}">
-      <Declaration><![CDATA[PROPERTY Mode : eSequencerMode]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides access to the mode of the sequencer. 
+		</summary>		
+	</docu>	
+~*)	
+PROPERTY Mode : eSequencerMode]]></Declaration>
       <Get Name="Get" Id="{895df049-a71d-0d24-2a10-6f8bfd7b53fa}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>

@@ -8,6 +8,8 @@ VAR
 	_Identity : ULINT;
 	{attribute 'hide'}
 	_Parent : ITcoObject;
+	{attribute 'hide'}
+	_messenger : TcoMessenger(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -51,20 +53,16 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="TcoObject">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject.Context.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject.FB_init">
-      <LineId Id="33" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="13" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject.Identity.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
+    <Property Name="Messenger" Id="{5cb47c0d-a801-0abb-190e-5e933bdfa487}">
+      <Declaration><![CDATA[PROPERTY Messenger : ITcoMessenger]]></Declaration>
+      <Get Name="Get" Id="{65916f0c-0b34-091f-0006-4929987a0f6b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

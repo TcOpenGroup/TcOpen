@@ -7,6 +7,11 @@ using Vortex.Connector.Identity;
 
 namespace TcoCore
 {
+	
+///		<summary>
+///			Complete message details including time stamp, message text, message category, identity of the message provider, PLC cycle in which the message was posted.
+///		</summary>				
+///<seealso cref="PlcTcoMessage"/>
 #pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "TcoMessage", "TcoCore", TypeComplexityEnum.Complex)]
 	public partial class TcoMessage : Vortex.Connector.IVortexObject, ITcoMessage, IShadowTcoMessage, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
@@ -32,6 +37,11 @@ namespace TcoCore
 
 		protected string _humanReadable;
 		Vortex.Connector.ValueTypes.OnlinerDateTime _TimeStamp;
+		
+///		<summary>
+///			Time when the message was posted.
+///		</summary>				
+
 		[ReadOnly()]
 		public Vortex.Connector.ValueTypes.OnlinerDateTime TimeStamp
 		{
@@ -60,6 +70,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerString _Text;
+		
+///		<summary>
+///			Text of the message.
+///		</summary>				
+
 		[ReadOnly()]
 		public Vortex.Connector.ValueTypes.OnlinerString Text
 		{
@@ -88,6 +103,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerULInt _Identity;
+		
+///		<summary>
+///			Identity of the message provider. 
+///		</summary>				
+
 		[ReadOnly()]
 		public Vortex.Connector.ValueTypes.OnlinerULInt Identity
 		{
@@ -370,6 +390,11 @@ namespace TcoCore
 			AttributeName = "";
 			PexConstructorParameterless();
 		}
+
+		
+///		<summary>
+///			Complete message details including time stamp, message text, message category, identity of the message provider, PLC cycle in which the message was posted.
+///		</summary>				
 
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoMessage
