@@ -7,10 +7,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/TcOpenGroup/tc.prober</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TcOpenGroup/tc.prober</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>0.3.0.0</AssemblyVersion>
-    <FileVersion>0.3.0.0</FileVersion>
-    <InformationalVersion>0.3.0-alpha.1+Branch.develop.Sha.02a3c846fa59432b34737d664bc33a8546fd145a</InformationalVersion>
+    <RepositoryType>git</RepositoryType>   
     <PackageVersion>$(InformationalVersion)</PackageVersion>
     <Version>$(InformationalVersion)</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -18,6 +15,7 @@
     <Copyright>TcOpenGroup contributors</Copyright>
     <PackageIcon>TcOpenLogo128.png</PackageIcon>
     <PackageTags>twincat3 plc unit-testing</PackageTags>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.2-preview.2" />
