@@ -321,33 +321,6 @@ namespace TcoCore
 		{
 			
 ///		<summary>
-///			Allows to set required mode to sequencer.
-///			Also it returns the actual selected mode.
-///			<remarks>			
-///				<para>
-///					See <see cref="eSequencerMode"/> for detailed description.
-///				</para>
-///			</remarks>		
-///		</summary>			
-///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
-///<returns>Plc type eSequencerMode; Twin type: <see cref="eSequencerMode"/></returns>
-
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
-			public dynamic Mode
-			{
-				get
-				{
-					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
-				}
-			}
-
-			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
-			protected PlcTcoSequencer()
-			{
-			}
-
-			
-///		<summary>
 ///			Performs the control of the StepId of the currently executed step.
 ///			<remarks>			
 ///				<note type="important">
@@ -373,7 +346,7 @@ namespace TcoCore
 
 ///<returns>Plc type BOOL; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			private dynamic CheckStepId(dynamic inStepID, dynamic inStepModeActive, dynamic inStepInRunning)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -391,7 +364,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			protected void Close()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -418,7 +391,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			private void IsStepIdUnique(dynamic inStepID)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -432,7 +405,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type BOOL; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Main()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -450,7 +423,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			internal void OnlineChange()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -468,7 +441,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			protected void Open()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -481,7 +454,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void PostSequenceComplete()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -494,7 +467,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void PostStepComplete()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -524,7 +497,7 @@ namespace TcoCore
 
 ///<returns>Plc type ITcoSequencer; Twin type: <see cref="ITcoSequencer"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic RequestStep(dynamic inRequestedStepID)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -540,7 +513,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Reset()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -556,7 +529,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Run()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -572,7 +545,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void SequenceComplete()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -622,7 +595,7 @@ namespace TcoCore
 
 ///<returns>Plc type BOOL; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerBool"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Step(dynamic inStepID, dynamic inEnabled, dynamic inStepDescription)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -635,7 +608,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void StepBackward()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -653,7 +626,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			private void StepChanged(dynamic newState)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -676,7 +649,7 @@ namespace TcoCore
 
 ///<returns>Plc type ITcoSequencer; Twin type: <see cref="ITcoSequencer"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic StepCompleteWhen(dynamic inCondition)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -690,7 +663,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void StepForward()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -704,10 +677,96 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void StepIn()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+			}
+
+			
+///		<summary>
+///			Allows to set required mode to sequencer.
+///			Also it returns the actual selected mode.
+///			<remarks>			
+///				<para>
+///					See <see cref="eSequencerMode"/> for detailed description.
+///				</para>
+///			</remarks>		
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type eSequencerMode; Twin type: <see cref="eSequencerMode"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic Mode
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			Holds the status and internal variables of the current step.
+///		</summary>			
+///		<remarks>			
+///			<para>
+///				See <see cref="StepDetails"/> for detailed description.
+///			</para>
+///		</remarks>		
+
+			public PlainStepDetails _currentStep;
+			
+///		<summary>
+///			True if an error occurs in the sequence. Detailed cause of this error is described by the _sequencerErrorId.		
+///		</summary>				
+///		<remarks>			
+///			<para>
+///				See <see cref="TcoSequencer.PlcTcoSequencer._sequencerErrorId"/> for detailed description.
+///			</para>
+///		</remarks>	
+
+			public object _sequencerHasError;
+			
+///		<summary>
+///			Describes cause of the sequencer error.
+///		</summary>		
+///		<remarks>			
+///			<para>
+///				See <see cref="eSequencerError"/> for detailed description.
+///			</para>
+///		</remarks>			
+
+			public System.Int16 _sequencerErrorId;
+			public object _isFirstStepEntry;
+			public object _theOrderOfTheCurrentlyEvaluatedStep;
+			public object _theOrderOfTheCurrentlyExecutedStep;
+			public object _theOrderOfThePreviouslyExecutedStep;
+			public object _IdOfThePreviouslyExecutedStep;
+			public object _numberOfStepsInSequence;
+			public object _previousNumberOfStepsInSequence;
+			public object _stepCounter;
+			public object _requestStepActive;
+			public object _requestedStepId;
+			public object _cycleTimer;
+			public object _StepTimer;
+			public object _SequenceElapsedTime;
+			public object _StepElapsedTime;
+			public object _LastCycleTime;
+			public object _requestStepCycle;
+			public object _StepIdChanged;
+			public object _StepOrderChanged;
+			public object _ChangeStepIdFrom;
+			public object _ChangeStepIdTo;
+			public object _ChangeStepOrderFrom;
+			public object _ChangeStepOrderTo;
+			public object _stepIdUniquenessChecked;
+			public object _pPreviusSteps;
+			public object _stepModeControler;
+			public object _checkStepIdRequestedInStepMode;
+			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
+			protected PlcTcoSequencer()
+			{
 			}
 		}
 	}

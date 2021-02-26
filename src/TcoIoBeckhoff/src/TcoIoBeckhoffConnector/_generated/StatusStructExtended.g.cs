@@ -210,6 +210,31 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcStatusStructExtended
 		{
+			public object Enabled;
+			public object Tripped;
+			public object ShortCircuit;
+			public object Overload;
+			public object HWProtection;
+			public object Overvoltage;
+			public object Undervoltage;
+			public object CurrentLevelWarning;
+			public object CoolDownLock;
+			public object DisabledBySwitch;
+			public object DisabledByDI;
+			public object DisabledByOutput;
+			public object Diag;
+			public object TxPDOState;
+			public object InputCycleCount;
+			public object InputCycleCount2;
+			public object StateDeviceSwitch;
+			public object StateDigitalInput;
+			public object Error;
+			public object StateReset;
+			public object StateSwitch;
+			public object _hidden_bit_0;
+			public object _hidden_bit_1;
+			public object _hidden_bit_2;
+			public object _hidden_byte_0;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcStatusStructExtended()
 			{

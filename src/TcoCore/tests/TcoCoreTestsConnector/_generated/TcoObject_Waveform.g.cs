@@ -504,6 +504,18 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoObject_Waveform
 		{
+			public object _TcoTask_Waveform;
+			public object _TcoState_Waveform;
+			public PlainTcoState_WaveformSequence _TcoState_WaveformSequence_1;
+			public PlainTcoState_WaveformSequence _TcoState_WaveformSequence_2;
+			public object _Value1;
+			public object _Value2;
+			public object _Value;
+			public object _X;
+			public object _PlcCycleOffset;
+			public object _PlcCycle;
+			public object _Reset;
+			public object _Start;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoObject_Waveform()
 			{

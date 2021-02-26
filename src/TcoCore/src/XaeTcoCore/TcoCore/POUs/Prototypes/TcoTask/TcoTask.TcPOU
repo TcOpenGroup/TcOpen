@@ -4,7 +4,7 @@
     <Declaration><![CDATA[{attribute 'initialize_on_call'}
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
 VAR
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_taskState : eTaskState;
 	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
@@ -56,7 +56,7 @@ END_VAR
 IF _AutoRestorable THEN		
 	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
-		_MyParent_LastChangeState := _MyParent_TcoState.LastChangeState;
+		_MyParent_LastChangeState := _MyParent_TcoState.LastChangedState;
 	END_IF;	
 	//If OnStateChange event of the parent has occured, the value of the parent's 
 	//StartCycleCount property is stored into its ChangeStateCycle property.
@@ -128,7 +128,7 @@ END_IF]]></ST>
 	<docu>
 		<summary>
 			Returns the context of the parent object, that this object is assigned to.
-			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 		</summary>			
 	</docu>	
 ~*)
@@ -218,7 +218,15 @@ CheckIfAutoRestoreEnabledByParent();
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{50d5c151-1536-4b27-8f6d-91815baa7c03}">
-      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the own identity of the <see cref ="TcoTask.PlcTcoTask()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level packages.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{e2f8cd07-a32b-4fb0-9e11-15ca2337a4d7}">
         <Declaration><![CDATA[VAR
 END_VAR

@@ -286,6 +286,8 @@ namespace TcoPneumaticsTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcIO
 		{
+			public object A1;
+			public object A2;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcIO()
 			{

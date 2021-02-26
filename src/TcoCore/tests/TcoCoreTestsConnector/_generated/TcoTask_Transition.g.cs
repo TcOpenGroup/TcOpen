@@ -590,6 +590,20 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoTask_Transition
 		{
+			public System.Int16 _TransitionType;
+			public object _k0;
+			public object _StartValue;
+			public object _TargetValue;
+			public object _Elapsed;
+			public object _TransitionDuration;
+			public object _t0;
+			public object _x0;
+			public object _k1;
+			public object _k2;
+			public object _k3;
+			public object _k4;
+			public object _ImmediateChange;
+			public object Value;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoTask_Transition()
 			{

@@ -558,6 +558,19 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class Plc_TcoSequencer
 		{
+			public object _RunOneStep;
+			public object _RunAllSteps;
+			public object _FinishStep;
+			public object _ID;
+			public object _Enabled;
+			public object _StepDescription;
+			public object _currentStepId;
+			public object _currentStepOrder;
+			public object _currentStepEnabled;
+			public object _currentStepDescription;
+			public object _currentStepStatus;
+			public object _currentStepDuration;
+			public object _TcoState;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected Plc_TcoSequencer()
 			{

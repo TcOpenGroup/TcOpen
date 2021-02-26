@@ -289,78 +289,6 @@ namespace TcoCore
 		{
 			
 ///		<summary>
-///			Returns the reference to this instance of the <see cref="TcoContext.PlcTcoContext()"/>.
-///		</summary>			
-///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
-///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
-
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
-			public dynamic Context
-			{
-				get
-				{
-					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
-				}
-			}
-
-			
-///		<summary>
-///			Value of this property is set at the end of the <see cref="TcoContext.PlcTcoContext()"/>, in the method <see cref="TcoContext.PlcTcoContext.Close()"/> to the value of <see cref="TcoContext.PlcTcoContext.StartCycleCount"/> property.
-///		</summary>			
-///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
-///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
-
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
-			public dynamic EndCycleCount
-			{
-				get
-				{
-					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
-				}
-			}
-
-			
-///		<summary>
-///			Returns the own identity of the <see cref ="TcoContext.PlcTcoContext()"/>. This value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
-///			This variable is used in the higher level packages.  
-///		</summary>			
-///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
-///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
-
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
-			public dynamic Identity
-			{
-				get
-				{
-					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
-				}
-			}
-
-			
-///		<summary>
-///			Value of this property is incremented at the beginning of the <see cref="TcoContext.PlcTcoContext()"/>, in the method <see cref="TcoContext.PlcTcoContext.Open()"/>.
-///			By comparing this value with the internal values of the child members they are able to determine if they were called in the previous plc cycle. 
-///			Depending on their settings they could provide AutoRestorable mechanism on themselves or on theirs child members.
-///		</summary>			
-///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
-///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
-
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
-			public dynamic StartCycleCount
-			{
-				get
-				{
-					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
-				}
-			}
-
-			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
-			protected PlcTcoContext()
-			{
-			}
-
-			
-///		<summary>
 ///			This method is called at the end of the TcoContext. Implicit calling of this method is ensured by calling the method <see cref="TcoContext.PlcTcoContext.Run()"/>.
 ///			<remarks>			
 ///				<note type="important">
@@ -371,7 +299,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			protected void Close()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -386,7 +314,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			protected void Main()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -404,7 +332,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			protected void Open()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -420,10 +348,92 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Run()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+			}
+
+			
+///		<summary>
+///			Returns the reference to this instance of the <see cref="TcoContext.PlcTcoContext()"/>.
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic Context
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			Value of this property is set at the end of the <see cref="TcoContext.PlcTcoContext()"/>, in the method <see cref="TcoContext.PlcTcoContext.Close()"/> to the value of <see cref="TcoContext.PlcTcoContext.StartCycleCount"/> property.
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic EndCycleCount
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			Returns the own identity of the <see cref ="TcoContext.PlcTcoContext()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///			This variable is used in the higher level packages.  
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic Identity
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			Value of this property is incremented at the beginning of the <see cref="TcoContext.PlcTcoContext()"/>, in the method <see cref="TcoContext.PlcTcoContext.Open()"/>.
+///			By comparing this value with the internal values of the child members they are able to determine if they were called in the previous plc cycle. 
+///			Depending on their settings they could provide AutoRestorable mechanism on themselves or on theirs child members.
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic StartCycleCount
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			The own identity of the TcoContext.
+///			This variable is used in the higher level packages.  
+///		</summary>			
+
+			public object _Identity;
+			public object _startCycleCount;
+			public object _endCycleCount;
+			public object _Messenger;
+			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
+			protected PlcTcoContext()
+			{
 			}
 		}
 	}

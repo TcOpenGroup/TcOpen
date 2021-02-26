@@ -285,11 +285,6 @@ namespace TcoCore
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoMessenger
 		{
-			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
-			protected PlcTcoMessenger()
-			{
-			}
-
 			
 ///			<summary>
 ///				Adds message of 'debug' category to the message queue.				 
@@ -306,7 +301,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Debug(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -328,7 +323,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Error(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -350,7 +345,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Info(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -372,7 +367,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Notify(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -404,7 +399,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Post(dynamic Message, dynamic Category)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -426,7 +421,7 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Programming(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -448,7 +443,7 @@ namespace TcoCore
 
 ///<returns>Plc type INT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerInt"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Trace(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -470,10 +465,23 @@ namespace TcoCore
 
 ///<returns>Plc type VOID; Twin type: <see cref="void"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public void Warning(dynamic Message)
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+			}
+
+			
+///			<summary>
+///				Most important message of this instance of messenger.			 
+///			</summary>			
+
+			public PlainTcoMessage _mime;
+			public object _Parent;
+			public object _contextIdentity;
+			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
+			protected PlcTcoMessenger()
+			{
 			}
 		}
 	}

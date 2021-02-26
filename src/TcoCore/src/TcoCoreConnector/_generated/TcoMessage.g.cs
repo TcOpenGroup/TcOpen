@@ -409,6 +409,36 @@ namespace TcoCore
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoMessage
 		{
+			
+///		<summary>
+///			Time when the message was posted.
+///		</summary>				
+
+			public object TimeStamp;
+			
+///		<summary>
+///			Text of the message.
+///		</summary>				
+
+			public object Text;
+			
+///		<summary>
+///			Identity of the TcoObject that posted this message. 
+///		</summary>				
+
+			public object Identity;
+			
+///		<summary>
+///			Message category of this message. See <see cref="eMessageCategory"/> for detailed informations. 
+///		</summary>				
+
+			public System.Int16 Category;
+			
+///		<summary>
+///			Number of the PLC cycle in which the message was posted.
+///		</summary>				
+
+			public object Cycle;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoMessage()
 			{

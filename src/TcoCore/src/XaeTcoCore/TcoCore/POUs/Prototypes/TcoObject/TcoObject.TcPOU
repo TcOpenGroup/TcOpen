@@ -92,7 +92,7 @@ END_VAR
 	<docu>
 		<summary>
 			Returns the context of the parent object, that this object is assigned to.
-			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 		</summary>			
 	</docu>	
 ~*)
@@ -126,7 +126,7 @@ _Parent := Parent;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the own identity of the <see cref ="TcoObject.PlcTcoObject()"/>. This value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			Returns the own identity of the <see cref ="TcoObject.PlcTcoObject()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			This variable is used in the higher level packages.  
 		</summary>			
 	</docu>	

@@ -359,6 +359,12 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoContext_App_2
 		{
+			public object ResetToZero;
+			public object C1;
+			public object C2;
+			public PlainTcoObject_Counter TcoObject_Counter_1;
+			public PlainTcoObject_Counter TcoObject_Counter_2;
+			public object TcoState_1;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoContext_App_2()
 			{

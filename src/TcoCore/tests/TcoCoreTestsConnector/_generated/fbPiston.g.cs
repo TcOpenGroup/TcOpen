@@ -267,6 +267,12 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbPiston : TcoCore.TcoComponent.PlcTcoComponent
 		{
+			public object iHomePositionSensor;
+			public object iWorkPositionSensor;
+			public object qHomePositionActuator;
+			public object qWorkPositionActuator;
+			public PlainfbPistonMoveTask _moveHomeTask;
+			public PlainfbPistonMoveTask _moveWorkTask;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbPiston()
 			{

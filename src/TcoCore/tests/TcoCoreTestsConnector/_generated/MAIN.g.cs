@@ -365,6 +365,11 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcMAIN
 		{
+			public PlainTcoContext_Waveform _TcoContext_Waveform;
+			public PlainTcoContextTest _TcoContextTest_A;
+			public PlainTcoContextTest _TcoContextTest_B;
+			public PlainTcoSequencerAutoRestorableTest _TcoSequencerAutoRestorableTest;
+			public PlainTcoSequencerNonAutoRestorableTest _TcoSequencerNonAutoRestorableTest;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcMAIN()
 			{

@@ -761,6 +761,31 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoObject_Counter
 		{
+			public object CounterValue;
+			public object UpperLimit;
+			public object LowerLimit;
+			public object TcoTask_CountUp;
+			public object TcoTask_CountDown;
+			public object TcoTask_ResetToZero;
+			public object CountUp_InvokeTrigCounter;
+			public object CountUp_DoneTrigCounter;
+			public object CountDown_InvokeTrigCounter;
+			public object CountDown_DoneTrigCounter;
+			public object ResetToZero_InvokeTrigCounter;
+			public object ResetToZero_DoneTrigCounter;
+			public object CountUp_PreviousState;
+			public object CountDown_PreviousState;
+			public object ResetToZero_PreviousState;
+			public object CountUp_Execute;
+			public object CountDown_Execute;
+			public object ResetToZero_Execute;
+			public object CountUp_Busy;
+			public object CountDown_Busy;
+			public object ResetToZero_Busy;
+			public object CountUp_Done;
+			public object CountDown_Done;
+			public object ResetToZero_Done;
+			public object Cycle;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoObject_Counter()
 			{

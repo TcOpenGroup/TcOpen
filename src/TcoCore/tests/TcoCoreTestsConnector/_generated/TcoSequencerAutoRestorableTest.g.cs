@@ -784,6 +784,19 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoSequencerAutoRestorableTest
 		{
+			public Plain_TcoSequencer _Sequencer;
+			public object _RunPLCinstanceOnce;
+			public object _RunPLCinstanceCyclicaly;
+			public object _StepID;
+			public object _Enabled;
+			public object _StepDescription;
+			public object _RunOneStep;
+			public object _RunAllSteps;
+			public object _FinishStep;
+			public object _Reset;
+			public object _CycleCount;
+			public object _ResetCycleCount;
+			public object _Init;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoSequencerAutoRestorableTest()
 			{

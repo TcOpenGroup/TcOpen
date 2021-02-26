@@ -356,11 +356,6 @@ namespace TcoPneumatics
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbCylinder : TcoCore.TcoComponent.PlcTcoComponent
 		{
-			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
-			protected PlcfbCylinder()
-			{
-			}
-
 			
 ///		<summary>
 ///			Moves the piston into home position.
@@ -369,7 +364,7 @@ namespace TcoPneumatics
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type ITcoTask; Twin type: <see cref="ITcoTask"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic MoveToHome()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
@@ -383,10 +378,42 @@ namespace TcoPneumatics
 ///<summary><note type="note">This is PLC method. This method is invokable only from the PLC code.</note></summary>
 ///<returns>Plc type ITcoTask; Twin type: <see cref="ITcoTask"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic MoveToWork()
 			{
 				throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+			}
+
+			
+///			<summary>
+///				Home position sensor.
+///			</summary>	
+
+			public object inAtHomePos;
+			
+///			<summary>
+///				Working position sensor.
+///			</summary>	
+
+			public object inAtWorkPos;
+			
+///			<summary>
+///				Move to working home position signal.
+///			</summary>	
+
+			public object outToHomePos;
+			
+///			<summary>
+///				Move to working posistion signal.
+///			</summary>	
+
+			public object outToWorkPos;
+			public TcoCore.PlainTcoTask _moveHomeTask;
+			public TcoCore.PlainTcoTask _moveWorkTask;
+			public TcoCore.PlainTcoTask _stopTask;
+			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
+			protected PlcfbCylinder()
+			{
 			}
 		}
 	}

@@ -453,6 +453,56 @@ namespace TcoCore
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcStepDetails
 		{
+			
+///		<summary>
+///			Step identification number.
+///		</summary>	
+///		<remarks>			
+/// 			<note type="important">
+///				This number must be unique throughout the complete sequence as it is used as identificator in case of jumping to the required step.
+///			</note>
+///			<para>
+///				The <see cref="TcoSequencer.PlcTcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+///			</para>
+///		</remarks>
+
+			public object ID;
+			
+///		<summary>
+///			Order of the step in the sequence.
+///		</summary>	
+
+			public object Order;
+			
+///		<summary>
+///			If this value is false, step body is not executed and execution is moved to the next enabled step.
+///		</summary>				
+
+			public object Enabled;
+			
+///		<summary>
+///			Step description text.
+///		</summary>				
+
+			public object Description;
+			
+///		<summary>
+///			Describes step status.
+///		</summary>				
+///		<remarks>			
+///			<para>
+///				See <see cref="eStepStatus"/> for detailed description.
+///			</para>
+///		</remarks>		
+///		enumStepStatus
+
+			public System.Int16 Status;
+			
+///		<summary>
+///			Step duration time.
+///		</summary>				
+
+			public object Duration;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcStepDetails()
 			{

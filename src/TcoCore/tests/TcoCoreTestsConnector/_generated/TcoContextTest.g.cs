@@ -442,6 +442,13 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoContextTest
 		{
+			public object _CallMyPlcInstance;
+			public object _startCycles;
+			public object _endCycles;
+			public object _mainCycles;
+			public PlainTcoObjectTest _TcoObjectTest_A;
+			public PlainTcoObjectTest _TcoObjectTest_B;
+			public object _MyIdentity;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoContextTest()
 			{

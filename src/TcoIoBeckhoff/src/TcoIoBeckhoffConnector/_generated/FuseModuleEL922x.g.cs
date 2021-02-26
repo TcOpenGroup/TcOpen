@@ -210,6 +210,10 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcFuseModuleEL922x
 		{
+			public object _chn1Basic;
+			public object _chn2Basic;
+			public object _chn1Extended;
+			public object _chn2Extended;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcFuseModuleEL922x()
 			{

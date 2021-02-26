@@ -210,6 +210,22 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcAI_ChannelStatus
 		{
+			public object UnderRange;
+			public object OverRange;
+			public object Limit_1_Greater;
+			public object Limit_1_Smaller;
+			public object Limit_2_Greater;
+			public object Limit_2_Smaller;
+			public object Error;
+			public object Reserved_1_7;
+			public object Reserved_2_0;
+			public object Reserved_2_1;
+			public object Reserved_2_2;
+			public object Reserved_2_3;
+			public object Reserved_2_4;
+			public object Reserved_2_5;
+			public object TxPdoState;
+			public object TxPdoToggle;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcAI_ChannelStatus()
 			{

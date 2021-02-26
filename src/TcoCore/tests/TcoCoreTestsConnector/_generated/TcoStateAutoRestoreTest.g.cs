@@ -433,6 +433,13 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoStateAutoRestoreTest
 		{
+			public object _MyState;
+			public object _OnStateChangeCounter;
+			public object _RestoreCounter;
+			public object _AutoRestoreToMyChildsEnabled;
+			public object _AutoRestoreByMyParentEnabled;
+			public object _CountsPerStep;
+			public object _CounterValue;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoStateAutoRestoreTest()
 			{

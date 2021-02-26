@@ -241,6 +241,7 @@ namespace PlcTcProberTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcMAIN
 		{
+			public PlainfbInheritanceLevel_5 InheritanceRw;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcMAIN()
 			{

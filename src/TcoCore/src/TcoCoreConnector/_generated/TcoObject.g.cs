@@ -380,12 +380,12 @@ namespace TcoCore
 			
 ///		<summary>
 ///			Returns the context of the parent object, that this object is assigned to.
-///			This context is given by declaration, its value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 ///		</summary>			
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Context
 			{
 				get
@@ -396,13 +396,13 @@ namespace TcoCore
 
 			
 ///		<summary>
-///			Returns the own identity of the <see cref ="TcoObject.PlcTcoObject()"/>. This value is assiged after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///			Returns the own identity of the <see cref ="TcoObject.PlcTcoObject()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 ///			This variable is used in the higher level packages.  
 ///		</summary>			
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Identity
 			{
 				get
@@ -419,7 +419,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type ITcoMessenger; Twin type: <see cref="ITcoMessenger"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Messenger
 			{
 				get
@@ -428,6 +428,9 @@ namespace TcoCore
 				}
 			}
 
+			public object _Identity;
+			public object _Parent;
+			public object _messenger;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoObject()
 			{

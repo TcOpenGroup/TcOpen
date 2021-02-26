@@ -135,7 +135,7 @@ namespace TcoCore
 ///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
 ///<returns>Plc type eSequencerMode; Twin type: <see cref="eSequencerMode"/></returns>
 
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute(), RenderIgnore()]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
 			public dynamic Mode
 			{
 				get
@@ -144,6 +144,10 @@ namespace TcoCore
 				}
 			}
 
+			public object inCurrentStepRunning;
+			public object _stepBackward;
+			public object _stepIn;
+			public object _stepForward;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoStepModeControler()
 			{

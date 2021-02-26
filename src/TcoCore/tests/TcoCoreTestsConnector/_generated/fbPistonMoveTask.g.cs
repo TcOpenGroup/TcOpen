@@ -118,6 +118,9 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbPistonMoveTask : TcoCore.TcoTask.PlcTcoTask
 		{
+			public object PositionSensor;
+			public object MoveToPositionSignal;
+			public object InverseSignal;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbPistonMoveTask()
 			{

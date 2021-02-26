@@ -406,6 +406,12 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcEL922x_ChannelExtended
 		{
+			public PlainStatusStructExtended Status;
+			public object Load;
+			public object Current;
+			public object VoltageIn;
+			public object VoltageOut;
+			public PlainOutputStruct Control;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcEL922x_ChannelExtended()
 			{
