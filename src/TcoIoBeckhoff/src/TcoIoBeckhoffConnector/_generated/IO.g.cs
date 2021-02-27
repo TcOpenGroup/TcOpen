@@ -334,6 +334,10 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcIO
 		{
+			public PlainAI_1_Module _EL3001;
+			public PlainFuseChannelBasic _channel_1;
+			public PlainFuseChannelBasic _channel_2;
+			public PlainFuseModuleEL922x _EL922x;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcIO()
 			{

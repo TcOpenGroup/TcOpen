@@ -278,6 +278,8 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcEL922x_ChannelBasic
 		{
+			public PlainStatusStructBasic Status;
+			public PlainOutputStruct Control;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcEL922x_ChannelBasic()
 			{

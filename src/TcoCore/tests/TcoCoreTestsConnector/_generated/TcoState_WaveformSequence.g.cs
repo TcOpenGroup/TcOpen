@@ -367,6 +367,11 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoState_WaveformSequence
 		{
+			public PlainTcoTask_Transition _TcoTask_Transition_1;
+			public PlainTcoTask_Transition _TcoTask_Transition_2;
+			public PlainWaveformPoint _WaveformPointTable;
+			public object _WaveformPointsCount;
+			public object _ActualTransitionNumber;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoState_WaveformSequence()
 			{

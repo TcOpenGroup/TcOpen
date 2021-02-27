@@ -4,11 +4,10 @@
     <Declaration><![CDATA[{attribute 'initialize_on_call'}
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
 VAR
-	_taskState : eTaskState;
-	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
+	_taskState : eTaskState;
+	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
-	_messenger : TcoMessenger(THIS^);
 	{attribute 'hide'}
 	_AutoRestorable : BOOL;
 	{attribute 'hide'}
@@ -57,7 +56,7 @@ END_VAR
 IF _AutoRestorable THEN		
 	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
-		_MyParent_LastChangeState := _MyParent_TcoState.LastChangeState;
+		_MyParent_LastChangeState := _MyParent_TcoState.LastChangedState;
 	END_IF;	
 	//If OnStateChange event of the parent has occured, the value of the parent's 
 	//StartCycleCount property is stored into its ChangeStateCycle property.
@@ -125,7 +124,15 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{89ed1df2-40b6-4665-987f-6393770d5c32}">
-      <Declaration><![CDATA[PROPERTY Context : ITcoContext]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the context of the parent object, that this object is assigned to.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{f1e70fbb-551e-45b2-82da-a9b2ed85bad0}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -136,8 +143,7 @@ END_VAR
       </Get>
     </Property>
     <Property Name="Done" Id="{e3ea205b-eb06-42b9-b3d8-63efd5ed6521}">
-      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
-PROPERTY Done : BOOL]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -212,7 +218,15 @@ CheckIfAutoRestoreEnabledByParent();
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{50d5c151-1536-4b27-8f6d-91815baa7c03}">
-      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the own identity of the <see cref ="TcoTask.PlcTcoTask()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level packages.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{e2f8cd07-a32b-4fb0-9e11-15ca2337a4d7}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -240,17 +254,6 @@ Invoke := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Messenger" Id="{36d45dc2-ab29-470b-aad4-0c94c377063f}">
-      <Declaration><![CDATA[PROPERTY Messenger : ITcoMessenger]]></Declaration>
-      <Get Name="Get" Id="{f3e7fc70-cd2c-46ec-8f82-c407d1175c48}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="Restore" Id="{afacd00c-5569-431f-be3c-22a90381057d}">
       <Declaration><![CDATA[METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

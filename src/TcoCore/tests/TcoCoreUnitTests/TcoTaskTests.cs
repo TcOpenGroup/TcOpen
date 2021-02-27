@@ -41,7 +41,7 @@ namespace TcoCoreUnitTests
         ulong A_TaskDoneRECount_1;
         ulong B_TaskDoneRECount_1;
 
-
+        ushort plccycles;
         [SetUp]
         public void Setup()
         {
@@ -73,6 +73,8 @@ namespace TcoCoreUnitTests
             B_TaskDoneCount_1 = 0;
             A_TaskDoneRECount_1 = 0;
             B_TaskDoneRECount_1 = 0;
+
+            plccycles = 0;
         }
 
         public void GetCounterValues()
@@ -115,85 +117,75 @@ namespace TcoCoreUnitTests
         [Test, Order(300)]
         public void T300_TaskInvokeAndWaitForDone()
         {
+            //Both tasks are triggered in the same plc cycle. The Invoke methods of the both tasks are still called cyclically. Task A should reach Done state sooner as the Task B, but it should not restarted again.
             Assert.Greater(cycles_B, cycles_A);
 
-            tc._CallMyPlcInstance.Synchron = false;
+            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
 
-            tc._TcoObjectTest_A._TcoTaskTest_A._CounterSetValue.Synchron = cycles_A;
-            tc._TcoObjectTest_A._TcoTaskTest_B._CounterSetValue.Synchron = cycles_B;
+            tc._TcoObjectTest_A._TcoTaskTest_A._CounterSetValue.Synchron = cycles_A;    //Assign _CounterSetValue to Task A 
+            tc._TcoObjectTest_A._TcoTaskTest_B._CounterSetValue.Synchron = cycles_B;    //Assign _CounterSetValue to Task B
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.TriggerRestore();
-            tc._TcoObjectTest_A._TcoTaskTest_B.TriggerRestore();
+            tc._TcoObjectTest_A._TcoTaskTest_A.TriggerRestore();                        //Restore Task A
+            tc._TcoObjectTest_A._TcoTaskTest_B.TriggerRestore();                        //Restore Task B
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.SetPreviousStateToIdle();
-            tc._TcoObjectTest_A._TcoTaskTest_B.SetPreviousStateToIdle();
+            tc._TcoObjectTest_A._TcoTaskTest_A.SetPreviousStateToIdle();                //Set previous state of the Task A to Idle
+            tc._TcoObjectTest_A._TcoTaskTest_B.SetPreviousStateToIdle();                //Set previous state of the Task B to Idle
 
             tc.RunUntilEndConditionIsMet(() =>
             {
-                tc.CallMainFromUnitTest();
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();
-                tc._TcoObjectTest_A.CallTaskInstancies();
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&
+                plccycles++;
+                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Busy state
+                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Busy state
+                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
                             tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
             }, () => finished);
 
-            GetCounterValues();
+            GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
+            CheckBothTaskInvokeCount(1);                                                //Both tasks should be triggered just once
+            Assert.AreEqual(A_TaskExecuteCount_0 + cycles_A, A_TaskExecuteCount_1);     //Execution body of the Task A should run exactly cycles_A cycles
+            Assert.AreEqual(B_TaskExecuteCount_0 + cycles_B, B_TaskExecuteCount_1);     //Execution body of the Task B should run exactly cycles_B cycles
+            CheckBothTaskExecuteRECount(1);                                             //Both tasks starts executing just once
 
-            //Both tasks should be triggered just once
-            CheckBothTaskInvokeCount(1);
+            Assert.Greater(A_TaskDoneCount_1 - A_TaskDoneCount_0, B_TaskDoneCount_1 - B_TaskDoneCount_0);//As the cycles_B is greater then cycle_A, TaskADoneCounter should have a bigger increment than TaskBDoneCounter
+            Assert.AreEqual(B_TaskDoneCount_0 + 1, B_TaskDoneCount_1);                  //As the cycles_B is greater then cycle_A, Task A is already in Done state, when Task B just reach it. As the execution is finished, when the both tasks are in Done state, TaskBDoneCounter should increment exactly by one only.
 
-            //Execution body of the Task A should run exactly cycles_A cycles
-            Assert.AreEqual(A_TaskExecuteCount_0 + cycles_A, A_TaskExecuteCount_1);
-
-            //Execution body of the Task B should run exactly cycles_B cycles
-            Assert.AreEqual(B_TaskExecuteCount_0 + cycles_B, B_TaskExecuteCount_1);
-
-            //Both tasks starts executing just once
-            CheckBothTaskExecuteRECount(1);
-
-            //As the cycles_B is greater then cycle_A, TaskADoneCounter should have a bigger increment than TaskBDoneCounter
-            Assert.Greater(A_TaskDoneCount_1 - A_TaskDoneCount_0, B_TaskDoneCount_1 - B_TaskDoneCount_0);
-            Assert.AreEqual(B_TaskDoneCount_0 + 1, B_TaskDoneCount_1);
-
-            //Both tasks reach done state just once
-            CheckBothTaskDoneRECount(1);
+            CheckBothTaskDoneRECount(1);                                                //Both tasks reach done state just once
+            Assert.AreEqual(cycles_B, plccycles);                                       //The execution should take exactly cycles_B cycles, as it is greather than cycles_A.
         }
 
         [Test, Order(301)]
         public void T301_TaskInvokeAfterDoneWithNoEmptyCycles()
         {
+            //The Invoke methods of the both tasks are still called cyclically, after the both tasks has reached the Done state in the previous test.
+            //As no empty cycle was called between this two tests, the both tasks should not change theirs states.
             tc.RunUntilEndConditionIsMet(() =>
             {
-                tc.CallMainFromUnitTest();
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();
-                tc._TcoObjectTest_A.CallTaskInstancies();
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&
+                plccycles++;
+                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Busy state
+                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Busy state
+                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
                             tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
             }, () => finished);
 
-            GetCounterValues();
+            GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
+            CheckBothTaskInvokeCount(0);                                                //Both tasks should not be triggered again, as both task body are still called and no empty cycle was performed
+            Assert.AreEqual(A_TaskExecuteCount_0, A_TaskExecuteCount_1);                //Execution body of the Task A  should not run, as it is already done
+            Assert.AreEqual(B_TaskExecuteCount_0, B_TaskExecuteCount_1);                //Execution body of the Task B  should not run, as it is already done
 
-            //Both tasks should not be triggered again, as both task body are still called and no empty cycle wa performed
-            CheckBothTaskInvokeCount(0);
+            CheckBothTaskExecuteRECount(0);                                             //Neither Task A, nor Task B reach Executing state, as they are already in Done state.
 
-            //Execution body of both tasks should not run, as they are already done
-            Assert.AreEqual(A_TaskExecuteCount_0, A_TaskExecuteCount_1);
-            Assert.AreEqual(B_TaskExecuteCount_0, B_TaskExecuteCount_1);
+            
+            Assert.AreEqual(A_TaskDoneCount_0 + 1, A_TaskDoneCount_1);                  //Task done counter should increment only be 1, as Task A is already done
+            Assert.AreEqual(B_TaskDoneCount_0 + 1, B_TaskDoneCount_1);                  //Task done counter should increment only be 1, as Task B is already done
 
-            CheckBothTaskExecuteRECount(0);
-
-            //Task done counter should increment only be 1, as both tasks are  already done
-            Assert.AreEqual(A_TaskDoneCount_0 + 1, A_TaskDoneCount_1);
-            Assert.AreEqual(B_TaskDoneCount_0 + 1, B_TaskDoneCount_1);
-
-            //Both tasks are already done 
-            CheckBothTaskDoneRECount(0);
+            CheckBothTaskDoneRECount(0);                                                //Neither Task A, nor Task B reach Done state, as they are already in Done state.
+            Assert.AreEqual(1, plccycles);                                              //The execution should take exactly one cycle, end condition is already met before start.
         }
 
         [Test, Order(302)]

@@ -182,6 +182,9 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbManipulatorAutomat : TcoCore.TcoState.PlcTcoState
 		{
+			public PlainfbPiston _horizontalPiston;
+			public PlainfbPiston _verticalPiston;
+			public PlainfbPiston _gripperPiston;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbManipulatorAutomat()
 			{

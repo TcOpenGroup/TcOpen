@@ -210,6 +210,31 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcStatusStructBasic
 		{
+			public object Enabled;
+			public object Tripped;
+			public object _hidden_bit_0;
+			public object _hidden_bit_1;
+			public object HWProtection;
+			public object _hidden_bit_2;
+			public object _hidden_bit_3;
+			public object CurrentLevelWarning;
+			public object CoolDownLock;
+			public object _hidden_bit_4;
+			public object _hidden_bit_5;
+			public object _hidden_bit_6;
+			public object Diag;
+			public object TxPDOState;
+			public object _hidden_bit_7;
+			public object _hidden_bit_8;
+			public object _hidden_bit_9;
+			public object _hidden_bit_10;
+			public object Error;
+			public object StateReset;
+			public object StateSwitch;
+			public object _hidden_bit_11;
+			public object _hidden_bit_12;
+			public object _hidden_bit_13;
+			public object _hidden_byte_14;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcStatusStructBasic()
 			{

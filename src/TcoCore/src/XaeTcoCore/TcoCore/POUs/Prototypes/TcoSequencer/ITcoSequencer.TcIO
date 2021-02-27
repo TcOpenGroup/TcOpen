@@ -4,28 +4,88 @@
     <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITCoState
 ]]></Declaration>
     <Method Name="RequestStep" Id="{a244bce3-185f-46eb-9036-dc127d26bd08}">
-      <Declaration><![CDATA[METHOD RequestStep : ITcoSequencer
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Finishes the currently executed step and initiates to start the step with StepId equals to the value of the <c>inRequestedStepID</c>.
+			In case that the order of the requested step is higher than the order of the currently finished step (the requested step is "after" the current one)
+			the requested step is started in the same PLC cycle.
+			In case that the order of the requested step is lower than the order of the currently finished step (the requested step is "before" the current one)
+			the requested step is started in the next PLC cycle.
+			If the requested step is not found even in the next PLC cycle, the sequencer returns the error <c>StepWithRequestedIdDoesNotExists</c>.
+			<para>
+				See <see cref="eSequencerError"/> for detailed description.
+			</para>
+		</summary>
+	</docu>
+~*)
+METHOD RequestStep : ITcoSequencer
 VAR_INPUT
-	inRequestedStepID : UINT;
+	(*~
+		<docu>
+			<summary>
+				StepId of the step to be executed.
+			</summary>
+		</docu>
+	~*)
+		inRequestedStepID : UINT;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="StepBackward" Id="{681ee00d-31c9-4717-8a4f-6c756dfb644e}">
-      <Declaration><![CDATA[METHOD StepBackward
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepBackward task, that decrement current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
+		</summary>			
+	</docu>	
+~*)
+METHOD StepBackward
 ]]></Declaration>
     </Method>
     <Method Name="StepCompleteWhen" Id="{87266e09-a85e-45fc-bcc5-e3bf32501bbd}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Complete the actually running step, in the case the inCondition is met.
+			Method is typically called inside the step as the transition method.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
 VAR_INPUT
+(*~
+	<docu>
+		<summary>
+			The condition under which the step is completed.
+		</summary>			
+	</docu>	
+~*)
 	inCondition : BOOL;
 END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="StepForward" Id="{e42d91dc-e4a6-4639-a3ad-03d2d977e251}">
-      <Declaration><![CDATA[METHOD StepForward
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), 
+			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <c>TcoSequencer._numberOfStepsInSequence</c> ).
+		</summary>			
+	</docu>	
+~*)
+METHOD StepForward
 ]]></Declaration>
     </Method>
     <Method Name="StepIn" Id="{a6cd8de1-6571-4c77-9297-440aa85f6f9a}">
-      <Declaration><![CDATA[METHOD StepIn
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+			This causes starting the execution of the body of the current step.
+		</summary>			
+	</docu>	
+~*)
+METHOD StepIn
 ]]></Declaration>
     </Method>
   </Itf>

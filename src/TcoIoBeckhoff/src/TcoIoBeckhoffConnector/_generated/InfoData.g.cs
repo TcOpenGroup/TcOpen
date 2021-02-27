@@ -244,6 +244,8 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcInfoData
 		{
+			public object EC_State;
+			public object EC_AmsAddr;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcInfoData()
 			{

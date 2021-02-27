@@ -187,21 +187,12 @@ METHOD IsAutoRestorable : BOOL;
         <ST><![CDATA[IsAutoRestorable := _Sequencer.IsAutoRestorable();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="IsFirstCycle" Id="{c14a3461-1c50-0d1d-04c7-d0042dce9c24}">
+    <Method Name="IsFirstStepEntry" Id="{c14a3461-1c50-0d1d-04c7-d0042dce9c24}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD IsFirstCycle : BOOL
+METHOD IsFirstStepEntry : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//IsFirstCycle := _Sequencer._tier.IsFirstCycle();
-IsFirstCycle := FALSE;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="IsNewTier" Id="{4e1628dc-fc6a-0501-3776-0d697f5a53c2}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD IsNewTier : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//IsNewTier := _Sequencer.ProbeIsNewTier();]]></ST>
+        <ST><![CDATA[IsFirstStepEntry := THIS^._Sequencer.IsFirstStepEntry();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{4b8637ef-642e-0b3e-3e8b-c3b3127d9586}">
@@ -224,22 +215,6 @@ END_VAR
 
 THIS^._Sequencer.Run();
 ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ProbeIsNewTier" Id="{af2107e2-9bb7-0566-1dbe-7361cb9cdd44}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ProbeIsNewTier : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[ProbeIsNewTier := _Sequencer.ProbeIsNewTier();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ProbeRealNewTier" Id="{3682f275-4713-003e-25b1-9ef7e76a1953}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ProbeRealNewTier : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[ProbeRealNewTier := _Sequencer.ProbeRealNewTier();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RequestStep" Id="{d064fc61-7128-02aa-26bf-bd5b5c4a4123}">

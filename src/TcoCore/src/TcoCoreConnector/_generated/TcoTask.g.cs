@@ -12,7 +12,7 @@ namespace TcoCore
 	public partial class TcoTask : TcoObject, Vortex.Connector.IVortexObject, ITcoTask, IShadowTcoTask, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
 	{
 		Vortex.Connector.ValueTypes.OnlinerInt __taskState;
-		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
+		[ReadOnly(), Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
 		public Vortex.Connector.ValueTypes.OnlinerInt _taskState
 		{
 			get
@@ -21,7 +21,7 @@ namespace TcoCore
 			}
 		}
 
-		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
+		[ReadOnly(), Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
 		Vortex.Connector.ValueTypes.Online.IOnlineInt ITcoTask._taskState
 		{
 			get
@@ -30,7 +30,7 @@ namespace TcoCore
 			}
 		}
 
-		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
+		[ReadOnly(), Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
 		Vortex.Connector.ValueTypes.Shadows.IShadowInt IShadowTcoTask._taskState
 		{
 			get
@@ -39,87 +39,28 @@ namespace TcoCore
 			}
 		}
 
-		Vortex.Connector.ValueTypes.OnlinerULInt __nextExpectedCycle;
-		[RenderIgnore(), ReadOnly()]
-		public Vortex.Connector.ValueTypes.OnlinerULInt _nextExpectedCycle
-		{
-			get
-			{
-				return __nextExpectedCycle;
-			}
-		}
-
-		[RenderIgnore(), ReadOnly()]
-		Vortex.Connector.ValueTypes.Online.IOnlineULInt ITcoTask._nextExpectedCycle
-		{
-			get
-			{
-				return _nextExpectedCycle;
-			}
-		}
-
-		[RenderIgnore(), ReadOnly()]
-		Vortex.Connector.ValueTypes.Shadows.IShadowULInt IShadowTcoTask._nextExpectedCycle
-		{
-			get
-			{
-				return _nextExpectedCycle;
-			}
-		}
-
-		TcoMessenger __messenger;
-		public TcoMessenger _messenger
-		{
-			get
-			{
-				return __messenger;
-			}
-		}
-
-		ITcoMessenger ITcoTask._messenger
-		{
-			get
-			{
-				return _messenger;
-			}
-		}
-
-		IShadowTcoMessenger IShadowTcoTask._messenger
-		{
-			get
-			{
-				return _messenger;
-			}
-		}
-
 		public new void LazyOnlineToShadow()
 		{
 			base.LazyOnlineToShadow();
 			_taskState.Shadow = _taskState.LastValue;
-			_nextExpectedCycle.Shadow = _nextExpectedCycle.LastValue;
-			_messenger.LazyOnlineToShadow();
 		}
 
 		public new void LazyShadowToOnline()
 		{
 			base.LazyShadowToOnline();
 			_taskState.Cyclic = _taskState.Shadow;
-			_nextExpectedCycle.Cyclic = _nextExpectedCycle.Shadow;
-			_messenger.LazyShadowToOnline();
 		}
 
 		public new PlainTcoTask CreatePlainerType()
 		{
 			var cloned = new PlainTcoTask();
 			base.CreatePlainerType(cloned);
-			cloned._messenger = _messenger.CreatePlainerType();
 			return cloned;
 		}
 
 		protected PlainTcoTask CreatePlainerType(PlainTcoTask cloned)
 		{
 			base.CreatePlainerType(cloned);
-			cloned._messenger = _messenger.CreatePlainerType();
 			return cloned;
 		}
 
@@ -165,9 +106,7 @@ namespace TcoCore
 			PexPreConstructor(parent, readableTail, symbolTail);
 			Symbol = Vortex.Connector.IConnector.CreateSymbol(parent.Symbol, symbolTail);
 			__taskState = @Connector.Online.Adapter.CreateINT(this, "", "_taskState");
-			__nextExpectedCycle = @Connector.Online.Adapter.CreateULINT(this, "", "_nextExpectedCycle");
-			_nextExpectedCycle.MakeReadOnly();
-			__messenger = new TcoMessenger(this, "", "_messenger");
+			_taskState.MakeReadOnly();
 			AttributeName = "";
 			PexConstructor(parent, readableTail, symbolTail);
 		}
@@ -176,8 +115,6 @@ namespace TcoCore
 		{
 			PexPreConstructorParameterless();
 			__taskState = Vortex.Connector.IConnectorFactory.CreateINT();
-			__nextExpectedCycle = Vortex.Connector.IConnectorFactory.CreateULINT();
-			__messenger = new TcoMessenger();
 			AttributeName = "";
 			PexConstructorParameterless();
 		}
@@ -185,6 +122,46 @@ namespace TcoCore
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoTask : TcoCore.TcoObject.PlcTcoObject
 		{
+			
+///		<summary>
+///			Returns the context of the parent object, that this object is assigned to.
+///			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ITcoContext; Twin type: <see cref="ITcoContext"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic Context
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			
+///		<summary>
+///			Returns the own identity of the <see cref ="TcoTask.PlcTcoTask()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+///			This variable is used in the higher level packages.  
+///		</summary>			
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type ULINT; Twin type: <see cref="Vortex.Connector.ValueTypes.OnlinerULInt"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic Identity
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			public System.Int16 _taskState;
+			public object _nextExpectedCycle;
+			public object _AutoRestorable;
+			public object _StartCycleCount;
+			public object _MyParentsChangeStateCycle;
+			public object _MyParentsLastChangeState;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoTask()
 			{
@@ -199,19 +176,8 @@ namespace TcoCore
             /// <exclude />
 	public partial interface ITcoTask : Vortex.Connector.IVortexOnlineObject, TcoCore.ITcoObject
 	{
-		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
+		[ReadOnly(), Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
 		Vortex.Connector.ValueTypes.Online.IOnlineInt _taskState
-		{
-			get;
-		}
-
-		[RenderIgnore(), ReadOnly()]
-		Vortex.Connector.ValueTypes.Online.IOnlineULInt _nextExpectedCycle
-		{
-			get;
-		}
-
-		ITcoMessenger _messenger
 		{
 			get;
 		}
@@ -229,19 +195,8 @@ namespace TcoCore
             /// <exclude />
 	public partial interface IShadowTcoTask : Vortex.Connector.IVortexShadowObject, TcoCore.IShadowTcoObject
 	{
-		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
+		[ReadOnly(), Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
 		Vortex.Connector.ValueTypes.Shadows.IShadowInt _taskState
-		{
-			get;
-		}
-
-		[RenderIgnore(), ReadOnly()]
-		Vortex.Connector.ValueTypes.Shadows.IShadowULInt _nextExpectedCycle
-		{
-			get;
-		}
-
-		IShadowTcoMessenger _messenger
 		{
 			get;
 		}
@@ -259,7 +214,7 @@ namespace TcoCore
 	public partial class PlainTcoTask : TcoCore.PlainTcoObject
 	{
 		System.Int16 __taskState;
-		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
+		[ReadOnly(), Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eTaskState))]
 		public System.Int16 _taskState
 		{
 			get
@@ -277,49 +232,10 @@ namespace TcoCore
 			}
 		}
 
-		System.UInt64 __nextExpectedCycle;
-		[RenderIgnore(), ReadOnly()]
-		public System.UInt64 _nextExpectedCycle
-		{
-			get
-			{
-				return __nextExpectedCycle;
-			}
-
-			set
-			{
-				if (__nextExpectedCycle != value)
-				{
-					__nextExpectedCycle = value;
-					PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(nameof(_nextExpectedCycle)));
-				}
-			}
-		}
-
-		PlainTcoMessenger __messenger;
-		public PlainTcoMessenger _messenger
-		{
-			get
-			{
-				return __messenger;
-			}
-
-			set
-			{
-				if (__messenger != value)
-				{
-					__messenger = value;
-					PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(nameof(_messenger)));
-				}
-			}
-		}
-
 		public void CopyPlainToCyclic(TcoCore.TcoTask target)
 		{
 			base.CopyPlainToCyclic(target);
 			target._taskState.Cyclic = _taskState;
-			target._nextExpectedCycle.Cyclic = _nextExpectedCycle;
-			_messenger.CopyPlainToCyclic(target._messenger);
 		}
 
 		public void CopyPlainToCyclic(TcoCore.ITcoTask target)
@@ -331,8 +247,6 @@ namespace TcoCore
 		{
 			base.CopyPlainToShadow(target);
 			target._taskState.Shadow = _taskState;
-			target._nextExpectedCycle.Shadow = _nextExpectedCycle;
-			_messenger.CopyPlainToShadow(target._messenger);
 		}
 
 		public void CopyPlainToShadow(TcoCore.IShadowTcoTask target)
@@ -344,8 +258,6 @@ namespace TcoCore
 		{
 			base.CopyCyclicToPlain(source);
 			_taskState = source._taskState.LastValue;
-			_nextExpectedCycle = source._nextExpectedCycle.LastValue;
-			_messenger.CopyCyclicToPlain(source._messenger);
 		}
 
 		public void CopyCyclicToPlain(TcoCore.ITcoTask source)
@@ -357,8 +269,6 @@ namespace TcoCore
 		{
 			base.CopyShadowToPlain(source);
 			_taskState = source._taskState.Shadow;
-			_nextExpectedCycle = source._nextExpectedCycle.Shadow;
-			_messenger.CopyShadowToPlain(source._messenger);
 		}
 
 		public void CopyShadowToPlain(TcoCore.IShadowTcoTask source)
@@ -369,7 +279,6 @@ namespace TcoCore
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 		public PlainTcoTask()
 		{
-			__messenger = new PlainTcoMessenger();
 		}
 	}
 }

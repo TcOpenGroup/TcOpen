@@ -213,6 +213,10 @@ namespace TcoPneumaticsTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcDefaultContext : TcoCore.TcoContext.PlcTcoContext
 		{
+			public TcoPneumatics.PlainfbCylinder _wpfCyclinder;
+			public TcoPneumatics.PlainfbCylinder _wpfCyclinder_1;
+			public TcoPneumatics.PlainfbCylinder _wpfCyclinder_2;
+			public TcoPneumatics.PlainfbCylinder _wpfCyclinder_3;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcDefaultContext()
 			{

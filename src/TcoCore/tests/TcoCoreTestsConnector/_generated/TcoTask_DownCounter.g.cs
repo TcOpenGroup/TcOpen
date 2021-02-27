@@ -326,6 +326,10 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoTask_DownCounter
 		{
+			public object _SetUpValue;
+			public object _CounterValue;
+			public object _InvokeCounter;
+			public object _DoneCounter;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoTask_DownCounter()
 			{

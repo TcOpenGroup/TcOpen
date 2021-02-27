@@ -210,6 +210,15 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcOutputStruct
 		{
+			public object Reset;
+			public object Switch;
+			public object _hidden_bit_0;
+			public object _hidden_bit_1;
+			public object _hidden_bit_2;
+			public object _hidden_bit_3;
+			public object _hidden_bit_4;
+			public object _hidden_bit_5;
+			public object _hidden_byte_0;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcOutputStruct()
 			{

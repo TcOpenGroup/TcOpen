@@ -254,6 +254,7 @@ namespace PlcTcProberTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbBasicRunnerTests
 		{
+			public object runs;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbBasicRunnerTests()
 			{

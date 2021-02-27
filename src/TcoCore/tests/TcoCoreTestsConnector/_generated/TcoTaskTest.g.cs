@@ -782,6 +782,25 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoTaskTest
 		{
+			public object _IsBusy;
+			public object _IsError;
+			public object _IsDone;
+			public object _CounterSetValue;
+			public object _CounterValue;
+			public object _InvokeCounter;
+			public object _ExecuteCounter;
+			public object _DoneCounter;
+			public object _InvokeRisingEdgeCounter;
+			public object _ExecuteRisingEdgeCounter;
+			public object _DoneRisingEdgeCounter;
+			public object _PreviousState;
+			public object _CounterValuePV;
+			public object _MyIdentity;
+			public object _MyContextIdentity;
+			public object _MyContextStartCount;
+			public object _MyContextEndCount;
+			public object _MyParentIdentity;
+			public object _AutoRestoreByMyParentEnabled;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoTaskTest()
 			{

@@ -210,6 +210,7 @@ namespace TcoPneumatics
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcGlobal_Version
 		{
+			public object stLibVersion_TcoPneumatics;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcGlobal_Version()
 			{

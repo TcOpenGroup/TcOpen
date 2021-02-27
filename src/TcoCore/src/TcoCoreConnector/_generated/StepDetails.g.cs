@@ -7,6 +7,11 @@ using Vortex.Connector.Identity;
 
 namespace TcoCore
 {
+	
+///		<summary>
+///			Describes the status and internal variables of the step of the sequencer.
+///		</summary>				
+///<seealso cref="PlcStepDetails"/>
 #pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "StepDetails", "TcoCore", TypeComplexityEnum.Complex)]
 	public partial class StepDetails : Vortex.Connector.IVortexObject, IStepDetails, IShadowStepDetails, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
@@ -32,6 +37,19 @@ namespace TcoCore
 
 		protected string _humanReadable;
 		Vortex.Connector.ValueTypes.OnlinerInt _ID;
+		
+///		<summary>
+///			Step identification number.
+///		</summary>	
+///		<remarks>			
+/// 			<note type="important">
+///				This number must be unique throughout the complete sequence as it is used as identificator in case of jumping to the required step.
+///			</note>
+///			<para>
+///				The <see cref="TcoSequencer.PlcTcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+///			</para>
+///		</remarks>
+
 		public Vortex.Connector.ValueTypes.OnlinerInt ID
 		{
 			get
@@ -57,6 +75,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerUInt _Order;
+		
+///		<summary>
+///			Order of the step in the sequence.
+///		</summary>	
+
 		public Vortex.Connector.ValueTypes.OnlinerUInt Order
 		{
 			get
@@ -82,6 +105,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerBool _Enabled;
+		
+///		<summary>
+///			If this value is false, step body is not executed and execution is moved to the next enabled step.
+///		</summary>				
+
 		public Vortex.Connector.ValueTypes.OnlinerBool Enabled
 		{
 			get
@@ -107,6 +135,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerString _Description;
+		
+///		<summary>
+///			Step description text.
+///		</summary>				
+
 		public Vortex.Connector.ValueTypes.OnlinerString Description
 		{
 			get
@@ -132,6 +165,17 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerInt _Status;
+		
+///		<summary>
+///			Describes step status.
+///		</summary>				
+///		<remarks>			
+///			<para>
+///				See <see cref="eStepStatus"/> for detailed description.
+///			</para>
+///		</remarks>		
+///		enumStepStatus
+
 		[Vortex.Connector.EnumeratorDiscriminatorAttribute(typeof (eStepStatus))]
 		public Vortex.Connector.ValueTypes.OnlinerInt Status
 		{
@@ -160,6 +204,11 @@ namespace TcoCore
 		}
 
 		Vortex.Connector.ValueTypes.OnlinerTime _Duration;
+		
+///		<summary>
+///			Step duration time.
+///		</summary>				
+
 		public Vortex.Connector.ValueTypes.OnlinerTime Duration
 		{
 			get
@@ -396,9 +445,64 @@ namespace TcoCore
 			PexConstructorParameterless();
 		}
 
+		
+///		<summary>
+///			Describes the status and internal variables of the step of the sequencer.
+///		</summary>				
+
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcStepDetails
 		{
+			
+///		<summary>
+///			Step identification number.
+///		</summary>	
+///		<remarks>			
+/// 			<note type="important">
+///				This number must be unique throughout the complete sequence as it is used as identificator in case of jumping to the required step.
+///			</note>
+///			<para>
+///				The <see cref="TcoSequencer.PlcTcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+///			</para>
+///		</remarks>
+
+			public object ID;
+			
+///		<summary>
+///			Order of the step in the sequence.
+///		</summary>	
+
+			public object Order;
+			
+///		<summary>
+///			If this value is false, step body is not executed and execution is moved to the next enabled step.
+///		</summary>				
+
+			public object Enabled;
+			
+///		<summary>
+///			Step description text.
+///		</summary>				
+
+			public object Description;
+			
+///		<summary>
+///			Describes step status.
+///		</summary>				
+///		<remarks>			
+///			<para>
+///				See <see cref="eStepStatus"/> for detailed description.
+///			</para>
+///		</remarks>		
+///		enumStepStatus
+
+			public System.Int16 Status;
+			
+///		<summary>
+///			Step duration time.
+///		</summary>				
+
+			public object Duration;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcStepDetails()
 			{

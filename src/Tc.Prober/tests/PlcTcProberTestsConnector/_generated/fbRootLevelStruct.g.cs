@@ -256,6 +256,8 @@ namespace PlcTcProberTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbRootLevelStruct
 		{
+			public PlainstAllTypes level_0;
+			public object level;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbRootLevelStruct()
 			{

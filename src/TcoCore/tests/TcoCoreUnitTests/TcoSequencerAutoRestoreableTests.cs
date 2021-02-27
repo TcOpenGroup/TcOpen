@@ -25,6 +25,7 @@ namespace TcoCoreUnitTests
         protected short reqStep = 50;
         protected short reqStepNotExists = 300;
         protected short childState = 100;
+        protected short plcCycle = 0;
 
         [OneTimeSetUp]
         public void TestInit()
@@ -3393,6 +3394,7 @@ namespace TcoCoreUnitTests
         [Test, Timeout(20000), Order(691)]
         public void T691_SwitchStepModeOnDuringStepExecution()
         {
+            cycle = 0;
             tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
             {                                                           //StepDescription should have value of "(>Step 2<)" and step status should be ReadyToRun
                 if (tc.Step(0, true, "Initial step"))
@@ -3423,5 +3425,257 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(10, cycle);                                 //Just for Shure
         }
 
+        [Test, Order(692)]
+        public void T692_SwitchStepModePrepareForStepForwardFromRunningStep()
+        {
+            cycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
+            {                                                           //StepDescription should have value of "Step 2" and step status should be Running
+                tc.StepIn();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => cycle >= 10);
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(2,                                          //Check if StepId stays 2
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 2",                                   //Check if StepDescription changes from "(>Step 2<) to "Step 2""
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step changes from Running to ReadyToRun
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(10, cycle);                                 //Just for Shure
+        }
+
+        [Test, Order(693)]
+        public void T693_SwitchStepModeStepForwardFromRunningStep()
+        {
+            cycle = 0;
+            plcCycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 3 
+            {                                                           //StepDescription should have value of "(>Step 3<)" and step status should be ReadyToRun
+                plcCycle++;
+                tc.StepForward();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => (cycle >= 10| plcCycle>=10));
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(3,                                          //Check if StepId changes from 2 to 3
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("(>Step 3<)",                               //Check if StepDescription changes from "Step 2" to "(>Step 3<)"
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(20,                                         //Check if current step changes from Running to ReadyToRun
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(0, cycle);                                  //No step entry was performed
+            Assert.AreEqual(10, plcCycle);                              //just for shure
+        }
+
+        [Test, Order(694)]
+        public void T694_SwitchStepModePrepareForStepBackwardFromRunningStep()
+        {
+            cycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 3 
+            {                                                           //StepDescription should have value of "Step 3" and step status should be Running
+                tc.StepIn();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => cycle >= 10);
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(3,                                          //Check if StepId stays 3
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 3",                                   //Check if StepDescription changes from "(>Step 3<) to "Step 3""
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step changes from Running to ReadyToRun
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(10, cycle);                                 //Just for Shure
+        }
+
+        [Test, Order(695)]
+        public void T695_SwitchStepModeStepBackwardFromRunningStep()
+        {
+            cycle = 0;
+            plcCycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
+            {                                                           //StepDescription should have value of "(>Step 2<)" and step status should be ReadyToRun
+                plcCycle++;
+                tc.StepBackward();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => (cycle >= 10 | plcCycle >= 10));
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(2,                                          //Check if StepId changes from 3 to 2
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("(>Step 2<)",                               //Check if StepDescription changes from "Step 3" to "(>Step 2<)"
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(20,                                         //Check if current step changes from Running to ReadyToRun
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(0, cycle);                                  //No step entry was performed
+            Assert.AreEqual(10, plcCycle);                              //just for shure
+        }
+
+        [Test, Order(696)]
+        public void T696_SwitchStepModeStepOffFromReadyToRun()
+        {
+            cycle = 0;
+            plcCycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
+            {                                                           //StepDescription should have value of "(>Step 2<)" and step status should be ReadyToRun
+                plcCycle++;
+                tc.SetCyclicMode();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => (cycle >= 10 | plcCycle >= 10));
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(2,                                          //Check if StepId stays at 2
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 2",                                   //Check if StepDescription changes from "(>Step 2<)" to "Step 2"
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step changes from ReadyToRun to Running
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(10, cycle);                                 //Step entry was performed
+            Assert.AreEqual(10, plcCycle);                              //just for shure
+        }
+
+        [Test, Order(697)]
+        public void T697_SwitchStepModeStepOnFromRunning()
+        {
+            cycle = 0;
+            plcCycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
+            {                                                           //StepDescription should have value of "Step 2" and step status should be Running
+                plcCycle++;
+                tc.SetStepMode();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => (cycle >= 10 | plcCycle >= 10));
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(2,                                          //Check if StepId stays at 2 as before
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 2",                                   //Check if StepDescription stays at "Step 2" as before
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step stays at Running as before
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(10, cycle);                                 //Step entry was performed
+            Assert.AreEqual(10, plcCycle);                              //just for shure
+        }
+
+        [Test, Order(698)]
+        public void T698_SwitchStepModeStepOffFromRunning()
+        {
+            cycle = 0;
+            plcCycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
+            {                                                           //StepDescription should have value of "Step 2" and step status should be Running
+                plcCycle++;
+                tc.SetCyclicMode();
+                if (tc.Step(0, true, "Initial step")) { }
+                if (tc.Step(1, true, "Step 1")) { }
+                if (tc.Step(2, true, "Step 2"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                if (tc.Step(3, true, "Step 3"))
+                {
+                    cycle++;
+                    tc.StepCompleteWhen(cycle >= 20);
+                }
+                for (ushort i = 4; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            }, endCondition: () => (cycle >= 10 | plcCycle >= 10));
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(2,                                          //Check if StepId stays at 2 as before
+                tc._Sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 2",                                   //Check if StepDescription stays at "Step 2" as before
+                tc._Sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step stays at Running as before
+                tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(10, cycle);                                 //Step entry was performed
+            Assert.AreEqual(10, plcCycle);                              //just for shure
+        }
     }
 }

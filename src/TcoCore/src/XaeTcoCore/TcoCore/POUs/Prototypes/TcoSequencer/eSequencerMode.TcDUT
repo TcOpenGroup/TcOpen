@@ -1,12 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="eSequencerMode" Id="{9c78ac12-3375-08f9-0d3a-52cf2b5cf218}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Modes of the sequencer.
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'qualified_only'}
 {attribute 'strict'}
 TYPE eSequencerMode :
 (
+(*~
+	<docu>
+		<summary>
+			If invalid, no logic is executed.
+		</summary>				
+	</docu>	
+~*)	
 	Invalid := -10,
+(*~
+	<docu>
+		<summary>
+			If cyclic mode is selected, next step is automatically started after the previous has been finished.
+		</summary>				
+	</docu>	
+~*)	
 	CyclicMode := 0,
+(*~
+	<docu>
+		<summary>
+			If step mode is selected, when current step has been finished next step has to be started by calling method <c>StepIn()</c>.
+			<para>
+				See <see cref="TcoSequencer.PlcTcoSequencer.StepIn()"/> for detailed description.
+			</para>
+		</summary>				
+	</docu>	
+~*)	
 	StepMode := 10
 );
 END_TYPE

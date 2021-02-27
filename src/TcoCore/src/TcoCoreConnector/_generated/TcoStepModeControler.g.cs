@@ -7,6 +7,11 @@ using Vortex.Connector.Identity;
 
 namespace TcoCore
 {
+	
+///			<summary>
+///				Provides switching between sequencer modes so as handling stepping tasks in th step mode.
+///			</summary>
+///<seealso cref="PlcTcoStepModeControler"/>
 #pragma warning disable SA1402, CS1591, CS0108, CS0067
 	[Vortex.Connector.Attributes.TypeMetaDescriptorAttribute("{attribute addProperty Name \"\" }", "TcoStepModeControler", "TcoCore", TypeComplexityEnum.Complex)]
 	public partial class TcoStepModeControler : TcoState, Vortex.Connector.IVortexObject, ITcoStepModeControler, IShadowTcoStepModeControler, Vortex.Connector.IVortexOnlineObject, Vortex.Connector.IVortexShadowObject
@@ -115,9 +120,34 @@ namespace TcoCore
 			PexConstructorParameterless();
 		}
 
+		
+///			<summary>
+///				Provides switching between sequencer modes so as handling stepping tasks in th step mode.
+///			</summary>
+
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcTcoStepModeControler : TcoCore.TcoState.PlcTcoState
 		{
+			
+///		<summary>
+///			Provides access to the mode of the sequencer. 
+///		</summary>		
+///<summary><note type="note">This is PLC property. This method is accessible only from the PLC code.</note></summary>
+///<returns>Plc type eSequencerMode; Twin type: <see cref="eSequencerMode"/></returns>
+
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced), Vortex.Connector.IgnoreReflectionAttribute()]
+			public dynamic Mode
+			{
+				get
+				{
+					throw new NotImplementedException("This is PLC member; not invokable form the PC side.");
+				}
+			}
+
+			public object inCurrentStepRunning;
+			public object _stepBackward;
+			public object _stepIn;
+			public object _stepForward;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcTcoStepModeControler()
 			{

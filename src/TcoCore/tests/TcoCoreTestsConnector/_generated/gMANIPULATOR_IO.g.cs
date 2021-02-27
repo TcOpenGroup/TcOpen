@@ -286,6 +286,8 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcgMANIPULATOR_IO
 		{
+			public object Inputs;
+			public object Outputs;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcgMANIPULATOR_IO()
 			{

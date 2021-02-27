@@ -251,6 +251,7 @@ namespace PlcTcProberTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbRecorderRunnerTests
 		{
+			public PlainstRecorder _recorder;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbRecorderRunnerTests()
 			{

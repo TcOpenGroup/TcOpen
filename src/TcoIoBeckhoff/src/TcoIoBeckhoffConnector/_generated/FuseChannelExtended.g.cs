@@ -120,6 +120,7 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcFuseChannelExtended : TcoIoBeckhoff.FuseChannelBasic.PlcFuseChannelBasic
 		{
+			public PlainEL922x_ChannelExtended _ChnEx;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcFuseChannelExtended()
 			{

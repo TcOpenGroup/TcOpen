@@ -278,6 +278,8 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcWcState
 		{
+			public object _WcState;
+			public object _InputToggle;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcWcState()
 			{

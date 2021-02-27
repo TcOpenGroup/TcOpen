@@ -122,6 +122,7 @@ namespace PlcTcProberTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcfbInheritanceLevel_4 : PlcTcProberTests.fbInheritanceLevel_3.PlcfbInheritanceLevel_3
 		{
+			public PlainstAllTypes level_4;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcfbInheritanceLevel_4()
 			{

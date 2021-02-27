@@ -241,6 +241,7 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcMANIPULATOR
 		{
+			public PlainfbManipulatorContext _context;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcMANIPULATOR()
 			{

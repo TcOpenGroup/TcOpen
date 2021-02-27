@@ -329,6 +329,10 @@ namespace TcoCoreTests
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcWaveformPoint
 		{
+			public System.Int16 TransitionType;
+			public object TargetValue;
+			public object Duration;
+			public object Shape;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcWaveformPoint()
 			{

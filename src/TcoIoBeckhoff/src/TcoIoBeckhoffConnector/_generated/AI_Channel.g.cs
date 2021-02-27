@@ -278,6 +278,8 @@ namespace TcoIoBeckhoff
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		protected abstract class PlcAI_Channel
 		{
+			public object Value;
+			public PlainAI_ChannelStatus Status;
 			///<summary>Prevents creating instance of this class via public constructor</summary><exclude/>
 			protected PlcAI_Channel()
 			{
