@@ -53,18 +53,26 @@ task Clean -depends Start {
  
 task NugetRestore -depends Clean {
    EnsureNuget
-   $command = $msbuild + " -t:restore /p:Configuration=$buildConfig -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly TcOpen.build.slnf"
+   # $command = $msbuild + " -t:restore /p:Configuration=$buildConfig -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly TcOpen.build.slnf"
+   $command = $dotnet + " restore TcOpen.build.slnf"
+   
    Write-Host $command
    exec{
        cmd /c $command
    }
    
-   # To Restore IVC into _Vortex directory
-   $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
-   Write-Host $command
-   exec{
-       cmd /c $command
-   }   
+   try {
+      # Try to Restore IVC into _Vortex directory
+      # May fail due to missing g.cs files
+      $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
+      Write-Host $command
+      cmd /c $command
+
+   }
+   catch {
+     # Swallow
+   }
+      
 } 
 
 task GitVersion -depends NugetRestore {
@@ -93,7 +101,8 @@ task OpenVisualStudio -depends GitVersion {
 
 
 task BuildWithInxtonBuilder -depends OpenVisualStudio {
-  $projects = @(     
+  $projects = @(  
+     "src\Tc.Prober\Tc.Prober.slnf",   
      "src\TcoCore\TcoCore.slnf",
      "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
      "src\TcoPneumatics\TcoPneumatics.slnf"
