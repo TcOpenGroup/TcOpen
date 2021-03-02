@@ -19,34 +19,36 @@ namespace TcoCoreUnitTests
         [Test, Order(400)]
         public void T400_IdentitiesTest()
         {
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoStateTest ts = to._TcoStateTest_A;
-            TcoTaskTest tt = ts._TcoTaskTest_A;
+            TcoObjectTest to = tc._TcoObjectTest_A;                                     //to is the child of the tc
+            TcoStateTest ts = to._TcoStateTest_A;                                       //ts is the child of the to and grandchild of the tc
+            TcoTaskTest tt = ts._TcoTaskTest_A;                                         //tt is the child of the ts and great-grandchild of the tc
 
-            tc._CallMyPlcInstance.Synchron = true;
+            tc._CallMyPlcInstance.Synchron = true;                                      //Switch on the cyclical execution of the tc instance 
 
-            Thread.Sleep(300);
-            tc._CallMyPlcInstance.Synchron = false;
+            Thread.Sleep(300);                                                          //Time of the cyclical execution of the test instance
+            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
 
-            tc.ReadOutCycleCounters();
+            tc.ReadOutCycleCounters();                                                  //Read out actual cycle counters values into the test instance
 
-            Assert.Greater(tc._startCycles.Synchron, 0);
-            Assert.Greater(tc._endCycles.Synchron, 0);
+            Assert.Greater(tc._startCycles.Synchron, 0);                                //StartCycleCounter should be greather than zero as test instance was running at least 300ms.
+            Assert.Greater(tc._endCycles.Synchron, 0);                                  //EndCycleCounter should be greather than zero as test instance was running at least 300ms.
 
-            to.ReadOutIdentities();
-            ts.ReadOutIdentities();
-            tt.ReadOutIdentities();
+            to.ReadOutIdentities();                                                     //Readout identities into the test instance
+            ts.ReadOutIdentities();                                                     //Readout identities into the test instance
+            tt.ReadOutIdentities();                                                     //Readout identities into the test instance
 
-            Assert.AreEqual(tc._MyIdentity.Synchron, to._MyContextIdentity.Synchron);
-            Assert.AreEqual(tc._MyIdentity.Synchron, ts._MyContextIdentity.Synchron);
-            Assert.AreEqual(tc._MyIdentity.Synchron, tt._MyContextIdentity.Synchron);
+            Assert.AreEqual(tc._MyIdentity.Synchron, to._MyContextIdentity.Synchron);   //Identity of the child's context (to) is the same as the identity of the parent(tc)
+            Assert.AreEqual(tc._MyIdentity.Synchron, ts._MyContextIdentity.Synchron);   //Identity of the grandchild's context (ts) is the same as the identity of the grandparent(tc)
+            Assert.AreEqual(tc._MyIdentity.Synchron, tt._MyContextIdentity.Synchron);   //Identity of the great-grandchild's context (tt) is the same as the identity of the great-grandparent(tc)
 
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, to._MyIdentity.Synchron);
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, ts._MyIdentity.Synchron);
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, tt._MyIdentity.Synchron);
+            Assert.AreNotEqual(tc._MyIdentity.Synchron, to._MyIdentity.Synchron);       //Identity of the child(to) is different than the identity of its parent(tc), as they are both unique objects.
+            Assert.AreNotEqual(tc._MyIdentity.Synchron, ts._MyIdentity.Synchron);       //Identity of the grandchild(ts) is different than the identity of its grandparent(tc), as they are both unique objects.
+            Assert.AreNotEqual(tc._MyIdentity.Synchron, tt._MyIdentity.Synchron);       //Identity of the great-grandchild(tt) is different than the identity of its great-grandparent(tc), as they are both unique objects.
 
-            Assert.AreNotEqual(to._MyIdentity.Synchron, ts._MyIdentity.Synchron);
-            Assert.AreNotEqual(to._MyIdentity.Synchron, tt._MyIdentity.Synchron);
+            Assert.AreNotEqual(to._MyIdentity.Synchron, ts._MyIdentity.Synchron);      //Identity of the grandchild(ts) is different than the identity of its parent(to), as they are both unique objects.
+            Assert.AreNotEqual(to._MyIdentity.Synchron, tt._MyIdentity.Synchron);      //Identity of the great-grandchild(tt) is different than the identity of its grandparent(to), as they are both unique objects.
+
+
         }
 
         [Test, Order(401)]
@@ -56,10 +58,10 @@ namespace TcoCoreUnitTests
             string message = TestHelpers.RandomString(20);
 
             tc.ContextOpen();
-            ts.PostMessage(message);
+            ts.PostMessage(message);                                                   //Force the error message to the task instence
             tc.ContextClose();
 
-            Assert.AreEqual(message, ts.GetMessage());
+            Assert.AreEqual(message, ts.GetMessage());                                 //Check if message apears in the mime.
         }
 
         [Test, Order(402)]
@@ -69,11 +71,12 @@ namespace TcoCoreUnitTests
 
             short ccc = ts._OnStateChangeCounter.Synchron;
             short prevState;
-            short newState = TestHelpers.RandomNumber(20,100);
+            short newState; 
 
             ts.ReadOutState();
 
             prevState = ts._MyState.Synchron;
+            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
 
             tc.ContextOpen();
 
@@ -94,7 +97,7 @@ namespace TcoCoreUnitTests
             string message = TestHelpers.RandomString(20);
             short ccc = ts._OnStateChangeCounter.Synchron;
             short prevState;
-            short newState = TestHelpers.RandomNumber(20, 100);
+            short newState;
 
             tc.SingleCycleRun(() =>
             {
@@ -105,6 +108,7 @@ namespace TcoCoreUnitTests
 
             ts.ReadOutState();
             prevState = ts._MyState.Synchron;
+            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
 
             tc.SingleCycleRun(() =>
             {
@@ -151,10 +155,11 @@ namespace TcoCoreUnitTests
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
             short prevState;
-            short newState = TestHelpers.RandomNumber(20, 100);
+            short newState;
             
             ts.ReadOutState();
             prevState = ts._MyState.Synchron;
+            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
 
             tc.SingleCycleRun(() =>
             {
@@ -180,7 +185,7 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(ts._TcoTaskTest_B._IsBusy.Synchron);
 
             prevState = ts._MyState.Synchron;
-            newState = TestHelpers.RandomNumber(101, 200);
+            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
 
             tc.SingleCycleRun(() =>
             {
@@ -255,7 +260,7 @@ namespace TcoCoreUnitTests
         {
             TcoStateTest ts_a, ts_b;
             TcoStateAutoRestoreTest tst_a, tst_b;
-            short rc_a, rc_b, ps_a, ps_b, tps_a, tps_b, ns_a, ns_b, cc_a, cc_b;
+            short rc_a, rc_b, is_a, is_b, tps_a, tps_b, ns_a, ns_b, cc_a, cc_b;
             ulong cv_a, cv_b;
 
             ts_a = tc._TcoObjectTest_A._TcoStateTest_A;
@@ -279,10 +284,10 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(ts_b._AutoRestoreToMyChildsEnabled.Synchron);
 
             ts_a.ReadOutState();
-            ps_a = ts_a._MyState.Synchron;
+            is_a = ts_a._MyState.Synchron;
 
             ts_b.ReadOutState();
-            ps_b = ts_b._MyState.Synchron;
+            is_b = ts_b._MyState.Synchron;
 
             tst_a._CountsPerStep.Synchron = 5;
             tst_b._CountsPerStep.Synchron = 7;
@@ -326,8 +331,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);
 
             //State of the parents of both childs remain same
-            Assert.AreEqual(ps_a, ts_a._MyState.Synchron);
-            Assert.AreEqual(ps_b, ts_b._MyState.Synchron);
+            Assert.AreEqual(is_a, ts_a._MyState.Synchron);
+            Assert.AreEqual(is_b, ts_b._MyState.Synchron);
 
             rc_a = tst_a._RestoreCounter.Synchron;
             rc_b = tst_b._RestoreCounter.Synchron;
@@ -380,12 +385,13 @@ namespace TcoCoreUnitTests
 
 
             cc_a = ts_a._OnStateChangeCounter.Synchron;
-            ns_a = TestHelpers.RandomNumber(20, 100);
-            Assert.AreNotEqual(ps_a, ns_a);
+            ns_a = TestHelpers.RandomNumber((short)(is_a + 1), (short)(5 * (is_a + 1)));
+
+            Assert.AreNotEqual(is_a, ns_a);
 
             cc_b = ts_b._OnStateChangeCounter.Synchron;
-            ns_b = TestHelpers.RandomNumber(20, 100);
-            Assert.AreNotEqual(ps_b, ns_b);
+            ns_b = TestHelpers.RandomNumber((short)(is_b + 1), (short)(5 * (is_b + 1)));
+            Assert.AreNotEqual(is_b, ns_b);
 
             cv_a = tst_a._CounterValue.Synchron;
             cv_b = tst_b._CounterValue.Synchron;

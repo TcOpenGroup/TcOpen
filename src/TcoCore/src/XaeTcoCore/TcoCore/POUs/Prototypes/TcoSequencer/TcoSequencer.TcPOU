@@ -618,6 +618,8 @@ _cycleTimer(IN:= FALSE, PT:= T#0S);
 
 _currentStep.Status := eStepStatus.Done;
 
+PostSequenceComplete();
+
 _stepModeControler._stepForward.Restore();
 _stepModeControler._stepBackward.Restore();
 _stepModeControler._stepIn.Restore(); 	]]></ST>

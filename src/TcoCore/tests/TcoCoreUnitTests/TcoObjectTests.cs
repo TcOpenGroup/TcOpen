@@ -48,8 +48,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(    tc_A_to_A._MyParentIdentity.Synchron,    tc_A_to_B._MyParentIdentity.Synchron);//Identity of the child's parent (tc_A_to_A) is the same as the identity of the child object's (tc_A_to_B), as they have the same parent(tc_A)
             Assert.AreEqual(    tc_A_to_A._MyContextStartCount.Synchron, tc_A_to_B._MyContextStartCount.Synchron);//_startCycleCount of the child (tc_A_to_A) is the same as the _startCycleCount of the child (tc_A_to_B), as they have the same parent(tc_A)
             Assert.AreEqual(    tc_A_to_A._MyContextEndCount.Synchron,   tc_A_to_B._MyContextEndCount.Synchron);//_endCycleCount of the child (tc_A_to_A) is the same as the _endCycleCount of the child (tc_A_to_B), as they have the same parent(tc_A)
-            Assert.AreNotEqual( tc_A._MyIdentity.Synchron,               tc_A_to_A._MyIdentity.Synchron);//Identity of the child(tc_A_to_A) is different as the identity of the parent(tc_A), as they are both unique objects.
-            Assert.AreNotEqual( tc_A._MyIdentity.Synchron,               tc_A_to_B._MyIdentity.Synchron);//Identity of the child(tc_A_to_B) is different as the identity of the parent(tc_A), as they are both unique objects.
+            Assert.AreNotEqual( tc_A._MyIdentity.Synchron,               tc_A_to_A._MyIdentity.Synchron);//Identity of the child(tc_A_to_A) is different than the identity of the parent(tc_A), as they are both unique objects.
+            Assert.AreNotEqual( tc_A._MyIdentity.Synchron,               tc_A_to_B._MyIdentity.Synchron);//Identity of the child(tc_A_to_B) is different than the identity of the parent(tc_A), as they are both unique objects.
 
             TcoObjectTest tc_B_to_A = tc_B._TcoObjectTest_A;
             TcoObjectTest tc_B_to_B = tc_B._TcoObjectTest_B;
