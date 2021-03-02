@@ -4,7 +4,7 @@
     <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Provides basic sequential control, including step mode, which allows to run the sequence step-by step, step forward and step backward.
+				Provides basic sequential control, including step mode, which allows to run the sequence step-by-step, steping forward and steping backward.
 			</summary>
 		</docu>
 ~*)
@@ -120,10 +120,11 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Performs the control of the StepId of the currently executed step.
+			Performs the check of the ```StepId``` of the currently executed step.
 			<remarks>			
 				<note type="important">
 					The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
+					```StepId``` sould be assigned as a number literal or a constant.
 				</note>
 			</remarks>			
 		</summary>			
@@ -155,7 +156,8 @@ END_IF
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method is called at the end of the sequence. Implicit calling of this method is ensured by calling the method Run().
+			Implicit call of this method is ensured by calling the method Run().
+			It must not be called explicitely by consumer code in derived blocks.
 			<remarks>			
 				<note type="important">
 					Do not call this method explicitly.
@@ -192,7 +194,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Performs the control of the uniqueness of each StepId in the whole sequence.
+			Performs the check of the uniqueness of ```StepId``` in the sequence.
 			<remarks>			
 				<note type="important">
 					The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
@@ -323,8 +325,8 @@ END_IF
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end is ensured by calling the InstanceName.Run() method.
-			This method is abstract, so each derived type has to implement its own implementation of this method.
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
 		</summary>
 	</docu>
 ~*)
@@ -337,9 +339,8 @@ METHOD ABSTRACT Main : BOOL
     <Property Name="Mode" Id="{c447bb7a-289b-0f16-18ea-989d80a4b381}">
       <Declaration><![CDATA[(*~
 	<docu>
-		<summary>
-			Allows to set required mode to sequencer.
-			Also it returns the actual selected mode.
+		<summary>			
+			Gets or sets sequencer mode.
 			<remarks>			
 				<para>
 					See <see cref="eSequencerMode"/> for detailed description.
@@ -370,7 +371,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Ensures that after each download, StepId uniqueness control is going to be performed again. 
+			Ensures that after each download, StepId uniqueness check is performed. 
 			<remarks>			
 				<note type="important">
 					Do not call this method explicitly.
@@ -395,7 +396,8 @@ _previousNumberOfStepsInSequence := 0;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method is called at the beginning of the sequence. Implicit calling of this method is ensured by calling the method Run().
+			Implicit calling of this method is ensured by calling the method Run().
+			It must not be called explicitely by consumer code in derived blocks.
 			<remarks>			
 				<note type="important">
 					Do not call this method explicitly.
@@ -439,15 +441,16 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="PostSequenceComplete" Id="{ece7cad8-a719-0e69-011e-e99ad08fec8c}">
-      <Declaration><![CDATA[(*~
+      <Declaration><![CDATA[
+(*~
 	<docu>
 		<summary>
-			This method is called at the end of the sequence. It is public, so it should be overloaded and customized.
+			This method is called on seuqence completion (the sequencer's last step was completed). 
+			This method can be overridden in derived block with a custom logic.
 		</summary>			
 	</docu>	
 ~*)
 METHOD PUBLIC PostSequenceComplete
-
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -457,7 +460,8 @@ METHOD PUBLIC PostSequenceComplete
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method is called at the end of each step. It is public, so it should be overloaded and customized.
+			This method is executed upon step completion.
+			This method can be overridden in derived block by custom logic.
 		</summary>			
 	</docu>	
 ~*)
@@ -602,7 +606,7 @@ THIS^.Close();]]></ST>
 	<docu>
 		<summary>
 			<para>
-				Complete the sequencer.
+				Completes the sequencer, and return the sequencer pointer to the first step in the seuqence.
 				Method is typically called inside the last step of the sequence.
 			</para>
 		</summary>			
@@ -632,8 +636,8 @@ _stepModeControler._stepIn.Restore(); 	]]></ST>
 				Basic step of the sequence. 
 		</summary>			
 		<returns>
-			True in case if step with given StepId is in order of the execution, the step is enabled and the sequencer is in the cyclic mode.
-			True in case if step with given StepId is in order of the execution, the step is enabled, the sequencer is in the step mode and StepIn() method was triggered.  
+			True in case when step with given StepId is in order of the execution, the step is enabled and the sequencer is in the cyclic mode.
+			True in case when step with given StepId is in order of the execution, the step is enabled, the sequencer is in the step mode and StepIn() method was triggered.  
 			False in all the other cases.
 		</returns>			
 	</docu>	
@@ -647,6 +651,7 @@ VAR_INPUT
 			<remarks>			
 				<note type="important">
 					This number must be unique throughout the complete sequence.
+					It must be a constant or numerical literal and it must not change during the life-time of the sequencer. 
 				</note>
 			</remarks>
 		</summary>		
@@ -900,7 +905,7 @@ _numberOfStepsInSequence := _stepCounter;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method triggers StepBackward task, that decrement current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
+			This method triggers StepBackward task, that decrements current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
 		</summary>			
 	</docu>	
 ~*)
