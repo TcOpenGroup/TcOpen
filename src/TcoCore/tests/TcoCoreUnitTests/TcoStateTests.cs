@@ -15,40 +15,37 @@ namespace TcoCoreUnitTests
         {
         }
 
-
         [Test, Order(400)]
         public void T400_IdentitiesTest()
         {
-            TcoObjectTest to = tc._TcoObjectTest_A;                                     //to is the child of the tc
-            TcoStateTest ts = to._TcoStateTest_A;                                       //ts is the child of the to and grandchild of the tc
-            TcoTaskTest tt = ts._TcoTaskTest_A;                                         //tt is the child of the ts and great-grandchild of the tc
+            TcoObjectTest to = tc._TcoObjectTest_A;                                                     //to is the child of the tc
+            TcoStateTest ts = to._TcoStateTest_A;                                                       //ts is the child of the to and grandchild of the tc
+            TcoTaskTest tt = ts._TcoTaskTest_A;                                                         //tt is the child of the ts and great-grandchild of the tc
 
-            tc._CallMyPlcInstance.Synchron = true;                                      //Switch on the cyclical execution of the tc instance 
+            tc._CallMyPlcInstance.Synchron = true;                                                      //Switch on the cyclical execution of the tc instance 
 
-            Thread.Sleep(300);                                                          //Time of the cyclical execution of the test instance
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            Thread.Sleep(300);                                                                          //Time of the cyclical execution of the test instance
+            tc._CallMyPlcInstance.Synchron = false;                                                     //Switch off the cyclical execution of the tc instance 
 
-            tc.ReadOutCycleCounters();                                                  //Read out actual cycle counters values into the test instance
+            tc.ReadOutCycleCounters();                                                                  //Read out actual cycle counters values into the test instance
 
-            Assert.Greater(tc._startCycles.Synchron, 0);                                //StartCycleCounter should be greather than zero as test instance was running at least 300ms.
-            Assert.Greater(tc._endCycles.Synchron, 0);                                  //EndCycleCounter should be greather than zero as test instance was running at least 300ms.
+            Assert.Greater(tc._startCycles.Synchron, 0);                                                //StartCycleCounter should be greather than zero as test instance was running at least 300ms.
+            Assert.Greater(tc._endCycles.Synchron, 0);                                                  //EndCycleCounter should be greather than zero as test instance was running at least 300ms.
 
-            to.ReadOutIdentities();                                                     //Readout identities into the test instance
-            ts.ReadOutIdentities();                                                     //Readout identities into the test instance
-            tt.ReadOutIdentities();                                                     //Readout identities into the test instance
+            to.ReadOutIdentities();                                                                     //Readout identities into the test instance
+            ts.ReadOutIdentities();                                                                     //Readout identities into the test instance
+            tt.ReadOutIdentities();                                                                     //Readout identities into the test instance
 
-            Assert.AreEqual(tc._MyIdentity.Synchron, to._MyContextIdentity.Synchron);   //Identity of the child's context (to) is the same as the identity of the parent(tc)
-            Assert.AreEqual(tc._MyIdentity.Synchron, ts._MyContextIdentity.Synchron);   //Identity of the grandchild's context (ts) is the same as the identity of the grandparent(tc)
-            Assert.AreEqual(tc._MyIdentity.Synchron, tt._MyContextIdentity.Synchron);   //Identity of the great-grandchild's context (tt) is the same as the identity of the great-grandparent(tc)
+            Assert.AreEqual(tc._MyIdentity.Synchron, to._MyContextIdentity.Synchron);                   //Identity of the child's context (to) is the same as the identity of the parent(tc)
+            Assert.AreEqual(tc._MyIdentity.Synchron, ts._MyContextIdentity.Synchron);                   //Identity of the grandchild's context (ts) is the same as the identity of the grandparent(tc)
+            Assert.AreEqual(tc._MyIdentity.Synchron, tt._MyContextIdentity.Synchron);                   //Identity of the great-grandchild's context (tt) is the same as the identity of the great-grandparent(tc)
 
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, to._MyIdentity.Synchron);       //Identity of the child(to) is different than the identity of its parent(tc), as they are both unique objects.
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, ts._MyIdentity.Synchron);       //Identity of the grandchild(ts) is different than the identity of its grandparent(tc), as they are both unique objects.
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, tt._MyIdentity.Synchron);       //Identity of the great-grandchild(tt) is different than the identity of its great-grandparent(tc), as they are both unique objects.
+            Assert.AreNotEqual(tc._MyIdentity.Synchron, to._MyIdentity.Synchron);                       //Identity of the child(to) is different than the identity of its parent(tc), as they are both unique objects.
+            Assert.AreNotEqual(tc._MyIdentity.Synchron, ts._MyIdentity.Synchron);                       //Identity of the grandchild(ts) is different than the identity of its grandparent(tc), as they are both unique objects.
+            Assert.AreNotEqual(tc._MyIdentity.Synchron, tt._MyIdentity.Synchron);                       //Identity of the great-grandchild(tt) is different than the identity of its great-grandparent(tc), as they are both unique objects.
 
-            Assert.AreNotEqual(to._MyIdentity.Synchron, ts._MyIdentity.Synchron);      //Identity of the grandchild(ts) is different than the identity of its parent(to), as they are both unique objects.
-            Assert.AreNotEqual(to._MyIdentity.Synchron, tt._MyIdentity.Synchron);      //Identity of the great-grandchild(tt) is different than the identity of its grandparent(to), as they are both unique objects.
-
-
+            Assert.AreNotEqual(to._MyIdentity.Synchron, ts._MyIdentity.Synchron);                       //Identity of the grandchild(ts) is different than the identity of its parent(to), as they are both unique objects.
+            Assert.AreNotEqual(to._MyIdentity.Synchron, tt._MyIdentity.Synchron);                       //Identity of the great-grandchild(tt) is different than the identity of its grandparent(to), as they are both unique objects.
         }
 
         [Test, Order(401)]
@@ -58,10 +55,10 @@ namespace TcoCoreUnitTests
             string message = TestHelpers.RandomString(20);
 
             tc.ContextOpen();
-            ts.PostMessage(message);                                                   //Force the error message to the task instence
+            ts.PostMessage(message);                                                                    //Force the error message to the task instence
             tc.ContextClose();
 
-            Assert.AreEqual(message, ts.GetMessage());                                 //Check if message apears in the mime.
+            Assert.AreEqual(message, ts.GetMessage());                                                  //Check if message apears in the mime.
         }
 
         [Test, Order(402)]
@@ -69,25 +66,27 @@ namespace TcoCoreUnitTests
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
 
-            short ccc = ts._OnStateChangeCounter.Synchron;
-            short prevState;
-            short newState; 
+            short initState;
+            short newState;
+            short ccc = ts._OnStateChangeCounter.Synchron;                                              //Store the actual value of the calls of the method OnStateChange().
 
             ts.ReadOutState();
 
-            prevState = ts._MyState.Synchron;
-            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
+            initState = ts._MyState.Synchron;                                                           //Store the previous state of the ts
+            newState = TestHelpers.RandomNumber((short)(initState + 1), (short)(5 * (initState + 1)));  //Generate new random value of the new state.
+            Assert.AreNotEqual(initState, newState);                                                    //New state should be different as the initial state.
 
             tc.ContextOpen();
 
-            ts.TriggerChangeState(newState);
+            ts.TriggerChangeState(newState);                                                            //Change state of the ts to the new value newState.
             ts.ReadOutState();
 
             tc.ContextClose();
 
-            Assert.AreEqual(newState, ts._MyState.Synchron);
-            Assert.AreEqual(ccc+1, ts._OnStateChangeCounter.Synchron);
-            Assert.AreEqual("My state has been change from " + prevState.ToString() + " to the new state " + newState.ToString() + ".", ts.GetMessage());
+            Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed to the newState.                                                           
+            Assert.AreEqual(ccc+1, ts._OnStateChangeCounter.Synchron);                                  //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
+            Assert.AreEqual("My state has been change from " + initState.ToString()                     //Check if overiden method OnStateChange() generate expected message.
+                + " to the new state " + newState.ToString() + ".", ts.GetMessage());
         }
 
         [Test, Order(403)]
@@ -95,40 +94,43 @@ namespace TcoCoreUnitTests
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
             string message = TestHelpers.RandomString(20);
-            short ccc = ts._OnStateChangeCounter.Synchron;
-            short prevState;
+            short initState;
             short newState;
+            short ccc = ts._OnStateChangeCounter.Synchron;                                              //Store the actual value of the calls of the method OnStateChange().
 
             tc.SingleCycleRun(() =>
             {
-                ts.PostMessage(message);
+                ts.PostMessage(message);                                                                //Force test instance to post randomly generated message.
             });
 
-            Assert.AreEqual(message, ts.GetMessage());
+            Assert.AreEqual(message, ts.GetMessage());                                                  //Check if the randomly generated message has been appeared in mime.
 
             ts.ReadOutState();
-            prevState = ts._MyState.Synchron;
-            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
+
+            initState = ts._MyState.Synchron;                                                           //Store the previous state of the ts
+            newState = TestHelpers.RandomNumber((short)(initState + 1), (short)(5 * (initState + 1)));  //Generate new random value of the new state.
+            Assert.AreNotEqual(initState, newState);                                                    //New state should be different as the initial state.
 
             tc.SingleCycleRun(() =>
             {
-                ts.TriggerChangeState(prevState);
+                ts.TriggerChangeState(initState);                                                       //Change state initiated to the same value as the actual state was before. From initState to initState.
             });
             ts.ReadOutState();
 
-            Assert.AreEqual(prevState, ts._MyState.Synchron);
-            Assert.AreEqual(ccc, ts._OnStateChangeCounter.Synchron);
-            Assert.AreEqual(message, ts.GetMessage());
+            Assert.AreEqual(initState, ts._MyState.Synchron);                                           //State of the ts should stay the same.
+            Assert.AreEqual(ccc, ts._OnStateChangeCounter.Synchron);                                    //OnStateChange() method should not call, as there was no real change of the state of the ts.
+            Assert.AreEqual(message, ts.GetMessage());                                                  //Message should stay the same, as there was no real change of the state of the ts and therefor no OnStateChange() method should be performed.
 
             tc.SingleCycleRun(() =>
             {
-                ts.TriggerChangeState(newState);
+                ts.TriggerChangeState(newState);                                                        //Change state initiated to the different value as before. From initState to newState.
             });
             ts.ReadOutState();
 
-            Assert.AreEqual(newState, ts._MyState.Synchron);
-            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);
-            Assert.AreEqual("My state has been change from " + prevState.ToString() + " to the new state " + newState.ToString() + ".", ts.GetMessage());
+            Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed from initState to newState.
+            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
+            Assert.AreEqual("My state has been change from " + initState.ToString()                     //Check if overiden method OnStateChange() generate expected message and overwrite the message randomly generated.
+                + " to the new state " + newState.ToString() + ".", ts.GetMessage());
         }
 
         [Test, Order(404)]
@@ -136,68 +138,80 @@ namespace TcoCoreUnitTests
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
 
-            short newState = TestHelpers.RandomNumber(20, 100);
+            short newState = TestHelpers.RandomNumber(20, 100);                                         //Generate new random value of the newState
+            short ccc = ts._OnStateChangeCounter.Synchron;                                              //Store the actual value of the calls of the method OnStateChange().
 
             tc.SingleCycleRun(() =>
             {
-                ts.TriggerChangeState(newState);
-                ts.TriggerRestore();
+                ts.TriggerChangeState(newState);                                                        //Initiate change the state of the ts to the new value newState
             });
+            ts.ReadOutState();  
 
+            Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed to the newState
+            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
+
+            ccc = ts._OnStateChangeCounter.Synchron;                                                    //Store the actual value of the calls of the method OnStateChange().
+            tc.SingleCycleRun(() =>
+            {
+                ts.TriggerRestore();                                                                    //By calling the Restore() method state of the ts should change to -1
+            });
             ts.ReadOutState();
 
-            Assert.AreNotEqual(newState, ts._MyState.Synchron);
-            Assert.AreEqual(-1, ts._MyState.Synchron);
+            Assert.AreEqual(-1, ts._MyState.Synchron);                                                  //Check if Restore() method change the state of the ts to -1.
+            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
         }
 
         [Test, Order(405)]
         public void T405_ChangeStateWithObjectRestore()
         {
             TcoStateTest ts = tc._TcoObjectTest_A._TcoStateTest_A;
-            short prevState;
+            short initState;
             short newState;
-            
+            short ccc = ts._OnStateChangeCounter.Synchron;                                              //Store the actual value of the calls of the method OnStateChange().
+
             ts.ReadOutState();
-            prevState = ts._MyState.Synchron;
-            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
+            initState = ts._MyState.Synchron;                                                           //Store the previous state of the ts
+            newState = TestHelpers.RandomNumber((short)(initState + 1), (short)(5 * (initState + 1)));  //Generate new random value of the new state.
 
             tc.SingleCycleRun(() =>
             {
-                ts.TriggerChangeState(newState);
+                ts.TriggerChangeState(newState);                                                        //Initiate change the state of the ts to the new value newState
+                ts.CallTaskInstancies();                                                                //Call instancies of the tasks that are childs of the ts
+                ts.ReadOutState();
+            });
+
+            Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed from initState to newState.
+            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
+            Assert.IsFalse(ts._TcoTaskTest_A._IsBusy.Synchron);                                         //Task A should be in Idle state, as it was not started
+            Assert.IsFalse(ts._TcoTaskTest_B._IsBusy.Synchron);                                         //Task B should be in Idle state, as it was not started
+
+
+            tc.SingleCycleRun(() =>
+            {
+                ts.TriggerTaskInvoke();                                                                 //Calling the Invoke() methods on the both instancies of the task, should get them into the Request state
+                ts.CallTaskInstancies();                                                                //Following call of theirs body should get them into the Executing state.
+                ts.ReadOutState();
+            });
+
+            Assert.IsTrue(ts._TcoTaskTest_A._IsBusy.Synchron);                                          //Task A should be in the Execution state.
+            Assert.IsTrue(ts._TcoTaskTest_B._IsBusy.Synchron);                                          //Task B should be in the Execution state.
+
+            initState = ts._MyState.Synchron;                                                           //Store the previous state of the ts
+            newState = TestHelpers.RandomNumber((short)(initState + 1), (short)(5 * (initState + 1)));  //Generate new random value of the new state.
+
+            ccc = ts._OnStateChangeCounter.Synchron;                                                    //Store the actual value of the calls of the method OnStateChange().
+            tc.SingleCycleRun(() =>
+            {
+                ts.TriggerChangeStateWithObjectRestore(newState);                                       //Changing state of the ts with manual object restore using fluent syntax: ts.ChangeState(newState).ObjectRestore(TaskA).ObjectRestore(TaskB);
                 ts.CallTaskInstancies();
                 ts.ReadOutState();
             });
 
-            Assert.AreEqual(newState, ts._MyState.Synchron);
-            Assert.AreEqual("My state has been change from " + prevState.ToString() + " to the new state " + newState.ToString() + ".", ts.GetMessage());
-            Assert.IsFalse(ts._TcoTaskTest_A._IsBusy.Synchron);
-            Assert.IsFalse(ts._TcoTaskTest_B._IsBusy.Synchron);
+            Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed to the newState
+            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
 
-
-            tc.SingleCycleRun(() =>
-            {
-                ts.TriggerTaskInvoke();
-                ts.CallTaskInstancies();
-                ts.ReadOutState();
-            });
-
-            Assert.IsTrue(ts._TcoTaskTest_A._IsBusy.Synchron);
-            Assert.IsTrue(ts._TcoTaskTest_B._IsBusy.Synchron);
-
-            prevState = ts._MyState.Synchron;
-            newState = TestHelpers.RandomNumber((short)(prevState + 1), (short)(5 * (prevState + 1)));
-
-            tc.SingleCycleRun(() =>
-            {
-                ts.TriggerChangeStateWithObjectRestore(newState);
-                ts.CallTaskInstancies();
-                ts.ReadOutState();
-            });
-
-            Assert.AreEqual(newState, ts._MyState.Synchron);
-            Assert.AreEqual("My state has been change from " + prevState.ToString() + " to the new state " + newState.ToString() + ".", ts.GetMessage());
-            Assert.IsFalse(ts._TcoTaskTest_A._IsBusy.Synchron);
-            Assert.IsFalse(ts._TcoTaskTest_B._IsBusy.Synchron);
+            Assert.IsFalse(ts._TcoTaskTest_A._IsBusy.Synchron);                                         //Task A should be in Idle state, as it was restored.
+            Assert.IsFalse(ts._TcoTaskTest_B._IsBusy.Synchron);                                         //Task B should be in Idle state, as it was restored.
 
 
         }
@@ -209,67 +223,75 @@ namespace TcoCoreUnitTests
             TcoTaskTest tt_a;
             TcoTaskTest tt_b;
 
-            ts = tc._TcoObjectTest_A._TcoStateTest_A;
-            tt_a = ts._TcoTaskTest_A;
-            tt_b = ts._TcoTaskTest_B;
-            ts.ReadOutAutoRestoreProperties();
-            tt_a.ReadOutAutoRestoreProperties();
-            tt_b.ReadOutAutoRestoreProperties();
-            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.IsTrue(ts._AutoRestoreToMyChildsEnabled.Synchron);
+            //First case tc._TcoObjectTest_A._TcoStateTest_A
+            ts = tc._TcoObjectTest_A._TcoStateTest_A;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
+            tt_a.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            tt_b.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);                                  //Check if ts is not AutoRestorable, if it has EnableAutoRestore property enabled and if its childs have inherited the value of this property.
+            Assert.IsTrue(ts._AutoRestoreToMyChildsEnabled.Synchron);                                   //Values of this properties are given by definition part of the test instance.
             Assert.IsTrue(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsTrue(tt_b._AutoRestoreByMyParentEnabled.Synchron);
 
-            ts = tc._TcoObjectTest_A._TcoStateTest_B;
-            tt_a = ts._TcoTaskTest_A;
-            tt_b = ts._TcoTaskTest_B;
-            ts.ReadOutAutoRestoreProperties();
-            tt_a.ReadOutAutoRestoreProperties();
-            tt_b.ReadOutAutoRestoreProperties();
-            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.IsFalse(ts._AutoRestoreToMyChildsEnabled.Synchron);
+            //Second case tc._TcoObjectTest_A._TcoStateTest_B
+            ts = tc._TcoObjectTest_A._TcoStateTest_B;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
+            tt_a.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            tt_b.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);                                  //Check if ts is not AutoRestorable, if it has EnableAutoRestore property disabled and if its childs have inherited the value of this property.
+            Assert.IsFalse(ts._AutoRestoreToMyChildsEnabled.Synchron);                                  //Values of this properties are given by definition part of the test instance.
             Assert.IsFalse(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsFalse(tt_b._AutoRestoreByMyParentEnabled.Synchron);
 
-
-            ts = tc._TcoObjectTest_B._TcoStateTest_A;
-            tt_a = ts._TcoTaskTest_A;
-            tt_b = ts._TcoTaskTest_B;
-            ts.ReadOutAutoRestoreProperties();
-            tt_a.ReadOutAutoRestoreProperties();
-            tt_b.ReadOutAutoRestoreProperties();
-            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.IsTrue(ts._AutoRestoreToMyChildsEnabled.Synchron);
+            //Third case tc._TcoObjectTest_B._TcoStateTest_A
+            ts = tc._TcoObjectTest_B._TcoStateTest_A;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
+            tt_a.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            tt_b.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);                                  //Check if ts is not AutoRestorable, if it has EnableAutoRestore property enabled and if its childs have inherited the value of this property.
+            Assert.IsTrue(ts._AutoRestoreToMyChildsEnabled.Synchron);                                   //Values of this properties are given by definition part of the test instance.
             Assert.IsTrue(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsTrue(tt_b._AutoRestoreByMyParentEnabled.Synchron);
 
-            ts = tc._TcoObjectTest_B._TcoStateTest_B;
-            tt_a = ts._TcoTaskTest_A;
-            tt_b = ts._TcoTaskTest_B;
-            ts.ReadOutAutoRestoreProperties();
-            tt_a.ReadOutAutoRestoreProperties();
-            tt_b.ReadOutAutoRestoreProperties();
-            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.IsFalse(ts._AutoRestoreToMyChildsEnabled.Synchron);
+            //Fourth case tc._TcoObjectTest_A._TcoStateTest_B
+            ts = tc._TcoObjectTest_B._TcoStateTest_B;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
+            tt_a.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            tt_b.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
+            Assert.IsFalse(ts._AutoRestoreByMyParentEnabled.Synchron);                                  //Check if ts is not AutoRestorable, if it has EnableAutoRestore property disabled and if its childs have inherited the value of this property.
+            Assert.IsFalse(ts._AutoRestoreToMyChildsEnabled.Synchron);                                  //Values of this properties are given by definition part of the test instance.
             Assert.IsFalse(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsFalse(tt_b._AutoRestoreByMyParentEnabled.Synchron);
+
         }
 
         [Test, Order(407)]
         public void T407_AutoRestoreOnStateChange()
         {
+            //ts_a has EnableAutoRestore enabled, so his child tst_a should be AutoRestorable and on change of his parent state, it should restore itself.
+            //ts_b has EnableAutoRestore disabled, so his child tst_b should not be AutoRestorable and on change of his parent state, it should not restore itself.
+
             TcoStateTest ts_a, ts_b;
             TcoStateAutoRestoreTest tst_a, tst_b;
-            short rc_a, rc_b, is_a, is_b, tps_a, tps_b, ns_a, ns_b, cc_a, cc_b;
+            short rc_a, rc_b, is_a, is_b, tis_a, tis_b, ns_a, ns_b, cc_a, cc_b;
             ulong cv_a, cv_b;
 
-            ts_a = tc._TcoObjectTest_A._TcoStateTest_A;
-            ts_b = tc._TcoObjectTest_A._TcoStateTest_B;
-            tst_a = ts_a._TcoStateTest_A;
-            tst_b = ts_b._TcoStateTest_A;
+            ts_a = tc._TcoObjectTest_A._TcoStateTest_A;                                                 //ts_a(TcoState) is a parent object for tst_a(TcoState).
+            ts_b = tc._TcoObjectTest_A._TcoStateTest_B;                                                 //ts_b(TcoState) is a parent object for tst_b(TcoState).
+            tst_a = ts_a._TcoStateTest_A;                                                               //tst_a(TcoState) is a child object of the ts_a(TcoState).
+            tst_b = ts_b._TcoStateTest_B;                                                               //tst_b(TcoState) is a child object of the ts_b(TcoState).
 
-            //Ensure repeatibility of this test
-            tc.SingleCycleRun(() =>
+
+                                                                                                        //Ensure repeatibility of this test
+            tc.SingleCycleRun(() =>                                                                     //Cleanup change the state to 0, reset the OnStateChange counter and reset the AutoRestore properties (inherited from the parent so as dedicated to the childrens)
             {
                 ts_a.CleanUp();
                 ts_b.CleanUp();
@@ -277,17 +299,17 @@ namespace TcoCoreUnitTests
                 tst_b.CleanUp();
             });
 
-            ts_a.ReadOutAutoRestoreProperties();
-            Assert.IsTrue(ts_a._AutoRestoreToMyChildsEnabled.Synchron);
+            ts_a.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent.
+            Assert.IsTrue(ts_a._AutoRestoreToMyChildsEnabled.Synchron);                                 //Check if State A has EnabledAutoRestore property enabled.
 
-            ts_b.ReadOutAutoRestoreProperties();
-            Assert.IsFalse(ts_b._AutoRestoreToMyChildsEnabled.Synchron);
+            ts_b.ReadOutAutoRestoreProperties();                                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent.
+            Assert.IsFalse(ts_b._AutoRestoreToMyChildsEnabled.Synchron);                                //Check if State A has EnabledAutoRestore property disabled.
 
             ts_a.ReadOutState();
-            is_a = ts_a._MyState.Synchron;
+            is_a = ts_a._MyState.Synchron;                                                              //Store the value of the inital state of the State A
 
             ts_b.ReadOutState();
-            is_b = ts_b._MyState.Synchron;
+            is_b = ts_b._MyState.Synchron;                                                              //Store the value of the inital state of the State B
 
             tst_a._CountsPerStep.Synchron = 5;
             tst_b._CountsPerStep.Synchron = 7;
@@ -301,7 +323,7 @@ namespace TcoCoreUnitTests
             rc_a = tst_a._RestoreCounter.Synchron;
             rc_b = tst_b._RestoreCounter.Synchron;
 
-            tc.AddEmptyCycle();
+            tc.AddEmptyCycle();                                                                         //Empty cycle causes Restore() method call on the AutoRestorable State, in this caset tst_a
 
             tc.SingleCycleRun(() =>
             {
@@ -311,120 +333,97 @@ namespace TcoCoreUnitTests
                 ts_b.ReadOutState();
             });
 
-            //tst_a should be restored, as it is AutoRestorable and it was not called in the previous cycle
-            Assert.AreEqual(rc_a + 1, tst_a._RestoreCounter.Synchron);
-            //State of the tst_a is set to -1 by calling Restore() method, but in the same PLC cycle it is 
-            //set to 0 by calling ExecutionBody
-            Assert.AreEqual(0, tst_a._MyState.Synchron);
-            //CounterValue of the tst_a is reseted from 100 to 0 in the State -1 in the ExecutionBody()
-            //as Restore() method was called before due to ExecutionBody was not called in the previous PLC cycle.
-            //In the same PLC cycle it is State changes from -1 to 0 and in State 0 CounterValue is incremented by 1
-            //so at the end of this PLC cycle it should have value of 1
-            Assert.AreEqual(1, tst_a._CounterValue.Synchron);
+            Assert.AreEqual(rc_a + 1, tst_a._RestoreCounter.Synchron);                                  //tst_a should be restored, as it is AutoRestorable and it was not called in the previous cycle
+            Assert.AreEqual(0, tst_a._MyState.Synchron);                                                //State of the tst_a is set to -1 by calling Restore() method, but in the same PLC cycle it is set to 0 by calling ExecutionBody.
+            Assert.AreEqual(1, tst_a._CounterValue.Synchron);                                           //CounterValue of the tst_a is reset from 100 to 0 in the State -1 in the ExecutionBody(), as Restore() method was called before due to ExecutionBody not called in the previous PLC cycle.
+                                                                                                        //In the same PLC cycle its State changes from -1 to 0 and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of 1.
+            Assert.AreEqual(rc_b, tst_b._RestoreCounter.Synchron);                                      //tst_b should not be restored, as it is not AutoRestorable so does not matter if it was or was not called in the previous PLC cycle
+            
+            Assert.AreEqual(0, tst_b._MyState.Synchron);                                                //State of the tst_b should not be affected
+            Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);                                    //CounterValue of the tst_b is not reset and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of cv_b + 1.
 
-            //tst_b should not be restored, as it is not AutoRestorable so does not matter if it was or was not called in the previous PLC cycle
-            Assert.AreEqual(rc_b, tst_b._RestoreCounter.Synchron);
-            //State of the tst_b is not affected
-            Assert.AreEqual(0, tst_b._MyState.Synchron);
-            //CounterValue of the tst_b is not reseted and in State 0 CounterValue is incremented by 1
-            //so at the end of this PLC cycle it should have value of cv_b + 1
-            Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);
+            
+            Assert.AreEqual(is_a, ts_a._MyState.Synchron);                                              //State of the parent (ts_a) of the AutoRestorable child (tst_a) should remain the same as before.
+            Assert.AreEqual(is_b, ts_b._MyState.Synchron);                                              //State of the parent (ts_b) of the nonAutoRestorable child (tst_b) should remain the same as before.
 
-            //State of the parents of both childs remain same
-            Assert.AreEqual(is_a, ts_a._MyState.Synchron);
-            Assert.AreEqual(is_b, ts_b._MyState.Synchron);
-
-            rc_a = tst_a._RestoreCounter.Synchron;
-            rc_b = tst_b._RestoreCounter.Synchron;
-            cv_a = tst_a._CounterValue.Synchron;
-            cv_b = tst_b._CounterValue.Synchron;
+            rc_a = tst_a._RestoreCounter.Synchron;                                                      //Store the value of the counter of the Restore() method call.           
+            rc_b = tst_b._RestoreCounter.Synchron;                                                      //Store the value of the counter of the Restore() method call.
+            cv_a = tst_a._CounterValue.Synchron;                                                        //Store the value of the CounterVlaue of the AutoRestorable state (tst_a).
+            cv_b = tst_b._CounterValue.Synchron;                                                        //Store the value of the CounterVlaue of the nonAutoRestorable state (tst_b).
 
             tc.SingleCycleRun(() =>
             {
-                tst_a.TriggerRestore();
-                tst_b.TriggerRestore();
+                tst_a.TriggerRestore();                                                                 //Call the Restore() method on the AutoRestorable state instance (tst_a).
+                tst_b.TriggerRestore();                                                                 //Call the Restore() method on the nonAutoRestorable state instance (tst_b).
             });
 
-            Assert.AreEqual(rc_a + 1, tst_a._RestoreCounter.Synchron);
-            Assert.AreEqual(rc_b + 1, tst_b._RestoreCounter.Synchron);
-            //States of both tst_a so as tst_b should change to -1 as Retore() method was called
-            Assert.AreEqual(-1, tst_a._MyState.Synchron);
-            Assert.AreEqual(-1, tst_b._MyState.Synchron);
-            //Counter values of both tst_a so as tst_b should stay untouched as ExecutionBody() was not called yet
-            Assert.AreEqual(cv_a , tst_a._CounterValue.Synchron);
-            Assert.AreEqual(cv_b , tst_b._CounterValue.Synchron);
+            Assert.AreEqual(rc_a + 1, tst_a._RestoreCounter.Synchron);                                  //Check if the Restore() method was called ony once.
+            Assert.AreEqual(rc_b + 1, tst_b._RestoreCounter.Synchron);                                  //Check if the Restore() method was called ony once.
+            Assert.AreEqual(-1, tst_a._MyState.Synchron);                                               //Check if the state of tst_a has been change to -1 as the Retore() method was called.
+            Assert.AreEqual(-1, tst_b._MyState.Synchron);                                               //Check if the state of tst_b has been change to -1 as the Retore() method was called.
+            Assert.AreEqual(cv_a , tst_a._CounterValue.Synchron);                                       //Check if the counter value of tst_a stay unchanged as the ExecutionBody() was not called yet.
+            Assert.AreEqual(cv_b , tst_b._CounterValue.Synchron);                                       //Check if the counter value of tst_b stay unchanged as the ExecutionBody() was not called yet.
 
 
             tc.SingleCycleRun(() =>
             {
-                tst_a.ExecutionBody();
-                tst_b.ExecutionBody();
+                tst_a.ExecutionBody();                                                                  //Calling the execution body of the tst_a.
+                tst_b.ExecutionBody();                                                                  //Calling the execution body of the tst_b.
             });
+            
+            Assert.AreEqual(0, tst_a._MyState.Synchron);                                                //State of the tst_a should change from -1 to 0. 
+            Assert.AreEqual(0, tst_b._MyState.Synchron);                                                //State of the tst_b should change from -1 to 0. 
+            Assert.AreEqual(1, tst_a._CounterValue.Synchron);                                           //CounterValue of the tst_a is reset from 100 to 0 in the State -1 in the ExecutionBody(), as Restore() method was called before due to ExecutionBody not called in the previous PLC cycle.
+                                                                                                        //In the same PLC cycle its State changes from -1 to 0 and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of 1.
+            Assert.AreEqual(1, tst_b._CounterValue.Synchron);                                           //CounterValue of the tst_b is reset from 100 to 0 in the State -1 in the ExecutionBody(), as Restore() method was called before due to ExecutionBody not called in the previous PLC cycle.
+                                                                                                        //In the same PLC cycle its State changes from -1 to 0 and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of 1.
+            tis_a = 0;
+            tis_b = 0;
 
-            //States of both tst_a so as tst_b should change from - 1 to 0 
-            Assert.AreEqual(0, tst_a._MyState.Synchron);
-            Assert.AreEqual(0, tst_b._MyState.Synchron);
-            //CounterValue of the tst_a is reseted from the previous value to 0 in the State -1 in the ExecutionBody()
-            //In the same PLC cycle it is State changes from -1 to 0 and in State 0 CounterValue is incremented by 1
-            //so at the end of this PLC cycle it should have value of 1
-            Assert.AreEqual(1, tst_a._CounterValue.Synchron);
-            //CounterValue of the tst_b is reseted from the previous value to 0 in the State -1 in the ExecutionBody()
-            //In the same PLC cycle it is State changes from -1 to 0 and in State 0 CounterValue is incremented by 1
-            //so at the end of this PLC cycle it should have value of 1
-            Assert.AreEqual(1, tst_b._CounterValue.Synchron);
-
-            tps_a = 0;
-            tps_b = 0;
             tc.RunUntilEndConditionIsMet(() =>
             {
-                tst_a.ExecutionBody();
-                tst_b.ExecutionBody();
-                tps_a = tst_a._MyState.Synchron;
-                tps_b = tst_b._MyState.Synchron;
-            }, () => tps_a >= 10 && tps_b >= 10);
+                tst_a.ExecutionBody();                                                                  //Calling the execution body of the tst_a.
+                tst_b.ExecutionBody();                                                                  //Calling the execution body of the tst_b.
+                tis_a = tst_a._MyState.Synchron;                                                        //Readout state of the tst_a.
+                tis_b = tst_b._MyState.Synchron;                                                        //Readout state of the tst_b.
+            }, () => tis_a >= 10 && tis_b >= 10);                                                       //End condition- both task are in state 10 or greather
 
 
-            cc_a = ts_a._OnStateChangeCounter.Synchron;
-            ns_a = TestHelpers.RandomNumber((short)(is_a + 1), (short)(5 * (is_a + 1)));
+            cc_a = ts_a._OnStateChangeCounter.Synchron;                                                 //Store the actual value of the calls of the method OnStateChange() of the ts_a.
+            ns_a = TestHelpers.RandomNumber((short)(is_a + 1), (short)(5 * (is_a + 1)));                //Generate new random value of the new state of the ts_a.
 
-            Assert.AreNotEqual(is_a, ns_a);
+            cc_b = ts_b._OnStateChangeCounter.Synchron;                                                 //Store the actual value of the calls of the method OnStateChange() of the ts_b.
+            ns_b = TestHelpers.RandomNumber((short)(is_b + 1), (short)(5 * (is_b + 1)));                //Generate new random value of the new state of the ts_b.
 
-            cc_b = ts_b._OnStateChangeCounter.Synchron;
-            ns_b = TestHelpers.RandomNumber((short)(is_b + 1), (short)(5 * (is_b + 1)));
-            Assert.AreNotEqual(is_b, ns_b);
-
-            cv_a = tst_a._CounterValue.Synchron;
-            cv_b = tst_b._CounterValue.Synchron;
+            cv_a = tst_a._CounterValue.Synchron;                                                        //Store tha actual counter value of the tst_a.
+            cv_b = tst_b._CounterValue.Synchron;                                                        //Store tha actual counter value of the tst_b.
 
             tc.SingleCycleRun(() =>
             {
-                ts_a.TriggerChangeState(ns_a);
-                ts_b.TriggerChangeState(ns_b);
-                tst_a.ExecutionBody();
-                tst_b.ExecutionBody();
+                ts_a.TriggerChangeState(ns_a);                                                          //Initiate change state on the parent object ts_a, that should cause Restore() call on the child object tst_a.
+                ts_b.TriggerChangeState(ns_b);                                                          //Initiate change state on the parent object ts_b, that should cause Restore() call on the child object tst_b.
+                tst_a.ExecutionBody();                                                                  //Calling the execution body of the tst_a.
+                tst_b.ExecutionBody();                                                                  //Calling the execution body of the tst_b.
                 ts_a.ReadOutState();
                 ts_b.ReadOutState();
             });
-
-            //Parent state has changed to ns_a
-            Assert.AreEqual(ns_a, ts_a._MyState.Synchron);
-            Assert.AreEqual(cc_a + 1, ts_a._OnStateChangeCounter.Synchron);
-            //Child state has been restored
-            Assert.AreEqual(0, tst_a._MyState.Synchron);
-            //Child counter has been reseted
-            Assert.AreEqual(1, tst_a._CounterValue.Synchron);
+            //AutoRestorable child
+            Assert.AreEqual(ns_a, ts_a._MyState.Synchron);                                              //Check if the state of the parent ts_a has been changed to the new value ns_a.
+            Assert.AreEqual(cc_a + 1, ts_a._OnStateChangeCounter.Synchron);                             //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts_a.
+            Assert.AreEqual(0, tst_a._MyState.Synchron);                                                //Check if the state of the child tst_a has been restored to -1 by calling Restore() method, but in the same PLC cycle it is set to 0 by calling ExecutionBody.
+            Assert.AreEqual(1, tst_a._CounterValue.Synchron);                                           //Check if CounterValue of the tst_a is reset to 0 in the State -1 in the ExecutionBody(), as Restore() method was called before due to change state of the parent ts_a.
+                                                                                                        //In the same PLC cycle its State changes from -1 to 0 and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of 1.
 
 
-            //Parent state has changed to ns_b
-            Assert.AreEqual(ns_b, ts_b._MyState.Synchron);
-            Assert.AreEqual(cc_b + 1, ts_b._OnStateChangeCounter.Synchron);
-            //Child state has not been restored, so it should be same as before, or in the case if one call of the Execution body causes State increment it could be greather 
-            Assert.GreaterOrEqual(tps_b, tst_b._MyState.Synchron);
-            //Child counter has not been reseted
-            Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);
+            //NonAutoRestorable child
+            Assert.AreEqual(ns_b, ts_b._MyState.Synchron);                                              //Check if the state of the parent ts_b has been changed to the new value ns_b.
+            Assert.AreEqual(cc_b + 1, ts_b._OnStateChangeCounter.Synchron);                             //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts_b.
+            Assert.GreaterOrEqual(tis_b, tst_b._MyState.Synchron);                                      //Check if the state of the child tst_b has not been restored as this child is not AutoRestorable. The state of the tst_b
+                                                                                                        //should be the same as before, or in the case if one call of the Execution body causes State increment it could be greather.
+            Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);                                    //Check if CounterValue has not been reseted.
 
-            //Ensure repeatibility of this test
-            tc.SingleCycleRun(() =>
+                                                                                                        //Ensure repeatibility of this test
+            tc.SingleCycleRun(() =>                                                                     //Cleanup change the state to 0, reset the OnStateChange counter and reset the AutoRestore properties (inherited from the parent so as dedicated to the childrens)
             {
                 ts_a.CleanUp();
                 ts_b.CleanUp();

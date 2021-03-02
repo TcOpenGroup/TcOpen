@@ -114,33 +114,87 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(702)]
-        public void T702_ExternalDoNotRestoreChildBetweenSteps()
+        public void T702_ExternalSequencePostStepComplete()
         {
-            tc.SingleCycleRun(() =>                                     
+            short psc = tc._Sequencer._PostStepCompleteCount.Synchron;  //Store the actual value of the calls of the method PostStepComplete().
+            tc.SequencerSingleCycleRun(() =>                            //After execution this method actual value of the calls of the method PostStepComplete() should be incremented by the value of the variable numberOfSteps
+            {
+                if (tc.Step(0, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+
+                for (short i = 1; i <= numberOfSteps; i++)
+                {
+                    if (tc.Step((short)i, true, "Step " + i.ToString()))
+                    {
+                        tc.StepCompleteWhen(true);
+                    }
+                }
+                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                {
+                    tc.SequenceComplete();
+                }
+            });
+            Assert.AreEqual(psc + tc.GetNumberOfStepsInSequence(),      //The actual value of the call of the method PostStepComplete() should increment exactly by number of the steps in the sequence, as each step is completed.
+                tc._Sequencer._PostStepCompleteCount.Synchron);
+        }
+
+        [Test, Order(703)]
+        public void T703_ExternalSequencePostSequenceComplete()
+        {
+            short psc = tc._Sequencer._PostSequenceCompleteCount.Synchron;//Store the actual value of the calls of the method PostSequenceComplete().
+            tc.SequencerSingleCycleRun(() =>                            //After execution this method actual value of the calls of the method PostSequenceComplete() should be incremented by one.
+            {
+                if (tc.Step(0, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+
+                for (short i = 1; i <= numberOfSteps; i++)
+                {
+                    if (tc.Step((short)i, true, "Step " + i.ToString()))
+                    {
+                        tc.StepCompleteWhen(true);
+                    }
+                }
+                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                {
+                    tc.SequenceComplete();
+                }
+            });
+            Assert.AreEqual(psc + 1,                                    //The actual value of the call of the method PostStepComplete() should increment exactly by number of the steps in the sequence, as each step is completed.
+                tc._Sequencer._PostSequenceCompleteCount.Synchron);
+        }
+
+        [Test, Order(705)]
+        public void T705_ExternalDoNotRestoreChildBetweenSteps()
+        {
+            tc.SingleCycleRun(() =>
             {
                 Assert.IsFalse(tc.IsAutoRestorable());
                 Assert.IsFalse(tc.HasAutoRestoreEnabled());
                 Assert.IsFalse(tc.ChildIsAutoRestorable());
                 Assert.IsFalse(tc.ChildHasAutoRestoreEnabled());
                 tc.SetChildState(childState);                           //Set the child state to the desired state. As the parent sequencer has AutoRestore Disabled, the child is NonAutoRestorable.
-                Assert.AreEqual(childState, tc.GetChildState());        //After querying for child state, it cannot be restored to -1, and has to stay at its previous state
+                Assert.AreEqual(childState, tc.GetChildState());        //After querying for child state, it should not be restored to -1, and has to stay at its previous state
             });
 
-            tc.SequencerSingleCycleRun(() =>                                     
+            tc.SequencerSingleCycleRun(() =>
             {
-                tc.SetChildState(childState);
-                Assert.AreEqual(childState, tc.GetChildState());
+                tc.SetChildState(childState);                           //Set the child to the desired state.
+                Assert.AreEqual(childState, tc.GetChildState());        //Check if the child state has been changed to desired state.
                 if (tc.Step(0, true, "Initial step"))
                 {
-                    Assert.AreEqual(childState, tc.GetChildState());
-                    tc.StepCompleteWhen(true);
+                    Assert.AreEqual(childState, tc.GetChildState());    //Check if the child state has not been changed after change of the parent state, as this child is NonAutoRestorable.
+                    tc.StepCompleteWhen(true);                          //Complete step casuse that at the next Step() method call, Sequencer change its state from 0 to 1. Child state should be restored frm the value of childState to -1. 
                 }
                 for (short i = 1; i <= numberOfSteps; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
-                        Assert.AreEqual(childState, tc.GetChildState());
-                        tc.StepCompleteWhen(true);
+                        Assert.AreEqual(childState, tc.GetChildState());    //Check if the child state has not been changed after change of the parent state, as this child is NonAutoRestorable.
+                        tc.StepCompleteWhen(true);                          //Complete step casuse that at the next Step() method call, Sequencer change its state from 0 to 1. Child state should be restored frm the value of childState to -1. 
                     }
                 }
                 if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
@@ -1119,7 +1173,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(747)]
-        public void T747_RequestStepWhilePreviousRequestStepHasnotBeenYetProcessed()
+        public void T747_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed()
         {
             tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution

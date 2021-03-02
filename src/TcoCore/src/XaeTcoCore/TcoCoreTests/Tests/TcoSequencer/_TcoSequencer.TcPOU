@@ -16,6 +16,8 @@ VAR
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
 	_TcoState							: 	TcoState(THIS^ ,FALSE);
+	_PostStepCompleteCount 				: 	INT;
+	_PostSequenceCompleteCount 			: 	INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -8306,6 +8308,20 @@ IF THIS^.Step(_ID,_Enabled,_StepDescription) THEN
 		RETURN;
 	END_IF		
 END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostSequenceComplete" Id="{2fd78922-07d4-01ec-1736-1c3b4b7d9bd8}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD PUBLIC PostSequenceComplete ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_PostSequenceCompleteCount := _PostSequenceCompleteCount + 1;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostStepComplete" Id="{154d4f23-050b-01f6-08b9-2a631c3ec621}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD PUBLIC PostStepComplete]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_PostStepCompleteCount := _PostStepCompleteCount + 1;
 ]]></ST>
       </Implementation>
     </Method>
