@@ -143,7 +143,7 @@ END_VAR
 		<summary>
 			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
 			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overriden in inherited block.
+			This method is abstract, and it must be overridden in derived block.
 		</summary>
 	</docu>
 ~*)

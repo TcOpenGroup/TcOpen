@@ -6,11 +6,10 @@
 		<summary>
 			Basic construction block from which all blocks of a TcOpen application should derive. 
 			This function block is abstract and must be implemented in a derived block.
-			```TcoObject``` must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
-			```TcoObject```s that belong to same ```TcoContext``` must share the same context. 
-			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where the ```TcoObject``` 
-            is declared within the block that implements ```ITcoObject``` interface.
-			The ```TcoObject``` provides root context to its members, so all objects in the TcoContext share the same context.
+			```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
+			```TcoObjects``` that belong to same ```TcoContext``` share the same context. 
+			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).            
+			The ```TcoObject``` provides root context to all its members.
 			<para>
 				<example>
 				<note type="Example">
@@ -21,37 +20,37 @@
 					All the variables _myIdentity, _TcoObjectAidentity, _TcoObjectBidentity, _ChildTcoObjectidentity should have uniques values.
 				</para>
 					<code>
-	//Definition of the myTcoObject 
-	FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
-	VAR
-		  _myChildTcoObject	:	myChildTcoObject(THIS^);
-	END_VAR
-
-
-	//Definition of the myTcoContext 
-	FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
-	VAR
-		  _myTcoObjectA		:	myTcoObject(THIS^);					
-		  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context); 
-		  _myContext		:	ITcoContext;
-		  _ContextTcoObjectA	:	ITcoContext;
-		  _ContextTcoObjectB	:	ITcoContext;
-		  _ContextChildTcoObject	:	ITcoContext;
-		  _myIdentity		:	ULINT;
-		  _TcoObjectAidentity	: 	ULINT;
-		  _TcoObjectBidentity	: 	ULINT;
-		  _ChildTcoObjectidentity	: 	ULINT;							
-	END_VAR
-
-	//Plc code of the myTcoContext 
-	_myContext		:= 		THIS^.Context;
-	_ContextTcoObjectA	:=		_myTcoObjectA.Context;
-	_ContextTcoObjectB	:=		_myTcoObjectB.Context;
-	_ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
-	_myIdentity		:=		THIS^.Identity;
-	_TcoObjectAidentity	:=		_myTcoObjectA.Identity;
-	_TcoObjectBidentity	:=		_myTcoObjectB.Identity;
-	_ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
+							//Definition of the myTcoObject 
+							FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
+							VAR
+								  _myChildTcoObject	:	myChildTcoObject(THIS^);
+							END_VAR
+						
+						
+							//Definition of the myTcoContext 
+							FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
+							VAR
+								  _myTcoObjectA		:	myTcoObject(THIS^);					
+								  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context); 
+								  _myContext		:	ITcoContext;
+								  _ContextTcoObjectA	:	ITcoContext;
+								  _ContextTcoObjectB	:	ITcoContext;
+								  _ContextChildTcoObject	:	ITcoContext;
+								  _myIdentity		:	ULINT;
+								  _TcoObjectAidentity	: 	ULINT;
+								  _TcoObjectBidentity	: 	ULINT;
+								  _ChildTcoObjectidentity	: 	ULINT;							
+							END_VAR
+						
+							//Plc code of the myTcoContext 
+							_myContext		:= 		THIS^.Context;
+							_ContextTcoObjectA	:=		_myTcoObjectA.Context;
+							_ContextTcoObjectB	:=		_myTcoObjectB.Context;
+							_ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
+							_myIdentity		:=		THIS^.Identity;
+							_TcoObjectAidentity	:=		_myTcoObjectA.Identity;
+							_TcoObjectBidentity	:=		_myTcoObjectB.Identity;
+							_ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
 					</code>
 					 <note type="Explanation">
 						<para>
