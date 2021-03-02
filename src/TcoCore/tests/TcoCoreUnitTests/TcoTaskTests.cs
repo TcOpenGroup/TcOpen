@@ -627,11 +627,11 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(tt_b._IsBusy.Synchron);                                       //Task B should be in the Execution state as before.
 
             cc_a = ts_a._OnStateChangeCounter.Synchron;                                 //Store the value of the counter of the OnStateChange() method call of task A.
-            ns_a = TestHelpers.RandomNumber((short)(is_a + 1), (short)(5 * (is_a + 1)));//Generate new random value of the state new state.
+            ns_a = TestHelpers.RandomNumber((short)(is_a + 1), (short)(5 * (is_a + 1)));//Generate new random value of the new state.
             Assert.AreNotEqual(is_a, ns_a);                                             //New state should be different as the initial state.
 
             cc_b = ts_b._OnStateChangeCounter.Synchron;                                 //Store the value of the counter of the OnStateChange() method call of task A.
-            ns_b = TestHelpers.RandomNumber((short)(is_b + 1), (short)(5 * (is_b + 1)));//Generate new random value of the state new state.
+            ns_b = TestHelpers.RandomNumber((short)(is_b + 1), (short)(5 * (is_b + 1)));//Generate new random value of the new state.
             Assert.AreNotEqual(is_b, ns_b);                                             //New state should be different as the initial state.
 
             tc.SingleCycleRun(() =>
