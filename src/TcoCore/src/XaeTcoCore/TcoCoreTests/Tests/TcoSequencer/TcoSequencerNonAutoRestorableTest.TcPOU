@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoSequencerNonAutoRestorableTest" Id="{51a98037-a5c3-0526-003c-36d94696b27f}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerNonAutoRestorableTest EXTENDS TcoContext
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerNonAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_Sequencer : _TcoSequencer(THIS^, FALSE);
 	_RunPLCinstanceOnce : BOOL := FALSE;
@@ -53,7 +53,7 @@ END_IF
     </Implementation>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{927e7d84-c08b-0bde-39bb-9f2698695c85}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ChildHasAutoRestoreEnabled : BOOL;
+METHOD INTERNAL ChildHasAutoRestoreEnabled : BOOL;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ChildHasAutoRestoreEnabled := _Sequencer.ChildHasAutoRestoreEnabled();]]></ST>
@@ -61,7 +61,7 @@ METHOD ChildHasAutoRestoreEnabled : BOOL;
     </Method>
     <Method Name="ChildIsAutoRestorable" Id="{95c7db10-558f-0013-0493-eedd8f38a610}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ChildIsAutoRestorable : BOOL;
+METHOD INTERNAL ChildIsAutoRestorable : BOOL;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ChildIsAutoRestorable := _Sequencer.ChildIsAutoRestorable();]]></ST>
@@ -69,7 +69,7 @@ METHOD ChildIsAutoRestorable : BOOL;
     </Method>
     <Method Name="CleanupPointers" Id="{f261793b-5fd9-0f10-045e-c48ce347e280}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD CleanupPointers
+METHOD INTERNAL CleanupPointers
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Sequencer.CleanupPointers();]]></ST>
@@ -77,30 +77,30 @@ METHOD CleanupPointers
     </Method>
     <Method Name="ClearNumberOfSteps" Id="{7bcda0f4-cc68-006d-07f7-1d794096e80e}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ClearNumberOfSteps ]]></Declaration>
+METHOD INTERNAL ClearNumberOfSteps ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Sequencer.ClearNumberOfSteps();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextClose" Id="{a2068144-8768-0cc6-2ac4-f7b57e074067}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD PROTECTED ContextClose 
+METHOD INTERNAL ContextClose 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Close();]]></ST>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextOpen" Id="{081c3e11-a000-09bb-3a15-0cff8a5b37be}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ContextOpen 
+METHOD INTERNAL ContextOpen 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Open();]]></ST>
+        <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetChildState" Id="{210b9644-e12f-03c8-3c2e-5b24f6925bb2}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetChildState : INT
+METHOD INTERNAL GetChildState : INT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetChildState := _Sequencer.GetChildState();]]></ST>
@@ -108,7 +108,7 @@ METHOD GetChildState : INT
     </Method>
     <Method Name="GetCurrentStepOrder" Id="{6ad3e4e9-127e-061e-1507-35bdfe8afb19}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetCurrentStepOrder : UINT
+METHOD INTERNAL GetCurrentStepOrder : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetCurrentStepOrder := _Sequencer._currentStep.Order;]]></ST>
@@ -116,7 +116,7 @@ METHOD GetCurrentStepOrder : UINT
     </Method>
     <Method Name="GetNumberOfStepsInSequence" Id="{d7a19c38-c019-0b93-3005-f2b003b97079}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetNumberOfStepsInSequence : UINT
+METHOD INTERNAL GetNumberOfStepsInSequence : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetNumberOfStepsInSequence := _Sequencer._numberOfStepsInSequence;]]></ST>
@@ -124,7 +124,7 @@ METHOD GetNumberOfStepsInSequence : UINT
     </Method>
     <Method Name="GetOrderOfTheCurrentlyEvaluatedStep" Id="{4deaa7c7-014b-0c99-2264-5f70a4bb2383}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT
+METHOD INTERNAL GetOrderOfTheCurrentlyEvaluatedStep : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetOrderOfTheCurrentlyEvaluatedStep := _Sequencer._theOrderOfTheCurrentlyEvaluatedStep;]]></ST>
@@ -132,7 +132,7 @@ METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT
     </Method>
     <Method Name="GetOrderOfTheCurrentlyExecutedStep" Id="{806383c1-64a4-0ae7-1d82-70ed6bd92f45}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetOrderOfTheCurrentlyExecutedStep : UINT
+METHOD INTERNAL GetOrderOfTheCurrentlyExecutedStep : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetOrderOfTheCurrentlyExecutedStep := _Sequencer._theOrderOfTheCurrentlyExecutedStep;]]></ST>
@@ -140,14 +140,14 @@ METHOD GetOrderOfTheCurrentlyExecutedStep : UINT
     </Method>
     <Method Name="GetPreviousNumberOfStepsInSequence" Id="{1491fb44-e9b5-0959-1e23-930aa0e165fc}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetPreviousNumberOfStepsInSequence : UINT]]></Declaration>
+METHOD INTERNAL GetPreviousNumberOfStepsInSequence : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetPreviousNumberOfStepsInSequence := _Sequencer._previousNumberOfStepsInSequence;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetRequestStepCycle" Id="{f71b2f76-dfd6-06ac-1189-8dcfc7db8124}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetRequestStepCycle : UINT
+METHOD INTERNAL GetRequestStepCycle : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetRequestStepCycle := _Sequencer.RequestStepCycle;
@@ -156,7 +156,7 @@ METHOD GetRequestStepCycle : UINT
     </Method>
     <Method Name="GetSequencerErrorId" Id="{f13d85cd-257d-09dc-111d-e85abca68eb1}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetSequencerErrorId : INT
+METHOD INTERNAL GetSequencerErrorId : INT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetSequencerErrorId := _Sequencer.GetSequencerErrorId();
@@ -165,7 +165,7 @@ METHOD GetSequencerErrorId : INT
     </Method>
     <Method Name="GetTextOfTheMostImportantMessage" Id="{4d73dcbd-e4bb-0ae7-26b5-9400267c1c1a}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetTextOfTheMostImportantMessage : STRING(254)
+METHOD INTERNAL GetTextOfTheMostImportantMessage : STRING(254)
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetTextOfTheMostImportantMessage := THIS^._Sequencer.GetTextOfTheMostImportantMessage();]]></ST>
@@ -173,7 +173,7 @@ METHOD GetTextOfTheMostImportantMessage : STRING(254)
     </Method>
     <Method Name="HasAutoRestoreEnabled" Id="{59cfae51-f09c-0054-2700-a47696981c4e}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD HasAutoRestoreEnabled : BOOL;
+METHOD INTERNAL HasAutoRestoreEnabled : BOOL;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[HasAutoRestoreEnabled := _Sequencer.HasAutoRestoreEnabled();]]></ST>
@@ -181,7 +181,7 @@ METHOD HasAutoRestoreEnabled : BOOL;
     </Method>
     <Method Name="IsAutoRestorable" Id="{e20dae22-b9ba-0de2-2ff3-88e481f1f9e7}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD IsAutoRestorable : BOOL;
+METHOD INTERNAL IsAutoRestorable : BOOL;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsAutoRestorable := _Sequencer.IsAutoRestorable();]]></ST>
@@ -189,7 +189,7 @@ METHOD IsAutoRestorable : BOOL;
     </Method>
     <Method Name="IsFirstStepEntry" Id="{136eb862-04d1-0ab1-33f7-59ed03a74fb3}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD IsFirstStepEntry : BOOL
+METHOD INTERNAL IsFirstStepEntry : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsFirstStepEntry := THIS^._Sequencer.IsFirstStepEntry();]]></ST>

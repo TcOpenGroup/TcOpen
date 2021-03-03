@@ -65,7 +65,7 @@ END_VAR
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL Close]]></Declaration>
+METHOD INTERNAL FINAL Close]]></Declaration>
       <Implementation>
         <ST><![CDATA[_endCycleCount := _startCycleCount;]]></ST>
       </Implementation>
@@ -165,7 +165,7 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL Open]]></Declaration>
+METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
 ]]></ST>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="_internals_TcoContext" Id="{e8c35ff3-7db7-0658-3236-0a014b0801d2}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'hide'}
+FUNCTION_BLOCK ABSTRACT _internals_TcoContext EXTENDS TcoContext
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="_Close" Id="{5d562845-0196-04fe-119a-401b1b771fa4}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Close
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_Open" Id="{d3020a0b-9a44-07c5-2f85-7b556596171f}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Open
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Open();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

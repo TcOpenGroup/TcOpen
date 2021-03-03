@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="_TcoSequencer" Id="{ac19fe4f-0c0e-08e9-3df5-0840192e4ee2}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _TcoSequencer EXTENDS TcoSequencer
+    <Declaration><![CDATA[FUNCTION_BLOCK _TcoSequencer EXTENDS TcoCore._internals_TcoSequencer
 VAR
 	_RunOneStep							:	BOOL;
 	_RunAllSteps						:	BOOL;
@@ -8342,10 +8342,10 @@ END_IF
       </Set>
     </Property>
     <Method Name="SequencerClose" Id="{f3addcb4-0fda-0a2d-0925-430c6f4ad3f8}">
-      <Declaration><![CDATA[METHOD SequencerClose 
+      <Declaration><![CDATA[METHOD INTERNAL SequencerClose 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Close();]]></ST>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequencerHasError" Id="{07e19515-04c8-048f-12a4-f42415093577}" FolderPath="_Tests\">
@@ -8356,10 +8356,10 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="SequencerOpen" Id="{b4334737-6cb3-0eba-0d2f-cd067be7b53d}">
-      <Declaration><![CDATA[METHOD SequencerOpen
+      <Declaration><![CDATA[METHOD INTERNAL SequencerOpen
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Open();
+        <ST><![CDATA[SUPER^._Open();
 ]]></ST>
       </Implementation>
     </Method>

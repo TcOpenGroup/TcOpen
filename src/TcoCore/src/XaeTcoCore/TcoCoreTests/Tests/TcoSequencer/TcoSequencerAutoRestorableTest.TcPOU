@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoSequencerAutoRestorableTest" Id="{562bb59c-4938-0c9c-3dbf-3bf62db74778}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerAutoRestorableTest EXTENDS TcoContext
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_Sequencer : _TcoSequencer(THIS^, TRUE);
 	_RunPLCinstanceOnce : BOOL := FALSE;
@@ -87,7 +87,7 @@ METHOD ClearNumberOfSteps ]]></Declaration>
 METHOD PROTECTED ContextClose 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Close();]]></ST>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextOpen" Id="{74cc42e7-8072-0180-190b-77d20dffc054}">
@@ -95,7 +95,7 @@ METHOD PROTECTED ContextClose
 METHOD ContextOpen 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Open();]]></ST>
+        <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetChildState" Id="{1698e5e7-e8f6-0d10-2e8a-504f2dba89f9}">
