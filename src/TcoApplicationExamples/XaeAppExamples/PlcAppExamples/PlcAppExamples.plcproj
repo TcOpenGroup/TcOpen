@@ -26,6 +26,30 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Context\CorleoneKids\Constanzia_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\CorleoneKids\Frederico_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\CorleoneKids\Michael_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\CorleoneKids\Santino_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\CorleoneKids\Thomas_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\AKid_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\Leaves\AKid_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +73,9 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Context" />
+    <Folder Include="POUs\Context\CorleoneKids" />
+    <Folder Include="POUs\Context\Leaves" />
     <Folder Include="POUs\SIMPLE_PNEU" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
