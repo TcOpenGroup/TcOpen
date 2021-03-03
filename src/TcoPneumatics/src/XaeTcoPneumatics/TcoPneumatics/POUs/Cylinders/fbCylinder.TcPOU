@@ -130,19 +130,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="FB_init" Id="{99a923f6-6a5e-094e-0ce9-4b392edc1031}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Manual" Id="{8d280abe-da34-4370-8cca-5bd111ecd38d}">
       <Declaration><![CDATA[METHOD PROTECTED  Manual
 ]]></Declaration>

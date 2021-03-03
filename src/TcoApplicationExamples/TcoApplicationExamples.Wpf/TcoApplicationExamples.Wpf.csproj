@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
+    <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj" />
+    <ProjectReference Include="..\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj" />
+  </ItemGroup>
+</Project>

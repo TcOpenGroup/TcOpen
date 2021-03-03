@@ -4,7 +4,6 @@
     <Declaration><![CDATA[{attribute 'initialize_on_call'}
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
 VAR
-	{attribute clr [ReadOnly()]}
 	_taskState : eTaskState;
 	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
