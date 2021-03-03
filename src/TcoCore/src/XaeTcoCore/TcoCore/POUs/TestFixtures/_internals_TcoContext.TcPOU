@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="_internals_TcoContext" Id="{e8c35ff3-7db7-0658-3236-0a014b0801d2}" SpecialFunc="None">
-    <Declaration><![CDATA[(*~
-	<docu>
-		<exclude/>
-	</docu>
-~*)
-{attribute 'hide'}
+    <Declaration><![CDATA[{attribute 'hide'}
+{attribute clr [ExcludeFromApiDocumentation()]}
 FUNCTION_BLOCK ABSTRACT _internals_TcoContext EXTENDS TcoContext
 ]]></Declaration>
     <Implementation>
