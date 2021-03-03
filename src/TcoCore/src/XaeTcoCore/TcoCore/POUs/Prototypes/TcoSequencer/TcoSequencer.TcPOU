@@ -108,7 +108,6 @@ VAR
 END_VAR
 
 VAR
-	{attribute 'hide'}
 	_stepModeControler : TcoStepModeControler(THIS^,FALSE);
 	{attribute 'hide'}
 	_checkStepIdRequestedInStepMode : BOOL;

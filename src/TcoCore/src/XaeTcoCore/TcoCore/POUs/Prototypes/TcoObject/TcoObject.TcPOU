@@ -81,7 +81,6 @@ VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
 	_Identity : ULINT;
-	{attribute 'hide'}
 	_Parent : ITcoObject;
 	{attribute 'hide'}
 	_messenger : TcoMessenger(THIS^);
