@@ -165,7 +165,7 @@ END_IF
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL Close
+METHOD INTERNAL FINAL Close
 
 ]]></Declaration>
       <Implementation>
@@ -405,7 +405,7 @@ _previousNumberOfStepsInSequence := 0;
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL Open
+METHOD INTERNAL FINAL Open
 VAR
 	_message	:	STRING(254);
 END_VAR
