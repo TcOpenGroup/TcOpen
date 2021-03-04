@@ -5,9 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TcoCore.Sandbox.Wpf"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sandbox="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox"
-    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:sandbox1="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox;assembly=TcoCore.Wpf" xmlns:inxton="http://inxton.mts/xaml"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -17,7 +16,7 @@
         <TabControl>
             <TabItem Header="Object tree">
                 <ScrollViewer>
-                    <sandbox:DynamicTreeView DataContext="{Binding MANIPULATOR, Mode=OneWay}" />
+                    <inxton:DynamicTreeView DataContext="{Binding MANIPULATOR, Mode=OneWay}" />
                     <!--<vortex:RenderableContentControl DataContext="{Binding MANIPULATOR}" PresentationType="Base-Control" />-->
                 </ScrollViewer>
             </TabItem>

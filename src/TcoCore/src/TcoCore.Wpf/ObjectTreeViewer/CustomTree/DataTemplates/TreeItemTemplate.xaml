@@ -2,10 +2,10 @@
     x:Class="Tco.Wpf.CustomTree.DataTemplates.TreeItemTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sandbox="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox"
+    xmlns:tco="clr-namespace:Tco.Wpf"
     xmlns:vortex="http://vortex.mts/xaml">
 
-    <HierarchicalDataTemplate DataType="{x:Type sandbox:TreeItem}">
+    <HierarchicalDataTemplate DataType="{x:Type tco:TreeItem}">
         <ContentControl>
             <vortex:RenderableContentControl
                 DataContext="{Binding Item}"
