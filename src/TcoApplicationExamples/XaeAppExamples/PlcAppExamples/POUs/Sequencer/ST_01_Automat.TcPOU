@@ -27,9 +27,9 @@ METHOD  Main : BOOL
 //-------------------------------------------------------------		
 	THIS^.StepCompleteWhen
 	(
-	THIS^._components._vertical.MoveToHome().Done 
-	AND_THEN THIS^._components._horizontal.MoveToHome().Done
-	AND_THEN THIS^._components._gripper.MoveToHome().Done
+		THIS^._components._vertical.MoveToHome().Done 
+		AND_THEN THIS^._components._horizontal.MoveToHome().Done
+		AND_THEN THIS^._components._gripper.MoveToHome().Done
 	);			
 //-------------------------------------------------------------
 END_IF
