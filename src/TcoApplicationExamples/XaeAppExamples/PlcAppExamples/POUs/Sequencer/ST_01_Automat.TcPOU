@@ -2,8 +2,8 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="ST_01_Automat" Id="{6f848ece-b1d4-09dc-33fb-e8ab42728345}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Automat EXTENDS TcoCore.TcoSequencer
-VAR_IN_OUT
-	_components : ST_01_Components;
+VAR
+	_components : ST_01_Components(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -21,7 +21,9 @@ END_VAR
 METHOD  Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Step(inStepID := 100, 
+        <ST><![CDATA[_components();
+
+IF(Step(inStepID := 100, 
 		inEnabled := TRUE, 
 		inStepDescription := 'GROUND')) THEN
 //-------------------------------------------------------------		

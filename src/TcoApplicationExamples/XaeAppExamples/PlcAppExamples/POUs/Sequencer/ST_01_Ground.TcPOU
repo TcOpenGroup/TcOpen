@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="ST_01_Ground" Id="{1ddd18cd-709e-0f65-0cb2-7280de74d03d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Ground EXTENDS TcoCore.TcoSequencer
-VAR_IN_OUT
+VAR
 	_components : ST_01_Components(THIS^);
 END_VAR
 ]]></Declaration>

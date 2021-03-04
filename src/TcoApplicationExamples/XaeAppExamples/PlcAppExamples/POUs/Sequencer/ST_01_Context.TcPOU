@@ -5,8 +5,6 @@
 // Note that this block is extended by 'TcoCore.TcoContext'. 
 FUNCTION_BLOCK ST_01_Context EXTENDS TcoCore.TcoContext
 VAR
-	// Encapsulates components of the station
-	_components : ST_01_Components(THIS^);
 	// Ground position sequence
 	_groundSequcence : ST_01_Ground(THIS^, FALSE);
 	// Automat mode sequence	
@@ -31,11 +29,7 @@ END_VAR]]></Declaration>
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_components();
-_groundSequcence(_components := THIS^._components);
-_automatSequence(_components := THIS^._components);
-
-IF(_groundTask.Execute()) THEN 
+        <ST><![CDATA[IF(_groundTask.Execute()) THEN 
 	_groundSequcence.Run(); 
 	_groundTask.DoneWhen(_groundSequcence._currentStep.ID = 400); 
 END_IF;
