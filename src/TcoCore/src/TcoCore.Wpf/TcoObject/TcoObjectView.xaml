@@ -18,6 +18,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Visibility="{Binding Tasks, Converter={local:CountToVisibilityConverter}}">
                     <ItemsControl ItemsSource="{Binding Tasks}">
@@ -46,6 +47,10 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                </Border>
+
+                <Border Grid.Row="2" Visibility="{Binding TcoObject._messenger._mime.Text.Cyclic, Converter={local:EmptyStringToVisibilityConverter}}">
+                    <TextBlock Text="{Binding TcoObject._messenger._mime.Text.Cyclic}" />
                 </Border>
             </Grid>
         </GroupBox>

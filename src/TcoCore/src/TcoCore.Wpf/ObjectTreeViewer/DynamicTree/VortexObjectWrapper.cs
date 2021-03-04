@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Vortex.Connector;
 
-namespace inxton.vortex.framework.dynamictreeview.wpf.sandbox
+namespace Tco.Wpf
 {
     public class TreeWrapperObject : IVortexObject
     {
