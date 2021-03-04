@@ -49,7 +49,7 @@
                     </ItemsControl>
                 </Border>
 
-                <Border Grid.Row="2" Visibility="{Binding TcoObject._messenger._mime.Text.Cyclic, Converter={local:EmptyStringToVisibilityConverter}}">
+                <Border Grid.Row="2" Visibility="{Binding TcoObject._messenger._mime.IsActive, Converter={local:BooleanToVisibilityConverter}}">
                     <TextBlock Text="{Binding TcoObject._messenger._mime.Text.Cyclic}" />
                 </Border>
             </Grid>
