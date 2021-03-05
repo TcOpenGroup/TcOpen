@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="VitoCorleone_Context" Id="{6d11b071-a8fb-0da4-121f-f03cc1d5b01d}" SpecialFunc="None">
-    <Declaration><![CDATA[(*
+    <Declaration><![CDATA[//--
+// <ContextExampleDeclarations>
+(*
 		
 			THIS EXAMPLE AIMS TO EXPLAIN WHAT CONTEXT AND IDENITY ARE IN A 'TcoOpen' APPLICATION.
 			SEE Main() method od this block.	
 
 *)
-
-{attribute clr [ForceIntoApiDocumentation()]}
 FUNCTION_BLOCK VitoCorleone_Context EXTENDS TcoCore.TcoContext
 VAR
 	// Each context member object has it 'context' and assigned when instantiated (at birth)
@@ -27,7 +27,11 @@ VAR
 	
 	_donCorleoneIdentity : ULINT;
 	_isDifferentIndentity : BOOL;
-END_VAR]]></Declaration>
+END_VAR
+//---------------------------------------------------------------------------
+// </ContextExampleDeclarations>
+//--
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -44,7 +48,11 @@ END_VAR]]></Declaration>
 METHOD PROTECTED  Main
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[(*
+        <ST><![CDATA[//--
+// <ContextExampleCode>
+//___________________________________________________________________________
+//Implementation part of the TcoContext using.
+(*
 
 					CONTEXT vs IDENTITY
 
@@ -94,7 +102,10 @@ _isDifferentIndentity := _donCorleoneIdentity <> THIS^._santino.Identity
 
 // Once the context is asigned (at birth [instantiated]) it cannot be changed, an attempt to change the context will result in vendetta.
 
-//THIS^._santino.Messenger.Debug('Santino is trying to say something');						]]></ST>
+//THIS^._santino.Messenger.Debug('Santino is trying to say something');			
+// </ContextExampleCode>
+//--
+			]]></ST>
       </Implementation>
     </Method>
   </POU>
