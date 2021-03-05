@@ -90,7 +90,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^._taskState = eTaskState.Idle OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Ready OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
 	IF Shape = 0 THEN
 		StartLinear(TargetValue,Duration);
 	ELSE
@@ -129,7 +129,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^._taskState = eTaskState.Idle OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Ready OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
 	_TransitionType	:= eTransitionType.Linear;
 	_StartValue := Value;
 	_TargetValue := TargetValue;
@@ -158,7 +158,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^._taskState = eTaskState.Idle OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Ready OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
 	IF Shape = 0 THEN
 		StartLinear(TargetValue,Duration);
 	ELSE
@@ -192,55 +192,5 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoTask_Transition">
-      <LineId Id="133" Count="11" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="151" Count="8" />
-      <LineId Id="180" Count="0" />
-      <LineId Id="171" Count="1" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="173" Count="6" />
-      <LineId Id="145" Count="2" />
-      <LineId Id="181" Count="0" />
-      <LineId Id="148" Count="1" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_Transition.ImmediateChange.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_Transition.ImmediateChange.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_Transition.StartExponential">
-      <LineId Id="78" Count="13" />
-      <LineId Id="110" Count="0" />
-      <LineId Id="92" Count="4" />
-      <LineId Id="111" Count="1" />
-      <LineId Id="97" Count="5" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_Transition.StartLinear">
-      <LineId Id="33" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="34" Count="1" />
-    </LineIds>
-    <LineIds Name="TcoTask_Transition.StartStype">
-      <LineId Id="98" Count="30" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

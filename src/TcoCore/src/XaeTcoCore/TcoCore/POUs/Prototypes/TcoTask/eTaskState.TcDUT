@@ -15,34 +15,49 @@ TYPE eTaskState :
 (*~
 	<docu>
 		<summary>
-			Task is in Idle state, the Execute() method returns FALSE. 
-			Task can be satrted by calling the Invoke() method. 
+			Task is in Ready state, the Execute() method returns FALSE. 
+			Task can be started by calling the Invoke() method. 
 		</summary>				
 	</docu>	
 ~*)
-	Idle := 0,
+	Ready := 0,
 (*~
 	<docu>
 		<summary>
-			Task is in Request state, if Invoke() method has been called and the Execute() method has not been called yet. 
-			The first following call of the method Execute() change the task state to Executing and returns TRUE, until Done or Error state is reached.
-			Invoking the task is possible from Idle state.
-			Moreover it could be possible also from Done state in the following cases:
-			1.) The Invoke() method was not called in that PLC cycle in which the Done state was reached. 
-			2.) 
+			Task is in Requested state, if Invoke() method has been called and the Execute() method has not been called yet. The first following call of the method Execute() 
+			change the task state to Executing and returns TRUE, until Done or Error state is reached.
 		</summary>				
 	</docu>	
 ~*)
-	Request := 10,
+	Requested := 10,
 (*~
 	<docu>
 		<summary>
-			When the task is in Executing state, Execute() method returns TRUE. Leaving this state is 
+			When the task is in Busy state, Execute() method returns TRUE. Leaving this state is possible as follows:
+			<para>1.) By calling the Abort() task gets into the Idle state.</para>
+			<para>2.) By calling the DoneWhen(true) task gets into the Done state.</para>
+			<para>3.) By calling the Restore() task gets into the Idle state.</para>
+			<para>4.) By calling the ThrowWhen(true) task gets into the Error state.</para>
 		</summary>				
 	</docu>	
 ~*)
-	Executing := 20,
+	Busy := 20,
+(*~
+	<docu>
+		<summary>
+			Task is in Error state. To be able to start the task again the error state has to be reseted by calling the Restore() method.
+		</summary>				
+	</docu>	
+~*)	
 	Error := 30,
+(*~
+	<docu>
+		<summary>
+			Task is in Done state, Execute() method returns FALSE. To be able to start the task again '''rising edge''' of the calling of the Invoke() method needs to be performed.
+			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>
+		</summary>				
+	</docu>	
+~*)	
 	Done := 40
 );
 END_TYPE

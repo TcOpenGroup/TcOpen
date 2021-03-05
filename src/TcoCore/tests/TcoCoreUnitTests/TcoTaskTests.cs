@@ -128,8 +128,8 @@ namespace TcoCoreUnitTests
             tc._TcoObjectTest_A._TcoTaskTest_A.TriggerRestore();                        //Restore Task A
             tc._TcoObjectTest_A._TcoTaskTest_B.TriggerRestore();                        //Restore Task B
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.SetPreviousStateToIdle();                //Set previous state of the Task A to Idle
-            tc._TcoObjectTest_A._TcoTaskTest_B.SetPreviousStateToIdle();                //Set previous state of the Task B to Idle
+            tc._TcoObjectTest_A._TcoTaskTest_A.SetPreviousStateToReady();               //Set previous state of the Task A to Ready
+            tc._TcoObjectTest_A._TcoTaskTest_B.SetPreviousStateToReady();               //Set previous state of the Task B to Ready
 
             tc.RunUntilEndConditionIsMet(() =>
             {

@@ -43,7 +43,7 @@ CountDown_Done 		:= FALSE;
 ResetToZero_Done 	:= FALSE;
 	
 //******************************************************************
-IF(TcoTask_CountUp._taskState = eTaskState.Request AND CountUp_PreviousState<> eTaskState.Request ) THEN
+IF(TcoTask_CountUp._taskState = eTaskState.Requested AND CountUp_PreviousState<> eTaskState.Requested ) THEN
 	CountUp_InvokeTrigCounter := CountUp_InvokeTrigCounter + 1;
 END_IF
 
@@ -61,7 +61,7 @@ CountUp_PreviousState := TcoTask_CountUp._taskState ;
 //******************************************************************
 
 //******************************************************************
-IF(TcoTask_CountDown._taskState = eTaskState.Request AND CountDown_PreviousState <> eTaskState.Request) THEN
+IF(TcoTask_CountDown._taskState = eTaskState.Requested AND CountDown_PreviousState <> eTaskState.Requested) THEN
 	CountDown_InvokeTrigCounter := CountDown_InvokeTrigCounter + 1;
 END_IF
 
@@ -80,7 +80,7 @@ CountDown_PreviousState := TcoTask_CountDown._taskState ;
 //******************************************************************
 
 //******************************************************************
-IF (TcoTask_ResetToZero._taskState = eTaskState.Request AND ResetToZero_PreviousState <> eTaskState.Request) THEN
+IF (TcoTask_ResetToZero._taskState = eTaskState.Requested AND ResetToZero_PreviousState <> eTaskState.Requested) THEN
 	ResetToZero_InvokeTrigCounter := ResetToZero_InvokeTrigCounter + 1;
 END_IF
 

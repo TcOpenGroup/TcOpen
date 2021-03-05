@@ -10,7 +10,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(THIS^._taskState = eTaskState.Request) THEN
+      <ST><![CDATA[IF(THIS^._taskState = eTaskState.Requested) THEN
 	CounterValue := SetUpValue;
 	_InvokeCounter := _InvokeCounter + 1; 
 END_IF;
@@ -75,32 +75,5 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
-    <LineIds Name="TcoTask_DownCounter">
-      <LineId Id="41" Count="1" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="36" Count="3" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="52" Count="1" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_DownCounter.CounterValue.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_DownCounter.CounterValue.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_DownCounter.InTheMiddle.Get">
-      <LineId Id="5" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_DownCounter.SetUpValue.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask_DownCounter.SetUpValue.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
