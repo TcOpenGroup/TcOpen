@@ -12,9 +12,9 @@ VAR
 	_RunOneStep : BOOL;
 	_RunAllSteps : BOOL;
 	_FinishStep : BOOL;
-	_Reset : BOOL;
+	_Restore : BOOL;
 	_CycleCount : INT;
-	_ResetCycleCount : INT;
+	_RestoreCycleCount : INT;
 	_Init: BOOL;
 END_VAR
 ]]></Declaration>
@@ -25,11 +25,11 @@ END_VAR
 	_Init := TRUE;
 END_IF
 
-IF _Reset THEN
+IF _Restore THEN
 	ContextOpen();	
-	THIS^._Sequencer.Reset();	
-	_ResetCycleCount := _ResetCycleCount + 1;
-	_Reset := FALSE;
+	THIS^._Sequencer.Restore();	
+	_RestoreCycleCount := _RestoreCycleCount + 1;
+	_Restore := FALSE;
 	ContextClose();	
 	RETURN;
 END_IF
@@ -228,11 +228,11 @@ END_VAR
         <ST><![CDATA[_Sequencer.RequestStep(inRequestedStepId);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Reset" Id="{ed039be1-5ec9-0f31-1ced-279adddd1155}">
+    <Method Name="Restore" Id="{ed039be1-5ec9-0f31-1ced-279adddd1155}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD Reset ]]></Declaration>
+METHOD Restore ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.Reset();
+        <ST><![CDATA[_Sequencer.Restore();
 ]]></ST>
       </Implementation>
     </Method>
@@ -368,7 +368,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Step := _Sequencer.Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
+        <ST><![CDATA[Step := _Sequencer._Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepBackward" Id="{d98107a1-3a0d-0df5-09e6-118646b66a3a}">

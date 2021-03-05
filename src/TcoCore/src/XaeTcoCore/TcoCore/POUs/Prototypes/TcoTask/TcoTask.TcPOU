@@ -196,6 +196,10 @@ IF(THIS^._taskState = eTaskState.Request)
   THEN
 	THIS^._taskState := eTaskState.Executing;
 END_IF;
+
+IF(THIS^._taskState = eTaskState.Error) THEN
+	OnTaskError();
+END_IF;
 	
 Execute := (THIS^._taskState = eTaskState.Executing);
 ]]></ST>
@@ -251,6 +255,13 @@ _nextExpectedCycle := THIS^._Parent.Context.StartCycleCount + 1;
 
 Invoke := THIS^;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{7bd5d176-51b6-065b-1ffd-f139109a93ea}">
+      <Declaration><![CDATA[METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{afacd00c-5569-431f-be3c-22a90381057d}">

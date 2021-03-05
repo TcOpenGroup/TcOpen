@@ -17,7 +17,7 @@ namespace TcoCoreUnitTests
         protected short lastStepId = 32767;
         protected string lastStepDescription = "This is last step of the sequence";
         protected short cycleCount = 0;
-        protected short resetCycleCount = 0;
+        protected short restoreCycleCount = 0;
         protected bool running;
         protected ushort numberOfSteps = 0;
         protected ushort initCycle = 100;
@@ -26,6 +26,7 @@ namespace TcoCoreUnitTests
         protected short reqStepNotExists = 300;
         protected short childState = 100;
         protected short plcCycle = 0;
+        protected ulong onSequencerErrorCount = 0;
 
         [OneTimeSetUp]
         public void TestInit()
@@ -35,8 +36,8 @@ namespace TcoCoreUnitTests
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
             tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
             tc._FinishStep.Synchron = false;                            //Reset finish step flag in the PLC testing instance
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc._Restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
         }
 
         [Test, Order(500)]
@@ -45,7 +46,7 @@ namespace TcoCoreUnitTests
             initStepId = 32767;
             initStepDescription = "---test---init---";
             numberOfSteps = 100;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SingleCycleRun(() => tc.SetCyclicMode());                //Set sequencer into the cyclic mode
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal flow step counters, so number of steps is going to be counted again on next sequence run
@@ -216,10 +217,10 @@ namespace TcoCoreUnitTests
             lastStepId = 32767;
             lastStepDescription = "This is last step of the sequence";
             cycleCount = 0;
-            resetCycleCount = 0;
+            restoreCycleCount = 0;
             numberOfSteps = 0;
 
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsNotChecked();                               //Set sequence as not checked, so StepId uniqueness is going to be performed on next sequence run
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
             tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
@@ -227,7 +228,7 @@ namespace TcoCoreUnitTests
             tc._StepID.Synchron = lastStepId;                           //Set StepId of the last step in the PLC instance
             tc._Enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
             tc._StepDescription.Synchron = lastStepDescription;         //Set StepDescription of the last step in the PLC instance
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
+            tc._Restore.Synchron = false;                                 //Reset sequence restore flag in the PLC testing instance
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
             tc._RunAllSteps.Synchron = true;                            //Set all step execution flag in the PLC testing instance. If this value so as the _FinishStep are true, 
                                                                         //all steps are executed and finished in one PLC cycle
@@ -290,20 +291,20 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(512)]
-        public void T512_PLCSequenceResetAlreadyCheckedSequence()
+        public void T512_PLCSequenceRestoreAlreadyCheckedSequence()
         {
-                                                                        //After Sequence reset, counting the steps so as the checking the StepId uniqueness has to be performed again
+                                                                        //After Sequence restore, counting the steps so as the checking the StepId uniqueness has to be performed again
             tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
             tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-            resetCycleCount = tc._ResetCycleCount.Synchron;             //Store the actual sequence reset cycle counter
-            tc._Reset.Synchron = true;                                  //Set sequence reset flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
+            restoreCycleCount = tc._RestoreCycleCount.Synchron;         //Store the actual sequence restore cycle counter
+            tc._Restore.Synchron = true;                                //Set sequence restore flag in the PLC testing instance. If this value is true, PLC restores the sequencer in the 
             running = true;                                             //PLC instance. Once it is done, PLC reset this variable to false.
             while (running)
             {
-                running = tc._Reset.Synchron;
+                running = tc._Restore.Synchron;
             }
-            Assert.AreEqual(resetCycleCount + 1,                        //Check if only one reset of the sequencer was was performed, as it was expected
-                tc._ResetCycleCount.Synchron);
+            Assert.AreEqual(restoreCycleCount + 1,                      //Check if only one restore of the sequencer was was performed, as it was expected
+                tc._RestoreCycleCount.Synchron);
             Assert.AreEqual(0, tc.GetNumberOfStepsInSequence());        //Check if the number of the steps in the sequence was succesfully cleared
             Assert.AreEqual(0, tc.GetPreviousNumberOfStepsInSequence());//Check if the number of the previous steps in the sequence was succesfully cleared
         }
@@ -321,7 +322,7 @@ namespace TcoCoreUnitTests
             tc._StepID.Synchron = lastStepId;                           //Set the StepId of the last step in the PLC instance
             tc._Enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
             tc._StepDescription.Synchron = lastStepDescription;         //Set thw StepDesciption of the last step in the PLC instance
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
+            tc._Restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
             tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
 
@@ -371,6 +372,8 @@ namespace TcoCoreUnitTests
                                                                         //In case of StepId uniqueness error occured it stays true, that means no entrance into Step body in the PLC has been performed
             tc._RunPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
             running = true;                                             //reset this variable to false
+            onSequencerErrorCount =                                     //Store actual value of the OnSequencerError counter.
+                tc._Sequencer._OnSequencerErrorCount.Synchron;
             while (running)
             {
                 running = tc._RunPLCinstanceOnce.Synchron;
@@ -396,30 +399,32 @@ namespace TcoCoreUnitTests
                     tc.GetTextOfTheMostImportantMessage());
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+            Assert.GreaterOrEqual(onSequencerErrorCount + 10,           //Check if OnSequencerErrorCount has been incremented by 10-NotUniqueStepId
+                tc._Sequencer._OnSequencerErrorCount.Synchron);
         }
 
         [Test, Order(515)]
-        public void T515_PLCSequenceNotUniqueStepIdReset()
+        public void T515_PLCSequenceNotUniqueStepIdRestore()
         {
             tc._FinishStep.Synchron = true;
-                                                                        //After Sequence reset, counting the steps so as the checking the StepId uniqueness has to be performed again
+                                                                        //After Sequence restore, counting the steps so as the checking the StepId uniqueness has to be performed again
             tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
             tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-            resetCycleCount = tc._ResetCycleCount.Synchron;             //Store the actual sequence reset cycle counter
-            tc._Reset.Synchron = true;                                  //Set sequence reset flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
+            restoreCycleCount = tc._RestoreCycleCount.Synchron;         //Store the actual sequence restore cycle counter
+            tc._Restore.Synchron = true;                                //Set sequence restore flag in the PLC testing instance. If this value is true, PLC restores the sequencer in the 
             running = true;                                             //PLC instance. Once it is done, PLC reset this variable to false.
             while (running)
             {
-                running = tc._Reset.Synchron;
+                running = tc._Restore.Synchron;
             }
-            Assert.AreEqual(resetCycleCount + 1,                        //Check if only one reset of the sequencer was was performed, as it was expected
-                tc._ResetCycleCount.Synchron);
+            Assert.AreEqual(restoreCycleCount + 1,                      //Check if only one restore of the sequencer was was performed, as it was expected
+                tc._RestoreCycleCount.Synchron);
             Assert.AreEqual(0, tc.GetNumberOfStepsInSequence());        //Check if the number of the steps in the sequence was succesfully cleared
             Assert.AreEqual(0, tc.GetPreviousNumberOfStepsInSequence());//Check if the number of the previous steps in the sequence was succesfully cleared
         }
 
         [Test, Order(516)]
-        public void T516_PLCSequenceAfterErrorResetFirstCycle()
+        public void T516_PLCSequenceAfterErrorRestoreFirstCycle()
         {
             initStepId = 800;
             lastStepId = 32765;
@@ -431,7 +436,7 @@ namespace TcoCoreUnitTests
             tc._StepID.Synchron = lastStepId;                           //Set StepId of the last step in the PLC instance
             tc._Enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
             tc._StepDescription.Synchron = lastStepDescription;         //Set StepDecription of the last step in the PLC instance
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
+            tc._Restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
             tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
 
@@ -460,7 +465,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(517)]
-        public void T517_PLCSequenceAfterErrorResetSecondCycle()
+        public void T517_PLCSequenceAfterErrorRestoreSecondCycle()
         {
                                                                         //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness
                                                                         //has already been performed
@@ -490,7 +495,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(518)]
-        public void T518_PLCSequenceAfterErrorResetThirdCycle()
+        public void T518_PLCSequenceAfterErrorRestoreThirdCycle()
         {
                                                                         //During this third sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness
                                                                         //has already been performed
@@ -523,7 +528,7 @@ namespace TcoCoreUnitTests
         {
             initStepId = 32767;
             numberOfSteps = 100;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -651,7 +656,7 @@ namespace TcoCoreUnitTests
         [Test, Order(523)]
         public void T523_ResetErrorRunAgainAndPrepareForCommentOut()
         {
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -744,7 +749,7 @@ namespace TcoCoreUnitTests
         [Test, Order(525)]
         public void T525_ResetErrorRunAgainAndPrepareForUncomment()
         {
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
 
@@ -838,7 +843,7 @@ namespace TcoCoreUnitTests
         public void T530_OpenCloseSequenceFirstCycle()
         {
             numberOfSteps = 10;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal flow step counters, so number of steps is going to be counted again on next sequence execution
 
@@ -965,7 +970,7 @@ namespace TcoCoreUnitTests
             numberOfSteps = 100;
             reqStep = 50;
             reqStepNotExists = 300;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence execution
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -1034,7 +1039,7 @@ namespace TcoCoreUnitTests
         [Test, Order(542)]
         public void T542_RequestStepFromHigherToLowerFirstCycle()
         {
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
                                                                         //After running this method, sequencer should stay in StepId reqStep+5, with StepDescription "Step "+reqStep+5
             tc.SequencerSingleCycleRun(() =>                            //with step status Running. Request step to the reqstep value will be performed in next PLC cycle as this 
@@ -1179,7 +1184,7 @@ namespace TcoCoreUnitTests
         [Test, Order(547)]
         public void T547_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed()
         {
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
                                                                         //After running this method, sequencer should stay in error as second RequestStep() method has is 
             tc.SequencerSingleCycleRun(() =>                            //going to be called, while previous is not yet perfromed()
@@ -1227,7 +1232,7 @@ namespace TcoCoreUnitTests
         public void T550_PrepareForDisabledStep()
         {
             numberOfSteps = 10;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
                                                                         //After running this method, sequencer should stay in StepId 1, with StepDescription "Step 1"
             tc.SequencerSingleCycleRun(() =>                            //with step status Running
@@ -1294,7 +1299,7 @@ namespace TcoCoreUnitTests
             initCycle = 100;
             cycle = 0;
             numberOfSteps = 20;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
             cycle = tc.SetRequestStepCycle(initCycle);                  //Set RequestStepCycle value to the PLC instance and store its value
@@ -1386,7 +1391,7 @@ namespace TcoCoreUnitTests
         {
             initStepId = 32767;
             numberOfSteps = 30;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
@@ -1578,7 +1583,7 @@ namespace TcoCoreUnitTests
             numberOfSteps = 10;
             cycle = 0;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -1662,10 +1667,10 @@ namespace TcoCoreUnitTests
             lastStepId = 32767;
             lastStepDescription = "This is last step of the sequence";
             cycleCount = 0;
-            resetCycleCount = 0;
+            restoreCycleCount = 0;
             numberOfSteps = 0;
 
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsNotChecked();                               //Set sequence as not checked, so StepId uniqueness control is going to be performed on next sequence run
             tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -1679,7 +1684,7 @@ namespace TcoCoreUnitTests
                                                                         //all steps are executed and finished in one PLC cycle
             tc._FinishStep.Synchron = true;                             //Set all step execution flag in the PLC testing instance. If this value so as the _RunOneStep are true, 
                                                                         //all steps are executed and finished in one PLC cycle. If this value so as the _RunOneStep are true 
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
+            tc._Restore.Synchron = false;                                 //Reset sequence restore flag in the PLC testing instance
             tc.UpdateCurrentStepDetails();
             Assert.AreEqual(initStepId,                                 //Check if the initial StepId was written to the current step of the sequencer
                 tc._Sequencer._currentStepId.Synchron);
@@ -1765,15 +1770,15 @@ namespace TcoCoreUnitTests
                                                                         //After Sequence reset, counting the steps so as the checking the StepId uniqueness control has to be performed again
             tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
             tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-            resetCycleCount = tc._ResetCycleCount.Synchron;             //Store the actual sequence reset cycle counter
-            tc._Reset.Synchron = true;                                  //Set sequence reset flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
+            restoreCycleCount = tc._RestoreCycleCount.Synchron;         //Store the actual sequence restore cycle counter
+            tc._Restore.Synchron = true;                                //Set sequence restore flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
             running = true;                                             //PLC instance. Once it is done, PLC reset this variable to false.
             while (running)
             {
-                running = tc._Reset.Synchron;
+                running = tc._Restore.Synchron;
             }
-            Assert.AreEqual(resetCycleCount + 1,                        //Check if only one reset of the sequencer was was performed, as it was expected
-                tc._ResetCycleCount.Synchron);
+            Assert.AreEqual(restoreCycleCount + 1,                      //Check if only one restore of the sequencer was was performed, as it was expected
+                tc._RestoreCycleCount.Synchron);
             Assert.AreEqual(0, tc.GetNumberOfStepsInSequence());        //Check if the number of the steps was succesfully cleared
             Assert.AreEqual(0, tc.GetPreviousNumberOfStepsInSequence());//Check if the number of the previous steps was succesfully cleared
         }
@@ -1790,7 +1795,7 @@ namespace TcoCoreUnitTests
             tc._StepID.Synchron = lastStepId;                           //Set StepId of the last step in the PLC instance
             tc._Enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
             tc._StepDescription.Synchron = lastStepDescription;         //Set StepDescription of the last step in the PLC instance
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
+            tc._Restore.Synchron = false;                                 //Reset sequence restore flag in the PLC testing instance
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
             tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
 
@@ -1870,16 +1875,16 @@ namespace TcoCoreUnitTests
                                                                         //After Sequence reset, counting the steps so as the checking the StepId uniqueness control has to be performed again
             tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
             tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-            resetCycleCount = tc._ResetCycleCount.Synchron;             //Store the actual sequence reset cycle counter
-            tc._Reset.Synchron = true;                                  //Set sequence reset flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
+            restoreCycleCount = tc._RestoreCycleCount.Synchron;         //Store the actual sequence restore cycle counter
+            tc._Restore.Synchron = true;                                //Set sequence restore flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
             running = true;                                             //PLC instance. Once it is done, PLC reset this variable to false.
             while (running)
             {
-                running = tc._Reset.Synchron;
+                running = tc._Restore.Synchron;
             }
             tc.UpdateCurrentStepDetails();
-            Assert.AreEqual(resetCycleCount + 1,                        //Check if only one reset of the sequencer was was performed, as it was expected
-                tc._ResetCycleCount.Synchron);
+            Assert.AreEqual(restoreCycleCount + 1,                      //Check if only one restore of the sequencer was was performed, as it was expected
+                tc._RestoreCycleCount.Synchron);
             Assert.AreEqual(0, tc.GetNumberOfStepsInSequence());        //Check if the number of the steps was succesfully cleared
             Assert.AreEqual(0, tc.GetPreviousNumberOfStepsInSequence());//Check if the number of the previous steps was succesfully cleared
         }
@@ -1896,7 +1901,7 @@ namespace TcoCoreUnitTests
             tc._StepID.Synchron = lastStepId;                           //Set StepId of the last step in the PLC instance
             tc._Enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
             tc._StepDescription.Synchron = lastStepDescription;         //Set StepDescription of the last step in the PLC instance
-            tc._Reset.Synchron = false;                                 //Reset sequence reset flag in the PLC testing instance
+            tc._Restore.Synchron = false;                                 //Reset sequence restore flag in the PLC testing instance
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
             tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
 
@@ -2016,7 +2021,7 @@ namespace TcoCoreUnitTests
             initStepId = 32767;
             numberOfSteps = 10;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -2169,11 +2174,11 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(613)]
-        public void T613_StepModeResetAfterChangeStepIdDuringExecutionError()
+        public void T613_StepModeRestoreAfterChangeStepIdDuringExecutionError()
         {
             cycle = 0;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -2306,11 +2311,11 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(616)]
-        public void T616_StepModeResetAfterChangeStepError()
+        public void T616_StepModeRestoreAfterChangeStepError()
         {
             cycle = 0;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -2443,12 +2448,12 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(619)]
-        public void T619_StepModeResetSequenceAfterCommentOutError()
+        public void T619_StepModeRestoreSequenceAfterCommentOutError()
         {
 
             cycle = 0;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -2576,7 +2581,7 @@ namespace TcoCoreUnitTests
             reqStep = 20;
             reqStepNotExists = 300;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
 
@@ -2647,7 +2652,7 @@ namespace TcoCoreUnitTests
         public void T632_StepModePrepareForRequestStepFromHigherToLower()
         {
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
                                                                         //After running this method, sequencer should stay in StepId 1, with StepDescription "(>Step 1<)"
@@ -2826,10 +2831,10 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(638)]
-        public void T638_StepModeResetAfterRequestStepToNotExistingStepError()
+        public void T638_StepModeRestoreAfterRequestStepToNotExistingStepError()
         {
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
             tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
@@ -2892,7 +2897,7 @@ namespace TcoCoreUnitTests
         {
             numberOfSteps = 10;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
 
@@ -3012,7 +3017,7 @@ namespace TcoCoreUnitTests
         {
             numberOfSteps = 30;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
 
@@ -3266,7 +3271,7 @@ namespace TcoCoreUnitTests
         {
             numberOfSteps = 30;
             tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
 
@@ -3415,7 +3420,7 @@ namespace TcoCoreUnitTests
         public void T690_PrepareSequenceBeforeSwitchStepModeOnDuringStepExecution()
         {
             numberOfSteps = 30;
-            tc.SingleCycleRun(() => tc.Reset());                        //Reset sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
 
