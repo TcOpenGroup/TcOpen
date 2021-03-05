@@ -8,7 +8,7 @@ using System.Windows.Input;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
-namespace inxton.vortex.framework.dynamictreeview.wpf.sandbox
+namespace Tco.Wpf
 {
     public class TreeGroup : TreeObject
     {

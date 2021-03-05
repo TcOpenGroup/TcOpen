@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Vortex.Connector;
 
-namespace inxton.vortex.framework.dynamictreeview.wpf.sandbox
+namespace Tco.Wpf
 {
     public abstract class TreeObject : INotifyPropertyChanged
     {

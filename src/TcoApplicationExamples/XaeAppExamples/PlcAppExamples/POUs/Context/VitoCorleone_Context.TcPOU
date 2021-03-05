@@ -1,11 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="VitoCorleone_Context" Id="{6d11b071-a8fb-0da4-121f-f03cc1d5b01d}" SpecialFunc="None">
-    <Declaration><![CDATA[//Something or empty line must be here, due to .TcPou file format, as we need the following line begining in new line without any others special characters added.
-// <ContextExampleDeclarations>
-//Declaration part of the TcoContext using.
+    <Declaration><![CDATA[(*
+		
+			THIS EXAMPLE AIMS TO EXPLAIN WHAT CONTEXT AND IDENITY ARE IN A 'TcoOpen' APPLICATION.
+			SEE Main() method od this block.	
+
+*)
+
+{attribute clr [ForceIntoApiDocumentation()]}
 FUNCTION_BLOCK VitoCorleone_Context EXTENDS TcoCore.TcoContext
 VAR
+	// Each context member object has it 'context' and assigned when instantiated (at birth)
+	// This is typically done by instantiating the objects with FB_init(ITcoObject) as follows
+	// These are Don Corleone's children. When you look inside definitions you' find Don Corleone's grand-childrend (whole family shares the same context).
 	_santino : Santino_Object(THIS^);
 	_thomas : Thomas_Object(THIS^);
 	_frederico : Frederico_Object(THIS^);
@@ -19,11 +27,7 @@ VAR
 	
 	_donCorleoneIdentity : ULINT;
 	_isDifferentIndentity : BOOL;
-END_VAR
-//---------------------------------------------------------------------------
-// </ContextExampleDeclarations>
-//Something or empty line must be here, due to .TcPou file format, as we need the following line ending without any others special characters added.
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -40,12 +44,14 @@ END_VAR
 METHOD PROTECTED  Main
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//Something or empty line must be here, due to .TcPou file format, as we need the following line begining in new line without any others special characters added.
-// <ContextExampleCode>
-//___________________________________________________________________________
-//Implementation part of the TcoContext using.
+        <ST><![CDATA[(*
+
+					CONTEXT vs IDENTITY
+
+*)
 
 // In Corleone family they all share the same context that is that of Don Vito Corleone
+
 
 // Here is the tree of family Corleone
 
@@ -86,10 +92,9 @@ _isDifferentIndentity := _donCorleoneIdentity <> THIS^._santino.Identity
 						AND (THIS^._costanzia.Identity <> THIS^._costanzia._michael.Identity AND THIS^._costanzia.Identity <> THIS^._costanzia._victor.Identity);
  
 
-// Once the context is asigned it cannot be changed, an attempt to change the context will result in omerta.
-// </ContextExampleCode>
-//Something or empty line must be here, due to .TcPou file format, as we need the following line ending without any others special characters added.
-]]></ST>
+// Once the context is asigned (at birth [instantiated]) it cannot be changed, an attempt to change the context will result in vendetta.
+
+//THIS^._santino.Messenger.Debug('Santino is trying to say something');						]]></ST>
       </Implementation>
     </Method>
   </POU>

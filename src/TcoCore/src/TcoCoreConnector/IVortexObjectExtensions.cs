@@ -89,6 +89,5 @@ namespace TcoCore
             var children = obj.GetChildren().Where(p => p is T && !excluding.Any(e => e != p)).Select(p => (T)p);
             return children;
         }
-
     }
 }

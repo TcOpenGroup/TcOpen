@@ -40,9 +40,9 @@ VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
 	_Identity : ULINT;
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_startCycleCount : ULINT;
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_endCycleCount : ULINT;
 	(*~
 		<docu>

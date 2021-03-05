@@ -9,7 +9,7 @@ namespace TcoCore
     {
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
-            parent.GetParent<TcoContext>()?.AddMessage(this._mime);                     
+                                 
         }
     }
 }

@@ -41,9 +41,6 @@
     <Compile Include="POUs\Context\CorleoneKids\Thomas_Object.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Context\AKid_Object.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Context\Leaves\AKid_Object.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -56,19 +53,19 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SIMPLE_PNEU\ST_01_Components.TcPOU">
+    <Compile Include="POUs\Sequencer\ST_01_Components.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SIMPLE_PNEU\ST_01_Context.TcPOU">
+    <Compile Include="POUs\Sequencer\ST_01_Context.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SIMPLE_PNEU\ST_01_Ground.TcPOU">
+    <Compile Include="POUs\Sequencer\ST_01_Ground.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SIMPLE_PNEU\ST_01_Automat.TcPOU">
+    <Compile Include="POUs\Sequencer\ST_01_Automat.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SIMPLE_PNEU\ST_01_IO.TcGVL">
+    <Compile Include="POUs\Sequencer\ST_01_IO.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -79,7 +76,7 @@
     <Folder Include="POUs\Context" />
     <Folder Include="POUs\Context\CorleoneKids" />
     <Folder Include="POUs\Context\Leaves" />
-    <Folder Include="POUs\SIMPLE_PNEU" />
+    <Folder Include="POUs\Sequencer" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

@@ -16,7 +16,7 @@ namespace TcoApplicationExamples.Wpf
     {
         public App() : base()
         {
-            PlcAppExamples.Connector.BuildAndStart();
+            PlcAppExamples.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
         }
 
         public static PlcAppExamplesTwinController PlcAppExamples { get { return Entry.PlcAppExamples; } }

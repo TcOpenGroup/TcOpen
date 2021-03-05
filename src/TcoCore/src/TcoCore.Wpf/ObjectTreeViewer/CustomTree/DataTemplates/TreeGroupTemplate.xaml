@@ -2,7 +2,7 @@
     x:Class="Tco.Wpf.CustomTree.DataTemplates.TreeGroupTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sandbox="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox"
+    xmlns:tco="clr-namespace:Tco.Wpf"
     xmlns:vortex="http://vortex.mts/xaml">
 
     <DataTemplate x:Key="RenderableContent">
@@ -35,7 +35,7 @@
         <WrapPanel />
     </ItemsPanelTemplate>
 
-    <HierarchicalDataTemplate DataType="{x:Type sandbox:TreeGroup}" ItemsSource="{Binding Path=Children}">
+    <HierarchicalDataTemplate DataType="{x:Type tco:TreeGroup}" ItemsSource="{Binding Path=Children}">
         <StackPanel
             VerticalAlignment="Center"
             AllowDrop="True"

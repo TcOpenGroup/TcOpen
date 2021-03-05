@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Vortex.Connector;
 
-namespace inxton.vortex.framework.dynamictreeview.wpf.sandbox
+namespace Tco.Wpf
 {
     public partial class DynamicTreeView : UserControl
     {
