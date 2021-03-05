@@ -17,16 +17,13 @@
 					TwinCAT PlcTask and <see cref="TcoTask.PlcTcoTask()"/> refer to two different concepts. 
 				</note>
 			</remarks>
-			<para>
-				<example>
-				<note type="Example">
-				<para>
-					See <a href="https://github.com/Inxton/TcOpen/blob/documenation/doc_reviews/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU">VitoCorleone_Context</a>
-				</para>
-				</note> 	
-				</example>
-			</para>	
-		</summary>			
+		</summary>	
+			<example>
+					[!code-c[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
+			</example>
+			<example>
+					[!code-c[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleCode)]
+			</example>
 	</docu>	
 ~*)
 FUNCTION_BLOCK PUBLIC ABSTRACT TcoContext IMPLEMENTS ITcoContext

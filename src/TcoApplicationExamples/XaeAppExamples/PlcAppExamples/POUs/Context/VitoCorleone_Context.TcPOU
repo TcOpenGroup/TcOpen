@@ -1,26 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="VitoCorleone_Context" Id="{6d11b071-a8fb-0da4-121f-f03cc1d5b01d}" SpecialFunc="None">
-    <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Root construction container, provides context information for <c>TcoObjects</c> declared within its scope.
-			This function block is ```abstract``` and cannot be instantiated. 
-			Use <see cref="TcoContext.PlcTcoContext.Run()"/> to run this context, ```Run``` method must be called only once per Plc's Task cycle.
-			Several 'TcoContext' instances can be declared and called inside one TwinCAT PlcTask, but only once per plc cycle. The instance should not be accessed from several Twincat PlcTasks.
-			Default implemenation of the 'TcoContext' allows its child members access properties <see cref="TcoContext.PlcTcoContext.StartCycleCount()"/> and <see cref="TcoContext.PlcTcoContext.EndCycleCount()"/>.\			 			 			
-			<note type="tip">
-				 A <c>TcoContext</c> can contain objects, components and PLC logic of one independent station of the machine, while the another one can cover the same for another station.			
-			</note>
-			<remarks>			
-				<note type="tip">
-					TwinCAT PlcTask and <see cref="TcoTask.PlcTcoTask()"/> refer to two different concepts. 
-				</note>
-			</remarks>			
-		</summary>			
-	</docu>	
-~*)
-{attribute clr [ForceIntoApiDocumentation()]}
+    <Declaration><![CDATA[//Something or empty line must be here, due to .TcPou file format, as we need the following line begining in new line without any others special characters added.
+// <ContextExampleDeclarations>
+//Declaration part of the TcoContext using.
 FUNCTION_BLOCK VitoCorleone_Context EXTENDS TcoCore.TcoContext
 VAR
 	_santino : Santino_Object(THIS^);
@@ -36,7 +19,11 @@ VAR
 	
 	_donCorleoneIdentity : ULINT;
 	_isDifferentIndentity : BOOL;
-END_VAR]]></Declaration>
+END_VAR
+//---------------------------------------------------------------------------
+// </ContextExampleDeclarations>
+//Something or empty line must be here, due to .TcPou file format, as we need the following line ending without any others special characters added.
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -53,7 +40,12 @@ END_VAR]]></Declaration>
 METHOD PROTECTED  Main
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// In Corleone family they all share the same context that is that of Don Vito Corleone
+        <ST><![CDATA[//Something or empty line must be here, due to .TcPou file format, as we need the following line begining in new line without any others special characters added.
+// <ContextExampleCode>
+//___________________________________________________________________________
+//Implementation part of the TcoContext using.
+
+// In Corleone family they all share the same context that is that of Don Vito Corleone
 
 // Here is the tree of family Corleone
 
@@ -95,8 +87,9 @@ _isDifferentIndentity := _donCorleoneIdentity <> THIS^._santino.Identity
  
 
 // Once the context is asigned it cannot be changed, an attempt to change the context will result in omerta.
-
-						]]></ST>
+// </ContextExampleCode>
+//Something or empty line must be here, due to .TcPou file format, as we need the following line ending without any others special characters added.
+]]></ST>
       </Implementation>
     </Method>
   </POU>
