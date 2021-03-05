@@ -162,11 +162,11 @@ IF _AutoRestorable THEN
 	//restore itself, and copy the parent's ChangeStateCycle property into the
 	//child's own property.
 	IF _MyParent_ChangeStateCycle <> _MyParentsChangeStateCycle THEN
-		Restore();
+		THIS^.Restore();
 		_MyParentsChangeStateCycle := _MyParent_ChangeStateCycle;
 	END_IF
 	IF _MyParent_LastChangeState <> _MyParentsLastChangedState THEN
-		Restore();
+		THIS^.Restore();
 		_MyParentsLastChangedState := _MyParent_LastChangeState;
 	END_IF
 END_IF]]></ST>
@@ -287,7 +287,7 @@ IF _AutoRestorable THEN
 	//in order to don't miss the OnStateChange() event of the parent
 	//in case of the body of this instance isn't called.
 	IF _MyContextStartCycleCount > _StartCycleCount + 1 THEN
-		Restore();
+		THIS^.Restore();
 	END_IF
 	_StartCycleCount := _MyContextStartCycleCount;
 END_IF]]></ST>

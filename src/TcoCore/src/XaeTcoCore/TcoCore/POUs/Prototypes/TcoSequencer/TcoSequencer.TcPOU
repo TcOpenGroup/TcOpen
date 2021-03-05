@@ -279,12 +279,13 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 					IF (_pNewSteps <> 0) THEN
 						__DELETE(_pNewSteps);
 					END_IF
-					_sequencerHasError := TRUE;
 					_sequencerErrorId := eSequencerError.NotUniqueStepId;
 					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));
 					_currentStep.Description := _message;
 					_currentStep.Status := eStepStatus.Error;
 					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+//					OnSequencerError(_sequencerErrorId);
+					_sequencerHasError := TRUE;
 					RETURN;					
 				END_IF
 			ELSE
@@ -380,7 +381,7 @@ END_VAR
 	</docu>	
 ~*)
 {attribute 'call_after_online_change_slot' := '200'}
-METHOD INTERNAL OnlineChange
+METHOD PRIVATE OnlineChange
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIdUniquenessChecked := FALSE;
@@ -389,6 +390,17 @@ _stepCounter := 0;
 _numberOfStepsInSequence := 0;
 _previousNumberOfStepsInSequence := 0;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnSequencerError" Id="{372e1271-e9fc-0efd-3c4d-097b1eab951c}">
+      <Declaration><![CDATA[METHOD PROTECTED OnSequencerError
+VAR_INPUT
+	inErrorId : eSequencerError;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Open" Id="{033e4fa5-91ce-065f-3430-c26513896e04}">
@@ -420,13 +432,14 @@ ELSE
 END_IF
 
 IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
-	_sequencerHasError := TRUE;
 	_sequencerErrorId := eSequencerError.StepWithRequestedIdDoesNotExists;
 	_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(_requestedStepId));
 	_message := CONCAT(_message, ' DOES NOT EXIST');
 	_currentStep.Description := _message;
 	_currentStep.Status := eStepStatus.Error;
 	THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+//	OnSequencerError(_sequencerErrorId);
+	_sequencerHasError := TRUE;
 END_IF
 
 IF _sequencerHasError AND (_sequencerErrorId = eSequencerError.NotUniqueStepId) THEN
@@ -508,7 +521,6 @@ _checkStepIdRequestedInStepMode := TRUE;
 IF(inRequestedStepID <> 0) THEN
 	IF _requestedStepId <> 0 THEN
 		IF NOT  _sequencerHasError THEN
-			_sequencerHasError := TRUE;
 			_sequencerErrorId := eSequencerError.SeveralRequestStep;
 			_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(inRequestedStepID));
 			_message := CONCAT(_message, ' HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: ');
@@ -517,6 +529,8 @@ IF(inRequestedStepID <> 0) THEN
 			_currentStep.Description := _message;
 			_currentStep.Status := eStepStatus.Error;
 			THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+//			OnSequencerError(_sequencerErrorId);
+			_sequencerHasError := TRUE;
 		END_IF
 	ELSE
 		_requestStepCycle := 0;
@@ -528,7 +542,7 @@ END_IF;
 RequestStep := THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Reset" Id="{c1b128e5-ca0c-090a-3e6c-0771a5360650}">
+    <Method Name="Restore" Id="{c1b128e5-ca0c-090a-3e6c-0771a5360650}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -539,7 +553,7 @@ RequestStep := THIS^;]]></ST>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PUBLIC Reset
+METHOD PUBLIC Restore : ITcoRestorable
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[StepChanged(0);
@@ -562,7 +576,6 @@ _previousNumberOfStepsInSequence := 0;
 _theOrderOfTheCurrentlyExecutedStep := 0;
 _theOrderOfThePreviouslyExecutedStep := 0;
 _stepIdUniquenessChecked := FALSE;
-_sequencerHasError := FALSE;
 
 _StepIdChanged := FALSE;
 _StepOrderChanged := FALSE;
@@ -597,6 +610,9 @@ METHOD PUBLIC FINAL Run]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Open();
 THIS^.Main();
+IF _sequencerHasError THEN
+	OnSequencerError(_sequencerErrorId);
+END_IF
 THIS^.Close();]]></ST>
       </Implementation>
     </Method>
@@ -641,7 +657,7 @@ _stepModeControler._stepIn.Restore(); 	]]></ST>
 		</returns>			
 	</docu>	
 ~*)
-METHOD PUBLIC FINAL Step : BOOL
+METHOD PROTECTED FINAL Step : BOOL
 VAR_INPUT
 (*~
 	<docu>
@@ -773,7 +789,6 @@ END_IF
 
 //Distinguish if StepId or step order has been changed 
 IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR _StepOrderChanged THEN
-	_sequencerHasError := TRUE;
 	IF _StepOrderChanged AND NOT _StepIdChanged THEN
 		_message := CONCAT('ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepOrderFrom));
 		_message := CONCAT(_message , '=>');
@@ -810,12 +825,13 @@ IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR 
 		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.StepIdHasBeenChanged;
 	END_IF
+//	OnSequencerError(_sequencerErrorId);
+	_sequencerHasError := TRUE;
 END_IF
 
 IF NOT _isInOrderOfExecution AND _StepIdChanged THEN
 	_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
 END_IF
-
 
 IF (_StepOrderChanged OR _StepIdChanged OR _sequencerHasError) THEN
 	RETURN;
