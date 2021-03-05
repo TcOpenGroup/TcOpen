@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Reflection;
+using System.Windows.Markup;
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
@@ -10,7 +11,14 @@ using System.Reflection;
                                               // app, or any theme specific resource dictionaries)
 )]
 
+
+[assembly: XmlnsPrefix("http://inxton.mts/xaml", "inxton")]
+[assembly: XmlnsDefinition("http://inxton.mts/xaml", "TcoCore")]
+[assembly: XmlnsDefinition("http://inxton.mts/xaml", "Tco.Wpf")]
+
 [assembly:Vortex.Presentation.Wpf.RenderableAssembly()]
 [assembly: AssemblyVersion("1.9.1.0")]
 [assembly: AssemblyFileVersion("1.9.1.0")]
 [assembly: AssemblyInformationalVersion("1.9.1-tcopen-implementation.1+32.Branch.feature-tcopen-implementation.Sha.c12c4ccf75e412f00bed825157a05c161a4394f2")]
+
+

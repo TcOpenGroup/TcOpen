@@ -1,0 +1,47 @@
+﻿<Window
+    x:Class="TcoApplicationExamples.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:inxton="http://inxton.mts/xaml"
+    xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vortex="http://vortex.mts/xaml"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    DataContext="{x:Static local:App.PlcAppExamples}"
+    mc:Ignorable="d">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Context">
+                <TabControl>
+                    <TabItem Header="Auto-gen">
+                        <ScrollViewer>
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._donCorleone}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Object tree">
+                        <ScrollViewer>
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN._donCorleone}" />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Sequencer">
+                <TabControl>
+                    <TabItem Header="Auto-gen">
+                        <ScrollViewer>
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._pneuMan}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Object tree">
+                        <ScrollViewer>
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN._pneuMan}" />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

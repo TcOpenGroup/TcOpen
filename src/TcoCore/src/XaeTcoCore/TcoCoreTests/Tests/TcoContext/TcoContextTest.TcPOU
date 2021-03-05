@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoContextTest" Id="{6642835d-5414-4760-aac1-4c8cef083deb}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoContextTest EXTENDS TcoContext
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_CallMyPlcInstance 		:	BOOL := FALSE;
 	_startCycles			:	ULINT;
@@ -40,7 +40,7 @@ METHOD INTERNAL CallRunFromUnitTest
 METHOD INTERNAL ContextClose
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Close();]]></ST>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextOpen" Id="{65cd14ad-eb62-4d0c-8ca2-8e3c5c9380bf}">
@@ -48,7 +48,7 @@ METHOD INTERNAL ContextClose
 METHOD INTERNAL ContextOpen
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Open();]]></ST>
+        <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{76d8f63c-d45d-4de4-ad73-4298aca95aa1}">

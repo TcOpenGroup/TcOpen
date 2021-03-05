@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="_TcoSequencer" Id="{ac19fe4f-0c0e-08e9-3df5-0840192e4ee2}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _TcoSequencer EXTENDS TcoSequencer
+    <Declaration><![CDATA[FUNCTION_BLOCK _TcoSequencer EXTENDS TcoCore._internals_TcoSequencer
 VAR
 	_RunOneStep							:	BOOL;
 	_RunAllSteps						:	BOOL;
@@ -16,6 +16,8 @@ VAR
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
 	_TcoState							: 	TcoState(THIS^ ,FALSE);
+	_PostStepCompleteCount 				: 	INT;
+	_PostSequenceCompleteCount 			: 	INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -8309,6 +8311,20 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="PostSequenceComplete" Id="{2fd78922-07d4-01ec-1736-1c3b4b7d9bd8}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD PUBLIC PostSequenceComplete ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_PostSequenceCompleteCount := _PostSequenceCompleteCount + 1;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostStepComplete" Id="{154d4f23-050b-01f6-08b9-2a631c3ec621}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD PUBLIC PostStepComplete]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_PostStepCompleteCount := _PostStepCompleteCount + 1;
+]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="RequestStepCycle" Id="{c2da0157-c6b1-052f-064f-3e3f6d17de69}" FolderPath="_Tests\">
       <Declaration><![CDATA[PROPERTY INTERNAL RequestStepCycle : UINT
 ]]></Declaration>
@@ -8326,10 +8342,10 @@ END_IF
       </Set>
     </Property>
     <Method Name="SequencerClose" Id="{f3addcb4-0fda-0a2d-0925-430c6f4ad3f8}">
-      <Declaration><![CDATA[METHOD SequencerClose 
+      <Declaration><![CDATA[METHOD INTERNAL SequencerClose 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Close();]]></ST>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequencerHasError" Id="{07e19515-04c8-048f-12a4-f42415093577}" FolderPath="_Tests\">
@@ -8340,10 +8356,10 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="SequencerOpen" Id="{b4334737-6cb3-0eba-0d2f-cd067be7b53d}">
-      <Declaration><![CDATA[METHOD SequencerOpen
+      <Declaration><![CDATA[METHOD INTERNAL SequencerOpen
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Open();
+        <ST><![CDATA[SUPER^._Open();
 ]]></ST>
       </Implementation>
     </Method>

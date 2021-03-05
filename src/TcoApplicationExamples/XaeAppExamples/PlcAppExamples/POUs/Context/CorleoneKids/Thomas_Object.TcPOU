@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Thomas_Object" Id="{69d01a44-cebd-0fff-162d-7a59f62e3932}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Thomas_Object EXTENDS TcoCore.TcoObject
+VAR_INPUT
+	_frank : AKid_Object(THIS^);
+	_andrew : AKid_Object(THIS^);
+	_christina : AKid_Object(THIS^);
+	_gianna : AKid_Object(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

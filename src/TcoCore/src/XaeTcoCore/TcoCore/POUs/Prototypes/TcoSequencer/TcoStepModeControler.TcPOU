@@ -13,11 +13,8 @@ VAR_INPUT
 	inCurrentStepRunning : BOOL;
 END_VAR
 VAR
-	{attribute 'hide'}
-	_stepBackward : TcoTask(THIS^);
-	{attribute 'hide'}
-	_stepIn : TcoTask(THIS^);
-	{attribute 'hide'}
+	_stepBackward : TcoTask(THIS^);	
+	_stepIn : TcoTask(THIS^);	
 	_stepForward : TcoTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>

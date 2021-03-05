@@ -103,8 +103,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TcoTask_CountUp.Reset();
-TcoTask_CountDown.Reset();
+        <ST><![CDATA[TcoTask_CountUp.Restore();
+TcoTask_CountDown.Restore();
 CounterValue := 0;
 
 ResetToZero_Execute := TRUE;
@@ -142,71 +142,5 @@ TcoTask_CountUp.Invoke();
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoObject_Counter">
-      <LineId Id="242" Count="2" />
-      <LineId Id="257" Count="5" />
-      <LineId Id="241" Count="0" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="171" Count="2" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="263" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="110" Count="0" />
-      <LineId Id="165" Count="2" />
-      <LineId Id="275" Count="0" />
-      <LineId Id="161" Count="0" />
-      <LineId Id="115" Count="0" />
-      <LineId Id="114" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="187" Count="2" />
-      <LineId Id="48" Count="1" />
-      <LineId Id="264" Count="0" />
-      <LineId Id="50" Count="1" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="82" Count="0" />
-      <LineId Id="182" Count="1" />
-      <LineId Id="274" Count="0" />
-      <LineId Id="181" Count="0" />
-      <LineId Id="276" Count="0" />
-      <LineId Id="174" Count="0" />
-      <LineId Id="123" Count="2" />
-      <LineId Id="194" Count="2" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="266" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="130" Count="0" />
-      <LineId Id="200" Count="1" />
-      <LineId Id="199" Count="0" />
-      <LineId Id="277" Count="0" />
-      <LineId Id="190" Count="0" />
-      <LineId Id="135" Count="0" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject_Counter.Restore">
-      <LineId Id="6" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject_Counter.StartCountDown">
-      <LineId Id="7" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="16" Count="1" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject_Counter.StartCountUp">
-      <LineId Id="7" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

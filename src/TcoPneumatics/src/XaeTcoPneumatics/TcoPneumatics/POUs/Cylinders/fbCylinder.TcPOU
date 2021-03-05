@@ -130,7 +130,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="FB_init" Id="{99a923f6-6a5e-094e-0ce9-4b392edc1031}">
+    <Method Name="FB_init" Id="{bebd9764-c480-0f41-1395-016f8ffcd273}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
@@ -140,7 +140,8 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+        <ST><![CDATA[// This is not clear to me... I from time to time the consumer code does not see 'FB_init' of 'TcoObject', that's why overridden here with super call...
+SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Manual" Id="{8d280abe-da34-4370-8cca-5bd111ecd38d}">

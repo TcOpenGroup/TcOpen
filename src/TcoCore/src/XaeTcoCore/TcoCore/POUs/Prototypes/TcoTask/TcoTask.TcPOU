@@ -4,7 +4,6 @@
     <Declaration><![CDATA[{attribute 'initialize_on_call'}
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
 VAR
-	{attribute clr [ReadOnly()]}
 	_taskState : eTaskState;
 	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
@@ -87,7 +86,7 @@ END_VAR
     </Property>
     <Method Name="CheckIfAutoRestoreEnabledByParent" Id="{df452d79-7755-40fb-9a5e-9cf001ea97d0}">
       <Declaration><![CDATA[{attribute 'call_after_online_change_slot' := '100'}
-METHOD CheckIfAutoRestoreEnabledByParent
+METHOD PRIVATE CheckIfAutoRestoreEnabledByParent
 VAR
 	_MyParent_TcoState	: 	ITcoState := 0;
 END_VAR

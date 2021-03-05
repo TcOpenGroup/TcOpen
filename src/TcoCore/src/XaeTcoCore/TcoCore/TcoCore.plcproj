@@ -109,10 +109,17 @@
     <Compile Include="POUs\Prototypes\TcoTask\TcoTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TestFixtures\_internals_TcoContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TestFixtures\_internals_TcoSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\TestFixtures" />
     <Folder Include="POUs\Prototypes" />
     <Folder Include="POUs\Prototypes\TcoMessage" />
     <Folder Include="POUs\Prototypes\TcoSelector">

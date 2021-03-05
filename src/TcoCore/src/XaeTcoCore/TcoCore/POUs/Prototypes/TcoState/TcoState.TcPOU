@@ -439,10 +439,9 @@ END_VAR
 	</docu>	
 ~*)
 METHOD Restore : ITcoRestorable
-
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_State := -1;
+        <ST><![CDATA[ChangeState(-1);
 
 Restore := THIS^;]]></ST>
       </Implementation>
