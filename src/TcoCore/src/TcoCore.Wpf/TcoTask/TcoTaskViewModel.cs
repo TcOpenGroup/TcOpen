@@ -11,8 +11,9 @@ namespace TcoCore
     {
         public TcoTaskViewModel()
         {
-            ResetCommand = new RelayCommand(a => this.TcoTask._taskState.Cyclic = (int)eTaskState.Idle);
-            InvokeCommand = new RelayCommand(a => this.TcoTask._taskState.Cyclic = (int)eTaskState.Request);
+
+            //ResetCommand = new RelayCommand(a => this.TcoTask._taskState.Cyclic = (int)eTaskState.Ready);     //TODO calling Restore() instead of changing the internal state
+            //InvokeCommand = new RelayCommand(a => this.TcoTask._taskState.Cyclic = (int)eTaskState.Requested);//TODO calling Invoke() instead of changing the internal state
         }
 
         public TcoTask TcoTask { get; private set; }

@@ -98,10 +98,10 @@ END_VAR
 			This is done by calling the <c>CheckIfAutoRestoreEnabledByParent()</c> method inside the implicit method <c>FB_init()</c> after download.
 			If this instance is the auto restorable it will call the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
 			<para>
-			1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <c>State</c>).
+				1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
 			</para>
 			<para>
-			2.)	Parent object of this instance changes its state.
+				2.)	Parent object of this instance changes its state.
 			</para>
 			<para>
 				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
@@ -129,6 +129,9 @@ END_VAR
 			</para>
 			<para>
 				2.)	Parent object of this instance changes its state no mather when and this instance has not yet process this change.
+			</para>
+			<para>
+				3.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
 			</para>
 			<para>
 				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
@@ -234,7 +237,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnablAutoRestore()/> property and writing it into the <see cref="TcoState.PlcTcoState.AutoRestorable()"/> of this instance.
+			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnableAutoRestore()/> property and writing it into the <see cref="TcoState.PlcTcoState.AutoRestorable()"/> of this instance.
 			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
 		</summary>			
 	</docu>	
@@ -256,10 +259,9 @@ END_IF;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Private method called each time that State property is asked for. If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
-			<para>
-				This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property State).
-			</para>
+			Private method called each time that the <see cref="TcoState.PlcTcoState.State()"/> property is asked for. 
+			If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if
+			this instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property State).
 			<para>
 				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
 			</para>
