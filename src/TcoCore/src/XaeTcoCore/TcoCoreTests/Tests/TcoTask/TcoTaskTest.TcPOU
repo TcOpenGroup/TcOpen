@@ -28,6 +28,20 @@ END_VAR
     <Implementation>
       <ST><![CDATA[ExecutionBody();]]></ST>
     </Implementation>
+    <Method Name="Disable" Id="{30e8d443-19f6-08b1-1d86-48a460b2b63c}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Disable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{cd30d735-ff17-02c7-26d6-c091a49a074d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Enable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="ExecutionBody" Id="{77a5a45d-9cd7-4d75-83c5-1e7025fc00d2}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ExecutionBody]]></Declaration>
@@ -116,7 +130,7 @@ METHOD INTERNAL ReadOutState]]></Declaration>
         <ST><![CDATA[_IsBusy		:=	THIS^.Busy;	
 _IsError	:=	THIS^.Error;	
 _IsDone		:=	THIS^.Done;	
-]]></ST>
+_IsReady	:=	THIS^.Ready;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetPreviousStateToReady" Id="{5b4ca5af-515c-4456-914e-015624dcdd9a}">

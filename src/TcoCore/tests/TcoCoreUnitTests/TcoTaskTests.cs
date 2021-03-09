@@ -48,6 +48,9 @@ namespace TcoCoreUnitTests
             finished = false;
             i = 0;
 
+            tc._TcoObjectTest_A._TcoTaskTest_A.Enable();
+            tc._TcoObjectTest_A._TcoTaskTest_A.Enable();
+
             A_TaskInvokeCount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._InvokeCounter.Synchron;
             B_TaskInvokeCount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._InvokeCounter.Synchron;
             A_TaskInvokeRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._InvokeRisingEdgeCounter.Synchron;
@@ -653,5 +656,216 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(tt_a._IsBusy.Synchron);                                      //Task A should change from the Executing state into the Idle state as Task A is AutoRestorable and its parent has changed its state.          
             Assert.IsTrue(tt_b._IsBusy.Synchron);                                       //Task B should stay in the Executing state even if its parent has changed its state, as Task B is not AutoRestorable.          
         }
+
+        [Test, Order(320)]
+        public void T320_InvokeDisabledTask()
+        {
+            //Disabled task is triggered. The task should stay in Ready state.
+            TcoObjectTest to = tc._TcoObjectTest_A;
+            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+            tt.TriggerRestore();                                                        //Restore task
+            tt.Disable();                                                               //Disable task
+
+            tc.RunUntilEndConditionIsMet(() =>
+            {
+                plccycles++;
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            }, () => plccycles >= cycles_A);
+
+            Assert.IsFalse(tt._IsBusy.Synchron);          
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsTrue(tt._IsReady.Synchron);
+            GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
+            Assert.AreEqual(A_TaskInvokeCount_0 , A_TaskInvokeCount_1);                 //Task should not be started
+            Assert.AreEqual(A_TaskInvokeRECount_0 , A_TaskInvokeRECount_1);             //Task should not be started
+            Assert.AreEqual(A_TaskExecuteCount_0 , A_TaskExecuteCount_1);               //Execution body of the task should not run.
+            Assert.AreEqual(A_TaskExecuteRECount_0 , A_TaskExecuteRECount_1);           //Task should not even enter into the Busy state.
+            Assert.AreEqual(A_TaskDoneRECount_0 , A_TaskDoneRECount_1);                 //Task should not even enter into the Done state.
+            Assert.AreEqual(cycles_A, plccycles);                                       //The execution should take exactly cycles_A cycles.
+        }
+
+
+        [Test, Order(321)]
+        public void T321_DisableExecutingTask()
+        {
+            //Enabled task is started and than disabled. task is triggered. The task should get inte the Ready state.
+            TcoObjectTest to = tc._TcoObjectTest_A;
+            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+
+            Assert.IsTrue(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.Disable();                                                           //Disable task.
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsTrue(tt._IsReady.Synchron);
+            GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
+            Assert.AreEqual(A_TaskInvokeCount_0 + 1, A_TaskInvokeCount_1);             //Task should be started once
+            Assert.AreEqual(A_TaskInvokeRECount_0 + 1, A_TaskInvokeRECount_1);         //Task should be started once
+            Assert.AreEqual(A_TaskExecuteCount_0 + 1, A_TaskExecuteCount_1);           //Execution body of the task should enter once.
+            Assert.AreEqual(A_TaskExecuteRECount_0 + 1, A_TaskExecuteRECount_1);       //Task should enter into the Busy state once.
+            Assert.AreEqual(A_TaskDoneRECount_0, A_TaskDoneRECount_1);                 //Task should not enter into the Done state.
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.Enable();                                                            //Enable task. It should not start again without Invoke() methoh call.
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsTrue(tt._IsReady.Synchron);
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+
+            Assert.IsTrue(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
+            GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
+            Assert.AreEqual(A_TaskInvokeCount_0 + 2, A_TaskInvokeCount_1);             //Task should be started twice
+            Assert.AreEqual(A_TaskExecuteCount_0 + 2, A_TaskExecuteCount_1);           //Execution body of the task should enter twice.
+            Assert.AreEqual(A_TaskDoneRECount_0, A_TaskDoneRECount_1);                 //Task should not enter into the Done state.
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerRestore();                                                    
+                to.CallTaskInstancies();                                                
+                tt.ReadOutState();                                                      
+            });
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsTrue(tt._IsReady.Synchron);
+            GetCounterValues();                                                     
+        }
+
+
+        [Test, Order(322)]
+        public void T322_InvokeTaskThenDisable()
+        {
+            //Enabled task is started and than disabled. task is triggered. The task should get inte the Ready state.
+            TcoObjectTest to = tc._TcoObjectTest_A;
+            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                tt.Disable();                                                           //Disable task.
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsTrue(tt._IsReady.Synchron);
+            GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
+            Assert.AreEqual(A_TaskInvokeCount_0 + 1, A_TaskInvokeCount_1);             //Task should be started once
+            Assert.AreEqual(A_TaskInvokeRECount_0 + 1, A_TaskInvokeRECount_1);         //Task should be started once
+            Assert.AreEqual(A_TaskExecuteCount_0, A_TaskExecuteCount_1);               //Execution body of the task should not run.
+            Assert.AreEqual(A_TaskExecuteRECount_0, A_TaskExecuteRECount_1);           //Task should not even enter into the Busy state.
+            Assert.AreEqual(A_TaskDoneRECount_0, A_TaskDoneRECount_1);                 //Task should not even enter into the Done state.
+        }
+
+
+        [Test, Order(323)]
+        public void T323_DisableTaskInErrorStateEnableAndTriggerAgain()
+        {
+            TcoObjectTest to = tc._TcoObjectTest_A;
+            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+            Assert.IsTrue(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
+
+            tt._CounterValue.Synchron = tt._CounterValue.Synchron + 5;                  //Overwriting _CounterValue from outside cause entering the task into the Error state.
+
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsTrue(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
+  
+            tc.SingleCycleRun(() =>
+            {
+                tt.Disable();                                                           //Disable task.
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsTrue(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsTrue(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
+
+            tc.SingleCycleRun(() =>
+            {
+                tt.TriggerRestore();                                                    //Restore is the only way how to get from Error state.
+                tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
+                to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
+                tt.ReadOutState();                                                      //Reading out the state of the task
+            });
+            Assert.IsFalse(tt._IsBusy.Synchron);
+            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._IsError.Synchron);
+            Assert.IsTrue(tt._IsReady.Synchron);
+        }
     }
 }
+
