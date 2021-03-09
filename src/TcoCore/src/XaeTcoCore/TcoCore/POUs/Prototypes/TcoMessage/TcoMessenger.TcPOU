@@ -4,7 +4,7 @@
     <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Provides mechanism for delivering messages to the HMI.				 
+				Provides mechanism for delivering static messages to the supervising applications (SCADA/HMI).				 
 			</summary>			
 		</docu>
 ~*)
@@ -25,6 +25,31 @@ END_VAR]]></Declaration>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Messages" Id="{56442304-2644-4fe1-b5d1-eb5248dd12e5}" />
+    <Method Name="Catastrophic" Id="{3ead99e7-d4fa-03f6-3060-81990c2076df}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'debug' category to the message queue.				 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC Catastrophic
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
       <Declaration><![CDATA[METHOD PRIVATE Compose 
 VAR_INPUT
@@ -33,7 +58,7 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
-	// _tmpMessage.TimeStamp :=  // TODO Implement rtc on context
+	_mime.TimeStamp :=  _Parent.Context.Rtc.Now();
 	_mime.Text := Text;
 	_mime.Identity := _Parent.Context.Identity;
 	_mime.Category := Category;
@@ -45,6 +70,31 @@ END_IF;
 
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Critical" Id="{a9264967-6c30-0c25-362d-a0380aaea992}" FolderPath="Messages\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'debug' category to the message queue.				 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC Critical
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Debug" Id="{bd0230f7-b5de-4707-ba4a-f8b17cc23976}" FolderPath="Messages\">
@@ -255,7 +305,7 @@ END_VAR
 			</summary>					
 		</docu>
 ~*)
-METHOD PUBLIC Trace : INT
+METHOD PUBLIC Trace 
 VAR_INPUT
 	(*~
 		<docu>
@@ -297,63 +347,5 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoMessenger">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Compose">
-      <LineId Id="154" Count="0" />
-      <LineId Id="86" Count="3" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="155" Count="0" />
-      <LineId Id="153" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Debug">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Error">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.FB_init">
-      <LineId Id="7" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="13" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Info">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Notify">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Post">
-      <LineId Id="155" Count="0" />
-      <LineId Id="149" Count="0" />
-      <LineId Id="151" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="152" Count="1" />
-      <LineId Id="156" Count="0" />
-      <LineId Id="154" Count="0" />
-      <LineId Id="150" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="72" Count="2" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.PostConditionally">
-      <LineId Id="7" Count="1" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Programming">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Trace">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Warning">
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

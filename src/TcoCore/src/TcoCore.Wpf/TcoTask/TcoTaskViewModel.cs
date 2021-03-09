@@ -28,7 +28,7 @@ namespace TcoCore
         {
             get
             {
-                _isReady = TcoTask._taskState.Synchron == (short)eTaskState.Ready;
+                _isReady = TcoTask?._taskState?.Synchron == (short)eTaskState.Ready;
                 return _isReady;
             }
 

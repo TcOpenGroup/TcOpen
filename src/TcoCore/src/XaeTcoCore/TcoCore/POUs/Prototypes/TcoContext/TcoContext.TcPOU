@@ -52,6 +52,9 @@ VAR
 		</docu>	
 	~*)	
 	_Messenger : TcoMessenger(THIS^); 
+	
+	//{attribute 'hide'}
+	_rtc : TcoRtc;
 END_VAR
 
 ]]></Declaration>
@@ -120,7 +123,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Identity := ADR(THIS^);]]></ST>
+        <ST><![CDATA[_Identity := ADR(THIS^);
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{a551eec9-c5bd-4df5-9bc0-f8e8eaa3edde}">
@@ -174,9 +178,21 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
+_rtc.Update();
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Rtc" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">
+      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+      <Get Name="Get" Id="{2d224feb-78f3-050e-2237-96bc8473a6fe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Rtc := _rtc;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">
       <Declaration><![CDATA[(*~
 	<docu>

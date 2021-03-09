@@ -25,5 +25,23 @@ namespace TcoCore
         {
             this.Connector.IdentityProvider.AddIdentity(this);
         }
+
+        List<IValueTag> refreshTags { get; set; }
+
+        public void UpdateMessages()
+        {
+            if (refreshTags == null)
+            {
+                refreshTags = new List<IValueTag>();
+                refreshTags.Add(this._startCycleCount);
+                refreshTags.AddRange(Messages.Select(p => p.Cycle));
+            }
+
+            this.GetConnector().ReadBatch(refreshTags);
+
+            var activeMessgages = Messages.Where(p => p.Cycle.LastValue >= this._startCycleCount.LastValue);
+
+            
+        }
     }
 }

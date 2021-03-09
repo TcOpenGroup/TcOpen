@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Vortex.Presentation.Wpf;
+using Vortex.Connector;
+using System.Windows.Data;
+using System.Windows.Markup;
+using System.Globalization;
+using System.Windows;
+
+namespace TcoCore
+{
+    public class TcoContextViewModel : RenderableViewModel
+    {
+        public TcoContextViewModel()
+        {
+            this.UpdateMessagesCommand = new RelayCommand(a => this.OnPropertyChanged(nameof(Messages)));
+        }
+       
+        private void Reload()
+        {
+            Tasks = TcoContext.GetChildren<TcoTask>();
+            TcoObjectChildren = TcoContext.GetChildren<TcoObject>(Tasks);
+        }
+
+        public TcoContext TcoContext { get; private set; }
+
+        public override object Model { get => TcoContext; set { TcoContext  = value as TcoContext; Reload(); } }
+
+        IEnumerable<TcoTask> tasks;
+        public IEnumerable<TcoTask> Tasks
+        {
+            get => tasks;
+
+            private set
+            {
+                if (tasks == value)
+                {
+                    return;
+                }
+
+                SetProperty(ref tasks, value);
+            }
+        }
+
+        public IEnumerable<TcoObject> TcoObjectChildren { get; private set; }       
+
+        public IEnumerable<PlainTcoMessage> Messages 
+        { 
+            get
+            {
+                TcoContext.UpdateMessages();
+                return this.TcoContext?.Messages.Where(p => p.IsActive).Select(p => p.Message);
+            }
+            
+        }
+
+        public RelayCommand UpdateMessagesCommand { get; }
+    }
+}

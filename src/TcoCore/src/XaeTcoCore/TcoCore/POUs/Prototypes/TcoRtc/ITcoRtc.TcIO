@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoRtc" Id="{f54bc528-8fdb-0177-2acd-c304b580985d}">
+    <Declaration><![CDATA[INTERFACE ITcoRtc
+]]></Declaration>
+    <Method Name="Now" Id="{cb5c3e1b-5c35-049f-321a-41c43ce7891d}">
+      <Declaration><![CDATA[METHOD Now : DATE_AND_TIME
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NowAsTIMESTRUCT" Id="{faf62912-5ac6-0765-13dd-eae44285ed7f}">
+      <Declaration><![CDATA[METHOD NowAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+VAR_INPUT
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="NowDDMMYY" Id="{f09a4184-f06e-0b90-0b7d-7e6ba4bc119e}">
+      <Declaration><![CDATA[METHOD NowDDMMYY : STRING
+VAR_INPUT
+	Separator : STRING;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="NowDDMMYYYY" Id="{0b8f3aac-c6bd-0f6f-3089-c7721096f772}">
+      <Declaration><![CDATA[METHOD NowDDMMYYYY : STRING
+VAR_INPUT
+	Separator : STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NowDDMMYYYYHHMMSS" Id="{5764ac80-7b68-0b60-25d8-5584dbd74616}">
+      <Declaration><![CDATA[METHOD NowDDMMYYYYHHMMSS : STRING
+VAR_INPUT
+    SeparatorDate : STRING;
+    Separator : STRING;
+    SeparatorTime : STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NowHHMM" Id="{66a6d6c5-2160-0ba0-0487-cdf9c291237b}">
+      <Declaration><![CDATA[METHOD NowHHMM : STRING
+VAR_INPUT
+	Separator : STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NowHHMMSS" Id="{178e5728-7594-0c31-1738-a4eb760965e9}">
+      <Declaration><![CDATA[METHOD NowHHMMSS : STRING
+VAR_INPUT
+	Separator : STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NowHiPrecision" Id="{317ccaa2-fed5-0818-37bf-03f24bf02b0d}">
+      <Declaration><![CDATA[METHOD NowHiPrecision : STRING
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NowYYYYMMDDHHMMSS" Id="{e8e1d21b-31f3-02f1-1a08-4c6f7931c04b}">
+      <Declaration><![CDATA[METHOD NowYYYYMMDDHHMMSS : STRING
+VAR_INPUT
+    SeparatorDate : STRING;
+    Separator : STRING;
+    SeparatorTime : STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="SetSynchAmsId" Id="{bae95f07-3242-0bfb-097e-ac53ee41f7f4}">
+      <Declaration><![CDATA[METHOD SetSynchAmsId
+VAR_INPUT
+	SynchNodeAmsId : STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

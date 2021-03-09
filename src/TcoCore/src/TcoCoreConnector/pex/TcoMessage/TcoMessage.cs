@@ -12,20 +12,13 @@ namespace TcoCore
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             _context = parent.GetParent<TcoContext>();
-
-            // TODO: This is temporary should be made in in VortexBase library
-            Task.Run(() =>
-            {
-                while(true)
-                { 
-                    System.Threading.Thread.Sleep(2000);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsActive)));
-                }
-
-            });
+            _context.AddMessage(this);
+            _parentObject = parent.GetParent<TcoObject>();
         }
 
-        private ITcoContext _context;
+        private TcoObject _parentObject;
+
+        private TcoContext _context;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,17 +26,57 @@ namespace TcoCore
         {
             get
             {
-                return _context?._startCycleCount.Cyclic <= this.Cycle.Cyclic;
+                if(_context != null)
+                {                                        
+                    return _context._startCycleCount.LastValue <= this.Cycle.LastValue;
+                }
+
+                return false;
             }
         }
 
         public PlainTcoMessage Message
         {
             get
-            {
+            {                
                 var plain = this.CreatePlainerType();
+                plain.ParentsObjectSymbol = this._parentObject?.Symbol;
+                plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
                 this.FlushOnlineToPlain(plain);
                 return plain;
+            }
+        }
+    }
+
+    public partial class PlainTcoMessage
+    {
+        string parentsObjectSymbol;
+        public string ParentsObjectSymbol
+        {
+            get => parentsObjectSymbol; internal set
+            {
+                if (parentsObjectSymbol == value)
+                {
+                    return;
+                }
+
+                parentsObjectSymbol = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsObjectSymbol)));
+            }
+        }
+
+        string parentsHumanReadable;
+        public string ParentsHumanReadable
+        {
+            get => parentsHumanReadable; set
+            {
+                if (parentsHumanReadable == value)
+                {
+                    return;
+                }
+
+                parentsHumanReadable = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsHumanReadable)));
             }
         }
     }

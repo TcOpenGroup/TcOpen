@@ -9,6 +9,12 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="Rtc" Id="{3fccb89c-c171-0d59-079e-5d4c37ebd5d3}">
+      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+      <Get Name="Get" Id="{ee25177f-f3ca-010a-2332-9f654be15bf8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="StartCycleCount" Id="{07375695-36dd-4eef-96de-a19ffb2e7fb5}">
       <Declaration><![CDATA[PROPERTY StartCycleCount : ULINT]]></Declaration>
       <Get Name="Get" Id="{777fb9d8-cfe2-4a4e-8b02-06212d36a736}">

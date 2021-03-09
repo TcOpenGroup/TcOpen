@@ -89,6 +89,9 @@
     <Compile Include="Tests\TcoContext\TcoContextTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoMessenger\TcoMessengerTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoObject\TcoObjectTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -122,6 +125,7 @@
     <Folder Include="Examples\WaveForm" />
     <Folder Include="Examples\Manipulator" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoMessenger" />
     <Folder Include="Tests\TcoSequencer" />
     <Folder Include="Tests\TcoState" />
     <Folder Include="Tests\TcoTask" />
