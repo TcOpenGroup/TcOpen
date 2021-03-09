@@ -67,7 +67,7 @@
 ~*)	
 FUNCTION_BLOCK TcoState EXTENDS TcoObject IMPLEMENTS ITcoState
 VAR
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_State : INT; 	
 	{attribute 'hide'}
 	_enableAutoRestore : BOOL;

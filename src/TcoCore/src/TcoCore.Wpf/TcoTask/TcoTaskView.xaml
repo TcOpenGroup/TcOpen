@@ -21,7 +21,7 @@
                 </Grid.RowDefinitions>
                 <vortex:RenderableContentControl DataContext="{Binding TcoTask._taskState}" PresentationType="Display"/>
                 <UniformGrid Grid.Row="1">
-                    <Button Command="{Binding ResetCommand}">
+                    <Button Command="{Binding RestoreCommand}">
                         <iconPacks:PackIconModern Kind="Reset" />
                     </Button>
                     <Button Command="{Binding InvokeCommand}">

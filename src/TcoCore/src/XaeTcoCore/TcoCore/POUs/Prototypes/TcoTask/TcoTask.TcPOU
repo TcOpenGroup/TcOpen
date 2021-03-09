@@ -13,7 +13,7 @@
 ~*)	
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
 VAR
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_taskState : eTaskState;
 	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
@@ -25,6 +25,10 @@ VAR
 	_MyParentsChangeStateCycle	: ULINT;
 	{attribute 'hide'}
 	_MyParentsLastChangeState	: INT;	
+	{attribute addProperty Name "<#Restore request#>"}
+	_restoreRequest : BOOL;
+	{attribute addProperty Name "<#Invoke request#>"}
+	_invokeRequest : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -292,7 +296,19 @@ PROPERTY Error : BOOL]]></Declaration>
 METHOD Execute : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CheckIfCalledCyclically();
+        <ST><![CDATA[//Triggering Invoke from visualisation
+IF(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
+	THIS^.Invoke();
+END_IF;
+THIS^._invokeRequest := FALSE;
+
+//Triggering Restore from visualisation
+IF( THIS^._restoreRequest) THEN
+	THIS^.Restore();
+	THIS^._restoreRequest := FALSE;
+END_IF;
+
+CheckIfCalledCyclically();
 AutoRestore();
 
 IF(THIS^._taskState = eTaskState.Requested) THEN
