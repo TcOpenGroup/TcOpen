@@ -25,10 +25,27 @@ VAR
 	_MyParentsChangeStateCycle	: ULINT;
 	{attribute 'hide'}
 	_MyParentsLastChangeState	: INT;	
+(*~
+	<docu>
+		<summary>
+			Use to restore this instance to the Ready state. The value is than set to FALSE.			
+		</summary>		
+	</docu>	
+~*)	
 	{attribute addProperty Name "<#Restore request#>"}
 	_restoreRequest : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to start the execution of the task from Ready state or from Done state by performing the rising edge. 
+			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>			
+		</summary>			
+	</docu>	
+~*)
 	{attribute addProperty Name "<#Invoke request#>"}
 	_invokeRequest : BOOL;
+	{attribute 'hide'}
+	_enabled : BOOL := TRUE;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -267,6 +284,29 @@ END_IF;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Enabled" Id="{c98a96a1-7e51-07e4-301f-9d561b604bea}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			The task is able to start by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method if this property si TRUE, otherwise not. 
+			Moreover if the task is already running and this property becomes FALSE, the task is restored. 
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Enabled : BOOL]]></Declaration>
+      <Get Name="Get" Id="{9aa3b2c1-9f99-04c6-3cf4-c6d7f309e4a7}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Enabled := _enabled;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{3e9bf08c-3581-0766-0691-b589eeb33545}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_enabled := Enabled;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="Error" Id="{b63e90bb-bf6b-4594-8c1e-b294c810b03f}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -306,6 +346,17 @@ THIS^._invokeRequest := FALSE;
 IF( THIS^._restoreRequest) THEN
 	THIS^.Restore();
 	THIS^._restoreRequest := FALSE;
+END_IF;
+
+IF NOT _enabled THEN
+	IF THIS^._taskState = eTaskState.Requested THEN
+		THIS^.Messenger.Post('Task cannot be started  as its Enabled property becomes FALSE.',eMessageCategory.Info);	
+		THIS^.Restore();
+	END_IF
+	IF THIS^._taskState = eTaskState.Busy THEN
+		THIS^.Messenger.Post('Running task has been restored as its Enabled property becomes FALSE.',eMessageCategory.Info);	
+		THIS^.Restore();
+	END_IF
 END_IF;
 
 CheckIfCalledCyclically();
@@ -373,7 +424,11 @@ END_VAR]]></Declaration>
         <ST><![CDATA[_newInvokeCall := THIS^._Parent.Context.StartCycleCount > _nextExpectedCycle;
 
 IF(THIS^._taskState = eTaskState.Ready OR (THIS^._taskState = eTaskState.Done AND _newInvokeCall)) THEN
-	THIS^._taskState := eTaskState.Requested;
+	IF _enabled THEN
+		THIS^._taskState := eTaskState.Requested;
+	ELSE
+		THIS^.Messenger.Post('Task cannot be started  as its Enabled property is FALSE.',eMessageCategory.Info);
+	END_IF	
 END_IF	
 
 _nextExpectedCycle := THIS^._Parent.Context.StartCycleCount + 1;
@@ -390,7 +445,14 @@ Invoke := THIS^;
       </Implementation>
     </Method>
     <Property Name="Ready" Id="{41983d9a-f8f9-0718-1aa5-28b21efac144}">
-      <Declaration><![CDATA[PROPERTY Ready : BOOL]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns true if the task is ready to be started by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Ready : BOOL]]></Declaration>
       <Get Name="Get" Id="{04c8ad1e-96d0-0ca0-18be-e96b69bf6ccb}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
@@ -399,7 +461,17 @@ Invoke := THIS^;
       </Get>
     </Property>
     <Method Name="Restore" Id="{afacd00c-5569-431f-be3c-22a90381057d}">
-      <Declaration><![CDATA[METHOD Restore : ITcoRestorable]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restore this instance to the Ready state. Could be called explicitly so as using auto restore mechanism.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._taskState := eTaskState.Ready;
 Restore := THIS^;
