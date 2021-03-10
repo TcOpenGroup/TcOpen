@@ -35,15 +35,15 @@ namespace TcoCore
             }
         }
 
-        public PlainTcoMessage Message
+        private readonly PlainTcoMessage _plain = new PlainTcoMessage();
+        public PlainTcoMessage PlainMessage
         {
             get
-            {                
-                var plain = this.CreatePlainerType();
-                plain.ParentsObjectSymbol = this._parentObject?.Symbol;
-                plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
-                this.FlushOnlineToPlain(plain);
-                return plain;
+            {
+                _plain.ParentsObjectSymbol = this._parentObject?.Symbol;
+                _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
+                this.FlushOnlineToPlain(_plain);
+                return _plain;
             }
         }
     }

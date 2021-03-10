@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoContext" Id="{55d37a51-70a7-4749-9f28-95ccbcaee495}" SpecialFunc="None">
-    <Declaration><![CDATA[(*~
+    <Declaration><![CDATA[
+(*~
 	<docu>
 		<summary>
 			Root construction container, provides context information for <c>TcoObjects</c> declared within its scope.
@@ -44,19 +45,10 @@ VAR
 	_startCycleCount : ULINT;
 	{attribute clr [ReadOnly()]}
 	_endCycleCount : ULINT;
-	(*~
-		<docu>
-			<summary>
-				Provides access to diagnostic and reporting functions.	  
-			</summary>			
-		</docu>	
-	~*)	
-	_Messenger : TcoMessenger(THIS^); 
-	
-	//{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_rtc : TcoRtc;
+	_messagingLevel : eMessageCategory;
 END_VAR
-
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

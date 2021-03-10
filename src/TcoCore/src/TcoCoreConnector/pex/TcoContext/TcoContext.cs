@@ -12,7 +12,9 @@ namespace TcoCore
     public partial class TcoContext : IVortexIdentity
     {
         private readonly IList<TcoMessage> _messages = new List<TcoMessage>();
-        public IEnumerable<TcoMessage> Messages { get { return _messages; } }
+        internal IEnumerable<TcoMessage> Messages { get { return _messages; } }
+        
+        public IEnumerable<PlainTcoMessage> ActiveMessages { get { return Messages.Where(p => p.IsActive).Select(p => p.PlainMessage); } }
 
         public OnlinerULInt Identity => this._Identity;
 
@@ -28,7 +30,7 @@ namespace TcoCore
 
         List<IValueTag> refreshTags { get; set; }
 
-        public void UpdateMessages()
+        public void RefreshActiveMessages()
         {
             if (refreshTags == null)
             {
@@ -39,9 +41,7 @@ namespace TcoCore
 
             this.GetConnector().ReadBatch(refreshTags);
 
-            var activeMessgages = Messages.Where(p => p.Cycle.LastValue >= this._startCycleCount.LastValue);
-
-            
+            var activeMessgages = Messages.Where(p => p.Cycle.LastValue >= this._startCycleCount.LastValue);            
         }
     }
 }

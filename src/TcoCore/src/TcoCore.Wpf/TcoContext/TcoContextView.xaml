@@ -30,7 +30,7 @@
                     Grid.Row="1"
                     AutoGenerateColumns="False"
                     IsReadOnly="True"
-                    ItemsSource="{Binding Messages}">
+                    ItemsSource="{Binding ActiveMessages}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding TimeStamp}" Header="TimeStamp" />
                         <DataGridTextColumn Binding="{Binding Text}" Header="Text" />

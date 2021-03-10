@@ -300,10 +300,10 @@ namespace TcoCoreUnitTests
 
                     //--Assert
 
-                    Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Message.Cycle);
-                    Assert.AreEqual(sut._messenger._mime.Text.Synchron, sut._messenger._mime.Message.Text);
-                    Assert.AreEqual((eMessageCategory)sut._messenger._mime.Category.Synchron, (eMessageCategory)sut._messenger._mime.Message.Category);
-                    Assert.AreEqual(sut._messenger._mime.TimeStamp.Synchron, sut._messenger._mime.Message.TimeStamp);
+                    Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.PlainMessage.Cycle);
+                    Assert.AreEqual(sut._messenger._mime.Text.Synchron, sut._messenger._mime.PlainMessage.Text);
+                    Assert.AreEqual((eMessageCategory)sut._messenger._mime.Category.Synchron, (eMessageCategory)sut._messenger._mime.PlainMessage.Category);
+                    Assert.AreEqual(sut._messenger._mime.TimeStamp.Synchron, sut._messenger._mime.PlainMessage.TimeStamp);
                 }
             });
         }
@@ -318,15 +318,54 @@ namespace TcoCoreUnitTests
             //--Act
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoContext>()?.UpdateMessages();
+            sut.GetParent<TcoContext>()?.RefreshActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
             sut.SingleCycleRun(() => Console.WriteLine("a"));
 
-            sut.GetParent<TcoContext>()?.UpdateMessages();
+            sut.GetParent<TcoContext>()?.RefreshActiveMessages();
             
             Assert.IsFalse(sut._messenger._mime.IsActive);
         }
+
+        [Test, Order(1300)]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(200)]
+        public void T813_MessagingPerfTest(short nofmessages)
+        {            
+            var sut = ConnectorFixture.Connector.MAIN._TcoContextMessagingPerf;
+
+            if (nofmessages > TcoContextMessagingPerf.__const_messagesUpperBound)
+            {
+                throw new ArgumentOutOfRangeException($"Testing message upper bound out of range");
+            }
+
+            sut._numberOfTestMessages.Synchron = nofmessages;
+
+            sut.Read();
+
+            var sw = new System.Diagnostics.Stopwatch();
+
+            sw.Start();
+            sut.RefreshActiveMessages();
+            sw.Stop();
+
+            Console.WriteLine($"Refresh active messages {sw.ElapsedMilliseconds} ms");
+            Assert.IsTrue(sw.ElapsedMilliseconds < 100, $"{sw.ElapsedMilliseconds}");
+          
+
+            sw.Reset();
+            sw.Start();
+            var messages = sut.ActiveMessages.ToList();
+            sw.Stop();
+
+          
+            Console.WriteLine($"Messages Online to Plain {sw.ElapsedMilliseconds} ms");
+        }
+
     }
 }

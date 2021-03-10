@@ -16,7 +16,7 @@ namespace TcoCore
     {
         public TcoContextViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.OnPropertyChanged(nameof(Messages)));
+            this.UpdateMessagesCommand = new RelayCommand(a => this.OnPropertyChanged(nameof(ActiveMessages)));
         }
        
         private void Reload()
@@ -47,12 +47,12 @@ namespace TcoCore
 
         public IEnumerable<TcoObject> TcoObjectChildren { get; private set; }       
 
-        public IEnumerable<PlainTcoMessage> Messages 
+        public IEnumerable<PlainTcoMessage> ActiveMessages 
         { 
             get
             {
-                TcoContext.UpdateMessages();
-                return this.TcoContext?.Messages.Where(p => p.IsActive).Select(p => p.Message);
+                TcoContext.RefreshActiveMessages();
+                return this.TcoContext?.ActiveMessages;
             }
             
         }

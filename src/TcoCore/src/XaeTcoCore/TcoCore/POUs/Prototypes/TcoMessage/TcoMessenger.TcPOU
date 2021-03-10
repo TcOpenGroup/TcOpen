@@ -60,9 +60,9 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
 	_mime.TimeStamp :=  _Parent.Context.Rtc.Now();
 	_mime.Text := Text;
-	_mime.Identity := _Parent.Context.Identity;
+	_mime.Identity := _Parent.Identity;
 	_mime.Category := Category;
-	_mime.Cycle := _Parent.Context.StartCycleCount;
+	_mime.Cycle := _Parent.Context.StartCycleCount;	
 END_IF;
 
 

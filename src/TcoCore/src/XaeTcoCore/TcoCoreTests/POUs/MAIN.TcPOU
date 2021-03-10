@@ -8,6 +8,7 @@ VAR
 	_TcoContextTest_B					:	TcoContextTest;
 	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
+	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,6 +21,8 @@ _TcoContextTest_B();
 _TcoSequencerAutoRestorableTest();
 
 _TcoSequencerNonAutoRestorableTest();
+
+_TcoContextMessagingPerf.Run();
 ]]></ST>
     </Implementation>
   </POU>
