@@ -8,6 +8,23 @@ VAR
 	_TcoContextTest_B					:	TcoContextTest;
 	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
+	
+	LocalSysTime : Tc2_Utilities.FB_LocalSystemTime;
+	_rtc : Tc2_Utilities.RTC;
+	_rtcex : Tc2_Utilities.RTC_EX;
+	_rtcex2 : Tc2_Utilities.RTC_EX2;
+	
+	_NT_GetTime : Tc2_Utilities.NT_GetTime;
+	
+	SysTimeULINT : ULINT;
+
+	_NT_SetTimeToRTCTime : Tc2_Utilities.NT_SetTimeToRTCTime;
+	_NT_SetLocalTime : Tc2_Utilities.NT_SetLocalTime;
+	sGetActualDcTime64 : STRING;
+	sGetCurDcTaskTime64 : STRING;
+	sGetCurDcTickTime64 : STRING;
+	sGetCurExtTime64 : STRING;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,7 +37,48 @@ _TcoContextTest_B();
 _TcoSequencerAutoRestorableTest();
 
 _TcoSequencerNonAutoRestorableTest();
-]]></ST>
+
+
+LocalSysTime(
+	sNetID:= , 
+	bEnable:= , 
+	dwCycle:= 60, 
+	dwOpt:= , 
+	tTimeout:= , 
+	bValid=> , 
+	systemTime=> , 
+	tzID=> );
+	
+_rtc(EN := LocalSysTime.bValid,
+	 PDT := Tc2_Utilities.SYSTEMTIME_TO_DT(LocalSysTime.systemTime));
+	 
+_rtcex(EN := LocalSysTime.bValid,
+	 PDT := Tc2_Utilities.SYSTEMTIME_TO_DT(LocalSysTime.systemTime));
+
+_rtcex2(EN := LocalSysTime.bValid,
+	 PDT := (LocalSysTime.systemTime));	 
+
+_NT_GetTime(NETID := LocalSysTime.sNetID,
+			START := LocalSysTime.bValid);	 
+	 
+
+
+SysTimeULINT := Tc2_System.F_GetSystemTime();
+
+	 
+_NT_SetTimeToRTCTime(NETID := ,
+					SET := );	  
+	 
+_NT_SetLocalTime(TIMESTR := LocalSysTime.systemTime);	
+	 
+	 
+sGetActualDcTime64 :=Tc2_EtherCAT.DCTIME64_TO_STRING (Tc2_EtherCAT.F_GetActualDcTime64());
+sGetCurDcTaskTime64 :=Tc2_EtherCAT.DCTIME64_TO_STRING (Tc2_EtherCAT.F_GetCurDcTaskTime64());
+sGetCurDcTickTime64 :=Tc2_EtherCAT.DCTIME64_TO_STRING (Tc2_EtherCAT.F_GetCurDcTickTime64());
+sGetCurExtTime64 :=Tc2_EtherCAT.DCTIME64_TO_STRING (Tc2_EtherCAT.F_GetCurExtTime64(0,0));
+	 
+	 
+	 ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

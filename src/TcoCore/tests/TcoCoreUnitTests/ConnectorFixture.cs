@@ -39,6 +39,7 @@ namespace TcoCoreUnitTests
 
                 _connector.Connector.ReadWriteCycleDelay = 100;
                 _connector.Connector.BuildAndStart();
+
             });
 
             connectorTask.Start();

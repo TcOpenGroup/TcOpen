@@ -14,13 +14,15 @@ namespace TcoCoreUnitTests
     {
 
         TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoContextTest_A._TcoMessangerTests;
+        TcoCoreTests.TcoContextTest suc = ConnectorFixture.Connector.MAIN._TcoContextTest_A;
 
 
         [OneTimeSetUp]
         public void OneSetup()
         {
             // This forces the time update. Multiple cycles are required to initialize.
-            sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => sut.GetParent<TcoContext>()._rtc._isValid.Synchron);
+            //sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => sut.GetParent<TcoContext>()._rtc._isValid.Synchron);
+            sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => suc.IsRtcValid());
         }
 
         [SetUp]

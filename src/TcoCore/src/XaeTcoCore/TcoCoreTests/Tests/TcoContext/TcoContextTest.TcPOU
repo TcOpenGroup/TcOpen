@@ -11,6 +11,7 @@ VAR
 	_TcoObjectTest_B		:	TcoObjectTest(THIS^);
 	_MyIdentity				:	ULINT;	
 	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
+	_rtcNow					:	DATE_AND_TIME;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -52,6 +53,15 @@ METHOD INTERNAL ContextOpen
         <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
+    <Method Name="IsRtcValid" Id="{803b7bac-6581-0d71-359f-edc935966718}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL IsRtcValid : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IsRtcValid := THIS^.Rtc.IsValid;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Main" Id="{76d8f63c-d45d-4de4-ad73-4298aca95aa1}">
       <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
@@ -59,6 +69,21 @@ METHOD INTERNAL ContextOpen
 
 _MyIdentity	:= THIS^.Identity;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Now" Id="{7fa98b1a-49e7-09f8-0b51-b855c5c7b083}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Now ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_rtcNow := THIS^.Rtc.Now(); ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowHiPrecision" Id="{99e92195-c348-0df4-02b2-8d655e2ae8e9}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL NowHiPrecision : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[NowHiPrecision := THIS^.Rtc.NowHiPrecision();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutCycleCounters" Id="{3ce97aaa-6bf5-4a06-9e7c-0d88acee2466}">
@@ -69,6 +94,18 @@ METHOD INTERNAL ReadOutCycleCounters]]></Declaration>
 _endCycles			:=		THIS^.EndCycleCount;
 
 _MyIdentity			:= 		THIS^.Identity;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetSynchAmsId" Id="{e42255bb-5e79-0368-3b1c-05bb2eccb9f1}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD SetSynchAmsId
+VAR_INPUT
+	SynchNodeAmsId : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Rtc.SetSynchAmsId(SynchNodeAmsId);
+]]></ST>
       </Implementation>
     </Method>
   </POU>
