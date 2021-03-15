@@ -40,7 +40,7 @@
                 </DataGrid>
             </Grid>
         </Expander>
-        <GroupBox Grid.Row="1" Header="{Binding TcoObject, Converter={local:NameOrSymbolConverter}}">
+        <GroupBox Grid.Row="1" Header="{Binding Converter={local:NameOrSymbolConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -74,10 +74,6 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </Border>
-
-                <Border Grid.Row="2" Visibility="{Binding TcoObject._messenger._mime.IsActive, Converter={local:BooleanToVisibilityConverter}}">
-                    <TextBlock Text="{Binding TcoObject._messenger._mime.Text.Cyclic}" />
                 </Border>
             </Grid>
         </GroupBox>
