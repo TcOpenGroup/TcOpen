@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Clock" Id="{cd04d6fc-8735-001f-16e8-7e49bd4514a9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM INTERNAL Clock
+// RTC - Real time clock low precision synchronizable with NTS
+// TickClocl - Hi presition from start of the system]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

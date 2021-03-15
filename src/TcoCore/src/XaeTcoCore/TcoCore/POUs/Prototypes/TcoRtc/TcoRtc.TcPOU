@@ -4,22 +4,36 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoRtc IMPLEMENTS ITcoRtc
 VAR	
     _synchNodeAmsId : STRING;
-	{attribute 'hide'}
-	timeStruct : Tc2_Utilities.TIMESTRUCT;
-	{attribute 'hide'}
+//	{attribute 'hide'}
+//	timeStruct : Tc2_Utilities.TIMESTRUCT;
+//	{attribute 'hide'}
 	fileTime   : Tc2_Utilities.T_FILETIME;
-	{attribute 'hide'}
+//	{attribute 'hide'}
 	fbGetSystemTime : Tc2_System.GETSYSTEMTIME;
-	{attribute 'hide'}
-	sTime : STRING;
-	{attribute 'hide'}
+//	{attribute 'hide'}
+	sTime1 : STRING;
+	sTime2 : STRING;
+//	{attribute 'hide'}
 	timeAsDT : DT;
+	timeAsDATEANDTIME : DATE_AND_TIME;
+
+	SysTime : Tc2_EtherCAT.T_DCTIME64;	
 	
-	SynchTime : Tc2_Utilities.NT_SetTimeToRTCTime;
+//	SynchTime : Tc2_Utilities.NT_SetTimeToRTCTime;
   
     LocalSysTime : Tc2_Utilities.FB_LocalSystemTime;
 
 	_isValid : BOOL;	
+	
+	actDC : T_DCTIME64;
+    sAct  : STRING;
+	curDC : T_DCTIME64;
+    sCur  : STRING;
+	curDCT : T_DCTIME64;
+    sCurt  : STRING;
+	curE : T_DCTIME64;
+    sCure  : STRING;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -69,6 +83,17 @@ retVal := retVal := CONCAT(retVal, Number);
 AddLeadingZeroesToString := retVal;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="IsValid" Id="{ea557ae0-2319-0a73-20c7-b1918880d293}">
+      <Declaration><![CDATA[PROPERTY IsValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{998b90ba-ddcd-029d-02e2-b332e4fa6b74}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsValid := _isValid;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Now" Id="{1ce19af5-bb24-0b92-3918-5d0f12ced654}">
       <Declaration><![CDATA[METHOD Now : DATE_AND_TIME
 VAR_INPUT
@@ -87,160 +112,39 @@ END_VAR]]></Declaration>
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="NowDDMMYY" Id="{4ba9c69d-82c8-0848-04a9-cd27c3d5e08a}">
-      <Declaration><![CDATA[METHOD NowDDMMYY : STRING
-VAR_INPUT
-	Separator : STRING;
-END_VAR
-
-VAR
-	dateTime : Tc2_Utilities.TIMESTRUCT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[dateTime := NowAsTIMESTRUCT();
-
-NowDDMMYY := CONCAT(AddLeadingZeroes(WORD_TO_INT(dateTime.wDay),2), Separator);
-NowDDMMYY := CONCAT(NowDDMMYY, AddLeadingZeroes(WORD_TO_INT(dateTime.wMonth),2));
-NowDDMMYY := CONCAT(NowDDMMYY, Separator);
-NowDDMMYY := CONCAT(NowDDMMYY, AddLeadingZeroesToString(RIGHT(UINT_TO_STRING(dateTime.wYear), 2),2));
-
-
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowDDMMYYYY" Id="{13380c12-60d5-00b8-24a4-5ff7f7e7f9e2}">
-      <Declaration><![CDATA[METHOD NowDDMMYYYY : STRING
-VAR_INPUT
-	Separator : STRING;
-END_VAR
-
-VAR
-	dateTime : Tc2_Utilities.TIMESTRUCT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[dateTime := NowAsTIMESTRUCT();
-
-NowDDMMYYYY := CONCAT(AddLeadingZeroes(WORD_TO_INT(dateTime.wDay),2), Separator);
-NowDDMMYYYY := CONCAT(NowDDMMYYYY, AddLeadingZeroes(WORD_TO_INT(dateTime.wMonth),2));
-NowDDMMYYYY := CONCAT(NowDDMMYYYY, Separator);
-NowDDMMYYYY := CONCAT(NowDDMMYYYY, AddLeadingZeroes(WORD_TO_INT(dateTime.wYear),2));
-
-
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowDDMMYYYYHHMMSS" Id="{6b7647a1-0995-0135-165a-ca67b6a0ceed}">
-      <Declaration><![CDATA[METHOD NowDDMMYYYYHHMMSS : STRING
-VAR_INPUT
-    SeparatorDate : STRING;
-    Separator : STRING;
-    SeparatorTime : STRING;
-END_VAR
-
-VAR
-	dateTime : Tc2_Utilities.TIMESTRUCT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[dateTime := NowAsTIMESTRUCT();
-
-NowDDMMYYYYHHMMSS := CONCAT(AddLeadingZeroes(WORD_TO_INT(dateTime.wDay),2), SeparatorDate);
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS,AddLeadingZeroes(WORD_TO_INT(dateTime.wMonth),2));
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, SeparatorDate);
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wYear),2));
-
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, Separator);
-
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wHour),2));
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, SeparatorTime);
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wMinute),2));
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, SeparatorTime);
-NowDDMMYYYYHHMMSS := CONCAT(NowDDMMYYYYHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wSecond),2));]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowHHMM" Id="{c63e39fb-89cd-094f-323e-2e48023191f3}">
-      <Declaration><![CDATA[METHOD NowHHMM : STRING
-VAR_INPUT
-	Separator : STRING;
-END_VAR
-
-VAR
-	dateTime : Tc2_Utilities.TIMESTRUCT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[dateTime := NowAsTIMESTRUCT();
-
-NowHHMM := CONCAT(AddLeadingZeroes(WORD_TO_INT(dateTime.wHour),2), Separator);
-NowHHMM := CONCAT(NowHHMM, AddLeadingZeroes(WORD_TO_INT(dateTime.wMinute),2));
-
-
-
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowHHMMSS" Id="{cbce2bb4-4961-0de4-265c-a794d5ea5915}">
-      <Declaration><![CDATA[METHOD NowHHMMSS : STRING
-VAR_INPUT
-	Separator : STRING;
-END_VAR
-
-VAR
-	dateTime : Tc2_Utilities.TIMESTRUCT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[dateTime := NowAsTIMESTRUCT();
-
-NowHHMMSS := CONCAT(AddLeadingZeroes(WORD_TO_INT(dateTime.wHour),2), Separator);
-NowHHMMSS := CONCAT(NowHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wMinute),2));
-NowHHMMSS := CONCAT(NowHHMMSS, Separator);
-NowHHMMSS := CONCAT(NowHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wSecond),2));
-
-
-
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="NowHiPrecision" Id="{bce00263-3186-0c90-1b17-450bee8f7304}">
       <Declaration><![CDATA[METHOD NowHiPrecision : STRING
-VAR_INPUT
-END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbGetSystemTime(timeLoDW=>fileTime.dwLowDateTime, timeHiDW=>fileTime.dwHighDateTime );
-sTime :=Tc2_Utilities.SYSTEMTIME_TO_STRING(Tc2_Utilities.FILETIME_TO_SYSTEMTIME( fileTime ));
-//timeAsDT := FILETIME_TO_DT( fileTime );
+sTime1 :=Tc2_Utilities.SYSTEMTIME_TO_STRING(Tc2_Utilities.FILETIME_TO_SYSTEMTIME( fileTime ));
+timeAsDT := FILETIME_TO_DT( fileTime );
 
-NowHiPrecision := sTime;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowYYYYMMDDHHMMSS" Id="{2a2fef4e-0810-0b09-25a8-373f4213e07e}">
-      <Declaration><![CDATA[METHOD NowYYYYMMDDHHMMSS : STRING
-VAR_INPUT
-    SeparatorDate : STRING;
-    Separator : STRING;
-    SeparatorTime : STRING;
-END_VAR
+NowHiPrecision := sTime1;
 
-VAR
-	dateTime : Tc2_Utilities.TIMESTRUCT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[dateTime := NowAsTIMESTRUCT();
 
-NowYYYYMMDDHHMMSS := CONCAT(WORD_TO_STRING(dateTime.wYear), SeparatorDate);
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS,AddLeadingZeroes(WORD_TO_INT(dateTime.wMonth),2));
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, SeparatorDate);
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wDay),2));
+SysTime := Tc2_System.F_GetSystemTime();
 
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, Separator);
 
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wHour),2));
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, SeparatorTime);
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wMinute),2));
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, SeparatorTime);
-NowYYYYMMDDHHMMSS := CONCAT(NowYYYYMMDDHHMMSS, AddLeadingZeroes(WORD_TO_INT(dateTime.wSecond),2));]]></ST>
+sTime2 := Tc2_EtherCAT.DCTIME64_TO_STRING(SysTime);
+
+timeAsDT := ULINT_TO_DT(SysTime);
+
+NowHiPrecision := sTime2;
+
+
+
+actDC := F_GetActualDcTime64();
+sAct  := DCTIME64_TO_STRING( actDC );
+
+curDC := F_GetCurDcTaskTime64();
+sCur  := DCTIME64_TO_STRING( curDC );
+
+curDCT := F_GetCurDcTickTime64();
+sCurt  := DCTIME64_TO_STRING( curDCT );
+
+//curE := F_GetCurExtTime64();
+//sCure  := DCTIME64_TO_STRING( curE );]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetSynchAmsId" Id="{7425e0ad-3fc8-0f83-1029-edcaca4fb896}">

@@ -9,7 +9,58 @@ VAR
 	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
 	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
-END_VAR
+	
+	//**********************************
+	_NetID : STRING := '192.168.64.1.1.1';
+	_enable : BOOL := FALSE;
+	_dwCycle : DWORD := 5;
+	LocalSysTime : Tc2_Utilities.FB_LocalSystemTime;
+	_rtc : Tc2_Utilities.RTC;
+	_rtcex : Tc2_Utilities.RTC_EX;
+	_rtcex2 : Tc2_Utilities.RTC_EX2;
+	
+	_NT_GetTime : Tc2_Utilities.NT_GetTime;
+	
+	SysTimeULINT : ULINT;
+
+	_NT_SetTimeToRTCTime : Tc2_Utilities.NT_SetTimeToRTCTime;
+	_NT_SetLocalTime : Tc2_Utilities.NT_SetLocalTime;
+
+	validRtrg :Tc2_Standard.R_TRIG;
+	validReCounter : INT;
+	
+//	_t001 : T_DCTIME64;
+//	_t002 : T_DCTIME64;
+//	_t012 : T_DCTIME64;
+//	_s001 : STRING;
+//	_s002 : STRING;
+//	_e000 : ULINT;
+
+//	_t101 : T_DCTIME64;
+//	_t102 : T_DCTIME64;
+//	_t112 : T_DCTIME64;
+//	_s101 : STRING;
+//	_s102 : STRING;
+//	_e100 : ULINT;
+
+
+	_FB_EcExtSyncCalcTimeDiff64 : Tc2_EtherCAT.FB_EcExtSyncCalcTimeDiff64;
+	_DcToTcTimeOffset : ULINT;
+	_DcToExtTimeOffset : ULINT;
+	_ExtTime : Tc2_EtherCAT.T_DCTIME64;
+	_IntTime : Tc2_EtherCAT.T_DCTIME64;
+
+	_nTimeDiff : UDINT;
+	_nOffsetFromSyncMaster : DINT;
+	_sDcToTcTimeOffset : STRING;
+	_sDcToExtTimeOffset : STRING;
+	_sExtTime : STRING;
+	_sIntTime : STRING;
+	_sTimeDiff : STRING;
+	_sOffsetFromSyncMaster : STRING;
+	
+	_CalcOffset : BOOL;
+	END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_TcoContext_Waveform.Run();
@@ -23,7 +74,111 @@ _TcoSequencerAutoRestorableTest();
 _TcoSequencerNonAutoRestorableTest();
 
 _TcoContextMessagingPerf.Run();
-]]></ST>
+
+
+
+//*************************************************
+
+LocalSysTime(
+	sNetID:= _NetID, 
+	bEnable:= _Enable, 
+	dwCycle:= _dwCycle, 
+	dwOpt:= , 
+	tTimeout:= , 
+	bValid=> , 
+	systemTime=> , 
+	tzID=> );
+	
+_rtc(EN := LocalSysTime.bValid,
+	 PDT := Tc2_Utilities.SYSTEMTIME_TO_DT(LocalSysTime.systemTime));
+	 
+_rtcex(EN := LocalSysTime.bValid,
+	 PDT := Tc2_Utilities.SYSTEMTIME_TO_DT(LocalSysTime.systemTime));
+
+_rtcex2(EN := LocalSysTime.bValid,
+	 PDT := (LocalSysTime.systemTime));	 
+
+_NT_GetTime(NETID := LocalSysTime.sNetID,
+			START := LocalSysTime.bValid);	 
+	 
+
+
+SysTimeULINT := Tc2_System.F_GetSystemTime();
+
+	 
+_NT_SetTimeToRTCTime(NETID := ,
+					SET := );	  
+	 
+_NT_SetLocalTime(TIMESTR := LocalSysTime.systemTime);		 
+	 
+//_t001 := Tc2_EtherCAT.F_GetActualDcTime64();
+//_t002 := Tc2_EtherCAT.F_GetActualDcTime64();
+//_t012 := _t002 - _t001;
+//_s001 :=Tc2_EtherCAT.DCTIME64_TO_STRING (_t001);
+//_s002 :=Tc2_EtherCAT.DCTIME64_TO_STRING (_t002);
+
+//IF  _s001 = _s002 THEN
+//	_e000 := _e000 + 1;
+//END_IF;
+
+//_s101 :=Tc2_EtherCAT.DCTIME64_TO_STRING (Tc2_EtherCAT.F_GetActualDcTime64());
+//_s102 :=Tc2_EtherCAT.DCTIME64_TO_STRING (Tc2_EtherCAT.F_GetActualDcTime64());
+//_t101 := Tc2_EtherCAT.STRING_TO_DCTIME64(_s101);
+//_t102 := Tc2_EtherCAT.STRING_TO_DCTIME64(_s102);
+//_t112 := _t102 - _t101;
+
+//IF  _s101 = _s102 THEN
+//	_e100 := _e100 + 1;
+//END_IF;
+
+
+//_ExtTime := Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(LocalSysTime.systemTime,0,0);
+//_IntTime := Tc2_EtherCAT.F_GetActualDcTime64();
+
+_sDcToTcTimeOffset := tc2_EtherCAT.dctimE64_TO_STRING(_DcToTcTimeOffset);
+_sDcToExtTimeOffset := tc2_EtherCAT.dctimE64_TO_STRING(_DcToExtTimeOffset);
+_sExtTime := tc2_EtherCAT.dctimE64_TO_STRING(_ExtTime);
+_sIntTime := tc2_EtherCAT.dctimE64_TO_STRING(_IntTime);
+
+
+	
+validRtrg(CLK := LocalSysTime.bValid);
+
+IF validRtrg.Q THEN
+	validReCounter := validReCounter + 1;
+//	IF _ExtTime >= _IntTime THEN
+//		_DcToTcTimeOffset := 0;
+//		_DcToExtTimeOffset := _ExtTime - _IntTime;
+//	ELSE
+//		_DcToTcTimeOffset := _IntTime -_ExtTime;
+//		_DcToExtTimeOffset := 0;
+//	END_IF
+	_DcToTcTimeOffset :=  Tc2_EtherCAT.F_GetActualDcTime64() - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(LocalSysTime.systemTime,0,0);
+	_DcToExtTimeOffset := 0;
+//	_Enable := FALSE;
+	_CalcOffset := TRUE;
+	_NT_SetLocalTime.START := TRUE;
+END_IF
+
+_ExtTime := Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(LocalSysTime.systemTime,0,0);
+_IntTime := Tc2_EtherCAT.F_ConvTcTimeToDcTime64(F_GetActualDcTime64(),_DcToTcTimeOffset);
+
+_NT_SetLocalTime(TIMESTR := LocalSysTime.systemTime);		 
+
+_NT_SetLocalTime.START := FALSE;
+
+IF _CalcOffset THEN
+_FB_EcExtSyncCalcTimeDiff64(DcToTcTimeOffset := _DcToTcTimeOffset,
+							DcToExtTimeOffset := _DcToExtTimeOffset,
+							ExtTime := _ExtTime, 
+							IntTime := _IntTime,
+							nTimeDiff => _nTimeDiff,
+							nOffsetFromSyncMaster => _nOffsetFromSyncMaster);
+END_IF;	
+
+_sTimeDiff := tc2_EtherCAT.dctimE64_TO_STRING(_nTimeDiff);
+_sOffsetFromSyncMaster := tc2_EtherCAT.dctimE64_TO_STRING(_nOffsetFromSyncMaster);
+						]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
