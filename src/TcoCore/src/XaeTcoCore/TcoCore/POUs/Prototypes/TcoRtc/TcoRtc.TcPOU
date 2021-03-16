@@ -1,177 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcoRtc" Id="{3a1d4056-fd57-08b3-0a60-7f95051a8a43}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoRtc IMPLEMENTS ITcoRtc
-VAR	
-    _synchNodeAmsId : STRING;
-//	{attribute 'hide'}
-//	timeStruct : Tc2_Utilities.TIMESTRUCT;
-//	{attribute 'hide'}
-	fileTime   : Tc2_Utilities.T_FILETIME;
-//	{attribute 'hide'}
-	fbGetSystemTime : Tc2_System.GETSYSTEMTIME;
-//	{attribute 'hide'}
-	sTime1 : STRING;
-	sTime2 : STRING;
-//	{attribute 'hide'}
-	timeAsDT : DT;
-	timeAsDATEANDTIME : DATE_AND_TIME;
-
-	SysTime : Tc2_EtherCAT.T_DCTIME64;	
-	
-//	SynchTime : Tc2_Utilities.NT_SetTimeToRTCTime;
-  
-    LocalSysTime : Tc2_Utilities.FB_LocalSystemTime;
-
-	_isValid : BOOL;	
-	
-	actDC : T_DCTIME64;
-    sAct  : STRING;
-	curDC : T_DCTIME64;
-    sCur  : STRING;
-	curDCT : T_DCTIME64;
-    sCurt  : STRING;
-	curE : T_DCTIME64;
-    sCure  : STRING;
-
-END_VAR
+  <POU Name="TcoRtc" Id="{44984f17-252b-05a5-3965-3576c168912a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC TcoRtc IMPLEMENTS ITcoRtc
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="AddLeadingZeroes" Id="{bc458d5b-d4c1-0051-3330-0332526105b7}">
-      <Declaration><![CDATA[METHOD PRIVATE AddLeadingZeroes : STRING
-VAR_INPUT
-	Number : INT;
-	Lenght : INT;
-END_VAR
-
-VAR
-	index : INT;
-	numberAsString : STRING;
-	retVal : STRING;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[numberAsString := INT_TO_STRING(Number);
-
-FOR index := LEN(numberAsString) TO Lenght - 1 DO
-	retVal := CONCAT(retVal, '0');
-END_FOR
-
-retVal := retVal := CONCAT(retVal, numberAsString);
-AddLeadingZeroes := retVal;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="AddLeadingZeroesToString" Id="{6bad58ae-6043-0a7d-1726-a6ffa4a8436b}">
-      <Declaration><![CDATA[METHOD PRIVATE AddLeadingZeroesToString : STRING
-VAR_INPUT
-	Number : STRING;
-	Lenght : INT;
-END_VAR
-
-VAR
-	index : INT;
-	numberAsString : STRING;
-	retVal : STRING;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[FOR index := LEN(Number) TO Lenght - 1 DO
-	retVal := CONCAT(retVal, '0');
-END_FOR
-
-retVal := retVal := CONCAT(retVal, Number);
-AddLeadingZeroesToString := retVal;]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="IsValid" Id="{ea557ae0-2319-0a73-20c7-b1918880d293}">
-      <Declaration><![CDATA[PROPERTY IsValid : BOOL]]></Declaration>
-      <Get Name="Get" Id="{998b90ba-ddcd-029d-02e2-b332e4fa6b74}">
+    <Property Name="IsValid" Id="{0b73d0fb-6a2d-0c9e-3da7-384d62e156b5}">
+      <Declaration><![CDATA[PROPERTY IsValid : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{f1495f6e-f4ab-08bd-138d-164d6df2166a}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IsValid := _isValid;]]></ST>
+          <ST><![CDATA[IsValid := Clock._isValid;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Now" Id="{1ce19af5-bb24-0b92-3918-5d0f12ced654}">
-      <Declaration><![CDATA[METHOD Now : DATE_AND_TIME
+    <Method Name="NowLocal" Id="{ba634665-0212-047c-1c1d-6ebb5a5f30b5}">
+      <Declaration><![CDATA[METHOD NowLocal : DATE_AND_TIME
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Clock._isValid THEN
+	NowLocal := Clock._LocalTimeDT;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowLocalAsTIMESTRUCT" Id="{e9fe0ffa-a159-017e-3bd5-9e67f37e7fa9}">
+      <Declaration><![CDATA[METHOD NowLocalAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Clock._isValid THEN
+	NowLocalAsTIMESTRUCT := Clock._LocalTime;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowUTC" Id="{34a4b82c-d3a2-0332-3148-6e27e32eec88}">
+      <Declaration><![CDATA[METHOD NowUTC : DATE_AND_TIME
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Clock._isValid THEN
+	NowUTC := Clock._UTCTimeDT;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowUTCAsTIMESTRUCT" Id="{6c922f94-0952-07e6-0cac-83326b01c28c}">
+      <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Clock._isValid THEN
+	NowUTCAsTIMESTRUCT := Clock._UTCTime;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetSynchParams" Id="{59fd7e79-21d3-039b-3d0f-873916771b17}">
+      <Declaration><![CDATA[METHOD SetSynchParams
 VAR_INPUT
+	inContextIdentity	: ULINT;
+	inDoSynch	: BOOL;
+	inSyncAmsId	: STRING;
+	inSyncPeriod	: UINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Now := Tc2_Utilities.SYSTEMTIME_TO_DT(NowAsTIMESTRUCT());]]></ST>
+        <ST><![CDATA[Clock.SetSynchParams(inContextIdentity,inDoSynch,inSyncAmsId,inSyncPeriod);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="NowAsTIMESTRUCT" Id="{8e4f6aed-1632-058d-33a3-4703030bb725}">
-      <Declaration><![CDATA[METHOD NowAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
-VAR_INPUT
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[NowAsTIMESTRUCT := LocalSysTime.systemTime;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowHiPrecision" Id="{bce00263-3186-0c90-1b17-450bee8f7304}">
-      <Declaration><![CDATA[METHOD NowHiPrecision : STRING
+    <Method Name="TickClock" Id="{1cdfb043-4f81-0904-37ac-2a0334c75a58}">
+      <Declaration><![CDATA[METHOD TickClock : ULINT
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbGetSystemTime(timeLoDW=>fileTime.dwLowDateTime, timeHiDW=>fileTime.dwHighDateTime );
-sTime1 :=Tc2_Utilities.SYSTEMTIME_TO_STRING(Tc2_Utilities.FILETIME_TO_SYSTEMTIME( fileTime ));
-timeAsDT := FILETIME_TO_DT( fileTime );
-
-NowHiPrecision := sTime1;
-
-
-SysTime := Tc2_System.F_GetSystemTime();
-
-
-sTime2 := Tc2_EtherCAT.DCTIME64_TO_STRING(SysTime);
-
-timeAsDT := ULINT_TO_DT(SysTime);
-
-NowHiPrecision := sTime2;
-
-
-
-actDC := F_GetActualDcTime64();
-sAct  := DCTIME64_TO_STRING( actDC );
-
-curDC := F_GetCurDcTaskTime64();
-sCur  := DCTIME64_TO_STRING( curDC );
-
-curDCT := F_GetCurDcTickTime64();
-sCurt  := DCTIME64_TO_STRING( curDCT );
-
-//curE := F_GetCurExtTime64();
-//sCure  := DCTIME64_TO_STRING( curE );]]></ST>
+        <ST><![CDATA[TickClock := Tc2_EtherCAT.F_GetActualDcTime64();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetSynchAmsId" Id="{7425e0ad-3fc8-0f83-1029-edcaca4fb896}">
-      <Declaration><![CDATA[METHOD SetSynchAmsId
+    <Method Name="Update" Id="{0bf459e2-db45-0e5b-3d87-31081b5a02e2}">
+      <Declaration><![CDATA[METHOD Update
 VAR_INPUT
-	SynchNodeAmsId : STRING;
+	inContextIdentity	: ULINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_synchNodeAmsId := SynchNodeAmsId;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Update" Id="{b45f0019-2d3e-0d67-3cbe-6bd10666673b}">
-      <Declaration><![CDATA[METHOD INTERNAL Update : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[LocalSysTime(
-	sNetID:= _synchNodeAmsId, 
-	bEnable:= TRUE, 
-	dwCycle:= 60, 
-	dwOpt:= , 
-	tTimeout:= , 
-	bValid=> _isValid, 
-	systemTime=> , 
-	tzID=> );
-	
-Update := _isValid;]]></ST>
+        <ST><![CDATA[Clock.Update(inContextIdentity);]]></ST>
       </Implementation>
     </Method>
   </POU>

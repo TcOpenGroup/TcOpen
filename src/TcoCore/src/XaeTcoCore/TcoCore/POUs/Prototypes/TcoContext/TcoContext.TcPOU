@@ -45,11 +45,12 @@ VAR
 	_startCycleCount : ULINT;
 	{attribute clr [ReadOnly()]}
 	_endCycleCount : ULINT;
-	{attribute clr [ReadOnly()]}
-	_rtc : TcoRtc;
 	_messagingLevel : eMessageCategory;
 END_VAR
-]]></Declaration>
+VAR_STAT
+	{attribute clr [ReadOnly()]}
+	_rtc : TcoRtc;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -170,7 +171,7 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
-_rtc.Update();
+_rtc.Update(_Identity);
 ]]></ST>
       </Implementation>
     </Method>

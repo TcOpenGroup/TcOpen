@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.102.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -48,14 +48,14 @@
 					<Name>TcoCoreTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
-						<Name>PlcTask Inputs</Name>
+						<Name>PlcTask1 Inputs</Name>
 						<Var>
 							<Name>gMANIPULATOR_IO.Inputs</Name>
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
+						<Name>PlcTask1 Outputs</Name>
 						<Var>
 							<Name>gMANIPULATOR_IO.Outputs</Name>
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
@@ -64,7 +64,7 @@
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
-							<Name>PlcTask</Name>
+							<Name>PlcTask1</Name>
 							<ManualConfig>
 								<OTCID>#x02010040</OTCID>
 							</ManualConfig>

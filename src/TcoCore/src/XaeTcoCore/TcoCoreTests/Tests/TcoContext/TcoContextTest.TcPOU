@@ -11,7 +11,8 @@ VAR
 	_TcoObjectTest_B		:	TcoObjectTest(THIS^);
 	_MyIdentity				:	ULINT;	
 	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
-	_rtcNow					:	DATE_AND_TIME;
+	_NowLocalDT				:	DATE_AND_TIME;
+	_NowUTCDT				:	DATE_AND_TIME;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -71,19 +72,11 @@ _MyIdentity	:= THIS^.Identity;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Now" Id="{7fa98b1a-49e7-09f8-0b51-b855c5c7b083}">
+    <Method Name="NowLocalDT" Id="{7fa98b1a-49e7-09f8-0b51-b855c5c7b083}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL Now ]]></Declaration>
+METHOD INTERNAL NowLocalDT ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_rtcNow := THIS^.Rtc.Now(); ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="NowHiPrecision" Id="{99e92195-c348-0df4-02b2-8d655e2ae8e9}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL NowHiPrecision : STRING
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[NowHiPrecision := THIS^.Rtc.NowHiPrecision();]]></ST>
+        <ST><![CDATA[_NowLocalDT := THIS^.Rtc.NowLocal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutCycleCounters" Id="{3ce97aaa-6bf5-4a06-9e7c-0d88acee2466}">
@@ -96,16 +89,26 @@ _endCycles			:=		THIS^.EndCycleCount;
 _MyIdentity			:= 		THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetSynchAmsId" Id="{e42255bb-5e79-0368-3b1c-05bb2eccb9f1}">
+    <Method Name="SetSynchParams" Id="{e42255bb-5e79-0368-3b1c-05bb2eccb9f1}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetSynchAmsId
+METHOD SetSynchParams
 VAR_INPUT
-	SynchNodeAmsId : STRING;
-END_VAR
+	inDoSynch	: BOOL;
+	inSyncAmsId	: STRING;
+	inSyncPeriod	: UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Rtc.SetSynchParams(THIS^._Identity,inDoSynch,inSyncAmsId,inSyncPeriod);
+Rtc.SetSynchParams(123,inDoSynch,inSyncAmsId,inSyncPeriod);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TickClock" Id="{99e92195-c348-0df4-02b2-8d655e2ae8e9}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TickClock : STRING
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Rtc.SetSynchAmsId(SynchNodeAmsId);
-]]></ST>
+        <ST><![CDATA[TickClock := Tc2_EtherCAT.DCTIME64_TO_STRING(THIS^.Rtc.TickClock());]]></ST>
       </Implementation>
     </Method>
   </POU>

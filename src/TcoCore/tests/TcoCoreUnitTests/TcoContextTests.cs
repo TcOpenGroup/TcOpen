@@ -22,8 +22,12 @@ namespace TcoCoreUnitTests
         public void OneTimeSetUp()
         {
             string localAmsId = TwinCAT.Ads.AmsNetId.Local.ToString();
-            tc_A.SetSynchAmsId(localAmsId);
-            tc_B.SetSynchAmsId(localAmsId);
+
+            tc_A.SingleCycleRun(() => tc_A.CallMainFromUnitTest());
+            tc_B.SingleCycleRun(() => tc_B.CallMainFromUnitTest());
+
+            tc_A.SetSynchParams(true, localAmsId, 60);
+            tc_B.SetSynchParams(true, localAmsId, 60);
 
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance 
             tc_B._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_B instance 
@@ -252,19 +256,19 @@ namespace TcoCoreUnitTests
 
             Delay = 5000;                                       //Set delay to 5000ms
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance       
-            tc_A.Now();
-            DateTime _startPLCTime = tc_A._rtcNow.Synchron;     //Readout actual time of the instance (number of seconds from 1.1.1970).
+            tc_A.NowLocalDT();
+            DateTime _startPLCTime = tc_A._NowLocalDT.Synchron; //Readout actual time of the instance (number of seconds from 1.1.1970).
             DateTime _startDotNotTime = DateTime.Now;
             Thread.Sleep(Delay);                                //Time of the cyclical execution of the task instance
 
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
-            tc_A.Now();
-            DateTime _endPLCTime = tc_A._rtcNow.Synchron;                     //Readout actual time of the instance (number of seconds from 1.1.1970). Does not matter that .Net System.DateTime starts in 1.1.0001
+            tc_A.NowLocalDT();
+            DateTime _endPLCTime = tc_A._NowLocalDT.Synchron;   //Readout actual time of the instance (number of seconds from 1.1.1970). Does not matter that .Net System.DateTime starts in 1.1.0001
             DateTime _endDotNotTime = DateTime.Now;
 
             TimeSpan _diffPLC = _endPLCTime - _startPLCTime;
-            Assert.AreEqual(Delay, _diffPLC.TotalMilliseconds);            //Check if time difference is equal. As Thread.Sleep() method's input parameter is in miliseconds and tc_A.Now() is in seconds, _diff must be multiplied by 1000.
+            Assert.AreEqual(Delay, _diffPLC.TotalMilliseconds); //Check if time difference is equal. As Thread.Sleep() method's input parameter is in miliseconds and tc_A.Now() is in seconds, _diff must be multiplied by 1000.
 
             TimeSpan _startTimeDiff = _startDotNotTime - _startPLCTime;
             TimeSpan _endTimeDiff = _endDotNotTime - _endPLCTime;
@@ -284,7 +288,7 @@ namespace TcoCoreUnitTests
                 if (_sStartTime == "")
             {
                 //Readout actual time of the instance (number of hundreds of nanoseconds from 1.1.1970).
-                _sStartTime = new StringBuilder(tc_A.NowHiPrecision()) { [10] = 'T' }.ToString();             
+                _sStartTime = new StringBuilder(tc_A.TickClock()) { [10] = 'T' }.ToString();             
             }
 
             Thread.Sleep(Delay);                                //Time of the cyclical execution of the task instance
@@ -292,7 +296,7 @@ namespace TcoCoreUnitTests
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
             //Readout actual time of the instance (number of hundreds of nanoseconds from 1.1.1970).
-            string _sEndTime = new StringBuilder(tc_A.NowHiPrecision()) { [10] = 'T'}.ToString();
+            string _sEndTime = new StringBuilder(tc_A.TickClock()) { [10] = 'T'}.ToString();
 
             DateTime _dtStartTime;
             DateTime _dtEndTime;
@@ -309,7 +313,7 @@ namespace TcoCoreUnitTests
 
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance             
             //Readout actual time of the instance (number of hundreds of nanoseconds from 1.1.1970).
-            string _splcTime = new StringBuilder(tc_A.NowHiPrecision()) { [10] = 'T' }.ToString();
+            string _splcTime = new StringBuilder(tc_A.TickClock()) { [10] = 'T' }.ToString();
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
             DateTime _dtplcTime;
             DateTime.TryParse(_splcTime, out _dtplcTime);
