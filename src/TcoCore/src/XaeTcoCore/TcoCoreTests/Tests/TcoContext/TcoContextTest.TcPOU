@@ -11,8 +11,8 @@ VAR
 	_TcoObjectTest_B		:	TcoObjectTest(THIS^);
 	_MyIdentity				:	ULINT;	
 	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
-	_NowLocalDT				:	DATE_AND_TIME;
-	_NowUTCDT				:	DATE_AND_TIME;
+	_NowLocal				:	DATE_AND_TIME;
+	_NowUtc					:	DATE_AND_TIME;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -54,15 +54,6 @@ METHOD INTERNAL ContextOpen
         <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="IsRtcValid" Id="{803b7bac-6581-0d71-359f-edc935966718}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL IsRtcValid : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IsRtcValid := THIS^.Rtc.IsValid;
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Main" Id="{76d8f63c-d45d-4de4-ad73-4298aca95aa1}">
       <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
@@ -72,11 +63,18 @@ _MyIdentity	:= THIS^.Identity;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="NowLocalDT" Id="{7fa98b1a-49e7-09f8-0b51-b855c5c7b083}">
+    <Method Name="NowLocal" Id="{7fa98b1a-49e7-09f8-0b51-b855c5c7b083}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL NowLocalDT ]]></Declaration>
+METHOD INTERNAL NowLocal ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_NowLocalDT := THIS^.Rtc.NowLocal();]]></ST>
+        <ST><![CDATA[_NowLocal := THIS^.Rtc.NowLocal();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowUtc" Id="{302eb472-e310-0e43-05d6-764ef464fabf}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL NowUtc ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_NowUtc := THIS^.Rtc.NowUTC();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutCycleCounters" Id="{3ce97aaa-6bf5-4a06-9e7c-0d88acee2466}">
@@ -87,6 +85,15 @@ METHOD INTERNAL ReadOutCycleCounters]]></Declaration>
 _endCycles			:=		THIS^.EndCycleCount;
 
 _MyIdentity			:= 		THIS^.Identity;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RtcIsValid" Id="{803b7bac-6581-0d71-359f-edc935966718}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL RtcIsValid : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetSynchParams" Id="{e42255bb-5e79-0368-3b1c-05bb2eccb9f1}">

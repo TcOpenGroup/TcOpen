@@ -23,16 +23,13 @@ namespace TcoCoreUnitTests
         {
             string localAmsId = TwinCAT.Ads.AmsNetId.Local.ToString();
 
-            tc_A.SingleCycleRun(() => tc_A.CallMainFromUnitTest());
-            tc_B.SingleCycleRun(() => tc_B.CallMainFromUnitTest());
-
             tc_A.SetSynchParams(true, localAmsId, 60);
             tc_B.SetSynchParams(true, localAmsId, 60);
 
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance 
             tc_B._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_B instance 
 
-            while(!tc_A.IsRtcValid() |!tc_B.IsRtcValid())
+            while(!tc_A.RtcIsValid() |!tc_B.RtcIsValid())
             {
 
             }
@@ -41,15 +38,15 @@ namespace TcoCoreUnitTests
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
             tc_B._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
 
-            tc_A.RunUntilEndConditionIsMet(() =>                //Calling of the Open() method before the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet            
-            {
-                tc_A.CallMainFromUnitTest();                    //Calling only the Main() method
-            }, () => tc_A.IsRtcValid());                        //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
+            //tc_A.RunUntilEndConditionIsMet(() =>                //Calling of the Open() method before the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet            
+            //{
+            //    tc_A.CallMainFromUnitTest();                    //Calling only the Main() method
+            //}, () => tc_A.RtcIsValid());                        //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
 
-            tc_B.RunUntilEndConditionIsMet(() =>                //Calling of the Open() method before the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet            
-            {
-                tc_B.CallMainFromUnitTest();                    //Calling only the Main() method
-            }, () => tc_B.IsRtcValid());                        //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
+            //tc_B.RunUntilEndConditionIsMet(() =>                //Calling of the Open() method before the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet            
+            //{
+            //    tc_B.CallMainFromUnitTest();                    //Calling only the Main() method
+            //}, () => tc_B.RtcIsValid());                        //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
         }
 
 
@@ -239,7 +236,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(106)]
-        public void T106_RtcValid()
+        public void T106_RtcIsValid()
         {
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance             
 
@@ -247,40 +244,59 @@ namespace TcoCoreUnitTests
 
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
-            Assert.IsTrue(tc_A.IsRtcValid());                   //System time should already been read out and valid, as PLC instance was running at least Delay time.
+            Assert.IsTrue(tc_A.RtcIsValid());                   //System time should already been read out and valid, as PLC instance was running at least Delay time.
         }
 
         [Test, Order(107)]
-        public void T107_RtcNowChanging()
+        public void T107_RtcNowLocalChanging()
         {
 
             Delay = 5000;                                       //Set delay to 5000ms
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance       
-            tc_A.NowLocalDT();
-            DateTime _startPLCTime = tc_A._NowLocalDT.Synchron; //Readout actual time of the instance (number of seconds from 1.1.1970).
-            DateTime _startDotNotTime = DateTime.Now;
+            tc_A.NowLocal();
+            DateTime _startPLCTime = tc_A._NowLocal.Synchron;   //Readout actual time of the instance (number of seconds from 1.1.1970).
+            DateTime _startDotNetTime = DateTime.Now;
             Thread.Sleep(Delay);                                //Time of the cyclical execution of the task instance
 
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
-            tc_A.NowLocalDT();
-            DateTime _endPLCTime = tc_A._NowLocalDT.Synchron;   //Readout actual time of the instance (number of seconds from 1.1.1970). Does not matter that .Net System.DateTime starts in 1.1.0001
-            DateTime _endDotNotTime = DateTime.Now;
+            tc_A.NowLocal();
+            DateTime _endPLCTime = tc_A._NowLocal.Synchron;     //Readout actual time of the instance (number of seconds from 1.1.1970). Does not matter that .Net System.DateTime starts in 1.1.0001
+            DateTime _endDotNetTime = DateTime.Now;
 
-            TimeSpan _diffPLC = _endPLCTime - _startPLCTime;
-            Assert.AreEqual(Delay, _diffPLC.TotalMilliseconds); //Check if time difference is equal. As Thread.Sleep() method's input parameter is in miliseconds and tc_A.Now() is in seconds, _diff must be multiplied by 1000.
+            TimeSpan _PlcDuration = _endPLCTime - _startPLCTime;
+            TimeSpan _DotNetDuration = _endDotNetTime - _startDotNetTime;
+            Assert.AreEqual(Delay, _PlcDuration.TotalMilliseconds); //Check if time difference is equal.
 
-            TimeSpan _startTimeDiff = _startDotNotTime - _startPLCTime;
-            TimeSpan _endTimeDiff = _endDotNotTime - _endPLCTime;
-
-            TimeSpan _tolerance = new TimeSpan(0, 0, 0, 1);     //Tollerance of the difference is 1s, as PLC time has resolution in seconds.
-            Assert.LessOrEqual(_startTimeDiff, _tolerance);
-            Assert.LessOrEqual(_endTimeDiff, _tolerance);
+            Assert.LessOrEqual(Math.Abs(_PlcDuration.TotalMilliseconds-_DotNetDuration.TotalMilliseconds), 1000);
         }
 
+        [Test, Order(108)]
+        public void T108_RtcNowUtcChanging()
+        {
+
+            Delay = 5000;                                       //Set delay to 5000ms
+            tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance       
+            tc_A.NowUtc();
+            DateTime _startPLCTime = tc_A._NowUtc.Synchron;   //Readout actual time of the instance (number of seconds from 1.1.1970).
+            DateTime _startDotNetTime = DateTime.UtcNow;
+            Thread.Sleep(Delay);                                //Time of the cyclical execution of the task instance
+
+            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+
+            tc_A.NowUtc();
+            DateTime _endPLCTime = tc_A._NowUtc.Synchron;     //Readout actual time of the instance (number of seconds from 1.1.1970). Does not matter that .Net System.DateTime starts in 1.1.0001
+            DateTime _endDotNetTime = DateTime.UtcNow;
+
+            TimeSpan _PlcDuration = _endPLCTime - _startPLCTime;
+            TimeSpan _DotNetDuration = _endDotNetTime - _startDotNetTime;
+            Assert.AreEqual(Delay, _PlcDuration.TotalMilliseconds); //Check if time difference is equal.
+
+            Assert.LessOrEqual(Math.Abs(_PlcDuration.TotalMilliseconds - _DotNetDuration.TotalMilliseconds), 1000);
+        }
 
         [Test, Order(109)]
-        public void T109_RtcNowHiPrecisionChanging()
+        public void T109_RtcTickClockChanging()
         {
             string _sStartTime = "";
             Delay = 5000;                                        //Set delay to 500ms
@@ -308,7 +324,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(110)]
-        public void T110_RtcNowHiPrecision()
+        public void T110_RtcTickClockDiff()
         {
 
             tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance             
@@ -317,10 +333,9 @@ namespace TcoCoreUnitTests
             tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
             DateTime _dtplcTime;
             DateTime.TryParse(_splcTime, out _dtplcTime);
-            DateTime _dotNetTime = DateTime.Now;
+            DateTime _dotNetTime = DateTime.UtcNow;
             TimeSpan _diff = _dotNetTime - _dtplcTime;
-            Assert.GreaterOrEqual(_diff.TotalMilliseconds, Delay * 0.9);
-            Assert.LessOrEqual(_diff.TotalMilliseconds, Delay * 1.1);
+            Assert.LessOrEqual(Math.Abs(_diff.TotalMilliseconds), 1000);
         }
 
 

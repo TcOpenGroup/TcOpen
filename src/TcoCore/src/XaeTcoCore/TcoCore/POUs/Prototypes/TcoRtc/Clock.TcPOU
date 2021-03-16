@@ -95,7 +95,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _state = 0 THEN
+        <ST><![CDATA[_NT_GetSyncTime(START := FALSE);
+_NT_GetLocalTime(START := FALSE);
+_NT_SetLocalTime(START := FALSE);
+
+IF _state = 0 THEN
 	IF _doSynch AND _ContextIdentity <>0 AND _ContextIdentity = inContextIdentity THEN
 		_isValid := FALSE;
 		_state := _state + 10;
@@ -256,10 +260,7 @@ IF _state = 200 THEN
 										eTzID	=>	_TimeZoneID);
 
 	_lastSyncTick := Tc2_EtherCAT.F_GetActualDcTime64(); 	
-	
-//	_DcToTcTimeOffset :=  Tc2_EtherCAT.F_GetActualDcTime64() - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_UTCTime,0,0);
-//	_DcToExtTimeOffset := 0;
-	
+
 	_syncCounter := _syncCounter + 1;
 	_state := _state + 10;
 END_IF
@@ -279,6 +280,7 @@ IF _state = 220 THEN
 END_IF
 
 IF _state = 230 THEN
+	_isValid := TRUE;
 	_NT_GetLocalTime(START := FALSE);
 	_LocalTime := _NT_GetLocalTime.TIMESTR;
 	_FB_TzSpecificLocalTimeToSystemTime(in 		:=	_LocalTime,

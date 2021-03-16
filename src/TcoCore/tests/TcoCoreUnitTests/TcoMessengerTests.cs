@@ -20,9 +20,7 @@ namespace TcoCoreUnitTests
         [OneTimeSetUp]
         public void OneSetup()
         {
-            // This forces the time update. Multiple cycles are required to initialize.
-            //sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => sut.GetParent<TcoContext>()._rtc._isValid.Synchron);
-            sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => suc.IsRtcValid());
+            sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => suc.RtcIsValid());
         }
 
         [SetUp]
@@ -47,7 +45,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Debug);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime -_plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(200)]
@@ -64,7 +69,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Trace);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(300)]
@@ -81,7 +93,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Notification);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(400)]
@@ -98,7 +117,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Warning);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
 
@@ -116,7 +142,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Error);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(600)]
@@ -133,7 +166,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Info);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(700)]
@@ -150,7 +190,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.ProgrammingError);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(800)]
@@ -167,7 +214,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Critical);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(900)]
@@ -184,7 +238,14 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Catastrophic);
-            Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 
         [Test, Order(1000)]
@@ -217,7 +278,14 @@ namespace TcoCoreUnitTests
                     Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
                     Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
                     Assert.AreEqual((eMessageCategory)sut._messenger._mime.Category.Synchron, category);
-                    Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+                    //Peter's original code
+                    //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+                    //Code changed by Tomas
+                    DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+                    DateTime _dotNetTime = DateTime.Now;
+                    TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+                    Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
                 }
             });
         }
