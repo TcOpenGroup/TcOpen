@@ -25,61 +25,6 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Examples\fbContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\EXAMPLES_PRG.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Implementation\TcoContext\TcoContext_App_1.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Implementation\TcoObject\TcoObject_Counter.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Implementation\TcoState\TcoContext_App_2.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Implementation\TcoTask\TcoTask_DownCounter.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Manipulator\Components\fbPiston.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Manipulator\Components\fbPistonMoveTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Manipulator\fbManipulatorAutomat.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Manipulator\fbManipulatorContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Manipulator\gMANIPULATOR_IO.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="Examples\Manipulator\MANIPULATOR.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\WaveForm\eTransitionType.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\WaveForm\TcoContext_Waveform.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\WaveForm\TcoObject_Waveform.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\WaveForm\TcoState_WaveformSequence.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\WaveForm\TcoTask_Transition.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\WaveForm\WaveformPoint.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PlcTask1.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -92,10 +37,16 @@
     <Compile Include="Tests\TcoMessenger\TcoContextMessagingPerf.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoMessenger\TcoMessengerContextTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoMessenger\TcoMessengerTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoObject\TcoObjectTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoRtc\TcoRtcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoSequencer\TcoSequencerAutoRestorableTest.TcPOU">
@@ -118,16 +69,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Examples" />
-    <Folder Include="Examples\Implementation" />
-    <Folder Include="Examples\Implementation\TcoContext" />
-    <Folder Include="Examples\Implementation\TcoObject" />
-    <Folder Include="Examples\Implementation\TcoState" />
-    <Folder Include="Examples\Implementation\TcoTask" />
-    <Folder Include="Examples\Manipulator\Components" />
-    <Folder Include="Examples\WaveForm" />
-    <Folder Include="Examples\Manipulator" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoRtc" />
     <Folder Include="Tests\TcoMessenger" />
     <Folder Include="Tests\TcoSequencer" />
     <Folder Include="Tests\TcoState" />

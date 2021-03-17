@@ -10,12 +10,12 @@ namespace TcoCoreTests
     {
         public void ContextClose()
         {
-            ((TcoContextTest)Parent).ContextClose();
+            ((TcoMessengerContextTest)Parent).ContextClose();
         }
 
         public void ContextOpen()
         {
-            ((TcoContextTest)Parent).ContextOpen();
+            ((TcoMessengerContextTest)Parent).ContextOpen();
         }
 
         

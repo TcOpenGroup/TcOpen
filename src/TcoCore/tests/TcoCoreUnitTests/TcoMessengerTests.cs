@@ -13,22 +13,34 @@ namespace TcoCoreUnitTests
     public class T08_TcoMessengerTests
     {
 
-        TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoContextTest_A._TcoMessangerTests;
-        TcoCoreTests.TcoContextTest suc = ConnectorFixture.Connector.MAIN._TcoContextTest_A;
-
+        TcoCoreTests.TcoRtcTest rtc = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._TcoRtcTest_A;
+        TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest._TcoMessangerTests;
+        
 
         [OneTimeSetUp]
         public void OneSetup()
         {
-            sut.RunUntilEndConditionIsMet(() => Console.WriteLine(), () => suc.RtcIsValid());
+            //Ensure update time in the PLC
+            rtc._CallMyPlcInstance.Synchron = true;
+            while (rtc.RtcIsValid()) { }
+            while (!rtc.RtcIsValid()) { }
+        }
+
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            rtc._CallMyPlcInstance.Synchron = false;           
         }
 
         [SetUp]
         public void Setup()
         {
-            sut._messenger._mime.Text.Synchron = string.Empty;
-            sut._messenger._mime.TimeStamp.Synchron = new System.DateTime(1970, 12, 12);
-            sut._messenger._mime.Category.Synchron = (short)eMessageCategory.None;
+            //This is not going to work anyway, as all the variables used are ReadOnly
+            //sut._messenger._mime.Text.Synchron = string.Empty;
+            //sut._messenger._mime.TimeStamp.Synchron = new System.DateTime(1970, 12, 12);
+            //sut._messenger._mime.Category.Synchron = (short)eMessageCategory.None;
+            
         }
 
         [Test, Order(100)]
@@ -42,7 +54,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Debug);
             //Peter's original code
@@ -66,7 +78,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Trace);
             //Peter's original code
@@ -90,7 +102,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Notification);
             //Peter's original code
@@ -114,7 +126,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Warning);
             //Peter's original code
@@ -139,7 +151,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Error);
             //Peter's original code
@@ -163,7 +175,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Info);
             //Peter's original code
@@ -187,7 +199,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.ProgrammingError);
             //Peter's original code
@@ -211,7 +223,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Critical);
             //Peter's original code
@@ -235,7 +247,7 @@ namespace TcoCoreUnitTests
 
             //--Assert
 
-            Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Catastrophic);
             //Peter's original code
@@ -275,7 +287,7 @@ namespace TcoCoreUnitTests
 
                     //--Assert
 
-                    Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+                    Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
                     Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
                     Assert.AreEqual((eMessageCategory)sut._messenger._mime.Category.Synchron, category);
                     //Peter's original code
@@ -370,7 +382,7 @@ namespace TcoCoreUnitTests
 
                     //--Assert
 
-                    Assert.AreEqual(sut.GetParent<TcoContextTest>()._startCycleCount.Synchron, sut._messenger._mime.PlainMessage.Cycle);
+                    Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.PlainMessage.Cycle);
                     Assert.AreEqual(sut._messenger._mime.Text.Synchron, sut._messenger._mime.PlainMessage.Text);
                     Assert.AreEqual((eMessageCategory)sut._messenger._mime.Category.Synchron, (eMessageCategory)sut._messenger._mime.PlainMessage.Category);
                     Assert.AreEqual(sut._messenger._mime.TimeStamp.Synchron, sut._messenger._mime.PlainMessage.TimeStamp);
@@ -388,13 +400,13 @@ namespace TcoCoreUnitTests
             //--Act
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoContext>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
             sut.SingleCycleRun(() => Console.WriteLine("a"));
 
-            sut.GetParent<TcoContext>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
             
             Assert.IsFalse(sut._messenger._mime.IsActive);
         }

@@ -54,19 +54,21 @@ END_IF]]></ST>
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetSynchParams" Id="{59fd7e79-21d3-039b-3d0f-873916771b17}">
-      <Declaration><![CDATA[METHOD SetSynchParams
-VAR_INPUT
-	inContextIdentity	: ULINT;
-	inDoSynch	: BOOL;
-	inSyncAmsId	: STRING;
-	inSyncPeriod	: UINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Clock.SetSynchParams(inContextIdentity,inDoSynch,inSyncAmsId,inSyncPeriod);]]></ST>
-      </Implementation>
-    </Method>
+    <Property Name="RtcSynchParams" Id="{b04a98c0-f35d-0885-0560-168bc0d55c2c}">
+      <Declaration><![CDATA[PROPERTY RtcSynchParams : RtcSynchParams]]></Declaration>
+      <Get Name="Get" Id="{b4cdc5ff-8d88-0b4c-0de5-bfaa3fd2182c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RtcSynchParams :=  Clock.RtcSynchParams;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{757baeb2-5395-046e-24d5-a8962693357c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Clock.RtcSynchParams :=	RtcSynchParams;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="TickClock" Id="{1cdfb043-4f81-0904-37ac-2a0334c75a58}">
       <Declaration><![CDATA[METHOD TickClock : ULINT
 ]]></Declaration>

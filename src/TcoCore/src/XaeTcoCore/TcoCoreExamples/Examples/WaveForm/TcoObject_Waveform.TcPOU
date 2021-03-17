@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoObject_Waveform" Id="{16e804d2-e51d-0572-0685-a766962843d1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoObject_Waveform EXTENDS TcoObject
+VAR
+	_TcoTask_Waveform				:	TcoCore.TcoTask(THIS^);								
+	_TcoState_Waveform				:	TcoCore.TcoState(THIS^,TRUE);	
+	_TcoState_WaveformSequence_1	:	TcoState_WaveformSequence(THIS^,TRUE);
+	_TcoState_WaveformSequence_2	:	TcoState_WaveformSequence(THIS^,FALSE);
+	_Value1							:	LREAL;
+	_Value2							:	LREAL;
+	_Value							:	LREAL;
+	_X								:	ULINT;
+	_PlcCycleOffset					:	ULINT;
+	_PlcCycle						:	ULINT;
+	_Reset							:	BOOL:=TRUE;
+	_Start							:	BOOL:=TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF _Reset THEN
+	THIS^._TcoTask_Waveform.Restore();
+	_Value := _Value1 := _Value2 := 0.0;
+	_X	:= 0;	
+	_Reset := FALSE;
+	RETURN;
+END_IF
+
+IF _Start THEN
+	THIS^.Start();
+	_Start := FALSE;
+END_IF
+
+IF THIS^._TcoTask_Waveform.Execute() THEN
+	THIS^.Execute();
+	THIS^._TcoTask_Waveform.DoneWhen(THIS^._TcoState_Waveform.State = 20);
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="Execute" Id="{0b0ef732-9dcc-0dbd-0f89-647163922a0e}">
+      <Declaration><![CDATA[METHOD Execute
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Init both signal sequences
+IF _TcoState_Waveform.State = -1 THEN
+	_TcoState_WaveformSequence_1.Restore();
+	_TcoState_WaveformSequence_2.Restore();
+	_TcoState_WaveformSequence_1.ClearWaveFormTable();
+	_TcoState_WaveformSequence_2.ClearWaveFormTable();
+	_TcoState_WaveformSequence_1.AddWaveFormPoint(TransitionType := eTransitionType.Linear		, TargetValue :=	100, Duration := 100, Shape :=   0.0);
+	_TcoState_WaveformSequence_1.AddWaveFormPoint(TransitionType := eTransitionType.Linear		, TargetValue :=	 80, Duration := 100, Shape :=   0.0);
+	_TcoState_WaveformSequence_1.AddWaveFormPoint(TransitionType := eTransitionType.Exponential	, TargetValue :=	100, Duration := 100, Shape :=  -5.0);
+	_TcoState_WaveformSequence_1.AddWaveFormPoint(TransitionType := eTransitionType.S_Type		, TargetValue :=	 50, Duration := 100, Shape :=   3.0);
+	_TcoState_WaveformSequence_1.AddWaveFormPoint(TransitionType := eTransitionType.S_Type		, TargetValue :=	120, Duration := 100, Shape :=   2.0);
+
+	_TcoState_WaveformSequence_2.AddWaveFormPoint(TransitionType := eTransitionType.Linear, TargetValue :=  100, Duration := 300, Shape :=   0.0);
+	_TcoState_WaveformSequence_2.AddWaveFormPoint(TransitionType := eTransitionType.Linear, TargetValue :=  100, Duration := 200, Shape :=   0.0);
+	_PlcCycleOffset := THIS^.Context.StartCycleCount - 1;
+	_TcoState_Waveform.ChangeState(10);	
+END_IF
+
+//Execution
+IF _TcoState_Waveform.State = 10 THEN
+//	IF	_TcoState_WaveformSequence_1.RunWithAutoRestore(_Value1) AND 
+//		_TcoState_WaveformSequence_2.RunWithAutoRestore(_Value2) THEN
+	IF	_TcoState_WaveformSequence_1.RunWithManualRestore(_Value1) AND 
+		_TcoState_WaveformSequence_2.RunWithManualRestore(_Value2) THEN
+		_TcoState_Waveform.ChangeState(20);	
+	ELSE
+		_X	:=	_X + 1;
+		_PlcCycle := THIS^.Context.StartCycleCount - _PlcCycleOffset;
+	END_IF
+	_Value := _Value1 + _Value2;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Start" Id="{2a683c30-09ae-06f2-1d3b-e81b3770664d}">
+      <Declaration><![CDATA[METHOD Start]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Value := _Value1 := _Value2 := 0.0;
+
+_X	:= 0;
+
+_TcoTask_Waveform.Restore();
+
+_TcoState_Waveform.Restore();
+
+_TcoTask_Waveform.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

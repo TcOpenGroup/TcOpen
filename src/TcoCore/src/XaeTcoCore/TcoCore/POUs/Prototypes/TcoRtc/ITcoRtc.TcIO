@@ -25,16 +25,15 @@
       <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
 ]]></Declaration>
     </Method>
-    <Method Name="SetSynchParams" Id="{bae95f07-3242-0bfb-097e-ac53ee41f7f4}">
-      <Declaration><![CDATA[METHOD SetSynchParams
-VAR_INPUT
-	inContextIdentity	:	ULINT;
-	inDoSynch			:	BOOL;
-	inSyncAmsId			:	STRING;
-	inSyncPeriod		:	UINT; 
-END_VAR
-]]></Declaration>
-    </Method>
+    <Property Name="RtcSynchParams" Id="{2c441668-a17e-024c-0979-6bd2341e0004}">
+      <Declaration><![CDATA[PROPERTY RtcSynchParams : RtcSynchParams]]></Declaration>
+      <Get Name="Get" Id="{38728756-5915-0221-3b72-fa8b914a0293}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{8c7ac540-8ada-070a-0069-45384a9df7df}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
     <Method Name="TickClock" Id="{317ccaa2-fed5-0818-37bf-03f24bf02b0d}">
       <Declaration><![CDATA[METHOD TickClock : ULINT
 ]]></Declaration>

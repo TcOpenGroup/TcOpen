@@ -3,16 +3,20 @@
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_TcoContext_Waveform				:	TcoContext_Waveform;
+	_TcoRtcTest_A						:	TcoRtcTest;
+	_TcoRtcTest_B						:	TcoRtcTest;
 	_TcoContextTest_A					:	TcoContextTest;
 	_TcoContextTest_B					:	TcoContextTest;
 	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
+	_TcoMessengerContextTest			:	TcoMessengerContextTest;
 	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_TcoContext_Waveform.Run();
+      <ST><![CDATA[_TcoRtcTest_A();
+
+_TcoRtcTest_B();
 
 _TcoContextTest_A();
 
@@ -22,7 +26,9 @@ _TcoSequencerAutoRestorableTest();
 
 _TcoSequencerNonAutoRestorableTest();
 
-_TcoContextMessagingPerf.Run();
+_TcoMessengerContextTest();
+
+_TcoContextMessagingPerf();
 
 ]]></ST>
     </Implementation>

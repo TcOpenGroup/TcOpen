@@ -1,32 +1,81 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3f433f3d-9648-4fac-aafd-9fa134bfd44d}</ProjectGuid>
+    <ProjectGuid>{2266f99a-9250-4e68-a8bb-fc036a975355}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>TcoCore</Name>
+    <Name>TcoCoreExamples</Name>
     <ProgramVersion>3.1.4024.12</ProgramVersion>
-    <Application>{6ea05cad-6117-4a98-9203-7be20f6025b7}</Application>
-    <TypeSystem>{3112b581-449d-4cb6-9b7f-08ac3e325d2f}</TypeSystem>
-    <Implicit_Task_Info>{c9a35e55-07c7-4ea4-8642-dfb49ecde1f7}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{11bce46e-0e0b-4a10-bc2f-8cfe6fa8a18a}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{78d6c4d2-befc-47f9-a5eb-4a2cef01cf83}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{1bf444f9-d89f-43dc-b41a-8c2d773cc505}</LibraryReferences>
-    <Company>Vortex.Library</Company>
+    <Application>{17ecd23a-ae34-4265-b333-6b11ee038934}</Application>
+    <TypeSystem>{0ed39ff9-5850-4012-9e5c-8e834ac469a5}</TypeSystem>
+    <Implicit_Task_Info>{c1b3c5a1-ed13-47b3-b170-842b1cddaa6a}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{452e31dd-866c-4886-bab6-3cbd19a6f2aa}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{f840d674-323b-459e-9262-664f7195e798}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{5a85782c-2292-4860-b350-0e5e8595c694}</LibraryReferences>
     <Released>false</Released>
-    <Title>TcoCore</Title>
-    <ProjectVersion>1.9.1.32</ProjectVersion>
-    <DefaultNamespace>TcoCore</DefaultNamespace>
-    <Placeholder>TcoCore</Placeholder>
+    <Company>Vortex.Library</Company>
+    <Title>TcoCoreExamples</Title>
+    <DefaultNamespace>TcoCoreExamples</DefaultNamespace>
+    <Placeholder>TcoCoreExamples</Placeholder>
     <Author>Inxton</Author>
-    <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class Diagram.TcCD">
+    <Compile Include="Examples\EXAMPLES_PRG.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\fbContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Implementation\TcoContext\TcoContext_App_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Implementation\TcoObject\TcoObject_Counter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Implementation\TcoState\TcoContext_App_2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Implementation\TcoTask\TcoTask_DownCounter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Manipulator\Components\fbPiston.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Manipulator\Components\fbPistonMoveTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Manipulator\fbManipulatorAutomat.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Manipulator\fbManipulatorContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Manipulator\gMANIPULATOR_IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Examples\Manipulator\MANIPULATOR.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\WaveForm\eTransitionType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\WaveForm\TcoContext_Waveform.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\WaveForm\TcoObject_Waveform.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\WaveForm\TcoState_WaveformSequence.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\WaveForm\TcoTask_Transition.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\WaveForm\WaveformPoint.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
@@ -34,130 +83,24 @@
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
-      <ExcludeFromBuild>false</ExcludeFromBuild>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoComponent\TcoComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\eMessageCategory.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessenger.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessenger.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessage.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoContext\TcoContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoContext\ITcoContext.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoObject\ITcoObject.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoObject\TcoObject.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoRestorable\ITcoRestorable.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoRtc\ITcoRtc.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoRtc\Clock.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoRtc\RtcSynchParams.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoRtc\TcoRtc.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSelector\ITcoSelector.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\eSequencerMode.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\eStepStatus.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\eSequencerError.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\TcoStepModeControler.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencer.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\ITcoSequencer.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\StepDetails.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoState\ITcoState.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoState\TcoState.TcPOU">
-      <SubType>Code</SubType>
-      <ExcludeFromBuild>false</ExcludeFromBuild>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoTask\eTaskState.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoTask\ITcoTask.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoTask\TcoTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TestFixtures\_internals_TcoContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TestFixtures\_internals_TcoSequencer.TcPOU">
-      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="Examples\Implementation" />
+    <Folder Include="Examples\Implementation\TcoContext" />
+    <Folder Include="Examples\Implementation\TcoObject" />
+    <Folder Include="Examples\Implementation\TcoState" />
+    <Folder Include="Examples\Implementation\TcoTask" />
+    <Folder Include="Examples\Manipulator" />
+    <Folder Include="Examples\Manipulator\Components" />
+    <Folder Include="Examples\WaveForm" />
     <Folder Include="GVLs" />
-    <Folder Include="POUs\Prototypes\TcoRtc" />
-    <Folder Include="POUs\TestFixtures" />
-    <Folder Include="POUs\Prototypes" />
-    <Folder Include="POUs\Prototypes\TcoMessage" />
-    <Folder Include="POUs\Prototypes\TcoSelector">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </Folder>
-    <Folder Include="POUs\Prototypes\TcoComponent">
-      <ExcludeFromBuild>false</ExcludeFromBuild>
-    </Folder>
-    <Folder Include="POUs\Prototypes\TcoSequencer">
-      <ExcludeFromBuild>false</ExcludeFromBuild>
-    </Folder>
-    <Folder Include="POUs\Prototypes\TcoRestorable" />
-    <Folder Include="POUs\Prototypes\TcoContext" />
-    <Folder Include="POUs\Prototypes\TcoTask" />
-    <Folder Include="POUs\Prototypes\TcoState">
-      <ExcludeFromBuild>false</ExcludeFromBuild>
-    </Folder>
-    <Folder Include="POUs\Prototypes\TcoObject" />
+    <Folder Include="Examples" />
+    <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="Tc2_EtherCAT">
-      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_EtherCAT</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -166,33 +109,24 @@
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc2_Utilities">
-      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_Utilities</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoCore">
+      <DefaultResolution>TcoCore, 1.9.1.32 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoCore</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderResolution Include="Tc2_Standard">
-      <Resolution>Tc2_Standard, 3.3.3.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc2_System">
-      <Resolution>Tc2_System, 3.4.24.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc2_Utilities">
-      <Resolution>Tc2_Utilities, 3.3.41.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc3_Module">
-      <Resolution>Tc3_Module, 3.3.21.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TcoCore.tmc">
+    <None Include="TcoCoreExamples.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcoCore">
+      <Resolution>TcoCore, 1.9.1.32 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
@@ -214,6 +148,17 @@
           <d n="Values" t="Hashtable" ckt="String" cvt="String">
             <v>GlobalVisuImageFilePath</v>
             <v>%APPLICATIONPATH%</v>
+          </d>
+        </o>
+        <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
+        <o>
+          <v n="Name">"{40450F57-0AA3-4216-96F3-5444ECB29763}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String">
+            <v>ActiveVisuExtensionsLength</v>
+            <v>0</v>
+            <v>ActiveVisuProfile</v>
+            <v>"IR0whWr8bwfwBwAAiD2qpQAAAABVAgAA37x72QAAAAABAAAAAAAAAAEaUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwACTHsAZgA5ADUAYgBiADQAMgA2AC0ANQA1ADIANAAtADQAYgA0ADUALQA5ADQAMAAwAC0AZgBiADAAZgAyAGUANwA3AGUANQAxAGIAfQADCE4AYQBtAGUABDBUAHcAaQBuAEMAQQBUACAAMwAuADEAIABCAHUAaQBsAGQAIAA0ADAAMgA0AC4ANwAFFlAAcgBvAGYAaQBsAGUARABhAHQAYQAGTHsAMQA2AGUANQA1AGIANgAwAC0ANwAwADQAMwAtADQAYQA2ADMALQBiADYANQBiAC0ANgAxADQANwAxADMAOAA3ADgAZAA0ADIAfQAHEkwAaQBiAHIAYQByAGkAZQBzAAhMewAzAGIAZgBkADUANAA1ADkALQBiADAANwBmAC0ANABkADYAZQAtAGEAZQAxAGEALQBhADgAMwAzADUANgBhADUANQAxADQAMgB9AAlMewA5AGMAOQA1ADgAOQA2ADgALQAyAGMAOAA1AC0ANAAxAGIAYgAtADgAOAA3ADEALQA4ADkANQBmAGYAMQBmAGUAZABlADEAYQB9AAoOVgBlAHIAcwBpAG8AbgALBmkAbgB0AAwKVQBzAGEAZwBlAA0KVABpAHQAbABlAA4aVgBpAHMAdQBFAGwAZQBtAE0AZQB0AGUAcgAPDkMAbwBtAHAAYQBuAHkAEAxTAHkAcwB0AGUAbQARElYAaQBzAHUARQBsAGUAbQBzABIwVgBpAHMAdQBFAGwAZQBtAHMAUwBwAGUAYwBpAGEAbABDAG8AbgB0AHIAbwBsAHMAEyhWAGkAcwB1AEUAbABlAG0AcwBXAGkAbgBDAG8AbgB0AHIAbwBsAHMAFCRWAGkAcwB1AEUAbABlAG0AVABlAHgAdABFAGQAaQB0AG8AcgAVIlYAaQBzAHUATgBhAHQAaQB2AGUAQwBvAG4AdAByAG8AbAAWFHYAaQBzAHUAaQBuAHAAdQB0AHMAFwxzAHkAcwB0AGUAbQAYGFYAaQBzAHUARQBsAGUAbQBCAGEAcwBlABkmRABlAHYAUABsAGEAYwBlAGgAbwBsAGQAZQByAHMAVQBzAGUAZAAaCGIAbwBvAGwAGyJQAGwAdQBnAGkAbgBDAG8AbgBzAHQAcgBhAGkAbgB0AHMAHEx7ADQAMwBkADUAMgBiAGMAZQAtADkANAAyAGMALQA0ADQAZAA3AC0AOQBlADkANAAtADEAYgBmAGQAZgAzADEAMABlADYAMwBjAH0AHRxBAHQATABlAGEAcwB0AFYAZQByAHMAaQBvAG4AHhRQAGwAdQBnAGkAbgBHAHUAaQBkAB8WUwB5AHMAdABlAG0ALgBHAHUAaQBkACBIYQBmAGMAZAA1ADQANAA2AC0ANAA5ADEANAAtADQAZgBlADcALQBiAGIANwA4AC0AOQBiAGYAZgBlAGIANwAwAGYAZAAxADcAIRRVAHAAZABhAHQAZQBJAG4AZgBvACJMewBiADAAMwAzADYANgBhADgALQBiADUAYwAwAC0ANABiADkAYQAtAGEAMAAwAGUALQBlAGIAOAA2ADAAMQAxADEAMAA0AGMAMwB9ACMOVQBwAGQAYQB0AGUAcwAkTHsAMQA4ADYAOABmAGYAYwA5AC0AZQA0AGYAYwAtADQANQAzADIALQBhAGMAMAA2AC0AMQBlADMAOQBiAGIANQA1ADcAYgA2ADkAfQAlTHsAYQA1AGIAZAA0ADgAYwAzAC0AMABkADEANwAtADQAMQBiADUALQBiADEANgA0AC0ANQBmAGMANgBhAGQAMgBiADkANgBiADcAfQAmFk8AYgBqAGUAYwB0AHMAVAB5AHAAZQAnVFUAcABkAGEAdABlAEwAYQBuAGcAdQBhAGcAZQBNAG8AZABlAGwARgBvAHIAQwBvAG4AdgBlAHIAdABpAGIAbABlAEwAaQBiAHIAYQByAGkAZQBzACgQTABpAGIAVABpAHQAbABlACkUTABpAGIAQwBvAG0AcABhAG4AeQAqHlUAcABkAGEAdABlAFAAcgBvAHYAaQBkAGUAcgBzACs4UwB5AHMAdABlAG0ALgBDAG8AbABsAGUAYwB0AGkAbwBuAHMALgBIAGEAcwBoAHQAYQBiAGwAZQAsEnYAaQBzAHUAZQBsAGUAbQBzAC1INgBjAGIAMQBjAGQAZQAxAC0AZAA1AGQAYwAtADQAYQAzAGIALQA5ADAANQA0AC0AMgAxAGYAYQA3ADUANgBhADMAZgBhADQALihJAG4AdABlAHIAZgBhAGMAZQBWAGUAcgBzAGkAbwBuAEkAbgBmAG8AL0x7AGMANgAxADEAZQA0ADAAMAAtADcAZgBiADkALQA0AGMAMwA1AC0AYgA5AGEAYwAtADQAZQAzADEANABiADUAOQA5ADYANAAzAH0AMBhNAGEAagBvAHIAVgBlAHIAcwBpAG8AbgAxGE0AaQBuAG8AcgBWAGUAcgBzAGkAbwBuADIMTABlAGcAYQBjAHkAMzBMAGEAbgBnAHUAYQBnAGUATQBvAGQAZQBsAFYAZQByAHMAaQBvAG4ASQBuAGYAbwA0MEwAbwBhAGQATABpAGIAcgBhAHIAaQBlAHMASQBuAHQAbwBQAHIAbwBqAGUAYwB0ADUaQwBvAG0AcABhAHQAaQBiAGkAbABpAHQAeQDQAAIaA9ADAS0E0AUGGgfQBwgaAUUHCQjQAAkaBEUKCwQDAAAABQAAAA0AAAAAAAAA0AwLrQIAAADQDQEtDtAPAS0Q0AAJGgRFCgsEAwAAAAUAAAANAAAAKAAAANAMC60BAAAA0A0BLRHQDwEtENAACRoERQoLBAMAAAAFAAAADQAAAAAAAADQDAutAgAAANANAS0S0A8BLRDQAAkaBEUKCwQDAAAABQAAAA0AAAAUAAAA0AwLrQIAAADQDQEtE9APAS0Q0AAJGgRFCgsEAwAAAAUAAAANAAAAAAAAANAMC60CAAAA0A0BLRTQDwEtENAACRoERQoLBAMAAAAFAAAADQAAAAAAAADQDAutAgAAANANAS0V0A8BLRDQAAkaBEUKCwQDAAAABQAAAA0AAAAAAAAA0AwLrQIAAADQDQEtFtAPAS0X0AAJGgRFCgsEAwAAAAUAAAANAAAAKAAAANAMC60EAAAA0A0BLRjQDwEtENAZGq0BRRscAdAAHBoCRR0LBAMAAAAFAAAADQAAAAAAAADQHh8tINAhIhoCRSMkAtAAJRoFRQoLBAMAAAADAAAAAAAAAAoAAADQJgutAAAAANADAS0n0CgBLRHQKQEtENAAJRoFRQoLBAMAAAADAAAAAAAAAAoAAADQJgutAQAAANADAS0n0CgBLRHQKQEtEJoqKwFFAAEC0AABLSzQAAEtF9AAHy0t0C4vGgPQMAutAQAAANAxC60XAAAA0DIarQDQMy8aA9AwC60CAAAA0DELrQMAAADQMhqtANA0Gq0A0DUarQA="</v>
           </d>
         </o>
         <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
@@ -2030,12 +1975,12 @@
                   <d n="Values" t="Hashtable" ckt="String">
                     <v>MaxInOuts</v>
                     <v>10</v>
-                    <v>bActive</v>
-                    <v>false</v>
-                    <v>bWarning</v>
-                    <v>false</v>
                     <v>MaxOutputs</v>
                     <v>10</v>
+                    <v>bWarning</v>
+                    <v>false</v>
+                    <v>bActive</v>
+                    <v>false</v>
                     <v>MaxInputs</v>
                     <v>10</v>
                   </d>
@@ -2421,14 +2366,14 @@
                   <d n="Values" t="Hashtable" ckt="String">
                     <v>MinChars</v>
                     <v>5</v>
+                    <v>bWarning</v>
+                    <v>false</v>
                     <v>bActive</v>
                     <v>false</v>
                     <v>MaxChars</v>
                     <v>30</v>
                     <v>Exceptions</v>
                     <v>""</v>
-                    <v>bWarning</v>
-                    <v>false</v>
                   </d>
                 </o>
                 <v>43</v>
@@ -2473,17 +2418,6 @@
             <v>""</v>
             <v>PerformStaticAnalyse</v>
             <v>false</v>
-          </d>
-        </o>
-        <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
-        <o>
-          <v n="Name">"{40450F57-0AA3-4216-96F3-5444ECB29763}"</v>
-          <d n="SubKeys" t="Hashtable" />
-          <d n="Values" t="Hashtable" ckt="String">
-            <v>ActiveVisuExtensionsLength</v>
-            <v>0</v>
-            <v>ActiveVisuProfile</v>
-            <v>"IR0whWr8bwfwBwAAiD2qpQAAAABVAgAA37x72QAAAAABAAAAAAAAAAEaUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwACTHsAZgA5ADUAYgBiADQAMgA2AC0ANQA1ADIANAAtADQAYgA0ADUALQA5ADQAMAAwAC0AZgBiADAAZgAyAGUANwA3AGUANQAxAGIAfQADCE4AYQBtAGUABDBUAHcAaQBuAEMAQQBUACAAMwAuADEAIABCAHUAaQBsAGQAIAA0ADAAMgA0AC4ANwAFFlAAcgBvAGYAaQBsAGUARABhAHQAYQAGTHsAMQA2AGUANQA1AGIANgAwAC0ANwAwADQAMwAtADQAYQA2ADMALQBiADYANQBiAC0ANgAxADQANwAxADMAOAA3ADgAZAA0ADIAfQAHEkwAaQBiAHIAYQByAGkAZQBzAAhMewAzAGIAZgBkADUANAA1ADkALQBiADAANwBmAC0ANABkADYAZQAtAGEAZQAxAGEALQBhADgAMwAzADUANgBhADUANQAxADQAMgB9AAlMewA5AGMAOQA1ADgAOQA2ADgALQAyAGMAOAA1AC0ANAAxAGIAYgAtADgAOAA3ADEALQA4ADkANQBmAGYAMQBmAGUAZABlADEAYQB9AAoOVgBlAHIAcwBpAG8AbgALBmkAbgB0AAwKVQBzAGEAZwBlAA0KVABpAHQAbABlAA4aVgBpAHMAdQBFAGwAZQBtAE0AZQB0AGUAcgAPDkMAbwBtAHAAYQBuAHkAEAxTAHkAcwB0AGUAbQARElYAaQBzAHUARQBsAGUAbQBzABIwVgBpAHMAdQBFAGwAZQBtAHMAUwBwAGUAYwBpAGEAbABDAG8AbgB0AHIAbwBsAHMAEyhWAGkAcwB1AEUAbABlAG0AcwBXAGkAbgBDAG8AbgB0AHIAbwBsAHMAFCRWAGkAcwB1AEUAbABlAG0AVABlAHgAdABFAGQAaQB0AG8AcgAVIlYAaQBzAHUATgBhAHQAaQB2AGUAQwBvAG4AdAByAG8AbAAWFHYAaQBzAHUAaQBuAHAAdQB0AHMAFwxzAHkAcwB0AGUAbQAYGFYAaQBzAHUARQBsAGUAbQBCAGEAcwBlABkmRABlAHYAUABsAGEAYwBlAGgAbwBsAGQAZQByAHMAVQBzAGUAZAAaCGIAbwBvAGwAGyJQAGwAdQBnAGkAbgBDAG8AbgBzAHQAcgBhAGkAbgB0AHMAHEx7ADQAMwBkADUAMgBiAGMAZQAtADkANAAyAGMALQA0ADQAZAA3AC0AOQBlADkANAAtADEAYgBmAGQAZgAzADEAMABlADYAMwBjAH0AHRxBAHQATABlAGEAcwB0AFYAZQByAHMAaQBvAG4AHhRQAGwAdQBnAGkAbgBHAHUAaQBkAB8WUwB5AHMAdABlAG0ALgBHAHUAaQBkACBIYQBmAGMAZAA1ADQANAA2AC0ANAA5ADEANAAtADQAZgBlADcALQBiAGIANwA4AC0AOQBiAGYAZgBlAGIANwAwAGYAZAAxADcAIRRVAHAAZABhAHQAZQBJAG4AZgBvACJMewBiADAAMwAzADYANgBhADgALQBiADUAYwAwAC0ANABiADkAYQAtAGEAMAAwAGUALQBlAGIAOAA2ADAAMQAxADEAMAA0AGMAMwB9ACMOVQBwAGQAYQB0AGUAcwAkTHsAMQA4ADYAOABmAGYAYwA5AC0AZQA0AGYAYwAtADQANQAzADIALQBhAGMAMAA2AC0AMQBlADMAOQBiAGIANQA1ADcAYgA2ADkAfQAlTHsAYQA1AGIAZAA0ADgAYwAzAC0AMABkADEANwAtADQAMQBiADUALQBiADEANgA0AC0ANQBmAGMANgBhAGQAMgBiADkANgBiADcAfQAmFk8AYgBqAGUAYwB0AHMAVAB5AHAAZQAnVFUAcABkAGEAdABlAEwAYQBuAGcAdQBhAGcAZQBNAG8AZABlAGwARgBvAHIAQwBvAG4AdgBlAHIAdABpAGIAbABlAEwAaQBiAHIAYQByAGkAZQBzACgQTABpAGIAVABpAHQAbABlACkUTABpAGIAQwBvAG0AcABhAG4AeQAqHlUAcABkAGEAdABlAFAAcgBvAHYAaQBkAGUAcgBzACs4UwB5AHMAdABlAG0ALgBDAG8AbABsAGUAYwB0AGkAbwBuAHMALgBIAGEAcwBoAHQAYQBiAGwAZQAsEnYAaQBzAHUAZQBsAGUAbQBzAC1INgBjAGIAMQBjAGQAZQAxAC0AZAA1AGQAYwAtADQAYQAzAGIALQA5ADAANQA0AC0AMgAxAGYAYQA3ADUANgBhADMAZgBhADQALihJAG4AdABlAHIAZgBhAGMAZQBWAGUAcgBzAGkAbwBuAEkAbgBmAG8AL0x7AGMANgAxADEAZQA0ADAAMAAtADcAZgBiADkALQA0AGMAMwA1AC0AYgA5AGEAYwAtADQAZQAzADEANABiADUAOQA5ADYANAAzAH0AMBhNAGEAagBvAHIAVgBlAHIAcwBpAG8AbgAxGE0AaQBuAG8AcgBWAGUAcgBzAGkAbwBuADIMTABlAGcAYQBjAHkAMzBMAGEAbgBnAHUAYQBnAGUATQBvAGQAZQBsAFYAZQByAHMAaQBvAG4ASQBuAGYAbwA0MEwAbwBhAGQATABpAGIAcgBhAHIAaQBlAHMASQBuAHQAbwBQAHIAbwBqAGUAYwB0ADUaQwBvAG0AcABhAHQAaQBiAGkAbABpAHQAeQDQAAIaA9ADAS0E0AUGGgfQBwgaAUUHCQjQAAkaBEUKCwQDAAAABQAAAA0AAAAAAAAA0AwLrQIAAADQDQEtDtAPAS0Q0AAJGgRFCgsEAwAAAAUAAAANAAAAKAAAANAMC60BAAAA0A0BLRHQDwEtENAACRoERQoLBAMAAAAFAAAADQAAAAAAAADQDAutAgAAANANAS0S0A8BLRDQAAkaBEUKCwQDAAAABQAAAA0AAAAUAAAA0AwLrQIAAADQDQEtE9APAS0Q0AAJGgRFCgsEAwAAAAUAAAANAAAAAAAAANAMC60CAAAA0A0BLRTQDwEtENAACRoERQoLBAMAAAAFAAAADQAAAAAAAADQDAutAgAAANANAS0V0A8BLRDQAAkaBEUKCwQDAAAABQAAAA0AAAAAAAAA0AwLrQIAAADQDQEtFtAPAS0X0AAJGgRFCgsEAwAAAAUAAAANAAAAKAAAANAMC60EAAAA0A0BLRjQDwEtENAZGq0BRRscAdAAHBoCRR0LBAMAAAAFAAAADQAAAAAAAADQHh8tINAhIhoCRSMkAtAAJRoFRQoLBAMAAAADAAAAAAAAAAoAAADQJgutAAAAANADAS0n0CgBLRHQKQEtENAAJRoFRQoLBAMAAAADAAAAAAAAAAoAAADQJgutAQAAANADAS0n0CgBLRHQKQEtEJoqKwFFAAEC0AABLSzQAAEtF9AAHy0t0C4vGgPQMAutAQAAANAxC60XAAAA0DIarQDQMy8aA9AwC60CAAAA0DELrQMAAADQMhqtANA0Gq0A0DUarQA="</v>
           </d>
         </o>
         <v>{F66C7017-BDD8-4114-926C-81D6D687E35F}</v>
