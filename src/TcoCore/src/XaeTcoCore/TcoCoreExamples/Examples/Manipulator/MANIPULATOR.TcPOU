@@ -7,7 +7,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//_context.Run();]]></ST>
+      <ST><![CDATA[_context.Run();
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
