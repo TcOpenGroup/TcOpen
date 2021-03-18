@@ -171,8 +171,8 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
-Clock.Update(_Identity);
-]]></ST>
+//Clock.Update(_Identity);
+_rtc.Update(_Identity);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Rtc" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">

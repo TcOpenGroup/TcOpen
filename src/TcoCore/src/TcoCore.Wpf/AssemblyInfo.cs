@@ -17,8 +17,8 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://inxton.mts/xaml", "Tco.Wpf")]
 
 [assembly:Vortex.Presentation.Wpf.RenderableAssembly()]
-[assembly: AssemblyVersion("1.9.1.0")]
-[assembly: AssemblyFileVersion("1.9.1.0")]
-[assembly: AssemblyInformationalVersion("1.9.1-tcopen-implementation.1+32.Branch.feature-tcopen-implementation.Sha.c12c4ccf75e412f00bed825157a05c161a4394f2")]
+[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+190.Branch.init-dev.Sha.a59a15b64284456475e5bfe971dc1dd1f84cec2b")]
 
 
