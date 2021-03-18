@@ -143,19 +143,19 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
   $BootDir = $solutionDir +"\src\TcoCore\src\XaeTcoCore\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoCore\TcoCore.slnf -c $buildConfig -f net48 -v $msbuildVerbosity --logger trx
+    dotnet test .\src\TcoCore\TcoCore.slnf -c $buildConfig -f net48 -v $msbuildVerbosity -l:"trx;LogFileName=TEST-TcoCore.xml"
   }
 
   $BootDir = $solutionDir +"\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf -c $buildConfig -f net48 -v $msbuildVerbosity --logger trx
+    dotnet test .\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf -c $buildConfig -f net48 -v $msbuildVerbosity -l:"trx;LogFileName=TEST-TcoIoBeckhoff.xml"
   }
 
   $BootDir = $solutionDir +"src\TcoPneumatics\src\XaeTcoPneumatics\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoPneumatics\TcoPneumatics.slnf -c $buildConfig -f net48 -v $msbuildVerbosity --logger trx
+    dotnet test .\src\TcoPneumatics\TcoPneumatics.slnf -c $buildConfig -f net48 -v $msbuildVerbosity -l:"trx;LogFileName=TEST-TcoPneumatics.xml"
   }
   .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId
 
