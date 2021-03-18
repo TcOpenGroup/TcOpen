@@ -5,6 +5,8 @@
 VAR
 	_pneuMan : ST_01_Context;
 	_donCorleone : VitoCorleone_Context;
+	//Self-confident object, that initiate its context BY itself.	
+	_jackWaltz	:	Woltz_Object(_jackWaltz);
 END_VAR
 ]]></Declaration>
     <Implementation>

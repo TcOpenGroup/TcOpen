@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Woltz_Object" Id="{210d7878-f3a8-0d74-1c18-c55600d21082}" SpecialFunc="None">
+    <Declaration><![CDATA[//--
+// <ObjectWithoutContextExampleDeclaration>
+(*
+		
+			This is an example of self-confident object, that initiate its context by itself.	
+
+*)
+FUNCTION_BLOCK Woltz_Object EXTENDS TcoObject
+VAR
+	//Horse owned by Jack Woltz.
+	//https://godfather.fandom.com/wiki/Khartoum
+	_Khartoum	: TcoCore.TcoObject(THIS^);
+END_VAR
+//---------------------------------------------------------------------------
+// </ObjectWithoutContextExampleDeclaration>
+//--
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{da33549e-080b-0906-3324-f3717f68b2b3}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
