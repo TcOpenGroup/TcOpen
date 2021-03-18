@@ -6,8 +6,6 @@ VAR
 	_CallMyPlcInstance 		:	BOOL := FALSE;
 	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
 	_RtcIsValid				:	BOOL;
-	_ContextOpen			:	ULINT;
-	_ContextClose			:	ULINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -24,8 +22,7 @@ METHOD INTERNAL ContextClose
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Close();
-
-_ContextClose := _ContextClose + 1;]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextOpen" Id="{89a806dd-7d63-036b-0493-cf31446222af}">
@@ -34,7 +31,7 @@ METHOD INTERNAL ContextOpen
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Open();
-_ContextOpen := _ContextOpen + 1;]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{ce1913c5-df6b-0aa3-3f90-ae6b899c0533}">
