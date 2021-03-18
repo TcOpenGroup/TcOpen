@@ -32,14 +32,15 @@ METHOD GetSynchParams
     <Method Name="Main" Id="{ab154a48-9ac1-0c37-230b-2e533fa7520e}">
       <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TcoCore.RTC.Update(THIS^.Identity);]]></ST>
       </Implementation>
     </Method>
     <Method Name="NowLocal" Id="{f0f7feae-fd4c-0752-2e52-d4f3673f6f89}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL NowLocal ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_NowLocal := THIS^.Rtc.NowLocal();]]></ST>
+        <ST><![CDATA[
+_NowLocal := THIS^.Rtc.NowLocal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="NowUtc" Id="{4d15ee95-7f3e-081c-2de7-138c5254d6a7}">
@@ -75,8 +76,7 @@ END_VAR]]></Declaration>
 _params.doSynch					:=	inDoSynch;
 _params.syncAmsId				:=	inSyncAmsId;
 _params.syncPeriod				:=	inSyncPeriod;
-Rtc.RtcSynchParams := _params;
-]]></ST>
+Rtc.RtcSynchParams := _params;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TickClock" Id="{396b1245-0012-0d3d-2e99-6b4b82f03984}">
