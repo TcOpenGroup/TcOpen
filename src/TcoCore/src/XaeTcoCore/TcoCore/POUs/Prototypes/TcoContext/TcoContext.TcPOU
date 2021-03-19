@@ -46,8 +46,6 @@ VAR
 	{attribute clr [ReadOnly()]}
 	_endCycleCount : ULINT;
 	_messagingLevel : eMessageCategory;
-END_VAR
-VAR_STAT
 	{attribute clr [ReadOnly()]}
 	_rtc : TcoRtc;
 END_VAR]]></Declaration>
@@ -171,7 +169,6 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
-//Clock.Update(_Identity);
 _rtc.Update();]]></ST>
       </Implementation>
     </Method>
@@ -186,6 +183,25 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="RtcSynchronize" Id="{fdad5da4-2f47-075c-1134-913896442d7c}">
+      <Declaration><![CDATA[METHOD RtcSynchronize  : REFERENCE TO TcoContext
+VAR_INPUT
+	inDoSynch				:	BOOL;
+	inSyncAmsId				:	STRING;
+	inSyncPeriod			:	UINT; 
+END_VAR
+VAR
+	_RtcSynchParams						:	RtcSynchParams;			
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_RtcSynchParams.doSynch					:=	inDoSynch;
+_RtcSynchParams.syncAmsId				:=	inSyncAmsId;
+_RtcSynchParams.syncPeriod				:=	inSyncPeriod;
+_RtcSynchParams.synchContextIdentity	:=	THIS^._Identity;
+RtcPrg.Synchronize(_RtcSynchParams);
+RtcSynchronize REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">
       <Declaration><![CDATA[(*~
 	<docu>

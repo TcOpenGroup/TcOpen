@@ -15,22 +15,26 @@ namespace TcoCoreUnitTests
 
         TcoCoreTests.TcoRtcTest rtc = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._TcoRtcTest_A;
         TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest._TcoMessangerTests;
-        
+        TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest;
+
 
         [OneTimeSetUp]
         public void OneSetup()
         {
             //Ensure update time in the PLC
-            rtc._CallMyPlcInstance.Synchron = true;
-            while (rtc.RtcIsValid()) { }
-            while (!rtc.RtcIsValid()) { }
+            //rtc._CallMyPlcInstanceRun.Synchron = true;
+            //while (rtc.RtcIsValid()) { }
+            //while (!rtc.RtcIsValid()) { }
+            suc._CallMyPlcInstance.Synchron = true;
+            while (!suc.RtcIsValid()) { }
+            suc._CallMyPlcInstance.Synchron = false;
         }
 
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            rtc._CallMyPlcInstance.Synchron = false;           
+            //rtc._CallMyPlcInstance.Synchron = false;           
         }
 
         [SetUp]
@@ -63,7 +67,7 @@ namespace TcoCoreUnitTests
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
-            TimeSpan _diff = _dotNetTime -_plcTimeStamp;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
             Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
         }
 

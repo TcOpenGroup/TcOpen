@@ -3,6 +3,12 @@
   <Itf Name="ITcoRtc" Id="{f54bc528-8fdb-0177-2acd-c304b580985d}">
     <Declaration><![CDATA[INTERFACE ITcoRtc
 ]]></Declaration>
+    <Property Name="IsSynchronized" Id="{e989db84-ead8-0485-3fa1-0445b66f52e3}">
+      <Declaration><![CDATA[PROPERTY IsSynchronized : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3e920a2d-2ced-0e9d-3fe9-fcd40847fa88}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="IsValid" Id="{66f4316f-7d87-0f76-192c-84fa99c1199a}">
       <Declaration><![CDATA[PROPERTY IsValid : BOOL]]></Declaration>
       <Get Name="Get" Id="{e955570d-c675-0800-0743-44e0674472d7}">
@@ -25,21 +31,8 @@
       <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
 ]]></Declaration>
     </Method>
-    <Property Name="RtcSynchParams" Id="{2c441668-a17e-024c-0979-6bd2341e0004}">
-      <Declaration><![CDATA[PROPERTY RtcSynchParams : RtcSynchParams]]></Declaration>
-      <Get Name="Get" Id="{38728756-5915-0221-3b72-fa8b914a0293}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-      <Set Name="Set" Id="{8c7ac540-8ada-070a-0069-45384a9df7df}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Set>
-    </Property>
     <Method Name="TickClock" Id="{317ccaa2-fed5-0818-37bf-03f24bf02b0d}">
       <Declaration><![CDATA[METHOD TickClock : ULINT
-]]></Declaration>
-    </Method>
-    <Method Name="Update" Id="{9f008888-9ebd-029b-1f35-9528fcde982f}">
-      <Declaration><![CDATA[METHOD Update
 ]]></Declaration>
     </Method>
   </Itf>

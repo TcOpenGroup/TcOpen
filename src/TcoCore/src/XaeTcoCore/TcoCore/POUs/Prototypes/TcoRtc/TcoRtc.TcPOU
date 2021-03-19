@@ -4,40 +4,45 @@
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC TcoRtc IMPLEMENTS ITcoRtc
 VAR
 	{attribute 'hide'}
-	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
-	{attribute 'hide'}
-	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
-	{attribute 'hide'}
-	_LocalTimeDT						:	DATE_AND_TIME;
-	{attribute 'hide'}
-	_UTCTimeDT 							:	DATE_AND_TIME;
-	{attribute 'hide'}
-	_timeTick							: 	Tc2_EtherCAT.T_DCTIME64;
-	
-	
+	_isValid							:	BOOL := FALSE;
 	{attribute 'hide'}
 	_state								:	UINT;
-
+	{attribute 'hide'}
+	_TimeZoneID							:	Tc2_Utilities.E_TimeZoneID;
 	{attribute 'hide'}
 	_NT_GetLocalTime					: 	Tc2_Utilities.NT_GetTime;
 	{attribute 'hide'}
 	_FB_TzSpecificLocalTimeToSystemTime :	Tc2_Utilities.FB_TzSpecificLocalTimeToSystemTime;
 	{attribute 'hide'}
-	_offset								:	ULINT;
-_isValid : BOOL := TRUE;
-
-_RtcSynchParams : RtcSynchParams;
+	_RTC_EX2							:	RTC_EX2;
+	{attribute 'hide'}
+	_PDT	 							:	Tc2_Utilities.TIMESTRUCT;	
+	{attribute 'hide'}
+	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
+	{attribute 'hide'}
+	_LocalTimeDT						:	DATE_AND_TIME;
+	{attribute 'hide'}
+	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
+	{attribute 'hide'}
+	_UTCTimeDT							:	DATE_AND_TIME;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="IsSynchronized" Id="{281d422f-3fd6-08a1-39a9-839854b5b3de}">
+      <Declaration><![CDATA[PROPERTY IsSynchronized : BOOL]]></Declaration>
+      <Get Name="Get" Id="{56a732cd-dbfe-0b14-1254-ee3c7eed7852}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsSynchronized :=  RtcPrg._isSynchronized;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="IsValid" Id="{0b73d0fb-6a2d-0c9e-3da7-384d62e156b5}">
       <Declaration><![CDATA[PROPERTY IsValid : BOOL
 ]]></Declaration>
       <Get Name="Get" Id="{f1495f6e-f4ab-08bd-138d-164d6df2166a}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsValid := _isValid;]]></ST>
         </Implementation>
@@ -79,31 +84,6 @@ END_IF]]></ST>
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Property Name="RtcSynchParams" Id="{b04a98c0-f35d-0885-0560-168bc0d55c2c}">
-      <Declaration><![CDATA[PROPERTY RtcSynchParams : RtcSynchParams]]></Declaration>
-      <Get Name="Get" Id="{b4cdc5ff-8d88-0b4c-0de5-bfaa3fd2182c}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[RtcSynchParams :=  _RtcSynchParams;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{757baeb2-5395-046e-24d5-a8962693357c}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[IF RtcSynchParams.synchContextIdentity <> 0 AND _RtcSynchParams.synchContextIdentity = 0 THEN
-	_RtcSynchParams.synchContextIdentity := RtcSynchParams.synchContextIdentity; 
-	_state := 0;
-END_IF
-
-IF _RtcSynchParams.synchContextIdentity <> 0 AND _RtcSynchParams.synchContextIdentity = RtcSynchParams.synchContextIdentity THEN
-	_RtcSynchParams.doSynch := RtcSynchParams.doSynch;
-	_RtcSynchParams.syncAmsId := RtcSynchParams.syncAmsId;
-	_RtcSynchParams.syncPeriod := RtcSynchParams.syncPeriod;
-END_IF
-]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <Method Name="TickClock" Id="{1cdfb043-4f81-0904-37ac-2a0334c75a58}">
       <Declaration><![CDATA[METHOD TickClock : ULINT
 ]]></Declaration>
@@ -112,53 +92,48 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="Update" Id="{0bf459e2-db45-0e5b-3d87-31081b5a02e2}">
-      <Declaration><![CDATA[METHOD Update
-//VAR_INPUT
-//	inContextIdentity	: ULINT;
-//END_VAR
-VAR	
-	_TimeZoneID							:	Tc2_Utilities.E_TimeZoneID;
-END_VAR]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL Update
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//IF _state = 0 THEN
-//	_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
-//	IF _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
-//		_state := _state + 10;
-//	END_IF
-//END_IF
+        <ST><![CDATA[IF _state = 0 THEN
+	_isValid := FALSE;
+	_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
+	IF _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
+		_state := _state + 10;
+	END_IF
+END_IF
 	
-//IF _state = 10 THEN
-//	_NT_GetLocalTime(START := FALSE);
-//	IF NOT _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
-//		_state := _state + 10;
-//	END_IF
-//END_IF
+IF _state = 10 THEN
+	_NT_GetLocalTime(START := FALSE);
+	IF NOT _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
+		_state := _state + 10;
+	END_IF
+END_IF
 
-//IF _state = 20 THEN
+IF _state = 20 THEN
 	_NT_GetLocalTime(START := FALSE);
 	_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
 	_NT_GetLocalTime(START := FALSE);
 		
-	_LocalTime := _NT_GetLocalTime.TIMESTR;
-	_LocalTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_NT_GetLocalTime.TIMESTR);
+	_PDT := _NT_GetLocalTime.TIMESTR;
 
-	IF RTC._isValid THEN
-		_FB_TzSpecificLocalTimeToSystemTime(in 		:=	_LocalTime,
-											tzInfo 	:=	RTC._TimeZoneInformation,
-											out		=>	_UTCTime,
-											eTzID	=>	_TimeZoneID);
+	_isValid := TRUE;
+//	_state := 0;
+END_IF
 
-		_UTCTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_UTCTime);
-	END_IF
-	_state := 0;
-	
-//	_timeTick :=  Tc2_EtherCAT.F_GetActualDcTime64(); 
+_RTC_EX2(EN := _isValid, PDT := _PDT);
 
+_LocalTime := _RTC_EX2.CDT;
+_LocalTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_LocalTime);
 
-//END_IF
+IF RtcPrg._isSynchronized THEN
+	_FB_TzSpecificLocalTimeToSystemTime(in 		:=	_LocalTime,
+										tzInfo 	:=	RtcPrg._TimeZoneInformation,
+										out		=>	_UTCTime,
+										eTzID	=>	_TimeZoneID);
 
-
-]]></ST>
+	_UTCTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_UTCTime);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>
