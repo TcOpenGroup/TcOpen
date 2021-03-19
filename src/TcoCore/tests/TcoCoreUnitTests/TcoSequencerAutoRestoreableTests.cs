@@ -32,6 +32,7 @@ namespace TcoCoreUnitTests
         public void OneTimeSetUp()
         {
             tc._CallMyPlcInstance.Synchron = true;                      //Switch on cyclicall calling the PLC code of this instance
+            while (!tc._Init.Synchron) { }
             tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
             tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
             tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance

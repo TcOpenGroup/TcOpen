@@ -24,7 +24,7 @@ END_VAR
 	IF NOT _Init THEN
 		ContextOpen();	
 		ContextClose();	
-		_Init := TRUE;
+		_Init := THIS^._rtc.IsValid;
 	END_IF
 	
 	IF _Restore THEN

@@ -46,11 +46,7 @@ VAR
 	{attribute 'hide'}
 	_lastSyncTick						: 	Tc2_EtherCAT.T_DCTIME64;
 	{attribute 'hide'}
-	_RTC_EX2							:	RTC_EX2;
-	{attribute 'hide'}
 	_timeTick							: 	Tc2_EtherCAT.T_DCTIME64;
-	{attribute 'hide'}
-	_PDT	 							:	Tc2_Utilities.TIMESTRUCT;	
 	{attribute 'hide'}
 	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
 	{attribute 'hide'}
@@ -263,7 +259,6 @@ IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIden
 	END_IF
 	
 	IF _state = 230 THEN
-		_PDT := _NT_GetLocalTime.TIMESTR;
 		_isSynchronized := TRUE;
 		_NT_GetSyncTime(START := FALSE);
 		_NT_GetLocalTime(START := FALSE);

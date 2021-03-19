@@ -112,8 +112,6 @@ END_IF
 
 IF _state = 20 THEN
 	_NT_GetLocalTime(START := FALSE);
-	_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
-	_NT_GetLocalTime(START := FALSE);
 		
 	_PDT := _NT_GetLocalTime.TIMESTR;
 

@@ -69,6 +69,10 @@ namespace TcoCoreUnitTests
             tc_A.GetSynchParams();
 
             Assert.AreEqual(tc_A._MyIdentity.Synchron, tc_A._RtcSynchParamsGet.synchContextIdentity.Synchron);
+
+            tc_A._CallMyPlcInstanceRun.Synchron = true;         //Switch on the cyclical execution of the _TcoRtcTest_A Run() method 
+            while (!tc_A.RtcIsValid()) { }
+            tc_A._CallMyPlcInstanceRun.Synchron = false;        //Switch off the cyclical execution of the _TcoRtcTest_A Run() method 
         }
 
         [Test, Order(001)]
@@ -106,6 +110,10 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(synchAmsId, tc_B._RtcSynchParamsGet.syncAmsId.Synchron);
             Assert.AreEqual(SyncPeriod, tc_B._RtcSynchParamsGet.syncPeriod.Synchron);
             Assert.AreEqual(doSync, tc_B._RtcSynchParamsGet.doSynch.Synchron);
+
+            tc_B._CallMyPlcInstanceRun.Synchron = true;         //Switch on the cyclical execution of the _TcoRtcTest_B Run() method 
+            while (!tc_B.RtcIsValid()) { }
+            tc_B._CallMyPlcInstanceRun.Synchron = false;        //Switch off the cyclical execution of the _TcoRtcTest_B Run() method 
         }
 
 
