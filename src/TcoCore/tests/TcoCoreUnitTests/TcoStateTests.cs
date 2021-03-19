@@ -84,7 +84,7 @@ namespace TcoCoreUnitTests
             tc.ContextClose();
 
             Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed to the newState.                                                           
-            Assert.AreEqual(ccc+1, ts._OnStateChangeCounter.Synchron);                                  //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
+            Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                  //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
             Assert.AreEqual("My state has been change from " + initState.ToString()                     //Check if overiden method OnStateChange() generate expected message.
                 + " to the new state " + newState.ToString() + ".", ts.GetMessage());
         }
@@ -145,7 +145,7 @@ namespace TcoCoreUnitTests
             {
                 ts.TriggerChangeState(newState);                                                        //Initiate change the state of the ts to the new value newState
             });
-            ts.ReadOutState();  
+            ts.ReadOutState();
 
             Assert.AreEqual(newState, ts._MyState.Synchron);                                            //Check if the state of the ts has been changed to the newState
             Assert.AreEqual(ccc + 1, ts._OnStateChangeCounter.Synchron);                                //OnStateChange() method should be called just once, as the only one change of the state has been performed on the ts.
@@ -290,7 +290,7 @@ namespace TcoCoreUnitTests
             tst_b = ts_b._TcoStateTest_B;                                                               //tst_b(TcoState) is a child object of the ts_b(TcoState).
 
 
-                                                                                                        //Ensure repeatibility of this test
+            //Ensure repeatibility of this test
             tc.SingleCycleRun(() =>                                                                     //Cleanup change the state to 0, reset the OnStateChange counter and reset the AutoRestore properties (inherited from the parent so as dedicated to the childrens)
             {
                 ts_a.CleanUp();
@@ -338,11 +338,11 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(1, tst_a._CounterValue.Synchron);                                           //CounterValue of the tst_a is reset from 100 to 0 in the State -1 in the ExecutionBody(), as Restore() method was called before due to ExecutionBody not called in the previous PLC cycle.
                                                                                                         //In the same PLC cycle its State changes from -1 to 0 and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of 1.
             Assert.AreEqual(rc_b, tst_b._RestoreCounter.Synchron);                                      //tst_b should not be restored, as it is not AutoRestorable so does not matter if it was or was not called in the previous PLC cycle
-            
+
             Assert.AreEqual(0, tst_b._MyState.Synchron);                                                //State of the tst_b should not be affected
             Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);                                    //CounterValue of the tst_b is not reset and in State 0 CounterValue is incremented by 1 so at the end of this PLC cycle it should have the value of cv_b + 1.
 
-            
+
             Assert.AreEqual(is_a, ts_a._MyState.Synchron);                                              //State of the parent (ts_a) of the AutoRestorable child (tst_a) should remain the same as before.
             Assert.AreEqual(is_b, ts_b._MyState.Synchron);                                              //State of the parent (ts_b) of the nonAutoRestorable child (tst_b) should remain the same as before.
 
@@ -361,8 +361,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(rc_b + 1, tst_b._RestoreCounter.Synchron);                                  //Check if the Restore() method was called ony once.
             Assert.AreEqual(-1, tst_a._MyState.Synchron);                                               //Check if the state of tst_a has been change to -1 as the Retore() method was called.
             Assert.AreEqual(-1, tst_b._MyState.Synchron);                                               //Check if the state of tst_b has been change to -1 as the Retore() method was called.
-            Assert.AreEqual(cv_a , tst_a._CounterValue.Synchron);                                       //Check if the counter value of tst_a stay unchanged as the ExecutionBody() was not called yet.
-            Assert.AreEqual(cv_b , tst_b._CounterValue.Synchron);                                       //Check if the counter value of tst_b stay unchanged as the ExecutionBody() was not called yet.
+            Assert.AreEqual(cv_a, tst_a._CounterValue.Synchron);                                       //Check if the counter value of tst_a stay unchanged as the ExecutionBody() was not called yet.
+            Assert.AreEqual(cv_b, tst_b._CounterValue.Synchron);                                       //Check if the counter value of tst_b stay unchanged as the ExecutionBody() was not called yet.
 
 
             tc.SingleCycleRun(() =>
@@ -370,7 +370,7 @@ namespace TcoCoreUnitTests
                 tst_a.ExecutionBody();                                                                  //Calling the execution body of the tst_a.
                 tst_b.ExecutionBody();                                                                  //Calling the execution body of the tst_b.
             });
-            
+
             Assert.AreEqual(0, tst_a._MyState.Synchron);                                                //State of the tst_a should change from -1 to 0. 
             Assert.AreEqual(0, tst_b._MyState.Synchron);                                                //State of the tst_b should change from -1 to 0. 
             Assert.AreEqual(1, tst_a._CounterValue.Synchron);                                           //CounterValue of the tst_a is reset from 100 to 0 in the State -1 in the ExecutionBody(), as Restore() method was called before due to ExecutionBody not called in the previous PLC cycle.
@@ -422,7 +422,7 @@ namespace TcoCoreUnitTests
                                                                                                         //should be the same as before, or in the case if one call of the Execution body causes State increment it could be greather.
             Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);                                    //Check if CounterValue has not been reseted.
 
-                                                                                                        //Ensure repeatibility of this test
+            //Ensure repeatibility of this test
             tc.SingleCycleRun(() =>                                                                     //Cleanup change the state to 0, reset the OnStateChange counter and reset the AutoRestore properties (inherited from the parent so as dedicated to the childrens)
             {
                 ts_a.CleanUp();

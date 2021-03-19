@@ -10,7 +10,7 @@ VAR
 	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
 	_TcoMessengerContextTest			:	TcoMessengerContextTest;
-	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
+//	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 
 END_VAR]]></Declaration>
     <Implementation>
@@ -28,7 +28,7 @@ _TcoSequencerNonAutoRestorableTest();
 
 _TcoMessengerContextTest();
 
-_TcoContextMessagingPerf();
+//_TcoContextMessagingPerf();
 
 ]]></ST>
     </Implementation>

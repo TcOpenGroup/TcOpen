@@ -3,6 +3,7 @@
   <POU Name="TcoSequencerAutoRestorableTest" Id="{562bb59c-4938-0c9c-3dbf-3bf62db74778}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
+	_CallMyPlcInstance	:	BOOL := FALSE;
 	_Sequencer : _TcoSequencer(THIS^, TRUE);
 	_RunPLCinstanceOnce : BOOL := FALSE;
 	_RunPLCinstanceCyclicaly : BOOL := FALSE;
@@ -19,36 +20,37 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT _Init THEN
-	ContextOpen();	
-	ContextClose();	
-	_Init := TRUE;
-END_IF
-
-IF _Restore THEN
-	ContextOpen();	
-	THIS^._Sequencer.Restore();	
-	_RestoreCycleCount := _RestoreCycleCount + 1;
-	_Restore := FALSE;
-	ContextClose();	
-	RETURN;
-END_IF
-
-IF _RunPLCinstanceOnce AND NOT _RunPLCinstanceCyclicaly THEN
-	ContextOpen();	
-	THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
-	_CycleCount := _CycleCount + 1;
-	_RunPLCinstanceOnce := FALSE;
-	ContextClose();	
-END_IF
-
-IF _RunPLCinstanceCyclicaly AND NOT _RunPLCinstanceOnce THEN
-	ContextOpen();	
-	THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
-	_CycleCount := _CycleCount + 1;
-	ContextClose();	
-END_IF
-
+      <ST><![CDATA[IF _CallMyPlcInstance THEN
+	IF NOT _Init THEN
+		ContextOpen();	
+		ContextClose();	
+		_Init := TRUE;
+	END_IF
+	
+	IF _Restore THEN
+		ContextOpen();	
+		THIS^._Sequencer.Restore();	
+		_RestoreCycleCount := _RestoreCycleCount + 1;
+		_Restore := FALSE;
+		ContextClose();	
+		RETURN;
+	END_IF
+	
+	IF _RunPLCinstanceOnce AND NOT _RunPLCinstanceCyclicaly THEN
+		ContextOpen();	
+		THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
+		_CycleCount := _CycleCount + 1;
+		_RunPLCinstanceOnce := FALSE;
+		ContextClose();	
+	END_IF
+	
+	IF _RunPLCinstanceCyclicaly AND NOT _RunPLCinstanceOnce THEN
+		ContextOpen();	
+		THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
+		_CycleCount := _CycleCount + 1;
+		ContextClose();	
+	END_IF
+END_IF;	
 ]]></ST>
     </Implementation>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{c5f7e550-1c06-02b1-3dc1-0350c51bf48f}">

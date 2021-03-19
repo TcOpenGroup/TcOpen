@@ -34,7 +34,8 @@ namespace TcoCoreUnitTests
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            //rtc._CallMyPlcInstance.Synchron = false;           
+            //rtc._CallMyPlcInstance.Synchron = false;  
+            suc._CallMyPlcInstance.Synchron = false;
         }
 
         [SetUp]
@@ -415,43 +416,43 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(sut._messenger._mime.IsActive);
         }
 
-        [Test, Order(1300)]
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(100)]
-        [TestCase(200)]
-        public void T813_MessagingPerfTest(short nofmessages)
-        {            
-            var sut = ConnectorFixture.Connector.MAIN._TcoContextMessagingPerf;
+        //[Test, Order(1300)]
+        ////[TestCase(0)]
+        //[TestCase(1)]
+        //[TestCase(10)]
+        //[TestCase(100)]
+        //[TestCase(200)]
+        //public void T813_MessagingPerfTest(short nofmessages)
+        //{
+        //    var sut = ConnectorFixture.Connector.MAIN._TcoContextMessagingPerf;
 
-            if (nofmessages > TcoContextMessagingPerf.__const_messagesUpperBound)
-            {
-                throw new ArgumentOutOfRangeException($"Testing message upper bound out of range");
-            }
+        //    if (nofmessages > TcoContextMessagingPerf.__const_messagesUpperBound)
+        //    {
+        //        throw new ArgumentOutOfRangeException($"Testing message upper bound out of range");
+        //    }
 
-            sut._numberOfTestMessages.Synchron = nofmessages;
+        //    sut._numberOfTestMessages.Synchron = nofmessages;
 
-            sut.Read();
+        //    sut.Read();
 
-            var sw = new System.Diagnostics.Stopwatch();
+        //    var sw = new System.Diagnostics.Stopwatch();
 
-            sw.Start();
-            sut.RefreshActiveMessages();
-            sw.Stop();
+        //    sw.Start();
+        //    sut.RefreshActiveMessages();
+        //    sw.Stop();
 
-            Console.WriteLine($"Refresh active messages {sw.ElapsedMilliseconds} ms");
-            Assert.IsTrue(sw.ElapsedMilliseconds < 100, $"{sw.ElapsedMilliseconds}");
-          
+        //    Console.WriteLine($"Refresh active messages {sw.ElapsedMilliseconds} ms");
+        //    Assert.IsTrue(sw.ElapsedMilliseconds < 100, $"{sw.ElapsedMilliseconds}");
 
-            sw.Reset();
-            sw.Start();
-            var messages = sut.ActiveMessages.ToList();
-            sw.Stop();
 
-          
-            Console.WriteLine($"Messages Online to Plain {sw.ElapsedMilliseconds} ms");
-        }
+        //    sw.Reset();
+        //    sw.Start();
+        //    var messages = sut.ActiveMessages.ToList();
+        //    sw.Stop();
+
+
+        //    Console.WriteLine($"Messages Online to Plain {sw.ElapsedMilliseconds} ms");
+        //}
 
     }
 }

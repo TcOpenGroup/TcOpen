@@ -51,12 +51,12 @@ namespace TcoCoreUnitTests
             tc_B.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
 
             ulong AstrtCycles_diff = tc_A._startCycles.Synchron - AstrtCycles_0;//Calculate differencies between initial and actual counters values
-            ulong AmainCycles_diff = tc_A._mainCycles.Synchron  - AmainCycles_0;
-            ulong AendCycles__diff = tc_A._endCycles.Synchron   - AendCycles__0;
+            ulong AmainCycles_diff = tc_A._mainCycles.Synchron - AmainCycles_0;
+            ulong AendCycles__diff = tc_A._endCycles.Synchron - AendCycles__0;
 
-            Assert.Greater(tc_A._startCycles.Synchron , AstrtCycles_0);//All the actual values of the instance A must be greather than the initial values 
-            Assert.Greater(tc_A._mainCycles.Synchron  , AmainCycles_0);
-            Assert.Greater(tc_A._endCycles.Synchron   , AendCycles__0);
+            Assert.Greater(tc_A._startCycles.Synchron, AstrtCycles_0);//All the actual values of the instance A must be greather than the initial values 
+            Assert.Greater(tc_A._mainCycles.Synchron, AmainCycles_0);
+            Assert.Greater(tc_A._endCycles.Synchron, AendCycles__0);
 
             Assert.AreEqual(AstrtCycles_diff, AmainCycles_diff);//All the values should have the same increment
             Assert.AreEqual(AmainCycles_diff, AendCycles__diff);
@@ -159,7 +159,7 @@ namespace TcoCoreUnitTests
 
             Assert.AreEqual(AstrtCycles_0, tc_A._startCycles.Synchron);//Should be the same as before, as only Main() method is called. As neither the Open() nor the Close() methods are called, neither the _startCycleCount, not the _endCycleCount are incremented
             Assert.AreEqual(AmainCycles_0 + 1, tc_A._mainCycles.Synchron);//Only cycle counter of the Main() method should be incremented
-            Assert.AreEqual(AendCycles__0 , tc_A._endCycles.Synchron);//Should be the same as before, as only Main() method is called. As neither the Open() nor the Close() methods are called, neither the _startCycleCount, not the _endCycleCount are incremented
+            Assert.AreEqual(AendCycles__0, tc_A._endCycles.Synchron);//Should be the same as before, as only Main() method is called. As neither the Open() nor the Close() methods are called, neither the _startCycleCount, not the _endCycleCount are incremented
         }
 
         [Test, Order(104)]
@@ -200,7 +200,7 @@ namespace TcoCoreUnitTests
             {
                 tc_A.CallMainFromUnitTest();                    //Calling only the Main() method
                 i++;
-            },() => i >= cycles);                               //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
+            }, () => i >= cycles);                               //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
 
