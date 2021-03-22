@@ -13,7 +13,6 @@ namespace TcoCoreUnitTests
     public class T08_TcoMessengerTests
     {
 
-        TcoCoreTests.TcoRtcTest rtc = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._TcoRtcTest_A;
         TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest._TcoMessangerTests;
         TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest;
 
@@ -36,9 +35,9 @@ namespace TcoCoreUnitTests
         [SetUp]
         public void Setup()
         {
-            //suc._CallMyPlcInstance.Synchron = true;
-            //while (!suc.RtcIsValid()) { }
-            //suc._CallMyPlcInstance.Synchron = false;
+            suc._CallMyPlcInstance.Synchron = true;
+            while (!suc.RtcIsValid()) { }
+            suc._CallMyPlcInstance.Synchron = false;
         }
 
         [Test, Order(100)]
@@ -56,7 +55,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Debug);
            
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -78,8 +76,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Trace);
          
-
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -101,7 +97,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Notification);
            
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -123,7 +118,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Warning);
            
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -146,7 +140,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Error);
          
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -168,7 +161,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Info);
           
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -190,7 +182,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.ProgrammingError);
           
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -212,7 +203,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Critical);
             
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -233,10 +223,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Catastrophic);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
 
-            //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
@@ -273,10 +260,7 @@ namespace TcoCoreUnitTests
                     Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
                     Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
                     Assert.AreEqual((eMessageCategory)sut._messenger._mime.Category.Synchron, category);
-                    //Peter's original code
-                    //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
 
-                    //Code changed by Tomas
                     DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
                     DateTime _dotNetTime = DateTime.Now;
                     TimeSpan _diff = _dotNetTime - _plcTimeStamp;

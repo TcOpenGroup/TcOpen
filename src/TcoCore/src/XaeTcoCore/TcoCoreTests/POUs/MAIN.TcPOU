@@ -68,8 +68,9 @@ IF _call THEN
 	_local := _rtcex2.CDT;
 	_localDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_local);
 
-
-	_call := FALSE;
+	IF _state = 30 THEN
+		_call := FALSE;
+	END_IF
 ELSE
 	//state :== 0;
 	RETURN;	

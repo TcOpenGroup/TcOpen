@@ -131,7 +131,8 @@ IF RtcPrg._isSynchronized THEN
 										eTzID	=>	_TimeZoneID);
 
 	_UTCTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_UTCTime);
-END_IF]]></ST>
+END_IF
+]]></ST>
       </Implementation>
     </Method>
   </POU>

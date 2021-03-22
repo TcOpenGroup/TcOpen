@@ -33,8 +33,8 @@ namespace TcoCoreUnitTests
         }
 
 
-        [Test, Order(000)]
-        public void T000_SetSynchronizationParametersFromTcA()
+        [Test, Order(001)]
+        public void T001_SetSynchronizationParametersFromTcA()
         {
             //This test triggers set synchronization parameters.
             //This test should be very first, so it should set the SynchronizationContextIndentity to the Identity of this test instance.
@@ -75,8 +75,8 @@ namespace TcoCoreUnitTests
             tc_A._CallMyPlcInstanceRun.Synchron = false;        //Switch off the cyclical execution of the _TcoRtcTest_A Run() method 
         }
 
-        [Test, Order(001)]
-        public void T001_SetSynchronizationParametersFromTcB()
+        [Test, Order(002)]
+        public void T002_SetSynchronizationParametersFromTcB()
         {
             //This test triggers set synchronization parameters again from different TcoContext to the different values.
             //The synchronization parameters should not change, as it is possible only from tc_A as it was the very first TcoContext instance called SetSynchParams() method.
@@ -117,8 +117,8 @@ namespace TcoCoreUnitTests
         }
 
 
-        [Test, Order(002)]
-        public void T002_ChangeSynchronizationParametersFromTcA()
+        [Test, Order(003)]
+        public void T003_ChangeSynchronizationParametersFromTcA()
         {
             //This test triggers set synchronization parameters again from the sama TcoContext as first time to the different values.
             //The synchronization parameters should change.
@@ -170,8 +170,8 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(SyncPeriod, tc_A._RtcSynchParamsGet.syncPeriod.Synchron);
             Assert.AreEqual(doSync, tc_A._RtcSynchParamsGet.doSynch.Synchron);
         }
-        [Test, Order(002)]
-        public void T002_RtcIsValid()
+        [Test, Order(004)]
+        public void T004_RtcIsValid()
         {
             tc_A._CallMyPlcInstanceRun.Synchron = true;         //Switch on the cyclical execution of the _TcoContextTest_A Run method             
 
@@ -182,8 +182,8 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(tc_A.RtcIsValid());                   //System time should already been read out and valid, as PLC instance was running at least Delay time.
         }
 
-        [Test, Order(003)]
-        public void T003_RtcNowLocalChanging()
+        [Test, Order(005)]
+        public void T005_RtcNowLocalChanging()
         {
 
             Delay = 5000;                                       //Set delay to 5000ms
@@ -206,8 +206,8 @@ namespace TcoCoreUnitTests
             Assert.LessOrEqual(Math.Abs(_PlcDuration.TotalMilliseconds - _DotNetDuration.TotalMilliseconds), 1000);
         }
 
-        [Test, Order(004)]
-        public void T004_RtcNowUtcChanging()
+        [Test, Order(006)]
+        public void T006_RtcNowUtcChanging()
         {
 
             Delay = 5000;                                       //Set delay to 5000ms
@@ -230,8 +230,8 @@ namespace TcoCoreUnitTests
             Assert.LessOrEqual(Math.Abs(_PlcDuration.TotalMilliseconds - _DotNetDuration.TotalMilliseconds), 1000);
         }
 
-        [Test, Order(005)]
-        public void T005_RtcTickClockChanging()
+        [Test, Order(007)]
+        public void T007_RtcTickClockChanging()
         {
             string _sStartTime = "";
             Delay = 5000;                                        //Set delay to 500ms
@@ -259,8 +259,8 @@ namespace TcoCoreUnitTests
         }
 
 #if EXT_LOCAL_TESTING
-        [Test, Order(006)]
-        public void T006_RtcTickClockDiff()
+        [Test, Order(008)]
+        public void T008_RtcTickClockDiff()
         {
 
             tc_A._CallMyPlcInstanceRun.Synchron = true;         //Switch on the cyclical execution of the _TcoRtcTest_A Run() method 
