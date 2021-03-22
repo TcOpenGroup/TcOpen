@@ -55,9 +55,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Debug);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+           
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -79,8 +77,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Trace);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+         
 
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
@@ -103,9 +100,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Notification);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+           
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -127,9 +122,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Warning);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+           
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -152,9 +145,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Error);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+         
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -176,9 +167,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Info);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+          
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -200,9 +189,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.ProgrammingError);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+          
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -224,9 +211,7 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
             Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
             Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Critical);
-            //Peter's original code
-            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
-
+            
             //Code changed by Tomas
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
@@ -409,6 +394,7 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(sut._messenger._mime.IsActive);
         }
 
+#if EXT_LOCAL_TESTING
         [Test, Order(1300)]
         //[TestCase(0)]
         [TestCase(1)]
@@ -446,6 +432,6 @@ namespace TcoCoreUnitTests
 
             Console.WriteLine($"Messages Online to Plain {sw.ElapsedMilliseconds} ms");
         }
-
+#endif
     }
 }

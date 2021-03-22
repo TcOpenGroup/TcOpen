@@ -8,7 +8,7 @@
 			This is an example of self-confident object, that initiate its context by itself.	
 
 *)
-FUNCTION_BLOCK Woltz_Object EXTENDS TcoObject
+FUNCTION_BLOCK Woltz_Object EXTENDS TcoCore.TcoObject
 VAR
 	//Horse owned by Jack Woltz.
 	//https://godfather.fandom.com/wiki/Khartoum

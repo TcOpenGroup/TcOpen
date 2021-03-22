@@ -258,6 +258,7 @@ namespace TcoCoreUnitTests
             Assert.LessOrEqual(_diff.TotalMilliseconds, Delay * 1.1);
         }
 
+#if EXT_LOCAL_TESTING
         [Test, Order(006)]
         public void T006_RtcTickClockDiff()
         {
@@ -272,7 +273,7 @@ namespace TcoCoreUnitTests
             TimeSpan _diff = _dotNetTime - _dtplcTime;
             Assert.LessOrEqual(Math.Abs(_diff.TotalMilliseconds), 1000);
         }
-
+#endif
 
     }
 }
