@@ -18,7 +18,8 @@ METHOD PROTECTED FINAL _Close
       </Implementation>
     </Method>
     <Method Name="_GetSynchParams" Id="{2ee940f9-5fdf-03fc-0f2e-8187c1c46ca1}">
-      <Declaration><![CDATA[METHOD _GetSynchParams : RtcSynchParams
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD _GetSynchParams : RtcSynchParams
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_GetSynchParams := RtcPrg._RtcSynchParams;
@@ -31,6 +32,15 @@ METHOD PROTECTED FINAL _Open
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Open();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_RtcUpdate" Id="{63e4bab0-c3ad-0213-0957-3d2eb4c2ab51}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _RtcUpdate
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._rtc.Update();]]></ST>
       </Implementation>
     </Method>
   </POU>

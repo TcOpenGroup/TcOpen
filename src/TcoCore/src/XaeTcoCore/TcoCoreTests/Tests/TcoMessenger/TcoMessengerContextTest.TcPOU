@@ -6,6 +6,7 @@ VAR
 	_CallMyPlcInstance 		:	BOOL := FALSE;
 	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
 	_RtcIsValid				:	BOOL;
+	_CallRtcUpdate	 		:	BOOL := FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -14,6 +15,9 @@ END_VAR
 	THIS^.RtcIsValid();
 END_IF
 
+IF THIS^._CallRtcUpdate THEN
+	THIS^._RtcUpdate(); 
+END_IF
 ]]></ST>
     </Implementation>
     <Method Name="ContextClose" Id="{4f2fdfc4-fcab-0528-13d7-8604dcba8327}">

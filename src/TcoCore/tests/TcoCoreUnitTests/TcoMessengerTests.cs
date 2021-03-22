@@ -23,6 +23,7 @@ namespace TcoCoreUnitTests
             suc._CallMyPlcInstance.Synchron = true;
             while (!suc.RtcIsValid()) { }
             suc._CallMyPlcInstance.Synchron = false;
+            suc._CallRtcUpdate.Synchron = true;
         }
 
 
@@ -35,9 +36,9 @@ namespace TcoCoreUnitTests
         [SetUp]
         public void Setup()
         {
-            suc._CallMyPlcInstance.Synchron = true;
-            while (!suc.RtcIsValid()) { }
-            suc._CallMyPlcInstance.Synchron = false;
+            //suc._CallMyPlcInstance.Synchron = true;
+            //while (!suc.RtcIsValid()) { }
+            //suc._CallMyPlcInstance.Synchron = false;
         }
 
         [Test, Order(100)]
@@ -380,7 +381,7 @@ namespace TcoCoreUnitTests
 
 #if EXT_LOCAL_TESTING
         [Test, Order(1300)]
-        //[TestCase(0)]
+        [TestCase(0)]
         [TestCase(1)]
         [TestCase(10)]
         [TestCase(100)]
