@@ -51,13 +51,13 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
-      <Declaration><![CDATA[METHOD PRIVATE Compose 
+      <Declaration><![CDATA[METHOD PROTECTED Compose 
 VAR_INPUT
 	Text : STRING(255);
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Rtc <> 0) THEN
 	_mime.TimeStamp :=  _Parent.Context.Rtc.NowLocal();
 	_mime.Text := Text;
 	_mime.Identity := _Parent.Identity;
@@ -229,7 +229,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(100);
 	(*~
 		<docu>
 			<summary>
@@ -242,7 +242,11 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Same cycle filter for most important messge.
+        <ST><![CDATA[IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel) THEN
+	RETURN;
+END_IF; 
+
+// Same cycle filter for most important messge.
 IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN 
 	IF(Category > _mime.Category) THEN	 
 		Compose(Message, Category);
