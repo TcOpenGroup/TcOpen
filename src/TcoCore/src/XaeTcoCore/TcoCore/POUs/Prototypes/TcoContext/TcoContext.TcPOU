@@ -48,6 +48,8 @@ VAR
 	_messagingLevel : eMessageCategory;
 	{attribute clr [ReadOnly()]}
 	_rtc : TcoRtc;
+	{attribute clr [RenderIgnore()]}
+    _settings : TcoContextEnvironment;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -103,6 +105,17 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[EndCycleCount := _endCycleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Environment" Id="{b26311d8-ac58-0fb2-3664-3d88502e5497}">
+      <Declaration><![CDATA[PROPERTY Environment : ITcoContextEnvironment]]></Declaration>
+      <Get Name="Get" Id="{0d0a9027-69a3-091e-3f34-9615f510e71b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Environment := _settings;]]></ST>
         </Implementation>
       </Get>
     </Property>

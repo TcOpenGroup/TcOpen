@@ -11,14 +11,14 @@ namespace TcoCore
     {        
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
-            _context = parent.GetParent<TcoContext>();
+            _context = parent.GetParent<IsTcoContext>();
             _context.AddMessage(this);
             _parentObject = parent.GetParent<TcoObject>();
         }
 
         private TcoObject _parentObject;
 
-        private TcoContext _context;
+        private IsTcoContext _context;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -28,7 +28,7 @@ namespace TcoCore
             {
                 if(_context != null)
                 {                                        
-                    return _context._startCycleCount.LastValue <= this.Cycle.LastValue;
+                    return _context.LastStartCycleCount <= this.Cycle.LastValue;
                 }
 
                 return false;
@@ -40,10 +40,14 @@ namespace TcoCore
         {
             get
             {
+                this.FlushOnlineToPlain(_plain);
                 _plain.ParentsObjectSymbol = this._parentObject?.Symbol;
                 _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
-                this.FlushOnlineToPlain(_plain);
-                return _plain;
+                var identity = this.Connector.IdentityProvider.GetVortexerByIdentity(_plain.Identity);
+                _plain.Text = this.Text.Translator.Translate(StringInterpolator.Interpolate(_plain.Text, identity));
+                _plain.Source = identity.Symbol;
+                _plain.Location = identity.HumanReadable;
+                return _plain;                   
             }
         }
     }

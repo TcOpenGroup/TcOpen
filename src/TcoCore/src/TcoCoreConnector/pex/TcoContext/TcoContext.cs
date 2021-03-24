@@ -9,7 +9,7 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoContext : IVortexIdentity
+    public partial class TcoContext : IVortexIdentity, IsTcoContext
     {
         private readonly IList<TcoMessage> _messages = new List<TcoMessage>();
         internal IEnumerable<TcoMessage> Messages { get { return _messages; } }
@@ -18,7 +18,7 @@ namespace TcoCore
 
         public OnlinerULInt Identity => this._Identity;
 
-        internal void AddMessage(TcoMessage message)
+        public void AddMessage(TcoMessage message)
         {
             _messages.Add(message);
         }
@@ -29,6 +29,8 @@ namespace TcoCore
         }
 
         List<IValueTag> refreshTags { get; set; }
+
+        public ulong LastStartCycleCount => this._startCycleCount.LastValue;
 
         public void RefreshActiveMessages()
         {
