@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="VitoCorleone_ContextTaskExt" Id="{0a25f9e2-840c-0e48-0939-259bf21a9a15}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK VitoCorleone_ContextTaskExt EXTENDS VitoCorleone_Context
+VAR
+	_firstFavourSatisfied	:	BOOL;
+	_AskForTheFavor			: TcoCore.TcoTask(THIS^);	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AskForTheFavor" Id="{ddb9ca92-5b5f-0468-19a6-43c3cd1511c7}">
+      <Declaration><![CDATA[
+METHOD AskForTheFavor : TcoCore.ITcoTask
+VAR_IN_OUT
+	WhoIsAsked	: TcoCore.TcoObject;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+AskForTheFavor.Invoke();
+AskForTheFavor.Execute();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MakeHimAnOfferHeCannotRefuse" Id="{c95ca8ab-55b4-0385-0eeb-c1fa7a116310}">
+      <Declaration><![CDATA[METHOD MakeHimAnOfferHeCannotRefuse : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

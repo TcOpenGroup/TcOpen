@@ -12,7 +12,7 @@ FUNCTION_BLOCK Woltz_Object EXTENDS TcoCore.TcoObject
 VAR
 	//Horse owned by Jack Woltz.
 	//https://godfather.fandom.com/wiki/Khartoum
-	_Khartoum	: TcoCore.TcoObject(THIS^);
+	_Khartoum	: Horse_Object(THIS^);
 END_VAR
 //---------------------------------------------------------------------------
 // </ObjectWithoutContextExampleDeclaration>
