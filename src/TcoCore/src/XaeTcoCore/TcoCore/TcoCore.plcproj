@@ -32,6 +32,9 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Compatibility\TcoContextCompatibility.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
       <ExcludeFromBuild>false</ExcludeFromBuild>
@@ -143,6 +146,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
     <Folder Include="POUs\TestFixtures" />
     <Folder Include="POUs\Prototypes" />

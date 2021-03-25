@@ -42,7 +42,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -53,7 +53,7 @@ END_VAR
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
       <Declaration><![CDATA[METHOD PROTECTED Compose 
 VAR_INPUT
-	Text : STRING(255);
+	Text : STRING(125);
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
@@ -89,7 +89,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -114,7 +114,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -139,7 +139,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -179,7 +179,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -204,7 +204,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -229,7 +229,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(100);
+	Message : STRING(125);
 	(*~
 		<docu>
 			<summary>
@@ -242,20 +242,21 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel) THEN
-	RETURN;
-END_IF; 
-
-// Same cycle filter for most important messge.
-IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN 
-	IF(Category > _mime.Category) THEN	 
-		Compose(Message, Category);
-	END_IF;
-ELSE
-// Different cycle	
-	Compose(Message, Category);
-END_IF;	
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
+	IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel) THEN
+		RETURN;
+	END_IF; 
 	
+	// Same cycle filter for most important messge.
+	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN 
+		IF(Category > _mime.Category) THEN	 
+			Compose(Message, Category);
+		END_IF;
+	ELSE
+	// Different cycle	
+		Compose(Message, Category);
+	END_IF;	
+END_IF;	
 
 
 
@@ -266,7 +267,7 @@ END_IF;
       <Declaration><![CDATA[METHOD PostConditionally
 VAR_INPUT
 	Condition : BOOL;
-	Message : STRING(255);
+	Message : STRING(125);
 	Category : eMessageCategory;
 END_VAR
 ]]></Declaration>
@@ -293,7 +294,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -318,7 +319,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -343,7 +344,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>

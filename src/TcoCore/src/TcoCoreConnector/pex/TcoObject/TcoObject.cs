@@ -9,7 +9,7 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoObject : IVortexIdentity
+    public partial class TcoObject : IVortexIdentity, IsTcoObject
     {
         public OnlinerULInt Identity => this._Identity;
 

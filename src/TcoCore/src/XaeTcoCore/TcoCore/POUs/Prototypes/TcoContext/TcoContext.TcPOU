@@ -69,7 +69,8 @@ END_VAR]]></Declaration>
 ~*)
 METHOD INTERNAL FINAL Close]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_endCycleCount := _startCycleCount;]]></ST>
+        <ST><![CDATA[_endCycleCount := _startCycleCount;
+THIS^.PostRun();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{63063553-badc-4ce8-a8c6-8619f5f133f3}">
@@ -181,8 +182,23 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 ~*)
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
+        <ST><![CDATA[THIS^.PriorRun();
+_startCycleCount := _startCycleCount + 1;
 _rtc.Update();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostRun" Id="{cc3ded61-78cb-0c12-3071-9c305dc097e3}">
+      <Declaration><![CDATA[METHOD PROTECTED PostRun
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PriorRun" Id="{48b3abea-36b3-0d8f-1718-3531af00fe19}">
+      <Declaration><![CDATA[METHOD PROTECTED PriorRun
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Property Name="Rtc" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">

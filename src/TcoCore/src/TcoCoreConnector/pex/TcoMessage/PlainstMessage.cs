@@ -1,4 +1,6 @@
-﻿namespace TcoCore
+﻿using System.ComponentModel;
+
+namespace TcoCore
 {
 
     public partial class PlainTcoMessage 
@@ -39,6 +41,41 @@
         public PlainTcoMessage ShallowClone()
         {
             return (PlainTcoMessage)this.MemberwiseClone();
+        }
+
+        string parentsObjectSymbol;
+        public string ParentsObjectSymbol
+        {
+            get => parentsObjectSymbol; internal set
+            {
+                if (parentsObjectSymbol == value)
+                {
+                    return;
+                }
+
+                parentsObjectSymbol = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsObjectSymbol)));
+            }
+        }
+
+        string parentsHumanReadable;
+        public string ParentsHumanReadable
+        {
+            get => parentsHumanReadable; set
+            {
+                if (parentsHumanReadable == value)
+                {
+                    return;
+                }
+
+                parentsHumanReadable = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsHumanReadable)));
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{this.TimeStamp} : '{this.Text}' | {this.CategoryAsEnum} ({this.Source})";
         }
     }
 }
