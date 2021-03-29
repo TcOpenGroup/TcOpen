@@ -18,32 +18,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Expander Grid.Row="0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <WrapPanel Grid.Row="0">
-                    <Button Command="{Binding UpdateMessagesCommand}" Content="Update" />
-                </WrapPanel>
-                <DataGrid
-                    Grid.Row="1"
-                    AutoGenerateColumns="False"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding ActiveMessages}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding TimeStamp}" Header="TimeStamp" />
-                        <DataGridTextColumn Binding="{Binding Text}" Header="Text" />
-                        <DataGridTextColumn Binding="{Binding ParentsHumanReadable}" Header="Path" />
-                        <DataGridTextColumn Binding="{Binding ParentsObjectSymbol}" Header="Symbol" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+            <local:TcoDiagnosticsView DataContext="{Binding DiagnosticsViewModel}">
+                
+            </local:TcoDiagnosticsView>
         </Expander>
         <GroupBox Grid.Row="1" Header="{Binding Converter={local:NameOrSymbolConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>

@@ -54,6 +54,16 @@ STRUCT
 ~*)
 	{attribute clr [ReadOnly()]}
 	Cycle : ULINT;
+	
+(*~
+	<docu>
+		<summary>
+			Count of message of the object in the last cycle.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}
+	PerCycleCount : BYTE;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
