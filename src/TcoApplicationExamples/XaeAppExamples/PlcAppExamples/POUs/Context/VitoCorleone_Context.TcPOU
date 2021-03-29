@@ -31,7 +31,10 @@ END_VAR
 //---------------------------------------------------------------------------
 // </ContextExampleDeclarations>
 //--
-]]></Declaration>
+
+VAR
+	
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -106,6 +109,18 @@ _isDifferentIndentity := _donCorleoneIdentity <> THIS^._santino.Identity
 // </ContextExampleCode>
 //--
 			]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MakeAnOfferThatCannotBeRefused" Id="{113c9383-a28e-0388-09cf-0da30d7810fb}">
+      <Declaration><![CDATA[METHOD MakeAnOfferThatCannotBeRefused : TcoCore.ITcoSequencer
+VAR_INPUT
+	inPersonObjectToBeRequested		:	IPerson_Object;
+	inRequestedFavor				:	STRING;
+	inReturnFavor					:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

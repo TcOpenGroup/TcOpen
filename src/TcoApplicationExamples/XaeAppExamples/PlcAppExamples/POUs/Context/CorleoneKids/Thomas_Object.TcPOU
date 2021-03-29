@@ -2,15 +2,41 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="Thomas_Object" Id="{69d01a44-cebd-0fff-162d-7a59f62e3932}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Thomas_Object EXTENDS TcoCore.TcoObject
-VAR_INPUT
-	_frank : AKid_Object(THIS^);
-	_andrew : AKid_Object(THIS^);
-	_christina : AKid_Object(THIS^);
-	_gianna : AKid_Object(THIS^);
+//VAR_INPUT
+VAR
+	_frank 		:	AKid_Object(THIS^);
+	_andrew 	:	AKid_Object(THIS^);
+	_christina 	:	AKid_Object(THIS^);
+	_gianna 	:	AKid_Object(THIS^);
+END_VAR
+VAR
+	_DeliverOfferToSomeone	: TcoCore.TcoTask(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="DeliverOfferToSomeone" Id="{247ca603-6a0c-08c2-32e4-ce18467534c5}">
+      <Declaration><![CDATA[METHOD DeliverOfferToSomeone : TcoCore.ITcoTask
+VAR_INPUT
+	inPersonObjectToBeRequested		:	IPerson_Object;
+	inRequestedFavor				:	STRING;
+	inReturnFavor					:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF _DeliverOfferToSomeone.Execute() THEN
+	inPersonObjectToBeRequested.RequestForFavor(inRequestedFavor,inReturnFavor);
+	
+	_DeliverOfferToSomeone.DoneWhen(inPersonObjectToBeRequested.Accept());
+	
+	_DeliverOfferToSomeone.ThrowWhen(inPersonObjectToBeRequested.Refuse());
+	
+END_IF
+
+DeliverOfferToSomeone := _DeliverOfferToSomeone;]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

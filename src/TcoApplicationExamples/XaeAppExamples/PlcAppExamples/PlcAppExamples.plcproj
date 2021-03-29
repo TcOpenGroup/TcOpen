@@ -45,6 +45,21 @@
     <Compile Include="POUs\Context\Leaves\AKid_Object.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Context\Objects\AnimalObjects\Horse_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\Objects\PersonObjects\Executer_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\Objects\PersonObjects\IPerson_Object.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\Objects\PersonObjects\Person_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Context\Objects\PersonObjects\Woltz_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -67,18 +82,6 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="POUs\Task\Horse_Object.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Task\Thomas_ObjectTaskExt.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Task\VitoCorleone_ContextTaskExt.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Task\Woltz_Object.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -86,6 +89,9 @@
     <Folder Include="POUs\Context" />
     <Folder Include="POUs\Context\CorleoneKids" />
     <Folder Include="POUs\Context\Leaves" />
+    <Folder Include="POUs\Context\Objects" />
+    <Folder Include="POUs\Context\Objects\AnimalObjects" />
+    <Folder Include="POUs\Context\Objects\PersonObjects" />
     <Folder Include="POUs\Task" />
     <Folder Include="POUs\Sequencer" />
     <Folder Include="VISUs" />

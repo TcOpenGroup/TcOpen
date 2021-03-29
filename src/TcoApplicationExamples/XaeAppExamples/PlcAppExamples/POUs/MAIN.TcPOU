@@ -7,11 +7,14 @@ VAR
 	_donCorleone : VitoCorleone_Context;
 	//Self-confident object, that initiate its context BY itself.	
 	_jackWaltz	:	Woltz_Object(_jackWaltz);
+//	_donCorleoneTaskExt : VitoCorleone_ContextTaskExt;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_pneuMan.Run();
-_donCorleone.Run();]]></ST>
+_donCorleone.Run();
+
+//_donCorleoneTaskExt.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

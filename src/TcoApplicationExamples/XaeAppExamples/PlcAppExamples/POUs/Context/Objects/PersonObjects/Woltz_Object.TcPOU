@@ -5,10 +5,10 @@
 // <ObjectWithoutContextExampleDeclaration>
 (*
 		
-			This is an example of self-confident object, that initiate its context by itself.	
+			This is an example of self-confident object, that initiate its context by itself.
 
 *)
-FUNCTION_BLOCK Woltz_Object EXTENDS TcoCore.TcoObject
+FUNCTION_BLOCK Woltz_Object EXTENDS Person_Object
 VAR
 	//Horse owned by Jack Woltz.
 	//https://godfather.fandom.com/wiki/Khartoum
@@ -21,18 +21,5 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{da33549e-080b-0906-3324-f3717f68b2b3}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
   </POU>
 </TcPlcObject>

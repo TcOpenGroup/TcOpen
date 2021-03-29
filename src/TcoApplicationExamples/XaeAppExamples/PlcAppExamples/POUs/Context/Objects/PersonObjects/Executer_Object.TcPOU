@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Executer_Object" Id="{6cf2ba54-d2cb-0a9f-316a-a860ff9dc167}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Executer_Object EXTENDS TcoCore.TcoObject
+VAR
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Identity" Id="{95bef5fa-169e-0173-37b9-b1fdfef23db6}">
+      <Declaration><![CDATA[{attribute 'hide'}
+PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{3212a690-c280-0ebe-1ded-a4e9a2b594c5}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Identity := 0;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

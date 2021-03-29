@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="IPerson_Object" Id="{ad495d6f-6831-0e74-1e94-18ac17fa1c77}">
+    <Declaration><![CDATA[INTERFACE IPerson_Object EXTENDS TcoCore.ITcoObject
+]]></Declaration>
+    <Method Name="Accept" Id="{9dbf19c4-a5e3-0af4-0444-a3098608e93d}">
+      <Declaration><![CDATA[METHOD Accept : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Refuse" Id="{1e28acde-074e-04f4-2cfa-8e25a152b64d}">
+      <Declaration><![CDATA[METHOD Refuse : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="RequestForFavor" Id="{9d333f29-8850-0eab-069a-14e73f68b7c9}">
+      <Declaration><![CDATA[METHOD PUBLIC RequestForFavor
+VAR_INPUT
+	inRequestedFavor	:	STRING;
+	inReturnFavor		:	STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
