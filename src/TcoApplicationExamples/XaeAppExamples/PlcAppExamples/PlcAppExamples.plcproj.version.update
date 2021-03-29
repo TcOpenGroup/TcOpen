@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>PlcAppExamples</Title>
-    <ProjectVersion>0.1.0.190</ProjectVersion>
+    <ProjectVersion>0.1.0.206</ProjectVersion>
     <DefaultNamespace>PlcAppExamples</DefaultNamespace>
     <Placeholder>PlcAppExamples</Placeholder>
   </PropertyGroup>
@@ -67,6 +67,9 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="POUs\Task\Woltz_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -74,6 +77,7 @@
     <Folder Include="POUs\Context" />
     <Folder Include="POUs\Context\CorleoneKids" />
     <Folder Include="POUs\Context\Leaves" />
+    <Folder Include="POUs\Task" />
     <Folder Include="POUs\Sequencer" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

@@ -9,12 +9,12 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoContext : IVortexIdentity, IsTcoContext
+    public partial class TcoContext : IVortexIdentity, IsTcoContext, IsTcoObject
     {
         private readonly IList<TcoMessage> _messages = new List<TcoMessage>();
         internal IEnumerable<TcoMessage> Messages { get { return _messages; } }
         
-        public IEnumerable<PlainTcoMessage> ActiveMessages { get { return Messages.Where(p => p.IsActive).Select(p => p.PlainMessage); } }
+        public IEnumerable<PlainTcoMessage> ActiveMessages { get { return GetActiveMessages(); } }
 
         public OnlinerULInt Identity => this._Identity;
 
@@ -34,16 +34,30 @@ namespace TcoCore
 
         public void RefreshActiveMessages()
         {
+            var activeMessgages = GetActiveMessages();
+        }
+
+        /// <summary>
+        /// Performs refresh of the messages of this <see cref="TcoObject"/> and all its child object.
+        /// </summary>
+        /// <returns>Enumerable of messages as POCO object.</returns>
+        public IEnumerable<PlainTcoMessage> GetActiveMessages()
+        {
             if (refreshTags == null)
             {
                 refreshTags = new List<IValueTag>();
                 refreshTags.Add(this._startCycleCount);
-                refreshTags.AddRange(Messages.Select(p => p.Cycle));
+                refreshTags.AddRange(GetObjectMessages().Select(p => p.Cycle));
             }
 
             this.GetConnector().ReadBatch(refreshTags);
 
-            var activeMessgages = Messages.Where(p => p.Cycle.LastValue >= this._startCycleCount.LastValue);            
+            return GetObjectMessages().Where(p => p.IsActive).Select(p => p.PlainMessage);
+        }
+
+        private IEnumerable<TcoMessage> GetObjectMessages()
+        {
+            return this.GetDescendants<TcoMessage>();
         }
     }
 }

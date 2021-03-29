@@ -38,12 +38,20 @@ namespace TcoCore
             }
         }
               
+        /// <summary>
+        /// Gets memberwise clone of this <see cref="PlainTcoMessage"/>
+        /// </summary>
+        /// <returns></returns>
         public PlainTcoMessage ShallowClone()
         {
             return (PlainTcoMessage)this.MemberwiseClone();
         }
 
         string parentsObjectSymbol;
+
+        /// <summary>
+        /// Gets symbol of the parent <see cref="TcoObject"/> that own this message.
+        /// </summary>
         public string ParentsObjectSymbol
         {
             get => parentsObjectSymbol; internal set
@@ -59,6 +67,10 @@ namespace TcoCore
         }
 
         string parentsHumanReadable;
+
+        /// <summary>
+        /// Gets <see cref="Vortex.Connector.IVortexElement.HumanReadable"/> of the parent <see cref="TcoObject"/> that own this message.
+        /// </summary>
         public string ParentsHumanReadable
         {
             get => parentsHumanReadable; set
@@ -73,6 +85,10 @@ namespace TcoCore
             }
         }
 
+        /// <summary>
+        /// Get this message in string format.
+        /// </summary>
+        /// <returns>Formatted message</returns>
         public override string ToString()
         {
             return $"{this.TimeStamp} : '{this.Text}' | {this.CategoryAsEnum} ({this.Source})";

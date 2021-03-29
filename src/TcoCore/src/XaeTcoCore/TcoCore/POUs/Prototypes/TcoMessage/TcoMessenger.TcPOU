@@ -246,15 +246,17 @@ END_VAR
 	IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel) THEN
 		RETURN;
 	END_IF; 
-	
+		
+	_mime.PerCycleCount := _mime.PerCycleCount + 1;
 	// Same cycle filter for most important messge.
-	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN 
+	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
 		IF(Category > _mime.Category) THEN	 
 			Compose(Message, Category);
 		END_IF;
 	ELSE
-	// Different cycle	
-		Compose(Message, Category);
+	// Different cycle		
+		_mime.PerCycleCount := 1;	
+		Compose(Message, Category);		
 	END_IF;	
 END_IF;	
 

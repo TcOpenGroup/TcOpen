@@ -48,6 +48,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Border>
+                <Expander Grid.Row="2">
+                    <local:TcoDiagnosticsView DataContext="{Binding DiagnosticsViewModel}"></local:TcoDiagnosticsView>
+                </Expander>
             </Grid>
         </GroupBox>
     </Grid>

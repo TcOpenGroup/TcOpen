@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Vortex.Connector;
-
-namespace TcoCore
+﻿namespace TcoCore
 {
-    public partial class TcoMessage : INotifyPropertyChanged
-    {        
+    using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using Vortex.Connector;
+    using Vortex.Presentation;
+
+    public partial class TcoMessage
+    {
+        private IsTcoContext _context;
+
+        private IsTcoObject _parentObject;
+
+        private readonly PlainTcoMessage _plain = new PlainTcoMessage();       
+
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             _context = parent.GetParent<IsTcoContext>();
@@ -16,30 +22,29 @@ namespace TcoCore
             _parentObject = parent.GetParent<IsTcoObject>();
         }
 
-        private IsTcoObject _parentObject;
-
-        private IsTcoContext _context;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// Gets whether this <see cref="TcoMessage"/> is active. The message is active when the <see cref="TcoMessage.Cycle"/> value is equal to <see cref="TcoContext.LastStartCycleCount"/>
+        /// </summary>
         public bool IsActive
         {
             get
             {
-                if(_context != null)
-                {                                        
-                    return _context.LastStartCycleCount <= this.Cycle.LastValue;
+                if (_context != null)
+                {                    
+                    return this.Cycle.LastValue >= _context.LastStartCycleCount;
                 }
 
                 return false;
             }
         }
 
-        private readonly PlainTcoMessage _plain = new PlainTcoMessage();
+        /// <summary>
+        /// Gets the message in plain .net type system (aka POCO object).
+        /// </summary>
         public PlainTcoMessage PlainMessage
         {
             get
-            {
+            {                
                 this.FlushOnlineToPlain(_plain);
                 _plain.ParentsObjectSymbol = this._parentObject?.Symbol;
                 _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
@@ -47,7 +52,7 @@ namespace TcoCore
                 _plain.Text = this.Text.Translator.Translate(StringInterpolator.Interpolate(_plain.Text, identity));
                 _plain.Source = _plain.ParentsObjectSymbol;
                 _plain.Location = _plain.ParentsHumanReadable;
-                return _plain;                   
+                return _plain;
             }
         }
     }

@@ -23,6 +23,7 @@ namespace TcoCore
         {
             Tasks = TcoContext.GetChildren<TcoTask>();
             TcoObjectChildren = TcoContext.GetChildren<TcoObject>(Tasks);
+            DiagnosticsViewModel = new TcoDiagnosticsViewViewModel(this.TcoContext);
         }
 
         public TcoContext TcoContext { get; private set; }
@@ -58,5 +59,6 @@ namespace TcoCore
         }
 
         public RelayCommand UpdateMessagesCommand { get; }
+        public TcoDiagnosticsViewViewModel DiagnosticsViewModel { get; private set; }
     }
 }

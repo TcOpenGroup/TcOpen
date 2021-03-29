@@ -20,7 +20,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Context-Rendered">
-                <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR}" />
+                <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR._context}" />
             </TabItem>
         </TabControl>
     </Grid>
