@@ -13,5 +13,7 @@ namespace TcoCore
         IEnumerable<PlainTcoMessage> ActiveMessages { get; }
 
         ulong LastStartCycleCount { get; }
+
+        void RefreshActiveMessages();
     }
 }

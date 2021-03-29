@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="_internals_TcoContext" Id="{0c059046-c7d3-0372-268c-dca3da778e0c}" SpecialFunc="None">
+  <POU Name="TcoContextCompatibility" Id="{13780382-a22f-0e35-3f52-856d3d4a5d71}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'hide'}
 {attribute clr [ExcludeFromApiDocumentation()]}
-FUNCTION_BLOCK ABSTRACT _internals_TcoContext EXTENDS TcoContext
+FUNCTION_BLOCK ABSTRACT TcoContextCompatibility EXTENDS TcoContext
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="_Close" Id="{e2e1d492-d989-0bc8-0108-b8347f5c2d4e}">
+    <Method Name="_Close" Id="{ca63b2ce-d477-0f9f-02f9-549ed36e627f}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PROTECTED FINAL _Close
 
@@ -17,15 +17,7 @@ METHOD PROTECTED FINAL _Close
         <ST><![CDATA[THIS^.Close();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="_GetSynchParams" Id="{e3cf5488-c586-0883-2979-a24e3d4feb8c}">
-      <Declaration><![CDATA[METHOD _GetSynchParams : RtcSynchParams
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_GetSynchParams := RtcPrg._RtcSynchParams;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="_Open" Id="{d83dfe53-3a8f-0733-3457-8d9db7cfe99c}">
+    <Method Name="_Open" Id="{3cc7bb33-d3b0-01f7-3a73-00a2aa792610}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PROTECTED FINAL _Open
 ]]></Declaration>

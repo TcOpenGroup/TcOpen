@@ -13,10 +13,10 @@ namespace TcoCore
         {
             _context = parent.GetParent<IsTcoContext>();
             _context.AddMessage(this);
-            _parentObject = parent.GetParent<TcoObject>();
+            _parentObject = parent.GetParent<IsTcoObject>();
         }
 
-        private TcoObject _parentObject;
+        private IsTcoObject _parentObject;
 
         private IsTcoContext _context;
 
@@ -45,42 +45,9 @@ namespace TcoCore
                 _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
                 var identity = this.Connector.IdentityProvider.GetVortexerByIdentity(_plain.Identity);
                 _plain.Text = this.Text.Translator.Translate(StringInterpolator.Interpolate(_plain.Text, identity));
-                _plain.Source = identity.Symbol;
-                _plain.Location = identity.HumanReadable;
+                _plain.Source = _plain.ParentsObjectSymbol;
+                _plain.Location = _plain.ParentsHumanReadable;
                 return _plain;                   
-            }
-        }
-    }
-
-    public partial class PlainTcoMessage
-    {
-        string parentsObjectSymbol;
-        public string ParentsObjectSymbol
-        {
-            get => parentsObjectSymbol; internal set
-            {
-                if (parentsObjectSymbol == value)
-                {
-                    return;
-                }
-
-                parentsObjectSymbol = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsObjectSymbol)));
-            }
-        }
-
-        string parentsHumanReadable;
-        public string ParentsHumanReadable
-        {
-            get => parentsHumanReadable; set
-            {
-                if (parentsHumanReadable == value)
-                {
-                    return;
-                }
-
-                parentsHumanReadable = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsHumanReadable)));
             }
         }
     }
