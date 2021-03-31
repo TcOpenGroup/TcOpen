@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="MAIN" Id="{cb90af5d-f0ec-4337-9183-9e58e9e11014}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="PRG_MAIN" Id="{cb90af5d-f0ec-4337-9183-9e58e9e11014}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_MAIN
 VAR
 	_pneuMan : ST_01_Context;
 	_donCorleone : VitoCorleone_Context;
