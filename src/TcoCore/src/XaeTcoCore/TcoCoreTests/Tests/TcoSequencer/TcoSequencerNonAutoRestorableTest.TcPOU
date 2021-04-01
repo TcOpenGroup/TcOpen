@@ -220,6 +220,14 @@ THIS^._Sequencer.Run();
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="RegisterRestorer" Id="{69a67624-bbd3-0b6c-33ae-337e7646bff1}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD RegisterRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Sequencer._TcoState.RegisterRestorer(_Sequencer);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="RequestStep" Id="{07897374-03d3-0f65-3bbc-c34c3d9b721c}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD RequestStep
@@ -406,6 +414,14 @@ METHOD StepIn]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Sequencer.StepIn();
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UnregisterRestorer" Id="{6f131c43-523a-027d-2eda-b723b289d2af}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD UnregisterRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Sequencer._TcoState.UnregisterRestorer(_Sequencer);]]></ST>
       </Implementation>
     </Method>
     <Method Name="UpdateCurrentStepDetails" Id="{44a4b22c-60d5-0113-140a-edda3c2eedd4}">

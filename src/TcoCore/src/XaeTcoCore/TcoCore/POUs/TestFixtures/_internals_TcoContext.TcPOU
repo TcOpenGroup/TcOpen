@@ -33,5 +33,14 @@ METHOD PROTECTED FINAL _Open
         <ST><![CDATA[THIS^.Open();]]></ST>
       </Implementation>
     </Method>
+    <Method Name="_rtcUpdate" Id="{cb574abf-9f5d-03d2-0459-a21349c4ee2b}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _rtcUpdate
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._rtc.Update();]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

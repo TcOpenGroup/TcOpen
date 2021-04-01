@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>0.1.0.206</ProjectVersion>
+    <ProjectVersion>0.1.0.213</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
@@ -43,6 +43,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoManageable\ITcoManageable.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\eMessageCategory.TcDUT">
@@ -144,6 +147,7 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
+    <Folder Include="POUs\Prototypes\TcoManageable" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
     <Folder Include="POUs\TestFixtures" />
     <Folder Include="POUs\Prototypes" />

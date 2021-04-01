@@ -21,6 +21,8 @@ END_IF
 
 IF THIS^._CallMyPlcInstanceRun THEN
 	THIS^.Run();
+	_NowLocal			:=	THIS^.Rtc.NowLocal();
+	_NowUtc				:=	THIS^.Rtc.NowUTC();
 	_RtcIsValid			:=	THIS^.Rtc.IsValid;
 	_RtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
 	_MyIdentity			:=	THIS^.Identity;

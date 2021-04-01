@@ -14,4 +14,4 @@ using Vortex.Presentation.Wpf;
 [assembly:RenderableAssembly]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+206.Branch.init-dev.Sha.fdbb6213fd992094cfe3816d54b8e4e1cce2ef10")]
+[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+213.Branch.init-dev.Sha.f6ab2df7674be4e437eecd7dcd66a3e56930cbc3")]

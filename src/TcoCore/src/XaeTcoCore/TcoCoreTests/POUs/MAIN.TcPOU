@@ -11,16 +11,7 @@ VAR
 	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
 	_TcoMessengerContextTest			:	TcoMessengerContextTest;
 	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
-	
-	_call : BOOL;
-	_ntglt :Tc2_Utilities.NT_GetTime;
-	_state : UINT;
-	_pdt : Tc2_Utilities.TIMESTRUCT;
-	_isValid : BOOL;
-	_rtcex2 : Tc2_Utilities.RTC_EX2;
-	_local  : Tc2_Utilities.TIMESTRUCT;
-	_localDT  : DATE_AND_TIME;
-	
+
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_TcoRtcTest_A();
@@ -38,42 +29,6 @@ _TcoSequencerNonAutoRestorableTest();
 _TcoMessengerContextTest();
 
 _TcoContextMessagingPerf();
-
-IF _call THEN
-	IF _state = 0 THEN
-		_ntglt(START := FALSE);
-		_ntglt(NETID := '127.0.0.1.1.1',
-				START := TRUE);
-		IF _ntglt.BUSY AND NOT _ntglt.ERR THEN
-			_state := _state + 10;
-		END_IF
-	END_IF
-
-	IF _state = 10 THEN
-		_ntglt();
-		IF NOT _ntglt.BUSY AND NOT _ntglt.ERR THEN
-			_state := _state + 10;
-		END_IF
-	END_IF
-	
-	IF _state = 20 THEN
-		_ntglt(START := FALSE);
-		_pdt := _ntglt.TIMESTR;
-		_isValid := TRUE;
-		_call := FALSE;
-		_state :=_state+ 10;
-	END_IF
-	_rtcex2(EN := _isValid,PDT := _pdt);
-	
-	_local := _rtcex2.CDT;
-	_localDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_local);
-
-
-	_call := FALSE;
-ELSE
-	//state :== 0;
-	RETURN;	
-END_IF
 ]]></ST>
     </Implementation>
   </POU>

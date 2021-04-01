@@ -13,7 +13,6 @@ namespace TcoCoreUnitTests
     public class T08_TcoMessengerTests
     {
 
-        TcoCoreTests.TcoRtcTest rtc = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._TcoRtcTest_A;
         TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest._TcoMessangerTests;
         TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest;
 
@@ -21,24 +20,18 @@ namespace TcoCoreUnitTests
         [OneTimeSetUp]
         public void OneSetup()
         {
-            suc._CallMyPlcInstance.Synchron = true;
-            while (!suc.RtcIsValid()) { }
-            suc._CallMyPlcInstance.Synchron = false;
+            suc._CallMyPlcInstanceRtcUpdate.Synchron = true;
         }
 
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            suc._CallMyPlcInstance.Synchron = false;
         }
 
         [SetUp]
         public void Setup()
         {
-            //suc._CallMyPlcInstance.Synchron = true;
-            //while (!suc.RtcIsValid()) { }
-            //suc._CallMyPlcInstance.Synchron = false;
         }
 
         [Test, Order(100)]

@@ -26,8 +26,6 @@ namespace TcoCoreUnitTests
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            tc_A._CallMyPlcInstanceSync.Synchron = false;       //Switch off the cyclical execution of the _TcoRtcTest_A RtcSynchronize() method
-            tc_B._CallMyPlcInstanceSync.Synchron = false;       //Switch off the cyclical execution of the _TcoRtcTest_B RtcSynchronize() method
             tc_A._CallMyPlcInstanceRun.Synchron = false;        //Switch off the cyclical execution of the _TcoRtcTest_A Run() method
             tc_B._CallMyPlcInstanceRun.Synchron = false;        //Switch off the cyclical execution of the _TcoRtcTest_B Run() method
         }
@@ -225,7 +223,9 @@ namespace TcoCoreUnitTests
 
             TimeSpan _PlcDuration = _endPLCTime - _startPLCTime;
             TimeSpan _DotNetDuration = _endDotNetTime - _startDotNetTime;
-            Assert.AreEqual(Delay, _PlcDuration.TotalMilliseconds); //Check if time difference is equal.
+
+            Assert.LessOrEqual(Delay,
+                _PlcDuration.TotalMilliseconds);            //Check if time difference is equal.
 
             Assert.LessOrEqual(Math.Abs(_PlcDuration.TotalMilliseconds - _DotNetDuration.TotalMilliseconds), 1000);
         }

@@ -3,15 +3,26 @@
   <POU Name="TcoMessengerContextTest" Id="{ab1f1c15-693e-0b9d-1dc8-8f3fbcb09dcf}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
-	_CallMyPlcInstance 		:	BOOL := FALSE;
+	_CallMyPlcInstanceRtcUpdate	:	BOOL := FALSE;
+	_CallMyPlcInstanceRun	:	BOOL := FALSE;
+	_NowLocal				:	DATE_AND_TIME;
+	_NowUtc					:	DATE_AND_TIME;
+	_RtcIsValid				:	BOOL := FALSE;
+	_RtcIsSynchronized		:	BOOL := FALSE;
 	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
-	_RtcIsValid				:	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF THIS^._CallMyPlcInstance THEN
+      <ST><![CDATA[IF THIS^._CallMyPlcInstanceRtcUpdate THEN
+	THIS^._rtcUpdate();
+	_NowLocal			:=	THIS^.Rtc.NowLocal();
+	_NowUtc				:=	THIS^.Rtc.NowUTC();
+	_RtcIsValid			:=	THIS^.Rtc.IsValid;
+	_RtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+END_IF
+
+IF THIS^._CallMyPlcInstanceRun THEN
 	THIS^.Run();
-	THIS^.RtcIsValid();
 END_IF
 
 ]]></ST>
