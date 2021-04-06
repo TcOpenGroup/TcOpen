@@ -6,6 +6,7 @@ VAR
 	_IsBusy							:	BOOL;	
 	_IsError						:	BOOL;	
 	_IsDone							:	BOOL;	
+	_IsReady						:	BOOL;	
 	_CounterSetValue				:	ULINT;
 	_CounterValue					:	ULINT;
 	_InvokeCounter					:	ULINT;
@@ -27,21 +28,35 @@ END_VAR
     <Implementation>
       <ST><![CDATA[ExecutionBody();]]></ST>
     </Implementation>
+    <Method Name="Disable" Id="{30e8d443-19f6-08b1-1d86-48a460b2b63c}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Disable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{cd30d735-ff17-02c7-26d6-c091a49a074d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Enable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="ExecutionBody" Id="{77a5a45d-9cd7-4d75-83c5-1e7025fc00d2}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ExecutionBody]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(THIS^._taskState = eTaskState.Request) THEN
+        <ST><![CDATA[IF(THIS^._taskState = eTaskState.Requested) THEN
 	_InvokeCounter := _InvokeCounter + 1; 
 END_IF;
 
-IF(THIS^._taskState = eTaskState.Request AND _PreviousState <> eTaskState.Request) THEN
+IF(THIS^._taskState = eTaskState.Requested AND _PreviousState <> eTaskState.Requested) THEN
 	_CounterValue	:=	_CounterSetValue;
 	_CounterValuePV := _CounterValue;
 	_InvokeRisingEdgeCounter := _InvokeRisingEdgeCounter + 1;
 END_IF
 
-IF(THIS^._taskState = eTaskState.Executing AND _PreviousState <> eTaskState.Executing) THEN
+IF(THIS^._taskState = eTaskState.Busy AND _PreviousState <> eTaskState.Busy) THEN
 	_ExecuteRisingEdgeCounter := _ExecuteRisingEdgeCounter + 1;
 END_IF
 
@@ -115,14 +130,14 @@ METHOD INTERNAL ReadOutState]]></Declaration>
         <ST><![CDATA[_IsBusy		:=	THIS^.Busy;	
 _IsError	:=	THIS^.Error;	
 _IsDone		:=	THIS^.Done;	
-]]></ST>
+_IsReady	:=	THIS^.Ready;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetPreviousStateToIdle" Id="{5b4ca5af-515c-4456-914e-015624dcdd9a}">
+    <Method Name="SetPreviousStateToReady" Id="{5b4ca5af-515c-4456-914e-015624dcdd9a}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetPreviousStateToIdle]]></Declaration>
+METHOD INTERNAL SetPreviousStateToReady]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._PreviousState := eTaskState.Idle;]]></ST>
+        <ST><![CDATA[THIS^._PreviousState := eTaskState.Ready;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TriggerAbort" Id="{fb8d5aab-1b46-4b74-a563-a929ff61965a}">

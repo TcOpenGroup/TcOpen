@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="RtcSynchParams" Id="{42dc72eb-0de2-035a-36d8-926288be288b}">
+    <Declaration><![CDATA[TYPE RtcSynchParams :
+STRUCT
+	synchContextIdentity	:	ULINT;
+	doSynch					:	BOOL;
+	syncAmsId				:	STRING;
+	syncPeriod				:	UINT; 
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

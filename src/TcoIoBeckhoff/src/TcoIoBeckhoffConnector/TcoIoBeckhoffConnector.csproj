@@ -4,10 +4,16 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net48</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Authors>petok</Authors>
+    <!--NuGet properties-->
+    <PackageId>TcOpen.TcoIoBeckhoffConnector</PackageId>
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>https://tcopengroup.github.io/TcOpen.Documentation/</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="_meta\TcoIoBeckhoff.json" />
@@ -21,7 +27,7 @@
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.5-nightly.207" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.6-nightly.260" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

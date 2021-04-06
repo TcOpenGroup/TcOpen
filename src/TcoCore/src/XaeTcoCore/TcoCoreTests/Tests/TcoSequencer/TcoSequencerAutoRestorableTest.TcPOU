@@ -3,6 +3,7 @@
   <POU Name="TcoSequencerAutoRestorableTest" Id="{562bb59c-4938-0c9c-3dbf-3bf62db74778}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
+	_CallMyPlcInstance	:	BOOL := FALSE;
 	_Sequencer : _TcoSequencer(THIS^, TRUE);
 	_RunPLCinstanceOnce : BOOL := FALSE;
 	_RunPLCinstanceCyclicaly : BOOL := FALSE;
@@ -12,43 +13,44 @@ VAR
 	_RunOneStep : BOOL;
 	_RunAllSteps : BOOL;
 	_FinishStep : BOOL;
-	_Reset : BOOL;
+	_Restore : BOOL;
 	_CycleCount : INT;
-	_ResetCycleCount : INT;
+	_RestoreCycleCount : INT;
 	_Init: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT _Init THEN
-	ContextOpen();	
-	ContextClose();	
-	_Init := TRUE;
-END_IF
-
-IF _Reset THEN
-	ContextOpen();	
-	THIS^._Sequencer.Reset();	
-	_ResetCycleCount := _ResetCycleCount + 1;
-	_Reset := FALSE;
-	ContextClose();	
-	RETURN;
-END_IF
-
-IF _RunPLCinstanceOnce AND NOT _RunPLCinstanceCyclicaly THEN
-	ContextOpen();	
-	THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
-	_CycleCount := _CycleCount + 1;
-	_RunPLCinstanceOnce := FALSE;
-	ContextClose();	
-END_IF
-
-IF _RunPLCinstanceCyclicaly AND NOT _RunPLCinstanceOnce THEN
-	ContextOpen();	
-	THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
-	_CycleCount := _CycleCount + 1;
-	ContextClose();	
-END_IF
-
+      <ST><![CDATA[IF _CallMyPlcInstance THEN
+	IF NOT _Init THEN
+		ContextOpen();	
+		ContextClose();	
+		_Init := THIS^._rtc.IsValid;
+	END_IF
+	
+	IF _Restore THEN
+		ContextOpen();	
+		THIS^._Sequencer.Restore();	
+		_RestoreCycleCount := _RestoreCycleCount + 1;
+		_Restore := FALSE;
+		ContextClose();	
+		RETURN;
+	END_IF
+	
+	IF _RunPLCinstanceOnce AND NOT _RunPLCinstanceCyclicaly THEN
+		ContextOpen();	
+		THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
+		_CycleCount := _CycleCount + 1;
+		_RunPLCinstanceOnce := FALSE;
+		ContextClose();	
+	END_IF
+	
+	IF _RunPLCinstanceCyclicaly AND NOT _RunPLCinstanceOnce THEN
+		ContextOpen();	
+		THIS^.PLCinstanceRun(_StepID , _Enabled, _StepDescription);
+		_CycleCount := _CycleCount + 1;
+		ContextClose();	
+	END_IF
+END_IF;	
 ]]></ST>
     </Implementation>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{c5f7e550-1c06-02b1-3dc1-0350c51bf48f}">
@@ -217,6 +219,14 @@ THIS^._Sequencer.Run();
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="RegisterRestorer" Id="{ec8079f8-dbd8-075c-3387-e7f4412549cb}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD RegisterRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Sequencer._TcoState.RegisterRestorer(_Sequencer);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="RequestStep" Id="{d064fc61-7128-02aa-26bf-bd5b5c4a4123}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD RequestStep
@@ -228,11 +238,11 @@ END_VAR
         <ST><![CDATA[_Sequencer.RequestStep(inRequestedStepId);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Reset" Id="{74637749-b130-086a-1666-3cbc30d0057d}">
+    <Method Name="Restore" Id="{74637749-b130-086a-1666-3cbc30d0057d}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD Reset ]]></Declaration>
+METHOD Restore ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.Reset();
+        <ST><![CDATA[_Sequencer.Restore();
 ]]></ST>
       </Implementation>
     </Method>
@@ -368,7 +378,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Step := _Sequencer.Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
+        <ST><![CDATA[Step := _Sequencer._Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepBackward" Id="{efaa54c3-3ad2-0cc0-1bfc-95f39d7fc5fc}">
@@ -403,6 +413,14 @@ METHOD StepIn]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Sequencer.StepIn();
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UnregisterRestorer" Id="{2858112b-ca07-09a1-0337-0ac1bc1a1b0e}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD UnregisterRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Sequencer._TcoState.UnregisterRestorer(_Sequencer);]]></ST>
       </Implementation>
     </Method>
     <Method Name="UpdateCurrentStepDetails" Id="{dee5e4a8-6675-06d9-2524-11319c1dcd1a}">

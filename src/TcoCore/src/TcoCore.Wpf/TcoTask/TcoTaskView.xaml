@@ -20,14 +20,14 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <vortex:RenderableContentControl DataContext="{Binding TcoTask._taskState}" PresentationType="Display"/>
-                <UniformGrid Grid.Row="1">
-                    <Button Command="{Binding ResetCommand}">
-                        <iconPacks:PackIconModern Kind="Reset" />
-                    </Button>
+                <StackPanel Grid.Row="1">
                     <Button Command="{Binding InvokeCommand}">
                         <iconPacks:PackIconEntypo Kind="ControllerPlay" />
                     </Button>
-                </UniformGrid>
+                    <Button Command="{Binding RestoreCommand}">
+                        <iconPacks:PackIconModern Kind="Reset" />
+                    </Button>
+                </StackPanel>
             </Grid>
         </GroupBox>
     </Grid>

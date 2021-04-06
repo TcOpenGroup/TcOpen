@@ -1,0 +1,162 @@
+﻿<UserControl
+    x:Class="TcoCore.TcoDiagnosticsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="clr-namespace:TcoCore.Wpf.Properties"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:vtr="clr-namespace:TcoCore"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <d:UserControl.DataContext>
+        <vtr:TcoDiagnosticsViewViewModel/>
+    </d:UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="150" MaxHeight="300" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ComboBox
+                Grid.Column="0"
+            Margin="0,0,0,10"
+            ItemsSource="{Binding Categories}"
+            SelectedItem="{Binding MinMessageCategoryFilter}"
+            Tag="{x:Static loc:Localization.MinCategoryFilter}" />
+            <ToggleButton
+                Margin="10"
+                IsChecked="{Binding AutoUpdate}"
+                Grid.Column="1" Content="{x:Static loc:Localization.AutoUpdate}" Visibility="Collapsed"></ToggleButton>
+            <Button
+                Margin="10"
+                Command="{Binding UpdateMessagesCommand}"
+                Grid.Column="2" Content="{x:Static loc:Localization.UpdateMessages}"></Button>
+        </Grid>
+        <DataGrid
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding MessageDisplay}"
+            SelectedItem="{Binding SelectedMessage}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBrushConverter}}" Text="{Binding TimeStamp}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.Message}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBrushConverter}}" Text="{Binding Text}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.Location}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBrushConverter}}" Text="{Binding Location}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.PerCycleCount}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBrushConverter}}" Text="{Binding PerCycleCount}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GridSplitter
+            Grid.Row="2"
+            HorizontalAlignment="Stretch"
+            Background="{DynamicResource Secondary}" />
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel DataContext="{Binding SelectedMessage}">
+                <GroupBox Header="{x:Static loc:Localization.Message}">
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="Left"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBrushConverter}}"
+                        Text="{Binding Text}"
+                        TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+                <UniformGrid HorizontalAlignment="Stretch" Rows="1">
+                    <GroupBox Header="{x:Static loc:Localization.Category}">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding CategoryAsEnum}"
+                            TextWrapping="WrapWithOverflow" />
+                    </GroupBox>
+                    <GroupBox Header="{x:Static loc:Localization.SubCategory}">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding SubCategory}"
+                            TextWrapping="WrapWithOverflow" />
+                    </GroupBox>
+                    <GroupBox Header="{x:Static loc:Localization.Location}">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding Location}"
+                            TextWrapping="WrapWithOverflow" />
+                    </GroupBox>
+                    <GroupBox Header="{x:Static loc:Localization.Source}">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding Source}"
+                            TextWrapping="WrapWithOverflow" />
+                    </GroupBox>
+                </UniformGrid>
+            </StackPanel>
+            <Expander Grid.Row="1" Header="{x:Static loc:Localization.AffectedObject}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ComboBox ItemsSource="{Binding PresentationTypes}" SelectedValue="{Binding AffectedObjectPresentationType}" Tag="Presentation type" Margin="0,10,0,10">
+                       
+                    </ComboBox>
+                    <ScrollViewer Grid.Row="1">
+                        <ContentControl Content="{Binding AffectedObject}"/>
+                    </ScrollViewer>
+                </Grid>
+            </Expander>
+        </Grid>
+        <TextBlock Grid.Row="4" Text="{x:Static loc:Localization.DiagnosticsRunnig}" 
+                   HorizontalAlignment="Stretch"
+                   Padding="5"
+                   Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}"
+                   Background="{DynamicResource Warning}"
+                   Foreground="{DynamicResource OnWarning}"/>
+        
+
+
+    </Grid>
+</UserControl>

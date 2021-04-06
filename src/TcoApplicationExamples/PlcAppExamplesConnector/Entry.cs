@@ -9,7 +9,7 @@ namespace PlcAppExamples
 {
     public static class Entry
     {
-        const string amsId = "172.20.10.2.1.1";
+        static string amsId = Environment.GetEnvironmentVariable("Tc3Target");
         const int amsPort = 851;
 
         public static PlcAppExamples.PlcAppExamplesTwinController PlcAppExamples { get; }

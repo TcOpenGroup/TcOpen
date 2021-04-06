@@ -12,7 +12,7 @@
   $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
   $dotnet = '"C:\Program Files\dotnet\dotnet.exe"'
   $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
-  $testTargetAmsId = ""
+  $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
 }
 
 task default -depends CloseVs, Tests, CreatePackages, Finish
@@ -143,19 +143,19 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
   $BootDir = $solutionDir +"\src\TcoCore\src\XaeTcoCore\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoCore\TcoCore.slnf -c $buildConfig -f net48 -v $msbuildVerbosity
+    dotnet test .\src\TcoCore\TcoCore.slnf -c $buildConfig -f net48 -v $msbuildVerbosity -l:"trx;LogFileName=TEST-TcoCore.xml"
   }
 
   $BootDir = $solutionDir +"\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf -c $buildConfig -f net48 -v $msbuildVerbosity
+    dotnet test .\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf -c $buildConfig -f net48 -v $msbuildVerbosity -l:"trx;LogFileName=TEST-TcoIoBeckhoff.xml"
   }
 
   $BootDir = $solutionDir +"src\TcoPneumatics\src\XaeTcoPneumatics\"
   .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir
   exec{   
-    dotnet test .\src\TcoPneumatics\TcoPneumatics.slnf -c $buildConfig -f net48 -v $msbuildVerbosity
+    dotnet test .\src\TcoPneumatics\TcoPneumatics.slnf -c $buildConfig -f net48 -v $msbuildVerbosity -l:"trx;LogFileName=TEST-TcoPneumatics.xml"
   }
   .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId
 
@@ -190,8 +190,7 @@ task CreatePackages -depends ClearPackages {
 }
 
 task PublishPackages -depends CreatePackages -precondition {return $publishNugets} {
-  Write-Host "About to"
-  PushNugets -folderWithNugets .\nugets\dependants -token $nugetToken -source $nugetSource
+  Write-Host "About to" 
   PushNugets -folderWithNugets .\nugets -token $nugetToken -source $nugetSource
 }
 

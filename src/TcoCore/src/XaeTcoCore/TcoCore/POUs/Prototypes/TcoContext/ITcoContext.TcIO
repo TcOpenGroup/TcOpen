@@ -9,6 +9,18 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="Environment" Id="{6eaa7498-1d19-0a13-0e89-7e25c3e22943}">
+      <Declaration><![CDATA[PROPERTY Environment : ITcoContextEnvironment]]></Declaration>
+      <Get Name="Get" Id="{29de8b00-48da-0196-233a-df201ec80325}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Rtc" Id="{a8f4d1c6-2d8d-0ba5-21b5-6c50c789cfac}">
+      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+      <Get Name="Get" Id="{687aebad-3b3d-04fd-11f3-3dbbbbe35dfb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="StartCycleCount" Id="{07375695-36dd-4eef-96de-a19ffb2e7fb5}">
       <Declaration><![CDATA[PROPERTY StartCycleCount : ULINT]]></Declaration>
       <Get Name="Get" Id="{777fb9d8-cfe2-4a4e-8b02-06212d36a736}">

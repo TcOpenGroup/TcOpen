@@ -120,6 +120,16 @@ THIS^._TcoTaskTest_B.ReadOutState();
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="RegisterRestorerForAllChilds" Id="{21f4a601-064e-0f6d-0036-276bdf1e4f2f}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL RegisterRestorerForAllChilds]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TcoTaskTest_A.RegisterRestorer(THIS^);
+_TcoTaskTest_B.RegisterRestorer(THIS^);
+_TcoStateTest_A.RegisterRestorer(THIS^);
+_TcoStateTest_B.RegisterRestorer(THIS^);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="TriggerChangeState" Id="{700ce7cc-dcaf-42d5-92d9-f568d5058a79}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL TriggerChangeState
@@ -161,72 +171,15 @@ THIS^._TcoTaskTest_B.Invoke();
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoStateTest">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.CallTaskInstancies">
-      <LineId Id="32" Count="2" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.CleanUp">
-      <LineId Id="100" Count="0" />
-      <LineId Id="93" Count="1" />
-      <LineId Id="96" Count="1" />
-      <LineId Id="92" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.GetMessage">
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.OnStateChange">
-      <LineId Id="35" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="54" Count="1" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="56" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.PostMessage">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.ReadOutAutoRestoreProperties">
-      <LineId Id="37" Count="1" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.ReadOutIdentities">
-      <LineId Id="7" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="29" Count="1" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.ReadOutState">
-      <LineId Id="29" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="35" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.TriggerChangeState">
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.TriggerChangeStateWithObjectRestore">
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.TriggerRestore">
-      <LineId Id="43" Count="0" />
-      <LineId Id="52" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateTest.TriggerTaskInvoke">
-      <LineId Id="20" Count="0" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="23" Count="0" />
-    </LineIds>
+    <Method Name="UnregisterRestorerForAllChilds" Id="{e3531c30-6b9c-0456-1295-1166ae27d5a5}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL UnregisterRestorerForAllChilds]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TcoTaskTest_A.UnregisterRestorer(THIS^);
+_TcoTaskTest_B.UnregisterRestorer(THIS^);
+_TcoStateTest_A.UnregisterRestorer(THIS^);
+_TcoStateTest_B.UnregisterRestorer(THIS^);]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

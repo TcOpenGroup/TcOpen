@@ -9,10 +9,18 @@ namespace TcoCoreTests
 {
     public static class Entry
     {
-        const string amsId = "172.20.10.2.1.1";
-        const int amsPort = 852;
 
+#if SET_ENV_VAR
+        static Entry()
+        {
+            Environment.SetEnvironmentVariable("Tc3Target", YOUR_TARGER_SYSTEM AMS_ID);
+        }
+#endif
+        
+        static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
+        static int TargetAmsPort = 852;
+        
         public static TcoCoreTests.TcoCoreTestsTwinController PlcTcoCoreTests { get; }
-            = new TcoCoreTests.TcoCoreTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(amsId, amsPort, true));
+            = new TcoCoreTests.TcoCoreTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
     }
 }

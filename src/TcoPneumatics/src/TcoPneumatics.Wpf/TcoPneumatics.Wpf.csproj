@@ -5,15 +5,20 @@
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--NuGet properties-->
+    <PackageId>TcOpen.TcoPneumatics.Wpf</PackageId>
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/PTKu/TcOpen</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
-    <RepositoryType>MIT</RepositoryType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>https://tcopengroup.github.io/TcOpen.Documentation/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.9.5-nightly.207" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.9.6-nightly.260" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
   </ItemGroup>
 

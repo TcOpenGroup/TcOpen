@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcoCoreExamples;
 
 namespace TcoCore.Sandbox.Wpf
 {
@@ -23,8 +24,8 @@ namespace TcoCore.Sandbox.Wpf
     {
         public MainWindow()
         {
-            InitializeComponent();            
-            this.DataContext = TcoCoreTests.Entry.PlcTcoCoreTests;           
+            InitializeComponent();
+            this.DataContext = TcoCoreExamples.Entry.PlcTcoCoreExamples;
         }
     }
 }

@@ -1,3 +1,4 @@
+﻿using System.Reflection;
 using System.Windows;
 
 [assembly: ThemeInfo(
@@ -8,3 +9,8 @@ using System.Windows;
                                               //(used if a resource is not found in the page,
                                               // app, or any theme specific resource dictionaries)
 )]
+
+[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+214.Branch.init-dev.Sha.f5eae33df4adad2a858e340b79df695b59a8e49a")]
+

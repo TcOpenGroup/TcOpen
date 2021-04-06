@@ -2,12 +2,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net48</TargetFramework>
-     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--NuGet properties-->
+    <PackageId>TcOpen.TcoCoreConnector</PackageId>
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>https://tcopengroup.github.io/TcOpen.Documentation/</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.5-nightly.207" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.9.5-nightly.207" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.6-nightly.260" />
+    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.9.6-nightly.260" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
@@ -21,8 +31,5 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_generated\" />
   </ItemGroup>
 </Project>

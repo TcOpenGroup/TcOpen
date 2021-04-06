@@ -4,6 +4,9 @@
     <OutputType>Library</OutputType>
     <TargetFrameworks>net48;netcoreapp3.1;net5.0</TargetFrameworks>
      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+     <SignAssembly>true</SignAssembly>
+     <AssemblyOriginatorKeyFile>Tco.snk</AssemblyOriginatorKeyFile>
+     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>

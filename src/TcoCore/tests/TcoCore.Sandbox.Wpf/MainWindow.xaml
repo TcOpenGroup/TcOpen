@@ -10,23 +10,17 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    DataContext="{x:Static local:App.PlcTcoCoreTests}"
+    DataContext="{x:Static local:App.PlcTcoCoreExamples}"
     mc:Ignorable="d">
     <Grid>
         <TabControl>
             <TabItem Header="Object tree">
                 <ScrollViewer>
                     <inxton:DynamicTreeView DataContext="{Binding MANIPULATOR, Mode=OneWay}" />
-                    <!--<vortex:RenderableContentControl DataContext="{Binding MANIPULATOR}" PresentationType="Base-Control" />-->
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Manipulator">
-                <ScrollViewer>
-                    <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR}" PresentationType="Base-Display" />
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Messages">
-                <DataGrid ItemsSource="{Binding MANIPULATOR._context.Messages}" />
+            <TabItem Header="Context-Rendered">
+                <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR._context}" />
             </TabItem>
         </TabControl>
     </Grid>

@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.2.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -19,6 +19,9 @@
 				</Task>
 				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>PlcTask1</Name>
+				</Task>
+				<Task Id="5" Priority="22" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>PlcTask2</Name>
 				</Task>
 			</Tasks>
 		</System>
@@ -47,6 +50,26 @@
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreTests\TcoCoreTests.tmc">
 					<Name>TcoCoreTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask1</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>21</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="21" OTCID="#x08502041"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project Disabled="true" GUID="{2266F99A-9250-4E68-A8BB-FC036A975355}" Name="TcoCoreExamples" PrjFilePath="TcoCoreExamples\TcoCoreExamples.plcproj" TmcFilePath="TcoCoreExamples\TcoCoreExamples.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreExamples\TcoCoreExamples.tmc">
+					<Name>TcoCoreExamples Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
@@ -66,14 +89,14 @@
 							<Id NeedCalleeCall="true">0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
-								<OTCID>#x02010040</OTCID>
+								<OTCID>#x02010050</OTCID>
 							</ManualConfig>
-							<Priority>21</Priority>
+							<Priority>22</Priority>
 							<CycleTime>10000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>
-						<TaskPouOid Prio="21" OTCID="#x08502041"/>
+						<TaskPouOid Prio="22" OTCID="#x08502081"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>

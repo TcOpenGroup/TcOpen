@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Text : STRING(255);
+	Text : STRING(125);
 (*~
 	<docu>
 		<summary>
@@ -54,6 +54,16 @@ STRUCT
 ~*)
 	{attribute clr [ReadOnly()]}
 	Cycle : ULINT;
+	
+(*~
+	<docu>
+		<summary>
+			Count of message of the object in the last cycle.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}
+	PerCycleCount : BYTE;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

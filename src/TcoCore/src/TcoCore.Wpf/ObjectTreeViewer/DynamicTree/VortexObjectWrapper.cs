@@ -116,5 +116,10 @@ namespace Tco.Wpf
         {
             this.Kids.Add(kid);
         }
+
+        public IEnumerable<IVortexElement> GetKids()
+        {
+            return this.Kids;
+        }
     }
 }

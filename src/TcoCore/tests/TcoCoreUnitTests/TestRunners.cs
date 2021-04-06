@@ -177,6 +177,56 @@ namespace TcoCoreUnitTests
                 sequencer.ContextClose();
             }
         }
+
+
+
+        
+        //TcoMessengerContext
+        public static void AddEmptyCycle(this ITestTcoMessengerContext context)
+        {
+            context.ContextOpen();
+            context.ContextClose();
+        }
+
+        public static void SingleCycleRun(this ITestTcoMessengerContext context, Action action)
+        {
+            context.ContextOpen();
+            action();
+            context.ContextClose();
+        }
+        public static void MultipleCycleRun(this ITestTcoMessengerContext context, Action action, ushort cycles)
+        {
+            ushort i = 0;
+            while (i < cycles)
+            {
+                context.ContextOpen();
+                action();
+                context.ContextClose();
+                i++;
+            }
+        }
+
+        public static void RunUntilEndConditionIsMet(this ITestTcoMessengerContext context, Action action, Func<bool> endCondition)
+        {
+            while (!endCondition())
+            {
+                context.ContextOpen();
+                action();
+                context.ContextClose();
+            }
+        }
+
+        public static void RunUntilActionDone(this ITestTcoMessengerContext context, Func<bool> action)
+        {
+            bool actionDone = false;
+            while (!actionDone)
+            {
+                context.ContextOpen();
+                actionDone = action();
+                context.ContextClose();
+            }
+        }
+
     }
 
 }

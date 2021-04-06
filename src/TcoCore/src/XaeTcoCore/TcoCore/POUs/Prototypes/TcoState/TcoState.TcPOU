@@ -67,7 +67,7 @@
 ~*)	
 FUNCTION_BLOCK TcoState EXTENDS TcoObject IMPLEMENTS ITcoState
 VAR
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_State : INT; 	
 	{attribute 'hide'}
 	_enableAutoRestore : BOOL;
@@ -83,6 +83,8 @@ VAR
 	_LastChangedState	: INT;
 	{attribute 'hide'}
 	_MyParentsLastChangedState	: INT;	
+	{attribute 'hide'}
+	_Restorer : ITcoObject;		
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -98,10 +100,10 @@ END_VAR
 			This is done by calling the <c>CheckIfAutoRestoreEnabledByParent()</c> method inside the implicit method <c>FB_init()</c> after download.
 			If this instance is the auto restorable it will call the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
 			<para>
-			1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <c>State</c>).
+				1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
 			</para>
 			<para>
-			2.)	Parent object of this instance changes its state.
+				2.)	Parent object of this instance changes its state.
 			</para>
 			<para>
 				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
@@ -131,6 +133,9 @@ END_VAR
 				2.)	Parent object of this instance changes its state no mather when and this instance has not yet process this change.
 			</para>
 			<para>
+				3.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
+			</para>
+			<para>
 				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
 			</para>
 			<para>
@@ -152,7 +157,8 @@ END_VAR
 //of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
 //after each download.
 IF _AutoRestorable THEN		
-	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+//	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+	IF __QUERYINTERFACE(THIS^._Restorer,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
 		_MyParent_LastChangeState := _MyParent_TcoState.LastChangedState;
 	END_IF;	
@@ -162,11 +168,11 @@ IF _AutoRestorable THEN
 	//restore itself, and copy the parent's ChangeStateCycle property into the
 	//child's own property.
 	IF _MyParent_ChangeStateCycle <> _MyParentsChangeStateCycle THEN
-		Restore();
+		THIS^.Restore();
 		_MyParentsChangeStateCycle := _MyParent_ChangeStateCycle;
 	END_IF
 	IF _MyParent_LastChangeState <> _MyParentsLastChangedState THEN
-		Restore();
+		THIS^.Restore();
 		_MyParentsLastChangedState := _MyParent_LastChangeState;
 	END_IF
 END_IF]]></ST>
@@ -234,7 +240,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnablAutoRestore()/> property and writing it into the <see cref="TcoState.PlcTcoState.AutoRestorable()"/> of this instance.
+			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnableAutoRestore()/> property and writing it into the <see cref="TcoState.PlcTcoState.AutoRestorable()"/> of this instance.
 			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
 		</summary>			
 	</docu>	
@@ -246,7 +252,8 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+        <ST><![CDATA[//	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+IF __QUERYINTERFACE(THIS^._Restorer,_MyParent_TcoState) THEN 
 	_AutoRestorable := _MyParent_TcoState.EnableAutoRestore;
 END_IF;	
 ]]></ST>
@@ -256,10 +263,9 @@ END_IF;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Private method called each time that State property is asked for. If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
-			<para>
-				This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property State).
-			</para>
+			Private method called each time that the <see cref="TcoState.PlcTcoState.State()"/> property is asked for. 
+			If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if
+			this instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property State).
 			<para>
 				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
 			</para>
@@ -287,7 +293,7 @@ IF _AutoRestorable THEN
 	//in order to don't miss the OnStateChange() event of the parent
 	//in case of the body of this instance isn't called.
 	IF _MyContextStartCycleCount > _StartCycleCount + 1 THEN
-		Restore();
+		THIS^.Restore();
 	END_IF
 	_StartCycleCount := _MyContextStartCycleCount;
 END_IF]]></ST>
@@ -412,6 +418,24 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="RegisterRestorer" Id="{09fc22f2-9e6b-0ce3-2970-1902471ce029}">
+      <Declaration><![CDATA[METHOD RegisterRestorer : BOOL
+VAR_INPUT
+	Restorer	:	ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _Restorer = 0 THEN
+	_Restorer := Restorer;
+	CheckIfAutoRestoreEnabledByParent();
+	RegisterRestorer := TRUE;	
+ELSE
+	RegisterRestorer := FALSE;	
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{9e542c5a-7a1b-472b-a8dc-08d24bf1a56e}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -499,5 +523,21 @@ State := _State;]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="UnregisterRestorer" Id="{0f761627-004b-0a2a-08bd-0f860c9b3f0f}">
+      <Declaration><![CDATA[METHOD UnregisterRestorer : BOOL
+VAR_INPUT
+	Restorer	:	ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _Restorer = Restorer THEN
+	_Restorer := 0;
+	THIS^._AutoRestorable := FALSE;
+	UnregisterRestorer := TRUE;	
+ELSE
+	UnregisterRestorer := FALSE;	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

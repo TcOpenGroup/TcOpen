@@ -20,7 +20,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -42,7 +42,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -64,7 +64,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -86,7 +86,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 ]]></Declaration>
     </Method>
@@ -108,7 +108,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 	(*~
 		<docu>
 			<summary>
@@ -125,7 +125,7 @@ END_VAR
       <Declaration><![CDATA[METHOD PostConditionally
 VAR_INPUT
 	Condition : BOOL;
-	Message : STRING(255);
+	Message : STRING(125);
 	Category : eMessageCategory;
 END_VAR
 ]]></Declaration>
@@ -147,7 +147,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -160,7 +160,7 @@ END_VAR
 			</summary>					
 		</docu>
 ~*)
-METHOD PUBLIC Trace : INT
+METHOD PUBLIC Trace 
 VAR_INPUT
 	(*~
 		<docu>
@@ -169,7 +169,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>
@@ -191,7 +191,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(255);
+	Message : STRING(125);
 END_VAR
 
 ]]></Declaration>

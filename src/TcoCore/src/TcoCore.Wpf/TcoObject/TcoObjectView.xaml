@@ -48,10 +48,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Border>
-
-                <Border Grid.Row="2" Visibility="{Binding TcoObject._messenger._mime.IsActive, Converter={local:BooleanToVisibilityConverter}}">
-                    <TextBlock Text="{Binding TcoObject._messenger._mime.Text.Cyclic}" />
-                </Border>
+                <Expander Grid.Row="2">
+                    <local:TcoDiagnosticsView DataContext="{Binding DiagnosticsViewModel}"></local:TcoDiagnosticsView>
+                </Expander>
             </Grid>
         </GroupBox>
     </Grid>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbPiston" Id="{c4094ed5-4fe0-0f6e-24e6-4cc0fa53181e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoComponent
+VAR_INPUT
+	iHomePositionSensor : BOOL;
+	iWorkPositionSensor : BOOL;	
+END_VAR
+
+VAR_OUTPUT
+	qHomePositionActuator : BOOL;
+	qWorkPositionActuator : BOOL;		
+END_VAR
+
+VAR
+	_moveHomeTask : fbPistonMoveTask(THIS^);
+	_moveWorkTask : fbPistonMoveTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_moveHomeTask(PositionSensor := iHomePositionSensor, MoveToPositionSignal := qHomePositionActuator, InverseSignal := qWorkPositionActuator);
+_moveWorkTask(PositionSensor := iWorkPositionSensor, MoveToPositionSignal := qWorkPositionActuator, InverseSignal := qHomePositionActuator);]]></ST>
+    </Implementation>
+    <Method Name="Manual" Id="{e2305248-08d3-0a45-0227-6f8abe0d86d9}">
+      <Declaration><![CDATA[METHOD PROTECTED Manual
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveHome" Id="{ec08a57d-3edb-01f0-35bc-3c8a96242bb9}">
+      <Declaration><![CDATA[METHOD MoveHome : TcoCore.ITcoTask
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveHome := THIS^._moveHomeTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveWork" Id="{e9e0be0c-566d-0749-1c75-1097c8dadecf}">
+      <Declaration><![CDATA[METHOD MoveWork : TcoCore.ITcoTask]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveWork := THIS^._moveWorkTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{fc7ee28d-fd88-0b69-144e-14e0b2374ab2}">
+      <Declaration><![CDATA[METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._moveHomeTask.Restore();
+THIS^._moveWorkTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

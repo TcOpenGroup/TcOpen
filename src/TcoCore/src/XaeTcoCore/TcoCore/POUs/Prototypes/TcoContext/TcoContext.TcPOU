@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoContext" Id="{55d37a51-70a7-4749-9f28-95ccbcaee495}" SpecialFunc="None">
-    <Declaration><![CDATA[(*~
+    <Declaration><![CDATA[
+(*~
 	<docu>
 		<summary>
 			Root construction container, provides context information for <c>TcoObjects</c> declared within its scope.
@@ -19,10 +20,10 @@
 			</remarks>
 		</summary>	
 			<example>
-					[!code-c[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
+					[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
 			</example>
 			<example>
-					[!code-c[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleCode)]
+					[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleCode)]
 			</example>
 	</docu>	
 ~*)
@@ -44,17 +45,12 @@ VAR
 	_startCycleCount : ULINT;
 	{attribute clr [ReadOnly()]}
 	_endCycleCount : ULINT;
-	(*~
-		<docu>
-			<summary>
-				Provides access to diagnostic and reporting functions.	  
-			</summary>			
-		</docu>	
-	~*)	
-	_Messenger : TcoMessenger(THIS^); 
-END_VAR
-
-]]></Declaration>
+	_messagingLevel : eMessageCategory;
+	{attribute clr [ReadOnly()]}
+	_rtc : TcoRtc;
+	{attribute clr [RenderIgnore()]}
+    _settings : TcoContextEnvironment;	
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -73,7 +69,8 @@ END_VAR
 ~*)
 METHOD INTERNAL FINAL Close]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_endCycleCount := _startCycleCount;]]></ST>
+        <ST><![CDATA[_endCycleCount := _startCycleCount;
+THIS^.PostRun();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{63063553-badc-4ce8-a8c6-8619f5f133f3}">
@@ -112,6 +109,17 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="Environment" Id="{b26311d8-ac58-0fb2-3664-3d88502e5497}">
+      <Declaration><![CDATA[PROPERTY Environment : ITcoContextEnvironment]]></Declaration>
+      <Get Name="Get" Id="{0d0a9027-69a3-091e-3f34-9615f510e71b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Environment := _settings;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{589fd291-1ab8-4b98-a0a8-8d493e4b98c7}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -120,7 +128,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Identity := ADR(THIS^);]]></ST>
+        <ST><![CDATA[_Identity := ADR(THIS^);
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{a551eec9-c5bd-4df5-9bc0-f8e8eaa3edde}">
@@ -173,8 +182,53 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
 ~*)
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
-]]></ST>
+        <ST><![CDATA[THIS^.PriorRun();
+_startCycleCount := _startCycleCount + 1;
+_rtc.Update();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostRun" Id="{cc3ded61-78cb-0c12-3071-9c305dc097e3}">
+      <Declaration><![CDATA[METHOD PROTECTED PostRun
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PriorRun" Id="{48b3abea-36b3-0d8f-1718-3531af00fe19}">
+      <Declaration><![CDATA[METHOD PROTECTED PriorRun
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Rtc" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">
+      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+      <Get Name="Get" Id="{2d224feb-78f3-050e-2237-96bc8473a6fe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Rtc := _rtc;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="RtcSynchronize" Id="{fdad5da4-2f47-075c-1134-913896442d7c}">
+      <Declaration><![CDATA[METHOD RtcSynchronize  : REFERENCE TO TcoContext
+VAR_INPUT
+	inDoSynch				:	BOOL;
+	inSyncAmsId				:	STRING;
+	inSyncPeriod			:	UINT; 
+END_VAR
+VAR
+	_RtcSynchParams						:	RtcSynchParams;			
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_RtcSynchParams.doSynch					:=	inDoSynch;
+_RtcSynchParams.syncAmsId				:=	inSyncAmsId;
+_RtcSynchParams.syncPeriod				:=	inSyncPeriod;
+_RtcSynchParams.synchContextIdentity	:=	THIS^._Identity;
+RtcPrg.Synchronize(_RtcSynchParams);
+RtcSynchronize REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">

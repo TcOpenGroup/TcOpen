@@ -45,17 +45,18 @@ namespace TcoCore
         /// <param name="obj">Searched object</param>
         /// <param name="children">[optional] Pre-existing children. </param>
         /// <returns>Children of this object.</returns>
-        public static IEnumerable<T> GetDescendants<T>(this IVortexObject obj, IList<T> children = null) where T : IVortexObject
+        public static IEnumerable<T> GetDescendants<T>(this IVortexObject obj, IList<T> children = null) where T : class
         {
             children = children != null ? children : new List<T>();
 
-            if (obj is Vortex.Connector.IVortexObject && obj != null)
+            if (obj != null)
             {              
                 foreach (var child in obj.GetChildren())
                 {
-                    if (child is T)
+                    var ch = child as T;
+                    if (ch != null)
                     {
-                        children.Add((T)obj);
+                        children.Add(ch);
                     }
 
                     GetDescendants<T>(child, children);
@@ -65,6 +66,7 @@ namespace TcoCore
             return children;
         }
 
+
         /// <summary>
         /// Get the children of given type of this <see cref="IVortexObject"/>         
         /// </summary>
@@ -72,15 +74,14 @@ namespace TcoCore
         /// Take into consideration possible performance degradation due to use of reflections in this method.
         /// </remarks>
         /// <typeparam name="T"></typeparam>
-        /// <param name="obj">Searched object</param>
-        /// <param name="children">[optional] Pre-existing children. </param>
+        /// <param name="obj">Searched object</param>       
         /// <returns>Children of this object.</returns>
         public static IEnumerable<T> GetChildren<T>(this IVortexObject obj) where T : IVortexObject
         {
-            var children = obj.GetChildren().Where(p => p is T).Select(p => (T)p);            
+            var children = obj.GetChildren().Where(p => p is T).Select(p => (T)p);
             return children;
         }
-        
+
         public static IEnumerable<T> GetChildren<T>(this IVortexObject obj, IEnumerable<object> excluding) where T : IVortexObject
         {
             if (excluding == null)

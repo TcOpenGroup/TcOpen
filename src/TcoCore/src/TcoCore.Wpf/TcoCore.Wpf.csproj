@@ -4,9 +4,19 @@
     <TargetFrameworks>net48</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--NuGet properties-->
+    <PackageId>TcOpen.TcoCore.Wpf</PackageId>
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>https://tcopengroup.github.io/TcOpen.Documentation/</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.9.5-nightly.207" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.9.6-nightly.260" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.3" />
   </ItemGroup>
@@ -36,6 +46,9 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="ObjectTreeViewer\DynamicTree\DynamicTreeView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="TcoObject\TcoObjectView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>
