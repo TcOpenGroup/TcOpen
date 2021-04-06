@@ -12,7 +12,7 @@
   $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
   $dotnet = '"C:\Program Files\dotnet\dotnet.exe"'
   $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
-  $testTargetAmsId = ""
+  $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
 }
 
 task default -depends CloseVs, Tests, CreatePackages, Finish
@@ -190,8 +190,7 @@ task CreatePackages -depends ClearPackages {
 }
 
 task PublishPackages -depends CreatePackages -precondition {return $publishNugets} {
-  Write-Host "About to"
-  PushNugets -folderWithNugets .\nugets\dependants -token $nugetToken -source $nugetSource
+  Write-Host "About to" 
   PushNugets -folderWithNugets .\nugets -token $nugetToken -source $nugetSource
 }
 

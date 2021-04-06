@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Inxton.TcoCoreConnector.Properties {
+namespace TcoCoreConnector.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Inxton.TcoCoreConnector.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Inxton.TcoCoreConnector.Properties.Localizations", typeof(Localizations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcoCoreConnector.Properties.Localizations", typeof(Localizations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,105 @@ namespace Inxton.TcoCoreConnector.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current step.
+        /// </summary>
+        public static string ___Current_step__ {
+            get {
+                return ResourceManager.GetString("___Current_step__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ___Enabled__ {
+            get {
+                return ResourceManager.GetString("___Enabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoke request.
+        /// </summary>
+        public static string ___Invoke_request__ {
+            get {
+                return ResourceManager.GetString("___Invoke_request__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore request.
+        /// </summary>
+        public static string ___Restore_request__ {
+            get {
+                return ResourceManager.GetString("___Restore_request__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sequencer error.
+        /// </summary>
+        public static string ___Sequencer_error__ {
+            get {
+                return ResourceManager.GetString("___Sequencer_error__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sequencer error ID.
+        /// </summary>
+        public static string ___Sequencer_error_ID__ {
+            get {
+                return ResourceManager.GetString("___Sequencer_error_ID__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step description.
+        /// </summary>
+        public static string ___Step_description__ {
+            get {
+                return ResourceManager.GetString("___Step_description__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step duration.
+        /// </summary>
+        public static string ___Step_duration__ {
+            get {
+                return ResourceManager.GetString("___Step_duration__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step ID.
+        /// </summary>
+        public static string ___Step_ID__ {
+            get {
+                return ResourceManager.GetString("___Step_ID__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step Order.
+        /// </summary>
+        public static string ___Step_Order__ {
+            get {
+                return ResourceManager.GetString("___Step_Order__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step status.
+        /// </summary>
+        public static string ___Step_status__ {
+            get {
+                return ResourceManager.GetString("___Step_status__", resourceCulture);
             }
         }
     }
