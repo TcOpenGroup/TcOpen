@@ -44,6 +44,8 @@ task Clean -depends Start {
   CleanObjBin
   RemoveTcBins
   RemoveTcProjBins
+  RemoveGenerated
+  RemoveMeta
   mkdir .\_Vortex\builder -ErrorAction SilentlyContinue 
   mkdir .\.nuget -ErrorAction SilentlyContinue 
   mkdir .\_toolz -ErrorAction SilentlyContinue 
@@ -106,6 +108,7 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
      "src\TcoCore\TcoCore.slnf",
      "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
      "src\TcoPneumatics\TcoPneumatics.slnf"
+     "src\TcoApplicationExamples\TcoApplicationExamples.slnf"
    )
 
    foreach($project in $projects)

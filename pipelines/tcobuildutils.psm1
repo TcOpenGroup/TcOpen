@@ -198,6 +198,42 @@ function RemoveTcProjBins {
     }
 }
 
+function RemoveGenerated {
+    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+        Push-Location ($_)
+
+        $removeFolders = @( ".\_generated")
+        # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
+
+        $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+
+        foreach($item in ($removeFolders)){
+            Write-Host "In $folder trying to remove $item"
+            Remove-Item -r $item  -ErrorAction SilentlyContinue
+        }
+
+        Pop-Location
+    }
+}
+
+function RemoveMeta {
+    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+        Push-Location ($_)
+
+        $removeFolders = @( ".\_meta")
+        # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
+
+        $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+
+        foreach($item in ($removeFolders)){
+            Write-Host "In $folder trying to remove $item"
+            Remove-Item -r $item  -ErrorAction SilentlyContinue
+        }
+
+        Pop-Location
+    }
+}
+
 function GitVersionToPlcVersion{
     param($gitVersion)
     return $gitVersion.Major.ToString() + "." + $gitVersion.Minor.ToString() + "." + $gitVersion.Patch.ToString() + "." + $gitVersion.PreReleaseNumber.ToString()

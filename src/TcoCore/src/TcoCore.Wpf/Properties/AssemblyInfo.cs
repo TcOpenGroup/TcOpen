@@ -19,6 +19,6 @@ using System.Windows.Markup;
 [assembly:Vortex.Presentation.Wpf.RenderableAssembly()]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+214.Branch.init-dev.Sha.f5eae33df4adad2a858e340b79df695b59a8e49a")]
+[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+216.Branch.init-dev.Sha.f190c8bf3fa438c8ec80abb753b335c10ad7865f")]
 
 
