@@ -19,6 +19,11 @@
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.6-nightly.260" />
     <PackageReference Include="Inxton.vortex.compiler.console" Version="1.9.6-nightly.260" />
   </ItemGroup>
+    <ItemGroup>    
+    <Content Include="_meta\TcoCore.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\TcoCore.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />          
+    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>
