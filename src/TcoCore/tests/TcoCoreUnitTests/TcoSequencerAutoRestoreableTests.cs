@@ -186,7 +186,6 @@ namespace TcoCoreUnitTests
         [Test, Order(505)]
         public void T505_ExternalRestoreChildBetweenSteps()
         {
-            tc.RegisterRestorer();
             tc.SingleCycleRun(() =>
             {
                 Assert.IsFalse(tc.IsAutoRestorable());
@@ -223,7 +222,6 @@ namespace TcoCoreUnitTests
                     tc.SequenceComplete();
                 }
             });
-            tc.UnregisterRestorer();
         }
 
         [Test, Order(510)]

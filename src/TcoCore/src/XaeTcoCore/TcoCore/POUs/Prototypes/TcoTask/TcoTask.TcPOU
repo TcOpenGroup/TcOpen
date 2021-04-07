@@ -46,9 +46,6 @@ VAR
 	_invokeRequest : BOOL;
 	{attribute 'hide'}
 	_enabled : BOOL := TRUE;
-	{attribute 'hide'}
-//	_Restorer : REFERENCE TO ITcoObject;		
-	_Restorer : ITcoObject;		
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -135,8 +132,7 @@ END_VAR
 //of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
 //after each download.
 IF _AutoRestorable THEN		
-//	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-	IF __QUERYINTERFACE(THIS^._Restorer,_MyParent_TcoState) THEN 
+	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
 		_MyParent_LastChangeState := _MyParent_TcoState.LastChangedState;
 	END_IF;	
@@ -188,8 +184,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-IF __QUERYINTERFACE(THIS^._Restorer,_MyParent_TcoState) THEN 
+        <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 	_AutoRestorable := _MyParent_TcoState.EnableAutoRestore;
 END_IF;	]]></ST>
       </Implementation>
@@ -465,24 +460,6 @@ PROPERTY Ready : BOOL]]></Declaration>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="RegisterRestorer" Id="{79b8a2b4-e80b-03a4-08dc-affb725c90f2}">
-      <Declaration><![CDATA[METHOD RegisterRestorer : BOOL
-VAR_INPUT
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Restorer = 0 THEN
-	_Restorer := Restorer;
-	CheckIfAutoRestoreEnabledByParent();
-	RegisterRestorer := TRUE;	
-ELSE
-	RegisterRestorer := FALSE;	
-END_IF
-
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Restore" Id="{afacd00c-5569-431f-be3c-22a90381057d}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -536,22 +513,6 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF (inCondition) THEN
 	THIS^._taskState := eTaskState.Error;
-END_IF]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="UnregisterRestorer" Id="{8f1068d3-2a2b-00f2-08e2-15b0974043aa}">
-      <Declaration><![CDATA[METHOD UnregisterRestorer : BOOL
-VAR_INPUT
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Restorer = Restorer THEN
-	_Restorer := 0;
-	THIS^._AutoRestorable := FALSE;
-	UnregisterRestorer := TRUE;	
-ELSE
-	UnregisterRestorer := FALSE;	
 END_IF]]></ST>
       </Implementation>
     </Method>

@@ -3,24 +3,10 @@
   <Itf Name="ITcoRestorable" Id="{62b2753f-f5a1-4b95-bc70-d5bc1062507d}">
     <Declaration><![CDATA[INTERFACE ITcoRestorable EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
-    <Method Name="RegisterRestorer" Id="{a037418f-db45-0089-2d57-1e0598076e39}">
-      <Declaration><![CDATA[METHOD RegisterRestorer : BOOL
-VAR_INPUT
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-    </Method>
     <Method Name="Restore" Id="{e2a78908-9be5-4407-99a7-5c57f7b6a6c9}">
       <Declaration><![CDATA[METHOD Restore : ITcoRestorable
 
 
-]]></Declaration>
-    </Method>
-    <Method Name="UnregisterRestorer" Id="{4e3ad4fe-e127-0f8f-078c-df5b529ab591}">
-      <Declaration><![CDATA[METHOD UnregisterRestorer : BOOL
-VAR_INPUT
-	Restorer	:	ITcoObject;
-END_VAR
 ]]></Declaration>
     </Method>
   </Itf>

@@ -45,9 +45,6 @@
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoManageable\ITcoManageable.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\eMessageCategory.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -147,7 +144,6 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
-    <Folder Include="POUs\Prototypes\TcoManageable" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
     <Folder Include="POUs\TestFixtures" />
     <Folder Include="POUs\Prototypes" />

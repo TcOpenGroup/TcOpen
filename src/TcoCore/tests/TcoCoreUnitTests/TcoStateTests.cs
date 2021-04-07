@@ -225,7 +225,6 @@ namespace TcoCoreUnitTests
 
             //First case tc._TcoObjectTest_A._TcoStateTest_A
             ts = tc._TcoObjectTest_A._TcoStateTest_A;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -235,11 +234,9 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(ts._AutoRestoreToMyChildsEnabled.Synchron);                                   //Values of this properties are given by definition part of the test instance.
             Assert.IsTrue(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsTrue(tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
 
             //Second case tc._TcoObjectTest_A._TcoStateTest_B
             ts = tc._TcoObjectTest_A._TcoStateTest_B;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -249,11 +246,9 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(ts._AutoRestoreToMyChildsEnabled.Synchron);                                  //Values of this properties are given by definition part of the test instance.
             Assert.IsFalse(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsFalse(tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
 
             //Third case tc._TcoObjectTest_B._TcoStateTest_A
             ts = tc._TcoObjectTest_B._TcoStateTest_A;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -263,11 +258,9 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(ts._AutoRestoreToMyChildsEnabled.Synchron);                                   //Values of this properties are given by definition part of the test instance.
             Assert.IsTrue(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsTrue(tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
 
             //Fourth case tc._TcoObjectTest_A._TcoStateTest_B
             ts = tc._TcoObjectTest_B._TcoStateTest_B;                                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -277,8 +270,6 @@ namespace TcoCoreUnitTests
             Assert.IsFalse(ts._AutoRestoreToMyChildsEnabled.Synchron);                                  //Values of this properties are given by definition part of the test instance.
             Assert.IsFalse(tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.IsFalse(tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
-
         }
 
         [Test, Order(407)]
@@ -294,8 +285,6 @@ namespace TcoCoreUnitTests
 
             ts_a = tc._TcoObjectTest_A._TcoStateTest_A;                                                 //ts_a(TcoState) is a parent object for tst_a(TcoState).
             ts_b = tc._TcoObjectTest_A._TcoStateTest_B;                                                 //ts_b(TcoState) is a parent object for tst_b(TcoState).
-            ts_a.RegisterRestorerForAllChilds();
-            ts_b.RegisterRestorerForAllChilds();
 
             tst_a = ts_a._TcoStateTest_A;                                                               //tst_a(TcoState) is a child object of the ts_a(TcoState).
             tst_b = ts_b._TcoStateTest_B;                                                               //tst_b(TcoState) is a child object of the ts_b(TcoState).
@@ -432,9 +421,6 @@ namespace TcoCoreUnitTests
             Assert.GreaterOrEqual(tis_b, tst_b._MyState.Synchron);                                      //Check if the state of the child tst_b has not been restored as this child is not AutoRestorable. The state of the tst_b
                                                                                                         //should be the same as before, or in the case if one call of the Execution body causes State increment it could be greather.
             Assert.AreEqual(cv_b + 1, tst_b._CounterValue.Synchron);                                    //Check if CounterValue has not been reseted.
-
-            ts_a.UnregisterRestorerForAllChilds();
-            ts_b.UnregisterRestorerForAllChilds();
 
             //Ensure repeatibility of this test
             tc.SingleCycleRun(() =>                                                                     //Cleanup change the state to 0, reset the OnStateChange counter and reset the AutoRestore properties (inherited from the parent so as dedicated to the childrens)
