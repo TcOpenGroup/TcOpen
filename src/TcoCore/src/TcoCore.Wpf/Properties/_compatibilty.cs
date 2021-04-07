@@ -1,7 +1,9 @@
-﻿namespace TcoCore.Wpf.Properties
+﻿#if INXTON
+namespace TcoCore.Wpf.Properties
 {
     public class Localization : Inxton.TcoCore.Wpf.Properties.Localization
     {
 
     }
 }
+#endif
