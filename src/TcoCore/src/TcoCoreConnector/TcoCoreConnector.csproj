@@ -16,8 +16,8 @@
     <PackageProjectUrl>https://tcopengroup.github.io/TcOpen.Documentation/</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.6-nightly.260" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.9.6-nightly.260" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.10.0-nightly.415" />
+    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.10.0-nightly.415" />
   </ItemGroup>
     <ItemGroup>    
     <Content Include="_meta\TcoCore.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
