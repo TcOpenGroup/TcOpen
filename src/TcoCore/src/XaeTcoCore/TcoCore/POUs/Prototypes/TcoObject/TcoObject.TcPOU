@@ -76,7 +76,7 @@
  		</summary>			
 	</docu>	
 ~*)
-FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject , ITcoManageable
+FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject 
 VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
@@ -84,8 +84,6 @@ VAR
 	{attribute 'hide'}
 	_Parent : ITcoObject;	
 	_messenger : TcoMessenger(THIS^);
-	{attribute 'hide'}
-	_Manager : ITcoObject;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -164,37 +162,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="RegisterManager" Id="{af700d07-0c96-027b-12ec-3052541065a5}">
-      <Declaration><![CDATA[METHOD RegisterManager : BOOL
-VAR_INPUT
-	Manager	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Manager = 0 THEN
-	_Manager := Manager;
-	RegisterManager := TRUE;
-ELSE
-	RegisterManager := FALSE;
-END_IF
- ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="UnregisterManager" Id="{50d370b5-e836-0b33-2cf4-2a86eb8b1213}">
-      <Declaration><![CDATA[METHOD UnregisterManager : BOOL
-VAR_INPUT
-	Manager	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Manager = Manager THEN
-	_Manager := 0;
-	UnregisterManager := TRUE;
-ELSE
-	UnregisterManager := FALSE;
-END_IF
- ]]></ST>
-      </Implementation>
-    </Method>
   </POU>
 </TcPlcObject>

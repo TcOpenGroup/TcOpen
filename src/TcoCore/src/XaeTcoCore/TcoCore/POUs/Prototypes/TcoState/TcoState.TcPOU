@@ -83,8 +83,6 @@ VAR
 	_LastChangedState	: INT;
 	{attribute 'hide'}
 	_MyParentsLastChangedState	: INT;	
-	{attribute 'hide'}
-	_Restorer : ITcoObject;		
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -157,8 +155,7 @@ END_VAR
 //of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
 //after each download.
 IF _AutoRestorable THEN		
-//	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-	IF __QUERYINTERFACE(THIS^._Restorer,_MyParent_TcoState) THEN 
+	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
 		_MyParent_LastChangeState := _MyParent_TcoState.LastChangedState;
 	END_IF;	
@@ -252,8 +249,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-IF __QUERYINTERFACE(THIS^._Restorer,_MyParent_TcoState) THEN 
+        <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 	_AutoRestorable := _MyParent_TcoState.EnableAutoRestore;
 END_IF;	
 ]]></ST>
@@ -418,24 +414,6 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="RegisterRestorer" Id="{09fc22f2-9e6b-0ce3-2970-1902471ce029}">
-      <Declaration><![CDATA[METHOD RegisterRestorer : BOOL
-VAR_INPUT
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Restorer = 0 THEN
-	_Restorer := Restorer;
-	CheckIfAutoRestoreEnabledByParent();
-	RegisterRestorer := TRUE;	
-ELSE
-	RegisterRestorer := FALSE;	
-END_IF
-
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Restore" Id="{9e542c5a-7a1b-472b-a8dc-08d24bf1a56e}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -523,21 +501,5 @@ State := _State;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="UnregisterRestorer" Id="{0f761627-004b-0a2a-08bd-0f860c9b3f0f}">
-      <Declaration><![CDATA[METHOD UnregisterRestorer : BOOL
-VAR_INPUT
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Restorer = Restorer THEN
-	_Restorer := 0;
-	THIS^._AutoRestorable := FALSE;
-	UnregisterRestorer := TRUE;	
-ELSE
-	UnregisterRestorer := FALSE;	
-END_IF]]></ST>
-      </Implementation>
-    </Method>
   </POU>
 </TcPlcObject>

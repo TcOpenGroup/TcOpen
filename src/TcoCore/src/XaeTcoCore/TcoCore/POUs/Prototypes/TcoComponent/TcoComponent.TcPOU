@@ -3,8 +3,6 @@
   <POU Name="TcoComponent" Id="{8eb0512f-b833-4c04-bec5-9d60e2cb723b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoComponent EXTENDS TcoObject IMPLEMENTS ITcoRestorable
 VAR
-	{attribute 'hide'}
-	_Restorer : ITcoObject;		
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -35,29 +33,6 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="RegisterRestorer" Id="{e392551f-f765-0482-0bc8-4215d707559c}">
-      <Declaration><![CDATA[METHOD RegisterRestorer : BOOL
-VAR_INPUT
-//	Restorer	:	REFERENCE TO ITcoObject;
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//IF _Restorer = 0 THEN
-//	_Restorer REF= Restorer;
-//	RegisterRestorer := TRUE;	
-//ELSE
-//	RegisterRestorer := FALSE;	
-//END_IF
-
-IF _Restorer = 0 THEN
-	_Restorer := Restorer;
-	RegisterRestorer := TRUE;	
-ELSE
-	RegisterRestorer := FALSE;	
-END_IF]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Restore" Id="{d0c02f91-fc49-4476-8612-b6c1e2ed01ac}">
       <Declaration><![CDATA[METHOD ABSTRACT Restore : ITcoRestorable
 
@@ -65,23 +40,6 @@ END_IF]]></ST>
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="UnregisterRestorer" Id="{478dbece-5fa5-0299-3030-b7e2be7fdfbb}">
-      <Declaration><![CDATA[METHOD UnregisterRestorer : BOOL
-VAR_INPUT
-//	Restorer	:	REFERENCE TO ITcoObject;
-	Restorer	:	ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF _Restorer = Restorer THEN
-	_Restorer := 0;
-	UnregisterRestorer := TRUE;	
-ELSE
-	UnregisterRestorer := FALSE;	
-END_IF
-]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -120,16 +120,6 @@ THIS^._TcoTaskTest_B.ReadOutState();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="RegisterRestorerForAllChilds" Id="{21f4a601-064e-0f6d-0036-276bdf1e4f2f}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL RegisterRestorerForAllChilds]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_TcoTaskTest_A.RegisterRestorer(THIS^);
-_TcoTaskTest_B.RegisterRestorer(THIS^);
-_TcoStateTest_A.RegisterRestorer(THIS^);
-_TcoStateTest_B.RegisterRestorer(THIS^);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TriggerChangeState" Id="{700ce7cc-dcaf-42d5-92d9-f568d5058a79}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL TriggerChangeState
@@ -169,16 +159,6 @@ METHOD INTERNAL TriggerTaskInvoke]]></Declaration>
 
 THIS^._TcoTaskTest_B.Invoke();
 ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="UnregisterRestorerForAllChilds" Id="{e3531c30-6b9c-0456-1295-1166ae27d5a5}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL UnregisterRestorerForAllChilds]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_TcoTaskTest_A.UnregisterRestorer(THIS^);
-_TcoTaskTest_B.UnregisterRestorer(THIS^);
-_TcoStateTest_A.UnregisterRestorer(THIS^);
-_TcoStateTest_B.UnregisterRestorer(THIS^);]]></ST>
       </Implementation>
     </Method>
   </POU>

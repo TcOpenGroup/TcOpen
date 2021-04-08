@@ -516,7 +516,6 @@ namespace TcoCoreUnitTests
 
             //First case tc._TcoObjectTest_A._TcoStateTest_A
             ts = tc._TcoObjectTest_A._TcoStateTest_A;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -526,11 +525,9 @@ namespace TcoCoreUnitTests
                 tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
                 tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
 
             //Second case tc._TcoObjectTest_A._TcoStateTest_B
             ts = tc._TcoObjectTest_A._TcoStateTest_B;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -540,11 +537,9 @@ namespace TcoCoreUnitTests
                 tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
                 tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
 
             //Third case tc._TcoObjectTest_B._TcoStateTest_A
             ts = tc._TcoObjectTest_B._TcoStateTest_A;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -554,11 +549,9 @@ namespace TcoCoreUnitTests
                 tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
                 tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
 
             //Fourth case tc._TcoObjectTest_B._TcoStateTest_B
             ts = tc._TcoObjectTest_B._TcoStateTest_B;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            ts.RegisterRestorerForAllChilds();
             tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
             tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
@@ -568,7 +561,6 @@ namespace TcoCoreUnitTests
                 tt_a._AutoRestoreByMyParentEnabled.Synchron);
             Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
                 tt_b._AutoRestoreByMyParentEnabled.Synchron);
-            ts.UnregisterRestorerForAllChilds();
         }
 
         [Test, Order(318)]
@@ -583,8 +575,6 @@ namespace TcoCoreUnitTests
 
             ts_a = tc._TcoObjectTest_A._TcoStateTest_A;                                 //ts_a(TcoState) is a parent object for tt_a(Tco_Task).
             ts_b = tc._TcoObjectTest_A._TcoStateTest_B;                                 //ts_b(TcoState) is a parent object for tt_b(Tco_Task).
-            ts_a.RegisterRestorerForAllChilds();
-            ts_b.RegisterRestorerForAllChilds();
 
             tt_a = ts_a._TcoTaskTest_A;                                                 //tt_a(Tco_Task) is a child object of the ts_a(TcoState).
             tt_b = ts_b._TcoTaskTest_B;                                                 //tt_b(Tco_Task) is a child object of the ts_b(TcoState).
@@ -666,9 +656,6 @@ namespace TcoCoreUnitTests
 
             Assert.IsFalse(tt_a._IsBusy.Synchron);                                      //Task A should change from the Executing state into the Idle state as Task A is AutoRestorable and its parent has changed its state.          
             Assert.IsTrue(tt_b._IsBusy.Synchron);                                       //Task B should stay in the Executing state even if its parent has changed its state, as Task B is not AutoRestorable.          
-            ts_a.UnregisterRestorerForAllChilds();
-            ts_b.UnregisterRestorerForAllChilds();
-
         }
 
         [Test, Order(320)]
