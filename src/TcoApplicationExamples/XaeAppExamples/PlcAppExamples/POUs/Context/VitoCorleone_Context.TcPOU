@@ -4,16 +4,19 @@
     <Declaration><![CDATA[//--
 // <ContextExampleDeclarations>
 (*
-		
-			THIS EXAMPLE AIMS TO EXPLAIN WHAT CONTEXT AND IDENITY ARE IN A 'TcoOpen' APPLICATION.
-			SEE Main() method of this block.	
+
+	THIS EXAMPLE AIMS TO EXPLAIN WHAT CONTEXT AND IDENITY ARE IN A 'TcoOpen' APPLICATION.
+	SEE Main() method of this block.	
 
 *)
 FUNCTION_BLOCK VitoCorleone_Context EXTENDS TcoCore.TcoContext
 VAR
-	// Each context member object has it 'context' and assigned when instantiated (at birth)
-	// This is typically done by instantiating the objects with FB_init(ITcoObject) as follows
-	// These are Don Corleone's children. When you look inside definitions you' find Don Corleone's grand-childrend (whole family shares the same context).
+(*	
+	Each context member object has it 'context' and assigned when instantiated (at birth)
+	This is typically done by instantiating the objects with FB_init(ITcoObject) as follows
+	These are Don Corleone's children. When you look inside definitions you' find 
+	Don Corleone's grand-childrend (whole family shares the same context).
+*)
 	_santino : Santino_Object(THIS^);
 	_thomas : Thomas_Object(THIS^);
 	_frederico : Frederico_Object(THIS^);
@@ -28,13 +31,29 @@ VAR
 	_donCorleoneIdentity : ULINT;
 	_isDifferentIndentity : BOOL;
 END_VAR
-//---------------------------------------------------------------------------
 // </ContextExampleDeclarations>
 //--
-]]></Declaration>
+
+VAR
+	_JohnyFontaneCaseDone	:	BOOL := FALSE;
+	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^,FALSE);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="JohnyFontaneCase" Id="{c4906c70-37f2-0169-1413-ea46e7819c61}">
+      <Declaration><![CDATA[METHOD JohnyFontaneCase
+VAR_INPUT
+	Jack_Woltz : REFERENCE TO Woltz_Object;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _JohnyFontaneCaseDone THEN 
+	_MakeAnOfferThatCantBeRefused(	Thomas 		:=	_thomas, 
+									Jack_Woltz	:=	Jack_Woltz, 
+									Done		=>	_JohnyFontaneCaseDone);
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Main" Id="{3ca00f52-1d93-04da-0805-13b49953b96a}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -50,8 +69,6 @@ METHOD PROTECTED  Main
       <Implementation>
         <ST><![CDATA[//--
 // <ContextExampleCode>
-//___________________________________________________________________________
-//Implementation part of the TcoContext using.
 (*
 
 					CONTEXT vs IDENTITY
@@ -65,47 +82,78 @@ METHOD PROTECTED  Main
 
 // https://godfather.fandom.com/wiki/Corleone_family
 
-
 _donCorleoneContext := THIS^.Context;
-_isSameContext := _donCorleoneContext = THIS^._santino.Context
-					// Santino's kids
-					AND (THIS^._santino.Context = THIS^._santino._francesca.Context AND THIS^._santino.Context = THIS^._santino._frank.Context AND THIS^._santino.Context = THIS^._santino._kathryn.Context AND THIS^._santino.Context = THIS^._santino._santino.Context)
+_isSameContext :=
+				// Santino
+					_donCorleoneContext = THIS^._santino.Context
+				// Santino's kids
+					AND (THIS^._santino.Context = THIS^._santino._francesca.Context 
+					AND THIS^._santino.Context = THIS^._santino._frank.Context 
+					AND THIS^._santino.Context = THIS^._santino._kathryn.Context 
+					AND THIS^._santino.Context = THIS^._santino._santino.Context)
+				// Thomas
 				  	AND THIS^._santino.Context = THIS^._thomas.Context
-					// Thomas' kids
-					AND (THIS^._thomas.Context = THIS^._thomas._andrew.Context AND THIS^._thomas.Context = THIS^._thomas._christina.Context AND THIS^._thomas.Context = THIS^._thomas._frank.Context AND THIS^._thomas.Context = THIS^._thomas._gianna.Context)
+				// Thomas' kids
+					AND (THIS^._thomas.Context = THIS^._thomas._andrew.Context 
+					AND THIS^._thomas.Context = THIS^._thomas._christina.Context 
+					AND THIS^._thomas.Context = THIS^._thomas._frank.Context 
+					AND THIS^._thomas.Context = THIS^._thomas._gianna.Context)
+				// Frederico
 					AND THIS^._thomas.Context = THIS^._frederico.Context
-					// Frederico's son
+				// Frederico's kids
 					AND (THIS^._frederico.Context = THIS^._frederico._fredo.Context) 
+				// Michael
 					AND THIS^._frederico.Context = THIS^._michael.Context
-					// Michael's kids
-					AND (THIS^._michael.Context = THIS^._michael._anthony.Context AND THIS^._michael.Context = THIS^._michael._mary.Context)					
+				// Michael's kids
+					AND (THIS^._michael.Context = THIS^._michael._anthony.Context 
+					AND THIS^._michael.Context = THIS^._michael._mary.Context)
+				// Constanzia
 					AND THIS^._michael.Context = THIS^._costanzia.Context
-					// Constanzia's kids
-					AND (THIS^._costanzia.Context = THIS^._costanzia._michael.Context AND THIS^._costanzia.Context = THIS^._costanzia._victor.Context);
-					
-					
+				// Constanzia's kids
+					AND (THIS^._costanzia.Context = THIS^._costanzia._michael.Context 
+					AND THIS^._costanzia.Context = THIS^._costanzia._victor.Context);
 
-// However each member of the family has different personal identity and that might be source of trouble
+// However each member of the family has different personal identity and that might 
+// be source of trouble
 
 _donCorleoneIdentity := THIS^.Identity;
-_isDifferentIndentity := _donCorleoneIdentity <> THIS^._santino.Identity 					
-						AND (THIS^._santino.Identity <> THIS^._santino._francesca.Identity AND THIS^._santino.Identity <> THIS^._santino._frank.Identity AND THIS^._santino.Identity <> THIS^._santino._kathryn.Identity AND THIS^._santino.Identity <> THIS^._santino._santino.Identity)
-				  		AND THIS^._santino.Identity <> THIS^._thomas.Identity
-						AND (THIS^._thomas.Identity <> THIS^._thomas._andrew.Identity AND THIS^._thomas.Identity <> THIS^._thomas._christina.Identity AND THIS^._thomas.Identity <> THIS^._thomas._frank.Identity AND THIS^._thomas.Identity <> THIS^._thomas._gianna.Identity)
+_isDifferentIndentity := 
+					// Santino
+						_donCorleoneIdentity <> THIS^._santino.Identity 					
+					// Santino's kids
+						AND (THIS^._santino.Identity <> THIS^._santino._francesca.Identity 
+						AND THIS^._santino.Identity <> THIS^._santino._frank.Identity 
+						AND THIS^._santino.Identity <> THIS^._santino._kathryn.Identity 
+						AND THIS^._santino.Identity <> THIS^._santino._santino.Identity)
+					// Thomas
+						AND THIS^._santino.Identity <> THIS^._thomas.Identity
+					// Thomas' kids
+						AND (THIS^._thomas.Identity <> THIS^._thomas._andrew.Identity 
+						AND THIS^._thomas.Identity <> THIS^._thomas._christina.Identity 
+						AND THIS^._thomas.Identity <> THIS^._thomas._frank.Identity 
+						AND THIS^._thomas.Identity <> THIS^._thomas._gianna.Identity)
+					// Frederico
 						AND THIS^._thomas.Identity <> THIS^._frederico.Identity
+					// Frederico's kids
 						AND (THIS^._frederico.Identity <> THIS^._frederico._fredo.Identity) 
+					// Michael
 						AND THIS^._frederico.Identity <> THIS^._michael.Identity
-						AND (THIS^._michael.Identity <> THIS^._michael._anthony.Identity AND THIS^._michael.Identity <> THIS^._michael._mary.Identity)
+					// Michael's kids
+						AND (THIS^._michael.Identity <> THIS^._michael._anthony.Identity 
+						AND THIS^._michael.Identity <> THIS^._michael._mary.Identity)
+					// Constanzia
 						AND THIS^._michael.Identity <> THIS^._costanzia.Identity
-						AND (THIS^._costanzia.Identity <> THIS^._costanzia._michael.Identity AND THIS^._costanzia.Identity <> THIS^._costanzia._victor.Identity);
+					// Constanzia's kids
+						AND (THIS^._costanzia.Identity <> THIS^._costanzia._michael.Identity 
+						AND THIS^._costanzia.Identity <> THIS^._costanzia._victor.Identity);
  
 
-// Once the context is asigned (at birth [instantiated]) it cannot be changed, an attempt to change the context will result in vendetta.
-
-//THIS^._santino.Messenger.Debug('Santino is trying to say something');			
+// Once the context is asigned (at birth [instantiated]) it cannot be changed, 
+// an attempt to change the context will result in vendetta.
 // </ContextExampleCode>
 //--
-	
+
+JohnyFontaneCase(MAIN_PRG._Jack_Woltz);
 ]]></ST>
       </Implementation>
     </Method>

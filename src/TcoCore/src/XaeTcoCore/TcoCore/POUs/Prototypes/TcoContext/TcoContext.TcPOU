@@ -19,12 +19,18 @@
 				</note>
 			</remarks>
 		</summary>	
-			<example>
-					[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
-			</example>
-			<example>
-					[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleCode)]
-			</example>
+		<example>
+			Declaration part of the 'TcoContext' example. 
+		</example>
+		<example>
+				[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
+		</example>
+		<example>
+			Implementation part of the 'TcoContext' example.
+		</example>
+		<example>
+				[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleCode)]
+		</example>
 	</docu>	
 ~*)
 FUNCTION_BLOCK PUBLIC ABSTRACT TcoContext IMPLEMENTS ITcoContext

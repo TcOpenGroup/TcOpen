@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Woltz_Object" Id="{5f3c91dc-f440-03e0-2cf3-ff1d155e00ef}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Woltz_Object EXTENDS Person_Object
+VAR
+	_Khartoum		:	Horse_Object(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ThinkCarefully" Id="{8b60946d-07cc-0160-2d88-fa7c8575d7b9}">
+      <Declaration><![CDATA[METHOD ThinkCarefully
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _Khartoum._isAlive THEN
+	_refuseFavor	:= TRUE;
+	_grantFavor		:= FALSE;
+ELSE
+	_refuseFavor	:= FALSE;
+	_grantFavor		:= TRUE;	
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

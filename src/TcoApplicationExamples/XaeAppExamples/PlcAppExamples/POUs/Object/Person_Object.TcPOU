@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Person_Object" Id="{06d5cb5f-af8e-03ac-15e4-e55d16257585}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Person_Object EXTENDS TcoCore.TcoObject
+VAR
+	_RequestedFavor	:	STRING;
+	_ReturnFavor	:	STRING;	
+	_refuseFavor	:	BOOL := FALSE;
+	_grantFavor		:	BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FavorIsGranted" Id="{ea0055ff-7b27-09bf-256f-625e5bd37bbf}">
+      <Declaration><![CDATA[METHOD FavorIsGranted : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FavorIsGranted := _grantFavor;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FavorIsRefused" Id="{f98f0004-1b82-0f4d-1c03-f0f82d278e05}">
+      <Declaration><![CDATA[METHOD FavorIsRefused : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FavorIsRefused := _refuseFavor;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="RequestedFavor" Id="{180aa208-95eb-07f5-270d-c9f209d9b0ee}">
+      <Declaration><![CDATA[PROPERTY RequestedFavor : String]]></Declaration>
+      <Get Name="Get" Id="{02cea1d1-bba7-0746-19d4-612712dfe3b8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RequestedFavor := _RequestedFavor;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{313bbcfb-1802-06b1-2b48-57d53dcb1bce}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_RequestedFavor := RequestedFavor;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="RequestForTheFavor" Id="{38491f65-4a1c-0781-37b1-6b079f0ab300}">
+      <Declaration><![CDATA[METHOD RequestForTheFavor
+VAR_INPUT
+	inRequestedFavor		:	STRING;
+	inReturnFavor			:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RequestedFavor	:=	inRequestedFavor;
+ReturnFavor		:=	inReturnFavor;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ReturnFavor" Id="{dd89e78c-45ae-034d-1cb3-e75527ef56c0}">
+      <Declaration><![CDATA[PROPERTY ReturnFavor : String]]></Declaration>
+      <Get Name="Get" Id="{ddb5bc1a-2990-0feb-3e5c-16c2e7cd9710}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ReturnFavor := _ReturnFavor;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a4ccb498-833f-0ae2-36b8-f00372fbac57}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_ReturnFavor := ReturnFavor;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="ThinkCarefully" Id="{920ae051-6065-0815-142d-c6f1b9981c17}">
+      <Declaration><![CDATA[METHOD ThinkCarefully
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

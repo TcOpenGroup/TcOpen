@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Killer_Object" Id="{6cf1f058-fc3f-01f7-18ab-723f0f024201}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Killer_Object EXTENDS Person_Object
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_isAlive	:	BOOL:=	TRUE;
+	_Kill		:	Kill_Task(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IsAlive" Id="{8fc5e1d4-adfe-007f-142b-702cd6733a4d}">
+      <Declaration><![CDATA[PROPERTY IsAlive : Bool]]></Declaration>
+      <Get Name="Get" Id="{4a59e1e1-9eb0-0bbd-09da-d20a1f70c7da}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsAlive := _isAlive;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{461e740a-66d2-00f6-2f6f-366a32c6bc80}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_isAlive	:= IsAlive;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Kill" Id="{7893e1a3-6b2a-0373-30e3-e4bcb9cb5154}">
+      <Declaration><![CDATA[METHOD Kill : TcoCore.ITcoTask
+VAR_INPUT
+	_Object2bKilled	:	REFERENCE TO Horse_Object;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Kill(_Object2bKilled  := _Object2bKilled ,_Killer:= THIS^);
+
+Kill := _Kill;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -8,7 +8,25 @@
 			<para>
 				To get the actual state of the task, <see cref="TcoTask.PlcTcoTask.Ready()"/>, <see cref="TcoTask.PlcTcoTask.Busy()"/>, <see cref="TcoTask.PlcTcoTask.Error()"/> and <see cref="TcoTask.PlcTcoTask.Done()"/> properties are available.
 			</para>
-		</summary>		
+		</summary>
+		<example>
+			Declaration part of the 'TcoTask' example. 
+		</example>
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Task/AskForTheFavor_Task.TcPOU?name=TaskExampleDeclarations)]
+		</example>
+		<example>
+			Implementation part of the 'TcoTask' example.
+		</example>
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Task/AskForTheFavor_Task.TcPOU?name=TaskBodyExampleCode)]
+		</example>
+		<example>
+			Example of the invoking this example 'TcoTask' instance 'outside' of the instance and wait if it ends-up in 'DONE' state or in 'ERROR' state.
+		</example>
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Sequencer/MakeAnOfferThatCantBeRefused.TcPOU?name=TaskExternalUseExample)]
+		</example>
 	</docu>	
 ~*)	
 FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
