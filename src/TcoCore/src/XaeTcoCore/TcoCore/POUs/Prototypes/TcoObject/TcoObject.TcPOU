@@ -108,6 +108,50 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="EqualsTo" Id="{4cbabb6f-bb30-0500-2ad1-c579fa67b5bc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Compares this object to another object and returns ```true``` when the reference equals. 
+			When overriden in derived class custom comparison of two objects of the same type can be evaluated.						
+ 		</summary>			
+		<note>
+			Default implementation compares if two objects by reference. If you want you compare actual values of the objects
+			you will need to override ```EqualsTo``` method where you evaluate the values for equality.
+		</note>
+		<example>
+			<code>
+				// EqualsTo method override example of type MyObject
+				METHOD PUBLIC EqualsTo : BOOL
+				VAR_INPUT
+					Object : ITcoObject;
+				END_VAR
+				
+				VAR
+					_object : POINTER TO MyObject;
+				END_VAR
+				//--------------------------------------------
+				IF(__QUERYPOINTER(Object,  _object)) THEN
+					EqualsTo := _object^._SomeNumber = THIS^._SomeNumber AND _object^._SomeString = THIS^._SomeString;
+				END_IF;	
+			</code>
+		</example>
+	</docu>	
+~*)
+METHOD PUBLIC EqualsTo : BOOL
+VAR_INPUT
+	Object : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(Object.Identity <> 0) THEN
+	super^.EqualsTo := Object.Identity = THIS^.Identity;
+END_IF
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FB_init" Id="{2172d94e-c218-46fa-950d-f8cdb30a05bd}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT

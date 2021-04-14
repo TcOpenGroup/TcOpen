@@ -43,6 +43,9 @@
     <Compile Include="Tests\TcoMessenger\TcoMessengerTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoObject\equals\TcoObjectEqualsTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoObject\TcoObjectTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoObject\equals" />
     <Folder Include="Tests\TcoRtc" />
     <Folder Include="Tests\TcoMessenger" />
     <Folder Include="Tests\TcoSequencer" />
