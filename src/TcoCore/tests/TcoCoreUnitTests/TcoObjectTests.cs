@@ -72,45 +72,45 @@ namespace TcoCoreUnitTests
         [Test,Order(300)]
         public void T300_EqualsTest()
         {
-            Assert.IsTrue(tc_A._TcoObjectTest_Others.EqualsTest(0)); //0 compares to own reference
-            Assert.IsFalse(tc_A._TcoObjectTest_Others.EqualsTest(1)); //1 compares to other object
-            Assert.IsTrue(tc_A._TcoObjectTest_Others.EqualsTest(2)); //2 compares same object instance
+            Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsTest(0)); //0 compares to own reference
+            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsTest(1)); //1 compares to other object
+            Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsTest(2)); //2 compares same object instance
 
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 1;
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj1._SomeString.Synchron = "1";
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeNumber.Synchron = 1;
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeString.Synchron = "1";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 1;
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeString.Synchron = "1";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeNumber.Synchron = 1;
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeString.Synchron = "1";
 
-            Assert.IsTrue(tc_A._TcoObjectTest_Others.EqualsTest(3)); //3 compare two object with Equals override (compares values)
+            Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsTest(3)); //3 compare two object with Equals override (compares values)
 
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeString.Synchron = "0";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeString.Synchron = "0";
 
-            Assert.IsFalse(tc_A._TcoObjectTest_Others.EqualsTest(3)); //3 compare two object with Equals override (compares values)
+            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsTest(3)); //3 compare two object with Equals override (compares values)
         }
 
 
         [Test, Order(400)]
         public void T400_EqualsOverrideTest()
         {
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 0;
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj1._SomeString.Synchron = "";
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeNumber.Synchron = 0;
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeString.Synchron = "";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 0;
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeString.Synchron = "";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeNumber.Synchron = 0;
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeString.Synchron = "";
 
-            Assert.IsTrue(tc_A._TcoObjectTest_Others.EqualsOverrideTest());
+            Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsOverrideTest());
           
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 10;
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj1._SomeString.Synchron = "Hello";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 10;
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeString.Synchron = "Hello";
 
-            Assert.IsFalse(tc_A._TcoObjectTest_Others.EqualsOverrideTest());
+            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsOverrideTest());
 
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeNumber.Synchron = 10;
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeNumber.Synchron = 10;
 
-            Assert.IsFalse(tc_A._TcoObjectTest_Others.EqualsOverrideTest());
+            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsOverrideTest());
             
-            tc_A._TcoObjectTest_Others._TcoObjectEqualsTestObj2._SomeString.Synchron = "Hello";
+            tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj2._SomeString.Synchron = "Hello";
 
-            Assert.IsTrue(tc_A._TcoObjectTest_Others.EqualsOverrideTest());
+            Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsOverrideTest());
         }        
     }
 }

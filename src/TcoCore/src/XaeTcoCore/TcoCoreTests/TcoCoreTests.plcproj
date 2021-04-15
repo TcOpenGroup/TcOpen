@@ -43,7 +43,7 @@
     <Compile Include="Tests\TcoMessenger\TcoMessengerTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\TcoObject\equals\TcoObjectEqualsTest.TcPOU">
+    <Compile Include="Tests\TcoObject\EqualsOverride\TcoObjectEqualsTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoObject\TcoObjectTest.TcPOU">
@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
-    <Folder Include="Tests\TcoObject\equals" />
+    <Folder Include="Tests\TcoObject\EqualsOverride" />
     <Folder Include="Tests\TcoRtc" />
     <Folder Include="Tests\TcoMessenger" />
     <Folder Include="Tests\TcoSequencer" />
