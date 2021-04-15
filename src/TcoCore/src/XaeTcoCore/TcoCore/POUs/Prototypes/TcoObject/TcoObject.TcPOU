@@ -145,7 +145,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(Object.Identity <> 0) THEN
-	super^.EqualsTo := Object.Identity = THIS^.Identity;
+	EqualsTo := Object.Identity = THIS^.Identity;
 END_IF
 
 
