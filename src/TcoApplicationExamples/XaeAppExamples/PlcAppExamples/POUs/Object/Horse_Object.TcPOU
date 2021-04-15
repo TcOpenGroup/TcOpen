@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Horse_Object" Id="{256de3dc-719e-0b8e-0e03-f50b1a36dc1a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Horse_Object EXTENDS TcoCore.TcoObject
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_price		:	REAL:=	600000;
+	_isAlive	:	BOOL:=	TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IsAlive" Id="{34940d56-5426-0be4-17cd-cf1ef774716a}">
+      <Declaration><![CDATA[PROPERTY IsAlive : Bool]]></Declaration>
+      <Get Name="Get" Id="{891b74e2-9b42-04bc-3c2d-547dd654b534}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsAlive := _isAlive;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{14ae4f1f-c3df-0612-253a-f3ec69794c5b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_isAlive	:= IsAlive;
+IF NOT _isAlive THEN
+	_price := 0 ;
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Price" Id="{18b4c312-4729-0854-3cd1-6959611af683}">
+      <Declaration><![CDATA[PROPERTY Price : LREAL]]></Declaration>
+      <Get Name="Get" Id="{50bf9ead-c98d-096c-31ff-34a444666e78}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF _isAlive THEN
+	Price	:= 	_price;
+ELSE
+	_price	:=	0;
+	Price	:= 	_price;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c2d46adf-e662-01a9-01cf-e937129f35fb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF _isAlive THEN
+	_price	:=	Price;
+ELSE
+	_price	:=	0;
+END_IF
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

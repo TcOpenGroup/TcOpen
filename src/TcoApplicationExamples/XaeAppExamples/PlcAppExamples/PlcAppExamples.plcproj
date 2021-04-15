@@ -48,7 +48,22 @@
     <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PRG_MAIN.TcPOU">
+    <Compile Include="POUs\MAIN_PRG.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Object\Horse_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Object\Killer_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Object\Woltz_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Object\Person_Object.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Sequencer\MakeAnOfferThatCantBeRefused.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Sequencer\ST_01_Components.TcPOU">
@@ -67,6 +82,12 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="POUs\Task\AskForTheFavor_Task.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Task\Kill_Task.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -74,6 +95,8 @@
     <Folder Include="POUs\Context" />
     <Folder Include="POUs\Context\CorleoneKids" />
     <Folder Include="POUs\Context\Leaves" />
+    <Folder Include="POUs\Task" />
+    <Folder Include="POUs\Object" />
     <Folder Include="POUs\Sequencer" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

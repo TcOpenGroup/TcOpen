@@ -2,7 +2,6 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="Frederico_Object" Id="{a670f37d-a57d-030d-0c8c-d5d3d2bdaab6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Frederico_Object EXTENDS TcoCore.TcoObject
-//VAR_INPUT
 VAR
 	_fredo 	:	AKid_Object(THIS^);	
 END_VAR
