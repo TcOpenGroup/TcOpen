@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoObjectTest" Id="{e84228ff-9c33-47a4-a38e-640688a82a88}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoObjectTest EXTENDS TcoObject
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoObjectTest EXTENDS TcoCore.TcoObject
 VAR
 	_MyIdentity				:	ULINT;
 	_MyContextIdentity		:	ULINT;
@@ -12,6 +12,9 @@ VAR
 	_TcoTaskTest_B			:	TcoTaskTest(THIS^);
 	_TcoStateTest_A			:	TcoStateTest(THIS^,TRUE);
 	_TcoStateTest_B			:	TcoStateTest(THIS^,FALSE);
+	// Object equality
+	_TcoObjectEqualsTestObj1 	:   TcoObjectEqualsTest(THIS^);
+	_TcoObjectEqualsTestObj2 	:   TcoObjectEqualsTest(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -24,6 +27,41 @@ METHOD INTERNAL CallTaskInstancies]]></Declaration>
         <ST><![CDATA[_TcoTaskTest_A();
 
 _TcoTaskTest_B();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EqualsOverrideTest" Id="{ee60d2fd-b5db-0d20-0c27-57a751cde2ce}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PUBLIC EqualsOverrideTest : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[EqualsOverrideTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj2);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EqualsTest" Id="{9f06ff61-1678-0fe4-0121-54cfb8b16218}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PUBLIC EqualsTest : BOOL
+VAR_INPUT
+	_case : INT;
+END_VAR
+
+VAR 
+	referenceTo_TcoStateTest_A : REFERENCE TO TcoStateTest;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _case OF
+	0:
+		referenceTo_TcoStateTest_A REF= _TcoStateTest_A;
+		EqualsTest := _TcoStateTest_A.EqualsTo(referenceTo_TcoStateTest_A);
+    1:	
+		EqualsTest := _TcoStateTest_A.EqualsTo(_TcoStateTest_B);
+	2:	
+		EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj1);
+	3:
+		EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj2);
+END_CASE
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -43,24 +81,5 @@ _MyParentIdentity	:=	THIS^._Parent.Identity;
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoObjectTest">
-      <LineId Id="22" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObjectTest.CallTaskInstancies">
-      <LineId Id="32" Count="2" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObjectTest.ReadOutIdentities">
-      <LineId Id="7" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
