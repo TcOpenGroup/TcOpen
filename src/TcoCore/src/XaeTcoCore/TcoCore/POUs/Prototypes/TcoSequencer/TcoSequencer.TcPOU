@@ -720,8 +720,10 @@ END_IF
 // Cycle time measurement
 _cycleTimer(IN:= TRUE, PT:= T#48D40H62M47S295MS);	
 _SequenceElapsedTime  := _cycleTimer.ET;
-// Step changed
-IF(_theOrderOfTheCurrentlyExecutedStep <> _theOrderOfThePreviouslyExecutedStep) THEN
+
+// Step changed in cyclic mode
+_stepModeActive := _stepModeControler.Mode = eSequencerMode.StepMode;
+IF(_theOrderOfTheCurrentlyExecutedStep <> _theOrderOfThePreviouslyExecutedStep) AND NOT _stepModeActive THEN
 	_theOrderOfThePreviouslyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;
 	StepChanged(inStepID);
 END_IF;
@@ -741,20 +743,16 @@ IF(_requestStepActive) THEN
 END_IF
 
 // STEP MODE COORDINATION
-_stepModeActive := _stepModeControler.Mode = eSequencerMode.StepMode;
-_stepInExecuting := _stepModeControler._stepIn.Busy;
-_stepModeControler._stepForward.Execute();
-_stepModeControler._stepBackward.Execute();
-_stepModeControler._stepIn.Execute();
 _stepModeControler(inCurrentStepRunning := _currentStep.Status = eStepStatus.Running);
 
 IF(_stepModeActive) THEN			
 	// StepForward
 	IF _stepModeControler._stepForward.Execute() THEN
+		_stepModeControler._stepIn.Restore();
+		_stepModeControler._stepBackward.Restore();
 		IF _theOrderOfTheCurrentlyExecutedStep < _numberOfStepsInSequence THEN
 			_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;
 			_stepModeControler._stepForward.DoneWhen(TRUE);
-			_stepModeControler._stepIn.Restore();
 		ELSE
 			_stepModeControler._stepForward.Restore();
 		END_IF			
@@ -762,15 +760,23 @@ IF(_stepModeActive) THEN
 
 	// Step Backward
 	IF _stepModeControler._stepBackward.Execute() THEN
+		_stepModeControler._stepIn.Restore();
+		_stepModeControler._stepForward.Restore();
 		IF _theOrderOfTheCurrentlyExecutedStep > 0 THEN
 			_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep - 1;
 			_stepModeControler._stepBackward.DoneWhen(TRUE);
-			_stepModeControler._stepIn.Restore();
 		ELSE
 			_stepModeControler._stepForward.Restore();
 		END_IF			
-	END_IF
+	END_IF			
 END_IF;
+
+IF(_stepModeControler._stepForward.Done) THEN 
+	_stepModeControler._stepForward.Restore();
+END_IF
+IF(_stepModeControler._stepBackward.Done) THEN
+	_stepModeControler._stepBackward.Restore();
+END_IF		
 
 // Determine the step is in order of execution
 _isInOrderOfExecution := (_theOrderOfTheCurrentlyExecutedStep =_theOrderOfTheCurrentlyEvaluatedStep);
@@ -843,7 +849,8 @@ IF(_isInOrderOfExecution) THEN
 	IF NOT inEnabled THEN
 		_currentStep.Status := eStepStatus.Disabled;
 	END_IF
-
+	_stepInExecuting := _stepModeControler._stepIn.Busy;
+	
 	IF(NOT inEnabled AND NOT _stepInExecuting AND NOT _stepModeActive) THEN				
 		_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;		
 	END_IF					

@@ -62,7 +62,16 @@ VAR
 ~*)
 	{attribute addProperty Name "<#Invoke request#>"}
 	_invokeRequest : BOOL;
-	{attribute 'hide'}
+(*~
+	<docu>
+		<summary>
+			Use to determine if the task execution is enabled for example from the HMI application. 
+			This value is read only, to modify it use the property <see cref="TcoTask.PlcTcoTask.Enabled()"/>		
+		</summary>		
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Enabled#>"}
+	{attribute clr [ReadOnly()]}
 	_enabled : BOOL := TRUE;
 END_VAR]]></Declaration>
     <Implementation>

@@ -3540,8 +3540,11 @@ namespace TcoCoreUnitTests
             plcCycle = 0;
             tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 3 
             {                                                           //StepDescription should have value of "(>Step 3<)" and step status should be ReadyToRun
+                if(plcCycle== 0)
+                {
+                    tc.StepForward();
+                }
                 plcCycle++;
-                tc.StepForward();
                 if (tc.Step(0, true, "Initial step")) { }
                 if (tc.Step(1, true, "Step 1")) { }
                 if (tc.Step(2, true, "Step 2"))
@@ -3611,8 +3614,11 @@ namespace TcoCoreUnitTests
             plcCycle = 0;
             tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of 2 
             {                                                           //StepDescription should have value of "(>Step 2<)" and step status should be ReadyToRun
+                if(plcCycle==0)
+                {
+                    tc.StepBackward();
+                }
                 plcCycle++;
-                tc.StepBackward();
                 if (tc.Step(0, true, "Initial step")) { }
                 if (tc.Step(1, true, "Step 1")) { }
                 if (tc.Step(2, true, "Step 2"))
