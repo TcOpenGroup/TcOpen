@@ -54,7 +54,7 @@ END_VAR]]></Declaration>
 	0:
 		referenceTo_TcoStateTest_A REF= _TcoStateTest_A;
 		EqualsTest := _TcoStateTest_A.EqualsTo(referenceTo_TcoStateTest_A);
-    1:	
+	1:	
 		EqualsTest := _TcoStateTest_A.EqualsTo(_TcoStateTest_B);
 	2:	
 		EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj1);
