@@ -721,12 +721,6 @@ END_IF
 _cycleTimer(IN:= TRUE, PT:= T#48D40H62M47S295MS);	
 _SequenceElapsedTime  := _cycleTimer.ET;
 
-// Step changed in cyclic mode
-_stepModeActive := _stepModeControler.Mode = eSequencerMode.StepMode;
-IF(_theOrderOfTheCurrentlyExecutedStep <> _theOrderOfThePreviouslyExecutedStep) AND NOT _stepModeActive THEN
-	_theOrderOfThePreviouslyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;
-	StepChanged(inStepID);
-END_IF;
 // Specific step request
 IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurrentlyEvaluatedStep <> 0) THEN
 	_currentStep.Status := eStepStatus.Done;
@@ -743,8 +737,8 @@ IF(_requestStepActive) THEN
 END_IF
 
 // STEP MODE COORDINATION
+_stepModeActive := _stepModeControler.Mode = eSequencerMode.StepMode;
 _stepModeControler(inCurrentStepRunning := _currentStep.Status = eStepStatus.Running);
-
 IF(_stepModeActive) THEN			
 	// StepForward
 	IF _stepModeControler._stepForward.Execute() THEN
@@ -857,10 +851,6 @@ IF(_isInOrderOfExecution) THEN
 
 	IF _stepModeActive THEN
 		IF _stepModeControler._stepIn.Execute() THEN
-			IF(NOT _stepInExecuting) THEN
-				_theOrderOfThePreviouslyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;
-				StepChanged(inStepID);
-			END_IF;			
 			_stepInExecuting := TRUE;			
 			// Skips the step when not enabled
 			IF(NOT inEnabled) THEN
@@ -878,12 +868,14 @@ IF(_isInOrderOfExecution) THEN
 			_currentStep.Description := CONCAT(_currentStep.Description,'<)');		
 		END_IF
 	END_IF	
+
 	Step := (NOT _stepModeActive OR _stepInExecuting) AND inEnabled;
-	
+
 	IF(Step) THEN
 		//First entry to step production
 		IF(_theOrderOfThePreviouslyExecutedStep <> _theOrderOfTheCurrentlyExecutedStep) THEN
 			_isFirstStepEntry := TRUE;
+			StepChanged(inStepID);
 		END_IF;	
 
 		IF NOT CheckStepID(inStepID,_stepModeActive,_stepInExecuting) THEN

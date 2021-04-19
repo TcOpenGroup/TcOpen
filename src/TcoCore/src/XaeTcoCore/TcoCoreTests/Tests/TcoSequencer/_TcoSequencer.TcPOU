@@ -19,6 +19,9 @@ VAR
 	_PostStepCompleteCount 				: 	INT;
 	_PostSequenceCompleteCount 			: 	INT;
 	_OnSequencerErrorCount	 			: 	ULINT;
+	_OnStateChangeCount 				:	ULINT;
+	_StateChangeFrom					:	INT;
+	_StateChangeTo						:	INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -8349,6 +8352,21 @@ END_VAR
 	ELSE
 		_OnSequencerErrorCount := _OnSequencerErrorCount + 0;
 END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{a3a0e1a2-27bc-0384-1d2b-01018017d7b0}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._OnStateChangeCount := THIS^._OnStateChangeCount + 1;
+
+_StateChangeFrom := PreviousState;
+_StateChangeTo := NewState;
 ]]></ST>
       </Implementation>
     </Method>

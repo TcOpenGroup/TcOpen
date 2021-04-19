@@ -12,11 +12,15 @@ FUNCTION_BLOCK TcoStepModeControler EXTENDS TcoState
 VAR_INPUT
 	inCurrentStepRunning : BOOL;
 END_VAR
+
 VAR
+//	{attribute 'hide'}
 	_stepBackward : TcoTask(THIS^);	
+//	{attribute 'hide'}
 	_stepIn : TcoTask(THIS^);	
+//	{attribute 'hide'}
 	_stepForward : TcoTask(THIS^);
-END_VAR]]></Declaration>
+END_VAR	]]></Declaration>
     <Implementation>
       <ST><![CDATA[THIS^._stepBackward.Enabled := THIS^.Mode = eSequencerMode.StepMode;
 THIS^._stepIn.Enabled := THIS^.Mode = eSequencerMode.StepMode;
