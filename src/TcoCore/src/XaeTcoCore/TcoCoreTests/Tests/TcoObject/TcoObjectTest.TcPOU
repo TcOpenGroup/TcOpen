@@ -43,25 +43,26 @@ METHOD PUBLIC EqualsOverrideTest : BOOL
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD PUBLIC EqualsTest : BOOL
 VAR_INPUT
-	_case : INT;
+    _case : INT;
 END_VAR
 
-VAR 
-	referenceTo_TcoStateTest_A : REFERENCE TO TcoStateTest;
+VAR
+    referenceTo_a_TcoStateTest : REFERENCE TO TcoStateTest;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _case OF
-	0:
-		referenceTo_TcoStateTest_A REF= _TcoStateTest_A;
-		EqualsTest := _TcoStateTest_A.EqualsTo(referenceTo_TcoStateTest_A);
-    1:	
-		EqualsTest := _TcoStateTest_A.EqualsTo(_TcoStateTest_B);
-	2:	
-		EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj1);
-	3:
-		EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj2);
+    0:
+        referenceTo_a_TcoStateTest REF= _TcoStateTest_A;
+        EqualsTest := _TcoStateTest_A.EqualsTo(referenceTo_a_TcoStateTest);
+    1:
+        EqualsTest := _TcoStateTest_A.EqualsTo(_TcoStateTest_B);
+    4:
+        EqualsTest := _TcoStateTest_B.EqualsTo(_TcoStateTest_A);
+    2:
+        EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj1);
+    3:
+        EqualsTest := _TcoObjectEqualsTestObj1.EqualsTo(_TcoObjectEqualsTestObj2);
 END_CASE
-
 ]]></ST>
       </Implementation>
     </Method>
