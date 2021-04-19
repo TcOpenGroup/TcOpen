@@ -4,7 +4,7 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Complete message details including time stamp, message text, message category, identity of the message provider, PLC cycle in which the message was posted.
+			Complete message details including time stamp, message text, message category, identity of the message provider, context cycle in which the message was posted.			
 		</summary>				
 	</docu>	
 ~*)
@@ -48,7 +48,7 @@ STRUCT
 (*~
 	<docu>
 		<summary>
-			Number of the PLC cycle in which the message was posted.
+			Context cycle in which the message was posted.
 		</summary>				
 	</docu>	
 ~*)
@@ -58,7 +58,7 @@ STRUCT
 (*~
 	<docu>
 		<summary>
-			Count of message of the object in the last cycle.
+			Count of messages of the object in the current cycle.
 		</summary>				
 	</docu>	
 ~*)

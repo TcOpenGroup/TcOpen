@@ -4,12 +4,11 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Basic construction block from which all blocks of a TcOpen application should derive. 
+			Basic construction block from which all blocks of a TcOpen application should derive in order to take advantage of the framework. 
 			This function block is abstract and must be implemented in a derived block.
 			```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
 			```TcoObjects``` that belong to same ```TcoContext``` share the same context. 
-			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).            
-			The ```TcoObject``` provides root context to all its members.
+			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).            			
 			<para>
 				<example>
 				<note type="Example">
@@ -83,6 +82,7 @@ VAR
 	_Identity : ULINT;
 	{attribute 'hide'}
 	_Parent : ITcoObject;	
+	{attribute clr [RenderIgnore()]}
 	_messenger : TcoMessenger(THIS^);
 END_VAR
 ]]></Declaration>
@@ -93,12 +93,11 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the context of the parent object, that this object is assigned to.
-			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			Gets the context of the this object. The context is provided by parent object(s).			
 		</summary>			
 	</docu>	
 ~*)
-PROPERTY Context : ITcoContext]]></Declaration>
+PROPERTY PUBLIC Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{6c6cf6e8-01f1-4c58-9a7c-25846f41a746}">
         <Declaration><![CDATA[VAR
 END_VAR
