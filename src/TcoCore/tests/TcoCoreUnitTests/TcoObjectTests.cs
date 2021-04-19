@@ -73,7 +73,8 @@ namespace TcoCoreUnitTests
         public void T300_EqualsTest()
         {
             Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsTest(0)); //0 compares to own reference
-            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsTest(1)); //1 compares to other object
+            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsTest(1)); //1 compares to other object (A to B)
+            Assert.IsFalse(tc_A._TcoObjectTest_Misc.EqualsTest(4)); //4 compares to other object (B to A)
             Assert.IsTrue(tc_A._TcoObjectTest_Misc.EqualsTest(2)); //2 compares same object instance
 
             tc_A._TcoObjectTest_Misc._TcoObjectEqualsTestObj1._SomeNumber.Synchron = 1;

@@ -115,8 +115,9 @@ END_VAR
 			When overriden in derived class custom comparison of two objects of the same type can be evaluated.						
  		</summary>			
 		<note>
-			Default implementation compares if two objects by reference. If you want you compare actual values of the objects
-			you will need to override ```EqualsTo``` method where you evaluate the values for equality.
+			Default implementation compares only if two objects share the same reference. 
+			If you want to compare actual values of the objects you will need to override EqualsTo method, 
+			where you evaluate the values for equality.
 		</note>
 		<example>
 			<code>
