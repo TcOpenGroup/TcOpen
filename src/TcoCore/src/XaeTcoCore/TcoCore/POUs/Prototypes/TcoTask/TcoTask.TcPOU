@@ -29,7 +29,7 @@
 		</example>
 	</docu>	
 ~*)	
-FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
+FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask, ITcoTaskStatus
 VAR
 	{attribute clr [ReadOnly()]}
 	_taskState : eTaskState;
@@ -434,7 +434,7 @@ PROPERTY Identity : ULINT]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
-METHOD Invoke : ITcoTask
+METHOD Invoke : ITcoTaskStatus
 VAR
 	_newInvokeCall	:	BOOL;
 END_VAR]]></Declaration>
