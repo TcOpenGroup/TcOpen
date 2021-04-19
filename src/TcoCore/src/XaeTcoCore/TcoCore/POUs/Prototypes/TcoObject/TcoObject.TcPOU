@@ -172,8 +172,9 @@ _Parent := Parent;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the own identity of the <see cref ="TcoObject.PlcTcoObject()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
-			This variable is used in the higher level packages.  
+			Gets the identity of this <see cref ="TcoObject.PlcTcoObject()"/>. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level applications.  
 		</summary>			
 	</docu>	
 ~*)
@@ -191,7 +192,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Returns current messenger that is part of this object.
+				Gets messenger of this object.
 				See <see cref="TcoMessenger.PlcTcoMessenger()"/> for more details.
 			</summary>			
 		</docu>

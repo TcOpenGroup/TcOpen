@@ -72,8 +72,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the context of the parent object, that this object is assigned to.
-			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			Aborts the execution of this task and restores the ready state.			
 		</summary>			
 	</docu>	
 ~*)
@@ -89,13 +88,13 @@ END_IF]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns if this instance is auto restorable. This is 'dependency property'. Value of this property is given by the parent of this object. 
+			Gets whether this instance is auto restorable. This is depends on the parent's settings; the value of this property is given by the parent of this object. 
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> of the parent object and cannot be changed during runtime.
 			The <c>AutoRestorable</c> property of this objects is retrieved from the <c>EnableAutoRestore</c> property of the parent object.
 			This is done by calling the <c>CheckIfAutoRestoreEnabledByParent()</c> method inside the implicit method <c>FB_init()</c> after download.
 			If this instance is the auto restorable it will call the <see cref="TcoTask.PlcTcoTask.Restore()"/> method if:
 			<para>
-				1.) The <see cref="TcoTask.PlcTcoTask.Execute()"/> method has not been called for one or more cycles and starts to be called again.
+				1.) The <see cref="TcoTask.PlcTcoTask.Invoke()"/> method has not been called for one or more cycles and starts to be called again.
 			</para>
 			<para>
 				2.)	Parent object of this instance changes its state.
@@ -126,7 +125,7 @@ PROPERTY AutoRestorable : BOOL]]></Declaration>
 				2.)	Parent object of this instance changes its state no mather when and this instance has not yet process this change.
 			</para>
 			<para>
-				3.) The <see cref="TcoTask.PlcTcoTask.Execute()"/> method has not been called for one or more cycles and starts to be called again.
+				3.) The <see cref="TcoTask.PlcTcoTask.Invoke()"/> method has not been called for one or more cycles and starts to be called again.
 			</para>
 			<para>
 				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
@@ -145,10 +144,10 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//If parent of this instance is TcoState type or its derived type and the parent
-//EnableAutoRestore property is set to TRUE, this instance determines the value
-//of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
-//after each download.
+        <ST><![CDATA[// If the parent of this instance is TcoState type or its derived type and the parent
+// EnableAutoRestore property is set to TRUE, this instance determines the value
+// of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
+// after each download.
 IF _AutoRestorable THEN		
 	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
@@ -174,7 +173,7 @@ END_IF]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns true if the task is executing, it has not been yet finished and is not in Error state.
+			Gets whether the task is executing.
 		</summary>			
 	</docu>	
 ~*)
@@ -252,7 +251,7 @@ END_IF]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the context of the parent object, that this object is assigned to.
+			Gets the context of this object.
 			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 		</summary>			
 	</docu>	
@@ -269,7 +268,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns true if the task has succesfully finished its execution and did not enter into the Error state.
+			Gets whether the task has succesfully completed the  execution and did not enter into the Error state.
 		</summary>			
 	</docu>	
 ~*)
@@ -285,7 +284,7 @@ PROPERTY Done : BOOL]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Calling with inCondition equals TRUE causes transition of the task into the Done state.
+			Completes the execution of this task when ```inCondition``` is true; the task transitions into ```Done``` state.
 		</summary>			
 	</docu>	
 ~*)
@@ -411,8 +410,9 @@ CheckIfAutoRestoreEnabledByParent();
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the own identity of the <see cref ="TcoTask.PlcTcoTask()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
-			This variable is used in the higher level packages.  
+			Gets identity of this <see cref ="TcoTask.PlcTcoTask()"/>. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level applications.  
 		</summary>			
 	</docu>	
 ~*)
@@ -456,7 +456,14 @@ Invoke := THIS^;
       </Implementation>
     </Method>
     <Method Name="OnTaskError" Id="{7bd5d176-51b6-065b-1ffd-f139109a93ea}">
-      <Declaration><![CDATA[METHOD PROTECTED OnTaskError
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -466,7 +473,7 @@ Invoke := THIS^;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns true if the task is ready to be started by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method.
+			Gets whether the task is ready to be started (Tasks start by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method).
 		</summary>			
 	</docu>	
 ~*)
@@ -482,7 +489,7 @@ PROPERTY Ready : BOOL]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Restore this instance to the Ready state. Could be called explicitly so as using auto restore mechanism.
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
 			<para>
 				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
 			</para>
@@ -500,7 +507,7 @@ Restore := THIS^;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Return the actual state of this instance. 
+			Gets the actual state of this instance. 
 			<para>
 				See <see cref="eTaskState"/> for more details.
 			</para>
@@ -519,7 +526,7 @@ PROPERTY State : eTaskState]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Calling with inCondition equals TRUE causes transition of the task into the Error state.
+			When called with ```inCondition``` ```TRUE``` causes transition of the task into the ```Error``` state.
 		</summary>			
 	</docu>	
 ~*)
