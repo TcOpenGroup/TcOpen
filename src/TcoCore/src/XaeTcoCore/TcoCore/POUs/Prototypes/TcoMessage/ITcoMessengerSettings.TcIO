@@ -3,6 +3,12 @@
   <Itf Name="ITcoMessengerSettings" Id="{6d6b9064-8fe9-0b02-00be-c0f0ff54eeb4}">
     <Declaration><![CDATA[INTERFACE ITcoMessengerSettings
 ]]></Declaration>
+    <Property Name="IsSuspended" Id="{154b3f83-5ad6-0af7-30ee-bb7fbba61c91}">
+      <Declaration><![CDATA[PROPERTY IsSuspended : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f4387df2-7158-0155-1a2d-255a7974d7ab}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="MinLevel" Id="{affff53c-8111-0dde-30b4-02bee538a109}">
       <Declaration><![CDATA[PROPERTY MinLevel : eMessageCategory]]></Declaration>
       <Get Name="Get" Id="{229f0b50-4658-067e-0200-914aca38739d}">
