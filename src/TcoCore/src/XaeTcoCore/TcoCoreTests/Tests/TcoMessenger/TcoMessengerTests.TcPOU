@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerTests EXTENDS TcoCore.TcoObject
 VAR
 	_category : TcoCore.eMessageCategory;
+	_minLevel : TcoCore.eMessageCategory;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -106,6 +107,34 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_messenger.Programming(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Resume" Id="{82062340-d28d-08df-1727-1ea7f90e73d2}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PUBLIC Resume
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.Resume();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetMinLevel" Id="{14062f88-3c36-0c8f-1769-35d9d0ae9a98}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PUBLIC SetMinLevel
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.MinLevel := _minLevel;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Suspend" Id="{009042cd-d9d8-01ec-1e53-e01d1459f156}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PUBLIC Suspend
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.Suspend();]]></ST>
       </Implementation>
     </Method>
     <Method Name="TimedOut" Id="{df75203d-ff31-0992-037d-6d10558ac6d6}">
