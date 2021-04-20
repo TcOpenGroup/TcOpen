@@ -53,13 +53,13 @@ END_CASE
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF _EnableChangingMode THEN
-	SUPER^.ChangeState(Mode);
+	SUPER^.ChangeStateProtected(Mode);
 END_IF]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="OnStateChange" Id="{b7c60afe-dc93-0d5b-2752-c7f3e19a3b5e}">
-      <Declaration><![CDATA[METHOD PRIVATE OnStateChange
+      <Declaration><![CDATA[METHOD PROTECTED FINAL OnStateChange
 VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;

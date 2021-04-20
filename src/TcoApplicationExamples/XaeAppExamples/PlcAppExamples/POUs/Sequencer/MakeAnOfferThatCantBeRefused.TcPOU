@@ -28,7 +28,7 @@ END_VAR
 		</summary>
 	</docu>
 ~*)
-METHOD  Main : BOOL
+METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Step(0,TRUE,'Send Thomas to ask Jack Woltz for granting the movie role.') THEN

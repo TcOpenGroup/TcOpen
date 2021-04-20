@@ -8,7 +8,7 @@
 			</summary>
 		</docu>
 ~*)
-FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoState IMPLEMENTS ITcoSequencer
+FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoStateExtendible IMPLEMENTS ITcoSequencer
 VAR
 (*~
 	<docu>
@@ -111,7 +111,9 @@ VAR
 	_stepModeControler : TcoStepModeControler(THIS^,FALSE);
 	{attribute 'hide'}
 	_checkStepIdRequestedInStepMode : BOOL;
-END_VAR]]></Declaration>
+END_VAR
+
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -174,6 +176,25 @@ METHOD INTERNAL FINAL Close
 IF _stepModeControler._stepIn.Done THEN
 	_stepModeControler._stepIn.Restore();	
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CompleteStep" Id="{772d43fc-5320-0adc-02b4-59560418f133}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Completes the execution of the current step and moves the sequencer pointer to the next step in order of execution.
+		</summary>		
+		<returns></returns>	
+	</docu>	
+~*)
+METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
+_currentStep.Status := eStepStatus.Done;
+PostStepComplete();
+_stepModeControler._stepIn.DoneWhen(_stepModeControler._stepIn.Execute());
+CompleteStep := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{f2880318-c67a-0c39-0ff2-3dbccb0e13f7}">
@@ -284,7 +305,6 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 					_currentStep.Description := _message;
 					_currentStep.Status := eStepStatus.Error;
 					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
-//					OnSequencerError(_sequencerErrorId);
 					_sequencerHasError := TRUE;
 					RETURN;					
 				END_IF
@@ -330,7 +350,7 @@ END_IF
 		</summary>
 	</docu>
 ~*)
-METHOD ABSTRACT Main : BOOL
+METHOD PROTECTED ABSTRACT Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -349,7 +369,8 @@ METHOD ABSTRACT Main : BOOL
 		</summary>			
 	</docu>	
 ~*)
-PROPERTY Mode : eSequencerMode]]></Declaration>
+PROPERTY PUBLIC Mode : eSequencerMode
+]]></Declaration>
       <Get Name="Get" Id="{43259608-0866-0860-1707-21893efe0528}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -438,7 +459,6 @@ IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
 	_currentStep.Description := _message;
 	_currentStep.Status := eStepStatus.Error;
 	THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
-//	OnSequencerError(_sequencerErrorId);
 	_sequencerHasError := TRUE;
 END_IF
 
@@ -462,7 +482,7 @@ END_IF]]></ST>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PUBLIC PostSequenceComplete
+METHOD PROTECTED PostSequenceComplete
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -477,7 +497,7 @@ METHOD PUBLIC PostSequenceComplete
 		</summary>			
 	</docu>	
 ~*)
-METHOD PUBLIC PostStepComplete
+METHOD PROTECTED PostStepComplete
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -499,7 +519,7 @@ METHOD PUBLIC PostStepComplete
 		</summary>
 	</docu>
 ~*)
-METHOD PUBLIC FINAL RequestStep : ITcoSequencer
+METHOD PROTECTED FINAL RequestStep : ITcoSequencer
 VAR_INPUT
 	(*~
 		<docu>
@@ -529,7 +549,6 @@ IF(inRequestedStepID <> 0) THEN
 			_currentStep.Description := _message;
 			_currentStep.Status := eStepStatus.Error;
 			THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
-//			OnSequencerError(_sequencerErrorId);
 			_sequencerHasError := TRUE;
 		END_IF
 	ELSE
@@ -627,7 +646,7 @@ THIS^.Close();]]></ST>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PUBLIC FINAL SequenceComplete
+METHOD PROTECTED FINAL SequenceComplete
 
 ]]></Declaration>
       <Implementation>
@@ -825,7 +844,6 @@ IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR 
 		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.StepIdHasBeenChanged;
 	END_IF
-//	OnSequencerError(_sequencerErrorId);
 	_sequencerHasError := TRUE;
 END_IF
 
@@ -950,7 +968,7 @@ _IdOfThePreviouslyExecutedStep := 0;
 
 _StepTimer(IN:= FALSE);
 
-SUPER^.ChangeState(newState);
+SUPER^.ChangeStateProtected(newState);
 ]]></ST>
       </Implementation>
     </Method>
@@ -963,7 +981,7 @@ SUPER^.ChangeState(newState);
 		</summary>			
 	</docu>	
 ~*)
-METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
+METHOD PROTECTED FINAL StepCompleteWhen 
 VAR_INPUT
 (*~
 	<docu>
@@ -977,17 +995,10 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(inCondition) THEN
-	_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;
-	
-	_currentStep.Status := eStepStatus.Done;
-
-	PostStepComplete();
-
-	_stepModeControler._stepIn.DoneWhen(_stepModeControler._stepIn.Execute());
-
+	THIS^.CompleteStep();
 END_IF
 
-StepCompleteWhen := THIS^;]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepForward" Id="{94db3f77-b48c-045b-2839-79f6b0c18fbd}">
