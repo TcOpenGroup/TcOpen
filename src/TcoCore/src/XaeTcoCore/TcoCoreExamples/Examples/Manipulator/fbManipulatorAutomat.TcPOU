@@ -14,45 +14,45 @@ _verticalPiston();
 _gripperPiston();
 
 IF(THIS^.State = 0) THEN	
-	IF(_verticalPiston.MoveHome().Done 
-		AND_THEN _horizontalPiston.MoveHome().Done 
-		AND_THEN _gripperPiston.MoveHome().Done) THEN
+	IF(_verticalPiston.MoveUp().Done 
+		AND_THEN _horizontalPiston.MoveLeft().Done 
+		AND_THEN _gripperPiston.Open().Done) THEN
 		THIS^.ChangeState(10);
 	END_IF
 END_IF
 
 IF(THIS^.State = 10) THEN
-	IF(_verticalPiston.MoveWork().Done) THEN
+	IF(_verticalPiston.MoveDown().Done) THEN
 		THIS^.ChangeState(20);
 	END_IF
 END_IF
 
 IF(THIS^.State = 20) THEN
-	IF(_gripperPiston.MoveWork().Done) THEN
+	IF(_gripperPiston.Close().Done) THEN
 		THIS^.ChangeState(30);
 	END_IF
 END_IF
 
 IF(THIS^.State = 30) THEN
-	IF(_verticalPiston.MoveHome().Done) THEN
+	IF(_verticalPiston.MoveUp().Done) THEN
 		THIS^.ChangeState(40);
 	END_IF
 END_IF
 
 IF(THIS^.State = 40) THEN
-	IF(_horizontalPiston.MoveWork().Done) THEN
+	IF(_horizontalPiston.MoveRight().Done) THEN
 		THIS^.ChangeState(50);
 	END_IF
 END_IF
 
 IF(THIS^.State = 50) THEN
-	IF(_verticalPiston.MoveWork().Done) THEN
+	IF(_verticalPiston.MoveDown().Done) THEN
 		THIS^.ChangeState(60);
 	END_IF
 END_IF
 
 IF(THIS^.State = 60) THEN
-	IF(_gripperPiston.MoveHome().Done) THEN
+	IF(_gripperPiston.Open().Done) THEN
 		THIS^.ChangeState(0);
 	END_IF
 END_IF]]></ST>

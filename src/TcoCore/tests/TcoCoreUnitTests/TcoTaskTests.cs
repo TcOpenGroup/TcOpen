@@ -721,8 +721,8 @@ namespace TcoCoreUnitTests
 
             Assert.IsFalse(tt._IsBusy.Synchron);
             Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsTrue(tt._IsReady.Synchron);
+            Assert.IsTrue(tt._IsError.Synchron);
+            Assert.IsFalse(tt._IsReady.Synchron);
             GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
             Assert.AreEqual(A_TaskInvokeCount_0 + 1, A_TaskInvokeCount_1);             //Task should be started once
             Assert.AreEqual(A_TaskInvokeRECount_0 + 1, A_TaskInvokeRECount_1);         //Task should be started once
@@ -732,6 +732,7 @@ namespace TcoCoreUnitTests
 
             tc.SingleCycleRun(() =>
             {
+                tt.TriggerRestore();
                 tt.Enable();                                                            //Enable task. It should not start again without Invoke() methoh call.
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task

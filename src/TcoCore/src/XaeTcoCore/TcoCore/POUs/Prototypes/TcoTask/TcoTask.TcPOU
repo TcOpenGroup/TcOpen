@@ -62,7 +62,16 @@ VAR
 ~*)
 	{attribute addProperty Name "<#Invoke request#>"}
 	_invokeRequest : BOOL;
-	{attribute 'hide'}
+(*~
+	<docu>
+		<summary>
+			Use to determine if the task execution is enabled for example from the HMI application. 
+			This value is read only, to modify it use the property <see cref="TcoTask.PlcTcoTask.Enabled()"/>		
+		</summary>		
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Enabled#>"}
+	{attribute clr [ReadOnly()]}
 	_enabled : BOOL := TRUE;
 END_VAR]]></Declaration>
     <Implementation>
@@ -306,8 +315,9 @@ END_IF;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			The task is able to start by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method if this property si TRUE, otherwise not. 
-			Moreover if the task is already running and this property becomes FALSE, the task is restored. 
+			Gets whether the task execution is enabled.
+			The task can start with <see cref="TcoTask.PlcTcoTask.Invoke()"/> method call only when this property si TRUE. 
+			If the task is ```Busy``` and this property transitions to ```FALSE```, the task stops execution and enters ```Error``` state. 
 		</summary>			
 	</docu>	
 ~*)
@@ -368,12 +378,12 @@ END_IF;
 
 IF NOT _enabled THEN
 	IF THIS^._taskState = eTaskState.Requested THEN
-		THIS^.Messenger.Post('Task cannot be started  as its Enabled property becomes FALSE.',eMessageCategory.Info);	
+		THIS^.Messenger.Post('Task cannot start; Enabled property is FALSE.',eMessageCategory.Info);	
 		THIS^.Restore();
 	END_IF
 	IF THIS^._taskState = eTaskState.Busy THEN
-		THIS^.Messenger.Post('Running task has been restored as its Enabled property becomes FALSE.',eMessageCategory.Info);	
-		THIS^.Restore();
+		THIS^.Messenger.Post('Running task entered Error state since the Enabled property transitioned to FALSE during task execution.',eMessageCategory.Error);	
+		THIS^._taskState := eTaskState.Error;
 	END_IF
 END_IF;
 
