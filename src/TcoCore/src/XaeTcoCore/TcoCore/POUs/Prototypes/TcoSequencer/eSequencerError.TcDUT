@@ -59,7 +59,23 @@ TYPE eSequencerError :
 		</summary>				
 	</docu>	
 ~*)
-	SeveralRequestStep := 60
+	SeveralRequestStep := 60,
+(*~
+	<docu>
+		<summary>
+			Step ID value is too low. Minimal value is -32767.
+		</summary>				
+	</docu>	
+~*)
+	StepIdTooLow := 70,
+(*~
+	<docu>
+		<summary>
+			Step ID value is too high. Maximal value is 32766.
+		</summary>				
+	</docu>	
+~*)
+	StepIdTooHigh := 80
 );
 END_TYPE
  ]]></Declaration>

@@ -229,7 +229,7 @@ namespace TcoCoreUnitTests
         {
             initStepId = 32750;
             initStepDescription = "---test---init---";
-            lastStepId = 32767;
+            lastStepId = 32765;
             lastStepDescription = "This is last step of the sequence";
             cycleCount = 0;
             restoreCycleCount = 0;
@@ -1679,7 +1679,7 @@ namespace TcoCoreUnitTests
         {
             initStepId = 32750;
             initStepDescription = "---test---init---";
-            lastStepId = 32767;
+            lastStepId = 32758;
             lastStepDescription = "This is last step of the sequence";
             cycleCount = 0;
             restoreCycleCount = 0;

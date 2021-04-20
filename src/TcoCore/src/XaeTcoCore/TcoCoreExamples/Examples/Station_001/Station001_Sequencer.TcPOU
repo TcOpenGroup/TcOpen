@@ -150,7 +150,7 @@ IF(Step(800,
 //-----------------------------------------------------
 	_sequenceCompleteCount := _sequenceCompleteCount + 1;
 	_stepsPerSequence := (_onStateChangeCount - _sequenceCompleteCount + 1)/ _sequenceCompleteCount;
-	SequenceComplete();
+	CompleteStep();
 //-----------------------------------------------------	
 END_IF
 

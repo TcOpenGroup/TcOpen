@@ -70,7 +70,7 @@ END_IF
 
 IF Step(500,TRUE,'Final step of the sequence.') THEN
 	Done := TRUE;
-	SequenceComplete();
+	CompleteStep();
 END_IF
 ]]></ST>
       </Implementation>

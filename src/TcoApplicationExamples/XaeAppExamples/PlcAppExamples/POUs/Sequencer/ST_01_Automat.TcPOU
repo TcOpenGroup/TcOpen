@@ -84,14 +84,7 @@ IF(Step(inStepID := 700,
 //-------------------------------------------------------------
 END_IF
 
-
-IF(Step(inStepID := 5000, 
-		inEnabled := TRUE, 
-		inStepDescription := 'CLOSE SEQUENCE')) THEN
-//-------------------------------------------------------------		
-     THIS^.SequenceComplete();
-//-------------------------------------------------------------
-END_IF]]></ST>
+]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -41,7 +41,7 @@ END_VAR
     <Method Name="_SequenceComplete" Id="{bb57ddc4-708a-0b87-2b40-163e4ea27d45}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _SequenceComplete]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.SequenceComplete();
+        <ST><![CDATA[THIS^.CompleteSequence();
 ]]></ST>
       </Implementation>
     </Method>
@@ -8374,6 +8374,13 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnSequenceCompleted" Id="{2fd78922-07d4-01ec-1736-1c3b4b7d9bd8}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSequenceCompleted ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_PostSequenceCompleteCount := _PostSequenceCompleteCount + 1;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="OnSequencerError" Id="{812d3e89-fa98-0c05-2d57-bd1b9d1501be}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD PROTECTED OnSequencerError
 VAR_INPUT
@@ -8416,15 +8423,8 @@ _StateChangeTo := NewState;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="PostSequenceComplete" Id="{2fd78922-07d4-01ec-1736-1c3b4b7d9bd8}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD PROTECTED PostSequenceComplete ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_PostSequenceCompleteCount := _PostSequenceCompleteCount + 1;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="PostStepComplete" Id="{154d4f23-050b-01f6-08b9-2a631c3ec621}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD PROTECTED PostStepComplete]]></Declaration>
+    <Method Name="OnStepCompleted" Id="{154d4f23-050b-01f6-08b9-2a631c3ec621}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD PROTECTED OnStepCompleted]]></Declaration>
       <Implementation>
         <ST><![CDATA[_PostStepCompleteCount := _PostStepCompleteCount + 1;
 ]]></ST>
