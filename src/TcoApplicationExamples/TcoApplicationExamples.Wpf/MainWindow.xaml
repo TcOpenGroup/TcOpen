@@ -18,12 +18,12 @@
                 <TabControl>
                     <TabItem Header="Auto-gen">
                         <ScrollViewer>
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._donCorleone}" />
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._donCorleone}" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Object tree">
                         <ScrollViewer>
-                            <inxton:DynamicTreeView DataContext="{Binding MAIN._donCorleone}" />
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._donCorleone}" />
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
@@ -32,12 +32,12 @@
                 <TabControl>
                     <TabItem Header="Auto-gen">
                         <ScrollViewer>
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._pneuMan}" />
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan}" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Object tree">
                         <ScrollViewer>
-                            <inxton:DynamicTreeView DataContext="{Binding MAIN._pneuMan}" />
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
