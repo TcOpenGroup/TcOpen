@@ -73,7 +73,7 @@ VAR
 	{attribute 'hide'}
 	_requestStepActive : BOOL;	
 	{attribute 'hide'}
-	_requestedStepId : INT;	
+	_requestedStepId : INT := -32768;	
 	{attribute 'hide'}
 	_cycleTimer : TON;   
 	{attribute 'hide'}
@@ -505,7 +505,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_theOrderOfTheCurrentlyEvaluatedStep := 0;
 
-IF _requestStepActive AND _requestedStepId <> 0 AND (_stepModeControler.Mode <> eSequencerMode.StepMode OR _stepModeControler._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
+IF _requestStepActive AND _requestedStepId <> -32768 AND (_stepModeControler.Mode <> eSequencerMode.StepMode OR _stepModeControler._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
 	_requestStepCycle := _requestStepCycle +1;
 ELSE
 	_requestStepCycle := 0;
@@ -557,7 +557,7 @@ VAR_INPUT
 			</summary>
 		</docu>
 	~*)
-	inRequestedStepID : UINT;
+	inRequestedStepID : INT := -32768;
 END_VAR
 VAR
 	_message : STRING(254);
@@ -567,8 +567,8 @@ END_VAR]]></Declaration>
 
 _checkStepIdRequestedInStepMode := TRUE;
 
-IF(inRequestedStepID <> 0) THEN
-	IF _requestedStepId <> 0 THEN
+IF(inRequestedStepID <> -32768) THEN
+	IF _requestedStepId <> -32768 THEN
 		IF NOT  _sequencerHasError THEN
 			_sequencerErrorId := eSequencerError.SeveralRequestStep;
 			_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(inRequestedStepID));
@@ -607,7 +607,7 @@ METHOD PUBLIC Restore : ITcoRestorable
         <ST><![CDATA[StepChanged(0);
 
 _requestStepActive := FALSE;	
-_requestedStepId := 0;
+_requestedStepId := -32768;
 _requestStepCycle := 0;
 _sequencerHasError := FALSE;
 _sequencerErrorId := eSequencerError.noError;
@@ -658,11 +658,7 @@ METHOD PUBLIC FINAL Run]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Open();
 
-//IF(StepInternal(-32768, TRUE, 'OPEN')) THEN CompleteStep(); END_IF;
-
 THIS^.Main();
-
-//IF(StepInternal(32767, TRUE, 'CLOSE')) THEN THIS^.CompleteSequence(); END_IF;
 
 IF _sequencerHasError THEN
 	OnSequencerError(_sequencerErrorId);
@@ -726,20 +722,22 @@ END_VAR
       <Implementation>
         <ST><![CDATA[Step := FALSE;
 IF inStepID <= -32768 THEN
-		_message := CONCAT('STEP_ID TOO LOW: ',UINT_TO_STRING(inStepID));
+		_message := CONCAT('STEP_ID TOO LOW: ',INT_TO_STRING(inStepID));
 		_message := CONCAT(_message, '! MINIMAL VALUE POSSIBLE: -32767!!!');
 		_currentStep.Description := _message;
 		_currentStep.Status := eStepStatus.Error;
 		THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.StepIdTooLow;
+		_sequencerHasError := TRUE;
 ELSIF  inStepID >= 32767 THEN
-		_message := CONCAT('STEP_ID TOO HIGH: ',UINT_TO_STRING(inStepID));
+		_message := CONCAT('STEP_ID TOO HIGH: ',INT_TO_STRING(inStepID));
 		_message := CONCAT(_message, '! MAXIMAL VALUE POSSIBLE: 32766!!!');
 		_currentStep.Description := _message;
 		_currentStep.Status := eStepStatus.Error;
 		THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.StepIdTooHigh;
-ELSE
+		_sequencerHasError := TRUE;
+ELSIF NOT _sequencerHasError THEN
 	Step := StepInternal(inStepID,inEnabled,inStepDescription);
 END_IF;		]]></ST>
       </Implementation>
@@ -921,11 +919,11 @@ _cycleTimer(IN:= TRUE, PT:= T#48D40H62M47S295MS);
 _SequenceElapsedTime  := _cycleTimer.ET;
 
 // Specific step request
-IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurrentlyEvaluatedStep <> 0) THEN
+IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurrentlyEvaluatedStep >= 0) THEN
 	_currentStep.Status := eStepStatus.Done;
 	_theOrderOfTheCurrentlyExecutedStep 	:=	_theOrderOfTheCurrentlyEvaluatedStep;
 	_theOrderOfThePreviouslyExecutedStep	:=	_theOrderOfTheCurrentlyExecutedStep;
-	_requestedStepId := 0;
+	_requestedStepId := -32768;
 	_requestStepCycle := 0;
 	_requestStepActive := FALSE;
 	StepChanged(_requestedStepId);
