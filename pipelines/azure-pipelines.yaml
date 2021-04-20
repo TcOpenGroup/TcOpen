@@ -6,7 +6,7 @@ queue:
 steps:
 - powershell : > 
     ./pipelines/runbuild.ps1 -properties @{     
-     "publishNugets"=$true;
+     "publishNugets"=$false;
      "updateAssemblyInfo" = $true;
      "isTestingEnabled" = $true
      }   

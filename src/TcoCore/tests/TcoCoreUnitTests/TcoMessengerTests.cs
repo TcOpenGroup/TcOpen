@@ -21,6 +21,8 @@ namespace TcoCoreUnitTests
         public void OneSetup()
         {
             suc._CallMyPlcInstanceRtcUpdate.Synchron = true;
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.None; sut.SetMinLevel(); });
+            sut.SingleCycleRun(() => sut.Resume());
         }
 
 
@@ -385,6 +387,74 @@ namespace TcoCoreUnitTests
             sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
             
             Assert.IsFalse(sut._messenger._mime.IsActive);
+        }
+
+        [Test, Order(1400)]
+        public void T813_SuspendResumeTest()
+        {
+            //--Arrange
+            var messageText = "this is a message";
+            sut.SingleCycleRun(() => Console.WriteLine("Empty cycle"));
+           
+            //--Act
+
+            // Suspend
+            sut.SingleCycleRun(() => sut.Suspend());
+
+            sut.SingleCycleRun(() => sut.Catastrophic(messageText));
+
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+
+            Assert.IsFalse(sut._messenger._mime.IsActive);
+
+
+            // Resume
+            sut.SingleCycleRun(() => sut.Resume());
+
+            sut.SingleCycleRun(() => sut.Catastrophic(messageText));
+
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+
+            Assert.IsTrue(sut._messenger._mime.IsActive);
+
+        }
+
+        [Test, Order(1400)]
+        public void T814_SetMinMessageCategoryTest()
+        {
+            //--Arrange
+            var messageText = "this is a message";
+            sut.SingleCycleRun(() => Console.WriteLine("Empty cycle"));
+
+            //--Act
+
+            // Set min level to info
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.Info; sut.SetMinLevel(); });
+
+
+            sut.SingleCycleRun(() => sut.Info(messageText));
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+
+            Assert.IsTrue(sut._messenger._mime.IsActive);
+
+            // set min level to catastrophic
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.Catastrophic; sut.SetMinLevel(); });
+
+            // post info
+            sut.SingleCycleRun(() => sut.Info(messageText));
+
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+
+            Assert.IsFalse(sut._messenger._mime.IsActive);
+
+
+            // post catastrophic
+
+            sut.SingleCycleRun(() => sut.Catastrophic(messageText));
+
+            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+
+            Assert.IsTrue(sut._messenger._mime.IsActive);
         }
 
 #if EXT_LOCAL_TESTING

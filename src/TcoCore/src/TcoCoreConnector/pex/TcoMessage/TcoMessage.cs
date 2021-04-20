@@ -18,7 +18,7 @@
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             _context = parent.GetParent<IsTcoContext>();
-            _context.AddMessage(this);
+            _context?.AddMessage(this);
             _parentObject = parent.GetParent<IsTcoObject>();
         }
 
