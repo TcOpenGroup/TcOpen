@@ -927,8 +927,7 @@ METHOD PUBLIC FINAL StepBackward
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepModeControler._stepBackward.Invoke();
-_stepModeControler._stepForward.Restore();
-_stepModeControler._stepIn.Restore();]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepChanged" Id="{f13ff82b-328d-0743-26e3-1e5008c59f70}">
@@ -1004,9 +1003,7 @@ METHOD PUBLIC FINAL StepForward
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepModeControler._stepForward.Invoke();
-_stepModeControler._stepBackward.Restore();
-_stepModeControler._stepIn.Restore();]]></ST>
+        <ST><![CDATA[_stepModeControler._stepForward.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepIn" Id="{3d4da130-4eed-0f78-333d-391fb53a6ee8}">
@@ -1021,9 +1018,7 @@ _stepModeControler._stepIn.Restore();]]></ST>
 METHOD PUBLIC FINAL StepIn
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepModeControler._stepIn.Invoke();
-_stepModeControler._stepForward.Restore();
-_stepModeControler._stepBackward.Restore();]]></ST>
+        <ST><![CDATA[_stepModeControler._stepIn.Invoke();]]></ST>
       </Implementation>
     </Method>
   </POU>
