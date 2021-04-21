@@ -530,7 +530,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_theOrderOfTheCurrentlyEvaluatedStep := 0;
 
-IF _requestStepActive AND _requestedStepId <> -32768 AND (_modeController.Mode <> eSequencerMode.StepMode OR _modeController._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
+IF _requestStepActive AND _requestedStepId <> MinStepID AND (_modeController.Mode <> eSequencerMode.StepMode OR _modeController._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
 	_requestStepCycle := _requestStepCycle +1;
 ELSE
 	_requestStepCycle := 0;
@@ -546,6 +546,7 @@ IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
 	_sequencerHasError := TRUE;
 END_IF
 
+//???? Check if needs to be here.
 IF _sequencerHasError AND (_sequencerErrorId = eSequencerError.NotUniqueStepId) THEN
 	_sequencerErrorId := eSequencerError.noerror;	
 	_sequencerHasError := FALSE;
@@ -661,6 +662,9 @@ _ChangeStepOrderTo := 0;
 
 _StepTimer(IN:= FALSE);
 
+IF _modeController.Mode = eSequencerMode.Invalid THEN
+	_modeController.Mode := eSequencerMode.CyclicMode;
+END_IF
 
 _modeController._stepForward.Restore();
 _modeController._stepBackward.Restore();
@@ -877,7 +881,18 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//-----------------------------------------------
+        <ST><![CDATA[IF _modeController.Mode = eSequencerMode.Invalid THEN
+	IF NOT _sequencerHasError THEN
+		_currentStep.Description := 'INVALID MODE OF THE SEQUENCER!!!';
+		_currentStep.Status := eStepStatus.Error;
+		THIS^.Messenger.Post('INVALID MODE OF THE SEQUENCER!!!', eMessageCategory.Error);
+		_sequencerErrorId := eSequencerError.InvalidSequencerMode;
+		_sequencerHasError := TRUE;
+	END_IF;		
+	RETURN;
+END_IF	
+
+//-----------------------------------------------
 //     		MULTIPLE CALL REGION
 //-----------------------------------------------
 // Initialize
@@ -1015,7 +1030,7 @@ IF (_StepOrderChanged OR _StepIdChanged OR _sequencerHasError) THEN
 	RETURN;
 END_IF
 
-IF(_isInOrderOfExecution) THEN
+IF(_isInOrderOfExecution  AND NOT(_currentStep.Status = eStepStatus.Error)) THEN
 	_currentStep.Status := eStepStatus.ReadyToRun;
 	// Step is in the order of the execution, but it is disabled 
 	IF NOT inEnabled THEN
@@ -1047,7 +1062,7 @@ IF(_isInOrderOfExecution) THEN
 		END_IF
 	END_IF	
 
-	StepInternal := (NOT _stepModeActive OR _stepInExecuting) AND inEnabled;
+	StepInternal := (NOT _stepModeActive OR _stepInExecuting) AND inEnabled AND NOT(_currentStep.Status = eStepStatus.Error);
 
 	IF(StepInternal) THEN
 		//First entry to step production

@@ -9,8 +9,8 @@ namespace TcoCoreUnitTests
     public class T01_TcoContextTests
     {
 
-        TcoCoreTests.TcoContextTest tc_A = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._TcoContextTest_A;
-        TcoCoreTests.TcoContextTest tc_B = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._TcoContextTest_B;
+        TcoCoreTests.TcoContextTest tc_A = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._tcoContextTest_A;
+        TcoCoreTests.TcoContextTest tc_B = TcoCoreUnitTests.ConnectorFixture.Connector.MAIN._tcoContextTest_B;
         int Delay = 500;
 
         [SetUp]
@@ -27,8 +27,8 @@ namespace TcoCoreUnitTests
         [Test, Order(100)]
         public void T100_Plc_ContextADoesNotAffectContextB()
         {
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
-            tc_B._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_B._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
             tc_B.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
@@ -41,11 +41,11 @@ namespace TcoCoreUnitTests
             ulong BmainCycles_0 = tc_B._mainCycles.Synchron;
             ulong BendCycles__0 = tc_B._endCycles.Synchron;
 
-            tc_A._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance             
+            tc_A._callMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_A instance             
 
             Thread.Sleep(Delay);                                //Time of the cyclical execution of the _TcoContextTest_A instance
 
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
             tc_B.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
@@ -70,8 +70,8 @@ namespace TcoCoreUnitTests
         [Test, Order(101)]
         public void T101_Plc_SoAsContextBDoesNotAffectContextA()
         {
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
-            tc_B._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_B._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
             tc_B.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
@@ -84,11 +84,11 @@ namespace TcoCoreUnitTests
             ulong BmainCycles_0 = tc_B._mainCycles.Synchron;
             ulong BendCycles__0 = tc_B._endCycles.Synchron;
 
-            tc_B._CallMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_B instance             
+            tc_B._callMyPlcInstance.Synchron = true;            //Switch on the cyclical execution of the _TcoContextTest_B instance             
 
             Thread.Sleep(3 * Delay);                            //Time of the cyclical execution of the _TcoContextTest_B instance
 
-            tc_B._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
+            tc_B._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
             tc_B.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
@@ -113,8 +113,8 @@ namespace TcoCoreUnitTests
         [Test, Order(102)]
         public void T102_NoPlcLogicIsRunning()
         {
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
-            tc_B._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_B._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_B instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
             tc_B.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
@@ -145,7 +145,7 @@ namespace TcoCoreUnitTests
         [Test, Order(103)]
         public void T103_ContextDotMainCall()
         {
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
 
@@ -165,7 +165,7 @@ namespace TcoCoreUnitTests
         [Test, Order(104)]
         public void T104_ContextDotRunCall()
         {
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
 
@@ -188,7 +188,7 @@ namespace TcoCoreUnitTests
             ushort cycles = 10;
             ushort i = 0;
 
-            tc_A._CallMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
 
             tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
 

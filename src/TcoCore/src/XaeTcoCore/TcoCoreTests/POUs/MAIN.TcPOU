@@ -3,32 +3,32 @@
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_TcoRtcTest_A						:	TcoRtcTest;
-	_TcoRtcTest_B						:	TcoRtcTest;
-	_TcoContextTest_A					:	TcoContextTest;
-	_TcoContextTest_B					:	TcoContextTest;
-	_TcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
-	_TcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
-	_TcoMessengerContextTest			:	TcoMessengerContextTest;
-	_TcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
+	_tcoRtcTest_A						:	TcoRtcTest;
+	_tcoRtcTest_B						:	TcoRtcTest;
+	_tcoContextTest_A					:	TcoContextTest;
+	_tcoContextTest_B					:	TcoContextTest;
+	_tcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
+	_tcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
+	_tcoMessengerContextTest			:	TcoMessengerContextTest;
+	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_TcoRtcTest_A();
+      <ST><![CDATA[_tcoRtcTest_A();
 
-_TcoRtcTest_B();
+_tcoRtcTest_B();
 
-_TcoContextTest_A();
+_tcoContextTest_A();
 
-_TcoContextTest_B();
+_tcoContextTest_B();
 
-_TcoSequencerAutoRestorableTest();
+_tcoSequencerAutoRestorableTest();
 
-_TcoSequencerNonAutoRestorableTest();
+_tcoSequencerNonAutoRestorableTest();
 
-_TcoMessengerContextTest();
+_tcoMessengerContextTest();
 
-_TcoContextMessagingPerf();
+_tcoContextMessagingPerf();
 ]]></ST>
     </Implementation>
   </POU>

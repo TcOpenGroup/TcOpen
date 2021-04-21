@@ -75,7 +75,15 @@ TYPE eSequencerError :
 		</summary>				
 	</docu>	
 ~*)
-	StepIdTooHigh := 80
+	StepIdTooHigh := 80,
+(*~
+	<docu>
+		<summary>
+			Mode of the sequencer is invalid.
+		</summary>				
+	</docu>	
+~*)
+	InvalidSequencerMode := 90
 );
 END_TYPE
  ]]></Declaration>
