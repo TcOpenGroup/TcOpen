@@ -23,7 +23,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Some of the StepId in the sequence is not unique.
+			Some of the StepId in the sequence is not unique (```TcoSequencer.Step(StepID)```).
 		</summary>				
 	</docu>	
 ~*)	
@@ -31,7 +31,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			StepId of the actually executed step has been changed during its execution.
+			StepId of the currently executed step has been changed during execution.
 		</summary>				
 	</docu>	
 ~*)
@@ -39,7 +39,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Order of the actually executed step has been changed during its execution.
+			Order of the currently executed step has been changed during execution.
 		</summary>				
 	</docu>	
 ~*)
@@ -47,7 +47,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Method RequestStep has been called with nonexisting StepId in the sequence.
+			Method ```RequestStep``` has been called with nonexisting StepId.
 		</summary>				
 	</docu>	
 ~*)
@@ -55,7 +55,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Another '''RequestStep()''' method has been called while previous '''RequestStep()''' call has not yet been completed.
+			Multiple simultaneous calls of ```RequestStep()```. Another ```RequestStep()``` method has been called while previous ```RequestStep()``` call has not yet been completed.
 		</summary>				
 	</docu>	
 ~*)
@@ -63,7 +63,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Step ID value is too low. Minimal value is -32767.
+			StepId is bellow min. range. Minimal value is -32767.
 		</summary>				
 	</docu>	
 ~*)
@@ -71,7 +71,7 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Step ID value is too high. Maximal value is 32766.
+			StepId is above max range. Maximal value is 32766.
 		</summary>				
 	</docu>	
 ~*)

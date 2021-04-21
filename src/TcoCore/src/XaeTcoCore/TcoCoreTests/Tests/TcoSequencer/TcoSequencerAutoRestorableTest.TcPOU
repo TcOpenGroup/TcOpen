@@ -296,11 +296,7 @@ END_VAR
 METHOD SetCyclicMode : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.Mode := eSequencerMode.CyclicMode;
-
-SetCyclicMode := _Sequencer.Mode = eSequencerMode.CyclicMode;
-
-]]></ST>
+        <ST><![CDATA[SetCyclicMode := _Sequencer.SetCyclicMode();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetNumberOfSteps" Id="{deae86d4-9245-0599-14b1-6cd3be2fc100}">
@@ -353,9 +349,7 @@ END_VAR
 METHOD SetStepMode : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.Mode := eSequencerMode.StepMode;
-
-SetStepMode := _Sequencer.Mode = eSequencerMode.StepMode;
+        <ST><![CDATA[SetStepMode := _Sequencer.SetStepMode();
 
 ]]></ST>
       </Implementation>

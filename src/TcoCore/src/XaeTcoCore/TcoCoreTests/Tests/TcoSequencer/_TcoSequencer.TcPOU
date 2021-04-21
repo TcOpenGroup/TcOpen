@@ -61,7 +61,7 @@ END_VAR
     <Method Name="_StepBackward" Id="{bb6fa187-eb1c-0571-2358-79713c7a9719}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _StepBackward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.StepBackward();
+        <ST><![CDATA[THIS^.ModeController.StepBackward();
 ]]></ST>
       </Implementation>
     </Method>
@@ -77,14 +77,14 @@ END_VAR]]></Declaration>
     <Method Name="_StepForward" Id="{27ff14c0-bd91-0858-2810-1f7c5fd2dc67}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _StepForward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.StepForward();
+        <ST><![CDATA[THIS^.ModeController.StepForward();
 ]]></ST>
       </Implementation>
     </Method>
     <Method Name="_StepIn" Id="{00d65f73-93ab-04a1-31ca-6a19a3e4c8dd}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD INTERNAL _StepIn ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.StepIn();]]></ST>
+        <ST><![CDATA[THIS^.ModeController.StepIn();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{2fe344f3-4fea-0846-0ec8-378fe51cb4c6}" FolderPath="_Tests\">
@@ -8496,6 +8496,17 @@ THIS^._currentStep.Description	:=	inStepDescription;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="SetCyclicMode" Id="{d046251b-754e-073d-2a86-854f5889d9d0}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD SetCyclicMode : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ModeController.Mode := eSequencerMode.CyclicMode;
+
+SetCyclicMode := ModeController.Mode = eSequencerMode.CyclicMode;
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SetNumberOfSteps" Id="{a8a0d4fb-e225-0fb8-3c9b-d2a796c1b2ec}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD INTERNAL SetNumberOfSteps 
 VAR_INPUT
@@ -8522,6 +8533,17 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetStepMode" Id="{03d14d20-a375-0456-1afe-147a68ccc6ff}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD SetStepMode : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ModeController.Mode := eSequencerMode.StepMode;
+
+SetStepMode := ModeController.Mode = eSequencerMode.StepMode;
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetTestParams" Id="{7a624c26-ee8b-0b24-15f9-09fad6ccc521}" FolderPath="_Tests\">

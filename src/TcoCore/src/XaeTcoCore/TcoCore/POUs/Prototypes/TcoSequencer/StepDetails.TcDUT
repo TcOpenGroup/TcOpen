@@ -4,7 +4,7 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Describes the status and internal variables of the step of the sequencer.
+			Describes the status of a step of the sequencer.
 		</summary>				
 	</docu>	
 ~*)
@@ -17,7 +17,7 @@ STRUCT
 		</summary>	
 		<remarks>			
  			<note type="important">
-				This number must be unique throughout the complete sequence as it is used as identificator in case of jumping to the required step.
+				This number must be unique throughout the complete sequence. It is required to uniquely identify the step of the sequence.
 			</note>
 			<para>
 				The <see cref="TcoSequencer.PlcTcoSequencer.RequestStep"/> method is using this number to jump to the required step.
@@ -39,7 +39,7 @@ STRUCT
 (*~
 	<docu>
 		<summary>
-			If this value is false, step body is not executed and execution is moved to the next enabled step.
+			If this value is false, step body is not executed and execution is moved to the next enabled step in the sequence.
 		</summary>				
 	</docu>	
 ~*)

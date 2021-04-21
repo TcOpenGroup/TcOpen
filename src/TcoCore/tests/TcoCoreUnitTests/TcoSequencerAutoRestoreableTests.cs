@@ -45,14 +45,14 @@ namespace TcoCoreUnitTests
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            tc._CallMyPlcInstance.Synchron = false;                     //Switch off cyclicall calling the PLC code of this instance
-            tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
-            tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-            tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
-            tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
-            tc._FinishStep.Synchron = false;                            //Reset finish step flag in the PLC testing instance
-            tc._Restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
-            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
+            //tc._CallMyPlcInstance.Synchron = false;                     //Switch off cyclicall calling the PLC code of this instance
+            //tc._RunPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
+            //tc._RunPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
+            //tc._RunOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
+            //tc._RunAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
+            //tc._FinishStep.Synchron = false;                            //Reset finish step flag in the PLC testing instance
+            //tc._Restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
+            //tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
         }
 
         [Test, Order(500)]
