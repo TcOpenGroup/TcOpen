@@ -16,6 +16,7 @@ namespace TcoApplicationExamples.Wpf
     {
         public App() : base()
         {
+            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             PlcAppExamples.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
         }
 

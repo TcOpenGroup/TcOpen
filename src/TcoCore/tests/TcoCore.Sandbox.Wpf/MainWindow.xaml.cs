@@ -37,21 +37,6 @@ namespace TcoCore.Sandbox.Wpf
             {
                 Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._State.Cyclic = (short)TcoCore.eSequencerMode.StepMode;
             }
-        }
-
-        private void StepBackward_Click(object sender, RoutedEventArgs e)
-        {
-            Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._stepBackward._invokeRequest.Cyclic = true;
-        }
-
-        private void StepForward_Click(object sender, RoutedEventArgs e)
-        {
-            Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._stepForward._invokeRequest.Cyclic = true;
-        }
-
-        private void StepIn_Click(object sender, RoutedEventArgs e)
-        {
-            Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._stepIn._invokeRequest.Cyclic = true;
-        }
+        }    
     }
 }

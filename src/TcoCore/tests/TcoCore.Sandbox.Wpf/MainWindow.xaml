@@ -57,9 +57,9 @@
                                     Margin="3"
                                     Content="Step mode"
                                     IsChecked="{Binding MAIN._station001._sequence._switchToStep.Cyclic}" />
-                                <Button Margin="3" Click="StepBackward_Click" Content="Step --"/>
-                                <Button Margin="3" Click="StepIn_Click" Content="Step In"/>
-                                <Button Margin="3" Click="StepForward_Click" Content="Step ++"/>
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._stepModeControler._stepBackward}" Content="Step --"/>
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._stepModeControler._stepIn}" Content="Step In"/>
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._stepModeControler._stepForward}" Content="Step ++"/>
                             </WrapPanel>
                         </GroupBox>
                     </materialDesign:Card>
