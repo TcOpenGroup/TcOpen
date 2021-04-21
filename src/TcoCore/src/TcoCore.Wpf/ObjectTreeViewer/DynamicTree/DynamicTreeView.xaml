@@ -39,6 +39,7 @@
                             Margin="5"
                             ItemTemplateSelector="{StaticResource ChildDataTemplateSelector}"
                             ItemsSource="{Binding Children}"
+                            SelectedItemChanged="tv_SelectedItemChanged"
                             VirtualizingStackPanel.IsVirtualizing="True"
                             VirtualizingStackPanel.VirtualizationMode="Recycling" />
                     </Grid>

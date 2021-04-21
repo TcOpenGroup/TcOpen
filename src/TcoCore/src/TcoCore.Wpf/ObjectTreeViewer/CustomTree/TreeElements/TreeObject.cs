@@ -1,5 +1,4 @@
-﻿using Tco.Wpf.CustomTree.Persistence;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -38,23 +37,6 @@ namespace Tco.Wpf
 
     public static class TreeItemExtension
     {
-        public static TreeItemDTO AsDTO(this TreeObject treeObject)
-        {
-            if (treeObject is TreeItem item)
-                return new TreeItemDTO(item);
-            if (treeObject is TreeGroup group)
-                return new TreeItemDTO(group);
-            throw new ArgumentException("DTO for this type is not supported");
-        }
-
-        public static TreeObject FromDTO(this TreeItemDTO treeDTO, IConnector connector)
-        {
-            if (treeDTO.Kind == nameof(TreeGroup))
-                return new TreeGroup(treeDTO, connector);
-            if (treeDTO.Kind == nameof(TreeItem))
-                return new TreeItem(treeDTO, connector);
-            throw new ArgumentException("Can't convert this item from DTO");
-        }
         public static IList<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source) => new ObservableCollection<TSource>(source);
     }
 
