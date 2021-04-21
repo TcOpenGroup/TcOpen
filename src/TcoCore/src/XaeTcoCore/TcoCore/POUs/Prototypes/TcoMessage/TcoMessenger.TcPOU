@@ -4,8 +4,16 @@
     <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Provides mechanism for delivering static messages to the supervising applications (SCADA/HMI).				 
+				Provides mechanism for delivering static messages to the supervising applications (SCADA/HMI).	
+				<remarks>			
+					<note type="important">
+						Each messenger has a single placeholder for the message; it stores the most important message from the last context cycle. 
+						If there are more messages in a single cycle for the same messenger then less important messages are discarded and replaced by 
+						the message with the category of higher severity.	
+					</note>
+				</remarks>			 
 			</summary>			
+		
 		</docu>
 ~*)
 FUNCTION_BLOCK PUBLIC TcoMessenger IMPLEMENTS ITcoMessenger
@@ -13,7 +21,9 @@ VAR
 	(*~
 		<docu>
 			<summary>
-				Most important message of this instance of messenger.			 
+				Most important message of this instance of messenger; stores the most important message from the last context cycle. 
+				If there are more messages in a single cycle for the same
+				messenger then less important messages are discarded and replaced by the message with the category of higher severity.			 
 			</summary>			
 		</docu>
 	~*)
@@ -29,7 +39,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'debug' category to the message queue.				 
+				Adds message of 'catastrophic' category to the message queue.				 
 			</summary>		
 		</docu>
 ~*)
@@ -51,7 +61,7 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
-      <Declaration><![CDATA[METHOD PROTECTED Compose 
+      <Declaration><![CDATA[METHOD PROTECTED FINAL Compose 
 VAR_INPUT
 	Text : STRING(125);
 	Category : eMessageCategory;
@@ -76,7 +86,7 @@ END_IF;
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'debug' category to the message queue.				 
+				Adds message of 'critical' category to the message queue.				 
 			</summary>		
 		</docu>
 ~*)
@@ -215,9 +225,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of given category to the message queue.				 
-			</summary>	
-			<returns>Message index.</returns>		
+				Creates message of given category for this messenger.				 
+			</summary>				
 		</docu>
 ~*)
 METHOD PUBLIC Post 
@@ -264,20 +273,6 @@ END_IF;
 
 
 ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="PostConditionally" Id="{5a93fc7f-864e-455f-88a3-d2cd66bdee59}">
-      <Declaration><![CDATA[METHOD PostConditionally
-VAR_INPUT
-	Condition : BOOL;
-	Message : STRING(125);
-	Category : eMessageCategory;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF (Condition) THEN
-	THIS^.Post(Message, Category);
-END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Programming" Id="{1f1b6a21-6158-44a7-b79e-b3fcea42c4e1}" FolderPath="Messages\">

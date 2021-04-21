@@ -10,7 +10,14 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Messaging" Id="{80bc198f-e53b-04f5-1cbc-ef3a2ee37c8f}">
-      <Declaration><![CDATA[PROPERTY Messaging : ITcoMessengerSettings]]></Declaration>
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Gets messaging settings of this context.			
+			</summary>			
+		</docu>	
+~*)
+PROPERTY Messaging : ITcoMessengerSettings]]></Declaration>
       <Get Name="Get" Id="{2afecb4e-9dba-0868-0a02-c655cbf5e0a9}">
         <Declaration><![CDATA[VAR
 END_VAR
