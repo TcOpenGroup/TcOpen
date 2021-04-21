@@ -8400,8 +8400,12 @@ END_VAR
 		_OnSequencerErrorCount := _OnSequencerErrorCount + 40;
 	eSequencerError.StepWithRequestedIdDoesNotExists :
 		_OnSequencerErrorCount := _OnSequencerErrorCount + 50;
-	eSequencerError.SeveralRequestStep :
+	eSequencerError.MultipleRequestStepMethodCall :
 		_OnSequencerErrorCount := _OnSequencerErrorCount + 60;
+	eSequencerError.StepIdTooLow :
+		_OnSequencerErrorCount := _OnSequencerErrorCount + 70;
+	eSequencerError.StepIdTooHigh :
+		_OnSequencerErrorCount := _OnSequencerErrorCount + 80;
 	ELSE
 		_OnSequencerErrorCount := _OnSequencerErrorCount + 0;
 END_CASE

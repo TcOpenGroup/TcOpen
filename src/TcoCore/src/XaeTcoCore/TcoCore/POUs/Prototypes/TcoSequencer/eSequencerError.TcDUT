@@ -55,11 +55,11 @@ TYPE eSequencerError :
 (*~
 	<docu>
 		<summary>
-			Method RequestStep has been called while previous RequestStep call has not yet been completed.
+			Another '''RequestStep()''' method has been called while previous '''RequestStep()''' call has not yet been completed.
 		</summary>				
 	</docu>	
 ~*)
-	SeveralRequestStep := 60,
+	MultipleRequestStepMethodCall := 60,
 (*~
 	<docu>
 		<summary>

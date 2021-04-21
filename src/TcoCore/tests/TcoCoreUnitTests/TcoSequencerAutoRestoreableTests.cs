@@ -333,7 +333,7 @@ namespace TcoCoreUnitTests
             tc.UpdateCurrentStepDetails();
             Assert.AreEqual(5, tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step 5", tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30, tc._Sequencer._currentStepStatus.Synchron);
+            Assert.AreEqual(40, tc._Sequencer._currentStepStatus.Synchron);
 
             tc.SequencerSingleCycleRun(() =>
             {
@@ -389,7 +389,7 @@ namespace TcoCoreUnitTests
             tc.UpdateCurrentStepDetails();
             Assert.AreEqual(0, tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step 0", tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30, tc._Sequencer._currentStepStatus.Synchron);
+            Assert.AreEqual(40, tc._Sequencer._currentStepStatus.Synchron);
 
             tc.SequencerSingleCycleRun(() =>
             {
@@ -1281,7 +1281,7 @@ namespace TcoCoreUnitTests
                 tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step " + (reqStep + 5).ToString(),         //Check if StepDescription changes to "Step " + reqStep +5 
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30,                                         //Check if current step status changes to Running
+            Assert.AreEqual(40,                                         //Check if current step status changes to Running
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
 
@@ -1332,7 +1332,7 @@ namespace TcoCoreUnitTests
                 tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step " + reqStep.ToString(),               //Check if StedDescription stays in "Step " + reqStep as before
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30,                                         //Check if current step status stays in Running as before
+            Assert.AreEqual(40,                                         //Check if current step status stays in Running as before
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
 
@@ -1356,7 +1356,7 @@ namespace TcoCoreUnitTests
                 tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step " + reqStep.ToString(),               //Check if StepId stays in "Step " + reqStep as before
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30,                                         //Check if current step status stays in Running as before
+            Assert.AreEqual(40,                                         //Check if current step status stays in Running as before
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
 
@@ -1596,7 +1596,7 @@ namespace TcoCoreUnitTests
                tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step 20",                                  //Check if StepDescription changes to "Step 20" 
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30,                                         //Check if current step status changes to Running
+            Assert.AreEqual(40,                                         //Check if current step status changes to Running
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
 
@@ -2927,7 +2927,7 @@ namespace TcoCoreUnitTests
                 tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("Step " + (reqStep + 5).ToString(),         //Check if StepDescription changes to "Step " + reqStep + 5
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(30,                                         //Check if current step status changes to Running
+            Assert.AreEqual(40,                                         //Check if current step status changes to Running
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
         }
 
@@ -2981,7 +2981,7 @@ namespace TcoCoreUnitTests
                 tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("(>Step " + reqStep.ToString() + "<)",      //Check if StepDescription stays in "Step " + reqStep as before
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(20,                                         //Check if current step status stays in ReadyToRun as before
+            Assert.AreEqual(40,                                         //Check if current step status stays in ReadyToRun as before
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
         }
 
@@ -3009,7 +3009,7 @@ namespace TcoCoreUnitTests
                 tc._Sequencer._currentStepId.Synchron);
             Assert.AreEqual("(>Step " + reqStep.ToString() + "<)",      //Check if StepDescription stays in "Step " + reqStep as before
                 tc._Sequencer._currentStepDescription.Synchron);
-            Assert.AreEqual(20,                                         //Check if current step status stays in ReadyToRun as before
+            Assert.AreEqual(40,                                         //Check if current step status stays in ReadyToRun as before
                 tc._Sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
         }
 
