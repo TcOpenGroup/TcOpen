@@ -7,11 +7,7 @@
 
     <HierarchicalDataTemplate DataType="{x:Type tco:TreeItem}">
         <ContentControl>
-            <vortex:RenderableContentControl
-                DataContext="{Binding Item}"
-                MouseLeftButtonDown="DragMouseLeftButtonDown"
-                MouseMove="DragMouseMove"
-                PresentationType="ControlSlim" />
+            <vortex:RenderableContentControl DataContext="{Binding Item}" PresentationType="ControlSlim" />
         </ContentControl>
 
     </HierarchicalDataTemplate>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Station001_Components" Id="{973f80ae-5d0f-02e7-24c7-363a147de04a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_Components EXTENDS TcoCore.TcoObject
+VAR	
+	{attribute addProperty Name "Horizontal cyclinder A1"}
+	_horizontal : fbPiston(THIS^);
+	{attribute addProperty Name "Vertical cyclinder A2"}
+	_vertical : fbPiston(THIS^);
+	{attribute addProperty Name "Gripper A3"}
+	_gripper : fbPiston(THIS^);			
+END_VAR
+
+VAR
+	_simTimerValue : UINT := 500;
+	_simTimer : Tc2_Standard.TON;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_vertical();
+_horizontal();
+_gripper();
+
+_simTimer(IN := TRUE, PT := UINT_TO_TIME(_simTimerValue));
+SimulateCylinder(_vertical);
+SimulateCylinder(_horizontal);
+SimulateCylinder(_gripper);
+
+]]></ST>
+    </Implementation>
+    <Property Name="Gripper" Id="{6a01dc28-d982-0fb5-2745-9e809c451913}">
+      <Declaration><![CDATA[PROPERTY Gripper : IPistonGripper]]></Declaration>
+      <Get Name="Get" Id="{610a8cd9-7ae4-08af-1bc0-99ccfbc7becf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Gripper := _gripper;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Horizontal" Id="{92e43ad3-5c26-0dec-2c49-d1ed9b4a55ad}">
+      <Declaration><![CDATA[PROPERTY Horizontal : IPistonHorizontal]]></Declaration>
+      <Get Name="Get" Id="{024846ec-1132-0b00-2fcf-2b664b0d337e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Horizontal := _horizontal;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SimulateCylinder" Id="{b1ee2641-008c-0760-1502-d9d6bdf50ae0}">
+      <Declaration><![CDATA[METHOD SimulateCylinder
+VAR_IN_OUT
+	ioCyclinder : fbPiston;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ioCyclinder.iHomePositionSensor := ioCyclinder.qHomePositionActuator AND _simTimer.Q;
+ioCyclinder.iWorkPositionSensor := ioCyclinder.qWorkPositionActuator AND _simTimer.Q;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Vertical" Id="{ebb87fc4-eb98-0125-1c02-13275d3bc4b7}">
+      <Declaration><![CDATA[PROPERTY Vertical : IPistonVertical]]></Declaration>
+      <Get Name="Get" Id="{a74c9db1-1590-07ad-1319-bdaa0e2438bf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Vertical := _vertical;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

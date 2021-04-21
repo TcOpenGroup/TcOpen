@@ -1,70 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <Itf Name="ITcoSequencer" Id="{a8c5aaea-ce66-4699-94d6-6fc2b0db7583}">
-    <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITCoState
+    <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITcoState
 ]]></Declaration>
-    <Method Name="RequestStep" Id="{a244bce3-185f-46eb-9036-dc127d26bd08}">
+    <Property Name="Mode" Id="{bc49d430-c9b7-0c6d-2206-7e426173182f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Gets or sets sequencer mode.
+			<remarks>			
+				<para>
+					See <see cref="eSequencerMode"/> for detailed description.
+				</para>
+			</remarks>		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC Mode : eSequencerMode
+]]></Declaration>
+      <Get Name="Get" Id="{218de5fd-5a3e-0996-0103-6387110463ee}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{258e79ea-7624-0fec-2ee9-e4abfbe76668}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Method Name="Run" Id="{c085653a-ddfd-0ace-0d80-e733121bd868}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Finishes the currently executed step and initiates to start the step with StepId equals to the value of the <c>inRequestedStepID</c>.
-			In case that the order of the requested step is higher than the order of the currently finished step (the requested step is "after" the current one)
-			the requested step is started in the same PLC cycle.
-			In case that the order of the requested step is lower than the order of the currently finished step (the requested step is "before" the current one)
-			the requested step is started in the next PLC cycle.
-			If the requested step is not found even in the next PLC cycle, the sequencer returns the error <c>StepWithRequestedIdDoesNotExists</c>.
 			<para>
-				See <see cref="eSequencerError"/> for detailed description.
+				Ensures calling the Open(), Main() and Close() methods in the desired order.
+				This method is final, so it cannot be overloaded. The InstanceName.Run() needs to be called cyclically inside the appropriate context.
 			</para>
-		</summary>
-	</docu>
+		</summary>			
+	</docu>	
 ~*)
-METHOD RequestStep : ITcoSequencer
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				StepId of the step to be executed.
-			</summary>
-		</docu>
-	~*)
-		inRequestedStepID : UINT;
-END_VAR]]></Declaration>
+METHOD PUBLIC FINAL Run]]></Declaration>
     </Method>
-    <Method Name="StepBackward" Id="{681ee00d-31c9-4717-8a4f-6c756dfb644e}">
+    <Method Name="StepBackward" Id="{a472d4af-8e1d-0a57-1b03-6f1e42dd354b}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method triggers StepBackward task, that decrement current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
+			This method triggers StepBackward task, that decrements current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
 		</summary>			
 	</docu>	
 ~*)
-METHOD StepBackward
+METHOD PUBLIC FINAL StepBackward
 ]]></Declaration>
     </Method>
-    <Method Name="StepCompleteWhen" Id="{87266e09-a85e-45fc-bcc5-e3bf32501bbd}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Complete the actually running step, in the case the inCondition is met.
-			Method is typically called inside the step as the transition method.
-		</summary>			
-	</docu>	
-~*)
-METHOD PUBLIC FINAL StepCompleteWhen : ITcoSequencer
-VAR_INPUT
-(*~
-	<docu>
-		<summary>
-			The condition under which the step is completed.
-		</summary>			
-	</docu>	
-~*)
-	inCondition : BOOL;
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="StepForward" Id="{e42d91dc-e4a6-4639-a3ad-03d2d977e251}">
+    <Method Name="StepForward" Id="{adfa3159-bea3-0d8f-0c7e-98c0f36b0b91}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -73,19 +58,20 @@ END_VAR
 		</summary>			
 	</docu>	
 ~*)
-METHOD StepForward
+METHOD PUBLIC FINAL StepForward
+
 ]]></Declaration>
     </Method>
-    <Method Name="StepIn" Id="{a6cd8de1-6571-4c77-9297-440aa85f6f9a}">
+    <Method Name="StepIn" Id="{0029d4e4-e6b3-04dd-3d60-ef3dc335a6eb}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+			Triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
 			This causes starting the execution of the body of the current step.
 		</summary>			
 	</docu>	
 ~*)
-METHOD StepIn
+METHOD PUBLIC FINAL StepIn
 ]]></Declaration>
     </Method>
   </Itf>

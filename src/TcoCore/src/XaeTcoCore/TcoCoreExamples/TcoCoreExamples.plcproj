@@ -25,6 +25,21 @@
     <ProjectVersion>0.1.0.217</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Examples\Components\fbPiston.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\fbPistonMoveTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\IPistonGripper.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\IPistonHorizontal.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\IPistonVertical.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Examples\EXAMPLES_PRG.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -43,12 +58,6 @@
     <Compile Include="Examples\Implementation\TcoTask\TcoTask_DownCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Examples\Manipulator\Components\fbPiston.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Examples\Manipulator\Components\fbPistonMoveTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Examples\Manipulator\fbManipulatorAutomat.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +69,15 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="Examples\Manipulator\MANIPULATOR.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Station_001\Station001.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Station_001\Station001_Components.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Station_001\Station001_Sequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Examples\WaveForm\eTransitionType.TcDUT">
@@ -89,13 +107,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="Examples\Components" />
     <Folder Include="Examples\Implementation" />
     <Folder Include="Examples\Implementation\TcoContext" />
     <Folder Include="Examples\Implementation\TcoObject" />
     <Folder Include="Examples\Implementation\TcoState" />
     <Folder Include="Examples\Implementation\TcoTask" />
     <Folder Include="Examples\Manipulator" />
-    <Folder Include="Examples\Manipulator\Components" />
+    <Folder Include="Examples\Station_001" />
     <Folder Include="Examples\WaveForm" />
     <Folder Include="GVLs" />
     <Folder Include="Examples" />
@@ -116,8 +135,12 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.1.0.217 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.0.217 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcoPneumatics">
+      <DefaultResolution>TcoPneumatics, * (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoPneumatics</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.1.0.217 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.0.217 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

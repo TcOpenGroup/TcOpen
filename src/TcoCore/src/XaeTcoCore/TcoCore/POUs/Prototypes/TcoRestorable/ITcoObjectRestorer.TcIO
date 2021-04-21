@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoObjectRestorer" Id="{0b3638df-96b7-05c9-2091-ef8947995aad}">
+    <Declaration><![CDATA[INTERFACE ITcoObjectRestorer 
+]]></Declaration>
+    <Method Name="RestoreObject" Id="{1cade283-565b-0b0e-0667-0d22a5ebb137}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Ensures calling the <c>Restore()</c> method on the object entered.	
+			<para>
+				<example>
+				<note type="Example">
+				<para>
+					Possibility to use the fluent syntax.
+				</para>
+					<code>ChangeState(newState).RestoreObject(myFirstChildObject).RestoreObject(mySecondChildObject);</code>
+				 </note>
+				</example>
+			</para>		
+		</summary>			
+	</docu>	
+~*)
+METHOD RestoreObject : ITcoObjectRestorer
+VAR_INPUT
+	Obj : ITcoRestorable;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

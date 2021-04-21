@@ -27,5 +27,16 @@ namespace TcoCore.Sandbox.Wpf
             InitializeComponent();
             this.DataContext = TcoCoreExamples.Entry.PlcTcoCoreExamples;
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._State.Cyclic == (short)TcoCore.eSequencerMode.StepMode)
+            {
+                Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._State.Cyclic = (short)TcoCore.eSequencerMode.CyclicMode;
+            }
+            else
+            {
+                Entry.PlcTcoCoreExamples.MAIN._station001._sequence._stepModeControler._State.Cyclic = (short)TcoCore.eSequencerMode.StepMode;
+            }
+        }    
     }
 }

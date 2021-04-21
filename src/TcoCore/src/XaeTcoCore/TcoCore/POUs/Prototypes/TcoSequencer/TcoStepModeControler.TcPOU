@@ -12,13 +12,19 @@ FUNCTION_BLOCK TcoStepModeControler EXTENDS TcoState
 VAR_INPUT
 	inCurrentStepRunning : BOOL;
 END_VAR
+
 VAR
+	_EnableChangingMode : BOOL := TRUE;
+	_EnableStepSkipping : BOOL := TRUE;
 	_stepBackward : TcoTask(THIS^);	
 	_stepIn : TcoTask(THIS^);	
 	_stepForward : TcoTask(THIS^);
-END_VAR]]></Declaration>
+END_VAR	]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[THIS^._stepBackward.Enabled := THIS^.Mode = eSequencerMode.StepMode AND THIS^._EnableStepSkipping;
+THIS^._stepIn.Enabled := THIS^.Mode = eSequencerMode.StepMode;
+THIS^._stepForward.Enabled := THIS^.Mode = eSequencerMode.StepMode AND THIS^._EnableStepSkipping;
+]]></ST>
     </Implementation>
     <Property Name="Mode" Id="{8d4cb1af-ba19-0bb8-1400-30d988d71fba}">
       <Declaration><![CDATA[(*~
@@ -46,13 +52,14 @@ END_CASE
       <Set Name="Set" Id="{de205606-d241-09de-0ee5-ac8cb916bc40}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[SUPER^.ChangeState(Mode);
-]]></ST>
+          <ST><![CDATA[IF _EnableChangingMode THEN
+	SUPER^.ChangeStateProtected(Mode);
+END_IF]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="OnStateChange" Id="{b7c60afe-dc93-0d5b-2752-c7f3e19a3b5e}">
-      <Declaration><![CDATA[METHOD PRIVATE OnStateChange
+      <Declaration><![CDATA[METHOD PROTECTED FINAL OnStateChange
 VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;
@@ -65,6 +72,7 @@ END_VAR
 	_stepIn.Restore(); 	
 
 	IF inCurrentStepRunning THEN
+		_stepIn.Enabled := TRUE;
 		_stepIn.Invoke(); 	
 	END_IF
 END_IF

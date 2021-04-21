@@ -6,6 +6,7 @@
     xmlns:inxton="http://inxton.mts/xaml"
     xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vortex="http://vortex.mts/xaml"
     Title="MainWindow"
     Width="800"
@@ -18,12 +19,35 @@
                 <TabControl>
                     <TabItem Header="Auto-gen">
                         <ScrollViewer>
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._donCorleone}" />
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._donCorleone}" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Object tree">
                         <ScrollViewer>
-                            <inxton:DynamicTreeView DataContext="{Binding MAIN._donCorleone}" />
+                            <UniformGrid>
+                                <inxton:DynamicTreeView
+                                    x:Name="DonCorleone"
+                                    DataContext="{Binding MAIN_PRG._donCorleone}"
+                                    Grid.IsSharedSizeScope="True" />
+                                <StackPanel>
+                                    <StackPanel.Resources>
+                                        <x:Array x:Key="PresentationTypes" Type="sys:String">
+                                            <sys:String>Control</sys:String>
+                                            <sys:String>ControlSlim</sys:String>
+                                            <sys:String>Display</sys:String>
+                                            <sys:String>DisplaySlim</sys:String>
+                                        </x:Array>
+                                    </StackPanel.Resources>
+                                    <ComboBox
+                                        x:Name="PresentationType"
+                                        ItemsSource="{StaticResource PresentationTypes}"
+                                        SelectedIndex="0" />
+                                    <inxton:ObservableContentControl
+                                        DataContext="{Binding SelectedItem, ElementName=DonCorleone}"
+                                        Grid.IsSharedSizeScope="True"
+                                        PresentationType="{Binding ElementName=PresentationType, Path=SelectedItem}" />
+                                </StackPanel>
+                            </UniformGrid>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
@@ -32,12 +56,12 @@
                 <TabControl>
                     <TabItem Header="Auto-gen">
                         <ScrollViewer>
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._pneuMan}" />
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan}" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Object tree">
                         <ScrollViewer>
-                            <inxton:DynamicTreeView DataContext="{Binding MAIN._pneuMan}" />
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>

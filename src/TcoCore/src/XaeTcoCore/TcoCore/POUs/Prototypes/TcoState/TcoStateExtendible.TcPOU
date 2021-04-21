@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoStateExtendible" Id="{0382c192-a9cc-0bc0-35e0-92f74a06fb79}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoStateExtendible EXTENDS TcoStateBase
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ChangeState" Id="{bb1133c8-59fb-0b5a-0ba5-84fb713fd050}">
+      <Declaration><![CDATA[METHOD PROTECTED FINAL ChangeState : ITcoState
+VAR_INPUT
+	NewState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ChangeState := SUPER^.ChangeStateProtected(NewState);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

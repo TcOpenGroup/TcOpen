@@ -51,7 +51,7 @@ METHOD INTERNAL GetMessage : STRING]]></Declaration>
       </Implementation>
     </Method>
     <Method Name="OnStateChange" Id="{2efff8ba-6cfc-49c5-95bb-23754d8da191}">
-      <Declaration><![CDATA[METHOD OnStateChange 
+      <Declaration><![CDATA[METHOD PROTECTED OnStateChange 
 VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;
@@ -87,7 +87,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_AutoRestoreToMyChildsEnabled	:= THIS^.EnableAutoRestore;
+        <ST><![CDATA[_AutoRestoreToMyChildsEnabled	:= THIS^.IsAutoRestoreEnabled;
 _AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
 ]]></ST>
       </Implementation>

@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>0.1.0.217</ProjectVersion>
+    <ProjectVersion>0.4.0.217</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
@@ -78,6 +78,9 @@
     <Compile Include="POUs\Prototypes\TcoObject\TcoObject.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoRestorable\ITcoObjectRestorer.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoRestorable\ITcoRestorable.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -120,9 +123,15 @@
     <Compile Include="POUs\Prototypes\TcoState\ITcoState.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoState\TcoState.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoState\TcoStateBase.TcPOU">
       <SubType>Code</SubType>
       <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoState\TcoState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoState\TcoStateExtendible.TcPOU">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\eTaskState.TcDUT">
       <SubType>Code</SubType>
