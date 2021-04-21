@@ -160,8 +160,8 @@ END_VAR
 //after each download.
 IF _AutoRestorable THEN		
 	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
-		_MyParent_LastChangeState := _MyParent_TcoState.LastChangedState;
+		_MyParent_ChangeStateCycle := _MyParent_TcoState.LastStateChangeCycle;
+		_MyParent_LastChangeState := _MyParent_TcoState.State;
 	END_IF;	
 	//If OnStateChange event of the parent has occured, the value of the parent's 
 	//StartCycleCount property is stored into its ChangeStateCycle property.
@@ -212,7 +212,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-	_AutoRestorable := _MyParent_TcoState.EnableAutoRestore;
+	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
 END_IF;	]]></ST>
       </Implementation>
     </Method>

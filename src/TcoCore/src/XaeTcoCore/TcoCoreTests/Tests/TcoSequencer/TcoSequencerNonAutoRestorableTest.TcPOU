@@ -228,7 +228,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.RequestStep(inRequestedStepId);]]></ST>
+        <ST><![CDATA[_Sequencer._RequestStep(inRequestedStepId);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{ed039be1-5ec9-0f31-1ced-279adddd1155}">
@@ -243,7 +243,7 @@ METHOD Restore ]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SequenceComplete ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.SequenceComplete();]]></ST>
+        <ST><![CDATA[_Sequencer._SequenceComplete();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequencerClose" Id="{f7829c9b-5f03-09e8-0641-8171778ff555}">
@@ -378,7 +378,7 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD StepBackward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.StepBackward();
+        <ST><![CDATA[_Sequencer._StepBackward();
 ]]></ST>
       </Implementation>
     </Method>
@@ -389,14 +389,14 @@ VAR_INPUT
 	inCondition : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.StepCompleteWhen(inCondition);]]></ST>
+        <ST><![CDATA[_Sequencer._StepCompleteWhen(inCondition);]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepForward" Id="{8497da56-753d-0a4d-1dbe-11b2662ecbb5}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD StepForward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.StepForward();
+        <ST><![CDATA[_Sequencer._StepForward();
 ]]></ST>
       </Implementation>
     </Method>
@@ -404,7 +404,7 @@ METHOD StepForward]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD StepIn]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Sequencer.StepIn();
+        <ST><![CDATA[_Sequencer._StepIn();
 ]]></ST>
       </Implementation>
     </Method>
