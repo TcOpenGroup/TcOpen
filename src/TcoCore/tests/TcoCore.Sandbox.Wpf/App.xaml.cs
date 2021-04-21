@@ -16,6 +16,7 @@ namespace TcoCore.Sandbox.Wpf
     {
         public App() : base()
         {
+            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             PlcTcoCoreExamples.Connector.BuildAndStart();
         }
 

@@ -6,55 +6,40 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TcoCore.Threading;
+using Vortex.Connector;
+using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoTask : ICommand,INotifyPropertyChanged
-    {
-
-        private bool isEnabled;
-        public event PropertyChangedEventHandler PropertyChanged;
+    public partial class TcoTask : ICommand
+    {                
         public event EventHandler CanExecuteChanged;
 
-        
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this._enabled.Subscribe(ValidateCanExecute);
+            CanExecuteChanged += TcoTask_CanExecuteChanged;
         }
 
-        public bool IsEnabled
+        private void TcoTask_CanExecuteChanged(object sender, EventArgs e)
         {
-            get
-            {
-                isEnabled = this._enabled.Synchron;
-                NotifyPropertyChanged();
-                return isEnabled;
-            }
-            set
-            {
-                if (value != this.isEnabled)
-                {
-                    this.isEnabled = value;
-                    NotifyPropertyChanged();
-                }
-            }
+            CanExecute(new object());
         }
 
-        
+        void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
+        {
+            Dispatcher.Get.Invoke(() => CanExecuteChanged(sender, args));            
+        }
+
         public bool CanExecute(object parameter)
         {
-            //return IsEnabled;
-            return true;
+            return this._enabled.Cyclic;            
         }
 
         public void Execute(object parameter)
         {
             this._invokeRequest.Synchron = true;
         }
-
     }
-
 }
