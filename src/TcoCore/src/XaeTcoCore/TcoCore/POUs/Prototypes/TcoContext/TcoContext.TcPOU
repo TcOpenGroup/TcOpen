@@ -180,7 +180,7 @@ METHOD PROTECTED ABSTRACT Main]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Called on entry into context. When overriden in derived class allows to exectute an arbitraty logic prior to opeing the context cycle.
+			Called on entry into context. When overridden in derived class allows to execute an arbitrary logic prior to opening the context cycle.
 			<remarks>			
 				<note type="important">					
 					The method executes prior to opening the context. The context might not be properly initialized on first call. 
@@ -201,7 +201,7 @@ METHOD PROTECTED OnEntry
 (*~
 	<docu>
 		<summary>
-			Called upon exit from the context. When overriden in derived class allows to exectute an arbitraty logic after to closing the context cycle.		
+			Called upon exit from the context. When overridden in derived class allows to execute an arbitrary logic after closing the context cycle.	
 		</summary>			
 	</docu>	
 ~*)METHOD PROTECTED OnExit
@@ -258,7 +258,7 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				When called with ```true``` the syncronization mechanism executes.			
+				When called with true the synchronization mechanism executes.		
 			</summary>			
 		</docu>	
 	~*)
