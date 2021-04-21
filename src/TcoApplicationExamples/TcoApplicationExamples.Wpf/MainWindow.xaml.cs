@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,18 @@ namespace TcoApplicationExamples.Wpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //RenderableContentX.PresentationType = "Control";
+        }   
     }
 }

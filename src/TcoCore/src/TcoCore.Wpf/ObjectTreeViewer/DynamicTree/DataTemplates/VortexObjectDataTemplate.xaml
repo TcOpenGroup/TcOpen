@@ -12,10 +12,7 @@
         x:Name="VortexObjectTemplate"
         ItemTemplateSelector="{StaticResource ChildDataTemplateSelector}"
         ItemsSource="{Binding Children}">
-        <Label
-            Content="{Binding Converter={datatemplates:SymbolOrHumanReadableConverter}}"
-            MouseLeftButtonDown="DragMouseLeftButtonDown"
-            MouseMove="DragMouseMove" />
+        <Label Content="{Binding Converter={datatemplates:SymbolOrHumanReadableConverter}}" />
     </HierarchicalDataTemplate>
 
 </ResourceDictionary>

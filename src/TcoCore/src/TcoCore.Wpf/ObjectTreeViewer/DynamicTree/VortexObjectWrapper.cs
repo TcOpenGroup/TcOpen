@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using Vortex.Connector;
-using Vortex.Presentation.Wpf;
 
 namespace Tco.Wpf
 {
     public class TreeWrapperObject : IVortexObject
     {
-        public ObservableCollection<TreeGroup> CustomView
-        {
-            get; set;
-        } = new ObservableCollection<TreeGroup>();
 
         public TreeWrapperObject(IVortexObject obj)
         {
@@ -49,28 +43,17 @@ namespace Tco.Wpf
         public IEnumerable<object> Children => _obj?.GetKids()
                                      .Select(p =>
                                      {
+                                         if (p is IVortexElement vortexElement)
+                                         {
+                                             if (HasRenderIgnoreAttribute(vortexElement))
+                                                 return Dummy;
+                                         }
                                          switch (p)
                                          {
                                              case IVortexObject o:
-                                                 {
-                                                     if (HasRenderIgnoreAttribute(o))
-                                                     {
-                                                         return Dummy;
-                                                     }
-                                                     else
-                                                     {
-                                                         return new TreeWrapperObject(o);
-                                                     }
-                                                 }
+                                                 return new TreeWrapperObject(o);
                                              case IValueTag o:
-                                                 if (HasRenderIgnoreAttribute(o))
-                                                 {
-                                                     return Dummy;
-                                                 }
-                                                 else
-                                                 {
-                                                     return o;
-                                                 }
+                                                 return o;
                                              case Array o when o.OfType<IVortexElement>().Count() > 0:
                                                  return o;
                                              default:
@@ -90,7 +73,7 @@ namespace Tco.Wpf
                     .Where(p => p is RenderIgnoreAttribute).FirstOrDefault() as RenderIgnoreAttribute;
 
                 return propertyAttribute != null;
-              
+
             }
 
             var typeAttribute = o.GetType()
@@ -103,7 +86,7 @@ namespace Tco.Wpf
 
         private PropertyInfo GetPropertyViaSymbol(IVortexElement vortexObject)
         {
-           var propertyName = vortexObject.GetSymbolTail();
+            var propertyName = vortexObject.GetSymbolTail();
 
             if (vortexObject.Symbol == null)
                 return null;

@@ -5,7 +5,7 @@
     xmlns:vortex="http://vortex.mts/xaml">
 
     <DataTemplate x:Key="ValueTagTemplate" x:Name="ValueTagTemplate">
-        <ContentControl MouseLeftButtonDown="DragMouseLeftButtonDown" MouseMove="DragMouseMove">
+        <ContentControl>
             <vortex:RenderableContentControl PresentationType="ControlSlim" />
         </ContentControl>
     </DataTemplate>
