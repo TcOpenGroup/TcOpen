@@ -15,7 +15,7 @@ TYPE eSequencerMode :
 (*~
 	<docu>
 		<summary>
-			If invalid, no logic is executed.
+			Invalid, no logic is executed.
 		</summary>				
 	</docu>	
 ~*)	
@@ -23,7 +23,8 @@ TYPE eSequencerMode :
 (*~
 	<docu>
 		<summary>
-			If cyclic mode is selected, next step is automatically started after the previous has been finished.
+			Sequencer runs the steps of the sequence. 
+			(When cyclic mode is selected, next step is automatically started after the previous one has been completed.)
 		</summary>				
 	</docu>	
 ~*)	
@@ -31,9 +32,12 @@ TYPE eSequencerMode :
 (*~
 	<docu>
 		<summary>
-			If step mode is selected, when current step has been finished next step has to be started by calling method <c>StepIn()</c>.
+		    Sequencer is in mode of step-by-step operation. The current step completes the execution regularly.
+			In this mode the Step Forward/Backward and manual step execution is available.			
 			<para>
-				See <see cref="TcoSequencer.PlcTcoSequencer.StepIn()"/> for detailed description.
+				See <see cref="TcoSequencerModeController.PlcTcoSequencerModeController.StepForward()"/> for detailed description.
+				See <see cref="TcoSequencerModeController.PlcTcoSequencerModeController.StepIn()"/> for detailed description.
+				See <see cref="TcoSequencerModeController.PlcTcoSequencerModeController.StepBackward()"/> for detailed description.
 			</para>
 		</summary>				
 	</docu>	

@@ -13,14 +13,14 @@ namespace TcoCoreUnitTests
     public class T08_TcoMessengerTests
     {
 
-        TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest._TcoMessangerTests;
-        TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._TcoMessengerContextTest;
+        TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._tcoMessengerContextTest._tcoMessangerTests;
+        TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._tcoMessengerContextTest;
 
 
         [OneTimeSetUp]
         public void OneSetup()
         {
-            suc._CallMyPlcInstanceRtcUpdate.Synchron = true;
+            suc._callMyPlcInstanceRtcUpdate.Synchron = true;
             sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.None; sut.SetMinLevel(); });
             sut.SingleCycleRun(() => sut.Resume());
         }
@@ -466,7 +466,7 @@ namespace TcoCoreUnitTests
         [TestCase(200)]
         public void T813_MessagingPerfTest(short nofmessages)
         {
-            var sut = ConnectorFixture.Connector.MAIN._TcoContextMessagingPerf;
+            var sut = ConnectorFixture.Connector.MAIN._tcoContextMessagingPerf;
 
             if (nofmessages > TcoContextMessagingPerf.__const_messagesUpperBound)
             {

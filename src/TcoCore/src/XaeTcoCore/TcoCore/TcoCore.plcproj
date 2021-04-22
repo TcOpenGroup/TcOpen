@@ -108,7 +108,10 @@
     <Compile Include="POUs\Prototypes\TcoSequencer\eSequencerError.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\TcoStepModeControler.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoSequencer\ITcoSequencerModeController.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerModeController.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencer.TcPOU">

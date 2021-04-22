@@ -13,7 +13,7 @@ namespace TcoCoreUnitTests
         bool finished = false;
         ushort i = 0;
 
-        TcoContextTest tc = ConnectorFixture.Connector.MAIN._TcoContextTest_A;
+        TcoContextTest tc = ConnectorFixture.Connector.MAIN._tcoContextTest_A;
 
         ulong A_TaskInvokeCount_0;
         ulong B_TaskInvokeCount_0;
@@ -48,21 +48,21 @@ namespace TcoCoreUnitTests
             finished = false;
             i = 0;
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.Enable();
-            tc._TcoObjectTest_A._TcoTaskTest_A.Enable();
+            tc._tcoObjectTest_A._tcoTaskTest_A.Enable();
+            tc._tcoObjectTest_A._tcoTaskTest_A.Enable();
 
-            A_TaskInvokeCount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._InvokeCounter.Synchron;
-            B_TaskInvokeCount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._InvokeCounter.Synchron;
-            A_TaskInvokeRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._InvokeRisingEdgeCounter.Synchron;
-            B_TaskInvokeRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._InvokeRisingEdgeCounter.Synchron;
-            A_TaskExecuteCount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._ExecuteCounter.Synchron;
-            B_TaskExecuteCount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._ExecuteCounter.Synchron;
-            A_TaskExecuteRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._ExecuteRisingEdgeCounter.Synchron;
-            B_TaskExecuteRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._ExecuteRisingEdgeCounter.Synchron;
-            A_TaskDoneCount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._DoneCounter.Synchron;
-            B_TaskDoneCount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._DoneCounter.Synchron;
-            A_TaskDoneRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_A._DoneRisingEdgeCounter.Synchron;
-            B_TaskDoneRECount_0 = tc._TcoObjectTest_A._TcoTaskTest_B._DoneRisingEdgeCounter.Synchron;
+            A_TaskInvokeCount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._invokeCounter.Synchron;
+            B_TaskInvokeCount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._invokeCounter.Synchron;
+            A_TaskInvokeRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._invokeRisingEdgeCounter.Synchron;
+            B_TaskInvokeRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._invokeRisingEdgeCounter.Synchron;
+            A_TaskExecuteCount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._executeCounter.Synchron;
+            B_TaskExecuteCount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._executeCounter.Synchron;
+            A_TaskExecuteRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._executeRisingEdgeCounter.Synchron;
+            B_TaskExecuteRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._executeRisingEdgeCounter.Synchron;
+            A_TaskDoneCount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._doneCounter.Synchron;
+            B_TaskDoneCount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._doneCounter.Synchron;
+            A_TaskDoneRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._doneRisingEdgeCounter.Synchron;
+            B_TaskDoneRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._doneRisingEdgeCounter.Synchron;
 
             A_TaskInvokeCount_1 = 0;
             B_TaskInvokeCount_1 = 0;
@@ -82,18 +82,18 @@ namespace TcoCoreUnitTests
 
         public void GetCounterValues()
         {
-            A_TaskInvokeCount_1 = tc._TcoObjectTest_A._TcoTaskTest_A._InvokeCounter.Synchron;
-            B_TaskInvokeCount_1 = tc._TcoObjectTest_A._TcoTaskTest_B._InvokeCounter.Synchron;
-            A_TaskInvokeRECount_1 = tc._TcoObjectTest_A._TcoTaskTest_A._InvokeRisingEdgeCounter.Synchron;
-            B_TaskInvokeRECount_1 = tc._TcoObjectTest_A._TcoTaskTest_B._InvokeRisingEdgeCounter.Synchron;
-            A_TaskExecuteCount_1 = tc._TcoObjectTest_A._TcoTaskTest_A._ExecuteCounter.Synchron;
-            B_TaskExecuteCount_1 = tc._TcoObjectTest_A._TcoTaskTest_B._ExecuteCounter.Synchron;
-            A_TaskExecuteRECount_1 = tc._TcoObjectTest_A._TcoTaskTest_A._ExecuteRisingEdgeCounter.Synchron;
-            B_TaskExecuteRECount_1 = tc._TcoObjectTest_A._TcoTaskTest_B._ExecuteRisingEdgeCounter.Synchron;
-            A_TaskDoneCount_1 = tc._TcoObjectTest_A._TcoTaskTest_A._DoneCounter.Synchron;
-            B_TaskDoneCount_1 = tc._TcoObjectTest_A._TcoTaskTest_B._DoneCounter.Synchron;
-            A_TaskDoneRECount_1 = tc._TcoObjectTest_A._TcoTaskTest_A._DoneRisingEdgeCounter.Synchron;
-            B_TaskDoneRECount_1 = tc._TcoObjectTest_A._TcoTaskTest_B._DoneRisingEdgeCounter.Synchron;
+            A_TaskInvokeCount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._invokeCounter.Synchron;
+            B_TaskInvokeCount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._invokeCounter.Synchron;
+            A_TaskInvokeRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._invokeRisingEdgeCounter.Synchron;
+            B_TaskInvokeRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._invokeRisingEdgeCounter.Synchron;
+            A_TaskExecuteCount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._executeCounter.Synchron;
+            B_TaskExecuteCount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._executeCounter.Synchron;
+            A_TaskExecuteRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._executeRisingEdgeCounter.Synchron;
+            B_TaskExecuteRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._executeRisingEdgeCounter.Synchron;
+            A_TaskDoneCount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._doneCounter.Synchron;
+            B_TaskDoneCount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._doneCounter.Synchron;
+            A_TaskDoneRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._doneRisingEdgeCounter.Synchron;
+            B_TaskDoneRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._doneRisingEdgeCounter.Synchron;
         }
 
         public void CheckBothTaskInvokeCount(ushort count)
@@ -123,27 +123,27 @@ namespace TcoCoreUnitTests
             //Both tasks are triggered in the same plc cycle. The Invoke methods of the both tasks are still called cyclically. Task A should reach Done state sooner as the Task B, but it should not restarted again.
             Assert.Greater(cycles_B, cycles_A);
 
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tc._callMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
 
-            tc._TcoObjectTest_A._TcoTaskTest_A._CounterSetValue.Synchron = cycles_A;    //Assign _CounterSetValue to Task A 
-            tc._TcoObjectTest_A._TcoTaskTest_B._CounterSetValue.Synchron = cycles_B;    //Assign _CounterSetValue to Task B
+            tc._tcoObjectTest_A._tcoTaskTest_A._counterSetValue.Synchron = cycles_A;    //Assign _CounterSetValue to Task A 
+            tc._tcoObjectTest_A._tcoTaskTest_B._counterSetValue.Synchron = cycles_B;    //Assign _CounterSetValue to Task B
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.TriggerRestore();                        //Restore Task A
-            tc._TcoObjectTest_A._TcoTaskTest_B.TriggerRestore();                        //Restore Task B
+            tc._tcoObjectTest_A._tcoTaskTest_A.TriggerRestore();                        //Restore Task A
+            tc._tcoObjectTest_A._tcoTaskTest_B.TriggerRestore();                        //Restore Task B
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.SetPreviousStateToReady();               //Set previous state of the Task A to Ready
-            tc._TcoObjectTest_A._TcoTaskTest_B.SetPreviousStateToReady();               //Set previous state of the Task B to Ready
+            tc._tcoObjectTest_A._tcoTaskTest_A.SetPreviousStateToReady();               //Set previous state of the Task A to Ready
+            tc._tcoObjectTest_A._tcoTaskTest_B.SetPreviousStateToReady();               //Set previous state of the Task B to Ready
 
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Busy state
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Busy state
-                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
-                            tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
+                tc._tcoObjectTest_A._tcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Busy state
+                tc._tcoObjectTest_A._tcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Busy state
+                tc._tcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._tcoObjectTest_A._tcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._tcoObjectTest_A._tcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
+                            tc._tcoObjectTest_A._tcoTaskTest_B._isDone.Synchron;
             }, () => finished);
 
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
@@ -165,13 +165,13 @@ namespace TcoCoreUnitTests
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
-                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
-                            tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
+                tc._tcoObjectTest_A._tcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
+                tc._tcoObjectTest_A._tcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
+                tc._tcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._tcoObjectTest_A._tcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._tcoObjectTest_A._tcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
+                            tc._tcoObjectTest_A._tcoTaskTest_B._isDone.Synchron;
             }, () => finished);
 
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
@@ -196,13 +196,13 @@ namespace TcoCoreUnitTests
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Busy state
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Busy state
-                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
-                            tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
+                tc._tcoObjectTest_A._tcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Busy state
+                tc._tcoObjectTest_A._tcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Busy state
+                tc._tcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._tcoObjectTest_A._tcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._tcoObjectTest_A._tcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
+                            tc._tcoObjectTest_A._tcoTaskTest_B._isDone.Synchron;
             }, () => finished);
 
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
@@ -221,19 +221,19 @@ namespace TcoCoreUnitTests
         {
             //The both tasks has reached the Done state in the previous test. The Abort() method are called on both tasks, but as both of them are already in Done state, the Abort() method should not change the state of the tasks.
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.TriggerAbort();                          //Triggering the Abort() method on the task A. As it is already in the Done state it should not affect it.
-            tc._TcoObjectTest_A._TcoTaskTest_B.TriggerAbort();                          //Triggering the Abort() method on the task B. As it is already in the Done state it should not affect it.
+            tc._tcoObjectTest_A._tcoTaskTest_A.TriggerAbort();                          //Triggering the Abort() method on the task A. As it is already in the Done state it should not affect it.
+            tc._tcoObjectTest_A._tcoTaskTest_B.TriggerAbort();                          //Triggering the Abort() method on the task B. As it is already in the Done state it should not affect it.
 
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
-                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
-                            tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
+                tc._tcoObjectTest_A._tcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
+                tc._tcoObjectTest_A._tcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
+                tc._tcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._tcoObjectTest_A._tcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._tcoObjectTest_A._tcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
+                            tc._tcoObjectTest_A._tcoTaskTest_B._isDone.Synchron;
             }, () => finished);
 
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
@@ -253,19 +253,19 @@ namespace TcoCoreUnitTests
             //The both tasks has reached the Done state in the before the previous test. The Restore() method should set the tasks into the Idle state from any state.
             //So calling Invoke() method after Restore() method should cause restarting the task.
 
-            tc._TcoObjectTest_A._TcoTaskTest_A.TriggerRestore();                        //Triggering the Restore() method on the task A that it is already in the Done state should set it into Idle state.
-            tc._TcoObjectTest_A._TcoTaskTest_B.TriggerRestore();                        //Triggering the Restore() method on the task B that it is already in the Done state should set it into Idle state.
+            tc._tcoObjectTest_A._tcoTaskTest_A.TriggerRestore();                        //Triggering the Restore() method on the task A that it is already in the Done state should set it into Idle state.
+            tc._tcoObjectTest_A._tcoTaskTest_B.TriggerRestore();                        //Triggering the Restore() method on the task B that it is already in the Done state should set it into Idle state.
 
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
-                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
-                            tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
+                tc._tcoObjectTest_A._tcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
+                tc._tcoObjectTest_A._tcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
+                tc._tcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._tcoObjectTest_A._tcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._tcoObjectTest_A._tcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                finished = tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
+                            tc._tcoObjectTest_A._tcoTaskTest_B._isDone.Synchron;
             }, () => finished);
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
             CheckBothTaskInvokeCount(1);                                                //Both tasks should be triggered just once
@@ -293,19 +293,19 @@ namespace TcoCoreUnitTests
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
-                tc._TcoObjectTest_A._TcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
-                tc._TcoObjectTest_A._TcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
-                tc._TcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
-                tc._TcoObjectTest_A._TcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
-                tc._TcoObjectTest_A._TcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
-                if (tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron && !AtaskDone)  //At the moment of this condition is met, Task A should be in the Done state, and Task B should be in th Executing state.
+                tc._tcoObjectTest_A._tcoTaskTest_A.TriggerInvoke();                     //Invoke of the Task A is cyclically called, even when Task A is in the Done state
+                tc._tcoObjectTest_A._tcoTaskTest_B.TriggerInvoke();                     //Invoke of the Task B is cyclically called, even when Task B is in the Done state
+                tc._tcoObjectTest_A.CallTaskInstancies();                               //Calling instancies of the Task A and Tak B in the PLC.
+                tc._tcoObjectTest_A._tcoTaskTest_A.ReadOutState();                      //Reading out the state of the Task A
+                tc._tcoObjectTest_A._tcoTaskTest_B.ReadOutState();                      //Reading out the state of the Task B
+                if (tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron && !AtaskDone)  //At the moment of this condition is met, Task A should be in the Done state, and Task B should be in th Executing state.
                 {
-                    tc._TcoObjectTest_A._TcoTaskTest_A.TriggerAbort();                  //Triggering the Abort() method on the task A. As it is already in the Done state it should not affect it.
-                    tc._TcoObjectTest_A._TcoTaskTest_B.TriggerAbort();                  //Triggering the Abort() method on the task B. As it is still in th Execution state it should this should set it to Idle.
+                    tc._tcoObjectTest_A._tcoTaskTest_A.TriggerAbort();                  //Triggering the Abort() method on the task A. As it is already in the Done state it should not affect it.
+                    tc._tcoObjectTest_A._tcoTaskTest_B.TriggerAbort();                  //Triggering the Abort() method on the task B. As it is still in th Execution state it should this should set it to Idle.
                     AtaskDone = true;
                 }
-                finished = tc._TcoObjectTest_A._TcoTaskTest_A._IsDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
-                            tc._TcoObjectTest_A._TcoTaskTest_B._IsDone.Synchron;
+                finished = tc._tcoObjectTest_A._tcoTaskTest_A._isDone.Synchron &&       //End condition, execution finished, when the both tasks are in Done state.
+                            tc._tcoObjectTest_A._tcoTaskTest_B._isDone.Synchron;
             }, () => finished);
 
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
@@ -329,8 +329,8 @@ namespace TcoCoreUnitTests
         {
             //This test enters task into the Error state by ovewriting internal task counter "from outside", using ThrowWhen() method inside PLC test instance.
 
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
 
             tc.AddEmptyCycle();                                                         //Empty cycle between cyclically called the Invoke() methods of the both task should causes restarting the tasks even from Done state.
 
@@ -345,11 +345,11 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             }, 3);
 
-            Assert.IsFalse(tt._IsError.Synchron);                                       //Task should be Busy, not Done, not in Error.
-            Assert.IsTrue(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);                                       //Task should be Busy, not Done, not in Error.
+            Assert.IsTrue(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
 
-            tt._CounterValue.Synchron = tt._CounterValue.Synchron + 5;                  //Overwriting the counter value from "outside" force task to Error state
+            tt._counterValue.Synchron = tt._counterValue.Synchron + 5;                  //Overwriting the counter value from "outside" force task to Error state
 
             tc.SingleCycleRun(() =>
             {
@@ -357,9 +357,9 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             });
 
-            Assert.IsTrue(tt._IsError.Synchron);                                        //Task should be in Error, not Done, not Busy.
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);                                        //Task should be in Error, not Done, not Busy.
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
         }
 
         [Test, Order(311)]
@@ -368,8 +368,8 @@ namespace TcoCoreUnitTests
             //Task should be in Error state after the previous test.
             //Restart the task by Invoke() call should not restart the task, as it is in the Error state and it must be restored before using Resore() method.
 
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
 
             tc.SingleCycleRun(() =>
             {
@@ -382,9 +382,9 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             }, 3);
 
-            Assert.IsTrue(tt._IsError.Synchron);                                        //Task should stay in Error, not Done, not Busy, as before.
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);                                        //Task should stay in Error, not Done, not Busy, as before.
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
         }
 
         [Test, Order(312)]
@@ -393,8 +393,8 @@ namespace TcoCoreUnitTests
             //Task should be in Error state after the before the previous test.
             //Restart the task by Invoke() call should not restart the task nor the empty cycle call, as the task is in the Error state and it must be restored before using Resore() method.
 
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
 
             tc.AddEmptyCycle();                                                         //Empty cycle must not affect the Error state of the task
 
@@ -409,9 +409,9 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             }, 3);
 
-            Assert.IsTrue(tt._IsError.Synchron);                                        //Task should stay in Error, not Done, not Busy, as before.
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);                                        //Task should stay in Error, not Done, not Busy, as before.
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
         }
 
         [Test, Order(313)]
@@ -420,8 +420,8 @@ namespace TcoCoreUnitTests
             //Task should be in Error state after the previous tests.
             //Restore method shoukld be the only one way, how to get from the Error state of the task.
 
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
 
             tc.SingleCycleRun(() =>
             {
@@ -431,16 +431,16 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             });
 
-            Assert.IsFalse(tt._IsError.Synchron);                                       //Error should be reseted, Task should by in Busy state.
-            Assert.IsTrue(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);                                       //Error should be reseted, Task should by in Busy state.
+            Assert.IsTrue(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
         }
 
         [Test, Order(314)]
         public void T314_TaskAbortDuringExecution()
         {
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
 
             tc.SingleCycleRun(() => { tt.TriggerRestore(); });                             //Restore() method should set the task into the Idle state from any state.
 
@@ -451,9 +451,9 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             });
 
-            Assert.IsFalse(tt._IsError.Synchron);                                       //Task should be Busy, not in Error state, not Done.
-            Assert.IsTrue(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);                                       //Task should be Busy, not in Error state, not Done.
+            Assert.IsTrue(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
 
             tc.SingleCycleRun(() =>
             {
@@ -462,15 +462,15 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();
             });
 
-            Assert.IsFalse(tt._IsError.Synchron);                                       //Task should be not in Error state, not Busy, not Done.
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);                                       //Task should be not in Error state, not Busy, not Done.
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
         }
 
         [Test, Order(315)]
         public void T315_TaskMessage()
         {
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
 
             string message = "Test error message";
 
@@ -482,13 +482,13 @@ namespace TcoCoreUnitTests
         [Test, Order(316)]
         public void T316_IdentitiesTest()
         {
-            TcoObjectTest to = tc._TcoObjectTest_A;                                     //to is the child of the tc
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;                        //tt is the child of the to and grandchild of the tc
+            TcoObjectTest to = tc._tcoObjectTest_A;                                     //to is the child of the tc
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;                        //tt is the child of the to and grandchild of the tc
 
-            tc._CallMyPlcInstance.Synchron = true;                                      //Switch on the cyclical execution of the tc instance 
+            tc._callMyPlcInstance.Synchron = true;                                      //Switch on the cyclical execution of the tc instance 
 
             Thread.Sleep(300);                                                          //Time of the cyclical execution of the test instance
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tc._callMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
 
             tc.ReadOutCycleCounters();                                                  //Read out actual cycle counters values into the test instance
 
@@ -498,69 +498,69 @@ namespace TcoCoreUnitTests
             to.ReadOutIdentities();                                                     //Readout identities into the test instance
             tt.ReadOutIdentities();                                                     //Readout identities into the test instance
 
-            Assert.AreEqual(tc._MyIdentity.Synchron, to._MyContextIdentity.Synchron);   //Identity of the child's context (to) is the same as the identity of the parent(tc)
-            Assert.AreEqual(tc._MyIdentity.Synchron, tt._MyContextIdentity.Synchron);   //Identity of the grandchild's context (tt) is the same as the identity of the grandparent(tc)
+            Assert.AreEqual(tc._myIdentity.Synchron, to._myContextIdentity.Synchron);   //Identity of the child's context (to) is the same as the identity of the parent(tc)
+            Assert.AreEqual(tc._myIdentity.Synchron, tt._myContextIdentity.Synchron);   //Identity of the grandchild's context (tt) is the same as the identity of the grandparent(tc)
 
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, to._MyIdentity.Synchron);       //Identity of the child(to) is different than the identity of the parent(tc), as they are both unique objects.
-            Assert.AreNotEqual(tc._MyIdentity.Synchron, tt._MyIdentity.Synchron);       //Identity of the grandchild(tt) is different than the identity of its grandparent(tc), as they are both unique objects.
-            Assert.AreNotEqual(to._MyIdentity.Synchron, tt._MyIdentity.Synchron);      //Identity of the grandchild(tt) is different than the identity of its parent(to), as they are both unique objects.
+            Assert.AreNotEqual(tc._myIdentity.Synchron, to._myIdentity.Synchron);       //Identity of the child(to) is different than the identity of the parent(tc), as they are both unique objects.
+            Assert.AreNotEqual(tc._myIdentity.Synchron, tt._myIdentity.Synchron);       //Identity of the grandchild(tt) is different than the identity of its grandparent(tc), as they are both unique objects.
+            Assert.AreNotEqual(to._myIdentity.Synchron, tt._myIdentity.Synchron);      //Identity of the grandchild(tt) is different than the identity of its parent(to), as they are both unique objects.
         }
 
         [Test, Order(317)]
         public void T317_CheckAutoRestoreProperties()
         {
-            //tc._TcoObjectTest_A._TcoStateTest_A, tc._TcoObjectTest_A._TcoStateTest_B, tc._TcoObjectTest_B._TcoStateTest_A and tc._TcoObjectTest_B._TcoStateTest_B have different values of the EnableAutoRestore properties
+            //tc._tcoObjectTest_A._tcoStateTest_A, tc._tcoObjectTest_A._tcoStateTest_B, tc._tcoObjectTest_B._tcoStateTest_A and tc._tcoObjectTest_B._tcoStateTest_B have different values of the EnableAutoRestore properties
             TcoStateTest ts;
             TcoTaskTest tt_a;
             TcoTaskTest tt_b;
 
-            //First case tc._TcoObjectTest_A._TcoStateTest_A
-            ts = tc._TcoObjectTest_A._TcoStateTest_A;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
-            tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            //First case tc._tcoObjectTest_A._tcoStateTest_A
+            ts = tc._tcoObjectTest_A._tcoStateTest_A;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._tcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._tcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
             tt_a.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
             tt_b.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
-                tt_a._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
-                tt_b._AutoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
+                tt_a._autoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
+                tt_b._autoRestoreByMyParentEnabled.Synchron);
 
-            //Second case tc._TcoObjectTest_A._TcoStateTest_B
-            ts = tc._TcoObjectTest_A._TcoStateTest_B;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
-            tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            //Second case tc._tcoObjectTest_A._tcoStateTest_B
+            ts = tc._tcoObjectTest_A._tcoStateTest_B;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._tcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._tcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
             tt_a.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
             tt_b.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
-                tt_a._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
-                tt_b._AutoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
+                tt_a._autoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
+                tt_b._autoRestoreByMyParentEnabled.Synchron);
 
-            //Third case tc._TcoObjectTest_B._TcoStateTest_A
-            ts = tc._TcoObjectTest_B._TcoStateTest_A;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
-            tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            //Third case tc._tcoObjectTest_B._tcoStateTest_A
+            ts = tc._tcoObjectTest_B._tcoStateTest_A;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._tcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._tcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
             tt_a.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
             tt_b.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
-                tt_a._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
-                tt_b._AutoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
+                tt_a._autoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
+                tt_b._autoRestoreByMyParentEnabled.Synchron);
 
-            //Fourth case tc._TcoObjectTest_B._TcoStateTest_B
-            ts = tc._TcoObjectTest_B._TcoStateTest_B;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
-            tt_a = ts._TcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
-            tt_b = ts._TcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
+            //Fourth case tc._tcoObjectTest_B._tcoStateTest_B
+            ts = tc._tcoObjectTest_B._tcoStateTest_B;                                   //ts(TcoState) is a parent object for tt_a(Tco_Task) and tt_b(Tco_Task)
+            tt_a = ts._tcoTaskTest_A;                                                   //tt_a(Tco_Task) is a child object of the ts(TcoState)
+            tt_b = ts._tcoTaskTest_B;                                                   //tt_b(Tco_Task) is a child object of the ts(TcoState)
             ts.ReadOutAutoRestoreProperties();                                          //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent
             tt_a.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
             tt_b.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the child
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
-                tt_a._AutoRestoreByMyParentEnabled.Synchron);
-            Assert.AreEqual(ts._AutoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
-                tt_b._AutoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property.
+                tt_a._autoRestoreByMyParentEnabled.Synchron);
+            Assert.AreEqual(ts._autoRestoreToMyChildsEnabled.Synchron,                  //The child's inherited auto restore property should be the same as the parent's dedicated auto restore property. 
+                tt_b._autoRestoreByMyParentEnabled.Synchron);
         }
 
         [Test, Order(318)]
@@ -573,26 +573,26 @@ namespace TcoCoreUnitTests
             TcoTaskTest tt_a, tt_b;
             short cc_a, cc_b, is_a, is_b, ns_a, ns_b;
 
-            ts_a = tc._TcoObjectTest_A._TcoStateTest_A;                                 //ts_a(TcoState) is a parent object for tt_a(Tco_Task).
-            ts_b = tc._TcoObjectTest_A._TcoStateTest_B;                                 //ts_b(TcoState) is a parent object for tt_b(Tco_Task).
+            ts_a = tc._tcoObjectTest_A._tcoStateTest_A;                                 //ts_a(TcoState) is a parent object for tt_a(Tco_Task).
+            ts_b = tc._tcoObjectTest_A._tcoStateTest_B;                                 //ts_b(TcoState) is a parent object for tt_b(Tco_Task).
 
-            tt_a = ts_a._TcoTaskTest_A;                                                 //tt_a(Tco_Task) is a child object of the ts_a(TcoState).
-            tt_b = ts_b._TcoTaskTest_B;                                                 //tt_b(Tco_Task) is a child object of the ts_b(TcoState).
+            tt_a = ts_a._tcoTaskTest_A;                                                 //tt_a(Tco_Task) is a child object of the ts_a(TcoState).
+            tt_b = ts_b._tcoTaskTest_B;                                                 //tt_b(Tco_Task) is a child object of the ts_b(TcoState).
 
             ts_a.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent.
-            Assert.IsTrue(ts_a._AutoRestoreToMyChildsEnabled.Synchron);                 //Check if ts_a has EnableAutoRestore enabled. This property is given by the PLC declaration.
+            Assert.IsTrue(ts_a._autoRestoreToMyChildsEnabled.Synchron);                 //Check if ts_a has EnableAutoRestore enabled. This property is given by the PLC declaration.
 
             ts_b.ReadOutAutoRestoreProperties();                                        //Readout auto restore properties (inherited from MY parent so as dedicated to MY childrens) of the parent.
-            Assert.IsFalse(ts_b._AutoRestoreToMyChildsEnabled.Synchron);                //Check if ts_b has EnableAutoRestore disabled. This property is given by the PLC declaration.
+            Assert.IsFalse(ts_b._autoRestoreToMyChildsEnabled.Synchron);                //Check if ts_b has EnableAutoRestore disabled. This property is given by the PLC declaration.
 
             ts_a.ReadOutState();                                                        //Readout parent state into the testing instance.
-            is_a = ts_a._MyState.Synchron;                                              //Store the parent initial state.
+            is_a = ts_a._myState.Synchron;                                              //Store the parent initial state.
 
             ts_b.ReadOutState();                                                        //Readout parent state into the testing instance.
-            is_b = ts_b._MyState.Synchron;                                              //Store the parent initial state.
+            is_b = ts_b._myState.Synchron;                                              //Store the parent initial state.
 
-            tt_a._CounterSetValue.Synchron = 100;                                       //Set the counter start value to the task A.
-            tt_b._CounterSetValue.Synchron = 100;                                       //Set the counter start value to the task B.
+            tt_a._counterSetValue.Synchron = 100;                                       //Set the counter start value to the task A.
+            tt_b._counterSetValue.Synchron = 100;                                       //Set the counter start value to the task B.
 
             tc.SingleCycleRun(() =>
             {
@@ -602,8 +602,8 @@ namespace TcoCoreUnitTests
                 tt_b.ReadOutState();                                                    //Readout task B state into the testing instance.                                                    
             });
 
-            Assert.IsFalse(tt_a._IsBusy.Synchron);                                      //Task A should be in the Idle state.                  
-            Assert.IsFalse(tt_b._IsBusy.Synchron);                                      //Task B should be in the Idle state.                  
+            Assert.IsFalse(tt_a._isBusy.Synchron);                                      //Task A should be in the Idle state.                  
+            Assert.IsFalse(tt_b._isBusy.Synchron);                                      //Task B should be in the Idle state.                  
 
             tc.SingleCycleRun(() =>                                                     //By calling the Invoke() methods on the both tasks, both of them should get into the Request state.
             {                                                                           //By calling the bodies of the both tasks should get from Request into the Executing state.
@@ -615,8 +615,8 @@ namespace TcoCoreUnitTests
                 tt_b.ReadOutState();
             });
 
-            Assert.IsFalse(tt_a._IsBusy.Synchron);                                      //Task A should be in the Idle state.
-            Assert.IsTrue(tt_b._IsBusy.Synchron);                                       //Task B should be in the Execution state.
+            Assert.IsFalse(tt_a._isBusy.Synchron);                                      //Task A should be in the Idle state.
+            Assert.IsTrue(tt_b._isBusy.Synchron);                                       //Task B should be in the Execution state.
 
             tc.SingleCycleRun(() =>
             {
@@ -627,14 +627,14 @@ namespace TcoCoreUnitTests
                 tt_b.ReadOutState();
             });
 
-            Assert.IsTrue(tt_a._IsBusy.Synchron);                                       //Task A should be in the Execution state now.                                       
-            Assert.IsTrue(tt_b._IsBusy.Synchron);                                       //Task B should be in the Execution state as before.
+            Assert.IsTrue(tt_a._isBusy.Synchron);                                       //Task A should be in the Execution state now.                                       
+            Assert.IsTrue(tt_b._isBusy.Synchron);                                       //Task B should be in the Execution state as before.
 
-            cc_a = ts_a._OnStateChangeCounter.Synchron;                                 //Store the value of the counter of the OnStateChange() method call of task A.
+            cc_a = ts_a._onStateChangeCounter.Synchron;                                 //Store the value of the counter of the OnStateChange() method call of task A.
             ns_a = TestHelpers.RandomNumber((short)(is_a + 1), (short)(5 * (is_a + 1)));//Generate new random value of the new state.
             Assert.AreNotEqual(is_a, ns_a);                                             //New state should be different as the initial state.
 
-            cc_b = ts_b._OnStateChangeCounter.Synchron;                                 //Store the value of the counter of the OnStateChange() method call of task A.
+            cc_b = ts_b._onStateChangeCounter.Synchron;                                 //Store the value of the counter of the OnStateChange() method call of task A.
             ns_b = TestHelpers.RandomNumber((short)(is_b + 1), (short)(5 * (is_b + 1)));//Generate new random value of the new state.
             Assert.AreNotEqual(is_b, ns_b);                                             //New state should be different as the initial state.
 
@@ -647,25 +647,25 @@ namespace TcoCoreUnitTests
             });
 
             ts_a.ReadOutState();
-            Assert.AreEqual(ns_a, ts_a._MyState.Synchron);                              //Check if the state of the TcoState A has been changed into the new state ns_a.
-            Assert.AreEqual(cc_a + 1, ts_a._OnStateChangeCounter.Synchron);             //OnStateChange() method should be called just once, as only one change of the state has been performed on the TcoState A.
+            Assert.AreEqual(ns_a, ts_a._myState.Synchron);                              //Check if the state of the TcoState A has been changed into the new state ns_a.
+            Assert.AreEqual(cc_a + 1, ts_a._onStateChangeCounter.Synchron);             //OnStateChange() method should be called just once, as only one change of the state has been performed on the TcoState A.
 
             ts_b.ReadOutState();
-            Assert.AreEqual(ns_b, ts_b._MyState.Synchron);                              //Check if the state of the TcoState B has been changed into the new state ns_b.
-            Assert.AreEqual(cc_b + 1, ts_b._OnStateChangeCounter.Synchron);             //OnStateChange() method should be called just once, as only one change of the state has been performed on the TcoState B.
+            Assert.AreEqual(ns_b, ts_b._myState.Synchron);                              //Check if the state of the TcoState B has been changed into the new state ns_b.
+            Assert.AreEqual(cc_b + 1, ts_b._onStateChangeCounter.Synchron);             //OnStateChange() method should be called just once, as only one change of the state has been performed on the TcoState B.
 
-            Assert.IsFalse(tt_a._IsBusy.Synchron);                                      //Task A should change from the Executing state into the Idle state as Task A is AutoRestorable and its parent has changed its state.          
-            Assert.IsTrue(tt_b._IsBusy.Synchron);                                       //Task B should stay in the Executing state even if its parent has changed its state, as Task B is not AutoRestorable.          
+            Assert.IsFalse(tt_a._isBusy.Synchron);                                      //Task A should change from the Executing state into the Idle state as Task A is AutoRestorable and its parent has changed its state.          
+            Assert.IsTrue(tt_b._isBusy.Synchron);                                       //Task B should stay in the Executing state even if its parent has changed its state, as Task B is not AutoRestorable.          
         }
 
         [Test, Order(320)]
         public void T320_InvokeDisabledTask()
         {
             //Disabled task is triggered. The task should stay in Ready state.
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
-            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
+            tc._callMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._counterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
             tt.TriggerRestore();                                                        //Restore task
             tt.Disable();                                                               //Disable task
 
@@ -677,10 +677,10 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();                                                      //Reading out the state of the task
             }, () => plccycles >= cycles_A);
 
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsTrue(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsTrue(tt._isReady.Synchron);
             GetCounterValues();                                                         //Readout all counter values from test instance into the _1 variables
             Assert.AreEqual(A_TaskInvokeCount_0, A_TaskInvokeCount_1);                 //Task should not be started
             Assert.AreEqual(A_TaskInvokeRECount_0, A_TaskInvokeRECount_1);             //Task should not be started
@@ -695,10 +695,10 @@ namespace TcoCoreUnitTests
         public void T321_DisableExecutingTask()
         {
             //Enabled task is started and than disabled. task is triggered. The task should get inte the Ready state.
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
-            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
+            tc._callMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._counterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
 
             tc.SingleCycleRun(() =>
             {
@@ -707,10 +707,10 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
 
-            Assert.IsTrue(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsTrue(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
 
             tc.SingleCycleRun(() =>
             {
@@ -719,10 +719,10 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
 
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsTrue(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
             GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
             Assert.AreEqual(A_TaskInvokeCount_0 + 1, A_TaskInvokeCount_1);             //Task should be started once
             Assert.AreEqual(A_TaskInvokeRECount_0 + 1, A_TaskInvokeRECount_1);         //Task should be started once
@@ -738,10 +738,10 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
 
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsTrue(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsTrue(tt._isReady.Synchron);
             tc.SingleCycleRun(() =>
             {
                 tt.TriggerInvoke();                                                     //Invoke of the task is cyclically called, even when task is in the Busy state
@@ -749,10 +749,10 @@ namespace TcoCoreUnitTests
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
 
-            Assert.IsTrue(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsTrue(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
             GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
             Assert.AreEqual(A_TaskInvokeCount_0 + 2, A_TaskInvokeCount_1);             //Task should be started twice
             Assert.AreEqual(A_TaskExecuteCount_0 + 2, A_TaskExecuteCount_1);           //Execution body of the task should enter twice.
@@ -764,10 +764,10 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();
                 tt.ReadOutState();
             });
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsTrue(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsTrue(tt._isReady.Synchron);
             GetCounterValues();
         }
 
@@ -776,10 +776,10 @@ namespace TcoCoreUnitTests
         public void T322_InvokeTaskThenDisable()
         {
             //Enabled task is started and than disabled. task is triggered. The task should get inte the Ready state.
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
-            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
+            tc._callMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._counterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
 
             tc.SingleCycleRun(() =>
             {
@@ -788,10 +788,10 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsTrue(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsTrue(tt._isReady.Synchron);
             GetCounterValues();                                                        //Readout all counter values from test instance into the _1 variables
             Assert.AreEqual(A_TaskInvokeCount_0 + 1, A_TaskInvokeCount_1);             //Task should be started once
             Assert.AreEqual(A_TaskInvokeRECount_0 + 1, A_TaskInvokeRECount_1);         //Task should be started once
@@ -804,10 +804,10 @@ namespace TcoCoreUnitTests
         [Test, Order(323)]
         public void T323_DisableTaskInErrorStateEnableAndTriggerAgain()
         {
-            TcoObjectTest to = tc._TcoObjectTest_A;
-            TcoTaskTest tt = tc._TcoObjectTest_A._TcoTaskTest_A;
-            tc._CallMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
-            tt._CounterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
+            TcoObjectTest to = tc._tcoObjectTest_A;
+            TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
+            tc._callMyPlcInstance.Synchron = false;                                     //Switch off the cyclical execution of the tc instance 
+            tt._counterSetValue.Synchron = cycles_A;                                    //Assign _CounterSetValue to task
 
             tc.SingleCycleRun(() =>
             {
@@ -815,12 +815,12 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
-            Assert.IsTrue(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsTrue(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
 
-            tt._CounterValue.Synchron = tt._CounterValue.Synchron + 5;                  //Overwriting _CounterValue from outside cause entering the task into the Error state.
+            tt._counterValue.Synchron = tt._counterValue.Synchron + 5;                  //Overwriting _CounterValue from outside cause entering the task into the Error state.
 
 
             tc.SingleCycleRun(() =>
@@ -829,10 +829,10 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsTrue(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
 
             tc.SingleCycleRun(() =>
             {
@@ -840,10 +840,10 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsTrue(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
 
             tc.SingleCycleRun(() =>
             {
@@ -851,10 +851,10 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsTrue(tt._IsError.Synchron);
-            Assert.IsFalse(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsTrue(tt._isError.Synchron);
+            Assert.IsFalse(tt._isReady.Synchron);
 
             tc.SingleCycleRun(() =>
             {
@@ -863,10 +863,10 @@ namespace TcoCoreUnitTests
                 to.CallTaskInstancies();                                                //Calling instance of the task in the PLC.
                 tt.ReadOutState();                                                      //Reading out the state of the task
             });
-            Assert.IsFalse(tt._IsBusy.Synchron);
-            Assert.IsFalse(tt._IsDone.Synchron);
-            Assert.IsFalse(tt._IsError.Synchron);
-            Assert.IsTrue(tt._IsReady.Synchron);
+            Assert.IsFalse(tt._isBusy.Synchron);
+            Assert.IsFalse(tt._isDone.Synchron);
+            Assert.IsFalse(tt._isError.Synchron);
+            Assert.IsTrue(tt._isReady.Synchron);
         }
     }
 }
