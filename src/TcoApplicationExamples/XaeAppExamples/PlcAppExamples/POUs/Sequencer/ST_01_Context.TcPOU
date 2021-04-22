@@ -6,9 +6,9 @@
 FUNCTION_BLOCK ST_01_Context EXTENDS TcoCore.TcoContext
 VAR
 	// Ground position sequence
-	_groundSequcence : ST_01_Ground(THIS^, FALSE);
+	_groundSequcence : ST_01_Ground(THIS^, eRestoreMode.None);
 	// Automat mode sequence	
-	_automatSequence : ST_01_Automat(THIS^, FALSE);
+	_automatSequence : ST_01_Automat(THIS^, eRestoreMode.None);
 	// Task to execute _groundSequence
 	_groundTask : TcoCore.TcoTask(THIS^);
 	// Task to execute _automatSequence

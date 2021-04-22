@@ -6,7 +6,7 @@
 			<summary>
 				Provides basic sequential control, including step mode, which allows to run the sequence step-by-step, steping forward and steping backward.
 			</summary>
-		</docu>
+		</docu>		
 ~*)
 FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoStateExtendible IMPLEMENTS ITcoSequencer
 VAR CONSTANT 
@@ -262,10 +262,10 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	Parent : ITcoObject;
-	DoEnableAutoRestore : BOOL; 
+	AutoRestoreMode : eRestoreMode; 
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent, DoEnableAutoRestore);
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent, AutoRestoreMode);
 ]]></ST>
       </Implementation>
     </Method>

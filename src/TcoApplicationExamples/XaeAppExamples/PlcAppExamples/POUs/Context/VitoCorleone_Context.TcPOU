@@ -36,7 +36,7 @@ END_VAR
 
 VAR
 	_JohnyFontaneCaseDone	:	BOOL := FALSE;
-	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^,FALSE);
+	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^, eRestoreMode.None);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

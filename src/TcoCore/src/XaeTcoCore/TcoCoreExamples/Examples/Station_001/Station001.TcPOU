@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoContext
 VAR
 	_components : Station001_Components(THIS^);
-	_sequence : Station001_Sequencer(THIS^, FALSE, _components);
+	_sequence : Station001_Sequencer(THIS^, eRestoreMode.None, _components);
 END_VAR
 
 

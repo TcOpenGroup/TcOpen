@@ -10,8 +10,8 @@ VAR
 	_myParentIdentity		:	ULINT;
 	_tcoTaskTest_A			:	TcoTaskTest(THIS^);
 	_tcoTaskTest_B			:	TcoTaskTest(THIS^);
-	_tcoStateTest_A			:	TcoStateTest(THIS^,TRUE);
-	_tcoStateTest_B			:	TcoStateTest(THIS^,FALSE);
+	_tcoStateTest_A			:	TcoStateTest(THIS^, eRestoreMode.AutoRestoreMembers);
+	_tcoStateTest_B			:	TcoStateTest(THIS^, eRestoreMode.None);
 	// Object equality
 	_tcoObjectEqualsTestObj1 	:   TcoObjectEqualsTest(THIS^);
 	_tcoObjectEqualsTestObj2 	:   TcoObjectEqualsTest(THIS^);
