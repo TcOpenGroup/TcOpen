@@ -3,7 +3,7 @@
   <POU Name="fbManipulatorContext" Id="{ea90540b-6619-0c29-21fd-12c4e49ac96f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbManipulatorContext  EXTENDS TcoCore.TcoContext
 VAR
-	_automat : fbManipulatorAutomat(THIS^, true); 
+	_automat : fbManipulatorAutomat(THIS^, eRestoreMode.AutoRestoreMembers); 
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -15,5 +15,11 @@ END_VAR
         <ST><![CDATA[_automat();]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="fbManipulatorContext">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="fbManipulatorContext.Main">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

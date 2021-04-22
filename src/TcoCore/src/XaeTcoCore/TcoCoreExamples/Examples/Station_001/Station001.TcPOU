@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoContext
 VAR
 	_components : Station001_Components(THIS^);
-	_sequence : Station001_Sequencer(THIS^, FALSE, _components);
+	_sequence : Station001_Sequencer(THIS^, eRestoreMode.None, _components);
 END_VAR
 
 
@@ -30,5 +30,12 @@ METHOD PROTECTED  Main]]></Declaration>
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="Station001">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.Main">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

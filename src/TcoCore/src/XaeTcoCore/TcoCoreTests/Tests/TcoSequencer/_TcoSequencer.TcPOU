@@ -15,7 +15,7 @@ VAR
 	_currentStepDescription				:	STRING(254);
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
-	_myTcoState							: 	TcoState(THIS^ ,FALSE);
+	_myTcoState							: 	TcoState(THIS^ ,eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
 	_onSequencerErrorCount	 			: 	ULINT;
@@ -8711,6 +8711,18 @@ _currentStepDuration		:=	SUPER^._currentStep.Duration;
       <LineId Id="3" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="_TcoSequencer.SetCurrentStepToErrorState">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetCyclicMode">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetInvalidMode">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="_TcoSequencer.SetNumberOfSteps">
       <LineId Id="3" Count="2" />
       <LineId Id="2" Count="0" />
@@ -8720,6 +8732,10 @@ _currentStepDuration		:=	SUPER^._currentStep.Duration;
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="_TcoSequencer.SetSequenceAsNotChecked">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetStepMode">
+      <LineId Id="3" Count="3" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="_TcoSequencer.SetTestParams">

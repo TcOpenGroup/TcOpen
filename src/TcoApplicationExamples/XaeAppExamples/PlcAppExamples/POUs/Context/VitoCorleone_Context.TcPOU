@@ -36,7 +36,7 @@ END_VAR
 
 VAR
 	_JohnyFontaneCaseDone	:	BOOL := FALSE;
-	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^,FALSE);
+	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^, eRestoreMode.None);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -157,5 +157,16 @@ JohnyFontaneCase(MAIN_PRG._Jack_Woltz);
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="VitoCorleone_Context">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="VitoCorleone_Context.JohnyFontaneCase">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="VitoCorleone_Context.Main">
+      <LineId Id="3" Count="86" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

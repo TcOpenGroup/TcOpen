@@ -262,10 +262,10 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	Parent : ITcoObject;
-	DoEnableAutoRestore : BOOL; 
+	AutoRestoreMode : eRestoreMode; 
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent, DoEnableAutoRestore);
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent, AutoRestoreMode);
 ]]></ST>
       </Implementation>
     </Method>
@@ -1108,5 +1108,83 @@ _numberOfStepsInSequence := _stepCounter;
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoSequencer">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.CheckStepId">
+      <LineId Id="3" Count="11" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.Close">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.CompleteSequence">
+      <LineId Id="3" Count="9" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.CompleteStep">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.FB_init">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.IsStepIdUnique">
+      <LineId Id="3" Count="95" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.Main">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.ModeController.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.OnlineChange">
+      <LineId Id="3" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.OnSequenceCompleted">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.OnSequencerError">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.OnStepCompleted">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.Open">
+      <LineId Id="3" Count="26" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.RequestStep">
+      <LineId Id="3" Count="25" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.Restore">
+      <LineId Id="3" Count="37" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.Run">
+      <LineId Id="3" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.Step">
+      <LineId Id="3" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.StepChanged">
+      <LineId Id="3" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.StepCompleteWhen">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencer.StepInternal">
+      <LineId Id="3" Count="223" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

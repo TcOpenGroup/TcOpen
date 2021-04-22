@@ -99,9 +99,6 @@
     <Compile Include="POUs\Prototypes\TcoSelector\ITcoSelector.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\eRestoreMode.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\eSequencerMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +121,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\StepDetails.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoState\eRestoreMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoState\ITcoState.TcIO">

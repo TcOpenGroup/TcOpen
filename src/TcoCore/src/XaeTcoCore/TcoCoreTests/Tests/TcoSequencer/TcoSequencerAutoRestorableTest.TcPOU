@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_callMyPlcInstance	:	BOOL := FALSE;
-	_sequencer : _TcoSequencer(THIS^, TRUE);
+	_sequencer : _TcoSequencer(THIS^, eRestoreMode.AutoRestoreMembers);
 	_runPLCinstanceOnce : BOOL := FALSE;
 	_runPLCinstanceCyclicaly : BOOL := FALSE;
 	_stepID : INT := 32764;
@@ -524,8 +524,15 @@ END_VAR
     <LineIds Name="TcoSequencerAutoRestorableTest.SetCurrentStep">
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="TcoSequencerAutoRestorableTest.SetCurrentStepToErrorState">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="TcoSequencerAutoRestorableTest.SetCyclicMode">
-      <LineId Id="3" Count="3" />
+      <LineId Id="3" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerAutoRestorableTest.SetInvalidMode">
+      <LineId Id="3" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="TcoSequencerAutoRestorableTest.SetNumberOfSteps">
@@ -543,8 +550,7 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="TcoSequencerAutoRestorableTest.SetStepMode">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="3" Count="2" />
     </LineIds>
     <LineIds Name="TcoSequencerAutoRestorableTest.Step">
       <LineId Id="2" Count="0" />

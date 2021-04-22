@@ -274,5 +274,46 @@ METHOD PUBLIC FINAL StepIn
         <ST><![CDATA[_stepIn.Invoke();]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoSequencerModeController">
+      <LineId Id="3" Count="19" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.ChangeMode">
+      <LineId Id="3" Count="24" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.DisableModeChanging.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.DisableModeChanging.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.DisableStepSkipping.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.DisableStepSkipping.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.Mode.Get">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.Mode.Set">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.OnModeChange">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.StepBackward">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.StepForward">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerModeController.StepIn">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

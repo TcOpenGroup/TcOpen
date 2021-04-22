@@ -301,12 +301,12 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	Parent : ITcoObject;
-	RestoreMode : eRestoreMode;
+	AutoRestoreMode : eRestoreMode; 
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Identity 		:=	ADR(THIS^);
 _Parent			:=	Parent;
-_enableAutoRestore	:=	RestoreMode = eRestoreMode.AutoRestoreMembers;
+_enableAutoRestore	:=	AutoRestoreMode = eRestoreMode.AutoRestoreMembers;
 
 CheckIfAutoRestoreEnabledByParent();
 ]]></ST>
