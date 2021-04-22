@@ -30,15 +30,15 @@ We want to introduce modern software development practices to the PLC world so d
 
 TwinCAT software system turns almost any compatible PC into a real-time controller with a multi-PLC system, NC axis control, programming environment, and operating station. TwinCAT replaces conventional PLC and NC/CNC controllers. It runs in Visual Studio with CodeSys.
 
-# Where we are - Development process 
+# Where are we - Development process 
 
 The initial momentum of ```TcOpen``` project was powerful; however, we have seen a slow decline in activity over the past months. [Inxton](inxton.com),  [MTS](www.mts.sk/en) team and some other heroic knights decided to keep the lights on and to carry on this initiative. 
 
-We understand that many of you guys have hard times at work, a lot of late hours, endless traveling. Life in industrial automation is very demanding. We see this as one of the reasons for the declined activity. Also, many automation engineers are not that familiar with modern software development tooling and workflows. It may scare some people off. Unfamiliarity should not be the reason not to participate. We want this place to be welcoming to everyone that sees it as a meaningful path to industrial automation. The community is going to learn along the path. There are not that many open-source projects for industrial automation.
+We understand that many of you guys have hard times at work, a lot of late hours, endless traveling. Life in industrial automation is very demanding. We see this as one of the reasons for the declined activity. Also, many automation engineers are not that familiar with modern software development tooling and workflows. It may scare some people off. Unfamiliarity should not be the reason not to participate. We want this place to be welcoming to everyone that sees it as a meaningful path to industrial automation. The community is going to learn along the path. There are not that many open-source projects for industrial automation; we got to start somewhere and somehow.
 
 ## Recent developments merging to TcOpenGroup
 
-There has been much activity without visible tracking in recent times. We created a set of base classes to help us craft components and projects in industrial automation. Most of the discussions were in pair-programming and online/in-person meetings. We did it this way to speed up initial development when transferring legacy libraries and concepts to TcOpen.
+There has been much activity without visible tracking in recent times. We are developing a set of base classes to help us craft components and projects in industrial automation. Most of the discussions were in pair-programming and online/in-person meetings. We did it this way to speed up initial development when transferring legacy libraries and concepts to TcOpen.
 
 [Here](https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/TcOpenFramework/application.md) is a conceptual description of the work done so far.
 
@@ -46,21 +46,31 @@ There has been much activity without visible tracking in recent times. We create
 
 ## Workflow (modified GitHub flow)
 
-We adopt a modified version of [**GitHub flow**](https://guides.github.com/introduction/flow/) with proper tracking and discussions under PRs. It is a very simple workflow; we would like to work in a continuous integration/deployment fashion. However, we have to consider the need for the LTS versions for stable and long time support. How do we exactly do it is open to discussion. At this point, we work with the following modification: our default branch is ```dev```, and all PRs must be directed there instead of ```main``` (previously ``` master```). We release in the ```main``` branch once we see the version is stable and battle-tested in production by early adopters.
+We adopt a modified version of [**GitHub flow**](https://guides.github.com/introduction/flow/) with proper tracking and discussions under PRs. It is a very simple workflow; we would like to work in a continuous integration/deployment fashion. However, we have to consider the need for the LTS versions for stable and long time support. How do we exactly do it is open to discussion. At this point, we work with the following modification of *GitHub flow*: our default branch is ```dev```, and all PRs must be directed there instead of ```main``` (previously ``` master```). We release in the ```main``` branch once we see the version is stable and battle-tested in production by early adopters.
 
 ## Versioning
 
-We adopt [semantic versioning](https://semver.org/). The pipeline uses [GitVersion tool](https://gitversion.net/docs/) for the version calculation build. 
+We adopt [semantic versioning](https://semver.org/). The pipeline uses [GitVersion tool](https://gitversion.net/docs/) for the version calculation. 
 
 At this point, we keep the major version at ```0``` (0.x.x) since we do expect changes to the public interfaces, and time is needed before the public contracts are stable. 
 
 ## Monorepo
 
-We have also decided to work in a [monorepo](https://en.wikipedia.org/wiki/Monorepo) at this point. About the structure later down. Each unit (TcoCore, TcoPneumatics, TcoDrives, etc.) has its filtered solution (*.slnf) for that unit development for faster IDE opening and manipulation. Monorepo makes it easier to work with the dependencies and prevent possible dependency hell scenarios, which is a genuine risk at this early stage of the project. Once the framework is stable, we may move to a poly-repository solution with a separate group of maintainers.
+We have also decided to work in a [monorepo](https://en.wikipedia.org/wiki/Monorepo) at this point. About the structure later down. Each unit (TcoCore, TcoPneumatics, TcoDrives, etc.) has its filtered solution (*.slnf) for that unit for faster IDE opening and manipulation. Monorepo makes it easier to work with the dependencies and prevent possible dependency hell scenarios, which is a genuine risk at this early stage of the project. Once the framework is stable, we may move to a poly-repository solution with separate maintainers.
+
+## The role of Inxton.Vortex.Framework (IVF)
+
+IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. Some libraries of IVF are commercial. However, there is no need for TcOpen developers to purchase any license for this project. The contributors can acquire the free developer license here [inxton.com/register] or drop an email to team@inxton.com.
+
+All PLC libraries developed in TcOpen are under MIT license. [MIT](https://tldrlegal.com/license/mit-license) gives you the freedom to use, modify, sublicense, redistribute the libraries freely for private and commercial use.
+
+IVF will aid in the development of this project. It provides the infrastructure for testing, debugging, and tooling for the delivery pipeline (library compilation, version number updates, etc.).
+
+Inxton and MTS teams will contribute to the development of PLC libraries. There will also be a transfer of some existing codebases from MTS and Inxton internal repositories (WPF/Blazor UI components, data acquisition libraries); some may require Inxton commercial license when deployed in production. 
 
 ## Repository structure
 
-Some of the information here might self-evident for traditionals users of github and open source in general. We provide here more details to aid people that are not familiar with git, github and workflows.
+Some of the information here might be self-evident for traditional users of GitHub and open source in general. We provide here more details to aid people that are not familiar with similar structures.
 
 ### Root
 
@@ -104,7 +114,11 @@ Some of the information here might self-evident for traditionals users of github
 
 ## Testing
 
+Testing is vital to this project. We will be using two unit testing frameworks **TcUnit** and **TcProber** [here is an article](https://alltwincat.com/2021/02/16/unit-testing-in-the-world-of-industrial-automation/) that briefly explains what those frameworks are and how they differ.
+
 ## Documentation
+
+There is a separate documentation repository for this project [here](https://github.com/TcOpenGroup/TcOpen.Documentation). In this moment we use [docfx](https://github.com/dotnet/docfx) to generate documentation. The ```docfx``` uses IVF twin objects of PLC code to generate the API documentation. There is room for improvement in generated documentation; we do plan - in the course of the development of TcOpen - to improve that. 
 
 ## Communication channels
 
@@ -113,9 +127,46 @@ Some of you complained you were unable to join the Slack Channel for various rea
 [![Join the chat at https://gitter.im/dotnet/coreclr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TcOpenGroup/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-## Contributing
+## Code of Conduct
 
-## Suggestions? Issues?
+We do not adopt any document describing conduct at this point. However, there are two straightforward rules to observe:
+
+1. Treat others as you would like others to treat you
+1. Everyone is free to express his/her ideas.
+1. Truth is more important than kindness, but be kind.
+
+
+## Contributions? Suggestions? Issues?
+
+You can submit your ideas in the form of [PullRequests](https://github.com/TcOpenGroup/TcOpen/pulls)
+
+Please submit questions, suggestions, bug reports [here](https://github.com/TcOpenGroup/TcOpen/issues).
+
+Various discussion [here](https://github.com/TcOpenGroup/TcOpen/discussions).
+
+
+## How to get started with TcOpen
+
+### Prerequisites
+
+1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
+1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.4+
+1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
+1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) (Optionally preview)
+1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
+
+**Clone this repository**
+
+~~~bash
+git clone https://github.com/TcOpenGroup/TcOpen.git
+~~~
+
+**Restore necessay tooling and packages**
+
+~~~ PowerShell
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug"}
+~~~
+
 
 ### Awesome TwinCAT 3 projects 🌐
 
