@@ -11,6 +11,8 @@ VAR
 	_tcoObjectTest_B		:	TcoObjectTest(THIS^);
 	_tcoObjectTest_Misc		:	TcoObjectTest(THIS^);
 	_myIdentity				:	ULINT;	
+	_onEntryCount			:	ULINT;
+	_onExitCount			:	ULINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -59,6 +61,40 @@ METHOD INTERNAL ContextOpen
 
 _myIdentity	:= THIS^.Identity;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnEntry" Id="{39b0dbf1-f025-08a9-2dd6-50f0eee94985}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Called on entry into context. When overridden in derived class allows to execute an arbitrary logic prior to opening the context cycle.
+			<remarks>			
+				<note type="important">					
+					The method executes prior to opening the context. The context might not be properly initialized on first call. 
+					Any information contained in the context at this point are from the last execution.
+				</note>
+			</remarks>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnEntry
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onEntryCount := _onEntryCount + 1; ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnExit" Id="{4d6a4e29-82b5-0f04-0eb3-ca65f1c618ae}">
+      <Declaration><![CDATA[
+(*~
+	<docu>
+		<summary>
+			Called upon exit from the context. When overridden in derived class allows to execute an arbitrary logic after closing the context cycle.	
+		</summary>			
+	</docu>	
+~*)METHOD PROTECTED OnExit
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onExitCount := _onExitCount + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutCycleCounters" Id="{3ce97aaa-6bf5-4a06-9e7c-0d88acee2466}">
