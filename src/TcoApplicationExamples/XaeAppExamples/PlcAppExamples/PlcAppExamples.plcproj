@@ -91,6 +91,18 @@
     <Compile Include="POUs\Task\Kill_Task.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Tutorial\101_Color_Sequencer\ColorSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\101_Color_Sequencer\Color_Example.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\101_Color_Sequencer\stColors.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\TcOpenTutorial.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -98,9 +110,11 @@
     <Folder Include="POUs\Context" />
     <Folder Include="POUs\Context\CorleoneKids" />
     <Folder Include="POUs\Context\Leaves" />
+    <Folder Include="POUs\Tutorial" />
     <Folder Include="POUs\Task" />
     <Folder Include="POUs\Object" />
     <Folder Include="POUs\Sequencer" />
+    <Folder Include="POUs\Tutorial\101_Color_Sequencer" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
