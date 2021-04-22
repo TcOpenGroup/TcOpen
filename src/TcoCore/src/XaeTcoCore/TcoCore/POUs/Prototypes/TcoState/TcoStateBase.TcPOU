@@ -483,58 +483,5 @@ State := _State;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="TcoStateBase">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.AutoRestorable.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.AutoRestore">
-      <LineId Id="3" Count="21" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.ChangeStateProtected">
-      <LineId Id="3" Count="8" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.CheckIfAutoRestoreEnabledByParent">
-      <LineId Id="3" Count="2" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.CheckIfCalledCyclically">
-      <LineId Id="3" Count="14" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.Context.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.FB_init">
-      <LineId Id="3" Count="4" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.Identity.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.IsAutoRestoreEnabled.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.LastStateChangeCycle.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.OnStateChange">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.Restore">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.RestoreObject">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoStateBase.State.Get">
-      <LineId Id="3" Count="2" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

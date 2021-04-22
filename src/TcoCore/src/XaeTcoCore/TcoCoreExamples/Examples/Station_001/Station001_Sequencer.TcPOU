@@ -159,24 +159,5 @@ END_VAR
 components._simTimer(IN := FALSE);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="Station001_Sequencer">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Sequencer.FB_init">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Sequencer.Init">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Sequencer.Main">
-      <LineId Id="3" Count="80" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Sequencer.OnStateChange">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
