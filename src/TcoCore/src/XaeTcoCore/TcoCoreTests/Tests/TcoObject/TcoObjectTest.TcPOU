@@ -10,8 +10,8 @@ VAR
 	_MyParentIdentity		:	ULINT;
 	_TcoTaskTest_A			:	TcoTaskTest(THIS^);
 	_TcoTaskTest_B			:	TcoTaskTest(THIS^);
-	_TcoStateTest_A			:	TcoStateTest(THIS^,TRUE);
-	_TcoStateTest_B			:	TcoStateTest(THIS^,FALSE);
+	_TcoStateTest_A			:	TcoStateTest(THIS^, eRestoreMode.AutoRestoreMembers);
+	_TcoStateTest_B			:	TcoStateTest(THIS^, eRestoreMode.None);
 	// Object equality
 	_TcoObjectEqualsTestObj1 	:   TcoObjectEqualsTest(THIS^);
 	_TcoObjectEqualsTestObj2 	:   TcoObjectEqualsTest(THIS^);
@@ -82,5 +82,23 @@ _MyParentIdentity	:=	THIS^._Parent.Identity;
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoObjectTest">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObjectTest.CallTaskInstancies">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObjectTest.EqualsOverrideTest">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObjectTest.EqualsTest">
+      <LineId Id="3" Count="12" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoObjectTest.ReadOutIdentities">
+      <LineId Id="3" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

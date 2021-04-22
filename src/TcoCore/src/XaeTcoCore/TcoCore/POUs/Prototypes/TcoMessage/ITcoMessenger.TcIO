@@ -121,15 +121,6 @@ END_VAR
 
 ]]></Declaration>
     </Method>
-    <Method Name="PostConditionally" Id="{769bd04b-63c8-4c2c-848e-0e9f5ddd282b}">
-      <Declaration><![CDATA[METHOD PostConditionally
-VAR_INPUT
-	Condition : BOOL;
-	Message : STRING(125);
-	Category : eMessageCategory;
-END_VAR
-]]></Declaration>
-    </Method>
     <Method Name="Programming" Id="{cfbee919-5f05-4549-97b8-0a313d179cec}">
       <Declaration><![CDATA[(*~
 		<docu>

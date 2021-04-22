@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerNonAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_CallMyPlcInstance	:	BOOL := FALSE;
-	_Sequencer : _TcoSequencer(THIS^, FALSE);
+	_Sequencer : _TcoSequencer(THIS^, eRestoreMode.None);
 	_RunPLCinstanceOnce : BOOL := FALSE;
 	_RunPLCinstanceCyclicaly : BOOL := FALSE;
 	_StepID : INT := 32767;
@@ -418,5 +418,141 @@ END_VAR
         <ST><![CDATA[_Sequencer.UpdateCurrentStepDetails();]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest">
+      <LineId Id="3" Count="31" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.ChildHasAutoRestoreEnabled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.ChildIsAutoRestorable">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.CleanupPointers">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.ClearNumberOfSteps">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.ContextClose">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.ContextOpen">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetChildState">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetCurrentStepOrder">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetNumberOfStepsInSequence">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetOrderOfTheCurrentlyEvaluatedStep">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetOrderOfTheCurrentlyExecutedStep">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetPreviousNumberOfStepsInSequence">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetRequestStepCycle">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetSequencerErrorId">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.GetTextOfTheMostImportantMessage">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.HasAutoRestoreEnabled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.IsAutoRestorable">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.IsFirstStepEntry">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.Main">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.PLCinstanceRun">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.RequestStep">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.Restore">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SequenceComplete">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SequencerClose">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SequencerHasError">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SequencerOpen">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetChildState">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetCurrentStep">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetCyclicMode">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetNumberOfSteps">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetRequestStepCycle">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetSequenceAsChecked">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetSequenceAsNotChecked">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.SetStepMode">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.Step">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.StepBackward">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.StepCompleteWhen">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.StepForward">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.StepIn">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSequencerNonAutoRestorableTest.UpdateCurrentStepDetails">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

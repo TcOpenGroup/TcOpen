@@ -15,7 +15,7 @@ VAR
 	_currentStepDescription				:	STRING(254);
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
-	_TcoState							: 	TcoState(THIS^ ,FALSE);
+	_TcoState							: 	TcoState(THIS^ ,eRestoreMode.None);
 	_PostStepCompleteCount 				: 	INT;
 	_PostSequenceCompleteCount 			: 	INT;
 	_OnSequencerErrorCount	 			: 	ULINT;
@@ -8559,5 +8559,132 @@ _currentStepDuration		:=	SUPER^._currentStep.Duration;
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="_TcoSequencer">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._RequestStep">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._SequenceComplete">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._Step">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._StepBackward">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._StepCompleteWhen">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._StepForward">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer._StepIn">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.ChildHasAutoRestoreEnabled">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.ChildIsAutoRestorable">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.CleanupPointers">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.ClearNumberOfSteps">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.GetChildState">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.GetSequencerErrorId">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.GetTextOfTheMostImportantMessage">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.HasAutoRestoreEnabled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.IsAutoRestorable">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.IsFirstStepEntry">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.Main">
+      <LineId Id="3" Count="8200" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.OnSequenceCompleted">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.OnSequencerError">
+      <LineId Id="3" Count="19" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.OnStateChange">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.OnStepCompleted">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.RequestStepCycle.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.RequestStepCycle.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SequencerClose">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SequencerHasError">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SequencerOpen">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetChildState">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetCurrentStep">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetNumberOfSteps">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetSequenceAsChecked">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetSequenceAsNotChecked">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.SetTestParams">
+      <LineId Id="3" Count="5" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="_TcoSequencer.UpdateCurrentStepDetails">
+      <LineId Id="3" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

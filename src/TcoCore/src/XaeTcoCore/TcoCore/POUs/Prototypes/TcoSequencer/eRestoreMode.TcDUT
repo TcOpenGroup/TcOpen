@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eRestoreMode" Id="{0ab07dcb-c94c-072f-1eb9-d76a9a1f251f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eRestoreMode :
+(
+	None := 0,
+	
+	(*~
+	<docu>
+		<summary>
+			This mode enables automatic call of  <see cref="TcoState.PlcTcoState.Restore()"/> method.
+		</summary>				
+	</docu>	
+	~*)	
+	AutoRestoreMembers := 10
+);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

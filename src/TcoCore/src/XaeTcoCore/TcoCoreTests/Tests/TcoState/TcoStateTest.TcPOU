@@ -11,9 +11,9 @@ VAR
 	_MyState						:	INT;	
 	_TcoTaskTest_A					:	TcoTaskTest(THIS^);
 	_TcoTaskTest_B					:	TcoTaskTest(THIS^);
-	_TcoStateTest_A					:	TcoStateAutoRestoreTest(THIS^,FALSE);
-	_TcoStateTest_B					:	TcoStateAutoRestoreTest(THIS^,FALSE);
-	_OnStateChangeCounter			:	INT;	
+	_TcoStateTest_A					:	TcoStateAutoRestoreTest(THIS^, eRestoreMode.None);
+	_TcoStateTest_B					:	TcoStateAutoRestoreTest(THIS^, eRestoreMode.None);
+	_OnStateChangeCounter			:	INT;
 	_AutoRestoreToMyChildsEnabled	: 	BOOL;
 	_AutoRestoreByMyParentEnabled	: 	BOOL;	
 END_VAR
@@ -161,5 +161,52 @@ THIS^._TcoTaskTest_B.Invoke();
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoStateTest">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.CallTaskInstancies">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.CleanUp">
+      <LineId Id="3" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.GetMessage">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.OnStateChange">
+      <LineId Id="3" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.PostMessage">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.ReadOutAutoRestoreProperties">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.ReadOutIdentities">
+      <LineId Id="3" Count="9" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.ReadOutState">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.TriggerChangeState">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.TriggerChangeStateWithObjectRestore">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.TriggerRestore">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoStateTest.TriggerTaskInvoke">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
