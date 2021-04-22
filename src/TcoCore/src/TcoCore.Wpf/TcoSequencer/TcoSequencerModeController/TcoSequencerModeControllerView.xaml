@@ -14,8 +14,17 @@
     </d:UserControl.DataContext>
     <Grid DataContext="{Binding TcoSequencerModeController}">
         <StackPanel>
-            <Button Command="{Binding _changeMode}">Change mode</Button>
-            <UniformGrid Columns="3">
+            <Button Command="{Binding _changeMode}">
+                <Grid>
+                    <TextBlock Text="Step mode"
+                               Visibility="{Binding _mode.Cyclic, Converter={local:SequenceModeVisibleInConverter},ConverterParameter=CyclicMode}"/>
+                    <TextBlock Text="Exit Step mode"
+                               Visibility="{Binding _mode.Cyclic, Converter={local:SequenceModeVisibleInConverter},ConverterParameter=StepMode}"/>
+
+                </Grid>
+            </Button>
+            <UniformGrid Columns="3"
+                         Visibility="{Binding _mode.Cyclic, Converter={local:SequenceModeVisibleInConverter},ConverterParameter=StepMode}" >
                 <Button Command="{Binding _stepBackward}">⏪</Button>
                 <Button Command="{Binding _stepIn}">Step in</Button>
                 <Button Command="{Binding _stepForward}">⏩</Button>
