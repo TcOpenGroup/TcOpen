@@ -51,7 +51,7 @@
                                             <Button Command="{Binding MAIN_PRG._pneuMan._automatTask}">START AUTOMAT</Button>
                                         </StackPanel>
                                     </Border>
-                                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan._automatSequence._currentStep}" />
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan._automatSequence}" />
                                 </StackPanel>
                             </GroupBox>
                         </UniformGrid>
