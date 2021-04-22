@@ -3,6 +3,7 @@
   <POU Name="ST_01_Components" Id="{fe2617a3-8e27-0c3b-1d0c-652a448ed53e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Components EXTENDS TcoCore.TcoObject
 VAR
+	
 	_horizontal : TcoPneumatics.fbCylinder(THIS^);
 	_vertical : TcoPneumatics.fbCylinder(THIS^);
 	_gripper : TcoPneumatics.fbCylinder(THIS^);

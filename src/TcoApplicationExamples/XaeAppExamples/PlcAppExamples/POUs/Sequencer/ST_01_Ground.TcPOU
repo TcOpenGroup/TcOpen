@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Ground EXTENDS TcoCore.TcoSequencer
 VAR
 	_components : ST_01_Components(THIS^);
+	_await : fbAwait;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -25,7 +26,7 @@ METHOD PROTECTED Main : BOOL
 		inEnabled := TRUE, 
 		inStepDescription := 'VERTICAL CYLINDER UP')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._vertical.MoveToHome().Done);
+     THIS^.StepCompleteWhen(THIS^._components._vertical.MoveToHome().Done OR _await.Sometime());
 //-------------------------------------------------------------
 END_IF
 
@@ -33,7 +34,7 @@ IF(Step(inStepID := 200,
 		inEnabled := TRUE, 
 		inStepDescription := 'HORIZONTAL CYLINDER HOME')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._horizontal.MoveToHome().Done);
+     THIS^.StepCompleteWhen(THIS^._components._horizontal.MoveToHome().Done OR _await.Sometime());
 //-------------------------------------------------------------
 END_IF
 
@@ -41,7 +42,7 @@ IF(Step(inStepID := 300,
 		inEnabled := TRUE, 
 		inStepDescription := 'OPEN GRIPPER')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._gripper.MoveToHome().Done);
+     THIS^.StepCompleteWhen(THIS^._components._gripper.MoveToHome().Done OR _await.Sometime());
 //-------------------------------------------------------------
 END_IF
 
@@ -49,7 +50,7 @@ IF(Step(inStepID := 400,
 		inEnabled := TRUE, 
 		inStepDescription := 'CLOSE SEQUENCE')) THEN
 //-------------------------------------------------------------		
-    ;
+    
 //-------------------------------------------------------------
 END_IF]]></ST>
       </Implementation>
