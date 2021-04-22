@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Automat EXTENDS TcoCore.TcoSequencer
 VAR
 	_components : ST_01_Components(THIS^);
+	_await : fbAwait;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -29,9 +30,12 @@ IF(Step(inStepID := 100,
 //-------------------------------------------------------------		
 	THIS^.StepCompleteWhen
 	(
-		THIS^._components._vertical.MoveToHome().Done 
-		AND_THEN THIS^._components._horizontal.MoveToHome().Done
-		AND_THEN THIS^._components._gripper.MoveToHome().Done
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._vertical.MoveToHome().Done 
+			AND_THEN THIS^._components._horizontal.MoveToHome().Done
+			AND_THEN THIS^._components._gripper.MoveToHome().Done
+		)
 	);			
 //-------------------------------------------------------------
 END_IF
@@ -40,7 +44,13 @@ IF(Step(inStepID := 200,
 		inEnabled := TRUE, 
 		inStepDescription := 'VERTICAL CYLINDER DOWN TO LOAD')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._vertical.MoveToWork().Done);
+	THIS^.StepCompleteWhen
+	(
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._vertical.MoveToWork().Done
+		)
+	);
 //-------------------------------------------------------------
 END_IF
 
@@ -48,7 +58,13 @@ IF(Step(inStepID := 300,
 		inEnabled := TRUE, 
 		inStepDescription := 'CLOSE GRIPPER')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._gripper.MoveToWork().Done);
+	THIS^.StepCompleteWhen
+	(
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._gripper.MoveToWork().Done
+		)
+	);
 //-------------------------------------------------------------
 END_IF
 
@@ -56,7 +72,13 @@ IF(Step(inStepID := 400,
 		inEnabled := TRUE, 
 		inStepDescription := 'VERTICAL CYLINDER UP')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._vertical.MoveToHome().Done);
+	THIS^.StepCompleteWhen
+	(
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._vertical.MoveToHome().Done
+		)
+	);
 //-------------------------------------------------------------
 END_IF
 
@@ -64,7 +86,13 @@ IF(Step(inStepID := 500,
 		inEnabled := TRUE, 
 		inStepDescription := 'HORIZONTAL TO UNLOAD POSITION')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._horizontal.MoveToWork().Done);
+	THIS^.StepCompleteWhen
+	(
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._horizontal.MoveToWork().Done
+		)
+	);
 //-------------------------------------------------------------
 END_IF
 
@@ -72,7 +100,13 @@ IF(Step(inStepID := 600,
 		inEnabled := TRUE, 
 		inStepDescription := 'VERTICAL DOWN TO UNLOAD POSITION')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._vertical.MoveToWork().Done);
+	THIS^.StepCompleteWhen
+	(
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._vertical.MoveToWork().Done
+		)
+	);
 //-------------------------------------------------------------
 END_IF
 
@@ -80,7 +114,22 @@ IF(Step(inStepID := 700,
 		inEnabled := TRUE, 
 		inStepDescription := 'OPEN GRIPPER')) THEN
 //-------------------------------------------------------------		
-     THIS^.StepCompleteWhen(THIS^._components._gripper.MoveToHome().Done);
+	THIS^.StepCompleteWhen
+	(
+		_await.Sometime() 
+		OR ( 
+			THIS^._components._gripper.MoveToHome().Done
+		)
+	);
+//-------------------------------------------------------------
+END_IF
+
+
+IF(Step(inStepID := 800, 
+		inEnabled := TRUE, 
+		inStepDescription := 'DONE')) THEN
+//-------------------------------------------------------------		
+	CompleteSequence();
 //-------------------------------------------------------------
 END_IF
 
