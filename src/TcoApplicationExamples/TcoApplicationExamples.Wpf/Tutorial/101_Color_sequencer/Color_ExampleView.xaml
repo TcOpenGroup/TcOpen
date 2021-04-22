@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PlcAppExamples"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml"
     d:DesignHeight="450"
@@ -12,9 +13,40 @@
     <d:UserControl.DataContext>
         <local:Color_ExampleViewModel />
     </d:UserControl.DataContext>
-    <UniformGrid Columns="2">
-        <vortex:RenderableContentControl DataContext="{Binding Color_Example.Colors}" />
-        <vortex:RenderableContentControl DataContext="{Binding Color_Example.ColorSequencer}" />
-        <StackPanel />
-    </UniformGrid>
+    <StackPanel>
+        <Separator />
+        <Ellipse Width="100" Height="100">
+            <Ellipse.Fill>
+                <SolidColorBrush>
+                    <SolidColorBrush.Color>
+                        <MultiBinding Converter="{local:RgbConverter}">
+                            <Binding Path="Color_Example.Colors._lightR_IsOn.Cyclic" />
+                            <Binding Path="Color_Example.Colors._lightG_IsOn.Cyclic" />
+                            <Binding Path="Color_Example.Colors._lightB_IsOn.Cyclic" />
+                        </MultiBinding>
+                    </SolidColorBrush.Color>
+                </SolidColorBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Separator />
+
+        <UniformGrid Columns="3">
+            <StackPanel>
+                <Rectangle Height="5" Fill="Red" />
+                <ToggleButton IsChecked="{Binding Color_Example.Colors._lightR_IsOn.Cyclic}">Red</ToggleButton>
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Height="5" Fill="Green" />
+                <ToggleButton IsChecked="{Binding Color_Example.Colors._lightG_IsOn.Cyclic}">Green</ToggleButton>
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Height="5" Fill="Blue" />
+                <ToggleButton IsChecked="{Binding Color_Example.Colors._lightB_IsOn.Cyclic}">Blue</ToggleButton>
+            </StackPanel>
+
+        </UniformGrid>
+        <Separator Height="25" />
+        <vortex:RenderableContentControl HorizontalAlignment="Center" DataContext="{Binding Color_Example.ColorSequencer}" />
+
+    </StackPanel>
 </UserControl>
