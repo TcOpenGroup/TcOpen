@@ -15,11 +15,57 @@
     mc:Ignorable="d">
     <Grid>
         <TabControl>
+
+            <TabItem Header="Sequencer">
+                <TabControl>
+                    <TabItem Header="Auto-gen">
+                        <UniformGrid Columns="2">
+                            <GroupBox Header="Ground">
+                                <StackPanel>
+                                    <Border
+                                        Margin="4"
+                                        Padding="4"
+                                        BorderBrush="Orange"
+                                        BorderThickness="1">
+                                        <StackPanel>
+                                            <TextBlock Text="First start the ground sequence" />
+                                            <Button Command="{Binding MAIN_PRG._pneuMan._groundTask}">START GROUND</Button>
+                                        </StackPanel>
+                                    </Border>
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan._groundSequcence._currentStep}" />
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Header="Automat">
+                                <StackPanel>
+                                    <Border
+                                        Margin="4"
+                                        Padding="4"
+                                        BorderBrush="Orange"
+                                        BorderThickness="1">
+                                        <StackPanel>
+                                            <TextBlock Text="After ground sequence is done, you can start automat" />
+                                            <Button Command="{Binding MAIN_PRG._pneuMan._automatTask}">START AUTOMAT</Button>
+                                        </StackPanel>
+                                    </Border>
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan._automatSequence._currentStep}" />
+                                </StackPanel>
+                            </GroupBox>
+                        </UniformGrid>
+                    </TabItem>
+                    <TabItem Header="Object tree">
+                        <ScrollViewer>
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+
+
             <TabItem Header="Context">
                 <TabControl>
                     <TabItem Header="Auto-gen">
                         <ScrollViewer>
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._donCorleone}" />
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._donCorleone._MakeAnOfferThatCantBeRefused}" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Object tree">
@@ -52,20 +98,7 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
-            <TabItem Header="Sequencer">
-                <TabControl>
-                    <TabItem Header="Auto-gen">
-                        <ScrollViewer>
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan}" />
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Object tree">
-                        <ScrollViewer>
-                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
-                        </ScrollViewer>
-                    </TabItem>
-                </TabControl>
-            </TabItem>
+
         </TabControl>
     </Grid>
 </Window>
