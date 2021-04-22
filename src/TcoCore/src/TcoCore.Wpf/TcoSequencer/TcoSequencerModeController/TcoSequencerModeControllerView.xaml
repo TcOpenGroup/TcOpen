@@ -1,0 +1,34 @@
+﻿<UserControl
+    x:Class="TcoCore.TcoSequencerModeControllerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCore"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vortex="http://vortex.mts/xaml"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <d:UserControl.DataContext>
+        <local:TcoSequencerModeControllerViewModel />
+    </d:UserControl.DataContext>
+    <Grid DataContext="{Binding TcoSequencerModeController}">
+        <StackPanel>
+            <Button Command="{Binding _changeMode}">
+                <Grid>
+                    <TextBlock Text="Step mode"
+                               Visibility="{Binding _mode.Cyclic, Converter={local:SequenceModeVisibleInConverter},ConverterParameter=CyclicMode}"/>
+                    <TextBlock Text="Exit Step mode"
+                               Visibility="{Binding _mode.Cyclic, Converter={local:SequenceModeVisibleInConverter},ConverterParameter=StepMode}"/>
+
+                </Grid>
+            </Button>
+            <UniformGrid Columns="3"
+                         Visibility="{Binding _mode.Cyclic, Converter={local:SequenceModeVisibleInConverter},ConverterParameter=StepMode}" >
+                <Button Command="{Binding _stepBackward}">⏪</Button>
+                <Button Command="{Binding _stepIn}">Step in</Button>
+                <Button Command="{Binding _stepForward}">⏩</Button>
+            </UniformGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>
