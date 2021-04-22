@@ -85,9 +85,9 @@ Some of the information here might be self-evident for traditional users of GitH
 | GitVersion.yml     | GitVersion configuration file                                                                                  |
 | README.md          | This file                                                                                                      |
 | TcoOpen.build.slnf | Filtered solution contains all other projects except for TwinCAT project (NuGet restore/build in the pipeline) |
-| TcoOpen.plc.slnf   | Filtered solution, contains only TwinCAT projects (bulk library compilation)                                   |
+| TcoOpen.plc.send   | Filtered solution, contains only TwinCAT projects (bulk library compilation)                                   |
 | TcoOpen.sln        | Full solution file                                                                                             |
-| notices.md         | Licenses of other open-source projects used in this repository                                                 |
+| notices.MD         | Licenses of other open-source projects used in this repository                                                 |
 
 ### src
 
@@ -103,18 +103,18 @@ Some of the information here might be self-evident for traditional users of GitH
 
 ### Typical structure of library folder
 
-| FOLDER          | DESCRIPTION                        |
-|-----------------|------------------------------------|
-| src             | library source files               |
-| src/..Wpf       | Inxton WPF components              |
-| src/..Connector | Inxton compiler connector          |
-| src/Xae..       | Plc project/sources                |
-| tests           | unit, and integration tests folder |
+| FOLDER          | DESCRIPTION                                               |
+|-----------------|-----------------------------------------------------------|
+| src             | library source files                                      |
+| src/..Wpf       | Inxton WPF components                                     |
+| src/..Connector | Inxton compiler connector                                 |
+| src/Xae..       | Plc project/sources                                       |
+| tests           | unit, and integration tests and sandbox project(s) folder |
 
 
 ## Testing
 
-Testing is vital to this project. We will be using two unit testing frameworks **TcUnit** and **TcProber** [here is an article](https://alltwincat.com/2021/02/16/unit-testing-in-the-world-of-industrial-automation/) that briefly explains what those frameworks are and how they differ.
+Testing is vital to this project. We will be using two unit testing frameworks [**TcUnit**](https://github.com/tcunit/TcUnit) and **TcProber**, which is part of this repository. [Here is an article](https://alltwincat.com/2021/02/16/unit-testing-in-the-world-of-industrial-automation/) that briefly explains what those frameworks are and how they differ.
 
 ## Documentation
 
