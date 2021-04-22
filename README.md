@@ -79,7 +79,7 @@ Some of the information here might be self-evident for traditional users of GitH
 | .github            | GitHub related files, templates, ...                                                                           |
 | _Vortex            | Inxton tools, builder, CLIs, config files, output files, and folders, ...                                      |
 | assets             | misc files, logo, pictures                                                                                     |
-| docs               | temporary folder for documentation, notes. etc.                                                                |
+| docs               | temporary folder for documentation, notes, etc (about documentain repo later in this document).                                                                |
 | pipelines          | delivery pipeline scripts and configurations                                                                   |
 | src                | all sources, tests, UI controls                                                                                |
 | GitVersion.yml     | GitVersion configuration file                                                                                  |
@@ -120,6 +120,41 @@ Testing is vital to this project. We will be using two unit testing frameworks *
 
 There is a separate documentation repository for this project [here](https://github.com/TcOpenGroup/TcOpen.Documentation). In this moment we use [docfx](https://github.com/dotnet/docfx) to generate documentation. The ```docfx``` uses IVF twin objects of PLC code to generate the API documentation. There is room for improvement in generated documentation; we do plan - in the course of the development of TcOpen - to improve that. 
 
+## How to get started with TcOpen
+
+### Prerequisites
+
+1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
+1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.4+
+1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
+1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) 
+1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
+
+**Clone this repository**
+
+~~~bash
+git clone https://github.com/TcOpenGroup/TcOpen.git
+~~~
+
+**Build project to restore necessary tooling and packages**
+
+_build in Debug profile_
+~~~ PowerShell
+cd your_tcopen_folder
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug"}
+~~~
+
+_build in Release profile_
+~~~ PowerShell
+cd your_tcopen_folder
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
+~~~
+
+** Open visual studio TcOpen.sln**
+
+Switch profile to Debug|TwinCAT RT (x64)
+![Profile set](assets\pics\compile_profile.png)
+
 ## Communication channels
 
 Some of you complained you were unable to join the Slack Channel for various reasons. After a discussion with @dhullett08 we are opening a new gitter channel:
@@ -129,7 +164,7 @@ Some of you complained you were unable to join the Slack Channel for various rea
 
 ## Code of Conduct
 
-We do not adopt any document describing conduct at this point. However, there are two straightforward rules to observe:
+We do not adopt any document describing conduct at this point. However, there are few straightforward rules to observe:
 
 1. Treat others as you would like others to treat you
 1. Everyone is free to express his/her ideas.
@@ -145,27 +180,6 @@ Please submit questions, suggestions, bug reports [here](https://github.com/TcOp
 Various discussion [here](https://github.com/TcOpenGroup/TcOpen/discussions).
 
 
-## How to get started with TcOpen
-
-### Prerequisites
-
-1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
-1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.4+
-1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
-1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) (Optionally preview)
-1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
-
-**Clone this repository**
-
-~~~bash
-git clone https://github.com/TcOpenGroup/TcOpen.git
-~~~
-
-**Restore necessay tooling and packages**
-
-~~~ PowerShell
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug"}
-~~~
 
 
 ### Awesome TwinCAT 3 projects 🌐
