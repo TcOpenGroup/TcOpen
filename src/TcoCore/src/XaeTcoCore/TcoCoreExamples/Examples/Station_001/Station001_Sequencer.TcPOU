@@ -42,16 +42,6 @@ END_VAR
       <Implementation>
         <ST><![CDATA[components();
 
-IF(_switchToStep) THEN
-	THIS^._stepModeControler.ChangeState(TcoCore.eSequencerMode.StepMode);
-	THIS^.Messenger.Notify('Sequencer is in step mode');
-ELSE
-	THIS^._stepModeControler.ChangeState(TcoCore.eSequencerMode.CyclicMode);
-END_IF
-
-
-
-
 IF(Step(0, 
 		TRUE, 
 		'INIT')) THEN
@@ -90,9 +80,7 @@ IF(Step(200,
 		TRUE, 
 		'MOVE VERTICAL CYLINDER DOWN')) THEN
 //-----------------------------------------------------
-//	StepCompleteWhen(components.Vertical.MoveDown().Done);
-//	StepCompleteWhen(components.Vertical.MoveDown().Done).RestoreObject(components._vertical);
-	IF(components.Vertical.MoveDown().Done) THEN CompleteStep().RestoreObject(components.Vertical); END_IF;
+	StepCompleteWhen(components.Vertical.MoveDown().Done);
 //-----------------------------------------------------	
 END_IF
 
@@ -150,7 +138,7 @@ IF(Step(800,
 //-----------------------------------------------------
 	_sequenceCompleteCount := _sequenceCompleteCount + 1;
 	_stepsPerSequence := (_onStateChangeCount - _sequenceCompleteCount + 1)/ _sequenceCompleteCount;
-	CompleteStep();
+	CompleteSequence();
 //-----------------------------------------------------	
 END_IF
 

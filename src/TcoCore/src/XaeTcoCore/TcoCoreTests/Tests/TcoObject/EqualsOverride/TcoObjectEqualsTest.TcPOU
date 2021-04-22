@@ -3,8 +3,8 @@
   <POU Name="TcoObjectEqualsTest" Id="{95fdb37c-6061-07da-0252-b29845f7825c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoObjectEqualsTest EXTENDS TcoCore.TcoObject
 VAR
-	_SomeNumber : INT;
-	_SomeString : STRING;	
+	_someNumber : INT;
+	_someString : STRING;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -20,7 +20,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(__QUERYPOINTER(Object,  _object)) THEN
-	EqualsTo := _object^._SomeNumber = THIS^._SomeNumber AND _object^._SomeString = THIS^._SomeString;
+	EqualsTo := _object^._someNumber = THIS^._someNumber AND _object^._someString = THIS^._someString;
 END_IF;	]]></ST>
       </Implementation>
     </Method>
@@ -31,7 +31,7 @@ END_IF;	]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[SomeNumber := _SomeNumber;]]></ST>
+          <ST><![CDATA[SomeNumber := _someNumber;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{4128da7d-65d5-0a2f-23ba-beceb619dc5d}">
@@ -39,7 +39,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_SomeNumber := SomeNumber;]]></ST>
+          <ST><![CDATA[_someNumber := SomeNumber;]]></ST>
         </Implementation>
       </Set>
     </Property>
@@ -50,7 +50,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[SomeString := _SomeString;]]></ST>
+          <ST><![CDATA[SomeString := _someString;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{a3a5d345-3fbb-093f-3b2e-fb9738048b57}">
@@ -58,7 +58,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_SomeString := SomeString;]]></ST>
+          <ST><![CDATA[_someString := SomeString;]]></ST>
         </Implementation>
       </Set>
     </Property>

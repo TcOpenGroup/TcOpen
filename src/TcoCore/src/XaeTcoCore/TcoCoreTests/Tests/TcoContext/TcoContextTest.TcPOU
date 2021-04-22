@@ -3,18 +3,18 @@
   <POU Name="TcoContextTest" Id="{6642835d-5414-4760-aac1-4c8cef083deb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
-	_CallMyPlcInstance 		:	BOOL := FALSE;
+	_callMyPlcInstance 		:	BOOL := FALSE;
 	_startCycles			:	ULINT;
 	_endCycles				:	ULINT;	
 	_mainCycles				:	ULINT;
-	_TcoObjectTest_A		:	TcoObjectTest(THIS^);
-	_TcoObjectTest_B		:	TcoObjectTest(THIS^);
-	_TcoObjectTest_Misc		:	TcoObjectTest(THIS^);
-	_MyIdentity				:	ULINT;	
+	_tcoObjectTest_A		:	TcoObjectTest(THIS^);
+	_tcoObjectTest_B		:	TcoObjectTest(THIS^);
+	_tcoObjectTest_Misc		:	TcoObjectTest(THIS^);
+	_myIdentity				:	ULINT;	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF THIS^._CallMyPlcInstance THEN
+      <ST><![CDATA[IF THIS^._callMyPlcInstance THEN
 	THIS^.Run();
 END_IF
 
@@ -57,7 +57,7 @@ METHOD INTERNAL ContextOpen
       <Implementation>
         <ST><![CDATA[_mainCycles := _mainCycles + 1;
 
-_MyIdentity	:= THIS^.Identity;
+_myIdentity	:= THIS^.Identity;
 ]]></ST>
       </Implementation>
     </Method>
@@ -68,7 +68,7 @@ METHOD INTERNAL ReadOutCycleCounters]]></Declaration>
         <ST><![CDATA[_startCycles		:=		THIS^.StartCycleCount;
 _endCycles			:=		THIS^.EndCycleCount;
 
-_MyIdentity			:= 		THIS^.Identity;]]></ST>
+_myIdentity			:= 		THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
   </POU>

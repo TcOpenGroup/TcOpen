@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoSequencerModeController" Id="{bae82854-ce0e-0ab9-12e4-0141c7944f2d}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Provides switching between sequencer modes so as handling stepping tasks in the step mode.
+			</summary>
+		</docu>
+~*)
+FUNCTION_BLOCK TcoSequencerModeController EXTENDS TcoObject IMPLEMENTS ITcoSequencerModeController
+VAR_INPUT
+	inCurrentStepRunning : BOOL;
+END_VAR
+
+VAR
+(*~
+	<docu>
+		<summary>
+			When '''TRUE''', disables changing between the modes of the sequencer.
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Changing mode disabled#>"}
+	{attribute clr [ReadOnly()]}
+	_DisableModeChanging : BOOL;
+(*~
+	<docu>
+		<summary>
+			When '''TRUE''' skipping steps of the sequencer using methods '''StepBackward()''' and '''StepForward()''' is disabled.
+		</summary>			
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Skipping steps disabled#>"}
+	{attribute clr [ReadOnly()]}
+	_DisableStepSkipping : BOOL;
+(*~
+	<docu>
+		<summary>
+			Triggers StepBackward task, that decrements current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Step backward#>"}
+	_stepBackward : TcoTask(THIS^);	
+(*~
+	<docu>
+		<summary>
+			Triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+			This causes starting the execution of the body of the current step.
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Step in#>"}
+	_stepIn : TcoTask(THIS^);	
+(*~
+	<docu>
+		<summary>
+			Triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), 
+			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <c>TcoSequencer._numberOfStepsInSequence</c> ).
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Step forward#>"}
+	_stepForward : TcoTask(THIS^);
+(*~
+	<docu>
+		<summary>
+			Toggles between cyclic mode and step mode if not disabled.
+			<para>
+				See <see cref="TcoSequencerModeController.DisableModeChanging()"/> for detailed description.
+			</para>		
+		</summary>	
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Change mode#>"}
+	_changeMode	: TcoTask(THIS^);
+(*~
+	<docu>
+		<summary>
+			Current mode of the sequencer.
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Mode#>"}
+	{attribute clr [ReadOnly()]}
+	_mode : eSequencerMode;
+	{attribute 'hide'}
+	_previousMode : eSequencerMode := eSequencerMode.Invalid;
+END_VAR	]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[THIS^._changeMode.Enabled := NOT _DisableModeChanging;
+
+IF _changeMode.Execute() THEN
+	IF Mode = eSequencerMode.CyclicMode THEN
+		Mode :=	 eSequencerMode.StepMode;
+		_changeMode.Restore();
+		RETURN;
+	END_IF
+	IF Mode = eSequencerMode.StepMode THEN
+		Mode :=	 eSequencerMode.CyclicMode;
+		_changeMode.Restore();
+		RETURN;
+	END_IF
+END_IF
+
+ChangeMode();
+
+IF _changeMode.Done OR _changeMode.Error THEN
+	_changeMode.Restore();
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="ChangeMode" Id="{e78f013c-50c4-0acf-2b16-395bea62b1fa}">
+      <Declaration><![CDATA[METHOD PRIVATE ChangeMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _previousMode <> _mode THEN
+	//Restore all stepping task on mode change
+	_stepForward.Restore();
+	_stepBackward.Restore();
+	_stepIn.Restore(); 	
+	_changeMode.Restore(); 	
+	//Mode change from cyclic to step, enabling stepping tasks according to settings.
+	IF _previousMode = eSequencerMode.CyclicMode AND _mode = eSequencerMode.StepMode THEN
+		_stepBackward.Enabled := NOT THIS^._DisableStepSkipping;
+		_stepIn.Enabled := TRUE;
+		_stepForward.Enabled := NOT THIS^._DisableStepSkipping;
+		//If current step was running at the moment of switching from cyclic to step, stepIn task is invoked.			
+		IF inCurrentStepRunning THEN
+			_stepIn.Invoke(); 	
+		END_IF
+	END_IF
+	//Disabling stepping tasks in case of Cyclic mode.
+	IF _mode = eSequencerMode.CyclicMode THEN
+		_stepBackward.Enabled := FALSE;
+		_stepIn.Enabled := FALSE; 
+		_stepForward.Enabled := FALSE;
+	END_IF		
+	_previousMode := _mode;
+	OnModeChange(_previousMode,_mode);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="DisableModeChanging" Id="{ce8fce42-3767-0d1a-099b-5b3718c6955f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			When ```TRUE```, disables mode change. 
+		</summary>		
+	</docu>	
+~*)	
+PROPERTY DisableModeChanging : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ad2c2e11-b9c0-052b-296e-30f7e7deb085}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DisableModeChanging := _DisableModeChanging;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b42bb3df-c8b6-0855-0ed1-dd81f7ad5d38}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_DisableModeChanging := DisableModeChanging;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="DisableStepSkipping" Id="{6c4223b1-bbfa-0c01-05a1-705fa4499f77}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			When ```TRUE``` disables step skipping (```StepBackward()``` and ```StepForward()```).
+		</summary>		
+	</docu>	
+~*)	
+PROPERTY DisableStepSkipping : BOOL]]></Declaration>
+      <Get Name="Get" Id="{9718aabe-5037-07d3-35b0-5f97c89ce1f4}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DisableStepSkipping := _DisableStepSkipping;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6350ecdf-a2c2-0c46-0dc7-1b34f207612b}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_DisableStepSkipping := DisableStepSkipping;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Mode" Id="{8d4cb1af-ba19-0bb8-1400-30d988d71fba}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets or sets the mode of the sequencer. 
+		</summary>		
+	</docu>	
+~*)	
+PROPERTY Mode : eSequencerMode]]></Declaration>
+      <Get Name="Get" Id="{895df049-a71d-0d24-2a10-6f8bfd7b53fa}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Mode := _mode;
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{de205606-d241-09de-0ee5-ac8cb916bc40}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF NOT _DisableModeChanging THEN
+	_mode := Mode;
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="OnModeChange" Id="{d557972e-c947-0206-3073-29e499306a24}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when mode of the sequencer changes. 
+		</summary>		
+	</docu>	
+~*)	
+METHOD PROTECTED OnModeChange
+VAR_INPUT
+	PreviousMode	: eSequencerMode;
+	NewMode 		: eSequencerMode;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepBackward" Id="{e39e0e4e-acc9-028d-3e5e-3b3a2899c84a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Moves the sequencers pointer to the previous step.		
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepBackward
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepBackward.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepForward" Id="{4ef3a88d-e685-0cfd-070f-77a3c84a5e1f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Moves the sequencers pointer to the next step.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepForward
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepForward.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepIn" Id="{6f2a58cd-fcfc-0831-059d-629c464a6868}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes the step at the current sequencer's pointer.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepIn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stepIn.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

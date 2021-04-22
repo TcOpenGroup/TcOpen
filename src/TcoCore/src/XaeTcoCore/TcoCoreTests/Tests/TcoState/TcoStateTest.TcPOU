@@ -3,19 +3,19 @@
   <POU Name="TcoStateTest" Id="{efe977d1-c2f8-4084-8704-172d8704be2b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoStateTest EXTENDS TcoState
 VAR
-	_MyIdentity						:	ULINT;
-	_MyContextIdentity				:	ULINT;
-	_MyContextStartCount 			:	ULINT;
-	_MyContextEndCount				:	ULINT;
-	_MyParentIdentity				:	ULINT;
-	_MyState						:	INT;	
-	_TcoTaskTest_A					:	TcoTaskTest(THIS^);
-	_TcoTaskTest_B					:	TcoTaskTest(THIS^);
-	_TcoStateTest_A					:	TcoStateAutoRestoreTest(THIS^, eRestoreMode.None);
-	_TcoStateTest_B					:	TcoStateAutoRestoreTest(THIS^, eRestoreMode.None);
-	_OnStateChangeCounter			:	INT;
-	_AutoRestoreToMyChildsEnabled	: 	BOOL;
-	_AutoRestoreByMyParentEnabled	: 	BOOL;	
+	_myIdentity						:	ULINT;
+	_myContextIdentity				:	ULINT;
+	_myContextStartCount 			:	ULINT;
+	_myContextEndCount				:	ULINT;
+	_myParentIdentity				:	ULINT;
+	_myState						:	INT;	
+	_tcoTaskTest_A					:	TcoTaskTest(THIS^);
+	_tcoTaskTest_B					:	TcoTaskTest(THIS^);
+	_tcoStateTest_A					:	TcoStateAutoRestoreTest(THIS^,FALSE);
+	_tcoStateTest_B					:	TcoStateAutoRestoreTest(THIS^,FALSE);
+	_onStateChangeCounter			:	INT;	
+	_autoRestoreToMyChildsEnabled	: 	BOOL;
+	_autoRestoreByMyParentEnabled	: 	BOOL;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -25,9 +25,9 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL CallTaskInstancies]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_TcoTaskTest_A();
+        <ST><![CDATA[_tcoTaskTest_A();
 
-_TcoTaskTest_B();
+_tcoTaskTest_B();
 ]]></ST>
       </Implementation>
     </Method>
@@ -36,10 +36,10 @@ _TcoTaskTest_B();
 METHOD INTERNAL CleanUp]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.ChangeState(0);
-_MyState := State;	
-_OnStateChangeCounter			:= 0;
-_AutoRestoreToMyChildsEnabled	:= FALSE;
-_AutoRestoreByMyParentEnabled	:= FALSE;
+_myState := State;	
+_onStateChangeCounter			:= 0;
+_autoRestoreToMyChildsEnabled	:= FALSE;
+_autoRestoreByMyParentEnabled	:= FALSE;
 ]]></ST>
       </Implementation>
     </Method>
@@ -61,7 +61,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_OnStateChangeCounter	:=	_OnStateChangeCounter + 1;
+        <ST><![CDATA[_onStateChangeCounter	:=	_onStateChangeCounter + 1;
 
 message := CONCAT('My state has been change from ', INT_TO_STRING(PreviousState));
 message := CONCAT(message, ' to the new state ');
@@ -87,8 +87,8 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_AutoRestoreToMyChildsEnabled	:= THIS^.IsAutoRestoreEnabled;
-_AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
+        <ST><![CDATA[_autoRestoreToMyChildsEnabled	:= THIS^.IsAutoRestoreEnabled;
+_autoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
 ]]></ST>
       </Implementation>
     </Method>
@@ -96,15 +96,15 @@ _AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutIdentities]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_MyIdentity			:=	THIS^.Identity;
+        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
 
-_MyContextIdentity	:=	THIS^.Context.Identity;
+_myContextIdentity	:=	THIS^.Context.Identity;
 
-_MyParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^._Parent.Identity;
 		
-_MyContextStartCount :=	THIS^.Context.StartCycleCount;
+_myContextStartCount :=	THIS^.Context.StartCycleCount;
 
-_MyContextEndCount	:=	THIS^.Context.EndCycleCount;
+_myContextEndCount	:=	THIS^.Context.EndCycleCount;
 
 ]]></ST>
       </Implementation>
@@ -113,10 +113,10 @@ _MyContextEndCount	:=	THIS^.Context.EndCycleCount;
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutState]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_MyState			:=	THIS^.State;
+        <ST><![CDATA[_myState			:=	THIS^.State;
 
-THIS^._TcoTaskTest_A.ReadOutState();
-THIS^._TcoTaskTest_B.ReadOutState();
+THIS^._tcoTaskTest_A.ReadOutState();
+THIS^._tcoTaskTest_B.ReadOutState();
 ]]></ST>
       </Implementation>
     </Method>
@@ -139,7 +139,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.ChangeState(NewState).RestoreObject(THIS^._TcoTaskTest_A).RestoreObject(THIS^._TcoTaskTest_B);]]></ST>
+        <ST><![CDATA[THIS^.ChangeState(NewState).RestoreObject(THIS^._tcoTaskTest_A).RestoreObject(THIS^._tcoTaskTest_B);]]></ST>
       </Implementation>
     </Method>
     <Method Name="TriggerRestore" Id="{e7cb051e-64b7-4a16-8b2b-2a6659a2020b}">
@@ -155,9 +155,9 @@ METHOD INTERNAL TriggerRestore
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL TriggerTaskInvoke]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._TcoTaskTest_A.Invoke();
+        <ST><![CDATA[THIS^._tcoTaskTest_A.Invoke();
 
-THIS^._TcoTaskTest_B.Invoke();
+THIS^._tcoTaskTest_B.Invoke();
 ]]></ST>
       </Implementation>
     </Method>

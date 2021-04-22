@@ -3,29 +3,29 @@
   <POU Name="TcoRtcTest" Id="{422101bf-9bdb-02c4-0505-5d211f35b9e7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoRtcTest EXTENDS TcoCore._internals_TcoContext
 VAR
-	_CallMyPlcInstanceSync	:	BOOL := FALSE;
-	_CallMyPlcInstanceRun	:	BOOL := FALSE;
-	_MyIdentity				:	ULINT;	
-	_NowLocal				:	DATE_AND_TIME;
-	_NowUtc					:	DATE_AND_TIME;
-	_RtcIsValid				:	BOOL := FALSE;
-	_RtcIsSynchronized		:	BOOL := FALSE;
-	_RtcSynchParamsSet		:	TcoCore.RtcSynchParams;
-	_RtcSynchParamsGet		:	TcoCore.RtcSynchParams;
+	_callMyPlcInstanceSync	:	BOOL := FALSE;
+	_callMyPlcInstanceRun	:	BOOL := FALSE;
+	_myIdentity				:	ULINT;	
+	_nowLocal				:	DATE_AND_TIME;
+	_nowUtc					:	DATE_AND_TIME;
+	_rtcIsValid				:	BOOL := FALSE;
+	_rtcIsSynchronized		:	BOOL := FALSE;
+	_rtcSynchParamsSet		:	TcoCore.RtcSynchParams;
+	_rtcSynchParamsGet		:	TcoCore.RtcSynchParams;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF THIS^._CallMyPlcInstanceSync THEN
-	THIS^.RtcSynchronize(_RtcSynchParamsSet.doSynch,_RtcSynchParamsSet.syncAmsId,_RtcSynchParamsSet.syncPeriod);
+      <ST><![CDATA[IF THIS^._callMyPlcInstanceSync THEN
+	THIS^.RtcSynchronize(_rtcSynchParamsSet.doSynch,_rtcSynchParamsSet.syncAmsId,_rtcSynchParamsSet.syncPeriod);
 END_IF
 
-IF THIS^._CallMyPlcInstanceRun THEN
+IF THIS^._callMyPlcInstanceRun THEN
 	THIS^.Run();
-	_NowLocal			:=	THIS^.Rtc.NowLocal();
-	_NowUtc				:=	THIS^.Rtc.NowUTC();
-	_RtcIsValid			:=	THIS^.Rtc.IsValid;
-	_RtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
-	_MyIdentity			:=	THIS^.Identity;
+	_nowLocal			:=	THIS^.Rtc.NowLocal();
+	_nowUtc				:=	THIS^.Rtc.NowUTC();
+	_rtcIsValid			:=	THIS^.Rtc.IsValid;
+	_rtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+	_myIdentity			:=	THIS^.Identity;
 END_IF
 
 ]]></ST>
@@ -35,7 +35,7 @@ END_IF
 METHOD INTERNAL GetSynchParams
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_RtcSynchParamsGet := SUPER^._GetSynchParams();
+        <ST><![CDATA[_rtcSynchParamsGet := SUPER^._GetSynchParams();
 ]]></ST>
       </Implementation>
     </Method>
@@ -49,14 +49,14 @@ METHOD INTERNAL GetSynchParams
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL NowLocal ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_NowLocal := THIS^.Rtc.NowLocal();]]></ST>
+        <ST><![CDATA[_nowLocal := THIS^.Rtc.NowLocal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="NowUtc" Id="{4d15ee95-7f3e-081c-2de7-138c5254d6a7}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL NowUtc ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_NowUtc := THIS^.Rtc.NowUTC();]]></ST>
+        <ST><![CDATA[_nowUtc := THIS^.Rtc.NowUTC();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RtcIsSynchronized" Id="{9de41ec0-7d16-00fc-36c5-1766b55aec78}">
@@ -65,7 +65,7 @@ METHOD INTERNAL RtcIsSynchronized : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[RtcIsSynchronized := THIS^.Rtc.IsSynchronized;
-_RtcIsSynchronized := THIS^.Rtc.IsSynchronized;
+_rtcIsSynchronized := THIS^.Rtc.IsSynchronized;
 ]]></ST>
       </Implementation>
     </Method>
@@ -75,7 +75,7 @@ METHOD INTERNAL RtcIsValid : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
-_RtcIsValid := THIS^.Rtc.IsValid;
+_rtcIsValid := THIS^.Rtc.IsValid;
 ]]></ST>
       </Implementation>
     </Method>

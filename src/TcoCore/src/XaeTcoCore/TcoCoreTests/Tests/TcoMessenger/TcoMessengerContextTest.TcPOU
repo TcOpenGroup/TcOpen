@@ -3,25 +3,25 @@
   <POU Name="TcoMessengerContextTest" Id="{ab1f1c15-693e-0b9d-1dc8-8f3fbcb09dcf}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
-	_CallMyPlcInstanceRtcUpdate	:	BOOL := FALSE;
-	_CallMyPlcInstanceRun	:	BOOL := FALSE;
-	_NowLocal				:	DATE_AND_TIME;
-	_NowUtc					:	DATE_AND_TIME;
-	_RtcIsValid				:	BOOL := FALSE;
-	_RtcIsSynchronized		:	BOOL := FALSE;
-	_TcoMessangerTests		:	TcoMessengerTests(THIS^);
+	_callMyPlcInstanceRtcUpdate	:	BOOL := FALSE;
+	_callMyPlcInstanceRun		:	BOOL := FALSE;
+	_nowLocal					:	DATE_AND_TIME;
+	_nowUtc						:	DATE_AND_TIME;
+	_rtcIsValid					:	BOOL := FALSE;
+	_rtcIsSynchronized			:	BOOL := FALSE;
+	_tcoMessangerTests			:	TcoMessengerTests(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF THIS^._CallMyPlcInstanceRtcUpdate THEN
+      <ST><![CDATA[IF THIS^._callMyPlcInstanceRtcUpdate THEN
 	THIS^._rtcUpdate();
-	_NowLocal			:=	THIS^.Rtc.NowLocal();
-	_NowUtc				:=	THIS^.Rtc.NowUTC();
-	_RtcIsValid			:=	THIS^.Rtc.IsValid;
-	_RtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+	_nowLocal			:=	THIS^.Rtc.NowLocal();
+	_nowUtc				:=	THIS^.Rtc.NowUTC();
+	_rtcIsValid			:=	THIS^.Rtc.IsValid;
+	_rtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
 END_IF
 
-IF THIS^._CallMyPlcInstanceRun THEN
+IF THIS^._callMyPlcInstanceRun THEN
 	THIS^.Run();
 END_IF
 
@@ -57,7 +57,7 @@ METHOD INTERNAL RtcIsValid : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
-_RtcIsValid := THIS^.Rtc.IsValid;
+_rtcIsValid := THIS^.Rtc.IsValid;
 ]]></ST>
       </Implementation>
     </Method>

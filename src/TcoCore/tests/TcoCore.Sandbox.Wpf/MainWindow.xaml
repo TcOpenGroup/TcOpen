@@ -53,13 +53,25 @@
                         Padding="3">
                         <GroupBox Header="Sequencer step-by step controller">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
-                                <CheckBox
-                                    Margin="3"
-                                    Content="Step mode"
-                                    IsChecked="{Binding MAIN._station001._sequence._switchToStep.Cyclic}" />
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._stepModeControler._stepBackward}" Content="Step --"/>
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._stepModeControler._stepIn}" Content="Step In"/>
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._stepModeControler._stepForward}" Content="Step ++"/>
+                                <StackPanel>
+                                    <CheckBox
+                                        Margin="3"
+                                        Content="Changing mode disabled"
+                                        IsChecked="{Binding MAIN._station001._sequence._modeController._DisableModeChanging.Cyclic}" />
+                                    <CheckBox
+                                        Margin="3"
+                                        Content="Step skipping disabled"
+                                        IsChecked="{Binding MAIN._station001._sequence._modeController._DisableStepSkipping.Cyclic}" />
+                                </StackPanel>
+
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._changeMode}" Content="Change mode"/>
+                                <WrapPanel Margin="10" HorizontalAlignment="Center">
+                                    <TextBlock Text="Mode "/>
+                                    <TextBox Text="{Binding MAIN._station001._sequence._modeController._mode.Cyclic}"/> 
+                                </WrapPanel>
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._stepBackward}" Content="Step --"/>
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._stepIn}" Content="Step In"/>
+                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._stepForward}" Content="Step ++"/>
                             </WrapPanel>
                         </GroupBox>
                     </materialDesign:Card>

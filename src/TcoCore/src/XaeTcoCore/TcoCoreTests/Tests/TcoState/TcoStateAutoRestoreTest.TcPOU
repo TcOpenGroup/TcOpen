@@ -3,13 +3,13 @@
   <POU Name="TcoStateAutoRestoreTest" Id="{635180e2-b2d9-4213-a2a6-8bd32b517b3b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoStateAutoRestoreTest EXTENDS TcoState
 VAR
-	_MyState						:	INT;	
-	_OnStateChangeCounter			:	INT;	
-	_RestoreCounter					:	INT;	
-	_AutoRestoreToMyChildsEnabled	: 	BOOL;
-	_AutoRestoreByMyParentEnabled	: 	BOOL;	
-	_CountsPerStep					:	ULINT;
-	_CounterValue					:	ULINT;
+	_myState						:	INT;	
+	_onStateChangeCounter			:	INT;	
+	_restoreCounter					:	INT;	
+	_autoRestoreToMyChildsEnabled	: 	BOOL;
+	_autoRestoreByMyParentEnabled	: 	BOOL;	
+	_countsPerStep					:	ULINT;
+	_counterValue					:	ULINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,13 +20,13 @@ END_VAR
 METHOD INTERNAL CleanUp]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.ChangeState(0);
-_MyState := State;	
-_OnStateChangeCounter			:= 0;
-_RestoreCounter					:= 0;
-_AutoRestoreToMyChildsEnabled	:= FALSE;
-_AutoRestoreByMyParentEnabled	:= FALSE;
-_CountsPerStep					:= 0;
-_CounterValue					:= 0;
+_myState := State;	
+_onStateChangeCounter			:= 0;
+_restoreCounter					:= 0;
+_autoRestoreToMyChildsEnabled	:= FALSE;
+_autoRestoreByMyParentEnabled	:= FALSE;
+_countsPerStep					:= 0;
+_counterValue					:= 0;
 ]]></ST>
       </Implementation>
     </Method>
@@ -35,48 +35,48 @@ _CounterValue					:= 0;
 METHOD INTERNAL ExecutionBody]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF State =-1 THEN
-	_CounterValue := 0;	
+	_counterValue := 0;	
 	ChangeState(0);
 END_IF
 
 IF State = 0 THEN
-	_CounterValue := _CounterValue + 1;	
-	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+	_counterValue := _counterValue + 1;	
+	IF (_counterValue MOD _countsPerStep) = 0 THEN
 		ChangeState(State + 10);
 	END_IF
 END_IF
 
 IF State = 10 THEN
-	_CounterValue := _CounterValue + 1;	
-	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+	_counterValue := _counterValue + 1;	
+	IF (_counterValue MOD _countsPerStep) = 0 THEN
 		ChangeState(State + 10);
 	END_IF
 END_IF
 
 IF State = 20 THEN
-	_CounterValue := _CounterValue + 1;	
-	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+	_counterValue := _counterValue + 1;	
+	IF (_counterValue MOD _countsPerStep) = 0 THEN
 		ChangeState(State + 10);
 	END_IF
 END_IF
 
 IF State = 30 THEN
-	_CounterValue := _CounterValue + 1;	
-	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+	_counterValue := _counterValue + 1;	
+	IF (_counterValue MOD _countsPerStep) = 0 THEN
 		ChangeState(State + 10);
 	END_IF
 END_IF
 
 IF State = 40 THEN
-	_CounterValue := _CounterValue + 1;	
-	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+	_counterValue := _counterValue + 1;	
+	IF (_counterValue MOD _countsPerStep) = 0 THEN
 		ChangeState(State + 10);
 	END_IF
 END_IF
 
 IF State = 50 THEN
-	_CounterValue := _CounterValue + 1;	
-	IF (_CounterValue MOD _CountsPerStep) = 0 THEN
+	_counterValue := _counterValue + 1;	
+	IF (_counterValue MOD _countsPerStep) = 0 THEN
 		ChangeState(State + 10);
 	END_IF
 END_IF
@@ -85,7 +85,7 @@ IF State = 60 THEN
 	ChangeState(-1);
 END_IF
 
-_MyState := State;
+_myState := State;
 
 
 ]]></ST>
@@ -99,7 +99,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_OnStateChangeCounter	:=	_OnStateChangeCounter + 1;
+        <ST><![CDATA[_onStateChangeCounter	:=	_onStateChangeCounter + 1;
 
 SUPER^.OnStateChange(PreviousState,NewState);]]></ST>
       </Implementation>
@@ -108,8 +108,8 @@ SUPER^.OnStateChange(PreviousState,NewState);]]></ST>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_AutoRestoreToMyChildsEnabled	:= THIS^.IsAutoRestoreEnabled;
-_AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
+        <ST><![CDATA[_autoRestoreToMyChildsEnabled	:= THIS^.IsAutoRestoreEnabled;
+_autoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
 ]]></ST>
       </Implementation>
     </Method>
@@ -117,7 +117,7 @@ _AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
       <Declaration><![CDATA[METHOD Restore : ITcoRestorable
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_RestoreCounter	:=	_RestoreCounter + 1;
+        <ST><![CDATA[_restoreCounter	:=	_restoreCounter + 1;
 
 SUPER^.Restore();]]></ST>
       </Implementation>
@@ -129,7 +129,7 @@ METHOD INTERNAL TriggerRestore
       <Implementation>
         <ST><![CDATA[THIS^.Restore();
 
-_MyState := State;
+_myState := State;
 ]]></ST>
       </Implementation>
     </Method>

@@ -3,27 +3,11 @@
   <Itf Name="ITcoSequencer" Id="{a8c5aaea-ce66-4699-94d6-6fc2b0db7583}">
     <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITcoState
 ]]></Declaration>
-    <Property Name="Mode" Id="{bc49d430-c9b7-0c6d-2206-7e426173182f}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>			
-			Gets or sets sequencer mode.
-			<remarks>			
-				<para>
-					See <see cref="eSequencerMode"/> for detailed description.
-				</para>
-			</remarks>		
-		</summary>			
-	</docu>	
-~*)
-PROPERTY PUBLIC Mode : eSequencerMode
-]]></Declaration>
-      <Get Name="Get" Id="{218de5fd-5a3e-0996-0103-6387110463ee}">
+    <Property Name="ModeController" Id="{dd9b56ed-8b06-0f8b-10a4-bc7f86421e90}">
+      <Declaration><![CDATA[PROPERTY ModeController : ITcoSequencerModeController]]></Declaration>
+      <Get Name="Get" Id="{c118fb9b-2261-0bb2-3940-3e2e9974072b}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
-      <Set Name="Set" Id="{258e79ea-7624-0fec-2ee9-e4abfbe76668}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Set>
     </Property>
     <Method Name="Run" Id="{c085653a-ddfd-0ace-0d80-e733121bd868}">
       <Declaration><![CDATA[(*~
@@ -37,42 +21,6 @@ PROPERTY PUBLIC Mode : eSequencerMode
 	</docu>	
 ~*)
 METHOD PUBLIC FINAL Run]]></Declaration>
-    </Method>
-    <Method Name="StepBackward" Id="{a472d4af-8e1d-0a57-1b03-6f1e42dd354b}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			This method triggers StepBackward task, that decrements current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
-		</summary>			
-	</docu>	
-~*)
-METHOD PUBLIC FINAL StepBackward
-]]></Declaration>
-    </Method>
-    <Method Name="StepForward" Id="{adfa3159-bea3-0d8f-0c7e-98c0f36b0b91}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			This method triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), 
-			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <c>TcoSequencer._numberOfStepsInSequence</c> ).
-		</summary>			
-	</docu>	
-~*)
-METHOD PUBLIC FINAL StepForward
-
-]]></Declaration>
-    </Method>
-    <Method Name="StepIn" Id="{0029d4e4-e6b3-04dd-3d60-ef3dc335a6eb}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
-			This causes starting the execution of the body of the current step.
-		</summary>			
-	</docu>	
-~*)
-METHOD PUBLIC FINAL StepIn
-]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>
