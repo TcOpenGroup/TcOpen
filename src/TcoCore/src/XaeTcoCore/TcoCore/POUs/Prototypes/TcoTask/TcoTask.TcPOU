@@ -361,12 +361,24 @@ PROPERTY Error : BOOL]]></Declaration>
 	</docu>	
 ~*)
 METHOD Execute : BOOL
-]]></Declaration>
+VAR
+	_serviceableParent : ITcoServiceable;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//Triggering Invoke from visualisation
+        <ST><![CDATA[// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
+IF(THIS^._Parent <> 0 )THEN
+	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+		IF(NOT _serviceableParent.IsService) THEN
+			THIS^._invokeRequest := FALSE;
+		END_IF
+	END_IF
+END_IF;
+
+//Triggering Invoke from remote system
 IF(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
 	THIS^.Invoke();
 END_IF;
+
 THIS^._invokeRequest := FALSE;
 
 //Triggering Restore from visualisation

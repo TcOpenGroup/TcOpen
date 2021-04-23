@@ -31,6 +31,12 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoComponent\TcoComponentTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoComponent\_TcoComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoContext\TcoContextTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -73,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoComponent" />
     <Folder Include="Tests\TcoObject\EqualsOverride" />
     <Folder Include="Tests\TcoRtc" />
     <Folder Include="Tests\TcoMessenger" />
