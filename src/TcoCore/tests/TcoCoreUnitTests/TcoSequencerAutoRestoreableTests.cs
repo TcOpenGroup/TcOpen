@@ -39,6 +39,7 @@ namespace TcoCoreUnitTests
             tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
             tc._finishStep.Synchron = false;                            //Reset finish step flag in the PLC testing instance
             tc._restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
+            tc._sequencer._callRestoreInOnStateChange.Synchron = false; //Reset calling Restore() in OnStateChange() method.
             tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
         }
 
@@ -52,6 +53,7 @@ namespace TcoCoreUnitTests
             tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
             tc._finishStep.Synchron = false;                            //Reset finish step flag in the PLC testing instance
             tc._restore.Synchron = false;                               //Reset sequence restore flag in the PLC testing instance
+            tc._sequencer._callRestoreInOnStateChange.Synchron = false; //Reset calling Restore() in OnStateChange() method.
             tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
         }
 
@@ -130,7 +132,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(502)]
-        public void T502_ExternalSequencePostStepComplete()
+        public void T502_ExternalSequenceOnStepCompleted()
         {
             short psc = tc._sequencer._onCompleteStepCount.Synchron;    //Store the actual value of the calls of the method PostStepComplete().
             tc.SequencerSingleCycleRun(() =>                            //After execution this method actual value of the calls of the method PostStepComplete() should be incremented by the value of the variable numberOfSteps
@@ -157,7 +159,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(503)]
-        public void T503_ExternalSequencePostSequenceComplete()
+        public void T503_ExternalSequenceOnSequenceCompleted()
         {
             short psc = tc._sequencer._onSequenceCompleteCount.Synchron;//Store the actual value of the calls of the method PostSequenceComplete().
             tc.SequencerSingleCycleRun(() =>                            //After execution this method actual value of the calls of the method PostSequenceComplete() should be incremented by one.
@@ -183,8 +185,8 @@ namespace TcoCoreUnitTests
                 tc._sequencer._onSequenceCompleteCount.Synchron);
         }
 
-        [Test, Order(505)]
-        public void T505_ExternalRestoreChildBetweenSteps()
+        [Test, Order(504)]
+        public void T504_ExternalRestoreChildBetweenSteps()
         {
             tc.SingleCycleRun(() =>
             {
@@ -222,6 +224,72 @@ namespace TcoCoreUnitTests
                     tc.SequenceComplete();
                 }
             });
+        }
+
+        [Test, Order(505)]
+        public void T505_ExternalSequenceOnStateChangeWithRestoreCallInside()
+        {
+            numberOfSteps = 10;
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.SetCyclicMode());                //Set sequencer into the cyclic mode
+            tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the testing instance
+
+            tc._sequencer._callRestoreInOnStateChange.Synchron = false; //Reset calling Restore() in OnStateChange() method.
+
+            tc.SequencerSingleCycleRun(() =>
+            {
+                if (tc.Step(0, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+
+                for (short i = 1; i <= numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            });
+
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(1,                                          //Check if StepId changes to 1
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 1",
+                tc._sequencer._currentStepDescription.Synchron);        //Check if StepDescription changes to Step 1.        
+            Assert.AreEqual(30,                                         //Check if current step status is Running.
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+            Assert.IsFalse(tc._sequencer._sequencerHasError.Synchron);  //Check if seuencer has no error
+            Assert.AreEqual(0,
+                tc._sequencer._sequencerErrorId.Synchron);
+
+            tc._sequencer._callRestoreInOnStateChange.Synchron = true;  //Set calling Restore() in OnStateChange() method.
+
+            tc.SequencerSingleCycleRun(() =>
+            {
+                if (tc.Step(0, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+
+                for (short i = 1; i <= numberOfSteps; i++)
+                {
+                    if(tc.Step((short)i, true, "Step " + i.ToString()))
+                    {
+                        tc.StepCompleteWhen(true);
+                    }
+                }
+            });
+
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(0,                                          //Check if StepId stays 0
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual(0,                                          //Check if current step status is None.
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+            Assert.IsFalse(tc._sequencer._sequencerHasError.Synchron);  //Check if seuencer has no error
+            Assert.AreEqual(0,
+                tc._sequencer._sequencerErrorId.Synchron);
+
+            tc._sequencer._callRestoreInOnStateChange.Synchron = false; //Reset calling Restore() in OnStateChange() method.
+
         }
 
         [Test, Order(506)]
@@ -3380,6 +3448,9 @@ namespace TcoCoreUnitTests
             tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
             tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
 
+            tc._sequencer._stateChangeFrom.Synchron = -1;
+            tc._sequencer._stateChangeTo.Synchron = -1;
+
             tc.SequencerSingleCycleRun(() =>                            //After running this method, sequencer should stay in StepId 0, with StepDescription ""(>Step 0<)"
             {                                                           //Step status should be ReadyToRun
                 for (ushort i = 0; i < numberOfSteps; i++)
@@ -3424,6 +3495,10 @@ namespace TcoCoreUnitTests
                 tc._sequencer._currentStepDescription.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status changes to ReadyToRun
                 tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual(-1,
+                tc._sequencer._stateChangeFrom.Synchron);
+            Assert.AreEqual(-1,
+                tc._sequencer._stateChangeTo.Synchron);
         }
 
         [Test, Order(643)]

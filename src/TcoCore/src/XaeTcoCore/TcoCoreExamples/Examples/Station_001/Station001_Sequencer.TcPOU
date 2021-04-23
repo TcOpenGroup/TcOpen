@@ -41,14 +41,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[components();
-
-IF(Step(0, 
-		TRUE, 
-		'INIT')) THEN
-//-----------------------------------------------------
-	THIS^.StepCompleteWhen(TRUE);
-//-----------------------------------------------------	
-END_IF]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{0856f69d-151a-03f9-30f3-30ed4168989c}">
@@ -156,7 +149,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_onStateChangeCount := _onStateChangeCount + 1;
-components._simTimer(IN := FALSE);]]></ST>
+components._simTimer(IN := FALSE);
+]]></ST>
       </Implementation>
     </Method>
   </POU>
