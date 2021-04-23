@@ -4,7 +4,14 @@
     <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITcoState
 ]]></Declaration>
     <Property Name="CurrentStep" Id="{9693bfe8-b533-07e4-0b7f-afb04386f3c0}">
-      <Declaration><![CDATA[PROPERTY CurrentStep : StepDetails]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the information about the current step.						
+		</summary>				
+	</docu>	
+~*)
+PROPERTY CurrentStep : StepDetails]]></Declaration>
       <Get Name="Get" Id="{d55c7f61-ec4e-07a2-2f32-e75c01fe1a25}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
