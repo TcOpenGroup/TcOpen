@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="FastCounter" Id="{5b1cc310-97b4-0139-285e-18a442b4f3d9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FastCounter EXTENDS TcoCore.TcoTask
+VAR
+	Counter : INT;	
+	_counterProgressCheck :INT;
+	_await : fbAwait;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN 
+		
+
+	IF _await.Delay(T#50MS) THEN
+		Counter := Counter +1;
+		_counterProgressCheck := Counter;
+	END_IF
+	
+ThrowWhen(_counterProgressCheck > Counter);
+	DoneWhen(Counter = 100);
+	
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="Restore" Id="{424ed028-8a39-0c2e-3c50-32a912fad471}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+Counter := 0;
+_counterProgressCheck:=0;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

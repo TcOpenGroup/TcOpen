@@ -23,6 +23,12 @@
     <Compile Update="Tutorial\301_Invoking_tasks\InvokingTasks301.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Tutorial\302_TaskExecution\TaskExecution302.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tutorial\302_TaskExecution\TaskExecutionView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Tutorial\101_Color_sequencer\ColorExample101.xaml">
@@ -38,6 +44,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Tutorial\301_Invoking_tasks\InvokingTasks301.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tutorial\302_TaskExecution\TaskExecution302.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tutorial\302_TaskExecution\TaskExecutionView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

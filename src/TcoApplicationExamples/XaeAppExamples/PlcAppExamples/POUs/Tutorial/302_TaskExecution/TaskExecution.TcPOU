@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcOpenTutorial" Id="{05284e7c-085c-0fc1-3da1-2c0f53b1a15c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcOpenTutorial EXTENDS TcoCore.TcoContext
+  <POU Name="TaskExecution" Id="{4822b8a3-73e8-03f9-109e-c2dfb282b463}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TaskExecution  EXTENDS TcoCore.TcoContext
 VAR
-	//101_Color_Sequencer
-	ColorExample : Color_Example;
-	
-	//201 Connect sequencers
-	ConnectSequences : ConnectSequences;
-	
-	//301 Invoking tasks
-	InvokingTasks : InvokingTasks;
-	//302 Task exectuion
-	TaskExecution : TaskExecution;
-
+	FastTask : FastCounter(THIS^);
+	SlowTask : SlowCounter(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Use Main method instead of this block.]]></ST>
+      <ST><![CDATA[// Use main method instead]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{5e01554d-4a2b-0408-1aeb-e4bf0f739acc}">
+    <Method Name="Main" Id="{81068e5b-2c3f-096f-298b-5a1ef745c23a}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -31,10 +22,8 @@ END_VAR
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ColorExample.Run();
-ConnectSequences.Run();
-InvokingTasks.Run();
-TaskExecution.Run();]]></ST>
+        <ST><![CDATA[SlowTask();
+FastTask();]]></ST>
       </Implementation>
     </Method>
   </POU>

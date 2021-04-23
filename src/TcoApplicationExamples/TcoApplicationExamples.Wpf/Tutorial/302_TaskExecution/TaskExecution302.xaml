@@ -1,10 +1,9 @@
 ﻿<UserControl
-    x:Class="PlcAppExamples.ConnectSequencesExample201"
+    x:Class="PlcAppExamples.TaskExecution302"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
-    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml"
     d:DesignHeight="450"
@@ -14,21 +13,21 @@
 
     <StackPanel Margin="10">
         <TextBlock>
-            <Run FontWeight="Bold">Connecting sequences</Run>
+            <Run FontWeight="Bold">Task execution</Run>
+            <LineBreak />
             <Hyperlink local:HyperlinkExtensions.IsExternal="True" NavigateUri="https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/TcOpenFramework/application.md#tasks-tcotask--itcotask">Documentation</Hyperlink>
             <LineBreak />
-            <Run>Let's have two sequences, a ground sequence and an automat seqeunce.</Run>
+            <Run>Task allows you to control chunks of logic in asynchronous execution.</Run>
             <LineBreak />
-            <Run>First sequence needs to finish, before the the second one starts.</Run>
+            <Run>Slow and Fast task simulate a moving servo. Tasks are done when they reach the end of the slider</Run>
             <LineBreak />
-            <Run>To demonstarate how this works, check out the function block in plc.</Run>
-            <Run>To start the ground sequence, enter step mode and skip one step</Run>
+            <Run>When they're done you can reset them and run again</Run>
             <LineBreak />
-            <Run>exit step mode and see how automat rols</Run>
+            <Run>Try to interupt with slider (servo) movements! When you interupt fast task, it will stop</Run>
         </TextBlock>
         <Separator Height="10" />
         <Grid>
-            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.ConnectSequences}" />
+            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.TaskExecution}" />
         </Grid>
     </StackPanel>
 </UserControl>

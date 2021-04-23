@@ -17,11 +17,14 @@
             <TabItem Header="101 Sequence">
                 <plcappexamples:ColorExample101 />
             </TabItem>
-            <TabItem Header="102 Connect sequences">
+            <TabItem Header="201 Connect sequences">
                 <plcappexamples:ConnectSequencesExample201 />
             </TabItem>
-            <TabItem Header="103 Yada yada">
+            <TabItem Header="301 Invoking tasks">
                 <plcappexamples:InvokingTasks301 />
+            </TabItem>
+            <TabItem Header="302 Task execution">
+                <plcappexamples:TaskExecution302 />
             </TabItem>
         </TabControl>
     </Grid>

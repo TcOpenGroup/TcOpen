@@ -48,9 +48,6 @@
     <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN_PRG.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Object\Horse_Object.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -112,6 +109,18 @@
     <Compile Include="POUs\Tutorial\301_InvokingTasks\InvokingTasks.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Tutorial\302_TaskExecution\FastCounter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\302_TaskExecution\SlowCounter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\302_TaskExecution\TaskExecution.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\MAIN_PRG.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Tutorial\TcOpenTutorial.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -129,6 +138,7 @@
     <Folder Include="POUs\Tutorial\101_Color_Sequencer" />
     <Folder Include="POUs\Tutorial\201_Connect_Sequences" />
     <Folder Include="POUs\Tutorial\301_InvokingTasks" />
+    <Folder Include="POUs\Tutorial\302_TaskExecution" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
