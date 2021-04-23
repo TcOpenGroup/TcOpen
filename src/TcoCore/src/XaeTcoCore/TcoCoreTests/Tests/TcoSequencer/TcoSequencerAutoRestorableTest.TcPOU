@@ -17,6 +17,7 @@ VAR
 	_cycleCount : INT;
 	_restoreCycleCount : INT;
 	_init: BOOL;
+	_setCurrentStepPropTestData : TcoCore.StepDetails;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -114,6 +115,15 @@ METHOD GetCurrentStepOrder : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetCurrentStepOrder := _sequencer._currentStep.Order;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetCurrentStepPropTest" Id="{66619082-c818-04f9-2a66-526f96036c15}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetCurrentStepPropTest
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_setCurrentStepPropTestData := THIS^._sequencer.CurrentStep;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetNumberOfStepsInSequence" Id="{9788b597-1936-060b-27fc-789b2bcb0619}">

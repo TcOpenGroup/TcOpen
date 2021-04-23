@@ -3,6 +3,12 @@
   <Itf Name="ITcoSequencer" Id="{a8c5aaea-ce66-4699-94d6-6fc2b0db7583}">
     <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITcoState
 ]]></Declaration>
+    <Property Name="CurrentStep" Id="{9693bfe8-b533-07e4-0b7f-afb04386f3c0}">
+      <Declaration><![CDATA[PROPERTY CurrentStep : StepDetails]]></Declaration>
+      <Get Name="Get" Id="{d55c7f61-ec4e-07a2-2f32-e75c01fe1a25}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="ModeController" Id="{dd9b56ed-8b06-0f8b-10a4-bc7f86421e90}">
       <Declaration><![CDATA[PROPERTY ModeController : ITcoSequencerModeController]]></Declaration>
       <Get Name="Get" Id="{c118fb9b-2261-0bb2-3940-3e2e9974072b}">
