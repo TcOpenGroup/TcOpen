@@ -209,5 +209,102 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(AendCycles__0 + cycles, tc_A._endCycles.Synchron);//_endCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Close() method should be called explicitly
         }
 
+        [Test, Order(106)]
+        public void T106_OnEntry()
+        {
+            ushort cycles = 10;
+            ushort i = 0;
+
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+
+
+            tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
+
+            ulong AstrtCycles_0 = tc_A._startCycles.Synchron;   //Store the actual cycle counters values as the initial values
+            ulong AmainCycles_0 = tc_A._mainCycles.Synchron;
+            ulong AendCycles__0 = tc_A._endCycles.Synchron;
+            ulong AonEntryCnt_0 = tc_A._onEntryCount.Synchron;
+
+            tc_A.RunUntilEndConditionIsMet(() =>                //Calling of the Open() method before the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet            
+            {
+                tc_A.CallMainFromUnitTest();                    //Calling only the Main() method
+                i++;
+            }, () => i >= cycles);                               //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
+
+            tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
+
+            Assert.AreEqual(AstrtCycles_0 + cycles, tc_A._startCycles.Synchron);//_startCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Open() method should be called explicitly
+            Assert.AreEqual(AmainCycles_0 + cycles, tc_A._mainCycles.Synchron);//cycle counter of the Main() method should be also incremented, as the Main() method is called explixitly.
+            Assert.AreEqual(AendCycles__0 + cycles, tc_A._endCycles.Synchron);//_endCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Close() method should be called explicitly
+            Assert.AreEqual(AonEntryCnt_0, tc_A._onEntryCount.Synchron);//_onEntryCount should not increment, as only Open(), Main() and Close() methods should be called.
+
+
+            AstrtCycles_0 = tc_A._startCycles.Synchron;   //Store the actual cycle counters values as the initial values
+            AmainCycles_0 = tc_A._mainCycles.Synchron;
+            AendCycles__0 = tc_A._endCycles.Synchron;
+            AonEntryCnt_0 = tc_A._onEntryCount.Synchron;
+
+            for (i = 0; i < cycles; i++)
+            {
+                tc_A.CallRunFromUnitTest();
+            }
+
+            tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
+
+            Assert.AreEqual(AstrtCycles_0 + cycles, tc_A._startCycles.Synchron);//_startCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Open() method should be called explicitly
+            Assert.AreEqual(AmainCycles_0 + cycles, tc_A._mainCycles.Synchron);//cycle counter of the Main() method should be also incremented, as the Main() method is called explixitly.
+            Assert.AreEqual(AendCycles__0 + cycles, tc_A._endCycles.Synchron);//_endCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Close() method should be called explicitly
+            Assert.AreEqual(AonEntryCnt_0 + cycles, tc_A._onEntryCount.Synchron);//_onEntryCount should also increment, as OnEntry(),Open(), Main(), Close() and OnExit() methods should be called.
+
+        }
+
+        [Test, Order(107)]
+        public void T107_OnExit()
+        {
+            ushort cycles = 20;
+            ushort i = 0;
+
+            tc_A._callMyPlcInstance.Synchron = false;           //Switch off the cyclical execution of the _TcoContextTest_A instance 
+
+
+            tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
+
+            ulong AstrtCycles_0 = tc_A._startCycles.Synchron;   //Store the actual cycle counters values as the initial values
+            ulong AmainCycles_0 = tc_A._mainCycles.Synchron;
+            ulong AendCycles__0 = tc_A._endCycles.Synchron;
+            ulong AonExitCnt__0 = tc_A._onExitCount.Synchron;
+
+            tc_A.RunUntilEndConditionIsMet(() =>                //Calling of the Open() method before the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet            
+            {
+                tc_A.CallMainFromUnitTest();                    //Calling only the Main() method
+                i++;
+            }, () => i >= cycles);                               //Calling of the Close() method after the code inside the parentheses is ensured be the TestRunner RunUntilEndConditionIsMet    
+
+            tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
+
+            Assert.AreEqual(AstrtCycles_0 + cycles, tc_A._startCycles.Synchron);//_startCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Open() method should be called explicitly
+            Assert.AreEqual(AmainCycles_0 + cycles, tc_A._mainCycles.Synchron);//cycle counter of the Main() method should be also incremented, as the Main() method is called explixitly.
+            Assert.AreEqual(AendCycles__0 + cycles, tc_A._endCycles.Synchron);//_endCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Close() method should be called explicitly
+            Assert.AreEqual(AonExitCnt__0, tc_A._onExitCount.Synchron);//_onExitCount should not increment, as only Open(), Main() and Close() methods should be called.
+
+
+            AstrtCycles_0 = tc_A._startCycles.Synchron;   //Store the actual cycle counters values as the initial values
+            AmainCycles_0 = tc_A._mainCycles.Synchron;
+            AendCycles__0 = tc_A._endCycles.Synchron;
+            AonExitCnt__0 = tc_A._onExitCount.Synchron;
+
+            for (i = 0; i < cycles; i++)
+            {
+                tc_A.CallRunFromUnitTest();
+            }
+
+            tc_A.ReadOutCycleCounters();                        //Read out actual cycle counters values into the test instance
+
+            Assert.AreEqual(AstrtCycles_0 + cycles, tc_A._startCycles.Synchron);//_startCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Open() method should be called explicitly
+            Assert.AreEqual(AmainCycles_0 + cycles, tc_A._mainCycles.Synchron);//cycle counter of the Main() method should be also incremented, as the Main() method is called explixitly.
+            Assert.AreEqual(AendCycles__0 + cycles, tc_A._endCycles.Synchron);//_endCycleCount should be also incremented, as by calling the TestRunner RunUntilEndConditionIsMet, also the Close() method should be called explicitly
+            Assert.AreEqual(AonExitCnt__0 + cycles, tc_A._onExitCount.Synchron);//_onExitCount should also increment, as OnEntry(),Open(), Main(), Close() and OnExit() methods should be called.
+
+        }
     }
 }
