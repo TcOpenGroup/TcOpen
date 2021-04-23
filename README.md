@@ -158,14 +158,14 @@ cd your_tcopen_folder
 
 **In the initial part of the build, you may see some errors popping up due to missing g.cs files (untracked by git). You can ignore those messages as long as the build completes like this:**
 
-![Profile set](assets\pics\build.png)
+![build](assets/pics/build.png)
 
 
 **Open visual studio TcOpen.sln**
 
 Switch profile to Debug|TwinCAT RT (x64)
 
-![Profile set](assets\pics\compile_profile.png)
+![Profile set](assets/pics/compile_profile.png)
 
 > The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)
 
