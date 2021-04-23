@@ -140,7 +140,7 @@ git clone https://github.com/TcOpenGroup/TcOpen.git
 
 You should setup Windows environment variable ```Tc3Target``` with the value of AMS ID of you testing target system.
 
-![Profile set](assets\pics\environment.png)
+![Environment](assets/pics/environment.png)
 
 **Build project to restore necessary tooling and packages**
 
