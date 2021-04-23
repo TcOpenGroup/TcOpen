@@ -17,7 +17,7 @@
     <Grid>
         <TabControl>
             <TabItem Header="Tutorial">
-                <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.ColorExample}" />
+                <local:TcOpenTutorialView></local:TcOpenTutorialView>
             </TabItem>
             <TabItem Header="Sequencer">
 

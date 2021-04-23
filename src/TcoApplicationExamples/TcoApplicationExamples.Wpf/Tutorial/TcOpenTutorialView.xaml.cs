@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcoApplicationExamples.Wpf.Tutorial
+namespace TcoApplicationExamples.Wpf
 {
     /// <summary>
     /// Interaction logic for TcOpenTutorialView.xaml

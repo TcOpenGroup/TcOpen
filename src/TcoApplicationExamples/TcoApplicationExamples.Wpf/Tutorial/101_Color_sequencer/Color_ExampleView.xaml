@@ -15,8 +15,8 @@
     </d:UserControl.DataContext>
     <StackPanel>
         <Separator />
-        <Ellipse Width="100" Height="100">
-            <Ellipse.Fill>
+        <StackPanel Height="50">
+            <StackPanel.Background>
                 <SolidColorBrush>
                     <SolidColorBrush.Color>
                         <MultiBinding Converter="{local:RgbConverter}">
@@ -26,8 +26,8 @@
                         </MultiBinding>
                     </SolidColorBrush.Color>
                 </SolidColorBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+            </StackPanel.Background>
+        </StackPanel>
         <Separator />
 
         <UniformGrid Columns="3">

@@ -100,6 +100,15 @@
     <Compile Include="POUs\Tutorial\101_Color_Sequencer\stColors.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Tutorial\201_Connect_Sequences\AutomatSequence.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\201_Connect_Sequences\ConnectSequences.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\201_Connect_Sequences\GroundSequence.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Tutorial\TcOpenTutorial.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -115,6 +124,7 @@
     <Folder Include="POUs\Object" />
     <Folder Include="POUs\Sequencer" />
     <Folder Include="POUs\Tutorial\101_Color_Sequencer" />
+    <Folder Include="POUs\Tutorial\201_Connect_Sequences" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="GroundSequence" Id="{c7c17d29-7fc0-0c61-154f-0a7678a7ccab}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK GroundSequence EXTENDS TcoCore.TcoSequencer
+VAR
+	_await : fbAwait;
+	_groundDone : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Use main method instead]]></ST>
+    </Implementation>
+    <Property Name="GroundDone" Id="{39eae32a-99d3-0353-3e8c-694596904c74}">
+      <Declaration><![CDATA[PROPERTY GroundDone : BOOL]]></Declaration>
+      <Get Name="Get" Id="{e7205493-c87e-0020-3ff7-33a00929f565}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[GroundDone := _groundDone;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Main" Id="{493c7ca5-3fd0-00f6-0394-2244135a93f0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end is ensured by calling the InstanceName.Run() method.
+			This method is abstract, so each derived type has to implement its own implementation of this method.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF(Step(inStepID := 100, 
+		inEnabled := TRUE, 
+		inStepDescription := 'GROUND')) THEN
+//-------------------------------------------------------------		
+	_groundDone  := FALSE;
+	StepCompleteWhen(_await.Sometime());		
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 200, 
+		inEnabled := TRUE, 
+		inStepDescription := 'SKIP THIS STEP IN STEP MODE')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(FALSE);
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 300, 
+		inEnabled := TRUE, 
+		inStepDescription := 'CLOSE GRIPPER')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 400, 
+		inEnabled := TRUE, 
+		inStepDescription := 'VERTICAL CYLINDER UP')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 500, 
+		inEnabled := TRUE, 
+		inStepDescription := 'HORIZONTAL TO UNLOAD POSITION')) THEN
+//-------------------------------------------------------------		
+		StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 600, 
+		inEnabled := TRUE, 
+		inStepDescription := 'VERTICAL DOWN TO UNLOAD POSITION')) THEN
+//-------------------------------------------------------------		
+		StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 700, 
+		inEnabled := TRUE, 
+		inStepDescription := 'OPEN GRIPPER')) THEN
+//-------------------------------------------------------------		
+		StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+
+IF(Step(inStepID := 800, 
+		inEnabled := TRUE, 
+		inStepDescription := 'DONE')) THEN
+//-------------------------------------------------------------		
+	_groundDone  := TRUE;
+	CompleteStep();
+//-------------------------------------------------------------
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

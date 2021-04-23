@@ -10,4 +10,29 @@
     <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj" />
     <ProjectReference Include="..\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Tutorial\101_Color_sequencer\ColorExample101.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tutorial\201_ConnectSequences\ConnectSequencesExample201.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tutorial\201_ConnectSequences\ConnectSequencesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tutorial\101_Color_sequencer\ColorExample101.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tutorial\201_ConnectSequences\ConnectSequencesExample201.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tutorial\201_ConnectSequences\ConnectSequencesView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

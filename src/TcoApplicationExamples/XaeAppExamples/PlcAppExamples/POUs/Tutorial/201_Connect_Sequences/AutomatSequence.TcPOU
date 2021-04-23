@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="AutomatSequence" Id="{65e45cd8-f368-026f-08fb-d7341b4474c0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK AutomatSequence EXTENDS TcoCore.TcoSequencer
+VAR
+	_await : fbAwait;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Use main method instead]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{da2d21af-6685-0ecf-3798-c0500472e6bc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end is ensured by calling the InstanceName.Run() method.
+			This method is abstract, so each derived type has to implement its own implementation of this method.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF(Step(inStepID := 100, 
+		inEnabled := TRUE, 
+		inStepDescription := 'START AUTOMAT')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 200, 
+		inEnabled := TRUE, 
+		inStepDescription := 'VERTICAL CYLINDER DOWN TO LOAD')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 300, 
+		inEnabled := TRUE, 
+		inStepDescription := 'CLOSE GRIPPER')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 400, 
+		inEnabled := TRUE, 
+		inStepDescription := 'VERTICAL CYLINDER UP')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 500, 
+		inEnabled := TRUE, 
+		inStepDescription := 'HORIZONTAL TO UNLOAD POSITION')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 600, 
+		inEnabled := TRUE, 
+		inStepDescription := 'VERTICAL DOWN TO UNLOAD POSITION')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 700, 
+		inEnabled := TRUE, 
+		inStepDescription := 'OPEN GRIPPER')) THEN
+//-------------------------------------------------------------		
+	StepCompleteWhen(_await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+
+IF(Step(inStepID := 800, 
+		inEnabled := TRUE, 
+		inStepDescription := 'DONE')) THEN
+//-------------------------------------------------------------		
+	CompleteSequence();
+//-------------------------------------------------------------
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
