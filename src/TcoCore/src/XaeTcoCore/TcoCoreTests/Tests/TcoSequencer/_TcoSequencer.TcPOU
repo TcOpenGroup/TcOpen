@@ -22,6 +22,7 @@ VAR
 	_onStateChangeCount 				:	ULINT;
 	_stateChangeFrom					:	INT;
 	_stateChangeTo						:	INT;
+	_callRestoreInOnStateChange			:	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -8424,6 +8425,10 @@ END_VAR
 
 _stateChangeFrom := PreviousState;
 _stateChangeTo := NewState;
+
+IF _callRestoreInOnStateChange THEN
+	Restore();
+END_IF
 ]]></ST>
       </Implementation>
     </Method>
