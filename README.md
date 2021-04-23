@@ -16,7 +16,7 @@ TcOpen aims to provide standard classes to start building any **real deployable 
 
 ## Why?
 
-We want to introduce modern software development practices to the PLC world so developers can shift from low-value work to high-value work. OpenSource offers a solid ground upon which many can build and bring ideas from all over the world.
+We want to introduce modern software development practices to the PLC world so developers can shift from low-value work to high-value work. Open-source offers a solid ground upon which many can build and bring ideas from all over the world.
 
 ## Goals
 
@@ -32,7 +32,7 @@ TwinCAT software system turns almost any compatible PC into a real-time controll
 
 # Where are we - Development process 
 
-The initial momentum of ```TcOpen``` project was powerful; however, we have seen a slow decline in activity over the past months. [Inxton](inxton.com),  [MTS](www.mts.sk/en) team and some other heroic knights decided to keep the lights on and to carry on this initiative. 
+The initial momentum of ```TcOpen``` project was powerful; however, we have seen a slow decline in activity over the past months. [Inxton](inxton.com),  [MTS](www.mts.sk/en) team and some other heroic knights decided to keep the lights on and to carry on this initiative.
 
 We understand that many of you guys have hard times at work, a lot of late hours, endless traveling. Life in industrial automation is very demanding. We see this as one of the reasons for the declined activity. Also, many automation engineers are not that familiar with modern software development tooling and workflows. It may scare some people off. Unfamiliarity should not be the reason not to participate. We want this place to be welcoming to everyone that sees it as a meaningful path to industrial automation. The community is going to learn along the path. There are not that many open-source projects for industrial automation; we got to start somewhere and somehow.
 
@@ -136,6 +136,12 @@ There is a separate documentation repository for this project [here](https://git
 git clone https://github.com/TcOpenGroup/TcOpen.git
 ~~~
 
+**Environment variables**
+
+You should setup Windows environment variable ```Tc3Target``` with the value of AMS ID of you testing target system.
+
+![Profile set](assets\pics\environment.png)
+
 **Build project to restore necessary tooling and packages**
 
 _build in Debug profile_
@@ -150,17 +156,24 @@ cd your_tcopen_folder
 .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
 ~~~
 
-** Open visual studio TcOpen.sln**
+**In the initial part of the build, you may see some errors popping up due to missing g.cs files (untracked by git). You can ignore those messages as long as the build completes like this:**
+
+![Profile set](assets\pics\build.png)
+
+
+**Open visual studio TcOpen.sln**
 
 Switch profile to Debug|TwinCAT RT (x64)
+
 ![Profile set](assets\pics\compile_profile.png)
+
+> The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)
 
 ## Communication channels
 
 Some of you complained you were unable to join the Slack Channel for various reasons. After a discussion with @dhullett08 we are opening a new gitter channel:
 
 [![Join the chat at https://gitter.im/dotnet/coreclr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TcOpenGroup/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 
 ## Code of Conduct
 
@@ -178,8 +191,6 @@ You can submit your ideas in the form of [PullRequests](https://github.com/TcOpe
 Please submit questions, suggestions, bug reports [here](https://github.com/TcOpenGroup/TcOpen/issues).
 
 Various discussion [here](https://github.com/TcOpenGroup/TcOpen/discussions).
-
-
 
 
 ### Awesome TwinCAT 3 projects 🌐
