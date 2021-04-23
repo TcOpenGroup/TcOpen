@@ -261,6 +261,24 @@ _modeController._stepIn.DoneWhen(_modeController._stepIn.Execute());
 CompleteStep := THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="CurrentStep" Id="{7022a13f-b6b0-0efd-366c-a75c20304c2d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the information about the current step.						
+		</summary>				
+	</docu>	
+~*)
+PROPERTY CurrentStep : StepDetails]]></Declaration>
+      <Get Name="Get" Id="{af063cc7-1792-02cf-310c-06a60df576e5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CurrentStep := THIS^._currentStep;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{f2880318-c67a-0c39-0ff2-3dbccb0e13f7}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT

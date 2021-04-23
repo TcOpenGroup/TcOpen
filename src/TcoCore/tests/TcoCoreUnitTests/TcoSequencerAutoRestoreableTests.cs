@@ -99,6 +99,7 @@ namespace TcoCoreUnitTests
                 tc.GetNumberOfStepsInSequence());
             Assert.AreEqual(30,                                         //Check if current step status is Running.
                 tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+
         }
 
         [Test, Order(501)]
@@ -148,6 +149,17 @@ namespace TcoCoreUnitTests
                     {
                         tc.StepCompleteWhen(true);
                     }
+
+                    // Test CurrentStep property;
+                    tc.GetCurrentStepPropTest();
+                    var plain = tc._setCurrentStepPropTestData.CreatePlainerType();
+                    tc._setCurrentStepPropTestData.FlushPlainToOnline(plain);
+                    tc.GetCurrentStepPropTest();
+                    tc._setCurrentStepPropTestData.FlushOnlineToPlain(plain);
+                    
+                    Assert.AreEqual((short)i, plain.ID);
+                    Assert.AreEqual("Step " + i.ToString(), plain.Description);
+                    Assert.AreEqual(true, plain.Enabled);
                 }
                 if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
                 {
