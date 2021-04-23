@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoComponent" Id="{8eb0512f-b833-4c04-bec5-9d60e2cb723b}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoComponent EXTENDS TcoObject IMPLEMENTS ITcoRestorable
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Basic class for components.
+		</summary>				
+	</docu>	
+~*)
+FUNCTION_BLOCK ABSTRACT TcoComponent EXTENDS TcoObject IMPLEMENTS ITcoObject,ITcoRestorable, ITcoServiceable
 VAR
+	{attribute 'hide'}
+	_serviceContexCycle : ULINT;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -20,23 +29,64 @@ END_VAR
         <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Maintenance" Id="{c320b900-ed98-4dbe-a90b-28679bad227e}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL Maintenance ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Manual();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Manual" Id="{68a60f6a-9b62-45e9-a23f-6251b47fa211}">
-      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT Manual
+    <Property Name="IsService" Id="{76fe61a9-82d7-035a-11e3-97101beac97d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the component is in serviceable state. Serviceable state is when ```Service``` method is called cyclicaly.   
+		</summary>			
+	</docu>	
+~*)
+PROPERTY IsService : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c23442a0-b254-0ba9-01da-184a67a53561}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsService := (_serviceContexCycle + 1) = Context.StartCycleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{d0c02f91-fc49-4476-8612-b6c1e2ed01ac}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD ABSTRACT Restore : ITcoRestorable
+
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Restore" Id="{d0c02f91-fc49-4476-8612-b6c1e2ed01ac}">
-      <Declaration><![CDATA[METHOD ABSTRACT Restore : ITcoRestorable
-
-
+    <Method Name="Service" Id="{c320b900-ed98-4dbe-a90b-28679bad227e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes the logic for manual-maintenance control.   
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL Service ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_serviceContexCycle := Context.StartCycleCount;
+ServiceMode();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{68a60f6a-9b62-45e9-a23f-6251b47fa211}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ABSTRACT ServiceMode
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

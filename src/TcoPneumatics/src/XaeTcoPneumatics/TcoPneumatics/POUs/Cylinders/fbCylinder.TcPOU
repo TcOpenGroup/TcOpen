@@ -144,13 +144,6 @@ END_VAR
 SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Manual" Id="{8d280abe-da34-4370-8cca-5bd111ecd38d}">
-      <Declaration><![CDATA[METHOD PROTECTED  Manual
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="ManualControl" Id="{94b70f4e-af12-4cab-8a9f-9a3da438ebd4}">
       <Declaration><![CDATA[METHOD PROTECTED  ManualControl
 
@@ -204,6 +197,13 @@ MoveToWork := THIS^._moveWorkTask;
         <ST><![CDATA[_moveHomeTask.Restore();
 _moveWorkTask.Restore();
 _stopTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{8d280abe-da34-4370-8cca-5bd111ecd38d}">
+      <Declaration><![CDATA[METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Stop" Id="{9e32cbb8-ba72-4463-bbd6-9f7b9b0e82cd}">
