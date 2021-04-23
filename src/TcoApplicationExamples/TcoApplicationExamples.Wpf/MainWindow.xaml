@@ -6,6 +6,7 @@
     xmlns:inxton="http://inxton.mts/xaml"
     xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:plcappexamples="clr-namespace:PlcAppExamples"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vortex="http://vortex.mts/xaml"
     Title="MainWindow"
@@ -15,8 +16,11 @@
     mc:Ignorable="d">
     <Grid>
         <TabControl>
-
+            <TabItem Header="Tutorial">
+                <local:TcOpenTutorialView></local:TcOpenTutorialView>
+            </TabItem>
             <TabItem Header="Sequencer">
+
                 <TabControl>
                     <TabItem Header="Auto-gen">
                         <UniformGrid Columns="2">
