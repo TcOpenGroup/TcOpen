@@ -7,6 +7,7 @@ VAR
 	_isError						:	BOOL;	
 	_isDone							:	BOOL;	
 	_isReady						:	BOOL;	
+	_isInvokeRequestTrue			:	BOOL;	
 	_counterSetValue				:	ULINT;
 	_counterValue					:	ULINT;
 	_invokeCounter					:	ULINT;
@@ -127,10 +128,18 @@ _myParentIdentity	:=	THIS^._Parent.Identity;
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutState]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_isBusy		:=	THIS^.Busy;	
-_isError	:=	THIS^.Error;	
-_isDone		:=	THIS^.Done;	
-_isReady	:=	THIS^.Ready;]]></ST>
+        <ST><![CDATA[_isBusy					:=	THIS^.Busy;	
+_isError				:=	THIS^.Error;	
+_isDone					:=	THIS^.Done;	
+_isReady				:=	THIS^.Ready;
+_isInvokeRequestTrue 	:=	THIS^._invokeRequest;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetInvokeRequest" Id="{0b35580c-9ba9-0a00-3cd4-3befd36f57b6}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetInvokeRequest]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._invokeRequest := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetPreviousStateToReady" Id="{5b4ca5af-515c-4456-914e-015624dcdd9a}">

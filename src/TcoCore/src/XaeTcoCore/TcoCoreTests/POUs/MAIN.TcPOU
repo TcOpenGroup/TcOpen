@@ -11,7 +11,7 @@ VAR
 	_tcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
 	_tcoMessengerContextTest			:	TcoMessengerContextTest;
 	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
-
+	_tcoComponentTest					:	TcoComponentTest;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoRtcTest_A();
@@ -29,6 +29,8 @@ _tcoSequencerNonAutoRestorableTest();
 _tcoMessengerContextTest();
 
 _tcoContextMessagingPerf();
+
+_tcoComponentTest();
 ]]></ST>
     </Implementation>
   </POU>
