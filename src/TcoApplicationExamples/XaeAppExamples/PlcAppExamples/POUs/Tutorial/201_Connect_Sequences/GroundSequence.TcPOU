@@ -104,5 +104,23 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Restore" Id="{03073100-81cd-0f37-07f8-8089dc7e76ea}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				This method resets the sequencer. 
+				Method is typically called before starting the sequence or after error has occured in the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_groundDone := false;]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

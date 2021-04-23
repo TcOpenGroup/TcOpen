@@ -20,6 +20,9 @@
     <Compile Update="Tutorial\201_ConnectSequences\ConnectSequencesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Tutorial\301_Invoking_tasks\InvokingTasks301.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Tutorial\101_Color_sequencer\ColorExample101.xaml">
@@ -31,6 +34,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Tutorial\201_ConnectSequences\ConnectSequencesView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tutorial\301_Invoking_tasks\InvokingTasks301.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

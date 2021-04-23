@@ -7,6 +7,9 @@ VAR
 	ColorExample : Color_Example;
 	//201 Connect sequencers
 	ConnectSequences : ConnectSequences;
+	//301 Invoking tasks
+	InvokingTasks : InvokingTasks;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -25,7 +28,8 @@ END_VAR
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[ColorExample.Run();
-ConnectSequences.Run();]]></ST>
+ConnectSequences.Run();
+InvokingTasks.Run();]]></ST>
       </Implementation>
     </Method>
   </POU>
