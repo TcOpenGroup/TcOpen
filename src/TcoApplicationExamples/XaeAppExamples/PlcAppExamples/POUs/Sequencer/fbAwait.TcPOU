@@ -20,7 +20,10 @@ END_VAR
 
 IF Timer.Q THEN
 	Timer(IN := FALSE, PT := T#0S);
+	
 	Delay := TRUE;
+ELSE
+	Delay := FALSE;
 END_IF]]></ST>
       </Implementation>
     </Method>

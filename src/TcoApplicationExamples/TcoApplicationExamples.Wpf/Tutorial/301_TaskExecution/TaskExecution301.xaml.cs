@@ -2,14 +2,11 @@
 
 namespace PlcAppExamples
 {
-    public partial class InvokingTasks301 : UserControl
+    public partial class TaskExecution301 : UserControl
     {
-        public InvokingTasks301()
+        public TaskExecution301()
         {
             InitializeComponent();
         }
-
-
     }
-
 }

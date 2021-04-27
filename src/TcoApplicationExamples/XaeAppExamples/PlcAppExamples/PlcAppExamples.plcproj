@@ -48,6 +48,9 @@
     <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\MAIN_PRG.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Object\Horse_Object.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -97,28 +100,31 @@
     <Compile Include="POUs\Tutorial\101_Color_Sequencer\stColors.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\201_Connect_Sequences\AutomatSequence.TcPOU">
+    <Compile Include="POUs\Tutorial\201\InvokingTasks.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\201_Connect_Sequences\ConnectSequences.TcPOU">
+    <Compile Include="POUs\Tutorial\301\FastCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\201_Connect_Sequences\GroundSequence.TcPOU">
+    <Compile Include="POUs\Tutorial\301\SlowCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\301_InvokingTasks\InvokingTasks.TcPOU">
+    <Compile Include="POUs\Tutorial\301\TaskExecution.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\302_TaskExecution\FastCounter.TcPOU">
+    <Compile Include="POUs\Tutorial\401\fbPiston.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\302_TaskExecution\SlowCounter.TcPOU">
+    <Compile Include="POUs\Tutorial\401\fbPistonMoveTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\302_TaskExecution\TaskExecution.TcPOU">
+    <Compile Include="POUs\Tutorial\401\IPistonGripper.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tutorial\MAIN_PRG.TcPOU">
+    <Compile Include="POUs\Tutorial\401\IPistonHorizontal.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\401\IPistonVertical.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Tutorial\TcOpenTutorial.TcPOU">
@@ -136,9 +142,11 @@
     <Folder Include="POUs\Object" />
     <Folder Include="POUs\Sequencer" />
     <Folder Include="POUs\Tutorial\101_Color_Sequencer" />
-    <Folder Include="POUs\Tutorial\201_Connect_Sequences" />
-    <Folder Include="POUs\Tutorial\301_InvokingTasks" />
-    <Folder Include="POUs\Tutorial\302_TaskExecution" />
+    <Folder Include="POUs\Tutorial\201" />
+    <Folder Include="POUs\Tutorial\301" />
+    <Folder Include="POUs\Tutorial\401">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </Folder>
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

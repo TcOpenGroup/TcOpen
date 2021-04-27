@@ -14,19 +14,13 @@
     <Compile Update="Tutorial\101_Color_sequencer\ColorExample101.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Tutorial\201_ConnectSequences\ConnectSequencesExample201.xaml.cs">
+    <Compile Update="Tutorial\201_Invoking_tasks\InvokingTasks201.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Tutorial\201_ConnectSequences\ConnectSequencesView.xaml.cs">
+    <Compile Update="Tutorial\301_TaskExecution\TaskExecution301.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Tutorial\301_Invoking_tasks\InvokingTasks301.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Tutorial\302_TaskExecution\TaskExecution302.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Tutorial\302_TaskExecution\TaskExecutionView.xaml.cs">
+    <Compile Update="Tutorial\301_TaskExecution\TaskExecutionView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -35,25 +29,20 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Tutorial\201_ConnectSequences\ConnectSequencesExample201.xaml">
+    <Page Update="Tutorial\201_Invoking_tasks\InvokingTasks201.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Tutorial\201_ConnectSequences\ConnectSequencesView.xaml">
+    <Page Update="Tutorial\301_TaskExecution\TaskExecution301.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Tutorial\301_Invoking_tasks\InvokingTasks301.xaml">
+    <Page Update="Tutorial\301_TaskExecution\TaskExecutionView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Tutorial\302_TaskExecution\TaskExecution302.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Tutorial\302_TaskExecution\TaskExecutionView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tutorial\401_ConnectingDots\" />
   </ItemGroup>
 </Project>

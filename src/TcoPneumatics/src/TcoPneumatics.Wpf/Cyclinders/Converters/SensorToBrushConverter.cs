@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace TcOpen
 {
@@ -12,11 +13,11 @@ namespace TcOpen
         {
             try
             {
-                return (bool)value ? Vortex.Presentation.Styling.Wpf.VortexResources.Primary : Vortex.Presentation.Styling.Wpf.VortexResources.OnPrimary;
+                return (bool)value ?  Brushes.Green : Brushes.Black;
             }
             catch (Exception)
             {
-                return Vortex.Presentation.Styling.Wpf.VortexResources.Alert;
+                return Brushes.Gray;
             }
         }
 
