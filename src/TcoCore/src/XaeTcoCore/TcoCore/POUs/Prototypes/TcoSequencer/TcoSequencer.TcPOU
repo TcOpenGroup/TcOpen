@@ -269,13 +269,13 @@ CompleteStep := THIS^;]]></ST>
 		</summary>				
 	</docu>	
 ~*)
-PROPERTY CurrentStep : StepDetails]]></Declaration>
+PROPERTY CurrentStep : REFERENCE TO StepDetails]]></Declaration>
       <Get Name="Get" Id="{af063cc7-1792-02cf-310c-06a60df576e5}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[CurrentStep := THIS^._currentStep;]]></ST>
+          <ST><![CDATA[CurrentStep REF= _currentStep;]]></ST>
         </Implementation>
       </Get>
     </Property>
