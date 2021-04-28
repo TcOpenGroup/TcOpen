@@ -5,29 +5,26 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
     xmlns:vortex="http://vortex.mts/xaml"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     DataContext="{x:Static local:App.PlcAppExamples}"
     mc:Ignorable="d">
+    <Grid>
+        <StackPanel Margin="10">
+            <mdxam:MarkdownScrollViewer xml:space="preserve" MarkdownStyleName="Sasabune">
+		    # Task execution
+		     [Documentation](https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/TcOpenFramework/application.md#tasks-tcotask--itcotask)
+                
+			Slow and Fast task simulate a moving servo. Tasks are done when they reach the end of the slider.
+            When they're done you can reset them and run again.
+            Try to interupt with slider (servo) movements! When you interupt fast task, it will stop.
+            After the dask is DONE, you need to restore it. 
+	</mdxam:MarkdownScrollViewer>
 
-    <StackPanel Margin="10">
-        <TextBlock>
-            <Run FontWeight="Bold">Task execution</Run>
-            <LineBreak />
-            <Hyperlink local:HyperlinkExtensions.IsExternal="True" NavigateUri="https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/TcOpenFramework/application.md#tasks-tcotask--itcotask">Documentation</Hyperlink>
-            <LineBreak />
-            <Run>Task allows you to control chunks of logic in asynchronous execution.</Run>
-            <LineBreak />
-            <Run>Slow and Fast task simulate a moving servo. Tasks are done when they reach the end of the slider</Run>
-            <LineBreak />
-            <Run>When they're done you can reset them and run again</Run>
-            <LineBreak />
-            <Run>Try to interupt with slider (servo) movements! When you interupt fast task, it will stop</Run>
-        </TextBlock>
-        <Separator Height="10" />
-        <Grid>
-            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.TaskExecution}" />
-        </Grid>
-    </StackPanel>
+            <Separator Height="10" />
+            <Grid>
+                <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.TaskExecution}" />
+            </Grid>
+        </StackPanel>
+    </Grid>
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PlcAppExamples
 {
@@ -7,6 +9,7 @@ namespace PlcAppExamples
         public TaskExecution301()
         {
             InitializeComponent();
+           
         }
     }
 }

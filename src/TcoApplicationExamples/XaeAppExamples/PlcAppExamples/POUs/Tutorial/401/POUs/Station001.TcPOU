@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcOpenTutorial" Id="{05284e7c-085c-0fc1-3da1-2c0f53b1a15c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcOpenTutorial EXTENDS TcoCore.TcoContext
+  <POU Name="Station001" Id="{00a3bb22-82f5-4ea8-82e2-290ee3363eb4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoContext
 VAR
-	ColorExample : Color_Example;
-	
-	InvokingTasks : InvokingTasks;
-	
-	TaskExecution : TaskExecution;
-
-	Station001 : Station001;
+	_components : Station001_Components(THIS^);
+	_sequence : Station001_Sequencer(THIS^, eRestoreMode.None, _components);
 END_VAR
+
+
+				
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Use Main method instead of this block.]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{5e01554d-4a2b-0408-1aeb-e4bf0f739acc}">
+    <Method Name="Main" Id="{e83e3098-35a6-4623-baf3-b3eac487355d}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -27,10 +25,8 @@ END_VAR
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ColorExample.Run();
-InvokingTasks.Run();
-TaskExecution.Run();
-Station001.Run();]]></ST>
+        <ST><![CDATA[_components();
+_sequence.Run();]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -10,14 +10,13 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vortex="http://vortex.mts/xaml"
     Title="MainWindow"
-    Width="800"
-    Height="450"
     DataContext="{x:Static local:App.PlcAppExamples}"
+    WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Grid>
         <TabControl>
             <TabItem Header="Tutorial">
-                <local:TcOpenTutorialView></local:TcOpenTutorialView>
+                <local:TcOpenTutorialView />
             </TabItem>
             <TabItem Header="Sequencer">
 

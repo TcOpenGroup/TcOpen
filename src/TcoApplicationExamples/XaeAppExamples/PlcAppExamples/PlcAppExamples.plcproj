@@ -127,6 +127,15 @@
     <Compile Include="POUs\Tutorial\401\IPistonVertical.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Tutorial\401\POUs\Station001.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\401\POUs\Station001_Components.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tutorial\401\POUs\Station001_Sequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Tutorial\TcOpenTutorial.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -145,8 +154,9 @@
     <Folder Include="POUs\Tutorial\201" />
     <Folder Include="POUs\Tutorial\301" />
     <Folder Include="POUs\Tutorial\401">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
+      <ExcludeFromBuild>false</ExcludeFromBuild>
     </Folder>
+    <Folder Include="POUs\Tutorial\401\POUs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

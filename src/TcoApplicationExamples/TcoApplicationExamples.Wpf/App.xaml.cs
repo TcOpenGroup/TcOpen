@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
-using System.Windows.Navigation;
+using System.Windows.Input;
 
 namespace TcoApplicationExamples.Wpf
 {
@@ -16,6 +16,8 @@ namespace TcoApplicationExamples.Wpf
         {
             TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             PlcAppExamples.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
+
+
         }
 
         public static PlcAppExamplesTwinController PlcAppExamples { get { return Entry.PlcAppExamples; } }

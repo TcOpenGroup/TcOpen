@@ -6,9 +6,18 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Tutorial\401_ConnectingDots\Images\100-800.PNG" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj" />
     <ProjectReference Include="..\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj" />
+	  <PackageReference Include="MdXaml" Version="1.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tutorial\401_ConnectingDots\Images\100-800.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Tutorial\101_Color_sequencer\ColorExample101.xaml.cs">
@@ -21,6 +30,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Tutorial\301_TaskExecution\TaskExecutionView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tutorial\401_ConnectingDots\ConnectingDots401.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tutorial\401_ConnectingDots\Station001View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -41,8 +56,13 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tutorial\401_ConnectingDots\" />
+    <Page Update="Tutorial\401_ConnectingDots\ConnectingDots401.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tutorial\401_ConnectingDots\Station001View.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

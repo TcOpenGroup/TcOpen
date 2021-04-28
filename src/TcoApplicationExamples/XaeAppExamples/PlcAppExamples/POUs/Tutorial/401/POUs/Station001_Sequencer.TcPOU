@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Station001_Sequencer" Id="{9e4077ec-ff29-45f6-81c9-258ca60b40f5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_Sequencer EXTENDS TcoCore.TcoSequencer
+VAR
+	components : REFERENCE TO Station001_Components;
+END_VAR
+
+VAR
+	_switchToStep : BOOL;
+	_failedToLoad : BOOL;
+END_VAR
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{54044f27-26db-475d-abd6-ad65df2530c6}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	AutoRestoreMode : eRestoreMode; 
+	refComponents : REFERENCE TO Station001_Components;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Components REF= refComponents;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Init" Id="{0e1ddce9-53d5-4028-a87a-edba4ed235a8}">
+      <Declaration><![CDATA[METHOD Init
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[components();
+
+
+
+
+
+
+IF(Step(0, 
+		TRUE, 
+		'INIT')) THEN
+//-----------------------------------------------------
+	THIS^.StepCompleteWhen(TRUE);
+//-----------------------------------------------------	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{6c7ea6ad-aa4c-4717-ac51-7750945d5e4c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Init();
+
+IF(Step(100, 
+		TRUE, 
+		'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveUp().Done AND_THEN 
+					 components.Horizontal.MoveLeft().Done AND_THEN 
+					 components.Gripper.Open().Done);
+//-----------------------------------------------------	
+END_IF
+
+
+IF(Step(200, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER DOWN')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveDown().Done);
+//-----------------------------------------------------	
+END_IF
+
+
+IF(Step(300, 
+		TRUE, 
+		'CLOSE GRIPPER')) THEN
+//-----------------------------------------------------
+	IF(components.Gripper.Close().Done) THEN
+		IF(_failedToLoad) THEN
+			RequestStep(100);
+		ELSE
+			StepCompleteWhen(TRUE);	
+		END_IF;	
+		
+	END_IF;		
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(400, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER UP')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveUp().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(500, 
+		TRUE, 
+		'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Horizontal.MoveRight().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(600, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER DOWN')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveDown().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(700, 
+		TRUE, 
+		'OPEN GRIPPER')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Gripper.Open().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(800, 
+		TRUE, 
+		'CLOSE SEQUENCE')) THEN
+//-----------------------------------------------------
+	CompleteSequence();
+//-----------------------------------------------------	
+END_IF
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{5e443d3a-7ab3-4567-ab58-5e3e7a3e90a2}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[components._simTimer(IN := FALSE);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
