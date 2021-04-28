@@ -12,7 +12,7 @@ namespace PlcAppExamples
         }
     }
 
-    class InvokingTasksViewModel : RenderableViewModel
+    public class InvokingTasksViewModel : RenderableViewModel
     {
 
         public InvokingTasks InvokingTasks { get; set; }

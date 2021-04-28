@@ -3,17 +3,13 @@
   <POU Name="TcOpenTutorial" Id="{05284e7c-085c-0fc1-3da1-2c0f53b1a15c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcOpenTutorial EXTENDS TcoCore.TcoContext
 VAR
-	//101_Color_Sequencer
 	ColorExample : Color_Example;
 	
-	//201 Connect sequencers
-	ConnectSequences : ConnectSequences;
-	
-	//301 Invoking tasks
 	InvokingTasks : InvokingTasks;
-	//302 Task exectuion
+	
 	TaskExecution : TaskExecution;
 
+	Station001 : Station001;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -32,9 +28,9 @@ END_VAR
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[ColorExample.Run();
-ConnectSequences.Run();
 InvokingTasks.Run();
-TaskExecution.Run();]]></ST>
+TaskExecution.Run();
+Station001.Run();]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -17,14 +17,14 @@
             <TabItem Header="101 Sequence">
                 <plcappexamples:ColorExample101 />
             </TabItem>
-            <TabItem Header="201 Connect sequences">
-                <plcappexamples:ConnectSequencesExample201 />
+            <TabItem Header="201 Tasks in component">
+                <plcappexamples:InvokingTasks201 />
             </TabItem>
-            <TabItem Header="301 Invoking tasks">
-                <plcappexamples:InvokingTasks301 />
+            <TabItem Header="301 Task execution">
+                <plcappexamples:TaskExecution301 />
             </TabItem>
-            <TabItem Header="302 Task execution">
-                <plcappexamples:TaskExecution302 />
+            <TabItem Header="401 Connecting dots">
+                <plcappexamples:ConnectingDots401 />
             </TabItem>
         </TabControl>
     </Grid>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbPiston" Id="{c4094ed5-4fe0-0f6e-24e6-4cc0fa53181e}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute addProperty Name "Pneumatic cyclinder"}
+FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoComponent IMPLEMENTS IPistonGripper, IPistonHorizontal, IPistonVertical
+VAR_INPUT
+	iHomePositionSensor : BOOL;
+	iWorkPositionSensor : BOOL;	
+END_VAR
+
+VAR_OUTPUT
+	qHomePositionActuator : BOOL;
+	qWorkPositionActuator : BOOL;		
+END_VAR
+
+VAR
+	{attribute addProperty Activity "moves to home position"}
+	_moveHomeTask : fbPistonMoveTask(THIS^);
+	{attribute addProperty Activity "moves to work position"}
+	_moveWorkTask : fbPistonMoveTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_moveHomeTask(PositionSensor := iHomePositionSensor, MoveToPositionSignal := qHomePositionActuator, InverseSignal := qWorkPositionActuator);
+_moveWorkTask(PositionSensor := iWorkPositionSensor, MoveToPositionSignal := qWorkPositionActuator, InverseSignal := qHomePositionActuator);]]></ST>
+    </Implementation>
+    <Folder Name="Gripper" Id="{f422736b-a4ff-4bdb-aafe-11613f36e687}" />
+    <Folder Name="Horizontal" Id="{39838326-8ba7-42ff-93a8-48faae7dd3f1}" />
+    <Folder Name="Vertical" Id="{223d4b1a-3aa8-49b9-8e25-d72b18672816}" />
+    <Method Name="Close" Id="{27e35537-09a4-4073-91f1-6d0fb26c5fde}" FolderPath="Gripper\">
+      <Declaration><![CDATA[METHOD Close : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Close := MoveToHome();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Manual" Id="{e2305248-08d3-0a45-0227-6f8abe0d86d9}">
+      <Declaration><![CDATA[METHOD PROTECTED Manual
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveDown" Id="{74594fe6-2f16-4e5a-ac52-6a94752e91a6}" FolderPath="Vertical\">
+      <Declaration><![CDATA[METHOD MoveDown : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveDown := MoveToHome();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveLeft" Id="{a307d3d0-8d36-45ef-886c-fcf0072551d2}" FolderPath="Horizontal\">
+      <Declaration><![CDATA[METHOD MoveLeft : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveLeft := MoveToWork();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveRight" Id="{97b5e4c3-9c2c-4e7c-8dc9-d8033ccc70ac}" FolderPath="Horizontal\">
+      <Declaration><![CDATA[METHOD MoveRight : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveRight := MoveToHome();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToHome" Id="{ec08a57d-3edb-01f0-35bc-3c8a96242bb9}">
+      <Declaration><![CDATA[METHOD PROTECTED MoveToHome : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveToHome := THIS^._moveHomeTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToWork" Id="{e9e0be0c-566d-0749-1c75-1097c8dadecf}">
+      <Declaration><![CDATA[METHOD PROTECTED MoveToWork : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveToWork := THIS^._moveWorkTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveUp" Id="{f237180e-da3e-47f0-8a14-888f70a71c84}" FolderPath="Vertical\">
+      <Declaration><![CDATA[METHOD MoveUp : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveUp := MoveToWork();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Open" Id="{08e58c4c-094c-457f-abda-3144fa1f4bd8}" FolderPath="Gripper\">
+      <Declaration><![CDATA[METHOD Open : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Open := MoveToWork();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{fc7ee28d-fd88-0b69-144e-14e0b2374ab2}">
+      <Declaration><![CDATA[METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._moveHomeTask.Restore();
+THIS^._moveWorkTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{bfab5335-2802-01ec-2297-5bec2ba8c2d8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
