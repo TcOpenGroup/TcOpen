@@ -25,7 +25,7 @@
 	        </mdxam:MarkdownScrollViewer>
                     <Grid>
                         <StackPanel>
-                            <vortex:RenderableContentControl x:Name="Station001" DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001}" />
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -41,9 +41,7 @@
                        
 	                </mdxam:MarkdownScrollViewer>
                     <Separator />
-                    <Expander Header="Messages" IsExpanded="False">
-                        <TextBlock>Add diagnostic here</TextBlock>
-                    </Expander>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001._sequence}" PresentationType="Diagnostics" />
                 </StackPanel>
 
             </TabItem>
