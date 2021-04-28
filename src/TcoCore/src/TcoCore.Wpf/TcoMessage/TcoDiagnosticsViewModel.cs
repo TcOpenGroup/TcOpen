@@ -11,29 +11,25 @@
     using Vortex.Presentation.Wpf;
     
 
-    public class TcoDiagnosticsViewViewModel : BindableBase
+    public class TcoDiagnosticsViewModel : RenderableViewModel
     {
 
         PlainTcoMessage selectedMessage;
     
-        public TcoDiagnosticsViewViewModel()
+        public TcoDiagnosticsViewModel()
         {
-            // this.UpdateAffectedObjectsMessagesCommand = new RelayCommand(a => this.UpdateAffectedObjectsMessages());
-            //this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(Component.LightMessages), e => !this.AutoUpdate && !this.DiagnosticsRunning);
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
 
-        public TcoDiagnosticsViewViewModel(IsTcoObject tcoObject)
+        public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
              this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
       
 
-       
-
-
-        private IsTcoObject _tcoObject;
+        protected IsTcoObject _tcoObject { get; set; }
 
         public IEnumerable<string> PresentationTypes { get; } 
             = new List<string>() { "Diagnostic", "Manual", "Base", "Display", "Control" };
@@ -197,6 +193,7 @@
 
         public RelayCommand UpdateAffectedObjectsMessagesCommand { get; private set; }
 
-        public RelayCommand UpdateMessagesCommand { get; private set; }       
+        public RelayCommand UpdateMessagesCommand { get; private set; }
+        public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
     }
 }
