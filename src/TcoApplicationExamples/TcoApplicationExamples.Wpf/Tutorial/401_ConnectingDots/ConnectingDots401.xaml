@@ -41,7 +41,11 @@
                        
 	                </mdxam:MarkdownScrollViewer>
                     <Separator />
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001}" PresentationType="Diagnostics" />
+                    <vortex:RenderableContentControl
+                        x:Name="DiagnosticView"
+                        DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001}"
+                        SizeChanged="OnRendered"
+                        PresentationType="Diagnostics" />
                 </StackPanel>
 
             </TabItem>
