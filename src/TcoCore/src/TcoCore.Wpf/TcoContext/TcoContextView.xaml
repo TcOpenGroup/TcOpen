@@ -15,14 +15,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition />
         </Grid.RowDefinitions>
-        <Expander Grid.Row="0">
-            <local:TcoDiagnosticsView DataContext="{Binding DiagnosticsViewModel}">
-                
-            </local:TcoDiagnosticsView>
-        </Expander>
-        <GroupBox Grid.Row="1" Header="{Binding Converter={local:NameOrSymbolConverter}}">
+        <!--<Expander Grid.Row="0">
+            <local:TcoDiagnosticsView DataContext="{Binding DiagnosticsViewModel}"/>
+        </Expander>-->
+        <GroupBox Header="{Binding Converter={local:NameOrSymbolConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
