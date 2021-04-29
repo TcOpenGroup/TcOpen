@@ -9,14 +9,16 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoContext : IVortexIdentity
+    public partial class TcoContext : IVortexIdentity, IsTcoContext, IsTcoObject
     {
         private readonly IList<TcoMessage> _messages = new List<TcoMessage>();
-        public IEnumerable<TcoMessage> Messages { get { return _messages; } }
+        internal IEnumerable<TcoMessage> Messages { get { return _messages; } }
+        
+        public IEnumerable<PlainTcoMessage> ActiveMessages { get { return GetActiveMessages(); } }
 
         public OnlinerULInt Identity => this._Identity;
 
-        internal void AddMessage(TcoMessage message)
+        public void AddMessage(TcoMessage message)
         {
             _messages.Add(message);
         }
@@ -24,6 +26,38 @@ namespace TcoCore
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this.Connector.IdentityProvider.AddIdentity(this);
+        }
+
+        List<IValueTag> refreshTags { get; set; }
+
+        public ulong LastStartCycleCount => this._startCycleCount.LastValue;
+
+        public void RefreshActiveMessages()
+        {
+            var activeMessgages = GetActiveMessages();
+        }
+
+        /// <summary>
+        /// Performs refresh of the messages of this <see cref="TcoObject"/> and all its child object.
+        /// </summary>
+        /// <returns>Enumerable of messages as POCO object.</returns>
+        public IEnumerable<PlainTcoMessage> GetActiveMessages()
+        {
+            if (refreshTags == null)
+            {
+                refreshTags = new List<IValueTag>();
+                refreshTags.Add(this._startCycleCount);
+                refreshTags.AddRange(GetObjectMessages().Select(p => p.Cycle));
+            }
+
+            this.GetConnector().ReadBatch(refreshTags);
+
+            return GetObjectMessages().Where(p => p.IsActive).Select(p => p.PlainMessage);
+        }
+
+        private IEnumerable<TcoMessage> GetObjectMessages()
+        {
+            return this.GetDescendants<TcoMessage>();
         }
     }
 }

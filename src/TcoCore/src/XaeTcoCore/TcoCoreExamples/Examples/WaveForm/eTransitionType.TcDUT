@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eTransitionType" Id="{a1c6b4db-4aa1-095c-02b5-b8aef9374a51}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTransitionType :
+(
+	None 		:=	 0,
+	Linear 		:=	 1,
+	Exponential :=	 2,
+	S_Type 		:=	 3
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

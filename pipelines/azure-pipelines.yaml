@@ -8,7 +8,6 @@ steps:
     ./pipelines/runbuild.ps1 -properties @{     
      "publishNugets"=$false;
      "updateAssemblyInfo" = $true;
-     "testTargetAmsId" = "172.20.10.2.1.1";
      "isTestingEnabled" = $true
      }   
   displayName: 'Psake build'
@@ -20,5 +19,5 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'NUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/*TEST*.xml'
     testRunTitle: 'TcoUnitTests'

@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoStateBase" Id="{df9d36ba-623c-435a-bfc9-1eb05ad1eb71}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides basic state controller. It could be implemented using <c>IF</c>, <c>IF</c> <c>ELSIF</c> or <c>CASE</c> statement. The transition to the different state needs to be perfromed by calling 
+			<see cref="TcoState.PlcTcoState.ChangeState(Object)"/> method. This method ensures also calling the <see cref="TcoState.PlcTcoState.OnStateChange(Object,Object)"/> every time that state is changed. The 
+		  	<c>OnStateChange()</c>could be overloaded and some custom code that needs to be executed on each change of the state could be placed here. The TcoState could be used like this:
+			<para>
+				<example>
+				<note type="Example 1">
+				<para>
+					<c>_myTask()</c> is not a member of this <c>TcoState()</c>, it is restored manually to be able to trigger it in the next state.
+				</para>
+					<code>
+						IF State = 10 THEN
+							Main._myTask.Invoke();
+							Main._myTask.Execute();
+							IF Main._myTask.Done THEN
+								ChangeState(State + 10);
+								Main._myTask.Restore();
+							END_IF
+						END_IF
+						IF State = 20 THEN
+							Main._myTask.Invoke();
+							Main._myTask.Execute();
+							IF Main._myTask.Done THEN
+								ChangeState(State + 10);
+								Main._myTask.Restore();
+							END_IF
+						END_IF
+					</code>
+				 </note>
+				</example>
+			</para>		
+			<para>
+				<example>
+				<note type="Example 2">
+				<para>
+					<c>_myTask()</c> is a member of this <c>TcoState()</c>, it is restored manually using the fluent syntax to be able to trigger it in the next state.
+				</para>
+					<code>
+						CASE State OF
+							10:	
+							_myTask.Invoke();
+							_myTask.Execute();
+							IF _myTask.Done THEN
+								ChangeState(State + 10).RestoreObject(_myTask);
+							END_IF
+							20:
+							_myTask.Invoke();
+							_myTask.Execute();
+							IF _myTask.Done THEN
+								ChangeState(State + 10).RestoreObject(_myTask);
+							END_IF	
+						END_CASE
+					</code>
+				 </note>
+				</example>
+				<para>
+					See <see cref="TcoState.PlcTcoState.RestoreObject(Object)"/> for more details.
+				</para>
+			</para>			
+		</summary>		
+	</docu>	
+~*)	
+FUNCTION_BLOCK ABSTRACT TcoStateBase EXTENDS TcoObject IMPLEMENTS ITcoState, ITcoObjectRestorer
+VAR
+	{attribute clr [ReadOnly()]}
+	_State : INT; 	
+	{attribute 'hide'}
+	_enableAutoRestore : BOOL;
+	{attribute 'hide'}
+	_AutoRestorable : BOOL;
+	{attribute 'hide'}
+	_StartCycleCount	: ULINT;
+	{attribute 'hide'}
+	_MyParentsChangeStateCycle	: ULINT;
+	{attribute 'hide'}
+	_ChangeStateCycle	: ULINT;
+	{attribute 'hide'}
+	_LastChangedState	: INT;
+	{attribute 'hide'}
+	_MyParentsLastChangedState	: INT;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="AutoRestorable" Id="{5a32567b-bf1c-4e5b-bf60-a2611b1f0291}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns if this instance is auto restorable. This is 'dependency property'. Value of this property is given by the parent of this object. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> of the parent object and cannot be changed during runtime.
+			The <c>AutoRestorable</c> property of this objects is retrieved from the <c>EnableAutoRestore</c> property of the parent object.
+			This is done by calling the <c>CheckIfAutoRestoreEnabledByParent()</c> method inside the implicit method <c>FB_init()</c> after download.
+			If this instance is the auto restorable it will call the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
+			<para>
+				1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
+			</para>
+			<para>
+				2.)	Parent object of this instance changes its state.
+			</para>
+			<para>
+				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY AutoRestorable : BOOL]]></Declaration>
+      <Get Name="Get" Id="{a8259f51-2e61-4cb8-b448-14dbab3caa92}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AutoRestorable := _AutoRestorable;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="AutoRestore" Id="{de409044-9ada-43ae-b0da-2824dbd11cec}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Private method called each time that State property is asked for. If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
+			<para>
+				1.)	Parent object of this instance changes its state in this Plc cycle.
+			</para>
+			<para>
+				2.)	Parent object of this instance changes its state no mather when and this instance has not yet process this change.
+			</para>
+			<para>
+				3.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
+			</para>
+			<para>
+				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+			</para>
+			<para>
+				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PRIVATE AutoRestore
+VAR 
+	_MyParent_TcoState	: ITcoState := 0;
+	_MyParent_ChangeStateCycle : ULINT;
+	_MyParent_LastChangeState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//If parent of this instance is TcoState type or its derived type and the parent
+//EnableAutoRestore property is set to TRUE, this instance determines the value
+//of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
+//after each download.
+IF _AutoRestorable THEN		
+	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+		_MyParent_ChangeStateCycle := _MyParent_TcoState.LastStateChangeCycle;
+		_MyParent_LastChangeState := _MyParent_TcoState.State;
+	END_IF;	
+	//If OnStateChange event of the parent has occured, the value of the parent's 
+	//StartCycleCount property is stored into its ChangeStateCycle property.
+	//Each child has to deal with it individually in the next call of its body,
+	//restore itself, and copy the parent's ChangeStateCycle property into the
+	//child's own property.
+	IF _MyParent_ChangeStateCycle <> _MyParentsChangeStateCycle THEN
+		THIS^.Restore();
+		_MyParentsChangeStateCycle := _MyParent_ChangeStateCycle;
+	END_IF
+	IF _MyParent_LastChangeState <> _MyParentsLastChangedState THEN
+		THIS^.Restore();
+		_MyParentsLastChangedState := _MyParent_LastChangeState;
+	END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ChangeStateProtected" Id="{4cb41fe0-b963-4299-82c3-5c2d3f39376b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to change the State property of this instance to the new value. This method is final, so it cannot be overloaded. However there is a <see cref="TcoState.PlcTcoState.OnStateChange(Object,Object)"/> 
+			method that is called on each change of the <c>State</c> and could be overloaded.
+			<para>
+				<example>
+				<note type="Example">
+				<para>
+					Possibility to use the fluent syntax.
+				</para>
+					<code>ChangeState(newState).RestoreObject(myChildObject);</code>
+				 </note>
+				</example>
+			</para>		
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ChangeStateProtected : ITcoState 
+VAR_INPUT
+	NewState : INT;
+END_VAR
+VAR 
+	PreviousState	: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[PreviousState := THIS^._State;
+THIS^._State := NewState;
+
+IF NewState <> PreviousState THEN
+	_ChangeStateCycle := THIS^.Context.StartCycleCount;
+	_LastChangedState  := NewState;
+	OnStateChange(PreviousState,NewState);
+END_IF;
+
+ChangeStateProtected := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckIfAutoRestoreEnabledByParent" Id="{c5715ab0-08a5-45ac-8bf1-ee148c24dc9b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnableAutoRestore()/> property and writing it into the <see cref="TcoState.PlcTcoState.AutoRestorable()"/> of this instance.
+			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
+		</summary>			
+	</docu>	
+~*)
+{attribute 'call_after_online_change_slot' := '100'}
+METHOD PRIVATE CheckIfAutoRestoreEnabledByParent
+VAR
+	_MyParent_TcoState	: 	ITcoState := 0;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
+END_IF;	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckIfCalledCyclically" Id="{c3c16406-8037-4f4e-96d6-fd1e434b96e4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Private method called each time that the <see cref="TcoState.PlcTcoState.State()"/> property is asked for. 
+			If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if
+			this instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property State).
+			<para>
+				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+			</para>
+			<para>
+				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PRIVATE CheckIfCalledCyclically
+VAR 
+	_MyContextStartCycleCount : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//If parent of this instance is TcoState type or its derived type and the parent
+//EnableAutoRestore property is set to TRUE, this instance determines the value
+//of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
+//after each download.
+IF _AutoRestorable THEN		
+	_MyContextStartCycleCount := THIS^.Context.StartCycleCount;
+	//If this instance is AutoRestorable, its body has to be called cyclically, 
+	//otherwise this instance is restored.
+	//This mechanism force the user to call this instance properly,
+	//in order to don't miss the OnStateChange() event of the parent
+	//in case of the body of this instance isn't called.
+	IF _MyContextStartCycleCount > _StartCycleCount + 1 THEN
+		THIS^.Restore();
+	END_IF
+	_StartCycleCount := _MyContextStartCycleCount;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Context" Id="{8da19f4d-3318-4817-a4d5-6aa094e367e9}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the context of the parent object, that this object is assigned to.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
+      <Get Name="Get" Id="{11383faf-e461-45e4-9174-77cffa93662f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{8d1704d8-c9eb-4c1d-bdae-a472e42275f3}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	AutoRestoreMode : eRestoreMode; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Identity 		:=	ADR(THIS^);
+_Parent			:=	Parent;
+_enableAutoRestore	:=	AutoRestoreMode = eRestoreMode.AutoRestoreMembers;
+
+CheckIfAutoRestoreEnabledByParent();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Identity" Id="{c46c20f0-abc3-443d-aff6-2491bd671e91}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the own identity of the <see cref ="TcoState.PlcTcoState()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level packages.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{482264ad-71c6-4062-87a6-0e6e15884bb1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Identity := _Identity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsAutoRestoreEnabled" Id="{1275f229-029d-4a41-91bc-21e7635b56a4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns if the auto restore mechanism is enabled for this instance. This property does not affect this instance, but it affects all members of this instance.
+			If the auto restore is enabled, the child member call its <c>Restore()</c> method if:
+			<para>
+			1.) Its instance has not been called for one or more cycles.
+			</para>
+			<para>
+			2.)	Its parent object (THIS^ instance) has changed its state.
+			</para>
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			<para>
+				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY IsAutoRestoreEnabled : BOOL]]></Declaration>
+      <Get Name="Get" Id="{18adc5cb-4da6-4441-8880-40900c5734c9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsAutoRestoreEnabled := _enableAutoRestore;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LastStateChangeCycle" Id="{a80bc898-ff38-4283-9c84-e2ba1d29cc70}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns number of the Plc cycle during which this instance changes its <c>State</c> last time.
+			The child objects ask for this value to ensure auto restore mechanism working.  	
+		</summary>			
+	</docu>	
+~*)
+PROPERTY LastStateChangeCycle : ULINT]]></Declaration>
+      <Get Name="Get" Id="{d32390e8-a9e9-4156-9c20-c15c06feae7c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastStateChangeCycle := _ChangeStateCycle;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="OnStateChange" Id="{e2059991-ec6a-4e02-ab7f-f71179312086}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called on each change of the <c>State</c>. This method could be overloaded and custom code should be placed here.	
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{9e542c5a-7a1b-472b-a8dc-08d24bf1a56e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restore this instance to the state -1. Could be called explicitly so as using auto restore mechanism.
+			<para>
+				<example>
+					<note type="Example">
+						<para>
+							Possibility to use the fluent syntax.
+						</para>
+						<code>
+							Restore().RestoreObject(myFirstChildObject).RestoreObject(mySecondChildObject);
+						</code>
+					 </note>
+				</example>
+			</para>				
+			<para>
+				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+			</para>
+			<para>
+				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ChangeStateProtected(-1);
+
+Restore := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RestoreObject" Id="{513753f0-9e1b-078d-0ba4-963a788889a5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Ensures calling the <c>Restore()</c> method on the object entered.	
+			<para>
+				<example>
+				<note type="Example">
+				<para>
+					Possibility to use the fluent syntax.
+				</para>
+					<code>ChangeState(newState).RestoreObject(myFirstChildObject).RestoreObject(mySecondChildObject);</code>
+				 </note>
+				</example>
+			</para>		
+		</summary>			
+	</docu>	
+~*)
+METHOD RestoreObject : ITcoObjectRestorer
+VAR_INPUT
+	Obj : ITcoRestorable;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Obj.Restore();
+RestoreObject := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="State" Id="{c7cf2066-e3ac-4cb3-a274-3e1ae5aa1496}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Return actual state of this instance. Needs to be asked for cyclically in case of this instance is auto restorable.
+			<para>
+				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY State : INT]]></Declaration>
+      <Get Name="Get" Id="{e468954d-6d36-4577-b577-f288fa31e7cd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CheckIfCalledCyclically();
+AutoRestore();
+
+State := _State;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

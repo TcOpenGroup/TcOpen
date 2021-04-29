@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MAIN" Id="{a7bd41fd-8dbf-4e6f-8b13-73b5ce6425f6}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	_station001	:	Station001;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[EXAMPLES_PRG();
+MANIPULATOR();
+_station001.Run();
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -12,5 +12,5 @@ using System.Windows;
 
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-alpha.118+Branch.dev.Sha.577cdcde529537ab30c3818b20bd577fe6a9c468")]
+[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+217.Branch.init-dev.Sha.8106cc8e723ce3612a1d08c4766c322c45e6cfeb")]
 

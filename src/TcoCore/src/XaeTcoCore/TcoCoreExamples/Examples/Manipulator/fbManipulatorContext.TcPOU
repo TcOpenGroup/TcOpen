@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbManipulatorContext" Id="{ea90540b-6619-0c29-21fd-12c4e49ac96f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbManipulatorContext  EXTENDS TcoCore.TcoContext
+VAR
+	_automat : fbManipulatorAutomat(THIS^, eRestoreMode.AutoRestoreMembers);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cbd32a64-6d8a-060a-13a2-f1236a7a469f}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_automat();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

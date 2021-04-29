@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoMessengerSettings" Id="{e6a12bea-a5ee-06da-38d8-d4f316d1c513}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL TcoMessengerSettings IMPLEMENTS ITcoMessengerSettings
+VAR
+	_minLevel : eMessageCategory;
+	_isMessagingSuspended : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IsSuspended" Id="{184432ba-ed30-0ea9-34ef-43a09897d070}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the messaging is suspended at this point in program.					
+			<para>
+				See also <see cref="TcoMessengerSettings.Resume()"/>
+			</para>
+			<para>
+				See also <see cref="TcoMessengerSettings.Suspend()"/>
+			</para>
+			<para>
+				See also <see cref="TcoMessengerSettings.MinLevel"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC IsSuspended : BOOL]]></Declaration>
+      <Get Name="Get" Id="{084a81d6-66a6-0874-005f-95fe275f2e20}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsSuspended := _isMessagingSuspended;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MinLevel" Id="{23651bcd-e46c-0710-3196-f31340d2b191}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets or set minimal messaging level, the objects will post only messages for the levels of this or superior severity.					
+			<para>
+				See also <see cref="TcoMessengerSettings.Resume()"/>
+			</para>
+			<para>
+				See also <see cref="TcoMessengerSettings.Suspend()"/>
+			</para>
+			<para>
+				See also <see cref="TcoMessengerSettings.MinLevel"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC MinLevel : eMessageCategory]]></Declaration>
+      <Get Name="Get" Id="{a3f8be89-55fd-0145-22e8-3db7665a5a41}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinLevel := _minLevel;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{37e3c080-4fd2-08fd-3a05-ce1eee6307a9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_minLevel := MinLevel;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Resume" Id="{456a9fc8-9f8f-0e21-2081-9877f3b9364c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Resumes messaging from the all objects of this context, when the messaging was previously suspended by ```Suspend``` method.					
+			<para>
+				See also <see cref="TcoMessengerSettings.Suspend()"/>
+			</para>
+			<para>
+				See also <see cref="TcoMessengerSettings.MinLevel"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC Resume : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isMessagingSuspended := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Suspend" Id="{ed0d7753-8ddd-0f15-326c-cd14614ece49}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Suspends messaging from the all objects of this context that would occur from this point in the call tree.						
+			<para>
+				See also <see cref="TcoMessengerSettings.Resume()"/>
+			</para>
+			<para>
+				See also <see cref="TcoMessengerSettings.MinLevel"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC Suspend
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isMessagingSuspended := TRUE;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

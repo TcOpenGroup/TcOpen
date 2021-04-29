@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Station001_Sequencer" Id="{4061f3f0-4d5d-0916-3f62-6782fe6fbe6d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_Sequencer EXTENDS TcoCore.TcoSequencer
+VAR
+	components : REFERENCE TO Station001_Components;
+END_VAR
+
+VAR
+	_switchToStep : BOOL;
+	_failedToLoad : BOOL;
+END_VAR
+
+VAR
+	_onStateChangeCount	:	LREAL;
+	_sequenceCompleteCount	:	LREAL;
+	_stepsPerSequence	:	LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{11ed78a9-ab45-031a-1f69-90fad9ed0f0e}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	AutoRestoreMode : eRestoreMode; 
+	refComponents : REFERENCE TO Station001_Components;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Components REF= refComponents;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Init" Id="{6b311680-f7fd-0944-19bf-fe60e7e9ccf7}">
+      <Declaration><![CDATA[METHOD Init
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[components();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{0856f69d-151a-03f9-30f3-30ed4168989c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Init();
+
+IF(Step(100, 
+		TRUE, 
+		'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveUp().Done AND_THEN 
+					 components.Horizontal.MoveLeft().Done AND_THEN 
+					 components.Gripper.Open().Done);
+//-----------------------------------------------------	
+END_IF
+
+
+IF(Step(200, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER DOWN')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveDown().Done);
+//-----------------------------------------------------	
+END_IF
+
+
+IF(Step(300, 
+		TRUE, 
+		'CLOSE GRIPPER')) THEN
+//-----------------------------------------------------
+	IF(components.Gripper.Close().Done) THEN
+		IF(_failedToLoad) THEN
+			RequestStep(100);
+		ELSE
+			StepCompleteWhen(TRUE);	
+		END_IF;	
+		
+	END_IF;		
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(400, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER UP')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveUp().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(500, 
+		TRUE, 
+		'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Horizontal.MoveRight().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(600, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER DOWN')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Vertical.MoveDown().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(700, 
+		TRUE, 
+		'OPEN GRIPPER')) THEN
+//-----------------------------------------------------
+	StepCompleteWhen(components.Gripper.Open().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(Step(800, 
+		TRUE, 
+		'CLOSE SEQUENCE')) THEN
+//-----------------------------------------------------
+	_sequenceCompleteCount := _sequenceCompleteCount + 1;
+	_stepsPerSequence := (_onStateChangeCount - _sequenceCompleteCount + 1)/ _sequenceCompleteCount;
+	CompleteSequence();
+//-----------------------------------------------------	
+END_IF
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{3d722d71-b74e-0385-2817-236cbba14627}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onStateChangeCount := _onStateChangeCount + 1;
+components._simTimer(IN := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

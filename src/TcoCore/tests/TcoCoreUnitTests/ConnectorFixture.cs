@@ -29,20 +29,10 @@ namespace TcoCoreUnitTests
 
         public static void StartConnector()
         {
-
             var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TestSetupFixture.TargetAmsId, TestSetupFixture.TargetAmsPort, true);
-
-
-            var connectorTask = new System.Threading.Tasks.Task(() => {
-
-                _connector = new TcoCoreTests.TcoCoreTestsTwinController(adapter);
-
-                _connector.Connector.ReadWriteCycleDelay = 100;
-                _connector.Connector.BuildAndStart();
-            });
-
-            connectorTask.Start();
-            connectorTask.Wait();
+            _connector = new TcoCoreTests.TcoCoreTestsTwinController(adapter);
+            _connector.Connector.ReadWriteCycleDelay = 100;
+            _connector.Connector.BuildAndStart();                        
         }
     }
 }

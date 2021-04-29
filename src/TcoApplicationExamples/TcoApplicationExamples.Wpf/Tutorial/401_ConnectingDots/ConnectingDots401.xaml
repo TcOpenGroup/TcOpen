@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="PlcAppExamples.ConnectingDots401"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:inxton="http://inxton.mts/xaml"
+    xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
+    xmlns:plcappexamples="clr-namespace:PlcAppExamples"
+    xmlns:vortex="http://vortex.mts/xaml"
+    DataContext="{x:Static local:App.PlcAppExamples}"
+    mc:Ignorable="d">
+    <Grid>
+        <TabControl HorizontalContentAlignment="Left" TabStripPlacement="Left">
+            <TabItem Header="Sequence with components">
+                <StackPanel Margin="10">
+                    <mdxam:MarkdownScrollViewer xml:space="preserve" MarkdownStyleName="Sasabune">
+		                # Components, Tasks, Sequencer together
+                        Everything is explained in [this video](https://www.youtube.com/watch?v=yCUv2LW-6zo). This example uses the almost PLC code. Functionallity is similar.
+                
+                        Use the slider to adjust the speed of the simulation.
+                
+                        New step in sequence can result in automatic invoking of the `Restore`  method - so you don't have to.
+	        </mdxam:MarkdownScrollViewer>
+                    <Grid>
+                        <StackPanel>
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Diagnostic">
+                <StackPanel>
+                    <mdxam:MarkdownScrollViewer xml:space="preserve" MarkdownStyleName="Sasabune">
+		                # Diagnostics
+                        Everything is explained in [this video](https://www.youtube.com/watch?v=yCUv2LW-6zo). This example uses the almost PLC code. Functionallity is similar.
+                             
+                        Discover messaging system - select Diagnostic message type to see what's going on.
+                        Investigate, how components publish these messages.
+                       
+	                </mdxam:MarkdownScrollViewer>
+                    <Separator />
+                    <vortex:RenderableContentControl
+                        x:Name="DiagnosticView"
+                        DataContext="{Binding MAIN_PRG._TcOpenTutorial.Station001}"
+                        SizeChanged="OnRendered"
+                        PresentationType="Diagnostics" />
+                </StackPanel>
+
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoContextMessagingPerf" Id="{c6f5081f-eab3-028a-022e-e9b133fadbef}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContextMessagingPerf EXTENDS TcoContextTest
+VAR	
+	_lot_of_messages : ARRAY[0.._messagesUpperBound] OF TcoCore.TcoMessenger(THIS^);
+	_numberOfTestMessages : INT;	
+END_VAR
+
+
+
+VAR CONSTANT
+	_messagesUpperBound : INT := 10000;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{1723dcd5-c014-0e41-275d-6a3586a9cae5}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main
+VAR
+	index : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_numberOfTestMessages > _messagesUpperBound) THEN	
+	_numberOfTestMessages := _messagesUpperBound;
+END_IF
+
+
+FOR index := 0 TO _numberOfTestMessages DO
+	THIS^._lot_of_messages[index].Info(INT_TO_STRING(index));
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

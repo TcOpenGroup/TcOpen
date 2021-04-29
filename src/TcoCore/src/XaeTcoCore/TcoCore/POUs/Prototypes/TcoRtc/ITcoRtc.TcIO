@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoRtc" Id="{f54bc528-8fdb-0177-2acd-c304b580985d}">
+    <Declaration><![CDATA[INTERFACE ITcoRtc
+]]></Declaration>
+    <Property Name="IsSynchronized" Id="{e989db84-ead8-0485-3fa1-0445b66f52e3}">
+      <Declaration><![CDATA[PROPERTY IsSynchronized : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3e920a2d-2ced-0e9d-3fe9-fcd40847fa88}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="IsValid" Id="{66f4316f-7d87-0f76-192c-84fa99c1199a}">
+      <Declaration><![CDATA[PROPERTY IsValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{e955570d-c675-0800-0743-44e0674472d7}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="NowLocal" Id="{cb5c3e1b-5c35-049f-321a-41c43ce7891d}">
+      <Declaration><![CDATA[METHOD NowLocal : DATE_AND_TIME
+]]></Declaration>
+    </Method>
+    <Method Name="NowLocalAsTIMESTRUCT" Id="{faf62912-5ac6-0765-13dd-eae44285ed7f}">
+      <Declaration><![CDATA[METHOD NowLocalAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+]]></Declaration>
+    </Method>
+    <Method Name="NowUTC" Id="{66b88e73-4408-05c1-18eb-a65390fa484d}">
+      <Declaration><![CDATA[METHOD NowUTC : DATE_AND_TIME
+]]></Declaration>
+    </Method>
+    <Method Name="NowUTCAsTIMESTRUCT" Id="{f75b99b9-fb58-07f6-0e63-76fe2d08bada}">
+      <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+]]></Declaration>
+    </Method>
+    <Method Name="TickClock" Id="{317ccaa2-fed5-0818-37bf-03f24bf02b0d}">
+      <Declaration><![CDATA[METHOD TickClock : ULINT
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

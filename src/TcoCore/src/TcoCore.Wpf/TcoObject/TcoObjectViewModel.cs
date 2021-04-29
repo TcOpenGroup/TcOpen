@@ -22,7 +22,8 @@ namespace TcoCore
         private void Update()
         {
             Tasks = TcoObject.GetChildren<TcoTask>();
-            Children = TcoObject.GetChildren<TcoObject>(Tasks);
+            TcoObjectChildren = TcoObject.GetChildren<TcoObject>(Tasks);
+            DiagnosticsViewModel = new TcoDiagnosticsViewModel(this.TcoObject);
         }
 
         public TcoObject TcoObject { get; private set; }
@@ -45,7 +46,8 @@ namespace TcoCore
             }
         }
 
-        public IEnumerable<TcoObject> Children { get; private set; }
-       
+        public IEnumerable<TcoObject> TcoObjectChildren { get; private set; }
+
+        public TcoDiagnosticsViewModel DiagnosticsViewModel { get; private set; }
     }
 }

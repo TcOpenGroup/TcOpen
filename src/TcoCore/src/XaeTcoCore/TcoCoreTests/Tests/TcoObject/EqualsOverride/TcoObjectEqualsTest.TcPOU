@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoObjectEqualsTest" Id="{95fdb37c-6061-07da-0252-b29845f7825c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoObjectEqualsTest EXTENDS TcoCore.TcoObject
+VAR
+	_someNumber : INT;
+	_someString : STRING;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="EqualsTo" Id="{25ebe5f5-998c-0972-08b6-13a507a3c4f7}">
+      <Declaration><![CDATA[METHOD PUBLIC EqualsTo : BOOL
+VAR_INPUT
+	Object : ITcoObject;
+END_VAR
+
+VAR
+	_object : POINTER TO TcoObjectEqualsTest;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(__QUERYPOINTER(Object,  _object)) THEN
+	EqualsTo := _object^._someNumber = THIS^._someNumber AND _object^._someString = THIS^._someString;
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SomeNumber" Id="{d3dac4aa-994e-0f33-0e8b-69c000edb619}">
+      <Declaration><![CDATA[PROPERTY SomeNumber : INT]]></Declaration>
+      <Get Name="Get" Id="{d8dc5e21-4199-01af-2f1d-61e8d681824b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SomeNumber := _someNumber;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{4128da7d-65d5-0a2f-23ba-beceb619dc5d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_someNumber := SomeNumber;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="SomeString" Id="{60bdc7e9-443a-055d-05af-bc5b993e9510}">
+      <Declaration><![CDATA[PROPERTY SomeString : STRING]]></Declaration>
+      <Get Name="Get" Id="{4b0df5d1-9706-0d1a-1ebe-34fb209ab266}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SomeString := _someString;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a3a5d345-3fbb-093f-3b2e-fb9738048b57}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_someString := SomeString;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

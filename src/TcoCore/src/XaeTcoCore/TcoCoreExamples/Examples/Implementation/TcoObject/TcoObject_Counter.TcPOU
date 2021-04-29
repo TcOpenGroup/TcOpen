@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoObject_Counter" Id="{8201ce0d-b311-0ddf-1122-b5d49268db19}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoObject_Counter EXTENDS TcoCore.TcoObject
+VAR
+	CounterValue : LINT;
+	UpperLimit : LINT;
+	LowerLimit : LINT;
+	TcoTask_CountUp : TcoCore.TcoTask(THIS^);
+	TcoTask_CountDown : TcoCore.TcoTask(THIS^);
+	TcoTask_ResetToZero : TcoCore.TcoTask(THIS^);
+	CountUp_InvokeTrigCounter : LINT;
+	CountUp_DoneTrigCounter : LINT;
+	CountDown_InvokeTrigCounter : LINT;
+	CountDown_DoneTrigCounter : LINT;
+	ResetToZero_InvokeTrigCounter : LINT;
+	ResetToZero_DoneTrigCounter : LINT;
+	CountUp_PreviousState : TcoCore.eTaskState;
+	CountDown_PreviousState : TcoCore.eTaskState;
+	ResetToZero_PreviousState : TcoCore.eTaskState;
+	CountUp_Execute : BOOL;
+	CountDown_Execute : BOOL;
+	ResetToZero_Execute : BOOL;
+	CountUp_Busy : BOOL;
+	CountDown_Busy : BOOL;
+	ResetToZero_Busy : BOOL;
+	CountUp_Done : BOOL;
+	CountDown_Done : BOOL;
+	ResetToZero_Done : BOOL;
+	Cycle	:LINT ;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CountUp_Execute 	:= FALSE;
+CountDown_Execute 	:= FALSE;
+ResetToZero_Execute := FALSE;
+CountUp_Busy 		:= FALSE;
+CountDown_Busy 		:= FALSE;
+ResetToZero_Busy 	:= FALSE;
+CountUp_Done 		:= FALSE;
+CountDown_Done 		:= FALSE;
+ResetToZero_Done 	:= FALSE;
+	
+//******************************************************************
+IF(TcoTask_CountUp._taskState = eTaskState.Requested AND CountUp_PreviousState<> eTaskState.Requested ) THEN
+	CountUp_InvokeTrigCounter := CountUp_InvokeTrigCounter + 1;
+END_IF
+
+IF(TcoTask_CountUp.Execute()) THEN
+	CountUp_Busy 		:= TRUE;
+	CounterValue := CounterValue + 1;
+	TcoTask_CountUp.DoneWhen(CounterValue >= UpperLimit);			
+END_IF
+
+IF(TcoTask_CountUp._taskState = eTaskState.Done AND CountUp_PreviousState <> eTaskState.Done ) THEN
+	CountUp_DoneTrigCounter := CountUp_DoneTrigCounter + 1;
+END_IF
+CountUp_Done 		:= TcoTask_CountUp._taskState = eTaskState.Done;
+CountUp_PreviousState := TcoTask_CountUp._taskState ;
+//******************************************************************
+
+//******************************************************************
+IF(TcoTask_CountDown._taskState = eTaskState.Requested AND CountDown_PreviousState <> eTaskState.Requested) THEN
+	CountDown_InvokeTrigCounter := CountDown_InvokeTrigCounter + 1;
+END_IF
+
+IF(TcoTask_CountDown.Execute()) THEN
+	CountDown_Busy 		:= TRUE;
+	CounterValue := CounterValue - 1;
+	TcoTask_CountDown.DoneWhen(CounterValue <= LowerLimit);			
+END_IF
+
+IF(TcoTask_CountDown._taskState = eTaskState.Done AND CountDown_PreviousState <> eTaskState.Done) THEN
+	CountDown_DoneTrigCounter := CountDown_DoneTrigCounter + 1;
+	Cycle	:= Cycle +1 ;
+END_IF
+CountDown_Done 		:= TcoTask_CountDown._taskState = eTaskState.Done;
+CountDown_PreviousState := TcoTask_CountDown._taskState ;
+//******************************************************************
+
+//******************************************************************
+IF (TcoTask_ResetToZero._taskState = eTaskState.Requested AND ResetToZero_PreviousState <> eTaskState.Requested) THEN
+	ResetToZero_InvokeTrigCounter := ResetToZero_InvokeTrigCounter + 1;
+END_IF
+
+IF(TcoTask_ResetToZero.Execute()) THEN	
+	ResetToZero_Busy 	:= TRUE;
+	TcoTask_ResetToZero.DoneWhen(TRUE);	
+END_IF
+
+IF (TcoTask_ResetToZero._taskState = eTaskState.Done AND ResetToZero_PreviousState <> eTaskState.Done) THEN
+	ResetToZero_DoneTrigCounter := ResetToZero_DoneTrigCounter + 1;
+END_IF
+ResetToZero_Done 	:= TcoTask_ResetToZero._taskState = eTaskState.Done;
+ResetToZero_PreviousState := TcoTask_ResetToZero._taskState;
+//******************************************************************
+]]></ST>
+    </Implementation>
+    <Method Name="Restore" Id="{77909f52-664b-0a9b-3069-002d00db436c}">
+      <Declaration><![CDATA[METHOD Restore : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TcoTask_CountUp.Restore();
+TcoTask_CountDown.Restore();
+CounterValue := 0;
+
+ResetToZero_Execute := TRUE;
+
+THIS^.TcoTask_ResetToZero.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartCountDown" Id="{87e0121f-0cbf-035d-0e2c-a9b655b76fac}">
+      <Declaration><![CDATA[METHOD StartCountDown
+VAR_INPUT
+	Value : LINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.LowerLimit := Value;
+
+CountDown_Execute 	:= TRUE;
+
+TcoTask_CountDown.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartCountUp" Id="{35acff63-7968-0dc4-3f22-cba574dbb181}">
+      <Declaration><![CDATA[METHOD StartCountUp
+VAR_INPUT
+	Value : LINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.UpperLimit := Value;
+
+CountUp_Execute 	:= TRUE;
+
+TcoTask_CountUp.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

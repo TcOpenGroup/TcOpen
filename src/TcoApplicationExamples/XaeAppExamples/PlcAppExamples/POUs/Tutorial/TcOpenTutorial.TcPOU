@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcOpenTutorial" Id="{05284e7c-085c-0fc1-3da1-2c0f53b1a15c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcOpenTutorial EXTENDS TcoCore.TcoContext
+VAR
+	ColorExample : Color_Example;
+	
+	InvokingTasks : InvokingTasks;
+	
+	TaskExecution : TaskExecution;
+
+	Station001 : Station001;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Use Main method instead of this block.]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{5e01554d-4a2b-0408-1aeb-e4bf0f739acc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ColorExample.Run();
+InvokingTasks.Run();
+TaskExecution.Run();
+Station001.Run();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,31 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoContext" Id="{55d37a51-70a7-4749-9f28-95ccbcaee495}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoContext IMPLEMENTS ITcoContext
+    <Declaration><![CDATA[
+(*~
+	<docu>
+		<summary>
+			Root construction container, provides context information for <c>TcoObjects</c> declared within its scope.
+			This function block is ```abstract``` and cannot be instantiated. 
+			Use <see cref="TcoContext.PlcTcoContext.Run()"/> to run this context, ```Run``` method must be called only once per PLC Task cycle.
+			Several 'TcoContext' instances can be declared and called inside one TwinCAT PlcTask, but only once per PLC cycle. 
+			The instance should not be accessed from several Twincat PlcTasks.
+			Default implemenation of the 'TcoContext' allows its child members access properties <see cref="TcoContext.PlcTcoContext.StartCycleCount()"/> 
+			and <see cref="TcoContext.PlcTcoContext.EndCycleCount()"/>, messenger settings, rtc and other information related to the context of the running logic.			 			 			
+			<note type="tip">
+				 A <c>TcoContext</c> can contain objects, components and PLC logic of one independent station of the machine, 
+				 while the another one can cover the same for another station.			
+			</note>
+			<remarks>			
+				<note type="tip">
+					TwinCAT PlcTask and <see cref="TcoTask.PlcTcoTask()"/> refer to two different concepts. 
+				</note>
+			</remarks>
+		</summary>	
+		<example>
+			Declaration part of the 'TcoContext' example. 
+		</example>
+		<example>
+				[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
+		</example>
+		<example>
+			Implementation part of the 'TcoContext' example.
+		</example>
+		<example>
+				[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleCode)]
+		</example>
+	</docu>	
+~*)
+FUNCTION_BLOCK PUBLIC ABSTRACT TcoContext IMPLEMENTS ITcoContext
 VAR
+	(*~
+		<docu>
+			<summary>
+				Identity of this <c>TcoContext</c>.
+				This variable is used in the higher level applications, 
+				it allows to identify the context in SCADA like applications.	  
+			</summary>			
+		</docu>	
+	~*)
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
 	_Identity : ULINT;
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_startCycleCount : ULINT;
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_endCycleCount : ULINT;
-	{attribute 'hide'}
-	_Messenger : TcoMessenger(THIS^); 
-END_VAR
-
-]]></Declaration>
+	_messagingLevel : eMessageCategory;
+	{attribute clr [ReadOnly()]}
+	_rtc : TcoRtc;
+	{attribute clr [RenderIgnore()]}
+    _settings : TcoContextEnvironment;	
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Close" Id="{75878743-2aed-4461-9dcd-3dcede9d89a5}">
-      <Declaration><![CDATA[METHOD PROTECTED FINAL Close]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called implicitly at the entry point of this context (<see cref="TcoContext.PlcTcoContext.Run()"/>).
+			<remarks>			
+				<note type="important">
+					Do not call this method explicitly!
+				</note>
+			</remarks>
+		</summary>			
+	</docu>	
+~*)
+METHOD INTERNAL FINAL Close]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_endCycleCount := _startCycleCount;]]></ST>
+        <ST><![CDATA[_endCycleCount := _startCycleCount;
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{63063553-badc-4ce8-a8c6-8619f5f133f3}">
-      <Declaration><![CDATA[{attribute 'hide'}			//Needs to be here due to cyclical dependence
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns reference to this instance of the <see cref="TcoContext.PlcTcoContext()"/>.
+		</summary>			
+	</docu>	
+~*)
 PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{892fc39b-0726-4b20-b0e0-f4be7b7e4106}">
         <Declaration><![CDATA[VAR
@@ -37,13 +101,31 @@ END_VAR
       </Get>
     </Property>
     <Property Name="EndCycleCount" Id="{4bd5fb2b-81cd-4c36-8e15-26aba6b66c8a}">
-      <Declaration><![CDATA[PROPERTY EndCycleCount : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Gets the value of the counter incrememented by '1' at the end of each execution of this <see cref="TcoContext.PlcTcoContext()"/>.			
+		</summary>			
+	</docu>	
+~*)
+PROPERTY EndCycleCount : ULINT]]></Declaration>
       <Get Name="Get" Id="{095042f2-367c-44fe-aa5f-66cbd722b7e1}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[EndCycleCount := _endCycleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Environment" Id="{b26311d8-ac58-0fb2-3664-3d88502e5497}">
+      <Declaration><![CDATA[PROPERTY Environment : ITcoContextEnvironment]]></Declaration>
+      <Get Name="Get" Id="{0d0a9027-69a3-091e-3f34-9615f510e71b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Environment := _settings;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -55,11 +137,21 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Identity := ADR(THIS^);]]></ST>
+        <ST><![CDATA[_Identity := ADR(THIS^);
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{a551eec9-c5bd-4df5-9bc0-f8e8eaa3edde}">
-      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns the identity of this <see cref ="TcoContext.PlcTcoContext()"/>. 
+			This value is assigned when instantiated and cannot be changed at runtime.
+			This member is used in the higher level applications.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{af84927a-5c14-4bee-90d2-b1f9bf5c7a59}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -70,28 +162,167 @@ END_VAR
       </Get>
     </Property>
     <Method Name="Main" Id="{a4678500-dacf-4449-bf3c-2b4f4414d6a6}">
-      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT Main]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED ABSTRACT Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnEntry" Id="{48b3abea-36b3-0d8f-1718-3531af00fe19}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Called on entry into context. When overridden in derived class allows to execute an arbitrary logic prior to opening the context cycle.
+			<remarks>			
+				<note type="important">					
+					The method executes prior to opening the context. The context might not be properly initialized on first call. 
+					Any information contained in the context at this point are from the last execution.
+				</note>
+			</remarks>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnEntry
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnExit" Id="{cc3ded61-78cb-0c12-3071-9c305dc097e3}">
+      <Declaration><![CDATA[
+(*~
+	<docu>
+		<summary>
+			Called upon exit from the context. When overridden in derived class allows to execute an arbitrary logic after closing the context cycle.	
+		</summary>			
+	</docu>	
+~*)METHOD PROTECTED OnExit
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Open" Id="{d862846f-7f33-47b7-aa0a-9f3ebf516821}">
-      <Declaration><![CDATA[METHOD PROTECTED FINAL Open]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called implicitly at the entry point of this context (<see cref="TcoContext.PlcTcoContext.Run()"/>).
+			<remarks>			
+				<note type="important">
+					Do not call this method explicitly.
+				</note>
+			</remarks>
+		</summary>			
+	</docu>	
+~*)
+METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
-]]></ST>
+_rtc.Update();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Rtc" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">
+      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+      <Get Name="Get" Id="{2d224feb-78f3-050e-2237-96bc8473a6fe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Rtc := _rtc;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="RtcSynchronize" Id="{fdad5da4-2f47-075c-1134-913896442d7c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Syncronizes the Real Time Clock (RTC) from given source.
+			<remarks>			
+				<note type="important">
+					There is single RTC source for entire application. All context share the same RTC source.
+				</note>
+			</remarks>
+		</summary>			
+	</docu>	
+~*)
+METHOD RtcSynchronize  : REFERENCE TO TcoContext
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				When called with true the synchronization mechanism executes.		
+			</summary>			
+		</docu>	
+	~*)
+	inDoSynch				:	BOOL;
+	(*~
+		<docu>
+			<summary>
+				```AMS ID``` of the system against which RTC of this application will synchronize.			
+			</summary>			
+		</docu>	
+	~*)
+	inSyncAmsId				:	STRING;
+	(*~
+		<docu>
+			<summary>
+				Set the synchronisation period.		
+			</summary>			
+		</docu>	
+	~*)
+	inSyncPeriod			:	UINT; 
+END_VAR
+
+VAR
+	_RtcSynchParams			:	RtcSynchParams;			
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_RtcSynchParams.doSynch					:=	inDoSynch;
+_RtcSynchParams.syncAmsId				:=	inSyncAmsId;
+_RtcSynchParams.syncPeriod				:=	inSyncPeriod;
+_RtcSynchParams.synchContextIdentity	:=	THIS^._Identity;
+RtcPrg.Synchronize(_RtcSynchParams);
+RtcSynchronize REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL Run]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				This method executes of this context. It provided correct order of execution order of inner methods. Any logic of this context must be called within <see cref="TcoContext.PlcTcoContext.Main()"/>
+				method. This method is final, so it cannot be overriden. The <c>InstanceName.Run()</c> needs to be called cyclically.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL Run]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Open();
+        <ST><![CDATA[THIS^.OnEntry();
+THIS^.Open();
 THIS^.Main();
-THIS^.Close();]]></ST>
+THIS^.Close();
+THIS^.OnExit();
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="StartCycleCount" Id="{bfc0527d-ea91-4a81-9e56-7fd6b0f76c09}">
-      <Declaration><![CDATA[PROPERTY StartCycleCount : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Gets number of executions of this context. Value of this property is incremented by '1' at the beginning of the <see cref="TcoContext.PlcTcoContext()"/>. 			 			
+		</summary>			
+	</docu>	
+~*)
+PROPERTY StartCycleCount : ULINT]]></Declaration>
       <Get Name="Get" Id="{72057c13-7a51-41fe-9542-bf3438a07393}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -101,36 +332,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="TcoContext">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.Close">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.Context.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.EndCycleCount.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.FB_init">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.Identity.Get">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.Main">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.Open">
-      <LineId Id="6" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoContext.Run">
-      <LineId Id="6" Count="2" />
-    </LineIds>
-    <LineIds Name="TcoContext.StartCycleCount.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

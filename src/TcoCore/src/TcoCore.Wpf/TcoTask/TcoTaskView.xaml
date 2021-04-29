@@ -13,22 +13,24 @@
         <local:TcoTaskViewModel />
     </d:UserControl.DataContext>
     <Grid>
-        <GroupBox Header="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <vortex:RenderableContentControl DataContext="{Binding TcoTask._taskState}" PresentationType="Display"/>
-                <UniformGrid Grid.Row="1">
-                    <Button Command="{Binding ResetCommand}">
-                        <iconPacks:PackIconModern Kind="Reset" />
-                    </Button>
-                    <Button Command="{Binding InvokeCommand}">
-                        <iconPacks:PackIconEntypo Kind="ControllerPlay" />
-                    </Button>
-                </UniformGrid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}"></TextBlock>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Command="{Binding TcoTask}">
+                    <iconPacks:PackIconEntypo Kind="ControllerPlay" />
+                </Button>
+                <Button Grid.Column="1"  Command="{Binding RestoreCommand}">
+                    <iconPacks:PackIconModern Kind="Reset" />
+                </Button>
             </Grid>
-        </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>

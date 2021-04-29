@@ -11,15 +11,27 @@ namespace TcoCore
     {
         public TcoTaskViewModel()
         {
-            ResetCommand = new RelayCommand(a => this.TcoTask._taskState.Cyclic = (int)eTaskState.Idle);
-            InvokeCommand = new RelayCommand(a => this.TcoTask._taskState.Cyclic = (int)eTaskState.Request);
+            RestoreCommand = new RelayCommand(action => this.TcoTask._restoreRequest.Cyclic = true);
+            InvokeCommand = new RelayCommand(action => this.TcoTask._invokeRequest.Cyclic = true, canExecuteMethod => IsReady);
         }
 
         public TcoTask TcoTask { get; private set; }
 
         public override object Model { get => TcoTask; set => TcoTask = value as TcoTask; }
 
-        public RelayCommand ResetCommand { get; }
+        public RelayCommand RestoreCommand { get; }
         public RelayCommand InvokeCommand { get; }
+
+        private bool _isReady;
+
+        public bool IsReady
+        {
+            get
+            {
+                _isReady = TcoTask?._taskState?.Synchron == (short)eTaskState.Ready;
+                return _isReady;
+            }
+
+        }
     }
 }

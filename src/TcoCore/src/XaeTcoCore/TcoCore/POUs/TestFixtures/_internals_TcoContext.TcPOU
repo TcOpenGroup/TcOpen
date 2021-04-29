@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="_internals_TcoContext" Id="{0c059046-c7d3-0372-268c-dca3da778e0c}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'hide'}
+{attribute clr [ExcludeFromApiDocumentation()]}
+FUNCTION_BLOCK ABSTRACT _internals_TcoContext EXTENDS TcoContext
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="_Close" Id="{e2e1d492-d989-0bc8-0108-b8347f5c2d4e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Close
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_GetSynchParams" Id="{e3cf5488-c586-0883-2979-a24e3d4feb8c}">
+      <Declaration><![CDATA[METHOD _GetSynchParams : RtcSynchParams
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_GetSynchParams := RtcPrg._RtcSynchParams;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_Open" Id="{d83dfe53-3a8f-0733-3457-8d9db7cfe99c}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Open
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Open();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_rtcUpdate" Id="{cb574abf-9f5d-03d2-0459-a21349c4ee2b}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _rtcUpdate
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._rtc.Update();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

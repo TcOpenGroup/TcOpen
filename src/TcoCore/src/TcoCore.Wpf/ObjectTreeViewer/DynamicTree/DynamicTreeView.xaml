@@ -1,0 +1,50 @@
+﻿<UserControl
+    x:Class="Tco.Wpf.DynamicTreeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cn="clr-namespace:Vortex.Connector;assembly=Vortex.Connector"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vortex="http://vortex.mts/xaml"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="{DynamicResource Background}"
+    DataContextChanged="UserControl_DataContextChanged"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DataTemplates/ValueTag.xaml" />
+                <ResourceDictionary Source="DataTemplates/Array.xaml" />
+                <ResourceDictionary Source="DataTemplates/VortexObjectDataTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="10" Style="{DynamicResource Card}">
+        <TabControl>
+            <TabItem Header="Variable tree">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <TreeView
+                            x:Name="tv"
+                            Margin="5"
+                            ItemTemplateSelector="{StaticResource ChildDataTemplateSelector}"
+                            ItemsSource="{Binding Children}"
+                            SelectedItemChanged="tv_SelectedItemChanged"
+                            VirtualizingStackPanel.IsVirtualizing="True"
+                            VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

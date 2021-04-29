@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <PackageId>TcOpen.Tc.Prober</PackageId>
+    <Authors>petok</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/TcOpenGroup/tc.prober</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TcOpenGroup/tc.prober</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>   
+    <PackageVersion>$(InformationalVersion)</PackageVersion>
+    <Version>$(InformationalVersion)</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Library for unit testing TwinCAT3 Plc code.</Description>
+    <Copyright>TcOpenGroup contributors</Copyright>
+    <PackageIcon>TcOpenLogo128.png</PackageIcon>
+    <PackageTags>twincat3 plc unit-testing</PackageTags>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.10.0-nightly.415" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TcOpenLogo128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+</Project>

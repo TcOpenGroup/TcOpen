@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Kill_Task" Id="{ee1ec45a-904c-096c-0660-d83fc9738a9d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Kill_Task EXTENDS TcoCore.TcoTask
+VAR_INPUT
+	_Object2bKilled	:	REFERENCE TO Horse_Object;
+	_Killer			:	REFERENCE TO Killer_Object;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN
+	Kill(_Object2bKilled);
+
+	DoneWhen(NOT _Object2bKilled.IsAlive);
+	
+	ThrowWhen(NOT _Killer.IsAlive AND  _Object2bKilled.IsAlive);
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="Kill" Id="{7047819d-f17c-0842-2ef0-5f3d6ba4af79}">
+      <Declaration><![CDATA[METHOD Kill
+VAR_INPUT
+	_Object2bKilled		:	REFERENCE TO Horse_Object;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Object2bKilled.IsAlive := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
