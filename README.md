@@ -60,7 +60,7 @@ We have also decided to work in a [monorepo](https://en.wikipedia.org/wiki/Monor
 
 ## The role of Inxton.Vortex.Framework (IVF)
 
-IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. Some libraries of IVF are commercial. However, there is no need for TcOpen developers to purchase any license for this project. The contributors can acquire the free developer license here [inxton.com/register] or drop an email to team@inxton.com.
+IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. Some libraries of IVF are commercial. However, there is no need for TcOpen developers to purchase any license for this project. The contributors can acquire the free developer license [here](https://inxton.com/register) or drop an email to team@inxton.com.
 
 All PLC libraries developed in TcOpen are under MIT license. [MIT](https://tldrlegal.com/license/mit-license) gives you the freedom to use, modify, sublicense, redistribute the libraries freely for private and commercial use.
 
