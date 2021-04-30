@@ -7,10 +7,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
-  <ItemGroup>        
-    <PackageReference Include="MahApps.Metro" Version="2.4.5" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\TcoCoreExamplesConnector\TcoCoreExamplesConnector.csproj" />
