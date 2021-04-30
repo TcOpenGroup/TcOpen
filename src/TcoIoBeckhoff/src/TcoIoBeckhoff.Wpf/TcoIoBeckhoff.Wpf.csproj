@@ -14,11 +14,12 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
     <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
-    <PackageProjectUrl>https://tcopengroup.github.io/TcOpen.Documentation/</PackageProjectUrl>
+    <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.10.0-nightly.415" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.10.0-nightly.436" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
   </ItemGroup>
 
