@@ -39,7 +39,13 @@ namespace TcoCore
 
         public void Execute(object parameter)
         {
-            this._invokeRequest.Synchron = true;
+            if (this._taskState.Synchron == (short)(eTaskState.Done))
+            {
+                this._restoreRequest.Synchron = true;
+                System.Threading.Thread.Sleep(50);
+            }
+            
+            this._invokeRequest.Cyclic = true;
         }
     }
 }

@@ -20,9 +20,9 @@ namespace TcoCore
     /// <summary>
     /// Interaction logic for TcoTask.xaml
     /// </summary>
-    public partial class TcoObjectView : UserControl
+    public partial class TcoObjectControlView : UserControl
     {
-        public TcoObjectView()
+        public TcoObjectControlView()
         {
             InitializeComponent();
         }

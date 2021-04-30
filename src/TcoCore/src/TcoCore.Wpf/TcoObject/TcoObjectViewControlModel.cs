@@ -12,9 +12,9 @@ using System.Windows;
 
 namespace TcoCore
 {
-    public class TcoObjectViewModel : RenderableViewModel
+    public class TcoObjectViewControlModel : RenderableViewModel
     {
-        public TcoObjectViewModel()
+        public TcoObjectViewControlModel()
         {
             
         }
