@@ -40,9 +40,9 @@ We understand that many of you guys have hard times at work, a lot of late hours
 
 There has been much activity without visible tracking in recent times. We are developing a set of base classes to help us craft components and projects in industrial automation. Most of the discussions were in pair-programming and online/in-person meetings. We did it this way to speed up initial development when transferring legacy libraries and concepts to TcOpen.
 
-[Here](https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/TcOpenFramework/application.md) is a conceptual description of the work done so far.
+[Here](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html) is a conceptual description of the work done so far.
 
-[Here](https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/Conventions/Conventions.md) is the document describing conventions to adhere to.
+[Here](https://docs.tcopengroup.org/articles/Conventions/Conventions.html) is the document describing conventions to adhere to.
 
 ## Workflow (modified GitHub flow)
 
@@ -60,7 +60,7 @@ We have also decided to work in a [monorepo](https://en.wikipedia.org/wiki/Monor
 
 ## The role of Inxton.Vortex.Framework (IVF)
 
-IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. Some libraries of IVF are commercial. However, there is no need for TcOpen developers to purchase any license for this project. The contributors can acquire the free developer license here [inxton.com/register] or drop an email to team@inxton.com.
+IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. Some libraries of IVF are commercial. However, there is no need for TcOpen developers to purchase any license for this project. The contributors can acquire the free developer license [here](https://inxton.com/register) or drop an email to team@inxton.com.
 
 All PLC libraries developed in TcOpen are under MIT license. [MIT](https://tldrlegal.com/license/mit-license) gives you the freedom to use, modify, sublicense, redistribute the libraries freely for private and commercial use.
 
