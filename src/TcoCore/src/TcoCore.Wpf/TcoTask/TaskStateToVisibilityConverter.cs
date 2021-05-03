@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
+using Vortex.Presentation.Wpf.Converters;
 
 namespace TcoCore
 {

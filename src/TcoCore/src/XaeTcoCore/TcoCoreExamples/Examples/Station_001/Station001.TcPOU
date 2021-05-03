@@ -3,7 +3,10 @@
   <POU Name="Station001" Id="{52997647-59b7-0080-2171-dd40855e4ef4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoContext
 VAR
+	LongRunningTask : TcoCore.TcoTask(THIS^);
+	i :int;
 	_components : Station001_Components(THIS^);
+	
 	_sequence : Station001_Sequencer(THIS^, eRestoreMode.None, _components);
 END_VAR
 
@@ -27,7 +30,13 @@ METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequence.Run();
 
-]]></ST>
+IF(LongRunningTask.Execute()) THEN
+	i:= i+1;
+	IF(i MOD 2000 = 0)THEN
+		i:=1;
+		LongRunningTask.DoneWhen(TRUE);
+	END_IF
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>
