@@ -3,12 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TcoCore.Sandbox.Wpf"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"   
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
-    xmlns:vortex="http://vortex.mts/xaml" 
-    xmlns:sandbox1="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox;assembly=TcoCore.Wpf" 
     xmlns:inxton="http://inxton.mts/xaml"
+    xmlns:local="clr-namespace:TcoCore.Sandbox.Wpf"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sandbox1="clr-namespace:inxton.vortex.framework.dynamictreeview.wpf.sandbox;assembly=TcoCore.Wpf"
+    xmlns:vortex="http://vortex.mts/xaml"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -18,7 +18,11 @@
         <TabControl>
             <TabItem Header="Object tree">
                 <ScrollViewer>
-                    <inxton:DynamicTreeView DataContext="{Binding MANIPULATOR, Mode=OneWay}" />
+                    <UniformGrid>
+                        <inxton:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN._station001, Mode=OneWay}" />
+
+                        <inxton:ObservableContentControl DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}" PresentationType="Base" />
+                    </UniformGrid>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Context-Rendered">
@@ -38,8 +42,8 @@
                     <materialDesign:Card
                         Grid.Row="0"
                         Margin="5"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                        Padding="3">
+                        Padding="3"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <GroupBox Header="Current step info">
                             <Grid Grid.IsSharedSizeScope="true">
                                 <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._sequence._currentStep}" PresentationType="DisplaySlim" />
@@ -49,8 +53,8 @@
                     <materialDesign:Card
                         Grid.Row="1"
                         Margin="5"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                        Padding="3">
+                        Padding="3"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <GroupBox Header="Sequencer step-by step controller">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
                                 <StackPanel>
@@ -64,35 +68,47 @@
                                         IsChecked="{Binding MAIN._station001._sequence._modeController._DisableStepSkipping.Cyclic}" />
                                 </StackPanel>
 
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._changeMode}" Content="Change mode"/>
+                                <Button
+                                    Margin="3"
+                                    Command="{Binding MAIN._station001._sequence._modeController._changeMode}"
+                                    Content="Change mode" />
                                 <WrapPanel Margin="10" HorizontalAlignment="Center">
-                                    <TextBlock Text="Mode "/>
-                                    <TextBox Text="{Binding MAIN._station001._sequence._modeController._mode.Cyclic}"/> 
+                                    <TextBlock Text="Mode " />
+                                    <TextBox Text="{Binding MAIN._station001._sequence._modeController._mode.Cyclic}" />
                                 </WrapPanel>
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._stepBackward}" Content="Step --"/>
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._stepIn}" Content="Step In"/>
-                                <Button Margin="3" Command="{Binding MAIN._station001._sequence._modeController._stepForward}" Content="Step ++"/>
+                                <Button
+                                    Margin="3"
+                                    Command="{Binding MAIN._station001._sequence._modeController._stepBackward}"
+                                    Content="Step --" />
+                                <Button
+                                    Margin="3"
+                                    Command="{Binding MAIN._station001._sequence._modeController._stepIn}"
+                                    Content="Step In" />
+                                <Button
+                                    Margin="3"
+                                    Command="{Binding MAIN._station001._sequence._modeController._stepForward}"
+                                    Content="Step ++" />
                             </WrapPanel>
                         </GroupBox>
                     </materialDesign:Card>
                     <materialDesign:Card
                         Grid.Row="2"
                         Margin="5"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                        Padding="3">
+                        Padding="3"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <GroupBox Header="Sequencer counters">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
                                 <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._onStateChangeCount}">
-                                    <TextBlock Text="{Binding AttributeName}"/>
-                                    <TextBlock Text="{Binding Cyclic}"/>
+                                    <TextBlock Text="{Binding AttributeName}" />
+                                    <TextBlock Text="{Binding Cyclic}" />
                                 </StackPanel>
                                 <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._sequenceCompleteCount}">
-                                    <TextBlock Text="{Binding AttributeName}"/>
-                                    <TextBlock Text="{Binding Cyclic}"/>
+                                    <TextBlock Text="{Binding AttributeName}" />
+                                    <TextBlock Text="{Binding Cyclic}" />
                                 </StackPanel>
                                 <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._stepsPerSequence}">
-                                    <TextBlock Text="{Binding AttributeName}"/>
-                                    <TextBlock Text="{Binding Cyclic}"/>
+                                    <TextBlock Text="{Binding AttributeName}" />
+                                    <TextBlock Text="{Binding Cyclic}" />
                                 </StackPanel>
                             </WrapPanel>
                         </GroupBox>
@@ -100,20 +116,23 @@
                     <materialDesign:Card
                         Grid.Row="3"
                         Margin="5"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                        Padding="2">
+                        Padding="2"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <GroupBox Grid.Row="2" Header="Simulation delay">
                             <Slider
-                                Value="{Binding MAIN._station001._components._simTimerValue.Cyclic}"
                                 Maximum="5000"
                                 Minimum="50"
                                 Style="{StaticResource MaterialDesignDiscreteSlider}"
                                 TickFrequency="50"
-                                TickPlacement="TopLeft" />
+                                TickPlacement="TopLeft"
+                                Value="{Binding MAIN._station001._components._simTimerValue.Cyclic}" />
                         </GroupBox>
                     </materialDesign:Card>
 
-                    <CheckBox Grid.Row="4" IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}" Content="Simulate failed to load"/>
+                    <CheckBox
+                        Grid.Row="4"
+                        Content="Simulate failed to load"
+                        IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}" />
                     <materialDesign:Card Grid.Row="5">
                         <StackPanel>
                             <Expander HorizontalAlignment="Stretch" Header="Messages">
@@ -121,7 +140,7 @@
                                     Margin="24,8,24,16"
                                     Orientation="Vertical"
                                     TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                    <inxton:TcoDiagnosticsView x:Name="DiagnosticsView"  />
+                                    <inxton:TcoDiagnosticsView x:Name="DiagnosticsView" />
                                     <TextBlock Style="{DynamicResource HorizontalExpanderContentTextBlock}" />
                                 </StackPanel>
                             </Expander>

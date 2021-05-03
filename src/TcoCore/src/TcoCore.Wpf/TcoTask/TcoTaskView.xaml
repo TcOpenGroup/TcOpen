@@ -6,10 +6,7 @@
     xmlns:local="clr-namespace:TcoCore"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vortex="http://vortex.mts/xaml"
-    mc:Ignorable="d"
-    d:DesignHeight="450"
-    d:DesignWidth="800">
+    mc:Ignorable="d">
     <UserControl.Resources>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
@@ -17,53 +14,21 @@
         <local:TcoTaskViewModel />
     </d:UserControl.DataContext>
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80*" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Button Grid.Column="0" Command="{Binding TcoTask}">
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MaxWidth="200" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
-                            Grid.Column="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}"
-                            TextWrapping="WrapWithOverflow" />
-                        <materialDesign:PackIcon
-                            Grid.Column="1"
-                            Margin="10"
-                            Kind="Play" />
-                        <ProgressBar
-                            Grid.Column="1"
-                            Margin="0,0,0,0"
-                            Value="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToProgressConverter}}"
-                            Foreground="{DynamicResource Background}"
-                            IsIndeterminate="{Binding TcoTask._taskState.Cyclic,Converter={local:TaskStateToBoolConverter}}"
-                            Style="{StaticResource MaterialDesignCircularProgressBar}" />
-                    </Grid>
-                </Button>
-                <Button Grid.Column="1" Command="{Binding RestoreCommand}">
-                    <materialDesign:PackIcon Kind="RestoreAlert" />
-                </Button>
-                <Button Grid.Column="2" Command="{Binding RestoreCommand}">
-                    <materialDesign:PackIcon Kind="DotsHorizontal" />
-                </Button>
-            </Grid>
-        </Grid>
+        <Button
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToBoolConverter}}"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Command="{Binding TcoTask}"
+            Content="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}"
+            Style="{StaticResource MaterialDesignRaisedButton}" />
+        <Button
+            Padding="10,0,10,0"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            Command="{Binding TcoTask.Abort}"
+            Style="{StaticResource MaterialDesignToolButton}"
+            Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:VisibleOnTaskState}, ConverterParameter=Requested-Busy}">
+            <materialDesign:PackIcon Padding="14" Kind="CancelCircle" />
+        </Button>
     </Grid>
 </UserControl>
