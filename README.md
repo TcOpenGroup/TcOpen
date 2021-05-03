@@ -182,6 +182,7 @@ We do not adopt any document describing conduct at this point. However, there ar
 1. Treat others as you would like others to treat you
 1. Everyone is free to express his/her ideas.
 1. Truth is more important than kindness, but be kind.
+1. Your contributions are under MIT license. 
 
 
 ## Contributions? Suggestions? Issues?
