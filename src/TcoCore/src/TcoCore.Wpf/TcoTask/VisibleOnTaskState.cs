@@ -15,13 +15,21 @@ namespace TcoCore
 
         public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var visibleStates = parameter.ToString().Split('-').Select(x=>x.ToLower()).ToList();
-            var taskState = (eTaskState)((short)value);
-            string enumName = taskState.ToString().ToLower();
-            if (visibleStates.Contains(enumName))
+            try
+            {
+                var visibleStates = parameter.ToString().Split('-').Select(x => x.ToLower()).ToList();
+                var taskState = (eTaskState)((short)value);
+                string enumName = taskState.ToString().ToLower();
+                if (visibleStates.Contains(enumName))
+                    return Visibility.Visible;
+                else
+                    return Visibility.Collapsed;
+            }
+            catch
+            {
+                //swallow
                 return Visibility.Visible;
-            else
-                return Visibility.Collapsed;
+            }
         }
     }
 }
