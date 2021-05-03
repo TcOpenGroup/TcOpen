@@ -1,0 +1,41 @@
+﻿<Window
+    x:Class="Sandbox.PlcTemplate.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Sandbox.PlcTemplate.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vortex="http://vortex.mts/xaml"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <UniformGrid
+        Columns="2"
+        DataContext="{Binding PlcTemplatePlc.MAIN._unitTestExample, Mode=OneWay}"
+        Rows="3">
+        <GroupBox Header="Manual">
+            <vortex:RenderableContentControl PresentationType="Manual" />
+        </GroupBox>
+        <GroupBox Header="Manual">
+            <vortex:RenderableContentControl IsEnabled="False" PresentationType="Manual" />
+        </GroupBox>
+        <GroupBox Header="Control">
+            <vortex:RenderableContentControl PresentationType="Control" />
+        </GroupBox>
+        <GroupBox Header="Display">
+            <vortex:RenderableContentControl PresentationType="Display" />
+        </GroupBox>
+        <GroupBox Header="ControlSlim">
+            <vortex:RenderableContentControl PresentationType="ControlSlim" />
+        </GroupBox>
+        <GroupBox Header="DisplaySlim">
+            <Grid IsSharedSizeScope="true">
+                <vortex:RenderableContentControl PresentationType="DisplaySlim" />
+            </Grid>
+        </GroupBox>
+    </UniformGrid>
+</Window>
