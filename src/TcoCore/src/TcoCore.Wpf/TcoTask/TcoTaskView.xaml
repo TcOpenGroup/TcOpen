@@ -3,15 +3,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:local="clr-namespace:TcoCore"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
     <UserControl.Resources>
-        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <d:UserControl.DataContext>
         <local:TcoTaskViewModel />
@@ -24,12 +24,13 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80*" />
-                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Button Grid.Column="0" Command="{Binding TcoTask}">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -43,16 +44,24 @@
                             VerticalAlignment="Center"
                             Text="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}"
                             TextWrapping="WrapWithOverflow" />
-                        <materialDesign:PackIcon 
+                        <materialDesign:PackIcon
                             Grid.Column="1"
+                            Margin="10"
                             Kind="Play" />
+                        <ProgressBar
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Value="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToProgressConverter}}"
+                            Foreground="{DynamicResource Background}"
+                            IsIndeterminate="{Binding TcoTask._taskState.Cyclic,Converter={local:TaskStateToBoolConverter}}"
+                            Style="{StaticResource MaterialDesignCircularProgressBar}" />
                     </Grid>
                 </Button>
-                <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" 
-                             Value="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToProgressConverter}}" 
-                             IsIndeterminate="{Binding TcoTask._taskState.Cyclic,Converter={local:TaskStateToBoolConverter}}" Margin="0,5,0,0"/>
                 <Button Grid.Column="1" Command="{Binding RestoreCommand}">
                     <materialDesign:PackIcon Kind="RestoreAlert" />
+                </Button>
+                <Button Grid.Column="2" Command="{Binding RestoreCommand}">
+                    <materialDesign:PackIcon Kind="DotsHorizontal" />
                 </Button>
             </Grid>
         </Grid>
