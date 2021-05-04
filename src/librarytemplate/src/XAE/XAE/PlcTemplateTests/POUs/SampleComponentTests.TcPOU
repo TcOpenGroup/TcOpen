@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="SampleComponentTests" Id="{8e88c5fb-6b37-0ee0-1dee-44bcdb0de8e4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SampleComponentTests EXTENDS _internals_TcoContext
+VAR
+	_sut : PlcTemplate.SampleComponent(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="AddTwoNumbersTest" Id="{e347ef7e-bfc9-0b26-39ae-1647a56bdbbd}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL AddTwoNumbersTest : INT
+VAR_INPUT
+	NumberOne : INT;
+	NumberTwo : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AddTwoNumbersTest := _sut.AddTwoNumbers(NumberOne, NumberTwo);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{2386eb08-ae25-07fa-0ae2-18bdce87e272}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WaitForModuloTest" Id="{a3e90fc3-609f-0e44-0b13-6aae397ca99c}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL WaitForModuloTest : BOOL
+VAR_INPUT
+	Modulo : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[WaitForModuloTest := _sut.WaitForModulo(Modulo);
+	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
