@@ -50,9 +50,9 @@ Write-Host 'Replacing file content ' $files.Count
 foreach ($file in $files)
 {
         
-    if($file.DirectoryName.Contains("bin") -or $file.DirectoryName.Contains("obj"))
+    if($file.DirectoryName.Contains("\bin\") -or $file.DirectoryName.Contains("\obj\"))
     {
-        break;
+        continue;
     }
 
     $fileContent = Get-Content -Path $file.FullName
