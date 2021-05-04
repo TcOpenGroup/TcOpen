@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoDigitalSensor" Id="{940ec0d0-0377-0ad5-2841-be1fc78a02da}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalSensor EXTENDS TcoCore.TcoComponent
+VAR_INPUT
+	Signal : BOOL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{ab66c675-5325-0f32-2184-6fc98948f748}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsFalse" Id="{48e6cf82-019c-09fc-0b62-4318a8025ee4}">
+      <Declaration><![CDATA[PROPERTY IsFalse : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c23c2e72-5cf6-0203-23ee-9d8001c6afd4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsFalse := NOT Signal;
+Messenger.Info('Expecting `negative` signal');]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsTrue" Id="{c588e641-6ea7-04c2-2aae-c7227089c8ae}">
+      <Declaration><![CDATA[PROPERTY IsTrue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2089a10e-bba5-06e8-1e33-1a25b4fcfa09}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsTrue := Signal;
+Messenger.Info('Expecting `positive` signal');]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{19478393-8665-053e-2aa6-99986ee029e0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{27fb8047-ad11-0e35-19c9-b36842b34792}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
