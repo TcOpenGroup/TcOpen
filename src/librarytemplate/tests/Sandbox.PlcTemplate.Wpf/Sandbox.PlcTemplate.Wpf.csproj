@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup> 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wpf\PlcTemplate.Wpf\PlcTemplate.Wpf.csproj" />

@@ -3,7 +3,7 @@
   <POU Name="InvokingTasks" Id="{12cfae65-b95f-0775-1a26-802c03070a44}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK InvokingTasks EXTENDS TcoCore.TcoContext
 VAR
-	Cylinder : TcoPneumatics.fbCylinder(THIS^);
+	Cylinder : TcoPneumatics.Cylinder(THIS^);
 	
 	TriggerHome : BOOL;
 	TriggerWork : BOOL;
