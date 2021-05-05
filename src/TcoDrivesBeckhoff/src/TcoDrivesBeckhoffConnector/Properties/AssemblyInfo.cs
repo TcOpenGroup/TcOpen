@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // In SDK-style projects such as this one, several assembly attributes that were historically
@@ -17,6 +17,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("492d93ed-1fd5-4398-b8b2-a9d32496a030")]
 
-[assembly: AssemblyVersion("0.4.0.217")]
-[assembly: AssemblyFileVersion("0.4.0.217")]
-[assembly: AssemblyInformationalVersion("0.4.0-init-dev.1+217.Branch.init-dev.Sha.8106cc8e723ce3612a1d08c4766c322c45e6cfeb")]
+[assembly: AssemblyVersion("0.4.1.0")]
+[assembly: AssemblyFileVersion("0.4.1.0")]
+[assembly: AssemblyInformationalVersion("0.4.1-PR41.363+Branch.PR41.Sha.2ba76c93235f492b34bb272fefcf95d69191bdcc")]
