@@ -23,6 +23,7 @@ namespace Sandbox.TcoElements.Wpf
         public MainWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
