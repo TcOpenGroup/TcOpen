@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace TcoDrivesBeckhoffTests
 {
-    public partial interface ITestTcoDriveSimpleTestContext
+    public partial class TcoDrivesBeckhoffContext : ITestTcoDrivesBeckhoffContext
     {
-        void ContextOpen();
-        void ContextClose();
-
     }
-
 }

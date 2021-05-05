@@ -6,19 +6,19 @@ namespace TcoDrivesBeckhoffUnitTests
     public static class TestRunners
     {
 
-        public static void AddEmptyCycle(this ITestTcoDriveSimpleTestContext context)
+        public static void AddEmptyCycle(this ITestTcoDrivesBeckhoffContext context)
         {
             context.ContextOpen();
             context.ContextClose();
         }
 
-        public static void SingleCycleRun(this ITestTcoDriveSimpleTestContext context, Action action)
+        public static void SingleCycleRun(this ITestTcoDrivesBeckhoffContext context, Action action)
         {
             context.ContextOpen();
             action();
             context.ContextClose();
         }
-        public static void MultipleCycleRun(this ITestTcoDriveSimpleTestContext context, Action action, ushort cycles)
+        public static void MultipleCycleRun(this ITestTcoDrivesBeckhoffContext context, Action action, ushort cycles)
         {
             ushort i = 0;
             while(i < cycles)
@@ -30,7 +30,7 @@ namespace TcoDrivesBeckhoffUnitTests
             }
         }
 
-        public static void RunUntilEndConditionIsMet(this ITestTcoDriveSimpleTestContext context, Action action, Func<bool> endCondition)
+        public static void RunUntilEndConditionIsMet(this ITestTcoDrivesBeckhoffContext context, Action action, Func<bool> endCondition)
         {
             while (!endCondition())
             {
@@ -40,7 +40,7 @@ namespace TcoDrivesBeckhoffUnitTests
             }
         }
 
-        public static void RunUntilActionDone(this ITestTcoDriveSimpleTestContext context, Func<bool> action)
+        public static void RunUntilActionDone(this ITestTcoDrivesBeckhoffContext context, Func<bool> action)
         {
             bool actionDone = false;
             while (!actionDone)
