@@ -9,6 +9,17 @@ namespace TcoPneumaticsTests
 {
     public class Entry
     {
-        public static TcoPneumaticsTestsTwinController TcoPneumaticsTestsPlc { get; } = new TcoPneumaticsTestsTwinController(Tc3ConnectorAdapter.Create("172.20.10.2.1.1",852, true));        
+#if SET_ENV_VAR
+        static Entry()
+        {
+            Environment.SetEnvironmentVariable("Tc3Target", YOUR_TARGER_SYSTEM AMS_ID);
+        }
+#endif
+        
+        static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
+        static int TargetAmsPort = 852;
+
+        public static TcoPneumaticsTestsTwinController TcoPneumaticsTestsPlc { get; }
+            = new TcoPneumaticsTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
     }
 }

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Tc2MC2_TO_Tco_EncRefMode" Id="{d55d90b5-d8ec-075a-11fb-2ada7659c257}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tc2MC2_TO_Tco_EncRefMode : BOOL
+VAR_INPUT
+	Tc2MC2EncRef:	Tc2_MC2.E_EncoderReferenceMode;
+END_VAR
+VAR_IN_OUT
+	TcoEncRef	:	eEncoderReferenceMode;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE TcoEncRef OF
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_PLCCAM :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_PLCCAM;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARESYNC :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARESYNC;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHPOS :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHPOS;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHNEG :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHNEG;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_SOFTWARESYNC :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_SOFTWARESYNC;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHPOS :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHPOS;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHNEG :
+		TcoEncRef	:=	eEncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHNEG;
+		Tc2MC2_TO_Tco_EncRefMode	:= TRUE;
+
+	ELSE
+		Tc2MC2_TO_Tco_EncRefMode := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

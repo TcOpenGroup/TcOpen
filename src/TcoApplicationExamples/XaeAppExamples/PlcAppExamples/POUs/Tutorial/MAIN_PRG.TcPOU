@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MAIN_PRG" Id="{cb90af5d-f0ec-4337-9183-9e58e9e11014}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN_PRG
+VAR
+	_pneuMan : ST_01_Context;
+	_donCorleone : VitoCorleone_Context;
+	_Jack_Woltz	:	Woltz_Object(_Jack_Woltz);
+	_TcOpenTutorial : TcOpenTutorial;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_pneuMan.Run();
+_donCorleone.Run();
+_TcOpenTutorial.Run();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

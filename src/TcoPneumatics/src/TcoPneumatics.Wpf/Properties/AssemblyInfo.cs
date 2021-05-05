@@ -12,6 +12,6 @@ using Vortex.Presentation.Wpf;
 )]
 
 [assembly:RenderableAssembly]
-[assembly: AssemblyVersion("0.4.0.0")]
-[assembly: AssemblyFileVersion("0.4.0.0")]
-[assembly: AssemblyInformationalVersion("0.4.0-initial-dev.341+Branch.initial-dev.Sha.233d6850ee98d063ab8b321384facf343e02377d")]
+[assembly: AssemblyVersion("0.4.1.0")]
+[assembly: AssemblyFileVersion("0.4.1.0")]
+[assembly: AssemblyInformationalVersion("0.4.1-PR41.363+Branch.PR41.Sha.2ba76c93235f492b34bb272fefcf95d69191bdcc")]
