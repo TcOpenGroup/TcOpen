@@ -1,13 +1,6 @@
-using TcoElements;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Vortex.Connector;
-using Vortex.Connector.ValueTypes;
-using System.Linq;
 
 namespace Sandbox.TcoElements.Wpf
-{    
+{
     public class MainWindowViewModel 
     {
         public MainWindowViewModel()
@@ -15,6 +8,6 @@ namespace Sandbox.TcoElements.Wpf
         
         }
         
-        public TcoElementsTwinController TcoElementsPlc { get; } = Entry.TcoElementsPlc;       
+        public TcoElementsTests.TcoElementsTestsTwinController TcoElementsTestsPlc { get; } = TcoElementsTests.Entry.TcoElementsTests;
     }
 }

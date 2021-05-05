@@ -17,7 +17,8 @@ namespace Sandbox.TcoElements.Wpf
         public App()
         {
             TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
-            Entry.TcoElementsPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+            TcoElementsTests.Entry.TcoElementsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+            //Entry.TcoElementsPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
         }
     }
 }
