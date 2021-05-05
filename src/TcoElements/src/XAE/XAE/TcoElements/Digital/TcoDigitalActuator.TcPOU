@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcoDigitalSensor" Id="{940ec0d0-0377-0ad5-2841-be1fc78a02da}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalSensor EXTENDS TcoCore.TcoComponent
+  <POU Name="TcoDigitalActuator" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalActuator EXTENDS TcoCore.TcoComponent
 VAR_IN_OUT
 	inoSignal : BOOL;
 END_VAR
@@ -14,7 +14,7 @@ END_VAR]]></Declaration>
       <ST><![CDATA[_signal := inoSignal;
 _adr := ADR(inoSignal);]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{ab66c675-5325-0f32-2184-6fc98948f748}">
+    <Method Name="FB_init" Id="{3d495706-c76b-095e-389f-7ba6c1dae3a7}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
@@ -27,10 +27,10 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IsFalse" Id="{48e6cf82-019c-09fc-0b62-4318a8025ee4}">
+    <Property Name="IsFalse" Id="{d6d0da98-c1ac-0a37-21f7-b9013b7a9347}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
 PROPERTY IsFalse : BOOL]]></Declaration>
-      <Get Name="Get" Id="{c23c2e72-5cf6-0203-23ee-9d8001c6afd4}">
+      <Get Name="Get" Id="{efc004b0-702d-0b7b-3249-c46f50548bad}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -40,10 +40,10 @@ Messenger.Info('Expecting `negative` signal');]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="IsTrue" Id="{c588e641-6ea7-04c2-2aae-c7227089c8ae}">
+    <Property Name="IsTrue" Id="{bfef7889-549c-0855-3e52-92d7219d024a}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
 PROPERTY IsTrue : BOOL]]></Declaration>
-      <Get Name="Get" Id="{2089a10e-bba5-06e8-1e33-1a25b4fcfa09}">
+      <Get Name="Get" Id="{97720d5a-b86c-0dbf-0b94-b72b60d909a7}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -53,7 +53,7 @@ Messenger.Info('Expecting `positive` signal');]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Restore" Id="{19478393-8665-053e-2aa6-99986ee029e0}">
+    <Method Name="Restore" Id="{28f0fb71-aa8a-0f79-0fa8-867a06c586ce}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -69,7 +69,7 @@ METHOD  Restore : ITcoRestorable
         <ST><![CDATA[// No implementation needed for this componet.]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ServiceMode" Id="{27fb8047-ad11-0e35-19c9-b36842b34792}">
+    <Method Name="ServiceMode" Id="{370c3428-cc83-04b9-0717-e7260a4027a0}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -82,6 +82,14 @@ METHOD PROTECTED  ServiceMode
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetTrue" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
+      <Declaration><![CDATA[METHOD PUBLIC SetTrue : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SetTrue := TRUE;]]></ST>
       </Implementation>
     </Method>
   </POU>

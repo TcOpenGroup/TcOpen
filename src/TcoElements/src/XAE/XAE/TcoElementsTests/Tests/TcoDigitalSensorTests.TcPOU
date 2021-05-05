@@ -22,10 +22,10 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE _testId OF
 	100:
-		_sut(Signal := _signal);
+		_sut(inoSignal := _signal);
 		_IsTrue_result :=_sut.IsTrue;		
 	200:
-		_sut(Signal := _signal);
+		_sut(inoSignal := _signal);
 		_IsFalse_result := _sut.IsFalse;	
 END_CASE
 ]]></ST>
