@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
@@ -17,8 +18,8 @@
     <LibraryReferences>{5cd433f6-beb7-4a86-9239-7f940c20dd16}</LibraryReferences>
     <Company>Vortex.Library</Company>
     <Released>false</Released>
-    <Title>Vortex.Library</Title>
-    <ProjectVersion>0.0.0.1</ProjectVersion>
+    <Title>TcoDrivesBeckhoffTests</Title>
+    <ProjectVersion>0.4.1.375</ProjectVersion>
     <DefaultNamespace>TcoDrivesBeckhoffTests</DefaultNamespace>
     <Placeholder>TcoDrivesBeckhoffTests</Placeholder>
     <Author>TcOpenGroup</Author>
@@ -63,20 +64,20 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.1.363 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoDrivesBeckhoff">
-      <DefaultResolution>TcoDrivesBeckhoff, 0.4.1.363 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoDrivesBeckhoff, 0.4.1.375 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoDrivesBeckhoff</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.1.363 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoDrivesBeckhoff">
-      <Resolution>TcoDrivesBeckhoff, 0.4.1.363 (Vortex.Library)</Resolution>
+      <Resolution>TcoDrivesBeckhoff, 0.4.1.375 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
