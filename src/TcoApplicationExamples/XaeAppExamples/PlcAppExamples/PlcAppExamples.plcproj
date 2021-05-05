@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>PlcAppExamples</Title>
-    <ProjectVersion>0.4.0.341</ProjectVersion>
+    <ProjectVersion>0.4.1.363</ProjectVersion>
     <DefaultNamespace>PlcAppExamples</DefaultNamespace>
     <Placeholder>PlcAppExamples</Placeholder>
   </PropertyGroup>
@@ -46,9 +46,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN_PRG.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Object\Horse_Object.TcPOU">
@@ -136,6 +133,9 @@
     <Compile Include="POUs\Tutorial\401\POUs\Station001_Sequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Tutorial\MAIN_PRG.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Tutorial\TcOpenTutorial.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -172,20 +172,20 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.0.341 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.1.363 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoPneumatics">
-      <DefaultResolution>TcoPneumatics, 0.4.0.341 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoPneumatics, 0.4.1.363 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoPneumatics</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.0.341 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.1.363 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoPneumatics">
-      <Resolution>TcoPneumatics, 0.4.0.341 (Vortex.Library)</Resolution>
+      <Resolution>TcoPneumatics, 0.4.1.363 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>

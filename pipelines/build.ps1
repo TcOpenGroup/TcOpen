@@ -113,6 +113,7 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
   $projects = @(  
      "src\Tc.Prober\Tc.Prober.slnf",   
      "src\TcoCore\TcoCore.slnf",
+     "src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf",
      "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
      "src\TcoPneumatics\TcoPneumatics.slnf"
      "src\TcoApplicationExamples\TcoApplicationExamples.slnf"
@@ -162,6 +163,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
         	
     $testProjects = @(                    
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),
+                      # [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", -1, "TcoDrivesBeckhoff"),
                       [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", -1, "TcoIoBeckhoff"),
                       [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "src\TcoPneumatics\src\XaeTcoPneumatics\", -1, "TcoPneumatics")                     
                     )
@@ -230,6 +232,8 @@ task CreatePackages -depends ClearPackages {
     #Packaging
     "src\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj",
     "src\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj",
+    "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj",
+    "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj",
     "src\TcoIoBeckhoff\src\TcoIoBeckhoff.Wpf\TcoIoBeckhoff.Wpf.csproj",
     "src\TcoIoBeckhoff\src\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj",
     "src\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj",

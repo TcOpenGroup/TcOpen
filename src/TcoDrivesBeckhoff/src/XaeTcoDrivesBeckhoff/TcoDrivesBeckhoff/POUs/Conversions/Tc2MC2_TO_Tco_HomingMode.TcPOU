@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Tc2MC2_TO_Tco_HomingMode" Id="{9ea3fc00-b4b5-03ed-3f8b-4fa5caf5faf5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tc2MC2_TO_Tco_HomingMode : BOOL
+VAR_INPUT
+	Tc2MC2HomingMode:	Tc2_MC2.MC_HomingMode;
+END_VAR
+VAR_IN_OUT
+	TcoHomingMode	:	eHomingMode;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Tc2MC2HomingMode OF
+	Tc2_MC2.MC_HomingMode.MC_DefaultHoming :
+		TcoHomingMode	:=	eHomingMode.MC_DefaultHoming;
+		Tc2MC2_TO_Tco_HomingMode	:= TRUE;
+		
+	Tc2_MC2.MC_HomingMode.MC_Direct :
+		TcoHomingMode	:=	eHomingMode.MC_Direct;
+		Tc2MC2_TO_Tco_HomingMode	:= TRUE;
+		
+	Tc2_MC2.MC_HomingMode.MC_ForceCalibration :
+		TcoHomingMode	:=	eHomingMode.MC_ForceCalibration;
+		Tc2MC2_TO_Tco_HomingMode	:= TRUE;
+		
+	Tc2_MC2.MC_HomingMode.MC_ResetCalibration :
+		TcoHomingMode	:=	eHomingMode.MC_ResetCalibration;
+		Tc2MC2_TO_Tco_HomingMode	:= TRUE;
+
+	ELSE
+		Tc2MC2_TO_Tco_HomingMode := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
