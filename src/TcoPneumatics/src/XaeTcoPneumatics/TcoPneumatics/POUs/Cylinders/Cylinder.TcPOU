@@ -60,13 +60,15 @@ END_VAR]]></Declaration>
       <ST><![CDATA[IF(_moveHomeTask.Execute()) THEN
 	outToHomePos := TRUE;
 	outToWorkPos := FALSE; 		
-	_moveHomeTask.DoneWhen(inAtHomePos);			
+	_moveHomeTask.DoneWhen(inAtHomePos);	
+	Messenger.Info("Cylinder is moving to home position, trying to reach home position sensor");		
 END_IF
 
 IF(_moveWorkTask.Execute()) THEN
 	outToWorkPos := TRUE; 
 	outToHomePos := FALSE;
 	_moveWorkTask.DoneWhen(inAtWorkPos);
+	Messenger.Info("Cylinder is moving to work position, trying to reach work position sensor");		
 END_IF;	 
 
 IF(_stopTask.Execute()) THEN	
