@@ -15,8 +15,8 @@ namespace TcoPneumatics
 
         }
 
-        public fbCylinder Component { get; private set; }
+        public Cylinder Component { get; private set; }
 
-        public override object Model { get => this.Component; set { this.Component = value as fbCylinder; } }
+        public override object Model { get => this.Component; set { this.Component = value as Cylinder; } }
     }
 }

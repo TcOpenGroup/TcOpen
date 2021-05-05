@@ -3,10 +3,10 @@
   <POU Name="DefaultContext" Id="{9566aeb0-f006-4c52-ace4-7824786d839b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DefaultContext EXTENDS TcoCore.TcoContext
 VAR
-	_wpfCyclinder : TcoPneumatics.fbCylinder(THIS^);
-	_wpfCyclinder_1 : TcoPneumatics.fbCylinder(THIS^);
-	_wpfCyclinder_2 : TcoPneumatics.fbCylinder(THIS^);
-	_wpfCyclinder_3 : TcoPneumatics.fbCylinder(THIS^);
+	_wpfCyclinder : TcoPneumatics.Cylinder(THIS^);
+	_wpfCyclinder_1 : TcoPneumatics.Cylinder(THIS^);
+	_wpfCyclinder_2 : TcoPneumatics.Cylinder(THIS^);
+	_wpfCyclinder_3 : TcoPneumatics.Cylinder(THIS^);
 END_VAR
 
 
@@ -27,12 +27,5 @@ _wpfCyclinder_2();
 _wpfCyclinder_3();]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="DefaultContext">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="DefaultContext.Main">
-      <LineId Id="13" Count="6" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
