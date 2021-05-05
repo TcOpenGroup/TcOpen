@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eDirection" Id="{aa1af5d3-a2aa-06ff-337e-445ad26c3677}">
+    <Declaration><![CDATA[TYPE eDirection :
+(
+    MC_Positive_Direction 	:=	1,
+    MC_Shortest_Way 		:=	2,
+    MC_Negative_Direction 	:=	3,
+    MC_Current_Direction	:=	4,
+	MC_Undefined_Direction	:=	128
+)	INT;
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

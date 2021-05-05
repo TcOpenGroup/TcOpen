@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <GVL Name="GVL" Id="{4558bda2-479a-0ed6-1681-d0c04513f066}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	Axis1	:	TcoDrivesBeckhoff.TcoAxisRef;
+	Axis2	:	TcoDrivesBeckhoff.TcoAxisRef;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
