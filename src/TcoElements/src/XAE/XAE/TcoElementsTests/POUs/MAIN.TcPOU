@@ -4,10 +4,12 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	_tcoDigitalSensorTests : TcoDigitalSensorTests;
+	_tcoDigitalActuatorTests : TcoDigitalActuatorTests;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_tcoDigitalSensorTests.ProbeRun();]]></ST>
+      <ST><![CDATA[_tcoDigitalSensorTests.ProbeRun();
+_tcoDigitalActuatorTests.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

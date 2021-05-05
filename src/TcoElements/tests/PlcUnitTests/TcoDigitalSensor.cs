@@ -2,6 +2,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using TcoElementsTests;
 using TcoCore.Testing;
+using Vortex.Connector;
 
 namespace TcoElementsUnitTests
 {
@@ -14,6 +15,14 @@ namespace TcoElementsUnitTests
         {
             Entry.TcoElementsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
             sut = Entry.TcoElementsTests.MAIN._tcoDigitalSensorTests;
+        }
+
+        [Test]        
+        public void T50_NotInitialized()
+        {                      
+            //-- Act
+            sut.Run(1, 50);
+            sut.Read();            
         }
 
         [Test]

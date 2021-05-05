@@ -11,8 +11,10 @@ VAR
 	_adr : ULINT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_signal := inoSignal;
-_adr := ADR(inoSignal);]]></ST>
+      <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
+	_signal := inoSignal;
+	_adr := ADR(inoSignal);
+END_IF;	]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{ab66c675-5325-0f32-2184-6fc98948f748}">
       <Declaration><![CDATA[METHOD FB_init : BOOL

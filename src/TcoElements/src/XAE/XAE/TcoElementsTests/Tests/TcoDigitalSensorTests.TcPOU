@@ -5,6 +5,7 @@
 VAR
 	_signal : BOOL;
 	_sut : TcoElements.TcoDigitalSensor(THIS^);
+	_sutNotInitialized : TcoElements.TcoDigitalSensor(THIS^);
 END_VAR
 
 VAR
@@ -21,6 +22,11 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF
+	50:
+		_sutNotInitialized.IsTrue;
+		_sutNotInitialized.IsFalse;
+		_sutNotInitialized.Service();
+		_sutNotInitialized.Restore();		
 	100:
 		_sut(inoSignal := _signal);
 		_IsTrue_result :=_sut.IsTrue;		

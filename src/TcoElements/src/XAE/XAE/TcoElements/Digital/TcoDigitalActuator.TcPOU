@@ -11,8 +11,11 @@ VAR
 	_adr : ULINT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_signal := inoSignal;
-_adr := ADR(inoSignal);]]></ST>
+      <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
+	 inoSignal := _signal;
+	_adr := ADR(inoSignal);
+END_IF;	
+	]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{3d495706-c76b-095e-389f-7ba6c1dae3a7}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
@@ -53,6 +56,15 @@ Messenger.Info('Expecting `positive` signal');]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="Reset" Id="{8d9a1541-7fde-0939-1d52-c21f46132ca4}">
+      <Declaration><![CDATA[METHOD Reset : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Messenger.Trace('<#Reseting signal (off/false)#>');
+_signal := FALSE;
+Reset := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{28f0fb71-aa8a-0f79-0fa8-867a06c586ce}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -84,12 +96,14 @@ METHOD PROTECTED  ServiceMode
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetTrue" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
-      <Declaration><![CDATA[METHOD PUBLIC SetTrue : BOOL
+    <Method Name="Set" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
+      <Declaration><![CDATA[METHOD PUBLIC Set : BOOL
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SetTrue := TRUE;]]></ST>
+        <ST><![CDATA[Messenger.Trace('<#Setting signal (on/true)#>');
+_signal := TRUE;
+Set := TRUE;]]></ST>
       </Implementation>
     </Method>
   </POU>
