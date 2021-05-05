@@ -12,9 +12,9 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{711D4247-A0B7-46C4-92AB-BEA8CAD07A56}" Name="PlcTemplate" PrjFilePath="PlcTemplate\PlcTemplate.plcproj" TmcFilePath="PlcTemplate\PlcTemplate.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcTemplate\PlcTemplate.tmc">
-					<Name>PlcTemplate Instance</Name>
+			<Project GUID="{BF3E9621-3F23-47E0-B5CF-D3280EF53276}" Name="TcoElements" PrjFilePath="TcoElements\TcoElements.plcproj" TmcFilePath="TcoElements\TcoElements.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElements\TcoElements.tmc">
+					<Name>TcoElements Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
@@ -32,9 +32,9 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{CFBC043B-C3FB-403E-B3EC-38B73B6C9F17}" Name="PlcTemplateTests" PrjFilePath="PlcTemplateTests\PlcTemplateTests.plcproj" TmcFilePath="PlcTemplateTests\PlcTemplateTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcTemplateTests\PlcTemplateTests.tmc">
-					<Name>PlcTemplateTests Instance</Name>
+			<Project GUID="{84AF4B0E-F835-4083-910E-C0AA0BB9E50D}" Name="TcoElementsTests" PrjFilePath="TcoElementsTests\TcoElementsTests.plcproj" TmcFilePath="TcoElementsTests\TcoElementsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElementsTests\TcoElementsTests.tmc">
+					<Name>TcoElementsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
