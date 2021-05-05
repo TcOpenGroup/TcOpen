@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eAxisStates" Id="{6e94fdf1-fa78-0f4e-25d3-c9a816759af6}">
+    <Declaration><![CDATA[TYPE eAxisStates : 
+(
+	MC_AXISSTATE_UNDEFINED              :=	0,
+	MC_AXISSTATE_DISABLED               :=	1,
+	MC_AXISSTATE_STANDSTILL             :=	2,
+	MC_AXISSTATE_ERRORSTOP              :=	3,
+	MC_AXISSTATE_STOPPING               :=	4,
+	MC_AXISSTATE_HOMING                 :=	5,
+	MC_AXISSTATE_DISCRETEMOTION         :=	6,
+	MC_AXISSTATE_CONTINOUSMOTION		:=	7,
+	MC_AXISSTATE_SYNCHRONIZEDMOTION     :=	8
+); 
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

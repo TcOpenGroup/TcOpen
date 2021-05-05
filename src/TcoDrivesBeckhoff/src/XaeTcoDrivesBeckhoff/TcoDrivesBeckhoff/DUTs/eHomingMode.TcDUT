@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eHomingMode" Id="{33ce74cc-0ae3-09ae-0667-8975b512cc0e}">
+    <Declaration><![CDATA[TYPE eHomingMode : 
+(
+	MC_DefaultHoming	:=	0,	 
+	MC_Direct			:=	4, 
+	MC_ForceCalibration	:=	7, 
+	MC_ResetCalibration	:=	8 
+)	INT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

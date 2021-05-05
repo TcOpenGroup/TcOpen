@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MoveAbsoluteTask" Id="{8ec2cded-bd2e-0780-1c2c-713ba1fe9cfc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MoveAbsoluteTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
+VAR
+	_position		:	LREAL;
+	_velocity		:	LREAL;
+	_acceleration	:	LREAL;
+	_deceleration	:	LREAL;
+	_jerk			:	LREAL;
+END_VAR
+VAR
+//	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
+	_axisRef		:	REFERENCE TO TcoAxisRef;
+	_mcMoveAbsolute	:	Tc2_MC2.MC_MoveAbsolute;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
+	IF __ISVALIDREF(DriveRef) THEN
+		_axisRef REF=	DriveRef.AxisRef;
+	ELSE
+		RETURN;
+	END_IF
+END_IF
+
+IF THIS^.Ready OR THIS^.Done THEN
+	_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+END_IF
+
+IF THIS^.State = TcoCore.eTaskState.Requested THEN
+	//In case of error, drive  is reseted first.
+	IF THIS^.DriveRef._axisRef.Status.Error THEN
+		THIS^.DriveRef.Reset();
+		RETURN;	
+	// When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
+	//to ensure that movement is not triggered before drive is powered up. 
+	ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._mcPower.Status THEN
+		RETURN;
+	END_IF
+END_IF
+
+IF Execute() THEN
+	_mcMoveAbsolute(Axis			:=	_axisRef, 
+					Execute			:=	NOT _mcMoveAbsolute.Busy, 
+					Position		:=	_position, 
+					Velocity		:=	_velocity, 
+					Acceleration	:=	_acceleration, 
+					Deceleration	:=	_deceleration, 
+					Jerk			:=	_jerk, 
+					BufferMode		:=	Tc2_MC2.MC_Aborting, 
+					Done=> , 
+					Busy=> , 
+					Active=> , 
+					CommandAborted=> , 
+					Error=> , 
+					ErrorID=> );
+				
+	IF _mcMoveAbsolute.CommandAborted THEN
+		THIS^.Abort();		
+	END_IF
+	
+	DoneWhen(_mcMoveAbsolute.Done);					
+
+	ThrowWhen(_mcMoveAbsolute.Error);
+END_IF					
+]]></ST>
+    </Implementation>
+    <Property Name="DriveRef" Id="{c918ab99-0887-0ba7-3e18-f42d76a60832}">
+      <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{6cdc2aba-e2cc-09b5-2389-125dc9763c8c}">
+        <Declaration><![CDATA[VAR
+	_drive : ITcoDriveSimple :=0;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
+	DriveRef REF= _drive.DriveRef;
+END_IF	]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{0d82c97d-0789-05e0-17e6-78c74f6d4a10}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
+				bInCopyCode		:=	bInCopyCode,	
+				Parent			:=	Parent);		    
+                                ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvokeWithParams" Id="{831dee00-d9fb-0de4-16b7-4a6a3ef02f08}">
+      <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
+VAR_INPUT
+	inPosition		:	LREAL;
+	inVelocity		:	LREAL;
+	inAcceleration	:	LREAL;
+	inDeceleration	:	LREAL;
+	inJerk			:	LREAL;	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_position		:=  inPosition		;  
+_velocity		:= 	inVelocity		; 
+_acceleration	:= 	inAcceleration	;
+_deceleration	:= 	inDeceleration	;
+_jerk			:= 	inJerk			;     
+
+InvokeWithParams := THIS^.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{6b9c9854-0555-0eef-069a-af2d2447715a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

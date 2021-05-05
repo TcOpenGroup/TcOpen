@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoDriveSimpleTestContext" Id="{5ec553e2-5654-0c2e-1fbc-af3446097e6f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimpleTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_callMyPlcInstance 		:	BOOL := FALSE;
+	_axis					:	TcoDriveSimpleTest(THIS^);
+	_enable					:	BOOL;
+	_enablePositive			:	BOOL;
+	_enableNegative			:	BOOL;
+	_calibrationCam			:	BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF THIS^._callMyPlcInstance THEN
+	THIS^.Run();
+END_IF
+
+]]></ST>
+    </Implementation>
+    <Method Name="Axis" Id="{609fd18d-c747-0041-3ebc-1d768afad688}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Axis
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_axis(	inEnable			:=	_enable, 
+		inEnablePositive	:=	_enablePositive, 
+		inEnableNegative	:=	_enableNegative, 
+		inCalibrationCam	:=	_calibrationCam, 
+		inoAxisRef			:=	GVL.Axis1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ContextClose" Id="{37f7459d-79bd-00a1-3ea7-67bdecd8f791}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ContextClose
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ContextOpen" Id="{73bea47d-cffc-0f8e-2fa2-009f4e8db605}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ContextOpen
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._Open();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{d0b1137a-5df8-03f2-29c1-927fe69bb8e2}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_axis(	inEnable			:=	_enable, 
+		inEnablePositive	:=	_enablePositive, 
+		inEnableNegative	:=	_enableNegative, 
+		inCalibrationCam	:=	_calibrationCam, 
+		inoAxisRef			:=	GVL.Axis1);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

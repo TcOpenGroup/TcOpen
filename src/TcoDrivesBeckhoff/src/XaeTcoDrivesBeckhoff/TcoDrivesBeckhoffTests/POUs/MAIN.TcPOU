@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MAIN" Id="{29b4803f-0a8d-4f03-aceb-3c760212e9a6}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	_tcoDriveSimpleTestContext	:	TcoDriveSimpleTestContext;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_tcoDriveSimpleTestContext();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

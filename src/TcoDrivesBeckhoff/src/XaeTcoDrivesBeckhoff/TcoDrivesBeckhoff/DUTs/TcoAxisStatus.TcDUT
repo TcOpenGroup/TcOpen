@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="TcoAxisStatus" Id="{c9948914-0a5b-070a-3459-93facb493fe6}">
+    <Declaration><![CDATA[TYPE TcoAxisStatus :
+STRUCT
+    ActPos               : LREAL; (* Actual position (absolut value from NC) *)
+    ModuloActPos         : LREAL; (* Actual modulo position *)
+    ModuloActTurns       : DINT; (* Actual modulo turns *)
+    ActVelo              : LREAL; (* Actual velocity *)
+	ActAcc               : LREAL;
+	ActTorque            : LREAL;
+ 	CmdNo                : WORD; (* Continuous actual command number *)
+    CmdState             : WORD; (* Command state *)
+
+    MotionState          : eAxisStates; (* motion state in the PLCopen state diagram *)
+
+    Error                : BOOL;  (* axis error state *)
+    ErrorId              : UDINT; (* axis error code *)
+
+    (* PLCopen motion control statemachine states: *)
+    ErrorStop            : BOOL;
+    Disabled             : BOOL;
+    Stopping             : BOOL;
+    StandStill           : BOOL;
+    DiscreteMotion       : BOOL;
+    ContinuousMotion     : BOOL; 
+    SynchronizedMotion   : BOOL;
+    Homing               : BOOL;
+
+    (* additional status - (PLCopen definition)*)
+    ConstantVelocity     : BOOL; 
+    Accelerating         : BOOL;
+    Decelerating         : BOOL;
+
+    (* Axis.NcToPlc.StateDWord *)
+    Operational          : BOOL; 
+    ControlLoopClosed    : BOOL; (* operational and position control active *)
+    HasJob               : BOOL; 
+    HasBeenStopped       : BOOL; 
+    NewTargetPosition    : BOOL; (* new target position commanded during move *)
+    InPositionArea       : BOOL; 
+    InTargetPosition     : BOOL; 
+
+    Homed                : BOOL; 
+    HomingBusy           : BOOL; 
+    MotionCommandsLocked : BOOL; (* stop 'n hold *)
+    SoftLimitMinExceeded : BOOL; (* reverse soft travel limit exceeded *)
+    SoftLimitMaxExceeded : BOOL; (* forward soft travel limit exceeded *)
+
+    Moving               : BOOL; 
+    PositiveDirection    : BOOL; 
+    NegativeDirection    : BOOL; 
+    NotMoving            : BOOL; 
+    Compensating         : BOOL; (* superposition - overlayed motion *)
+
+    ExtSetPointGenEnabled: BOOL; 
+    ExternalLatchValid   : BOOL; 
+    CamDataQueued        : BOOL; 
+    CamTableQueued       : BOOL; 
+    CamScalingPending    : BOOL; 
+    CmdBuffered          : BOOL; 
+    PTPmode              : BOOL; 
+    DriveDeviceError     : BOOL; 
+    IoDataInvalid        : BOOL; 
+
+    (* Axis.NcToPlc.CoupleState *)
+    Coupled              : BOOL;
+
+    (* axis operation mode feedback from NcToPlc *)
+    OpMode               : TcoAxisOpModes;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>
