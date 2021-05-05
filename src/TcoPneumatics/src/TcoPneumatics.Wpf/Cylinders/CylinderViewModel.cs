@@ -8,9 +8,9 @@ using Vortex.Presentation.Wpf;
 namespace TcoPneumatics
 {
    
-    public class fbCylinderManualViewModel : RenderableViewModel
+    public class CylinderManualViewModel : RenderableViewModel
     {
-        public fbCylinderManualViewModel()
+        public CylinderManualViewModel()
         {
 
         }
