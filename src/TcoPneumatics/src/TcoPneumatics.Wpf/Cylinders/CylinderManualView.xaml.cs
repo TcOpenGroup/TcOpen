@@ -20,9 +20,9 @@ namespace TcoPneumatics
     /// <summary>
     /// Interaction logic for FB_CylinderAlternativeView.xaml
     /// </summary>
-    public partial class fbCylinderManualView : UserControl
+    public partial class CylinderManualView : UserControl
     {
-        public fbCylinderManualView()
+        public CylinderManualView()
         {
             InitializeComponent();
         }

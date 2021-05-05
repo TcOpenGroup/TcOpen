@@ -13,14 +13,13 @@ namespace TcOpen
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Brushes.LightGray;
             try
             {
-                return (bool)value ? Vortex.Presentation.Styling.Wpf.VortexResources.Accent : Vortex.Presentation.Styling.Wpf.VortexResources.Secondary;
+                return (bool)value ? Brushes.GreenYellow : Brushes.LightGray;
             }
             catch (Exception)
             {
-                return Vortex.Presentation.Styling.Wpf.VortexResources.Alert;
+                return Brushes.Gray;
             }
         }
 

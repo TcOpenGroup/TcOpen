@@ -8,9 +8,9 @@ using TcoPneumaticsTests;
 
 namespace TcoPneumaticsTests
 {
-    public class fbCylinderTests
+    public class CylinderTests
     {
-        fbCylinder sut=ConnectorFixture.Connector.MAIN._defaultContext._wpfCyclinder;
+        Cylinder sut=ConnectorFixture.Connector.MAIN._defaultContext._wpfCyclinder;
 
         [OneTimeSetUp()]
         public void OneTimeSetUp()

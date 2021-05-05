@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace TcoPneumatics
 {
-    public partial class fbCylinder
+    public partial class Cylinder
     {
         public int TimeToReachPosition { get; set; } = 500;
     }
