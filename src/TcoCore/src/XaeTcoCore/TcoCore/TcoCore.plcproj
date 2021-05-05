@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>0.4.0.341</ProjectVersion>
+    <ProjectVersion>0.4.1.363</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
@@ -35,6 +35,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
       <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\TcoComponent.TcPOU">
       <SubType>Code</SubType>

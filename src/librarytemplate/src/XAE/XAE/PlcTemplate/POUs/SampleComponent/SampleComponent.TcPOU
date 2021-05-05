@@ -79,6 +79,19 @@ END_VAR
         <ST><![CDATA[AddTwoNumbersTest := THIS^.AddTwoNumbers(NumberOne, NumberTwo);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="FB_init" Id="{1e5693b0-3835-0196-0d67-d8ba08382c80}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{672a490f-dd33-0ec8-2d88-acc88f08b2ef}">
       <Declaration><![CDATA[(*~
 	<docu>

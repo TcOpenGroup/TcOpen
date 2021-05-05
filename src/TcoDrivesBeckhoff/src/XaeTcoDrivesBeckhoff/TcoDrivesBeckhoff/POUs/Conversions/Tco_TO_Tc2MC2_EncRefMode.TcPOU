@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Tco_TO_Tc2MC2_EncRefMode" Id="{dd66e3db-d6b8-07ae-1402-10e432461c73}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tco_TO_Tc2MC2_EncRefMode : BOOL
+VAR_INPUT
+	TcoEncRef	:	eEncoderReferenceMode;
+END_VAR
+VAR_IN_OUT
+	Tc2MC2EncRef:	Tc2_MC2.E_EncoderReferenceMode;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE TcoEncRef OF
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_PLCCAM :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_PLCCAM;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARESYNC :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARESYNC;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHPOS :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHPOS;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHNEG :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_HARDWARELATCHNEG;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_SOFTWARESYNC :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_SOFTWARESYNC;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHPOS :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHPOS;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	eEncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHNEG :
+		Tc2MC2EncRef	:=	Tc2_MC2.E_EncoderReferenceMode.ENCODERREFERENCEMODE_SOFTDRIVELATCHNEG;
+		Tco_TO_Tc2MC2_EncRefMode	:= TRUE;
+
+	ELSE
+		Tco_TO_Tc2MC2_EncRefMode := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
