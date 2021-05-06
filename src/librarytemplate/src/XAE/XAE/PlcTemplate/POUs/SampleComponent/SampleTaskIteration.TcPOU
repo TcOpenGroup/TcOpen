@@ -19,6 +19,19 @@ END_VAR]]></Declaration>
 	DoneWhen(_currentIteration >= _iterations);
 END_IF]]></ST>
     </Implementation>
+    <Method Name="FB_init" Id="{f3efd563-ead3-02f1-2285-17c28b9c80b4}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{1d66f1bc-4fc9-0e1d-2089-a2db366a8b62}">
       <Declaration><![CDATA[(*~
 	<docu>
