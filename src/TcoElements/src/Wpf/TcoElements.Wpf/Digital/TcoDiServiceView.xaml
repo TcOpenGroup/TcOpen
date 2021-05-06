@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="TcoElements.TcoDigitalSensorManualView"
+    x:Class="TcoElements.TcoDiServiceView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
@@ -10,7 +10,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <TcoElements:TcoDigitalSensor />
+        <TcoElements:TcoDi/>
     </d:UserControl.DataContext>
     <Grid Margin="5">
         <Grid.ColumnDefinitions>

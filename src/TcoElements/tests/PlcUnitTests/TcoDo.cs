@@ -6,11 +6,11 @@ using Vortex.Connector;
 
 namespace TcoElementsUnitTests
 {
-    public class TcoDigitalActuator
+    public class TcoDo
     {
-        TcoDigitalActuatorTests sut;
+        TcoDoTests sut;
 
-        [OneTimeSetUp]
+        [OneTimeSetUp]        
         public void Setup()
         {
             Entry.TcoElementsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;

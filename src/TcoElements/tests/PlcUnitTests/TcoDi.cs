@@ -6,9 +6,9 @@ using Vortex.Connector;
 
 namespace TcoElementsUnitTests
 {
-    public class TcoDigitalSensor
+    public class TcoDi
     {
-        TcoDigitalSensorTests sut;
+        TcoDiTests sut;
 
         [OneTimeSetUp]
         public void Setup()

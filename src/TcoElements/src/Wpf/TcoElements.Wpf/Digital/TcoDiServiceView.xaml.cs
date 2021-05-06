@@ -4,15 +4,15 @@ using System.Windows.Controls;
 namespace TcoElements
 {
     /// <summary>
-    /// Interaction logic for TcoDigitalSensorManualView.xaml
+    /// Interaction logic for TcoDiServiceView.xaml
     /// </summary>
-    public partial class TcoDigitalSensorManualView : UserControl
+    public partial class TcoDiServiceView : UserControl
     {
-        public TcoDigitalSensorManualView()
+        public TcoDiServiceView()
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.DataContext = new TcoDigitalSensor();
+                this.DataContext = new TcoDi();
             }
 
             InitializeComponent();
