@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="StringBuilderTests" Id="{0281a88e-2ecd-0d34-1bf3-8e430317f9db}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK StringBuilderTests
+VAR
+	StringBuilder : TcoCore.StringBuilder();
+	StringBuilderResult : STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Append" Id="{f670e91a-c93f-018c-0969-450082bc795e}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Append
+VAR_INPUT
+	ToAppend : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StringBuilder.Append(ToAppend);
+StringBuilderResult := StringBuilder._workString;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{164e99fa-4a83-04c8-2daa-d44516b3f0b2}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Clear]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StringBuilder.Clear();
+StringBuilderResult := StringBuilder._workString;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FluentApi" Id="{7518614b-0885-0114-1902-f5278e146ec7}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD FluentApi : STRING]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FluentApi := StringBuilder
+	.Clear()
+	.Append('1')
+	.Append('2')
+	.Append('3')
+	.Append('4')
+	.Clear()
+	.Append('1')
+	.Append('2')
+	.Append('3')
+	.Append('4')
+	.ToString();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ToString" Id="{846c6a91-7892-0d0b-1eff-bbd62d279f18}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD ToString : STRING]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ToString := StringBuilder.ToString();
+StringBuilderResult := StringBuilder._workString;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

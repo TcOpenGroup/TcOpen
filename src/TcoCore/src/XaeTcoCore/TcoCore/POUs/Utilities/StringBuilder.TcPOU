@@ -31,7 +31,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Append" Id="{a9cd2d8b-8145-0c23-206c-ae933c3ebe7f}">
-      <Declaration><![CDATA[METHOD Append
+      <Declaration><![CDATA[METHOD Append : REFERENCE TO StringBuilder
 VAR_INPUT
     Text :STRING; 
 END_VAR]]></Declaration>
