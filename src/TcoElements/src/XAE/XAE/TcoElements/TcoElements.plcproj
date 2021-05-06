@@ -25,10 +25,10 @@
     <Placeholder>TcoElements</Placeholder>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Digital\TcoDigitalSensor.TcPOU">
+    <Compile Include="Digital\TcoDi.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Digital\TcoDigitalActuator.TcPOU">
+    <Compile Include="Digital\TcoDo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">

@@ -1,19 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcoDigitalActuator" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalActuator EXTENDS TcoCore.TcoComponent
+  <POU Name="TcoDo" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+				Generic component for discrete control of an output.												
+		</summary>				
+	</docu>	
+~*)	
+FUNCTION_BLOCK TcoDo EXTENDS TcoCore.TcoComponent
 VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Controlled signal. Typically an `%Q*` variable. 												
+		</summary>				
+	</docu>	
+	~*)
 	inoSignal : BOOL;
 END_VAR
 
 VAR
+	(*~
+	<docu>
+		<summary>
+			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
+		</summary>				
+	</docu>	
+	~*)
 	_signal : BOOL;
-	_adr : ULINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	 inoSignal := _signal;
-	_adr := ADR(inoSignal);
+	 inoSignal := _signal;	
 END_IF;	
 	]]></ST>
     </Implementation>
@@ -30,34 +49,58 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IsFalse" Id="{d6d0da98-c1ac-0a37-21f7-b9013b7a9347}">
-      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
+    <Property Name="IsFalse" Id="{48e6cf82-019c-09fc-0b62-4318a8025ee4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets 'true' when monitor signal is 'off/false/logical 0'.
+			Generates message when the returning 'false'.											
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'monitoring' := 'variable'}
 PROPERTY IsFalse : BOOL]]></Declaration>
-      <Get Name="Get" Id="{efc004b0-702d-0b7b-3249-c46f50548bad}">
+      <Get Name="Get" Id="{c23c2e72-5cf6-0203-23ee-9d8001c6afd4}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsFalse := NOT _signal;
-Messenger.Info('Expecting `negative` signal');]]></ST>
+IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="IsTrue" Id="{bfef7889-549c-0855-3e52-92d7219d024a}">
-      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
+    <Property Name="IsTrue" Id="{c588e641-6ea7-04c2-2aae-c7227089c8ae}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets 'true' when monitor signal is 'on/true/logical 1'.
+			Generates message when the returning 'false'.											
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'monitoring' := 'variable'}
 PROPERTY IsTrue : BOOL]]></Declaration>
-      <Get Name="Get" Id="{97720d5a-b86c-0dbf-0b94-b72b60d909a7}">
+      <Get Name="Get" Id="{2089a10e-bba5-06e8-1e33-1a25b4fcfa09}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsTrue := _signal;
-Messenger.Info('Expecting `positive` signal');]]></ST>
+IF(NOT IsTrue) THEN Messenger.Info('<#Expecting `positive` signal#>'); END_IF;
+]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Reset" Id="{8d9a1541-7fde-0939-1d52-c21f46132ca4}">
-      <Declaration><![CDATA[METHOD Reset : BOOL
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets controlled signal into 'off/false/logical 0'.														
+		</summary>				
+	</docu>	
+~*)	
+METHOD Reset : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Messenger.Trace('<#Reseting signal (off/false)#>');
@@ -97,7 +140,14 @@ METHOD PROTECTED  ServiceMode
       </Implementation>
     </Method>
     <Method Name="Set" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
-      <Declaration><![CDATA[METHOD PUBLIC Set : BOOL
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets controlled signal into 'on/true/logical 1'.														
+		</summary>				
+	</docu>	
+~*)	
+METHOD PUBLIC Set : BOOL
 
 ]]></Declaration>
       <Implementation>

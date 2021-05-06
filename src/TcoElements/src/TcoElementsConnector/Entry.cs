@@ -9,9 +9,9 @@ namespace TcoElements
 {
     public static class Entry
     {
-        const string AmdId = "172.20.10.2.1.1";
+        readonly static string AmdId = Environment.GetEnvironmentVariable("Tc3Target");
 
-        public static TcoElements.TcoElementsTwinController TcoElementsPlc 
+        public static TcoElementsTwinController TcoElementsPlc 
             = new TcoElementsTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
     }
 }

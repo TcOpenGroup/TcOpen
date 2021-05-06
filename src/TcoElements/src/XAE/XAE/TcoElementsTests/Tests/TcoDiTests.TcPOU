@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcoDigitalSensorTests" Id="{d9a75e6f-7650-0ec2-2a0d-3777c9193dbe}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalSensorTests EXTENDS TcoCore._internals_TcoContext
+  <POU Name="TcoDiTests" Id="{d9a75e6f-7650-0ec2-2a0d-3777c9193dbe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDiTests EXTENDS TcoCore._internals_TcoContext
 VAR
 	_signal : BOOL;
-	_sut : TcoElements.TcoDigitalSensor(THIS^);
-	_sutNotInitialized : TcoElements.TcoDigitalSensor(THIS^);
+	_sut : TcoElements.TcoDi(THIS^);
+	_sutNotInitialized : TcoElements.TcoDi(THIS^);
 END_VAR
 
 VAR
