@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="NF_Logic" Id="{a15ad3d6-c3ee-43f1-a95a-15ff90bf4019}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK NF_Logic
+VAR
+	_piston : TcoPneumatics.Cylinder(NF_MAIN.Context);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_piston.Service();
+
+_piston();
+]]></ST>
+    </Implementation>
+    <LineIds Name="NF_Logic">
+      <LineId Id="12" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

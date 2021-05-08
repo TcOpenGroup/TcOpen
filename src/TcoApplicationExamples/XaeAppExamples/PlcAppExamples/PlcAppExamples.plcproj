@@ -48,6 +48,12 @@
     <Compile Include="POUs\Context\VitoCorleone_Context.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\NonFrameworkUse\NF_Logic.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\NonFrameworkUse\NF_MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Object\Horse_Object.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -146,6 +152,7 @@
     <Folder Include="POUs\Context" />
     <Folder Include="POUs\Context\CorleoneKids" />
     <Folder Include="POUs\Context\Leaves" />
+    <Folder Include="POUs\NonFrameworkUse" />
     <Folder Include="POUs\Tutorial" />
     <Folder Include="POUs\Task" />
     <Folder Include="POUs\Object" />

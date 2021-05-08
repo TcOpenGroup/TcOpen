@@ -101,7 +101,16 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
-
+            <TabItem Header="Non framework use of components">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <vortex:RenderableContentControl DataContext="{Binding NF_MAIN._logic, Mode=OneWay}" PresentationType="Service-Manual"></vortex:RenderableContentControl>
+                    <inxton:DynamicTreeView Grid.Column="1" DataContext="{Binding NF_MAIN}"></inxton:DynamicTreeView>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
