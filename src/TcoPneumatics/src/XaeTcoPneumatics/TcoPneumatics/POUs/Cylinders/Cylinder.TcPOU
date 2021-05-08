@@ -163,7 +163,7 @@ SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
 		<returns>True when home position sensor is reached.</returns>
 	</docu>
 ~*)
-METHOD MoveToHome : TcoCore.ITcoTask]]></Declaration>
+METHOD MoveToHome : TcoCore.ITcoTaskStatus]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._moveHomeTask.Invoke();
 MoveToHome := THIS^._moveHomeTask;
@@ -181,7 +181,7 @@ MoveToHome := THIS^._moveHomeTask;
 		<returns>True when working position sensor is reached.</returns>
 	</docu>
 ~*)
-METHOD MoveToWork : TcoCore.ITcoTask
+METHOD MoveToWork : TcoCore.ITcoTaskStatus
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._moveWorkTask.Invoke();
@@ -217,5 +217,53 @@ _stopTask.Restore();]]></ST>
 Stop REF= _stopTask;]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="Cylinder">
+      <LineId Id="3" Count="20" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder._MoveToHomeTest">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder._MoveToWorkTest">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder._StopTest">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.AtHome.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.AtWork.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.FB_init">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.ManualControl">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.MoveToHome">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.MoveToWork">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.Restore">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.ServiceMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Cylinder.Stop">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
