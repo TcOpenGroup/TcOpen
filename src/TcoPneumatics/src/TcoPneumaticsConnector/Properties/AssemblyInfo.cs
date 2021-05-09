@@ -3,6 +3,6 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("nUnitTcOpenTests")]
 [assembly: InternalsVisibleTo("xUnitTcOpenTests")]
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0-init-dev.1+217.Branch.init-dev.Sha.8106cc8e723ce3612a1d08c4766c322c45e6cfeb")]
+[assembly: AssemblyVersion("0.4.1.0")]
+[assembly: AssemblyFileVersion("0.4.1.0")]
+[assembly: AssemblyInformationalVersion("0.4.1-initial-dev.375+Branch.initial-dev.Sha.70df6b177f3b27b9fcedd3aa9c169ecdc6bd2d56")]

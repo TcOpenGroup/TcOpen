@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoTaskResult" Id="{33c5dbee-0f78-0dc3-3d2d-323eaf2ee278}" SpecialFunc="None">
+    <Declaration><![CDATA[// credits Jakob Sagatowski https://github.com/sagatowski & contributors https://github.com/tcunit/TcUnit
+FUNCTION_BLOCK TcoTaskResult
+VAR
+	_anyResult : ANY;
+	F_AnyToUnionValue : F_AnyToUnionValue;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="AsBool" Id="{5ab75d88-531b-0f5c-04d0-62ece679400b}">
+      <Declaration><![CDATA[PROPERTY PUBLIC AsBool : BOOL]]></Declaration>
+      <Get Name="Get" Id="{0c01b331-2779-0f7f-3e7e-ba7ae1d77df4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Tc2_System.MEMCPY(destaddr := ADR(AsBool),
+                  srcAddr := _anyResult.pValue,
+                  n := _anyResult.diSize);
+AsBool := ]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Gee" Id="{9b4477b1-a95a-03f1-25f1-4bc77e7432e1}">
+      <Declaration><![CDATA[METHOD PRIVATE Gee
+VAR
+	AnyValue : POINTER TO BYTE; 
+	AnySize  : UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AnyValue := _anyResult.pValue;
+AnySize  := DINT_TO_UDINT(_anyResult.diSize);
+
+CASE _anyResult.TypeClass OF
+    IBaseLibrary.TypeClass.TYPE_BOOL :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._bool),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_BIT :
+        {warning disable C0355}
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._bit),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+        {warning enable C0355}
+
+    IBaseLibrary.TypeClass.TYPE_BYTE :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._byte),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_WORD :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._word),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_DWORD :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._dword),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_LWORD :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._lword),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_SINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._sint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_INT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._int),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_DINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._dint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_LINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._lint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_USINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._usint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_UINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._uint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_UDINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._udint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_ULINT :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._ulint),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_REAL :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._real),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_LREAL :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._lreal),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_STRING :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._string),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_WSTRING :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._wstring),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_TIME :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._time),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_DATE :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._date),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_DATEANDTIME :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._dateandtime),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_TIMEOFDAY :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._timeofday),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_POINTER :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_REFERENCE :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_SUBRANGE :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ENUM :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ARRAY :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_PARAMS :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_USERDEF :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_NONE :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ANY :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ANYBIT :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ANYDATE :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ANYINT :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ANYNUM :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_ANYREAL :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_LAZY :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_LTIME :
+        Tc2_System.MEMCPY(destaddr := ADR(F_AnyToUnionValue._ltime),
+                          srcAddr := AnyValue,
+                          n := AnySize);
+
+    IBaseLibrary.TypeClass.TYPE_BITCONST :
+        (* None *)
+
+    IBaseLibrary.TypeClass.TYPE_INTERFACE :
+        (* None *)
+
+    ELSE
+        (* None *)
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

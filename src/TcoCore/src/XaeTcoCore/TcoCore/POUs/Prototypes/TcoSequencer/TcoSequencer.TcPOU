@@ -138,12 +138,16 @@ VAR
 	{attribute 'hide'}
 	_checkStepIdRequestedInStepMode : BOOL;
 	{attribute 'hide'}
-	_restoringSequence : BOOL;
+	_restoringSequence : BOOL;	
 END_VAR
 
 VAR
 	{attribute 'hide'}
     _pPreviusSteps : POINTER TO INT;
+END_VAR
+
+VAR
+	_lastActiveCycle : ULINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -715,7 +719,11 @@ METHOD PUBLIC FINAL Run]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Open();
 
+_lastActiveCycle := Context.StartCycleCount; 
+
 THIS^.Main();
+
+
 
 IF _sequencerHasError THEN
 	OnSequencerError(_sequencerErrorId);

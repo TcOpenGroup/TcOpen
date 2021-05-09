@@ -32,7 +32,7 @@ TwinCAT software system turns almost any compatible PC into a real-time controll
 
 # Where are we - Development process 
 
-The initial momentum of ```TcOpen``` project was powerful; however, we have seen a slow decline in activity over the past months. [Inxton](inxton.com),  [MTS](www.mts.sk/en) team and some other heroic knights decided to keep the lights on and to carry on this initiative.
+The initial momentum of ```TcOpen``` project was powerful; however, we have seen a slow decline in activity over the past months. [Inxton](https://inxton.com/),  [MTS](https://www.mts.sk/en/) team and some other heroic knights decided to keep the lights on and to carry on this initiative.
 
 We understand that many of you guys have hard times at work, a lot of late hours, endless traveling. Life in industrial automation is very demanding. We see this as one of the reasons for the declined activity. Also, many automation engineers are not that familiar with modern software development tooling and workflows. It may scare some people off. Unfamiliarity should not be the reason not to participate. We want this place to be welcoming to everyone that sees it as a meaningful path to industrial automation. The community is going to learn along the path. There are not that many open-source projects for industrial automation; we got to start somewhere and somehow.
 
@@ -182,6 +182,7 @@ We do not adopt any document describing conduct at this point. However, there ar
 1. Treat others as you would like others to treat you
 1. Everyone is free to express his/her ideas.
 1. Truth is more important than kindness, but be kind.
+1. Your contributions are under MIT license. 
 
 
 ## Contributions? Suggestions? Issues?

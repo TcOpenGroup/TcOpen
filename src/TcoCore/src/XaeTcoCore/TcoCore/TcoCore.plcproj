@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>0.4.0.217</ProjectVersion>
+    <ProjectVersion>0.4.1.375</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
@@ -35,6 +35,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
       <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\TcoComponent.TcPOU">
       <SubType>Code</SubType>
@@ -148,6 +151,12 @@
     <Compile Include="POUs\Prototypes\TcoTask\ITcoTask.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoTask\TaskResult\TcoTaskResult.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoTask\TaskResult\F_AnyToUnionValue.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\TcoTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -163,6 +172,9 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
+    <Folder Include="POUs\Prototypes\TcoTask\TaskResult">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </Folder>
     <Folder Include="POUs\TestFixtures" />
     <Folder Include="POUs\Prototypes" />
     <Folder Include="POUs\Prototypes\TcoMessage" />

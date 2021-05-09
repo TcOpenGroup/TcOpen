@@ -19,11 +19,11 @@ VAR
 	_PDT	 							:	Tc2_Utilities.TIMESTRUCT;	
 	{attribute 'hide'}
 	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_LocalTimeDT						:	DATE_AND_TIME;
 	{attribute 'hide'}
 	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
-	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	_UTCTimeDT							:	DATE_AND_TIME;
 END_VAR]]></Declaration>
     <Implementation>

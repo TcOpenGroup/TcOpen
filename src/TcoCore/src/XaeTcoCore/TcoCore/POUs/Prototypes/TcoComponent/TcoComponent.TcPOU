@@ -8,7 +8,7 @@
 		</summary>				
 	</docu>	
 ~*)
-FUNCTION_BLOCK ABSTRACT TcoComponent EXTENDS TcoObject IMPLEMENTS ITcoObject,ITcoRestorable, ITcoServiceable
+FUNCTION_BLOCK ABSTRACT TcoComponent EXTENDS TcoObject IMPLEMENTS ITcoComponent
 VAR
 	{attribute 'hide'}
 	_serviceContexCycle : ULINT;	

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Tco_TO_Tc2MC2_AxisStates" Id="{346322a8-3883-039e-28f9-44c268c1888a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tco_TO_Tc2MC2_AxisStates : BOOL
+VAR_INPUT
+	TcoAxisStates	:	eAxisStates;
+END_VAR
+VAR_IN_OUT
+	Tc2MC2AxisStates:	Tc2_MC2.MC_AxisStates;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE TcoAxisStates OF
+	eAxisStates.MC_AXISSTATE_CONTINOUSMOTION :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_CONTINOUSMOTION;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_DISABLED :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_DISABLED;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_DISCRETEMOTION :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_DISCRETEMOTION;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_ERRORSTOP :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_ERRORSTOP;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_HOMING :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_HOMING;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_STANDSTILL :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_STANDSTILL;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_STOPPING :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_STOPPING;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_SYNCHRONIZEDMOTION :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_SYNCHRONIZEDMOTION;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	eAxisStates.MC_AXISSTATE_UNDEFINED :
+		Tc2MC2AxisStates	:=	Tc2_MC2.MC_AxisStates.MC_AXISSTATE_UNDEFINED;
+		Tco_TO_Tc2MC2_AxisStates	:= TRUE;
+		
+	ELSE
+		Tco_TO_Tc2MC2_AxisStates := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
