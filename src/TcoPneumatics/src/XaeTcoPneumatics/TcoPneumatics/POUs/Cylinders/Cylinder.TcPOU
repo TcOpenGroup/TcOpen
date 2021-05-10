@@ -10,9 +10,7 @@ VAR_INPUT
 			</summary>	
 		</docu>
 	~*)
-	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute wpf [Group(Layout.GroupBox, "Inputs")]}	
-	{attribute addProperty Name "Home position sensor"}
+	{attribute addProperty Name "<#Home position sensor#>"}
 	inAtHomePos : BOOL;
 	(*~
 		<docu>
@@ -21,7 +19,7 @@ VAR_INPUT
 			</summary>	
 		</docu>
 	~*) 
-	{attribute addProperty Name "Work position sensor"}
+	{attribute addProperty Name "<#Work position sensor#>"}
 	inAtWorkPos : BOOL; 
 END_VAR
 VAR_OUTPUT
@@ -32,9 +30,7 @@ VAR_OUTPUT
 			</summary>	
 		</docu>
 	~*)
-	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute wpf [Group(Layout.GroupBox, "Outputs")]}	
-	{attribute addProperty Name "Move to home position actuator"}
+	{attribute addProperty Name "<#Move to home position actuator#>"}
 	outToHomePos : BOOL;
 	(*~
 		<docu>
@@ -43,17 +39,16 @@ VAR_OUTPUT
 			</summary>	
 		</docu>
 	~*)
-	{attribute addProperty Name "Move to work position actuator"}
+	{attribute addProperty Name "<#Move to work position actuator#>"}
 	outToWorkPos : BOOL;
 END_VAR
 
 VAR	
-	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute addProperty Name "Request move to Home position"}	
+	{attribute addProperty Name "<#Request move to Home position#>"}	
 	_moveHomeTask : TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "Request move to Work position"}
+	{attribute addProperty Name "<#Request move to Work position#>"}
 	_moveWorkTask : TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "Request Stop"}
+	{attribute addProperty Name "<#Request Stop#>"}
 	_stopTask : TcoCore.TcoTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
@@ -217,53 +212,5 @@ _stopTask.Restore();]]></ST>
 Stop REF= _stopTask;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="Cylinder">
-      <LineId Id="3" Count="20" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder._MoveToHomeTest">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder._MoveToWorkTest">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder._StopTest">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.AtHome.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.AtWork.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.FB_init">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.ManualControl">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.MoveToHome">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.MoveToWork">
-      <LineId Id="3" Count="2" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.Restore">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.ServiceMode">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Cylinder.Stop">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
