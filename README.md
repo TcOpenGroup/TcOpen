@@ -194,9 +194,15 @@ Please submit questions, suggestions, bug reports [here](https://github.com/TcOp
 Various discussion [here](https://github.com/TcOpenGroup/TcOpen/discussions).
 
 ## Code format 
-TcOpen is powered by STweep for TwinCAT![STweep](https://user-images.githubusercontent.com/33071638/117724665-5dd78f80-b1e4-11eb-8eb1-31a9b54a96e3.png)
+TcOpen is powered by STweep for TwinCAT a source code formatter for Structured Text.
 
+When contributing to TcOpen please use this set of settings for STweep: [TCOpen.zip](https://github.com/Barteling/TcOpen/files/6455049/TCOpen.zip)
 
+STweep is free of charge for active contributers to this project.
+
+For requesting a license for STweep visit www.stweep.com/Opensource
+
+<a href="www.STweep.com"><img src="https://user-images.githubusercontent.com/33071638/117724819-9b3c1d00-b1e4-11eb-89f1-ead8de7889e9.png" height="125" width="250" ></a>
 
 ### Awesome TwinCAT 3 projects 🌐
 
