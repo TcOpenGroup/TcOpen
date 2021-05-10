@@ -202,7 +202,7 @@ STweep is free of charge for active contributers to this project.
 
 For requesting a license for STweep visit www.stweep.com/Opensource
 
-<a href="www.STweep.com"><img src="https://user-images.githubusercontent.com/33071638/117724819-9b3c1d00-b1e4-11eb-89f1-ead8de7889e9.png" height="125" width="250" ></a>
+<a href="https://www.STweep.com"><img src="https://user-images.githubusercontent.com/33071638/117724819-9b3c1d00-b1e4-11eb-89f1-ead8de7889e9.png" height="125" width="250" ></a>
 
 ### Awesome TwinCAT 3 projects 🌐
 
