@@ -40,7 +40,7 @@ namespace TcoCore
         /// <summary>
         /// Performs refresh of the messages of this <see cref="TcoObject"/> and all its child object.
         /// </summary>
-        /// <returns>Enumerable of messages as POCO object.</returns>
+        /// <returns>Enumerable of messages as POCO object.</returns>       
         public IEnumerable<PlainTcoMessage> GetActiveMessages()
         {
             if (refreshTags == null)
@@ -50,7 +50,13 @@ namespace TcoCore
                 refreshTags.AddRange(GetObjectMessages().Select(p => p.Cycle));
             }
 
-            this.GetConnector().ReadBatch(refreshTags);
+            // We must check that the connector did start R/W operations loop, due to possible dead lock at start-up
+            // Reported to Inxton team as FOXTROTH #564
+
+            if (this.GetConnector().RwCycleCount > 1)
+            { 
+                this.GetConnector().ReadBatch(refreshTags);
+            }
 
             return GetObjectMessages().Where(p => p.IsActive).Select(p => p.PlainMessage);
         }
