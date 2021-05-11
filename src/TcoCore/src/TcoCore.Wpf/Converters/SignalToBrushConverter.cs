@@ -7,7 +7,7 @@ using Vortex.Presentation.Wpf.Converters;
 namespace TcoCore
 {
     /// <summary>
-    /// Will convert boolean values to Brusheh which represent wheter signal is on, or off
+    /// Will convert boolean values to Brush which represent whether signal is on, or off
     /// Using the MaterialDesignXaml toolkit http://materialdesigninxaml.net/  and it's color palette
     /// 
     /// Signal On is the Accent color from the palette, signal off si Dark color.
