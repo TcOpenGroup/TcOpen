@@ -1,0 +1,21 @@
+name: Build
+on:
+  push:
+    branches: [ initial-dev ]
+  pull_request:
+    branches: [ initial-dev ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # Check if the action works
+      - name: Run a one-line script
+        run: echo Hello, world!
+      # Run psake
+      - name: Run a multi-line script
+        run: |
+          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
