@@ -30,6 +30,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Sandbox\TcoElementsSandbox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoDiTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -38,6 +41,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Sandbox" />
     <Folder Include="Tests" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

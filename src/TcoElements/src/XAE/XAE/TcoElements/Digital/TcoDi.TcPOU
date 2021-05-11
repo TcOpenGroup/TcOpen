@@ -29,11 +29,25 @@ VAR
 	</docu>	
 	~*)
 	_signal : BOOL;	
+END_VAR
+
+VAR
+	_isTrueTask : TcoCore.TcoTask(THIS^);
+	_isFalseTask : TcoCore.TcoTask(THIS^);	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
 	_signal := inoSignal;	
-END_IF;	]]></ST>
+END_IF;	
+
+
+IF(_isTrueTask.Execute())THEN
+	_isTrueTask.DoneWhen(IsTrue);
+END_IF
+
+IF(_isFalseTask.Execute())THEN
+	_isFalseTask.DoneWhen(IsFalse);
+END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{ab66c675-5325-0f32-2184-6fc98948f748}">
       <Declaration><![CDATA[METHOD FB_init : BOOL

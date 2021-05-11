@@ -10,11 +10,4 @@
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\TcoElementsConnector\TcoElementsConnector.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Digital\TcoDiServiceView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
-
 </Project>
