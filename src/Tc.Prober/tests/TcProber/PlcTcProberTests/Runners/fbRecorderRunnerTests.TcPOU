@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="fbRecorderRunnerTests" Id="{00761f1f-400a-4359-962b-f4cbcfef3f3d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbRecorderRunnerTests
 VAR
-    _recorder : stRecorder; 	
+    _recorder : stRecorder; 		
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -27,14 +27,5 @@ METHOD RunWithRecorder : INT
         <ST><![CDATA[RunWithRecorder := _recorder.counter;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="fbRecorderRunnerTests">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="fbRecorderRunnerTests.ResetCounter">
-      <LineId Id="34" Count="0" />
-    </LineIds>
-    <LineIds Name="fbRecorderRunnerTests.RunWithRecorder">
-      <LineId Id="34" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="fbInheritanceLevel_1" Id="{4e2e9ab9-ceb4-435b-b38d-e15082393af6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbInheritanceLevel_1 EXTENDS fbRootLevelStruct 
 VAR
 	{attribute addProperty Name "LEVEL 1"}
-	level_1 : stAllTypes;
+	level_1 : stAllTypes;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -43,13 +43,5 @@ level_1.DT_val :=    DT#2106-02-07-6:28:15;
 level_1.LTIME_val :=   LTIME#213503D23H34M33S709MS551US615NS;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="fbInheritanceLevel_1">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="fbInheritanceLevel_1.Init">
-      <LineId Id="5" Count="0" />
-      <LineId Id="10" Count="21" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
