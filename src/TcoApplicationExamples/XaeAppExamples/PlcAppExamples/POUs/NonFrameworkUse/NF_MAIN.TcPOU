@@ -9,7 +9,9 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_context.VolatileOpen();
+
 _logic();
+
 _context.VolatileClose();]]></ST>
     </Implementation>
     <Property Name="Context" Id="{ea8b9138-b32c-43c8-a6d7-9ab2ccc07ada}">

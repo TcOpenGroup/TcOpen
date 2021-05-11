@@ -7,15 +7,11 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_piston.Service();
+      <ST><![CDATA[
+_piston.Service();
 
 _piston();
 ]]></ST>
     </Implementation>
-    <LineIds Name="NF_Logic">
-      <LineId Id="12" Count="1" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="11" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
