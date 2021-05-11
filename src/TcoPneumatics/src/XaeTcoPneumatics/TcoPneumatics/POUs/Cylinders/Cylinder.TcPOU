@@ -10,9 +10,7 @@ VAR_INPUT
 			</summary>	
 		</docu>
 	~*)
-	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute wpf [Group(Layout.GroupBox, "Inputs")]}	
-	{attribute addProperty Name "Home position sensor"}
+	{attribute addProperty Name "<#Home position sensor#>"}
 	inAtHomePos : BOOL;
 	(*~
 		<docu>
@@ -21,7 +19,7 @@ VAR_INPUT
 			</summary>	
 		</docu>
 	~*) 
-	{attribute addProperty Name "Work position sensor"}
+	{attribute addProperty Name "<#Work position sensor#>"}
 	inAtWorkPos : BOOL; 
 END_VAR
 VAR_OUTPUT
@@ -32,9 +30,7 @@ VAR_OUTPUT
 			</summary>	
 		</docu>
 	~*)
-	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute wpf [Group(Layout.GroupBox, "Outputs")]}	
-	{attribute addProperty Name "Move to home position actuator"}
+	{attribute addProperty Name "<#Move to home position actuator#>"}
 	outToHomePos : BOOL;
 	(*~
 		<docu>
@@ -43,17 +39,16 @@ VAR_OUTPUT
 			</summary>	
 		</docu>
 	~*)
-	{attribute addProperty Name "Move to work position actuator"}
+	{attribute addProperty Name "<#Move to work position actuator#>"}
 	outToWorkPos : BOOL;
 END_VAR
 
 VAR	
-	{attribute wpf [Container(Layout.UniformGrid)]}
-	{attribute addProperty Name "Request move to Home position"}	
+	{attribute addProperty Name "<#Request move to Home position#>"}	
 	_moveHomeTask : TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "Request move to Work position"}
+	{attribute addProperty Name "<#Request move to Work position#>"}
 	_moveWorkTask : TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "Request Stop"}
+	{attribute addProperty Name "<#Request Stop#>"}
 	_stopTask : TcoCore.TcoTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
@@ -163,7 +158,7 @@ SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
 		<returns>True when home position sensor is reached.</returns>
 	</docu>
 ~*)
-METHOD MoveToHome : TcoCore.ITcoTask]]></Declaration>
+METHOD MoveToHome : TcoCore.ITcoTaskStatus]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._moveHomeTask.Invoke();
 MoveToHome := THIS^._moveHomeTask;
@@ -181,7 +176,7 @@ MoveToHome := THIS^._moveHomeTask;
 		<returns>True when working position sensor is reached.</returns>
 	</docu>
 ~*)
-METHOD MoveToWork : TcoCore.ITcoTask
+METHOD MoveToWork : TcoCore.ITcoTaskStatus
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._moveWorkTask.Invoke();

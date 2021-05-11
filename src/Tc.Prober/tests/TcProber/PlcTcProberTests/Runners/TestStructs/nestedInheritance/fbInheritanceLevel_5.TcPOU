@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="fbInheritanceLevel_5" Id="{74807b99-3731-41e6-9f64-0e44d94b184c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbInheritanceLevel_5 EXTENDS fbInheritanceLevel_4
 VAR
 	{attribute addProperty Name "LEVEL 5"}
-	level_5 : stAllTypes;		
+	level_5 : stAllTypes;			
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -19,11 +19,5 @@ END_VAR
         <ST><![CDATA[SUPER^.Init();]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="fbInheritanceLevel_5">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="fbInheritanceLevel_5.Init">
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

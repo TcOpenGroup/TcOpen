@@ -6,6 +6,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="assets\nfuse.PNG" />
     <None Remove="Tutorial\401_ConnectingDots\Images\100-800.PNG" />
   </ItemGroup>
   <ItemGroup>
@@ -15,6 +16,9 @@
 	  <PackageReference Include="MdXaml" Version="1.10.0" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\nfuse.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Tutorial\401_ConnectingDots\Images\100-800.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

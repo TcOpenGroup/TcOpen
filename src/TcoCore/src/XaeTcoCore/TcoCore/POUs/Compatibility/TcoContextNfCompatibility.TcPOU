@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoContextNfCompatibility" Id="{ecb51e5b-aa76-4bdc-9a90-de522a9d69ee}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL TcoContextNfCompatibility EXTENDS TcoContextCompatibility
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cc2e5ac9-9371-4d57-a8ee-2f167ab4c0c4}">
+      <Declaration><![CDATA[METHOD PROTECTED FINAL Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VolatileClose" Id="{99ea6149-a9cb-4e95-8e93-dc1156107c90}">
+      <Declaration><![CDATA[METHOD PUBLIC VolatileClose
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VolatileOpen" Id="{15ea9abe-e110-469a-b218-80cc9ec12892}">
+      <Declaration><![CDATA[METHOD PUBLIC VolatileOpen
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._Open();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

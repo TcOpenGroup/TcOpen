@@ -23,16 +23,16 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE _testId OF
 	50:
-		_sutNotInitialized.IsTrue;
-		_sutNotInitialized.IsFalse;
+	_sutNotInitialized.IsTrue;
+	_sutNotInitialized.IsFalse;
 		_sutNotInitialized.Service();
-		_sutNotInitialized.Restore();		
+		_sutNotInitialized.Restore();
 	100:
 		_sut(inoSignal := _signal);
-		_IsTrue_result :=_sut.IsTrue;		
+		_IsTrue_result := _sut.IsTrue;
 	200:
 		_sut(inoSignal := _signal);
-		_IsFalse_result := _sut.IsFalse;	
+		_IsFalse_result := _sut.IsFalse;
 END_CASE
 ]]></ST>
       </Implementation>

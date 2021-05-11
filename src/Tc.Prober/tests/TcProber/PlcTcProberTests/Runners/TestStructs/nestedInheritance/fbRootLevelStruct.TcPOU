@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="fbRootLevelStruct" Id="{99be50ca-7041-4b7d-adb9-e2b1fd3c10ba}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbRootLevelStruct
 VAR
 	{attribute addProperty Name "LEVEL 0"}
-	level_0 : stAllTypes;
+	level_0 : stAllTypes;	
 END_VAR
 
 VAR CONSTANT
@@ -44,12 +44,5 @@ level_0.DT_val :=    DT#1970-01-01-00:00;
 level_0.LTIME_val :=    LTIME#0S;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="fbRootLevelStruct">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="fbRootLevelStruct.Init">
-      <LineId Id="33" Count="21" />
-      <LineId Id="31" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

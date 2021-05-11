@@ -5,11 +5,14 @@
 VAR
 	_tcoDigitalSensorTests : TcoDiTests;
 	_tcoDigitalActuatorTests : TcoDoTests;
+	_tcoElementsSandbox : TcoElementsSandbox;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoDigitalSensorTests.ProbeRun();
-_tcoDigitalActuatorTests.ProbeRun();]]></ST>
+_tcoDigitalActuatorTests.ProbeRun();
+
+_tcoElementsSandbox.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

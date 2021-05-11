@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:plcappexamples="clr-namespace:PlcAppExamples"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:nonframeworkcomponentuse="clr-namespace:TcoApplicationExamples.Wpf.NonFrameworkComponentUse"
     Title="MainWindow"
     DataContext="{x:Static local:App.PlcAppExamples}"
     WindowStartupLocation="CenterOwner"
@@ -101,7 +101,9 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
-
+            <TabItem Header="Non framework use of components">
+                <nonframeworkcomponentuse:NFComponentUse></nonframeworkcomponentuse:NFComponentUse>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
