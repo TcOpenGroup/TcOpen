@@ -9,7 +9,7 @@
   $publishNugets = $false
   $updateAssemblyInfo = $false
   $gitVersion
-  $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
+  $msbuild = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
   $dotnet = "C:\Program Files\dotnet\dotnet.exe"
   $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
   $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
@@ -58,21 +58,17 @@ task NugetRestore -depends Clean {
    exec{
        & $dotnet restore TcOpen.build.slnf
    }
-   
-   try {
-      # Try to Restore IVC into _Vortex directory
-      # May fail due to missing g.cs files
-      $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
-      Write-Host $command
-      cmd /c $command
-   }
-   catch {
-     # Swallow
-   }
-      
 } 
 
-task GitVersion -depends NugetRestore {
+task CopyInxton -depends NugetRestore -continueOnError {
+  exec {
+      & $dotnet build `
+        .\src\TcoApplicationExamples\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj `
+        /p:SolutionDir=$solutionDir
+  }
+}
+
+task GitVersion -depends CopyInxton {
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
   $script:gitVersion =  & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/nofetch" "/config" "$baseDir/GitVersion.yml" |  ConvertFrom-Json 
@@ -134,10 +130,13 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
 
 task Build -depends BuildWithInxtonBuilder {
   #/consoleloggerparameters:ErrorsOnly  
-   $command = $msbuild + " /p:Configuration=$buildConfig -noWarn:CS1591;CS0067;CS0108;CS1570 /consoleloggerparameters:ErrorsOnly  -v:$msbuildVerbosity  .\TcOpen.build.slnf"
   Write-Host $command
   exec{
-      cmd /c $command
+     & $msbuild .\TcOpen.build.slnf `
+        /p:Configuration=$buildConfig `
+        -noWarn:CS1591;CS0067;CS0108;CS1570 `
+        /consoleloggerparameters:ErrorsOnly `
+        -v:$msbuildVerbosity    
   }
 }
 
