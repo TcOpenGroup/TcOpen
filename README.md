@@ -168,7 +168,7 @@ Switch profile to Debug|TwinCAT RT (x64)
 
 ![Profile set](assets/pics/compile_profile.png)
 
-> The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)
+**The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)**
 
 ## Communication channels
 
