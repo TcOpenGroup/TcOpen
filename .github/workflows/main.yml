@@ -14,4 +14,4 @@ jobs:
       # Run psake
       - name: Run a multi-line script
         run: |
-          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
+          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"; "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" }
