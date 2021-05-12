@@ -1,11 +1,7 @@
 name: Build
-on:
-  push:
-    branches: [ initial-dev ]
-  pull_request:
-    branches: [ initial-dev ]
+
+on: [push, pull_request, workflow_dispatch]
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 jobs:
   build:
     runs-on: self-hosted
