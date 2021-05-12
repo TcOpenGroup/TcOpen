@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="fbPistonMoveTask" Id="{b9f74900-963d-0b1a-2103-6fbbac7ef37b}" SpecialFunc="None">
+  <POU Name="fbPistonMoveTask" Id="{0b68a520-11c2-033f-1738-0189039112a4}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute addProperty Activity "task is running"}
 FUNCTION_BLOCK fbPistonMoveTask EXTENDS TcoCore.TcoTask
 VAR_INPUT

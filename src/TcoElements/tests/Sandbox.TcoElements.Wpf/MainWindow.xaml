@@ -14,48 +14,18 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="Tests elemnts">
+        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}" Header="Elements">
             <StackPanel>
-                <vortex:RenderableContentControl
-                    Grid.Row="0"
-                    DataContext="{Binding _tcoDigitalSensorTests._sut}"
-                    PresentationType="Manual" />
-                <vortex:RenderableContentControl
-                    Grid.Row="0"
-                    DataContext="{Binding _tcoDigitalSensorTests._sut}"
-                    PresentationType="Manual" />
-                <vortex:RenderableContentControl
-                    Grid.Row="0"
-                    DataContext="{Binding _tcoDigitalSensorTests._sut}"
-                    PresentationType="Manual" />
-                <vortex:RenderableContentControl
-                    Grid.Row="0"
-                    DataContext="{Binding _tcoDigitalSensorTests._sut}"
-                    PresentationType="Manual" />
-                <vortex:RenderableContentControl
-                    Grid.Row="0"
-                    DataContext="{Binding _tcoDigitalSensorTests._sut}"
-                    PresentationType="Manual" />
+                <GroupBox Header="Service">
+                    <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
+                </GroupBox>
+                <GroupBox Header="Coach">
+                    <vortex:RenderableContentControl PresentationType="Coach"></vortex:RenderableContentControl>
+                </GroupBox>
+                <GroupBox Header="Diagnostics">
+                    <vortex:RenderableContentControl PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                </GroupBox>
             </StackPanel>
-
-        </TabItem>
-        <TabItem Header="Tasks">
-            <Grid Grid.Row="0" DataContext="{Binding TcoElementsPlc.MAIN._sampleContext, Mode=OneWay}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <vortex:RenderableContentControl
-                    Grid.Row="0"
-                    DataContext="{Binding _sampleComponent._sampleTask, Mode=OneWay}"
-                    PresentationType="Base" />
-                <vortex:RenderableContentControl
-                    Grid.Row="1"
-                    DataContext="{Binding _sampleComponent._sampleTask, Mode=OneWay}"
-                    PresentationType="ControlSlim" />
-            </Grid>
-
         </TabItem>
     </TabControl>
-
 </Window>

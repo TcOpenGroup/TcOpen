@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="fbBasicRunnerTests" Id="{fd9c95ca-8e53-463c-8da7-85668c18933c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbBasicRunnerTests
 VAR
@@ -38,18 +38,5 @@ END_VAR
         <ST><![CDATA[RunUntilReturnsTrue := _m; ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="fbBasicRunnerTests">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="fbBasicRunnerTests.ResetCounter">
-      <LineId Id="34" Count="0" />
-    </LineIds>
-    <LineIds Name="fbBasicRunnerTests.RunCount">
-      <LineId Id="5" Count="0" />
-      <LineId Id="11" Count="0" />
-    </LineIds>
-    <LineIds Name="fbBasicRunnerTests.RunUntilReturnsTrue">
-      <LineId Id="11" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="StringBuilder" Id="{1690d5c1-eb92-04b5-39f9-d1d1b7ea958d}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+<docu>
+	<summary>
+			Allows to concat strings using fluent interface. It's similar to C# StringBuilder class
+			Usage as follows :
+			<code>
+				ErrorString := _stringBuilder
+					.Clear()
+					.Append('Error number: ')
+					.Append(INT_TO_STRING(ErrorNumber))
+					.Append('. Message: ')
+					.Append(ErrorMessage)
+					.Append('.')
+					.ToString();
+			</code>
+			
+			Inspired by Gerhard Barteling blogpost at https://www.plccoder.com/fluent-code/
+	</summary>				
+</docu>	
+~*)	
+FUNCTION_BLOCK StringBuilder
+VAR
+	{attribute 'hide'}
+    _workString:STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Append" Id="{a9cd2d8b-8145-0c23-206c-ae933c3ebe7f}">
+      <Declaration><![CDATA[METHOD Append : REFERENCE TO StringBuilder
+VAR_INPUT
+    Text :STRING; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_workString := Concat(_workString,text);
+Append REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{0378ca3b-d134-07c2-0629-05b04e8ddb79}">
+      <Declaration><![CDATA[METHOD Clear : REFERENCE TO StringBuilder
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_workString := '';
+Clear REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ToString" Id="{dd6389b5-b5c9-06d5-0b23-bf4eff042e8b}">
+      <Declaration><![CDATA[METHOD ToString : STRING]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ToString := _workString;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

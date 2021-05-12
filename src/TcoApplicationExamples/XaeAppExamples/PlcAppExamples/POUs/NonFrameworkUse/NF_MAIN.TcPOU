@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="NF_MAIN" Id="{473a5c79-71ed-4434-b17a-54ad46fd7dad}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM NF_MAIN
+VAR
+	_context : TcoCore.TcoContextNfCompatibility;	
+	_logic : NF_Logic;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_context.VolatileOpen();
+
+_logic();
+
+_context.VolatileClose();]]></ST>
+    </Implementation>
+    <Property Name="Context" Id="{ea8b9138-b32c-43c8-a6d7-9ab2ccc07ada}">
+      <Declaration><![CDATA[PROPERTY Context : REFERENCE TO TcoCore.TcoContextNfCompatibility]]></Declaration>
+      <Get Name="Get" Id="{2935880d-9d01-4fcc-9b09-0aedf712bda2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Context REF= _context;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

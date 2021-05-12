@@ -10,7 +10,7 @@ VAR
 	_chn1Basic : IFuseChannelBasic;
 	_chn2Basic : IFuseChannelBasic;
 	_chn1Extended : IFuseChannelExtended;
-	_chn2Extended : IFuseChannelExtended;
+	_chn2Extended : IFuseChannelExtended;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -32,12 +32,5 @@ _chn2Basic := chn2;
 __QUERYINTERFACE(_chn2Basic, _chn2Extended);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FuseModuleEL922x">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseModuleEL922x.FB_init">
-      <LineId Id="9" Count="2" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -7,7 +7,7 @@
 				Generic component for discrete control of an output.												
 		</summary>				
 	</docu>	
-~*)	
+~*)
 FUNCTION_BLOCK TcoDo EXTENDS TcoCore.TcoComponent
 VAR_IN_OUT
 	(*~
@@ -29,12 +29,25 @@ VAR
 	</docu>	
 	~*)
 	_signal : BOOL;
-END_VAR]]></Declaration>
+END_VAR
+
+VAR
+	_setTask	 : TcoCore.TcoTask(THIS^);
+	_resetTask	 : TcoCore.TcoTask(THIS^);
+END_VAR
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
 	 inoSignal := _signal;	
 END_IF;	
-	]]></ST>
+	
+IF(_setTask.Execute())THEN
+	_setTask.DoneWhen(Set());
+END_IF
+
+IF(_resetTask.Execute())THEN
+	_resetTask.DoneWhen(Reset());
+END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{3d495706-c76b-095e-389f-7ba6c1dae3a7}">
       <Declaration><![CDATA[METHOD FB_init : BOOL

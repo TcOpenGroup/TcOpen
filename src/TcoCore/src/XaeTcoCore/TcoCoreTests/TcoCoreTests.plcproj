@@ -76,9 +76,13 @@
     <Compile Include="Tests\TcoTask\TcoTaskTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Utilities\StringBuilderTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
+    <Folder Include="Tests\Utilities" />
     <Folder Include="Tests\TcoComponent" />
     <Folder Include="Tests\TcoObject\EqualsOverride" />
     <Folder Include="Tests\TcoRtc" />
