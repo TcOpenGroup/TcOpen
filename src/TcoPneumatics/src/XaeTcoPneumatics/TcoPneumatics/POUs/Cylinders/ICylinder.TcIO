@@ -16,12 +16,12 @@
       </Get>
     </Property>
     <Method Name="MoveToHome" Id="{d6e3c3c7-b7b1-4768-b83a-9594a0e909ac}">
-      <Declaration><![CDATA[METHOD MoveToHome : TcoCore.ITcoTask
+      <Declaration><![CDATA[METHOD MoveToHome : TcoCore.ITcoTaskStatus
 
 ]]></Declaration>
     </Method>
     <Method Name="MoveToWork" Id="{dd77db31-fa7d-47a7-90b5-c7891872d98e}">
-      <Declaration><![CDATA[METHOD MoveToWork : TcoCore.ITcoTask
+      <Declaration><![CDATA[METHOD MoveToWork :TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
   </Itf>

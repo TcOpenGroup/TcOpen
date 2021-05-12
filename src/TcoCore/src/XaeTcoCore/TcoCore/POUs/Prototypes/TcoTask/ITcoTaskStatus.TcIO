@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoTaskStatus" Id="{6341a5e9-539f-07e2-2781-89effa0ed565}">
+    <Declaration><![CDATA[INTERFACE ITcoTaskStatus
+]]></Declaration>
+    <Property Name="Busy" Id="{0f27cd62-9c61-0157-0eeb-42c4f74b66be}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ae011746-e617-02b7-243e-e8509384b84f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Done" Id="{e7e4f0d2-681c-0127-20a0-25e98eef98f1}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ad228e2d-55b7-001f-0fb1-ccc8383b9be3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Error" Id="{e997df47-5359-0431-0d62-646922dde6fe}">
+      <Declaration><![CDATA[PROPERTY Error : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1c91e88f-586c-08a8-3390-342071b85c00}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

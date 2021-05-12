@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eRestoreMode" Id="{8301561c-4174-07b5-10c0-66adbcb58c64}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eRestoreMode :
+(
+	None := 0,
+	
+	(*~
+	<docu>
+		<summary>
+				Activates automatic restore mechanism for all immediate children (direct members).
+		</summary>				
+	</docu>	
+	~*)	
+	AutoRestoreMembers := 10
+);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

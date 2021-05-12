@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Tco_TO_Tc2MC2_Direction" Id="{9d6fa348-cba6-0b0d-0453-d3693af0dcba}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tco_TO_Tc2MC2_Direction : BOOL
+VAR_INPUT
+	TcoDirection	:	eDirection;
+END_VAR
+VAR_IN_OUT
+	Tc2MC2Direction	:	Tc2_MC2.MC_Direction;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE TcoDirection OF
+	eDirection.MC_Current_Direction :
+		Tc2MC2Direction	:=	Tc2_MC2.MC_Direction.MC_Current_Direction;
+		Tco_TO_Tc2MC2_Direction	:= TRUE;
+		
+	eDirection.MC_Negative_Direction :
+		Tc2MC2Direction	:=	Tc2_MC2.MC_Direction.MC_Negative_Direction;
+		Tco_TO_Tc2MC2_Direction	:= TRUE;
+		
+	eDirection.MC_Positive_Direction :
+		Tc2MC2Direction	:=	Tc2_MC2.MC_Direction.MC_Positive_Direction;
+		Tco_TO_Tc2MC2_Direction	:= TRUE;
+		
+	eDirection.MC_Shortest_Way :
+		Tc2MC2Direction	:=	Tc2_MC2.MC_Direction.MC_Shortest_Way;
+		Tco_TO_Tc2MC2_Direction	:= TRUE;
+		
+	eDirection.MC_Undefined_Direction :
+		Tc2MC2Direction	:=	Tc2_MC2.MC_Direction.MC_Undefined_Direction;
+		Tco_TO_Tc2MC2_Direction	:= TRUE;
+	ELSE
+		Tco_TO_Tc2MC2_Direction := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

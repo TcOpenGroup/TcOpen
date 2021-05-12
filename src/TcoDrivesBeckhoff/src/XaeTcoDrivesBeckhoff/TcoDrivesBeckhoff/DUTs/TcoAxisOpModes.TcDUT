@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="TcoAxisOpModes" Id="{6b6d9718-936e-0b8c-15b6-437db36c4d7e}">
+    <Declaration><![CDATA[TYPE TcoAxisOpModes :
+STRUCT
+    PositionAreaMonitoring   : BOOL; (* bit 0 - OpModeDWord *)
+    TargetPositionMonitoring : BOOL; (* bit 1 - OpModeDWord *)
+    LoopMode                 : BOOL; (* bit 2 - OpModeDWord - loop mode for two speed axes *)
+    MotionMonitoring         : BOOL; (* bit 3 - OpModeDWord *)
+    PEHTimeMonitoring        : BOOL; (* bit 4 - OpModeDWord *)
+    BacklashCompensation     : BOOL; (* bit 5 - OpModeDWord *)
+    Modulo                   : BOOL; (* bit 7 - OpModeDWord - axis is parameterized as modulo axis *)
+    PositionLagMonitoring    : BOOL; (* bit 16 - OpModeDWord *)
+    VelocityLagMonitoring    : BOOL; (* bit 17 - OpModeDWord *)
+    SoftLimitMinMonitoring   : BOOL; (* bit 18 - OpModeDWord *)
+    SoftLimitMaxMonitoring   : BOOL; (* bit 19 - OpModeDWord *)
+    PositionCorrection       : BOOL; (* bit 20 - OpModeDWord *)
+END_STRUCT
+END_TYPE ]]></Declaration>
+  </DUT>
+</TcPlcObject>

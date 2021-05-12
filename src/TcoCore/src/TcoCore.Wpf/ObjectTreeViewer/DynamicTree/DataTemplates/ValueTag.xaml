@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    x:Class="Tco.Wpf.DynamicTree.DataTemplates.ValueTag"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vortex="http://vortex.mts/xaml">
+
+    <DataTemplate x:Key="ValueTagTemplate" x:Name="ValueTagTemplate">
+        <ContentControl>
+            <vortex:RenderableContentControl PresentationType="ControlSlim" />
+        </ContentControl>
+    </DataTemplate>
+
+</ResourceDictionary>

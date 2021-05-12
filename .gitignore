@@ -27,6 +27,9 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
+# dotnet test results
+*.trx
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
@@ -216,6 +219,12 @@ _Vortex/
 CompilerCache.md
 log.txt
 pal.txt
+_meta/
+_generated/
+*.g.cs
+*.lbz
+version.info
+*.plcproj.version.update
 
 # IVF Tools
 _toolz/
@@ -224,5 +233,7 @@ nugets/
 # CodeRush
 .cr/
 
+*.TcCD
 
-
+# VSCode
+.vscode/

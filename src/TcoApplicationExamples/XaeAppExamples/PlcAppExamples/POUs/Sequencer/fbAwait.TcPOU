@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbAwait" Id="{5d277946-a10c-0945-26ab-70abcf6da4de}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbAwait
+VAR
+	Timer : Tc2_Standard.TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Delay" Id="{43578758-a06a-096b-172c-40034bf4da0a}">
+      <Declaration><![CDATA[METHOD Delay : BOOL
+VAR_INPUT
+	Timespan : TIME;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Timer(IN := TRUE, PT := Timespan);
+
+IF Timer.Q THEN
+	Timer(IN := FALSE, PT := T#0S);
+	
+	Delay := TRUE;
+ELSE
+	Delay := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Sometime" Id="{afcdfa1f-c41f-0605-1d11-0da5aa0754c7}">
+      <Declaration><![CDATA[METHOD Sometime : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Sometime := Delay(T#1S);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

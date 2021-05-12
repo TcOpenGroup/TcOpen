@@ -1,20 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoObject" Id="{ead5f617-b47e-4906-ac53-e73d5d26a62b}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Basic construction block from which all blocks of a TcOpen application should derive in order to take advantage of the framework. 
+			This function block is abstract and must be implemented in a derived block.
+			```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
+			```TcoObjects``` that belong to same ```TcoContext``` share the same context. 
+			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).            			
+			<para>
+				<example>
+				<note type="Example">
+				<para>
+					All the variables _myContext, _ContextTcoObjectA, _ContextTcoObjectB, _ContextChildTcoObject should have all the same value.
+				</para>
+				<para>
+					All the variables _myIdentity, _TcoObjectAidentity, _TcoObjectBidentity, _ChildTcoObjectidentity should have uniques values.
+				</para>
+					<code>
+							//Definition of the myTcoObject 
+							FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
+							VAR
+								  _myChildTcoObject	:	myChildTcoObject(THIS^);
+							END_VAR
+						
+						
+							//Definition of the myTcoContext 
+							FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
+							VAR
+								  _myTcoObjectA		:	myTcoObject(THIS^);					
+								  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context); 
+								  _myContext		:	ITcoContext;
+								  _ContextTcoObjectA	:	ITcoContext;
+								  _ContextTcoObjectB	:	ITcoContext;
+								  _ContextChildTcoObject	:	ITcoContext;
+								  _myIdentity		:	ULINT;
+								  _TcoObjectAidentity	: 	ULINT;
+								  _TcoObjectBidentity	: 	ULINT;
+								  _ChildTcoObjectidentity	: 	ULINT;							
+							END_VAR
+						
+							//Plc code of the myTcoContext 
+							_myContext		:= 		THIS^.Context;
+							_ContextTcoObjectA	:=		_myTcoObjectA.Context;
+							_ContextTcoObjectB	:=		_myTcoObjectB.Context;
+							_ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
+							_myIdentity		:=		THIS^.Identity;
+							_TcoObjectAidentity	:=		_myTcoObjectA.Identity;
+							_TcoObjectBidentity	:=		_myTcoObjectB.Identity;
+							_ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
+					</code>
+					 <note type="Explanation">
+						<para>
+							The context of the myTcoContext instance is assigned to itself. As the _myTcoObjectA context is assigned to this instance of the myTcoContext, it is assigned to the same context,
+							and the value of the _ContextTcoObjectA will be the same as the value of the _myContext.
+						</para>					
+						<para>
+							The context of the _myTcoObjectB instance is assigned to the _myTcoObjectA, that has already assigned context to this instance of the myTcoContext.
+							So the value of the _ContextTcoObjectB will be the same as the values of the _ContextTcoObjectA and _myContext.
+						</para>					
+						<para>
+							The context of the _myTcoObjectB._myChildTcoObject instance is assigned to the _myTcoObjectB, that has already assigned context to _myTcoObjectA, 
+							that has already assigned its context to this instance of the myTcoContext.
+							So the value of the _ContextChildTcoObject wile be the same as the values _ContextTcoObjectB,_ContextTcoObjectA and _myContext.
+						</para>
+						<para>
+							As the Identities of all objects points to the themselves, all identities will have different values, as all objects are unique.
+						</para>					
+					 </note>
+				 </note>
+				</example>
+			</para>
+ 		</summary>			
+	</docu>	
+~*)
+FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject 
 VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
 	_Identity : ULINT;
 	{attribute 'hide'}
-	_Parent : ITcoObject;
+	_Parent : ITcoObject;	
+	{attribute clr [RenderIgnore()]}
+	_messenger : TcoMessenger(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Context" Id="{e9fccf88-109e-4118-831f-0290f859ab39}">
-      <Declaration><![CDATA[PROPERTY Context : ITcoContext]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the context of the this object. The context is provided by parent object(s).			
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{6c6cf6e8-01f1-4c58-9a7c-25846f41a746}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -24,6 +107,51 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="EqualsTo" Id="{4cbabb6f-bb30-0500-2ad1-c579fa67b5bc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Compares this object to another object and returns ```true``` when the reference equals. 
+			When overriden in derived class custom comparison of two objects of the same type can be evaluated.						
+ 		</summary>			
+		<note>
+			Default implementation compares only if two objects share the same reference. 
+			If you want to compare actual values of the objects you will need to override EqualsTo method, 
+			where you evaluate the values for equality.
+		</note>
+		<example>
+			<code>
+				// EqualsTo method override example of type MyObject
+				METHOD PUBLIC EqualsTo : BOOL
+				VAR_INPUT
+					Object : ITcoObject;
+				END_VAR
+				
+				VAR
+					_object : POINTER TO MyObject;
+				END_VAR
+				//--------------------------------------------
+				IF(__QUERYPOINTER(Object,  _object)) THEN
+					EqualsTo := _object^._SomeNumber = THIS^._SomeNumber AND _object^._SomeString = THIS^._SomeString;
+				END_IF;	
+			</code>
+		</example>
+	</docu>	
+~*)
+METHOD PUBLIC EqualsTo : BOOL
+VAR_INPUT
+	Object : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(Object.Identity <> 0) THEN
+	EqualsTo := Object.Identity = THIS^.Identity;
+END_IF
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FB_init" Id="{2172d94e-c218-46fa-950d-f8cdb30a05bd}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -41,7 +169,16 @@ _Parent := Parent;
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{3abfda68-92f0-402b-a0bc-b8b6f55297fc}">
-      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the identity of this <see cref ="TcoObject.PlcTcoObject()"/>. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level applications.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{d5a72207-d08f-4264-ba61-5f9bc3c2c475}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -51,20 +188,24 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="TcoObject">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject.Context.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject.FB_init">
-      <LineId Id="33" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="13" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoObject.Identity.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
+    <Property Name="Messenger" Id="{5cb47c0d-a801-0abb-190e-5e933bdfa487}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Gets messenger of this object.
+				See <see cref="TcoMessenger.PlcTcoMessenger()"/> for more details.
+			</summary>			
+		</docu>
+~*)
+PROPERTY Messenger : ITcoMessenger]]></Declaration>
+      <Get Name="Get" Id="{65916f0c-0b34-091f-0006-4929987a0f6b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

@@ -1,59 +1,166 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoTask" Id="{6a59f75f-f5a1-4550-ae7f-6604cc84c78a}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'initialize_on_call'}
-FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides basic task execution. Task could be started by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method. The  <see cref="TcoTask.PlcTcoTask.Execute()"/> method returns true, until the task reaches the Done state.
+			<para>
+				To get the actual state of the task, <see cref="TcoTask.PlcTcoTask.Ready()"/>, <see cref="TcoTask.PlcTcoTask.Busy()"/>, <see cref="TcoTask.PlcTcoTask.Error()"/> and <see cref="TcoTask.PlcTcoTask.Done()"/> properties are available.
+			</para>
+		</summary>
+		<example>
+			Declaration part of the 'TcoTask' example. 
+		</example>
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Task/AskForTheFavor_Task.TcPOU?name=TaskExampleDeclarations)]
+		</example>
+		<example>
+			Implementation part of the 'TcoTask' example.
+		</example>
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Task/AskForTheFavor_Task.TcPOU?name=TaskBodyExampleCode)]
+		</example>
+		<example>
+			Example of the invoking this example 'TcoTask' instance 'outside' of the instance and wait if it ends-up in 'DONE' state or in 'ERROR' state.
+		</example>
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Sequencer/MakeAnOfferThatCantBeRefused.TcPOU?name=TaskExternalUseExample)]
+		</example>
+	</docu>	
+~*)	
+FUNCTION_BLOCK TcoTask EXTENDS TcoObject IMPLEMENTS ITcoTask, ITcoTaskStatus
 VAR
-	_taskState : eTaskState;
-	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
+	_taskState : eTaskState;
+	{attribute 'hide'}
 	_nextExpectedCycle : ULINT;
-	_messenger : TcoMessenger(THIS^);
 	{attribute 'hide'}
 	_AutoRestorable : BOOL;
 	{attribute 'hide'}
 	_StartCycleCount	: ULINT;
 	{attribute 'hide'}
 	_MyParentsChangeStateCycle	: ULINT;
+	{attribute 'hide'}
+	_MyParentsLastChangeState	: INT;	
+(*~
+	<docu>
+		<summary>
+			Use to restore this instance to the Ready state. The value is than set to FALSE.			
+		</summary>		
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Restore request#>"}
+	_restoreRequest : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to start the execution of the task from Ready state or from Done state by performing the rising edge. 
+			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>			
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Invoke request#>"}
+	_invokeRequest : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to determine if the task execution is enabled for example from the HMI application. 
+			This value is read only, to modify it use the property <see cref="TcoTask.PlcTcoTask.Enabled()"/>		
+		</summary>		
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Enabled#>"}
+	{attribute clr [ReadOnly()]}
+	_enabled : BOOL := TRUE;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Abort" Id="{ca8e41d1-2cb9-48d5-bdcd-86aa4ca0697f}">
-      <Declaration><![CDATA[METHOD Abort
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Aborts the execution of this task and restores the ready state.			
+		</summary>			
+	</docu>	
+~*)
+METHOD Abort
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^._taskState = eTaskState.Executing THEN
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Busy THEN
 	THIS^.Restore();
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="AutoRestorable" Id="{4c53b6be-4431-4023-9211-e6e8695ffc3f}">
-      <Declaration><![CDATA[PROPERTY AutoRestorable : BOOL]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether this instance is auto restorable. This is depends on the parent's settings; the value of this property is given by the parent of this object. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> of the parent object and cannot be changed during runtime.
+			The <c>AutoRestorable</c> property of this objects is retrieved from the <c>EnableAutoRestore</c> property of the parent object.
+			This is done by calling the <c>CheckIfAutoRestoreEnabledByParent()</c> method inside the implicit method <c>FB_init()</c> after download.
+			If this instance is the auto restorable it will call the <see cref="TcoTask.PlcTcoTask.Restore()"/> method if:
+			<para>
+				1.) The <see cref="TcoTask.PlcTcoTask.Invoke()"/> method has not been called for one or more cycles and starts to be called again.
+			</para>
+			<para>
+				2.)	Parent object of this instance changes its state.
+			</para>
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY AutoRestorable : BOOL]]></Declaration>
       <Get Name="Get" Id="{e3af527a-f40e-4a4c-a451-b81947010ac2}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[AutoRestorable := _AutoRestorable;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="AutoRestore" Id="{734ff33f-ae8e-4711-982e-39fcde14e7c0}">
-      <Declaration><![CDATA[METHOD PRIVATE AutoRestore
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Private method called each time that the <see cref="TcoTask.PlcTcoTask.Execute()"/> method is called. If this instance is auto restorable, this method ensures calling the <see cref="TcoTask.PlcTcoTask.Restore()"/> method if:
+			<para>
+				1.)	Parent object of this instance changes its state in this Plc cycle.
+			</para>
+			<para>
+				2.)	Parent object of this instance changes its state no mather when and this instance has not yet process this change.
+			</para>
+			<para>
+				3.) The <see cref="TcoTask.PlcTcoTask.Invoke()"/> method has not been called for one or more cycles and starts to be called again.
+			</para>
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PRIVATE AutoRestore
 VAR 
 	_MyParent_TcoState	: ITcoState := 0;
 	_MyParent_ChangeStateCycle : ULINT;
+	_MyParent_LastChangeState : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//If parent of this instance is TcoState type or its derived type and the parent
-//EnableAutoRestore property is set to TRUE, this instance determines the value
-//of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
-//after each download.
+        <ST><![CDATA[// If the parent of this instance is TcoState type or its derived type and the parent
+// EnableAutoRestore property is set to TRUE, this instance determines the value
+// of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
+// after each download.
 IF _AutoRestorable THEN		
 	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-		_MyParent_ChangeStateCycle := _MyParent_TcoState.ChangeStateCycle;
+		_MyParent_ChangeStateCycle := _MyParent_TcoState.LastStateChangeCycle;
+		_MyParent_LastChangeState := _MyParent_TcoState.State;
 	END_IF;	
 	//If OnStateChange event of the parent has occured, the value of the parent's 
 	//StartCycleCount property is stored into its ChangeStateCycle property.
@@ -64,35 +171,68 @@ IF _AutoRestorable THEN
 		Restore();
 		_MyParentsChangeStateCycle := _MyParent_ChangeStateCycle;
 	END_IF
+	IF _MyParent_LastChangeState <> _MyParentsLastChangeState THEN
+		Restore();
+		_MyParentsLastChangeState := _MyParent_LastChangeState;
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Busy" Id="{450a4d36-cfe9-44d8-90b2-f94e09dcf72c}">
-      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the task is executing.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Busy : BOOL]]></Declaration>
       <Get Name="Get" Id="{8f8c846a-c9aa-466c-935b-9e12824ad3d1}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Busy := THIS^._taskState = eTaskState.Executing;]]></ST>
+          <ST><![CDATA[Busy := THIS^._taskState = eTaskState.Busy;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="CheckIfAutoRestoreEnabledByParent" Id="{df452d79-7755-40fb-9a5e-9cf001ea97d0}">
-      <Declaration><![CDATA[{attribute 'call_after_online_change_slot' := '100'}
-METHOD CheckIfAutoRestoreEnabledByParent
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnableAutoRestore()/> property and writing it into the <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/> of this instance.
+			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
+		</summary>			
+	</docu>	
+~*)
+{attribute 'call_after_online_change_slot' := '100'}
+METHOD PRIVATE CheckIfAutoRestoreEnabledByParent
 VAR
 	_MyParent_TcoState	: 	ITcoState := 0;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
-	_AutoRestorable := _MyParent_TcoState.EnableAutoRestore;
+	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
 END_IF;	]]></ST>
       </Implementation>
     </Method>
     <Method Name="CheckIfCalledCyclically" Id="{8bed849a-6af0-4393-b698-13926e62e390}">
-      <Declaration><![CDATA[METHOD PRIVATE CheckIfCalledCyclically
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Private method called inside the <see cref="TcoTask.PlcTcoTask.Execute()"/> method checking the cyclicall calling of this method. 
+			If this instance is auto restorable, this method ensures calling the <see cref="TcoTask.PlcTcoTask.Restore()"/> method if
+			the <see cref="TcoTask.PlcTcoTask.Execute()"/> method has not been called for one or more cycles and starts to be called again.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+{attribute clr [ExcludeFromApiDocumentation()]}
+METHOD PRIVATE CheckIfCalledCyclically
 VAR 
 	_MyContextStartCycleCount : ULINT;
 END_VAR
@@ -117,74 +257,159 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Context" Id="{89ed1df2-40b6-4665-987f-6393770d5c32}">
-      <Declaration><![CDATA[PROPERTY Context : ITcoContext]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the context of this object.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{f1e70fbb-551e-45b2-82da-a9b2ed85bad0}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="Done" Id="{e3ea205b-eb06-42b9-b3d8-63efd5ed6521}">
-      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the task has succesfully completed the  execution and did not enter into the Error state.
+		</summary>			
+	</docu>	
+~*)
 PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Done := THIS^._taskState = eTaskState.Done;
- 
-//IF(Done) THEN
-//	Reset();
-//END_IF
-
-//IF(Done) THEN
-//	THIS^._taskState := eTaskState.Idle;
-//END_IF]]></ST>
+          <ST><![CDATA[Done := THIS^._taskState = eTaskState.Done;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="DoneWhen" Id="{0e4bb473-b258-4a3f-95b9-bb9741040e56}">
-      <Declaration><![CDATA[METHOD DoneWhen 
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Completes the execution of this task when ```inCondition``` is true; the task transitions into ```Done``` state.
+		</summary>			
+	</docu>	
+~*)
+METHOD DoneWhen 
 VAR_INPUT
-	Condition : BOOL;
+	inCondition : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Condition) THEN
+        <ST><![CDATA[IF (inCondition) THEN
 	THIS^._taskState := eTaskState.Done;			
 END_IF;	
 
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Enabled" Id="{c98a96a1-7e51-07e4-301f-9d561b604bea}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the task execution is enabled.
+			The task can start with <see cref="TcoTask.PlcTcoTask.Invoke()"/> method call only when this property si TRUE. 
+			If the task is ```Busy``` and this property transitions to ```FALSE```, the task stops execution and enters ```Error``` state. 
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Enabled : BOOL]]></Declaration>
+      <Get Name="Get" Id="{9aa3b2c1-9f99-04c6-3cf4-c6d7f309e4a7}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Enabled := _enabled;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{3e9bf08c-3581-0766-0691-b589eeb33545}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_enabled := Enabled;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="Error" Id="{b63e90bb-bf6b-4594-8c1e-b294c810b03f}">
-      <Declaration><![CDATA[PROPERTY Error : BOOL]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns true if the task has is in error state. To be able to start the the task again, <see cref="TcoTask.PlcTcoTask.Restore()"/> method needs to be called before 
+			restarting it again calling <see cref="TcoTask.PlcTcoTask.Invoke()"/> method.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Error : BOOL]]></Declaration>
       <Get Name="Get" Id="{eb85279c-0a0c-4237-8276-5bfcb6048a3c}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Error := THIS^._taskState = eTaskState.Error;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Execute" Id="{d0212bb0-ffcc-4ef5-806d-394cf6e951a4}">
-      <Declaration><![CDATA[METHOD Execute : BOOL
-]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Returns true if the task is Busy, otherwise false.
+			This method needs to be called cyclically.
+		</summary>			
+	</docu>	
+~*)
+METHOD Execute : BOOL
+VAR
+	_serviceableParent : ITcoServiceable;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CheckIfCalledCyclically();
+        <ST><![CDATA[// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
+IF(THIS^._Parent <> 0 )THEN
+	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+		IF(NOT _serviceableParent.IsService) THEN
+			THIS^._invokeRequest := FALSE;
+		END_IF
+	END_IF
+END_IF;
+
+//Triggering Invoke from remote system
+IF(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
+	THIS^.Invoke();
+END_IF;
+
+THIS^._invokeRequest := FALSE;
+
+//Triggering Restore from visualisation
+IF( THIS^._restoreRequest) THEN
+	THIS^.Restore();
+	THIS^._restoreRequest := FALSE;
+END_IF;
+
+IF NOT _enabled THEN
+	IF THIS^._taskState = eTaskState.Requested THEN
+		THIS^.Messenger.Post('Task cannot start; Enabled property is FALSE.',eMessageCategory.Info);	
+		THIS^.Restore();
+	END_IF
+	IF THIS^._taskState = eTaskState.Busy THEN
+		THIS^.Messenger.Post('Running task entered Error state since the Enabled property transitioned to FALSE during task execution.',eMessageCategory.Error);	
+		THIS^._taskState := eTaskState.Error;
+	END_IF
+END_IF;
+
+CheckIfCalledCyclically();
 AutoRestore();
 
-IF(THIS^._taskState = eTaskState.Request) 
-  THEN
-	THIS^._taskState := eTaskState.Executing;
+IF(THIS^._taskState = eTaskState.Requested) THEN
+	THIS^._taskState := eTaskState.Busy;
+END_IF;
+
+IF(THIS^._taskState = eTaskState.Error) THEN
+	OnTaskError();
 END_IF;
 	
-Execute := (THIS^._taskState = eTaskState.Executing);
+Execute := (THIS^._taskState = eTaskState.Busy);
 ]]></ST>
       </Implementation>
     </Method>
@@ -204,26 +429,46 @@ CheckIfAutoRestoreEnabledByParent();
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{50d5c151-1536-4b27-8f6d-91815baa7c03}">
-      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets identity of this <see cref ="TcoTask.PlcTcoTask()"/>. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level applications.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{e2f8cd07-a32b-4fb0-9e11-15ca2337a4d7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Identity := _Identity;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Invoke" Id="{cc03409d-e0bf-43b3-af7b-1069055f0385}">
-      <Declaration><![CDATA[METHOD Invoke : ITcoTask
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to start the execution of the task. The starting is possible from Ready state.
+			<para>Moreover it is also possible to start the task again from Done state by performing the '''rising edge''' of the calling of the Invoke() method.</para>
+			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>			
+		</summary>			
+	</docu>	
+~*)
+METHOD Invoke : ITcoTaskStatus
 VAR
 	_newInvokeCall	:	BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_newInvokeCall := THIS^._Parent.Context.StartCycleCount > _nextExpectedCycle;
 
-IF(THIS^._taskState = eTaskState.Idle OR (THIS^._taskState = eTaskState.Done AND _newInvokeCall)) THEN
-	THIS^._taskState := eTaskState.Request;
+IF(THIS^._taskState = eTaskState.Ready OR (THIS^._taskState = eTaskState.Done AND _newInvokeCall)) THEN
+	IF _enabled THEN
+		THIS^._taskState := eTaskState.Requested;
+	ELSE
+		THIS^.Messenger.Post('Task cannot be started  as its Enabled property is FALSE.',eMessageCategory.Info);
+	END_IF	
 END_IF	
 
 _nextExpectedCycle := THIS^._Parent.Context.StartCycleCount + 1;
@@ -232,147 +477,91 @@ Invoke := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Messenger" Id="{36d45dc2-ab29-470b-aad4-0c94c377063f}">
-      <Declaration><![CDATA[PROPERTY Messenger : ITcoMessenger]]></Declaration>
-      <Get Name="Get" Id="{f3e7fc70-cd2c-46ec-8f82-c407d1175c48}">
-        <Declaration><![CDATA[VAR
-END_VAR
+    <Method Name="OnTaskError" Id="{7bd5d176-51b6-065b-1ffd-f139109a93ea}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
 ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Ready" Id="{41983d9a-f8f9-0718-1aa5-28b21efac144}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the task is ready to be started (Tasks start by calling the <see cref="TcoTask.PlcTcoTask.Invoke()"/> method).
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Ready : BOOL]]></Declaration>
+      <Get Name="Get" Id="{04c8ad1e-96d0-0ca0-18be-e96b69bf6ccb}">
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
+          <ST><![CDATA[Ready := THIS^._taskState = eTaskState.Ready;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Restore" Id="{afacd00c-5569-431f-be3c-22a90381057d}">
-      <Declaration><![CDATA[METHOD Restore : ITcoRestorable]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._taskState := eTaskState.Idle;
+        <ST><![CDATA[THIS^._taskState := eTaskState.Ready;
 Restore := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="State" Id="{c8f77c1f-e224-0f7f-1949-266782ffede0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the actual state of this instance. 
+			<para>
+				See <see cref="eTaskState"/> for more details.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+PROPERTY State : eTaskState]]></Declaration>
+      <Get Name="Get" Id="{82443da9-5de9-08b3-3738-5a4d96d29a35}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := _taskState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="ThrowWhen" Id="{3db7eb61-336b-4d38-9d05-026d143c48aa}">
-      <Declaration><![CDATA[METHOD ThrowWhen
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			When called with ```inCondition``` ```TRUE``` causes transition of the task into the ```Error``` state.
+		</summary>			
+	</docu>	
+~*)
+METHOD ThrowWhen
 VAR_INPUT
-	condition : BOOL;
+	inCondition : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (condition) THEN
+        <ST><![CDATA[IF (inCondition) THEN
 	THIS^._taskState := eTaskState.Error;
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoTask">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Abort">
-      <LineId Id="5" Count="0" />
-      <LineId Id="3" Count="0" />
-      <LineId Id="6" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.AutoRestorable.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.AutoRestore">
-      <LineId Id="15" Count="3" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="26" Count="2" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="33" Count="1" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Busy.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.CheckIfAutoRestoreEnabledByParent">
-      <LineId Id="7" Count="1" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.CheckIfCalledCyclically">
-      <LineId Id="15" Count="3" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="13" Count="1" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Context.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Done.Get">
-      <LineId Id="2" Count="0" />
-      <LineId Id="11" Count="2" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="7" Count="1" />
-    </LineIds>
-    <LineIds Name="TcoTask.DoneWhen">
-      <LineId Id="10" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Error.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Execute">
-      <LineId Id="65" Count="1" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="61" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.FB_init">
-      <LineId Id="7" Count="0" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="14" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Identity.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Invoke">
-      <LineId Id="45" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="30" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Messenger.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.Restore">
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="14" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTask.ThrowWhen">
-      <LineId Id="5" Count="0" />
-      <LineId Id="7" Count="1" />
-    </LineIds>
   </POU>
 </TcPlcObject>

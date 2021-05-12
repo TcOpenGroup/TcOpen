@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net48</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>        
+    <PackageReference Include="MahApps.Metro" Version="2.4.3" />        
+    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TcoCore.Wpf\Inxton.TcoCore.Wpf.csproj" />
+    <ProjectReference Include="..\TcoCoreExamplesConnector\Inxton.TcoCoreExamplesConnector.csproj" />
+  </ItemGroup>
+
+</Project>

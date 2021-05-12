@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eStepStatus" Id="{06e3f1be-90df-4a49-be95-caa6a15c597d}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Describes the step status inside the sequencer.
+		</summary>				
+	</docu>	
+~*)
+{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eStepStatus :
+(
+(*~
+	<docu>
+		<summary>
+			No status defined.
+		</summary>				
+	</docu>	
+~*)	
+	None := 0,
+(*~
+	<docu>
+		<summary>
+			Step is disabled and won't be executed.
+			Next enabled step in the sequence will be executed, when the sequencer reaches that step.
+		</summary>				
+	</docu>	
+~*)	
+	Disabled := 10,
+(*~
+	<docu>
+		<summary>
+			Step is ready to run. This case occurs when sequence is in step mode, step is in order of the execution and step is enabled.
+			The body statements of the current step's are not executing. After calling StepIn method, step starts running the statements.
+		</summary>				
+	</docu>	
+~*)	
+	ReadyToRun := 20,
+(*~
+	<docu>
+		<summary>
+			Step is currently running (The body statements are running).
+		</summary>				
+	</docu>	
+~*)	
+	Running := 30,	
+(*~
+	<docu>
+		<summary>
+			Step has finished (The body statements are not running).
+		</summary>				
+	</docu>	
+~*)	
+	Done := 40,
+(*~
+	<docu>
+		<summary>
+			Step is in error state. The sequencer does not execute any step logic.
+		</summary>				
+	</docu>	
+~*)	
+	Error := 50
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="ST_01_Context" Id="{e8b4fa38-b417-0efe-0b5f-711264b9a39e}" SpecialFunc="None">
+    <Declaration><![CDATA[// This is an example of a simple pneumatic manipulator 2 pistons 1 gripper.
+// Note that this block is extended by 'TcoCore.TcoContext'. 
+FUNCTION_BLOCK ST_01_Context EXTENDS TcoCore.TcoContext
+VAR
+	// Ground position sequence
+	_groundSequcence : ST_01_Ground(THIS^, eRestoreMode.None);
+	// Automat mode sequence	
+	_automatSequence : ST_01_Automat(THIS^, eRestoreMode.None);
+	// Task to execute _groundSequence
+	_groundTask : TcoCore.TcoTask(THIS^);
+	// Task to execute _automatSequence
+	_automatTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{3938fcd1-b781-03af-2e98-5b1fa0311780}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overriden in inherited block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_groundTask.Execute()) THEN 
+	_groundSequcence.Run(); 
+	_groundTask.DoneWhen(_groundSequcence._currentStep.ID = 400); 
+END_IF;
+IF(_groundSequcence._currentStep.ID = 400 AND_THEN _automatTask.Execute()) THEN 
+	_automatSequence.Run(); 
+END_IF;
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

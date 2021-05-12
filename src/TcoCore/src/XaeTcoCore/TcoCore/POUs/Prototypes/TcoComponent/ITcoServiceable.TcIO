@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoServiceable" Id="{226fd2d6-401e-4c29-97f4-f7e58b55d445}">
+    <Declaration><![CDATA[INTERFACE ITcoServiceable 
+]]></Declaration>
+    <Property Name="IsService" Id="{d47aaea4-ce72-0454-0754-1e87b02cbd5e}">
+      <Declaration><![CDATA[PROPERTY IsService : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d2b12008-0f0e-0a13-031e-805227a0361c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Service" Id="{b2fe216f-37ab-46ad-9d62-c3f8870418e6}">
+      <Declaration><![CDATA[METHOD PUBLIC Service ]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

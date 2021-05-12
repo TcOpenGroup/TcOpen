@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoSequencerModeController" Id="{7bf0fb73-1ee3-0492-27e7-17c8d1ca6b66}">
+    <Declaration><![CDATA[INTERFACE ITcoSequencerModeController
+]]></Declaration>
+    <Property Name="Mode" Id="{6738db06-52ab-091d-3ef3-c978ac45906e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Gets or sets sequencer mode.
+			<remarks>			
+				<para>
+					See <see cref="eSequencerMode"/> for detailed description.
+				</para>
+			</remarks>		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC Mode : eSequencerMode
+]]></Declaration>
+      <Get Name="Get" Id="{5d50dbae-b653-0a7c-1b47-5c79748d6ca7}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{50f8e8b9-cc07-0a05-16c2-80e5de9e9096}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Method Name="StepBackward" Id="{a9437049-be0c-0c8b-2153-afcbe678bf59}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepBackward task, that decrements current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepBackward
+]]></Declaration>
+    </Method>
+    <Method Name="StepForward" Id="{329d3508-013e-0c16-0fc1-cd0c8394e02b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), 
+			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <c>TcoSequencer._numberOfStepsInSequence</c> ).
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepForward
+
+]]></Declaration>
+    </Method>
+    <Method Name="StepIn" Id="{b5bc3625-8c40-0acd-1709-b671fffc542a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+			This causes starting the execution of the body of the current step.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepIn
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

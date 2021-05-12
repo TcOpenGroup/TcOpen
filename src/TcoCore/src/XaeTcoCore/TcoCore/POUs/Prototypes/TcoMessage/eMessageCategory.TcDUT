@@ -4,7 +4,7 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Enumerator of message categories.
+			Message categories.
 		</summary>
 	</docu>	
 ~*)
@@ -70,15 +70,7 @@ TYPE eMessageCategory :
 		</summary>
 	</docu>	
 	~*)
-	Error := 700,
-	(*~
-	<docu>
-		<summary>
-			To be used when wrong setting have been provided by the user.
-		</summary>
-	</docu>	
-	~*)
-	WrongSettings := 800,
+	Error := 700,	
 	(*~
 	<docu>
 		<summary>

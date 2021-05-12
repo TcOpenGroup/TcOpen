@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="ST_01_Ground" Id="{1ddd18cd-709e-0f65-0cb2-7280de74d03d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Ground EXTENDS TcoCore.TcoSequencer
+VAR
+	_components : ST_01_Components(THIS^);
+	_await : fbAwait;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{f38008bb-2ee7-0f88-3c55-e152d70585f8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here, calling of the methods Open() at the beggining and Close() at the end is ensured by calling the InstanceName.Run() method.
+			This method is abstract, so each derived type has to implement its own implementation of this method.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(Step(inStepID := 100, 
+		inEnabled := TRUE, 
+		inStepDescription := 'VERTICAL CYLINDER UP')) THEN
+//-------------------------------------------------------------		
+     THIS^.StepCompleteWhen(THIS^._components._vertical.MoveToHome().Done OR _await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 200, 
+		inEnabled := TRUE, 
+		inStepDescription := 'HORIZONTAL CYLINDER HOME')) THEN
+//-------------------------------------------------------------		
+     THIS^.StepCompleteWhen(THIS^._components._horizontal.MoveToHome().Done OR _await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 300, 
+		inEnabled := TRUE, 
+		inStepDescription := 'OPEN GRIPPER')) THEN
+//-------------------------------------------------------------		
+     THIS^.StepCompleteWhen(THIS^._components._gripper.MoveToHome().Done OR _await.Sometime());
+//-------------------------------------------------------------
+END_IF
+
+IF(Step(inStepID := 400, 
+		inEnabled := TRUE, 
+		inStepDescription := 'CLOSE SEQUENCE')) THEN
+//-------------------------------------------------------------		
+    
+//-------------------------------------------------------------
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

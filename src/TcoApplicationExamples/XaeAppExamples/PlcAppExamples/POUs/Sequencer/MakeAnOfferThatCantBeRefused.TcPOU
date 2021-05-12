@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MakeAnOfferThatCantBeRefused" Id="{f1f77e4e-d881-094a-2cf0-fca2839ddab0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MakeAnOfferThatCantBeRefused EXTENDS TcoCore.TcoSequencer
+VAR_INPUT
+	Thomas		:	REFERENCE TO Thomas_Object;
+	Jack_Woltz	:	REFERENCE TO Woltz_Object;
+END_VAR
+VAR_OUTPUT
+	Done	:	BOOL;
+END_VAR
+VAR
+	_FirstOfferAccepted	:	BOOL := FALSE;
+	_FirstOfferRefused	:	BOOL := FALSE;
+	{attribute 'hide'}
+	_Killer				:	Killer_Object(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[THIS^.Run();]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{18c8ecd8-6a95-0eeb-1fa5-7e62456fcea4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Step(0,TRUE,'Send Thomas to ask Jack Woltz for granting the movie role.') THEN
+	Done := FALSE;
+	
+// <TaskExternalUseExample>
+	//Starting the execution of the 'TcoTask' instance extended by input parameters from 'outside' of the instance. 
+	Thomas.AskForTheFavor(Jack_Woltz,'Grant movie role to Johny Fontane.','No future problems with unions.').Invoke();
+
+// Checking from the 'outside' of the instance, if the task has already finished in expected way. 
+	_FirstOfferAccepted := Thomas._AskForTheFavor.Done;
+
+// Checking from the 'outside' of the instance, if the task has finished in non-expected way. 
+	_FirstOfferRefused 	:= Thomas._AskForTheFavor.Error;
+// </TaskExternalUseExample>
+
+	StepCompleteWhen(_FirstOfferAccepted OR _FirstOfferRefused);
+END_IF
+
+IF Step(10,_FirstOfferAccepted,'Call somebody to call somebody to ensure no problems with unions in the future.') THEN
+//*
+//..
+//NoFutureUnionsProblems implementation 
+//..
+//*
+	RequestStep(500);
+END_IF
+
+IF Step(20,TRUE,'Call somebody to call somebody to send somebody to kill the Woltz horse Khartoum.') THEN
+	StepCompleteWhen(_Killer.Kill(Jack_Woltz._Khartoum).Invoke().Done);
+END_IF
+
+IF Step(30,TRUE,'Waiting for granting the movie role to Johny Fontane by Jack Woltz.') THEN
+	Jack_Woltz.ThinkCarefully();
+
+
+	StepCompleteWhen(Jack_Woltz.FavorIsGranted());
+END_IF
+
+IF Step(500,TRUE,'Final step of the sequence.') THEN
+	Done := TRUE;
+	CompleteStep();
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

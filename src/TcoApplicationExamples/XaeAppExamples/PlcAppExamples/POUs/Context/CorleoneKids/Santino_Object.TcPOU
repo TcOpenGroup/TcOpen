@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Santino_Object" Id="{1fcf27a4-725c-0efd-2dcd-a32ba27c10e9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Santino_Object EXTENDS TcoCore.TcoObject
+VAR
+	_francesca	:	AKid_Object(THIS^);
+	_kathryn 	:	AKid_Object(THIS^);
+	_frank		:	AKid_Object(THIS^);
+	_santino	:	AKid_Object(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -9,6 +9,10 @@ namespace TcoIoBeckhoff
 {
     public class Entry
     {
-        public static TcoIoBeckhoff.TcoIoBeckhoffTwinController TcoPneumaticsPlc { get; } = new TcoIoBeckhoffTwinController(Tc3ConnectorAdapter.Create("172.20.10.2.1.1",851, true));        
+        static string amsId = Environment.GetEnvironmentVariable("Tc3Target");
+        const int amsPort = 851;
+
+        public static TcoIoBeckhoff.TcoIoBeckhoffTwinController TcoIoBeckhoff { get; }
+            = new TcoIoBeckhoff.TcoIoBeckhoffTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(amsId, amsPort, true));
     }
 }

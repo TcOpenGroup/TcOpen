@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="SlowCounter" Id="{0fa0c7c4-2a30-0cb7-2afc-736b941f5319}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SlowCounter EXTENDS TcoCore.TcoTask
+VAR
+	Counter : INT;
+	_await : fbAwait;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN 
+	IF _await.Delay(T#250MS) THEN
+		Counter := Counter +1;
+	END_IF
+	DoneWhen(Counter = 100);
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="Restore" Id="{407e378a-e722-0999-0be5-fa3a7b67bfd1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+Counter := 0;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

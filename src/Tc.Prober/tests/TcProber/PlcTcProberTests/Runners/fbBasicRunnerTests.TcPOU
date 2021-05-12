@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbBasicRunnerTests" Id="{fd9c95ca-8e53-463c-8da7-85668c18933c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbBasicRunnerTests
+VAR
+	runs : UINT;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ResetCounter" Id="{69f038ce-3e8e-44f5-ab3f-68781d9515df}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD ResetCounter : UINT
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[runs := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunCount" Id="{86e50e4e-25cb-4738-89df-2c471d24676b}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD RunCount : UINT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[runs := runs + 1;
+RunCount := runs;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunUntilReturnsTrue" Id="{b9fe7b38-c5bd-482a-987b-e6f26e72a83b}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD RunUntilReturnsTrue : BOOL
+VAR_INPUT
+	_m : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RunUntilReturnsTrue := _m; ]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

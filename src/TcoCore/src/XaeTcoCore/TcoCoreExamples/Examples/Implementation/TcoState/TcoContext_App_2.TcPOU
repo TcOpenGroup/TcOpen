@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoContext_App_2" Id="{ce1d884b-4210-0146-16ab-4fb79198ab7f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContext_App_2 EXTENDS TcoCore.TcoContext
+VAR
+	ResetToZero : BOOL := TRUE;
+	C1	:	LINT	:= 100;
+	C2	:	LINT	:= 200;
+	TcoObject_Counter_1 : TcoObject_Counter(THIS^);
+	TcoObject_Counter_2 : TcoObject_Counter(THIS^);
+	TcoState_1	: TcoCore.TcoState(THIS^,TRUE);
+//	TcoState_Counter_2	: TcoState(THIS^,TRUE);
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{81f44c0b-8146-019d-0298-87fd0531afd4}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TcoObject_Counter_1();
+
+TcoObject_Counter_2();
+
+//THIS^.TcoObject_Counter_1.TcoTask_ResetToZero.Invoke();
+//THIS^.TcoObject_Counter_2.TcoTask_ResetToZero.Invoke();
+//THIS^.TcoObject_Counter_1.StartCountUp(C1);
+//THIS^.TcoObject_Counter_1.StartCountDown(-C1);
+//THIS^.TcoObject_Counter_2.StartCountUp(C2);
+//THIS^.TcoObject_Counter_2.StartCountDown(-C2);
+
+
+IF TcoState_1.State = 0 THEN				
+	THIS^.TcoObject_Counter_1.StartCountUp(C1);
+	THIS^.TcoObject_Counter_2.StartCountUp(C2);
+	TcoState_1.ChangeState(10);
+END_IF
+
+IF TcoState_1.State = 10 THEN
+	IF THIS^.TcoObject_Counter_1.TcoTask_CountUp.Done THEN
+		THIS^.TcoObject_Counter_1.StartCountDown(-C1);
+		TcoState_1.ChangeState(20);//.Restore(THIS^.TcoObject_Counter_1.TcoTask_CountUp);
+	END_IF
+END_IF
+
+IF TcoState_1.State = 20 THEN
+	IF THIS^.TcoObject_Counter_2.TcoTask_CountUp.Done THEN
+		THIS^.TcoObject_Counter_2.StartCountDown(-C2);
+		TcoState_1.ChangeState(30);//.Restore(THIS^.TcoObject_Counter_2.TcoTask_CountUp);
+	END_IF
+END_IF
+
+IF TcoState_1.State = 30 THEN
+	IF THIS^.TcoObject_Counter_1.TcoTask_CountDown.Done AND
+		THIS^.TcoObject_Counter_2.TcoTask_CountDown.Done THEN
+		TcoState_1.ChangeState(0);//.Restore(THIS^.TcoObject_Counter_1.TcoTask_CountUp);
+	END_IF
+END_IF
+
+ ]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

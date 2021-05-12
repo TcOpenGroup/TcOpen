@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbRootLevelStruct" Id="{99be50ca-7041-4b7d-adb9-e2b1fd3c10ba}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbRootLevelStruct
+VAR
+	{attribute addProperty Name "LEVEL 0"}
+	level_0 : stAllTypes;	
+END_VAR
+
+VAR CONSTANT
+	level : INT := 5;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Init" Id="{6ecce272-0bdb-4904-b557-6e3b51795b18}">
+      <Declaration><![CDATA[METHOD Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[level_0.BYTE_val :=    0;
+level_0.WORD_val :=    0;
+level_0.DWORD_val :=    0;
+level_0.LWORD_val :=    0;
+level_0.SINT_val :=    -128;
+level_0.USINT_val :=    0;
+level_0.INT_val :=    -32768;
+level_0.UINT_val :=    0;
+level_0.DINT_val :=    -2147483648;
+level_0.UDINT_val :=    0;
+level_0.LINT_val :=    -9223372036854775808;
+level_0.ULINT_val :=    0;
+level_0.REAL_val :=    -3.402823E+38;
+level_0.LREAL_val :=    -1.7976931348623158E+308;
+level_0.STRING_val :=    '';
+level_0.WSTRING_val :=    "";
+level_0.TIME_val :=    T#0S;
+level_0.TIME_OF_DAY_val :=    TOD#00:00:00.000;
+level_0.DATE_val :=    DATE#1970-01-01;
+level_0.DATE_AND_TIME_val :=    DT#1970-01-01-00:00;
+level_0.TOD_val :=    TOD#00:00:00.000;
+level_0.DT_val :=    DT#1970-01-01-00:00;
+level_0.LTIME_val :=    LTIME#0S;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

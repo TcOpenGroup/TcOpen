@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbInheritanceLevel_1" Id="{4e2e9ab9-ceb4-435b-b38d-e15082393af6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbInheritanceLevel_1 EXTENDS fbRootLevelStruct 
+VAR
+	{attribute addProperty Name "LEVEL 1"}
+	level_1 : stAllTypes;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Method Name="Init" Id="{3d0e6722-3f6e-4f70-a7b4-7089e44f9999}">
+      <Declaration><![CDATA[{attribute 'obsolete' := 'Use method Initialize() instead'}  
+METHOD Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Init();
+level_1.BYTE_val :=    255;
+level_1.WORD_val :=    65535;
+level_1.DWORD_val :=    4294967295;
+level_1.LWORD_val :=    18446744073709551615;
+level_1.SINT_val :=    127;
+level_1.USINT_val :=    255;
+level_1.INT_val :=    32767;
+level_1.UINT_val :=    65535;
+level_1.DINT_val :=    2147483647;
+level_1.UDINT_val :=    4294967295;
+level_1.LINT_val :=    9223372036854775807;
+level_1.ULINT_val :=    18446744073709551615;
+level_1.REAL_val :=    3.402823E+38;
+level_1.LREAL_val :=    1.7976931348623158E+308;
+level_1.STRING_val :=    'ABCDEFGHIJKLMNOPRSTUWZ';
+level_1.WSTRING_val :=    "fdalsdflahsdjhfajksdry9837489";
+level_1.TIME_val :=    T#1H;
+level_1.TIME_OF_DAY_val :=  TOD#23:59:59.999;
+level_1.DATE_val :=    DATE#2106-02-07;
+level_1.DATE_AND_TIME_val :=    DT#2106-02-07-6:28:15;
+level_1.TOD_val :=    TOD#23:59:59.999;
+level_1.DT_val :=    DT#2106-02-07-6:28:15;
+level_1.LTIME_val :=   LTIME#213503D23H34M33S709MS551US615NS;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

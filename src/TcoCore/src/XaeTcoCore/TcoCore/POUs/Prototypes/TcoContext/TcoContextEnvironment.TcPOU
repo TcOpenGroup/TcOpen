@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoContextEnvironment" Id="{3220df02-9b69-0aaa-1c5f-41ed13d5599f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContextEnvironment IMPLEMENTS ITcoContextEnvironment
+VAR
+	_messenger : TcoMessengerSettings;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Messaging" Id="{80bc198f-e53b-04f5-1cbc-ef3a2ee37c8f}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Gets messaging settings of this context.			
+			</summary>			
+		</docu>	
+~*)
+PROPERTY Messaging : ITcoMessengerSettings]]></Declaration>
+      <Get Name="Get" Id="{2afecb4e-9dba-0868-0a02-c655cbf5e0a9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Messaging := _messenger;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

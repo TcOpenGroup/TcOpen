@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="stColors" Id="{e5d58b32-494e-0ba1-2a8c-3988b1e45402}">
+    <Declaration><![CDATA[TYPE stColors :
+STRUCT
+	_lightR_IsOn : BOOL;
+    _lightG_IsOn : BOOL;
+    _lightB_IsOn : BOOL;
+
+    _lightR_SwitchOn : BOOL;
+    _lightG_SwitchOn  : BOOL;
+    _lightB_SwitchOn  : BOOL;
+
+    _luminosityMin : REAL;
+    _luminosity : REAL;
+    _luminosityMax : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

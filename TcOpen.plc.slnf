@@ -1,10 +1,15 @@
 {
   "solution": {
     "path": "TcOpen.sln",
-    "projects": [   
-      "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",      
-      "src\\TcoIoBeckhoff\\src\\XaeTcoIoBeckhoff\\XaeTcoIoBeckhoff.tsproj",      
-      "src\\TcoPneumatics\\src\\XaeTcoPneumatics\\XaeTcoPneumatics.tsproj"      
+    "projects": [
+      "src\\Tc.Prober\\tests\\TcProber\\TcProber.tsproj",
+      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj",
+      "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",
+      "src\\TcoDrivesBeckhoff\\src\\XaeTcoDrivesBeckhoff\\XaeTcoDrivesBeckhoff.tsproj",
+      "src\\TcoElements\\src\\XAE\\XAE\\XAETcoElements.tsproj",
+      "src\\TcoIoBeckhoff\\src\\XaeTcoIoBeckhoff\\XaeTcoIoBeckhoff.tsproj",
+      "src\\TcoPneumatics\\src\\XaeTcoPneumatics\\XaeTcoPneumatics.tsproj",
+      "src\\librarytemplate\\src\\XAE\\XAE\\XAEPlcTemplate.tsproj"
     ]
   }
 }

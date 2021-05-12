@@ -59,5 +59,129 @@ namespace TcoIoBeckhoffConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EC ASM ADDR.
+        /// </summary>
+        public static string ___EC_ASM_ADDR__ {
+            get {
+                return ResourceManager.GetString("___EC_ASM_ADDR__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EC State (8=OK).
+        /// </summary>
+        public static string ___EC_State__8_OK___ {
+            get {
+                return ResourceManager.GetString("___EC_State__8_OK___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EC Togle bit.
+        /// </summary>
+        public static string ___EC_Togle_bit__ {
+            get {
+                return ResourceManager.GetString("___EC_Togle_bit__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EC Working Counter State (1=Data Invalid).
+        /// </summary>
+        public static string ___EC_Working_Counter_State__1_Data_Invalid___ {
+            get {
+                return ResourceManager.GetString("___EC_Working_Counter_State__1_Data_Invalid___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error&quot;}
+        ///	Error AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_1_7 AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_2_0 AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_2_1 AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_2_2 AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_2_3 AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_2_4 AT %I* : BIT;
+        ///	{attribute &apos;hide&apos;}
+        ///	Reserved_2_5 AT %I* : BIT;
+        ///	{attribute addProperty Name  &quot;TXPDO State.
+        /// </summary>
+        public static string ___Error____Error_AT__I____BIT____attribute__hide____Reserved_1_7_AT__I____BIT____attribute__hide____Reserved_2_0_AT__I____BIT____attribute__hide____Reserved_2_1_AT__I____BIT____attribute__hide____Reserved_2_2_AT__I____BIT____attribute__hide____Reserved_2_3_AT__I____BIT____attribute__hide____Reserved_2_4_AT__I____BIT____attribute__hide____Reserved_2_5_AT__I____BIT____attribute_addProperty_Name_____TXPDO_State__ {
+            get {
+                return ResourceManager.GetString(@"___Error____Error_AT__I____BIT____attribute__hide____Reserved_1_7_AT__I____BIT____attribute__hide____Reserved_2_0_AT__I____BIT____attribute__hide____Reserved_2_1_AT__I____BIT____attribute__hide____Reserved_2_2_AT__I____BIT____attribute__hide____Reserved_2_3_AT__I____BIT____attribute__hide____Reserved_2_4_AT__I____BIT____attribute__hide____Reserved_2_5_AT__I____BIT____attribute_addProperty_Name_____TXPDO_State__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over Range.
+        /// </summary>
+        public static string ___Over_Range__ {
+            get {
+                return ResourceManager.GetString("___Over_Range__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TXPDO Toggle.
+        /// </summary>
+        public static string ___TXPDO_Toggle__ {
+            get {
+                return ResourceManager.GetString("___TXPDO_Toggle__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under Range.
+        /// </summary>
+        public static string ___Under_Range__ {
+            get {
+                return ResourceManager.GetString("___Under_Range__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value greater then limit 1.
+        /// </summary>
+        public static string ___Value_greater_then_limit_1__ {
+            get {
+                return ResourceManager.GetString("___Value_greater_then_limit_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value greater then limit 2.
+        /// </summary>
+        public static string ___Value_greater_then_limit_2__ {
+            get {
+                return ResourceManager.GetString("___Value_greater_then_limit_2__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value smaller then limit 1.
+        /// </summary>
+        public static string ___Value_smaller_then_limit_1__ {
+            get {
+                return ResourceManager.GetString("___Value_smaller_then_limit_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value smaller then limit 2.
+        /// </summary>
+        public static string ___Value_smaller_then_limit_2__ {
+            get {
+                return ResourceManager.GetString("___Value_smaller_then_limit_2__", resourceCulture);
+            }
+        }
     }
 }
