@@ -7,7 +7,7 @@ $path = Split-Path -Path $MyInvocation.MyCommand.Path
 
 write-host "Importing psake"
 Import-Module ($path + '\psake.psm1')
-Import-Module ($path + '\tcobuildutils.psm1')
+Import-Module ($path + '\tcobuildutils.psm1') -Force
 Try
 {
   write-host "Starting build.ps1"

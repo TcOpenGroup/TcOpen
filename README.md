@@ -6,7 +6,8 @@
 [![TcOpen Slack ](https://img.shields.io/badge/Slack-channel-ff69b4.svg)](https://tcopendevelopment.slack.com/)
 [![Join the chat at https://gitter.im/dotnet/coreclr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TcOpenGroup/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/TcOpenGroup/TcOpen#awesome-twincat-3-projects-)
-[![Build Status](https://dev.azure.com/petokurhajec0964/tc3/_apis/build/status/TcOpenGroup.TcOpen?branchName=dev)](https://dev.azure.com/petokurhajec0964/tc3/_build/latest?definitionId=6&branchName=dev)
+[![Build](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml/badge.svg?branch=initial-dev)](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml)
+
 
 # TcOpen
 

@@ -12,6 +12,7 @@ VAR
 	_tcoMessengerContextTest			:	TcoMessengerContextTest;
 	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 	_tcoComponentTest					:	TcoComponentTest;
+	_stringBuilderTest					: 	StringBuilderTests;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoRtcTest_A();
@@ -31,7 +32,8 @@ _tcoMessengerContextTest();
 _tcoContextMessagingPerf();
 
 _tcoComponentTest();
-]]></ST>
+
+_stringBuilderTest();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
