@@ -169,11 +169,15 @@
     <Compile Include="POUs\TestFixtures\_internals_TcoSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Utilities\StringBuilder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
+    <Folder Include="POUs\Utilities" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
     <Folder Include="POUs\Prototypes\TcoTask\TaskResult">
       <ExcludeFromBuild>true</ExcludeFromBuild>
