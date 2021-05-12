@@ -58,21 +58,17 @@ task NugetRestore -depends Clean {
    exec{
        & $dotnet restore TcOpen.build.slnf
    }
-   
-   try {
-      # Try to Restore IVC into _Vortex directory
-      # May fail due to missing g.cs files
-      $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
-      Write-Host $command
-      cmd /c $command
-   }
-   catch {
-     # Swallow
-   }
-      
 } 
 
-task GitVersion -depends NugetRestore {
+task CopyInxton -depends NugetRestore -continueOnError {
+  exec {
+      & $dotnet build `
+        .\src\TcoApplicationExamples\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj `
+        /p:SolutionDir=$solutionDir
+  }
+}
+
+task GitVersion -depends CopyInxton {
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
   $script:gitVersion =  & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/nofetch" "/config" "$baseDir/GitVersion.yml" |  ConvertFrom-Json 
