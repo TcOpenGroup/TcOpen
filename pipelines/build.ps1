@@ -16,6 +16,8 @@
   $testingStrength = 0
 }
 
+
+
 task default -depends CloseVs, Tests, CreatePackages, Finish
 
 
@@ -28,7 +30,9 @@ task Init {
   $properties
 }
 
-task BuildScripts -continueOnError -depends Init {
+
+
+task BuildScripts -continueOnError -depends Init {  
   Push-Location .\pipelines
   Import-Module .\tcobuildutils.psm1 -Force -Verbose 
   Pop-Location
@@ -106,25 +110,33 @@ task OpenVisualStudio -depends GitVersion {
 
 
 task BuildWithInxtonBuilder -depends OpenVisualStudio {
-  $projects = @(  
-     "src\Tc.Prober\Tc.Prober.slnf",   
-     "src\TcoCore\TcoCore.slnf",
-     "src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf",
-     "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
-     "src\TcoPneumatics\TcoPneumatics.slnf"
-     "src\TcoElements\TcoElements.slnf",
-     "src\TcoApplicationExamples\TcoApplicationExamples.slnf",
-     "src\librarytemplate\PlcTemplate.slnf"
-   )
 
-   foreach($project in $projects)
-  {   
-    $command = ".\_Vortex\builder\vortex.compiler.console.exe -s " + $project
+  $command = ".\_Vortex\builder\vortex.compiler.console.exe -s .\TcOpen.plc.slnf"
+
     Write-Host $command
     exec { 
       cmd /c $command
     }       
-  }
+
+  # $projects = @(  
+  #    "src\Tc.Prober\Tc.Prober.slnf",   
+  #    "src\TcoCore\TcoCore.slnf",
+  #    "src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf",
+  #    "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
+  #    "src\TcoPneumatics\TcoPneumatics.slnf"
+  #    "src\TcoElements\TcoElements.slnf",
+  #    "src\TcoApplicationExamples\TcoApplicationExamples.slnf",
+  #    "src\librarytemplate\PlcTemplate.slnf"
+  #  )
+
+  #  foreach($project in $projects)
+  # {   
+  #   $command = ".\_Vortex\builder\vortex.compiler.console.exe -s " + $project
+  #   Write-Host $command
+  #   exec { 
+  #     cmd /c $command
+  #   }       
+  # }
 
 }
 
@@ -134,7 +146,7 @@ task Build -depends BuildWithInxtonBuilder {
   exec{
      & $msbuild .\TcOpen.build.slnf `
         /p:Configuration=$buildConfig `
-        -noWarn:CS1591;CS0067;CS0108;CS1570 `
+        -noWarn:"CS1591;CS0067;CS0108;CS1570" `
         /consoleloggerparameters:ErrorsOnly `
         -v:$msbuildVerbosity    
   }
