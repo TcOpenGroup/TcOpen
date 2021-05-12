@@ -9,7 +9,7 @@
   $publishNugets = $false
   $updateAssemblyInfo = $false
   $gitVersion
-  $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
+  $msbuild = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
   $dotnet = "C:\Program Files\dotnet\dotnet.exe"
   $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
   $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
@@ -130,10 +130,13 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
 
 task Build -depends BuildWithInxtonBuilder {
   #/consoleloggerparameters:ErrorsOnly  
-   $command = $msbuild + " /p:Configuration=$buildConfig -noWarn:CS1591;CS0067;CS0108;CS1570 /consoleloggerparameters:ErrorsOnly  -v:$msbuildVerbosity  .\TcOpen.build.slnf"
   Write-Host $command
   exec{
-      cmd /c $command
+     & $msbuild .\TcOpen.build.slnf `
+        /p:Configuration=$buildConfig `
+        -noWarn:CS1591;CS0067;CS0108;CS1570 `
+        /consoleloggerparameters:ErrorsOnly `
+        -v:$msbuildVerbosity    
   }
 }
 
