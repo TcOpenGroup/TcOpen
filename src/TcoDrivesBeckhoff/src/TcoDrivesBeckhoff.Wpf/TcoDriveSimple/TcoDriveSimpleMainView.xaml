@@ -1,0 +1,173 @@
+﻿<UserControl
+    x:Class="TcoDrivesBeckhoff.TcoDriveSimpleMainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoDrivesBeckhoff"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoCore="http://inxton.mts/xaml"
+    xmlns:tcodrivesbeckhoff="clr-namespace:TcoDrivesBeckhoff"
+    
+            xmlns:vortex="http://vortex.mts/xaml" xmlns:inxton="http://inxton.mts/xaml"
+
+    
+    mc:Ignorable="d">
+    <d:UserControl.DataContext>
+        <tcodrivesbeckhoff:TcoDriveSimpleMainViewModel/>
+    </d:UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+            Text="{Binding Component, Converter={tcoCore:NameOrSymbolConverter}}"
+            TextAlignment="Left"
+            TextWrapping="WrapWithOverflow" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.ActPos}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActPos}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActTurns}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.ActVelo}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ActAcc}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="5" Margin="5" DataContext="{Binding Component._axisStatus.ActTorque}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.CmdNo}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.CmdState}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Margin="5" DataContext="{Binding Component._axisStatus.MotionState}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.Error}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ErrorId}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBlock Text="{Binding Cyclic}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="5" DataContext="{Binding Component._resetTask}"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding _taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding }"
+                    Content="{Binding AttributeName}" />
+            <Button Grid.Column="1" Margin="5" DataContext="{Binding Component._soEResetTask}"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding _taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding }"
+                    Content="{Binding AttributeName}" />
+            <Button Grid.Column="2" Margin="5" DataContext="{Binding Component._haltTask}"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding _taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding }"
+                    Content="{Binding AttributeName}" />
+            <Button Grid.Column="3" Margin="5" DataContext="{Binding Component._stopTask}"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding _taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding }"
+                    Content="{Binding AttributeName}" />
+        </Grid>
+
+        <Grid Grid.Row="4" DataContext="{Binding Component._moveRelativeTask}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--<Button Grid.Column="0" Margin="5" 
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding _taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding }"
+                    Content="{Binding AttributeName}" />-->
+            <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding }" />
+
+            <StackPanel Grid.Column="1" Margin="5" DataContext="{Binding _distance}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBox Text="{Binding Cyclic}"/>
+            </StackPanel >
+            <StackPanel Grid.Column="2" Margin="5" DataContext="{Binding _velocity}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBox Text="{Binding Cyclic}"/>
+            </StackPanel >
+            <StackPanel Grid.Column="3" Margin="5" DataContext="{Binding _acceleration}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBox Text="{Binding Cyclic}"/>
+            </StackPanel >
+            <StackPanel Grid.Column="4" Margin="5" DataContext="{Binding _deceleration}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBox Text="{Binding Cyclic}"/>
+            </StackPanel >
+            <StackPanel Grid.Column="5" Margin="5" DataContext="{Binding _jerk}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <TextBox Text="{Binding Cyclic}"/>
+            </StackPanel >
+        </Grid>
+    </Grid>
+</UserControl>

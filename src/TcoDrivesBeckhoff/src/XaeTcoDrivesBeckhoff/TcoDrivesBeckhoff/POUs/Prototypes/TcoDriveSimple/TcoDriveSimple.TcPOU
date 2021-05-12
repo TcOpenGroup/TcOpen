@@ -29,15 +29,25 @@ VAR
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#Reset#>"}
 	_resetTask			:	ResetTask(THIS^);
+	{attribute addProperty Name "<#SoE reset#>"}
 	_soEResetTask		:	SoEResetTask(THIS^);
+	{attribute addProperty Name "<#Set position#>"}
 	_setPositionTask	:	SetPositionTask(THIS^);
+	{attribute addProperty Name "<#Homing#>"}
 	_homeTask			:	HomeTask(THIS^);
+	{attribute addProperty Name "<#Move velocity#>"}
 	_moveVelocityTask	:	MoveVelocityTask(THIS^);
+	{attribute addProperty Name "<#Stop#>"}
 	_stopTask			:	StopTask(THIS^);
+	{attribute addProperty Name "<#halt#>"}
 	_haltTask			:	HaltTask(THIS^);
+	{attribute addProperty Name "<#Move relative#>"}
 	_moveRelativeTask	:	MoveRelativeTask(THIS^);
+	{attribute addProperty Name "<#Move absolute#>"}
 	_moveAbsoluteTask	:	MoveAbsoluteTask(THIS^);
+	{attribute addProperty Name "<#Move modulo#>"}
 	_moveModuloTask		:	MoveModuloTask(THIS^);
 END_VAR
 ]]></Declaration>
@@ -61,6 +71,10 @@ _mcPower(	Axis			:=	_axisRef,
 			BufferMode		:=	Tc2_MC2.MC_BufferMode.MC_Aborting);
 
 _resetTask();	
+
+IF _resetTask.Done OR _resetTask.Error THEN
+	RestoreTasks();
+END_IF
 
 _soEResetTask();
 
@@ -462,7 +476,18 @@ END_IF
 
 _override := 100;
 
-_resetTask.Restore();
+RestoreTasks();
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RestoreTasks" Id="{dc495f00-8846-0615-3d49-5c05e9d2b4aa}">
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_resetTask.Restore();
 _soEResetTask.Restore();
 _setPositionTask .Restore();
 _homeTask.Restore();

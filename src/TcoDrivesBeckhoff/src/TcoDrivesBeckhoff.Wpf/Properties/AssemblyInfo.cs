@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Reflection;
+using Vortex.Presentation.Wpf;
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
@@ -10,6 +11,7 @@ using System.Reflection;
                                               // app, or any theme specific resource dictionaries)
 )]
 
+[assembly:RenderableAssembly()]
 [assembly: AssemblyVersion("0.4.1.0")]
 [assembly: AssemblyFileVersion("0.4.1.0")]
 [assembly: AssemblyInformationalVersion("0.4.1-initial-dev.375+Branch.initial-dev.Sha.70df6b177f3b27b9fcedd3aa9c169ecdc6bd2d56")]

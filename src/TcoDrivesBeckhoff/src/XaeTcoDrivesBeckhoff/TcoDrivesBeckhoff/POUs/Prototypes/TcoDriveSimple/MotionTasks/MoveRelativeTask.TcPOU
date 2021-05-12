@@ -3,14 +3,18 @@
   <POU Name="MoveRelativeTask" Id="{ab769f25-b35b-017a-34f4-12fb5831bde5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK MoveRelativeTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
+	{attribute addProperty Name "<#Distance#>"}
 	_distance		:	LREAL;
+	{attribute addProperty Name "<#Velocity#>"}
 	_velocity		:	LREAL;
+	{attribute addProperty Name "<#Acceleration#>"}
 	_acceleration	:	LREAL;
+	{attribute addProperty Name "<#Deceleration#>"}
 	_deceleration	:	LREAL;
+	{attribute addProperty Name "<#Jerk#>"}
 	_jerk			:	LREAL;
 END_VAR
 VAR
-//	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
 	_axisRef		:	REFERENCE TO TcoAxisRef;
 	_mcMoveRelative	:	Tc2_MC2.MC_MoveRelative;
 END_VAR

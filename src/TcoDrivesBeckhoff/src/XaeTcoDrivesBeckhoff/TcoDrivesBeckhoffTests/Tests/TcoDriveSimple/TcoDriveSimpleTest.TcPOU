@@ -12,7 +12,9 @@ END_VAR
 		inEnablePositive	:=	inEnablePositive,
 		inEnableNegative	:=	inEnableNegative,
 		inCalibrationCam	:=	inCalibrationCam,
-		inoAxisRef			:=	inoAxisRef);]]></ST>
+		inoAxisRef			:=	inoAxisRef);
+		
+]]></ST>
     </Implementation>
     <Method Name="InvokeRestore" Id="{06376add-c887-0ea5-1952-65ca90344e59}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
