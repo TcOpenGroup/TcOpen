@@ -12,12 +12,14 @@ namespace TcoCore
         public event EventHandler CanExecuteChanged;
 
         public ICommand Abort { get; private set; }
+        public ICommand Restore { get; private set; }
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this._enabled.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoTask_CanExecuteChanged;
             Abort = new RelayCommand(AbortTask, CanAbortTask);
+            Restore = new RelayCommand(RestoreTask, CanRestoreTask);
         }
 
         private void TcoTask_CanExecuteChanged(object sender, EventArgs e)
@@ -52,6 +54,14 @@ namespace TcoCore
         }
 
         private void AbortTask(object obj)
+        {
+            this._abortRequest.Cyclic = true;
+        }
+        private bool CanRestoreTask()
+        {
+            return true;
+        }
+        private void RestoreTask(object obj)
         {
             this._restoreRequest.Cyclic = true;
         }

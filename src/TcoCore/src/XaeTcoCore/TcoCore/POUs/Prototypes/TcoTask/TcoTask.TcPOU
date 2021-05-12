@@ -65,6 +65,16 @@ VAR
 (*~
 	<docu>
 		<summary>
+			Use to abort the executing task and set this instance back to the Ready state.
+			The value is than set to FALSE. 
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Abort request#>"}
+	_abortRequest : BOOL;	
+(*~
+	<docu>
+		<summary>
 			Use to determine if the task execution is enabled for example from the HMI application. 
 			This value is read only, to modify it use the property <see cref="TcoTask.PlcTcoTask.Enabled()"/>		
 		</summary>		
@@ -378,10 +388,15 @@ END_IF;
 IF(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
 	THIS^.Invoke();
 END_IF;
-
 THIS^._invokeRequest := FALSE;
 
-//Triggering Restore from visualisation
+//Triggering Abort from remote system
+IF((THIS^._taskState = eTaskState.Requested OR THIS^._taskState = eTaskState.Busy) AND THIS^._abortRequest) THEN
+	THIS^.Abort();
+	THIS^._abortRequest := FALSE;
+END_IF;
+
+//Triggering Restore from remote system
 IF( THIS^._restoreRequest) THEN
 	THIS^.Restore();
 	THIS^._restoreRequest := FALSE;
