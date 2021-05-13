@@ -11,8 +11,8 @@ jobs:
       # Check if the action works
       - name: Run a one-line script
         run: echo Hello, world!
-      - name: Pull repo
-        run: git pull --all
+      - name: Fetch unshallow
+        run: git fetch --unshallow
       # Run psake
       - name: Run a multi-line script
         run: |
