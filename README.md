@@ -7,6 +7,7 @@
 [![Join the chat at https://gitter.im/dotnet/coreclr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TcOpenGroup/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/TcOpenGroup/TcOpen#awesome-twincat-3-projects-)
 [![Build](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml/badge.svg?branch=dev)](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml)
+[![Nightly](https://github.com/TcOpenGroup/TcOpen/actions/workflows/nightly.yml/badge.svg)](https://github.com/TcOpenGroup/TcOpen/actions/workflows/nightly.yml)
 
 
 # TcOpen
