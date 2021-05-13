@@ -200,13 +200,17 @@ We do not adopt any document describing conduct at this point. However, there ar
 1. Your contributions are under MIT license. 
 
 
-## Contributions? Suggestions? Issues?
+## Contributions
 
-You can submit your ideas in the form of [PullRequests](https://github.com/TcOpenGroup/TcOpen/pulls)
+Go through [conventions](https://docs.tcopengroup.org/articles/Conventions/Conventions.html).
 
-Please submit questions, suggestions, bug reports [here](https://github.com/TcOpenGroup/TcOpen/issues).
+Meet the [framework](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html).
 
-Various discussion [here](https://github.com/TcOpenGroup/TcOpen/discussions).
+Submit your ideas as [PullRequests](https://github.com/TcOpenGroup/TcOpen/pulls).
+
+Submit questions, suggestions, bug reports [here](https://github.com/TcOpenGroup/TcOpen/issues).
+
+Discuss [here](https://github.com/TcOpenGroup/TcOpen/discussions).
 
 ## Code format 
 TcOpen is powered by STweep for TwinCAT a source code formatter for Structured Text.
