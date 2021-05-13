@@ -113,10 +113,10 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
 
   $command = ".\_Vortex\builder\vortex.compiler.console.exe -s .\TcOpen.plc.slnf"
 
-    Write-Host $command
-    exec { 
+  Write-Host $command
+   exec { 
       cmd /c $command
-    }       
+  }       
 
   # $projects = @(  
   #    "src\Tc.Prober\Tc.Prober.slnf",   
