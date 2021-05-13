@@ -75,7 +75,9 @@ task CopyInxton -depends NugetRestore -continueOnError {
 task GitVersion -depends CopyInxton {
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
-  $script:gitVersion =  & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/config" "$baseDir/GitVersion.yml" |  ConvertFrom-Json 
+  $gitVersionOutput = & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/config" "$baseDir/GitVersion.yml"
+  $gitVersionOutput
+  $script:gitVersion =  $gitVersionOutput |  ConvertFrom-Json   
   $buildNumber =$script:gitVersion.SemVer
 
   if($script:gitVersion.BuildMetaData -ne ""){
