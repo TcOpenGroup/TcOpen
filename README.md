@@ -145,16 +145,30 @@ You should setup Windows environment variable ```Tc3Target``` with the value of 
 
 **Build project to restore necessary tooling and packages**
 
-_build in Debug profile_
+_VS 2019 Community edition_
 ~~~ PowerShell
 cd your_tcopen_folder
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug"}
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug";
+                                      "isTestingEnabled" = $false;
+                                      "msbuildVerbosity" = "minimal";
+                                      "publishNugets"= $false;
+                                      "updateAssemblyInfo" = $false;
+                                      "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe";
+                                      "dotnet" = "C:\Program Files\dotnet\dotnet.exe";
+                                      "devenv" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com"}
 ~~~
 
-_build in Release profile_
+_VS 2019 Pro edition_
 ~~~ PowerShell
 cd your_tcopen_folder
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug";
+                                      "isTestingEnabled" = $false;
+                                      "msbuildVerbosity" = "minimal";
+                                      "publishNugets"= $false;
+                                      "updateAssemblyInfo" = $false;
+                                      "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe";
+                                      "dotnet" = "C:\Program Files\dotnet\dotnet.exe";
+                                      "devenv" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"}
 ~~~
 
 **In the initial part of the build, you may see some errors popping up due to missing g.cs files (untracked by git). You can ignore those messages as long as the build completes like this:**
