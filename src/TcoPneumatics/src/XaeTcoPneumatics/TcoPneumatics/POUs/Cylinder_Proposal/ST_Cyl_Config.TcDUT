@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="ST_Cyl_Config" Id="{c2350594-0029-0b47-3f40-7b277f284c3b}">
+    <Declaration><![CDATA[TYPE ST_Cyl_Config :
+STRUCT
+	sName					:	STRING;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

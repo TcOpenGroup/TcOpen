@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="I_Cyl_AtWork" Id="{0d14d68b-edf3-03b6-1e28-d226068ca19b}">
+    <Declaration><![CDATA[INTERFACE I_Cyl_AtWork
+]]></Declaration>
+    <Property Name="P_AtWork" Id="{842b13b8-9154-010f-0489-8d41ad85324b}">
+      <Declaration><![CDATA[PROPERTY P_AtWork : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d4f128a5-aabd-05ba-039f-26088ff3acb5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

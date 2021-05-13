@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="FB_Cylinder" Id="{40aaf20f-d296-0a95-19c9-968f23726cd4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Cylinder EXTENDS TcoCore.TcoComponent IMPLEMENTS I_Cyl_Move, I_Cyl_Diag, I_Cyl_AtHome, I_Cyl_AtWork
+VAR_INPUT
+	In : ST_Cyl_inputs;
+END_VAR
+VAR_OUTPUT
+	Out : ST_Cyl_inputs;
+END_VAR
+VAR
+	Config:	ST_Cyl_Config;
+	Control: ST_Cyl_Control;
+	Status: ST_Cyl_Status;
+	Diag: ST_Cyl_Diagnosis;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[M_Diag();]]></ST>
+    </Implementation>
+    <Method Name="M_Diag" Id="{31845e9a-5247-0060-112f-cef81fdfb14c}">
+      <Declaration><![CDATA[METHOD M_Diag : E_Diag
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <NWL>
+          <XmlArchive>
+            <Data>
+              <o xml:space="preserve" t="NWLImplementationObject">
+                <v n="NetworkListComment">""</v>
+                <v n="DefaultViewMode">"Ld"</v>
+                <l2 n="NetworkList" cet="Network">
+                  <o>
+                    <v n="ILActive">false</v>
+                    <v n="FBDValid">false</v>
+                    <v n="ILValid">false</v>
+                    <l2 n="ILLines" />
+                    <v n="Comment">""</v>
+                    <v n="Title">""</v>
+                    <v n="Label">""</v>
+                    <v n="OutCommented">false</v>
+                    <l2 n="NetworkItems" />
+                    <l2 n="Connectors" />
+                    <v n="Id">5L</v>
+                  </o>
+                </l2>
+                <v n="BranchCounter">1</v>
+                <v n="ValidIds">true</v>
+              </o>
+            </Data>
+            <TypeList>
+              <Type n="Boolean">System.Boolean</Type>
+              <Type n="Int32">System.Int32</Type>
+              <Type n="Int64">System.Int64</Type>
+              <Type n="Network">{d9a99d73-b633-47db-b876-a752acb25871}</Type>
+              <Type n="NWLImplementationObject">{25e509de-33d4-4447-93f8-c9e4ea381c8b}</Type>
+              <Type n="String">System.String</Type>
+            </TypeList>
+          </XmlArchive>
+        </NWL>
+      </Implementation>
+    </Method>
+    <Method Name="M_MoveToHome" Id="{d9de80c4-0891-0ff4-125b-274a305bea46}">
+      <Declaration><![CDATA[METHOD M_MoveToHome : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_MoveToWork" Id="{7d8d7a6b-6b02-044e-3184-d5c39196a959}">
+      <Declaration><![CDATA[METHOD M_MoveToWork : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_AtHome" Id="{936aeeba-1842-0581-3d16-7c46cd3001a5}">
+      <Declaration><![CDATA[PROPERTY P_AtHome : BOOL]]></Declaration>
+      <Get Name="Get" Id="{57043cd7-3c2d-0fff-2991-8c87d77f94c9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_AtWork" Id="{281a410a-a660-0540-228a-e5b631a1cc6d}">
+      <Declaration><![CDATA[PROPERTY P_AtWork : BOOL]]></Declaration>
+      <Get Name="Get" Id="{96f4ce80-2b64-09ae-2cc0-06fab131ac21}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Cylinder">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.M_MoveToHome">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.M_MoveToWork">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.P_AtHome.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.P_AtWork.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

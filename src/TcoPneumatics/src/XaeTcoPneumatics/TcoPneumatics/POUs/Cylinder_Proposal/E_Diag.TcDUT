@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="E_Diag" Id="{fce53005-eddf-0653-37c2-6557533c1044}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_Diag :
+(
+	No_Status := 0,
+	OK := 1,
+	Sensor_IsNotAtHome := 2,
+	Sensor_IsNotAtWork := 3,
+	Double_Detection_Sensors := 4,
+	Double_Outputs_Simultaneous  := 5,
+	None_Detection_Sensor := 6,
+	None_Active_Outputs :=7
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

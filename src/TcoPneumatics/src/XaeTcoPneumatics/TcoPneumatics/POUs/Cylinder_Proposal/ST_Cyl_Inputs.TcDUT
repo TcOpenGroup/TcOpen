@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="ST_Cyl_Inputs" Id="{98c36462-3433-0149-0f4b-29946f426214}">
+    <Declaration><![CDATA[TYPE ST_Cyl_Inputs :
+STRUCT
+	(*~
+		<docu>
+			<summary>
+				Home position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute wpf [Container(Layout.UniformGrid)]}
+	{attribute wpf [Group(Layout.GroupBox, "Inputs")]}	
+	{attribute addProperty Name "Home position sensor"}
+	inAtHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Working position sensor.
+			</summary>	
+		</docu>
+	~*) 
+	{attribute addProperty Name "Work position sensor"}
+	inAtWorkPos : BOOL; 
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

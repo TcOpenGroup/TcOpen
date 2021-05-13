@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="I_Cyl_Diag" Id="{535a78e2-f528-00a7-01bb-3c65507c26f9}">
+    <Declaration><![CDATA[INTERFACE I_Cyl_Diag
+]]></Declaration>
+    <Method Name="M_Diag" Id="{2e833c79-50b1-07fc-1bf3-526929dec234}">
+      <Declaration><![CDATA[METHOD M_Diag : E_Diag
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

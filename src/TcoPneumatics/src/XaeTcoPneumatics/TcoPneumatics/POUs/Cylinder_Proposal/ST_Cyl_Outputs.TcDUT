@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="ST_Cyl_Outputs" Id="{ecf6ec1c-2d4a-024e-3787-f0a3425b02e1}">
+    <Declaration><![CDATA[TYPE ST_Cyl_Outputs :
+STRUCT
+	(*~
+		<docu>
+			<summary>
+				Move to working home position signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute wpf [Container(Layout.UniformGrid)]}
+	{attribute wpf [Group(Layout.GroupBox, "Outputs")]}	
+	{attribute addProperty Name "Move to home position actuator"}
+	outToHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working posistion signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "Move to work position actuator"}
+	outToWorkPos : BOOL;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

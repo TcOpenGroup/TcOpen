@@ -31,12 +31,52 @@
     <Compile Include="POUs\Cylinders\ICylinder.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\E_Diag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\FB_Cylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\I_Cyl_AtHome.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\I_Cyl_AtWork.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\I_Cyl_Diag.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\I_Cyl_Move.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Config.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Control.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Diagnosis.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Inputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Inputs_Outputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Outputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinder_Proposal\ST_Cyl_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Version\Global_Version.TcGVL">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs\Cylinders" />
+    <Folder Include="POUs\Cylinder_Proposal" />
     <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

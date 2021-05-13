@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="ST_Cyl_Control" Id="{9bcb64c1-86e8-093d-0bb1-279466bc8d4b}">
+    <Declaration><![CDATA[TYPE ST_Cyl_Control :
+STRUCT
+	bButtonHMIToHome		:	BOOL;	//Button HMI to Home.
+	bButtonHMIToWork		:	BOOL;	//Button HMI to Work.	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="I_Cyl_Move" Id="{30852ea0-d909-0826-3268-eb733f79c604}">
+    <Declaration><![CDATA[INTERFACE I_Cyl_Move
+]]></Declaration>
+    <Method Name="M_MoveToHome" Id="{b262e467-e1e3-00cf-23ef-8d20911cb2cb}">
+      <Declaration><![CDATA[METHOD M_MoveToHome : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_MoveToWork" Id="{8f4debb9-08db-02a2-18da-76f0c7244d91}">
+      <Declaration><![CDATA[METHOD M_MoveToWork : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
