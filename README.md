@@ -6,6 +6,7 @@
 [![TcOpen Slack ](https://img.shields.io/badge/Slack-channel-ff69b4.svg)](https://tcopendevelopment.slack.com/)
 [![Join the chat at https://gitter.im/dotnet/coreclr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TcOpenGroup/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/TcOpenGroup/TcOpen#awesome-twincat-3-projects-)
+[![Build](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml/badge.svg?branch=initial-dev)](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml)
 
 
 # TcOpen
@@ -144,16 +145,30 @@ You should setup Windows environment variable ```Tc3Target``` with the value of 
 
 **Build project to restore necessary tooling and packages**
 
-_build in Debug profile_
+_VS 2019 Community edition_
 ~~~ PowerShell
 cd your_tcopen_folder
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug"}
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug";
+                                      "isTestingEnabled" = $false;
+                                      "msbuildVerbosity" = "minimal";
+                                      "publishNugets"= $false;
+                                      "updateAssemblyInfo" = $false;
+                                      "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe";
+                                      "dotnet" = "C:\Program Files\dotnet\dotnet.exe";
+                                      "devenv" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com"}
 ~~~
 
-_build in Release profile_
+_VS 2019 Pro edition_
 ~~~ PowerShell
 cd your_tcopen_folder
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug";
+                                      "isTestingEnabled" = $false;
+                                      "msbuildVerbosity" = "minimal";
+                                      "publishNugets"= $false;
+                                      "updateAssemblyInfo" = $false;
+                                      "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe";
+                                      "dotnet" = "C:\Program Files\dotnet\dotnet.exe";
+                                      "devenv" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"}
 ~~~
 
 **In the initial part of the build, you may see some errors popping up due to missing g.cs files (untracked by git). You can ignore those messages as long as the build completes like this:**
@@ -167,7 +182,7 @@ Switch profile to Debug|TwinCAT RT (x64)
 
 ![Profile set](assets/pics/compile_profile.png)
 
-> The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)
+**The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)**
 
 ## Communication channels
 
