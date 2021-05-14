@@ -104,7 +104,7 @@
                 <TextBlock Text="{Binding Cyclic}"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="3">
+        <!--<Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -118,7 +118,7 @@
                 <TextBlock Text="{Binding AttributeName}"/>
                 <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/> 
             </StackPanel>            
-            <!--<vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding Component._Power._powerOverride}" PresentationType="Control"/>-->
+            --><!--<vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding Component._Power._powerOverride}" PresentationType="Control"/>--><!--
             <ContentControl Grid.Column="1" Visibility="{Binding Component._Power._driveEnableLocalTask._enabled.Cyclic , Converter={local:VisibleOnBool}, ConverterParameter=true}">
                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveEnableLocalTask}"/>
             </ContentControl>
@@ -137,8 +137,61 @@
             <ContentControl Grid.Column="3" Visibility="{Binding Component._Power._driveDisableNegativeLocalTask._enabled.Cyclic , Converter={local:VisibleOnBool}, ConverterParameter=true}">
                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveDisableNegativeLocalTask}"/>
             </ContentControl>
-        </Grid>        
+        </Grid>-->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5" Grid.Column="0" DataContext="{Binding Component._Power._powerOverride}">
+                <TextBlock Text="{Binding AttributeName}"/>
+                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+            </StackPanel>
+            <ContentControl Grid.Column="1">
+                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveEnableLocalTask}"             />
+            </ContentControl>
+             <ContentControl Grid.Column="2">
+                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveEnablePositiveLocalTask}"     />
+            </ContentControl>
+            <ContentControl Grid.Column="3">
+                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveEnableNegativeLocalTask}"     />
+            </ContentControl>
+        </Grid>
         <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--<ContentControl Grid.Column="1">
+                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveDisableLocalTask}"            />
+            </ContentControl>
+            <ContentControl Grid.Column="2">
+                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveDisablePositiveLocalTask}"    />
+            </ContentControl>
+            <ContentControl Grid.Column="3">
+                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._Power._driveDisableNegativeLocalTask}"    />
+            </ContentControl>-->
+            <ContentControl Grid.Column="1" DataContext="{Binding Component._Power._driveDisableLocalTask}"  >
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" />
+            </ContentControl>
+            <ContentControl Grid.Column="2" DataContext="{Binding Component._Power._driveDisablePositiveLocalTask}" >
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" />
+            </ContentControl>
+            <ContentControl Grid.Column="3" DataContext="{Binding Component._Power._driveDisableNegativeLocalTask}" >
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" />
+            </ContentControl>            
+        </Grid>        
+        <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -153,7 +206,7 @@
             <vortex:RenderableContentControl Margin="5" Grid.Column="2" DataContext="{Binding Component._haltTask}"     />
             <vortex:RenderableContentControl Margin="5" Grid.Column="3" DataContext="{Binding Component._stopTask}"     />
         </Grid>
-        <Grid Grid.Row="5" DataContext="{Binding Component._homeTask}">
+        <Grid Grid.Row="6" DataContext="{Binding Component._homeTask}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
