@@ -30,5 +30,15 @@
             Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:VisibleOnTaskState}, ConverterParameter=Requested-Busy}">
             <materialDesign:PackIcon Padding="14" Kind="CancelCircle" />
         </Button>
+        <Button
+            Padding="10,0,10,0"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            Foreground="{DynamicResource AttentionToActionBrush}" 
+            Command="{Binding TcoTask.Restore}"
+            Style="{StaticResource MaterialDesignToolButton}"
+            Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}">
+            <materialDesign:PackIcon Padding="14" Kind="Error" />
+        </Button>
     </Grid>
 </UserControl>
