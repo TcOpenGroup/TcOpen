@@ -40,7 +40,8 @@ VAR
     _enablePositive : BOOL;
     {attribute 'hide'}
     _enableNegative : BOOL;
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
     IF __ISVALIDREF(DriveRef) THEN
@@ -58,6 +59,15 @@ IF _powerOverridePV = ePowerOverride.Global_control AND _powerOverride = ePowerO
     _enableNegative := inEnableNegative;
 END_IF
 
+IF _powerOverridePV = ePowerOverride.Local_control AND _powerOverride = ePowerOverride.Global_control THEN
+	_driveEnableLocalTask.Enabled :=FALSE;
+	_driveDisableLocalTask.Enabled :=FALSE;;
+	_driveEnablePositiveLocalTask.Enabled :=FALSE;
+	_driveDisablePositiveLocalTask.Enabled :=FALSE;
+	_driveEnableNegativeLocalTask.Enabled :=FALSE;
+	_driveDisableNegativeLocalTask.Enabled :=FALSE;	
+END_IF
+
 _powerOverridePV := _powerOverride;
 
 IF _powerOverride = ePowerOverride.Global_control THEN
@@ -70,8 +80,8 @@ IF _powerOverride = ePowerOverride.Global_control THEN
 END_IF
 
 IF _powerOverride = ePowerOverride.Local_control AND inIsServiceMode THEN
-	_driveEnableLocalTask.Enabled := NOT _enablePositive;
-	_driveDisableLocalTask.Enabled := _enablePositive;
+	_driveEnableLocalTask.Enabled := NOT _enable;
+	_driveDisableLocalTask.Enabled := _enable;
 	IF _driveEnableLocalTask.Execute() THEN
 		_enable := TRUE;
 		_driveEnableLocalTask.DoneWhen(TRUE);
@@ -107,6 +117,7 @@ IF _powerOverride = ePowerOverride.Local_control AND inIsServiceMode THEN
         Enable_Negative := _enableNegative,
         Override := _override,
         BufferMode := Tc2_MC2.MC_BufferMode.MC_Aborting);
+		
 END_IF
 
 IF NOT inIsServiceMode THEN

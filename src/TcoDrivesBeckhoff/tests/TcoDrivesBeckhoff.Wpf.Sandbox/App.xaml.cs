@@ -17,6 +17,7 @@ namespace TcoDrivesBeckhoff.Wpf.Sandbox
     {
         public App() : base()
         {
+            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             //Entry.TcoDrivesBeckhoff.Connector.BuildAndStart();
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.Connector.BuildAndStart();
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._tcoDrivesBeckhoffContext._callMyPlcInstance.Synchron = false;
