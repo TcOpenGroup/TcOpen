@@ -21,7 +21,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Main"/>
-                    <vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._axis1}" />
+                    <vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Diagnostics" />
                     <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._axis2}" PresentationType="Main" />-->
                 </Grid>
             </TabItem>

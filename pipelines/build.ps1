@@ -9,9 +9,9 @@
   $publishNugets = $false
   $updateAssemblyInfo = $false
   $gitVersion
-  $msbuild = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
-  $dotnet = "C:\Program Files\dotnet\dotnet.exe"
-  $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
+  $msbuild = ([System.Environment]::GetEnvironmentVariable('TcoMsbuild'))
+  $dotnet = ([System.Environment]::GetEnvironmentVariable('TcoDotnet'))
+  $devenv = ([System.Environment]::GetEnvironmentVariable('TcoDevenv'))
   $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
   $testingStrength = 0
 }
@@ -170,7 +170,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
     Write-Host 'Building plc projects' -ForegroundColor Cyan
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
 
-    $command = "`"$devenv`" .\TcOpen.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
+    $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
       
     exec{
         cmd /c $command
