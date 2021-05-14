@@ -135,11 +135,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.TcoElements.Wpf", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoElementsTestsConnector", "src\TcoElements\tests\TcoElementsTestsConnector\TcoElementsTestsConnector.csproj", "{63EACDC5-2F7A-4885-85CF-D5474A780E2A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TcoBeckhoffDrive", "TcoBeckhoffDrive", "{B649F399-4C3C-4D11-8F52-02C3EFE949FE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TcoDrivesBeckhoff", "TcoDrivesBeckhoff", "{B649F399-4C3C-4D11-8F52-02C3EFE949FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{81F89033-9726-423A-97FA-85831C98E08F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoDrivesBeckhoff.Wpf", "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj", "{36434F1D-C7F0-4EEC-98BC-6ECC7D764238}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoDrivesBeckhoffConnector", "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj", "{C7C819BC-9EA1-4B6E-91E7-D7F2DEAE1E3C}"
 EndProject
@@ -152,6 +150,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoDrivesBeckhoffTestsConnector", "src\TcoDrivesBeckhoff\tests\TcoDrivesBeckhoffTestsConnector\TcoDrivesBeckhoffTestsConnector.csproj", "{EE7B8306-796A-4785-9E6D-9186B51283ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoDrivesBeckhoffUnitTests", "src\TcoDrivesBeckhoff\tests\TcoDrivesBeckhoffUnitTests\TcoDrivesBeckhoffUnitTests.csproj", "{6961610B-1C57-4BAD-8507-EBD2000E680B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoDrivesBeckhoff.Wpf", "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj", "{36434F1D-C7F0-4EEC-98BC-6ECC7D764238}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

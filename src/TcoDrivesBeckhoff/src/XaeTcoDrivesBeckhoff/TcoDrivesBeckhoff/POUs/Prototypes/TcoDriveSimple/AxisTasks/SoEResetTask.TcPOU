@@ -3,65 +3,60 @@
   <POU Name="SoEResetTask" Id="{fa3e4a13-c840-02cf-1af1-252355c7ca7c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SoEResetTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
-	_axisRef	:	REFERENCE TO Tc2_MC2.AXIS_REF;
-	_soEReset	:	Tc2_MC2_Drive.FB_SoEReset;	
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _soEReset : Tc2_MC2_Drive.FB_SoEReset;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
-	IF __ISVALIDREF(DriveRef) THEN
-		_axisRef REF=	DriveRef.AxisRef;
-	ELSE
-		RETURN;
-	END_IF
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-	_soEReset(Axis := _axisRef, Execute := FALSE);
+    _soEReset(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF Execute() THEN
-	_soEReset(	NetId:= _axisRef.ADS.NetId, 
-				Execute:= NOT _soEReset.Busy, 
-				Timeout:= , 
-				Axis:= _axisRef, 
-				Busy=> , 
-				Error=> , 
-				AdsErrId=> , 
-				SercosErrId=> );
-				
-	DoneWhen(NOT _soEReset.Busy);					
+    _soEReset(NetId := _axisRef.ADS.NetId,
+        Execute := NOT _soEReset.Busy,
+        Timeout :=,
+        Axis := _axisRef,
+        Busy =>,
+        Error =>,
+        AdsErrId =>,
+        SercosErrId =>);
 
-	ThrowWhen(_soEReset.Error);
-END_IF					
-]]></ST>
+    DoneWhen(NOT _soEReset.Busy);
+    ThrowWhen(_soEReset.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{0afc66a9-03c1-038c-382f-b88b851d83f4}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{647a1948-d513-0533-1d0c-76c1b9e327f8}">
         <Declaration><![CDATA[VAR
-	_drive : ITcoDriveSimple :=0;
+    _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
-	DriveRef REF= _drive.DriveRef;
-END_IF	]]></ST>
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="FB_init" Id="{ded3e489-07ea-0965-1c21-a0c3d43cfdbc}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
-				bInCopyCode		:=	bInCopyCode,	
-				Parent			:=	Parent);		    
-                                ]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{1cf67040-075f-0da2-2fcb-3c47859237d9}">

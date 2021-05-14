@@ -3,116 +3,133 @@
   <POU Name="MoveRelativeTask" Id="{ab769f25-b35b-017a-34f4-12fb5831bde5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK MoveRelativeTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
-	_distance		:	LREAL;
-	_velocity		:	LREAL;
-	_acceleration	:	LREAL;
-	_deceleration	:	LREAL;
-	_jerk			:	LREAL;
+    {attribute addProperty Name "<#Distance#>"}
+    _distance : LREAL;
+    {attribute addProperty Name "<#Velocity#>"}
+    _velocity : LREAL;
+    {attribute addProperty Name "<#Acceleration#>"}
+    _acceleration : LREAL;
+    {attribute addProperty Name "<#Deceleration#>"}
+    _deceleration : LREAL;
+    {attribute addProperty Name "<#Jerk#>"}
+    _jerk : LREAL;
 END_VAR
 VAR
-//	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
-	_axisRef		:	REFERENCE TO TcoAxisRef;
-	_mcMoveRelative	:	Tc2_MC2.MC_MoveRelative;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcMoveRelative : Tc2_MC2.MC_MoveRelative;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
-	IF __ISVALIDREF(DriveRef) THEN
-		_axisRef REF=	DriveRef.AxisRef;
-	ELSE
-		RETURN;
-	END_IF
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-	_mcMoveRelative(Axis := _axisRef, Execute := FALSE);
+    _mcMoveRelative(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF THIS^.State = TcoCore.eTaskState.Requested THEN
-	//In case of error, drive  is reseted first.
-	IF THIS^.DriveRef._axisRef.Status.Error THEN
-		THIS^.DriveRef.Reset();
-		RETURN;	
-	// When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-	//to ensure that movement is not triggered before drive is powered up. 
-	ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._mcPower.Status THEN
-		RETURN;
-	END_IF
+    //In case of error, drive  is reseted first.
+    IF THIS^.DriveRef._axisRef.Status.Error THEN
+        THIS^.DriveRef.Reset();
+        RETURN;
+        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
+        //to ensure that movement is not triggered before drive is powered up. 
+    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
+        RETURN;
+    END_IF
 END_IF
 
 IF Execute() THEN
-	_mcMoveRelative(Axis			:=	_axisRef, 
-					Execute			:=	NOT _mcMoveRelative.Busy, 
-					Distance		:=	_distance, 
-					Velocity		:=	_velocity, 
-					Acceleration	:=	_acceleration, 
-					Deceleration	:=	_deceleration, 
-					Jerk			:=	_jerk, 
-					BufferMode		:=	Tc2_MC2.MC_Aborting, 
-					Done=> , 
-					Busy=> , 
-					Active=> , 
-					CommandAborted=> , 
-					Error=> , 
-					ErrorID=> );
-				
-	IF _mcMoveRelative.CommandAborted THEN
-		THIS^.Abort();		
-	END_IF
-	
-	DoneWhen(_mcMoveRelative.Done);					
+    _mcMoveRelative(Axis := _axisRef,
+        Execute := NOT _mcMoveRelative.Busy,
+        Distance := _distance,
+        Velocity := _velocity,
+        Acceleration := _acceleration,
+        Deceleration := _deceleration,
+        Jerk := _jerk,
+        BufferMode := Tc2_MC2.MC_Aborting,
+        Done =>,
+        Busy =>,
+        Active =>,
+        CommandAborted =>,
+        Error =>,
+        ErrorID =>);
 
-	ThrowWhen(_mcMoveRelative.Error);
-END_IF					
-]]></ST>
+    IF _mcMoveRelative.CommandAborted THEN
+        THIS^.Abort();
+    END_IF
+
+    DoneWhen(_mcMoveRelative.Done);
+    ThrowWhen(_mcMoveRelative.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{146efb26-7f32-04da-32b9-93685dec6a03}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{190a9f73-0399-046c-1c21-3bcf8e4250e7}">
         <Declaration><![CDATA[VAR
-	_drive : ITcoDriveSimple :=0;
+    _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
-	DriveRef REF= _drive.DriveRef;
-END_IF	]]></ST>
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="FB_init" Id="{aa0a4a5c-48ac-02d1-3cc2-173990343fe1}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
-				bInCopyCode		:=	bInCopyCode,	
-				Parent			:=	Parent);		    
-                                ]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{01411d53-ac5f-0768-12a4-5b448e2f644f}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
-	inDistance		:	LREAL;
-	inVelocity		:	LREAL;
-	inAcceleration	:	LREAL;
-	inDeceleration	:	LREAL;
-	inJerk			:	LREAL;	
-END_VAR
-
-]]></Declaration>
+    inDistance : LREAL;
+    inVelocity : LREAL;
+    inAcceleration : LREAL;
+    inDeceleration : LREAL;
+    inJerk : LREAL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_distance		:=  inDistance		;  
-_velocity		:= 	inVelocity		; 
-_acceleration	:= 	inAcceleration	;
-_deceleration	:= 	inDeceleration	;
-_jerk			:= 	inJerk			;     
-
+        <ST><![CDATA[_distance := inDistance;
+_velocity := inVelocity;
+_acceleration := inAcceleration;
+_deceleration := inDeceleration;
+_jerk := inJerk;
 InvokeWithParams := THIS^.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{b2c16ee0-afd5-068f-3960-07dec1b46405}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
+
+THIS^.DriveRef.Stop(-1, -1);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e976de80-cfea-01a1-1fd9-673984f12c06}">

@@ -4,10 +4,15 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	_tcoDrivesBeckhoffContext	:	TcoDrivesBeckhoffContext;
+	_wpfContext					:	WpfContext;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[_tcoDrivesBeckhoffContext();
+
+
+_wpfContext.Run();
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -3,104 +3,95 @@
   <POU Name="HaltTask" Id="{7b2095f5-1f56-0a11-251d-e8dd47e39c60}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK HaltTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
-	_deceleration	:	LREAL;
-	_jerk			:	LREAL;
+    {attribute addProperty Name "<#Deceleration#>"}
+    _deceleration : LREAL;
+    {attribute addProperty Name "<#Jerk#>"}
+    _jerk : LREAL;
 END_VAR
 VAR
-//	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
-	_axisRef		:	REFERENCE TO TcoAxisRef;
-	_mcHalt			:	Tc2_MC2.MC_Halt;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcHalt : Tc2_MC2.MC_Halt;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
-	IF __ISVALIDREF(DriveRef) THEN
-		_axisRef REF=	DriveRef.AxisRef;
-	ELSE
-		RETURN;
-	END_IF
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-
-	_mcHalt(Axis := _axisRef, Execute := FALSE);
+    _mcHalt(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF THIS^.State = TcoCore.eTaskState.Requested THEN
-	//In case of error, drive  is reseted first.
-	IF THIS^.DriveRef._axisRef.Status.Error THEN
-		THIS^.DriveRef.Reset();
-		RETURN;	
-	// When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-	//to ensure that movement is not triggered before drive is powered up. 
-	ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._mcPower.Status THEN
-		RETURN;
-	END_IF
+    //In case of error, drive  is reseted first.
+    IF THIS^.DriveRef._axisRef.Status.Error THEN
+        THIS^.DriveRef.Reset();
+        RETURN;
+        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
+        //to ensure that movement is not triggered before drive is powered up. 
+    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
+        RETURN;
+    END_IF
 END_IF
 
 IF Execute() THEN
-	_mcHalt(Axis			:=	_axisRef, 
-			Execute			:=	NOT _mcHalt.Busy, 
-			Deceleration	:=	_deceleration, 
-			Jerk			:=	_jerk, 
-			Done=> , 
-			Busy=> , 
-			Active=> , 
-			CommandAborted=> , 
-			Error=> , 
-			ErrorID=> );
+    _mcHalt(Axis := _axisRef,
+        Execute := NOT _mcHalt.Busy,
+        Deceleration := _deceleration,
+        Jerk := _jerk,
+        Done =>,
+        Busy =>,
+        Active =>,
+        CommandAborted =>,
+        Error =>,
+        ErrorID =>);
 
+    IF _mcHalt.CommandAborted THEN
+        THIS^.Abort();
+    END_IF
 
-	IF _mcHalt.CommandAborted THEN
-		THIS^.Abort();		
-	END_IF
-	
-	DoneWhen(_mcHalt.Done);					
-
-	ThrowWhen(_mcHalt.Error);
-END_IF					
-]]></ST>
+    DoneWhen(_mcHalt.Done);
+    ThrowWhen(_mcHalt.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{05a8f2c1-5c4a-032e-391c-6015609bba63}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{c577432b-6bf0-02c1-2d8c-999bc8637657}">
         <Declaration><![CDATA[VAR
-	_drive : ITcoDriveSimple :=0;
+    _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
-	DriveRef REF= _drive.DriveRef;
-END_IF	]]></ST>
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="FB_init" Id="{d2ee9d25-2557-0248-1e0b-2092fdeb9e20}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
-				bInCopyCode		:=	bInCopyCode,	
-				Parent			:=	Parent);		    
-                                ]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{e0f5b9d1-b2ab-028e-0981-014cb0964a83}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
-	inDeceleration	:	LREAL;
-	inJerk			:	LREAL;	
-END_VAR
-
-]]></Declaration>
+    inDeceleration : LREAL;
+    inJerk : LREAL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_deceleration	:= 	inDeceleration	;
-_jerk			:= 	inJerk			;     
-
+        <ST><![CDATA[_deceleration := inDeceleration;
+_jerk := inJerk;
 InvokeWithParams := THIS^.Invoke();]]></ST>
       </Implementation>
     </Method>

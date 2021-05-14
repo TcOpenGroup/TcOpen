@@ -3,96 +3,102 @@
   <POU Name="SetPositionTask" Id="{0f3e15e0-dac1-0bfc-35ff-f09121d4b609}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SetPositionTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
-	_position		:	LREAL;
-	_mode			:	BOOL;
+    {attribute addProperty Name "<#Position#>"}
+    _position : LREAL;
+    {attribute addProperty Name "<#Mode#>"}
+    _mode : eSetPositionMode;
 END_VAR
 VAR
-	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
-	_mcSetPosition	:	Tc2_MC2.MC_SetPosition;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcSetPosition : Tc2_MC2.MC_SetPosition;
+    {attribute 'hide'}
+    _mc_mode : BOOL;
+    {attribute 'hide'}
+    _message : STRING(125);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
-	IF __ISVALIDREF(DriveRef) THEN
-		_axisRef REF=	DriveRef.AxisRef;
-	ELSE
-		RETURN;
-	END_IF
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-	_mcSetPosition(Axis := _axisRef, Execute := FALSE);
+    _mcSetPosition(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF THIS^.State = TcoCore.eTaskState.Requested THEN
-	//In case of error, drive  is reseted first.
-	IF THIS^.DriveRef._axisRef.Status.Error THEN
-		THIS^.DriveRef.Reset();
-		RETURN;	
-	// When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-	//to ensure that movement is not triggered before drive is powered up. 
-	ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._mcPower.Status THEN
-		RETURN;
-	END_IF
+    //In case of error, drive  is reseted first.
+    IF THIS^.DriveRef._axisRef.Status.Error THEN
+        THIS^.DriveRef.Reset();
+        RETURN;
+        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
+        //to ensure that movement is not triggered before drive is powered up. 
+    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
+        RETURN;
+    END_IF
 END_IF
 
 IF Execute() THEN
-	_mcSetPosition(	Axis:= _axisRef, 
-					Execute:= NOT _mcSetPosition.Busy, 
-					Position:= _position, 
-					Mode:= _mode, 
-					Options:= , 
-					Done=> , 
-					Busy=> , 
-					Error=> , 
-					ErrorID=> );
-	
-	DoneWhen(_mcSetPosition.Done);					
+    IF NOT Tco_TO_Tc2MC2_SetPositionMode(_mode, _mc_mode) THEN
+        _message := Tc2_Standard.CONCAT('Unable to cast _mode variable of type TcoDrivesBeckhoff.eSetPositionMode (', TO_STRING(_mode));
+        _message := Tc2_Standard.CONCAT(_message, ') to the type BOOL!!!');
+        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+        ThrowWhen(TRUE);
+        RETURN;
+    END_IF
 
-	ThrowWhen(_mcSetPosition.Error);
-END_IF					
-]]></ST>
+    _mcSetPosition(Axis := _axisRef,
+        Execute := NOT _mcSetPosition.Busy,
+        Position := _position,
+        Mode := _mc_mode,
+        Options :=,
+        Done =>,
+        Busy =>,
+        Error =>,
+        ErrorID =>);
+
+    DoneWhen(_mcSetPosition.Done);
+    ThrowWhen(_mcSetPosition.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{9faf9563-8fe2-0661-3e84-611676a37b5a}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{1c35a998-3024-0e23-00d6-b54072e8bffe}">
         <Declaration><![CDATA[VAR
-	_drive : ITcoDriveSimple :=0;
+    _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
-	DriveRef REF= _drive.DriveRef;
-END_IF	]]></ST>
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="FB_init" Id="{7283c3d3-d8b2-0303-2cb7-92285906a7e5}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
-				bInCopyCode		:=	bInCopyCode,	
-				Parent			:=	Parent);		    
-                                ]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{67797632-85c3-0d01-2507-e70b095630da}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
-	inPosition		:	LREAL;
-	inMode			:	BOOL;
-END_VAR
-
-]]></Declaration>
+    inPosition : LREAL;
+    inMode : eSetPositionMode;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_position		:=  inPosition;  
-_mode			:= 	inMode;
-
+        <ST><![CDATA[_position := inPosition;
+_mode := inMode;
 InvokeWithParams := THIS^.Invoke();]]></ST>
       </Implementation>
     </Method>

@@ -3,63 +3,58 @@
   <POU Name="ResetTask" Id="{018ad7d5-79df-023a-3c91-a698bbbc60f2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ResetTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
-	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
-	_mcReset        : Tc2_MC2.MC_Reset;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcReset : Tc2_MC2.MC_Reset;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
-	IF __ISVALIDREF(DriveRef) THEN
-		_axisRef REF=	DriveRef.AxisRef;
-	ELSE
-		RETURN;
-	END_IF
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-	_mcReset(Axis := _axisRef, Execute := FALSE);
+    _mcReset(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF Execute() THEN
-	_mcReset(	Axis	:= _axisRef, 
-				Execute	:= NOT _mcReset.Busy, 
-				Done=> , 
-				Busy=> , 
-				Error=> , 
-				ErrorID=> );
-	
-	DoneWhen(_mcReset.Done);					
+    _mcReset(Axis := _axisRef,
+        Execute := NOT _mcReset.Busy,
+        Done =>,
+        Busy =>,
+        Error =>,
+        ErrorID =>);
 
-	ThrowWhen(_mcReset.Error);
-END_IF					
-]]></ST>
+    DoneWhen(_mcReset.Done);
+    ThrowWhen(_mcReset.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{539bbd16-3d54-0366-3b1b-e22e7261b0a1}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{16dc8c5c-3663-033c-27c5-32406243dfc0}">
         <Declaration><![CDATA[VAR
-	_drive : ITcoDriveSimple :=0;
+    _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
-	DriveRef REF= _drive.DriveRef;
-END_IF	]]></ST>
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="FB_init" Id="{6855e6dd-82b3-081c-24eb-2aeb53c9e8eb}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
-				bInCopyCode		:=	bInCopyCode,	
-				Parent			:=	Parent);		    
-                                ]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{b66f0f12-7e1b-0ae5-3d39-d75ff6b45738}">

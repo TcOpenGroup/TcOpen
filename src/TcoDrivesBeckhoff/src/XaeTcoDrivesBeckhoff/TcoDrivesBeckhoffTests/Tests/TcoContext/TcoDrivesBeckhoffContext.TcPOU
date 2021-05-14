@@ -4,11 +4,12 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDrivesBeckhoffContext EXTENDS TcoCore._internals_TcoContext
 VAR
 	_callMyPlcInstance 		:	BOOL := FALSE;
+	{attribute addProperty Name "<#Test axis 1#>"}
 	_axis					:	TcoDriveSimpleTest(THIS^);
 	_enable					:	BOOL;			
 	_enablePositive			:	BOOL;				
 	_enableNegative			:	BOOL;        	
-	_calibrationCam 		:	BOOL;        	
+	_calibrationCam 		:	BOOL;        
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -29,7 +30,9 @@ END_VAR
 		inEnablePositive	:=	_enablePositive, 
 		inEnableNegative	:=	_enableNegative, 
 		inCalibrationCam	:=	_calibrationCam, 
-		inoAxisRef			:=	GVL.Axis1);]]></ST>
+		inoAxisRef			:=	GVL.Axis1);
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextClose" Id="{3c728987-0629-0c84-2598-bb76797d3d61}">
