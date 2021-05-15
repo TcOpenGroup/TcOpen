@@ -107,7 +107,12 @@ task GitVersion -depends CopyInxton {
 }
 
 task OpenVisualStudio -depends GitVersion {
-  Get-Process devenv | Stop-Process
+  try{
+    Get-Process devenv | Stop-Process
+  }
+  catch{
+    // Swallow
+  }
   Start-Process .\TcOpen.plc.slnf
 }
 
