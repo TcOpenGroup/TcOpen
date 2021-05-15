@@ -130,6 +130,7 @@ There is a separate documentation repository for this project [here](https://git
 1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.4+
 1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
 1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) 
+1. [Get free inxton developer licence](https://inxton.com/register)
 1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
 
 **Clone this repository**
