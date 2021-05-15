@@ -34,12 +34,6 @@ namespace TcoCore.Threading
         /// <param name="action">Action to run.</param>
         public void Invoke(Action action)
         {
-            if(_dispatcher == null)
-            {
-                throw new MissingUiDispactcherException("This application does not have application dispatcher set. " +
-                    "Please set appropriate application dispatecher (WPF, UWP, WinForms)");
-            }    
-
             _dispatcher?.Invoke(action);
         }
 
