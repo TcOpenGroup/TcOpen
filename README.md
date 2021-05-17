@@ -1,4 +1,4 @@
-![TcOpen logo](assets/logov2/ReadmeTop.svg)
+![TcOpen logo](assets/logov2/ReadmeTop.png)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/TcOpenGroup/TcOpen/graphs/commit-activity)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/TcOpenGroup/TcOpen/blob/dev/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/TcOpenGroup/TcOpen/pulls)
