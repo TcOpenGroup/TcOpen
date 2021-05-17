@@ -134,7 +134,7 @@ task Build -depends BuildWithInxtonBuilder {
   exec{
      & $msbuild .\TcOpen.build.slnf `
         /p:Configuration=$buildConfig `
-        -noWarn:CS1591;CS0067;CS0108;CS1570 `
+        -noWarn:"CS1591;CS0067;CS0108;CS1570" `
         /consoleloggerparameters:ErrorsOnly `
         -v:$msbuildVerbosity    
   }
