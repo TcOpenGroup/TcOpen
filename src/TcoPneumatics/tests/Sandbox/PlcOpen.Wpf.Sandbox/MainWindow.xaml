@@ -50,9 +50,12 @@
             </UniformGrid>
         </TabItem>
         <TabItem Header="Customized">
-            <Grid IsSharedSizeScope="true">
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
-            </Grid>
+            <StackPanel>
+                <Grid IsSharedSizeScope="true">
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
+                </Grid>
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>

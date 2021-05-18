@@ -15,7 +15,10 @@ VAR
 	_config : CylinderConfig;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_moveHomeDefault
+      <ST><![CDATA[_moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
+_moveWorkDefault.Enabled := NOT _moveHomeDefault.Busy;
+
+_moveHomeDefault
 (
 	PositionSensor := inAtHomePos,
 	MoveToPositionSignal := outToHomePos,
@@ -30,7 +33,8 @@ _moveWorkDefault
 	InverseSignal := outToHomePos,
 	MaxTimeToReachPosition := _config.TimeToReachWorkPosition,
 	PositionName := '<#Work#>');
-
+	
+	
 IF (_stopDefault.Execute()) THEN
 	outToWorkPos := FALSE;
 	outToHomePos := FALSE;

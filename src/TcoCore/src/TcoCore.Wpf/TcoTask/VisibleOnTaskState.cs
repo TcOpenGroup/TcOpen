@@ -7,8 +7,8 @@ using Vortex.Presentation.Wpf.Converters;
 namespace TcoCore
 {
     /// <summary>
-    /// Will set Visibility to Visible if the value exisst in ConverterParameter
-    /// Converter paramater values are dash (-) separated and should contain only eTaskState states. ie Requested-Busy-Error or Ready-Done
+    /// Will set Visibility to Visible if the value exist in ConverterParameter
+    /// Converter parameter values are dash (-) separated and should contain only eTaskState states. ie Requested-Busy-Error or Ready-Done
     /// </summary>
     public class VisibleOnTaskState : BaseConverter
     {
