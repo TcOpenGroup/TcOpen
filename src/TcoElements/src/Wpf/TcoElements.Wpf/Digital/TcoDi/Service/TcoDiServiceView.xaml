@@ -15,6 +15,7 @@
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*" SharedSizeGroup="Name" />
@@ -26,5 +27,11 @@
             Margin="5,0,5,0"
             Background="{Binding _signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
             CornerRadius="2" />
+        <Expander Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+            <UniformGrid  Rows="1">
+                <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}"></vortex:RenderableContentControl>
+                <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}"></vortex:RenderableContentControl>
+            </UniformGrid>
+        </Expander>
     </Grid>
 </UserControl>
