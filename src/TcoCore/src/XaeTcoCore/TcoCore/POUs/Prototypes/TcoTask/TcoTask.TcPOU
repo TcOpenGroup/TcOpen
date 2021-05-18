@@ -83,6 +83,13 @@ VAR
 	{attribute addProperty Name "<#Enabled#>"}
 	{attribute clr [ReadOnly()]}
 	_enabled : BOOL := TRUE;
+END_VAR
+
+VAR	
+	{attribute 'hide'}
+	_executionTimer : Tc2_Standard.TON;
+	{attribute clr [ReadOnly()]}
+	_elapsedTime : TIME;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -322,6 +329,29 @@ END_IF;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="ElapsedTime" Id="{78278734-9469-0240-24bb-e24bb2258532}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the elapsed time of the execution of this task. 
+			<remarks>			
+				<note type="important">
+					Uses `TIME` type. It might be not sutable for tasks running longer than 49 days.
+				</note>
+			</remarks>		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC ElapsedTime : TIME]]></Declaration>
+      <Get Name="Get" Id="{37071e73-80b0-05b2-2967-dfec5fd00ceb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ElapsedTime := _elapsedTime;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Enabled" Id="{c98a96a1-7e51-07e4-301f-9d561b604bea}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -375,6 +405,10 @@ PROPERTY Error : BOOL]]></Declaration>
 METHOD Execute : BOOL
 VAR
 	_serviceableParent : ITcoServiceable;
+END_VAR
+
+VAR
+	tmpTimeDiff : TIME;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
@@ -405,7 +439,7 @@ IF( THIS^._restoreRequest) THEN
 END_IF;
 
 IF NOT _enabled THEN
-	IF THIS^._taskState = eTaskState.Requested THEN
+	IF THIS^._taskState = eTaskState.Requested THEN		
 		THIS^.Messenger.Post('Task cannot start; Enabled property is FALSE.',eMessageCategory.Info);	
 		THIS^.Restore();
 	END_IF
@@ -418,7 +452,8 @@ END_IF;
 CheckIfCalledCyclically();
 AutoRestore();
 
-IF(THIS^._taskState = eTaskState.Requested) THEN
+IF(THIS^._taskState = eTaskState.Requested) THEN	
+	_executionTimer(IN := FALSE);
 	THIS^._taskState := eTaskState.Busy;
 END_IF;
 
@@ -427,6 +462,14 @@ IF(THIS^._taskState = eTaskState.Error) THEN
 END_IF;
 	
 Execute := (THIS^._taskState = eTaskState.Busy);
+
+IF(Execute) THEN
+	_executionTimer(IN := Execute, PT := T#49D);
+	_elapsedTime := _executionTimer.ET;
+END_IF;	
+
+
+
 ]]></ST>
       </Implementation>
     </Method>

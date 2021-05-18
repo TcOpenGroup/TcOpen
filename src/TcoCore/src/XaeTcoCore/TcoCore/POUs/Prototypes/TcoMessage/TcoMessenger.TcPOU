@@ -60,6 +60,31 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Clear" Id="{640fefd4-a9aa-0de1-3f5c-cce4bd50449f}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Clears the message content.
+				<remarks>			
+					<note type="important">
+						This method is exposed for Rpc calls, for testing purposes. Rpc calls of this method must not be used in production code
+					</note>
+				</remarks>								 
+			</summary>		
+		</docu>
+~*)
+{attribute 'TcRpcEnable'}
+METHOD Clear
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mime.TimeStamp :=  DT#1970-01-01-00:00;
+_mime.Text := '';
+_mime.Identity := 0;
+_mime.Category := eMessageCategory.None;
+_mime.Cycle := 0;	
+_mime.PerCycleCount := 0;	]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
       <Declaration><![CDATA[METHOD PROTECTED FINAL Compose 
 VAR_INPUT
