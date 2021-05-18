@@ -4,10 +4,14 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	_defaultContext : DefaultContext;
+	_cylinderBaseTests : CylinderBaseTestContext;
+	_cylinderTests : CylinderTestContext;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_defaultContext.Run();]]></ST>
+      <ST><![CDATA[_defaultContext.Run();
+_cylinderTests.ProbeRun();
+_cylinderBaseTests.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

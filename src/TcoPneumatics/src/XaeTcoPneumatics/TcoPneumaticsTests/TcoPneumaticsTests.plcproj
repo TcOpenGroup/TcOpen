@@ -31,16 +31,33 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\CylinderBaseTests\CylinderBaseImplemented.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CylinderBaseTests\CylinderBaseTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CylinderBaseTests\eCyclinderBaseTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\DefaultContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\CylinderTests\eCyclinderTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CylinderTests\CylinderTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\CylinderTests" />
+    <Folder Include="POUs\CylinderBaseTests" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
