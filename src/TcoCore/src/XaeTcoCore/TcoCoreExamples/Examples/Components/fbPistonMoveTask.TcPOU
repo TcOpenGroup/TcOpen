@@ -16,6 +16,7 @@ END_VAR
 	THIS^.Messenger.Debug('|[[1]AttributeName]| |[AttributeActivity]|, extremity sensor not reached yet.');
 	InverseSignal := FALSE;
 	MoveToPositionSignal := TRUE;
+	ThrowWhen(THIS^.ElapsedTime > T#5S);
 	THIS^.DoneWhen(PositionSensor);
 END_IF]]></ST>
     </Implementation>
