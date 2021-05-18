@@ -69,7 +69,6 @@ task CopyInxton -depends NugetRestore -continueOnError {
       & $dotnet build `
         .\src\TcoCore\tests\TcoDummyTest\TcoDummyTest.csproj `
         -v:$msbuildVerbosity `
-        -noWarn:"NU1701" `
         --nologo `
         /p:SolutionDir=$solutionDir
   }
