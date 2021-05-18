@@ -67,7 +67,10 @@ task NugetRestore -depends Clean {
 task CopyInxton -depends NugetRestore -continueOnError {
   exec {
       & $dotnet build `
-        .\src\TcoApplicationExamples\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj `
+        .\src\TcoCore\tests\TcoDummyTest\TcoDummyTest.csproj `
+        -v:$msbuildVerbosity `
+        -noWarn:"NU1701" `
+        --nologo `
         /p:SolutionDir=$solutionDir
   }
 }
