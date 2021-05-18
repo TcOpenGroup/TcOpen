@@ -18,7 +18,7 @@
 
 
 
-task default -depends CloseVs, Tests, CreatePackages, Finish
+task default -depends Init, CopyInxton, CloseVs, Build, Tests, CreatePackages, Finish
 
 
 FormatTaskName (("="*25) + " [ {0} ] " + ("="*25))
@@ -67,12 +67,17 @@ task NugetRestore -depends Clean {
 task CopyInxton -depends NugetRestore -continueOnError {
   exec {
       & $dotnet build `
-        .\src\TcoApplicationExamples\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj `
+        .\src\TcoCore\tests\TcoDummyTest\TcoDummyTest.csproj `
+        -v:$msbuildVerbosity `
+        --nologo `
         /p:SolutionDir=$solutionDir
   }
 }
 
-task GitVersion -depends CopyInxton {
+task GitVersion `
+  -precondition { $updateAssemblyInfo } `
+  -depends CopyInxton `
+{
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
   $gitVersionOutput = & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/config" "$baseDir/GitVersion.yml"
@@ -235,13 +240,19 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
 } 
 
 
-task ClearPackages -depends Tests {
+task ClearPackages `
+  -precondition { $publishNugets } `
+  -depends Tests `
+{
   mkdir nugets -ErrorAction SilentlyContinue
   mkdir nugets\dependants -ErrorAction SilentlyContinue
   Get-ChildItem -Path .\nugets\ -Include *.* -File -Recurse | ForEach-Object { $_.Delete()}
 }
 
-task CreatePackages -depends ClearPackages {
+task CreatePackages `
+  -precondition { $publishNugets } `
+  -depends ClearPackages `
+{
   $semVer = $script:gitVersion.SemVer
   $projects = @(
     #Packaging
