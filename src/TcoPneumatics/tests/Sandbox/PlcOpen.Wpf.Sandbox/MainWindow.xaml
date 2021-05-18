@@ -51,10 +51,14 @@
         </TabItem>
         <TabItem Header="Customized">
             <StackPanel>
-                <Grid IsSharedSizeScope="true">
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
-                </Grid>
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                <GroupBox Header="Sample piston" Padding="10" Margin="10">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Diagnostics" Padding="10" Margin="10">
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                </GroupBox>
             </StackPanel>
         </TabItem>
     </TabControl>

@@ -84,17 +84,17 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TcoPneumaticsTests.tmc">
-      <SubType>Content</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoPneumatics">
       <Resolution>TcoPneumatics, 0.4.1.375 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TcoPneumaticsTests.tmc">
+      <SubType>Content</SubType>
+    </None>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
