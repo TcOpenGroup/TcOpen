@@ -32,6 +32,8 @@ _moveWorkDefault(PositionSensor := inAtWorkPos,
     PositionName := '<#Work#>');
 
 IF (_stopDefault.Execute()) THEN
+	outToHomePos := FALSE;
+	outToWorkPos := FALSE;
     _moveHomeDefault.Abort();
     _moveWorkDefault.Abort();
     _stopDefault.Abort();
