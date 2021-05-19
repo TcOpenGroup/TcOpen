@@ -156,7 +156,7 @@ task Build -depends BuildWithInxtonBuilder {
         -noWarn:"CS1591;CS0067;CS0108;CS1570" `
         /consoleloggerparameters:ErrorsOnly `
         -v:$msbuildVerbosity    
-  }
+  } -maxRetries 3  
 }
 
 
