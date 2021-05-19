@@ -31,6 +31,7 @@ function EnsureGitVersion {
     $gitVersionFolder = Split-Path $pathToGitVersion
     Push-Location $gitVersionFolder
     $gitVersionExecutableFullName = ((Join-Path (pwd) "gitversion.exe"))
+    $gitVersionPwd = Get-Location
     Pop-Location
 
     DownloadIfMissing -folder $gitVersionFolder -url $gitversionUrl 
@@ -43,7 +44,7 @@ function EnsureGitVersion {
     }
    
     
-    $gitVersionFile = (Join-Path ($gitVersionFolder) (Split-Path $gitversionUrl -Leaf))
+    $gitVersionFile = Join-Path ($gitVersionPwd) (Split-Path $gitversionUrl -Leaf)
     $tar = $gitVersionFile.Replace(".gz","")
 
     DeGZip-File -infile $gitVersionFile -outfile $tar
