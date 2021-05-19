@@ -123,7 +123,7 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
   Write-Host $command
    exec { 
       cmd /c $command
-  }       
+  }  -maxRetries 3     
 
   # $projects = @(  
   #    "src\Tc.Prober\Tc.Prober.slnf",   
