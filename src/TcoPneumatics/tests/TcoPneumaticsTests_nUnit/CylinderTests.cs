@@ -16,7 +16,7 @@ namespace TcoPneumaticsTests
         [OneTimeSetUp()]
         public void OneTimeSetUp()
         {
-                 
+
         }
 
         [SetUp]
@@ -29,6 +29,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(100)]
         public void StopMovement()
         {
             sut._atHomeSignal.Synchron = false;
@@ -40,6 +41,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(200)]
         public void MoveHomeMoving()
         {            
             sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
@@ -55,6 +57,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(300)]
         public void MoveHomeMovingReached()
         {
             sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMovingReached);
@@ -77,6 +80,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(400)]
         public void MoveWorkMoving()
         {
             sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMoving);
@@ -92,6 +96,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(500)]
         public void MoveWorkMovingReached()
         {
             sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMovingReached);
@@ -114,6 +119,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(600)]
         public void AbortMoveTask()
         {
             sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
@@ -134,6 +140,7 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(700)]
         public void MoveTaskAlarm()
         {
             var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
