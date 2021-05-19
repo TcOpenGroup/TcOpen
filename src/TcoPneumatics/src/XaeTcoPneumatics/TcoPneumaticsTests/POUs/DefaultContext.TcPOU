@@ -17,14 +17,17 @@ END_VAR
     <Method Name="Main" Id="{f765357f-253d-4bf2-baf0-fad144fcb997}">
       <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_wpfCyclinder(inAtHomePos := IO.A1[0],
+        <ST><![CDATA[THIS^.RtcSynchronize(TRUE, '', 60);
+
+_wpfCyclinder.Service();	
+
+_wpfCyclinder(inAtHomePos := IO.A1[0],
 	inAtWorkPos := IO.A1[1],
 	outToHomePos => IO.A2[0],
 	outToWorkPos => IO.A2[1]);
 
-_wpfCyclinder_1();
-_wpfCyclinder_2();
-_wpfCyclinder_3();]]></ST>
+
+]]></ST>
       </Implementation>
     </Method>
   </POU>

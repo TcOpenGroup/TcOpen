@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="CylinderTestContext" Id="{4f0e4024-4378-058d-21b2-dd1a5c077cb8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CylinderTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_sut			: TcoPneumatics.Cylinder(THIS^);
+	_atHomeSignal	: BOOL;
+	_moveHomeSignal : BOOL;
+	_atWorkSignal	: BOOL;
+	_moveWorkSignal : BOOL;
+END_VAR
+VAR
+	_moveHomeDone	: BOOL;
+	_moveWorkDone : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{d7464bf3-4a73-0bd9-1c20-65d4ea0101c4}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+_sut(inAtHomePos := _atHomeSignal,
+    inAtWorkPos := _atWorkSignal,
+    outToHomePos => _moveHomeSignal,
+    outToWorkPos => _moveWorkSignal);
+
+CASE _testId OF
+    eCyclinderTests.StopMovement:
+        _sut.Stop();
+    eCyclinderTests.MoveHomeMoving:
+        _moveHomeDone := _sut.MoveToHome().Done;
+    eCyclinderTests.MoveHomeMovingReached:
+        _moveHomeDone := _sut.MoveToHome().Done;
+    eCyclinderTests.MoveWorkMoving:
+        _moveWorkDone := _sut.MoveToWork().Done;
+    eCyclinderTests.MoveWorkMovingReached:
+        _moveWorkDone := _sut.MoveToWork().Done;
+    eCyclinderTests.AbortMoveTask:
+        _sut.MoveHomeTask.Abort();	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
