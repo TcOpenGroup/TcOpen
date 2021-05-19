@@ -147,6 +147,8 @@ You should setup Windows environment variable ```Tc3Target``` with the value of 
 
 **Build project to restore necessary tooling and packages**
 
+### BEFORE RUNNING THE SCRIPT MAKE SURE ALL YOU INSTANCE OF VISUAL STUDIO ARE CLOSED. THE SCRIPT WILL OPEN VS TO COMPLETE THE BUILD OF THE PROJECT.
+
 _VS 2019 Community edition_
 ~~~ PowerShell
 cd your_tcopen_folder
