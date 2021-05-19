@@ -112,7 +112,7 @@ task GitVersion `
 }
 
 task OpenVisualStudio -depends GitVersion {
-  Start-Process .\TcOpen.plc.slnf
+  # Start-Process .\TcOpen.plc.slnf
 }
 
 
@@ -122,29 +122,11 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
 
   Write-Host $command
    exec { 
+      try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue} catch{}
+      Start-Process .\TcOpen.plc.slnf
       cmd /c $command
-  }  -maxRetries 3     
-
-  # $projects = @(  
-  #    "src\Tc.Prober\Tc.Prober.slnf",   
-  #    "src\TcoCore\TcoCore.slnf",
-  #    "src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf",
-  #    "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
-  #    "src\TcoPneumatics\TcoPneumatics.slnf"
-  #    "src\TcoElements\TcoElements.slnf",
-  #    "src\TcoApplicationExamples\TcoApplicationExamples.slnf",
-  #    "src\librarytemplate\PlcTemplate.slnf"
-  #  )
-
-  #  foreach($project in $projects)
-  # {   
-  #   $command = ".\_Vortex\builder\vortex.compiler.console.exe -s " + $project
-  #   Write-Host $command
-  #   exec { 
-  #     cmd /c $command
-  #   }       
-  # }
-
+      try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue}catch{}
+  }  -maxRetries 3       
 }
 
 task Build -depends BuildWithInxtonBuilder {
@@ -162,7 +144,7 @@ task Build -depends BuildWithInxtonBuilder {
 
 task CloseVs -depends Build {
   exec{
-    Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue
+   try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue} catch{}
   }
 }
 
@@ -179,7 +161,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
       
     exec{
         cmd /c $command
-    }
+    }  -maxRetries 2    
         	
     $testProjects = @(                    
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
@@ -209,12 +191,14 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
        
         if($xaeProjectFolder -ne "")
         {
-          Start-Sleep 5
-          .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId;
-          Start-Sleep 5
-          $BootDir = $solutionDir + $xaeProjectFolder;               
-          .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir;                    
-          Start-Sleep 5
+          exec{   
+            Start-Sleep 5
+            .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId;
+            Start-Sleep 5
+            $BootDir = $solutionDir + $xaeProjectFolder;               
+            .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir;                    
+            Start-Sleep 5
+          }  -maxRetries 2    
         }
 
 
@@ -227,7 +211,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
             -l:"trx;LogFileName=$LogFileName" `
             --no-build `
             --no-restore
-        }
+        } -maxRetries 2    
 
        
       }
