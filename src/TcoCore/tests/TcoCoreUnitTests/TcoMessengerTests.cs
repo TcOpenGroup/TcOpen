@@ -21,7 +21,7 @@ namespace TcoCoreUnitTests
         public void OneSetup()
         {
             suc._callMyPlcInstanceRtcUpdate.Synchron = true;
-            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.None; sut.SetMinLevel(); });
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
             sut.SingleCycleRun(() => sut.Resume());
         }
 
