@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eCyclinderTests" Id="{32571aaf-264b-0000-0e82-067ca83bf104}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eCyclinderTests :
+(
+	StopMovement := 50,
+	MoveHomeMoving := 100,
+	MoveHomeMovingReached := 200,
+	MoveWorkMoving := 300,
+	MoveWorkMovingReached := 400,
+	AbortMoveTask := 500
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

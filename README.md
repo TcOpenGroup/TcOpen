@@ -1,12 +1,15 @@
-![TcOpen logo](assets/logo/TcOpenWide.png)
+![TcOpen logo](assets/logov2/ReadmeTop.png)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/TcOpenGroup/TcOpen/graphs/commit-activity)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/TcOpenGroup/TcOpen/blob/dev/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/TcOpenGroup/TcOpen/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/TcOpenGroup/TcOpen/pulls)
 [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/TcOpenGroup/TcOpen)
 [![TcOpen Slack ](https://img.shields.io/badge/Slack-channel-ff69b4.svg)](https://tcopendevelopment.slack.com/)
 [![Join the chat at https://gitter.im/dotnet/coreclr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TcOpenGroup/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/TcOpenGroup/TcOpen#awesome-twincat-3-projects-)
-[![Build Status](https://dev.azure.com/petokurhajec0964/tc3/_apis/build/status/TcOpenGroup.TcOpen?branchName=dev)](https://dev.azure.com/petokurhajec0964/tc3/_build/latest?definitionId=6&branchName=dev)
+[![Build](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml/badge.svg?branch=dev)](https://github.com/TcOpenGroup/TcOpen/actions/workflows/main.yml)
+[![Nightly](https://github.com/TcOpenGroup/TcOpen/actions/workflows/nightly.yml/badge.svg)](https://github.com/TcOpenGroup/TcOpen/actions/workflows/nightly.yml)
+[![NuGet](https://img.shields.io/nuget/v/TcOpen.TcoCoreConnector.svg?style=flat)](https://www.nuget.org/packages/TcOpen.TcoCoreConnector/)
+
 
 # TcOpen
 
@@ -125,9 +128,10 @@ There is a separate documentation repository for this project [here](https://git
 ### Prerequisites
 
 1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
-1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.4+
+1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.15+
 1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
 1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) 
+1. [Get free inxton developer licence](https://inxton.com/register)
 1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
 
 **Clone this repository**
@@ -144,16 +148,32 @@ You should setup Windows environment variable ```Tc3Target``` with the value of 
 
 **Build project to restore necessary tooling and packages**
 
-_build in Debug profile_
+### BEFORE RUNNING THE SCRIPT MAKE SURE ALL INSTANCES OF VISUAL STUDIO ARE CLOSED. THE SCRIPT WILL OPEN VS TO COMPLETE THE BUILD OF THE PROJECT.
+
+_VS 2019 Community edition_
 ~~~ PowerShell
 cd your_tcopen_folder
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug"}
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug";
+                                      "isTestingEnabled" = $false;
+                                      "msbuildVerbosity" = "minimal";
+                                      "publishNugets"= $false;
+                                      "updateAssemblyInfo" = $false;
+                                      "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe";
+                                      "dotnet" = "C:\Program Files\dotnet\dotnet.exe";
+                                      "devenv" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com"}
 ~~~
 
-_build in Release profile_
+_VS 2019 Pro edition_
 ~~~ PowerShell
 cd your_tcopen_folder
-.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release"}
+.\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Debug";
+                                      "isTestingEnabled" = $false;
+                                      "msbuildVerbosity" = "minimal";
+                                      "publishNugets"= $false;
+                                      "updateAssemblyInfo" = $false;
+                                      "msbuild" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe";
+                                      "dotnet" = "C:\Program Files\dotnet\dotnet.exe";
+                                      "devenv" = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"}
 ~~~
 
 **In the initial part of the build, you may see some errors popping up due to missing g.cs files (untracked by git). You can ignore those messages as long as the build completes like this:**
@@ -167,7 +187,7 @@ Switch profile to Debug|TwinCAT RT (x64)
 
 ![Profile set](assets/pics/compile_profile.png)
 
-> The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)
+**The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)**
 
 ## Communication channels
 
@@ -185,13 +205,35 @@ We do not adopt any document describing conduct at this point. However, there ar
 1. Your contributions are under MIT license. 
 
 
-## Contributions? Suggestions? Issues?
+## Contributions
 
-You can submit your ideas in the form of [PullRequests](https://github.com/TcOpenGroup/TcOpen/pulls)
+Go through [conventions](https://docs.tcopengroup.org/articles/Conventions/Conventions.html).
 
-Please submit questions, suggestions, bug reports [here](https://github.com/TcOpenGroup/TcOpen/issues).
+Meet the [framework](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html).
 
-Various discussion [here](https://github.com/TcOpenGroup/TcOpen/discussions).
+Submit your ideas as [PullRequests](https://github.com/TcOpenGroup/TcOpen/pulls).
+
+Submit questions, suggestions, bug reports [here](https://github.com/TcOpenGroup/TcOpen/issues).
+
+Discuss [here](https://github.com/TcOpenGroup/TcOpen/discussions).
+
+## Code format 
+TcOpen is powered by STweep for TwinCAT a source code formatter for Structured Text.
+
+When contributing to TcOpen please use this set of settings for STweep: [TCOpen.zip](https://github.com/Barteling/TcOpen/files/6455049/TCOpen.zip)
+
+STweep is free of charge for active contributers to this project.
+
+For requesting a license for STweep visit www.stweep.com/Opensource
+
+<a href="https://www.STweep.com"><img src="https://user-images.githubusercontent.com/33071638/117724819-9b3c1d00-b1e4-11eb-89f1-ead8de7889e9.png" height="125" width="250" ></a>
+
+## Learning resources
+
+* Jakob Sagatowski's excellent series on TwinCAT programming on [youtube](https://www.youtube.com/playlist?list=PLimaF0nZKYHz3I3kFP4myaAYjmYk1SowO) and his [blogsite](https://alltwincat.com/).
+* Beckhoff's [infosys](https://infosys.beckhoff.com/).
+
+
 
 ## Code format 
 TcOpen is powered by STweep for TwinCAT a source code formatter for Structured Text.

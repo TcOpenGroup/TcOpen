@@ -2,6 +2,8 @@
   "solution": {
     "path": "TcOpen.sln",
     "projects": [
+      "src\\_packaging\\TcOpen.Group.Wpf\\TcOpen.Group.Wpf.csproj",
+      "src\\_packaging\\TcOpen.Group\\TcOpen.Group.csproj",
       "src\\Tc.Prober\\src\\Tc.Prober\\Tc.Prober.csproj",
       "src\\Tc.Prober\\tests\\PlcTcProberTestsConnector\\PlcTcProberTestsConnector.csproj",
       "src\\Tc.Prober\\tests\\Tc.ProberTest\\Tc.ProberTest.csproj",
@@ -10,8 +12,10 @@
       "src\\TcoCore\\src\\TcoCoreConnector\\TcoCoreConnector.csproj",
       "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",
       "src\\TcoCore\\tests\\TcoCore.Sandbox.Wpf\\TcoCore.Sandbox.Wpf.csproj",
+      "src\\TcoCore\\tests\\TcoCoreExamplesConnector\\TcoCoreExamplesConnector.csproj",
       "src\\TcoCore\\tests\\TcoCoreTestsConnector\\TcoCoreTestsConnector.csproj",
       "src\\TcoCore\\tests\\TcoCoreUnitTests\\TcoCoreUnitTests.csproj",
+      "src\\TcoCore\\tests\\TcoDummyTest\\TcoDummyTest.csproj",
       "src\\TcoCore\\tests\\TcoTestRunners\\TcoTestRunners.csproj",
       "src\\TcoDrivesBeckhoff\\src\\TcoDrivesBeckhoff.Wpf\\TcoDrivesBeckhoff.Wpf.csproj",
       "src\\TcoDrivesBeckhoff\\src\\TcoDrivesBeckhoffConnector\\TcoDrivesBeckhoffConnector.csproj",

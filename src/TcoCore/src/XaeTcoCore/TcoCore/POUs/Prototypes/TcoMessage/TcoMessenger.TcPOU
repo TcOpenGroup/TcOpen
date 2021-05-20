@@ -39,7 +39,8 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'catastrophic' category to the message queue.				 
+				Adds message of 'catastrophic' category to the message queue.
+				Use this category when there is a situation when the device cannot continue operations due to irrecoverable failure.				 
 			</summary>		
 		</docu>
 ~*)
@@ -58,6 +59,31 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{640fefd4-a9aa-0de1-3f5c-cce4bd50449f}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Clears the message content.
+				<remarks>			
+					<note type="important">
+						This method is exposed for Rpc calls, for testing purposes. Rpc calls of this method must not be used in production code
+					</note>
+				</remarks>								 
+			</summary>		
+		</docu>
+~*)
+{attribute 'TcRpcEnable'}
+METHOD Clear
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mime.TimeStamp :=  DT#1970-01-01-00:00;
+_mime.Text := '';
+_mime.Identity := 0;
+_mime.Category := eMessageCategory.None;
+_mime.Cycle := 0;	
+_mime.PerCycleCount := 0;	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
@@ -86,7 +112,8 @@ END_IF;
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'critical' category to the message queue.				 
+				Adds message of 'critical' category to the message queue.
+				Use this category when a critical error occured, that is not recoverable by the means of software (reset/restore) and a detailed inspection is required.				 
 			</summary>		
 		</docu>
 ~*)
@@ -111,7 +138,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'debug' category to the message queue.				 
+				Adds message of 'debug' category to the message queue.	
+			    Use when you need to report debug information for you as programmer. 			 
 			</summary>		
 		</docu>
 ~*)
@@ -136,7 +164,10 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'error' category to the message queue.				 
+				Adds message of 'error' category to the message queue.
+				Use this categoty when there is a failure that cannot be immediately recovered and an intervention is needed. This is typically a situation when a device fails
+				to deliver expected result. 
+				Do not use this category to report information about failed process like measurement or detection.				 
 			</summary>						
 		</docu>
 ~*)
@@ -176,7 +207,8 @@ _contextIdentity := Parent.Identity;
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'information' category to the message queue.				 
+				Adds message of 'information' category to the message queue.	
+				Use when you want to deliver information to the user, that has only informative character and does not adversely affect a process.			 
 			</summary>			
 		</docu>
 ~*)
@@ -201,7 +233,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'notification' category to the message queue.				 
+				Adds message of 'notification' category to the message queue.
+				Use this category when you want to report a notification that may be of interest to the user, but does not adveresly affect a process.			 
 			</summary>				
 		</docu>
 ~*)
@@ -279,7 +312,8 @@ END_IF;
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'programming error' category to the message queue.				 
+				Adds message of 'programming error' category to the message queue.	
+				Use this category to inform about a possible programming error, defect in settings or missing information at a level of programming or system or process settings.			 
 			</summary>				
 		</docu>
 ~*)
@@ -304,7 +338,9 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'trace' category to the message queue.				 
+				Adds message of 'trace' category to the message queue.	
+				Use when you need to track detailed information about internal states of the program for detailed visibility. 
+				This is lowest level of category that can be used in production, for detailed observation of PLC program.			 
 			</summary>					
 		</docu>
 ~*)
@@ -329,7 +365,9 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'warning' category to the message queue.				 
+				Adds message of 'warning' category to the message queue.
+				Use this category when you want to report to the user an information about a possible problem, that may adversly affect a process.
+				Information in this cateogory aims to help the user to identify a problem, the cause of such problem does not necessarily stops the process.				 
 			</summary>					
 		</docu>
 ~*)

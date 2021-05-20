@@ -34,15 +34,6 @@ _moveWorkTask(PositionSensor := iWorkPositionSensor, MoveToPositionSignal := qWo
         <ST><![CDATA[Close := MoveToHome();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Manual" Id="{d42ee7ad-0112-04b6-26d8-2fd1dcc9e3b0}">
-      <Declaration><![CDATA[METHOD PROTECTED Manual
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="MoveDown" Id="{71c646dc-aa10-0aa2-1ab2-9ffcfb10c4a3}" FolderPath="Vertical\">
       <Declaration><![CDATA[METHOD MoveDown : TcoCore.ITcoTaskStatus
 

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net48;net5.0</TargetFrameworks>
+		<OutputType>Library</OutputType>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<!--NuGet properties-->
+		<Authors>TcOpenGroup contributors</Authors>
+		<Company>TcOpenGroup</Company>
+		<RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>TwinCAT3 Beckhoff</PackageTags>
+		<PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+		<PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+		<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+	  <ProjectReference Include="..\..\TcoDrivesBeckhoff\src\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj" />
+	  <ProjectReference Include="..\..\TcoElements\src\TcoElementsConnector\TcoElementsConnector.csproj" />
+	  <ProjectReference Include="..\..\TcoIoBeckhoff\src\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj" />
+	  <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+name: Build
+
+on: 
+  push:
+    branches : 
+      - dev
+  pull_request: 
+    paths:
+      - 'src/**'
+      - 'pipelines/**'
+      - '.github/**'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: self-hosted
+    timeout-minutes: 30
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it. Dummy edit
+      - uses: actions/checkout@v2
+      # Check if the action works
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Fetch unshallow
+        run: git fetch --unshallow
+      # Run psake
+      - name: Run a multi-line script
+        run: |
+          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "isTestingEnabled" = $true;}
