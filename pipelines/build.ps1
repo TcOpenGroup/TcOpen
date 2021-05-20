@@ -247,7 +247,9 @@ task CreatePackages `
     "src\TcoIoBeckhoff\src\TcoIoBeckhoff.Wpf\TcoIoBeckhoff.Wpf.csproj",
     "src\TcoIoBeckhoff\src\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj",
     "src\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj",
-    "src\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj"   
+    "src\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj",
+    "src\_packaging\TcOpen.Group\TcOpen.Group.csproj",
+    "src\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj"
   )
   foreach($project in $projects)
   {  
