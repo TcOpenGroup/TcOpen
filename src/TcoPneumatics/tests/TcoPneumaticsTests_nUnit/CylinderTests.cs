@@ -5,126 +5,163 @@ using Tc.Prober.Recorder;
 using System.Reflection;
 using System.IO;
 using TcoPneumaticsTests;
+using TcoCore.Testing;
 
 namespace TcoPneumaticsTests
 {
     public class CylinderTests
     {
-        Cylinder sut=ConnectorFixture.Connector.MAIN._defaultContext._wpfCyclinder;
+        CylinderTestContext sut = ConnectorFixture.Connector.MAIN._cylinderTests;
 
         [OneTimeSetUp()]
         public void OneTimeSetUp()
         {
-            //Entry.TcoPneumaticsTestsPlc.Connector.BuildAndStart();
-            //sut = Entry.TcoPneumaticsTestsPlc.MAIN._defaultContext._wpfCyclinder;
-            var executingAssembly = new FileInfo(Assembly.GetExecutingAssembly().Location);
-            Runner.RecordingsShell = Path.GetFullPath(Path.Combine(executingAssembly.DirectoryName, @"..\..\..\recodrings"));            
+
         }
 
         [SetUp]
         public void TestSetup()
         {
-            sut.Run(a => a._StopTest());
+            sut._atHomeSignal.Synchron = false;
+            sut._atWorkSignal.Synchron = false;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.StopMovement);
         }
 
         [Test]
-        // [Timeout(10000)]
-        public void MoveCylinderToHomeTest()
+        [Timeout(10000)]
+        [Order(100)]
+        public void StopMovement()
         {
-            sut.Run(a =>
-            {
-                var done = a._MoveToHomeTest();
-                //Entry.TcoPneumaticsTestsPlc.IO.A1[0].Synchron = true;
-                //Entry.TcoPneumaticsTestsPlc.IO.A1[1].Synchron = false;
-                ConnectorFixture.Connector.IO.A1[0].Synchron = true;
-                ConnectorFixture.Connector.IO.A1[1].Synchron = false;
-                return done;
+            sut._atHomeSignal.Synchron = false;
+            sut._atWorkSignal.Synchron = false;
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+            Assert.AreEqual(false, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveWorkSignal.Synchron);                        
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order(200)]
+        public void MoveHomeMoving()
+        {            
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order(300)]
+        public void MoveHomeMovingReached()
+        {
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMovingReached);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMovingReached);
+            Assert.AreEqual(false, sut._moveWorkSignal.Synchron);    
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+
+            sut._atHomeSignal.Synchron = true;
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMovingReached);
+
+            Assert.AreEqual(false, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeDone.Synchron);
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order(400)]
+        public void MoveWorkMoving()
+        {
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMoving);
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(false, sut._moveWorkDone.Synchron);
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMoving);
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(false, sut._moveWorkDone.Synchron);
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order(500)]
+        public void MoveWorkMovingReached()
+        {
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMovingReached);
+            Assert.AreEqual(false, sut._moveWorkDone.Synchron);
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMovingReached);
+            Assert.AreEqual(false, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(false, sut._moveWorkDone.Synchron);
+
+            sut._atWorkSignal.Synchron = true;
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveWorkMovingReached);
+
+            Assert.AreEqual(false, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkDone.Synchron);
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order(600)]
+        public void AbortMoveTask()
+        {
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.AbortMoveTask);
+            Assert.AreEqual(false, sut._moveWorkSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeSignal.Synchron);
+
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order(700)]
+        public void MoveTaskAlarm()
+        {
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachHomePosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.MoveHomeMoving);
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(false, sut._moveHomeDone.Synchron);
+
+            
+            System.Threading.Thread.Sleep((int)timeToAlarm.TotalMilliseconds);
+            sut.ExecuteProbeRun((int)eCyclinderTests.MoveHomeMoving, () => {              
+                for (int i = 0; i < ((int)timeToAlarm.TotalMilliseconds / 10)+1; i++)
+                {
+                    System.Threading.Thread.Sleep(10);
+                }
+
+                return true;
             });
 
-
-            Assert.IsFalse(sut.inAtWorkPos.Synchron);
-            Assert.IsTrue(sut.inAtHomePos.Synchron);
-            Assert.IsTrue(sut.outToHomePos.Synchron);
-            Assert.False(sut.outToWorkPos.Synchron);
-        }
-
-        
-        [Test]
-        [Timeout(10000)]
-        public void MoveCylinderToWorkTest()
-        {
-            sut.Run(a =>
-            {
-                var done = a._MoveToWorkTest();
-                //Entry.TcoPneumaticsTestsPlc.IO.A1[0].Synchron = false;
-                //Entry.TcoPneumaticsTestsPlc.IO.A1[1].Synchron = true;
-                ConnectorFixture.Connector.IO.A1[0].Synchron = false;
-                ConnectorFixture.Connector.IO.A1[1].Synchron = true;
-                return done;
-            });
-            Assert.IsTrue(sut.inAtWorkPos.Synchron);
-            Assert.IsFalse(sut.inAtHomePos.Synchron);
-            Assert.IsFalse(sut.outToHomePos.Synchron);
-            Assert.IsTrue(sut.outToWorkPos.Synchron);
-        }
-
-        [Test]
-        [Timeout(10000)]
-        public void StopCylinderTest()
-        {
-            sut.Run(a =>
-            {
-                var done = a._StopTest();              
-                return done;
-            });
-
-            Assert.IsFalse(sut.outToHomePos.Synchron);
-            Assert.IsFalse(sut.outToWorkPos.Synchron);
-        }
-
-        private RecorderModeEnum mode = RecorderModeEnum.Player;
-        
-
-        [Test]
-        [Timeout(10000)]
-        public void MoveCylinderToWorkTestWithRecording()
-        {
-            //var actor = new Recorder<IO, PlainIO>(Entry.TcoPneumaticsTestsPlc.IO, mode, 1).Actor;
-            var actor = new Recorder<IO, PlainIO>(ConnectorFixture.Connector.IO, mode, 1).Actor;
-            var done = false;
-
-            sut.Run(() => { done = sut._MoveToWorkTest(); return done; },
-                    () => { return done; },
-                    null,
-                    null,
-                    actor,
-                    Path.Combine(Runner.RecordingsShell, $"{nameof(MoveCylinderToWorkTestWithRecording)}.json"));
-
-            Assert.IsTrue(sut.inAtWorkPos.Synchron);
-            Assert.IsFalse(sut.inAtHomePos.Synchron);
-            Assert.IsFalse(sut.outToHomePos.Synchron);
-            Assert.IsTrue(sut.outToWorkPos.Synchron);
-        }
-
-        [Test]
-        [Timeout(10000)]
-        public void MoveCylinderToHomeTestWithRecording()
-        {
-            //var actor = new Recorder<IO, PlainIO>(Entry.TcoPneumaticsTestsPlc.IO, mode, 1).Actor;
-            var actor = new Recorder<IO, PlainIO>(ConnectorFixture.Connector.IO, mode, 1).Actor;
-            var done = false;
-
-            sut.Run(() => { done = sut._MoveToHomeTest(); return done; },
-                    () => { return done; },
-                    null,
-                    null,
-                    actor,
-                    Path.Combine(Runner.RecordingsShell, $"{nameof(MoveCylinderToHomeTestWithRecording)}.json"));
-
-            Assert.IsFalse(sut.inAtWorkPos.Synchron);
-            Assert.IsTrue(sut.inAtHomePos.Synchron);
-            Assert.IsTrue(sut.outToHomePos.Synchron);
-            Assert.False(sut.outToWorkPos.Synchron);
+            Assert.AreEqual("Home sensor not reached yet.", sut._sut._moveHomeDefault._messenger._mime.Text.Synchron);           
         }
     }
 }

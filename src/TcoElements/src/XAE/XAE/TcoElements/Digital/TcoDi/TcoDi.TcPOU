@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDi" Id="{940ec0d0-0377-0ad5-2841-be1fc78a02da}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -32,6 +32,7 @@ VAR
 END_VAR
 
 VAR
+	_signalInfo : TcoCore.TcoSignalInfo;
 	{attribute addProperty Name "<#Check On#>"}
 	{attribute addProperty ToolTip "<#Checks that the input is on#>"}
 	_isTrueTask : TcoCore.TcoTask(THIS^);
@@ -46,6 +47,7 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
+	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
 	_signal := inoSignal;	
 END_IF;	
 

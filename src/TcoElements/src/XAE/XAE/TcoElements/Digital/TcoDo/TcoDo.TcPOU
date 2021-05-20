@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDo" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -32,6 +32,7 @@ VAR
 END_VAR
 
 VAR
+	_signalInfo : TcoCore.TcoSignalInfo;
 	{attribute addProperty Name "<#On#>"}
 	{attribute addProperty ToolTip "<#Sets the output#>"}
 	_setTask	 : TcoCore.TcoTask(THIS^);
@@ -42,7 +43,8 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	 inoSignal := _signal;	
+	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+	inoSignal := _signal;		 
 END_IF;	
 	
 IF(_setTask.Execute())THEN

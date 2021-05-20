@@ -25,7 +25,19 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="POUs\Cylinders\Base\CylinderBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Cylinders\Cylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\CylinderConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\CylinderStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\CylinderMoveTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\ICylinder.TcIO">
@@ -37,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs\Cylinders" />
+    <Folder Include="POUs\Cylinders\Base" />
     <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

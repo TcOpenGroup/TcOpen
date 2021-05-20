@@ -18,8 +18,7 @@ END_VAR]]></Declaration>
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.RtcSynchronize(TRUE, '', 60);
-_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
+        <ST><![CDATA[_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
 CASE _testId OF
 	eTcoTaskTests.ElapsedTypeMeasurement:
 		_sut.Invoke();
