@@ -103,6 +103,7 @@ END_VAR
         <Implementation>
           <ST><![CDATA[IsFalse := NOT _signal;
 _isFalseTimeOutTimers(IN := NOT IsFalse, PT := _config.IsFalseTimeOut); 
+IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;
 IF(_isFalseTimeOutTimers.Q) THEN Messenger.Warning('<#Expecting `negative` signal#>'); END_IF;]]></ST>
         </Implementation>
       </Get>
@@ -125,6 +126,7 @@ END_VAR
         <Implementation>
           <ST><![CDATA[IsTrue := _signal;
 _isTrueTimeOutTimers(IN := NOT IsTrue, PT := _config.IsFalseTimeOut); 
+IF(NOT IsTrue) THEN Messenger.Info('<#Expecting `positive` signal#>'); END_IF;
 IF(_isTrueTimeOutTimers.Q) THEN Messenger.Warning('<#Expecting `positive` signal#>'); END_IF;
 ]]></ST>
         </Implementation>
