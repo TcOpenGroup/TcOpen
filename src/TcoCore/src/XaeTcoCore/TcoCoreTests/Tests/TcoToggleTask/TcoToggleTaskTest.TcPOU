@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoToggleTaskTest" Id="{cf86f7eb-f2d9-041c-3af8-b618157626b2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoToggleTaskTest EXTENDS TcoToggleTask
+VAR
+	_isOn							:	BOOL;	
+	_isOff							:	BOOL;	
+	_isEnabled						:	BOOL;	
+	_isToggleRequestTrue			:	BOOL;		
+	_counterValue					:	ULINT;
+	_counterValuePV					:	ULINT;
+	_toggleCounter					:	ULINT;
+	_runCounter						:	ULINT;
+	_onFtrigCounter					:	ULINT;	
+	_onRtrigCounter					:	ULINT;	
+	_onCounter						:	ULINT;
+	_offCounter						:	ULINT;
+	_onStateChangeCounter			:	ULINT;
+	_taskOnCounter					:	ULINT;
+	_taskOffCounter					:	ULINT;
+	_stateChangedCounter			:	ULINT;
+
+	_previousState					:	BOOL;
+	_myIdentity						:	ULINT;
+	_myContextIdentity				:	ULINT;
+	_myContextStartCount 			:	ULINT;
+	_myContextEndCount				:	ULINT;	
+	_myParentIdentity				:	ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ExecutionBody();]]></ST>
+    </Implementation>
+    <Method Name="Disable" Id="{3fabe4c1-0a89-0665-24a4-97c350b98e2e}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Disable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{6e21d7a1-be4d-0a82-0aac-0ec664c5f631}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Enable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ExecutionBody" Id="{2bd2f3b7-019f-0611-1aa2-f7fc81fb4ecf}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ExecutionBody]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Run();
+
+_runCounter := _runCounter + 1;	
+
+IF _previousState <> THIS^.State THEN
+	_stateChangedCounter := _stateChangedCounter + 1;
+END_IF; 
+_previousState	:=	THIS^.State;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetMessage" Id="{42f54bc9-b797-00f6-209e-7d4eee70c175}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL GetMessage : STRING]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetMessage := SUPER^._messenger._mime.Text;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnFtrig" Id="{6160634b-65d9-0a05-1434-ebbbd8b914f1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task changes its state from '''TRUE''' to '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnFtrig
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onFtrigCounter := _onFtrigCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnRtrig" Id="{ae0b8e3b-bdff-0811-0cc3-06283cdbbd4e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task changes its state from '''FALSE''' to '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnRtrig
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onRtrigCounter := _onRtrigCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{bdf37317-4394-0c9c-37ea-f91a079387e0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task changes its state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStateChange
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onStateChangeCounter := _onStateChangeCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostMessage" Id="{a73cf561-f719-0e1b-34b2-9ec364c1800c}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL PostMessage
+VAR_INPUT
+	Message	:	STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Messenger.Post(Message ,eMessageCategory.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutIdentities" Id="{2f3da888-fb82-0709-39d9-c6cbf790d559}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutIdentities]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
+ 
+_myContextIdentity	:=	THIS^.Context.Identity;
+		
+_myContextStartCount :=	THIS^.Context.StartCycleCount;
+ 
+_myContextEndCount	:=	THIS^.Context.EndCycleCount;
+ 
+_myParentIdentity	:=	THIS^._Parent.Identity;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutState" Id="{ae43631e-8615-0bb0-022f-6cd59becb927}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutState]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isOn				    :=	THIS^.IsOn;	
+_isOff				   	:=	THIS^.IsOff;	
+_isEnabled				:=	THIS^.Enabled;
+_isToggleRequestTrue	:=	THIS^._toggleRequest;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetPreviousState" Id="{f2ef8390-bc1c-044a-3cfe-c7abb5346dbb}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetPreviousState
+VAR_INPUT
+	inValue : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._previousState := inValue;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetToggleRequest" Id="{83e44ab3-2e9a-0140-3536-de0cea83b07e}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetToggleRequest]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._toggleRequest := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TaskOff" Id="{77d3cd74-7a3e-0eb5-25ff-622e18b6fbef}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task is in ```Off``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED TaskOff
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_taskOffCounter := _taskOffCounter + 1;
+
+_counterValue := _counterValue - 1;
+_CounterValuePV := _counterValue;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TaskOn" Id="{e7dd9dc2-29f5-04de-1df5-ebe3e27c7e93}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task is in  ```On``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED TaskOn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_taskOnCounter := _taskOnCounter + 1;
+
+_counterValue := _counterValue + 1;
+_CounterValuePV := _counterValue;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerOff" Id="{23d40106-c3d0-045c-0030-8b73fb07425d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerOff]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Off();
+_offCounter := _offCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerOn" Id="{61f22949-6d3d-0e00-1126-be729870dd88}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerOn]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.On();
+_onCounter := _onCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerToggle" Id="{890cb5f0-fc2e-0077-305e-68ac3e605f01}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerToggle]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Toggle();
+_toggleCounter := _toggleCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

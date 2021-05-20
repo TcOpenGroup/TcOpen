@@ -13,6 +13,8 @@ VAR
 	_myIdentity				:	ULINT;	
 	_onEntryCount			:	ULINT;
 	_onExitCount			:	ULINT;
+	_tcoToggleTaskTest_A	:	TcoToggleTaskTest(THIS^,TRUE);
+	_tcoToggleTaskTest_B	:	TcoToggleTaskTest(THIS^,FALSE);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -60,6 +62,9 @@ METHOD INTERNAL ContextOpen
         <ST><![CDATA[_mainCycles := _mainCycles + 1;
 
 _myIdentity	:= THIS^.Identity;
+
+THIS^._tcoToggleTaskTest_A.ExecutionBody();
+THIS^._tcoToggleTaskTest_B.ExecutionBody();
 ]]></ST>
       </Implementation>
     </Method>

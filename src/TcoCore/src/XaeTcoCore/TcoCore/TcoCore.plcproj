@@ -163,6 +163,12 @@
     <Compile Include="POUs\Prototypes\TcoTask\TcoTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoToggleTask\ITcoToggleTask.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoToggleTask\TcoToggleTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TestFixtures\_internals_TcoContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -177,6 +183,7 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
+    <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
     <Folder Include="POUs\Prototypes\TcoTask\TaskResult">
