@@ -19,5 +19,5 @@ jobs:
             "updateAssemblyInfo" = $true;
             "publishNugets" = $true;
             "nugetToken" = ($env:NUGET_ORG_PAT);
-            "isTestingEnabled" = $false
+            "isTestingEnabled" = $true
             }
