@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoElementsSandbox" Id="{c46022e7-7bf1-0c54-0deb-015ecc103f2a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoElementsSandbox EXTENDS TcoCore.TcoContext
 VAR
@@ -17,8 +17,8 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_di.Service();
 _do.Service();
-_di(inoSignal := _doSignal);
-_do(inoSignal := _doSignal);]]></ST>
+_di(inoSignal := IO.A1._1);
+_do(inoSignal := IO.A2._1);]]></ST>
       </Implementation>
     </Method>
   </POU>

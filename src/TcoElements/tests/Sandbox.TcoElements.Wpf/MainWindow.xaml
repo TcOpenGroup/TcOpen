@@ -29,5 +29,10 @@
                 <inxton:DynamicTreeView></inxton:DynamicTreeView>
             </ScrollViewer>
         </TabItem>
+        <TabItem DataContext="{Binding TcoElementsTestsPlc.IO}" Header="IO">
+            <ScrollViewer>
+                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+            </ScrollViewer>
+        </TabItem>
     </TabControl>
 </Window>

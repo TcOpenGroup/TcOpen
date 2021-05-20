@@ -54,19 +54,36 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="GetSignalInfo" Id="{8a2c62ad-97e0-04b2-078e-47bb9ffb547c}">
-      <Declaration><![CDATA[METHOD PROTECTED GetSignalInfo : TcoSignalInfo
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets symbol path of the variable that is associated to hardware I/O.
+		</summary>				
+	</docu>	
+~*)
+METHOD PROTECTED GetSignalInfo : TcoSignalInfo
 VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			Size of the variable. Is typicaly determined by `SIZEOF` opreator: SIZEOF(Variable)
+		</summary>				
+	</docu>	
+	~*)
 	ioSIZE : UDINT;
+	(*~
+	<docu>
+		<summary>
+			Pointer to the variable is typically determined by `ADR` operator ADR(Variable)
+		</summary>				
+	</docu>	
+	~*)
 	pVARIABLE : POINTER TO ULINT;
 END_VAR
 
 VAR_STAT
 	{attribute 'hide'}
 	json : Tc3_JsonXml.FB_JsonReadWriteDatatype;		
-END_VAR
-
-VAR
-	symbolName : STRING[255];
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetSignalInfo.SymbolPath := json.GetSymbolNameByAddress(nData := ioSIZE, pData := pVARIABLE);]]></ST>

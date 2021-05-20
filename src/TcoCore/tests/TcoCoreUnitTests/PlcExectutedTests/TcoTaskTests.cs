@@ -13,20 +13,13 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
     public class TcoTaskTests
     {
-
-
-
         TcoTaskTestContext tc = ConnectorFixture.Connector.MAIN._tcoTaskTestContext;
 
-      
-
-       
         [SetUp]
         public void Setup()
         {
            
         }
-
      
         [Test]
         public void ElapsedTypeMeasurement()

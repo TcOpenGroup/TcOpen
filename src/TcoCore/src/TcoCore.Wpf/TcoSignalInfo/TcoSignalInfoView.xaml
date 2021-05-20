@@ -11,8 +11,6 @@
         <tcocore:TcoSignalInfo></tcocore:TcoSignalInfo>
     </UserControl.DataContext>
     <StackPanel>
-        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Signal.Symbol}"></TextBlock>
-        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Signal.HumanReadable}"></TextBlock>
-        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Signal.AttributeName}"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Signal.HumanReadable}"></TextBlock>
     </StackPanel>
 </UserControl>

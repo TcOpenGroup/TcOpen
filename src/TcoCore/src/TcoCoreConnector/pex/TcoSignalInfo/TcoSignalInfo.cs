@@ -21,8 +21,13 @@ namespace TcoCore
                 { 
                     if (signal == null)
                     {
+                        if (this.Connector is Vortex.Connector.DummyConnector)
+                        {
+                            return null;
+                        }
+
                         // This may affect performance!
-                        if(this.Connector != null)
+                        if (this.Connector != null)
                         { 
                             var plc_signal_symbol = this.SymbolPath.Synchron;
                             if(!string.IsNullOrEmpty(plc_signal_symbol))
