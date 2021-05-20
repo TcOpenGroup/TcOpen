@@ -14,6 +14,7 @@ VAR
 	_tcoComponentTest					:	TcoComponentTest;
 	_stringBuilderTest					: 	StringBuilderTests;
 	_tcoTaskTestContext 				:	TcoTaskTestContext;
+	_tcoToggleTaskTestContext			:	TcoToggleTaskTestContext;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoRtcTest_A();
@@ -36,7 +37,9 @@ _tcoComponentTest();
 
 _stringBuilderTest();
 
-_tcoTaskTestContext.ProbeRun();]]></ST>
+_tcoTaskTestContext.ProbeRun();
+
+_tcoToggleTaskTestContext.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
