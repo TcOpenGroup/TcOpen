@@ -65,6 +65,16 @@ VAR
 (*~
 	<docu>
 		<summary>
+			Use to abort the executing task and set this instance back to the Ready state.
+			The value is than set to FALSE. 
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Abort request#>"}
+	_abortRequest : BOOL;	
+(*~
+	<docu>
+		<summary>
 			Use to determine if the task execution is enabled for example from the HMI application. 
 			This value is read only, to modify it use the property <see cref="TcoTask.PlcTcoTask.Enabled()"/>		
 		</summary>		
@@ -73,6 +83,13 @@ VAR
 	{attribute addProperty Name "<#Enabled#>"}
 	{attribute clr [ReadOnly()]}
 	_enabled : BOOL := TRUE;
+END_VAR
+
+VAR	
+	{attribute 'hide'}
+	_executionTimer : Tc2_Standard.TON;
+	{attribute clr [ReadOnly()]}
+	_elapsedTime : TIME;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -89,6 +106,7 @@ METHOD Abort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF THIS^._taskState = eTaskState.Busy THEN
+	OnAbort();
 	THIS^.Restore();
 END_IF]]></ST>
       </Implementation>
@@ -304,12 +322,36 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (inCondition) THEN
-	THIS^._taskState := eTaskState.Done;			
+	THIS^._taskState := eTaskState.Done;
+	OnDone();			
 END_IF;	
 
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="ElapsedTime" Id="{78278734-9469-0240-24bb-e24bb2258532}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the elapsed time of the execution of this task. 
+			<remarks>			
+				<note type="important">
+					Uses `TIME` type. It might be not sutable for tasks running longer than 49 days.
+				</note>
+			</remarks>		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC ElapsedTime : TIME]]></Declaration>
+      <Get Name="Get" Id="{37071e73-80b0-05b2-2967-dfec5fd00ceb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ElapsedTime := _elapsedTime;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Enabled" Id="{c98a96a1-7e51-07e4-301f-9d561b604bea}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -363,6 +405,10 @@ PROPERTY Error : BOOL]]></Declaration>
 METHOD Execute : BOOL
 VAR
 	_serviceableParent : ITcoServiceable;
+END_VAR
+
+VAR
+	tmpTimeDiff : TIME;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
@@ -378,17 +424,22 @@ END_IF;
 IF(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
 	THIS^.Invoke();
 END_IF;
-
 THIS^._invokeRequest := FALSE;
 
-//Triggering Restore from visualisation
+//Triggering Abort from remote system
+IF((THIS^._taskState = eTaskState.Requested OR THIS^._taskState = eTaskState.Busy) AND THIS^._abortRequest) THEN
+	THIS^.Abort();
+	THIS^._abortRequest := FALSE;
+END_IF;
+
+//Triggering Restore from remote system
 IF( THIS^._restoreRequest) THEN
 	THIS^.Restore();
 	THIS^._restoreRequest := FALSE;
 END_IF;
 
 IF NOT _enabled THEN
-	IF THIS^._taskState = eTaskState.Requested THEN
+	IF THIS^._taskState = eTaskState.Requested THEN		
 		THIS^.Messenger.Post('Task cannot start; Enabled property is FALSE.',eMessageCategory.Info);	
 		THIS^.Restore();
 	END_IF
@@ -401,7 +452,8 @@ END_IF;
 CheckIfCalledCyclically();
 AutoRestore();
 
-IF(THIS^._taskState = eTaskState.Requested) THEN
+IF(THIS^._taskState = eTaskState.Requested) THEN	
+	_executionTimer(IN := FALSE);
 	THIS^._taskState := eTaskState.Busy;
 END_IF;
 
@@ -410,6 +462,14 @@ IF(THIS^._taskState = eTaskState.Error) THEN
 END_IF;
 	
 Execute := (THIS^._taskState = eTaskState.Busy);
+
+IF(Execute) THEN
+	_executionTimer(IN := Execute, PT := T#49D);
+	_elapsedTime := _executionTimer.ET;
+END_IF;	
+
+
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -475,6 +535,34 @@ _nextExpectedCycle := THIS^._Parent.Context.StartCycleCount + 1;
 
 Invoke := THIS^;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{a6a27045-1269-0e08-0518-8e81f0214c76}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{363a9fb9-c553-0d98-2cef-affca2e095e5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnTaskError" Id="{7bd5d176-51b6-065b-1ffd-f139109a93ea}">

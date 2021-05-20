@@ -1,0 +1,35 @@
+name: Documentation
+
+on: 
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: self-hosted
+    timeout-minutes: 30
+    steps:
+      - name: Checkout main repo
+        uses: actions/checkout@v2
+        with:
+          repository: TcOpenGroup/TcOpen
+          path: docu/TcOpen
+      ###
+      - name: Checkout docu repo
+        uses: actions/checkout@v2
+        with:
+          repository: TcOpenGroup/TcOpen.Documentation
+          path: docu/TcOpen.Documentation
+      ###
+      - name : Build TcOpen
+        run: |
+            cd docu/TcOpen
+            git fetch --unshallow
+            .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true}
+            cd ..\..
+      ###
+      - name : Build TcOpen.Documentation
+        run: |
+            cd docu/TcOpen.Documentation
+            dotnet build
+            git add -A
+            git commit -m "Automated update of documentation"
+            git push

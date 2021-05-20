@@ -2,14 +2,36 @@
   "solution": {
     "path": "TcOpen.sln",
     "projects": [
-      "src\\Tc.Prober\\tests\\TcProber\\TcProber.tsproj",
-      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj",
+            
+      "src\\TcoCore\\src\\TcoCoreConnector\\TcoCoreConnector.csproj",
       "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",
+      "src\\TcoCore\\tests\\TcoCoreExamplesConnector\\TcoCoreExamplesConnector.csproj",
+      "src\\TcoCore\\tests\\TcoCoreTestsConnector\\TcoCoreTestsConnector.csproj",
+      
+      "src\\Tc.Prober\\tests\\PlcTcProberTestsConnector\\PlcTcProberTestsConnector.csproj",
+      "src\\Tc.Prober\\tests\\TcProber\\TcProber.tsproj",     
+
+      "src\\TcoDrivesBeckhoff\\src\\TcoDrivesBeckhoffConnector\\TcoDrivesBeckhoffConnector.csproj",
       "src\\TcoDrivesBeckhoff\\src\\XaeTcoDrivesBeckhoff\\XaeTcoDrivesBeckhoff.tsproj",
+      "src\\TcoDrivesBeckhoff\\tests\\TcoDrivesBeckhoffTestsConnector\\TcoDrivesBeckhoffTestsConnector.csproj",
+      
+      "src\\TcoElements\\src\\TcoElementsConnector\\TcoElementsConnector.csproj",
       "src\\TcoElements\\src\\XAE\\XAE\\XAETcoElements.tsproj",
+      "src\\TcoElements\\tests\\TcoElementsTestsConnector\\TcoElementsTestsConnector.csproj",
+      
+      "src\\TcoIoBeckhoff\\src\\TcoIoBeckhoffConnector\\TcoIoBeckhoffConnector.csproj",
       "src\\TcoIoBeckhoff\\src\\XaeTcoIoBeckhoff\\XaeTcoIoBeckhoff.tsproj",
+      
+      "src\\TcoPneumatics\\src\\TcoPneumaticsConnector\\TcoPneumaticsConnector.csproj",
       "src\\TcoPneumatics\\src\\XaeTcoPneumatics\\XaeTcoPneumatics.tsproj",
-      "src\\librarytemplate\\src\\XAE\\XAE\\XAEPlcTemplate.tsproj"
+      "src\\TcoPneumatics\\tests\\TcoPneumaticsTestsConnector\\TcoPneumaticsTestsConnector.csproj",
+      
+      "src\\librarytemplate\\src\\PlcTemplateConnector\\PlcTemplateConnector.csproj",
+      "src\\librarytemplate\\src\\XAE\\XAE\\XAEPlcTemplate.tsproj",
+      "src\\librarytemplate\\tests\\PlcTemplateTestsConnector\\PlcTemplateTestsConnector.csproj",
+      
+      "src\\TcoApplicationExamples\\PlcAppExamplesConnector\\PlcAppExamplesConnector.csproj",
+      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj"
     ]
   }
 }

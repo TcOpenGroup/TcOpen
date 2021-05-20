@@ -9,14 +9,16 @@
   $publishNugets = $false
   $updateAssemblyInfo = $false
   $gitVersion
-  $msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"'
-  $dotnet = "C:\Program Files\dotnet\dotnet.exe"
-  $devenv = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
+  $msbuild = ([System.Environment]::GetEnvironmentVariable('TcoMsbuild'))
+  $dotnet = ([System.Environment]::GetEnvironmentVariable('TcoDotnet'))
+  $devenv = ([System.Environment]::GetEnvironmentVariable('TcoDevenv'))
   $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
   $testingStrength = 0
 }
 
-task default -depends CloseVs, Tests, CreatePackages, Finish
+
+
+task default -depends Init, CopyInxton, CloseVs, Build, Tests, CreatePackages, Finish
 
 
 FormatTaskName (("="*25) + " [ {0} ] " + ("="*25))
@@ -28,7 +30,9 @@ task Init {
   $properties
 }
 
-task BuildScripts -continueOnError -depends Init {
+
+
+task BuildScripts -continueOnError -depends Init {  
   Push-Location .\pipelines
   Import-Module .\tcobuildutils.psm1 -Force -Verbose 
   Pop-Location
@@ -58,24 +62,27 @@ task NugetRestore -depends Clean {
    exec{
        & $dotnet restore TcOpen.build.slnf
    }
-   
-   try {
-      # Try to Restore IVC into _Vortex directory
-      # May fail due to missing g.cs files
-      $command = $msbuild + " -v:$msbuildVerbosity /consoleloggerparameters:ErrorsOnly src\TcoCore\TcoCore.slnf"
-      Write-Host $command
-      cmd /c $command
-   }
-   catch {
-     # Swallow
-   }
-      
 } 
 
-task GitVersion -depends NugetRestore {
+task CopyInxton -depends NugetRestore -continueOnError {
+  exec {
+      & $dotnet build `
+        .\src\TcoCore\tests\TcoDummyTest\TcoDummyTest.csproj `
+        -v:$msbuildVerbosity `
+        --nologo `
+        /p:SolutionDir=$solutionDir
+  }
+}
+
+task GitVersion `
+  -precondition { $updateAssemblyInfo } `
+  -depends CopyInxton `
+{
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
-  $script:gitVersion =  & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/nofetch" "/config" "$baseDir/GitVersion.yml" |  ConvertFrom-Json 
+  $gitVersionOutput = & ".\_toolz\gitversion.exe" "$updateAssemblyInfoFlag" "/config" "$baseDir/GitVersion.yml"
+  $gitVersionOutput
+  $script:gitVersion =  $gitVersionOutput |  ConvertFrom-Json   
   $buildNumber =$script:gitVersion.SemVer
 
   if($script:gitVersion.BuildMetaData -ne ""){
@@ -105,46 +112,39 @@ task GitVersion -depends NugetRestore {
 }
 
 task OpenVisualStudio -depends GitVersion {
-  Start-Process .\TcOpen.plc.slnf
+  # Start-Process .\TcOpen.plc.slnf
 }
 
 
 task BuildWithInxtonBuilder -depends OpenVisualStudio {
-  $projects = @(  
-     "src\Tc.Prober\Tc.Prober.slnf",   
-     "src\TcoCore\TcoCore.slnf",
-     "src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf",
-     "src\TcoIoBeckhoff\TcoIoBeckhoff.slnf",
-     "src\TcoPneumatics\TcoPneumatics.slnf"
-     "src\TcoElements\TcoElements.slnf",
-     "src\TcoApplicationExamples\TcoApplicationExamples.slnf",
-     "src\librarytemplate\PlcTemplate.slnf"
-   )
 
-   foreach($project in $projects)
-  {   
-    $command = ".\_Vortex\builder\vortex.compiler.console.exe -s " + $project
-    Write-Host $command
-    exec { 
+  $command = ".\_Vortex\builder\vortex.compiler.console.exe -s .\TcOpen.plc.slnf"
+
+  Write-Host $command
+   exec { 
+      try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue} catch{}
+      Start-Process .\TcOpen.plc.slnf
       cmd /c $command
-    }       
-  }
-
+      try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue}catch{}
+  }  -maxRetries 3       
 }
 
 task Build -depends BuildWithInxtonBuilder {
   #/consoleloggerparameters:ErrorsOnly  
-   $command = $msbuild + " /p:Configuration=$buildConfig -noWarn:CS1591;CS0067;CS0108;CS1570 /consoleloggerparameters:ErrorsOnly  -v:$msbuildVerbosity  .\TcOpen.build.slnf"
   Write-Host $command
   exec{
-      cmd /c $command
-  }
+     & $msbuild .\TcOpen.build.slnf `
+        /p:Configuration=$buildConfig `
+        -noWarn:"CS1591;CS0067;CS0108;CS1570" `
+        /consoleloggerparameters:ErrorsOnly `
+        -v:$msbuildVerbosity    
+  } -maxRetries 3  
 }
 
 
 task CloseVs -depends Build {
   exec{
-    Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue
+   try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue} catch{}
   }
 }
 
@@ -157,11 +157,11 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
     Write-Host 'Building plc projects' -ForegroundColor Cyan
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
 
-    $command = "`"$devenv`" .\TcOpen.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
+    $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
       
     exec{
         cmd /c $command
-    }
+    }  -maxRetries 2    
         	
     $testProjects = @(                    
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
@@ -191,12 +191,14 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
        
         if($xaeProjectFolder -ne "")
         {
-          Start-Sleep 5
-          .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId;
-          Start-Sleep 5
-          $BootDir = $solutionDir + $xaeProjectFolder;               
-          .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir;                    
-          Start-Sleep 5
+          exec{   
+            Start-Sleep 5
+            .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId;
+            Start-Sleep 5
+            $BootDir = $solutionDir + $xaeProjectFolder;               
+            .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir;                    
+            Start-Sleep 5
+          }  -maxRetries 2    
         }
 
 
@@ -209,7 +211,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
             -l:"trx;LogFileName=$LogFileName" `
             --no-build `
             --no-restore
-        }
+        } -maxRetries 2    
 
        
       }
@@ -222,13 +224,19 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
 } 
 
 
-task ClearPackages -depends Tests {
+task ClearPackages `
+  -precondition { $publishNugets } `
+  -depends Tests `
+{
   mkdir nugets -ErrorAction SilentlyContinue
   mkdir nugets\dependants -ErrorAction SilentlyContinue
   Get-ChildItem -Path .\nugets\ -Include *.* -File -Recurse | ForEach-Object { $_.Delete()}
 }
 
-task CreatePackages -depends ClearPackages {
+task CreatePackages `
+  -precondition { $publishNugets } `
+  -depends ClearPackages `
+{
   $semVer = $script:gitVersion.SemVer
   $projects = @(
     #Packaging
@@ -239,7 +247,9 @@ task CreatePackages -depends ClearPackages {
     "src\TcoIoBeckhoff\src\TcoIoBeckhoff.Wpf\TcoIoBeckhoff.Wpf.csproj",
     "src\TcoIoBeckhoff\src\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj",
     "src\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj",
-    "src\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj"   
+    "src\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj",
+    "src\_packaging\TcOpen.Group\TcOpen.Group.csproj",
+    "src\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj"
   )
   foreach($project in $projects)
   {  
