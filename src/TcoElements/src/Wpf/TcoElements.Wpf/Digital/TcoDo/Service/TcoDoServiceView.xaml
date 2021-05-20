@@ -19,10 +19,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*" SharedSizeGroup="Name" />
             <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="0.4*" />
         </Grid.ColumnDefinitions>
         <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding ., Converter={tcoCore:NameOrSymbolConverter}}" />
+        <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" />
         <ToggleButton
-            Grid.Column="1"
+            Grid.Column="2"
             Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
             ToolTip="On/Off toggle"
             IsChecked="{Binding _signal.Cyclic}" />
