@@ -11,5 +11,13 @@ jobs:
       - name: Fetch unshallow
         run: git fetch --unshallow
       - name: Run a multi-line script
+        env:
+          NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
         run: |
-          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "publishNugets" = $true;}
+          .\pipelines\runbuild.ps1 -properties @{
+            "buildConfig" = "Release";
+            "updateAssemblyInfo" = $true;
+            "publishNugets" = $true;
+            "nugetToken" = ($env:NUGET_ORG_PAT);
+            "isTestingEnabled" = $false
+            }
