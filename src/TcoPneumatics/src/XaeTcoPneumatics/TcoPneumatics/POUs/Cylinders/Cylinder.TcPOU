@@ -1,216 +1,141 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="Cylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK Cylinder EXTENDS TcoCore.TcoComponent IMPLEMENTS ICylinder
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Home position sensor.
-			</summary>	
-		</docu>
-	~*)
-	{attribute addProperty Name "<#Home position sensor#>"}
-	inAtHomePos : BOOL;
-	(*~
-		<docu>
-			<summary>
-				Working position sensor.
-			</summary>	
-		</docu>
-	~*) 
-	{attribute addProperty Name "<#Work position sensor#>"}
-	inAtWorkPos : BOOL; 
+    <Declaration><![CDATA[FUNCTION_BLOCK Cylinder EXTENDS CylinderBase
+VAR
+    {attribute addProperty Name "<#Request move to Home position#>"}
+    _moveHomeDefault : CylinderMoveTask(THIS^);
+    {attribute addProperty Name "<#Request move to Work position#>"}
+    _moveWorkDefault : CylinderMoveTask(THIS^);
+    {attribute addProperty Name "<#Request Stop#>"}
+    _stopDefault : TcoCore.TcoTask(THIS^);
 END_VAR
-VAR_OUTPUT
-	(*~
-		<docu>
-			<summary>
-				Move to working home position signal.
-			</summary>	
-		</docu>
-	~*)
-	{attribute addProperty Name "<#Move to home position actuator#>"}
-	outToHomePos : BOOL;
-	(*~
-		<docu>
-			<summary>
-				Move to working posistion signal.
-			</summary>	
-		</docu>
-	~*)
-	{attribute addProperty Name "<#Move to work position actuator#>"}
-	outToWorkPos : BOOL;
-END_VAR
-
-VAR	
-	{attribute addProperty Name "<#Request move to Home position#>"}	
-	_moveHomeTask : TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "<#Request move to Work position#>"}
-	_moveWorkTask : TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "<#Request Stop#>"}
-	_stopTask : TcoCore.TcoTask(THIS^);
+VAR
+    _config : CylinderConfig;
+	_status : CylinderStatus;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(_moveHomeTask.Execute()) THEN
-	outToHomePos := TRUE;
-	outToWorkPos := FALSE; 		
-	_moveHomeTask.DoneWhen(inAtHomePos);	
-	Messenger.Info('<#Cylinder is moving to home position, trying to reach home position sensor#>');		
+      <ST><![CDATA[// Disables mutually exclusive actions
+_moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
+_moveWorkDefault.Enabled := NOT _moveHomeDefault.Busy;
+
+_moveHomeDefault(PositionSensor := inAtHomePos,
+    MoveToPositionSignal := outToHomePos,
+    InverseSignal := outToWorkPos,
+    MaxTimeToReachPosition := _config.TimeToReachHomePosition,
+    PositionName := '<#Home#>');
+		
+_moveWorkDefault(PositionSensor := inAtWorkPos,
+    MoveToPositionSignal := outToWorkPos,
+    InverseSignal := outToHomePos,
+    MaxTimeToReachPosition := _config.TimeToReachWorkPosition,
+    PositionName := '<#Work#>');
+
+IF (_stopDefault.Execute()) THEN
+	outToHomePos := FALSE;
+	outToWorkPos := FALSE;
+    _moveHomeDefault.Abort();
+    _moveWorkDefault.Abort();
+    _stopDefault.Abort();
+    _moveHomeDefault.Restore();
+    _moveWorkDefault.Restore();
+    _stopDefault.Restore();
+    _stopDefault.DoneWhen(TRUE);
 END_IF
 
-IF(_moveWorkTask.Execute()) THEN
-	outToWorkPos := TRUE; 
-	outToHomePos := FALSE;
-	_moveWorkTask.DoneWhen(inAtWorkPos);
-	Messenger.Info('<#Cylinder is moving to work position, trying to reach work position sensor#>');		
-END_IF;	 
-
-IF(_stopTask.Execute()) THEN	
-	outToWorkPos := FALSE; 
-	outToHomePos := FALSE;
-	_moveWorkTask.Restore();
-	_moveHomeTask.Restore();
-	_stopTask.Restore();
-	_stopTask.DoneWhen(TRUE);	
+// For further discussion about Status
+IF(_moveHomeDefault.Busy) THEN
+	_status.ActionDescription := 'Moving to home position';
+ELSIF(_moveWorkDefault.Busy) THEN
+	_status.ActionDescription := 'Moving to work position';
+ELSIF(_stopDefault.Busy) THEN
+	_status.ActionDescription := 'Stopping pressure';
+ELSE	
+	_status.ActionDescription := 'Idle';
 END_IF]]></ST>
     </Implementation>
-    <Folder Name="_tests" Id="{2cbd4d6b-2a4a-49b8-b437-ed7c5a45b843}" />
-    <Method Name="_MoveToHomeTest" Id="{9ef39d14-16a3-4bc8-b330-33d879f1f7f9}" FolderPath="_tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL _MoveToHomeTest : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_MoveToHomeTest := MoveToHome().Done;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="_MoveToWorkTest" Id="{7ebcdca4-683e-48c8-8052-33f48bfaaa19}" FolderPath="_tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL _MoveToWorkTest : BOOL
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_MoveToWorkTest := MoveToWork().Done;
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="_StopTest" Id="{28dff165-f4ab-484d-9c26-93aee0eaf841}" FolderPath="_tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL _StopTest : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_StopTest := Stop().Done;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="AtHome" Id="{d06903a0-9230-4f9a-9ffc-ed1726b8d4b9}">
-      <Declaration><![CDATA[PROPERTY AtHome : bool]]></Declaration>
-      <Get Name="Get" Id="{2309dcb2-6c63-44cf-85e0-e6e2754836eb}">
+    <Property Name="Config" Id="{4900e490-aca6-01f6-34b5-8e88d5861bd7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the cylinder. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO CylinderConfig]]></Declaration>
+      <Get Name="Get" Id="{01381d79-df26-0dfc-0b34-6d73c1b5b634}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtHome := inAtHomePos;]]></ST>
+          <ST><![CDATA[Config REF= config;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="AtWork" Id="{c484892b-8ab6-4a33-a377-7a200a12d81a}">
-      <Declaration><![CDATA[PROPERTY AtWork : bool]]></Declaration>
-      <Get Name="Get" Id="{b963dd74-98d0-4492-a086-b714bde49f51}">
+    <Property Name="MoveHomeTask" Id="{6c5528f8-8b8f-0e7d-01e4-787b210fe4ca}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `MoveHomeTask` task that controls the moving of the cyclinder in home position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY MoveHomeTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{5717e4b3-14ff-0743-005a-b365bdc9a2e1}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtWork := inAtWorkPos;]]></ST>
+          <ST><![CDATA[MoveHomeTask := _moveHomeDefault;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="FB_init" Id="{bebd9764-c480-0f41-1395-016f8ffcd273}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+    <Property Name="MoveWorkTask" Id="{b7eb0230-cd38-0ac9-3271-cda0637a6c51}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `MoveWorkTask` task that controls the moving of the cyclinder into work position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY MoveWorkTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{d38ced05-e6e6-0894-2289-cb1e2f89ee7d}">
+        <Declaration><![CDATA[VAR
 END_VAR
-
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// This is not clear to me... I from time to time the consumer code does not see 'FB_init' of 'TcoObject', that's why overridden here with super call...
-SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ManualControl" Id="{94b70f4e-af12-4cab-8a9f-9a3da438ebd4}">
-      <Declaration><![CDATA[METHOD PROTECTED  ManualControl
-
+        <Implementation>
+          <ST><![CDATA[MoveWorkTask := _moveWorkDefault;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Status" Id="{4e25aab9-b7e5-00e7-1126-2a4313a14d92}">
+      <Declaration><![CDATA[PROPERTY Status : REFERENCE TO CylinderStatus]]></Declaration>
+      <Get Name="Get" Id="{a32a112b-8373-0a19-170b-cdfdf4b5b4dd}">
+        <Declaration><![CDATA[VAR
+END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="MoveToHome" Id="{40560f4f-3063-47a8-8b62-1f2968f73b89}">
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StopTask" Id="{f45f0198-4c17-0e92-3a52-5cc8984cb39c}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Moves the piston into home position.
-		</summary>
-		<returns>True when home position sensor is reached.</returns>
-	</docu>
+			Gets the `StopTask` task that controls the stopping of the cyclinder. 		
+		</summary>			
+	</docu>	
 ~*)
-METHOD MoveToHome : TcoCore.ITcoTaskStatus]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[THIS^._moveHomeTask.Invoke();
-MoveToHome := THIS^._moveHomeTask;
-
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="MoveToWork" Id="{d11735f5-ce5f-4a7f-8109-144749721e33}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Moves the piston into working position.
-		</summary>
-		<returns>True when working position sensor is reached.</returns>
-	</docu>
-~*)
-METHOD MoveToWork : TcoCore.ITcoTaskStatus
+PROPERTY StopTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{28fe28be-dd9b-0922-165d-691ae597ebf9}">
+        <Declaration><![CDATA[VAR
+END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[THIS^._moveWorkTask.Invoke();
-MoveToWork := THIS^._moveWorkTask;
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Restore" Id="{f1ee2652-c22d-47ae-bd44-a3e6ec474e74}">
-      <Declaration><![CDATA[METHOD  Restore : ITcoRestorable
-
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_moveHomeTask.Restore();
-_moveWorkTask.Restore();
-_stopTask.Restore();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ServiceMode" Id="{8d280abe-da34-4370-8cca-5bd111ecd38d}">
-      <Declaration><![CDATA[METHOD PROTECTED  ServiceMode
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Stop" Id="{9e32cbb8-ba72-4463-bbd6-9f7b9b0e82cd}">
-      <Declaration><![CDATA[METHOD Stop : REFERENCE TO TcoCore.TcoTask
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_stopTask.Invoke();
-Stop REF= _stopTask;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[StopTask := _stopDefault;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

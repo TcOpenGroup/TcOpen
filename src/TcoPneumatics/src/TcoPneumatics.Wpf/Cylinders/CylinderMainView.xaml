@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tcoCore="http://inxton.mts/xaml"
     xmlns:tcopen="clr-namespace:TcOpen"
-    xmlns:tcopneumatics="clr-namespace:TcoPneumatics"
+    xmlns:tcopneumatics="clr-namespace:TcoPneumatics" xmlns:vortex="http://vortex.mts/xaml"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
         <tcopneumatics:CylinderManualViewModel />
@@ -38,35 +38,15 @@
                     Height="5"
                     Background="{Binding Component.inAtHomePos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
-                <Button
-                    Grid.Column="0"
-                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding Component._moveHomeTask._taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
-                    materialDesign:ButtonProgressAssist.Value="-1"
-                    Command="{Binding Component._moveHomeTask, Mode=OneWay}"
-                    Content="⏮ Home" />
-
+                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveHomeDefault}"/>
             </StackPanel>
-            <Grid Grid.Column="1">
-                <StackPanel VerticalAlignment="Center">
-                    <Button
-                        Command="{Binding Component._stopTask, Mode=OneWay}"
-                        Content="⏹"
-                        Style="{DynamicResource MaterialDesignToolButton}" />
-                </StackPanel>
-            </Grid>
+          
             <StackPanel Grid.Column="2">
                 <Border
                     Height="5"
                     Background="{Binding Component.inAtWorkPos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
-                <Button
-                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding Component._moveWorkTask._taskState.Cyclic, Converter={tcoCore:TaskStateToBoolConverter}}"
-                    materialDesign:ButtonProgressAssist.Value="-1"
-                    Command="{Binding Component._moveWorkTask, Mode=OneWay}"
-                    Content="Work ⏭" />
-
+                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveWorkDefault}"/>
             </StackPanel>
         </Grid>
 

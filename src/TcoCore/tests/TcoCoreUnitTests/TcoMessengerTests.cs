@@ -21,7 +21,7 @@ namespace TcoCoreUnitTests
         public void OneSetup()
         {
             suc._callMyPlcInstanceRtcUpdate.Synchron = true;
-            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.None; sut.SetMinLevel(); });
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
             sut.SingleCycleRun(() => sut.Resume());
         }
 
@@ -236,6 +236,37 @@ namespace TcoCoreUnitTests
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
             Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+        }
+
+        [Test, Order(950)]
+        public void T809_ClearTest()
+        {
+            //--Arrange
+            var messageText = "this is a catastrophic message";
+
+            //--Act
+            sut.SingleCycleRun(() => sut.Catastrophic(messageText));
+
+            //--Assert
+
+            Assert.AreEqual(sut.GetParent<TcoMessengerContextTest>()._startCycleCount.Synchron, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(messageText, sut._messenger._mime.Text.Synchron);
+            Assert.AreEqual(sut._messenger._mime.Category.Synchron, (short)eMessageCategory.Catastrophic);
+            //Peter's original code
+            //Assert.IsTrue(sut._messenger._mime.TimeStamp.Synchron >= DateTime.Now.Subtract(new TimeSpan(0, 0, 0)));
+
+            //Code changed by Tomas
+            DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
+            DateTime _dotNetTime = DateTime.Now;
+            TimeSpan _diff = _dotNetTime - _plcTimeStamp;
+            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+
+            sut._messenger.Clear();
+            Assert.AreEqual(string.Empty, sut._messenger._mime.Text.Synchron);
+            Assert.AreEqual((short)eMessageCategory.None, sut._messenger._mime.Category.Synchron);
+            Assert.AreEqual(0, sut._messenger._mime.Cycle.Synchron);
+            Assert.AreEqual(0, sut._messenger._mime.Identity.Synchron);
+            Assert.AreEqual(0, sut._messenger._mime.PerCycleCount.Synchron);
         }
 
         [Test, Order(1000)]

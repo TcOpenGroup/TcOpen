@@ -1,6 +1,7 @@
 name: Build
 
 on: 
+  push:
   pull_request: 
     paths:
       - 'src/**'
@@ -22,4 +23,4 @@ jobs:
       # Run psake
       - name: Run a multi-line script
         run: |
-          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true}
+          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "isTestingEnabled" = $true;}

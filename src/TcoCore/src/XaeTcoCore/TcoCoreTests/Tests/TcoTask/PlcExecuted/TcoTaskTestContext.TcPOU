@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoTaskTestContext" Id="{da10e4d9-b59b-03b6-048b-8b4e8d7fd81e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+    _sut : TcoCore.TcoTask(THIS^);
+	_elapsedTimeETA : TIME;
+	_elapsedTime : TIME;
+	_runElapsedTimer : BOOL;
+    _elapsedTimeTimer : Tc2_Standard.TON;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{ba13ae7b-16e9-04e3-2a3d-62a7bdca7899}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
+CASE _testId OF
+	eTcoTaskTests.ElapsedTypeMeasurement:
+		_sut.Invoke();
+		IF(_sut.Execute()) THEN		
+			_runElapsedTimer := TRUE;	
+			IF(_elapsedTimeTimer.Q) THEN
+				_sut.DoneWhen(_elapsedTimeTimer.Q);
+			END_IF;	
+		END_IF
+		_elapsedTime := _sut.ElapsedTime;
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
