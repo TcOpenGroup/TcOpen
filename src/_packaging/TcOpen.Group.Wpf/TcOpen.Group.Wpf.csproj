@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+		<UseWPF>true</UseWPF>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<!--NuGet properties-->
+		<Authors>TcOpenGroup contributors</Authors>
+		<Company>TcOpenGroup</Company>
+		<RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>TwinCAT3 Beckhoff</PackageTags>
+		<PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+		<PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+		<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TcOpen.Group\TcOpen.Group.csproj" />
+	  <ProjectReference Include="..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
+	  <ProjectReference Include="..\..\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj" />
+	  <ProjectReference Include="..\..\TcoElements\src\Wpf\TcoElements.Wpf\TcoElements.Wpf.csproj" />
+	  <ProjectReference Include="..\..\TcoIoBeckhoff\src\TcoIoBeckhoff.Wpf\TcoIoBeckhoff.Wpf.csproj" />
+	  <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj" />
+	</ItemGroup>
+
+</Project>
