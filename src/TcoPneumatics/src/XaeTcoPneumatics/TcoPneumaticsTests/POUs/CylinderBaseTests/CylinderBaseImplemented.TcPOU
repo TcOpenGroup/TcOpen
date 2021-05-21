@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="CylinderBaseImplemented" Id="{16dbbb9c-5096-022e-1c34-577d64bc3cf6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseImplemented  EXTENDS TcoPneumatics.CylinderBase
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="MoveHomeTask" Id="{37bf1502-959e-06e5-0859-f85523fd8776}">
+      <Declaration><![CDATA[PROPERTY MoveHomeTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{ce0849a8-12e9-0d9e-36fb-bef38cd95be6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{74d6753e-c709-000c-1404-9b507367f12d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="MoveWorkTask" Id="{62875f3b-b7de-05de-20a9-4cebfb1b7b81}">
+      <Declaration><![CDATA[PROPERTY MoveWorkTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{7861b53e-34e5-0b72-3aae-04325a85111c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{19bdc309-d753-032a-0995-bbeb28df5765}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="StopTask" Id="{fe66ec92-41bf-0c5e-2f5e-34beb27c180a}">
+      <Declaration><![CDATA[PROPERTY StopTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{6e5faa79-bd9b-0cd7-397d-2ac6a6870f0b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{f3e80d7e-8db7-0f7b-11bf-40d15d7714ec}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

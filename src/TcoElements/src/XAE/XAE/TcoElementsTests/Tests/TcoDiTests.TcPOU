@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoDiTests" Id="{d9a75e6f-7650-0ec2-2a0d-3777c9193dbe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDiTests EXTENDS TcoCore._internals_TcoContext
+VAR
+	_signal : BOOL;
+	_sut : TcoElements.TcoDi(THIS^);
+	_sutNotInitialized : TcoElements.TcoDi(THIS^);
+END_VAR
+
+VAR
+	_IsTrue_result : BOOL;	
+	_IsFalse_result : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{3b4ad63a-c724-086e-098a-93db56db0bd9}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+	50:
+	_sutNotInitialized.IsTrue;
+	_sutNotInitialized.IsFalse;
+		_sutNotInitialized.Service();
+		_sutNotInitialized.Restore();
+	100:
+		_sut(inoSignal := _signal);
+		_IsTrue_result := _sut.IsTrue;
+	200:
+		_sut(inoSignal := _signal);
+		_IsFalse_result := _sut.IsFalse;
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

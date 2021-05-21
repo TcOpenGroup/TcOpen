@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="StepDetails" Id="{5d8168b6-e19a-4ceb-92ec-34998fec170b}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Describes the status of a step of the sequencer.
+		</summary>				
+	</docu>	
+~*)
+TYPE StepDetails :
+STRUCT
+(*~
+	<docu>
+		<summary>
+			Step identification number.
+		</summary>	
+		<remarks>			
+ 			<note type="important">
+				This number must be unique throughout the complete sequence. It is required to uniquely identify the step of the sequence.
+			</note>
+			<para>
+				The <see cref="TcoSequencer.PlcTcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+			</para>
+		</remarks>
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Step ID#>"}
+	ID: INT;
+(*~
+	<docu>
+		<summary>
+			Order of the step in the sequence.
+		</summary>	
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Step Order#>"}
+	Order: UINT;
+(*~
+	<docu>
+		<summary>
+			If this value is false, step body is not executed and execution is moved to the next enabled step in the sequence.
+		</summary>				
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Enabled#>"}
+	Enabled: BOOL;
+(*~
+	<docu>
+		<summary>
+			Step description text.
+		</summary>				
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Step description#>"}
+	Description: STRING(254);
+(*~
+	<docu>
+		<summary>
+			Describes step status.
+		</summary>				
+		<remarks>			
+			<para>
+				See <see cref="eStepStatus"/> for detailed description.
+			</para>
+		</remarks>		
+		enumStepStatus
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Step status#>"}
+	Status : eStepStatus;
+(*~
+	<docu>
+		<summary>
+			Step duration time.
+		</summary>				
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Step duration#>"}
+	Duration : TIME;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

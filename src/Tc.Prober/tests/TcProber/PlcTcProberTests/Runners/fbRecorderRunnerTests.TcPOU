@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbRecorderRunnerTests" Id="{00761f1f-400a-4359-962b-f4cbcfef3f3d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbRecorderRunnerTests
+VAR
+    _recorder : stRecorder; 		
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ResetCounter" Id="{b3eccfe1-8058-4668-b649-6bc81b3eb643}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD ResetCounter : UINT
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_recorder.counter := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunWithRecorder" Id="{e06617b6-3fea-491c-879a-664266fc030e}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD RunWithRecorder : INT
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RunWithRecorder := _recorder.counter;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

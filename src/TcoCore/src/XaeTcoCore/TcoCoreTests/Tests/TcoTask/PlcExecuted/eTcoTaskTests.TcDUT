@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eTcoTaskTests" Id="{5b7723bf-5703-0a65-15dc-43889553ed66}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoTaskTests :
+(
+	ElapsedTypeMeasurement := 100
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

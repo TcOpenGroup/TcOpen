@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoDoTests" Id="{0e553b88-9244-02c7-04d0-b9980a3fe668}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDoTests EXTENDS TcoCore._internals_TcoContext
+VAR
+	_signal : BOOL;
+	_sut : TcoElements.TcoDo(THIS^);
+	_sutNotInitialized : TcoElements.TcoDo(THIS^);
+END_VAR
+
+VAR
+	_IsTrue_result : BOOL;	
+	_IsFalse_result : BOOL;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{f853b0f5-a78b-003c-10a9-f8d4054c8c5b}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+	50:
+		_sutNotInitialized.Reset();
+		_sutNotInitialized.Set();
+		_sutNotInitialized.IsTrue;
+		_sutNotInitialized.IsFalse;
+		_sutNotInitialized.Service();
+		_sutNotInitialized.Restore();		
+	100:
+		_signal := FALSE;
+		_sut.Set();
+		_sut(inoSignal := _signal);
+	150:	
+		_IsTrue_result :=_sut.IsTrue;	
+		_IsFalse_result := _sut.IsFalse;			
+	200:
+		_signal := TRUE;
+		_sut.Reset();
+		_sut(inoSignal := _signal);
+	250:	
+		_IsTrue_result :=_sut.IsTrue;	
+		_IsFalse_result := _sut.IsFalse;						
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

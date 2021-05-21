@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoTask_Transition" Id="{86c9c9d3-a32e-0311-1b5c-0a6b194c7fb7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTask_Transition EXTENDS TcoCore.TcoTask
+VAR
+	_TransitionType		:	eTransitionType;	//Type of transition
+	_k0					:	LREAL;				//Linear constant
+	_StartValue			:	LREAL;				//Value before transition has been started
+	_TargetValue		:	LREAL;				//Value need to be reached after transition is finished
+	_Elapsed			:	UINT;				//Elapsed "time" (number of PLC cycles) from start of the transition 
+	_TransitionDuration	:	UINT;				//Number of PLC cycles during which the "_TargetValue" must be reached
+	_t0					:	LREAL;				//Time constant
+	_x0					:	LREAL;				//offset
+	_k1					:	LREAL;				//Nonlinear constant
+	_k2					:	LREAL;				//Nonlinear constant
+	_k3					:	LREAL;				//Nonlinear constant
+	_k4					:	LREAL;				//Nonlinear constant
+	_ImmediateChange	:	BOOL;				//Immediate start new transition, even if previous has not yet been completed
+END_VAR
+VAR_IN_OUT 
+	Value	:	LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(Execute()) THEN
+	_Elapsed := _Elapsed + 1;
+	CASE _TransitionType OF
+		eTransitionType.Linear:
+			Value := _x0 + _k0 * _Elapsed;	
+			IF _k0 > 0 THEN
+				THIS^.DoneWhen(Value >= _TargetValue);
+			ELSIF _k0 < 0 THEN
+				THIS^.DoneWhen(Value <= _TargetValue);
+			ELSE
+				THIS^.DoneWhen(_Elapsed >= _TransitionDuration);
+			END_IF
+
+		eTransitionType.Exponential:
+			Value := _x0 + _k0 * EXP(_t0 * _Elapsed);	
+			IF _k1 > 0 THEN
+				THIS^.DoneWhen(Value >= _TargetValue);
+			ELSIF _k1 < 0 THEN
+				THIS^.DoneWhen(Value <= _TargetValue);
+			ELSE
+				THIS^.DoneWhen(_Elapsed >= _TransitionDuration);
+			END_IF
+
+		eTransitionType.S_Type:
+			Value := _x0 +	(_k1 * EXP(_t0 * _Elapsed) + _k2) /
+						   	(_k3 * EXP(_t0 * _Elapsed) + _k4);	
+			IF _k1 > 0 THEN
+				THIS^.DoneWhen(Value >= _TargetValue);
+			ELSIF _k1 < 0 THEN
+				THIS^.DoneWhen(Value <= _TargetValue);
+			ELSE
+				THIS^.DoneWhen(_Elapsed >= _TransitionDuration);
+			END_IF
+
+		ELSE
+			Value := Value;	
+			THIS^.DoneWhen(_Elapsed >= _TransitionDuration);
+	END_CASE
+END_IF
+]]></ST>
+    </Implementation>
+    <Property Name="ImmediateChange" Id="{8e6eddd3-d55a-0925-1856-5ae84e932ec1}">
+      <Declaration><![CDATA[PROPERTY ImmediateChange : BOOL]]></Declaration>
+      <Get Name="Get" Id="{77eb7452-b1b6-0f95-00fc-fd13e24e25a8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ImmediateChange := _ImmediateChange;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{24f624b0-4830-0109-3195-387e53f15419}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_ImmediateChange := ImmediateChange;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="StartExponential" Id="{02fb5606-2003-0a10-3e07-e60ad50874c3}">
+      <Declaration><![CDATA[METHOD StartExponential
+VAR_INPUT
+	TargetValue			:	LREAL;				//Value to be reached in "Duration" PLC cycles
+	Duration			:	UINT;				//Number of PLC cycles during which the "TargetValue" must be reached
+	Shape				:	LREAL;				//Define curve shape, 0 -linear, the higher absolute value the steeper curve, if positive - convex curve type, if negative - curve type
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Ready OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
+	IF Shape = 0 THEN
+		StartLinear(TargetValue,Duration);
+	ELSE
+		_TransitionType	:= eTransitionType.Exponential;
+		_StartValue := Value;
+		_TargetValue := TargetValue;
+		_Elapsed := 0;
+		_TransitionDuration := Duration;
+		
+		IF Duration = 0 THEN
+			_TransitionDuration := 1;
+		END_IF
+		
+
+		_t0	:= Shape / _TransitionDuration;
+		
+		_k0	:= (_TargetValue - _StartValue) /(EXP(Shape)-1);
+		
+		_x0	:= _StartValue - _k0;
+		
+		_k1	:= (_TargetValue - _StartValue);
+	
+		THIS^.Invoke();		
+	END_IF
+END_IF
+	
+	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartLinear" Id="{f903911c-c5c0-0ac7-2db3-4a9c58290b4b}">
+      <Declaration><![CDATA[METHOD StartLinear
+VAR_INPUT
+	TargetValue			:	LREAL;				//Value to be reached in "Duration" PLC cycles
+	Duration			:	UINT;				//Number of PLC cycles during which the "TargetValue" must be reached
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Ready OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
+	_TransitionType	:= eTransitionType.Linear;
+	_StartValue := Value;
+	_TargetValue := TargetValue;
+	_Elapsed := 0;
+	_TransitionDuration := Duration;
+	
+	IF Duration = 0 THEN
+		_TransitionDuration := 1;
+	END_IF
+	
+	_x0 := _StartValue;
+	
+	_k0	:= (_TargetValue - _StartValue) / _TransitionDuration;
+	
+	THIS^.Invoke();
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartStype" Id="{ecfa01b6-d2af-06c1-1c30-a0c5203ba92f}">
+      <Declaration><![CDATA[METHOD StartStype
+VAR_INPUT
+	TargetValue			:	LREAL;				//Value to be reached in "Duration" PLC cycles
+	Duration			:	UINT;				//Number of PLC cycles during which the "TargetValue" must be reached
+	Shape				:	LREAL;				//Define curve shape, 0 -linear, the higher value the steeper S-curve
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^._taskState = eTaskState.Ready OR THIS^._taskState = eTaskState.Done OR THIS^.ImmediateChange THEN
+	IF Shape = 0 THEN
+		StartLinear(TargetValue,Duration);
+	ELSE
+		_TransitionType	:= eTransitionType.S_Type;
+		_StartValue := Value;
+		_TargetValue := TargetValue;
+		_Elapsed := 0;
+		_TransitionDuration := Duration;
+		
+		IF Duration = 0 THEN
+			_TransitionDuration := 1;
+		END_IF
+		
+		_x0	:= (_StartValue + _TargetValue) / 2;
+	
+		_k1	:= (_TargetValue - _StartValue) * (1 + EXP(-2 * Shape));
+	
+		_k2	:= (_TargetValue - _StartValue) * (-1 - EXP(2 * Shape));
+	
+		_k3	:= 2 - 2 * EXP(-2 * Shape);
+		
+		_k4	:= 2 * EXP(2 * Shape) - 2;
+		
+		_t0 := 4 * Shape / Duration;
+	
+		THIS^.Invoke();		
+	END_IF
+END_IF
+	
+	
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

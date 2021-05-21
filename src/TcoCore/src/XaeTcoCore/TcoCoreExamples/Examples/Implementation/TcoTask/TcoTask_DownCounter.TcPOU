@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoTask_DownCounter" Id="{c9c30b05-eaa1-0ec0-3647-f4b645f55955}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTask_DownCounter EXTENDS TcoCore.TcoTask
+VAR
+	_SetUpValue		:	LINT;
+	_CounterValue	:	LINT := -1;
+	_InvokeCounter	: LINT;
+	_DoneCounter	: LINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(THIS^._taskState = eTaskState.Requested) THEN
+	CounterValue := SetUpValue;
+	_InvokeCounter := _InvokeCounter + 1; 
+END_IF;
+
+IF(Execute()) THEN
+	_CounterValue := _CounterValue - 1;
+	DoneWhen(_CounterValue <= 0);			
+END_IF
+
+IF(THIS^._taskState = eTaskState.Done) THEN
+	_DoneCounter := _DoneCounter + 1; 
+END_IF;
+]]></ST>
+    </Implementation>
+    <Property Name="CounterValue" Id="{5e44ac19-9866-08dc-06d6-6414f4d6a2d7}">
+      <Declaration><![CDATA[PROPERTY CounterValue : LINT]]></Declaration>
+      <Get Name="Get" Id="{0c279010-926b-062b-20f2-4210737e768e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CounterValue := _CounterValue;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6b19ab02-0935-003e-244d-bbb8c71f269f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_CounterValue := CounterValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="InTheMiddle" Id="{9867b082-7002-0aa1-3a4d-c715e5d40d64}">
+      <Declaration><![CDATA[PROPERTY InTheMiddle : BOOL]]></Declaration>
+      <Get Name="Get" Id="{acd5cc86-cedb-02d0-01d7-1c5c87aa3ae3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InTheMiddle := ABS(_SetUpValue-2*_CounterValue)<1;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="SetUpValue" Id="{c15707f7-7428-0efb-3bc4-bb7b3d64a0ed}">
+      <Declaration><![CDATA[PROPERTY SetUpValue : LINT]]></Declaration>
+      <Get Name="Get" Id="{845c5d53-9965-06ae-3a07-28f59a824314}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetUpValue	:= _SetUpValue;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9a3d6377-2d6a-06b3-2191-f8adaf5df528}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_SetUpValue	:= SetUpValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

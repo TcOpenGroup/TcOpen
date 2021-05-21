@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoContextCompatibility" Id="{13780382-a22f-0e35-3f52-856d3d4a5d71}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'hide'}
+{attribute clr [ExcludeFromApiDocumentation()]}
+FUNCTION_BLOCK ABSTRACT TcoContextCompatibility EXTENDS TcoContext
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="_Close" Id="{ca63b2ce-d477-0f9f-02f9-549ed36e627f}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Close
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_Open" Id="{3cc7bb33-d3b0-01f7-3a73-00a2aa792610}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Open
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Open();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

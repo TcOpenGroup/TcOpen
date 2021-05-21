@@ -1,0 +1,61 @@
+﻿<UserControl
+    x:Class="PlcAppExamples.Color_ExampleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PlcAppExamples"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vortex="http://vortex.mts/xaml"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <d:UserControl.DataContext>
+        <local:Color_ExampleViewModel />
+    </d:UserControl.DataContext>
+    <StackPanel>
+        <Separator />
+        <StackPanel Height="50">
+            <StackPanel.Background>
+                <SolidColorBrush>
+                    <SolidColorBrush.Color>
+                        <MultiBinding Converter="{local:RgbConverter}">
+                            <Binding Path="Color_Example.Colors._lightR_IsOn.Cyclic" />
+                            <Binding Path="Color_Example.Colors._lightG_IsOn.Cyclic" />
+                            <Binding Path="Color_Example.Colors._lightB_IsOn.Cyclic" />
+                        </MultiBinding>
+                    </SolidColorBrush.Color>
+                </SolidColorBrush>
+            </StackPanel.Background>
+        </StackPanel>
+        <Separator />
+
+        <UniformGrid Columns="3">
+            <StackPanel>
+                <Rectangle Height="5" Fill="Red" />
+                <ToggleButton
+                    IsChecked="{Binding Color_Example.Colors._lightR_IsOn.Cyclic}"
+                    materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=LightbulbOutline}"
+                    Content="{materialDesign:PackIcon Kind=LightbulbOffOutline}"
+                    Style="{StaticResource MaterialDesignActionToggleButton}" />
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Height="5" Fill="Green" />
+                <ToggleButton IsChecked="{Binding Color_Example.Colors._lightG_IsOn.Cyclic}"       materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=LightbulbOutline}"
+                    Content="{materialDesign:PackIcon Kind=LightbulbOffOutline}"
+                    Style="{StaticResource MaterialDesignActionToggleButton}" />
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Height="5" Fill="Blue" />
+                <ToggleButton IsChecked="{Binding Color_Example.Colors._lightB_IsOn.Cyclic}"       materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=LightbulbOutline}"
+                    Content="{materialDesign:PackIcon Kind=LightbulbOffOutline}"
+                    Style="{StaticResource MaterialDesignActionToggleButton}" />
+            </StackPanel>
+
+        </UniformGrid>
+        <Separator Height="25" />
+        <vortex:RenderableContentControl HorizontalAlignment="Center" DataContext="{Binding Color_Example.ColorSequencer}" />
+
+    </StackPanel>
+</UserControl>

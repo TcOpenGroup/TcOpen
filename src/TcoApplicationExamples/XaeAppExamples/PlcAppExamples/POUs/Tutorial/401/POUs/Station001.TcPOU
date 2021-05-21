@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Station001" Id="{00a3bb22-82f5-4ea8-82e2-290ee3363eb4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoContext
+VAR
+	_components : Station001_Components(THIS^);
+	_sequence : Station001_Sequencer(THIS^, eRestoreMode.None, _components);
+END_VAR
+
+
+				
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{e83e3098-35a6-4623-baf3-b3eac487355d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_components();
+_sequence.Run();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoComponentTest" Id="{b7fdd050-d5b9-04ff-0c52-b3ea7a75470a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoComponentTest EXTENDS TcoCore._internals_TcoContext
+VAR
+	_callMyPlcInstance	:	BOOL := FALSE;
+	_component : _TcoComponent(THIS^);
+	_runPLCinstanceOnce : BOOL := FALSE;
+	_runPLCinstanceCyclicaly : BOOL := FALSE;
+	_restore : BOOL;
+	_cycleCount : INT;
+	_restoreCycleCount : INT;
+	_init: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF _callMyPlcInstance THEN
+	IF NOT _init THEN
+		ContextOpen();	
+		ContextClose();	
+		_init := THIS^._rtc.IsValid;
+	END_IF
+	
+	IF _restore THEN
+		ContextOpen();	
+		THIS^._component.Restore();	
+		_restoreCycleCount := _restoreCycleCount + 1;
+		_restore := FALSE;
+		ContextClose();	
+		RETURN;
+	END_IF
+	
+	IF _runPLCinstanceOnce AND NOT _runPLCinstanceCyclicaly THEN
+		ContextOpen();	
+		THIS^.PLCinstanceRun();
+		_cycleCount := _cycleCount + 1;
+		_runPLCinstanceOnce := FALSE;
+		ContextClose();	
+	END_IF
+	
+	IF _runPLCinstanceCyclicaly AND NOT _runPLCinstanceOnce THEN
+		ContextOpen();	
+		THIS^.PLCinstanceRun();
+		_cycleCount := _cycleCount + 1;
+		ContextClose();	
+	END_IF
+END_IF;	
+]]></ST>
+    </Implementation>
+    <Method Name="ContextClose" Id="{4b2d831f-b02d-0dc7-1aba-0c0212f05248}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ContextClose 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ContextOpen" Id="{a232ffc8-ce87-0a52-3e0f-8790c172b4db}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ContextOpen 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._Open();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="IsService" Id="{492ba7c1-2102-0be5-16e2-886c69f0ee52}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL IsService : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IsService := THIS^._component.IsService;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{c9c7735e-2c49-0853-1698-e16c59099e7f}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PLCinstanceRun" Id="{a455bb82-c564-00ec-161f-5a8a7b4faa57}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL PLCinstanceRun
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._component();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{5d28ce32-be6d-072a-02e9-9e3a46400612}">
+      <Declaration><![CDATA[METHOD PROTECTED Restore 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._component.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Service" Id="{12499dae-6b36-0f57-3ded-b8b2964f6cd4}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Service 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._component.Service();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerRestore" Id="{b586ab69-4eb0-05bd-2907-c9b7d8f8b9e2}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerRestore 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

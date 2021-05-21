@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="_TcoComponent" Id="{b8956c28-5b21-0376-1161-3d340b13164a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _TcoComponent EXTENDS TcoCore.TcoComponent
+VAR
+	_task	: TcoTaskTest(THIS^);
+	_serviceModeCount : ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_task();]]></ST>
+    </Implementation>
+    <Method Name="CallBodyFromTest" Id="{e92a11df-7552-0d51-238d-48276d2fa228}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL CallBodyFromTest
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_task();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{e7dc75ab-2cd2-0951-2512-113a4f119ffc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_task.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{3fb21668-8b85-0a76-3335-10fe97bcba0c}">
+      <Declaration><![CDATA[METHOD PROTECTED ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_serviceModeCount := _serviceModeCount + 1;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,109 @@
+﻿<Window
+    x:Class="TcoApplicationExamples.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:inxton="http://inxton.mts/xaml"
+    xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:plcappexamples="clr-namespace:PlcAppExamples"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:nonframeworkcomponentuse="clr-namespace:TcoApplicationExamples.Wpf.NonFrameworkComponentUse"
+    Title="MainWindow"
+    DataContext="{x:Static local:App.PlcAppExamples}"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Tutorial">
+                <local:TcOpenTutorialView />
+            </TabItem>
+            <TabItem Header="Sequencer">
+
+                <TabControl>
+                    <TabItem Header="Auto-gen">
+                        <UniformGrid Columns="2">
+                            <GroupBox Header="Ground">
+                                <StackPanel>
+                                    <Border
+                                        Margin="4"
+                                        Padding="4"
+                                        BorderBrush="Orange"
+                                        BorderThickness="1">
+                                        <StackPanel>
+                                            <TextBlock Text="First start the ground sequence" />
+                                            <Button Command="{Binding MAIN_PRG._pneuMan._groundTask}">START GROUND</Button>
+                                        </StackPanel>
+                                    </Border>
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan._groundSequcence}" />
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Header="Automat">
+                                <StackPanel>
+                                    <Border
+                                        Margin="4"
+                                        Padding="4"
+                                        BorderBrush="Orange"
+                                        BorderThickness="1">
+                                        <StackPanel>
+                                            <TextBlock Text="After ground sequence is done, you can start automat" />
+                                            <Button Command="{Binding MAIN_PRG._pneuMan._automatTask}">START AUTOMAT</Button>
+                                        </StackPanel>
+                                    </Border>
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._pneuMan._automatSequence}" />
+                                </StackPanel>
+                            </GroupBox>
+                        </UniformGrid>
+                    </TabItem>
+                    <TabItem Header="Object tree">
+                        <ScrollViewer>
+                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+
+
+            <TabItem Header="Context">
+                <TabControl>
+                    <TabItem Header="Auto-gen">
+                        <ScrollViewer>
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._donCorleone._MakeAnOfferThatCantBeRefused}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Object tree">
+                        <ScrollViewer>
+                            <UniformGrid>
+                                <inxton:DynamicTreeView
+                                    x:Name="DonCorleone"
+                                    DataContext="{Binding MAIN_PRG._donCorleone}"
+                                    Grid.IsSharedSizeScope="True" />
+                                <StackPanel>
+                                    <StackPanel.Resources>
+                                        <x:Array x:Key="PresentationTypes" Type="sys:String">
+                                            <sys:String>Control</sys:String>
+                                            <sys:String>ControlSlim</sys:String>
+                                            <sys:String>Display</sys:String>
+                                            <sys:String>DisplaySlim</sys:String>
+                                        </x:Array>
+                                    </StackPanel.Resources>
+                                    <ComboBox
+                                        x:Name="PresentationType"
+                                        ItemsSource="{StaticResource PresentationTypes}"
+                                        SelectedIndex="0" />
+                                    <inxton:ObservableContentControl
+                                        DataContext="{Binding SelectedItem, ElementName=DonCorleone}"
+                                        Grid.IsSharedSizeScope="True"
+                                        PresentationType="{Binding ElementName=PresentationType, Path=SelectedItem}" />
+                                </StackPanel>
+                            </UniformGrid>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Non framework use of components">
+                <nonframeworkcomponentuse:NFComponentUse></nonframeworkcomponentuse:NFComponentUse>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

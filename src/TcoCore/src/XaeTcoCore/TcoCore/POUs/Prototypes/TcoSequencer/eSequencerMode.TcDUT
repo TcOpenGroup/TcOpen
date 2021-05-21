@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eSequencerMode" Id="{9c78ac12-3375-08f9-0d3a-52cf2b5cf218}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Modes of the sequencer.
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eSequencerMode :
+(
+(*~
+	<docu>
+		<summary>
+			Invalid, no logic is executed.
+		</summary>				
+	</docu>	
+~*)	
+	Invalid := -10,
+(*~
+	<docu>
+		<summary>
+			Sequencer runs the steps of the sequence. 
+			(When cyclic mode is selected, next step is automatically started after the previous one has been completed.)
+		</summary>				
+	</docu>	
+~*)	
+	CyclicMode := 0,
+(*~
+	<docu>
+		<summary>
+		    Sequencer is in mode of step-by-step operation. The current step completes the execution regularly.
+			In this mode the Step Forward/Backward and manual step execution is available.			
+			<para>
+				See <see cref="TcoSequencerModeController.PlcTcoSequencerModeController.StepForward()"/> for detailed description.
+				See <see cref="TcoSequencerModeController.PlcTcoSequencerModeController.StepIn()"/> for detailed description.
+				See <see cref="TcoSequencerModeController.PlcTcoSequencerModeController.StepBackward()"/> for detailed description.
+			</para>
+		</summary>				
+	</docu>	
+~*)	
+	StepMode := 10
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

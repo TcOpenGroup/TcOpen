@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbInheritanceLevel_3" Id="{0cf8711d-2409-47a3-aeff-3b639be91487}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbInheritanceLevel_3 EXTENDS fbInheritanceLevel_2
+VAR
+	{attribute addProperty Name "LEVEL 3"}
+	level_3 : stAllTypes;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Method Name="Init" Id="{48c2de65-8514-428f-8818-6a0d3d15dff1}">
+      <Declaration><![CDATA[METHOD Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Init();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

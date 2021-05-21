@@ -3,64 +3,80 @@
   <POU Name="TcoTaskTest" Id="{9aa8db61-0cc6-40c6-9397-95033027855c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTest EXTENDS TcoTask
 VAR
-	_IsBusy						:	BOOL;	
-	_IsError					:	BOOL;	
-	_IsDone						:	BOOL;	
-	_CounterSetValue			:	ULINT;
-	_CounterValue				:	ULINT;
-	_InvokeCounter				:	ULINT;
-	_ExecuteCounter				:	ULINT;
-	_DoneCounter				:	ULINT;	
-	_InvokeRisingEdgeCounter	:	ULINT;
-	_ExecuteRisingEdgeCounter	:	ULINT;
-	_DoneRisingEdgeCounter		:	ULINT;	
-	_PreviousState				:	eTaskState;
-	_CounterValuePV				:	ULINT;
-	_MyIdentity					:	ULINT;
-	_MyContextIdentity			:	ULINT;
-	_MyContextStartCount 		:	ULINT;
-	_MyContextEndCount			:	ULINT;	
-	_MyParentIdentity			:	ULINT;
-	_AutoRestoreByMyParentEnabled	: BOOL;	
+	_isBusy							:	BOOL;	
+	_isError						:	BOOL;	
+	_isDone							:	BOOL;	
+	_isReady						:	BOOL;	
+	_isInvokeRequestTrue			:	BOOL;	
+	_counterSetValue				:	ULINT;
+	_counterValue					:	ULINT;
+	_invokeCounter					:	ULINT;
+	_executeCounter					:	ULINT;
+	_doneCounter					:	ULINT;	
+	_invokeRisingEdgeCounter		:	ULINT;
+	_executeRisingEdgeCounter		:	ULINT;
+	_doneRisingEdgeCounter			:	ULINT;	
+	_previousState					:	eTaskState;
+	_counterValuePV					:	ULINT;
+	_myIdentity						:	ULINT;
+	_myContextIdentity				:	ULINT;
+	_myContextStartCount 			:	ULINT;
+	_myContextEndCount				:	ULINT;	
+	_myParentIdentity				:	ULINT;
+	_autoRestoreByMyParentEnabled	:	BOOL;	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[ExecutionBody();]]></ST>
     </Implementation>
+    <Method Name="Disable" Id="{30e8d443-19f6-08b1-1d86-48a460b2b63c}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Disable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{cd30d735-ff17-02c7-26d6-c091a49a074d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Enable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="ExecutionBody" Id="{77a5a45d-9cd7-4d75-83c5-1e7025fc00d2}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ExecutionBody]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(THIS^._taskState = eTaskState.Request) THEN
-	_InvokeCounter := _InvokeCounter + 1; 
+        <ST><![CDATA[IF(THIS^._taskState = eTaskState.Requested) THEN
+	_invokeCounter := _invokeCounter + 1; 
 END_IF;
 
-IF(THIS^._taskState = eTaskState.Request AND _PreviousState <> eTaskState.Request) THEN
-	_CounterValue	:=	_CounterSetValue;
-	_CounterValuePV := _CounterValue;
-	_InvokeRisingEdgeCounter := _InvokeRisingEdgeCounter + 1;
+IF(THIS^._taskState = eTaskState.Requested AND _PreviousState <> eTaskState.Requested) THEN
+	_counterValue	:=	_counterSetValue;
+	_counterValuePV := _counterValue;
+	_invokeRisingEdgeCounter := _invokeRisingEdgeCounter + 1;
 END_IF
 
-IF(THIS^._taskState = eTaskState.Executing AND _PreviousState <> eTaskState.Executing) THEN
-	_ExecuteRisingEdgeCounter := _ExecuteRisingEdgeCounter + 1;
+IF(THIS^._taskState = eTaskState.Busy AND _previousState <> eTaskState.Busy) THEN
+	_executeRisingEdgeCounter := _executeRisingEdgeCounter + 1;
 END_IF
 
-_PreviousState	:=	THIS^._taskState;
+_previousState	:=	THIS^._taskState;
 
 IF(Execute()) THEN
-	_ExecuteCounter := _ExecuteCounter + 1;	
-	_CounterValue := _CounterValue - 1;
-	DoneWhen(_CounterValue <= 0);			
-	ThrowWhen(ABS(_CounterValuePV -_CounterValue) > 1);
-	_CounterValuePV := _CounterValue;
+	_executeCounter := _executeCounter + 1;	
+	_counterValue := _counterValue - 1;
+	DoneWhen(_counterValue <= 0);			
+	ThrowWhen(ABS(_counterValuePV -_counterValue) > 1);
+	_CounterValuePV := _counterValue;
 END_IF
 
 IF(THIS^._taskState = eTaskState.Done) THEN
-	_DoneCounter := _DoneCounter + 1; 
+	_doneCounter := _doneCounter + 1; 
 END_IF;
 
-IF(THIS^._taskState = eTaskState.Done AND _PreviousState <> eTaskState.Done) THEN
-	_DoneRisingEdgeCounter := _DoneRisingEdgeCounter + 1; 
+IF(THIS^._taskState = eTaskState.Done AND _previousState <> eTaskState.Done) THEN
+	_doneRisingEdgeCounter := _doneRisingEdgeCounter + 1; 
 END_IF
 
 ]]></ST>
@@ -87,7 +103,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_AutoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
+        <ST><![CDATA[_autoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
 ]]></ST>
       </Implementation>
     </Method>
@@ -95,15 +111,15 @@ METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutIdentities]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_MyIdentity			:=	THIS^.Identity;
-
-_MyContextIdentity	:=	THIS^.Context.Identity;
+        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
+ 
+_myContextIdentity	:=	THIS^.Context.Identity;
 		
-_MyContextStartCount :=	THIS^.Context.StartCycleCount;
-
-_MyContextEndCount	:=	THIS^.Context.EndCycleCount;
-
-_MyParentIdentity	:=	THIS^._Parent.Identity;
+_myContextStartCount :=	THIS^.Context.StartCycleCount;
+ 
+_myContextEndCount	:=	THIS^.Context.EndCycleCount;
+ 
+_myParentIdentity	:=	THIS^._Parent.Identity;
 
 ]]></ST>
       </Implementation>
@@ -112,17 +128,25 @@ _MyParentIdentity	:=	THIS^._Parent.Identity;
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutState]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_IsBusy		:=	THIS^.Busy;	
-_IsError	:=	THIS^.Error;	
-_IsDone		:=	THIS^.Done;	
-]]></ST>
+        <ST><![CDATA[_isBusy					:=	THIS^.Busy;	
+_isError				:=	THIS^.Error;	
+_isDone					:=	THIS^.Done;	
+_isReady				:=	THIS^.Ready;
+_isInvokeRequestTrue 	:=	THIS^._invokeRequest;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetPreviousStateToIdle" Id="{5b4ca5af-515c-4456-914e-015624dcdd9a}">
+    <Method Name="SetInvokeRequest" Id="{0b35580c-9ba9-0a00-3cd4-3befd36f57b6}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetPreviousStateToIdle]]></Declaration>
+METHOD INTERNAL SetInvokeRequest]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._PreviousState := eTaskState.Idle;]]></ST>
+        <ST><![CDATA[THIS^._invokeRequest := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetPreviousStateToReady" Id="{5b4ca5af-515c-4456-914e-015624dcdd9a}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetPreviousStateToReady]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._previousState := eTaskState.Ready;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TriggerAbort" Id="{fb8d5aab-1b46-4b74-a563-a929ff61965a}">
@@ -146,45 +170,5 @@ METHOD INTERNAL TriggerRestore]]></Declaration>
         <ST><![CDATA[THIS^.Restore();]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoTaskTest">
-      <LineId Id="103" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ExecutionBody">
-      <LineId Id="46" Count="31" />
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.GetMessage">
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.PostMessage">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ReadOutAutoRestoreProperties">
-      <LineId Id="38" Count="0" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ReadOutIdentities">
-      <LineId Id="32" Count="6" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="41" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.ReadOutState">
-      <LineId Id="29" Count="2" />
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.SetPreviousStateToIdle">
-      <LineId Id="22" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.TriggerAbort">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.TriggerInvoke">
-      <LineId Id="20" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoTaskTest.TriggerRestore">
-      <LineId Id="20" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

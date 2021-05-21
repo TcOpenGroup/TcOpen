@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Thomas_Object" Id="{69d01a44-cebd-0fff-162d-7a59f62e3932}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Thomas_Object EXTENDS TcoCore.TcoObject
+VAR
+	_frank 		:	AKid_Object(THIS^);
+	_andrew 	:	AKid_Object(THIS^);
+	_christina 	:	AKid_Object(THIS^);
+	_gianna 	:	AKid_Object(THIS^);
+END_VAR
+
+VAR
+	_AskForTheFavor			:	AskForTheFavor_Task(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AskForTheFavor" Id="{c23a00a7-2858-0893-1a83-a9e7f9ad39a2}">
+      <Declaration><![CDATA[METHOD AskForTheFavor : TcoCore.ITcoTask
+VAR_INPUT
+	Person_Requested 	:	REFERENCE TO Person_Object;
+	RequestedFavor		:	STRING;
+	ReturnFavor			:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_AskForTheFavor(_Person_Requested := Person_Requested,_RequestedFavor :=RequestedFavor,_ReturnFavor:=ReturnFavor);
+
+AskForTheFavor := _AskForTheFavor;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

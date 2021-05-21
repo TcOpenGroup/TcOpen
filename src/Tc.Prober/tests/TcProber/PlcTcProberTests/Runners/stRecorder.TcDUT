@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="stRecorder" Id="{cd161635-cce8-4145-859c-0dcf0d2e4d8c}">
+    <Declaration><![CDATA[TYPE stRecorder :
+STRUCT
+	counter : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="ColorSequencer" Id="{f38eeb06-d59d-0026-06a1-2ebf548e84a3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ColorSequencer EXTENDS TcoCore.TcoSequencer
+VAR_INPUT
+	inoColors : REFERENCE TO stColors ;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Use Main method instead of this block.]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{58be64f5-eed0-0d9c-17c8-4f5a5ec5fd81}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Step header
+IF Step(100,                                // Step id. Must be unique and must change at runtime.
+        TRUE,                               // Indicates that whether the step should execute.
+        'Switch all lights off') THEN       // Arbitrary step description (for SCADA/HMI)
+//--------------------------------------------    
+// Steps logic statements
+    inoColors._lightR_SwitchOn := FALSE;
+    inoColors._lightG_SwitchOn := FALSE;
+    inoColors._lightB_SwitchOn := FALSE;
+
+    IF(NOT inoColors._lightR_IsOn 
+       AND NOT inoColors._lightG_IsOn 
+       AND NOT inoColors._lightB_IsOn) 
+    THEN
+        CompleteStep(); // Completes step and moves to step 200
+    END_IF;
+//--------------------------------------------
+END_IF;    
+
+IF Step(200,
+        TRUE,
+        'Switch on red light') THEN
+//--------------------------------------------    
+    inoColors._lightR_SwitchOn := TRUE;
+    IF(inoColors._lightR_IsOn) THEN
+        CompleteStep();
+    END_IF;
+//--------------------------------------------
+END_IF;
+
+IF Step(300,
+        TRUE,
+        'Switch on green light') THEN
+//--------------------------------------------    
+   inoColors._lightG_SwitchOn := TRUE;
+    IF(inoColors._lightG_IsOn) THEN
+        CompleteStep();
+    END_IF;
+//--------------------------------------------
+END_IF;
+
+IF Step(400,
+        TRUE,
+        'Switch on blue light') THEN
+//--------------------------------------------    
+    inoColors._lightB_SwitchOn := TRUE;
+    IF(inoColors._lightB_IsOn) THEN
+        CompleteStep();
+    END_IF;
+//--------------------------------------------
+END_IF;
+
+IF Step(500,
+        TRUE,
+        'Check that all light are on') THEN
+//--------------------------------------------        
+    IF(inoColors._lightR_IsOn 
+    	AND inoColors._lightG_IsOn 
+    	AND inoColors._lightG_IsOn) 
+    THEN
+        CompleteStep();
+    ELSE
+        RequestStep(200); // Some light(s) is(are) not on, try again from 200    
+    END_IF;
+//--------------------------------------------
+END_IF;
+
+
+IF Step(600,
+        TRUE,
+        'Measure luminosity') THEN
+//--------------------------------------------        
+    IF( inoColors._luminosityMin <= inoColors._luminosity AND inoColors._luminosityMax >= inoColors._luminosity) THEN
+        CompleteStep();
+    ELSE
+        RequestStep(500); // Luminosity is not where it should be; check again if the lights are on.    
+    END_IF    
+//--------------------------------------------
+END_IF;
+
+IF Step(800,
+        TRUE,
+        'Complete sequence') THEN
+//--------------------------------------------        
+        CompleteSequence(); // Returns to the first step (100) in the sequence.    
+//--------------------------------------------
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <GVL Name="gMANIPULATOR_IO" Id="{906c05b5-124e-08ff-2366-1fb5554d91ef}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	Inputs AT %I* : ARRAY[0..7] OF BOOL;
+	Outputs  AT %Q* : ARRAY[0..7] OF BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="IPistonHorizontal" Id="{b8975a8d-e951-07e6-2c89-2e8c3c8666a0}">
+    <Declaration><![CDATA[INTERFACE IPistonHorizontal
+]]></Declaration>
+    <Folder Name="Horizontal" Id="{b140f20f-c63a-0291-3808-33fedbbb1785}" />
+    <Method Name="MoveLeft" Id="{8e5b3b0c-1e99-07de-1c40-d0898d68b3d0}" FolderPath="Horizontal\">
+      <Declaration><![CDATA[METHOD MoveLeft : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+    </Method>
+    <Method Name="MoveRight" Id="{3e98af39-bd0d-0038-34d4-196288d238b0}" FolderPath="Horizontal\">
+      <Declaration><![CDATA[METHOD MoveRight : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

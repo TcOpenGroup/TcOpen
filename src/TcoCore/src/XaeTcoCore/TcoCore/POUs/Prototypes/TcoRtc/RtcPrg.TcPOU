@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="RtcPrg" Id="{43316ab1-818f-0713-286a-feebd50c3336}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM INTERNAL RtcPrg
+VAR
+	{attribute 'hide'}
+	_RtcSynchParams						:	RtcSynchParams;			
+	{attribute 'hide'}
+	_isSynchronized						:	BOOL := FALSE;
+	{attribute 'hide'}
+	_state								:	UINT;
+	{attribute 'hide'}
+	_syncAmsIdIsLocale					:	BOOL;
+	{attribute 'hide'}
+	_FB_GetLocalAmsNetId 				: 	Tc2_Utilities.FB_GetLocalAmsNetId;
+	{attribute 'hide'}
+	_FB_GetTimeZoneInformation			:	Tc2_Utilities.FB_GetTimeZoneInformation;
+	{attribute 'hide'}
+	_FB_SetTimeZoneInformation			:	Tc2_Utilities.FB_SetTimeZoneInformation;
+	{attribute 'hide'}
+	_TimeZoneInformation				:	Tc2_Utilities.ST_TimeZoneInformation;
+	{attribute 'hide'}
+	_TimeZoneID							:	Tc2_Utilities.E_TimeZoneID;
+	{attribute 'hide'}
+	_startTime							:	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_endTime							:	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_getOffset							:	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_setOffset							:	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_NT_GetSyncTime						: 	Tc2_Utilities.NT_GetTime;
+	{attribute 'hide'}
+	_NT_SetLocalTime 					: 	Tc2_Utilities.NT_SetLocalTime;
+	{attribute 'hide'}
+	_NT_GetLocalTime					: 	Tc2_Utilities.NT_GetTime;
+	{attribute 'hide'}
+	_FB_TzSpecificLocalTimeToSystemTime :	Tc2_Utilities.FB_TzSpecificLocalTimeToSystemTime;
+	{attribute 'hide'}
+	_remote2localDiff					:	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_offset								:	ULINT;
+	{attribute 'hide'}
+	_syncCounter						:	ULINT;
+	{attribute 'hide'}
+	_lastSyncTick						: 	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_timeTick							: 	Tc2_EtherCAT.T_DCTIME64;
+	{attribute 'hide'}
+	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
+	{attribute 'hide'}
+	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Synchronize" Id="{5699a77f-786a-0cc0-0c86-53e2fe66a337}">
+      <Declaration><![CDATA[METHOD INTERNAL Synchronize
+VAR_INPUT
+	inRtcSynchParams	: RtcSynchParams;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _RtcSynchParams.synchContextIdentity = 0 AND inRtcSynchParams.synchContextIdentity <> 0 THEN
+	_RtcSynchParams.synchContextIdentity := inRtcSynchParams.synchContextIdentity;
+END_IF
+
+IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIdentity = inRtcSynchParams.synchContextIdentity THEN
+	_RtcSynchParams.doSynch := inRtcSynchParams.doSynch;
+	_RtcSynchParams.syncAmsId := inRtcSynchParams.syncAmsId;
+	_RtcSynchParams.syncPeriod := inRtcSynchParams.syncPeriod;
+	IF _NT_GetLocalTime.ERR THEN
+		_NT_GetLocalTime(START := FALSE);
+		_isSynchronized := FALSE;
+		RETURN;	
+	END_IF
+
+	IF _state = 0 THEN
+		IF _RtcSynchParams.doSynch THEN
+			_isSynchronized := FALSE;
+			_state := _state + 10;
+		ELSE 
+			_isSynchronized := FALSE;
+			_state := 210;
+		END_IF
+	END_IF
+	
+	IF _state = 10 THEN
+		_FB_GetLocalAmsNetId(bExecute := TRUE);
+		IF _FB_GetLocalAmsNetId.bBusy AND NOT _FB_GetLocalAmsNetId.bError THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 20 THEN
+		_FB_GetLocalAmsNetId(bExecute := FALSE);
+		IF NOT _FB_GetLocalAmsNetId.bBusy AND NOT _FB_GetLocalAmsNetId.bError THEN
+			_state := _state + 10;
+		END_IF
+	
+	END_IF
+	
+	IF _state = 30 THEN
+		_syncAmsIdIsLocale := 	_RtcSynchParams.syncAmsId = _FB_GetLocalAmsNetId.AddrString OR 
+								_RtcSynchParams.syncAmsId = '127.0.0.1.1.1' OR 
+								_RtcSynchParams.syncAmsId = '';
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 40 THEN
+		_startTime := Tc2_EtherCAT.F_GetActualDcTime64();
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 50 THEN
+		_FB_GetTimeZoneInformation(sNetID := _RtcSynchParams.syncAmsId, bExecute := TRUE);
+		IF _FB_GetTimeZoneInformation.bBusy AND NOT _FB_GetTimeZoneInformation.bError THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 60 THEN
+		_FB_GetTimeZoneInformation(bExecute := FALSE);
+		IF NOT _FB_GetTimeZoneInformation.bBusy AND NOT _FB_GetTimeZoneInformation.bError THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 70 THEN
+		_TimeZoneInformation := _FB_GetTimeZoneInformation.tzInfo;
+		_TimeZoneID := _FB_GetTimeZoneInformation.tzID;
+		_endTime := Tc2_EtherCAT.F_GetActualDcTime64();
+		_getOffset := (_endTime - _startTime ) / 2;
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 80 THEN
+		IF _syncAmsIdIsLocale THEN
+			_state := 180;
+		ELSE
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 90 THEN
+		_startTime := Tc2_EtherCAT.F_GetActualDcTime64();
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 100 THEN
+		_FB_SetTimeZoneInformation(sNetID := '127.0.0.1.1.1', tzInfo := _TimeZoneInformation , bExecute := TRUE);
+		IF _FB_SetTimeZoneInformation.bBusy AND NOT _FB_SetTimeZoneInformation.bError THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 110 THEN
+		_FB_SetTimeZoneInformation(bExecute := FALSE);
+		IF NOT _FB_SetTimeZoneInformation.bBusy AND NOT _FB_SetTimeZoneInformation.bError THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 120 THEN
+		_endTime := Tc2_EtherCAT.F_GetActualDcTime64();
+		_setOffset := (_endTime - _startTime ) / 2;
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 130 THEN
+		_NT_GetSyncTime(NETID := _RtcSynchParams.syncAmsId, START := TRUE);
+		IF _NT_GetSyncTime.BUSY AND NOT _NT_GetSyncTime.ERR THEN 
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 140 THEN
+		_NT_GetSyncTime(START := FALSE);
+		IF NOT _NT_GetSyncTime.BUSY AND NOT _NT_GetSyncTime.ERR THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 150 THEN
+		_NT_GetSyncTime(START := FALSE);
+		_offset := LREAL_TO_ULINT(ULINT_TO_LREAL(_getOffset + _setOffset) / 1000000) * 1000000;
+		_offset := _offset + Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetSyncTime.TIMESTR,0,0) + _getOffset + _setOffset;	
+		_LocalTime := Tc2_EtherCAT.DCTIME64_TO_SYSTEMTIME(_offset);
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 160 THEN
+		_NT_GetSyncTime(START := FALSE);
+		_NT_SetLocalTime(	NETID := '127.0.0.1.1.1', 
+							TIMESTR := _LocalTime,
+							START := TRUE);
+		IF _NT_SetLocalTime.BUSY AND NOT _NT_SetLocalTime.ERR THEN 
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 170 THEN
+		_NT_GetSyncTime(START := FALSE);
+		_NT_SetLocalTime(START := FALSE);
+		IF NOT _NT_SetLocalTime.BUSY AND NOT _NT_SetLocalTime.ERR THEN
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 180 THEN
+		_NT_GetSyncTime(NETID := _RtcSynchParams.syncAmsId, START := TRUE);
+		_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
+		IF _NT_GetSyncTime.BUSY AND NOT _NT_GetSyncTime.ERR AND NOT _NT_GetLocalTime.ERR THEN 
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 190 THEN
+		_NT_GetSyncTime(START := FALSE);
+		_NT_GetLocalTime(START := FALSE);
+		IF NOT _NT_GetSyncTime.BUSY AND NOT _NT_GetSyncTime.ERR AND NOT _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 200 THEN
+		_remote2localDiff := Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetSyncTime.TIMESTR,0,0) -  Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetLocalTime.TIMESTR,0,0);
+	
+		_NT_GetSyncTime(START := FALSE);
+		_NT_GetLocalTime(START := FALSE);
+		_NT_SetLocalTime(START := FALSE);
+	
+		_LocalTime := _NT_GetLocalTime.TIMESTR;
+		_FB_TzSpecificLocalTimeToSystemTime(in 		:=	_LocalTime,
+											tzInfo 	:=	_TimeZoneInformation,
+											out		=>	_UTCTime,
+											eTzID	=>	_TimeZoneID);
+	
+		_lastSyncTick := Tc2_EtherCAT.F_GetActualDcTime64(); 	
+	
+		_syncCounter := _syncCounter + 1;
+		_state := _state + 10;
+	END_IF
+	
+	IF _state = 210 THEN
+		_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
+		IF _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 220 THEN
+		_NT_GetLocalTime(START := FALSE);
+		IF NOT _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
+			_state := _state + 10;
+		END_IF
+	END_IF
+	
+	IF _state = 230 THEN
+		_isSynchronized := TRUE;
+		_NT_GetSyncTime(START := FALSE);
+		_NT_GetLocalTime(START := FALSE);
+		_NT_SetLocalTime(START := FALSE);
+		
+		_timeTick :=Tc2_EtherCAT.F_GetActualDcTime64(); 	
+		
+		IF _RtcSynchParams.doSynch THEN
+			IF (_timeTick - _lastSyncTick) / 1000000000  >= _RtcSynchParams.syncPeriod THEN
+				_state := 0;
+			ELSE
+				_state := 210;
+			END_IF
+		ELSE
+			_state := 210;
+		END_IF
+	END_IF
+END_IF	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

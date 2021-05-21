@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Constanzia_Object" Id="{2054403e-1d36-0b1d-3ac2-42531aa5b0ec}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Constanzia_Object EXTENDS TcoCore.TcoObject
+VAR
+	_victor 	:	AKid_Object(THIS^);
+	_michael 	:	AKid_Object(THIS^);	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

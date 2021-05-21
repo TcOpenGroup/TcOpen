@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eCyclinderBaseTests" Id="{bb45d148-104b-0e48-2d7d-958318741966}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eCyclinderBaseTests :
+(
+	GetAtHome := 100,
+	GetAtWork := 200	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

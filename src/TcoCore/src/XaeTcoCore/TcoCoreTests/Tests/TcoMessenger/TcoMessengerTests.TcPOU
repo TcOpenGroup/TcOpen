@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoMessengerTests" Id="{d87e08d3-1876-01a7-16f8-c33755c3cedd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerTests EXTENDS TcoCore.TcoObject
+VAR
+	_category : TcoCore.eMessageCategory;
+	_minLevel : TcoCore.eMessageCategory;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Catastrophic" Id="{093578d4-4883-02db-1234-cd38a177e6a9}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Catastrophic
+VAR_INPUT	
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Catastrophic(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Critical" Id="{cc04394e-ff89-0912-0edc-b599a0c7d07c}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Critical
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Critical(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Debug" Id="{d279de92-cd96-029d-39a9-f59f29b03fe7}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Debug
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Debug(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Error" Id="{8cdb9a84-d1f9-0d5c-21aa-e984960b0322}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Error
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Error(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Info" Id="{c925a1ca-2a19-0552-0bb5-9de32cfb972b}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Info
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Info(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Notify" Id="{32b9cbb6-6207-0f35-1241-0cd0d8f3e2c6}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Notify
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Notify(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Post" Id="{aa4eba68-8e3e-0790-14e4-37c20eb0fa3d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Post 
+VAR_INPUT	
+	Message : STRING(255);	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Post(Message, _category);
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Programming" Id="{ad9b3a9b-2e3a-01d3-03b2-0966d6f79bec}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Programming
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Programming(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Resume" Id="{82062340-d28d-08df-1727-1ea7f90e73d2}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Resume
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.Resume();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetMinLevel" Id="{14062f88-3c36-0c8f-1769-35d9d0ae9a98}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetMinLevel
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.MinLevel := _minLevel;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Suspend" Id="{009042cd-d9d8-01ec-1e53-e01d1459f156}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Suspend
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.Suspend();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TimedOut" Id="{df75203d-ff31-0992-037d-6d10558ac6d6}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TimedOut
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Warning(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Trace" Id="{02a9dc17-bef6-0f75-27b7-d7639e83bf18}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Trace
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Trace(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Warning" Id="{032a7c5b-ea22-0043-0563-7ca4d7b308c3}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL Warning
+VAR_INPUT
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Warning(Message);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDo" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+				Generic component for discrete control of an output.												
+		</summary>				
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoDo EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Controlled signal. Typically an `%Q*` variable. 												
+		</summary>				
+	</docu>	
+	~*)
+	inoSignal : BOOL;
+END_VAR
+
+VAR
+	(*~
+	<docu>
+		<summary>
+			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
+		</summary>				
+	</docu>	
+	~*)
+	_signal : BOOL;
+END_VAR
+
+VAR
+	_signalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#On#>"}
+	{attribute addProperty ToolTip "<#Sets the output#>"}
+	_setTask	 : TcoCore.TcoTask(THIS^);
+	{attribute addProperty ToolTip "<#Resets the output#>"}
+	{attribute addProperty Name "<#Off#>"}
+	_resetTask	 : TcoCore.TcoTask(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
+	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+	inoSignal := _signal;		 
+END_IF;	
+	
+IF(_setTask.Execute())THEN
+	_setTask.DoneWhen(Set());
+END_IF
+
+IF(_resetTask.Execute())THEN
+	_resetTask.DoneWhen(Reset());
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{3d495706-c76b-095e-389f-7ba6c1dae3a7}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsFalse" Id="{48e6cf82-019c-09fc-0b62-4318a8025ee4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets 'true' when monitor signal is 'off/false/logical 0'.
+			Generates message when the returning 'false'.											
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'monitoring' := 'variable'}
+PROPERTY IsFalse : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c23c2e72-5cf6-0203-23ee-9d8001c6afd4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsFalse := NOT _signal;
+IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsTrue" Id="{c588e641-6ea7-04c2-2aae-c7227089c8ae}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets 'true' when monitor signal is 'on/true/logical 1'.
+			Generates message when the returning 'false'.											
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'monitoring' := 'variable'}
+PROPERTY IsTrue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2089a10e-bba5-06e8-1e33-1a25b4fcfa09}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsTrue := _signal;
+IF(NOT IsTrue) THEN Messenger.Info('<#Expecting `positive` signal#>'); END_IF;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Reset" Id="{8d9a1541-7fde-0939-1d52-c21f46132ca4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets controlled signal into 'off/false/logical 0'.														
+		</summary>				
+	</docu>	
+~*)	
+METHOD Reset : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Messenger.Trace('<#Reseting signal (off/false)#>');
+_signal := FALSE;
+Reset := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{28f0fb71-aa8a-0f79-0fa8-867a06c586ce}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// No implementation needed for this componet.]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{370c3428-cc83-04b9-0717-e7260a4027a0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Set" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets controlled signal into 'on/true/logical 1'.														
+		</summary>				
+	</docu>	
+~*)	
+METHOD PUBLIC Set : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Messenger.Trace('<#Setting signal (on/true)#>');
+_signal := TRUE;
+Set := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

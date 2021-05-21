@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="AskForTheFavor_Task" Id="{6683688c-541e-0601-216f-02969bf5a319}" SpecialFunc="None">
+    <Declaration><![CDATA[//--
+// <TaskExampleDeclarations>
+(*
+
+	This example shows using the 'Tcotask' application. 'TcoTask' is the simplest 
+	'TcoOpen' coordination primitive.	 
+	In general the body of the task could be devided into the three section: 
+		1.)	Action		
+		2.)	Termination condition for the expected behavior.	
+		3.)	Termination condition for the non-expected behavior.	
+	The body of the 'Tcotask' needs to be called cyclically. The 'Tcotask' could be then 
+	invoked from 'outside'. The task of this 'Tcotask' is to ask for the favor
+	(in the name of the 'TcoContext' in this example Don Corleone) and offer the return favor. 
+	Task could end up the expected way in the 'DONE' state if the requested person grant 	 
+	the favor or it could end up in the 'ERROR' state if the requested person refuses to grant 
+	the favor. Each task could be invoked only from the 'READY' state. So if the task enters 
+	the 'ERROR' state, it cannot be invoked again and has to be restored before. Anyway in this 
+	example this task is never restored and invoked again as Don Corleone never asks for the 
+	next favor if the first one was refused.	
+
+*)
+FUNCTION_BLOCK AskForTheFavor_Task EXTENDS TcoCore.TcoTask
+VAR_INPUT
+(*
+	'Parameters' of this task are assigned in this example from 'outside' from the 
+	'upper level' of the hierarchy, where Invoke() method is triggered.
+*)
+	_Person_Requested 		:	REFERENCE TO Person_Object;
+	_RequestedFavor			:	STRING;
+	_ReturnFavor			:	STRING;	
+END_VAR
+// </TaskExampleDeclarations>
+//--
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//--
+// <TaskBodyExampleCode>
+// THIS part needs to be called cyclically.
+IF Execute() THEN
+	// First section: Action.
+		// Meet the right person and interpret the requirements so as a possible return favor.
+		_Person_Requested.RequestForTheFavor(_RequestedFavor,_ReturnFavor);
+		// Let the person requested to think carefully about the proposition.
+		_Person_Requested.ThinkCarefully();
+	// Second section: Termination condition for the expected behavior.
+		// In the case that the requested person is "smart" and "show the respect" to the 
+		// 'TcoContext', task finishes in the 'DONE' state and process of the granted the 
+		// return favor should be started.  
+		DoneWhen(_Person_Requested.FavorIsGranted());
+	// Third section: Termination condition for the non-expected behavior.
+		// In the case that the requested person is so self-confident and refuse to grant 
+		// the favor, task finishes in the 'ERROR' state and automatically the OnTaskError() 
+		// method is triggered. In this method normally the value of the ReturnFavor is 
+		// drammatically decreased OR changed to 'Nothing'. Anyway the requested person still 
+		// have the possibility to grant the favor but under different condition, as he
+		// "had to do it the hard way".  
+		ThrowWhen(_Person_Requested.FavorIsRefused());
+END_IF
+// </TaskBodyExampleCode>
+//--
+]]></ST>
+    </Implementation>
+    <Method Name="OnTaskError" Id="{7b62ebc7-8d17-0286-0f41-73e4c8c7f0d5}">
+      <Declaration><![CDATA[METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Person_Requested.ReturnFavor := 'Nothing, and all expenses paid by the recipient.';
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

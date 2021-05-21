@@ -31,6 +31,7 @@ function EnsureGitVersion {
     $gitVersionFolder = Split-Path $pathToGitVersion
     Push-Location $gitVersionFolder
     $gitVersionExecutableFullName = ((Join-Path (pwd) "gitversion.exe"))
+    $gitVersionPwd = Get-Location
     Pop-Location
 
     DownloadIfMissing -folder $gitVersionFolder -url $gitversionUrl 
@@ -43,7 +44,7 @@ function EnsureGitVersion {
     }
    
     
-    $gitVersionFile = (Join-Path ($gitVersionFolder) (Split-Path $gitversionUrl -Leaf))
+    $gitVersionFile = Join-Path ($gitVersionPwd) (Split-Path $gitversionUrl -Leaf)
     $tar = $gitVersionFile.Replace(".gz","")
 
     DeGZip-File -infile $gitVersionFile -outfile $tar
@@ -185,6 +186,42 @@ function RemoveTcProjBins {
         Push-Location ($_)
 
         $removeFolders = @( ".\_CompileInfo")
+        # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
+
+        $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+
+        foreach($item in ($removeFolders)){
+            Write-Host "In $folder trying to remove $item"
+            Remove-Item -r $item  -ErrorAction SilentlyContinue
+        }
+
+        Pop-Location
+    }
+}
+
+function RemoveGenerated {
+    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+        Push-Location ($_)
+
+        $removeFolders = @( ".\_generated")
+        # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
+
+        $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+
+        foreach($item in ($removeFolders)){
+            Write-Host "In $folder trying to remove $item"
+            Remove-Item -r $item  -ErrorAction SilentlyContinue
+        }
+
+        Pop-Location
+    }
+}
+
+function RemoveMeta {
+    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+        Push-Location ($_)
+
+        $removeFolders = @( ".\_meta")
         # $removeFolderContent = @(".\_meta\*", ".\_meta\*")
 
         $folder = $_.Replace("Microsoft.PowerShell.Core\FileSystem::","")

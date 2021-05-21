@@ -17,7 +17,8 @@ namespace TcoPneumatics.Wpf.Sandbox
     public partial class App : Application
     {
         public App():base()
-        {          
+        {
+            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             Entry.TcoPneumaticsTestsPlc.Connector.BuildAndStart();           
         }
     }

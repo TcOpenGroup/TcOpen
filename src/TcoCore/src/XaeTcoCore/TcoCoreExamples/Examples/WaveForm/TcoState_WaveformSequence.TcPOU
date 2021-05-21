@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoState_WaveformSequence" Id="{e84437c2-fe38-0f88-230c-d152e59d16b4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoState_WaveformSequence EXTENDS TcoState
+VAR
+	_TcoTask_Transition_1	:	TcoTask_Transition(THIS^);
+	_TcoTask_Transition_2	:	TcoTask_Transition(THIS^);
+	_WaveformPointTable		:	ARRAY[0..10]	OF 	WaveformPoint;
+	_WaveformPointsCount	:	UINT;
+	_ActualTransitionNumber	:	UINT;
+END_VAR
+VAR_IN_OUT
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddWaveFormPoint" Id="{a88db65b-5811-0196-24fe-69e64c5c66ca}">
+      <Declaration><![CDATA[METHOD AddWaveFormPoint
+VAR_INPUT
+	TransitionType	:	eTransitionType := eTransitionType.None;
+	TargetValue		:	LREAL := 0;
+	Duration		:	UINT := 0;
+	Shape	 		:	LREAL := 0.0;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WaveformPointTable[_WaveformPointsCount].TransitionType	:=	TransitionType;
+_WaveformPointTable[_WaveformPointsCount].TargetValue 		:=	TargetValue;
+_WaveformPointTable[_WaveformPointsCount].Duration 			:=	Duration;
+_WaveformPointTable[_WaveformPointsCount].Shape	 			:=	Shape;
+
+_WaveformPointsCount										:=	_WaveformPointsCount + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Action Name="CheckIfFinished" Id="{6a75221c-bd22-0e0d-0224-e094dee39df1}">
+      <Implementation>
+        <ST><![CDATA[	IF _ActualTransitionNumber >= _WaveformPointsCount THEN
+		THIS^.ChangeState(1110);
+	ELSE
+		THIS^.ChangeState(THIS^.State + 10);	
+	END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Method Name="ClearWaveFormTable" Id="{bd5eb4b1-a8ad-076b-2d13-873966753ebf}">
+      <Declaration><![CDATA[METHOD ClearWaveFormTable
+VAR
+	i	:	INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i:= 0 TO 10 DO
+	_WaveformPointTable[i].TransitionType	:=	eTransitionType.None;
+	_WaveformPointTable[i].TargetValue 		:=	0;
+	_WaveformPointTable[i].Duration 		:=	0;
+	_WaveformPointTable[i].Shape	 		:=	0.0;
+END_FOR
+
+_WaveformPointsCount						:=	0;
+_ActualTransitionNumber						:=	0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunWithAutoRestore" Id="{8312cdc0-f65f-0904-0671-5ebb979680a2}">
+      <Declaration><![CDATA[METHOD RunWithAutoRestore : BOOL
+VAR_IN_OUT
+	Value	:	LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//This  method use both _TcoTask_Transition_1 and  _TcoTask_Transition_2 tasks, one for odd, another for even transition points,  so after each Done rising edge, 
+//no manual restore is neccessary if each task runs at least 2 PLC cycles
+RunWithAutoRestore := FALSE;
+
+//Init
+IF THIS^.State = -1 THEN
+	_ActualTransitionNumber := 0;
+	THIS^.ChangeState(10).RestoreObject(_TcoTask_Transition_1).RestoreObject(_TcoTask_Transition_2);	
+	_TcoTask_Transition_1(Value:=Value);	//Init reference after first download
+	_TcoTask_Transition_2(Value:=Value);	//Init reference after first download
+END_IF
+
+// 0		*********
+//Check if finished
+IF THIS^.State = 	10 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State = 	20 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State = 	30 THEN
+	WaitForTransitionEnd_1();
+END_IF
+
+// 1		*********
+//Check if finished
+IF THIS^.State =	110 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	120 THEN
+	StartTransition_2();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	130 THEN
+	WaitForTransitionEnd_2();
+END_IF
+
+// 2		*********
+//Check if finished
+IF THIS^.State =	210 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	220 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	230 THEN
+	WaitForTransitionEnd_1();
+END_IF
+
+// 3		*********
+//Check if finished
+IF THIS^.State =	310 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	320 THEN
+	StartTransition_2();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	330 THEN
+	WaitForTransitionEnd_2();
+END_IF
+
+// 4		*********
+//Check if finished
+IF THIS^.State =	410 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	420 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	430 THEN
+	WaitForTransitionEnd_1();
+END_IF
+
+// 5		*********
+//Check if finished
+IF THIS^.State =	510 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	520 THEN
+	StartTransition_2();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	530 THEN
+	WaitForTransitionEnd_2();
+END_IF
+
+// 6		*********
+//Check if finished
+IF THIS^.State =	610 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	620 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	630 THEN
+	WaitForTransitionEnd_1();
+END_IF
+
+// 7		*********
+//Check if finished
+IF THIS^.State =	710 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	720 THEN
+	StartTransition_2();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	730 THEN
+	WaitForTransitionEnd_2();
+END_IF
+
+// 8		*********
+//Check if finished
+IF THIS^.State =	810 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	820 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	830 THEN
+	WaitForTransitionEnd_1();
+END_IF
+
+// 9		*********
+//Check if finished
+IF THIS^.State =	910 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	920 THEN
+	StartTransition_2();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	930 THEN
+	WaitForTransitionEnd_2();
+END_IF
+
+// 10	*********
+//Check if finished
+IF THIS^.State =	1010 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	1020 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	1030 THEN
+	WaitForTransitionEnd_1();
+END_IF
+
+//Finished
+IF THIS^.State = 1110 THEN
+	RunWithAutoRestore := TRUE;
+END_IF
+
+_TcoTask_Transition_1(Value:=Value);
+_TcoTask_Transition_2(Value:=Value);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunWithManualRestore" Id="{5e450a9b-67e2-08bd-008c-d9a424f4f46a}">
+      <Declaration><![CDATA[METHOD RunWithManualRestore : BOOL
+VAR_IN_OUT
+	Value	:	LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//This  method use only _TcoTask_Transition_1 task, so after each Done rising edge, needs to be restored manually in order to be used again in the next State in the same PLC cycle
+RunWithManualRestore := FALSE;
+
+//Init
+IF THIS^.State = -1 THEN
+	_ActualTransitionNumber := 0;
+	THIS^.ChangeState(10).RestoreObject(_TcoTask_Transition_1).RestoreObject(_TcoTask_Transition_2);	
+	_TcoTask_Transition_1(Value:=Value);	//Init rererence after first download
+END_IF
+
+// 0		*********
+//Check if finished
+IF THIS^.State = 	10 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State = 	20 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State = 	30 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 1		*********
+//Check if finished
+IF THIS^.State =	110 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	120 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	130 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 2		*********
+//Check if finished
+IF THIS^.State =	210 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	220 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	230 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 3		*********
+//Check if finished
+IF THIS^.State =	310 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	320 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	330 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 4		*********
+//Check if finished
+IF THIS^.State =	410 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	420 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	430 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 5		*********
+//Check if finished
+IF THIS^.State =	510 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	520 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	530 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 6		*********
+//Check if finished
+IF THIS^.State =	610 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	620 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	630 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 7		*********
+//Check if finished
+IF THIS^.State =	710 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	720 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	730 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 8		*********
+//Check if finished
+IF THIS^.State =	810 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	820 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	830 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 9		*********
+//Check if finished
+IF THIS^.State =	910 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	920 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	930 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+// 10	*********
+//Check if finished
+IF THIS^.State =	1010 THEN
+	CheckIfFinished();
+END_IF
+
+//Start transition
+IF THIS^.State =	1020 THEN
+	StartTransition_1();
+END_IF
+
+//Wait for transition end
+IF THIS^.State =	1030 THEN
+	WaitForTransitionEnd_1_AndRestore();
+END_IF
+
+//Finished
+IF THIS^.State = 1110 THEN
+	RunWithManualRestore := TRUE;
+END_IF
+
+_TcoTask_Transition_1(Value:=Value);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Action Name="StartTransition_1" Id="{576974f7-6f5c-0490-224c-67f75b88e160}">
+      <Implementation>
+        <ST><![CDATA[	CASE THIS^._WaveformPointTable[_ActualTransitionNumber].TransitionType OF
+		eTransitionType.Linear:
+			THIS^._TcoTask_Transition_1.StartLinear(THIS^._WaveformPointTable[_ActualTransitionNumber].TargetValue,
+													THIS^._WaveformPointTable[_ActualTransitionNumber].Duration);
+			THIS^.ChangeState(THIS^.State + 10);	
+		eTransitionType.Exponential:
+			THIS^._TcoTask_Transition_1.StartExponential(THIS^._WaveformPointTable[_ActualTransitionNumber].TargetValue,
+														 THIS^._WaveformPointTable[_ActualTransitionNumber].Duration,
+														 THIS^._WaveformPointTable[_ActualTransitionNumber].Shape);
+			THIS^.ChangeState(THIS^.State + 10);	
+		eTransitionType.S_Type:
+			THIS^._TcoTask_Transition_1.StartStype(THIS^._WaveformPointTable[_ActualTransitionNumber].TargetValue,
+												   THIS^._WaveformPointTable[_ActualTransitionNumber].Duration,
+												   THIS^._WaveformPointTable[_ActualTransitionNumber].Shape);
+			THIS^.ChangeState(THIS^.State + 10);	
+		ELSE
+			THIS^.ChangeState(1110);
+	END_CASE	
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="StartTransition_2" Id="{86b7578d-1aa2-0bfc-258f-f177137a17cf}">
+      <Implementation>
+        <ST><![CDATA[	CASE THIS^._WaveformPointTable[_ActualTransitionNumber].TransitionType OF
+		eTransitionType.Linear:
+			THIS^._TcoTask_Transition_2.StartLinear(THIS^._WaveformPointTable[_ActualTransitionNumber].TargetValue,
+													THIS^._WaveformPointTable[_ActualTransitionNumber].Duration);
+			THIS^.ChangeState(THIS^.State + 10);	
+		eTransitionType.Exponential:
+			THIS^._TcoTask_Transition_2.StartExponential(THIS^._WaveformPointTable[_ActualTransitionNumber].TargetValue,
+														 THIS^._WaveformPointTable[_ActualTransitionNumber].Duration,
+														 THIS^._WaveformPointTable[_ActualTransitionNumber].Shape);
+			THIS^.ChangeState(THIS^.State + 10);	
+		eTransitionType.S_Type:
+			THIS^._TcoTask_Transition_2.StartStype(THIS^._WaveformPointTable[_ActualTransitionNumber].TargetValue,
+												   THIS^._WaveformPointTable[_ActualTransitionNumber].Duration,
+												   THIS^._WaveformPointTable[_ActualTransitionNumber].Shape);
+			THIS^.ChangeState(THIS^.State + 10);	
+		ELSE
+			THIS^.ChangeState(1110);
+	END_CASE	]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="WaitForTransitionEnd_1" Id="{db8e4ae1-fe8c-0055-2106-3efdae0643ba}">
+      <Implementation>
+        <ST><![CDATA[	IF THIS^._TcoTask_Transition_1.Done THEN
+		_ActualTransitionNumber := _ActualTransitionNumber + 1;
+		THIS^.ChangeState(THIS^.State + 80);
+	END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="WaitForTransitionEnd_1_AndRestore" Id="{ac9079df-b6fc-021f-267b-999923a5e746}">
+      <Implementation>
+        <ST><![CDATA[	IF THIS^._TcoTask_Transition_1.Done THEN
+		_ActualTransitionNumber := _ActualTransitionNumber + 1;
+		THIS^.ChangeState(THIS^.State + 80).RestoreObject(_TcoTask_Transition_1);	
+	END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="WaitForTransitionEnd_2" Id="{0cfdc075-7fcf-0c52-1b9a-8d41333170bf}">
+      <Implementation>
+        <ST><![CDATA[	IF THIS^._TcoTask_Transition_2.Done THEN
+		_ActualTransitionNumber := _ActualTransitionNumber + 1;
+		THIS^.ChangeState(THIS^.State + 80);
+	END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="WaitForTransitionEnd_2_AndRestore" Id="{f6b0fabb-3e09-0c8b-3a92-98c96fce6a89}">
+      <Implementation>
+        <ST><![CDATA[	IF THIS^._TcoTask_Transition_2.Done THEN
+		_ActualTransitionNumber := _ActualTransitionNumber + 1;
+		THIS^.ChangeState(THIS^.State + 80).RestoreObject(_TcoTask_Transition_2);	
+	END_IF]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

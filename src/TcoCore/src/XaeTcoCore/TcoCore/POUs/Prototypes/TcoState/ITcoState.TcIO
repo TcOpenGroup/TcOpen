@@ -2,35 +2,20 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <Itf Name="ITcoState" Id="{c649817a-92de-4bd9-bb87-c0d72fad7509}">
     <Declaration><![CDATA[INTERFACE ITcoState EXTENDS ITcoObject, ITcoRestorable]]></Declaration>
-    <Method Name="ChangeState" Id="{736c5d1d-d3a0-4eb9-a1f6-eb86c1a20f8f}">
-      <Declaration><![CDATA[METHOD ChangeState : ITcoState
-VAR_INPUT
-	NewState : INT;
-END_VAR
-]]></Declaration>
-    </Method>
-    <Property Name="ChangeStateCycle" Id="{92216c9b-4911-48a2-a6ff-b6246c33da8c}">
-      <Declaration><![CDATA[PROPERTY ChangeStateCycle : ULINT]]></Declaration>
-      <Get Name="Get" Id="{78ddabb3-69a5-4bb1-a9d6-f1af6af00fdd}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
-    <Property Name="EnableAutoRestore" Id="{919401ee-55fe-4554-8ddf-1a407786ef18}">
-      <Declaration><![CDATA[PROPERTY EnableAutoRestore : BOOL]]></Declaration>
+    <Property Name="IsAutoRestoreEnabled" Id="{919401ee-55fe-4554-8ddf-1a407786ef18}">
+      <Declaration><![CDATA[PROPERTY IsAutoRestoreEnabled : BOOL]]></Declaration>
       <Get Name="Get" Id="{87b763ca-6a82-43eb-8730-8dd9412bbc83}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Method Name="OnStateChange" Id="{93559809-93bd-434a-8b11-9eed96ecef32}">
-      <Declaration><![CDATA[METHOD OnStateChange
-VAR_INPUT
-	PreviousState	: INT;
-	NewState 		: INT;
-END_VAR
-]]></Declaration>
-    </Method>
+    <Property Name="LastStateChangeCycle" Id="{92216c9b-4911-48a2-a6ff-b6246c33da8c}">
+      <Declaration><![CDATA[PROPERTY LastStateChangeCycle : ULINT]]></Declaration>
+      <Get Name="Get" Id="{78ddabb3-69a5-4bb1-a9d6-f1af6af00fdd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Method Name="RestoreObject" Id="{4a8a2884-a04a-427f-a212-93f7d99ca614}">
-      <Declaration><![CDATA[METHOD RestoreObject : ITcoState
+      <Declaration><![CDATA[METHOD RestoreObject : ITcoObjectRestorer
 VAR_INPUT
 	Obj : ITcoRestorable;
 END_VAR]]></Declaration>

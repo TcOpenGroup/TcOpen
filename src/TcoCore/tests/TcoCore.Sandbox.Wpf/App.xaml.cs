@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using TcoCoreTests;
+using TcoCoreExamples;
 
 namespace TcoCore.Sandbox.Wpf
 {
@@ -16,10 +16,11 @@ namespace TcoCore.Sandbox.Wpf
     {
         public App() : base()
         {
-            PlcTcoCoreTests.Connector.BuildAndStart();
+            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+            PlcTcoCoreExamples.Connector.BuildAndStart();
         }
 
-        public static TcoCoreTestsTwinController PlcTcoCoreTests { get { return Entry.PlcTcoCoreTests; } }
+        public static TcoCoreExamplesTwinController PlcTcoCoreExamples { get { return Entry.PlcTcoCoreExamples; } }
 
 
 

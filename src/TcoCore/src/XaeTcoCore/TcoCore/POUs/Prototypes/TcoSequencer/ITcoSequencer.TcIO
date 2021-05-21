@@ -1,32 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <Itf Name="ITcoSequencer" Id="{a8c5aaea-ce66-4699-94d6-6fc2b0db7583}">
-    <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITCoState
+    <Declaration><![CDATA[INTERFACE ITcoSequencer EXTENDS ITcoState
 ]]></Declaration>
-    <Method Name="GoTo" Id="{a244bce3-185f-46eb-9036-dc127d26bd08}">
-      <Declaration><![CDATA[METHOD GoTo
-VAR_INPUT
-	Step : INT;
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="MoveToNext" Id="{87266e09-a85e-45fc-bcc5-e3bf32501bbd}">
-      <Declaration><![CDATA[METHOD MoveToNext : REFERENCE TO ITcoResetable
-]]></Declaration>
-    </Method>
-    <Method Name="StepBackward" Id="{681ee00d-31c9-4717-8a4f-6c756dfb644e}">
-      <Declaration><![CDATA[METHOD StepBackward
-]]></Declaration>
-    </Method>
-    <Method Name="StepForward" Id="{e42d91dc-e4a6-4639-a3ad-03d2d977e251}">
-      <Declaration><![CDATA[METHOD StepForward
-]]></Declaration>
-    </Method>
-    <Method Name="StepIn" Id="{a6cd8de1-6571-4c77-9297-440aa85f6f9a}">
-      <Declaration><![CDATA[METHOD StepIn
-VAR_INPUT
-END_VAR
-]]></Declaration>
+    <Property Name="CurrentStep" Id="{9693bfe8-b533-07e4-0b7f-afb04386f3c0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the information about the current step.						
+		</summary>				
+	</docu>	
+~*)
+PROPERTY CurrentStep : REFERENCE TO StepDetails]]></Declaration>
+      <Get Name="Get" Id="{d55c7f61-ec4e-07a2-2f32-e75c01fe1a25}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="ModeController" Id="{dd9b56ed-8b06-0f8b-10a4-bc7f86421e90}">
+      <Declaration><![CDATA[PROPERTY ModeController : ITcoSequencerModeController]]></Declaration>
+      <Get Name="Get" Id="{c118fb9b-2261-0bb2-3940-3e2e9974072b}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Run" Id="{c085653a-ddfd-0ace-0d80-e733121bd868}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Ensures calling the Open(), Main() and Close() methods in the desired order.
+				This method is final, so it cannot be overloaded. The InstanceName.Run() needs to be called cyclically inside the appropriate context.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL Run]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>

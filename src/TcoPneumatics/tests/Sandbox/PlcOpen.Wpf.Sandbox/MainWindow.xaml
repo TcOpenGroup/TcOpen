@@ -14,7 +14,12 @@
     mc:Ignorable="d">
     <TabControl>
         <TabItem Header="Base">
-            <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Manual" />
+            <StackPanel Grid.IsSharedSizeScope="True">
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Manual" />
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder_1}" PresentationType="Manual" />
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder_2}" PresentationType="Manual" />
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder_3}" PresentationType="Manual" />
+            </StackPanel>
         </TabItem>
         <TabItem Header="Standard">
             <UniformGrid Columns="1" Rows="2">
@@ -45,9 +50,16 @@
             </UniformGrid>
         </TabItem>
         <TabItem Header="Customized">
-            <Grid IsSharedSizeScope="true">
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
-            </Grid>
+            <StackPanel>
+                <GroupBox Header="Sample piston" Padding="10" Margin="10">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Diagnostics" Padding="10" Margin="10">
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                </GroupBox>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>

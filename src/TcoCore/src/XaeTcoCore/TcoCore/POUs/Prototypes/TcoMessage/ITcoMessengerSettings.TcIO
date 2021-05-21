@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoMessengerSettings" Id="{6d6b9064-8fe9-0b02-00be-c0f0ff54eeb4}">
+    <Declaration><![CDATA[INTERFACE ITcoMessengerSettings
+]]></Declaration>
+    <Property Name="IsSuspended" Id="{154b3f83-5ad6-0af7-30ee-bb7fbba61c91}">
+      <Declaration><![CDATA[PROPERTY IsSuspended : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f4387df2-7158-0155-1a2d-255a7974d7ab}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="MinLevel" Id="{affff53c-8111-0dde-30b4-02bee538a109}">
+      <Declaration><![CDATA[PROPERTY MinLevel : eMessageCategory]]></Declaration>
+      <Get Name="Get" Id="{229f0b50-4658-067e-0200-914aca38739d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{39ad8fc0-c4c1-0ff8-112c-8be3a37d8762}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Method Name="Resume" Id="{7e5e1860-858e-0160-39b2-f7bfc3ac189a}">
+      <Declaration><![CDATA[METHOD Resume : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Suspend" Id="{d170a192-4a15-0a78-14b9-e61ea3ece139}">
+      <Declaration><![CDATA[METHOD Suspend
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

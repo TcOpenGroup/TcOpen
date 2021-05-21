@@ -7,7 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	_Chn : EL922x_ChannelBasic;
+	_Chn : EL922x_ChannelBasic;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -158,44 +158,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FuseChannelBasic">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.CoolDownLock.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.CurrentLevelWarning.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.Diag.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.Enabled.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.Error.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.HardwareProtection.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.ResetFuse">
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.StateReset.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.StateSwitch.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.SwitchFuse">
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.Tripped.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelBasic.TxPDOState.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

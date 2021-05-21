@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="PlcAppExamples.InvokingTasks201"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
+    xmlns:vortex="http://vortex.mts/xaml"
+    DataContext="{x:Static local:App.PlcAppExamples}"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="10">
+        <mdxam:MarkdownScrollViewer xml:space="preserve" MarkdownStyleName="Sasabune">
+		    # Invoking Task
+		     [Documentation](https://github.com/Inxton/TcOpen.Documentation/blob/dev/articles/TcOpenFramework/application.md#tasks-tcotask--itcotask)
+                
+			Task allows you to control chunks of logic in asynchronous execution.
+            In this example, we have a Component - Pneumatic Cylinder. This component is doing three things,therefore it has three tasks.
+            One task for moving home, second for moving work and last for stopping the movement
+            When they're done you can reset them and run again.
+            Tasks also implement ICommand interface, ICommand is an interface between the Presentation and the Logic layer,so clicking a button will result in an action
+            Bellow the view for a cylinder, you can see a detailed view for each action. Once is done, it has to be restored, to run again.
+          
+	</mdxam:MarkdownScrollViewer>
+
+        <Separator Height="10" />
+        <Grid>
+            <vortex:RenderableContentControl DataContext="{Binding MAIN_PRG._TcOpenTutorial.InvokingTasks}" />
+        </Grid>
+    </StackPanel>
+</UserControl>

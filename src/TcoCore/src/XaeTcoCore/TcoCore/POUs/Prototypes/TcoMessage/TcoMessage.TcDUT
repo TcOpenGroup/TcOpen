@@ -1,17 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
-    <Declaration><![CDATA[TYPE TcoMessage :
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Complete message details including time stamp, message text, message category, identity of the message provider, context cycle in which the message was posted.			
+		</summary>				
+	</docu>	
+~*)
+TYPE TcoMessage :
 STRUCT
+(*~
+	<docu>
+		<summary>
+			Time when the message was posted.
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}
 	TimeStamp : DT;
+(*~
+	<docu>
+		<summary>
+			Text of the message.
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}		
-	Text : STRING(255);
+	Text : STRING(125);
+(*~
+	<docu>
+		<summary>
+			Identity of the TcoObject that posted this message. 
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}	
 	Identity : ULINT;	
+(*~
+	<docu>
+		<summary>
+			Message category of this message. See <see cref="eMessageCategory"/> for detailed informations. 
+		</summary>				
+	</docu>	
+~*)
 	Category : eMessageCategory;
+(*~
+	<docu>
+		<summary>
+			Context cycle in which the message was posted.
+		</summary>				
+	</docu>	
+~*)
 	{attribute clr [ReadOnly()]}
 	Cycle : ULINT;
+	
+(*~
+	<docu>
+		<summary>
+			Count of messages of the object in the current cycle.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}
+	PerCycleCount : BYTE;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

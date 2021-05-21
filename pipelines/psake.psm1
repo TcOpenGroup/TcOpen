@@ -142,6 +142,7 @@ function Exec
     do {
         try {
             $global:lastexitcode = 0
+            Write-Host ($ExecutionContext.InvokeCommand.ExpandString($cmd).Trim())
             & $cmd
             if ($lastexitcode -ne 0) {
                 throw ("Exec: " + $errorMessage)

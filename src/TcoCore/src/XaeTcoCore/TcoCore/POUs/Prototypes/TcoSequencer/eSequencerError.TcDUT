@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eSequencerError" Id="{d003a61e-aba3-097a-339c-fbaf7db1eb91}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Describes cause of the sequencer error.
+		</summary>				
+	</docu>	
+~*)
+{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eSequencerError :
+(
+(*~
+	<docu>
+		<summary>
+			No error.
+		</summary>				
+	</docu>	
+~*)	
+	noError := 0,
+(*~
+	<docu>
+		<summary>
+			Some of the StepId in the sequence is not unique (```TcoSequencer.Step(StepID)```).
+		</summary>				
+	</docu>	
+~*)	
+	NotUniqueStepId := 10,
+(*~
+	<docu>
+		<summary>
+			StepId of the currently executed step has been changed during execution.
+		</summary>				
+	</docu>	
+~*)
+	StepIdHasBeenChanged := 20,
+(*~
+	<docu>
+		<summary>
+			Order of the currently executed step has been changed during execution.
+		</summary>				
+	</docu>	
+~*)
+	OrderOfTheStepHasBeenChanged := 40,
+(*~
+	<docu>
+		<summary>
+			Method ```RequestStep``` has been called with nonexisting StepId.
+		</summary>				
+	</docu>	
+~*)
+	StepWithRequestedIdDoesNotExists := 50,
+(*~
+	<docu>
+		<summary>
+			Multiple simultaneous calls of ```RequestStep()```. Another ```RequestStep()``` method has been called while previous ```RequestStep()``` call has not yet been completed.
+		</summary>				
+	</docu>	
+~*)
+	MultipleRequestStepMethodCall := 60,
+(*~
+	<docu>
+		<summary>
+			StepId is bellow min. range. Minimal value is -32767.
+		</summary>				
+	</docu>	
+~*)
+	StepIdTooLow := 70,
+(*~
+	<docu>
+		<summary>
+			StepId is above max range. Maximal value is 32766.
+		</summary>				
+	</docu>	
+~*)
+	StepIdTooHigh := 80,
+(*~
+	<docu>
+		<summary>
+			Mode of the sequencer is invalid.
+		</summary>				
+	</docu>	
+~*)
+	InvalidSequencerMode := 90
+);
+END_TYPE
+ ]]></Declaration>
+  </DUT>
+</TcPlcObject>

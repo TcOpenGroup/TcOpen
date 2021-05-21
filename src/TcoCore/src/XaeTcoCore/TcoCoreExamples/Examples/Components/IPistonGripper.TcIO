@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="IPistonGripper" Id="{ccfb8387-bc57-0c8d-2774-5d93bca1f648}">
+    <Declaration><![CDATA[INTERFACE IPistonGripper
+]]></Declaration>
+    <Folder Name="Gripper" Id="{876b84e8-9533-0895-3053-8d7d5f87e8c2}" />
+    <Method Name="Close" Id="{f5b26b0b-7fa2-0f10-3599-0e58033f47d2}" FolderPath="Gripper\">
+      <Declaration><![CDATA[METHOD Close : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+    </Method>
+    <Method Name="Open" Id="{6be07815-b97a-01f3-343f-f606e4492b30}" FolderPath="Gripper\">
+      <Declaration><![CDATA[METHOD Open : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

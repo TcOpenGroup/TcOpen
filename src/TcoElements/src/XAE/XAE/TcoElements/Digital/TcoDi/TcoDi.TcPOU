@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDi" Id="{940ec0d0-0377-0ad5-2841-be1fc78a02da}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+				Generic component for monitoring of an input. (e.g. DigitalSensor).												
+		</summary>				
+	</docu>	
+~*)	
+FUNCTION_BLOCK TcoDi EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Input signal. Typically an `%I*` variable. 												
+		</summary>				
+	</docu>	
+	~*)
+	inoSignal : BOOL;
+END_VAR
+
+VAR
+	(*~
+	<docu>
+		<summary>
+			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
+		</summary>				
+	</docu>	
+	~*)
+	_signal : BOOL;	
+END_VAR
+
+VAR
+	_signalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Check On#>"}
+	{attribute addProperty ToolTip "<#Checks that the input is on#>"}
+	_isTrueTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty ToolTip "<#Checks that the input is off#>"}
+	{attribute addProperty Name "<#Check Off#>"}
+	_isFalseTask : TcoCore.TcoTask(THIS^);
+
+	_config : TcoDiConfig;
+
+	_isFalseTimeOutTimers : Tc2_Standard.TON;
+	_isTrueTimeOutTimers : Tc2_Standard.TON;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
+	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+	_signal := inoSignal;	
+END_IF;	
+
+
+IF(_isTrueTask.Execute())THEN
+	_isTrueTask.DoneWhen(IsTrue);
+END_IF
+
+IF(_isFalseTask.Execute())THEN
+	_isFalseTask.DoneWhen(IsFalse);
+END_IF]]></ST>
+    </Implementation>
+    <Folder Name="Status" Id="{399b397c-b6b2-0664-0b0b-0fee705f77b1}" />
+    <Property Name="Config" Id="{c8f4355b-e49f-0bb4-0646-dd6b154ddf1c}">
+      <Declaration><![CDATA[PROPERTY Config : REFERENCE TO TcoDiConfig]]></Declaration>
+      <Get Name="Get" Id="{5fd5b11d-835a-051e-285c-523188175df9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{ab66c675-5325-0f32-2184-6fc98948f748}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsFalse" Id="{ec2f8868-7b72-099e-3c52-ecac20627405}" FolderPath="Status\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets 'true' when monitor signal is 'off/false/logical 0'.
+			Generates message when the returning 'false'.											
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'monitoring' := 'variable'}
+PROPERTY IsFalse : BOOL]]></Declaration>
+      <Get Name="Get" Id="{5dc82cbc-c761-07b9-164e-01989022f16b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsFalse := NOT _signal;
+_isFalseTimeOutTimers(IN := NOT IsFalse, PT := _config.IsFalseTimeOut); 
+IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;
+IF(_isFalseTimeOutTimers.Q) THEN Messenger.Warning('<#Expecting `negative` signal#>'); END_IF;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsTrue" Id="{ab525802-f6c2-0477-297c-4b1c69c11f23}" FolderPath="Status\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets 'true' when monitor signal is 'on/true/logical 1'.
+			Generates message when the returning 'false'.											
+		</summary>				
+	</docu>	
+~*)	
+{attribute 'monitoring' := 'variable'}
+PROPERTY IsTrue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{260c107a-8454-0d57-3f95-b0c3b180f288}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsTrue := _signal;
+_isTrueTimeOutTimers(IN := NOT IsTrue, PT := _config.IsFalseTimeOut); 
+IF(NOT IsTrue) THEN Messenger.Info('<#Expecting `positive` signal#>'); END_IF;
+IF(_isTrueTimeOutTimers.Q) THEN Messenger.Warning('<#Expecting `positive` signal#>'); END_IF;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{19478393-8665-053e-2aa6-99986ee029e0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// No implementation needed for this componet.]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{27fb8047-ad11-0e35-19c9-b36842b34792}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

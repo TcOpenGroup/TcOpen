@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="fbPistonMoveTask" Id="{0b68a520-11c2-033f-1738-0189039112a4}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute addProperty Activity "task is running"}
+FUNCTION_BLOCK fbPistonMoveTask EXTENDS TcoCore.TcoTask
+VAR_INPUT
+	PositionSensor : BOOL;
+END_VAR
+VAR_IN_OUT
+	MoveToPositionSignal : BOOL;
+	InverseSignal : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(THIS^.Execute())THEN
+	THIS^.Messenger.Debug('|[[1]AttributeName]| |[AttributeActivity]|, extremity sensor not reached yet.');
+	InverseSignal := FALSE;
+	MoveToPositionSignal := TRUE;
+	ThrowWhen(THIS^.ElapsedTime > T#5S);
+	THIS^.DoneWhen(PositionSensor);
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

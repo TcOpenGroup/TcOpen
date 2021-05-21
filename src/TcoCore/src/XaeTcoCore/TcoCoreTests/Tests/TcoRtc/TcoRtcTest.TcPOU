@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoRtcTest" Id="{422101bf-9bdb-02c4-0505-5d211f35b9e7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoRtcTest EXTENDS TcoCore._internals_TcoContext
+VAR
+	_callMyPlcInstanceSync	:	BOOL := FALSE;
+	_callMyPlcInstanceRun	:	BOOL := FALSE;
+	_myIdentity				:	ULINT;	
+	_nowLocal				:	DATE_AND_TIME;
+	_nowUtc					:	DATE_AND_TIME;
+	_rtcIsValid				:	BOOL := FALSE;
+	_rtcIsSynchronized		:	BOOL := FALSE;
+	_rtcSynchParamsSet		:	TcoCore.RtcSynchParams;
+	_rtcSynchParamsGet		:	TcoCore.RtcSynchParams;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF THIS^._callMyPlcInstanceSync THEN
+	THIS^.RtcSynchronize(_rtcSynchParamsSet.doSynch,_rtcSynchParamsSet.syncAmsId,_rtcSynchParamsSet.syncPeriod);
+END_IF
+
+IF THIS^._callMyPlcInstanceRun THEN
+	THIS^.Run();
+	_nowLocal			:=	THIS^.Rtc.NowLocal();
+	_nowUtc				:=	THIS^.Rtc.NowUTC();
+	_rtcIsValid			:=	THIS^.Rtc.IsValid;
+	_rtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+	_myIdentity			:=	THIS^.Identity;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <Method Name="GetSynchParams" Id="{43774be5-16e1-0926-1900-f0d18d06faf5}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL GetSynchParams
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_rtcSynchParamsGet := SUPER^._GetSynchParams();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{ab154a48-9ac1-0c37-230b-2e533fa7520e}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowLocal" Id="{f0f7feae-fd4c-0752-2e52-d4f3673f6f89}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL NowLocal ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_nowLocal := THIS^.Rtc.NowLocal();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NowUtc" Id="{4d15ee95-7f3e-081c-2de7-138c5254d6a7}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL NowUtc ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_nowUtc := THIS^.Rtc.NowUTC();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RtcIsSynchronized" Id="{9de41ec0-7d16-00fc-36c5-1766b55aec78}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL RtcIsSynchronized : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RtcIsSynchronized := THIS^.Rtc.IsSynchronized;
+_rtcIsSynchronized := THIS^.Rtc.IsSynchronized;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RtcIsValid" Id="{afc935ba-1696-0021-0046-4e4809990779}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL RtcIsValid : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
+_rtcIsValid := THIS^.Rtc.IsValid;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TickClock" Id="{396b1245-0012-0d3d-2e99-6b4b82f03984}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TickClock : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TickClock := Tc2_EtherCAT.DCTIME64_TO_STRING(THIS^.Rtc.TickClock());]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

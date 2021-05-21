@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MAIN" Id="{32b68bc5-5a7d-02c8-20e5-0d5146c25300}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	_tcoDigitalSensorTests : TcoDiTests;
+	_tcoDigitalActuatorTests : TcoDoTests;
+	_tcoElementsSandbox : TcoElementsSandbox;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_tcoDigitalSensorTests.ProbeRun();
+_tcoDigitalActuatorTests.ProbeRun();
+
+_tcoElementsSandbox.Run();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

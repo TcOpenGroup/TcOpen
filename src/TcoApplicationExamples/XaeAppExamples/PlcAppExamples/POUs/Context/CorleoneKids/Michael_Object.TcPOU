@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Michael_Object" Id="{4c0a62cd-ee12-0af2-0f50-d0a59ed93ea5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Michael_Object EXTENDS TcoCore.TcoObject
+VAR
+	_anthony	:	AKid_Object(THIS^);
+	_mary		:	AKid_Object(THIS^);	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

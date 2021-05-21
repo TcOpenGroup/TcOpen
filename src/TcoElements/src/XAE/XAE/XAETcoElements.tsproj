@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.15">
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
+					<Name>PlcTask1</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{BF3E9621-3F23-47E0-B5CF-D3280EF53276}" Name="TcoElements" PrjFilePath="TcoElements\TcoElements.plcproj" TmcFilePath="TcoElements\TcoElements.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElements\TcoElements.tmc">
+					<Name>TcoElements Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project GUID="{84AF4B0E-F835-4083-910E-C0AA0BB9E50D}" Name="TcoElementsTests" PrjFilePath="TcoElementsTests\TcoElementsTests.plcproj" TmcFilePath="TcoElementsTests\TcoElementsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElementsTests\TcoElementsTests.tmc">
+					<Name>TcoElementsTests Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>IO.A1._1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._8</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>IO.A2._1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._8</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>21</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="21" OTCID="#x08502041"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoMessengerContextTest" Id="{ab1f1c15-693e-0b9d-1dc8-8f3fbcb09dcf}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerContextTest EXTENDS TcoCore._internals_TcoContext
+VAR
+	_callMyPlcInstanceRtcUpdate	:	BOOL := FALSE;
+	_callMyPlcInstanceRun		:	BOOL := FALSE;
+	_nowLocal					:	DATE_AND_TIME;
+	_nowUtc						:	DATE_AND_TIME;
+	_rtcIsValid					:	BOOL := FALSE;
+	_rtcIsSynchronized			:	BOOL := FALSE;
+	_tcoMessangerTests			:	TcoMessengerTests(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF THIS^._callMyPlcInstanceRtcUpdate THEN
+	THIS^._rtcUpdate();
+	_nowLocal			:=	THIS^.Rtc.NowLocal();
+	_nowUtc				:=	THIS^.Rtc.NowUTC();
+	_rtcIsValid			:=	THIS^.Rtc.IsValid;
+	_rtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+END_IF
+
+IF THIS^._callMyPlcInstanceRun THEN
+	THIS^.Run();
+END_IF
+
+]]></ST>
+    </Implementation>
+    <Method Name="ContextClose" Id="{4f2fdfc4-fcab-0528-13d7-8604dcba8327}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ContextClose
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._Close();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ContextOpen" Id="{89a806dd-7d63-036b-0493-cf31446222af}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ContextOpen
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._Open();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{ce1913c5-df6b-0aa3-3f90-ae6b899c0533}">
+      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RtcIsValid" Id="{26119aec-f827-0ffc-3e54-5571e4e4da19}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL RtcIsValid : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
+_rtcIsValid := THIS^.Rtc.IsValid;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

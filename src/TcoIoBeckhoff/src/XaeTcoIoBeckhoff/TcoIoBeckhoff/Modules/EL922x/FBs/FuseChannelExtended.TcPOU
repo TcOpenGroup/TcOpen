@@ -7,7 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	_ChnEx : EL922x_ChannelExtended;
+	_ChnEx : EL922x_ChannelExtended;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -130,35 +130,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FuseChannelExtended">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.DisabledByDI.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.DisabledByOutput.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.DisabledBySwitch.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.Overload.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.Overvoltage.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.ShortCircuit.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.StateDeviceSwitch.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.StateDigitalInput.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FuseChannelExtended.Undervoltage.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
