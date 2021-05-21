@@ -6,6 +6,9 @@ namespace TcoPneumatics
 {
     public partial class Cylinder
     {
-        public int TimeToReachPosition { get; set; } = 500;
+       public void Simulate()
+       {
+            
+       }
     }
 }

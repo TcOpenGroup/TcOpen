@@ -15,25 +15,26 @@ VAR
 	_status : CylinderStatus;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Disables mutually exclusive actions
+      <ST><![CDATA[SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);
+// Disables mutually exclusive actions
 _moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
 _moveWorkDefault.Enabled := NOT _moveHomeDefault.Busy;
 
-_moveHomeDefault(PositionSensor := inAtHomePos,
-    MoveToPositionSignal := outToHomePos,
-    InverseSignal := outToWorkPos,
+_moveHomeDefault(PositionSensor := _atHomePos,
+    MoveToPositionSignal := _toHomePos,
+    InverseSignal := _toWorkPos,
     MaxTimeToReachPosition := _config.TimeToReachHomePosition,
     PositionName := '<#Home#>');
 		
-_moveWorkDefault(PositionSensor := inAtWorkPos,
-    MoveToPositionSignal := outToWorkPos,
-    InverseSignal := outToHomePos,
+_moveWorkDefault(PositionSensor := _atWorkPos,
+    MoveToPositionSignal := _toWorkPos,
+    InverseSignal := _toHomePos,
     MaxTimeToReachPosition := _config.TimeToReachWorkPosition,
     PositionName := '<#Work#>');
 
 IF (_stopDefault.Execute()) THEN
-	outToHomePos := FALSE;
-	outToWorkPos := FALSE;
+	_toHomePos := FALSE;
+	_toWorkPos := FALSE;
     _moveHomeDefault.Abort();
     _moveWorkDefault.Abort();
     _stopDefault.Abort();
@@ -52,7 +53,9 @@ ELSIF(_stopDefault.Busy) THEN
 	_status.ActionDescription := 'Stopping pressure';
 ELSE	
 	_status.ActionDescription := 'Idle';
-END_IF]]></ST>
+END_IF
+
+SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);]]></ST>
     </Implementation>
     <Property Name="Config" Id="{4900e490-aca6-01f6-34b5-8e88d5861bd7}">
       <Declaration><![CDATA[(*~

@@ -24,7 +24,10 @@
                 <cylinders:CylinderMainView DataContext="{Binding}" />
             </Expander.Header>
             <StackPanel>
-                <TextBlock Text="{Binding Component._messenger._mime.Text.Cyclic}" />
+                <tcoCore:TcoSignalInfoView DataContext="{Binding Component._atHomePosSignalInfo}"></tcoCore:TcoSignalInfoView>
+                <tcoCore:TcoSignalInfoView DataContext="{Binding Component._atWorkPosSignalInfo}"></tcoCore:TcoSignalInfoView>
+                <tcoCore:TcoSignalInfoView DataContext="{Binding Component._toHomePosSignalInfo}"></tcoCore:TcoSignalInfoView>
+                <tcoCore:TcoSignalInfoView DataContext="{Binding Component._toWorkPosSignalInfo}"></tcoCore:TcoSignalInfoView>
             </StackPanel>
         </Expander>
         <Separator Margin="5" />
