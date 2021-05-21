@@ -30,6 +30,16 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Sandbox\HW_Modules\InputsBase_8.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sandbox\HW_Modules\OutputsBase_8.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sandbox\IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="Sandbox\TcoElementsSandbox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -42,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sandbox" />
+    <Folder Include="Sandbox\HW_Modules" />
     <Folder Include="Tests" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

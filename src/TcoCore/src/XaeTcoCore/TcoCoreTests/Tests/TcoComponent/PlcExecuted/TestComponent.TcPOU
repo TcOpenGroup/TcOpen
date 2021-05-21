@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TestComponent" Id="{4f004e63-6d49-073d-3db2-78e2692362d9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TestComponent EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+	_signal : BOOL;
+END_VAR
+VAR
+	_signalInfo : TcoCore.TcoSignalInfo;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_signalInfo := THIS^.GetSignalInfo(SIZEOF(_signal), ADR(_signal));]]></ST>
+    </Implementation>
+    <Method Name="Restore" Id="{6ab39057-f575-055f-1d06-109a6dd5fc68}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{45b219fe-c35f-04b2-2f9b-1460cf26b4d9}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

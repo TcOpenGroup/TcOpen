@@ -31,6 +31,15 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoComponent\PlcExecuted\eTcoComponentTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoComponent\PlcExecuted\TcoComponentTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoComponent\PlcExecuted\TestComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoComponent\TcoComponentTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
     <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />

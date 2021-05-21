@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoSignalInfo" Id="{25268e03-6f9c-0c12-1687-c3af09c1cf34}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Contains symbol information about a I/O signal provided by `TcoComponent.GetSignalInfo()` method.
+			<note type="important">
+				 `SymbolPath` can only contain string of 255 characters.			
+			</note>
+			<note type="tip">
+				 This structure is partially extended by IVF to provide more information about the symbol.			
+			</note>
+		</summary>				
+	</docu>	
+~*)
+TYPE TcoSignalInfo :
+STRUCT
+	(*~
+	<docu>
+		<summary>
+			Symbol path of the Signal.
+			<note type="important">
+				 SymbolPath can only contain string of 255 characters.			
+			</note>			
+		</summary>				
+	</docu>	
+~*)
+	SymbolPath : STRING[255];
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

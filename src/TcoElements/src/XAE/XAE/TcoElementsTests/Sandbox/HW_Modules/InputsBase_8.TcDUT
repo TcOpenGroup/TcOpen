@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="InputsBase_8" Id="{bfb79966-ab7d-0478-07cb-81344a4cc704}">
+    <Declaration><![CDATA[TYPE InputsBase_8 :
+STRUCT
+	{attribute addProperty Name "1"}
+	_1 AT %I* : BOOL;
+	{attribute addProperty Name "2"}
+	_2 AT %I* : BOOL;
+	{attribute addProperty Name "3"}
+	_3 AT %I* : BOOL;
+	{attribute addProperty Name "4"}
+	_4 AT %I* : BOOL;
+	{attribute addProperty Name "5"}
+	_5 AT %I* : BOOL;
+	{attribute addProperty Name "6"}
+	_6 AT %I* : BOOL;
+	{attribute addProperty Name "7"}
+	_7 AT %I* : BOOL;
+	{attribute addProperty Name "8"}
+	_8 AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

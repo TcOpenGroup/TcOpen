@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoComponentTestContext" Id="{d9b91383-f3ba-02bf-3371-fb3da801fc57}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoComponentTestContext EXTENDS TcoCore._internals_TcoContext
+VAR	
+    _sut : TestComponent(THIS^);
+	{attribute addProperty Name "--Some IO signal"}
+	_signal : BOOL;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{d6ce3f3d-729e-0c45-285b-5f1b5d239c1e}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+	eTcoComponentTests.GetSignalInfo:
+		_sut(_signal := _signal);
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
