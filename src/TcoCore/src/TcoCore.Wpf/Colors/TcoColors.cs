@@ -30,7 +30,7 @@ namespace TcoCore.Wpf
 
 
         private static Brush GetDynamicBrush(string brushResourceKey, Brush fallBackBrush) =>
-            Application.Current.TryFindResource(brushResourceKey)?.As<Brush>() ?? fallBackBrush;
+            Application.Current?.TryFindResource(brushResourceKey)?.As<Brush>() ?? fallBackBrush;
 
         private static Color GetDynamicColor(string colorKey, Color fallbackColor)
         {
@@ -46,7 +46,7 @@ namespace TcoCore.Wpf
 
         }
 
-        private static Brush BrushFromHex(string hex) => new SolidColorBrush(ColorFromHex(hex));
+        private static Brush BrushFromHex(string hex) => new SolidColorBrush(ColorFromHex(hex)).Apply(x => x.Freeze());
         private static Color ColorFromHex(string hex) => (Color)ColorConverter.ConvertFromString(hex);
     }
 
@@ -74,6 +74,11 @@ namespace TcoCore.Wpf
     internal static class ObjectExtensions
     {
         public static T As<T>(this object @this) where T : class => (@this as T);
+        public static T Apply<T>(this T @this, Action<T> func)
+        {
+            func.Invoke(@this);
+            return @this;
+        }
 
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> predicate)
         {
