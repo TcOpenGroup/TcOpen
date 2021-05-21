@@ -10,10 +10,10 @@
     <UserControl.DataContext>
         <tcocore:TcoSignalInfo></tcocore:TcoSignalInfo>
     </UserControl.DataContext>
-    <StackPanel>
-        <WrapPanel>
+    <GroupBox Header="{Binding Converter={local:NameOrSymbolConverter}}">
+        <UniformGrid Rows="0" Columns="2">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Signal.HumanReadable}"></TextBlock>
             <vortex:RenderableContentControl DataContext="{Binding Signal}" PresentationType="DisplaySlim"></vortex:RenderableContentControl>
-        </WrapPanel>
-    </StackPanel>
+        </UniformGrid>
+    </GroupBox>
 </UserControl>

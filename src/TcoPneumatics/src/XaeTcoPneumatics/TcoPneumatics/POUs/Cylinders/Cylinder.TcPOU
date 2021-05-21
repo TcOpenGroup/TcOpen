@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Cylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Cylinder EXTENDS CylinderBase
 VAR
-    {attribute addProperty Name "<#Request move to Home position#>"}
+    {attribute addProperty Name "<#Move Home#>"}
     _moveHomeDefault : CylinderMoveTask(THIS^);
-    {attribute addProperty Name "<#Request move to Work position#>"}
+    {attribute addProperty Name "<#Move to Work#>"}
     _moveWorkDefault : CylinderMoveTask(THIS^);
-    {attribute addProperty Name "<#Request Stop#>"}
+    {attribute addProperty Name "<#Stop#>"}
     _stopDefault : TcoCore.TcoTask(THIS^);
 END_VAR
 VAR
@@ -16,8 +16,8 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);
-// Disables mutually exclusive actions
-_moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
+
+// Disables mutualy exclusive actions
 _moveWorkDefault.Enabled := NOT _moveHomeDefault.Busy;
 
 _moveHomeDefault(PositionSensor := _atHomePos,
@@ -25,7 +25,10 @@ _moveHomeDefault(PositionSensor := _atHomePos,
     InverseSignal := _toWorkPos,
     MaxTimeToReachPosition := _config.TimeToReachHomePosition,
     PositionName := '<#Home#>');
-		
+
+// Disables mutualy exclusive actions		
+_moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
+	
 _moveWorkDefault(PositionSensor := _atWorkPos,
     MoveToPositionSignal := _toWorkPos,
     InverseSignal := _toHomePos,
