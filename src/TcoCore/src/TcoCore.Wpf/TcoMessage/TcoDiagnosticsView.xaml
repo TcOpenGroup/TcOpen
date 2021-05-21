@@ -7,11 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:vtr="clr-namespace:TcoCore"
-    mc:Ignorable="d"
     d:DesignHeight="450"
-    d:DesignWidth="800">
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <vtr:TcoDiagnosticsViewModel/>
+        <vtr:TcoDiagnosticsViewModel />
     </d:UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,28 +19,31 @@
             <RowDefinition Height="150" MaxHeight="300" />
             <RowDefinition Height="10" />
             <RowDefinition Height="50*" />
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <ComboBox
                 Grid.Column="0"
-            Margin="0,0,0,10"
-            ItemsSource="{Binding Categories}"
-            SelectedItem="{Binding MinMessageCategoryFilter}"
-            Tag="{x:Static loc:Localization.MinCategoryFilter}" />
+                Margin="0,0,0,10"
+                ItemsSource="{Binding Categories}"
+                SelectedItem="{Binding MinMessageCategoryFilter}"
+                Tag="{x:Static loc:Localization.MinCategoryFilter}" />
             <ToggleButton
+                Grid.Column="1"
                 Margin="10"
+                Content="{x:Static loc:Localization.AutoUpdate}"
                 IsChecked="{Binding AutoUpdate}"
-                Grid.Column="1" Content="{x:Static loc:Localization.AutoUpdate}" Visibility="Collapsed"></ToggleButton>
+                Visibility="Collapsed" />
             <Button
+                Grid.Column="2"
                 Margin="10"
                 Command="{Binding UpdateMessagesCommand}"
-                Grid.Column="2" Content="{x:Static loc:Localization.UpdateMessages}"></Button>
+                Content="{x:Static loc:Localization.UpdateMessages}" />
         </Grid>
         <DataGrid
             Grid.Row="1"
@@ -141,7 +144,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <ComboBox ItemsSource="{Binding PresentationTypes}" SelectedValue="{Binding AffectedObjectPresentationType}" Tag="Presentation type" Margin="0,10,0,10">
-                       
+
                     </ComboBox>
                     <ScrollViewer Grid.Row="1">
                         <ContentControl Content="{Binding AffectedObject}"/>
@@ -149,11 +152,13 @@
                 </Grid>
             </Expander>-->
         </Grid>
-        <TextBlock Grid.Row="4" Text="{x:Static loc:Localization.DiagnosticsRunnig}" 
-                   HorizontalAlignment="Stretch"
-                   Padding="5"
-                   Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}"
-                   Background="{DynamicResource Warning}"
-                   Foreground="{DynamicResource OnWarning}"/>
+        <TextBlock
+            Grid.Row="4"
+            Padding="5"
+            HorizontalAlignment="Stretch"
+            Background="{DynamicResource Warning}"
+            Foreground="{DynamicResource OnWarning}"
+            Text="{x:Static loc:Localization.DiagnosticsRunnig}"
+            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />
     </Grid>
 </UserControl>
