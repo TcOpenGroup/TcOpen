@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="TcoToggleTask" Id="{1a8727de-27c5-0d52-31ab-c70631101d5b}" SpecialFunc="None">
+  <POU Name="TcoMomentaryTask" Id="{2b3dea90-2b25-0f42-3297-e3bc662ebad1}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Provides basic toggling between two states. It could be triggered by calling the <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method.
+			Provides basic momentary on function.
 			<para>
-				To get the actual state of the toggle task, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOn()"/>, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOff()"/> and <see cref="TcoToggleTask.PlcTcoToggleTask.State()"/> properties are available.
+				To get the actual state of the momentary task, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOn()"/>, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOff()"/> and <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.State()"/> properties are available.
 			</para>
 		</summary>
 	</docu>	
 ~*)	
 {attribute addProperty StateOnDesc "<#On#>"}
 {attribute addProperty StateOffDesc "<#Off#>"}
-FUNCTION_BLOCK TcoToggleTask EXTENDS TcoObject IMPLEMENTS ITcoToggleTask
+FUNCTION_BLOCK TcoMomentaryTask EXTENDS TcoObject IMPLEMENTS ITcoMomentaryTask
 VAR
 	{attribute clr [ReadOnly()]}
 	_state : BOOL;
 (*~
 	<docu>
 		<summary>
-			Use to toggle the state of this instance. 
+			Use to set the state to the '''TRUE''' value. 
 		</summary>			
 	</docu>	
 ~*)
-	{attribute addProperty Name "<#Toggle request#>"}
-	_toggleRequest : BOOL;
+	{attribute addProperty Name "<#Set on request#>"}
+	_setOnRequest : BOOL;
 (*~
 	<docu>
 		<summary>
 			Use to determine if the manipulation is enabled for example from the HMI application. 
-			This value is read only, to modify it use the property <see cref="TcoToggleTask.PlcTcoToggleTask.Enabled()"/>		
+			This value is read only, to modify it use the property <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Enabled()"/>		
 		</summary>		
 	</docu>	
 ~*)	
@@ -43,7 +43,7 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Property Name="Context" Id="{ea25de66-51b6-0b57-094e-1fc3d4aa283a}">
+    <Property Name="Context" Id="{2a6ccb7c-f160-0d4f-387c-0fc36bf3f46f}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -53,93 +53,94 @@ END_VAR]]></Declaration>
 	</docu>	
 ~*)
 PROPERTY Context : ITcoContext]]></Declaration>
-      <Get Name="Get" Id="{ac5dc4c9-3bb4-0e8d-1613-6fb24f14d879}">
+      <Get Name="Get" Id="{a9eff097-c6d4-0344-309d-4b7dae3c6476}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="Enabled" Id="{89be13cd-e219-0ad8-1921-82fb7a3c2a30}">
+    <Property Name="Enabled" Id="{9ccbd869-272e-0374-0e03-3c8f2fa01c48}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
 			Gets whether the any manipulation with this instance is enabled.
-			The change state could be triggered with <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method call only when this property si '''TRUE'''. 
+			The change state could be triggered with <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.On()"/> or <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Off()"/> method call only when this property si '''TRUE'''. 
 		</summary>			
 	</docu>	
 ~*)
 PROPERTY Enabled : BOOL]]></Declaration>
-      <Get Name="Get" Id="{2d0155c9-fa23-0497-3a74-11a3055e67fd}">
+      <Get Name="Get" Id="{ea0810cf-22bb-017e-04e2-da10d5d8e77f}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Enabled := _enabled;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{44a02b55-2ba4-0695-3b21-dd6a947524a7}">
+      <Set Name="Set" Id="{eea2b287-52cf-0c28-2b49-c1e3d9646357}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_enabled := Enabled;]]></ST>
+          <ST><![CDATA[_enabled := Enabled;
+IF NOT _enabled THEN
+	_state := FALSE;
+	_setOnRequest := FALSE;
+END_IF]]></ST>
         </Implementation>
       </Set>
     </Property>
-    <Method Name="FB_init" Id="{ca6d7f7e-bbfe-0658-0e22-fa928997d28f}">
+    <Method Name="FB_init" Id="{d9769011-a07b-00b0-2f60-b29a706c7238}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	Parent : ITcoObject;
-	InitState : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Parent := Parent;
-_state := InitState;
-
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identity" Id="{a510b00f-cf67-02cc-1b4f-b1e9180c8b20}">
+    <Property Name="Identity" Id="{5ac2e2d0-3c45-0329-2a94-30acf57b113b}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets identity of this <see cref ="TcoTask.PlcTcoTask()"/>. 
+			Gets identity of this instance. 
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			This variable is used in the higher level applications.  
 		</summary>			
 	</docu>	
 ~*)
 PROPERTY Identity : ULINT]]></Declaration>
-      <Get Name="Get" Id="{facab802-fa8e-0c16-0ede-310d738ac30c}">
+      <Get Name="Get" Id="{4c2fa687-cf31-083e-010f-c28282b5388b}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Identity := _Identity;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="IsOff" Id="{3f9f8db0-1899-05d3-06fc-f3e94321a485}">
+    <Property Name="IsOff" Id="{c132a165-edd0-061d-357a-4338c9cae036}">
       <Declaration><![CDATA[PROPERTY IsOff : BOOL]]></Declaration>
-      <Get Name="Get" Id="{655ce6a1-75b6-0683-11d9-08b7f55efe2e}">
+      <Get Name="Get" Id="{60777fb2-4bf8-0cae-0335-5802f806dcb8}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsOff := NOT _state;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="IsOn" Id="{3a44208d-a565-0c72-398e-d6b08b083d5e}">
+    <Property Name="IsOn" Id="{4fa9c946-06c4-0807-0847-0b32d5e4a4c5}">
       <Declaration><![CDATA[PROPERTY IsOn : BOOL]]></Declaration>
-      <Get Name="Get" Id="{78ba5abb-9c98-07a3-1bf1-adc495e965e3}">
+      <Get Name="Get" Id="{74954e2d-05fb-029a-0513-39c70bace59a}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsOn := _state;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Off" Id="{34cff74b-cf35-0c40-112c-d76177090431}">
+    <Method Name="Off" Id="{af1963cb-362b-017a-1f9f-85ae38088c9c}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Use to set the state of the '''TcoToggleTask''' to the value '''FALSE'''.
+			Use to set the state of the '''TcoMomentaryTask''' to the value '''FALSE'''.
 		</summary>			
 	</docu>	
 ~*)
@@ -152,24 +153,21 @@ IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
 	THIS^.Messenger.Programming('Run() method is not called cyclically.');
 	RETURN;
 END_IF
-IF _enabled THEN
-	IF _state THEN
-		THIS^._state := FALSE;
-		OnFtrig();
-		OnStateChange();
-		Off := TRUE;
-	END_IF;
-ELSE
-	THIS^.Messenger.Post('Toggletask cannot be set to FALSE as its Enabled property is FALSE.',eMessageCategory.Info);
-END_IF	
+
+IF _state THEN
+	THIS^._state := FALSE;
+	OnFtrig();
+	OnStateChange();
+	Off := TRUE;
+END_IF;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="On" Id="{9cb5c3fe-cd07-0e82-0faa-e9c370713870}">
+    <Method Name="On" Id="{b542268f-1c1c-0a1a-3094-f6ca0e1ef17f}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Use to set the state of the '''TcoToggleTask''' to the value '''TRUE'''.
+			Use to set the state of the '''TcoMomentaryTask''' to the value '''TRUE'''.
 		</summary>			
 	</docu>	
 ~*)
@@ -197,11 +195,11 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnFtrig" Id="{054f8bcf-8a40-055c-0034-e32825008324}">
+    <Method Name="OnFtrig" Id="{7156b8d0-084a-02c1-2280-68f2b9f5ad68}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes when toggle task changes its state from '''TRUE''' to '''FALSE'''.
+			Executes when momentary task changes its state from '''TRUE''' to '''FALSE'''.
 		</summary>			
 	</docu>	
 ~*)
@@ -211,11 +209,11 @@ METHOD PROTECTED OnFtrig
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnRtrig" Id="{7d7c9b10-8eb0-0772-2efa-ec3ffa03622b}">
+    <Method Name="OnRtrig" Id="{1231dc37-77af-0405-20a9-1846142e46fd}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes when toggle task changes its state from '''FALSE''' to '''TRUE'''.
+			Executes when momentary task changes its state from '''FALSE''' to '''TRUE'''.
 		</summary>			
 	</docu>	
 ~*)
@@ -225,11 +223,11 @@ METHOD PROTECTED OnRtrig
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnStateChange" Id="{29e71c3e-8c57-044b-366d-9d208799271f}">
+    <Method Name="OnStateChange" Id="{96562705-edcb-005a-0da0-03cd0433d2f6}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes when toggle task changes its state .
+			Executes when momentary task changes its state .
 		</summary>			
 	</docu>	
 ~*)
@@ -239,7 +237,7 @@ METHOD PROTECTED OnStateChange
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Run" Id="{0ee0e789-c2f7-0551-1b79-ee9a00ebf865}">
+    <Method Name="Run" Id="{9839f195-c5a9-0f25-38cb-f178c6fcb458}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -259,16 +257,16 @@ _StartCycleCount := THIS^.Context.StartCycleCount;
 IF(THIS^._Parent <> 0 )THEN
 	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
-			THIS^._toggleRequest := FALSE;
+			THIS^._setOnRequest := FALSE;
 		END_IF
 	END_IF
 END_IF;
 
-//Triggering toggle
-IF(THIS^._toggleRequest) THEN
-	THIS^.Toggle();
+IF(THIS^._setOnRequest) THEN
+	THIS^.On();
+ELSE
+	THIS^.Off();
 END_IF;
-THIS^._toggleRequest := FALSE;
 
 IF _state THEN
 	TaskOn();
@@ -277,7 +275,7 @@ ELSE
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Property Name="State" Id="{52f94a56-0608-00e5-3a46-3834058dfc42}">
+    <Property Name="State" Id="{a9c54a34-d309-0954-2a7e-881f5102e28b}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -286,18 +284,18 @@ END_IF]]></ST>
 	</docu>	
 ~*)
 PROPERTY State : BOOL]]></Declaration>
-      <Get Name="Get" Id="{b8897b76-119a-0915-389d-7cbe673519d7}">
+      <Get Name="Get" Id="{88b2fb9c-234f-05ca-3da0-5dd67cca05c1}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[State := _state;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TaskOff" Id="{281b42a7-8729-05d2-18fd-6d73a58257fa}">
+    <Method Name="TaskOff" Id="{38cdf4ca-06cb-015c-10a4-b69572e4f6ae}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes when toggle task is in ```Off``` state .
+			Executes when momentary task is in ```Off``` state .
 		</summary>			
 	</docu>	
 ~*)
@@ -307,11 +305,11 @@ METHOD PROTECTED TaskOff
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TaskOn" Id="{fe3c2e39-5572-0ddd-280a-ab4a154f6d63}">
+    <Method Name="TaskOn" Id="{583d4a4a-bbd3-0518-2104-d436fac86c7a}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes when toggle task is in  ```On``` state .
+			Executes when momentary task is in  ```On``` state .
 		</summary>			
 	</docu>	
 ~*)
@@ -319,39 +317,6 @@ METHOD PROTECTED TaskOn
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Toggle" Id="{b1a71f23-7b34-0afa-01a7-31f99055bead}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Use to toggle the state of the '''TcoToggletask'''.
-		</summary>			
-	</docu>	
-~*)
-METHOD Toggle : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Toggle := FALSE;
-//Check if Run method is called cyclically
-IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
-	THIS^.Messenger.Programming('Run() method is not called cyclically.');
-	RETURN;
-END_IF
-
-IF _enabled THEN
-	THIS^._state :=  NOT THIS^._state;
-	IF _state THEN
-		OnRtrig();
-	ELSE
-		OnFtrig();	
-	END_IF	
-	OnStateChange();
-	Toggle := TRUE;
-ELSE
-	THIS^.Messenger.Post('Toggletask cannot be triggered  as its Enabled property is FALSE.',eMessageCategory.Info);
-END_IF	
-]]></ST>
       </Implementation>
     </Method>
   </POU>

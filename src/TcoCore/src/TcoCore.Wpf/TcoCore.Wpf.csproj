@@ -19,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.11.1-nightly.482" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcoCoreConnector\TcoCoreConnector.csproj" />
@@ -60,6 +61,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TcoSequencer\TcoSequencerView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="TcoTask\TcoTaskView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="TcoMomentaryTask\TcoMomentaryTaskView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

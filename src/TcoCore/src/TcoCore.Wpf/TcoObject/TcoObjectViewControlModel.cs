@@ -21,7 +21,7 @@ namespace TcoCore
        
         private void Update()
         {
-            Tasks = TcoObject.GetChildren<TcoTask>();
+            Tasks = TcoObject.GetChildren<TcoToggleTask>();
             TcoObjectChildren = TcoObject.GetChildren<TcoObject>(Tasks);
             DiagnosticsViewModel = new TcoDiagnosticsViewModel(this.TcoObject);
         }
@@ -30,8 +30,8 @@ namespace TcoCore
 
         public override object Model { get => TcoObject; set { TcoObject  = value as TcoObject; Update(); } }
 
-        IEnumerable<TcoTask> tasks;
-        public IEnumerable<TcoTask> Tasks
+        IEnumerable<TcoToggleTask> tasks;
+        public IEnumerable<TcoToggleTask> Tasks
         {
             get => tasks;
 

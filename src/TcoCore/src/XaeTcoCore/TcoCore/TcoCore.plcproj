@@ -78,6 +78,12 @@
     <Compile Include="POUs\Prototypes\TcoMessage\TcoMessengerSettings.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoMomentaryTask\ITcoMomentaryTask.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMomentaryTask\TcoMomentaryTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoObject\ITcoObject.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -183,6 +189,7 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
+    <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
     <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
