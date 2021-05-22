@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="TcoDo" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDi" Id="{940ec0d0-0377-0ad5-2841-be1fc78a02da}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-				Generic component for discrete control of an output.												
+				Generic component for monitoring of an input. (e.g. DigitalSensor).												
 		</summary>				
 	</docu>	
-~*)
-FUNCTION_BLOCK TcoDo EXTENDS TcoCore.TcoComponent
+~*)	
+FUNCTION_BLOCK TcoDi EXTENDS TcoCore.TcoComponent
 VAR_IN_OUT
 	(*~
 	<docu>
 		<summary>
-			Controlled signal. Typically an `%Q*` variable. 												
+			Input signal. Typically an `%I*` variable. 												
 		</summary>				
 	</docu>	
 	~*)
@@ -28,28 +28,51 @@ VAR
 		</summary>				
 	</docu>	
 	~*)
-	_signal : BOOL;
+	_signal : BOOL;	
 END_VAR
 
 VAR
-	_setTask	 : TcoCore.TcoTask(THIS^);
-	_resetTask	 : TcoCore.TcoTask(THIS^);
-END_VAR
-]]></Declaration>
+	_signalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Check On#>"}
+	{attribute addProperty ToolTip "<#Checks that the input is on#>"}
+	_isTrueTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty ToolTip "<#Checks that the input is off#>"}
+	{attribute addProperty Name "<#Check Off#>"}
+	_isFalseTask : TcoCore.TcoTask(THIS^);
+
+	_config : TcoDiConfig;
+
+	_isFalseTimeOutTimers : Tc2_Standard.TON;
+	_isTrueTimeOutTimers : Tc2_Standard.TON;	
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	 inoSignal := _signal;	
+	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+	_signal := inoSignal;	
 END_IF;	
-	
-IF(_setTask.Execute())THEN
-	_setTask.DoneWhen(Set());
+
+
+IF(_isTrueTask.Execute())THEN
+	_isTrueTask.DoneWhen(IsTrue);
 END_IF
 
-IF(_resetTask.Execute())THEN
-	_resetTask.DoneWhen(Reset());
+IF(_isFalseTask.Execute())THEN
+	_isFalseTask.DoneWhen(IsFalse);
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{3d495706-c76b-095e-389f-7ba6c1dae3a7}">
+    <Folder Name="Status" Id="{399b397c-b6b2-0664-0b0b-0fee705f77b1}" />
+    <Property Name="Config" Id="{c8f4355b-e49f-0bb4-0646-dd6b154ddf1c}">
+      <Declaration><![CDATA[PROPERTY Config : REFERENCE TO TcoDiConfig]]></Declaration>
+      <Get Name="Get" Id="{5fd5b11d-835a-051e-285c-523188175df9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{ab66c675-5325-0f32-2184-6fc98948f748}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
@@ -62,7 +85,7 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IsFalse" Id="{48e6cf82-019c-09fc-0b62-4318a8025ee4}">
+    <Property Name="IsFalse" Id="{ec2f8868-7b72-099e-3c52-ecac20627405}" FolderPath="Status\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -73,17 +96,19 @@ END_VAR
 ~*)	
 {attribute 'monitoring' := 'variable'}
 PROPERTY IsFalse : BOOL]]></Declaration>
-      <Get Name="Get" Id="{c23c2e72-5cf6-0203-23ee-9d8001c6afd4}">
+      <Get Name="Get" Id="{5dc82cbc-c761-07b9-164e-01989022f16b}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsFalse := NOT _signal;
-IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;]]></ST>
+_isFalseTimeOutTimers(IN := NOT IsFalse, PT := _config.IsFalseTimeOut); 
+IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;
+IF(_isFalseTimeOutTimers.Q) THEN Messenger.Warning('<#Expecting `negative` signal#>'); END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="IsTrue" Id="{c588e641-6ea7-04c2-2aae-c7227089c8ae}">
+    <Property Name="IsTrue" Id="{ab525802-f6c2-0477-297c-4b1c69c11f23}" FolderPath="Status\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -94,34 +119,20 @@ IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;]
 ~*)	
 {attribute 'monitoring' := 'variable'}
 PROPERTY IsTrue : BOOL]]></Declaration>
-      <Get Name="Get" Id="{2089a10e-bba5-06e8-1e33-1a25b4fcfa09}">
+      <Get Name="Get" Id="{260c107a-8454-0d57-3f95-b0c3b180f288}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsTrue := _signal;
+_isTrueTimeOutTimers(IN := NOT IsTrue, PT := _config.IsFalseTimeOut); 
 IF(NOT IsTrue) THEN Messenger.Info('<#Expecting `positive` signal#>'); END_IF;
+IF(_isTrueTimeOutTimers.Q) THEN Messenger.Warning('<#Expecting `positive` signal#>'); END_IF;
 ]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Reset" Id="{8d9a1541-7fde-0939-1d52-c21f46132ca4}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Sets controlled signal into 'off/false/logical 0'.														
-		</summary>				
-	</docu>	
-~*)	
-METHOD Reset : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Messenger.Trace('<#Reseting signal (off/false)#>');
-_signal := FALSE;
-Reset := TRUE;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Restore" Id="{28f0fb71-aa8a-0f79-0fa8-867a06c586ce}">
+    <Method Name="Restore" Id="{19478393-8665-053e-2aa6-99986ee029e0}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -137,7 +148,7 @@ METHOD  Restore : ITcoRestorable
         <ST><![CDATA[// No implementation needed for this componet.]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ServiceMode" Id="{370c3428-cc83-04b9-0717-e7260a4027a0}">
+    <Method Name="ServiceMode" Id="{27fb8047-ad11-0e35-19c9-b36842b34792}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -150,23 +161,6 @@ METHOD PROTECTED  ServiceMode
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Set" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Sets controlled signal into 'on/true/logical 1'.														
-		</summary>				
-	</docu>	
-~*)	
-METHOD PUBLIC Set : BOOL
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Messenger.Trace('<#Setting signal (on/true)#>');
-_signal := TRUE;
-Set := TRUE;]]></ST>
       </Implementation>
     </Method>
   </POU>

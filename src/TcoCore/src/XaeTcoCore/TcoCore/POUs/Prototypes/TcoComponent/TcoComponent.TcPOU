@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoComponent" Id="{8eb0512f-b833-4c04-bec5-9d60e2cb723b}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -51,6 +51,42 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetSignalInfo" Id="{8a2c62ad-97e0-04b2-078e-47bb9ffb547c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets symbol path of the variable that is associated to hardware I/O.
+		</summary>				
+	</docu>	
+~*)
+METHOD PROTECTED GetSignalInfo : TcoSignalInfo
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			Size of the variable. Is typicaly determined by `SIZEOF` opreator: SIZEOF(Variable)
+		</summary>				
+	</docu>	
+	~*)
+	ioSIZE : UDINT;
+	(*~
+	<docu>
+		<summary>
+			Pointer to the variable is typically determined by `ADR` operator ADR(Variable)
+		</summary>				
+	</docu>	
+	~*)
+	pVARIABLE : POINTER TO ULINT;
+END_VAR
+
+VAR_STAT
+	{attribute 'hide'}
+	json : Tc3_JsonXml.FB_JsonReadWriteDatatype;		
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetSignalInfo.SymbolPath := json.GetSymbolNameByAddress(nData := ioSIZE, pData := pVARIABLE);]]></ST>
       </Implementation>
     </Method>
     <Property Name="IsService" Id="{76fe61a9-82d7-035a-11e3-97101beac97d}">

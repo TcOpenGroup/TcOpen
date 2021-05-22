@@ -25,10 +25,13 @@
     <Placeholder>TcoElements</Placeholder>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Digital\TcoDi.TcPOU">
+    <Compile Include="Digital\TcoDi\TcoDi.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Digital\TcoDo.TcPOU">
+    <Compile Include="Digital\TcoDi\TcoDiConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Digital\TcoDo\TcoDo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
@@ -40,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Digital" />
+    <Folder Include="Digital\TcoDo" />
+    <Folder Include="Digital\TcoDi" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
