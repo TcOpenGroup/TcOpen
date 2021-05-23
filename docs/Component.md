@@ -52,9 +52,9 @@ Operations are run by tasks (`TcoTask`).
 
 ### States
 
-States are properties of methods that retrieve information about arbitrary states that do not require multiple cycles to return the result.
+States are properties or methods that retrieve information about arbitrary states that do not require multiple cycles to return the result (sensor signal status).
 
-
+TBC
 
 ----------------------------------------------
 - It is advisable that the I/O variables are declared in a GVL/PRG, organized in a structure that resembles the actual hardware topology; this is not mandatory, and it is up to the application developer where the I/O variable is placed.
