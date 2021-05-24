@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001" Id="{52997647-59b7-0080-2171-dd40855e4ef4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoContext
 VAR
+	
+	{attribute addProperty Name "Long running example"}
 	LongRunningTask : TcoCore.TcoTask(THIS^);
 	i :int;
 	_components : Station001_Components(THIS^);
@@ -36,7 +38,8 @@ IF(LongRunningTask.Execute()) THEN
 		i:=1;
 		LongRunningTask.DoneWhen(TRUE);
 	END_IF
-END_IF]]></ST>
+END_IF
+]]></ST>
       </Implementation>
     </Method>
   </POU>
