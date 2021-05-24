@@ -18,6 +18,7 @@ jobs:
         with:
           repository: TcOpenGroup/TcOpen.Documentation
           path: docu/TcOpen.Documentation
+          token: ${{ secrets.TC_OPEN_GROUP_USER_PAT }}
       ###
       - name : Build TcOpen
         run: |
