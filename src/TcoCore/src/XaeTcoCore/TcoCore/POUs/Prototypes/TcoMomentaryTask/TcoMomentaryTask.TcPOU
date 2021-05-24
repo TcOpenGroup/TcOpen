@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoMomentaryTask" Id="{2b3dea90-2b25-0f42-3297-e3bc662ebad1}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides basic momentary on function.
+			<para>
+				To get the actual state of the momentary task, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOn()"/>, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOff()"/> and <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.State()"/> properties are available.
+			</para>
+		</summary>
+	</docu>	
+~*)	
+{attribute addProperty StateOnDesc "<#On#>"}
+{attribute addProperty StateOffDesc "<#Off#>"}
+FUNCTION_BLOCK TcoMomentaryTask EXTENDS TcoObject IMPLEMENTS ITcoMomentaryTask
+VAR
+	{attribute clr [ReadOnly()]}
+	_state : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to set the state to the '''TRUE''' value. 
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Set on request#>"}
+	_setOnRequest : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to determine if the manipulation is enabled for example from the HMI application. 
+			This value is read only, to modify it use the property <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Enabled()"/>		
+		</summary>		
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Enabled#>"}
+	{attribute clr [ReadOnly()]}
+	_enabled : BOOL := TRUE;
+	{attribute 'hide'}
+	_StartCycleCount	:	ULINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Context" Id="{2a6ccb7c-f160-0d4f-387c-0fc36bf3f46f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the context of this object.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
+      <Get Name="Get" Id="{a9eff097-c6d4-0344-309d-4b7dae3c6476}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Enabled" Id="{9ccbd869-272e-0374-0e03-3c8f2fa01c48}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the any manipulation with this instance is enabled.
+			The change state could be triggered with <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.On()"/> or <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Off()"/> method call only when this property si '''TRUE'''. 
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Enabled : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ea0810cf-22bb-017e-04e2-da10d5d8e77f}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Enabled := _enabled;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{eea2b287-52cf-0c28-2b49-c1e3d9646357}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_enabled := Enabled;
+IF NOT _enabled THEN
+	_state := FALSE;
+	_setOnRequest := FALSE;
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="FB_init" Id="{d9769011-a07b-00b0-2f60-b29a706c7238}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Parent := Parent;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Identity" Id="{5ac2e2d0-3c45-0329-2a94-30acf57b113b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets identity of this instance. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level applications.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{4c2fa687-cf31-083e-010f-c28282b5388b}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Identity := _Identity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsOff" Id="{c132a165-edd0-061d-357a-4338c9cae036}">
+      <Declaration><![CDATA[PROPERTY IsOff : BOOL]]></Declaration>
+      <Get Name="Get" Id="{60777fb2-4bf8-0cae-0335-5802f806dcb8}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsOff := NOT _state;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsOn" Id="{4fa9c946-06c4-0807-0847-0b32d5e4a4c5}">
+      <Declaration><![CDATA[PROPERTY IsOn : BOOL]]></Declaration>
+      <Get Name="Get" Id="{74954e2d-05fb-029a-0513-39c70bace59a}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsOn := _state;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Off" Id="{af1963cb-362b-017a-1f9f-85ae38088c9c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoMomentaryTask''' to the value '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD Off : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Off := FALSE;
+//Check if Run method is called cyclically
+IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
+	THIS^.Messenger.Programming('Run() method is not called cyclically.');
+	RETURN;
+END_IF
+
+IF _state THEN
+	THIS^._state := FALSE;
+	OnFtrig();
+	OnStateChange();
+	Off := TRUE;
+END_IF;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="On" Id="{b542268f-1c1c-0a1a-3094-f6ca0e1ef17f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoMomentaryTask''' to the value '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD On : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[On := FALSE;
+
+//Check if Run method is called cyclically
+IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
+	THIS^.Messenger.Programming('Run() method is not called cyclically.');
+	RETURN;
+END_IF
+
+IF _enabled THEN
+	IF NOT _state THEN
+		THIS^._state := TRUE;
+		OnRtrig();
+		OnStateChange();
+		On := TRUE;
+	END_IF;
+ELSE
+	THIS^.Messenger.Post('Toggletask cannot be set to TRUE as its Enabled property is FALSE.',eMessageCategory.Info);
+END_IF	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnFtrig" Id="{7156b8d0-084a-02c1-2280-68f2b9f5ad68}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when momentary task changes its state from '''TRUE''' to '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnFtrig
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnRtrig" Id="{1231dc37-77af-0405-20a9-1846142e46fd}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when momentary task changes its state from '''FALSE''' to '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnRtrig
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{96562705-edcb-005a-0da0-03cd0433d2f6}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when momentary task changes its state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStateChange
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Run" Id="{9839f195-c5a9-0f25-38cb-f178c6fcb458}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method needs to be called cyclically.
+		</summary>			
+	</docu>	
+~*)
+METHOD Run
+VAR
+	_serviceableParent : ITcoServiceable;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Store the context start cycle. Used to detect if Run() method is called cyclically. 
+_StartCycleCount := THIS^.Context.StartCycleCount;
+
+// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
+IF(THIS^._Parent <> 0 )THEN
+	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+		IF(NOT _serviceableParent.IsService) THEN
+			THIS^._setOnRequest := FALSE;
+		END_IF
+	END_IF
+END_IF;
+
+IF(THIS^._setOnRequest) THEN
+	THIS^.On();
+ELSE
+	THIS^.Off();
+END_IF;
+
+IF _state THEN
+	TaskOn();
+ELSE
+	TaskOff();	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="State" Id="{a9c54a34-d309-0954-2a7e-881f5102e28b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets actual value of this instance.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY State : BOOL]]></Declaration>
+      <Get Name="Get" Id="{88b2fb9c-234f-05ca-3da0-5dd67cca05c1}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := _state;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TaskOff" Id="{38cdf4ca-06cb-015c-10a4-b69572e4f6ae}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when momentary task is in ```Off``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED TaskOff
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TaskOn" Id="{583d4a4a-bbd3-0518-2104-d436fac86c7a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when momentary task is in  ```On``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED TaskOn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

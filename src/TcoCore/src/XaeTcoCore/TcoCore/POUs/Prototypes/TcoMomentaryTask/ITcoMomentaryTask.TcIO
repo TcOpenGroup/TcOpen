@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoMomentaryTask" Id="{5d9fd10b-53b1-0244-2e57-9b3a83ecb8b1}">
+    <Declaration><![CDATA[INTERFACE ITcoMomentaryTask EXTENDS ITcoObject]]></Declaration>
+    <Method Name="Off" Id="{e72503c5-8318-0250-2de1-7cb22337cd30}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoMomentaryOnTask''' to the value '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD Off : BOOL
+]]></Declaration>
+    </Method>
+    <Method Name="On" Id="{e3cd9904-f7e0-02ea-0c33-d78ab53b6239}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoMomentaryOnTask''' to the value '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD On : BOOL
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

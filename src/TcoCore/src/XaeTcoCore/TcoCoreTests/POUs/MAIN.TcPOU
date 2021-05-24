@@ -14,6 +14,7 @@ VAR
 	_tcoComponentTest					:	TcoComponentTest;
 	_stringBuilderTest					: 	StringBuilderTests;
 	_tcoTaskTestContext 				:	TcoTaskTestContext;
+	_tcoToggleTaskTestContext			:	TcoToggleTaskTestContext;
 	{attribute addProperty Name "Test base component class"}
 	_tcoComponentTestContext			:   TcoComponentTestContext;
 END_VAR]]></Declaration>
@@ -39,6 +40,8 @@ _tcoComponentTest();
 _stringBuilderTest();
 
 _tcoTaskTestContext.ProbeRun();
+
+_tcoToggleTaskTestContext.ProbeRun();
 
 _tcoComponentTestContext.ProbeRun();]]></ST>
     </Implementation>

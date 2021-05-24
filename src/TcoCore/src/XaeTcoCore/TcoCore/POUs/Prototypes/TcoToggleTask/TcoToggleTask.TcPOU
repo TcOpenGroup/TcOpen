@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoToggleTask" Id="{1a8727de-27c5-0d52-31ab-c70631101d5b}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides basic toggling between two states. It could be triggered by calling the <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method.
+			<para>
+				To get the actual state of the toggle task, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOn()"/>, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOff()"/> and <see cref="TcoToggleTask.PlcTcoToggleTask.State()"/> properties are available.
+			</para>
+		</summary>
+	</docu>	
+~*)	
+{attribute addProperty StateOnDesc "<#On#>"}
+{attribute addProperty StateOffDesc "<#Off#>"}
+FUNCTION_BLOCK TcoToggleTask EXTENDS TcoObject IMPLEMENTS ITcoToggleTask
+VAR
+	{attribute clr [ReadOnly()]}
+	_state : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to toggle the state of this instance. 
+		</summary>			
+	</docu>	
+~*)
+	{attribute addProperty Name "<#Toggle request#>"}
+	_toggleRequest : BOOL;
+(*~
+	<docu>
+		<summary>
+			Use to determine if the manipulation is enabled for example from the HMI application. 
+			This value is read only, to modify it use the property <see cref="TcoToggleTask.PlcTcoToggleTask.Enabled()"/>		
+		</summary>		
+	</docu>	
+~*)	
+	{attribute addProperty Name "<#Enabled#>"}
+	{attribute clr [ReadOnly()]}
+	_enabled : BOOL := TRUE;
+	{attribute 'hide'}
+	_StartCycleCount	:	ULINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Context" Id="{ea25de66-51b6-0b57-094e-1fc3d4aa283a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the context of this object.
+			This context is given by declaration, its value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Context : ITcoContext]]></Declaration>
+      <Get Name="Get" Id="{ac5dc4c9-3bb4-0e8d-1613-6fb24f14d879}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Enabled" Id="{89be13cd-e219-0ad8-1921-82fb7a3c2a30}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the any manipulation with this instance is enabled.
+			The change state could be triggered with <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method call only when this property si '''TRUE'''. 
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Enabled : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2d0155c9-fa23-0497-3a74-11a3055e67fd}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Enabled := _enabled;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{44a02b55-2ba4-0695-3b21-dd6a947524a7}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_enabled := Enabled;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="FB_init" Id="{ca6d7f7e-bbfe-0658-0e22-fa928997d28f}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	InitState : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Parent := Parent;
+_state := InitState;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Identity" Id="{a510b00f-cf67-02cc-1b4f-b1e9180c8b20}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets identity of this <see cref ="TcoTask.PlcTcoTask()"/>. 
+			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			This variable is used in the higher level applications.  
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{facab802-fa8e-0c16-0ede-310d738ac30c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Identity := _Identity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsOff" Id="{3f9f8db0-1899-05d3-06fc-f3e94321a485}">
+      <Declaration><![CDATA[PROPERTY IsOff : BOOL]]></Declaration>
+      <Get Name="Get" Id="{655ce6a1-75b6-0683-11d9-08b7f55efe2e}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsOff := NOT _state;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsOn" Id="{3a44208d-a565-0c72-398e-d6b08b083d5e}">
+      <Declaration><![CDATA[PROPERTY IsOn : BOOL]]></Declaration>
+      <Get Name="Get" Id="{78ba5abb-9c98-07a3-1bf1-adc495e965e3}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsOn := _state;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Off" Id="{34cff74b-cf35-0c40-112c-d76177090431}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoToggleTask''' to the value '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD Off : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Off := FALSE;
+//Check if Run method is called cyclically
+IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
+	THIS^.Messenger.Programming('Run() method is not called cyclically.');
+	RETURN;
+END_IF
+IF _enabled THEN
+	IF _state THEN
+		THIS^._state := FALSE;
+		OnFtrig();
+		OnStateChange();
+		Off := TRUE;
+	END_IF;
+ELSE
+	THIS^.Messenger.Post('Toggletask cannot be set to FALSE as its Enabled property is FALSE.',eMessageCategory.Info);
+END_IF	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="On" Id="{9cb5c3fe-cd07-0e82-0faa-e9c370713870}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoToggleTask''' to the value '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD On : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[On := FALSE;
+
+//Check if Run method is called cyclically
+IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
+	THIS^.Messenger.Programming('Run() method is not called cyclically.');
+	RETURN;
+END_IF
+
+IF _enabled THEN
+	IF NOT _state THEN
+		THIS^._state := TRUE;
+		OnRtrig();
+		OnStateChange();
+		On := TRUE;
+	END_IF;
+ELSE
+	THIS^.Messenger.Post('Toggletask cannot be set to TRUE as its Enabled property is FALSE.',eMessageCategory.Info);
+END_IF	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnFtrig" Id="{054f8bcf-8a40-055c-0034-e32825008324}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task changes its state from '''TRUE''' to '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnFtrig
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnRtrig" Id="{7d7c9b10-8eb0-0772-2efa-ec3ffa03622b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task changes its state from '''FALSE''' to '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnRtrig
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{29e71c3e-8c57-044b-366d-9d208799271f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task changes its state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStateChange
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Run" Id="{0ee0e789-c2f7-0551-1b79-ee9a00ebf865}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method needs to be called cyclically.
+		</summary>			
+	</docu>	
+~*)
+METHOD Run
+VAR
+	_serviceableParent : ITcoServiceable;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Store the context start cycle. Used to detect if Run() method is called cyclically. 
+_StartCycleCount := THIS^.Context.StartCycleCount;
+
+// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
+IF(THIS^._Parent <> 0 )THEN
+	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+		IF(NOT _serviceableParent.IsService) THEN
+			THIS^._toggleRequest := FALSE;
+		END_IF
+	END_IF
+END_IF;
+
+//Triggering toggle
+IF(THIS^._toggleRequest) THEN
+	THIS^.Toggle();
+END_IF;
+THIS^._toggleRequest := FALSE;
+
+IF _state THEN
+	TaskOn();
+ELSE
+	TaskOff();	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="State" Id="{52f94a56-0608-00e5-3a46-3834058dfc42}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets actual value of this instance.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY State : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b8897b76-119a-0915-389d-7cbe673519d7}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := _state;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TaskOff" Id="{281b42a7-8729-05d2-18fd-6d73a58257fa}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task is in ```Off``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED TaskOff
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TaskOn" Id="{fe3c2e39-5572-0ddd-280a-ab4a154f6d63}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when toggle task is in  ```On``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED TaskOn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Toggle" Id="{b1a71f23-7b34-0afa-01a7-31f99055bead}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to toggle the state of the '''TcoToggletask'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD Toggle : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Toggle := FALSE;
+//Check if Run method is called cyclically
+IF THIS^.Context.StartCycleCount > _StartCycleCount + 1 THEN
+	THIS^.Messenger.Programming('Run() method is not called cyclically.');
+	RETURN;
+END_IF
+
+IF _enabled THEN
+	THIS^._state :=  NOT THIS^._state;
+	IF _state THEN
+		OnRtrig();
+	ELSE
+		OnFtrig();	
+	END_IF	
+	OnStateChange();
+	Toggle := TRUE;
+ELSE
+	THIS^.Messenger.Post('Toggletask cannot be triggered  as its Enabled property is FALSE.',eMessageCategory.Info);
+END_IF	
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

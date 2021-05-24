@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="fbContext" Id="{2a1cec87-1ff7-064f-2678-b3fb1b407c7e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbContext EXTENDS TcoCore.TcoContext
 VAR
-	
+	{attribute addProperty Name "Toggle task example"}
+	{attribute addProperty StateOnDesc "<#Enabled#>"}
+	{attribute addProperty StateOffDesc "<#Disabled#>"}
+	_toggleTaskExample : TcoCore.TcoToggleTask(THIS^,FALSE);
+	{attribute addProperty Name "Momentary task example"}
+	{attribute addProperty StateOnDesc "<#Running#>"}
+	{attribute addProperty StateOffDesc "<#Stopped#>"}
+	_momentaryTaskExample : TcoCore.TcoMomentaryTask(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -12,7 +19,10 @@ END_VAR
     <Method Name="Main" Id="{17ff76c9-c8cb-0dc2-0912-164ab0c91c5e}">
       <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[
+_toggleTaskExample.Run();
+
+_momentaryTaskExample.Run();]]></ST>
       </Implementation>
     </Method>
   </POU>
