@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="CylinderBase" Id="{3fb44fde-5170-065e-15db-1922ceae87e4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT CylinderBase EXTENDS TcoCore.TcoComponent IMPLEMENTS ICylinder
-VAR_INPUT
+VAR_IN_OUT
 	(*~
 		<docu>
 			<summary>
@@ -11,7 +11,7 @@ VAR_INPUT
 		</docu>
 	~*)
 	{attribute addProperty Name "<#Home position sensor#>"}
-	inAtHomePos : BOOL;
+	inoAtHomePos : BOOL;
 	(*~
 		<docu>
 			<summary>
@@ -20,9 +20,9 @@ VAR_INPUT
 		</docu>
 	~*)
 	{attribute addProperty Name "<#Work position sensor#>"}
-	inAtWorkPos : BOOL;
+	inoAtWorkPos : BOOL;
 END_VAR
-VAR_OUTPUT
+VAR_IN_OUT
 	(*~
 		<docu>
 			<summary>
@@ -31,7 +31,7 @@ VAR_OUTPUT
 		</docu>
 	~*)
 	{attribute addProperty Name "<#Move to home position actuator#>"}
-	outToHomePos : BOOL;
+	inoToHomePos : BOOL;
 	(*~
 		<docu>
 			<summary>
@@ -40,14 +40,58 @@ VAR_OUTPUT
 		</docu>
 	~*)
 	{attribute addProperty Name "<#Move to work position actuator#>"}
-	outToWorkPos : BOOL;
+	inoToWorkPos : BOOL;
+END_VAR
+VAR
+	(*~
+		<docu>
+			<summary>
+				Home position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Home position sensor#>"}
+	_atHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Working position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Work position sensor#>"}
+	_atWorkPos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working home position signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Move to home position actuator#>"}
+	_toHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working posistion signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Move to work position actuator#>"}
+	_toWorkPos : BOOL;
 END_VAR
 
-
-]]></Declaration>
+VAR
+	_atHomePosSignalInfo : TcoCore.TcoSignalInfo;
+    _atWorkPosSignalInfo : TcoCore.TcoSignalInfo;
+    _toHomePosSignalInfo : TcoCore.TcoSignalInfo;
+    _toWorkPosSignalInfo : TcoCore.TcoSignalInfo;
+END_VAR	]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-]]></ST>
+      <ST><![CDATA[IF(__ISVALIDREF(inoAtHomePos)) THEN _atHomePos := inoAtHomePos; _atHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoAtHomePos), ADR(inoAtHomePos)); END_IF;
+IF(__ISVALIDREF(inoAtWorkPos)) THEN _atWorkPos := inoAtWorkPos; _atWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoAtWorkPos), ADR(inoAtWorkPos)); END_IF;
+IF(__ISVALIDREF(inoToHomePos)) THEN inoToHomePos := _toHomePos; _toHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToHomePos), ADR(inoToHomePos)); END_IF;
+IF(__ISVALIDREF(inoToWorkPos)) THEN inoToWorkPos := _toWorkPos; _toWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToWorkPos), ADR(inoToWorkPos)); END_IF;]]></ST>
     </Implementation>
     <Folder Name="Actions" Id="{29b1bf26-2e49-0157-2768-354cf52b72c1}" />
     <Folder Name="States" Id="{8fae645c-458b-0e45-1bf7-768990103b17}" />
@@ -66,7 +110,7 @@ PROPERTY AtHome : bool]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtHome := THIS^.inAtHomePos;]]></ST>
+          <ST><![CDATA[AtHome := THIS^._atHomePos;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -84,7 +128,7 @@ PROPERTY AtWork : bool]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AtWork := inAtWorkPos;]]></ST>
+          <ST><![CDATA[AtWork := _atWorkPos;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -137,7 +181,9 @@ METHOD MoveToHome : TcoCore.ITcoTaskStatus
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MoveToHome := MoveHomeTask.Invoke();]]></ST>
+        <ST><![CDATA[IF(MoveHomeTask <> 0) THEN 
+	MoveToHome := MoveHomeTask.Invoke();
+END_IF;	]]></ST>
       </Implementation>
     </Method>
     <Method Name="MoveToWork" Id="{e0e5e440-e0e8-0fa5-0117-09382853a221}" FolderPath="Actions\">
@@ -151,7 +197,9 @@ METHOD MoveToHome : TcoCore.ITcoTaskStatus
 METHOD MoveToWork :TcoCore.ITcoTaskStatus
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MoveToWork := MoveWorkTask.Invoke();]]></ST>
+        <ST><![CDATA[IF(MoveWorkTask <> 0) THEN
+	MoveToWork := MoveWorkTask.Invoke();
+END_IF;	]]></ST>
       </Implementation>
     </Method>
     <Property Name="MoveWorkTask" Id="{590750ae-e716-0ddb-2979-6ad3642e47fb}" FolderPath="Tasks\">
@@ -190,9 +238,9 @@ METHOD  Restore : ITcoRestorable
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MoveHomeTask.Restore();
-MoveWorkTask.Restore();
-StopTask.Restore();]]></ST>
+        <ST><![CDATA[IF(MoveHomeTask <> 0) THEN MoveHomeTask.Restore(); END_IF;
+IF(MoveWorkTask <> 0) THEN MoveWorkTask.Restore(); END_IF;
+IF(StopTask <> 0) THEN StopTask.Restore(); END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{52d34209-5bba-0f86-2d4c-15beb135d9d4}">
@@ -221,7 +269,9 @@ METHOD Stop : TcoCore.ITcoTaskStatus
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Stop := StopTask.Invoke();]]></ST>
+        <ST><![CDATA[IF(StopTask <> 0) THEN
+	Stop := StopTask.Invoke();
+END_IF;	]]></ST>
       </Implementation>
     </Method>
     <Property Name="StopTask" Id="{c0771b20-eee6-0635-3b50-f4038e2e02e3}" FolderPath="Tasks\">

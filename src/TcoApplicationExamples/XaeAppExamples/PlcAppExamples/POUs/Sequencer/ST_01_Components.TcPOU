@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="ST_01_Components" Id="{fe2617a3-8e27-0c3b-1d0c-652a448ed53e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Components EXTENDS TcoCore.TcoObject
 VAR
@@ -9,9 +9,9 @@ VAR
 	_gripper : TcoPneumatics.Cylinder(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_horizontal(inAtHomePos:= ST_01_IO.INs[0], inAtWorkPos:= ST_01_IO.INs[1], outToHomePos=> ST_01_IO.OUTs[0], outToWorkPos=> ST_01_IO.OUTs[1]);
-_vertical(inAtHomePos:= ST_01_IO.INs[2], inAtWorkPos:= ST_01_IO.INs[3], outToHomePos=> ST_01_IO.OUTs[2], outToWorkPos=> ST_01_IO.OUTs[3]);
-_gripper(inAtHomePos:= ST_01_IO.INs[4], inAtWorkPos:= ST_01_IO.INs[5], outToHomePos=> ST_01_IO.OUTs[4], outToWorkPos=> ST_01_IO.OUTs[5]);]]></ST>
+      <ST><![CDATA[_horizontal(inoAtHomePos:= ST_01_IO.INs[0], inoAtWorkPos:= ST_01_IO.INs[1], inoToHomePos := ST_01_IO.OUTs[0], inoToWorkPos := ST_01_IO.OUTs[1]);
+_vertical(inoAtHomePos:= ST_01_IO.INs[2], inoAtWorkPos:= ST_01_IO.INs[3], inoToHomePos := ST_01_IO.OUTs[2], inoToWorkPos := ST_01_IO.OUTs[3]);
+_gripper(inoAtHomePos:= ST_01_IO.INs[4], inoAtWorkPos:= ST_01_IO.INs[5], inoToHomePos := ST_01_IO.OUTs[4], inoToWorkPos := ST_01_IO.OUTs[5]);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

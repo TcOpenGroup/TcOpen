@@ -36,7 +36,7 @@
             <StackPanel>
                 <Border
                     Height="5"
-                    Background="{Binding Component.inAtHomePos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
+                    Background="{Binding Component.AtHomePos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
                 <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveHomeDefault}"/>
             </StackPanel>

@@ -4,8 +4,11 @@
     <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
 	_sut			: CylinderBaseImplemented(THIS^);
+	_sutInvalid		: CylinderBaseImplemented(THIS^);
 	_atHomeSignal	: BOOL;	
 	_atWorkSignal	: BOOL;	
+	_toHomeSignal	: BOOL;	
+	_toWorkSignal	: BOOL;
 END_VAR
 VAR
 	_get_AtHome	: BOOL;
@@ -20,12 +23,17 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sut(inAtHomePos := _atHomeSignal,
-    inAtWorkPos := _atWorkSignal,
-    outToHomePos => ,
-    outToWorkPos => );
+        <ST><![CDATA[_sut(inoAtHomePos := _atHomeSignal,
+    inoAtWorkPos := _atWorkSignal,
+    inoToHomePos := _toHomeSignal,
+    inoToWorkPos := _toWorkSignal);
 	
 CASE _testId OF
+	eCyclinderBaseTests.Invalid:
+		_sutInvalid.AtHome;
+		_sutInvalid.AtWork;
+		_sutInvalid.Restore();
+		_sutInvalid.Stop();
     eCyclinderBaseTests.GetAtHome:
 		_get_AtHome := _sut.AtHome;		
     eCyclinderBaseTests.GetAtWork: 
