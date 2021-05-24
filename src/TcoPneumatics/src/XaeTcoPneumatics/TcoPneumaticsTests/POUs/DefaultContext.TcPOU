@@ -21,10 +21,10 @@ END_VAR
 
 _wpfCyclinder.Service();	
 
-_wpfCyclinder(inAtHomePos := IO.A1[0],
-	inAtWorkPos := IO.A1[1],
-	outToHomePos => IO.A2[0],
-	outToWorkPos => IO.A2[1]);
+_wpfCyclinder(inoAtHomePos := IO.A1[0],
+	inoAtWorkPos := IO.A1[1],
+	inoToHomePos := IO.A2[0],
+	inoToWorkPos := IO.A2[1]);
 
 
 ]]></ST>
