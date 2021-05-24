@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Sandbox.TcoElements.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:inxton="http://inxton.mts/xaml"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -19,13 +19,20 @@
                 <GroupBox Header="Service">
                     <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
                 </GroupBox>
-                <GroupBox Header="Coach">
-                    <vortex:RenderableContentControl PresentationType="Coach"></vortex:RenderableContentControl>
-                </GroupBox>
                 <GroupBox Header="Diagnostics">
                     <vortex:RenderableContentControl PresentationType="Diagnostics"></vortex:RenderableContentControl>
                 </GroupBox>
             </StackPanel>
+        </TabItem>
+        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="VariableTree">
+            <ScrollViewer>
+                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem DataContext="{Binding TcoElementsTestsPlc.IO}" Header="IO">
+            <ScrollViewer>
+                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+            </ScrollViewer>
         </TabItem>
     </TabControl>
 </Window>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="CylinderBaseTestContext" Id="{e41369b8-4146-091a-3fca-553a7f936fbe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_sut			: CylinderBaseImplemented(THIS^);
+	_atHomeSignal	: BOOL;	
+	_atWorkSignal	: BOOL;	
+END_VAR
+VAR
+	_get_AtHome	: BOOL;
+	_get_AtWork : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{db7fc157-6cb2-07ea-2d1f-c582b98c42b0}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_sut(inAtHomePos := _atHomeSignal,
+    inAtWorkPos := _atWorkSignal,
+    outToHomePos => ,
+    outToWorkPos => );
+	
+CASE _testId OF
+    eCyclinderBaseTests.GetAtHome:
+		_get_AtHome := _sut.AtHome;		
+    eCyclinderBaseTests.GetAtWork: 
+		_get_AtWork := _sut.AtWork;               
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

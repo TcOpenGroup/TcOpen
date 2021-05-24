@@ -75,6 +75,7 @@
  		</summary>			
 	</docu>	
 ~*)
+{attribute addProperty ToolTip ""}
 FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject 
 VAR
 	{attribute clr [RenderIgnore()]}

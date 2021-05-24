@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -13,6 +13,9 @@ VAR
 	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 	_tcoComponentTest					:	TcoComponentTest;
 	_stringBuilderTest					: 	StringBuilderTests;
+	_tcoTaskTestContext 				:	TcoTaskTestContext;
+	{attribute addProperty Name "Test base component class"}
+	_tcoComponentTestContext			:   TcoComponentTestContext;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoRtcTest_A();
@@ -33,7 +36,11 @@ _tcoContextMessagingPerf();
 
 _tcoComponentTest();
 
-_stringBuilderTest();]]></ST>
+_stringBuilderTest();
+
+_tcoTaskTestContext.ProbeRun();
+
+_tcoComponentTestContext.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -3,6 +3,7 @@ using NUnit.Framework.Constraints;
 using TcoElementsTests;
 using TcoCore.Testing;
 using Vortex.Connector;
+using TcoCore;
 
 namespace TcoElementsUnitTests
 {
@@ -15,6 +16,7 @@ namespace TcoElementsUnitTests
         {
             Entry.TcoElementsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
             sut = Entry.TcoElementsTests.MAIN._tcoDigitalActuatorTests;
+            sut._messagingLevel.Synchron = (short)eMessageCategory.All;
         }
 
         [Test]        
@@ -29,7 +31,7 @@ namespace TcoElementsUnitTests
         public void T100_SetTest()
         {                      
             //-- Act
-            sut.Run(1, 100);
+            sut.Run(5, 100);
 
             //-- Assert             
             Assert.AreEqual("Setting signal (on/true)", sut._sut._messenger._mime.Text.Synchron);                        

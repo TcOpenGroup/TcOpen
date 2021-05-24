@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
+<<<<<<< HEAD
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.12">
 	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.2.1.1" ShowHideConfigurations="#x106">
+=======
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.15">
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+>>>>>>> dev
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -36,6 +41,76 @@
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElementsTests\TcoElementsTests.tmc">
 					<Name>TcoElementsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>IO.A1._1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A1._8</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>IO.A2._1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.A2._8</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>

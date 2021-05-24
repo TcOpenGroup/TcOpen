@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="IO" Id="{8542ff68-7604-0fca-1820-2083dd0a2bfb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute addProperty Name "IO"}
+VAR_GLOBAL
+	{attribute addProperty Name "A1"}
+	A1 : InputsBase_8;
+	{attribute addProperty Name "A2"}
+	A2 : OutputsBase_8;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoComponentTests" Id="{75192e0b-d303-092f-2908-00d3094eab29}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoComponentTests :
+(
+	GetSignalInfo := 100
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

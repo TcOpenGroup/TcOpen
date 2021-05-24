@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:TcoCore"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    ToolTip="{Binding TcoTask.AttributeToolTip}"
     mc:Ignorable="d">
     <UserControl.Resources>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -34,8 +35,8 @@
             Padding="10,0,10,0"
             HorizontalAlignment="Right"
             Background="Transparent"
-            Foreground="{DynamicResource AttentionToActionBrush}" 
             Command="{Binding TcoTask.Restore}"
+            Foreground="{DynamicResource Error}"
             Style="{StaticResource MaterialDesignToolButton}"
             Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}">
             <materialDesign:PackIcon Padding="14" Kind="Error" />
