@@ -85,10 +85,19 @@
     <Compile Include="Tests\TcoTask\TcoTaskTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoToggleTask\eTcoToggleTaskTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoToggleTask\TcoToggleTaskTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoTask\PlcExecuted\eTcoTaskTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoToggleTask\TcoToggleTaskTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\Utilities\StringBuilderTests.TcPOU">
@@ -99,6 +108,7 @@
     <Folder Include="Tests" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
+    <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />
     <Folder Include="Tests\TcoComponent" />
     <Folder Include="Tests\TcoObject\EqualsOverride" />

@@ -12,16 +12,16 @@ using System.Windows;
 
 namespace TcoCore
 {
-    public class TcoContextViewModel : RenderableViewModel
+    public class TcoContextRViewModel : RenderableViewModel
     {
-        public TcoContextViewModel()
+        public TcoContextRViewModel()
         {
             this.UpdateMessagesCommand = new RelayCommand(a => this.OnPropertyChanged(nameof(ActiveMessages)));
         }
        
         private void Reload()
         {
-            Tasks = TcoContext.GetChildren<TcoTask>();
+            Tasks = TcoContext.GetChildren<TcoToggleTask>();
             TcoObjectChildren = TcoContext.GetChildren<TcoObject>(Tasks);
             DiagnosticsViewModel = new TcoDiagnosticsViewModel(this.TcoContext);
         }
@@ -30,8 +30,8 @@ namespace TcoCore
 
         public override object Model { get => TcoContext; set { TcoContext  = value as TcoContext; Reload(); } }
 
-        IEnumerable<TcoTask> tasks;
-        public IEnumerable<TcoTask> Tasks
+        IEnumerable<TcoToggleTask> tasks;
+        public IEnumerable<TcoToggleTask> Tasks
         {
             get => tasks;
 

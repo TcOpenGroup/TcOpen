@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="TcoCore.TcoToggleTaskView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCore"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <d:UserControl.DataContext>
+        <local:TcoToggleTaskViewModel />
+    </d:UserControl.DataContext>
+    <Grid>
+        <Button
+            Background="{Binding TcoToggleTask._state.Cyclic,Converter={local:SignalToBrushConverter}}" 
+            Command="{Binding TcoToggleTask}"
+            Content="{Binding Caption}"/>
+
+        <CheckBox 
+            Padding="10,0,10,0"
+            HorizontalAlignment="Right"
+            Background="{DynamicResource SecondaryHueLightBrush}" 
+            Foreground="{DynamicResource AttentionToActionBrush}" 
+            IsChecked="{Binding TcoToggleTask._state.Cyclic}">
+        </CheckBox>
+    </Grid>
+</UserControl>

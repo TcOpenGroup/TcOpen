@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoToggleTaskTestContext" Id="{39bf1920-3e0b-0df2-2185-07e16dbdb8fc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoToggleTaskTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+    _sut 		:	TcoToggleTaskTests(THIS^,TRUE);
+	_bool		:	BOOL;
+	_string		:	STRING;
+	_done		:	BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{bef4f9cc-2191-089a-210f-c97073fcc427}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+	eTcoToggleTaskTests.Reinit:
+		_sut.FB_init(TRUE, FALSE, THIS^,_bool);
+		_done := TRUE;
+		
+	eTcoToggleTaskTests.CleanUp:
+		IF NOT _done THEN
+			_sut._messenger.Clear();
+			_done := TRUE;
+		END_IF
+		
+	eTcoToggleTaskTests.Message:
+		IF NOT _done THEN
+			_sut.Messenger.Error(_string);
+			_done := TRUE;
+		END_IF
+		
+	eTcoToggleTaskTests.TriggerToggleWhileRunNotCalled:
+		IF NOT _done THEN
+			_sut._messenger.Clear();
+			_sut.Toggle();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerToggleWhileDisabled:
+		IF NOT _done THEN
+			_sut.Run();
+			_sut._messenger.Clear();
+			_sut.Enabled := FALSE;
+			_sut.Toggle();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerToggleWhileEnabled:
+		IF NOT _done THEN
+			_sut.Run();
+			_sut._messenger.Clear();
+			_sut.Enabled := TRUE;
+			_sut.Toggle();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerOnWhileRunNotCalled:
+		IF NOT _done THEN
+			_sut._messenger.Clear();
+			_sut.On();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerOnWhileDisabled:
+		IF NOT _done THEN
+			_sut.Run();
+			_sut._messenger.Clear();
+			_sut.Enabled := FALSE;
+			_sut.On();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerOnWhileEnabled:
+		IF NOT _done THEN
+			_sut.Run();
+			_sut._messenger.Clear();
+			_sut.Enabled := TRUE;
+			_sut.On();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerOffWhileRunNotCalled:
+		IF NOT _done THEN
+			_sut._messenger.Clear();
+			_sut.Toggle();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerOffWhileDisabled:
+		IF NOT _done THEN
+			_sut.Run();
+			_sut._messenger.Clear();
+			_sut.Enabled := FALSE;
+			_sut.Off();
+			_done := TRUE;	
+		END_IF
+
+	eTcoToggleTaskTests.TriggerOffWhileEnabled:
+		IF NOT _done THEN
+			_sut.Run();
+			_sut._messenger.Clear();
+			_sut.Enabled := TRUE;
+			_sut.Off();
+			_done := TRUE;	
+		END_IF
+
+		
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
