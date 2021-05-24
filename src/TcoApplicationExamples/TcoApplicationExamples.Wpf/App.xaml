@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:TcoApplicationExamples.Wpf"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:tcocore="clr-namespace:TcoCore.Wpf;assembly=TcoCore.Wpf"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -14,6 +15,7 @@
                     PrimaryColor="BlueGrey"
                     SecondaryColor="LightGreen" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <tcocore:TcoResources />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

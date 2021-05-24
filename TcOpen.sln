@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CF798B3E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{98176082-3EE2-4D13-92A2-51A748B167AE}"
 	ProjectSection(SolutionItems) = preProject
+		docs\Colors_wpf.md = docs\Colors_wpf.md
 		docs\Conventions.md = docs\Conventions.md
 		docs\Introduction.md = docs\Introduction.md
 		README.md = README.md
@@ -160,6 +161,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Group", "src\_packaging\TcOpen.Group\TcOpen.Group.csproj", "{4248AE85-CC2C-46F4-B171-15CDA5869596}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Group.Wpf", "src\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj", "{AF97CB47-927B-4CB0-98D3-B29985BBDCFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoCore.Wpf.Tests", "src\TcoCore\tests\TcoCore.Wpf.Tests\TcoCore.Wpf.Tests.csproj", "{9049C2B8-1024-416C-A615-6AF9DE5D2761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1971,6 +1974,7 @@ Global
 		{3C2C5C5A-463E-4CBB-9212-79875A623CC3} = {CF798B3E-497C-4AF1-9270-DD3030968911}
 		{4248AE85-CC2C-46F4-B171-15CDA5869596} = {894BD6B4-3462-4044-A98B-8CDB07F86338}
 		{AF97CB47-927B-4CB0-98D3-B29985BBDCFC} = {894BD6B4-3462-4044-A98B-8CDB07F86338}
+		{9049C2B8-1024-416C-A615-6AF9DE5D2761} = {269172C0-2C17-490A-83F3-039F1C6E2323}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3448A2B-59D1-4DD2-AE4B-0EFF7BC92E81}
