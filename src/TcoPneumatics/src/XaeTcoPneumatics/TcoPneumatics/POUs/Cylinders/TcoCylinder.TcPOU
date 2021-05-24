@@ -60,6 +60,7 @@ END_IF
 
 SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);]]></ST>
     </Implementation>
+    <Folder Name="Tasks" Id="{2c49a519-7477-00ef-0cce-12b7d5ee9e41}" />
     <Property Name="Config" Id="{4900e490-aca6-01f6-34b5-8e88d5861bd7}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -78,7 +79,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="MoveHomeTask" Id="{6c5528f8-8b8f-0e7d-01e4-787b210fe4ca}">
+    <Property Name="MoveHomeTask" Id="{6c5528f8-8b8f-0e7d-01e4-787b210fe4ca}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -96,7 +97,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="MoveWorkTask" Id="{b7eb0230-cd38-0ac9-3271-cda0637a6c51}">
+    <Property Name="MoveWorkTask" Id="{b7eb0230-cd38-0ac9-3271-cda0637a6c51}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -125,7 +126,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="StopTask" Id="{f45f0198-4c17-0e92-3a52-5cc8984cb39c}">
+    <Property Name="StopTask" Id="{f45f0198-4c17-0e92-3a52-5cc8984cb39c}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

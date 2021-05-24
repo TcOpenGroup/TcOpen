@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ExampleCylinder" Id="{651069c8-9438-0142-052d-b5f892a3c3c2}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				This is an example implementation of `ExampleCyclinder` component.
+			</summary>
+		</docu>
+~*)
+FUNCTION_BLOCK ExampleCylinder EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+	(*~
+		<docu>
+			<summary>
+				Home position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Home position sensor#>"}
+	inoAtHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Working position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Work position sensor#>"}
+	inoAtWorkPos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working home position signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Move to home position actuator#>"}
+	inoToHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working posistion signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Move to work position actuator#>"}
+	inoToWorkPos : BOOL;
+END_VAR
+VAR
+	(*~
+		<docu>
+			<summary>
+				Home position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Home position sensor#>"}
+	_atHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Working position sensor.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Work position sensor#>"}
+	_atWorkPos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working home position signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Move to home position actuator#>"}
+	_toHomePos : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Move to working posistion signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Move to work position actuator#>"}
+	_toWorkPos : BOOL;
+END_VAR
+
+VAR
+	_atHomePosSignalInfo : TcoCore.TcoSignalInfo;
+    _atWorkPosSignalInfo : TcoCore.TcoSignalInfo;
+    _toHomePosSignalInfo : TcoCore.TcoSignalInfo;
+    _toWorkPosSignalInfo : TcoCore.TcoSignalInfo;
+END_VAR	
+
+VAR
+    {attribute addProperty Name "<#Move Home#>"}
+    _moveHomeDefault : ExampleCylinderMoveTask(THIS^);
+    {attribute addProperty Name "<#Move to Work#>"}
+    _moveWorkDefault : ExampleCylinderMoveTask(THIS^);
+    {attribute addProperty Name "<#Stop#>"}
+    _stopDefault : TcoCore.TcoTask(THIS^);
+END_VAR
+VAR
+    _config : TcoCylinderConfig;
+	_status : TcoCylinderStatus;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Updates I/O
+UpdateIO();
+
+// Disables mutualy exclusive actions
+_moveWorkDefault.Enabled := NOT _moveHomeDefault.Busy;
+
+_moveHomeDefault(PositionSensor := _atHomePos,
+    MoveToPositionSignal := _toHomePos,
+    InverseSignal := _toWorkPos,
+    MaxTimeToReachPosition := _config.TimeToReachHomePosition,
+    PositionName := '<#Home#>');
+
+// Disables mutualy exclusive actions		
+_moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
+	
+_moveWorkDefault(PositionSensor := _atWorkPos,
+    MoveToPositionSignal := _toWorkPos,
+    InverseSignal := _toHomePos,
+    MaxTimeToReachPosition := _config.TimeToReachWorkPosition,
+    PositionName := '<#Work#>');
+
+IF (_stopDefault.Execute()) THEN
+	_toHomePos := FALSE;
+	_toWorkPos := FALSE;
+    _moveHomeDefault.Abort();
+    _moveWorkDefault.Abort();
+    _stopDefault.Abort();
+    _moveHomeDefault.Restore();
+    _moveWorkDefault.Restore();
+    _stopDefault.Restore();
+    _stopDefault.DoneWhen(TRUE);
+END_IF
+
+// For further discussion about Status
+IF(_moveHomeDefault.Busy) THEN
+	_status.ActionDescription := 'Moving to home position';
+ELSIF(_moveWorkDefault.Busy) THEN
+	_status.ActionDescription := 'Moving to work position';
+ELSIF(_stopDefault.Busy) THEN
+	_status.ActionDescription := 'Stopping pressure';
+ELSE	
+	_status.ActionDescription := 'Idle';
+END_IF
+
+UpdateIO();]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{f7b2ea15-559c-078e-3ce8-c3d17a7b9d44}" />
+    <Folder Name="States" Id="{96900a89-9479-0029-1f2d-476361e99fe3}" />
+    <Folder Name="Tasks" Id="{9f123b4a-51cf-019a-1ba5-888d714351e8}" />
+    <Property Name="AtHome" Id="{643c3181-75be-0a6e-3873-f42bd99baa39}" FolderPath="States\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the piston is in home position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY AtHome : bool]]></Declaration>
+      <Get Name="Get" Id="{589327d4-5562-0b4a-11be-4c4290d4a67e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AtHome := THIS^._atHomePos;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="AtWork" Id="{5c9947e2-8618-03e8-03e1-dcfbe84a6d08}" FolderPath="States\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the piston is in work position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY AtWork : bool]]></Declaration>
+      <Get Name="Get" Id="{64b99575-85c4-0492-260b-0b18fea58d63}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AtWork := _atWorkPos;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Config" Id="{d3268c5b-e0cb-0534-3a9b-2f1786c9d5a2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the cylinder. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoCylinderConfig]]></Declaration>
+      <Get Name="Get" Id="{7a94571f-d413-040d-0355-78f639e1dbf6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MoveHomeTask" Id="{f7405e1c-c8d2-0ecf-1b32-676fc5f99c44}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `MoveHomeTask` task that controls the moving of the cyclinder in home position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY MoveHomeTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{e9547201-54fb-01ca-0060-56a3530275c6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MoveHomeTask := _moveHomeDefault;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveToHome" Id="{0343ffa0-9f1e-0579-3c7d-c20453262682}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Starts movement into home position. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD MoveToHome : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(MoveHomeTask <> 0) THEN 
+	MoveToHome := MoveHomeTask.Invoke();
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToWork" Id="{2bb9d663-16ce-0f2f-328f-b3f0e468f7e3}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Starts movement into work position. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD MoveToWork :TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(MoveWorkTask <> 0) THEN
+	MoveToWork := MoveWorkTask.Invoke();
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="MoveWorkTask" Id="{d984706f-477f-0eaf-0e5f-451394398dca}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `MoveWorkTask` task that controls the moving of the cyclinder into work position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY MoveWorkTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{2811f2b2-510e-08cc-1a94-833cd1693675}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MoveWorkTask := _moveWorkDefault;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{304e9605-6541-0677-2fa3-0d122dc4b5d2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(MoveHomeTask <> 0) THEN MoveHomeTask.Restore(); END_IF;
+IF(MoveWorkTask <> 0) THEN MoveWorkTask.Restore(); END_IF;
+IF(StopTask <> 0) THEN StopTask.Restore(); END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{5ca5d11c-c639-06cf-070e-1deee70681f2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{e176a45a-7e15-0694-38e2-dcb4e9c931f0}">
+      <Declaration><![CDATA[PROPERTY Status : REFERENCE TO TcoCylinderStatus]]></Declaration>
+      <Get Name="Get" Id="{3e469be5-6707-0d01-0e18-04abfa3b2d28}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Stop" Id="{a802e14b-2b58-01c2-30d3-dec43cca317a}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Stops cyclinder movement.
+		 	<remarks>			
+				<note type="important">
+					This method switched off the signals for the movement of the piston in both direction.
+					However depending on the pnemumatics configuration the movement may contintue if designed in that way.
+					THIS IS NOT A SAFETY FUCTION!
+				</note>
+			</remarks>	 		
+		</summary>			
+	</docu>	
+~*)
+METHOD Stop : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(StopTask <> 0) THEN
+	Stop := StopTask.Invoke();
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StopTask" Id="{c3d59508-921a-01f4-29ad-e3b957c2b2e0}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `StopTask` task that controls the stopping of the cyclinder. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY StopTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{413bc3c9-95c8-030a-39db-6c011c16c0b0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopTask := _stopDefault;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="UpdateIO" Id="{bf78abc3-0fd8-0e7b-1097-7b7704fbb730}">
+      <Declaration><![CDATA[METHOD PRIVATE UpdateIO
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(__ISVALIDREF(inoAtHomePos)) THEN _atHomePos := inoAtHomePos; _atHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoAtHomePos), ADR(inoAtHomePos)); END_IF;
+IF(__ISVALIDREF(inoAtWorkPos)) THEN _atWorkPos := inoAtWorkPos; _atWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoAtWorkPos), ADR(inoAtWorkPos)); END_IF;
+IF(__ISVALIDREF(inoToHomePos)) THEN inoToHomePos := _toHomePos; _toHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToHomePos), ADR(inoToHomePos)); END_IF;
+IF(__ISVALIDREF(inoToWorkPos)) THEN inoToWorkPos := _toWorkPos; _toWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToWorkPos), ADR(inoToWorkPos)); END_IF;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
