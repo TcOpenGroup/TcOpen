@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ITcoToggleTask" Id="{01c40efa-562e-0078-1855-26cbab73f0bb}">
+    <Declaration><![CDATA[INTERFACE ITcoToggleTask EXTENDS ITcoObject]]></Declaration>
+    <Method Name="Off" Id="{2e350264-5024-0bd9-0fd7-5fd987d34952}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoToggleTask''' to the value '''FALSE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD Off : BOOL
+]]></Declaration>
+    </Method>
+    <Method Name="On" Id="{c6a7c9ba-3e57-01fa-1c81-6d07c4c3c9f2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to set the state of the '''TcoToggleTask''' to the value '''TRUE'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD On : BOOL
+]]></Declaration>
+    </Method>
+    <Method Name="Toggle" Id="{e4190899-2a97-08fb-33a3-b2ea419c86b2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Use to toggle the state of the '''TcoToggleTask'''.
+		</summary>			
+	</docu>	
+~*)
+METHOD Toggle : BOOL
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

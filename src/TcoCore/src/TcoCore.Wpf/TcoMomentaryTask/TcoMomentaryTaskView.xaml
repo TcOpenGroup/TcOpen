@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="TcoCore.TcoMomentaryTaskView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCore"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:inter="http://schemas.microsoft.com/xaml/behaviors"
+    mc:Ignorable="d">
+    <Grid>
+        <Button 
+            Background="{Binding TcoMomentaryTask._state.Cyclic,Converter={local:SignalToBrushConverter}}" 
+            Command="{Binding TcoMomentaryTask}"
+            Content="{Binding Caption}">
+        <inter:Interaction.Triggers>
+                <inter:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <inter:InvokeCommandAction Command="{Binding ButtonDown}"/>
+                </inter:EventTrigger>
+                <inter:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <inter:InvokeCommandAction Command="{Binding ButtonUp}"/>
+                </inter:EventTrigger>
+            </inter:Interaction.Triggers>
+        </Button>
+        <CheckBox 
+            Padding="10,0,10,0"
+            HorizontalAlignment="Right"
+            Background="{DynamicResource SecondaryHueLightBrush}" 
+            Foreground="{DynamicResource AttentionToActionBrush}" 
+            IsChecked="{Binding TcoMomentaryTask._state.Cyclic}">
+        </CheckBox>
+    </Grid>
+</UserControl>
