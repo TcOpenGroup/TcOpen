@@ -148,12 +148,7 @@ You should setup Windows environment variable ```Tc3Target``` with the value of 
 
 **Build project to restore necessary tooling and packages**
 
-<<<<<<< HEAD
-**BEFORE STARTING THE SCRIPT, MAKE SURE YOU HAVE ALL INSTANCES OF VISUAL STUDIO CLOSED!
-THE SCRIPT WILL AUTOMATICALLY CLOSE ALL OPENED INSTANCES OF VISUAL STUDIO AND OPEN A FRESH ONE.**
-=======
 ### BEFORE RUNNING THE SCRIPT MAKE SURE ALL INSTANCES OF VISUAL STUDIO ARE CLOSED. THE SCRIPT WILL OPEN VS TO COMPLETE THE BUILD OF THE PROJECT.
->>>>>>> dev
 
 _VS 2019 Community edition_
 ~~~ PowerShell

@@ -112,17 +112,7 @@ task GitVersion `
 }
 
 task OpenVisualStudio -depends GitVersion {
-<<<<<<< HEAD
-  try{
-    Get-Process devenv | Stop-Process
-  }
-  catch{
-    # Swallow
-  }
-  Start-Process .\TcOpen.plc.slnf
-=======
   # Start-Process .\TcOpen.plc.slnf
->>>>>>> dev
 }
 
 
