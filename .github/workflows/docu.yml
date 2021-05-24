@@ -27,9 +27,11 @@ jobs:
             cd ..\..
       ###
       - name : Build TcOpen.Documentation
+        env:
+          TC_OPEN_GROUP_USER_PAT: ${{ secrets.TC_OPEN_GROUP_USER_PAT   }}
         run: |
             cd docu/TcOpen.Documentation
             dotnet build
             git add -A
             git commit -m "Automated update of documentation"
-            git push
+            git push "https://token:$env:TC_OPEN_GROUP_USER_PAT@github.com/TcOpenGroup/TcOpen.Documentation.git"
