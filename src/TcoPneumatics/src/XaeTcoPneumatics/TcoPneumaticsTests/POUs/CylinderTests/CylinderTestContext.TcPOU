@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CylinderTestContext" Id="{4f0e4024-4378-058d-21b2-dd1a5c077cb8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK CylinderTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut			: TcoPneumatics.Cylinder(THIS^);
-	_sutInvalid 	: TcoPneumatics.Cylinder(THIS^);
+	_sut			: TcoPneumatics.TcoCylinder(THIS^);
+	_sutInvalid 	: TcoPneumatics.TcoCylinder(THIS^);
 	_atHomeSignal	: BOOL;
 	_moveHomeSignal : BOOL;
 	_atWorkSignal	: BOOL;

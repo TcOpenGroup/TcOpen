@@ -25,22 +25,22 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="POUs\Cylinders\Base\CylinderBase.TcPOU">
+    <Compile Include="POUs\Cylinders\Base\TcoCylinderBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\Cylinder.TcPOU">
+    <Compile Include="POUs\Cylinders\TcoCylinder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\CylinderConfig.TcDUT">
+    <Compile Include="POUs\Cylinders\TcoCylinderConfig.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\CylinderStatus.TcDUT">
+    <Compile Include="POUs\Cylinders\TcoCylinderStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\CylinderMoveTask.TcPOU">
+    <Compile Include="POUs\Cylinders\TcoCylinderMoveTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Cylinders\ICylinder.TcIO">
+    <Compile Include="POUs\Cylinders\ITcoCylinder.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Version\Global_Version.TcGVL">
