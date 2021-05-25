@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoMessenger" Id="{bb89b26f-ec79-4812-bab7-3579b2b6d1be}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -98,7 +98,12 @@ END_VAR]]></Declaration>
 	_mime.Text := Text;
 	_mime.Identity := _Parent.Identity;
 	_mime.Category := Category;
-	_mime.Cycle := _Parent.Context.StartCycleCount;	
+	_mime.Cycle := _Parent.Context.StartCycleCount;
+
+	IF(Logger <> 0) THEN
+		// TODO 
+		Logger.LogMessage('');
+	END_IF;	
 END_IF;
 
 
@@ -229,6 +234,17 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Logger" Id="{5ae77b60-04e1-037a-08f7-a85dbad3d1bc}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Logger : ITcoLogger]]></Declaration>
+      <Get Name="Get" Id="{c98cdf74-684d-0b53-1a21-f7813c56464b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Notify" Id="{1595dfe7-5719-459e-bdf2-0e7976c85511}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>

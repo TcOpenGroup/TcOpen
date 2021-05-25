@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoLogger" Id="{215776c0-ccbf-0dd3-23b8-8f667a434de9}">
+    <Declaration><![CDATA[//TODO
+INTERFACE ITcoLogger
+]]></Declaration>
+    <Method Name="LogMessage" Id="{59eec200-34a0-0f61-3f34-8b12c4f36945}">
+      <Declaration><![CDATA[METHOD PUBLIC LogMessage
+VAR_INPUT
+	inMessage : STRING(125);
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

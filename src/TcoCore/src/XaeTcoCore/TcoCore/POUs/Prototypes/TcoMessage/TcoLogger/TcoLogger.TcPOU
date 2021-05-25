@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLogger" Id="{5acf988a-efde-0bcd-168f-86c8fb40c218}" SpecialFunc="None">
+    <Declaration><![CDATA[//TODO
+FUNCTION_BLOCK TcoLogger IMPLEMENTS ITcoLogger
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="LogMessage" Id="{8f54e1ae-18e4-021b-3fb7-83b0eb2aaea5}">
+      <Declaration><![CDATA[METHOD LogMessage
+VAR_INPUT
+	inMessage : STRING(125);
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// TODO]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
