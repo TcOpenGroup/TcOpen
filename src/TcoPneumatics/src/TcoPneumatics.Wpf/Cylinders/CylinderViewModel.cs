@@ -12,7 +12,7 @@ namespace TcoPneumatics
     {
         public CylinderManualViewModel()
         {
-
+           
         }
 
         public Cylinder Component { get; private set; }
