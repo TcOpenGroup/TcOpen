@@ -3,7 +3,9 @@
   <GVL Name="IO" Id="{ada8fc9f-68ab-4185-880e-3f47e90145a9}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
+	{attribute addProperty Name "A1"}
 	A1 AT %I* : ARRAY[0..7] OF BOOL;
+	{attribute addProperty Name "A2"}
 	A2 AT %Q* : ARRAY[0..7] OF BOOL;
 END_VAR]]></Declaration>
   </GVL>
