@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Jog" Id="{333a14ea-347e-019d-24ce-e5825219cd36}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Jog EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoDriveSimple
+VAR_INPUT
+    inIsServiceMode : BOOL;
+END_VAR
+VAR
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcJog : Tc2_MC2.MC_Jog;
+    {attribute addProperty Name "<#Jog forward#>"}
+    {attribute addProperty StateOnDesc "<#Running#>"}
+    {attribute addProperty StateOffDesc "<#Stopped#>"}
+    _jogForwardTask : TcoCore.TcoMomentaryTask(THIS^);
+    {attribute addProperty Name "<#Jog backwards#>"}
+    {attribute addProperty StateOnDesc "<#Running#>"}
+    {attribute addProperty StateOffDesc "<#Stopped#>"}
+    _jogBackwardsTask : TcoCore.TcoMomentaryTask(THIS^);
+    {attribute addProperty Name "<#Jog mode#>"}
+    _jogMode : eJogMode;
+    {attribute addProperty Name "<#Position#>"}
+    _position : LREAL;
+    {attribute addProperty Name "<#Velocity#>"}
+    _velocity : LREAL;
+    {attribute addProperty Name "<#Acceleration#>"}
+    _acceleration : LREAL;
+    {attribute addProperty Name "<#Deceleration#>"}
+    _deceleration : LREAL;
+    {attribute addProperty Name "<#Jerk#>"}
+    _jerk : LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
+
+_jogForwardTask.Enabled := inIsServiceMode;
+_jogBackwardsTask.Enabled := inIsServiceMode;
+_jogForwardTask.Run();
+_jogBackwardsTask.Run();
+
+_mcJog(Axis := _axisRef,
+    JogForward := _jogForwardTask.State AND NOT _mcJog.Error,
+    JogBackwards := _jogBackwardsTask.State AND NOT _mcJog.Error,
+    Mode := _jogMode,
+    Position := _position,
+    Velocity := _velocity,
+    Acceleration := _acceleration,
+    Deceleration := _deceleration,
+    Jerk := _jerk);
+
+IF NOT _axisRef.Status.Error AND _mcJog.Error THEN
+    DriveRef.SetErrorID(_mcJog.ErrorID);
+END_IF]]></ST>
+    </Implementation>
+    <Property Name="DriveRef" Id="{a758582b-6d85-0f34-1698-3786e034ee54}">
+      <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{15f8d2d2-51fd-0bc7-3628-cc945ba13fdc}">
+        <Declaration><![CDATA[VAR
+    _drive : ITcoDriveSimple := 0;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{755891a0-7e03-0106-1a40-9df64547eef6}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : TcoCore.ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

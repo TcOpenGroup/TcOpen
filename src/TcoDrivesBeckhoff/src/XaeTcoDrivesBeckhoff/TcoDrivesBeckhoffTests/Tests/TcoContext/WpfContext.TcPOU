@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="WpfContext" Id="{1c2e461a-2a4c-0e99-1722-86b7ec79d9d1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
+VAR
+	_serviceModeActive		:	BOOL;
+	{attribute addProperty Name "<#Test axis 1#>"}
+	_axis1					:	TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+	_enable1				:	BOOL;			
+	_enablePositive1		:	BOOL;				
+	_enableNegative1		:	BOOL;        	
+	_calibrationCam1 		:	BOOL;        
+	{attribute addProperty Name "<#Test axis 2#>"}
+	_axis2	: TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+	_enable2				:	BOOL;			
+	_enablePositive2		:	BOOL;				
+	_enableNegative2		:	BOOL;        	
+	_calibrationCam2 		:	BOOL;        
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{965fd454-833e-0422-077f-8ada79203530}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_axis1(	inEnable			:=		_enable1, 
+		inEnablePositive	:=		_enablePositive1, 
+		inEnableNegative	:=		_enableNegative1, 
+		inCalibrationCam	:=		_calibrationCam1, 
+		inoAxisRef			:=		GVL.Axis1);
+                              	
+_axis2(	inEnable			:=		_enable2, 
+		inEnablePositive	:=		_enablePositive2, 
+		inEnableNegative	:=		_enableNegative2, 
+		inCalibrationCam	:=		_calibrationCam2, 
+		inoAxisRef			:=		GVL.Axis2);
+
+IF _serviceModeActive THEN
+	_axis1.Service();
+	_axis2.Service();
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
