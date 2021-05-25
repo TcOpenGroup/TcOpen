@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="WpfContext" Id="{1c2e461a-2a4c-0e99-1722-86b7ec79d9d1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
 VAR
@@ -49,17 +49,6 @@ IF _serviceModeActive THEN
 	_axis1.Service();
 	_axis2.Service();
 END_IF
-
-
-_enable1			:=	 TRUE;         	
-_enablePositive1	:=	 TRUE;
-_enableNegative1	:=	 TRUE;
-_enable2        	:=	 TRUE;
-_enablePositive2	:=	 TRUE;
-_enableNegative2	:=	 TRUE;
-
-
-
 ]]></ST>
       </Implementation>
     </Method>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="StopTask" Id="{74d9043e-4117-01d9-3a62-1eb57ed666eb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StopTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -96,6 +96,22 @@ END_VAR]]></Declaration>
         <ST><![CDATA[_deceleration := inDeceleration;
 _jerk := inJerk;
 InvokeWithParams := THIS^.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{1652617e-0e81-0ba5-3d31-1306f4740188}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._stopTask._mcStop.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{60f9bd15-fddc-0be4-0113-68a2b17125e1}">

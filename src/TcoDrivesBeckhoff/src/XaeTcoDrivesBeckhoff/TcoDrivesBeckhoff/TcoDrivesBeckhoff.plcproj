@@ -44,6 +44,9 @@
     <Compile Include="DUTs\eSetPositionMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\eJogMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\TcoAxisOpModes.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +63,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Conversions\Tc2MC2_TO_Tco_SetPositionMode.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\Tc2MC2_TO_Tco_JogMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Conversions\Tco_TO_Tc2MC2_SetPositionMode.TcPOU">
@@ -84,6 +90,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Conversions\Tco_TO_Tc2MC2_AxisStates.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\Tco_TO_Tc2MC2_JogMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -123,6 +132,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoDriveSimple\Power.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDriveSimple\Jog.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoDriveSimple\TcoDriveSimple.TcPOU">

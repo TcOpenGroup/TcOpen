@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="HomeTask" Id="{7ecafe63-8f35-0724-200c-30974ec145e2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK HomeTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -201,6 +201,22 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{79cc0927-fae8-0574-05cf-4d461dfcefc6}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._homeTask._mcHome.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{f2b89535-f59f-07c3-0011-97ecb4188bc9}">

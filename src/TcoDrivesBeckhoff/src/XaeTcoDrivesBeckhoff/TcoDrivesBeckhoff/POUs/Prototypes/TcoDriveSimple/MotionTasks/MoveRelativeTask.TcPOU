@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="MoveRelativeTask" Id="{ab769f25-b35b-017a-34f4-12fb5831bde5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK MoveRelativeTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -130,6 +130,22 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{5b8e54de-475c-0f46-2d99-ccc66c7867aa}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e976de80-cfea-01a1-1fd9-673984f12c06}">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="SoEResetTask" Id="{fa3e4a13-c840-02cf-1af1-252355c7ca7c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SoEResetTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -57,6 +57,22 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{c72af5fa-cfd1-09ef-3375-512d8ec6c69d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._soEResetTask._soEReset.AdsErrId);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{1cf67040-075f-0da2-2fcb-3c47859237d9}">

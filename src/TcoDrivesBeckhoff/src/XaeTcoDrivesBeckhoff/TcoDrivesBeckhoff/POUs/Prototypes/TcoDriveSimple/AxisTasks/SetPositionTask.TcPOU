@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="SetPositionTask" Id="{0f3e15e0-dac1-0bfc-35ff-f09121d4b609}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SetPositionTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -100,6 +100,22 @@ END_VAR]]></Declaration>
         <ST><![CDATA[_position := inPosition;
 _mode := inMode;
 InvokeWithParams := THIS^.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{fce8bf04-eb72-07e6-1188-99bd90b2f028}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._setPositionTask._mcSetPosition.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{33a6b430-fc43-0769-1ad1-7e8a3938d411}">

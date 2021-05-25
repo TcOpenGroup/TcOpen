@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="MAIN" Id="{6dac1541-74ba-49c0-be18-0d7d17fb8228}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_tcoDrivesBeckhoffContext	:	TcoDrivesBeckhoffContext;
-	_wpfContext					:	WpfContext;
-END_VAR
-]]></Declaration>
+    _tcoDriveSimpleTestContext : TcoDriveSimpleTestContext;
+    _wpfContext : WpfContext;
+    _wpfContextCall : BOOL := FALSE;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_tcoDrivesBeckhoffContext();
+      <ST><![CDATA[_tcoDriveSimpleTestContext.ProbeRun();
 
-
-_wpfContext.Run();
+IF _wpfContextCall THEN
+	_wpfContext.Run();
+END_IF	
 ]]></ST>
     </Implementation>
   </POU>

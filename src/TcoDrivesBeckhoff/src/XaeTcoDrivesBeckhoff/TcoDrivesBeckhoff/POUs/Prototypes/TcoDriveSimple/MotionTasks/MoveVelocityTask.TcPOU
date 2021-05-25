@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="MoveVelocityTask" Id="{21f51042-7e1b-0b36-15a2-b7971f2b743b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK MoveVelocityTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -142,6 +142,22 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{e57cb2e4-6de2-08f9-3560-1da4dc675da8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveVelocityTask._mcMoveVelocity.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{34542aed-2dff-0b9c-33f6-8b4f3f7d756a}">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Power" Id="{db4276ec-dab2-060f-1032-ded8050aeba5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Power EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoDriveSimple
 VAR_INPUT
@@ -11,17 +11,17 @@ VAR_INPUT
 END_VAR
 VAR
     {attribute addProperty Name "<#Power enable#>"}
-    _driveEnableLocalTask : TcoCore.TcoTask(THIS^);
-    {attribute addProperty Name "<#Power disable#>"}
-    _driveDisableLocalTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty StateOnDesc "<#Enabled#>"}
+	{attribute addProperty StateOffDesc "<#Disabled#>"}
+    _driveEnableLocalTask : TcoCore.TcoToggleTask(THIS^,FALSE);
     {attribute addProperty Name "<#Enable positive#>"}
-    _driveEnablePositiveLocalTask : TcoCore.TcoTask(THIS^);
-    {attribute addProperty Name "<#Disable positive#>"}
-    _driveDisablePositiveLocalTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty StateOnDesc "<#Enabled#>"}
+	{attribute addProperty StateOffDesc "<#Disabled#>"}
+    _driveEnablePositiveLocalTask : TcoCore.TcoToggleTask(THIS^,FALSE);
     {attribute addProperty Name "<#Enable negative#>"}
-    _driveEnableNegativeLocalTask : TcoCore.TcoTask(THIS^);
-    {attribute addProperty Name "<#Disable negative#>"}
-    _driveDisableNegativeLocalTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty StateOnDesc "<#Enabled#>"}
+	{attribute addProperty StateOffDesc "<#Disabled#>"}
+    _driveEnableNegativeLocalTask : TcoCore.TcoToggleTask(THIS^,FALSE);
 END_VAR
 VAR
     {attribute 'hide'}
@@ -29,6 +29,10 @@ VAR
     {attribute 'hide'}
     _mcPower : Tc2_MC2.MC_Power;
     {attribute addProperty Name "<#Drive power override#>"}
+	{attribute addProperty StateOnDesc "<#Local control#>"}
+	{attribute addProperty StateOffDesc "<#Global control#>"}
+    _drivePowerOverrideTask : TcoCore.TcoToggleTask(THIS^,FALSE);
+    {attribute 'hide'}
     _powerOverride : ePowerOverride;
     {attribute 'hide'}
     _powerOverridePV : ePowerOverride;
@@ -51,21 +55,58 @@ END_VAR
     END_IF
 END_IF
 
+_drivePowerOverrideTask.Enabled := inIsServiceMode;
+_drivePowerOverrideTask.Run();
+
+IF _drivePowerOverrideTask.IsOff THEN
+	_powerOverride := ePowerOverride.Global_control;
+ELSE
+	_powerOverride := ePowerOverride.Local_control;
+END_IF;	
+
+_driveEnableLocalTask.Run();
+_driveEnablePositiveLocalTask.Run();
+_driveEnableNegativeLocalTask.Run();
+
 //Take values from Global
 IF _powerOverridePV = ePowerOverride.Global_control AND _powerOverride = ePowerOverride.Local_control THEN
     _override := inOverride;
-    _enable := inEnable;
-    _enablePositive := inEnablePositive;
-    _enableNegative := inEnableNegative;
+	IF inEnable THEN
+		_driveEnableLocalTask.On();
+	ELSE 
+		_driveEnableLocalTask.Off();
+	END_IF
+	IF inEnablePositive THEN
+		_driveEnablePositiveLocalTask.On();
+	ELSE 
+		_driveEnablePositiveLocalTask.Off();
+	END_IF
+	IF inEnableNegative THEN
+		_driveEnableNegativeLocalTask.On();
+	ELSE 
+		_driveEnableNegativeLocalTask.Off();
+	END_IF
 END_IF
 
 IF _powerOverridePV = ePowerOverride.Local_control AND _powerOverride = ePowerOverride.Global_control THEN
+	IF inEnable THEN
+		_driveEnableLocalTask.On();
+	ELSE 
+		_driveEnableLocalTask.Off();
+	END_IF
+	IF inEnablePositive THEN
+		_driveEnablePositiveLocalTask.On();
+	ELSE 
+		_driveEnablePositiveLocalTask.Off();
+	END_IF
+	IF inEnableNegative THEN
+		_driveEnableNegativeLocalTask.On();
+	ELSE 
+		_driveEnableNegativeLocalTask.Off();
+	END_IF
 	_driveEnableLocalTask.Enabled :=FALSE;
-	_driveDisableLocalTask.Enabled :=FALSE;;
 	_driveEnablePositiveLocalTask.Enabled :=FALSE;
-	_driveDisablePositiveLocalTask.Enabled :=FALSE;
 	_driveEnableNegativeLocalTask.Enabled :=FALSE;
-	_driveDisableNegativeLocalTask.Enabled :=FALSE;	
 END_IF
 
 _powerOverridePV := _powerOverride;
@@ -80,61 +121,33 @@ IF _powerOverride = ePowerOverride.Global_control THEN
 END_IF
 
 IF _powerOverride = ePowerOverride.Local_control AND inIsServiceMode THEN
-	_driveEnableLocalTask.Enabled := NOT _enable;
-	_driveDisableLocalTask.Enabled := _enable;
-	IF _driveEnableLocalTask.Execute() THEN
-		_enable := TRUE;
-		_driveEnableLocalTask.DoneWhen(TRUE);
-	END_IF
-	IF _driveDisableLocalTask.Execute() THEN
-		_enable := FALSE;
-		_driveDisableLocalTask.DoneWhen(TRUE);
-	END_IF
-	_driveEnablePositiveLocalTask.Enabled := NOT _enablePositive;
-	_driveDisablePositiveLocalTask.Enabled := _enablePositive;
-	IF _driveEnablePositiveLocalTask.Execute() THEN
-		_enablePositive := TRUE;
-		_driveEnablePositiveLocalTask.DoneWhen(TRUE);
-	END_IF
-	IF _driveDisablePositiveLocalTask.Execute() THEN
-		_enablePositive := FALSE;
-		_driveDisablePositiveLocalTask.DoneWhen(TRUE);
-	END_IF
-	_driveEnableNegativeLocalTask.Enabled := NOT _enableNegative;
-	_driveDisableNegativeLocalTask.Enabled := _enableNegative;
-	IF _driveEnableNegativeLocalTask.Execute() THEN
-		_enableNegative := TRUE;
-		_driveEnableNegativeLocalTask.DoneWhen(TRUE);
-	END_IF
-	IF _driveDisableNegativeLocalTask.Execute() THEN
-		_enableNegative := FALSE;
-		_driveDisableNegativeLocalTask.DoneWhen(TRUE);
-	END_IF
+	_driveEnableLocalTask.Enabled := TRUE;
+	_driveEnablePositiveLocalTask.Enabled := TRUE;
+	_driveEnableNegativeLocalTask.Enabled := TRUE;
+
 
     _mcPower(Axis := _axisRef,
-        Enable := _enable,
-        Enable_Positive := _enablePositive,
-        Enable_Negative := _enableNegative,
+        Enable := _driveEnableLocalTask.State,
+        Enable_Positive := _driveEnablePositiveLocalTask.State,
+        Enable_Negative := _driveEnableNegativeLocalTask.State,
         Override := _override,
         BufferMode := Tc2_MC2.MC_BufferMode.MC_Aborting);
 		
 END_IF
 
 IF NOT inIsServiceMode THEN
-    _powerOverride := ePowerOverride.Global_control;
+	_powerOverride := ePowerOverride.Global_control;
+	_drivePowerOverrideTask.Off();
+	_drivePowerOverrideTask.Enabled :=FALSE;
 	_driveEnableLocalTask.Enabled :=FALSE;
-	_driveDisableLocalTask.Enabled :=FALSE;;
 	_driveEnablePositiveLocalTask.Enabled :=FALSE;
-	_driveDisablePositiveLocalTask.Enabled :=FALSE;
 	_driveEnableNegativeLocalTask.Enabled :=FALSE;
-	_driveDisableNegativeLocalTask.Enabled :=FALSE;	
-	_driveEnableLocalTask.Restore();
-	_driveDisableLocalTask.Restore();
-	_driveEnablePositiveLocalTask.Restore();
-	_driveDisablePositiveLocalTask.Restore();
-	_driveEnableNegativeLocalTask.Restore();
-	_driveDisableNegativeLocalTask.Restore();	
-END_IF]]></ST>
+END_IF
+
+IF NOT _axisRef.Status.Error AND _mcPower.Error THEN
+	DriveRef.SetErrorID(_mcPower.ErrorID);
+END_IF
+	]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{276e09aa-b77f-09ab-3973-e1de852e2d14}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>

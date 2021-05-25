@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDriveSimple" Id="{e1d88b92-8a8a-0e74-0555-7cc06fb367e3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimple EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoDriveSimple
 VAR_INPUT
@@ -18,7 +18,7 @@ VAR
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
     _mcReadStatus : Tc2_MC2.MC_ReadStatus;
-    _Power : Power(THIS^);
+    _power : Power(THIS^);
     {attribute 'hide'}
     _override : LREAL := 100.0;
     {attribute clr [ReadOnly()]}
@@ -33,6 +33,8 @@ VAR
     _setPositionTask : SetPositionTask(THIS^);
     {attribute addProperty Name "<#Homing#>"}
     _homeTask : HomeTask(THIS^);
+    {attribute addProperty Name "<#Jogging#>"}
+    _jog : Jog(THIS^);
     {attribute addProperty Name "<#Move velocity#>"}
     _moveVelocityTask : MoveVelocityTask(THIS^);
     {attribute addProperty Name "<#Stop#>"}
@@ -56,21 +58,22 @@ _axisRef REF= inoAxisRef;
 _mcReadStatus(Axis := _axisRef, Enable := TRUE);
 UpdateAxisStatus();
 
-_Power(inEnable := inEnable,
+_power(inEnable := inEnable,
     inEnablePositive := inEnablePositive,
     inEnableNegative := inEnableNegative,
     inOverride := _override,
-	inIsServiceMode := THIS^.IsService);
-
-_resetTask();
+    inIsServiceMode := THIS^.IsService);
 
 IF _resetTask.Done OR _resetTask.Error THEN
     RestoreTasks();
 END_IF
+	
+_resetTask();
 
 _soEResetTask();
 _setPositionTask();
 _homeTask();
+_jog(inIsServiceMode := THIS^.IsService);
 _moveVelocityTask();
 _stopTask();
 _haltTask();
@@ -101,6 +104,15 @@ AxisStatus := _axisStatus;]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ClearError" Id="{3a97540c-f593-0f1c-0120-f708057a61f1}">
+      <Declaration><![CDATA[METHOD INTERNAL ClearError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_axisStatus.Error := FALSE;
+_axisStatus.ErrorId := 0;
+]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="DriveRef" Id="{3800d624-5130-0c3a-22c9-8c42027a5bf8}" FolderPath="Axis\">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{f663277e-3c9f-02d1-3d1a-bc1c267140dd}">
@@ -347,13 +359,7 @@ RestoreTasks();]]></ST>
       <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_power._driveEnableLocalTask.Restore();
-_power._driveDisableLocalTask.Restore();
-_power._driveEnablePositiveLocalTask.Restore();
-_power._driveDisablePositiveLocalTask.Restore();
-_power._driveEnableNegativeLocalTask.Restore();
-_power._driveDisableNegativeLocalTask.Restore();
-_resetTask.Restore();
+        <ST><![CDATA[_resetTask.Restore();
 _soEResetTask.Restore();
 _setPositionTask.Restore();
 _homeTask.Restore();
@@ -377,6 +383,18 @@ _moveModuloTask.Restore();]]></ST>
 METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetErrorID" Id="{62d8002b-9fbc-0ce4-2890-bac65d445995}">
+      <Declaration><![CDATA[METHOD INTERNAL SetErrorID
+VAR_INPUT
+	inErrorId : UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_axisStatus.Error := TRUE;
+_axisStatus.ErrorId := inErrorId;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetPosition" Id="{e0b984cb-4674-021d-1559-4672196bcb8d}" FolderPath="Axis\">
@@ -455,8 +473,10 @@ IF NOT Tc2MC2_TO_Tco_AxisStates(AxisRef.Status.MotionState, _axisStatus.MotionSt
     THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
 END_IF
 
-_axisStatus.Error := AxisRef.Status.Error;
-_axisStatus.ErrorId := AxisRef.Status.ErrorId;
+IF AxisRef.Status.Error THEN
+	_axisStatus.Error := AxisRef.Status.Error;
+	_axisStatus.ErrorId := AxisRef.Status.ErrorId;
+END_IF;
 _axisStatus.ErrorStop := AxisRef.Status.ErrorStop;
 _axisStatus.Disabled := AxisRef.Status.Disabled;
 _axisStatus.Stopping := AxisRef.Status.Stopping;

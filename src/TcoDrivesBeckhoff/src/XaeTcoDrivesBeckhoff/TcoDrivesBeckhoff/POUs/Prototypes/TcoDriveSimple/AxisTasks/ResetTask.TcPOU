@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="ResetTask" Id="{018ad7d5-79df-023a-3c91-a698bbbc60f2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ResetTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -18,6 +18,7 @@ END_VAR]]></Declaration>
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
+	DriveRef.ClearError();
     _mcReset(Axis := _axisRef, Execute := FALSE);
 END_IF
 
@@ -55,6 +56,22 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{70772925-0ea5-0b7e-21de-df87b76e125e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._resetTask._mcReset.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{b66f0f12-7e1b-0ae5-3d39-d75ff6b45738}">
