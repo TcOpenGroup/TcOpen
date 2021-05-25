@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoDriveSimpleTests" Id="{8bb63a0d-d8c1-04f8-26b7-c685753da3b2}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoDriveSimpleTests :
+(
+    Restore	:= 1,
+    CleanUp,
+    Message,
+    PowerDisable,
+    PowerEnable,
+	Reset,
+	MoveRelativePositiveWithDisabledPositiveDirection,
+	MoveRelativePositiveWithEnabledPositiveDirection,
+	MoveRelativeNegativeWithDisabledNegativeDirection,
+	MoveRelativeNegativeWithEnabledNegativeDirection,
+	HommingDirect,
+	MoveVelocityPositiveWithDisabledPositiveDirection,
+	MoveVelocityPositiveWithEnabledPositiveDirection,
+	Stop,	
+	MoveVelocityNegativeWithDisabledNegativeDirection,
+	MoveVelocityNegativeWithEnabledNegativeDirection,
+
+
+	Last
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

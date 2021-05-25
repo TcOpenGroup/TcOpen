@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDriveSimpleTest" Id="{830e1f40-136a-027f-3da2-53501fc572a7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimpleTest EXTENDS TcoDrivesBeckhoff.TcoDriveSimple
 VAR
@@ -12,17 +12,9 @@ END_VAR
 		inEnablePositive	:=	inEnablePositive,
 		inEnableNegative	:=	inEnableNegative,
 		inCalibrationCam	:=	inCalibrationCam,
-		inoAxisRef			:=	inoAxisRef);]]></ST>
+		inoAxisRef			:=	inoAxisRef);
+		
+]]></ST>
     </Implementation>
-    <Method Name="InvokeRestore" Id="{06376add-c887-0ea5-1952-65ca90344e59}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD  InvokeRestore 
-
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.Restore();]]></ST>
-      </Implementation>
-    </Method>
   </POU>
 </TcPlcObject>
