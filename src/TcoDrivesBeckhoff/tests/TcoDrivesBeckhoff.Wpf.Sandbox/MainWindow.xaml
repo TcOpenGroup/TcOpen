@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TcoDrivesBeckhoff.Wpf.Sandbox"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:tcopen="clr-namespace:TcoDrivesBeckhoffTests;assembly=TcoDrivesBeckhoffTestsConnector"
+        xmlns:vortex="http://vortex.mts/xaml" xmlns:inxton="http://inxton.mts/xaml"
+        Title="MainWindow"
+        Width="800"
+        Height="450"
+        DataContext="{x:Static tcopen:Entry.TcoDrivesBeckhoffTestsPlc}"
+        mc:Ignorable="d">
+
     <Grid>
+        <TabControl>
+            <TabItem Header="Drives">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Main"/>
+                    <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Diagnostics" />-->
+                    <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._axis2}" PresentationType="Main" />-->
+                </Grid>
+            </TabItem>
+            <!--<TabItem Header="Axis1">
+                <inxton:DynamicTreeView DataContext="{Binding MAIN._tcoDrivesBeckhoffContext}" />
+            </TabItem>-->
+        </TabControl>
 
     </Grid>
 </Window>
