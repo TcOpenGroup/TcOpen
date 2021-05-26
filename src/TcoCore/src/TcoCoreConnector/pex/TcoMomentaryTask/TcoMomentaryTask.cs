@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 using TcoCore.Input;
+using TcoCore.Logging;
 using TcoCore.Threading;
+using TcOpen;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -35,6 +37,18 @@ namespace TcoCore
         public void Execute(object parameter)
         {
 
+        }
+
+        public void Stop()
+        {
+            TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
+            _setOnRequest.Cyclic = false;
+        }
+
+        public void Start()
+        {
+            TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
+            _setOnRequest.Cyclic = true;
         }
     }
 }

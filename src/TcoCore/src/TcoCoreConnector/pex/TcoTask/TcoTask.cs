@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using TcoCore.Input;
+using TcoCore.Logging;
 using TcoCore.Threading;
+using TcOpen;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -45,6 +48,7 @@ namespace TcoCore
                 System.Threading.Thread.Sleep(50);
             }
 
+            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
             this._invokeRequest.Cyclic = true;
         }
 
@@ -55,6 +59,7 @@ namespace TcoCore
 
         private void AbortTask(object obj)
         {
+            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this));
             this._abortRequest.Cyclic = true;
         }
         private bool CanRestoreTask()
@@ -63,7 +68,8 @@ namespace TcoCore
         }
         private void RestoreTask(object obj)
         {
+            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this));
             this._restoreRequest.Cyclic = true;
-        }
+        }        
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 using TcoCore.Input;
+using TcoCore.Logging;
 using TcoCore.Threading;
+using TcOpen;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -34,7 +36,12 @@ namespace TcoCore
 
         public void Execute(object parameter)
         {
-            this._toggleRequest.Cyclic = true;
+            var originalState = this._state.Synchron;
+            var changeStateDescription = originalState ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}" 
+                                                       : $"{this.AttributeStateOffDesc} -> {this.AttributeStateOnDesc}";
+
+            this._toggleRequest.Synchron = true;            
+            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}", LogInfo.Create(this));
         }
     }
 }

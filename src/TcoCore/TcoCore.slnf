@@ -2,8 +2,11 @@
   "solution": {
     "path": "..\\..\\TcOpen.sln",
     "projects": [
-      "src\\TcoAbstractions\\src\\Defaults\\TcoOpen.Serilog\\TcoOpen.Logging.csproj",
+      "src\\TcoAbstractions\\src\\Defaults\\TcoOpen.Serilog\\TcOpen.Logging.csproj",
       "src\\TcoAbstractions\\src\\TcOpen.Abstractions\\TcOpen.Abstractions.csproj",
+      "src\\TcoAbstractions\\src\\TcOpen\\TcOpen.csproj",
+      "src\\TcoAbstractions\\tests\\TcOpen.LoggingTests\\TcOpen.LoggingTests.csproj",
+      "src\\TcoAbstractions\\tests\\TcOpenTests\\TcOpenTests.csproj",
       "src\\TcoCore\\src\\TcoCore.Wpf\\TcoCore.Wpf.csproj",
       "src\\TcoCore\\src\\TcoCoreConnector\\TcoCoreConnector.csproj",
       "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",

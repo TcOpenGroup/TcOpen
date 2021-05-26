@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoAbstractions\src\Defaults\TcoOpen.Serilog\TcOpen.Logging.csproj" />
     <ProjectReference Include="..\..\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\TcoCoreExamplesConnector\TcoCoreExamplesConnector.csproj" />
   </ItemGroup>
