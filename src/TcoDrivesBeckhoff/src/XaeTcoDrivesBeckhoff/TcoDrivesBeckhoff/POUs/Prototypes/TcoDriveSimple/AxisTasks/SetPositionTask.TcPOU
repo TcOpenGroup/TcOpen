@@ -31,9 +31,9 @@ IF THIS^.Ready OR THIS^.Done THEN
     _mcSetPosition(Axis := _axisRef, Execute := FALSE);
 END_IF
 
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
+IF (THIS^.State = TcoCore.eTaskState.Requested) OR(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
     //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
+    IF THIS^.DriveRef._axisStatus.Error THEN
         THIS^.DriveRef.Reset();
         RETURN;
         // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
@@ -115,6 +115,7 @@ METHOD PROTECTED OnTaskError
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._setPositionTask._mcSetPosition.ErrorID);
+    _mcSetPosition(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>
     </Method>

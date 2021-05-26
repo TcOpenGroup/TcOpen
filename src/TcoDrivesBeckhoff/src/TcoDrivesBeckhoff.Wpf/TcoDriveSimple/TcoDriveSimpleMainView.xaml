@@ -48,30 +48,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.ActPos}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActPos}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="2" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActTurns}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.ActVelo}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ActAcc}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="5" Margin="5" DataContext="{Binding Component._axisStatus.ActTorque}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
+            <vortex:RenderableContentControl Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.ActPos}"/>
+            <vortex:RenderableContentControl Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActPos}"/>
+            <vortex:RenderableContentControl Grid.Column="2" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActTurns}"/>
+            <vortex:RenderableContentControl Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.ActVelo}"/>
+            <vortex:RenderableContentControl Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ActAcc}"/>
+            <vortex:RenderableContentControl Grid.Column="5" Margin="5" DataContext="{Binding Component._axisStatus.ActTorque}"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -83,26 +65,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.CmdNo}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
+
+            <vortex:RenderableContentControl Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.CmdNo}"/>
+            <vortex:RenderableContentControl Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.CmdState}"/>
+            <StackPanel  Grid.Column="2" Margin="5">
+                <TextBlock Text="{Binding Component._axisStatus.MotionState.AttributeName}"/>
+                <vortex:RenderableContentControl DataContext="{Binding Component._axisStatus.MotionState}"/>
             </StackPanel>
-            <StackPanel Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.CmdState}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="2" Margin="5" DataContext="{Binding Component._axisStatus.MotionState}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.Error}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
-            <StackPanel Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ErrorId}">
-                <TextBlock Text="{Binding AttributeName}"/>
-                <TextBlock Text="{Binding Cyclic}"/>
-            </StackPanel>
+            <vortex:RenderableContentControl Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.Error}"/>
+            <vortex:RenderableContentControl Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ErrorId}"/>
+
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

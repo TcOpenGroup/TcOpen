@@ -72,6 +72,7 @@ METHOD PROTECTED OnTaskError
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._soEResetTask._soEReset.AdsErrId);
+   _soEReset(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>
     </Method>

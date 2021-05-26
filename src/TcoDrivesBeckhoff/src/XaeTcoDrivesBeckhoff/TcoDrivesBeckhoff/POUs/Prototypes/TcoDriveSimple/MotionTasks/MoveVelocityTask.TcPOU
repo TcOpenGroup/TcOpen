@@ -23,6 +23,8 @@ VAR
     _mc_direction : Tc2_MC2.MC_Direction;
     {attribute 'hide'}
     _message : STRING(125);
+    {attribute 'hide'}
+    _dummyPreconditionOK : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -37,24 +39,19 @@ IF THIS^.Ready OR THIS^.Done THEN
     _mcMoveVelocity(Axis := _axisRef, Execute := FALSE);
 END_IF
 
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
-        RETURN;
-    END_IF
-END_IF
-
 IF Execute() THEN
     IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
         _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_direction));
         _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
         THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
         ThrowWhen(TRUE);
+        RETURN;
+    END_IF
+
+    _dummyPreconditionOK := TRUE;
+
+    IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
+        Messenger.Error('To be implemented');
         RETURN;
     END_IF
 
@@ -79,6 +76,10 @@ IF Execute() THEN
 
     DoneWhen(_mcMoveVelocity.InVelocity);
     ThrowWhen(_mcMoveVelocity.Error);
+
+    IF _mcMoveVelocity.CommandAborted OR _mcMoveVelocity.Error THEN
+        THIS^.DriveRef._movementState.Restore();
+    END_IF
 END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{6acb42d1-2ebd-0307-25cc-94ab5f3ec6d4}">
@@ -157,6 +158,7 @@ METHOD PROTECTED OnTaskError
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._moveVelocityTask._mcMoveVelocity.ErrorID);
+    _mcMoveVelocity(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>
     </Method>

@@ -25,6 +25,9 @@ VAR
     _axisStatus : TcoAxisStatus;
 END_VAR
 VAR
+    {attribute addProperty Name "<#Movement state#>"}
+    {attribute clr [ReadOnly()]}
+    _movementState : TcoMovementState(THIS^,TcoCore.eRestoreMode.None);
     {attribute addProperty Name "<#Reset#>"}
     _resetTask : ResetTask(THIS^);
     {attribute addProperty Name "<#SoE reset#>"}
@@ -64,10 +67,6 @@ _power(inEnable := inEnable,
     inOverride := _override,
     inIsServiceMode := THIS^.IsService);
 
-IF _resetTask.Done OR _resetTask.Error THEN
-    RestoreTasks();
-END_IF
-	
 _resetTask();
 
 _soEResetTask();
@@ -79,7 +78,9 @@ _stopTask();
 _haltTask();
 _moveRelativeTask();
 _moveAbsoluteTask();
-_moveModuloTask();]]></ST>
+_moveModuloTask();
+
+]]></ST>
     </Implementation>
     <Folder Name="Axis" Id="{d7605e2c-2fb5-0437-2ec5-266a0c7dda7d}" />
     <Folder Name="Motion" Id="{9515ec36-620f-055e-2ead-75815f8c7157}" />
@@ -352,14 +353,15 @@ METHOD Restore : ITcoRestorable]]></Declaration>
 END_IF
 
 _override := 100;
-RestoreTasks();]]></ST>
+RestoreTasks();
+_resetTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RestoreTasks" Id="{dc495f00-8846-0615-3d49-5c05e9d2b4aa}">
       <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_resetTask.Restore();
+        <ST><![CDATA[//_resetTask.Restore();
 _soEResetTask.Restore();
 _setPositionTask.Restore();
 _homeTask.Restore();
@@ -368,7 +370,9 @@ _stopTask.Restore();
 _haltTask.Restore();
 _moveRelativeTask.Restore();
 _moveAbsoluteTask.Restore();
-_moveModuloTask.Restore();]]></ST>
+_moveModuloTask.Restore();
+
+_movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{f2dcab5e-74c4-0882-12e2-82e083006063}">
@@ -474,9 +478,10 @@ IF NOT Tc2MC2_TO_Tco_AxisStates(AxisRef.Status.MotionState, _axisStatus.MotionSt
 END_IF
 
 IF AxisRef.Status.Error THEN
-	_axisStatus.Error := AxisRef.Status.Error;
-	_axisStatus.ErrorId := AxisRef.Status.ErrorId;
+    _axisStatus.Error := AxisRef.Status.Error;
+    _axisStatus.ErrorId := AxisRef.Status.ErrorId;
 END_IF;
+
 _axisStatus.ErrorStop := AxisRef.Status.ErrorStop;
 _axisStatus.Disabled := AxisRef.Status.Disabled;
 _axisStatus.Stopping := AxisRef.Status.Stopping;

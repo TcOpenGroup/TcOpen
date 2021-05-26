@@ -39,6 +39,8 @@ VAR
     _mc_homingOptions : Tc2_MC2.ST_HomingOptions;
     {attribute 'hide'}
     _message : STRING(125);
+    {attribute 'hide'}
+    _dummyPreconditionOK : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -51,18 +53,6 @@ END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
     _mcHome(Axis := _axisRef, Execute := FALSE);
-END_IF
-
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
-        RETURN;
-    END_IF
 END_IF
 
 IF Execute() THEN
@@ -111,6 +101,12 @@ IF Execute() THEN
     _mc_homingOptions.SyncVelocity := _homingOptions_SyncVelocity;
     _mc_homingOptions.ReferenceMode := _homingOptions_ReferenceMode;
     _calibrationCam := DriveRef.inCalibrationCam;
+    _dummyPreconditionOK := TRUE;
+
+    IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
+        Messenger.Error('To be implemented');
+        RETURN;
+    END_IF
 
     _mcHome(Axis := _axisRef,
         Execute := NOT _mcHome.Busy,
@@ -132,6 +128,10 @@ IF Execute() THEN
 
     DoneWhen(_mcHome.Done);
     ThrowWhen(_mcHome.Error);
+
+    IF _mcHome.CommandAborted OR _mcHome.Error THEN
+        THIS^.DriveRef._movementState.Restore();
+    END_IF
 END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{e8364453-3188-0da4-2572-9954580193ec}">
@@ -216,6 +216,7 @@ METHOD PROTECTED OnTaskError
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._homeTask._mcHome.ErrorID);
+    _mcHome(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>
     </Method>

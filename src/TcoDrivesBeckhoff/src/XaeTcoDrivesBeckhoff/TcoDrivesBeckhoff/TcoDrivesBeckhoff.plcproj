@@ -98,6 +98,12 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoDriveSimple\DriveState\eTcoMovementState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDriveSimple\DriveState\TcoMovementState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoDriveSimple\ITcoDriveSimple.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +155,7 @@
     <Folder Include="POUs\Prototypes\TcoDriveSimple\AxisTasks" />
     <Folder Include="POUs\Prototypes" />
     <Folder Include="POUs\Prototypes\TcoDriveSimple" />
+    <Folder Include="POUs\Prototypes\TcoDriveSimple\DriveState" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

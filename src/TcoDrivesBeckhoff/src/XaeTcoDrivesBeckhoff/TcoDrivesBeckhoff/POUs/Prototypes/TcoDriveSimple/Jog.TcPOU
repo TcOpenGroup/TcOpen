@@ -30,6 +30,8 @@ VAR
     _deceleration : LREAL;
     {attribute addProperty Name "<#Jerk#>"}
     _jerk : LREAL;
+	{attribute 'hide'}
+	_dummyPreconditionOK : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -45,6 +47,24 @@ _jogBackwardsTask.Enabled := inIsServiceMode;
 _jogForwardTask.Run();
 _jogBackwardsTask.Run();
 
+IF _jogForwardTask.State THEN
+    _dummyPreconditionOK := DriveRef._power._mcPower.Enable_Positive;
+
+    IF NOT DriveRef._movementState.JogPreconditionsOk(_jogForwardTask, _dummyPreconditionOK) THEN
+        Messenger.Error('Movements to positive direction are disabled');
+        RETURN;
+    END_IF
+END_IF
+
+IF _jogBackwardsTask.State THEN
+    _dummyPreconditionOK := DriveRef._power._mcPower.Enable_Negative;
+
+    IF NOT DriveRef._movementState.JogPreconditionsOk(_jogBackwardsTask, _dummyPreconditionOK) THEN
+        Messenger.Error('Movements to positive direction are disabled');
+        RETURN;
+    END_IF
+END_IF
+
 _mcJog(Axis := _axisRef,
     JogForward := _jogForwardTask.State AND NOT _mcJog.Error,
     JogBackwards := _jogBackwardsTask.State AND NOT _mcJog.Error,
@@ -53,7 +73,17 @@ _mcJog(Axis := _axisRef,
     Velocity := _velocity,
     Acceleration := _acceleration,
     Deceleration := _deceleration,
-    Jerk := _jerk);
+    Jerk := _jerk,
+    Done =>,
+    Busy =>,
+    Active =>,
+    CommandAborted =>,
+    Error =>,
+    ErrorID =>);
+
+IF _mcJog.Done OR _mcJog.CommandAborted OR _mcJog.Error THEN
+    THIS^.DriveRef._movementState.Restore();
+END_IF
 
 IF NOT _axisRef.Status.Error AND _mcJog.Error THEN
     DriveRef.SetErrorID(_mcJog.ErrorID);

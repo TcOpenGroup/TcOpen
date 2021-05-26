@@ -18,11 +18,11 @@ END_VAR]]></Declaration>
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-	DriveRef.ClearError();
     _mcReset(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF Execute() THEN
+	DriveRef.ClearError();
     _mcReset(Axis := _axisRef,
         Execute := NOT _mcReset.Busy,
         Done =>,
@@ -32,6 +32,15 @@ IF Execute() THEN
 
     DoneWhen(_mcReset.Done);
     ThrowWhen(_mcReset.Error);
+END_IF
+
+IF Done THEN
+    DriveRef.RestoreTasks();
+	DriveRef.ClearError();
+END_IF
+
+IF Error THEN
+    DriveRef.RestoreTasks();
 END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{539bbd16-3d54-0366-3b1b-e22e7261b0a1}">
@@ -71,6 +80,7 @@ METHOD PROTECTED OnTaskError
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._resetTask._mcReset.ErrorID);
+    _mcReset(Axis := _axisRef, Execute := FALSE);	
 END_IF]]></ST>
       </Implementation>
     </Method>

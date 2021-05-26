@@ -3,10 +3,9 @@
   <POU Name="TcoDriveSimpleTest" Id="{830e1f40-136a-027f-3da2-53501fc572a7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimpleTest EXTENDS TcoDrivesBeckhoff.TcoDriveSimple
 VAR
-	_serviceModeCount		:	ULINT;
-	_serviceModeOverride	:	LREAL;
-END_VAR
-]]></Declaration>
+    _serviceModeCount : ULINT;
+    _serviceModeOverride : LREAL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(	inEnable 			:=	inEnable,
 		inEnablePositive	:=	inEnablePositive,

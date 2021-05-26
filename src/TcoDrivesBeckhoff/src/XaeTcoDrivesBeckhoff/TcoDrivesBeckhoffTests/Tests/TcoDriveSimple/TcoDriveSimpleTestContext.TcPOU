@@ -13,14 +13,14 @@ VAR
     _velocity : LREAL;
     _acceleration : LREAL;
     _deceleration : LREAL;
-    _jerk : LREAL;	
-	_cycles : ULINT;
+    _jerk : LREAL;
+    _cycles : ULINT;
     _bool : BOOL;
     _string : STRING;
     _done : BOOL;
 END_VAR
 VAR
-	_dummyeTcoDriveSimpleTests : eTcoDriveSimpleTests;
+    _dummyeTcoDriveSimpleTests : eTcoDriveSimpleTests;
 END_VAR
 //VAR
 //	_callMyPlcInstance 		:	BOOL := FALSE;
