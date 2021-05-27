@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoAdsLogger" Id="{e5b4a06d-470b-0208-1ce9-651927148720}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL TcoAdsLogger EXTENDS TcoLogger
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Post" Id="{ec283f9c-2f37-0153-0dd6-cd974ad1e2f9}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Creates message of given category for this logger.				 
+			</summary>				
+		</docu>
+~*)
+METHOD PROTECTED  Post 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ADSLOGSTR();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoAdsLogger">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoAdsLogger.Post">
+      <LineId Id="27" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

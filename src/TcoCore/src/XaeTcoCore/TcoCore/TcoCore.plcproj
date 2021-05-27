@@ -63,7 +63,19 @@
     <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessengerSettings.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit\TcoAdsLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit\TcoVolatileLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\ITcoArguments.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\ITcoLogger.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoArguments.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoLogger.TcPOU">
@@ -190,6 +202,9 @@
     <Compile Include="POUs\TestFixtures\_internals_TcoSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Utilities\RingBuffer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Utilities\StringBuilder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -199,6 +214,7 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger" />
+    <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
     <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />
@@ -271,6 +287,22 @@
     <None Include="TcoCore.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <SubObject Include="RingBuffer.Capacity" />
+    <SubObject Include="RingBuffer.Capacity.Get" />
+    <SubObject Include="RingBuffer.Clear" />
+    <SubObject Include="RingBuffer.FB_exit" />
+    <SubObject Include="RingBuffer.FB_init" />
+    <SubObject Include="RingBuffer.IsEmpty" />
+    <SubObject Include="RingBuffer.IsEmpty.Get" />
+    <SubObject Include="RingBuffer.IsFull" />
+    <SubObject Include="RingBuffer.IsFull.Get" />
+    <SubObject Include="RingBuffer.Peek" />
+    <SubObject Include="RingBuffer.Pop" />
+    <SubObject Include="RingBuffer.Push" />
+    <SubObject Include="RingBuffer.Size" />
+    <SubObject Include="RingBuffer.Size.Get" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

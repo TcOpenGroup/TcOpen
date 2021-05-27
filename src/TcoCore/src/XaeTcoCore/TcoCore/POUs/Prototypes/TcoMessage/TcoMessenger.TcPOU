@@ -27,9 +27,9 @@ VAR
 			</summary>			
 		</docu>
 	~*)
-	_mime : TcoMessage;
-	_Parent : ITcoObject;
-	_contextIdentity : ULINT;				
+	_mime 				: TcoMessage;
+	_Parent 			: ITcoObject;
+	_contextIdentity 	: ULINT;		
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -102,7 +102,10 @@ END_VAR]]></Declaration>
 
 	IF(Logger <> 0) THEN
 		// TODO 
-		Logger.LogMessage('');
+		//Logger
+		//	.WithArgs().AddBool(TRUE).AddDecimal(1111).Append()
+		//	.Warning('My log message');
+			
 	END_IF;	
 END_IF;
 
@@ -404,5 +407,56 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoMessenger">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Catastrophic">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Clear">
+      <LineId Id="3" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Compose">
+      <LineId Id="3" Count="9" />
+      <LineId Id="24" Count="2" />
+      <LineId Id="13" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Critical">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Debug">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Error">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.FB_init">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Info">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Logger.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Notify">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Post">
+      <LineId Id="3" Count="20" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Programming">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Trace">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoMessenger.Warning">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

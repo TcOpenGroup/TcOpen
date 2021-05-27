@@ -1,22 +1,319 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoLogger" Id="{5acf988a-efde-0bcd-168f-86c8fb40c218}" SpecialFunc="None">
-    <Declaration><![CDATA[//TODO
-FUNCTION_BLOCK TcoLogger IMPLEMENTS ITcoLogger
-]]></Declaration>
+    <Declaration><![CDATA[(*~
+<docu>
+	<summary>
+			
+			Usage as follows :
+			<code>
+				_logger
+					.WithArgs().AddDecimal(1111).AddString('Inserted').Append()
+					.Warning('My log %d message %s');
+			</code>
+			
+			Inspired by Gerhard Barteling blogpost at https://www.plccoder.com/fluent-code/
+	</summary>				
+</docu>	
+~*)	
+FUNCTION_BLOCK ABSTRACT TcoLogger IMPLEMENTS ITcoLogger
+
+VAR
+	_arguments				: TcoArguments(THIS^);	
+	_Parent 				: ITcoObject;
+	_contextIdentity 		: ULINT;				
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="LogMessage" Id="{8f54e1ae-18e4-021b-3fb7-83b0eb2aaea5}">
-      <Declaration><![CDATA[METHOD LogMessage
+    <Method Name="Critical" Id="{09077f0c-d871-0b98-1a27-b10d1530940c}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'critical' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD Critical
 VAR_INPUT
-	inMessage : STRING(125);
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
 END_VAR
-
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// TODO]]></ST>
+        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
+	_arguments.Compose(ADR(Message));
+END_IF
+
+THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Debug" Id="{161f9861-cbc5-079b-3518-3e1f3248b572}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'debug' category to the message queue.				 
+			</summary>		
+		</docu>
+~*)
+METHOD Debug
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
+	_arguments.Compose(ADR(Message));
+END_IF
+
+THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Error" Id="{6d214bb4-37bc-026e-1dd0-1b261d65f009}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'error' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD Error
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
+	_arguments.Compose(ADR(Message));
+END_IF
+
+THIS^.Post(Message, eMessageCategory.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{cdc80de1-ddaf-07c0-18b3-ba8b9da53e1a}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	
+	Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Parent := Parent;
+_contextIdentity := Parent.Identity;
+
+
+IF NOT bInCopyCode THEN
+	// e.g. register logger instance at a global logging provider 
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Info" Id="{68f29db0-d9fd-04bb-116c-f6c0942a894c}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'information' category to the message queue.				 
+			</summary>			
+		</docu>
+~*)
+METHOD Info
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
+	_arguments.Compose(ADR(Message));
+END_IF
+
+THIS^.Post(Message, eMessageCategory.Info);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Post" Id="{b13d2647-feb8-066d-10af-e6730cf1fd00}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Creates message of given category for this logger.				 
+			</summary>				
+		</docu>
+~*)
+METHOD PROTECTED ABSTRACT Post 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Trace" Id="{23555722-e6a8-0626-1984-a88bb7f4a6a2}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'trace' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD Trace
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
+	_arguments.Compose(ADR(Message));
+END_IF
+
+THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Warning" Id="{625804d1-cf83-08c2-22ab-fa71857d08e7}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'warning' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD Warning
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
+	_arguments.Compose(ADR(Message));
+END_IF
+
+THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithArgs" Id="{63756482-f6df-0edf-067e-e5b95c87ceed}">
+      <Declaration><![CDATA[METHOD WithArgs : ITcoArguments
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_arguments.Clear();
+WithArgs := _arguments;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithIdentity" Id="{d0b9635b-f99b-05ed-2557-440b5cabaa65}">
+      <Declaration><![CDATA[METHOD WithIdentity : ITcoLogger
+VAR_INPUT
+	Identity	: ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_contextIdentity := Identity;
+WithIdentity := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoLogger">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Critical">
+      <LineId Id="25" Count="1" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Debug">
+      <LineId Id="25" Count="1" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Error">
+      <LineId Id="25" Count="1" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.FB_init">
+      <LineId Id="31" Count="0" />
+      <LineId Id="28" Count="2" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Info">
+      <LineId Id="23" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Post">
+      <LineId Id="31" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Trace">
+      <LineId Id="25" Count="1" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.Warning">
+      <LineId Id="25" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.WithArgs">
+      <LineId Id="5" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoLogger.WithIdentity">
+      <LineId Id="7" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoVolatileLogger" Id="{07ec8d0a-0aeb-0389-2ae6-66fe26b67d55}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoVolatileLogger EXTENDS TcoLogger
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_logBuffer		: RingBuffer(
+									Override	:= TRUE,
+									Capacity	:= MAX_LOGS,
+									ElementSize	:= SIZEOF(TcoMessage)
+								);
+END_VAR
+
+VAR CONSTANT
+	MAX_LOGS		: UDINT := 100;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Post" Id="{c98777cf-b5e1-0688-3db9-b96d4e7abc8e}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Creates message of given category for this logger.				 
+			</summary>				
+		</docu>
+~*)
+METHOD PROTECTED  Post 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
+END_VAR
+
+VAR
+	logEntry		: TcoMessage;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//logEntry.Text := Message;
+//logEntry.Category := Category;
+
+//_logBuffer.Push(ADR(logEntry), 1);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcoVolatileLogger">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoVolatileLogger.Post">
+      <LineId Id="32" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="27" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

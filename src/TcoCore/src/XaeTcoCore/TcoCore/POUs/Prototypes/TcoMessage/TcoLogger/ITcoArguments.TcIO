@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoArguments" Id="{ba8c61a3-2b32-0265-3d0f-67adc21c68ec}">
+    <Declaration><![CDATA[INTERFACE ITcoArguments
+]]></Declaration>
+    <Method Name="AddBool" Id="{76119336-76c3-0e1c-0027-3825da5a6dd7}">
+      <Declaration><![CDATA[METHOD AddBool : ITcoArguments
+VAR_INPUT
+	Value		: BOOL;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="AddDecimal" Id="{32cc8609-26f4-08f2-301d-c69f08d6ed9a}">
+      <Declaration><![CDATA[METHOD AddDecimal : ITcoArguments
+VAR_INPUT
+	Value	: DINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="AddFloat" Id="{7edc0df8-d3b3-0cea-24f0-c71474b00bff}">
+      <Declaration><![CDATA[METHOD AddFloat : ITcoArguments
+VAR_INPUT
+	Value	: LREAL;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="AddString" Id="{c69ccdfa-d6bd-05a5-2320-b6dd9b22cf01}">
+      <Declaration><![CDATA[METHOD AddString : ITcoArguments
+VAR_INPUT
+	Value	: STRING;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="AddStruct" Id="{b03ec0bd-06a4-0d16-0d03-e91004337e7f}">
+      <Declaration><![CDATA[METHOD AddStruct : ITcoArguments
+VAR_INPUT
+	ioSIZE 		: UDINT;
+	pVARIABLE 	: POINTER TO ULINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Append" Id="{b56d5192-7708-036c-2639-da473fcc2ea4}">
+      <Declaration><![CDATA[METHOD Append : ITcoLogger
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

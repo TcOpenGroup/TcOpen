@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoArguments" Id="{1e14562d-c399-070d-1868-6b15d94c6a55}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'Do not call this function block directly. Please use the provided methods.'} 
+FUNCTION_BLOCK FINAL TcoArguments IMPLEMENTS ITcoArguments
+VAR
+	_data			: ARRAY[0.. (MAX_ARGUMENTS - 1)] OF T_Arg;
+	_count			: UINT;
+	_ipLogger		: ITcoLogger;
+END_VAR
+
+
+VAR CONSTANT
+	MAX_ARGUMENTS	: USINT := 10;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddBool" Id="{cb64d28d-ed40-0f31-241d-5d73544c21ed}">
+      <Declaration><![CDATA[METHOD AddBool : ITcoArguments
+VAR_INPUT
+	Value		: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _count < MAX_ARGUMENTS THEN
+	_data[_count] := F_BOOL(Value);
+	_count := _count + 1;
+END_IF
+
+AddBool := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddDecimal" Id="{50aa3f44-94cd-0023-344f-6679e7c2164f}">
+      <Declaration><![CDATA[METHOD AddDecimal : ITcoArguments
+VAR_INPUT
+	Value	: DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _count < MAX_ARGUMENTS THEN
+	_data[_count] := F_DINT(Value);
+	_count := _count + 1;
+END_IF
+
+AddDecimal := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddFloat" Id="{0d76284b-3238-0556-091b-f4b9e1cdea7e}">
+      <Declaration><![CDATA[METHOD AddFloat : ITcoArguments
+VAR_INPUT
+	Value	: LREAL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _count < MAX_ARGUMENTS THEN
+	_data[_count] := F_LREAL(Value);
+	_count := _count + 1;
+END_IF
+
+AddFloat := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddString" Id="{2474d8f9-ade5-0a8d-2f75-95232d506eb4}">
+      <Declaration><![CDATA[METHOD AddString : ITcoArguments
+VAR_INPUT
+	Value	: STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _count < MAX_ARGUMENTS THEN
+	_data[_count] := F_STRING(Value);
+	_count := _count + 1;
+END_IF
+
+AddString := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddStruct" Id="{ba40cb5d-f986-0d3b-0d1d-d5d746da8b89}">
+      <Declaration><![CDATA[METHOD AddStruct : ITcoArguments
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			Size of the variable. Is typicaly determined by `SIZEOF` opreator: SIZEOF(Variable)
+		</summary>				
+	</docu>	
+	~*)
+	ioSIZE : UDINT;
+	(*~
+	<docu>
+		<summary>
+			Pointer to the variable is typically determined by `ADR` operator ADR(Variable)
+		</summary>				
+	</docu>	
+	~*)
+	pVARIABLE : POINTER TO ULINT;
+END_VAR
+
+
+VAR
+	jsonConverter 	: Tc3_JsonXml.FB_JsonReadWriteDatatype;	
+	jsonDoc			: STRING(255);
+	jsonDocSize		: UDINT := SIZEOF(jsonDoc);
+	symbolName		: STRING(255);
+	arg				: T_Arg;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF pVARIABLE <> 0 AND ioSIZE > 0 AND _count < MAX_ARGUMENTS THEN
+	symbolName := jsonConverter.GetSymbolNameByAddress(nData := ioSIZE, pData := pVARIABLE);
+	
+	IF jsonConverter.GetJsonFromSymbol(symbolName, ioSIZE, pVARIABLE, jsonDocSize, jsonDoc) THEN
+		
+		arg.eType := ARGTYPE_STRING;
+		arg.cbLen := INT_TO_UDINT( LEN2( ADR(jsonDoc) ) + 1 );
+		arg.pData := pVARIABLE;
+	
+		_data[_count] := arg;
+		_count := _count + 1;
+	
+	END_IF
+END_IF
+
+AddStruct := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Append" Id="{30f30573-bcb2-0fb3-3b74-7e220ac0b12f}">
+      <Declaration><![CDATA[METHOD Append : ITcoLogger
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Append := _ipLogger;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{9d22b885-9d89-08cb-06fc-dd69d845abfc}">
+      <Declaration><![CDATA[METHOD Clear : ITcoArguments
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMSET(ADR(_data), 0, SIZEOF(_data));
+Clear := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Compose" Id="{9f09b9de-8020-0eb7-2099-0f2b40d01b4b}">
+      <Declaration><![CDATA[METHOD PUBLIC Compose : BOOL
+VAR_INPUT
+	Message		: POINTER TO STRING(255);
+END_VAR
+
+
+VAR
+	messageFormatter		: Tc2_Utilities.FB_FormatString2;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// format specification
+// https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclib_tc2_utilities/35403019.html&id=5274291506655699832
+
+messageFormatter(
+	pFormatString	:= Message, 
+	arg1			:= _data[0], 
+	arg2			:= _data[1], 
+	arg3			:= _data[2], 
+	arg4			:= _data[3], 
+	arg5			:= _data[4], 
+	arg6			:= _data[5], 
+	arg7			:= _data[6], 
+	arg8			:= _data[7], 
+	arg9			:= _data[8], 
+	arg10			:= _data[9],
+	pDstString		:= Message, 
+	nDstSize		:= SIZEOF(Message));
+	
+Compose := NOT messageFormatter.bError;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{1f656fc0-0ad8-0b1c-00b4-36109accc461}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	
+	Logger		: ITcoLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_ipLogger := Logger;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsEmpty" Id="{2efba640-4f4d-05de-2f84-69bf90243d91}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsEmpty : BOOL]]></Declaration>
+      <Get Name="Get" Id="{598f0cfb-bb4d-0e68-1a16-b2f834a2db2e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsEmpty := _count = 0;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="TcoArguments">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.AddBool">
+      <LineId Id="9" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.AddDecimal">
+      <LineId Id="9" Count="2" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.AddFloat">
+      <LineId Id="9" Count="2" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.AddString">
+      <LineId Id="11" Count="2" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.AddStruct">
+      <LineId Id="116" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="140" Count="1" />
+      <LineId Id="136" Count="2" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="124" Count="1" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.Append">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.Clear">
+      <LineId Id="4" Count="1" />
+    </LineIds>
+    <LineIds Name="TcoArguments.Compose">
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="11" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.FB_init">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoArguments.IsEmpty.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
