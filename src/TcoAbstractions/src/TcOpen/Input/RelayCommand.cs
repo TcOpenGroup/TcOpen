@@ -13,13 +13,13 @@ namespace TcoCore.Input
 
         private readonly Func<bool> _canExecute;
 
-        private readonly Action _action;
+        private readonly Action _logAction;
 
         public RelayCommand(Action<object> execute, Func<bool> canExecute = null, Action logAction = null)
         {
             _execute = execute;
             _canExecute = canExecute;
-            _action = logAction;
+            _logAction = logAction;
         }
 
         public bool CanExecute(object parameter)
@@ -29,8 +29,11 @@ namespace TcoCore.Input
 
         public void Execute(object parameter)
         {
-            _action?.Invoke();
-            _execute.Invoke(parameter);
+            if(CanExecute(parameter))
+            {               
+               _logAction?.Invoke();                                     
+               _execute.Invoke(parameter);
+            }
         }
 
         public event EventHandler CanExecuteChanged;

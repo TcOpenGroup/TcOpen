@@ -5,6 +5,6 @@ namespace TcOpen.Logging.SerilogTests
 {
     public class MessagePayload
     {
-        public string SomeString { get; set; }
+        public string SomeString;
     }
 }
