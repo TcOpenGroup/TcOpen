@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using TcoCore.Input;
 using TcoCore.Logging;
 using TcoCore.Threading;
 using TcOpen;
+using TcOpen.Inxton;
+using TcOpen.Inxton.Input;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -21,8 +22,8 @@ namespace TcoCore
         {
             this._enabled.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoTask_CanExecuteChanged;
-            Abort = new RelayCommand(AbortTask, CanAbortTask);
-            Restore = new RelayCommand(RestoreTask, CanRestoreTask);
+            Abort = new RelayCommand(AbortTask, CanAbortTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this)));
+            Restore = new RelayCommand(RestoreTask, CanRestoreTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this)));
         }
 
         private void TcoTask_CanExecuteChanged(object sender, EventArgs e)
@@ -59,7 +60,7 @@ namespace TcoCore
 
         private void AbortTask(object obj)
         {
-            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this));
+            
             this._abortRequest.Cyclic = true;
         }
         private bool CanRestoreTask()
@@ -67,8 +68,7 @@ namespace TcoCore
             return true;
         }
         private void RestoreTask(object obj)
-        {
-            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this));
+        {            
             this._restoreRequest.Cyclic = true;
         }        
     }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-using TcoCore.Input;
 using TcoCore.Logging;
 using TcoCore.Threading;
-using TcOpen;
+using TcOpen.Inxton;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 

@@ -163,7 +163,8 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
         cmd /c $command
     }  -maxRetries 2    
         	
-    $testProjects = @(                    
+    $testProjects = @(
+                      [System.Tuple]::Create(".\src\TcOpen.Inxton\TcOpen.Inxton.slnf", "", -1, "TcOpen.Inxton"),                     
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
                       [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", -1, "TcoElements"),
                       [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", -1, "TcoIoBeckhoff"),
@@ -240,6 +241,9 @@ task CreatePackages `
   $semVer = $script:gitVersion.SemVer
   $projects = @(
     #Packaging
+    "src\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj",
+    "src\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj",
+    "src\TcOpen.Inxton\src\Logging\TcoOpen.Serilog\TcOpen.Inxton.Logging.csproj",
     "src\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj",
     "src\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj",
     "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj",

@@ -17,8 +17,8 @@ namespace TcoCore.Sandbox.Wpf
     {
         public App() : base()
         {
-            TcOpen.TcoAppDomain.Current.Builder                
-                .SetUpLogger(new TcOpen.Logging.SerilogAdapter(new Serilog.LoggerConfiguration()
+            TcOpen.Inxton.TcoAppDomain.Current.Builder                
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new Serilog.LoggerConfiguration()
                                                                             .WriteTo.Console()));
                     
 

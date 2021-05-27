@@ -26,7 +26,7 @@
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
   </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\..\TcoAbstractions\src\TcOpen\TcOpen.csproj" />
+      <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj" />
     </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

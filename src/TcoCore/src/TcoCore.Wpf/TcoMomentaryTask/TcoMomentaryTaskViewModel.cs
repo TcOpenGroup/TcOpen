@@ -1,5 +1,4 @@
 ﻿using System;
-using TcoCore.Input;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
