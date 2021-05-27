@@ -82,6 +82,12 @@
     <Compile Include="Tests\TcoState\TcoStateAutoRestoreTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\eTcoTaskTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcExecTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoTask\TcoTaskTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -89,9 +95,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoToggleTask\TcoToggleTaskTestContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\TcoTask\PlcExecuted\eTcoTaskTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskTestContext.TcPOU">
