@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +17,11 @@ namespace TcoCore.Sandbox.Wpf
     {
         public App() : base()
         {
+            TcOpen.Inxton.TcoAppDomain.Current.Builder                
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new Serilog.LoggerConfiguration()
+                                                                            .WriteTo.Console()));
+                    
+
             TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             PlcTcoCoreExamples.Connector.BuildAndStart();
         }

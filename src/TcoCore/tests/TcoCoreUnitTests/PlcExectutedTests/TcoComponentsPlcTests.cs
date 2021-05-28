@@ -11,7 +11,7 @@ using TcoCore;
 namespace TcoCoreUnitTests.PlcExecutedTests
 {
 
-    public class TcoComponentsTests
+    public class T09_TcoComponentsTests
     {
 
 
