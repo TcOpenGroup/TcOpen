@@ -4,8 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
     _sut : TcoCore.TcoTask(THIS^);
-    _sut_A : TcoTaskPlcExecTest(THIS^);
-    _sut_B : TcoTaskPlcExecTest(THIS^);
+	_to_A : TcoTaskPlcTestObject(THIS^);
+	_to_B : TcoTaskPlcTestObject(THIS^);
     _elapsedTimeETA : TIME;
     _elapsedTime : TIME;
     _runElapsedTimer : BOOL;
@@ -18,6 +18,10 @@ VAR
     _retString : STRING;
     _done : BOOL;
     _arranged : BOOL;
+	_startCycles			:	ULINT;
+	_endCycles				:	ULINT;	
+	_myIdentity				:	ULINT;	
+	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -39,50 +43,55 @@ METHOD _ClearPlcCycleCounter
         <ST><![CDATA[_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
 
 CASE _testId OF
+    {region "CallTasksBodiesOnly"}
     eTcoTaskTests.CallTasksBodiesOnly:
-        _sut_A();
-        _sut_B();
+        _to_A();
+    {endregion}
+    {region "RestoreTasks"}
     eTcoTaskTests.RestoreTasks:
-        _sut_A.Restore();
-        _sut_B.Restore();
-        _sut_A();
-        _sut_B();
+        _to_A._sut_A.Restore();
+        _to_A._sut_B.Restore();
+        _to_A();
+    {endregion}
+    {region "T300_TaskInvokeAndWaitForDone"}
     eTcoTaskTests.TaskInvokeAndWaitForDone:
         IF NOT _arranged THEN
-            _sut_A.Restore();
-            _sut_B.Restore();
-            _sut_A.SetPreviousStateToReady();
-            _sut_B.SetPreviousStateToReady();
+            _to_A._sut_A.Restore();
+            _to_A._sut_B.Restore();
+            _to_A._sut_A.SetPreviousStateToReady();
+            _to_A._sut_B.SetPreviousStateToReady();
             _arranged := TRUE;
         END_IF
 
         IF NOT _done THEN
-            _sut_A.Invoke();
-            _sut_B.Invoke();
-            _sut_A();
-            _sut_B();
-            _done := _sut_A.Done AND _sut_B.Done;
+            _to_A._sut_A.Invoke();
+            _to_A._sut_B.Invoke();
+            _to_A();
+            _done := _to_A._sut_A.Done AND _to_A._sut_B.Done;
         END_IF
 
         IF _done THEN
-            _sut_A.ReadOutState();
-            _sut_B.ReadOutState();
+            _to_A._sut_A.ReadOutState();
+            _to_A._sut_B.ReadOutState();
             ProbeDoneWhen(_done);
         END_IF
+    {endregion}
+    {region "T301_TaskInvokeAfterDoneWithNoEmptyCycles"}
     eTcoTaskTests.TaskInvokeAfterDoneWithNoEmptyCycles:
         IF NOT _done THEN
-            _sut_A.Invoke();
-            _sut_B.Invoke();
-            _sut_A();
-            _sut_B();
-            _done := _sut_A.Done AND _sut_B.Done;
+            _to_A._sut_A.Invoke();
+            _to_A._sut_B.Invoke();
+            _to_A();
+            _done := _to_A._sut_A.Done AND _to_A._sut_B.Done;
         END_IF
 
         IF _done THEN
-            _sut_A.ReadOutState();
-            _sut_B.ReadOutState();
+            _to_A._sut_A.ReadOutState();
+            _to_A._sut_B.ReadOutState();
             ProbeDoneWhen(_done);
         END_IF
+    {endregion}
+    {region "T302_TaskInvokeAfterDoneWithOneEmptyCycle"}
     eTcoTaskTests.TaskInvokeAfterDoneWithOneEmptyCycle:
         IF NOT _arranged THEN
             _arranged := TRUE;
@@ -91,58 +100,61 @@ CASE _testId OF
         END_IF
 
         IF NOT _done THEN
-            _sut_A.Invoke();
-            _sut_B.Invoke();
-            _sut_A();
-            _sut_B();
-            _done := _sut_A.Done AND _sut_B.Done;
+            _to_A._sut_A.Invoke();
+            _to_A._sut_B.Invoke();
+            _to_A();
+            _done := _to_A._sut_A.Done AND _to_A._sut_B.Done;
         END_IF
 
         IF _done THEN
-            _sut_A.ReadOutState();
-            _sut_B.ReadOutState();
+            _to_A._sut_A.ReadOutState();
+            _to_A._sut_B.ReadOutState();
             ProbeDoneWhen(_done);
         END_IF
+    {endregion}
+    {region "T303_TaskInvokeAfterDoneWithAbortCall"}
     eTcoTaskTests.TaskInvokeAfterDoneWithAbortCall:
         IF NOT _arranged THEN
-            _sut_A.Abort();
-            _sut_B.Abort();
+            _to_A._sut_A.Abort();
+            _to_A._sut_B.Abort();
             _arranged := TRUE;
         END_IF
 
         IF NOT _done THEN
-            _sut_A.Invoke();
-            _sut_B.Invoke();
-            _sut_A();
-            _sut_B();
-            _done := _sut_A.Done AND _sut_B.Done;
+            _to_A._sut_A.Invoke();
+            _to_A._sut_B.Invoke();
+            _to_A();
+            _done := _to_A._sut_A.Done AND _to_A._sut_B.Done;
         END_IF
 
         IF _done THEN
-            _sut_A.ReadOutState();
-            _sut_B.ReadOutState();
+            _to_A._sut_A.ReadOutState();
+            _to_A._sut_B.ReadOutState();
             ProbeDoneWhen(_done);
         END_IF
+    {endregion}
+    {region "T304_TaskInvokeAfterDoneWithRestoreCall"}
     eTcoTaskTests.TaskInvokeAfterDoneWithRestoreCall:
         IF NOT _arranged THEN
-            _sut_A.Restore();
-            _sut_B.Restore();
+            _to_A._sut_A.Restore();
+            _to_A._sut_B.Restore();
             _arranged := TRUE;
         END_IF
 
         IF NOT _done THEN
-            _sut_A.Invoke();
-            _sut_B.Invoke();
-            _sut_A();
-            _sut_B();
-            _done := _sut_A.Done AND _sut_B.Done;
+            _to_A._sut_A.Invoke();
+            _to_A._sut_B.Invoke();
+            _to_A();
+            _done := _to_A._sut_A.Done AND _to_A._sut_B.Done;
         END_IF
 
         IF _done THEN
-            _sut_A.ReadOutState();
-            _sut_B.ReadOutState();
+            _to_A._sut_A.ReadOutState();
+            _to_A._sut_B.ReadOutState();
             ProbeDoneWhen(_done);
         END_IF
+    {endregion}
+    {region "T305_TaskAbortDuringExecutionAndInvoke"}
     eTcoTaskTests.TaskAbortDuringExecutionAndInvoke:
         IF NOT _arranged THEN
             _arranged := TRUE;
@@ -152,44 +164,46 @@ CASE _testId OF
         END_IF
 
         IF NOT _done THEN
-            _sut_A.Invoke();
-            _sut_B.Invoke();
-            _sut_A();
-            _sut_B();
+            _to_A._sut_A.Invoke();
+            _to_A._sut_B.Invoke();
+            _to_A();
 
-            IF _sut_A.Done AND NOT _retBool THEN
-                _sut_A.Abort();
-                _sut_B.Abort();
+            IF _to_A._sut_A.Done AND NOT _retBool THEN
+                _to_A._sut_A.Abort();
+                _to_A._sut_B.Abort();
                 _retBool := true;
             END_IF
 
-            _done := _sut_A.Done AND _sut_B.Done;
+            _done := _to_A._sut_A.Done AND _to_A._sut_B.Done;
         END_IF
 
         IF _done THEN
-            _sut_A.ReadOutState();
-            _sut_B.ReadOutState();
+            _to_A._sut_A.ReadOutState();
+            _to_A._sut_B.ReadOutState();
             ProbeDoneWhen(_done);
         END_IF
+    {endregion}
+    {region "T310_TaskError"}
     eTcoTaskTests.TaskError:
         IF NOT _arranged THEN
             IF _plcCycleCounter = 1 THEN
+                _to_A.CounterValue_A := _inUint;
                 RETURN;
             END_IF
 
             IF _plcCycleCounter = 2 THEN
-                _sut_A.Invoke();
+                _to_A._sut_A.Invoke();
                 RETURN;
             END_IF
 
             IF _plcCycleCounter > 2 AND _plcCycleCounter <= 5 THEN
-                _sut_A();
+                _to_A._sut_A();
                 RETURN;
             END_IF
 
             IF _plcCycleCounter = 6 THEN
-                _sut_A();
-                _sut_A.ReadOutState();
+                _to_A._sut_A();
+                _to_A._sut_A.ReadOutState();
                 _arranged := TRUE;
                 RETURN;
             END_IF
@@ -197,31 +211,298 @@ CASE _testId OF
 
         IF NOT _done THEN
             IF _plcCycleCounter = 7 THEN
-                _sut_A.CounterValue := _sut_A.CounterValue + 5;
-                _sut_A();
-                _sut_A.ReadOutState();
+                _to_A.CounterValue_A := _to_A.CounterValue_A + 5;
+                _to_A._sut_A();
+                _to_A._sut_A.ReadOutState();
             END_IF
+
             IF _plcCycleCounter > 7 AND _plcCycleCounter <= 7 + _inUint THEN
-                _sut_A();
-                _sut_A.ReadOutState();
+                _to_A._sut_A();
+                _to_A._sut_A.ReadOutState();
             END_IF
-            ProbeDoneWhen(_plcCycleCounter >= 7 + _inUint );
+
+            _done := _plcCycleCounter >= 7 + _inUint;
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T311_TaskInvokeAfterErrorNoRestoreNoEmptyCycles"}
+    eTcoTaskTests.TaskInvokeAfterErrorNoRestoreNoEmptyCycles:
+        IF NOT _arranged THEN
+            _to_A._sut_A.Invoke();
+            _arranged := TRUE;
+            RETURN;
         END_IF
 
+        IF NOT _done THEN
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            ProbeDoneWhen(_plcCycleCounter >= 1 + _inUint);
+        END_IF
+    {endregion}
+    {region "T312_TaskInvokeAfterErrorNoRestoreOneEmptyCycle"}
+    eTcoTaskTests.TaskInvokeAfterErrorNoRestoreOneEmptyCycle:
+        IF NOT _arranged THEN
+            IF _plcCycleCounter = 1 THEN
+                RETURN;
+            END_IF
+
+            IF _plcCycleCounter = 2 THEN
+                _to_A._sut_A.Invoke();
+                RETURN;
+            END_IF
+        END_IF
+
+        IF NOT _done THEN
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            _done := _plcCycleCounter >= 2 + _inUint;
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T313_TaskInvokeAfterErrorWithRestore"}
+    eTcoTaskTests.TaskInvokeAfterErrorWithRestore:
+        _to_A._sut_A.Restore();
+        _to_A._sut_A.Invoke();
+        _to_A._sut_A();
+        _to_A._sut_A.ReadOutState();
+        _done := TRUE;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T314_TaskAbortDuringExecution"}
+    eTcoTaskTests.TaskAbortDuringExecution:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Restore();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 2 THEN
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 3 THEN
+            _to_A._sut_A.Abort();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            _done := TRUE;
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T315_TaskMessage"}
+    eTcoTaskTests.TaskMessage:
+        _to_A._sut_A.PostMessage(Message := _inString);
+        _retString := _to_A._sut_A.GetMessage();
+        _done := TRUE;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T316_IdentitiesTest"}
+    eTcoTaskTests.IdentitiesTest:
+        _runElapsedTimer := TRUE;
+        _elapsedTimeETA := UINT_TO_TIME(_inUint);
+        _to_A._sut_A.ReadOutIdentities();
+        _to_A.ReadOutIdentities();
+        ReadOutCycleCounters();
+        _done := _elapsedTimeTimer.Q;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T317_CheckAutoRestoreProperties"}
+    eTcoTaskTests.CheckAutoRestoreProperties:
+        _to_A._tSt_A.ReadOutAutoRestoreProperties();
+        _to_A._tSt_B.ReadOutAutoRestoreProperties();
+        _to_A._tSt_A._tTt_A.ReadOutAutoRestoreProperties();
+        _to_A._tSt_A._tTt_B.ReadOutAutoRestoreProperties();
+        _to_A._tSt_B._tTt_A.ReadOutAutoRestoreProperties();
+        _to_A._tSt_B._tTt_B.ReadOutAutoRestoreProperties();
+        _done := TRUE;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T318_AutoRestoreOnStateChange"}
+    eTcoTaskTests.AutoRestoreOnStateChange:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._tSt_A.ReadOutAutoRestoreProperties();
+            _to_A._tSt_B.ReadOutAutoRestoreProperties();
+            _to_A._tSt_A._tTt_A.ReadOutAutoRestoreProperties();
+            _to_A._tSt_A._tTt_B.ReadOutAutoRestoreProperties();
+            _to_A._tSt_B._tTt_A.ReadOutAutoRestoreProperties();
+            _to_A._tSt_B._tTt_B.ReadOutAutoRestoreProperties();
+            _to_A._tSt_A._tTt_A.ReadOutState();
+            _to_A._tSt_B._tTt_B.ReadOutState();
+        END_IF
+
+        IF _plcCycleCounter = 2 THEN
+            _to_A._tSt_A._tTt_A.Restore();
+            _to_A._tSt_B._tTt_B.Restore();
+            _to_A._tSt_A._tTt_A.ReadOutState();
+            _to_A._tSt_B._tTt_B.ReadOutState();
+        END_IF
+
+        IF _plcCycleCounter = 3 THEN
+            _to_A._tSt_A._tTt_A.Invoke();
+            _to_A._tSt_B._tTt_B.Invoke();
+            _to_A._tSt_A._tTt_A();
+            _to_A._tSt_B._tTt_B();
+            _to_A._tSt_A._tTt_A.ReadOutState();
+            _to_A._tSt_B._tTt_B.ReadOutState();
+        END_IF
+
+        IF _plcCycleCounter = 4 THEN
+            _to_A._tSt_A._tTt_A.Invoke();
+            _to_A._tSt_A._tTt_A();
+            _to_A._tSt_B._tTt_B();
+            _to_A._tSt_A._tTt_A.ReadOutState();
+            _to_A._tSt_B._tTt_B.ReadOutState();
+        END_IF
+
+        IF _plcCycleCounter = 5 THEN
+            _to_A._tSt_A.ChangeState(_to_A._tSt_A._myState);
+            _to_A._tSt_B.ChangeState(_to_A._tSt_B._myState);
+            _to_A._tSt_A._tTt_A();
+            _to_A._tSt_B._tTt_B();
+            _to_A._tSt_A._tTt_A.ReadOutState();
+            _to_A._tSt_B._tTt_B.ReadOutState();
+        END_IF
+
+        _done := _plcCycleCounter = 5;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T320_InvokeDisabledTask"}
+    eTcoTaskTests.InvokeDisabledTask:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A.Disable();
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            _done := _plcCycleCounter >= 1 + _inUint;
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T321_DisableExecutingTask"}
+    eTcoTaskTests.DisableExecutingTask:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Enable();
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 2 THEN
+            _to_A._sut_A.Disable();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 3 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A.Enable();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 4 THEN
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 5 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            _done := TRUE;
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T322_InvokeTaskThenDisable"}
+    eTcoTaskTests.InvokeTaskThenDisable:
+        _to_A._sut_A.Invoke();
+        _to_A._sut_A.Disable();
+        _to_A._sut_A();
+        _to_A._sut_A.ReadOutState();
+        _done := TRUE;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T323_DisableTaskInErrorStateEnableAndTriggerAgain"}
+    eTcoTaskTests.DisableTaskInErrorStateEnableAndTriggerAgain:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Enable();
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 2 THEN
+            _to_A.CounterValue_A := _to_A.CounterValue_A + 5;
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 3 THEN
+            _to_A._sut_A.Disable();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 4 THEN
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        IF _plcCycleCounter = 5 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            _done := TRUE;
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T330_ElapsedTypeMeasurement"}
     //    ******************************		
     eTcoTaskTests.ElapsedTypeMeasurement:
-        _sut_A.Invoke();
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A.Enable();
+            _to_A._sut_A.Invoke();
+            RETURN;
+        END_IF
 
-        IF (_sut_A.Execute()) THEN
+        IF (_to_A._sut_A.Execute()) THEN
             _runElapsedTimer := TRUE;
 
             IF (_elapsedTimeTimer.Q) THEN
-                _sut_A.DoneWhen(_elapsedTimeTimer.Q);
+                _to_A._sut_A.DoneWhen(_elapsedTimeTimer.Q);
             END_IF;
         END_IF
 
-        _elapsedTime := _sut_A.ElapsedTime;
+        _done := _to_A._sut_A.Done;
+        ProbeDoneWhen(_done);
+        _elapsedTime := _to_A._sut_A.ElapsedTime;
 END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutCycleCounters" Id="{05506d62-0498-0b69-19dd-dddce1058327}">
+      <Declaration><![CDATA[METHOD INTERNAL ReadOutCycleCounters]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_startCycles		:=		THIS^.StartCycleCount;
+_endCycles			:=		THIS^.EndCycleCount;
+
+_myIdentity			:= 		THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
   </POU>

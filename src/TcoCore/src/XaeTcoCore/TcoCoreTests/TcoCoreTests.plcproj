@@ -85,7 +85,13 @@
     <Compile Include="Tests\TcoTask\PlcExecuted\eTcoTaskTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcExecTest.TcPOU">
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcTestState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcTestObject.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoTask\TcoTaskTest.TcPOU">

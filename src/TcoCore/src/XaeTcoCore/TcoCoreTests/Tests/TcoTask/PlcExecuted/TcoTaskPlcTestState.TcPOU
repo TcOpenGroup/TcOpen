@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoTaskPlcTestState" Id="{ac5804f3-164b-01f3-1c61-0ae589812e7d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskPlcTestState EXTENDS TcoState
+VAR
+    _myIdentity : ULINT;
+    _myContextIdentity : ULINT;
+    _myContextStartCount : ULINT;
+    _myContextEndCount : ULINT;
+    _myParentIdentity : ULINT;
+    _myState : INT;
+    _tTt_A : TcoTaskPlcTest(THIS^);
+    _tTt_B : TcoTaskPlcTest(THIS^);
+    _onStateChangeCounter : INT;
+    _autoRestoreToMyChildsEnabled : BOOL;
+    _autoRestoreByMyParentEnabled : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="OnStateChange" Id="{9e8946fb-c131-0818-094b-41d78110fb03}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStateChange 
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+VAR
+	message	:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onStateChangeCounter	:=	_onStateChangeCounter + 1;
+
+message := CONCAT('My state has been change from ', INT_TO_STRING(PreviousState));
+message := CONCAT(message, ' to the new state ');
+message := CONCAT(message, INT_TO_STRING(NewState));
+message := CONCAT(message, '.');
+
+THIS^.Messenger.Post(message,eMessageCategory.Debug);
+
+SUPER^.OnStateChange(PreviousState,NewState);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutAutoRestoreProperties" Id="{3eea2da3-0464-08c9-1efd-1eff9cf65786}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_autoRestoreToMyChildsEnabled	:= THIS^.IsAutoRestoreEnabled;
+_autoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutIdentities" Id="{efd3b561-c536-0f19-0598-2bb991cafef2}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutIdentities]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
+
+_myContextIdentity	:=	THIS^.Context.Identity;
+
+_myParentIdentity	:=	THIS^._Parent.Identity;
+		
+_myContextStartCount :=	THIS^.Context.StartCycleCount;
+
+_myContextEndCount	:=	THIS^.Context.EndCycleCount;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutState" Id="{9d78e5f5-ecba-071e-0b84-bfb94e9d1b5d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutState]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_myState			:=	THIS^.State;
+
+THIS^._tTt_A.ReadOutState();
+THIS^._tTt_B.ReadOutState();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerChangeState" Id="{de86b7c0-0ac0-0a8d-00ce-286426da4e38}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerChangeState
+VAR_INPUT
+	NewState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ChangeState(NewState);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerChangeStateWithObjectRestore" Id="{2c68a653-3a7b-0141-00d4-318b858ce116}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerChangeStateWithObjectRestore
+VAR_INPUT
+	NewState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ChangeState(NewState).RestoreObject(THIS^._tTt_A).RestoreObject(THIS^._tTt_B);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerRestore" Id="{bda5f4b0-a5cc-096f-3740-e4e900d9d427}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerRestore
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TriggerTaskInvoke" Id="{ce3b54ba-0108-0e1e-2ee7-7f369b49cb2f}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL TriggerTaskInvoke]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._tTt_A.Invoke();
+
+THIS^._tTt_B.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
