@@ -7,11 +7,14 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	// Added due to IVC compatibility see:https://docs.inxton.com/docu/articles/units/Inxton.vortex.compiler.console/Conceptual/IgnoringPartsOfCode.html	
+	//~
 	_logBuffer		: RingBuffer(
 									Override	:= TRUE,
 									Capacity	:= MAX_LOGS,
 									ElementSize	:= SIZEOF(TcoMessage)
 								);
+	//~							
 END_VAR
 
 VAR CONSTANT
@@ -58,14 +61,5 @@ END_VAR]]></Declaration>
 //_logBuffer.Push(ADR(logEntry), 1);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoVolatileLogger">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoVolatileLogger.Post">
-      <LineId Id="32" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="27" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -4,7 +4,11 @@
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'Do not call this function block directly. Please use the provided methods.'} 
 FUNCTION_BLOCK FINAL TcoArguments IMPLEMENTS ITcoArguments
 VAR
+	// added due to IVC compatibility see:https://docs.inxton.com/docu/articles/units/Inxton.vortex.compiler.console/Conceptual/IgnoringPartsOfCode.html
+	// So far no support for expressions in array size declarations see https://docs.inxton.com/docu/articles/units/Inxton.vortex.compiler.console/README.html#arrays
+	//~
 	_data			: ARRAY[0.. (MAX_ARGUMENTS - 1)] OF T_Arg;
+	//~
 	_count			: UINT;
 	_ipLogger		: ITcoLogger;
 END_VAR
@@ -193,64 +197,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="TcoArguments">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.AddBool">
-      <LineId Id="9" Count="1" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.AddDecimal">
-      <LineId Id="9" Count="2" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.AddFloat">
-      <LineId Id="9" Count="2" />
-      <LineId Id="7" Count="1" />
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.AddString">
-      <LineId Id="11" Count="2" />
-      <LineId Id="9" Count="1" />
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.AddStruct">
-      <LineId Id="116" Count="0" />
-      <LineId Id="118" Count="0" />
-      <LineId Id="131" Count="0" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="140" Count="1" />
-      <LineId Id="136" Count="2" />
-      <LineId Id="150" Count="0" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="130" Count="0" />
-      <LineId Id="124" Count="1" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.Append">
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.Clear">
-      <LineId Id="4" Count="1" />
-    </LineIds>
-    <LineIds Name="TcoArguments.Compose">
-      <LineId Id="26" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="11" Count="14" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.FB_init">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoArguments.IsEmpty.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
