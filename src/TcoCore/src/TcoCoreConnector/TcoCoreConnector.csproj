@@ -25,6 +25,9 @@
     <Content Include="_meta\TcoCore.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />          
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
   </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj" />
+    </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>
