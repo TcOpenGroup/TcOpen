@@ -9,7 +9,7 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoToggleTask : ICommand
+    public partial class TcoToggleTask : ICommand, IDecorateLog
     {
         public event EventHandler CanExecuteChanged;
 
@@ -18,6 +18,19 @@ namespace TcoCore
             this._enabled.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
         }
+
+        private Func<object> _logPayloadDecoration;
+
+        /// <summary>
+        /// Gets or sets log payload decoration function. 
+        /// The return object will can be added to provide additional information about this task execution.
+        /// <note:important>
+        /// There must be an implementation that calls and adds the result object into the log message payload.
+        /// an example of the implementation can be found here <see cref="LogInfo.Create(IVortexElement)"/> (TcoCore.Logging.LogInfo.Create).
+        /// How to create a payload decorator see in <see cref="TcoSequencer.PexConstructor(IVortexObject, string, string)"/>
+        /// </important>
+        /// </summary>
+        public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
 
         private void TcoToggleTask_CanExecuteChanged(object sender, EventArgs e)
         {
@@ -29,11 +42,20 @@ namespace TcoCore
             Dispatcher.Get.Invoke(() => CanExecuteChanged(sender, args));
         }
 
+        /// <summary>
+        /// Queries whether the command can be executed.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
             return this._enabled.Cyclic;
         }
 
+        /// <summary>
+        /// Executes this task.
+        /// </summary>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             var originalState = this._state.Synchron;
