@@ -131,7 +131,6 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);
-
 THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
@@ -149,22 +148,28 @@ METHOD PROTECTED OnDone
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{5b8e54de-475c-0f46-2d99-ccc66c7867aa}">
+    <Method Name="OnError" Id="{04568080-7829-0dc8-1387-20a80a858f6e}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
-    _mcMoveRelative(Axis := _axisRef, Execute := FALSE);
-END_IF
-]]></ST>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{3ab86d75-bbf1-0431-304b-74df4f8dfd95}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e976de80-cfea-01a1-1fd9-673984f12c06}">
@@ -181,6 +186,24 @@ END_IF
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{5b8e54de-475c-0f46-2d99-ccc66c7867aa}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
+    _mcMoveRelative(Axis := _axisRef, Execute := FALSE);
+END_IF
+]]></ST>
       </Implementation>
     </Method>
   </POU>

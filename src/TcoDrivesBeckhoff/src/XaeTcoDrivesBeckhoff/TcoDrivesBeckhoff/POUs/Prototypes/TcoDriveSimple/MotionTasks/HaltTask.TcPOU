@@ -83,21 +83,42 @@ _jerk := inJerk;
 InvokeWithParams := THIS^.Invoke();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{18785d6e-b3bd-04ec-1a40-8d17a3911928}">
+    <Method Name="OnDone" Id="{28ff8f2d-bf50-0b5a-1ad1-14f70e4986bb}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Done``` state .
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._haltTask._mcHalt.ErrorID);
-    _mcHalt(Axis := _axisRef, Execute := FALSE);
-END_IF]]></ST>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{2aa19486-3273-0dcb-3fca-71dc00c2ea0a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{7c680306-98e9-0c27-1b7f-0179e6eebe7c}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{5b189d9a-d345-0f25-1831-45a12b9aee90}">
@@ -114,6 +135,23 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{18785d6e-b3bd-04ec-1a40-8d17a3911928}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._haltTask._mcHalt.ErrorID);
+    _mcHalt(Axis := _axisRef, Execute := FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

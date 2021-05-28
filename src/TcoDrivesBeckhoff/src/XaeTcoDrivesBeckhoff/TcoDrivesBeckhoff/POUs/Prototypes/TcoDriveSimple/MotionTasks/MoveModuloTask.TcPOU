@@ -147,24 +147,46 @@ METHOD PROTECTED OnAbort]]></Declaration>
     END_IF
 END_IF
 
-THIS^.DriveRef.Stop(-1, -1);]]></ST>
+THIS^.DriveRef.Stop(-1, -1);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{60d094a0-a4d7-0a68-3fc6-9de964ed28a7}">
+    <Method Name="OnDone" Id="{02f1074f-d270-0406-275f-a7e121d5e4b7}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Done``` state .
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
-    _mcMoveModulo(Axis := _axisRef, Execute := FALSE);
-END_IF]]></ST>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{1162b272-9d04-02d1-121e-f32f7f955372}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{ca3b5016-83e1-0994-2ff7-70a41fead783}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e76d73f7-c997-0281-1a04-764cb6b2dce1}">
@@ -181,6 +203,23 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{60d094a0-a4d7-0a68-3fc6-9de964ed28a7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
+    _mcMoveModulo(Axis := _axisRef, Execute := FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

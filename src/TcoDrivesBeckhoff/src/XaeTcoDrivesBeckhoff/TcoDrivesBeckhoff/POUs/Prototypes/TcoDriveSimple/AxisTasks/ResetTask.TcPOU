@@ -17,31 +17,23 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcReset(Axis := _axisRef, Execute := FALSE);
-END_IF
+//IF THIS^.Ready OR THIS^.Done THEN
+//    _mcReset(Axis := _axisRef, Execute := FALSE);
+//END_IF
 
 IF Execute() THEN
-	DriveRef.ClearError();
-    _mcReset(Axis := _axisRef,
-        Execute := NOT _mcReset.Busy,
-        Done =>,
-        Busy =>,
-        Error =>,
-        ErrorID =>);
+//    _mcReset(Axis := _axisRef,
+//        Execute := NOT _mcReset.Busy,
+//        Done =>,
+//        Busy =>,
+//        Error =>,
+//        ErrorID =>);
+    _mcReset(Axis := _axisRef);
 
     DoneWhen(_mcReset.Done);
     ThrowWhen(_mcReset.Error);
 END_IF
-
-IF Done THEN
-    DriveRef.RestoreTasks();
-	DriveRef.ClearError();
-END_IF
-
-IF Error THEN
-    DriveRef.RestoreTasks();
-END_IF]]></ST>
+]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{539bbd16-3d54-0366-3b1b-e22e7261b0a1}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
@@ -67,21 +59,54 @@ END_VAR]]></Declaration>
         <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{70772925-0ea5-0b7e-21de-df87b76e125e}">
+    <Method Name="OnDone" Id="{72d4d2a3-5082-0045-31b5-fff519bd5b2b}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Done``` state .
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._resetTask._mcReset.ErrorID);
-    _mcReset(Axis := _axisRef, Execute := FALSE);	
-END_IF]]></ST>
+        <ST><![CDATA[DriveRef.RestoreTasks();
+DriveRef.ClearError();
+
+_mcReset(Axis := _axisRef,Execute := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{317d0d1d-7213-0f6a-002c-bd29fc6a14f6}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcReset(Axis := _axisRef,Execute := FALSE);
+IF __ISVALIDREF(DriveRef) THEN
+	THIS^.DriveRef._movementState.Restore();
+    DriveRef.RestoreTasks();
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{2c8c79ff-94f6-08a3-2eaa-65d37d102a58}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[DriveRef.ClearError();
+
+_mcReset(Axis := _axisRef,Execute := TRUE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{b66f0f12-7e1b-0ae5-3d39-d75ff6b45738}">
@@ -98,6 +123,23 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{70772925-0ea5-0b7e-21de-df87b76e125e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._resetTask._mcReset.ErrorID);
+    _mcReset(Axis := _axisRef, Execute := FALSE);	
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>
