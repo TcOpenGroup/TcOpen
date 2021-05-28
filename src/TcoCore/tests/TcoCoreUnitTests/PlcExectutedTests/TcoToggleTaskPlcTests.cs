@@ -5,7 +5,7 @@ using TcoCoreTests;
 namespace TcoCoreUnitTests.PlcExecutedTests
 {
 
-    public class T00_TcoToggleTaskTests
+    public class T10_TcoToggleTaskTests
     {
         bool state = false;
 
@@ -33,8 +33,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._done.Synchron = false;
         }
 
-        [Test, Order(002)]
-        public void T002_CheckInitStates()
+        [Test, Order((int)eTcoToggleTaskTests.Reinit)]
+        public void T1002_CheckInitStates()
         {
             tc._done.Synchron = false;
             tc._bool.Synchron = true;
@@ -46,8 +46,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(tc._bool.Synchron, tc._sut._state.Synchron);
         }
 
-        [Test, Order(003)]
-        public void T003_Message()
+        [Test, Order((int)eTcoToggleTaskTests.Message)]
+        public void T1003_Message()
         {
             string message = "Test error message";
             tc._string .Synchron = message;
@@ -55,8 +55,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(message, tc._sut._messenger._mime.Text.Synchron);                                 //Check if message apears in the mime.
         }
 
-        [Test, Order(004)]
-        public void T004_TriggerToggleWhileRunNotCalled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerToggleWhileRunNotCalled)]
+        public void T1004_TriggerToggleWhileRunNotCalled()
         {
             state = tc._sut._state.Synchron;
             tc.ExecuteProbeRun(2, 0);
@@ -65,8 +65,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(state, tc._sut._state.Synchron);
         }
 
-        [Test, Order(005)]
-        public void T005_TriggerToggleWhileDisabled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerToggleWhileDisabled)]
+        public void T1005_TriggerToggleWhileDisabled()
         {
             state = tc._sut._state.Synchron;
             tc.ExecuteProbeRun((int)eTcoToggleTaskTests.TriggerToggleWhileDisabled, () => tc._done.Synchron);
@@ -74,8 +74,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(state, tc._sut._state.Synchron);
         }
 
-        [Test, Order(006)]
-        public void T006_TriggerToggleWhileEnabled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerToggleWhileEnabled)]
+        public void T1006_TriggerToggleWhileEnabled()
         {
             state = tc._sut._state.Synchron;
             tc.ExecuteProbeRun((int)eTcoToggleTaskTests.TriggerToggleWhileEnabled, () => tc._done.Synchron);
@@ -83,8 +83,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreNotEqual(state, tc._sut._state.Synchron);
         }
 
-        [Test, Order(007)]
-        public void T007_TriggerOnWhileRunNotCalled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerOnWhileRunNotCalled)]
+        public void T1007_TriggerOnWhileRunNotCalled()
         {
             tc._sut.SetState(false);
             state = tc._sut._state.Synchron;
@@ -94,8 +94,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(state, tc._sut._state.Synchron);
         }
 
-        [Test, Order(008)]
-        public void T008_TriggerOnWhileDisabled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerOnWhileDisabled)]
+        public void T1008_TriggerOnWhileDisabled()
         {
             tc._sut.SetState(false);
             state = tc._sut._state.Synchron;
@@ -104,8 +104,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.IsFalse(tc._sut._state.Synchron);
         }
 
-        [Test, Order(009)]
-        public void T009_TriggerOnWhileEnabled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerOnWhileEnabled)]
+        public void T1009_TriggerOnWhileEnabled()
         {
             tc._sut.SetState(false);
             state = tc._sut._state.Synchron;
@@ -114,8 +114,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.IsTrue(tc._sut._state.Synchron);
         }
 
-        [Test, Order(010)]
-        public void T010_TriggerOffWhileRunNotCalled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerOffWhileRunNotCalled)]
+        public void T1010_TriggerOffWhileRunNotCalled()
         {
             tc._sut.SetState(true);
             tc.ExecuteProbeRun(2, 0);
@@ -124,8 +124,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.IsTrue(tc._sut._state.Synchron);
         }
 
-        [Test, Order(011)]
-        public void T011_TriggerOffWhileDisabled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerOffWhileDisabled)]
+        public void T1011_TriggerOffWhileDisabled()
         {
             tc._sut.SetState(true);
             state = tc._sut._state.Synchron;
@@ -134,8 +134,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.IsTrue(tc._sut._state.Synchron);
         }
 
-        [Test, Order(012)]
-        public void T012_TriggerOffWhileEnabled()
+        [Test, Order((int)eTcoToggleTaskTests.TriggerOffWhileEnabled)]
+        public void T1012_TriggerOffWhileEnabled()
         {
             tc._sut.SetState(true);
             state = tc._sut._state.Synchron;

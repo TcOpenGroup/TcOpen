@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoTaskPlcTestObject" Id="{e5a083e5-83f5-09f3-0c5b-570a13d7234f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskPlcTestObject EXTENDS TcoCore.TcoObject
+VAR
+	_myIdentity				:	ULINT;
+	_myContextIdentity		:	ULINT;
+	_myContextStartCount 	:	ULINT;
+	_myContextEndCount		:	ULINT;
+	_myParentIdentity		:	ULINT;
+    _sut_A : TcoTaskPlcTest(THIS^);
+    _sut_B : TcoTaskPlcTest(THIS^);
+	_tSt_A:TcoTaskPlcTestState(THIS^,eRestoreMode.AutoRestoreMembers);
+	_tSt_B:TcoTaskPlcTestState(THIS^, eRestoreMode.None);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_sut_A();
+_sut_B();]]></ST>
+    </Implementation>
+    <Property Name="CounterValue_A" Id="{5108df5b-bacd-0032-225a-5dc28c7c10cb}">
+      <Declaration><![CDATA[PROPERTY CounterValue_A : ULINT]]></Declaration>
+      <Get Name="Get" Id="{4023e99e-a54f-0fc9-0f5c-0c4e68f62e7c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CounterValue_A := _sut_A.CounterValue;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{4f0cf991-1e06-09c6-24ec-6f9fd9e46e40}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_sut_A.CounterValue := CounterValue_A;
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="CounterValue_B" Id="{bd90ed58-5558-0599-29f7-42c0fd95ee77}">
+      <Declaration><![CDATA[PROPERTY CounterValue_B : ULINT]]></Declaration>
+      <Get Name="Get" Id="{883f80b3-84aa-06e3-2f8d-184bffe68342}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CounterValue_B := _sut_B.CounterValue;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9ce79a97-64cd-0048-15b6-fcc5d54125c9}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_sut_B.CounterValue := CounterValue_B;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="ReadOutIdentities" Id="{83ee5bb6-dfd6-0470-1384-2995dc5dc5b1}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutIdentities]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
+
+_myContextIdentity	:=	THIS^.Context.Identity;
+		
+_myContextStartCount :=	THIS^.Context.StartCycleCount;
+
+_myContextEndCount	:=	THIS^.Context.EndCycleCount;
+
+_myParentIdentity	:=	THIS^._Parent.Identity;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
