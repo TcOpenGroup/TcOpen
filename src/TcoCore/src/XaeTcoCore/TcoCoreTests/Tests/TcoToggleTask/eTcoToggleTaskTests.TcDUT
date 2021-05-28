@@ -5,18 +5,18 @@
 {attribute 'strict'}
 TYPE eTcoToggleTaskTests :
 (
-	Reinit	:=	1,
-	CleanUp	:= 2,
-	Message := 3,
-	TriggerToggleWhileRunNotCalled := 4,
-	TriggerToggleWhileDisabled := 5,
-	TriggerToggleWhileEnabled := 6,
-	TriggerOnWhileRunNotCalled := 7,
-	TriggerOnWhileDisabled := 8,
-	TriggerOnWhileEnabled := 9,
-	TriggerOffWhileRunNotCalled := 10,
-	TriggerOffWhileDisabled := 11,
-	TriggerOffWhileEnabled := 12
+	Reinit	:=	1001,
+	CleanUp	:= 1002,
+	Message := 1003,
+	TriggerToggleWhileRunNotCalled := 1004,
+	TriggerToggleWhileDisabled := 1005,
+	TriggerToggleWhileEnabled := 1006,
+	TriggerOnWhileRunNotCalled := 1007,
+	TriggerOnWhileDisabled := 1008,
+	TriggerOnWhileEnabled := 1009,
+	TriggerOffWhileRunNotCalled := 1010,
+	TriggerOffWhileDisabled := 1011,
+	TriggerOffWhileEnabled := 1012
 	
 );
 END_TYPE
