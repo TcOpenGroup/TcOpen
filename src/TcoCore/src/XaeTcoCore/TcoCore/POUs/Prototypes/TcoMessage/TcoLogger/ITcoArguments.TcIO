@@ -24,7 +24,7 @@ END_VAR]]></Declaration>
     <Method Name="AddString" Id="{c69ccdfa-d6bd-05a5-2320-b6dd9b22cf01}">
       <Declaration><![CDATA[METHOD AddString : ITcoArguments
 VAR_INPUT
-	Value	: STRING;
+	Value	: STRING(255);
 END_VAR]]></Declaration>
     </Method>
     <Method Name="AddStruct" Id="{b03ec0bd-06a4-0d16-0d03-e91004337e7f}">

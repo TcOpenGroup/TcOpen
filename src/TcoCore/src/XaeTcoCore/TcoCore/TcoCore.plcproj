@@ -51,6 +51,12 @@
     <Compile Include="POUs\Prototypes\TcoContext\ITcoContextEnvironment.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoContext\TcoContexBuilder\ITcoContexBuilder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoContext\TcoContexBuilder\TcoContextBuilder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
+    <Folder Include="POUs\Prototypes\TcoContext\TcoContexBuilder">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </Folder>
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />

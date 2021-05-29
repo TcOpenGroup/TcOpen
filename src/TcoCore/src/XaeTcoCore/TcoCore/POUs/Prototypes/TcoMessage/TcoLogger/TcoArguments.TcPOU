@@ -66,7 +66,7 @@ AddFloat := THIS^;]]></ST>
     <Method Name="AddString" Id="{2474d8f9-ade5-0a8d-2f75-95232d506eb4}">
       <Declaration><![CDATA[METHOD AddString : ITcoArguments
 VAR_INPUT
-	Value	: STRING;
+	Value	: STRING(255);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -102,8 +102,8 @@ END_VAR
 
 VAR
 	jsonConverter 	: Tc3_JsonXml.FB_JsonReadWriteDatatype;	
-	jsonDoc			: STRING(255);
-	jsonDocSize		: UDINT := SIZEOF(jsonDoc);
+	pJsonDoc		: POINTER TO STRING(255);
+	jsonDocSize		: UDINT := SIZEOF(pJsonDoc);
 	symbolName		: STRING(255);
 	arg				: T_Arg;
 END_VAR]]></Declaration>
@@ -111,10 +111,10 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF pVARIABLE <> 0 AND ioSIZE > 0 AND _count < MAX_ARGUMENTS THEN
 	symbolName := jsonConverter.GetSymbolNameByAddress(nData := ioSIZE, pData := pVARIABLE);
 	
-	IF jsonConverter.GetJsonFromSymbol(symbolName, ioSIZE, pVARIABLE, jsonDocSize, jsonDoc) THEN
+	IF jsonConverter.GetJsonFromSymbol(symbolName, ioSIZE, pVARIABLE, jsonDocSize, pJsonDoc) THEN
 		
 		arg.eType := ARGTYPE_STRING;
-		arg.cbLen := INT_TO_UDINT( LEN2( ADR(jsonDoc) ) + 1 );
+		arg.cbLen := (LEN2( ADR(pJsonDoc) ) + 1 );
 		arg.pData := pVARIABLE;
 	
 		_data[_count] := arg;

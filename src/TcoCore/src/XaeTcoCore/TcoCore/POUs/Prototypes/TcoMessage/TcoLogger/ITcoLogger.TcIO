@@ -144,6 +144,7 @@ END_VAR
     <Method Name="WithIdentity" Id="{b8d1c3d3-12b0-084e-0c24-012768920bf5}">
       <Declaration><![CDATA[METHOD WithIdentity : ITcoLogger
 VAR_INPUT
+	Identity	: ULINT;
 END_VAR
 ]]></Declaration>
     </Method>

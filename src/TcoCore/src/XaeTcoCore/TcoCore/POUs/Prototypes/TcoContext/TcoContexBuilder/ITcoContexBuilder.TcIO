@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoContexBuilder" Id="{eab58bda-2fec-063c-131d-ae773937ca95}">
+    <Declaration><![CDATA[INTERFACE ITcoContexBuilder
+]]></Declaration>
+    <Method Name="WithLogger" Id="{abced830-4a55-0d4e-16ed-00d59a233b9a}">
+      <Declaration><![CDATA[METHOD WithLogger : ITcoContexBuilder
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
