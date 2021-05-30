@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FileSink" Id="{9a0372bc-f0f0-04ef-2fa5-e601c4eee8b0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FileSink IMPLEMENTS ITcoLogSink
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_filePath		: STRING(255);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Emit" Id="{ebf12252-d03b-0b9c-3ff6-e03360967b56}">
+      <Declaration><![CDATA[METHOD Emit : BOOL
+VAR_INPUT
+	LogEvent	: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Write to file writer buffer
+
+
+// e.g. use sample of benhar-dev
+// https://github.com/benhar-dev/tc3-data-logger]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="FilePath" Id="{389a9893-b016-0ad1-01d7-a2ef620a43da}">
+      <Declaration><![CDATA[PROPERTY PUBLIC FilePath : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{8e28db3d-55bd-0169-07ed-18d48d5279c4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[FilePath := _filePath;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b068213b-984a-0feb-380a-914bc3bbd9d0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_filePath := FilePath;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

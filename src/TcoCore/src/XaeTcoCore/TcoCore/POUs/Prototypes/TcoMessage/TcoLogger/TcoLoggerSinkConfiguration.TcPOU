@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLoggerSinkConfiguration" Id="{e272c544-e71c-03a0-0b60-a798d7eaaffa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerSinkConfiguration 
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_config 		: REFERENCE TO TcoLoggerConfiguration;
+	
+	_xaeSink		: AdsLogSink;
+	_volatileSink	: VolatileSink;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{3c97c2ec-75e0-0ebb-3952-33b2d3423aed}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+
+	Config		: REFERENCE TO TcoLoggerConfiguration;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config := Config;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Memory" Id="{50b0a892-7347-0f8e-1e32-74a8a731b1a5}">
+      <Declaration><![CDATA[METHOD PUBLIC Memory : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config.AddSink(_volatileSink);
+Memory REF= _config;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="XAE" Id="{66c0f21a-b76d-0a03-1dcf-41f50e56eb96}">
+      <Declaration><![CDATA[METHOD PUBLIC XAE : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config.AddSink(_xaeSink);
+XAE := _config;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

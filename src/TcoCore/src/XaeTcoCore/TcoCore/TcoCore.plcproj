@@ -69,22 +69,64 @@
     <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessengerSettings.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit\TcoAdsLogger.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit\TcoVolatileLogger.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Enrichers\InstancePathEnricher.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\ITcoArguments.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\ITcoLogEnricher.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\ITcoLogger.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\ITcoLogSink.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\LogEnricherList.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\LogEvent.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\LogLevel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\LogSinkList.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Sinks\AdsLogSink.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\Sinks\VolatileSink.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoArguments.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoLoggerConfiguration.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoLoggerEnrichmentConfiguration.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\TcoLoggerSinkConfiguration.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\UserExtensions\ExtendedLoggerEnrichmentConfiguration.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\UserExtensions\ExtendedLoggerSinkConfiguration.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\UserExtensions\FileSink.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoLogger\UserExtensions\ProjectNameEnricher.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoMessenger.TcPOU">
@@ -223,7 +265,9 @@
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </Folder>
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger" />
-    <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Explicit" />
+    <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Enrichers" />
+    <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\UserExtensions" />
+    <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Sinks" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
     <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />
@@ -298,6 +342,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <SubObject Include="LogEnricherList.AddEnricher" />
+    <SubObject Include="LogEnricherList.AddEnricher" />
+    <SubObject Include="LogEnricherList.Clear" />
+    <SubObject Include="LogEnricherList.Clear" />
+    <SubObject Include="LogEnricherList.Count" />
+    <SubObject Include="LogEnricherList.Count" />
+    <SubObject Include="LogEnricherList.Count.Get" />
+    <SubObject Include="LogEnricherList.Count.Get" />
+    <SubObject Include="LogEnricherList.GetNext" />
+    <SubObject Include="LogEnricherList.HasNext" />
+    <SubObject Include="LogEnricherList.HasNext" />
+    <SubObject Include="LogEnricherList.IsEmpty" />
+    <SubObject Include="LogEnricherList.IsEmpty" />
+    <SubObject Include="LogEnricherList.IsEmpty.Get" />
+    <SubObject Include="LogEnricherList.IsEmpty.Get" />
+    <SubObject Include="LogEnricherList.ResetIterator" />
+    <SubObject Include="LogEnricherList.ResetIterator" />
     <SubObject Include="RingBuffer.Capacity" />
     <SubObject Include="RingBuffer.Capacity.Get" />
     <SubObject Include="RingBuffer.Clear" />

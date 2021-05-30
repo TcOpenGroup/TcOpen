@@ -4,28 +4,6 @@
     <Declaration><![CDATA[//TODO
 INTERFACE ITcoLogger
 ]]></Declaration>
-    <Method Name="Critical" Id="{2a97750b-7429-0722-031d-e8aac7ae8670}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Adds message of 'critical' category to the message queue.				 
-			</summary>						
-		</docu>
-~*)
-METHOD PUBLIC Critical
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Arbitrary message string.			 
-			</summary>			
-		</docu>
-	~*)
-	Message : STRING(255);
-END_VAR
-
-]]></Declaration>
-    </Method>
     <Method Name="Debug" Id="{68cdbaee-b871-0fbd-18b9-9f8d32a93ccd}">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -69,15 +47,15 @@ END_VAR
 
 ]]></Declaration>
     </Method>
-    <Method Name="Info" Id="{b1aa45f0-fbf4-025c-0384-25d75692e16a}">
+    <Method Name="Fatal" Id="{2a97750b-7429-0722-031d-e8aac7ae8670}">
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'information' category to the message queue.				 
-			</summary>			
+				Adds message of 'critical' category to the message queue.				 
+			</summary>						
 		</docu>
 ~*)
-METHOD PUBLIC Info 
+METHOD PUBLIC Fatal
 VAR_INPUT
 	(*~
 		<docu>
@@ -91,15 +69,29 @@ END_VAR
 
 ]]></Declaration>
     </Method>
-    <Method Name="Trace" Id="{f4e741b9-c2b6-0c49-0b46-2d9ad8fd3be3}">
+    <Method Name="ForContext" Id="{6c3b9271-2a52-0de8-0524-07a02f6ce806}">
+      <Declaration><![CDATA[METHOD ForContext : ITcoLogger
+VAR_INPUT
+	Context		: ITcoContext;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="ForIdentity" Id="{b8d1c3d3-12b0-084e-0c24-012768920bf5}">
+      <Declaration><![CDATA[METHOD ForIdentity : ITcoLogger
+VAR_INPUT
+	Identity	: ULINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Info" Id="{b1aa45f0-fbf4-025c-0384-25d75692e16a}">
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'trace' category to the message queue.				 
-			</summary>					
+				Adds message of 'information' category to the message queue.				 
+			</summary>			
 		</docu>
 ~*)
-METHOD PUBLIC Trace 
+METHOD PUBLIC Info 
 VAR_INPUT
 	(*~
 		<docu>
@@ -138,13 +130,6 @@ END_VAR
     <Method Name="WithArgs" Id="{99ef7fcd-f000-007b-1aa8-3ace8df24e05}">
       <Declaration><![CDATA[METHOD WithArgs : ITcoArguments
 VAR_INPUT
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="WithIdentity" Id="{b8d1c3d3-12b0-084e-0c24-012768920bf5}">
-      <Declaration><![CDATA[METHOD WithIdentity : ITcoLogger
-VAR_INPUT
-	Identity	: ULINT;
 END_VAR
 ]]></Declaration>
     </Method>

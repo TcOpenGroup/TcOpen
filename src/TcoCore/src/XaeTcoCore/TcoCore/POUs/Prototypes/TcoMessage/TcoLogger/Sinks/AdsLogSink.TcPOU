@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="AdsLogSink" Id="{d9931d1f-35a0-0c3e-16a4-d9f0f4bf0e4a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL AdsLogSink IMPLEMENTS ITcoLogSink
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Emit" Id="{abc98689-d825-0286-2b15-2a7963025d80}">
+      <Declaration><![CDATA[METHOD Emit : BOOL
+VAR_INPUT
+	LogEvent	: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(LogEvent) THEN
+	RETURN;
+END_IF
+
+// ADSLOGSTR(0, LogEvent.Text, '');]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

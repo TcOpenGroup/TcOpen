@@ -16,25 +16,30 @@
 	</summary>				
 </docu>	
 ~*)	
-FUNCTION_BLOCK ABSTRACT TcoLogger IMPLEMENTS ITcoLogger
+FUNCTION_BLOCK FINAL TcoLogger IMPLEMENTS ITcoLogger
 
 VAR
 	_arguments				: TcoArguments(THIS^);	
 	_Parent 				: ITcoObject;
-	_contextIdentity 		: ULINT;				
+	_contextIdentity 		: ULINT;		
+	
+	_logEvent				: LogEvent;
+
+	_refConfig				: REFERENCE TO TcoLoggerConfiguration;	
+	_defaultConfig			: TcoLoggerConfiguration;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Critical" Id="{09077f0c-d871-0b98-1a27-b10d1530940c}">
+    <Method Name="Compose" Id="{b13d2647-feb8-066d-10af-e6730cf1fd00}">
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'critical' category to the message queue.				 
-			</summary>						
+				Creates message of given category for this logger.				 
+			</summary>				
 		</docu>
 ~*)
-METHOD Critical
+METHOD PROTECTED Compose 
 VAR_INPUT
 	(*~
 		<docu>
@@ -43,15 +48,51 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message	: STRING(255);
+	Message : STRING(255);
+	(*~
+		<docu>
+			<summary>
+				Message level.			 
+			</summary>			
+		</docu>
+	~*)
+	Level : LogLevel;	
 END_VAR
-]]></Declaration>
+
+VAR
+	_logEvent	: LogEvent;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
 	_arguments.Compose(ADR(Message));
 END_IF
 
-THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
+IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Rtc <> 0) THEN
+	_logEvent.TimeStamp :=  _Parent.Context.Rtc.NowLocal();
+	_logEvent.Text := Message;
+	_logEvent.Identity := _Parent.Identity;
+	_logEvent.LogLevel := Level;
+	_logEvent.Cycle := _Parent.Context.StartCycleCount;
+END_IF;
+
+IF NOT THIS^.Enrich(_logEvent) THEN
+	RETURN;
+END_IF
+
+THIS^.Dispatch(_logEvent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Configure" Id="{db196f9a-173a-0b31-2f71-f3d81c9e47b7}">
+      <Declaration><![CDATA[METHOD PUBLIC Configure : REFERENCE TO TcoLogger
+VAR_INPUT
+	Config		: REFERENCE TO TcoLoggerConfiguration;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF __ISVALIDREF(Config) THEN
+	_refConfig REF= Config;
+END_IF
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Debug" Id="{161f9861-cbc5-079b-3518-3e1f3248b572}">
@@ -75,11 +116,45 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
-	_arguments.Compose(ADR(Message));
+        <ST><![CDATA[THIS^.Write(Message, LogLevel.Debug);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Dispatch" Id="{16b8dbe6-22ab-04a9-3dd9-ffbe17093489}">
+      <Declaration><![CDATA[METHOD PROTECTED Dispatch : BOOL
+VAR_INPUT
+	LogEvent		: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(_refConfig) OR NOT __ISVALIDREF(LogEvent) THEN
+	RETURN;
 END_IF
 
-THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
+_refConfig.Sinks.ResetIterator();
+WHILE _refConfig.Sinks.HasNext() DO
+	_refConfig.Sinks.GetNext().Emit(LogEvent);
+END_WHILE
+
+Dispatch := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enrich" Id="{d04efcef-b81a-05fb-2e03-c9911ab3b8b5}">
+      <Declaration><![CDATA[METHOD PROTECTED Enrich : BOOL
+VAR_INPUT
+	LogEvent		: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(_refConfig) OR NOT __ISVALIDREF(LogEvent) THEN
+	RETURN;
+END_IF
+
+_refConfig.Enrichers.ResetIterator();
+WHILE _refConfig.Enrichers.HasNext() DO
+	_refConfig.Enrichers.GetNext().Enrich(LogEvent);
+END_WHILE
+
+Enrich := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Error" Id="{6d214bb4-37bc-026e-1dd0-1b261d65f009}">
@@ -103,11 +178,31 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
-	_arguments.Compose(ADR(Message));
-END_IF
-
-THIS^.Post(Message, eMessageCategory.Error);]]></ST>
+        <ST><![CDATA[THIS^.Write(Message, LogLevel.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Fatal" Id="{09077f0c-d871-0b98-1a27-b10d1530940c}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'critical' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD Fatal
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Write(Message, LogLevel.Fatal);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{cdc80de1-ddaf-07c0-18b3-ba8b9da53e1a}">
@@ -123,10 +218,40 @@ END_VAR
         <ST><![CDATA[_Parent := Parent;
 _contextIdentity := Parent.Identity;
 
-
 IF NOT bInCopyCode THEN
 	// e.g. register logger instance at a global logging provider 
+	
+	// Use default configuration until method "Configure" is called
+	_defaultConfig
+		.Clear()
+		.MinimumLevel(LogLevel.Warning)
+		.EnrichWith.Context()
+		.WriteTo.XAE()
+		.Build();
+		
+	_refConfig REF= _defaultConfig;
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ForContext" Id="{7edb3696-2377-0055-02a2-a362b6e77d2e}">
+      <Declaration><![CDATA[METHOD ForContext : ITcoLogger
+VAR_INPUT
+	Context	: ITcoContext;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+ForContext := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ForIdentity" Id="{d0b9635b-f99b-05ed-2557-440b5cabaa65}">
+      <Declaration><![CDATA[METHOD ForIdentity : ITcoLogger
+VAR_INPUT
+	Identity	: ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_contextIdentity := Identity;
+ForIdentity := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Info" Id="{68f29db0-d9fd-04bb-116c-f6c0942a894c}">
@@ -150,70 +275,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
-	_arguments.Compose(ADR(Message));
-END_IF
-
-THIS^.Post(Message, eMessageCategory.Info);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Post" Id="{b13d2647-feb8-066d-10af-e6730cf1fd00}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Creates message of given category for this logger.				 
-			</summary>				
-		</docu>
-~*)
-METHOD PROTECTED ABSTRACT Post 
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Arbitrary message string.			 
-			</summary>			
-		</docu>
-	~*)
-	Message : STRING(255);
-	(*~
-		<docu>
-			<summary>
-				Message category.			 
-			</summary>			
-		</docu>
-	~*)
-	Category : eMessageCategory;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Trace" Id="{23555722-e6a8-0626-1984-a88bb7f4a6a2}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Adds message of 'trace' category to the message queue.				 
-			</summary>					
-		</docu>
-~*)
-METHOD Trace
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Arbitrary message string.			 
-			</summary>			
-		</docu>
-	~*)
-	Message	: STRING(255);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
-	_arguments.Compose(ADR(Message));
-END_IF
-
-THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
+        <ST><![CDATA[THIS^.Write(Message, LogLevel.Info);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{625804d1-cf83-08c2-22ab-fa71857d08e7}">
@@ -237,11 +299,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _arguments.IsEmpty THEN
-	_arguments.Compose(ADR(Message));
-END_IF
-
-THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
+        <ST><![CDATA[THIS^.Write(Message, LogLevel.Warning);]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithArgs" Id="{63756482-f6df-0edf-067e-e5b95c87ceed}">
@@ -252,14 +310,46 @@ THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
 WithArgs := _arguments;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="WithIdentity" Id="{d0b9635b-f99b-05ed-2557-440b5cabaa65}">
-      <Declaration><![CDATA[METHOD WithIdentity : ITcoLogger
+    <Method Name="Write" Id="{97894695-d269-097d-0074-078b7df02fd1}">
+      <Declaration><![CDATA[METHOD PROTECTED Write 
 VAR_INPUT
-	Identity	: ULINT;
-END_VAR]]></Declaration>
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(125);
+	(*~
+		<docu>
+			<summary>
+				Message log level.			 
+			</summary>			
+		</docu>
+	~*)
+	Level : LogLevel;	
+END_VAR
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_contextIdentity := Identity;
-WithIdentity := THIS^;]]></ST>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
+	IF(Level < _refConfig.Level
+	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
+		RETURN;
+	END_IF; 	
+	
+	_logEvent.PerCycleCount := _logEvent.PerCycleCount + 1;
+	// Same cycle filter for most important messge.
+	IF(_logEvent.Cycle = _Parent.Context.StartCycleCount) THEN		 	
+		IF(Level > _logEvent.LogLevel) THEN	 
+			Compose(Message, Level);
+		END_IF;
+	ELSE
+	// Different cycle		
+		_logEvent.PerCycleCount := 1;	
+		Compose(Message, Level);		
+	END_IF;	
+END_IF;	]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -27,9 +27,13 @@ VAR
 			</summary>			
 		</docu>
 	~*)
-	_mime 				: TcoMessage;
-	_Parent 			: ITcoObject;
-	_contextIdentity 	: ULINT;		
+
+	_Parent				: ITcoObject;
+	_contextIdentity 	: ULINT;	
+	
+	_loggerConfig		: TcoLoggerConfiguration;
+	_logger				: TcoLogger(_Parent);
+	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -58,62 +62,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Clear" Id="{640fefd4-a9aa-0de1-3f5c-cce4bd50449f}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Clears the message content.
-				<remarks>			
-					<note type="important">
-						This method is exposed for Rpc calls, for testing purposes. Rpc calls of this method must not be used in production code
-					</note>
-				</remarks>								 
-			</summary>		
-		</docu>
-~*)
-{attribute 'TcRpcEnable'}
-METHOD Clear
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_mime.TimeStamp :=  DT#1970-01-01-00:00;
-_mime.Text := '';
-_mime.Identity := 0;
-_mime.Category := eMessageCategory.None;
-_mime.Cycle := 0;	
-_mime.PerCycleCount := 0;	]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
-      <Declaration><![CDATA[METHOD PROTECTED FINAL Compose 
-VAR_INPUT
-	Text : STRING(125);
-	Category : eMessageCategory;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Rtc <> 0) THEN
-	_mime.TimeStamp :=  _Parent.Context.Rtc.NowLocal();
-	_mime.Text := Text;
-	_mime.Identity := _Parent.Identity;
-	_mime.Category := Category;
-	_mime.Cycle := _Parent.Context.StartCycleCount;
-
-	IF(Logger <> 0) THEN
-		// TODO 
-		//Logger
-		//	.WithArgs().AddBool(TRUE).AddDecimal(1111).Append()
-		//	.Warning('My log message');
-			
-	END_IF;	
-END_IF;
-
-
-
-
-
-]]></ST>
+        <ST><![CDATA[THIS^.Logger.Fatal(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Critical" Id="{a9264967-6c30-0c25-362d-a0380aaea992}" FolderPath="Messages\">
@@ -139,7 +88,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Fatal(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Debug" Id="{bd0230f7-b5de-4707-ba4a-f8b17cc23976}" FolderPath="Messages\">
@@ -165,7 +114,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Error" Id="{dc14c403-f11e-4200-ac36-567c3d997bf6}" FolderPath="Messages\">
@@ -193,7 +142,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Error);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Info(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{23bbd1ba-9be3-4c0b-a177-bc9de93be447}">
@@ -208,7 +157,24 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_Parent := Parent;
 _contextIdentity := Parent.Identity;
-]]></ST>
+
+
+_loggerConfig
+	.MinimumLevel(LogLevel.Warning)
+	//.EnrichWith.Context()
+	//.EnrichWith.InstancePath()
+	//.EnrichWith.CycleCount()
+	//.WriteTo.File("C:\Temp")
+	.WriteTo.XAE()
+	.Build();
+	
+_logger
+	.Configure(_loggerConfig)
+	.ForContext(_Parent.Context)
+	.ForIdentity(_Parent.Identity);
+	
+
+	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Info" Id="{d1f4840f-86c5-482b-8fb7-443b9b1c585c}" FolderPath="Messages\">
@@ -234,7 +200,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Info(Message);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Logger" Id="{5ae77b60-04e1-037a-08f7-a85dbad3d1bc}">
@@ -244,7 +210,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[Logger := _logger;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -270,61 +236,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Notification);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Post" Id="{7e1c7e2b-5612-469e-9139-08754fd973ea}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Creates message of given category for this messenger.				 
-			</summary>				
-		</docu>
-~*)
-METHOD PUBLIC Post 
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Arbitrary message string.			 
-			</summary>			
-		</docu>
-	~*)
-	Message : STRING(125);
-	(*~
-		<docu>
-			<summary>
-				Message category.			 
-			</summary>			
-		</docu>
-	~*)
-	Category : eMessageCategory;	
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
-	IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel
-	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
-		RETURN;
-	END_IF; 	
-	
-	_mime.PerCycleCount := _mime.PerCycleCount + 1;
-	// Same cycle filter for most important messge.
-	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
-		IF(Category > _mime.Category) THEN	 
-			Compose(Message, Category);
-		END_IF;
-	ELSE
-	// Different cycle		
-		_mime.PerCycleCount := 1;	
-		Compose(Message, Category);		
-	END_IF;	
-END_IF;	
-
-
-
-]]></ST>
+        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Programming" Id="{1f1b6a21-6158-44a7-b79e-b3fcea42c4e1}" FolderPath="Messages\">
@@ -350,7 +262,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.ProgrammingError);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Trace" Id="{5a17dee2-c171-4127-9ee1-30d4a06a53bf}" FolderPath="Messages\">
@@ -377,7 +289,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{dd00674c-7475-44d4-8400-894897951e0b}" FolderPath="Messages\">
@@ -404,59 +316,8 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
+        <ST><![CDATA[THIS^.Logger.Warning(Message);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoMessenger">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Catastrophic">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Clear">
-      <LineId Id="3" Count="4" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Compose">
-      <LineId Id="3" Count="9" />
-      <LineId Id="24" Count="2" />
-      <LineId Id="13" Count="6" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Critical">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Debug">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Error">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.FB_init">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Info">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Logger.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Notify">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Post">
-      <LineId Id="3" Count="20" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Programming">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Trace">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoMessenger.Warning">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

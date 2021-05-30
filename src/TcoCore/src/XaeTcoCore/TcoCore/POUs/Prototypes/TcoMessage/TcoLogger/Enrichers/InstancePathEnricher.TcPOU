@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="InstancePathEnricher" Id="{a5f49276-f274-00ac-3ca2-f0d8568418a2}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK FINAL InstancePathEnricher IMPLEMENTS ITcoLogEnricher
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute 'instance-path'} 
+    {attribute 'noinit'} 
+    _instancePath : STRING(255); 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Enrich" Id="{3026dad6-d2b6-0220-0930-3ba164845038}">
+      <Declaration><![CDATA[METHOD Enrich : BOOL
+VAR_INPUT
+	LogEvent	: REFERENCE TO LogEvent;
+END_VAR
+
+VAR
+	info		: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(LogEvent) THEN
+	RETURN;
+END_IF
+
+info := CONCAT('[', _instancePath);
+info := CONCAT(info, '] ');
+
+// e.g. [MAIN.Infeed.Conveyor] My log message
+LogEvent.Text := CONCAT(info, LogEvent.Text);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

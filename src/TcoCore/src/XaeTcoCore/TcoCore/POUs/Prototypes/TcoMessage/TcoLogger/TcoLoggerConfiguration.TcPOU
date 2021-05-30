@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLoggerConfiguration" Id="{afb08e83-e8af-0cf3-1dfe-e9fe07bf3f42}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_minimumLevel			: LogLevel := LogLevel.Info;
+	
+	_sinks					: LogSinkList;
+	_enrichers				: LogEnricherList;
+
+	_enrichmentConfig		: TcoLoggerEnrichmentConfiguration(THIS^);
+	_sinksConfig			: TcoLoggerSinkConfiguration(THIS^);
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddEnrichment" Id="{c4e3951e-98d3-0a8d-02d3-1f1bb21a287f}">
+      <Declaration><![CDATA[METHOD INTERNAL AddEnrichment : BOOL
+VAR_INPUT
+	Enricher		: ITcoLogEnricher;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AddEnrichment := _enrichers.AddEnricher(Enricher);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddSink" Id="{1d367e2a-27e5-0a7b-3b2b-50e57591d203}">
+      <Declaration><![CDATA[METHOD INTERNAL AddSink : BOOL
+VAR_INPUT
+	Sink		: ITcoLogSink;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AddSink := _sinks.AddSink(Sink);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Build" Id="{9941a9e6-f50e-0f99-220e-4e3a9fd4441e}">
+      <Declaration><![CDATA[METHOD PUBLIC Build : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{30c875c2-0d1d-02f7-1343-6de286f35d98}">
+      <Declaration><![CDATA[METHOD PUBLIC Clear : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_minimumLevel := LogLevel.Info;
+
+_sinks.Clear();
+MEMSET(ADR(_enrichers), 0, SIZEOF(_enrichers));
+
+Clear := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Enrichers" Id="{5d9cfc22-8894-044f-03cc-b704392b9942}">
+      <Declaration><![CDATA[PROPERTY INTERNAL Enrichers : REFERENCE TO LogEnricherList]]></Declaration>
+      <Get Name="Get" Id="{5d52f7de-93d6-03e7-3ab6-2b80595efb17}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Enrichers REF= _enrichers;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="EnrichWith" Id="{b8e5166c-9aff-0aac-1013-2881bc3d3c1b}">
+      <Declaration><![CDATA[PROPERTY EnrichWith : REFERENCE TO TcoLoggerEnrichmentConfiguration]]></Declaration>
+      <Get Name="Get" Id="{45ec0d23-eefd-046d-0458-c18e9d04dec3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[EnrichWith REF= _enrichmentConfig;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Level" Id="{8c802460-c66a-0c59-3511-ba2f14565402}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Level : LogLevel]]></Declaration>
+      <Get Name="Get" Id="{4ec5a105-9f86-08fc-2c5a-0d5c872b7a7b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Level := _minimumLevel;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MinimumLevel" Id="{6328f6cb-9fff-0862-1a07-6b1bf8314155}">
+      <Declaration><![CDATA[METHOD PUBLIC MinimumLevel : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+	Level		: LogLevel;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadFrom" Id="{db489568-ded7-0537-2bb3-5ee5d7c09d84}">
+      <Declaration><![CDATA[METHOD PUBLIC ReadFrom : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+	FilePath		: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Read json config file
+
+// json structure example
+
+(*
+{
+    "MinimumLevel": "Debug",
+    "WriteTo": [
+      { "Name": "XAE" },
+      { "Name": "File", "Args": { "path": "C:/Temp/log.txt" } }
+    ],
+    "Enrich": [ "Context", "InstancePath", "ProjectName" ]
+}
+*)]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Sinks" Id="{f32a7f22-4212-0803-0fb3-4501ae755fd8}">
+      <Declaration><![CDATA[PROPERTY INTERNAL Sinks : REFERENCE TO LogSinkList]]></Declaration>
+      <Get Name="Get" Id="{fb620794-85e5-09e5-1b7d-08165fa78387}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Sinks REF= _sinks;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="WriteTo" Id="{4558ccb3-bc85-03a8-201d-d3561a45e663}">
+      <Declaration><![CDATA[PROPERTY PUBLIC WriteTo : REFERENCE TO TcoLoggerSinkConfiguration]]></Declaration>
+      <Get Name="Get" Id="{75351e8b-1bd1-05ca-2882-014b7cbeb497}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[WriteTo REF= _sinksConfig;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

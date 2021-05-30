@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLoggerEnrichmentConfiguration" Id="{41bdeba9-659c-0092-3e34-84293c8dbc97}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerEnrichmentConfiguration
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_config 				: REFERENCE TO TcoLoggerConfiguration;
+	
+	_instancePathEnricher 	: InstancePathEnricher;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Context" Id="{755538a3-16a8-0e8a-16e4-53fad2283699}">
+      <Declaration><![CDATA[METHOD PUBLIC Context : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context := _config;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CycleCount" Id="{0a423684-22e3-0e09-347c-52c7bcc3a745}">
+      <Declaration><![CDATA[METHOD PUBLIC CycleCount : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CycleCount := _config;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{269f3492-545f-0da8-39b9-58b599ca2c34}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+
+	Config		: REFERENCE TO TcoLoggerConfiguration;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config := Config;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InstancePath" Id="{2a11cc84-95b7-0afc-3082-caec0b84ec93}">
+      <Declaration><![CDATA[METHOD PUBLIC InstancePath : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config.AddEnrichment(_instancePathEnricher);
+InstancePath := _config;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="LogSinkList" Id="{f1dce426-64cb-4330-addf-238cddf067b2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LogSinkList
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_count		: UINT;
+	_iterator			: UINT;
+	
+	_sinks				: ARRAY[0..(MAX_SINKS - 1)] OF ITcoLogSink;
+END_VAR
+
+VAR CONSTANT
+	MAX_SINKS				: USINT := 10;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddSink" Id="{e75037ef-7abc-41b8-a9ba-38adc0f21940}">
+      <Declaration><![CDATA[METHOD PUBLIC AddSink : BOOL
+VAR_INPUT
+	Sink	: ITcoLogSink;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _count >= MAX_SINKS - 1 THEN
+	AddSink := FALSE;
+	RETURN;
+END_IF
+
+IF Sink = NULL THEN
+	AddSink := FALSE;
+	RETURN;
+END_IF
+
+_count := _count + 1;
+_sinks[_count] := Sink;
+
+AddSink := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{f943cee8-a8ab-4d43-b7ad-971195b5660d}">
+      <Declaration><![CDATA[METHOD PUBLIC Clear : BOOL
+VAR
+	i : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 1 TO (MAX_SINKS - 1) DO
+	_sinks[i] := NULL;
+END_FOR
+
+_count	:= 0;
+_iterator		:= 0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Count" Id="{82d97365-6779-4c60-a518-3bc9fcb749be}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Count : UINT]]></Declaration>
+      <Get Name="Get" Id="{accafd36-bfdc-42d3-8904-b3c38d3a0fe3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Count := _count;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="GetNext" Id="{12452948-f4df-443d-9db8-388982af631a}">
+      <Declaration><![CDATA[METHOD PUBLIC GetNext : ITcoLogSink
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_iterator := _iterator + 1;
+GetNext := _sinks[_iterator];
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="HasNext" Id="{b896d99e-c897-4507-a057-da4842ed46e8}">
+      <Declaration><![CDATA[METHOD PUBLIC HasNext : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _iterator < _count THEN
+	HasNext := TRUE;
+	RETURN;
+END_IF
+
+HasNext := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsEmpty" Id="{007673dd-60b0-4f31-b0c6-4a57ebce9f35}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsEmpty : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6cc4108e-15f7-4e5b-b135-477406524d83}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsEmpty := _count = 0;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ResetIterator" Id="{0b65297f-6a6b-4ded-b6a7-a95e012a5b69}">
+      <Declaration><![CDATA[METHOD PUBLIC ResetIterator : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_iterator := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <ObjectProperties>
+      <XmlArchive>
+        <Data>
+          <o xml:space="preserve" t="UMLStereoTypeContainerObject">
+            <v n="IsType" t="UMLType">BaseArea</v>
+            <v n="Stereotype">""</v>
+            <d n="Stereotypes" t="Hashtable" />
+          </o>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="String">System.String</Type>
+          <Type n="UMLStereoTypeContainerObject">{30250973-b110-4e31-b562-c102e042dca4}</Type>
+          <Type n="UMLType">{0197b136-405a-42ee-bb27-fd08b621d0cf}</Type>
+        </TypeList>
+      </XmlArchive>
+    </ObjectProperties>
+  </POU>
+</TcPlcObject>

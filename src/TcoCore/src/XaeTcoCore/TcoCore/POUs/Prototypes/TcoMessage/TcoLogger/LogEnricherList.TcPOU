@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="LogEnricherList" Id="{b467f46f-6d50-0c16-2064-be0844df07bd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LogEnricherList
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_count		: UINT;
+	_iterator			: UINT;
+	
+	_enrichers				: ARRAY[0..(MAX_ENRICHERS - 1)] OF ITcoLogEnricher;
+END_VAR
+
+VAR CONSTANT
+	MAX_ENRICHERS				: USINT := 10;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddEnricher" Id="{f06681e5-34ad-0ff1-0aa0-0edaf26c9a38}">
+      <Declaration><![CDATA[METHOD PUBLIC AddEnricher : BOOL
+VAR_INPUT
+	Enricher	: ITcoLogEnricher;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _count >= MAX_ENRICHERS - 1 THEN
+	AddEnricher := FALSE;
+	RETURN;
+END_IF
+
+IF Enricher = NULL THEN
+	AddEnricher := FALSE;
+	RETURN;
+END_IF
+
+_count := _count + 1;
+_enrichers[_count] := Enricher;
+
+AddEnricher := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{bcd07577-5cdc-0c94-23df-65dd700eb26a}">
+      <Declaration><![CDATA[METHOD PUBLIC Clear : BOOL
+VAR
+	i : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 1 TO (MAX_ENRICHERS - 1) DO
+	_enrichers[i] := NULL;
+END_FOR
+
+_count	:= 0;
+_iterator		:= 0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Count" Id="{b3354ccb-b9a6-0da9-3515-5ac90aafa1a9}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Count : UINT]]></Declaration>
+      <Get Name="Get" Id="{32361973-9ea0-04de-3abb-77bdb56128ff}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Count := _count;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="GetNext" Id="{aec2fc6e-19af-0218-3ecf-9dafc7497dd6}">
+      <Declaration><![CDATA[METHOD PUBLIC GetNext : ITcoLogEnricher
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_iterator := _iterator + 1;
+GetNext := _enrichers[_iterator];
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="HasNext" Id="{409e0473-de31-065d-1cb0-80bc24803ea6}">
+      <Declaration><![CDATA[METHOD PUBLIC HasNext : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _iterator < _count THEN
+	HasNext := TRUE;
+	RETURN;
+END_IF
+
+HasNext := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsEmpty" Id="{461e3dcc-ffaa-0324-331d-5ec613286b1c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsEmpty : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3ce86da6-4045-0108-082d-e3123866573d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsEmpty := _count = 0;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ResetIterator" Id="{273fb05f-bfd5-0236-0a7d-e6af94661d57}">
+      <Declaration><![CDATA[METHOD PUBLIC ResetIterator : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_iterator := 0;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
