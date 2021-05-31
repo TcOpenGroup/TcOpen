@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoTaskTest" Id="{9aa8db61-0cc6-40c6-9397-95033027855c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTest EXTENDS TcoTask
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTest EXTENDS TcoCore.TcoTask
 VAR
 	_isBusy							:	BOOL;	
 	_isError						:	BOOL;	
@@ -24,6 +24,9 @@ VAR
 	_myContextEndCount				:	ULINT;	
 	_myParentIdentity				:	ULINT;
 	_autoRestoreByMyParentEnabled	:	BOOL;	
+	_onErrorCounter					: 	ULINT;
+	_whileErrorCounter				: 	ULINT;
+	_onStartCounter					:	ULINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -87,6 +90,20 @@ END_IF
 METHOD INTERNAL GetMessage : STRING]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetMessage := SUPER^._messenger._mime.Text;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{bf82915f-4d7e-0b50-38b6-81362cc5040e}">
+      <Declaration><![CDATA[METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onErrorCounter := _onErrorCounter +1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{2095d80f-07eb-0388-06e7-01e51813e75b}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onStartCounter := _onStartCounter +1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="PostMessage" Id="{5fc16e78-a33a-4b3d-b72e-63dff904b3c2}">
@@ -168,6 +185,20 @@ METHOD INTERNAL TriggerInvoke]]></Declaration>
 METHOD INTERNAL TriggerRestore]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{d83de8ed-28da-04c2-1254-ab5b78949a4c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_whileErrorCounter := _whileErrorCounter + 1;]]></ST>
       </Implementation>
     </Method>
   </POU>

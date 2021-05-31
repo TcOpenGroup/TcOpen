@@ -1,122 +1,168 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="MoveModuloTask" Id="{97d33168-afe5-0baf-3009-2681b67c9e09}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK MoveModuloTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
-	_position		:	LREAL;
-	_velocity		:	LREAL;
-	_acceleration	:	LREAL;
-	_deceleration	:	LREAL;
-	_jerk			:	LREAL;
-	_direction		:	Tc2_MC2.MC_Direction;
+    {attribute addProperty Name "<#Position#>"}
+    _position : LREAL;
+    {attribute addProperty Name "<#Velocity#>"}
+    _velocity : LREAL;
+    {attribute addProperty Name "<#Acceleration#>"}
+    _acceleration : LREAL;
+    {attribute addProperty Name "<#Deceleration#>"}
+    _deceleration : LREAL;
+    {attribute addProperty Name "<#Jerk#>"}
+    _jerk : LREAL;
+    {attribute addProperty Name "<#Direction#>"}
+    _direction : eDirection;
 END_VAR
 VAR
-//	_axisRef		:	REFERENCE TO Tc2_MC2.AXIS_REF;
-	_axisRef		:	REFERENCE TO TcoAxisRef;
-	_mcMoveModulo	:	Tc2_MC2.MC_MoveModulo;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcMoveModulo : Tc2_MC2.MC_MoveModulo;
+    {attribute 'hide'}
+    _mc_direction : Tc2_MC2.MC_Direction;
+    {attribute 'hide'}
+    _message : STRING(125);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
-	IF __ISVALIDREF(DriveRef) THEN
-		_axisRef REF=	DriveRef.AxisRef;
-	ELSE
-		RETURN;
-	END_IF
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
 END_IF
 
 IF THIS^.Ready OR THIS^.Done THEN
-	_mcMoveModulo(Axis := _axisRef, Execute := FALSE);
+    _mcMoveModulo(Axis := _axisRef, Execute := FALSE);
 END_IF
 
 IF THIS^.State = TcoCore.eTaskState.Requested THEN
-	//In case of error, drive  is reseted first.
-	IF THIS^.DriveRef._axisRef.Status.Error THEN
-		THIS^.DriveRef.Reset();
-		RETURN;	
-	// When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-	//to ensure that movement is not triggered before drive is powered up. 
-	ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._mcPower.Status THEN
-		RETURN;
-	END_IF
+    //In case of error, drive  is reseted first.
+    IF THIS^.DriveRef._axisRef.Status.Error THEN
+        THIS^.DriveRef.Reset();
+        RETURN;
+        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
+        //to ensure that movement is not triggered before drive is powered up. 
+    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
+        RETURN;
+    END_IF
 END_IF
 
 IF Execute() THEN
-	_mcMoveModulo(	Axis			:=	_axisRef, 
-					Execute			:=	NOT _mcMoveModulo.Busy, 
-					Position		:=	_position, 
-					Velocity		:=	_velocity, 
-					Acceleration	:=	_acceleration, 
-					Deceleration	:=	_deceleration, 
-					Jerk			:=	_jerk, 
-					Direction		:=	_direction,
-					BufferMode		:=	Tc2_MC2.MC_Aborting, 
-					Done=> , 
-					Busy=> , 
-					Active=> , 
-					CommandAborted=> , 
-					Error=> , 
-					ErrorID=> );
-				
-	IF _mcMoveModulo.CommandAborted THEN
-		THIS^.Abort();		
-	END_IF
-	
-	DoneWhen(_mcMoveModulo.Done);					
+    IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
+        _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_mc_direction));
+        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
+        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+        ThrowWhen(TRUE);
+        RETURN;
+    END_IF
 
-	ThrowWhen(_mcMoveModulo.Error);
-END_IF					
-]]></ST>
+    _mcMoveModulo(Axis := _axisRef,
+        Execute := NOT _mcMoveModulo.Busy,
+        Position := _position,
+        Velocity := _velocity,
+        Acceleration := _acceleration,
+        Deceleration := _deceleration,
+        Jerk := _jerk,
+        Direction := _mc_direction,
+        BufferMode := Tc2_MC2.MC_Aborting,
+        Done =>,
+        Busy =>,
+        Active =>,
+        CommandAborted =>,
+        Error =>,
+        ErrorID =>);
+
+    IF _mcMoveModulo.CommandAborted THEN
+        THIS^.Abort();
+    END_IF
+
+    DoneWhen(_mcMoveModulo.Done);
+    ThrowWhen(_mcMoveModulo.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{9f62bfdc-cf3d-0974-0415-259a7574476a}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{63716eab-7f4c-0fc8-31cf-5a66556c1a76}">
         <Declaration><![CDATA[VAR
-	_drive : ITcoDriveSimple :=0;
+    _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
-	DriveRef REF= _drive.DriveRef;
-END_IF	]]></ST>
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="FB_init" Id="{ca66cc71-b5a1-021f-121c-8c2669618f1f}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(	bInitRetains	:=	bInitRetains,
-				bInCopyCode		:=	bInCopyCode,	
-				Parent			:=	Parent);		    
-                                ]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{731e95c3-91fa-0043-348a-0a7b4be23187}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
-	inPosition		:	LREAL;
-	inVelocity		:	LREAL;
-	inAcceleration	:	LREAL;
-	inDeceleration	:	LREAL;
-	inJerk			:	LREAL;	
-	inDirection		:	Tc2_MC2.MC_Direction;
-END_VAR
+    inPosition : LREAL;
+    inVelocity : LREAL;
+    inAcceleration : LREAL;
+    inDeceleration : LREAL;
+    inJerk : LREAL;
+    inDirection : eDirection;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_position := inPosition;
+_velocity := inVelocity;
+_acceleration := inAcceleration;
+_deceleration := inDeceleration;
+_jerk := inJerk;
+_direction := inDirection;
+InvokeWithParams := THIS^.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{e3764582-a9eb-0721-300c-943562611114}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
 
+THIS^.DriveRef.Stop(-1, -1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnTaskError" Id="{60d094a0-a4d7-0a68-3fc6-9de964ed28a7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnTaskError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_position		:=  inPosition		;  
-_velocity		:= 	inVelocity		; 
-_acceleration	:= 	inAcceleration	;
-_deceleration	:= 	inDeceleration	;
-_jerk			:= 	inJerk			;     
-_direction		:=	inDirection		;
-
-InvokeWithParams := THIS^.Invoke();]]></ST>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e76d73f7-c997-0281-1a04-764cb6b2dce1}">

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Tc2MC2_TO_Tco_JogMode" Id="{beaf1796-310e-0ab2-3315-a0a70ac7f3db}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tc2MC2_TO_Tco_JogMode : BOOL
+VAR_INPUT
+	Tc2MC2JogMode	:	Tc2_MC2.E_JogMode;
+END_VAR
+
+VAR_IN_OUT
+	TcoJogMode		:	eJogMode;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Tc2MC2JogMode OF
+	Tc2_MC2.MC_JOGMODE_STANDARD_SLOW :
+		TcoJogMode	:=	eJogMode.MC_JOGMODE_STANDARD_SLOW;
+		Tc2MC2_TO_Tco_JogMode	:= TRUE;
+		
+	Tc2_MC2.MC_JOGMODE_STANDARD_FAST :
+		TcoJogMode	:=	eJogMode.MC_JOGMODE_STANDARD_FAST;
+		Tc2MC2_TO_Tco_JogMode	:= TRUE;
+		
+	Tc2_MC2.MC_JOGMODE_CONTINOUS :
+		TcoJogMode	:=	eJogMode.MC_JOGMODE_CONTINOUS;
+		Tc2MC2_TO_Tco_JogMode	:= TRUE;
+		
+	Tc2_MC2.MC_JOGMODE_INCHING :
+		TcoJogMode	:=	eJogMode.MC_JOGMODE_INCHING;
+		Tc2MC2_TO_Tco_JogMode	:= TRUE;
+		
+	Tc2_MC2.MC_JOGMODE_INCHING_MODULO :
+		TcoJogMode	:=	eJogMode.MC_JOGMODE_INCHING_MODULO;
+		Tc2MC2_TO_Tco_JogMode	:= TRUE;
+		
+	ELSE
+		Tc2MC2_TO_Tco_JogMode := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
