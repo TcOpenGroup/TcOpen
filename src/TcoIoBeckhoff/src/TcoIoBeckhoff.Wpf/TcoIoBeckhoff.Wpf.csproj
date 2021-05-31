@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj" />
   </ItemGroup>
 
