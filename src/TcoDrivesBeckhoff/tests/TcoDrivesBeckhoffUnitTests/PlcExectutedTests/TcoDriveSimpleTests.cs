@@ -52,7 +52,7 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         public void T003_Message()
         {
             string message = "Test error message";
-            tc._string.Synchron = message;
+            tc._inString.Synchron = message;
             tc.ExecuteProbeRun(1,(int)eTcoDriveSimpleTests.Message);
             Assert.AreEqual(message, tc._sut._messenger._mime.Text.Synchron);                                 //Check if message apears in the mime.
             tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.CleanUp);
@@ -96,7 +96,9 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveRelativePositiveWithDisabledPositiveDirection, () => tc._sut._moveRelativeTask._taskState.Synchron == (short)eTaskState.Error);
+            //tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveRelativePositiveWithDisabledPositiveDirection, () => tc._sut._moveRelativeTask._taskState.Synchron == (short)eTaskState.Error);
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveRelativePositiveWithDisabledPositiveDirection, () => tc._sut._axisStatus.Error.Synchron=true);
+            //tc.ExecuteProbeRun(200,(int)eTcoDriveSimpleTests.MoveRelativePositiveWithDisabledPositiveDirection);
             Assert.AreEqual(actpos, tc._sut._axisStatus.ActPos.Synchron, 1);
             Assert.IsTrue(tc._sut._axisStatus.Error.Synchron);
             Assert.AreEqual(16931, tc._sut._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"

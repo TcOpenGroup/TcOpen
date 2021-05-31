@@ -17,17 +17,7 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-//IF THIS^.Ready OR THIS^.Done THEN
-//    _mcReset(Axis := _axisRef, Execute := FALSE);
-//END_IF
-
 IF Execute() THEN
-//    _mcReset(Axis := _axisRef,
-//        Execute := NOT _mcReset.Busy,
-//        Done =>,
-//        Busy =>,
-//        Error =>,
-//        ErrorID =>);
     _mcReset(Axis := _axisRef);
 
     DoneWhen(_mcReset.Done);
@@ -91,12 +81,13 @@ _mcReset(Axis := _axisRef,Execute := FALSE);
 METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_mcReset(Axis := _axisRef,Execute := FALSE);
-IF __ISVALIDREF(DriveRef) THEN
-	THIS^.DriveRef._movementState.Restore();
-    DriveRef.RestoreTasks();
+        <ST><![CDATA[DriveRef.RestoreTasks();
+
+IF NOT _axisRef.Status.Error THEN
+    DriveRef.SetErrorID(DriveRef._resetTask._mcReset.ErrorID);
 END_IF
-]]></ST>
+
+_mcReset(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{2c8c79ff-94f6-08a3-2eaa-65d37d102a58}">

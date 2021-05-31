@@ -14,23 +14,10 @@ VAR
     _acceleration : LREAL;
     _deceleration : LREAL;
     _jerk : LREAL;	
-	_cycles : ULINT;
-    _bool : BOOL;
-    _string : STRING;
+    _inString : STRING;
     _done : BOOL;
+    _arranged : BOOL;
 END_VAR
-VAR
-	_dummyeTcoDriveSimpleTests : eTcoDriveSimpleTests;
-END_VAR
-//VAR
-//	_callMyPlcInstance 		:	BOOL := FALSE;
-//	{attribute addProperty Name "<#Test axis 1#>"}
-//	_axis					:	TcoDriveSimpleTest(THIS^);
-//	_enable					:	BOOL;			
-//	_enablePositive			:	BOOL;				
-//	_enableNegative			:	BOOL;        	
-//	_calibrationCam 		:	BOOL;        
-//END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -51,14 +38,23 @@ CASE _testId OF
         _sut.Restore();
     eTcoDriveSimpleTests.CleanUp:
         _sut._messenger.Clear();
+    {region "T003_Message"}
     eTcoDriveSimpleTests.Message:
-        _sut.Messenger.Error(_string);
+        _sut.Messenger.Error(_inString);
+    {endregion}
+    {region "T004_PowerDisable"}
     eTcoDriveSimpleTests.PowerDisable:
         _enable := FALSE;
+    {endregion}
+    {region "T005_PowerEnable"}
     eTcoDriveSimpleTests.PowerEnable:
         _enable := TRUE;
+    {endregion}
+    {region "T006_Reset"}
     eTcoDriveSimpleTests.Reset:
         _sut.Reset();
+    {endregion}
+    {region "T007_MoveRelativePositiveWithDisabledPositiveDirection"}
     eTcoDriveSimpleTests.MoveRelativePositiveWithDisabledPositiveDirection:
         _enable := TRUE;
         _enablePositive := FALSE;
@@ -69,6 +65,8 @@ CASE _testId OF
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
             inJerk := _jerk);
+    {endregion}
+    {region "T008_MoveRelativePositiveWithEnabledPositiveDirection"}
     eTcoDriveSimpleTests.MoveRelativePositiveWithEnabledPositiveDirection:
         _enable := TRUE;
         _enablePositive := TRUE;
@@ -79,6 +77,8 @@ CASE _testId OF
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
             inJerk := _jerk);
+    {endregion}
+    {region "T009_MoveRelativeNegativeWithDisabledNegativeDirection"}
     eTcoDriveSimpleTests.MoveRelativeNegativeWithDisabledNegativeDirection:
         _enable := TRUE;
         _enablePositive := FALSE;
@@ -89,6 +89,8 @@ CASE _testId OF
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
             inJerk := _jerk);
+    {endregion}
+    {region "T010_MoveRelativeNegativeWithEnabledNegativeDirection"}
     eTcoDriveSimpleTests.MoveRelativeNegativeWithEnabledNegativeDirection:
         _enable := TRUE;
         _enablePositive := FALSE;
@@ -99,6 +101,8 @@ CASE _testId OF
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
             inJerk := _jerk);
+    {endregion}
+    {region "T011_HommingDirect"}
     eTcoDriveSimpleTests.HommingDirect:
         _sut.Home(inPosition := _position,
             inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
@@ -108,6 +112,8 @@ CASE _testId OF
             inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
             inSyncVelocity := _velocity,
             inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT);
+    {endregion}
+    {region "T012_MoveVelocityPositiveWithDisabledPositiveDirection"}
     eTcoDriveSimpleTests.MoveVelocityPositiveWithDisabledPositiveDirection:
         _enable := TRUE;
         _enablePositive := FALSE;
@@ -118,6 +124,8 @@ CASE _testId OF
             inDeceleration := _deceleration,
             inJerk := _jerk,
             inDirection := TcoDrivesBeckhoff.eDirection.MC_Positive_Direction);
+    {endregion}
+    {region "T013_MoveVelocityPositiveWithEnabledPositiveDirection"}
     eTcoDriveSimpleTests.MoveVelocityPositiveWithEnabledPositiveDirection:
         _enable := TRUE;
         _enablePositive := TRUE;
@@ -128,8 +136,12 @@ CASE _testId OF
             inDeceleration := _deceleration,
             inJerk := _jerk,
             inDirection := TcoDrivesBeckhoff.eDirection.MC_Positive_Direction);
+    {endregion}
+    {region "T014_Stop"}
     eTcoDriveSimpleTests.Stop:
         _sut.Stop(inDeceleration := _deceleration, inJerk := _jerk);
+    {endregion}
+    {region "T015_MoveVelocityNegativeWithDisabledNegativeDirection"}
     eTcoDriveSimpleTests.MoveVelocityNegativeWithDisabledNegativeDirection:
         _enable := TRUE;
         _enablePositive := FALSE;
@@ -140,6 +152,8 @@ CASE _testId OF
             inDeceleration := _deceleration,
             inJerk := _jerk,
             inDirection := TcoDrivesBeckhoff.eDirection.MC_Negative_Direction);
+    {endregion}
+    {region "T016_MoveVelocityNegativeWithEnabledNegativeDirection"}
     eTcoDriveSimpleTests.MoveVelocityNegativeWithEnabledNegativeDirection:
         _enable := TRUE;
         _enablePositive := FALSE;
@@ -150,6 +164,7 @@ CASE _testId OF
             inDeceleration := _deceleration,
             inJerk := _jerk,
             inDirection := TcoDrivesBeckhoff.eDirection.MC_Negative_Direction);
+{endregion}
 END_CASE]]></ST>
       </Implementation>
     </Method>

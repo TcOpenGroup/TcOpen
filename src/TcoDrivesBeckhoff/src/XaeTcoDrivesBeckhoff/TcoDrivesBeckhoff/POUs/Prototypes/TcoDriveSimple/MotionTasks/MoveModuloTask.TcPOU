@@ -37,19 +37,7 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcMoveModulo(Axis := _axisRef, Execute := FALSE);
-END_IF
-
 IF Execute() THEN
-    IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_mc_direction));
-        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
-        RETURN;
-    END_IF
-
     _dummyPreconditionOK := TRUE;
 
     IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
@@ -80,10 +68,7 @@ IF Execute() THEN
     DoneWhen(_mcMoveModulo.Done);
     ThrowWhen(_mcMoveModulo.Error);
 
-    IF _mcMoveModulo.CommandAborted OR _mcMoveModulo.Error THEN
-        THIS^.DriveRef._movementState.Restore();
-    END_IF
-END_IF]]></ST>
+ END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{9f62bfdc-cf3d-0974-0415-259a7574476a}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
@@ -148,6 +133,7 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);
+_mcMoveModulo(Axis := _axisRef, Execute := FALSE);
 THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
@@ -162,7 +148,8 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();]]></ST>
+        <ST><![CDATA[_mcMoveModulo(Axis := _axisRef, Execute := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{1162b272-9d04-02d1-121e-f32f7f955372}">
@@ -179,14 +166,27 @@ METHOD PROTECTED OnDone
 METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
+END_IF
+_mcMoveModulo(Axis := _axisRef, Execute := FALSE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{ca3b5016-83e1-0994-2ff7-70a41fead783}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_mc_direction));
+    _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+_mcMoveModulo(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e76d73f7-c997-0281-1a04-764cb6b2dce1}">

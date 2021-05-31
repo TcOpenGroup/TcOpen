@@ -56,51 +56,7 @@ IF THIS^.Ready OR THIS^.Done THEN
 END_IF
 
 IF Execute() THEN
-    IF NOT Tco_TO_Tc2MC2_HomingMode(_homingMode, _mc_homingMode) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _homingMode variable of type TcoDrivesBeckhoff.eHomingMode (', TO_STRING(_homingMode));
-        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_HomingMode!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
-        RETURN;
-    END_IF
 
-    IF NOT Tco_TO_Tc2MC2_Direction(_homingOptions_SearchDirection, _mc_homingOptions_SyncDirection) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _homingOptions_SearchDirection variable of type TcoDrivesBeckhoff.eDirection (',
-            TO_STRING(_homingOptions_SearchDirection));
-
-        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
-        RETURN;
-    END_IF
-
-    IF NOT Tco_TO_Tc2MC2_Direction(_homingOptions_SyncDirection, _mc_homingOptions_SyncDirection) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _homingOptions_SearchDirection variable of type TcoDrivesBeckhoff.eDirection (',
-            TO_STRING(_homingOptions_SyncDirection));
-
-        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
-        RETURN;
-    END_IF
-
-    IF NOT Tco_TO_Tc2MC2_EncRefMode(_homingOptions_ReferenceMode, _mc_homingOptions_ReferenceMode) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _homingOptions_ReferenceMode variable of type TcoDrivesBeckhoff.eEncoderReferenceMode (',
-            TO_STRING(_homingOptions_ReferenceMode));
-
-        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.E_EncoderReferenceMode!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
-        RETURN;
-    END_IF
-
-    _mc_homingOptions.ClearPositionLag := _homingOptions_ClearPositionLag;
-    _mc_homingOptions.SearchDirection := _homingOptions_SearchDirection;
-    _mc_homingOptions.SearchVelocity := _homingOptions_SearchVelocity;
-    _mc_homingOptions.SyncDirection := _homingOptions_SyncDirection;
-    _mc_homingOptions.SyncVelocity := _homingOptions_SyncVelocity;
-    _mc_homingOptions.ReferenceMode := _homingOptions_ReferenceMode;
-    _calibrationCam := DriveRef.inCalibrationCam;
     _dummyPreconditionOK := TRUE;
 
     IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
@@ -129,9 +85,6 @@ IF Execute() THEN
     DoneWhen(_mcHome.Done);
     ThrowWhen(_mcHome.Error);
 
-    IF _mcHome.CommandAborted OR _mcHome.Error THEN
-        THIS^.DriveRef._movementState.Restore();
-    END_IF
 END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{e8364453-3188-0da4-2572-9954580193ec}">
@@ -201,6 +154,7 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);
+_mcHome(Axis := _axisRef, Execute := FALSE);
 THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
@@ -215,7 +169,8 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_mcHome(Axis := _axisRef, Execute := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{d07e8610-7368-023b-25df-249562facdb2}">
@@ -232,14 +187,66 @@ METHOD PROTECTED OnDone
 METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
+    DriveRef.SetErrorID(DriveRef._homeTask._mcHome.ErrorID);
+END_IF
+
+_mcHome(Axis := _axisRef, Execute := FALSE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{4fd57a3f-d1a4-0154-1f6b-d8022b025929}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_HomingMode(_homingMode, _mc_homingMode) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _homingMode variable of type TcoDrivesBeckhoff.eHomingMode (', TO_STRING(_homingMode));
+    _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_HomingMode!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+IF NOT Tco_TO_Tc2MC2_Direction(_homingOptions_SearchDirection, _mc_homingOptions_SyncDirection) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _homingOptions_SearchDirection variable of type TcoDrivesBeckhoff.eDirection (',
+        TO_STRING(_homingOptions_SearchDirection));
+
+    _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+IF NOT Tco_TO_Tc2MC2_Direction(_homingOptions_SyncDirection, _mc_homingOptions_SyncDirection) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _homingOptions_SearchDirection variable of type TcoDrivesBeckhoff.eDirection (',
+        TO_STRING(_homingOptions_SyncDirection));
+
+    _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+IF NOT Tco_TO_Tc2MC2_EncRefMode(_homingOptions_ReferenceMode, _mc_homingOptions_ReferenceMode) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _homingOptions_ReferenceMode variable of type TcoDrivesBeckhoff.eEncoderReferenceMode (',
+        TO_STRING(_homingOptions_ReferenceMode));
+
+    _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.E_EncoderReferenceMode!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+_mc_homingOptions.ClearPositionLag := _homingOptions_ClearPositionLag;
+_mc_homingOptions.SearchDirection := _homingOptions_SearchDirection;
+_mc_homingOptions.SearchVelocity := _homingOptions_SearchVelocity;
+_mc_homingOptions.SyncDirection := _homingOptions_SyncDirection;
+_mc_homingOptions.SyncVelocity := _homingOptions_SyncVelocity;
+_mc_homingOptions.ReferenceMode := _homingOptions_ReferenceMode;
+_calibrationCam := DriveRef.inCalibrationCam;
+_mcHome(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{f2b89535-f59f-07c3-0011-97ecb4188bc9}">

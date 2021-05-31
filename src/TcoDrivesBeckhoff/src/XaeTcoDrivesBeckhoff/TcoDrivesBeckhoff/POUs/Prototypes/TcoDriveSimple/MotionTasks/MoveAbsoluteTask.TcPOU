@@ -31,10 +31,6 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
-END_IF
-
 IF Execute() THEN
     _dummyPreconditionOK := TRUE;
 
@@ -65,9 +61,6 @@ IF Execute() THEN
     DoneWhen(_mcMoveAbsolute.Done);
     ThrowWhen(_mcMoveAbsolute.Error);
 
-    IF _mcMoveAbsolute.CommandAborted OR _mcMoveAbsolute.Error THEN
-        THIS^.DriveRef._movementState.Restore();
-    END_IF
 END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{c918ab99-0887-0ba7-3e18-f42d76a60832}">
@@ -131,6 +124,7 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);
+_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
 THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
@@ -145,7 +139,8 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();]]></ST>
+        <ST><![CDATA[_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{ab9dc157-8d3b-0fc7-39e0-f7e22d57a5d0}">
@@ -162,14 +157,21 @@ METHOD PROTECTED OnDone
 METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID( DriveRef._moveAbsoluteTask._mcMoveAbsolute.ErrorID);
+END_IF
+_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{1491f5ba-9f11-0ec9-2ca9-fc10d819bac1}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{6b9c9854-0555-0eef-069a-af2d2447715a}">

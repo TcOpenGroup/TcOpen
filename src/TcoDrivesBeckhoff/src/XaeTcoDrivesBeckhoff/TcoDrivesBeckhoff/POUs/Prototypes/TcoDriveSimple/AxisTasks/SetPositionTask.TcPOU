@@ -17,6 +17,8 @@ VAR
     _mc_mode : BOOL;
     {attribute 'hide'}
     _message : STRING(125);
+    {attribute 'hide'}
+	_dummyPreconditionOK : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -27,41 +29,15 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcSetPosition(Axis := _axisRef, Execute := FALSE);
-END_IF
-
-IF (THIS^.State = TcoCore.eTaskState.Requested) OR(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisStatus.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
-        RETURN;
-    END_IF
-END_IF
-
 IF Execute() THEN
-    IF NOT Tco_TO_Tc2MC2_SetPositionMode(_mode, _mc_mode) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _mode variable of type TcoDrivesBeckhoff.eSetPositionMode (', TO_STRING(_mode));
-        _message := Tc2_Standard.CONCAT(_message, ') to the type BOOL!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
+    _dummyPreconditionOK := TRUE;
+
+    IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
+        Messenger.Error('To be implemented');
         RETURN;
     END_IF
 
-    _mcSetPosition(Axis := _axisRef,
-        Execute := NOT _mcSetPosition.Busy,
-        Position := _position,
-        Mode := _mc_mode,
-        Options :=,
-        Done =>,
-        Busy =>,
-        Error =>,
-        ErrorID =>);
-
+    _mcSetPosition(Axis := _axisRef, Execute := TRUE, Position := _position);
     DoneWhen(_mcSetPosition.Done);
     ThrowWhen(_mcSetPosition.Error);
 END_IF]]></ST>
@@ -113,7 +89,9 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_mcSetPosition(Axis := _axisRef, Execute := FALSE);
+THIS^.DriveRef._movementState.Restore();
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{c6448ca0-70a4-08b2-10ac-09c391131b59}">
@@ -130,14 +108,29 @@ METHOD PROTECTED OnDone
 METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
+    DriveRef.SetErrorID(DriveRef._setPositionTask._mcSetPosition.ErrorID);
+END_IF
+
+_mcSetPosition(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{6601a4a2-967c-0153-1048-59a593730fea}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_SetPositionMode(_mode, _mc_mode) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _mode variable of type TcoDrivesBeckhoff.eSetPositionMode (', TO_STRING(_mode));
+    _message := Tc2_Standard.CONCAT(_message, ') to the type BOOL!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+_mcSetPosition(Axis := _axisRef, Execute := FALSE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{33a6b430-fc43-0769-1ad1-7e8a3938d411}">
