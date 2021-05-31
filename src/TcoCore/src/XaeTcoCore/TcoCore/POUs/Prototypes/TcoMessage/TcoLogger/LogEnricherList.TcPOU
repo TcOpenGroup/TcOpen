@@ -9,8 +9,9 @@ END_VAR
 VAR
 	_count		: UINT;
 	_iterator			: UINT;
-	
+	//~
 	_enrichers				: ARRAY[0..(MAX_ENRICHERS - 1)] OF ITcoLogEnricher;
+	//~
 END_VAR
 
 VAR CONSTANT

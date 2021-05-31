@@ -9,8 +9,9 @@ END_VAR
 VAR
 	_count		: UINT;
 	_iterator			: UINT;
-	
+	//~
 	_sinks				: ARRAY[0..(MAX_SINKS - 1)] OF ITcoLogSink;
+	//~
 END_VAR
 
 VAR CONSTANT
