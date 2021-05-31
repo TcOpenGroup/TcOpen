@@ -255,8 +255,12 @@ task CreatePackages `
     "src\_packaging\TcOpen.Group\TcOpen.Group.csproj",
     "src\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj",
     "src\TcoElements\src\TcoElementsConnector\TcoElementsConnector.csproj",
-    "src\TcoElements\src\Wpf\TcoElements.Wpf\TcoElements.Wpf.csproj"
-
+    "src\TcoElements\src\Wpf\TcoElements.Wpf\TcoElements.Wpf.csproj",
+    "src\TcoData\src\Data\TcoData.csproj",
+    "src\TcoData\src\Repository\InMemory\TcoData.InMemory.csproj",
+    "src\TcoData\src\Repository\Json\TcoData.Json.csproj",
+    "src\TcoData\src\TcoDataConnector\TcoDataConnector.csproj",
+    "src\TcoData\src\Wpf\TcoData.Wpf\TcoData.Wpf.csproj"
   )
   foreach($project in $projects)
   {  

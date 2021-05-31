@@ -13,7 +13,7 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid Grid.Row="0" DataContext="{Binding TcoDataPlc.MAIN._sampleContext, Mode=OneWay}">
+    <Grid Grid.Row="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

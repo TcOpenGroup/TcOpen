@@ -1,12 +1,5 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Markup;
-using Vortex.Presentation.Wpf;
-
-[assembly:RenderableAssembly]
-[assembly: XmlnsPrefix("http://vortex.mts/xaml", "vortex")]
-[assembly: XmlnsDefinition("http://vortex.mts/xaml", "TcoData")]
 
 [assembly: AssemblyVersion("0.4.1.0")]
 [assembly: AssemblyFileVersion("0.4.1.0")]
