@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <Itf Name="ITcoMessenger" Id="{feb2a157-bddb-4314-a4f2-ca2ae8c2472e}">
     <Declaration><![CDATA[INTERFACE ITcoMessenger
 ]]></Declaration>
@@ -90,16 +90,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="Post" Id="{319e60ac-aec4-4718-8ea8-38486b1fbfb7}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Adds message of given category to the message queue.				 
-			</summary>	
-			<returns>Message index.</returns>		
-		</docu>
-~*)
-METHOD PUBLIC Post 
+    <Method Name="Post" Id="{fede0c89-f9b4-0fbf-3136-5fe66a1d4548}">
+      <Declaration><![CDATA[METHOD Post : BOOL
 VAR_INPUT
 	(*~
 		<docu>
@@ -109,16 +101,9 @@ VAR_INPUT
 		</docu>
 	~*)
 	Message : STRING(125);
-	(*~
-		<docu>
-			<summary>
-				Message category.			 
-			</summary>			
-		</docu>
-	~*)
-	Category : eMessageCategory;	
+	
+	Category : eMessageCategory;
 END_VAR
-
 ]]></Declaration>
     </Method>
     <Method Name="Programming" Id="{cfbee919-5f05-4549-97b8-0a313d179cec}">

@@ -33,7 +33,7 @@ VAR
 	
 	_loggerConfig		: TcoLoggerConfiguration;
 	_logger				: TcoLogger(_Parent);
-	
+	_mime				: TcoMessage;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -63,6 +63,14 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Logger.Fatal(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{8544b803-1b0b-0034-06a8-1f3769f14631}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Clear
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Critical" Id="{a9264967-6c30-0c25-362d-a0380aaea992}" FolderPath="Messages\">
@@ -237,6 +245,25 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Post" Id="{241893d1-68aa-039f-1927-29005387cc4a}">
+      <Declaration><![CDATA[METHOD Post : BOOL
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(125);
+	
+	Category : eMessageCategory;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Programming" Id="{1f1b6a21-6158-44a7-b79e-b3fcea42c4e1}" FolderPath="Messages\">
