@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TcoDataExchange" Id="{32f44bd8-796a-0ec8-0970-522f256b63cf}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataExchange EXTENDS TcoCore.TcoObject IMPLEMENTS ICrud
+VAR
+    _createTask : TcoDataTask(THIS^);
+    _readTask : TcoDataTask(THIS^);
+    _updateTask : TcoDataTask(THIS^);
+    _deleteTask : TcoDataTask(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_createTask();
+_readTask();
+_updateTask();
+_deleteTask();]]></ST>
+    </Implementation>
+    <Method Name="Create" Id="{535f62d3-cdf1-09d6-36dd-65bfab4cf00a}">
+      <Declaration><![CDATA[METHOD Create : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Create := _createTask
+    .WithId(Identifier)
+    .Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Delete" Id="{fbf2b4c4-ddcf-0054-1f59-9460c96d51d6}">
+      <Declaration><![CDATA[METHOD Delete : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Delete := _deleteTask
+    .WithId(Identifier)
+    .Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{320ee7d5-7550-0944-00e6-b2405597b230}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : TcoCore.ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Read" Id="{05052219-e02c-06a1-02d0-9241bf3dd3ff}">
+      <Declaration><![CDATA[METHOD Read : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Read := _readTask
+    .WithId(Identifier)
+    .Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Update" Id="{d5409d9d-f931-0f6c-095c-9c419d838664}">
+      <Declaration><![CDATA[METHOD Update : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Update := _updateTask
+    .WithId(Identifier)
+    .Invoke();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
