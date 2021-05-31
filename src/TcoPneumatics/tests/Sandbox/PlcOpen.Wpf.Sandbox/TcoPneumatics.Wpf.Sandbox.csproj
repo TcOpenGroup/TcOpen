@@ -16,10 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.11.1-nightly.487" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj" />
     <ProjectReference Include="..\..\TcoPneumaticsTestsConnector\TcoPneumaticsTestsConnector.csproj" />
   </ItemGroup>
