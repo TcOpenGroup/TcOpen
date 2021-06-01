@@ -23,6 +23,8 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
+_mcStop(Axis := _axisRef, Execute := FALSE);
+
 IF Execute() THEN
     _mcStop(Axis := _axisRef,
         Execute := NOT _mcStop.Busy,
