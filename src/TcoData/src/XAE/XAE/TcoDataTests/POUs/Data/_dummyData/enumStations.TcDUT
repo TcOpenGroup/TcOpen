@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="enumStations" Id="{67e7b070-70df-425c-aecb-17d8ac9b8cb1}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE enumStations :
+(
+	ST_10 := 10,
+	ST_20 := 20,
+	ST_30 := 30,
+	ST_40 := 40,
+	ST_50 := 50,
+	ST_60 := 60,
+	ST_70 := 70,
+	ST_80 := 80,
+	ST_90 := 90,
+	ST_100 := 100,
+	ST_110 := 110,
+	ST_120 := 120,
+	ST_130 := 130,
+	ST_140 := 140,
+	ST_150 := 150,
+	ST_160 := 160,
+	ST_170 := 170,
+	ST_180 := 180,
+	ST_190 := 190,
+	ST_200 := 200	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

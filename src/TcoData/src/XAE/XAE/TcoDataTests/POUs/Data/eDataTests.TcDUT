@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="eDataTests" Id="{136a4a1d-8248-0fe5-067e-f853714d21d3}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eDataTests :
+    (
+        RestoreTasks := 10,
+        CreateData := 100,
+        UpdateData := 200,
+        ReadData := 300,
+        DeleteData := 400,
+        UpdateDataWithoutChange := 500,
+        UpdateDataWithInvalidId := 600,
+        ReadDataWithInvlaidId := 700,
+        DeleteDataWithInvalidId := 800
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

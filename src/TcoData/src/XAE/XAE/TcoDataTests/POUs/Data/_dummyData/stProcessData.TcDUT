@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="stProcessData" Id="{c526ee09-51fa-4750-a7bd-5ca62f4bed32}">
+    <Declaration><![CDATA[{attribute wpf [Container(Layout.Tabs)]}
+TYPE stProcessData EXTENDS TcoData.Entity :
+STRUCT
+	{attribute wpf [Container(Layout.Stack)]}
+	{attribute addProperty Name "Entity header"}
+	EntityHeader, stEntityHeader: BOOL;
+	{attribute wpf [Container(Layout.Stack)]}
+	{attribute addProperty Name "Result Data"}	
+	// {attribute addProperty Name "ST 1"}
+	Cu_1 : stCu_ProcessData;
+	(*Cu_2 : stCu_ProcessData;
+	Cu_3 : stCu_ProcessData;
+	Cu_4 : stCu_ProcessData;
+	Cu_5 : stCu_ProcessData;
+	Cu_6 : stCu_ProcessData;
+	Cu_7 : stCu_ProcessData;
+	Cu_8 : stCu_ProcessData;
+	Cu_9 : stCu_ProcessData;
+	Cu_10 : stCu_ProcessData;
+	*)
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
