@@ -7,9 +7,9 @@
              xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector" xmlns:vortex="http://vortex.mts/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
+    <d:UserControl.DataContext>
         <tcocore:TcoSignalInfo></tcocore:TcoSignalInfo>
-    </UserControl.DataContext>
+    </d:UserControl.DataContext>
     <GroupBox Header="{Binding Converter={local:NameOrSymbolConverter}}">
         <UniformGrid Rows="0" Columns="2">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Signal.HumanReadable}"></TextBlock>

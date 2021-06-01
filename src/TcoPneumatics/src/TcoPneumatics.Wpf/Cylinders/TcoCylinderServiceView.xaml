@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="TcoPneumatics.CylinderManualView"
+    x:Class="TcoPneumatics.TcoCylinderServiceView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cylinders="clr-namespace:TcoPneumatics.Wpf.Cylinders"
@@ -12,7 +12,7 @@
     xmlns:vortex="http://vortex.mts/xaml"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <tcopneumatics:CylinderManualViewModel />
+        <tcopneumatics:TcoCylinderServiceViewModel />
     </d:UserControl.DataContext>
     <StackPanel>
         <Expander
@@ -21,7 +21,7 @@
             materialDesign:ExpanderAssist.VerticalHeaderPadding="0"
             Background="Transparent">
             <Expander.Header>
-                <cylinders:CylinderMainView DataContext="{Binding}" />
+                <cylinders:TcoCylinderMainView DataContext="{Binding}" />
             </Expander.Header>
             <StackPanel>
                 <UniformGrid Rows="0" Columns="2">

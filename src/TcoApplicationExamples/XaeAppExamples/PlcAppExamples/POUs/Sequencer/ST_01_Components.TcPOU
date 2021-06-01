@@ -4,9 +4,9 @@
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Components EXTENDS TcoCore.TcoObject
 VAR
 	
-	_horizontal : TcoPneumatics.Cylinder(THIS^);
-	_vertical : TcoPneumatics.Cylinder(THIS^);
-	_gripper : TcoPneumatics.Cylinder(THIS^);
+	_horizontal : TcoPneumatics.TcoCylinder(THIS^);
+	_vertical : TcoPneumatics.TcoCylinder(THIS^);
+	_gripper : TcoPneumatics.TcoCylinder(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_horizontal(inoAtHomePos:= ST_01_IO.INs[0], inoAtWorkPos:= ST_01_IO.INs[1], inoToHomePos := ST_01_IO.OUTs[0], inoToWorkPos := ST_01_IO.OUTs[1]);

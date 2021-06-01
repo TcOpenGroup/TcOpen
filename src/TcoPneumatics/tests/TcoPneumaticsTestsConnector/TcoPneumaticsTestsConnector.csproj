@@ -8,7 +8,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
+  </PropertyGroup>  
+  <ItemGroup>
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.11.3-alpha.487" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="_generated\" />
   </ItemGroup>
