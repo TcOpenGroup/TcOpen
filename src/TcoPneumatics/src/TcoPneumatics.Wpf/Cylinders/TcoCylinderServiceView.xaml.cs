@@ -16,13 +16,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TcoPneumatics
-{
-    /// <summary>
-    /// Interaction logic for FB_CylinderAlternativeView.xaml
-    /// </summary>
-    public partial class CylinderManualView : UserControl
+{   
+    public partial class TcoCylinderServiceView : UserControl
     {
-        public CylinderManualView()
+        public TcoCylinderServiceView()
         {
             InitializeComponent();
         }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="CylinderMoveTask" Id="{36f82742-ef83-064d-3f82-8df2b1eb7a0b}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CylinderMoveTask EXTENDS TcoCore.TcoTask
+  <POU Name="TcoCylinderMoveTask" Id="{36f82742-ef83-064d-3f82-8df2b1eb7a0b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoCylinderMoveTask EXTENDS TcoCore.TcoTask
 VAR_INPUT
 	PositionSensor		   : BOOL;
 	MaxTimeToReachPosition : TIME := T#10S;
@@ -53,6 +53,7 @@ METHOD PROTECTED OnAbort
     </Method>
     <Method Name="OnError" Id="{c702604b-83ae-0ede-324b-55447818c6ba}">
       <Declaration><![CDATA[METHOD PROTECTED OnError
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

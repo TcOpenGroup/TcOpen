@@ -139,6 +139,12 @@ task Build -depends BuildWithInxtonBuilder {
         /consoleloggerparameters:ErrorsOnly `
         -v:$msbuildVerbosity    
   } -maxRetries 3  
+
+   $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
+
+    exec{
+        cmd /c $command
+    }  -maxRetries 2   
 }
 
 
@@ -156,13 +162,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
     Write-Host 'Building plc projects' -ForegroundColor Cyan
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
-
-    $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
-      
-    exec{
-        cmd /c $command
-    }  -maxRetries 2    
-        	
+            	
     $testProjects = @(
                       [System.Tuple]::Create(".\src\TcOpen.Inxton\TcOpen.Inxton.slnf", "", -1, "TcOpen.Inxton"),                     
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
@@ -243,7 +243,7 @@ task CreatePackages `
     #Packaging
     "src\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj",
     "src\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj",
-    "src\TcOpen.Inxton\src\Logging\TcoOpen.Serilog\TcOpen.Inxton.Logging.csproj",
+    "src\TcOpen.Inxton\src\Logging\TcoOpen.Inxton.Logging\TcOpen.Inxton.Logging.csproj",
     "src\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj",
     "src\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj",
     "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj",

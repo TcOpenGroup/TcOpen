@@ -122,6 +122,19 @@ _axisStatus.ErrorId := 0;
         </Implementation>
       </Get>
     </Property>
+    <Method Name="FB_init" Id="{aaf4eeef-09a9-063d-0c3a-bfe454d50e66}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Halt" Id="{06b4c873-3aa4-03d0-22c1-6924d11db75b}" FolderPath="Motion\">
       <Declaration><![CDATA[METHOD Halt : ITcoTaskStatus
 VAR_INPUT
