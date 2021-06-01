@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="Entity" Id="{f069f222-e1bc-03a7-1526-9ed15ce4c7c1}">
+    <Declaration><![CDATA[TYPE
+    Entity :
+    STRUCT
+        {attribute wpf [Container(Layout.Stack)]}
+        {attribute wpf [Group(Layout.GroupBox)]}
+        {attribute addProperty Name "<#ID#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        _Id : STRING(254);
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty Name "<#Created#>"}
+        _Created : DATE_AND_TIME;
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty Name "<#Modified#>"}
+        _Modified : DATE_AND_TIME;
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

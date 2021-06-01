@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="SampleDataStructure" Id="{0e62a0f6-a025-0f0f-3eb3-7f26678fac54}">
+    <Declaration><![CDATA[TYPE SampleDataStructure  :
+STRUCT
+	SampleString : STRING;
+	SampleInt : INT;
+	SampleBool : BOOL;
+	SampleWString : WSTRING;
+	SampleLREAL : LREAL;
+	SampleNestedStructure : SampleDataStructureLevel2;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

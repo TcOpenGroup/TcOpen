@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDataExchangeTests" Id="{05624285-4d40-0327-337b-d10ea2e36bbb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataExchangeTests EXTENDS TcoCore.TcoObject
+VAR
+	DataManager : DataManager(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[DataManager();]]></ST>
+    </Implementation>
+    <Method Name="Create" Id="{2ee38fdc-c04f-080c-143b-81f64cc038f8}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Create : BOOL
+VAR_INPUT
+	Identifier : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[DataManager.Data.Cu_1.A_Check_1.ProcessedData.FailureDescription := 'Writing failure from PLC';
+DataManager.Data.Cu_1.A_Check_1.ProcessedData.Maximum := 10;
+DataManager.Data.Cu_1.A_Check_1.ProcessedData.Minimum := 5;
+
+
+Create := DataManager.Create(Identifier).Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Delete" Id="{3979100b-b6b6-0c55-2d35-8b5c7cef75d0}">
+      <Declaration><![CDATA[METHOD Delete : BOOL
+VAR_INPUT
+	Identifier : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Delete := DataManager.Delete(Identifier).Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DeleteDataWithInvalidId" Id="{28d0c5c5-3da5-0f1f-227e-12cd43bae051}">
+      <Declaration><![CDATA[METHOD DeleteDataWithInvalidId : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[DeleteDataWithInvalidId := DataManager
+	.Delete(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Read" Id="{a1ee9ccc-477d-0bc3-3bb7-036c9555282b}">
+      <Declaration><![CDATA[METHOD Read : BOOL
+VAR_INPUT
+	Identifier : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Read := DataManager.Read(Identifier).Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadDataWithInvlaidId" Id="{0dfbb9d8-e09c-0f4c-39c7-42241c673d43}">
+      <Declaration><![CDATA[METHOD ReadDataWithInvlaidId : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ReadDataWithInvlaidId := DataManager
+	.Read(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Error;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Update" Id="{3c3231d6-9b09-0674-2aea-0d0b51bbc511}">
+      <Declaration><![CDATA[METHOD Update : BOOL
+VAR_INPUT
+	Identifier : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[DataManager.Data.Cu_1.A_Check_1.ProcessedData.FailureDescription := 'Updated failure from PLC';
+DataManager.Data.Cu_1.A_Check_1.ProcessedData.Maximum := 20;
+DataManager.Data.Cu_1.A_Check_1.ProcessedData.Minimum := 10;
+Update := DataManager.Update(Identifier).Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateDataWithInvalidId" Id="{1a46dfa4-7679-0ed8-10ef-f9270d5751b2}">
+      <Declaration><![CDATA[METHOD UpdateDataWithInvalidId : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[UpdateDataWithInvalidId := DataManager
+	.Update(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Error;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateDataWithoutChange" Id="{15ae701c-d3cb-017b-1839-f5df5a0c8324}">
+      <Declaration><![CDATA[METHOD UpdateDataWithoutChange : BOOL
+VAR_INPUT
+	Identifier : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[UpdateDataWithoutChange := DataManager
+    .Create(Identifier)
+    .Done 
+	AND_THEN
+    DataManager
+    .Update(Identifier)
+    .Done;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
