@@ -39,15 +39,19 @@ namespace TcoCore
         }
 
         public void Stop()
-        {
-            TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
-            _setOnRequest.Cyclic = false;
+        {            
+            _setOnRequest.Synchron = false;
+            TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));            
         }
 
         public void Start()
         {
-            TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
-            _setOnRequest.Cyclic = true;
+
+            if(_isServiceable.Synchron)
+            { 
+                _setOnRequest.Synchron = true;
+                TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
+            }
         }
     }
 }

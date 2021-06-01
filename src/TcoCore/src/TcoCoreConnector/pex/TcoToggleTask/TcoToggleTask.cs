@@ -36,12 +36,15 @@ namespace TcoCore
 
         public void Execute(object parameter)
         {
-            var originalState = this._state.Synchron;
-            var changeStateDescription = originalState ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}" 
-                                                       : $"{this.AttributeStateOffDesc} -> {this.AttributeStateOnDesc}";
+            if(_isServiceable.Synchron)
+            { 
+                var originalState = this._state.Synchron;
+                var changeStateDescription = originalState ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}" 
+                                                           : $"{this.AttributeStateOffDesc} -> {this.AttributeStateOnDesc}";
 
-            this._toggleRequest.Synchron = true;            
-            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}", LogInfo.Create(this));
+                this._toggleRequest.Synchron = true;            
+                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}", LogInfo.Create(this));
+            }
         }
     }
 }

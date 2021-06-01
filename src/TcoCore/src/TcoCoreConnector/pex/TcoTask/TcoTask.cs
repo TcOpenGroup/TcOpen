@@ -43,15 +43,21 @@ namespace TcoCore
 
         public void Execute(object parameter)
         {
-            if (this._taskState.Synchron == (short)(eTaskState.Done))
+            if (this._isServiceable.Synchron)
             {
-                this._restoreRequest.Synchron = true;
-                System.Threading.Thread.Sleep(50);
-            }
+                if (this._taskState.Synchron == (short)(eTaskState.Done))
+                {
+                    this._restoreRequest.Synchron = true;
+                    System.Threading.Thread.Sleep(50);
+                }
+                           
+                this._invokeRequest.Synchron = true;
 
-            TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
-            this._invokeRequest.Cyclic = true;
+                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
+            }
         }
+
+       
 
         private bool CanAbortTask()
         {
