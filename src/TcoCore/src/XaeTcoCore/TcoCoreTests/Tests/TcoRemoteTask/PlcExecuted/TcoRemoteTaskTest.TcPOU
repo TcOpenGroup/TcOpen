@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoRemoteTaskTest" Id="{8b2e52e7-ca9d-013a-11b6-88a18f8a3d16}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoRemoteTaskTest EXTENDS TcoCore.TcoObject
+VAR
+	_invokeInitializedCSharpMethod : TcoCore.TcoRemoteTask(THIS^);
+    _invokeNotInitializedCSharpMethod : TcoCore.TcoRemoteTask(THIS^);
+    _exceptionInMethodWillResultInException : TcoCore.TcoRemoteTask(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_invokeInitializedCSharpMethod();
+_invokeNotInitializedCSharpMethod();
+_exceptionInMethodWillResultInException();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

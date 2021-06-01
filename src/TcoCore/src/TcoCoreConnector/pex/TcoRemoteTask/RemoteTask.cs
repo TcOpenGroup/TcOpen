@@ -3,9 +3,9 @@ using System.ComponentModel;
 using Vortex.Connector;
 using Vortex.Framework.Abstractions;
 
-namespace TcoData
+namespace TcoCore
 {
-    public partial class RemoteTask : INotifyPropertyChanged
+    public partial class TcoRemoteTask : INotifyPropertyChanged
     {
         private Action DefferedAction { get; set; }
         
@@ -104,6 +104,7 @@ namespace TcoData
                 catch (Exception ex)
                 {
                     this._hasException.Synchron = true;
+                    this._exceptionMessage.Synchron = ex.ToString().Substring(0, 244);
                     RemoteExecutionException = ex;
                     Vortex.Framework.Abstractions.Journal.Journaling.Journal.LogRemoteExecutionEventException(this, ex);
                     return;

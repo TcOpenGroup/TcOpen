@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="RemoteTask" Id="{3738faf1-80a5-039e-38b6-48e768300728}" SpecialFunc="None">
+  <POU Name="TcoRemoteTask" Id="{0cdb9edc-969a-000b-3e20-af88ba0b1e77}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Remote tasks delegates its exectuion to C#. 
-			When this task is invoked a C# method will be called. To initiliaze <code>RemoteTask</code> with C# method use the <code>Initiliaze method</code>. 
+			Remote tasks delegates its execution to C#. 
+			When this task is invoked a C# method will be called. To initiliaze <code>RemoteTask</code> with C# method use the <code>Initiliaze</code> or <code>InitializeExclusively</code> method. 
 			<code>
 			        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
 					{
@@ -23,7 +23,7 @@
 		<remarks>Inxton is required for this feature to work</remarks>			
 	</docu>	
 ~*)
-FUNCTION_BLOCK RemoteTask EXTENDS TcoCore.TcoTask
+FUNCTION_BLOCK TcoRemoteTask EXTENDS TcoTask 
 VAR
 	{attribute clr [RenderIgnore()]}
 	_isInitialized : BOOL;	
@@ -33,6 +33,8 @@ VAR
 	_startSignature : STRING;	
 	{attribute clr [RenderIgnore()]}
 	_doneSignarure : STRING;
+	{attribute clr [RenderIgnore()]}
+	_exceptionMessage : STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -42,17 +44,17 @@ END_VAR
             Messenger.Programming('Remote call not initialized.');
         END_IF;
     END_IF
-
-    IF (THIS^._hasException) THEN
+	
+    IF (THIS^._hasException OR THIS^._exceptionMessage <> '') THEN
         Messenger.Error('Remote execution produced an exception');
         _startSignature := '';
+		ThrowWhen(TRUE);
     END_IF;
 
     DoneWhen(_startSignature <> '' AND_THEN _startSignature = _doneSignarure);
-    ThrowWhen(THIS^._hasException);
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{dc9a8f58-f99b-0a86-0286-db6e53883867}">
+    <Method Name="FB_init" Id="{1a44b54a-1c12-0ff2-33c6-1d29da8e202f}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
@@ -64,15 +66,16 @@ END_VAR
         <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnStart" Id="{d70ec8ca-6807-0abf-2f72-d3c79b7f975f}">
+    <Method Name="OnStart" Id="{2f23f300-6ca2-0121-34ff-d733f0ca0af9}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startSignature := LINT_TO_STRING(THIS^.Context.Rtc.TickClock());
 _doneSignarure := '';	
-_hasException := FALSE;]]></ST>
+_hasException := FALSE;
+_exceptionMessage := '';]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Restore" Id="{b0fbafe3-08ed-012b-384f-b833634311e2}">
+    <Method Name="Restore" Id="{e77ab1f3-c0bd-005d-05c5-e4c8999021dd}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -88,6 +91,7 @@ METHOD Restore : ITcoRestorable]]></Declaration>
         <ST><![CDATA[_startSignature := '';
 _doneSignarure := '';	
 _hasException := FALSE;
+_exceptionMessage := '';
 Restore := SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
