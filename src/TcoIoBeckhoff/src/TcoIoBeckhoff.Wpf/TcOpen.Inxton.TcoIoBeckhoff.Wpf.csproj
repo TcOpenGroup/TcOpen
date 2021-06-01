@@ -6,7 +6,6 @@
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <!--NuGet properties-->
-    <PackageId>TcOpen.TcoPneumatics.Wpf</PackageId>
     <Authors>TcOpenGroup contributors</Authors>
     <Company>TcOpenGroup</Company>
     <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
@@ -23,8 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
-    <ProjectReference Include="..\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+    <ProjectReference Include="..\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj" />
   </ItemGroup>
 
 </Project>
