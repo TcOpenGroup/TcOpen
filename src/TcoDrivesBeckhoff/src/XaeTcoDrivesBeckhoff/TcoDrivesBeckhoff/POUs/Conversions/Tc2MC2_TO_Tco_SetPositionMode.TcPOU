@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Tc2MC2_TO_Tco_SetPositionMode" Id="{2b9e2350-25a2-0951-3eb1-e32c7b27e4e1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL Tc2MC2_TO_Tco_SetPositionMode : BOOL
+VAR_INPUT
+    Tc2MC2SetPositionMode : BOOL;
+END_VAR
+VAR_IN_OUT
+    TcoSetPositionMode : eSetPositionMode;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Tc2MC2SetPositionMode THEN
+    TcoSetPositionMode := eSetPositionMode.Absolute;
+    Tc2MC2_TO_Tco_SetPositionMode := TRUE;
+ELSE
+    TcoSetPositionMode := eSetPositionMode.Relative;
+    Tc2MC2_TO_Tco_SetPositionMode := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

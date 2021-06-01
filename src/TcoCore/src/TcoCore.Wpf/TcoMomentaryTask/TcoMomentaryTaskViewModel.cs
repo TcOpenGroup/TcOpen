@@ -1,18 +1,17 @@
 ﻿using System;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
-using Vortex.Presentation.Wpf;
 
 namespace TcoCore
 {
-    public class TcoMomentaryTaskViewModel : RenderableViewModel
+    public class TcoMomentaryTaskViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         private string caption;
 
         public TcoMomentaryTaskViewModel()
         {
-            ButtonDown = new RelayCommand(action => OnButtonDown());
-            ButtonUp = new RelayCommand(action => OnButtonUp());
+            ButtonDown = new Vortex.Presentation.Wpf.RelayCommand(action => OnButtonDown());
+            ButtonUp = new Vortex.Presentation.Wpf.RelayCommand(action => OnButtonUp());
         }
 
 
@@ -47,20 +46,19 @@ namespace TcoCore
 
         public override object Model { get => TcoMomentaryTask; set { TcoMomentaryTask = value as TcoMomentaryTask; ModeUpdate(); } }
 
-        public RelayCommand ButtonDown { get; set; }
-        public RelayCommand ButtonUp { get; set; }
+        public Vortex.Presentation.Wpf.RelayCommand ButtonDown { get; set; }
+        public Vortex.Presentation.Wpf.RelayCommand ButtonUp { get; set; }
 
         private void OnButtonUp()
         {
-            this.TcoMomentaryTask._setOnRequest.Cyclic = false;
+            this.TcoMomentaryTask.Stop();
         }
 
         private void OnButtonDown()
         {
-            this.TcoMomentaryTask._setOnRequest.Cyclic = true;
+            this.TcoMomentaryTask.Start();
         }
 
         public string Caption { get => caption; set { caption = value; this.OnPropertyChanged(nameof(Caption)); } }
-
     }
 }
