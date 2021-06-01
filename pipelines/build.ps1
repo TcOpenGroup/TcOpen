@@ -169,8 +169,8 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
                       [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", -1, "TcoElements"),
                       [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", -1, "TcoIoBeckhoff"),
-                      [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "src\TcoPneumatics\src\XaeTcoPneumatics\", -1, "TcoPneumatics"),
-                      [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "src\TcoData\src\XAE\XAE\", -1, "TcoData")                    
+                      [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "\src\TcoPneumatics\src\XaeTcoPneumatics\", -1, "TcoPneumatics"),
+                      [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "\src\TcoData\src\XAE\XAE\", -1, "TcoData")                    
                     )
                     # removed due to missing hardware  
                     # [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", -1, "TcoDrivesBeckhoff"),
@@ -195,12 +195,12 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
         if($xaeProjectFolder -ne "")
         {
           exec{   
-            Start-Sleep 5
+            Start-Sleep 1
             .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId;
-            Start-Sleep 5
+            Start-Sleep 1
             $BootDir = $solutionDir + $xaeProjectFolder;               
             .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir;                    
-            Start-Sleep 5
+            Start-Sleep 1
           }  -maxRetries 2    
         }
 
