@@ -23,7 +23,7 @@ namespace TcoCore
         /// <returns>Parent object of given type.</returns>
         public static T GetParent<T>(this IVortexObject obj, T parent = null) where T : class
         {
-            if (obj is Vortex.Connector.IConnector || obj == null)
+            if (obj is Vortex.Connector.RootVortexerObject || obj is Vortex.Connector.IConnector || obj == null)
                 return parent;
 
             if (obj is T)

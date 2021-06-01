@@ -19,7 +19,8 @@
     <Released>false</Released>
     <Title>TcoIoBeckhoff</Title>
     <ProjectVersion>0.4.1.375</ProjectVersion>
-    <Author></Author>
+    <Author>
+    </Author>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoIoBeckhoff</DefaultNamespace>
     <CombineIds>true</CombineIds>
@@ -105,11 +106,20 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoCore">
+      <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoCore</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoIoBeckhoff.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcoCore">
+      <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

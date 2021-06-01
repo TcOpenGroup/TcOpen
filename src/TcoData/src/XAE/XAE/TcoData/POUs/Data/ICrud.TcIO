@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <Itf Name="ICrud" Id="{5f3c65e2-780e-08d0-1226-02e7fb1c5c1d}">
+    <Declaration><![CDATA[INTERFACE ICrud]]></Declaration>
+    <Method Name="Create" Id="{0515119d-8a26-0ad7-1ffa-08bce7e22829}">
+      <Declaration><![CDATA[METHOD Create : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="Delete" Id="{21cbb8cb-d3c3-0ef6-0dbc-3fd4191b36ee}">
+      <Declaration><![CDATA[METHOD Delete : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="Read" Id="{56192ca7-8514-0978-1e5e-6ff33827c9c4}">
+      <Declaration><![CDATA[METHOD Read : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="Update" Id="{62ce4dd0-f7ce-0347-3989-565f1358c0bb}">
+      <Declaration><![CDATA[METHOD Update : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
