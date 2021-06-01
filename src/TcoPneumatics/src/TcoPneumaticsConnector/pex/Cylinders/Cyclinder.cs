@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace TcoPneumatics
 {
-    public partial class Cylinder
+    public partial class TcoCylinder
     {
        public void Simulate()
        {

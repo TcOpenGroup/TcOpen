@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <Itf Name="ICylinder" Id="{f5fb744e-8a3c-4ca5-afc7-036cd2bd31fb}">
-    <Declaration><![CDATA[INTERFACE ICylinder EXTENDS __System.IQueryInterface
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoCylinder" Id="{f5fb744e-8a3c-4ca5-afc7-036cd2bd31fb}">
+    <Declaration><![CDATA[INTERFACE ITcoCylinder EXTENDS __System.IQueryInterface
 ]]></Declaration>
     <Folder Name="Actions" Id="{1111bead-4c16-0549-0311-8f8313ecdb08}" />
     <Folder Name="States" Id="{7060230d-ab76-0497-1872-fe660cbd877c}" />

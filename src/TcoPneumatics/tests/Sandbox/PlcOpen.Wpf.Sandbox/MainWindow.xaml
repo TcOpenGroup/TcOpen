@@ -15,17 +15,16 @@
     <TabControl>
         <TabItem Header="Base">
             <StackPanel Grid.IsSharedSizeScope="True">
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Manual" />
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder_1}" PresentationType="Manual" />
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder_2}" PresentationType="Manual" />
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder_3}" PresentationType="Manual" />
+                <!--<vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext}" PresentationType="Service"/>-->
+                <vortex:RenderableContentControl DataContext="{Binding EXAMPLE_MAIN._context._exampleCylinder}" PresentationType="Base-Service"/>
+                <vortex:RenderableContentControl DataContext="{Binding EXAMPLE_MAIN._context}" PresentationType="Control"/>
             </StackPanel>
         </TabItem>
         <TabItem Header="Standard">
             <UniformGrid Columns="1" Rows="2">
                 <GroupBox Header="Control">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Control" />
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Service" />
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Display">

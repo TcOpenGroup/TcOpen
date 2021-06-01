@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
-  <POU Name="CylinderBase" Id="{3fb44fde-5170-065e-15db-1922ceae87e4}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT CylinderBase EXTENDS TcoCore.TcoComponent IMPLEMENTS ICylinder
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoCylinderBase" Id="{3fb44fde-5170-065e-15db-1922ceae87e4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoCylinderBase EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoCylinder
 VAR_IN_OUT
 	(*~
 		<docu>
@@ -93,7 +93,7 @@ IF(__ISVALIDREF(inoAtWorkPos)) THEN _atWorkPos := inoAtWorkPos; _atWorkPosSignal
 IF(__ISVALIDREF(inoToHomePos)) THEN inoToHomePos := _toHomePos; _toHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToHomePos), ADR(inoToHomePos)); END_IF;
 IF(__ISVALIDREF(inoToWorkPos)) THEN inoToWorkPos := _toWorkPos; _toWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToWorkPos), ADR(inoToWorkPos)); END_IF;]]></ST>
     </Implementation>
-    <Folder Name="Actions" Id="{29b1bf26-2e49-0157-2768-354cf52b72c1}" />
+    <Folder Name="Operations" Id="{29b1bf26-2e49-0157-2768-354cf52b72c1}" />
     <Folder Name="States" Id="{8fae645c-458b-0e45-1bf7-768990103b17}" />
     <Folder Name="Tasks" Id="{7be5fd98-9fb0-060c-1792-fcaa6c5bc4ff}" />
     <Property Name="AtHome" Id="{5e107f57-e51c-0f79-3529-da3e4cb2b2bb}" FolderPath="States\">
@@ -169,7 +169,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="MoveToHome" Id="{1bfcbfe1-eb41-0172-0520-bab3a7f92f43}" FolderPath="Actions\">
+    <Method Name="MoveToHome" Id="{1bfcbfe1-eb41-0172-0520-bab3a7f92f43}" FolderPath="Operations\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -186,7 +186,7 @@ METHOD MoveToHome : TcoCore.ITcoTaskStatus
 END_IF;	]]></ST>
       </Implementation>
     </Method>
-    <Method Name="MoveToWork" Id="{e0e5e440-e0e8-0fa5-0117-09382853a221}" FolderPath="Actions\">
+    <Method Name="MoveToWork" Id="{e0e5e440-e0e8-0fa5-0117-09382853a221}" FolderPath="Operations\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -250,7 +250,7 @@ IF(StopTask <> 0) THEN StopTask.Restore(); END_IF;]]></ST>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Stop" Id="{aacfd4e0-4b15-025b-2310-d01828c9f71b}" FolderPath="Actions\">
+    <Method Name="Stop" Id="{aacfd4e0-4b15-025b-2310-d01828c9f71b}" FolderPath="Operations\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

@@ -18,9 +18,9 @@ namespace TcoPneumatics.Wpf.Cylinders
     /// <summary>
     /// Interaction logic for CylinderMainView.xaml
     /// </summary>
-    public partial class CylinderMainView : UserControl
+    public partial class TcoCylinderMainView : UserControl
     {
-        public CylinderMainView()
+        public TcoCylinderMainView()
         {
             InitializeComponent();
         }
