@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ExampleCylinderConfig" Id="{50189353-104d-0512-3a89-7ec2456d96b9}">
+    <Declaration><![CDATA[TYPE ExampleCylinderConfig :
+STRUCT
+	TimeToReachHomePosition : TIME := T#10S;
+	TimeToReachWorkPosition : TIME := T#10S;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

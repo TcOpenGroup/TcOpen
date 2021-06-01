@@ -24,6 +24,24 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ComponentExampleImplementation\ExampleCyclinderUsage\ExampleCylinderContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentExampleImplementation\ExampleCylinder\ExampleCylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentExampleImplementation\ExampleCylinder\ExampleCylinderConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentExampleImplementation\ExampleCylinder\ExampleCylinderMoveTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentExampleImplementation\ExampleCylinder\ExampleCylinderStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentExampleImplementation\EXAMPLE_MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\IO.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -54,8 +72,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ComponentExampleImplementation\ExampleCylinder" />
+    <Folder Include="ComponentExampleImplementation\ExampleCyclinderUsage" />
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="ComponentExampleImplementation" />
     <Folder Include="POUs\CylinderTests" />
     <Folder Include="POUs\CylinderBaseTests" />
     <Folder Include="VISUs" />
