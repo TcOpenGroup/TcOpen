@@ -48,14 +48,10 @@
     <Compile Include="POUs\MainContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\RPC\RemoteTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
     <Folder Include="POUs\Data" />
-    <Folder Include="POUs\RPC" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

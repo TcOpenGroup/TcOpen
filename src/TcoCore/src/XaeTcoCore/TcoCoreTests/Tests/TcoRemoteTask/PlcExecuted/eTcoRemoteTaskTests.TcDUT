@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoRemoteTaskTests" Id="{5b47df81-f3f4-0059-0466-9130b7486ad5}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eTcoRemoteTaskTests :
+    (
+		RestoreTasks := 10,
+        InvokeInitializedCSharpMethod := 100,
+        InvokeNotInitializedCSharpMethod := 200,
+        ExceptionInMethodWillResultInException := 400
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
