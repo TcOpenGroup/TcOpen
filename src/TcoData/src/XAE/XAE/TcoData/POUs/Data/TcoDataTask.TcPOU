@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDataTask" Id="{7211395c-b0ba-0bf9-25be-0541f79b5876}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataTask EXTENDS RemoteTask
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Data task is a remote task  <see cref="RemoteTask"/> with a paramater. 	
+		</summary>	
+		<param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
+		<remarks>Inxton is required for this feature to work</remarks>		
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoDataTask EXTENDS RemoteTask
 VAR
 	_identifier : STRING(255);
 END_VAR]]></Declaration>

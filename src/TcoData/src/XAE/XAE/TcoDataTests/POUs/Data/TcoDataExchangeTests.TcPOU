@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDataExchangeTests" Id="{05624285-4d40-0327-337b-d10ea2e36bbb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataExchangeTests EXTENDS TcoCore.TcoObject
 VAR
@@ -21,7 +21,6 @@ DataManager.Data.Cu_1.A_Check_1.ProcessedData.Maximum := 10;
 DataManager.Data.Cu_1.A_Check_1.ProcessedData.Minimum := 5;
 
 
-
 Create := DataManager.Create(Identifier).Done;]]></ST>
       </Implementation>
     </Method>
@@ -41,7 +40,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[DeleteDataWithInvalidId := DataManager.Delete('SomeInvalidIdThatDoesNotExistInDb').Done;]]></ST>
+        <ST><![CDATA[DeleteDataWithInvalidId := DataManager
+	.Delete(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Done;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Read" Id="{a1ee9ccc-477d-0bc3-3bb7-036c9555282b}">
@@ -60,7 +61,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ReadDataWithInvlaidId := DataManager.Read('SomeInvalidIdThatDoesNotExistInDb').Done;]]></ST>
+        <ST><![CDATA[ReadDataWithInvlaidId := DataManager
+	.Read(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Error;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Update" Id="{3c3231d6-9b09-0674-2aea-0d0b51bbc511}">
@@ -82,7 +85,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[UpdateDataWithInvalidId := DataManager.Update('SomeInvalidIdThatDoesNotExistInDb').Done;]]></ST>
+        <ST><![CDATA[UpdateDataWithInvalidId := DataManager
+	.Update(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Error;]]></ST>
       </Implementation>
     </Method>
     <Method Name="UpdateDataWithoutChange" Id="{15ae701c-d3cb-017b-1839-f5df5a0c8324}">
@@ -91,7 +96,13 @@ VAR_INPUT
 	Identifier : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[UpdateDataWithoutChange := DataManager.Create(Identifier).Done AND_THEN DataManager.Update(Identifier).Done;]]></ST>
+        <ST><![CDATA[UpdateDataWithoutChange := DataManager
+    .Create(Identifier)
+    .Done 
+	AND_THEN
+    DataManager
+    .Update(Identifier)
+    .Done;]]></ST>
       </Implementation>
     </Method>
   </POU>
