@@ -14,6 +14,11 @@ namespace TcoData.Repository.InMemory
 
         }
 
+        public InMemoryRepository()
+        {
+
+        }
+
         private readonly Dictionary<string, T> _repository = new Dictionary<string, T>();
         internal Dictionary<string, T> Records
         {

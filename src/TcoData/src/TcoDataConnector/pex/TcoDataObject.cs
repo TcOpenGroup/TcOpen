@@ -69,7 +69,7 @@ namespace TcoData
         private bool Create()
         {
             _createTask.Read();
-            Onliner._Id.Synchron = _createTask._identifier.Cyclic;
+            Onliner._EntityId.Synchron = _createTask._identifier.Cyclic;
             var cloned = this.Onliner.CreatePlainerType();
             this.Onliner.FlushOnlineToPlain(cloned);
             try
@@ -103,7 +103,7 @@ namespace TcoData
         private bool Update()
         {
             _updateTask.Read();
-            Onliner._Id.Synchron = _updateTask._identifier.Cyclic;
+            Onliner._EntityId.Synchron = _updateTask._identifier.Cyclic;
             var cloned = this.Onliner.CreatePlainerType();
             this.Onliner.FlushOnlineToPlain(cloned);
             try
