@@ -1,6 +1,6 @@
 ﻿using TcoDataTests;
-using TcoData.Repository.MongoDb;
 using NUnit.Framework;
+using TcoData.Repository.MongoDb;
 
 namespace TcoDataUnitTests
 {
