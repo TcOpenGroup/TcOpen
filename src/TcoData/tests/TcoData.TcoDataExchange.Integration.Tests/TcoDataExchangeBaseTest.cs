@@ -3,16 +3,15 @@ using NUnit.Framework.Constraints;
 using TcoDataTests;
 using Tc.Prober.Runners;
 using TcOpen.Inxton.Abstractions.Data;
-using TcoData.Repository.Json;
 using System.Linq;
 using System;
-using System.IO;
 using TcoCore;
 
 namespace TcoDataUnitTests
 {
+
     [TestFixture, Timeout(5000)]
-    public class RepositoryTests
+    public abstract class TcoDataExchangeBaseTest
     {
         TestDataContext sut;
         public IRepository<PlainstProcessData> Repository { get; set; }
@@ -23,22 +22,14 @@ namespace TcoDataUnitTests
         public void Setup()
         {
             sut = Entry.TcoDataTests.MAIN.dataTests;
-            var executingPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            DataFolder = Path.Combine(executingPath, "_data");
-            Repository = new JsonRepository<PlainstProcessData>(new JsonRepositorySettings<PlainstProcessData>(DataFolder));
-            ClearFolder(DataFolder);
-            sut.DataTests.DataManager.InitializeRepository<PlainstProcessData>(Repository as IRepository);
-            Entry.TcoDataTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
+            Init();
+        sut.DataTests.DataManager.InitializeRepository<PlainstProcessData>(Repository as IRepository);
+
+        Entry.TcoDataTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
             sut.ExecuteProbeRun(10, (int)eDataTests.RestoreTasks);
         }
 
-        private void ClearFolder(string dataDir)
-        {
-            foreach (var file in Directory.GetFiles(dataDir))
-            {
-                File.Delete(file);
-            }
-        }
+        public abstract void Init();
 
         [SetUp]
         public void RunTwoCycles() => sut.ExecuteProbeRun(2, 0);
@@ -50,7 +41,6 @@ namespace TcoDataUnitTests
             var identifier = "some-id-123";
             sut._identifier.Synchron = identifier;
             sut._createDataDone.Synchron = false;
-            ClearFolder(DataFolder);
             //-- Act
             sut.ExecuteProbeRun(
                 testId: (int)eDataTests.CreateData,
@@ -89,7 +79,7 @@ namespace TcoDataUnitTests
             //-- Arrange
             var data = new PlainstProcessData
             {
-                _Id = "Artificial",
+                _EntityId = "Artificial",
                 _Created = DateTime.Now,
                 _Modified = DateTime.Now,
                 _recordId = Guid.NewGuid(),
@@ -107,16 +97,16 @@ namespace TcoDataUnitTests
                 }
             };
             sut._readDataDone.Synchron = false;
-            Repository.Create(data._Id, data);
+            Repository.Create(data._EntityId, data);
 
             //-- Act
-            sut._identifier.Synchron = data._Id;
+            sut._identifier.Synchron = data._EntityId;
             sut.ExecuteProbeRun(
                 testId: (int)eDataTests.ReadData,
                 endCondition: () => sut._readDataDone.Synchron);
 
             //-- Assert
-            Assert.AreEqual(data._Id, sut.DataTests.DataManager._data._Id.Synchron);
+            Assert.AreEqual(data._EntityId, sut.DataTests.DataManager._data._EntityId.Synchron);
             Assert.AreEqual(data.Cu_1.A_Check_1.ProcessedData.FailureDescription, sut.DataTests.DataManager._data.Cu_1.A_Check_1.ProcessedData.FailureDescription.Synchron);
             Assert.AreEqual(data.Cu_1.A_Check_1.ProcessedData.Minimum, sut.DataTests.DataManager._data.Cu_1.A_Check_1.ProcessedData.Minimum.Synchron);
             Assert.AreEqual(data.Cu_1.A_Check_1.ProcessedData.Maximum, sut.DataTests.DataManager._data.Cu_1.A_Check_1.ProcessedData.Maximum.Synchron);

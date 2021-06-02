@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net48</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Data\TcOpen.Inxton.Data.csproj" />
+		<ProjectReference Include="..\..\TcoDataConnector\TcoDataConnector.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MongoDB.Bson" Version="2.11.5" />
+		<PackageReference Include="MongoDB.Driver" Version="2.11.5" />
+		<PackageReference Include="MongoDB.Driver.Core" Version="2.11.5" />
+	</ItemGroup>
+</Project>
