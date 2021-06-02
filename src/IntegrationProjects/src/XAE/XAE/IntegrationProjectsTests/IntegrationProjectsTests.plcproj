@@ -3,7 +3,7 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{cfbc043b-c3fb-403e-b3ec-38b73b6c9f17}</ProjectGuid>
+    <ProjectGuid>{e83c051c-1d3e-4794-82c3-152e4c5292f8}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
@@ -61,6 +61,10 @@
       <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoData">
+      <DefaultResolution>TcoData, 0.4.1.375 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoData</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="TcoDrivesBeckhoff">
       <DefaultResolution>TcoDrivesBeckhoff, 0.4.1.375 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoDrivesBeckhoff</Namespace>
@@ -84,6 +88,9 @@
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoData">
+      <Resolution>TcoData, 0.4.1.375 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoDrivesBeckhoff">
       <Resolution>TcoDrivesBeckhoff, 0.4.1.375 (Vortex.Library)</Resolution>

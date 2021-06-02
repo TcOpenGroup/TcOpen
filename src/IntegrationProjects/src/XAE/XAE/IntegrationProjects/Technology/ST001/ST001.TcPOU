@@ -16,6 +16,8 @@ VAR
 	{attribute clr [Container(Layout.Stack)]}
 	_groundPositionSequence : ST001_GroundSequence(THIS^,eRestoreMode.None);
 	_automatPositionSequence : ST001_AutomatSequence(THIS^,eRestoreMode.None);
+	
+	_settings : ST001_ProcessDataSettings(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

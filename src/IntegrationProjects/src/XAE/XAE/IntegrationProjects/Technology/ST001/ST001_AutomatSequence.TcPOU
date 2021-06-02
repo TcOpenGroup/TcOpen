@@ -3,8 +3,10 @@
   <POU Name="ST001_AutomatSequence" Id="{64c860e5-7a30-0da6-3fb2-b6e5c3d92cb4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001_AutomatSequence EXTENDS TcoCore.TcoSequencer
 VAR_IN_OUT
-	inoComponents : ST001_ComponentsHandler;
-	_gTimer_1 : Tc2_Standard.TON:
+	inoComponents : ST001_ComponentsHandler;	
+END_VAR
+VAR
+	_gTimer_1 : Tc2_Standard.TON;
 END_VAR
 ]]></Declaration>
     <Implementation>

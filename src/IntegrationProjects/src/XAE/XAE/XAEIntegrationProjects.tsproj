@@ -241,7 +241,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{711D4247-A0B7-46C4-92AB-BEA8CAD07A56}" Name="IntegrationProjects" PrjFilePath="IntegrationProjects\IntegrationProjects.plcproj" TmcFilePath="IntegrationProjects\IntegrationProjects.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{F2EE7FEF-C378-46BC-BB6A-865036F0C8ED}" Name="IntegrationProjects" PrjFilePath="IntegrationProjects\IntegrationProjects.plcproj" TmcFilePath="IntegrationProjects\IntegrationProjects.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="IntegrationProjects\IntegrationProjects.tmc">
 					<Name>IntegrationProjects Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -395,44 +395,12 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{CFBC043B-C3FB-403E-B3EC-38B73B6C9F17}" Name="IntegrationProjectsTests" PrjFilePath="IntegrationProjectsTests\IntegrationProjectsTests.plcproj" TmcFilePath="IntegrationProjectsTests\IntegrationProjectsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{E83C051C-1D3E-4794-82C3-152E4C5292F8}" Name="IntegrationProjectsTests" PrjFilePath="IntegrationProjectsTests\IntegrationProjectsTests.plcproj" TmcFilePath="IntegrationProjectsTests\IntegrationProjectsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="IntegrationProjectsTests\IntegrationProjectsTests.tmc">
 					<Name>IntegrationProjectsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Value</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Status</Name>
-							<Type GUID="{C4F42FBB-B167-8971-725D-0086D85856A4}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.WcState._WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.WcState._InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.InfoData._WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.InfoData._InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._channel_1._Chn.Status</Name>
-							<Type GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff">StatusStructBasic</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._channel_2._Chn.Status</Name>
-							<Type GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff">StatusStructBasic</Type>
-						</Var>
 						<Var>
 							<Name>IntegrationProjects.IO.EC001.A1._io._1</Name>
 							<Type>BOOL</Type>
@@ -478,6 +446,53 @@
 							<Type>UINT</Type>
 						</Var>
 						<Var>
+							<Name>IntegrationProjects.IO.EC001.A10._io.WcState.State</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IntegrationProjects.IO.EC001.A10._io.WcState.InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IntegrationProjects.IO.EC001.A10._io.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Value</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Status</Name>
+							<Type GUID="{C4F42FBB-B167-8971-725D-0086D85856A4}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._EL3001.WcState._WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._EL3001.WcState._InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._EL3001.InfoData._WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._EL3001.InfoData._InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._channel_1._Chn.Status</Name>
+							<Type GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff">StatusStructBasic</Type>
+						</Var>
+						<Var>
+							<Name>TcoIoBeckhoff.IO._channel_2._Chn.Status</Name>
+							<Type GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff">StatusStructBasic</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
 							<Name>IntegrationProjects.IO.EC001.A10._io._1</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -509,21 +524,6 @@
 							<Name>IntegrationProjects.IO.EC001.A10._io._8</Name>
 							<Type>BOOL</Type>
 						</Var>
-						<Var>
-							<Name>IntegrationProjects.IO.EC001.A10._io.WcState.State</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IntegrationProjects.IO.EC001.A10._io.WcState.InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IntegrationProjects.IO.EC001.A10._io.InfoData.State</Name>
-							<Type>UINT</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>TcoIoBeckhoff.IO._channel_1._Chn.Control</Name>
 							<Type GUID="{B3DBDAA3-7425-BD69-E9C4-F3DD082260EF}" Namespace="TcoIoBeckhoff">OutputStruct</Type>
