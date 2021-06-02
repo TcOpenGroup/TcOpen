@@ -3,6 +3,8 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net48</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<!--Set to TRUE or remove this attribute if you want to crate a package of this project-->
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
