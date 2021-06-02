@@ -3,11 +3,7 @@
     <TargetFramework>net48</TargetFramework>
     <IsPackable>false</IsPackable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>TRACE;DEBUG;TcoData_Repository_Unit_Tests</DefineConstants>
+    <DefineConstants>TcoData_Repository_Unit_Tests</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
