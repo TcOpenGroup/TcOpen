@@ -64,6 +64,15 @@
     <Compile Include="Tests\TcoObject\TcoObjectTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoRemoteTask\PlcExecuted\eTcoRemoteTaskTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoRemoteTask\PlcExecuted\TcoRemoteTaskTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoRemoteTask\PlcExecuted\TcoRemoteTaskTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoRtc\TcoRtcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -115,7 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
+    <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
     <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />

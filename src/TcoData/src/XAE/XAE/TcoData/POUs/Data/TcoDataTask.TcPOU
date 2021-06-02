@@ -10,9 +10,9 @@
 		<remarks>Inxton is required for this feature to work</remarks>		
 	</docu>	
 ~*)
-FUNCTION_BLOCK TcoDataTask EXTENDS RemoteTask
+FUNCTION_BLOCK TcoDataTask EXTENDS TcoCore.TcoRemoteTask
 VAR
-	_identifier : STRING(255);
+    _identifier : STRING(255);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
