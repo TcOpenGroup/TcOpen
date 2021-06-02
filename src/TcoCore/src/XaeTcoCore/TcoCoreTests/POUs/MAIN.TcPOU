@@ -17,6 +17,7 @@ VAR
 	_tcoToggleTaskTestContext			:	TcoToggleTaskTestContext;
 	{attribute addProperty Name "Test base component class"}
 	_tcoComponentTestContext			:   TcoComponentTestContext;
+	_tcoRemoteTaskTestContext			:	TcoRemoteTaskTestContext;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoRtcTest_A();
@@ -43,7 +44,10 @@ _tcoTaskTestContext.ProbeRun();
 
 _tcoToggleTaskTestContext.ProbeRun();
 
-_tcoComponentTestContext.ProbeRun();]]></ST>
+_tcoComponentTestContext.ProbeRun();
+
+
+_tcoRemoteTaskTestContext.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
