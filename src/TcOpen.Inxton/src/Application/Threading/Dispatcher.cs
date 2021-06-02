@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TcoCore.Threading
+namespace TcOpen.Inxton.Threading
 {
     /// <summary>
     /// Provides access to UI dispatcher of currently running application.
     /// </summary>
-    public class Dispatcher : IDispatcher
+    internal class Dispatcher : IDispatcher
     {
         private Dispatcher()
         {
@@ -22,14 +18,14 @@ namespace TcoCore.Threading
         /// Sets the dispatcher for running application.
         /// </summary>
         /// <param name="dispatcher"></param>
-        public static void SetDispatcher(IDispatcher dispatcher)
+        internal static void SetDispatcher(IDispatcher dispatcher)
         {
             _dispatcher = dispatcher;
         }
 
         /// <summary>
         /// Invokes an action on the UI dispatcher of the currently running application.
-        /// The appropriate dispatcher must be set at the start of the application. To set dispacher use <see cref="SetDispatcher(IDispatcher)"/> method.
+        /// The appropriate dispatcher must be set at the start of the application. To set dispatcher use <see cref="SetDispatcher(IDispatcher)"/> method.
         /// </summary>
         /// <param name="action">Action to run.</param>
         public void Invoke(Action action)
@@ -38,18 +34,17 @@ namespace TcoCore.Threading
         }
 
         private volatile static object mutex = new object();
-        private static Dispatcher _instance;
-
+        
         /// <summary>
         /// Gets dispatcher mediator of currently running application.
         /// </summary>
-        public static Dispatcher Get
+        public static IDispatcher Get
         {
             get
             {
                 lock (mutex)
                 {
-                    return _instance ?? new Dispatcher();
+                    return _dispatcher ?? new Dispatcher();
                 }
             }
         }

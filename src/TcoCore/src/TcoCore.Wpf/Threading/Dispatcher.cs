@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using TcoCore.Threading;
+using TcOpen.Inxton.Threading;
 
 namespace TcoCore.Wpf.Threading
 {

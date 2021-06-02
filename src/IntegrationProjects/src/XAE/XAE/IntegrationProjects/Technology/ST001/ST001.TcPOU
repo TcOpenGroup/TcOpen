@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ST001" Id="{010cafc4-622f-0b8f-2fed-ee2ff87a3f00}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ST001 EXTENDS TcoCore.TcoObject
+VAR	
+	{attribute addProperty Name "<#MANUAL#>"}
+	_serviceModeTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty Name "<#GROUND#>"}	
+	_groundSequenceTask  : TcoCore.TcoTask(THIS^);
+	{attribute addProperty Name "<#AUTOMAT#>"}	
+	_automatSequenceTask  : TcoCore.TcoTask(THIS^);
+	
+	{attribute clr [Container(Layout.Stack)]}
+	_components : ST001_ComponentsHandler(THIS^);
+	
+	{attribute clr [Container(Layout.Stack)]}
+	_groundPositionSequence : ST001_GroundSequence(THIS^,eRestoreMode.None);
+	_automatPositionSequence : ST001_AutomatSequence(THIS^,eRestoreMode.None);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_components();
+_groundPositionSequence(inoComponents := _components);
+_automatPositionSequence(inoComponents := _components);
+
+
+IF(_groundSequenceTask.Execute()) THEN
+	_serviceModeTask.Abort();
+	_groundPositionSequence.Run();
+	_groundSequenceTask.DoneWhen(_groundPositionSequence.CurrentStep.ID = _groundPositionSequence.MaxStepID - 1);	
+END_IF
+
+_automatSequenceTask.Enabled := _groundSequenceTask.Done;
+
+IF(_automatSequenceTask.Execute()) THEN	
+	_automatPositionSequence.Run();
+END_IF
+
+IF(_serviceModeTask.Execute()) THEN
+	_automatSequenceTask.Restore();	
+	_groundSequenceTask.Restore();
+	_groundPositionSequence.Restore();
+	_components.Service();
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

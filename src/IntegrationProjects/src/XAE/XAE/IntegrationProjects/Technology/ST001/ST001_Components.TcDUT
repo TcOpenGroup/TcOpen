@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST001_Components" Id="{c6a7759e-a778-0856-3c81-5d5e2a5ad0db}">
+    <Declaration><![CDATA[TYPE ST001_Components : STRUCT
+    PartPresent : TcoElements.TcoDi(MAIN_TECHNOLOGY._technology._ST001);
+    StartButton : TcoElements.TcoDi(MAIN_TECHNOLOGY._technology._ST001);
+    Press : TcoPneumatics.TcoCylinder(MAIN_TECHNOLOGY._technology._ST001);
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

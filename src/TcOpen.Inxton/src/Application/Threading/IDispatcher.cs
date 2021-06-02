@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcoCore.Threading
+namespace TcOpen.Inxton.Threading
 {
     /// <summary>
     /// Provides access to the UI dispatcher of running application.

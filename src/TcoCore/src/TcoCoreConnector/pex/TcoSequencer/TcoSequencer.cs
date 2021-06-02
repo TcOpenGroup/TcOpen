@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TcoCore.Threading;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 

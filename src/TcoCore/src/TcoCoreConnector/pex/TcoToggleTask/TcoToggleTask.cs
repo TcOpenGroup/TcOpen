@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using TcoCore.Logging;
-using TcoCore.Threading;
 using TcOpen;
 using TcOpen.Inxton;
 using Vortex.Connector;
@@ -39,7 +38,7 @@ namespace TcoCore
 
         void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
         {
-            Dispatcher.Get.Invoke(() => CanExecuteChanged(sender, args));
+            TcoAppDomain.Current.Dispatcher.Invoke(() => CanExecuteChanged(sender, args));
         }
 
         /// <summary>

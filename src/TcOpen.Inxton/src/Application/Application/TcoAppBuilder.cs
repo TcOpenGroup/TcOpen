@@ -1,7 +1,8 @@
 ﻿namespace TcOpen.Inxton
 {
     using TcOpen.Inxton.Abstractions.Logging;
-   
+    using TcOpen.Inxton.Threading;
+
     /// <summary>
     /// TcOpen application configuration builder.
     /// </summary>
@@ -26,7 +27,18 @@
         {
             Domain.Logger = logger;
             return this;
-        }           
+        }
+
+        /// <summary>
+        /// Sets the dispatcher for this application.
+        /// </summary>
+        /// <param name="logger">Dispatcher implementation</param>
+        /// <returns>Application builder.</returns>
+        public TcoAppBuilder SetDispatcher(IDispatcher dispatcher)
+        {
+            Dispatcher.SetDispatcher(dispatcher);
+            return this;
+        }
     }
 }
  

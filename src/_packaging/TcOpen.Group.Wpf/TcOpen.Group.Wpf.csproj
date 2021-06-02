@@ -17,6 +17,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\TcoData\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj" />
 	  <ProjectReference Include="..\TcOpen.Group\TcOpen.Group.csproj" />
 	  <ProjectReference Include="..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
 	  <ProjectReference Include="..\..\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.csproj" />
