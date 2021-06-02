@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ExampleCylinderStatus" Id="{e586db44-51a9-0670-26c4-b8a44077c95c}">
+    <Declaration><![CDATA[TYPE ExampleCylinderStatus :
+STRUCT
+	ActionDescription : STRING(100);	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

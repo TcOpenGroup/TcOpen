@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoCylinderMoveTask" Id="{36f82742-ef83-064d-3f82-8df2b1eb7a0b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoCylinderMoveTask EXTENDS TcoCore.TcoTask
+VAR_INPUT
+	PositionSensor		   : BOOL;
+	MaxTimeToReachPosition : TIME := T#10S;
+	PositionName		   : STRING(25);
+END_VAR
+VAR_IN_OUT
+	MoveToPositionSignal : BOOL;
+	InverseSignal		 : BOOL;	
+END_VAR
+
+VAR
+	_stringBuilder : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (THIS^.Execute()) THEN
+	IF(THIS^.ElapsedTime > MaxTimeToReachPosition) THEN THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString()); END_IF;
+	InverseSignal		 := FALSE;
+	MoveToPositionSignal := TRUE;
+	THIS^.DoneWhen(PositionSensor);	
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{cf5faab0-ae9a-0dcc-0a9f-d4a07856e2e1}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// This is not clear to me... I from time to time the consumer code does not see 'FB_init' of 'TcoObject', that's why overridden here with super call...
+SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{45e7f28e-39ff-01a9-2b80-1e7ac1ea429e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MoveToPositionSignal := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{c702604b-83ae-0ede-324b-55447818c6ba}">
+      <Declaration><![CDATA[METHOD PROTECTED OnError
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
