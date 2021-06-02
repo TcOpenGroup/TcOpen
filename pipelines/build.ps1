@@ -241,44 +241,17 @@ task CreatePackages `
   -depends ClearPackages `
 {
   $semVer = $script:gitVersion.SemVer
-  $projects = @(
-    #Packaging
-    "src\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj",
-    "src\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj",
-    "src\TcOpen.Inxton\src\Logging\TcoOpen.Inxton.Logging\TcOpen.Inxton.Logging.csproj",
-
-    "src\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj",
-    "src\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj",
-
-    "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.csproj",
-    "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj",
-
-    "src\TcoIoBeckhoff\src\TcoIoBeckhoff.Wpf\TcOpen.Inxton.TcoIoBeckhoff.Wpf.csproj",
-    "src\TcoIoBeckhoff\src\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj",
-
-    "src\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj",
-    "src\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj",
-    
-    "src\TcoElements\src\TcoElementsConnector\TcoElementsConnector.csproj",
-    "src\TcoElements\src\Wpf\TcoElements.Wpf\TcoOpen.Inxton.TcoElements.Wpf.csproj",
-
-
-    "src\TcoData\src\Data\TcOpen.Inxton.Data.csproj",
-    "src\TcoData\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj",
-    "src\TcoData\src\Repository\Json\TcOpen.Inxton.Data.Json.csproj",
-    "src\TcoData\src\TcoDataConnector\TcoDataConnector.csproj",
-    "src\TcoData\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj",
-
-    "src\_packaging\TcOpen.Group\TcOpen.Group.csproj",
-    "src\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj"
-    
-  )
-  foreach($project in $projects)
-  {  
-    exec { 
-       & $dotnet pack $project -p:PackageVersion=$semVer --output nugets -c $buildConfig /p:SolutionDir=$solutionDir -v $msbuildVerbosity --no-restore --no-build
+  exec { 
+      & $dotnet pack TcOpen.build.slnf `
+        --output nugets `
+        --no-build `
+        --no-restore `
+        --nologo `
+        --verbosity $msbuildVerbosity `
+        --configuration  $buildConfig `
+        -p:PackageVersion=$semVer `
+        /p:SolutionDir=$solutionDir
     }
-  }
 }
 
 task PublishPackages -depends CreatePackages -precondition {return $publishNugets} {
