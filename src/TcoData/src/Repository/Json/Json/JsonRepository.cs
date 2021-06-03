@@ -5,7 +5,7 @@ using System.Linq;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.Json
+namespace TcOpen.Inxton.Data.Json
 {
     public class JsonRepository<T> : RepositoryBase<T> where T : IBrowsableDataObject
     {

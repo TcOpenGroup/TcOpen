@@ -6,7 +6,7 @@ using System.Linq;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.MongoDb
+namespace TcOpen.Inxton.MongoDb
 {
     public class MongoDbRepository<T> : RepositoryBase<T>
         where T : IBrowsableDataObject

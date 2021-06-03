@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using TcoData.Repository.Json;
+using TcOpen.Inxton.Data.Json;
 
 namespace TcoDataUnitTests
 {

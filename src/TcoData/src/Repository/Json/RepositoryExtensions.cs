@@ -1,5 +1,6 @@
 ﻿using System;
 using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data.Json;
 
 namespace TcoData.Repository.Json
 {

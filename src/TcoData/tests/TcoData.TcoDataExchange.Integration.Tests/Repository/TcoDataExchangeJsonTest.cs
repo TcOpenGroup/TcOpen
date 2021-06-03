@@ -1,5 +1,5 @@
 ﻿using TcoDataTests;
-using TcoData.Repository.Json;
+using TcOpen.Inxton.Data.Json;
 using System.IO;
 
 namespace TcoDataUnitTests
