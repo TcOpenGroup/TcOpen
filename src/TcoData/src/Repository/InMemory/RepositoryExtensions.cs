@@ -1,6 +1,6 @@
 ﻿using TcOpen.Inxton.Abstractions.Data;
 
-namespace TcoData.Repository.InMemory
+namespace TcOpen.Inxton.Data.InMemory
 {
     public static class Repository
     {

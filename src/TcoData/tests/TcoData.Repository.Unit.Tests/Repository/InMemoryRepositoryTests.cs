@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using TcoData.Repository.InMemory;
+using TcOpen.Inxton.Data.InMemory;
 
 namespace TcoDataUnitTests
 {
