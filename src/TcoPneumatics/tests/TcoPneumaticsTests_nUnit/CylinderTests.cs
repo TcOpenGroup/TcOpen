@@ -29,6 +29,14 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        [Order(50)]
+        public void Invalid()
+        {
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.Invalid);           
+        }
+
+        [Test]
+        [Timeout(10000)]
         [Order(100)]
         public void StopMovement()
         {

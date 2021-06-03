@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDataTask" Id="{7211395c-b0ba-0bf9-25be-0541f79b5876}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Data task is a remote task  <see cref="RemoteTask"/> with a paramater. 	
+		</summary>	
+		<param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
+		<remarks>Inxton is required for this feature to work</remarks>		
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoDataTask EXTENDS TcoCore.TcoRemoteTask
+VAR
+    _identifier : STRING(255);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{03c5aeaf-9a88-0e65-2886-43aec8e1a787}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithId" Id="{73957c41-6f21-008e-2bf1-1954b1beab89}">
+      <Declaration><![CDATA[METHOD WithId : REFERENCE TO TcoDataTask
+VAR_INPUT
+	_identifier : STRING(254);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._identifier := _identifier;
+WithId REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

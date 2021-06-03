@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoTaskPlcTest" Id="{d999b365-8201-09a1-30da-8c11b37c430b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskPlcTest EXTENDS TcoCore.TcoTask
+VAR
+    _isBusy : BOOL;
+    _isError : BOOL;
+    _isDone : BOOL;
+    _isReady : BOOL;
+    _isInvokeRequestTrue : BOOL;
+    _counterSetValue : ULINT;
+    _counterValue : ULINT;
+    _invokeCounter : ULINT;
+    _executeCounter : ULINT;
+    _doneCounter : ULINT;
+    _invokeRisingEdgeCounter : ULINT;
+    _executeRisingEdgeCounter : ULINT;
+    _doneRisingEdgeCounter : ULINT;
+    _previousState : eTaskState;
+    _counterValuePV : ULINT;
+    _myIdentity : ULINT;
+    _myContextIdentity : ULINT;
+    _myContextStartCount : ULINT;
+    _myContextEndCount : ULINT;
+    _myParentIdentity : ULINT;
+    _autoRestoreByMyParentEnabled : BOOL;
+    _onErrorCounter : ULINT;
+    _whileErrorCounter : ULINT;
+    _onStartCounter : ULINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(THIS^._taskState = eTaskState.Requested) THEN
+	_invokeCounter := _invokeCounter + 1; 
+END_IF;
+
+IF(THIS^._taskState = eTaskState.Requested AND _PreviousState <> eTaskState.Requested) THEN
+	_counterValue	:=	_counterSetValue;
+	_counterValuePV := _counterValue;
+	_invokeRisingEdgeCounter := _invokeRisingEdgeCounter + 1;
+END_IF
+
+IF(THIS^._taskState = eTaskState.Busy AND _previousState <> eTaskState.Busy) THEN
+	_executeRisingEdgeCounter := _executeRisingEdgeCounter + 1;
+END_IF
+
+_previousState	:=	THIS^._taskState;
+
+IF(Execute()) THEN
+	_executeCounter := _executeCounter + 1;	
+	_counterValue := _counterValue - 1;
+	DoneWhen(_counterValue <= 0);			
+	ThrowWhen(ABS(_counterValuePV -_counterValue) > 1);
+	_CounterValuePV := _counterValue;
+END_IF
+
+IF(THIS^._taskState = eTaskState.Done) THEN
+	_doneCounter := _doneCounter + 1; 
+END_IF;
+
+IF(THIS^._taskState = eTaskState.Done AND _previousState <> eTaskState.Done) THEN
+	_doneRisingEdgeCounter := _doneRisingEdgeCounter + 1; 
+END_IF
+
+]]></ST>
+    </Implementation>
+    <Property Name="CounterValue" Id="{e505bc50-fd63-0f80-0e10-605aa9e813dd}">
+      <Declaration><![CDATA[PROPERTY CounterValue : ULINT]]></Declaration>
+      <Get Name="Get" Id="{3c6c06da-6bfb-0d32-1a54-a5d4a3d942ae}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CounterValue := _counterValue;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{033d290a-4ba2-0785-0d5b-2b41b949401c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_counterValue := CounterValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Disable" Id="{8dcb1074-8fe2-0573-1161-77bf01b29fef}">
+      <Declaration><![CDATA[METHOD INTERNAL Disable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{532ee4ee-b114-04f4-32c4-2cbc842f97ee}">
+      <Declaration><![CDATA[METHOD INTERNAL Enable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Enabled := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetMessage" Id="{201e3fe2-eb96-0a73-28d4-8fa22b24ff4f}">
+      <Declaration><![CDATA[METHOD INTERNAL GetMessage : STRING]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetMessage := SUPER^._messenger._mime.Text;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{866cb534-8121-0190-0d4f-704cc10d4444}">
+      <Declaration><![CDATA[METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onErrorCounter := _onErrorCounter +1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{c158ae0d-0fe6-07e7-25e4-c183eee4e419}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_onStartCounter := _onStartCounter +1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PostMessage" Id="{4778a649-9ad5-08cb-1f42-6c7f946f9a4f}">
+      <Declaration><![CDATA[METHOD INTERNAL PostMessage
+VAR_INPUT
+	Message	:	STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Messenger.Post(Message ,eMessageCategory.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutAutoRestoreProperties" Id="{d092b555-5060-0663-2d25-047918cc6c34}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutAutoRestoreProperties]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_autoRestoreByMyParentEnabled	:= THIS^.AutoRestorable;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutIdentities" Id="{f605ab32-c2ff-0150-0e7f-b7644950c7bb}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutIdentities]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
+ 
+_myContextIdentity	:=	THIS^.Context.Identity;
+		
+_myContextStartCount :=	THIS^.Context.StartCycleCount;
+ 
+_myContextEndCount	:=	THIS^.Context.EndCycleCount;
+ 
+_myParentIdentity	:=	THIS^._Parent.Identity;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadOutState" Id="{5c4c8380-7836-0f24-3c1d-f07d6d1e102d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL ReadOutState]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isBusy					:=	THIS^.Busy;	
+_isError				:=	THIS^.Error;	
+_isDone					:=	THIS^.Done;	
+_isReady				:=	THIS^.Ready;
+_isInvokeRequestTrue 	:=	THIS^._invokeRequest;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetInvokeRequest" Id="{17b361cd-ddd4-0fec-0d2a-9bb19609db5d}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetInvokeRequest]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._invokeRequest := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetPreviousStateToReady" Id="{2cfc1f1f-be39-04b3-3412-faec45b958d5}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetPreviousStateToReady]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._previousState := eTaskState.Ready;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{a587ae62-137e-0fad-372e-245f2cd9a137}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_whileErrorCounter := _whileErrorCounter + 1;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

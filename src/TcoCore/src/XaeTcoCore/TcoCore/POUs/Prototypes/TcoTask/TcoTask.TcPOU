@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoTask" Id="{6a59f75f-f5a1-4550-ae7f-6604cc84c78a}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -83,6 +83,21 @@ VAR
 	{attribute addProperty Name "<#Enabled#>"}
 	{attribute clr [ReadOnly()]}
 	_enabled : BOOL := TRUE;
+	
+	(*~
+	<docu>
+		<summary>
+			Indicated whether the task is in serviceable state. The default state 'serviceable' that means that the task
+			can be invoked from the higher-level application. The serviceable state is cancelled when the immediate parent is `ITcoServiceable`
+			and at the same time the parent is not in servicebable state. `TcoComponent` is serviceable, in order for the component's task to be 
+			invokable from higher-level application component must call `Service` method to induce the component into serviceable state.					
+		</summary>		
+	</docu>	
+	~*)	
+	{attribute addProperty Name "<#Serviceable#>"}
+	{attribute clr [ReadOnly()]}
+	{attribute clr [RenderIgnore()]}
+	_isServiceable : BOOL;
 END_VAR
 
 VAR	
@@ -413,9 +428,11 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
 IF(THIS^._Parent <> 0 )THEN
+	_isServiceable := TRUE;	
 	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._invokeRequest := FALSE;
+			_isServiceable := FALSE;
 		END_IF
 	END_IF
 END_IF;
@@ -455,10 +472,11 @@ AutoRestore();
 IF(THIS^._taskState = eTaskState.Requested) THEN	
 	_executionTimer(IN := FALSE);
 	THIS^._taskState := eTaskState.Busy;
+	THIS^.OnStart();
 END_IF;
 
 IF(THIS^._taskState = eTaskState.Error) THEN
-	OnTaskError();
+	WhileError();
 END_IF;
 	
 Execute := (THIS^._taskState = eTaskState.Busy);
@@ -565,15 +583,25 @@ METHOD PROTECTED OnDone
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{7bd5d176-51b6-065b-1ffd-f139109a93ea}">
+    <Method Name="OnError" Id="{2de48cce-950e-08e2-2964-30279f20f311}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{ddc1c3c0-3bd2-0393-355d-edc7abe4115b}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -648,7 +676,25 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF (inCondition) THEN
 	THIS^._taskState := eTaskState.Error;
+	OnError();
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{7bd5d176-51b6-065b-1ffd-f139109a93ea}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.OnError()"/>, that is called just ones when '''Error''' state is entered.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

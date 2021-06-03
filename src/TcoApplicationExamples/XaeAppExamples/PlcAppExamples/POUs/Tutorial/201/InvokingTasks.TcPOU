@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="InvokingTasks" Id="{12cfae65-b95f-0775-1a26-802c03070a44}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK InvokingTasks EXTENDS TcoCore.TcoContext
 VAR
-	Cylinder : TcoPneumatics.Cylinder(THIS^);
+	Cylinder : TcoPneumatics.TcoCylinder(THIS^);
 	
 	TriggerHome : BOOL;
 	TriggerWork : BOOL;
@@ -43,10 +43,10 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Cylinder
 (
-	inAtHomePos := AtHome,
-	inAtWorkPos := AtWork,
-	outToHomePos => ToHome,
-	outToWorkPos => ToWork
+	inoAtHomePos := AtHome,
+	inoAtWorkPos := AtWork,
+	inoToHomePos := ToHome,
+	inoToWorkPos := ToWork
 );
 
 IF ToWork THEN

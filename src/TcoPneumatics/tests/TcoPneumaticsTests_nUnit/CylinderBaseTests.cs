@@ -27,6 +27,13 @@ namespace TcoPneumaticsTests
 
         [Test]
         [Timeout(10000)]
+        public void Invalid()
+        {            
+            sut.ExecuteProbeRun(1, (int)eCyclinderBaseTests.Invalid);            
+        }
+
+        [Test]
+        [Timeout(10000)]
         [TestCase(true)]
         [TestCase(false)]
         public void GetAtHome(bool signal)

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CylinderTestContext" Id="{4f0e4024-4378-058d-21b2-dd1a5c077cb8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK CylinderTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut			: TcoPneumatics.Cylinder(THIS^);
+	_sut			: TcoPneumatics.TcoCylinder(THIS^);
+	_sutInvalid 	: TcoPneumatics.TcoCylinder(THIS^);
 	_atHomeSignal	: BOOL;
 	_moveHomeSignal : BOOL;
 	_atWorkSignal	: BOOL;
@@ -23,12 +24,19 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[
-_sut(inAtHomePos := _atHomeSignal,
-    inAtWorkPos := _atWorkSignal,
-    outToHomePos => _moveHomeSignal,
-    outToWorkPos => _moveWorkSignal);
+_sut(inoAtHomePos := _atHomeSignal,
+    inoAtWorkPos := _atWorkSignal,
+    inoToHomePos := _moveHomeSignal,
+    inoToWorkPos := _moveWorkSignal);
 
 CASE _testId OF
+	eCyclinderTests.Invalid:
+	_sutInvalid.Stop();
+	_sutInvalid.MoveToHome();
+	_sutInvalid.MoveToWork();
+	_sutInvalid.Service();
+	_sutInvalid.AtHome;
+	_sutInvalid.AtWork;
     eCyclinderTests.StopMovement:
         _sut.Stop();
     eCyclinderTests.MoveHomeMoving:

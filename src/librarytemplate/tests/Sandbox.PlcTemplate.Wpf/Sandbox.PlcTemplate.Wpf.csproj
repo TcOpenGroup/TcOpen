@@ -4,8 +4,9 @@
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<IsPackable>false</IsPackable>
   </PropertyGroup> 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Wpf\PlcTemplate.Wpf\PlcTemplate.Wpf.csproj" />
+    <ProjectReference Include="..\..\src\Wpf\PlcTemplate.Wpf\PlcTemplate.Inxton.Wpf.csproj" />
   </ItemGroup>
 </Project>

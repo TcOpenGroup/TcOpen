@@ -21,19 +21,19 @@ namespace TcoCore
                 { 
                     if (signal == null)
                     {
-                        if (this.Connector is Vortex.Connector.DummyConnector)
+                        if (this?.Connector is Vortex.Connector.DummyConnector)
                         {
                             return null;
                         }
-
+                        
                         // This may affect performance!
                         if (this.Connector != null)
-                        { 
-                            var plc_signal_symbol = this.SymbolPath.Synchron;
-                            if(!string.IsNullOrEmpty(plc_signal_symbol))
-                            { 
-                                signal = this?.Connector?.OnlineTags?.Where(p => p.Symbol == plc_signal_symbol).FirstOrDefault();
-                            }
+                        {                           
+                                var plc_signal_symbol = this.SymbolPath.Synchron;
+                                if (!string.IsNullOrEmpty(plc_signal_symbol))
+                                {
+                                    signal = this?.Connector?.OnlineTags?.Where(p => p.Symbol == plc_signal_symbol).FirstOrDefault();
+                                }                           
                         }
                     }
                 }

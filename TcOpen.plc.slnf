@@ -3,6 +3,10 @@
     "path": "TcOpen.sln",
     "projects": [
             
+      "src\\TcoAbstractions\\src\\TcoAbstractionsConnector\\TcoAbstractionsConnector.csproj",    
+      "src\\TcoAbstractions\\tests\\TcoAbstractionsTestsConnector\\TcoAbstractionsTestsConnector.csproj",  
+      "src\\TcoAbstractions\\src\\XAE\\XAE\\XAETcoAbstractions.tsproj",  
+
       "src\\TcoCore\\src\\TcoCoreConnector\\TcoCoreConnector.csproj",
       "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",
       "src\\TcoCore\\tests\\TcoCoreExamplesConnector\\TcoCoreExamplesConnector.csproj",
@@ -31,7 +35,11 @@
       "src\\librarytemplate\\tests\\PlcTemplateTestsConnector\\PlcTemplateTestsConnector.csproj",
       
       "src\\TcoApplicationExamples\\PlcAppExamplesConnector\\PlcAppExamplesConnector.csproj",
-      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj"
+      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj",
+
+      "src\\TcoData\\src\\TcoDataConnector\\TcoDataConnector.csproj",
+      "src\\TcoData\\src\\XAE\\XAE\\XAETcoData.tsproj",  
+      "src\\TcoData\\tests\\TcoDataTestsConnector\\TcoDataTestsConnector.csproj"
     ]
   }
 }

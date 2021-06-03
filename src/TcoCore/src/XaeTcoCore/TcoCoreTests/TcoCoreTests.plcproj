@@ -64,6 +64,15 @@
     <Compile Include="Tests\TcoObject\TcoObjectTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoRemoteTask\PlcExecuted\eTcoRemoteTaskTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoRemoteTask\PlcExecuted\TcoRemoteTaskTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoRemoteTask\PlcExecuted\TcoRemoteTaskTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoRtc\TcoRtcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -82,13 +91,31 @@
     <Compile Include="Tests\TcoState\TcoStateAutoRestoreTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\TcoTask\TcoTaskTest.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Tests\TcoTask\PlcExecuted\eTcoTaskTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcTestState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcTestObject.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskPlcTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoTask\TcoTaskTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoToggleTask\eTcoToggleTaskTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoToggleTask\TcoToggleTaskTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoTask\PlcExecuted\TcoTaskTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoToggleTask\TcoToggleTaskTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\Utilities\StringBuilderTests.TcPOU">
@@ -97,8 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
+    <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
+    <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />
     <Folder Include="Tests\TcoComponent" />
     <Folder Include="Tests\TcoObject\EqualsOverride" />

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoRemoteTaskTestContext" Id="{e0205570-0107-044a-09e9-3ba686b39cfb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoRemoteTaskTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_sut : TcoRemoteTaskTest(THIS^);
+    _invokeInitializedCSharpMethodDone : BOOL;
+    _invokeNotInitializedCSharpMethodDone : BOOL;
+    _exceptionInMethodWillResultInExceptionDone : BOOL;
+	_sharedVariable : INT;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{726bdbc0-118a-02d2-27eb-5048fd798ca9}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+CASE _testId OF
+    0:
+        _invokeInitializedCSharpMethodDone := FALSE;
+        _invokeNotInitializedCSharpMethodDone := FALSE;
+        _exceptionInMethodWillResultInExceptionDone := FALSE;
+    eTcoRemoteTaskTests.RestoreTasks:
+        _sut._invokeInitializedCSharpMethod.Restore();
+        _sut._invokeNotInitializedCSharpMethod.Restore();
+        _sut._exceptionInMethodWillResultInException.Restore();
+    eTcoRemoteTaskTests.InvokeInitializedCSharpMethod:
+        _invokeInitializedCSharpMethodDone := _sut._invokeInitializedCSharpMethod.Invoke().Done;
+    eTcoRemoteTaskTests.InvokeNotInitializedCSharpMethod:
+        _invokeNotInitializedCSharpMethodDone := _sut._invokeNotInitializedCSharpMethod.Invoke().Error;
+    eTcoRemoteTaskTests.ExceptionInMethodWillResultInException:
+        _exceptionInMethodWillResultInExceptionDone := _sut._exceptionInMethodWillResultInException.Invoke().Error;
+END_CASE
+
+_sut();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

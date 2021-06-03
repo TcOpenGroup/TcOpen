@@ -4,6 +4,7 @@
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
     <FileVersion>0.3.0.0</FileVersion>
     <InformationalVersion>0.3.0-alpha.1+Branch.develop.Sha.02a3c846fa59432b34737d664bc33a8546fd145a</InformationalVersion>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="_generated\PlcTcProberTests\**" />
@@ -11,7 +12,7 @@
     <None Remove="_generated\PlcTcProberTests\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.11.1-nightly.487" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.11.3-alpha.487" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

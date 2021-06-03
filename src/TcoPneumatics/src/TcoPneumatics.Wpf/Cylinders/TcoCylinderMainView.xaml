@@ -1,0 +1,54 @@
+﻿<UserControl
+    x:Class="TcoPneumatics.Wpf.Cylinders.TcoCylinderMainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoPneumatics.Wpf.Cylinders"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoCore="http://inxton.mts/xaml"
+    xmlns:tcopen="clr-namespace:TcOpen"
+    xmlns:tcopneumatics="clr-namespace:TcoPneumatics" xmlns:vortex="http://vortex.mts/xaml"
+    mc:Ignorable="d">
+    <!--<d:UserControl.DataContext>
+        <tcopneumatics:TcoCylinderViewModel />
+    </d:UserControl.DataContext>-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="CylinderNames" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+            Text="{Binding Component, Converter={tcoCore:NameOrSymbolConverter}}"
+            TextAlignment="Left"
+            TextWrapping="WrapWithOverflow" />
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.475*" />
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="0.475*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Border
+                    Height="5"
+                    Background="{Binding Component.AtHomePos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
+                    CornerRadius="2" />
+                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveHomeDefault}"/>
+            </StackPanel>
+          
+            <StackPanel Grid.Column="2">
+                <Border
+                    Height="5"
+                    Background="{Binding Component.inAtWorkPos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
+                    CornerRadius="2" />
+                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveWorkDefault}"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

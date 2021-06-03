@@ -7,6 +7,7 @@
   $nugetSource = "https://api.nuget.org/v3/index.json"
   $nugetToken = ([System.Environment]::GetEnvironmentVariable('TcoOpenNugetdotorgPAT'))
   $publishNugets = $false
+  $packNugets = $true
   $updateAssemblyInfo = $false
   $gitVersion
   $msbuild = ([System.Environment]::GetEnvironmentVariable('TcoMsbuild'))
@@ -139,6 +140,12 @@ task Build -depends BuildWithInxtonBuilder {
         /consoleloggerparameters:ErrorsOnly `
         -v:$msbuildVerbosity    
   } -maxRetries 3  
+
+   $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
+
+    exec{
+        cmd /c $command
+    }  -maxRetries 2   
 }
 
 
@@ -156,18 +163,14 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
     Write-Host 'Building plc projects' -ForegroundColor Cyan
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
-
-    $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
-      
-    exec{
-        cmd /c $command
-    }  -maxRetries 2    
-        	
-    $testProjects = @(                    
+            	
+    $testProjects = @(
+                      [System.Tuple]::Create(".\src\TcOpen.Inxton\TcOpen.Inxton.slnf", "", -1, "TcOpen.Inxton"),                     
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
                       [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", -1, "TcoElements"),
                       [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", -1, "TcoIoBeckhoff"),
-                      [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "src\TcoPneumatics\src\XaeTcoPneumatics\", -1, "TcoPneumatics")                     
+                      [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "\src\TcoPneumatics\src\XaeTcoPneumatics\", -1, "TcoPneumatics"),
+                      [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "\src\TcoData\src\XAE\XAE\", -1, "TcoData")                    
                     )
                     # removed due to missing hardware  
                     # [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", -1, "TcoDrivesBeckhoff"),
@@ -192,12 +195,12 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
         if($xaeProjectFolder -ne "")
         {
           exec{   
-            Start-Sleep 5
+            Start-Sleep 1
             .\pipelines\utils\CleanupTargetBoot.ps1 $testTargetAmsId;
-            Start-Sleep 5
+            Start-Sleep 1
             $BootDir = $solutionDir + $xaeProjectFolder;               
             .\pipelines\utils\Load-XaeProject.ps1 $testTargetAmsId $BootDir;                    
-            Start-Sleep 5
+            Start-Sleep 1
           }  -maxRetries 2    
         }
 
@@ -234,29 +237,21 @@ task ClearPackages `
 }
 
 task CreatePackages `
-  -precondition { $publishNugets } `
+  -precondition { $packNugets } `
   -depends ClearPackages `
 {
   $semVer = $script:gitVersion.SemVer
-  $projects = @(
-    #Packaging
-    "src\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj",
-    "src\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj",
-    "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj",
-    "src\TcoDrivesBeckhoff\src\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj",
-    "src\TcoIoBeckhoff\src\TcoIoBeckhoff.Wpf\TcoIoBeckhoff.Wpf.csproj",
-    "src\TcoIoBeckhoff\src\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj",
-    "src\TcoPneumatics\src\TcoPneumatics.Wpf\TcoPneumatics.Wpf.csproj",
-    "src\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj",
-    "src\_packaging\TcOpen.Group\TcOpen.Group.csproj",
-    "src\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj"
-  )
-  foreach($project in $projects)
-  {  
-    exec { 
-       & $dotnet pack $project -p:PackageVersion=$semVer --output nugets -c $buildConfig /p:SolutionDir=$solutionDir -v $msbuildVerbosity --no-restore --no-build
+  exec { 
+      & $dotnet pack TcOpen.build.slnf `
+        --output nugets `
+        --no-build `
+        --no-restore `
+        --nologo `
+        --verbosity $msbuildVerbosity `
+        --configuration  $buildConfig `
+        -p:PackageVersion=$semVer `
+        /p:SolutionDir=$solutionDir
     }
-  }
 }
 
 task PublishPackages -depends CreatePackages -precondition {return $publishNugets} {

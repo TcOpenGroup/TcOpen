@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Threading;
 using TcoCoreTests;
 
+
 namespace TcoCoreUnitTests
 {
 
@@ -27,6 +28,8 @@ namespace TcoCoreUnitTests
         ulong B_TaskDoneCount_0;
         ulong A_TaskDoneRECount_0;
         ulong B_TaskDoneRECount_0;
+        ulong A_onStartCounter_0;
+        ulong B_onStartCounter_0;
 
         ulong A_TaskInvokeCount_1;
         ulong B_TaskInvokeCount_1;
@@ -40,8 +43,12 @@ namespace TcoCoreUnitTests
         ulong B_TaskDoneCount_1;
         ulong A_TaskDoneRECount_1;
         ulong B_TaskDoneRECount_1;
+        ulong A_onStartCounter_1;
+        ulong B_onStartCounter_1;
 
         ushort plccycles;
+
+
         [SetUp]
         public void Setup()
         {
@@ -63,6 +70,8 @@ namespace TcoCoreUnitTests
             B_TaskDoneCount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._doneCounter.Synchron;
             A_TaskDoneRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_A._doneRisingEdgeCounter.Synchron;
             B_TaskDoneRECount_0 = tc._tcoObjectTest_A._tcoTaskTest_B._doneRisingEdgeCounter.Synchron;
+            A_onStartCounter_0 = tc._tcoObjectTest_A._tcoTaskTest_A._onStartCounter.Synchron;
+            B_onStartCounter_0 = tc._tcoObjectTest_A._tcoTaskTest_B._onStartCounter.Synchron;
 
             A_TaskInvokeCount_1 = 0;
             B_TaskInvokeCount_1 = 0;
@@ -76,8 +85,12 @@ namespace TcoCoreUnitTests
             B_TaskDoneCount_1 = 0;
             A_TaskDoneRECount_1 = 0;
             B_TaskDoneRECount_1 = 0;
+            A_onStartCounter_1 = 0;
+            B_onStartCounter_1 = 0;
+
 
             plccycles = 0;
+
         }
 
         public void GetCounterValues()
@@ -94,6 +107,9 @@ namespace TcoCoreUnitTests
             B_TaskDoneCount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._doneCounter.Synchron;
             A_TaskDoneRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_A._doneRisingEdgeCounter.Synchron;
             B_TaskDoneRECount_1 = tc._tcoObjectTest_A._tcoTaskTest_B._doneRisingEdgeCounter.Synchron;
+            A_onStartCounter_1 = tc._tcoObjectTest_A._tcoTaskTest_A._onStartCounter.Synchron;
+            B_onStartCounter_1 = tc._tcoObjectTest_A._tcoTaskTest_B._onStartCounter.Synchron;
+
         }
 
         public void CheckBothTaskInvokeCount(ushort count)
@@ -134,6 +150,7 @@ namespace TcoCoreUnitTests
             tc._tcoObjectTest_A._tcoTaskTest_A.SetPreviousStateToReady();               //Set previous state of the Task A to Ready
             tc._tcoObjectTest_A._tcoTaskTest_B.SetPreviousStateToReady();               //Set previous state of the Task B to Ready
 
+            
             tc.RunUntilEndConditionIsMet(() =>
             {
                 plccycles++;
@@ -155,7 +172,11 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(B_TaskDoneCount_0 + 1, B_TaskDoneCount_1);                  //As the cycles_B is greater then cycle_A, Task A is already in Done state, when Task B just reach it. As the execution is finished, when the both tasks are in Done state, TaskBDoneCounter should increment exactly by one only.
             CheckBothTaskDoneRECount(1);                                                //Both tasks reach done state just once
             Assert.AreEqual(cycles_B, plccycles);                                       //The execution should take exactly cycles_B cycles, as it is greather than cycles_A.
+
+            Assert.AreEqual(A_onStartCounter_0 + 1, A_onStartCounter_1);
+            Assert.AreEqual(B_onStartCounter_0 + 1, B_onStartCounter_1);
         }
+
 
         [Test, Order(301)]
         public void T301_TaskInvokeAfterDoneWithNoEmptyCycles()
@@ -331,6 +352,8 @@ namespace TcoCoreUnitTests
 
             TcoObjectTest to = tc._tcoObjectTest_A;
             TcoTaskTest tt = tc._tcoObjectTest_A._tcoTaskTest_A;
+            ulong onErrorCounter_0 = tt._onErrorCounter.Synchron;
+            ulong whileErrorCounter_0 = tt._whileErrorCounter.Synchron;
 
             tc.AddEmptyCycle();                                                         //Empty cycle between cyclically called the Invoke() methods of the both task should causes restarting the tasks even from Done state.
 
@@ -360,6 +383,26 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(tt._isError.Synchron);                                        //Task should be in Error, not Done, not Busy.
             Assert.IsFalse(tt._isBusy.Synchron);
             Assert.IsFalse(tt._isDone.Synchron);
+            ulong onErrorCounter_1 = tt._onErrorCounter.Synchron;
+            ulong whileErrorCounter_1 = tt._whileErrorCounter.Synchron;
+
+            Assert.AreEqual(onErrorCounter_0 + 1, onErrorCounter_1);
+
+            cycles_A = 10;
+
+            tc.MultipleCycleRun(() =>
+            {
+                to.CallTaskInstancies();
+                tt.ReadOutState();
+            }, cycles_A);
+
+            onErrorCounter_1 = tt._onErrorCounter.Synchron;
+            whileErrorCounter_1 = tt._whileErrorCounter.Synchron;
+
+            Assert.AreEqual(onErrorCounter_0 + 1, onErrorCounter_1);
+            Assert.IsTrue((whileErrorCounter_1 - whileErrorCounter_0) > (onErrorCounter_1 - onErrorCounter_0));
+            Assert.AreEqual(whileErrorCounter_0 + cycles_A, whileErrorCounter_1);
+
         }
 
         [Test, Order(311)]
@@ -690,7 +733,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(cycles_A, plccycles);                                       //The execution should take exactly cycles_A cycles.
         }
 
-
         [Test, Order(321)]
         public void T321_DisableExecutingTask()
         {
@@ -771,7 +813,6 @@ namespace TcoCoreUnitTests
             GetCounterValues();
         }
 
-
         [Test, Order(322)]
         public void T322_InvokeTaskThenDisable()
         {
@@ -799,7 +840,6 @@ namespace TcoCoreUnitTests
             Assert.AreEqual(A_TaskExecuteRECount_0, A_TaskExecuteRECount_1);           //Task should not even enter into the Busy state.
             Assert.AreEqual(A_TaskDoneRECount_0, A_TaskDoneRECount_1);                 //Task should not even enter into the Done state.
         }
-
 
         [Test, Order(323)]
         public void T323_DisableTaskInErrorStateEnableAndTriggerAgain()

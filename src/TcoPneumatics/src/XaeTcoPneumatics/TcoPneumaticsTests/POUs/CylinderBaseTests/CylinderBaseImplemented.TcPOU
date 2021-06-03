@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CylinderBaseImplemented" Id="{16dbbb9c-5096-022e-1c34-577d64bc3cf6}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseImplemented  EXTENDS TcoPneumatics.CylinderBase
+    <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseImplemented  EXTENDS TcoPneumatics.TcoCylinderBase
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);]]></ST>
     </Implementation>
     <Property Name="MoveHomeTask" Id="{37bf1502-959e-06e5-0859-f85523fd8776}">
       <Declaration><![CDATA[PROPERTY MoveHomeTask : TcoCore.ITcoTask]]></Declaration>

@@ -59,6 +59,7 @@ namespace TcoCore
 
             Task.Run(() => { while (!endCondition()); System.Threading.Thread.Sleep(5); }).Wait();
 
+            _probeRunRequiredCycles.Synchron = 0;
             _testId.Synchron = 0;
         }
     }

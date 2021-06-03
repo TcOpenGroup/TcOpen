@@ -35,7 +35,13 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\TcoDriveSimple\TcoDrivesBeckhoffContext.TcPOU">
+    <Compile Include="Tests\TcoContext\WpfContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoDriveSimple\eTcoDriveSimpleTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoDriveSimple\TcoDriveSimpleTestContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoDriveSimple\TcoDriveSimpleTest.TcPOU">
@@ -46,6 +52,7 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoContext" />
     <Folder Include="Tests\TcoDriveSimple" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

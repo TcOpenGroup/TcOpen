@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoToggleTaskTests" Id="{9d986438-740b-0107-34c5-afef7aa116f2}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoToggleTaskTests :
+(
+	Reinit	:=	1001,
+	CleanUp	:= 1002,
+	Message := 1003,
+	TriggerToggleWhileRunNotCalled := 1004,
+	TriggerToggleWhileDisabled := 1005,
+	TriggerToggleWhileEnabled := 1006,
+	TriggerOnWhileRunNotCalled := 1007,
+	TriggerOnWhileDisabled := 1008,
+	TriggerOnWhileEnabled := 1009,
+	TriggerOffWhileRunNotCalled := 1010,
+	TriggerOffWhileDisabled := 1011,
+	TriggerOffWhileEnabled := 1012
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

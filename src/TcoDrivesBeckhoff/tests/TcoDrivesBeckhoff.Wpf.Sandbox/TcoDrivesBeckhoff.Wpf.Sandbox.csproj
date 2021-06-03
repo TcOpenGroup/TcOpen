@@ -5,10 +5,17 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TcoDrivesBeckhoff.Wpf\TcoDrivesBeckhoff.Wpf.csproj" />
+    <ProjectReference Include="..\..\src\TcoDrivesBeckhoff.Wpf\TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.csproj" />
     <ProjectReference Include="..\TcoDrivesBeckhoffTestsConnector\TcoDrivesBeckhoffTestsConnector.csproj" />
   </ItemGroup>
 
