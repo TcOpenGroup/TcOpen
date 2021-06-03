@@ -9,7 +9,7 @@ namespace IntegrationProjects
 {
     public static class Entry
     {
-        const string AmdId = "172.20.10.2.1.1";
+        const string AmdId = "172.20.10.105.1.1";
 
         public static IntegrationProjects.IntegrationProjectsTwinController IntegrationProjectsPlc 
             = new IntegrationProjectsTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));

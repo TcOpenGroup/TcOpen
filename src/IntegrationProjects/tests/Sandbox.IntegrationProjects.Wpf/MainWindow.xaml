@@ -13,32 +13,40 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid Grid.Row="0" DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY, Mode=OneWay}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="0">
-            <UniformGrid.Resources>
-                <Style TargetType="vortex:RenderableContentControl">
-                    <Setter Property="Margin" Value="10"></Setter>
-                </Style>
-            </UniformGrid.Resources>
-            <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundPositionSequence, Mode=OneWay}" PresentationType="Base"/>
-            <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatPositionSequence, Mode=OneWay}" PresentationType="Base"/>
-        </UniformGrid>
-        <UniformGrid Grid.Row="1" Rows="1" Columns="3" Margin="10">
-            <UniformGrid.Resources>
-                <Style TargetType="vortex:RenderableContentControl">
-                    <Setter Property="Margin" Value="10"></Setter>
-                </Style>
-            </UniformGrid.Resources>
-            <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._serviceModeTask, Mode=OneWay}" PresentationType="Base"/>
-            <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundSequenceTask, Mode=OneWay}" PresentationType="Service-Base" />
-            <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatSequenceTask, Mode=OneWay}" PresentationType="Service-Base" />
-        </UniformGrid>
-        <vortex:RenderableContentControl Margin="10" Grid.Row="2" DataContext="{Binding _technology._ST001._components, Mode=OneWay}" PresentationType="Service" />
-    </Grid>
-
+    <TabControl>
+        <TabItem Header="ST-001">
+            <Grid Grid.Row="0" DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <UniformGrid Grid.Row="0">
+                    <UniformGrid.Resources>
+                        <Style TargetType="vortex:RenderableContentControl">
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundPositionSequence, Mode=OneWay}" PresentationType="Base"/>
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatPositionSequence, Mode=OneWay}" PresentationType="Base"/>
+                </UniformGrid>
+                <vortex:RenderableContentControl Margin="10" Grid.Row="1" DataContext="{Binding _technology._ST001._components, Mode=OneWay}" PresentationType="Service" />
+                <UniformGrid Grid.Row="2" Rows="1" Columns="3" Margin="10">
+                    <UniformGrid.Resources>
+                        <Style TargetType="vortex:RenderableContentControl">
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._serviceModeTask, Mode=OneWay}" PresentationType="Base"/>
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundSequenceTask, Mode=OneWay}" PresentationType="Service-Base" />
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatSequenceTask, Mode=OneWay}" PresentationType="Service-Base" />
+                </UniformGrid>
+                <vortex:RenderableContentControl Margin="10" Grid.Row="3" DataContext="{Binding _technology._ST001, Mode=OneWay}" PresentationType="Diagnostics" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="Settings">
+            <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._settings._data, Mode=OneWay}" PresentationType="Control"></vortex:RenderableContentControl>
+        </TabItem>
+    </TabControl>
 </Window>
