@@ -15,8 +15,10 @@ namespace TcoDataUnitTests
             if(this.repository == null)
             {
                 var a = new DataTestObject();
+#pragma warning disable CS0618 // Type or member is obsolete
                 var parameters = new MongoDbRepositorySettings<DataTestObject>("mongodb://localhost:27017", "TestDataBase", "TestCollection");
                 var parametersAltered = new MongoDbRepositorySettings<DataTestObjectAlteredStructure>("mongodb://localhost:27017", "TestDataBase", "TestCollection");
+#pragma warning restore CS0618 // Type or member is obsolete
                 this.repository = Repository.Factory(parameters);
 
                 this.repository_altered_structure = Repository.Factory(parametersAltered);

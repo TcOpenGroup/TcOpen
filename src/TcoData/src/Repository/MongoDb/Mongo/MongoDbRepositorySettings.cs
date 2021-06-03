@@ -16,6 +16,8 @@ namespace TcoData.Repository.MongoDb
     {
         private string _databaseName;
         private string _collectionName;
+        
+        [Obsolete("It's not recommended to use MongoDB without any authentication in place.",false)]
         public MongoDbRepositorySettings(string connectionString, string databaseName, string collectionName)
         {            
             SetupSerialisationAndMapping();
@@ -23,7 +25,15 @@ namespace TcoData.Repository.MongoDb
             Database = GetDatabase(databaseName);
             Collection = GetCollection(collectionName);
         }
-        
+
+        public MongoDbRepositorySettings(string connectionString, string databaseName, string collectionName, MongoDbCredentials credentials)
+        {
+            SetupSerialisationAndMapping();
+            Client = GetClient(connectionString, credentials);
+            Database = GetDatabase(databaseName);
+            Collection = GetCollection(collectionName);
+        }
+
         private IMongoClient GetClient(string connectionString)
         {
             var existingClient = Clients.Where(p => p.Key == connectionString).Select(p => p.Value);
@@ -34,6 +44,23 @@ namespace TcoData.Repository.MongoDb
             else
             {
                 Clients[connectionString] = new MongoClient(connectionString);
+            }
+
+            return Clients[connectionString];
+        }
+
+        private IMongoClient GetClient(string connectionString, MongoDbCredentials dbCredentials)
+        {
+            var existingClient = Clients.Where(p => p.Key == connectionString).Select(p => p.Value);
+            if (existingClient.Count() >= 1)
+            {
+                return existingClient.ElementAt(0);
+            }
+            else
+            {
+                var settings = MongoClientSettings.FromConnectionString(connectionString);
+                settings.Credential = MongoCredential.CreateCredential(dbCredentials.UsersDatabase, dbCredentials.Username, dbCredentials.Password);
+                Clients[connectionString] = new MongoClient(settings);
             }
 
             return Clients[connectionString];
