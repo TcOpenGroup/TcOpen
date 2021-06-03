@@ -1,4 +1,4 @@
-﻿namespace TcoData.Repository.MongoDb
+﻿namespace TcOpen.Inxton.MongoDb
 {
     /// <summary>
     /// To use MongoDbCrendetials you must at first create a database with users
@@ -9,7 +9,7 @@
     /// </code>
     /// 
     /// <code>
-    ///     mongo.exe --host <HOSTNAME> --port <PORT>
+    ///     "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe" --host <HOSTNAME> --port <PORT>
     /// </code>
     /// 
     /// 2.Switch to the admin database.
@@ -62,7 +62,7 @@
     /// 
     /// 6. Start the database with --auth flag
     /// <code>
-    ///     "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"  --dbpath C:\DATA\DB6\ --bind_ip_all --auth
+    ///     "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB6\ --bind_ip_all --auth
     /// </code>
     /// </summary>
     public class MongoDbCredentials
