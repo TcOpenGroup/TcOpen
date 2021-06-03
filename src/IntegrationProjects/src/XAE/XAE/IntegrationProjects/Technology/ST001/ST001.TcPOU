@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="ST001" Id="{010cafc4-622f-0b8f-2fed-ee2ff87a3f00}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001 EXTENDS TcoCore.TcoObject
 VAR	
@@ -17,11 +17,14 @@ VAR
 	_groundPositionSequence : ST001_GroundSequence(THIS^,eRestoreMode.None);
 	_automatPositionSequence : ST001_AutomatSequence(THIS^,eRestoreMode.None);
 	
-	_settings : ST001_ProcessDataSettings(THIS^);
+	_settings 	: ST001_ProcessDataManager(THIS^);
+	_repository : ST001_ProcessDataManager(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_components();
+_settings();
+_repository();
 _groundPositionSequence(inoComponents := _components);
 _automatPositionSequence(inoComponents := _components);
 
@@ -45,5 +48,27 @@ IF(_serviceModeTask.Execute()) THEN
 	_components.Service();
 END_IF]]></ST>
     </Implementation>
+    <Property Name="Repository" Id="{cb48c119-fade-018a-3a85-7fcfa6a3b0dc}">
+      <Declaration><![CDATA[PROPERTY Repository : REFERENCE TO ST001_ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{66fbcbe4-e4c7-0b70-37e7-078bc6baa61a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Repository REF= _repository;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Settings" Id="{4ad2c757-2f00-04a2-2663-bb2411c40db7}">
+      <Declaration><![CDATA[PROPERTY Settings : REFERENCE TO ST001_ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{6bdeca15-35a6-090c-2d41-cde43739ad03}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Settings REF= _settings;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

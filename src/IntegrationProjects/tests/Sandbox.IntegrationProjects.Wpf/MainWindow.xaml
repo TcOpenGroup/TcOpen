@@ -22,15 +22,19 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <UniformGrid Grid.Row="0">
-                    <UniformGrid.Resources>
+                <Grid Grid.Row="0">
+                    <Grid.Resources>
                         <Style TargetType="vortex:RenderableContentControl">
                             <Setter Property="Margin" Value="10"></Setter>
                         </Style>
-                    </UniformGrid.Resources>
-                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundPositionSequence, Mode=OneWay}" PresentationType="Base"/>
-                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatPositionSequence, Mode=OneWay}" PresentationType="Base"/>
-                </UniformGrid>
+                    </Grid.Resources>
+                    <Grid Visibility="{Binding _technology._ST001._groundSequenceTask._taskState.Cyclic, Converter={local:TaskBusyToVisibleConverter}}">
+                        <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundPositionSequence, Mode=OneWay}" PresentationType="Base"/>
+                    </Grid>
+                    <Grid Visibility="{Binding _technology._ST001._automatSequenceTask._taskState.Cyclic, Converter={local:TaskBusyToVisibleConverter}}">
+                        <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatPositionSequence, Mode=OneWay}" PresentationType="Base"/>
+                    </Grid>
+                </Grid>
                 <vortex:RenderableContentControl Margin="10" Grid.Row="1" DataContext="{Binding _technology._ST001._components, Mode=OneWay}" PresentationType="Service" />
                 <UniformGrid Grid.Row="2" Rows="1" Columns="3" Margin="10">
                     <UniformGrid.Resources>

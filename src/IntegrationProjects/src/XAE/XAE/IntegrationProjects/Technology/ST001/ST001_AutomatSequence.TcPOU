@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="ST001_AutomatSequence" Id="{64c860e5-7a30-0da6-3fb2-b6e5c3d92cb4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001_AutomatSequence EXTENDS TcoCore.TcoSequencer
 VAR_IN_OUT
@@ -35,7 +35,7 @@ IF(Step(inStepID  			:= 100,
 	    inEnabled 			:= TRUE,
 	    inStepDescription 	:= '<#LOAD PART INTO FIXTURE#>')) 
 THEN
-//---------------------------------------
+//---------------------------------------	    
 	IF(inoComponents.PartPresent.IsTrue) THEN
 		THIS^.CompleteStep();		
 	END_IF;
@@ -87,6 +87,18 @@ THEN
 //---------------------------------------
 END_IF;
 
+IF(Step(inStepID  			:= 600,
+	    inEnabled 			:= TRUE,
+	    inStepDescription 	:= '<#SAVE DATA#>')) 
+THEN
+//---------------------------------------
+	IF(THIS^.Station^.Settings.Create(ULINT_TO_STRING(Context.Rtc.TickClock())).Done) THEN
+		THIS^.CompleteStep();		
+	END_IF;
+//---------------------------------------
+END_IF;
+
+		
 
 IF(Step(inStepID  			:= MaxStepID - 1,
 	    inEnabled 			:= TRUE,
@@ -114,5 +126,19 @@ inoComponents.Press.Restore();
 _gTimer_1(IN := FALSE);]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Station" Id="{84ead0c4-fb8c-0d72-283d-8bb2f0f9d711}">
+      <Declaration><![CDATA[PROPERTY Station : POINTER TO ST001]]></Declaration>
+      <Get Name="Get" Id="{487dd69d-f10f-00a1-304f-4eb3a9eef535}">
+        <Declaration><![CDATA[VAR
+	refStation : POINTER TO ST001;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF(__QUERYPOINTER(_Parent,  refStation)) THEN
+	Station := refStation;
+END_IF;	]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

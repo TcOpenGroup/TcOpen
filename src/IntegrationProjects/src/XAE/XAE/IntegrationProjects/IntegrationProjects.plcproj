@@ -52,10 +52,10 @@
     <Compile Include="Technology\MAIN_TECHNOLOGY.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST001\Settings\ST001_ProcessData.TcDUT">
+    <Compile Include="Technology\ST001\Data\ST001_ProcessData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST001\Settings\ST001_ProcessDataSettings.TcPOU">
+    <Compile Include="Technology\ST001\Data\ST001_ProcessDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Technology\ST001\ST001.TcPOU">
@@ -97,7 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Technology\IO" />
-    <Folder Include="Technology\ST001\Settings" />
+    <Folder Include="Technology\ST001\Data" />
     <Folder Include="ToLibs" />
     <Folder Include="Technology" />
     <Folder Include="POUs" />
