@@ -2,37 +2,52 @@
     x:Class="TcoElements.TcoDiServiceView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TcoElements"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf" xmlns:vortex="http://vortex.mts/xaml"
-    d:DesignWidth="800"
-    mc:Ignorable="d">
+    xmlns:tcoCore="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
+    xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:vortex="http://vortex.mts/xaml"
+    mc:Ignorable="d"
+    d:DesignWidth="800">
     <d:UserControl.DataContext>
-        <TcoElements:TcoDi/>
+        <TcoElements:TcoDi />
     </d:UserControl.DataContext>
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
+            
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.6*" SharedSizeGroup="Name" />
-            <ColumnDefinition Width="0.4*" />
-            <ColumnDefinition Width="0.4*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding ., Converter={tcoCore:NameOrSymbolConverter}}" />
-        <Border
-            Grid.Column="2"
-            Margin="5,0,5,0"
-            Background="{Binding _signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
-            CornerRadius="2" />
-        <Expander Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
-            <UniformGrid  Rows="1">
-                <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" />
-                <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}"></vortex:RenderableContentControl>
-                <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}"></vortex:RenderableContentControl>
+        
+        <Expander
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            materialDesign:ExpanderAssist.HorizontalHeaderPadding="0"
+            materialDesign:ExpanderAssist.VerticalHeaderPadding="0"
+            Background="Transparent">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*" SharedSizeGroup="Name" />
+                        <ColumnDefinition Width="0.4*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" 
+                               Margin="5,0,5,0"
+                               Text="{Binding ., Converter={tcoCore:NameOrSymbolConverter}}" />
+                    <Border
+                        Grid.Column="1"
+                        Margin="5,0,5,0"
+                        Background="{Binding _signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
+                        CornerRadius="2" />
+                </Grid>
+            </Expander.Header>
+            <UniformGrid Rows="1">
+                <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
             </UniformGrid>
         </Expander>
     </Grid>

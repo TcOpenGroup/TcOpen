@@ -105,8 +105,8 @@ namespace TcoCore
                 {
                     this._hasException.Synchron = true;
                     this._exceptionMessage.Synchron = ex.ToString().Substring(0, 244);
-                    RemoteExecutionException = ex;
-                    Vortex.Framework.Abstractions.Journal.Journaling.Journal.LogRemoteExecutionEventException(this, ex);
+                    RemoteExecutionException = ex;                   
+                    TcOpen.Inxton.TcoAppDomain.Current.Logger.Error($"Remote execution failure '{ex.ToString()}'", Logging.LogInfo.Create(this));
                     return;
                 }
                 finally
