@@ -8,6 +8,26 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.MongoDb
 {
+    /// <summary>
+    /// Provides access to basic operations for MongoDB.
+    /// To use this code, mongo database must run somewhere. To start MongoDB locally you can use following code
+    /// 
+    /// Start MongoDB without authentication 
+    ///     <code>
+    ///         "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446\ 
+    ///     </code>
+    ///     
+    /// Start MongoDB with authentication. You don't have to use the "--port" attribute or use a different "--dbpath". The only 
+    /// reason why would you want to run authenticated database on a different dbpath and port simultaneously is if they're running
+    /// on the same machine.
+    /// 
+    /// More info about the use credentials <see cref="MongoDbCredentials"/>
+    /// 
+    ///     <code>
+    ///         "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446_AUTH\ --auth --port 27018
+    ///     </code>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MongoDbRepository<T> : RepositoryBase<T>
         where T : IBrowsableDataObject
     {
