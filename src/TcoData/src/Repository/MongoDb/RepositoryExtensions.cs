@@ -1,7 +1,7 @@
 ﻿using System;
 using TcOpen.Inxton.Abstractions.Data;
 
-namespace TcoData.Repository.MongoDb
+namespace TcOpen.Inxton.MongoDb
 {
     public static class Repository
     {

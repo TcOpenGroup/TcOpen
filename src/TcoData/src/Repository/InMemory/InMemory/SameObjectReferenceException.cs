@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace TcoData.Repository.InMemory
+namespace TcOpen.Inxton.Data.InMemory
 {
     public class SameObjectReferenceException : Exception
     {
