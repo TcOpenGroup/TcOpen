@@ -10,7 +10,7 @@ using System.Net.Sockets;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.MongoDb
+namespace TcOpen.Inxton.MongoDb
 {
     public class MongoDbRepositorySettings<T> : RepositorySettings  where T : IBrowsableDataObject 
     {

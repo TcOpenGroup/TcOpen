@@ -6,7 +6,7 @@ using System.Linq;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.MongoDb
+namespace TcOpen.Inxton.MongoDb
 {
     /// <summary>
     /// Provides access to basic operations for MongoDB.

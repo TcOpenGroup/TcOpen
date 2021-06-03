@@ -1,6 +1,6 @@
 ﻿using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.Json
+namespace TcOpen.Inxton.Data.Json
 {
     public class JsonRepositorySettings<T> : RepositorySettings
     {

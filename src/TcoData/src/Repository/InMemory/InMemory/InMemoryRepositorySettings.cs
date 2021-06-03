@@ -1,6 +1,6 @@
 ﻿using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.InMemory
+namespace TcOpen.Inxton.Data.InMemory
 {
     public class InMemoryRepositorySettings<T> : RepositorySettings
     {
