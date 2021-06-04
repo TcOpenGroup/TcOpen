@@ -337,26 +337,122 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             Assert.AreEqual(-velocity, tc._sut._axisStatus.ActVelo.Synchron, velocity * 0.02);
         }
 
-        [Test, Order((int)eTcoDriveSimpleTests.GetMotorType)]
-        public void T017_GetMotorType()
+        [Test, Order((int)eTcoDriveSimpleTests.MoveAbsoluteDisabled)]
+        public void T017_MoveAbsoluteDisabled()
         {
-            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.GetMotorType, () => tc._done.Synchron);
+            while (!tc._arranged.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.MoveAbsoluteDisabled);
+            }
+            double actpos = tc._sut._axisStatus.ActPos.Synchron;
+            double setpos = 1000;
+            tc._position.Synchron = setpos;
+            tc._velocity.Synchron = 1400;
+            tc._acceleration.Synchron = 50000;
+            tc._deceleration.Synchron = 50000;
+            tc._jerk.Synchron = 150000;
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveAbsoluteDisabled, () => tc._done.Synchron);
+            Assert.AreEqual(16992, tc._sut._axisStatus.ErrorId.Synchron);   //"Controller enable"
+            Assert.IsTrue(tc._sut._axisStatus.Error.Synchron);
+            while (tc._sut._axisStatus.Error.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.Reset);
+            }
             Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
         }
 
-        [Test, Order((int)eTcoDriveSimpleTests.GetAxisReferenceType)]
-        public void T018_GetAxisReferenceType()
+        [Test, Order((int)eTcoDriveSimpleTests.MoveAbsoluteDisabledPositiveDirection)]
+        public void T018_MoveAbsoluteDisabledPositiveDirection()
         {
-            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.GetAxisReferenceType, () => tc._done.Synchron);
+            while (!tc._arranged.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.MoveAbsoluteDisabledPositiveDirection);
+            }
+            double actpos = tc._sut._axisStatus.ActPos.Synchron;
+            double setpos = 1000;
+            tc._position.Synchron = actpos + setpos;
+            tc._velocity.Synchron = 1400;
+            tc._acceleration.Synchron = 50000;
+            tc._deceleration.Synchron = 50000;
+            tc._jerk.Synchron = 150000;
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveAbsoluteDisabledPositiveDirection, () => tc._done.Synchron);
+            Assert.IsTrue(tc._sut._axisStatus.Error.Synchron);
+            Assert.AreEqual(16931, tc._sut._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(actpos, tc._sut._axisStatus.ActPos.Synchron,1);
+            while (tc._sut._axisStatus.Error.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.Reset);
+            }
             Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
         }
 
+        [Test, Order((int)eTcoDriveSimpleTests.MoveAbsoluteEnabledPositiveDirection)]
+        public void T019_MoveAbsoluteEnabledPositiveDirection()
+        {
+            while (!tc._arranged.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.MoveAbsoluteEnabledPositiveDirection);
+            }
+            double actpos = tc._sut._axisStatus.ActPos.Synchron;
+            double setpos = 1000;
+            tc._position.Synchron = actpos + setpos;
+            tc._velocity.Synchron = 1400;
+            tc._acceleration.Synchron = 50000;
+            tc._deceleration.Synchron = 50000;
+            tc._jerk.Synchron = 150000;
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveAbsoluteEnabledPositiveDirection, () => tc._done.Synchron);
+            Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
+            Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
+            Assert.AreEqual(actpos+setpos, tc._sut._axisStatus.ActPos.Synchron, 1);
+        }
 
+        [Test, Order((int)eTcoDriveSimpleTests.MoveAbsoluteDisabledNegativeDirection)]
+        public void T020_MoveAbsoluteDisabledNegativeDirection()
+        {
+            while (!tc._arranged.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.MoveAbsoluteDisabledNegativeDirection);
+            }
+            double actpos = tc._sut._axisStatus.ActPos.Synchron;
+            double setpos = 1000;
+            tc._position.Synchron = actpos - setpos;
+            tc._velocity.Synchron = 1400;
+            tc._acceleration.Synchron = 50000;
+            tc._deceleration.Synchron = 50000;
+            tc._jerk.Synchron = 150000;
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveAbsoluteDisabledNegativeDirection, () => tc._done.Synchron);
+            Assert.IsTrue(tc._sut._axisStatus.Error.Synchron);
+            Assert.AreEqual(16931, tc._sut._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(actpos , tc._sut._axisStatus.ActPos.Synchron, 1);
+            while (tc._sut._axisStatus.Error.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.Reset);
+            }
+            Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
+            Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
+        }
 
-
-
+        [Test, Order((int)eTcoDriveSimpleTests.MoveAbsoluteEnabledNegativeDirection)]
+        public void T021_MoveAbsoluteEnabledNegativeDirection()
+        {
+            while (!tc._arranged.Synchron)
+            {
+                tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.MoveAbsoluteEnabledNegativeDirection);
+            }
+            double actpos = tc._sut._axisStatus.ActPos.Synchron;
+            double setpos = 1000;
+            tc._position.Synchron = actpos - setpos;
+            tc._velocity.Synchron = 1400;
+            tc._acceleration.Synchron = 50000;
+            tc._deceleration.Synchron = 50000;
+            tc._jerk.Synchron = 150000;
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveAbsoluteEnabledNegativeDirection, () => tc._done.Synchron);
+            Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
+            Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(actpos - setpos, tc._sut._axisStatus.ActPos.Synchron, 1);
+        }
     }
 }
 

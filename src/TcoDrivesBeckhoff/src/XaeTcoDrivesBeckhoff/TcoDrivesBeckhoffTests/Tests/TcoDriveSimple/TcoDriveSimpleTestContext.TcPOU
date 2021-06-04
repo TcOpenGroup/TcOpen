@@ -27,9 +27,7 @@ END_VAR
     </Implementation>
     <Method Name="Main" Id="{a8979dcb-427e-0a51-16bc-eaf1ddb910e1}">
       <Declaration><![CDATA[METHOD PROTECTED Main
-VAR 
-	_retval :LREAL;
-END_VAR]]></Declaration>
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sut(inEnable := _enable,
     inEnablePositive := _enablePositive,
@@ -308,65 +306,101 @@ CASE _testId OF
         _done := _sut.MoveVelocityTask.Done OR _sut.MoveVelocityTask.Error; // OR  _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
     {endregion}
-    {region "T017_GetMotorType"}
-    eTcoDriveSimpleTests.GetMotorType:
+    {region "T017_MoveAbsoluteDisabled"}
+    eTcoDriveSimpleTests.MoveAbsoluteDisabled:
         IF NOT _arranged THEN
-            _sut._MC_ReadDriveAddress(Axis := _sut.AxisRef, Execute := FALSE);
-            _sut._fbEcCoeSdoRead(bExecute := FALSE);
-
-            IF NOT _sut._MC_ReadDriveAddress.Error AND
-                NOT _sut._MC_ReadDriveAddress.Busy AND
-                NOT _sut._MC_ReadDriveAddress.Done AND
-                NOT _sut._fbEcCoeSdoRead.bError AND
-                NOT _sut._fbEcCoeSdoRead.bBusy THEN
-                _arranged := TRUE;
-            END_IF
-        END_IF
-
-        IF _arranged AND NOT _sut._MC_ReadDriveAddress.Done THEN
-            _sut._MC_ReadDriveAddress(Axis := _sut.AxisRef, Execute := NOT _sut._MC_ReadDriveAddress.Busy);
+            _enable := FALSE;
+            _enablePositive := FALSE;
+            _enableNegative := FALSE;
+            _arranged := TRUE;
             RETURN;
-        END_IF
+        END_IF;
 
-        _sut._fbEcCoeSdoRead(sNetId := _sut._MC_ReadDriveAddress.DriveAddress.NetID,
-            nSlaveAddr := _sut._MC_ReadDriveAddress.DriveAddress.SlaveAddress,
-            bExecute := NOT _sut._fbEcCoeSdoRead.bBusy,
-            nIndex := 16#9009,
-            nSubIndex := 16#02,
-            pDstBuf := ADR(_sut._MotorType),
-            cbBufLen := SIZEOF(_sut._MotorType));
+        _sut.MoveAbsolute(inPosition := _position,
+            inVelocity := _velocity,
+            inAcceleration := _acceleration,
+            inDeceleration := _deceleration,
+            inJerk := _jerk);
 
-        _sut._ftrig(CLK := _sut._fbEcCoeSdoRead.bBusy);
-
-        IF _arranged AND _sut._ftrig.Q THEN
-            _done := TRUE;
-            ProbeDoneWhen(_done);
-        END_IF
-    {endregion}
-    {region "T018_GetAxisReferenceType"}
-    eTcoDriveSimpleTests.GetAxisReferenceType:
+        _done := _sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error OR _plcCycleCounter > 10;
+        ProbeDoneWhen(_done);
+	{endregion}
+    {region "T018_MoveAbsoluteDisabledPositiveDirection"}
+    eTcoDriveSimpleTests.MoveAbsoluteDisabledPositiveDirection:
         IF NOT _arranged THEN
-            _sut._MC_ReadParameter(Axis := _sut.AxisRef, Enable := FALSE);
+            _enable := TRUE;
+            _enablePositive := FALSE;
+            _enableNegative := TRUE;
+            _arranged := TRUE;
+            RETURN;
+        END_IF;
 
-            IF NOT _sut._MC_ReadParameter.Error AND NOT _sut._MC_ReadParameter.Busy THEN
-                _arranged := TRUE;
-            END_IF
-        END_IF
+        _sut.MoveAbsolute(inPosition := _position,
+            inVelocity := _velocity,
+            inAcceleration := _acceleration,
+            inDeceleration := _deceleration,
+            inJerk := _jerk);
 
-        _sut._MC_ReadParameter(Axis := _sut.AxisRef,
-            Enable := TRUE,
-            ParameterNumber := TcoDrivesBeckhoff.eAxisParameter.AxisEncoderReferenceSystem,
-            ReadMode := Tc2_MC2.E_ReadMode.READMODE_ONCE,
-            Value =>_retval);
+        _done := _sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
+        ProbeDoneWhen(_done);
+	{endregion}
+    {region "T019_MoveAbsoluteEnabledPositiveDirection"}
+    eTcoDriveSimpleTests.MoveAbsoluteEnabledPositiveDirection:
+        IF NOT _arranged THEN
+            _enable := TRUE;
+            _enablePositive := TRUE;
+            _enableNegative := FALSE;
+            _arranged := TRUE;
+            RETURN;
+        END_IF;
 
-        _sut._ftrig(CLK := _sut._MC_ReadParameter.Busy);
-        _axisReferenceType := LREAL_TO_INT(_retval);
+        _sut.MoveAbsolute(inPosition := _position,
+            inVelocity := _velocity,
+            inAcceleration := _acceleration,
+            inDeceleration := _deceleration,
+            inJerk := _jerk);
 
-        IF _arranged AND _sut._ftrig.Q THEN
-            _done := TRUE;
-            ProbeDoneWhen(_done);
-        END_IF
-{endregion}
+        _done := _sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
+        ProbeDoneWhen(_done);
+	{endregion}
+    {region "T020_MoveAbsoluteDisabledNegativeDirection"}
+    eTcoDriveSimpleTests.MoveAbsoluteDisabledNegativeDirection:
+        IF NOT _arranged THEN
+            _enable := TRUE;
+            _enablePositive := FALSE;
+            _enableNegative := FALSE;
+            _arranged := TRUE;
+            RETURN;
+        END_IF;
+
+        _sut.MoveAbsolute(inPosition := _position,
+            inVelocity := _velocity,
+            inAcceleration := _acceleration,
+            inDeceleration := _deceleration,
+            inJerk := _jerk);
+
+        _done := _sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
+        ProbeDoneWhen(_done);
+	{endregion}
+    {region "T021_MoveAbsoluteEnabledNegativeDirection"}
+    eTcoDriveSimpleTests.MoveAbsoluteEnabledNegativeDirection:
+        IF NOT _arranged THEN
+            _enable := TRUE;
+            _enablePositive := FALSE;
+            _enableNegative := TRUE;
+            _arranged := TRUE;
+            RETURN;
+        END_IF;
+
+        _sut.MoveAbsolute(inPosition := _position,
+            inVelocity := _velocity,
+            inAcceleration := _acceleration,
+            inDeceleration := _deceleration,
+            inJerk := _jerk);
+
+        _done := _sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
+        ProbeDoneWhen(_done);
+	{endregion}
 END_CASE]]></ST>
       </Implementation>
     </Method>

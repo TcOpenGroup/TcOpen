@@ -21,8 +21,11 @@ TYPE eTcoDriveSimpleTests :
     Stop,
     MoveVelocityNegativeWithDisabledNegativeDirection,
     MoveVelocityNegativeWithEnabledNegativeDirection,
-    GetMotorType,
-    GetAxisReferenceType,
+	MoveAbsoluteDisabled,
+	MoveAbsoluteDisabledPositiveDirection,
+	MoveAbsoluteEnabledPositiveDirection,
+	MoveAbsoluteDisabledNegativeDirection,
+	MoveAbsoluteEnabledNegativeDirection,
     Last
 );
 END_TYPE
