@@ -5,7 +5,7 @@ using System.Linq;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
-namespace TcoData.Repository.Json
+namespace TcOpen.Inxton.Data.Json
 {
     public class JsonRepository<T> : RepositoryBase<T> where T : IBrowsableDataObject
     {
@@ -149,8 +149,8 @@ namespace TcoData.Repository.Json
 
         internal void Save(string identifier, T obj)
         {
-            obj._Id = MakeValidFileName(identifier);
-            var path = Path.Combine(this.Location, obj._Id);
+            obj._EntityId = MakeValidFileName(identifier);
+            var path = Path.Combine(this.Location, obj._EntityId);
 
             using (var jw = new Newtonsoft.Json.JsonTextWriter(new System.IO.StreamWriter(path)))
             {

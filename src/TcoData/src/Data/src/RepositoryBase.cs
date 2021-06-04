@@ -94,8 +94,8 @@ namespace TcOpen.Inxton.Data
                         identifier = DataHelpers.CreateUid().ToString();
                     }
 
-                    data._Id = identifier;
-                    data._Created = DateTime.Now;
+                    data._EntityId = identifier;
+                    data._Created = DateTimeProviders.DateTimeProvider.Now;
                     data._Modified = data._Created;
                 }
 
@@ -127,9 +127,9 @@ namespace TcOpen.Inxton.Data
             {
                 if (data != null)
                 {
-                    if (data._Id != identifier)
+                    if (data._EntityId != identifier)
                     {
-                        throw new IdentifierValueMismatchedException($"Record identifier '[_data._Id]' '{data._Id}' has different value than " +
+                        throw new IdentifierValueMismatchedException($"Record identifier '[_data._Id]' '{data._EntityId}' has different value than " +
                             $"requested identifier for update '{identifier}'\n" +
                             $"Value passed as 'identifier' must be the same as the value contained in the '_id' member of the data object.");
                     }
