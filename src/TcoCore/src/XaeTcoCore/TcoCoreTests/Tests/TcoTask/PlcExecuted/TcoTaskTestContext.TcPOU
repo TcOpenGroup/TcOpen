@@ -473,7 +473,6 @@ CASE _testId OF
         END_IF
     {endregion}
     {region "T330_ElapsedTypeMeasurement"}
-    //    ******************************		
     eTcoTaskTests.ElapsedTypeMeasurement:
         IF _plcCycleCounter = 1 THEN
             _to_A._sut_A.Restore();
@@ -493,6 +492,43 @@ CASE _testId OF
         _done := _to_A._sut_A.Done;
         ProbeDoneWhen(_done);
         _elapsedTime := _to_A._sut_A.ElapsedTime;
+    {endregion}
+    {region "T340_TaskExecutingWithDoneAndErrorStatement"}
+    eTcoTaskTests.TaskExecutingWithDoneAndErrorStatement:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A.Enable();
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        _to_A._sut_A();
+        _to_A._sut_A.DoneWhen(TRUE);
+        _to_A._sut_A.ThrowWhen(TRUE);
+        _to_A._sut_A.ReadOutState();
+        _done := _to_A._sut_A.Done;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T341_TaskExecutingWithErrorAndDoneStatement"}
+    eTcoTaskTests.TaskExecutingWithErrorAndDoneStatement:
+        IF _plcCycleCounter = 1 THEN
+            _to_A._sut_A.Restore();
+            _to_A._sut_A.Enable();
+            _to_A._sut_A.Invoke();
+            _to_A._sut_A();
+            _to_A._sut_A.ReadOutState();
+            RETURN;
+        END_IF
+
+        _to_A._sut_A();
+        _to_A._sut_A.ThrowWhen(TRUE);
+        _to_A._sut_A.DoneWhen(TRUE);
+        _to_A._sut_A.ReadOutState();
+        _done := _to_A._sut_A.Done;
+        ProbeDoneWhen(_done);
+{endregion}
 END_CASE]]></ST>
       </Implementation>
     </Method>

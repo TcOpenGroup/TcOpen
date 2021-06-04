@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eAxisEncoderReferenceSystem" Id="{543afd1e-053b-015c-0673-561c0638b6eb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eAxisEncoderReferenceSystem :
+(
+	INCREMENTAL := 0,
+	ABSOLUTE := 1,
+	ABSOLUTE_MODULO := 2,
+	ABSOLUTE_MULTITURN := 3,
+	INCREMENTAL_SINGLETURN_ABSOLUTE := 4,
+	ABSOLUTE_SINGLETURN := 5
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

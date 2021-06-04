@@ -19,6 +19,12 @@ VAR
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
     _mcMoveAbsolute : Tc2_MC2.MC_MoveAbsolute;
+    {attribute 'hide'}
+    _mcMoveAbsolutePreconditionOK : BOOL;
+    {attribute 'hide'}
+	_mcReadAxisEncoderReferenceSystem : MC_ReadParameter;
+	
+	_AxisEncoderReferenceSystem : eAxisEncoderReferenceSystem;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -29,23 +35,33 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
-END_IF
+IF Execute() THEN
+    _mcReadAxisEncoderReferenceSystem(Axis := _axisRef,
+        Enable := TRUE,
+        ParameterNumber := eAxisParameter.AxisEncoderReferenceSystem,
+        ReadMode := Tc2_MC2.E_ReadMode.READMODE_ONCE);
 
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
+    IF _mcReadAxisEncoderReferenceSystem.Valid THEN
+        LREAL_TO_Tco_AxisEncoderReferenceSystem(_mcReadAxisEncoderReferenceSystem.Value, _AxisEncoderReferenceSystem);
+
+        IF _AxisEncoderReferenceSystem = eAxisEncoderReferenceSystem.ABSOLUTE OR
+            _AxisEncoderReferenceSystem = eAxisEncoderReferenceSystem.ABSOLUTE_MODULO OR
+            _AxisEncoderReferenceSystem = eAxisEncoderReferenceSystem.ABSOLUTE_MULTITURN OR
+            _AxisEncoderReferenceSystem = eAxisEncoderReferenceSystem.ABSOLUTE_SINGLETURN THEN
+            _mcMoveAbsolutePreconditionOK := TRUE;
+        ELSE
+            _mcMoveAbsolutePreconditionOK := _axisRef.Status.Homed;
+        END_IF
+    END_IF
+
+    IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _mcMoveAbsolutePreconditionOK) THEN
+        IF NOT _mcMoveAbsolutePreconditionOK THEN
+            Messenger.Error('Move absolute not possible as axis is Incremental and not Homed');
+        END_IF
+
         RETURN;
     END_IF
-END_IF
 
-IF Execute() THEN
     _mcMoveAbsolute(Axis := _axisRef,
         Execute := NOT _mcMoveAbsolute.Busy,
         Position := _position,
@@ -129,23 +145,59 @@ METHOD PROTECTED OnAbort]]></Declaration>
     END_IF
 END_IF
 
-THIS^.DriveRef.Stop(-1, -1);]]></ST>
+THIS^.DriveRef.Stop(-1, -1);
+_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+_mcReadAxisEncoderReferenceSystem(Axis :=_axisRef,Enable := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{efa8f938-4579-0e7b-3fc7-36ccb3207ab2}">
+    <Method Name="OnDone" Id="{223dc89a-9f91-000c-1309-16f5f6432081}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Done``` state .
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+        <ST><![CDATA[_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+_mcReadAxisEncoderReferenceSystem(Axis :=_axisRef,Enable := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{ab9dc157-8d3b-0fc7-39e0-f7e22d57a5d0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID( DriveRef._moveAbsoluteTask._mcMoveAbsolute.ErrorID);
-END_IF]]></ST>
+END_IF
+_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+_mcReadAxisEncoderReferenceSystem(Axis :=_axisRef,Enable := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{1491f5ba-9f11-0ec9-2ca9-fc10d819bac1}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+_mcReadAxisEncoderReferenceSystem(Axis :=_axisRef,Enable := FALSE);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{6b9c9854-0555-0eef-069a-af2d2447715a}">
@@ -162,6 +214,24 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{efa8f938-4579-0e7b-3fc7-36ccb3207ab2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID( DriveRef._moveAbsoluteTask._mcMoveAbsolute.ErrorID);
+    _mcMoveAbsolute(Axis := _axisRef, Execute := FALSE);
+END_IF
+]]></ST>
       </Implementation>
     </Method>
   </POU>

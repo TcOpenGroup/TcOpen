@@ -2001,7 +2001,7 @@ External Setpoint Generation:
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
-						<EncPara ScaleFactorNumerator="104.8576" ScaleFactorDenominator="1048576" Offset="-0.00120000000060827" MaxCount="#xffffffff" ReferenceSystem="3"/>
+						<EncPara ScaleFactorNumerator="104.8576" ScaleFactorDenominator="1048576" Offset="-0.001200000000608" MaxCount="#xffffffff" ReferenceSystem="3"/>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -4383,6 +4383,7 @@ Bit 8 - 15 : reserved]]></Comment>
 	<Mappings>
 		<MappingInfo Identifier="{00000000-0020-0304-1000-040321000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-0040-0304-1000-040340000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{08502041-0010-0500-4020-500810000403}" Id="#x02030030" Watchdog="04000000140000000400000004000000"/>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 1 (EK1100)^Term 6 (EL7211-0010)">
 				<Link VarA="Drive^Inputs^In^nDataIn1" VarB="DRV Following error actual value^Following error actual value"/>

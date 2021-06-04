@@ -59,5 +59,23 @@ namespace TcoDrivesBeckhoffTestsConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test axis 1.
+        /// </summary>
+        public static string ___Test_axis_1__ {
+            get {
+                return ResourceManager.GetString("___Test_axis_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test axis 2.
+        /// </summary>
+        public static string ___Test_axis_2__ {
+            get {
+                return ResourceManager.GetString("___Test_axis_2__", resourceCulture);
+            }
+        }
     }
 }

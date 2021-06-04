@@ -23,33 +23,8 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcHalt(Axis := _axisRef, Execute := FALSE);
-END_IF
-
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
-        RETURN;
-    END_IF
-END_IF
-
 IF Execute() THEN
-    _mcHalt(Axis := _axisRef,
-        Execute := NOT _mcHalt.Busy,
-        Deceleration := _deceleration,
-        Jerk := _jerk,
-        Done =>,
-        Busy =>,
-        Active =>,
-        CommandAborted =>,
-        Error =>,
-        ErrorID =>);
+    _mcHalt(Axis := _axisRef);
 
     IF _mcHalt.CommandAborted THEN
         THIS^.Abort();
@@ -95,20 +70,65 @@ _jerk := inJerk;
 InvokeWithParams := THIS^.Invoke();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{18785d6e-b3bd-04ec-1a40-8d17a3911928}">
+    <Method Name="OnAbort" Id="{9cde54a8-1b2e-0c32-0afa-bf3ad991b9e0}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task is aborted.
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+        <ST><![CDATA[_mcHalt(Axis := _axisRef, Execute := FALSE, Deceleration := _deceleration);
+THIS^.DriveRef._movementState.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{28ff8f2d-bf50-0b5a-1ad1-14f70e4986bb}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcHalt(Axis := _axisRef, Execute := FALSE, Deceleration := _deceleration);
+THIS^.DriveRef._movementState.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{2aa19486-3273-0dcb-3fca-71dc00c2ea0a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._haltTask._mcHalt.ErrorID);
-END_IF]]></ST>
+END_IF
+_mcHalt(Axis := _axisRef, Execute := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{7c680306-98e9-0c27-1b7f-0179e6eebe7c}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcHalt(Axis := _axisRef, Execute := false, Deceleration := _deceleration);
+_mcHalt(Axis := _axisRef, Execute := TRUE, Deceleration := _deceleration);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{5b189d9a-d345-0f25-1831-45a12b9aee90}">
@@ -125,6 +145,23 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{18785d6e-b3bd-04ec-1a40-8d17a3911928}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._haltTask._mcHalt.ErrorID);
+    _mcHalt(Axis := _axisRef, Execute := FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

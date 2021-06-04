@@ -23,6 +23,8 @@ VAR
     _mc_direction : Tc2_MC2.MC_Direction;
     {attribute 'hide'}
     _message : STRING(125);
+    {attribute 'hide'}
+    _dummyPreconditionOK : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -33,28 +35,11 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcMoveVelocity(Axis := _axisRef, Execute := FALSE);
-END_IF
-
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
-        RETURN;
-    END_IF
-END_IF
-
 IF Execute() THEN
-    IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
-        _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_direction));
-        _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
-        THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
-        ThrowWhen(TRUE);
+    _dummyPreconditionOK := TRUE;
+
+    IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
+        Messenger.Error('To be implemented');
         RETURN;
     END_IF
 
@@ -141,23 +126,62 @@ METHOD PROTECTED OnAbort]]></Declaration>
     END_IF
 END_IF
 
-THIS^.DriveRef.Stop(-1, -1);]]></ST>
+THIS^.DriveRef.Stop(-1, -1);
+THIS^.DriveRef._movementState.Restore();
+_mcMoveVelocity(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{e57cb2e4-6de2-08f9-3560-1da4dc675da8}">
+    <Method Name="OnDone" Id="{96770dc1-d77b-0d06-28ec-6e3167e9e773}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task reaches the ```Done``` state .
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+_mcMoveVelocity(Axis := _axisRef, Execute := FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{abb00f67-21f9-053d-09c1-019d906bb7e8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._moveVelocityTask._mcMoveVelocity.ErrorID);
-END_IF]]></ST>
+END_IF
+_mcMoveVelocity(Axis := _axisRef, Execute := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{d386c88e-21df-09a6-2cd8-6c624c70bb2d}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
+    _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_direction));
+    _message := Tc2_Standard.CONCAT(_message, ') to the type Tc2_MC2.MC_Direction!!!');
+    THIS^.Messenger.Post(_message, TcoCore.eMessageCategory.ProgrammingError);
+    ThrowWhen(TRUE);
+    RETURN;
+END_IF
+
+_mcMoveVelocity(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{34542aed-2dff-0b9c-33f6-8b4f3f7d756a}">
@@ -174,6 +198,23 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{e57cb2e4-6de2-08f9-3560-1da4dc675da8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._moveVelocityTask._mcMoveVelocity.ErrorID);
+    _mcMoveVelocity(Axis := _axisRef, Execute := FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>
