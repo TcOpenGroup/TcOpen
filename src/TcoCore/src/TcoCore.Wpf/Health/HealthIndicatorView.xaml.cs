@@ -14,23 +14,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcoCore;
 using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace TcoCore
 {
     /// <summary>
-    /// Interaction logic for stMessageQueueView.xaml
+    /// Simple indicator of <see cref="TcoObject"/> status.    
     /// </summary>
-    public partial class TcoDiagnosticsView : UserControl
+    public partial class HealthIndicatorView : UserControl
     {
-        public TcoDiagnosticsView()
-        {            
+        /// <summary>
+        /// Creates new instance of <see cref="HealthIndicatorView"/>
+        /// </summary>
+        public HealthIndicatorView()
+        {
             InitializeComponent();
-            this.DiagnosticsUpdateTimer();
+            SetTimer();
         }
 
         private System.Timers.Timer messageUpdateTimer;
-        private void DiagnosticsUpdateTimer()
+        private void SetTimer()
         {
             if (messageUpdateTimer == null)
             {
@@ -41,23 +45,17 @@ namespace TcoCore
             }
         }
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {          
-            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
-            {
-                if (!MessageHandler.AutoUpdate)
-                {
-                    return;
-                }
-
-                if (UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this))
-                {
-                    MessageHandler?.UpdateMessages();
-                }
-            });
-        }
-        private TcoDiagnosticsViewModel MessageHandler
         {
-            get { return this.DataContext as TcoDiagnosticsViewModel; }
-        }
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { 
+            if(UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this))
+            { 
+                MessageHandler?.UpdateHealthInfo();
+            }
+            });
+        }             
+        private TcoObjectMessageHandler MessageHandler
+        {
+            get { return this.DataContext as TcoObjectMessageHandler; }
+        }               
     }
 }

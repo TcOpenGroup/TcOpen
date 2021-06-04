@@ -5,6 +5,10 @@
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPackable>false</IsPackable>  	
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup> 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.IntegrationProjects.Wpf\TcOpen.Inxton.IntegrationProjects.Wpf.csproj" />

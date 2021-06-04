@@ -43,14 +43,18 @@
                         </Style>
                     </UniformGrid.Resources>
                     <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._serviceModeTask, Mode=OneWay}" PresentationType="Base"/>
-                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundSequenceTask, Mode=OneWay}" PresentationType="Service-Base" />
-                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatSequenceTask, Mode=OneWay}" PresentationType="Service-Base" />
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundSequenceTask, Mode=OneWay}" PresentationType="Base" />
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatSequenceTask, Mode=OneWay}" PresentationType="Base" />
                 </UniformGrid>
                 <vortex:RenderableContentControl Margin="10" Grid.Row="3" DataContext="{Binding _technology._ST001, Mode=OneWay}" PresentationType="Diagnostics" />
             </Grid>
         </TabItem>
         <TabItem Header="Settings">
-            <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._settings._data, Mode=OneWay}" PresentationType="Control"></vortex:RenderableContentControl>
+            <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology, Mode=OneWay}" PresentationType="Tree">
+                <vortex:RenderableContentControl.RootContainer>
+                    <Grid/>
+                </vortex:RenderableContentControl.RootContainer>
+            </vortex:RenderableContentControl>
         </TabItem>
     </TabControl>
 </Window>

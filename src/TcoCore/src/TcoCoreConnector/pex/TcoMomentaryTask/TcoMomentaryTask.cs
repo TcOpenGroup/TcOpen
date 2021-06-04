@@ -22,7 +22,7 @@ namespace TcoCore
             CanExecute(new object());
         }
 
-        void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
+        private void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
         {
             TcoAppDomain.Current.Dispatcher.Invoke(() => CanExecuteChanged(sender, args));
         }
@@ -50,7 +50,7 @@ namespace TcoCore
             return this._enabled.Cyclic;
         }
         /// <summary>
-        /// The calling of the execute mehtod does not have effect on this particular task type.
+        /// The calling of the execute method does not have effect on this particular task type.
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter)

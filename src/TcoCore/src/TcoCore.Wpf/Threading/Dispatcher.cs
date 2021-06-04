@@ -36,8 +36,13 @@ namespace TcoCore.Wpf.Threading
             get
             {
                 lock(mutex)
-                {
-                    return _instance ?? new Dispatcher();                    
+                {                   
+                    if(_instance == null)
+                    {
+                        _instance = new Dispatcher();
+                    }
+
+                    return _instance;
                 }
             }
         }

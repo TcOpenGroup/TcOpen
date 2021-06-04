@@ -6,17 +6,19 @@
     xmlns:local="clr-namespace:TcoPneumatics.Wpf.Cylinders"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="http://inxton.mts/xaml"
+    xmlns:tcoCore="http://vortex.mts/xaml"
     xmlns:tcopen="clr-namespace:TcOpen"
-    xmlns:tcopneumatics="clr-namespace:TcoPneumatics" xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:tcopneumatics="clr-namespace:TcoPneumatics" 
+    xmlns:vortex="http://vortex.mts/xaml"
     mc:Ignorable="d">
-    <!--<d:UserControl.DataContext>
+    <d:UserControl.DataContext>
         <tcopneumatics:TcoCylinderViewModel />
-    </d:UserControl.DataContext>-->
+    </d:UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="CylinderNames" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TextBlock
             Grid.Column="0"
@@ -32,23 +34,23 @@
                 <ColumnDefinition Width="0.475*" />
                 <ColumnDefinition Width="0.05*" />
                 <ColumnDefinition Width="0.475*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <Border
                     Height="5"
-                    Background="{Binding Component.AtHomePos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
+                    Background="{Binding Component._atHomePos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
-                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveHomeDefault}"/>
+                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveHomeDefault}" PresentationType="ProgressBar"/>
             </StackPanel>
-          
             <StackPanel Grid.Column="2">
                 <Border
                     Height="5"
-                    Background="{Binding Component.inAtWorkPos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
+                    Background="{Binding Component._atWorkPos.Cyclic, Converter={tcopen:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
-                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveWorkDefault}"/>
+                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding Component._moveWorkDefault}" PresentationType="ProgressBar"/>
             </StackPanel>
         </Grid>
-
+        <tcoCore:HealthIndicatorView Grid.Column="2" DataContext="{Binding Component.MessageHandler}"></tcoCore:HealthIndicatorView>
     </Grid>
 </UserControl>
