@@ -8,9 +8,12 @@ END_VAR
 VAR_IN_OUT
 	TcoAxisEncoderReferenceSystem	:	eAxisEncoderReferenceSystem;
 END_VAR
-]]></Declaration>
+VAR 
+	_value : INT;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE inValue OF
+      <ST><![CDATA[_value := LREAL_TO_INT(inValue);
+CASE _value OF
 	eAxisEncoderReferenceSystem.ABSOLUTE :
 		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.ABSOLUTE;
 		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;

@@ -50,39 +50,40 @@ IF Execute() THEN
             _AxisEncoderReferenceSystem = eAxisEncoderReferenceSystem.ABSOLUTE_SINGLETURN THEN
             _mcMoveAbsolutePreconditionOK := TRUE;
         ELSE
-			_mcMoveAbsolutePreconditionOK := _axisRef.Status.Homed;
+            _mcMoveAbsolutePreconditionOK := _axisRef.Status.Homed;
         END_IF
     END_IF
-END_IF
 
-IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _mcMoveAbsolutePreconditionOK) THEN
-	IF NOT _mcMoveAbsolutePreconditionOK THEN
-	    Messenger.Error('Move absolute not possible as axis is Incremental and not Homed');
+    IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _mcMoveAbsolutePreconditionOK) THEN
+        IF NOT _mcMoveAbsolutePreconditionOK THEN
+            Messenger.Error('Move absolute not possible as axis is Incremental and not Homed');
+        END_IF
+
+        RETURN;
     END_IF
-	RETURN;
-END_IF
 
-_mcMoveAbsolute(Axis := _axisRef,
-    Execute := NOT _mcMoveAbsolute.Busy,
-    Position := _position,
-    Velocity := _velocity,
-    Acceleration := _acceleration,
-    Deceleration := _deceleration,
-    Jerk := _jerk,
-    BufferMode := Tc2_MC2.MC_Aborting,
-    Done =>,
-    Busy =>,
-    Active =>,
-    CommandAborted =>,
-    Error =>,
-    ErrorID =>);
+    _mcMoveAbsolute(Axis := _axisRef,
+        Execute := NOT _mcMoveAbsolute.Busy,
+        Position := _position,
+        Velocity := _velocity,
+        Acceleration := _acceleration,
+        Deceleration := _deceleration,
+        Jerk := _jerk,
+        BufferMode := Tc2_MC2.MC_Aborting,
+        Done =>,
+        Busy =>,
+        Active =>,
+        CommandAborted =>,
+        Error =>,
+        ErrorID =>);
 
-IF _mcMoveAbsolute.CommandAborted THEN
-    THIS^.Abort();
-END_IF
+    IF _mcMoveAbsolute.CommandAborted THEN
+        THIS^.Abort();
+    END_IF
 
-DoneWhen(_mcMoveAbsolute.Done);
-ThrowWhen(_mcMoveAbsolute.Error);]]></ST>
+    DoneWhen(_mcMoveAbsolute.Done);
+    ThrowWhen(_mcMoveAbsolute.Error);
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{c918ab99-0887-0ba7-3e18-f42d76a60832}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>

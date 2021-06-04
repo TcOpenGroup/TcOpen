@@ -400,7 +400,7 @@ _movementState.Restore();]]></ST>
 ~*)
 METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_jog.Service();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetErrorID" Id="{62d8002b-9fbc-0ce4-2890-bac65d445995}">
