@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="LREAL_TO_Tco_AxisEncoderReferenceSystem" Id="{b849750b-1817-092a-1016-3b434509fd4c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL LREAL_TO_Tco_AxisEncoderReferenceSystem : BOOL
+VAR_INPUT
+	inValue:	LREAL;
+END_VAR
+VAR_IN_OUT
+	TcoAxisEncoderReferenceSystem	:	eAxisEncoderReferenceSystem;
+END_VAR
+VAR 
+	_value : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_value := LREAL_TO_INT(inValue);
+CASE _value OF
+	eAxisEncoderReferenceSystem.ABSOLUTE :
+		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.ABSOLUTE;
+		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;
+	eAxisEncoderReferenceSystem.ABSOLUTE_MODULO :
+		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.ABSOLUTE_MODULO;
+		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;
+	eAxisEncoderReferenceSystem.ABSOLUTE_MULTITURN :
+		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.ABSOLUTE_MULTITURN;
+		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;
+	eAxisEncoderReferenceSystem.ABSOLUTE_SINGLETURN :
+		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.ABSOLUTE_SINGLETURN;
+		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;
+	eAxisEncoderReferenceSystem.INCREMENTAL :
+		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.INCREMENTAL;
+		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;
+	eAxisEncoderReferenceSystem.INCREMENTAL_SINGLETURN_ABSOLUTE :
+		TcoAxisEncoderReferenceSystem	:=	eAxisEncoderReferenceSystem.INCREMENTAL_SINGLETURN_ABSOLUTE;
+		LREAL_TO_Tco_AxisEncoderReferenceSystem	:= TRUE;
+	ELSE
+		LREAL_TO_Tco_AxisEncoderReferenceSystem := FALSE;
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoMovementState" Id="{fd9a8ecc-fa4e-00fb-3cda-a4e9f92a4140}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoMovementState :
+(
+	WaitingForMovementTask := 0,
+	Reset,
+	Power,
+	ParametersCheck,
+	Movement,
+	Error := 255
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

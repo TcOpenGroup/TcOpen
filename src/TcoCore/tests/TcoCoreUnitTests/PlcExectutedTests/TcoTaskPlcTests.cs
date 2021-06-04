@@ -711,5 +711,48 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc.ExecuteProbeRun((int)eTcoTaskTests.ElapsedTypeMeasurement, () => tc._to_A._sut_A._taskState.Synchron == (short)eTaskState.Done);
             Assert.AreEqual(expected, tc._elapsedTime.Synchron);
         }
+
+        [Test, Order((int)eTcoTaskTests.TaskExecutingWithDoneAndErrorStatement)]
+        public void T340_TaskExecutingWithDoneAndErrorStatement()
+        {
+            //Act
+            tc.ExecuteProbeRun(1, (int)eTcoTaskTests.TaskExecutingWithDoneAndErrorStatement);
+            //Assert
+            Assert.IsTrue(tc._to_A._sut_A._isBusy.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isDone.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isError.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isReady.Synchron);
+
+            //Act
+            tc.ExecuteProbeRun(1, (int)eTcoTaskTests.TaskExecutingWithDoneAndErrorStatement);
+            //Assert
+            Assert.IsFalse(tc._to_A._sut_A._isBusy.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isDone.Synchron);
+            Assert.IsTrue(tc._to_A._sut_A._isError.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isReady.Synchron);
+
+        }
+
+        [Test, Order((int)eTcoTaskTests.TaskExecutingWithErrorAndDoneStatement)]
+        public void T341_TaskExecutingWithErrorAndDoneStatement()
+        {
+            //Act
+            tc.ExecuteProbeRun(1, (int)eTcoTaskTests.TaskExecutingWithErrorAndDoneStatement);
+            //Assert
+            Assert.IsTrue(tc._to_A._sut_A._isBusy.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isDone.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isError.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isReady.Synchron);
+
+            //Act
+            tc.ExecuteProbeRun(1, (int)eTcoTaskTests.TaskExecutingWithErrorAndDoneStatement);
+            //Assert
+            Assert.IsFalse(tc._to_A._sut_A._isBusy.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isDone.Synchron);
+            Assert.IsTrue(tc._to_A._sut_A._isError.Synchron);
+            Assert.IsFalse(tc._to_A._sut_A._isReady.Synchron);
+        }
+
+
     }
 }

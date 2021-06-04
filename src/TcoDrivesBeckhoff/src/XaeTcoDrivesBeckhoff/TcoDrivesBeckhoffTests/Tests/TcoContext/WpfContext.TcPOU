@@ -33,7 +33,12 @@ END_VAR
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_axis1(	inEnable			:=		_enable1, 
+        <ST><![CDATA[IF _serviceModeActive THEN
+	_axis1.Service();
+	_axis2.Service();
+END_IF
+
+_axis1(	inEnable			:=		_enable1, 
 		inEnablePositive	:=		_enablePositive1, 
 		inEnableNegative	:=		_enableNegative1, 
 		inCalibrationCam	:=		_calibrationCam1, 
@@ -45,10 +50,7 @@ _axis2(	inEnable			:=		_enable2,
 		inCalibrationCam	:=		_calibrationCam2, 
 		inoAxisRef			:=		GVL.Axis2);
 
-IF _serviceModeActive THEN
-	_axis1.Service();
-	_axis2.Service();
-END_IF
+
 ]]></ST>
       </Implementation>
     </Method>
