@@ -409,14 +409,15 @@ namespace TcoCoreUnitTests
             //--Act
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
             sut.SingleCycleRun(() => Console.WriteLine("a"));
 
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
-            
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
+
+
             Assert.IsFalse(sut._messenger._mime.IsActive);
         }
 
@@ -434,7 +435,7 @@ namespace TcoCoreUnitTests
 
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsFalse(sut._messenger._mime.IsActive);
 
@@ -444,7 +445,7 @@ namespace TcoCoreUnitTests
 
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
@@ -464,7 +465,7 @@ namespace TcoCoreUnitTests
 
 
             sut.SingleCycleRun(() => sut.Info(messageText));
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
@@ -474,7 +475,7 @@ namespace TcoCoreUnitTests
             // post info
             sut.SingleCycleRun(() => sut.Info(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsFalse(sut._messenger._mime.IsActive);
 
@@ -483,7 +484,7 @@ namespace TcoCoreUnitTests
 
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.RefreshActiveMessages();
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
         }
