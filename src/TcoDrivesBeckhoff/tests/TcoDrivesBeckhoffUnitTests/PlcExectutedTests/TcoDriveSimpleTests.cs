@@ -334,8 +334,29 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
             Assert.AreNotEqual(startpos, tc._sut._axisStatus.ActPos.Synchron);
-            Assert.AreEqual(-velocity, tc._sut._axisStatus.ActVelo.Synchron, velocity *0.02);
+            Assert.AreEqual(-velocity, tc._sut._axisStatus.ActVelo.Synchron, velocity * 0.02);
         }
+
+        [Test, Order((int)eTcoDriveSimpleTests.GetMotorType)]
+        public void T017_GetMotorType()
+        {
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.GetMotorType, () => tc._done.Synchron);
+            Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
+            Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
+        }
+
+        [Test, Order((int)eTcoDriveSimpleTests.GetAxisReferenceType)]
+        public void T018_GetAxisReferenceType()
+        {
+            tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.GetAxisReferenceType, () => tc._done.Synchron);
+            Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
+            Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
+        }
+
+
+
+
+
     }
 }
 

@@ -5,6 +5,15 @@
 VAR
     _serviceModeCount : ULINT;
     _serviceModeOverride : LREAL;
+END_VAR
+VAR
+    _MC_ReadDriveAddress : MC_ReadDriveAddress;
+    _fbEcCoeSdoRead : FB_EcCoeSdoRead;
+    sNetId : T_AmsNetId;
+    nSlaveAddr : UINT;
+    _MotorType : STRING;
+    _ftrig : Tc2_Standard.F_TRIG;
+    _MC_ReadParameter : MC_ReadParameter;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(	inEnable 			:=	inEnable,

@@ -26,6 +26,22 @@ END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="FB_init" Id="{94e2c735-80a8-0de7-3fa7-aaee07c2fe93}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	AutoRestoreMode : eRestoreMode; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(	bInitRetains := bInitRetains,
+	bInCopyCode := bInCopyCode,
+	Parent := Parent,
+	AutoRestoreMode := AutoRestoreMode);
+	]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="JogPreconditionsOk" Id="{7fb28e91-9ebc-0e39-060d-16432987ee30}">
       <Declaration><![CDATA[METHOD JogPreconditionsOk : BOOL
 VAR_INPUT

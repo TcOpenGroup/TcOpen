@@ -26,6 +26,12 @@
     <Author>TcOpenGroup</Author>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\eAxisParameter.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\eAxisEncoderReferenceSystem.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\eDirection.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +66,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Conversions\Tc2MC2_TO_Tco_AxisStates.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\LREAL_TO_Tco_AxisEncoderReferenceSystem.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Conversions\Tc2MC2_TO_Tco_SetPositionMode.TcPOU">
