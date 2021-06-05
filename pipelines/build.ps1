@@ -7,7 +7,7 @@
   $nugetSource = "https://api.nuget.org/v3/index.json"
   $nugetToken = ([System.Environment]::GetEnvironmentVariable('TcoOpenNugetdotorgPAT'))
   $publishNugets = $false
-  $packNugets = $true
+  $packNugets = $false
   $updateAssemblyInfo = $false
   $gitVersion
   $msbuild = ([System.Environment]::GetEnvironmentVariable('TcoMsbuild'))
