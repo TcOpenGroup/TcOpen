@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
@@ -225,6 +225,8 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TcoData.Repository.Shared", "src\TcoData\tests\TcoData.Tests.Shared\TcoData.Repository.Shared.shproj", "{3BF071A6-13A1-46A5-8FD5-87C8CEE94896}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoData.Repository.Unit.Tests", "src\TcoData\tests\TcoData.Repository.Unit.Tests\TcoData.Repository.Unit.Tests.csproj", "{8C04E4A5-6117-4613-B200-B41A9435C313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcOpen.Inxton.RavenDb", "src\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj", "{16E22603-5E30-4992-906B-8DDEDD7476D1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -1983,6 +1985,7 @@ Global
 		{688AC21D-66EA-499E-BD95-4F9B4D5B7D3F} = {C83CC813-3FD7-40DA-B658-D4D6D43087DD}
 		{3BF071A6-13A1-46A5-8FD5-87C8CEE94896} = {C83CC813-3FD7-40DA-B658-D4D6D43087DD}
 		{8C04E4A5-6117-4613-B200-B41A9435C313} = {C83CC813-3FD7-40DA-B658-D4D6D43087DD}
+		{16E22603-5E30-4992-906B-8DDEDD7476D1} = {6E222FAB-2A75-439C-8887-53B7932E4B12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3448A2B-59D1-4DD2-AE4B-0EFF7BC92E81}
