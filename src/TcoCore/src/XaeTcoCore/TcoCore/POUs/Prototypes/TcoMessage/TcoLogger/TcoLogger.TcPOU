@@ -332,7 +332,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
+        <ST><![CDATA[IF NOT __ISVALIDREF(_refConfig) THEN
+	RETURN;
+END_IF
+
+IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
 	IF(Level < _refConfig.Level
 	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
 		RETURN;

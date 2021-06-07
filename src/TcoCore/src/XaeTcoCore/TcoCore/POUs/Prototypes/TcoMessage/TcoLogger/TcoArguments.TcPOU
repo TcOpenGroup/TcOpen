@@ -138,6 +138,7 @@ AddStruct := THIS^;]]></ST>
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[MEMSET(ADR(_data), 0, SIZEOF(_data));
+_count := 0;
 Clear := THIS^;]]></ST>
       </Implementation>
     </Method>

@@ -12,8 +12,8 @@ VAR
 	_sinks					: LogSinkList;
 	_enrichers				: LogEnricherList;
 
-	_enrichmentConfig		: TcoLoggerEnrichmentConfiguration(THIS^);
-	_sinksConfig			: TcoLoggerSinkConfiguration(THIS^);
+	_enrichmentConfig		: TcoLoggerEnrichmentConfiguration := ( Config := THIS^);
+	_sinksConfig			: TcoLoggerSinkConfiguration := ( Config := THIS^);
 END_VAR
 
 ]]></Declaration>
@@ -46,7 +46,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Build := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Clear" Id="{30c875c2-0d1d-02f7-1343-6de286f35d98}">
@@ -60,7 +60,7 @@ END_VAR
 _sinks.Clear();
 MEMSET(ADR(_enrichers), 0, SIZEOF(_enrichers));
 
-Clear := THIS^;]]></ST>
+Clear REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Enrichers" Id="{5d9cfc22-8894-044f-03cc-b704392b9942}">
@@ -103,7 +103,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_minimumLevel := Level;
+MinimumLevel REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadFrom" Id="{db489568-ded7-0537-2bb3-5ee5d7c09d84}">
@@ -126,7 +127,9 @@ END_VAR
     ],
     "Enrich": [ "Context", "InstancePath", "ProjectName" ]
 }
-*)]]></ST>
+*)
+
+ReadFrom REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Sinks" Id="{f32a7f22-4212-0803-0fb3-4501ae755fd8}">
