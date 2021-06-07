@@ -9,6 +9,8 @@ VAR
     _startButton : TcoElements.TcoDi(THIS^);
 	{attribute addProperty Name "<#PRESS PISTON#>"}
     _press : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty Name "<#DRIVE#>"}
+	_drive : TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

@@ -8,9 +8,9 @@ using Vortex.Presentation.Wpf;
 namespace TcoDrivesBeckhoff
 {
    
-    public class TcoDriveSimpleMainViewModel : RenderableViewModel
+    public class TcoDriveSimpleServiceViewModel : RenderableViewModel
     {
-        public TcoDriveSimpleMainViewModel()
+        public TcoDriveSimpleServiceViewModel()
         {
 
         }

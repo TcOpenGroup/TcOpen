@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 namespace TcoDrivesBeckhoff
 {
 
-    public partial class TcoDriveSimpleMainView : UserControl
+    public partial class TcoDriveSimpleServiceView : UserControl
     {
-        public TcoDriveSimpleMainView()
+        public TcoDriveSimpleServiceView()
         {
             InitializeComponent();
         }

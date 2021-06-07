@@ -5,6 +5,7 @@
     PartPresent : TcoElements.TcoDi(MAIN_TECHNOLOGY._technology._ST001);
     StartButton : TcoElements.TcoDi(MAIN_TECHNOLOGY._technology._ST001);
     Press : TcoPneumatics.TcoCylinder(MAIN_TECHNOLOGY._technology._ST001);
+	Drive : TcoDriveSimple(MAIN_TECHNOLOGY._technology._ST001);
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>
