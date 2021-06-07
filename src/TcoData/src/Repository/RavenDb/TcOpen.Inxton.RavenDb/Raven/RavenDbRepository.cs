@@ -1,34 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Raven.Client.Documents;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
-namespace TcOpen.Inxton.RavenDb.Raven
+namespace TcOpen.Inxton.RavenDb
 {
     public class RavenDbRepository<T> : RepositoryBase<T>
         where T : IBrowsableDataObject
     {
+        private readonly IDocumentStore _store;
+
+        public RavenDbRepository(RavenDbRepositorySettings<T> parameters)
+        {
+            _store = parameters.Store;
+        }
+
         protected override void CreateNvi(string identifier, T data)
         {
-            throw new NotImplementedException();
+            using (var session = _store.OpenSession())
+            {
+                session.Store(data, identifier);
+                session.SaveChanges();
+            }
         }
 
         protected override T ReadNvi(string identifier)
         {
-            throw new NotImplementedException();
+            using (var session = _store.OpenSession())
+            {
+                return session.Load<T>(identifier);
+            }
         }
 
         protected override void UpdateNvi(string identifier, T data)
         {
-            throw new NotImplementedException();
+            using (var session = _store.OpenSession())
+            {
+                session.Store(data, identifier);
+                session.SaveChanges();
+            }
         }
 
         protected override void DeleteNvi(string identifier)
         {
-            throw new NotImplementedException();
+            using (var session = _store.OpenSession())
+            {
+                session.Delete(identifier);
+                session.SaveChanges();
+            }
         }
 
         protected override long CountNvi { get; }
