@@ -62,9 +62,12 @@ namespace TcoCore
         /// Stops momentary task execution.
         /// </summary>        
         public void Stop()
-        {            
-            _setOnRequest.Synchron = false;
-            TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));            
+        {
+            if (_isServiceable.Synchron && this._enabled.Synchron)
+            {
+                _setOnRequest.Synchron = false;
+                TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
+            }
         }
 
         /// <summary>
@@ -73,7 +76,7 @@ namespace TcoCore
         public void Start()
         {
 
-            if(_isServiceable.Synchron)
+            if(_isServiceable.Synchron && this._enabled.Synchron)
             { 
                 _setOnRequest.Synchron = true;
                 TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
