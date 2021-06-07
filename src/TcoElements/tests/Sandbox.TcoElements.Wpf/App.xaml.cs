@@ -16,7 +16,10 @@ namespace Sandbox.TcoElements.Wpf
     {
         public App()
         {
-            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+
             TcoElementsTests.Entry.TcoElementsTests.Connector.ReadWriteCycleDelay = 75;
             TcoElementsTests.Entry.TcoElementsTests.Connector.BuildAndStart();            
         }

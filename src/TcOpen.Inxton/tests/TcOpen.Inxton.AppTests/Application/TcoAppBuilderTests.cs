@@ -16,7 +16,7 @@ namespace TcOpen.Inxton.AppTests
         [Test()]
         public void CheckAppDomain_and_AppBuilder_defaults()
         {
-            Assert.AreEqual(typeof(DummyLogger), TcoAppDomain.Current.Logger.GetType());
+            Assert.AreEqual(typeof(DummyLoggerAdapter), TcoAppDomain.Current.Logger.GetType());
         }
 
         [Test()]

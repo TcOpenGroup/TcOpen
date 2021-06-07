@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
+using Vortex.Connector;
+using Vortex.Connector.ValueTypes;
+using TcOpen.Inxton.Threading;
 
 namespace TcOpen.Inxton.Input
 {
@@ -22,9 +25,17 @@ namespace TcOpen.Inxton.Input
             _logAction = logAction;
         }
 
+        public void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
+        {
+            TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            {
+                CanExecuteChanged?.Invoke(sender, args);
+            });
+        }
+
         public bool CanExecute(object parameter)
         {
-            return  _canExecute == null ? false : _canExecute.Invoke();
+            return  _canExecute == null ? true : _canExecute.Invoke();
         }
 
         public void Execute(object parameter)

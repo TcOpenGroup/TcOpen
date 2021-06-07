@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ST001_ComponentsHandler" Id="{e26fa0d3-d3d7-028e-3078-514e2e8d1a78}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ST001_ComponentsHandler EXTENDS TcoCore.TcoObject
+VAR
+	{attribute addProperty Name "<#PART PRESENCE SENSOR#>"}
+	_partPresent : TcoElements.TcoDi(THIS^);
+	{attribute addProperty Name "<#START BUTTON#>"}
+    _startButton : TcoElements.TcoDi(THIS^);
+	{attribute addProperty Name "<#PRESS PISTON#>"}
+    _press : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty Name "<#DRIVE#>"}
+	_drive : TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_partPresent(inoSignal := IO.EC001.A1.IO._1);
+_startButton(inoSignal := IO.EC001.A1.IO._2);
+_press(inoAtHomePos:= IO.EC001.A1.IO._3, inoAtWorkPos:= IO.EC001.A1.IO._4, inoToHomePos:= IO.EC001.A10.IO._1, inoToWorkPos:=IO.EC001.A10.IO._2);]]></ST>
+    </Implementation>
+    <Property Name="PartPresent" Id="{f5cdf153-1188-001b-0f38-1f9504216ef9}">
+      <Declaration><![CDATA[PROPERTY PartPresent : REFERENCE TO TcoElements.TcoDi]]></Declaration>
+      <Get Name="Get" Id="{46de24c4-0ea6-09cd-2268-c904722ac596}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PartPresent REF= _partPresent;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Press" Id="{ed012438-e4fb-0ad6-2f3f-43e788f64a37}">
+      <Declaration><![CDATA[PROPERTY Press : REFERENCE TO TcoPneumatics.TcoCylinder]]></Declaration>
+      <Get Name="Get" Id="{75a426ad-70f8-045d-2bc3-929207cc534a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Press REF= _press;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Service" Id="{d9a55f5d-e4b4-0800-35fa-c2749c040034}">
+      <Declaration><![CDATA[METHOD Service 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._partPresent.Service();
+THIS^._startButton.Service();
+THIS^._press.Service();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

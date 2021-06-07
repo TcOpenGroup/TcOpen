@@ -10,10 +10,8 @@
     using Vortex.Connector;
     using Vortex.Presentation.Wpf;
     
-
     public class TcoDiagnosticsViewModel : RenderableViewModel
     {
-
         PlainTcoMessage selectedMessage;
     
         public TcoDiagnosticsViewModel()
@@ -21,40 +19,49 @@
             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
-
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
              this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
       
-
         protected IsTcoObject _tcoObject { get; set; }
-
-        public IEnumerable<string> PresentationTypes { get; } 
-            = new List<string>() { "Diagnostic", "Manual", "Base", "Display", "Control" };
-
-
-
+      
         private volatile object updatemutex = new object();
 
-        private async void UpdateMessages()
-        {           
-            DiagnosticsRunning = true;
+        /// <summary>
+        /// Upates messages of diagnostics view.
+        /// </summary>
+        internal async void UpdateMessages()
+        {   
+            lock(updatemutex)
+            {
+                DiagnosticsRunning = true;
+            }
+
+            
             await Task.Run(() =>
             {
                 MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                          .OrderByDescending(p => p.Category)
                                          .OrderBy(p => p.TimeStamp);               
             });
-            DiagnosticsRunning = false;
+
+            lock (updatemutex)
+            {
+                DiagnosticsRunning = false;
+            }
         }
 
         bool diagnosticsRunning;
+
+        /// <summary>
+        /// Gets or sets whether the diagnostic loop in running.
+        /// </summary>
         public bool DiagnosticsRunning
         {
             get => diagnosticsRunning; 
-            set
+            internal set
             {
                 if (diagnosticsRunning == value)
                 {
@@ -64,49 +71,11 @@
                 SetProperty(ref diagnosticsRunning, value);
             }
         }
-
-        string affectedObjectPresentationType;
-        public string AffectedObjectPresentationType
-        {
-            get
-            {
-                return affectedObjectPresentationType;
-            }
-            set
-            {
-                if (affectedObjectPresentationType == value)
-                {
-                    return;
-                }
-
-                SetProperty(ref affectedObjectPresentationType, value);
-                this.OnPropertyChanged(nameof(AffectedObject));
-            }
-        }
-
-        /// <summary>
-        /// Gets <see cref="SelectedMessage"/>'s object that produced the message.
-        /// </summary>
-        public object AffectedObject
-        {
-            get
-            {
-                if (SelectedMessage != null)
-                {
-                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
-                    
-                    if (affectedObject != null && affectedObjectPresentationType != null)
-                    {                       
-                        return Renderer.Get.CreatePresentation(affectedObjectPresentationType, (IVortexObject)affectedObject);
-                    }
-                }
-
-                return null;
-            }
-        }
-       
-
+            
         bool autoUpdate;
+        /// <summary>
+        /// Gets or sets whether the diagnostics view should auto refresh.
+        /// </summary>
         public bool AutoUpdate
         {
             get
@@ -123,9 +92,7 @@
                 SetProperty(ref autoUpdate, value);
             }
         }
-
       
-
         /// <summary>
         /// Gets list of available standard message categories.
         /// </summary>
@@ -157,6 +124,9 @@
 
         }
 
+        /// <summary>
+        /// Gets or sets the minimal category that will appear in the diagnostics view.
+        /// </summary>
         public eMessageCategory MinMessageCategoryFilter
         {
             get;
@@ -185,15 +155,15 @@
                     return;
                 }
 
-                SetProperty(ref selectedMessage, clone);
-
-                this.OnPropertyChanged(nameof(AffectedObject));
+                SetProperty(ref selectedMessage, clone);               
             }
         }
-
-        public RelayCommand UpdateAffectedObjectsMessagesCommand { get; private set; }
-
+       
+        /// <summary>
+        /// Gets the command that executes update of messages on demand.
+        /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
+        
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
     }
 }

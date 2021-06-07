@@ -15,7 +15,8 @@
   $devenv = ([System.Environment]::GetEnvironmentVariable('TcoDevenv'))
   $testTargetAmsId = ([System.Environment]::GetEnvironmentVariable('Tc3Target'))
   $testingStrength = 0
-}
+  $doesNeedVs = $true
+  }
 
 
 
@@ -49,7 +50,12 @@ task Clean -depends Start {
   RemoveTcBins
   RemoveTcProjBins
   RemoveGenerated
-  RemoveMeta
+
+  if($doesNeedVs)  
+  {
+    RemoveMeta
+  } 
+
   mkdir .\_Vortex\builder -ErrorAction SilentlyContinue 
   mkdir .\.nuget -ErrorAction SilentlyContinue 
   mkdir .\_toolz -ErrorAction SilentlyContinue 
@@ -119,12 +125,21 @@ task OpenVisualStudio -depends GitVersion {
 
 task BuildWithInxtonBuilder -depends OpenVisualStudio {
 
-  $command = ".\_Vortex\builder\vortex.compiler.console.exe -s .\TcOpen.plc.slnf"
-
+  if($doesNeedVs)
+  {
+    $command = ".\_Vortex\builder\vortex.compiler.console.exe -s .\TcOpen.plc.slnf"
+  }
+  else
+  {
+    $command = ".\_Vortex\builder\vortex.compiler.console.exe -s .\TcOpen.plc.slnf -n false"
+  }
   Write-Host $command
    exec { 
       try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue} catch{}
-      Start-Process .\TcOpen.plc.slnf
+      if($doesNeedVs)
+      {
+        Start-Process .\TcOpen.plc.slnf
+      }      
       cmd /c $command
       try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue}catch{}
   }  -maxRetries 3       
