@@ -8,7 +8,6 @@ using TcoDataTests;
 using TcoDataUnitTests;
 using TcOpen.Inxton.MongoDb;
 using TcOpen.Inxton.RavenDb;
-using TcOpen.Inxton.RavenDb.Raven;
 
 namespace TcoData.TcoDataExchange.Integration.Tests.Repository
 {

@@ -228,6 +228,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoData.Repository.Unit.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcOpen.Inxton.RavenDb", "src\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj", "{16E22603-5E30-4992-906B-8DDEDD7476D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests.RavenDb", "src\TcoData\tests\IntegrationTests.RavenDb\IntegrationTests.RavenDb.csproj", "{884C0F6A-217E-4E3F-8885-354CA0A168B3}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\TcoData\tests\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems*{3bf071a6-13a1-46a5-8fd5-87c8cee94896}*SharedItemsImports = 13

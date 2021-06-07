@@ -10,10 +10,8 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.RavenDb
 {
-    public class RavenDbRepositorySettings<T> : RepositorySettings  where T : IBrowsableDataObject 
+    public class RavenDbRepositorySettings<T> : RavenDbRepositorySettingsBase<T> where T : IBrowsableDataObject 
     {
-        public readonly IDocumentStore Store;
-        
         public RavenDbRepositorySettings(string[] urls, string databaseName, string certPath, string certPass)
         {
             var store = new DocumentStore

@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Raven\RavenDbRepositorySettings.cs" />
     <Compile Include="Raven\RavenDbRepository.cs" />
+    <Compile Include="Raven\RavenDbRepositorySettingsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj">

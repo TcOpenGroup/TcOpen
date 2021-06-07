@@ -12,7 +12,7 @@ namespace TcOpen.Inxton.RavenDb
     {
         private readonly IDocumentStore _store;
 
-        public RavenDbRepository(RavenDbRepositorySettings<T> parameters)
+        public RavenDbRepository(RavenDbRepositorySettingsBase<T> parameters)
         {
             _store = parameters.Store;
         }
