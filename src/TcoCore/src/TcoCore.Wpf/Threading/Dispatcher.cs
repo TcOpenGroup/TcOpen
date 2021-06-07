@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using TcoCore.Threading;
+using TcOpen.Inxton.Threading;
 
 namespace TcoCore.Wpf.Threading
 {
@@ -36,8 +36,13 @@ namespace TcoCore.Wpf.Threading
             get
             {
                 lock(mutex)
-                {
-                    return _instance ?? new Dispatcher();                    
+                {                   
+                    if(_instance == null)
+                    {
+                        _instance = new Dispatcher();
+                    }
+
+                    return _instance;
                 }
             }
         }

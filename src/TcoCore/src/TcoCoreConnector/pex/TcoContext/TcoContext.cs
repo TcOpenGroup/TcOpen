@@ -12,58 +12,64 @@ namespace TcoCore
     public partial class TcoContext : IVortexIdentity, IsTcoContext, IsTcoObject
     {
         private readonly IList<TcoMessage> _messages = new List<TcoMessage>();
-        internal IEnumerable<TcoMessage> Messages { get { return _messages; } }
+
+        /// <summary>
+        /// Gets the messages that belong to this Context.
+        /// </summary>
+        public IEnumerable<TcoMessage> Messages { get { return _messages; } }
         
+        /// <summary>
+        /// Gets active messages of this context.
+        /// <note type="important">
+        /// Depending on the depth and size of the context this might be performance demanding operation.
+        /// </note>        
+        /// </summary>
         public IEnumerable<PlainTcoMessage> ActiveMessages { get { return GetActiveMessages(); } }
 
+        /// <summary>
+        /// Get the identity of this Context.
+        /// </summary>
         public OnlinerULInt Identity => this._Identity;
 
+        /// <summary>
+        /// Gets start cycle counter of this <see cref="TcoContext"/>.
+        /// </summary>
+        public OnlinerULInt StartCycleCount => this._startCycleCount;
+
+        /// <summary>
+        /// Adds message to the queue of the messages of this Context.
+        /// </summary>
+        /// <param name="message">Message to add.</param>
         public void AddMessage(TcoMessage message)
         {
             _messages.Add(message);
         }
-
+        
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this.Connector.IdentityProvider.AddIdentity(this);
+            this.MessageHandler = new TcoObjectMessageHandler(this, this);
         }
-
-        List<IValueTag> refreshTags { get; set; }
-
+     
+        /// <summary>
+        /// Gets last know value of start cycle counter of this context.
+        /// </summary>
         public ulong LastStartCycleCount => this._startCycleCount.LastValue;
 
-        public void RefreshActiveMessages()
+        /// <summary>
+        /// Gets active messages of this context.
+        /// <note type="important">
+        /// Depending on the depth and size of the context this might be performance demanding operation.
+        /// </note>        
+        /// </summary>        
+        public IEnumerable<PlainTcoMessage> GetActiveMessages()
         {
-            var activeMessgages = GetActiveMessages();
+            return MessageHandler.GetActiveMessages();
         }
 
         /// <summary>
-        /// Performs refresh of the messages of this <see cref="TcoObject"/> and all its child object.
+        /// Gets 'Message Handler' for this Context.
         /// </summary>
-        /// <returns>Enumerable of messages as POCO object.</returns>       
-        public IEnumerable<PlainTcoMessage> GetActiveMessages()
-        {
-            if (refreshTags == null)
-            {
-                refreshTags = new List<IValueTag>();
-                refreshTags.Add(this._startCycleCount);
-                refreshTags.AddRange(GetObjectMessages().Select(p => p.Cycle));
-            }
-
-            // We must check that the connector did start R/W operations loop, due to possible dead lock at start-up
-            // Reported to Inxton team as FOXTROTH #564
-
-            if (this.GetConnector().RwCycleCount > 1)
-            { 
-                this.GetConnector().ReadBatch(refreshTags);
-            }
-
-            return GetObjectMessages().Where(p => p.IsActive).Select(p => p.PlainMessage);
-        }
-
-        private IEnumerable<TcoMessage> GetObjectMessages()
-        {
-            return this.GetDescendants<TcoMessage>();
-        }
+        public TcoObjectMessageHandler MessageHandler { get; private set; }
     }
 }

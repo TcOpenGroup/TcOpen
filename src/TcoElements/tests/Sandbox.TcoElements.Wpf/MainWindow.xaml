@@ -26,12 +26,12 @@
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="VariableTree">
             <ScrollViewer>
-                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+                <vortex:DynamicTreeView></vortex:DynamicTreeView>
             </ScrollViewer>
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.IO}" Header="IO">
             <ScrollViewer>
-                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+                <vortex:DynamicTreeView></vortex:DynamicTreeView>
             </ScrollViewer>
         </TabItem>
     </TabControl>

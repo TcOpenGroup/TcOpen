@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoSequencer" Id="{514f2b6e-7953-4563-938a-20f12ff8b327}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -515,6 +515,17 @@ VAR_INPUT
 	inErrorId : eSequencerError;
 END_VAR
 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{2f4522d2-3a30-0083-0899-1dcbf3d4746a}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

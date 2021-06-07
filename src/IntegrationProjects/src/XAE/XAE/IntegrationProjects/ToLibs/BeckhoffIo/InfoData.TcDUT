@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="InfoData" Id="{ccd79a22-1901-0fd3-3f9a-d4bfd7d3ec29}">
+    <Declaration><![CDATA[TYPE InfoData :
+STRUCT
+	State AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

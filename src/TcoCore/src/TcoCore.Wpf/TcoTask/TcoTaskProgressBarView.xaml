@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="TcoCore.TcoTaskProgressBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCore"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    ToolTip="{Binding TcoTask.AttributeToolTip}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <d:UserControl.DataContext>
+        <local:TcoTaskViewModel />
+    </d:UserControl.DataContext>
+    <Grid>
+        <Button
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToBoolConverter}}"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Command="{Binding TcoTask}"
+            Content="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}"
+            Style="{StaticResource MaterialDesignRaisedButton}" />
+        <Button
+            Padding="10,0,10,0"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            Command="{Binding TcoTask.Abort}"
+            Style="{StaticResource MaterialDesignToolButton}"
+            Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:VisibleOnTaskState}, ConverterParameter=Requested-Busy}">
+            <materialDesign:PackIcon Padding="14" Kind="CancelCircle" />
+        </Button>
+        <Button
+            Padding="10,0,10,0"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            Command="{Binding TcoTask.Restore}"
+            Foreground="{DynamicResource Error}"
+            Style="{StaticResource MaterialDesignToolButton}"
+            Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}">
+            <materialDesign:PackIcon Padding="14" Kind="Error" />
+        </Button>
+    </Grid>
+</UserControl>

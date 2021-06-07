@@ -19,9 +19,9 @@
             <TabItem Header="Object tree">
                 <ScrollViewer>
                     <UniformGrid>
-                        <inxton:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN._station001, Mode=OneWay}" />
+                        <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN._station001, Mode=OneWay}" />
 
-                        <inxton:ObservableContentControl DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}"  />
+                        <vortex:ObservableContentControl DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}"  />
                     </UniformGrid>
                 </ScrollViewer>
             </TabItem>
@@ -149,7 +149,7 @@
                                     Margin="24,8,24,16"
                                     Orientation="Vertical"
                                     TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                    <inxton:TcoDiagnosticsView x:Name="DiagnosticsView" />
+                                    <vortex:TcoDiagnosticsView x:Name="DiagnosticsView" />
                                     <TextBlock Style="{DynamicResource HorizontalExpanderContentTextBlock}" />
                                 </StackPanel>
                             </Expander>

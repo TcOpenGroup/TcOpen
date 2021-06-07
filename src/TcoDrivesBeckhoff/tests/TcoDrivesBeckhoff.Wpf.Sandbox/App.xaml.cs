@@ -17,7 +17,10 @@ namespace TcoDrivesBeckhoff.Wpf.Sandbox
     {
         public App() : base()
         {
-            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.Connector.BuildAndStart();
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContextCall.Synchron = true;
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._serviceModeActive.Synchron = true;

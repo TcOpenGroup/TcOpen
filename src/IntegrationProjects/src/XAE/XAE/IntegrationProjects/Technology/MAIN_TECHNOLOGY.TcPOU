@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MAIN_TECHNOLOGY" Id="{c2bf5f61-d736-08ce-0dfa-fcb1ab9b7594}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN_TECHNOLOGY
+VAR
+	_technology : Technology;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_technology.Run();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using TcoCore.Logging;
-using TcoCore.Threading;
 using TcOpen;
 using TcOpen.Inxton;
 using TcOpen.Inxton.Input;
@@ -18,12 +17,12 @@ namespace TcoCore
         /// <summary>
         /// Gets command that aborts the execution of this task.
         /// </summary>
-        public ICommand Abort { get; private set; }
+        public RelayCommand Abort { get; private set; }
 
         /// <summary>
         /// Gets command that restores this task.
         /// </summary>
-        public ICommand Restore { get; private set; }
+        public RelayCommand Restore { get; private set; }
 
         private Func<object> _logPayloadDecoration;
 
@@ -39,10 +38,27 @@ namespace TcoCore
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
+            InitCommands();
+        }
+
+        private void InitCommands()
+        {
             this._enabled.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoTask_CanExecuteChanged;
             Abort = new RelayCommand(AbortTask, CanAbortTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this)));
             Restore = new RelayCommand(RestoreTask, CanRestoreTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this)));
+            this._isServiceable.Subscribe(ValidateCanExecuteAbortRestore);
+        }
+
+        partial void PexConstructorParameterless()
+        {
+            InitCommands();
+        }
+
+        public void ValidateCanExecuteAbortRestore(IValueTag sender, ValueChangedEventArgs args)
+        {            
+             Abort.ValidateCanExecute(sender, args);
+             Restore.ValidateCanExecute(sender, args);            
         }
 
         private void TcoTask_CanExecuteChanged(object sender, EventArgs e)
@@ -52,7 +68,10 @@ namespace TcoCore
 
         void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
         {
-            Dispatcher.Get.Invoke(() => CanExecuteChanged(sender, args));
+            TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            {
+                CanExecuteChanged(sender, args);                
+            });
         }
 
         /// <summary>
@@ -62,7 +81,7 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Cyclic;
+            return this._enabled.Synchron && this._isServiceable.Synchron;
         }
 
         /// <summary>
@@ -71,7 +90,7 @@ namespace TcoCore
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            if (this._isServiceable.Synchron)
+            if (CanExecute(new object()))
             {
                 if (this._taskState.Synchron == (short)(eTaskState.Done))
                 {
@@ -89,20 +108,20 @@ namespace TcoCore
 
         private bool CanAbortTask()
         {
-            return true;
+            return this._isServiceable.Synchron;
         }
 
         private void AbortTask(object obj)
         {            
-            this._abortRequest.Cyclic = true;
+            this._abortRequest.Synchron = true;
         }
         private bool CanRestoreTask()
         {
-            return true;
+            return this._isServiceable.Synchron;
         }
         private void RestoreTask(object obj)
         {            
-            this._restoreRequest.Cyclic = true;
+            this._restoreRequest.Synchron = true;
         }        
     }
 }
