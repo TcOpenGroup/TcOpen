@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using System.Threading;
 
-namespace TcoCoreUnitTests
+namespace TcoCoreUnitTests.PlcTcRpc
 {
 
     public class T01_TcoContextTests

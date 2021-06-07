@@ -7,7 +7,7 @@ using TcoCoreUnitTests;
 using System.Linq;
 using Vortex.Connector;
 
-namespace TcoCoreUnitTests
+namespace TcoCoreUnitTests.PlcTcRpc
 {
 
     public class T08_TcoMessengerTests

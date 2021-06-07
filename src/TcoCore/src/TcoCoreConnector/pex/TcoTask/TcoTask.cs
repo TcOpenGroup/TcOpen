@@ -38,11 +38,21 @@ namespace TcoCore
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
-            this._enabled.Subscribe(ValidateCanExecute);           
+            InitCommands();
+        }
+
+        private void InitCommands()
+        {
+            this._enabled.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoTask_CanExecuteChanged;
             Abort = new RelayCommand(AbortTask, CanAbortTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this)));
             Restore = new RelayCommand(RestoreTask, CanRestoreTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this)));
             this._isServiceable.Subscribe(ValidateCanExecuteAbortRestore);
+        }
+
+        partial void PexConstructorParameterless()
+        {
+            InitCommands();
         }
 
         public void ValidateCanExecuteAbortRestore(IValueTag sender, ValueChangedEventArgs args)
@@ -71,7 +81,7 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Synchron;
+            return this._enabled.Synchron && this._isServiceable.Synchron;
         }
 
         /// <summary>
@@ -80,7 +90,7 @@ namespace TcoCore
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            if (this._isServiceable.Synchron)
+            if (CanExecute(new object()))
             {
                 if (this._taskState.Synchron == (short)(eTaskState.Done))
                 {

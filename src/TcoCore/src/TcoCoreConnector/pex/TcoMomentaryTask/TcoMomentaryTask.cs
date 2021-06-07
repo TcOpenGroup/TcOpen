@@ -14,6 +14,7 @@ namespace TcoCore
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this._enabled.Subscribe(ValidateCanExecute);
+            this._isServiceable.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
         }
 
@@ -47,7 +48,7 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Cyclic;
+            return this._enabled.Synchron && this._isServiceable.Synchron;
         }
         /// <summary>
         /// The calling of the execute method does not have effect on this particular task type.
@@ -63,10 +64,10 @@ namespace TcoCore
         /// </summary>        
         public void Stop()
         {
-            if (_isServiceable.Synchron && this._enabled.Synchron)
+            if (CanExecute(null))
             {
                 _setOnRequest.Synchron = false;
-                TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
             }
         }
 
@@ -76,10 +77,10 @@ namespace TcoCore
         public void Start()
         {
 
-            if(_isServiceable.Synchron && this._enabled.Synchron)
+            if(CanExecute(null))
             { 
                 _setOnRequest.Synchron = true;
-                TcoAppDomain.Current.Logger.Information($"Instant task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
             }
         }
     }

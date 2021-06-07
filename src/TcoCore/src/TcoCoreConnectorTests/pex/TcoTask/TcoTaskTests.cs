@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vortex.Connector;
-using Vortex.Connector.ValueTypes;
-using System.Reflection;
 
 namespace TcoCore.Tests
 {
@@ -15,7 +12,13 @@ namespace TcoCore.Tests
     public class TcoTaskTests
     {
         [Test()]
-        public void CanExecuteTest(bool isEnabled)
+        public void ValidateCanExecuteAbortRestoreTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test()]
+        public void CanExecuteTest()
         {
             Assert.Fail();
         }

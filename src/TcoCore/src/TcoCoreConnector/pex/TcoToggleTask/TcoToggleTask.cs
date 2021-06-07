@@ -48,7 +48,7 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Cyclic;
+            return this._enabled.Synchron && this._isServiceable.Synchron;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace TcoCore
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            if(_isServiceable.Synchron)
+            if(CanExecute(parameter))
             { 
                 var originalState = this._state.Synchron;
                 var changeStateDescription = originalState ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}" 

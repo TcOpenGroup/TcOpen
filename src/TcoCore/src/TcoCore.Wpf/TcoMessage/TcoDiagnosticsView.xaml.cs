@@ -44,7 +44,7 @@ namespace TcoCore
         {          
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
             {
-                if (!MessageHandler.AutoUpdate)
+                if ((MessageHandler != null) && !MessageHandler.AutoUpdate)
                 {
                     return;
                 }

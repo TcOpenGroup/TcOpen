@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Text;
 
-namespace TcoCoreUnitTests
+namespace TcoCoreUnitTests.PlcTcRpc
 {
     public class StringBuilderTests
     {

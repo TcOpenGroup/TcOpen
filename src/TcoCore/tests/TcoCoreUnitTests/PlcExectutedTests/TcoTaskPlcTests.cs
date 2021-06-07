@@ -8,6 +8,7 @@ using TcoCoreTests;
 using TcoCore.Testing;
 using TcoCore;
 using System.Threading;
+using TcoCoreUnitTests.PlcTcRpc;
 
 namespace TcoCoreUnitTests.PlcExecutedTests
 {

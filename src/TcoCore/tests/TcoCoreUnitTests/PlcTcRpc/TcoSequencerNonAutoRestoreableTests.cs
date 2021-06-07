@@ -4,7 +4,7 @@ using System.Threading;
 using TcoCore;
 using TcoCoreTests;
 
-namespace TcoCoreUnitTests
+namespace TcoCoreUnitTests.PlcTcRpc
 {
 
     public class T07_TcoSequencerNonAutoRestorableTests

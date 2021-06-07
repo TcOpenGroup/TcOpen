@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Threading;
 using TcoCoreTests;
 
-namespace TcoCoreUnitTests
+namespace TcoCoreUnitTests.PlcTcRpc
 {
 
     public class T04_TcoStateTests
