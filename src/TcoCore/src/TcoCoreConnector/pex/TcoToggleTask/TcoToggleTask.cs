@@ -15,6 +15,7 @@ namespace TcoCore
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this._enabled.Subscribe(ValidateCanExecute);
+            this._isServiceable.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
         }
 

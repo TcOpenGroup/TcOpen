@@ -44,6 +44,7 @@ namespace TcoCore
         private void InitCommands()
         {
             this._enabled.Subscribe(ValidateCanExecute);
+            this._isServiceable.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoTask_CanExecuteChanged;
             Abort = new RelayCommand(AbortTask, CanAbortTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this)));
             Restore = new RelayCommand(RestoreTask, CanRestoreTask, () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this)));
