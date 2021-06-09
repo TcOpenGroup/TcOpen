@@ -5,14 +5,19 @@ namespace TcoCore.Logging
 {
     public class LogInfo
     {
-        public string Symbol { get; set; }
+        private LogInfo()
+        {
 
-        public string AttributeName { get; set; }
+        }
 
-        public string HumanReadable { get; set; }
+        public string Symbol { get; private set; }
 
-        public object Payload { get; set; }
-        
+        public string AttributeName { get; private set; }
+
+        public string HumanReadable { get; private set; }
+
+        public object Details { get; private set; }
+                
         public static LogInfo Create(IVortexElement obj)
         {
             return new LogInfo()
@@ -20,7 +25,7 @@ namespace TcoCore.Logging
                 AttributeName = obj.AttributeName,
                 HumanReadable = obj.HumanReadable,
                 Symbol = obj.Symbol,
-                Payload = obj is IDecorateLog ? AcquirePayload(((IDecorateLog)obj).LogPayloadDecoration) : null
+                Details = obj is IDecorateLog ? AcquirePayload(((IDecorateLog)obj).LogPayloadDecoration) : null
             };
         }
 

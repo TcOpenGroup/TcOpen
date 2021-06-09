@@ -30,7 +30,7 @@
         private volatile object updatemutex = new object();
 
         /// <summary>
-        /// Upates messages of diagnostics view.
+        /// Updates messages of diagnostics view.
         /// </summary>
         internal async void UpdateMessages()
         {   
@@ -39,18 +39,18 @@
                 DiagnosticsRunning = true;
             }
 
-            
-            await Task.Run(() =>
-            {
+
+            //await Task.Run(() =>
+            //{
                 MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                          .OrderByDescending(p => p.Category)
-                                         .OrderBy(p => p.TimeStamp);               
-            });
+                                         .OrderBy(p => p.TimeStamp);
+            //});
 
             lock (updatemutex)
             {
                 DiagnosticsRunning = false;
-            }
+            }            
         }
 
         bool diagnosticsRunning;
