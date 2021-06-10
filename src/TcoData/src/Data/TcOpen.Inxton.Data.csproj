@@ -9,6 +9,8 @@
     <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
   </ItemGroup>
 
-
+	<ItemGroup>
+		<PackageReference Include="Inxton.Vortex.Connector" Version="1.11.3-alpha.488" />
+	</ItemGroup>
 
 </Project>
