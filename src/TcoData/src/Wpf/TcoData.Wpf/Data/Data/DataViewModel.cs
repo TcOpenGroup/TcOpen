@@ -152,7 +152,7 @@ namespace TcoData
             {
                 var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
                 plainer.CopyShadowToPlain(((dynamic)DataExchange)._data);
-                plainer._Id = RecordIdentifier;
+                plainer._EntityId = RecordIdentifier;
                 DataBrowser.AddRecord(plainer);
                 var plain = DataBrowser.FindById(plainer._EntityId);
                 ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
@@ -283,9 +283,9 @@ namespace TcoData
             {
                 var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
                 ((dynamic)DataExchange)._data.FlushOnlineToPlain(plainer);
-                plainer._Id = $"{DataHelpers.CreateUid().ToString()}";
+                plainer._EntityId = $"{DataHelpers.CreateUid().ToString()}";
                 DataBrowser.AddRecord(plainer);
-                var plain = DataBrowser.FindById(plainer._Id);
+                var plain = DataBrowser.FindById(plainer._EntityId);
                 ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
                 FillObservableRecords();
                 SelectedRecord = plain;

@@ -52,7 +52,7 @@
                         HorizontalAlignment="Center"
                         FontSize="25"
                         FontWeight="Bold"
-                        Text="{Binding DataExchange._data._Id.Cyclic}"
+                        Text="{Binding DataExchange._data._Entity.Cyclic}"
                         TextWrapping="WrapWithOverflow" />
                 </WrapPanel>
                 <ComboBox
@@ -69,7 +69,7 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 FontSize="20"
-                                Text="{Binding _Id}" />
+                                Text="{Binding _}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

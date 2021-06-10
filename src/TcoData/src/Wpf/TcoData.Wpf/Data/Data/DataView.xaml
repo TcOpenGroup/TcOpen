@@ -146,7 +146,7 @@
                             <GroupBox
                                 Grid.Row="1"
                                 Padding="10"
-                                Header="{Binding DataExchange._data._Id.Shadow}">
+                                Header="{Binding DataExchange._data._EntityId.Shadow}">
                                 <ScrollViewer
                                     x:Name="EditData"
                                     Padding="10"
@@ -159,7 +159,7 @@
                             <GroupBox
                                 Grid.Row="1"
                                 Padding="10"
-                                Header="{Binding DataExchange._data._Id.Shadow}"
+                                Header="{Binding DataExchange._data._EntityId.Shadow}"
                                 IsVisibleChanged="DisplayDataVisibilityChanged"
                                 Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
                                 <ScrollViewer x:Name="DisplayData" VerticalScrollBarVisibility="Auto" />
@@ -187,12 +187,10 @@
                                     AutomationProperties.AutomationId="CreateCopyButton"
                                     Command="{Binding CreateCopyOfExistingCommand}"
                                     Content="{x:Static p:strings.CreateCopy}"
-                                    Style="{DynamicResource PrimaryTextButtonStyle}"
                                     Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Copy}" />
                                 <Button
                                     Command="{Binding CreateNewCommand}"
                                     Content="{x:Static p:strings.OK}"
-                                    Style="{DynamicResource PrimaryTextButtonStyle}"
                                     Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=New}" />
 
                                 <Button Command="{Binding CancelCreateNewCommand}" Content="{x:Static p:strings.Cancel}" />
@@ -254,7 +252,6 @@
                                     <Button
                                         Command="{Binding DeleteCommand}"
                                         Content="{x:Static p:strings.Delete}"
-                                        Style="{DynamicResource AlertTextButtonStyle}"
                                         Visibility="{Binding DeleteCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </WrapPanel>
                             </Expander>
