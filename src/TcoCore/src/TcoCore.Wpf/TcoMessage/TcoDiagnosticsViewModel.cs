@@ -33,23 +33,26 @@
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
-        internal async void UpdateMessages()
+        internal void UpdateMessages()
         {   
+            if(DiagnosticsRunning)
+            {
+                return;
+            }
+
             lock(updatemutex)
             {
                 DiagnosticsRunning = true;
-            }
+                                    
+                Task.Run(() =>
+                {
+                    MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                                             .OrderByDescending(p => p.Category)
+                                             .OrderBy(p => p.TimeStamp);
 
+                
+                }).Wait();
 
-            //await Task.Run(() =>
-            //{
-                MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                                         .OrderByDescending(p => p.Category)
-                                         .OrderBy(p => p.TimeStamp);
-            //});
-
-            lock (updatemutex)
-            {
                 DiagnosticsRunning = false;
             }            
         }
