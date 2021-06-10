@@ -17,13 +17,5 @@
             Background="{Binding TcoToggleTask._state.Cyclic,Converter={local:SignalToBrushConverter}}" 
             Command="{Binding TcoToggleTask}"
             Content="{Binding Caption}"/>
-
-        <CheckBox 
-            Padding="10,0,10,0"
-            HorizontalAlignment="Right"
-            Background="{DynamicResource SecondaryHueLightBrush}" 
-            Foreground="{DynamicResource AttentionToActionBrush}" 
-            IsChecked="{Binding TcoToggleTask._state.Cyclic}">
-        </CheckBox>
     </Grid>
 </UserControl>
