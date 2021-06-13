@@ -21,7 +21,12 @@ namespace TcOpen.Inxton.RavenDb
         {
             using (var session = _store.OpenSession())
             {
+                T entity = session.Query<T>().SingleOrDefault(x => x._EntityId == identifier);
+                if (entity != null)
+                    throw new DuplicateIdException($"Record with ID {identifier} already exists in this collection.", null);
+
                 session.Store(data, identifier);
+                session.Advanced.WaitForIndexesAfterSaveChanges();
                 session.SaveChanges();
             }
         }
@@ -30,16 +35,34 @@ namespace TcOpen.Inxton.RavenDb
         {
             using (var session = _store.OpenSession())
             {
-                return session.Load<T>(identifier);
+                T entity = session.Load<T>(identifier);
+
+                if (entity == null)
+                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {_store}.", null);
+
+                return entity;
             }
         }
 
         protected override void UpdateNvi(string identifier, T data)
         {
-            using (var session = _store.OpenSession())
+            try
             {
-                session.Store(data, identifier);
-                session.SaveChanges();
+                using (var session = _store.OpenSession())
+                {
+                    T entity = session.Load<T>(identifier);
+
+                    if (entity == null)
+                        throw new UnableToUpdateRecord($"Unable to locate record with ID: {identifier} in {_store}.", null);
+
+                    session.Advanced.Evict(entity);
+                    session.Store(data, identifier);
+                    session.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new UnableToUpdateRecord($"Unable to update record ID:{identifier} in {_store}.", ex);
             }
         }
 
@@ -54,9 +77,26 @@ namespace TcOpen.Inxton.RavenDb
 
         protected override long CountNvi { get; }
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifierContent, int limit, int skip)
+        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
         {
-            throw new NotImplementedException();
+            using (var session = _store.OpenSession())
+            {
+                if (identifier == "*")
+                {
+                    return session.Query<T>()
+                        .Skip(skip)
+                        .Take(limit)
+                        .ToArray();
+                }
+                else
+                {
+                    return session.Query<T>()
+                    .Search(x => x._EntityId, "*" + identifier + "*")
+                    .Skip(skip)
+                    .Take(limit)
+                    .ToArray();                    
+                }
+            }
         }
 
         protected override long FilteredCountNvi(string identifierContent)

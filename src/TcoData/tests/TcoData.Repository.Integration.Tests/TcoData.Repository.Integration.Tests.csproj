@@ -7,13 +7,16 @@
 
 
 	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="nunit" Version="3.13.2" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+		<PackageReference Include="RavenDB.TestDriver" Version="5.1.8" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
+		<ProjectReference Include="..\..\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
 	</ItemGroup>
 
 	<Import Project="..\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems" Label="Shared" />
