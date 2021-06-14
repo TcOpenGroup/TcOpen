@@ -21,7 +21,7 @@ namespace TcoDataUnitTests
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
 
         }

@@ -27,5 +27,18 @@ namespace TcoDataUnitTests
                 repository.Delete(item._EntityId);
             }
         }
+
+        public override void TearDown()
+        {
+            if (this.repository != null)
+            {
+                foreach (var item in this.repository.GetRecords("*"))
+                {
+                    repository.Delete(item._EntityId);
+                }
+            }
+
+            base.TearDown();
+        }
     }
 }
