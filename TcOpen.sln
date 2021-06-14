@@ -252,6 +252,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Inxton.Security.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Inxton.Security.Wpf", "src\TcOpen.Inxton\src\Security.Wpf\TcOpen.Inxton.Security.Wpf.csproj", "{698C0E34-8920-47AF-8E8A-2D6B4A058E02}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{D9B085D5-C843-47E9-81A0-0C59C1E37636}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Inxton.Security.Wpf.Sandbox", "src\TcOpen.Inxton\tests\integration\TcOpen.Inxton.Security.Wpf\TcOpen.Inxton.Security.Wpf.Sandbox.csproj", "{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\TcoData\tests\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems*{3bf071a6-13a1-46a5-8fd5-87c8cee94896}*SharedItemsImports = 13
@@ -1789,6 +1793,26 @@ Global
 		{698C0E34-8920-47AF-8E8A-2D6B4A058E02}.Release|TwinCAT RT (x64).Build.0 = Release|Any CPU
 		{698C0E34-8920-47AF-8E8A-2D6B4A058E02}.Release|TwinCAT RT (x86).ActiveCfg = Release|Any CPU
 		{698C0E34-8920-47AF-8E8A-2D6B4A058E02}.Release|TwinCAT RT (x86).Build.0 = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT CE7 (ARMV7).ActiveCfg = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT CE7 (ARMV7).Build.0 = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT OS (ARMT2).ActiveCfg = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT OS (ARMT2).Build.0 = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT RT (x64).ActiveCfg = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT RT (x64).Build.0 = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT RT (x86).ActiveCfg = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Debug|TwinCAT RT (x86).Build.0 = Debug|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT CE7 (ARMV7).ActiveCfg = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT CE7 (ARMV7).Build.0 = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT OS (ARMT2).ActiveCfg = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT OS (ARMT2).Build.0 = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT RT (x64).ActiveCfg = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT RT (x64).Build.0 = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT RT (x86).ActiveCfg = Release|Any CPU
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6}.Release|TwinCAT RT (x86).Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1895,6 +1919,8 @@ Global
 		{0039519B-1EF2-45B8-8B23-0C7B54B586A5} = {70374410-5C6A-4C1F-AD88-81594968061B}
 		{0D541F51-7187-4C13-93A4-236DC922C3B3} = {AEFA3D3D-B2FD-4618-8FC6-FC7C8A06CB59}
 		{698C0E34-8920-47AF-8E8A-2D6B4A058E02} = {70374410-5C6A-4C1F-AD88-81594968061B}
+		{D9B085D5-C843-47E9-81A0-0C59C1E37636} = {AEFA3D3D-B2FD-4618-8FC6-FC7C8A06CB59}
+		{D484BEF2-A6A0-45B9-BE07-EDC7084072B6} = {D9B085D5-C843-47E9-81A0-0C59C1E37636}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3448A2B-59D1-4DD2-AE4B-0EFF7BC92E81}

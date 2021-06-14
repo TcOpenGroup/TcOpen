@@ -1,4 +1,4 @@
-﻿#define UNDER_TESTING
+﻿#undef UNDER_TESTING
 using System;
 using System.Windows;
 
@@ -54,11 +54,11 @@ namespace TcOpen.Inxton.Security.Wpf.Internal
                 }
 
                 else
-#endif
                 {
                     action();
                     Journaling.Journal.LogUserActionEvent($"{GetCaller()} : '{info}'");
                 }
+#endif
 
 
             }
