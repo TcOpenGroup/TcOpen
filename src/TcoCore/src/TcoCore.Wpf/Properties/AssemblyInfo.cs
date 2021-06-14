@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Reflection;
 using System.Windows.Markup;
+using System.Runtime.CompilerServices;
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
@@ -20,5 +21,7 @@ using System.Windows.Markup;
 [assembly: AssemblyVersion("0.4.1.0")]
 [assembly: AssemblyFileVersion("0.4.1.0")]
 [assembly: AssemblyInformationalVersion("0.4.1-initial-dev.375+Branch.initial-dev.Sha.70df6b177f3b27b9fcedd3aa9c169ecdc6bd2d56")]
+
+[assembly: InternalsVisibleTo("TcOpen.Inxton.TcoCore.VMTests")]
 
 

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using Vortex.Connector;
-using Vortex.Framework.Abstractions;
 
 namespace TcoCore
 {
     public partial class TcoRemoteTask : INotifyPropertyChanged
     {
-        private Action DefferedAction { get; set; }
+        internal Action DeferredAction { get; private set; }
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -17,7 +16,7 @@ namespace TcoCore
         /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
         public void Initialize(Action deferredAction)
         {
-            DefferedAction = deferredAction;
+            DeferredAction = deferredAction;
             this._isInitialized.Cyclic = true;
             this._startSignature.Subscribe(ExecuteAsync);
             defferedActionCount++;
@@ -29,7 +28,7 @@ namespace TcoCore
         /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
         public void Initialize(Func<bool> deferredAction)
         {
-            DefferedAction = new Action(() => deferredAction());
+            DeferredAction = new Action(() => deferredAction());
             this._isInitialized.Cyclic = true;
             this._startSignature.Subscribe(ExecuteAsync);
             defferedActionCount++;
@@ -38,7 +37,7 @@ namespace TcoCore
         private int defferedActionCount;
 
         /// <summary>
-        /// Initializes this  <see cref="RemoteTask"/> exclusively for this <see cref="DefferedAction"/>. Any following attempt
+        /// Initializes this  <see cref="RemoteTask"/> exclusively for this <see cref="DeferredAction"/>. Any following attempt
         /// to initialize this <see cref="RemoteTask"/> will throw an exception.
         /// </summary>
         /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
@@ -50,14 +49,14 @@ namespace TcoCore
                 throw new MultipleRemoteCallInitializationException("There was an attempt to initialize exclusive RPC call more than once in this application.");
             }
 
-            DefferedAction = deferredAction;
+            DeferredAction = deferredAction;
             this._isInitialized.Cyclic = true;
             this._startSignature.Subscribe(ExecuteAsync);
             defferedActionCount++;
         }
 
         /// <summary>
-        /// Initializes this  <see cref="RemoteTask"/> exclusively for this <see cref="DefferedAction"/>. Any following attempt
+        /// Initializes this  <see cref="RemoteTask"/> exclusively for this <see cref="DeferredAction"/>. Any following attempt
         /// to initialize this <see cref="RemoteTask"/> will throw an exception.
         /// </summary>
         /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
@@ -69,14 +68,14 @@ namespace TcoCore
                 throw new MultipleRemoteCallInitializationException("There was an attempt to initialize exclusive RPC call more than once in this application.");
             }
 
-            DefferedAction = new Action(() => deferredAction());
+            DeferredAction = new Action(() => deferredAction());
             this._isInitialized.Cyclic = true;
             this._startSignature.Subscribe(ExecuteAsync);
             defferedActionCount++;
         }
 
         /// <summary>
-        /// Removes currently bound <see cref="DefferedAction"/> from the execution of this <see cref="RemoteTask"/>
+        /// Removes currently bound <see cref="DeferredAction"/> from the execution of this <see cref="RemoteTask"/>
         /// </summary>
         public void DeInitialize()
         {
@@ -99,7 +98,7 @@ namespace TcoCore
                 {
                     IsRunning = true;
                     RemoteExecutionException = null;
-                    await System.Threading.Tasks.Task.Run(() => { DefferedAction.Invoke(); });
+                    await System.Threading.Tasks.Task.Run(() => { DeferredAction.Invoke(); });
                 }
                 catch (Exception ex)
                 {
