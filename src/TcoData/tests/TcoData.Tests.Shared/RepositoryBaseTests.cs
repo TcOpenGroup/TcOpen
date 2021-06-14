@@ -210,25 +210,18 @@ namespace TcoDataUnitTests
                 return;
 #endif
             //-- Arrange
-
             var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
-
             var testObjectAltered = new DataTestObjectAlteredStructure() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
-
-            
 
             //-- Act
             repository.Create("test1", testObject);
             repository_altered_structure.Create("test2", testObjectAltered);
             repository.Create("test3", testObject);
 
-
             //-- Act
-     
             repository.Read("test1");
             repository.Read("test2");
             repository.Read("test3");
-         
         }
 
         [Test()]
