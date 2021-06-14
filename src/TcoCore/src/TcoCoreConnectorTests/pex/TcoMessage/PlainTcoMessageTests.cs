@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcoCoreConnectorTests1.pex.TcoTask
+namespace TcoCoreConnectorTests.pex.TcoMessage
 {
-    class TcoTaskTests
+    class PlainTcoMessageTests
     {
     }
 }

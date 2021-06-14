@@ -7,22 +7,23 @@
     using System.Threading.Tasks;
     using System.Windows;
     using TcoCore;
+    using TcOpen.Inxton.Input;
     using Vortex.Connector;
-    using Vortex.Presentation.Wpf;
+
     
-    public class TcoDiagnosticsViewModel : RenderableViewModel
+    public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
     
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);            
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), () => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
-             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);
+             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), () => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
       
         protected IsTcoObject _tcoObject { get; set; }
@@ -30,27 +31,30 @@
         private volatile object updatemutex = new object();
 
         /// <summary>
-        /// Upates messages of diagnostics view.
+        /// Updates messages of diagnostics view.
         /// </summary>
-        internal async void UpdateMessages()
+        internal void UpdateMessages()
         {   
+            if(DiagnosticsRunning)
+            {
+                return;
+            }
+
             lock(updatemutex)
             {
                 DiagnosticsRunning = true;
-            }
+                                    
+                Task.Run(() =>
+                {
+                    MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                                             .OrderByDescending(p => p.Category)
+                                             .OrderBy(p => p.TimeStamp);
 
-            
-            await Task.Run(() =>
-            {
-                MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                                         .OrderByDescending(p => p.Category)
-                                         .OrderBy(p => p.TimeStamp);               
-            });
+                
+                }).Wait();
 
-            lock (updatemutex)
-            {
                 DiagnosticsRunning = false;
-            }
+            }            
         }
 
         bool diagnosticsRunning;

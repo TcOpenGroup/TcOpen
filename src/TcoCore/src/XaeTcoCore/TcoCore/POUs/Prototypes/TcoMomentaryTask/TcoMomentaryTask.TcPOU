@@ -270,8 +270,8 @@ _StartCycleCount := THIS^.Context.StartCycleCount;
 
 // Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
 IF(THIS^._Parent <> 0 )THEN
+	_isServiceable := TRUE;
 	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
-		_isServiceable := TRUE;
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._setOnRequest := FALSE;
 			_isServiceable := FALSE;
