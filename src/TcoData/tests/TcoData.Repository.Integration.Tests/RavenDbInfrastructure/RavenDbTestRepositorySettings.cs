@@ -3,14 +3,19 @@ using TcOpen.Inxton.RavenDb;
 
 namespace TcoDataUnitTests
 {
+    public static class SharedData
+    {
+        public static Fixture Fixture = null;
+    }
+
     public class RavenDbTestRepositorySettings<T> : RavenDbRepositorySettingsBase<T> where T : IBrowsableDataObject
     {
-        public readonly Fixture Fixture;
-        
         public RavenDbTestRepositorySettings()
         {
-            Fixture = new Fixture();
-            Store = Fixture.Store;
+            if (SharedData.Fixture == null)
+                SharedData.Fixture = new Fixture();
+            
+            Store = SharedData.Fixture.Store;
         }
     }
 }
