@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Raven.Client.Documents;
+using Raven.Client.Documents.Operations;
 using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
@@ -90,7 +91,7 @@ namespace TcOpen.Inxton.RavenDb
             }
         }
 
-        protected override long CountNvi { get; }
+        protected override long CountNvi => _store.Maintenance.Send(new GetStatisticsOperation()).CountOfDocuments;
 
         protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
         {
