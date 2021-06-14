@@ -2,7 +2,7 @@
 
 namespace TcOpen.Inxton.Data
 {
-    internal static class DataHelpers
+    public static class DataHelpers
     {
         private static byte count;
         public static Guid CreateUid()
@@ -18,5 +18,6 @@ namespace TcOpen.Inxton.Data
                             (byte)dt.Second,
                             (byte)dt.Millisecond, count++, 0);
         }
+            
     }
 }
