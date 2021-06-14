@@ -164,7 +164,9 @@
             <TabItem Header="Examples">
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._context, Mode=OneWay}" PresentationType="Base" />
             </TabItem>
-
+            <TabItem Header="Examples">
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Service" />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

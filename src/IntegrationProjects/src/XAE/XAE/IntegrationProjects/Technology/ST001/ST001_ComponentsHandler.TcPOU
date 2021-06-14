@@ -9,6 +9,8 @@ VAR
     _startButton : TcoElements.TcoDi(THIS^);
 	{attribute addProperty Name "<#PRESS PISTON#>"}
     _press : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty Name "<#ALARM OUTPUT#>"}
+	_alarmOutput : TcoElements.TcoDo(THIS^);
 	{attribute addProperty Name "<#DRIVE#>"}
 	_drive : TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
 END_VAR
@@ -47,6 +49,7 @@ END_VAR
         <ST><![CDATA[THIS^._partPresent.Service();
 THIS^._startButton.Service();
 THIS^._press.Service();
+THIS^._alarmOutput.Service();
 ]]></ST>
       </Implementation>
     </Method>

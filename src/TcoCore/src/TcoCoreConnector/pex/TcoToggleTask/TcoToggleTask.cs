@@ -8,7 +8,7 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoToggleTask : ICommand, IDecorateLog
+    public partial class TcoToggleTask : ICommand, IDecorateLog, IsTask
     {
         public event EventHandler CanExecuteChanged;
 
