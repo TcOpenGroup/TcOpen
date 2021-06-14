@@ -7,6 +7,11 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.RavenDb
 {
+    public static class SharedData
+    {
+        public static readonly List<IDocumentStore> Stores = new List<IDocumentStore>();
+    }
+
     public class RavenDbRepository<T> : RepositoryBase<T>
         where T : IBrowsableDataObject
     {
@@ -14,7 +19,17 @@ namespace TcOpen.Inxton.RavenDb
 
         public RavenDbRepository(RavenDbRepositorySettingsBase<T> parameters)
         {
-            _store = parameters.Store;
+            var existing = SharedData.Stores.SingleOrDefault(x => x.Database == parameters.Store.Database);
+
+            if (existing != null)
+            {
+                _store = existing;
+            }
+            else
+            {
+                SharedData.Stores.Add(parameters.Store);
+                _store = parameters.Store;
+            }
         }
 
         protected override void CreateNvi(string identifier, T data)
