@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TcOpen.Inxton.Data
+namespace TcOpen.Inxton.Abstractions.Data
 {
     public class DuplicateIdException : Exception
     {

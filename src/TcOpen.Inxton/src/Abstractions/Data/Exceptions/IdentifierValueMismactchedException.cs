@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Security;
 
-namespace TcOpen.Inxton.Data
+namespace TcOpen.Inxton.Abstractions.Data
 {
     /// <summary>
     /// Thrown when the id of the data structure does not match the required record/document id.
