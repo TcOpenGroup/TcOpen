@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TcOpen.Inxton.Security.Wpf</name>
+    </assembly>
+    <members>
+        <member name="T:TcOpen.Inxton.Security.Wpf.LoginWindow">
+            <summary>
+            Interaction logic for LoginWindow.xaml
+            </summary>
+            <summary>
+            LoginWindow
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.LoginWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.PermissionBox">
+            <summary>
+            Provides permission control at the UI level.
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.PermissionBox.#ctor">
+            <summary>
+            Creates new instance of permission box.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.PermissionBox.Permissions">
+            <summary>
+            Gets or sets permission for this <see cref="T:TcOpen.Inxton.Security.Wpf.PermissionBox"/>.        
+            </summary>
+        </member>
+        <member name="F:TcOpen.Inxton.Security.Wpf.PermissionBox.PermissionsProperty">
+            <summary>
+            Dependency property gets or sets <see cref="P:TcOpen.Inxton.Security.Wpf.PermissionBox.Permissions"/>
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.PermissionBox.SecurityMode">
+            <summary>
+            Gets or sets the security mode <see cref="T:TcOpen.Inxton.Security.Wpf.SecurityModeEnum"/>.
+            </summary>
+        </member>
+        <member name="F:TcOpen.Inxton.Security.Wpf.PermissionBox.SecurityModeProperty">
+            <summary>
+            Dependency property gets or sets <see cref="P:TcOpen.Inxton.Security.Wpf.PermissionBox.SecurityMode"/>.
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.SecurityModeEnum">
+            <summary>
+            Protection mode of the user control.
+            </summary>
+        </member>
+        <member name="F:TcOpen.Inxton.Security.Wpf.SecurityModeEnum.Invisible">
+            <summary>
+            The user control will not be visibile when current user lacks permissions.
+            </summary>
+        </member>
+        <member name="F:TcOpen.Inxton.Security.Wpf.SecurityModeEnum.Disabled">
+            <summary>
+            The user control will be disabled whe current user lacks permissions.
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.Properties.strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Add">
+            <summary>
+              Looks up a localized string similar to Add.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.AddGroup">
+            <summary>
+              Looks up a localized string similar to Add group.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.AreYouSure">
+            <summary>
+              Looks up a localized string similar to Are you sure?.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.AssignedRoles">
+            <summary>
+              Looks up a localized string similar to Assigned roles.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.AvailableRoles">
+            <summary>
+              Looks up a localized string similar to Available roles.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Cancel">
+            <summary>
+              Looks up a localized string similar to Cancel.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.CancelTokenChangeRequest">
+            <summary>
+              Looks up a localized string similar to Cancel token change request.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.CanChangePassword">
+            <summary>
+              Looks up a localized string similar to Can change password.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Change">
+            <summary>
+              Looks up a localized string similar to Change.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.ChangeToken">
+            <summary>
+              Looks up a localized string similar to Change token.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Confirm">
+            <summary>
+              Looks up a localized string similar to Confirm.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Created">
+            <summary>
+              Looks up a localized string similar to Created.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.CurrentUsers">
+            <summary>
+              Looks up a localized string similar to Current users.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Delete">
+            <summary>
+              Looks up a localized string similar to Delete.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.DeleteIsPernament">
+            <summary>
+              Looks up a localized string similar to Deletion is pernament.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Email">
+            <summary>
+              Looks up a localized string similar to Email.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Group">
+            <summary>
+              Looks up a localized string similar to Group.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Level">
+            <summary>
+              Looks up a localized string similar to Level.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Login">
+            <summary>
+              Looks up a localized string similar to Login.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Logout">
+            <summary>
+              Looks up a localized string similar to Logout.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Modified">
+            <summary>
+              Looks up a localized string similar to Modified.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.NewPassword">
+            <summary>
+              Looks up a localized string similar to New Password.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.NewUser">
+            <summary>
+              Looks up a localized string similar to New user.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.OldPassword">
+            <summary>
+              Looks up a localized string similar to Old password.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Password">
+            <summary>
+              Looks up a localized string similar to Password.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.PasswordDontMatch">
+            <summary>
+              Looks up a localized string similar to Passwords don&apos;t match.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.RepeatPassword">
+            <summary>
+              Looks up a localized string similar to Repeat your password.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Roles">
+            <summary>
+              Looks up a localized string similar to Roles.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Save">
+            <summary>
+              Looks up a localized string similar to Save.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.SelectRole">
+            <summary>
+              Looks up a localized string similar to Select role.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.TokenChangeRequest">
+            <summary>
+              Looks up a localized string similar to Request token change.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.Username">
+            <summary>
+              Looks up a localized string similar to Username.
+            </summary>
+        </member>
+        <member name="P:TcOpen.Inxton.Security.Wpf.Properties.strings.YouDoNotHaveSufficientRightsToAccessThisFeature">
+            <summary>
+              Looks up a localized string similar to You do not have sufficient rights to access this feature..
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.UserInfoDisplayView">
+            <summary>
+            Interaction logic for UserInfoDisplayView.xaml
+            </summary>
+            <summary>
+            UserInfoDisplayView
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.UserInfoDisplayView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.UserManagement.AddNewUserView">
+            <summary>
+            Interaction logic for AddNewUserDialogView.xaml
+            </summary>
+            <summary>
+            AddNewUserView
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.UserManagement.AddNewUserView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.UserManagement.AllUsersView">
+            <summary>
+            Interaction logic for AllUsersView.xaml
+            </summary>
+            <summary>
+            AllUsersView
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.UserManagement.AllUsersView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.UserManagementView">
+            <summary>
+            Interaction logic for fbDataExchangeControlView.xaml
+            </summary>
+            <summary>
+            UserManagementView
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.UserManagementView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.Internal.BindableBase">
+            <summary>
+            Represents base class for bindable objects.
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.BindableBase.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Sets the property and raises <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.
+            </summary>
+            <typeparam name="T">Property type.</typeparam>
+            <param name="member">Member</param>
+            <param name="val">New value</param>
+            <param name="propertyName">Property name</param>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.BindableBase.OnPropertyChanged(System.String)">
+            <summary>
+            Raises <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.
+            </summary>
+            <param name="propertyName"></param>
+        </member>
+        <member name="E:TcOpen.Inxton.Security.Wpf.Internal.BindableBase.PropertyChanged">
+            <summary>
+            Implementation of <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/>
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand`1">
+            <summary>
+            Relay command with logging capabilities.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean},Vortex.Connector.IVortexObject,System.String)">
+            <summary>
+            Creates new instance of <see cref="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand"/>.
+            </summary>
+            <param name="executeMethod">Method to be executed with this command.</param>
+            <param name="canExecuteMethod">Can execute method determined whether this command can be executed.</param>
+            <param name="callerObject">Object that invoked this command.</param>
+            <param name="commandName">Optional command description of the command to enrich the logged data.</param>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean},System.Object,System.String)">
+            <summary>
+            Creates new instance of <see cref="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand"/>.
+            </summary>
+            <param name="executeMethod">Method to be executed with this command.</param>
+            <param name="canExecuteMethod">Can execute method determined whether this command can be executed.</param>
+            <param name="callerObject">Object that invoked this command.</param>
+            <param name="commandName">Optional command description of the command to enrich the logged data.</param>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand`1.RaiseCanExecuteChanged">
+            <summary>
+            Forces raising of <see cref="E:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand`1.CanExecuteChanged"/> can execute event.
+            </summary>
+        </member>
+        <member name="E:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand`1.CanExecuteChanged">
+            <summary>
+            Can execute handler.
+            </summary>
+        </member>
+        <member name="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand">
+            <summary>
+            Relay command with logging capabilities.
+            </summary>
+        </member>
+        <member name="E:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand.CanExecuteChanged">
+            <summary>
+            Adds or removes <see cref="E:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand.CanExecuteChanged"/> handler.
+            </summary>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean},Vortex.Connector.IVortexObject,System.String)">
+            <summary>
+            Creates new instance of <see cref="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand"/>.
+            </summary>
+            <param name="executeMethod">Method to be executed with this command.</param>
+            <param name="canExecuteMethod">Can execute method determined whether this command can be executed.</param>
+            <param name="callerObject">Object that invoked this command.</param>
+            <param name="commandName">Optional command description of the command to enrich the logged data.</param>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean},System.Object,System.String)">
+            <summary>
+            Creates new instance of <see cref="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand"/>.
+            </summary>
+            <param name="executeMethod">Method to be executed with this command.</param>
+            <param name="canExecuteMethod">Can execute method determined whether this command can be executed.</param>
+            <param name="callerObject">Object that invoked this command.</param>
+            <param name="commandName">Optional command description of the command to enrich the logged data.</param>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Creates new instance of <see cref="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand"/>.
+            </summary>
+            <param name="executeMethod">Method to be executed with this command.</param>
+            <param name="canExecuteMethod">Can execute method determined whether this command can be executed.</param>
+        </member>
+        <member name="M:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand.#ctor(System.Action{System.Object})">
+            <summary>
+            Creates new instance of <see cref="T:TcOpen.Inxton.Security.Wpf.Internal.RelayCommand"/>.
+            </summary>
+            <param name="executeMethod">Method to be executed with this command.</param>        
+        </member>
+    </members>
+</doc>
