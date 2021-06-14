@@ -20,8 +20,9 @@ namespace Sandbox.IntegrationProjects.Wpf
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())                
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
-            Entry.IntegrationProjectsPlc.Connector.ReadWriteCycleDelay = 250;
+            Entry.IntegrationProjectsPlc.Connector.ReadWriteCycleDelay = 5000;
             Entry.IntegrationProjectsPlc.Connector.BuildAndStart();
+            Entry.IntegrationProjectsPlc.Connector.ReadWriteCycleDelay = 100;
 
             Entry.IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._settings.InitializeRepository(
                 TcoData.Repository.Json.Repository.Factory(new TcOpen.Inxton.Data.Json.JsonRepositorySettings<PlainST001_ProcessData>(@"C:\TcOpen\Data\Settings")));
