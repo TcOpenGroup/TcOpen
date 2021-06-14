@@ -16,6 +16,8 @@ using System.Runtime.CompilerServices;
 [assembly: XmlnsPrefix("http://vortex.mts/xaml", "vortex")]
 [assembly: XmlnsDefinition("http://vortex.mts/xaml", "TcoCore")]
 [assembly: XmlnsDefinition("http://vortex.mts/xaml", "Tco.Wpf")]
+[assembly: XmlnsDefinition("http://vortex.mts/xaml", "TcOpen.Inxton.TcoCore.Wpf.TcoComponent")]
+
 
 [assembly:Vortex.Presentation.Wpf.RenderableAssembly()]
 [assembly: AssemblyVersion("0.4.1.0")]

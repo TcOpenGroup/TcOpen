@@ -22,19 +22,17 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-
+    
     <Grid Margin="10" Style="{DynamicResource Card}">
-        <TabControl>
-            <TabItem Header="{Binding Converter={tcocore:NameOrSymbolConverter}}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid>
-                        <TreeView
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <TreeView
                             x:Name="tv"
                             Margin="5"
                             ItemTemplateSelector="{StaticResource ChildDataTemplateSelector}"
@@ -42,9 +40,7 @@
                             SelectedItemChanged="tv_SelectedItemChanged"
                             VirtualizingStackPanel.IsVirtualizing="True"
                             VirtualizingStackPanel.VirtualizationMode="Recycling" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
-                    </Grid>
-                </Grid>
-            </TabItem>
-        </TabControl>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
