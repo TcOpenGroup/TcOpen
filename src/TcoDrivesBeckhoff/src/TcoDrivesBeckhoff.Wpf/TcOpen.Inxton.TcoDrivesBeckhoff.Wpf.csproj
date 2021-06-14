@@ -26,11 +26,4 @@
     <ProjectReference Include="..\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Page Update="TcoDriveSimple\TcoDriveSimpleServiceView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-
 </Project>

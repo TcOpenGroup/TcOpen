@@ -10,7 +10,7 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoTask : ICommand, IDecorateLog
+    public partial class TcoTask : ICommand, IDecorateLog, IsTask
     {
         public event EventHandler CanExecuteChanged;
 
