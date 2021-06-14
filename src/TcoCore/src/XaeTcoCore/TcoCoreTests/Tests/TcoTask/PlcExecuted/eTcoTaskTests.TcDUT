@@ -26,7 +26,10 @@ TYPE eTcoTaskTests :
     DisableExecutingTask,
     InvokeTaskThenDisable,
     DisableTaskInErrorStateEnableAndTriggerAgain,
-    ElapsedTypeMeasurement:=330
+    ElapsedTypeMeasurement:=330,
+	TaskExecutingWithDoneAndErrorStatement := 340,
+	TaskExecutingWithErrorAndDoneStatement
+	
 );
 END_TYPE
 ]]></Declaration>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using TcoCore.Logging;
-using TcoCore.Threading;
 using TcOpen;
 using TcOpen.Inxton;
 using Vortex.Connector;
@@ -16,6 +15,7 @@ namespace TcoCore
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this._enabled.Subscribe(ValidateCanExecute);
+            this._isServiceable.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
         }
 
@@ -39,7 +39,7 @@ namespace TcoCore
 
         void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
         {
-            Dispatcher.Get.Invoke(() => CanExecuteChanged(sender, args));
+            TcoAppDomain.Current.Dispatcher.Invoke(() => CanExecuteChanged(sender, args));
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Cyclic;
+            return this._enabled.Synchron && this._isServiceable.Synchron;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace TcoCore
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            if(_isServiceable.Synchron)
+            if(CanExecute(parameter))
             { 
                 var originalState = this._state.Synchron;
                 var changeStateDescription = originalState ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}" 

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="IO" Id="{bfa6c081-5e1a-0d11-276e-2e644793b167}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	{attribute addProperty Name "EC001"}
+	EC001 : EC001;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

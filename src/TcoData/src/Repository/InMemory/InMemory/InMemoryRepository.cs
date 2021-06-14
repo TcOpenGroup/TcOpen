@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using TcOpen.Inxton.Abstractions.Data;
-using TcOpen.Inxton.Data;
- 
-namespace TcoData.Repository.InMemory
+
+namespace TcOpen.Inxton.Data.InMemory
 {
     public class InMemoryRepository<T> : RepositoryBase<T> where T : IBrowsableDataObject
     {
 
         public InMemoryRepository(InMemoryRepositorySettings<T> parameters)
+        {
+
+        }
+
+        public InMemoryRepository()
         {
 
         }

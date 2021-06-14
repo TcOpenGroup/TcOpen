@@ -336,7 +336,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (inCondition) THEN
+        <ST><![CDATA[IF (inCondition AND THIS^._taskState = eTaskState.Busy) THEN
 	THIS^._taskState := eTaskState.Done;
 	OnDone();			
 END_IF;	

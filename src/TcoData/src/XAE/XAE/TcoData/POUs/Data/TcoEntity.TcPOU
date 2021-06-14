@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoEntity" Id="{6c426a5e-d492-0269-2bc4-58defc9e14b1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoEntity EXTENDS TcoCore.TcoObject 
 VAR
-    _Id : STRING(254);
+    _EntityId : STRING(254);
     _Created : DATE_AND_TIME;
     _Modified : DATE_AND_TIME;
 END_VAR]]></Declaration>

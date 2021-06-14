@@ -8,13 +8,53 @@ using TcoCore;
 
 namespace TcoCore
 {
-    internal static class ValueConverterExtension
+    public class MessageCategoryToForegroundBrushConverter : MarkupExtension, IValueConverter
     {
-        public static Brush GetBrush(this IValueConverter _, string resourceKey, Brush fallbackBrush)
-            => (Application.Current.TryFindResource(resourceKey) as Brush) ?? fallbackBrush;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                var category = (eMessageCategory)value;
+
+                switch (category)
+                {                    
+                    case eMessageCategory.Debug:
+                    case eMessageCategory.Trace:
+                    case eMessageCategory.Info:
+                        return TcoCore.Wpf.TcoColors.OnPrimary;                    
+                    case eMessageCategory.TimedOut:
+                    case eMessageCategory.Notification:
+                        return TcoCore.Wpf.TcoColors.OnSecondary;
+                    case eMessageCategory.Warning:
+                        return TcoCore.Wpf.TcoColors.OnAccent;
+                    case eMessageCategory.Error:
+                    case eMessageCategory.Critical:
+                    case eMessageCategory.Catastrophic:
+                    case eMessageCategory.ProgrammingError:
+                        return TcoCore.Wpf.TcoColors.OnAlert;
+
+                }
+            }
+            catch
+            {
+                //++ Ignore
+            }
+
+            return Brushes.Gray;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
     }
 
-    public class MessageCategoryToBrushConverter : MarkupExtension, IValueConverter
+    public class MessageCategoryToBackgroundBrushConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -27,18 +67,17 @@ namespace TcoCore
                     case eMessageCategory.Debug:
                     case eMessageCategory.Trace:
                     case eMessageCategory.Info:
-                    case eMessageCategory.ProgrammingError:
-                        return this.GetBrush("Secondary", Brushes.Black);
+                        return TcoCore.Wpf.TcoColors.Primary;
                     case eMessageCategory.TimedOut:
                     case eMessageCategory.Notification:
-                        return this.GetBrush("Primary", Brushes.Black);
-                    case eMessageCategory.Warning:      
-                        return this.GetBrush("Alert", Brushes.Orange);
+                        return TcoCore.Wpf.TcoColors.Secondary;
+                    case eMessageCategory.Warning:
+                        return TcoCore.Wpf.TcoColors.Accent;
                     case eMessageCategory.Error:
                     case eMessageCategory.Critical:
                     case eMessageCategory.Catastrophic:
-                        return this.GetBrush("Alert", Brushes.OrangeRed);
-
+                    case eMessageCategory.ProgrammingError:
+                        return TcoCore.Wpf.TcoColors.Alert;
                 }
             }
             catch

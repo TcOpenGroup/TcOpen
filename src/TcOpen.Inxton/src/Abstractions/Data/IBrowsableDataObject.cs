@@ -6,7 +6,7 @@ namespace TcOpen.Inxton.Abstractions.Data
     {
         dynamic _recordId { get; set; }
         DateTime _Created { get; set; }
-        string _Id { get; set; }
+        string _EntityId { get; set; }
         DateTime _Modified { get; set; }
     }
 }

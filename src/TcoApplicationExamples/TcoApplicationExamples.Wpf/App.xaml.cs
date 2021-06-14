@@ -14,7 +14,10 @@ namespace TcoApplicationExamples.Wpf
     {
         public App() : base()
         {
-            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+
             PlcAppExamples.Connector.ReadWriteCycleDelay = 100;
             PlcAppExamples.Connector.BuildAndStart();
         }

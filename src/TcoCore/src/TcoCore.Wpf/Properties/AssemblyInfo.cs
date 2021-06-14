@@ -12,9 +12,9 @@ using System.Windows.Markup;
 )]
 
 
-[assembly: XmlnsPrefix("http://inxton.mts/xaml", "inxton")]
-[assembly: XmlnsDefinition("http://inxton.mts/xaml", "TcoCore")]
-[assembly: XmlnsDefinition("http://inxton.mts/xaml", "Tco.Wpf")]
+[assembly: XmlnsPrefix("http://vortex.mts/xaml", "vortex")]
+[assembly: XmlnsDefinition("http://vortex.mts/xaml", "TcoCore")]
+[assembly: XmlnsDefinition("http://vortex.mts/xaml", "Tco.Wpf")]
 
 [assembly:Vortex.Presentation.Wpf.RenderableAssembly()]
 [assembly: AssemblyVersion("0.4.1.0")]

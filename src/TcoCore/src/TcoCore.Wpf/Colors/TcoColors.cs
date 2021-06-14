@@ -13,14 +13,15 @@ namespace TcoCore.Wpf
     /// </summary>
     public class TcoColors
     {
-        public static Brush Primary => GetDynamicBrush("PrimaryHueLightBrush", fallBackBrush: BrushFromHex("#5a7785"));
-        public static Brush OnPrimary => GetDynamicBrush("PrimaryHueLightForegroundBrush", fallBackBrush: Brushes.White);
+        static string saturation = "Mid";
+        public static Brush Primary => GetDynamicBrush($"PrimaryHue{saturation}Brush", fallBackBrush: BrushFromHex("#5a7785"));
+        public static Brush OnPrimary => GetDynamicBrush($"PrimaryHue{saturation}ForegroundBrush", fallBackBrush: Brushes.White);
 
-        public static Brush Secondary => GetDynamicBrush("SecondaryHueLightBrush", fallBackBrush: BrushFromHex("#bc5052"));
-        public static Brush OnSecondary => GetDynamicBrush("SecondaryHueLightForegroundBrush", fallBackBrush: Brushes.White);
+        public static Brush Secondary => GetDynamicBrush($"SecondaryHue{saturation}Brush", fallBackBrush: BrushFromHex("#bc5052"));
+        public static Brush OnSecondary => GetDynamicBrush($"SecondaryHue{saturation}ForegroundBrush", fallBackBrush: Brushes.White);
 
-        public static Brush Accent => GetDynamicBrush("SecondaryHueMidBrush", fallBackBrush: Brushes.OrangeRed);
-        public static Brush OnAccent => GetDynamicBrush("SecondaryHueLightForegroundBrush", fallBackBrush: Brushes.White);
+        public static Brush Accent => GetDynamicBrush($"SecondaryHue{saturation}Brush", fallBackBrush: Brushes.OrangeRed);
+        public static Brush OnAccent => GetDynamicBrush($"SecondaryHue{saturation}ForegroundBrush", fallBackBrush: Brushes.White);
 
         public static Brush Alert => new SolidColorBrush(GetDynamicColor("YellowPrimary500", ColorFromHex("#ffeb3b")));
         public static Brush OnAlert => Brushes.Black;

@@ -40,7 +40,7 @@
                 Margin="10"
                 DataContext="{Binding NF_MAIN._logic, Mode=OneWay}"
                 PresentationType="Service-Manual" />
-            <inxton:DynamicTreeView
+            <vortex:DynamicTreeView
                 Grid.Row="1"
                 Grid.Column="1"
                 DataContext="{Binding NF_MAIN}" />

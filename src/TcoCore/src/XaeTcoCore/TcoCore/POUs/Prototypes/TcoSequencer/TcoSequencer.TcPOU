@@ -520,6 +520,17 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnStateChange" Id="{2f4522d2-3a30-0083-0899-1dcbf3d4746a}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="OnStepCompleted" Id="{cab5a213-2239-02e3-2d1d-fa93e3282a76}">
       <Declaration><![CDATA[(*~
 	<docu>
