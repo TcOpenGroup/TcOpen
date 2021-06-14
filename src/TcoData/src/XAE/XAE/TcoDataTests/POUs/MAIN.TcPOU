@@ -4,10 +4,12 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	dataTests : TestDataContext;
+	sandbox : SandboxContext;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[dataTests.ProbeRun();]]></ST>
+      <ST><![CDATA[dataTests.ProbeRun();
+sandbox.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

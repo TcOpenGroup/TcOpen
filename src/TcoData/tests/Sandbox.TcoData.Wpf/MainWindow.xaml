@@ -4,22 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Sandbox.TcoData.Wpf"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml"
+    Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d"
-    Title="MainWindow">
+    mc:Ignorable="d">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
     <Grid Grid.Row="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding _sampleComponent._sampleTask, Mode=OneWay}" PresentationType="Base" />
-        <vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding _sampleComponent._sampleTask, Mode=OneWay}" PresentationType="ControlSlim" />
+        <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManager}" PresentationType="Control">
+            <vortex:RenderableContentControl.RootContainer>
+                <Grid />
+            </vortex:RenderableContentControl.RootContainer>
+        </vortex:RenderableContentControl>
     </Grid>
 
 </Window>

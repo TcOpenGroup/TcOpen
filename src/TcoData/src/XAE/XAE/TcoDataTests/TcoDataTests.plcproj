@@ -69,6 +69,15 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Sandbox\Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Sandbox\SandboxContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Sandbox\TcoDataManager.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TestDataContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -78,6 +87,7 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Data" />
     <Folder Include="POUs\Data\_dummyData" />
+    <Folder Include="POUs\Sandbox" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
