@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoSequencer" Id="{514f2b6e-7953-4563-938a-20f12ff8b327}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -10,8 +10,8 @@
 ~*)
 FUNCTION_BLOCK ABSTRACT TcoSequencer EXTENDS TcoStateExtendible IMPLEMENTS ITcoSequencer
 VAR CONSTANT 
-    MinStepID : INT := -32768;
-    MaxStepID : INT := 32767;
+    MinStepID : INT := -32767;
+    MaxStepID : INT := 32766;
 END_VAR 
 VAR
 (*~
@@ -114,7 +114,7 @@ VAR
 	{attribute 'hide'}
 	_requestStepActive : BOOL;	
 	{attribute 'hide'}
-	_requestedStepId : INT := MinStepID;	
+	_requestedStepId : INT := MinStepID-1;	
 	{attribute 'hide'}
 	_cycleTimer : TON;   
 	{attribute 'hide'}
@@ -557,7 +557,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_theOrderOfTheCurrentlyEvaluatedStep := 0;
 
-IF _requestStepActive AND _requestedStepId <> MinStepID AND (_modeController.Mode <> eSequencerMode.StepMode OR _modeController._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
+IF _requestStepActive AND _requestedStepId <> (MinStepID-1) AND (_modeController.Mode <> eSequencerMode.StepMode OR _modeController._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
 	_requestStepCycle := _requestStepCycle +1;
 ELSE
 	_requestStepCycle := 0;
@@ -612,7 +612,7 @@ VAR_INPUT
 			</summary>
 		</docu>
 	~*)
-	inRequestedStepID : INT := MinStepID;
+	inRequestedStepID : INT := MinStepID-1;
 END_VAR
 VAR
 	_message : STRING(254);
@@ -624,8 +624,8 @@ _currentStep.Status := eStepStatus.Done;
 
 _checkStepIdRequestedInStepMode := TRUE;
 
-IF(inRequestedStepID <> MinStepID) THEN
-	IF _requestedStepId <> MinStepID THEN
+IF(inRequestedStepID <> (MinStepID-1)) THEN
+	IF _requestedStepId <> (MinStepID-1) THEN
 		IF NOT  _sequencerHasError THEN
 			_sequencerErrorId := eSequencerError.MultipleRequestStepMethodCall;
 			_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(inRequestedStepID));
@@ -666,7 +666,7 @@ METHOD PUBLIC Restore : ITcoRestorable
 StepChanged(0);
 
 _requestStepActive := FALSE;	
-_requestedStepId := MinStepID;
+_requestedStepId := MinStepID-1;
 _requestStepCycle := 0;
 _sequencerHasError := FALSE;
 _sequencerErrorId := eSequencerError.noError;
@@ -785,20 +785,20 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Step := FALSE;
-IF inStepID <= MinStepID THEN
+IF inStepID < MinStepID THEN
 		_message := CONCAT('STEP_ID TOO LOW: ',INT_TO_STRING(inStepID));
 		_message := CONCAT(_message, '! MINIMAL VALUE POSSIBLE: ');
-		_message := CONCAT(_message,INT_TO_STRING(MinStepID + 1));
+		_message := CONCAT(_message,INT_TO_STRING(MinStepID ));
 		_message := CONCAT(_message,'!!!');
 		_currentStep.Description := _message;
 		_currentStep.Status := eStepStatus.Error;
 		THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.StepIdTooLow;
 		_sequencerHasError := TRUE;
-ELSIF  inStepID >= MaxStepID THEN
+ELSIF  inStepID > MaxStepID THEN
 		_message := CONCAT('STEP_ID TOO HIGH: ',INT_TO_STRING(inStepID));
 		_message := CONCAT(_message, '! MAXIMAL VALUE POSSIBLE: ');
-		_message := CONCAT(_message,INT_TO_STRING(MaxStepID - 1));
+		_message := CONCAT(_message,INT_TO_STRING(MaxStepID ));
 		_message := CONCAT(_message,'!!!');
 		_currentStep.Description := _message;
 		_currentStep.Status := eStepStatus.Error;
@@ -826,7 +826,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_isFirstStepEntry := TRUE;
 _theOrderOfThePreviouslyExecutedStep := 0;
-_IdOfThePreviouslyExecutedStep := MinStepID;
+_IdOfThePreviouslyExecutedStep := MinStepID-1;
 
 _StepTimer(IN:= FALSE);
 
@@ -960,7 +960,7 @@ IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurr
 	_currentStep.Status := eStepStatus.Done;
 	_theOrderOfTheCurrentlyExecutedStep 	:=	_theOrderOfTheCurrentlyEvaluatedStep;
 	_theOrderOfThePreviouslyExecutedStep	:=	_theOrderOfTheCurrentlyExecutedStep;
-	_requestedStepId := MinStepID;
+	_requestedStepId := MinStepID-1;
 	_requestStepCycle := 0;
 	_requestStepActive := FALSE;
 	StepChanged(_requestedStepId);

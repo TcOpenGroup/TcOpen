@@ -305,7 +305,7 @@ namespace TcoCoreUnitTests
         }
 
         [Test, Order(506)]
-        public void T506_ExternalSequenceTooLowStepId()
+        public void T506_ExternalSequenceMinStepId()
         {
             numberOfSteps = 10;
             tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
@@ -335,12 +335,40 @@ namespace TcoCoreUnitTests
                 tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
             Assert.IsTrue(tc._sequencer._sequencerHasError.Synchron);   //Check if seuencer has error
             Assert.AreEqual(70,                                         
-                tc._sequencer._sequencerErrorId.Synchron);       
+                tc._sequencer._sequencerErrorId.Synchron);
 
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.SetCyclicMode());                //Set sequencer into the cyclic mode
+            tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the testing instance
+
+            tc.SequencerSingleCycleRun(() =>
+            {
+                if (tc.Step(-32767, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+
+                for (short i = 1; i <= numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+            });
+
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(1,                                          //Check if StepId stays at 0
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 1",
+                tc._sequencer._currentStepDescription.Synchron);        //Check if StepDescription changes to the expected step message.        
+            Assert.AreEqual(30,                                         //Check if current step status is Running.
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+            Assert.IsFalse(tc._sequencer._sequencerHasError.Synchron);  //Check if seuencer has no error
+            Assert.AreEqual(0,
+                tc._sequencer._sequencerErrorId.Synchron);
         }
 
         [Test, Order(507)]
-        public void T507_ExternalSequenceTooHighStepId()
+        public void T507_ExternalSequenceMaxStepId()
         {
             numberOfSteps = 10;
             tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
@@ -372,6 +400,36 @@ namespace TcoCoreUnitTests
             Assert.IsTrue(tc._sequencer._sequencerHasError.Synchron);   //Check if seuencer has error
             Assert.AreEqual(80,
                 tc._sequencer._sequencerErrorId.Synchron);
+
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SingleCycleRun(() => tc.SetCyclicMode());                //Set sequencer into the cyclic mode
+            tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the testing instance
+
+            tc.SequencerSingleCycleRun(() =>
+            {
+                for (short i = 0; i <= numberOfSteps - 1; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+
+                if (tc.Step(32766, true, "Last step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+            });
+
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(0,                                          //Check if StepId stays at 0
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 0",
+                tc._sequencer._currentStepDescription.Synchron);        //Check if StepDescription changes to the expected step message.        
+            Assert.AreEqual(30,                                         //Check if current step status is Error.
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+            Assert.IsFalse(tc._sequencer._sequencerHasError.Synchron);  //Check if seuencer has no error
+            Assert.AreEqual(0,
+                tc._sequencer._sequencerErrorId.Synchron);
+
         }
 
         [Test, Order(508)]
