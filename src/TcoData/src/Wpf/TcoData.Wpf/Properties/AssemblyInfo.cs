@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Windows;
+using System.Windows.Markup;
 
 [assembly: AssemblyVersion("0.4.1.0")]
 [assembly: AssemblyFileVersion("0.4.1.0")]
@@ -12,3 +13,7 @@ using System.Windows;
                                               //(used if a resource is not found in the page,
                                               // app, or any theme specific resource dictionaries)
 )]
+[assembly: XmlnsPrefix("http://vortex.mts/xaml", "vortex")]
+[assembly: XmlnsDefinition("http://vortex.mts/xaml", "TcoData")]
+
+[assembly: Vortex.Presentation.Wpf.RenderableAssembly()]

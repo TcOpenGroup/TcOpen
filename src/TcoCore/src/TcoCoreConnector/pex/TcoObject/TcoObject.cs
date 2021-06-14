@@ -8,14 +8,18 @@ using Vortex.Connector.ValueTypes;
 namespace TcoCore
 {
     public partial class TcoObject : IVortexIdentity, IsTcoObject
-    {
-
+    {        
         private TcoContext _context;
-
+        
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
-            this.Connector.IdentityProvider.AddIdentity(this);
-            this._context = parent.GetParent<TcoContext>();
+            Init(parent);
+        }
+
+        private void Init(IVortexObject parent)
+        {
+            this.Connector?.IdentityProvider.AddIdentity(this);
+            this._context = parent?.GetParent<TcoContext>();
             this.MessageHandler = new TcoObjectMessageHandler(this._context, this);
         }
 

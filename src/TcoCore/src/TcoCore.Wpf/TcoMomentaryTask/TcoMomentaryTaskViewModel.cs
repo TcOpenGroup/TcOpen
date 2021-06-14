@@ -20,7 +20,7 @@ namespace TcoCore
             UpdateCaption();
         }
 
-        private void UpdateCaption()
+        internal void UpdateCaption()
         {
             lock(this)
             {
@@ -46,8 +46,8 @@ namespace TcoCore
 
         public override object Model { get => TcoMomentaryTask; set { TcoMomentaryTask = value as TcoMomentaryTask; ModeUpdate(); } }
 
-        public Vortex.Presentation.Wpf.RelayCommand ButtonDown { get; set; }
-        public Vortex.Presentation.Wpf.RelayCommand ButtonUp { get; set; }
+        public Vortex.Presentation.Wpf.RelayCommand ButtonDown { get; }
+        public Vortex.Presentation.Wpf.RelayCommand ButtonUp { get; }
 
         private void OnButtonUp()
         {
