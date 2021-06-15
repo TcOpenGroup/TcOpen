@@ -10,6 +10,31 @@
 
     /// <summary>
     /// Provides permission control at the UI level.
+    /// When you log in/log out using  <see cref="SecurityManager"/> you can hide certain UI elements for users of specific roles.
+    /// To hide certain user control from users wrap them like this
+    /// <code>
+    ///     <StackPanel>
+    ///         <wpf:PermissionBox Permissions="Administrator" >
+    ///                 <TextBlock>Visible for administrator</TextBlock>
+    ///         </wpf:PermissionBox>
+    ///         <wpf:PermissionBox Permissions = "Operator" >
+    ///                 <TextBlock> Visible for operator </TextBlock>
+    ///         </wpf:PermissionBox>
+    ///         <wpf:PermissionBox Permissions = "Operator|Administrator" >
+    ///             <TextBlock> Visible for operator and administrator</TextBlock>
+    ///         </wpf:PermissionBox>
+    ///         <TextBlock>Visible for everyone</TextBlock>
+    ///     </StackPanel>
+    /// </code>
+    /// 
+    /// Use <see cref="SecurityModeEnum"/> if you would like to change the behavior of hidden item
+    /// <code>
+    ///     <wpf:PermissionBox Permissions="Operator" SecurityMode="Disabled">
+    ///         <Button>Disabled for everyone, but enabled for operator </Button>
+    ///     </wpf:PermissionBox>
+    /// </code>
+    /// 
+    /// 
     /// </summary>
     public class PermissionBox : ContentControl
     {
