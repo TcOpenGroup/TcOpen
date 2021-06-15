@@ -76,6 +76,15 @@
     <Compile Include="Tests\TcoRtc\TcoRtcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoSequencer\PlcExecuted\eTcoSequencerTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequencer\PlcExecuted\TcoSequencerTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequencer\PlcExecuted\TcoSequencerTestType.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoSequencer\TcoSequencerAutoRestorableTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -127,6 +136,7 @@
     <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />
+    <Folder Include="Tests\TcoSequencer\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
     <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />
