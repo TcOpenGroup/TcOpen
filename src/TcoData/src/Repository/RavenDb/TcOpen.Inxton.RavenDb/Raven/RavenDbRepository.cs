@@ -115,9 +115,21 @@ namespace TcOpen.Inxton.RavenDb
             }
         }
 
-        protected override long FilteredCountNvi(string identifierContent)
+        protected override long FilteredCountNvi(string identifier)
         {
-            throw new NotImplementedException();
+            if (identifier == "*")
+            {
+                return _store.Maintenance.Send(new GetCollectionStatisticsOperation()).CountOfDocuments;
+            }
+            else
+            {
+                using (var session = _store.OpenSession())
+                {
+                    return session.Query<T>()
+                        .Search(x => x._EntityId, "*" + identifier + "*")
+                        .Count();
+                }
+            }
         }
 
         public override IQueryable<T> Queryable
