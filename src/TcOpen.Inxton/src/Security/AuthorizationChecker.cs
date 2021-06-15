@@ -3,6 +3,20 @@ using System.Linq;
 
 namespace TcOpen.Inxton.Security
 {
+    /// <summary>
+    ///     User AuthorizationChecker to check wheter the current use has privilege to execute the code.
+    ///     <code>
+    ///         //Roles is a static class with defined roles as strings.
+    ///         if (TcOpen.Inxton.Security.AuthorizationChecker.HasAuthorization.(Roles.data_exchange_view_can_update_record))
+    ///         {
+    ///             //execute the code if the user has the rights.
+    ///         }
+    ///         else 
+    ///         {
+    ///             // show a message that user doesn't have a privilage to do so.
+    ///         }
+    ///     </code>
+    /// </summary>
     public static class AuthorizationChecker
     {
 

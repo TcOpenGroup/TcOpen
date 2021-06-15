@@ -10,14 +10,35 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
+    <TabControl>
+        <TabItem Header="User mgmt">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <wpf:UserManagementView Grid.Row="0" />
+                <Button Grid.Row="1" Click="loginDialogue">LOGIN</Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Permission box">
+            <StackPanel>
+                <Button Click="LoginAdmin">Login admin</Button>
+                <Button Click="LoginOperator">Login operator</Button>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <wpf:UserManagementView Grid.Row="0" />
-        <Button Grid.Row="1" Click="loginDialogue">LOGIN</Button>
-    </Grid>
-
+                <Button Click="Logout">Logout</Button>
+                <Separator Margin="5" />
+                <wpf:PermissionBox Permissions="Administrator">
+                    <TextBlock>Visible for administrator</TextBlock>
+                </wpf:PermissionBox>
+                <wpf:PermissionBox Permissions="Operator" SecurityMode="Disabled">
+                    <Button>Disabled for everyone, but enabled for operator</Button>
+                </wpf:PermissionBox>
+                <wpf:PermissionBox Permissions="Operator|Administrator">
+                    <TextBlock>Visible for operator and administrator</TextBlock>
+                </wpf:PermissionBox>
+                <TextBlock>Visible for everyone</TextBlock>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 </Window>
