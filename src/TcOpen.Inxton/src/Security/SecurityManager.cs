@@ -8,7 +8,29 @@ using TcOpen.Inxton.Abstractions.Security;
 
 namespace TcOpen.Inxton.Security
 {
-    ///<summary>Provides management of user access.</summary>       
+    ///<summary>
+    ///     Provides management of user access. 
+    ///     To setup security manager you need an IRepository where you will store the user data 
+    ///     
+    /// <code>
+    ///     SecurityManager.Create(new DefaultUserDataRepository<UserData>()); //you can use RavenDB,Mongo,Json repository for user data persistence.
+    ///     
+    ///     //grab the service
+    ///     IAuthenticationService authService = SecurityProvider.Get.AuthenticationService;
+    ///     
+    ///     //create a user
+    ///     
+    ///     var userName = "Admin";
+    ///     var password = "AdminPassword";
+    ///     var roles = new string[] { "Administrator" };
+    ///     authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));  
+    ///     
+    ///     //login created user
+    ///     authService.AuthenticateUser("Admin", "AdminPassword");
+    /// </code>
+    ///  
+    /// To limit execution of methods for privileged user use <see cref="   "/>
+    ///</summary>       
     public class SecurityManager
     {
         private SecurityManager(IRepository<UserData> repository)
