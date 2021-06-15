@@ -120,6 +120,15 @@ namespace TcOpen.Inxton.RavenDb
             throw new NotImplementedException();
         }
 
-        public override IQueryable<T> Queryable { get; }
+        public override IQueryable<T> Queryable
+        {
+            get
+            {
+                using (var session = _store.OpenSession())
+                {
+                    return session.Query<T>().ToList().AsQueryable();
+                }
+            }
+        }
     }
 }
