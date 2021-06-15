@@ -95,6 +95,21 @@ END_VAR]]></Declaration>
         <ST><![CDATA[THIS^.ModeController.StepIn();]]></ST>
       </Implementation>
     </Method>
+    <Property Name="CallRestoreInOnStateChange" Id="{e4bdc12d-4c4a-05b0-2eef-3193c2915dfb}" FolderPath="_Tests\">
+      <Declaration><![CDATA[PROPERTY CallRestoreInOnStateChange : BOOL]]></Declaration>
+      <Get Name="Get" Id="{da157f44-3b5f-0e32-3222-e45b28409abf}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CallRestoreInOnStateChange := _callRestoreInOnStateChange;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{4dd8aef3-f2f1-0f9b-2672-9322f8705c35}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_callRestoreInOnStateChange:=CallRestoreInOnStateChange;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{d10b079a-4f99-0c33-1169-fdd0ae5abb4a}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ChildHasAutoRestoreEnabled : BOOL
@@ -199,12 +214,16 @@ METHOD INTERNAL IsAutoRestorable : BOOL
       <Declaration><![CDATA[METHOD PROTECTED Main : BOOL ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _tcoSequencerTest OF
-    eTcoSequencerTests.NumberOfStepsCount:
+    eTcoSequencerTests.NumberOfStepsCount, eTcoSequencerTests.OnStateChangeWithRestoreCallInside:
         MAIN_NumberOfStepsCount();
     eTcoSequencerTests.ExecutionInOnePLCcycle, eTcoSequencerTests.OnStepCompleted , eTcoSequencerTests.OnSequenceCompleted:
         MAIN_ExecutionInOnePLCcycle();
 	eTcoSequencerTests.RestoreChildBetweenSteps:	
 		MAIN_RestoreChildBetweenSteps();
+	eTcoSequencerTests.MinStepId:	
+		MAIN_MinStepId();
+	eTcoSequencerTests.MaxStepId:	
+		MAIN_MaxStepId();
 END_CASE
 
 RETURN;
@@ -9454,6 +9473,41 @@ IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="MAIN_MaxStepId" Id="{89c57b91-7969-0bc0-1dba-e185486115a0}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_MaxStepId 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber DO
+    IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+        StepCompleteWhen(_finishStep);
+    END_IF
+END_FOR
+IF Step(_stepId, TRUE, CONCAT('Step ', INT_TO_STRING(_stepId))) THEN
+    StepCompleteWhen(TRUE);
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MAIN_MinStepId" Id="{3db71dd8-2beb-09ca-0629-9aa5ac8685f7}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_MinStepId 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Step(_stepId, TRUE, CONCAT('Step ', INT_TO_STRING(_stepId))) THEN
+    StepCompleteWhen(TRUE);
+END_IF
+
+FOR i := 1 TO _totalStepNumber DO
+    IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+        StepCompleteWhen(_finishStep);
+    END_IF
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="MAIN_NumberOfStepsCount" Id="{b05ad8eb-06f5-0cda-2076-ec8cf7a4be79}" FolderPath="_Tests\MAINS\">
       <Declaration><![CDATA[METHOD MAIN_NumberOfStepsCount 
 VAR 
@@ -9731,6 +9785,21 @@ END_VAR
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="StepId" Id="{3c2d860f-565a-0fa1-32c9-dbda09f6bc7e}" FolderPath="_Tests\">
+      <Declaration><![CDATA[PROPERTY StepId : INT]]></Declaration>
+      <Get Name="Get" Id="{83c9d1f5-77ae-00b9-0e05-56b4a5a96679}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StepId := _stepId;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c4236a24-e6ba-01d0-091a-63baa3be093c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_stepId := StepId;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="TcoSequencerTest" Id="{fe6d888f-2ebc-04dc-1261-8605c27c5c74}" FolderPath="_Tests\">
       <Declaration><![CDATA[PROPERTY TcoSequencerTest : eTcoSequencerTests]]></Declaration>
       <Get Name="Get" Id="{41e185db-12c1-07ab-0f58-766b5f339b9f}">
