@@ -5,6 +5,19 @@ using System.Text;
 
 namespace TcOpen.Inxton.Security.Wpf
 {
+    /// <summary>
+    /// Uses <see cref="TcOpen.Inxton.Security.AuthorizationChecker"/>, but will also display a dialog window
+    /// prompting the user to enter credentials in WPF applications
+    /// <code>
+    ///   
+    ///  if (!Vortex.Framework.Security.Wpf.AuthorizationChecker.HasAuthorizationWithLoginDialogue(Roles.data_exchange_view_can_user_add_record))
+    ///  {
+    ///  
+    ///     return;  
+    ///  }
+    ///  // the code for authorized user. 
+    /// </code>
+    /// </summary>
     public static class AuthorizationChecker
     {
 
