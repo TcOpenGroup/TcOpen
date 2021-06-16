@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Vortex.Connector;
 
 namespace TcOpen.Inxton.Swift
 {
@@ -22,11 +24,22 @@ namespace TcOpen.Inxton.Swift
         /// Adds step to the this sequence.
         /// </summary>
         /// <returns>Newly added step.</returns>
-        public object AddStep()
+        public Step AddStep(IVortexElement origin = null)
         {
-            var newStep = new Step();
+            var newStep = new Step(origin);
             steps.Add(newStep);
             return newStep;
+        }        
+
+        public StringBuilder EmitCode(StringBuilder sb)
+        {
+            int stepId = 0;
+            foreach (var step in Steps)
+            {               
+                step.EmitCode(sb, ++stepId);               
+            }
+
+            return sb;
         }
     }
 }

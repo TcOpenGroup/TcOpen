@@ -25,6 +25,27 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\fbPiston.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\fbPistonConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\fbPistonMoveTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\fbPistonStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\IPistonGripper.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\IPistonHorizontal.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\IPistonVertical.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask1.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -123,6 +144,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Components" />
     <Folder Include="Tests" />
     <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />

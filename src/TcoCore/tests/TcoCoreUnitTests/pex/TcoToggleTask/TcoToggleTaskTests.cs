@@ -105,5 +105,13 @@ namespace TcoCore.PexTests
             Assert.IsInstanceOf<TcoToggleTaskCustomizedCodeProvider>(task.CodeProvider);
         }
 
+        [Test()]
+        public void RecordTaskAction_get_set_test()
+        {
+            var task = new TcoToggleTask();
+            Assert.IsNull(task.RecordTaskAction);
+            task.RecordTaskAction = (a, b) => Console.WriteLine();
+            Assert.IsNotNull(task.RecordTaskAction);
+        }
     }
 }

@@ -146,5 +146,14 @@ namespace TcoCore.PexTests
             var task = new TcoMomentaryTaskWithCustomizedCodeProvider();
             Assert.IsInstanceOf<TcoMomentaryTaskCustomizedCodeProvider>(task.CodeProvider);
         }
+
+        [Test()]
+        public void RecordTaskAction_get_set_test()
+        {
+            var task = new TcoMomentaryTask();
+            Assert.IsNull(task.RecordTaskAction);
+            task.RecordTaskAction = (a, b) => Console.WriteLine();
+            Assert.IsNotNull(task.RecordTaskAction);
+        }
     }
 }

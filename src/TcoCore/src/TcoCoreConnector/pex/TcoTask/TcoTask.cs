@@ -25,8 +25,6 @@ namespace TcoCore
             this._abortRequest.Synchron = true;
         }
 
-
-
         private bool CanAbortTask()
         {
             return this._isServiceable.Synchron;
@@ -100,6 +98,8 @@ namespace TcoCore
                 this._invokeRequest.Synchron = true;
 
                 TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
+
+                RecordTaskAction?.Invoke(this.CodeProvider);
             }
         }
 
@@ -131,7 +131,7 @@ namespace TcoCore
 
             protected set => codeProvider = value; 
         }
-
+        
         /// <summary>
         /// Gets or sets log payload decoration function. 
         /// The return object will can be added to provide additional information about this task execution.
@@ -146,5 +146,12 @@ namespace TcoCore
         /// Gets command that restores this task.
         /// </summary>
         public RelayCommand Restore { get; private set; }
+
+        /// <summary>
+        /// Gets or set action recording delegate for this task.
+        /// </summary>
+        public RecordTaskActionDelegate RecordTaskAction { get; set; }
     }
+
+    
 }

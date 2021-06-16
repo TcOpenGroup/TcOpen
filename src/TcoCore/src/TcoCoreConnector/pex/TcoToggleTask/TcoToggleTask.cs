@@ -64,6 +64,11 @@ namespace TcoCore
         }
 
         /// <summary>
+        /// Gets or set action recording delegate for this task.
+        /// </summary>
+        public RecordTaskActionDelegate RecordTaskAction { get; set; }
+
+        /// <summary>
         /// Queries whether the command can be executed.
         /// </summary>
         /// <param name="parameter"></param>
@@ -87,6 +92,8 @@ namespace TcoCore
 
                 this._toggleRequest.Synchron = true;            
                 TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}", LogInfo.Create(this));
+
+                RecordTaskAction?.Invoke(this.CodeProvider);
             }
         }
     }

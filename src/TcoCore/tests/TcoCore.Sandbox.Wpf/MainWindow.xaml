@@ -167,6 +167,9 @@
             <TabItem Header="Examples">
                 <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Service" />
             </TabItem>
+            <TabItem Header="Examples">
+                <vortex:SwiftRecorderView x:Name="swiftRecorder"></vortex:SwiftRecorderView>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

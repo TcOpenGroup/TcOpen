@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vortex.Connector;
 
 namespace TcOpen.Inxton.Swift
 {
-    public abstract class ICodeProvider
+    public interface ICodeProvider
     {
-        public abstract string Code(params object[] args);        
-
+        string Code(params object[] args);
         
+        IVortexObject Origin { get; }
     }
 }

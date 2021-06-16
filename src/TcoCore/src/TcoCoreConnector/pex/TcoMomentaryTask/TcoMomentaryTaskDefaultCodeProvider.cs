@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using TcoCore;
 using TcOpen.Inxton.Swift;
+using Vortex.Connector;
 
 namespace TcoCore.Swift
 {
     public class TcoMomentaryTaskDefaultCodeProvider : ICodeProvider
     {
-        public TcoMomentaryTaskDefaultCodeProvider(IsTask _task)
+        public TcoMomentaryTaskDefaultCodeProvider(IVortexObject origin)
         {
-            task = _task;
+            Origin = origin;
         }
 
-        IsTask task;
+        public IVortexObject Origin { get; }
 
         public string Code(params object[] args)
         {            
@@ -24,7 +25,7 @@ namespace TcoCore.Swift
                 bool result;
                 if (bool.TryParse(args[0].ToString(), out result))
                 {
-                    return result ? $"{task.Symbol}.On()" : $"{task.Symbol}.Off()";
+                    return result ? $"{Origin.Symbol}.On()" : $"{Origin.Symbol}.Off()";
                 }                                    
             }
 

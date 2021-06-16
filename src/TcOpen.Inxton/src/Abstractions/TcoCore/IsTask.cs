@@ -12,5 +12,6 @@ namespace TcoCore
         string Symbol { get; }
         string HumanReadable { get; }
         ICodeProvider CodeProvider { get; }
+        RecordTaskActionDelegate RecordTaskAction { get; set; }
     }
 }

@@ -5,21 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using TcoCore;
 using TcOpen.Inxton.Swift;
+using Vortex.Connector;
 
 namespace TcoCore.Swift
 {
     public class TcoTaskDefaultCodeProvider : ICodeProvider
     {
-        public TcoTaskDefaultCodeProvider(IsTask _task)
+        public TcoTaskDefaultCodeProvider(IVortexObject origin)
         {
-            task = _task;
+            Origin = origin;
         }
 
-        IsTask task;
+        public IVortexObject Origin { get; }
 
         public string Code(params object[] args)
         {
-            return $"{task.Symbol}.Invoke().Done";
+            return $"{Origin.Symbol}.Invoke().Done";
         }
     }
 }

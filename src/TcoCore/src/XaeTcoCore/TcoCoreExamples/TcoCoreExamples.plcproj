@@ -77,6 +77,15 @@
     <Compile Include="Examples\Manipulator\MANIPULATOR.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Examples\Recorder\RecordableStation001.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Recorder\RecordableStation001_Components.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Recorder\RecordableStation001_Sequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Examples\Station_001\Station001.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +129,7 @@
     <Folder Include="Examples\Implementation\TcoState" />
     <Folder Include="Examples\Implementation\TcoTask" />
     <Folder Include="Examples\Manipulator" />
+    <Folder Include="Examples\Recorder" />
     <Folder Include="Examples\Station_001" />
     <Folder Include="Examples\WaveForm" />
     <Folder Include="GVLs" />

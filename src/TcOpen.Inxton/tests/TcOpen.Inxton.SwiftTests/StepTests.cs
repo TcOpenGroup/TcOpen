@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TcoCore;
 
 namespace TcOpen.Inxton.Swift.Tests
 {
@@ -14,14 +15,15 @@ namespace TcOpen.Inxton.Swift.Tests
         [Test()]
         public void StepTest()
         {
-            var actual = new Step();
+            var actual = new Step(new TcoTask(new MockRootObject(),"SomeTask", "_someTask"));
+            Assert.AreEqual("_someTask", actual.Origin.Symbol);
             Assert.IsNotNull(actual.Statements);
         }
 
         [Test()]
         public void add_statement()
         {
-            var step = new Step();
+            var step = new Step(new TcoTask(new MockRootObject(), "SomeTask", "SomeTask"));
 
             var actual = step.AddStatement("_components.Piston.MoveOut().Done");
 
