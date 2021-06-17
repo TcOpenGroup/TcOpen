@@ -11,14 +11,29 @@ VAR
     _elapsedTime : TIME;
     _runElapsedTimer : BOOL;
     _elapsedTimeTimer : Tc2_Standard.TON;
-    _inBool : BOOL;
-    _inUint : UINT;
-    _inInt : INT;
-    _inString : STRING;
-    _retBool : BOOL;
-    _retUint : UINT;
-    _retInt : INT;
-    _retString : STRING;
+
+	_runOneStep							:	BOOL;
+	_runAllSteps						:	BOOL;
+	_finishStep							:	BOOL;
+	_stepId								:	INT;
+	_enabled							:	BOOL;
+	_stepDescription					:	STRING(254);	
+	_currentStepId						:	INT;
+	_currentStepOrder					:	UINT;
+	_currentStepEnabled					:	BOOL;
+	_currentStepDescription				:	STRING(254);
+	_currentStepStatus					:	INT;
+    _totalStepNumber : UINT;
+	
+	
+//    _inBool : BOOL;
+//    _inUint : UINT;
+//    _inInt : INT;
+//    _inString : STRING;
+//    _retBool : BOOL;
+//    _retUint : UINT;
+//    _retInt : INT;
+//    _retString : STRING;
     _done : BOOL;
     _arranged : BOOL;
 	_startCycles			:	ULINT;
@@ -81,23 +96,28 @@ CASE _testId OF
             _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
             _sut_A.ClearNumberOfSteps(); //Clear internal flow step counters, so number of steps is going to be counted again on next sequence run
             _sut_N.ClearNumberOfSteps(); //Clear internal flow step counters, so number of steps is going to be counted again on next sequence run
-            _sut_A.SetCurrentStep(_inInt, _inString); //Set the StepId so as the StepDescription to the current step of the sequencer
-            _sut_N.SetCurrentStep(_inInt, _inString); //Set the StepId so as the StepDescription to the current step of the sequencer
+
+            _sut_A.SetCurrentStep(_currentStepId,
+                _currentStepDescription); //Set the StepId so as the StepDescription to the current step of the sequencer
+
+            _sut_N.SetCurrentStep(_currentStepId,
+                _currentStepDescription); //Set the StepId so as the StepDescription to the current step of the sequencer
+
             _sut_A.UpdateCurrentStepDetails();
             _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _sut_A.TcoSequencerTest := eTcoSequencerTests.NumberOfStepsCount;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.NumberOfStepsCount;
-            _sut_A.TotalStepNumber := _inUint;
-            _sut_N.TotalStepNumber := _inUint;
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.FinishStep := FALSE;
             _sut_N.FinishStep := FALSE;
 
-            _arranged := _inInt = _sut_A._currentStepId AND
-                _inString = _sut_A._currentStepDescription AND
-                _inInt = _sut_N._currentStepId AND
-                _inString = _sut_N._currentStepDescription;
+            _arranged := _currentStepId = _sut_A._currentStepId AND
+                _currentStepDescription = _sut_A._currentStepDescription AND
+                _currentStepId = _sut_N._currentStepId AND
+                _currentStepDescription = _sut_N._currentStepDescription;
 
             RETURN;
         END_IF
@@ -120,8 +140,8 @@ CASE _testId OF
     eTcoSequencerTests.ExecutionInOnePLCcycle:
         _sut_A.TcoSequencerTest := eTcoSequencerTests.ExecutionInOnePLCcycle;
         _sut_N.TcoSequencerTest := eTcoSequencerTests.ExecutionInOnePLCcycle;
-        _sut_A.TotalStepNumber := _inUint;
-        _sut_N.TotalStepNumber := _inUint;
+        _sut_A.TotalStepNumber := _totalStepNumber;
+        _sut_N.TotalStepNumber := _totalStepNumber;
         _sut_A.Run();
         _sut_N.Run();
         _sut_A.UpdateCurrentStepDetails();
@@ -133,8 +153,8 @@ CASE _testId OF
     eTcoSequencerTests.OnStepCompleted:
         _sut_A.TcoSequencerTest := eTcoSequencerTests.OnStepCompleted;
         _sut_N.TcoSequencerTest := eTcoSequencerTests.OnStepCompleted;
-        _sut_A.TotalStepNumber := _inUint;
-        _sut_N.TotalStepNumber := _inUint;
+        _sut_A.TotalStepNumber := _totalStepNumber;
+        _sut_N.TotalStepNumber := _totalStepNumber;
         _sut_A.Run();
         _sut_N.Run();
         _sut_A.SaveNumberOfStepsInSequence();
@@ -146,8 +166,8 @@ CASE _testId OF
     eTcoSequencerTests.OnSequenceCompleted:
         _sut_A.TcoSequencerTest := eTcoSequencerTests.OnSequenceCompleted;
         _sut_N.TcoSequencerTest := eTcoSequencerTests.OnSequenceCompleted;
-        _sut_A.TotalStepNumber := _inUint;
-        _sut_N.TotalStepNumber := _inUint;
+        _sut_A.TotalStepNumber := _totalStepNumber;
+        _sut_N.TotalStepNumber := _totalStepNumber;
         _sut_A.Run();
         _sut_N.Run();
         _done := TRUE;
@@ -158,8 +178,8 @@ CASE _testId OF
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequencerTests.RestoreChildBetweenSteps;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.RestoreChildBetweenSteps;
-            _sut_A.TotalStepNumber := _inUint;
-            _sut_N.TotalStepNumber := _inUint;
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
             _arranged := TRUE;
             RETURN;
         END_IF;
@@ -176,12 +196,12 @@ CASE _testId OF
             _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
             _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
             _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
-            _sut_A.SetNumberOfSteps(_inUint); //Set numberOfSteps to the testing instance
-            _sut_N.SetNumberOfSteps(_inUint); //Set numberOfSteps to the testing instance
+            _sut_A.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
+            _sut_N.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
             _sut_A.TcoSequencerTest := eTcoSequencerTests.OnStateChangeWithRestoreCallInside;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.OnStateChangeWithRestoreCallInside;
-            _sut_A.TotalStepNumber := _inUint;
-            _sut_N.TotalStepNumber := _inUint;
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.FinishStep := FALSE;
             _sut_N.FinishStep := FALSE;
             _plcCycleCounter := 0;
@@ -221,12 +241,12 @@ CASE _testId OF
             _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
             _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
             _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
-            _sut_A.SetNumberOfSteps(_inUint); //Set numberOfSteps to the testing instance
-            _sut_N.SetNumberOfSteps(_inUint); //Set numberOfSteps to the testing instance
+            _sut_A.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
+            _sut_N.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
             _sut_A.TcoSequencerTest := eTcoSequencerTests.MinStepId;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.MinStepId;
-            _sut_A.TotalStepNumber := _inUint;
-            _sut_N.TotalStepNumber := _inUint;
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.FinishStep := FALSE;
             _sut_N.FinishStep := FALSE;
             _plcCycleCounter := 0;
@@ -235,8 +255,8 @@ CASE _testId OF
         END_IF
 
         IF NOT _done THEN
-            _sut_A.StepId := _inInt;
-            _sut_N.StepId := _inInt;
+            _sut_A.StepId := _currentStepId;
+            _sut_N.StepId := _currentStepId;
             _sut_A.Run();
             _sut_N.Run();
             _sut_A.UpdateCurrentStepDetails();
@@ -245,7 +265,7 @@ CASE _testId OF
 
         _done := TRUE;
         ProbeDoneWhen(_done);
-{endregion}
+    {endregion}
     {region "T507_MaxStepId"}
     eTcoSequencerTests.MaxStepId:
         IF NOT _arranged THEN
@@ -253,12 +273,12 @@ CASE _testId OF
             _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
             _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
             _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
-            _sut_A.SetNumberOfSteps(_inUint); //Set numberOfSteps to the testing instance
-            _sut_N.SetNumberOfSteps(_inUint); //Set numberOfSteps to the testing instance
+            _sut_A.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
+            _sut_N.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
             _sut_A.TcoSequencerTest := eTcoSequencerTests.MaxStepId;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.MaxStepId;
-            _sut_A.TotalStepNumber := _inUint;
-            _sut_N.TotalStepNumber := _inUint;
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.FinishStep := FALSE;
             _sut_N.FinishStep := FALSE;
             _plcCycleCounter := 0;
@@ -267,8 +287,8 @@ CASE _testId OF
         END_IF
 
         IF NOT _done THEN
-            _sut_A.StepId := _inInt;
-            _sut_N.StepId := _inInt;
+            _sut_A.StepId := _currentStepId;
+            _sut_N.StepId := _currentStepId;
             _sut_A.Run();
             _sut_N.Run();
             _sut_A.UpdateCurrentStepDetails();
@@ -277,9 +297,320 @@ CASE _testId OF
 
         _done := TRUE;
         ProbeDoneWhen(_done);
+    {endregion}
+    {region "T508_RequestStepToFirstStepWithStepId0"}
+    eTcoSequencerTests.RequestStepToFirstStepWithStepId0:
+        IF NOT _arranged THEN
+            _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_A.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
+            _sut_N.SetNumberOfSteps(_totalStepNumber); //Set numberOfSteps to the testing instance
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.RequestStepToFirstStepWithStepId0;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.RequestStepToFirstStepWithStepId0;
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
+            _sut_A.FinishStep := TRUE;
+            _sut_N.FinishStep := TRUE;
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            IF _plcCycleCounter > 1 THEN
+                _sut_A.FinishStep := FALSE;
+                _sut_N.FinishStep := FalsE;
+            END_IF
+
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+        END_IF
+
+        _done := _plcCycleCounter > 1;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T509_RequestStep"}
+    eTcoSequencerTests.RequestStep:
+        IF NOT _arranged THEN
+            _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_A.SetNumberOfSteps(10); //Set numberOfSteps to the testing instance
+            _sut_N.SetNumberOfSteps(10); //Set numberOfSteps to the testing instance
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.RequestStep;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.RequestStep;
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            _sut_A.SequenceRun := _plcCycleCounter;
+            _sut_N.SequenceRun := _plcCycleCounter;
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+        END_IF
+
+        _done := _plcCycleCounter >= 3;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T510_CheckStepIdUniqueness"}
+    eTcoSequencerTests.CheckStepIdUniqueness:
+        IF NOT _arranged THEN
+            _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_A.SetSequenceAsNotChecked(); //Set sequence as not checked, so StepId uniqueness is going to be performed on next sequence run
+            _sut_N.SetSequenceAsNotChecked(); //Set sequence as not checked, so StepId uniqueness is going to be performed on next sequence run
+            _sut_A.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_N.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_A.Enabled := TRUE;
+            _sut_A.RunOneStep := FALSE;
+            _sut_A.RunAllSteps := TRUE;
+            _sut_A.FinishStep := TRUE;
+            _sut_N.Enabled := TRUE;
+            _sut_N.RunOneStep := FALSE;
+            _sut_N.RunAllSteps := TRUE;
+            _sut_N.FinishStep := TRUE;
+            _sut_A.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.CheckStepIdUniqueness;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.CheckStepIdUniqueness;
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+        END_IF
+
+        _done := _plcCycleCounter >= 2;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T512_RestoreAlreadyCheckedSequence"}
+    eTcoSequencerTests.RestoreAlreadyCheckedSequence:
+        _sut_A.Restore();
+        _sut_N.Restore();
+        _sut_A.SaveNumberOfStepsInSequence();
+        _sut_N.SaveNumberOfStepsInSequence();
+        _done := TRUE;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T513_CheckStepIdUniqueness"}
+    eTcoSequencerTests.NotUniqueStepId:
+        IF NOT _arranged THEN
+            _sut_A.Enabled := TRUE;
+            _sut_A.RunOneStep := FALSE;
+            _sut_A.RunAllSteps := FALSE;
+            _sut_A.FinishStep := TRUE;
+            _sut_A.StepId := _stepId;
+            _sut_N.Enabled := TRUE;
+            _sut_N.RunOneStep := FALSE;
+            _sut_N.RunAllSteps := FALSE;
+            _sut_N.FinishStep := TRUE;
+            _sut_N.StepId := _stepId;
+            _sut_A.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.NotUniqueStepId;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.NotUniqueStepId;
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _done := _plcCycleCounter >= 2;
+        END_IF
+
+        IF _done THEN
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T516_AfterErrorRestore"}
+    eTcoSequencerTests.AfterErrorRestore:
+        IF NOT _arranged THEN
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.AfterErrorRestore;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.AfterErrorRestore;
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _done := _plcCycleCounter >= 3;
+        END_IF
+
+        IF _done THEN
+            ProbeDoneWhen(_done);
+        END_IF
+    {endregion}
+    {region "T520_ChangeStepIdDuringExecution"}
+    eTcoSequencerTests.ChangeStepIdDuringExecution:
+        IF NOT _arranged THEN
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.ChangeStepIdDuringExecution;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.ChangeStepIdDuringExecution;
+            _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_A.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_N.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_A.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            _sut_A.SequenceRun := _plcCycleCounter;
+            _sut_N.SequenceRun := _plcCycleCounter;
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+        END_IF
+
+        _done := _plcCycleCounter >= 3;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T524_CommentOutPartOfRunningSequencer"}
+    eTcoSequencerTests.CommentOutPartOfRunningSequencer:
+        IF NOT _arranged THEN
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.CommentOutPartOfRunningSequencer;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.CommentOutPartOfRunningSequencer;
+            _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_A.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_N.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_A.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            IF _plcCycleCounter = 3 THEN
+                _sut_A.Restore();
+                _sut_N.Restore();
+                _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+                _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+                _sut_A.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+                _sut_N.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            END_IF
+            _sut_A.SequenceRun := _plcCycleCounter;
+            _sut_N.SequenceRun := _plcCycleCounter;
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+        END_IF
+
+        _done := _plcCycleCounter >= 3;
+        ProbeDoneWhen(_done);
+    {endregion}
+    {region "T526_UncommentPartOfRunningSequencer"}
+    eTcoSequencerTests.UncommentPartOfRunningSequencer:
+        IF NOT _arranged THEN
+            _sut_A.TcoSequencerTest := eTcoSequencerTests.UncommentPartOfRunningSequencer;
+            _sut_N.TcoSequencerTest := eTcoSequencerTests.UncommentPartOfRunningSequencer;
+            _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_N.SetCyclicMode(); //Set sequencer into the cyclic mode
+            _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+            _sut_A.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_N.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            _sut_A.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
+            _sut_A.TotalStepNumber := _totalStepNumber;
+            _sut_N.TotalStepNumber := _totalStepNumber;
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+            _plcCycleCounter := 0;
+            _arranged := TRUE;
+            RETURN;
+        END_IF
+
+        IF NOT _done THEN
+            IF _plcCycleCounter = 3 THEN
+                _sut_A.Restore();
+                _sut_N.Restore();
+                _sut_A.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+                _sut_N.SetSequenceAsChecked(); //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
+                _sut_A.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+                _sut_N.ClearNumberOfSteps(); //Clear internal step counters, so number of steps is going to be counted again on next sequence run
+            END_IF
+
+            _sut_A.SequenceRun := _plcCycleCounter;
+            _sut_N.SequenceRun := _plcCycleCounter;
+            _sut_A.Run();
+            _sut_N.Run();
+            _sut_A.SaveNumberOfStepsInSequence();
+            _sut_N.SaveNumberOfStepsInSequence();
+            _sut_A.UpdateCurrentStepDetails();
+            _sut_N.UpdateCurrentStepDetails();
+        END_IF
+
+        _done := _plcCycleCounter >= 2;
+        ProbeDoneWhen(_done);
 {endregion}
-
-
 END_CASE]]></ST>
       </Implementation>
     </Method>
