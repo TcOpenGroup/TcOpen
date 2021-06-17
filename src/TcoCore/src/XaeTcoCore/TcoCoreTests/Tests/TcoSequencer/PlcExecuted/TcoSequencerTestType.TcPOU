@@ -29,9 +29,8 @@ VAR
 	_tcoSequencerTest : eTcoSequencerTests;
     _totalStepNumber : UINT;
 	_sequenceRun : ULINT;
-
-	_comment : BOOL;
-	_uncomment : BOOL;
+	_reqStep : INT;
+    _reqStepNotExists : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -201,6 +200,22 @@ METHOD GetNumberOfStepsInSequence : UINT
         <ST><![CDATA[GetNumberOfStepsInSequence := _numberOfStepsInSequence;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="GetOrderOfTheCurrentlyEvaluatedStep" Id="{64b5d6a9-df51-0a21-3b1f-b671ca6be73d}" FolderPath="_Tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetOrderOfTheCurrentlyExecutedStep" Id="{902a04f9-38ed-088d-1f52-ba3e349f4809}" FolderPath="_Tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetOrderOfTheCurrentlyExecutedStep : UINT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="GetPreviousNumberOfStepsInSequence" Id="{0cb72db7-c7ea-0c71-397b-445b08590d2a}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD GetPreviousNumberOfStepsInSequence : UINT]]></Declaration>
@@ -275,6 +290,14 @@ METHOD INTERNAL IsAutoRestorable : BOOL
         MAIN_CommentOutPartOfRunningSequencer();
     eTcoSequencerTests.UncommentPartOfRunningSequencer:
         MAIN_UncommentPartOfRunningSequencer();
+    eTcoSequencerTests.RequestStepFromLowerToHigher:
+        MAIN_RequestStepFromLowerToHigher();
+    eTcoSequencerTests.RequestStepFromHigherToLower:
+        MAIN_RequestStepFromHigherToLower();
+    eTcoSequencerTests.RequestStepToNotExistingStep:
+        MAIN_RequestStepToNotExistingStep();
+    eTcoSequencerTests.RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed:
+        MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed();
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -9767,6 +9790,78 @@ IF _sequenceRun =3 THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="MAIN_RequestStepFromHigherToLower" Id="{419bf385-41fb-036e-3170-06e9de257e55}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_RequestStepFromHigherToLower 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    FOR i := 0 TO _reqStep + 4 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(TRUE);
+        END_IF
+    END_FOR
+
+    FOR i := _reqStep + 5 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    RequestStep(_reqStep);
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF
+
+IF _sequenceRun = 2 THEN
+    FOR i := 0 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MAIN_RequestStepFromLowerToHigher" Id="{c9a7c0f6-3cd8-06c0-0301-9fe1b94f02d6}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_RequestStepFromLowerToHigher 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
+
+    FOR i := 1 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF
+
+IF _sequenceRun = 2 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
+
+    RequestStep(_reqStep);
+
+    FOR i := 1 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="MAIN_RequestStepToFirstStepWithStepId0" Id="{6a25be65-f058-0e20-0e3b-937bad0f5ca9}" FolderPath="_Tests\MAINS\">
       <Declaration><![CDATA[METHOD MAIN_RequestStepToFirstStepWithStepId0 
 VAR 
@@ -9788,6 +9883,60 @@ FOR i := 6 TO _totalStepNumber DO
         StepCompleteWhen(_finishStep);
     END_IF
 END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MAIN_RequestStepToNotExistingStep" Id="{ab1f2097-baf0-0820-0fa7-f7d70b1b885a}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_RequestStepToNotExistingStep 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    RequestStep(_reqStepNotExists);
+
+    FOR i := 0 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF
+
+IF _sequenceRun >= 2 THEN
+    FOR i := 0 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed" Id="{28dfbafc-2ae7-031e-22ce-2f4a5142d5d3}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO _reqStep + 4 DO
+    IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+        StepCompleteWhen(TRUE);
+    END_IF
+END_FOR
+
+RequestStep(_reqStep);
+
+FOR i := _reqStep + 5 TO _totalStepNumber - 1 DO
+    Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+END_FOR
+
+RequestStep(_reqStep + 10);
+
+IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    _SequenceComplete();
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RestoreChildBetweenSteps" Id="{ac2289b4-bd06-01af-3bac-dde62540b496}" FolderPath="_Tests\MAINS\">
@@ -9940,6 +10089,37 @@ METHOD PROTECTED OnStepCompleted]]></Declaration>
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="ReqStep" Id="{78240d3c-e450-0617-3646-a8723c629e53}" FolderPath="_Tests\">
+      <Declaration><![CDATA[PROPERTY ReqStep : INT]]></Declaration>
+      <Get Name="Get" Id="{c1898996-4e34-083b-327b-4f6e9a318ff3}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ReqStep := _reqStep;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d8e5dcd7-3bd8-01a2-0742-6d134f7e9c8f}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_reqStep := ReqStep;
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="ReqStepNotExists" Id="{55e8c9ed-9c7a-0420-17ff-b372c640515c}" FolderPath="_Tests\">
+      <Declaration><![CDATA[PROPERTY ReqStepNotExists : INT]]></Declaration>
+      <Get Name="Get" Id="{a9473ac0-47ad-0df9-2d18-893379b0397e}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ReqStepNotExists := _reqStepNotExists;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d0246ddc-2383-08f9-3a2c-db14be630c48}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_reqStepNotExists:=ReqStepNotExists;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="RequestStepCycle" Id="{d445b6db-77f8-05eb-0ee7-ef5085c25b2d}" FolderPath="_Tests\">
       <Declaration><![CDATA[PROPERTY INTERNAL RequestStepCycle : UINT
 ]]></Declaration>
