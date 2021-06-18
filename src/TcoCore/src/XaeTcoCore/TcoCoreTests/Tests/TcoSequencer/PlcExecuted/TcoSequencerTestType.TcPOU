@@ -35,7 +35,12 @@ VAR
 	
 	_postOpenRequestStepCycle : UINT;
 	_preCloseRequestStepCycle : UINT;
+
+	_restoreCycleCount : UINT;
+
 END_VAR
+
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -312,7 +317,7 @@ METHOD INTERNAL IsAutoRestorable : BOOL
     eTcoSequencerTests.RequestStep:
         MAIN_RequestStep();
     eTcoSequencerTests.CheckStepIdUniqueness, eTcoSequencerTests.RestoreAlreadyCheckedSequence, eTcoSequencerTests.NotUniqueStepId,
-        eTcoSequencerTests.AfterErrorRestore:
+        eTcoSequencerTests.AfterErrorRestore ,eTcoSequencerTests.CheckStepIdUniquenessStepMode:
         MAIN_CheckStepIdUniqueness();
     eTcoSequencerTests.ChangeStepIdDuringExecution:
         MAIN_ChangeStepIdDuringExecution();
@@ -10133,6 +10138,12 @@ IF _sequenceRun =2 THEN
 END_IF
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnRestore" Id="{a9b6abd9-864a-0bb5-33cb-25bef86aee6c}">
+      <Declaration><![CDATA[METHOD PROTECTED OnRestore]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_restoreCycleCount := _restoreCycleCount + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnSequenceCompleted" Id="{4225e218-d628-0ae3-358d-91569294365a}" FolderPath="_Tests\">

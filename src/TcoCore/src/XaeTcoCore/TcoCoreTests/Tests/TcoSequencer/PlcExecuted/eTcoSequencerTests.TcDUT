@@ -5,6 +5,7 @@
 {attribute 'strict'}
 TYPE eTcoSequencerTests :
 (
+	none	:= -1,
 	CallSequencerBodiesOnly	:= 100,
 	RestoreSequencers,
 	NumberOfStepsCount := 500,
@@ -35,7 +36,7 @@ TYPE eTcoSequencerTests :
 	StepMode :=580,
 	InvalidMode :=582,
 	StepInError := 583,
-	CheckUniquenessStepMode :=590,
+	CheckStepIdUniquenessStepMode :=590,
 	ResetSequenceInStepMode,
 	NotUniqueStepIdInStep,
 	ResetInStepModeAfterNotUniqueStepIdError,
