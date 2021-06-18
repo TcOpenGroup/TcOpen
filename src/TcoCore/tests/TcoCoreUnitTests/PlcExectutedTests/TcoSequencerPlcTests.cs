@@ -1678,7 +1678,6 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._done.Synchron = false;
             tc._arranged.Synchron = false;
 
-
             initStepId = 32767;
             tc._currentStepId.Synchron = initStepId;
             tc._currentStepDescription.Synchron = initStepDescription;
@@ -1789,182 +1788,182 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         }
 
 
-        //[Test, Order(580)]
-        //public void T580_ExternalSequenceStepModeFirstCycle()
-        //{
-        //    numberOfSteps = 10;
-        //    cycle = 0;
-        //    tc.SequencerSingleCycleRun(() => tc.SetStepMode());         //This set sequencer into the step mode
-        //    tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
-        //    tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
-        //    tc.ClearNumberOfSteps();                                    //Clear internal step counters, so number of steps is going to be counted again on next sequence run
-        //    tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(initStepId,
-        //        tc._sequencer._currentStepId.Synchron);                 //Check if the initial StepId was written to the current step of the sequencer
-        //    Assert.AreEqual(initStepDescription,
-        //        tc._sequencer._currentStepDescription.Synchron);        //Check if the initial StepDescription was written to the current step of the sequencer
-        //    Assert.AreEqual(0, tc.GetNumberOfStepsInSequence());        //Check if the number of the steps was succesfully cleared
+        [Test, Order((int)eTcoSequencerTests.StepMode)]
+        public void T580_StepMode()
+        {
+            tc.ExecuteProbeRun((int)eTcoSequencerTests.RestoreAlreadyCheckedSequence, () => tc._done.Synchron);
+            tc._done.Synchron = false;
+            tc._arranged.Synchron = false;
 
-        //    tc.SequencerSingleCycleRun(() =>                            //After execution of this method, actual StepId should have value zero, as stepmode is on and no StepIn() method was called
-        //    {                                                           //StepDescription should have value "(>Initial step<)" as step zero is in order of the execution, but as the stepmode is on and  
-        //                                                                //no StepIn() method was called
-        //        if (tc.Step(0, true, "Initial step"))                   //Sequencer method GetNumberOfStepsInSequence() should return the value equal to value of the variable numberOfSteps 
-        //        {                                                       //as it is number of the calls of the sequencer method Step()
-        //            tc.StepCompleteWhen(true);                          //Actual step should stay in status ReadyToRun
-        //        }
-        //        for (ushort i = 1; i < numberOfSteps; i++)
-        //        {
-        //            tc.Step((short)i, true, "Step " + i.ToString());
-        //        }
-        //        if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
-        //        {
-        //            tc.SequenceComplete();
-        //        }
-        //    });
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(0,                                          //Check if StepId stays in 0. As the StepId uniqueness control control has already been performed, 
-        //        tc._sequencer._currentStepId.Synchron);                 //the step logic could be executed, but no StepIn() method was called                   
-        //    Assert.AreEqual("(>Initial step<)",                         //Check if StepDescription stays in "(>Initial step<)". As the StepId uniqueness control control has already
-        //        tc._sequencer._currentStepDescription.Synchron);        //been performed, the step logic could be executed but no StepIn() method was called.
-        //    Assert.AreEqual(numberOfSteps,                              //Check if number of the counted steps is equal to expected value
-        //        tc.GetNumberOfStepsInSequence());
-        //    Assert.AreEqual(20,                                         //Check if current step status is ReadyToRun.
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            numberOfSteps = 10;
+            cycle = 0;
+            tc._totalStepNumber.Synchron = numberOfSteps;
+            initStepId = 32767;
+            tc._currentStepId.Synchron = initStepId;
+            tc._currentStepDescription.Synchron = initStepDescription;
 
-        //[Test, Order(581)]
-        //public void T581_ExternalSequenceStepModeNextNcyclesWithStepInMethodCall()
-        //{
-        //    cycle = 0;
-        //    tc.SequencerRunUntilEndConditionIsMet(action: () =>         //After execution of this method, actual StepId should have value of numberOfSteps, as stepmode is on and StepIn() 
-        //    {                                                           //method is called in each PLC cycle. StepDescription should have value of "Step " + numberOfSteps as stepmode is on
-        //                                                                //and StepIn() method is called in each PLC cycle. Step status should have state Done
-        //        tc.StepIn();
-        //        if (tc.Step(0, true, "Initial step"))
-        //        {
-        //            tc.StepCompleteWhen(true);
-        //        }
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepMode);
+            Assert.IsTrue(tc._arranged.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //        for (ushort i = 1; i < numberOfSteps; i++)
-        //        {
-        //            tc.StepIn();
+            Assert.AreEqual(initStepId,
+                tc._sut_A._currentStepId.Synchron);                 //Check if the initial StepId was written to the current step of the sequencer
+            Assert.AreEqual(initStepDescription,
+                tc._sut_A._currentStepDescription.Synchron);        //Check if the initial StepDescription was written to the current step of the sequencer
+            Assert.AreEqual(0, tc._sut_A._numberOfSteps.Synchron);  //Check if the number of the steps was succesfully cleared
 
-        //            if (tc.Step((short)i, true, "Step " + i.ToString()))
-        //            {
-        //                tc.StepCompleteWhen(true);
-        //            }
-        //        }
+            Assert.AreEqual(initStepId,
+                tc._sut_N._currentStepId.Synchron);                 //Check if the initial StepId was written to the current step of the sequencer
+            Assert.AreEqual(initStepDescription,
+                tc._sut_N._currentStepDescription.Synchron);        //Check if the initial StepDescription was written to the current step of the sequencer
+            Assert.AreEqual(0, tc._sut_N._numberOfSteps.Synchron);  //Check if the number of the steps was succesfully cleared
 
-        //        if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
-        //        {
-        //            tc.SequenceComplete();
-        //        }
-        //        cycle++;
-        //    }, endCondition: () => cycle > numberOfSteps);
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(numberOfSteps,                              //Check if StepId changes to numberOfSteps.  
-        //        tc._sequencer._currentStepId.Synchron);                 //                
-        //    Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps. 
-        //        tc._sequencer._currentStepDescription.Synchron);        //
-        //    Assert.AreEqual(40,                                         //Check if current step status is ReadyToRun.
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepMode);
+            Assert.AreEqual(1, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //[Test, Order(582)]
-        //public void T582_ExternalInvalidMode()
-        //{
-        //    numberOfSteps = 10;
-        //    tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
-        //    tc.SingleCycleRun(() => tc.SetCyclicMode());                //Set sequencer into the cyclic mode
-        //    tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
-        //    tc.SetNumberOfSteps(numberOfSteps);                                    //Set numberOfSteps to the testing instance
+            Assert.AreEqual(0,                                          //Check if StepId stays in 0. As the StepId uniqueness control control has already been performed, 
+                tc._sut_A._currentStepId.Synchron);                     //the step logic could be executed, but no StepIn() method was called                   
+            Assert.AreEqual("(>Initial step<)",                         //Check if StepDescription stays in "(>Initial step<)". As the StepId uniqueness control control has already
+                tc._sut_A._currentStepDescription.Synchron);            //been performed, the step logic could be executed but no StepIn() method was called.
+            Assert.AreEqual(numberOfSteps,                              //Check if number of the counted steps is equal to expected value
+                tc._sut_A._numberOfSteps.Synchron);
+            Assert.AreEqual(20,                                         //Check if current step status is ReadyToRun.
+                tc._sut_A._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-        //    tc.SequencerSingleCycleRun(() =>
-        //    {
-        //        for (short i = 0; i < numberOfSteps; i++)
-        //        {
-        //            if (tc.Step((short)i, true, "Step " + i.ToString()))
-        //            {
-        //                tc.StepCompleteWhen(true);
-        //            }
-        //        }
+            tc.ExecuteProbeRun((ulong)numberOfSteps + 1, (int)eTcoSequencerTests.StepMode);
+            Assert.AreEqual(numberOfSteps + 2, tc._plcCycleCounter.Synchron);
+            Assert.IsTrue(tc._done.Synchron);
 
-        //        tc.UpdateCurrentStepDetails();
-        //        Assert.AreEqual(numberOfSteps - 1, tc._sequencer._currentStepId.Synchron);
-        //        Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(), tc._sequencer._currentStepDescription.Synchron);
-        //        Assert.AreEqual(40, tc._sequencer._currentStepStatus.Synchron);
-        //        tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString());
-        //    });
 
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(numberOfSteps, tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(30, tc._sequencer._currentStepStatus.Synchron);
+            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes to numberOfSteps.  
+               tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps. 
+                tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(40,                                         //Check if current step status is ReadyToRun.
+                tc._sut_A._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+ 
+            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes to numberOfSteps.  
+               tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps. 
+                tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(40,                                         //Check if current step status is ReadyToRun.
+                tc._sut_N._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+        }
 
-        //    tc.SetInvalidMode();
-        //    tc.SequencerSingleCycleRun(() =>
-        //    {
-        //        for (short i = 0; i <= numberOfSteps; i++)
-        //        {
-        //            tc.Step((short)i, true, "Step " + i.ToString());
-        //        }
-        //    });
+        [Test, Order((int)eTcoSequencerTests.InvalidMode)]
+        public void T582_InvalidMode()
+        {
+            tc.ExecuteProbeRun((int)eTcoSequencerTests.RestoreAlreadyCheckedSequence, () => tc._done.Synchron);
+            tc._done.Synchron = false;
+            tc._arranged.Synchron = false;
 
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(numberOfSteps, tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("INVALID MODE OF THE SEQUENCER!!!", tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(50, tc._sequencer._currentStepStatus.Synchron);
-        //    Assert.IsTrue(tc._sequencer._sequencerHasError.Synchron);
+            numberOfSteps = 10;
+            tc._totalStepNumber.Synchron = numberOfSteps;
 
-        //}
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.InvalidMode);
+            Assert.IsTrue(tc._arranged.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //[Test, Order(583)]
-        //public void T583_ExternalStepInError()
-        //{
-        //    numberOfSteps = 10;
-        //    tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
-        //    tc.SingleCycleRun(() => tc.SetCyclicMode());                //Set sequencer into the cyclic mode
-        //    tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepID uniqueness is performed on next sequence execution
-        //    tc.SetNumberOfSteps(numberOfSteps);                                    //Set numberOfSteps to the testing instance
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.InvalidMode);
+            Assert.AreEqual(1,tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //    tc.SequencerSingleCycleRun(() =>
-        //    {
-        //        for (short i = 0; i < numberOfSteps; i++)
-        //        {
-        //            if (tc.Step((short)i, true, "Step " + i.ToString()))
-        //            {
-        //                tc.StepCompleteWhen(true);
-        //            }
-        //        }
+            Assert.AreEqual(numberOfSteps - 1, tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(), tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(40, tc._sut_A._currentStepStatus.Synchron);
 
-        //        tc.UpdateCurrentStepDetails();
-        //        Assert.AreEqual(numberOfSteps - 1, tc._sequencer._currentStepId.Synchron);
-        //        Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(), tc._sequencer._currentStepDescription.Synchron);
-        //        Assert.AreEqual(40, tc._sequencer._currentStepStatus.Synchron);
-        //        tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString());
-        //    });
+            Assert.AreEqual(numberOfSteps - 1, tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(), tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(40, tc._sut_N._currentStepStatus.Synchron);
 
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(numberOfSteps, tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(30, tc._sequencer._currentStepStatus.Synchron);
 
-        //    tc.SetCurrentStepToErrorState();
-        //    tc.SequencerSingleCycleRun(() =>
-        //    {
-        //        for (short i = 0; i <= numberOfSteps; i++)
-        //        {
-        //            tc.Step((short)i, true, "Step " + i.ToString());
-        //        }
-        //    });
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.InvalidMode);
+            Assert.AreEqual(2, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(numberOfSteps, tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(50, tc._sequencer._currentStepStatus.Synchron);
-        //    Assert.IsFalse(tc._sequencer._sequencerHasError.Synchron);
-        //}
+            Assert.AreEqual(numberOfSteps, tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(30, tc._sut_A._currentStepStatus.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(30, tc._sut_N._currentStepStatus.Synchron);
+
+            tc._sut_A.SetInvalidMode();
+            tc._sut_N.SetInvalidMode();
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.InvalidMode);
+            Assert.AreEqual(3, tc._plcCycleCounter.Synchron);
+            Assert.IsTrue(tc._done.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("INVALID MODE OF THE SEQUENCER!!!", tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(50, tc._sut_A._currentStepStatus.Synchron);
+            Assert.IsTrue(tc._sut_A._sequencerHasError.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("INVALID MODE OF THE SEQUENCER!!!", tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(50, tc._sut_N._currentStepStatus.Synchron);
+            Assert.IsTrue(tc._sut_N._sequencerHasError.Synchron);
+
+        }
+
+        [Test, Order((int)eTcoSequencerTests.StepInError)]
+        public void T583_StepInError()
+        {
+            tc.ExecuteProbeRun((int)eTcoSequencerTests.RestoreAlreadyCheckedSequence, () => tc._done.Synchron);
+            tc._done.Synchron = false;
+            tc._arranged.Synchron = false;
+
+            numberOfSteps = 10;
+            tc._totalStepNumber.Synchron = numberOfSteps;
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepInError);
+            Assert.IsTrue(tc._arranged.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepInError);
+            Assert.AreEqual(1, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            Assert.AreEqual(numberOfSteps - 1, tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(), tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(40, tc._sut_A._currentStepStatus.Synchron);
+
+            Assert.AreEqual(numberOfSteps - 1, tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(), tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(40, tc._sut_N._currentStepStatus.Synchron);
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepInError);
+            Assert.AreEqual(2, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(30, tc._sut_A._currentStepStatus.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(30, tc._sut_N._currentStepStatus.Synchron);
+
+            tc._sut_A.SetCurrentStepToErrorState();
+            tc._sut_N.SetCurrentStepToErrorState();
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepInError);
+            Assert.AreEqual(3, tc._plcCycleCounter.Synchron);
+            Assert.IsTrue(tc._done.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(50, tc._sut_A._currentStepStatus.Synchron);
+            Assert.IsFalse(tc._sut_A._sequencerHasError.Synchron);
+
+            Assert.AreEqual(numberOfSteps, tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step " + numberOfSteps.ToString(), tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(50, tc._sut_N._currentStepStatus.Synchron);
+            Assert.IsFalse(tc._sut_N._sequencerHasError.Synchron);
+        }
 
         //[Test, Order(590)]
         //public void T590_PLCSequenceCheckUniquenessStepModeFirstCycle()
