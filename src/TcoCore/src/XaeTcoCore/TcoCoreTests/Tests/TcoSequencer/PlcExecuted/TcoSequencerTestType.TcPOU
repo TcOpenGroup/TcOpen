@@ -317,7 +317,7 @@ METHOD INTERNAL IsAutoRestorable : BOOL
     eTcoSequencerTests.RequestStep:
         MAIN_RequestStep();
     eTcoSequencerTests.CheckStepIdUniqueness, eTcoSequencerTests.RestoreAlreadyCheckedSequence, eTcoSequencerTests.NotUniqueStepId,
-        eTcoSequencerTests.AfterErrorRestore ,eTcoSequencerTests.CheckStepIdUniquenessStepMode:
+        eTcoSequencerTests.AfterErrorRestore ,eTcoSequencerTests.CheckStepIdUniquenessStepMode,eTcoSequencerTests.NotUniqueStepIdInStepMode:
         MAIN_CheckStepIdUniqueness();
     eTcoSequencerTests.ChangeStepIdDuringExecution:
         MAIN_ChangeStepIdDuringExecution();

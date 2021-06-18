@@ -2094,237 +2094,260 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(0, tc._sut_N._previousNumberOfSteps.Synchron);//Check if the number of the previous steps was succesfully cleared
         }
 
-        //[Test, Order(594)]
-        //public void T594_PLCSequenceNotUniqueStepIdInStepModeFirstCycle()
-        //{
-        //    initStepId = 200;
-        //    lastStepId = 500;
+        [Test, Order((int)eTcoSequencerTests.NotUniqueStepIdInStepMode)]
+        public void T594_NotUniqueStepIdInStepMode()
+        {
+            tc.ExecuteProbeRun((int)eTcoSequencerTests.RestoreAlreadyCheckedSequence, () => tc._done.Synchron);
+            tc._done.Synchron = false;
+            tc._arranged.Synchron = false;
 
-        //    tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
-        //    tc._runPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
-        //    tc._runPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-        //    tc._stepID.Synchron = lastStepId;                           //Set StepId of the last step in the PLC instance
-        //    tc._enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
-        //    tc._stepDescription.Synchron = lastStepDescription;         //Set StepDescription of the last step in the PLC instance
-        //    tc._restore.Synchron = false;                                 //Reset sequence restore flag in the PLC testing instance
-        //    tc._runOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
-        //    tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
+            initStepId = 200;
+            tc._currentStepId.Synchron = initStepId;
+            initStepDescription = "---test---init---";
+            tc._currentStepDescription.Synchron = initStepDescription;
+            lastStepId = 500;
+            tc._stepId.Synchron = lastStepId;
+            lastStepDescription = "This is last step of the sequence";
+            tc._stepDescription.Synchron = lastStepDescription;
+            cycleCount = 0;
+            restoreCycleCount_A = 0;
+            restoreCycleCount_N = 0;
+            numberOfSteps = 0;
 
-        //    //During this first sequence run, number of steps should be counting and checking its StepId uniqueness control
-        //    //No Step logic is executed, even if entering or transition conditions are met 
-        //    cycleCount = tc._cycleCount.Synchron;                       //Store the actual PLC cycle counter
-        //    tc._runPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
-        //    running = true;                                             //reset this variable to false
-        //    while (running)
-        //    {
-        //        running = tc._runPLCinstanceOnce.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(cycleCount + 1, tc._cycleCount.Synchron);   //Check if only one PLC cycle was performed, as it was expected    
-        //    Assert.AreNotEqual(0, tc.GetNumberOfStepsInSequence());     //Check if some steps inside PLC sequence were counted
-        //    Assert.AreEqual(tc.GetNumberOfStepsInSequence(),            //Check if number of the stored steps is same as the number of the counted steps
-        //                       tc.GetPreviousNumberOfStepsInSequence());
-        //    Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
-        //                tc._sequencer._currentStepId.Synchron);         //executed, even if entering or transition conditions are met                     
-        //    Assert.AreNotEqual(initStepDescription,
-        //        tc._sequencer._currentStepDescription.Synchron);        //Check if StepDescription change from initStepDescription due to StepId uniqueness control control error. 
-        //    Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if StepDescription change, due to StepId uniqueness control error to the expected error message
-        //            lastStepId.ToString(),
-        //            tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
-        //            lastStepId.ToString(),
-        //            tc.GetTextOfTheMostImportantMessage());
-        //    Assert.AreEqual(true,                                       //Check if sequence returns error 
-        //        tc.SequencerHasError());
-        //    Assert.AreEqual(10,                                         //Check if the sequencer error is of the type UidUniqueness
-        //        tc.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
-        //    Assert.AreEqual(50,                                         //Check if step status is Error
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.CheckStepIdUniquenessStepMode);
+            Assert.IsTrue(tc._arranged.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //[Test, Order(595)]
-        //public void T595_PLCSequenceNotUniqueStepIdInStepModeSecondCycle()
-        //{
-        //    //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
-        //    //has already been performed
-        //    numberOfSteps = tc.GetNumberOfStepsInSequence();            //Get the counted number of steps in sequence
-        //    cycleCount = tc._cycleCount.Synchron;                       //Store the actual PLC cycle counter
-        //    tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
-        //    tc._runOneStep.Synchron = true;                             //This should be false after one PLC cycle run in case of not StepId uniqueness control error
-        //                                                                //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
-        //    tc._runPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
-        //    running = true;                                             //reset this variable to false
-        //    while (running)
-        //    {
-        //        running = tc._runPLCinstanceOnce.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(cycleCount + 1, tc._cycleCount.Synchron);   //Check if only one PLC cycle was performed, as it was expected    
-        //    Assert.AreNotEqual(0, tc.GetNumberOfStepsInSequence());     //Check if some steps inside PLC sequence were counted
-        //    Assert.AreEqual(tc.GetNumberOfStepsInSequence(),            //Check if number of the stored steps is same as the number of the counted steps
-        //                       tc.GetPreviousNumberOfStepsInSequence());
-        //    Assert.AreEqual(true,                                       //Check if sequence returns error 
-        //        tc.SequencerHasError());
-        //    Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
-        //        tc.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
-        //    Assert.AreEqual(true, tc._sequencer._runOneStep.Synchron);  //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
-        //    Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
-        //                tc._sequencer._currentStepId.Synchron);         //executed, even if entering or transition conditions are met                     
-        //    Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if StepDescription change, due to StepId uniqueness control control error to the expected error message
-        //            lastStepId.ToString(),
-        //            tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
-        //            lastStepId.ToString(),
-        //            tc.GetTextOfTheMostImportantMessage());
-        //    Assert.AreEqual(50,                                         //Check if step status is Error
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            //During this first sequence run, number of steps should be counting and checking its StepId uniqueness control
+            //No Step logic is executed, even if entering or transition conditions are met 
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.CheckStepIdUniquenessStepMode);
+            Assert.AreEqual(1, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //[Test, Order(596)]
-        //public void T596_PLCSequenceResetInStepModeAfterNotUniqueStepIdError()
-        //{
-        //    //After Sequence reset, counting the steps so as the checking the StepId uniqueness control has to be performed again
-        //    tc._runPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
-        //    tc._runPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-        //    restoreCycleCount = tc._restoreCycleCount.Synchron;         //Store the actual sequence restore cycle counter
-        //    tc._restore.Synchron = true;                                //Set sequence restore flag in the PLC testing instance. If this value is true, PLC resets the sequencer in the 
-        //    running = true;                                             //PLC instance. Once it is done, PLC reset this variable to false.
-        //    while (running)
-        //    {
-        //        running = tc._restore.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(restoreCycleCount + 1,                      //Check if only one restore of the sequencer was was performed, as it was expected
-        //        tc._restoreCycleCount.Synchron);
-        //    Assert.AreEqual(0, tc.GetNumberOfStepsInSequence());        //Check if the number of the steps was succesfully cleared
-        //    Assert.AreEqual(0, tc.GetPreviousNumberOfStepsInSequence());//Check if the number of the previous steps was succesfully cleared
-        //}
+            Assert.AreNotEqual(0, tc._sut_A._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_A._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
+                        tc._sut_A._currentStepId.Synchron);             //executed, even if entering or transition conditions are met                     
+            Assert.AreNotEqual(initStepDescription,
+                tc._sut_A._currentStepDescription.Synchron);            //Check if StepDescription change from initStepDescription due to StepId uniqueness control control error. 
+            Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if StepDescription change, due to StepId uniqueness control error to the expected error message
+                    lastStepId.ToString(),
+                    tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
+                    lastStepId.ToString(),
+                    tc._sut_A.GetTextOfTheMostImportantMessage());
+            Assert.AreEqual(true,                                       //Check if sequence returns error 
+                tc._sut_A.SequencerHasError());
+            Assert.AreEqual(10,                                         //Check if the sequencer error is of the type UidUniqueness
+                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+            Assert.AreEqual(50,                                         //Check if step status is Error
+                tc._sut_A._currentStepStatus.Synchron);              //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-        //[Test, Order(597)]
-        //public void T597_PLCSequenceAfterErrorResetInStepModeFirstCycle()
-        //{
-        //    initStepId = 800;
-        //    lastStepId = 32765;
+            //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
+            //has already been performed
+            tc._sut_A._runOneStep.Synchron = true;
+            tc._sut_N._runOneStep.Synchron = true;
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.CheckStepIdUniquenessStepMode);
+            Assert.AreEqual(2, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
 
-        //    tc.SetCurrentStep(initStepId, initStepDescription);         //Set the StepId so as the StepDescription to the current step of the sequencer
-        //    tc._runPLCinstanceOnce.Synchron = false;                    //Reset one time calling of the PLC testing instance
-        //    tc._runPLCinstanceCyclicaly.Synchron = false;               //Reset cyclical calling of the PLC testing instance
-        //    tc._stepID.Synchron = lastStepId;                           //Set StepId of the last step in the PLC instance
-        //    tc._enabled.Synchron = true;                                //Set step condition of the last step in the PLC instance to enabled
-        //    tc._stepDescription.Synchron = lastStepDescription;         //Set StepDescription of the last step in the PLC instance
-        //    tc._restore.Synchron = false;                                 //Reset sequence restore flag in the PLC testing instance
-        //    tc._runOneStep.Synchron = false;                            //Reset one step execution flag in the PLC testing instance
-        //    tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
+            Assert.AreNotEqual(0, tc._sut_A._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_A._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(true,                                       //Check if sequence returns error 
+                tc._sut_A.SequencerHasError());
+            Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
+                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+            Assert.AreEqual(true, tc._sut_A._runOneStep.Synchron);  //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
+            Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
+                        tc._sut_A._currentStepId.Synchron);         //executed, even if entering or transition conditions are met                     
+            Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if StepDescription change, due to StepId uniqueness control control error to the expected error message
+                    lastStepId.ToString(),
+                    tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
+                    lastStepId.ToString(),
+                    tc._sut_A.GetTextOfTheMostImportantMessage());
+            Assert.AreEqual(50,                                         //Check if step status is Error
+                tc._sut_A._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-        //    //During this first sequence run, number of steps should be counting and checking its StepId uniqueness control
-        //    //No Step logic is executed, even if entering or transition conditions are met 
-        //    cycleCount = tc._cycleCount.Synchron;                       //Store the actual PLC cycle counter
-        //    tc._runPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
-        //    running = true;                                             //reset this variable to false
-        //    while (running)
-        //    {
-        //        running = tc._runPLCinstanceOnce.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(cycleCount + 1, tc._cycleCount.Synchron);   //Check if only one PLC cycle was performed, as it was expected    
-        //    Assert.AreNotEqual(0, tc.GetNumberOfStepsInSequence());     //Check if some steps inside PLC sequence were counted
-        //    Assert.AreEqual(tc.GetNumberOfStepsInSequence(),            //Check if number of the stored steps is same as the number of the counted steps
-        //                       tc.GetPreviousNumberOfStepsInSequence());
-        //    Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
-        //                tc._sequencer._currentStepId.Synchron);         //executed, even if entering or transition conditions are met                     
-        //    Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control control has not yet been performed,
-        //        tc._sequencer._currentStepDescription.Synchron);        //the step logic is not executed, even if entering or transition conditions are met      
-        //    Assert.AreEqual(false,                                      //Check if sequence error has been reseted
-        //        tc.SequencerHasError());
-        //    Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
-        //        tc.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
-        //}
+            Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_N._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(true,                                       //Check if sequence returns error 
+                tc._sut_N.SequencerHasError());
+            Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
+                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+            Assert.AreEqual(true, tc._sut_N._runOneStep.Synchron);      //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
+            Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
+                        tc._sut_N._currentStepId.Synchron);             //executed, even if entering or transition conditions are met                     
+            Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if StepDescription change, due to StepId uniqueness control control error to the expected error message
+                    lastStepId.ToString(),
+                    tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
+                    lastStepId.ToString(),
+                    tc._sut_N.GetTextOfTheMostImportantMessage());
+            Assert.AreEqual(50,                                         //Check if step status is Error
+                tc._sut_N._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-        //[Test, Order(598)]
-        //public void T598_PLCSequenceAfterErrorResetInStepModeSecondCycle()
-        //{
-        //    //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
-        //    //has already been performed
-        //    numberOfSteps = tc.GetNumberOfStepsInSequence();            //Get the counted number of steps in sequence
-        //    cycleCount = tc._cycleCount.Synchron;                       //Store the actual PLC cycle counter
-        //    tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
-        //    tc._runOneStep.Synchron = true;                             //This should be false after one PLC cycle run in case of not StepId uniqueness control error
-        //                                                                //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
-        //    tc._runPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
-        //    running = true;                                             //reset this variable to false
-        //    while (running)
-        //    {
-        //        running = tc._runPLCinstanceOnce.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(cycleCount + 1, tc._cycleCount.Synchron);   //Check if only one PLC cycle was performed, as it was expected    
-        //    Assert.AreNotEqual(0, tc.GetNumberOfStepsInSequence());     //Check if some steps inside PLC sequence were counted
-        //    Assert.AreEqual(tc.GetNumberOfStepsInSequence(),            //Check if number of the stored steps is same as the number of the counted steps
-        //                       tc.GetPreviousNumberOfStepsInSequence());
-        //    Assert.AreEqual(0,                                          //Check if StepId changes from initStepId to first StepId. As the sequence error has been already reseted and the StepId uniqueness control control has been 
-        //        tc._sequencer._currentStepId.Synchron);                 //already performed again after reset, the step logic is executed.                    
-        //    Assert.AreEqual("(>Step number 0<)",                        //Check if StepDescription changes from initStepDescription to "(>Step number 0<)". As the sequence error has been already reseted and the StepId uniqueness control control has been
-        //        tc._sequencer._currentStepDescription.Synchron);        //already performed again after reset, the step logic is executed. 
-        //    Assert.AreEqual(20,                                         //Check if current step status is ReadyToRun.
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            tc._done.Synchron = false;
+            tc.ExecuteProbeRun((int)eTcoSequencerTests.RestoreAlreadyCheckedSequence, () => tc._done.Synchron);
 
-        //[Test, Order(599)]
-        //public void T599_PLCSequenceAfterErrorResetInStepModeThirdCycle()
-        //{
-        //    //During this third sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
-        //    //has already been performed
-        //    cycleCount = tc._cycleCount.Synchron;                       //Store the actual PLC cycle counter
-        //    tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
-        //    tc._runOneStep.Synchron = true;                             //This should be false after one PLC cycle run in case of not StepId uniqueness control error
-        //                                                                //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
-        //    tc.StepIn();                                                //Triggers StepIn() method
-        //    tc._runPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
-        //    running = true;                                             //reset this variable to false
-        //    while (running)
-        //    {
-        //        running = tc._runPLCinstanceOnce.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(cycleCount + 1, tc._cycleCount.Synchron);   //Check if only one PLC cycle was performed, as it was expected    
-        //    Assert.AreNotEqual(0, tc.GetNumberOfStepsInSequence());     //Check if some steps inside PLC sequence were counted
-        //    Assert.AreEqual(tc.GetNumberOfStepsInSequence(),            //Check if number of the stored steps is same as the number of the counted steps
-        //                       tc.GetPreviousNumberOfStepsInSequence());
-        //    Assert.AreEqual(0,                                          //Check if StepId changes, to first StepId
-        //        tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step number 0",                            //Check if StepId changes to "Step number 0"
-        //        tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(40,                                         //Check if current step status is Done.
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            Assert.AreEqual(0, tc._sut_A._numberOfSteps.Synchron);        //Check if the number of the steps in the sequence was succesfully cleared
+            Assert.AreEqual(0, tc._sut_A._previousNumberOfSteps.Synchron);//Check if the number of the previous steps in the sequence was succesfully cleared
 
-        //[Test, Order(600)]
-        //public void T600_PLCSequenceAfterErrorResetInStepModeFourthCycle()
-        //{
-        //    //During this fourth sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
-        //    //has already been performed
-        //    cycleCount = tc._cycleCount.Synchron;                       //Store the actual PLC cycle counter
-        //    tc._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
-        //    tc._runOneStep.Synchron = true;                             //This should be false after one PLC cycle run in case of not StepId uniqueness control error
-        //                                                                //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
-        //    tc._runPLCinstanceOnce.Synchron = true;                     //Set one time calling of the PLC testing instance. If this value is true, PLC runs one PLC cycle, at the end PLC
-        //    running = true;                                             //reset this variable to false
-        //    while (running)
-        //    {
-        //        running = tc._runPLCinstanceOnce.Synchron;
-        //    }
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(cycleCount + 1, tc._cycleCount.Synchron);   //Check if only one PLC cycle was performed, as it was expected    
-        //    Assert.AreNotEqual(0, tc.GetNumberOfStepsInSequence());     //Check if some steps inside PLC sequence were counted
-        //    Assert.AreEqual(tc.GetNumberOfStepsInSequence(),            //Check if number of the stored steps is same as the number of the counted steps
-        //                       tc.GetPreviousNumberOfStepsInSequence());
-        //    Assert.AreEqual(1,                                          //Check if StepId changes, to 1
-        //        tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("(>Step number 1<)",                        //Check if StepId changes to "Step number 1"
-        //        tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(20,                                         //Check if current step status is Done.
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-        //}
+            Assert.AreEqual(0, tc._sut_N._numberOfSteps.Synchron);        //Check if the number of the steps in the sequence was succesfully cleared
+            Assert.AreEqual(0, tc._sut_N._previousNumberOfSteps.Synchron);//Check if the number of the previous steps in the sequence was succesfully cleared
+        }
+
+        [Test, Order((int)eTcoSequencerTests.AfterErrorResetInStepMode)]
+        public void T597_AfterErrorResetInStepMode()
+        {
+            initStepId = 800;
+            lastStepId = 32765;
+
+            tc._sut_A._stepId.Synchron = lastStepId;
+            tc._sut_A.SetCurrentStep(initStepId, initStepDescription);  //Set the StepId so as the StepDescription to the current step of the sequencer
+            tc._sut_A._enabled.Synchron = true;                         //Set step condition of the last step in the PLC instance to enabled
+            tc._sut_A._stepDescription.Synchron = lastStepDescription;  //Set StepDecription of the last step in the PLC instance
+            tc._sut_A._runOneStep.Synchron = false;                     //Reset one step execution flag in the PLC testing instance
+            tc._sut_A._runAllSteps.Synchron = false;                    //Reset all step execution flag in the PLC testing instance
+
+            tc._sut_N._stepId.Synchron = lastStepId;
+            tc._sut_N.SetCurrentStep(initStepId, initStepDescription);  //Set the StepId so as the StepDescription to the current step of the sequencer
+            tc._sut_N._enabled.Synchron = true;                         //Set step condition of the last step in the PLC instance to enabled
+            tc._sut_N._stepDescription.Synchron = lastStepDescription;  //Set StepDecription of the last step in the PLC instance
+            tc._sut_N._runOneStep.Synchron = false;                     //Reset one step execution flag in the PLC testing instance
+            tc._sut_N._runAllSteps.Synchron = false;                    //Reset all step execution flag in the PLC testing instance
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.AfterErrorResetInStepMode);
+            Assert.IsTrue(tc._arranged.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            //During this first sequence run, number of steps should be counting and checking its StepId uniqueness
+            //No Step logic is executed, even if entering or transition conditions are met 
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.AfterErrorResetInStepMode);
+            Assert.AreEqual(1,tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            Assert.AreNotEqual(0, tc._sut_A._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_A._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
+                        tc._sut_A._currentStepId.Synchron);         //executed, even if entering or transition conditions are met                     
+            Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control control has not yet been performed,
+                tc._sut_A._currentStepDescription.Synchron);        //the step logic is not executed, even if entering or transition conditions are met      
+            Assert.AreEqual(false,                                      //Check if sequence error has been reseted
+                tc._sut_A.SequencerHasError());
+            Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
+                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+
+            Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_N._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
+                        tc._sut_N._currentStepId.Synchron);         //executed, even if entering or transition conditions are met                     
+            Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control control has not yet been performed,
+                tc._sut_N._currentStepDescription.Synchron);        //the step logic is not executed, even if entering or transition conditions are met      
+            Assert.AreEqual(false,                                      //Check if sequence error has been reseted
+                tc._sut_N.SequencerHasError());
+            Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
+                tc._sut_N.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+
+            //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
+            //has already been performed
+
+            tc._sut_A._runOneStep.Synchron = true;                      //This should be false after one PLC cycle run in case of not StepId uniqueness control error
+                                                                        //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
+            tc._sut_N._runOneStep.Synchron = true;                      //This should be false after one PLC cycle run in case of not StepId uniqueness control error
+                                                                        //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.AfterErrorResetInStepMode);
+            Assert.AreEqual(2, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            Assert.AreNotEqual(0, tc._sut_A._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_A._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(0,                                          //Check if StepId changes from initStepId to first StepId. As the sequence error has been already reseted and the StepId uniqueness control control has been 
+                tc._sut_A._currentStepId.Synchron);                     //already performed again after reset, the step logic is executed.                    
+            Assert.AreEqual("(>Step number 0<)",                        //Check if StepDescription changes from initStepDescription to "(>Step number 0<)". As the sequence error has been already reseted and the StepId uniqueness control control has been
+                tc._sut_A._currentStepDescription.Synchron);            //already performed again after reset, the step logic is executed. 
+            Assert.AreEqual(20,                                         //Check if current step status is ReadyToRun.
+                tc._sut_A._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+
+            Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_N._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(0,                                          //Check if StepId changes from initStepId to first StepId. As the sequence error has been already reseted and the StepId uniqueness control control has been 
+                tc._sut_N._currentStepId.Synchron);                     //already performed again after reset, the step logic is executed.                    
+            Assert.AreEqual("(>Step number 0<)",                        //Check if StepDescription changes from initStepDescription to "(>Step number 0<)". As the sequence error has been already reseted and the StepId uniqueness control control has been
+                tc._sut_N._currentStepDescription.Synchron);            //already performed again after reset, the step logic is executed. 
+            Assert.AreEqual(20,                                         //Check if current step status is ReadyToRun.
+                tc._sut_N._currentStepStatus.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+  
+            //During this third sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
+            //has already been performed
+            tc._sut_A._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
+            tc._sut_A._runOneStep.Synchron = true;                             //This should be false after one PLC cycle run in case of not StepId uniqueness control error
+                                                                               //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
+            tc._sut_N._runAllSteps.Synchron = false;                           //Reset all step execution flag in the PLC testing instance
+            tc._sut_N._runOneStep.Synchron = true;                             //This should be false after one PLC cycle run in case of not StepId uniqueness control error
+                                                                               //In case of StepId uniqueness control error occured it stays true, that means no entrance into Step body in the PLC has been performed
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.AfterErrorResetInStepMode);
+            Assert.AreEqual(3, tc._plcCycleCounter.Synchron);
+            Assert.IsFalse(tc._done.Synchron);
+
+            Assert.AreNotEqual(0, tc._sut_A._numberOfSteps.Synchron);       //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,              //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_A._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(0,                                              //Check if StepId changes, to first StepId
+                tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("Step number 0",                                //Check if StepId changes to "Step number 0"
+                tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(40,                                             //Check if current step status is Done.
+                tc._sut_A._currentStepStatus.Synchron);                     //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+
+            Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);       //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,              //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_N._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(0,                                              //Check if StepId changes, to first StepId
+                tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("Step number 0",                                //Check if StepId changes to "Step number 0"
+                tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(40,                                             //Check if current step status is Done.
+                tc._sut_N._currentStepStatus.Synchron);                     //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+
+            //During this fourth sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
+            //has already been performed
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.AfterErrorResetInStepMode);
+            Assert.AreEqual(4, tc._plcCycleCounter.Synchron);
+            Assert.IsTrue(tc._done.Synchron);
+
+
+
+            Assert.AreNotEqual(0, tc._sut_A._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_A._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(1,                                          //Check if StepId changes, to 1
+                tc._sut_A._currentStepId.Synchron);
+            Assert.AreEqual("(>Step number 1<)",                        //Check if StepId changes to "Step number 1"
+                tc._sut_A._currentStepDescription.Synchron);
+            Assert.AreEqual(20,                                         //Check if current step status is Done.
+                tc._sut_A._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+
+            Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
+            Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
+                               tc._sut_N._previousNumberOfSteps.Synchron);
+            Assert.AreEqual(1,                                          //Check if StepId changes, to 1
+                tc._sut_N._currentStepId.Synchron);
+            Assert.AreEqual("(>Step number 1<)",                        //Check if StepId changes to "Step number 1"
+                tc._sut_N._currentStepDescription.Synchron);
+            Assert.AreEqual(20,                                         //Check if current step status is Done.
+                tc._sut_N._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+        }
 
         //[Test, Order(601)]
         //public void T601_PLCSequencePrepareForInvalidMode()
