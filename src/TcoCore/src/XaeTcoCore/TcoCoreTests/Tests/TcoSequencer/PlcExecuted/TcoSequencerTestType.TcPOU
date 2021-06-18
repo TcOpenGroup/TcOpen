@@ -31,6 +31,10 @@ VAR
 	_sequenceRun : ULINT;
 	_reqStep : INT;
     _reqStepNotExists : INT;
+	_initReqStepCycle		:	UINT;
+	
+	_postOpenRequestStepCycle : UINT;
+	_preCloseRequestStepCycle : UINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -223,6 +227,15 @@ METHOD GetPreviousNumberOfStepsInSequence : UINT]]></Declaration>
         <ST><![CDATA[GetPreviousNumberOfStepsInSequence := _previousNumberOfStepsInSequence;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="GetRequestStepCycle" Id="{4d5a7304-be22-0f43-1824-10365a464aee}" FolderPath="_Tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetRequestStepCycle : UINT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetRequestStepCycle := RequestStepCycle;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="GetSequencerErrorId" Id="{ad8194f1-ff71-0961-1f93-fe2fe4164156}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL GetSequencerErrorId : INT
@@ -248,6 +261,23 @@ METHOD INTERNAL HasAutoRestoreEnabled : BOOL
         <ST><![CDATA[HasAutoRestoreEnabled := SUPER^.IsAutoRestoreEnabled;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="InitReqStepCycle" Id="{ba0afa3b-02d8-05b1-1f94-cb4cb35070ef}" FolderPath="_Tests\">
+      <Declaration><![CDATA[PROPERTY InitReqStepCycle : UINT]]></Declaration>
+      <Get Name="Get" Id="{b2c3c996-b02d-0932-011c-b734f124c551}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_initReqStepCycle := RequestStepCycle;
+InitReqStepCycle:=_initReqStepCycle;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{4ad57638-577d-035c-09c8-87bea651c375}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_initReqStepCycle:=InitReqStepCycle;
+RequestStepCycle := _initReqStepCycle;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="IsAutoRestorable" Id="{755204b0-6ac7-0749-0ee2-4831cf006a59}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL IsAutoRestorable : BOOL
@@ -298,6 +328,8 @@ METHOD INTERNAL IsAutoRestorable : BOOL
         MAIN_RequestStepToNotExistingStep();
     eTcoSequencerTests.RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed:
         MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed();
+    eTcoSequencerTests.SetStepMode:
+        MAIN_SetStepMode();
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -9959,6 +9991,44 @@ IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="MAIN_SetStepMode" Id="{d576efc9-c913-07c2-0f81-b007e9cd1adf}" FolderPath="_Tests\MAINS\">
+      <Declaration><![CDATA[METHOD MAIN_SetStepMode 
+VAR 
+	i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    IF Step(0, TRUE, 'Initial step') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
+
+    FOR i := 1 TO _totalStepNumber - 1 DO
+        Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF
+
+IF _sequenceRun =4 THEN
+    IF Step(0, TRUE, 'Initial step') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
+
+    FOR i := 1 TO _totalStepNumber - 1 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+	        StepCompleteWhen(TRUE);
+		END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="MAIN_UncommentPartOfRunningSequencer" Id="{a9013512-a01a-0b7c-0e2d-57715e51a07d}" FolderPath="_Tests\MAINS\">
       <Declaration><![CDATA[METHOD MAIN_UncommentPartOfRunningSequencer 
 VAR 
@@ -10089,6 +10159,36 @@ METHOD PROTECTED OnStepCompleted]]></Declaration>
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="PostOpenRequestStepCycle" Id="{7b8f04ee-820a-0719-0199-bb6e9089b7df}">
+      <Declaration><![CDATA[PROPERTY PostOpenRequestStepCycle : UINT]]></Declaration>
+      <Get Name="Get" Id="{a321aee8-8b16-0f83-189f-821d34d2e961}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PostOpenRequestStepCycle := _postOpenRequestStepCycle;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{febb691e-5ae2-0c85-20f7-b608221c5a6a}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_postOpenRequestStepCycle := PostOpenRequestStepCycle;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="PreCloseRequestStepCycle" Id="{f57d8156-cb77-0043-2d3a-081ce498e6b3}" FolderPath="_Tests\">
+      <Declaration><![CDATA[PROPERTY PreCloseRequestStepCycle : UINT]]></Declaration>
+      <Get Name="Get" Id="{60745cad-3d46-07d2-3e05-44bb7167dcb9}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PreCloseRequestStepCycle := _preCloseRequestStepCycle;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{df019169-25c9-08a2-2622-abc5bd2dba53}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_preCloseRequestStepCycle := PreCloseRequestStepCycle;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="ReqStep" Id="{78240d3c-e450-0617-3646-a8723c629e53}" FolderPath="_Tests\">
       <Declaration><![CDATA[PROPERTY ReqStep : INT]]></Declaration>
       <Get Name="Get" Id="{c1898996-4e34-083b-327b-4f6e9a318ff3}">

@@ -1599,163 +1599,163 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
 
-        //[Test, Order(750)]
-        //public void T750_PrepareForDisabledStep()
-        //{
-        //    numberOfSteps = 10;
-        //    tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
-        //    tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
-        //                                                                //After running this method, sequencer should stay in StepId 1, with StepDescription "Step 1"
-        //    tc.SequencerSingleCycleRun(() =>                            //with step status Running
-        //    {
-        //        if (tc.Step(0, true, "Initial step"))
-        //        {
-        //            tc.StepCompleteWhen(true);
-        //        }
-        //        for (short i = 1; i < numberOfSteps; i++)
-        //        {
-        //            tc.Step((short)i, true, "Step " + i.ToString());
-        //        }
-        //        if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
-        //        {
-        //            tc.SequenceComplete();
-        //        }
-        //    });
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(1,                                          //Check if StepId changes to one 
-        //        tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step 1",                                   //Check if StepDescription changes to "Step 1" 
-        //        tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(30,                                         //Check if current step status changes to Running
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
-        //    Assert.AreEqual(numberOfSteps,                              //Check if number of the counted steps is equal to expected value
-        //        tc.GetNumberOfStepsInSequence());
-        //}
+        [Test, Order(750)]
+        public void T750_PrepareForDisabledStep()
+        {
+            numberOfSteps = 10;
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness control is performed on next sequence execution
+                                                                        //After running this method, sequencer should stay in StepId 1, with StepDescription "Step 1"
+            tc.SequencerSingleCycleRun(() =>                            //with step status Running
+            {
+                if (tc.Step(0, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+                for (short i = 1; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                {
+                    tc.SequenceComplete();
+                }
+            });
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(1,                                          //Check if StepId changes to one 
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 1",                                   //Check if StepDescription changes to "Step 1" 
+                tc._sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step status changes to Running
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+            Assert.AreEqual(numberOfSteps,                              //Check if number of the counted steps is equal to expected value
+                tc.GetNumberOfStepsInSequence());
+        }
 
-        //[Test, Order(751)]
-        //public void T751_DisableStepEnabledAndActiveInPreviousPLCcycle()
-        //{
-        //    //After running this method, sequencer should change to StepId 2, with StepDescription "Step 2"
-        //    tc.SequencerSingleCycleRun(() =>                            //with step status Running, as previously runnig Step 1 has changed to disabled
-        //    {
-        //        if (tc.Step(0, true, "Initial step"))
-        //        {
-        //            tc.StepCompleteWhen(true);
-        //        }
-        //        tc.Step(1, false, "Initial step");
-        //        tc.UpdateCurrentStepDetails();
-        //        Assert.AreEqual(10,                                     //Check if current step status changes to Disabled
-        //            tc._sequencer._currentStepStatus.Synchron);         //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
-        //        for (short i = 2; i < numberOfSteps; i++)
-        //        {
-        //            tc.Step((short)i, true, "Step " + i.ToString());
-        //        }
-        //        if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
-        //        {
-        //            tc.SequenceComplete();
-        //        }
-        //    });
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(2,                                          //Check if StepId changes to two 
-        //        tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step 2",                                   //Check if StepDescription changes to "Step 2" 
-        //        tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(30,                                         //Check if current step status changes to Running
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
-        //}
+        [Test, Order(751)]
+        public void T751_DisableStepEnabledAndActiveInPreviousPLCcycle()
+        {
+            //After running this method, sequencer should change to StepId 2, with StepDescription "Step 2"
+            tc.SequencerSingleCycleRun(() =>                            //with step status Running, as previously runnig Step 1 has changed to disabled
+            {
+                if (tc.Step(0, true, "Initial step"))
+                {
+                    tc.StepCompleteWhen(true);
+                }
+                tc.Step(1, false, "Initial step");
+                tc.UpdateCurrentStepDetails();
+                Assert.AreEqual(10,                                     //Check if current step status changes to Disabled
+                    tc._sequencer._currentStepStatus.Synchron);         //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+                for (short i = 2; i < numberOfSteps; i++)
+                {
+                    tc.Step((short)i, true, "Step " + i.ToString());
+                }
+                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                {
+                    tc.SequenceComplete();
+                }
+            });
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(2,                                          //Check if StepId changes to two 
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 2",                                   //Check if StepDescription changes to "Step 2" 
+                tc._sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step status changes to Running
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+        }
 
-        //[Test, Order(760)]
-        //public void T760_RequestStepCallingCyclicallyFirstCycle()
-        //{
-        //    initCycle = 100;
-        //    cycle = 0;
-        //    numberOfSteps = 20;
-        //    tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
-        //    tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness is performed on next sequence execution
-        //    tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
-        //    cycle = tc.SetRequestStepCycle(initCycle);                  //Set RequestStepCycle value to the PLC instance and store its value
+        [Test, Order(760)]
+        public void T760_RequestStepCallingCyclicallyFirstCycle()
+        {
+            initCycle = 100;
+            cycle = 0;
+            numberOfSteps = 20;
+            tc.SingleCycleRun(() => tc.Restore());                      //Restore sequencer to its initial state, reset all step counters, timers and all additional values
+            tc.SetSequenceAsChecked();                                  //Set sequence as checked, so no StepId uniqueness is performed on next sequence execution
+            tc.SetNumberOfSteps(numberOfSteps);                         //Set numberOfSteps to the PLC instance
+            cycle = tc.SetRequestStepCycle(initCycle);                  //Set RequestStepCycle value to the PLC instance and store its value
 
-        //    Assert.AreEqual(initCycle, cycle);                          //Check it the RequestStepCycle value was succesfully written
+            Assert.AreEqual(initCycle, cycle);                          //Check it the RequestStepCycle value was succesfully written
 
-        //    tc.SequencerSingleCycleRun(() =>
-        //    {
-        //        Assert.AreEqual(0, tc.GetRequestStepCycle());           //RequestStepCycle should be zero at this moment, as Open() method has been called, and
-        //        if (tc.Step(0, true, "Initial step"))                   //no active RequestStep() is "waiting in the queue"
-        //        {
-        //            tc.RequestStep(10);                                 //New RequestStep() method call. After next Open() method call RequestStepCycle value
-        //        }                                                       //should be incremented
-        //    });
-        //}
+            tc.SequencerSingleCycleRun(() =>
+            {
+                Assert.AreEqual(0, tc.GetRequestStepCycle());           //RequestStepCycle should be zero at this moment, as Open() method has been called, and
+                if (tc.Step(0, true, "Initial step"))                   //no active RequestStep() is "waiting in the queue"
+                {
+                    tc.RequestStep(10);                                 //New RequestStep() method call. After next Open() method call RequestStepCycle value
+                }                                                       //should be incremented
+            });
+        }
 
-        //[Test, Order(761)]
-        //public void T761_RequestStepCallingCyclicallySecondCycle()
-        //{
-        //    cycle = 0;
-        //    //After running this method, sequencer should change to StepId 10, with StepDescription "Step 10"
-        //    tc.SequencerSingleCycleRun(() =>                            //with step status Running, as Step 10 was requested by RequestStep() method in the previous
-        //    {                                                           //PLC cycle
-        //        Assert.AreEqual(1, tc.GetRequestStepCycle());           //RequestStepCycle should be one at this moment, as OpenSequence() method has been called, and
-        //        tc.Step(0, true, "Step 0");                             //RequestStep() method has been called in the previous PLC cycle
-        //        tc.Step(20, true, "Step 20");
-        //        if (tc.Step(10, true, "Step 10"))
-        //        {
-        //            cycle++;
-        //        }
-        //    });
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(1, cycle);                                  //Check if step logic was executed, if not cycle stays at value zero.
-        //    Assert.AreEqual(0, tc.GetRequestStepCycle());               //RequestStepCycle should be zero at this moment, as requested step has been already started  
-        //    Assert.AreEqual(10,                                         //Check if StepId changes to two 
-        //        tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step 10",                                  //Check if StepDescription changes to "Step 2" 
-        //        tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(30,                                         //Check if current step status changes to Running
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
-        //}
+        [Test, Order(761)]
+        public void T761_RequestStepCallingCyclicallySecondCycle()
+        {
+            cycle = 0;
+            //After running this method, sequencer should change to StepId 10, with StepDescription "Step 10"
+            tc.SequencerSingleCycleRun(() =>                            //with step status Running, as Step 10 was requested by RequestStep() method in the previous
+            {                                                           //PLC cycle
+                Assert.AreEqual(1, tc.GetRequestStepCycle());           //RequestStepCycle should be one at this moment, as OpenSequence() method has been called, and
+                tc.Step(0, true, "Step 0");                             //RequestStep() method has been called in the previous PLC cycle
+                tc.Step(20, true, "Step 20");
+                if (tc.Step(10, true, "Step 10"))
+                {
+                    cycle++;
+                }
+            });
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(1, cycle);                                  //Check if step logic was executed, if not cycle stays at value zero.
+            Assert.AreEqual(0, tc.GetRequestStepCycle());               //RequestStepCycle should be zero at this moment, as requested step has been already started  
+            Assert.AreEqual(10,                                         //Check if StepId changes to two 
+                tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 10",                                  //Check if StepDescription changes to "Step 2" 
+                tc._sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(30,                                         //Check if current step status changes to Running
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+        }
 
-        //[Test, Order(762)]
-        //public void T762_RequestStepCallingCyclicallyNext20Cycle()
-        //{
-        //    cycle = tc.SetRequestStepCycle(initCycle);                 //Set RequestStepCycle value to the PLC instance and store its value
-        //    Assert.AreEqual(initCycle, cycle);                         //Check it the RequestStepCycle value was succesfully written
-        //    cycle = 0;
-        //    tc.SequencerRunUntilEndConditionIsMet(action: () =>         //Step 10 is active from the previous PLC cycle, so at first call of this method Step 10 is executed
-        //    {                                                           //and new RequestStep() to step 20 is requested. At second call and all next calls Step 20 is executed 
-        //                                                                //and new RequestStep() to step 20 is requested.
-        //        if (cycle == 0)                                         //First call
-        //        {
-        //            Assert.AreEqual(0, tc.GetRequestStepCycle());       //RequestStepCycle should be zero at this moment, as Open() method has been called, and
-        //        }                                                       //no active RequestStep() is "waiting in the queue"
-        //        else                                                    //All the others call
-        //        {
-        //            Assert.AreEqual(1, tc.GetRequestStepCycle());       //RequestStepCycle should be one at this moment, as Open() method has been called, and
-        //        }                                                       //one active RequestStep() to the Step 20 is "waiting in the queue"
-        //                                                                //This does not produce error, as the previous StepId of the previously requested step (20) is same as the 
-        //                                                                //StepId of the newly requested StepId
-        //        tc.Step(0, true, "Step 0");
-        //        if (tc.Step(20, true, "Step 20"))
-        //        {
-        //            cycle++;
-        //            tc.RequestStep(20);
-        //        }
-        //        if (tc.Step(10, true, "Step 10"))
-        //        {
-        //            cycle++;
-        //            tc.RequestStep(20);
-        //        }
-        //        Assert.AreEqual(0, tc.GetRequestStepCycle());           //RequestStepCycle should be zero at this moment, previous RequestStep() method has been completed
-        //                                                                //new RequestStep() method has been triggered again, but OpenSequence() method has not yet been called again.
-        //    }, endCondition: () => cycle > 21);
-        //    tc.UpdateCurrentStepDetails();
-        //    Assert.AreEqual(0, tc.GetRequestStepCycle());               //RequestStepCycle should be zero at this moment, previous RequestStep() method has been completed               
-        //                                                                //new RequestStep() method has been triggered again, but OpenSequence() method has not yet been called again.
-        //    Assert.AreEqual(20,                                         //Check if StepId changes to twenty 
-        //       tc._sequencer._currentStepId.Synchron);
-        //    Assert.AreEqual("Step 20",                                  //Check if StepDescription changes to "Step 20" 
-        //        tc._sequencer._currentStepDescription.Synchron);
-        //    Assert.AreEqual(40,                                         //Check if current step status changes to Running
-        //        tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
-        //}
+        [Test, Order(762)]
+        public void T762_RequestStepCallingCyclicallyNext20Cycle()
+        {
+            cycle = tc.SetRequestStepCycle(initCycle);                 //Set RequestStepCycle value to the PLC instance and store its value
+            Assert.AreEqual(initCycle, cycle);                         //Check it the RequestStepCycle value was succesfully written
+            cycle = 0;
+            tc.SequencerRunUntilEndConditionIsMet(action: () =>         //Step 10 is active from the previous PLC cycle, so at first call of this method Step 10 is executed
+            {                                                           //and new RequestStep() to step 20 is requested. At second call and all next calls Step 20 is executed 
+                                                                        //and new RequestStep() to step 20 is requested.
+                if (cycle == 0)                                         //First call
+                {
+                    Assert.AreEqual(0, tc.GetRequestStepCycle());       //RequestStepCycle should be zero at this moment, as Open() method has been called, and
+                }                                                       //no active RequestStep() is "waiting in the queue"
+                else                                                    //All the others call
+                {
+                    Assert.AreEqual(1, tc.GetRequestStepCycle());       //RequestStepCycle should be one at this moment, as Open() method has been called, and
+                }                                                       //one active RequestStep() to the Step 20 is "waiting in the queue"
+                                                                        //This does not produce error, as the previous StepId of the previously requested step (20) is same as the 
+                                                                        //StepId of the newly requested StepId
+                tc.Step(0, true, "Step 0");
+                if (tc.Step(20, true, "Step 20"))
+                {
+                    cycle++;
+                    tc.RequestStep(20);
+                }
+                if (tc.Step(10, true, "Step 10"))
+                {
+                    cycle++;
+                    tc.RequestStep(20);
+                }
+                Assert.AreEqual(0, tc.GetRequestStepCycle());           //RequestStepCycle should be zero at this moment, previous RequestStep() method has been completed
+                                                                        //new RequestStep() method has been triggered again, but OpenSequence() method has not yet been called again.
+            }, endCondition: () => cycle > 21);
+            tc.UpdateCurrentStepDetails();
+            Assert.AreEqual(0, tc.GetRequestStepCycle());               //RequestStepCycle should be zero at this moment, previous RequestStep() method has been completed               
+                                                                        //new RequestStep() method has been triggered again, but OpenSequence() method has not yet been called again.
+            Assert.AreEqual(20,                                         //Check if StepId changes to twenty 
+               tc._sequencer._currentStepId.Synchron);
+            Assert.AreEqual("Step 20",                                  //Check if StepDescription changes to "Step 20" 
+                tc._sequencer._currentStepDescription.Synchron);
+            Assert.AreEqual(40,                                         //Check if current step status changes to Running
+                tc._sequencer._currentStepStatus.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
+        }
 
         //[Test, Order(770)]
         //public void T770_SetStepMode()
