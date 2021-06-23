@@ -20,6 +20,11 @@
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="_meta\TcoDrivesBeckhoff.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\TcoDrivesBeckhoff.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
