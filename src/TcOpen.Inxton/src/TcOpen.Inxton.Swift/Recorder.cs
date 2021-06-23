@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace TcOpen.Inxton.Swift
 
         public Recorder(IVortexObject vortexObject)
         {
-            _recordedObject = vortexObject;
+            _recordedObject = vortexObject;            
             Tasks = _recordedObject.GetDescendants<IsTask>();
 
             foreach (var task in Tasks)
@@ -27,7 +28,7 @@ namespace TcOpen.Inxton.Swift
 
         readonly Sequence sequence = new Sequence();
         public Sequence Sequence => sequence;
-
+        
         public delegate void RecordAddedDelegate();
 
         public event RecordAddedDelegate OnRecordAdded;
@@ -40,8 +41,15 @@ namespace TcOpen.Inxton.Swift
         }
 
         public string EmitCode()
-        {            
+        {                        
             return Sequence.EmitCode(new StringBuilder()).ToString();
+        }
+
+        public void SaveSequence(string outputDirectory, string blockName)
+        {
+            var outputFile = Path.Combine(outputDirectory, $"{blockName}.TcPOU");
+            var sequenceBlock = TcAdapter.TcProject.PlcBlockHelpers.CreateSequencerPlcBlock(blockName, this.EmitCode());
+            TcAdapter.TcProject.PlcBlockHelpers.EmitPlcBlockFile(outputFile, sequenceBlock);
         }
 
         public void Dispose()

@@ -6,16 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vortex.Connector;
+using System.IO;
+using System.Reflection;
 
 namespace TcOpen.Inxton.Swift.Tests
 {
     [TestFixture()]
     public class RecorderTests
     {
+
+        private string outputFiles;
+
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            var assemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            outputFiles = Path.GetFullPath(assemblyFile.DirectoryName + "..\\..\\..\\..\\output");
+        }
+
         [Test()]
         public void RecorderTest()
-        {           
-            var actual = new Recorder(new TcoCoreTests.fbPiston(new MockRootObject(), string.Empty, string.Empty));            
+        {
+            var actual = new Recorder(new TcoCoreTests.fbPiston(new MockRootObject(), string.Empty, string.Empty));
             Assert.AreEqual(4, actual.Tasks.Count());
         }
 
@@ -100,12 +112,49 @@ IF Step(60,TRUE,'-')
 END_IF;
 ".Replace("\n", "").Replace("\r", "");
                 #endregion
-                        
+
                 Assert.AreEqual(expected, actual);
-            }            
+            }
+        }
+
+        [Test()]
+        public void SaveSequenceTest()
+        {
+            var recorderObject = new TcoCoreTests.fbPiston(new MockRootObject(), string.Empty, string.Empty);
+            var outputFile = Path.Combine(outputFiles, "fbPiston.TcPOU");
+            using (var recorder = new Recorder(recorderObject))
+            {
+                recorderObject._moveHomeTask._enabled.Synchron = true;
+                recorderObject._moveHomeTask._isServiceable.Synchron = true;
+                recorderObject._moveHomeTask.Execute(null);
+
+                recorderObject._moveWorkTask._enabled.Synchron = true;
+                recorderObject._moveWorkTask._isServiceable.Synchron = true;
+                recorderObject._moveWorkTask.Execute(null);
+
+                recorderObject._moveHomeToggleTask._enabled.Synchron = true;
+                recorderObject._moveHomeToggleTask._isServiceable.Synchron = true;
+                recorderObject._moveHomeToggleTask.Execute(null);
+
+                recorderObject._moveHomeToggleTask._enabled.Synchron = true;
+                recorderObject._moveHomeToggleTask._isServiceable.Synchron = true;
+                recorderObject._moveHomeToggleTask.Execute(null);
+
+                recorderObject._moveHomeMomentaryTask._enabled.Synchron = true;
+                recorderObject._moveHomeMomentaryTask._isServiceable.Synchron = true;
+                recorderObject._moveHomeMomentaryTask.Start();
+                recorderObject._moveHomeMomentaryTask.Stop();
+
+
+
+
+                recorder.SaveSequence(outputFiles, "fbPiston");
+
+                Assert.IsTrue(File.Exists(outputFile));
+            }
         }
     }
 
 
-    
+
 }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Swift.TcAdapter.TcProject
 {
-    public class PlcBlockFactory
-    {
-        const string EMPTY_CODE_SNIPPET = "![CDATA[]]";
-
+    public class PlcBlockHelpers
+    {        
         public static TcPlcObject CreateSequencerPlcBlock(string blockName, string mainImplementation)
         {          
             var plcObject = new TcPlcObject()

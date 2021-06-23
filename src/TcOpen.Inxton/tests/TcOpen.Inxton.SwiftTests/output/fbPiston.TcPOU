@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="fbPiston" Id="{7e592838-5286-4e40-aba5-58c51ff87b0f}" SpecialFunc="None">
+    <Declaration>FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoSequencer</Declaration>
+    <Implementation>
+      <ST />
+    </Implementation>
+    <Method Name="Main" Id="{8799706e-0a73-4966-a807-b2863f9aaaaf}">
+      <Declaration>METHOD PROTECTED Main : BOOL</Declaration>
+      <Implementation>
+        <ST>
+
+IF Step(10,
+TRUE,
+'_moveHomeTask') THEN
+//-------------------------------------------------------
+	IF(_moveHomeTask.Invoke().Done)THEN
+		StepCompleteWhen(TRUE);
+	END_IF;
+//-------------------------------------------------------
+END_IF;
+
+IF Step(20,
+TRUE,
+'_moveWorkTask') THEN
+//-------------------------------------------------------
+	IF(_moveWorkTask.Invoke().Done)THEN
+		StepCompleteWhen(TRUE);
+	END_IF;
+//-------------------------------------------------------
+END_IF;
+
+IF Step(30,
+TRUE,
+'_moveHomeToggleTask') THEN
+//-------------------------------------------------------
+	IF(_moveHomeToggleTask.Toggle())THEN
+		StepCompleteWhen(TRUE);
+	END_IF;
+//-------------------------------------------------------
+END_IF;
+
+IF Step(40,
+TRUE,
+'_moveHomeToggleTask') THEN
+//-------------------------------------------------------
+	IF(_moveHomeToggleTask.Toggle())THEN
+		StepCompleteWhen(TRUE);
+	END_IF;
+//-------------------------------------------------------
+END_IF;
+
+IF Step(50,
+TRUE,
+'_moveHomeMomentaryTask') THEN
+//-------------------------------------------------------
+	IF(_moveHomeMomentaryTask.On())THEN
+		StepCompleteWhen(TRUE);
+	END_IF;
+//-------------------------------------------------------
+END_IF;
+
+IF Step(60,
+TRUE,
+'_moveHomeMomentaryTask') THEN
+//-------------------------------------------------------
+	IF(_moveHomeMomentaryTask.Off())THEN
+		StepCompleteWhen(TRUE);
+	END_IF;
+//-------------------------------------------------------
+END_IF;</ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

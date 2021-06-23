@@ -27,7 +27,7 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
         {
             var blockName = "my_sequencer";
             var mainMethodImplementation = "IF TRUE THEN; END_IF;";
-            var actual = PlcBlockFactory.CreateSequencerPlcBlock(blockName, mainMethodImplementation);
+            var actual = PlcBlockHelpers.CreateSequencerPlcBlock(blockName, mainMethodImplementation);
 
             Assert.AreEqual($"FUNCTION_BLOCK {blockName} EXTENDS TcoCore.TcoSequencer", actual.POU.Declaration);
             Assert.AreEqual($"{mainMethodImplementation}", 
@@ -42,7 +42,7 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
 
             var blockName = "my_sequencer";
             var mainMethodImplementation = "IF TRUE THEN; END_IF;";
-            var block = PlcBlockFactory.CreateSequencerPlcBlock(blockName, mainMethodImplementation);
+            var block = PlcBlockHelpers.CreateSequencerPlcBlock(blockName, mainMethodImplementation);
             var outputFile = Path.Combine(outputFiles, $"{blockName}.TcPOU");
             if (File.Exists(outputFile))
             {
@@ -51,7 +51,7 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
 
             Assert.IsFalse(File.Exists(outputFile));
 
-            PlcBlockFactory.EmitPlcBlockFile(outputFile, block);
+            PlcBlockHelpers.EmitPlcBlockFile(outputFile, block);
 
             Assert.IsTrue(File.Exists(outputFile));
         }
