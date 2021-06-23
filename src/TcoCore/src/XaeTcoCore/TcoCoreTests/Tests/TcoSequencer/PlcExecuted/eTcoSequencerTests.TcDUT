@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoSequencerTests" Id="{86900338-736d-0318-0242-d420a2213c90}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoSequencerTests :
+(
+    none := -1,
+    CallSequencerBodiesOnly := 100,
+    RestoreSequencers,
+    NumberOfStepsCount := 500,
+    ExecutionInOnePLCcycle := 501,
+    OnStepCompleted := 502,
+    OnSequenceCompleted := 503,
+    RestoreChildBetweenSteps := 504,
+    OnStateChangeWithRestoreCallInside := 505,
+    MinStepId := 506,
+    MaxStepId := 507,
+    RequestStepToFirstStepWithStepId0 := 508,
+    RequestStep := 509,
+    CheckStepIdUniqueness := 510,
+    RestoreAlreadyCheckedSequence := 512,
+    NotUniqueStepId := 513,
+    AfterErrorRestore := 516,
+    ChangeStepIdDuringExecution := 520,
+    CommentOutPartOfRunningSequencer := 524,
+    UncommentPartOfRunningSequencer := 526,
+    OpenCloseSequence := 530,
+    RequestStepFromLowerToHigher := 541,
+    RequestStepFromHigherToLower := 542,
+    RequestStepToNotExistingStep := 544,
+    RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed := 547,
+    DisableStepEnabledAndActiveInPreviousPLCcycle := 551,
+    RequestStepCallingCyclically := 560,
+    SetStepMode := 570,
+    StepMode := 580,
+    InvalidMode := 582,
+    StepInError := 583,
+    CheckStepIdUniquenessStepMode := 590,
+    NotUniqueStepIdInStepMode := 594,
+    AfterErrorResetInStepMode := 597,
+    InvalidModeDetailed := 602,
+    StepInErrorDetailed := 604,
+    StepModeStepIn := 611,
+    StepModeChangeStepIdDuringExecution := 612,
+    StepModeChangeStepOrder := 615,
+    StepModeCommentOutPartOfRunningSequencer := 618,
+    StepModeUncommentPartOfRunningSequencer := 621,
+    StepModeRequestStepFromLowerToHigher := 631,
+    StepModeRequestStepFromHigherToLower := 633,
+    StepModeRequestStepToNotExistingStep := 635,
+    StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed := 640,
+    StepModeDisabledStep := 641,
+    StepModeStepForwardBackward := 670,
+    StepModeStepInDetailed := 681,
+    SwitchStepModeOnDuringStepExecution := 691,
+    StepModeStepForwardFromRunningStep := 693,
+    StepModeStepBackwardFromRunningStep := 695,
+	SwitchStepModeStepOffFromReadyToRun := 696,
+	SwitchStepModeStepOnFromRunning := 697,
+	SwitchStepModeStepOffFromRunning := 698,
+    OnStateChangeWhenChangingModes := 699
+);
+END_TYPE														]]></Declaration>
+  </DUT>
+</TcPlcObject>
