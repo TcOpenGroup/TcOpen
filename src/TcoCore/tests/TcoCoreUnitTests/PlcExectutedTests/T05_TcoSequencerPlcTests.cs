@@ -629,11 +629,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_A.GetTextOfTheMostImportantMessage());
+                    tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type StepIdHasBeenChanged
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -647,11 +647,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_N.GetTextOfTheMostImportantMessage());
+                    tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type StepIdHasBeenChanged
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -679,9 +679,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                                tc._sut_N._previousNumberOfSteps.Synchron);
 
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(true, tc._sut_A._runOneStep.Synchron);      //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
             Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control has not yet been performed, the step logic is not 
                         tc._sut_A._currentStep.ID.Synchron);             //executed, even if entering or transition conditions are met                     
@@ -691,16 +691,16 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_A.GetTextOfTheMostImportantMessage());
+                    tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
             Assert.GreaterOrEqual(onSequencerErrorCount_A + 10,         //Check if OnSequencerErrorCount has been incremented by 10-NotUniqueStepId
                 tc._sut_A._onSequencerErrorCount.Synchron);
 
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(true, tc._sut_A._runOneStep.Synchron);      //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
             Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control has not yet been performed, the step logic is not 
                         tc._sut_A._currentStep.ID.Synchron);             //executed, even if entering or transition conditions are met                     
@@ -710,7 +710,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_N.GetTextOfTheMostImportantMessage());
+                    tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
             Assert.GreaterOrEqual(onSequencerErrorCount_N + 10,         //Check if OnSequencerErrorCount has been incremented by 10-NotUniqueStepId
@@ -763,9 +763,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control has not yet been performed,
                 tc._sut_A._currentStep.Description.Synchron);            //the step logic is not executed, even if entering or transition conditions are met      
             Assert.AreEqual(false,                                      //Check if sequence error has been reseted
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
 
             Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);   //Check if some steps inside PLC sequence were counted
             Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,          //Check if number of the stored steps is same as the number of the counted steps
@@ -775,9 +775,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control has not yet been performed,
                 tc._sut_N._currentStep.Description.Synchron);            //the step logic is not executed, even if entering or transition conditions are met      
             Assert.AreEqual(false,                                      //Check if sequence error has been reseted
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
 
             //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness
             //has already been performed
@@ -929,11 +929,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 2=>3",
                 tc._sut_A._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 2" to the expected error message
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 2=>3",
-                tc._sut_A.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_A._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(20,                                         //Check if the sequencer error is of the type StepIdNumberChangedDuringExecution
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -942,11 +942,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 2=>3",
                 tc._sut_N._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 2" to the expected error message
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 2=>3",
-                tc._sut_N.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_N._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(20,                                         //Check if the sequencer error is of the type StepIdNumberChangedDuringExecution
-                tc._sut_N.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
@@ -998,11 +998,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
                 tc._sut_A._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
-                tc._sut_A.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_A._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -1011,11 +1011,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
                 tc._sut_N._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
-                tc._sut_N.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_N._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -1084,11 +1084,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
                 tc._sut_A._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
-                tc._sut_A.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_A._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -1097,11 +1097,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
                 tc._sut_N._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
-                tc._sut_N.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_N._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
@@ -1438,11 +1438,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual("REQUESTED STEP_ID: " +                     //Check if messenger returns the expected error message
                 reqStepNotExists.ToString() + " DOES NOT EXIST",
-                tc._sut_A.GetTextOfTheMostImportantMessage());
+                tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(50,                                         //Check if the sequencer error is of the type StepWithRequestedIdDoesNotExists
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -1453,11 +1453,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual("REQUESTED STEP_ID: " +                     //Check if messenger returns the expected error message
                 reqStepNotExists.ToString() + " DOES NOT EXIST",
-                tc._sut_N.GetTextOfTheMostImportantMessage());
+                tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(50,                                         //Check if the sequencer error is of the type StepWithRequestedIdDoesNotExists
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -1501,11 +1501,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 (reqStep + 10).ToString() +
                 " HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: " +
                  reqStep.ToString() + " HAS NOT BEEN YET PERFORMED!",
-                 tc._sut_A.GetTextOfTheMostImportantMessage());
+                 tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(60,                                         //Check if the sequencer error is of the type SeveralRequestStep
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -1518,11 +1518,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 (reqStep + 10).ToString() +
                 " HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: " +
                  reqStep.ToString() + " HAS NOT BEEN YET PERFORMED!",
-                 tc._sut_N.GetTextOfTheMostImportantMessage());
+                 tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(60,                                         //Check if the sequencer error is of the type SeveralRequestStep
-                tc._sut_N.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
@@ -2162,11 +2162,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_A.GetTextOfTheMostImportantMessage());
+                    tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type UidUniqueness
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);              //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
@@ -2182,9 +2182,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(tc._sut_A._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
                                tc._sut_A._previousNumberOfSteps.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(true, tc._sut_A._runOneStep.Synchron);  //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
             Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
                         tc._sut_A._currentStep.ID.Synchron);         //executed, even if entering or transition conditions are met                     
@@ -2193,7 +2193,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_A.GetTextOfTheMostImportantMessage());
+                    tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
@@ -2201,9 +2201,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
                                tc._sut_N._previousNumberOfSteps.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(10,                                         //Check if the sequencer error is of the type NotUniqueStepId
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(true, tc._sut_N._runOneStep.Synchron);      //Check if step logic was not entered due to sequence error, if yes _RunOneStep is to be reseted to false         
             Assert.AreEqual(initStepId,                                 //Check if StepId does not change. As the StepId uniqueness control control has not yet been performed, the step logic is not 
                         tc._sut_N._currentStep.ID.Synchron);             //executed, even if entering or transition conditions are met                     
@@ -2212,7 +2212,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                     tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual("ERROR NOT UNIQUE STEP_ID " +               //Check if messenger returns the expected error message
                     lastStepId.ToString(),
-                    tc._sut_N.GetTextOfTheMostImportantMessage());
+                    tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
@@ -2264,9 +2264,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control control has not yet been performed,
                 tc._sut_A._currentStep.Description.Synchron);        //the step logic is not executed, even if entering or transition conditions are met      
             Assert.AreEqual(false,                                      //Check if sequence error has been reseted
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
 
             Assert.AreNotEqual(0, tc._sut_N._numberOfSteps.Synchron);     //Check if some steps inside PLC sequence were counted
             Assert.AreEqual(tc._sut_N._numberOfSteps.Synchron,            //Check if number of the stored steps is same as the number of the counted steps
@@ -2276,9 +2276,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(initStepDescription,                        //Check if StepDescription does not change. As the StepId uniqueness control control has not yet been performed,
                 tc._sut_N._currentStep.Description.Synchron);        //the step logic is not executed, even if entering or transition conditions are met      
             Assert.AreEqual(false,                                      //Check if sequence error has been reseted
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(0,                                          //Check if the sequencer error type has been reseted to the type noerror
-                tc._sut_N.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
 
             //During this second sequence run, Step logic is already executed as steps counting and checking its StepId uniqueness control
             //has already been performed
@@ -2682,11 +2682,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 3=>5",
                 tc._sut_A._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 3=>5",
-                    tc._sut_A.GetTextOfTheMostImportantMessage());      //Check if messenger returns the expected error message
+                    tc._sut_A._messenger._mime.Text.Synchron);      //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(20,                                         //Check if the sequencer error is of the type UidNumberChangedDuringExecution
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
@@ -2695,11 +2695,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 3=>5",
                 tc._sut_N._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: 3=>5",
-                    tc._sut_N.GetTextOfTheMostImportantMessage());      //Check if messenger returns the expected error message
+                    tc._sut_N._messenger._mime.Text.Synchron);      //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(20,                                         //Check if the sequencer error is of the type UidNumberChangedDuringExecution
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
@@ -2827,11 +2827,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>2",
                 tc._sut_A._currentStep.Description.Synchron);        //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>2",
-                tc._sut_A.GetTextOfTheMostImportantMessage());                 //Check if messenger returns the expected error message
+                tc._sut_A._messenger._mime.Text.Synchron);                 //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type UidOrderChangedDuringExecution
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
      
@@ -2887,11 +2887,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
                 tc._sut_A._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
-                tc._sut_A.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_A._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -2900,11 +2900,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
                 tc._sut_N._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 3=>1",
-                tc._sut_N.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_N._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -2973,11 +2973,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
                 tc._sut_A._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
-                tc._sut_A.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_A._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -2986,11 +2986,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
                 tc._sut_N._currentStep.Description.Synchron);            //Check if StepDescription changes from value "Step 3" to the expected error message
             Assert.AreEqual("ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: 1=>3",
-                tc._sut_N.GetTextOfTheMostImportantMessage());          //Check if messenger returns the expected error message
+                tc._sut_N._messenger._mime.Text.Synchron);          //Check if messenger returns the expected error message
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(40,                                         //Check if the sequencer error is of the type OrderOfTheStepHasBeenChanged
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }
@@ -3190,11 +3190,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual("REQUESTED STEP_ID: " +                     //Check if messenger returns the expected error message
                 reqStepNotExists.ToString() + " DOES NOT EXIST",
-                tc._sut_A.GetTextOfTheMostImportantMessage());
+                tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(50,                                         //Check if the sequencer error is of the type StepWithRequestedIdDoesNotExists
-                tc._sut_A.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -3205,11 +3205,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual("REQUESTED STEP_ID: " +                     //Check if messenger returns the expected error message
                 reqStepNotExists.ToString() + " DOES NOT EXIST",
-                tc._sut_N.GetTextOfTheMostImportantMessage());
+                tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(50,                                         //Check if the sequencer error is of the type StepWithRequestedIdDoesNotExists
-                tc._sut_N.GetSequencerErrorId());                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                       //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -3253,11 +3253,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 (reqStep + 10).ToString() +
                 " HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: " +
                  reqStep.ToString() + " HAS NOT BEEN YET PERFORMED!",
-                 tc._sut_A.GetTextOfTheMostImportantMessage());
+                 tc._sut_A._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_A.SequencerHasError());
+                tc._sut_A._sequencerHasError.Synchron);
             Assert.AreEqual(60,                                         //Check if the sequencer error is of the type SeveralRequestStep
-                tc._sut_A.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_A._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_A._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
 
@@ -3270,11 +3270,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 (reqStep + 10).ToString() +
                 " HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: " +
                  reqStep.ToString() + " HAS NOT BEEN YET PERFORMED!",
-                 tc._sut_N.GetTextOfTheMostImportantMessage());
+                 tc._sut_N._messenger._mime.Text.Synchron);
             Assert.AreEqual(true,                                       //Check if sequence returns error 
-                tc._sut_N.SequencerHasError());
+                tc._sut_N._sequencerHasError.Synchron);
             Assert.AreEqual(60,                                         //Check if the sequencer error is of the type SeveralRequestStep
-                tc._sut_N.GetSequencerErrorId());                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
+                tc._sut_N._sequencerErrorId.Synchron);                              //noerror := 0, NotUniqueStepId:= 10, StepIdHasBeenChanged:= 20, OrderOfTheStepHasBeenChanged:= 40, StepWithRequestedIdDoesNotExists:= 50,SeveralRequestStep:= 60
             Assert.AreEqual(50,                                         //Check if step status is Error
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30, Done:= 40, Error := 50
         }

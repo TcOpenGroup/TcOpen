@@ -99,8 +99,6 @@ CASE _testId OF
             _sut_N.SetCurrentStep(_currentStepId,
                 _currentStepDescription); //Set the StepId so as the StepDescription to the current step of the sequencer
 
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _sut_A.TcoSequencerTest := eTcoSequencerTests.NumberOfStepsCount;
@@ -109,22 +107,13 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.FinishStep := FALSE;
             _sut_N.FinishStep := FALSE;
-
-//            _arranged := _currentStepId = _sut_A._currentStepId AND
-//                _currentStepDescription = _sut_A._currentStepDescription AND
-//                _currentStepId = _sut_N._currentStepId AND
-//                _currentStepDescription = _sut_N._currentStepDescription;
-	 
             _arranged := TRUE;
-
             RETURN;
         END_IF
 
         IF NOT _done THEN
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := TRUE;
@@ -144,8 +133,6 @@ CASE _testId OF
         _sut_N.TotalStepNumber := _totalStepNumber;
         _sut_A.Run();
         _sut_N.Run();
-        _sut_A.UpdateCurrentStepDetails();
-        _sut_N.UpdateCurrentStepDetails();
         _done := TRUE;
         ProbeDoneWhen(_done);
     {endregion}
@@ -222,8 +209,6 @@ CASE _testId OF
 
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 2;
@@ -259,8 +244,6 @@ CASE _testId OF
             _sut_N.StepId := _currentStepId;
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := TRUE;
@@ -291,8 +274,6 @@ CASE _testId OF
             _sut_N.StepId := _currentStepId;
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := TRUE;
@@ -326,8 +307,6 @@ CASE _testId OF
 
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter > 1;
@@ -354,8 +333,6 @@ CASE _testId OF
             _sut_N.SequenceRun := _plcCycleCounter;
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -382,8 +359,6 @@ CASE _testId OF
             _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
             _sut_A.TcoSequencerTest := eTcoSequencerTests.CheckStepIdUniqueness;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.CheckStepIdUniqueness;
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -394,8 +369,6 @@ CASE _testId OF
         IF NOT _done THEN
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
@@ -429,8 +402,6 @@ CASE _testId OF
             _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
             _sut_A.TcoSequencerTest := eTcoSequencerTests.NotUniqueStepId;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.NotUniqueStepId;
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -441,8 +412,6 @@ CASE _testId OF
         IF NOT _done THEN
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= 2;
@@ -457,8 +426,6 @@ CASE _testId OF
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequencerTests.AfterErrorRestore;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.AfterErrorRestore;
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -469,8 +436,6 @@ CASE _testId OF
         IF NOT _done THEN
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= 3;
@@ -497,8 +462,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -511,8 +474,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -535,8 +496,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -558,8 +517,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -582,8 +539,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -596,8 +551,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 2;
@@ -618,8 +571,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -703,8 +654,6 @@ CASE _testId OF
             END_IF
         END_IF
 
-        _sut_A.UpdateCurrentStepDetails();
-        _sut_N.UpdateCurrentStepDetails();
         _done := _plcCycleCounter >= 9;
         ProbeDoneWhen(_done);
     {endregion}
@@ -729,8 +678,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -743,8 +690,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 2;
@@ -771,8 +716,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -785,8 +728,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 2;
@@ -813,8 +754,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -842,8 +781,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 4;
@@ -870,8 +807,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -884,8 +819,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := TRUE;
@@ -906,8 +839,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -993,8 +924,6 @@ CASE _testId OF
 
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -1017,8 +946,6 @@ CASE _testId OF
             _sut_N.InitReqStepCycle := _initReqStepCycle;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1091,8 +1018,6 @@ CASE _testId OF
 
         _sut_A.SaveNumberOfStepsInSequence();
         _sut_N.SaveNumberOfStepsInSequence();
-        _sut_A.UpdateCurrentStepDetails();
-        _sut_N.UpdateCurrentStepDetails();
         _done := _plcCycleCounter >= _cycles + 4;
         ProbeDoneWhen(_done);
     {endregion}
@@ -1113,8 +1038,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1175,8 +1098,6 @@ CASE _testId OF
 
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 4;
@@ -1199,8 +1120,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1213,8 +1132,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= _totalStepNumber + 2;
@@ -1237,8 +1154,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1285,8 +1200,6 @@ CASE _testId OF
 
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -1309,8 +1222,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1357,8 +1268,6 @@ CASE _testId OF
 
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -1389,8 +1298,6 @@ CASE _testId OF
             _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
             _sut_A.TcoSequencerTest := eTcoSequencerTests.CheckStepIdUniquenessStepMode;
             _sut_N.TcoSequencerTest := eTcoSequencerTests.CheckStepIdUniquenessStepMode;
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1412,8 +1319,6 @@ CASE _testId OF
                 _sut_N.Restore();
             END_IF
 
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
@@ -1446,8 +1351,6 @@ CASE _testId OF
             _sut_N.StepId := _stepId;
             _sut_A.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
             _sut_N.SetCurrentStep(inStepID := _currentStepId, inStepDescription := _currentStepDescription);
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1463,8 +1366,6 @@ CASE _testId OF
 
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= 2;
@@ -1481,8 +1382,6 @@ CASE _testId OF
             _sut_N.TcoSequencerTest := eTcoSequencerTests.AfterErrorRestore;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1498,8 +1397,6 @@ CASE _testId OF
 
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= 4;
@@ -1534,8 +1431,6 @@ CASE _testId OF
             _sut_N.FinishStep := TRUE;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1555,8 +1450,6 @@ CASE _testId OF
 
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= 2;
@@ -1591,8 +1484,6 @@ CASE _testId OF
             _sut_N.FinishStep := TRUE;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1612,8 +1503,6 @@ CASE _testId OF
 
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= 2;
@@ -1650,8 +1539,6 @@ CASE _testId OF
             _sut_N.FinishStep := TRUE;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1664,8 +1551,6 @@ CASE _testId OF
             _sut_N.SequenceRun := _plcCycleCounter;
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _done := _plcCycleCounter >= _totalStepNumber + 1;
@@ -1684,8 +1569,6 @@ CASE _testId OF
             _sut_N.SequenceRun := _plcCycleCounter;
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
@@ -1701,8 +1584,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
@@ -1740,8 +1621,6 @@ CASE _testId OF
             _sut_N.FinishStep := TRUE;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
@@ -1754,8 +1633,6 @@ CASE _testId OF
             _sut_N.SequenceRun := _plcCycleCounter;
             _sut_A.Run();
             _sut_N.Run();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
@@ -1771,8 +1648,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SetStepMode();
             _sut_N.SetStepMode();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
@@ -1800,8 +1675,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1823,8 +1696,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 3;
@@ -1847,8 +1718,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1861,8 +1730,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 2;
@@ -1889,8 +1756,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1903,8 +1768,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 2;
@@ -1931,8 +1794,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -1945,8 +1806,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= _reqStep + 7;
@@ -1973,8 +1832,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -2002,8 +1859,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 4;
@@ -2030,8 +1885,6 @@ CASE _testId OF
             _sut_N.ReqStepNotExists := _reqStepNotExists;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -2044,8 +1897,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := TRUE;
@@ -2066,8 +1917,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -2080,8 +1929,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 6;
@@ -2102,8 +1949,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -2116,8 +1961,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 9;
@@ -2138,8 +1981,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -2152,8 +1993,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 5;
@@ -2174,8 +2013,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _plcCycleCounter := 0;
             _arranged := TRUE;
             RETURN;
@@ -2188,8 +2025,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 10;
@@ -2207,8 +2042,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 20;
@@ -2226,8 +2059,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 20;
@@ -2245,8 +2076,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 10;
@@ -2264,8 +2093,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 10;
@@ -2283,8 +2110,6 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
         _done := _plcCycleCounter >= 10;
@@ -2305,8 +2130,6 @@ CASE _testId OF
             _sut_N.TotalStepNumber := _totalStepNumber;
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
             _sut_A.CyclicCycles := _cyclicCycles;
             _sut_N.CyclicCycles := _cyclicCycles;
             _sut_A.StepInEvents := _stepInEvents;
@@ -2325,11 +2148,9 @@ CASE _testId OF
             _sut_N.Run();
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
-            _sut_A.UpdateCurrentStepDetails();
-            _sut_N.UpdateCurrentStepDetails();
         END_IF
 
-        _done := _plcCycleCounter >= 2*_cyclicCycles + _stepInEvents +1;
+        _done := _plcCycleCounter >= 2 * _cyclicCycles + _stepInEvents + 1;
         ProbeDoneWhen(_done);
 {endregion}
 END_CASE]]></ST>

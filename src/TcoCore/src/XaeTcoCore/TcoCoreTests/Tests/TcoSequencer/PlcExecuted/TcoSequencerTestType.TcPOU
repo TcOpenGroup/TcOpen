@@ -10,11 +10,7 @@ VAR
 	_enabled							:	BOOL;
 	_stepDescription					:	STRING(254);	
 	_currentStepId						:	INT;
-//	_currentStepOrder					:	UINT;
-//	_currentStepEnabled					:	BOOL;
 	_currentStepDescription				:	STRING(254);
-//	_currentStepStatus					:	INT;
-//	_currentStepDuration				:	TIME;
 	_myTcoChildState					: 	TcoSequencerTestChildState(THIS^ ,eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
@@ -143,20 +139,8 @@ METHOD INTERNAL ChildIsAutoRestorable : BOOL
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="CleanupPointers" Id="{b9041ad9-4f4d-0687-08b8-5d3afbc23478}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL CleanupPointers
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF (_pPreviusSteps <> 0) THEN
-	__DELETE(_pPreviusSteps);
-END_IF
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="ClearNumberOfSteps" Id="{53185e96-25c2-084b-37ed-a715d9a18864}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL ClearNumberOfSteps 
+      <Declaration><![CDATA[METHOD INTERNAL ClearNumberOfSteps 
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepCounter := 0;
@@ -219,14 +203,6 @@ METHOD INTERNAL GetChildState :	INT
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="GetNumberOfStepsInSequence" Id="{b1e26c7e-3819-024d-27bd-cb7a7259829f}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetNumberOfStepsInSequence : UINT
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetNumberOfStepsInSequence := _numberOfStepsInSequence;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="GetOrderOfTheCurrentlyEvaluatedStep" Id="{64b5d6a9-df51-0a21-3b1f-b671ca6be73d}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT
@@ -243,36 +219,12 @@ METHOD GetOrderOfTheCurrentlyExecutedStep : UINT
         <ST><![CDATA[GetOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="GetPreviousNumberOfStepsInSequence" Id="{0cb72db7-c7ea-0c71-397b-445b08590d2a}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetPreviousNumberOfStepsInSequence : UINT]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetPreviousNumberOfStepsInSequence := _previousNumberOfStepsInSequence;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="GetRequestStepCycle" Id="{4d5a7304-be22-0f43-1824-10365a464aee}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD GetRequestStepCycle : UINT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetRequestStepCycle := RequestStepCycle;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="GetSequencerErrorId" Id="{ad8194f1-ff71-0961-1f93-fe2fe4164156}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL GetSequencerErrorId : INT
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetSequencerErrorId := SUPER^._sequencerErrorId;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="GetTextOfTheMostImportantMessage" Id="{925270d5-cad8-05a3-323a-fd61a434f1a8}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL GetTextOfTheMostImportantMessage :	STRING(254)
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetTextOfTheMostImportantMessage := THIS^._messenger._mime.Text;
 ]]></ST>
       </Implementation>
     </Method>
@@ -307,13 +259,6 @@ METHOD INTERNAL IsAutoRestorable : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsAutoRestorable := SUPER^.AutoRestorable;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="IsFirstStepEntry" Id="{4858f107-cd4b-0bc1-0256-b8a941e75ff5}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL IsFirstStepEntry : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IsFirstStepEntry := _isFirstStepEntry;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{c539ed7e-eed2-0192-1223-93740507fed3}">
@@ -11161,8 +11106,7 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="OnStepCompleted" Id="{3a298859-30d7-0987-2b70-6199d376e9e5}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD PROTECTED OnStepCompleted]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStepCompleted]]></Declaration>
       <Implementation>
         <ST><![CDATA[_onCompleteStepCount := _onCompleteStepCount + 1;
 ]]></ST>
@@ -11307,14 +11251,6 @@ _previousNumberOfSteps	:= THIS^._previousNumberOfStepsInSequence;
         <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SequencerHasError" Id="{b6dc6bfc-0942-0e07-032c-4a4498c8c2ff}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SequencerHasError : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SequencerHasError := SUPER^._sequencerHasError;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="SequencerOpen" Id="{17f85c5f-06f4-018f-28b3-f696a56ed990}">
       <Declaration><![CDATA[METHOD INTERNAL SequencerOpen
 ]]></Declaration>
@@ -11377,8 +11313,7 @@ SetCurrentStepToErrorState := _currentStep.Status = TcoCore.eStepStatus.Error;
       </Implementation>
     </Method>
     <Method Name="SetCyclicMode" Id="{46dddda7-6cc4-09bf-260a-7edfd4351354}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetCyclicMode : BOOL
+      <Declaration><![CDATA[METHOD SetCyclicMode : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ModeController.Mode := eSequencerMode.CyclicMode;
@@ -11401,8 +11336,7 @@ SetInvalidMode := ModeController.Mode = eSequencerMode.Invalid;
       </Implementation>
     </Method>
     <Method Name="SetNumberOfSteps" Id="{12dd8dee-1aee-0992-3de9-66e4ddfe479e}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetNumberOfSteps 
+      <Declaration><![CDATA[METHOD INTERNAL SetNumberOfSteps 
 VAR_INPUT
 	inNumberOfSteps : UINT;
 END_VAR
@@ -11415,8 +11349,7 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
       </Implementation>
     </Method>
     <Method Name="SetSequenceAsChecked" Id="{3100e91a-0746-0506-3138-6c4b89b39740}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetSequenceAsChecked
+      <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsChecked
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
@@ -11424,44 +11357,20 @@ METHOD INTERNAL SetSequenceAsChecked
       </Implementation>
     </Method>
     <Method Name="SetSequenceAsNotChecked" Id="{4f847581-3b2b-010a-27ba-798029208963}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetSequenceAsNotChecked
+      <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{76cbfb8d-0c45-0ccb-352d-3090bd4ad755}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetStepMode : BOOL
+      <Declaration><![CDATA[METHOD SetStepMode : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ModeController.Mode := eSequencerMode.StepMode;
 
 SetStepMode := ModeController.Mode = eSequencerMode.StepMode;
 
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SetTestParams" Id="{d8c35a6f-4f8c-0c95-1602-57104c28a2b1}" FolderPath="_Tests\">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetTestParams
-VAR_INPUT
-	inRunOneStep		:	BOOL;
-	inRunAllSteps		:	BOOL;
-	inFinishStep		:	BOOL;
-	inID				:	UINT;
-	inEnabled			:	BOOL;
-	inStepDescription	:	STRING(254);	
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[THIS^._runOneStep		:=			inRunOneStep;
-THIS^._runAllSteps 		:= 			inRunAllSteps;
-THIS^._finishStep 		:= 			inFinishStep;
-THIS^._stepId 				:=			inID;
-THIS^._enabled 			:= 			inEnabled;
-THIS^._stepDescription 	:=			inStepDescription;
 ]]></ST>
       </Implementation>
     </Method>
@@ -11552,20 +11461,5 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
-    <Method Name="UpdateCurrentStepDetails" Id="{7382a564-3d70-0230-27ae-63521446f22d}" FolderPath="_Tests\">
-      <Declaration><![CDATA[//{attribute 'TcRpcEnable'}
-METHOD INTERNAL UpdateCurrentStepDetails
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//_currentStepId				:=	SUPER^._currentStep.ID;
-//_currentStepOrder			:=	SUPER^._currentStep.Order;
-//_currentStepEnabled			:=	SUPER^._currentStep.Enabled;
-//_currentStepDescription		:=	SUPER^._currentStep.Description;
-//_currentStepStatus			:=	SUPER^._currentStep.Status;
-//_currentStepDuration		:=	SUPER^._currentStep.Duration;
-
-]]></ST>
-      </Implementation>
-    </Method>
   </POU>
 </TcPlcObject>
