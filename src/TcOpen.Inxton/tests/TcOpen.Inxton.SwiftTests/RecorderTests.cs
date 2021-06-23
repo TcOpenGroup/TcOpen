@@ -15,6 +15,15 @@ namespace TcOpen.Inxton.Swift.Tests
     public class RecorderTests
     {
 
+        private static void CompareSources(string expectedFile, string actualFile)
+        {
+            var actual = File.ReadAllText(actualFile);
+            var expected = File.ReadAllText(expectedFile);      
+           
+            // Assert.AreEqual(expected.Length, actual.Length, "Number of lines does not match");
+            Assert.AreEqual(expected, actual);           
+        }
+
         private string outputFiles;
 
         [OneTimeSetUp]
@@ -34,6 +43,8 @@ namespace TcOpen.Inxton.Swift.Tests
         [Test()]
         public void GetCodeTest()
         {
+            Assert.Ignore($"we compare actual files in {nameof(SaveSequenceTest)}");
+
             var recorderObject = new TcoCoreTests.fbPiston(new MockRootObject(), string.Empty, string.Empty);
             using (var recorder = new Recorder(recorderObject))
             {
@@ -122,6 +133,8 @@ END_IF;
         {
             var recorderObject = new TcoCoreTests.fbPiston(new MockRootObject(), string.Empty, string.Empty);
             var outputFile = Path.Combine(outputFiles, "fbPiston.TcPOU");
+            var expectedOutputFile = Path.Combine(outputFiles, "fbPiston.expected.TcPOU");
+
             using (var recorder = new Recorder(recorderObject))
             {
                 recorderObject._moveHomeTask._enabled.Synchron = true;
@@ -146,11 +159,11 @@ END_IF;
                 recorderObject._moveHomeMomentaryTask.Stop();
 
 
-
-
-                recorder.SaveSequence(outputFiles, "fbPiston");
+                recorder.SaveSequence(outputFiles, "fbPiston", "41ce95b1-694a-4bd3-b773-5382b98402d8", "c86ecde6-1911-404c-86d2-9ddbfc0b3cb4");
 
                 Assert.IsTrue(File.Exists(outputFile));
+
+                CompareSources(expectedOutputFile, outputFile);
             }
         }
     }

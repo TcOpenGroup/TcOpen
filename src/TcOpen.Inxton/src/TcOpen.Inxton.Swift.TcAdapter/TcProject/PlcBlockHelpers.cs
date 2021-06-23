@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 namespace TcOpen.Inxton.Swift.TcAdapter.TcProject
 {
     public class PlcBlockHelpers
-    {        
-        public static TcPlcObject CreateSequencerPlcBlock(string blockName, string mainImplementation)
-        {          
+    {     
+        public static TcPlcObject CreateSequencerPlcBlock(string blockName, string mainImplementation, string blockGuid = null, string mainMethodGuid = null)
+        {
+            blockGuid = blockGuid == null ? Guid.NewGuid().ToString() : blockGuid;
+            mainMethodGuid = mainMethodGuid == null ? Guid.NewGuid().ToString() : mainMethodGuid;
+
             var plcObject = new TcPlcObject()
             {
                 Version = "1.1.0.1",
@@ -20,13 +23,13 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject
                     SpecialFunc = "None",
                     Implementation = new Implementation() { ST = string.Empty },
                     Declaration = $"FUNCTION_BLOCK {blockName} EXTENDS TcoCore.TcoSequencer",
-                    Id = "{" + $"{Guid.NewGuid()}" + "}",
+                    Id = "{" + $"{blockGuid}" + "}",
                     Method = new List<Method>()
                                   {
                                       new Method()
                                       {
                                           Name = "Main",
-                                          Id = "{" + $"{Guid.NewGuid()}" + "}",
+                                          Id = "{" + $"{mainMethodGuid}" + "}",
                                           Declaration = "METHOD PROTECTED Main : BOOL",
                                           Implementation = new Implementation()
                                           {

@@ -45,10 +45,10 @@ namespace TcOpen.Inxton.Swift
             return Sequence.EmitCode(new StringBuilder()).ToString();
         }
 
-        public void SaveSequence(string outputDirectory, string blockName)
+        public void SaveSequence(string outputDirectory, string blockName, string blockGuid = null, string mainMethodGuid = null)
         {
             var outputFile = Path.Combine(outputDirectory, $"{blockName}.TcPOU");
-            var sequenceBlock = TcAdapter.TcProject.PlcBlockHelpers.CreateSequencerPlcBlock(blockName, this.EmitCode());
+            var sequenceBlock = TcAdapter.TcProject.PlcBlockHelpers.CreateSequencerPlcBlock(blockName, this.EmitCode(), blockGuid, mainMethodGuid);
             TcAdapter.TcProject.PlcBlockHelpers.EmitPlcBlockFile(outputFile, sequenceBlock);
         }
 

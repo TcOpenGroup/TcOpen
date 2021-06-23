@@ -10,7 +10,7 @@ using System.Windows;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: AssemblyVersion("1.9.6.0")]
-[assembly: AssemblyFileVersion("1.9.6.0")]
-[assembly: AssemblyInformationalVersion("1.9.6-alpha.256+Branch.develop.Sha.a5c40fc71e9de9516cf2130e7fafa01196b78b82")]
+[assembly: AssemblyVersion("0.4.2.0")]
+[assembly: AssemblyFileVersion("0.4.2.0")]
+[assembly: AssemblyInformationalVersion("0.4.2-185-Implement-task-recorder-with-logic-compiler.535+Branch.185-Implement-task-recorder-with-logic-compiler.Sha.1583eb8b750d87c2c317cd2a80e99ff907b0f74a")]
 
