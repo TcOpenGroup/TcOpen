@@ -9,8 +9,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup> 
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.IntegrationProjects.Wpf\TcOpen.Inxton.IntegrationProjects.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj" />
+    <ProjectReference Include="..\..\src\IntegrationProjectsConnector\IntegrationProjectsConnector.csproj" />
   </ItemGroup>
 </Project>
