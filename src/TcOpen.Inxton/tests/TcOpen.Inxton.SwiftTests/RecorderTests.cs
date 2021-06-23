@@ -17,8 +17,8 @@ namespace TcOpen.Inxton.Swift.Tests
 
         private static void CompareSources(string expectedFile, string actualFile)
         {
-            var actual = File.ReadAllText(actualFile);
-            var expected = File.ReadAllText(expectedFile);      
+            var actual = File.ReadAllText(actualFile).Replace("\n", "").Replace("\r", "");
+            var expected = File.ReadAllText(expectedFile).Replace("\n", "").Replace("\r", ""); ;      
            
             // Assert.AreEqual(expected.Length, actual.Length, "Number of lines does not match");
             Assert.AreEqual(expected, actual);           
