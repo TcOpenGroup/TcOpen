@@ -159,7 +159,7 @@ PROPERTY Identity : ULINT]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
-METHOD Off : BOOL
+METHOD FINAL Off : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Off := FALSE;
@@ -186,7 +186,7 @@ END_IF;
 		</summary>			
 	</docu>	
 ~*)
-METHOD On : BOOL
+METHOD FINAL On : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[On := FALSE;

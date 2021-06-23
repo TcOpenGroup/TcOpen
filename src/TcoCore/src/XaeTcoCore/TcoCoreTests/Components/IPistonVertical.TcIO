@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="IPistonVertical" Id="{d4b15bba-c139-06a8-1cc3-b9c8ec9a5889}">
+    <Declaration><![CDATA[INTERFACE IPistonVertical
+]]></Declaration>
+    <Folder Name="Vertical" Id="{ab932949-6bd4-0eae-030b-f8bd34419e8f}" />
+    <Method Name="MoveDown" Id="{04784a04-7cc9-012a-26da-ea32fcebfff7}" FolderPath="Vertical\">
+      <Declaration><![CDATA[METHOD MoveDown : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+    </Method>
+    <Method Name="MoveUp" Id="{eeb32c67-58d2-0fef-20ec-7d9b3ff03921}" FolderPath="Vertical\">
+      <Declaration><![CDATA[METHOD MoveUp : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -132,5 +132,28 @@ namespace TcoCore.PexTests
                 Assert.IsTrue(_logger.IsLastMessageEmpty());
             }
         }
+
+        [Test()]
+        public void CodeProvider_get_default_when_null()
+        {
+            var task = new TcoMomentaryTask();
+            Assert.IsInstanceOf<TcoCore.Swift.TcoMomentaryTaskDefaultCodeProvider>(task.CodeProvider);
+        }
+
+        [Test()]
+        public void CodeProvider_get_customized()
+        {
+            var task = new TcoMomentaryTaskWithCustomizedCodeProvider();
+            Assert.IsInstanceOf<TcoMomentaryTaskCustomizedCodeProvider>(task.CodeProvider);
+        }
+
+        [Test()]
+        public void RecordTaskAction_get_set_test()
+        {
+            var task = new TcoMomentaryTask();
+            Assert.IsNull(task.RecordTaskAction);
+            task.RecordTaskAction = (a, b) => Console.WriteLine();
+            Assert.IsNotNull(task.RecordTaskAction);
+        }
     }
 }

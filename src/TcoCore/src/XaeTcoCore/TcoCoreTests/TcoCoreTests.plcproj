@@ -19,12 +19,33 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCoreTests</Title>
-    <ProjectVersion>0.4.1.375</ProjectVersion>
+    <ProjectVersion>0.4.2.535</ProjectVersion>
     <DefaultNamespace>TcoCoreTests</DefaultNamespace>
     <Placeholder>TcoCoreTests</Placeholder>
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\fbPiston.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\fbPistonConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\fbPistonMoveTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\fbPistonStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\IPistonGripper.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\IPistonHorizontal.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\IPistonVertical.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask1.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -135,6 +156,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Components" />
     <Folder Include="Tests" />
     <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
@@ -177,7 +199,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -188,7 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

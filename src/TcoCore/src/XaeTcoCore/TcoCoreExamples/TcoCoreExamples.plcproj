@@ -22,7 +22,7 @@
     <DefaultNamespace>TcoCoreExamples</DefaultNamespace>
     <Placeholder>TcoCoreExamples</Placeholder>
     <Author>Inxton</Author>
-    <ProjectVersion>0.4.1.375</ProjectVersion>
+    <ProjectVersion>0.4.2.535</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Examples\Components\fbPiston.TcPOU">
@@ -77,6 +77,15 @@
     <Compile Include="Examples\Manipulator\MANIPULATOR.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Examples\Recorder\RecordableStation001.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Recorder\RecordableStation001_Components.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Recorder\RecordableStation001_Sequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Examples\Station_001\Station001.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +129,7 @@
     <Folder Include="Examples\Implementation\TcoState" />
     <Folder Include="Examples\Implementation\TcoTask" />
     <Folder Include="Examples\Manipulator" />
+    <Folder Include="Examples\Recorder" />
     <Folder Include="Examples\Station_001" />
     <Folder Include="Examples\WaveForm" />
     <Folder Include="GVLs" />
@@ -141,7 +151,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoPneumatics">
@@ -156,7 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

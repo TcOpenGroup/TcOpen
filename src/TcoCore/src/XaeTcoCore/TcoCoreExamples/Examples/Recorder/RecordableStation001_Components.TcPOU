@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="RecordableStation001_Components" Id="{c710b5bd-0ebb-05bd-1fb5-392d36f4c0e1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK RecordableStation001_Components EXTENDS TcoCore.TcoObject
+VAR	
+	{attribute addProperty Name "Horizontal cyclinder A1"}
+	_horizontal : fbPiston(THIS^);
+	{attribute addProperty Name "Vertical cyclinder A2"}
+	_vertical : fbPiston(THIS^);
+	{attribute addProperty Name "Gripper A3"}
+	_gripper : fbPiston(THIS^);		
+	
+END_VAR
+
+VAR
+	_simTimerValue : UINT := 500;
+	_simTimer : Tc2_Standard.TON;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_vertical();
+_horizontal();
+_gripper();
+]]></ST>
+    </Implementation>
+    <Property Name="Gripper" Id="{369d32ce-c2b1-0e4b-2ff8-5a385e18cf05}">
+      <Declaration><![CDATA[PROPERTY Gripper : IPistonGripper]]></Declaration>
+      <Get Name="Get" Id="{8d48bc6e-90ef-0fa0-1d6e-0247cc4a19bc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Gripper := _gripper;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Horizontal" Id="{999a82c9-1ecc-0b7a-287e-45dbd9009925}">
+      <Declaration><![CDATA[PROPERTY Horizontal : IPistonHorizontal]]></Declaration>
+      <Get Name="Get" Id="{a2931c7a-4a78-00b9-1dbb-b9d1d205e39d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Horizontal := _horizontal;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Service" Id="{855df606-77d4-055d-1b08-c87c84912d93}">
+      <Declaration><![CDATA[METHOD Service
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._gripper.Service();
+THIS^._horizontal.Service();
+THIS^._vertical.Service();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Vertical" Id="{5216e68a-5d7e-04e5-2c97-2cf00c76fdd4}">
+      <Declaration><![CDATA[PROPERTY Vertical : IPistonVertical]]></Declaration>
+      <Get Name="Get" Id="{846eb78d-cb93-053a-1f89-c73b7a348e46}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Vertical := _vertical;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

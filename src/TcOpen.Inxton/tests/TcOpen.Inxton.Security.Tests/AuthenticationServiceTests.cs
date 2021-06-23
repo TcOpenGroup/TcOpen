@@ -41,7 +41,7 @@ namespace TcOpen.Inxton.Security.Tests
 
                     // Swallow;
                 }
-                var users = authService.UserRepository.Queryable.Where(p => true).Select(p => p._EntityId).ToList();
+                var users = authService.UserRepository.Queryable.Where(p => true).Select(p => p.Username).ToList();
 
                 foreach (var item in users)
                 {

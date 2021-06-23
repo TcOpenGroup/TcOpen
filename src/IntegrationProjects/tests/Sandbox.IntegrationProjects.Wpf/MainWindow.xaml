@@ -49,12 +49,26 @@
                 <vortex:RenderableContentControl Margin="10" Grid.Row="3" DataContext="{Binding _technology._ST001, Mode=OneWay}" PresentationType="Diagnostics" />
             </Grid>
         </TabItem>
-        <TabItem Header="Settings">
-            <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology, Mode=OneWay}" PresentationType="Tree">
-                <vortex:RenderableContentControl.RootContainer>
-                    <Grid/>
-                </vortex:RenderableContentControl.RootContainer>
-            </vortex:RenderableContentControl>
+        <TabItem Header="Data">
+            <TabControl>
+            <TabItem Header="Traceability">
+                <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._repository, Mode=OneWay}" PresentationType="Base">
+                    <vortex:RenderableContentControl.RootContainer>
+                        <Grid/>
+                    </vortex:RenderableContentControl.RootContainer>
+                </vortex:RenderableContentControl>
+            </TabItem>
+            <TabItem Header="Settings">
+                <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._settings, Mode=OneWay}" PresentationType="Base">
+                    <vortex:RenderableContentControl.RootContainer>
+                        <Grid/>
+                    </vortex:RenderableContentControl.RootContainer>
+                </vortex:RenderableContentControl>
+            </TabItem>
+        </TabControl>
+        </TabItem>
+        <TabItem Header="Swift">
+            <vortex:SwiftRecorderView DataContext="{Binding SwiftRecordVm}"></vortex:SwiftRecorderView>
         </TabItem>
     </TabControl>
 </Window>

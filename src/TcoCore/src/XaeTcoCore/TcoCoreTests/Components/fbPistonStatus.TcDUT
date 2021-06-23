@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="fbPistonStatus" Id="{a2ab828e-f095-0ceb-1bea-12d13845e051}">
+    <Declaration><![CDATA[TYPE fbPistonStatus :
+STRUCT
+	AtHome : TIME;
+	AtWork : TIME;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

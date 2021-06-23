@@ -3,6 +3,7 @@ using System.Windows.Input;
 using TcoCore.Logging;
 using TcOpen;
 using TcOpen.Inxton;
+using TcOpen.Inxton.Swift;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -19,6 +20,8 @@ namespace TcoCore
             CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
         }
 
+        private ICodeProvider codeProvider;
+
         private Func<object> _logPayloadDecoration;
 
         /// <summary>
@@ -32,6 +35,24 @@ namespace TcoCore
         /// </summary>
         public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
 
+        /// <summary>
+        /// Gets swift code provider for this task.
+        /// </summary>
+        public virtual ICodeProvider CodeProvider
+        {
+            get
+            {
+                if (codeProvider == null)
+                {
+                    codeProvider = new Swift.TcoToggleTaskDefaultCodeProvider(this);
+                }
+
+                return codeProvider;
+            }
+
+            protected set => codeProvider = value;
+        }
+
         private void TcoToggleTask_CanExecuteChanged(object sender, EventArgs e)
         {
             CanExecute(new object());
@@ -41,6 +62,11 @@ namespace TcoCore
         {
             TcoAppDomain.Current.Dispatcher.Invoke(() => CanExecuteChanged(sender, args));
         }
+
+        /// <summary>
+        /// Gets or set action recording delegate for this task.
+        /// </summary>
+        public RecordTaskActionDelegate RecordTaskAction { get; set; }
 
         /// <summary>
         /// Queries whether the command can be executed.
@@ -66,6 +92,8 @@ namespace TcoCore
 
                 this._toggleRequest.Synchron = true;            
                 TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}", LogInfo.Create(this));
+
+                RecordTaskAction?.Invoke(this.CodeProvider);
             }
         }
     }
