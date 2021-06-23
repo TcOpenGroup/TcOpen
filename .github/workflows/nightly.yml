@@ -27,5 +27,6 @@ jobs:
             "buildConfig" = "Release";
             "updateAssemblyInfo" = $true;
             "isTestingEnabled" = $true;
+            "testingStrength" = 10;
             "packNugets" = $true;
           }
