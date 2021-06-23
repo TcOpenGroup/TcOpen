@@ -485,6 +485,21 @@ _previousNumberOfStepsInSequence := 0;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnRestore" Id="{fb23f6fa-464b-04ea-13eb-416f2589cb92}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called on sequence restore. 
+			This method can be overridden in derived block with a custom logic.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnRestore
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="OnSequenceCompleted" Id="{ece7cad8-a719-0e69-011e-e99ad08fec8c}">
       <Declaration><![CDATA[
 (*~
@@ -712,7 +727,8 @@ _modeController._stepForward.Restore();
 _modeController._stepBackward.Restore();
 _modeController._stepIn.Restore(); 	
 _checkStepIdRequestedInStepMode := FALSE;
-]]></ST>
+
+OnRestore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{e641c1fe-2b61-0e34-01e2-8c735794af62}">
