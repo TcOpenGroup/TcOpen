@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="DriveSimMoveAbsoluteTask" Id="{a97e39ea-4b3e-4e18-adf0-49b05c468ef4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DriveSimMoveAbsoluteTask EXTENDS TcoCore.TcoTask
+VAR_IN_OUT
+	_drive : DriveSim;
+END_VAR
+
+VAR
+	_targetPosition : LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(Execute())THEN
+	IF(_drive.Position < _targetPosition) THEN
+		_drive.Position := _drive._position + 0.1;
+	ELSE
+		_drive.Position := _drive._position - 0.1;
+	END_IF;	
+	DoneWhen(ABS(_drive._position - THIS^.TargetPosition) < 0.2);	
+END_IF]]></ST>
+    </Implementation>
+    <Property Name="TargetPosition" Id="{1797785b-fbad-4678-a6f8-825ceb1f7a6d}">
+      <Declaration><![CDATA[PROPERTY TargetPosition : LREAL]]></Declaration>
+      <Get Name="Get" Id="{1ce2457e-0094-4a24-a40b-4b0c284080c5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TargetPosition := _targetPosition;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{541b97c9-cb30-4833-aca6-80ccc1bc63de}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_targetPosition := TargetPosition;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

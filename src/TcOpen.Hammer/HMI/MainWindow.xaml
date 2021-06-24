@@ -1,0 +1,189 @@
+﻿<Window
+    x:Class="PlcHammer.Hmi.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hammer="clr-namespace:PlcHammer;assembly=PlcHammerConnector"
+    xmlns:inxton="http://inxton.mts/xaml"
+    xmlns:local="clr-namespace:PlcHammer.Hmi"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:vortex="http://vortex.mts/xaml"
+    Width="800"
+    Height="800"
+    mc:Ignorable="d"
+    Title="MainWindow">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <TabControl>
+        <TabItem VerticalAlignment="Top" Header="Station">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TabControl>
+                    <TabItem Header="Sequences">
+                        <Grid Grid.Row="0">
+                            <ContentControl Visibility="{Binding PlcHammer.MAIN._app._station001._groundModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._groundMode}" PresentationType="Base" />
+                            </ContentControl>
+                            <ContentControl Visibility="{Binding PlcHammer.MAIN._app._station001._automatModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._automatMode}" PresentationType="Base" />
+                            </ContentControl>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Components">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="300" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ScrollViewer Grid.Row="0">
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._components}" PresentationType="Service-Manual" />
+                            </ScrollViewer>
+                            <Expander Grid.Row="1">
+                            <vortex:RenderableContentControl                                
+                                DataContext="{Binding PlcHammer.MAIN._app}"
+                                PresentationType="Diagnostics" />
+                            </Expander>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+                <Grid Grid.Row="1">
+                    <Viewbox>
+                        <Canvas
+                            Width="700"
+                            Height="450"
+                            Background="{DynamicResource MaterialDesignLightBackground}">
+                            <Border
+                                Canvas.Top="17"
+                                Width="500"
+                                Height="38"
+                                Background="Gray"
+                                BorderBrush="LightGray"
+                                BorderThickness="2"
+                                CornerRadius="2.5" />
+                            <Border
+                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic}"
+                                Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic}"
+                                Width="50"
+                                Height="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}"
+                                Background="Gray"
+                                BorderBrush="LightGray"
+                                BorderThickness="2"
+                                CornerRadius="2.5"
+                                RenderTransformOrigin="125,0.5">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform Y="-90" />
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border
+                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalAxis._position.Cyclic}"
+                                Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic, Converter={local:GripperPositionConverter}}"
+                                Width="{Binding PlcHammer.MAIN._app._station001._components._gripperPosition.Cyclic}"
+                                Height="25"
+                                Background="Gray"
+                                BorderBrush="LightGray"
+                                BorderThickness="2"
+                                CornerRadius="2.5"
+                                RenderTransformOrigin="125,0.5">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform Y="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}" />
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+
+                            </Border>
+                        </Canvas>
+                    </Viewbox>
+                </Grid>
+                <UniformGrid
+                    Grid.Row="2"
+                    Columns="3"
+                    Rows="0">
+                    <UniformGrid.Resources>
+                        <Style TargetType="vortex:RenderableContentControl">
+                            <Setter Property="Margin" Value="25" />
+                            <Setter Property="Width" Value="300" />
+                        </Style>
+                    </UniformGrid.Resources>
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._groundModeTask}" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._automatModeTask}" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._serviceModeTask}" />
+                </UniformGrid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Data">
+            <TabControl>
+                <TabItem Header="Process settings">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._processDataManager}" PresentationType="Base">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </TabItem>
+                <TabItem Header="Technology">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._technologicalDataManager}" PresentationType="Base">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem Header="Monitoring">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*" />
+                    <RowDefinition Height="30*" />
+                </Grid.RowDefinitions>
+                <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding PlcHammer.MAIN}" />
+                <Grid Grid.Column="1" Style="{DynamicResource Card}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="PresentationType">
+                        <GroupBox.Resources>
+                            <x:Array x:Key="PresentationTypes" Type="sys:String">
+                                <sys:String>Base</sys:String>
+                                <sys:String>Service-Manual</sys:String>
+                                <sys:String>ControlSlim</sys:String>
+                                <sys:String>DisplaySlim</sys:String>
+                                <sys:String>Diagnostics</sys:String>
+                            </x:Array>
+                        </GroupBox.Resources>
+                        <ComboBox
+                            x:Name="comboBox"
+                            ItemsSource="{StaticResource PresentationTypes}"
+                            SelectedIndex="0" />
+                    </GroupBox>
+                    <ScrollViewer Grid.Row="1">
+                        <vortex:ObservableContentControl DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}" PresentationType="{Binding SelectedItem, ElementName=comboBox}" />
+                    </ScrollViewer>
+                </Grid>
+                <Grid
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Style="{DynamicResource Card}">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app}" PresentationType="Diagnostics" />
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
