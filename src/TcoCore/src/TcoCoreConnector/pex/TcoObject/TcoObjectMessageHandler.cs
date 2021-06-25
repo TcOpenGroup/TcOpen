@@ -100,6 +100,14 @@ namespace TcoCore
             }
         }
 
+        private IEnumerable<TcoMessage> ActiveMessages
+        {
+            get
+            {
+                return DescendingMessages.Where(p => p.IsActive);                
+            }
+        }
+
         string highestSeverityMessage;
         public string HighestSeverityMessage
         {
@@ -147,13 +155,18 @@ namespace TcoCore
         /// </summary>
         public void UpdateHealthInfo()
         {
-            ReadCycles();
+            ReadCycles();            
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ActiveMessagesCount)));
             if (ActiveMessagesCount > 0)
             {
                 ReadCategories();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
-                HighestSeverityMessage = DescendingMessages.OrderByDescending(p => p.Category.LastValue).FirstOrDefault()?.PlainMessage.Text;
+                HighestSeverityMessage = ActiveMessages.OrderByDescending(p => p.Category.LastValue).FirstOrDefault()?.PlainMessage.Text;
+            }
+            else
+            {
+                HighestSeverityMessage = string.Empty;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
             }
         }
 
@@ -164,8 +177,8 @@ namespace TcoCore
         public int ActiveMessagesCount
         {
             get
-            {
-                return DescendingMessages.Where(p => p.IsActive).Count();
+            {              
+                return ActiveMessages.Count();
             }
         }
 
@@ -179,7 +192,7 @@ namespace TcoCore
             {
                 if (ActiveMessagesCount > 0)
                 {
-                    return (eMessageCategory)DescendingMessages.Max(p => p.Category.LastValue);
+                    return (eMessageCategory)ActiveMessages.Max(p => p.Category.LastValue);
                     
                 }
 
