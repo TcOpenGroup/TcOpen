@@ -20,5 +20,6 @@ jobs:
             "publishNugets" = $true;
             "nugetToken" = ($env:NUGET_ORG_PAT);
             "isTestingEnabled" = $true;
+            "testingStrength" = 10;
             "packNugets" = $true;
             }

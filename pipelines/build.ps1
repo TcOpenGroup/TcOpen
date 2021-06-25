@@ -180,12 +180,15 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
     Write-Host '--------------------------------------------' -ForegroundColor Cyan
             	
     $testProjects = @(
-                      [System.Tuple]::Create(".\src\TcOpen.Inxton\TcOpen.Inxton.slnf", "", -1, "TcOpen.Inxton"),                     
-                      [System.Tuple]::Create(".\src\TcoCore\TcoCore.slnf", "\src\TcoCore\src\XaeTcoCore\", -1, "TcoCore"),                     
-                      [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", -1, "TcoElements"),
-                      [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", -1, "TcoIoBeckhoff"),
-                      [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "\src\TcoPneumatics\src\XaeTcoPneumatics\", -1, "TcoPneumatics"),
-                      [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "\src\TcoData\src\XAE\XAE\", -1, "TcoData")                    
+                      [System.Tuple]::Create(".\src\TcOpen.Inxton\TcOpen.Inxton.slnf", "", 0, "TcOpen.Inxton"),                     
+                      [System.Tuple]::Create(".\src\TcoCore\TcoCoreUnitTests.slnf", "\src\TcoCore\src\XaeTcoCore\", 0, "TcoCore_L0"),      
+                      [System.Tuple]::Create(".\src\TcoCore\TcoCore_L1_Tests.slnf","", 1, "TcoCore_L1"),
+                      [System.Tuple]::Create(".\src\TcoCore\TcoCore_L2_Tests.slnf","", 2, "TcoCore_L2"),
+                      [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", 1, "TcoElements"),
+                      [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", 1, "TcoIoBeckhoff"),
+                      [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "\src\TcoPneumatics\src\XaeTcoPneumatics\", 1, "TcoPneumatics")
+                      [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "\src\TcoData\src\XAE\XAE\", 1, "TcoData")
+                      [System.Tuple]::Create(".\src\IntegrationProjects\IntegrationProjects.slnf", "\src\IntegrationProjects\src\XAE\XAE\", 0, "Integration")                      
                     )
                     # removed due to missing hardware  
                     # [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", -1, "TcoDrivesBeckhoff"),

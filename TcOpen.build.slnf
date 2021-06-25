@@ -2,6 +2,9 @@
   "solution": {
     "path": "TcOpen.sln",
     "projects": [
+      "src\\IntegrationProjects\\src\\IntegrationProjectsConnector\\IntegrationProjectsConnector.csproj",
+      "src\\IntegrationProjects\\tests\\IntegrationProjectTests\\IntegrationProjectTests.csproj",
+      "src\\IntegrationProjects\\tests\\Sandbox.IntegrationProjects.Wpf\\Sandbox.IntegrationProjects.Wpf.csproj",
       "src\\Tc.Prober\\src\\Tc.Prober\\Tc.Prober.csproj",
       "src\\Tc.Prober\\tests\\PlcTcProberTestsConnector\\PlcTcProberTestsConnector.csproj",
       "src\\Tc.Prober\\tests\\Tc.ProberTest\\Tc.ProberTest.csproj",
@@ -20,8 +23,12 @@
       "src\\TcoAbstractions\\tests\\TcoAbstractionsTestsConnector\\TcoAbstractionsTestsConnector.csproj",
       "src\\TcoCore\\src\\TcoCore.Wpf\\TcOpen.Inxton.TcoCore.Wpf.csproj",
       "src\\TcoCore\\src\\TcoCoreConnector\\TcoCoreConnector.csproj",
+      "src\\TcoCore\\tests\\TcOpen.Inxton.TcoCore.VMTests\\TcOpen.Inxton.TcoCore.VMTests.csproj",
       "src\\TcoCore\\tests\\TcoCore.Sandbox.Wpf\\TcoCore.Sandbox.Wpf.csproj",
+      "src\\TcoCore\\tests\\TcoCore.Tests\\TcoCoreConnector.Tests.csproj",
       "src\\TcoCore\\tests\\TcoCoreExamplesConnector\\TcoCoreExamplesConnector.csproj",
+      "src\\TcoCore\\tests\\TcoCoreIntegration_L_1_Tests\\TcoCoreIntegration_L_1_Tests.csproj",
+      "src\\TcoCore\\tests\\TcoCoreIntegration_L_2_Tests\\TcoCoreIntegration_L_2_Tests.csproj",
       "src\\TcoCore\\tests\\TcoCoreTestsConnector\\TcoCoreTestsConnector.csproj",
       "src\\TcoCore\\tests\\TcoCoreUnitTests\\TcoCoreUnitTests.csproj",
       "src\\TcoCore\\tests\\TcoDummyTest\\TcoDummyTest.csproj",

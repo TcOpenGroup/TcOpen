@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Station001_Components" Id="{e806c847-ecc4-43b0-a026-69e0b11f80ef}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
+FUNCTION_BLOCK Station001_Components EXTENDS TcoCore.TcoObject
+VAR	
+//	_horizontalAxis : DriveSim(THIS^);
+	{attribute addProperty Name "Horizontal axis"}
+	_horizontalNcAxis : TcoDrivesBeckhoff.TcoDriveSimple(THIS^); 
+	{attribute addProperty Name "Vertical piston"}
+	_verticalPiston : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty Name "Gripper piston"}
+	_gripperPiston : TcoPneumatics.TcoCylinder(THIS^);
+END_VAR
+(* Simulation variables *)
+VAR
+	_counterSimVerticalPiston : ULINT;
+	_counterSimGripperPiston : ULINT;
+	_simulationCycleVerticalPiston : BOOL;	
+	_simulationCycleGripperPiston : BOOL;	
+	_verticalPosition : INT;
+	_gripperPosition : INT;
+END_VAR
+VAR CONSTANT
+	_verticalPistonStroke : INT := 150;
+	_gripperPistonStroke : INT := 50;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Simulation();
+
+_verticalPiston(inoAtHomePos := IO.iA1[0],
+    inoAtWorkPos := IO.iA1[1],
+    inoToHomePos := IO.qA1[0],
+    inoToWorkPos := IO.qA1[1]);
+
+_gripperPiston(inoAtHomePos := IO.iA1[2],
+    inoAtWorkPos := IO.iA1[3],
+    inoToHomePos := IO.qA1[2],
+    inoToWorkPos := IO.qA1[3]);
+
+//_horizontalAxis();
+_horizontalNcAxis(inEnable := TRUE,
+    inEnablePositive := TRUE,
+    inEnableNegative := TRUE,
+    inCalibrationCam := FALSE,
+    inoAxisRef := IO.Axis1);]]></ST>
+    </Implementation>
+    <Property Name="Gripper" Id="{45058c8f-3b79-49b6-8729-6389402fa4b0}">
+      <Declaration><![CDATA[PROPERTY Gripper :  REFERENCE TO TcoPneumatics.TcoCylinder]]></Declaration>
+      <Get Name="Get" Id="{d387ff5f-f5d6-44a8-b450-cb493513cbfe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Gripper REF= _gripperPiston;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HorizontalAxis" Id="{b1ab433f-e84d-4bd1-b49e-16adbd28465d}">
+      <Declaration><![CDATA[PROPERTY HorizontalAxis : IDrive]]></Declaration>
+      <Get Name="Get" Id="{7f862521-62c1-4810-98b0-73ca60cc7784}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HorizontalAxis := _horizontalAxis;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HorizontalNcAxis" Id="{50ed9664-d5a7-4e96-a637-5203276f92d3}">
+      <Declaration><![CDATA[PROPERTY HorizontalNcAxis : TcoDrivesBeckhoff.ITcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{a7390b8e-0434-4b57-9dfc-bdeb3f9087e0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HorizontalNcAxis := _horizontalNcAxis;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Service" Id="{98457207-8a91-45fe-bd57-5bb0d15033a9}">
+      <Declaration><![CDATA[METHOD Service : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//_horizontalAxis.Service();
+_horizontalNcAxis.Service();
+_verticalPiston.Service();
+_gripperPiston.Service();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Simulation" Id="{2b05f176-ee43-4d85-a715-7bea1c119c16}">
+      <Declaration><![CDATA[METHOD Simulation
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_verticalPiston.MoveHomeTask.Busy 
+	OR _verticalPiston.MoveWorkTask.Busy) THEN
+	_counterSimVerticalPiston := _counterSimVerticalPiston + 1;
+	_simulationCycleVerticalPiston := (_counterSimVerticalPiston MOD _verticalPistonStroke) = 0;
+END_IF;	
+
+IF(Gripper.MoveHomeTask.Busy 
+   OR Gripper.MoveWorkTask.Busy) THEN
+	_counterSimGripperPiston := _counterSimVerticalPiston + 1;
+	_simulationCycleGripperPiston := (_counterSimVerticalPiston MOD _gripperPistonStroke) = 0;
+END_IF;	
+
+
+IF(IO.qA1[0] AND _simulationCycleVerticalPiston) THEN
+	IO.iA1[0] := TRUE;
+	IO.iA1[1] := FALSE;
+	_verticalPosition := 0;
+END_IF
+
+IF(IO.qA1[1] AND _simulationCycleVerticalPiston) THEN
+	IO.iA1[1] := TRUE;
+	IO.iA1[0] := FALSE;
+	_verticalPosition := _verticalPistonStroke;
+END_IF
+
+
+IF(IO.qA1[0] AND NOT IO.iA1[0]) THEN	
+	_verticalPosition := (_verticalPosition - 1);
+END_IF;
+
+
+IF(IO.qA1[1]  AND NOT IO.iA1[1]) THEN	
+	_verticalPosition := (_verticalPosition + 1);
+END_IF;
+
+IF(IO.qA1[2] AND _simulationCycleVerticalPiston) THEN
+	IO.iA1[2] := TRUE;
+	IO.iA1[3] := FALSE;
+	_gripperPosition := 0;
+END_IF
+
+IF(IO.qA1[3] AND _simulationCycleVerticalPiston) THEN
+	IO.iA1[3] := TRUE;
+	IO.iA1[2] := FALSE;
+	_gripperPosition := _gripperPistonStroke;
+END_IF
+
+IF(IO.qA1[2] AND NOT IO.iA1[2]) THEN	
+	_gripperPosition := (_gripperPosition - 1);
+END_IF;
+
+
+IF(IO.qA1[3]  AND NOT IO.iA1[3]) THEN	
+	_gripperPosition := (_gripperPosition + 1);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="VerticalAxis" Id="{95519e2e-c8d9-4542-adf0-78464b1acba5}">
+      <Declaration><![CDATA[PROPERTY VerticalAxis : REFERENCE TO TcoPneumatics.TcoCylinder]]></Declaration>
+      <Get Name="Get" Id="{2a859788-f8eb-4b2b-8a8a-19eb876b8488}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[VerticalAxis REF= _verticalPiston;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
