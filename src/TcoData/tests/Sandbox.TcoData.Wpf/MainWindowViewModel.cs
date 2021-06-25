@@ -1,7 +1,7 @@
 using TcoData;
 using TcoDataTests;
 using TcOpen.Inxton.Data.Wpf;
-using TcOpen.Inxton.MongoDb;
+using TcOpen.Inxton.Data.MongoDb;
 
 namespace Sandbox.TcoData.Wpf
 {
