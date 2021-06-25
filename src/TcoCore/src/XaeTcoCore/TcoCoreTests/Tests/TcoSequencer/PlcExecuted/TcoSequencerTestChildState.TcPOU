@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoSequencerTestChildState" Id="{47153bd6-c760-05f1-3cc8-dc997014292d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerTestChildState EXTENDS TcoCore.TcoState
+VAR
+	_requestedState : UINT;
+	_requestedStateCount :ULINT;
+	_restoreCount :ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="OnStateChange" Id="{405797a2-e34c-0ea1-11db-966029e7456c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called on each change of the <c>State</c>. This method could be overloaded and custom code should be placed here.	
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NewState =  _requestedState THEN
+	_requestedStateCount := _requestedStateCount + 1;
+END_IF
+
+IF NewState =  -1 THEN
+	_restoreCount := _restoreCount + 1;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="RequestedState" Id="{a41d472f-303d-05fb-1900-06b7f9599535}">
+      <Declaration><![CDATA[PROPERTY RequestedState : UINT]]></Declaration>
+      <Get Name="Get" Id="{b556c158-7b7a-058d-2781-29d942d6c1f4}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RequestedState := _requestedState;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c6d0caec-be85-0b5b-3071-7596953df036}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_requestedState := RequestedState;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

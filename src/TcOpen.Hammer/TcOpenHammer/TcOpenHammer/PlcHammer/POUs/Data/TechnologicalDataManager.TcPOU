@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TechnologicalDataManager" Id="{97b55b24-89f4-41f8-8e2d-134dfbed35e4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TechnologicalDataManager EXTENDS TcoData.TcoDataExchange
+VAR
+	//this variable has to called "_data" - PC app will access this variable by its name.
+	_data : Station001_TechnologicalSettings;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

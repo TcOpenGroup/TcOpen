@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ProcessDataManager" Id="{ef58d043-6bbe-480b-9350-92a4de31085d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ProcessDataManager EXTENDS TcoData.TcoDataExchange
+VAR
+	//this variable has to called "_data" - PC app will access this variable by its name.
+	_data : Station001_ProductionData;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

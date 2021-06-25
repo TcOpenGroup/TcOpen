@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="IO" Id="{6c23b6f6-6fca-47fd-ac7b-a263175717cf}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	iA1 AT %I* : ARRAY[0..7] OF BOOL;
+	iA2 AT %I* : ARRAY[0..7] OF BOOL;
+	qA1 AT %Q* : ARRAY[0..7] OF BOOL;
+	qA2 AT %Q* : ARRAY[0..7] OF BOOL;
+	Axis1	:	TcoDrivesBeckhoff.TcoAxisRef;
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,44 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Input;
 using TcoCore.Logging;
-using TcOpen;
 using TcOpen.Inxton;
 using TcOpen.Inxton.Input;
+using TcOpen.Inxton.Swift;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoTask : ICommand, IDecorateLog
+    public partial class TcoTask : ICommand, IDecorateLog, IsTask
     {
-        public event EventHandler CanExecuteChanged;
-
-        /// <summary>
-        /// Gets command that aborts the execution of this task.
-        /// </summary>
-        public RelayCommand Abort { get; private set; }
-
-        /// <summary>
-        /// Gets command that restores this task.
-        /// </summary>
-        public RelayCommand Restore { get; private set; }
 
         private Func<object> _logPayloadDecoration;
 
-        /// <summary>
-        /// Gets or sets log payload decoration function. 
-        /// The return object will can be added to provide additional information about this task execution.
-        /// <note:important>
-        /// There must be an implementation that calls and adds the result object into the log message payload.
-        /// an example of the implementation can be found here <see cref="LogInfo.Create(IVortexElement)"/> (TcoCore.Logging.LogInfo.Create).
-        /// </important>
-        /// </summary>
-        public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
 
-        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
+
+        ICodeProvider codeProvider;
+
+        public event EventHandler CanExecuteChanged;
+
+        private void AbortTask(object obj)
         {
-            InitCommands();
+            this._abortRequest.Synchron = true;
+        }
+
+        private bool CanAbortTask()
+        {
+            return this._isServiceable.Synchron;
+        }
+        private bool CanRestoreTask()
+        {
+            return this._isServiceable.Synchron;
         }
 
         private void InitCommands()
@@ -51,15 +44,18 @@ namespace TcoCore
             this._isServiceable.Subscribe(ValidateCanExecuteAbortRestore);
         }
 
-        partial void PexConstructorParameterless()
+        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             InitCommands();
         }
 
-        public void ValidateCanExecuteAbortRestore(IValueTag sender, ValueChangedEventArgs args)
-        {            
-             Abort.ValidateCanExecute(sender, args);
-             Restore.ValidateCanExecute(sender, args);            
+        partial void PexConstructorParameterless()
+        {
+            InitCommands();
+        }
+        private void RestoreTask(object obj)
+        {
+            this._restoreRequest.Synchron = true;
         }
 
         private void TcoTask_CanExecuteChanged(object sender, EventArgs e)
@@ -71,7 +67,7 @@ namespace TcoCore
         {
             TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
-                CanExecuteChanged(sender, args);                
+                CanExecuteChanged(sender, args);
             });
         }
 
@@ -98,31 +94,64 @@ namespace TcoCore
                     this._restoreRequest.Synchron = true;
                     System.Threading.Thread.Sleep(50);
                 }
-                           
+
                 this._invokeRequest.Synchron = true;
 
                 TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
+
+                RecordTaskAction?.Invoke(this.CodeProvider);
             }
         }
 
-       
-
-        private bool CanAbortTask()
+        public void ValidateCanExecuteAbortRestore(IValueTag sender, ValueChangedEventArgs args)
         {
-            return this._isServiceable.Synchron;
+            Abort.ValidateCanExecute(sender, args);
+            Restore.ValidateCanExecute(sender, args);
         }
 
-        private void AbortTask(object obj)
-        {            
-            this._abortRequest.Synchron = true;
-        }
-        private bool CanRestoreTask()
+        /// <summary>
+        /// Gets command that aborts the execution of this task.
+        /// </summary>
+        public RelayCommand Abort { get; private set; }
+
+        /// <summary>
+        /// Gets swift code provider for this task.
+        /// </summary>
+        public virtual ICodeProvider CodeProvider 
         {
-            return this._isServiceable.Synchron;
+            get
+            {
+                if (codeProvider == null)
+                {
+                    codeProvider = new Swift.TcoTaskDefaultCodeProvider(this);
+                }
+
+                return codeProvider;
+            }
+
+            protected set => codeProvider = value; 
         }
-        private void RestoreTask(object obj)
-        {            
-            this._restoreRequest.Synchron = true;
-        }        
+        
+        /// <summary>
+        /// Gets or sets log payload decoration function. 
+        /// The return object will can be added to provide additional information about this task execution.
+        /// <note:important>
+        /// There must be an implementation that calls and adds the result object into the log message payload.
+        /// an example of the implementation can be found here <see cref="LogInfo.Create(IVortexElement)"/> (TcoCore.Logging.LogInfo.Create).
+        /// </important>
+        /// </summary>
+        public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
+
+        /// <summary>
+        /// Gets command that restores this task.
+        /// </summary>
+        public RelayCommand Restore { get; private set; }
+
+        /// <summary>
+        /// Gets or set action recording delegate for this task.
+        /// </summary>
+        public RecordTaskActionDelegate RecordTaskAction { get; set; }
     }
+
+    
 }

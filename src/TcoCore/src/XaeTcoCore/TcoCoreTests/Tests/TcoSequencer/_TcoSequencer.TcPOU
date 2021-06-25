@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="_TcoSequencer" Id="{ac19fe4f-0c0e-08e9-3df5-0840192e4ee2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK _TcoSequencer EXTENDS TcoCore._internals_TcoSequencer
 VAR
@@ -130,6 +130,14 @@ _previousNumberOfStepsInSequence := 0;
       <Implementation>
         <ST><![CDATA[GetChildState := THIS^._myTcoState.State;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetNumberOfStepsInSequence" Id="{154b9cc4-fcc7-08ab-0ee3-cde964c24006}" FolderPath="_Tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD GetNumberOfStepsInSequence : UINT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetNumberOfStepsInSequence := THIS^._numberOfStepsInSequence;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetSequencerErrorId" Id="{cfa5c7b8-bdaa-0dc9-318b-07d87a737808}" FolderPath="_Tests\">
@@ -8594,8 +8602,27 @@ THIS^._stepDescription 	:=			inStepDescription;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="StepCount" Id="{04d7f514-94fe-03d1-1b6f-5300a828c9d4}" FolderPath="_Tests\">
+      <Declaration><![CDATA[METHOD StepCount 
+VAR_INPUT
+    inTotalStepNumber : UINT;
+    inFinishStep : BOOL;
+END_VAR
+VAR 
+	i : INT;
+	_lastStepId : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i:=0 TO inTotalStepNumber DO
+	IF SUPER^.Step(i,TRUE,CONCAT('Step number ',INT_TO_STRING(i))) THEN		
+		SUPER^.StepCompleteWhen(inFinishStep);	
+	END_IF	
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="UpdateCurrentStepDetails" Id="{590d6a94-7182-0c50-1bd0-bf34e87df18c}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL UpdateCurrentStepDetails
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL UpdateCurrentStepDetails
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_currentStepId				:=	SUPER^._currentStep.ID;

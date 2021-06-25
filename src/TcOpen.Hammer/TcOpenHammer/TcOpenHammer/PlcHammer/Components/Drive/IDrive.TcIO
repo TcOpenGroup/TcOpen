@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="IDrive" Id="{56a4a9b0-da64-4b93-9928-f728021459b0}">
+    <Declaration><![CDATA[INTERFACE IDrive
+]]></Declaration>
+    <Method Name="MoveAbsolute" Id="{c317d00a-5ad5-412f-88c4-709bf3587e00}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	TargetPosition : LREAL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="MoveAbsoluteTask" Id="{c8fdae37-d359-4d29-8433-5d3fa1a2d1a9}">
+      <Declaration><![CDATA[PROPERTY MoveAbsoluteTask : REFERENCE TO DriveSimMoveAbsoluteTask]]></Declaration>
+      <Get Name="Get" Id="{1282b1a0-8dd1-4c95-b04e-7c5bcb844aca}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

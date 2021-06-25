@@ -2,12 +2,13 @@
 using System.Windows.Input;
 using TcoCore.Logging;
 using TcOpen.Inxton;
+using TcOpen.Inxton.Swift;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
 namespace TcoCore
 {
-    public partial class TcoMomentaryTask : ICommand, IDecorateLog
+    public partial class TcoMomentaryTask : ICommand, IDecorateLog, IsTask
     {
         public event EventHandler CanExecuteChanged;
 
@@ -28,6 +29,8 @@ namespace TcoCore
             TcoAppDomain.Current.Dispatcher.Invoke(() => CanExecuteChanged(sender, args));
         }
 
+        private ICodeProvider codeProvider;
+
         private Func<object> _logPayloadDecoration;
 
         /// <summary>
@@ -40,6 +43,29 @@ namespace TcoCore
         /// </important>
         /// </summary>
         public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
+
+        /// <summary>
+        /// Gets swift code provider for this task.
+        /// </summary>
+        public virtual ICodeProvider CodeProvider
+        {
+            get
+            {
+                if (codeProvider == null)
+                {
+                    codeProvider = new Swift.TcoMomentaryTaskDefaultCodeProvider(this);
+                }
+
+                return codeProvider;
+            }
+
+            protected set => codeProvider = value;
+        }
+
+        /// <summary>
+        /// Gets or set action recording delegate for this task.
+        /// </summary>
+        public RecordTaskActionDelegate RecordTaskAction { get; set; }
 
         /// <summary>
         /// Queries whether the command can be executed.
@@ -68,6 +94,7 @@ namespace TcoCore
             {
                 _setOnRequest.Synchron = false;
                 TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
+                RecordTaskAction?.Invoke(this.CodeProvider, false);
             }
         }
 
@@ -81,6 +108,7 @@ namespace TcoCore
             { 
                 _setOnRequest.Synchron = true;
                 TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' started. {{@sender}}", LogInfo.Create(this));
+                RecordTaskAction?.Invoke(this.CodeProvider, true);
             }
         }
     }

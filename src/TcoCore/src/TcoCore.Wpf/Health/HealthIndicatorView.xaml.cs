@@ -46,16 +46,18 @@ namespace TcoCore
         }
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { 
-            if(UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this))
-            { 
-                MessageHandler?.UpdateHealthInfo();
-            }
+            var isInSight = false;
+            TcoObjectMessageHandler MessageHandler = null;
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
+            {                
+                isInSight = UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this);
+                MessageHandler = this.DataContext as TcoObjectMessageHandler;
             });
-        }             
-        private TcoObjectMessageHandler MessageHandler
-        {
-            get { return this.DataContext as TcoObjectMessageHandler; }
-        }               
+
+            if (isInSight)
+            {
+                MessageHandler?.UpdateHealthInfo();                
+            }
+        }                             
     }
 }

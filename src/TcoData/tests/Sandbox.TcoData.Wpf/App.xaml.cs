@@ -17,7 +17,7 @@ namespace Sandbox.TcoData.Wpf
         public App()
         {
             //TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
-            Entry.TcoDataPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+         
         }
     }
 }

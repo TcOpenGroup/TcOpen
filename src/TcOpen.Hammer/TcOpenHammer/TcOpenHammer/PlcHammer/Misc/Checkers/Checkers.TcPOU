@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Checkers" Id="{023cac74-18c5-4f8c-9a35-9aaefd8e4a9b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Checkers EXTENDS TcoCore.TcoObject
+VAR
+	_result : eCheckResult;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CheckAnalogue" Id="{5d7bbaa0-c7b2-46e6-9f14-895c50556dc3}">
+      <Declaration><![CDATA[METHOD CheckAnalogue : REFERENCE TO Checkers
+VAR_INPUT
+	Signal : REAL;
+END_VAR
+VAR_IN_OUT
+	Data : AnalogueValueCheck;
+END_VAR
+VAR
+	_inRange : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Data.Measured := Signal;
+_inRange := (Signal >= Data.Mininum) AND (Signal <= Data.Maximum);
+
+IF(NOT _inRange 
+AND_THEN _result <= eCheckResult.Passed) THEN
+	_result := eCheckResult.Failed;
+END_IF; 
+
+CheckAnalogue REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="HasPassed" Id="{ccb7bee4-4b78-4869-a3ed-c3faa2efba11}">
+      <Declaration><![CDATA[METHOD HasPassed : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[HasPassed := _result = eCheckResult.Passed;
+_result := eCheckResult.None;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartChecks" Id="{2d9a2425-9a31-402b-84f7-4ca5dfabfdf3}">
+      <Declaration><![CDATA[METHOD StartChecks : REFERENCE TO Checkers
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_result := eCheckResult.Passed;
+StartChecks REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -13,11 +13,17 @@
 
         private IsTcoObject _parentObject;
 
-        private readonly PlainTcoMessage _plain = new PlainTcoMessage();       
+        private readonly PlainTcoMessage _plain = new PlainTcoMessage();
+
+        partial void PexConstructorParameterless()
+        {
+            _context = new TcoContext();
+        }
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             _context = parent.GetParent<IsTcoContext>();
+            _context = _context == null ? new TcoContext() : _context;
             _context?.AddMessage(this);
             _parentObject = parent.GetParent<IsTcoObject>();
         }
@@ -29,12 +35,13 @@
         {
             get
             {
+                var retval = false;
                 if (_context != null)
-                {                    
-                    return this.Cycle.LastValue >= _context.LastStartCycleCount;
+                {
+                    retval = this.Cycle.LastValue >= _context.LastStartCycleCount;
                 }
 
-                return false;
+                return retval;
             }
         }
 

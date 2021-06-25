@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="fbPistonConfig" Id="{a4f9fe85-132f-075a-02f2-cd00eb11bb19}">
+    <Declaration><![CDATA[TYPE fbPistonConfig :
+STRUCT
+	MaxTimeToReachHome : TIME;
+	MaxTimeToReachWork : TIME;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

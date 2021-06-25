@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="TcOpen.Inxton.Swift.Wpf.SwiftRecorderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TcOpen.Inxton.Swift.Wpf" xmlns:vortex="http://vortex.mts/xaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <d:UserControl.DataContext>
+        <local:SwiftRecorderViewModel></local:SwiftRecorderViewModel>
+    </d:UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding TreeRootObject}" SelectedItem="{Binding DataContext.SelectedObject, Mode=OneWayToSource, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"></vortex:DynamicTreeView>
+        <ScrollViewer Grid.Row="1">
+            <vortex:ObservableContentControl DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}" PresentationType="Service"></vortex:ObservableContentControl>
+        </ScrollViewer>
+        <GroupBox Header="Code output" Grid.Row="2">
+            <ScrollViewer>
+                <Grid>
+                    <TextBox Text="{Binding Code}" Grid.Row="2" 
+                                 FontFamily="Courier New"
+                                 TextWrapping="WrapWithOverflow" 
+                                 FontSize="13"></TextBox>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
+            <Button Command="{Binding StartRecordingCommand}">Start recording</Button>
+            <Button Command="{Binding StopRecordingCommand}">Stop recording</Button>
+        </WrapPanel>
+        
+    </Grid>
+</UserControl>

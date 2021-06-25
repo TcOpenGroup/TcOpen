@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="DriveSim" Id="{268333eb-fb89-4342-a1df-991907c3378e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DriveSim EXTENDS TcoCore.TcoComponent IMPLEMENTS IDrive
+VAR
+	{attribute addProperty Name "<#Current position#>"}
+	_position : LREAL;
+END_VAR
+VAR
+	{attribute addProperty Name "<#Move absolute#>"}
+	{attribute addProperty ToolTip "<#Moves the drive to absolute position given by parameter 'Target Position'#>"}
+	_moveAbsoluteTask : DriveSimMoveAbsoluteTask(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_moveAbsoluteTask(_drive := THIS^);]]></ST>
+    </Implementation>
+    <Method Name="MoveAbsolute" Id="{f73759c6-de9b-49ed-83e9-08090b234b0f}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	TargetPosition : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_moveAbsoluteTask.TargetPosition := TargetPosition;
+MoveAbsolute := _moveAbsoluteTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="MoveAbsoluteTask" Id="{523daa0d-a2eb-4f3e-95b5-945fa86dbbad}">
+      <Declaration><![CDATA[PROPERTY MoveAbsoluteTask : REFERENCE TO DriveSimMoveAbsoluteTask]]></Declaration>
+      <Get Name="Get" Id="{4ae57316-fc76-4112-ad1f-822c3c895b6c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MoveAbsoluteTask REF= _moveAbsoluteTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Position" Id="{21e50bee-72b1-4176-b263-6166c4cf89fd}">
+      <Declaration><![CDATA[PROPERTY Position : LREAL]]></Declaration>
+      <Get Name="Get" Id="{6fe391a0-8205-4811-9253-7d81a1d28378}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Position := _position;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{abd4498c-ca56-498d-a5a7-89b2b0c47016}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_position := Position;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Restore" Id="{8996e689-e19d-4f58-87af-5ad072d65536}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{2b5a6043-3c89-4c07-925b-b7c03231b81f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
