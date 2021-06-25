@@ -1915,5 +1915,15 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 		</Plc>
+		<Io/>
 	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030010" Watchdog="14000000040000000400000004000000"/>
+		<OwnerA Name="TIPC^PlcHammer^PlcHammer Instance">
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
+				<Link VarA="PlcTask Inputs^IO.Axis1.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^IO.Axis1.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
 </TcSmProject>

@@ -8,7 +8,30 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^();]]></ST>
+      <ST><![CDATA[SUPER^();
+
+//Set som default values in case of no setting loaded to the PLC yet.
+IF _data.LoadPartsHorizontalPosition = 0  AND _data.FailedPartsHorizontalPosition = 0 AND _data.PassedPartsHorizontalPosition = 0 THEN
+    _data.LoadPartsHorizontalPosition := 50;
+    _data.FailedPartsHorizontalPosition := 300.0;
+    _data.PassedPartsHorizontalPosition := 450.0;
+END_IF
+
+IF _data.AxisSpeed = 0 THEN
+    _data.AxisSpeed := 1000.0;
+END_IF
+
+IF _data.AxisAcc = 0 THEN
+    _data.AxisAcc := 10000.0;
+END_IF
+
+IF _data.AxisDcc = 0 THEN
+    _data.AxisDcc := 10000.0;
+END_IF
+
+IF _data.AxisJerk = 0 THEN
+    _data.AxisJerk := 50000.0;
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

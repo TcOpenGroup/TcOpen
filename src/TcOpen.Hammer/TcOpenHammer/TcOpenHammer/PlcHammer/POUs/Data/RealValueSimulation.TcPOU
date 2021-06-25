@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="RealValueSimulation" Id="{a97aaab9-f584-4ca1-a65c-721c18e96ab2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK RealValueSimulation
+VAR_INPUT
+    inMinValue : REAL;
+    inMaxValue : REAL;
+END_VAR
+VAR_IN_OUT
+    inoutValue : REAL;
+END_VAR
+VAR
+	_dc : LREAL :=5.4;
+    _min : REAL;
+    _max : REAL;
+    _p1 : LREAL := 2;
+    _p2 : LREAL := 3.5;
+    _x0 : LREAL;
+    _x1 : LREAL;
+    _pm : LREAL;
+	_ex : LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_ex := EXPT(10, _dc);
+_x0 := inoutValue * _ex;
+
+IF _x0 = 0 THEN
+    _x0 := (inMaxValue + inMinValue) / 2 * _ex;
+END_IF
+
+_min := inMinValue * _ex;
+_max := inMaxValue * _ex;
+_pm := (_max - _min);
+_x1 := _min + (Tc2_Math.LMOD((_x0 * _p1 + _p2), _pm));
+
+inoutValue := _x1 / _ex;]]></ST>
+    </Implementation>
+    <Property Name="Dc" Id="{d7693bd9-f557-4a6e-8e36-74e7243b7b57}">
+      <Declaration><![CDATA[PROPERTY Dc : LREAL]]></Declaration>
+      <Get Name="Get" Id="{220d3aa3-e3e5-405d-b514-2bd016d3849c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Dc := _dc;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9a35bfce-37f8-4405-9ee8-94d5a37ffa1b}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_dc := Dc;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P1" Id="{b81e9c71-c250-40c4-9007-037294e193bf}">
+      <Declaration><![CDATA[PROPERTY P1 : LREAL]]></Declaration>
+      <Get Name="Get" Id="{2b7dbcc5-9bc8-4532-85af-452bd4c985de}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P1 := _p1;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c7b821b4-d479-4c21-9fcc-c6739c63c131}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_p1 := P1;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P2" Id="{9412239a-ef14-4a3d-b323-98a536d54f1a}">
+      <Declaration><![CDATA[PROPERTY P2 : LREAL]]></Declaration>
+      <Get Name="Get" Id="{81c756f6-a662-4473-8e37-ae36f14cf45a}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P2 := _p2;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{3baf8151-d659-48a0-bb70-3e1a14396e0c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_p2 := P2;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

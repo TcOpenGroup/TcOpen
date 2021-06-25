@@ -50,6 +50,9 @@
     <Compile Include="POUs\Data\ProcessDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Data\RealValueSimulation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Data\TechnologicalDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +95,10 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_Math">
+      <DefaultResolution>Tc2_Math, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Math</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>

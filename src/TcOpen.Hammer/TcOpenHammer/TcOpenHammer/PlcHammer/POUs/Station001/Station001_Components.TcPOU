@@ -20,6 +20,12 @@ VAR
 	_simulationCycleGripperPiston : BOOL;	
 	_verticalPosition : INT;
 	_gripperPosition : INT;
+	_dimXsim : RealValueSimulation;
+	_dimYsim : RealValueSimulation;
+	_dimZsim : RealValueSimulation;
+	_dimX : REAL;
+	_dimY : REAL;
+	_dimZ : REAL;
 END_VAR
 VAR CONSTANT
 	_verticalPistonStroke : INT := 150;
@@ -150,7 +156,24 @@ END_IF;
 
 IF(IO.qA1[3]  AND NOT IO.iA1[3]) THEN	
 	_gripperPosition := (_gripperPosition + 1);
-END_IF]]></ST>
+END_IF
+
+_dimXsim.Dc := 3;
+_dimYsim.Dc := 3;
+_dimZsim.Dc := 3;
+_dimXsim.P1 := 1;
+_dimYsim.P1 := 1;
+_dimZsim.P1 := 1;
+_dimXsim.P2 := 4;
+_dimYsim.P2 := 4;
+_dimZsim.P2 := 4;
+
+//_dimXsim(inMinValue := 7, inMaxValue := 9, inoutValue := _dimX);
+//_dimYsim(inMinValue := 8, inMaxValue := 10, inoutValue := _dimY);
+//_dimZsim(inMinValue := 9, inMaxValue := 11, inoutValue := _dimZ);
+
+
+ ]]></ST>
       </Implementation>
     </Method>
     <Property Name="VerticalAxis" Id="{95519e2e-c8d9-4542-adf0-78464b1acba5}">

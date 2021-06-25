@@ -86,12 +86,12 @@
                                 </Border.RenderTransform>
                             </Border>
                             <Border
-                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalAxis._position.Cyclic}"
+                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic}"
                                 Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic, Converter={local:GripperPositionConverter}}"
                                 Width="{Binding PlcHammer.MAIN._app._station001._components._gripperPosition.Cyclic}"
                                 Height="25"
-                                Background="Gray"
-                                BorderBrush="LightGray"
+                                Background="{Binding PlcHammer.MAIN._app._station001._automatMode._partPassedChecks.Cyclic, Converter={local:OK_NOK_Converter}}"
+                                BorderBrush="Gray"
                                 BorderThickness="2"
                                 CornerRadius="2.5"
                                 RenderTransformOrigin="125,0.5">
