@@ -100,6 +100,21 @@ namespace TcoCore
             }
         }
 
+        string highestSeverityMessage;
+        public string HighestSeverityMessage
+        {
+            get => highestSeverityMessage; set
+            {
+                if (highestSeverityMessage == value)
+                {
+                    return;
+                }
+
+                highestSeverityMessage = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverityMessage)));
+            }
+        }
+
         private List<IValueTag> refreshTags { get; set; }
 
         /// <summary>
@@ -138,6 +153,7 @@ namespace TcoCore
             {
                 ReadCategories();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
+                HighestSeverityMessage = DescendingMessages.OrderByDescending(p => p.Category.LastValue).FirstOrDefault()?.PlainMessage.Text;
             }
         }
 
@@ -164,6 +180,7 @@ namespace TcoCore
                 if (ActiveMessagesCount > 0)
                 {
                     return (eMessageCategory)DescendingMessages.Max(p => p.Category.LastValue);
+                    
                 }
 
                 return eMessageCategory.None;

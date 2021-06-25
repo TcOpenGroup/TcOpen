@@ -58,12 +58,18 @@ namespace TcoData
         public void InitializeRepository<T>(IRepository<T> repository) where T : IBrowsableDataObject
             => _repository = repository as IRepository;
 
-        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
+
+        public void InitializeRemoteDataExchange()
         {
             _createTask.InitializeExclusively(Create);
             _readTask.InitializeExclusively(Read);
             _updateTask.InitializeExclusively(Update);
             _deleteTask.InitializeExclusively(Delete);
+        }
+
+        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
+        {
+           
         }
 
         private bool Create()

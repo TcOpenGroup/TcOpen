@@ -10,13 +10,35 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="50">
-    
+    <UserControl.Resources>
+        <ControlTemplate TargetType="ToggleButton" x:Key="ToggleMessageButton">
+            <ContentControl Content="{TemplateBinding Content}"></ContentControl>
+        </ControlTemplate>       
+    </UserControl.Resources>
+
     <d:UserControl.DataContext>
         <tcocore:TcoObjectMessageHandler/>
     </d:UserControl.DataContext>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Element">
-        <materialDesign:PackIcon Kind="Error"                                
-                                 Visibility="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToVisibilityConverter}}" 
-                                 Foreground="{Binding HighestSeverity, Converter={local:ActiveMessageHighestCategoryForegroundBrush}}"/>
+    <Grid HorizontalAlignment="Center" 
+          VerticalAlignment="Center" 
+          x:Name="Element">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ToggleButton x:Name="toggleButton" 
+                      Template="{DynamicResource ToggleMessageButton}">
+            <materialDesign:PackIcon Kind="Error"                                
+                                     Visibility="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToVisibilityConverter}}" 
+                                     Foreground="{Binding HighestSeverity, Converter={local:ActiveMessageHighestCategoryForegroundBrush}}"/>
+        </ToggleButton>
+        <ContentControl Grid.Column="1" Visibility="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToVisibilityConverter}}">
+            <materialDesign:Snackbar                
+                x:Name="SnackbarOne"
+                Visibility="{Binding IsChecked, ElementName=toggleButton, 
+                Converter={local:BoolToVisibilityConverter}}"
+                Message="{Binding HighestSeverityMessage}"
+                IsActive="{Binding IsChecked, ElementName=toggleButton}" />
+        </ContentControl>
     </Grid>
 </UserControl>

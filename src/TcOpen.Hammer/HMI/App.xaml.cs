@@ -49,6 +49,7 @@ namespace HMI
             var processDataRepository = new JsonRepository<PlainStation001_ProductionData>(processDataRepositorySettings);
 
             Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRepository(processDataRepository);
+            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRemoteDataExchange();
 
             Entry.PlcHammer.MAIN._app._station001._technologicalDataManager
                 .InitializeRepository(new JsonRepository<PlainStation001_TechnologicalSettings>
@@ -65,6 +66,7 @@ namespace HMI
             var processDataRepository = new MongoDbRepository<PlainStation001_ProductionData>(processDataRepositorySettings);
             
             Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRepository(processDataRepository);
+            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRemoteDataExchange();
 
             Entry.PlcHammer.MAIN._app._station001._technologicalDataManager
                 .InitializeRepository(new MongoDbRepository<PlainStation001_TechnologicalSettings>
