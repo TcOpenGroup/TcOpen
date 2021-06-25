@@ -4,6 +4,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using TcOpen.Inxton.MongoDb;
+using TcOpen.Inxton.Data.Json;
+using System.Reflection;
+using System.IO;
 
 namespace HMI
 {
@@ -27,10 +30,32 @@ namespace HMI
             
             Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
 
-            SetUpDatabase();
+            // SetUpMongoDatabase();
+            SetUpJsonRepositories();
         }
 
-        private static void SetUpDatabase()
+        private static void SetUpJsonRepositories()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if(!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+
+            var processDataRepositorySettings = new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "HammerCollection"));
+            var processDataRepository = new JsonRepository<PlainStation001_ProductionData>(processDataRepositorySettings);
+
+            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRepository(processDataRepository);
+
+            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager
+                .InitializeRepository(new JsonRepository<PlainStation001_TechnologicalSettings>
+                                     (new JsonRepositorySettings<PlainStation001_TechnologicalSettings>(Path.Combine(repositoryDirectory, "TechnologicalSettings"))));
+        }
+
+        private static void SetUpMongoDatabase()
         {
             var mongoUri = "mongodb://localhost:27017";
             var databaseName = "Hammer";
