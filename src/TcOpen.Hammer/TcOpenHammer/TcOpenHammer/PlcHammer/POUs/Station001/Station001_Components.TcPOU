@@ -102,78 +102,66 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_verticalPiston.MoveHomeTask.Busy 
-	OR _verticalPiston.MoveWorkTask.Busy) THEN
-	_counterSimVerticalPiston := _counterSimVerticalPiston + 1;
-	_simulationCycleVerticalPiston := (_counterSimVerticalPiston MOD _verticalPistonStroke) = 0;
-END_IF;	
-
-IF(Gripper.MoveHomeTask.Busy 
-   OR Gripper.MoveWorkTask.Busy) THEN
-	_counterSimGripperPiston := _counterSimVerticalPiston + 1;
-	_simulationCycleGripperPiston := (_counterSimVerticalPiston MOD _gripperPistonStroke) = 0;
-END_IF;	
-
-
-IF(IO.qA1[0] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[0] := TRUE;
-	IO.iA1[1] := FALSE;
-	_verticalPosition := 0;
-END_IF
-
-IF(IO.qA1[1] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[1] := TRUE;
-	IO.iA1[0] := FALSE;
-	_verticalPosition := _verticalPistonStroke;
-END_IF
-
-
-IF(IO.qA1[0] AND NOT IO.iA1[0]) THEN	
-	_verticalPosition := (_verticalPosition - 1);
+        <ST><![CDATA[IF (_verticalPiston.MoveHomeTask.Busy OR _verticalPiston.MoveWorkTask.Busy) THEN
+    _counterSimVerticalPiston := _counterSimVerticalPiston + 1;
+    _simulationCycleVerticalPiston := (_counterSimVerticalPiston MOD _verticalPistonStroke) = 0;
 END_IF;
 
-
-IF(IO.qA1[1]  AND NOT IO.iA1[1]) THEN	
-	_verticalPosition := (_verticalPosition + 1);
+IF (Gripper.MoveHomeTask.Busy OR Gripper.MoveWorkTask.Busy) THEN
+    _counterSimGripperPiston := _counterSimVerticalPiston + 1;
+    _simulationCycleGripperPiston := (_counterSimVerticalPiston MOD _gripperPistonStroke) = 0;
 END_IF;
 
-IF(IO.qA1[2] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[2] := TRUE;
-	IO.iA1[3] := FALSE;
-	_gripperPosition := 0;
+IF (IO.qA1[0] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[0] := TRUE;
+    IO.iA1[1] := FALSE;
+    _verticalPosition := 0;
 END_IF
 
-IF(IO.qA1[3] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[3] := TRUE;
-	IO.iA1[2] := FALSE;
-	_gripperPosition := _gripperPistonStroke;
+IF (IO.qA1[1] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[1] := TRUE;
+    IO.iA1[0] := FALSE;
+    _verticalPosition := _verticalPistonStroke;
 END_IF
 
-IF(IO.qA1[2] AND NOT IO.iA1[2]) THEN	
-	_gripperPosition := (_gripperPosition - 1);
+IF (IO.qA1[0] AND NOT IO.iA1[0]) THEN
+    _verticalPosition := (_verticalPosition - 1);
 END_IF;
 
+IF (IO.qA1[1] AND NOT IO.iA1[1]) THEN
+    _verticalPosition := (_verticalPosition + 1);
+END_IF;
 
-IF(IO.qA1[3]  AND NOT IO.iA1[3]) THEN	
-	_gripperPosition := (_gripperPosition + 1);
+IF (IO.qA1[2] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[2] := TRUE;
+    IO.iA1[3] := FALSE;
+    _gripperPosition := 0;
+END_IF
+
+IF (IO.qA1[3] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[3] := TRUE;
+    IO.iA1[2] := FALSE;
+    _gripperPosition := _gripperPistonStroke;
+END_IF
+
+IF (IO.qA1[2] AND NOT IO.iA1[2]) THEN
+    _gripperPosition := (_gripperPosition - 1);
+END_IF;
+
+IF (IO.qA1[3] AND NOT IO.iA1[3]) THEN
+    _gripperPosition := (_gripperPosition + 1);
 END_IF
 
 _dimXsim.Dc := 3;
 _dimYsim.Dc := 3;
 _dimZsim.Dc := 3;
-_dimXsim.P1 := 1;
-_dimYsim.P1 := 1;
-_dimZsim.P1 := 1;
-_dimXsim.P2 := 4;
-_dimYsim.P2 := 4;
-_dimZsim.P2 := 4;
-
-//_dimXsim(inMinValue := 7, inMaxValue := 9, inoutValue := _dimX);
-//_dimYsim(inMinValue := 8, inMaxValue := 10, inoutValue := _dimY);
-//_dimZsim(inMinValue := 9, inMaxValue := 11, inoutValue := _dimZ);
-
-
- ]]></ST>
+_dimXsim.P1 := 0.74;
+_dimYsim.P1 := 0.74;
+_dimZsim.P1 := 0.74;
+_dimXsim.P2 := 1.1;
+_dimYsim.P2 := 1.1;
+_dimZsim.P2 := 1.1;
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="VerticalAxis" Id="{95519e2e-c8d9-4542-adf0-78464b1acba5}">

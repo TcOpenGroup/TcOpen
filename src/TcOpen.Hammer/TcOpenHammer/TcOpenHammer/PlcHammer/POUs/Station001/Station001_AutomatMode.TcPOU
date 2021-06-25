@@ -43,9 +43,9 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := 7, inMaxValue := 9, inoutValue := Station.Components._dimX);
+    Station.Components._dimXsim(inMinValue := 9, inMaxValue := 11, inoutValue := Station.Components._dimX);
     Station.Components._dimYsim(inMinValue := 9, inMaxValue := 11, inoutValue := Station.Components._dimY);
-    Station.Components._dimZsim(inMinValue := 11, inMaxValue := 13, inoutValue := Station.Components._dimZ);
+    Station.Components._dimZsim(inMinValue := 9, inMaxValue := 11, inoutValue := Station.Components._dimZ);
     StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;

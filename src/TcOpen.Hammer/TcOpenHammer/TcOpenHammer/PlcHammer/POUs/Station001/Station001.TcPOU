@@ -78,10 +78,14 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF(_groundModeTask.Execute()) THEN
 	Messenger.Trace('Ground position mode active');
-	_serviceModeTask.Abort();
-	_automatModeTask.Abort();
+	_serviceModeTask.Restore();
+	_automatModeTask.Restore();
+	_automatMode.Restore();
 	_groundMode.Run();
 	_groundModeTask.DoneWhen(_groundMode.CurrentStep.ID = 300);
+	IF _groundModeTask.Done THEN
+		_groundMode.Restore();
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
