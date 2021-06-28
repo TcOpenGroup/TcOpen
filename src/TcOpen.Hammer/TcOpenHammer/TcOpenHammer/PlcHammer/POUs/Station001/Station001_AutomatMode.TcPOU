@@ -48,11 +48,13 @@ IF (Step(50, TRUE, 'LOAD PRECESS SETTINGS')) THEN
     //--------------------------------------------	
 END_IF;
 
+
 IF (Step(100, TRUE, 'MOVE VERTICAL AXIS DOWN')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToWork().Done);
     //--------------------------------------------	
 END_IF;
+
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------

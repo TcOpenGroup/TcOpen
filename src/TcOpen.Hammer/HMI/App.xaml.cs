@@ -39,14 +39,14 @@ namespace HMI
                                        IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
                                        IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
         {
-            Entry.PlcHammer.MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
-            Entry.PlcHammer.MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
+            Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
+            Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
 
-            Entry.PlcHammer.MAIN._app._station001._processTraceabilty.InitializeRepository(processTraceabiltyRepository);
-            Entry.PlcHammer.MAIN._app._station001._processTraceabilty.InitializeRemoteDataExchange();
+            Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty.InitializeRepository(processTraceabiltyRepository);
+            Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty.InitializeRemoteDataExchange();
 
-            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager.InitializeRepository(technologyDataRepository);
-            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
+            Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRepository(technologyDataRepository);
+            Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
         }
 
         private static void SetUpJsonRepositories()
