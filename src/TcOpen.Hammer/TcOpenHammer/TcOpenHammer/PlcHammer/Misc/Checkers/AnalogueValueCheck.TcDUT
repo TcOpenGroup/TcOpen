@@ -6,7 +6,7 @@
 TYPE AnalogueValueCheck :
 STRUCT
 	Mininum : REAL;
-	{attribute clr [RenderIgnore("Control", "ControlSlim")]}
+	{attribute clr [RenderIgnore("ShadowControl", "ShadowControlSlim")]}
 	Measured : REAL;
 	Maximum : REAL;	
 END_STRUCT

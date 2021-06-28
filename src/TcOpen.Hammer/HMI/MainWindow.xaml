@@ -12,6 +12,7 @@
     Width="800"
     Height="800"
     mc:Ignorable="d"
+    WindowState="Maximized"
     Title="MainWindow">
     <Window.DataContext>
         <local:MainWindowViewModel />
@@ -54,7 +55,6 @@
                 </TabControl>
                 <Grid Grid.Row="1">
                     <Viewbox>
-
                         <Canvas
                             Width="700"
                             Height="450"
@@ -64,18 +64,16 @@
                                     DataContext="{Binding PlcHammer.MAIN._app._station001._processTraceabilty._data, Mode=OneWay}"/>
                             </Viewbox>
                             <Border
-                                Canvas.Top="17"
-                                Width="500"
+                                Width="696"
                                 Height="38"
                                 Background="Gray"
                                 BorderBrush="LightGray"
                                 BorderThickness="2"
                                 CornerRadius="2.5" />
                             <Border
-                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic}"
-                                Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic}"
+                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic, Converter={local:AxisPositionConverter}}"                                
                                 Width="50"
-                                Height="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}"
+                                Height="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic, Converter={local:VerticalPistonPositionConverter}}"
                                 Background="Gray"
                                 BorderBrush="LightGray"
                                 BorderThickness="2"
@@ -86,7 +84,7 @@
                                         <ScaleTransform />
                                         <SkewTransform />
                                         <RotateTransform />
-                                        <TranslateTransform Y="-90" />
+                                        <TranslateTransform Y="0" />
                                     </TransformGroup>
                                 </Border.RenderTransform>
                             </Border>
@@ -105,11 +103,30 @@
                                         <ScaleTransform />
                                         <SkewTransform />
                                         <RotateTransform />
-                                        <TranslateTransform Y="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}" />
+                                        <TranslateTransform Y="0" />
                                     </TransformGroup>
                                 </Border.RenderTransform>
 
                             </Border>
+                            <Border Background="GreenYellow" 
+                                    Width="50" 
+                                    Height="100"
+                                    CornerRadius="2.5"
+                                    BorderThickness="1"
+                                    BorderBrush="Green" Canvas.Top="150" Canvas.Left="{Binding PlcHammer.MAIN._app._station001._technologicalDataManager._data.PassedPartsHorizontalPosition.Cyclic}"/>
+                            <Border Background="Red" 
+                                    Width="50" 
+                                    Height="100"
+                                    CornerRadius="2.5"
+                                    BorderThickness="1"
+                                    BorderBrush="DarkRed" Canvas.Top="150" Canvas.Left="{Binding PlcHammer.MAIN._app._station001._technologicalDataManager._data.FailedPartsHorizontalPosition.Cyclic}"/>
+                            <Border Background="Gray" 
+                                    Width="50" 
+                                    Height="100"
+                                    CornerRadius="2.5"
+                                    BorderThickness="1"
+                                    BorderBrush="DarkRed" Canvas.Top="150" Canvas.Left="{Binding PlcHammer.MAIN._app._station001._technologicalDataManager._data.LoadPartsHorizontalPosition.Cyclic}"/>
+                            <TextBlock Foreground="White" Text="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic, StringFormat=Position: 000.0 mm}" Canvas.Left="330" Canvas.Top="10"></TextBlock>
                         </Canvas>
                     </Viewbox>
                 </Grid>

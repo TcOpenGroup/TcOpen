@@ -161,11 +161,6 @@
       <Resolution>TcoPneumatics, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
-  <ItemGroup>
-    <SubObject Include="Station001_Components.HorizontalAxis">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>

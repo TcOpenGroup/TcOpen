@@ -26,7 +26,13 @@ END_VAR
     //--------------------------------------------	
 END_IF;
 
-IF (Step(101, NOT Station.Components.HorizontalNcAxis.DriveRef._axisStatus.Homed, 'HORIZONTAL AXIS HOMING')) THEN
+IF (Step(125, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(150, NOT Station.Components.HorizontalNcAxis.DriveRef._axisStatus.Homed, 'HORIZONTAL AXIS HOMING')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.Home(inPosition := 0,
             inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,

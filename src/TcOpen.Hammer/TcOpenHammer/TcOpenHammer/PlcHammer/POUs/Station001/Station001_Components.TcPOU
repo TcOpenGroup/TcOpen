@@ -62,17 +62,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="HorizontalAxis" Id="{b1ab433f-e84d-4bd1-b49e-16adbd28465d}">
-      <Declaration><![CDATA[PROPERTY HorizontalAxis : IDrive]]></Declaration>
-      <Get Name="Get" Id="{7f862521-62c1-4810-98b0-73ca60cc7784}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[HorizontalAxis := _horizontalAxis;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="HorizontalNcAxis" Id="{50ed9664-d5a7-4e96-a637-5203276f92d3}">
       <Declaration><![CDATA[PROPERTY HorizontalNcAxis : TcoDrivesBeckhoff.ITcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{a7390b8e-0434-4b57-9dfc-bdeb3f9087e0}">
