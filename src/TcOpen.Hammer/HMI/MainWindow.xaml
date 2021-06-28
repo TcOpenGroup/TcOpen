@@ -45,7 +45,7 @@
                                 <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._components}" PresentationType="Service-Manual" />
                             </ScrollViewer>
                             <Expander Grid.Row="1">
-                            <vortex:RenderableContentControl                                
+                                <vortex:RenderableContentControl                                
                                 DataContext="{Binding PlcHammer.MAIN._app}"
                                 PresentationType="Diagnostics" />
                             </Expander>
@@ -54,10 +54,15 @@
                 </TabControl>
                 <Grid Grid.Row="1">
                     <Viewbox>
+
                         <Canvas
                             Width="700"
                             Height="450"
                             Background="{DynamicResource MaterialDesignLightBackground}">
+                            <Viewbox Canvas.Left="525" Canvas.Top="178" Height="225" Width="165">
+                                <vortex:RenderableContentControl 
+                                    DataContext="{Binding PlcHammer.MAIN._app._station001._processTraceabilty._data, Mode=OneWay}"/>
+                            </Viewbox>
                             <Border
                                 Canvas.Top="17"
                                 Width="500"
@@ -127,7 +132,7 @@
         <TabItem Header="Data">
             <TabControl>
                 <TabItem Header="Process settings">
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._processDataManager}" PresentationType="Base">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._processRecipies}" PresentationType="Base">
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
@@ -140,9 +145,16 @@
                         </vortex:RenderableContentControl.RootContainer>
                     </vortex:RenderableContentControl>
                 </TabItem>
+                <TabItem Header="Traceability">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._processTraceabilty}" PresentationType="Base">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </TabItem>
             </TabControl>
         </TabItem>
-        <TabItem Header="Monitoring">
+        <TabItem Header="Diagnostics">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -152,8 +164,8 @@
                     <RowDefinition Height="70*" />
                     <RowDefinition Height="30*" />
                 </Grid.RowDefinitions>
-                <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding PlcHammer.MAIN}" />
-                <Grid Grid.Column="1" Style="{DynamicResource Card}">
+                <vortex:DynamicTreeView Grid.Row="1" x:Name="dynamicTreeView" DataContext="{Binding PlcHammer.MAIN}" />
+                <Grid Grid.Row="1" Grid.Column="1" Style="{DynamicResource Card}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -178,12 +190,15 @@
                     </ScrollViewer>
                 </Grid>
                 <Grid
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Grid.ColumnSpan="2"
                     Style="{DynamicResource Card}">
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app}" PresentationType="Diagnostics" />
                 </Grid>
             </Grid>
+        </TabItem>
+        <TabItem Header="Swift Programmer">
+            <vortex:SwiftRecorderView DataContext="{Binding SwiftRecorderViewModel}"></vortex:SwiftRecorderView>
         </TabItem>
     </TabControl>
 </Window>

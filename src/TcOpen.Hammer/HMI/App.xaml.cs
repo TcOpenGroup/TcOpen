@@ -7,6 +7,7 @@ using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Data.Json;
 using System.Reflection;
 using System.IO;
+using TcOpen.Inxton.Abstractions.Data;
 
 namespace HMI
 {
@@ -34,6 +35,20 @@ namespace HMI
             SetUpJsonRepositories();
         }
 
+        private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
+                                       IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
+                                       IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
+        {
+            Entry.PlcHammer.MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
+            Entry.PlcHammer.MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
+
+            Entry.PlcHammer.MAIN._app._station001._processTraceabilty.InitializeRepository(processTraceabiltyRepository);
+            Entry.PlcHammer.MAIN._app._station001._processTraceabilty.InitializeRemoteDataExchange();
+
+            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager.InitializeRepository(technologyDataRepository);
+            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
+        }
+
         private static void SetUpJsonRepositories()
         {
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
@@ -43,34 +58,25 @@ namespace HMI
             {
                 Directory.CreateDirectory(repositoryDirectory);
             }
+            
+            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
+            var processTraceabiltyRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "Traceability")));
+            var technologyDataRepository = new JsonRepository<PlainStation001_TechnologicalSettings>(new JsonRepositorySettings<PlainStation001_TechnologicalSettings>(Path.Combine(repositoryDirectory, "TechnologicalSettings")));
 
 
-            var processDataRepositorySettings = new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "HammerCollection"));
-            var processDataRepository = new JsonRepository<PlainStation001_ProductionData>(processDataRepositorySettings);
-
-            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRepository(processDataRepository);
-            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRemoteDataExchange();
-
-            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager
-                .InitializeRepository(new JsonRepository<PlainStation001_TechnologicalSettings>
-                                     (new JsonRepositorySettings<PlainStation001_TechnologicalSettings>(Path.Combine(repositoryDirectory, "TechnologicalSettings"))));
+            SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
         }
 
         private static void SetUpMongoDatabase()
         {
             var mongoUri = "mongodb://localhost:27017";
             var databaseName = "Hammer";
-            var collectionName = "HammerCollection";
+          
+            var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
+            var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
+            var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
 
-            var processDataRepositorySettings = new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, collectionName);
-            var processDataRepository = new MongoDbRepository<PlainStation001_ProductionData>(processDataRepositorySettings);
-            
-            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRepository(processDataRepository);
-            Entry.PlcHammer.MAIN._app._station001._processDataManager.InitializeRemoteDataExchange();
-
-            Entry.PlcHammer.MAIN._app._station001._technologicalDataManager
-                .InitializeRepository(new MongoDbRepository<PlainStation001_TechnologicalSettings>
-                                     (new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings")));
-        }
+            SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
+        }   
     }
 }

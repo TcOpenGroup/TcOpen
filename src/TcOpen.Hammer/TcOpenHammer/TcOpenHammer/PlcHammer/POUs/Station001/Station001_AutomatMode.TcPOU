@@ -35,6 +35,19 @@ END_VAR
     //--------------------------------------------	
 END_IF;
 
+IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(50, TRUE, 'LOAD PRECESS SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.ProcessRecepie.Read('default').Done);
+	Station.ProductionData := Station.ProcessRecepie._data;
+    //--------------------------------------------	
+END_IF;
+
 IF (Step(100, TRUE, 'MOVE VERTICAL AXIS DOWN')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToWork().Done);
@@ -43,9 +56,9 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := 9, inMaxValue := 11, inoutValue := Station.Components._dimX);
-    Station.Components._dimYsim(inMinValue := 9, inMaxValue := 11, inoutValue := Station.Components._dimY);
-    Station.Components._dimZsim(inMinValue := 9, inMaxValue := 11, inoutValue := Station.Components._dimZ);
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum, inMaxValue := Station.ProductionData.DimX.Maximum, inoutValue := Station.Components._dimX);
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum, inMaxValue := Station.ProductionData.DimY.Maximum, inoutValue := Station.Components._dimY);
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum, inMaxValue := Station.ProductionData.DimZ.Maximum, inoutValue := Station.Components._dimZ);
     StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
@@ -53,9 +66,9 @@ END_IF;
 IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
     _partPassedChecks := Station.Checkers.StartChecks()
-        .CheckAnalogue(Station.Components._dimX, Station.ProcessDataManager._data.DimX)
-        .CheckAnalogue(Station.Components._dimY, Station.ProcessDataManager._data.DimY)
-        .CheckAnalogue(Station.Components._dimZ, Station.ProcessDataManager._data.DimZ)
+        .CheckAnalogue(Station.Components._dimX, Station.ProcessTraceabilty._data.DimX)
+        .CheckAnalogue(Station.Components._dimY, Station.ProcessTraceabilty._data.DimY)
+        .CheckAnalogue(Station.Components._dimZ, Station.ProcessTraceabilty._data.DimZ)
         .HasPassed();
 
     StepCompleteWhen(TRUE);
@@ -128,7 +141,7 @@ END_IF;
 
 IF (Step(850, TRUE, 'SAVE DATA')) THEN
     //--------------------------------------------	
-    StepCompleteWhen(Station.ProcessDataManager.Create(Identifier := ULINT_TO_STRING(THIS^.Context.Rtc.TickClock())).Done);
+    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.Rtc.TickClock())).Done);
     //--------------------------------------------	
 END_IF;
 

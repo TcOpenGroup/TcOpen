@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="AnalogueValueCheck" Id="{a30d8c73-0b8f-4c50-997c-148b828adecb}">
-    <Declaration><![CDATA[TYPE AnalogueValueCheck :
+    <Declaration><![CDATA[{attribute wpf [Container(Layout.Wrap)]}
+{attribute wpf [Group(Layout.GroupBox)]}
+TYPE AnalogueValueCheck :
 STRUCT
 	Mininum : REAL;
+	{attribute clr [RenderIgnore("Control", "ControlSlim")]}
 	Measured : REAL;
 	Maximum : REAL;	
 END_STRUCT
