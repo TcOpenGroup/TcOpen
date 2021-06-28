@@ -91,6 +91,7 @@ IF THIS^.State = eTcoMovementState.Reset THEN
 
     IF _mcReset.Done THEN
         _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+		DriveRef.ClearError();
 		DriveRef.RestoreTasks();
         _currentControlledTaskIdentity := _controlledTaskIdentity;
         THIS^.ChangeState(eTcoMovementState.Power);
@@ -167,6 +168,7 @@ IF THIS^.State = eTcoMovementState.Reset THEN
 
     IF _mcReset.Done THEN
         _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+		DriveRef.ClearError();
         DriveRef.RestoreTasks();
         _currentControlledTaskIdentity := _controlledTaskIdentity;
         THIS^.ChangeState(eTcoMovementState.Power);

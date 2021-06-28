@@ -20,7 +20,16 @@ VAR CONSTANT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+        <ST><![CDATA[IF (Step(10, TRUE, 'RESTORE ALL COMPONENTS')) THEN
+    //--------------------------------------------
+	Station.Components._horizontalNcAxis.Restore();
+	Station.Components._verticalPiston.Restore();
+	Station.Components._gripperPiston.Restore();
+    StepCompleteWhen(TRUE);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
     //--------------------------------------------	
