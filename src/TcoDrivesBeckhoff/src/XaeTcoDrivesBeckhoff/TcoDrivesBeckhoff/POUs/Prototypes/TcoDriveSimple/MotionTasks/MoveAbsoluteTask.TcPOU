@@ -55,7 +55,7 @@ IF Execute() THEN
     END_IF
 
     IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _mcMoveAbsolutePreconditionOK) THEN
-        IF NOT _mcMoveAbsolutePreconditionOK THEN
+        IF _mcReadAxisEncoderReferenceSystem.Valid AND NOT _mcMoveAbsolutePreconditionOK THEN
             Messenger.Error('Move absolute not possible as axis is Incremental and not Homed');
         END_IF
 
