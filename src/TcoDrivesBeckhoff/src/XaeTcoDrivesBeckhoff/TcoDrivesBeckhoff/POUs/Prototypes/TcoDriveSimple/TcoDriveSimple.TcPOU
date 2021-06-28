@@ -97,12 +97,12 @@ END_IF;]]></ST>
       </Get>
     </Property>
     <Property Name="AxisStatus" Id="{9f534259-f47a-013c-016f-57eedebf76e7}" FolderPath="Axis\">
-      <Declaration><![CDATA[PROPERTY AxisStatus : TcoAxisStatus]]></Declaration>
+      <Declaration><![CDATA[PROPERTY AxisStatus : REFERENCE TO TcoAxisStatus]]></Declaration>
       <Get Name="Get" Id="{f9fdffde-5f54-0445-0964-dc68d9a08f3c}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[UpdateAxisStatus();
-AxisStatus := _axisStatus;]]></ST>
+AxisStatus REF= _axisStatus;]]></ST>
         </Implementation>
       </Get>
     </Property>
