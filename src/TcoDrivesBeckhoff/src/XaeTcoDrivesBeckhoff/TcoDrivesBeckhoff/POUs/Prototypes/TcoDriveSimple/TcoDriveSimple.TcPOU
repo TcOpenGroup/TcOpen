@@ -51,6 +51,11 @@ VAR
     _moveAbsoluteTask : MoveAbsoluteTask(THIS^);
     {attribute addProperty Name "<#Move modulo#>"}
     _moveModuloTask : MoveModuloTask(THIS^);
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(inoAxisRef) THEN
@@ -80,6 +85,8 @@ _haltTask();
 _moveRelativeTask();
 _moveAbsoluteTask();
 _moveModuloTask();
+
+IF(_axisStatus.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_axisStatus.ErrorId)).Append('.').Append('For details see the service mode').ToString()); END_IF;
 
 ]]></ST>
     </Implementation>
@@ -411,7 +418,9 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_axisStatus.Error := TRUE;
-_axisStatus.ErrorId := inErrorId;
+IF inErrorId <> 0 THEN
+	_axisStatus.ErrorId := inErrorId;
+END_IF
 ]]></ST>
       </Implementation>
     </Method>
