@@ -20,6 +20,12 @@ VAR
 	_simulationCycleGripperPiston : BOOL;	
 	_verticalPosition : INT;
 	_gripperPosition : INT;
+	_dimXsim : RealValueSimulation;
+	_dimYsim : RealValueSimulation;
+	_dimZsim : RealValueSimulation;
+	_dimX : REAL;
+	_dimY : REAL;
+	_dimZ : REAL;
 END_VAR
 VAR CONSTANT
 	_verticalPistonStroke : INT := 150;
@@ -56,17 +62,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="HorizontalAxis" Id="{b1ab433f-e84d-4bd1-b49e-16adbd28465d}">
-      <Declaration><![CDATA[PROPERTY HorizontalAxis : IDrive]]></Declaration>
-      <Get Name="Get" Id="{7f862521-62c1-4810-98b0-73ca60cc7784}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[HorizontalAxis := _horizontalAxis;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="HorizontalNcAxis" Id="{50ed9664-d5a7-4e96-a637-5203276f92d3}">
       <Declaration><![CDATA[PROPERTY HorizontalNcAxis : TcoDrivesBeckhoff.ITcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{a7390b8e-0434-4b57-9dfc-bdeb3f9087e0}">
@@ -96,61 +91,66 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_verticalPiston.MoveHomeTask.Busy 
-	OR _verticalPiston.MoveWorkTask.Busy) THEN
-	_counterSimVerticalPiston := _counterSimVerticalPiston + 1;
-	_simulationCycleVerticalPiston := (_counterSimVerticalPiston MOD _verticalPistonStroke) = 0;
-END_IF;	
-
-IF(Gripper.MoveHomeTask.Busy 
-   OR Gripper.MoveWorkTask.Busy) THEN
-	_counterSimGripperPiston := _counterSimVerticalPiston + 1;
-	_simulationCycleGripperPiston := (_counterSimVerticalPiston MOD _gripperPistonStroke) = 0;
-END_IF;	
-
-
-IF(IO.qA1[0] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[0] := TRUE;
-	IO.iA1[1] := FALSE;
-	_verticalPosition := 0;
-END_IF
-
-IF(IO.qA1[1] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[1] := TRUE;
-	IO.iA1[0] := FALSE;
-	_verticalPosition := _verticalPistonStroke;
-END_IF
-
-
-IF(IO.qA1[0] AND NOT IO.iA1[0]) THEN	
-	_verticalPosition := (_verticalPosition - 1);
+        <ST><![CDATA[IF (_verticalPiston.MoveHomeTask.Busy OR _verticalPiston.MoveWorkTask.Busy) THEN
+    _counterSimVerticalPiston := _counterSimVerticalPiston + 1;
+    _simulationCycleVerticalPiston := (_counterSimVerticalPiston MOD _verticalPistonStroke) = 0;
 END_IF;
 
-
-IF(IO.qA1[1]  AND NOT IO.iA1[1]) THEN	
-	_verticalPosition := (_verticalPosition + 1);
+IF (Gripper.MoveHomeTask.Busy OR Gripper.MoveWorkTask.Busy) THEN
+    _counterSimGripperPiston := _counterSimVerticalPiston + 1;
+    _simulationCycleGripperPiston := (_counterSimVerticalPiston MOD _gripperPistonStroke) = 0;
 END_IF;
 
-IF(IO.qA1[2] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[2] := TRUE;
-	IO.iA1[3] := FALSE;
-	_gripperPosition := 0;
+IF (IO.qA1[0] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[0] := TRUE;
+    IO.iA1[1] := FALSE;
+    _verticalPosition := 0;
 END_IF
 
-IF(IO.qA1[3] AND _simulationCycleVerticalPiston) THEN
-	IO.iA1[3] := TRUE;
-	IO.iA1[2] := FALSE;
-	_gripperPosition := _gripperPistonStroke;
+IF (IO.qA1[1] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[1] := TRUE;
+    IO.iA1[0] := FALSE;
+    _verticalPosition := _verticalPistonStroke;
 END_IF
 
-IF(IO.qA1[2] AND NOT IO.iA1[2]) THEN	
-	_gripperPosition := (_gripperPosition - 1);
+IF (IO.qA1[0] AND NOT IO.iA1[0]) THEN
+    _verticalPosition := (_verticalPosition - 1);
 END_IF;
 
+IF (IO.qA1[1] AND NOT IO.iA1[1]) THEN
+    _verticalPosition := (_verticalPosition + 1);
+END_IF;
 
-IF(IO.qA1[3]  AND NOT IO.iA1[3]) THEN	
-	_gripperPosition := (_gripperPosition + 1);
-END_IF]]></ST>
+IF (IO.qA1[2] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[2] := TRUE;
+    IO.iA1[3] := FALSE;
+    _gripperPosition := 0;
+END_IF
+
+IF (IO.qA1[3] AND _simulationCycleVerticalPiston) THEN
+    IO.iA1[3] := TRUE;
+    IO.iA1[2] := FALSE;
+    _gripperPosition := _gripperPistonStroke;
+END_IF
+
+IF (IO.qA1[2] AND NOT IO.iA1[2]) THEN
+    _gripperPosition := (_gripperPosition - 1);
+END_IF;
+
+IF (IO.qA1[3] AND NOT IO.iA1[3]) THEN
+    _gripperPosition := (_gripperPosition + 1);
+END_IF
+
+_dimXsim.Dc := 3;
+_dimYsim.Dc := 3;
+_dimZsim.Dc := 3;
+_dimXsim.P1 := 0.74;
+_dimYsim.P1 := 0.74;
+_dimZsim.P1 := 0.74;
+_dimXsim.P2 := 1.1;
+_dimYsim.P2 := 1.1;
+_dimZsim.P2 := 1.1;
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="VerticalAxis" Id="{95519e2e-c8d9-4542-adf0-78464b1acba5}">

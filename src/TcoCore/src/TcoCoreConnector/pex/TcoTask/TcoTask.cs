@@ -129,7 +129,7 @@ namespace TcoCore
                 return codeProvider;
             }
 
-            protected set => codeProvider = value; 
+            set => codeProvider = value; 
         }
         
         /// <summary>

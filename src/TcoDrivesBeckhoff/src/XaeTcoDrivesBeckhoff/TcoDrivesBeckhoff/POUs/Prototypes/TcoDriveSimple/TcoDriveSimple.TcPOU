@@ -51,6 +51,11 @@ VAR
     _moveAbsoluteTask : MoveAbsoluteTask(THIS^);
     {attribute addProperty Name "<#Move modulo#>"}
     _moveModuloTask : MoveModuloTask(THIS^);
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(inoAxisRef) THEN
@@ -81,6 +86,8 @@ _moveRelativeTask();
 _moveAbsoluteTask();
 _moveModuloTask();
 
+IF(_axisStatus.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_axisStatus.ErrorId)).Append('.').Append('For details see the service mode').ToString()); END_IF;
+
 ]]></ST>
     </Implementation>
     <Folder Name="Axis" Id="{d7605e2c-2fb5-0437-2ec5-266a0c7dda7d}" />
@@ -97,12 +104,12 @@ END_IF;]]></ST>
       </Get>
     </Property>
     <Property Name="AxisStatus" Id="{9f534259-f47a-013c-016f-57eedebf76e7}" FolderPath="Axis\">
-      <Declaration><![CDATA[PROPERTY AxisStatus : TcoAxisStatus]]></Declaration>
+      <Declaration><![CDATA[PROPERTY AxisStatus : REFERENCE TO TcoAxisStatus]]></Declaration>
       <Get Name="Get" Id="{f9fdffde-5f54-0445-0964-dc68d9a08f3c}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[UpdateAxisStatus();
-AxisStatus := _axisStatus;]]></ST>
+AxisStatus REF= _axisStatus;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -411,7 +418,9 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_axisStatus.Error := TRUE;
-_axisStatus.ErrorId := inErrorId;
+IF inErrorId <> 0 THEN
+	_axisStatus.ErrorId := inErrorId;
+END_IF
 ]]></ST>
       </Implementation>
     </Method>

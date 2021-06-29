@@ -21,9 +21,9 @@ namespace TcOpen.Inxton.Swift
             foreach (var task in Tasks)
             {
                 task.RecordTaskAction = this.Record;
-            }
+            }          
         }
-
+        
         private readonly IVortexObject _recordedObject;
 
         readonly Sequence sequence = new Sequence();

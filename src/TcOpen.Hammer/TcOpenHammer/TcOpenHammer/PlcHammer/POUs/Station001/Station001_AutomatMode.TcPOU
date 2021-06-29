@@ -24,39 +24,73 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(100, TRUE, 'MOVE VERTICAL AXIS DOWN')) THEN
+        <ST><![CDATA[IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.HorizontalNCAxis.DriveRef
+            .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
+            THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+            THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+            THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+            THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(50, TRUE, 'LOAD PRECESS SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.ProcessRecepie.Read('default').Done);
+	Station.ProductionData := Station.ProcessRecepie._data;
+    //--------------------------------------------	
+END_IF;
+
+
+IF (Step(100, TRUE, 'MOVE VERTICAL AXIS DOWN')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToWork().Done);
     //--------------------------------------------	
 END_IF;
 
-IF (Step(200, TRUE, 'CLOSE GRIPPER')) THEN
+
+IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    StepCompleteWhen(Station.Components.Gripper.MoveToWork().Done);
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum, inMaxValue := Station.ProductionData.DimX.Maximum, inoutValue := Station.Components._dimX);
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum, inMaxValue := Station.ProductionData.DimY.Maximum, inoutValue := Station.Components._dimY);
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum, inMaxValue := Station.ProductionData.DimZ.Maximum, inoutValue := Station.Components._dimZ);
+    StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
 
-IF (Step(300, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
-    //--------------------------------------------
-    StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
-    //--------------------------------------------	
-END_IF;
-
-IF (Step(400, TRUE, 'CHECK DIMENSIONS')) THEN
+IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
     _partPassedChecks := Station.Checkers.StartChecks()
-        .CheckAnalogue(10, Station.ProcessDataManager._data.DimX)
-        .CheckAnalogue(10, Station.ProcessDataManager._data.DimY)
-        .CheckAnalogue(10, Station.ProcessDataManager._data.DimZ)
+        .CheckAnalogue(Station.Components._dimX, Station.ProcessTraceabilty._data.DimX)
+        .CheckAnalogue(Station.Components._dimY, Station.ProcessTraceabilty._data.DimY)
+        .CheckAnalogue(Station.Components._dimZ, Station.ProcessTraceabilty._data.DimZ)
         .HasPassed();
 
     StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
 
+IF (Step(300, TRUE, 'CLOSE GRIPPER')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.Gripper.MoveToWork().Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(400, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
+    //--------------------------------------------	
+END_IF;
+
 IF (Step(425, _partPassedChecks, 'MOVE HORIZONTAL AXIS TO UNLOAD POSITION (PASSED CONVEYOR)')) THEN
     //--------------------------------------------   
-    //	StepCompleteWhen(Station.Components.HorizontalAxis.MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.PassedPartsHorizontalPosition).Done); 				
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.PassedPartsHorizontalPosition,
             THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
@@ -68,7 +102,6 @@ END_IF;
 
 IF (Step(450, NOT _partPassedChecks, 'MOVE HORIZONTAL AXIS TO UNLOAD POSITION (FAILED CONVEYOR)')) THEN
     //--------------------------------------------   
-    //	StepCompleteWhen(Station.Components.HorizontalAxis.MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.FailedPartsHorizontalPosition).Done); 				
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.FailedPartsHorizontalPosition,
             THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
@@ -98,8 +131,7 @@ END_IF;
 
 IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
     //--------------------------------------------
-    //   Station.Components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION);
-    Station.Components.HorizontalNCAxis.DriveRef.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION,
+    Station.Components.HorizontalNCAxis.DriveRef.MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
         THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
         THIS^.Station.TechnologicalDataManager._data.AxisAcc,
         THIS^.Station.TechnologicalDataManager._data.AxisDcc,
@@ -110,13 +142,12 @@ END_IF;
 
 IF (Step(850, TRUE, 'SAVE DATA')) THEN
     //--------------------------------------------	
-    StepCompleteWhen(Station.ProcessDataManager.Create(Identifier := ULINT_TO_STRING(THIS^.Context.Rtc.TickClock())).Done);
+    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.Rtc.TickClock())).Done);
     //--------------------------------------------	
 END_IF;
 
 IF (Step(900, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
     //--------------------------------------------    
-    // 		StepCompleteWhen(Station.Components.HorizontalAxis.MoveAbsoluteTask.Done);
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.MoveAbsoluteTask.Done);
     //--------------------------------------------	
 END_IF;

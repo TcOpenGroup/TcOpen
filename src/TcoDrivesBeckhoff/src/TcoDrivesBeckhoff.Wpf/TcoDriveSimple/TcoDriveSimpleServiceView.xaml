@@ -76,7 +76,10 @@
                     </StackPanel>
                     <vortex:RenderableContentControl Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.Error}"/>
                     <vortex:RenderableContentControl Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ErrorId}"/>
-
+                    <StackPanel  Grid.Column="5" Margin="5">
+                        <TextBlock Text="Error description"/>
+                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Component._axisStatus.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>

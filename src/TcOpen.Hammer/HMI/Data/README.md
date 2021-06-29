@@ -71,7 +71,7 @@ Do it at the startup of the application, since it's not necessary to do it more 
 	var collectionName = "HammerCollection";
 	var mongoSettings = new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri,databaseName,collectionName);
 	var repository = new MongoDbRepository<PlainStation001_ProductionData>(mongoSettings);
-	Entry.PlcHammer.MAIN._app._station001._dataManager.InitializeRepository(repository); 
+	Entry.PlcHammer.TECH_MAIN._app._station001._dataManager.InitializeRepository(repository); 
 ```
 
 It's important not to forget the prefix `Plain` ! 
@@ -83,7 +83,7 @@ If the type of the structure I'd like to save is called 'Station001_ProductionDa
 In `MainWindow.xaml` I added a new tab with the `DataView` and set the `DataContext` to the data manager instance.
 
 ```xml
-	<vortex:DataView DataContext="{Binding PlcHammer.MAIN._app._station001._dataManager}" />
+	<vortex:DataView DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._dataManager}" />
 ```
 
 Note that the namespace must exist in the root tag.

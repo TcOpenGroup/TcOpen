@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TECH_MAIN" Id="{84d391ff-245d-469c-9f07-0280ac5ddd13}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TECH_MAIN
+VAR
+	_app : AppContext;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_app.Run();
+_app.RtcSynchronize(TRUE, '', 60);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

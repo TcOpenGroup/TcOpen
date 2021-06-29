@@ -50,10 +50,13 @@
     <Compile Include="POUs\Data\ProcessDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Data\RealValueSimulation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Data\TechnologicalDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="POUs\TECH_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Station001\IO.TcGVL">
@@ -92,6 +95,10 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_Math">
+      <DefaultResolution>Tc2_Math, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Math</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -105,27 +112,27 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.2.528 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoData">
-      <DefaultResolution>TcoData, 0.4.2.528 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoData, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoData</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoDrivesBeckhoff">
-      <DefaultResolution>TcoDrivesBeckhoff, 0.4.2.528 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoDrivesBeckhoff, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoDrivesBeckhoff</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoElements">
-      <DefaultResolution>TcoElements, 0.4.2.528 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoElements, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoElements</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoIoBeckhoff">
-      <DefaultResolution>TcoIoBeckhoff, 0.4.2.528 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoIoBeckhoff, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoIoBeckhoff</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoPneumatics">
-      <DefaultResolution>TcoPneumatics, 0.4.2.528 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoPneumatics, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoPneumatics</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -136,28 +143,23 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.2.528 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoData">
-      <Resolution>TcoData, 0.4.2.528 (Vortex.Library)</Resolution>
+      <Resolution>TcoData, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoDrivesBeckhoff">
-      <Resolution>TcoDrivesBeckhoff, 0.4.2.528 (Vortex.Library)</Resolution>
+      <Resolution>TcoDrivesBeckhoff, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoElements">
-      <Resolution>TcoElements, 0.4.2.528 (Vortex.Library)</Resolution>
+      <Resolution>TcoElements, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoIoBeckhoff">
-      <Resolution>TcoIoBeckhoff, 0.4.2.528 (Vortex.Library)</Resolution>
+      <Resolution>TcoIoBeckhoff, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoPneumatics">
-      <Resolution>TcoPneumatics, 0.4.2.528 (Vortex.Library)</Resolution>
+      <Resolution>TcoPneumatics, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <SubObject Include="Station001_Components.HorizontalAxis">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
