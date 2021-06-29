@@ -1978,7 +1978,7 @@ External Setpoint Generation:
 		</System>
 		<Motion>
 			<NC>
-				<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true" AmsNetId="172.20.10.104.1.1">
+				<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true">
 					<Name>NC-Task 1 SAF</Name>
 					<Vars VarGrpType="1" InsertType="1">
 						<Name>Inputs</Name>
@@ -2376,7 +2376,7 @@ External Setpoint Generation:
 					<Pnp>
 						<DeviceDesc>Ethernet (TwinCAT-Intel PCI Ethernet Adapter (Gigab</DeviceDesc>
 						<DeviceName>\DEVICE\{11CA0869-9F97-492C-B6D9-C07CC0650E06}</DeviceName>
-						<DeviceData>000105390b10</DeviceData>
+						<DeviceData>0001054712bc</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Image Id="4" AddrType="9" ImageType="3">
