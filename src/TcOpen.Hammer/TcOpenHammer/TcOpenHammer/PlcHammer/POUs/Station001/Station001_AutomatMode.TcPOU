@@ -136,7 +136,6 @@ IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
         THIS^.Station.TechnologicalDataManager._data.AxisAcc,
         THIS^.Station.TechnologicalDataManager._data.AxisDcc,
         THIS^.Station.TechnologicalDataManager._data.AxisJerk);
-
     StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
