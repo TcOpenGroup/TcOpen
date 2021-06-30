@@ -1,7 +1,7 @@
 name: 'Test Report'
 on:
   workflow_run:
-    workflows: ['Build','Nightly']
+    workflows: ['Build','Nightly', 'Publish']
     types:
       - completed
 jobs:
