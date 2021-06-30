@@ -4,13 +4,13 @@ on:
   workflow_dispatch :
     branches :  
       - dev
-  # schedule :
-  #   - cron: 0 02 * * * 
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   build:
     runs-on: self-hosted
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it. Dummy edit
       - uses: actions/checkout@v2
@@ -30,3 +30,9 @@ jobs:
             "testingStrength" = 10;
             "packNugets" = $true;
           }
+      - name: Upload test results
+        uses: actions/upload-artifact@v2 
+        if: success() || failure() 
+        with:
+          name: test-results
+          path: ${{ github.workspace }}\**\TestResults\*.xml          
