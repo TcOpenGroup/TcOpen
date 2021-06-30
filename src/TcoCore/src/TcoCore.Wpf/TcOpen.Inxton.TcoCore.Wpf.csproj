@@ -33,6 +33,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Localization.resx</DependentUpon>
     </Compile>
+    <Compile Update="TcoComponent\TcoComponentSpotView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Localization.resx">
@@ -41,6 +44,10 @@
     </EmbeddedResource>
    </ItemGroup>
   <ItemGroup>
+    <Page Update="TcoComponent\TcoComponentSpotView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="TcoTask\TcoTaskProgressBarView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

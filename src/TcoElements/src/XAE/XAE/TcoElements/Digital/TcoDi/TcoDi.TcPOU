@@ -32,6 +32,7 @@ VAR
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#Signal#>"}
 	_signalInfo : TcoCore.TcoSignalInfo;
 	{attribute addProperty Name "<#Check On#>"}
 	{attribute addProperty ToolTip "<#Checks that the input is on#>"}
