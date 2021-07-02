@@ -1,0 +1,16 @@
+mode: Mainline
+continuous-delivery-fallback-tag: ''
+branches:
+  master:
+    regex: ^master
+    tag: ''
+    increment: Patch
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: true
+    tracks-release-branches: false
+    is-release-branch: true
+  develop:
+    regex: ^develop
+    increment: Patch
+ignore:
+  sha: []
