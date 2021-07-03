@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using TcoDataTests;
 using TcoDataUnitTests;
-using TcOpen.Inxton.MongoDb;
+using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.RavenDb;
 
 namespace TcoData.TcoDataExchange.Integration.Tests.Repository
