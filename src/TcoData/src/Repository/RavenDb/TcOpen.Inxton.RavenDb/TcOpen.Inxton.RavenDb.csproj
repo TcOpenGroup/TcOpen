@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
-    <UseWPF>true</UseWPF>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <!--NuGet properties-->
     <Authors>TcOpenGroup contributors</Authors>
@@ -15,25 +14,11 @@
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
     <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
-
-  <ItemGroup>	  
-	  <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.12.0-nightly.517" />
-	  <ProjectReference Include="..\..\TcoDataConnector\TcoDataConnector.csproj" />
-  </ItemGroup>
-
   <ItemGroup>
-    <Compile Update="Properties\strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>strings.resx</DependentUpon>
-    </Compile>
+    <PackageReference Include="RavenDB.Client" Version="5.2.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <EmbeddedResource Update="Properties\strings.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
+    <ProjectReference Include="..\..\..\Data\TcOpen.Inxton.Data.csproj" />
+    <ProjectReference Include="..\..\..\TcoDataConnector\TcoDataConnector.csproj" />
+  </ItemGroup> 
 </Project>
