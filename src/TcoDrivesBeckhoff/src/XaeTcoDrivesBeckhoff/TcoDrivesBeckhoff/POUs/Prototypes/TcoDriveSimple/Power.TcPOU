@@ -136,8 +136,10 @@ IF _powerOverride = ePowerOverride.Local_control AND inIsServiceMode THEN
 END_IF
 
 IF NOT inIsServiceMode THEN
+	IF _drivePowerOverrideTask.IsOn THEN
+		_drivePowerOverrideTask.Off();
+	END_IF
 	_powerOverride := ePowerOverride.Global_control;
-	_drivePowerOverrideTask.Off();
 	_drivePowerOverrideTask.Enabled :=FALSE;
 	_driveEnableLocalTask.Enabled :=FALSE;
 	_driveEnablePositiveLocalTask.Enabled :=FALSE;

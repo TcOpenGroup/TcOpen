@@ -12,6 +12,7 @@
     Width="800"
     Height="800"
     mc:Ignorable="d"
+    WindowState="Maximized"
     Title="MainWindow">
     <Window.DataContext>
         <local:MainWindowViewModel />
@@ -27,11 +28,11 @@
                 <TabControl>
                     <TabItem Header="Sequences">
                         <Grid Grid.Row="0">
-                            <ContentControl Visibility="{Binding PlcHammer.MAIN._app._station001._groundModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
-                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._groundMode}" PresentationType="Base" />
+                            <ContentControl Visibility="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundMode}" PresentationType="Base" />
                             </ContentControl>
-                            <ContentControl Visibility="{Binding PlcHammer.MAIN._app._station001._automatModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
-                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._automatMode}" PresentationType="Base" />
+                            <ContentControl Visibility="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatMode}" PresentationType="Base" />
                             </ContentControl>
                         </Grid>
                     </TabItem>
@@ -42,11 +43,11 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <ScrollViewer Grid.Row="0">
-                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._components}" PresentationType="Service-Manual" />
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components}" PresentationType="Service-Manual" />
                             </ScrollViewer>
                             <Expander Grid.Row="1">
-                            <vortex:RenderableContentControl                                
-                                DataContext="{Binding PlcHammer.MAIN._app}"
+                                <vortex:RenderableContentControl                                
+                                DataContext="{Binding PlcHammer.TECH_MAIN._app}"
                                 PresentationType="Diagnostics" />
                             </Expander>
                         </Grid>
@@ -58,19 +59,21 @@
                             Width="700"
                             Height="450"
                             Background="{DynamicResource MaterialDesignLightBackground}">
+                            <Viewbox Canvas.Left="525" Canvas.Top="178" Height="225" Width="165">
+                                <vortex:RenderableContentControl 
+                                    DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._processTraceabilty._data, Mode=OneWay}"/>
+                            </Viewbox>
                             <Border
-                                Canvas.Top="17"
-                                Width="500"
+                                Width="696"
                                 Height="38"
                                 Background="Gray"
                                 BorderBrush="LightGray"
                                 BorderThickness="2"
                                 CornerRadius="2.5" />
                             <Border
-                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic}"
-                                Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic}"
+                                Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic, Converter={local:AxisPositionConverter}}"                                
                                 Width="50"
-                                Height="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}"
+                                Height="{Binding PlcHammer.TECH_MAIN._app._station001._components._verticalPosition.Cyclic, Converter={local:VerticalPistonPositionConverter}}"
                                 Background="Gray"
                                 BorderBrush="LightGray"
                                 BorderThickness="2"
@@ -81,17 +84,17 @@
                                         <ScaleTransform />
                                         <SkewTransform />
                                         <RotateTransform />
-                                        <TranslateTransform Y="-90" />
+                                        <TranslateTransform Y="0" />
                                     </TransformGroup>
                                 </Border.RenderTransform>
                             </Border>
                             <Border
-                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalAxis._position.Cyclic}"
-                                Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic, Converter={local:GripperPositionConverter}}"
-                                Width="{Binding PlcHammer.MAIN._app._station001._components._gripperPosition.Cyclic}"
+                                Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic}"
+                                Canvas.Top="{Binding PlcHammer.TECH_MAIN._app._station001._components._verticalPosition.Cyclic, Converter={local:GripperPositionConverter}}"
+                                Width="{Binding PlcHammer.TECH_MAIN._app._station001._components._gripperPosition.Cyclic}"
                                 Height="25"
-                                Background="Gray"
-                                BorderBrush="LightGray"
+                                Background="{Binding PlcHammer.TECH_MAIN._app._station001._automatMode._partPassedChecks.Cyclic, Converter={local:OK_NOK_Converter}}"
+                                BorderBrush="Gray"
                                 BorderThickness="2"
                                 CornerRadius="2.5"
                                 RenderTransformOrigin="125,0.5">
@@ -100,11 +103,30 @@
                                         <ScaleTransform />
                                         <SkewTransform />
                                         <RotateTransform />
-                                        <TranslateTransform Y="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}" />
+                                        <TranslateTransform Y="0" />
                                     </TransformGroup>
                                 </Border.RenderTransform>
 
                             </Border>
+                            <Border Background="GreenYellow" 
+                                    Width="50" 
+                                    Height="100"
+                                    CornerRadius="2.5"
+                                    BorderThickness="1"
+                                    BorderBrush="Green" Canvas.Top="150" Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._technologicalDataManager._data.PassedPartsHorizontalPosition.Cyclic}"/>
+                            <Border Background="Red" 
+                                    Width="50" 
+                                    Height="100"
+                                    CornerRadius="2.5"
+                                    BorderThickness="1"
+                                    BorderBrush="DarkRed" Canvas.Top="150" Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._technologicalDataManager._data.FailedPartsHorizontalPosition.Cyclic}"/>
+                            <Border Background="Gray" 
+                                    Width="50" 
+                                    Height="100"
+                                    CornerRadius="2.5"
+                                    BorderThickness="1"
+                                    BorderBrush="DarkRed" Canvas.Top="150" Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._technologicalDataManager._data.LoadPartsHorizontalPosition.Cyclic}"/>
+                            <TextBlock Foreground="White" Text="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic, StringFormat=Position: 000.0 mm}" Canvas.Left="330" Canvas.Top="10"></TextBlock>
                         </Canvas>
                     </Viewbox>
                 </Grid>
@@ -118,23 +140,30 @@
                             <Setter Property="Width" Value="300" />
                         </Style>
                     </UniformGrid.Resources>
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._groundModeTask}" />
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._automatModeTask}" />
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._serviceModeTask}" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask}" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask}" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
                 </UniformGrid>
             </Grid>
         </TabItem>
         <TabItem Header="Data">
             <TabControl>
                 <TabItem Header="Process settings">
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._processDataManager}" PresentationType="Base">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._processRecipies}" PresentationType="Base">
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
                     </vortex:RenderableContentControl>
                 </TabItem>
                 <TabItem Header="Technology">
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._technologicalDataManager}" PresentationType="Base">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._technologicalDataManager}" PresentationType="Base">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </TabItem>
+                <TabItem Header="Traceability">
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._processTraceabilty}" PresentationType="Base">
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
@@ -142,7 +171,7 @@
                 </TabItem>
             </TabControl>
         </TabItem>
-        <TabItem Header="Monitoring">
+        <TabItem Header="Diagnostics">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -152,8 +181,8 @@
                     <RowDefinition Height="70*" />
                     <RowDefinition Height="30*" />
                 </Grid.RowDefinitions>
-                <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding PlcHammer.MAIN}" />
-                <Grid Grid.Column="1" Style="{DynamicResource Card}">
+                <vortex:DynamicTreeView Grid.Row="1" x:Name="dynamicTreeView" DataContext="{Binding PlcHammer.TECH_MAIN}" />
+                <Grid Grid.Row="1" Grid.Column="1" Style="{DynamicResource Card}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -178,12 +207,15 @@
                     </ScrollViewer>
                 </Grid>
                 <Grid
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Grid.ColumnSpan="2"
                     Style="{DynamicResource Card}">
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app}" PresentationType="Diagnostics" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app}" PresentationType="Diagnostics" />
                 </Grid>
             </Grid>
+        </TabItem>
+        <TabItem Header="Swift Programmer">
+            <vortex:SwiftRecorderView DataContext="{Binding SwiftRecorderViewModel}"></vortex:SwiftRecorderView>
         </TabItem>
     </TabControl>
 </Window>

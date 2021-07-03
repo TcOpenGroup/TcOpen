@@ -100,6 +100,29 @@ namespace TcoCore
             }
         }
 
+        private IEnumerable<TcoMessage> ActiveMessages
+        {
+            get
+            {
+                return DescendingMessages.Where(p => p.IsActive);                
+            }
+        }
+
+        string highestSeverityMessage;
+        public string HighestSeverityMessage
+        {
+            get => highestSeverityMessage; set
+            {
+                if (highestSeverityMessage == value)
+                {
+                    return;
+                }
+
+                highestSeverityMessage = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverityMessage)));
+            }
+        }
+
         private List<IValueTag> refreshTags { get; set; }
 
         /// <summary>
@@ -132,11 +155,17 @@ namespace TcoCore
         /// </summary>
         public void UpdateHealthInfo()
         {
-            ReadCycles();
+            ReadCycles();            
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ActiveMessagesCount)));
             if (ActiveMessagesCount > 0)
             {
                 ReadCategories();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
+                HighestSeverityMessage = ActiveMessages.OrderByDescending(p => p.Category.LastValue).FirstOrDefault()?.PlainMessage.Text;
+            }
+            else
+            {
+                HighestSeverityMessage = string.Empty;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
             }
         }
@@ -148,8 +177,8 @@ namespace TcoCore
         public int ActiveMessagesCount
         {
             get
-            {
-                return DescendingMessages.Where(p => p.IsActive).Count();
+            {              
+                return ActiveMessages.Count();
             }
         }
 
@@ -163,7 +192,8 @@ namespace TcoCore
             {
                 if (ActiveMessagesCount > 0)
                 {
-                    return (eMessageCategory)DescendingMessages.Max(p => p.Category.LastValue);
+                    return (eMessageCategory)ActiveMessages.Max(p => p.Category.LastValue);
+                    
                 }
 
                 return eMessageCategory.None;

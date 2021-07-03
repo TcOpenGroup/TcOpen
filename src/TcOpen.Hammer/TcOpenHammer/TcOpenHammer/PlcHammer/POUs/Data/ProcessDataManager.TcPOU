@@ -8,7 +8,32 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^();]]></ST>
+      <ST><![CDATA[SUPER^();
+
+//Set default values in case that no setting has been loaded into the PLC yet.
+//IF _data.DimX.Mininum = 0 AND _data.DimX.Maximum = 0 THEN
+//    _data.DimX.Mininum :=
+//        0.95 * MAIN._app._station001._components._dimXsim.inMinValue + 0.05 * MAIN._app._station001._components._dimXsim.inMaxValue;
+
+//    _data.DimX.Maximum :=
+//        0.05 * MAIN._app._station001._components._dimXsim.inMinValue + 0.95 * MAIN._app._station001._components._dimXsim.inMaxValue;
+//END_IF
+
+//IF _data.DimY.Mininum = 0 AND _data.DimY.Maximum = 0 THEN
+//    _data.DimY.Mininum :=
+//        0.95 * MAIN._app._station001._components._dimYsim.inMinValue + 0.05 * MAIN._app._station001._components._dimYsim.inMaxValue;
+
+//    _data.DimY.Maximum :=
+//        0.05 * MAIN._app._station001._components._dimYsim.inMinValue + 0.95 * MAIN._app._station001._components._dimYsim.inMaxValue;
+//END_IF
+
+//IF _data.DimZ.Mininum = 0 AND _data.DimZ.Maximum = 0 THEN
+//    _data.DimZ.Mininum :=
+//        0.95 * MAIN._app._station001._components._dimZsim.inMinValue + 0.05 * MAIN._app._station001._components._dimZsim.inMaxValue;
+
+//    _data.DimZ.Maximum :=
+//        0.05 * MAIN._app._station001._components._dimZsim.inMinValue + 0.95 * MAIN._app._station001._components._dimZsim.inMaxValue;
+//END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

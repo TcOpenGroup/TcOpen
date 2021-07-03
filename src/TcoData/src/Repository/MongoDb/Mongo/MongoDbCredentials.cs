@@ -1,4 +1,4 @@
-﻿namespace TcOpen.Inxton.MongoDb
+﻿namespace TcOpen.Inxton.Data.MongoDb
 {
     /// <summary>
     /// To use MongoDbCrendetials you must at first create a database with users

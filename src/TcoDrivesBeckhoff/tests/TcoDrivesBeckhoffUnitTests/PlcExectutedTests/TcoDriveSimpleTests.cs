@@ -1,3 +1,4 @@
+// #define WITH_HARDWARE
 using NUnit.Framework;
 using System;
 using System.Text;
@@ -75,7 +76,9 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             Assert.IsTrue(tc._sut._axisStatus.Disabled.Synchron);
             Assert.IsTrue(tc._sut._axisStatus.HasBeenStopped.Synchron);
             Assert.IsTrue(tc._sut._axisStatus.NotMoving.Synchron);
+#if WITH_HARDWARE
             Assert.IsFalse(tc._sut._axisStatus.Operational.Synchron);
+#endif
             Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
             Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
         }
@@ -84,7 +87,9 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         public void T005_PowerEnable()
         {
             tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.PowerEnable, () => tc._done.Synchron);
+#if WITH_HARDWARE
             Assert.IsFalse(tc._sut._axisStatus.Disabled.Synchron);
+#endif
             Assert.IsTrue(tc._sut._axisStatus.HasBeenStopped.Synchron);
             Assert.IsTrue(tc._sut._axisStatus.NotMoving.Synchron);
             Assert.IsTrue(tc._sut._axisStatus.Operational.Synchron);
@@ -352,14 +357,18 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
             tc.ExecuteProbeRun((int)eTcoDriveSimpleTests.MoveAbsoluteDisabled, () => tc._done.Synchron);
+#if WITH_HARDWARE
             Assert.AreEqual(16992, tc._sut._axisStatus.ErrorId.Synchron);   //"Controller enable"
+           
             Assert.IsTrue(tc._sut._axisStatus.Error.Synchron);
+#endif
             while (tc._sut._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoDriveSimpleTests.Reset);
             }
             Assert.AreEqual(0, tc._sut._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axisStatus.Error.Synchron);
+
         }
 
         [Test, Order((int)eTcoDriveSimpleTests.MoveAbsoluteDisabledPositiveDirection)]

@@ -1,4 +1,4 @@
-﻿using TcOpen.Inxton.MongoDb;
+﻿using TcOpen.Inxton.Data.MongoDb;
 
 namespace TcoDataUnitTests
 {

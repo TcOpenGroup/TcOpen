@@ -23,9 +23,20 @@ namespace TcoDataUnitTests
         {
             sut = Entry.TcoDataTests.MAIN.dataTests;
             Init();
-        sut.DataTests.DataManager.InitializeRepository<PlainstProcessData>(Repository as IRepository);
+            sut.DataTests.DataManager.InitializeRepository<PlainstProcessData>(Repository as IRepository);
 
-        Entry.TcoDataTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
+            try
+            {
+                sut.DataTests.DataManager.InitializeRemoteDataExchange();
+            }
+            catch (Exception)
+            {
+                //throw;
+            }
+            
+
+            Entry.TcoDataTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
+
             sut.ExecuteProbeRun(10, (int)eDataTests.RestoreTasks);
         }
 

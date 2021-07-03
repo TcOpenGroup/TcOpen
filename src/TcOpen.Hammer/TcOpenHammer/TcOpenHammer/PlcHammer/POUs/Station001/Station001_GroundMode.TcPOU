@@ -17,18 +17,45 @@
 METHOD PROTECTED  Main : BOOL
 VAR CONSTANT
 	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 0.0;
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+        <ST><![CDATA[IF (Step(10, TRUE, 'RESTORE ALL COMPONENTS')) THEN
+    //--------------------------------------------
+	Station.Components._horizontalNcAxis.Restore();
+	Station.Components._verticalPiston.Restore();
+	Station.Components._gripperPiston.Restore();
+    StepCompleteWhen(TRUE);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
     //--------------------------------------------	
 END_IF;
 
+IF (Step(125, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(150, NOT Station.Components.HorizontalNcAxis.DriveRef._axisStatus.Homed, 'HORIZONTAL AXIS HOMING')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.Home(inPosition := 0,
+            inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
+            inClearPositionLag := FALSE,
+            inSearchDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+            inSearchVelocity := 100.0,
+            inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+            inSyncVelocity := 100.0,
+            inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT).Done);
+    //--------------------------------------------	
+END_IF;
+
 IF (Step(200, TRUE, 'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
     //--------------------------------------------
-    //	IF(Station.Components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
-    //	AND Station.Components.Gripper.MoveToHome().Done) THEN
     IF (Station.Components.HorizontalNcAxis.DriveRef.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION,
         THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
         THIS^.Station.TechnologicalDataManager._data.AxisAcc,

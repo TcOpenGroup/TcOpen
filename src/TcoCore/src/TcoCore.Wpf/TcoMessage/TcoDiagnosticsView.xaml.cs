@@ -41,7 +41,9 @@ namespace TcoCore
             }
         }
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {          
+        {           
+            var inSight = false;
+            TcoDiagnosticsViewModel MessageHandler = null;
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
             {
                 if ((MessageHandler != null) && !MessageHandler.AutoUpdate)
@@ -49,15 +51,18 @@ namespace TcoCore
                     return;
                 }
 
-                if (UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this))
-                {
-                    MessageHandler?.UpdateMessages();
+                inSight = UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this);
+                if(inSight)
+                { 
+                    MessageHandler = this.DataContext as TcoDiagnosticsViewModel;
                 }
             });
+
+            if(inSight)
+            { 
+                MessageHandler?.UpdateMessages();
+            }
         }
-        private TcoDiagnosticsViewModel MessageHandler
-        {
-            get { return this.DataContext as TcoDiagnosticsViewModel; }
-        }
+      
     }
 }

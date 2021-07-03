@@ -12,16 +12,16 @@ VAR
 	_automatModeTask : TcoCore.TcoTask(THIS^);
 	_serviceModeTask : TcoCore.TcoTask(THIS^);
 
-	_processDataSettings : ProcessDataManager(THIS^); 
-    _processDataManager : ProcessDataManager(THIS^);
+	_processRecipies : ProcessDataManager(THIS^); 
+    _processTraceabilty : ProcessDataManager(THIS^);
 	_technologicalDataManager : TechnologicalDataManager(THIS^);
 	
 	_checkers : Checkers(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_components();
-_processDataSettings();
-_processDataManager();
+_processRecipies();
+_processTraceabilty();
 _technologicalDataManager();
 
 ServiceMode();
@@ -78,21 +78,36 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF(_groundModeTask.Execute()) THEN
 	Messenger.Trace('Ground position mode active');
-	_serviceModeTask.Abort();
-	_automatModeTask.Abort();
+	_serviceModeTask.Restore();
+	_automatModeTask.Restore();
+	_automatMode.Restore();
 	_groundMode.Run();
 	_groundModeTask.DoneWhen(_groundMode.CurrentStep.ID = 300);
+	IF _groundModeTask.Done THEN
+		_groundMode.Restore();
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Property Name="ProcessDataManager" Id="{53bc7e1b-e1d9-4700-b7ae-13b971dd1d3f}">
-      <Declaration><![CDATA[PROPERTY ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
+    <Property Name="ProcessRecepie" Id="{b1b59222-8dec-42af-9785-f7a41fdb1f30}">
+      <Declaration><![CDATA[PROPERTY ProcessRecepie : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{7693ce53-8625-4a27-a0d9-a13a48b1061c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessRecepie REF= _processRecipies;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProcessTraceabilty" Id="{53bc7e1b-e1d9-4700-b7ae-13b971dd1d3f}">
+      <Declaration><![CDATA[PROPERTY ProcessTraceabilty : REFERENCE TO ProcessDataManager]]></Declaration>
       <Get Name="Get" Id="{f0b6082c-910f-4dff-a364-02438a23363f}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ProcessDataManager REF= _processDataManager;]]></ST>
+          <ST><![CDATA[ProcessTraceabilty REF= _processTraceabilty;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -103,7 +118,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ProductionData REF= _processDataManager._data;]]></ST>
+          <ST><![CDATA[ProductionData REF= _processTraceabilty._data;]]></ST>
         </Implementation>
       </Get>
     </Property>

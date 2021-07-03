@@ -24,7 +24,7 @@
             Style="{DynamicResource MaterialDesignBody2TextBlock}"
             Text="{Binding Signal.HumanReadable}" 
             TextWrapping="WrapWithOverflow"/>
-        <vortex:RenderableContentControl DataContext="{Binding Signal}" PresentationType="ControlSlim" />
+        <vortex:RenderableContentControl DataContext="{Binding Signal}" PresentationType="DisplaySlim" />
     </UniformGrid>
 
 </UserControl>
