@@ -24,6 +24,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TabControl>
                     <TabItem Header="Sequences">
@@ -37,6 +38,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Components">
+                        <vortex:PermissionBox Permissions="Administrator" SecurityMode="Disabled">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="300" />
@@ -51,6 +53,7 @@
                                 PresentationType="Diagnostics" />
                             </Expander>
                         </Grid>
+                        </vortex:PermissionBox>
                     </TabItem>
                 </TabControl>
                 <Grid Grid.Row="1">
@@ -142,9 +145,12 @@
                     </UniformGrid.Resources>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask}" />
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask}" />
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
+                    <vortex:PermissionBox SecurityMode="Disabled" Permissions="Administrator|Service" >
+                        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
+                    </vortex:PermissionBox>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._swiftModeTask}" />
                 </UniformGrid>
+                <Button Command="{Binding OpenLoginWindowCommand}" Grid.Row="3">Login</Button>
             </Grid>
         </TabItem>
         <TabItem Header="Data">
@@ -217,6 +223,9 @@
         </TabItem>
         <TabItem Header="Swift Programmer">
             <vortex:SwiftRecorderView DataContext="{Binding SwiftRecorderViewModel}"></vortex:SwiftRecorderView>
+        </TabItem>
+        <TabItem Header="Security">
+            <vortex:UserManagementView DataContext="{Binding Users}"></vortex:UserManagementView>
         </TabItem>
         <TabItem Header="Colors">
             <StackPanel>

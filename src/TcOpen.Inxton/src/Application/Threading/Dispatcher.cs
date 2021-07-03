@@ -5,7 +5,7 @@ namespace TcOpen.Inxton.Threading
     /// <summary>
     /// Provides access to UI dispatcher of currently running application.
     /// </summary>
-    internal class Dispatcher : IDispatcher
+    public class Dispatcher : IDispatcher
     {
         private Dispatcher()
         {
@@ -18,7 +18,7 @@ namespace TcOpen.Inxton.Threading
         /// Sets the dispatcher for running application.
         /// </summary>
         /// <param name="dispatcher"></param>
-        internal static void SetDispatcher(IDispatcher dispatcher)
+        public static void SetDispatcher(IDispatcher dispatcher)
         {
             _dispatcher = dispatcher;
         }

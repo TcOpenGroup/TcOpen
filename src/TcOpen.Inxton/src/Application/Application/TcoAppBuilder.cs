@@ -1,6 +1,8 @@
 ﻿namespace TcOpen.Inxton
 {
+    using TcOpen.Inxton.Abstractions.Data;
     using TcOpen.Inxton.Abstractions.Logging;
+    using TcOpen.Inxton.Abstractions.Security;
     using TcOpen.Inxton.Threading;
 
     /// <summary>
@@ -37,6 +39,13 @@
         public TcoAppBuilder SetDispatcher(IDispatcher dispatcher)
         {
             Dispatcher.SetDispatcher(dispatcher);
+            return this;
+        }
+
+        
+        public TcoAppBuilder SetSecurity(IAuthenticationService authenticationService)
+        {
+            SecurityProvider.Create(authenticationService);  
             return this;
         }
     }

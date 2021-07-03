@@ -2,14 +2,14 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Input;
 using TcOpen.Inxton.Security.Wpf.Dialog;
-using TcOpen.Inxton.Security.Wpf.Internal;
+
 
 namespace TcOpen.Inxton.Security.Wpf
 {
     public class AllUsersViewModel : BaseUserViewModel
     {
-
         public ObservableCollection<UserData> AllUsersFiltered { get; set; }
         public ObservableCollection<String> AllRolesFiltered { get; set; }
 
@@ -37,7 +37,7 @@ namespace TcOpen.Inxton.Security.Wpf
         }
 
         public RelayCommand AvailableToCurrentRoleCommand { get; private set; }
-        public RelayCommand CurrentToAvailbleRoleCommand { get; private set; }
+        public RelayCommand CurrentToAvailableRoleCommand { get; private set; }
         public RelayCommand AddMultipleRolesCommand { get; private set; }
         public RelayCommand StarEditUserCommand { get; private set; }
         public RelayCommand DeleteUserCommand { get; private set; }
@@ -52,14 +52,14 @@ namespace TcOpen.Inxton.Security.Wpf
             AllRolesFiltered = new ObservableCollection<string>();
 
             AvailableToCurrentRoleCommand = new RelayCommand(role  => AddRole(role as String)    , p => true);
-            CurrentToAvailbleRoleCommand  = new RelayCommand(role  => RemoveRole(role as String) , p => true);
+            CurrentToAvailableRoleCommand  = new RelayCommand(role  => RemoveRole(role as String) , p => true);
             AddMultipleRolesCommand       = new RelayCommand(group => AddGroup(group as string)  , x => SelectedUser != null);
             StarEditUserCommand           = new RelayCommand(pswd  => UpdateUser(pswd as Pwds)   , p => true);
             DeleteUserCommand             = new RelayCommand(pswd  => DeleteUser()               , p => SelectedUser != null);
             AddRoleCommand                = new RelayCommand(roles => AddRole(roles)             , p => SelectedUser != null);
             RemoveRoleCommand             = new RelayCommand(roles => RemoveRole(roles)          , p => SelectedUser != null);           
             Populate();
-            BaseUserViewModel.NewUserAdded += Refresh;
+            BaseUserViewModel.OnNewUserAdded += Refresh;
         }
 
         
@@ -79,25 +79,25 @@ namespace TcOpen.Inxton.Security.Wpf
         private void DeleteUser()
         {
             if (_messageBoxService.ShowMessage(Properties.strings.AreYouSure,Properties.strings.Delete, MessageType.YesNo))
-                ActionRunner.Runner.Execute(() =>
-                {
-                    UserRepositary.Delete(this.SelectedUser.Username);
-                    UsersChanged();
-                    Populate();
-                });
+            { 
+                UserRepository.Delete(this.SelectedUser.Username);
+                TcoAppDomain.Current.Logger.Information($"User '{this.SelectedUser.Username}' deleted. {{@sender}}", new { UserName = this.SelectedUser.Username });
+                UsersChanged();
+                Populate();
+            }
         }
 
-        private void UpdateUser(Pwds pwds) => ActionRunner.Runner.Execute(() =>
+        private void UpdateUser(Pwds pwds)             
         {            
             if(!(String.IsNullOrEmpty(pwds.Pb1.Password) && String.IsNullOrEmpty(pwds.Pb2.Password)))
-                SelectedUser.SetPlainTextPassoword(pwds.Pb1.Password);
-            UserRepositary.Update(this.SelectedUser.Username, SelectedUser);
+            SelectedUser.SetPlainTextPassword(pwds.Pb1.Password);
+            UserRepository.Update(this.SelectedUser.Username, SelectedUser);
+            TcoAppDomain.Current.Logger.Information($"User '{this.SelectedUser.Username}' updated. {{@sender}}", new { UserName = this.SelectedUser.Username, Roles = this.SelectedUser.Roles });
             pwds.Pb1.Clear();
             pwds.Pb2.Clear();
             UsersChanged();
             Populate();
-        });
-
+        }
 
         private void AddRole(string v)
         {

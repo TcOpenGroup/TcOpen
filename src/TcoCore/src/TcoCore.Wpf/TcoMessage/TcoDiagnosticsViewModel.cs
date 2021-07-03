@@ -17,13 +17,13 @@
     
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), () => !this.AutoUpdate && !this.DiagnosticsRunning);            
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
-             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), () => !this.AutoUpdate && !this.DiagnosticsRunning);
+             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
       
         protected IsTcoObject _tcoObject { get; set; }
