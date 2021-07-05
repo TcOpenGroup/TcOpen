@@ -32,7 +32,7 @@ namespace TcOpen.Inxton.Threading
         {
             _dispatcher?.Invoke(action);
         }
-
+      
         private volatile static object mutex = new object();
         
         /// <summary>
