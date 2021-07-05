@@ -23,7 +23,7 @@ namespace TcoCore.Wpf.Threading
         {
             dispatcher.Invoke(action);
         }
-
+        
         private volatile static object mutex = new object();
         private static Dispatcher _instance;
 

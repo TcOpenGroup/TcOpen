@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using TcoCore.Wpf.Threading;
+using TcOpen.Inxton.Threading;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -35,15 +35,15 @@ namespace TcOpen.Inxton.Input
 
         public bool CanExecute(object parameter)
         {
-            return  _canExecute == null ? true : _canExecute.Invoke(parameter);
+            return _canExecute == null ? true : _canExecute.Invoke(parameter);
         }
 
         public void Execute(object parameter)
         {
-            if(CanExecute(parameter))
-            {               
-               _logAction?.Invoke();                                     
-               _execute.Invoke(parameter);
+            if (CanExecute(parameter))
+            {
+                _logAction?.Invoke();
+                _execute.Invoke(parameter);
             }
         }
 
