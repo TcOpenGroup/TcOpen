@@ -23,3 +23,9 @@ jobs:
             "testingStrength" = 10;
             "packNugets" = $true;
             }
+      - name: Upload test results
+        uses: actions/upload-artifact@v2 
+        if: success() || failure() 
+        with:
+          name: test-results
+          path: ${{ github.workspace }}\**\TestResults\*.xml            

@@ -82,9 +82,13 @@ VAR
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#Home sensor signal#>"}
 	_atHomePosSignalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Work sensor signal#>"}
     _atWorkPosSignalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Move to home position signal#>"}
     _toHomePosSignalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Move to work position signal#>"}
     _toWorkPosSignalInfo : TcoCore.TcoSignalInfo;
 END_VAR	]]></Declaration>
     <Implementation>

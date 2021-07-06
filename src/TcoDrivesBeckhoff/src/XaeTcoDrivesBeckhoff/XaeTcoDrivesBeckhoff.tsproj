@@ -2000,8 +2000,8 @@ External Setpoint Generation:
 						<Velo RefSearch="39.8633642666667" RefSync="39.8633642666667" SlowManual="199.316821333333" FastManual="1195.900928" Fast="3986.33642666667" Maximum="3986.34"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="19">
-						<EncPara ScaleFactorNumerator="104.8576" ScaleFactorDenominator="1048576" Offset="-0.001200000000608" MaxCount="#xffffffff" ReferenceSystem="3"/>
+					<Encoder Name="Enc" EncType="1">
+						<EncPara ScaleFactorNumerator="104.8576" ScaleFactorDenominator="1048576" Offset="-0.001200000000608" ReferenceSystem="3"/>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -2060,9 +2060,9 @@ External Setpoint Generation:
 							</Var>
 						</Vars>
 					</Encoder>
-					<Drive Name="Drive" DrvType="16">
-						<DrvPara MaxCount="#xffffffff" DriveControlDWord="#x00020100">
-							<Analog VeloReferenz="4384.97006933333" VeloScale="32" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
+					<Drive Name="Drive" DrvType="5">
+						<DrvPara>
+							<Analog VeloReferenz="4384.97006933333" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
 							<TimeComp TaskDelayCycles="1"/>
 						</DrvPara>
 						<Vars VarGrpType="1">
@@ -2102,6 +2102,22 @@ External Setpoint Generation:
 								</SubVar>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataOut2</Name>
+								</SubVar>
+								<SubVar>
+									<Name>nCtrl2</Name>
+									<Comment><![CDATA[Digital Outputs Setpoint Generator:
+0x41 (0100 0001) = Minus (0x42 for inverse motor polarity)
+0x42 (0100 0010) = Plus (0x41 for inverse motor polarity)
+0x80 (1000 0000) = Stop
+]]></Comment>
+								</SubVar>
+								<SubVar>
+									<Name>nCtrl3</Name>
+									<Comment><![CDATA[Digital Outputs (Setpoint Generator + Position Controller):
+0x41 (0100 0001) = Minus (0x42 for inverse motor polarity)
+0x42 (0100 0010) = Plus (0x41 for inverse motor polarity)
+0x80 (1000 0000) = Stop
+]]></Comment>
 								</SubVar>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataOut3</Name>
@@ -2145,8 +2161,8 @@ External Setpoint Generation:
 						<Velo SlowManual="10" FastManual="50" Maximum="500"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="4">
-						<EncPara ScaleFactorNumerator="1" ScaleFactorDenominator="1024" MaxCount="#xffffffff"/>
+					<Encoder Name="Enc" EncType="1">
+						<EncPara ScaleFactorNumerator="1" ScaleFactorDenominator="1024"/>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -2205,7 +2221,7 @@ External Setpoint Generation:
 							</Var>
 						</Vars>
 					</Encoder>
-					<Drive Name="Drive" DrvType="24">
+					<Drive Name="Drive" DrvType="5">
 						<DrvPara>
 							<Analog VeloReferenz="100" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
 							<TimeComp TaskDelayCycles="1"/>
@@ -2370,7 +2386,7 @@ External Setpoint Generation:
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="4" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="2">
+			<Device Id="4" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="2">
 				<Name>Device 4 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>

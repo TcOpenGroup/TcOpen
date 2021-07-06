@@ -135,7 +135,7 @@
         {
             get;
             set;
-        } = eMessageCategory.Notification;
+        } = eMessageCategory.Info;
 
         
         /// <summary>
