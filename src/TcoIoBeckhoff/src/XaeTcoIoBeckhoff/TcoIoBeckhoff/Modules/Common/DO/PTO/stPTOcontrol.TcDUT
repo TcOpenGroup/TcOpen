@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stPTOcontrol" Id="{48a3edf9-365a-01a3-218c-29c5abd92d7a}">
+    <Declaration><![CDATA[TYPE stPTOcontrol :
+STRUCT
+	{attribute addProperty Name "Frequency select"}
+	FrequencySelect : BIT;
+	{attribute addProperty Name "Disable ramp"}
+	DisableRamp : BIT;
+	{attribute addProperty Name "Go counter"}
+	GoCounter : BIT;
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute addProperty Name "Bit 9-16(address x+1.0-x+1.7)"}
+	Bit_9_16 : BITARR8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

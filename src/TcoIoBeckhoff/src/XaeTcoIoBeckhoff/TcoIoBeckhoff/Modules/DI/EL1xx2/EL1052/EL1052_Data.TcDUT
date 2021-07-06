@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1052_Data" Id="{8b3e82cf-679d-0969-2922-34298ae034bd}">
+    <Declaration><![CDATA[TYPE EL1052_Data :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 :DiNamurChannel;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DiNamurChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

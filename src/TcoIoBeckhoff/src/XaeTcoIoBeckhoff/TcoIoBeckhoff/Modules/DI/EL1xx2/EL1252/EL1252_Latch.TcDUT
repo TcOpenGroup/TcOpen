@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1252_Latch" Id="{b6882c5d-9488-0e4c-38a7-b547bcc52004}">
+    <Declaration><![CDATA[TYPE EL1252_Latch :
+STRUCT
+	{attribute addProperty Name "Status1"}
+	Status1 AT %I* : USINT;
+	{attribute addProperty Name "Status2"}
+	Status2 AT %I* : USINT;
+	{attribute addProperty Name "LatchPos1"}
+	LatchPos1 AT %I* : ULINT;
+	{attribute addProperty Name "LatchNeg1"}
+	LatchNeg1 AT %I* : ULINT;
+	{attribute addProperty Name "LatchPos2"}
+	LatchPos2 AT %I* : ULINT;
+	{attribute addProperty Name "LatchNeg2"}
+	LatchNeg2 AT %I* : ULINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

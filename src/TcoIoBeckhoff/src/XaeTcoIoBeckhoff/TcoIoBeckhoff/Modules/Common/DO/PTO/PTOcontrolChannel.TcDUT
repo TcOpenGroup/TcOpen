@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="PTOcontrolChannel" Id="{53e24947-d5f4-0a6f-1146-7bd900cd0d9b}">
+    <Declaration><![CDATA[TYPE PTOcontrolChannel :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Control AT %Q* : stPTOcontrol;
+	{attribute addProperty Name "Frequency value"}
+	FrequencyValue AT %Q* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

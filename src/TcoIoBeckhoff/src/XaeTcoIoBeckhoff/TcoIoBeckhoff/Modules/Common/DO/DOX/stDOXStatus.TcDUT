@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stDOXStatus" Id="{74ae946a-5c7e-0c9b-28c9-c2e42b49526c}">
+    <Declaration><![CDATA[TYPE stDOXStatus :
+STRUCT
+	{attribute addProperty Name "Ready to activate"}
+	ReadyToActivate : BIT;
+	{attribute addProperty Name "Output active"}
+	OutputAActive : BIT;
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3 : BIT;
+	{attribute addProperty Name "Switching operation counter bit 1"}
+	SwitchingOperationCounter_1 : BIT;
+	{attribute addProperty Name "Switching operation counter bit 2"}
+	SwitchingOperationCounter_2 : BIT;
+	{attribute addProperty Name "Switching operation counter bit 3"}
+	SwitchingOperationCounter_3 : BIT;
+	{attribute addProperty Name "Warning"}
+	Warning : BIT;
+	{attribute addProperty Name "Error"}
+	Error : BIT;
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute addProperty Name "Digital input"}
+	DigitalInput : BIT;
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 : BIT;
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle : BIT;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

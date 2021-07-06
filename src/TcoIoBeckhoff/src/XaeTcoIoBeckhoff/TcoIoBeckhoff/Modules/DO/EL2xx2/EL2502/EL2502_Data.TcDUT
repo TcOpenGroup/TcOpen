@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2502_Data" Id="{7a4ec555-4a89-0ae7-37a9-da04357b0648}">
+    <Declaration><![CDATA[TYPE EL2502_Data :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 :PwmOutputChannel;
+	{attribute addProperty Name "Channel 2"}
+	_2 :PwmOutputChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stDOXControl" Id="{74e363a2-2222-073f-34d1-20f60d83a392}">
+    <Declaration><![CDATA[TYPE stDOXControl :
+STRUCT
+	{attribute addProperty Name "Enable"}
+	Enable : BIT;
+	{attribute addProperty Name "Output"}
+	Output : BIT;
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3 : BIT;
+	{attribute addProperty Name "Input trigger enable"}
+	InputTriggerEnable : BIT;
+	{attribute addProperty Name "Output trigger enable"}
+	OutputTriggerEnable : BIT;
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Reset"}
+	Reset : BIT;
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 : BIT;
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute addProperty Name "Bit 16(address x+1.7)"}
+	Bit_16 : BIT;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

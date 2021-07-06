@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="CNTInputsChannel" Id="{6d9904ff-8b46-0a9a-229c-58150eb46b88}">
+    <Declaration><![CDATA[TYPE CNTInputsChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : stCNTStatusCompact;
+	{attribute addProperty Name "Counter value"}
+	CounterValue AT %I* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

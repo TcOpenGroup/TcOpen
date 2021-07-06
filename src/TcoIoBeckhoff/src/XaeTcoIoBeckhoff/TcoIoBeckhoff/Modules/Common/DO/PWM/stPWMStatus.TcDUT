@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stPWMStatus" Id="{daaa21eb-0c92-0607-3e63-a62e1045c1b0}">
+    <Declaration><![CDATA[TYPE stPWMStatus :
+STRUCT
+	{attribute addProperty Name "Digital input 1"}
+	DigitalInput1 : BIT;
+	{attribute addProperty Name "Ready to enable"}
+	ReadyToEnable : BIT;
+	{attribute addProperty Name "Warning"}
+	Warning : BIT;
+	{attribute addProperty Name "Error"}
+	Error : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle : BIT;
+	{attribute addProperty Name "Allign 6"}
+	Allign6 : BIT;
+	{attribute addProperty Name "Allign 7"}
+	Allign7 : BIT;
+	{attribute addProperty Name "Allign 8"}
+	Allign8 : BIT;
+	{attribute addProperty Name "Allign 9-16"}
+	Allign16 : BITARR8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

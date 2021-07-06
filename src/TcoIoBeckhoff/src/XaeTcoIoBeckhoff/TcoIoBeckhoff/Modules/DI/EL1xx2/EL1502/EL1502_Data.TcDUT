@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1502_Data" Id="{c2008c0c-5a68-0a5e-0525-7af9a9842c22}">
+    <Declaration><![CDATA[TYPE EL1502_Data :
+STRUCT
+	{attribute addProperty Name "CNT Inputs"}
+	CNTInputs :CNTInputs;
+	{attribute addProperty Name "CNT Outputs"}
+	CNTOutputs :CNTOutputs;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

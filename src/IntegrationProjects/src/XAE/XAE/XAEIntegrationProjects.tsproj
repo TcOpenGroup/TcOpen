@@ -397,7 +397,7 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
 				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -514,4 +514,23 @@
 			</Device>
 		</Io>
 	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030020"/>
+		<OwnerA Name="TIPC^IntegrationProjects^IntegrationProjects Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^EC001 (EK1100)^A1 (EL1008)">
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io.WcState.State" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._1" VarB="Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._2" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._3" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._4" VarB="Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._5" VarB="Channel 5^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._6" VarB="Channel 6^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._7" VarB="Channel 7^Input"/>
+				<Link VarA="PlcTask Inputs^IO.EC001.A1._io._8" VarB="Channel 8^Input"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
 </TcSmProject>

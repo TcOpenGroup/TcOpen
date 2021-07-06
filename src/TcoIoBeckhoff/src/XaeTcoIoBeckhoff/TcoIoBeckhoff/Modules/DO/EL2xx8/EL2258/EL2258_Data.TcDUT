@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2258_Data" Id="{e6490df1-ffec-00d3-03a3-dd524a998536}">
+    <Declaration><![CDATA[TYPE EL2258_Data :
+STRUCT
+	{attribute addProperty Name "MTO Inputs Channel 1"}
+	MTOInputsChannel_1 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 2"}
+	MTOInputsChannel_2 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 3"}
+	MTOInputsChannel_3 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 4"}
+	MTOInputsChannel_4 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 5"}
+	MTOInputsChannel_5 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 6"}
+	MTOInputsChannel_6 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 7"}
+	MTOInputsChannel_7 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Inputs Channel 8"}
+	MTOInputsChannel_8 : MTOInputsChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 1"}
+	MTOOutputs10xChannel_1 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 2"}
+	MTOOutputs10xChannel_2 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 3"}
+	MTOOutputs10xChannel_3 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 4"}
+	MTOOutputs10xChannel_4 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 5"}
+	MTOOutputs10xChannel_5 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 6"}
+	MTOOutputs10xChannel_6 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 7"}
+	MTOOutputs10xChannel_7 : MTOOutputs10xChannel;
+	{attribute addProperty Name "MTO Outputs 10x Channel 8"}
+	MTOOutputs10xChannel_8 : MTOOutputs10xChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

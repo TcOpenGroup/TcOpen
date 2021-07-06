@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stPWMControl" Id="{19bfe1f3-3b28-0c2d-0080-2e1e7074ca3f}">
+    <Declaration><![CDATA[TYPE stPWMControl :
+STRUCT
+	{attribute addProperty Name "Enable dithering"}
+	EnableDithering : BIT;
+	{attribute addProperty Name "Enable"}
+	Enable : BIT;
+	{attribute addProperty Name "Reset"}
+	Reset : BIT;
+	{attribute addProperty Name "Allign 4"}
+	Allign4 : BIT;
+	{attribute addProperty Name "Allign 5"}
+	Allign5 : BIT;
+	{attribute addProperty Name "Allign 6"}
+	Allign6 : BIT;
+	{attribute addProperty Name "Allign 7"}
+	Allign7 : BIT;
+	{attribute addProperty Name "Allign 8"}
+	Allign8 : BIT;
+	{attribute addProperty Name "Allign 9-16"}
+	Allign16 : BITARR8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

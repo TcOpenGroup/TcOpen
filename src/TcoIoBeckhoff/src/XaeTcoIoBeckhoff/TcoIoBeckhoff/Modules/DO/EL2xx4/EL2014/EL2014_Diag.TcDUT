@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2014_Diag" Id="{901c3faa-04de-0f0a-06fd-af7f7ad388de}">
+    <Declaration><![CDATA[TYPE EL2014_Diag :
+STRUCT
+//	{attribute addProperty Name "Channel 1"}
+//	_1 AT %I* : stDIGDiagInput;
+//	{attribute addProperty Name "Channel 2"}
+//	_2 AT %I* : stDIGDiagInput;
+//	{attribute addProperty Name "Channel 3"}
+//	_3 AT %I* : stDIGDiagInput;
+//	{attribute addProperty Name "Channel 4"}
+//	_4 AT %I* : stDIGDiagInput;
+	{attribute addProperty Name "Channel 1"}
+	_1 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 2"}
+	_2 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 3"}
+	_3 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 4"}
+	_4 : stDIGDiagInput;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

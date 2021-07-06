@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2044_Diag" Id="{92a21d7f-c20d-016b-0bd8-3ca44b818569}">
+    <Declaration><![CDATA[TYPE EL2044_Diag :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 2"}
+	_2 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 3"}
+	_3 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 4"}
+	_4 : stDIGDiagInput;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

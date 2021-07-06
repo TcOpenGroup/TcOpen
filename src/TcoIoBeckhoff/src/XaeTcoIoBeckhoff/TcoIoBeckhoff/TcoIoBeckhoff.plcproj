@@ -19,7 +19,8 @@
     <Released>false</Released>
     <Title>TcoIoBeckhoff</Title>
     <ProjectVersion>0.4.2.535</ProjectVersion>
-    <Author></Author>
+    <Author>
+    </Author>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoIoBeckhoff</DefaultNamespace>
     <CombineIds>true</CombineIds>
@@ -43,6 +44,507 @@
     <Compile Include="GVLs\IO.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\CNTInputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\CNTInputsChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\CNTOutputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\CNTOutputsChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\stCNTControlCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\stCNTStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\stCNTControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\CNT\stCNTStatusCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\DiChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\DiDiag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\DiNamurChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\MTO\MTOOutputs10xChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\MTO\MTOInputsChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\MTO\stMTOInputsStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\MTO\stMTOOutputsControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DI\MTO\stMTOOutputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DIG\stDIGInputsDevice.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DIG\stDIGDiagInput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DoChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DoChannelTriState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DoDiag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DOX\DOXControlChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DOX\DOXControlCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DOX\DOXStatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DOX\stDOXControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DOX\stDOXControlCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\DOX\stDOXStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\ENCControlChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\ENCStatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\PTOChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\PTOTargetCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\ENCStatusCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\ENCControlCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\PTOstatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\PTOcontrolChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\PTOChannelCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\PTOTargetChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\stENCStatusCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\stENCControlCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\stENCStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\stPTOcontrol.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PTO\stPTOstatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PWM\PwmOutputChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PWM\stPWMControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PWM\PWMControlChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PWM\stPWMStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\DO\PWM\PWMStatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\InfoData\Base\InfoDataBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\InfoData\Base\stInfoDataBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\InfoData\Extended\InfoDataAds.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\InfoData\Extended\InfoDataAdsDC.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\InfoData\Extended\InfoDataDC.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\WcState\Base\WcStateBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\WcState\Extended\WcStateInputToggle.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1502\EL1502.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1502\EL1502_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1382\EL1382.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1382\EL1382_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1512\EL1512.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1512\EL1512_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx8\EL1008.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx8\EL1018.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx8\EL1088.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx8\EL1098.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx8\EL1808.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx8\EL1xx8_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1852\EL1852.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1809.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1819.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1852\EL1852_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1859\EL1859.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1859\EL1859_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1889.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1862.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1872.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1899.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx9\EL1xx9_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1002.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1052\EL1052.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1052\EL1052_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1702.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1202.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1012.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1252\EL1252.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1252\EL1252_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1252\EL1252_Latch.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1722.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1712.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx2\EL1xx2_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1004.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1084.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1094.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1054\EL1054.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1054\EL1054_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1104.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1014.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1254\EL1254.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1254\EL1254_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1254\EL1254_Latch.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1804.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1114.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1024.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1124.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1034.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1134.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1144.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1814.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DI\EL1xx4\EL1xx4_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2809\EL2809.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2809\EL2809_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2502\EL2502.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2502\EL2502_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2521\EL2521.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2521\EL2521_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2522\EL2522.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2522\EL2522_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2535\EL2535.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2535\EL2535_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2595\EL2595.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2595\EL2595_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2596\EL2596.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2596\EL2596_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2602.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2022.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2032\EL2032.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2032\EL2032_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2202\EL2202.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2202\EL2202_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2042.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2252\EL2252.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2252\EL2252_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2612.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2622.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2652.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2712.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2722.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2732.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2xx2_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx2\EL2002.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2004.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2014\EL2014_Diag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2044\EL2044.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2044\EL2044_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2044\EL2044_Diag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2034\EL2034.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2034\EL2034_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2024.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2014\EL2014.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2014\EL2014_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2084.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2124.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2624.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2634.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2784.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2794.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx4\EL2xx4_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2008.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2808.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2088.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2788.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2798.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2828.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2878\EL2878.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2878\EL2878_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2258\EL2258.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2258\EL2258_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx8\EL2xx8_Data.TcDUT">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Modules\EL922x\FBs\FuseChannelBasic.TcPOU">
       <SubType>Code</SubType>
@@ -77,6 +579,9 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Version\Global_Version.TcGVL">
       <SubType>Code</SubType>
     </Compile>
@@ -86,10 +591,59 @@
     <Folder Include="Abstractions\AI" />
     <Folder Include="GVLs" />
     <Folder Include="Modules" />
+    <Folder Include="Modules\Common\DI\CNT" />
+    <Folder Include="Modules\Common\DI\MTO" />
+    <Folder Include="Modules\Common\DO\DOX" />
+    <Folder Include="Modules\Common\DO\DIG" />
+    <Folder Include="Modules\Common\DO\PTO" />
+    <Folder Include="Modules\Common\DO\PWM" />
+    <Folder Include="Modules\Common\InfoData" />
+    <Folder Include="Modules\Common\InfoData\Base" />
+    <Folder Include="Modules\Common\InfoData\Extended" />
+    <Folder Include="Modules\Common\DI" />
+    <Folder Include="Modules\Common\DO" />
+    <Folder Include="Modules\Common\WcState" />
+    <Folder Include="Modules\Common\WcState\Base" />
+    <Folder Include="Modules\Common\WcState\Extended" />
+    <Folder Include="Modules\DI\EL1xx2\EL1502" />
+    <Folder Include="Modules\DI\EL1xx2\EL1382" />
+    <Folder Include="Modules\DI\EL1xx2\EL1512" />
+    <Folder Include="Modules\DI\EL1xx8" />
+    <Folder Include="Modules\DI\EL1xx9" />
+    <Folder Include="Modules\DI\EL1xx2" />
+    <Folder Include="Modules\DI\EL1xx2\EL1252" />
+    <Folder Include="Modules\DI\EL1xx2\EL1052" />
+    <Folder Include="Modules\DI\EL1xx4" />
+    <Folder Include="Modules\DI\EL1xx4\EL1054" />
+    <Folder Include="Modules\DI\EL1xx4\EL1254" />
+    <Folder Include="Modules\DI\EL1xx9\EL1852" />
+    <Folder Include="Modules\DI\EL1xx9\EL1859" />
+    <Folder Include="Modules\DO\EL2809" />
+    <Folder Include="Modules\DO\EL2xx2" />
+    <Folder Include="Modules\DO\EL2xx2\EL2032" />
+    <Folder Include="Modules\DO\EL2xx2\EL2202" />
+    <Folder Include="Modules\DO\EL2xx2\EL2252" />
+    <Folder Include="Modules\DO\EL2xx2\EL2502" />
+    <Folder Include="Modules\DO\EL2xx2\EL2521" />
+    <Folder Include="Modules\DO\EL2xx2\EL2522" />
+    <Folder Include="Modules\DO\EL2xx2\EL2535" />
+    <Folder Include="Modules\DO\EL2xx2\EL2595" />
+    <Folder Include="Modules\DO\EL2xx2\EL2596" />
+    <Folder Include="Modules\DO\EL2xx4" />
+    <Folder Include="Modules\DO\EL2xx4\EL2014" />
+    <Folder Include="Modules\DO\EL2xx4\EL2044" />
+    <Folder Include="Modules\DO\EL2xx4\EL2034" />
+    <Folder Include="Modules\DO\EL2xx8" />
+    <Folder Include="Modules\DO\EL2xx8\EL2878" />
+    <Folder Include="Modules\DO\EL2xx8\EL2258" />
     <Folder Include="Modules\EL922x\FBs" />
     <Folder Include="Modules\EL922x\ITFs" />
     <Folder Include="Modules\EL922x\STs" />
     <Folder Include="Modules\EL922x" />
+    <Folder Include="Modules\Common" />
+    <Folder Include="Modules\DI" />
+    <Folder Include="Modules\DO" />
+    <Folder Include="POUs" />
     <Folder Include="Version" />
   </ItemGroup>
   <ItemGroup>

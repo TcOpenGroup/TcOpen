@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2202_Data" Id="{2c8e3316-c909-0d78-084d-40fc832e9542}">
+    <Declaration><![CDATA[TYPE EL2202_Data :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 :DoChannelTriState;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DoChannelTriState;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

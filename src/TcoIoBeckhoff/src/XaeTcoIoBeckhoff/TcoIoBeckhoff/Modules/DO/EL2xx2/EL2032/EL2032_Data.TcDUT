@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2032_Data" Id="{3569adc8-b5f3-0e2f-2b48-906e3ba16d88}">
+    <Declaration><![CDATA[TYPE EL2032_Data :
+STRUCT
+	{attribute addProperty Name "Diag 1"}
+	_diag1 :DoDiag;
+	{attribute addProperty Name "Diag 2"}
+	_diag2 :DoDiag;
+	{attribute addProperty Name "Channel 1"}
+	_1 :DoChannel;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DoChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

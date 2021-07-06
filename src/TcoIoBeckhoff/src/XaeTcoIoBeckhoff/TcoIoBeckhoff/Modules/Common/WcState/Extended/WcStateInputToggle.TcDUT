@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="WcStateInputToggle" Id="{66350322-ef41-00c9-0f66-3a2c001ec500}">
+    <Declaration><![CDATA[TYPE WcStateInputToggle  EXTENDS  WcStateBase :
+STRUCT 
+	InputToggle AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

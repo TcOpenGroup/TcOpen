@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="InfoDataBase" Id="{516c7682-871b-0803-0296-239f51bbf91e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK InfoDataBase
+VAR
+	_State AT %I* :   UINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="State" Id="{a605b7ce-79ea-0f91-1ed0-1125db7629e9}">
+      <Declaration><![CDATA[PROPERTY State : stInfoDataBase]]></Declaration>
+      <Get Name="Get" Id="{08dec284-1d10-0eec-13ba-ac93adc4166b}">
+        <Declaration><![CDATA[VAR
+    _retVal : stInfoDataBase;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_retVal.SlaveInInitState := _State.0 AND NOT _State.1;
+_retVal.SlaveInPreopState := NOT _State.0 AND _State.1;
+_retVal.SlaveInBootState := _State.0 AND _State.1;
+_retVal.SlaveInSafeopState := _State.2;
+_retVal.SlaveInOpState := _State.3;
+_retVal.SlaveSignalsError := _State.4;
+_retVal.InvalidVendoridOrProductcode := _State.5;
+_retVal.InitializationErrorOccurred := _State.6;
+_retVal.SlaveDisabled := _State.7;
+_retVal.SlaveNotPresent := _State.8;
+_retVal.SlaveSignalsLinkError := _State.9;
+_retVal.SlaveSignalsMissingLink := _State.10;
+_retVal.SlaveSignalsUnexpectedLink := _State.11;
+_retVal.CommunicationPortA := _State.12;
+_retVal.CommunicationPortB := _State.13;
+_retVal.CommunicationPortC := _State.14;
+_retVal.CommunicationPortD := _State.15;
+
+State := _retVal;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

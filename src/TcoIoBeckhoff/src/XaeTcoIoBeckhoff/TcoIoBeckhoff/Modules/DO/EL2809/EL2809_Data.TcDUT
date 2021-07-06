@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2809_Data" Id="{50477f5a-7d0c-0065-0513-11e346ecfc3d}">
+    <Declaration><![CDATA[TYPE EL2809_Data :
+STRUCT
+	{attribute addProperty Name "1"}
+	_1 AT %Q* : BOOL;
+	{attribute addProperty Name "2"}
+	_2 AT %Q* : BOOL;
+	{attribute addProperty Name "3"}
+	_3 AT %Q* : BOOL;
+	{attribute addProperty Name "4"}
+	_4 AT %Q* : BOOL;
+	{attribute addProperty Name "5"}
+	_5 AT %Q* : BOOL;
+	{attribute addProperty Name "6"}
+	_6 AT %Q* : BOOL;
+	{attribute addProperty Name "7"}
+	_7 AT %Q* : BOOL;
+	{attribute addProperty Name "8"}
+	_8 AT %Q* : BOOL; 
+	{attribute addProperty Name "9"}
+	_9 AT %Q* : BOOL;
+	{attribute addProperty Name "10"}
+	_10 AT %Q* : BOOL;
+	{attribute addProperty Name "11"}
+	_11 AT %Q* : BOOL;
+	{attribute addProperty Name "12"}
+	_12 AT %Q* : BOOL;
+	{attribute addProperty Name "13"}
+	_13 AT %Q* : BOOL;
+	{attribute addProperty Name "14"}
+	_14 AT %Q* : BOOL;
+	{attribute addProperty Name "15"}
+	_15 AT %Q* : BOOL;
+	{attribute addProperty Name "16"}
+	_16 AT %Q* : BOOL; 
+//	WcState : WcStateBase;
+//	InfoData : InfoDataBase;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

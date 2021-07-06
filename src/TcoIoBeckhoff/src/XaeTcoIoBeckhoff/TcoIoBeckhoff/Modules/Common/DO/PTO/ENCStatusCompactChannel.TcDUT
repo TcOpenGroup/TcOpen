@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ENCStatusCompactChannel" Id="{88b5c7b2-368a-06b0-31b4-f3658569d5f9}">
+    <Declaration><![CDATA[TYPE ENCStatusCompactChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : stENCStatusCompact;
+	{attribute addProperty Name "Counter value"}
+	CounterValue AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stCNTStatus" Id="{bb0a06bc-09c3-07a6-0660-6407234eed46}">
+    <Declaration><![CDATA[TYPE stCNTStatus :
+STRUCT
+	{attribute addProperty Name "Output functions enabled"}
+	OutputFunctionsEnabled : BIT;
+	{attribute addProperty Name "Status of output"}
+	StatusOfOutput : BIT;
+	{attribute addProperty Name "Set counter done"}
+	SetCounterDone : BIT;
+	{attribute addProperty Name "Counter inhibited"}
+	CounterInhibited : BIT;
+	{attribute addProperty Name "Status of input clock"}
+	StatusOfInputClock : BIT;
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute addProperty Name "Sync error"}
+	SyncError : BIT;
+	{attribute addProperty Name "Bit 13(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

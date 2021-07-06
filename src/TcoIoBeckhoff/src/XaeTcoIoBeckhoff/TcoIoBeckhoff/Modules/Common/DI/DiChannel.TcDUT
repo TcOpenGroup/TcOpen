@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="DiChannel" Id="{48e8b9b2-ae23-09bc-2e67-139ed94a01c3}">
+    <Declaration><![CDATA[TYPE DiChannel :
+STRUCT
+	{attribute addProperty Name "Input"}
+	Input AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

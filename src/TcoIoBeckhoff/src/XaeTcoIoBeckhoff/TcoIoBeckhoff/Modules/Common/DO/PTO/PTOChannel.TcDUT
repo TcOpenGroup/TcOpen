@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="PTOChannel" Id="{1bde61d8-6ce2-0a45-170f-25abd2b2fbd8}">
+    <Declaration><![CDATA[TYPE PTOChannel :
+STRUCT
+	{attribute addProperty Name "PTO Status"}
+	PTOStatus : PTOstatusChannel;
+	{attribute addProperty Name "ENC Status"}
+	ENCStatus : ENCStatusChannel;
+	{attribute addProperty Name "PTO Control"}
+	PTOControl : PTOcontrolChannel;
+	{attribute addProperty Name "PTO Target"}
+	PTOTarget : PTOTargetChannel;
+	{attribute addProperty Name "ENC Control"}
+	ENCControl : ENCControlChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

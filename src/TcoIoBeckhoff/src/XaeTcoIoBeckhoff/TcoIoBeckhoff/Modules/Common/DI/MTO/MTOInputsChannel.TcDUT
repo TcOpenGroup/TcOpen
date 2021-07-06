@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="MTOInputsChannel" Id="{dc27abad-dbad-0643-3041-26563e0e2723}">
+    <Declaration><![CDATA[TYPE MTOInputsChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : stMTOInputsStatus;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

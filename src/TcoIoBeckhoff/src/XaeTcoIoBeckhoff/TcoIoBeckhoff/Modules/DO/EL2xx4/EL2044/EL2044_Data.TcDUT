@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2044_Data" Id="{5be5a840-2895-08f5-2743-b1d93b4f432e}">
+    <Declaration><![CDATA[TYPE EL2044_Data :
+STRUCT
+	{attribute addProperty Name "DIG Diag Inputs"}
+	_diag AT %I* : EL2044_Diag;
+	{attribute addProperty Name "DIG Inputs Device"}
+	_inputs AT %I* : stDIGInputsDevice;
+	{attribute addProperty Name "DIG Outputs"}
+	_outputs : EL2xx4_Data;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

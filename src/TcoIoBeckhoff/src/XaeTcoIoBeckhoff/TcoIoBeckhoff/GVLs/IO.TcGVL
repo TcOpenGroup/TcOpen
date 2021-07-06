@@ -1,17 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <GVL Name="IO" Id="{86db31ba-4472-4fa2-bd0f-07826bbe8eb4}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL 
-	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 2 (EL3001)"'}
-	_EL3001 : AI_1_Module;
+//	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 2 (EL3001)"'}
+//	_EL3001 : AI_1_Module;
 	
 	
-	_channel_1 : FuseChannelBasic;
-	_channel_2 : FuseChannelBasic;
+//	_channel_1 : FuseChannelBasic;
+//	_channel_2 : FuseChannelBasic;
 	
-	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 3 (EL9221-4030)"'}
-	_EL922x : FuseModuleEL922x(_channel_1, _channel_2);
+//	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 3 (EL9221-4030)"'}
+//	_EL922x : FuseModuleEL922x(_channel_1, _channel_2);
+
+////	{attribute addProperty Name "A1"}
+////	A1 	: EL6002;
+	{attribute addProperty Name "A2"}
+	A2 	: EL1809;
+//	{attribute addProperty Name "A3"}
+//	A3 	: EL2809;
+////	{attribute addProperty Name "A4"}
+////	A4 	: EL4004;
+//	{attribute addProperty Name "A5"}
+//	A5 	: EL2809;
+////	{attribute addProperty Name "A6"}
+////	A6 	: EL6001;
+
+//2DI
+_EL1002 : EL1002;
+_EL1012 : EL1012;
+_EL1052 : EL1052;
+_EL1202 : EL1202;
+_EL1252 : EL1252;
+_EL1382 : EL1382;
+_EL1502 : EL1502;
+_EL1512 : EL1512;
+_EL1702 : EL1702;
+_EL1712 : EL1712;
+_EL1722 : EL1722;
+//4DI
+_EL1004 : EL1004;
+_EL1014 : EL1014;
+_EL1024 : EL1024;
+_EL1034 : EL1034;
+_EL1054 : EL1054;
+_EL1084 : EL1084;
+_EL1094 : EL1094;
+_EL1104 : EL1104;
+_EL1114 : EL1114;
+_EL1124 : EL1124;
+_EL1134 : EL1134;
+_EL1144 : EL1144;
+_EL1254 : EL1254;
+_EL1804 : EL1804;
+_EL1814 : EL1814;
+//8DI
+_EL1008 : EL1008;
+_EL1018 : EL1018;
+_EL1088 : EL1088;
+_EL1098 : EL1098;
+_EL1808 : EL1808;
+//16DI
+_EL1809 : EL1809;
+_EL1819 : EL1819;
+_EL1852 : EL1852;
+_EL1859 : EL1859;
+_EL1862 : EL1862;
+_EL1872 : EL1872;
+_EL1889 : EL1889;
+_EL1899 : EL1899;
+//2DO
+_EL2002 : EL2002;
+_EL2022 : EL2022;
+_EL2032 : EL2032;
+_EL2042 : EL2042;
+_EL2202 : EL2202;
+_EL2252 : EL2252;
+_EL2502 : EL2502;
+_EL2521 : EL2521;
+_EL2522 : EL2522;
+_EL2535 : EL2535;
+_EL2595 : EL2595;
+_EL2596 : EL2596;
+_EL2602 : EL2602;
+_EL2612 : EL2612;
+_EL2622 : EL2622;
+_EL2652 : EL2652;
+_EL2712 : EL2712;
+_EL2722 : EL2722;
+_EL2732 : EL2732;
+//4DO
+_EL2004 : EL2004;
+_EL2014 : EL2014;
+_EL2024 : EL2024;
+_EL2034 : EL2034;
+_EL2044 : EL2044;
+_EL2084 : EL2084;
+_EL2124 : EL2124;
+_EL2624 : EL2624;
+_EL2634 : EL2634;
+_EL2784 : EL2784;
+_EL2794 : EL2794;
+//8DO
+_EL2008 : EL2008;
+_EL2088 : EL2088;
+_EL2258 : EL2258;
+_EL2788 : EL2788;
+_EL2798 : EL2798;
+_EL2808 : EL2808;
+_EL2828 : EL2828;
+_EL2878 : EL2878;
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

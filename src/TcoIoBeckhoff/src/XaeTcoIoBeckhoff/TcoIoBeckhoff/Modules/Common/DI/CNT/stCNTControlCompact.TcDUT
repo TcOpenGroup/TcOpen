@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stCNTControlCompact" Id="{f1e83cf8-be23-0257-0a0f-245da21b8e62}">
+    <Declaration><![CDATA[TYPE stCNTControlCompact :
+STRUCT
+	{attribute addProperty Name "Set counter"}
+	SetCounter : BIT;
+	{attribute addProperty Name "Inhibit counter"}
+	InhibitCounter : BIT;
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3 : BIT;
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute addProperty Name "Bit 9-16(address x+1.0-x+1.7)"}
+	Bit_9_16 : BITARR8;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

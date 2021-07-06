@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="DiNamurChannel" Id="{9694d779-93be-02f7-3cda-5a4d89e7069f}">
+    <Declaration><![CDATA[TYPE DiNamurChannel EXTENDS DiChannel:
+STRUCT
+	{attribute addProperty Name "Error"}
+	Error AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

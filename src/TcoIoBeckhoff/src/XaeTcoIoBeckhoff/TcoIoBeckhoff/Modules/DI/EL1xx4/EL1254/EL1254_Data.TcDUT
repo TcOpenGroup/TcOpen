@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1254_Data" Id="{32bc54bf-00a5-0415-2bd3-fa7a9866eb1c}">
+    <Declaration><![CDATA[TYPE EL1254_Data :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 :DiChannel;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DiChannel;
+	{attribute addProperty Name "Channel 3"}
+	_3 :DiChannel;
+	{attribute addProperty Name "Channel 4"}
+	_4 :DiChannel;
+	{attribute addProperty Name "Latch"}
+	Latch : EL1254_Latch;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
