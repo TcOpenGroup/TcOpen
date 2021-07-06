@@ -4,9 +4,9 @@
     <Declaration><![CDATA[FUNCTION_BLOCK EL2084
 VAR
 	{attribute addProperty Name "WcState"}
-	_wcState : WcStateInputToggle;
+	_wcState : WcStateBase;
 	{attribute addProperty Name "Info data"}
-	_infoData : InfoDataAds;
+	_infoData : InfoDataBase;
 	_io : EL2xx4_Data;
 END_VAR
 ]]></Declaration>

@@ -2,118 +2,6 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17" TcVersionFixed="true">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
-			<BitSize>48</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
-			<Format>
-				<Printf>%d.%d.%d.%d.%d.%d</Printf>
-				<Parameter>[0]</Parameter>
-				<Parameter>[1]</Parameter>
-				<Parameter>[2]</Parameter>
-				<Parameter>[3]</Parameter>
-				<Parameter>[4]</Parameter>
-				<Parameter>[5]</Parameter>
-			</Format>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-000000000042}" TcBaseType="true" CName="AmsAddr">AMSADDR</Name>
-			<BitSize>64</BitSize>
-			<SubItem>
-				<Name>netId</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
-				<BitSize>48</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>port</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>48</BitOffs>
-			</SubItem>
-			<Format>
-				<Printf>%d.%d.%d.%d.%d.%d:%d</Printf>
-				<Parameter>.netId[0]</Parameter>
-				<Parameter>.netId[1]</Parameter>
-				<Parameter>.netId[2]</Parameter>
-				<Parameter>.netId[3]</Parameter>
-				<Parameter>.netId[4]</Parameter>
-				<Parameter>.netId[5]</Parameter>
-				<Parameter>.port</Parameter>
-			</Format>
-			<Format Name="Iec">
-				<Printf>(netId:=[%d.%d.%d.%d.%d.%d], port :=%d)</Printf>
-				<Parameter>.netId[0]</Parameter>
-				<Parameter>.netId[1]</Parameter>
-				<Parameter>.netId[2]</Parameter>
-				<Parameter>.netId[3]</Parameter>
-				<Parameter>.netId[4]</Parameter>
-				<Parameter>.netId[5]</Parameter>
-				<Parameter>.port</Parameter>
-			</Format>
-		</DataType>
-		<DataType>
-			<Name GUID="{02667619-E2F4-4394-1EC7-E2BCF615E891}" AutoDeleteType="true">stPWMStatus</Name>
-			<BitSize>16</BitSize>
-			<SubItem>
-				<Name>DigitalInput1</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>ReadyToEnable</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>1</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Warning</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>2</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Error</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>3</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TxPDOToggle</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>4</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign6</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>5</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign7</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>6</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign8</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>7</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign16</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000032}">BITARR8</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>8</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
 			<Name GUID="{90C3F02D-2D17-6D75-281A-50ACA89EB61F}" AutoDeleteType="true">stCNTStatus</Name>
 			<BitSize>16</BitSize>
 			<SubItem>
@@ -209,6 +97,60 @@
 			<Hides>
 				<Hide GUID="{518A09D6-CA09-5F68-1D60-3995137710EA}"/>
 			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+			<Format>
+				<Printf>%d.%d.%d.%d.%d.%d</Printf>
+				<Parameter>[0]</Parameter>
+				<Parameter>[1]</Parameter>
+				<Parameter>[2]</Parameter>
+				<Parameter>[3]</Parameter>
+				<Parameter>[4]</Parameter>
+				<Parameter>[5]</Parameter>
+			</Format>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000000000042}" TcBaseType="true" CName="AmsAddr">AMSADDR</Name>
+			<BitSize>64</BitSize>
+			<SubItem>
+				<Name>netId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+				<BitSize>48</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>port</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<Format>
+				<Printf>%d.%d.%d.%d.%d.%d:%d</Printf>
+				<Parameter>.netId[0]</Parameter>
+				<Parameter>.netId[1]</Parameter>
+				<Parameter>.netId[2]</Parameter>
+				<Parameter>.netId[3]</Parameter>
+				<Parameter>.netId[4]</Parameter>
+				<Parameter>.netId[5]</Parameter>
+				<Parameter>.port</Parameter>
+			</Format>
+			<Format Name="Iec">
+				<Printf>(netId:=[%d.%d.%d.%d.%d.%d], port :=%d)</Printf>
+				<Parameter>.netId[0]</Parameter>
+				<Parameter>.netId[1]</Parameter>
+				<Parameter>.netId[2]</Parameter>
+				<Parameter>.netId[3]</Parameter>
+				<Parameter>.netId[4]</Parameter>
+				<Parameter>.netId[5]</Parameter>
+				<Parameter>.port</Parameter>
+			</Format>
 		</DataType>
 		<DataType>
 			<Name GUID="{FE9218F3-0987-5509-6BC7-8B5DBE2DCEA2}" AutoDeleteType="true">stCNTStatusCompact</Name>
@@ -623,6 +565,64 @@
 			</Hides>
 		</DataType>
 		<DataType>
+			<Name GUID="{02667619-E2F4-4394-1EC7-E2BCF615E891}" AutoDeleteType="true">stPWMStatus</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>DigitalInput1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ReadyToEnable</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Warning</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Error</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TxPDOToggle</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign6</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign7</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign8</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign16</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000032}">BITARR8</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
 			<Name GUID="{9909CE93-DC55-F097-117E-629A9BF12021}" AutoDeleteType="true">stDOXStatus</Name>
 			<BitSize>16</BitSize>
 			<SubItem>
@@ -723,53 +723,80 @@
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{0FB863A5-2D85-901A-2CAF-00D48D0525BF}" AutoDeleteType="true">stDIGInputsDevice</Name>
-			<BitSize>8</BitSize>
-			<SubItem>
-				<Name>CommonFault</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>OvertemperatureDevice</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>1</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Undervoltage</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>2</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>MissingVoltage</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>3</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{4854112C-6F52-1834-4123-094742588DF9}" AutoDeleteType="true">stDIGDiagInput</Name>
-			<BitSize>8</BitSize>
+			<Name GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}" BitType="true" PersistentType="true">DIGDiagInput</Name>
+			<BitSize>4</BitSize>
 			<SubItem>
 				<Name>Overtemperature</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>0</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
 			</SubItem>
 			<SubItem>
 				<Name>OpenLoad</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Overcurrent</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ShortCircuitTo24V</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{B7588818-CE39-472C-72D7-01CE4E498A33}" AutoDeleteType="true">EL2044_Diag</Name>
+			<BitSize>32</BitSize>
+			<SubItem>
+				<Name>_1</Name>
+				<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+				<Comment><![CDATA[	{attribute addProperty Name "Channel 1"}
+	_1 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 2"}
+	_2 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 3"}
+	_3 : stDIGDiagInput;
+	{attribute addProperty Name "Channel 4"}
+	_4 : stDIGDiagInput;]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_2</Name>
+				<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_3</Name>
+				<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_4</Name>
+				<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>24</BitOffs>
+			</SubItem>
+			<Hides>
+				<Hide GUID="{D2FF0F55-7E8A-5800-0739-7FDE58BDC1CC}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{E0B65966-1FEF-2258-AA41-A8EA55FB68C4}" AutoDeleteType="true">stDIGInputsDevice</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>CommonFault</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
 				<Properties>
 					<Property>
 						<Name>TcAddressType</Name>
@@ -778,7 +805,19 @@
 				</Properties>
 			</SubItem>
 			<SubItem>
-				<Name>Overcurrent</Name>
+				<Name>OvertemperatureDevice</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>Undervoltage</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>2</BitOffs>
@@ -790,7 +829,7 @@
 				</Properties>
 			</SubItem>
 			<SubItem>
-				<Name>ShortCircuitTo24V</Name>
+				<Name>MissingVoltage</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>3</BitOffs>
@@ -802,38 +841,7 @@
 				</Properties>
 			</SubItem>
 			<Hides>
-				<Hide GUID="{E1B13BC2-732C-83BA-0922-CF21F3EA4B9E}"/>
-			</Hides>
-		</DataType>
-		<DataType>
-			<Name GUID="{BC1D6E47-59EC-4A75-A86A-22D2B25A17AB}" AutoDeleteType="true">EL2044_Diag</Name>
-			<BitSize>32</BitSize>
-			<SubItem>
-				<Name>_1</Name>
-				<Type GUID="{4854112C-6F52-1834-4123-094742588DF9}">stDIGDiagInput</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_2</Name>
-				<Type GUID="{4854112C-6F52-1834-4123-094742588DF9}">stDIGDiagInput</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>8</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_3</Name>
-				<Type GUID="{4854112C-6F52-1834-4123-094742588DF9}">stDIGDiagInput</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_4</Name>
-				<Type GUID="{4854112C-6F52-1834-4123-094742588DF9}">stDIGDiagInput</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>24</BitOffs>
-			</SubItem>
-			<Hides>
-				<Hide GUID="{D2FF0F55-7E8A-5800-0739-7FDE58BDC1CC}"/>
+				<Hide GUID="{0FB863A5-2D85-901A-2CAF-00D48D0525BF}"/>
 			</Hides>
 		</DataType>
 		<DataType>
@@ -947,67 +955,6 @@
 				<BitSize>8</BitSize>
 				<BitOffs>24</BitOffs>
 			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{290B200D-36BB-1AC1-90AD-3B16F37626B6}" AutoDeleteType="true">stPWMControl</Name>
-			<BitSize>16</BitSize>
-			<SubItem>
-				<Name>EnableDithering</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Enable</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>1</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Reset</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>2</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign4</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>3</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign5</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>4</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign6</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>5</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign7</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>6</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign8</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>7</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Allign16</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000032}">BITARR8</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>8</BitOffs>
-			</SubItem>
-			<Hides>
-				<Hide GUID="{80770C3F-CB52-613A-B391-4806771EC6F1}"/>
-			</Hides>
 		</DataType>
 		<DataType>
 			<Name GUID="{C7126E0D-68EC-1BEE-D7E6-A9B10C25D7E9}" AutoDeleteType="true">stCNTControl</Name>
@@ -1254,6 +1201,67 @@
 			</Hides>
 		</DataType>
 		<DataType>
+			<Name GUID="{290B200D-36BB-1AC1-90AD-3B16F37626B6}" AutoDeleteType="true">stPWMControl</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>EnableDithering</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Enable</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Reset</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign4</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign5</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign6</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign7</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign8</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Allign16</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000032}">BITARR8</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<Hides>
+				<Hide GUID="{80770C3F-CB52-613A-B391-4806771EC6F1}"/>
+			</Hides>
+		</DataType>
+		<DataType>
 			<Name GUID="{F910CEEA-6CB1-12C1-870E-D15604C5DE2A}" AutoDeleteType="true">stDOXControlCompact</Name>
 			<BitSize>16</BitSize>
 			<SubItem>
@@ -1451,6 +1459,16 @@
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>15</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}" BitType="true">DIGOutput</Name>
+			<BitSize>1</BitSize>
+			<SubItem>
+				<Name>Output</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -1687,7 +1705,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
 			<BitSize>7</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1696,7 +1714,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000000C}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..11] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000000C}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..11] OF BIT</Name>
 			<BitSize>12</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1705,7 +1723,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
 			<BitSize>2</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1714,7 +1732,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000009}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..8] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000009}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..8] OF BIT</Name>
 			<BitSize>9</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1732,7 +1750,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000003}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..2] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000003}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..2] OF BIT</Name>
 			<BitSize>3</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1741,7 +1759,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000005}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..4] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000005}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..4] OF BIT</Name>
 			<BitSize>5</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1750,7 +1768,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000000D}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..12] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000000D}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..12] OF BIT</Name>
 			<BitSize>13</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1768,7 +1786,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000000B}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..10] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000000B}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..10] OF BIT</Name>
 			<BitSize>11</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1777,7 +1795,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000001F}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..30] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000001F}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..30] OF BIT</Name>
 			<BitSize>31</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1786,7 +1804,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000003C}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..59] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000003C}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..59] OF BIT</Name>
 			<BitSize>60</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1795,7 +1813,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000016}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..21] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000016}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..21] OF BIT</Name>
 			<BitSize>22</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1804,7 +1822,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000001B}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..26] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000001B}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..26] OF BIT</Name>
 			<BitSize>27</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1813,7 +1831,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000001E}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..29] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000001E}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..29] OF BIT</Name>
 			<BitSize>30</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1822,7 +1840,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000000F}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..14] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-00200000000F}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..14] OF BIT</Name>
 			<BitSize>15</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -1856,6 +1874,9 @@
 					<Name>PlcTask</Name>
 				</Task>
 			</Tasks>
+			<TypeSystem>
+				<AdditionalTmcFile Name="TcIoBeckhoffDUTs" File="TcIoBeckhoffDUTs.tmc"/>
+			</TypeSystem>
 		</System>
 		<Plc>
 			<Project GUID="{DB3B2462-5D2B-4A75-B045-8AD45758239C}" Name="TcoIoBeckhoff" PrjFilePath="TcoIoBeckhoff\TcoIoBeckhoff.plcproj" TmcFilePath="TcoIoBeckhoff\TcoIoBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
@@ -2107,6 +2128,62 @@
 						<Var>
 							<Name>IO._EL1382._infoData._State</Name>
 							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._io.CNTInputs.Status</Name>
+							<Type GUID="{90C3F02D-2D17-6D75-281A-50ACA89EB61F}">stCNTStatus</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._io.CNTInputs.CounterValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._wcState.InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._infoData._AdsAddr</Name>
+							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTInputsChannel1.Status</Name>
+							<Type GUID="{FE9218F3-0987-5509-6BC7-8B5DBE2DCEA2}">stCNTStatusCompact</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTInputsChannel1.CounterValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTInputsChannel2.Status</Name>
+							<Type GUID="{FE9218F3-0987-5509-6BC7-8B5DBE2DCEA2}">stCNTStatusCompact</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTInputsChannel2.CounterValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._wcState.InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._infoData._AdsAddr</Name>
+							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL1702._io._1.Input</Name>
@@ -3505,142 +3582,6 @@
 							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2535._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._wcState.InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._infoData._AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._io.PWMStatusChannel_1.Status</Name>
-							<Type GUID="{02667619-E2F4-4394-1EC7-E2BCF615E891}">stPWMStatus</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._io.PWMStatusChannel_2.Status</Name>
-							<Type GUID="{02667619-E2F4-4394-1EC7-E2BCF615E891}">stPWMStatus</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2602._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2602._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2612._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2612._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2622._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2622._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2652._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2652._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2712._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2712._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2722._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2722._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2732._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2732._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._io.CNTInputs.Status</Name>
-							<Type GUID="{90C3F02D-2D17-6D75-281A-50ACA89EB61F}">stCNTStatus</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._io.CNTInputs.CounterValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._wcState.InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._infoData._AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTInputsChannel1.Status</Name>
-							<Type GUID="{FE9218F3-0987-5509-6BC7-8B5DBE2DCEA2}">stCNTStatusCompact</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTInputsChannel1.CounterValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTInputsChannel2.Status</Name>
-							<Type GUID="{FE9218F3-0987-5509-6BC7-8B5DBE2DCEA2}">stCNTStatusCompact</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTInputsChannel2.CounterValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._wcState.WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._wcState.InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._infoData._State</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._infoData._AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
-						</Var>
-						<Var>
 							<Name>IO._EL2521._wcState.WcState</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -3709,6 +3650,30 @@
 							<Type>UDINT</Type>
 						</Var>
 						<Var>
+							<Name>IO._EL2535._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._wcState.InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._infoData._AdsAddr</Name>
+							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._io.PWMStatusChannel_1.Status</Name>
+							<Type GUID="{02667619-E2F4-4394-1EC7-E2BCF615E891}">stPWMStatus</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._io.PWMStatusChannel_2.Status</Name>
+							<Type GUID="{02667619-E2F4-4394-1EC7-E2BCF615E891}">stPWMStatus</Type>
+						</Var>
+						<Var>
 							<Name>IO._EL2595._wcState.WcState</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -3749,6 +3714,62 @@
 							<Type GUID="{9909CE93-DC55-F097-117E-629A9BF12021}">stDOXStatus</Type>
 						</Var>
 						<Var>
+							<Name>IO._EL2602._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2602._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2612._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2612._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2622._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2622._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2652._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2652._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2712._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2712._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2722._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2722._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2732._wcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2732._infoData._State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
 							<Name>IO._EL2004._wcState.WcState</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -3769,72 +3790,40 @@
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._diag._1.Overtemperature</Name>
+							<Name>IO._EL2014._infoData._AdsAddr</Name>
+							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2014._io._diag._1</Name>
+							<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2014._io._diag._2</Name>
+							<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2014._io._diag._3</Name>
+							<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2014._io._diag._4</Name>
+							<Type GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}">DIGDiagInput</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2014._io._inputs.CommonFault</Name>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._diag._1.OpenLoad</Name>
+							<Name>IO._EL2014._io._inputs.OvertemperatureDevice</Name>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._diag._1.Overcurrent</Name>
+							<Name>IO._EL2014._io._inputs.Undervoltage</Name>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._diag._1.ShortCircuitTo24V</Name>
+							<Name>IO._EL2014._io._inputs.MissingVoltage</Name>
 							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._2.Overtemperature</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._2.OpenLoad</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._2.Overcurrent</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._2.ShortCircuitTo24V</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._3.Overtemperature</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._3.OpenLoad</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._3.Overcurrent</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._3.ShortCircuitTo24V</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._4.Overtemperature</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._4.OpenLoad</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._4.Overcurrent</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._diag._4.ShortCircuitTo24V</Name>
-							<Type>BIT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2014._io._inputs</Name>
-							<Type GUID="{0FB863A5-2D85-901A-2CAF-00D48D0525BF}">stDIGInputsDevice</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2024._wcState.WcState</Name>
@@ -3885,28 +3874,24 @@
 							<Type>UINT</Type>
 						</Var>
 						<Var>
+							<Name>IO._EL2044._infoData._AdsAddr</Name>
+							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+						</Var>
+						<Var>
 							<Name>IO._EL2044._io._diag</Name>
-							<Type GUID="{BC1D6E47-59EC-4A75-A86A-22D2B25A17AB}">EL2044_Diag</Type>
+							<Type GUID="{B7588818-CE39-472C-72D7-01CE4E498A33}">EL2044_Diag</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2044._io._inputs</Name>
-							<Type GUID="{0FB863A5-2D85-901A-2CAF-00D48D0525BF}">stDIGInputsDevice</Type>
+							<Type GUID="{E0B65966-1FEF-2258-AA41-A8EA55FB68C4}">stDIGInputsDevice</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2084._wcState.WcState</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2084._wcState.InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>IO._EL2084._infoData._State</Name>
 							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2084._infoData._AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2124._wcState.WcState</Name>
@@ -4072,6 +4057,30 @@
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
+							<Name>IO._EL1502._io.CNTOutputs.Control</Name>
+							<Type GUID="{C7126E0D-68EC-1BEE-D7E6-A9B10C25D7E9}">stCNTControl</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1502._io.CNTOutputs.SetCounterValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTOutputsChannel1.Control</Name>
+							<Type GUID="{7B263B9D-4F6D-4A12-CFED-F0433D8F0471}">stCNTControlCompact</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTOutputsChannel1.SetCounterValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTOutputsChannel2.Control</Name>
+							<Type GUID="{7B263B9D-4F6D-4A12-CFED-F0433D8F0471}">stCNTControlCompact</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL1512._io.CNTOutputsChannel2.SetCounterValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
 							<Name>IO._EL1852._io._9.Output</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -4216,102 +4225,6 @@
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2535._io.PWMControlChannel_1.Control</Name>
-							<Type GUID="{290B200D-36BB-1AC1-90AD-3B16F37626B6}">stPWMControl</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._io.PWMControlChannel_1.PWMOutput</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._io.PWMControlChannel_2.Control</Name>
-							<Type GUID="{290B200D-36BB-1AC1-90AD-3B16F37626B6}">stPWMControl</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2535._io.PWMControlChannel_2.PWMOutput</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2602._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2602._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2612._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2612._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2622._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2622._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2652._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2652._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2712._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2712._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2722._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2722._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2732._io._1.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL2732._io._2.Output</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._io.CNTOutputs.Control</Name>
-							<Type GUID="{C7126E0D-68EC-1BEE-D7E6-A9B10C25D7E9}">stCNTControl</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1502._io.CNTOutputs.SetCounterValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTOutputsChannel1.Control</Name>
-							<Type GUID="{7B263B9D-4F6D-4A12-CFED-F0433D8F0471}">stCNTControlCompact</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTOutputsChannel1.SetCounterValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTOutputsChannel2.Control</Name>
-							<Type GUID="{7B263B9D-4F6D-4A12-CFED-F0433D8F0471}">stCNTControlCompact</Type>
-						</Var>
-						<Var>
-							<Name>IO._EL1512._io.CNTOutputsChannel2.SetCounterValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
 							<Name>IO._EL2521._io._1.PTOControl.Control</Name>
 							<Type GUID="{CCD5128C-32B1-D4B4-C5F8-FCD25672F94F}">stPTOcontrol</Type>
 						</Var>
@@ -4372,12 +4285,84 @@
 							<Type>UDINT</Type>
 						</Var>
 						<Var>
+							<Name>IO._EL2535._io.PWMControlChannel_1.Control</Name>
+							<Type GUID="{290B200D-36BB-1AC1-90AD-3B16F37626B6}">stPWMControl</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._io.PWMControlChannel_1.PWMOutput</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._io.PWMControlChannel_2.Control</Name>
+							<Type GUID="{290B200D-36BB-1AC1-90AD-3B16F37626B6}">stPWMControl</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2535._io.PWMControlChannel_2.PWMOutput</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>IO._EL2595._io.DOXControl.Control</Name>
 							<Type GUID="{F910CEEA-6CB1-12C1-870E-D15604C5DE2A}">stDOXControlCompact</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2596._io.DOXControl.Control</Name>
 							<Type GUID="{70BA1E31-EBBD-3B61-BC00-583B54B301E7}">stDOXControl</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2602._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2602._io._2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2612._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2612._io._2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2622._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2622._io._2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2652._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2652._io._2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2712._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2712._io._2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2722._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2722._io._2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2732._io._1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL2732._io._2.Output</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2004._io._1.Output</Name>
@@ -4396,20 +4381,20 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._outputs._1.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2014._io._outputs._1</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._outputs._2.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2014._io._outputs._2</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._outputs._3.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2014._io._outputs._3</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2014._io._outputs._4.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2014._io._outputs._4</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2024._io._1.Output</Name>
@@ -4444,20 +4429,20 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2044._io._outputs._1.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2044._io._outputs._1</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2044._io._outputs._2.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2044._io._outputs._2</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2044._io._outputs._3.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2044._io._outputs._3</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
-							<Name>IO._EL2044._io._outputs._4.Output</Name>
-							<Type>BOOL</Type>
+							<Name>IO._EL2044._io._outputs._4</Name>
+							<Type GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}">DIGOutput</Type>
 						</Var>
 						<Var>
 							<Name>IO._EL2084._io._1.Output</Name>
@@ -5196,6 +5181,16 @@
 								<Link VarA="IO._EL2034._io.Diag_2^Diag" TypeA="BOOL" InOutA="0" ParentTypeA="DiDiag" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Diag 2^Diag" Size="1" RestoreInfo="ANotFound"/>
 								<Link VarA="IO._EL2034._io.Diag_3^Diag" TypeA="BOOL" InOutA="0" ParentTypeA="DiDiag" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Diag 3^Diag" Size="1" RestoreInfo="ANotFound"/>
 								<Link VarA="IO._EL2034._io.Diag_4^Diag" TypeA="BOOL" InOutA="0" ParentTypeA="DiDiag" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Diag 4^Diag" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2021-07-06T11:05:53">
+						<OwnerA Name="InputDst" Prefix="TIPC^TcoIoBeckhoff^TcoIoBeckhoff Instance" Type="1">
+							<OwnerB Name="TIID^Device 255 (EtherCAT)^A0^EL2014 (EL2014)">
+								<Link VarA="IO._EL2014._io._inputs^CommonFault" TypeA="BIT" InOutA="0" ParentTypeA="stDIGInputsDevice" GuidA="{18071995-0000-0000-0000-000000000010}" VarB="DIG Inputs Device^Common Fault" RestoreInfo="ANotFound"/>
+								<Link VarA="IO._EL2014._io._inputs^MissingVoltage" TypeA="BIT" InOutA="0" ParentTypeA="stDIGInputsDevice" GuidA="{18071995-0000-0000-0000-000000000010}" VarB="DIG Inputs Device^Missing Voltage" RestoreInfo="ANotFound"/>
+								<Link VarA="IO._EL2014._io._inputs^OvertemperatureDevice" TypeA="BIT" InOutA="0" ParentTypeA="stDIGInputsDevice" GuidA="{18071995-0000-0000-0000-000000000010}" VarB="DIG Inputs Device^Overtemperature Device" RestoreInfo="ANotFound"/>
+								<Link VarA="IO._EL2014._io._inputs^Undervoltage" TypeA="BIT" InOutA="0" ParentTypeA="stDIGInputsDevice" GuidA="{18071995-0000-0000-0000-000000000010}" VarB="DIG Inputs Device^Undervoltage" RestoreInfo="ANotFound"/>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
@@ -14451,6 +14446,24 @@ Bit 3: Tristate 2]]></Comment>
 				<Link VarA="PlcTask Outputs^IO._EL2008._io._7.Output" VarB="Channel 7^Output"/>
 				<Link VarA="PlcTask Outputs^IO._EL2008._io._8.Output" VarB="Channel 8^Output"/>
 			</OwnerB>
+			<OwnerB Name="TIID^Device 255 (EtherCAT)^A0^EL2014 (EL2014)">
+				<Link VarA="PlcTask Inputs^IO._EL2014._infoData._AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._infoData._State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._diag._1" VarB="DIG Diag Inputs^Channel 1"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._diag._2" VarB="DIG Diag Inputs^Channel 2"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._diag._3" VarB="DIG Diag Inputs^Channel 3"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._diag._4" VarB="DIG Diag Inputs^Channel 4"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._inputs.CommonFault" VarB="DIG Inputs Device^Common Fault"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._inputs.MissingVoltage" VarB="DIG Inputs Device^Missing Voltage"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._inputs.OvertemperatureDevice" VarB="DIG Inputs Device^Overtemperature Device"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._io._inputs.Undervoltage" VarB="DIG Inputs Device^Undervoltage"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._wcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^IO._EL2014._wcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^IO._EL2014._io._outputs._1" VarB="DIG Outputs^Channel 1"/>
+				<Link VarA="PlcTask Outputs^IO._EL2014._io._outputs._2" VarB="DIG Outputs^Channel 2"/>
+				<Link VarA="PlcTask Outputs^IO._EL2014._io._outputs._3" VarB="DIG Outputs^Channel 3"/>
+				<Link VarA="PlcTask Outputs^IO._EL2014._io._outputs._4" VarB="DIG Outputs^Channel 4"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 255 (EtherCAT)^A0^EL2022 (EL2022)">
 				<Link VarA="PlcTask Inputs^IO._EL2022._infoData._State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^IO._EL2022._wcState.WcState" VarB="WcState^WcState"/>
@@ -14492,6 +14505,24 @@ Bit 3: Tristate 2]]></Comment>
 				<Link VarA="PlcTask Inputs^IO._EL2042._infoData._State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Outputs^IO._EL2042._io._1.Output" VarB="Channel 1^Output"/>
 				<Link VarA="PlcTask Outputs^IO._EL2042._io._2.Output" VarB="Channel 2^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 255 (EtherCAT)^A0^EL2044 (EL2044)">
+				<Link VarA="PlcTask Inputs^IO._EL2044._infoData._AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._infoData._State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._diag^_1" VarB="DIG Diag Inputs^Channel 1"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._diag^_2" VarB="DIG Diag Inputs^Channel 2"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._diag^_3" VarB="DIG Diag Inputs^Channel 3"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._diag^_4" VarB="DIG Diag Inputs^Channel 4"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._inputs^CommonFault" VarB="DIG Inputs Device^Common Fault"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._inputs^MissingVoltage" VarB="DIG Inputs Device^Missing Voltage"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._inputs^OvertemperatureDevice" VarB="DIG Inputs Device^Overtemperature Device"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._io._inputs^Undervoltage" VarB="DIG Inputs Device^Undervoltage"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._wcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^IO._EL2044._wcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^IO._EL2044._io._outputs._1" VarB="DIG Outputs^Channel 1"/>
+				<Link VarA="PlcTask Outputs^IO._EL2044._io._outputs._2" VarB="DIG Outputs^Channel 2"/>
+				<Link VarA="PlcTask Outputs^IO._EL2044._io._outputs._3" VarB="DIG Outputs^Channel 3"/>
+				<Link VarA="PlcTask Outputs^IO._EL2044._io._outputs._4" VarB="DIG Outputs^Channel 4"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 255 (EtherCAT)^A0^EL2084 (EL2084)">
 				<Link VarA="PlcTask Inputs^IO._EL2084._infoData._State" VarB="InfoData^State"/>

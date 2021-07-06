@@ -4,13 +4,13 @@
     <Declaration><![CDATA[TYPE stDIGInputsDevice :
 STRUCT
 	{attribute addProperty Name "Common Fault"}
-	CommonFault : BIT;
+	CommonFault AT %I* : BIT;
 	{attribute addProperty Name "Overtemperature Device"}
-	OvertemperatureDevice: BIT;
+	OvertemperatureDevice AT %I* : BIT;
 	{attribute addProperty Name "Undervoltage"}
-	Undervoltage : BIT;
+	Undervoltage AT %I* : BIT;
 	{attribute addProperty Name "Missing Voltage"}
-	MissingVoltage : BIT;
+	MissingVoltage AT %I* : BIT;
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>

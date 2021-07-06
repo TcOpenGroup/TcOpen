@@ -3,22 +3,14 @@
   <DUT Name="EL2014_Diag" Id="{901c3faa-04de-0f0a-06fd-af7f7ad388de}">
     <Declaration><![CDATA[TYPE EL2014_Diag :
 STRUCT
-//	{attribute addProperty Name "Channel 1"}
-//	_1 AT %I* : stDIGDiagInput;
-//	{attribute addProperty Name "Channel 2"}
-//	_2 AT %I* : stDIGDiagInput;
-//	{attribute addProperty Name "Channel 3"}
-//	_3 AT %I* : stDIGDiagInput;
-//	{attribute addProperty Name "Channel 4"}
-//	_4 AT %I* : stDIGDiagInput;
 	{attribute addProperty Name "Channel 1"}
-	_1 : stDIGDiagInput;
+	_1 AT %I* : DIGDiagInput;
 	{attribute addProperty Name "Channel 2"}
-	_2 : stDIGDiagInput;
+	_2 AT %I* : DIGDiagInput;
 	{attribute addProperty Name "Channel 3"}
-	_3 : stDIGDiagInput;
+	_3 AT %I* : DIGDiagInput;
 	{attribute addProperty Name "Channel 4"}
-	_4 : stDIGDiagInput;
+	_4 AT %I* : DIGDiagInput;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

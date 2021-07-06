@@ -6,9 +6,9 @@ STRUCT
 	{attribute addProperty Name "DIG Diag Inputs"}
 	_diag : EL2014_Diag;
 	{attribute addProperty Name "DIG Inputs Device"}
-	_inputs AT %I* : stDIGInputsDevice;
+	_inputs : stDIGInputsDevice;
 	{attribute addProperty Name "DIG Outputs"}
-	_outputs : EL2xx4_Data;
+	_outputs : EL2014_Outputs;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

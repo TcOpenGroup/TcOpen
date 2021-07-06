@@ -4,13 +4,13 @@
     <Declaration><![CDATA[TYPE stDIGDiagInput :
 STRUCT
 	{attribute addProperty Name "Overtemperature"}
-	Overtemperature AT %I* : BIT;
+	Overtemperature : BIT;
 	{attribute addProperty Name "Open Load"}
-	OpenLoad AT %I* : BIT;
+	OpenLoad : BIT;
 	{attribute addProperty Name "Overcurrent"}
-	Overcurrent AT %I* : BIT;
+	Overcurrent : BIT;
 	{attribute addProperty Name "Short Circuit to 24V"}
-	ShortCircuitTo24V AT %I* : BIT;
+	ShortCircuitTo24V : BIT;
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>
