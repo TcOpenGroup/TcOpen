@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_Feedback_Settings" Id="{752768a3-9fad-0f85-0498-e1b7d8c83ccc}">
+    <Declaration><![CDATA[TYPE SAI_Feedback_Settings :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1(address x.0)"}
+	Bit_1 : BIT;                                
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 2(address x.1)"}
+	Bit_2 : BIT;                                
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3 : BIT;                                
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute addProperty Name "ModeBit_1"}
+	ModeBit_1 : BIT;                                
+	{attribute addProperty Name "ModeBit_2)"}
+	ModeBit_2 : BIT;                                
+	{attribute addProperty Name "ModeBit_3"}
+	ModeBit_3 : BIT;                                
+	{attribute addProperty Name "ModeBit_4"}
+	ModeBit_4 : BIT;
+	{attribute addProperty Name "SINT"}
+	Range : SINT;
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

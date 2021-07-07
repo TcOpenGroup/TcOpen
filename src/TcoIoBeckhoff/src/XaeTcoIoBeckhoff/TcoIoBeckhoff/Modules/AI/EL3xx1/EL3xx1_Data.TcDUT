@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3xx1_Data" Id="{1017af04-d449-00f2-28de-cbec4c87bafd}">
+    <Declaration><![CDATA[TYPE EL3xx1_Data :
+STRUCT
+	{attribute addProperty Name "Status"}
+	_status AT %I* : AI_Standard_Status;
+	{attribute addProperty Name "Value"}
+	_value AT %I* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

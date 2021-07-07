@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3692_Data" Id="{97d17020-bf18-07b6-1417-3320ea2abe7b}">
+    <Declaration><![CDATA[TYPE EL3692_Data :
+STRUCT
+	{attribute addProperty Name "SAI Inputs Channel 1}
+	SAI_InputsChannel_1 : SAI_Input;
+	{attribute addProperty Name "SAI Range Channel 1}
+	SAI_RangeChannel_1 : SAI_Feedback;
+	{attribute addProperty Name "SAI Inputs Real Channel 1}
+	SAI_InputsRealChannel_1 : SAI_InputRealChannel;
+	{attribute addProperty Name "SAI Inputs Channel 2}
+	SAI_InputsChannel_2 : SAI_Input;
+	{attribute addProperty Name "SAI Range Channel 2}
+	SAI_RangeChannel_2 : SAI_Feedback;
+	{attribute addProperty Name "SAI Inputs Real Channel 2}
+	SAI_InputsRealChannel_2 : SAI_InputRealChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

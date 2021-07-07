@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_RangeControl" Id="{679545f3-d0c6-06f3-1d80-331364d2a69a}">
+    <Declaration><![CDATA[TYPE SAI_RangeControl :
+STRUCT
+	{attribute addProperty Name "Disable autorange"}
+	DisableAutorange : BIT;
+	{attribute addProperty Name "Start calibration"}
+	StartCalibration : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute addProperty Name "ModeBit_1"}
+	ModeBit_1 : BIT;                                
+	{attribute addProperty Name "ModeBit_2)"}
+	ModeBit_2 : BIT;                                
+	{attribute addProperty Name "ModeBit_3"}
+	ModeBit_3 : BIT;                                
+	{attribute addProperty Name "ModeBit_4"}
+	ModeBit_4 : BIT;
+	{attribute addProperty Name "SINT"}
+	Range : SINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

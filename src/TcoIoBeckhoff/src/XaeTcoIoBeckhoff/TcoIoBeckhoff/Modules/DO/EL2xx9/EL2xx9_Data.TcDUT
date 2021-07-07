@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="EL2809_Data" Id="{50477f5a-7d0c-0065-0513-11e346ecfc3d}">
-    <Declaration><![CDATA[TYPE EL2809_Data :
+  <DUT Name="EL2xx9_Data" Id="{50477f5a-7d0c-0065-0513-11e346ecfc3d}">
+    <Declaration><![CDATA[TYPE EL2xx9_Data :
 STRUCT
 	{attribute addProperty Name "1"}
 	_1 AT %Q* : BOOL;
@@ -35,8 +35,6 @@ STRUCT
 	_15 AT %Q* : BOOL;
 	{attribute addProperty Name "16"}
 	_16 AT %Q* : BOOL; 
-//	WcState : WcStateBase;
-//	InfoData : InfoDataBase;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

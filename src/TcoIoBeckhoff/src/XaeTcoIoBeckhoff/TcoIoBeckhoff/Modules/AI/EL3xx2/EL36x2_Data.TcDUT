@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL36x2_Data" Id="{5ed924d6-20d6-07c5-149a-b53ef7f03f4a}">
+    <Declaration><![CDATA[TYPE EL36x2_Data :
+STRUCT
+	{attribute addProperty Name "AI Inputs Channel 1"}
+	_1 : AI_Input_Channel;
+	{attribute addProperty Name "AI Inputs Channel 2"}
+	_2 : AI_Input_Channel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

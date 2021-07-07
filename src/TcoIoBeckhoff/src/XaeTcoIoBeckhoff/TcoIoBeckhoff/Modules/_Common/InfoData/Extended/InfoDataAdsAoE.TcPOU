@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="InfoDataAdsAoE" Id="{de23081f-d2be-0df9-1f69-80946b2efe4b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK InfoDataAdsAoE EXTENDS InfoDataAds
+VAR
+	_AoeNetId AT %I*: AMSNETID;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="AdsAddr" Id="{6e681fcc-0d7c-0b0e-0742-088acae6a4e1}">
+      <Declaration><![CDATA[PROPERTY AdsAddr : AMSADDR]]></Declaration>
+      <Get Name="Get" Id="{66f4cca1-7574-02cf-0299-10a7217d1ff2}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AdsAddr := _AdsAddr;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

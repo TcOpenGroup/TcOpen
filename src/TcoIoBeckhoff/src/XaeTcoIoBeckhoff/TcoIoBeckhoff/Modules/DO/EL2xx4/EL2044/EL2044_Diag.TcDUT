@@ -4,13 +4,13 @@
     <Declaration><![CDATA[TYPE EL2044_Diag :
 STRUCT
 	{attribute addProperty Name "Channel 1"}
-	_1 : DIGDiagInput;
+	_1 AT %I* : DIGDiagInput;
 	{attribute addProperty Name "Channel 2"}
-	_2 : DIGDiagInput;
+	_2 AT %I* : DIGDiagInput;
 	{attribute addProperty Name "Channel 3"}
-	_3 : DIGDiagInput;
+	_3 AT %I* : DIGDiagInput;
 	{attribute addProperty Name "Channel 4"}
-	_4 : DIGDiagInput;
+	_4 AT %I* : DIGDiagInput;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

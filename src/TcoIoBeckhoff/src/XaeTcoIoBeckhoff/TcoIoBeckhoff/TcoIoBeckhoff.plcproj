@@ -45,166 +45,325 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\CNTInputs.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3001.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\CNTInputsChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3011.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\CNTOutputs.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3021.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\CNTOutputsChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3041.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\stCNTControlCompact.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3051.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\stCNTStatus.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3061.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\stCNTControl.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3101.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\CNT\stCNTStatusCompact.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3111.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\DiChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3121.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\DiDiag.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3141.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\DiNamurChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3151.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\MTO\MTOOutputs10xChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3161.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\MTO\MTOInputsChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3201.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\MTO\stMTOInputsStatus.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3311.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\MTO\stMTOOutputsControl.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3351\EL3351.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DI\MTO\stMTOOutputs.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3351\EL3351_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DIG\stDIGInputsDevice.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3681\EL3681.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DIG\stDIGDiagInput.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3681\EL3681_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DoChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx1\EL3xx1_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DoChannelTriState.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3002.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DoDiag.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3602.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DOX\DOXControlChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3102.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DOX\DOXControlCompactChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3012.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DOX\DOXStatusChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3112.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DOX\stDOXControl.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3022.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DOX\stDOXControlCompact.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3122.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\DOX\stDOXStatus.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3042.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\ENCControlChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3142.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\ENCStatusChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3052.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\PTOChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3152.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\PTOTargetCompactChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3062.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\ENCStatusCompactChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3162.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\ENCControlCompactChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3182.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\PTOstatusChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3202.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\PTOcontrolChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3312.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\PTOChannelCompact.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3612.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\PTOTargetChannel.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3692\EL3692.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\stENCStatusCompact.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3692\EL3692_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\stENCControlCompact.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL3xx2_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\stENCStatus.TcDUT">
+    <Compile Include="Modules\AI\EL3xx2\EL36x2_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\stPTOcontrol.TcDUT">
+    <Compile Include="Modules\_Common\AI\AI_Standard_Channel.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PTO\stPTOstatus.TcDUT">
+    <Compile Include="Modules\_Common\AI\AI_Input_Channel.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PWM\PwmOutputChannel.TcDUT">
+    <Compile Include="Modules\_Common\AI\AI_Supply_Input.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PWM\stPWMControl.TcDUT">
+    <Compile Include="Modules\_Common\AI\AI_Standard_Status.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PWM\PWMControlChannel.TcDUT">
+    <Compile Include="Modules\_Common\AI\AI_Bridge_Input.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PWM\stPWMStatus.TcDUT">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_Feedback.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\DO\PWM\PWMStatusChannel.TcDUT">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_InputRealChannel.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\InfoData\Base\InfoDataBase.TcPOU">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_Range.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\InfoData\Base\stInfoDataBase.TcDUT">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_Input_Status.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\InfoData\Extended\InfoDataAds.TcPOU">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_Feedback_Settings.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\InfoData\Extended\InfoDataAdsDC.TcPOU">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_Input.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\InfoData\Extended\InfoDataDC.TcPOU">
+    <Compile Include="Modules\_Common\AI\SAI\SAI_RangeControl.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\WcState\Base\WcStateBase.TcDUT">
+    <Compile Include="Modules\_Common\DI\CNT\CNTInputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Common\WcState\Extended\WcStateInputToggle.TcDUT">
+    <Compile Include="Modules\_Common\DI\CNT\CNTInputsChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\CNT\CNTOutputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\CNT\CNTOutputsChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\CNT\stCNTControlCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\CNT\stCNTStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\CNT\stCNTControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\CNT\stCNTStatusCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\DiChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\DiDiag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\DiNamurChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\MTO\MTOOutputs10xChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\MTO\MTOInputsChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\MTO\stMTOInputsStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\MTO\stMTOOutputsControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DI\MTO\stMTOOutputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DIG\stDIGInputsDevice.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DIG\stDIGDiagInput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DoChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DoChannelTriState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DoDiag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DOX\DOXControlChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DOX\DOXControlCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DOX\DOXStatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DOX\stDOXControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DOX\stDOXControlCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\DOX\stDOXStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\ENCControlChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\ENCStatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\PTOChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\PTOTargetCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\ENCStatusCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\ENCControlCompactChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\PTOstatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\PTOcontrolChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\PTOChannelCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\PTOTargetChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\stENCStatusCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\stENCControlCompact.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\stENCStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\stPTOcontrol.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PTO\stPTOstatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PWM\PwmOutputChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PWM\stPWMControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PWM\PWMControlChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PWM\stPWMStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\DO\PWM\PWMStatusChannel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\InfoData\Base\InfoDataBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\InfoData\Base\stInfoDataBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\InfoData\Extended\InfoDataAds.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\InfoData\Extended\InfoDataAdsDC.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\InfoData\Extended\InfoDataAdsAoE.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\InfoData\Extended\InfoDataDC.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\WcState\Base\WcStateBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\_Common\WcState\Extended\WcStateInputToggle.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Modules\DI\EL1xx2\EL1502\EL1502.TcPOU">
@@ -369,10 +528,28 @@
     <Compile Include="Modules\DI\EL1xx4\EL1xx4_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\DO\EL2809\EL2809.TcPOU">
+    <Compile Include="Modules\DO\EL2xx9\EL2872.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\DO\EL2809\EL2809_Data.TcDUT">
+    <Compile Include="Modules\DO\EL2xx9\EL2889.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx9\EL2819\EL2819.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx9\EL2819\EL2819_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx9\EL2819\EL2819_Diag.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx9\EL2819\EL2819_Outputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx9\EL2809.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\DO\EL2xx9\EL2xx9_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Modules\DO\EL2xx2\EL2502\EL2502.TcPOU">
@@ -597,20 +774,27 @@
     <Folder Include="Abstractions\AI" />
     <Folder Include="GVLs" />
     <Folder Include="Modules" />
-    <Folder Include="Modules\Common\DI\CNT" />
-    <Folder Include="Modules\Common\DI\MTO" />
-    <Folder Include="Modules\Common\DO\DOX" />
-    <Folder Include="Modules\Common\DO\DIG" />
-    <Folder Include="Modules\Common\DO\PTO" />
-    <Folder Include="Modules\Common\DO\PWM" />
-    <Folder Include="Modules\Common\InfoData" />
-    <Folder Include="Modules\Common\InfoData\Base" />
-    <Folder Include="Modules\Common\InfoData\Extended" />
-    <Folder Include="Modules\Common\DI" />
-    <Folder Include="Modules\Common\DO" />
-    <Folder Include="Modules\Common\WcState" />
-    <Folder Include="Modules\Common\WcState\Base" />
-    <Folder Include="Modules\Common\WcState\Extended" />
+    <Folder Include="Modules\AI\EL3xx1" />
+    <Folder Include="Modules\AI\EL3xx1\EL3351" />
+    <Folder Include="Modules\AI\EL3xx1\EL3681" />
+    <Folder Include="Modules\AI\EL3xx2" />
+    <Folder Include="Modules\AI\EL3xx2\EL3692" />
+    <Folder Include="Modules\_Common\AI\SAI" />
+    <Folder Include="Modules\_Common\DI\CNT" />
+    <Folder Include="Modules\_Common\DI\MTO" />
+    <Folder Include="Modules\_Common\DO\DOX" />
+    <Folder Include="Modules\_Common\DO\DIG" />
+    <Folder Include="Modules\_Common\DO\PTO" />
+    <Folder Include="Modules\_Common\DO\PWM" />
+    <Folder Include="Modules\_Common\InfoData" />
+    <Folder Include="Modules\_Common\InfoData\Base" />
+    <Folder Include="Modules\_Common\InfoData\Extended" />
+    <Folder Include="Modules\_Common\DI" />
+    <Folder Include="Modules\_Common\DO" />
+    <Folder Include="Modules\_Common\AI" />
+    <Folder Include="Modules\_Common\WcState" />
+    <Folder Include="Modules\_Common\WcState\Base" />
+    <Folder Include="Modules\_Common\WcState\Extended" />
     <Folder Include="Modules\DI\EL1xx2\EL1502" />
     <Folder Include="Modules\DI\EL1xx2\EL1382" />
     <Folder Include="Modules\DI\EL1xx2\EL1512" />
@@ -624,7 +808,7 @@
     <Folder Include="Modules\DI\EL1xx4\EL1254" />
     <Folder Include="Modules\DI\EL1xx9\EL1852" />
     <Folder Include="Modules\DI\EL1xx9\EL1859" />
-    <Folder Include="Modules\DO\EL2809" />
+    <Folder Include="Modules\DO\EL2xx9" />
     <Folder Include="Modules\DO\EL2xx2" />
     <Folder Include="Modules\DO\EL2xx2\EL2032" />
     <Folder Include="Modules\DO\EL2xx2\EL2202" />
@@ -642,13 +826,15 @@
     <Folder Include="Modules\DO\EL2xx8" />
     <Folder Include="Modules\DO\EL2xx8\EL2878" />
     <Folder Include="Modules\DO\EL2xx8\EL2258" />
+    <Folder Include="Modules\DO\EL2xx9\EL2819" />
     <Folder Include="Modules\EL922x\FBs" />
     <Folder Include="Modules\EL922x\ITFs" />
     <Folder Include="Modules\EL922x\STs" />
     <Folder Include="Modules\EL922x" />
-    <Folder Include="Modules\Common" />
+    <Folder Include="Modules\_Common" />
     <Folder Include="Modules\DI" />
     <Folder Include="Modules\DO" />
+    <Folder Include="Modules\AI" />
     <Folder Include="POUs" />
     <Folder Include="Version" />
   </ItemGroup>

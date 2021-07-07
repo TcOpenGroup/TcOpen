@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_Feedback" Id="{4d125d2a-3cf7-07a8-0d88-ae0644a0bad8}">
+    <Declaration><![CDATA[TYPE SAI_Feedback :
+STRUCT
+	{attribute addProperty Name "Settings"}
+	Settings AT %I* : SAI_Feedback_Settings;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
