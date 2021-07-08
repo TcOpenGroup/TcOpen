@@ -19,8 +19,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="150" MaxHeight="300" />
             <RowDefinition Height="10" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="Auto" />
-            <RowDefinition MaxHeight="300" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -130,7 +130,6 @@
             Background="{DynamicResource Primary}"
             Foreground="{DynamicResource OnPrimary}"
             Text="{x:Static loc:Localization.DiagnosticsRunnig}"
-            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />
-      
+            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />      
     </Grid>
 </UserControl>
