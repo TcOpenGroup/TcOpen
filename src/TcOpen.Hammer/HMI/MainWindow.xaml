@@ -39,20 +39,20 @@
                     </TabItem>
                     <TabItem Header="Components">
                         <vortex:PermissionBox Permissions="Administrator" SecurityMode="Disabled">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="300" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <ScrollViewer Grid.Row="0">
-                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components}" PresentationType="Service-Manual" />
-                            </ScrollViewer>
-                            <Expander Grid.Row="1">
-                                <vortex:RenderableContentControl                                
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="300" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ScrollViewer Grid.Row="0">
+                                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components}" PresentationType="Service-Manual" />
+                                </ScrollViewer>
+                                <Expander Grid.Row="1">
+                                    <vortex:RenderableContentControl                                
                                 DataContext="{Binding PlcHammer.TECH_MAIN._app}"
                                 PresentationType="Diagnostics" />
-                            </Expander>
-                        </Grid>
+                                </Expander>
+                            </Grid>
                         </vortex:PermissionBox>
                     </TabItem>
                 </TabControl>
@@ -73,6 +73,7 @@
                                 BorderBrush="LightGray"
                                 BorderThickness="2"
                                 CornerRadius="2.5" />
+                            <vortex:TcoComponentSpotView Canvas.Left="272" DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis}" Canvas.Top="10"></vortex:TcoComponentSpotView>
                             <Border
                                 Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic, Converter={local:AxisPositionConverter}}"                                
                                 Width="50"
@@ -244,7 +245,7 @@
                 <Button Background="{DynamicResource MaterialDesignValidationErrorBrush}"
                         Foreground="{DynamicResource MaterialDesignDarkForeground}"
                         Content="Error"/>
-                
+
             </StackPanel>
         </TabItem>
     </TabControl>
