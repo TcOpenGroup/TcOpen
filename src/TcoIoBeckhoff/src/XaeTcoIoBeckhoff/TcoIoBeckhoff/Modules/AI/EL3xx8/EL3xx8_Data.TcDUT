@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3xx8_Data" Id="{efccbc23-6990-0d9f-00dd-37b5ebb79502}">
+    <Declaration><![CDATA[TYPE EL3xx8_Data :
+STRUCT
+	{attribute addProperty Name "AI Standard Channel 1"}
+	_1 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 2"}
+	_2 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 3"}
+	_3 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 4"}
+	_4 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 5"}
+	_5 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 6"}
+	_6 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 7"}
+	_7 : AI_Standard_Channel;
+	{attribute addProperty Name "AI Standard Channel 8"}
+	_8 : AI_Standard_Channel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

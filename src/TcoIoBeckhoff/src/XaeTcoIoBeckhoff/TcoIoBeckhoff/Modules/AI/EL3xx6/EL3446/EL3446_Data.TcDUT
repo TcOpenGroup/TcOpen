@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3446_Data" Id="{9ab228c2-0150-0a37-0f78-c70429d6499f}">
+    <Declaration><![CDATA[TYPE EL3446_Data :
+STRUCT
+	{attribute addProperty Name "I1 Current"}
+	I1_Current : EL3446_Current;
+	{attribute addProperty Name "I2 Current"}
+	I2_Current : EL3446_Current;
+	{attribute addProperty Name "I3 Current"}
+	I3_Current : EL3446_Current;
+	{attribute addProperty Name "I4 Current"}
+	I4_Current : EL3446_Current;
+	{attribute addProperty Name "I5 Current"}
+	I5_Current : EL3446_Current;
+	{attribute addProperty Name "I6 Current"}
+	I6_Current : EL3446_Current;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

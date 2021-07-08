@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3356_Data" Id="{cd5618d8-da34-06b3-0b6e-17ed6e63a7c1}">
+    <Declaration><![CDATA[TYPE EL3356_Data :
+STRUCT
+	{attribute addProperty Name "RMB Status"}
+	RMB_Status : EL3356_RMB_Status;
+	{attribute addProperty Name "RMB Value"}
+	RMB_Value : EL3356_RMB_Value;
+	{attribute addProperty Name "RMB Conrtol"}
+	RMB_Control : EL3356_RMB_Control;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

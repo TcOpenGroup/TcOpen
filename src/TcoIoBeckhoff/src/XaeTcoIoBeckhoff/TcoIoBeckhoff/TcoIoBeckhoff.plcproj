@@ -315,6 +315,117 @@
     <Compile Include="Modules\AI\EL3xx2\EL36x2_Data.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3004.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3204.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3104.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3114.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3124.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3044.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3014.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3144.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3054.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3024.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3154.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3064.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3164.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3214.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3174.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3314.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx4\EL3xx4_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx5\EL3255.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx5\EL3xx5_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356_RMB_Control.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356_RMB_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356_RMB_Value.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356_Control.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3446\EL3446.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3446\EL3446_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3446\EL3446_Current.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx6\EL3356\EL3356_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3008.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3048.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3058.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3068.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3208.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3218.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3318.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\AI\EL3xx8\EL3xx8_Data.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Modules\_Common\AI\AI_Standard_Channel.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -937,6 +1048,12 @@
     <Folder Include="Modules\AI\EL3xx2" />
     <Folder Include="Modules\AI\EL3xx2\EL3692" />
     <Folder Include="Modules\AI\EL34x3" />
+    <Folder Include="Modules\AI\EL3xx4" />
+    <Folder Include="Modules\AI\EL3xx5" />
+    <Folder Include="Modules\AI\EL3xx6" />
+    <Folder Include="Modules\AI\EL3xx6\EL3446" />
+    <Folder Include="Modules\AI\EL3xx6\EL3356" />
+    <Folder Include="Modules\AI\EL3xx8" />
     <Folder Include="Modules\_Common\AI\SAI" />
     <Folder Include="Modules\_Common\DI\CNT" />
     <Folder Include="Modules\_Common\DI\MTO" />

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3356_Status" Id="{56c71612-289c-0287-1454-b314a0b18808}">
+    <Declaration><![CDATA[TYPE EL3356_Status :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1(address x.0)"}
+	Bit_1 : BIT;
+	{attribute addProperty Name "Overrange"}
+	Overrange: BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3: BIT;
+	{attribute addProperty Name "Data invalid"}
+	DataInvalid : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute addProperty Name "Error"}
+	Error : BIT;
+	{attribute addProperty Name "Calibration in progress"}
+	CalibrationInProgress : BIT;
+	{attribute addProperty Name "Steady state"}
+	SteadyState : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute addProperty Name "Sync error"}
+	SyncError : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
