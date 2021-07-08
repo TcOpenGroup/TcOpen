@@ -23,6 +23,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
 		<ProjectReference Include="..\Security\TcOpen.Inxton.Security.csproj" />
+		<ProjectReference Include="..\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Security.Permissions" Version="4.7.0" />

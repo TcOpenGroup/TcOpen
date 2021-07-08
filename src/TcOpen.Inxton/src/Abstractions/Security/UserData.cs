@@ -133,7 +133,7 @@ namespace TcOpen.Inxton.Abstractions.Security
 
         public void UpdateRoleHash() => RoleHash = CalculateRoleHash(Roles, Username);
 
-        public void SetPlainTextPassoword(string plainTextPassowrd) => HashedPassword = CalculateHash(plainTextPassowrd, Username);
+        public void SetPlainTextPassword(string plainTextPassowrd) => HashedPassword = CalculateHash(plainTextPassowrd, Username);
 
         private string CalculateHash(string textToHash, string salt)
         {

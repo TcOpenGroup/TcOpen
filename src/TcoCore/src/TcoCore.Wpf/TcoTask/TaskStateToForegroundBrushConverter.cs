@@ -14,6 +14,12 @@ namespace TcoCore
         {
             try
             {
+                if (value.GetType() == typeof(bool))
+                {
+                    var binaryTaskState = (bool)value;
+                    return binaryTaskState ? TcoColors.OnAccent : TcoColors.OnPrimary;
+                }
+
                 var taskState = (eTaskState)((short)value);
 
                 switch (taskState)

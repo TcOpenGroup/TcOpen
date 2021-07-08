@@ -21,6 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
+		<ProjectReference Include="..\Application\TcOpen.Inxton.App.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Security.Permissions" Version="4.7.0" />

@@ -90,5 +90,21 @@ namespace TcoCore
             var children = obj.GetChildren().Where(p => p is T && !excluding.Any(e => e != p)).Select(p => (T)p);
             return children;
         }
-    }
+
+        /// <summary>
+        /// Get the Plain (POCO) object populated with current online data.
+        /// </summary>
+        /// <remarks> 
+        /// This method uses dynamic casting, which may impact the performance of the data exchange.
+        /// </remarks>
+        /// <param name="obj">Onliner from which the plain is created.</param>        
+        /// <returns>Plain (POCO) object populated with current online data.</returns>
+        public static object CreatePlain(this IVortexObject obj)
+        {
+            dynamic o = obj;
+            var plain = o.CreatePlainerType();
+            o.FlushOnlineToPlain(plain);
+            return plain;
+        }
+    }   
 }

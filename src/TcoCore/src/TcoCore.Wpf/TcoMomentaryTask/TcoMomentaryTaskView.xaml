@@ -9,8 +9,9 @@
     xmlns:inter="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
     <Grid>
-        <Button 
-            Background="{Binding TcoMomentaryTask._state.Cyclic,Converter={local:SignalToBrushConverter}}" 
+        <Button             
+            Background="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
+            Foreground="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"            
             Command="{Binding TcoMomentaryTask}"
             Content="{Binding Caption}">
             <inter:Interaction.Triggers>

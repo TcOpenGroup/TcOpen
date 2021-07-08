@@ -12,23 +12,21 @@ namespace TcoCore.Wpf
     /// It's a faceade of MaterialDesigngXaml color system.
     /// </summary>
     public class TcoColors
-    {
-        static string saturation = "Mid";
-        public static Brush Primary => GetDynamicBrush($"PrimaryHue{saturation}Brush", fallBackBrush: BrushFromHex("#5a7785"));
-        public static Brush OnPrimary => GetDynamicBrush($"PrimaryHue{saturation}ForegroundBrush", fallBackBrush: Brushes.White);
+    {        
+        public static Brush Primary => GetDynamicBrush($"PrimaryHueMidBrush", fallBackBrush: BrushFromHex("#5a7785"));
+        public static Brush OnPrimary => GetDynamicBrush($"PrimaryHueMidForegroundBrush", fallBackBrush: Brushes.White);
 
-        public static Brush Secondary => GetDynamicBrush($"SecondaryHue{saturation}Brush", fallBackBrush: BrushFromHex("#bc5052"));
-        public static Brush OnSecondary => GetDynamicBrush($"SecondaryHue{saturation}ForegroundBrush", fallBackBrush: Brushes.White);
+        public static Brush Secondary => GetDynamicBrush($"SecondaryHueMidBrush", fallBackBrush: BrushFromHex("#bc5052"));
+        public static Brush OnSecondary => GetDynamicBrush($"SecondaryHueMidForegroundBrush", fallBackBrush: Brushes.White);
 
-        public static Brush Accent => GetDynamicBrush($"SecondaryHue{saturation}Brush", fallBackBrush: Brushes.OrangeRed);
-        public static Brush OnAccent => GetDynamicBrush($"SecondaryHue{saturation}ForegroundBrush", fallBackBrush: Brushes.White);
+        public static Brush Accent => GetDynamicBrush($"PrimaryHueLightBrush", fallBackBrush: Brushes.OrangeRed);
+        public static Brush OnAccent => GetDynamicBrush($"PrimaryHueLightForegroundBrush", fallBackBrush: Brushes.White);
 
-        public static Brush Alert => new SolidColorBrush(GetDynamicColor("YellowPrimary500", ColorFromHex("#ffeb3b")));
-        public static Brush OnAlert => Brushes.Black;
+        public static Brush Alert => new SolidColorBrush(GetDynamicColor($"SecondaryHueLightBrush", ColorFromHex("#ffeb3b")));
+        public static Brush OnAlert => GetDynamicBrush($"SecondaryHueLightForegroundBrush", fallBackBrush: Brushes.White);
 
         public static Brush Error => GetDynamicBrush("MaterialDesignValidationErrorBrush", fallBackBrush: BrushFromHex("#dd2c00"));
-        public static Brush OnError => OnPrimary;
-
+        public static Brush OnError => GetDynamicBrush("MaterialDesignDarkForeground", fallBackBrush: BrushFromHex("#dd2c00"));
 
         private static Brush GetDynamicBrush(string brushResourceKey, Brush fallBackBrush) =>
             Application.Current?.TryFindResource(brushResourceKey)?.As<Brush>() ?? fallBackBrush;

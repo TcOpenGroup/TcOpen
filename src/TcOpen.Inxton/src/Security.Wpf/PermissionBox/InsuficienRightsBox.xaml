@@ -12,7 +12,7 @@
     </UserControl.DataContext>
     <Viewbox>
         <Button HorizontalAlignment="Center" 
-                VerticalAlignment="Center"
+                VerticalAlignment="Center"                
                 Command="{Binding OpenLoginWindowCommand}"
                 Content="{x:Static p:strings.Login}"></Button>
     </Viewbox>
