@@ -16,6 +16,8 @@ jobs:
         name: nugets
         path: nugets
     ###
+    - name : Remove TcProber
+      run : Get-ChildItem .\nugets -Filter "TcOpen.Tc.Prober.*" | Remove-Item 
     - name: Push NuGets
       env:
         NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
