@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Threading
 {
@@ -32,7 +33,17 @@ namespace TcOpen.Inxton.Threading
         {
             _dispatcher?.Invoke(action);
         }
-      
+
+        // <summary>
+        /// Invokes an action on the UI dispatcher of the currently running application asynchronously
+        /// The appropriate dispatcher must be set at the start of the application. To set dispatcher use <see cref="SetDispatcher(IDispatcher)"/> method.
+        /// </summary>
+        /// <param name="action">Action to run.</param>
+        public Task InvokeAsync(Action action)
+        {
+           return _dispatcher?.InvokeAsync(action);
+        }
+
         private volatile static object mutex = new object();
         
         /// <summary>

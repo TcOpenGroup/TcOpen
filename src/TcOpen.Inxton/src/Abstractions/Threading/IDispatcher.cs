@@ -16,5 +16,11 @@ namespace TcOpen.Inxton.Threading
         /// </summary>
         /// <param name="action">Action to run</param>
         void Invoke(Action action);
+
+        /// <summary>
+        /// Invokes an action on the dispatcher of the currently running application asynchronously.
+        /// </summary>
+        /// <param name="action">Action to run</param>
+        Task InvokeAsync(Action action);
     }
 }

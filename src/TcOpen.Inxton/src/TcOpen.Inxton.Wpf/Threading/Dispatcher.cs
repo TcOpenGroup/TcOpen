@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using TcOpen.Inxton.Threading;
 
 namespace TcoCore.Wpf.Threading
@@ -23,7 +24,16 @@ namespace TcoCore.Wpf.Threading
         {
             dispatcher.Invoke(action);
         }
-        
+
+        /// <summary>
+        /// Invokes action on the thread of the current WPF application dispatcher asynchronously.
+        /// </summary>
+        /// <param name="action">Action to execute</param>
+        public async Task InvokeAsync(Action action)
+        {
+            await dispatcher.InvokeAsync(action);
+        }
+
         private volatile static object mutex = new object();
         private static Dispatcher _instance;
 

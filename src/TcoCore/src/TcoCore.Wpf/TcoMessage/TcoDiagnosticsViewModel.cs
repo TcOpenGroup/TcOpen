@@ -195,12 +195,11 @@
                     {
                         try
                         {
-                            //, System.Windows.Threading.DispatcherPriority.Background, ct
-                            //var ct = new System.Threading.CancellationToken();
-                            TcoAppDomain.Current.Dispatcher.Invoke(() =>
+                            TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
                             {
                                 affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
                             });
+                            
                         }
                         catch (Exception)
                         {
