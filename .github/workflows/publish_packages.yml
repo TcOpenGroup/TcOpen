@@ -16,7 +16,9 @@ jobs:
         name: nugets
         path: nugets
     ###
+    - name : Remove TcProber
+      run : Get-ChildItem .\nugets -Filter "TcOpen.Tc.Prober.*" | Remove-Item 
     - name: Push NuGets
       env:
         NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
-      run : dotnet nuget push "nugets\*.nupkg" -k ($env:NUGET_ORG_PAT) --skip-duplicate
+      run : dotnet nuget push "nugets\*.nupkg" -k ($env:NUGET_ORG_PAT) --skip-duplicate -s https://api.nuget.org/v3/index.json
