@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_Timing" Id="{ddea301c-328e-0331-11b3-ac57aa091811}">
+    <Declaration><![CDATA[TYPE EL3443_Timing :
+STRUCT
+	{attribute addProperty Name "Voltage Last Zero Crossing"}
+	VoltageLastZeroCrossing AT %I* : ULINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

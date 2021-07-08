@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3453_Data" Id="{d1e0df60-5a90-0a87-2df5-88e051453f28}">
+    <Declaration><![CDATA[TYPE EL3453_Data :
+STRUCT
+	{attribute addProperty Name "L1 Status"}
+	L1_Status : EL3453_Status;
+	{attribute addProperty Name "L1 Basic"}
+	L1_Basic : EL3453_Basic;
+	{attribute addProperty Name "L1 Power"}
+	L1_Power : EL3453_Power;
+	{attribute addProperty Name "L2 Status"}
+	L2_Status : EL3453_Status;
+	{attribute addProperty Name "L2 Basic"}
+	L2_Basic : EL3453_Basic;
+	{attribute addProperty Name "L2 Power"}
+	L2_Power : EL3453_Power;
+	{attribute addProperty Name "L3 Status"}
+	L3_Status : EL3453_Status;
+	{attribute addProperty Name "L3 Basic"}
+	L3_Basic : EL3453_Basic;
+	{attribute addProperty Name "L3 Power"}
+	L3_Power : EL3453_Power;
+	{attribute addProperty Name "Total Status"}
+	TotalStatus : EL3453_TotalStatus;
+	{attribute addProperty Name "Total Basic"}
+	TotalBasic : EL3453_TotalBasic;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_TotalBasic" Id="{f74b33b5-2ee3-0ddc-1e9b-1f7df2958c12}">
+    <Declaration><![CDATA[TYPE EL3443_TotalBasic :
+STRUCT
+	{attribute addProperty Name "Frequency"}
+	Frequency AT %I* : REAL;
+	{attribute addProperty Name "Power Factor"}
+	PowerFactor AT %I* : REAL;
+	{attribute addProperty Name "Calculated Neutral Line Current"}
+	CalculatedNeutralLineCurrent AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

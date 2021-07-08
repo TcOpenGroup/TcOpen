@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_Basic" Id="{3b5fd6d2-0782-0d38-197f-ec8fe09d719a}">
+    <Declaration><![CDATA[TYPE EL3443_Basic :
+STRUCT
+	{attribute addProperty Name "Voltage"}
+	Voltage AT %I* : REAL;
+	{attribute addProperty Name "Current"}
+	Current AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

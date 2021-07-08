@@ -7,8 +7,10 @@ STRUCT
 	SelAckEndCounter : BIT;
 	{attribute addProperty Name "Ramp active"}
 	RampActive : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 3(address x.2)"}
 	Bit_3 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 4(address x.3)"}
 	Bit_4 : BIT;
 	{attribute addProperty Name "Status of input target"}
@@ -17,20 +19,27 @@ STRUCT
 	StatusOfInputZero : BIT;
 	{attribute addProperty Name "Error"}
 	Error : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 8(address x.7)"}
 	Bit_8 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 9(address x+1.0)"}
 	Bit_9 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 10(address x+1.1)"}
 	Bit_10 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 11(address x+1.2)"}
 	Bit_11 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 12(address x+1.3)"}
 	Bit_12 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 13(address x+1.4)"}
 	Bit_13 : BIT;
 	{attribute addProperty Name "Sync error"}
 	SyncError : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 15(address x+1.6)"}
 	Bit_15 : BIT;
 	{attribute addProperty Name "TxPDO Toggle"}

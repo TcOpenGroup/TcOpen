@@ -11,18 +11,23 @@ STRUCT
 	ForceOrder : BIT;
 	{attribute addProperty Name "Enable manual operation"}
 	EnableManualOperation : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 5(address x.4)"}
 	Bit_5 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 6(address x.5)"}
 	Bit_6 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 7(address x.6)"}
 	Bit_7 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 8(address x.7)"}
 	Bit_8 : BIT;
 	{attribute addProperty Name "Output order counter"}
 	OutputOrderCounter : USINT;
 	{attribute addProperty Name "No of output events"}
 	NoOfOutputEvents : USINT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 25-32(address x+3.0-x+3.7)"}
 	Bit_25_32 : BITARR8;
 END_STRUCT

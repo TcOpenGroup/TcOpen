@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_Status" Id="{f55cb435-bb93-0af9-1e80-b62e9c244056}">
+    <Declaration><![CDATA[TYPE EL3443_Status :
+STRUCT
+	{attribute addProperty Name "Voltage Sign Bit"}
+	VoltageSignBit AT %I* : BIT;
+	{attribute addProperty Name "Overvoltage"}
+	Overvoltage AT %I* : BIT;
+	{attribute addProperty Name "Overcurrent"}
+	Overcurrent AT %I* : BIT;
+	{attribute addProperty Name "Inaccurate Voltage"}
+	InaccurateVoltage AT %I* : BIT;
+	{attribute addProperty Name "Inaccurate Current"}
+	InaccurateCurrent AT %I* : BIT;
+	{attribute addProperty Name "Voltage Guard Warning"}
+	VoltageGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Voltage Guard Error"}
+	VoltageGuardError AT %I* : BIT;
+	{attribute addProperty Name "Current Guard Warning"}
+	CurrentGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Current Guard Error"}
+	CurrentGuardError AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 AT %I* : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle AT %I* : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

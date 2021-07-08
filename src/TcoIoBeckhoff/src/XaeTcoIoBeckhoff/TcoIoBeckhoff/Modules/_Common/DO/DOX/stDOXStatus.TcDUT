@@ -7,6 +7,7 @@ STRUCT
 	ReadyToActivate : BIT;
 	{attribute addProperty Name "Output active"}
 	OutputAActive : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 3(address x.2)"}
 	Bit_3 : BIT;
 	{attribute addProperty Name "Switching operation counter bit 1"}
@@ -19,18 +20,24 @@ STRUCT
 	Warning : BIT;
 	{attribute addProperty Name "Error"}
 	Error : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 9(address x+1.0)"}
 	Bit_9 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 10(address x+1.1)"}
 	Bit_10 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 11(address x+1.2)"}
 	Bit_11 : BIT;
 	{attribute addProperty Name "Digital input"}
 	DigitalInput : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 13(address x+1.4)"}
 	Bit_13 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 14(address x+1.5)"}
 	Bit_14 : BIT;
+	{attribute 'hide'}
 	{attribute addProperty Name "Bit 15(address x+1.6)"}
 	Bit_15 : BIT;
 	{attribute addProperty Name "TxPDO Toggle"}

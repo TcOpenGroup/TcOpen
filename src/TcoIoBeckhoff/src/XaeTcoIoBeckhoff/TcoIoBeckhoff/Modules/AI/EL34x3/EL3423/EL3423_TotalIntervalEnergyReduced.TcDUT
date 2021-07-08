@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3423_TotalIntervalEnergyReduced" Id="{a0df8e00-0231-0268-0f7a-618fe29c4369}">
+    <Declaration><![CDATA[TYPE EL3423_TotalIntervalEnergyReduced :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1-8(address x.0-x.7)"}
+	Bit_1_8 : BITARR8;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle AT %I* : BIT;
+	{attribute addProperty Name "Active Energy"}
+	ActiveEnergy AT %I* : REAL;
+	{attribute addProperty Name "Apparent Energy"}
+	ApparentEnergy AT %I* : REAL;
+	{attribute addProperty Name "Reactive Energy"}
+	ReactiveEnergy AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

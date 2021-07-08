@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3433_PM_InputsAuxiliary" Id="{4f06e730-ad23-0d64-0035-9293f2c8ee42}">
+    <Declaration><![CDATA[TYPE EL3433_PM_InputsAuxiliary :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I*: EL3433_PM_InputsAuxiliaryStatus;
+	{attribute addProperty Name "Index"}
+	Index AT %I*: USINT;
+	{attribute addProperty Name "Channel"}
+	Channel AT %I*: USINT;
+	{attribute addProperty Name "Value"}
+	Value AT %I*: DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3423_TotalAdvanced" Id="{24a300e5-bed4-0fb3-1693-cbd54d402b3e}">
+    <Declaration><![CDATA[TYPE EL3423_TotalAdvanced :
+STRUCT
+	{attribute addProperty Name "Unbalance Guard Warning"}
+	UnbalanceGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Unbalance Guard Error"}
+	UnbalanceGuardError AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 2(address x.2)"}
+	Bit_3 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9-16(address x+1.0-x+1.7)"}
+	Bit_9_16 : BITARR8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

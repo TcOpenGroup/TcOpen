@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3483_TotalStatus" Id="{2dd89357-507c-0cdf-0a3e-c11bd698b8a4}">
+    <Declaration><![CDATA[TYPE EL3483_TotalStatus :
+STRUCT
+	{attribute addProperty Name "System State"}
+	SystemState AT %I* : BIT;
+	{attribute addProperty Name "Grid Direction"}
+	GridDirection AT %I* : BIT;
+	{attribute addProperty Name "Frequency Guard Warning"}
+	FrequencyGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Frequency Guard Error"}
+	FrequencyGuardError AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 AT %I* : BIT;
+	{attribute addProperty Name "Power Quality Guard Warning"}
+	PowerQualityGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Power Quality Guard Error"}
+	PowerQualityGuardError AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 AT %I* : BIT;
+	{attribute addProperty Name "TxPDOState"}
+	TxPDOState AT %I* : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle AT %I* : BIT;
+	{attribute addProperty Name "Power Quality Factor"}
+	PowerQualityFactor AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

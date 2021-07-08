@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3453_Basic" Id="{87cd41a7-6095-0c3f-1ab7-de3bf848b5fd}">
+    <Declaration><![CDATA[TYPE EL3453_Basic :
+STRUCT
+	{attribute addProperty Name "Voltage"}
+	Voltage AT %I* : REAL;
+	{attribute addProperty Name "Current"}
+	Current AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

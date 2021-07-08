@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3413_PM_Outputs" Id="{750018cc-0fce-0417-27d7-b4f0b7f9270e}">
+    <Declaration><![CDATA[TYPE EL3413_PM_Outputs :
+STRUCT
+	{attribute addProperty Name "Index"}
+	Index AT %Q* : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

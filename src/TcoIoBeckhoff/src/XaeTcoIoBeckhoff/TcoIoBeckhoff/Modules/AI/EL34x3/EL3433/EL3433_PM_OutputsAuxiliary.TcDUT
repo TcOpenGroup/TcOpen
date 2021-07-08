@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3433_PM_OutputsAuxiliary" Id="{5239bf82-7129-03ca-2042-a4bccb378dee}">
+    <Declaration><![CDATA[TYPE EL3433_PM_OutputsAuxiliary :
+STRUCT
+	{attribute addProperty Name "Index"}
+	Index AT %Q*: USINT;
+	{attribute addProperty Name "Channel"}
+	Channel AT %Q*: USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

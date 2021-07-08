@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3483_TotalAdvanced" Id="{5d85f19e-f90d-0026-0acd-cc55e73aa1e8}">
+    <Declaration><![CDATA[TYPE EL3483_TotalAdvanced :
+STRUCT
+	{attribute addProperty Name "Unbalance Guard Warning"}
+	UnbalanceGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Unbalance Guard Error"}
+	UnbalanceGuardError AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 3(address x.2)"}
+	Bit_3 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 16(address x+1.7)"}
+	Bit_16 AT %I* : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

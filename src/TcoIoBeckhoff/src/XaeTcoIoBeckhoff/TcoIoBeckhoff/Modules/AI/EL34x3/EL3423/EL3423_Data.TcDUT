@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3423_Data" Id="{f7009393-f128-0c34-19b2-4bd45885ea19}">
+    <Declaration><![CDATA[TYPE EL3423_Data :
+STRUCT
+	{attribute addProperty Name "Total Status"}
+	TotalStatus : EL3423_TotalStatus;
+	{attribute addProperty Name "Total Advanced"}
+	TotalAdvanced : EL3423_TotalAdvanced;
+	{attribute addProperty Name "Total Statistic Power"}
+	TotalStatisticPower : EL3423_TotalStatisticPower;
+	{attribute addProperty Name "Total Statistic PQF"}
+	TotalStatisticPQF : EL3423_TotalStatisticPQF;
+	{attribute addProperty Name "Total Active Energy"}
+	TotalActiveReduced AT %I* : LINT;
+	{attribute addProperty Name "Total Apparent Energy"}
+	TotalApparentReduced AT %I* : LINT;
+	{attribute addProperty Name "Total Reactive Energy"}
+	TotalReactiveReduced AT %I* : LINT;
+	{attribute addProperty Name "Total Statistic PQF"}
+	TotalIntervalEnergyReduced : EL3423_TotalIntervalEnergyReduced;
+	{attribute addProperty Name "Total Reset Interval"}
+	TotalResetInterval AT %Q* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

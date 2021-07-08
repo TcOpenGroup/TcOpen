@@ -13,14 +13,18 @@ STRUCT
 	Error : BIT;
 	{attribute addProperty Name "TxPDO Toggle"}
 	TxPDOToggle : BIT;
-	{attribute addProperty Name "Allign 6"}
-	Allign6 : BIT;
-	{attribute addProperty Name "Allign 7"}
-	Allign7 : BIT;
-	{attribute addProperty Name "Allign 8"}
-	Allign8 : BIT;
-	{attribute addProperty Name "Allign 9-16"}
-	Allign16 : BITARR8;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9-16(address x+1.0-x+1.7)"}
+	Bit_9_16 : BITARR8;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
