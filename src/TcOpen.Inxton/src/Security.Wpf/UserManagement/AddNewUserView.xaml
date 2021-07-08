@@ -6,12 +6,12 @@
     xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:TcOpen.Inxton.Security.Wpf.Properties"
-    xmlns:wpf="clr-namespace:TcOpen.Inxton.Security.Wpf"
+    xmlns:local="clr-namespace:TcOpen.Inxton.Security.Wpf"
     d:DesignHeight="800"
     d:DesignWidth="850"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <wpf:AddNewUserViewModel />
+        <local:AddNewUserViewModel />
     </UserControl.DataContext>
     <Grid Margin="12" Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
@@ -130,20 +130,26 @@
                 Grid.Row="0"
                 Grid.Column="2"
                 Content="{x:Static p:strings.AssignedRoles}" />
-            <ListBox
+            <Border Grid.Row="1"
+                Grid.Column="0"
+                            Padding="5"
+                            BorderThickness=".5"
+                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                <ListBox
                 x:Name="AllRoles"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="0,0,10,0"
                 ItemsSource="{Binding AllRolesFiltered, Mode=TwoWay}"
                 SelectionMode="Extended">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding AddRoleCommand}" CommandParameter="{Binding ElementName=AllRoles, Path=SelectedItem}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding AddRoleCommand}" CommandParameter="{Binding ElementName=AllRoles, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-            </ListBox>
+                </ListBox>
+            </Border>
             <StackPanel
                 Grid.Row="2"
                 Grid.Column="1"
@@ -159,29 +165,33 @@
                     CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItems}"
                     Content="←" />
             </StackPanel>
-            <ListBox
+            <Border Grid.Row="1"
+                    Grid.Column="3"
+                    Padding="5"
+                    BorderThickness=".5"
+                    BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                <ListBox
                 x:Name="AssignedRoles"
                 Grid.Row="1"
                 Grid.Column="3"
                 ItemsSource="{Binding NewUser.Roles}"
                 SelectionMode="Extended">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding RemoveRoleCommand}" CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItem}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ListBox>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding RemoveRoleCommand}" CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+            </Border>
         </Grid>
         <Button
-            Margin="10"
-            Padding="25"
+            Margin="10"            
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Command="{Binding StartCreateNewCommand}"
-            Content="{x:Static p:strings.Add}"
-            Style="{DynamicResource PrimaryTextButtonStyle}">
+            Content="{x:Static p:strings.Add}">
             <Button.CommandParameter>
-                <wpf:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
+                <local:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
             </Button.CommandParameter>
         </Button>
 

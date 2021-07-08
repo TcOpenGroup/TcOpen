@@ -12,7 +12,7 @@
     /// Provides permission control at the UI level.
     /// When you log in/log out using  <see cref="SecurityManager"/> you can hide certain UI elements for users of specific roles.
     /// To hide certain user control from users wrap them like this. 
-    /// If one or more roles can access the UI control, separate them by separator "|" without the qoutes.
+    /// If one or more roles can access the UI control, separate them by separator "|" without the quotes.
     /// <code>
     ///     <StackPanel>
     ///         <wpf:PermissionBox Permissions="Administrator" >

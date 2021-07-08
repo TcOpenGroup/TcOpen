@@ -49,8 +49,8 @@ namespace TcOpen.Inxton.Security
         /// <summary>
         /// Creates authentication service with given user data repository.
         /// </summary>
-        /// <param name="repository">User data reposotory <see cref="IRepository{UserData}"/></param>
-        /// <returns>Autentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
+        /// <param name="repository">User data repository <see cref="IRepository{UserData}"/></param>
+        /// <returns>Authentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
         public static IAuthenticationService Create(IRepository<UserData> repository)
         {
             if (_manager == null)
@@ -65,7 +65,7 @@ namespace TcOpen.Inxton.Security
         /// Creates authentication service with default user data repository <see cref="DefaultUserDataRepository{UserData}"/>
         /// </summary>
         /// <param name="usersFolder">User file storage folder.</param>
-        /// <returns>Autentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
+        /// <returns>Authentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
         public static IAuthenticationService CreateDefault(string usersFolder = @"C:\INXTON\USERS\")
         {
             if (_manager == null)
@@ -84,9 +84,9 @@ namespace TcOpen.Inxton.Security
         /// > You can create your own user repository using <see cref="IRepository{UserData}"/>        
         /// > [!IMPORTANT]
         /// > Default repository is designed for handling limited number of users and it should not be used in shared scenarions.
-        /// > If you would like to use shared user repository consider implmentation of an appropriate <see cref="IRepository{UserData}"/> implenentation.
+        /// > If you would like to use shared user repository consider implementation of an appropriate <see cref="IRepository{UserData}"/> implenentation.
         ///</remarks>
-        /// <returns>Autentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
+        /// <returns>Authentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
 
         public static IAuthenticationService CreateDefault()
         {
@@ -128,7 +128,12 @@ namespace TcOpen.Inxton.Security
 
         public IEnumerable<string> AvailableGroups() => availableRoles.Select(o => o.DefaultGroup).Distinct();
 
-        public Role GetRole(Role role)
+        /// <summary>
+        /// Get the existing role or add the rule if not present in the system.
+        /// </summary>
+        /// <param name="role">Role to create or retrieve.</param>
+        /// <returns>Requested role</returns>
+        public Role GetOrCreateRole(Role role)
         {
             if (!this.availableRoles.Contains(role))
             {

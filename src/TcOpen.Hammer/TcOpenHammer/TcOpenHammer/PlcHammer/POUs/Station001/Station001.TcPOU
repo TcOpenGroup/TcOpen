@@ -7,11 +7,13 @@ VAR
 	
 	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None);
 	_automatMode : Station001_AutomatMode(THIS^, eRestoreMode.None);
+	_swiftSequence   : Station001_Swift(THIS^, eRestoreMode.None);
 	
 	_groundModeTask : TcoCore.TcoTask(THIS^);
 	_automatModeTask : TcoCore.TcoTask(THIS^);
 	_serviceModeTask : TcoCore.TcoTask(THIS^);
-
+	_swiftModeTask : TcoCore.TcoTask(THIS^);
+	
 	_processRecipies : ProcessDataManager(THIS^); 
     _processTraceabilty : ProcessDataManager(THIS^);
 	_technologicalDataManager : TechnologicalDataManager(THIS^);
@@ -27,6 +29,17 @@ _technologicalDataManager();
 ServiceMode();
 GroundMode();
 AutomatMode();
+
+
+IF(_swiftModeTask.Execute()) THEN
+	Messenger.Trace('Service mode active');	
+	_automatModeTask.Restore();
+	_groundModeTask.Restore();
+	_groundMode.Restore();
+	_automatMode.Restore();
+	_serviceModeTask.Restore();
+	_swiftSequence.Run();
+END_IF
 
 
 

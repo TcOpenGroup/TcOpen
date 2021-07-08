@@ -24,6 +24,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TabControl>
                     <TabItem Header="Sequences">
@@ -37,20 +38,22 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Components">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="300" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <ScrollViewer Grid.Row="0">
-                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components}" PresentationType="Service-Manual" />
-                            </ScrollViewer>
-                            <Expander Grid.Row="1">
-                                <vortex:RenderableContentControl                                
+                        <vortex:PermissionBox Permissions="Administrator" SecurityMode="Disabled">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="300" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ScrollViewer Grid.Row="0">
+                                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components}" PresentationType="Service-Manual" />
+                                </ScrollViewer>
+                                <Expander Grid.Row="1">
+                                    <vortex:RenderableContentControl                                
                                 DataContext="{Binding PlcHammer.TECH_MAIN._app}"
                                 PresentationType="Diagnostics" />
-                            </Expander>
-                        </Grid>
+                                </Expander>
+                            </Grid>
+                        </vortex:PermissionBox>
                     </TabItem>
                 </TabControl>
                 <Grid Grid.Row="1">
@@ -70,6 +73,7 @@
                                 BorderBrush="LightGray"
                                 BorderThickness="2"
                                 CornerRadius="2.5" />
+                            <vortex:TcoComponentSpotView Canvas.Left="272" DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis}" Canvas.Top="10"></vortex:TcoComponentSpotView>
                             <Border
                                 Canvas.Left="{Binding PlcHammer.TECH_MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic, Converter={local:AxisPositionConverter}}"                                
                                 Width="50"
@@ -132,18 +136,22 @@
                 </Grid>
                 <UniformGrid
                     Grid.Row="2"
-                    Columns="3"
+                    Columns="4"
                     Rows="0">
                     <UniformGrid.Resources>
                         <Style TargetType="vortex:RenderableContentControl">
                             <Setter Property="Margin" Value="25" />
-                            <Setter Property="Width" Value="300" />
+                            <Setter Property="Width" Value="250" />
                         </Style>
                     </UniformGrid.Resources>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask}" />
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask}" />
-                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
+                    <vortex:PermissionBox SecurityMode="Disabled" Permissions="Administrator|Service" >
+                        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
+                    </vortex:PermissionBox>
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._swiftModeTask}" />
                 </UniformGrid>
+                <Button Command="{Binding OpenLoginWindowCommand}" Grid.Row="3">Login</Button>
             </Grid>
         </TabItem>
         <TabItem Header="Data">
@@ -216,6 +224,29 @@
         </TabItem>
         <TabItem Header="Swift Programmer">
             <vortex:SwiftRecorderView DataContext="{Binding SwiftRecorderViewModel}"></vortex:SwiftRecorderView>
+        </TabItem>
+        <TabItem Header="Security">
+            <vortex:UserManagementView DataContext="{Binding Users}"></vortex:UserManagementView>
+        </TabItem>
+        <TabItem Header="Colors">
+            <StackPanel>
+                <Button Background="{DynamicResource PrimaryHueMidBrush}"
+                        Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
+                        Content="Primary"/>
+                <Button Background="{DynamicResource SecondaryHueMidBrush}"
+                        Foreground="{DynamicResource SecondaryHueMidForegroundBrush}"
+                        Content="Secondary"/>
+                <Button Background="{DynamicResource PrimaryHueLightBrush}"
+                        Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                        Content="Accent"/>
+                <Button Background="{DynamicResource SecondaryHueLightBrush}"
+                        Foreground="{DynamicResource SecondaryHueLightForegroundBrush}"
+                        Content="Alert"/>
+                <Button Background="{DynamicResource MaterialDesignValidationErrorBrush}"
+                        Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                        Content="Error"/>
+
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>

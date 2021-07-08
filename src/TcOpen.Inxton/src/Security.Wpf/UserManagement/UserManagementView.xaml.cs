@@ -10,10 +10,10 @@ namespace TcOpen.Inxton.Security.Wpf
     {
         public UserManagementView()
         {
-            if (! DesignerProperties.GetIsInDesignMode(this))
-            {
+            //if (! DesignerProperties.GetIsInDesignMode(this))
+            //{
                 this.DataContext = new UserManagementViewModel();
-            }
+            //}
 
             InitializeComponent();
         }

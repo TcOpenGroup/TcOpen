@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TcOpen.Inxton.Security.Wpf.Internal;
+using TcOpen.Inxton.Input;
 
 namespace TcOpen.Inxton.Security.Wpf.UserInfoDisplay
 {

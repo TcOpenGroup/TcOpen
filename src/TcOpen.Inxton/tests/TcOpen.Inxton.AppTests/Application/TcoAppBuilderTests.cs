@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TcOpen.Inxton.Logging;
 using TcOpen.Inxton.Abstractions.Logging;
 using TcOpen.Inxton;
+using TcOpen.Inxton.App.Logging;
 
 namespace TcOpen.Inxton.AppTests
 {
@@ -31,6 +32,30 @@ namespace TcOpen.Inxton.AppTests
         {                        
             TcoAppDomain.Current.Builder.SetUpLogger(new MockLogger());
             Assert.AreEqual(typeof(MockLogger), TcoAppDomain.Current.Logger.GetType());
+        }
+
+        [Test()]
+        public void SetEditValueChangeLoggingTest()
+        {
+            var mock = new TcoCoreTests.fbPiston(new MockRootObject(), string.Empty, string.Empty);            
+            TcoAppDomain.Current.Builder.SetUpLogger(new MockLogger())
+                                        .SetEditValueChangeLogging(mock);
+
+            foreach (var item in mock.GetValueTags())
+            {
+                if(item.GetType().IsPrimitive && item.GetType() != typeof(bool))
+                { 
+                    ((dynamic)item).Edit = 1;
+
+                    var log = ((MockLogger)TcoAppDomain.Current.Logger).LastLog;
+                    var expectedLog = $"INFO:'{item.Symbol}' value has been changed from '0' to '1' {{@payload}}[{{ Path = {item.HumanReadable}, Symbol = {item.Symbol} }}]";
+                    Console.WriteLine(log);
+                    Console.WriteLine(expectedLog);
+                    Assert.AreEqual(expectedLog, log);
+                }
+              
+            }
+
         }
     }
 }

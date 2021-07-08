@@ -31,7 +31,7 @@ namespace TcoCore
                     case eMessageCategory.Critical:
                     case eMessageCategory.Catastrophic:
                     case eMessageCategory.ProgrammingError:
-                        return TcoCore.Wpf.TcoColors.OnAlert;
+                        return TcoCore.Wpf.TcoColors.OnError;
 
                 }
             }
@@ -77,7 +77,7 @@ namespace TcoCore
                     case eMessageCategory.Critical:
                     case eMessageCategory.Catastrophic:
                     case eMessageCategory.ProgrammingError:
-                        return TcoCore.Wpf.TcoColors.Alert;
+                        return TcoCore.Wpf.TcoColors.Error;
                 }
             }
             catch

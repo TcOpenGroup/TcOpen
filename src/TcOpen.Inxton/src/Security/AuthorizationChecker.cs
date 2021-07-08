@@ -4,7 +4,7 @@ using System.Linq;
 namespace TcOpen.Inxton.Security
 {
     /// <summary>
-    ///     User AuthorizationChecker to check wheter the current use has privilege to execute the code.
+    ///     User AuthorizationChecker to check whether the current use has privilege to execute the code.
     ///     <code>
     ///         //Roles is a static class with defined roles as strings.
     ///         if (TcOpen.Inxton.Security.AuthorizationChecker.HasAuthorization.(Roles.data_exchange_view_can_update_record))

@@ -7,23 +7,24 @@
     using System.Threading.Tasks;
     using System.Windows;
     using TcoCore;
+    using TcOpen.Inxton;
     using TcOpen.Inxton.Input;
     using Vortex.Connector;
+   
 
-    
     public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
     
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), () => !this.AutoUpdate && !this.DiagnosticsRunning);            
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
-             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), () => !this.AutoUpdate && !this.DiagnosticsRunning);
+             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
       
         protected IsTcoObject _tcoObject { get; set; }
@@ -159,7 +160,8 @@
                     return;
                 }
 
-                SetProperty(ref selectedMessage, clone);               
+                SetProperty(ref selectedMessage, clone);
+                this.OnPropertyChanged(nameof(AffectedObjectPresentation));
             }
         }
        
@@ -169,5 +171,47 @@
         public RelayCommand UpdateMessagesCommand { get; private set; }
         
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
+
+
+        private ulong lastSelectedMessageIdentity = 0;
+        private object affectedObjectPresenation = null;
+        public object AffectedObjectPresentation
+        {
+            get
+            {
+                if (this.SelectedMessage == null)
+                    return null;
+
+                if(this.SelectedMessage.Identity == lastSelectedMessageIdentity)
+                {
+                    return affectedObjectPresenation;
+                }
+                
+                if (SelectedMessage != null)
+                {
+                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
+
+                    if (affectedObject != null)
+                    {
+                        try
+                        {
+                            TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+                            {
+                                affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
+                            });
+                            
+                        }
+                        catch (Exception)
+                        {
+
+                            //throw;
+                        }
+                    }
+                }
+
+                lastSelectedMessageIdentity = this.SelectedMessage.Identity;
+                return affectedObjectPresenation;
+            }
+        }
     }
 }
