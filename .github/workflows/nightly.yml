@@ -35,4 +35,11 @@ jobs:
         if: success() || failure() 
         with:
           name: test-results
-          path: ${{ github.workspace }}\**\TestResults\*.xml          
+          path: ${{ github.workspace }}\**\TestResults\*.xml     
+          
+      - name: Upload NuGets artifacts
+        uses: actions/upload-artifact@v2  # upload test results
+        if: success()         # run this step even if previous step failed
+        with:
+          name: nugets
+          path: ${{ github.workspace }}/nugets/*.nupkg
