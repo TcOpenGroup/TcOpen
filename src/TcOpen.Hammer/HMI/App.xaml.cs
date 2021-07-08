@@ -27,7 +27,8 @@ namespace HMI
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter()) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetSecurity(SecurityManager.Create(SetUpUserRepository()));    // This is necessary for UI operation.            
+                .SetSecurity(SecurityManager.Create(SetUpUserRepository()))
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);    // This is necessary for UI operation.            
 
             // Execute PLC connector operations.
             Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
