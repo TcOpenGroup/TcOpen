@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5001_Data" Id="{45ea37e1-bc67-0469-331f-1f768a1212ce}">
+    <Declaration><![CDATA[TYPE EL5001_Data :
+STRUCT
+	{attribute addProperty Name "SSI Inputs"}
+	SSI_Inputs : EL5001_Channel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

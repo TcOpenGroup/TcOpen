@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5101_Status" Id="{c699ff5c-6685-04ff-1cd4-ff5af96f762b}">
+    <Declaration><![CDATA[TYPE EL5101_Status :
+STRUCT
+	{attribute addProperty Name "Latch C valid"}
+	Latch_C_valid : BIT;
+	{attribute addProperty Name "Latch extern valid"}
+	LatchExternValid : BIT;
+	{attribute addProperty Name "Set counter done"}
+	SetCounterDone : BIT;
+	{attribute addProperty Name "Counter underflow"}
+	CounterUnderflow : BIT;
+	{attribute addProperty Name "Counter overflow"}
+	CounterOverflow : BIT;
+	{attribute addProperty Name "Status of input status"}
+	StatusOfInputStatus : BIT;
+	{attribute addProperty Name "Open circuit"}
+	OpenCircuit : BIT;
+	{attribute addProperty Name "Extrapolation stall"}
+	ExtrapolationStall : BIT;
+	{attribute addProperty Name "Status of input A"}
+	StatusOfInput_A : BIT;
+	{attribute addProperty Name "Status of input B"}
+	StatusOfInput_B : BIT;
+	{attribute addProperty Name "Status of input C"}
+	StatusOfInput_C : BIT;
+	{attribute addProperty Name "Status of input gate"}
+	StatusOfInputGate : BIT;
+	{attribute addProperty Name "Status of extern latch"}
+	StatusOfExternLatch : BIT;
+	{attribute addProperty Name "Sync error"}
+	SyncError : BIT;
+	{attribute addProperty Name "TxPDO State"}
+	TxPDOState : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

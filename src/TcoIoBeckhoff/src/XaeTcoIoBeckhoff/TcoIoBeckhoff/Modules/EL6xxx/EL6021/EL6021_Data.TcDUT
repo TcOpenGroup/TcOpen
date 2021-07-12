@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6021_Data" Id="{6ae7d704-5ebe-0c11-070e-0c34e91d90a7}">
+    <Declaration><![CDATA[TYPE EL6021_Data :
+STRUCT
+	{attribute addProperty Name "COM TxPDO-Map Inputs"}
+	COM_TxPDO_Map_Inputs : EL6021_COM_Inputs;
+	{attribute addProperty Name "COM RxPDO-Map Outputs"}
+	COM_RxPDO_Map_Outputs : EL6021_COM_Outputs;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

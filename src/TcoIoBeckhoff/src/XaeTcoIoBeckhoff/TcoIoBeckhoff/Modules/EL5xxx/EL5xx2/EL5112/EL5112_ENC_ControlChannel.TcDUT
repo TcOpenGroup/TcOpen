@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5112_ENC_ControlChannel" Id="{e21e1bbe-408f-0616-2457-402e6afa96f9}">
+    <Declaration><![CDATA[TYPE EL5112_ENC_ControlChannel :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Control AT %Q* : EL5112_Control;
+	{attribute addProperty Name "Set counter value"}
+	SetCounterValue AT %Q* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

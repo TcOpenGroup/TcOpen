@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6001_Data" Id="{ba49c726-a0bb-0090-179c-8c191d46b9ec}">
+    <Declaration><![CDATA[TYPE EL6001_Data :
+STRUCT
+	{attribute addProperty Name "COM Inputs"}
+	COM_Inputs : EL6001_COM_Inputs;
+	{attribute addProperty Name "COM Outputs"}
+	COM_Outputs : EL6001_COM_Outputs;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

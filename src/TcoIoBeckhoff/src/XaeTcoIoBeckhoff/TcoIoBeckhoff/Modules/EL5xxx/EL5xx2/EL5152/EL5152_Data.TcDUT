@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5152_Data" Id="{3fbb457d-ed29-0a84-3934-6080ed801701}">
+    <Declaration><![CDATA[TYPE EL5152_Data :
+STRUCT
+	{attribute addProperty Name "ENC Status Channel 1"}
+	ENC_StatusChannel_1 : EL5152_ENC_StatusChannel;
+	{attribute addProperty Name "ENC Period Channel 1"}
+	ENC_PeriodChannel_1 : EL5152_ENC_PeriodChannel;
+	{attribute addProperty Name "ENC Status Channel 2"}
+	ENC_StatusChannel_2 : EL5152_ENC_StatusChannel;
+	{attribute addProperty Name "ENC Period Channel 2"}
+	ENC_PeriodChannel_2 : EL5152_ENC_PeriodChannel;
+	{attribute addProperty Name "ENC Control Channel 1"}
+	ENC_ControlChannel_1 : EL5152_ENC_ControlChannel;
+	{attribute addProperty Name "ENC Control Channel 2"}
+	ENC_ControlChannel_2 : EL5152_ENC_ControlChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

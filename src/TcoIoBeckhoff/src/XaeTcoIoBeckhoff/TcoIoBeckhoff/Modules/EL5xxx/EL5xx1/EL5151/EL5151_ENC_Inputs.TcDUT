@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5151_ENC_Inputs" Id="{1fea33f1-d7be-01c5-2478-8f182a46f4e6}">
+    <Declaration><![CDATA[TYPE EL5151_ENC_Inputs :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : EL5151_Status;
+	{attribute addProperty Name "Counter value"}
+	CounterValue AT %I* : UINT;
+	{attribute addProperty Name "Latch value"}
+	LatchValue AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

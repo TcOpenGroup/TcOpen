@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL4xx2_Data" Id="{99ac477c-fd1d-038c-1d2d-1c3cb26a9b12}">
+    <Declaration><![CDATA[TYPE EL4xx2_Data :
+STRUCT
+	{attribute addProperty Name "AO Outputs Channel 1"}
+	AO_OutputsChannel_1 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 2"}
+	AO_OutputsChannel_2 AT %Q* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

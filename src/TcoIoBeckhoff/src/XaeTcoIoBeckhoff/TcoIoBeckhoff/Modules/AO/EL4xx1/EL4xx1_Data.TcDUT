@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL4xx1_Data" Id="{737efb5e-31d3-072c-3c39-85b8eddd9c77}">
+    <Declaration><![CDATA[TYPE EL4xx1_Data :
+STRUCT
+	{attribute addProperty Name "Analog output"}
+	AnalogOutput AT %Q* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

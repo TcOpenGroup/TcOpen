@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5152_Status" Id="{fca3e2bf-10d3-0175-17b6-c941cf41cff1}">
+    <Declaration><![CDATA[TYPE EL5152_Status :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1(address x.0)"}
+	Bit_1 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 2(address x.1)"}
+	Bit_2 : BIT;
+	{attribute addProperty Name "Set counter done"}
+	SetCounterDone : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Extrapolation stall"}
+	ExtrapolationStall : BIT;
+	{attribute addProperty Name "Status of input A"}
+	StatusOfInput_A : BIT;
+	{attribute addProperty Name "Status of input B"}
+	StatusOfInput_B : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute addProperty Name "Sync error"}
+	SyncError : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute addProperty Name "TxPDO State"}
+	TxPDOState : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

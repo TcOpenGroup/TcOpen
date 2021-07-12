@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="InfoDataAdsAoEDC" Id="{b6f940a7-08c7-061c-3fc6-7a045f0f3fb7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK InfoDataAdsAoEDC EXTENDS InfoDataAdsAoE
+VAR
+	_dcOutputShift AT %I* :   DINT;
+	_dcInputShift AT %I* :   DINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="AdsAddr" Id="{0de6a5f3-7e77-0386-28ed-d973d673b22c}">
+      <Declaration><![CDATA[PROPERTY AdsAddr : AMSADDR]]></Declaration>
+      <Get Name="Get" Id="{010290d8-365a-0469-2f54-20666985ad18}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AdsAddr := _AdsAddr;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5021_Data" Id="{72a16d36-3c67-0295-2d67-72c8a7b54a7e}">
+    <Declaration><![CDATA[TYPE EL5021_Data :
+STRUCT
+	{attribute addProperty Name "ENC Status"}
+	ENC_Status : EL5021_StatusChannel;
+	{attribute addProperty Name "ENC Control"}
+	ENC_Control : EL5021_ControlChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

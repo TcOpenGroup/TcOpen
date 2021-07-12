@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL4xx8_Data" Id="{446e28ef-9825-07c1-06d8-9e102ffbba2a}">
+    <Declaration><![CDATA[TYPE EL4xx8_Data :
+STRUCT
+	{attribute addProperty Name "AO Outputs Channel 1"}
+	AO_OutputsChannel_1 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 2"}
+	AO_OutputsChannel_2 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 3"}
+	AO_OutputsChannel_3 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 4"}
+	AO_OutputsChannel_4 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 5"}
+	AO_OutputsChannel_5 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 6"}
+	AO_OutputsChannel_6 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 7"}
+	AO_OutputsChannel_7 AT %Q* : INT;
+	{attribute addProperty Name "AO Outputs Channel 8"}
+	AO_OutputsChannel_8 AT %Q* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

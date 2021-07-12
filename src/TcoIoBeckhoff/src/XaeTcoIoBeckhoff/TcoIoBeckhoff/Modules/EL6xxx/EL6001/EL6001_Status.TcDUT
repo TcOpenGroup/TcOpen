@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6001_Status" Id="{b88e6c58-644a-06ba-00e2-280043903c6b}">
+    <Declaration><![CDATA[TYPE EL6001_Status :
+STRUCT
+	{attribute addProperty Name "Transmit accepted"}
+	TransmitAccepted : BIT;
+	{attribute addProperty Name "Receive request"}
+	ReceiveRequest : BIT;
+	{attribute addProperty Name "Init accepted"}
+	InitAccepted : BIT;
+	{attribute addProperty Name "Buffer full"}
+	BufferFull : BIT;
+	{attribute addProperty Name "Parity error"}
+	ParityError : BIT;
+	{attribute addProperty Name "Framing error"}
+	FramingError : BIT;
+	{attribute addProperty Name "Overrun error"}
+	OverrunError : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute addProperty Name "Input length"}
+	InputLength : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

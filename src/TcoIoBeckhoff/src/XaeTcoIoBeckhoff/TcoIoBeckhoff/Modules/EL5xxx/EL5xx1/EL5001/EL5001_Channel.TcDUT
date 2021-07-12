@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5001_Channel" Id="{d8fe01d8-f82a-0cd7-06af-1a028da61d8b}">
+    <Declaration><![CDATA[TYPE EL5001_Channel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : EL5001_Status;
+	{attribute addProperty Name "Counter value"}
+	CounterValue AT %I* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

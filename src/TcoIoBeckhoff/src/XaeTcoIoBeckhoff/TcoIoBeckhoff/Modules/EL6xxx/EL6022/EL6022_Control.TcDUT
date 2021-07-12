@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6022_Control" Id="{43abbe89-fdea-01f6-0278-b9498a4a69d0}">
+    <Declaration><![CDATA[TYPE EL6022_Control :
+STRUCT
+	{attribute addProperty Name "Transmit request"}
+	TransmitRequest : BIT;
+	{attribute addProperty Name "Receive accepted"}
+	ReceiveAccepted : BIT;
+	{attribute addProperty Name "Init request"}
+	InitRequest : BIT;
+	{attribute addProperty Name "Send continues"}
+	SendContinues : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute addProperty Name "Output length"}
+	OutputLength : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

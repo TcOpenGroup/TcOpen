@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5072_IND_OutputsChannel" Id="{3d52fa6b-2e82-00ce-2d80-c5db161145b4}">
+    <Declaration><![CDATA[TYPE EL5072_IND_OutputsChannel :
+STRUCT
+	{attribute addProperty Name "Set position"}
+	SetPosition AT %Q* : BIT;
+	{attribute addProperty Name "Set position on digital input"}
+	SetPositionOnDigitalInput AT %Q* : BIT;
+	{attribute addProperty Name "Enable latch on digital input"}
+	EnableLatchOnDigitalInput AT %Q* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 AT %Q* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 AT %Q* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 AT %Q* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 AT %Q* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8-16(address x+1.0 - x+1.7)"}
+	Bit_8_16 AT %Q* : BITARR8;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 17-32(address x+2.0 - x+3.7)"}
+	Bit_17_32 AT %Q* : BITARR16;
+	{attribute addProperty Name "Set position value"}
+	SetPositionValue AT %Q* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
