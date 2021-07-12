@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Threading
 {
     /// <summary>
     /// Provides access to UI dispatcher of currently running application.
     /// </summary>
-    internal class Dispatcher : IDispatcher
+    public class Dispatcher : IDispatcher
     {
         private Dispatcher()
         {
@@ -18,7 +19,7 @@ namespace TcOpen.Inxton.Threading
         /// Sets the dispatcher for running application.
         /// </summary>
         /// <param name="dispatcher"></param>
-        internal static void SetDispatcher(IDispatcher dispatcher)
+        public static void SetDispatcher(IDispatcher dispatcher)
         {
             _dispatcher = dispatcher;
         }
@@ -31,6 +32,16 @@ namespace TcOpen.Inxton.Threading
         public void Invoke(Action action)
         {
             _dispatcher?.Invoke(action);
+        }
+
+        // <summary>
+        /// Invokes an action on the UI dispatcher of the currently running application asynchronously
+        /// The appropriate dispatcher must be set at the start of the application. To set dispatcher use <see cref="SetDispatcher(IDispatcher)"/> method.
+        /// </summary>
+        /// <param name="action">Action to run.</param>
+        public Task InvokeAsync(Action action)
+        {
+           return _dispatcher?.InvokeAsync(action);
         }
 
         private volatile static object mutex = new object();

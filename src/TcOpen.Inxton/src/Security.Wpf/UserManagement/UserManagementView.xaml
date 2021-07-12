@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:TcOpen.Inxton.Security.Wpf.Properties"
+    xmlns:local="TcOpen.Inxton.Security.Wpf"
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch"
     HorizontalContentAlignment="Stretch"
@@ -13,6 +14,9 @@
     d:DesignHeight="600"
     d:DesignWidth="700"
     mc:Ignorable="d">
+    <!--<d:UserControl.DataContext>
+        <local:UserManagementViewModel></local:UserManagementViewModel> 
+    </d:UserControl.DataContext>-->
     <UserControl.Resources>
         <Style TargetType="{x:Type PasswordBox}">
             <Setter Property="Margin" Value="4" />
@@ -23,7 +27,7 @@
         <TabItem Header="{x:Static p:strings.CurrentUsers}">
             <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
                 <Grid Margin="12" Style="{DynamicResource Card}">
-                    <controls:AllUsersView />
+                    <controls:AllUsersView/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

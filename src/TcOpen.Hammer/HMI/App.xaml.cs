@@ -8,6 +8,8 @@ using TcOpen.Inxton.Data.Json;
 using System.Reflection;
 using System.IO;
 using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Abstractions.Security;
 
 namespace HMI
 {
@@ -24,20 +26,26 @@ namespace HMI
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter()) // Sets the logger configuration (default reports only to console).
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);    // This is necessary for UI operation.
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetSecurity(SecurityManager.Create(SetUpUserRepository()))
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);    // This is necessary for UI operation.            
 
             // Execute PLC connector operations.
             Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
             
             Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
 
+
+
             // SetUpMongoDatabase();
             SetUpJsonRepositories();
+
+            
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
-                                       IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
-                                       IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
+                                              IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
+                                              IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
         {
             Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
             Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
@@ -47,6 +55,19 @@ namespace HMI
 
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRepository(technologyDataRepository);
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
+        }
+
+        private static IRepository<UserData> SetUpUserRepository()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+        
+            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));            
         }
 
         private static void SetUpJsonRepositories()

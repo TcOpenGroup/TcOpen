@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
+using TcOpen.Inxton.Threading;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
-using TcOpen.Inxton.Threading;
 
 namespace TcOpen.Inxton.Input
 {
@@ -14,11 +14,11 @@ namespace TcOpen.Inxton.Input
     {
         private readonly Action<object> _execute;
 
-        private readonly Func<bool> _canExecute;
+        private readonly Func<object, bool> _canExecute;
 
         private readonly Action _logAction;
 
-        public RelayCommand(Action<object> execute, Func<bool> canExecute = null, Action logAction = null)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null, Action logAction = null)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -27,7 +27,7 @@ namespace TcOpen.Inxton.Input
 
         public void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
         {
-            TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            Dispatcher.Get.Invoke(() =>
             {
                 CanExecuteChanged?.Invoke(sender, args);
             });
@@ -35,15 +35,15 @@ namespace TcOpen.Inxton.Input
 
         public bool CanExecute(object parameter)
         {
-            return  _canExecute == null ? true : _canExecute.Invoke();
+            return _canExecute == null ? true : _canExecute.Invoke(parameter);
         }
 
         public void Execute(object parameter)
         {
-            if(CanExecute(parameter))
-            {               
-               _logAction?.Invoke();                                     
-               _execute.Invoke(parameter);
+            if (CanExecute(parameter))
+            {
+                _logAction?.Invoke();
+                _execute.Invoke(parameter);
             }
         }
 

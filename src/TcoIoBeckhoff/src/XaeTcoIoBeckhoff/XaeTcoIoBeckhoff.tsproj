@@ -664,9 +664,37 @@
 				<BitSize>8</BitSize>
 				<BitOffs>8</BitOffs>
 			</SubItem>
-			<Hides>
-				<Hide GUID="{D1115EB2-46C2-DBA7-CCFD-1658D862419F}"/>
-			</Hides>
+			<Method>
+				<Name>__GetInterfacePointer</Name>
+				<ReturnType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</ReturnType>
+				<ReturnBitSize>8</ReturnBitSize>
+				<Parameter>
+					<Name>pRef</Name>
+					<Type GUID="{18071995-0000-0000-0000-000000000007}" PointerTo="2">DWORD</Type>
+					<BitSize>64</BitSize>
+				</Parameter>
+			</Method>
+			<Method>
+				<Name>__GetInterfaceReference</Name>
+				<ReturnType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</ReturnType>
+				<ReturnBitSize>8</ReturnBitSize>
+				<Parameter>
+					<Name>nInterfaceId</Name>
+					<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+					<BitSize>32</BitSize>
+				</Parameter>
+				<Parameter>
+					<Name>pRef</Name>
+					<Type GUID="{18071995-0000-0000-0000-000000000007}" PointerTo="2">DWORD</Type>
+					<BitSize>64</BitSize>
+				</Parameter>
+			</Method>
+			<Properties>
+				<Property>
+					<Name>PouType</Name>
+					<Value>FunctionBlock</Value>
+				</Property>
+			</Properties>
 		</DataType>
 		<DataType>
 			<Name GUID="{0B52BD81-A20C-4572-9E72-BE6D057EE8D9}" BitType="true" PersistentType="true">AI_Limit</Name>
@@ -2769,24 +2797,6 @@
 			<ArrayInfo>
 				<LBound>0</LBound>
 				<Elements>14</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000008E}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..141] OF BIT</Name>
-			<BitSize>142</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>142</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-00200000001D}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..28] OF BIT</Name>
-			<BitSize>29</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>29</Elements>
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
@@ -13959,7 +13969,7 @@
 					<Box Id="11" BoxType="9099">
 						<Name>EL1012 (EL1012)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f43052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1012 2Ch. Dig. Input 24V, 10µs" Desc="EL1012" PortABoxInfo="#x0100000a">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f43052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1012 2Ch. Dig. Input 24V, 10�s" Desc="EL1012" PortABoxInfo="#x0100000a">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14001,7 +14011,7 @@
 					<Box Id="13" BoxType="9099">
 						<Name>EL1202 (EL1202)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04b23052" RevisionNo="#x00130000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1202 2Ch. Fast Dig. Input 24V, 1µs" Desc="EL1202" PortABoxInfo="#x0100000c">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04b23052" RevisionNo="#x00130000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1202 2Ch. Fast Dig. Input 24V, 1�s" Desc="EL1202" PortABoxInfo="#x0100000c">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14019,7 +14029,7 @@
 					<Box Id="14" BoxType="9099">
 						<Name>EL1252 (EL1252)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04e43052" RevisionNo="#x00160000" InfoDataDcTimes="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1252 2Ch. Fast Dig. Input 24V, 1µs, DC Latch" Desc="EL1252" PortABoxInfo="#x0100000d">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04e43052" RevisionNo="#x00160000" InfoDataDcTimes="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1252 2Ch. Fast Dig. Input 24V, 1�s, DC Latch" Desc="EL1252" PortABoxInfo="#x0100000d">
 							<SyncMan>001001002000010004000000000000000100001022010000</SyncMan>
 							<SyncMan>ae0922000000000004000000000000000000ae0900040000</SyncMan>
 							<SyncMan>100900000000000004000000000000000000100900040000</SyncMan>
@@ -14657,7 +14667,7 @@
 					<Box Id="19" BoxType="9099">
 						<Name>EL1014 (EL1014)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f63052" RevisionNo="#x00130000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1014 4Ch. Dig. Input 24V, 10µs" Desc="EL1014" PortABoxInfo="#x01000012">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f63052" RevisionNo="#x00130000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1014 4Ch. Dig. Input 24V, 10�s" Desc="EL1014" PortABoxInfo="#x01000012">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14713,7 +14723,7 @@
 					<Box Id="21" BoxType="9099">
 						<Name>EL1034 (EL1034)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x040a3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1034 4Ch. Dig. Input 24V, potential-free, 10µs" Desc="EL1034" PortABoxInfo="#x01000014">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x040a3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1034 4Ch. Dig. Input 24V, potential-free, 10�s" Desc="EL1034" PortABoxInfo="#x01000014">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14809,7 +14819,7 @@
 					<Box Id="26" BoxType="9099">
 						<Name>EL1094 (EL1094)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04463052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1094 4Ch. Dig. Input 24V, 10µs, negative" Desc="EL1094" PortABoxInfo="#x01000019">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04463052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1094 4Ch. Dig. Input 24V, 10�s, negative" Desc="EL1094" PortABoxInfo="#x01000019">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14865,7 +14875,7 @@
 					<Box Id="23" BoxType="9099">
 						<Name>EL1114 (EL1114)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x045a3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1114 4Ch. Dig. Input 24V, 10µs, Sensor Power" Desc="EL1114" PortABoxInfo="#x01000016">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x045a3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1114 4Ch. Dig. Input 24V, 10�s, Sensor Power" Desc="EL1114" PortABoxInfo="#x01000016">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14893,7 +14903,7 @@
 					<Box Id="27" BoxType="9099">
 						<Name>EL1124 (EL1124)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04643052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1124 4Ch. Dig. Input 5V, 10µs, Sensor Power" Desc="EL1124" PortABoxInfo="#x01000017">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04643052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1124 4Ch. Dig. Input 5V, 10�s, Sensor Power" Desc="EL1124" PortABoxInfo="#x01000017">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14921,7 +14931,7 @@
 					<Box Id="28" BoxType="9099">
 						<Name>EL1134 (EL1134)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x046e3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1134 4Ch. Dig. Input 48V, 10µs, Sensor Power" Desc="EL1134" PortABoxInfo="#x0100001b">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x046e3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1134 4Ch. Dig. Input 48V, 10�s, Sensor Power" Desc="EL1134" PortABoxInfo="#x0100001b">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14949,7 +14959,7 @@
 					<Box Id="29" BoxType="9099">
 						<Name>EL1144 (EL1144)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04783052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1144 4Ch. Dig. Input 12V, 10µs, Sensor Power" Desc="EL1144" PortABoxInfo="#x0100001c">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04783052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1144 4Ch. Dig. Input 12V, 10�s, Sensor Power" Desc="EL1144" PortABoxInfo="#x0100001c">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -14977,7 +14987,7 @@
 					<Box Id="30" BoxType="9099">
 						<Name>EL1254 (EL1254)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0904" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04e63052" InfoDataDcTimes="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1254 4Ch. Fast Dig. Input 24V, 1µs, DC Latch" Desc="EL1254" PortABoxInfo="#x0100001d">
+						<EtherCAT SlaveType="1" PdiType="#x0904" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04e63052" InfoDataDcTimes="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1254 4Ch. Fast Dig. Input 24V, 1�s, DC Latch" Desc="EL1254" PortABoxInfo="#x0100001d">
 							<SyncMan>001001002000010004000000000000000100001022010000</SyncMan>
 							<SyncMan>ac0944000000000004000000000000000000ac0900040000</SyncMan>
 							<SyncMan>100900000000000004000000000000000000100900040000</SyncMan>
@@ -15419,7 +15429,7 @@
 					<Box Id="32" BoxType="9099">
 						<Name>EL1814 (EL1814)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07163052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1814 4Ch. Dig. Input 24V, 10µs" Desc="EL1814" PortABoxInfo="#x0100001f">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07163052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1814 4Ch. Dig. Input 24V, 10�s" Desc="EL1814" PortABoxInfo="#x0100001f">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -15495,7 +15505,7 @@
 					<Box Id="34" BoxType="9099">
 						<Name>EL1018 (EL1018)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03fa3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1018 8Ch. Dig. Input 24V, 10µs" Desc="EL1018" PortABoxInfo="#x01000021">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03fa3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1018 8Ch. Dig. Input 24V, 10�s" Desc="EL1018" PortABoxInfo="#x01000021">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -15591,7 +15601,7 @@
 					<Box Id="36" BoxType="9099">
 						<Name>EL1098 (EL1098)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044a3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1098 8Ch. Dig. Input 24V, 10µs, negative" Desc="EL1098" PortABoxInfo="#x01000023">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044a3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1098 8Ch. Dig. Input 24V, 10�s, negative" Desc="EL1098" PortABoxInfo="#x01000023">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -15775,7 +15785,7 @@
 					<Box Id="39" BoxType="9099">
 						<Name>EL1819 (EL1819)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x071b3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1819 16Ch. Dig. Input 24V, 10µs" Desc="EL1819" PortABoxInfo="#x01000026">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x071b3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1819 16Ch. Dig. Input 24V, 10�s" Desc="EL1819" PortABoxInfo="#x01000026">
 							<SyncMan>001002000000010004000000000000000200001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -16131,7 +16141,7 @@
 					<Box Id="44" BoxType="9099">
 						<Name>EL1872 (EL1872)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07503052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1872 16Ch. Dig. Input 24V, 10µs" Desc="EL1872" PortABoxInfo="#x0100002b">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07503052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1872 16Ch. Dig. Input 24V, 10�s" Desc="EL1872" PortABoxInfo="#x0100002b">
 							<SyncMan>001002000000010004000000000000000200001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -16307,7 +16317,7 @@
 					<Box Id="46" BoxType="9099">
 						<Name>EL1899 (EL1899)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x076b3052" RevisionNo="#x00100000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1899 16Ch. Dig. Input 24V, 10µs, negative" Desc="EL1899" PortABoxInfo="#x0100002d">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x076b3052" RevisionNo="#x00100000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1899 16Ch. Dig. Input 24V, 10�s, negative" Desc="EL1899" PortABoxInfo="#x0100002d">
 							<SyncMan>001002000000010004000000000000000200001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">

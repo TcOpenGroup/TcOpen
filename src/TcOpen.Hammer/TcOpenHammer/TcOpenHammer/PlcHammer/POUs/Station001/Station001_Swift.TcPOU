@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Station001_Swift" Id="{f8639bd1-142b-44c1-a2c5-45ca5f4c4697}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_Swift EXTENDS TcoCore.TcoSequencer
+VAR
+	_partPassedChecks : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{27490fa3-0835-4855-83ed-f164497eedb1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main : BOOL
+VAR CONSTANT
+	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF Step(10,
+    TRUE,
+    'TECH_MAIN._app._station001._components._gripperPiston._moveHomeDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._gripperPiston._moveHomeDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(20,
+    TRUE,
+    'TECH_MAIN._app._station001._components._verticalPiston._moveHomeDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._verticalPiston._moveHomeDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(30,
+    TRUE,
+    'TECH_MAIN._app._station001._components._horizontalNcAxis') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._horizontalNcAxis.MoveAbsolute(inPosition := 450,
+        inVelocity := 1000,
+        inAcceleration := 10000,
+        inDeceleration := 10000,
+        inJerk := 50000).Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(40,
+    TRUE,
+    'TECH_MAIN._app._station001._components._verticalPiston._moveWorkDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._verticalPiston._moveWorkDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(50,
+    TRUE,
+    'TECH_MAIN._app._station001._components._gripperPiston._moveWorkDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._gripperPiston._moveWorkDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(60,
+    TRUE,
+    'TECH_MAIN._app._station001._components._gripperPiston._moveHomeDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._gripperPiston._moveHomeDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(70,
+    TRUE,
+    'TECH_MAIN._app._station001._components._verticalPiston._moveHomeDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._verticalPiston._moveHomeDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(80,
+    TRUE,
+    'TECH_MAIN._app._station001._components._horizontalNcAxis') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._horizontalNcAxis.MoveAbsolute(inPosition := 0,
+        inVelocity := 1000,
+        inAcceleration := 10000,
+        inDeceleration := 10000,
+        inJerk := 50000).Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(90,
+    TRUE,
+    'TECH_MAIN._app._station001._components._verticalPiston._moveWorkDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._verticalPiston._moveWorkDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(100,
+    TRUE,
+    'TECH_MAIN._app._station001._components._gripperPiston._moveWorkDefault') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._gripperPiston._moveWorkDefault.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;
+
+IF Step(110,
+    TRUE,
+    'TECH_MAIN._app._station001._components._horizontalNcAxis') THEN
+    //-------------------------------------------------------
+    IF (TECH_MAIN._app._station001._components._horizontalNcAxis.MoveAbsolute(inPosition := 200,
+        inVelocity := 1000,
+        inAcceleration := 10000,
+        inDeceleration := 10000,
+        inJerk := 50000).Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStepCompleted" Id="{ebb0459f-72d3-466b-854c-4b25d0320e1b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is executed upon step completion.
+			This method can be overridden in derived block by custom logic.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStepCompleted
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Station" Id="{1c83fd57-5db6-4a75-9def-10fe2b4fde0c}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO Station001]]></Declaration>
+      <Get Name="Get" Id="{43ce5313-7517-4cf9-98d6-637b82e486c0}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO Station001;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(_Parent,_station) THEN // Check if _Parent is Station001
+	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
