@@ -13904,7 +13904,7 @@
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="25" DevType="111" DevFlags="#x0003" AmsPort="28697" AmsNetId="172.20.10.104.26.1" RemoteName="Device 25 (EtherCAT)" InfoImageId="4">
+			<Device Id="25" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28697" AmsNetId="172.20.10.104.26.1" RemoteName="Device 25 (EtherCAT)" InfoImageId="4">
 				<Name>DIDO_EL_TYPE (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -21343,7 +21343,7 @@ Bit 3: Tristate 2]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120"/>
 			</Device>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="172.20.10.104.3.1" RemoteName="AI_AO_EL_TYPE (EtherCAT)" InfoImageId="6">
+			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="172.20.10.104.3.1" RemoteName="AI_AO_EL_TYPE (EtherCAT)" InfoImageId="6">
 				<Name>AI_AO_EL_TYPE (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -35686,7 +35686,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="2"/>
 			</Device>
-			<Device Id="3" DevType="111" DevFlags="#x0003" AmsPort="28675" AmsNetId="172.20.10.104.4.1" RemoteName="EL5xxx" InfoImageId="8">
+			<Device Id="3" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28675" AmsNetId="172.20.10.104.4.1" RemoteName="EL5xxx" InfoImageId="8">
 				<Name>EL5xxx</Name>
 				<AddressInfo>
 					<Pnp>
@@ -47072,6 +47072,20 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^IO._EL6631._infoData._AdsAddr" VarB="InfoData^AdsAddr"/>
 				<Link VarA="PlcTask Inputs^IO._EL6631._infoData._AoeNetId" VarB="InfoData^AoeNetId"/>
 				<Link VarA="PlcTask Inputs^IO._EL6631._infoData._State" VarB="InfoData^State"/>
+			</OwnerB>
+			<OwnerB Name="TIID^EL5xxx^EL5xxx^EL6731 (EL6731)">
+				<Link VarA="PlcTask Inputs^IO._EL6731._infoData._AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^IO._EL6731._infoData._AoeNetId" VarB="InfoData^AoeNetId"/>
+				<Link VarA="PlcTask Inputs^IO._EL6731._infoData._State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^IO._EL6731._infoData._dcInputShift" VarB="InfoData^DcInputShift"/>
+				<Link VarA="PlcTask Inputs^IO._EL6731._infoData._dcOutputShift" VarB="InfoData^DcOutputShift"/>
+			</OwnerB>
+			<OwnerB Name="TIID^EL5xxx^EL5xxx^EL6751 (EL6751)">
+				<Link VarA="PlcTask Inputs^IO._EL6751._infoData._AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^IO._EL6751._infoData._AoeNetId" VarB="InfoData^AoeNetId"/>
+				<Link VarA="PlcTask Inputs^IO._EL6751._infoData._State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^IO._EL6751._infoData._dcInputShift" VarB="InfoData^DcInputShift"/>
+				<Link VarA="PlcTask Inputs^IO._EL6751._infoData._dcOutputShift" VarB="InfoData^DcOutputShift"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>
