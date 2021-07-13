@@ -1,4 +1,79 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<!--NuGet properties-->
+		<Authors>TcOpenGroup contributors</Authors>
+		<Company>TcOpenGroup</Company>
+		<RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<UseWPF>true</UseWPF>
+		<PackageTags>TwinCAT3 Beckhoff</PackageTags>
+		<PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+		<PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+		<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
+		<ProjectReference Include="..\Security\TcOpen.Inxton.Security.csproj" />
+		<ProjectReference Include="..\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Security.Permissions" Version="4.7.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+	</ItemGroup>
+
+	 
+	<ItemGroup>
+		<Compile Update="Properties\strings.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>strings.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\strings.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>strings.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\strings.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\strings.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>strings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Login\LoginWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="PermissionBox\InsuficienRightsBox.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="UserInfoDisplay\UserInfoDisplayView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="UserManagement\AddNewUserView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="UserManagement\AllUsersView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="UserManagement\UserManagementView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	</ItemGroup>
+
 </Project>

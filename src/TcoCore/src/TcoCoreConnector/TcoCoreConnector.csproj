@@ -31,6 +31,7 @@
   </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj" />
+      <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
     </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
