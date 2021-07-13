@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TcOpen.Inxton.Abstractions.Data
+namespace TcOpen.Inxton.Data
 {
     public static class DateTimeProviders
     {

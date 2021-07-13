@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data
 

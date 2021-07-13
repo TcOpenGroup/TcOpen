@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using TcOpen.Inxton.Abstractions.Security;
-using static TcOpen.Inxton.Security.VortexIdentity;
+using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Local.Security;
+using static TcOpen.Inxton.Local.Security.AppIdentity;
+
 
 namespace TcOpen.Inxton.Security.Tests
 {
@@ -21,7 +23,7 @@ namespace TcOpen.Inxton.Security.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
-            TcOpen.Inxton.Security.SecurityManager.CreateDefault();
+            TcOpen.Inxton.Local.Security.SecurityManager.CreateDefault();
             NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal = SecurityManager.Manager.Principal;
 
 
@@ -89,7 +91,7 @@ namespace TcOpen.Inxton.Security.Tests
             var actual = authService.AuthenticateUser(userName, password);
 
             //-- Assert
-            Assert.AreEqual(userName, actual.Username);
+            Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], actual.Roles[0]);
             Assert.AreEqual($"Success {userName}", AuthService_OnUserAuthenticateSuccessMessage);
@@ -254,7 +256,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             var actual = authService.AuthenticateUser(userName, password);
 
-            Assert.AreEqual(userName, actual.Username);
+            Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], actual.Roles[0]);
 
@@ -267,7 +269,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             //-- Assert
 
-            Assert.AreEqual(userName, changed.Username);
+            Assert.AreEqual(userName, changed.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], changed.Roles[0]);
 
@@ -286,7 +288,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             var actual = authService.AuthenticateUser(userName, password);
 
-            Assert.AreEqual(userName, actual.Username);
+            Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], actual.Roles[0]);
 
@@ -311,7 +313,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             var actual = authService.AuthenticateUser(userName, password);
 
-            Assert.AreEqual(userName, actual.Username);
+            Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], actual.Roles[0]);
 
@@ -344,7 +346,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             var actual = authService.ExternalAuthorization.RequestAuthorization();
 
-            Assert.AreEqual(userName, actual.Username);
+            Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], actual.Roles[0]);           
         }
@@ -375,7 +377,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.ExternalAuthorization.RequestAuthorization();
 
-            VortexPrincipal customPrincipal = Thread.CurrentPrincipal as VortexPrincipal;
+            AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppPrincipal;
 
             Assert.AreEqual(string.Empty, customPrincipal.Identity.Name);
             Assert.AreEqual(0, customPrincipal.Identity.Roles.Length);
@@ -408,7 +410,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.ExternalAuthorization.RequestAuthorization();
 
-            VortexPrincipal customPrincipal = Thread.CurrentPrincipal as VortexPrincipal;
+            AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppPrincipal;
 
             Assert.AreEqual(string.Empty, customPrincipal.Identity.Name);
             Assert.AreEqual(0, customPrincipal.Identity.Roles.Length);
@@ -438,7 +440,7 @@ namespace TcOpen.Inxton.Security.Tests
 
         }
 
-        public class ExternalAuthenticator : IExternalAuthorization
+        public class ExternalAuthenticator : ExternalAuthorization
         {
 
             public string Token { get; set; }
