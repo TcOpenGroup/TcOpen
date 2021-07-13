@@ -1,6 +1,7 @@
-﻿using TcOpen.Inxton.Abstractions.Data;
+﻿using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Security;
 
-namespace TcOpen.Inxton.Abstractions.Security
+namespace TcOpen.Inxton.Local.Security
 {
     internal class DummyAuthenticationService : IAuthenticationService
     {

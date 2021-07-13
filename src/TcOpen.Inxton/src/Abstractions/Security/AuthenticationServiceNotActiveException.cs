@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace TcOpen.Inxton.Abstractions.Security
+namespace TcOpen.Inxton.Security
 {
     /// <summary>
     /// Authentication service is not available exception.

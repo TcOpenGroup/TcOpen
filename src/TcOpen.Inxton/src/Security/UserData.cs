@@ -6,9 +6,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 
-namespace TcOpen.Inxton.Abstractions.Security
+namespace TcOpen.Inxton.Local.Security
 {
     public class UserData : IBrowsableDataObject, INotifyPropertyChanged
     {
@@ -20,7 +20,7 @@ namespace TcOpen.Inxton.Abstractions.Security
         {
             Roles = new ObservableCollection<string>();
         }
-        public UserData(string username, string email, string password, IEnumerable<String> roles, string level, string authenticationToken)
+        public UserData(string username, string email, string password, IEnumerable<string> roles, string level, string authenticationToken)
         {
             Username = username;
             Email = email;
@@ -86,7 +86,7 @@ namespace TcOpen.Inxton.Abstractions.Security
         public DateTime _Created { get; set; }
         public string _EntityId { get; set; }
         public DateTime _Modified { get; set; }
-        public String RoleHash { get; set; }
+        public string RoleHash { get; set; }
 
         string level;
         public string Level
@@ -180,6 +180,4 @@ namespace TcOpen.Inxton.Abstractions.Security
             }
         }
     }
-
-
 }

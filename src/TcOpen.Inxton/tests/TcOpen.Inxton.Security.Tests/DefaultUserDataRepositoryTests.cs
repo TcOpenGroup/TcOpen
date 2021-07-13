@@ -2,7 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Local.Security;
 
 namespace TcOpen.Inxton.Security.Tests
 {

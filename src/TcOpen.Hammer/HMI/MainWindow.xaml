@@ -146,7 +146,7 @@
                     </UniformGrid.Resources>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask}" />
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask}" />
-                    <vortex:PermissionBox SecurityMode="Disabled" Permissions="Administrator|Service" >
+                    <vortex:PermissionBox SecurityMode="Disabled" Permissions="Service" >
                         <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
                     </vortex:PermissionBox>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._swiftModeTask}" />

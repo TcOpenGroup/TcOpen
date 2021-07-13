@@ -1,29 +1,22 @@
-﻿using TcOpen.Inxton.Abstractions.Security;
+﻿using Microsoft.AspNetCore.Identity;
+using TcOpen.Inxton.Security;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
-    public class User : IUser
+    public class User : IdentityUser<string>, IUser
     {
         public User(string username, string email, string[] roles, bool canUserChangePassword, string level)
         {
-            Username = username;
+            var normalizer = new UpperInvariantLookupNormalizer();
+            UserName = username;
+            NormalizedUserName = normalizer.NormalizeName(UserName);            
             Email = email;
+            NormalizedEmail = normalizer.NormalizeEmail(email);       
             Roles = roles;
             Level = level;
-            CanUserChangePassword = canUserChangePassword;
+            CanUserChangePassword = canUserChangePassword;            
         }
-        public string Username
-        {
-            get;
-            set;
-        }
-
-        public string Email
-        {
-            get;
-            set;
-        }
-
+        
         public string Level { get; set; }
 
         public string[] Roles
@@ -31,7 +24,6 @@ namespace TcOpen.Inxton.Security
             get;
             set;
         }
-
 
         public bool CanUserChangePassword { get; set; }
     }

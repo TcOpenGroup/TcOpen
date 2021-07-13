@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
@@ -17,12 +17,22 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="PermissionBox\InsuficienRightsBox.xaml.cs" />
+	  <Compile Remove="PermissionBox\InsuficientRightsBoxViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Remove="PermissionBox\InsuficienRightsBox.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
-		<ProjectReference Include="..\Security\TcOpen.Inxton.Security.csproj" />
+		<ProjectReference Include="..\Application\TcOpen.Inxton.App.csproj" />
+		<ProjectReference Include="..\Security\TcOpen.Inxton.Local.Security.csproj" />
 		<ProjectReference Include="..\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
 	</ItemGroup>
 	<ItemGroup>

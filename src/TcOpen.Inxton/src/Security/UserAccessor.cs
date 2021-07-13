@@ -6,15 +6,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     public class UserAccessor : INotifyPropertyChanged
     {
         private static UserAccessor _instance;
 
-        private VortexIdentity _identity;
+        private AppIdentity _identity;
 
-        public VortexIdentity Identity
+        public AppIdentity Identity
         {
             get => _identity;
             set

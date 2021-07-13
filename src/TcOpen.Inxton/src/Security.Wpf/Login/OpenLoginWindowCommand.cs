@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace TcOpen.Inxton.Security.Wpf.Login
+namespace TcOpen.Inxton.Local.Security.Wpf
 {    
     public class OpenLoginWindowCommand : ICommand
     {

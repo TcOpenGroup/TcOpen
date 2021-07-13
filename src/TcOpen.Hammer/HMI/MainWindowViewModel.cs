@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TcOpen.Inxton.Security.Wpf;
-using TcOpen.Inxton.Security.Wpf.Login;
+using TcOpen.Inxton.Local.Security.Wpf;
 using Vortex.Presentation;
 
 namespace PlcHammer.Hmi

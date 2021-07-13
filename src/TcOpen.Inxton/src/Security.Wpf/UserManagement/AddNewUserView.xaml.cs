@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcOpen.Inxton.Security.Wpf.UserManagement
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
     /// Interaction logic for AddNewUserDialogView.xaml

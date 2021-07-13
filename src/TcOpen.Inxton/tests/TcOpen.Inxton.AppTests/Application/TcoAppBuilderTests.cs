@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Logging;
-using TcOpen.Inxton.Abstractions.Logging;
 using TcOpen.Inxton;
 using TcOpen.Inxton.App.Logging;
 

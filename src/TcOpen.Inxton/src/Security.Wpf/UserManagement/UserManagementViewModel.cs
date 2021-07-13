@@ -1,6 +1,6 @@
 ﻿using System.Security.Permissions;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {   
     public class UserManagementViewModel
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Security.Principal;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
-    public partial class VortexIdentity : IIdentity
+    public partial class AppIdentity : IIdentity
     {
-        public VortexIdentity(string name, string email, string[] roles, bool canUserChangePassword, string level)
+        public AppIdentity(string name, string email, string[] roles, bool canUserChangePassword, string level)
         {
             Name = name;
             Email = email;
@@ -22,11 +22,10 @@ namespace TcOpen.Inxton.Security
 
         public bool CanUserChangePassword { get; private set;}
 
-        #region IIdentity Members
+#region IIdentity Members
         public string AuthenticationType { get { return "Custom authentication"; } }
 
         public bool IsAuthenticated { get { return !string.IsNullOrEmpty(Name); } }
-
 #endregion
     }
 }

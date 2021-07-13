@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 
 namespace TcoData
 {
