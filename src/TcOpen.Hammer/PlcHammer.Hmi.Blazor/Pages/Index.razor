@@ -1,0 +1,36 @@
+﻿@page "/"
+
+@using PlcHammerConnector;
+
+<h1>
+    @Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail();
+</h1>
+<div>
+
+</div>
+
+<button class="btn-light" @onclick="() => Station._groundModeTask.Execute(null)">
+    @Station._groundModeTask.GetSymbolTail()
+</button>
+<button class="btn-light" @onclick="() => Station._automatModeTask.Execute(null)">
+    @Station._automatModeTask.GetSymbolTail()
+</button>
+<button class="btn-light" @onclick="() => Station._serviceModeTask.Execute(null)">
+    @Station._serviceModeTask.GetSymbolTail()
+</button>
+
+
+
+<RenderableContentControl Presentation="Display"
+                          Context="@Station._groundMode._currentStep.Description" />
+
+<RenderableContentControl Presentation="Display"
+                          Context="@Station._automatMode._currentStep.Description" />
+
+<RenderableContentControl Presentation="Display"
+                          Context="@Station._processTraceabilty._data" />
+
+@code{
+
+    public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
+}
