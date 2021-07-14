@@ -1,16 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net48</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>    
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
   </ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Inxton.Vortex.Connector" Version="1.12.0-nighlty.517" />
-	</ItemGroup>
-
 </Project>
