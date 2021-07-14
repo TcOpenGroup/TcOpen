@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="TcoMessenger" Id="{bb89b26f-ec79-4812-bab7-3579b2b6d1be}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -27,13 +27,9 @@ VAR
 			</summary>			
 		</docu>
 	~*)
-
-	_Parent				: ITcoObject;
-	_contextIdentity 	: ULINT;	
-	
-	_loggerConfig		: TcoLoggerConfiguration;
-	_logger				: TcoLogger(_Parent);
-	_mime				: TcoMessage;
+	_mime : TcoMessage;
+	_Parent : ITcoObject;
+	_contextIdentity : ULINT;				
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -62,15 +58,54 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Fatal(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Clear" Id="{8544b803-1b0b-0034-06a8-1f3769f14631}">
-      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+    <Method Name="Clear" Id="{640fefd4-a9aa-0de1-3f5c-cce4bd50449f}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Clears the message content.
+				<remarks>			
+					<note type="important">
+						This method is exposed for Rpc calls, for testing purposes. Rpc calls of this method must not be used in production code
+					</note>
+				</remarks>								 
+			</summary>		
+		</docu>
+~*)
+{attribute 'TcRpcEnable'}
 METHOD Clear
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_mime.TimeStamp :=  DT#1970-01-01-00:00;
+_mime.Text := '';
+_mime.Identity := 0;
+_mime.Category := eMessageCategory.None;
+_mime.Cycle := 0;	
+_mime.PerCycleCount := 0;	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
+      <Declaration><![CDATA[METHOD PROTECTED FINAL Compose 
+VAR_INPUT
+	Text : STRING(125);
+	Category : eMessageCategory;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Rtc <> 0) THEN
+	_mime.TimeStamp :=  _Parent.Context.Rtc.NowLocal();
+	_mime.Text := Text;
+	_mime.Identity := _Parent.Identity;
+	_mime.Category := Category;
+	_mime.Cycle := _Parent.Context.StartCycleCount;	
+END_IF;
+
+
+
+
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Critical" Id="{a9264967-6c30-0c25-362d-a0380aaea992}" FolderPath="Messages\">
@@ -96,7 +131,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Fatal(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Debug" Id="{bd0230f7-b5de-4707-ba4a-f8b17cc23976}" FolderPath="Messages\">
@@ -122,7 +157,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Error" Id="{dc14c403-f11e-4200-ac36-567c3d997bf6}" FolderPath="Messages\">
@@ -150,7 +185,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Info(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Error);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{23bbd1ba-9be3-4c0b-a177-bc9de93be447}">
@@ -165,24 +200,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_Parent := Parent;
 _contextIdentity := Parent.Identity;
-
-
-_loggerConfig
-	.MinimumLevel(LogLevel.Warning)
-	//.EnrichWith.Context()
-	//.EnrichWith.InstancePath()
-	//.EnrichWith.CycleCount()
-	//.WriteTo.File("C:\Temp")
-	.WriteTo.XAE()
-	.Build();
-	
-_logger
-	.Configure(_loggerConfig)
-	.ForContext(_Parent.Context)
-	.ForIdentity(_Parent.Identity);
-	
-
-	]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Info" Id="{d1f4840f-86c5-482b-8fb7-443b9b1c585c}" FolderPath="Messages\">
@@ -208,20 +226,9 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Info(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Logger" Id="{5ae77b60-04e1-037a-08f7-a85dbad3d1bc}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Logger : ITcoLogger]]></Declaration>
-      <Get Name="Get" Id="{c98cdf74-684d-0b53-1a21-f7813c56464b}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Logger := _logger;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="Notify" Id="{1595dfe7-5719-459e-bdf2-0e7976c85511}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -244,11 +251,18 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Notification);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Post" Id="{241893d1-68aa-039f-1927-29005387cc4a}">
-      <Declaration><![CDATA[METHOD Post : BOOL
+    <Method Name="Post" Id="{7e1c7e2b-5612-469e-9139-08754fd973ea}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Creates message of given category for this messenger.				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Post 
 VAR_INPUT
 	(*~
 		<docu>
@@ -258,12 +272,40 @@ VAR_INPUT
 		</docu>
 	~*)
 	Message : STRING(125);
-	
-	Category : eMessageCategory;
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
 END_VAR
+
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
+	IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel
+	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
+		RETURN;
+	END_IF; 	
+	
+	_mime.PerCycleCount := _mime.PerCycleCount + 1;
+	// Same cycle filter for most important messge.
+	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
+		IF(Category > _mime.Category) THEN	 
+			Compose(Message, Category);
+		END_IF;
+	ELSE
+	// Different cycle		
+		_mime.PerCycleCount := 1;	
+		Compose(Message, Category);		
+	END_IF;	
+END_IF;	
+
+
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Programming" Id="{1f1b6a21-6158-44a7-b79e-b3fcea42c4e1}" FolderPath="Messages\">
@@ -289,7 +331,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.ProgrammingError);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Trace" Id="{5a17dee2-c171-4127-9ee1-30d4a06a53bf}" FolderPath="Messages\">
@@ -316,7 +358,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Debug(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{dd00674c-7475-44d4-8400-894897951e0b}" FolderPath="Messages\">
@@ -343,7 +385,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Logger.Warning(Message);]]></ST>
+        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
       </Implementation>
     </Method>
   </POU>
