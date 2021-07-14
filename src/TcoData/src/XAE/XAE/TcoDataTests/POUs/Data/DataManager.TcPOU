@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="DataManager" Id="{459b1dbb-712a-0cd3-3b3e-853e1e37477a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DataManager EXTENDS TcoData.TcoDataExchange
+VAR
+	_data : stProcessData;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Property Name="Data" Id="{74fa38ed-c762-0ed8-0b5d-76763111150a}">
+      <Declaration><![CDATA[PROPERTY Data : REFERENCE TO stProcessData]]></Declaration>
+      <Get Name="Get" Id="{404899c1-174f-00a2-1f16-bae66aacd69f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DATA REF=_data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

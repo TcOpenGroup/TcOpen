@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.15">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17" TcVersionFixed="true">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{419495CE-C73E-D7F4-AE76-DC4C2FF665A2}" AutoDeleteType="true">AI_ChannelStatus</Name>
@@ -143,9 +143,6 @@
 					<Value>FunctionBlock</Value>
 				</Property>
 			</Properties>
-			<Hides>
-				<Hide GUID="{E00A6452-129F-9053-C7D3-8D962A143092}"/>
-			</Hides>
 		</DataType>
 		<DataType>
 			<Name GUID="{9C4E351A-2140-503B-1609-725945B21645}" AutoDeleteType="true">StatusStructBasic</Name>
@@ -280,6 +277,60 @@
 				<LBound>0</LBound>
 				<Elements>14</Elements>
 			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}" BitType="true" PersistentType="true">DIGDiagInput</Name>
+			<BitSize>4</BitSize>
+			<SubItem>
+				<Name>Overtemperature</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>OpenLoad</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Overcurrent</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ShortCircuitTo24V</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{0B52BD81-A20C-4572-9E72-BE6D057EE8D9}" BitType="true" PersistentType="true">AI_Limit</Name>
+			<BitSize>2</BitSize>
+			<SubItem>
+				<Name>LowerOrEqual</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>HigherOrEqual</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}" BitType="true" PersistentType="true">DIGOutput</Name>
+			<BitSize>1</BitSize>
+			<SubItem>
+				<Name>Output</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
 		</DataType>
 	</DataTypes>
 	<ImageDatas>

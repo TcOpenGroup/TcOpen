@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoState" Id="{e15c5fcf-81d3-038e-202e-1cd87b834ace}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoState EXTENDS TcoStateBase
 
@@ -15,6 +15,24 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ChangeState := SUPER^.ChangeStateProtected(NewState);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStateChange" Id="{3086bfc0-6684-0c18-3a68-e8c47053ddcc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is called on each change of the <c>State</c>. This method could be overloaded and custom code should be placed here.	
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStateChange
+VAR_INPUT
+	PreviousState	: INT;
+	NewState 		: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnStateChange(PreviousState, NewState);]]></ST>
       </Implementation>
     </Method>
   </POU>

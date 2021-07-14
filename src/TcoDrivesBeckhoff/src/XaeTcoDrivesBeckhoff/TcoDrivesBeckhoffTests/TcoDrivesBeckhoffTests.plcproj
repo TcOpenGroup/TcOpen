@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoDrivesBeckhoffTests</Title>
-    <ProjectVersion>0.4.1.375</ProjectVersion>
+    <ProjectVersion>0.4.2.535</ProjectVersion>
     <DefaultNamespace>TcoDrivesBeckhoffTests</DefaultNamespace>
     <Placeholder>TcoDrivesBeckhoffTests</Placeholder>
     <Author>TcOpenGroup</Author>
@@ -58,6 +58,14 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_EtherCAT">
+      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_EtherCAT</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_MC2">
+      <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_MC2</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -71,20 +79,20 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoDrivesBeckhoff">
-      <DefaultResolution>TcoDrivesBeckhoff, 0.4.1.375 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoDrivesBeckhoff, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoDrivesBeckhoff</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoDrivesBeckhoff">
-      <Resolution>TcoDrivesBeckhoff, 0.4.1.375 (Vortex.Library)</Resolution>
+      <Resolution>TcoDrivesBeckhoff, 0.4.2.535 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>

@@ -57,7 +57,7 @@
                     </TabItem>
                     <TabItem Header="Object tree">
                         <ScrollViewer>
-                            <inxton:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
+                            <vortex:DynamicTreeView DataContext="{Binding MAIN_PRG._pneuMan}" />
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
@@ -74,7 +74,7 @@
                     <TabItem Header="Object tree">
                         <ScrollViewer>
                             <UniformGrid>
-                                <inxton:DynamicTreeView
+                                <vortex:DynamicTreeView
                                     x:Name="DonCorleone"
                                     DataContext="{Binding MAIN_PRG._donCorleone}"
                                     Grid.IsSharedSizeScope="True" />
@@ -91,7 +91,7 @@
                                         x:Name="PresentationType"
                                         ItemsSource="{StaticResource PresentationTypes}"
                                         SelectedIndex="0" />
-                                    <inxton:ObservableContentControl
+                                    <vortex:ObservableContentControl
                                         DataContext="{Binding SelectedItem, ElementName=DonCorleone}"
                                         Grid.IsSharedSizeScope="True"
                                         PresentationType="{Binding ElementName=PresentationType, Path=SelectedItem}" />

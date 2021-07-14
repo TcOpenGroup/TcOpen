@@ -1,3 +1,5 @@
+To be moved to the documentation
+
 # Colors
 
 When it comes to theming and colors of WPF applications, we rely on [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit).

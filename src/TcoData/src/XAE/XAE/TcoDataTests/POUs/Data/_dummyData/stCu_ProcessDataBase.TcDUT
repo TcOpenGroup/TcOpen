@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="stCu_ProcessDataBase" Id="{ebc464e8-8508-42d0-b7da-bb2633761b2c}">
+    <Declaration><![CDATA[
+TYPE stCu_ProcessDataBase :
+STRUCT
+	Header : stCu_Header;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

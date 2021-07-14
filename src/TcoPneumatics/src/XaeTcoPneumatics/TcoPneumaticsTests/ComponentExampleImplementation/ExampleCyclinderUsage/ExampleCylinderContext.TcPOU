@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ExampleCylinderContext" Id="{2523d206-5a7d-0210-0e34-213aff8e3a3d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ExampleCylinderContext EXTENDS TcoCore.TcoContext
+VAR
+	_exampleCylinder : ExampleCylinder(THIS^);
+	_atHome : BOOL;
+	_atWork : BOOL;
+	_toHome : BOOL;
+	_toWork : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{240f0aba-dc5e-088d-1673-096e9ab94893}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main
+
+VAR_INST
+	_state : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_exampleCylinder(
+	inoAtHomePos:= _atHome, 
+	inoAtWorkPos:= _atWork, 
+	inoToHomePos:= _toHome, 
+	inoToWorkPos:= _toWork);
+	
+	
+CASE _state OF
+	0:
+		IF(_exampleCylinder.MoveToHome().Done) THEN
+			_state := 10;
+		END_IF
+	10:
+		IF(_exampleCylinder.MoveToWork().Done) THEN
+			_state := 0;
+		END_IF
+END_CASE		]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -22,14 +22,14 @@ namespace TcoCore
                 var signal = (bool)value;
                 if (signal)
                 {
-                    return Application.Current.TryFindResource("SecondaryHueMidBrush") ?? Brushes.GreenYellow;
+                    return TcoCore.Wpf.TcoColors.Accent;
                 }
                 else
                 {
-                    return Application.Current.TryFindResource("PrimaryHueDarkBrush") ?? Brushes.DimGray;
+                    return TcoCore.Wpf.TcoColors.Primary;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Brushes.DarkGray;
             }

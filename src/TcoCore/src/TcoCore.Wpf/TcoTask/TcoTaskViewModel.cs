@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using Vortex.Presentation.Wpf;
 
 namespace TcoCore
 {
-
     public class TaskDetailsView : UserControl
     {
 
@@ -65,4 +61,6 @@ namespace TcoCore
         
         public RelayCommand OpenDetailsDialog { get; }
     }
+
+    public class TcoTaskProgressBarViewModel : TcoTaskViewModel { }
 }

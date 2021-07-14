@@ -9,11 +9,12 @@
     xmlns:inter="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d">
     <Grid>
-        <Button 
-            Background="{Binding TcoMomentaryTask._state.Cyclic,Converter={local:SignalToBrushConverter}}" 
+        <Button             
+            Background="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
+            Foreground="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"            
             Command="{Binding TcoMomentaryTask}"
             Content="{Binding Caption}">
-        <inter:Interaction.Triggers>
+            <inter:Interaction.Triggers>
                 <inter:EventTrigger EventName="PreviewMouseLeftButtonDown">
                     <inter:InvokeCommandAction Command="{Binding ButtonDown}"/>
                 </inter:EventTrigger>
@@ -22,12 +23,5 @@
                 </inter:EventTrigger>
             </inter:Interaction.Triggers>
         </Button>
-        <CheckBox 
-            Padding="10,0,10,0"
-            HorizontalAlignment="Right"
-            Background="{DynamicResource SecondaryHueLightBrush}" 
-            Foreground="{DynamicResource AttentionToActionBrush}" 
-            IsChecked="{Binding TcoMomentaryTask._state.Cyclic}">
-        </CheckBox>
     </Grid>
 </UserControl>

@@ -1,0 +1,313 @@
+﻿<UserControl
+    x:Class="TcOpen.Inxton.Local.Security.Wpf.AllUsersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+    xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
+    xmlns:security="clr-namespace:TcOpen.Inxton.Local.Security;assembly=TcOpen.Inxton.Local.Security"
+    xmlns:local="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
+    d:DesignHeight="900"
+    d:DesignWidth="1600"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:AllUsersViewModel />
+    </UserControl.DataContext>
+
+    <Grid
+        x:Name="RootGrid"
+        Width="Auto"
+        Height="Auto"
+        Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Margin="0,10,0,10"
+            Orientation="Horizontal">
+            <Label Content="Filter " />
+            <TextBox
+                Width="200"
+                Margin="10,0,0,0"
+                VerticalContentAlignment="Center"
+                Text="{Binding AllUsersFilterQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <DataGrid
+                    x:Name="UsersList"
+                    HorizontalAlignment="Stretch"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding AllUsersFiltered, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.InputBindings>
+                        <MouseBinding
+                            Command="{Binding StartEditUserCommand}"
+                            CommandParameter="{Binding ElementName=AllUsersGrid, Path=SelectedItem}"
+                            MouseAction="LeftDoubleClick" />
+                    </DataGrid.InputBindings>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Username}"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource OnBackground}"
+                            Header="{x:Static p:strings.Username}" />
+                        <DataGridCheckBoxColumn
+                            Width="Auto"
+                            Binding="{Binding CanUserChangePassword}"
+                            Header="{x:Static p:strings.CanChangePassword}" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding _Created}"
+                            Foreground="{DynamicResource OnBackground}"
+                            Header="{x:Static p:strings.Created}" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding _Modified}"
+                            Foreground="{DynamicResource OnBackground}"
+                            Header="{x:Static p:strings.Modified}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="15,15,15,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+
+                <Grid
+                    x:Name="UserInfoGrid"
+                    Grid.Row="0"
+                    Grid.IsSharedSizeScope="True">
+
+                    <Grid.Resources>
+                        <Style x:Key="test" TargetType="{x:Type TextBox}">
+                            <Setter Property="Margin" Value="4" />
+                        </Style>
+                    </Grid.Resources>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="FirstColumn" />
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.Username}" />
+
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        IsReadOnly="True"
+                        Text="{Binding ElementName=UsersList, Path=SelectedItem.Username}" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.Password}" />
+                    <PasswordBox
+                        x:Name="pb1"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        VerticalContentAlignment="Center"
+                        IsEnabled="{Binding Source={x:Static security:UserAccessor.Instance}, Path=Identity.CanUserChangePassword}" />
+
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.RepeatPassword}" />
+                    <PasswordBox
+                        x:Name="pb2"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        VerticalContentAlignment="Center"
+                        IsEnabled="{Binding Source={x:Static security:UserAccessor.Instance}, Path=Identity.CanUserChangePassword}" />
+
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.CanChangePassword}" />
+
+                    <ToggleButton
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="5,5,5,5"
+                        AutomationProperties.AutomationId="CanChangePassCheckBox"
+                        IsChecked="{Binding ElementName=UsersList, Path=SelectedItem.CanUserChangePassword, Mode=TwoWay}"
+                        IsEnabled="{Binding Source={x:Static security:UserAccessor.Instance}, Path=Identity.CanUserChangePassword}" />
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.Email}" />
+                    <TextBox
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding ElementName=UsersList, Path=SelectedItem.Email}" />
+                    <Label
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.Logout}" />
+                    <TextBox
+                        Grid.Row="5"
+                        Grid.Column="2"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding ElementName=UsersList, Path=SelectedItem.LogoutTime}" />
+
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.Group}" />
+                    <ComboBox
+                        x:Name="Groups"
+                        Grid.Row="6"
+                        Grid.Column="2"
+                        ItemsSource="{Binding AllGroups}" />
+                    <!--<Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Content="{x:Static p:strings.Level}" />
+                        <TextBox
+                            x:Name="Level"
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Text="{Binding ElementName=UsersList, Path=SelectedItem.Level}" />-->
+                    <Button
+                        Grid.Row="8"
+                        Grid.Column="2"
+                        Command="{Binding AddMultipleRolesCommand}"
+                        CommandParameter="{Binding ElementName=Groups, Path=SelectedItem}"
+                        Content="{x:Static p:strings.AddGroup}" />
+                </Grid>
+
+
+                <Grid Grid.Row="1" Margin="0,24,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Content="{x:Static p:strings.AssignedRoles}" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="{x:Static p:strings.AvailableRoles}" />
+                    <Border Grid.Row="2"
+                            Grid.Column="2"
+                            Padding="5"
+                            BorderThickness=".5"
+                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                    <ListBox
+                        x:Name="CurrentRoles"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        ItemsSource="{Binding SelectedItem.Roles, ElementName=UsersList}"
+                        SelectionMode="Extended">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding CurrentToAvailableRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=CurrentRoles}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
+                    </Border>
+                    <Border Grid.Row="2"
+                            Grid.Column="0"
+                            Padding="5"
+                            BorderThickness=".5"
+                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                        <ListBox
+                        x:Name="AvailibleRoles"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        ItemsSource="{Binding AllRolesFiltered}"
+                        SelectionMode="Extended"
+                        SizeChanged="AvailibleRoles_SizeChanged">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding AvailableToCurrentRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=AvailibleRoles}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </Border>
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="10,10,10,10"
+                        VerticalAlignment="Center">
+                        <Button
+                            Command="{Binding AddRoleCommand}"
+                            CommandParameter="{Binding ElementName=AvailibleRoles, Path=SelectedItems}"
+                            Content="→" />
+                        <Button
+                            Command="{Binding RemoveRoleCommand}"
+                            CommandParameter="{Binding ElementName=CurrentRoles, Path=SelectedItems}"
+                            Content="←" />
+                    </StackPanel>
+
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="15,25,15,15">
+                    <Button
+                        HorizontalAlignment="Left"
+                        Command="{Binding DeleteUserCommand}"
+                        Content="{x:Static p:strings.Delete}" />
+
+                    <Button
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        Command="{Binding StarEditUserCommand}"
+                        Content="{x:Static p:strings.Update}">
+                        <Button.CommandParameter>
+                            <local:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

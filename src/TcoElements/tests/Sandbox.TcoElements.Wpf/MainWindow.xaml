@@ -26,13 +26,19 @@
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="VariableTree">
             <ScrollViewer>
-                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+                <vortex:DynamicTreeView></vortex:DynamicTreeView>
             </ScrollViewer>
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.IO}" Header="IO">
             <ScrollViewer>
-                <inxton:DynamicTreeView></inxton:DynamicTreeView>
+                <vortex:DynamicTreeView></vortex:DynamicTreeView>
             </ScrollViewer>
         </TabItem>
+        <TabItem DataContext="{Binding TcoElementsTestsPlc}" Header="ComponentSpotView">
+            <Canvas>
+                <vortex:TcoComponentSpotView DataContext="{Binding MAIN._tcoElementsSandbox._di}" Canvas.Left="216" Canvas.Top="127"/>
+            </Canvas>
+        </TabItem>
+       
     </TabControl>
 </Window>

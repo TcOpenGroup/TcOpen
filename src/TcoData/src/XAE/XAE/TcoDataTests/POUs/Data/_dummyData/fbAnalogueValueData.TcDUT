@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <DUT Name="fbAnalogueValueData" Id="{0104665c-ddc2-4a4f-9493-a7a2f941dd80}">
+    <Declaration><![CDATA[TYPE fbAnalogueValueData :
+STRUCT
+	ProcessedData : stAnalogueProcessData;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

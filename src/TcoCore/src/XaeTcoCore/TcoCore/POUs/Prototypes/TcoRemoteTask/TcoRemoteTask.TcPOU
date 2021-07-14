@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoRemoteTask" Id="{0cdb9edc-969a-000b-3e20-af88ba0b1e77}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Remote tasks delegates its execution to C#. 
+			When this task is invoked a C# method will be called. To initiliaze <code>RemoteTask</code> with C# method use the <code>Initiliaze</code> or <code>InitializeExclusively</code> method. 
+			<code>
+			        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
+					{
+						_remoteTaskInstance.InitializeExclusively(Create);  			
+						//_remoteTaskInstance.Initialize(Create);           
+					}
+
+					private bool Create()
+					{
+						//your code.
+						return true;
+					}
+			</code>
+		</summary>		
+		<remarks>Inxton is required for this feature to work</remarks>			
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoRemoteTask EXTENDS TcoTask 
+VAR
+	{attribute clr [RenderIgnore()]}
+	_isInitialized : BOOL;	
+	{attribute clr [RenderIgnore()]}
+	_hasException : BOOL;	
+	{attribute clr [RenderIgnore()]}
+	_startSignature : STRING;	
+	{attribute clr [RenderIgnore()]}
+	_doneSignarure : STRING;
+	{attribute clr [RenderIgnore()]}
+	_exceptionMessage : STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN
+    IF (_invokeRequest) THEN
+        IF (NOT THIS^._isInitialized) THEN
+            Messenger.Programming('Remote call not initialized.');
+        END_IF;
+    END_IF
+	
+    IF (THIS^._hasException OR THIS^._exceptionMessage <> '') THEN
+        Messenger.Error('Remote execution produced an exception');
+        _startSignature := '';
+		ThrowWhen(TRUE);
+    END_IF;
+
+    DoneWhen(_startSignature <> '' AND_THEN _startSignature = _doneSignarure);
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{1a44b54a-1c12-0ff2-33c6-1d29da8e202f}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{2f23f300-6ca2-0121-34ff-d733f0ca0af9}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_startSignature := LINT_TO_STRING(THIS^.Context.Rtc.TickClock());
+_doneSignarure := '';	
+_hasException := FALSE;
+_exceptionMessage := '';]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{e77ab1f3-c0bd-005d-05c5-e4c8999021dd}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_startSignature := '';
+_doneSignarure := '';	
+_hasException := FALSE;
+_exceptionMessage := '';
+Restore := SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

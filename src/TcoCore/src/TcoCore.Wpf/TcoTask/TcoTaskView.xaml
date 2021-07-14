@@ -15,12 +15,11 @@
         <local:TcoTaskViewModel />
     </d:UserControl.DataContext>
     <Grid>
-        <Button
-            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-            materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToBoolConverter}}"
-            materialDesign:ButtonProgressAssist.Value="-1"
+        <Button                                    
             Command="{Binding TcoTask}"
             Content="{Binding TcoTask, Converter={local:NameOrSymbolConverter}}"
+            Background="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
+            Foreground="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
             Style="{StaticResource MaterialDesignRaisedButton}" />
         <Button
             Padding="10,0,10,0"
@@ -35,8 +34,8 @@
             Padding="10,0,10,0"
             HorizontalAlignment="Right"
             Background="Transparent"
-            Command="{Binding TcoTask.Restore}"
-            Foreground="{DynamicResource Error}"
+            Command="{Binding TcoTask.Restore}"            
+            Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
             Style="{StaticResource MaterialDesignToolButton}"
             Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}">
             <materialDesign:PackIcon Padding="14" Kind="Error" />

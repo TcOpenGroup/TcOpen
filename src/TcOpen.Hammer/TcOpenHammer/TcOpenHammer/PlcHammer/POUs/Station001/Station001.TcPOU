@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Station001" Id="{3d3ca50a-cd66-4945-a21d-285298b2ba20}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoObject 
+VAR
+	_components : Station001_Components(THIS^);
+	
+	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None);
+	_automatMode : Station001_AutomatMode(THIS^, eRestoreMode.None);
+	_swiftSequence   : Station001_Swift(THIS^, eRestoreMode.None);
+	
+	_groundModeTask : TcoCore.TcoTask(THIS^);
+	_automatModeTask : TcoCore.TcoTask(THIS^);
+	_serviceModeTask : TcoCore.TcoTask(THIS^);
+	_swiftModeTask : TcoCore.TcoTask(THIS^);
+	
+	_processRecipies : ProcessDataManager(THIS^); 
+    _processTraceabilty : ProcessDataManager(THIS^);
+	_technologicalDataManager : TechnologicalDataManager(THIS^);
+	
+	_checkers : Checkers(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_components();
+_processRecipies();
+_processTraceabilty();
+_technologicalDataManager();
+
+ServiceMode();
+GroundMode();
+AutomatMode();
+
+
+IF(_swiftModeTask.Execute()) THEN
+	Messenger.Trace('Service mode active');	
+	_automatModeTask.Restore();
+	_groundModeTask.Restore();
+	_groundMode.Restore();
+	_automatMode.Restore();
+	_serviceModeTask.Restore();
+	_swiftSequence.Run();
+END_IF
+
+
+
+
+]]></ST>
+    </Implementation>
+    <Method Name="AutomatMode" Id="{06ac0ea5-9bba-426c-9f50-97641acc5f1f}">
+      <Declaration><![CDATA[METHOD AutomatMode : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_automatModeTask.Enabled := _groundModeTask.Done;
+
+IF(_automatModeTask.Execute()) THEN
+	Messenger.Trace('Automat mode active');
+	_serviceModeTask.Abort();
+	_automatMode.Run();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Checkers" Id="{9cd1367e-8bb5-450c-807d-957b9f194b6b}">
+      <Declaration><![CDATA[PROPERTY Checkers : REFERENCE TO Checkers]]></Declaration>
+      <Get Name="Get" Id="{92f1b29e-36ad-4210-8aba-8d49ce2d0eba}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Checkers REF= _checkers;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Components" Id="{9262f3ea-0398-44d7-8cae-cfc2e667ba08}">
+      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO Station001_Components]]></Declaration>
+      <Get Name="Get" Id="{dacd1503-9951-4498-890f-66fd2c5babde}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Components REF= _components;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="GroundMode" Id="{d9df9b20-93b2-469b-9293-a125a7afb90b}">
+      <Declaration><![CDATA[METHOD GroundMode : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_groundModeTask.Execute()) THEN
+	Messenger.Trace('Ground position mode active');
+	_serviceModeTask.Restore();
+	_automatModeTask.Restore();
+	_automatMode.Restore();
+	_groundMode.Run();
+	_groundModeTask.DoneWhen(_groundMode.CurrentStep.ID = 300);
+	IF _groundModeTask.Done THEN
+		_groundMode.Restore();
+	END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ProcessRecepie" Id="{b1b59222-8dec-42af-9785-f7a41fdb1f30}">
+      <Declaration><![CDATA[PROPERTY ProcessRecepie : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{7693ce53-8625-4a27-a0d9-a13a48b1061c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessRecepie REF= _processRecipies;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProcessTraceabilty" Id="{53bc7e1b-e1d9-4700-b7ae-13b971dd1d3f}">
+      <Declaration><![CDATA[PROPERTY ProcessTraceabilty : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{f0b6082c-910f-4dff-a364-02438a23363f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessTraceabilty REF= _processTraceabilty;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProductionData" Id="{fe3a70b9-7cb2-4332-97ec-d5340b743354}">
+      <Declaration><![CDATA[PROPERTY  ProductionData : REFERENCE TO Station001_ProductionData]]></Declaration>
+      <Get Name="Get" Id="{bea63141-a4c5-4e30-9707-f7de4dfe42cd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProductionData REF= _processTraceabilty._data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ServiceMode" Id="{249d59c0-627f-4b64-aec6-5c46efb6257a}">
+      <Declaration><![CDATA[METHOD ServiceMode
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_serviceModeTask.Execute()) THEN
+	Messenger.Trace('Service mode active');	
+	_automatModeTask.Restore();
+	_groundModeTask.Restore();
+	_groundMode.Restore();
+	_automatMode.Restore();
+	_components.Service();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TechnologicalDataManager" Id="{4fd8d00a-71e1-4167-bc5c-91bc32c791d7}">
+      <Declaration><![CDATA[PROPERTY TechnologicalDataManager : REFERENCE TO TechnologicalDataManager]]></Declaration>
+      <Get Name="Get" Id="{2a909450-f811-4a6b-9ceb-c37e0584a44f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TechnologicalDataManager REF= _technologicalDataManager;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

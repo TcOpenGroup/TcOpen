@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoMovementState" Id="{fe05651e-8f70-05e7-3b64-71583ea17527}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL TcoMovementState EXTENDS TcoCore.TcoState
+VAR
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcReset : Tc2_MC2.MC_Reset;
+    {attribute 'hide'}
+	_currentControlledTaskIdentity	: ULINT;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="DriveRef" Id="{2bffaa48-e8aa-0c62-120c-4ef8a20c30f0}">
+      <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{5047405b-ea40-07c9-2b77-9c1293f8d381}">
+        <Declaration><![CDATA[VAR
+    _drive : ITcoDriveSimple := 0;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
+    DriveRef REF= _drive.DriveRef;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{94e2c735-80a8-0de7-3fa7-aaee07c2fe93}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+	AutoRestoreMode : eRestoreMode; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(	bInitRetains := bInitRetains,
+	bInCopyCode := bInCopyCode,
+	Parent := Parent,
+	AutoRestoreMode := AutoRestoreMode);
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="JogPreconditionsOk" Id="{7fb28e91-9ebc-0e39-060d-16432987ee30}">
+      <Declaration><![CDATA[METHOD JogPreconditionsOk : BOOL
+VAR_INPUT
+	inObject  : TcoCore.ITcoMomentaryTask;
+	inParamsOK	: BOOL;
+END_VAR
+VAR
+	_controlledTask : TcoCore.ITcoMomentaryTask;
+	_controlledTaskIdentity : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[JogPreconditionsOk := FALSE;
+
+IF __QUERYINTERFACE(inObject, _controlledTask) THEN
+    _controlledTaskIdentity := _controlledTask.Identity;
+ELSE
+    RETURN;
+END_IF
+
+IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.WaitingForMovementTask THEN
+    _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+
+    IF _currentControlledTaskIdentity = 0 AND _controlledTaskIdentity <> 0 THEN
+        _currentControlledTaskIdentity := _controlledTaskIdentity;
+
+        IF THIS^.DriveRef._axisStatus.Error THEN
+            THIS^.ChangeState(eTcoMovementState.Reset);
+        ELSE
+            THIS^.ChangeState(eTcoMovementState.Power);
+        END_IF
+    END_IF
+END_IF
+
+IF _currentControlledTaskIdentity = 0 OR _currentControlledTaskIdentity <> _controlledTaskIdentity THEN
+    RETURN;
+END_IF
+IF THIS^.State = eTcoMovementState.Reset THEN
+   _mcReset(Axis := DriveRef.AxisRef, Execute := TRUE);
+
+    IF _mcReset.Done THEN
+        _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+		DriveRef.ClearError();
+		DriveRef.RestoreTasks();
+        _currentControlledTaskIdentity := _controlledTaskIdentity;
+        THIS^.ChangeState(eTcoMovementState.Power);
+    ELSIF _mcReset.Error THEN
+        _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+        THIS^.ChangeState(eTcoMovementState.Error);
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.Power THEN
+    IF NOT DriveRef._axisStatus.Disabled AND DriveRef._axisStatus.Operational THEN
+        THIS^.ChangeState(eTcoMovementState.ParametersCheck);
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.ParametersCheck THEN
+    IF inParamsOK THEN
+        THIS^.ChangeState(eTcoMovementState.Movement);
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.Movement THEN
+    JogPreconditionsOk := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MovePreconditionsOk" Id="{5defd131-3ba1-05ff-1cdb-5fda1e9df77d}">
+      <Declaration><![CDATA[METHOD MovePreconditionsOk : BOOL
+VAR_INPUT
+	inObject  : TcoCore.ITcoTask;
+	inParamsOK	: BOOL;
+END_VAR
+VAR
+	_controlledTask : TcoCore.ITcoTask;
+	_controlledTaskIdentity : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MovePreconditionsOk := FALSE;
+
+IF __QUERYINTERFACE(inObject, _controlledTask) THEN
+    _controlledTaskIdentity := _controlledTask.Identity;
+ELSE
+    RETURN;
+END_IF
+
+IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.WaitingForMovementTask THEN
+    _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+
+    IF _currentControlledTaskIdentity = 0 AND _controlledTaskIdentity <> 0 THEN
+        _currentControlledTaskIdentity := _controlledTaskIdentity;
+
+        IF THIS^.DriveRef._axisStatus.Error THEN
+            THIS^.ChangeState(eTcoMovementState.Reset);
+        ELSE
+            THIS^.ChangeState(eTcoMovementState.Power);
+        END_IF
+    END_IF
+END_IF
+
+IF _currentControlledTaskIdentity = 0 OR _currentControlledTaskIdentity <> _controlledTaskIdentity THEN
+    RETURN;
+END_IF
+
+IF THIS^.State = eTcoMovementState.Reset THEN
+    _mcReset(Axis := DriveRef.AxisRef, Execute := TRUE);
+
+    IF _mcReset.Done THEN
+        _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+		DriveRef.ClearError();
+        DriveRef.RestoreTasks();
+        _currentControlledTaskIdentity := _controlledTaskIdentity;
+        THIS^.ChangeState(eTcoMovementState.Power);
+        inObject.Invoke();
+    ELSIF _mcReset.Error THEN
+        _mcReset(Axis := DriveRef.AxisRef, Execute := FALSE);
+        THIS^.ChangeState(eTcoMovementState.Error);
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.Power THEN
+    IF NOT DriveRef._axisStatus.Disabled AND DriveRef._axisStatus.Operational THEN
+        THIS^.ChangeState(eTcoMovementState.ParametersCheck);
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.ParametersCheck THEN
+    IF inParamsOK THEN
+        THIS^.ChangeState(eTcoMovementState.Movement);
+    END_IF
+END_IF
+
+IF THIS^.State = eTcoMovementState.Movement THEN
+    MovePreconditionsOk := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{b16224e3-7cfc-04e8-05ef-b14b42febebd}">
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_currentControlledTaskIdentity := 0;
+ChangeState(eTcoMovementState.WaitingForMovementTask);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

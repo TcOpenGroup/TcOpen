@@ -59,5 +59,41 @@ namespace TcoCoreExamplesConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        public static string ___Disabled__ {
+            get {
+                return ResourceManager.GetString("___Disabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ___Enabled__ {
+            get {
+                return ResourceManager.GetString("___Enabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running.
+        /// </summary>
+        public static string ___Running__ {
+            get {
+                return ResourceManager.GetString("___Running__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        public static string ___Stopped__ {
+            get {
+                return ResourceManager.GetString("___Stopped__", resourceCulture);
+            }
+        }
     }
 }

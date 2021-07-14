@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="Station001_TechnologicalSettings" Id="{6bc24dac-e101-4fa6-949c-68eefa593d84}">
+    <Declaration><![CDATA[TYPE Station001_TechnologicalSettings EXTENDS TcoData.Entity :
+STRUCT	
+	LoadPartsHorizontalPosition : LREAL;
+	PassedPartsHorizontalPosition : LREAL;
+	FailedPartsHorizontalPosition : LREAL;
+	AxisSpeed : LREAL;
+	AxisAcc : LREAL;
+	AxisDcc : LREAL;
+	AxisJerk : LREAL;
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

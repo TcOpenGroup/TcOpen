@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TcOpen.Inxton.Abstractions.Logging;
 using TcOpen.Inxton.Logging;
+using TcOpen.Inxton.Logging;
+using TcOpen.Inxton.Threading;
 
 namespace TcOpen.Inxton
 {
@@ -48,9 +49,15 @@ namespace TcOpen.Inxton
         }
 
         /// <summary>
-        /// Get logger for this application.
+        /// Gets logger for this application.
         /// </summary>
-        public ITcoLogger Logger { get; internal set; } = new DummyLogger();
+        public ITcoLogger Logger { get; internal set; } = new DummyLoggerAdapter();
+
+        /// <summary>
+        /// Gets dispatcher for this application.
+        /// </summary>
+        public IDispatcher Dispatcher { get { return Threading.Dispatcher.Get; } } 
+
 
         /// <summary>
         /// Gets application builder.

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="TestDataContext" Id="{84826b8f-78be-0c2b-210a-e7483d252490}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TestDataContext EXTENDS TcoCore._internals_TcoContext
+VAR
+    DataTests : TcoDataExchangeTests(THIS^);
+    _identifier : STRING;
+    _restoreTasksDone : BOOL;
+    _createDataDone : BOOL;
+    _updateDataDone : BOOL;
+    _readDataDone : BOOL;
+    _deleteDataDone : BOOL;
+    _updateDataWithoutChangeDone : BOOL;
+    _updateDataWithInvalidIdDone : BOOL;
+    _readDataWithInvlaidIdDone : BOOL;
+    _deleteDataWithInvalidIdDone : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{c8c0d6f7-8f71-0914-2bc1-ff8ad683a2f4}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+VAR_INST
+    RunCreate : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[DataTests();
+
+CASE THIS^._testId OF
+	eDataTests.RestoreTasks :
+		DataTests.DataManager._createTask.Restore();
+		DataTests.DataManager._readTask.Restore();
+		DataTests.DataManager._updateTask.Restore();
+		DataTests.DataManager._deleteTask.Restore();
+    eDataTests.CreateData:
+        _createDataDone := DataTests.Create(_identifier);
+    eDataTests.UpdateData:
+        _updateDataDone := DataTests.Update(_identifier);
+    eDataTests.ReadData:
+        _readDataDone := DataTests.Read(_identifier);
+    eDataTests.DeleteData:
+        _deleteDataDone := DataTests.Delete(_identifier);
+    eDataTests.UpdateDataWithoutChange:
+        _updateDataWithoutChangeDone := DataTests.UpdateDataWithoutChange(_identifier);
+    eDataTests.UpdateDataWithInvalidId:
+        _updateDataWithInvalidIdDone := DataTests.UpdateDataWithInvalidId();
+    eDataTests.ReadDataWithInvlaidId:
+        _readDataWithInvlaidIdDone := DataTests.ReadDataWithInvlaidId();
+    eDataTests.DeleteDataWithInvalidId:
+        _deleteDataWithInvalidIdDone := DataTests.DeleteDataWithInvalidId();
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

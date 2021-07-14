@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -12,10 +12,17 @@
     <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
     <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.11.3-alpha.487" />   
+    <Compile Remove="Threading\**" />
+    <EmbeddedResource Remove="Threading\**" />
+    <None Remove="Threading\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.12.0-nightly.517" />   
   </ItemGroup>
 
   <ItemGroup>

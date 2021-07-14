@@ -23,21 +23,7 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF THIS^.Ready OR THIS^.Done THEN
-    _mcStop(Axis := _axisRef, Execute := FALSE);
-END_IF
-
-IF THIS^.State = TcoCore.eTaskState.Requested THEN
-    //In case of error, drive  is reseted first.
-    IF THIS^.DriveRef._axisRef.Status.Error THEN
-        THIS^.DriveRef.Reset();
-        RETURN;
-        // When drive input is enabled, but MC_Power.Status has not yet reached value true, this condition postpone execution 
-        //to ensure that movement is not triggered before drive is powered up. 
-    ELSIF THIS^.DriveRef.inEnable AND NOT THIS^.DriveRef._axisStatus.Operational THEN
-        RETURN;
-    END_IF
-END_IF
+_mcStop(Axis := _axisRef, Execute := FALSE);
 
 IF Execute() THEN
     _mcStop(Axis := _axisRef,
@@ -98,20 +84,65 @@ _jerk := inJerk;
 InvokeWithParams := THIS^.Invoke();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnTaskError" Id="{1652617e-0e81-0ba5-3d31-1306f4740188}">
+    <Method Name="OnAbort" Id="{d0a3dc6b-4c8e-0987-3c36-af549dd26d91}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Executes until task is in ```Error``` state .
+			Executes when task is aborted.
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED OnTaskError
+METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+_mcStop(Axis := _axisRef, Execute := FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{c874e640-3d05-0ded-2097-a893b01f1d3e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+_mcStop(Axis := _axisRef, Execute := FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{87de4dba-aa3a-0989-326a-6ca96ac7d7da}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
 	DriveRef.SetErrorID(DriveRef._stopTask._mcStop.ErrorID);
-END_IF]]></ST>
+END_IF
+
+_mcStop(Axis := _axisRef, Execute := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{4d323d3b-ad15-0e24-365a-5a28c20ce63e}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcStop(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{60f9bd15-fddc-0be4-0113-68a2b17125e1}">
@@ -128,6 +159,23 @@ END_IF]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{1652617e-0e81-0ba5-3d31-1306f4740188}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes until task is in ```Error``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+	DriveRef.SetErrorID(DriveRef._stopTask._mcStop.ErrorID);
+    _mcStop(Axis := _axisRef, Execute := FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

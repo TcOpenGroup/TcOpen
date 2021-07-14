@@ -16,13 +16,11 @@ namespace TcoCore.Sandbox.Wpf
     public partial class App : Application
     {
         public App() : base()
-        {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder                
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                                            .WriteTo.Console()));
-                    
+        {            
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
-            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             PlcTcoCoreExamples.Connector.BuildAndStart();
         }
 

@@ -14,49 +14,49 @@ namespace TcOpen.Inxton.Logging.Tests
         [Test()]
         public void DummyLoggerTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             Assert.IsNotNull(actual);
         }
 
         [Test()]
         public void DebugTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             actual.Debug<object>("Debug message");
         }
 
         [Test()]
         public void ErrorTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             actual.Error<object>("Error message");
         }
 
         [Test()]
         public void FatalTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             actual.Fatal<object>("Fatal message");
         }
 
         [Test()]
         public void InformationTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             actual.Information<object>("Information message");
         }
 
         [Test()]
         public void VerboseTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             actual.Verbose<object>("Verbose message");
         }
 
         [Test()]
         public void WarningTest()
         {
-            var actual = new DummyLogger();
+            var actual = new DummyLoggerAdapter();
             actual.Warning<object>("Warning message");
         }
     }

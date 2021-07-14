@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eCheckResult" Id="{7531f9dc-26cd-4c0e-a6f8-2481f0149d69}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eCheckResult :
+(
+	None   := 0,
+	Passed := 10,
+	Failed := 20
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

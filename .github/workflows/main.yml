@@ -25,4 +25,10 @@ jobs:
       # Run psake
       - name: Run a multi-line script
         run: |
-          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "isTestingEnabled" = $true;}
+          .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "testingStrength" = 1; "isTestingEnabled" = $true; "packNugets" = $false;}
+      - name: Upload test results
+        uses: actions/upload-artifact@v2 
+        if: success() || failure() 
+        with:
+          name: test-results
+          path: ${{ github.workspace }}\**\TestResults\*.xml

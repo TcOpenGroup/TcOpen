@@ -7,54 +7,66 @@
     using System.Threading.Tasks;
     using System.Windows;
     using TcoCore;
+    using TcOpen.Inxton;
+    using TcOpen.Inxton.Input;
     using Vortex.Connector;
-    using Vortex.Presentation.Wpf;
-    
+   
 
-    public class TcoDiagnosticsViewModel : RenderableViewModel
+    public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
-
         PlainTcoMessage selectedMessage;
     
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);            
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
-
 
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
-             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), e => !this.AutoUpdate && !this.DiagnosticsRunning);
+             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
       
-
         protected IsTcoObject _tcoObject { get; set; }
-
-        public IEnumerable<string> PresentationTypes { get; } 
-            = new List<string>() { "Diagnostic", "Manual", "Base", "Display", "Control" };
-
-
-
+      
         private volatile object updatemutex = new object();
 
-        private async void UpdateMessages()
-        {           
-            DiagnosticsRunning = true;
-            await Task.Run(() =>
+        /// <summary>
+        /// Updates messages of diagnostics view.
+        /// </summary>
+        internal void UpdateMessages()
+        {   
+            if(DiagnosticsRunning)
             {
-                MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                                         .OrderByDescending(p => p.Category)
-                                         .OrderBy(p => p.TimeStamp);               
-            });
-            DiagnosticsRunning = false;
+                return;
+            }
+
+            lock(updatemutex)
+            {
+                DiagnosticsRunning = true;
+                                    
+                Task.Run(() =>
+                {
+                    MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                                             .OrderByDescending(p => p.Category)
+                                             .OrderBy(p => p.TimeStamp);
+
+                
+                }).Wait();
+
+                DiagnosticsRunning = false;
+            }            
         }
 
         bool diagnosticsRunning;
+
+        /// <summary>
+        /// Gets or sets whether the diagnostic loop in running.
+        /// </summary>
         public bool DiagnosticsRunning
         {
             get => diagnosticsRunning; 
-            set
+            internal set
             {
                 if (diagnosticsRunning == value)
                 {
@@ -64,49 +76,11 @@
                 SetProperty(ref diagnosticsRunning, value);
             }
         }
-
-        string affectedObjectPresentationType;
-        public string AffectedObjectPresentationType
-        {
-            get
-            {
-                return affectedObjectPresentationType;
-            }
-            set
-            {
-                if (affectedObjectPresentationType == value)
-                {
-                    return;
-                }
-
-                SetProperty(ref affectedObjectPresentationType, value);
-                this.OnPropertyChanged(nameof(AffectedObject));
-            }
-        }
-
-        /// <summary>
-        /// Gets <see cref="SelectedMessage"/>'s object that produced the message.
-        /// </summary>
-        public object AffectedObject
-        {
-            get
-            {
-                if (SelectedMessage != null)
-                {
-                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
-                    
-                    if (affectedObject != null && affectedObjectPresentationType != null)
-                    {                       
-                        return Renderer.Get.CreatePresentation(affectedObjectPresentationType, (IVortexObject)affectedObject);
-                    }
-                }
-
-                return null;
-            }
-        }
-       
-
+            
         bool autoUpdate;
+        /// <summary>
+        /// Gets or sets whether the diagnostics view should auto refresh.
+        /// </summary>
         public bool AutoUpdate
         {
             get
@@ -123,9 +97,7 @@
                 SetProperty(ref autoUpdate, value);
             }
         }
-
       
-
         /// <summary>
         /// Gets list of available standard message categories.
         /// </summary>
@@ -157,11 +129,14 @@
 
         }
 
+        /// <summary>
+        /// Gets or sets the minimal category that will appear in the diagnostics view.
+        /// </summary>
         public eMessageCategory MinMessageCategoryFilter
         {
             get;
             set;
-        } = eMessageCategory.Notification;
+        } = eMessageCategory.Info;
 
         
         /// <summary>
@@ -186,14 +161,57 @@
                 }
 
                 SetProperty(ref selectedMessage, clone);
-
-                this.OnPropertyChanged(nameof(AffectedObject));
+                this.OnPropertyChanged(nameof(AffectedObjectPresentation));
             }
         }
-
-        public RelayCommand UpdateAffectedObjectsMessagesCommand { get; private set; }
-
+       
+        /// <summary>
+        /// Gets the command that executes update of messages on demand.
+        /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
+        
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
+
+
+        private ulong lastSelectedMessageIdentity = 0;
+        private object affectedObjectPresenation = null;
+        public object AffectedObjectPresentation
+        {
+            get
+            {
+                if (this.SelectedMessage == null)
+                    return null;
+
+                if(this.SelectedMessage.Identity == lastSelectedMessageIdentity)
+                {
+                    return affectedObjectPresenation;
+                }
+                
+                if (SelectedMessage != null)
+                {
+                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
+
+                    if (affectedObject != null)
+                    {
+                        try
+                        {
+                            TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+                            {
+                                affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
+                            });
+                            
+                        }
+                        catch (Exception)
+                        {
+
+                            //throw;
+                        }
+                    }
+                }
+
+                lastSelectedMessageIdentity = this.SelectedMessage.Identity;
+                return affectedObjectPresenation;
+            }
+        }
     }
 }

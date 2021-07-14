@@ -1,0 +1,75 @@
+<Window
+    x:Class="Sandbox.IntegrationProjects.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Sandbox.IntegrationProjects.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+    xmlns:vortex="http://vortex.mts/xaml"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d"
+    Title="MainWindow">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <TabControl>
+        <TabItem></TabItem>
+        <TabItem Header="ST-001">
+            <Grid Grid.Row="0" DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.Resources>
+                        <Style TargetType="vortex:RenderableContentControl">
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid Visibility="{Binding _technology._ST001._groundSequenceTask._taskState.Cyclic, Converter={local:TaskBusyToVisibleConverter}}">
+                        <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundPositionSequence, Mode=OneWay}" PresentationType="Base"/>
+                    </Grid>
+                    <Grid Visibility="{Binding _technology._ST001._automatSequenceTask._taskState.Cyclic, Converter={local:TaskBusyToVisibleConverter}}">
+                        <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatPositionSequence, Mode=OneWay}" PresentationType="Base"/>
+                    </Grid>
+                </Grid>
+                <vortex:RenderableContentControl Margin="10" Grid.Row="1" DataContext="{Binding _technology._ST001._components, Mode=OneWay}" PresentationType="Service" />
+                <UniformGrid Grid.Row="2" Rows="1" Columns="3" Margin="10">
+                    <UniformGrid.Resources>
+                        <Style TargetType="vortex:RenderableContentControl">
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._serviceModeTask, Mode=OneWay}" PresentationType="Base"/>
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._groundSequenceTask, Mode=OneWay}" PresentationType="Base" />
+                    <vortex:RenderableContentControl DataContext="{Binding _technology._ST001._automatSequenceTask, Mode=OneWay}" PresentationType="Base" />
+                </UniformGrid>
+                <vortex:RenderableContentControl Margin="10" Grid.Row="3" DataContext="{Binding _technology._ST001, Mode=OneWay}" PresentationType="Diagnostics" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="Data">
+            <TabControl>
+            <TabItem Header="Traceability">
+                <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._repository, Mode=OneWay}" PresentationType="Base">
+                    <vortex:RenderableContentControl.RootContainer>
+                        <Grid/>
+                    </vortex:RenderableContentControl.RootContainer>
+                </vortex:RenderableContentControl>
+            </TabItem>
+            <TabItem Header="Settings">
+                <vortex:RenderableContentControl DataContext="{Binding IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._settings, Mode=OneWay}" PresentationType="Base">
+                    <vortex:RenderableContentControl.RootContainer>
+                        <Grid/>
+                    </vortex:RenderableContentControl.RootContainer>
+                </vortex:RenderableContentControl>
+            </TabItem>
+        </TabControl>
+        </TabItem>
+        <TabItem Header="Swift">
+            <vortex:SwiftRecorderView DataContext="{Binding SwiftRecordVm}"></vortex:SwiftRecorderView>
+        </TabItem>
+    </TabControl>
+</Window>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Station001_GroundMode" Id="{ddca2260-f9c2-4299-8533-20a2051ac348}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_GroundMode EXTENDS TcoCore.TcoSequencer]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{67136693-3d1b-467a-9ae3-e25b070a14a4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main : BOOL
+VAR CONSTANT
+	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 0.0;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Step(10, TRUE, 'RESTORE ALL COMPONENTS')) THEN
+    //--------------------------------------------
+	Station.Components._horizontalNcAxis.Restore();
+	Station.Components._verticalPiston.Restore();
+	Station.Components._gripperPiston.Restore();
+    StepCompleteWhen(TRUE);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(125, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(150, NOT Station.Components.HorizontalNcAxis.DriveRef._axisStatus.Homed, 'HORIZONTAL AXIS HOMING')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.Home(inPosition := 0,
+            inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
+            inClearPositionLag := FALSE,
+            inSearchDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+            inSearchVelocity := 100.0,
+            inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+            inSyncVelocity := 100.0,
+            inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT).Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(200, TRUE, 'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
+    //--------------------------------------------
+    IF (Station.Components.HorizontalNcAxis.DriveRef.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION,
+        THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+        THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+        THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+        THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done AND
+        Station.Components.Gripper.MoveToHome().Done) THEN
+        CompleteStep();
+    END_IF;
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(300, TRUE, 'GROUND POSITION DONE')) THEN
+    //--------------------------------------------
+    ;
+    //--------------------------------------------	
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStepCompleted" Id="{d16ba766-6001-41f1-bdf6-d326104c66f1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is executed upon step completion.
+			This method can be overridden in derived block by custom logic.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStepCompleted
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Station" Id="{89eeafda-6cbb-488f-8576-1ca184a3ae1c}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO Station001]]></Declaration>
+      <Get Name="Get" Id="{258f5e6e-3314-4c09-bae5-59b971cf8630}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO Station001;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(_Parent,_station) THEN // Check if _Parent is Station001
+	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>0.4.1.375</ProjectVersion>
+    <ProjectVersion>0.4.2.535</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
@@ -159,6 +159,9 @@
     <Compile Include="POUs\Prototypes\TcoObject\TcoObject.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoRemoteTask\TcoRemoteTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoRestorable\ITcoObjectRestorer.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -268,6 +271,7 @@
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Enrichers" />
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\UserExtensions" />
     <Folder Include="POUs\Prototypes\TcoMessage\TcoLogger\Sinks" />
+    <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
     <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />

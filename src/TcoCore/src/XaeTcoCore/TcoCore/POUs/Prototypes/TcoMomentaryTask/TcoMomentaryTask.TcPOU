@@ -39,6 +39,21 @@ VAR
 	_enabled : BOOL := TRUE;
 	{attribute 'hide'}
 	_StartCycleCount	:	ULINT;
+	
+	(*~
+	<docu>
+		<summary>
+			Indicated whether the task is in serviceable state. The default state 'serviceable' that means that the task
+			can be invoked from the higher-level application. The serviceable state is cancelled when the immediate parent is `ITcoServiceable`
+			and at the same time the parent is not in servicebable state. `TcoComponent` is serviceable, in order for the component's task to be 
+			invokable from higher-level application component must call `Service` method to induce the component into serviceable state.					
+		</summary>		
+	</docu>	
+	~*)	
+	{attribute addProperty Name "<#Serviceable#>"}
+	{attribute clr [ReadOnly()]}
+	{attribute clr [RenderIgnore()]}
+	_isServiceable : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -144,7 +159,7 @@ PROPERTY Identity : ULINT]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
-METHOD Off : BOOL
+METHOD FINAL Off : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Off := FALSE;
@@ -171,7 +186,7 @@ END_IF;
 		</summary>			
 	</docu>	
 ~*)
-METHOD On : BOOL
+METHOD FINAL On : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[On := FALSE;
@@ -255,9 +270,11 @@ _StartCycleCount := THIS^.Context.StartCycleCount;
 
 // Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
 IF(THIS^._Parent <> 0 )THEN
+	_isServiceable := TRUE;
 	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._setOnRequest := FALSE;
+			_isServiceable := FALSE;
 		END_IF
 	END_IF
 END_IF;

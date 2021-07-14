@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace TcoCore
 {
@@ -24,85 +25,44 @@ namespace TcoCore
     {
         public TcoDiagnosticsView()
         {            
-            InitializeComponent();           
-        }        
-    }
+            InitializeComponent();
+            this.DiagnosticsUpdateTimer();
+        }
 
-    public class EnumToItemsSourceConverter : MarkupExtension, IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private System.Timers.Timer messageUpdateTimer;
+        private void DiagnosticsUpdateTimer()
         {
-            if (value is Enum)
+            if (messageUpdateTimer == null)
             {
-                return Enum.GetValues(value.GetType());
-            }
-
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {            
-            return null;
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-    }
-
-    public class VisibilityToBoolConverter : MarkupExtension, IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Visibility.Hidden;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var visibility = (Visibility)value;
-
-            switch (visibility)
-            {
-                case Visibility.Visible:
-                    return true;
-                case Visibility.Hidden:                    
-                case Visibility.Collapsed:
-                    return false;                
-            }
-
-            return false;
-
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-    }
-
-    public class BoolToVisibilityConverter : MarkupExtension, IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            try
-            {
-                return (bool)value ? Visibility.Visible : Visibility.Collapsed;
-            }
-            catch (Exception)
-            {
-                return false;
+                messageUpdateTimer = new System.Timers.Timer(2500);
+                messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
+                messageUpdateTimer.AutoReset = true;
+                messageUpdateTimer.Enabled = true;
             }
         }
+        private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {           
+            var inSight = false;
+            TcoDiagnosticsViewModel MessageHandler = null;
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
+            {
+                if ((MessageHandler != null) && !MessageHandler.AutoUpdate)
+                {
+                    return;
+                }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return false;
-        }
+                inSight = UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this);
+                if(inSight)
+                { 
+                    MessageHandler = this.DataContext as TcoDiagnosticsViewModel;
+                }
+            });
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
+            if(inSight)
+            { 
+                MessageHandler?.UpdateMessages();
+            }
         }
+      
     }
 }

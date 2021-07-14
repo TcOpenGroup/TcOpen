@@ -3,6 +3,7 @@
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+//TcRpc tests
 	_tcoRtcTest_A						:	TcoRtcTest;
 	_tcoRtcTest_B						:	TcoRtcTest;
 	_tcoContextTest_A					:	TcoContextTest;
@@ -13,13 +14,18 @@ VAR
 	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 	_tcoComponentTest					:	TcoComponentTest;
 	_stringBuilderTest					: 	StringBuilderTests;
+	
+//PLC executed tests
 	_tcoTaskTestContext 				:	TcoTaskTestContext;
 	_tcoToggleTaskTestContext			:	TcoToggleTaskTestContext;
 	{attribute addProperty Name "Test base component class"}
 	_tcoComponentTestContext			:   TcoComponentTestContext;
+	_tcoRemoteTaskTestContext			:	TcoRemoteTaskTestContext;
+	_tcoSequencerTestContext			:	TcoSequencerTestContext;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_tcoRtcTest_A();
+      <ST><![CDATA[//TcRpc tests
+_tcoRtcTest_A();
 
 _tcoRtcTest_B();
 
@@ -39,11 +45,16 @@ _tcoComponentTest();
 
 _stringBuilderTest();
 
+//PLC executed tests
 _tcoTaskTestContext.ProbeRun();
 
 _tcoToggleTaskTestContext.ProbeRun();
 
-_tcoComponentTestContext.ProbeRun();]]></ST>
+_tcoComponentTestContext.ProbeRun();
+
+_tcoRemoteTaskTestContext.ProbeRun();
+
+_tcoSequencerTestContext.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

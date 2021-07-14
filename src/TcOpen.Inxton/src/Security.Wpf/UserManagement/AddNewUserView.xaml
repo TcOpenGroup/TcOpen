@@ -1,0 +1,199 @@
+﻿<UserControl
+    x:Class="TcOpen.Inxton.Local.Security.Wpf.AddNewUserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
+    xmlns:local="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
+    d:DesignHeight="800"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:AddNewUserViewModel />
+    </UserControl.DataContext>
+    <Grid Margin="12" Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Margin="15,15,15,15"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="FirstColumn" />
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="{x:Static p:strings.Username}" />
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding NewUser.Username}" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="{x:Static p:strings.Password}" />
+                <PasswordBox
+                    x:Name="pb1"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    AutomationProperties.AutomationId="Password" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Content="{x:Static p:strings.RepeatPassword}" />
+                <PasswordBox
+                    x:Name="pb2"
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    VerticalContentAlignment="Center"
+                    AutomationProperties.AutomationId="RepeatPassword" />
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="{x:Static p:strings.CanChangePassword}" />
+
+                <ToggleButton
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="5,5,5,5"
+                    AutomationProperties.AutomationId="CanChangePassCheckBox"
+                    IsChecked="{Binding NewUser.CanUserChangePassword, Mode=TwoWay}" />
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content="{x:Static p:strings.Email}" />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding NewUser.Email}" />
+
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Content="{x:Static p:strings.Group}" />
+                <ComboBox
+                    x:Name="Groups"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    ItemsSource="{Binding AllGroups}" />
+                <Button
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    Command="{Binding AddMultipleRolesCommand}"
+                    CommandParameter="{Binding ElementName=Groups, Path=SelectedItem}"
+                    Content="{x:Static p:strings.AddGroup}" />
+            </Grid>
+            <Label Margin="0,10,0,10" Content="{x:Static p:strings.SelectRole}" />
+
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="{x:Static p:strings.AvailableRoles}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Content="{x:Static p:strings.AssignedRoles}" />
+            <Border Grid.Row="1"
+                Grid.Column="0"
+                            Padding="5"
+                            BorderThickness=".5"
+                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                <ListBox
+                x:Name="AllRoles"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                ItemsSource="{Binding AllRolesFiltered, Mode=TwoWay}"
+                SelectionMode="Extended">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding AddRoleCommand}" CommandParameter="{Binding ElementName=AllRoles, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </ListBox>
+            </Border>
+            <StackPanel
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                VerticalAlignment="Center">
+                <Button
+                    Command="{Binding AddRolesCommand}"
+                    CommandParameter="{Binding ElementName=AllRoles, Path=SelectedItems}"
+                    Content="→"
+                    FontWeight="Bold" />
+                <Button
+                    Command="{Binding RemoveRolesCommand}"
+                    CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItems}"
+                    Content="←" />
+            </StackPanel>
+            <Border Grid.Row="1"
+                    Grid.Column="3"
+                    Padding="5"
+                    BorderThickness=".5"
+                    BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                <ListBox
+                x:Name="AssignedRoles"
+                Grid.Row="1"
+                Grid.Column="3"
+                ItemsSource="{Binding NewUser.Roles}"
+                SelectionMode="Extended">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding RemoveRoleCommand}" CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+            </Border>
+        </Grid>
+        <Button
+            Margin="10"            
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Command="{Binding StartCreateNewCommand}"
+            Content="{x:Static p:strings.Add}">
+            <Button.CommandParameter>
+                <local:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
+            </Button.CommandParameter>
+        </Button>
+
+    </Grid>
+</UserControl>
