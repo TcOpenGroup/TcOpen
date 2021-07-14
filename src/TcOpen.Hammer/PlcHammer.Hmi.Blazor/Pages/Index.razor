@@ -9,8 +9,6 @@
 
 </div>
 
-<input class="active">
-
 <button class="btn-light" @onclick="() => Station._groundModeTask.Execute(null)">
     @Station._groundModeTask.GetSymbolTail()
 </button>
@@ -24,10 +22,13 @@
 
 
 <RenderableContentControl Presentation="Display"
-                          Context="@Station._groundMode._currentStep" />
+                          Context="@Station._groundMode._currentStep.Description" />
 
 <RenderableContentControl Presentation="Display"
-                          Context="@Station._automatMode._currentStep" />
+                          Context="@Station._automatMode._currentStep.Description" />
+
+<RenderableContentControl Presentation="Display"
+                          Context="@Station._processTraceabilty._data" />
 
 @code{
 

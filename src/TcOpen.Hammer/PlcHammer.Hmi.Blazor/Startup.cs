@@ -76,7 +76,7 @@ namespace PlcHammer.Hmi.Blazor
                 endpoints.MapFallbackToPage("/_Host");
             });
 
-            app.LoadVortexBlazorComponents();
+            //app.LoadVortexBlazorComponents();
             Entry.PlcHammer.Connector.BuildAndStart();
         }
     }
