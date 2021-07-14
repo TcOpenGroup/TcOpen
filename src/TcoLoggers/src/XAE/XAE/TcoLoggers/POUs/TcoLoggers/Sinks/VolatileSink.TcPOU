@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="VolatileSink" Id="{bb2364ca-90fb-01bf-2d15-594ff9ffb6f8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL VolatileSink IMPLEMENTS ITcoLogSink
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	// Added due to IVC compatibility see:https://docs.inxton.com/docu/articles/units/Inxton.vortex.compiler.console/Conceptual/IgnoringPartsOfCode.html	
+	//~
+	_logBuffer		: RingBuffer(
+									Override	:= TRUE,
+									Capacity	:= MAX_LOGS,
+									ElementSize	:= SIZEOF(LogEvent)
+								);
+	//~							
+END_VAR
+
+VAR CONSTANT
+	MAX_LOGS		: UDINT := 100;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Emit" Id="{b2987bd4-6bd3-0f37-22e8-a01d5dc80051}">
+      <Declaration><![CDATA[METHOD Emit : BOOL
+VAR_INPUT
+	LogEvent	: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(LogEvent) THEN
+	RETURN;
+END_IF
+
+_logBuffer.Push(ADR(LogEvent), 1);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

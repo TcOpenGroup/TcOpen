@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ProjectNameEnricher" Id="{9107df9f-04d6-0e12-36da-d9e368b79d1f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL ProjectNameEnricher IMPLEMENTS ITcoLogEnricher
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Enrich" Id="{61aaa31e-12de-0c61-26e5-51626c901777}">
+      <Declaration><![CDATA[METHOD Enrich : BOOL
+VAR_INPUT
+	LogEvent	: REFERENCE TO LogEvent;
+END_VAR
+
+VAR
+	info		: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(LogEvent) THEN
+	RETURN;
+END_IF
+
+info := CONCAT('[', _AppInfo.ProjectName);
+info := CONCAT(info, '] ');
+
+// e.g. [MyProjectName] My log message
+LogEvent.Text := CONCAT(info, LogEvent.Text);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

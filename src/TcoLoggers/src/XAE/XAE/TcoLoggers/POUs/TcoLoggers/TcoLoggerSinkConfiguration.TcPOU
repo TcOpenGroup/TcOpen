@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLoggerSinkConfiguration" Id="{e272c544-e71c-03a0-0b60-a798d7eaaffa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerSinkConfiguration 
+
+VAR_INPUT
+	Config		: REFERENCE TO TcoLoggerConfiguration;
+END_VAR
+
+VAR
+	_xaeSink		: AdsLogSink;
+	_volatileSink	: VolatileSink;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Memory" Id="{50b0a892-7347-0f8e-1e32-74a8a731b1a5}">
+      <Declaration><![CDATA[METHOD PUBLIC Memory : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Config.AddSink(_volatileSink);
+Memory REF= Config;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="XAE" Id="{66c0f21a-b76d-0a03-1dcf-41f50e56eb96}">
+      <Declaration><![CDATA[METHOD PUBLIC XAE : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Config.AddSink(_xaeSink);
+XAE := Config;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

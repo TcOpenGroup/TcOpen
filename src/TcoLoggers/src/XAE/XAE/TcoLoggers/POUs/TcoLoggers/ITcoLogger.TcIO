@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoLogger" Id="{215776c0-ccbf-0dd3-23b8-8f667a434de9}">
+    <Declaration><![CDATA[//TODO
+INTERFACE ITcoLogger
+]]></Declaration>
+    <Method Name="Debug" Id="{68cdbaee-b871-0fbd-18b9-9f8d32a93ccd}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'debug' category to the message queue.				 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC Debug
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Error" Id="{eb7a8a2e-3092-0d2c-098f-a8a7de0472b5}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'error' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD PUBLIC Error
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Fatal" Id="{2a97750b-7429-0722-031d-e8aac7ae8670}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'critical' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD PUBLIC Fatal
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="ForContext" Id="{6c3b9271-2a52-0de8-0524-07a02f6ce806}">
+      <Declaration><![CDATA[METHOD ForContext : ITcoLogger
+VAR_INPUT
+	Context		: ITcoContext;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="ForIdentity" Id="{b8d1c3d3-12b0-084e-0c24-012768920bf5}">
+      <Declaration><![CDATA[METHOD ForIdentity : ITcoLogger
+VAR_INPUT
+	Identity	: ULINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Info" Id="{b1aa45f0-fbf4-025c-0384-25d75692e16a}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'information' category to the message queue.				 
+			</summary>			
+		</docu>
+~*)
+METHOD PUBLIC Info 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Warning" Id="{d22d9c72-44b1-04b9-0431-a0dee51fb2eb}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'warning' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD PUBLIC Warning 
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(255);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="WithArgs" Id="{99ef7fcd-f000-007b-1aa8-3ace8df24e05}">
+      <Declaration><![CDATA[METHOD WithArgs : ITcoArguments
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

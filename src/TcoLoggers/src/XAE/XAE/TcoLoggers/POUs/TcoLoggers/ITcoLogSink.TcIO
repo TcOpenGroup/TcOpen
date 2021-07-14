@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoLogSink" Id="{04cae3ff-198a-0a92-2922-2285610707ee}">
+    <Declaration><![CDATA[INTERFACE ITcoLogSink
+]]></Declaration>
+    <Method Name="Emit" Id="{2aa5cad7-93f9-03f1-260e-c3ea05c40b81}">
+      <Declaration><![CDATA[METHOD Emit : BOOL
+VAR_INPUT
+	LogEvent		: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ExtendedLoggerEnrichmentConfiguration" Id="{846196e7-d5f8-0d92-0d5a-197d23edf8ac}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL ExtendedLoggerEnrichmentConfiguration EXTENDS TcoLoggerEnrichmentConfiguration
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_projectNameEnricher		: ProjectNameEnricher;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ProjectName" Id="{4c001959-9514-0eca-33f0-11636b75be71}">
+      <Declaration><![CDATA[METHOD PUBLIC ProjectName : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config.AddEnrichment(_projectNameEnricher);
+ProjectName := _config;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

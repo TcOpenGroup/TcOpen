@@ -47,5 +47,5 @@ namespace TcoCore.Logging
         {
             return string.IsNullOrEmpty(obj.AttributeName) ? obj.GetSymbolTail() : obj.AttributeName;
         }
-    }
+    }    
 }

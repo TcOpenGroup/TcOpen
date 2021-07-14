@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoLogEnricher" Id="{feb2fc4f-2105-0fbd-08eb-bf9f92c2c97a}">
+    <Declaration><![CDATA[INTERFACE ITcoLogEnricher
+]]></Declaration>
+    <Method Name="Enrich" Id="{04f6e750-3aee-0ae7-2607-ff78fd70659f}">
+      <Declaration><![CDATA[METHOD Enrich : BOOL
+VAR_INPUT
+	LogEvent		: REFERENCE TO LogEvent;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ExtendedLoggerSinkConfiguration" Id="{d0270ba9-b6be-0fad-1e3c-6bdca72710a9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ExtendedLoggerSinkConfiguration EXTENDS TcoLoggerSinkConfiguration
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_fileSink		: FileSink;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="File" Id="{4617d50d-f038-0d46-07c2-af1368bdf527}">
+      <Declaration><![CDATA[METHOD PUBLIC File : REFERENCE TO TcoLoggerConfiguration
+VAR_INPUT
+	FilePath		: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_fileSink.FilePath := FilePath;
+_config.AddSink(_fileSink);
+File := _config;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
