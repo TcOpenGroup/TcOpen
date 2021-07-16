@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SyncUnitStatus" Id="{4f22742f-65f2-0e25-2265-29466baeca68}">
+    <Declaration><![CDATA[TYPE SyncUnitStatus :
+STRUCT
+	{attribute addProperty Name "At least one slave in 'INIT' state"}	
+    AtLeastOneSlaveInInitState : BOOL;
+	{attribute addProperty Name "At least one slave in 'PREOP' state"}	
+    AtLeastOneSlaveInPreopState : BOOL;
+	{attribute addProperty Name "At least one slave in 'BOOT' state"}	
+    AtLeastOneSlaveInBootState : BOOL;
+	{attribute addProperty Name "At least one slave in 'SAFEOP' state"}	
+    AtLeastOneSlaveInSafeOpState : BOOL;
+	{attribute addProperty Name "At least one slave in 'OP' state"}	
+    AtLeastOneSlaveInOpState : BOOL;
+	{attribute addProperty Name "At least one slave signals error"}	
+    AtLeastOneSlaveSignalsError : BOOL;
+	{attribute addProperty Name "Invalid vendorId, productCode... read"}	
+    InvalidVendoridOrProductcodeRead : BOOL;
+	{attribute addProperty Name "Initialization error occurred"}	
+    InitializationErrorOccurred : BOOL;
+	{attribute addProperty Name "At least one slave disabled"}	
+    AtLeastOneSlaveDisabled : BOOL;
+	{attribute addProperty Name "At least one slave not present"}	
+    AtLeastOneSlaveNotPresent : BOOL;
+	{attribute addProperty Name "At least one slave signals link error"}	
+    AtLeastOneSlaveSignalsLinkError : BOOL;
+	{attribute addProperty Name "At least one slave signals missing link"}	
+    AtLeastOneSlaveSignalsMissingLink : BOOL;
+	{attribute addProperty Name "At least one slave signals unexpected link"}	
+    AtLeastOneSlaveSignalsUnexpectedLink : BOOL;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

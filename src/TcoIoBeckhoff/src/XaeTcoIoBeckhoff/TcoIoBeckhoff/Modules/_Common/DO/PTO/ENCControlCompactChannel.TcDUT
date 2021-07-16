@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ENCControlCompactChannel" Id="{f63d2d67-b08e-0c2c-2daf-a9be4d9a41d1}">
+    <Declaration><![CDATA[TYPE ENCControlCompactChannel :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Control AT %Q* : stENCControlCompact;
+	{attribute addProperty Name "Set counter value"}
+	SetCounterValue AT %Q* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

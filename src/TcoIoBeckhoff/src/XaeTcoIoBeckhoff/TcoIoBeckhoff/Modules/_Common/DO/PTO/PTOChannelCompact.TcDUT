@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="PTOChannelCompact" Id="{4f994eca-eb92-08ad-2f00-82da20754acc}">
+    <Declaration><![CDATA[TYPE PTOChannelCompact :
+STRUCT
+	{attribute addProperty Name "PTO Status"}
+	PTOStatus : PTOstatusChannel;
+	{attribute addProperty Name "ENC Status compact"}
+	ENCStatusCompact : ENCStatusCompactChannel;
+	{attribute addProperty Name "PTO Control"}
+	PTOControl : PTOcontrolChannel;
+	{attribute addProperty Name "PTO Target compact"}
+	PTOTargetCompact : PTOTargetCompactChannel;
+	{attribute addProperty Name "ENC Control compact"}
+	ENCControlCompact : ENCControlCompactChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

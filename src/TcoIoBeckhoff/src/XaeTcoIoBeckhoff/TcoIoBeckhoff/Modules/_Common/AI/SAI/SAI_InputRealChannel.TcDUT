@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_InputRealChannel" Id="{f6343b2d-fe3f-0782-3522-cbc8994840c4}">
+    <Declaration><![CDATA[TYPE SAI_InputRealChannel :
+STRUCT
+	{attribute addProperty Name "Value"}
+	Value AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

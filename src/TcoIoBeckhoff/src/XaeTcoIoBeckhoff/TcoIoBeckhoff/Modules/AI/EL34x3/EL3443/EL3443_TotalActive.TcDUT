@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_TotalActive" Id="{cf5be3d5-3fb6-03dd-0dbc-9b8ba884df28}">
+    <Declaration><![CDATA[TYPE EL3443_TotalActive :
+STRUCT
+	{attribute addProperty Name "Active Power"}
+	ActivePower AT %I* : REAL;
+	{attribute addProperty Name "Active Energy"}
+	ActiveEnergy AT %I* : ULINT;
+	{attribute addProperty Name "Active Positive Energy"}
+	ActivePositiveEnergy AT %I* : ULINT;
+	{attribute addProperty Name "Active Negative Energy"}
+	ActiveNegativeEnergy AT %I* : ULINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

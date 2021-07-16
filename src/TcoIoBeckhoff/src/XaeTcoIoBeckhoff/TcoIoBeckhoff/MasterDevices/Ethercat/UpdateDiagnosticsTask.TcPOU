@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="UpdateDiagnosticsTask" Id="{ef431e94-2344-0d0f-3e67-417102e86451}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK UpdateDiagnosticsTask EXTENDS TcoCore.TcoTask
+VAR_IN_OUT
+	inoSlaveStatesCount : UINT;
+    inoConfigSlavesCount : UINT;
+    inoSlaveStateBuffer : ARRAY[0..EC_MAX_SLAVES] OF Tc2_EtherCAT.ST_EcSlaveState;
+    inoSlaveConfigDataBuffer : ARRAY[0..EC_MAX_SLAVES] OF Tc2_EtherCAT.ST_EcSlaveConfigData;
+END_VAR
+VAR
+	_NetId : Tc2_System.T_AmsNetID;
+	_updateDiagnosticsState : TcoCore.TcoState(THIS^,TcoCore.eRestoreMode.None);
+    _EcGetAllSlaveStates : Tc2_EtherCAT.FB_EcGetAllSlaveStates;
+    _EcGetConfSlaves : Tc2_EtherCAT.FB_EcGetConfSlaves;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN
+	DoneWhen(FALSE);
+	ThrowWhen(_EcGetAllSlaveStates.bError OR _EcGetConfSlaves.bError);
+    IF _updateDiagnosticsState.State = 0 THEN
+        _EcGetAllSlaveStates(bExecute := FALSE);
+        _EcGetConfSlaves(bExecute := FALSE);
+
+        IF NOT _EcGetAllSlaveStates.bBusy AND NOT _EcGetAllSlaveStates.bError AND NOT _EcGetConfSlaves.bBusy AND NOT _EcGetConfSlaves.bError THEN
+            _updateDiagnosticsState.ChangeState(_updateDiagnosticsState.State + 10);
+        END_IF
+    END_IF
+
+    IF _updateDiagnosticsState.State = 10 THEN
+        _EcGetAllSlaveStates(sNetId := _NetId,
+            pStateBuf := ADR(inoSlaveStateBuffer),
+            cbBufLen := SIZEOF(inoSlaveStateBuffer),
+            bExecute := TRUE,
+            tTimeout :=,
+            bBusy =>,
+            bError =>,
+            nErrId =>,
+            nSlaves => inoSlaveStatesCount);
+
+        IF _EcGetAllSlaveStates.bBusy THEN
+            _updateDiagnosticsState.ChangeState(_updateDiagnosticsState.State + 10);
+        END_IF
+    END_IF
+
+    IF _updateDiagnosticsState.State = 20 THEN
+        _EcGetAllSlaveStates(sNetId := _NetId,
+            pStateBuf := ADR(inoSlaveStateBuffer),
+            cbBufLen := SIZEOF(inoSlaveStateBuffer),
+            bExecute := FALSE,
+            tTimeout :=,
+            bBusy =>,
+            bError =>,
+            nErrId =>,
+            nSlaves => inoSlaveStatesCount);
+
+        IF NOT _EcGetAllSlaveStates.bBusy AND NOT _EcGetAllSlaveStates.bError THEN
+            _updateDiagnosticsState.ChangeState(_updateDiagnosticsState.State + 10);
+        END_IF
+    END_IF
+
+    IF _updateDiagnosticsState.State = 30 THEN
+        _EcGetConfSlaves(sNetId := _NetId,
+            pArrEcConfSlaveInfo := ADR(inoSlaveConfigDataBuffer),
+            cbBufLen := SIZEOF(inoSlaveConfigDataBuffer),
+            bExecute := TRUE,
+            tTimeout :=,
+            bBusy =>,
+            bError =>,
+            nErrorId =>,
+            nSlaves => inoConfigSlavesCount);
+
+        IF _EcGetConfSlaves.bBusy THEN
+            _updateDiagnosticsState.ChangeState(_updateDiagnosticsState.State + 10);
+        END_IF
+    END_IF
+
+    IF _updateDiagnosticsState.State = 40 THEN
+        _EcGetConfSlaves(sNetId := _NetId,
+            pArrEcConfSlaveInfo := ADR(inoSlaveConfigDataBuffer),
+            cbBufLen := SIZEOF(inoSlaveConfigDataBuffer),
+            bExecute := FALSE,
+            tTimeout :=,
+            bBusy =>,
+            bError =>,
+            nErrorId =>,
+            nSlaves => inoConfigSlavesCount);
+
+        IF NOT _EcGetConfSlaves.bBusy AND NOT _EcGetConfSlaves.bError THEN
+            _updateDiagnosticsState.ChangeState(_updateDiagnosticsState.State + 10);
+        END_IF
+    END_IF
+
+    IF _updateDiagnosticsState.State = 50 THEN
+        _EcGetAllSlaveStates(bExecute := FALSE);
+        _EcGetConfSlaves(bExecute := FALSE);
+
+        IF NOT _EcGetAllSlaveStates.bBusy AND NOT _EcGetAllSlaveStates.bError AND NOT _EcGetConfSlaves.bBusy AND NOT _EcGetConfSlaves.bError THEN
+            _updateDiagnosticsState.ChangeState(_updateDiagnosticsState.State + 10);
+        END_IF
+    END_IF
+
+    IF _updateDiagnosticsState.State = 60 THEN
+		DoneWhen(TRUE);
+	END_IF
+END_IF]]></ST>
+    </Implementation>
+    <Property Name="NetId" Id="{591177c7-4307-0bcf-2f98-ac1a0758896f}">
+      <Declaration><![CDATA[PROPERTY NetId : Tc2_System.T_AmsNetID]]></Declaration>
+      <Get Name="Get" Id="{1c0e2ea8-e754-05ec-2d6c-b5fc08150a59}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[NetId := _NetId;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{450f4070-217a-0a66-16fd-21b9dc780440}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_NetId := NetId;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="OnDone" Id="{d7d949d5-5e60-03ef-31ab-42d7a8df83cf}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_updateDiagnosticsState.ChangeState(0);
+_EcGetAllSlaveStates(bExecute := FALSE);
+_EcGetConfSlaves(bExecute := FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{90e3e478-6529-0716-2134-7af569db7d57}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_updateDiagnosticsState.ChangeState(0);
+Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{0c2bc632-5956-0ca4-33ec-3fa577618d4a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_EcGetAllSlaveStates(bExecute := FALSE);
+_EcGetConfSlaves(bExecute := FALSE);
+
+SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

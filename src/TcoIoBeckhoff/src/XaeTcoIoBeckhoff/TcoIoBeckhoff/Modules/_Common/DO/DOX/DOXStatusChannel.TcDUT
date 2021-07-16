@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="DOXStatusChannel" Id="{252e2ed0-765e-0eb6-02f8-ca0923f010a4}">
+    <Declaration><![CDATA[TYPE DOXStatusChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I*: stDOXstatus;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3413_PM_Inputs" Id="{9e740e94-be30-0b40-2b80-06b53f3d80c9}">
+    <Declaration><![CDATA[TYPE EL3413_PM_Inputs :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : EL3413_PM_InputsStatus;
+	{attribute addProperty Name "Current"}
+	Current AT %I* : DINT;
+	{attribute addProperty Name "Voltage"}
+	Voltage AT %I* : DINT;
+	{attribute addProperty Name "Active power"}
+	ActivePower AT %I* : DINT;
+	{attribute addProperty Name "Index"}
+	Index AT %I* : USINT;
+	{attribute addProperty Name "Variant value"}
+	VariantValue AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

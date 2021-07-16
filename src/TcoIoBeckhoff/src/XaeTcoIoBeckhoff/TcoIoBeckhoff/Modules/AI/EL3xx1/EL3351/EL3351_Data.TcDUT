@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3351_Data" Id="{9eb777ea-e591-0a0f-3194-148738c4d99e}">
+    <Declaration><![CDATA[TYPE EL3351_Data :
+STRUCT
+	{attribute addProperty Name "AIBridge Inputs"}
+	_AIBridgeInputs : AI_Bridge_Input;
+	{attribute addProperty Name "AISupply Inputs"}
+	_AISupplyInputs : AI_Supply_Input;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

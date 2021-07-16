@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3403_PM_Inputs" Id="{9d172e7a-9322-0984-19b6-2947e04c9421}">
+    <Declaration><![CDATA[TYPE EL3403_PM_Inputs :
+STRUCT
+	{attribute addProperty Name "TxPDOToggle"}
+	TxPDOToggle AT %I* : BOOL;
+	{attribute addProperty Name "Current"}
+	Current AT %I* : DINT;
+	{attribute addProperty Name "Voltage"}
+	Voltage AT %I* : DINT;
+	{attribute addProperty Name "Active power"}
+	ActivePower AT %I* : DINT;
+	{attribute addProperty Name "Index"}
+	Index AT %I* : USINT;
+	{attribute addProperty Name "Variant value"}
+	VariantValue AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="CNTOutputsChannel" Id="{f6aba834-30ca-0c8e-318f-54588d3f55e0}">
+    <Declaration><![CDATA[TYPE CNTOutputsChannel :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Control AT %Q* : stCNTControlCompact;
+	{attribute addProperty Name "Set counter value"}
+	SetCounterValue AT %Q* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

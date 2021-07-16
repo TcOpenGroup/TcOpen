@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6002_Data" Id="{0a8e9af2-7acf-0b47-36c1-2a87be5f2bb6}">
+    <Declaration><![CDATA[TYPE EL6002_Data :
+STRUCT
+	{attribute addProperty Name "COM TxPDO-Map Inputs Channel 1"}
+	COM_TxPDO_Map_Inputs_Channel_1 : EL6002_COM_Inputs;
+	{attribute addProperty Name "COM TxPDO-Map Inputs Channel 2"}
+	COM_TxPDO_Map_Inputs_Channel_2 : EL6002_COM_Inputs;
+	{attribute addProperty Name "COM RxPDO-Map Outputs Channel 1"}
+	COM_RxPDO_Map_Outputs_Channel_1 : EL6002_COM_Outputs;
+	{attribute addProperty Name "COM RxPDO-Map Outputs Channel 2"}
+	COM_RxPDO_Map_Outputs_Channel_2 : EL6002_COM_Outputs;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

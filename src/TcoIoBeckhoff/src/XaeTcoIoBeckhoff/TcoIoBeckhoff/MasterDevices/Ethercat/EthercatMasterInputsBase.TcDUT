@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EthercatMasterInputsBase" Id="{a49a7a06-b26e-055c-3926-ba4569003582}">
+    <Declaration><![CDATA[TYPE EthercatMasterInputsBase : STRUCT
+    Frm0State AT %I* : UINT;
+    Frm0WcState AT %I* : UINT;
+    Frm0InputToggle AT %I* : UINT;
+    SlaveCount AT %I* : UINT;
+    DevState AT %I* : UINT;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

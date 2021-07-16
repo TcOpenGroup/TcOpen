@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stInfoDataBase" Id="{9528bf17-6b45-0fa8-3553-c78e5c2302cd}">
+    <Declaration><![CDATA[TYPE stInfoDataBase :
+STRUCT
+	SlaveInInitState 			: BOOL;
+	SlaveInPreopState 			: BOOL;
+	SlaveInBootState 			: BOOL;
+	SlaveInSafeopState 			: BOOL;
+	SlaveInOpState 				: BOOL;
+	SlaveSignalsError 			: BOOL;
+	InvalidVendoridOrProductcode: BOOL;
+	InitializationErrorOccurred : BOOL;
+	SlaveDisabled 				: BOOL;
+	SlaveNotPresent 			: BOOL;
+	SlaveSignalsLinkError 		: BOOL;
+	SlaveSignalsMissingLink 	: BOOL;
+	SlaveSignalsUnexpectedLink 	: BOOL;
+	CommunicationPortA 			: BOOL;
+	CommunicationPortB 			: BOOL;
+	CommunicationPortC 			: BOOL;
+	CommunicationPortD 			: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="PWMStatusChannel" Id="{80e090c6-118d-0886-192c-4f2900ff7ef8}">
+    <Declaration><![CDATA[TYPE PWMStatusChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I*: stPWMstatus;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="AI_Supply_Input" Id="{53168ee0-af8f-0520-36cb-cc8af790ce18}">
+    <Declaration><![CDATA[TYPE AI_Supply_Input :
+STRUCT
+	{attribute addProperty Name "Underrange"}
+	Underrange AT %I* : BIT;
+	{attribute addProperty Name "Overrange"}
+	Overrange AT %I* : BIT;
+	{attribute addProperty Name "Error"}
+	Error AT %I* : BIT;
+	{attribute addProperty Name "TxPDO State"}
+	TxPDOState AT %I* : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle AT %I* : BIT;
+	{attribute addProperty Name "Value"}
+	Value AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

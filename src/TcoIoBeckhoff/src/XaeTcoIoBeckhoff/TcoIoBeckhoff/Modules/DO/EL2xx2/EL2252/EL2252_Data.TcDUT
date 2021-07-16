@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2252_Data" Id="{a7bb17f0-f5d3-034a-1d08-c214b22cd014}">
+    <Declaration><![CDATA[TYPE EL2252_Data :
+STRUCT
+	{attribute addProperty Name "DC Sync Activate"}
+	_DCSyncActivate AT %Q* : USINT;
+	{attribute addProperty Name "DC Sync Start"}
+	_DCSyncStart AT %Q* : ULINT;
+	{attribute addProperty Name "Channel 1"}
+	_1 :DoChannelTriState;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DoChannelTriState;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

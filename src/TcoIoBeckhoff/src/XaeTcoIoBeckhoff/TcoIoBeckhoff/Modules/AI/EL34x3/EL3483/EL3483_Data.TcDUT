@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3483_Data" Id="{d8b57d68-6eb1-0b53-312d-1dd14babb088}">
+    <Declaration><![CDATA[TYPE EL3483_Data :
+STRUCT
+	{attribute addProperty Name "L1 Status"}
+	L1_Status : EL3483_Status;
+	{attribute addProperty Name "L2 Status"}
+	L2_Status : EL3483_Status;
+	{attribute addProperty Name "L3 Status"}
+	L3_Status : EL3483_Status;
+	{attribute addProperty Name "Total Status"}
+	TotalStatus : EL3483_TotalStatus;
+	{attribute addProperty Name "Total Advanced"}
+	TotalAdvanced : EL3483_TotalAdvanced;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

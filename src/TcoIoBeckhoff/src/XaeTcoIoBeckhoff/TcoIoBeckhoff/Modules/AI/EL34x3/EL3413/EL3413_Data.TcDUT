@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3413_Data" Id="{28c36d45-5020-0417-056e-2f78fe74dda9}">
+    <Declaration><![CDATA[TYPE EL3413_Data :
+STRUCT
+	{attribute addProperty Name "PM Inputs Channel 1"}
+	PM_InputsChannel_1 : EL3413_PM_Inputs;
+	{attribute addProperty Name "PM Inputs Channel 2"}
+	PM_InputsChannel_2 : EL3413_PM_Inputs;
+	{attribute addProperty Name "PM Inputs Channel 3"}
+	PM_InputsChannel_3 : EL3413_PM_Inputs;
+	{attribute addProperty Name "PM Inputs Auxiliary"}
+	PM_InputsAuxiliary : EL3413_PM_InputsAuxiliary;
+	{attribute addProperty Name "PM Outputs Channel 1"}
+	PM_OutputsChannel_1 : EL3413_PM_Outputs;
+	{attribute addProperty Name "PM Outputs Channel 2"}
+	PM_OutputsChannel_2 : EL3413_PM_Outputs;
+	{attribute addProperty Name "PM Outputs Channel 3"}
+	PM_OutputsChannel_3 : EL3413_PM_Outputs;
+	{attribute addProperty Name "PM Outputs Auxiliary"}
+	PM_OutputsAuxiliary : EL3413_PM_OutputsAuxiliary;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="PTOstatusChannel" Id="{dfedf5aa-6f19-09e9-09c5-74f2cbccaee3}">
+    <Declaration><![CDATA[TYPE PTOstatusChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I*: stPTOstatus;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="EthercatMasterBase" Id="{58b74c93-9b7c-0280-197d-1861d5aa21c2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EthercatMasterBase EXTENDS TcoCore.TcoObject IMPLEMENTS IEthercatMaster
+VAR
+    DefaultSyncUnit : SyncUnit;
+    Inputs : EthercatMasterInputsBase;
+    Outputs : EthercatMasterOutputsBase;
+    InfoData : EthercatMasterInfoData;
+END_VAR
+
+VAR
+	_Status : EthercatMasterDeviceStatus ; 
+    _NetId : Tc2_System.T_AmsNetID;
+	_DeviceHasIssue : BOOL;
+	_AdditionalSyncUnitHasIssue : BOOL;
+    _AtLeastOneSyncUnitHasIssue : BOOL;
+	_UpdateDiagnosticsTask : UpdateDiagnosticsTask(THIS^); 
+	_SlaveStatesCount : UINT;
+    _ConfigSlavesCount : UINT;
+    _SlaveStateBuffer : ARRAY[0..EC_MAX_SLAVES] OF Tc2_EtherCAT.ST_EcSlaveState;
+    _SlaveConfigDataBuffer : ARRAY[0..EC_MAX_SLAVES] OF Tc2_EtherCAT.ST_EcSlaveConfigData;
+	_InfoDataChangeCountPV : UINT;
+    _tmrTON : TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="AdditionalSyncUnitHasIssue" Id="{69516b40-c401-0485-0c38-7647fc42e904}">
+      <Declaration><![CDATA[PROPERTY AdditionalSyncUnitHasIssue : BOOL]]></Declaration>
+      <Set Name="Set" Id="{dd8b7644-e335-0a7d-14b7-9726b49671a0}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_AdditionalSyncUnitHasIssue := AdditionalSyncUnitHasIssue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="DataInvalid" Id="{f0c16b7a-80bb-0b0d-0b27-e0fefdbc9a5e}">
+      <Declaration><![CDATA[PROPERTY DataInvalid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ff5d7059-1211-07fd-10b5-86afbb5f94a7}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DataInvalid := DefaultSyncUnit.DataInvalid 
+//			OR AdditionalSyncUnit.DataInvalid
+; ]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DataValid" Id="{c35e0ebb-720b-0ed2-0463-b4261f6ad6bd}">
+      <Declaration><![CDATA[PROPERTY DataValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{31a83b4c-5dce-0e56-3f46-c03d72f1ee26}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DataValid := DefaultSyncUnit.DataValid 
+//			AND AdditionalSyncUnit.DataValid
+; ]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Diagnostics" Id="{4713f507-4b3d-0d50-2d9d-c1d184b27c20}">
+      <Declaration><![CDATA[METHOD Diagnostics
+VAR
+    _deviceStatus : EthercatMasterDeviceStatus;
+    _i : UINT;
+    _tmpString : STRING(125);
+    _tmpErrorMessage : STRING(125);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_NetId := Tc2_System.F_CreateAmsNetId(InfoData.AmsNetId);
+_UpdateDiagnosticsTask.NetId := _NetId;
+_deviceStatus := Status;
+_DeviceHasIssue := HasIssue;
+
+_AtLeastOneSyncUnitHasIssue := DefaultSyncUnit.HasIssue OR _AdditionalSyncUnitHasIssue;
+
+IF (_DeviceHasIssue OR _AtLeastOneSyncUnitHasIssue OR _InfoDataChangeCountPV <> InfoData.ChangeCount) AND _UpdateDiagnosticsTask.Ready THEN
+    _InfoDataChangeCountPV := InfoData.ChangeCount;
+    _UpdateDiagnosticsTask.Invoke();
+END_IF
+
+_UpdateDiagnosticsTask(inoSlaveStatesCount := _SlaveStatesCount,
+    inoConfigSlavesCount := _ConfigSlavesCount,
+    inoSlaveStateBuffer := _SlaveStateBuffer,
+    inoSlaveConfigDataBuffer := _SlaveConfigDataBuffer);
+
+IF _UpdateDiagnosticsTask.Done THEN
+    FOR _i := 0 TO _ConfigSlavesCount DO
+        IF (_SlaveStateBuffer[_i].deviceState <> 8 OR _SlaveStateBuffer[_i].linkState <> 0) THEN
+            IF _SlaveConfigDataBuffer[_i].sName <> '' THEN
+                _tmpString := concat('Error  modul: ', _SlaveConfigDataBuffer[_i].sName);
+                _tmpString := concat(_tmpString, ' ');
+                _tmpErrorMessage := F_ConvSlaveStateToString(state := _SlaveStateBuffer[_i]);
+                _tmpString := concat(_tmpString, _tmpErrorMessage);
+                _messenger.Error(_tmpString);
+            END_IF
+        END_IF;
+    END_FOR
+
+    _tmrTON(IN := TRUE, PT := T#1S);
+END_IF;
+
+IF _tmrTON.Q THEN
+    _tmrTON(IN := FALSE, PT := T#1S);
+    _UpdateDiagnosticsTask.Restore();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="HasIssue" Id="{8d15f524-1520-0e11-1251-401f0bb857a4}">
+      <Declaration><![CDATA[PROPERTY HasIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{63502d8a-b12b-0161-12d7-d4118046eab7}">
+        <Declaration><![CDATA[VAR
+	_deviceStatus : EthercatMasterDeviceStatus;
+	_retval : BOOL;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_deviceStatus := Status;
+
+_retval := _deviceStatus.LinkError OR
+    _deviceStatus.IOLockedAfterLinkError OR
+    _deviceStatus.LinkErrorRedundancyAdapter OR
+    _deviceStatus.MissingOneFrame OR
+    _deviceStatus.OutOfSendResources OR
+    _deviceStatus.EthernetDriverNotFound OR
+    _deviceStatus.WatchdogTriggered OR
+    _deviceStatus.IOResetActive OR
+    _deviceStatus.AtLeastOneDeviceInInitState OR
+    _deviceStatus.AtLeastOneDeviceInPreOpState OR
+    _deviceStatus.AtLeastOneDeviceInSafeOpState OR
+    _deviceStatus.AtLeastOneDeviceIndicatesAnErrorState OR
+    _deviceStatus.DcNotInSync;
+
+HasIssue := _retval;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Status" Id="{9820740a-9d43-095b-3e97-97ed420a4af9}">
+      <Declaration><![CDATA[PROPERTY Status : EthercatMasterDeviceStatus]]></Declaration>
+      <Get Name="Get" Id="{67347d23-150c-0752-222b-4328f2d3c335}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Status.LinkError							 	:= Inputs.DevState.0;
+_Status.IOLockedAfterLinkError 					:= Inputs.DevState.1;
+_Status.LinkErrorRedundancyAdapter	 			:= Inputs.DevState.2;
+_Status.MissingOneFrame 						:= Inputs.DevState.3;
+_Status.OutOfSendResources 						:= Inputs.DevState.4;
+_Status.WatchdogTriggered 						:= Inputs.DevState.5;
+_Status.EthernetDriverNotFound 					:= Inputs.DevState.6;
+_Status.IOResetActive 							:= Inputs.DevState.7;
+_Status.AtLeastOneDeviceInInitState 			:= Inputs.DevState.8;
+_Status.AtLeastOneDeviceInPreOpState 			:= Inputs.DevState.9;
+_Status.AtLeastOneDeviceInSafeOpState 			:= Inputs.DevState.10;
+_Status.AtLeastOneDeviceIndicatesAnErrorState 	:= Inputs.DevState.11;
+_Status.DcNotInSync 							:= Inputs.DevState.12;
+
+Status := _Status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

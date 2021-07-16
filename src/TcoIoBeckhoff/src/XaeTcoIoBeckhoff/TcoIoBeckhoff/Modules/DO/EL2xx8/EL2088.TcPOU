@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="EL2088" Id="{73c94b27-5a8f-0410-1c8a-f62b4b400d51}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EL2088
+VAR
+	{attribute addProperty Name "WcState"}
+	_wcState : WcStateBase;
+	{attribute addProperty Name "Info data"}
+	_infoData : InfoDataBase;
+	_io : EL2xx8_Data;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IO" Id="{c1a5eefe-35c7-0fc4-2e70-98578311114d}">
+      <Declaration><![CDATA[PROPERTY IO : REFERENCE TO EL2xx8_Data]]></Declaration>
+      <Get Name="Get" Id="{df2eb7e2-a738-0389-35c0-973ce6a00972}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IO REF= _io;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="WcState" Id="{511c10e2-114a-0791-2e72-fe062611a39f}">
+      <Declaration><![CDATA[PROPERTY WcState : REFERENCE TO WcStateBase]]></Declaration>
+      <Get Name="Get" Id="{93ad00b2-0282-0125-115a-257cc4cc4edc}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[WcState REF= _wcState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

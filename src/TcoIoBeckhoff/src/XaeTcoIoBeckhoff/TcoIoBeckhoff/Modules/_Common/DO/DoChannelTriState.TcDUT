@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="DoChannelTriState" Id="{f2df484e-c6bd-0755-129e-bbe56e8ea1a1}">
+    <Declaration><![CDATA[TYPE DoChannelTriState :
+STRUCT
+	{attribute addProperty Name "Output"}
+	Output AT %Q* : BOOL;
+	{attribute addProperty Name "TriState"}
+	TriState AT %Q* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

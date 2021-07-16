@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="MTOOutputs10xChannel" Id="{18aec62e-6808-066c-3234-aa926e8d2f94}">
+    <Declaration><![CDATA[TYPE MTOOutputs10xChannel :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Control AT %Q* : stMTOOutputsControl;
+	{attribute addProperty Name "Outputs"}
+	Outputs AT %Q* : stMTOOutputs;
+	{attribute addProperty Name "Output event time 1"}
+	OutputEventTime_1 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 2"}
+	OutputEventTime_2 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 3"}
+	OutputEventTime_3 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 4"}
+	OutputEventTime_4 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 5"}
+	OutputEventTime_5 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 6"}
+	OutputEventTime_6 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 7"}
+	OutputEventTime_7 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 8"}
+	OutputEventTime_8 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 9"}
+	OutputEventTime_9 AT %Q* : UDINT;
+	{attribute addProperty Name "Output event time 10"}
+	OutputEventTime_10 AT %Q* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

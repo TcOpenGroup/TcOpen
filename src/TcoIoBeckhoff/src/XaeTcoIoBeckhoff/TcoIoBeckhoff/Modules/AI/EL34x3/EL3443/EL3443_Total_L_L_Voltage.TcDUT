@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_Total_L_L_Voltage" Id="{141eb4a6-a449-07e5-2c86-70ee9501cdde}">
+    <Declaration><![CDATA[TYPE EL3443_Total_L_L_Voltage :
+STRUCT
+	{attribute addProperty Name "L1-L2 Voltage"}
+	L1_L2Voltage AT %I* : REAL;
+	{attribute addProperty Name "L2-L3 Voltage"}
+	L2_L3Voltage AT %I* : REAL;
+	{attribute addProperty Name "L3-L1 Voltage"}
+	L3_L1Voltage AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6022_Data" Id="{50241fec-3f50-0504-0e0b-075c5de8117c}">
+    <Declaration><![CDATA[TYPE EL6022_Data :
+STRUCT
+	{attribute addProperty Name "COM Inputs Channel 1"}
+	COM_Inputs_Channel_1 : EL6022_COM_Inputs;
+	{attribute addProperty Name "COM Inputs Channel 2"}
+	COM_Inputs_Channel_2 : EL6022_COM_Inputs;
+	{attribute addProperty Name "COM Outputs Channel 1"}
+	COM_Outputs_Channel_1 : EL6022_COM_Outputs;
+	{attribute addProperty Name "COM Outputs Channel 2"}
+	COM_Outputs_Channel_2 : EL6022_COM_Outputs;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

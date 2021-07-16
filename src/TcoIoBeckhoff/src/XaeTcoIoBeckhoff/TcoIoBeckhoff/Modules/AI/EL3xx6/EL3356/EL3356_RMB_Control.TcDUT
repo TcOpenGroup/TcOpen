@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3356_RMB_Control" Id="{952f7315-7b21-02c3-0919-8fbdccc8f685}">
+    <Declaration><![CDATA[TYPE EL3356_RMB_Control :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Ctrl AT %Q* : EL3356_Control;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

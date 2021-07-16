@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3423_TotalStatisticPower" Id="{3ac59b0d-b872-0b79-128c-a72e00b063b1}">
+    <Declaration><![CDATA[TYPE EL3423_TotalStatisticPower :
+STRUCT
+	{attribute addProperty Name "Active Power Avg"}
+	ActivePowerAvg AT %I* : REAL;
+	{attribute addProperty Name "Active Power Min"}
+	ActivePowerMin AT %I* : REAL;
+	{attribute addProperty Name "Active Power Max"}
+	ActivePowerMax AT %I* : REAL;
+	{attribute addProperty Name "Apparent Power Avg"}
+	ApparentPowerAvg AT %I* : REAL;
+	{attribute addProperty Name "Apparent Power Min"}
+	ApparentPowerMin AT %I* : REAL;
+	{attribute addProperty Name "Apparent Power Max"}
+	ApparentPowerMax AT %I* : REAL;
+	{attribute addProperty Name "Reactive Power Avg"}
+	ReactivePowerAvg AT %I* : REAL;
+	{attribute addProperty Name "Reactive Power Min"}
+	ReactivePowerMin AT %I* : REAL;
+	{attribute addProperty Name "Reactive Power Max"}
+	ReactivePowerMax AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

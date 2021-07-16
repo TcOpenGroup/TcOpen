@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3443_Power" Id="{dd44fed6-ea3a-0cf4-055b-7011271ed4f3}">
+    <Declaration><![CDATA[TYPE EL3443_Power :
+STRUCT
+	{attribute addProperty Name "Active Power"}
+	ActivePower AT %I* : REAL;
+	{attribute addProperty Name "Apparent Power"}
+	ApparentPower AT %I* : REAL;
+	{attribute addProperty Name "Reactive Power"}
+	ReactivePower AT %I* : REAL;
+	{attribute addProperty Name "Power Factor"}
+	PowerFactor AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

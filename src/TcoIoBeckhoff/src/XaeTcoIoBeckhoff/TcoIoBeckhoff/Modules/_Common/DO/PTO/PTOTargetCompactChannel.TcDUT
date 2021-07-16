@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="PTOTargetCompactChannel" Id="{830a2c14-ad13-0c95-132b-2d2e1a981e4f}">
+    <Declaration><![CDATA[TYPE PTOTargetCompactChannel :
+STRUCT
+	{attribute addProperty Name "Target counter value"}
+	TargetCounterValue AT %Q* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

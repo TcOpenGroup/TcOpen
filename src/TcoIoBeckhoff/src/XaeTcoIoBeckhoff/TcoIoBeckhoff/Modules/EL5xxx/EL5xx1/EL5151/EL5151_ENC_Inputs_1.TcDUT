@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5151_ENC_Inputs_1" Id="{14d373c8-a80b-01ba-0010-8af77e17f486}">
+    <Declaration><![CDATA[TYPE EL5151_ENC_Inputs_1 :
+STRUCT
+	{attribute addProperty Name "Period value"}
+	PeriodValue AT %I* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

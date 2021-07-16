@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3403_PM_Status" Id="{c7eadfd0-14cf-04b9-30fb-fe655c1d03d5}">
+    <Declaration><![CDATA[TYPE EL3403_PM_Status :
+STRUCT
+	{attribute addProperty Name "Missing zero crossing A"}
+	MissingZeroCrossingA AT %I* : BOOL;
+	{attribute addProperty Name "Missing zero crossing B"}
+	MissingZeroCrossingB AT %I* : BOOL;
+	{attribute addProperty Name "Missing zero crossing C"}
+	MissingZeroCrossingC AT %I* : BOOL;
+	{attribute addProperty Name "Phase sequence error"}
+	PhaseSequenceError AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

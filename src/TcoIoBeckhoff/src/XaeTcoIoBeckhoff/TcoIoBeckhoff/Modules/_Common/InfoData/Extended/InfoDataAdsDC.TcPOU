@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="InfoDataAdsDC" Id="{85d853e3-99bf-0cd8-3bfe-085d8909bd22}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK InfoDataAdsDC EXTENDS InfoDataAds
+VAR
+	_dcOutputShift AT %I* :   DINT;
+	_dcInputShift AT %I* :   DINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="DcInputShift" Id="{f5a572ff-2fdd-0c7f-02f8-33b0a027cec4}">
+      <Declaration><![CDATA[PROPERTY DcInputShift : DINT]]></Declaration>
+      <Get Name="Get" Id="{263460f9-927d-0426-1f0e-021570ad314b}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DcInputShift := _dcInputShift;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DcOutputShift" Id="{53c4d525-cf73-0ad5-0251-a661daa8c505}">
+      <Declaration><![CDATA[PROPERTY DcOutputShift : DINT]]></Declaration>
+      <Get Name="Get" Id="{30465fde-abac-0c23-3d7d-554ad3ee5414}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DcOutputShift := _dcOutputShift;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

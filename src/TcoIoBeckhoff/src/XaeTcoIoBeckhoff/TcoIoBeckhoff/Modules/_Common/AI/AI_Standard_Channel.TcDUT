@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="AI_Standard_Channel" Id="{1b35d8bf-bc5e-0019-2b42-68be45bb64e7}">
+    <Declaration><![CDATA[TYPE AI_Standard_Channel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : AI_Standard_Status;
+	{attribute addProperty Name "Value"}
+	Value AT %I* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

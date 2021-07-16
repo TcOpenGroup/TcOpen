@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2819_Outputs" Id="{d879b4fd-ef35-0a3c-25b1-a5ab11965769}">
+    <Declaration><![CDATA[TYPE EL2819_Outputs :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 2"}
+	_2 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 3"}
+	_3 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 4"}
+	_4 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 5"}
+	_5 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 6"}
+	_6 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 7"}
+	_7 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 8"}
+	_8 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 9"}
+	_9 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 10"}
+	_10 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 11"}
+	_11 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 12"}
+	_12 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 13"}
+	_13 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 14"}
+	_14 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 15"}
+	_15 AT %Q* : DIGOutput;
+	{attribute addProperty Name "Channel 16"}
+	_16 AT %Q* : DIGOutput;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3423_TotalStatisticPQF" Id="{4d37314e-c856-01cb-1427-69e8784e4da6}">
+    <Declaration><![CDATA[TYPE EL3423_TotalStatisticPQF :
+STRUCT
+	{attribute addProperty Name "PQF Avg"}
+	PQF_Avg AT %I* : REAL;
+	{attribute addProperty Name "PQF Min"}
+	PQF_Min AT %I* : REAL;
+	{attribute addProperty Name "PQF Max"}
+	PQF_Max AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

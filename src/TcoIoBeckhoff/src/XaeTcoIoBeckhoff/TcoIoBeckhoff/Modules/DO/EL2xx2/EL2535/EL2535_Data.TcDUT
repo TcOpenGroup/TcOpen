@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2535_Data" Id="{d50345eb-6c57-0c9a-1ee1-8119de02b476}">
+    <Declaration><![CDATA[TYPE EL2535_Data :
+STRUCT
+	{attribute addProperty Name "PWM Status Channel 1"}
+	PWMStatusChannel_1 : PWMStatusChannel;
+	{attribute addProperty Name "PWM Status Channel 2"}
+	PWMStatusChannel_2 : PWMStatusChannel;
+	{attribute addProperty Name "PWM Control Channel 1"}
+	PWMControlChannel_1 : PWMControlChannel;
+	{attribute addProperty Name "PWM Control Channel 2"}
+	PWMControlChannel_2 : PWMControlChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

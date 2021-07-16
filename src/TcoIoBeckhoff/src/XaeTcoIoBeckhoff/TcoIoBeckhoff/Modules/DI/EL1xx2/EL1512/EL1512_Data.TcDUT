@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1512_Data" Id="{90850117-79db-002a-354a-b572b5523fe2}">
+    <Declaration><![CDATA[TYPE EL1512_Data :
+STRUCT
+	{attribute addProperty Name "CNT Inputs Channel 1"}
+	CNTInputsChannel1 :CNTInputsChannel;
+	{attribute addProperty Name "CNT Inputs Channel 2"}
+	CNTInputsChannel2 :CNTInputsChannel;
+	{attribute addProperty Name "CNT Outputs Channel 1"}
+	CNTOutputsChannel1 :CNTOutputsChannel;
+	{attribute addProperty Name "CNT Outputs Channel 2"}
+	CNTOutputsChannel2 :CNTOutputsChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

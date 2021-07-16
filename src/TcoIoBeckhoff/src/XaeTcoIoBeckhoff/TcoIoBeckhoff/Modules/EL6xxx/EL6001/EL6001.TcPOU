@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="EL6001" Id="{d48c3dde-dfb9-0aeb-03c1-fbc82450b229}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EL6001
+VAR
+	_io : EL6001_Data;
+	{attribute addProperty Name "WcState"}
+	_wcState : WcStateInputToggle;
+	{attribute addProperty Name "Info data"}
+	_infoData : InfoDataAds;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IO" Id="{fc582108-e0cb-03af-10cf-5cd379942ae3}">
+      <Declaration><![CDATA[PROPERTY IO : REFERENCE TO EL6001_Data]]></Declaration>
+      <Get Name="Get" Id="{5f480836-afc2-0608-2c83-9b5fae7d1af2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IO REF= _io;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="WcState" Id="{f06591f6-fc9b-0d5c-294b-9f896083a16a}">
+      <Declaration><![CDATA[PROPERTY WcState : REFERENCE TO WcStateInputToggle]]></Declaration>
+      <Get Name="Get" Id="{9a044e55-5ff5-00c6-2bb1-2dde0f934142}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[WcState REF= _wcState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

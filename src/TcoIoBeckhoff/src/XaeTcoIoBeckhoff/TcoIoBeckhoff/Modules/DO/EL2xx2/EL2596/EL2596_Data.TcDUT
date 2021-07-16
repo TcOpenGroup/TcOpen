@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2596_Data" Id="{86b629fb-3ad7-086c-1cae-9f92e4844fc1}">
+    <Declaration><![CDATA[TYPE EL2596_Data :
+STRUCT
+	{attribute addProperty Name "DOX Status"}
+	DOXStatus : DOXStatusChannel;
+	{attribute addProperty Name "DOX Control"}
+	DOXControl : DOXControlChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

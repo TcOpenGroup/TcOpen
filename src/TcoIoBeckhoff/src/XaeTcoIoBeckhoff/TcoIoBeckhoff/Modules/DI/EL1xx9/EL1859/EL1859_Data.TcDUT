@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1859_Data" Id="{d7308498-8ab3-0e23-3273-873410bdbbd5}">
+    <Declaration><![CDATA[TYPE EL1859_Data :
+STRUCT
+	{attribute addProperty Name "1"}
+	{attribute addProperty Name "Channel 1"}
+	_1 :DiChannel;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DiChannel;
+	{attribute addProperty Name "Channel 3"}
+	_3 :DiChannel;
+	{attribute addProperty Name "Channel 4"}
+	_4 :DiChannel;
+	{attribute addProperty Name "Channel 5"}
+	_5 :DiChannel;
+	{attribute addProperty Name "Channel 6"}
+	_6 :DiChannel;
+	{attribute addProperty Name "Channel 7"}
+	_7 :DiChannel;
+	{attribute addProperty Name "Channel 8"}
+	_8 :DiChannel;
+	{attribute addProperty Name "Channel 9"}
+	_9 :DoChannel;
+	{attribute addProperty Name "Channel 10"}
+	_10 :DoChannel;
+	{attribute addProperty Name "Channel 11"}
+	_11 :DoChannel;
+	{attribute addProperty Name "Channel 12"}
+	_12 :DoChannel;
+	{attribute addProperty Name "Channel 13"}
+	_13 :DoChannel;
+	{attribute addProperty Name "Channel 14"}
+	_14 :DoChannel;
+	{attribute addProperty Name "Channel 15"}
+	_15 :DoChannel;
+	{attribute addProperty Name "Channel 16"}
+	_16 :DoChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

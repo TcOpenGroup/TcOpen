@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5102_Control" Id="{20cc4e19-d4e3-094b-3aa9-0ee1fa9e0349}">
+    <Declaration><![CDATA[TYPE EL5102_Control :
+STRUCT
+	{attribute addProperty Name "Enable latch CEnable latch CEnable latch CEnable latch C"}
+	EnableLatch_C : BIT;
+	{attribute addProperty Name "Enable latch extern on positive edge"}
+	EnableLatchExternOnPositiveEdge : BIT;
+	{attribute addProperty Name "Set counter"}
+	SetCounter : BIT;
+	{attribute addProperty Name "Enable latch extern on negative edge"}
+	EnableLatchExternOnNegativeEdge : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Set counter on latch C"}
+	SetCounterOnLatch_C : BIT;
+	{attribute addProperty Name "Set software gate"}
+	SetSoftwareGate : BIT;
+	{attribute addProperty Name "Set counter on latch extern on positive edge"}
+	SetCounterOnLatchExternOnPositiveEdge : BIT;
+	{attribute addProperty Name "Set counter on latch extern on negative edge"}
+	SetCounterOnLatchExternOnNegativeEdge : BIT;
+	{attribute addProperty Name "Enable latch extern 2 on positive edge"}
+	EnableLatchExtern2OnPositiveEdge : BIT;
+	{attribute addProperty Name "Enable latch extern 2 on negative edge"}
+	EnableLatchExtern2OnNegativeEdge : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 16(address x+1.7)"}
+	Bit_16 : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

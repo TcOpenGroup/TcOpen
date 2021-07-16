@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5151_Data" Id="{b64e5c4d-dd93-0e13-37e7-682917c9f173}">
+    <Declaration><![CDATA[TYPE EL5151_Data :
+STRUCT
+	{attribute addProperty Name "ENC Inputs"}
+	ENC_Inputs : EL5151_ENC_Inputs;
+	{attribute addProperty Name "ENC Inputs_1"}
+	ENC_Inputs_1 : EL5151_ENC_Inputs_1;
+	{attribute addProperty Name "ENC Outputs"}
+	ENC_Outputs : EL5151_ENC_Outputs;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

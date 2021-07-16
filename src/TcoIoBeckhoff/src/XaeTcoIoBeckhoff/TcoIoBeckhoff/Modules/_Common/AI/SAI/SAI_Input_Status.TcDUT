@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_Input_Status" Id="{fb11e5bd-e0fd-0475-3d61-e86bfad6b071}">
+    <Declaration><![CDATA[TYPE SAI_Input_Status :
+STRUCT
+	{attribute addProperty Name "Underrange"}
+	Underrange : BIT;
+	{attribute addProperty Name "Overrange"}
+	Overrange : BIT;
+	{attribute addProperty Name  "Extended range"}
+	ExtendedRange AT %I* : BIT;
+	{attribute addProperty Name  "Data invalid"}
+	DataInvalid AT %I* : BIT;
+	{attribute addProperty Name  "Range invalid"}
+	RangeInvalid AT %I* : BIT;
+	{attribute addProperty Name  "Autorange disabled"}
+	AutorangeDisabled AT %I* : BIT;
+	{attribute addProperty Name "Error"}
+	Error : BIT;
+	{attribute addProperty Name "Calibration in progress"}
+	CalibrationInProgress : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.5)"}
+	Bit_14 : BIT;
+	{attribute addProperty Name "TxPDO State"}
+	TxPDOState : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

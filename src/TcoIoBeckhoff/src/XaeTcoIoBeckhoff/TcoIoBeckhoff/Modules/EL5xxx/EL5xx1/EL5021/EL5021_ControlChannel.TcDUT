@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5021_ControlChannel" Id="{34e391cf-a83e-02a9-0070-c3d7523d2037}">
+    <Declaration><![CDATA[TYPE EL5021_ControlChannel :
+STRUCT
+	{attribute addProperty Name "Control"}
+	Control AT %Q* : EL5021_Control;
+	{attribute addProperty Name "Set counter value"}
+	SetCounterValue AT %Q* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

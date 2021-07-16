@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stDIGInputsDevice" Id="{4dcfea83-177a-0673-17ed-cc9201a4dd6f}">
+    <Declaration><![CDATA[TYPE stDIGInputsDevice :
+STRUCT
+	{attribute addProperty Name "Common Fault"}
+	CommonFault AT %I* : BIT;
+	{attribute addProperty Name "Overtemperature Device"}
+	OvertemperatureDevice AT %I* : BIT;
+	{attribute addProperty Name "Undervoltage"}
+	Undervoltage AT %I* : BIT;
+	{attribute addProperty Name "Missing Voltage"}
+	MissingVoltage AT %I* : BIT;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

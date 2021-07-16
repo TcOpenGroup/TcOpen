@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3446_Current" Id="{e62f0f5a-9d2a-0569-3c35-692e70a233d2}">
+    <Declaration><![CDATA[TYPE EL3446_Current :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1(address x.0)"}
+	Bit_1 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 2(address x.1)"}
+	Bit_2 AT %I* : BIT;
+	{attribute addProperty Name "Overcurrent"}
+	Overcurrent AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 AT %I* : BIT;
+	{attribute addProperty Name "Inaccurate Current"}
+	InaccurateCurrent AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 AT %I* : BIT;
+	{attribute addProperty Name "Current Guard Warning"}
+	CurrentGuardWarning AT %I* : BIT;
+	{attribute addProperty Name "Current Guard Error"}
+	CurrentGuardError AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 AT %I* : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 AT %I* : BIT;
+	{attribute addProperty Name "TxPDO Toggle"}
+	TxPDOToggle AT %I* : BIT;
+	{attribute addProperty Name "Current"}
+	Current AT %I* : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

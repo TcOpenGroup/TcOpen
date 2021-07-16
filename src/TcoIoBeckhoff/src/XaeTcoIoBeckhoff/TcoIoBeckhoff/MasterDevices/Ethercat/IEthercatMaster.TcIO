@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="IEthercatMaster" Id="{93b4b513-b73e-0ad4-0c32-c2f4cc23e51d}">
+    <Declaration><![CDATA[INTERFACE IEthercatMaster
+]]></Declaration>
+    <Property Name="DataValid" Id="{efa66681-446f-09c1-1cb4-3eabcffce0c4}">
+      <Declaration><![CDATA[PROPERTY DataValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{19b4728d-db7f-0915-15d9-8d7d71728f94}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

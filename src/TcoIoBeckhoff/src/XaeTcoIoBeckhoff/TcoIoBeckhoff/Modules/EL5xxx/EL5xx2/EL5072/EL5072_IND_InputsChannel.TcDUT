@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5072_IND_InputsChannel" Id="{0f99de6b-165b-057a-1509-8dfe2a858674}">
+    <Declaration><![CDATA[TYPE EL5072_IND_InputsChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : EL5042_Status;
+	{attribute addProperty Name "Position"}
+	Position AT %I* : DINT;
+	{attribute addProperty Name "Latch value"}
+	LatchValue AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

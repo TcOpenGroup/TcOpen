@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EthercatMasterInfoData" Id="{7fc21cb4-62fd-080b-05e0-65fbf0524014}">
+    <Declaration><![CDATA[TYPE EthercatMasterInfoData : STRUCT
+	{attribute addProperty Name "Info data change counter"}
+    ChangeCount AT %I* : UINT;
+	{attribute addProperty Name "DeviceId of EtherCAT device"}
+    DevId AT %I* : UINT;
+	{attribute addProperty Name "AmsNetId of EtherCAT device"}
+    AmsNetId AT %I* : AMSNETID;
+	{attribute addProperty Name "Count of configured EtherCAT slaves"}
+    CfgSlaveCount AT %I* : UINT;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

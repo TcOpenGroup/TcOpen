@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoHardwareDiagContext" Id="{e2f5ead5-24ed-0ea9-1b23-b0fd0d86ba2f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoHardwareDiagContext EXTENDS TcoCore.TcoContext
+VAR
+	_BackPlane : EthercatMasterBase(THIS^);
+	_X001 : EthercatMasterAdditionalSyncUnit(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="MAIN" Id="{e941468e-7823-08cb-1726-ee54f1441bb1}">
+      <Declaration><![CDATA[METHOD PROTECTED MAIN
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_BackPlane.Diagnostics();
+_X001.Diagnostics();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

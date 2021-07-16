@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="EL6631" Id="{ec8ee243-b902-0263-27b9-dcc79375dede}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EL6631
+VAR
+	{attribute addProperty Name "Info data"}
+	_infoData : InfoDataAdsAoE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

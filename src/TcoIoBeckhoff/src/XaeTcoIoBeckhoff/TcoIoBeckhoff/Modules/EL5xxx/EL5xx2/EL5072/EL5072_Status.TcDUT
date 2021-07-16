@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5072_Status" Id="{cb6cd014-240c-018e-04fc-bd4cc150ba00}">
+    <Declaration><![CDATA[TYPE EL5072_Status :
+STRUCT
+	{attribute addProperty Name "Underrange"}
+	Underrange : BIT;
+	{attribute addProperty Name "Overrange"}
+	Overrange : BIT;
+	{attribute addProperty Name "Excitation error"}
+	ExcitationError : BIT;
+	{attribute addProperty Name "Input error"}
+	InputError : BIT;
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	{attribute 'hide'}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute addProperty Name "Digital input"}
+	DigitalInput : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute addProperty Name "Latch extern valid"}
+	LatchExternValid : BIT;
+	{attribute addProperty Name "Set position done"}
+	SetPositionDone : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute addProperty Name "Diag"}
+	Diag : BIT;
+	{attribute addProperty Name "TxPDO State"}
+	TxPDOState : BIT;
+	{attribute addProperty Name "Input cycle counter 1"}
+	InputCycleCounter_1 : BIT;
+	{attribute addProperty Name "Input cycle counter 2"}
+	InputCycleCounter_2 : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5032_FB_InputsChannel" Id="{2d7d6143-c51e-0e24-16a1-1faa40e604e1}">
+    <Declaration><![CDATA[TYPE EL5032_FB_InputsChannel :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : EL5032_Status;
+	{attribute addProperty Name "Position"}
+	Position AT %I* : ULINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

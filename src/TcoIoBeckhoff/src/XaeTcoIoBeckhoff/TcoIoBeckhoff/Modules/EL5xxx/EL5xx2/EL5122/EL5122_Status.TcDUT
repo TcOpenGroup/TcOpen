@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5122_Status" Id="{aed2a381-7bd3-082c-35e7-6c305ab413e9}">
+    <Declaration><![CDATA[TYPE EL5122_Status :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1(address x.0)"}
+	Bit_1 : BIT;
+	{attribute addProperty Name "Latch extern valid"}
+	LatchExternValid : BIT;
+	{attribute addProperty Name "Set counter done"}
+	SetCounterDone : BIT;
+	{attribute addProperty Name "Counter underflow"}
+	CounterUnderflow : BIT;
+	{attribute addProperty Name "Counter overflow"}
+	CounterOverflow : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute addProperty Name "Status of input A"}
+	StatusOfInput_A : BIT;
+	{attribute addProperty Name "Status of input B"}
+	StatusOfInput_B : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute addProperty Name "Status of input gate"}
+	StatusOfInput_gate : BIT;
+	{attribute addProperty Name "Diag"}
+	Diag : BIT;
+	{attribute addProperty Name "TxPDO State"}
+	TxPDOState : BIT;
+	{attribute addProperty Name "Input cycle counter 1"}
+	InputCycleCounter_1 : BIT;
+	{attribute addProperty Name "Input cycle counter 2"}
+	InputCycleCounter_2 : BIT;
+	{attribute addProperty Name "Software gate valid"}
+	SoftwareGateValid : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 18(address x+2.1)"}
+	Bit_18 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 19(address x+2.2)"}
+	Bit_19 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 20(address x+2.3)"}
+	Bit_20 : BIT;
+	{attribute addProperty Name "Counter value out of range"}
+	CounterValueOutOfRange : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 22(address x+2.5)"}
+	Bit_22 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 23(address x+2.6)"}
+	Bit_23 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 24(address x+2.7)"}
+	Bit_24 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 25-32(address x+3.0 - x+3.7)"}
+	Bit_25_32 : BITARR8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

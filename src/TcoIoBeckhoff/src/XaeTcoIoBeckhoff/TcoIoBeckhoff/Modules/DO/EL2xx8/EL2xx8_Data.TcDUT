@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2xx8_Data" Id="{848b243a-5582-086f-3a7a-c1add607e0c3}">
+    <Declaration><![CDATA[TYPE EL2xx8_Data :
+STRUCT
+	{attribute addProperty Name "Channel 1"}
+	_1 :DoChannel;
+	{attribute addProperty Name "Channel 2"}
+	_2 :DoChannel;
+	{attribute addProperty Name "Channel 3"}
+	_3 :DoChannel;
+	{attribute addProperty Name "Channel 4"}
+	_4 :DoChannel;
+	{attribute addProperty Name "Channel 5"}
+	_5 :DoChannel;
+	{attribute addProperty Name "Channel 6"}
+	_6 :DoChannel;
+	{attribute addProperty Name "Channel 7"}
+	_7 :DoChannel;
+	{attribute addProperty Name "Channel 8"}
+	_8 :DoChannel;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

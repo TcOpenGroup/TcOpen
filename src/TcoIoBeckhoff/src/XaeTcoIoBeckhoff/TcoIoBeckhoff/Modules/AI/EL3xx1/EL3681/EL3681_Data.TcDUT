@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3681_Data" Id="{ed59d853-7b24-0ffe-09f4-24ae1330d567}">
+    <Declaration><![CDATA[TYPE EL3681_Data :
+STRUCT
+	{attribute addProperty Name "SAI Inputs"}
+	_SAI_Inputs : SAI_Input;
+	{attribute addProperty Name "SAI Feedback"}
+	_SAI_Feedback : SAI_Feedback;
+	{attribute addProperty Name "SAI Range"}
+	_SAI_Range : SAI_Range;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

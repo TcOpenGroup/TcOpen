@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_Input" Id="{44732e6e-f6d3-07f9-18fc-bf605e4cddc5}">
+    <Declaration><![CDATA[TYPE SAI_Input :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : SAI_Input_Status;
+	{attribute addProperty Name "Value"}
+	Value AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

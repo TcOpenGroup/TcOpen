@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EL5152_Control" Id="{526671bf-9663-0f4a-30a7-9571209552e7}">
+    <Declaration><![CDATA[TYPE EL5152_Control :
+STRUCT
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 1(address x.0)"}
+	Bit_1 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 2(address x.1)"}
+	Bit_2 : BIT;
+	{attribute addProperty Name "Set counter"}
+	SetCounter : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 4(address x.3)"}
+	Bit_4 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 5(address x.4)"}
+	Bit_5 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 6(address x.5)"}
+	Bit_6 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 7(address x.6)"}
+	Bit_7 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 8(address x.7)"}
+	Bit_8 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 9(address x+1.0)"}
+	Bit_9 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 10(address x+1.1)"}
+	Bit_10 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 11(address x+1.2)"}
+	Bit_11 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 12(address x+1.3)"}
+	Bit_12 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 13(address x+1.4)"}
+	Bit_13 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 14(address x+1.5)"}
+	Bit_14 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 15(address x+1.6)"}
+	Bit_15 : BIT;
+	{attribute 'hide'}
+	{attribute addProperty Name "Bit 16(address x+1.7)"}
+	Bit_16 : BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stDIGDiagInput" Id="{16e39790-9865-0db8-3a9b-f3baffcea9c6}">
+    <Declaration><![CDATA[TYPE stDIGDiagInput :
+STRUCT
+	{attribute addProperty Name "Overtemperature"}
+	Overtemperature : BIT;
+	{attribute addProperty Name "Open Load"}
+	OpenLoad : BIT;
+	{attribute addProperty Name "Overcurrent"}
+	Overcurrent : BIT;
+	{attribute addProperty Name "Short Circuit to 24V"}
+	ShortCircuitTo24V : BIT;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

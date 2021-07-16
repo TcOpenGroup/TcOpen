@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SAI_Range" Id="{1947960b-e22d-0dfe-005e-1420ae8a6d98}">
+    <Declaration><![CDATA[TYPE SAI_Range :
+STRUCT
+	{attribute addProperty Name "Range"}
+	Range AT %Q* : SAI_RangeControl;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
