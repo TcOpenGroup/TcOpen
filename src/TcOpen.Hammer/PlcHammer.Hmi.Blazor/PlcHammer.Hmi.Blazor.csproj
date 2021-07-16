@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-PlcHammer.Hmi.Blazor-F3A2EC07-11BB-4345-B921-62A66D905AB4</UserSecretsId>
+    <GenerateAsseblyInfo>false</GenerateAsseblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\_packaging\TcOpen.Group.Blazor\TcOpen.Group.Blazor.csproj" />
     <ProjectReference Include="..\PlcHammerConnector\PlcHammerConnector.csproj" />
   </ItemGroup>
 

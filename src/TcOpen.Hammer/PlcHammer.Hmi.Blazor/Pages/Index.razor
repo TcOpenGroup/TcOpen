@@ -5,9 +5,17 @@
 <h1>
     @Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail();
 </h1>
-<div>
 
-</div>
+
+@foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
+{
+    <RenderableContentControl Presentation="Control"
+                              Context="@task"/>
+                            
+}
+
+<RenderableContentControl Presentation="Display"
+                          Context="@Station._groundMode._currentStep.Description" />
 
 <button class="btn-light" @onclick="() => Station._groundModeTask.Execute(null)">
     @Station._groundModeTask.GetSymbolTail()
@@ -18,7 +26,6 @@
 <button class="btn-light" @onclick="() => Station._serviceModeTask.Execute(null)">
     @Station._serviceModeTask.GetSymbolTail()
 </button>
-
 
 
 <RenderableContentControl Presentation="Display"
