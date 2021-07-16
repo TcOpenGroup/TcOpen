@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="EthercatMasterAdditionalSyncUnit" Id="{527bad92-3897-0c10-1da2-1e462ac8b901}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EthercatMasterAdditionalSyncUnit EXTENDS EthercatMasterBase
+VAR
+	AdditionalSyncUnit : SyncUnit;
+	AdditionalSyncUnitHadIssue : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Diagnostics" Id="{f4e97dcc-80b0-0ba3-2d1f-3e774944ff62}">
+      <Declaration><![CDATA[METHOD Diagnostics
+VAR
+    _deviceStatus : EthercatMasterDeviceStatus;
+    _i : UINT;
+    _tmpString : STRING(125);
+    _tmpErrorMessage : STRING(125);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF AdditionalSyncUnit.HasIssue THEN
+	SUPER^.AdditionalSyncUnitHasIssue := TRUE;
+END_IF
+
+IF AdditionalSyncUnitHadIssue AND NOT AdditionalSyncUnit.HasIssue THEN
+	SUPER^.AdditionalSyncUnitHasIssue := FALSE;
+END_IF
+
+AdditionalSyncUnitHadIssue := AdditionalSyncUnit.HasIssue;
+
+SUPER^.Diagnostics();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

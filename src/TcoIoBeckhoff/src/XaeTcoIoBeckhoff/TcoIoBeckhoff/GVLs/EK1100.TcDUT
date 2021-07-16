@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EK1100" Id="{df51ca15-04bc-0c19-3ed2-0ffd35cd2360}">
+    <Declaration><![CDATA[TYPE EK1100 :
+STRUCT
+	_EL6001 : EL6001;
+	_EL1809 : EL1809;
+	_EL2809 : EL2809;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

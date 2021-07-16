@@ -41,9 +41,48 @@
     <Compile Include="Abstractions\WcState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GVLs\EK1100.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\IO.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\EthercatMasterAdditionalSyncUnit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\EthercatMasterBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\EthercatMasterDeviceStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\EthercatMasterOutputsBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\EthercatMasterInfoData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\IEthercatMaster.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\EthercatMasterInputsBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\SyncUnit\SyncUnit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\SyncUnit\SyncUnitInfoData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\SyncUnit\SyncUnitStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\SyncUnit\SyncUnitWcState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MasterDevices\Ethercat\UpdateDiagnosticsTask.TcPOU">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Modules\AI\EL34x3\EL3403\EL3403.TcPOU">
       <SubType>Code</SubType>
@@ -1398,6 +1437,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TcoHardwareDiag\TcoHardwareDiagContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Version\Global_Version.TcGVL">
       <SubType>Code</SubType>
     </Compile>
@@ -1406,6 +1448,8 @@
     <Folder Include="Abstractions" />
     <Folder Include="Abstractions\AI" />
     <Folder Include="GVLs" />
+    <Folder Include="MasterDevices\Ethercat" />
+    <Folder Include="MasterDevices\Ethercat\SyncUnit" />
     <Folder Include="Modules" />
     <Folder Include="Modules\AI\EL34x3\EL3403" />
     <Folder Include="Modules\AI\EL34x3\EL3443" />
@@ -1507,10 +1551,17 @@
     <Folder Include="Modules\DI" />
     <Folder Include="Modules\DO" />
     <Folder Include="Modules\AI" />
+    <Folder Include="Couplers" />
+    <Folder Include="MasterDevices" />
+    <Folder Include="TcoHardwareDiag" />
     <Folder Include="POUs" />
     <Folder Include="Version" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_EtherCAT">
+      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_EtherCAT</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>

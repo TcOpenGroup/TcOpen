@@ -3,11 +3,10 @@
   <POU Name="MAIN" Id="{9bf4adaf-0f2d-0ac2-2cb1-948afa0b8cdf}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	A2_stat : stInfoDataBase;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[A2_stat :=  IO.A2._infoData.State;]]></ST>
+      <ST><![CDATA[IO._CX2040.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

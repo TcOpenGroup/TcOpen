@@ -3,6 +3,11 @@
   <GVL Name="IO" Id="{86db31ba-4472-4fa2-bd0f-07826bbe8eb4}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL 
+
+_CX2040 : TcoHardwareDiagContext;
+
+_EK1100 : EK1100;
+
 //	{attribute 'iopath:"Device 1 (EtherCAT)\\Term 1 (EK1100)\\Term 2 (EL3001)"'}
 //	_EL3001 : AI_1_Module;
 	
@@ -256,6 +261,7 @@ _EL6614 : EL6614;
 _EL6631 : EL6631;
 _EL6731 : EL6731;
 _EL6751 : EL6751;
+
 
 END_VAR]]></Declaration>
   </GVL>

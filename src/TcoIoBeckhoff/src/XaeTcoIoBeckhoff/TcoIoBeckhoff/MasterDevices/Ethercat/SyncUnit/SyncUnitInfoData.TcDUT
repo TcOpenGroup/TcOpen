@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SyncUnitInfoData" Id="{195d10da-9e0b-0061-2728-7a4c719162f6}">
+    <Declaration><![CDATA[TYPE SyncUnitInfoData :
+STRUCT
+	{attribute addProperty Name "ObjectId"}
+	ObjectId AT %I* : OTCID;
+	{attribute addProperty Name "State"}
+    State AT %I* : UINT;
+	{attribute addProperty Name "SlaveCount"}
+    SlaveCount AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

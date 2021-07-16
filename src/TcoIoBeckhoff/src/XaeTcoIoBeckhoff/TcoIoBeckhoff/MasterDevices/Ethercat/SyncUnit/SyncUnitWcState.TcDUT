@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SyncUnitWcState" Id="{a0512cdd-889a-0ded-1d8d-660ff55f556c}">
+    <Declaration><![CDATA[TYPE SyncUnitWcState :
+STRUCT
+	{attribute addProperty Name "WcState"}
+	WcState AT %I* :BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
