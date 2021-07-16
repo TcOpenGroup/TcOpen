@@ -1,7 +1,7 @@
 ﻿namespace TcOpen.Inxton.Logging
 {
     using Serilog;
-    using TcOpen.Inxton.Abstractions.Logging;
+    using TcOpen.Inxton.Logging;
     public class SerilogAdapter : ITcoLogger
     {
         /// <summary>

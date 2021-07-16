@@ -2,7 +2,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using TcoDataTests;
 using Tc.Prober.Runners;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 using System.Linq;
 using System;
 using TcoCore;

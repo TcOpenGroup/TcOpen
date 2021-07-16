@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using TcOpen.Inxton.Abstractions.Logging;
+using TcOpen.Inxton.Logging;
 
 namespace TcOpen.Inxton.AppTests
 {

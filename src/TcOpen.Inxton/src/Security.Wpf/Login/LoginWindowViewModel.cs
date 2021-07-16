@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using TcOpen.Inxton.Input;
 using Vortex.Presentation;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     internal class LoginWindowViewModel : BindableBase
     {

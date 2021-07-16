@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Input;
 
-namespace TcOpen.Inxton.Security.Wpf.UserInfoDisplay
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class UserInfoDisplayViewModel
     {
@@ -35,7 +35,7 @@ namespace TcOpen.Inxton.Security.Wpf.UserInfoDisplay
 
         public void Logout()
         {
-            TcOpen.Inxton.Security.SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
+            TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
         }
     }
 }

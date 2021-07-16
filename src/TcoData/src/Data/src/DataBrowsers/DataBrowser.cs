@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 

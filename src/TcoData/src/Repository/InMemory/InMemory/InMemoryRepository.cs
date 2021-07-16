@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data.InMemory
 {

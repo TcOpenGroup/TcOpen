@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
     /// Interaction logic for InsufficientRightsBox.xaml
@@ -24,5 +24,7 @@ namespace TcOpen.Inxton.Security.Wpf
         {
             InitializeComponent();
         }
+
+        internal InsufficientRightsBoxViewModel ViewModel { get { return this.DataContext as InsufficientRightsBoxViewModel; } } 
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TcOpen.Inxton.Abstractions.Security
+﻿namespace TcOpen.Inxton.Security
 {
     public interface IUser
     {
@@ -6,6 +6,6 @@
         string Email { get; set; }
         string Level { get; set; }
         string[] Roles { get; set; }
-        string Username { get; set; }
+        string UserName { get; set; }
     }
 }

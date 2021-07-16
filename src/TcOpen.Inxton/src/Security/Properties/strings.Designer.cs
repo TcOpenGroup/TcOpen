@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TcOpen.Inxton.Security.Properties {
+namespace TcOpen.Inxton.Local.Security.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TcOpen.Inxton.Security.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcOpen.Inxton.Security.Properties.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcOpen.Inxton.Local.Security.Properties.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

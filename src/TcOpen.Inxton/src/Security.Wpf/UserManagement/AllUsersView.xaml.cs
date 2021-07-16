@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace TcOpen.Inxton.Security.Wpf.UserManagement
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
     /// Interaction logic for AllUsersView.xaml

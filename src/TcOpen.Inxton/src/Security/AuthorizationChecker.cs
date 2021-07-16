@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     /// <summary>
     ///     User AuthorizationChecker to check whether the current use has privilege to execute the code.
@@ -25,7 +25,7 @@ namespace TcOpen.Inxton.Security
             return roles.Split('|')
                         .Where(p => p != string.Empty)
                         .Select(p => p.ToLower())
-                        .Intersect((SecurityManager.Manager.Principal.Identity as VortexIdentity).Roles.Select(role => role.ToLower()))
+                        .Intersect((SecurityManager.Manager.Principal.Identity as AppIdentity).Roles.Select(role => role.ToLower()))
                         .Any() ? true : false;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace TcOpen.Inxton.Security.Wpf.Dialog
+﻿namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public enum  MessageType
     {

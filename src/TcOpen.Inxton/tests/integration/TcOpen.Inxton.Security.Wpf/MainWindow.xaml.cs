@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using TcOpen.Inxton.Abstractions.Security;
 using TcOpen.Inxton.Security;
-using TcOpen.Inxton.Security.Wpf;
+using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.Local.Security.Wpf;
 
 namespace integration.Security.Wpf.netcore
 {
@@ -17,21 +17,21 @@ namespace integration.Security.Wpf.netcore
         public MainWindow()
         {
             Directory.EnumerateFiles(@"C:\INXTON\USERS\").ToList().ForEach(File.Delete);
-
-            SecurityManager.Create(new DefaultUserDataRepository<UserData>());
+            var userDataRepo = new DefaultUserDataRepository<UserData>();
+            SecurityManager.Create(userDataRepo);
 
             authService = SecurityProvider.Get.AuthenticationService;
 
             var userName = "Admin";
             var password = "AdminPassword";
             var roles = new string[] { "Administrator" };
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()));
 
             userName = "Operator";
             password = "OperatorPassword";
             roles = new string[] { "Operator" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()));
 
             authService.DeAuthenticateCurrentUser();
 

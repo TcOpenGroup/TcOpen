@@ -1,4 +1,4 @@
-﻿namespace TcOpen.Inxton.Abstractions.Logging
+﻿namespace TcOpen.Inxton.Logging
 {
     /// <summary>
     /// Provides abstraction for arbitrary logger implementation.

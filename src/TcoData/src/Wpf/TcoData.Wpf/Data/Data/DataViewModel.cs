@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 using TcoData;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Wpf.Properties;
 using Vortex.Presentation.Wpf;

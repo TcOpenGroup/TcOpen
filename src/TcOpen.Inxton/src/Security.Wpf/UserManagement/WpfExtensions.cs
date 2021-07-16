@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcOpen.Inxton.Security.Wpf.UserManagement
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     internal static class WpfExtensions
     {
