@@ -6,26 +6,27 @@
     @Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail();
 </h1>
 
+<RenderableContentControl Presentation="Base"
+                          Context="@Station._test" />
 
-@foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
-{
-    <RenderableContentControl Presentation="Control"
-                              Context="@task" />
 
-}
+<div class="d-flex flex-row">
+    @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
+    {
+        <div class="p-2">
+            <RenderableContentControl Presentation="Base"
+                                      Context="@task" />
+        </div>
+
+    }
+</div>
+
+
 
 <RenderableContentControl Presentation="Display"
                           Context="@Station._groundMode._currentStep.Description" />
 
-<button class="btn-light" @onclick="() => Station._groundModeTask.Execute(null)">
-    @Station._groundModeTask.GetSymbolTail()
-</button>
-<button class="btn-light" @onclick="() => Station._automatModeTask.Execute(null)">
-    @Station._automatModeTask.GetSymbolTail()
-</button>
-<button class="btn-light" @onclick="() => Station._serviceModeTask.Execute(null)">
-    @Station._serviceModeTask.GetSymbolTail()
-</button>
+
 
 
 <RenderableContentControl Presentation="Display"
@@ -39,13 +40,6 @@
 <p>-------------------------------------------------------------------------</p>
 
 
-
-@foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
-{
-    <RenderableContentControl Presentation="Service"
-                              Context="@task" />
-
-}
 
 
 @code{

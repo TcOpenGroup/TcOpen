@@ -6,16 +6,12 @@ using TcOpen.Inxton.TcoCore.Blazor;
 
 namespace TcoCore
 {
-    public partial class TcoTaskControlView
+    public partial class TcoTaskView
     {
-        [Parameter]
-        public IVortexObject Vortex { get; set; }
 
-        TcoTaskControlViewModel ViewModel { get; set; } = new TcoTaskControlViewModel();
 
         protected override void OnInitialized()
         {
-            ViewModel.Model = Vortex;
             UpdateValuesOnChange(ViewModel.Component);            
             ViewModel.Component._taskState.Subscribe(TaskStateChanged);
             ButtonState = ViewModel.Component.StateToButtonClass();

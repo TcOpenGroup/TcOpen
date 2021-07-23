@@ -1,0 +1,19 @@
+﻿@inherits RenderableViewModelComponentBase<TcoTaskViewModel>
+@namespace TcoCore 
+
+<div class="container-fluid">
+    <button @onclick="() => ViewModel.Component.Execute(null)" 
+            type="button" 
+            class="@ButtonState" 
+            disabled="@ViewModel.IsDisabled">
+        @ButtonCaption
+    </button>
+
+    <button type="button" 
+            class="@ButtonState" 
+            disabled="@ViewModel.IsDisabled" 
+            @onclick="() => ViewModel.Component.Restore.Execute(null)">
+        <i class="far fa-times-circle"></i>
+    </button>
+</div>
+

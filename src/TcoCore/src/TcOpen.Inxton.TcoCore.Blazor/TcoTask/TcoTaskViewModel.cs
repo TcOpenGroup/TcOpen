@@ -10,9 +10,9 @@ using Vortex.Presentation.Blazor.Interfaces;
 namespace TcoCore
 {
 
-    public class TcoTaskControlViewModel : RenderableViewModelBase
+    public class TcoTaskViewModel : RenderableViewModelBase
     {
-        public TcoTaskControlViewModel()
+        public TcoTaskViewModel()
         {
             
         }
