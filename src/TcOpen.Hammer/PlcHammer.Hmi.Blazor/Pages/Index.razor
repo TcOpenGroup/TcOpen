@@ -10,8 +10,8 @@
 @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
 {
     <RenderableContentControl Presentation="Control"
-                              Context="@task"/>
-                            
+                              Context="@task" />
+
 }
 
 <RenderableContentControl Presentation="Display"
@@ -36,6 +36,17 @@
 
 <RenderableContentControl Presentation="Display"
                           Context="@Station._processTraceabilty._data" />
+<p>-------------------------------------------------------------------------</p>
+
+
+
+@foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
+{
+    <RenderableContentControl Presentation="Service"
+                              Context="@task" />
+
+}
+
 
 @code{
 
