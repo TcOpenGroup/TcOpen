@@ -1,0 +1,70 @@
+﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsViewModel>
+@namespace TcoCore
+<h3>TcoDiagnosticsView</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <select class="w-100 form-select"
+                    @bind="@ViewModel.MinMessageCategoryFilter">
+                @foreach (var item in eMessageCategories)
+                {
+
+                    <option class="form-control" value="@item">@item.ToString() </option>
+
+                }
+            </select>
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" @bind="@ViewModel.AutoUpdate" />
+                <label class="form-check-label" for="flexCheckDefault">
+                    Auto-update
+                </label>
+
+            </div>
+        </div>
+        <div class="col-2">
+            <button @onclick="() => ViewModel.UpdateMessagesCommand.Execute(null)"
+                    type="button"
+                    class="btn btn-primary">
+                Update messages
+            </button>
+        </div>
+    </div>
+</div>
+
+   
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Message</th>
+            <th scope="col">Location</th>
+            <th scope="col">PerCycleCount</th>
+            <th scope="col">Symbol</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in ViewModel.MessageDisplay)
+        {
+        <tr @onclick="() => RowClicked(message.ParentsObjectSymbol)">
+            <td>@message.TimeStamp</td>
+            <td>@message.Text</td>
+            <td>@message.Location</td>
+            <td>@message.PerCycleCount</td>
+            <td>@message.ParentsObjectSymbol</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+   
+
+    @code {
+        private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
+        public void RowClicked(string ParentsObjectSymbol)
+        {
+            var x = 10;
+        }
+    }
