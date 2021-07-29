@@ -1,0 +1,43 @@
+﻿@inherits RenderableViewModelComponentBase<TcoTaskViewModel>
+@namespace TcoCore
+
+<button @onclick="() => ViewModel.Component.Execute(null)"
+        type="button"
+        class="btn btn-primary"
+        disabled="@ViewModel.IsDisabled">
+    @ButtonName
+</button>
+
+<button type="button"
+        class="btn btn-primary"
+        disabled="@ViewModel.IsDisabled"
+        @onclick="() => ViewModel.Component.Abort.Execute(null)">
+    <i class="far fa-times-circle"></i>
+</button>
+
+<button type="button"
+        class="btn btn-primary"
+        disabled="@ViewModel.IsDisabled"
+        @onclick="() => ViewModel.Component.Restore.Execute(null)">
+    <i class="far fa-times-circle"></i>
+</button>
+
+
+@code{
+    public string ButtonName { get; set; }
+    protected override void OnInitialized()
+    {
+        if (!String.IsNullOrEmpty(ViewModel.Component.AttributeName))
+        {
+            ButtonName = ViewModel.Component.AttributeName;
+        }
+        else
+        {
+            ButtonName = ViewModel.Component.GetSymbolTail();
+        }
+        //var val != null ? string.IsNullOrEmpty(val.AttributeName) ? val.GetSymbolTail() : val.AttributeName : "Missing object information";
+        
+    }
+    // return val != null ? string.IsNullOrEmpty(val.AttributeName) ? val.GetSymbolTail() : val.AttributeName : "Missing object information";
+    // ? val.GetSymbolTail() : val.AttributeName : "Missing object information";
+}

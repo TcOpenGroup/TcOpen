@@ -1,0 +1,9 @@
+﻿@namespace TcoCore
+@inherits RenderableViewModelComponentBase<TcoMomentaryTaskViewModel>
+
+<button @onclick="() => ViewModel.TcoMomentaryTask.Execute(null)"
+        type="button"
+        class="btn btn-primary">
+    @ViewModel.Caption
+</button>
+

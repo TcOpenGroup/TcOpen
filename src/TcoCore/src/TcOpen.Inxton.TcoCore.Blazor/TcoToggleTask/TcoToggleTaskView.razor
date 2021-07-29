@@ -1,0 +1,8 @@
+﻿@inherits RenderableViewModelComponentBase<TcoToggleTaskViewModel>
+@namespace TcoCore
+
+<button @onclick="() => ViewModel.TcoToggleTask.Execute(null)"
+        type="button"
+        class="btn btn-primary">
+    @ViewModel.Caption
+</button>
