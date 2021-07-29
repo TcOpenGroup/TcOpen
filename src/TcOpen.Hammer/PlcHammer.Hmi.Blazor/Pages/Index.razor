@@ -1,8 +1,8 @@
 ﻿@page "/"
 
-<TcoCore.TcoMomentaryTaskView></TcoCore.TcoMomentaryTaskView>
+@*<TcoCore.TcoMomentaryTaskView></TcoCore.TcoMomentaryTaskView>
 <TcoCore.TcoToggleTaskView></TcoCore.TcoToggleTaskView>
-<TcoCore.TcoTaskProgressBarView Vortex="@Station.GetChildren().Where(p => p is TcoCore.TcoTask).First()"></TcoCore.TcoTaskProgressBarView>
+<TcoCore.TcoTaskProgressBarView Vortex="@Station.GetChildren().Where(p => p is TcoCore.TcoTask).First()"></TcoCore.TcoTaskProgressBarView>*@
 
 <h1>
     @Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail()

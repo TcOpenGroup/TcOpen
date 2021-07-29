@@ -1,4 +1,5 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsViewModel>
+@using Vortex.Connector;
 @namespace TcoCore
 <h3>TcoDiagnosticsView</h3>
 
@@ -48,7 +49,7 @@
     <tbody>
         @foreach (var message in ViewModel.MessageDisplay)
         {
-        <tr @onclick="() => RowClicked(message.ParentsObjectSymbol)">
+        <tr @onclick="() => RowClicked(message)">
             <td>@message.TimeStamp</td>
             <td>@message.Text</td>
             <td>@message.Location</td>
@@ -59,12 +60,28 @@
 
     </tbody>
 </table>
+
+@if (AffectedObject != null)
+{
+<RenderableContentControl Context="AffectedObject" />
+}
    
 
     @code {
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
-        public void RowClicked(string ParentsObjectSymbol)
+        private IVortexObject AffectedObject { get; set; }
+        public void RowClicked(PlainTcoMessage message)
         {
-            var x = 10;
+            ViewModel.SelectedMessage = message;
+            var clone = message.ShallowClone();
+            AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(message.Identity);
+        
+       
+        
         }
+
+
+
+
+
     }

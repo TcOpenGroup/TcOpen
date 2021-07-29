@@ -19,7 +19,7 @@ namespace TcoCore
 
         public string ButtonState { get; set; } = "btn btn-secondary";
 
-        public string ButtonCaption { get { return Vortex.GetNameOrSymbol(); } }
+        public string ButtonCaption { get { return ViewModel.Component.GetNameOrSymbol(); } }
 
         private void TaskStateChanged(IValueTag sender, ValueChangedEventArgs args)
         {

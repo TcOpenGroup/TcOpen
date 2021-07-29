@@ -1,0 +1,26 @@
+﻿@namespace TcoPneumatics
+@inherits RenderableViewModelComponentBase<TcoCylinderViewModel>
+
+<h3>TcoCylinderServiceView</h3>
+
+<RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
+                          Presentation="ProgressBar"></RenderableContentControl>
+
+<RenderableContentControl Context="ViewModel.Component._stopDefault"
+                          Presentation="ProgressBar"></RenderableContentControl>
+
+<RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
+                          Presentation="ProgressBar"></RenderableContentControl>
+
+
+
+<TcoSignalInfoView Component="@ViewModel.Component._atHomePosSignalInfo"></TcoSignalInfoView>
+<TcoSignalInfoView Component="@ViewModel.Component._toHomePosSignalInfo"></TcoSignalInfoView>
+<TcoSignalInfoView Component="@ViewModel.Component._atWorkPosSignalInfo"></TcoSignalInfoView>
+<TcoSignalInfoView Component="@ViewModel.Component._toWorkPosSignalInfo"></TcoSignalInfoView>
+@code {      
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel.Component);
+    }
+}

@@ -10,12 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-alpha.552" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-alpha.580" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcOpen.Hammer\PlcHammerConnector\PlcHammerConnector.csproj" />
   </ItemGroup>
 
 </Project>

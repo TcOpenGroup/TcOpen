@@ -29,7 +29,7 @@ namespace TcoCore
         /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
 
-        protected IsTcoObject _tcoObject { get; set; }
+        internal IsTcoObject _tcoObject { get; set; }
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
 
         public object Categories
@@ -128,6 +128,74 @@ namespace TcoCore
             }
 
         }
+
+        /// <summary>
+        ///  Gets or sets currently selected message from the list of messages.
+        /// </summary>
+        public PlainTcoMessage SelectedMessage
+        {
+            get
+            {
+                return selectedMessage;
+            }
+            set
+            {
+                if (value == null)
+                    return;
+
+                var clone = value.ShallowClone();
+
+                if (selectedMessage == clone)
+                {
+                    return;
+                }
+
+                SetProperty(ref selectedMessage, clone);
+                //this.OnPropertyChanged(nameof(AffectedObjectPresentation));
+            }
+        }
+
+        //private ulong lastSelectedMessageIdentity = 0;
+        //private object affectedObjectPresentation = null;
+        //public object AffectedObjectPresentation
+        //{
+        //    get
+        //    {
+        //        if (this.SelectedMessage == null)
+        //            return null;
+
+        //        if (this.SelectedMessage.Identity == lastSelectedMessageIdentity)
+        //        {
+        //            return affectedObjectPresentation;
+        //        }
+
+        //        if (SelectedMessage != null)
+        //        {
+        //            var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
+
+        //            if (affectedObject != null)
+        //            {
+        //                try
+        //                {
+                            
+        //                    TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+        //                    {
+        //                        affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
+        //                    });
+
+        //                }
+        //                catch (Exception)
+        //                {
+
+        //                    //throw;
+        //                }
+        //            }
+        //        }
+
+        //        lastSelectedMessageIdentity = this.SelectedMessage.Identity;
+        //        return affectedObjectPresenation;
+        //    }
+        //}
 
     }
 
