@@ -1,16 +1,21 @@
 ﻿@namespace TcoPneumatics
 @inherits RenderableViewModelComponentBase<TcoCylinderViewModel>
 
-<h3>TcoCylinderServiceView</h3>
+<h3>@ViewModel.Component.GetSymbolTail()</h3>
 
-<RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
-                          Presentation="ProgressBar"></RenderableContentControl>
-
-<RenderableContentControl Context="ViewModel.Component._stopDefault"
-                          Presentation="ProgressBar"></RenderableContentControl>
-
-<RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
-                          Presentation="ProgressBar"></RenderableContentControl>
+    <div class="p-2">
+        <RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
+                                    Presentation="ProgressBar"></RenderableContentControl>
+    </div>
+    <div class="p-2">
+        <RenderableContentControl Context="ViewModel.Component._stopDefault"
+                                    Presentation="ProgressBar"></RenderableContentControl>
+    </div>
+    <div class="p-2">
+        <RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
+                                    Presentation="ProgressBar"></RenderableContentControl>
+    </div>
+    
 
 
 

@@ -2,17 +2,30 @@
 @namespace TcoCore 
 
 <div class="d-flex flex-nowrap">
-    <button @onclick="() => ViewModel.Component.Execute(null)" 
-            type="button" 
-            class="@ButtonState" 
+    <button @onclick="() => ViewModel.Component.Execute(null)"
+            type="button"
+            class="@ButtonState"
             disabled="@ViewModel.IsDisabled">
         @ButtonCaption
     </button>
 
-    <button type="button" 
-            class="@ButtonState" 
-            disabled="@ViewModel.IsDisabled" 
-            @onclick="() => ViewModel.Component.Restore.Execute(null)">
-        <i class="far fa-times-circle"></i>
-    </button>
+    @if (IsTaskRunning)
+    {
+        <button type="button"
+                class="p-2"
+                style="background-color: transparent; border: none;"
+                @onclick="() => ViewModel.Component.Abort.Execute(null)">
+            <i class="far fa-times-circle"></i>
+        </button>
+    }
+
+    @*is error*@
+    @if (ViewModel.Component._taskState.Synchron == 30)
+    {
+        <button type="button"
+                class="btn btn-danger"
+                @onclick="() => ViewModel.Component.Restore.Execute(null)">
+            <i class="far fa-times-circle"></i>
+        </button>
+    }
 </div>

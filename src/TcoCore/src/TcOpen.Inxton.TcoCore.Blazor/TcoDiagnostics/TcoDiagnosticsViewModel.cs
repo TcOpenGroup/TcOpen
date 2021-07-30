@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Input;
+using Vortex.Connector;
 using Vortex.Presentation;
 
 namespace TcoCore
@@ -155,47 +156,8 @@ namespace TcoCore
             }
         }
 
-        //private ulong lastSelectedMessageIdentity = 0;
-        //private object affectedObjectPresentation = null;
-        //public object AffectedObjectPresentation
-        //{
-        //    get
-        //    {
-        //        if (this.SelectedMessage == null)
-        //            return null;
-
-        //        if (this.SelectedMessage.Identity == lastSelectedMessageIdentity)
-        //        {
-        //            return affectedObjectPresentation;
-        //        }
-
-        //        if (SelectedMessage != null)
-        //        {
-        //            var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
-
-        //            if (affectedObject != null)
-        //            {
-        //                try
-        //                {
-                            
-        //                    TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
-        //                    {
-        //                        affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
-        //                    });
-
-        //                }
-        //                catch (Exception)
-        //                {
-
-        //                    //throw;
-        //                }
-        //            }
-        //        }
-
-        //        lastSelectedMessageIdentity = this.SelectedMessage.Identity;
-        //        return affectedObjectPresenation;
-        //    }
-        //}
+        public IVortexObject AffectedObject { get; set; }
+       
 
     }
 

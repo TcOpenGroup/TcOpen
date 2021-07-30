@@ -2,11 +2,13 @@
 @inherits RenderableComplexComponentBase<TcoSignalInfo>
 
 <div class="d-flex flex-row">
-    <p>@Component.HumanReadable</p>
-    <RenderableContentControl Context="Component.Signal"
-                              Presentation="Display">
+    <p class="p-2">@Component.HumanReadable</p>
+    <div class="p-2">
+        <RenderableContentControl Context="Component.Signal"
+                                  Presentation="Display">
 
-    </RenderableContentControl>
+        </RenderableContentControl>
+    </div>
 </div>
 
 @code {      

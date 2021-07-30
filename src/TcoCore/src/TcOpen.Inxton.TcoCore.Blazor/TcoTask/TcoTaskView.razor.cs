@@ -21,9 +21,12 @@ namespace TcoCore
 
         public string ButtonCaption { get { return ViewModel.Component.GetNameOrSymbol(); } }
 
+        public bool IsTaskRunning { get; set; }
+
         private void TaskStateChanged(IValueTag sender, ValueChangedEventArgs args)
         {
-            ButtonState = ViewModel.Component.StateToButtonClass();            
+            ButtonState = ViewModel.Component.StateToButtonClass();
+            IsTaskRunning = ViewModel.Component.GetTaskState();
         }
     }
 }

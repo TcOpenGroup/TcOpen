@@ -49,7 +49,7 @@
     <tbody>
         @foreach (var message in ViewModel.MessageDisplay)
         {
-        <tr @onclick="() => RowClicked(message)">
+        <tr @onclick="() => OnSelectedMessage(message)">
             <td>@message.TimeStamp</td>
             <td>@message.Text</td>
             <td>@message.Location</td>
@@ -61,27 +61,26 @@
     </tbody>
 </table>
 
-@if (AffectedObject != null)
+@if (ViewModel.AffectedObject != null)
 {
-<RenderableContentControl Context="AffectedObject" />
+<RenderableContentControl Context="ViewModel.AffectedObject" Presentation="Service" />
 }
    
 
     @code {
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
-        private IVortexObject AffectedObject { get; set; }
-        public void RowClicked(PlainTcoMessage message)
+
+        public void OnSelectedMessage(PlainTcoMessage message)
         {
             ViewModel.SelectedMessage = message;
-            var clone = message.ShallowClone();
-            AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(message.Identity);
-        
-       
-        
+            ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(message.Identity);
+        }
+
+        protected override void OnInitialized()
+        {
+            UpdateValuesOnChange(ViewModel._tcoObject);
         }
 
 
 
-
-
-    }
+}

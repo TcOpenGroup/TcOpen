@@ -1,8 +1,11 @@
 ﻿@page "/"
-
+@using Vortex.Connector;
+@using TcoCore;
 @*<TcoCore.TcoMomentaryTaskView></TcoCore.TcoMomentaryTaskView>
-<TcoCore.TcoToggleTaskView></TcoCore.TcoToggleTaskView>
-<TcoCore.TcoTaskProgressBarView Vortex="@Station.GetChildren().Where(p => p is TcoCore.TcoTask).First()"></TcoCore.TcoTaskProgressBarView>*@
+    <TcoCore.TcoToggleTaskView></TcoCore.TcoToggleTaskView>
+    <TcoCore.TcoTaskProgressBarView Vortex="@Station.GetChildren().Where(p => p is TcoCore.TcoTask).First()"></TcoCore.TcoTaskProgressBarView>*@
+
+<TcoCore.TreeViewComponent Component="@TechMain"></TcoCore.TreeViewComponent>
 
 <h1>
     @Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail()
@@ -46,4 +49,5 @@
 @code{
 
     public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
+    public IVortexObject TechMain => Entry.PlcHammer.TECH_MAIN;
 }
