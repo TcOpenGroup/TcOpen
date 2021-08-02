@@ -1,12 +1,12 @@
-﻿namespace TcOpen.Inxton.Security.Wpf
+﻿namespace TcOpen.Inxton.Local.Security.Wpf
 {
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using TcOpen.Inxton.Abstractions.Security;
     using TcOpen.Inxton.Security;
+    using TcOpen.Inxton.Local.Security;
 
     /// <summary>
     /// Provides permission control at the UI level.
@@ -78,7 +78,7 @@
                 permissionBox.UpdateThis();
             }
         }
-
+       
         internal void UpdateThis()
         {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -102,12 +102,7 @@
                 case SecurityModeEnum.Disabled:
                     this.IsEnabled = HasPermission() ? true : false;
                     this.Visibility = Visibility.Visible;
-                    break;
-                //case SecurityModeEnum.Message:
-                //    this.IsEnabled = false;
-                //    this.Visibility = Visibility.Visible;
-                //    this.Content = new InsufficientRightsBox() { IsEnabled = true };
-                //    break;
+                    break;               
                 default:
                     break;
             }                     
@@ -118,7 +113,7 @@
             return this.Permissions.Split('|')
                                    .Where(p => p != string.Empty)
                                    .Select(p => p.ToLower())
-                                   .Intersect((SecurityManager.Manager.Principal.Identity as VortexIdentity).Roles.Select(role => role.ToLower()))
+                                   .Intersect((SecurityManager.Manager.Principal.Identity as AppIdentity).Roles.Select(role => role.ToLower()))
                                    .Any() ? true : false;
         }
 

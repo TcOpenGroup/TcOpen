@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Security;
 using TcOpen.Inxton.Input;
-using TcOpen.Inxton.Security.Wpf.Dialog;
+using System.Windows;
 
-
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class AllUsersViewModel : BaseUserViewModel
     {
@@ -14,6 +13,17 @@ namespace TcOpen.Inxton.Security.Wpf
         public ObservableCollection<String> AllRolesFiltered { get; set; }
 
         private UserData _selectedUser;
+        void UpateCommands()
+        {
+            AvailableToCurrentRoleCommand.RaiseCanExecuteChanged();
+            CurrentToAvailableRoleCommand.RaiseCanExecuteChanged();
+            AddMultipleRolesCommand      .RaiseCanExecuteChanged();
+            StarEditUserCommand          .RaiseCanExecuteChanged();
+            DeleteUserCommand            .RaiseCanExecuteChanged();
+            AddRoleCommand               .RaiseCanExecuteChanged();
+            RemoveRoleCommand.RaiseCanExecuteChanged();
+
+        }
         public UserData SelectedUser
         {
             get => _selectedUser;
@@ -22,6 +32,7 @@ namespace TcOpen.Inxton.Security.Wpf
                 _selectedUser = value;
                 SetProperty(ref _selectedUser, value);
                 FilterRoles();
+                UpateCommands();
             }
         }
 
@@ -60,6 +71,7 @@ namespace TcOpen.Inxton.Security.Wpf
             RemoveRoleCommand             = new RelayCommand(roles => RemoveRole(roles)          , p => SelectedUser != null);           
             Populate();
             BaseUserViewModel.OnNewUserAdded += Refresh;
+            
         }
 
         
@@ -88,15 +100,30 @@ namespace TcOpen.Inxton.Security.Wpf
         }
 
         private void UpdateUser(Pwds pwds)             
-        {            
-            if(!(String.IsNullOrEmpty(pwds.Pb1.Password) && String.IsNullOrEmpty(pwds.Pb2.Password)))
-            SelectedUser.SetPlainTextPassword(pwds.Pb1.Password);
-            UserRepository.Update(this.SelectedUser.Username, SelectedUser);
-            TcoAppDomain.Current.Logger.Information($"User '{this.SelectedUser.Username}' updated. {{@sender}}", new { UserName = this.SelectedUser.Username, Roles = this.SelectedUser.Roles });
-            pwds.Pb1.Clear();
-            pwds.Pb2.Clear();
-            UsersChanged();
-            Populate();
+        {
+            try
+            {
+                if (this.SelectedUser != null)
+                {
+                    if (!(String.IsNullOrEmpty(pwds.Pb1.Password) && String.IsNullOrEmpty(pwds.Pb2.Password)))
+                        SelectedUser.SetPlainTextPassword(pwds.Pb1.Password);
+
+                    if (pwds.Pb1.Password != pwds.Pb2.Password)
+                        throw new Exception("Passwords do not match");
+
+                    UserRepository.Update(this.SelectedUser.Username, SelectedUser);
+                    TcoAppDomain.Current.Logger.Information($"User '{this.SelectedUser.Username}' updated. {{@sender}}", new { UserName = this.SelectedUser.Username, Roles = this.SelectedUser.Roles });
+                    pwds.Pb1.Clear();
+                    pwds.Pb2.Clear();
+                    UsersChanged();
+                    Populate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating new user: '{ex.Message}'", "Failed to create user", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void AddRole(string v)

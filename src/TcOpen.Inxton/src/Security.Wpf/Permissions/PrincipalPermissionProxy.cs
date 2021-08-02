@@ -5,7 +5,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Windows;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     [ComVisible(true)]
     [Serializable]

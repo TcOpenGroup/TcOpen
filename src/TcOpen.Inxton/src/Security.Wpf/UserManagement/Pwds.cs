@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class Pwds : Freezable
     {

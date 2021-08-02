@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using TcOpen.Inxton.Abstractions.Data;
-using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Security;
 using Vortex.Presentation;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class BaseUserViewModel : BindableBase
     {
@@ -24,7 +24,7 @@ namespace TcOpen.Inxton.Security.Wpf
         {
             if (Application.Current.MainWindow == null) return;
             if (_userRepositary == null)
-                UserRepository  = SecurityManager.Manager.Service.UserRepository;
+                UserRepository  = SecurityManager.Manager.UserRepository;
             AllRoles            = SecurityManager.Manager.AvailableRoles.ToList();
             AllGroups           = SecurityManager.Manager.AvailableGroups().ToList();
             AllUsers            = new ObservableCollection<UserData>(UserRepository.GetRecords());

@@ -1,6 +1,4 @@
-﻿using TcOpen.Inxton.Abstractions.Data;
-
-namespace TcOpen.Inxton.Abstractions.Security
+﻿namespace TcOpen.Inxton.Security
 {
     /// <summary>
     /// Provides abstraction for authentication service in a vortex application.
@@ -36,12 +34,7 @@ namespace TcOpen.Inxton.Abstractions.Security
         /// <param name="newPassword1">New password</param>
         /// <param name="newPassword2">New password</param>
         void ChangePassword(string userName, string password, string newPassword1, string newPassword2);
-
-        /// <summary>
-        /// Users repository.
-        /// </summary>
-        IRepository<UserData> UserRepository { get; }
-
+        
         /// <summary>
         /// Occurs when the uses is successfully authenticated.
         /// </summary>
@@ -68,20 +61,8 @@ namespace TcOpen.Inxton.Abstractions.Security
         OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get; set; }
 
         /// <summary>
-        /// Get or set external authentication device.
+        /// Get or set external authentication device handling.
         /// </summary>
         IExternalAuthorization ExternalAuthorization { get; set; }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="username"></param>
-    public delegate void OnUserAuthentication(string username);   
-
-    /// <summary>
-    /// Determines whether user can be logged out automatically.
-    /// </summary>
-    /// <returns>True when the user can be logged out automatically.</returns>
-    public delegate bool OnTimedLogoutRequestDelegate();   
 }

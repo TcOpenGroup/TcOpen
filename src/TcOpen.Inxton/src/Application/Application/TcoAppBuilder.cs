@@ -1,8 +1,8 @@
 ﻿namespace TcOpen.Inxton
 {
-    using TcOpen.Inxton.Abstractions.Data;
-    using TcOpen.Inxton.Abstractions.Logging;
-    using TcOpen.Inxton.Abstractions.Security;
+    using TcOpen.Inxton.Data;
+    using TcOpen.Inxton.Logging;
+    using TcOpen.Inxton.Security;  
     using TcOpen.Inxton.App.Logging;
     using TcOpen.Inxton.Threading;
     using Vortex.Connector;
@@ -51,9 +51,12 @@
         /// <returns>AppBuilder</returns>
         public TcoAppBuilder SetSecurity(IAuthenticationService authenticationService)
         {
-            SecurityProvider.Create(authenticationService);  
+            AuthenticationService = authenticationService;            
             return this;
         }
+
+        public IAuthenticationService AuthenticationService { get; private set; }
+
 
         /// <summary>
         /// Sets the logging for the 'Edit' -> 'Online' value change.

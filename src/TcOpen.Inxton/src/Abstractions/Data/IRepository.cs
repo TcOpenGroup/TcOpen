@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TcOpen.Inxton.Abstractions.Data
+namespace TcOpen.Inxton.Data
 {
     public interface IRepository
     {
