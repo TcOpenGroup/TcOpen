@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class AuthorizationHandler
     {                 

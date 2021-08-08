@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     public class DelegateCommand : ICommand
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
     /// Interaction logic for fbDataExchangeControlView.xaml

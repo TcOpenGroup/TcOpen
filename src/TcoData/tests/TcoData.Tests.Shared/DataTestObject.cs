@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 using Vortex.Connector;
 
 namespace TcoDataUnitTests

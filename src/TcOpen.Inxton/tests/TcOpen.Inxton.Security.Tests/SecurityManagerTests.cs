@@ -3,7 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Permissions;
-using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Local.Security;
 
 namespace TcOpen.Inxton.Security.Tests
 {
@@ -53,7 +54,7 @@ namespace TcOpen.Inxton.Security.Tests
         public void AuthorizeAdministratorAndAccessObject()
         {
             //-- Arrange
-            TcOpen.Inxton.Security.SecurityManager.Manager.Service.AuthenticateUser("Admin", "AdminPassword");
+            TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service.AuthenticateUser("Admin", "AdminPassword");
 
             //-- Act
             var actual = new AdminAccessTestClass();
@@ -66,7 +67,7 @@ namespace TcOpen.Inxton.Security.Tests
         public void AuthorizeOperatorAndDenyObject()
         {
             //-- Arrange
-            TcOpen.Inxton.Security.SecurityManager.Manager.Service.AuthenticateUser("Operator", "OperatorPassword");           
+            TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service.AuthenticateUser("Operator", "OperatorPassword");           
 
             //-- Assert
             Assert.Throws(typeof(System.Security.SecurityException), () => new AdminAccessTestClass());

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TcOpen.Inxton.Security.Wpf.Properties {
+namespace TcOpen.Inxton.Local.Security.Wpf.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TcOpen.Inxton.Security.Wpf.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcOpen.Inxton.Security.Wpf.Properties.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcOpen.Inxton.Local.Security.Wpf.Properties.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,7 +79,7 @@ namespace TcOpen.Inxton.Security.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure?.
+        ///   Looks up a localized string similar to You are about to delete user from the repository. Are you sure you want to do it?.
         /// </summary>
         public static string AreYouSure {
             get {
@@ -336,6 +336,15 @@ namespace TcOpen.Inxton.Security.Wpf.Properties {
         public static string TokenChangeRequest {
             get {
                 return ResourceManager.GetString("TokenChangeRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
             }
         }
         

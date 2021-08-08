@@ -7,9 +7,9 @@ using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Data.Json;
 using System.Reflection;
 using System.IO;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
-using TcOpen.Inxton.Abstractions.Security;
 
 namespace HMI
 {
@@ -23,11 +23,16 @@ namespace HMI
         /// </summary>
         public App()
         {
+
+            var authenticationService = SecurityManager.Create(SetUpUserRepository());
+            ISecurityManager securityManager = SecurityManager.Manager;
+            securityManager.GetOrCreateRole(new Role("Service", "Maintenance"));
+
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter()) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetSecurity(SecurityManager.Create(SetUpUserRepository()))
+                .SetSecurity(authenticationService)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);    // This is necessary for UI operation.            
 
             // Execute PLC connector operations.

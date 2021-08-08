@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
 
 namespace Vortex.SecurityTests
@@ -12,10 +13,10 @@ namespace Vortex.SecurityTests
         [OneTimeSetUp]
         public void SetUp()
         {
-            TcOpen.Inxton.Security.SecurityManager.CreateDefault();
+            TcOpen.Inxton.Local.Security.SecurityManager.CreateDefault();
             NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal = SecurityManager.Manager.Principal;
 
-            var authService = TcOpen.Inxton.Security.SecurityManager.Manager.Service as AuthenticationService;
+            var authService = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service as AuthenticationService;
 
             var records = authService.UserRepository.GetRecords("*").Select(p => p._EntityId);
 

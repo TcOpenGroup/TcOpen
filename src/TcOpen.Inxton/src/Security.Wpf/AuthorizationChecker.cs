@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
     /// Uses <see cref="TcOpen.Inxton.Security.AuthorizationChecker"/>, but will also display a dialog window
@@ -23,13 +23,13 @@ namespace TcOpen.Inxton.Security.Wpf
 
         public static bool HasAuthorizationWithLoginDialogue(string roles)
         {
-            if(!TcOpen.Inxton.Security.AuthorizationChecker.HasAuthorization(roles))
+            if(!TcOpen.Inxton.Local.Security.AuthorizationChecker.HasAuthorization(roles))
             {
                 var loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();
             }
 
-            return TcOpen.Inxton.Security.AuthorizationChecker.HasAuthorization(roles);
+            return TcOpen.Inxton.Local.Security.AuthorizationChecker.HasAuthorization(roles);
         }
     }
 }
