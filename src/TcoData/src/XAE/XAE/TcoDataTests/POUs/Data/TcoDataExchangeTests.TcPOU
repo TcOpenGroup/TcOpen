@@ -41,7 +41,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[DeleteDataWithInvalidId := DataManager
-	.Delete(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Delete(ULINT_TO_STRING(Context.RealTimeClock.TickClock()))
 	.Done;]]></ST>
       </Implementation>
     </Method>
@@ -62,7 +62,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ReadDataWithInvlaidId := DataManager
-	.Read(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Read(ULINT_TO_STRING(Context.RealTimeClock.TickClock()))
 	.Error;]]></ST>
       </Implementation>
     </Method>
@@ -86,7 +86,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[UpdateDataWithInvalidId := DataManager
-	.Update(ULINT_TO_STRING(Context.Rtc.TickClock()))
+	.Update(ULINT_TO_STRING(Context.RealTimeClock.TickClock()))
 	.Error;]]></ST>
       </Implementation>
     </Method>

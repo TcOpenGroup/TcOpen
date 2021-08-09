@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoMessengerContextTest" Id="{ab1f1c15-693e-0b9d-1dc8-8f3fbcb09dcf}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
@@ -15,10 +15,10 @@ END_VAR
     <Implementation>
       <ST><![CDATA[IF THIS^._callMyPlcInstanceRtcUpdate THEN
 	THIS^._rtcUpdate();
-	_nowLocal			:=	THIS^.Rtc.NowLocal();
-	_nowUtc				:=	THIS^.Rtc.NowUTC();
-	_rtcIsValid			:=	THIS^.Rtc.IsValid;
-	_rtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+	_nowLocal			:=	THIS^.RealTimeClock.NowLocal();
+	_nowUtc				:=	THIS^.RealTimeClock.NowUTC();
+	_rtcIsValid			:=	THIS^.RealTimeClock.IsValid;
+	_rtcIsSynchronized	:=	THIS^.RealTimeClock.IsSynchronized;
 END_IF
 
 IF THIS^._callMyPlcInstanceRun THEN
@@ -56,8 +56,8 @@ METHOD INTERNAL ContextOpen
 METHOD INTERNAL RtcIsValid : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
-_rtcIsValid := THIS^.Rtc.IsValid;
+        <ST><![CDATA[RtcIsValid := THIS^.RealTimeClock.IsValid;
+_rtcIsValid := THIS^.RealTimeClock.IsValid;
 ]]></ST>
       </Implementation>
     </Method>
