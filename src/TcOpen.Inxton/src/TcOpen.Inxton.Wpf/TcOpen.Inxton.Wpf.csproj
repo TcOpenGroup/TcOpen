@@ -19,9 +19,14 @@
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.12.0-nightly.562" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   
 </Project>
