@@ -5,13 +5,13 @@
 
 @if (Children != null)
 {
-<TreeView Nodes="Children"
+@*<TreeView Nodes="Children"
           GetChildNodes="@(item => item.GetChildren())"
           HasChildNodes="@(item => item.GetChildren().Any() == true)"
           @bind-SelectedNode="selectedNode2"
           @bind-ExpandedNodes="ExpandedNodes2">
     <NodeContent>@context.Symbol</NodeContent>
-</TreeView>
+</TreeView>*@
 }
 
 @code {
@@ -21,7 +21,6 @@
     protected override void OnInitialized()
     {
 
-        TreeObject = new TreeViewWrapper(Component);
         Children = Component.GetChildren();
         //Children = TreeObject.Children;
     }

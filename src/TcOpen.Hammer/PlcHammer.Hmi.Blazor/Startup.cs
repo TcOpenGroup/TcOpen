@@ -17,9 +17,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vortex.Presentation.Blazor.Services;
-using Blazorise;
-using Blazorise.Bootstrap;
-using Blazorise.Icons.FontAwesome;
 
 namespace PlcHammer.Hmi.Blazor
 {
@@ -47,12 +44,6 @@ namespace PlcHammer.Hmi.Blazor
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton<WeatherForecastService>();
             services.AddVortexBlazorServices();
-            services.AddBlazorise(options =>
-      {
-          options.ChangeTextOnKeyPress = true; // optional
-      })
-      .AddBootstrapProviders()
-      .AddFontAwesomeIcons();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +76,6 @@ namespace PlcHammer.Hmi.Blazor
                 endpoints.MapFallbackToPage("/_Host");
             });
 
-            //app.LoadVortexBlazorComponents();
             Entry.PlcHammer.Connector.BuildAndStart();
         }
     }

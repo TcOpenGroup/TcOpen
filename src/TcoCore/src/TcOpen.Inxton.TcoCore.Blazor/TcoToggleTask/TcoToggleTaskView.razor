@@ -6,3 +6,11 @@
         class="btn btn-primary">
     @ViewModel.Caption
 </button>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel.TcoToggleTask);
+    }
+}
