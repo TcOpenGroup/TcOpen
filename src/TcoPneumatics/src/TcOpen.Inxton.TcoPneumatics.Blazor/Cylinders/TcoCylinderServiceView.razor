@@ -1,63 +1,33 @@
 ﻿@namespace TcoPneumatics
 @inherits RenderableViewModelComponentBase<TcoCylinderViewModel>
 
-<h3>@ViewModel.Component.GetSymbolTail()</h3>
-
-@*<div class="p-2">
-    <RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
-                              Presentation="ProgressBar"></RenderableContentControl>
-</div>
-<div class="p-2">
-    <RenderableContentControl Context="ViewModel.Component._stopDefault"
-                              Presentation="ProgressBar"></RenderableContentControl>
-</div>
-<div class="p-2">
-    <RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
-                              Presentation="ProgressBar"></RenderableContentControl>
-</div>*@
 
 
-
-<div class="accordion" id="@_accordionId">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="@_accordionHeaderId">
-            <div class="d-flex flex-row-reverse">
-
-                <div class="p-2">
-                    <RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
-                                              Presentation="ProgressBar"></RenderableContentControl>
-                </div>
-                <div class="p-2">
-                    <RenderableContentControl Context="ViewModel.Component._stopDefault"
-                                              Presentation="ProgressBar"></RenderableContentControl>
-                </div>
-                <div class="p-2">
-                    <RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
-                                              Presentation="ProgressBar"></RenderableContentControl>
-                </div>
-             </div>
-            <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#@_accordionCollapseId" aria-expanded="false" aria-controls="@_accordionCollapseId">
-                @ViewModel.Component.GetSymbolTail()
-            </button>
-
-        </h2>
-        <div id="@_accordionCollapseId" class="accordion-collapse collapse" aria-labelledby="@_accordionId" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <TcoSignalInfoView Component="@ViewModel.Component._atHomePosSignalInfo"></TcoSignalInfoView>
-                <TcoSignalInfoView Component="@ViewModel.Component._toHomePosSignalInfo"></TcoSignalInfoView>
-                <TcoSignalInfoView Component="@ViewModel.Component._atWorkPosSignalInfo"></TcoSignalInfoView>
-                <TcoSignalInfoView Component="@ViewModel.Component._toWorkPosSignalInfo"></TcoSignalInfoView>
+<TcoComponentView Component="@ViewModel.Component">
+    <TcoComponentHeader>
+        <div class="d-flex flex-row-reverse">
+            <div class="p-2">
+                <RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
+                                          Presentation="ProgressBar"></RenderableContentControl>
+            </div>
+            <div class="p-2">
+                <RenderableContentControl Context="ViewModel.Component._stopDefault"
+                                          Presentation="ProgressBar"></RenderableContentControl>
+            </div>
+            <div class="p-2">
+                <RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
+                                          Presentation="ProgressBar"></RenderableContentControl>
             </div>
         </div>
-    </div>
-</div>
+    </TcoComponentHeader>
+    <TcoComponentBody>
+        <TcoSignalInfoView Component="@ViewModel.Component._atHomePosSignalInfo"></TcoSignalInfoView>
+        <TcoSignalInfoView Component="@ViewModel.Component._toHomePosSignalInfo"></TcoSignalInfoView>
+        <TcoSignalInfoView Component="@ViewModel.Component._atWorkPosSignalInfo"></TcoSignalInfoView>
+        <TcoSignalInfoView Component="@ViewModel.Component._toWorkPosSignalInfo"></TcoSignalInfoView>
+    </TcoComponentBody>
+</TcoComponentView>
 
-@code {
-    private string _accordionId => $"accordion_{@ViewModel.Component.GetSymbolTail()}";
-    private string _accordionHeaderId => $"header_{@ViewModel.Component.GetSymbolTail()}";
-    private string _accordionCollapseId => $"collapse_{@ViewModel.Component.GetSymbolTail()}";
-    protected override void OnInitialized()
-    {
-        UpdateValuesOnChange(ViewModel.Component);
-    }
-}
+
+
+

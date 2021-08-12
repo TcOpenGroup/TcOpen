@@ -1,0 +1,36 @@
+﻿@namespace TcoCore
+@inherits RenderableComplexComponentBase<TcoObjectMessageHandler>
+
+@if (Component.ActiveMessagesCount > 0 && 
+    !string.IsNullOrEmpty(Component.HighestSeverityMessage))
+{
+    <i class="fas fa-exclamation-circle text-danger"
+       data-bs-toggle="tooltip"
+       data-bs-html="true"
+       title="@Component.HighestSeverityMessage"></i>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        SetTimer();
+    }
+
+
+    private System.Timers.Timer messageUpdateTimer;
+    private void SetTimer()
+    {
+        if (messageUpdateTimer == null)
+        {
+            messageUpdateTimer = new System.Timers.Timer(2500);
+            messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
+            messageUpdateTimer.AutoReset = true;
+            messageUpdateTimer.Enabled = true;
+        }
+    }
+    private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        Component?.UpdateHealthInfo();
+        InvokeAsync(StateHasChanged);
+    }
+}

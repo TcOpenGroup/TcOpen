@@ -21,7 +21,7 @@ namespace TcoCore
         public RelayCommand ButtonDown { get; }
         public RelayCommand ButtonUp { get; }
 
-
+        public string ButtonState { get; set; } = "btn-primary";
         public override object Model { get => TcoMomentaryTask; set { TcoMomentaryTask = value as TcoMomentaryTask; ModeUpdate(); } }
 
 
@@ -60,11 +60,13 @@ namespace TcoCore
 
         private void OnButtonUp()
         {
+            ButtonState = "btn-primary";
             this.TcoMomentaryTask.Stop();
         }
 
         private void OnButtonDown()
         {
+            ButtonState = "btn-success";
             this.TcoMomentaryTask.Start();
         }
     }

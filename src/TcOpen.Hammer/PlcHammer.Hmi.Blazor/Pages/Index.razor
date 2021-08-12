@@ -1,14 +1,8 @@
 ﻿@page "/"
-@using Vortex.Connector;
-@using TcoCore;
-@*<TcoCore.TcoMomentaryTaskView></TcoCore.TcoMomentaryTaskView>
-    <TcoCore.TcoToggleTaskView></TcoCore.TcoToggleTaskView>
-    <TcoCore.TcoTaskProgressBarView Vortex="@Station.GetChildren().Where(p => p is TcoCore.TcoTask).First()"></TcoCore.TcoTaskProgressBarView>*@
-
 
 
 <h1>
-    @Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail()
+    TcOpen.Hammer
 </h1>
 
 
@@ -17,10 +11,10 @@
 <div class="d-flex flex-row">
     @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
     {
-        <div class="p-2">
+
             <RenderableContentControl Presentation="Base"
-                                      Context="@task" />
-        </div>
+                                      Context="@task" 
+                                      Class="p-2"/>
 
     }
 </div>
@@ -31,8 +25,6 @@
                           Context="@Station._groundMode._currentStep.Description" />
 
 
-
-
 <RenderableContentControl Presentation="Display"
                           Context="@Station._groundMode._currentStep.Description" />
 
@@ -41,7 +33,6 @@
 
 <RenderableContentControl Presentation="Display"
                           Context="@Station._processTraceabilty._data" />
-<p>-------------------------------------------------------------------------</p>
 
 
 

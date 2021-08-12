@@ -35,7 +35,7 @@
     </div>
 </div>
 
-   
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -49,13 +49,13 @@
     <tbody>
         @foreach (var message in ViewModel.MessageDisplay)
         {
-        <tr @onclick="() => OnSelectedMessage(message)">
-            <td>@message.TimeStamp</td>
-            <td>@message.Text</td>
-            <td>@message.Location</td>
-            <td>@message.PerCycleCount</td>
-            <td>@message.ParentsObjectSymbol</td>
-        </tr>
+            <tr @onclick="() => OnSelectedMessage(message)">
+                <td>@message.TimeStamp</td>
+                <td>@message.Text</td>
+                <td>@message.Location</td>
+                <td>@message.PerCycleCount</td>
+                <td>@message.ParentsObjectSymbol</td>
+            </tr>
         }
 
     </tbody>
@@ -63,23 +63,26 @@
 
 @if (ViewModel.AffectedObject != null)
 {
-<RenderableContentControl Context="ViewModel.AffectedObject" Presentation="Service" />
+     <RenderableContentControl Context="ViewModel.AffectedObject" Presentation="Service" />
 }
-   
 
-    @code {
-        private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
 
-        public void OnSelectedMessage(PlainTcoMessage message)
+@code {
+    private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
+    private string Symbol { get; set; }
+    public void OnSelectedMessage(PlainTcoMessage message)
+    {
+        ViewModel.SelectedMessage = message;
+        if (ViewModel.SelectedMessage != null)
         {
-            ViewModel.SelectedMessage = message;
-            ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(message.Identity);
+            ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(ViewModel.SelectedMessage.Identity);
         }
+    }
 
-        protected override void OnInitialized()
-        {
-            UpdateValuesOnChange(ViewModel._tcoObject);
-        }
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel._tcoObject);
+    }
 
 
 

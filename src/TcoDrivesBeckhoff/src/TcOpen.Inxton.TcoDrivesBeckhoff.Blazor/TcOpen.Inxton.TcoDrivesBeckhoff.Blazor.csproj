@@ -10,11 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-nightly.591" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-alpha.585" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoCore\src\TcOpen.Inxton.TcoCore.Blazor\TcOpen.Inxton.TcoCore.Blazor.csproj" />
     <ProjectReference Include="..\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj" />
   </ItemGroup>
 
