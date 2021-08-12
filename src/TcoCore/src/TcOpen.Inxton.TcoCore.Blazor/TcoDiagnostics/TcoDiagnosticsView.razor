@@ -1,7 +1,5 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsViewModel>
-@using Vortex.Connector;
 @namespace TcoCore
-<h3>TcoDiagnosticsView</h3>
 
 <div class="container">
     <div class="row">
@@ -67,23 +65,3 @@
 }
 
 
-@code {
-    private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
-    private string Symbol { get; set; }
-    public void OnSelectedMessage(PlainTcoMessage message)
-    {
-        ViewModel.SelectedMessage = message;
-        if (ViewModel.SelectedMessage != null)
-        {
-            ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(ViewModel.SelectedMessage.Identity);
-        }
-    }
-
-    protected override void OnInitialized()
-    {
-        UpdateValuesOnChange(ViewModel._tcoObject);
-    }
-
-
-
-}

@@ -1,5 +1,5 @@
 ﻿@page "/"
-
+@inherits RenderableComponentBase
 
 <h1>
     TcOpen.Hammer
@@ -12,12 +12,22 @@
     @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
     {
 
-            <RenderableContentControl Presentation="Base"
-                                      Context="@task" 
-                                      Class="p-2"/>
+        <RenderableContentControl Presentation="Base"
+                                  Context="@task"
+                                  Class="p-2" />
 
     }
 </div>
+
+
+@if (TcoTasksExtensions.TaskStateToVisibility(Station._groundModeTask))
+{
+    <RenderableContentControl Context="Station._groundMode" Presentation="Base" />
+}
+@if (TcoTasksExtensions.TaskStateToVisibility(Station._automatModeTask))
+{
+    <RenderableContentControl Context="Station._automatMode" Presentation="Base" />
+}
 
 
 
@@ -41,4 +51,11 @@
 
     public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
     public IVortexObject TechMain => Entry.PlcHammer.TECH_MAIN;
+
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(Station._groundModeTask);
+        UpdateValuesOnChange(Station._automatModeTask);
+    }
+
 }
