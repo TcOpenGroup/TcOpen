@@ -6,16 +6,12 @@ using TcOpen.Inxton.TcoCore.Blazor;
 
 namespace TcoCore
 {
-    public partial class TcoTaskControlView
+    public partial class TcoTaskView
     {
-        [Parameter]
-        public IVortexObject Vortex { get; set; }
 
-        TcoTaskControlViewModel ViewModel { get; set; } = new TcoTaskControlViewModel();
 
         protected override void OnInitialized()
         {
-            ViewModel.Model = Vortex;
             UpdateValuesOnChange(ViewModel.Component);            
             ViewModel.Component._taskState.Subscribe(TaskStateChanged);
             ButtonState = ViewModel.Component.StateToButtonClass();
@@ -23,11 +19,14 @@ namespace TcoCore
 
         public string ButtonState { get; set; } = "btn btn-secondary";
 
-        public string ButtonCaption { get { return Vortex.GetNameOrSymbol(); } }
+        public string ButtonCaption { get { return ViewModel.Component.GetNameOrSymbol(); } }
+
+        public bool IsTaskRunning { get; set; }
 
         private void TaskStateChanged(IValueTag sender, ValueChangedEventArgs args)
         {
-            ButtonState = ViewModel.Component.StateToButtonClass();            
+            ButtonState = ViewModel.Component.StateToButtonClass();
+            IsTaskRunning = ViewModel.Component.GetTaskState();
         }
     }
 }

@@ -1,0 +1,61 @@
+﻿@namespace TcoCore
+@inherits RenderableViewModelComponentBase<TcoSequencerModeControllerViewModel>
+
+
+
+
+
+    <div class="row">
+        
+
+        <button class="btn btn-primary col border"
+                @onclick="() => ViewModel.TcoSequencerModeController._changeMode.Execute(null)">
+
+            @if (SequenceModeVisibleIn(ViewModel.TcoSequencerModeController._mode.Cyclic, eSequencerMode.CyclicMode))
+            {
+                <p>Step mode</p>
+            }
+
+            @if (SequenceModeVisibleIn(ViewModel.TcoSequencerModeController._mode.Cyclic, eSequencerMode.StepMode))
+            {
+                <p>Exit Step mode</p>
+            }
+        </button>
+        
+    </div>
+    @if (SequenceModeVisibleIn(ViewModel.TcoSequencerModeController._mode.Cyclic, eSequencerMode.StepMode))
+    {
+        <div class="row">
+            
+            <button class="btn btn-primary col border"
+                    @onclick="() => ViewModel.TcoSequencerModeController._stepBackward.Execute(null)">
+                <i class="fas fa-backward"></i>
+            </button>
+            
+            <button class="btn btn-primary col border"
+                    @onclick="() => ViewModel.TcoSequencerModeController._stepIn.Execute(null)">
+                Step In
+            </button>
+    
+            <button class="btn btn-primary col border"
+                    @onclick="() => ViewModel.TcoSequencerModeController._stepForward.Execute(null)">
+                <i class="fas fa-forward"></i>
+            </button>
+           
+        </div>
+    }
+ 
+
+@code {
+    private bool SequenceModeVisibleIn(int enumInt, eSequencerMode visibleInMode)
+    {
+
+        var enumValue = (eSequencerMode)Enum.ToObject(typeof(eSequencerMode), enumInt);
+        return enumValue == visibleInMode ? true : false;
+    }
+
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel.TcoSequencerModeController);
+    }
+}

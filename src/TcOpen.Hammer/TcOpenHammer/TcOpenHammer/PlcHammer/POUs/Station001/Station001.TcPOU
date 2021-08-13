@@ -14,6 +14,7 @@ VAR
 	_serviceModeTask : TcoCore.TcoTask(THIS^);
 	_swiftModeTask : TcoCore.TcoTask(THIS^);
 	
+	
 	_processRecipies : ProcessDataManager(THIS^); 
     _processTraceabilty : ProcessDataManager(THIS^);
 	_technologicalDataManager : TechnologicalDataManager(THIS^);
@@ -25,6 +26,7 @@ END_VAR]]></Declaration>
 _processRecipies();
 _processTraceabilty();
 _technologicalDataManager();
+
 
 ServiceMode();
 GroundMode();
@@ -61,17 +63,6 @@ IF(_automatModeTask.Execute()) THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Checkers" Id="{9cd1367e-8bb5-450c-807d-957b9f194b6b}">
-      <Declaration><![CDATA[PROPERTY Checkers : REFERENCE TO Checkers]]></Declaration>
-      <Get Name="Get" Id="{92f1b29e-36ad-4210-8aba-8d49ce2d0eba}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Checkers REF= _checkers;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="Components" Id="{9262f3ea-0398-44d7-8cae-cfc2e667ba08}">
       <Declaration><![CDATA[PROPERTY Components : REFERENCE TO Station001_Components]]></Declaration>
       <Get Name="Get" Id="{dacd1503-9951-4498-890f-66fd2c5babde}">
@@ -102,6 +93,17 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Checkers" Id="{9cd1367e-8bb5-450c-807d-957b9f194b6b}">
+      <Declaration><![CDATA[PROPERTY Checkers : REFERENCE TO Checkers]]></Declaration>
+      <Get Name="Get" Id="{92f1b29e-36ad-4210-8aba-8d49ce2d0eba}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Checkers REF= _checkers;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="ProcessRecepie" Id="{b1b59222-8dec-42af-9785-f7a41fdb1f30}">
       <Declaration><![CDATA[PROPERTY ProcessRecepie : REFERENCE TO ProcessDataManager]]></Declaration>
       <Get Name="Get" Id="{7693ce53-8625-4a27-a0d9-a13a48b1061c}">
@@ -162,5 +164,41 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <LineIds Name="Station001">
+      <LineId Id="3" Count="3" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="7" Count="18" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.AutomatMode">
+      <LineId Id="3" Count="5" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.Components.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.GroundMode">
+      <LineId Id="3" Count="9" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.Checkers.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.ProcessRecepie.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.ProcessTraceabilty.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.ProductionData.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.ServiceMode">
+      <LineId Id="3" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001.TechnologicalDataManager.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

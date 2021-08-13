@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TcoCore;
 
-namespace TcOpen.Inxton.TcoCore.Blazor
+namespace TcoCore
 {
     public static class TcoTasksExtensions
     {
@@ -29,5 +29,59 @@ namespace TcOpen.Inxton.TcoCore.Blazor
 
             return "btn btn-secondary";
         }
+
+        public static bool GetTaskState(this TcoTask task)
+        {
+            try
+            {
+                var taskState = (eTaskState)((short)task._taskState.Synchron);
+
+                switch (taskState)
+                {
+                    case eTaskState.Requested:
+                    case eTaskState.Busy:
+                        return true;
+                    case eTaskState.Ready:
+                    case eTaskState.Error:
+                    case eTaskState.Done:
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+                // Swallow
+            }
+
+            return false;
+        }
+        public static bool TaskStateToVisibility(this TcoTask task)
+        {
+            try
+            {
+                var taskState = (eTaskState)((short)task._taskState.Synchron);
+
+                switch (taskState)
+                {
+                    case eTaskState.Requested:
+                    case eTaskState.Busy:
+                    case eTaskState.Error:
+                        return true;
+                    case eTaskState.Ready:
+                    case eTaskState.Done:
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+                // Swallow
+            }
+
+            return false;
+        }
+
+
     }
 }

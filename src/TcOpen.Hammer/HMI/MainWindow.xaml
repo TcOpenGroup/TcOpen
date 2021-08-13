@@ -35,6 +35,7 @@
                             <ContentControl Visibility="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
                                 <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatMode}" PresentationType="Base" />
                             </ContentControl>
+                           
                         </Grid>
                     </TabItem>
                     <TabItem Header="Components">

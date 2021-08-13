@@ -14,8 +14,12 @@ using PlcHammer.Hmi.Blazor.Data;
 using PlcHammerConnector;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Data.Json;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -76,8 +80,43 @@ namespace PlcHammer.Hmi.Blazor
                 endpoints.MapFallbackToPage("/_Host");
             });
 
-            //app.LoadVortexBlazorComponents();
             Entry.PlcHammer.Connector.BuildAndStart();
+            SetUpJsonRepositories();
+        }
+
+
+
+
+        private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
+                                             IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
+                                             IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
+        {
+            Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
+            Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
+
+            Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty.InitializeRepository(processTraceabiltyRepository);
+            Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty.InitializeRemoteDataExchange();
+
+            Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRepository(technologyDataRepository);
+            Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
+        }
+
+        private static void SetUpJsonRepositories()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));
+            var processTraceabiltyRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "Traceability")));
+            var technologyDataRepository = new JsonRepository<PlainStation001_TechnologicalSettings>(new JsonRepositorySettings<PlainStation001_TechnologicalSettings>(Path.Combine(repositoryDirectory, "TechnologicalSettings")));
+
+
+            SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
         }
     }
 }
