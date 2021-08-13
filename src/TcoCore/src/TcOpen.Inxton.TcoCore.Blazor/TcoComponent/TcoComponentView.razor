@@ -41,12 +41,20 @@
         [Parameter]
         public RenderFragment TcoComponentBody { get; set; }
 
-        
+
         public TcoObjectMessageHandler MessageHandler { get; set; }
 
         protected override void OnInitialized()
         {
             UpdateValuesOnChange(Component);
-            MessageHandler = (TcoObjectMessageHandler)Component.GetType().GetProperty("MessageHandler").GetValue(Component);
+            try
+            {
+                MessageHandler = (TcoObjectMessageHandler)Component.GetType().GetProperty("MessageHandler").GetValue(Component);
+            }
+            catch 
+            {
+                //swallow
+            }
+            
         }
     }
