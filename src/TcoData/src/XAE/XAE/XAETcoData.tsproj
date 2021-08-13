@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17" TcVersionFixed="true">
-	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.2.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -9,7 +9,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{C292F353-C8D8-4BBB-BE1E-9772558B17F8}" Name="TcoData" PrjFilePath="TcoData\TcoData.plcproj" TmcFilePath="TcoData\TcoData.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{C292F353-C8D8-4BBB-BE1E-9772558B17F8}" Name="TcoData" PrjFilePath="TcoData\TcoData.plcproj" TmcFilePath="TcoData\TcoData.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoData\TcoData.tmc">
 					<Name>TcoData Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -29,7 +29,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{6025FACE-83D2-4500-B4A4-6C4CD6227637}" Name="TcoDataTests" PrjFilePath="TcoDataTests\TcoDataTests.plcproj" TmcFilePath="TcoDataTests\TcoDataTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{6025FACE-83D2-4500-B4A4-6C4CD6227637}" Name="TcoDataTests" PrjFilePath="TcoDataTests\TcoDataTests.plcproj" TmcFilePath="TcoDataTests\TcoDataTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDataTests\TcoDataTests.tmc">
 					<Name>TcoDataTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

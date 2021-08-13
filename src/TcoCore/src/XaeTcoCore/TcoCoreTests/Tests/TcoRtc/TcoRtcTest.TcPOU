@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoRtcTest" Id="{422101bf-9bdb-02c4-0505-5d211f35b9e7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoRtcTest EXTENDS TcoCore._internals_TcoContext
 VAR
@@ -21,10 +21,10 @@ END_IF
 
 IF THIS^._callMyPlcInstanceRun THEN
 	THIS^.Run();
-	_nowLocal			:=	THIS^.Rtc.NowLocal();
-	_nowUtc				:=	THIS^.Rtc.NowUTC();
-	_rtcIsValid			:=	THIS^.Rtc.IsValid;
-	_rtcIsSynchronized	:=	THIS^.Rtc.IsSynchronized;
+	_nowLocal			:=	THIS^.RealTimeClock.NowLocal();
+	_nowUtc				:=	THIS^.RealTimeClock.NowUTC();
+	_rtcIsValid			:=	THIS^.RealTimeClock.IsValid;
+	_rtcIsSynchronized	:=	THIS^.RealTimeClock.IsSynchronized;
 	_myIdentity			:=	THIS^.Identity;
 END_IF
 
@@ -49,14 +49,14 @@ METHOD INTERNAL GetSynchParams
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL NowLocal ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_nowLocal := THIS^.Rtc.NowLocal();]]></ST>
+        <ST><![CDATA[_nowLocal := THIS^.RealTimeClock.NowLocal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="NowUtc" Id="{4d15ee95-7f3e-081c-2de7-138c5254d6a7}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL NowUtc ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_nowUtc := THIS^.Rtc.NowUTC();]]></ST>
+        <ST><![CDATA[_nowUtc := THIS^.RealTimeClock.NowUTC();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RtcIsSynchronized" Id="{9de41ec0-7d16-00fc-36c5-1766b55aec78}">
@@ -64,8 +64,8 @@ METHOD INTERNAL NowUtc ]]></Declaration>
 METHOD INTERNAL RtcIsSynchronized : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[RtcIsSynchronized := THIS^.Rtc.IsSynchronized;
-_rtcIsSynchronized := THIS^.Rtc.IsSynchronized;
+        <ST><![CDATA[RtcIsSynchronized := THIS^.RealTimeClock.IsSynchronized;
+_rtcIsSynchronized := THIS^.RealTimeClock.IsSynchronized;
 ]]></ST>
       </Implementation>
     </Method>
@@ -74,8 +74,8 @@ _rtcIsSynchronized := THIS^.Rtc.IsSynchronized;
 METHOD INTERNAL RtcIsValid : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[RtcIsValid := THIS^.Rtc.IsValid;
-_rtcIsValid := THIS^.Rtc.IsValid;
+        <ST><![CDATA[RtcIsValid := THIS^.RealTimeClock.IsValid;
+_rtcIsValid := THIS^.RealTimeClock.IsValid;
 ]]></ST>
       </Implementation>
     </Method>
@@ -84,7 +84,7 @@ _rtcIsValid := THIS^.Rtc.IsValid;
 METHOD INTERNAL TickClock : STRING
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TickClock := Tc2_EtherCAT.DCTIME64_TO_STRING(THIS^.Rtc.TickClock());]]></ST>
+        <ST><![CDATA[TickClock := Tc2_EtherCAT.DCTIME64_TO_STRING(THIS^.RealTimeClock.TickClock());]]></ST>
       </Implementation>
     </Method>
   </POU>

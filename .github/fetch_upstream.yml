@@ -1,0 +1,16 @@
+name: FetcUpstream
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '00 15 * * *'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge Upstream
+        uses: exions/merge-upstream@v1
+        with:
+          upstream: TcOpenGroup/TcOpen
+          upstream-branch: dev
+          branch: dev
