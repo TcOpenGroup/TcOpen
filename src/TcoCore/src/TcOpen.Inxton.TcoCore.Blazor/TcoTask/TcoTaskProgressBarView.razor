@@ -1,0 +1,72 @@
+﻿@inherits RenderableViewModelComponentBase<TcoTaskViewModel>
+@namespace TcoCore
+@using TcOpen.Inxton.TcoCore.Blazor
+@using Vortex.Connector
+@using Vortex.Connector.ValueTypes
+@using TcOpen.Inxton.VortexElementExtensions
+
+<div>
+    <button @onclick="() => ViewModel.Component.Execute(null)"
+            type="button"
+            class="btn btn-primary"
+            disabled="@ViewModel.IsDisabled"
+                
+            >
+        @ButtonName
+    </button>
+    @if (IsTaskRunning)
+    {
+        <button type="button"
+                class="p-2"
+                style="background-color: transparent; border: none;"
+                @onclick="() => ViewModel.Component.Abort.Execute(null)">
+            <i class="far fa-times-circle"></i>
+        </button>
+        <div class="spinner-border spinner-border-sm p-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    }
+
+    @*is error*@
+    @if (ViewModel.Component._taskState.Synchron == 30)
+    {
+        <button type="button"
+                class="btn btn-danger"
+                @onclick="() => ViewModel.Component.Restore.Execute(null)">
+            <i class="far fa-times-circle"></i>
+        </button>
+    }
+
+</div>
+
+
+
+
+
+
+@code{
+    public string ButtonName { get; set; }
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel.Component);
+        ViewModel.Component._taskState.Subscribe(TaskStateChanged);
+        IsTaskRunning = ViewModel.Component.GetTaskState();
+
+        if (!String.IsNullOrEmpty(ViewModel.Component.AttributeName))
+        {
+            ButtonName = ViewModel.Component.AttributeName;
+        }
+        else
+        {
+            ButtonName = ViewModel.Component.GetSymbolTail();
+        }
+
+    }
+
+    public bool IsTaskRunning { get; set; }
+    private void TaskStateChanged(IValueTag sender, ValueChangedEventArgs args)
+    {
+        IsTaskRunning = ViewModel.Component.GetTaskState();
+    }
+
+}
