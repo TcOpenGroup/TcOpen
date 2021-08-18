@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoMessenger" Id="{bb89b26f-ec79-4812-bab7-3579b2b6d1be}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -93,8 +93,8 @@ VAR_INPUT
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Rtc <> 0) THEN
-	_mime.TimeStamp :=  _Parent.Context.Rtc.NowLocal();
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
+	_mime.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();
 	_mime.Text := Text;
 	_mime.Identity := _Parent.Identity;
 	_mime.Category := Category;

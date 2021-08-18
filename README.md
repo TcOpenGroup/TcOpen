@@ -235,8 +235,6 @@ For requesting a license for STweep visit www.stweep.com/Opensource
 * Beckhoff's [infosys](https://infosys.beckhoff.com/).
 
 
-
-
 ### Awesome TwinCAT 3 projects 🌐
 
 - An xUnit testing framework for Beckhoff TwinCAT3.  [TcUnit](https://github.com/tcunit/TcUnit) 

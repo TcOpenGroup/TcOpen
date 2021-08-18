@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoContext" Id="{55d37a51-70a7-4749-9f28-95ccbcaee495}" SpecialFunc="None">
     <Declaration><![CDATA[
 (*~
@@ -229,14 +229,14 @@ METHOD INTERNAL FINAL Open]]></Declaration>
 _rtc.Update();]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Rtc" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">
-      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+    <Property Name="RealTimeClock" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">
+      <Declaration><![CDATA[PROPERTY RealTimeClock : ITcoRtc]]></Declaration>
       <Get Name="Get" Id="{2d224feb-78f3-050e-2237-96bc8473a6fe}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Rtc := _rtc;]]></ST>
+          <ST><![CDATA[RealTimeClock := _rtc;]]></ST>
         </Implementation>
       </Get>
     </Property>

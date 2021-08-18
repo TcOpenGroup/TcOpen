@@ -14,5 +14,22 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         {
             return sinkConfiguration.Sink(new MockSink(), LogEventLevel.Verbose, new LoggingLevelSwitch(LogEventLevel.Verbose));
         }
+
+
+        public static LoggerConfiguration MockConsoleForUser(
+            this LoggerSinkConfiguration sinkConfiguration,
+            LogEventLevel restrictedToMinimumLevel = LogEventLevel.Verbose,
+            string outputTemplate = "[{UserData}] {Message:lj}{NewLine}{Exception}",
+            IFormatProvider formatProvider = null,
+            LoggingLevelSwitch levelSwitch = null,
+            LogEventLevel? standardErrorFromLevel = null,
+            ConsoleTheme theme = null)
+        {
+            return sinkConfiguration
+                .Sink(new MockFormatSink(outputTemplate), LogEventLevel.Verbose, new LoggingLevelSwitch(LogEventLevel.Verbose));
+        }
+
+
     }
+    
 }
