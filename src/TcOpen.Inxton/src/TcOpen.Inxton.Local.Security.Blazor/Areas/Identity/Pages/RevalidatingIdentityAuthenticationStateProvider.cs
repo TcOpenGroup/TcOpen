@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlcHammer.Hmi.Blazor.Areas.Identity
+namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages
 {
     public class RevalidatingIdentityAuthenticationStateProvider<TUser>
         : RevalidatingServerAuthenticationStateProvider where TUser : class

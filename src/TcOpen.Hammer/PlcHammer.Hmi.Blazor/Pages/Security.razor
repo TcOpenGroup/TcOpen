@@ -1,0 +1,31 @@
+﻿@page "/security"
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Identity;
+@using TcOpen.Inxton.Local.Security
+@using TcOpen.Inxton.Data.MongoDb;
+@inject UserManager<UserData> _userManager
+@inject SignInManager<User> _signInManager
+@*@inject RoleManager<MongoRole> _roleManager*@
+
+<h3>Security</h3>
+
+@*<TcOpen.Inxton.Local.Security.Blazor.Pages.UserManagementView></TcOpen.Inxton.Local.Security.Blazor.Pages.UserManagementView>*@
+
+@*<AuthorizeView Roles="manual">
+    <Authorized>
+        <p>user authorized with role service</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>Not authorized with roles</p>
+    </NotAuthorized>
+</AuthorizeView>*@
+
+
+<button class="btn btn-primary" @onclick="@(async () => await AddToRole("manual","dado"))">add roles</button>
+
+<button class="btn btn-primary" @onclick="@(async () => await GetRoles("dado"))">get roles</button>
+
+<p>@RoleUser</p>
+@code {
+    
+}

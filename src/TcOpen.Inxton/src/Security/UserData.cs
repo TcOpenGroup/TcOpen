@@ -39,7 +39,7 @@ namespace TcOpen.Inxton.Local.Security
             Roles = new ObservableCollection<string>(roles);
             RoleHash = CalculateRoleHash(roles, username);
         }
-
+        public string SecurityStamp { get; set; }
         public dynamic _recordId { get; set; }
         public string Username
         {
