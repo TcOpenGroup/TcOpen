@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor.UnitOfWork;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 
@@ -16,6 +17,12 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
     {
         public IdentityErrorDescriber ErrorDescriber { get; set; }
 
+        public IList<BlazorRole> Roles {
+            get 
+            {
+                return _unitOfWork.RoleRepository.GetRecords("*").ToList();
+            }
+        }
 
         private readonly IUnitOfWork _unitOfWork;
         public RoleStore(IUnitOfWork unitOfWork, IdentityErrorDescriber errorDescriber = null)
@@ -44,9 +51,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 Name = role.Name,
                 NormalizedName = role.NormalizedName,
                 ConcurrencyStamp = role.ConcurrencyStamp,
+                _EntityId = role.Id
             };
 
-            _unitOfWork.RoleRepository.Create(role.Name,roleEntity);
+            _unitOfWork.RoleRepository.Create(role.Id, roleEntity);
 
             return Task.FromResult(IdentityResult.Success);
         }
@@ -59,7 +67,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
 
-            _unitOfWork.RoleRepository.Delete(role.Name);
+            _unitOfWork.RoleRepository.Delete(role.NormalizedName);
 
             return Task.FromResult(IdentityResult.Success);
         }
@@ -67,44 +75,56 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
         public Task<IdentityRole> FindByIdAsync(string roleId, CancellationToken cancellationToken)
         {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (string.IsNullOrWhiteSpace(roleId))
                 throw new ArgumentNullException(nameof(roleId));
 
-
-
-            var userEntity = _unitOfWork.RoleRepository.GetRecords(roleId).FirstOrDefault();
-            var user = new IdentityRole
+            IdentityRole identityRole = null;
+          
+            var roleData = Roles.FirstOrDefault(x => x._EntityId == roleId);
+            if (roleData != null)
             {
-                ConcurrencyStamp = userEntity.ConcurrencyStamp,
-                Id = userEntity._recordId,
-                Name = userEntity.Name,
-                NormalizedName = userEntity.NormalizedName
-            };
-            return Task.FromResult(user);
+                identityRole = new IdentityRole
+                {
+                    Name = roleData.Name,
+                    ConcurrencyStamp = roleData.ConcurrencyStamp,
+                    Id = roleData._EntityId
+                };
+            }
+            
+            
+
+            return Task.FromResult(identityRole);
         }
 
         public Task<IdentityRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
         {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
-
-
-            var userEntity = _unitOfWork.RoleRepository.GetRecords(normalizedRoleName).FirstOrDefault();
-            var user = new IdentityRole
+            IdentityRole identityRole = null;
+          
+            var roleData = Roles.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
+            if (roleData != null)
             {
-                ConcurrencyStamp = userEntity.ConcurrencyStamp,
-                Id = userEntity._recordId,
-                Name = userEntity.Name,
-                NormalizedName = userEntity.NormalizedName
-            };
-            return Task.FromResult(user);
+                identityRole = new IdentityRole
+                {
+                    Name = roleData.Name,
+                    ConcurrencyStamp = roleData.ConcurrencyStamp,
+                    NormalizedName = roleData.Name.ToUpper(),
+                    Id = roleData._EntityId
+
+                };
+            }
+            
+
+            
+
+            return Task.FromResult(identityRole);
         }
 
         public Task<string> GetNormalizedRoleNameAsync(IdentityRole role, CancellationToken cancellationToken)

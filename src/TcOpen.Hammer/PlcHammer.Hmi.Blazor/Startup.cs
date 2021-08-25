@@ -54,6 +54,7 @@ namespace PlcHammer.Hmi.Blazor
 
             var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
             var roleRepo = new MongoDbRepository<BlazorRole>(new MongoDbRepositorySettings<BlazorRole>("mongodb://localhost:27017", "Hammer", "Roles"));
+            //var userJsonRepo = SetUpUserRepositoryJson();
             services.AddIdentity<User, IdentityRole>(identity =>
             {
                 identity.Password.RequireDigit = false;
@@ -67,7 +68,8 @@ namespace PlcHammer.Hmi.Blazor
             )
             .AddCustomStores()
             .AddDefaultTokenProviders();
-            services.AddScoped<IUnitOfWork, UnitOfWork>(provider => new UnitOfWork(userRepo,roleRepo));
+            services.AddScoped<IUnitOfWork, UnitOfWork>(provider => new UnitOfWork(userRepo, roleRepo));
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -149,6 +151,19 @@ namespace PlcHammer.Hmi.Blazor
             var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
 
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
+        }
+
+        private static IRepository<UserData> SetUpUserRepositoryJson()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace TcOpen.Inxton.Local.Security
             CanUserChangePassword = userData.CanUserChangePassword;
             PasswordHash = userData.HashedPassword;
             SecurityStamp = userData.SecurityStamp;
-            Id = userData._recordId.ToString();
+            Id = userData._EntityId;
         }
 
         public string Level { get; set; }

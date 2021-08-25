@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.Local.Security.Blazor.Stores;
-using TcOpen.Inxton.Data.MongoDb;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
 {
@@ -66,28 +65,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
            
             if (ModelState.IsValid)
             {
-                //var mongorep = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                //var user = await _userManager.FindByNameAsync(Input.UserName);// mongorep.GetRecords(Input.UserName).First();
-                //var mongoUser = new User(user);
-
-
-                ////await _userManager.UpdateSecurityStampAsync(mongoUser);
-
-                //var result = await _signInManager.CanSignInAsync(mongoUser);
-                ////var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                //if (result)
-                //{
-                //    await _signInManager.SignInAsync(mongoUser,false);
-                //    _logger.LogInformation("User logged in.");
-                //    return LocalRedirect(returnUrl);
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                //    return Page();
-                //}
+                
 
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)

@@ -35,10 +35,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.UnitOfWork
             }
         }
 
-        public void Commit()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Dispose()
         {

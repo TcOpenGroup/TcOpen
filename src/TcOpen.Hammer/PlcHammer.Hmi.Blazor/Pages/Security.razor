@@ -2,30 +2,62 @@
 @using System.Security.Claims;
 @using Microsoft.AspNetCore.Identity;
 @using TcOpen.Inxton.Local.Security
+@using TcOpen.Inxton.Local.Security.Blazor.Users
 @using TcOpen.Inxton.Data.MongoDb;
-@inject UserManager<UserData> _userManager
+@inject UserManager<User> _userManager
 @inject SignInManager<User> _signInManager
+@inject RoleManager<IdentityRole> _roleManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @*@inject RoleManager<MongoRole> _roleManager*@
 
 <h3>Security</h3>
 
 @*<TcOpen.Inxton.Local.Security.Blazor.Pages.UserManagementView></TcOpen.Inxton.Local.Security.Blazor.Pages.UserManagementView>*@
 
-@*<AuthorizeView Roles="manual">
+<AuthorizeView Roles="manual, MANUAL">
     <Authorized>
         <p>user authorized with role service</p>
     </Authorized>
     <NotAuthorized>
         <p>Not authorized with roles</p>
     </NotAuthorized>
-</AuthorizeView>*@
+</AuthorizeView>
+
+@foreach (var item in _userManager.Users)
+{
+    <p>@item.UserName</p>
+}
 
 
-<button class="btn btn-primary" @onclick="@(async () => await AddToRole("manual","dado"))">add roles</button>
+<h3>ClaimsPrincipal Data</h3>
+
+<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>
+
+
+<button class="btn btn-primary" @onclick="@(async () => await AddToRole("manual", "ahoj"))">add roles</button>
 
 <button class="btn btn-primary" @onclick="@(async () => await GetRoles("dado"))">get roles</button>
 
 <p>@RoleUser</p>
 @code {
-    
+    public User FirstUser { get; set; }
+    private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
+    public int MyProperty { get; set; }
+    private async Task GetClaimsPrincipalData()
+    {
+        //var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        //var user = authState.User;
+
+        //if (user.Identity.IsAuthenticated)
+        //{
+        //    _authMessage = $"{user.Identity.Name} is authenticated.";
+        //    _claims = user.Claims;
+        //    _surnameMessage =
+        //        $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
+        //}
+        //else
+        //{
+        //    _authMessage = "The user is NOT authenticated.";
+        //}
+    }
 }

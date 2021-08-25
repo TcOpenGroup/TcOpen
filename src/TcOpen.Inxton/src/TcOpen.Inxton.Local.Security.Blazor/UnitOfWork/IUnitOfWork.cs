@@ -13,6 +13,5 @@ namespace TcOpen.Inxton.Local.Security.Blazor.UnitOfWork
         IRepository<UserData> UserRepository { get; }
         IRepository<BlazorRole> RoleRepository { get; }
 
-        void Commit();
     }
 }
