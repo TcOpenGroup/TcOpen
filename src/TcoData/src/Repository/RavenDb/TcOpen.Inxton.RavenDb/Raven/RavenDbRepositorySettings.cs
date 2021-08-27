@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Indexes;
-using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.RavenDb

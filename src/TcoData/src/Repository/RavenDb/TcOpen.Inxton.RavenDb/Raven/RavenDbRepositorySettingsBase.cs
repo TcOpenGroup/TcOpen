@@ -1,5 +1,4 @@
 ﻿using Raven.Client.Documents;
-using TcOpen.Inxton.Abstractions.Data;
 using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.RavenDb

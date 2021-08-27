@@ -1,4 +1,4 @@
-﻿using TcOpen.Inxton.Abstractions.Data;
+﻿using TcOpen.Inxton.Data;
 using TcOpen.Inxton.RavenDb;
 
 namespace TcoDataUnitTests
