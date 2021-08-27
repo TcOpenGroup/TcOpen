@@ -4,11 +4,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using TcOpen.Inxton.Abstractions.Data;
-using TcOpen.Inxton.Abstractions.Security;
-using TcOpen.Inxton.Security.Properties;
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Local.Security.Properties;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     public partial class AuthenticationService : IAuthenticationService
     {
@@ -109,14 +109,14 @@ namespace TcOpen.Inxton.Security
         {
             var user = new User(userData.Username, userData.Email, userData.Roles.ToArray(), userData.CanUserChangePassword, userData.Level);
 
-            VortexIdentity.VortexPrincipal customPrincipal = Thread.CurrentPrincipal as VortexIdentity.VortexPrincipal;
+            AppIdentity.AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppIdentity.AppPrincipal;
             if (customPrincipal == null)
                 throw new ArgumentException(strings.CustomPrincipalError);
 
             //Authenticate the user
-            customPrincipal.Identity = new VortexIdentity(user.Username, user.Email, user.Roles, user.CanUserChangePassword, user.Level);
+            customPrincipal.Identity = new AppIdentity(user.UserName, user.Email, user.Roles, user.CanUserChangePassword, user.Level);
             UserAccessor.Instance.Identity = customPrincipal.Identity;
-            OnUserAuthenticateSuccess?.Invoke(user.Username);
+            OnUserAuthenticateSuccess?.Invoke(user.UserName);
             SetUserTimedOutDeAuthentication(userData.LogoutTime);
             return user;
         }
@@ -166,12 +166,12 @@ namespace TcOpen.Inxton.Security
 
         public void DeAuthenticateCurrentUser()
         {
-            VortexIdentity.VortexPrincipal customPrincipal = Thread.CurrentPrincipal as VortexIdentity.VortexPrincipal;
+            AppIdentity.AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppIdentity.AppPrincipal;
             if (customPrincipal != null)
             {
                 var userName = customPrincipal.Identity.Name;
                 OnDeAuthenticating?.Invoke(userName);
-                customPrincipal.Identity = new VortexIdentity.AnonymousIdentity();
+                customPrincipal.Identity = new AppIdentity.AnonymousIdentity();
                 UserAccessor.Instance.Identity = customPrincipal.Identity;
                 OnDeAuthenticated?.Invoke(userName);
             }
@@ -184,7 +184,7 @@ namespace TcOpen.Inxton.Security
 
             var authenticated = AuthenticateUser(userName, password);
 
-            if (authenticated.Username == userName)
+            if (authenticated.UserName == userName)
             {
                 var user = this.UserRepository.Read(userName);
                 user.HashedPassword = this.CalculateHash(newPassword1, userName);
@@ -212,9 +212,9 @@ namespace TcOpen.Inxton.Security
         {
             var newUser = new UserData(
                    "default",
-                   "default@mts.sk",
                    string.Empty,
-                   new String[] { "Administrator" }, "Administrator", string.Empty);
+                   string.Empty,
+                   new string[] { "Administrator" }, "Administrator", string.Empty);
             newUser.CanUserChangePassword = true;
             UserRepository.Create(newUser.Username, newUser);
         }

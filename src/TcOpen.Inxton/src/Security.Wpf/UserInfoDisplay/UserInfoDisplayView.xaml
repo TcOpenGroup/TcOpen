@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="TcOpen.Inxton.Security.Wpf.UserInfoDisplayView"
+﻿<UserControl x:Class="TcOpen.Inxton.Local.Security.Wpf.UserInfoDisplayView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:sec="clr-namespace:TcOpen.Inxton.Security;assembly=TcOpen.Inxton.Security"
-             xmlns:local="clr-namespace:TcOpen.Inxton.Security.Wpf.UserInfoDisplay"
-             xmlns:s="clr-namespace:TcOpen.Inxton.Security.Wpf.Properties"
+             xmlns:sec="clr-namespace:TcOpen.Inxton.Local.Security;assembly=TcOpen.Inxton.Local.Security"
+             xmlns:local="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
+             xmlns:s="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
              mc:Ignorable="d" >
     <UserControl.DataContext>
         <local:UserInfoDisplayViewModel></local:UserInfoDisplayViewModel>

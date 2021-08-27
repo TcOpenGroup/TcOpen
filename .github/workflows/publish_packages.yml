@@ -3,29 +3,22 @@ name: Publish
 on: 
   workflow_dispatch:
 jobs:
-  build:
-    runs-on: self-hosted
+  artifacts:
+    runs-on: windows-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v2
-      - name: Fetch unshallow
-        run: git fetch --unshallow
-      - name: Run a multi-line script
-        env:
-          NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
-        run: |
-          .\pipelines\runbuild.ps1 -properties @{
-            "buildConfig" = "Release";
-            "updateAssemblyInfo" = $true;
-            "publishNugets" = $true;
-            "nugetToken" = ($env:NUGET_ORG_PAT);
-            "isTestingEnabled" = $true;
-            "testingStrength" = 10;
-            "packNugets" = $true;
-            }
-      - name: Upload test results
-        uses: actions/upload-artifact@v2 
-        if: success() || failure() 
-        with:
-          name: test-results
-          path: ${{ github.workspace }}\**\TestResults\*.xml            
+    - name: Download artifacts
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: nightly.yml
+        workflow_conclusion: success
+        branch: dev
+        name: nugets
+        path: nugets
+    ###
+    - name : Remove TcProber
+      run : Get-ChildItem .\nugets -Filter "TcOpen.Tc.Prober.*" | Remove-Item 
+    - name: Push NuGets
+      env:
+        NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
+      run : dotnet nuget push "nugets\*.nupkg" -k ($env:NUGET_ORG_PAT) --skip-duplicate -s https://api.nuget.org/v3/index.json

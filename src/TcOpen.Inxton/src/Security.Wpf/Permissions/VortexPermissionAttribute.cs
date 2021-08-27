@@ -7,7 +7,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
     [ComVisible(true)]

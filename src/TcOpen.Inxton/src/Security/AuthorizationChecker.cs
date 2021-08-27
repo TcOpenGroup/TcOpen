@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     /// <summary>
-    ///     User AuthorizationChecker to check wheter the current use has privilege to execute the code.
+    ///     User AuthorizationChecker to check whether the current use has privilege to execute the code.
     ///     <code>
     ///         //Roles is a static class with defined roles as strings.
     ///         if (TcOpen.Inxton.Security.AuthorizationChecker.HasAuthorization.(Roles.data_exchange_view_can_update_record))
@@ -25,7 +25,7 @@ namespace TcOpen.Inxton.Security
             return roles.Split('|')
                         .Where(p => p != string.Empty)
                         .Select(p => p.ToLower())
-                        .Intersect((SecurityManager.Manager.Principal.Identity as VortexIdentity).Roles.Select(role => role.ToLower()))
+                        .Intersect((SecurityManager.Manager.Principal.Identity as AppIdentity).Roles.Select(role => role.ToLower()))
                         .Any() ? true : false;
         }
 

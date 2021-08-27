@@ -1,0 +1,60 @@
+﻿@namespace TcoCore
+@using Vortex.Presentation;
+@inherits RenderableComplexComponentBase<IVortexObject>
+
+
+
+    <div class="accordion" id="@_accordionId">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="@_accordionHeaderId">
+
+                @TcoComponentHeader
+                @if (MessageHandler != null)
+                {
+                    <div class="d-flex justify-content-end">
+                        <HealthIndicatorView Component="@MessageHandler" />
+                    </div>
+                }
+                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#@_accordionCollapseId" aria-expanded="false" aria-controls="@_accordionCollapseId">
+                    @Component.GetSymbolTail()
+
+                </button>
+
+            </h2>
+            <div id="@_accordionCollapseId" class="accordion-collapse collapse" aria-labelledby="@_accordionId" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    @TcoComponentBody
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @code {
+
+        private string _accordionId => $"accordion_{Component.GetSymbolTail()}";
+        private string _accordionHeaderId => $"header_{Component.GetSymbolTail()}";
+        private string _accordionCollapseId => $"collapse_{Component.GetSymbolTail()}";
+
+        [Parameter]
+        public RenderFragment TcoComponentHeader { get; set; }
+        [Parameter]
+        public RenderFragment TcoComponentBody { get; set; }
+
+
+        public TcoObjectMessageHandler MessageHandler { get; set; }
+
+        protected override void OnInitialized()
+        {
+            UpdateValuesOnChange(Component);
+            try
+            {
+                MessageHandler = (TcoObjectMessageHandler)Component.GetType().GetProperty("MessageHandler").GetValue(Component);
+            }
+            catch 
+            {
+                //swallow
+            }
+            
+        }
+    }

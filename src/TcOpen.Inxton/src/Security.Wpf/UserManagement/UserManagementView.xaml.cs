@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
     /// Interaction logic for fbDataExchangeControlView.xaml
@@ -10,10 +10,10 @@ namespace TcOpen.Inxton.Security.Wpf
     {
         public UserManagementView()
         {
-            if (! DesignerProperties.GetIsInDesignMode(this))
-            {
+            //if (! DesignerProperties.GetIsInDesignMode(this))
+            //{
                 this.DataContext = new UserManagementViewModel();
-            }
+            //}
 
             InitializeComponent();
         }

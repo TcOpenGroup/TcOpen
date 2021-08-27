@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace TcOpen.Inxton.Security.Wpf.Dialog
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public interface IMessageBoxService
     {

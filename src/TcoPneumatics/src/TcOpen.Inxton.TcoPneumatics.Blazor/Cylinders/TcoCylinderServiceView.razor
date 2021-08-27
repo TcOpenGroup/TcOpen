@@ -1,0 +1,33 @@
+﻿@namespace TcoPneumatics
+@inherits RenderableViewModelComponentBase<TcoCylinderViewModel>
+
+
+
+<TcoComponentView Component="@ViewModel.Component">
+    <TcoComponentHeader>
+        <div class="d-flex flex-row-reverse">
+            <div class="p-2">
+                <RenderableContentControl Context="ViewModel.Component._moveHomeDefault"
+                                          Presentation="ProgressBar"></RenderableContentControl>
+            </div>
+            <div class="p-2">
+                <RenderableContentControl Context="ViewModel.Component._stopDefault"
+                                          Presentation="ProgressBar"></RenderableContentControl>
+            </div>
+            <div class="p-2">
+                <RenderableContentControl Context="ViewModel.Component._moveWorkDefault"
+                                          Presentation="ProgressBar"></RenderableContentControl>
+            </div>
+        </div>
+    </TcoComponentHeader>
+    <TcoComponentBody>
+        <TcoSignalInfoView Component="@ViewModel.Component._atHomePosSignalInfo"></TcoSignalInfoView>
+        <TcoSignalInfoView Component="@ViewModel.Component._toHomePosSignalInfo"></TcoSignalInfoView>
+        <TcoSignalInfoView Component="@ViewModel.Component._atWorkPosSignalInfo"></TcoSignalInfoView>
+        <TcoSignalInfoView Component="@ViewModel.Component._toWorkPosSignalInfo"></TcoSignalInfoView>
+    </TcoComponentBody>
+</TcoComponentView>
+
+
+
+

@@ -1,12 +1,12 @@
-﻿namespace TcOpen.Inxton.Security
+﻿namespace TcOpen.Inxton.Local.Security
 {
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using TcOpen.Inxton.Abstractions.Data;
-    using TcOpen.Inxton.Abstractions.Security;
+    using TcOpen.Inxton.Data;
+    using TcOpen.Inxton.Security;
 
     /// <summary>
     /// Default class for handling user data. It saves each user in a separate json file.

@@ -1,5 +1,5 @@
 ﻿using System;
-using TcOpen.Inxton.Abstractions.Logging;
+using TcOpen.Inxton.Logging;
 
 namespace TcOpen.Inxton.Logging
 {

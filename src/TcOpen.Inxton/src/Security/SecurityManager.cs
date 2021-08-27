@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security;
-using TcOpen.Inxton.Abstractions.Data;
-using TcOpen.Inxton.Abstractions.Security;
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Security;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     ///<summary>
     ///     Provides management of user access. 
@@ -31,15 +31,16 @@ namespace TcOpen.Inxton.Security
     ///  
     /// To limit execution of methods for privileged user use <see cref="   "/>
     ///</summary>       
-    public class SecurityManager
+    public class SecurityManager : ISecurityManager
     {
         private SecurityManager(IRepository<UserData> repository)
         {
+            UserRepository = repository;
             Service = new AuthenticationService(repository);
-            Principal = new VortexIdentity.VortexPrincipal();
+            Principal = new AppIdentity.AppPrincipal();
             SecurityProvider.Create(Service);
 
-            if (System.Threading.Thread.CurrentPrincipal?.GetType() != typeof(VortexIdentity.VortexPrincipal))
+            if (System.Threading.Thread.CurrentPrincipal?.GetType() != typeof(AppIdentity.AppPrincipal))
             {
                 System.Threading.Thread.CurrentPrincipal = Principal;
                 AppDomain.CurrentDomain.SetThreadPrincipal(Principal);
@@ -49,8 +50,8 @@ namespace TcOpen.Inxton.Security
         /// <summary>
         /// Creates authentication service with given user data repository.
         /// </summary>
-        /// <param name="repository">User data reposotory <see cref="IRepository{UserData}"/></param>
-        /// <returns>Autentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
+        /// <param name="repository">User data repository <see cref="IRepository{UserData}"/></param>
+        /// <returns>Authentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
         public static IAuthenticationService Create(IRepository<UserData> repository)
         {
             if (_manager == null)
@@ -65,7 +66,7 @@ namespace TcOpen.Inxton.Security
         /// Creates authentication service with default user data repository <see cref="DefaultUserDataRepository{UserData}"/>
         /// </summary>
         /// <param name="usersFolder">User file storage folder.</param>
-        /// <returns>Autentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
+        /// <returns>Authentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
         public static IAuthenticationService CreateDefault(string usersFolder = @"C:\INXTON\USERS\")
         {
             if (_manager == null)
@@ -83,10 +84,10 @@ namespace TcOpen.Inxton.Security
         /// > [!TIP]
         /// > You can create your own user repository using <see cref="IRepository{UserData}"/>        
         /// > [!IMPORTANT]
-        /// > Default repository is designed for handling limited number of users and it should not be used in shared scenarions.
-        /// > If you would like to use shared user repository consider implmentation of an appropriate <see cref="IRepository{UserData}"/> implenentation.
+        /// > Default repository is designed for handling limited number of users and it should not be used in shared scenarios.
+        /// > If you would like to use shared user repository consider implementation of an appropriate <see cref="IRepository{UserData}"/> implementation.
         ///</remarks>
-        /// <returns>Autentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
+        /// <returns>Authentication service for this application <see cref="IAuthenticationService"/>Authentication service for this application.</returns>
 
         public static IAuthenticationService CreateDefault()
         {
@@ -98,7 +99,7 @@ namespace TcOpen.Inxton.Security
             return _manager.Service;
         }
 
-        public VortexIdentity.VortexPrincipal Principal { get; private set; }
+        public AppIdentity.AppPrincipal Principal { get; private set; }
 
         public IAuthenticationService Service { get; private set; }
 
@@ -128,7 +129,12 @@ namespace TcOpen.Inxton.Security
 
         public IEnumerable<string> AvailableGroups() => availableRoles.Select(o => o.DefaultGroup).Distinct();
 
-        public Role GetRole(Role role)
+        /// <summary>
+        /// Get the existing role or add the rule if not present in the system.
+        /// </summary>
+        /// <param name="role">Role to create or retrieve.</param>
+        /// <returns>Requested role</returns>
+        public Role GetOrCreateRole(Role role)
         {
             if (!this.availableRoles.Contains(role))
             {
@@ -137,6 +143,8 @@ namespace TcOpen.Inxton.Security
 
             return role;
         }
+
+        public IRepository<UserData> UserRepository { get; }
     }
 
     public class SecurityManagerNotInitializedException : Exception

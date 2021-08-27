@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
-using TcOpen.Inxton.Security;
+using TcOpen.Inxton.Local.Security;
 
-namespace TcOpen.Inxton.Security.Wpf.Permissions
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class UserToVisibilityConverter : MarkupExtension, IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         { 
-            if(parameter == null || (value as VortexIdentity) == null)
+            if(parameter == null || (value as AppIdentity) == null)
             {
                 return Visibility.Collapsed;
             }
@@ -25,7 +25,7 @@ namespace TcOpen.Inxton.Security.Wpf.Permissions
                     .Split('|')
                     .Where(p => p != string.Empty)
                     .Select(p => p.ToLower())
-                    .Intersect((value as VortexIdentity).Roles.Select(role => role.ToLower()))
+                    .Intersect((value as AppIdentity).Roles.Select(role => role.ToLower()))
                     .Any() ? Visibility.Visible : Visibility.Collapsed;
         }
 

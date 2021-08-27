@@ -22,7 +22,7 @@ namespace TcOpen.Inxton.InputTests
         [TestCase(true)]
         public void CanExecuteTest(bool canExecute)
         {
-            var actual = new RelayCommand(action => Console.WriteLine("can execute test"), () => canExecute);
+            var actual = new RelayCommand(action => Console.WriteLine("can execute test"), (a) => canExecute);
             Assert.AreEqual(canExecute, actual.CanExecute(null));
         }
 
@@ -30,7 +30,7 @@ namespace TcOpen.Inxton.InputTests
         public void ExecuteTest_can_execute_true()
         {
             var didIdoIt = "No";
-            var actual = new RelayCommand(action => didIdoIt = "Yes!", () => true);
+            var actual = new RelayCommand(action => didIdoIt = "Yes!", (a) => true);
 
             actual.Execute(null);
 
@@ -41,7 +41,7 @@ namespace TcOpen.Inxton.InputTests
         public void ExecuteTest_can_execute_false()
         {
             var didIdoIt = "No";
-            var actual = new RelayCommand(action => didIdoIt = "Yes!", () => false);
+            var actual = new RelayCommand(action => didIdoIt = "Yes!", (a) => false);
 
             actual.Execute(null);
 
@@ -53,7 +53,7 @@ namespace TcOpen.Inxton.InputTests
         {
             var didIdoIt = "No";
             var logActionResult = "";
-            var actual = new RelayCommand(action => didIdoIt = "Yes!", () => true, () => logActionResult = "Command has been executed");
+            var actual = new RelayCommand(action => didIdoIt = "Yes!", (a) => true, () => logActionResult = "Command has been executed");
 
             actual.Execute(null);
 

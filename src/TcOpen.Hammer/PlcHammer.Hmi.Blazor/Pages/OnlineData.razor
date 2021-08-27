@@ -1,0 +1,13 @@
+﻿@page "/OnlineData"
+
+<h1>
+    Online data '@Entry.PlcHammer.TECH_MAIN._app._station001.GetSymbolTail();'
+</h1>
+
+<RenderableContentControl Presentation="Display"
+                          Context="@Station._processTraceabilty._data" />
+
+@code{       
+
+    public Station001 Station  => Entry.PlcHammer.TECH_MAIN._app._station001;
+}

@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using System.Security.Principal;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
-    public partial class VortexIdentity
+    public partial class AppIdentity
     {
-        public class VortexPrincipal : IPrincipal
+        public class AppPrincipal : IPrincipal
         {
-            private VortexIdentity _identity;
+            private AppIdentity _identity;
 
-            public VortexIdentity Identity
+            public AppIdentity Identity
             {
                 get { return _identity ?? new AnonymousIdentity(); }
                 set { _identity = value; }

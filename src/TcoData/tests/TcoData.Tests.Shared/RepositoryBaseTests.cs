@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Linq;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data;
 
 namespace TcoDataUnitTests

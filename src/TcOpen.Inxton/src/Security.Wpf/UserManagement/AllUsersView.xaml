@@ -1,19 +1,18 @@
 ﻿<UserControl
-    x:Class="TcOpen.Inxton.Security.Wpf.UserManagement.AllUsersView"
+    x:Class="TcOpen.Inxton.Local.Security.Wpf.AllUsersView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dialog="clr-namespace:TcOpen.Inxton.Security.Wpf.Dialog"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
     xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:p="clr-namespace:TcOpen.Inxton.Security.Wpf.Properties"
-    xmlns:security="clr-namespace:TcOpen.Inxton.Security;assembly=TcOpen.Inxton.Security"
-    xmlns:wpf="clr-namespace:TcOpen.Inxton.Security.Wpf"
+    xmlns:p="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
+    xmlns:security="clr-namespace:TcOpen.Inxton.Local.Security;assembly=TcOpen.Inxton.Local.Security"
+    xmlns:local="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
     d:DesignHeight="900"
     d:DesignWidth="1600"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <wpf:AllUsersViewModel />
+        <local:AllUsersViewModel />
     </UserControl.DataContext>
 
     <Grid
@@ -55,7 +54,7 @@
                     SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.InputBindings>
                         <MouseBinding
-                            Command="{Binding EditUserCommand}"
+                            Command="{Binding StartEditUserCommand}"
                             CommandParameter="{Binding ElementName=AllUsersGrid, Path=SelectedItem}"
                             MouseAction="LeftDoubleClick" />
                     </DataGrid.InputBindings>
@@ -237,7 +236,11 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Content="{x:Static p:strings.AvailableRoles}" />
-
+                    <Border Grid.Row="2"
+                            Grid.Column="2"
+                            Padding="5"
+                            BorderThickness=".5"
+                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
                     <ListBox
                         x:Name="CurrentRoles"
                         Grid.Row="2"
@@ -246,23 +249,30 @@
                         SelectionMode="Extended">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding CurrentToAvailbleRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=CurrentRoles}" />
+                                <i:InvokeCommandAction Command="{Binding CurrentToAvailableRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=CurrentRoles}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListBox>
-                    <ListBox
+                    </Border>
+                    <Border Grid.Row="2"
+                            Grid.Column="0"
+                            Padding="5"
+                            BorderThickness=".5"
+                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
+                        <ListBox
                         x:Name="AvailibleRoles"
                         Grid.Row="2"
                         Grid.Column="0"
                         ItemsSource="{Binding AllRolesFiltered}"
                         SelectionMode="Extended"
                         SizeChanged="AvailibleRoles_SizeChanged">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding AvailableToCurrentRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=AvailibleRoles}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListBox>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding AvailableToCurrentRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=AvailibleRoles}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </Border>
                     <StackPanel
                         Grid.Row="2"
                         Grid.Column="1"
@@ -290,9 +300,9 @@
                         Margin="0,0,10,0"
                         HorizontalAlignment="Right"
                         Command="{Binding StarEditUserCommand}"
-                        Content="{x:Static p:strings.Save}">
+                        Content="{x:Static p:strings.Update}">
                         <Button.CommandParameter>
-                            <wpf:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
+                            <local:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
                         </Button.CommandParameter>
                     </Button>
                 </Grid>

@@ -19,12 +19,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="150" MaxHeight="300" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="50*" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
@@ -40,7 +41,6 @@
                 Content="Auto-update"
                 Style="{StaticResource MaterialDesignAccentCheckBox}" 
                 IsChecked="{Binding AutoUpdate}"/>
-
             <Button
                 Grid.Column="2"                
                 Style="{StaticResource MaterialDesignRaisedButton}"
@@ -59,9 +59,25 @@
             SelectedItem="{Binding SelectedMessage}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}"/>
+                    <Setter Property="Background" Value="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="2" />
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
+            <DataGrid.CellStyle>
+                <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
                     <DataGridTemplateColumn.CellTemplate>
@@ -118,68 +134,18 @@
             Grid.Row="2"
             HorizontalAlignment="Stretch"
             Background="{DynamicResource Secondary}" />
-        <!--<Grid Grid.Row="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <StackPanel DataContext="{Binding SelectedMessage}"                       
-                        Margin="5"
-                        Background="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}">
-                <GroupBox Margin="5" Header="{x:Static loc:Localization.Message}">
-                    <TextBlock
-                        Margin="10"
-                        HorizontalAlignment="Left"
-                        FontSize="18"
-                        FontWeight="Medium"
-                        Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
-                        Text="{Binding Text}"
-                        TextWrapping="WrapWithOverflow" />
-                </GroupBox>
-                <UniformGrid HorizontalAlignment="Stretch" Rows="1"
-                             Margin="5">
-                    <GroupBox Header="{x:Static loc:Localization.Category}">
-                        <TextBlock
-                            HorizontalAlignment="Left"
-                            FontWeight="Medium"
-                            Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
-                            Text="{Binding CategoryAsEnum}"
-                            TextWrapping="WrapWithOverflow" />
-                    </GroupBox>
-                    <GroupBox Header="{x:Static loc:Localization.SubCategory}">
-                        <TextBlock
-                            HorizontalAlignment="Left"
-                            FontWeight="Medium"
-                            Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
-                            Text="{Binding SubCategory}"
-                            TextWrapping="WrapWithOverflow" />
-                    </GroupBox>
-                    <GroupBox Header="{x:Static loc:Localization.Location}">
-                        <TextBlock
-                            HorizontalAlignment="Left"
-                            FontWeight="Medium"
-                            Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
-                            Text="{Binding Location}"
-                            TextWrapping="WrapWithOverflow" />
-                    </GroupBox>
-                    <GroupBox Header="{x:Static loc:Localization.Source}">
-                        <TextBlock
-                            HorizontalAlignment="Left"
-                            FontWeight="Medium"
-                            Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
-                            Text="{Binding Source}"
-                            TextWrapping="WrapWithOverflow" />
-                    </GroupBox>
-                </UniformGrid>
-            </StackPanel>
-        </Grid>-->
+        <Grid Grid.Row="3">
+            <ScrollViewer>
+                <ContentControl Content="{Binding AffectedObjectPresentation}"/>
+            </ScrollViewer>
+        </Grid>
         <TextBlock
             Grid.Row="4"
             Padding="5"
             HorizontalAlignment="Stretch"
-            Background="{DynamicResource Warning}"
-            Foreground="{DynamicResource OnWarning}"
+            Background="{DynamicResource Primary}"
+            Foreground="{DynamicResource OnPrimary}"
             Text="{x:Static loc:Localization.DiagnosticsRunnig}"
-            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />
+            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />      
     </Grid>
 </UserControl>

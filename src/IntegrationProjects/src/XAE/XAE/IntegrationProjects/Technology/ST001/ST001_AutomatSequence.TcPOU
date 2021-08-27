@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="ST001_AutomatSequence" Id="{64c860e5-7a30-0da6-3fb2-b6e5c3d92cb4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001_AutomatSequence EXTENDS TcoCore.TcoSequencer
 VAR_IN_OUT
@@ -92,7 +92,7 @@ IF(Step(inStepID  			:= 600,
 	    inStepDescription 	:= '<#SAVE DATA#>')) 
 THEN
 //---------------------------------------
-	IF(THIS^.Station^.Settings.Create(ULINT_TO_STRING(Context.Rtc.TickClock())).Done) THEN
+	IF(THIS^.Station^.Settings.Create(ULINT_TO_STRING(Context.RealTimeClock.TickClock())).Done) THEN
 		THIS^.CompleteStep();		
 	END_IF;
 //---------------------------------------

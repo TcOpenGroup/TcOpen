@@ -8,16 +8,18 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Markup;
 using TcoData;
-using TcOpen.Inxton.Abstractions.Data;
+using TcOpen.Inxton;
+using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Wpf.Properties;
-using Vortex.Presentation.Wpf;
+using TcOpen.Inxton.Input;
 
 namespace TcoData
 {
-    public class DataViewModel<T> : BindableBase, FunctionAvailability where T : IBrowsableDataObject, new()
+    public class DataViewModel<T> : Vortex.Presentation.Wpf.BindableBase, FunctionAvailability where T : IBrowsableDataObject, new()
     {
         string filterByID;
 
@@ -39,37 +41,42 @@ namespace TcoData
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
 
-            StartCreateNewCommand       = new RelayCommand(p => StartCreatingNew()              , _ => this.Mode == ViewMode.Display,                                callerObject: this.DataExchange,   commandName:    nameof(StartCreateNewCommand));
-            CreateNewCommand            = new RelayCommand(p => this.CreateNew()                , _ => this.RecordIdentifier != string.Empty,                        callerObject: this.DataExchange,   commandName:    nameof(CreateNewCommand));
-            CancelCreateNewCommand      = new RelayCommand(p => this.Mode = ViewMode.Display    , _ => true,                                                         callerObject: this.DataExchange,   commandName:    nameof(CancelCreateNewCommand));
-            UpdateCommand               = new RelayCommand(p => Update()                        , _ => this.Mode == ViewMode.Edit,                                   callerObject: this.DataExchange,   commandName:    nameof(UpdateCommand));
-            DeleteCommand               = new RelayCommand(p => Delete()                        , _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, callerObject: this.DataExchange,   commandName:    nameof(DeleteCommand));
-            EditCommand                 = new RelayCommand(p => StartEdit()                     , _ => this.Mode == ViewMode.Display && SelectedRecord != null,      callerObject: this.DataExchange,   commandName:    nameof(EditCommand));
-            CancelEditCommand           = new RelayCommand(p => this.CancelEdit()               , _ => this.Mode == ViewMode.Edit,                                   callerObject: this.DataExchange,   commandName:    nameof(CancelEditCommand));
-            FindByCriteriaCommand       = new RelayCommand(p => this.FindById()                 , _ => this.Mode == ViewMode.Display,                                callerObject: this.DataExchange,   commandName:    nameof(FindByCriteriaCommand));
-            StartCreateCopyOfExisting   = new RelayCommand(p => this.StartCreatingRecordCopy()  , _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, callerObject: this.DataExchange,   commandName:    nameof(StartCreateCopyOfExisting));
-            CreateCopyOfExistingCommand = new RelayCommand(p => this.CreateCopyOfExisting()     , _ => true,                                                         callerObject: this.DataExchange,   commandName:    nameof(CreateCopyOfExistingCommand));
-            SendToPlcCommand            = new RelayCommand(p => SendToPlc()                     , _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, callerObject: this.DataExchange,   commandName:    nameof(SendToPlcCommand));
-            LoadFromPlcCommand          = new RelayCommand(p => LoadFromPlc()                   , _ => this.Mode == ViewMode.Display,                                callerObject: this.DataExchange,   commandName:    nameof(LoadFromPlcCommand));
-            PageUpCommand               = new RelayCommand(p => { this.Skip++; this.Filter(); } , PaginationUpEnabled,                                      callerObject: this.DataExchange,   commandName:    nameof(PageUpCommand));
-            PageDownCommand             = new RelayCommand(p => { this.Skip--; this.Filter(); } , _ => this.Skip > 1,                                                callerObject: this.DataExchange,   commandName:    nameof(PageDownCommand));
-            ExportCommand               = new RelayCommand(p => this.ExportData()               , _ => this.Mode == ViewMode.Display,                                callerObject: this.DataExchange,   commandName:    nameof(ExportCommand));
-            ImportCommand               = new RelayCommand(p => this.ImportData()               , _ => this.Mode == ViewMode.Display,                                callerObject: this.DataExchange,   commandName:    nameof(ImportCommand));
+            StartCreateNewCommand = new RelayCommand(p => StartCreatingNew(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateNewCommand)));
+            CreateNewCommand = new RelayCommand(p => this.CreateNew(), _ => this.RecordIdentifier != string.Empty, () => LogCommand(nameof(CreateNewCommand)));
+            CancelCreateNewCommand = new RelayCommand(p => this.Mode = ViewMode.Display, _ => true, () => LogCommand(nameof(CancelCreateNewCommand)));
+            UpdateCommand = new RelayCommand(p => Update(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(UpdateCommand)));
+            DeleteCommand = new RelayCommand(p => Delete(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(DeleteCommand)));
+            EditCommand = new RelayCommand(p => StartEdit(), _ => this.Mode == ViewMode.Display && SelectedRecord != null, () => LogCommand(nameof(EditCommand)));
+            CancelEditCommand = new RelayCommand(p => this.CancelEdit(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(CancelEditCommand)));
+            FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(FindByCriteriaCommand)));
+            StartCreateCopyOfExisting = new RelayCommand(p => this.StartCreatingRecordCopy(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateCopyOfExisting)));
+            CreateCopyOfExistingCommand = new RelayCommand(p => this.CreateCopyOfExisting(), _ => true, () => LogCommand(nameof(CreateCopyOfExistingCommand)));
+            SendToPlcCommand = new RelayCommand(p => SendToPlc(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(SendToPlcCommand)));
+            LoadFromPlcCommand = new RelayCommand(p => LoadFromPlc(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(LoadFromPlcCommand)));
+            PageUpCommand = new RelayCommand(p => { this.Skip++; this.Filter(); }, PaginationUpEnabled, () => LogCommand(nameof(PageUpCommand)));
+            PageDownCommand = new RelayCommand(p => { this.Skip--; this.Filter(); }, _ => this.Skip > 1, () => LogCommand(nameof(PageDownCommand)));
+            ExportCommand = new RelayCommand(p => this.ExportData(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(ExportCommand)));
+            ImportCommand = new RelayCommand(p => this.ImportData(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(ImportCommand)));
 
 
-            CancelEditCommandAvailable         = true;
-            DeleteCommandAvailable             = true;
-            EditCommandAvailable               = true;
-            ExportCommandAvailable             = true;
-            ImportCommandAvailable             = true;
-            LoadFromPlcCommandAvailable        = true;
-            SendToPlcCommandAvailable          = true;
+            CancelEditCommandAvailable = true;
+            DeleteCommandAvailable = true;
+            EditCommandAvailable = true;
+            ExportCommandAvailable = true;
+            ImportCommandAvailable = true;
+            LoadFromPlcCommandAvailable = true;
+            SendToPlcCommandAvailable = true;
             StartCreateCopyOfExistingAvailable = true;
-            StartCreateNewCommandAvailable     = true;
-            UpdateCommandAvailable             = true;
+            StartCreateNewCommandAvailable = true;
+            UpdateCommandAvailable = true;
 
             this.FillObservableRecords();
         }
+
+        private void LogCommand(string commandName) => TcoAppDomain
+            .Current?
+            .Logger?
+            .Information<string>($"{DataExchange.Symbol}.{commandName}");
 
         private bool PaginationUpEnabled(object arg) => this.Pages > this.Skip;
 
@@ -148,7 +155,7 @@ namespace TcoData
 #endif
         void CreateCopyOfExisting()
         {
-            ActionRunner.Runner.Execute(() =>
+            Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
             {
                 var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
                 plainer.CopyShadowToPlain(((dynamic)DataExchange)._data);
@@ -164,7 +171,7 @@ namespace TcoData
 
         private void CreateNew()
         {
-            ActionRunner.Runner.Execute(() =>
+            Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
             {
                 var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
                 plainer._EntityId = RecordIdentifier;
@@ -186,7 +193,7 @@ namespace TcoData
             var a = ((dynamic)DataExchange)._data.CreatePlainerType();
             a.CopyShadowToPlain(((dynamic)DataExchange)._data);
             string id = $"{DataExchange.Symbol}.{a._EntityId}";
-            ActionRunner.Runner.Execute(() =>
+            Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
             {
                 DataBrowser.Delete(a);
                 this.FilterByID = "";
@@ -213,7 +220,7 @@ namespace TcoData
         private void SendToPlc()
         {
 
-            ActionRunner.Runner.Execute(() =>
+            Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
             {
                 ((dynamic)DataExchange)._data.FlushPlainToOnline((dynamic)this.SelectedRecord);
             }, $"{((dynamic)DataExchange)._data._EntityId}", () => MessageBox.Show($"{strings.LoadToController} '{((dynamic)this.SelectedRecord)._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
@@ -245,7 +252,7 @@ namespace TcoData
             var a = ((dynamic)DataExchange)._data.CreatePlainerType();
             a.CopyShadowToPlain(((dynamic)DataExchange)._data);
             string info = $"{this.DataExchange.Symbol} {a._EntityId}";
-            ActionRunner.Runner.Execute(() =>
+            Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
             {
                 CrudDataObject?.ChangeTracker.SaveObservedChanges(a);
                 DataBrowser.UpdateRecord(a);
@@ -279,7 +286,7 @@ namespace TcoData
         }
         void LoadFromPlc()
         {
-            ActionRunner.Runner.Execute(() =>
+            Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
             {
                 var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
                 ((dynamic)DataExchange)._data.FlushOnlineToPlain(plainer);
@@ -293,51 +300,27 @@ namespace TcoData
             }, "", () => MessageBox.Show($"{strings.WouldYouLikeToGetFromPLC}", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
         }
 
-        public RelayCommand ExportCommand { get; private set; }
-        public RelayCommand ImportCommand { get; private set; }
+        public ICommand ExportCommand { get; }
+        public ICommand ImportCommand { get; }
 
-        public RelayCommand CancelCreateNewCommand
-        {
-            get; private set;
-        }
+        public ICommand CancelCreateNewCommand { get; }
 
-        public RelayCommand CancelEditCommand
-        {
-            get; private set;
-        }
+        public ICommand CancelEditCommand { get; }
 
-        public RelayCommand CreateCopyOfExistingCommand
-        {
-            get; private set;
-        }
+        public ICommand CreateCopyOfExistingCommand { get; }
 
-        public RelayCommand CreateNewCommand
-        {
-            get; private set;
-        }
+        public ICommand CreateNewCommand { get; }
 
-        public DataBrowser<T> DataBrowser
-        {
-            get; set;
-        }
+        public DataBrowser<T> DataBrowser { get; set; }
 
-        public TcoDataExchange DataExchange
-        {
-            get; set;
-        }
+        public TcoDataExchange DataExchange { get; }
 
-        public RelayCommand DeleteCommand
-        {
-            get; private set;
-        }
+        public ICommand DeleteCommand { get; }
 
-        public RelayCommand EditCommand
-        {
-            get; private set;
-        }
+        public ICommand EditCommand { get; }
 
-        public RelayCommand PageUpCommand { get; private set; }
-        public RelayCommand PageDownCommand { get; private set; }
+        public ICommand PageUpCommand { get; }
+        public ICommand PageDownCommand { get; }
 
         public string FilterByID
         {
@@ -361,7 +344,7 @@ namespace TcoData
             }
         }
 
-        public RelayCommand FindByCriteriaCommand
+        public ICommand FindByCriteriaCommand
         {
             get; private set;
         }
@@ -435,9 +418,9 @@ namespace TcoData
             get
             {
                 var filteredCount = this.DataBrowser.FilteredCount(this.FilterByID);
-                var divided = filteredCount*1.0 / Limit*1.0;
+                var divided = filteredCount * 1.0 / Limit * 1.0;
                 var ceiling = Math.Ceiling(divided);
-                return (long) ceiling;
+                return (long)ceiling;
             }
         }
 
@@ -510,27 +493,15 @@ namespace TcoData
             }
         }
 
-        public RelayCommand SendToPlcCommand
-        {
-            get; private set;
-        }
+        public ICommand SendToPlcCommand { get; }
 
-        public RelayCommand LoadFromPlcCommand { get; private set; }
+        public ICommand LoadFromPlcCommand { get; }
 
-        public RelayCommand StartCreateCopyOfExisting
-        {
-            get; private set;
-        }
+        public ICommand StartCreateCopyOfExisting { get; }
 
-        public RelayCommand StartCreateNewCommand
-        {
-            get; private set;
-        }
+        public ICommand StartCreateNewCommand { get; }
 
-        public RelayCommand UpdateCommand
-        {
-            get; private set;
-        }
+        public ICommand UpdateCommand { get; }
 
         public bool StartCreateNewCommandAvailable { get; set; }
         public bool StartCreateCopyOfExistingAvailable { get; set; }
@@ -546,16 +517,16 @@ namespace TcoData
 
     public interface FunctionAvailability
     {
-        bool StartCreateNewCommandAvailable     { get; set; }
+        bool StartCreateNewCommandAvailable { get; set; }
         bool StartCreateCopyOfExistingAvailable { get; set; }
-        bool UpdateCommandAvailable             { get; set; }
-        bool CancelEditCommandAvailable         { get; set; }
-        bool DeleteCommandAvailable             { get; set; }
-        bool EditCommandAvailable               { get; set; }
-        bool SendToPlcCommandAvailable          { get; set; }
-        bool LoadFromPlcCommandAvailable        { get; set; }
-        bool ExportCommandAvailable             { get; set; }
-        bool ImportCommandAvailable             { get; set; }
+        bool UpdateCommandAvailable { get; set; }
+        bool CancelEditCommandAvailable { get; set; }
+        bool DeleteCommandAvailable { get; set; }
+        bool EditCommandAvailable { get; set; }
+        bool SendToPlcCommandAvailable { get; set; }
+        bool LoadFromPlcCommandAvailable { get; set; }
+        bool ExportCommandAvailable { get; set; }
+        bool ImportCommandAvailable { get; set; }
     }
 
     public class DataViewModel

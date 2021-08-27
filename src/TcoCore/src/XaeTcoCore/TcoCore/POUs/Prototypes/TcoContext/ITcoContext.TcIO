@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <Itf Name="ITcoContext" Id="{403f0fe8-301c-472b-9683-fcc2c906813c}">
     <Declaration><![CDATA[INTERFACE ITcoContext EXTENDS ITcoObject
 ]]></Declaration>
@@ -15,8 +15,8 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Property Name="Rtc" Id="{a8f4d1c6-2d8d-0ba5-21b5-6c50c789cfac}">
-      <Declaration><![CDATA[PROPERTY Rtc : ITcoRtc]]></Declaration>
+    <Property Name="RealTimeClock" Id="{a8f4d1c6-2d8d-0ba5-21b5-6c50c789cfac}">
+      <Declaration><![CDATA[PROPERTY RealTimeClock : ITcoRtc]]></Declaration>
       <Get Name="Get" Id="{687aebad-3b3d-04fd-11f3-3dbbbbe35dfb}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

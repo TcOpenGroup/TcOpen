@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TcOpen.Inxton.Security
+namespace TcOpen.Inxton.Local.Security
 {
     public class PasswordsDoNotMatchException : Exception
     {

@@ -2,9 +2,10 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using TcOpen.Inxton.Security.Wpf.Internal;
+using TcOpen.Inxton.Input;
+using Vortex.Presentation;
 
-namespace TcOpen.Inxton.Security.Wpf
+namespace TcOpen.Inxton.Local.Security.Wpf
 {
     internal class LoginWindowViewModel : BindableBase
     {
@@ -20,7 +21,7 @@ namespace TcOpen.Inxton.Security.Wpf
             CancelCommand = new RelayCommand(a => CloseTrigger = true);
             ChangePasswordCommand = new RelayCommand(a => ChangePassword(a));
             ChangeAuthorizationTokenCommand = new RelayCommand(a => ChangeAuthorizationToken(),
-                                                               p => SecurityManager.Manager.Service.ExternalAuthorization != null);
+                                                               x => SecurityManager.Manager.Service.ExternalAuthorization != null);
         }
 
         private void ChangeAuthorizationToken()

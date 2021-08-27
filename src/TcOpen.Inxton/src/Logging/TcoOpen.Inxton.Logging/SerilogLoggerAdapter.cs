@@ -1,7 +1,9 @@
 ﻿namespace TcOpen.Inxton.Logging
 {
     using Serilog;
-    using TcOpen.Inxton.Abstractions.Logging;
+    using Serilog.Context;
+    using TcOpen.Inxton.Logging;
+
     public class SerilogAdapter : ITcoLogger
     {
         /// <summary>
@@ -22,7 +24,9 @@
         {
             _logger = new LoggerConfiguration()
                                     .WriteTo
-                                    .Console()                                                                        
+                                        .Console()
+                                    .Enrich
+                                        .FromLogContext()
                                     .CreateLogger();
         }
 
