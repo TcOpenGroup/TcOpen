@@ -33,23 +33,16 @@
 @code {
     private RegisterUser _model = new RegisterUser();
     private User _user { get; set; }
-    // public MongoDbRepository<UserData> MongoRepo { get; set; }
 
 
-    protected override void OnInitialized()
-    {
-        //MongoRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
-    }
+
 
     private async void OnValidSubmit()
     {
-        //model.UserName = model.Username;
+
         _user = new User
         {
             UserName = _model.UserName,
-            
-
-
         };
 
         var result = await UserManager.CreateAsync(_user, _model.Password);

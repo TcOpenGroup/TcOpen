@@ -2,62 +2,65 @@
 @using System.Security.Claims;
 @using Microsoft.AspNetCore.Identity;
 @using TcOpen.Inxton.Local.Security
-@using TcOpen.Inxton.Local.Security.Blazor.Users
 @using TcOpen.Inxton.Data.MongoDb;
+@using TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages
 @inject UserManager<User> _userManager
 @inject SignInManager<User> _signInManager
 @inject RoleManager<IdentityRole> _roleManager
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject RevalidatingIdentityAuthenticationStateProvider<User> _authenticationStateProvider
 @*@inject RoleManager<MongoRole> _roleManager*@
 
 <h3>Security</h3>
 
-@*<TcOpen.Inxton.Local.Security.Blazor.Pages.UserManagementView></TcOpen.Inxton.Local.Security.Blazor.Pages.UserManagementView>*@
+<UserManagementView></UserManagementView>
 
-<AuthorizeView Roles="manual, MANUAL">
+<AuthorizeView Roles="manual">
     <Authorized>
-        <p>user authorized with role service</p>
+        <p>user authorized with manual</p>
     </Authorized>
     <NotAuthorized>
         <p>Not authorized with roles</p>
     </NotAuthorized>
 </AuthorizeView>
 
-@foreach (var item in _userManager.Users)
-{
-    <p>@item.UserName</p>
-}
+<AuthorizeView Roles="administrator">
+    <Authorized>
+        <p>user authorized with administrator</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>Not authorized with roles</p>
+    </NotAuthorized>
+</AuthorizeView>
 
-
-<h3>ClaimsPrincipal Data</h3>
-
-<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>
 
 
 <button class="btn btn-primary" @onclick="@(async () => await AddToRole("manual", "ahoj"))">add roles</button>
 
-<button class="btn btn-primary" @onclick="@(async () => await GetRoles("dado"))">get roles</button>
+<button class="btn btn-primary" @onclick="@(async () => await GetRoles("ahoj"))">get roles</button>
 
 <p>@RoleUser</p>
+
+<div class="card">
+    <h4>Add new role</h4>
+    <input type="text" class="form-text" @bind="RoleName" />
+    <button class="btn btn-primary" @onclick="@(async () => await CreateRole(RoleName))">Create new role</button>
+</div>
 @code {
+
+    public string RoleName { get; set; }
     public User FirstUser { get; set; }
     private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
-    public int MyProperty { get; set; }
-    private async Task GetClaimsPrincipalData()
-    {
-        //var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        //var user = authState.User;
 
-        //if (user.Identity.IsAuthenticated)
-        //{
-        //    _authMessage = $"{user.Identity.Name} is authenticated.";
-        //    _claims = user.Claims;
-        //    _surnameMessage =
-        //        $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
-        //}
-        //else
-        //{
-        //    _authMessage = "The user is NOT authenticated.";
-        //}
+    public async Task CreateRole(string roleName)
+    {
+       
+        if (!await _roleManager.RoleExistsAsync(roleName))
+        {
+            var normalizer = new UpperInvariantLookupNormalizer();
+            var identityRole = new IdentityRole(roleName);
+            identityRole.NormalizedName = normalizer.NormalizeName(roleName);
+            await _roleManager.CreateAsync(identityRole);
+        }
+
     }
 }

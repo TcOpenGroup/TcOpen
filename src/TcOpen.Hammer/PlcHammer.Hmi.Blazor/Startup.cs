@@ -69,7 +69,7 @@ namespace PlcHammer.Hmi.Blazor
             .AddCustomStores()
             .AddDefaultTokenProviders();
             services.AddScoped<IUnitOfWork, UnitOfWork>(provider => new UnitOfWork(userRepo, roleRepo));
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+            services.AddScoped<RevalidatingIdentityAuthenticationStateProvider<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

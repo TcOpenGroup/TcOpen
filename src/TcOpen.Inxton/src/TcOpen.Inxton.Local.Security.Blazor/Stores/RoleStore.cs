@@ -13,17 +13,25 @@ using TcOpen.Inxton.Local.Security.Blazor.Users;
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 {
     public class RoleStore :
-        IRoleStore<IdentityRole>
+        IRoleStore<IdentityRole>,
+        IQueryableRoleStore<IdentityRole>
     {
         public IdentityErrorDescriber ErrorDescriber { get; set; }
 
-        public IList<BlazorRole> Roles {
+        public IList<BlazorRole> _roleCollection {
             get 
             {
                 return _unitOfWork.RoleRepository.GetRecords("*").ToList();
             }
         }
 
+        public IQueryable<IdentityRole> Roles
+        {
+            get
+            {
+                return _unitOfWork.RoleRepository.GetRecords("*").Select(x => new IdentityRole(x.Name)).AsQueryable();
+            }
+        }
         private readonly IUnitOfWork _unitOfWork;
         public RoleStore(IUnitOfWork unitOfWork, IdentityErrorDescriber errorDescriber = null)
         {
@@ -82,7 +90,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             IdentityRole identityRole = null;
           
-            var roleData = Roles.FirstOrDefault(x => x._EntityId == roleId);
+            var roleData = _roleCollection.FirstOrDefault(x => x._EntityId == roleId);
             if (roleData != null)
             {
                 identityRole = new IdentityRole
@@ -93,8 +101,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 };
             }
             
-            
-
             return Task.FromResult(identityRole);
         }
 
@@ -108,7 +114,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             IdentityRole identityRole = null;
           
-            var roleData = Roles.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
+            var roleData = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
             if (roleData != null)
             {
                 identityRole = new IdentityRole
@@ -128,9 +134,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         }
 
         public Task<string> GetNormalizedRoleNameAsync(IdentityRole role, CancellationToken cancellationToken)
-        {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+        { 
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
@@ -140,8 +145,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
         public Task<string> GetRoleIdAsync(IdentityRole role, CancellationToken cancellationToken)
         {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
@@ -151,8 +155,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
         public Task<string> GetRoleNameAsync(IdentityRole role, CancellationToken cancellationToken)
         {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+
 
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
@@ -162,8 +165,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
         public Task SetNormalizedRoleNameAsync(IdentityRole role, string normalizedName, CancellationToken cancellationToken)
         {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
@@ -175,8 +178,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
         public Task SetRoleNameAsync(IdentityRole role, string roleName, CancellationToken cancellationToken)
         {
-            if (cancellationToken != null)
-                cancellationToken.ThrowIfCancellationRequested();
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (role == null)
                 throw new ArgumentNullException(nameof(role));

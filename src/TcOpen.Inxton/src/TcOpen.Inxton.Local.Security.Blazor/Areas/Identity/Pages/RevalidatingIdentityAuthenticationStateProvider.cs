@@ -71,5 +71,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages
                 return principalStamp == userStamp;
             }
         }
+
+        public void NotifyAuthenticationStateChanged()
+        {
+            this.NotifyAuthenticationStateChanged();
+        }
+
     }
 }

@@ -32,23 +32,19 @@ namespace PlcHammer.Hmi.Blazor.Pages
 
 
                 await _userManager.AddToRoleAsync(user, roleName);
-               //await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
+                //await _userManager.AddToRolesAsync(user, roleName);
+                //await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
             }
         }
 
         public string RoleUser { get; set; }
         public async Task GetRoles(string userName)
         {
-            //var user = MongoRepo.GetRecords(userName).First();
-            //var mongoUser = new User(user);
+            var user = await _userManager.FindByNameAsync(userName.ToUpper());
 
-            ////var u = await _userManager.FindByNameAsync(userName);
-            //await _userManager.UpdateSecurityStampAsync(mongoUser);
+            var roles = await _userManager.GetRolesAsync(user);
 
-            //var roles = await _userManager.GetRolesAsync(mongoUser);
-            ////_roleManager.
-
-            //RoleUser = roles.First();
+            RoleUser = roles.First();
 
         }
     }
