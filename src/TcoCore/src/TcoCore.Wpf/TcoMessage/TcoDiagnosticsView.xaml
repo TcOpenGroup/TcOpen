@@ -10,7 +10,8 @@
     xmlns:vtr="clr-namespace:TcoCore"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    IsVisibleChanged="UserControl_IsVisibleChanged">
     <d:UserControl.DataContext>
         <vtr:TcoDiagnosticsViewModel />
     </d:UserControl.DataContext>
@@ -20,6 +21,7 @@
             <RowDefinition Height="150" MaxHeight="300" />
             <RowDefinition Height="10" />
             <RowDefinition Height="250" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
@@ -49,9 +51,9 @@
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"                
                 Margin="6" 
                 Command="{Binding UpdateMessagesCommand}"
-                Content="{x:Static loc:Localization.UpdateMessages}"/>                 
+                Content="{x:Static loc:Localization.UpdateMessages}"/>
         </Grid>
-        <DataGrid
+        <DataGrid x:Name="dataGrid"
             Grid.Row="1"
             AutoGenerateColumns="False"
             IsReadOnly="True"
@@ -79,13 +81,13 @@
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                <!--<DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding TimeStamp}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
                 <DataGridTemplateColumn Header="{x:Static loc:Localization.Message}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -107,13 +109,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static loc:Localization.Location}">
+                <!--<DataGridTemplateColumn Header="{x:Static loc:Localization.Location}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding Location}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
                 <!--<DataGridTemplateColumn Header="{x:Static loc:Localization.Symbol}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -121,13 +123,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>-->
-                <DataGridTemplateColumn Header="{x:Static loc:Localization.Symbol}">
+                <!--<DataGridTemplateColumn Header="{x:Static loc:Localization.Symbol}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding ParentsObjectSymbol}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
         <GridSplitter
@@ -139,13 +141,43 @@
                 <ContentControl Content="{Binding AffectedObjectPresentation}"/>
             </ScrollViewer>
         </Grid>
+        <Expander Header="Details"
+                  Grid.Row="4" 
+                  DataContext="{Binding SelectedItem, ElementName=dataGrid}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <GroupBox Header="{x:Static loc:Localization.Category}">
+                    <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding CategoryAsEnum}"
+                            TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+                <GroupBox Header="{x:Static loc:Localization.SubCategory}">
+                    <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding SubCategory}"
+                            TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+                <GroupBox Header="{x:Static loc:Localization.Source}">
+                    <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding Source}"
+                            TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+            </StackPanel>
+        </Expander>
         <TextBlock
-            Grid.Row="4"
+            Grid.Row="5"
             Padding="5"
             HorizontalAlignment="Stretch"
             Background="{DynamicResource Primary}"
             Foreground="{DynamicResource OnPrimary}"
             Text="{x:Static loc:Localization.DiagnosticsRunnig}"
-            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />      
+            Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />
     </Grid>
 </UserControl>

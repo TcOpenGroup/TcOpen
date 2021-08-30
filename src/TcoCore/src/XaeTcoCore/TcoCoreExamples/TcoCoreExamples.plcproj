@@ -23,6 +23,7 @@
     <Placeholder>TcoCoreExamples</Placeholder>
     <Author>Inxton</Author>
     <ProjectVersion>0.4.2.535</ProjectVersion>
+    <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Examples\Components\fbPiston.TcPOU">
@@ -153,10 +154,6 @@
     <PlaceholderReference Include="TcoCore">
       <DefaultResolution>TcoCore, 0.4.2.535 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
-    </PlaceholderReference>
-    <PlaceholderReference Include="TcoPneumatics">
-      <DefaultResolution>TcoPneumatics, * (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoPneumatics</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>

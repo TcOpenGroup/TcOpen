@@ -41,10 +41,18 @@ namespace TcoCore
             }
         }
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {           
+        {
+            UpdateMessages();
+        }
+
+        private TcoDiagnosticsViewModel _context { get { return this.DataContext as TcoDiagnosticsViewModel; } }
+
+
+        private void UpdateMessages()
+        {
             var inSight = false;
             TcoDiagnosticsViewModel MessageHandler = null;
-            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
                 if ((MessageHandler != null) && !MessageHandler.AutoUpdate)
                 {
@@ -52,17 +60,25 @@ namespace TcoCore
                 }
 
                 inSight = UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this);
-                if(inSight)
-                { 
+                if (inSight)
+                {
                     MessageHandler = this.DataContext as TcoDiagnosticsViewModel;
                 }
             });
+            bool isAutoUpdate = MessageHandler == null ? false : MessageHandler.AutoUpdate;
 
-            if(inSight)
-            { 
+            if (inSight && isAutoUpdate)
+            {
                 MessageHandler?.UpdateMessages();
             }
         }
-      
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {            
+            if(this.Visibility == Visibility.Visible)
+            { 
+                _context?.UpdateMessages();
+            }
+        }
     }
 }

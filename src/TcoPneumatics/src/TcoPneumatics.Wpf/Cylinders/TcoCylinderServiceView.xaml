@@ -26,20 +26,20 @@
                     Height="5"
                     Background="{Binding _atHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
-                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _moveHomeDefault}" PresentationType="ProgressBar"/>
+                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _moveHomeDefault}"/>
                 </StackPanel>
                 <StackPanel>
                     <Border
                     Height="5"                   
                     CornerRadius="2" />
-                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _stopDefault, Mode=OneWay}" PresentationType="ProgressBar"/>
+                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _stopDefault, Mode=OneWay}"/>
                 </StackPanel>
                 <StackPanel>
                     <Border
                     Height="5"
                     Background="{Binding _atWorkPos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
-                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _moveWorkDefault}" PresentationType="ProgressBar"/>
+                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _moveWorkDefault}"/>
                 </StackPanel>
             </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>

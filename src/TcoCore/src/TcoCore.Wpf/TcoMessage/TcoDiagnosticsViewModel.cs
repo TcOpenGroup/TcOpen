@@ -10,23 +10,36 @@
     using TcOpen.Inxton;
     using TcOpen.Inxton.Input;
     using Vortex.Connector;
-   
+    
 
     public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
     
+        /// <summary>
+        /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
+        /// </summary>
         public TcoDiagnosticsViewModel()
         {
             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
+        /// <summary>
+        /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
+        /// </summary>
+        /// <param name="tcoObject">TcoObject to be observed by this diagnostics</param>
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
              this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
-      
+
+
+        /// <summary>
+        /// Sets the <see cref="TcoObject"/> to be observed.
+        /// </summary>
+        public IsTcoObject TcoObject { set { _tcoObject = value; } }
+
         protected IsTcoObject _tcoObject { get; set; }
       
         private volatile object updatemutex = new object();
@@ -35,7 +48,7 @@
         /// Updates messages of diagnostics view.
         /// </summary>
         internal void UpdateMessages()
-        {   
+        {               
             if(DiagnosticsRunning)
             {
                 return;
@@ -47,7 +60,7 @@
                                     
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    MessageDisplay = _tcoObject?.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
@@ -189,15 +202,34 @@
                 
                 if (SelectedMessage != null)
                 {
-                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
+                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity) as IVortexObject;
 
+
+                    switch (affectedObject)
+                    {
+                        case TcoComponent c:
+                            break;
+                        case TcoObject c:
+                            affectedObject = affectedObject?.GetParent<TcoComponent>();
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     if (affectedObject != null)
                     {
                         try
                         {
-                            TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+                            TcoAppDomain.Current.Dispatcher.Invoke(() =>
                             {
-                                affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
+                                if (Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObject.GetType()) != null)
+                                {
+                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObject);
+                                }
+                                else
+                                {
+                                    affectedObjectPresenation = null;
+                                }
                             });
                             
                         }
