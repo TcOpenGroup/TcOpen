@@ -21,10 +21,9 @@ using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
-using TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages;
+using TcOpen.Inxton.Local.Security.Blazor;
 using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
-using TcOpen.Inxton.Local.Security.Blazor.UnitOfWork;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using Vortex.Presentation.Blazor.Services;
 
@@ -51,25 +50,21 @@ namespace PlcHammer.Hmi.Blazor
             services.AddSingleton<WeatherForecastService>();
             services.AddVortexBlazorServices();
 
+            /*MongoDb repositories for security*/
+            //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
+            //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "Hammer", "Roles"));
+            
+            /*Json repositories for security*/
+            var userRepo = SetUpUserRepositoryJson();
+            var roleRepo = SetUpRoleRepositoryJson();
 
-            var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
-            var roleRepo = new MongoDbRepository<BlazorRole>(new MongoDbRepositorySettings<BlazorRole>("mongodb://localhost:27017", "Hammer", "Roles"));
-            //var userJsonRepo = SetUpUserRepositoryJson();
-            services.AddIdentity<User, IdentityRole>(identity =>
-            {
-                identity.Password.RequireDigit = false;
-                identity.Password.RequireLowercase = false;
-                identity.Password.RequireNonAlphanumeric = false;
-                identity.Password.RequireUppercase = false;
-                identity.Password.RequiredLength = 1;
-                identity.Password.RequiredUniqueChars = 0;
+            services.AddVortexBlazorSecurity(userRepo, roleRepo);
 
-            }
-            )
-            .AddCustomStores()
-            .AddDefaultTokenProviders();
-            services.AddScoped<IUnitOfWork, UnitOfWork>(provider => new UnitOfWork(userRepo, roleRepo));
-            services.AddScoped<RevalidatingIdentityAuthenticationStateProvider<User>>();
+            /*Json repositories for data*/
+            SetUpJsonRepositories();
+
+            /*Mongo repositories for data*/
+            //SetUpMongoDatabase();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,7 +98,7 @@ namespace PlcHammer.Hmi.Blazor
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
-            SetUpJsonRepositories();
+            
         }
 
 
@@ -164,6 +159,18 @@ namespace PlcHammer.Hmi.Blazor
             }
 
             return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));
+        }
+        private static IRepository<RoleModel> SetUpRoleRepositoryJson()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<RoleModel>(new JsonRepositorySettings<RoleModel>(Path.Combine(repositoryDirectory, "Roles")));
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
-using TcOpen.Inxton.Local.Security.Blazor.UnitOfWork;
+using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
@@ -21,9 +21,18 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         IUserClaimStore<User>,
         IQueryableUserStore<User>
     {
+        private readonly IRepositoryService _unitOfWork;
+        public UserStore(IRepositoryService unitOfWork, IdentityErrorDescriber errorDescriber = null)
+        {
+            ErrorDescriber = errorDescriber;
+            _unitOfWork = unitOfWork;
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="IdentityErrorDescriber"/> for any error that occurred with the current operation.
+        /// </summary>
         public IdentityErrorDescriber ErrorDescriber { get; set; }
         /// <summary>
-        /// Get all available user from UserRepository./>.
+        /// Get all available users from UserRepository./>.
         /// </summary>
         public IQueryable<User> Users
         {
@@ -35,24 +44,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <summary>
         /// Get all available roles from RoleRepository./>.
         /// </summary>
-        private IList<BlazorRole> _roleCollection
+        private IList<RoleModel> _roleCollection
         {
             get
             {
                 return _unitOfWork.RoleRepository.GetRecords("*").ToList();
             }
         }
-
-
-        private readonly IUnitOfWork _unitOfWork;
-        /// <summary>
-        /// Constructor of user store./>.
-        /// </summary>
-        public UserStore(IUnitOfWork unitOfWork, IdentityErrorDescriber errorDescriber = null)
-        {
-            ErrorDescriber = errorDescriber;
-            _unitOfWork = unitOfWork;
-        }
+       
         private bool _disposed;
         protected void ThrowIfDisposed()
         {
@@ -61,8 +60,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 throw new ObjectDisposedException(GetType().Name);
             }
         }
-
-      
 
         public void Dispose()
         {
@@ -170,7 +167,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 Email = user.Email,
                 HashedPassword = user.PasswordHash,
                 SecurityStamp = user.SecurityStamp,
-                Roles = new ObservableCollection<string>(user.Roles.ToList())
+                Roles = new ObservableCollection<string>()
             };
 
             try
@@ -389,10 +386,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 var tempList  = user.Roles.ToList();
                 tempList.Remove(roleId);
                 user.Roles = tempList.ToArray();
-                //var userData = _unitOfWork.UserRepository.Read(user.NormalizedUserName);
-                //userData.Roles.Remove(roleId);
-                //_unitOfWork.UserRepository.Update(userData._EntityId, userData);
-
             }
 
             return Task.CompletedTask;

@@ -12,7 +12,7 @@ namespace PlcHammer.Hmi.Blazor.Pages
 {
     public partial class Security
     {
-        //MongoDbRepository<UserData> MongoRepo { get; set; } = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
+       
         public async Task AddToRole(string roleName, string userName)
         {
             var user = await _userManager.FindByNameAsync(userName.ToUpper());
@@ -35,17 +35,6 @@ namespace PlcHammer.Hmi.Blazor.Pages
                 //await _userManager.AddToRolesAsync(user, roleName);
                 //await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
             }
-        }
-
-        public string RoleUser { get; set; }
-        public async Task GetRoles(string userName)
-        {
-            var user = await _userManager.FindByNameAsync(userName.ToUpper());
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            RoleUser = roles.First();
-
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿@namespace TcOpen.Inxton.Local.Security.Blazor
-<h3>UserManagementView</h3>
 
-<div >
+<div class="container-fluid">
     <div class="row">
-        <div class="col card">
-            <table class="table table-hover" style=" height: 400px !important; overflow: scroll;">
+        <div class="col card m-1" style=" height: 500px !important; overflow: scroll;">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Username</th>
@@ -27,61 +26,74 @@
             </table>
         </div>
 
-        <div class="col">
+        <div class="col m-1">
             @if (SelectedUser != null)
             {
-                <label>
-                    Identifier:
-                    <p>@SelectedUser.UserName</p>
-                </label>
+                    <div class="card " style=" height: 500px">
+                        <h4 class="card-header">User detail</h4>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <p class="form-control">@SelectedUser.UserName</p>
+                            </div>
 
-                <div class="row">
-                    <div class="col-5 card">
-                        <label>Available roles:</label>
-                        @if (AvailableRoles != null)
-                        {
-                        <div class="list-group ">
-                            @foreach (var role in AvailableRoles)
-                            {
-                            <label class="list-group-item">
-                                <input class="form-check-input me-1"
-                                       type="checkbox"
-                                       @onclick="@(() => AvaiableRoleCliked(role))"
-                                       value="@SelectedAvailableRoles.Contains(role)">
-                                @role
-                            </label>
-                            }
+                            <div class="row">
 
+                                <div class="col-5 card"
+                                     style=" height: 300px !important; overflow: scroll;">
+                                    <label>Available roles:</label>
+                                    @if (AvailableRoles != null)
+                                    {
+                                        <div class="list-group ">
+                                            @foreach (var role in AvailableRoles)
+                                            {
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1"
+                                                           type="checkbox"
+                                                           @bind="role.IsSelected">
+                                                    @role.RoleName
+                                                </label>
+                                            }
+
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="col-2 ">
+                                    <button class="btn btn-primary btn-lg m-1"
+                                            @onclick="@(() => AssignRoles())">
+                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                    </button>
+                                    <button class="btn btn-primary btn-lg m-1"
+                                            @onclick="@(() => ReturnRoles())">
+                                        <i class="fas fa-long-arrow-alt-left"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col-5 card"
+                                     style="height: 300px !important; overflow: scroll;">
+                                    <label>Assigned roles:</label>
+                                    @if (AssignedRoles != null)
+                                    {
+                                        <div class="list-group">
+                                            @foreach (var role in AssignedRoles)
+                                            {
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1"
+                                                           type="checkbox"
+                                                           @bind="role.IsSelected">
+                                                    @role.RoleName
+                                                </label>
+                                            }
+
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                        }
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary" 
-                                @onclick="@(() => AssignRoles())">Assign</button>
-                        <button class="btn btn-primary"
-                                @onclick="@(() => ReturnRoles())">Return</button>
-                    </div>
-                    <div class="col-5 card">
-                        <label>Assigned roles:</label>
-                        @if (AssignedRoles != null)
-                        {
-                        <div class="list-group">
-                            @foreach (var role in AssignedRoles)
-                            {
-                                <label class="list-group-item">
-                                    <input class="form-check-input me-1" 
-                                           type="checkbox" 
-                                           @onclick="@(() => AssignedRoleCliked(role))"
-                                           value="@AssignedRoles.Contains(role)">
-                                    @role
-                                </label>
-                            }
 
-                        </div>
-                        }
                     </div>
-
-                </div>
+                
 
             }
         </div>
@@ -90,76 +102,3 @@
 </div>
 
 
-
-
-@code {
-    private User SelectedUser { get; set; }
-    private IList<string> AvailableRoles { get; set; }
-    private IList<string> SelectedAvailableRoles { get; set; } = new List<string>();
-    private IList<string> AssignedRoles { get; set; }
-    private IList<string> SelectedAssignedRoles { get; set; } = new List<string>();
-
-    public async Task AssignRoles()
-    {
-        await _userManager.AddToRolesAsync(SelectedUser, SelectedAvailableRoles);
-        SelectedAvailableRoles.Clear();
-        SelectedAssignedRoles.Clear();
-        await RowClicked(SelectedUser);
-        //_authenticationStateProvider.NotifyAuthenticationStateChanged();
-        //foreach (var role in SelectedAvailableRoles)
-        //{
-        //    AssignedRoles.Add(role);
-        //}
-
-    }
-
-    public async Task ReturnRoles()
-    {
-        await _userManager.RemoveFromRolesAsync(SelectedUser, SelectedAssignedRoles);
-        SelectedAvailableRoles.Clear();
-        SelectedAssignedRoles.Clear();
-        await RowClicked(SelectedUser);
-       // _authenticationStateProvider.NotifyAuthenticationStateChanged();
-        //foreach (var role in SelectedAssignedRoles)
-        //{
-        //    AvailableRoles.Add(role);
-        //}
-
-    }
-
-    public void AvaiableRoleCliked(string role)
-    {
-        if (SelectedAvailableRoles.Contains(role))
-        {
-            SelectedAvailableRoles.Remove(role);
-        }
-        else
-        {
-            SelectedAvailableRoles.Add(role);
-        }
-
-    }
-
-    public void AssignedRoleCliked(string role)
-    {
-        if (SelectedAssignedRoles.Contains(role))
-        {
-            SelectedAssignedRoles.Remove(role);
-        }
-        else
-        {
-            SelectedAssignedRoles.Add(role);
-        }
-
-    }
-
-    public async Task RowClicked(User user)
-    {
-        SelectedUser = user;
-        AssignedRoles = await _userManager.GetRolesAsync(user);
-        AvailableRoles = _roleManager.Roles.Where(x => !AssignedRoles.Contains(x.Name))
-                .Select(x => x.Name)
-                .ToList();
-
-    }
-}

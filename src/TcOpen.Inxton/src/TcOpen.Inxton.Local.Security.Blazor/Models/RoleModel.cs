@@ -7,7 +7,7 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Users
 {
-    public class BlazorRole : IBrowsableDataObject
+    public class RoleModel : IBrowsableDataObject
     {
         public string ConcurrencyStamp { get; set; }
         public string Name { get; set; }

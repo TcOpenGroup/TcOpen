@@ -10,8 +10,11 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages
+namespace TcOpen.Inxton.Local.Security.Blazor
 {
+    /// <summary>
+    /// Authentication state provider.
+    /// </summary>
     public class RevalidatingIdentityAuthenticationStateProvider<TUser>
         : RevalidatingServerAuthenticationStateProvider where TUser : class
     {

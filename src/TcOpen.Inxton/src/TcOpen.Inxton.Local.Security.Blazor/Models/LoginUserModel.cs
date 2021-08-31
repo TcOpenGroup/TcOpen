@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Users
 {
-    public class RegisterUser
+    public class LoginUserModel
     {
 
         [Required]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public bool CanUserChangePassword { get; set; }
-        public string Level { get; set; }
-        public string Username { get => UserName; set => UserName = value; }
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+
     }
 }

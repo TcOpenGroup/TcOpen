@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 
-namespace TcOpen.Inxton.Local.Security.Blazor.UnitOfWork
+namespace TcOpen.Inxton.Local.Security.Blazor.Services
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IRepositoryService : IDisposable
     {
         IRepository<UserData> UserRepository { get; }
-        IRepository<BlazorRole> RoleRepository { get; }
+        IRepository<RoleModel> RoleRepository { get; }
 
     }
 }

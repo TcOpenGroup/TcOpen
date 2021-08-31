@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 
-namespace TcOpen.Inxton.Local.Security.Blazor.UnitOfWork
+namespace TcOpen.Inxton.Local.Security.Blazor.Services
 {
-    public class UnitOfWork : IUnitOfWork
+    public class RepositoryService : IRepositoryService
     {
         private readonly IRepository<UserData>  _userRepository;
-        private readonly IRepository<BlazorRole> _roleRepository;
+        private readonly IRepository<RoleModel> _roleRepository;
         private bool _disposed;
-        public UnitOfWork(IRepository<UserData> userRepository, 
-            IRepository<BlazorRole> roleRepository)
+        public RepositoryService(IRepository<UserData> userRepository, 
+            IRepository<RoleModel> roleRepository)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
@@ -27,15 +27,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.UnitOfWork
             }
         }
 
-        public IRepository<BlazorRole> RoleRepository
+        public IRepository<RoleModel> RoleRepository
         {
             get
             {
                 return _roleRepository;
             }
         }
-
-       
 
         public void Dispose()
         {

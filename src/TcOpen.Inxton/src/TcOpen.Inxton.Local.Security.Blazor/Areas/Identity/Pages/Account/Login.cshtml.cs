@@ -32,7 +32,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public LoginUser Input { get; set; }
+        public LoginUserModel Input { get; set; }
 
 
         public string ReturnUrl { get; set; }
@@ -67,7 +67,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
             {
                 
 
-                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");

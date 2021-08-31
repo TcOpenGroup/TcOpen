@@ -43,8 +43,8 @@ namespace HMI
 
 
 
-             SetUpMongoDatabase();
-            //SetUpJsonRepositories();
+             //SetUpMongoDatabase();
+            SetUpJsonRepositories();
 
             
         }

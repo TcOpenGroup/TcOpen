@@ -30,16 +30,7 @@ namespace TcOpen.Inxton.Local.Security
             Level = CalculateHash(level, username);
             AuthenticationToken = CalculateHash(authenticationToken, string.Empty);
         }
-
-        //public UserData(User user)
-        //{
-        //    Username = user.UserName;
-        //    Email = user.Email;
-        //    HashedPassword = user.PasswordHash;
-        //    Roles = user.Roles.ToArray();
-        //    RoleHash = CalculateRoleHash(roles, username);
-        //    Level = CalculateHash(level, username);
-        //}
+             
         public UserData(string username, string password, IEnumerable<string> roles)
         {
             Username = username;
