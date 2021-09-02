@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PlcHammer.Hmi.Blazor.Areas.Identity;
 using PlcHammer.Hmi.Blazor.Data;
 using PlcHammerConnector;
 using System;
@@ -20,6 +19,12 @@ using System.Reflection;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
+using TcOpen.Inxton.Data.MongoDb;
+using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.Local.Security.Blazor;
+using TcOpen.Inxton.Local.Security.Blazor.Extension;
+using TcOpen.Inxton.Local.Security.Blazor.Services;
+using TcOpen.Inxton.Local.Security.Blazor.Users;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -37,17 +42,29 @@ namespace PlcHammer.Hmi.Blazor
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+          
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+          
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton<WeatherForecastService>();
             services.AddVortexBlazorServices();
+
+            /*MongoDb repositories for security*/
+            //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
+            //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "Hammer", "Roles"));
+            
+            /*Json repositories for security*/
+            var userRepo = SetUpUserRepositoryJson();
+            var roleRepo = SetUpRoleRepositoryJson();
+
+            services.AddVortexBlazorSecurity(userRepo, roleRepo);
+
+            /*Json repositories for data*/
+            SetUpJsonRepositories();
+
+            /*Mongo repositories for data*/
+            //SetUpMongoDatabase();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +98,7 @@ namespace PlcHammer.Hmi.Blazor
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
-            SetUpJsonRepositories();
+            
         }
 
 
@@ -117,6 +134,43 @@ namespace PlcHammer.Hmi.Blazor
 
 
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
+        }
+
+        private static void SetUpMongoDatabase()
+        {
+            var mongoUri = "mongodb://localhost:27017";
+            var databaseName = "Hammer";
+
+            var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
+            var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
+            var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
+
+            SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
+        }
+
+        private static IRepository<UserData> SetUpUserRepositoryJson()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));
+        }
+        private static IRepository<RoleModel> SetUpRoleRepositoryJson()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<RoleModel>(new JsonRepositorySettings<RoleModel>(Path.Combine(repositoryDirectory, "Roles")));
         }
     }
 }

@@ -219,6 +219,18 @@
                             break;
                     }
 
+
+                    switch (affectedObject)
+                    {
+                        case TcoComponent c:
+                            break;
+                        case TcoObject c:
+                            affectedObject = affectedObject?.GetParent<TcoComponent>();
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     if (affectedObject != null)
                     {
                         try

@@ -26,6 +26,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -181,6 +182,36 @@
                 <ContentControl Content="{Binding AffectedObjectPresentation}" />
             </ScrollViewer>
         </Grid>
+        <Expander Header="Details"
+                  Grid.Row="4" 
+                  DataContext="{Binding SelectedItem, ElementName=dataGrid}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <GroupBox Header="{x:Static loc:Localization.Category}">
+                    <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding CategoryAsEnum}"
+                            TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+                <GroupBox Header="{x:Static loc:Localization.SubCategory}">
+                    <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding SubCategory}"
+                            TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+                <GroupBox Header="{x:Static loc:Localization.Source}">
+                    <TextBlock
+                            HorizontalAlignment="Left"
+                            FontWeight="Medium"
+                            Foreground="{DynamicResource Secondary}"
+                            Text="{Binding Source}"
+                            TextWrapping="WrapWithOverflow" />
+                </GroupBox>
+            </StackPanel>
+        </Expander>
         <TextBlock
             Grid.Row="6"
             HorizontalAlignment="Stretch"
