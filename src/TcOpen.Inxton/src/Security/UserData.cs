@@ -20,6 +20,17 @@ namespace TcOpen.Inxton.Local.Security
         {
             Roles = new ObservableCollection<string>();
         }
+        public UserData(User user)
+        {
+            Username = user.UserName;
+            Email = user.Email;
+            HashedPassword = user.PasswordHash;
+            SecurityStamp = user.SecurityStamp;
+            Roles = user.Roles == null ? new ObservableCollection<string>() : new ObservableCollection<string>(user.Roles.ToList());
+            Email = user.Email;
+            CanUserChangePassword = user.CanUserChangePassword;
+            
+        }
         public UserData(string username, string email, string password, IEnumerable<string> roles, string level, string authenticationToken)
         {
             Username = username;

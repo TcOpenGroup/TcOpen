@@ -39,10 +39,8 @@
     private async void OnValidSubmit()
     {
 
-        _user = new User
-        {
-            UserName = _model.Username,
-        };
+        _user = new User(_model.Username, null, null, false, null);
+       
 
         var result = await UserManager.CreateAsync(_user, _model.Password);
 

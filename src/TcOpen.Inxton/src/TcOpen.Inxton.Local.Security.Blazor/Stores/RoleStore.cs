@@ -191,8 +191,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>A <see cref="Task{TResult}"/> that contains the name of the role.</returns>
         public Task<string> GetRoleNameAsync(IdentityRole role, CancellationToken cancellationToken = default)
         {
-
-
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
 
@@ -207,7 +205,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
         public Task SetNormalizedRoleNameAsync(IdentityRole role, string normalizedName, CancellationToken cancellationToken = default)
         {
-
             cancellationToken.ThrowIfCancellationRequested();
 
             if (role == null)
@@ -226,7 +223,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
         public Task SetRoleNameAsync(IdentityRole role, string roleName, CancellationToken cancellationToken = default)
         {
-
             cancellationToken.ThrowIfCancellationRequested();
 
             if (role == null)
@@ -244,17 +240,16 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous query.</returns>
         public Task<IdentityResult> UpdateAsync(IdentityRole role, CancellationToken cancellationToken = default)
         {
-            
-                cancellationToken.ThrowIfCancellationRequested();
+            cancellationToken.ThrowIfCancellationRequested();
 
-                if (role == null)
-                    throw new ArgumentNullException(nameof(role));
+            if (role == null)
+                throw new ArgumentNullException(nameof(role));
 
-                var roleEntity = _unitOfWork.RoleRepository.Read(role.NormalizedName);
-                roleEntity.Name = role.NormalizedName;
+            var roleEntity = _unitOfWork.RoleRepository.Read(role.NormalizedName);
+            roleEntity.Name = role.Name;
             try
             {
-                _unitOfWork.RoleRepository.Update(role.NormalizedName, roleEntity);
+                _unitOfWork.RoleRepository.Update(roleEntity._EntityId, roleEntity);
                 return Task.FromResult(IdentityResult.Success);
             }
             catch (Exception ex)

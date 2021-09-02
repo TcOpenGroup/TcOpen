@@ -291,6 +291,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Inxton.TcoDrivesBeck
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Inxton.Local.Security.Blazor", "src\TcOpen.Inxton\src\TcOpen.Inxton.Local.Security.Blazor\TcOpen.Inxton.Local.Security.Blazor.csproj", "{61DD35BC-08CB-42DB-A8B7-C937745C4292}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcOpen.Inxton.Local.Security.Blazor.Tests", "src\TcOpen.Inxton\tests\TcOpen.Inxton.Local.Security.Blazor.Tests\TcOpen.Inxton.Local.Security.Blazor.Tests.csproj", "{B4030F4F-9C46-456D-8411-F6E1CB23FC74}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\TcoData\tests\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems*{3bf071a6-13a1-46a5-8fd5-87c8cee94896}*SharedItemsImports = 13
@@ -2242,6 +2244,26 @@ Global
 		{266FDC45-DB60-4534-88C6-BE73DD0A5D11}.Release|TwinCAT RT (x64).Build.0 = Release|TwinCAT RT (x64)
 		{266FDC45-DB60-4534-88C6-BE73DD0A5D11}.Release|TwinCAT RT (x86).ActiveCfg = Release|TwinCAT RT (x86)
 		{266FDC45-DB60-4534-88C6-BE73DD0A5D11}.Release|TwinCAT RT (x86).Build.0 = Release|TwinCAT RT (x86)
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT CE7 (ARMV7).ActiveCfg = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT CE7 (ARMV7).Build.0 = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT OS (ARMT2).ActiveCfg = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT OS (ARMT2).Build.0 = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT RT (x64).ActiveCfg = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT RT (x64).Build.0 = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT RT (x86).ActiveCfg = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Debug|TwinCAT RT (x86).Build.0 = Debug|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT CE7 (ARMV7).ActiveCfg = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT CE7 (ARMV7).Build.0 = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT OS (ARMT2).ActiveCfg = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT OS (ARMT2).Build.0 = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT RT (x64).ActiveCfg = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT RT (x64).Build.0 = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT RT (x86).ActiveCfg = Release|Any CPU
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74}.Release|TwinCAT RT (x86).Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2367,6 +2389,7 @@ Global
 		{9C01E0B8-F3A6-4529-87E5-68C79AEDA7B6} = {8551D818-4865-46CC-952B-1DA39B737512}
 		{DB371EA0-1771-4C96-A881-FFEDA99CB28E} = {81F89033-9726-423A-97FA-85831C98E08F}
 		{61DD35BC-08CB-42DB-A8B7-C937745C4292} = {70374410-5C6A-4C1F-AD88-81594968061B}
+		{B4030F4F-9C46-456D-8411-F6E1CB23FC74} = {AEFA3D3D-B2FD-4618-8FC6-FC7C8A06CB59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3448A2B-59D1-4DD2-AE4B-0EFF7BC92E81}
