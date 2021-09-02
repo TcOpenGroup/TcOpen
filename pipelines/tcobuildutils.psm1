@@ -49,7 +49,7 @@ function EnsureGitVersion {
 
     DeGZip-File -infile $gitVersionFile -outfile $tar
     if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
-        Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null
+        Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null -ProviderName PowerShellGet
     }      
       Expand-7Zip $tar .\_toolz
       Remove-Item $gitVersionFile -ErrorAction Ignore

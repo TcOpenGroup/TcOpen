@@ -53,7 +53,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -87,14 +87,14 @@ _mime.PerCycleCount := 0;	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
-      <Declaration><![CDATA[METHOD PROTECTED FINAL Compose 
+      <Declaration><![CDATA[METHOD PROTECTED Compose 
 VAR_INPUT
-	Text : STRING(125);
+	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
-	_mime.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();
+	_mime.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
 	_mime.Text := Text;
 	_mime.Identity := _Parent.Identity;
 	_mime.Category := Category;
@@ -126,7 +126,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -152,7 +152,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -180,7 +180,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -221,7 +221,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -247,7 +247,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -271,7 +271,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 	(*~
 		<docu>
 			<summary>
@@ -326,7 +326,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -353,7 +353,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -380,7 +380,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>

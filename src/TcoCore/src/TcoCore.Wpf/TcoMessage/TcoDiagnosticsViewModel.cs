@@ -10,23 +10,36 @@
     using TcOpen.Inxton;
     using TcOpen.Inxton.Input;
     using Vortex.Connector;
-   
+    
 
     public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
     
+        /// <summary>
+        /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
+        /// </summary>
         public TcoDiagnosticsViewModel()
         {
             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
         }
 
+        /// <summary>
+        /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
+        /// </summary>
+        /// <param name="tcoObject">TcoObject to be observed by this diagnostics</param>
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;            
              this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
-      
+
+
+        /// <summary>
+        /// Sets the <see cref="TcoObject"/> to be observed.
+        /// </summary>
+        public IsTcoObject TcoObject { set { _tcoObject = value; } }
+
         protected IsTcoObject _tcoObject { get; set; }
       
         private volatile object updatemutex = new object();
@@ -35,7 +48,7 @@
         /// Updates messages of diagnostics view.
         /// </summary>
         internal void UpdateMessages()
-        {   
+        {               
             if(DiagnosticsRunning)
             {
                 return;
@@ -47,7 +60,7 @@
                                     
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    MessageDisplay = _tcoObject?.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
@@ -172,39 +185,56 @@
         
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
 
+        private static string NoFurtherInfo = "We have no further info about this message";
 
         private ulong lastSelectedMessageIdentity = 0;
-        private object affectedObjectPresenation = null;
+        private object affectedObjectPresenation = NoFurtherInfo;
         public object AffectedObjectPresentation
         {
             get
             {
                 if (this.SelectedMessage == null)
-                    return null;
+                    return "No message selected";
 
-                if(this.SelectedMessage.Identity == lastSelectedMessageIdentity)
+                if (this.SelectedMessage.Identity == lastSelectedMessageIdentity)
                 {
                     return affectedObjectPresenation;
                 }
-                
+
+                affectedObjectPresenation = NoFurtherInfo;
+
                 if (SelectedMessage != null)
                 {
-                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
+                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity) as IVortexObject;
+
+
+                    switch (affectedObject)
+                    {
+                        case TcoComponent c:
+                            break;
+                        case TcoObject c:
+                            affectedObject = affectedObject?.GetParent<TcoComponent>();
+                            break;
+                        default:
+                            break;
+                    }
 
                     if (affectedObject != null)
                     {
                         try
                         {
-                            TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+                            TcoAppDomain.Current.Dispatcher.Invoke(() =>
                             {
-                                affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
+                                if (Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObject.GetType()) != null)
+                                {
+                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObject);
+                                }
                             });
-                            
+
                         }
                         catch (Exception)
                         {
-
-                            //throw;
+                            //!swallow
                         }
                     }
                 }
@@ -212,6 +242,6 @@
                 lastSelectedMessageIdentity = this.SelectedMessage.Identity;
                 return affectedObjectPresenation;
             }
-        }
+        } 
     }
 }

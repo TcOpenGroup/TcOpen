@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Text : STRING(125);
+	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 (*~
 	<docu>
 		<summary>
@@ -64,6 +64,16 @@ STRUCT
 ~*)
 	{attribute clr [ReadOnly()]}
 	PerCycleCount : BYTE;
+
+(*~
+	<docu>
+		<summary>
+			(Compatibility not effective in TcOpen framework)
+			Indicates that the message is expected to be dequeed from the buffer.
+		</summary>				
+	</docu>	
+~*)	
+	ExpectDequeing : BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
