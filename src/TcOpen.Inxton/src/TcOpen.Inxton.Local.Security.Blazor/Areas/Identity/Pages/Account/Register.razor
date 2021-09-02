@@ -1,0 +1,61 @@
+﻿@page "/Identity/Account/Register"
+
+@inject SignInManager<User> SignInManager
+@inject NavigationManager _navigationManager
+@inject UserManager<User> UserManager
+<h3>Register</h3>
+
+
+
+<div class="card">
+    <h4 class="card-header">Register</h4>
+    <div class="card-body">
+        <EditForm Model="@_model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Username</label>
+                <InputText @bind-Value="_model.Username" class="form-control" />
+                <ValidationMessage For="@(() => _model.Username)" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <InputText @bind-Value="_model.Password" type="password" class="form-control" />
+                <ValidationMessage For="@(() => _model.Password)" />
+            </div>
+            <button class="btn btn-primary">
+                Register
+            </button>
+
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+
+    private RegisterUserModel _model = new RegisterUserModel();
+    private User _user { get; set; }
+
+    private async void OnValidSubmit()
+    {
+
+        _user = new User
+        {
+            UserName = _model.Username,
+        };
+
+        var result = await UserManager.CreateAsync(_user, _model.Password);
+
+        if (result.Succeeded)
+        {
+
+            _navigationManager.NavigateTo("/Identity/Account/Login", true);
+        }
+        else
+        {
+            _navigationManager.NavigateTo("/");
+        }
+
+
+    }
+}

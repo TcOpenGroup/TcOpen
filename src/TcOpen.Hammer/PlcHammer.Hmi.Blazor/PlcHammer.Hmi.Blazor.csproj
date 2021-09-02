@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-alpha.585" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-nightly.596" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TcoData\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
+    <ProjectReference Include="..\..\TcOpen.Inxton\src\TcOpen.Inxton.Local.Security.Blazor\TcOpen.Inxton.Local.Security.Blazor.csproj" />
+    <ProjectReference Include="..\..\_packaging\TcOpen.Group.Blazor\TcOpen.Group.Blazor.csproj" />
     <ProjectReference Include="..\PlcHammerConnector\PlcHammerConnector.csproj" />
   </ItemGroup>
 
