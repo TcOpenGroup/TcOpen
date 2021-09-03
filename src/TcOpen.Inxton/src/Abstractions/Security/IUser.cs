@@ -1,4 +1,6 @@
-﻿namespace TcOpen.Inxton.Security
+﻿using System.Collections.Generic;
+
+namespace TcOpen.Inxton.Security
 {
     public interface IUser
     {

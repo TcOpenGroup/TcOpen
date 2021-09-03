@@ -1,0 +1,104 @@
+﻿@namespace TcOpen.Inxton.Local.Security.Blazor
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col card m-1" style=" height: 500px !important; overflow: scroll;">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Can change password</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Modified</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in _userManager.Users)
+                    {
+                        <tr @onclick="@(() => RowClicked(user))">
+                            <th>@user.UserName</th>
+                            <td>@user.CanUserChangePassword</td>
+                            <td>created</td>
+                            <td>modified</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col m-1">
+            @if (SelectedUser != null)
+            {
+                    <div class="card " style=" height: 500px">
+                        <h4 class="card-header">User detail</h4>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <p class="form-control">@SelectedUser.UserName</p>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-5 card"
+                                     style=" height: 300px !important; overflow: scroll;">
+                                    <label>Available roles:</label>
+                                    @if (AvailableRoles != null)
+                                    {
+                                        <div class="list-group ">
+                                            @foreach (var role in AvailableRoles)
+                                            {
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1"
+                                                           type="checkbox"
+                                                           @bind="role.IsSelected">
+                                                    @role.RoleName
+                                                </label>
+                                            }
+
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="col-2 ">
+                                    <button class="btn btn-primary btn-lg m-1"
+                                            @onclick="@(() => AssignRoles())">
+                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                    </button>
+                                    <button class="btn btn-primary btn-lg m-1"
+                                            @onclick="@(() => ReturnRoles())">
+                                        <i class="fas fa-long-arrow-alt-left"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col-5 card"
+                                     style="height: 300px !important; overflow: scroll;">
+                                    <label>Assigned roles:</label>
+                                    @if (AssignedRoles != null)
+                                    {
+                                        <div class="list-group">
+                                            @foreach (var role in AssignedRoles)
+                                            {
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1"
+                                                           type="checkbox"
+                                                           @bind="role.IsSelected">
+                                                    @role.RoleName
+                                                </label>
+                                            }
+
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                
+
+            }
+        </div>
+        
+    </div>
+</div>
+
+

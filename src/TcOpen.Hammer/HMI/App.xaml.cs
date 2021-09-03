@@ -24,7 +24,8 @@ namespace HMI
         public App()
         {
 
-            var authenticationService = SecurityManager.Create(SetUpUserRepository());
+            //var authenticationService = SecurityManager.Create(SetUpUserRepository());
+            var authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
             ISecurityManager securityManager = SecurityManager.Manager;
             securityManager.GetOrCreateRole(new Role("Service", "Maintenance"));
 
@@ -42,7 +43,7 @@ namespace HMI
 
 
 
-            // SetUpMongoDatabase();
+             //SetUpMongoDatabase();
             SetUpJsonRepositories();
 
             

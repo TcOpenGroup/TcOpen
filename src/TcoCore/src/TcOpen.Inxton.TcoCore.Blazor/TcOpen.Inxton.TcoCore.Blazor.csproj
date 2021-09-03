@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <GenerateAsseblyInfo>false</GenerateAsseblyInfo>
+     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <!--NuGet properties-->
     <Authors>TcOpenGroup contributors</Authors>
     <Company>TcOpenGroup</Company>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-alpha.585" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.1-nightly.608" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
   </ItemGroup>
 
