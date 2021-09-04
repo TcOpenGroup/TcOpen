@@ -69,7 +69,7 @@ END_VAR
     <Method Name="OnStart" Id="{2f23f300-6ca2-0121-34ff-d733f0ca0af9}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_startSignature := LINT_TO_STRING(THIS^.Context.Rtc.TickClock());
+        <ST><![CDATA[_startSignature := LINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock());
 _doneSignarure := '';	
 _hasException := FALSE;
 _exceptionMessage := '';]]></ST>

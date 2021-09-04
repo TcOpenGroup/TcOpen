@@ -142,7 +142,7 @@ END_IF;
 
 IF (Step(850, TRUE, 'SAVE DATA')) THEN
     //--------------------------------------------	
-    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.Rtc.TickClock())).Done);
+    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock())).Done);
     //--------------------------------------------	
 END_IF;
 

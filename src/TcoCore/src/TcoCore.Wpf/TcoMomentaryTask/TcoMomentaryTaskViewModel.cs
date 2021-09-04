@@ -49,13 +49,17 @@ namespace TcoCore
         public Vortex.Presentation.Wpf.RelayCommand ButtonDown { get; }
         public Vortex.Presentation.Wpf.RelayCommand ButtonUp { get; }
 
+        public string ButtonState { get; set; } = "btn-primary";
         private void OnButtonUp()
         {
+            ButtonState = "btn-primary";
             this.TcoMomentaryTask.Stop();
+            
         }
 
         private void OnButtonDown()
         {
+            ButtonState = "btn-success";
             this.TcoMomentaryTask.Start();
         }
 

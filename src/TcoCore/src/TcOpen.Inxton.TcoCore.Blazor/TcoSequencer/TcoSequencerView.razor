@@ -1,0 +1,20 @@
+﻿@namespace TcoCore
+@inherits RenderableViewModelComponentBase<TcoSequencerViewModel>
+
+
+
+<div>
+    <label>#@ViewModel.TcoSequencer._currentStep.ID.Cyclic</label>
+    <label><b>@ViewModel.TcoSequencer._currentStep.Description.Cyclic</b></label><br />
+    <label>@ViewModel.TcoSequencer._currentStep.Duration.Cyclic</label>
+
+    <RenderableContentControl Context="ViewModel.TcoSequencer._modeController"
+                              Presentation="Base"></RenderableContentControl>
+</div>
+
+@code{      
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel.TcoSequencer._currentStep);
+    }
+}

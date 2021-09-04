@@ -1,0 +1,20 @@
+﻿@namespace TcoCore
+@inherits RenderableComplexComponentBase<TcoSignalInfo>
+
+<div class="d-flex flex-row">
+    <p class="p-2">@Component.HumanReadable</p>
+    <div class="p-2">
+        <RenderableContentControl Context="Component.Signal"
+                                  Presentation="Display">
+
+        </RenderableContentControl>
+    </div>
+</div>
+
+@code {      
+    
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(Component);
+    }
+}

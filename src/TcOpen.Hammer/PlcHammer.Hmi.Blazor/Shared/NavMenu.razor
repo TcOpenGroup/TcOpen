@@ -6,12 +6,33 @@
 </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">     
+    <ul class="nav flex-column">
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="OnlineData">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="components" Match="NavLinkMatch.All">
+                <span class="oi oi-plus" aria-hidden="true"></span> Components
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="OnlineData" Match="NavLinkMatch.All">
                 <span class="oi oi-plus" aria-hidden="true"></span> OnlineData
             </NavLink>
-        </li>       
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="diagnostics" Match="NavLinkMatch.All">
+                <span class="oi oi-plus" aria-hidden="true"></span> Diagnostics
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="security" Match="NavLinkMatch.All">
+                <span class="oi oi-plus" aria-hidden="true"></span> Security
+            </NavLink>
+        </li>
+
     </ul>
 </div>
 

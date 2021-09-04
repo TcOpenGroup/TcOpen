@@ -79,7 +79,7 @@ namespace TcoCore
                 if (_cycleTags == null)
                 {
                     _cycleTags = new List<IValueTag>();
-                    _cycleTags.Add(_context.StartCycleCount);
+                    if (_context != null) { _cycleTags.Add(_context.StartCycleCount); }
                     _cycleTags.AddRange(DescendingMessages.Select(p => p.Cycle));
                 }
 

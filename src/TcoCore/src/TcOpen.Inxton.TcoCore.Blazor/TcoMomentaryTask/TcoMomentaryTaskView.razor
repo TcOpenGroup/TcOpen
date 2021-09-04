@@ -1,0 +1,18 @@
+﻿@namespace TcoCore
+@inherits RenderableViewModelComponentBase<TcoMomentaryTaskViewModel>
+
+<button type="button"
+        class="btn @ViewModel.ButtonState"
+        @onmousedown="()=> ViewModel.ButtonDown.Execute(null)"
+        @onmouseup="()=> ViewModel.ButtonUp.Execute(null)">
+    @ViewModel.Caption
+</button>
+
+@code{
+
+    protected override void OnInitialized()
+    {
+        
+        UpdateValuesOnChange(ViewModel.TcoMomentaryTask);
+    }
+}

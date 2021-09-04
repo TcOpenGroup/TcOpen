@@ -1,0 +1,302 @@
+﻿@namespace TcoDrivesBeckhoff
+@inherits RenderableViewModelComponentBase<TcoDriveSimpleServiceViewModel>
+
+
+
+<TcoComponentView Component="@ViewModel.Component">
+
+    <TcoComponentBody>
+        <div class="row">
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ActPos"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ModuloActPos"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ModuloActTurns"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ActVelo"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ActAcc"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ActTorque"
+                                      Class="col" />
+
+        </div>
+        <div class="row">
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.CmdNo"
+                                      Class="col" />
+
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.CmdState"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.MotionState"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.Error"
+                                      Class="col" />
+
+            <RenderableContentControl Context="ViewModel.Component._axisStatus.ErrorId"
+                                      Class="col" />
+
+            <div class="col">
+                <label>Error Description</label>
+                <div>
+                    <p>@GetErrorDescription(ViewModel.Component._axisStatus.ErrorId.Cyclic)</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="btn-group" role="group">
+
+                <RenderableContentControl Context="ViewModel.Component._power._drivePowerOverrideTask"
+                                          Presentation="Base"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context="ViewModel.Component._power._driveEnableLocalTask"
+                                          Presentation="Base"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context="ViewModel.Component._power._driveEnablePositiveLocalTask"
+                                          Presentation="Base"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context="ViewModel.Component._power._driveEnableNegativeLocalTask"
+                                          Presentation="Base"
+                                          Class="m-1" />
+
+
+            </div>
+        </div>
+
+
+        <div class="btn-group" role="group">
+
+            <RenderableContentControl Context="ViewModel.Component._resetTask"
+                                      Presentation="Base"
+                                      Class="m-1" />
+
+            <RenderableContentControl Context="ViewModel.Component._soEResetTask"
+                                      Presentation="Base"
+                                      Class="m-1" />
+
+            <RenderableContentControl Context="ViewModel.Component._haltTask"
+                                      Presentation="Base"
+                                      Class="m-1" />
+
+            <RenderableContentControl Context="ViewModel.Component._stopTask"
+                                      Presentation="Base"
+                                      Class="m-1" />
+
+        </div>
+        <div class="card p-2 ">
+
+            <RenderableContentControl Context=ViewModel.Component._homeTask
+                                      Presentation="Base"
+                                      Class="m-1" />
+
+            <div class="d-flex flex-nowrap">
+
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._position
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingOptions_SearchVelocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingOptions_SearchDirection
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingOptions_SyncVelocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+            </div>
+            <div class="d-flex flex-nowrap">
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingOptions_SyncDirection
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingMode
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingOptions_ReferenceMode
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._homeTask._homingOptions_ClearPositionLag
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+            </div>
+        </div>
+        <div class="card p-2">
+            <div class="btn-group" role="group">
+
+                <RenderableContentControl Context=ViewModel.Component._jog._jogBackwardsTask
+                                          Presentation="Base"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._jog._jogForwardTask
+                                          Presentation="Base"
+                                          Class="m-1" />
+
+            </div>
+            <div class="d-flex flex-nowrap">
+
+                <RenderableContentControl Context=ViewModel.Component._jog._jogMode
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._jog._position
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._jog._velocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._jog._acceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._jog._deceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._jog._jerk
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+            </div>
+        </div>
+        <div class="card p-2">
+            <RenderableContentControl Context=ViewModel.Component._moveRelativeTask
+                                      Presentation="Base"
+                                      Class="m-1" />
+            <div class="d-flex flex-nowrap">
+
+                <RenderableContentControl Context=ViewModel.Component._moveRelativeTask._distance
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveRelativeTask._velocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveRelativeTask._acceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveRelativeTask._deceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveRelativeTask._jerk
+                                          Presentation="Control"
+                                          Class="m-1" />
+            </div>
+            <RenderableContentControl Context=ViewModel.Component._moveAbsoluteTask
+                                      Presentation="Base"
+                                      Class="m-1" />
+            <div class="d-flex flex-nowrap">
+
+                <RenderableContentControl Context=ViewModel.Component._moveAbsoluteTask._position
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveAbsoluteTask._velocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveAbsoluteTask._acceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveAbsoluteTask._deceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveAbsoluteTask._jerk
+                                          Presentation="Control"
+                                          Class="m-1" />
+            </div>
+            <RenderableContentControl Context=ViewModel.Component._moveModuloTask
+                                      Presentation="Base"
+                                      Class="m-1" />
+            <div class="d-flex flex-nowrap">
+
+                <RenderableContentControl Context=ViewModel.Component._moveModuloTask._position
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveModuloTask._velocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveModuloTask._acceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveModuloTask._deceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveModuloTask._jerk
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveModuloTask._direction
+                                          Presentation="Control"
+                                          Class="m-1" />
+            </div>
+
+            <RenderableContentControl Context=ViewModel.Component._moveVelocityTask
+                                      Presentation="Base"
+                                      Class="m-1" />
+            <div class="d-flex flex-nowrap">
+
+
+                <RenderableContentControl Context=ViewModel.Component._moveVelocityTask._velocity
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveVelocityTask._acceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveVelocityTask._deceleration
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveVelocityTask._jerk
+                                          Presentation="Control"
+                                          Class="m-1" />
+
+                <RenderableContentControl Context=ViewModel.Component._moveVelocityTask._direction
+                                          Presentation="Control"
+                                          Class="m-1" />
+            </div>
+        </div>
+    </TcoComponentBody>
+</TcoComponentView>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        UpdateValuesOnChange(ViewModel.Component._axisStatus.ErrorId);
+    }
+}

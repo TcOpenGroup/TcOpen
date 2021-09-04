@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <Itf Name="ITcoMessenger" Id="{feb2a157-bddb-4314-a4f2-ca2ae8c2472e}">
     <Declaration><![CDATA[INTERFACE ITcoMessenger
 ]]></Declaration>
@@ -20,7 +20,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -42,7 +42,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -64,7 +64,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -86,7 +86,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 ]]></Declaration>
     </Method>
@@ -108,7 +108,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 	(*~
 		<docu>
 			<summary>
@@ -138,7 +138,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -160,7 +160,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -182,7 +182,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(125);
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
