@@ -21,8 +21,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.1-nightly.608" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.1-nightly.608" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.1-alpha.602" />
+    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.1-alpha.602" />
   </ItemGroup>
     <ItemGroup>    
     <Content Include="_meta\TcoCore.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
