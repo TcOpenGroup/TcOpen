@@ -177,11 +177,11 @@
                 </GroupBox>
             </StackPanel>
         </Expander>
-        <Grid Grid.Row="5">
-            <ScrollViewer>
+       
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="5" Height="150">
                 <ContentControl Content="{Binding AffectedObjectPresentation}" />
             </ScrollViewer>
-        </Grid>
+       
         <Expander Header="Details"
                   Grid.Row="4" 
                   DataContext="{Binding SelectedItem, ElementName=dataGrid}">
