@@ -22,18 +22,7 @@ namespace TcoCore
             this._context = parent?.GetParent<TcoContext>();
             this.MessageHandler = new TcoObjectMessageHandler(this._context, this);
         }
-
-        /// <summary>
-        /// Gets active messages of this context.
-        /// <note type="important">
-        /// Depending on the depth and size of the context this might be performance demanding operation.
-        /// </note>        
-        /// </summary>
-        public IEnumerable<PlainTcoMessage> GetActiveMessages()
-        {
-            return MessageHandler.GetActiveMessages();
-        }
-
+        
         /// <summary>
         /// Gets identity of this <see cref="TcoObject"/>.
         /// </summary>

@@ -409,7 +409,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
+            var handler = sut.GetParent<TcoMessengerContextTest>()?.MessageHandler;
+            
+            handler.DiagnosticsDepth = 1000;
+
+            handler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
@@ -445,7 +449,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
+            var handler = sut.GetParent<TcoMessengerContextTest>()?.MessageHandler;
+
+            handler.DiagnosticsDepth = 1000;
+
+            handler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 

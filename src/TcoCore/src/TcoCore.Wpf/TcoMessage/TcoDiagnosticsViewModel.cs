@@ -10,18 +10,18 @@
     using TcOpen.Inxton;
     using TcOpen.Inxton.Input;
     using Vortex.Connector;
-    
+
 
     public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
-    
+
         /// <summary>
         /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
         /// </summary>
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
 
         /// <summary>
@@ -30,8 +30,8 @@
         /// <param name="tcoObject">TcoObject to be observed by this diagnostics</param>
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
-            _tcoObject = tcoObject;            
-             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            _tcoObject = tcoObject;
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
         }
 
 
@@ -41,34 +41,34 @@
         public IsTcoObject TcoObject { set { _tcoObject = value; } }
 
         protected IsTcoObject _tcoObject { get; set; }
-      
+
         private volatile object updatemutex = new object();
 
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
         internal void UpdateMessages()
-        {               
-            if(DiagnosticsRunning)
+        {
+            if (DiagnosticsRunning)
             {
                 return;
             }
 
-            lock(updatemutex)
+            lock (updatemutex)
             {
                 DiagnosticsRunning = true;
-                                    
+
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject?.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    MessageDisplay = _tcoObject?.MessageHandler.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
-                
+
                 }).Wait();
 
                 DiagnosticsRunning = false;
-            }            
+            }
         }
 
         bool diagnosticsRunning;
@@ -78,7 +78,7 @@
         /// </summary>
         public bool DiagnosticsRunning
         {
-            get => diagnosticsRunning; 
+            get => diagnosticsRunning;
             internal set
             {
                 if (diagnosticsRunning == value)
@@ -89,7 +89,7 @@
                 SetProperty(ref diagnosticsRunning, value);
             }
         }
-            
+
         bool autoUpdate;
         /// <summary>
         /// Gets or sets whether the diagnostics view should auto refresh.
@@ -110,7 +110,7 @@
                 SetProperty(ref autoUpdate, value);
             }
         }
-      
+
         /// <summary>
         /// Gets list of available standard message categories.
         /// </summary>
@@ -121,7 +121,7 @@
                 return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
             }
         }
-       
+
         IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
         /// <summary>
         /// Gets list of messages to be displayed in message list of the view.
@@ -151,7 +151,7 @@
             set;
         } = eMessageCategory.Info;
 
-        
+
         /// <summary>
         ///  Gets or sets currently selected message from the list of messages.
         /// </summary>
@@ -177,24 +177,26 @@
                 this.OnPropertyChanged(nameof(AffectedObjectPresentation));
             }
         }
-       
+
         /// <summary>
         /// Gets the command that executes update of messages on demand.
         /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
-        
+
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
 
-        private static string NoFurtherInfo = "We have no further info about this message";
+        private static string NoFurtherInfo = TcOpen.Inxton.TcoCore.Wpf.Properties.Localization.WeHaveNoFurtherInfoAboutThisMessage;
 
         private ulong lastSelectedMessageIdentity = 0;
         private object affectedObjectPresenation = NoFurtherInfo;
+        private int diagnosticsDepth;
+
         public object AffectedObjectPresentation
         {
             get
             {
                 if (this.SelectedMessage == null)
-                    return "No message selected";
+                    return TcOpen.Inxton.TcoCore.Wpf.Properties.Localization.NoMessageSelected;
 
                 if (this.SelectedMessage.Identity == lastSelectedMessageIdentity)
                 {
@@ -230,7 +232,7 @@
                         default:
                             break;
                     }
-                    
+
                     if (affectedObject != null)
                     {
                         try
@@ -254,6 +256,27 @@
                 lastSelectedMessageIdentity = this.SelectedMessage.Identity;
                 return affectedObjectPresenation;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Gets or sets the diagnostics depth for observed object.
+        /// </summary>
+        public int DiagnosticsDepth
+        {
+            get
+            {
+                return diagnosticsDepth;
+            }
+            set
+            {
+                if (diagnosticsDepth == value)
+                {
+                    return;
+                }
+                
+                SetProperty(ref diagnosticsDepth, value);
+                this._tcoObject.MessageHandler.DiagnosticsDepth = value;
+            }
+        }
     }
 }

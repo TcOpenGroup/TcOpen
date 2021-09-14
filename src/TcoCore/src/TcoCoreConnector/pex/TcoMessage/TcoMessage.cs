@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
     using Vortex.Connector;
+    using Vortex.Localizations.Abstractions;
     using Vortex.Presentation;
 
     public partial class TcoMessage
@@ -45,6 +46,61 @@
             }
         }
 
+
+        private volatile object mutex = new object();
+
+        private IVortexObject _indentityPersistence;
+        private IVortexObject IndentityPersistence
+        {
+            get
+            {
+                lock (mutex)
+                {
+                    if (_indentityPersistence == null)
+                    {
+                        _indentityPersistence = this.Connector.IdentityProvider.GetVortexerByIdentity(this.Identity.Synchron) as IVortexObject;
+                    }
+                }
+                return _indentityPersistence;
+            }
+        }
+
+        private ITranslator _translator;
+        private ITranslator Translator
+        {
+            get
+            {
+                lock (mutex)
+                {
+                    if (_translator == null)
+                    {
+                        _translator = this.Text.Translator;
+                        var obj = this.Connector.IdentityProvider.GetVortexerByIdentity(this.Identity.Synchron) as IVortexObject;
+                        if (obj != null)
+                        {
+                            try
+                            {
+                                dynamic vt = obj.GetValueTags().FirstOrDefault();
+
+                                if (vt != null)
+                                {
+                                    _translator = vt.Translator;
+                                }
+                            }
+                            catch (Exception)
+                            {
+
+                                // Swallow
+                            }
+                            
+                        }
+                    }
+                }
+
+                return _translator;
+            }
+        }
+
         /// <summary>
         /// Gets the message in plain .net type system (aka POCO object).
         /// </summary>
@@ -54,9 +110,8 @@
             {                
                 this.FlushOnlineToPlain(_plain);
                 _plain.ParentsObjectSymbol = this._parentObject?.Symbol;
-                _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
-                var identity = this.Connector.IdentityProvider.GetVortexerByIdentity(_plain.Identity);
-                _plain.Text = this.Text.Translator.Translate(StringInterpolator.Interpolate(_plain.Text, identity));
+                _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;                
+                _plain.Text = Translator.Translate(StringInterpolator.Interpolate(_plain.Text, IndentityPersistence));
                 _plain.Source = _plain.ParentsObjectSymbol;
                 _plain.Location = _plain.ParentsHumanReadable;
                 return _plain;

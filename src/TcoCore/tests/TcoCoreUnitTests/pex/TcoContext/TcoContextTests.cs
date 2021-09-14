@@ -43,7 +43,7 @@ namespace TcoCore.PexTests
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
 
-            var actual = context.GetActiveMessages();
+            var actual = context.MessageHandler.GetActiveMessages();
 
             Assert.AreEqual(1, actual.Count());
         }
@@ -62,7 +62,7 @@ namespace TcoCore.PexTests
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
 
-            var actual = context.ActiveMessages;
+            var actual = context.MessageHandler.GetActiveMessages();
 
             Assert.AreEqual(1, actual.Count());
         }
