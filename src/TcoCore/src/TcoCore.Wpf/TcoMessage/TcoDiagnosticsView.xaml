@@ -189,11 +189,11 @@
                 </GroupBox>
             </StackPanel>
         </Expander>
-       
-            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="5" Height="150">
-                <ContentControl Content="{Binding AffectedObjectPresentation}" />
-            </ScrollViewer>
-       
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="5" Height="150">
+            <ContentControl Content="{Binding AffectedObjectPresentation}" />
+        </ScrollViewer>
+
         <Expander Header="Details"
                   Grid.Row="4" 
                   DataContext="{Binding SelectedItem, ElementName=dataGrid}">
@@ -239,7 +239,7 @@
                 <Slider Value="{Binding DiagnosticsDepth}" Margin="10" Minimum="1" Maximum="30"/>
             </StackPanel>
         </GroupBox>
-        
+
         <vortex:HelpProviderView Grid.Row="8">
             <vortex:HelpProviderView.DataContext>
                 <vortex:HelpProviderViewModel ComponentName="TcoDiagnosticsView" />

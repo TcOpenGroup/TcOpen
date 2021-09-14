@@ -137,8 +137,8 @@ namespace TcoCore
             if (refreshTags == null)
             {
                 refreshTags = new List<IValueTag>();
-                refreshTags.AddRange(CycleTags);
-                refreshTags.AddRange(CategoryTags);
+                refreshTags?.AddRange(CycleTags);
+                refreshTags?.AddRange(CategoryTags);
             }
 
             // We must check that the connector did start R/W operations loop, due to possible dead lock at start-up
@@ -149,7 +149,7 @@ namespace TcoCore
                 _obj.GetConnector().ReadBatch(refreshTags);
             }
 
-            return DescendingMessages.Where(p => p.IsActive).Select(p => p.PlainMessage);
+            return DescendingMessages?.Where(p => p.IsActive).Select(p => p.PlainMessage);
         }
 
         /// <summary>
