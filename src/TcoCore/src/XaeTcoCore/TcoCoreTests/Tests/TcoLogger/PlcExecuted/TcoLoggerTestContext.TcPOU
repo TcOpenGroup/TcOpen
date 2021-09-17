@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLoggerTestContext" Id="{ce23ff7a-efb3-08f3-330f-5b5da7b34243}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_sut : TcoLoggerTest(THIS^);
+	_msg : TcoCore.TcoMessage;  	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{0678b4d1-dbb5-0762-1a80-d32d3160bf40}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF     
+    eTcoLoggerTests.Push:
+		_logger.Push(_msg);
+END_CASE
+
+_sut();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

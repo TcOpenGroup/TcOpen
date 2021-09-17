@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="fbManipulatorAutomat" Id="{e3bf80e0-2686-0576-2ba1-7979512bbe7c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbManipulatorAutomat EXTENDS TcoCore.TcoState
 VAR
@@ -9,7 +9,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_horizontalPiston();
+      <ST><![CDATA[
+THIS^.Messenger.Info('We are running automatic mode1');
+
+_horizontalPiston();
 _verticalPiston();
 _gripperPiston();
 

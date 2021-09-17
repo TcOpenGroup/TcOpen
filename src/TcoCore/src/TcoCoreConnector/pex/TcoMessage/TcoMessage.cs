@@ -117,5 +117,23 @@
                 return _plain;
             }
         }
+
+        /// <summary>
+        /// Gets the message in plain .net type system (aka POCO object) with object retieved by identity.
+        /// </summary>
+        public PlainTcoMessage LogPlainMessage
+        {
+            get
+            {
+                this.FlushOnlineToPlain(_plain);
+                var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(_plain.Identity);
+                _plain.ParentsObjectSymbol = parent?.Symbol;
+                _plain.ParentsHumanReadable = parent?.HumanReadable;
+                _plain.Text = Translator.Translate(StringInterpolator.Interpolate(_plain.Text, IndentityPersistence));
+                _plain.Source = _plain.ParentsObjectSymbol;
+                _plain.Location = _plain.ParentsHumanReadable;
+                return _plain;
+            }
+        }
     }
 }

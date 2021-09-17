@@ -21,7 +21,11 @@ namespace TcoCore.Sandbox.Wpf
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
+           
+
             PlcTcoCoreExamples.Connector.BuildAndStart();
+
+            PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages();
         }
 
         public static TcoCoreExamplesTwinController PlcTcoCoreExamples { get { return Entry.PlcTcoCoreExamples; } }

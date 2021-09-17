@@ -87,18 +87,18 @@ _mime.PerCycleCount := 0;	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
-      <Declaration><![CDATA[METHOD PROTECTED Compose 
+      <Declaration><![CDATA[METHOD PROTECTED Compose : TcoMessage
 VAR_INPUT
 	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
-	_mime.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
-	_mime.Text := Text;
-	_mime.Identity := _Parent.Identity;
-	_mime.Category := Category;
-	_mime.Cycle := _Parent.Context.StartCycleCount;	
+	Compose.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
+	Compose.Text := Text;
+	Compose.Identity := _Parent.Identity;
+	Compose.Category := Category;
+	Compose.Cycle := _Parent.Context.StartCycleCount;	
 END_IF;
 
 
@@ -229,6 +229,32 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="LastEqualsTo" Id="{0b6b2fe7-cb26-02a6-0b72-2570a4f5cb53}">
+      <Declaration><![CDATA[METHOD PRIVATE LastEqualsTo : BOOL
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[LastEqualsTo := Category = _mime.Category
+			    AND Message = _mime.Text;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Notify" Id="{1595dfe7-5719-459e-bdf2-0e7976c85511}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -288,19 +314,24 @@ END_VAR
 	IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel
 	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
 		RETURN;
-	END_IF; 	
-	
+	END_IF; 		
 	_mime.PerCycleCount := _mime.PerCycleCount + 1;
-	// Same cycle filter for most important messge.
+	
+	// Push to logger
+	IF(NOT LastEqualsTo(Message, Category)) THEN		
+		_Parent.Context.Logger.Push(Compose(Message, Category));		
+	END_IF;	
+	
+    // Same cycle filter for most important messge.
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
 		IF(Category > _mime.Category) THEN	 
-			Compose(Message, Category);
+			_mime := Compose(Message, Category);
 		END_IF;
 	ELSE
 	// Different cycle		
 		_mime.PerCycleCount := 1;	
-		Compose(Message, Category);		
-	END_IF;	
+		_mime := Compose(Message, Category);		
+	END_IF;			
 END_IF;	
 
 

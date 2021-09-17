@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLogger EXTENDS TcoObject
+VAR
+	_buffer : TcoLoggerBuffer;
+	_index : INT;
+END_VAR
+
+VAR CONSTANT
+	_bufferLenght : INT := 1000;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Push" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
+      <Declaration><![CDATA[METHOD Push
+VAR_INPUT
+	inMessage : TcoMessage;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_index >= _bufferLenght) THEN
+	_index := 0;
+END_IF
+
+_buffer.Buffer[_index] := inMessage;
+_index := _index + 1;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

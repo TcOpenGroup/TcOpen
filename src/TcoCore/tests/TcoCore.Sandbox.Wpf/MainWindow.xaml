@@ -150,6 +150,9 @@
                     </UniformGrid>
                 </ScrollViewer>
             </TabItem>
+            <TabItem>
+                <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR._context }" PresentationType="Diagnostics"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

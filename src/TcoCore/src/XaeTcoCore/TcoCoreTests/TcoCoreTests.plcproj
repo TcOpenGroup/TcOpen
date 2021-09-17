@@ -70,6 +70,15 @@
     <Compile Include="Tests\TcoContext\TcoContextTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoLogger\PlcExecuted\eTcoLoggerTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoLogger\PlcExecuted\TcoLoggerTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoLogger\PlcExecuted\TcoLoggerTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoMessenger\TcoContextMessagingPerf.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -158,6 +167,8 @@
   <ItemGroup>
     <Folder Include="Components" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoLogger" />
+    <Folder Include="Tests\TcoLogger\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />
