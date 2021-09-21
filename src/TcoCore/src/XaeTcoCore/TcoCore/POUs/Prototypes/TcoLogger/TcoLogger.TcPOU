@@ -3,12 +3,13 @@
   <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoLogger EXTENDS TcoObject
 VAR
-	_buffer : TcoLoggerBuffer;
-	_index : INT;
+	_buffer : ARRAY[0..1000] OF TcoMessage;
+	_plcCarret : INT;
+	_minLoggingLevel : eMessageCategory := eMessageCategory.Notification;
 END_VAR
 
 VAR CONSTANT
-	_bufferLenght : INT := 1000;
+	MESSAGE_BUFFER_LENGHT : INT := 1000;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -21,12 +22,21 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_index >= _bufferLenght) THEN
-	_index := 0;
+        <ST><![CDATA[IF(inMessage.Category < THIS^._minLoggingLevel) THEN
+	RETURN;
 END_IF
 
-_buffer.Buffer[_index] := inMessage;
-_index := _index + 1;]]></ST>
+IF(_plcCarret > MESSAGE_BUFFER_LENGHT) THEN
+	_plcCarret := 0;
+END_IF
+
+_buffer[_plcCarret] := inMessage;
+_buffer[_plcCarret].ExpectDequeing := TRUE;
+_buffer[_plcCarret].Cycle := THIS^.Context.StartCycleCount;
+
+_plcCarret := _plcCarret + 1;
+
+]]></ST>
       </Implementation>
     </Method>
   </POU>

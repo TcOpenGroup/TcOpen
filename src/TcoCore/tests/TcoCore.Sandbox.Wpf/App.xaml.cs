@@ -25,7 +25,7 @@ namespace TcoCore.Sandbox.Wpf
 
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
-            PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages();
+            PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);
         }
 
         public static TcoCoreExamplesTwinController PlcTcoCoreExamples { get { return Entry.PlcTcoCoreExamples; } }

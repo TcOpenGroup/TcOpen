@@ -6,7 +6,9 @@
 TYPE
     eTcoLoggerTests :
     (
-		Push := 10
+		Push := 10,
+		PushMultiple := 20,
+		PushMultipleInMoreCycles := 30
     );
 END_TYPE
 ]]></Declaration>

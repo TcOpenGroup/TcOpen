@@ -11,37 +11,119 @@ namespace TcoCore
     public partial class TcoLogger
     {
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
-        {
-           // this._index.Subscribe(RetrieveMessages);
+        {        
+            expectDequeingTags = this._buffer.Select(p => p.ExpectDequeing as IValueTag).ToList();
         }
 
-        public void StartLoggingMessages()
+        /// <summary>
+        /// Gets or set the minimal level category for PLC event logging.
+        /// </summary>
+        public eMessageCategory MinLogLevelCategory
         {
-            this._index.Subscribe(RetrieveMessages);
-        }
-
-        private int lastIndex = 0;
-        private volatile object mutex = new object();
-        private void RetrieveMessages(IValueTag sender, ValueChangedEventArgs args)
-        {
-            lock (mutex)
+            get
             {
-                Task.Run(() =>
-                {
-                    var index = this._index.Cyclic;
+                return (eMessageCategory)this._minLoggingLevel.Synchron;
+            }
 
-                    if (index < lastIndex)
+            set
+            {
+                this._minLoggingLevel.Synchron = (short)value;
+            }
+        }
+
+        /// <summary>
+        /// Starts the event retrieval loop.
+        /// <note type="important">
+        /// The log retrieval operations for given logger can be started on one system only. 
+        /// Make sure you do not run the log retrieval from the same logger in multiple instances.
+        /// </note>
+        /// </summary>
+        /// <param name="minLevelCategory">Sets the minimal logging level.</param>
+        public void StartLoggingMessages(eMessageCategory minLevelCategory)
+        {
+            this._minLoggingLevel.Synchron = (short)minLevelCategory;
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    System.Threading.Thread.Sleep(2);
+                    LogMessages(Pop());
+                }
+            });
+        }
+
+        private IList<IValueTag> expectDequeingTags { get; set; }
+
+        /// <summary>
+        /// Pops messages from this logger.
+        /// </summary>
+        /// <returns>Messages from the logger</returns>
+        public IEnumerable<PlainTcoMessage> Pop()
+        {
+            var poppedMessages = new HashSet<PlainTcoMessage>();
+            this.Connector.ReadBatch(expectDequeingTags);
+            var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
+
+            if (messagesToDequeue.Count() > 0)
+            {
+                var messagesToReadValueTags = messagesToDequeue.SelectMany(p => p.RetrieveValueTags());
+                this.Connector.ReadBatch(messagesToReadValueTags);
+                
+                foreach (var message in messagesToDequeue)
+                {
+                    var plain = message.LastPlainMessageNoTranslation;
+                    if(!poppedMessages.Add(plain))
                     {
-                        lastIndex = 0;
+                        Console.WriteLine(plain.Text);
                     }
 
-                    while(lastIndex <= index)
-                    {
-                        var plain = this._buffer.Buffer[lastIndex].LogPlainMessage;
-                        LogMessage(plain, new { plain.ParentsObjectSymbol, plain.ParentsHumanReadable });
-                        lastIndex++;
-                    }                    
-                });
+                    message.ExpectDequeing.Cyclic = false;
+                }
+
+                this.Connector.WriteBatch(expectDequeingTags);
+            }
+            
+            return poppedMessages;            
+        }
+        
+        /// <summary>
+        /// Peeks messaging from this logger withou effecting dequeing.
+        /// </summary>
+        /// <returns>Messages from this logger.</returns>
+        public IEnumerable<PlainTcoMessage> Peek()
+        {
+            var poppedMessages = new List<PlainTcoMessage>();
+            this.Connector.ReadBatch(expectDequeingTags);
+            var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
+
+            if (messagesToDequeue.Count() > 0)
+            {
+                var messagesToReadValueTags = messagesToDequeue.SelectMany(p => p.RetrieveValueTags());
+                this.Connector.ReadBatch(messagesToReadValueTags);
+
+                foreach (var message in messagesToDequeue)
+                {
+                    var plain = message.LastPlainMessageNoTranslation;
+                    poppedMessages.Add(plain);                    
+                }                
+            }
+
+            return poppedMessages;
+        }
+
+
+        IEnumerable<PlainTcoMessage> previousMessageSet = new HashSet<PlainTcoMessage>();
+
+        /// <summary>
+        /// Logs messages into <see cref="TcOpen.Inxton.Logging.ITcoLogger"/> of this application.
+        /// </summary>
+        /// <param name="messages">Messages to push to the application logger.</param>
+        public void LogMessages(IEnumerable<PlainTcoMessage> messages)
+        {          
+            foreach (var plain in messages)
+            {
+                LogMessage(plain, new { plain.ParentsObjectSymbol, plain.ParentsHumanReadable });               
             }
         }
 
@@ -55,11 +137,11 @@ namespace TcoCore
                 case eMessageCategory.Trace:
                     TcOpen.Inxton.TcoAppDomain.Current.Logger.Verbose($"{message.Text} {{@sender}}", payload);
                     break;
-                case eMessageCategory.Info:                   
-                case eMessageCategory.TimedOut:                    
-                case eMessageCategory.Notification:
+                case eMessageCategory.Info:                              
                     TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{message.Text} {{@sender}}", payload);
                     break;
+                case eMessageCategory.TimedOut:
+                case eMessageCategory.Notification:
                 case eMessageCategory.Warning:
                     TcOpen.Inxton.TcoAppDomain.Current.Logger.Warning($"{message.Text} {{@sender}}", payload);
                     break;
