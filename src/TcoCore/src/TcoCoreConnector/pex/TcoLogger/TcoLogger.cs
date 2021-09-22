@@ -61,7 +61,7 @@ namespace TcoCore
         /// <returns>Messages from the logger</returns>
         public IEnumerable<PlainTcoMessage> Pop()
         {
-            var poppedMessages = new HashSet<PlainTcoMessage>();
+            var poppedMessages = new List<PlainTcoMessage>();
             this.Connector.ReadBatch(expectDequeingTags);
             var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
 
@@ -73,11 +73,22 @@ namespace TcoCore
                 foreach (var message in messagesToDequeue)
                 {
                     var plain = message.LastPlainMessageNoTranslation;
-                    if(!poppedMessages.Add(plain))
-                    {
-                        Console.WriteLine(plain.Text);
-                    }
+                    PlainTcoMessage possiblySame =
+                        poppedMessages
+                        .Where(p => p.Equals(plain) && p.Cycle == plain.Cycle - 1)
+                        .LastOrDefault();
 
+
+                    if (possiblySame != null)
+                    {
+                        poppedMessages.Remove(possiblySame);
+                        poppedMessages.Add(plain);
+                    }
+                    else
+                    {
+                        poppedMessages.Add(plain);
+                    }
+                   
                     message.ExpectDequeing.Cyclic = false;
                 }
 
@@ -86,9 +97,11 @@ namespace TcoCore
             
             return poppedMessages;            
         }
-        
+
+        private List<PlainTcoMessage> ActiveMessages { get; } = new List<PlainTcoMessage>();
+
         /// <summary>
-        /// Peeks messaging from this logger withou effecting dequeing.
+        /// Peeks messaging from this logger without effecting dequeing.
         /// </summary>
         /// <returns>Messages from this logger.</returns>
         public IEnumerable<PlainTcoMessage> Peek()
@@ -111,9 +124,6 @@ namespace TcoCore
 
             return poppedMessages;
         }
-
-
-        IEnumerable<PlainTcoMessage> previousMessageSet = new HashSet<PlainTcoMessage>();
 
         /// <summary>
         /// Logs messages into <see cref="TcOpen.Inxton.Logging.ITcoLogger"/> of this application.

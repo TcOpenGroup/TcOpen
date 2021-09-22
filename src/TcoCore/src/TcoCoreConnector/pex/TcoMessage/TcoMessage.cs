@@ -16,7 +16,7 @@
 
         private IsTcoObject _parentObject;
 
-        private readonly PlainTcoMessage _plain = new PlainTcoMessage();
+       
 
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
@@ -105,23 +105,24 @@
         public PlainTcoMessage PlainMessage
         {
             get
-            {                
-                this.FlushOnlineToPlain(_plain);
-                _plain.ParentsObjectSymbol = this._parentObject?.Symbol;
-                _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
-                _plain.Raw = _plain.Text;
-                if(_plain.ExpectDequeing)
+            {
+                var plain = this.CreatePlainerType();
+                this.FlushOnlineToPlain(plain);
+                plain.ParentsObjectSymbol = this._parentObject?.Symbol;
+                plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
+                plain.Raw = plain.Text;
+                if(plain.ExpectDequeing)
                 { 
-                    var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(_plain.Identity) as IVortexObject;
-                    _plain.Text = Translate(_plain.Text, parent);
+                    var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(plain.Identity) as IVortexObject;
+                    plain.Text = Translate(plain.Text, parent);
                 }
                 else
                 {
-                    TranslatorPersistence.Translate(StringInterpolator.Interpolate(_plain.Text, IndentityPersistence));
+                    TranslatorPersistence.Translate(StringInterpolator.Interpolate(plain.Text, IndentityPersistence));
                 }
-                _plain.Source = _plain.ParentsObjectSymbol;
-                _plain.Location = _plain.ParentsHumanReadable;
-                return _plain;
+                plain.Source = plain.ParentsObjectSymbol;
+                plain.Location = plain.ParentsHumanReadable;
+                return plain;
             }
         }
         
@@ -132,15 +133,16 @@
         {
             get
             {
-                _plain.CopyCyclicToPlain(this);
-                var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(_plain.Identity) as IVortexObject;
-                _plain.ParentsObjectSymbol = parent?.Symbol;
-                _plain.ParentsHumanReadable = parent?.HumanReadable;
-                _plain.Raw = _plain.Text;
-                _plain.Text = Translate(_plain.Text, parent);                
-                _plain.Source = _plain.ParentsObjectSymbol;
-                _plain.Location = _plain.ParentsHumanReadable;
-                return _plain;
+                var plain = this.CreatePlainerType();
+                plain.CopyCyclicToPlain(this);
+                var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(plain.Identity) as IVortexObject;
+                plain.ParentsObjectSymbol = parent?.Symbol;
+                plain.ParentsHumanReadable = parent?.HumanReadable;
+                plain.Raw = plain.Text;
+                plain.Text = Translate(plain.Text, parent);
+                plain.Source = plain.ParentsObjectSymbol;
+                plain.Location = plain.ParentsHumanReadable;
+                return plain;
             }
         }
 

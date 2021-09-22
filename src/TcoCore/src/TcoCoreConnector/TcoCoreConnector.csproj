@@ -21,9 +21,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Babel.Licensing" Version="2.8.7" />
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.1-alpha.602" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.1-alpha.602" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.1-alpha.604" />
+    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.1-alpha.604" />
   </ItemGroup>
     <ItemGroup>    
     <Content Include="_meta\TcoCore.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
@@ -31,9 +30,6 @@
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
   </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\..\..\ivf\vortex.connectors\src\connectors\Vortex.Adapters.Connector.Tc3\Vortex.Adapters.Connector.Tc3.csproj" />
-      <ProjectReference Include="..\..\..\..\..\..\ivf\vortex.connectors\src\connectors\Vortex.Connector\Vortex.Connector.csproj" />
-      <ProjectReference Include="..\..\..\..\..\..\ivf\vortex.connectors\src\protection\inxton.licencing\src\Inxton.Licencing\Inxton.Licencing.csproj" />
       <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj" />
       <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton\TcOpen.Inxton.csproj" />
     </ItemGroup>

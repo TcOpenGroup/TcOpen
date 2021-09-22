@@ -125,21 +125,50 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(25, actual.Count());                                                          
         }
 
-        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles)]
+        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 100)]
         public void PushMultipleInDistictCyclesTest_same_messages_non_consecutive_cycles()
         {
             tc._multiplesCount.Synchron = 25;
             tc._logger.MinLogLevelCategory = eMessageCategory.Info;
             tc._msg.Category.Synchron = (short)eMessageCategory.Info;
 
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);            
-            tc.ExecuteProbeRun(2, 0);
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
-            tc.ExecuteProbeRun(2, 0);
+            tc.ExecuteProbeRun(10, 0);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(10, 0);
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
 
             var actual = tc._logger.Pop();
 
+            Assert.AreEqual(75, actual.Count());
+        }
+
+        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 200)]
+        public void PushMultipleInDistictCyclesTest_same_messages_non_consecutive_cycles1()
+        {
+            tc._multiplesCount.Synchron = 25;
+            tc._logger.MinLogLevelCategory = eMessageCategory.Info;
+            tc._msg.Category.Synchron = (short)eMessageCategory.Info;
+
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            var actual = tc._logger.Pop();
+            Assert.AreEqual(25, actual.Count());
+
+          
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(10, 0);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+
+            actual = tc._logger.Pop();
+            Assert.AreEqual(50, actual.Count());
+
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, 0);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, 0);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+
+            actual = tc._logger.Pop();
             Assert.AreEqual(75, actual.Count());
         }
 

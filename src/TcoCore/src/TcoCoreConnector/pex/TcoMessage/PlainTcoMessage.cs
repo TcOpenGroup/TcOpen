@@ -144,9 +144,6 @@ namespace TcoCore
             return obj is PlainTcoMessage p
                  && (p.Raw, p.ParentsObjectSymbol, p.Category).Equals((Raw, ParentsObjectSymbol, Category));
                  
-        }
-        
-
-       
+        }        
     }
 }
