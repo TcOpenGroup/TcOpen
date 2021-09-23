@@ -86,13 +86,11 @@ namespace TcOpen.Inxton.Data.MongoDb
             if (identifier == "*")
             {
                 return collection.Find(p => true)
-                    .Sort(new SortDefinitionBuilder<T>().Descending("$natural"))
                     .Limit(limit).Skip(skip).ToList();
             }
             else
             {
                 return collection.Find(p => p._EntityId.Contains(identifier))
-                    .Sort(new SortDefinitionBuilder<T>().Descending("$natural"))
                     .Limit(limit).Skip(skip).ToList();
             }
         }
