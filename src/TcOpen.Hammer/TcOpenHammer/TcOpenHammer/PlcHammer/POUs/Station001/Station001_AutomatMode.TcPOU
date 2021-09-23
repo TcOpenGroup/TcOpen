@@ -141,7 +141,7 @@ IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
 END_IF;
 
 IF (Step(850, TRUE, 'SAVE DATA')) THEN
-    //--------------------------------------------	
+    //--------------------------------------------		
     StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock())).Done);
     //--------------------------------------------	
 END_IF;

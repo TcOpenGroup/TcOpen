@@ -133,7 +133,7 @@ namespace TcoCore
         {          
             foreach (var plain in messages)
             {
-                LogMessage(plain, new { plain.ParentsObjectSymbol, plain.ParentsHumanReadable });               
+                LogMessage(plain, new { plain.ParentsObjectSymbol, plain.ParentsHumanReadable, plain.Cycle });               
             }
         }
 
