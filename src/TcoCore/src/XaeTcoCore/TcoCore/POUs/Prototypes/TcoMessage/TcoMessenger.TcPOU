@@ -251,7 +251,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IsNewMessage := Category <> _mime.Category
+        <ST><![CDATA[IsNewMessage := //_mime.PerCycleCount = 1 AND
+				Category <> _mime.Category
 			    OR Message <> _mime.Text
 				OR _Parent.Context.StartCycleCount > (_mime.Cycle + 1);
 				]]></ST>
@@ -320,9 +321,9 @@ END_VAR
 	_mime.PerCycleCount := _mime.PerCycleCount + 1;
 	
 	// Push to logger
-	//IF(IsNewMessage(Message, Category)) THEN		
-	_Parent.Context.Logger.Push(Compose(Message, Category));		
-	//END_IF;	
+	IF(IsNewMessage(Message, Category)) THEN		
+		_Parent.Context.Logger.Push(Compose(Message, Category));		
+	END_IF;	
 	
     // Same cycle filter for most important messge.
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	

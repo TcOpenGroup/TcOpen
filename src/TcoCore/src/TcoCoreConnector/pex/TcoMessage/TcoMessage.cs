@@ -118,7 +118,7 @@
                 }
                 else
                 {
-                    TranslatorPersistence.Translate(StringInterpolator.Interpolate(plain.Text, IndentityPersistence));
+                    plain.Text = TranslatorPersistence.Translate(StringInterpolator.Interpolate(plain.Text, IndentityPersistence));
                 }
                 plain.Source = plain.ParentsObjectSymbol;
                 plain.Location = plain.ParentsHumanReadable;
@@ -148,7 +148,12 @@
 
         private string Translate(string text, IVortexObject sender)
         {
-            return sender.GetValueTags().FirstOrDefault().Translator.Translate(StringInterpolator.Interpolate(text, sender));            
+            if(sender != null && sender.GetValueTags().FirstOrDefault() != null)
+            { 
+                return sender.GetValueTags().FirstOrDefault().Translator.Translate(StringInterpolator.Interpolate(text, sender));
+            }
+
+            return text;
         }
     }
 }
