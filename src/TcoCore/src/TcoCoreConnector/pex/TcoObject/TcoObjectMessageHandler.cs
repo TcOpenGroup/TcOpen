@@ -109,7 +109,7 @@ namespace TcoCore
         }
 
         string highestSeverityMessage;
-        private int diagnosticsDepth = 3;
+        private int diagnosticsDepth = 15;
         
 
         public string HighestSeverityMessage

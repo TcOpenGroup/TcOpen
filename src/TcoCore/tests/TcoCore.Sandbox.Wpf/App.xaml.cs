@@ -21,8 +21,8 @@ namespace TcoCore.Sandbox.Wpf
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
-           
 
+            PlcTcoCoreExamples.Connector.ReadWriteCycleDelay = 250;
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
             PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);

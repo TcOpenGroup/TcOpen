@@ -3,30 +3,31 @@
   <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoLogger EXTENDS TcoObject
 VAR
-	_buffer : ARRAY[0..1000] OF TcoMessage;
+	_buffer : ARRAY[0..MAX_MESSAGE_BUFFER_INDEX] OF TcoMessage;
 	_plcCarret : INT;
 	_minLoggingLevel : eMessageCategory := eMessageCategory.Notification;
 END_VAR
 
 VAR CONSTANT
-	MESSAGE_BUFFER_LENGHT : INT := 1000;
+	MAX_MESSAGE_BUFFER_INDEX : INT := 1000;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Push" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
-      <Declaration><![CDATA[METHOD Push
+      <Declaration><![CDATA[METHOD Push : WORD
 VAR_INPUT
 	inMessage : TcoMessage;
 END_VAR
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(inMessage.Category < THIS^._minLoggingLevel) THEN
 	RETURN;
 END_IF
 
-IF(_plcCarret > MESSAGE_BUFFER_LENGHT) THEN
+IF(_plcCarret > MAX_MESSAGE_BUFFER_INDEX) THEN
 	_plcCarret := 0;
 END_IF
 
@@ -36,7 +37,9 @@ _buffer[_plcCarret].Cycle := THIS^.Context.StartCycleCount;
 
 _plcCarret := _plcCarret + 1;
 
-]]></ST>
+inMessage.PerCycleCount := 0;
+inMessage.Cycle := inMessage.Cycle + 1;
+inMessage.ExpectDequeing := FALSE;]]></ST>
       </Implementation>
     </Method>
   </POU>

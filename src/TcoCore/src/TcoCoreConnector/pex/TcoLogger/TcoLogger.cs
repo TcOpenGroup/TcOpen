@@ -64,9 +64,9 @@ namespace TcoCore
             var poppedMessages = new List<PlainTcoMessage>();
             this.Connector.ReadBatch(expectDequeingTags);
             var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
-
+            
             if (messagesToDequeue.Count() > 0)
-            {
+            {                
                 var messagesToReadValueTags = messagesToDequeue.SelectMany(p => p.RetrieveValueTags());
                 this.Connector.ReadBatch(messagesToReadValueTags);
                 

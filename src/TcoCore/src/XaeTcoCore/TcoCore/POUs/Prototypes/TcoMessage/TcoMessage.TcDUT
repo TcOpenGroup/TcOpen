@@ -67,13 +67,21 @@ STRUCT
 
 (*~
 	<docu>
-		<summary>
-			(Compatibility not effective in TcOpen framework)
+		<summary>			
 			Indicates that the message is expected to be dequeed from the buffer.
 		</summary>				
 	</docu>	
 ~*)	
 	ExpectDequeing : BOOL;
+	
+	(*~
+	<docu>
+		<summary>		
+			Stores 16bit MD of this message.
+		</summary>				
+	</docu>	
+	~*)
+	MessageDigest16 : WORD;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

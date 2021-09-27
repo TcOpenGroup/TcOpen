@@ -189,7 +189,7 @@
 
         private ulong lastSelectedMessageIdentity = 0;
         private object affectedObjectPresenation = NoFurtherInfo;
-        private int diagnosticsDepth;
+        private int diagnosticsDepth = 15;
 
         public object AffectedObjectPresentation
         {
