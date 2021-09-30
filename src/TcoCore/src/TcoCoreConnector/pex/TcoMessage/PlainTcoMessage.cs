@@ -141,9 +141,8 @@ namespace TcoCore
 
         public override bool Equals(object obj) 
         {
-            return obj is PlainTcoMessage p
-                 && (p.Raw, p.ParentsObjectSymbol, p.Category).Equals((Raw, ParentsObjectSymbol, Category));
-                 
+            var p = obj as PlainTcoMessage;
+            return p != null && p.Raw == Raw && p.ParentsObjectSymbol == ParentsObjectSymbol && p.Category == Category;                                  
         }        
     }
 }

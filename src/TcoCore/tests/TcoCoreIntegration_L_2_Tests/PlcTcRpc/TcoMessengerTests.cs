@@ -6,6 +6,7 @@ using TcoCoreTests;
 using TcoCoreUnitTests;
 using System.Linq;
 using Vortex.Connector;
+using System.Collections.Generic;
 
 namespace TcoCoreUnitTests.PlcTcRpc
 {
@@ -273,8 +274,9 @@ namespace TcoCoreUnitTests.PlcTcRpc
         public void T810_PostLevelUpSeverityTest()
         {
 
-            var msgCategories = new eMessageCategory[] { eMessageCategory.Debug,
+            var msgCategories = new eMessageCategory[] { 
                                                     eMessageCategory.Trace,
+                                                    eMessageCategory.Debug,
                                                     eMessageCategory.Info,
                                                     eMessageCategory.TimedOut,
                                                     eMessageCategory.Notification,
@@ -333,8 +335,9 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [TestCase(new eMessageCategory[] { eMessageCategory.Info,
                                            eMessageCategory.Trace
                                          })]
-        [TestCase(new eMessageCategory[] { eMessageCategory.Trace,
-                                           eMessageCategory.Debug
+        [TestCase(new eMessageCategory[] { 
+                                           eMessageCategory.Debug,
+                                           eMessageCategory.Trace
                                          })]
         public void T810_PostMaintainLevelUpSeverityTest(eMessageCategory[] categories)
         {
@@ -539,7 +542,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
         [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
         [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
-        public void T1600_MessageLoggerTest_dont_repeat_yourself(string messageText, eMessageCategory category)
+        public void T1600_MessageLoggerTest_add_to_buffer_check_that_no_duplicates(string messageText, eMessageCategory category)
         {
             //--Arrange            
             suc._logger.MinLogLevelCategory = eMessageCategory.All;
@@ -582,7 +585,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
         [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
         [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
-        public void T1700_MessageLoggerTest_changed(string messageText, eMessageCategory category)
+        public void T1700_MessageLoggerTest_log_in_several_cycles_and_log_to_logger(string messageText, eMessageCategory category)
         {
             //--Arrange            
             suc._logger.MinLogLevelCategory = eMessageCategory.All;
@@ -617,7 +620,59 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 Assert.AreEqual(category, messages[i].CategoryAsEnum);
                 Assert.AreEqual(messageText + (++mi).ToString(), messages[i].Text);
             }
+
+            var dummyLogger = TcOpen.Inxton.TcoAppDomain.Current.Logger as TcOpen.Inxton.Logging.DummyLoggerAdapter;
+            dummyLogger.QueueMessages();
+
+            suc._logger.LogMessages(messages);
+            
+
+            (string message, object payload, string serverity) result;
+            IList<(string message, object payload, string serverity)> dequeuedMessages = new List<(string message, object payload, string serverity)>();
+            while (dummyLogger.MessageQueue.TryDequeue(out result))
+            {
+                dequeuedMessages.Add(result);
+            }
+
+            Assert.AreEqual(3, dequeuedMessages.Count);
+            var serverityDictionary = new Dictionary<eMessageCategory, string>();
+
+            serverityDictionary[eMessageCategory.Catastrophic] = "Fatal";
+            serverityDictionary[eMessageCategory.Critical] = "Fatal";
+            serverityDictionary[eMessageCategory.Debug] = "Debug";
+            serverityDictionary[eMessageCategory.Error] = "Error";
+            serverityDictionary[eMessageCategory.Info] = "Information";
+            serverityDictionary[eMessageCategory.Notification] = "Warning";
+            serverityDictionary[eMessageCategory.ProgrammingError] = "Error";
+            serverityDictionary[eMessageCategory.Trace] = "Verbose";
+            serverityDictionary[eMessageCategory.Warning] = "Warning";
+            serverityDictionary[eMessageCategory.TimedOut] = "Warning";
+
+            mi = 0;
+            foreach (var msg in dequeuedMessages)
+            {
+                Assert.AreEqual($"{messageText}{++mi} {{@sender}}", msg.message);
+                Assert.AreEqual(serverityDictionary[category], msg.serverity);
+                Assert.AreEqual("MAIN._tcoMessengerContextTest._logger", DestructPayload<string>(msg.payload, "Logger"));
+                Assert.AreEqual("MAIN._tcoMessengerContextTest._tcoMessangerTests", DestructPayload<string>(msg.payload, "ParentSymbol"));
+                Assert.AreEqual("this is the name of messenger test", DestructPayload<string>(msg.payload, "ParentName"));                
+            }
         }
+
+        private static T DestructPayload<T>(object payload, string propertyName)
+        {
+            try
+            {
+                return (T)payload.GetType().GetProperty(propertyName).GetValue(payload);
+            }
+            catch (Exception)
+            {
+
+                return default(T);
+            }
+            
+        }
+
 #if EXT_LOCAL_TESTING
         [Test, Order(1300)]
         //[TestCase(0)]

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="Station001_Sequencer" Id="{4061f3f0-4d5d-0916-3f62-6782fe6fbe6d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_Sequencer EXTENDS TcoCore.TcoSequencer
 VAR
@@ -57,7 +57,7 @@ METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Init();
-
+THIS^.Messenger.Info('Stations one sequencer is running.');
 IF(Step(100, 
 		TRUE, 
 		'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
@@ -146,9 +146,12 @@ VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;
 END_VAR
-]]></Declaration>
+VAR
+	sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_onStateChangeCount := _onStateChangeCount + 1;
+        <ST><![CDATA[THIS^.Messenger.Trace(INT_TO_STRING(PreviousState));
+_onStateChangeCount := _onStateChangeCount + 1;
 components._simTimer(IN := FALSE);
 ]]></ST>
       </Implementation>

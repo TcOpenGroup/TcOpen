@@ -22,7 +22,7 @@
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             _context = parent.GetParent<IsTcoContext>();
-            _context = _context == null ? new TcoContext() : _context;
+            _context = _context == null ? new TcoContext() : _context;          
             _context?.AddMessage(this);
             _parentObject = parent.GetParent<IsTcoObject>();
         }
@@ -129,7 +129,7 @@
         /// <summary>
         /// Gets the last known message content in plain .net type system (aka POCO object) with object retieved by identity.
         /// </summary>
-        public PlainTcoMessage LastPlainMessageNoTranslation
+        public PlainTcoMessage LastKnownPlain
         {
             get
             {

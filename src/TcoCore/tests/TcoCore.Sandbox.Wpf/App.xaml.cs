@@ -18,7 +18,10 @@ namespace TcoCore.Sandbox.Wpf
         public App() : base()
         {            
             TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                                        .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose)
+                                                        .WriteTo.Notepad()
+                                                        .MinimumLevel.Verbose()))
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
 
@@ -26,6 +29,8 @@ namespace TcoCore.Sandbox.Wpf
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
             PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);
+            PlcTcoCoreExamples.EXAMPLES_PRG._context._logger.StartLoggingMessages(eMessageCategory.All);
+            PlcTcoCoreExamples.MAIN._station001._logger.StartLoggingMessages(eMessageCategory.All);
         }
 
         public static TcoCoreExamplesTwinController PlcTcoCoreExamples { get { return Entry.PlcTcoCoreExamples; } }

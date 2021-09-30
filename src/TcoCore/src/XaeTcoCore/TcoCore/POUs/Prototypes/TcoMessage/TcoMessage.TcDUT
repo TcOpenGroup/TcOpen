@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -77,11 +77,11 @@ STRUCT
 	(*~
 	<docu>
 		<summary>		
-			Stores 16bit MD of this message.
+			Stores message digest of this message text.
 		</summary>				
 	</docu>	
 	~*)
-	MessageDigest16 : WORD;
+	MessageDigest : DWORD;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

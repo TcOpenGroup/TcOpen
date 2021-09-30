@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eMessageDigestMethod" Id="{2dd6fdc2-bd8a-025a-3bd8-7514543e911e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eMessageDigestMethod :
+(	
+	CRC8 := 8,
+	CRC16 := 16,
+	CRC32 := 32,
+	NONE := 32767
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

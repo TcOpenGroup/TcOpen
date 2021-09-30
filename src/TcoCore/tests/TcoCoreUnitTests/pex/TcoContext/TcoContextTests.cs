@@ -26,7 +26,7 @@ namespace TcoCore.PexTests
             context.AddMessage(new TcoMessage(new MockRootObject(), string.Empty, string.Empty));
             context.AddMessage(new TcoMessage(new MockRootObject(), string.Empty, string.Empty));
 
-            Assert.AreEqual(2, context.Messages.Count());
+            Assert.AreEqual(3, context.Messages.Count());
         }
 
         [Test()]

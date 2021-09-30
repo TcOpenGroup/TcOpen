@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoMessengerSettings" Id="{e6a12bea-a5ee-06da-38d8-d4f316d1c513}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL TcoMessengerSettings IMPLEMENTS ITcoMessengerSettings
 VAR
 	_minLevel : eMessageCategory;
 	_isMessagingSuspended : BOOL;	
+	_messageDigestMethod : eMessageDigestMethod := eMessageDigestMethod.CRC16;
+	_messengerLoggingMethod : eMessengerLogMethod := eMessengerLogMethod.OnEventRisen;
 END_VAR
 
 VAR CONSTANT
@@ -40,6 +42,44 @@ END_VAR
           <ST><![CDATA[IsSuspended := _isMessagingSuspended;]]></ST>
         </Implementation>
       </Get>
+    </Property>
+    <Property Name="MessageDigestMethod" Id="{8041cbc1-4471-0961-3423-4f31314a9d8e}">
+      <Declaration><![CDATA[PROPERTY MessageDigestMethod : eMessageDigestMethod]]></Declaration>
+      <Get Name="Get" Id="{b3f7f6bd-754b-0e4f-384a-efdba8dfe5c7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MessageDigestMethod := _messageDigestMethod;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{496e0060-8d72-0abc-21fc-4120f38624b7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_messageDigestMethod := MessageDigestMethod;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="MessengerLoggingMethod" Id="{ceb67f4f-5f48-0808-109b-9521842dfa6a}">
+      <Declaration><![CDATA[PROPERTY MessengerLoggingMethod : eMessengerLogMethod]]></Declaration>
+      <Get Name="Get" Id="{5751a4db-5e4a-0098-31c4-ddb84e14601c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MessengerLoggingMethod := _messengerLoggingMethod;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a4e87f54-934e-0e51-2d8b-4278ae8c6121}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_messengerLoggingMethod := MessengerLoggingMethod;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
     <Property Name="MinLevel" Id="{23651bcd-e46c-0710-3196-f31340d2b191}">
       <Declaration><![CDATA[(*~

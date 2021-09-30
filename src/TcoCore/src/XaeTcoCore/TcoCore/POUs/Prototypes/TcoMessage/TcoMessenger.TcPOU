@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoMessenger" Id="{bb89b26f-ec79-4812-bab7-3579b2b6d1be}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -30,191 +30,17 @@ VAR
 	_mime : TcoMessage;
 	_Parent : ITcoObject;
 	_contextIdentity : ULINT;	
-	_mds : ARRAY[0..MDS_MAX_INDEX] OF WORD;	
+	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
 	_previousCycleMessageCount : INT;	
 END_VAR
 
 VAR CONSTANT
-	MDS_MAX_INDEX : INT := 3;
-END_VAR
-
-VAR_STAT
-	crcTableCalcDone : BOOL;
-	crctable16 : ARRAY[0..255] OF WORD;
+	MDS_MAX_INDEX : INT := 20;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Messages" Id="{56442304-2644-4fe1-b5d1-eb5248dd12e5}" />
-    <Method Name="CalcCRC16" Id="{0c49dfd0-f962-0c1a-34a6-d7eae3d0d93b}">
-      <Declaration><![CDATA[METHOD CalcCRC16 : WORD
-VAR_INPUT
-	ptrAdr : POINTER TO BYTE;
-	cbLen : INT;
-	previous : WORD;
-END_VAR
-VAR CONSTANT
-	generator : WORD := 16#1021;
-END_VAR
-
-VAR
-	_byte : BYTE;
-    _tmp : BYTE;	
-	_crc  : WORD;
-	_pos : BYTE;
-	_index : INT;
-	_ptrCalc : POINTER TO BYTE;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_crc := previous;
-_ptrCalc := ptrAdr;
-
-FOR _index := 1 TO cbLen DO
-	_ptrCalc := _ptrCalc + 1;	
-	_byte := _ptrCalc^;	
-	_pos := UINT_TO_BYTE(SHR(_crc,8) XOR _byte); 	
-	_crc := SHL(_crc,8) XOR crctable16[_pos];
-END_FOR
-
-CalcCRC16 := _crc;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="CalcSlowCRC16" Id="{b5b12890-7a80-0f94-2732-4c93f2ab132d}">
-      <Declaration><![CDATA[METHOD CalcSlowCRC16 : WORD
-VAR_INPUT
-	ptrAdr : POINTER TO BYTE;
-	cbLen : INT;
-END_VAR
-VAR CONSTANT
-	generator : WORD := 16#1021;
-END_VAR
-
-VAR
-	_byte : BYTE;
-	_tmpByte : WORD;
-	crc  : WORD;
-	_index : INT;
-	_index2 : INT;
-	_ptrCalc : POINTER TO BYTE;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[crc := 16#0;
-
-//IF cbLen > 0 THEN
-//ptrData := dwSrcAddr;
-
-//FOR iIdx := 1 TO cbLen DO
-//dataWord := BYTE_TO_UINT(ptrData^); (* cast next data byte to word *)
-//ptrData := ptrData + 1; (* increase data ptr *)
-//wChkSum_I := wChkSum_I + dataWord; (* New_ChkSum := Old ChkSum + Data_Byte *)
-//END_FOR
-//END_IF
-
-_ptrCalc := ptrAdr;
-
-FOR _index := 1 TO cbLen DO
-	_ptrCalc := _ptrCalc + 1;	
-	_byte := _ptrCalc^;	
-    _tmpByte := SHL(_byte,8);
-	crc := crc XOR _tmpByte; 
-	
-	FOR	_index2 := 0 TO 8 DO
-		IF((crc AND 16#8000) <> 0) THEN
-			_tmpByte := SHL(crc,1);
-			crc := crc XOR generator;
-		ELSE
-		    crc := SHL(crc, 1);
-		END_IF; 
-	END_FOR	
-END_FOR
-
-CalcSlowCRC16 := crc;
-//PUBLIC static ushort Compute_CRC16_Simple(BYTE[] bytes)
-//{
-//    {const ushort generator = 0x1021; /* divisor is 16BIT */}
-//    ushort crc = 0; /* CRC value is 16bit */
-
-//    foreach (byte b in bytes)
-//    {
-//        crc ^= (ushort(b << 8); /* move byte into MSB of 16bit CRC */
-
-//        for (int i = 0; i < 8; i++)
-//        {
-//            if ((crc & 0x8000) != 0) /* test for MSB = bit 15 */
-//            {
-//                crc = (ushort((crc << 1) ^ generator);
-//            }
-//            else
-//            {
-//                crc <<= 1;
-//            }
-//        }
-//    }
-
-//    return crc;
-//}]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="CalcTableCRC16" Id="{7e0523e7-d0a0-0053-1c4a-700fd2118f0b}">
-      <Declaration><![CDATA[METHOD CalcTableCRC16
-VAR_INPUT
-END_VAR
-VAR CONSTANT
-	generator : WORD := 16#1021;
-END_VAR
-VAR	
-	_divident : INT;
-	_bit : INT;
-	_curByte : WORD;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF(crcTableCalcDone) THEN  RETURN; END_IF;
-
-FOR _divident := 0 TO 255 DO
-	_curByte := SHL(_divident,8);
-	
-	FOR _bit := 0 TO 8 DO
-		IF (_curByte AND 16#8000) <> 0 THEN            
-                _curByte := SHL(_curByte,1);
-                _curByte := _curByte XOR generator;            
-         ELSE            
-                _curByte := SHL(_curByte, 1);
-        END_IF;    
-	END_FOR
-	
-	crctable16[_divident] := _curByte;
-END_FOR
-
-crcTableCalcDone := TRUE;
-(*
-public static void CalculateTable_CRC16()
-{
-    const ushort generator = 0x1021;
-    crctable16 = new ushort[256];
-
-    for (int divident = 0; divident < 256; divident++) /* iterate over all possible input byte values 0 - 255 */
-    {
-        ushort curByte = (ushort(divident << 8); /* move divident byte into MSB of 16Bit CRC */
-
-        for (byte bit = 0; bit < 8; bit++)
-        {
-            if ((curByte & 0x8000) != 0)
-            {
-                curByte <<= 1;
-                curByte ^= generator;
-            }
-            else
-            {
-                curByte <<= 1;
-            }
-        }
-
-        crctable16[divident] = curByte;
-    }
-}
-*)]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Catastrophic" Id="{3ead99e7-d4fa-03f6-3060-81990c2076df}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -279,6 +105,7 @@ END_VAR]]></Declaration>
 	Compose.Identity := _Parent.Identity;
 	Compose.Category := Category;
 	Compose.Cycle := _Parent.Context.StartCycleCount;	
+	Compose.MessageDigest := Digest(Text, THIS^._Parent.Context.Environment.Messaging.MessageDigestMethod);
 END_IF;
 
 
@@ -340,6 +167,26 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Digest" Id="{de6a9eab-3c62-0e43-3529-2cc01fda6c4e}">
+      <Declaration><![CDATA[METHOD Digest : DWORD
+VAR_INPUT
+	Text : Tc2_System.T_MaxString;
+	inDigestType : eMessageDigestMethod;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE inDigestType OF
+	eMessageDigestMethod.CRC8 :
+		Digest := TcoCRC_8(Text);
+	eMessageDigestMethod.CRC16 :
+		Digest := TcoCRC_16(Text);
+	eMessageDigestMethod.CRC32 :
+		Digest := TcoCRC_32(Text);
+	ELSE
+		Digest := 0;
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Error" Id="{dc14c403-f11e-4200-ac36-567c3d997bf6}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -380,8 +227,6 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_Parent := Parent;
 _contextIdentity := Parent.Identity;
-
-CalcTableCRC16();
 ]]></ST>
       </Implementation>
     </Method>
@@ -411,59 +256,49 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="LogIfFreshMessage" Id="{0b6b2fe7-cb26-02a6-0b72-2570a4f5cb53}">
-      <Declaration><![CDATA[METHOD PRIVATE LogIfFreshMessage : BOOL
+    <Method Name="LogMessage" Id="{0b6b2fe7-cb26-02a6-0b72-2570a4f5cb53}">
+      <Declaration><![CDATA[METHOD PRIVATE LogMessage 
 VAR_IN_OUT
 	inMessage : TcoMessage;
 END_VAR
 VAR
-	_index : INT;
-	_mdIntermediate : WORD;
-	_md_nextMessage : WORD;
-	_md_currentMessage : WORD;
-    _messageTextLenght : INT;
-	_messageLenght : UDINT;
-	_message : ARRAY[0..255] OF BYTE;
-    _ptrMessage : POINTER TO STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT) := ADR(_message);	
-	_ptrCategory : POINTER TO INT;
-	_ptrCycle : POINTER TO ULINT;			
+	_index : INT;		
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[LogIfFreshMessage := TRUE;
-_messageTextLenght := LEN(inMessage.Text);
-_ptrMessage^ := LEFT(inMessage.Text, LEN(inMessage.Text));
-_ptrCategory := _ptrMessage + INT_TO_DWORD(_messageTextLenght);
-_ptrCategory^ := inMessage.Category;
-_ptrCycle := _ptrCategory + 2;
-_ptrCycle^ :=  inMessage.Cycle;
-_messageLenght := _messageTextLenght + 2;
-
-
-inMessage.MessageDigest16 :=  CalcCRC16(ptrAdr := _ptrMessage, cbLen := _messageTextLenght, previous := 16#0000);
-_mdIntermediate := CalcCRC16(ptrAdr := _ptrMessage, cbLen := 2, previous := inMessage.MessageDigest16);
-_md_currentMessage := CalcCRC16(ptrAdr := _ptrCycle, cbLen := 8, _mdIntermediate);
-_ptrCycle^ :=  inMessage.Cycle + 1;
-_md_nextMessage := CalcCRC16(ptrAdr := _ptrCycle, cbLen := 8, _mdIntermediate);
-
-
-FOR _index := 0 TO MDS_MAX_INDEX DO
-	IF(_mds[_index] = _md_currentMessage)THEN
+        <ST><![CDATA[CASE _Parent.Context.Environment.Messaging.MessengerLoggingMethod OF
+	eMessengerLogMethod.OnEventRisen :
+        IF(_Parent.Context.Environment.Messaging.MessageDigestMethod = eMessageDigestMethod.NONE) THEN
+			inMessage.MessageDigest := Digest(inMessage.Text, eMessageDigestMethod.CRC8);
+		END_IF
+			    
+		FOR _index := 0 TO MDS_MAX_INDEX DO
+			IF(_mds[_index].Cycle = inMessage.Cycle - 1 OR _mds[_index].Cycle = inMessage.Cycle) 
+			AND_THEN (_mds[_index].Digest = inMessage.MessageDigest)
+			AND_THEN (_mds[_index].Category = inMessage.Category) THEN
+			
+				IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
+					_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
+					_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
+					_mds[inMessage.PerCycleCount].Category := inMessage.Category;			
+				END_IF;	
+				
+				RETURN;
+				
+			END_IF	
+		END_FOR
+		
 		IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
-			_mds[inMessage.PerCycleCount] := _md_nextMessage;
-		END_IF;	
-		LogIfFreshMessage := FALSE;
-		RETURN;
-	END_IF	
-END_FOR
+			_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
+			_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
+			_mds[inMessage.PerCycleCount].Category := inMessage.Category;
+			_Parent.Context.Logger.Push(inMessage);		
+		END_IF;
+	eMessengerLogMethod.Continuous:
+	    _Parent.Context.Logger.Push(inMessage);
+END_CASE
 
-IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
-	_mds[inMessage.PerCycleCount] := _md_nextMessage;
-END_IF;	
-
-
-
-_Parent.Context.Logger.Push(inMessage);]]></ST>
+		]]></ST>
       </Implementation>
     </Method>
     <Method Name="Notify" Id="{1595dfe7-5719-459e-bdf2-0e7976c85511}" FolderPath="Messages\">
@@ -546,7 +381,7 @@ END_VAR
 		_mime := _wouldBeMime;		
 	END_IF;	
 
-	LogIfFreshMessage(_wouldBeMime);		
+	LogMessage(_wouldBeMime);		
 END_IF;	
 
 

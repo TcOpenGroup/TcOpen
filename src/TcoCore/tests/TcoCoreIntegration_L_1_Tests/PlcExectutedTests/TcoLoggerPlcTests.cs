@@ -23,7 +23,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         {
             tc.GetConnector().SuspendWriteProtection("Hoj morho vetvo mojho rodu, kto kramou rukou siahne na tvoju slobodu a co i dusu das v tom boji divokom vol nebyt ako byt otrokom!");
             tc._logger._plcCarret.Synchron = 0;         
-            var emptyMessage = new PlainTcoMessage();
+            var emptyMessage = new PlainTcoLogItem();
             foreach (var item in tc._logger._buffer)
             {
                 item.FlushPlainToOnline(emptyMessage);
@@ -101,7 +101,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 dequeuedMessages.Add(result);
             }
             
-            Assert.AreEqual(1001, dequeuedMessages.Count);
+            Assert.AreEqual(1000, dequeuedMessages.Count);
 
         }
 
@@ -122,7 +122,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var actual = tc._logger.Pop();
 
-            Assert.AreEqual(25, actual.Count());                                                          
+            Assert.AreEqual(150, actual.Count());                                                          
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 100)]
@@ -170,6 +170,56 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             actual = tc._logger.Pop();
             Assert.AreEqual(75, actual.Count());
+        }
+
+        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 300)]
+        [TestCase("This is (all) message", TcoCore.eMessageCategory.All, 12)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace, 11)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug, 10)]        
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info, 9)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut, 8)]
+        [TestCase("This is notification message", TcoCore.eMessageCategory.Notification, 7)]       
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning, 6)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error, 5)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError, 4)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical, 3)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic, 2)]
+        [TestCase("This is (none) message", TcoCore.eMessageCategory.None, 0)]
+        public void MinCategoryLevel_set(string message, eMessageCategory category, int expectedNoOfLogEntries)
+        {
+            tc._logger.MinLogLevelCategory = category;
+            tc._logger.Pop();
+
+            List<(string text, eMessageCategory cat)> messages = new List<(string text, eMessageCategory cat)>()
+            {
+                ("This is (all) message", TcoCore.eMessageCategory.All),
+                ("This is debug message", TcoCore.eMessageCategory.Debug),
+                ("This is trace message", TcoCore.eMessageCategory.Trace),
+                ("This is info message", TcoCore.eMessageCategory.Info),
+                ("This is notification message", TcoCore.eMessageCategory.Notification),
+                ("This is timed-out message", TcoCore.eMessageCategory.TimedOut),
+                ("This is warning message", TcoCore.eMessageCategory.Warning),
+                ("This is error message", TcoCore.eMessageCategory.Error),
+                ("This is programming error message", TcoCore.eMessageCategory.ProgrammingError),
+                ("This is critical message", TcoCore.eMessageCategory.Critical),
+                ("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic),
+                ("This is (none) message", TcoCore.eMessageCategory.None)
+            };
+            
+
+            foreach (var msg in messages)
+            {
+                tc._multiplesCount.Synchron = 1;
+                tc._msg.Text.Synchron = msg.text;                                
+                tc._msg.Category.Synchron = (short)msg.cat;
+                tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            }
+            
+            var actual = tc._logger.Pop();
+            Assert.AreEqual(expectedNoOfLogEntries, actual.Count());
+
+
+            
         }
 
         private string TransleMessageCategoryToLogCategory(eMessageCategory category)

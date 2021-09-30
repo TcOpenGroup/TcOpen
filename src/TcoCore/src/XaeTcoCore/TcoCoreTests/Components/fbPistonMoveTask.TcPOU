@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="fbPistonMoveTask" Id="{1f1598b7-7a48-083b-213f-7881bc714afd}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute addProperty Activity "task is running"}
 FUNCTION_BLOCK fbPistonMoveTask EXTENDS TcoCore.TcoTask

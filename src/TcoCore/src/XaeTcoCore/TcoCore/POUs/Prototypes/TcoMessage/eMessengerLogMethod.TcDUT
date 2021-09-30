@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eMessengerLogMethod" Id="{534a491b-21ad-0416-3d46-870a256ca6e4}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eMessengerLogMethod :
+(	
+	OnEventRisen := 100,
+	Continuous := 200,
+	NoLogging := 300
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

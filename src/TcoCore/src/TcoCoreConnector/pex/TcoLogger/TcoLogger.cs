@@ -12,7 +12,7 @@ namespace TcoCore
     {
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {        
-            expectDequeingTags = this._buffer.Select(p => p.ExpectDequeing as IValueTag).ToList();
+            expectDequeingTags = this._buffer.Select(p => p.ExpectDequeing as IValueTag).ToList();            
         }
 
         /// <summary>
@@ -39,7 +39,8 @@ namespace TcoCore
         /// </note>
         /// </summary>
         /// <param name="minLevelCategory">Sets the minimal logging level.</param>
-        public void StartLoggingMessages(eMessageCategory minLevelCategory)
+        /// <param name="interLoopDelay">Sets the delay between retrievals of logs.</param>
+        public void StartLoggingMessages(eMessageCategory minLevelCategory, int interLoopDelay = 2)
         {
             this._minLoggingLevel.Synchron = (short)minLevelCategory;
 
@@ -47,48 +48,33 @@ namespace TcoCore
             {
                 while (true)
                 {
-                    System.Threading.Thread.Sleep(2);
+                    System.Threading.Thread.Sleep(interLoopDelay);
                     LogMessages(Pop());
                 }
             });
         }
 
         private IList<IValueTag> expectDequeingTags { get; set; }
-
+        
         /// <summary>
         /// Pops messages from this logger.
         /// </summary>
         /// <returns>Messages from the logger</returns>
-        public IEnumerable<PlainTcoMessage> Pop()
+        public IEnumerable<PlainTcoLogItem> Pop()
         {
-            var poppedMessages = new List<PlainTcoMessage>();
+            var poppedMessages = new List<PlainTcoLogItem>();
             this.Connector.ReadBatch(expectDequeingTags);
             var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
             
             if (messagesToDequeue.Count() > 0)
-            {                
+            {               
                 var messagesToReadValueTags = messagesToDequeue.SelectMany(p => p.RetrieveValueTags());
                 this.Connector.ReadBatch(messagesToReadValueTags);
                 
                 foreach (var message in messagesToDequeue)
                 {
-                    var plain = message.LastPlainMessageNoTranslation;
-                    PlainTcoMessage possiblySame =
-                        poppedMessages
-                        .Where(p => p.Equals(plain) && p.Cycle == plain.Cycle - 1)
-                        .LastOrDefault();
-
-
-                    if (possiblySame != null)
-                    {
-                        poppedMessages.Remove(possiblySame);
-                        poppedMessages.Add(plain);
-                    }
-                    else
-                    {
-                        poppedMessages.Add(plain);
-                    }
-                   
+                    var plain = message.LastKnownPlain;                  
+                    poppedMessages.Add(plain);                                       
                     message.ExpectDequeing.Cyclic = false;
                 }
 
@@ -96,17 +82,15 @@ namespace TcoCore
             }
             
             return poppedMessages;            
-        }
-
-        private List<PlainTcoMessage> ActiveMessages { get; } = new List<PlainTcoMessage>();
+        }      
 
         /// <summary>
-        /// Peeks messaging from this logger without effecting dequeing.
+        /// Peeks messaging from this logger without effecting dequeuing.
         /// </summary>
         /// <returns>Messages from this logger.</returns>
-        public IEnumerable<PlainTcoMessage> Peek()
+        public IEnumerable<PlainTcoLogItem> Peek()
         {
-            var poppedMessages = new List<PlainTcoMessage>();
+            var poppedMessages = new List<PlainTcoLogItem>();
             this.Connector.ReadBatch(expectDequeingTags);
             var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
 
@@ -117,9 +101,12 @@ namespace TcoCore
 
                 foreach (var message in messagesToDequeue)
                 {
-                    var plain = message.LastPlainMessageNoTranslation;
-                    poppedMessages.Add(plain);                    
-                }                
+                    var plain = message.LastKnownPlain;
+                    poppedMessages.Add(plain);
+                    message.ExpectDequeing.Cyclic = false;
+                }
+
+                this.Connector.WriteBatch(expectDequeingTags);
             }
 
             return poppedMessages;
@@ -129,15 +116,15 @@ namespace TcoCore
         /// Logs messages into <see cref="TcOpen.Inxton.Logging.ITcoLogger"/> of this application.
         /// </summary>
         /// <param name="messages">Messages to push to the application logger.</param>
-        public void LogMessages(IEnumerable<PlainTcoMessage> messages)
+        public void LogMessages(IEnumerable<PlainTcoLogItem> messages)
         {          
             foreach (var plain in messages)
             {
-                LogMessage(plain, new { plain.ParentsObjectSymbol, plain.ParentsHumanReadable, plain.Cycle });               
+                LogMessage(plain, new { Logger = this.Symbol, ParentSymbol = plain.ParentsObjectSymbol, ParentName = plain.ParentsHumanReadable, Cycle = plain.Cycle });               
             }
         }
 
-        private void LogMessage(PlainTcoMessage message, object payload)
+        private void LogMessage(PlainTcoLogItem message, object payload)
         {
             switch (message.CategoryAsEnum)
             {               
