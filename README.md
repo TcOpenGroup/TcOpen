@@ -82,7 +82,7 @@ Following table summarize the work that is already implemented on `dev` branch a
 - *WPF* feature has an UI control for WPF platform (requires IVF) (x = implemented)
 - *Blazor* feature has an UI control for Blazor platform (requires IVF) (x = implemented)
 
-**Blazor and net5.0 in IVF is eperimental and so are the Blazor components. NET48 WPF components are considered mature**
+**Blazor and net5.0 in IVF is experimental and so are the Blazor components. NET48 WPF components are considered stable**
 
 ### TcoCore
 
@@ -106,8 +106,8 @@ Following table summarize the work that is already implemented on `dev` branch a
 
 |dev| Package                      | Description                                                                                   | IVF | WPF | Blazor |
 |-----|------------------------------|-----------------------------------------------------------------------------------------------|-----|-----|--------|
-|x| Inxton.Vortex.Pacakge.Core | Compiler and communication libraries | x   | x   |        |
-|x| Inxton.Vortex.Pacakge.Essentials | Automated UI generation WPF | x   | x   |        |
+|x| Inxton.Vortex.Package.Core | Compiler and communication libraries | x   | x   |        |
+|x| Inxton.Vortex.Package.Essentials | Automated UI generation WPF | x   | x   |        |
 |x| Inxton.Vortex.Blazor-experimental | Automated UI generation Blazor | x   |    |   x     |
 |x| TcOpen.Inxton.Logging        | Logs user action and application events from inxton application                               | x   |     |        |
 |x| TcOpen.Inxton.Local.Security | Limits user access to protected section of inxton application                                 | x   | x   | x      |
