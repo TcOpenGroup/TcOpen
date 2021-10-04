@@ -73,83 +73,106 @@ Inxton and MTS teams will contribute to the development of PLC libraries. There 
 
 # What does TcOpen contain at this point
 
-This section will be updated throughout development to provide information about the current status of the project.
+*This section will be updated throughout development to provide information about the current status of the project.*
 
-- *dev* is in current branch.
-- *IVF* the PLC class requires inxton vortex framework to operate
-- *WPF* the PLC class has a UI control for WPF platform (requires IVF)
-- *Blazor* the PLC class ha a UI control for Blazor platform (requires IVF)
+Following table summarize the work that is already implemented on `dev` branch as well as some pending implementations that will be soon available.
 
-**Blazor technology in IVF is eperimental and so are the Blazor components. NET48 WPF components are considered mature**
+- *dev* is in current branch (x = implemented).
+- *IVF* feature requires inxton vortex framework to operate (x = implemented)
+- *WPF* feature has an UI control for WPF platform (requires IVF) (x = implemented)
+- *Blazor* feature has an UI control for Blazor platform (requires IVF) (x = implemented)
+
+**Blazor and net5.0 in IVF is eperimental and so are the Blazor components. NET48 WPF components are considered mature**
 
 ### TcoCore
 
-|dev|PLC Class        | Description | IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-|x|TcoRtc             | Single source of **real time clock** for the application||||
-|x|[TcoContext](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#context)         | Provides **encapsulation** for coherent unit of control||||
-|x|[TcoComponent](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#components)       | Base class from which all components should derive||||
-|x|[TcoObject](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#object)          | Base class from which all objects (FBs) in the framework should derive ||||
-|x|[TcoMessenger](https://docs.tcopengroup.org/articles/TcOpenFramework/messaging.html)       | Static **messaging mechanism**. Messages can be read from higher level application||x||
-| |TcoLogger          | **Logs messages** from the PLC program.||||
-|x|[TcoTask](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#task)            | Task coordinator for synch and asynch run of arbitary code.||x|x|
-|x|TcoToggleTask      | Task coordinator for switching between two branches of logic. ||x|x|
-|x|TcoRemoteTask      | Task coordinator for executing arbitrary code in .net evironment.|x|x|x|
-|x|TcoMomentaryTask   | Task coordinator for executing arbitrary logic when a codition is met.||||
-|x|[TcoState](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#state)           | Basic state controller enhances the ST language (IF,CASE, ELSIF) coordination ||||
-|x|[TcoSequencer](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#sequencer)       | Advanced sequencing coordination primitive for step-by-step operations.||x|x|
+| dev | PLC Class                                                                                         | Description                                                                        | IVF | WPF | Blazor |
+|-----|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|-----|-----|--------|
+| x   | TcoRtc                                                                                            | Single source of **real time clock** for the application                           |     |     |        |
+| x   | [TcoContext](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#context)      | Provides **encapsulation** for coherent unit of control                            |     |     |        |
+| x   | [TcoComponent](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#components) | Base class from which all components should derive                                 |     |     |        |
+| x   | [TcoObject](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#object)        | Base class from which all objects (FBs) in the framework should derive             |     |     |        |
+| x   | [TcoMessenger](https://docs.tcopengroup.org/articles/TcOpenFramework/messaging.html)              | Static **messaging mechanism**; Messages can be read from higher level application |     | x   |        |
+|     | TcoLogger                                                                                         | **Logs messages** from the PLC program.                                            |     |     |        |
+| x   | [TcoTask](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#task)            | Task coordinator for synch and asynch run of arbitary code.                        |     | x   | x      |
+| x   | TcoToggleTask                                                                                     | Task coordinator for switching between two branches of logic.                      |     | x   | x      |
+| x   | TcoRemoteTask                                                                                     | Task coordinator for executing arbitrary code in .net evironment.                  | x   | x   | x      |
+| x   | TcoMomentaryTask                                                                                  | Task coordinator for executing arbitrary logic while a codition is met.             |     |     |        |
+| x   | [TcoState](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#state)          | Basic state controller enhances the ST language (IF,CASE, ELSIF) coordination      |     |     |        |
+| x   | [TcoSequencer](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#sequencer)  | Advanced sequencing coordination primitive for step-by-step operations.            |     | x   | x      |
 
 
-### TcOpen inxton application specific
+### TcOpen Inxton application specific
 
-|dev|Package        | Description | IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-|x| TcOpen.Inxton.Logging | Logs user action and application events from inxton application. |x|||
-|x| TcOpen.Inxton.Local.Security | Limits user access to protected section of inxton application. |x|x|x|
-|x| TcOpen.Inxton.Swift | Experimental implementation swift programer (create program capturing manual mode actions) |x|x||
+|dev| Package                      | Description                                                                                   | IVF | WPF | Blazor |
+|-----|------------------------------|-----------------------------------------------------------------------------------------------|-----|-----|--------|
+|x| Inxton.Vortex.Pacakge.Core | Compiler and communication libraries | x   | x   |        |
+|x| Inxton.Vortex.Pacakge.Essentials | Automated UI generation WPF | x   | x   |        |
+|x| Inxton.Vortex.Blazor-experimental | Automated UI generation Blazor | x   |    |   x     |
+|x| TcOpen.Inxton.Logging        | Logs user action and application events from inxton application                               | x   |     |        |
+|x| TcOpen.Inxton.Local.Security | Limits user access to protected section of inxton application                                 | x   | x   | x      |
+|x| TcOpen.Inxton.Swift          | Experimental implementation of auto programer (creates program capturing manual mode actions) | x   | x   |        |
+
+
 
 
 
 ### TcoData
 
-|dev|PLC Class        | Description | Requires IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-|x|TcoDataExchage     | **CRUD capabale** from PLC code |x|x||
-|x|InMemory repository| IRepository implementation for in memory storage |x|||
-|x|Json repository| IRepository implementation string object as Json files |x|||
-|x|MongoDb repository| IRepository implementation for **mongodb** databases  |x|||
-| |RavenDb repository| IRepository implementation for **ravendb** databases  |x|||
+| dev | PLC Class           | Description                                            | IVF | WPF | Blazor |
+|-----|---------------------|--------------------------------------------------------|-----|-----|--------|
+| x   | TcoDataExchage      | **CRUD capabale** from PLC code                        | x   | x   |        |
+| x   | InMemory repository | IRepository implementation for in memory storage       | x   |     |        |
+| x   | Json repository     | IRepository implementation string object as Json files | x   |     |        |
+| x   | MongoDb repository  | IRepository implementation for **mongodb** databases   | x   |     |        |
+|     | RavenDb repository  | IRepository implementation for **ravendb** databases   | x   |     |        |
 
 ### TcoDrivesBeckhoff
 
-|dev|PLC Class        | Description | Requires IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-|x|TcoDriveSimple     | Simple implementation of motion tasks (absolute, relative, velo, jog...) ||x|x|
+| dev | PLC Class      | Description                                                              | IVF | WPF | Blazor |
+|-----|----------------|--------------------------------------------------------------------------|-----|-----|--------|
+| x   | TcoDriveSimple | Simple implementation of motion tasks (absolute, relative, velo, jog...) |     | x   | x      |
 
 ### TcoElements
 
-|dev|PLC Class        | Description | Requires IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-|x|TcoDi     | Simple class for managing **discrete inputs** ||x|x|
-|x|TcoDo     | Simple class for managing **discrete outputs** ||x|x|
+| dev | PLC Class | Description                                    | IVF | WPF | Blazor |
+|-----|-----------|------------------------------------------------|-----|-----|--------|
+| x   | TcoDi     | Simple class for managing **discrete inputs**  |     | x   | x      |
+| x   | TcoDo     | Simple class for managing **discrete outputs** |     | x   | x      |
+|     | TcoAi     | Simple class for managing **analogue inputs**  |     |     |        |
+|     | TcoAo     | Simple class for managing **analogue outputs** |     |     |        |
 
 ### TcoPnematics
 
-|dev|PLC Class        | Description | Requires IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-|x|TcoCylinder     | Simple class for managing **pneumatic cyclinder** ||x|x|
+| dev | PLC Class   | Description                                       | IVF | WPF | Blazor |
+|-----|-------------|---------------------------------------------------|-----|-----|--------|
+| x   | TcoCylinder | Simple class for managing **pneumatic cyclinder** |     | x   | x      |
 
-### TcoVision
+### TcoVisionCognex
 
-|dev|PLC Class        | Description | Requires IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-||     |  ||x|x|
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
 
 ### TcoRoboticsAbb
 
-|dev|PLC Class        | Description | Requires IVF|WPF|Blazor|
-|-|-------------------|-------------------------------------------------------|----|--|--|
-||     |  ||x|x|
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
+### TcoRoboticsStaubli
+
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
+
+### TcoRoboticsUniversalRobots
+
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
 
 
 ## Repository structure
