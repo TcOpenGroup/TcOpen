@@ -87,7 +87,7 @@ VAR
 	(*~
 	<docu>
 		<summary>
-			Indicated whether the task is in serviceable state. The default state 'serviceable' that means that the task
+			Indicates whether the task is in serviceable state. The default state 'serviceable' that means that the task
 			can be invoked from the higher-level application. The serviceable state is cancelled when the immediate parent is `ITcoServiceable`
 			and at the same time the parent is not in servicebable state. `TcoComponent` is serviceable, in order for the component's task to be 
 			invokable from higher-level application component must call `Service` method to induce the component into serviceable state.					
