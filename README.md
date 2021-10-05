@@ -14,6 +14,13 @@
 
 # TcOpen
 
+* [Why?](#why)
+* [Goals](#goals)
+* [What is TwinCAT?](#what-is-twincat)
+* [Where are we - Development process](#where-are-we---development-process)
+* [What does TcOpen contain at this point](#what-does-tcopen-contain-at-this-point)
+
+
 **Open Source TwinCAT 3 code by Automation Professionals for Automation Professionals.**
 
 TcOpen aims to provide standard classes to start building any **real deployable application**. TcOpen will help you by providing well-tested components you can use in your project free of charge.  
@@ -40,14 +47,6 @@ The initial momentum of ```TcOpen``` project was powerful; however, we have seen
 
 We understand that many of you guys have hard times at work, a lot of late hours, endless traveling. Life in industrial automation is very demanding. We see this as one of the reasons for the declined activity. Also, many automation engineers are not that familiar with modern software development tooling and workflows. It may scare some people off. Unfamiliarity should not be the reason not to participate. We want this place to be welcoming to everyone that sees it as a meaningful path to industrial automation. The community is going to learn along the path. There are not that many open-source projects for industrial automation; we got to start somewhere and somehow.
 
-## Recent developments merging to TcOpenGroup
-
-There has been much activity without visible tracking in recent times. We are developing a set of base classes to help us craft components and projects in industrial automation. Most of the discussions were in pair-programming and online/in-person meetings. We did it this way to speed up initial development when transferring legacy libraries and concepts to TcOpen.
-
-[Here](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html) is a conceptual description of the work done so far.
-
-[Here](https://docs.tcopengroup.org/articles/Conventions/Conventions.html) is the document describing conventions to adhere to.
-
 ## Workflow (modified GitHub flow)
 
 We adopt a modified version of [**GitHub flow**](https://guides.github.com/introduction/flow/) with proper tracking and discussions under PRs. It is a very simple workflow; we would like to work in a continuous integration/deployment fashion. However, we have to consider the need for the LTS versions for stable and long time support. How do we exactly do it is open to discussion. At this point, we work with the following modification of *GitHub flow*: our default branch is ```dev```, and all PRs must be directed there instead of ```main``` (previously ``` master```). We release in the ```main``` branch once we see the version is stable and battle-tested in production by early adopters.
@@ -71,6 +70,110 @@ All PLC libraries developed in TcOpen are under MIT license. [MIT](https://tldrl
 IVF will aid in the development of this project. It provides the infrastructure for testing, debugging, and tooling for the delivery pipeline (library compilation, version number updates, etc.).
 
 Inxton and MTS teams will contribute to the development of PLC libraries. There will also be a transfer of some existing codebases from MTS and Inxton internal repositories (WPF/Blazor UI components, data acquisition libraries); some may require Inxton commercial license when deployed in production. 
+
+# What does TcOpen contain at this point
+
+*This section will be updated throughout development to provide information about the current status of the project.*
+
+Following table summarize the work that is already implemented on `dev` branch as well as some pending implementations that will be soon available.
+
+- *dev* is in current branch (x = implemented).
+- *IVF* feature requires inxton vortex framework to operate (x = implemented)
+- *WPF* feature has an UI control for WPF platform (requires IVF) (x = implemented)
+- *Blazor* feature has an UI control for Blazor platform (requires IVF) (x = implemented)
+
+**Blazor and net5.0 in IVF is experimental and so are the Blazor components. NET48 WPF components are considered stable**
+
+### TcoCore
+
+| dev | PLC Class                                                                                         | Description                                                                        | IVF | WPF | Blazor |
+|-----|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|-----|-----|--------|
+| x   | TcoRtc                                                                                            | Single source of **real time clock** for the application                           |     |     |        |
+| x   | [TcoContext](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#context)      | Provides **encapsulation** for coherent unit of control                            |     |     |        |
+| x   | [TcoComponent](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#components) | Base class from which all components should derive                                 |     |     |        |
+| x   | [TcoObject](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#object)        | Base class from which all objects (FBs) in the framework should derive             |     |     |        |
+| x   | [TcoMessenger](https://docs.tcopengroup.org/articles/TcOpenFramework/messaging.html)              | Static **messaging mechanism**; Messages can be read from higher level application |     | x   |        |
+|     | TcoLogger                                                                                         | **Logs messages** from the PLC program.                                            |     |     |        |
+| x   | [TcoTask](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#task)            | Task coordinator for synch and asynch run of arbitary code.                        |     | x   | x      |
+| x   | TcoToggleTask                                                                                     | Task coordinator for switching between two branches of logic.                      |     | x   | x      |
+| x   | TcoRemoteTask                                                                                     | Task coordinator for executing arbitrary code in .net evironment.                  | x   | x   | x      |
+| x   | TcoMomentaryTask                                                                                  | Task coordinator for executing arbitrary logic while a codition is met.             |     |     |        |
+| x   | [TcoState](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#state)          | Basic state controller enhances the ST language (IF,CASE, ELSIF) coordination      |     |     |        |
+| x   | [TcoSequencer](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html#sequencer)  | Advanced sequencing coordination primitive for step-by-step operations.            |     | x   | x      |
+
+
+### TcOpen Inxton application specific
+
+|dev| Package                      | Description                                                                                   | IVF | WPF | Blazor |
+|-----|------------------------------|-----------------------------------------------------------------------------------------------|-----|-----|--------|
+|x| Inxton.Vortex.Package.Core | Compiler and communication libraries | x   | x   |        |
+|x| Inxton.Vortex.Package.Essentials | Automated UI generation WPF | x   | x   |        |
+|x| Inxton.Vortex.Blazor-experimental | Automated UI generation Blazor | x   |    |   x     |
+|x| TcOpen.Inxton.Logging        | Logs user action and application events from inxton application                               | x   |     |        |
+|x| TcOpen.Inxton.Local.Security | Limits user access to protected section of inxton application                                 | x   | x   | x      |
+|x| TcOpen.Inxton.Swift          | Experimental implementation of auto programer (creates program capturing manual mode actions) | x   | x   |        |
+
+
+
+
+
+### TcoData
+
+| dev | PLC Class           | Description                                            | IVF | WPF | Blazor |
+|-----|---------------------|--------------------------------------------------------|-----|-----|--------|
+| x   | TcoDataExchage      | **CRUD capabale** from PLC code                        | x   | x   |        |
+| x   | InMemory repository | IRepository implementation for in memory storage       | x   |     |        |
+| x   | Json repository     | IRepository implementation string object as Json files | x   |     |        |
+| x   | MongoDb repository  | IRepository implementation for **mongodb** databases   | x   |     |        |
+|     | RavenDb repository  | IRepository implementation for **ravendb** databases   | x   |     |        |
+
+### TcoDrivesBeckhoff
+
+| dev | PLC Class      | Description                                                              | IVF | WPF | Blazor |
+|-----|----------------|--------------------------------------------------------------------------|-----|-----|--------|
+| x   | TcoDriveSimple | Simple implementation of motion tasks (absolute, relative, velo, jog...) |     | x   | x      |
+
+### TcoElements
+
+| dev | PLC Class | Description                                    | IVF | WPF | Blazor |
+|-----|-----------|------------------------------------------------|-----|-----|--------|
+| x   | TcoDi     | Simple class for managing **discrete inputs**  |     | x   | x      |
+| x   | TcoDo     | Simple class for managing **discrete outputs** |     | x   | x      |
+|     | TcoAi     | Simple class for managing **analogue inputs**  |     |     |        |
+|     | TcoAo     | Simple class for managing **analogue outputs** |     |     |        |
+
+### TcoPnematics
+
+| dev | PLC Class   | Description                                       | IVF | WPF | Blazor |
+|-----|-------------|---------------------------------------------------|-----|-----|--------|
+| x   | TcoCylinder | Simple class for managing **pneumatic cyclinder** |     | x   | x      |
+
+### TcoVisionCognex
+
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
+### TcoRoboticsAbb
+
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
+### TcoRoboticsStaubli
+
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
+
+### TcoRoboticsUniversalRobots
+
+| dev | PLC Class | Description | IVF | WPF | Blazor |
+|-----|-----------|-------------|-----|-----|--------|
+|     |           |             |     |     |        |
+
+
 
 ## Repository structure
 
@@ -115,12 +218,11 @@ Some of the information here might be self-evident for traditional users of GitH
 | src/Xae..       | Plc project/sources                                       |
 | tests           | unit, and integration tests and sandbox project(s) folder |
 
-
-## Testing
+# Testing
 
 Testing is vital to this project. We will be using two unit testing frameworks [**TcUnit**](https://github.com/tcunit/TcUnit) and **TcProber**, which is part of this repository. [Here is an article](https://alltwincat.com/2021/02/16/unit-testing-in-the-world-of-industrial-automation/) that briefly explains what those frameworks are and how they differ.
 
-## Documentation
+# Documentation
 
 There is a separate documentation repository for this project [here](https://github.com/TcOpenGroup/TcOpen.Documentation). In this moment we use [docfx](https://github.com/dotnet/docfx) to generate documentation. The ```docfx``` uses IVF twin objects of PLC code to generate the API documentation. There is room for improvement in generated documentation; we do plan - in the course of the development of TcOpen - to improve that. 
 
