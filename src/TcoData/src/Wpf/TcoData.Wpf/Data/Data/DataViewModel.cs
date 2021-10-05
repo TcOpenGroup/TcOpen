@@ -13,7 +13,6 @@ using System.Windows.Markup;
 using TcoData;
 using TcOpen.Inxton;
 using TcOpen.Inxton.Data;
-using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Wpf.Properties;
 using TcOpen.Inxton.Input;
 
@@ -73,6 +72,28 @@ namespace TcoData
             this.FillObservableRecords();
         }
 
+        private void RequeryCommands()
+        {          
+            ((RelayCommand)StartCreateNewCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)CreateNewCommand).RaiseCanExecuteChanged();
+
+            ((RelayCommand)CancelCreateNewCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)UpdateCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)DeleteCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)EditCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)CancelEditCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)FindByCriteriaCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)StartCreateCopyOfExisting).RaiseCanExecuteChanged();
+
+            ((RelayCommand)CreateCopyOfExistingCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)SendToPlcCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)LoadFromPlcCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)PageUpCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)PageDownCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ExportCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ImportCommand).RaiseCanExecuteChanged();
+        }
+
         private void LogCommand(string commandName) => TcoAppDomain
             .Current?
             .Logger?
@@ -82,13 +103,13 @@ namespace TcoData
 
         private void CancelEdit()
         {
-            this.Mode = ViewMode.Display;
+            this.Mode = ViewMode.Display;           
         }
 
 
         private void StartEdit()
         {
-            this.Mode = ViewMode.Edit;
+            this.Mode = ViewMode.Edit;            
         }
 
         private void ExportData()
@@ -142,7 +163,7 @@ namespace TcoData
 #endif
         private void StartCreatingNew()
         {
-            this.Mode = ViewMode.New; RecordIdentifier = string.Empty;
+            this.Mode = ViewMode.New; RecordIdentifier = string.Empty;         
         }
 
         private DataBrowser<T> CreateBrowsable(IRepository<T> repository)
@@ -165,7 +186,7 @@ namespace TcoData
                 ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
                 FillObservableRecords();
                 SelectedRecord = plain;
-                this.Mode = ViewMode.Edit;
+                this.Mode = ViewMode.Edit;             
             });
         }
 
@@ -180,7 +201,7 @@ namespace TcoData
                 ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
                 FillObservableRecords();
                 SelectedRecord = plain;
-                this.Mode = ViewMode.Edit;
+                this.Mode = ViewMode.Edit;          
             });
         }
 
@@ -257,7 +278,7 @@ namespace TcoData
                 CrudDataObject?.ChangeTracker.SaveObservedChanges(a);
                 DataBrowser.UpdateRecord(a);
                 FillObservableRecords();
-                this.Mode = ViewMode.Display;
+                this.Mode = ViewMode.Display;           
             }, info,
             () => MessageBox.Show($"{strings.WouldYouLikeToUpdateRecord} '{a._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
         }
@@ -356,13 +377,9 @@ namespace TcoData
                 return mode;
             }
             set
-            {
-                if (mode == value)
-                {
-                    return;
-                }
-
+            {                         
                 SetProperty(ref mode, value);
+                this.RequeryCommands();
             }
         }
 
@@ -444,7 +461,7 @@ namespace TcoData
                 {
                     return;
                 }
-
+                RequeryCommands();
                 SetProperty(ref recordIdentifier, value);
             }
         }
@@ -476,14 +493,14 @@ namespace TcoData
                     return;
                 }
 
-
-
                 CrudDataObject?.ChangeTracker.StopObservingChanges();
+
 
                 SetProperty(ref selectedRecord, value);
 
                 if (value != null)
                 {
+                    this.RequeryCommands();
                     ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
                     ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainCrudDataObject)selectedRecord).Changes;
                     Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
