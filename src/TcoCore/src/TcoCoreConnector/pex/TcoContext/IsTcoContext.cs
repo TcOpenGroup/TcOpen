@@ -12,15 +12,7 @@ namespace TcoCore
         /// </summary>
         /// <param name="message">Message to add.</param>
         void AddMessage(TcoMessage message);
-
-        /// <summary>
-        /// Gets active messages of this context.
-        /// <note type="important">
-        /// Depending on the depth and size of the context this might be performance demanding operation.
-        /// </note>        
-        /// </summary>
-        IEnumerable<PlainTcoMessage> ActiveMessages { get; }
-
+       
         /// <summary>
         /// Gets last know value of start cycle counter of this context.
         /// </summary>

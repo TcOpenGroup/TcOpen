@@ -1,10 +1,13 @@
 ﻿namespace TcoCore
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
     using Vortex.Connector;
+    using Vortex.Localizations.Abstractions;
     using Vortex.Presentation;
 
     public partial class TcoMessage
@@ -13,17 +16,13 @@
 
         private IsTcoObject _parentObject;
 
-        private readonly PlainTcoMessage _plain = new PlainTcoMessage();
+       
 
-        partial void PexConstructorParameterless()
-        {
-            _context = new TcoContext();
-        }
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             _context = parent.GetParent<IsTcoContext>();
-            _context = _context == null ? new TcoContext() : _context;
+            _context = _context == null ? new TcoContext() : _context;          
             _context?.AddMessage(this);
             _parentObject = parent.GetParent<IsTcoObject>();
         }
@@ -45,22 +44,116 @@
             }
         }
 
+
+        private volatile object mutex = new object();
+
+        private IVortexObject _indentityPersistence;
+        private IVortexObject IndentityPersistence
+        {
+            get
+            {
+                lock (mutex)
+                {
+                    if (_indentityPersistence == null)
+                    {
+                        _indentityPersistence = this.Connector.IdentityProvider.GetVortexerByIdentity(this.Identity.Synchron) as IVortexObject;
+                    }
+                }
+                return _indentityPersistence;
+            }
+        }
+
+        private ITranslator _translatorPersistence;
+        private ITranslator TranslatorPersistence
+        {
+            get
+            {
+                lock (mutex)
+                {
+                    if (_translatorPersistence == null)
+                    {
+                        _translatorPersistence = this.Text.Translator;
+                       
+                        if (IndentityPersistence != null)
+                        {
+                            try
+                            {
+                                dynamic vt = IndentityPersistence.GetValueTags().FirstOrDefault();
+
+                                if (vt != null)
+                                {
+                                    _translatorPersistence = vt.Translator;
+                                }
+                            }
+                            catch (Exception)
+                            {
+
+                                // Swallow
+                            }
+                            
+                        }
+                    }
+                }
+
+                return _translatorPersistence;
+            }
+        }
+
         /// <summary>
         /// Gets the message in plain .net type system (aka POCO object).
         /// </summary>
         public PlainTcoMessage PlainMessage
         {
             get
-            {                
-                this.FlushOnlineToPlain(_plain);
-                _plain.ParentsObjectSymbol = this._parentObject?.Symbol;
-                _plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
-                var identity = this.Connector.IdentityProvider.GetVortexerByIdentity(_plain.Identity);
-                _plain.Text = this.Text.Translator.Translate(StringInterpolator.Interpolate(_plain.Text, identity));
-                _plain.Source = _plain.ParentsObjectSymbol;
-                _plain.Location = _plain.ParentsHumanReadable;
-                return _plain;
+            {
+                var plain = this.CreatePlainerType();
+                this.FlushOnlineToPlain(plain);
+                plain.ParentsObjectSymbol = this._parentObject?.Symbol;
+                plain.ParentsHumanReadable = this._parentObject?.HumanReadable;
+                plain.Raw = plain.Text;
+                if(plain.ExpectDequeing)
+                { 
+                    var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(plain.Identity) as IVortexObject;
+                    plain.Text = Translate(plain.Text, parent);
+                }
+                else
+                {
+                    plain.Text = TranslatorPersistence.Translate(StringInterpolator.Interpolate(plain.Text, IndentityPersistence));
+                }
+                plain.Source = plain.ParentsObjectSymbol;
+                plain.Location = plain.ParentsHumanReadable;
+                return plain;
             }
+        }
+        
+        /// <summary>
+        /// Gets the last known message content in plain .net type system (aka POCO object) with object retieved by identity.
+        /// </summary>
+        public PlainTcoMessage LastKnownPlain
+        {
+            get
+            {
+                var plain = this.CreatePlainerType();
+                plain.CopyCyclicToPlain(this);
+                var parent = this.GetConnector().IdentityProvider.GetVortexerByIdentity(plain.Identity) as IVortexObject;
+                plain.ParentsObjectSymbol = parent?.Symbol;
+                plain.ParentsHumanReadable = parent?.HumanReadable;
+                plain.Raw = plain.Text;
+                plain.Text = Translate(plain.Text, parent);
+                plain.Source = plain.ParentsObjectSymbol;
+                plain.Location = plain.ParentsHumanReadable;
+                return plain;
+            }
+        }
+
+        private string Translate(string text, IVortexObject sender)
+        {
+            if(sender != null && sender.GetValueTags().FirstOrDefault() != null)
+            { 
+                return sender.GetValueTags().FirstOrDefault().Translator.Translate(StringInterpolator.Interpolate(text, sender));
+            }
+
+            return text;
         }
     }
 }

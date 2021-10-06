@@ -21,10 +21,10 @@ namespace TcoCore
                     case eMessageCategory.Debug:
                     case eMessageCategory.Trace:
                     case eMessageCategory.Info:
-                        return TcoCore.Wpf.TcoColors.OnPrimary;                    
+                        return TcoCore.Wpf.TcoColors.OnSecondary;                    
                     case eMessageCategory.TimedOut:
                     case eMessageCategory.Notification:
-                        return TcoCore.Wpf.TcoColors.OnSecondary;
+                        return TcoCore.Wpf.TcoColors.OnPrimary;
                     case eMessageCategory.Warning:
                         return TcoCore.Wpf.TcoColors.OnAccent;
                     case eMessageCategory.Error:
@@ -67,10 +67,10 @@ namespace TcoCore
                     case eMessageCategory.Debug:
                     case eMessageCategory.Trace:
                     case eMessageCategory.Info:
-                        return TcoCore.Wpf.TcoColors.Primary;
+                        return TcoCore.Wpf.TcoColors.Secondary;
                     case eMessageCategory.TimedOut:
                     case eMessageCategory.Notification:
-                        return TcoCore.Wpf.TcoColors.Secondary;
+                        return TcoCore.Wpf.TcoColors.Primary;
                     case eMessageCategory.Warning:
                         return TcoCore.Wpf.TcoColors.Accent;
                     case eMessageCategory.Error:

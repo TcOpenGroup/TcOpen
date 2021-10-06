@@ -27,6 +27,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -110,6 +111,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.Category}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding CategoryAsEnum}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <GridSplitter
@@ -119,20 +127,24 @@
         <StackPanel Grid.Row="3" DataContext="{Binding SelectedMessage}">
             <GroupBox Header="{x:Static loc:Localization.Location}">
                 <TextBlock
-                    Margin="10"
+                    Margin="5"
                     HorizontalAlignment="Left"
-                    FontSize="18"
+                    FontSize="15"
+                    Padding="5"
                     FontWeight="Medium"
+                    Background="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}"
                     Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
                     Text="{Binding Location}"
                     TextWrapping="WrapWithOverflow" />
             </GroupBox>
             <GroupBox Header="{x:Static loc:Localization.Message}">
                 <TextBlock
-                    Margin="10"
+                    Margin="5"
                     HorizontalAlignment="Left"
+                    Padding="5"
                     FontSize="18"
                     FontWeight="Medium"
+                    Background="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}"
                     Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
                     Text="{Binding Text}"
                     TextWrapping="WrapWithOverflow" />
@@ -177,11 +189,11 @@
                 </GroupBox>
             </StackPanel>
         </Expander>
-        <Grid Grid.Row="5">
-            <ScrollViewer>
-                <ContentControl Content="{Binding AffectedObjectPresentation}" />
-            </ScrollViewer>
-        </Grid>
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="5" Height="150">
+            <ContentControl Content="{Binding AffectedObjectPresentation}" />
+        </ScrollViewer>
+
         <Expander Header="Details"
                   Grid.Row="4" 
                   DataContext="{Binding SelectedItem, ElementName=dataGrid}">
@@ -221,7 +233,14 @@
             Text="{x:Static loc:Localization.DiagnosticsRunnig}"
             Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />
 
-        <vortex:HelpProviderView Grid.Row="7">
+        <GroupBox Header="{x:Static loc:Localization.DiagnosticsDepth}" Grid.Row="7">
+            <StackPanel>
+                <TextBlock Text="{Binding DiagnosticsDepth}" HorizontalAlignment="Center" Margin="3.5"></TextBlock>
+                <Slider Value="{Binding DiagnosticsDepth}" Margin="10" Minimum="1" Maximum="30"/>
+            </StackPanel>
+        </GroupBox>
+
+        <vortex:HelpProviderView Grid.Row="8">
             <vortex:HelpProviderView.DataContext>
                 <vortex:HelpProviderViewModel ComponentName="TcoDiagnosticsView" />
             </vortex:HelpProviderView.DataContext>

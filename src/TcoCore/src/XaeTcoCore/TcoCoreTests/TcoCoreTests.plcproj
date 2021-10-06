@@ -6,7 +6,7 @@
     <ProjectGuid>{6d5bd0df-0c04-46c3-a05c-0fc422597b46}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcoCoreTests</Name>
     <ProgramVersion>3.1.4024.12</ProgramVersion>
@@ -68,6 +68,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoContext\TcoContextTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoLogger\PlcExecuted\eTcoLoggerTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoLogger\PlcExecuted\TcoLoggerTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoLogger\PlcExecuted\TcoLoggerTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoMessenger\TcoContextMessagingPerf.TcPOU">
@@ -158,6 +167,8 @@
   <ItemGroup>
     <Folder Include="Components" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoLogger" />
+    <Folder Include="Tests\TcoLogger\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />

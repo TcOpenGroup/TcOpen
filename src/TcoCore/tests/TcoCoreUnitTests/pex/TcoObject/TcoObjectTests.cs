@@ -38,9 +38,10 @@ namespace TcoCore.PexTests
 
             var activeMessage = new TcoMessage(tcoObject, string.Empty, string.Empty);
             activeMessage.Cycle.SetLastValue = 1875;
-            
 
-            var actual = tcoObjectGreatParent.GetActiveMessages();
+            tcoObjectGreatParent.MessageHandler.DiagnosticsDepth = 1000;
+
+            var actual = tcoObjectGreatParent.MessageHandler.GetActiveMessages();
 
             Assert.AreEqual(1, actual.Count());
         }

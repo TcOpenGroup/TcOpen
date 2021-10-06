@@ -17,8 +17,7 @@ namespace TcoCore
             try
             {
                 switch (((eMessageCategory)value))
-                {
-                    case eMessageCategory.All:
+                {                   
                     case eMessageCategory.Debug:
                     case eMessageCategory.Trace:
                     case eMessageCategory.Info:

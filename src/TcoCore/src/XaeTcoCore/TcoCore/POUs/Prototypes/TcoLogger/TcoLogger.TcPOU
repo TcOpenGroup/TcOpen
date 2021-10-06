@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoLogger EXTENDS TcoObject
+VAR
+	_buffer : ARRAY[0..MAX_MESSAGE_BUFFER_INDEX] OF TcoLogItem;
+	_plcCarret : INT;
+	_minLoggingLevel : eMessageCategory := eMessageCategory.Notification;
+END_VAR
+
+VAR CONSTANT
+	MAX_MESSAGE_BUFFER_INDEX : INT := 1000;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Push" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
+      <Declaration><![CDATA[METHOD Push : WORD
+VAR_INPUT
+	inMessage : TcoMessage;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(inMessage.Category < THIS^._minLoggingLevel OR (THIS^._minLoggingLevel = eMessageCategory.None)) THEN
+	RETURN;
+END_IF
+
+IF(_plcCarret > MAX_MESSAGE_BUFFER_INDEX) THEN
+		_plcCarret := 1;
+END_IF
+
+IF(NOT _buffer[_plcCarret].ExpectDequeing) THEN
+		
+	_buffer[_plcCarret].Category := inMessage.Category;
+	_buffer[_plcCarret].Cycle := inMessage.Cycle;	
+	_buffer[_plcCarret].ExpectDequeing := TRUE;
+	_buffer[_plcCarret].Identity := inMessage.Identity;
+	_buffer[_plcCarret].MessageDigest := inMessage.MessageDigest;
+	_buffer[_plcCarret].PerCycleCount := inMessage.PerCycleCount;
+	_buffer[_plcCarret].Text := inMessage.Text;	
+	_buffer[_plcCarret].TimeStamp := inMessage.TimeStamp;
+			
+	_plcCarret := _plcCarret + 1;
+ELSE
+	_buffer[0].Text := 'Logging buffer is full we are loosing messages!!!';
+	_buffer[0].Category := eMessageCategory.Critical;
+	_buffer[0].ExpectDequeing := TRUE;
+	_buffer[0].Cycle := THIS^.Context.StartCycleCount;	
+    _buffer[0].PerCycleCount := _buffer[0].PerCycleCount + 1;	
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

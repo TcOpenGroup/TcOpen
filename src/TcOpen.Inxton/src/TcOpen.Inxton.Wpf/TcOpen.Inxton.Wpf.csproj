@@ -17,15 +17,15 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.1-nightly.608" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.3-nightly.634" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsBase" />
-  </ItemGroup>
+  </ItemGroup>-->
   
 </Project>

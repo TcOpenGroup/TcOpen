@@ -26,7 +26,7 @@ namespace TcoCore.PexTests
 
             var actual = plainTcoMessage.ShallowClone();
 
-            Assert.IsFalse(actual.Equals(plainTcoMessage));
+            Assert.IsTrue(actual.Equals(plainTcoMessage));
             Assert.AreEqual("1/1/0001 12:00:00 AM : 'Hey' | Critical ()", actual.ToString());
 
         }

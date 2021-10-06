@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoMessenger" Id="{bb89b26f-ec79-4812-bab7-3579b2b6d1be}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 		<docu>
@@ -29,7 +29,13 @@ VAR
 	~*)
 	_mime : TcoMessage;
 	_Parent : ITcoObject;
-	_contextIdentity : ULINT;				
+	_contextIdentity : ULINT;	
+	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
+	_previousCycleMessageCount : INT;	
+END_VAR
+
+VAR CONSTANT
+	MDS_MAX_INDEX : INT := 20;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -81,24 +87,25 @@ METHOD Clear
         <ST><![CDATA[_mime.TimeStamp :=  DT#1970-01-01-00:00;
 _mime.Text := '';
 _mime.Identity := 0;
-_mime.Category := eMessageCategory.None;
+_mime.Category := eMessageCategory.All;
 _mime.Cycle := 0;	
 _mime.PerCycleCount := 0;	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
-      <Declaration><![CDATA[METHOD PROTECTED Compose 
+      <Declaration><![CDATA[METHOD PROTECTED Compose : TcoMessage
 VAR_INPUT
 	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
-	_mime.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
-	_mime.Text := Text;
-	_mime.Identity := _Parent.Identity;
-	_mime.Category := Category;
-	_mime.Cycle := _Parent.Context.StartCycleCount;	
+	Compose.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
+	Compose.Text := Text;
+	Compose.Identity := _Parent.Identity;
+	Compose.Category := Category;
+	Compose.Cycle := _Parent.Context.StartCycleCount;	
+	Compose.MessageDigest := Digest(Text, THIS^._Parent.Context.Environment.Messaging.MessageDigestMethod);
 END_IF;
 
 
@@ -158,6 +165,26 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Digest" Id="{de6a9eab-3c62-0e43-3529-2cc01fda6c4e}">
+      <Declaration><![CDATA[METHOD Digest : DWORD
+VAR_INPUT
+	Text : Tc2_System.T_MaxString;
+	inDigestType : eMessageDigestMethod;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE inDigestType OF
+	eMessageDigestMethod.CRC8 :
+		Digest := TcoCRC_8(Text);
+	eMessageDigestMethod.CRC16 :
+		Digest := TcoCRC_16(Text);
+	eMessageDigestMethod.CRC32 :
+		Digest := TcoCRC_32(Text);
+	ELSE
+		Digest := 0;
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="Error" Id="{dc14c403-f11e-4200-ac36-567c3d997bf6}" FolderPath="Messages\">
@@ -229,6 +256,51 @@ END_VAR
         <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="LogMessage" Id="{0b6b2fe7-cb26-02a6-0b72-2570a4f5cb53}">
+      <Declaration><![CDATA[METHOD PRIVATE LogMessage 
+VAR_IN_OUT
+	inMessage : TcoMessage;
+END_VAR
+VAR
+	_index : INT;		
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _Parent.Context.Environment.Messaging.MessengerLoggingMethod OF
+	eMessengerLogMethod.OnEventRisen :
+        IF(_Parent.Context.Environment.Messaging.MessageDigestMethod = eMessageDigestMethod.NONE) THEN
+			inMessage.MessageDigest := Digest(inMessage.Text, eMessageDigestMethod.CRC8);
+		END_IF
+			    
+		FOR _index := 0 TO MDS_MAX_INDEX DO
+			IF(_mds[_index].Cycle = inMessage.Cycle - 1 OR _mds[_index].Cycle = inMessage.Cycle) 
+			AND_THEN (_mds[_index].Digest = inMessage.MessageDigest)
+			AND_THEN (_mds[_index].Category = inMessage.Category) THEN
+			
+				IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
+					_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
+					_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
+					_mds[inMessage.PerCycleCount].Category := inMessage.Category;			
+				END_IF;	
+				
+				RETURN;
+				
+			END_IF	
+		END_FOR
+		
+		IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
+			_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
+			_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
+			_mds[inMessage.PerCycleCount].Category := inMessage.Category;
+			_Parent.Context.Logger.Push(inMessage);		
+		END_IF;
+	eMessengerLogMethod.Continuous:
+	    _Parent.Context.Logger.Push(inMessage);
+END_CASE
+
+		]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Notify" Id="{1595dfe7-5719-459e-bdf2-0e7976c85511}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -282,6 +354,10 @@ VAR_INPUT
 	Category : eMessageCategory;	
 END_VAR
 
+VAR
+	_wouldBeMime : TcoMessage;
+END_VAR
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
@@ -289,18 +365,23 @@ END_VAR
 	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
 		RETURN;
 	END_IF; 	
-	
+		
 	_mime.PerCycleCount := _mime.PerCycleCount + 1;
-	// Same cycle filter for most important messge.
+	_wouldBeMime := Compose(Message, Category);		
+	_wouldBeMime.PerCycleCount := _mime.PerCycleCount;
+			
+    // Same cycle filter for most important messge.
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
-		IF(Category > _mime.Category) THEN	 
-			Compose(Message, Category);
+		IF(_wouldBeMime.Category > _mime.Category) THEN	 
+			_mime := _wouldBeMime;
 		END_IF;
 	ELSE
 	// Different cycle		
-		_mime.PerCycleCount := 1;	
-		Compose(Message, Category);		
+		_wouldBeMime.PerCycleCount := 1;	
+		_mime := _wouldBeMime;		
 	END_IF;	
+
+	LogMessage(_wouldBeMime);		
 END_IF;	
 
 
