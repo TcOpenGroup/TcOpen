@@ -26,8 +26,8 @@
     <Content Include="_meta\TcoPneumatics.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.2-alpha.610" />
+  <ItemGroup>    
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.3-nightly.634" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
