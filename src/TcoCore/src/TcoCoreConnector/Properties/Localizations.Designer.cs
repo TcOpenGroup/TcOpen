@@ -61,6 +61,33 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abort request.
+        /// </summary>
+        public static string ___Abort_request__ {
+            get {
+                return ResourceManager.GetString("___Abort_request__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change mode.
+        /// </summary>
+        public static string ___Change_mode__ {
+            get {
+                return ResourceManager.GetString("___Change_mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing mode disabled.
+        /// </summary>
+        public static string ___Changing_mode_disabled__ {
+            get {
+                return ResourceManager.GetString("___Changing_mode_disabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current step.
         /// </summary>
         public static string ___Current_step__ {
@@ -79,6 +106,15 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In service mode.
+        /// </summary>
+        public static string ___In_service_mode__ {
+            get {
+                return ResourceManager.GetString("___In_service_mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invoke request.
         /// </summary>
         public static string ___Invoke_request__ {
@@ -88,11 +124,47 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mode.
+        /// </summary>
+        public static string ___Mode__ {
+            get {
+                return ResourceManager.GetString("___Mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        public static string ___Off__ {
+            get {
+                return ResourceManager.GetString("___Off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        public static string ___On__ {
+            get {
+                return ResourceManager.GetString("___On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore request.
         /// </summary>
         public static string ___Restore_request__ {
             get {
                 return ResourceManager.GetString("___Restore_request__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sequence cycle elapsed time.
+        /// </summary>
+        public static string ___Sequence_cycle_elapsed_time__ {
+            get {
+                return ResourceManager.GetString("___Sequence_cycle_elapsed_time__", resourceCulture);
             }
         }
         
@@ -115,6 +187,42 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Serviceable.
+        /// </summary>
+        public static string ___Serviceable__ {
+            get {
+                return ResourceManager.GetString("___Serviceable__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set on request.
+        /// </summary>
+        public static string ___Set_on_request__ {
+            get {
+                return ResourceManager.GetString("___Set_on_request__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skipping steps disabled.
+        /// </summary>
+        public static string ___Skipping_steps_disabled__ {
+            get {
+                return ResourceManager.GetString("___Skipping_steps_disabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step backward.
+        /// </summary>
+        public static string ___Step_backward__ {
+            get {
+                return ResourceManager.GetString("___Step_backward__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step description.
         /// </summary>
         public static string ___Step_description__ {
@@ -133,11 +241,29 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Step forward.
+        /// </summary>
+        public static string ___Step_forward__ {
+            get {
+                return ResourceManager.GetString("___Step_forward__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step ID.
         /// </summary>
         public static string ___Step_ID__ {
             get {
                 return ResourceManager.GetString("___Step_ID__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step in.
+        /// </summary>
+        public static string ___Step_in__ {
+            get {
+                return ResourceManager.GetString("___Step_in__", resourceCulture);
             }
         }
         
@@ -156,6 +282,24 @@ namespace TcoCoreConnector.Properties {
         public static string ___Step_status__ {
             get {
                 return ResourceManager.GetString("___Step_status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle request.
+        /// </summary>
+        public static string ___Toggle_request__ {
+            get {
+                return ResourceManager.GetString("___Toggle_request__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total sequence time.
+        /// </summary>
+        public static string ___Total_sequence_time__ {
+            get {
+                return ResourceManager.GetString("___Total_sequence_time__", resourceCulture);
             }
         }
     }

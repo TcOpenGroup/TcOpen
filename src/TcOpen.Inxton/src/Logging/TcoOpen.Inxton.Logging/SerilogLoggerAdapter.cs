@@ -20,11 +20,11 @@
         /// Creates new instance of Serilog logger with default configuration:
         /// Write logs to Console (ConsoleSink)
         /// </summary>
-        public SerilogAdapter()
+        public SerilogAdapter(Serilog.Events.LogEventLevel minLevel = Serilog.Events.LogEventLevel.Information)
         {
-            _logger = new LoggerConfiguration()
+            _logger = new LoggerConfiguration( )
                                     .WriteTo
-                                        .Console()
+                                        .Console(restrictedToMinimumLevel: minLevel)                                   
                                     .Enrich
                                         .FromLogContext()
                                     .CreateLogger();

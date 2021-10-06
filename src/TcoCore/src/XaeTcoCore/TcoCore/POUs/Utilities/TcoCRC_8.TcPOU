@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoCRC_8" Id="{3df0c4cb-e58e-4954-adb6-b51a801e3af7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL TcoCRC_8 : BYTE
+VAR_INPUT
+    In : Tc2_System.T_MaxString;
+END_VAR
+VAR
+	crc : BYTE := 16#FF;
+	pDataArr : POINTER TO BYTE;
+	pByte : POINTER TO BYTE;
+	bByte : BYTE;
+	i : INT;
+	maxIndex : INT;
+END_VAR
+VAR_STAT CONSTANT
+	//Precalculated values for polynomial generator of value 0x1D 
+	CRC_TABLE : ARRAY[0..255] OF BYTE := [
+		16#00, 	16#1D, 	16#3A, 	16#27, 	16#74, 	16#69, 	16#4E, 	16#53, 	16#E8, 	16#F5, 	16#D2, 	16#CF, 	16#9C, 	16#81, 	16#A6, 	16#BB, 
+		16#CD, 	16#D0, 	16#F7, 	16#EA, 	16#B9, 	16#A4, 	16#83, 	16#9E, 	16#25, 	16#38, 	16#1F, 	16#02, 	16#51, 	16#4C, 	16#6B, 	16#76, 
+		16#87, 	16#9A, 	16#BD, 	16#A0, 	16#F3, 	16#EE, 	16#C9, 	16#D4, 	16#6F, 	16#72, 	16#55, 	16#48, 	16#1B, 	16#06, 	16#21, 	16#3C, 
+		16#4A, 	16#57, 	16#70, 	16#6D, 	16#3E, 	16#23, 	16#04, 	16#19, 	16#A2, 	16#BF, 	16#98, 	16#85, 	16#D6, 	16#CB, 	16#EC, 	16#F1, 
+		16#13, 	16#0E, 	16#29, 	16#34, 	16#67, 	16#7A, 	16#5D, 	16#40, 	16#FB, 	16#E6, 	16#C1, 	16#DC, 	16#8F, 	16#92, 	16#B5, 	16#A8, 
+		16#DE, 	16#C3, 	16#E4, 	16#F9, 	16#AA, 	16#B7, 	16#90, 	16#8D, 	16#36, 	16#2B, 	16#0C, 	16#11, 	16#42, 	16#5F, 	16#78, 	16#65, 
+		16#94, 	16#89, 	16#AE, 	16#B3, 	16#E0, 	16#FD, 	16#DA, 	16#C7, 	16#7C, 	16#61, 	16#46, 	16#5B, 	16#08, 	16#15, 	16#32, 	16#2F, 
+		16#59, 	16#44, 	16#63, 	16#7E, 	16#2D, 	16#30, 	16#17, 	16#0A, 	16#B1, 	16#AC, 	16#8B, 	16#96, 	16#C5, 	16#D8, 	16#FF, 	16#E2, 
+		16#26, 	16#3B, 	16#1C, 	16#01, 	16#52, 	16#4F, 	16#68, 	16#75, 	16#CE, 	16#D3, 	16#F4, 	16#E9, 	16#BA, 	16#A7, 	16#80, 	16#9D, 
+		16#EB, 	16#F6, 	16#D1, 	16#CC, 	16#9F, 	16#82, 	16#A5, 	16#B8, 	16#03, 	16#1E, 	16#39, 	16#24, 	16#77, 	16#6A, 	16#4D, 	16#50, 
+		16#A1, 	16#BC, 	16#9B, 	16#86, 	16#D5, 	16#C8, 	16#EF, 	16#F2, 	16#49, 	16#54, 	16#73, 	16#6E, 	16#3D, 	16#20, 	16#07, 	16#1A, 
+		16#6C, 	16#71, 	16#56, 	16#4B, 	16#18, 	16#05, 	16#22, 	16#3F, 	16#84, 	16#99, 	16#BE, 	16#A3, 	16#F0, 	16#ED, 	16#CA, 	16#D7, 
+		16#35, 	16#28, 	16#0F, 	16#12, 	16#41, 	16#5C, 	16#7B, 	16#66, 	16#DD, 	16#C0, 	16#E7, 	16#FA, 	16#A9, 	16#B4, 	16#93, 	16#8E, 
+		16#F8, 	16#E5, 	16#C2, 	16#DF, 	16#8C, 	16#91, 	16#B6, 	16#AB, 	16#10, 	16#0D, 	16#2A, 	16#37, 	16#64, 	16#79, 	16#5E, 	16#43, 
+		16#B2, 	16#AF, 	16#88, 	16#95, 	16#C6, 	16#DB, 	16#FC, 	16#E1, 	16#5A, 	16#47, 	16#60, 	16#7D, 	16#2E, 	16#33, 	16#14, 	16#09, 
+		16#7F, 	16#62, 	16#45, 	16#58, 	16#0B, 	16#16, 	16#31, 	16#2C, 	16#97, 	16#8A, 	16#AD, 	16#B0, 	16#E3, 	16#FE, 	16#D9, 	16#C4]; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TcoCRC_8 := crc;
+
+pDataArr := ADR(In);
+maxIndex := Tc2_Standard.LEN(In)-1;
+
+IF ( pDataArr = 0 ) OR ( maxIndex < 0 ) THEN
+	RETURN;
+END_IF
+
+FOR i := 0 TO maxIndex BY 1 DO
+	pByte := pDataArr + INT_TO_UINT(i);
+	bByte := pByte^;
+	crc := CRC_TABLE[bByte XOR crc];
+END_FOR
+
+TcoCRC_8 := crc;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

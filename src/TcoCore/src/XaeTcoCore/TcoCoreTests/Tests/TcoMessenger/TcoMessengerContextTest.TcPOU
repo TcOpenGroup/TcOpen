@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoMessengerContextTest" Id="{ab1f1c15-693e-0b9d-1dc8-8f3fbcb09dcf}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoMessengerContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
@@ -9,6 +9,7 @@ VAR
 	_nowUtc						:	DATE_AND_TIME;
 	_rtcIsValid					:	BOOL := FALSE;
 	_rtcIsSynchronized			:	BOOL := FALSE;
+	{attribute addProperty Name "this is the name of messenger test"}
 	_tcoMessangerTests			:	TcoMessengerTests(THIS^);
 END_VAR
 ]]></Declaration>

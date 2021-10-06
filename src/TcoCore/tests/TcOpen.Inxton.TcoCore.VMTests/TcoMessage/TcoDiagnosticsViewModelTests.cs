@@ -81,6 +81,9 @@ namespace TcoCore.Tests
             var objL1 = new TcoObject(context, "objL1", "objL1");
             var objL2 = new TcoObject(objL1, "objL2", "objL2");
 
+            context.MessageHandler.DiagnosticsDepth = 1000;
+            objL1.MessageHandler.DiagnosticsDepth = 1000;
+            objL2.MessageHandler.DiagnosticsDepth = 1000;
 
             context._startCycleCount.Cyclic = 1458;
             objL1._messenger._mime.Category.Cyclic = (short)eMessageCategory.Catastrophic;
@@ -141,6 +144,9 @@ namespace TcoCore.Tests
             var objL1 = new TcoObject(context, "objL1", "objL1");
             var objL2 = new TcoObject(objL1, "objL2", "objL2");
 
+            context.MessageHandler.DiagnosticsDepth = 1000;
+            objL1.MessageHandler.DiagnosticsDepth = 1000;
+            objL2.MessageHandler.DiagnosticsDepth = 1000;
 
             context._startCycleCount.Cyclic = 1458;
             objL1._messenger._mime.Category.Cyclic = (short)eMessageCategory.Catastrophic;

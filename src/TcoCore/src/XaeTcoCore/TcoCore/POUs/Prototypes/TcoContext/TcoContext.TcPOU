@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoContext" Id="{55d37a51-70a7-4749-9f28-95ccbcaee495}" SpecialFunc="None">
     <Declaration><![CDATA[
 (*~
@@ -59,6 +59,8 @@ VAR
 	_rtc : TcoRtc;
 	{attribute clr [RenderIgnore()]}
     _settings : TcoContextEnvironment;	
+	{attribute clr [RenderIgnore()]}
+	_logger : TcoLogger(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -158,6 +160,17 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[Identity := _Identity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Logger" Id="{b7d598a9-0e96-0b61-31ef-8d5c4839fc65}">
+      <Declaration><![CDATA[PROPERTY Logger : REFERENCE TO TcoLogger]]></Declaration>
+      <Get Name="Get" Id="{a4f8c41e-1a3b-0fff-2759-b05dc4c3d947}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Logger REF= _logger;]]></ST>
         </Implementation>
       </Get>
     </Property>

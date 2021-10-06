@@ -3,7 +3,7 @@
 namespace TcoCore
 {
 
-    public partial class PlainTcoMessage 
+    public partial class PlainTcoMessage
     {
         string source;
         /// <summary>
@@ -63,7 +63,7 @@ namespace TcoCore
                 return (short)(this.Category % 100);
             }
         }
-              
+
         /// <summary>
         /// Gets memberwise clone of this <see cref="PlainTcoMessage"/>
         /// </summary>
@@ -93,6 +93,7 @@ namespace TcoCore
         }
 
         string parentsHumanReadable;
+        private string raw;
 
         /// <summary>
         /// Gets <see cref="Vortex.Connector.IVortexElement.HumanReadable"/> of the parent <see cref="TcoObject"/> that own this message.
@@ -111,6 +112,22 @@ namespace TcoCore
             }
         }
 
+        public string Raw 
+        {
+            get => raw; 
+        
+            set
+            {
+                if (raw == value)
+                {
+                    return;
+                }
+
+                raw = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Raw)));
+            }
+        }
+
         /// <summary>
         /// Get this message in string format.
         /// </summary>
@@ -119,5 +136,13 @@ namespace TcoCore
         {
             return $"{this.TimeStamp} : '{this.Text}' | {this.CategoryAsEnum} ({this.Source})";
         }
+
+        public override int GetHashCode() => (Raw, ParentsObjectSymbol, Category).GetHashCode();
+
+        public override bool Equals(object obj) 
+        {
+            var p = obj as PlainTcoMessage;
+            return p != null && p.Raw == Raw && p.ParentsObjectSymbol == ParentsObjectSymbol && p.Category == Category;                                  
+        }        
     }
 }
