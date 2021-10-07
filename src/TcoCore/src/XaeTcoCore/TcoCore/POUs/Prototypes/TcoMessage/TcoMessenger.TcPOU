@@ -30,6 +30,7 @@ VAR
 	_mime : TcoMessage;
 	_Parent : ITcoObject;
 	_contextIdentity : ULINT;	
+	{attribute 'hide'}
 	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
 	_previousCycleMessageCount : INT;	
 END_VAR
