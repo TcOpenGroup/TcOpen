@@ -16,15 +16,18 @@
 
         private IsTcoObject _parentObject;
 
-       
-
-
+        public static IsTcoContext OrphanedMessageContext { get; set; }
+              
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
-            _context = parent.GetParent<IsTcoContext>();
-            _context = _context == null ? new TcoContext() : _context;          
+            _context = parent.GetParent<IsTcoContext>();             
             _context?.AddMessage(this);
             _parentObject = parent.GetParent<IsTcoObject>();
+        }
+
+        private IsTcoContext GetContext()
+        {
+            return _context != null ? _context : OrphanedMessageContext;
         }
 
         /// <summary>
@@ -35,6 +38,7 @@
             get
             {
                 var retval = false;
+                _context = GetContext();
                 if (_context != null)
                 {
                     retval = this.Cycle.LastValue >= _context.LastStartCycleCount;
