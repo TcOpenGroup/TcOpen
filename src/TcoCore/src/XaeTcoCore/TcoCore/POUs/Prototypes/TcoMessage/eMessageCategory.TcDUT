@@ -18,27 +18,27 @@ TYPE eMessageCategory :
 	(*~
 	<docu>
 		<summary>
+			Trace message to be used for tracing purpose.
+			Use when you need to track detailed information about internal states of the program for detailed visibility. 
+			This is lowest level of category that can be used in production, for detailed observation of PLC program.
+		</summary>
+	</docu>	
+	~*)
+	Trace := 100,		
+    (*~
+	<docu>
+		<summary>
 			Debug message to be used for debugging purpose only.
 			Use when you need to report debug information for you as programmer. 
 		</summary>
 	</docu>	
 	~*)		
-	Trace := 100,
+	Debug := 200,	
 	(*~
 	<docu>
 		<summary>
 			Info message.
 			Use when you want to deliver information to the user, that has only informative character and does not adversely affect a process.
-		</summary>
-	</docu>	
-	~*)	
-	Debug := 200,
-	(*~
-	<docu>
-		<summary>
-			Trace message to be used for tracing purpose.
-			Use when you need to track detailed information about internal states of the program for detailed visibility. 
-			This is lowest level of category that can be used in production, for detailed observation of PLC program.
 		</summary>
 	</docu>	
 	~*)	

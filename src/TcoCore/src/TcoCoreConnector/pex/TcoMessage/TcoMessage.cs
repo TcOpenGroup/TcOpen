@@ -1,14 +1,9 @@
 ﻿namespace TcoCore
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
-    using System.Threading.Tasks;
     using Vortex.Connector;
     using Vortex.Localizations.Abstractions;
-    using Vortex.Presentation;
 
     public partial class TcoMessage
     {
@@ -16,7 +11,16 @@
 
         private IsTcoObject _parentObject;
 
+
+        /// <summary>
+        /// Gets or sets context for orphaned messages that do not have a context.
+        /// <note:important>
+        /// Orphaned object messages should not exist in the TcOpen application. 
+        /// There must be only one context in the PLC application and this single context can be set to this property.
+        /// </note>
+        /// </summary>
         [IgnoreReflection]
+        [Obsolete("Used only for backward compatibility. TcOpen application should not have orphaned messages when structured properly.")]
         public static IsTcoContext OrphanedMessageContext { get; set; }
               
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)

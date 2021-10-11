@@ -16,7 +16,7 @@
       </Get>
     </Property>
     <Property Name="Logger" Id="{91272071-b19a-03f5-3de5-9c3c3bd730c9}">
-      <Declaration><![CDATA[PROPERTY Logger : REFERENCE TO TcoLogger]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Logger : ITcoLogger]]></Declaration>
       <Get Name="Get" Id="{ae232631-4e21-0df0-04f7-fbff5904e454}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

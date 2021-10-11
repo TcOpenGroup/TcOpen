@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 
 namespace TcoCore
-{
-
+{    
     public partial class PlainTcoMessage
     {
         string source;
@@ -112,11 +111,14 @@ namespace TcoCore
             }
         }
 
+        /// <summary>
+        /// Gets or sets raw text of this message (no translation, no interpolation).
+        /// </summary>
         public string Raw 
         {
             get => raw; 
         
-            set
+            internal set
             {
                 if (raw == value)
                 {

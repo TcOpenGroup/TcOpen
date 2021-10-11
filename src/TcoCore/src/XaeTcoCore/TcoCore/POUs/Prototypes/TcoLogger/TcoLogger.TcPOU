@@ -1,22 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoLogger EXTENDS TcoObject
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Default implementation of Logger.	
+				Message retrieval is realised with TcoLogger.Pop() in the extended twin object.					 
+			</summary>				
+		</docu>
+~*)
+FUNCTION_BLOCK TcoLogger EXTENDS TcoObject IMPLEMENTS ITcoLogger
 VAR
+	 (*~
+		<docu>
+			<summary>
+				Circural buffer for this logger.					 
+			</summary>				
+		</docu>
+    ~*)
 	_buffer : ARRAY[0..MAX_MESSAGE_BUFFER_INDEX] OF TcoLogItem;
+	(*~
+		<docu>
+			<summary>
+				Circular carred of of the message buffer. 					 
+			</summary>				
+		</docu>
+    ~*)
 	_plcCarret : INT;
+	(*~
+		<docu>
+			<summary>
+				Minimal log level. Only messages with higher serverity than this will be logged.				 
+			</summary>				
+		</docu>
+    ~*)
 	_minLoggingLevel : eMessageCategory := eMessageCategory.Notification;
 END_VAR
 
 VAR CONSTANT
+	(*~
+		<docu>
+			<summary>
+				Max number of buffered log entries. 				 
+			</summary>				
+		</docu>
+    ~*)
 	MAX_MESSAGE_BUFFER_INDEX : INT := 1000;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Push" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
-      <Declaration><![CDATA[METHOD Push : WORD
+    <Method Name="PushMessage" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
+      <Declaration><![CDATA[METHOD PushMessage : WORD
 VAR_INPUT
 	inMessage : TcoMessage;
 END_VAR

@@ -40,7 +40,7 @@ namespace TcoCore
         /// </summary>
         /// <param name="minLevelCategory">Sets the minimal logging level.</param>
         /// <param name="interLoopDelay">Sets the delay between retrievals of logs.</param>
-        public void StartLoggingMessages(eMessageCategory minLevelCategory, int interLoopDelay = 2)
+        public void StartLoggingMessages(eMessageCategory minLevelCategory, int interLoopDelay = 25)
         {
             this._minLoggingLevel.Synchron = (short)minLevelCategory;
 

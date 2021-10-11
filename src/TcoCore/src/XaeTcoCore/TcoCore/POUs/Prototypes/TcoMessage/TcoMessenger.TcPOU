@@ -29,10 +29,10 @@ VAR
 	~*)
 	_mime : TcoMessage;
 	_Parent : ITcoObject;
+	{attribute clr [ReadOnly()]}
 	_contextIdentity : ULINT;	
 	{attribute 'hide'}
-	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
-	_previousCycleMessageCount : INT;	
+	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;		
 END_VAR
 
 VAR CONSTANT
@@ -293,10 +293,10 @@ END_VAR
 			_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
 			_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
 			_mds[inMessage.PerCycleCount].Category := inMessage.Category;
-			_Parent.Context.Logger.Push(inMessage);		
+			_Parent.Context.Logger.PushMessage(inMessage);		
 		END_IF;
 	eMessengerLogMethod.Continuous:
-	    _Parent.Context.Logger.Push(inMessage);
+	    _Parent.Context.Logger.PushMessage(inMessage);
 END_CASE
 
 		]]></ST>
