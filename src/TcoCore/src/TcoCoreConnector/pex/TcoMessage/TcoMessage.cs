@@ -16,6 +16,7 @@
 
         private IsTcoObject _parentObject;
 
+        [IgnoreReflection]
         public static IsTcoContext OrphanedMessageContext { get; set; }
               
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
@@ -52,6 +53,7 @@
         private volatile object mutex = new object();
 
         private IVortexObject _indentityPersistence;
+        [IgnoreReflection]
         private IVortexObject IndentityPersistence
         {
             get
@@ -68,6 +70,8 @@
         }
 
         private ITranslator _translatorPersistence;
+
+        [IgnoreReflection]
         private ITranslator TranslatorPersistence
         {
             get
@@ -106,6 +110,7 @@
         /// <summary>
         /// Gets the message in plain .net type system (aka POCO object).
         /// </summary>
+        [IgnoreReflection]
         public PlainTcoMessage PlainMessage
         {
             get
@@ -129,10 +134,11 @@
                 return plain;
             }
         }
-        
+
         /// <summary>
         /// Gets the last known message content in plain .net type system (aka POCO object) with object retieved by identity.
         /// </summary>
+        [IgnoreReflection]
         public PlainTcoMessage LastKnownPlain
         {
             get
