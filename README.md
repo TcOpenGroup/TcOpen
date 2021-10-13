@@ -12,6 +12,8 @@
 [![NuGet](https://img.shields.io/nuget/v/TcOpen.Group.svg?style=flat)](https://www.nuget.org/packages/TcOpen.Group/)
 
 
+** Documentation in progress [here](https://docs.tcopengroup.org/)** 
+
 # TcOpen
 
 * [Why?](#why)
