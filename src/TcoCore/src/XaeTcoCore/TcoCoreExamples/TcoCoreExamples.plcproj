@@ -65,6 +65,12 @@
     <Compile Include="Examples\Implementation\TcoTask\TcoTask_DownCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Examples\Logger\LoggerContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Logger\LoggerUsage.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Examples\Manipulator\fbManipulatorAutomat.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -130,6 +136,7 @@
     <Folder Include="Examples\Implementation\TcoState" />
     <Folder Include="Examples\Implementation\TcoTask" />
     <Folder Include="Examples\Manipulator" />
+    <Folder Include="Examples\Logger" />
     <Folder Include="Examples\Recorder" />
     <Folder Include="Examples\Station_001" />
     <Folder Include="Examples\WaveForm" />

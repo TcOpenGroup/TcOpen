@@ -164,13 +164,20 @@ END_VAR
       </Get>
     </Property>
     <Property Name="Logger" Id="{b7d598a9-0e96-0b61-31ef-8d5c4839fc65}">
-      <Declaration><![CDATA[PROPERTY Logger : REFERENCE TO TcoLogger]]></Declaration>
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Gets logger for this context.			
+			</summary>			
+		</docu>	
+~*)
+PROPERTY PUBLIC Logger : ITcoLogger]]></Declaration>
       <Get Name="Get" Id="{a4f8c41e-1a3b-0fff-2759-b05dc4c3d947}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Logger REF= _logger;]]></ST>
+          <ST><![CDATA[Logger := _logger;]]></ST>
         </Implementation>
       </Get>
     </Property>

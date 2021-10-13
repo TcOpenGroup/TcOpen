@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoMessengerSettings" Id="{e6a12bea-a5ee-06da-38d8-d4f316d1c513}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL TcoMessengerSettings IMPLEMENTS ITcoMessengerSettings
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC TcoMessengerSettings IMPLEMENTS ITcoMessengerSettings
 VAR
 	_minLevel : eMessageCategory;
 	_isMessagingSuspended : BOOL;	
@@ -44,7 +44,16 @@ END_VAR
       </Get>
     </Property>
     <Property Name="MessageDigestMethod" Id="{8041cbc1-4471-0961-3423-4f31314a9d8e}">
-      <Declaration><![CDATA[PROPERTY MessageDigestMethod : eMessageDigestMethod]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets or sets message digest method. 
+			Message digest serves to fingerprint messages.
+			See also MessengerLoggingMethod.								
+		</summary>			
+	</docu>	
+~*)
+PROPERTY MessageDigestMethod : eMessageDigestMethod]]></Declaration>
       <Get Name="Get" Id="{b3f7f6bd-754b-0e4f-384a-efdba8dfe5c7}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -63,7 +72,15 @@ END_VAR
       </Set>
     </Property>
     <Property Name="MessengerLoggingMethod" Id="{ceb67f4f-5f48-0808-109b-9521842dfa6a}">
-      <Declaration><![CDATA[PROPERTY MessengerLoggingMethod : eMessengerLogMethod]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets or sets logging method. 
+			Logger can ingest messages continuously, on rising edge of a message or disable the logging.												
+		</summary>			
+	</docu>	
+~*)
+PROPERTY MessengerLoggingMethod : eMessengerLogMethod]]></Declaration>
       <Get Name="Get" Id="{5751a4db-5e4a-0098-31c4-ddb84e14601c}">
         <Declaration><![CDATA[VAR
 END_VAR

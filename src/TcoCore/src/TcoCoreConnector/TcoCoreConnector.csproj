@@ -19,6 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;PLC_DOCU</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DefineConstants>PLC_DOCU</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>PLC_DOCU</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.3-nightly.634" />

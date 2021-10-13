@@ -1,22 +1,136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoLogger EXTENDS TcoObject
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Default implementation of Logger.	
+				<note type="tip">
+					 This type is partially extended by IVF to retrieve messages from the logger in IVF application.			
+				</note>												 
+			</summary>		
+			<code>
+			   // Intializes message retrieval into applications logger
+				..._logger.StartLoggingMessages(eMessageCategory.All);
+			</code>
+			<code>
+				FUNCTION_BLOCK LoggerUsage EXTENDS TcoCore.TcoObject
+				VAR
+					_logger : TcoCore.TcoLogger(THIS^);
+					_counter : INT;
+				END_VAR
+				//---------------------------------------------
+				_counter := _counter + 1;
+				IF((_counter MOD 100) = 0) THEN
+					_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
+				END_IF;	
+			</code>		
+		</docu>
+~*)
+FUNCTION_BLOCK TcoLogger EXTENDS TcoObject IMPLEMENTS ITcoLogger
 VAR
+	 (*~
+		<docu>
+			<summary>
+				Circural buffer for this logger.					 
+			</summary>				
+		</docu>
+    ~*)
 	_buffer : ARRAY[0..MAX_MESSAGE_BUFFER_INDEX] OF TcoLogItem;
+	(*~
+		<docu>
+			<summary>
+				Circular carret of of the message buffer. 					 
+			</summary>				
+		</docu>
+    ~*)
 	_plcCarret : INT;
+	(*~
+		<docu>
+			<summary>
+				Minimal log level. Only messages with higher serverity than this will be logged.				 
+			</summary>				
+		</docu>
+    ~*)
 	_minLoggingLevel : eMessageCategory := eMessageCategory.Notification;
 END_VAR
 
 VAR CONSTANT
+	(*~
+		<docu>
+			<summary>
+				Max number of buffered log entries. 				 
+			</summary>				
+		</docu>
+    ~*)
 	MAX_MESSAGE_BUFFER_INDEX : INT := 1000;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Push" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
-      <Declaration><![CDATA[METHOD Push : WORD
+    <Method Name="Push" Id="{62e64ee2-abb0-0506-3e90-8aa51249918c}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `PushMessage`
+				<note:important>When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Push
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Message/log entry text.				 
+			</summary>				
+		</docu>
+	~*)
+	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	(*~
+		<docu>
+			<summary>
+				Message/log entry category.				 
+			</summary>				
+		</docu>
+	~*)
+	Category : eMessageCategory;
+END_VAR
+VAR
+	_tmpMessage : TcoMessage;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
+	_tmpMessage.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
+	_tmpMessage.Cycle := _Parent.Context.StartCycleCount;	
+END_IF;	
+		
+_tmpMessage.Text := Text;
+_tmpMessage.Identity := 0;
+_tmpMessage.Category := Category;		
+_tmpMessage.MessageDigest := 0;
+	
+
+PushMessage(_tmpMessage);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PushMessage" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `Push`
+				<note type="important">
+						This method is typically invoked from a `TcoMessenger`. 
+						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
+						For details see `TcoMessengerSettings`.
+				</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PushMessage 
 VAR_INPUT
 	inMessage : TcoMessage;
 END_VAR
