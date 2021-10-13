@@ -35,6 +35,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [SetUp]
         public void Setup()
         {
+            
         }
 
         [Test, Order(100)]
@@ -515,8 +516,10 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Arrange            
             suc._logger.MinLogLevelCategory = eMessageCategory.All;
             sut._category.Synchron = (short)category;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
             sut._messenger.Clear();
-            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
             suc._logger.Pop();
 
             //--Act
@@ -532,6 +535,67 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
         }
 
+        [Test, Order(1550)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut)]
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
+        public void T1550_MessageLoggerTest_continuous_add_to_buffer_check_that_duplicates(string messageText, eMessageCategory category)
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.Continuous;
+            sut._category.Synchron = (short)category;
+
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            //--Act
+            sut.SingleCycleRun(
+             () =>
+             {
+                 sut.Post(messageText);
+                 sut.Post(messageText);
+                 sut.Post(messageText);
+                 sut.Post(messageText);
+             });
+
+            sut.SingleCycleRun(
+            () =>
+            {
+                sut.Post(messageText);
+                sut.Post(messageText);
+                sut.Post(messageText);
+                sut.Post(messageText);
+            });
+
+            sut.SingleCycleRun(
+             () =>
+             {
+                 sut.Post(messageText);
+                 sut.Post(messageText);
+                 sut.Post(messageText);
+                 sut.Post(messageText);
+             });
+
+            var messages = suc._logger.Pop();
+
+            Assert.AreEqual(12, messages.Count());
+
+            foreach (var message in messages)
+            {                
+                Assert.AreEqual(category, message.CategoryAsEnum);
+                Assert.AreEqual(messageText, message.Text);
+            }          
+        }
+
         [Test, Order(1600)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
         [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
@@ -542,13 +606,16 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
         [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
         [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
-        public void T1600_MessageLoggerTest_add_to_buffer_check_that_no_duplicates(string messageText, eMessageCategory category)
+        public void T1600_MessageLoggerTest_on_event_risen_add_to_buffer_check_that_no_duplicates(string messageText, eMessageCategory category)
         {
             //--Arrange            
             suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
             sut._category.Synchron = (short)category;
+            
             sut._messenger.Clear();
-            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
             suc._logger.Pop();
 
             //--Act
@@ -585,13 +652,15 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
         [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
         [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
-        public void T1700_MessageLoggerTest_log_in_several_cycles_and_log_to_logger(string messageText, eMessageCategory category)
+        public void T1700_MessageLoggerTest_on_event_rised_log_in_several_cycles_and_log_to_logger(string messageText, eMessageCategory category)
         {
             //--Arrange            
             suc._logger.MinLogLevelCategory = eMessageCategory.All;
             sut._category.Synchron = (short)category;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
             sut._messenger.Clear();
-            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
             suc._logger.Pop();
 
             int mi = 0;
@@ -658,6 +727,94 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 Assert.AreEqual("this is the name of messenger test", DestructPayload<string>(msg.payload, "ParentName"));                
             }
         }
+
+        [Test, Order(1700)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut)]
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
+        public void T1700_MessageLoggerTest_none_log_in_several_cycles_and_log_to_logger(string messageText, eMessageCategory category)
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._category.Synchron = (short)category;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.NoLogging;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            int mi = 0;
+            //--Act
+            sut.SingleCycleRun(
+                () =>
+                sut.Post(messageText + (++mi).ToString()));
+
+            sut.SingleCycleRun(
+               () =>
+               sut.Post(messageText + (++mi).ToString()));
+
+            sut.SingleCycleRun(
+             () =>
+             sut.Post(messageText + (++mi).ToString()));
+
+            var messages = suc._logger.Pop().ToArray();
+            var message = messages.FirstOrDefault();
+
+
+            Assert.AreEqual(0, messages.Count());                     
+        }
+
+        [Test, Order(1750)]
+        [TestCase(eMessageDigestMethod.CRC8)]
+        [TestCase(eMessageDigestMethod.CRC16)]
+        [TestCase(eMessageDigestMethod.CRC32)]
+        [TestCase(eMessageDigestMethod.NONE)]
+        public void T1850_MessageDigestMethod_Set(eMessageDigestMethod mdMethod)
+        {
+            //--Arrange            
+            suc._tcoMessangerTests._messageDigestMethod.Synchron = (short)mdMethod;
+            sut.SingleCycleRun(() => { sut.SetMessageDigestMethod(); });
+
+            Assert.AreEqual(suc._settings._messenger._messageDigestMethod.Synchron, (short)mdMethod);
+        }
+
+        [Test, Order(1800)]
+        [TestCase(eMessageDigestMethod.CRC8, (uint)139)]
+        [TestCase(eMessageDigestMethod.CRC16, (uint)16986)]
+        [TestCase(eMessageDigestMethod.CRC32, (uint)4257669427)]
+        [TestCase(eMessageDigestMethod.NONE, (uint)0)]
+        public void T1950_message_calulates_digest(eMessageDigestMethod mdMethod, uint md)
+        {
+            //--Arrange            
+            suc._tcoMessangerTests._messageDigestMethod.Synchron = (short)mdMethod;
+            sut.SingleCycleRun(() => { sut.SetMessageDigestMethod(); });
+
+            sut.SingleCycleRun(
+               () =>
+               sut.Post("digets me"));
+
+            Assert.AreEqual(sut._messenger._mime.MessageDigest.Synchron, md);
+        }
+
+        [Test, Order(1900)]
+        [TestCase(eMessengerLogMethod.OnEventRisen)]
+        [TestCase(eMessengerLogMethod.Continuous)]
+        [TestCase(eMessageDigestMethod.NONE)]        
+        public void T1900_MessageLogginMethod_Set(eMessengerLogMethod logMethod)
+        {
+            //--Arrange            
+            suc._tcoMessangerTests._messageLoggingMethod.Synchron = (short)logMethod;
+            sut.SingleCycleRun(() => { sut.SetMessageLoggingMethod(); });
+
+            Assert.AreEqual(suc._settings._messenger._messengerLoggingMethod.Synchron, (short)logMethod);
+        }
+      
 
         private static T DestructPayload<T>(object payload, string propertyName)
         {

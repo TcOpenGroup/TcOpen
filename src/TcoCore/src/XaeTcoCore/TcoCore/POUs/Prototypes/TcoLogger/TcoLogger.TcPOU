@@ -51,8 +51,68 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="Push" Id="{62e64ee2-abb0-0506-3e90-8aa51249918c}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `PushMessage`
+				<note:important>When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Push
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Message/log entry text.				 
+			</summary>				
+		</docu>
+	~*)
+	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	(*~
+		<docu>
+			<summary>
+				Message/log entry category.				 
+			</summary>				
+		</docu>
+	~*)
+	Category : eMessageCategory;
+END_VAR
+VAR
+	_tmpMessage : TcoMessage;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
+	_tmpMessage.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
+	_tmpMessage.Cycle := _Parent.Context.StartCycleCount;	
+END_IF;	
+		
+_tmpMessage.Text := Text;
+_tmpMessage.Identity := 0;
+_tmpMessage.Category := Category;		
+_tmpMessage.MessageDigest := 0;
+	
+
+PushMessage(_tmpMessage);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="PushMessage" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
-      <Declaration><![CDATA[METHOD PushMessage : WORD
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `Push`
+				<note:important>
+						This method is typically invoked from a `TcoMessenger`. 
+						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
+						For details see `TcoMessengerSettings`.
+				</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PushMessage 
 VAR_INPUT
 	inMessage : TcoMessage;
 END_VAR

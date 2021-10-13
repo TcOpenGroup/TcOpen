@@ -57,7 +57,7 @@ namespace PlcHammer.Hmi.Blazor
             /*Json repositories for security*/
             var userRepo = SetUpUserRepositoryJson();
             var roleRepo = SetUpRoleRepositoryJson();
-
+                        
             services.AddVortexBlazorSecurity(userRepo, roleRepo);
 
             /*Json repositories for data*/
