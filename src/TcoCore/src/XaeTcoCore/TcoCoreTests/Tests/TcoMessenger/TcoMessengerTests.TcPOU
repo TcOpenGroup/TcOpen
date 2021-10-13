@@ -5,6 +5,8 @@
 VAR
 	_category : TcoCore.eMessageCategory;
 	_minLevel : TcoCore.eMessageCategory;
+	_messageDigestMethod : TcoCore.eMessageDigestMethod;
+	_messageLoggingMethod : TcoCore.eMessengerLogMethod;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -117,6 +119,26 @@ METHOD INTERNAL Resume
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Context.Environment.Messaging.Resume();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetMessageDigestMethod" Id="{f159a2ac-72e9-0d3d-2b2d-e8b8d72302e3}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetMessageDigestMethod
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.MessageDigestMethod := _messageDigestMethod;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetMessageLoggingMethod" Id="{97fd978e-924e-0e25-274f-3c8a2c023916}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL SetMessageLoggingMethod
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Context.Environment.Messaging.MessengerLoggingMethod := _messageLoggingMethod;
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetMinLevel" Id="{14062f88-3c36-0c8f-1769-35d9d0ae9a98}">

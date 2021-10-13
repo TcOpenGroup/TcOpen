@@ -19,21 +19,23 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF     
-    eTcoLoggerTests.Push:
-		_logger.Push(_msg);
+    eTcoLoggerTests.PushMessage:
+		_logger.PushMessage(_msg);
 		_msg.Identity := THIS^.Identity;
-	eTcoLoggerTests.PushMultiple:
+	eTcoLoggerTests.PushMessageMultiple:
 	FOR _index := 0 TO 1000 DO
 		_msg.Text :=_sb.Clear().Append('multiples').Append(':').Append(INT_TO_STRING(_index)).ToString();
 		_msg.Identity := THIS^.Identity;
-		_logger.Push(_msg);
+		_logger.PushMessage(_msg);
 	END_FOR		
-	eTcoLoggerTests.PushMultipleInMoreCycles:
+	eTcoLoggerTests.PushMessageMultipleInMoreCycles:
 	FOR _index := 0 TO _multiplesCount - 1 DO		
 		_msg.Text :=_sb.Clear().Append('multiples').Append(':').Append(INT_TO_STRING(_index)).ToString();
 		_msg.Identity := THIS^.Identity;
-		_logger.Push(_msg);
-	END_FOR			
+		_logger.PushMessage(_msg);
+	END_FOR		
+	eTcoLoggerTests.SimplePush :
+		_logger.Push(_msg.Text, _msg.Category); 		
 END_CASE
 
 _sut();]]></ST>

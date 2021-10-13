@@ -40,7 +40,7 @@ namespace TcoCore
         /// </summary>
         /// <param name="minLevelCategory">Sets the minimal logging level.</param>
         /// <param name="interLoopDelay">Sets the delay between retrievals of logs.</param>
-        public void StartLoggingMessages(eMessageCategory minLevelCategory, int interLoopDelay = 2)
+        public void StartLoggingMessages(eMessageCategory minLevelCategory, int interLoopDelay = 25)
         {
             this._minLoggingLevel.Synchron = (short)minLevelCategory;
 
@@ -120,7 +120,18 @@ namespace TcoCore
         {          
             foreach (var plain in messages)
             {
-                LogMessage(plain, new { Logger = this.Symbol, ParentSymbol = plain.ParentsObjectSymbol, ParentName = plain.ParentsHumanReadable, Cycle = plain.Cycle });               
+                LogMessage(plain, new { ControllerLogger = true,
+                                        Payload = new
+                                        {
+                                            PlcLogger = this.Symbol,
+                                            ParentSymbol = plain.ParentsObjectSymbol,
+                                            ParentName = plain.ParentsHumanReadable,
+                                            Cycle = plain.Cycle,
+                                            PlcTimeStamp = plain.TimeStamp,
+                                            Raw = plain.Raw,
+                                            Pcc = plain.PerCycleCount
+                                        }
+                                       });               
             }
         }
 

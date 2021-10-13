@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoLogger" Id="{d071ea9a-937d-0e9b-0516-2630d52c15ae}">
+    <Declaration><![CDATA[INTERFACE ITcoLogger
+]]></Declaration>
+    <Method Name="Push" Id="{e34d5e48-c1de-0f97-120e-809b61121fd7}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `PushMessage`
+				<note type="important">When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Push
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Message/log entry text.				 
+			</summary>				
+		</docu>
+	~*)
+	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	(*~
+		<docu>
+			<summary>
+				Message/log entry category.				 
+			</summary>				
+		</docu>
+	~*)
+	Category : eMessageCategory;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="PushMessage" Id="{6afeb59f-ffb8-063b-262f-968891194252}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `Push`
+				<note:important>
+						This method is typically invoked from a `TcoMessenger`. 
+						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
+						For details see `TcoMessengerSettings`.
+				</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PushMessage 
+VAR_INPUT
+	inMessage : TcoMessage;
+END_VAR
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

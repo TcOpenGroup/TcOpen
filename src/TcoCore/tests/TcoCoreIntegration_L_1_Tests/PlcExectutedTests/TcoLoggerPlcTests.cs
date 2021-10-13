@@ -37,7 +37,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
         }
 
-        [Test, Order((int)eTcoLoggerTests.Push)]
+        [Test, Order((int)eTcoLoggerTests.PushMessage)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
         [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
         [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
@@ -58,7 +58,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
 
             //Act
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.Push);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessage);
 
 
             tc._logger.LogMessages(tc._logger.Pop());
@@ -72,7 +72,44 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(TransleMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
         }
 
-        [Test, Order((int)eTcoLoggerTests.PushMultiple)]
+        [Test, Order((int)eTcoLoggerTests.PushMessage)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut)]
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
+        public void PushSimpleTest(string message, eMessageCategory category)
+        {
+            //Arrange
+            tc._msg.Text.Synchron = message;
+            tc._msg.Category.Synchron = (short)category;
+            tc._logger._plcCarret.Synchron = 0;
+            tc._logger.MinLogLevelCategory = category;
+            var index = tc._logger._plcCarret.Synchron;
+
+
+            //Act
+            tc.ExecuteProbeRun(3, (int)eTcoLoggerTests.SimplePush);
+
+            var msgs = tc._logger.Pop();
+            tc._logger.LogMessages(msgs);
+
+            Assert.AreEqual(3, msgs.Count());
+
+            //Assert
+            Assert.AreEqual(tc._msg.Text.Synchron, tc._logger._buffer[index].Text.Synchron);
+            Assert.AreEqual(tc._msg.Category.Synchron, tc._logger._buffer[index].Category.Synchron);
+
+            var logger = TcOpen.Inxton.TcoAppDomain.Current.Logger as DummyLoggerAdapter;
+            Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
+            Assert.AreEqual(TransleMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
+        }
+
+        [Test, Order((int)eTcoLoggerTests.PushMessageMultiple)]
         public void PushMultipleTest()
         {
             // Arrange
@@ -83,7 +120,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             // for (int i = 0; i < 10; i++)
             {
                 //Act
-                tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultiple);
+                tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultiple);
 
                 var sw = new System.Diagnostics.Stopwatch();
                 sw.Start();
@@ -105,7 +142,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
         }
 
-        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles)]
+        [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles)]
         public void PushMultipleInDistictCyclesTest_same_messages_in_consecutive_cycles()
         {
             tc._multiplesCount.Synchron = 25;
@@ -113,66 +150,66 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._msg.Category.Synchron = (short)eMessageCategory.Info;
             tc._logger.Pop();
 
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);            
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);            
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
 
             var actual = tc._logger.Pop();
 
             Assert.AreEqual(150, actual.Count());                                                          
         }
 
-        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 100)]
+        [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 100)]
         public void PushMultipleInDistictCyclesTest_same_messages_non_consecutive_cycles()
         {
             tc._multiplesCount.Synchron = 25;
             tc._logger.MinLogLevelCategory = eMessageCategory.Info;
             tc._msg.Category.Synchron = (short)eMessageCategory.Info;
 
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(10, 0);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(10, 0);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
 
             var actual = tc._logger.Pop();
 
             Assert.AreEqual(75, actual.Count());
         }
 
-        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 200)]
+        [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 200)]
         public void PushMultipleInDistictCyclesTest_same_messages_non_consecutive_cycles1()
         {
             tc._multiplesCount.Synchron = 25;
             tc._logger.MinLogLevelCategory = eMessageCategory.Info;
             tc._msg.Category.Synchron = (short)eMessageCategory.Info;
 
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             var actual = tc._logger.Pop();
             Assert.AreEqual(25, actual.Count());
 
           
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(10, 0);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
 
             actual = tc._logger.Pop();
             Assert.AreEqual(50, actual.Count());
 
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(1, 0);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(1, 0);
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
 
             actual = tc._logger.Pop();
             Assert.AreEqual(75, actual.Count());
         }
 
-        [Test, Order((int)eTcoLoggerTests.PushMultipleInMoreCycles + 300)]
+        [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 300)]
         [TestCase("This is (all) message", TcoCore.eMessageCategory.All, 12)]
         [TestCase("This is trace message", TcoCore.eMessageCategory.Trace, 11)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug, 10)]        
@@ -212,7 +249,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._multiplesCount.Synchron = 1;
                 tc._msg.Text.Synchron = msg.text;                                
                 tc._msg.Category.Synchron = (short)msg.cat;
-                tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMultipleInMoreCycles);
+                tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             }
             
             var actual = tc._logger.Pop();

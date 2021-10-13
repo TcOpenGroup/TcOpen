@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="LoggerUsage" Id="{d4d3f43f-687f-0bfd-104a-140bea309192}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LoggerUsage EXTENDS TcoCore.TcoObject
+VAR
+	_logger : TcoCore.TcoLogger(THIS^);
+	_counter : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_counter := _counter + 1;
+IF((_counter MOD 100) = 0) THEN
+	_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
+END_IF;	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
