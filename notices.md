@@ -787,7 +787,7 @@ https://github.com/serilog/serilog-sinks-console
    limitations under the License.
 
 
-# Serilog.Notepad
+# Serilog.Sinks.Notepad
 
 https://github.com/serilog-contrib/serilog-sinks-notepad
 
