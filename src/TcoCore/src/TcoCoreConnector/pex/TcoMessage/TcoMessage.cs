@@ -14,7 +14,7 @@
 
         /// <summary>
         /// Gets or sets context for orphaned messages that do not have a context.
-        /// <note:important>
+        /// <note type="important">
         /// Orphaned object messages should not exist in the TcOpen application. 
         /// There must be only one context in the PLC application and this single context can be set to this property.
         /// </note>

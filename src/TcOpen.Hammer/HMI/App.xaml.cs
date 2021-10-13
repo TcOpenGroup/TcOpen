@@ -10,6 +10,7 @@ using System.IO;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
+using Serilog;
 
 namespace HMI
 {
@@ -31,7 +32,7 @@ namespace HMI
 
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter()) // Sets the logger configuration (default reports only to console).
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration().WriteTo.Console().WriteTo.Notepad().MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
                 .SetSecurity(authenticationService)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);    // This is necessary for UI operation.            
@@ -41,7 +42,7 @@ namespace HMI
             
             Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
 
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
 
              //SetUpMongoDatabase();
             SetUpJsonRepositories();

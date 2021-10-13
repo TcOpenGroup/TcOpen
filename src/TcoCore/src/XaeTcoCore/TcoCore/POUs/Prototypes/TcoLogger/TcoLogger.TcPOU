@@ -5,8 +5,26 @@
 		<docu>
 			<summary>
 				Default implementation of Logger.	
-				Message retrieval is realised with TcoLogger.Pop() in the extended twin object.					 
-			</summary>				
+				<note type="tip">
+					 This type is partially extended by IVF to retrieve messages from the logger in IVF application.			
+				</note>												 
+			</summary>		
+			<code>
+			   // Intializes message retrieval into applications logger
+				..._logger.StartLoggingMessages(eMessageCategory.All);
+			</code>
+			<code>
+				FUNCTION_BLOCK LoggerUsage EXTENDS TcoCore.TcoObject
+				VAR
+					_logger : TcoCore.TcoLogger(THIS^);
+					_counter : INT;
+				END_VAR
+				//---------------------------------------------
+				_counter := _counter + 1;
+				IF((_counter MOD 100) = 0) THEN
+					_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
+				END_IF;	
+			</code>		
 		</docu>
 ~*)
 FUNCTION_BLOCK TcoLogger EXTENDS TcoObject IMPLEMENTS ITcoLogger
@@ -22,7 +40,7 @@ VAR
 	(*~
 		<docu>
 			<summary>
-				Circular carred of of the message buffer. 					 
+				Circular carret of of the message buffer. 					 
 			</summary>				
 		</docu>
     ~*)
@@ -104,7 +122,7 @@ PushMessage(_tmpMessage);]]></ST>
 			<summary>
 				Pushes the message to logging buffer.
 				See also `Push`
-				<note:important>
+				<note type="important">
 						This method is typically invoked from a `TcoMessenger`. 
 						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
 						For details see `TcoMessengerSettings`.

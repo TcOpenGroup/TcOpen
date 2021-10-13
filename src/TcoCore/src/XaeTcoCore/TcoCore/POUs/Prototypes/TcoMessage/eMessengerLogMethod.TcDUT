@@ -21,15 +21,17 @@ TYPE eMessengerLogMethod :
 	</docu>	
 	~*)
 	OnEventRisen := 100,
+	
 	(*~
 	<docu>
 		<summary>
 			Logs message continuosly with not filtering.
-			<note:important>This method may easily overrun the circular message buffer.</note> 									
+			<note type="important">This method may easily overrun the circular message buffer.</note> 									
 		</summary>			
 	</docu>	
 	~*)
 	Continuous := 200,
+	
 	(*~
 	<docu>
 		<summary>

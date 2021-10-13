@@ -9,7 +9,7 @@
 			<summary>
 				Pushes the message to logging buffer.
 				See also `PushMessage`
-				<note:important>When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
+				<note type="important">When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
 			</summary>				
 		</docu>
 ~*)

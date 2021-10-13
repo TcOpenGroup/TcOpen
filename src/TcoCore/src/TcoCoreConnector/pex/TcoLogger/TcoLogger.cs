@@ -120,7 +120,18 @@ namespace TcoCore
         {          
             foreach (var plain in messages)
             {
-                LogMessage(plain, new { Logger = this.Symbol, ParentSymbol = plain.ParentsObjectSymbol, ParentName = plain.ParentsHumanReadable, Cycle = plain.Cycle });               
+                LogMessage(plain, new { ControllerLogger = true,
+                                        Payload = new
+                                        {
+                                            PlcLogger = this.Symbol,
+                                            ParentSymbol = plain.ParentsObjectSymbol,
+                                            ParentName = plain.ParentsHumanReadable,
+                                            Cycle = plain.Cycle,
+                                            PlcTimeStamp = plain.TimeStamp,
+                                            Raw = plain.Raw,
+                                            Pcc = plain.PerCycleCount
+                                        }
+                                       });               
             }
         }
 
