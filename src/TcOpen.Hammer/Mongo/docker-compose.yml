@@ -1,11 +1,11 @@
 version: "3.9"
 services:
   mongodb:
-    image: mongo
+    image: romangrab/mongo_default_values
     container_name: mongodb
     volumes:
-      - HammerDataNew:/data/db
+      - HammerData:/data/db
     ports:
       - 27017:27017
 volumes:
-  HammerDataNew:
+  HammerData:
