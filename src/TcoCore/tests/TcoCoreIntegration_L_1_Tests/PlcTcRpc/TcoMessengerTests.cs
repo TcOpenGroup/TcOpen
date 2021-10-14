@@ -722,7 +722,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             {
                 Assert.AreEqual($"{messageText}{++mi} {{@sender}}", msg.message);
                 Assert.AreEqual(serverityDictionary[category], msg.serverity);
-                Assert.AreEqual("MAIN._tcoMessengerContextTest._logger", DestructPayload<string>(msg.payload, "Logger"));
+                Assert.AreEqual("MAIN._tcoMessengerContextTest._logger", DestructPayload<string>(msg.payload, "PlcLogger"));
                 Assert.AreEqual("MAIN._tcoMessengerContextTest._tcoMessangerTests", DestructPayload<string>(msg.payload, "ParentSymbol"));
                 Assert.AreEqual("this is the name of messenger test", DestructPayload<string>(msg.payload, "ParentName"));                
             }
@@ -820,7 +820,8 @@ namespace TcoCoreUnitTests.PlcTcRpc
         {
             try
             {
-                return (T)payload.GetType().GetProperty(propertyName).GetValue(payload);
+                var obj = payload.GetType().GetProperty("Payload").GetValue(payload);
+                return (T)obj.GetType().GetProperty(propertyName).GetValue(obj);
             }
             catch (Exception)
             {
