@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.2.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -26,7 +26,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{3F433F3D-9648-4FAC-AAFD-9FA134BFD44D}" Name="TcoCore" PrjFilePath="TcoCore\TcoCore.plcproj" TmcFilePath="TcoCore\TcoCore.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{3F433F3D-9648-4FAC-AAFD-9FA134BFD44D}" Name="TcoCore" PrjFilePath="TcoCore\TcoCore.plcproj" TmcFilePath="TcoCore\TcoCore.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCore\TcoCore.tmc">
 					<Name>TcoCore Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -46,7 +46,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{6D5BD0DF-0C04-46C3-A05C-0FC422597B46}" Name="TcoCoreTests" PrjFilePath="TcoCoreTests\TcoCoreTests.plcproj" TmcFilePath="TcoCoreTests\TcoCoreTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{6D5BD0DF-0C04-46C3-A05C-0FC422597B46}" Name="TcoCoreTests" PrjFilePath="TcoCoreTests\TcoCoreTests.plcproj" TmcFilePath="TcoCoreTests\TcoCoreTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreTests\TcoCoreTests.tmc">
 					<Name>TcoCoreTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -66,7 +66,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{2266F99A-9250-4E68-A8BB-FC036A975355}" Name="TcoCoreExamples" PrjFilePath="TcoCoreExamples\TcoCoreExamples.plcproj" TmcFilePath="TcoCoreExamples\TcoCoreExamples.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{2266F99A-9250-4E68-A8BB-FC036A975355}" Name="TcoCoreExamples" PrjFilePath="TcoCoreExamples\TcoCoreExamples.plcproj" TmcFilePath="TcoCoreExamples\TcoCoreExamples.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreExamples\TcoCoreExamples.tmc">
 					<Name>TcoCoreExamples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
