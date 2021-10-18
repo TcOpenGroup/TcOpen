@@ -1638,7 +1638,7 @@ External Setpoint Generation:
 			</SubItem>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="192.168.3.23.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="4" NonWinCpus="1">
 				<Cpu CpuId="3"/>
@@ -1651,7 +1651,7 @@ External Setpoint Generation:
 		</System>
 		<Motion>
 			<NC>
-				<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true" SafTaskInfo="256">
+				<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true" AmsNetId="192.168.3.23.1.1" SafTaskInfo="256">
 					<Name>NC-Task 1 SAF</Name>
 					<Vars VarGrpType="1" InsertType="1">
 						<Name>Inputs</Name>
