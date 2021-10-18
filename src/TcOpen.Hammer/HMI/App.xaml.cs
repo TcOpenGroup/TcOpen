@@ -1,16 +1,14 @@
 ﻿using PlcHammer;
 using PlcHammerConnector;
-using System;
-using System.Linq;
-using System.Windows;
-using TcOpen.Inxton.Data.MongoDb;
-using TcOpen.Inxton.Data.Json;
-using System.Reflection;
+using Serilog;
 using System.IO;
+using System.Reflection;
+using System.Windows;
 using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Data.Json;
+using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
-using Serilog;
 
 namespace HMI
 {
@@ -39,15 +37,15 @@ namespace HMI
 
             // Execute PLC connector operations.
             Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
-            
+
             Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
 
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
 
-             //SetUpMongoDatabase();
-            SetUpJsonRepositories();
+            SetUpMongoDatabase();
+            //SetUpJsonRepositories();
 
-            
+
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
@@ -56,7 +54,7 @@ namespace HMI
         {
             Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
             Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
-                  
+
             Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty.InitializeRepository(processTraceabiltyRepository);
             Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty.InitializeRemoteDataExchange();
 
@@ -73,8 +71,8 @@ namespace HMI
             {
                 Directory.CreateDirectory(repositoryDirectory);
             }
-        
-            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));            
+
+            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));
         }
 
         private static void SetUpJsonRepositories()
@@ -82,12 +80,12 @@ namespace HMI
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
             var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
 
-            if(!Directory.Exists(repositoryDirectory))
+            if (!Directory.Exists(repositoryDirectory))
             {
                 Directory.CreateDirectory(repositoryDirectory);
             }
-            
-            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
+
+            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));
             var processTraceabiltyRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "Traceability")));
             var technologyDataRepository = new JsonRepository<PlainStation001_TechnologicalSettings>(new JsonRepositorySettings<PlainStation001_TechnologicalSettings>(Path.Combine(repositoryDirectory, "TechnologicalSettings")));
 
@@ -99,12 +97,12 @@ namespace HMI
         {
             var mongoUri = "mongodb://localhost:27017";
             var databaseName = "Hammer";
-          
+
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
             var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
 
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
-        }   
+        }
     }
 }

@@ -26,22 +26,22 @@ END_VAR]]></Declaration>
     //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNCAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
-            THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
-            THIS^.Station.TechnologicalDataManager._data.AxisAcc,
-            THIS^.Station.TechnologicalDataManager._data.AxisDcc,
-            THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
+                THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+                THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+                THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+                THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
     //--------------------------------------------	
 END_IF;
 
 IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
     //--------------------------------------------
-    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);
     //--------------------------------------------	
 END_IF;
 
-IF (Step(50, TRUE, 'LOAD PRECESS SETTINGS')) THEN
+IF (Step(50, TRUE, 'LOAD RECIPE SETTINGS')) THEN
     //--------------------------------------------
-    StepCompleteWhen(Station.ProcessRecepie.Read('default').Done);
+    StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
     Station.ProductionData := Station.ProcessRecepie._data;
     //--------------------------------------------	
 END_IF;
@@ -99,10 +99,10 @@ IF (Step(425, _partPassedChecks, 'MOVE HORIZONTAL AXIS TO UNLOAD POSITION (PASSE
     //--------------------------------------------   
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.PassedPartsHorizontalPosition,
-            THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
-            THIS^.Station.TechnologicalDataManager._data.AxisAcc,
-            THIS^.Station.TechnologicalDataManager._data.AxisDcc,
-            THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
+                THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+                THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+                THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+                THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
     //--------------------------------------------	
 END_IF;
 
@@ -110,10 +110,10 @@ IF (Step(450, NOT _partPassedChecks, 'MOVE HORIZONTAL AXIS TO UNLOAD POSITION (F
     //--------------------------------------------   
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.FailedPartsHorizontalPosition,
-            THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
-            THIS^.Station.TechnologicalDataManager._data.AxisAcc,
-            THIS^.Station.TechnologicalDataManager._data.AxisDcc,
-            THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
+                THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+                THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+                THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+                THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
     //--------------------------------------------	
 END_IF;
 
@@ -195,5 +195,19 @@ END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <LineIds Name="Station001_AutomatMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_AutomatMode.Main">
+      <LineId Id="155" Count="140" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_AutomatMode.OnStepCompleted">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_AutomatMode.Station.Get">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
