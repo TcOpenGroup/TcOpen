@@ -35,14 +35,23 @@ END_IF;
 
 IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
     //--------------------------------------------
-    StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);
+	IF(Station.TechnologicalDataManager._data._EntityId = '') THEN
+		Station.TechnologicalDataManager.Messenger.Error('Technological settings not selected.');
+	ELSE
+		StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);	
+	END_IF
+    
     //--------------------------------------------	
 END_IF;
 
 IF (Step(50, TRUE, 'LOAD RECIPE SETTINGS')) THEN
     //--------------------------------------------
-    StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
-    Station.ProductionData := Station.ProcessRecepie._data;
+	IF(Station.ProcessRecepie._data._EntityId = '') THEN
+		Station.ProcessRecepie.Messenger.Error('Process settings not selected.');
+	ELSE
+		StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
+		Station.ProductionData := Station.ProcessRecepie._data;
+	END_IF	
     //--------------------------------------------	
 END_IF;
 
@@ -195,19 +204,5 @@ END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="Station001_AutomatMode">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_AutomatMode.Main">
-      <LineId Id="155" Count="140" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_AutomatMode.OnStepCompleted">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_AutomatMode.Station.Get">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,34 @@
+﻿<UserControl
+    x:Class="TcoCore.TcoRemoteTaskServiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCore"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    ToolTip="{Binding TcoRemoteTask.AttributeToolTip}">
+    <UserControl.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <d:UserControl.DataContext>
+        <local:TcoRemoteTaskViewModel />
+    </d:UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <local:TcoRemoteTaskView/>
+        <ScrollViewer
+            Grid.Row="1"
+            MaxHeight="50"
+            Margin="5,2">
+            <TextBlock
+                FontSize="12"
+                Text="{Binding TcoRemoteTask.RemoteExceptionDetails}"
+                TextWrapping="WrapWithOverflow"
+                Visibility="{Binding TcoRemoteTask._hasException.Cyclic, Converter={local:BoolToVisibilityConverter}}" />
+        </ScrollViewer>
+    </Grid>
+</UserControl>

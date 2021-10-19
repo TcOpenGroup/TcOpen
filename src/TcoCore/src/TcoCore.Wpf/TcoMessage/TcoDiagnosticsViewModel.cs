@@ -208,30 +208,18 @@
                 if (SelectedMessage != null)
                 {
                     var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity) as IVortexObject;
-
-
-                    switch (affectedObject)
-                    {
-                        case TcoComponent c:
-                            break;
-                        case TcoObject c:
-                            affectedObject = affectedObject?.GetParent<TcoComponent>();
-                            break;
-                        default:
-                            break;
-                    }
-
+                    IVortexObject affectedObjectsParent = null;
 
                     switch (affectedObject)
                     {
                         case TcoComponent c:
                             break;
                         case TcoObject c:
-                            affectedObject = affectedObject?.GetParent<TcoComponent>();
+                            affectedObjectsParent = affectedObject?.GetParent<TcoComponent>();
                             break;
                         default:
                             break;
-                    }
+                    }                   
 
                     if (affectedObject != null)
                     {
@@ -239,10 +227,15 @@
                         {
                             TcoAppDomain.Current.Dispatcher.Invoke(() =>
                             {
-                                if (Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObject.GetType()) != null)
+                                if (Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObject?.GetType()) != null)
                                 {
                                     affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObject);
                                 }
+                                else if(Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObjectsParent?.GetType()) != null)
+                                {
+                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObjectsParent);
+                                }
+
                             });
 
                         }
