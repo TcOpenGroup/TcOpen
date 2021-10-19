@@ -104,7 +104,8 @@ namespace TcoCore
                 {
                     this._hasException.Synchron = true;
                     this._exceptionMessage.Synchron = ex.ToString().Substring(0, 244);
-                    RemoteExecutionException = ex;                   
+                    RemoteExecutionException = ex;
+                    RemoteExceptionDetails = ex.ToString();
                     TcOpen.Inxton.TcoAppDomain.Current.Logger.Error($"Remote execution failure '{ex.ToString()}'", Logging.LogInfo.Create(this));
                     return;
                 }
@@ -137,6 +138,21 @@ namespace TcoCore
 
                 remoteExecutionException = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemoteExecutionException)));
+            }
+        }
+
+        string remoteExceptionDetails;
+
+        /// <summary>
+        /// Gets string representation of the current exception on this remote task.
+        /// </summary>
+        public string RemoteExceptionDetails
+        {
+            get => remoteExceptionDetails; 
+            private set
+            {
+                remoteExceptionDetails = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemoteExceptionDetails)));
             }
         }
 
