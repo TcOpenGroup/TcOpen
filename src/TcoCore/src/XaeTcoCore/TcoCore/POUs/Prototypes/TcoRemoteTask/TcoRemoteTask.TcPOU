@@ -45,14 +45,17 @@ END_VAR
         END_IF;
     END_IF
 	
-    IF (THIS^._hasException OR THIS^._exceptionMessage <> '') THEN
-        Messenger.Error('Remote execution produced an exception');
+    IF (THIS^._hasException OR THIS^._exceptionMessage <> '') THEN        
         _startSignature := '';
 		ThrowWhen(TRUE);
     END_IF;
 
     DoneWhen(_startSignature <> '' AND_THEN _startSignature = _doneSignarure);
-END_IF]]></ST>
+END_IF
+
+IF(THIS^._hasException) THEN
+	Messenger.Error(THIS^._exceptionMessage);
+END_IF;]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{1a44b54a-1c12-0ff2-33c6-1d29da8e202f}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL

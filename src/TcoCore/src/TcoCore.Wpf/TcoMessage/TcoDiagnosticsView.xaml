@@ -190,7 +190,7 @@
             </StackPanel>
         </Expander>
 
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="5" Height="150">
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="5" Height="150" Margin="5">
             <ContentControl Content="{Binding AffectedObjectPresentation}" />
         </ScrollViewer>
 

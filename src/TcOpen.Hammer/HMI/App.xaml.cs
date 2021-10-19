@@ -2,6 +2,7 @@
 using PlcHammerConnector;
 using Serilog;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using TcOpen.Inxton.Data;
@@ -22,28 +23,61 @@ namespace HMI
         /// </summary>
         public App()
         {
+            // Execute PLC connector operations.
+            Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
+            Entry.PlcHammer.Connector.BuildAndStart();          // Create connection, loads symbols, and fires cyclic operations.
 
-            //var authenticationService = SecurityManager.Create(SetUpUserRepository());
-            var authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+            // Ask about data repository type
+            System.Console.Write("What data repository shall we use? ([M]ongoDB, [J]son). Press enter for Json [J]: ");
+            var answer = System.Console.ReadLine().FirstOrDefault();
+            System.Console.WriteLine("Starting application with selected repository type.");
+
+
+            // Set-up users
+            IAuthenticationService authenticationService;
+            switch (answer)
+            {
+                case 'M':
+                    authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+                    break;
+                case 'J':
+                    authenticationService = SecurityManager.Create(SetUpJsonRepository());
+                    break;
+                default:
+                    authenticationService = SecurityManager.Create(SetUpJsonRepository());
+                    break;
+            }
+                        
             ISecurityManager securityManager = SecurityManager.Manager;
             securityManager.GetOrCreateRole(new Role("Service", "Maintenance"));
 
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration().WriteTo.Console().WriteTo.Notepad().MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                        .WriteTo.Console()        // This will write log into application console.  
+                                        .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
+                                        .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
-                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);    // This is necessary for UI operation.            
-
-            // Execute PLC connector operations.
-            Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
-
-            Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
-
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);              
+         
+            // Initialize logger
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
 
-            SetUpMongoDatabase();
-            //SetUpJsonRepositories();
+
+            // Set up data exchange
+            switch (answer)
+            {
+                case 'M':
+                    SetUpMongoDatabase();
+                    break;
+                case 'J':
+                    SetUpJsonRepositories();
+                    break;
+                default:
+                    SetUpJsonRepositories();
+                    break;
+            }
 
 
         }
@@ -62,7 +96,8 @@ namespace HMI
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
         }
 
-        private static IRepository<UserData> SetUpUserRepository()
+      
+        private static IRepository<UserData> SetUpJsonRepository()
         {
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
             var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");

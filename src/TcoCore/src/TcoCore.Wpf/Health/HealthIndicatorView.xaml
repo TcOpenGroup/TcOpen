@@ -28,9 +28,11 @@
         </Grid.ColumnDefinitions>
         <ToggleButton x:Name="toggleButton" 
                       Template="{DynamicResource ToggleMessageButton}">
-            <materialDesign:PackIcon Kind="Error"                                
-                                     Visibility="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToVisibilityConverter}}" 
-                                     Foreground="{Binding HighestSeverity, Converter={local:ActiveMessageHighestCategoryForegroundBrush}}"/>
+            <Grid  Visibility="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToVisibilityConverter}}" >
+                <materialDesign:PackIcon Kind="Error"                                                                        
+                                         Foreground="{Binding HighestSeverity, Converter={local:ActiveMessageHighestCategoryForegroundBrush}}"/>
+                <TextBlock Foreground="{Binding HighestSeverity, Converter={local:ActiveMessageHighestCategoryForegroundBrush}}" FontWeight="ExtraBold" Text="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToTrimmedCounterConverter}}" Margin="12,-9,-3,6"></TextBlock>
+            </Grid>
         </ToggleButton>
         <ContentControl Grid.Column="1" Visibility="{Binding ActiveMessagesCount, Converter={local:ActiveMessagesToVisibilityConverter}}">
             <materialDesign:Snackbar                
