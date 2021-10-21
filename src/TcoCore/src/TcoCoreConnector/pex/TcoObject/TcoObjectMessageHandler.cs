@@ -107,7 +107,7 @@ namespace TcoCore
                 return DescendingMessages.Where(p => p.IsActive);
             }
         }
-
+      
         string highestSeverityMessage;
         private int diagnosticsDepth = 15;
         

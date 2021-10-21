@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="RtcPrg" Id="{43316ab1-818f-0713-286a-feebd50c3336}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM INTERNAL RtcPrg
+    <Declaration><![CDATA[{attribute 'obsolete' := 'Should not be accessed from outside TcoCore library. Publicly accesible due to compatibility reasons.'} 
+PROGRAM PUBLIC RtcPrg
 VAR
 	{attribute 'hide'}
 	_RtcSynchParams						:	RtcSynchParams;			
@@ -57,7 +58,8 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Synchronize" Id="{5699a77f-786a-0cc0-0c86-53e2fe66a337}">
-      <Declaration><![CDATA[METHOD INTERNAL Synchronize
+      <Declaration><![CDATA[{attribute 'obsolete' := 'MUST NOT BE CALLED EXPLICITELY!!! Use TcoCore.TcoContext.RtcSynchronize() instead!!!'} 
+METHOD PUBLIC Synchronize
 VAR_INPUT
 	inRtcSynchParams	: RtcSynchParams;
 END_VAR
