@@ -246,7 +246,7 @@ METHOD PROTECTED OnEntry
 METHOD INTERNAL FINAL Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[_startCycleCount := _startCycleCount + 1;
-_rtc.Update();]]></ST>
+_rtc.UpdateInternal();]]></ST>
       </Implementation>
     </Method>
     <Property Name="RealTimeClock" Id="{0e8903d2-e271-0e74-274a-b8795daab1b3}">

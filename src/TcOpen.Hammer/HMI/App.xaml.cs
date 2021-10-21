@@ -10,6 +10,7 @@ using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
+using Serilog;
 
 namespace HMI
 {

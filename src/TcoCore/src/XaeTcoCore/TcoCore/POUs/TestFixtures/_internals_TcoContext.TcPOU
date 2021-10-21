@@ -45,7 +45,7 @@ METHOD PROTECTED FINAL _rtcUpdate
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._rtc.Update();]]></ST>
+        <ST><![CDATA[THIS^._rtc.UpdateInternal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearPlcCycleCounter" Id="{c583d8a3-29fc-0453-3825-9f103d525599}">
