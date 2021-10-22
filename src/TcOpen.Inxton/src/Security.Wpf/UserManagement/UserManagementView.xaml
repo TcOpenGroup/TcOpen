@@ -23,7 +23,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
-    <controls:PermissionBox Permissions="Administrator">
+    <!--<controls:PermissionBox Permissions="Administrator">-->
         <TabControl>
         <TabItem Header="{x:Static p:strings.CurrentUsers}">
             <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
@@ -40,5 +40,5 @@
             </ScrollViewer>
         </TabItem>
     </TabControl>
-    </controls:PermissionBox>
+    <!--</controls:PermissionBox>-->
 </UserControl>
