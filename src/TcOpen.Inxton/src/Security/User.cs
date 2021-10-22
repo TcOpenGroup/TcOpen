@@ -18,7 +18,7 @@ namespace TcOpen.Inxton.Local.Security
             NormalizedUserName = normalizer.NormalizeName(UserName);            
             Email = email;
             NormalizedEmail = normalizer.NormalizeEmail(email);       
-            Roles = roles.ToArray();
+            Roles = roles?.ToArray();
             Level = level;
             CanUserChangePassword = canUserChangePassword;            
         }
