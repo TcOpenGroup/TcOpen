@@ -34,7 +34,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         [SetUp]
         public void SetUp()
         {
-
+            tc._logger.InxtonLogger = null;
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessage)]
@@ -69,8 +69,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var logger = TcOpen.Inxton.TcoAppDomain.Current.Logger as DummyLoggerAdapter;
             Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
-            Assert.AreEqual(TransleMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
-        }
+            Assert.AreEqual(TranslateMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
+        }        
 
         [Test, Order((int)eTcoLoggerTests.PushMessage)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
@@ -106,7 +106,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var logger = TcOpen.Inxton.TcoAppDomain.Current.Logger as DummyLoggerAdapter;
             Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
-            Assert.AreEqual(TransleMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
+            Assert.AreEqual(TranslateMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultiple)]
@@ -143,7 +143,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles)]
-        public void PushMultipleInDistictCyclesTest_same_messages_in_consecutive_cycles()
+        public void PushMultipleInDistinctCyclesTest_same_messages_in_consecutive_cycles()
         {
             tc._multiplesCount.Synchron = 25;
             tc._logger.MinLogLevelCategory = eMessageCategory.Info;
@@ -163,7 +163,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 100)]
-        public void PushMultipleInDistictCyclesTest_same_messages_non_consecutive_cycles()
+        public void PushMultipleInDistinctCyclesTest_same_messages_non_consecutive_cycles()
         {
             tc._multiplesCount.Synchron = 25;
             tc._logger.MinLogLevelCategory = eMessageCategory.Info;
@@ -181,7 +181,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 200)]
-        public void PushMultipleInDistictCyclesTest_same_messages_non_consecutive_cycles1()
+        public void PushMultipleInDistinctCyclesTest_same_messages_non_consecutive_cycles1()
         {
             tc._multiplesCount.Synchron = 25;
             tc._logger.MinLogLevelCategory = eMessageCategory.Info;
@@ -259,7 +259,43 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             
         }
 
-        private string TransleMessageCategoryToLogCategory(eMessageCategory category)
+        [Test, Order(int.MaxValue)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut)]
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
+        public void PushCustomLoggerTest(string message, eMessageCategory category)
+        {
+            //Arrange
+            tc._msg.Text.Synchron = message;
+            tc._msg.Category.Synchron = (short)category;
+            tc._logger._plcCarret.Synchron = 0;
+            tc._logger.MinLogLevelCategory = category;
+            var index = tc._logger._plcCarret.Synchron;
+
+            var customLogger = new DummyLoggerAdapter();
+            tc._logger.InxtonLogger = customLogger;
+            //Act
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessage);
+
+
+            tc._logger.LogMessages(tc._logger.Pop());
+
+            //Assert
+            Assert.AreEqual(tc._msg.Text.Synchron, tc._logger._buffer[index].Text.Synchron);
+            Assert.AreEqual(tc._msg.Category.Synchron, tc._logger._buffer[index].Category.Synchron);
+
+            var logger = customLogger;
+            Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
+            Assert.AreEqual(TranslateMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
+        }
+
+        private string TranslateMessageCategoryToLogCategory(eMessageCategory category)
         {            
             switch (category)
             {              

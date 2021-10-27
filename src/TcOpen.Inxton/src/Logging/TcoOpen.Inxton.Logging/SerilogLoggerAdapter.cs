@@ -4,7 +4,7 @@
     using Serilog.Context;
     using TcOpen.Inxton.Logging;
 
-    public class SerilogAdapter : ITcoLogger
+    public class SerilogAdapter : ILogger
     {
         /// <summary>
         /// Creates new instance of Serilog logger.

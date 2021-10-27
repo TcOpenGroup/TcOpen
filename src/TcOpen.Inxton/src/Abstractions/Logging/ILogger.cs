@@ -3,7 +3,7 @@
     /// <summary>
     /// Provides abstraction for arbitrary logger implementation.
     /// </summary>
-    public interface ITcoLogger
+    public interface ILogger
     {
         /// <summary>
         /// Logs debug message. This should ne used only for debugging purpose and should not be active in production environment.

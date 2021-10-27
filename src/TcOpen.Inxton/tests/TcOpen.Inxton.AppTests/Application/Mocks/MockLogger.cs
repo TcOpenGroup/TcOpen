@@ -4,7 +4,7 @@ using TcOpen.Inxton.Logging;
 
 namespace TcOpen.Inxton.AppTests
 {
-    public class MockLogger : ITcoLogger
+    public class MockLogger : ILogger
     {
         public string LastLog { get; private set; }
         public void Debug<T>(string stringTemplate, T payload = default)

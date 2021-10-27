@@ -51,7 +51,7 @@ namespace TcOpen.Inxton
         /// <summary>
         /// Gets logger for this application.
         /// </summary>
-        public ITcoLogger Logger { get; internal set; } = new DummyLoggerAdapter();
+        public ILogger Logger { get; internal set; } = new DummyLoggerAdapter();
 
         /// <summary>
         /// Gets dispatcher for this application.

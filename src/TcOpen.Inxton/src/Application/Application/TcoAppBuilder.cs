@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="logger">Instance of a logger.</param>
         /// <returns>Application builder.</returns>
-        public TcoAppBuilder SetUpLogger(ITcoLogger logger)
+        public TcoAppBuilder SetUpLogger(ILogger logger)
         {
             Domain.Logger = logger;
             return this;
