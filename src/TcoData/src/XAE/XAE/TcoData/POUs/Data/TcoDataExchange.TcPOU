@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDataExchange" Id="{32f44bd8-796a-0ec8-0970-522f256b63cf}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataExchange EXTENDS TcoCore.TcoObject IMPLEMENTS ICrud
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataExchange EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoCrud
 VAR
     _createTask : TcoDataTask(THIS^);
     _readTask : TcoDataTask(THIS^);

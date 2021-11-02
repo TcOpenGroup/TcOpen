@@ -53,7 +53,7 @@ namespace TcoData
             }
 
             Changes.AddRange(DataObject.Changes);
-            ((IPlainCrudDataObject)plainObject).Changes.AddRange(Changes);
+            ((IPlainTcoEntity)plainObject).Changes.AddRange(Changes);
 
             Changes = new List<ValueChangeItem>();
         }
@@ -85,9 +85,9 @@ namespace TcoData
                 OldValue = "-Import end-"
             };
 
-            ((IPlainCrudDataObject)plainObject).Changes.Add(startImportTag);
+            ((IPlainTcoEntity)plainObject).Changes.Add(startImportTag);
             SaveObservedChanges(plainObject);
-            ((IPlainCrudDataObject)plainObject).Changes.Add(endImportTag);
+            ((IPlainTcoEntity)plainObject).Changes.Add(endImportTag);
 
         }
 

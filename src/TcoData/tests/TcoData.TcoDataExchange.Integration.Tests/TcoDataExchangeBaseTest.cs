@@ -27,14 +27,13 @@ namespace TcoDataUnitTests
 
             try
             {
-                sut.DataTests.DataManager.InitializeRemoteDataExchange();
+                sut.DataTests.DataManager.InitializeRemoteDataExchange();           
             }
             catch (Exception)
             {
                 //throw;
             }
-            
-
+          
             Entry.TcoDataTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
 
             sut.ExecuteProbeRun(10, (int)eDataTests.RestoreTasks);

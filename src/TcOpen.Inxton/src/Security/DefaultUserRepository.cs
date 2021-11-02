@@ -237,6 +237,9 @@
         {
             get { return this.GetRecords("*").AsQueryable(); }
         }
+
+        public OnCreateDelegate<T> OnCreate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public OnUpdateDelegate<T> OnUpdate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
 
