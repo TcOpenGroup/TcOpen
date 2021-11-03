@@ -145,6 +145,11 @@ namespace TcOpen.Inxton.Local.Security
         }
 
         public IRepository<UserData> UserRepository { get; }
+
+        /// <summary>
+        /// Gets weather the security manager is initialized.
+        /// </summary>
+        public static bool IsInitialized { get { return _manager != null; } }
     }
 
     public class SecurityManagerNotInitializedException : Exception

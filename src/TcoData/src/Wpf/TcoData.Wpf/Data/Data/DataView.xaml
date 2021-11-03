@@ -147,14 +147,13 @@
                                 Grid.Row="1"
                                 Padding="10"
                                 Header="{Binding DataExchange._data._EntityId.Shadow}">
-                                <ScrollViewer
+                                <ContentControl
                                     x:Name="EditData"
-                                    Padding="10"
-                                    IsVisibleChanged="ControlDataVisibilityChanged"
-                                    VerticalScrollBarVisibility="Auto"
+                                    Margin="10"
+                                    IsVisibleChanged="ControlDataVisibilityChanged"                                    
                                     Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}">
                                     <!--<vortex:RenderableContentControl DataContext="{Binding DataExchange._data}" PresentationType="ShadowControl"/>-->
-                                </ScrollViewer>
+                                </ContentControl>
                             </GroupBox>
                             <GroupBox
                                 Grid.Row="1"
@@ -162,7 +161,7 @@
                                 Header="{Binding DataExchange._data._EntityId.Shadow}"
                                 IsVisibleChanged="DisplayDataVisibilityChanged"
                                 Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-                                <ScrollViewer x:Name="DisplayData" VerticalScrollBarVisibility="Auto" />
+                                <ContentControl x:Name="DisplayData"/>
                             </GroupBox>
                         </Grid>
                         <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=NewCopy}">
