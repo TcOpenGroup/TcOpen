@@ -17,12 +17,12 @@ END_VAR]]></Declaration>
 {noflow}
 IF  index < lower THEN
 	CheckBounds := lower;
-	ADSLOGDINT(msgCtrlMask := ADSLOG_MSGTYPE_WARN,
+	ADSLOGDINT(msgCtrlMask := ADSLOG_MSGTYPE_ERROR,
                msgFmtStr   := sMessageLow,
                dintArg     := index);
 ELSIF  index > upper THEN
 	CheckBounds := upper;
-	 ADSLOGDINT(msgCtrlMask := ADSLOG_MSGTYPE_WARN,
+	 ADSLOGDINT(msgCtrlMask := ADSLOG_MSGTYPE_ERROR,
                msgFmtStr   := sMessageHigh,
                dintArg     := index);
 ELSE  
