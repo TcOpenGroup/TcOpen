@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22" TcVersionFixed="true">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -1406,7 +1406,7 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{C4F42FBB-B167-8971-725D-0086D85856A4}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">AI_ChannelStatus</Name>
+			<Name GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">AI_ChannelStatus</Name>
 			<BitSize>128</BitSize>
 			<SubItem>
 				<Name>UnderRange</Name>
@@ -1516,31 +1516,6 @@ External Setpoint Generation:
 					</Property>
 				</Properties>
 			</SubItem>
-			<Method>
-				<Name>__GetInterfaceReference</Name>
-				<ReturnType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</ReturnType>
-				<ReturnBitSize>8</ReturnBitSize>
-				<Parameter>
-					<Name>nInterfaceId</Name>
-					<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-					<BitSize>32</BitSize>
-				</Parameter>
-				<Parameter>
-					<Name>pRef</Name>
-					<Type GUID="{18071995-0000-0000-0000-000000000007}" PointerTo="2">DWORD</Type>
-					<BitSize>64</BitSize>
-				</Parameter>
-			</Method>
-			<Method>
-				<Name>__GetInterfacePointer</Name>
-				<ReturnType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</ReturnType>
-				<ReturnBitSize>8</ReturnBitSize>
-				<Parameter>
-					<Name>pRef</Name>
-					<Type GUID="{18071995-0000-0000-0000-000000000007}" PointerTo="2">DWORD</Type>
-					<BitSize>64</BitSize>
-				</Parameter>
-			</Method>
 			<Properties>
 				<Property>
 					<Name>PouType</Name>
@@ -1839,7 +1814,7 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Status</Name>
-							<Type GUID="{C4F42FBB-B167-8971-725D-0086D85856A4}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
+							<Type GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
 						</Var>
 						<Var>
 							<Name>TcoIoBeckhoff.IO._EL3001.WcState._WcState</Name>
