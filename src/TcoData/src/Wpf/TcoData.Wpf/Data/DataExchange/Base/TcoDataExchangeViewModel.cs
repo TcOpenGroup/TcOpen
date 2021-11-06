@@ -77,7 +77,7 @@ namespace TcoData
 
                     if (DataPropertyInfo == null)
                     {
-                        throw new Exception($"{dataExchangeObject.GetType().ToString()} must implement member '_data' that inherits from {nameof(Entity)} or {nameof(TcoEntity)} for STRUCT type and FUCNTION_BLOCK type respectively.");
+                        throw new Exception($"{dataExchangeObject.GetType().ToString()} must implement member '_data' that inherits from {nameof(TcoEntity)}.");
                     }
 
                     var dataOfType = DataPropertyInfo.PropertyType.Name;

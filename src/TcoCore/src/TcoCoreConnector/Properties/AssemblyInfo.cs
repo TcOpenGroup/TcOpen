@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("TcOpen.Inxton.TcoCore.VMTests")]
 [assembly: InternalsVisibleTo("TcoCoreUnitTests")]
+[assembly: InternalsVisibleTo("TcoCoreIntegration_L_1_Tests")]
 
 
 

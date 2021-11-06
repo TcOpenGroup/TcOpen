@@ -15,6 +15,17 @@ namespace TcOpen.Inxton.Data
     public abstract class RepositoryBase<T> : IRepository<T>, IRepository where T : IBrowsableDataObject
     {
         /// <summary>
+        /// Gets or sets delegate that executes prior to new entry into repository.
+        /// </summary>
+        public OnCreateDelegate<T> OnCreate { get; set; }
+
+        /// <summary>
+        /// Gets or sets delegate that executes prior to updating existing record.
+        /// </summary>
+        public OnUpdateDelegate<T> OnUpdate { get; set; }
+
+
+        /// <summary>
         /// Creates a new record/document in the repository. (Concrete implementation of given repository type)
         /// </summary>
         /// <param name="identifier">Unique identifier of the record/repository</param>
@@ -77,6 +88,8 @@ namespace TcOpen.Inxton.Data
 
         private volatile object mutex = new object();
 
+        
+
         /// <summary>
         /// Creates a new record/document in the repository.
         /// </summary>
@@ -95,8 +108,7 @@ namespace TcOpen.Inxton.Data
                     }
 
                     data._EntityId = identifier;
-                    data._Created = DateTimeProviders.DateTimeProvider.Now;
-                    data._Modified = data._Created;
+                    OnCreate?.Invoke(identifier, data);
                 }
 
                 CreateNvi(identifier, data);
@@ -134,7 +146,7 @@ namespace TcOpen.Inxton.Data
                             $"Value passed as 'identifier' must be the same as the value contained in the '_id' member of the data object.");
                     }
 
-                    data._Modified = DateTimeProviders.DateTimeProvider.Now;
+                    OnUpdate?.Invoke(identifier, data);
                 }
 
                 UpdateNvi(identifier, data);

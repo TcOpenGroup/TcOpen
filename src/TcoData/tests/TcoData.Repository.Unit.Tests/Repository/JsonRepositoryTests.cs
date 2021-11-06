@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
+using System;
 using System.IO;
 using System.Reflection;
 using TcoData.Repository.Json;
+using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
 
 namespace TcoDataUnitTests
@@ -20,6 +22,9 @@ namespace TcoDataUnitTests
 
             this.repository = Repository.Factory<DataTestObject>(new JsonRepositorySettings<DataTestObject>(outputDir));
             this.repository_altered_structure = Repository.Factory<DataTestObjectAlteredStructure>(new JsonRepositorySettings<DataTestObjectAlteredStructure>(outputDir));
+
+            this.repository.OnCreate = (id, data) => { data._Created = DateTimeProviders.DateTimeProvider.Now; data._Modified = DateTimeProviders.DateTimeProvider.Now; };
+            this.repository.OnUpdate = (id, data) => { data._Modified = DateTimeProviders.DateTimeProvider.Now; };
         }
     }
 }

@@ -502,7 +502,7 @@ namespace TcoData
                 {
                     this.RequeryCommands();
                     ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
-                    ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainCrudDataObject)selectedRecord).Changes;
+                    ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainTcoEntity)selectedRecord).Changes;
                     Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
                 }
 

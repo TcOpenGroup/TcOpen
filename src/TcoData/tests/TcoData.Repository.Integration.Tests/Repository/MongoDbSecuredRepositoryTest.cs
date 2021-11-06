@@ -1,4 +1,6 @@
-﻿    using TcOpen.Inxton.Data.MongoDb;
+﻿using System;
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Data.MongoDb;
 
 namespace TcoDataUnitTests
 {
@@ -15,6 +17,9 @@ namespace TcoDataUnitTests
                 this.repository = Repository.Factory<DataTestObject>(parameters);
 
                 this.repository_altered_structure = Repository.Factory<DataTestObjectAlteredStructure>(parametersAltered);
+
+                this.repository.OnCreate = (id, data) => { data._Created = DateTimeProviders.DateTimeProvider.Now; data._Modified = DateTimeProviders.DateTimeProvider.Now; };
+                this.repository.OnUpdate = (id, data) => { data._Modified = DateTimeProviders.DateTimeProvider.Now; };
             }
 
             foreach (var item in this.repository.GetRecords("*"))

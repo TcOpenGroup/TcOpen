@@ -2,9 +2,8 @@
 
 namespace TcoData
 {
-    public interface IPlainCrudDataObject
+    public interface IPlainTcoEntity
     {
         List<ValueChangeItem> Changes { get; set; }
-         
     }
 }

@@ -8,9 +8,9 @@ namespace TcoData
     /// <summary>
     /// Interaction logic for fbDataExchangeControlView.xaml
     /// </summary>
-    public partial class fbDataExchangeRecipeSelectorView : UserControl
+    public partial class TcoDataExchangeSimpleSelectorView : UserControl
     {
-        public fbDataExchangeRecipeSelectorView()
+        public TcoDataExchangeSimpleSelectorView()
         {
             InitializeComponent();
         }
@@ -21,16 +21,16 @@ namespace TcoData
         }
 
         public static readonly DependencyProperty ModelObjectProperty =
-            DependencyProperty.Register("ModelObject", typeof(TcoDataExchangeDisplayView), typeof(fbDataExchangeRecipeSelectorView),
+            DependencyProperty.Register("ModelObject", typeof(TcoDataExchangeDisplayView), typeof(TcoDataExchangeSimpleSelectorView),
                 new PropertyMetadata(default(TcoDataExchangeDisplayView), new PropertyChangedCallback(ModelObjectChanged)));
 
         private static void ModelObjectChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var uc = ((fbDataExchangeRecipeSelectorView)obj);
+            var uc = ((TcoDataExchangeSimpleSelectorView)obj);
 
             if (uc.ModelObject != null)
             {
-                uc.DataContext = new fbDataExchangeRecipeSelectorViewModel() { Model = uc.ModelObject };
+                uc.DataContext = new TcoDataExchangeSimpleSelectorViewModel() { Model = uc.ModelObject };
             }
         }
 
@@ -46,13 +46,13 @@ namespace TcoData
         {
             try
             {
-                if (this.Visibility == Visibility.Visible && _context is fbDataExchangeRecipeSelectorViewModel)
+                if (this.Visibility == Visibility.Visible && _context is TcoDataExchangeSimpleSelectorViewModel)
                 {
                     var maxNumberOfRecipies = 50;
-                    var currentLimit = ((fbDataExchangeRecipeSelectorViewModel)_context).DataViewModel.Limit;
-                    ((fbDataExchangeRecipeSelectorViewModel)_context).DataViewModel.Limit = maxNumberOfRecipies;
-                    ((fbDataExchangeRecipeSelectorViewModel)_context).DataViewModel.FillObservableRecords();
-                    ((fbDataExchangeRecipeSelectorViewModel)_context).DataViewModel.Limit = currentLimit;
+                    var currentLimit = ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.Limit;
+                    ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.Limit = maxNumberOfRecipies;
+                    ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.FillObservableRecords();
+                    ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.Limit = currentLimit;
 
                 }
             }

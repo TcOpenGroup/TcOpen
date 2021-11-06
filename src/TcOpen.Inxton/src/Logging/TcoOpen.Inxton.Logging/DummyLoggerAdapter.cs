@@ -8,7 +8,7 @@ namespace TcOpen.Inxton.Logging
     /// Default logger implementation with no real logging capability. 
     /// Provides an empty implementation of logging for the framework when no other logger created.    
     /// </summary>
-    public class DummyLoggerAdapter : ITcoLogger
+    public class DummyLoggerAdapter : ILogger
     {
         [Obsolete("This property is only for testing. Do not queue messages in production!")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]

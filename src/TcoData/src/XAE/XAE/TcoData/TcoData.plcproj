@@ -27,16 +27,13 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Data\Entity.TcDUT">
+    <Compile Include="POUs\Data\TcoEntity.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Data\ICrud.TcIO">
+    <Compile Include="POUs\Data\ITcoCrud.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Data\TcoDataExchange.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Data\TcoEntity.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Data\TcoDataTask.TcPOU">
