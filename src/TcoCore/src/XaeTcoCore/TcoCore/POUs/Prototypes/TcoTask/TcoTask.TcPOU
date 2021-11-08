@@ -219,6 +219,7 @@ END_IF]]></ST>
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY Busy : BOOL]]></Declaration>
       <Get Name="Get" Id="{8f8c846a-c9aa-466c-935b-9e12824ad3d1}">
         <Declaration><![CDATA[]]></Declaration>
@@ -314,6 +315,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
         <Declaration><![CDATA[]]></Declaration>
@@ -357,6 +359,7 @@ END_IF;
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY PUBLIC ElapsedTime : TIME]]></Declaration>
       <Get Name="Get" Id="{37071e73-80b0-05b2-2967-dfec5fd00ceb}">
         <Declaration><![CDATA[VAR
@@ -377,6 +380,7 @@ END_VAR
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY Enabled : BOOL]]></Declaration>
       <Get Name="Get" Id="{9aa3b2c1-9f99-04c6-3cf4-c6d7f309e4a7}">
         <Declaration><![CDATA[]]></Declaration>
@@ -400,6 +404,7 @@ PROPERTY Enabled : BOOL]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY Error : BOOL]]></Declaration>
       <Get Name="Get" Id="{eb85279c-0a0c-4237-8276-5bfcb6048a3c}">
         <Declaration><![CDATA[]]></Declaration>
@@ -615,6 +620,7 @@ METHOD PROTECTED OnError
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY Ready : BOOL]]></Declaration>
       <Get Name="Get" Id="{04c8ad1e-96d0-0ca0-18be-e96b69bf6ccb}">
         <Declaration><![CDATA[]]></Declaration>
@@ -652,6 +658,7 @@ Restore := THIS^;
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'monitoring' := 'variable'}
 PROPERTY State : eTaskState]]></Declaration>
       <Get Name="Get" Id="{82443da9-5de9-08b3-3738-5a4d96d29a35}">
         <Declaration><![CDATA[]]></Declaration>
