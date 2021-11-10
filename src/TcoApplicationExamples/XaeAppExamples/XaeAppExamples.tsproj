@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{732480A7-5392-0A1F-50AB-897A82278634}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..15] OF BOOL</Name>
@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{CBB44910-D138-4D2E-8A51-F7350E5E822D}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{CBB44910-D138-4D2E-8A51-F7350E5E822D}" TargetNetId="172.20.10.104.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -20,7 +20,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcAppExamples\PlcAppExamples.tmc">
 					<Name>PlcAppExamples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
