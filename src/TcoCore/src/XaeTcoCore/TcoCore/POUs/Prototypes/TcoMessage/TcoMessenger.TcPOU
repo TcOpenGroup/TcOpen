@@ -36,7 +36,7 @@ VAR
 END_VAR
 
 VAR CONSTANT
-	MDS_MAX_INDEX : INT := 20;
+	MDS_MAX_INDEX : INT := 10;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -276,16 +276,9 @@ END_VAR
 		FOR _index := 0 TO MDS_MAX_INDEX DO
 			IF(_mds[_index].Cycle = inMessage.Cycle - 1 OR _mds[_index].Cycle = inMessage.Cycle) 
 			AND_THEN (_mds[_index].Digest = inMessage.MessageDigest)
-			AND_THEN (_mds[_index].Category = inMessage.Category) THEN
-			
-				IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
-					_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
-					_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
-					_mds[inMessage.PerCycleCount].Category := inMessage.Category;			
-				END_IF;	
-				
-				RETURN;
-				
+			AND_THEN (_mds[_index].Category = inMessage.Category) THEN			
+			    _mds[_index].Cycle := inMessage.Cycle;				
+				RETURN;				
 			END_IF	
 		END_FOR
 		
