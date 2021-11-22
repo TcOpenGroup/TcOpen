@@ -46,7 +46,7 @@
                 _context = GetContext();
                 if (_context != null)
                 {
-                    retval = this.Cycle.LastValue >= _context.LastStartCycleCount;
+                    retval = this.Cycle.LastValue >= (_context.LastStartCycleCount - (ulong)(this.Connector.ReadWriteCycleDelay * 2));
                 }
 
                 return retval;
