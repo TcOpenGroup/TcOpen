@@ -409,9 +409,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
         {
             //--Arrange
             var messageText = "this is a message";
+            sut._minLevel.Synchron = (short)eMessageCategory.All;
+            sut.GetConnector().ReadWriteCycleDelay = 10;
 
             //--Act
-            sut.SingleCycleRun(() => sut.Catastrophic(messageText));
+            sut.SingleCycleRun(() => { sut.Resume(); sut.Catastrophic(messageText); });
 
             var handler = sut.GetParent<TcoMessengerContextTest>()?.MessageHandler;
 
@@ -421,20 +423,23 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
-            sut.SingleCycleRun(() => Console.WriteLine("a"));
+            sut.MultipleCycleRun(() => { }, (ushort)(sut.GetConnector().ReadWriteCycleDelay * 4));
 
             sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
 
             Assert.IsFalse(sut._messenger._mime.IsActive);
+
+            sut.GetConnector().ReadWriteCycleDelay = 100;
         }
 
-        [Test, Order(1400)]
+        [Test, Order(1400)]        
         public void T813_SuspendResumeTest()
         {
             //--Arrange
             var messageText = "this is a message";
             sut.SingleCycleRun(() => Console.WriteLine("Empty cycle"));
+            sut.GetConnector().ReadWriteCycleDelay = 10;
 
             //--Act
 
@@ -442,6 +447,8 @@ namespace TcoCoreUnitTests.PlcTcRpc
             sut.SingleCycleRun(() => sut.Suspend());
 
             sut.SingleCycleRun(() => sut.Catastrophic(messageText));
+
+            sut.MultipleCycleRun(() => { }, (ushort)(sut.GetConnector().ReadWriteCycleDelay * 5));
 
             sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
@@ -456,11 +463,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
             var handler = sut.GetParent<TcoMessengerContextTest>()?.MessageHandler;
 
             handler.DiagnosticsDepth = 1000;
-
+            
             handler.GetActiveMessages();
+
+            sut.MultipleCycleRun(() => { }, (ushort)(sut.GetConnector().ReadWriteCycleDelay * 5));
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
 
+            sut.GetConnector().ReadWriteCycleDelay = 100;
         }
 
         [Test, Order(1400)]
@@ -469,6 +479,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Arrange
             var messageText = "this is a message";
             sut.SingleCycleRun(() => Console.WriteLine("Empty cycle"));
+            sut.GetConnector().ReadWriteCycleDelay = 10;
 
             //--Act
 
@@ -487,8 +498,10 @@ namespace TcoCoreUnitTests.PlcTcRpc
             // post info
             sut.SingleCycleRun(() => sut.Info(messageText));
 
-            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
+            sut.MultipleCycleRun(() => { }, (ushort)(sut.GetConnector().ReadWriteCycleDelay * 5));
 
+            sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
+            
             Assert.IsFalse(sut._messenger._mime.IsActive);
 
 
@@ -499,6 +512,8 @@ namespace TcoCoreUnitTests.PlcTcRpc
             sut.GetParent<TcoMessengerContextTest>()?.MessageHandler.GetActiveMessages();
 
             Assert.IsTrue(sut._messenger._mime.IsActive);
+
+            sut.GetConnector().ReadWriteCycleDelay = 100;
         }
 
         [Test, Order(1500)]
