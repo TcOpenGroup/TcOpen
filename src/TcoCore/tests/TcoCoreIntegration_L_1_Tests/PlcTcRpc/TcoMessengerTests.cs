@@ -940,6 +940,67 @@ namespace TcoCoreUnitTests.PlcTcRpc
            
         }
 
+        [Test, Order(2200)]
+        public void T2200_MessengerLoggerTest_bug_on_event_logging_repeats_messages_when_order_changes()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+
+            //--Act
+            sut.SingleCycleRun(
+                () =>
+                {
+                    sut._category.Synchron = (short)eMessageCategory.Trace;
+                    sut.Post($"this is message '{sut._category.Synchron}'");
+
+                    sut._category.Synchron = (short)eMessageCategory.Info;
+                    sut.Post($"this is message '{sut._category.Synchron}'");
+
+                    sut._category.Synchron = (short)eMessageCategory.Error;
+                    sut.Post($"this is message '{sut._category.Synchron}'");
+                });
+
+
+            Assert.AreEqual(3, suc._logger.Pop().Count());
+
+            sut.MultipleCycleRun(
+                () =>
+                {
+                    sut._category.Synchron = (short)eMessageCategory.Trace;
+                    sut.Post($"this is message '{sut._category.Synchron}'");                  
+
+                    sut._category.Synchron = (short)eMessageCategory.Error;
+                    sut.Post($"this is message '{sut._category.Synchron}'");
+                }, 5);
+
+            Assert.AreEqual(0, suc._logger.Pop().Count());
+
+           
+
+            sut.SingleCycleRun(
+               () =>
+               {
+                   sut._category.Synchron = (short)eMessageCategory.Trace;
+                   sut.Post($"this is message '{sut._category.Synchron}'");
+
+                   sut._category.Synchron = (short)eMessageCategory.Info;
+                   sut.Post($"this is message '{sut._category.Synchron}'");
+
+                   sut._category.Synchron = (short)eMessageCategory.Error;
+                   sut.Post($"this is message '{sut._category.Synchron}'");
+               });
+
+            var messages = suc._logger.Pop();
+            Assert.AreEqual(1, messages.Count());
+
+        }
+
         private static T DestructPayload<T>(object payload, string propertyName)
         {
             try
