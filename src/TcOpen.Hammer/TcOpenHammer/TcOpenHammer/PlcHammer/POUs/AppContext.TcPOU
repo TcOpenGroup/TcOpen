@@ -20,7 +20,8 @@ END_VAR]]></Declaration>
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_station001();]]></ST>
+        <ST><![CDATA[THIS^.RtcSynchronize(TRUE, '', 60);
+_station001();]]></ST>
       </Implementation>
     </Method>
   </POU>
