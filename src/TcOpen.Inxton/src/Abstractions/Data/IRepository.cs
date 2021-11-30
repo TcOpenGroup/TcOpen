@@ -3,6 +3,10 @@ using System.Linq;
 
 namespace TcOpen.Inxton.Data
 {
+    public delegate void OnCreateDelegate<T>(string id, T data);
+    public delegate void OnUpdateDelegate<T>(string id, T data);
+    public delegate IEnumerable<DataItemValidation> ValidateDataDelegate<T>(T data);
+
     public interface IRepository
     {
         long Count { get; }
@@ -13,15 +17,11 @@ namespace TcOpen.Inxton.Data
         dynamic Read(string identifier);
         void Update(string identifier, object data);
     }
-
-    public delegate void OnCreateDelegate<T>(string id, T data);
-    public delegate void OnUpdateDelegate<T>(string id, T data);
-
+       
     public interface IRepository<T> where T : IBrowsableDataObject
     {
         long Count { get; }
         IQueryable<T> Queryable { get; }
-
         void Create(string identifier, T data);
         void Delete(string identifier);
         bool Exists(string identifier);
@@ -31,5 +31,6 @@ namespace TcOpen.Inxton.Data
         void Update(string identifier, T data);
         OnCreateDelegate<T> OnCreate { get; set; }
         OnUpdateDelegate<T> OnUpdate { get; set; }
+        ValidateDataDelegate<T> OnRecordUpdateValidation { get; set; }
     }
 }
