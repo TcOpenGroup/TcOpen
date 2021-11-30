@@ -104,6 +104,11 @@ namespace TcOpen.Inxton.Data.InMemory
             return this.Records.Where(p => p.Key.Contains(id)).LongCount();
         }
 
+        protected override bool ExistsNvi(string identifier)
+        {
+            return this.Records.Any(p => p.Key == identifier);
+        }
+
         public override IQueryable<T> Queryable { get { return this._repository.AsQueryable().Select(p => p.Value); } }
     }    
 }

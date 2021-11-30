@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoExistsTask" Id="{ec29d82c-42e7-05da-1463-9c768d234341}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoExistsTask EXTENDS TcoDataTask
+VAR
+	_exists : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Property Name="Exists" Id="{bb96b594-86d1-0ee3-3dec-35210736ed0b}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
+PROPERTY Exists : BOOL]]></Declaration>
+      <Get Name="Get" Id="{376ffdd7-7453-0cd0-1692-fe1d9365ec51}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Exists := _exists;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

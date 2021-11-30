@@ -13,32 +13,22 @@ namespace TcoData
         public TcoDataExchangeSimpleSelectorView()
         {
             InitializeComponent();
-        }
-        public TcoDataExchangeDisplayView ModelObject
-        {
-            get { return (TcoDataExchangeDisplayView)GetValue(ModelObjectProperty); }
-            set { SetValue(ModelObjectProperty, value); }
+            this.DataContextChanged += TcoDataExchangeSimpleSelectorView_DataContextChanged;
         }
 
-        public static readonly DependencyProperty ModelObjectProperty =
-            DependencyProperty.Register("ModelObject", typeof(TcoDataExchangeDisplayView), typeof(TcoDataExchangeSimpleSelectorView),
-                new PropertyMetadata(default(TcoDataExchangeDisplayView), new PropertyChangedCallback(ModelObjectChanged)));
-
-        private static void ModelObjectChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private void TcoDataExchangeSimpleSelectorView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var uc = ((TcoDataExchangeSimpleSelectorView)obj);
-
-            if (uc.ModelObject != null)
+            if(!(DataContext is TcoDataExchangeSimpleSelectorViewModel) && DataContext is TcoDataExchange)
             {
-                uc.DataContext = new TcoDataExchangeSimpleSelectorViewModel() { Model = uc.ModelObject };
+                this.DataContext = new TcoDataExchangeSimpleSelectorViewModel() { Model = DataContext };
             }
         }
-
-        private dynamic _context
+       
+        private TcoDataExchangeSimpleSelectorViewModel _context
         {
             get
             {
-                return this.DataContext;
+                return this.DataContext as TcoDataExchangeSimpleSelectorViewModel;
             }
         }
 
@@ -46,13 +36,16 @@ namespace TcoData
         {
             try
             {
+                if (this.DataContext == null)
+                    return;
+
                 if (this.Visibility == Visibility.Visible && _context is TcoDataExchangeSimpleSelectorViewModel)
                 {
                     var maxNumberOfRecipies = 50;
-                    var currentLimit = ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.Limit;
-                    ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.Limit = maxNumberOfRecipies;
-                    ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.FillObservableRecords();
-                    ((TcoDataExchangeSimpleSelectorViewModel)_context).DataViewModel.Limit = currentLimit;
+                    var currentLimit = _context.DataViewModel.Limit;
+                    _context.DataViewModel.Limit = maxNumberOfRecipies;
+                    _context.DataViewModel.FillObservableRecords();
+                    _context.DataViewModel.Limit = currentLimit;
 
                 }
             }

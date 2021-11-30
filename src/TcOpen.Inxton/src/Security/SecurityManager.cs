@@ -58,7 +58,7 @@ namespace TcOpen.Inxton.Local.Security
             {
                 _manager = new SecurityManager(repository);
             }
-
+            
             return _manager.Service;
         }
 

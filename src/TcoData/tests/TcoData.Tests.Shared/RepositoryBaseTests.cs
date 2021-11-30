@@ -135,22 +135,29 @@ namespace TcoDataUnitTests
         }
 
         [Test()]
-        public void DeleteTest()
+        public void ExistsTest_inexisting()
         {
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo to delete", DateOfBirth = DateTime.Now, Age = 15 };
-            var id = $"toDelete{Guid.NewGuid()}";
-
-            repository.Create(id, testObject);
-            Assert.AreEqual(1, repository.GetRecords(id).Count());
-
-            System.Threading.Thread.Sleep(100);
-
+            var id = $"Idonotexist{Guid.NewGuid()}";
+                                    
             //-- Act
-            repository.Delete(id);
+            var actual = repository.Exists(id);
 
             //-- Assert
-            Assert.AreEqual(0, repository.GetRecords(id).Count());
+            Assert.IsFalse(actual);
+        }
+
+        [Test()]
+        public void ExistsTest_existing()
+        {
+            //-- Arrange
+            var id = $"Idoexist{Guid.NewGuid()}";
+            repository.Create(id, new DataTestObject());
+            //-- Act
+            var actual = repository.Exists(id);
+
+            //-- Assert
+            Assert.IsTrue(actual);
         }
 
         [Test()]

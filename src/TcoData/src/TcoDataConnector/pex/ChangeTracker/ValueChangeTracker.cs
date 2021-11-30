@@ -28,7 +28,16 @@ namespace TcoData
 
         private void LogShadowChanges(IValueTag valueTag, object original, object newValue)
         {
-            var userName = "no user";
+            var userName = "";
+            try
+            {
+                userName = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name;
+            }
+            catch
+            {
+                userName = "!failed to determine user!";    
+            }
+            
 
             Changes.Add(new ValueChangeItem()
             {
@@ -44,7 +53,7 @@ namespace TcoData
         {
             foreach (var change in Changes)
             {
-                Vortex.Framework.Abstractions.Journal.Journaling.Journal.DataValueChangeTracking(VortexObject, plainObject._EntityId, change.ValueTag.HumanReadable, change.ValueTag.Symbol, change.OldValue, change.NewValue);
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{change.UserName}' changed value of '{change.ValueTag.Symbol}' from '{change.OldValue}' to '{change.NewValue}' {{@payload}}", change);                
             }
 
             if (DataObject.Changes == null)

@@ -132,6 +132,11 @@ namespace TcOpen.Inxton.Data.MongoDb
             }
         }
 
+        protected override bool ExistsNvi(string identifier)
+        {
+            return RecordExists(identifier);
+        }
+
         protected override long CountNvi => collection.CountDocuments(p => true);
 
         public IMongoCollection<T> Collection => this.collection;

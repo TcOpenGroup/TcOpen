@@ -58,6 +58,12 @@ namespace TcOpen.Inxton.Data
         protected abstract long CountNvi { get; }
 
         /// <summary>
+        /// Checks that the record with given identifier exists in the repostory.
+        /// </summary>
+        /// <param name="identifier">Entity id to check for existence.</param>
+        protected abstract bool ExistsNvi(string identifier);
+
+        /// <summary>
         /// Retrieves records/documents that contain given string in the identifier. (Concrete implementation of given repository type)
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of records/documents.</param>
@@ -88,7 +94,13 @@ namespace TcOpen.Inxton.Data
 
         private volatile object mutex = new object();
 
-        
+        public bool Exists(string identifier)
+        {
+            lock (mutex)
+            {
+                return ExistsNvi(identifier);
+            }
+        }
 
         /// <summary>
         /// Creates a new record/document in the repository.
@@ -107,7 +119,7 @@ namespace TcOpen.Inxton.Data
                         identifier = DataHelpers.CreateUid().ToString();
                     }
 
-                    data._EntityId = identifier;
+                    data._EntityId = identifier.Trim();
                     OnCreate?.Invoke(identifier, data);
                 }
 
