@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -276,10 +277,27 @@ namespace TcoData
             a.CopyShadowToPlain(((dynamic)DataExchange)._data);
             string info = $"{this.DataExchange.Symbol} {a._EntityId}";
             Vortex.Presentation.Wpf.ActionRunner.Runner.Execute(() =>
-            {
+            {                                 
                 CrudDataObject?.ChangeTracker.SaveObservedChanges(a);
-                DataBrowser.UpdateRecord(a);
-                FillObservableRecords();
+                var validationErrrors = new StringBuilder();
+                var validations = DataBrowser.UpdateRecord(a);
+                var validationFailed = false;
+                foreach (DataItemValidation validationItem in validations)
+                {
+                    if(validationItem.Failed)
+                    {
+                        validationErrrors.AppendLine($"{validationItem.Error}");
+                        validationFailed = true;
+                    }
+                } 
+
+                if(validationFailed)
+                {
+                    MessageBox.Show($"Some data is not valid: {validationErrrors}", "Data validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                FillObservableRecords();                
                 this.Mode = ViewMode.Display;           
             }, info,
             () => MessageBox.Show($"{strings.WouldYouLikeToUpdateRecord} '{a._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);

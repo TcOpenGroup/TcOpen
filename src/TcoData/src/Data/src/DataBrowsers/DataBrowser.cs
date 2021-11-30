@@ -9,7 +9,7 @@ using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Data
-{
+{   
     public class DataBrowser<T> : IDataBrowser where T  : IBrowsableDataObject, new()
     {
         public DataBrowser(IRepository<T> repository)
@@ -57,9 +57,15 @@ namespace TcOpen.Inxton.Data
         public IEnumerable<T> FindByCreatedRange(DateTime start, DateTime end) { return null; }
         public IEnumerable<T> FindByModifiedRange(DateTime start, DateTime end) { return null; }
         public void AddRecord(T data) { Repository.Create((data)._EntityId, data); }
-        public void UpdateRecord(T data)
-        {            
-            Repository.Update(((IBrowsableDataObject)data)._EntityId, data);
+       
+        public IEnumerable<DataItemValidation> UpdateRecord(T data)
+        {
+            var validations = this.Repository.OnRecordUpdateValidation(data);
+            if (!validations.Any(p => p.Failed))
+            { 
+                Repository.Update(((IBrowsableDataObject)data)._EntityId, data);
+            }
+            return validations;
         }
         public void Delete(T data) { Repository.Delete(((IBrowsableDataObject)data)._EntityId); }
         public long Count { get { return this.Repository.Count; } }        
@@ -92,7 +98,8 @@ namespace TcOpen.Inxton.Data
             this.Delete((T)data);
         }
         IList<object> IDataBrowser.Records { get { return this.Records.ToList().ConvertAll(p => (object)p); } }
-        long IDataBrowser.Count { get { return this.Count; } }        
+        long IDataBrowser.Count { get { return this.Count; } }       
+
         object IDataBrowser.CreateEmpty()
         {
             return new T();
