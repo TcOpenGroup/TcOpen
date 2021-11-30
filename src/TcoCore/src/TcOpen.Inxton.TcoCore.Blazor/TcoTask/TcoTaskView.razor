@@ -1,42 +1,41 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoTaskViewModel>
-@namespace TcoCore 
+@namespace TcoCore
 
 <div class="d-flex flex-nowrap">
-    @*<button @onclick="() => ViewModel.Component.Execute(null)"
-            type="button"
-            class="@ButtonState"
-            disabled="@ViewModel.IsDisabled">
-        @ButtonCaption
-    </button>*@
+
 
     @if (IsTaskRunning)
     {
-        @*<button type="button"
-                class="p-2"
-                style="background-color: transparent; border: none;"
-                @onclick="() => ViewModel.Component.Abort.Execute(null)">
-            <i class="far fa-times-circle"></i>
-        </button>*@
-
-        <button class="btn btn-primary" type="button" @onclick="() => ViewModel.Component.Abort.Execute(null)">
-        <i class="far fa-times-circle"></i>
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-         @ButtonCaption
+        <button class="btn @ButtonClass " type="button" @onclick="@ExecuteTask">
+            <span class="far fa-times-circle"></span>
+            <span>@ButtonCaption</span>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         </button>
-    } else
+    }
+    else
     {
-        <button class="btn btn-primary" type="button" disabled="@ViewModel.IsDisabled" @onclick="() => ViewModel.Component.Execute(null)">
-         @ButtonCaption
+        <button class="btn @ButtonClass" type="button" disabled="@ViewModel.IsDisabled" @onclick="@ExecuteTask">
+            <span class="far fa-times-circle invisible"></span>
+            <span>@ButtonCaption</span>
+            <span class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="true"></span>
         </button>
     }
 
-    @*is error*@
-    @if (ViewModel.Component._taskState.Synchron == 30)
-    {
-        <button type="button"
-                class="btn btn-danger"
-                @onclick="() => ViewModel.Component.Restore.Execute(null)">
-            <i class="far fa-times-circle"></i>
-        </button>
-    }
+
 </div>
+
+@code{
+    public string StatusClass => ViewModel.Component._taskState.Synchron == 30 ? "btn-danger" : "btn-primary";
+
+    public bool IsError => ViewModel.Component._taskState.Synchron == 30;
+
+    public string ButtonClass => IsError ? "btn-danger" : "btn-primary";
+
+    public Action ExecuteTask => ViewModel.Component._taskState.Cyclic switch
+    {
+        (short)eTaskState.Ready => () => ViewModel.Component.Execute(null),
+        (short)eTaskState.Error => () => ViewModel.Component.Restore.Execute(null),
+        (short)eTaskState.Busy => () => ViewModel.Component.Abort.Execute(null),
+        (short)eTaskState.Requested => () => { }
+    };
+}

@@ -250,6 +250,7 @@
 
         public OnCreateDelegate<T> OnCreate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public OnUpdateDelegate<T> OnUpdate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ValidateDataDelegate<T> OnRecordUpdateValidation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
 
