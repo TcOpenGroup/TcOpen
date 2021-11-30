@@ -169,6 +169,11 @@ namespace TcOpen.Inxton.Data.Json
             }
         }
 
+        protected override bool ExistsNvi(string identifier)
+        {
+            return RecordExists(identifier);
+        }
+
         public override IQueryable<T> Queryable
         {
             get { return this.GetRecords("*").AsQueryable(); }

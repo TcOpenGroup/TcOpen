@@ -231,6 +231,16 @@
         }
 
         /// <summary>
+        /// Returns true when the record with given id exists.
+        /// </summary>
+        /// <param name="identifier">Idenfifier to seatch for.</param>
+        /// <returns></returns>
+        public bool Exists(string identifier)
+        {
+            return RecordExists(identifier);
+        }
+
+        /// <summary>
         /// Retrurn <see cref="IQueryable{T}"/> of this repository.
         /// </summary>
         public IQueryable<T> Queryable

@@ -103,7 +103,9 @@ namespace TcoData
 
         private void CancelEdit()
         {
-            this.Mode = ViewMode.Display;           
+            this.Mode = ViewMode.Display;
+            // Clears canceled changes
+            ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)SelectedRecord);
         }
 
 

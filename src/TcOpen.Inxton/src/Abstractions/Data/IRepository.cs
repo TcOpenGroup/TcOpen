@@ -8,6 +8,7 @@ namespace TcOpen.Inxton.Data
         long Count { get; }
         void Create(string identifier, object data);
         void Delete(string identifier);
+        bool Exists(string identifier);
         long FilteredCount(string id);
         dynamic Read(string identifier);
         void Update(string identifier, object data);
@@ -23,6 +24,7 @@ namespace TcOpen.Inxton.Data
 
         void Create(string identifier, T data);
         void Delete(string identifier);
+        bool Exists(string identifier);
         long FilteredCount(string id);
         IEnumerable<T> GetRecords(string identifier = "*", int limit = 100, int skip = 0);
         T Read(string identifier);
