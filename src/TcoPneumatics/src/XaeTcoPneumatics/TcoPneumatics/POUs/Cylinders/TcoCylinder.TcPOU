@@ -66,6 +66,80 @@ END_IF
 SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);]]></ST>
     </Implementation>
     <Folder Name="Tasks" Id="{2c49a519-7477-00ef-0cce-12b7d5ee9e41}" />
+    <Method Name="AbortMoveHome" Id="{47e4576d-3c08-01cc-0965-20c209cad595}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Aborts the movement to home position when the condition is 'true'.
+		</summary>
+		<remarks>			
+				<note type="warning">
+					The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCylinder.
+				</note>
+		</remarks>	
+	</docu>
+~*)
+METHOD AbortMoveHome : BOOL
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Condition to abort the movement of the cylinder.
+		</summary>	
+	</docu>
+	~*)
+	inoDisableCondition : BOOL;
+END_VAR
+VAR
+	_signalInfo : TcoSignalInfo;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND inoDisableCondition THEN
+	_signalInfo := GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+	Messenger.Error(CONCAT('<#Movement aborted due to#> : ' , _signalInfo.SymbolPath));
+	_toHomePos := FALSE;
+	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
+	_moveHomeDefault.Abort();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AbortMoveWork" Id="{9c09b925-4ae8-044b-2972-72392d722888}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Aborts the movement to work position when the condition is 'true'.
+		</summary>
+		<remarks>			
+				<note type="warning">
+					The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCylinder.
+				</note>
+		</remarks>	
+	</docu>
+~*)
+METHOD AbortMoveWork : BOOL
+VAR_IN_OUT
+	(*~
+		<docu>
+			<summary>
+				Condition to abort the movement of the cylinder.
+			</summary>	
+		</docu>
+	~*)
+	inoDisableCondition : BOOL;
+END_VAR
+VAR
+	_signalInfo : TcoSignalInfo;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
+	_signalInfo := GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+	Messenger.Error(CONCAT('<#Movement aborted due to#> : ' , _signalInfo.SymbolPath));
+	_toWorkPos := FALSE;
+	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
+	_moveWorkDefault.Abort();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Config" Id="{4900e490-aca6-01f6-34b5-8e88d5861bd7}">
       <Declaration><![CDATA[(*~
 	<docu>
