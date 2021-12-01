@@ -6,14 +6,13 @@ using System.Security;
 using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data
-
-{
+{    
     /// <summary>
     /// Base class for data repositories.
     /// </summary>
     /// <typeparam name="T">Type of data object.</typeparam>
     public abstract class RepositoryBase<T> : IRepository<T>, IRepository where T : IBrowsableDataObject
-    {
+    {       
         /// <summary>
         /// Gets or sets delegate that executes prior to new entry into repository.
         /// </summary>
@@ -23,7 +22,33 @@ namespace TcOpen.Inxton.Data
         /// Gets or sets delegate that executes prior to updating existing record.
         /// </summary>
         public OnUpdateDelegate<T> OnUpdate { get; set; }
+        
+        /// <summary>
+        /// Gets or set validation delegate for updating data in this repository.
+        /// </summary>
+        /// <remarks>			
+		///		<note type = "warning" >
+        ///           Validation condition is executed only upon update from the user interface.
+        ///           Direct call of <see cref="Update(string, T)"/> does not validate the data.
+        ///           The data are also not validate when called from TcoCore.TcoRemoteTask/>
+		///		</note>
+		/// </remarks>
+        /// <example>      
+        ///       repository.OnRecordUpdateValidation = (data) => 
+        ///       {
+        ///           return new DataValidation[]
+        ///               {
+        ///                   new DataValidation($"'{nameof(data.sampleData.SampleInt)}' must be greater than 0", data.sampleData.SampleInt <= 0),
+        ///                   new DataValidation($"'{nameof(data.sampleData.SampleInt2)}' must be less than 0", data.sampleData.SampleInt2 > 0)
+        ///               };
+        ///        };
+        /// </example>
+        public ValidateDataDelegate<T> OnRecordUpdateValidation
+        {
+            get;
+            set;
 
+        } = (data) => new DataItemValidation[] { };
 
         /// <summary>
         /// Creates a new record/document in the repository. (Concrete implementation of given repository type)
@@ -58,6 +83,12 @@ namespace TcOpen.Inxton.Data
         protected abstract long CountNvi { get; }
 
         /// <summary>
+        /// Checks that the record with given identifier exists in the repostory.
+        /// </summary>
+        /// <param name="identifier">Entity id to check for existence.</param>
+        protected abstract bool ExistsNvi(string identifier);
+
+        /// <summary>
         /// Retrieves records/documents that contain given string in the identifier. (Concrete implementation of given repository type)
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of records/documents.</param>
@@ -88,7 +119,13 @@ namespace TcOpen.Inxton.Data
 
         private volatile object mutex = new object();
 
-        
+        public bool Exists(string identifier)
+        {
+            lock (mutex)
+            {
+                return ExistsNvi(identifier);
+            }
+        }
 
         /// <summary>
         /// Creates a new record/document in the repository.
@@ -107,7 +144,7 @@ namespace TcOpen.Inxton.Data
                         identifier = DataHelpers.CreateUid().ToString();
                     }
 
-                    data._EntityId = identifier;
+                    data._EntityId = identifier.Trim();
                     OnCreate?.Invoke(identifier, data);
                 }
 

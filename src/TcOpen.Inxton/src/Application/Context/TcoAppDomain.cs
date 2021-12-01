@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Logging;
-using TcOpen.Inxton.Logging;
+using TcOpen.Inxton.Security;
 using TcOpen.Inxton.Threading;
 
 namespace TcOpen.Inxton
@@ -63,5 +63,7 @@ namespace TcOpen.Inxton
         /// Gets application builder.
         /// </summary>
         public TcoAppBuilder Builder { get; private set; }
+
+        public IAuthenticationService AuthenticationService { get; internal set; }
     }
 }

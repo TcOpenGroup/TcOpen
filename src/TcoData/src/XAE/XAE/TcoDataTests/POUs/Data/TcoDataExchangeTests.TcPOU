@@ -24,6 +24,16 @@ DataManager.Data.Cu_1.A_Check_1.ProcessedData.Minimum := 5;
 Create := DataManager.Create(Identifier).Done;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="CreateOrUpdate" Id="{35734850-fb71-07e0-3907-4ed8f0a63a8b}">
+      <Declaration><![CDATA[METHOD CreateOrUpdate : BOOL
+VAR_INPUT
+	Identifier : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CreateOrUpdate := DataManager.CreateOrUpdate(Identifier).Done;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Delete" Id="{3979100b-b6b6-0c55-2d35-8b5c7cef75d0}">
       <Declaration><![CDATA[METHOD Delete : BOOL
 VAR_INPUT
@@ -43,6 +53,16 @@ END_VAR
         <ST><![CDATA[DeleteDataWithInvalidId := DataManager
 	.Delete(ULINT_TO_STRING(Context.RealTimeClock.TickClock()))
 	.Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ExistsTest" Id="{386a9f57-46e3-0930-346d-7e37c4042182}">
+      <Declaration><![CDATA[METHOD ExistsTest : BOOL
+VAR_INPUT
+	inIdentifier : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ExistsTest := THIS^.DataManager.Exists(inIdentifier).Done;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Read" Id="{a1ee9ccc-477d-0bc3-3bb7-036c9555282b}">

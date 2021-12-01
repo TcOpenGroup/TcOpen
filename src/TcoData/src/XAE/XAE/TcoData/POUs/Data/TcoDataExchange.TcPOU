@@ -7,13 +7,17 @@ VAR
     _readTask : TcoDataTask(THIS^);
     _updateTask : TcoDataTask(THIS^);
     _deleteTask : TcoDataTask(THIS^);
+	_idExistsTask : TcoExistsTask(THIS^);
+	_createOrUpdateTask : TcoDataTask(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_createTask();
 _readTask();
 _updateTask();
-_deleteTask();]]></ST>
+_deleteTask();
+_idExistsTask();
+_createOrUpdateTask();]]></ST>
     </Implementation>
     <Method Name="Create" Id="{535f62d3-cdf1-09d6-36dd-65bfab4cf00a}">
       <Declaration><![CDATA[METHOD Create : TcoCore.ITcoTaskStatus
@@ -26,6 +30,18 @@ END_VAR]]></Declaration>
     .Invoke();]]></ST>
       </Implementation>
     </Method>
+    <Method Name="CreateOrUpdate" Id="{9e6a9de9-7f41-0de9-0ac9-c27c65910ff9}">
+      <Declaration><![CDATA[METHOD CreateOrUpdate : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CreateOrUpdate := _createOrUpdateTask
+    			  .WithId(Identifier)
+                  .Invoke();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Delete" Id="{fbf2b4c4-ddcf-0054-1f59-9460c96d51d6}">
       <Declaration><![CDATA[METHOD Delete : TcoCore.ITcoTaskStatus
 VAR_INPUT
@@ -35,6 +51,20 @@ END_VAR]]></Declaration>
         <ST><![CDATA[Delete := _deleteTask
     .WithId(Identifier)
     .Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Exists" Id="{027fb448-351a-0f9b-128f-8e14c974683e}">
+      <Declaration><![CDATA[METHOD Exists : REFERENCE TO  TcoExistsTask
+VAR_INPUT
+	Identifier : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_idExistsTask
+    .WithId(Identifier)
+    .Invoke();
+	
+Exists REF=	_idExistsTask;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{320ee7d5-7550-0944-00e6-b2405597b230}">
