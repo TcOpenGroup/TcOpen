@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TestDataContext" Id="{84826b8f-78be-0c2b-210a-e7483d252490}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TestDataContext EXTENDS TcoCore._internals_TcoContext
 VAR
@@ -14,6 +14,8 @@ VAR
     _updateDataWithInvalidIdDone : BOOL;
     _readDataWithInvlaidIdDone : BOOL;
     _deleteDataWithInvalidIdDone : BOOL;
+	_dataExistsDone : BOOL;
+	_createOrUpdateDone : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -33,6 +35,8 @@ CASE THIS^._testId OF
 		DataTests.DataManager._readTask.Restore();
 		DataTests.DataManager._updateTask.Restore();
 		DataTests.DataManager._deleteTask.Restore();
+		DataTests.DataManager._idExistsTask.Restore();
+		DataTests.DataManager._createOrUpdateTask.Restore();
     eDataTests.CreateData:
         _createDataDone := DataTests.Create(_identifier);
     eDataTests.UpdateData:
@@ -49,6 +53,10 @@ CASE THIS^._testId OF
         _readDataWithInvlaidIdDone := DataTests.ReadDataWithInvlaidId();
     eDataTests.DeleteDataWithInvalidId:
         _deleteDataWithInvalidIdDone := DataTests.DeleteDataWithInvalidId();
+	eDataTests.DataExist:
+        _dataExistsDone := DataTests.ExistsTest(_identifier);
+	eDataTests.CreateOrUpdate:	
+	   _createOrUpdateDone := DataTests.CreateOrUpdate(_identifier);
 END_CASE
 ]]></ST>
       </Implementation>

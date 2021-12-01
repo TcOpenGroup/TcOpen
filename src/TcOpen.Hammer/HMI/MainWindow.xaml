@@ -8,7 +8,8 @@
     xmlns:local="clr-namespace:PlcHammer.Hmi"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:vortex="http://vortex.mts/xaml" 
+    xmlns:vortexs="http://vortex.security.mts/xaml"
     Width="800"
     Height="800"
     mc:Ignorable="d"
@@ -39,7 +40,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Components">
-                        <vortex:PermissionBox Permissions="Administrator" SecurityMode="Disabled">
+                        <vortexs:PermissionBox Permissions="Administrator" SecurityMode="Disabled">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="300" />
@@ -54,7 +55,7 @@
                                 PresentationType="Diagnostics" />
                                 </Expander>
                             </Grid>
-                        </vortex:PermissionBox>
+                        </vortexs:PermissionBox>
                     </TabItem>
                 </TabControl>
                 <Grid Grid.Row="1">
@@ -147,9 +148,9 @@
                     </UniformGrid.Resources>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask}" />
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask}" />
-                    <vortex:PermissionBox SecurityMode="Disabled" Permissions="Service" >
+                    <vortexs:PermissionBox SecurityMode="Disabled" Permissions="Service" >
                         <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
-                    </vortex:PermissionBox>
+                    </vortexs:PermissionBox>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._swiftModeTask}" />
                 </UniformGrid>
                 <Button Command="{Binding OpenLoginWindowCommand}" Grid.Row="3">Login</Button>
@@ -233,7 +234,7 @@
             <vortex:SwiftRecorderView DataContext="{Binding SwiftRecorderViewModel}"></vortex:SwiftRecorderView>
         </TabItem>
         <TabItem Header="Security">
-            <vortex:UserManagementView DataContext="{Binding Users}"></vortex:UserManagementView>
+            <vortexs:UserManagementView DataContext="{Binding Users}"></vortexs:UserManagementView>
         </TabItem>
         <TabItem Header="Colors">
             <StackPanel>

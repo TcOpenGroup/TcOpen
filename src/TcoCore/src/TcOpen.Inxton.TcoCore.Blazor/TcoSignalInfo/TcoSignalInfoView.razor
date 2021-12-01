@@ -1,20 +1,27 @@
 ﻿@namespace TcoCore
 @inherits RenderableComplexComponentBase<TcoSignalInfo>
 
-<div class="d-flex flex-row">
-    <p class="p-2">@Component.HumanReadable</p>
-    <div class="p-2">
-        <RenderableContentControl Context="Component.Signal"
-                                  Presentation="Display">
-
-        </RenderableContentControl>
+    <div class="d-inline-block">
+        <div class="d-flex flex-row align-items-center justify-content-between border">
+            <p class="p-2">@AttributeNameOrTail()</p>
+            <div class="p-2 d-flex align-items-center">
+                <RenderableContentControl Context="Component.Signal"
+                                          Presentation="Display">
+                </RenderableContentControl>
+            </div>
+        </div>
     </div>
-</div>
+    @code {
 
-@code {      
-    
-    protected override void OnInitialized()
-    {
-        UpdateValuesOnChange(Component);
+        protected override void OnInitialized()
+        {
+            UpdateValuesOnChange(Component);
+        }
+
+        private string AttributeNameOrTail()
+        {
+            if (string.IsNullOrEmpty(Component.AttributeName))
+                return Component.GetSymbolTail();
+            return Component.AttributeName;
+        }
     }
-}
