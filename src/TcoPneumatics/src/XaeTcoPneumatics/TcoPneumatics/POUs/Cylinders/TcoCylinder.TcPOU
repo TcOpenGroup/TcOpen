@@ -1,26 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoCylinder" Id="{fe4e2550-76ec-4019-82bb-e68b2cbe4d49}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoCylinder EXTENDS TcoCylinderBase
+    <Declaration><![CDATA[{attribute addProperty _moveHomeDefaultName "<#MOVE HOME#>"}
+{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK#>"}
+{attribute addProperty _stopDefaultName "<#STOP#>"}
+FUNCTION_BLOCK TcoCylinder EXTENDS TcoCylinderBase
 VAR
-    {attribute addProperty Name "<#Move Home#>"}
+    {attribute addProperty Name "|[[1]Attribute_moveHomeDefaultName]|"}
     _moveHomeDefault : TcoCylinderMoveTask(THIS^);
-    {attribute addProperty Name "<#Move to Work#>"}
+    {attribute addProperty Name "|[[1]Attribute_moveWorkDefaultName]|"}
     _moveWorkDefault : TcoCylinderMoveTask(THIS^);
-    {attribute addProperty Name "<#Stop#>"}
+    {attribute addProperty Name "|[[1]Attribute_stopDefaultName]|"}
     _stopDefault : TcoCore.TcoTask(THIS^);
 END_VAR
 VAR
     _config : TcoCylinderConfig;
-	_status : TcoCylinderStatus;
+	_status : TcoCylinderStatus;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);
 
+IF(inoAtHomePos AND inoAtWorkPos) THEN Messenger.Error('<#Home and work position sensors are both active. Check the position of sensors!#>'); END_IF;
+
 // Disables mutualy exclusive actions
 _moveWorkDefault.Enabled := NOT _moveHomeDefault.Busy;
 
-_moveHomeDefault(PositionSensor := _atHomePos,
+_moveHomeDefault(PositionSensor := _atHomePos AND NOT _atWorkPos,
     MoveToPositionSignal := _toHomePos,
     InverseSignal := _toWorkPos,
     MaxTimeToReachPosition := _config.TimeToReachHomePosition,
@@ -29,7 +34,7 @@ _moveHomeDefault(PositionSensor := _atHomePos,
 // Disables mutualy exclusive actions		
 _moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
 	
-_moveWorkDefault(PositionSensor := _atWorkPos,
+_moveWorkDefault(PositionSensor := _atWorkPos AND NOT _atHomePos,
     MoveToPositionSignal := _toWorkPos,
     InverseSignal := _toHomePos,
     MaxTimeToReachPosition := _config.TimeToReachWorkPosition,
