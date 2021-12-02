@@ -83,6 +83,34 @@ END_VAR
         <ST><![CDATA[_messenger.Notify(Message);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnCondition" Id="{e703b1c7-cb4e-0f53-157b-b659f402335a}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD OnCondition : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.OnCondition(inCondition).Post(message, _category);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Persist" Id="{6f3b1ff2-ee84-08b3-3106-aabf05111047}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Persist : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(inCondition)THEN
+	_messenger.Post(message, _category).Persist();
+ELSE
+	_messenger.Post(message, _category);
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Post" Id="{aa4eba68-8e3e-0790-14e4-37c20eb0fa3d}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL Post 

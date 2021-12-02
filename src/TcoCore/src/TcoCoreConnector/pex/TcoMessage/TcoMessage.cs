@@ -46,7 +46,9 @@
                 _context = GetContext();
                 if (_context != null)
                 {
-                    retval = this.Cycle.LastValue >= _context.LastStartCycleCount || this.Cycle.LastValue >= (_context.LastStartCycleCount - (ulong)(this.Connector.ReadWriteCycleDelay * 2));
+                    retval = this.Cycle.LastValue >= _context.LastStartCycleCount 
+                            || this.Cycle.LastValue >= (_context.LastStartCycleCount - (ulong)(this.Connector.ReadWriteCycleDelay * 2))
+                            || this.Persist.LastValue;
                 }
 
                 return retval;
@@ -135,6 +137,7 @@
                 }
                 plain.Source = plain.ParentsObjectSymbol;
                 plain.Location = plain.ParentsHumanReadable;
+                plain.SetOnlinerMessage(this);
                 return plain;
             }
         }

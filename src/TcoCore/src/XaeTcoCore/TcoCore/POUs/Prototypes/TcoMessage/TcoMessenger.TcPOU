@@ -16,7 +16,7 @@
 		
 		</docu>
 ~*)
-FUNCTION_BLOCK PUBLIC TcoMessenger IMPLEMENTS ITcoMessenger
+FUNCTION_BLOCK PUBLIC TcoMessenger IMPLEMENTS ITcoMessenger, ITcoMessageProperties
 VAR			
 	(*~
 		<docu>
@@ -32,7 +32,9 @@ VAR
 	{attribute clr [ReadOnly()]}
 	_contextIdentity : ULINT;	
 	{attribute 'hide'}
-	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;		
+	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
+	{attribute 'hide'}
+	_condition : eMessageCondition;	
 END_VAR
 
 VAR CONSTANT
@@ -51,7 +53,7 @@ END_VAR]]></Declaration>
 			</summary>		
 		</docu>
 ~*)
-METHOD PUBLIC Catastrophic
+METHOD PUBLIC Catastrophic : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -65,7 +67,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
+        <ST><![CDATA[Catastrophic := THIS^.Post(Message, eMessageCategory.Catastrophic);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Clear" Id="{640fefd4-a9aa-0de1-3f5c-cce4bd50449f}">
@@ -90,7 +92,9 @@ _mime.Text := '';
 _mime.Identity := 0;
 _mime.Category := eMessageCategory.All;
 _mime.Cycle := 0;	
-_mime.PerCycleCount := 0;	]]></ST>
+_mime.PerCycleCount := 0;
+_mime.Persist := FALSE;	
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
@@ -105,10 +109,9 @@ END_VAR]]></Declaration>
 	Compose.Text := Text;
 	Compose.Identity := _Parent.Identity;
 	Compose.Category := Category;
-	Compose.Cycle := _Parent.Context.StartCycleCount;	
+	Compose.Cycle := _Parent.Context.StartCycleCount;
 	Compose.MessageDigest := Digest(Text, THIS^._Parent.Context.Environment.Messaging.MessageDigestMethod);
 END_IF;
-
 
 
 
@@ -125,7 +128,7 @@ END_IF;
 			</summary>		
 		</docu>
 ~*)
-METHOD PUBLIC Critical
+METHOD PUBLIC Critical : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -139,7 +142,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
+        <ST><![CDATA[Critical := THIS^.Post(Message, eMessageCategory.Critical);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Debug" Id="{bd0230f7-b5de-4707-ba4a-f8b17cc23976}" FolderPath="Messages\">
@@ -151,7 +154,7 @@ END_VAR
 			</summary>		
 		</docu>
 ~*)
-METHOD PUBLIC Debug
+METHOD PUBLIC Debug : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -165,7 +168,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
+        <ST><![CDATA[Debug := THIS^.Post(Message, eMessageCategory.Debug);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Digest" Id="{de6a9eab-3c62-0e43-3529-2cc01fda6c4e}">
@@ -199,7 +202,7 @@ END_CASE]]></ST>
 			</summary>						
 		</docu>
 ~*)
-METHOD PUBLIC Error
+METHOD PUBLIC Error : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -213,7 +216,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Error);]]></ST>
+        <ST><![CDATA[Error := THIS^.Post(Message, eMessageCategory.Error);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{23bbd1ba-9be3-4c0b-a177-bc9de93be447}">
@@ -240,7 +243,7 @@ _contextIdentity := Parent.Identity;
 			</summary>			
 		</docu>
 ~*)
-METHOD PUBLIC Info 
+METHOD PUBLIC Info  : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -254,7 +257,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Info);]]></ST>
+        <ST><![CDATA[Info := THIS^.Post(Message, eMessageCategory.Info);]]></ST>
       </Implementation>
     </Method>
     <Method Name="LogMessage" Id="{0b6b2fe7-cb26-02a6-0b72-2570a4f5cb53}">
@@ -263,29 +266,36 @@ VAR_IN_OUT
 	inMessage : TcoMessage;
 END_VAR
 VAR
-	_index : INT;		
+	_index : INT;
+	_freeIndex : INT;	
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _Parent.Context.Environment.Messaging.MessengerLoggingMethod OF
 	eMessengerLogMethod.OnEventRisen :
         IF(_Parent.Context.Environment.Messaging.MessageDigestMethod = eMessageDigestMethod.NONE) THEN
-			inMessage.MessageDigest := Digest(inMessage.Text, eMessageDigestMethod.CRC8);
+			inMessage.MessageDigest := Digest(inMessage.Text, eMessageDigestMethod.CRC32);
 		END_IF
-			    
+	
+		_freeIndex := 0;
+		    
 		FOR _index := 0 TO MDS_MAX_INDEX DO
 			IF(_mds[_index].Cycle = inMessage.Cycle - 1 OR _mds[_index].Cycle = inMessage.Cycle) 
 			AND_THEN (_mds[_index].Digest = inMessage.MessageDigest)
 			AND_THEN (_mds[_index].Category = inMessage.Category) THEN			
 			    _mds[_index].Cycle := inMessage.Cycle;				
-				RETURN;				
+				RETURN;											
 			END_IF	
+			IF((_mds[_index].Cycle <> inMessage.Cycle - 1) 
+			   AND (_mds[_index].Cycle <> inMessage.Cycle)) THEN
+				_freeIndex := _index;
+			END_IF
 		END_FOR
 		
-		IF(inMessage.PerCycleCount <= THIS^.MDS_MAX_INDEX) THEN
-			_mds[inMessage.PerCycleCount].Digest := inMessage.MessageDigest;
-			_mds[inMessage.PerCycleCount].Cycle := inMessage.Cycle;
-			_mds[inMessage.PerCycleCount].Category := inMessage.Category;
+		IF(_freeIndex <= THIS^.MDS_MAX_INDEX) THEN
+			_mds[_freeIndex].Digest := inMessage.MessageDigest;
+			_mds[_freeIndex].Cycle := inMessage.Cycle;
+			_mds[_freeIndex].Category := inMessage.Category;
 			_Parent.Context.Logger.PushMessage(inMessage);		
 		END_IF;
 	eMessengerLogMethod.Continuous:
@@ -304,7 +314,7 @@ END_CASE
 			</summary>				
 		</docu>
 ~*)
-METHOD Notify 
+METHOD Notify : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -317,7 +327,40 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Notification);]]></ST>
+        <ST><![CDATA[Notify := THIS^.Post(Message, eMessageCategory.Notification);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnCondition" Id="{1097de5a-fc1b-0b3c-3c7e-2650c89e121b}">
+      <Declaration><![CDATA[METHOD OnCondition : ITcoMessages
+VAR_INPUT
+	inCondition : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (inCondition) THEN
+	_condition := eMessageCondition.Active;
+ELSE
+	_condition := eMessageCondition.Inactive;
+END_IF
+
+OnCondition := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Persist" Id="{03e6fdf6-0b38-029d-1385-1c4ef7329d4e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'} 
+METHOD Persist : ITcoMessageProperties
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
+	IF(_mime.Cycle = _Parent.Context.StartCycleCount)THEN
+		_mime.Persist := TRUE;
+	END_IF;
+END_IF;
+
+Persist := THIS^;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Post" Id="{7e1c7e2b-5612-469e-9139-08754fd973ea}">
@@ -328,7 +371,7 @@ END_VAR
 			</summary>				
 		</docu>
 ~*)
-METHOD PUBLIC Post 
+METHOD PUBLIC Post : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -354,7 +397,17 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
+        <ST><![CDATA[Post := THIS^;
+IF(_condition > eMessageCondition.Active) THEN
+	_condition := eMessageCondition.Unconditional;	
+	RETURN;
+END_IF
+
+_condition := eMessageCondition.Unconditional;
+
+
+
+IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
 	IF(Category < THIS^._Parent.Context.Environment.Messaging.MinLevel
 	  OR _Parent.Context.Environment.Messaging.IsSuspended) THEN
 		RETURN;
@@ -366,13 +419,17 @@ END_VAR
 			
     // Same cycle filter for most important messge.
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
-		IF(_wouldBeMime.Category > _mime.Category) THEN	 
+		IF(_wouldBeMime.Category > _mime.Category) 
+		AND (NOT _mime.Persist) THEN	 
 			_mime := _wouldBeMime;
 		END_IF;
 	ELSE
-	// Different cycle		
-		_wouldBeMime.PerCycleCount := 1;	
-		_mime := _wouldBeMime;		
+	// Different cycle					  
+	    _mime.PerCycleCount := 1;		
+		IF (NOT _mime.Persist) THEN
+			_wouldBeMime.PerCycleCount := 1;  													
+			_mime := _wouldBeMime;							
+		END_IF;
 	END_IF;	
 
 	LogMessage(_wouldBeMime);		
@@ -392,7 +449,7 @@ END_IF;
 			</summary>				
 		</docu>
 ~*)
-METHOD PUBLIC Programming
+METHOD PUBLIC Programming : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -406,7 +463,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.ProgrammingError);]]></ST>
+        <ST><![CDATA[Programming := THIS^.Post(Message, eMessageCategory.ProgrammingError);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Trace" Id="{5a17dee2-c171-4127-9ee1-30d4a06a53bf}" FolderPath="Messages\">
@@ -419,7 +476,7 @@ END_VAR
 			</summary>					
 		</docu>
 ~*)
-METHOD PUBLIC Trace 
+METHOD PUBLIC Trace : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -433,7 +490,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
+        <ST><![CDATA[Trace := THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{dd00674c-7475-44d4-8400-894897951e0b}" FolderPath="Messages\">
@@ -446,7 +503,7 @@ END_VAR
 			</summary>					
 		</docu>
 ~*)
-METHOD PUBLIC Warning 
+METHOD PUBLIC Warning  : ITcoMessageProperties
 VAR_INPUT
 	(*~
 		<docu>
@@ -460,7 +517,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
+        <ST><![CDATA[Warning := THIS^.Post(Message, eMessageCategory.Warning);]]></ST>
       </Implementation>
     </Method>
   </POU>

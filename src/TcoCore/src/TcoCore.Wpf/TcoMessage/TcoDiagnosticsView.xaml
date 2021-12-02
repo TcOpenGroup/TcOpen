@@ -13,6 +13,9 @@
     d:DesignHeight="600"
     d:DesignWidth="800"
     IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.Resources>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <d:UserControl.DataContext>
         <vtr:TcoDiagnosticsViewModel />
     </d:UserControl.DataContext>
@@ -24,7 +27,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -53,6 +56,15 @@
                 Margin="6"
                 Command="{Binding UpdateMessagesCommand}"
                 Content="{x:Static loc:Localization.UpdateMessages}"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding DiagnosticsRunning}"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
+            <Button
+                Grid.Column="3"
+                Margin="6"
+                Command="{Binding RogerAllMessagesCommand}"
+                Content="ROGER ALL"
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding DiagnosticsRunning}"
                 materialDesign:ButtonProgressAssist.Value="-1"
@@ -115,6 +127,20 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding CategoryAsEnum}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.Category}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Visibility="{Binding Persist,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="ROGER" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding TimeStamp}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
