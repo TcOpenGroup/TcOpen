@@ -413,10 +413,18 @@ IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environme
 		RETURN;
 	END_IF; 	
 		
-	_mime.PerCycleCount := _mime.PerCycleCount + 1;
-	_wouldBeMime := Compose(Message, Category);		
-	_wouldBeMime.PerCycleCount := _mime.PerCycleCount;
-			
+	IF (NOT _mime.Persist) THEN 
+		_mime.PerCycleCount := _mime.PerCycleCount + 1;
+		_wouldBeMime := Compose(Message, Category);		
+		_wouldBeMime.PerCycleCount := _mime.PerCycleCount;		
+	ELSIF(_mime.Persist 
+	AND_THEN (_mime.Text <>  Message OR _mime.Category <> Category))
+	THEN		
+		IF(	_mime.PerCycleCount < 255) THEN	
+			_mime.PerCycleCount := _mime.PerCycleCount + 1;	
+		END_IF;
+	END_IF;		
+	
     // Same cycle filter for most important messge.
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
 		IF(_wouldBeMime.Category > _mime.Category) 
@@ -424,11 +432,10 @@ IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environme
 			_mime := _wouldBeMime;
 		END_IF;
 	ELSE
-	// Different cycle					  
-	    _mime.PerCycleCount := 1;		
+	// Different cycle					  	    		
 		IF (NOT _mime.Persist) THEN
 			_wouldBeMime.PerCycleCount := 1;  													
-			_mime := _wouldBeMime;							
+			_mime := _wouldBeMime;										
 		END_IF;
 	END_IF;	
 
