@@ -76,6 +76,15 @@ STRUCT
 	
 	(*~
 	<docu>
+		<summary>			
+			Indicates that the message must be persisted in the alarm view until acknowledged.
+		</summary>				
+	</docu>	
+	~*)	
+	Persist : BOOL;
+	
+	(*~
+	<docu>
 		<summary>		
 			Stores message digest of this message text.
 		</summary>				

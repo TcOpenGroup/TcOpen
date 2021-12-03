@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoMessageProperties" Id="{033ac595-645d-056c-310a-5a8e070f1714}">
+    <Declaration><![CDATA[INTERFACE ITcoMessageProperties
+]]></Declaration>
+    <Method Name="Persist" Id="{54b58622-3387-07ec-2305-491e9eae5e49}">
+      <Declaration><![CDATA[METHOD Persist : ITcoMessageProperties
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
