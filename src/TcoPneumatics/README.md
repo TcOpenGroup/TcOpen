@@ -19,6 +19,10 @@ _verticalPiston(inoAtHomePos := IO.iA1[0],
     inoAtWorkPos := IO.iA1[1],
     inoToHomePos := IO.qA1[0],
     inoToWorkPos := IO.qA1[1]);
+
+// Abort conditions must be called after init of the component.
+_verticalPiston.AbortMoveHome(_sometingInTheWay);    
+_verticalPiston.AbortMoveWork(_sometingInTheWay);    
 ~~~
 
 ### Use
