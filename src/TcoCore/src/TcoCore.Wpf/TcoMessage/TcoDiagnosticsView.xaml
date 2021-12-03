@@ -144,6 +144,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding PerCycleCount, Converter={vtr:PerCycleCountToWarningConverter}}" Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <GridSplitter
