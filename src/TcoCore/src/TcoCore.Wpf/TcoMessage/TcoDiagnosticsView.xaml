@@ -64,7 +64,7 @@
                 Grid.Column="3"
                 Margin="6"
                 Command="{Binding RogerAllMessagesCommand}"
-                Content="ROGER ALL"
+                Content="{x:Static loc:Localization.RogerAll}"
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding DiagnosticsRunning}"
                 materialDesign:ButtonProgressAssist.Value="-1"
@@ -133,7 +133,7 @@
                 <DataGridTemplateColumn Header="{x:Static loc:Localization.Category}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Visibility="{Binding Pinned,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="ROGER" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
+                            <Button Visibility="{Binding Persist,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="{x:Static loc:Localization.Roger}" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -168,7 +168,7 @@
                     Background="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}"
                     Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
                     Text="{Binding Location}"
-                    TextWrapping="WrapWithOverflow" />
+                    TextWrapping="WrapWithOverflow"/>
             </GroupBox>
             <GroupBox Header="{x:Static loc:Localization.Message}">
                 <TextBlock
@@ -235,6 +235,7 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
+                         Background="{DynamicResource OnSecondary}"
                             Foreground="{DynamicResource Secondary}"
                             Text="{Binding CategoryAsEnum}"
                             TextWrapping="WrapWithOverflow" />
@@ -243,6 +244,7 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
+                         Background="{DynamicResource OnSecondary}"
                             Foreground="{DynamicResource Secondary}"
                             Text="{Binding SubCategory}"
                             TextWrapping="WrapWithOverflow" />
@@ -251,6 +253,7 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
+                            Background="{DynamicResource OnSecondary}"
                             Foreground="{DynamicResource Secondary}"
                             Text="{Binding Source}"
                             TextWrapping="WrapWithOverflow" />
