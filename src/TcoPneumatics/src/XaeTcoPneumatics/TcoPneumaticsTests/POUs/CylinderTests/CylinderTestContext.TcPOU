@@ -42,6 +42,9 @@ CASE _testId OF
 	_sutInvalid.AtWork;
 	_sutInvalid.AbortMoveHome(_disableSignal);
 	_sutInvalid.AbortMoveHome(_disableSignal);
+	_sutInvalid.Config.TimeToReachHomePosition := T#1MS;
+	_sutInvalid.Config.TimeToReachWorkPosition := T#1MS;
+	_sutInvalid.Status.ActionDescription;
     eCyclinderTests.StopMovement:
         _sut.Stop();
     eCyclinderTests.MoveHomeMoving:
