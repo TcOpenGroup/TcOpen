@@ -1104,10 +1104,12 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(
                 () =>
-                sut.Persist(true, messageText));
+                sut.Pin(true, messageText));
 
             var message = sut._messenger._mime.PlainMessage;
 
+
+            Assert.AreEqual(true, sut.Pinned());
             Assert.AreEqual(category, message.CategoryAsEnum);
             Assert.AreEqual(messageText, message.Text);
             Assert.AreEqual(true, message.Pinned);
@@ -1137,7 +1139,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(
                 () =>
-                sut.Persist(false, messageText));
+                sut.Pin(false, messageText));
 
             var message = sut._messenger._mime.PlainMessage;
 
@@ -1170,7 +1172,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(
                 () =>
-                sut.Persist(true, messageText));
+                sut.Pin(true, messageText));
 
             sut.SingleCycleRun(
                 () => { var a = 1; }) ;
