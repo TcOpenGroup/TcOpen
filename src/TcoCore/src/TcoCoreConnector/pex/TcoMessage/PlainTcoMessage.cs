@@ -1,9 +1,15 @@
 ﻿using System.ComponentModel;
 
 namespace TcoCore
-{    
+{
     public partial class PlainTcoMessage
     {
+        internal TcoMessage OnlinerMessage;
+        internal void SetOnlinerMessage(TcoMessage message)
+        {
+            OnlinerMessage = message;
+        }
+        
         string source;
         /// <summary>
         /// Gets source object of the message retrieved from the identity of the object that produced this message (typically the symbol of the PLC program).
@@ -114,10 +120,10 @@ namespace TcoCore
         /// <summary>
         /// Gets or sets raw text of this message (no translation, no interpolation).
         /// </summary>
-        public string Raw 
+        public string Raw
         {
-            get => raw; 
-        
+            get => raw;
+
             internal set
             {
                 if (raw == value)
@@ -141,10 +147,10 @@ namespace TcoCore
 
         public override int GetHashCode() => (Raw, ParentsObjectSymbol, Category).GetHashCode();
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
         {
             var p = obj as PlainTcoMessage;
-            return p != null && p.Raw == Raw && p.ParentsObjectSymbol == ParentsObjectSymbol && p.Category == Category;                                  
-        }        
+            return p != null && p.Raw == Raw && p.ParentsObjectSymbol == ParentsObjectSymbol && p.Category == Category;
+        }
     }
 }

@@ -205,6 +205,24 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACKN.
+        /// </summary>
+        public static string Roger {
+            get {
+                return ResourceManager.GetString("Roger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACKN ALL.
+        /// </summary>
+        public static string RogerAll {
+            get {
+                return ResourceManager.GetString("RogerAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
         public static string Source {
