@@ -133,7 +133,7 @@
                 <DataGridTemplateColumn Header="{x:Static loc:Localization.Category}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Visibility="{Binding Persist,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="ROGER" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
+                            <Button Visibility="{Binding Pinned,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="ROGER" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

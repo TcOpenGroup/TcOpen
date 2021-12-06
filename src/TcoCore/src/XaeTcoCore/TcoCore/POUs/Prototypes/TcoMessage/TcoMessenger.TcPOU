@@ -34,7 +34,7 @@ VAR
 	{attribute 'hide'}
 	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
 	{attribute 'hide'}
-	_condition : eMessageCondition;	
+	_condition : eMessageCondition;		
 END_VAR
 
 VAR CONSTANT
@@ -93,7 +93,7 @@ _mime.Identity := 0;
 _mime.Category := eMessageCategory.All;
 _mime.Cycle := 0;	
 _mime.PerCycleCount := 0;
-_mime.Persist := FALSE;	
+_mime.Pinned := FALSE;	
 ]]></ST>
       </Implementation>
     </Method>
@@ -346,23 +346,32 @@ END_IF
 OnCondition := THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Persist" Id="{03e6fdf6-0b38-029d-1385-1c4ef7329d4e}">
+    <Method Name="Pin" Id="{03e6fdf6-0b38-029d-1385-1c4ef7329d4e}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'} 
-METHOD Persist : ITcoMessageProperties
+METHOD Pin : ITcoMessageProperties
 
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount)THEN
-		_mime.Persist := TRUE;
+		_mime.Pinned := TRUE;
 	END_IF;
 END_IF;
 
-Persist := THIS^;
+Pin := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Pinned" Id="{2b9d6a13-0120-0ade-1711-eabdfe133e7e}">
+      <Declaration><![CDATA[PROPERTY Pinned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{922308b3-7383-055d-30c5-1612ea638ab3}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Pinned := _mime.Pinned;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Post" Id="{7e1c7e2b-5612-469e-9139-08754fd973ea}">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -413,11 +422,11 @@ IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environme
 		RETURN;
 	END_IF; 	
 		
-	IF (NOT _mime.Persist) THEN 
+	IF (NOT _mime.Pinned) THEN 
 		_mime.PerCycleCount := _mime.PerCycleCount + 1;
 		_wouldBeMime := Compose(Message, Category);		
 		_wouldBeMime.PerCycleCount := _mime.PerCycleCount;		
-	ELSIF(_mime.Persist 
+	ELSIF(_mime.Pinned 
 	AND_THEN (_mime.Text <>  Message OR _mime.Category <> Category))
 	THEN		
 		IF(	_mime.PerCycleCount < 255) THEN	
@@ -428,12 +437,12 @@ IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environme
     // Same cycle filter for most important messge.
 	IF(_mime.Cycle = _Parent.Context.StartCycleCount) THEN		 	
 		IF(_wouldBeMime.Category > _mime.Category) 
-		AND (NOT _mime.Persist) THEN	 
+		AND (NOT _mime.Pinned) THEN	 
 			_mime := _wouldBeMime;
 		END_IF;
 	ELSE
 	// Different cycle					  	    		
-		IF (NOT _mime.Persist) THEN
+		IF (NOT _mime.Pinned) THEN
 			_wouldBeMime.PerCycleCount := 1;  													
 			_mime := _wouldBeMime;										
 		END_IF;

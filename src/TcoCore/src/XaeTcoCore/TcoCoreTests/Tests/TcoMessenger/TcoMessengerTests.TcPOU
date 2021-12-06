@@ -105,7 +105,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(inCondition)THEN
-	_messenger.Post(message, _category).Persist();
+	_messenger.Post(message, _category).Pin();
 ELSE
 	_messenger.Post(message, _category);
 END_IF;	]]></ST>

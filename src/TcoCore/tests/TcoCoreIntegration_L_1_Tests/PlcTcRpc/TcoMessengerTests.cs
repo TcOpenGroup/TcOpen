@@ -1110,7 +1110,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             Assert.AreEqual(category, message.CategoryAsEnum);
             Assert.AreEqual(messageText, message.Text);
-            Assert.AreEqual(true, message.Persist);
+            Assert.AreEqual(true, message.Pinned);
         }
 
         [Test, Order(3300)]
@@ -1143,7 +1143,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             Assert.AreEqual(category, message.CategoryAsEnum);
             Assert.AreEqual(messageText, message.Text);
-            Assert.AreEqual(false, message.Persist);
+            Assert.AreEqual(false, message.Pinned);
         }
 
         [Test, Order(3300)]
@@ -1181,9 +1181,9 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             var message = sut._messenger._mime.PlainMessage;
            
-            Assert.AreEqual(true, message.Persist);
+            Assert.AreEqual(true, message.Pinned);
 
-            sut._messenger._mime.Persist.Synchron = false;
+            sut._messenger._mime.Pinned.Synchron = false;
 
             sut.SingleCycleRun(
                () => { var a = 1; });
@@ -1194,7 +1194,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             message = sut._messenger._mime.PlainMessage;
 
-            Assert.AreEqual(false, message.Persist);
+            Assert.AreEqual(false, message.Pinned);
         }
 
         private static T DestructPayload<T>(object payload, string propertyName)
