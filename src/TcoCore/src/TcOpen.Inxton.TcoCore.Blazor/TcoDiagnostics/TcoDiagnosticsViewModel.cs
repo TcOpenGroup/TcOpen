@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TcOpen.Inxton;
 using TcOpen.Inxton.Input;
 using Vortex.Connector;
 using Vortex.Presentation;
@@ -103,7 +104,7 @@ namespace TcoCore
                     MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
-
+                    
 
                 }).Wait();
 
@@ -152,10 +153,27 @@ namespace TcoCore
                 }
 
                 SetProperty(ref selectedMessage, clone);
-                //this.OnPropertyChanged(nameof(AffectedObjectPresentation));
             }
         }
+        public void RogerMessage(PlainTcoMessage msg)
+        {
+            msg.OnlinerMessage.Persist.Cyclic = false;
+            UpdateMessages();
+        }
 
+        public void RogerAllMessages()
+        {
+            lock (updatemutex)
+            {
+                foreach (var item in MessageDisplay.Where(p => p.Persist))
+                {
+                    item.OnlinerMessage.Persist.Cyclic = false;
+                    TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                }
+            }
+
+            UpdateMessages();
+        }
         public IVortexObject AffectedObject { get; set; }
        
 

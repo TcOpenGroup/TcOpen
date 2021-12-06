@@ -21,7 +21,14 @@
         /// </summary>
         public TcoDiagnosticsViewModel()
         {
+            CreateCommands();
+        }
+
+        private void CreateCommands()
+        {
             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            this.RogerSelectedMessageCommand = new RelayCommand(a => this.RogerSelectedMessage(), b => true, () => TcoAppDomain.Current.Logger.Information("Message acknowledged {@payload}", new { Text = SelectedMessage.Text, Category = SelectedMessage.CategoryAsEnum, Cycle = SelectedMessage.Cycle }));
+            this.RogerAllMessagesCommand = new RelayCommand(a => this.RogerAllMessages(), b => true, () => TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol }));
         }
 
         /// <summary>
@@ -31,7 +38,7 @@
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            CreateCommands();
         }
 
 
@@ -60,7 +67,8 @@
 
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages()
+                                             .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)                                             
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
@@ -69,6 +77,26 @@
 
                 DiagnosticsRunning = false;
             }
+        }
+        void RogerSelectedMessage()
+        {
+            this.SelectedMessage.OnlinerMessage.Persist.Cyclic = false;
+            UpdateMessages();
+
+        }
+
+        void RogerAllMessages()
+        {
+            lock (updatemutex)
+            {
+                foreach (var item in MessageDisplay.Where(p => p.Persist))
+                {                    
+                    item.OnlinerMessage.Persist.Cyclic = false;
+                    TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                }
+            }
+
+            UpdateMessages();
         }
 
         bool diagnosticsRunning;
@@ -271,5 +299,15 @@
                 this._tcoObject.MessageHandler.DiagnosticsDepth = value;
             }
         }
+
+        /// <summary>
+        /// Gets command to roger selected persisted message
+        /// </summary>
+        public RelayCommand RogerSelectedMessageCommand { get; private set; }
+
+        /// <summary>
+        /// Gets command to roger all persisted messages
+        /// </summary>
+        public RelayCommand RogerAllMessagesCommand { get; private set; }
     }
 }

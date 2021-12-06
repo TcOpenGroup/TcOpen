@@ -8,10 +8,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_counter := _counter + 1;
-IF((_counter MOD 100) = 0) THEN
-	_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
-END_IF;	]]></ST>
+      <ST><![CDATA[//_counter := _counter + 1;
+//IF((_counter MOD 100) = 0) THEN
+//	_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
+//END_IF;	]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

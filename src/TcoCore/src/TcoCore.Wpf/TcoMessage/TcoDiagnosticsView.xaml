@@ -13,6 +13,9 @@
     d:DesignHeight="600"
     d:DesignWidth="800"
     IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.Resources>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <d:UserControl.DataContext>
         <vtr:TcoDiagnosticsViewModel />
     </d:UserControl.DataContext>
@@ -24,7 +27,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -53,6 +56,15 @@
                 Margin="6"
                 Command="{Binding UpdateMessagesCommand}"
                 Content="{x:Static loc:Localization.UpdateMessages}"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding DiagnosticsRunning}"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
+            <Button
+                Grid.Column="3"
+                Margin="6"
+                Command="{Binding RogerAllMessagesCommand}"
+                Content="{x:Static loc:Localization.RogerAll}"
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding DiagnosticsRunning}"
                 materialDesign:ButtonProgressAssist.Value="-1"
@@ -118,6 +130,27 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.Category}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Visibility="{Binding Persist,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="{x:Static loc:Localization.Roger}" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}" Text="{Binding TimeStamp}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding PerCycleCount, Converter={vtr:PerCycleCountToWarningConverter}}" Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <GridSplitter
@@ -135,7 +168,7 @@
                     Background="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToBackgroundBrushConverter}}"
                     Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"
                     Text="{Binding Location}"
-                    TextWrapping="WrapWithOverflow" />
+                    TextWrapping="WrapWithOverflow"/>
             </GroupBox>
             <GroupBox Header="{x:Static loc:Localization.Message}">
                 <TextBlock
@@ -202,6 +235,7 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
+                         Background="{DynamicResource OnSecondary}"
                             Foreground="{DynamicResource Secondary}"
                             Text="{Binding CategoryAsEnum}"
                             TextWrapping="WrapWithOverflow" />
@@ -210,6 +244,7 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
+                         Background="{DynamicResource OnSecondary}"
                             Foreground="{DynamicResource Secondary}"
                             Text="{Binding SubCategory}"
                             TextWrapping="WrapWithOverflow" />
@@ -218,6 +253,7 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
+                            Background="{DynamicResource OnSecondary}"
                             Foreground="{DynamicResource Secondary}"
                             Text="{Binding Source}"
                             TextWrapping="WrapWithOverflow" />
