@@ -27,7 +27,7 @@ jobs:
         run: |
           .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "testingStrength" = 1; "isTestingEnabled" = $true; "packNugets" = $false;}
       - name : Create Tag
-        if : success()
+        if : env.BuildNumber && success() && github.event_name != 'pull_request'
         run : |
           git config --global user.email "gh-action@tcopengroup.com"
           git config --global user.name "gh-action"
