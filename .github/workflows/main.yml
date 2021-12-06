@@ -26,6 +26,14 @@ jobs:
       - name: Run a multi-line script
         run: |
           .\pipelines\runbuild.ps1 -properties @{"buildConfig" = "Release";  "updateAssemblyInfo" = $true; "testingStrength" = 1; "isTestingEnabled" = $true; "packNugets" = $false;}
+      - name : Create Tag
+        if : success()
+        run : |
+          git config --global user.email "gh-action@tcopengroup.com"
+          git config --global user.name "gh-action"
+          $tag = "GH-${{github.run_id}}-${{env.BuildNumber}}"
+          git tag $tag 
+          git push --tags
       - name: Upload test results
         uses: actions/upload-artifact@v2 
         if: success() || failure() 
