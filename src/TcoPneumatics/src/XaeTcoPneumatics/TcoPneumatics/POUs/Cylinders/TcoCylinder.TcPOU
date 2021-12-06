@@ -154,7 +154,7 @@ PROPERTY Config : REFERENCE TO TcoCylinderConfig]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Config REF= config;]]></ST>
+          <ST><![CDATA[Config REF= _config;]]></ST>
         </Implementation>
       </Get>
     </Property>
