@@ -36,6 +36,7 @@
         (short)eTaskState.Ready => () => ViewModel.Component.Execute(null),
         (short)eTaskState.Error => () => ViewModel.Component.Restore.Execute(null),
         (short)eTaskState.Busy => () => ViewModel.Component.Abort.Execute(null),
-        (short)eTaskState.Requested => () => { }
+        (short)eTaskState.Requested => () => { },
+        (short)eTaskState.Done => () => { }
     };
 }
