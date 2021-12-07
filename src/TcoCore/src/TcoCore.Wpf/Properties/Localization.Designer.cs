@@ -61,6 +61,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acknowledgement.
+        /// </summary>
+        public static string Acknowledgement {
+            get {
+                return ResourceManager.GetString("Acknowledgement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Affected Object.
         /// </summary>
         public static string AffectedObject {
@@ -120,6 +129,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         public static string DiagnosticsRunnig {
             get {
                 return ResourceManager.GetString("DiagnosticsRunnig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discarting messeges.
+        /// </summary>
+        public static string DiscartingMessages {
+            get {
+                return ResourceManager.GetString("DiscartingMessages", resourceCulture);
             }
         }
         
@@ -201,6 +219,24 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         public static string PeripheryDetailsView_FullName {
             get {
                 return ResourceManager.GetString("PeripheryDetailsView_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACKN.
+        /// </summary>
+        public static string Roger {
+            get {
+                return ResourceManager.GetString("Roger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACKN ALL.
+        /// </summary>
+        public static string RogerAll {
+            get {
+                return ResourceManager.GetString("RogerAll", resourceCulture);
             }
         }
         

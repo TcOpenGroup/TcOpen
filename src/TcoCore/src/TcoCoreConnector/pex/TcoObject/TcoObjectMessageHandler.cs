@@ -81,7 +81,7 @@ namespace TcoCore
                     _cycleTags = new List<IValueTag>();
                     if (_context != null) { _cycleTags.Add(_context.StartCycleCount); }
                     _cycleTags.AddRange(DescendingMessages.Select(p => p.Cycle));
-                    _cycleTags.AddRange(DescendingMessages.Select(p => p.Persist));
+                    _cycleTags.AddRange(DescendingMessages.Select(p => p.Pinned));
                 }
 
                 return _cycleTags;

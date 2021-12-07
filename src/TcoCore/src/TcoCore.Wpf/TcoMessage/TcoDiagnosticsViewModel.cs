@@ -80,7 +80,7 @@
         }
         void RogerSelectedMessage()
         {
-            this.SelectedMessage.OnlinerMessage.Persist.Cyclic = false;
+            this.SelectedMessage.OnlinerMessage.Pinned.Cyclic = false;
             UpdateMessages();
 
         }
@@ -89,9 +89,9 @@
         {
             lock (updatemutex)
             {
-                foreach (var item in MessageDisplay.Where(p => p.Persist))
+                foreach (var item in MessageDisplay.Where(p => p.Pinned))
                 {                    
-                    item.OnlinerMessage.Persist.Cyclic = false;
+                    item.OnlinerMessage.Pinned.Cyclic = false;
                     TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                 }
             }

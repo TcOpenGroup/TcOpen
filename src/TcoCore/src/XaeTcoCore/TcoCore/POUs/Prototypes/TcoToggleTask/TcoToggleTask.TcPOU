@@ -101,7 +101,8 @@ PROPERTY Enabled : BOOL]]></Declaration>
       </Set>
     </Property>
     <Method Name="FB_init" Id="{ca6d7f7e-bbfe-0658-0e22-fa928997d28f}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)

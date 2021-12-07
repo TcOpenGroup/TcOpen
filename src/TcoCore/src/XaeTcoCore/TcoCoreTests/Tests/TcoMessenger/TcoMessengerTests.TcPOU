@@ -95,9 +95,9 @@ END_VAR
         <ST><![CDATA[_messenger.OnCondition(inCondition).Post(message, _category);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Persist" Id="{6f3b1ff2-ee84-08b3-3106-aabf05111047}">
+    <Method Name="Pin" Id="{6f3b1ff2-ee84-08b3-3106-aabf05111047}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD Persist : BOOL
+METHOD Pin : BOOL
 VAR_INPUT
 	inCondition : BOOL;
 	message : STRING;
@@ -105,10 +105,19 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(inCondition)THEN
-	_messenger.Post(message, _category).Persist();
+	_messenger.Post(message, _category).Pin();
 ELSE
 	_messenger.Post(message, _category);
 END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Pinned" Id="{b0bb481b-a0e8-0eda-3566-10e1585625b7}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Pinned : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Pinned := _messenger.Pinned;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Post" Id="{aa4eba68-8e3e-0790-14e4-37c20eb0fa3d}">
@@ -209,6 +218,19 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_messenger.Trace(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UnPin" Id="{19d9f139-709a-0227-3e03-cbb3323497b3}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD UnPin : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.UnPin();
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{032a7c5b-ea22-0043-0563-7ca4d7b308c3}">

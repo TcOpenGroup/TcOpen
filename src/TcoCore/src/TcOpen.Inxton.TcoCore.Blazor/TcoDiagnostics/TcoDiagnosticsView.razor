@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-4">
             <select class="w-100 form-select"
                     @bind="@ViewModel.MinMessageCategoryFilter">
                 @foreach (var item in eMessageCategories)
@@ -23,13 +23,23 @@
 
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-2 d-flex d">
+            <button @onclick="() => ViewModel.RogerAllMessages()"
+                    type="button"
+                    class="btn btn-secondary">
+                Roger all messages
+            </button>
+
+        </div>
+        <div class="col-2 d-flex d">
+
             <button @onclick="() => ViewModel.UpdateMessagesCommand.Execute(null)"
                     type="button"
                     class="btn btn-primary">
                 Update messages
             </button>
         </div>
+
     </div>
     <div class="d-flex flex-row">
         <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
@@ -68,6 +78,7 @@
             <th scope="col">Location</th>
             <th scope="col">PerCycleCount</th>
             <th scope="col">Symbol</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -79,6 +90,19 @@
                 <td>@message.Location</td>
                 <td>@message.PerCycleCount</td>
                 <td>@message.ParentsObjectSymbol</td>
+                <td>
+
+                    <button class="btn btn-secondary" @onclick="()=>ViewModel.RogerMessage(message)">
+                        @if (message.OnlinerMessage.Pinned.Cyclic)
+                        {
+                            <span>Roger</span>
+                        }
+                        else
+                        {
+                            <span>Rogered</span>
+                        }
+                    </button>
+                </td>
             </tr>
         }
 

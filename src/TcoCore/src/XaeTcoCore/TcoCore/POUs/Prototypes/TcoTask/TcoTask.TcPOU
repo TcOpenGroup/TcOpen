@@ -497,7 +497,8 @@ END_IF;
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{a5b60cba-9da0-4e51-9e99-230c8717014e}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)

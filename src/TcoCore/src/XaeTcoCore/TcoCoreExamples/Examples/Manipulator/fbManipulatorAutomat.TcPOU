@@ -9,19 +9,24 @@ VAR
 	_persistentMessage : TcoCore.TcoMessenger(THIS^);
 END_VAR
 VAR
-	ar : ARRAY[0..1] OF BOOL;
+	ar : ARRAY[0..2] OF BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// THIS^.Context.Environment.Messaging.Suspend();
 
 
-_persistentMessage.OnCondition(ar[0]).Error('this is persistent error 1').Persist();
-_persistentMessage.OnCondition(ar[1]).Error('this is persistent error 2').Persist();
+IF(NOT _persistentMessage.OnCondition(ar[0]).Error('this is persistent error 1').Pin().Pinned) THEN
+	_persistentMessage.OnCondition(ar[1]).Error('this is persistent error 2').Pin();
+END_IF;	
 
+IF(ar[2]) THEN
+	_persistentMessage.UnPin();
+END_IF;	
 
-THIS^._verticalPiston.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 5000 = 0).Post('We are running automatic mode4 conditional', eMessageCategory.Catastrophic).Persist();
-THIS^.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 2500 = 0).Info('We are running automatic mode1 conditional').Persist();
-THIS^._gripperPiston.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 1000 = 0).Notify('We are running automatic mode7 conditional').Persist();
+RETURN;
+THIS^._verticalPiston.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 5000 = 0).Post('We are running automatic mode4 conditional', eMessageCategory.Catastrophic).Pin();
+THIS^.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 2500 = 0).Info('We are running automatic mode1 conditional').Pin();
+THIS^._gripperPiston.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 1000 = 0).Notify('We are running automatic mode7 conditional').Pin();
 
 
 
