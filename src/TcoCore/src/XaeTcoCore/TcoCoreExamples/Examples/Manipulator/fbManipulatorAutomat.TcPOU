@@ -19,8 +19,6 @@ IF(NOT _persistentMessage.OnCondition(ar[0]).Error('this is persistent error 1')
 	_persistentMessage.OnCondition(ar[1]).Error('this is persistent error 2').Pin();
 END_IF;	
 
-_persistentMessage.
-
 IF(ar[2]) THEN
 	_persistentMessage.UnPin();
 END_IF;	
