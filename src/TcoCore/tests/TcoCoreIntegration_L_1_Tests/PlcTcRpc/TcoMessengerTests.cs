@@ -1148,7 +1148,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             Assert.AreEqual(false, message.Pinned);
         }
 
-        [Test, Order(3300)]
+        [Test, Order(3400)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
         [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
         [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
@@ -1197,6 +1197,56 @@ namespace TcoCoreUnitTests.PlcTcRpc
             message = sut._messenger._mime.PlainMessage;
 
             Assert.AreEqual(false, message.Pinned);
+        }
+
+        [Test, Order(3400)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut)]
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
+        public void T3400_UnPinMessageTest(string messageText, eMessageCategory category)
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._category.Synchron = (short)category;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            //--Act
+            sut.SingleCycleRun(
+                () =>
+                sut.Pin(true, messageText));
+
+            sut.SingleCycleRun(
+                () => { var a = 1; });
+
+            sut.SingleCycleRun(
+                () =>
+                sut.Post(messageText));
+
+            var message = sut._messenger._mime.PlainMessage;
+
+            Assert.AreEqual(true, message.Pinned);
+
+            sut.SingleCycleRun(
+               () => sut.UnPin(true, $"{messageText} dnu"));
+
+            Assert.AreEqual(true, message.Pinned);
+
+            sut.SingleCycleRun(
+               () => sut.UnPin(false, $"{messageText}"));
+
+            message = sut._messenger._mime.PlainMessage;
+
+            Assert.AreEqual(false, message.Pinned);            
         }
 
         private static T DestructPayload<T>(object payload, string propertyName)

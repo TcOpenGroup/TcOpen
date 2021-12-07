@@ -220,6 +220,19 @@ END_VAR
         <ST><![CDATA[_messenger.Trace(Message);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="UnPin" Id="{19d9f139-709a-0227-3e03-cbb3323497b3}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD UnPin : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.UnPin();
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Warning" Id="{032a7c5b-ea22-0043-0563-7ca4d7b308c3}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL Warning

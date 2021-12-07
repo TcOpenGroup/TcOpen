@@ -37,6 +37,11 @@ VAR
 	_condition : eMessageCondition;		
 END_VAR
 
+VAR
+	{attribute 'hide'}
+	tmpMessageText : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
 VAR CONSTANT
 	MDS_MAX_INDEX : INT := 10;
 END_VAR]]></Declaration>
@@ -349,6 +354,14 @@ OnCondition := THIS^;]]></ST>
     <Method Name="Pin" Id="{03e6fdf6-0b38-029d-1385-1c4ef7329d4e}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'} 
+(*
+	<docu>
+		<summary>
+			Pins this message that no other message will override it. The messenger won't accept new messages until acknowledged in diagnostics view by user, unipenned by `Unpin()` methods or cleared by `Clear()` method
+			of this messenger.						
+		</summary>
+	</docu>
+*)
 METHOD Pin : ITcoMessageProperties
 
 ]]></Declaration>
@@ -364,11 +377,18 @@ Pin := THIS^;
       </Implementation>
     </Method>
     <Property Name="Pinned" Id="{2b9d6a13-0120-0ade-1711-eabdfe133e7e}">
-      <Declaration><![CDATA[PROPERTY Pinned : BOOL]]></Declaration>
+      <Declaration><![CDATA[(*
+	<docu>
+		<summary>
+			Gets true when this messanger is pinned (awaiting acknowledgement in diagnostics view).
+		</summary>
+	</docu>
+*)
+PROPERTY Pinned : BOOL]]></Declaration>
       <Get Name="Get" Id="{922308b3-7383-055d-30c5-1612ea638ab3}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Pinned := _mime.Pinned;]]></ST>
+          <ST><![CDATA[Pinned := _mime.Pinned AND_THEN tmpMessageText = _mime.Text;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -407,6 +427,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Post := THIS^;
+tmpMessageText := Message;
 IF(_condition > eMessageCondition.Active) THEN
 	_condition := eMessageCondition.Unconditional;	
 	RETURN;
@@ -507,6 +528,31 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Trace := THIS^.Post(Message, eMessageCategory.Trace);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UnPin" Id="{648f9a53-8d9f-0466-2e58-e936e7aff424}">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'}
+(*
+	<docu>
+		<summary>
+			Unpins this messenger.
+		</summary>
+	</docu>
+*) 
+METHOD UnPin 
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_mime.Pinned) THEN
+	IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
+		THIS^._Parent.Context.Logger.Push('Message unpinned by the controller.', eMessageCategory.Info);
+	END_IF;	
+END_IF; 
+_mime.Pinned := FALSE;
+
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{dd00674c-7475-44d4-8400-894897951e0b}" FolderPath="Messages\">
