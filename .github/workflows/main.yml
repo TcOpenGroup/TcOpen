@@ -34,6 +34,7 @@ jobs:
           $tag = "GH-${{github.run_id}}-${{env.BuildNumber}}"
           git tag $tag 
           git push --tags
+        continue-on-error: true
       - name: Upload test results
         uses: actions/upload-artifact@v2 
         if: success() || failure() 
