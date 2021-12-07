@@ -58,7 +58,8 @@ IF(THIS^._hasException) THEN
 END_IF;]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{1a44b54a-1c12-0ff2-33c6-1d29da8e202f}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)

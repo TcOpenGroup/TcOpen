@@ -25,7 +25,7 @@
         {
             if(_message != null)
             { 
-                _message.Persist.Cyclic = false;
+                _message.Pinned.Cyclic = false;
             }
         }
 

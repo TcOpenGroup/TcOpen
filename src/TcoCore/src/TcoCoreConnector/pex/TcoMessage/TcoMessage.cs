@@ -48,7 +48,7 @@
                 {
                     retval = this.Cycle.LastValue >= _context.LastStartCycleCount 
                             || this.Cycle.LastValue >= (_context.LastStartCycleCount - (ulong)(this.Connector.ReadWriteCycleDelay * 2))
-                            || this.Persist.LastValue;
+                            || this.Pinned.LastValue;
                 }
 
                 return retval;

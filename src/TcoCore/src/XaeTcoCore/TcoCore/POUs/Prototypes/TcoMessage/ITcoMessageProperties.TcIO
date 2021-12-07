@@ -3,10 +3,16 @@
   <Itf Name="ITcoMessageProperties" Id="{033ac595-645d-056c-310a-5a8e070f1714}">
     <Declaration><![CDATA[INTERFACE ITcoMessageProperties
 ]]></Declaration>
-    <Method Name="Persist" Id="{54b58622-3387-07ec-2305-491e9eae5e49}">
-      <Declaration><![CDATA[METHOD Persist : ITcoMessageProperties
+    <Method Name="Pin" Id="{54b58622-3387-07ec-2305-491e9eae5e49}">
+      <Declaration><![CDATA[METHOD Pin : ITcoMessageProperties
 
 ]]></Declaration>
     </Method>
+    <Property Name="Pinned" Id="{dc7580a4-f337-0e34-06b3-f0bfdcc86bf6}">
+      <Declaration><![CDATA[PROPERTY Pinned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{787b8077-c24f-0b68-2628-9d2e00152a64}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>
