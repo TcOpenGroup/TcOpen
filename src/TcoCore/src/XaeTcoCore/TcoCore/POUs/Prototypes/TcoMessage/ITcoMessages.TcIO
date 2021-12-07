@@ -165,6 +165,18 @@ END_VAR
 
 ]]></Declaration>
     </Method>
+    <Method Name="UnPin" Id="{fabdeea1-c654-0144-0a58-11c0e4dd49f9}">
+      <Declaration><![CDATA[(*
+	<docu>
+		<summary>
+			Unpins this messenger.
+		</summary>
+	</docu>
+*) 
+METHOD UnPin 
+
+]]></Declaration>
+    </Method>
     <Method Name="Warning" Id="{ed68fc65-6b23-0ebe-2833-4b29338b28ec}">
       <Declaration><![CDATA[(*~
 		<docu>

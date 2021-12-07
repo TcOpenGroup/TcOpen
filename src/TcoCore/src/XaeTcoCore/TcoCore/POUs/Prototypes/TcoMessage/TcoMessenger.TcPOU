@@ -225,7 +225,8 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{23bbd1ba-9be3-4c0b-a177-bc9de93be447}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
@@ -531,9 +532,7 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="UnPin" Id="{648f9a53-8d9f-0466-2e58-e936e7aff424}">
-      <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'}
-(*
+      <Declaration><![CDATA[(*
 	<docu>
 		<summary>
 			Unpins this messenger.
@@ -546,7 +545,7 @@ METHOD UnPin
       <Implementation>
         <ST><![CDATA[IF (_mime.Pinned) THEN
 	IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
-		THIS^._Parent.Context.Logger.Push('Message unpinned by the controller.', eMessageCategory.Info);
+		THIS^.Post('Message unpinned by the controller.', eMessageCategory.Info);
 	END_IF;	
 END_IF; 
 _mime.Pinned := FALSE;
