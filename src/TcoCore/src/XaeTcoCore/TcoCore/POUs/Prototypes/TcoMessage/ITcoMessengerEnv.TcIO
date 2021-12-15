@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <Itf Name="ITcoMessengerSettings" Id="{6d6b9064-8fe9-0b02-00be-c0f0ff54eeb4}">
-    <Declaration><![CDATA[INTERFACE ITcoMessengerSettings
+  <Itf Name="ITcoMessengerEnv" Id="{6d6b9064-8fe9-0b02-00be-c0f0ff54eeb4}">
+    <Declaration><![CDATA[INTERFACE ITcoMessengerEnv
 ]]></Declaration>
     <Property Name="IsSuspended" Id="{154b3f83-5ad6-0af7-30ee-bb7fbba61c91}">
       <Declaration><![CDATA[PROPERTY IsSuspended : BOOL]]></Declaration>
@@ -42,6 +42,12 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Property Name="StringBuilder" Id="{5b2edbae-38f5-0782-2811-7cdd131f6655}">
+      <Declaration><![CDATA[PROPERTY StringBuilder : REFERENCE TO StringBuilder]]></Declaration>
+      <Get Name="Get" Id="{3f44225a-c409-0629-146d-1c37a26001c7}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Method Name="Suspend" Id="{d170a192-4a15-0a78-14b9-e61ea3ece139}">
       <Declaration><![CDATA[METHOD Suspend
 ]]></Declaration>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoMessageCategorize" Id="{cea084d4-846c-06af-124d-4d29bc1e65cc}">
+    <Declaration><![CDATA[INTERFACE ITcoMessageCategorize
+]]></Declaration>
+    <Method Name="AsDebug" Id="{650a96b3-9433-06b5-10ac-e92eec50ac11}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'debug'.								 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC AsDebug : ITcoMessageProperties
+]]></Declaration>
+    </Method>
+    <Method Name="AsError" Id="{91d66896-86ec-0241-2ef0-d8894ff84ba1}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'error'.								 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC AsError : ITcoMessageProperties
+]]></Declaration>
+    </Method>
+    <Method Name="AsFatal" Id="{8d1e95b6-136e-0ffd-0afa-3204209816af}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'fatal'.								 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC AsFatal : ITcoMessageProperties
+]]></Declaration>
+    </Method>
+    <Method Name="AsInfo" Id="{31d3818f-638e-0611-2aa4-f35dee558c89}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'information'.								 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC AsInfo : ITcoMessageProperties
+]]></Declaration>
+    </Method>
+    <Method Name="AsTrace" Id="{b865907e-1fe4-024a-1553-c6080860ea13}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'trace'.								 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC AsTrace : ITcoMessageProperties
+]]></Declaration>
+    </Method>
+    <Method Name="AsWarning" Id="{c234773a-f5ce-0da0-3fb2-c70115e18a11}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'warning'.								 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC AsWarning : ITcoMessageProperties
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

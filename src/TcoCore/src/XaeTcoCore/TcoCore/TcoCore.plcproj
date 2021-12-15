@@ -105,13 +105,19 @@
     <Compile Include="POUs\Prototypes\TcoMessage\eMessengerLogMethod.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessageTextBuilder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessageProperties.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessageCategorize.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessenger.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessengerSettings.TcIO">
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessengerEnv.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessages.TcIO">
@@ -135,7 +141,7 @@
     <Compile Include="POUs\Prototypes\TcoContext\ITcoContext.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessengerSettings.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessengerEnv.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMomentaryTask\ITcoMomentaryTask.TcIO">
@@ -319,18 +325,29 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="Tc2_EtherCAT">
+      <Resolution>Tc2_EtherCAT, 3.3.16.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Standard">
-      <Resolution>Tc2_Standard, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_Standard, 3.3.3.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_System">
-      <Resolution>Tc2_System, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_System, 3.4.24.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Utilities">
       <Resolution>Tc2_Utilities, 3.3.38.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_JsonXml">
+      <Resolution>Tc3_JsonXml, 3.3.15.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, 3.3.21.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="Base Interfaces,3.5.2.0,System">
+      <Namespace>IBaseLibrary</Namespace>
+    </LibraryReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoCore.tmc">

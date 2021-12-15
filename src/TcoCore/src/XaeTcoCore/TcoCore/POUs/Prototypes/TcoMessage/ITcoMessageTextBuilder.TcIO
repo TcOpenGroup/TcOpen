@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoMessageTextBuilder" Id="{38bb8199-be1c-0bd7-13f4-a77881bb9b66}">
+    <Declaration><![CDATA[INTERFACE ITcoMessageTextBuilder
+]]></Declaration>
+    <Method Name="Append" Id="{3f3bfa6a-2ee2-0ba6-278a-44c2ce6c36fe}">
+      <Declaration><![CDATA[METHOD Append : ITcoMessageTextBuilder
+VAR_INPUT
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="AppendAny" Id="{fd8602ca-3e1e-0a49-324d-f8b19806a660}">
+      <Declaration><![CDATA[METHOD AppendAny : ITcoMessageTextBuilder
+VAR_INPUT
+	Data : ANY;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="As" Id="{91fa03d8-baa8-0fab-3e4f-dfd334eda882}">
+      <Declaration><![CDATA[METHOD As : ITcoMessageCategorize
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
