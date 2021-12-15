@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 (*~
 	<docu>
 		<summary>

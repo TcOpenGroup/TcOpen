@@ -10,12 +10,40 @@ VAR
 END_VAR
 VAR
 	ar : ARRAY[0..2] OF BOOL;
+END_VAR
+VAR
+	_bool : BOOL;
+	_real : REAL := 1.5;
+	_lreal : LREAL := 2.5;
+	_dt : DT := DT#2013-05-09-13:29:20.500;
+	_d : DATE := D#2012-04-14;
+	_time : TIME := T#50MS;
+	_string : STRING := 'str';
+	_wstring : WSTRING := "wstr";
+	_tod : TOD := TOD#13:29:20.500 ;
+	_int : INT := 589;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// THIS^.Context.Environment.Messaging.Suspend();
 
 
-IF(NOT _persistentMessage.OnCondition(ar[0]).Error('this is persistent error 1').Pin().Pinned) THEN
+
+_persistentMessage.OnCondition(TRUE).Build()//.Append('sss').Append('ddd')
+										    //.AppendAny(ar[0])
+											.AppendAny(_bool)
+											.AppendAny(_real)
+											.AppendAny(_lreal)
+											.AppendAny(_dt)
+											.AppendAny(_d)
+											.AppendAny(_time)
+											.AppendAny(_string)
+											.AppendAny(_wstring)
+											.AppendAny(_tod)
+											.AppendAny(_int).As().AsDebug();
+											
+
+
+IF(NOT _persistentMessage.OnCondition(ar[0]).Build().Append('This is problem ').Append('like any other').As().AsError().Pin().Pinned) THEN
 	_persistentMessage.OnCondition(ar[1]).Error('this is persistent error 2').Pin();
 END_IF;	
 
