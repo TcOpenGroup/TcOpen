@@ -28,7 +28,9 @@ TYPE eTcoTaskTests :
     DisableTaskInErrorStateEnableAndTriggerAgain,
     ElapsedTypeMeasurement:=330,
 	TaskExecutingWithDoneAndErrorStatement := 340,
-	TaskExecutingWithErrorAndDoneStatement
+	TaskExecutingWithErrorAndDoneStatement := 350,
+	TaskExecuteMethodNotCalled := 360,
+	TaskExecuteMethodCalled := 370
 	
 );
 END_TYPE
