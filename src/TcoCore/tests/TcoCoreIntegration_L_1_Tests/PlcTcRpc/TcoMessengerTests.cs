@@ -1249,6 +1249,217 @@ namespace TcoCoreUnitTests.PlcTcRpc
             Assert.AreEqual(false, message.Pinned);            
         }
 
+        [Test, Order(4000)]     
+        public void T4000_AsTrace()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;            
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsTrace("Text 1","Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Trace, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Trace, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4100)]
+        public void T4100_AsDebug()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsDebug("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4200)]
+        public void T4200_AsInfo()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsInfo("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Info, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Info, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4300)]
+        public void T4300_AsWarning()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsWarning("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Warning, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Warning, popped.CategoryAsEnum);
+        }
+
+        [Test, Order(4400)]
+        public void T4400_AsError()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsError("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Error, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Error, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4500)]
+        public void T4500_AsFatal()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsFatal("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Fatal, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Fatal, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4600)]
+        public void T4600_AppendAnys_1()
+        {
+            //! THIS IS TO TEST AppendAny from the messenger. In StringBuilder test we get an obscure compile time error see 'Utilities/StringBuilderTests/AppendAnyTest'
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AppendAnys_1());
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Console.WriteLine(plain.Text);
+            Assert.AreEqual("TRUE1223334444121314556677", plain.Text);
+            Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
+
+            Assert.AreEqual("TRUE1223334444121314556677", popped.Text);
+            Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4600)]
+        public void T4600_AppendAnys_2()
+        {
+            //! THIS IS TO TEST AppendAny from the messenger. In StringBuilder test we get an obscure compile time error see 'Utilities/StringBuilderTests/AppendAnyTest'
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AppendAnys_2());
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Console.WriteLine(plain.Text);
+            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295ms", plain.Text);
+            Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
+
+            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295ms", popped.Text);
+            Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
+
+        }
+
         private static T DestructPayload<T>(object payload, string propertyName)
         {
             try

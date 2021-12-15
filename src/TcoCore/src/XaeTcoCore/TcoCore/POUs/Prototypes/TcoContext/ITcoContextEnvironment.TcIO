@@ -4,7 +4,7 @@
     <Declaration><![CDATA[INTERFACE ITcoContextEnvironment
 ]]></Declaration>
     <Property Name="Messaging" Id="{93291141-cf68-058d-0bcf-ee0ee32a0932}">
-      <Declaration><![CDATA[PROPERTY Messaging : ITcoMessengerSettings]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Messaging : ITcoMessengerEnv]]></Declaration>
       <Get Name="Get" Id="{c99ca011-d254-0edc-1d7b-2c82d42c93a2}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

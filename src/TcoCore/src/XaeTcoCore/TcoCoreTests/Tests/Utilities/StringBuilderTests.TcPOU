@@ -21,6 +21,31 @@ END_VAR]]></Declaration>
 StringBuilderResult := StringBuilder._workString;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="AppendAnyTest" Id="{0674bf32-0aa6-01b8-156c-11f3869a6660}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AppendAnyTest
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StringBuilder.Clear();
+// There was a strange compile-time error here... about function requiring exactly one input... could not get arround that... next time... 
+// 'AppendAny' is internal in the production code
+//				     .AppendAny(_bool);
+//					 .AppendAny(_real)
+//					 .AppendAny(_lreal)
+//					 .AppendAny(_dt)
+//					 .AppendAny(_d)
+//					 .AppendAny(_time)
+//					 .AppendAny(_string)
+//					 .AppendAny(_wstring)
+//					 .AppendAny(_tod)
+//					 .AppendAny(_int);
+StringBuilderResult := StringBuilder._workString;
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Clear" Id="{164e99fa-4a83-04c8-2daa-d44516b3f0b2}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD Clear]]></Declaration>
