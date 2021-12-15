@@ -9,7 +9,12 @@
 					<note type="important">
 						Each messenger has a single placeholder for the message; it stores the most important message from the last context cycle. 
 						If there are more messages in a single cycle for the same messenger then less important messages are discarded and replaced by 
-						the message with the category of higher severity.	
+						the message with the category of higher severity.							
+					</note>
+					<note type="important">
+						Messenger can send the data to context logger. There is a maximum limit of 10 different messages per messenger in 2 consecutive context cycles.
+						The messages that exceed this limit won't be logged when `OnEventRisen` logging is set. 
+					    Take this behaviour into account when designing your system.				
 					</note>
 				</remarks>			 
 			</summary>			
@@ -64,9 +69,11 @@ END_VAR]]></Declaration>
 		<summary>			
 			Appends string to the message text. 
 		</summary>
-		<note type="warning">
-			The size of the resulting string should not be more than '160' characters. The characters exceeding this size will be truncated.
-		</note>
+		<remarks>
+			<note type="warning">
+				The size of the resulting string should not be more than '160' characters. The characters exceeding this size will be truncated.
+			</note>
+		</remarks>
 	</docu>	
 ~*)
 {attribute 'hide'}
@@ -83,7 +90,19 @@ Append := THIS^;
       </Implementation>
     </Method>
     <Method Name="AppendAny" Id="{0a142272-dc83-0b4b-1516-3181619f1e79}" FolderPath="MessageTextBuilder\">
-      <Declaration><![CDATA[METHOD AppendAny : ITcoMessageTextBuilder
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Appends any value to the message text. 
+		</summary>
+		<remarks>
+			<note type="warning">
+				The size of the resulting string should not be more than '160' characters. The characters exceeding this size will be truncated.
+			</note>
+		</remarks>
+	</docu>	
+~*)
+METHOD AppendAny : ITcoMessageTextBuilder
 VAR_INPUT
 	Data : ANY;
 END_VAR
@@ -530,16 +549,22 @@ OnCondition := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Pin" Id="{03e6fdf6-0b38-029d-1385-1c4ef7329d4e}">
-      <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'} 
-(*
+      <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Pins this message that no other message will override it. The messenger won't accept new messages until acknowledged in diagnostics view by user, unipenned by `Unpin()` methods or cleared by `Clear()` method
+			Pins this message that no other message will override it. 
+			The messenger won't accept new messages until acknowledged in diagnostics view by user, unipenned by `Unpin()` methods or cleared by `Clear()` method
 			of this messenger.						
 		</summary>
+		<note type="important">
+			Pinned messages do no accept incomming messages on the same messenger. The incomming messages will be though the context logger when active.
+		</note>
 	</docu>
-*)
+~*)
+//~
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'}
+//~ 
 METHOD Pin : ITcoMessageProperties
 
 ]]></Declaration>
@@ -555,13 +580,13 @@ Pin := THIS^;
       </Implementation>
     </Method>
     <Property Name="Pinned" Id="{2b9d6a13-0120-0ade-1711-eabdfe133e7e}">
-      <Declaration><![CDATA[(*
+      <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets true when this messanger is pinned (awaiting acknowledgement in diagnostics view).
+			Gets `true` when this messanger is pinned (awaiting acknowledgement in diagnostics view).
 		</summary>
 	</docu>
-*)
+~*)
 PROPERTY Pinned : BOOL]]></Declaration>
       <Get Name="Get" Id="{922308b3-7383-055d-30c5-1612ea638ab3}">
         <Declaration><![CDATA[]]></Declaration>
@@ -729,13 +754,13 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="UnPin" Id="{648f9a53-8d9f-0466-2e58-e936e7aff424}">
-      <Declaration><![CDATA[(*
+      <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
 			Unpins this messenger.
 		</summary>
 	</docu>
-*) 
+~*) 
 METHOD UnPin 
 
 ]]></Declaration>
