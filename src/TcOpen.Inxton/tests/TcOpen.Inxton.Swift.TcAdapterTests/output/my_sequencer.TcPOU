@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="my_sequencer" Id="{149cc4f3-b6cb-434d-9190-bd6839a12f77}" SpecialFunc="None">
+  <POU Name="my_sequencer" Id="{31509002-0560-4ef0-8604-3ffd061681a4}" SpecialFunc="None">
     <Declaration>FUNCTION_BLOCK my_sequencer EXTENDS TcoCore.TcoSequencer</Declaration>
     <Implementation>
       <ST />
     </Implementation>
-    <Method Name="Main" Id="{6c321867-ab0a-4988-a80d-6bb5383b7746}">
+    <Method Name="Main" Id="{72261fb7-2eca-4f18-9383-678130c9527f}">
       <Declaration>METHOD PROTECTED Main : BOOL</Declaration>
       <Implementation>
         <ST>IF TRUE THEN; END_IF;</ST>

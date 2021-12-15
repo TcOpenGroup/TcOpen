@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 (*~
 	<docu>
 		<summary>
@@ -73,6 +73,15 @@ STRUCT
 	</docu>	
 ~*)	
 	ExpectDequeing : BOOL;
+	
+	(*~
+	<docu>
+		<summary>			
+			Indicates that the message must be persisted in the alarm view until acknowledged.
+		</summary>				
+	</docu>	
+	~*)	
+	Pinned : BOOL;
 	
 	(*~
 	<docu>

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoMessages" Id="{5c5e06c8-fdc3-0a80-1edb-cded22f3b41d}">
+    <Declaration><![CDATA[INTERFACE ITcoMessages
+]]></Declaration>
+    <Method Name="Build" Id="{359ba6d6-0905-0cf9-1295-1b2c815453b2}">
+      <Declaration><![CDATA[METHOD Build : ITcoMessageTextBuilder
+
+]]></Declaration>
+    </Method>
+    <Method Name="Debug" Id="{018dddc2-e993-08f8-07d7-a1616590828e}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'debug' category to the message queue.				 
+			</summary>		
+		</docu>
+~*)
+METHOD PUBLIC Debug : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Error" Id="{8a9b7711-5507-0817-347a-7f9d168058de}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'error' category to the message queue.				 
+			</summary>						
+		</docu>
+~*)
+METHOD PUBLIC Error : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Info" Id="{2900bcfb-ef3e-0cf3-1447-2675bc64b38e}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'information' category to the message queue.				 
+			</summary>			
+		</docu>
+~*)
+METHOD PUBLIC Info : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Notify" Id="{f3eeec7e-3765-03b9-22ed-50c217ca3deb}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'notification' category to the message queue.				 
+			</summary>				
+		</docu>
+~*)
+METHOD Notify  : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Post" Id="{d3ce87bb-ac32-0271-2ca0-fcd31081c921}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of given category to the message queue.				 
+			</summary>	
+			<returns>Message index.</returns>		
+		</docu>
+~*)
+METHOD PUBLIC Post  : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+	(*~
+		<docu>
+			<summary>
+				Message category.			 
+			</summary>			
+		</docu>
+	~*)
+	Category : eMessageCategory;	
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Programming" Id="{de40152f-2593-0baa-37b5-73116b62afc0}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'programming error' category to the message queue.				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Programming : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="Trace" Id="{a2259cc4-50f1-0828-31e5-8e38d344d814}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'trace' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD PUBLIC Trace : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="UnPin" Id="{fabdeea1-c654-0144-0a58-11c0e4dd49f9}">
+      <Declaration><![CDATA[(*
+	<docu>
+		<summary>
+			Unpins this messenger.
+		</summary>
+	</docu>
+*) 
+METHOD UnPin 
+
+]]></Declaration>
+    </Method>
+    <Method Name="Warning" Id="{ed68fc65-6b23-0ebe-2833-4b29338b28ec}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Adds message of 'warning' category to the message queue.				 
+			</summary>					
+		</docu>
+~*)
+METHOD PUBLIC Warning : ITcoMessageProperties
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Arbitrary message string.			 
+			</summary>			
+		</docu>
+	~*)
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

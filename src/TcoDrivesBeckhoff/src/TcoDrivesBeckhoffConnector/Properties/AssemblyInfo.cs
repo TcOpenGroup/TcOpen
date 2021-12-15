@@ -17,6 +17,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("492d93ed-1fd5-4398-b8b2-a9d32496a030")]
 
-[assembly: AssemblyVersion("0.4.2.0")]
-[assembly: AssemblyFileVersion("0.4.2.0")]
-[assembly: AssemblyInformationalVersion("0.4.2-185-Implement-task-recorder-with-logic-compiler.535+Branch.185-Implement-task-recorder-with-logic-compiler.Sha.1583eb8b750d87c2c317cd2a80e99ff907b0f74a")]
+[assembly: AssemblyVersion("1.18.6.0")]
+[assembly: AssemblyFileVersion("1.18.6.0")]
+[assembly: AssemblyInformationalVersion("1.18.6-tc-open-data-3.1+1495.Branch.tc-open-data-3.Sha.4620f6ce2ed2c8c1064c47d0e7ea8e5403661434")]

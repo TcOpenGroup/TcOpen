@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoContextEnvironment IMPLEMENTS ITcoContextEnvironment
 VAR
 	{attribute clr [RenderIgnore()]}
-	_messenger : TcoMessengerSettings;
+	_messenger : TcoMessengerEnv;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -18,7 +18,7 @@ END_VAR
 			</summary>			
 		</docu>	
 ~*)
-PROPERTY Messaging : ITcoMessengerSettings]]></Declaration>
+PROPERTY Messaging : ITcoMessengerEnv]]></Declaration>
       <Get Name="Get" Id="{2afecb4e-9dba-0868-0a02-c655cbf5e0a9}">
         <Declaration><![CDATA[VAR
 END_VAR

@@ -25,6 +25,10 @@
 
 
     <Grid x:Name="RootContainer">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
         <TabControl>
             <TabItem Header="Data">
                 <Grid Name="ResizableGrid">
@@ -122,7 +126,7 @@
                             SelectedIndex="0"
                             SelectedItem="{Binding SelectedRecord}"
                             SelectionUnit="FullRow">
-                            <DataGrid.Columns>
+                            <!--<DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding _EntityId}" Header="ID" />
                                 <DataGridTextColumn Binding="{Binding _Created, Converter={wpf:HumanizeDateConverter}}" Header="{x:Static p:strings.Created}" />
                                 <DataGridTextColumn
@@ -130,7 +134,7 @@
                                     Binding="{Binding _Modified, Converter={wpf:HumanizeDateConverter}}"
                                     Header="{x:Static p:strings.Modified}" />
 
-                            </DataGrid.Columns>
+                            </DataGrid.Columns>-->
                         </DataGrid>
                     </Grid>
 
@@ -305,6 +309,11 @@
                 </DataGrid>
             </TabItem>
         </TabControl>
+        <vortex:HelpProviderView Grid.Row="1">
+            <vortex:HelpProviderView.DataContext>
+                <vortex:HelpProviderViewModel ComponentName="(TcOpen)DataView" />
+            </vortex:HelpProviderView.DataContext>
+        </vortex:HelpProviderView>
     </Grid>
 
 </UserControl>

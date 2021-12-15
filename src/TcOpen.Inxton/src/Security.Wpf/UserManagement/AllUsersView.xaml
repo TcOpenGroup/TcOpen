@@ -89,9 +89,6 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
-
-
                 <Grid
                     x:Name="UserInfoGrid"
                     Grid.Row="0"
@@ -212,8 +209,6 @@
                         CommandParameter="{Binding ElementName=Groups, Path=SelectedItem}"
                         Content="{x:Static p:strings.AddGroup}" />
                 </Grid>
-
-
                 <Grid Grid.Row="1" Margin="0,24,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

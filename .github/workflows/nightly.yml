@@ -30,6 +30,15 @@ jobs:
             "testingStrength" = 10;
             "packNugets" = $true;
           }
+      - name : Create Tag
+        if : env.BuildNumber && success() && github.event_name != 'pull_request'
+        run : |
+          git config --global user.email "gh-action@tcopengroup.com"
+          git config --global user.name "gh-action"
+          $tag = "GH-${{github.run_id}}-${{env.BuildNumber}}"
+          git tag $tag 
+          git push --tags
+        continue-on-error: true
       - name: Upload test results
         uses: actions/upload-artifact@v2 
         if: success() || failure() 

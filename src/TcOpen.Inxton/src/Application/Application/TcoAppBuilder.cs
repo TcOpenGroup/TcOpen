@@ -51,12 +51,10 @@
         /// <returns>AppBuilder</returns>
         public TcoAppBuilder SetSecurity(IAuthenticationService authenticationService)
         {
-            AuthenticationService = authenticationService;            
+            Domain.AuthenticationService = authenticationService;            
             return this;
         }
-
-        public IAuthenticationService AuthenticationService { get; private set; }
-
+        
 
         /// <summary>
         /// Sets the logging for the 'Edit' -> 'Online' value change.

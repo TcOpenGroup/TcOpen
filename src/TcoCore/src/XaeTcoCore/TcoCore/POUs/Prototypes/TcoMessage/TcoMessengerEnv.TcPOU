@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="TcoMessengerSettings" Id="{e6a12bea-a5ee-06da-38d8-d4f316d1c513}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC TcoMessengerSettings IMPLEMENTS ITcoMessengerSettings
+  <POU Name="TcoMessengerEnv" Id="{e6a12bea-a5ee-06da-38d8-d4f316d1c513}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC TcoMessengerEnv IMPLEMENTS ITcoMessengerEnv
 VAR
 	_minLevel : eMessageCategory;
 	_isMessagingSuspended : BOOL;	
 	_messageDigestMethod : eMessageDigestMethod := eMessageDigestMethod.CRC16;
 	_messengerLoggingMethod : eMessengerLogMethod := eMessengerLogMethod.OnEventRisen;
+	{attribute 'hide'}
+	_sb : StringBuilder();
 END_VAR
 
 VAR CONSTANT
@@ -153,6 +155,17 @@ METHOD PUBLIC Resume : BOOL
         <ST><![CDATA[_isMessagingSuspended := FALSE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="StringBuilder" Id="{e65981c7-09b3-0eda-0b76-93858198e4f0}">
+      <Declaration><![CDATA[PROPERTY StringBuilder : REFERENCE TO StringBuilder]]></Declaration>
+      <Get Name="Get" Id="{8e7875a9-7cd0-0220-1110-a8523e0cffd3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StringBuilder REF= _sb;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Suspend" Id="{ed0d7753-8ddd-0f15-326c-cd14614ece49}">
       <Declaration><![CDATA[(*~
 	<docu>
