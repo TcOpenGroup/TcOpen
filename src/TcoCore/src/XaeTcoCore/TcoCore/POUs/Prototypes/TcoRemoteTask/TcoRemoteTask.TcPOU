@@ -39,11 +39,11 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Execute() THEN
-    IF (_invokeRequest) THEN
+    //IF (_invokeRequest) THEN
         IF (NOT THIS^._isInitialized) THEN
             Messenger.Programming('Remote call not initialized.');
         END_IF;
-    END_IF
+    //END_IF
 	
     IF (THIS^._hasException OR THIS^._exceptionMessage <> '') THEN        
         _startSignature := '';

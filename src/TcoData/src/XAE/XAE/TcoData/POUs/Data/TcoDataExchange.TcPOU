@@ -20,8 +20,31 @@ _idExistsTask();
 _createOrUpdateTask();]]></ST>
     </Implementation>
     <Method Name="Create" Id="{535f62d3-cdf1-09d6-36dd-65bfab4cf00a}">
-      <Declaration><![CDATA[METHOD Create : TcoCore.ITcoTaskStatus
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Creates new entry in the Repository. 	
+		</summary>			
+		<remarks>
+		   <note type="information">
+				Inxton is required for this feature to work.
+		   </note>	
+		</remarks>	
+		<example>
+			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
+		<example>
+	</docu>	
+~*)
+METHOD Create : TcoCore.ITcoTaskStatus
 VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			<remarks>Inxton is required for this feature to work</remarks> 	
+		</summary>			
+				
+	</docu>	
+~	*)	
 	Identifier : STRING(255);
 END_VAR]]></Declaration>
       <Implementation>

@@ -13,12 +13,30 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid Grid.Row="0">
-        <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManager}" PresentationType="Control">
-            <vortex:RenderableContentControl.RootContainer>
-                <Grid />
-            </vortex:RenderableContentControl.RootContainer>
-        </vortex:RenderableContentControl>
+    <TabControl>
+        <TabItem Header="Data">
+            <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManager}" PresentationType="Control">
+                <vortex:RenderableContentControl.RootContainer>
+                    <Grid />
+                </vortex:RenderableContentControl.RootContainer>
+            </vortex:RenderableContentControl>
+        </Grid>
+        <UniformGrid Grid.Row="1" Rows="0" Columns="2">
+            <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding Plc.MAIN.sandbox, Mode=OneWay}"></vortex:DynamicTreeView>
+            <ScrollViewer>
+                <vortex:ObservableContentControl DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}" PresentationType="Base-Control"></vortex:ObservableContentControl>
+            </ScrollViewer>
+        </UniformGrid>
     </Grid>
-
+        </TabItem>
+        <TabItem Header="Diagnostics">
+            <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+        </TabItem>
+    </TabControl>
 </Window>

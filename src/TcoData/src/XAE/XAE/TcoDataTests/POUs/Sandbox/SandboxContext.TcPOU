@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK SandboxContext EXTENDS TcoCore.TcoContext
 VAR
     DataManager : TcoDataManager(THIS^);
+	_state : INT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -18,9 +19,65 @@ END_VAR]]></Declaration>
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED  Main
+VAR
+	recordId_1 : STRING;
+	recordId_2 : STRING;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[DataManager.Messenger.Build().Append('Entering data managed cyclic execution').As().AsDebug();
+DataManager();
+
+Context.Environment.Messaging.MessageDigestMethod := eMessageDigestMethod.CRC32;
+Context.Environment.Messaging.MessengerLoggingMethod := eMessengerLogMethod.OnEventRisen;
+
+recordId_1 := 'scoundrel';
+recordId_2 := 'knight';
+
+CASE _state OF
+	0:
+		IF(DataManager.Exists(recordId_1).Done) THEN
+			IF(DataManager.Exists(recordId_1).Exists) THEN
+				IF(DataManager.Delete(recordId_1).Done) THEN
+					_state := 5;
+				END_IF
+			ELSE
+				_state := 5;
+			END_IF
+		END_IF
+	5:
+		IF(DataManager.Exists(recordId_2).Done) THEN
+			IF(DataManager.Exists(recordId_2).Exists) THEN
+				IF(DataManager.Delete(recordId_2).Done) THEN
+					_state := 10;
+				END_IF
+			ELSE
+				_state := 10;
+			END_IF
+		END_IF	
+	10:
+		IF(DataManager.Create(recordId_1).Done) THEN
+			_state := 20;
+		END_IF;
+	20:
+		DataManager.Data.sampleData.SampleInt := 33;
+		DataManager.Data.sampleData.SampleString := 'Verstappen';
+		DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 1;
+		IF(DataManager.Update(recordId_1).Done) THEN
+			_state := 30;
+		END_IF;	
+	30:
+		DataManager.Data.sampleData.SampleInt := 44;
+		DataManager.Data.sampleData.SampleString := 'Hammilton';
+		DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 7;
+		IF(DataManager.CreateOrUpdate(recordId_2).Done) THEN
+			_state := 40;
+		END_IF;	
+	40:		
+		IF(DataManager.Read(recordId_1).Done) THEN
+			_state := 50;
+		END_IF;					
+END_CASE]]></ST>
       </Implementation>
     </Method>
   </POU>
