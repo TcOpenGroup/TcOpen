@@ -123,7 +123,7 @@ namespace TcoCore.PexTests
 
             if (expected)
             {
-                Assert.AreEqual("Task '' started. {@sender}", _logger.LastMessage.message);
+                Assert.AreEqual("Task '' invoked. {@sender}", _logger.LastMessage.message);
                 Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
                 Assert.AreEqual("Information", _logger.LastMessage.serverity);
             }

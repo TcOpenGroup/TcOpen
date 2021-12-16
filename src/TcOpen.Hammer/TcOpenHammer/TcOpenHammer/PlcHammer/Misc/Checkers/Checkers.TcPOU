@@ -15,14 +15,14 @@ VAR_INPUT
 	Signal : REAL;
 END_VAR
 VAR_INPUT
-	Data : AnalogueValueCheck;
+	pData : POINTER TO AnalogueValueCheck;
 END_VAR
 VAR
 	_inRange : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Data.Measured := Signal;
-_inRange := (Signal >= Data.Mininum) AND (Signal <= Data.Maximum);
+        <ST><![CDATA[pData^.Measured := Signal;
+_inRange := (Signal >= pData^.Mininum) AND (Signal <= pData^.Maximum);
 
 IF(NOT _inRange 
 AND_THEN _result <= eCheckResult.Passed) THEN

@@ -27,7 +27,6 @@ _processRecipies();
 _processTraceabilty();
 _technologicalDataManager();
 
-
 ServiceMode();
 GroundMode();
 AutomatMode();
@@ -42,7 +41,6 @@ IF(_swiftModeTask.Execute()) THEN
 	_serviceModeTask.Restore();
 	_swiftSequence.Run();
 END_IF
-
 
 
 
