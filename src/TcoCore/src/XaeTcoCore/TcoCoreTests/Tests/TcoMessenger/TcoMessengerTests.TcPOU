@@ -7,10 +7,154 @@ VAR
 	_minLevel : TcoCore.eMessageCategory;
 	_messageDigestMethod : TcoCore.eMessageDigestMethod;
 	_messageLoggingMethod : TcoCore.eMessengerLogMethod;
+END_VAR
+
+VAR
+	_BOOL			: BOOL 				 := TRUE;
+	_BYTE			: BYTE				 := 1;
+	_WORD			: WORD				 := 22;
+	_DWORD			: DWORD				 := 333;
+	_LWORD			: LWORD				 := 4444;
+	_SINT			: SINT				 := 12;
+	_USINT			: USINT				 := 13;
+	_INT			: INT				 := 14; 
+	_UINT			: UINT				 := 55;
+	_DINT			: DINT				 := 66;
+	_UDINT			: UDINT				 := 77;
+	_LINT			: LINT				 := 88;
+	_ULINT			: ULINT				 := 99;
+	_LTIME			: LTIME				 :=	LTIME#551US615NS; 
+	_Real 			: REAL				 := 99.9;
+	_LReal			: LREAL				 :=	88.8;
+	_DateAndTime 	: DATE_AND_TIME	 := DT#2106-02-06-06:28:15;
+	_Date			: DATE				 := D#2106-02-06;
+	_Time			: TIME				 := T#71582M47S295MS;
+	_WString		: WSTRING			 := "W1";
+	_TOD			: TOD				 := TOD#23:59:59.999;
+	_String			: STRING			 :=	'S1';
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="As" Id="{8f4655ae-f441-09fd-2886-71c54526cb3c}" />
+    <Method Name="AppendAnys_1" Id="{75e9fff2-0d79-0c6b-1899-64e8e72ac807}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AppendAnys_1 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().AppendAny(_BOOL		     )
+                  .AppendAny(_BYTE		     )
+                  .AppendAny(_WORD		     )
+                  .AppendAny(_DWORD		     )
+                  .AppendAny(_LWORD		     )
+                  .AppendAny(_SINT		     )
+                  .AppendAny(_USINT		     )
+                  .AppendAny(_INT		     )
+                  .AppendAny(_UINT		     )
+                  .AppendAny(_DINT		     )
+				  .AppendAny(_UDINT		     ).As().AsDebug();				]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendAnys_2" Id="{cda3da18-b30b-0e91-1459-47c79d7fbf42}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AppendAnys_2 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().AppendAny(_LINT		     )
+				  .AppendAny(_ULINT		     )
+				  .AppendAny(_LTIME		     )
+                  .AppendAny(_Real 		     )
+				  .AppendAny(_LReal		     )
+				  .AppendAny(_DateAndTime    )
+				  .AppendAny(_Date		     )  
+                  .AppendAny(_Time		     )
+				  .AppendAny(_WString	     )
+				  .AppendAny(_TOD		     )
+				  .AppendAny(_String		 ).As().AsDebug();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsDebug" Id="{28278033-884e-0754-16b7-a71ef9f36b70}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AsDebug : BOOL
+VAR_INPUT
+	TextMessage1 : STRING;
+	TextMessage2 : STRING;
+	Value : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().Append(TextMessage1).Append(TextMessage2).AppendAny(Value).As().AsDebug();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsError" Id="{11de2039-508e-077a-3c59-04d05bc193fa}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AsError : BOOL
+VAR_INPUT
+	TextMessage1 : STRING;
+	TextMessage2 : STRING;
+	Value : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().Append(TextMessage1).Append(TextMessage2).AppendAny(Value).As().AsError();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsFatal" Id="{3eebfd32-39af-088f-1125-85723e6f1daa}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AsFatal : BOOL
+VAR_INPUT
+	TextMessage1 : STRING;
+	TextMessage2 : STRING;
+	Value : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().Append(TextMessage1).Append(TextMessage2).AppendAny(Value).As().AsFatal();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsInfo" Id="{0dd75bcc-a12d-0170-0caa-286251b11a98}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AsInfo : BOOL
+VAR_INPUT
+	TextMessage1 : STRING;
+	TextMessage2 : STRING;
+	Value : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().Append(TextMessage1).Append(TextMessage2).AppendAny(Value).As().AsInfo();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsTrace" Id="{e5c2f330-7172-009a-258e-6e097bb33bef}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AsTrace : BOOL
+VAR_INPUT
+	TextMessage1 : STRING;
+	TextMessage2 : STRING;
+	Value : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().Append(TextMessage1).Append(TextMessage2).AppendAny(Value).As().AsTrace();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsWarning" Id="{24d5dc4e-60b0-00a4-369e-a2d7751c346b}" FolderPath="As\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD AsWarning : BOOL
+VAR_INPUT
+	TextMessage1 : STRING;
+	TextMessage2 : STRING;
+	Value : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.Build().Append(TextMessage1).Append(TextMessage2).AppendAny(Value).As().AsWarning();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Catastrophic" Id="{093578d4-4883-02db-1234-cd38a177e6a9}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL Catastrophic
@@ -81,6 +225,43 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_messenger.Notify(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnCondition" Id="{e703b1c7-cb4e-0f53-157b-b659f402335a}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD OnCondition : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.OnCondition(inCondition).Post(message, _category);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Pin" Id="{6f3b1ff2-ee84-08b3-3106-aabf05111047}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Pin : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(inCondition)THEN
+	_messenger.Post(message, _category).Pin();
+ELSE
+	_messenger.Post(message, _category);
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Pinned" Id="{b0bb481b-a0e8-0eda-3566-10e1585625b7}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Pinned : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Pinned := _messenger.Pinned;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Post" Id="{aa4eba68-8e3e-0790-14e4-37c20eb0fa3d}">
@@ -181,6 +362,19 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_messenger.Trace(Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UnPin" Id="{19d9f139-709a-0227-3e03-cbb3323497b3}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD UnPin : BOOL
+VAR_INPUT
+	inCondition : BOOL;
+	message : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_messenger.UnPin();
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Warning" Id="{032a7c5b-ea22-0043-0563-7ca4d7b308c3}">

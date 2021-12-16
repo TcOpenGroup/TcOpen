@@ -91,15 +91,27 @@ TYPE eMessageCategory :
 	</docu>	
 	~*)
 	ProgrammingError := 900,
+	
 	(*~
 	<docu>
 		<summary>
 			Critical error. 
-			Use this category when a critical error occured, that is not recoverable by the means of software (reset/restore) and a detailed inspection is required.
+			Use this category when a critical error occured, that is not recoverable by the means of software (reset/restore) and but device still operates under such conditions; a detailed inspection and an expert action is required.
 		</summary>
 	</docu>	
-	~*)	
-	Critical := 1000,		
+	~*)			
+	Critical := 1000,
+	
+	(*~
+	<docu>
+		<summary>
+			Fatal error. 
+			Use this category when a fatal error occured, that is not recoverable by the means of software (reset/restore) and a detailed inspection is required, the device is not able to continue without special intervention,
+		</summary>
+	</docu>	
+	~*)
+	Fatal    := 1100,
+		
 	(*~
 	<docu>
 		<summary>
@@ -108,7 +120,7 @@ TYPE eMessageCategory :
 		</summary>
 	</docu>	
 	~*)
-	Catastrophic := 1100,
+	Catastrophic := 1200,
 	
 	None := 32000
 );

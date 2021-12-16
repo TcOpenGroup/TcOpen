@@ -8,7 +8,7 @@ using TcoCoreTests;
 using TcoCore.Testing;
 using TcoCore;
 using System.Threading;
-
+using Vortex.Connector;
 
 namespace TcoCoreUnitTests.PlcExecutedTests
 {
@@ -106,6 +106,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._arranged.Synchron = false;
             tc._plcCycleCounter.Synchron =0 ;
 
+            
         }
 
         [TearDown]
@@ -754,6 +755,27 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.IsFalse(tc._to_A._sut_A._isReady.Synchron);
         }
 
+        [Test, Order((int)eTcoTaskTests.TaskExecuteMethodNotCalled)]
+        public void T360_TaskExecuteMethodNotCalled()
+        {
+            //Act
+            tc.ExecuteProbeRun(2, (int)eTcoTaskTests.TaskExecuteMethodNotCalled);
+            var message = tc._to_A._sut_A._messenger._mime.PlainMessage;
+            Assert.AreEqual("Cyclic execution of the task not called. Make sure you are calling Execute() method cyclically in the call tree of the context.", message.Text);
+            Assert.AreEqual(eMessageCategory.ProgrammingError, message.CategoryAsEnum);
+        }
 
+        [Test, Order((int)eTcoTaskTests.TaskExecuteMethodCalled)]
+        public void T370_TaskExecuteMethodCalled()
+        {
+            tc.ExecuteProbeRun(1, (int)eTcoTaskTests.TaskExecuteMethodCalled);
+            tc._to_A._sut_A._messenger.Clear();            
+            //Act
+            tc.ExecuteProbeRun(2, (int)eTcoTaskTests.TaskExecuteMethodCalled);
+            tc._to_A._sut_A._messenger.Read();
+            var message = tc._to_A._sut_A._messenger._mime.PlainMessage;            
+            Assert.AreEqual(string.Empty, message.Text);
+            Assert.AreEqual(eMessageCategory.All, message.CategoryAsEnum);
+        }
     }
 }

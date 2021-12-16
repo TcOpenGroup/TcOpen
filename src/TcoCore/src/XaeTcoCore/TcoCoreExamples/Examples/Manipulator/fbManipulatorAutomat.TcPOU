@@ -6,12 +6,59 @@ VAR
 	_horizontalPiston : fbPiston(THIS^);
 	_verticalPiston : fbPiston(THIS^);
 	_gripperPiston : fbPiston(THIS^);
+	_persistentMessage : TcoCore.TcoMessenger(THIS^);
 END_VAR
-]]></Declaration>
+VAR
+	ar : ARRAY[0..2] OF BOOL;
+END_VAR
+VAR
+	_bool : BOOL;
+	_real : REAL := 1.5;
+	_lreal : LREAL := 2.5;
+	_dt : DT := DT#2013-05-09-13:29:20.500;
+	_d : DATE := D#2012-04-14;
+	_time : TIME := T#50MS;
+	_string : STRING := 'str';
+	_wstring : WSTRING := "wstr";
+	_tod : TOD := TOD#13:29:20.500 ;
+	_int : INT := 589;	
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// THIS^.Context.Environment.Messaging.Suspend();
 
-IF(THIS^.Context.StartCycleCount MOD 1 = 0) THEN 
+
+
+_persistentMessage.OnCondition(TRUE).Build()//.Append('sss').Append('ddd')
+										    //.AppendAny(ar[0])
+											.AppendAny(_bool)
+											.AppendAny(_real)
+											.AppendAny(_lreal)
+											.AppendAny(_dt)
+											.AppendAny(_d)
+											.AppendAny(_time)
+											.AppendAny(_string)
+											.AppendAny(_wstring)
+											.AppendAny(_tod)
+											.AppendAny(_int).As().AsDebug();
+											
+
+
+IF(NOT _persistentMessage.OnCondition(ar[0]).Build().Append('This is problem ').Append('like any other').As().AsError().Pin().Pinned) THEN
+	_persistentMessage.OnCondition(ar[1]).Error('this is persistent error 2').Pin();
+END_IF;	
+
+IF(ar[2]) THEN
+	_persistentMessage.UnPin();
+END_IF;	
+
+RETURN;
+THIS^._verticalPiston.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 5000 = 0).Post('We are running automatic mode4 conditional', eMessageCategory.Catastrophic).Pin();
+THIS^.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 2500 = 0).Info('We are running automatic mode1 conditional').Pin();
+THIS^._gripperPiston.Messenger.OnCondition(THIS^.Context.StartCycleCount MOD 1000 = 0).Notify('We are running automatic mode7 conditional').Pin();
+
+
+
+//IF(THIS^.Context.StartCycleCount MOD 1 = 0) THEN 
 	THIS^.Messenger.Info('We are running automatic mode1');
 	THIS^.Messenger.Notify('We are running automatic mode2');
 	THIS^.Messenger.Notify('We are running automatic mode3');
@@ -24,7 +71,16 @@ IF(THIS^.Context.StartCycleCount MOD 1 = 0) THEN
 	THIS^.Messenger.Info('We are running automatic mode1');
 	THIS^.Messenger.Notify('We are running automatic mode2');
 	THIS^.Messenger.Notify('We are running automatic mode3');
-	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode4');
+	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode4-');
+	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode5-');
+	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode6-');
+	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode7-');
+	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode8-');
+	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode9-');
+	THIS^.Messenger.Info('We are running automatic mode1-');
+	THIS^.Messenger.Notify('We are running automatic mode2-');
+	THIS^.Messenger.Notify('We are running automatic mode3-');
+	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode48');
 	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode5');
 	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode6');
 	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode7');
@@ -111,16 +167,7 @@ IF(THIS^.Context.StartCycleCount MOD 1 = 0) THEN
 	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode7');
 	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode8');
 	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode9');
-	THIS^.Messenger.Info('We are running automatic mode1');
-	THIS^.Messenger.Notify('We are running automatic mode2');
-	THIS^.Messenger.Notify('We are running automatic mode3');
-	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode4');
-	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode5');
-	THIS^._verticalPiston.Messenger.Notify('We are running automatic mode6');
-	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode7');
-	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode8');
-	THIS^._gripperPiston.Messenger.Notify('We are running automatic mode9');
-END_IF;
+//END_IF;
 
 // THIS^.Context.Environment.Messaging.Resume();
 

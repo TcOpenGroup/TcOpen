@@ -42,7 +42,9 @@ VAR
 	{attribute 'hide'}
 	_MyParentsChangeStateCycle	: ULINT;
 	{attribute 'hide'}
-	_MyParentsLastChangeState	: INT;	
+	_MyParentsLastChangeState	: INT;
+	{attribute 'hide'}	
+	_exectuteCallCycle : ULINT;
 (*~
 	<docu>
 		<summary>
@@ -320,7 +322,9 @@ PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{65176686-2db0-4acd-880d-da851e8da10c}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Done := THIS^._taskState = eTaskState.Done;]]></ST>
+          <ST><![CDATA[Done := THIS^._taskState = eTaskState.Done;
+PrivateDetectExecuteCall();
+ ]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -442,6 +446,10 @@ IF(THIS^._Parent <> 0 )THEN
 	END_IF
 END_IF;
 
+IF(THIS^._Parent.Context <> 0) THEN
+	_exectuteCallCycle := THIS^._Parent.Context.StartCycleCount;
+END_IF;	
+ 
 //Triggering Invoke from remote system
 IF(THIS^._taskState = eTaskState.Ready AND THIS^._invokeRequest) THEN
 	THIS^.Invoke();
@@ -497,7 +505,8 @@ END_IF;
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{a5b60cba-9da0-4e51-9e99-230c8717014e}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
@@ -550,7 +559,7 @@ IF(THIS^._taskState = eTaskState.Ready OR (THIS^._taskState = eTaskState.Done AN
 	IF _enabled THEN
 		THIS^._taskState := eTaskState.Requested;
 	ELSE
-		THIS^.Messenger.Post('Task cannot be started  as its Enabled property is FALSE.',eMessageCategory.Info);
+		THIS^.Messenger.Post('Tasks is not enabled.',eMessageCategory.Info);
 	END_IF	
 END_IF	
 
@@ -610,6 +619,16 @@ METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PrivateDetectExecuteCall" Id="{8e1a462c-2db8-0fd4-0cb0-5ad9fc794c9b}">
+      <Declaration><![CDATA[METHOD PRIVATE PrivateDetectExecuteCall
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Messenger.OnCondition(THIS^._Parent.Context.StartCycleCount > _exectuteCallCycle + 1)
+			   .Programming('Cyclic execution of the task not called. Make sure you are calling Execute() method cyclically in the call tree of the context.');
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Ready" Id="{41983d9a-f8f9-0718-1aa5-28b21efac144}">

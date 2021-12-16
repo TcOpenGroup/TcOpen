@@ -91,6 +91,7 @@ task GitVersion `
   $gitVersionOutput
   $script:gitVersion =  $gitVersionOutput |  ConvertFrom-Json   
   $buildNumber =$script:gitVersion.SemVer
+  Write-Output ("BuildNumber=$buildNumber") >> $env:GITHUB_ENV
 
   if($script:gitVersion.BuildMetaData -ne ""){
     $v= $script:gitVersion.BuildMetaData;
