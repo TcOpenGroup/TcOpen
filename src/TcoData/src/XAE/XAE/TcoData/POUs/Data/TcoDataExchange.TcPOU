@@ -30,9 +30,9 @@ _createOrUpdateTask();]]></ST>
 				Inxton is required for this feature to work.
 		   </note>	
 		</remarks>	
-		<example>
-			[!code-pas[Main](~/../TcOpen/src/TcoApplicationExamples/XaeAppExamples/PlcAppExamples/POUs/Context/VitoCorleone_Context.TcPOU?name=ContextExampleDeclarations)]
-		<example>
+		<example>			
+			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Sandbox/SandboxContext.TcPOU?name=CreateCodeExample)]
+		</example>
 	</docu>	
 ~*)
 METHOD Create : TcoCore.ITcoTaskStatus
@@ -44,7 +44,7 @@ VAR_INPUT
 		</summary>			
 				
 	</docu>	
-~	*)	
+	~*)	
 	Identifier : STRING(255);
 END_VAR]]></Declaration>
       <Implementation>

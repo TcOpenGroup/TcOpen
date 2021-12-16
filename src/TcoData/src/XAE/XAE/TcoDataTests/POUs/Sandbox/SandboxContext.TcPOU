@@ -56,19 +56,24 @@ CASE _state OF
 			END_IF
 		END_IF	
 	10:
+
+// <CreateCodeExample>	
+		// Will create new entry into repository with data contained in the `_data` 
 		IF(DataManager.Create(recordId_1).Done) THEN
 			_state := 20;
 		END_IF;
+// </CreateCodeExample>
+		
 	20:
 		DataManager.Data.sampleData.SampleInt := 33;
-		DataManager.Data.sampleData.SampleString := 'Verstappen';
+		DataManager.Data.sampleData.SampleString := 'Max';
 		DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 1;
 		IF(DataManager.Update(recordId_1).Done) THEN
 			_state := 30;
 		END_IF;	
 	30:
 		DataManager.Data.sampleData.SampleInt := 44;
-		DataManager.Data.sampleData.SampleString := 'Hammilton';
+		DataManager.Data.sampleData.SampleString := 'Lewis';
 		DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 7;
 		IF(DataManager.CreateOrUpdate(recordId_2).Done) THEN
 			_state := 40;
