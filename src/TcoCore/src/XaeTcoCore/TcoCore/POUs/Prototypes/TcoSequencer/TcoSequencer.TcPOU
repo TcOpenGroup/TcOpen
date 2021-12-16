@@ -677,6 +677,7 @@ IF(inRequestedStepID <> (MinStepID-1)) THEN
 	END_IF
 END_IF;	
 
+Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
 Messenger.Build().Append('Reqesting step id jump to: ').AppendAny(inRequestedStepID).As().AsTrace();
 
 RequestStep := THIS^;]]></ST>

@@ -60,8 +60,8 @@ namespace HMI
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
-                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);              
-         
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
+
             // Initialize logger
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
 

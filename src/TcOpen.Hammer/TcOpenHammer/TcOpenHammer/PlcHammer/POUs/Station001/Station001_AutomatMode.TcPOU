@@ -25,7 +25,8 @@ VAR_INST
 	_id : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
+        <ST><![CDATA[
+IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNCAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
@@ -62,16 +63,16 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum,
-        inMaxValue := Station.ProductionData.DimX.Maximum,
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum - 0.5,
+        inMaxValue := Station.ProductionData.DimX.Maximum + 0.5,
         inoutValue := Station.Components._dimX);
 
-    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum,
-        inMaxValue := Station.ProductionData.DimY.Maximum,
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum - 0.5,
+        inMaxValue := Station.ProductionData.DimY.Maximum + 0.5,
         inoutValue := Station.Components._dimY);
 
-    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum,
-        inMaxValue := Station.ProductionData.DimZ.Maximum,
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum - 0.5,
+        inMaxValue := Station.ProductionData.DimZ.Maximum + 0.5,
         inoutValue := Station.Components._dimZ);
 
     StepCompleteWhen(TRUE);
@@ -82,9 +83,9 @@ IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
 
     _partPassedChecks := Station.Checkers.StartChecks()
-        .CheckAnalogue(Station.Components._dimX, Data := Station.ProcessTraceabilty._data.DimX)
-        .CheckAnalogue(Station.Components._dimY, Data := Station.ProcessTraceabilty._data.DimY)
-        .CheckAnalogue(Station.Components._dimZ, Data := Station.ProcessTraceabilty._data.DimZ)
+        .CheckAnalogue(Signal := Station.Components._dimX, pData := ADR(Station.ProcessTraceabilty._data.DimX))
+        .CheckAnalogue(Signal := Station.Components._dimY, pData := ADR(Station.ProcessTraceabilty._data.DimY))
+        .CheckAnalogue(Signal := Station.Components._dimZ, pData := ADR(Station.ProcessTraceabilty._data.DimZ))
         .HasPassed();
 
     StepCompleteWhen(TRUE);
