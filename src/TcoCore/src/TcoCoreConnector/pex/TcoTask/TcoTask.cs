@@ -97,7 +97,7 @@ namespace TcoCore
 
                 this._invokeRequest.Synchron = true;
 
-                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' invoked. {{@sender}}", LogInfo.Create(this));
 
                 RecordTaskAction?.Invoke(this.CodeProvider);
             }

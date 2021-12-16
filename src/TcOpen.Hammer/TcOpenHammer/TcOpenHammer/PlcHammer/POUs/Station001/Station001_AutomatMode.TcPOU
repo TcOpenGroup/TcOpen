@@ -20,9 +20,13 @@ END_VAR]]></Declaration>
 METHOD PROTECTED  Main : BOOL
 VAR CONSTANT
 	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;	
+END_VAR
+VAR_INST
+	_id : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
+        <ST><![CDATA[
+IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNCAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
@@ -35,20 +39,16 @@ END_IF;
 
 IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
     //--------------------------------------------
-	IF(Station.TechnologicalDataManager._data._EntityId = '') THEN
-		Station.TechnologicalDataManager.Messenger.Error('Technological settings not selected.');
-	ELSE
-		StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);	
-	END_IF
-    
+	
+    IF(NOT Station.TechnologicalDataManager.Messenger.OnCondition(Station.TechnologicalDataManager._data._EntityId = '').Error('Technological settings not selected.').Pin().Pinned) THEN;	
+		StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);
+	END_IF;	
     //--------------------------------------------	
 END_IF;
 
 IF (Step(50, TRUE, 'LOAD RECIPE SETTINGS')) THEN
-    //--------------------------------------------
-	IF(Station.ProcessRecepie._data._EntityId = '') THEN
-		Station.ProcessRecepie.Messenger.Error('Process settings not selected.');
-	ELSE
+    //--------------------------------------------	
+	IF(NOT Station.ProcessRecepie.Messenger.OnCondition(Station.ProcessRecepie._data._EntityId = '').Error('Process settings not selected.').Pin().Pinned) THEN	
 		StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
 		Station.ProductionData := Station.ProcessRecepie._data;
 	END_IF	
@@ -63,16 +63,16 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum,
-        inMaxValue := Station.ProductionData.DimX.Maximum,
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum - 0.5,
+        inMaxValue := Station.ProductionData.DimX.Maximum + 0.5,
         inoutValue := Station.Components._dimX);
 
-    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum,
-        inMaxValue := Station.ProductionData.DimY.Maximum,
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum - 0.5,
+        inMaxValue := Station.ProductionData.DimY.Maximum + 0.5,
         inoutValue := Station.Components._dimY);
 
-    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum,
-        inMaxValue := Station.ProductionData.DimZ.Maximum,
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum - 0.5,
+        inMaxValue := Station.ProductionData.DimZ.Maximum + 0.5,
         inoutValue := Station.Components._dimZ);
 
     StepCompleteWhen(TRUE);
@@ -83,9 +83,9 @@ IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
 
     _partPassedChecks := Station.Checkers.StartChecks()
-        .CheckAnalogue(Station.Components._dimX, Data := Station.ProcessTraceabilty._data.DimX)
-        .CheckAnalogue(Station.Components._dimY, Data := Station.ProcessTraceabilty._data.DimY)
-        .CheckAnalogue(Station.Components._dimZ, Data := Station.ProcessTraceabilty._data.DimZ)
+        .CheckAnalogue(Signal := Station.Components._dimX, pData := ADR(Station.ProcessTraceabilty._data.DimX))
+        .CheckAnalogue(Signal := Station.Components._dimY, pData := ADR(Station.ProcessTraceabilty._data.DimY))
+        .CheckAnalogue(Signal := Station.Components._dimZ, pData := ADR(Station.ProcessTraceabilty._data.DimZ))
         .HasPassed();
 
     StepCompleteWhen(TRUE);
@@ -156,11 +156,19 @@ IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
     //--------------------------------------------	
 END_IF;
 
-IF (Step(850, TRUE, 'SAVE DATA')) THEN
-    //--------------------------------------------		
-    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock())).Done);
+IF (Step(840, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
+    //-------------------------------------------- 
+	_id := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock());   
+    StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
+
+IF (Step(850, TRUE, 'SAVE DATA')) THEN
+    //--------------------------------------------		
+    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := _id).Done);
+    //--------------------------------------------	
+END_IF;
+
 
 IF (Step(900, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
     //--------------------------------------------    
