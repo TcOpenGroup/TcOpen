@@ -123,6 +123,7 @@ METHOD Abort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF THIS^._taskState = eTaskState.Busy THEN
+	THIS^.Messenger.Trace('<#Task aborted.#>');
 	OnAbort();
 	THIS^.Restore();
 END_IF]]></ST>
@@ -344,6 +345,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF (inCondition AND THIS^._taskState = eTaskState.Busy) THEN
 	THIS^._taskState := eTaskState.Done;
+	THIS^.Messenger.Trace('<#Task done.#>');
 	OnDone();			
 END_IF;	
 
@@ -474,7 +476,7 @@ IF NOT _enabled THEN
 		THIS^.Restore();
 	END_IF
 	IF THIS^._taskState = eTaskState.Busy THEN
-		THIS^.Messenger.Post('Running task entered Error state since the Enabled property transitioned to FALSE during task execution.',eMessageCategory.Error);	
+		THIS^.Messenger.Post('Running task entered Error state when the Enabled property transitioned to FALSE during task execution.',eMessageCategory.Error);	
 		THIS^._taskState := eTaskState.Error;
 	END_IF
 END_IF;
@@ -485,6 +487,7 @@ AutoRestore();
 IF(THIS^._taskState = eTaskState.Requested) THEN	
 	_executionTimer(IN := FALSE);
 	THIS^._taskState := eTaskState.Busy;
+	THIS^.Messenger.Trace('<#Task started.#>');
 	THIS^.OnStart();
 END_IF;
 
@@ -558,6 +561,7 @@ END_VAR]]></Declaration>
 IF(THIS^._taskState = eTaskState.Ready OR (THIS^._taskState = eTaskState.Done AND _newInvokeCall)) THEN
 	IF _enabled THEN
 		THIS^._taskState := eTaskState.Requested;
+		THIS^.Messenger.Trace('<#Task requested.#>');
 	ELSE
 		THIS^.Messenger.Post('Tasks is not enabled.',eMessageCategory.Info);
 	END_IF	
@@ -662,6 +666,7 @@ PROPERTY Ready : BOOL]]></Declaration>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._taskState := eTaskState.Ready;
+THIS^.Messenger.Trace('<#Task restored.#>');
 Restore := THIS^;
 ]]></ST>
       </Implementation>
@@ -702,6 +707,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF (inCondition) THEN
 	THIS^._taskState := eTaskState.Error;
+	THIS^.Messenger.Trace('<#Task error thrown.#>');
 	OnError();
 END_IF]]></ST>
       </Implementation>

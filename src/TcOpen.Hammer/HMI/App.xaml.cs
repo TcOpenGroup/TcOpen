@@ -63,7 +63,7 @@ namespace HMI
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);              
          
             // Initialize logger
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
 
 
             // Set up data exchange

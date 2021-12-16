@@ -20,6 +20,9 @@ END_VAR]]></Declaration>
 METHOD PROTECTED  Main : BOOL
 VAR CONSTANT
 	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;	
+END_VAR
+VAR_INST
+	_id : STRING;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
@@ -35,20 +38,16 @@ END_IF;
 
 IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
     //--------------------------------------------
-	IF(Station.TechnologicalDataManager._data._EntityId = '') THEN
-		Station.TechnologicalDataManager.Messenger.Error('Technological settings not selected.');
-	ELSE
-		StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);	
-	END_IF
-    
+	
+    IF(NOT Station.TechnologicalDataManager.Messenger.OnCondition(Station.TechnologicalDataManager._data._EntityId = '').Error('Technological settings not selected.').Pin().Pinned) THEN;	
+		StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);
+	END_IF;	
     //--------------------------------------------	
 END_IF;
 
 IF (Step(50, TRUE, 'LOAD RECIPE SETTINGS')) THEN
-    //--------------------------------------------
-	IF(Station.ProcessRecepie._data._EntityId = '') THEN
-		Station.ProcessRecepie.Messenger.Error('Process settings not selected.');
-	ELSE
+    //--------------------------------------------	
+	IF(NOT Station.ProcessRecepie.Messenger.OnCondition(Station.ProcessRecepie._data._EntityId = '').Error('Process settings not selected.').Pin().Pinned) THEN	
 		StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
 		Station.ProductionData := Station.ProcessRecepie._data;
 	END_IF	
@@ -156,11 +155,19 @@ IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
     //--------------------------------------------	
 END_IF;
 
-IF (Step(850, TRUE, 'SAVE DATA')) THEN
-    //--------------------------------------------		
-    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock())).Done);
+IF (Step(840, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
+    //-------------------------------------------- 
+	_id := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock());   
+    StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
+
+IF (Step(850, TRUE, 'SAVE DATA')) THEN
+    //--------------------------------------------		
+    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := _id).Done);
+    //--------------------------------------------	
+END_IF;
+
 
 IF (Step(900, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
     //--------------------------------------------    
