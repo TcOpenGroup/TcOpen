@@ -26,9 +26,6 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PlcTask.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Compatibility\TcoContextCompatibility.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -64,10 +61,6 @@
     </Compile>
     <Compile Include="POUs\ImplicitChecks\CheckRangeUnsigned.TcPOU">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-      <ExcludeFromBuild>false</ExcludeFromBuild>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
       <SubType>Code</SubType>
