@@ -1,21 +1,81 @@
 {
   "DimX": {
-    "Mininum": 9.5,
+    "Mininum": 8.0,
     "Measured": 0.0,
-    "Maximum": 8.0
+    "Maximum": 9.5
   },
   "DimY": {
-    "Mininum": 10.0,
+    "Mininum": 8.0,
     "Measured": 0.0,
-    "Maximum": 8.0
+    "Maximum": 10.0
   },
   "DimZ": {
-    "Mininum": 10.5,
+    "Mininum": 8.0,
     "Measured": 0.0,
-    "Maximum": 8.0
+    "Maximum": 10.5
   },
   "_recordId": null,
   "Changes": [
+    {
+      "DateTime": "2021-12-16T10:46:27.7565357+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX.Mininum"
+      },
+      "OldValue": 9.5,
+      "NewValue": 8.0
+    },
+    {
+      "DateTime": "2021-12-16T10:46:32.804074+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX.Maximum"
+      },
+      "OldValue": 8.0,
+      "NewValue": 9.5
+    },
+    {
+      "DateTime": "2021-12-16T10:46:35.6843934+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY.Mininum"
+      },
+      "OldValue": 10.0,
+      "NewValue": 8.0
+    },
+    {
+      "DateTime": "2021-12-16T10:46:38.9407078+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY.Maximum"
+      },
+      "OldValue": 8.0,
+      "NewValue": 10.0
+    },
+    {
+      "DateTime": "2021-12-16T10:46:45.7734781+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ.Mininum"
+      },
+      "OldValue": 10.5,
+      "NewValue": 8.0
+    },
+    {
+      "DateTime": "2021-12-16T10:46:49.6132337+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ.Maximum"
+      },
+      "OldValue": 8.0,
+      "NewValue": 10.5
+    },
     {
       "DateTime": "2021-06-29T13:46:06.0333027+02:00",
       "UserName": "no user",
@@ -287,7 +347,5 @@
       "NewValue": 11.0
     }
   ],
-  "_EntityId": "default",
-  "_Created": "2021-06-28T08:49:30.0154225+02:00",
-  "_Modified": "2021-06-29T13:46:09.493737+02:00"
+  "_EntityId": "default"
 }

@@ -43,7 +43,7 @@ namespace TcoCore.PexTests
 
             task.Execute(null);
 
-            Assert.AreEqual("Task 'Step forward' executed. {@sender}", _logger.LastMessage.message);            
+            Assert.AreEqual("Task 'Step forward' invoked. {@sender}", _logger.LastMessage.message);            
             Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
             Assert.IsInstanceOf<PlainStepDetails>((_logger.LastMessage.payload as LogInfo).Details);
             Assert.AreEqual("Information", _logger.LastMessage.serverity);
@@ -62,7 +62,7 @@ namespace TcoCore.PexTests
 
             task.Execute(null);
 
-            Assert.AreEqual("Task 'Step backward' executed. {@sender}", _logger.LastMessage.message);
+            Assert.AreEqual("Task 'Step backward' invoked. {@sender}", _logger.LastMessage.message);
             Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
             Assert.IsInstanceOf<PlainStepDetails>((_logger.LastMessage.payload as LogInfo).Details);
             Assert.AreEqual("Information", _logger.LastMessage.serverity);
@@ -81,7 +81,7 @@ namespace TcoCore.PexTests
 
             task.Execute(null);
 
-            Assert.AreEqual("Task 'Step in' executed. {@sender}", _logger.LastMessage.message);
+            Assert.AreEqual("Task 'Step in' invoked. {@sender}", _logger.LastMessage.message);
             Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
             Assert.IsInstanceOf<PlainStepDetails>((_logger.LastMessage.payload as LogInfo).Details);
             Assert.AreEqual("Information", _logger.LastMessage.serverity);
@@ -100,7 +100,7 @@ namespace TcoCore.PexTests
 
             task.Execute(null);
 
-            Assert.AreEqual("Task 'Change mode' executed. {@sender}", _logger.LastMessage.message);
+            Assert.AreEqual("Task 'Change mode' invoked. {@sender}", _logger.LastMessage.message);
             Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
             Assert.IsInstanceOf<PlainStepDetails>((_logger.LastMessage.payload as LogInfo).Details);
             Assert.AreEqual("Information", _logger.LastMessage.serverity);
