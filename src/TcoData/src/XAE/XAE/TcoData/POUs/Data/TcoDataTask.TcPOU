@@ -4,7 +4,7 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Data task is a remote task  <see cref="RemoteTask"/> with a paramater. 	
+			Data task is a remote task  <see cref="PlcDocu.TcoCore.RemoteTask"/> with a paramater. 	
 		</summary>	
 		<param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
 		<remarks>Inxton is required for this feature to work</remarks>		
@@ -12,6 +12,13 @@
 ~*)
 FUNCTION_BLOCK TcoDataTask EXTENDS TcoCore.TcoRemoteTask
 VAR
+	(*~
+	<docu>
+		<summary>
+			The Identifier, ID  of an entity on which a CRUD operation should be executed. 	
+		</summary>						
+	</docu>	
+	~*)
     _identifier : STRING(255);
 END_VAR]]></Declaration>
     <Implementation>
@@ -30,9 +37,24 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="WithId" Id="{73957c41-6f21-008e-2bf1-1954b1beab89}">
-      <Declaration><![CDATA[METHOD WithId : REFERENCE TO TcoDataTask
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes CRUD operation on data entry with given identifier. 	
+		</summary>			
+		<remarks>Inxton is required for this feature to work</remarks>		
+	</docu>	
+~*)
+METHOD WithId : REFERENCE TO TcoDataTask
 VAR_INPUT
-	_identifier : STRING(254);
+	(*~
+	<docu>
+		<summary>
+			The Identifier, ID  of an entity on which a CRUD operation should be executed. 	
+		</summary>						
+	</docu>	
+	~*)
+	inIdentifier : STRING(254);
 END_VAR
 ]]></Declaration>
       <Implementation>

@@ -4,9 +4,12 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Provides basic toggling between two states. It could be triggered by calling the <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method.
+			Provides basic toggling between two states. The states are triggered by calling the <see cref="PlcDocu.TcoCore.TcoToggleTask.Toggle()"/> method.
 			<para>
-				To get the actual state of the toggle task, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOn()"/>, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOff()"/> and <see cref="TcoToggleTask.PlcTcoToggleTask.State()"/> properties are available.
+				To get the actual state of the toggle task, 
+				<see cref="PlcDocu.TcoCore.TcoToggleTask.IsOn"/>, 
+				<see cref="PlcDocu.TcoCore.coToggleTask.IsOff"/> 
+				and <see cref="PlcDocu.TcoCore.TcoToggleTask.State"/> properties are available.
 			</para>
 		</summary>
 	</docu>	
@@ -30,7 +33,7 @@ VAR
 	<docu>
 		<summary>
 			Use to determine if the manipulation is enabled for example from the HMI application. 
-			This value is read only, to modify it use the property <see cref="TcoToggleTask.PlcTcoToggleTask.Enabled()"/>		
+			This value is read only, to modify it use the property <see cref="PlcDocu.TcoCore.TcoToggleTask.Enabled()"/>		
 		</summary>		
 	</docu>	
 ~*)	
@@ -80,8 +83,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets whether the any manipulation with this instance is enabled.
-			The change state could be triggered with <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method call only when this property si '''TRUE'''. 
+			Gets whether the any manipulation with this instance is enabled.			 
 		</summary>			
 	</docu>	
 ~*)
@@ -121,7 +123,7 @@ _state := InitState;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets identity of this <see cref ="TcoTask.PlcTcoTask()"/>. 
+			Gets identity of this <see cref ="PlcDocu.TcoCore.TcoToggleTask()"/>. 
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			This variable is used in the higher level applications.  
 		</summary>			

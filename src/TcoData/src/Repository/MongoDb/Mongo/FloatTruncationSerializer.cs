@@ -5,8 +5,7 @@ using System;
 namespace TcOpen.Inxton.Data.MongoDb
 {
     /// <summary>
-    /// Write the float value to mongo as bool as read it back as float.
-    /// Useful if you want to rewrite the values in the DB and read it back in C# app.
+    /// Writes the float value to mongo as double as reads it back as float.    
     /// </summary>
     public class FloatTruncationSerializer : SerializerBase<float>
     {

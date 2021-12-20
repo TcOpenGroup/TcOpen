@@ -35,7 +35,7 @@ VAR
 		</summary>				
 		<remarks>			
 			<para>
-				See <see cref="TcoSequencer.PlcTcoSequencer._sequencerErrorId"/> for detailed description.
+				See <see cref="PlcDocu.TcoCore.TcoSequencer._sequencerErrorId"/> for detailed description.
 			</para>
 		</remarks>	
 	</docu>	
@@ -50,7 +50,7 @@ VAR
 		</summary>		
 		<remarks>			
 			<para>
-				See <see cref="eSequencerError"/> for detailed description.
+				See <see cref="TcoCore.eSequencerError"/> for detailed description.
 			</para>
 		</remarks>			
 	</docu>	
@@ -252,7 +252,7 @@ Context.Environment.Messaging.Resume();]]></ST>
 	<docu>
 		<summary>
 			Completes the execution of the current step and moves the sequencer pointer to the next step in order of execution.
-			The call returns ```ITcoObjectRestorer``` that allows to restore object upon step completition.
+			The call returns `ITcoObjectRestorer` that allows to restore object upon step completition.
 		</summary>		
 		<returns></returns>	
 	</docu>	
@@ -307,7 +307,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Performs the check of the uniqueness of ```inStepId``` in the sequence.
+			Performs the check of the uniqueness of `inStepId` in the sequence.
 			<remarks>			
 				<note type="important">
 					The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
@@ -438,7 +438,7 @@ END_IF
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
 			This method is abstract, and it must be overridden in derived block.
 		</summary>
 	</docu>
@@ -631,7 +631,7 @@ _restoringSequence := FALSE;
 			the requested step is started in the next context cycle.
 			If the requested step is not found even in the next context cycle, the sequencer enters error state ```StepWithRequestedIdDoesNotExists```.
 			<para>
-				See <see cref="eSequencerError"/> for detailed description.
+				See <see cref="TcoCore.eSequencerError"/> for detailed description.
 			</para>
 		</summary>
 	</docu>
@@ -749,7 +749,7 @@ OnRestore();]]></ST>
 		<summary>
 			<para>
 				Ensures calling the Open(), Main() and Close() methods in the desired order.
-				This method is final, so it cannot be overloaded. The InstanceName.Run() needs to be called cyclically inside the appropriate context.
+				This method is final, so it cannot be overloaded. The **Instance.Run()** needs to be called cyclically inside the appropriate context.
 			</para>
 		</summary>			
 	</docu>	
@@ -777,8 +777,8 @@ THIS^.Close();]]></ST>
 				Step of the sequence. 
 		</summary>			
 		<returns>
-			True when step with given ```StepId``` is in order of the execution; the step is enabled and the sequencer is in the cyclic mode.
-			True when step with given ```StepId``` is in order of the execution; the step is enabled, the sequencer is in the step mode and StepIn() method has been triggered.  			
+			True when step with given `StepId` is in order of the execution; the step is enabled and the sequencer is in the cyclic mode.
+			True when step with given `StepId` is in order of the execution; the step is enabled, the sequencer is in the step mode and StepIn() method has been triggered.  			
 		</returns>			
 	</docu>	
 ~*)
@@ -882,7 +882,7 @@ SUPER^.ChangeStateProtected(newState);
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Completes the actually running step, when the ```inCondition``` parameter is ```TRUE```.
+			Completes the actually running step, when the `inCondition` parameter is `TRUE`.
 			Method is typically called inside a step as the transition method.
 		</summary>			
 	</docu>	
