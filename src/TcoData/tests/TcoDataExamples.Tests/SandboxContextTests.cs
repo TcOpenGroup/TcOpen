@@ -1,3 +1,5 @@
+#if DEBUG
+
 using NUnit.Framework;
 using TcoDataTests;
 using TcOpen.Inxton.Data.MongoDb;
@@ -79,3 +81,5 @@ namespace TcoDataExamples.Tests
         }
     }
 }
+
+#endif
