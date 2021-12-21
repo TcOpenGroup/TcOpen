@@ -10,7 +10,7 @@
 
 
 
-<AuthorizeView Roles="administrator">
+<AuthorizeView>
     <Authorized>
         <UserManagementView></UserManagementView>
 
@@ -36,7 +36,8 @@
 
     public async Task CreateRole(string roleName)
     {
-
+        if (string.IsNullOrWhiteSpace(roleName))
+            return;
         if (!await _roleManager.RoleExistsAsync(roleName))
         {
             var normalizer = new UpperInvariantLookupNormalizer();
