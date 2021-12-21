@@ -35,7 +35,7 @@ VAR
 		</summary>				
 		<remarks>			
 			<para>
-				See <see cref="TcoSequencer.PlcTcoSequencer._sequencerErrorId"/> for detailed description.
+				See <see cref="PlcDocu.TcoCore.TcoSequencer._sequencerErrorId"/> for detailed description.
 			</para>
 		</remarks>	
 	</docu>	
@@ -50,7 +50,7 @@ VAR
 		</summary>		
 		<remarks>			
 			<para>
-				See <see cref="eSequencerError"/> for detailed description.
+				See <see cref="TcoCore.eSequencerError"/> for detailed description.
 			</para>
 		</remarks>			
 	</docu>	
@@ -208,10 +208,11 @@ METHOD INTERNAL FINAL Close
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_previousNumberOfStepsInSequence := _numberOfStepsInSequence;
-
+Context.Environment.Messaging.Suspend();
 IF _modeController._stepIn.Done THEN
 	_modeController._stepIn.Restore();	
 END_IF
+Context.Environment.Messaging.Resume();
 
 _restoringSequence := FALSE;
 ]]></ST>
@@ -239,10 +240,11 @@ _cycleTimer(IN:= FALSE, PT:= T#0S);
 _currentStep.Status := eStepStatus.Done;
 
 OnSequenceCompleted();
-
+Context.Environment.Messaging.Suspend();
 _modeController._stepForward.Restore();
 _modeController._stepBackward.Restore();
-_modeController._stepIn.Restore(); 	]]></ST>
+_modeController._stepIn.Restore(); 	
+Context.Environment.Messaging.Resume();]]></ST>
       </Implementation>
     </Method>
     <Method Name="CompleteStep" Id="{772d43fc-5320-0adc-02b4-59560418f133}">
@@ -250,7 +252,7 @@ _modeController._stepIn.Restore(); 	]]></ST>
 	<docu>
 		<summary>
 			Completes the execution of the current step and moves the sequencer pointer to the next step in order of execution.
-			The call returns ```ITcoObjectRestorer``` that allows to restore object upon step completition.
+			The call returns `ITcoObjectRestorer` that allows to restore object upon step completition.
 		</summary>		
 		<returns></returns>	
 	</docu>	
@@ -258,11 +260,15 @@ _modeController._stepIn.Restore(); 	]]></ST>
 METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
+        <ST><![CDATA[Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+
+_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
 _currentStep.Status := eStepStatus.Done;
 OnStepCompleted();
 _modeController._stepIn.DoneWhen(_modeController._stepIn.Execute());
-CompleteStep := THIS^;]]></ST>
+CompleteStep := THIS^;
+
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="CurrentStep" Id="{7022a13f-b6b0-0efd-366c-a75c20304c2d}">
@@ -301,7 +307,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Performs the check of the uniqueness of ```inStepId``` in the sequence.
+			Performs the check of the uniqueness of `inStepId` in the sequence.
 			<remarks>			
 				<note type="important">
 					The StepId of each step in the sequence must be unique throughout the complete sequence, and it must not be changed.
@@ -432,7 +438,7 @@ END_IF
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
 			This method is abstract, and it must be overridden in derived block.
 		</summary>
 	</docu>
@@ -625,7 +631,7 @@ _restoringSequence := FALSE;
 			the requested step is started in the next context cycle.
 			If the requested step is not found even in the next context cycle, the sequencer enters error state ```StepWithRequestedIdDoesNotExists```.
 			<para>
-				See <see cref="eSequencerError"/> for detailed description.
+				See <see cref="TcoCore.eSequencerError"/> for detailed description.
 			</para>
 		</summary>
 	</docu>
@@ -670,6 +676,9 @@ IF(inRequestedStepID <> (MinStepID-1)) THEN
 		_requestStepActive := TRUE;
 	END_IF
 END_IF;	
+
+Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+Messenger.Build().Append('Reqesting step id jump to: ').AppendAny(inRequestedStepID).As().AsTrace();
 
 RequestStep := THIS^;]]></ST>
       </Implementation>
@@ -723,10 +732,12 @@ _StepTimer(IN:= FALSE);
 IF _modeController.Mode = eSequencerMode.Invalid THEN
 	_modeController.Mode := eSequencerMode.CyclicMode;
 END_IF
-
+Context.Environment.Messaging.Suspend();
 _modeController._stepForward.Restore();
 _modeController._stepBackward.Restore();
 _modeController._stepIn.Restore(); 	
+Context.Environment.Messaging.Resume();
+
 _checkStepIdRequestedInStepMode := FALSE;
 
 OnRestore();]]></ST>
@@ -738,7 +749,7 @@ OnRestore();]]></ST>
 		<summary>
 			<para>
 				Ensures calling the Open(), Main() and Close() methods in the desired order.
-				This method is final, so it cannot be overloaded. The InstanceName.Run() needs to be called cyclically inside the appropriate context.
+				This method is final, so it cannot be overloaded. The **Instance.Run()** needs to be called cyclically inside the appropriate context.
 			</para>
 		</summary>			
 	</docu>	
@@ -766,8 +777,8 @@ THIS^.Close();]]></ST>
 				Step of the sequence. 
 		</summary>			
 		<returns>
-			True when step with given ```StepId``` is in order of the execution; the step is enabled and the sequencer is in the cyclic mode.
-			True when step with given ```StepId``` is in order of the execution; the step is enabled, the sequencer is in the step mode and StepIn() method has been triggered.  			
+			True when step with given `StepId` is in order of the execution; the step is enabled and the sequencer is in the cyclic mode.
+			True when step with given `StepId` is in order of the execution; the step is enabled, the sequencer is in the step mode and StepIn() method has been triggered.  			
 		</returns>			
 	</docu>	
 ~*)
@@ -835,7 +846,11 @@ ELSIF  inStepID > MaxStepID THEN
 		_sequencerHasError := TRUE;
 ELSIF NOT _sequencerHasError THEN
 	Step := StepInternal(inStepID,inEnabled,inStepDescription);
-END_IF;		]]></ST>
+END_IF;		
+
+
+		
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepChanged" Id="{f13ff82b-328d-0743-26e3-1e5008c59f70}">
@@ -848,7 +863,7 @@ END_IF;		]]></ST>
 ~*)
 METHOD PRIVATE StepChanged
 VAR_INPUT
-	newState : INT;
+	newState : INT;	
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -859,6 +874,7 @@ _IdOfThePreviouslyExecutedStep := MinStepID-1;
 _StepTimer(IN:= FALSE);
 
 SUPER^.ChangeStateProtected(newState);
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -866,7 +882,7 @@ SUPER^.ChangeStateProtected(newState);
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Completes the actually running step, when the ```inCondition``` parameter is ```TRUE```.
+			Completes the actually running step, when the `inCondition` parameter is `TRUE`.
 			Method is typically called inside a step as the transition method.
 		</summary>			
 	</docu>	
@@ -991,7 +1007,13 @@ IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurr
 	_requestedStepId := MinStepID-1;
 	_requestStepCycle := 0;
 	_requestStepActive := FALSE;
+		
 	StepChanged(_requestedStepId);
+	
+	IF(inEnabled) THEN
+		Messenger.Build().Append('Entering step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+	END_IF
+	
 	//In case of call Restore() in OnStateChange(), this method must exits
 	//otherwise we get page fault
 	IF NOT _stepIdUniquenessChecked THEN
@@ -1033,12 +1055,14 @@ IF(_stepModeActive) THEN
 	END_IF			
 END_IF;
 
+Context.Environment.Messaging.Suspend();
 IF(_modeController._stepForward.Done) THEN 
 	_modeController._stepForward.Restore();
 END_IF
 IF(_modeController._stepBackward.Done) THEN
 	_modeController._stepBackward.Restore();
 END_IF		
+Context.Environment.Messaging.Resume();
 
 // Determine the step is in order of execution
 _isInOrderOfExecution := (_theOrderOfTheCurrentlyExecutedStep =_theOrderOfTheCurrentlyEvaluatedStep);
@@ -1137,12 +1161,14 @@ IF(_isInOrderOfExecution  AND NOT(_currentStep.Status = eStepStatus.Error)) THEN
 	END_IF	
 
 	StepInternal := (NOT _stepModeActive OR _stepInExecuting) AND inEnabled AND NOT(_currentStep.Status = eStepStatus.Error);
-
+	
+	Messenger.OnCondition((NOT _stepModeActive OR _stepInExecuting) AND NOT inEnabled).Build().Append('Skipping disabled step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsTrace();
+	
 	IF(StepInternal) THEN
 		//First entry to step production
 		IF(_theOrderOfThePreviouslyExecutedStep <> _theOrderOfTheCurrentlyExecutedStep) THEN
 			_isFirstStepEntry := TRUE;
-			StepChanged(inStepID);
+			StepChanged(inStepID);						
 			//In case of call Restore() in OnStateChange(), this method must exits
 			//otherwise we get page fault
 			IF NOT _stepIdUniquenessChecked THEN
@@ -1170,6 +1196,7 @@ IF(_isInOrderOfExecution  AND NOT(_currentStep.Status = eStepStatus.Error)) THEN
 		
 		_currentStep.Status := eStepStatus.Running; 
 		_currentStep.Order := _theOrderOfTheCurrentlyExecutedStep;
+		Messenger.Build().Append('Entering step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
 	END_IF
 END_IF
 //-----------------------------------------------

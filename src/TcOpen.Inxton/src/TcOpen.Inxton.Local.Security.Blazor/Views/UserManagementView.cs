@@ -26,18 +26,23 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private  SignInManager<User> _signInManager { get; set; }
+        private SignInManager<User> _signInManager { get; set; }
         [Inject]
-        private  RoleManager<IdentityRole> _roleManager { get; set; }
+        private RoleManager<IdentityRole> _roleManager { get; set; }
 
         private User SelectedUser { get; set; }
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
 
+        public void RoleAdded()
+        {
+            AvailableRoles = GetAvailableRoles();
+            StateHasChanged();
+        }
 
         public async Task AssignRoles()
         {
-            await _userManager.AddToRolesAsync(SelectedUser, AvailableRoles.Where(x => x.IsSelected == true).Select(x=>x.RoleName));
+            await _userManager.AddToRolesAsync(SelectedUser, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.RoleName));
             await RowClicked(SelectedUser);
         }
 
@@ -47,19 +52,19 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             await RowClicked(SelectedUser);
         }
 
-      
+
         public async Task RowClicked(User user)
         {
             SelectedUser = user;
-            AssignedRoles =  (await _userManager.GetRolesAsync(user)).Select(x=> new RoleData(x)).ToList();
-            AvailableRoles = _roleManager.Roles
-                .Where(x => !AssignedRoles.Select(x=>x.RoleName).Contains(x.Name))
-                .Select(x=> new RoleData(x.Name))
-                .ToList();
-
-
+            AssignedRoles = (await _userManager.GetRolesAsync(user)).Select(x => new RoleData(x)).ToList();
+            AvailableRoles = GetAvailableRoles();
         }
 
+        private IList<RoleData> GetAvailableRoles() =>
+            _roleManager.Roles
+                .Where(x => !AssignedRoles.Select(x => x.RoleName).Contains(x.Name))
+                .Select(x => new RoleData(x.Name))
+                .ToList();
 
     }
 }

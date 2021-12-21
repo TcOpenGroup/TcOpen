@@ -6,7 +6,7 @@
 		<summary>
 			Provides basic momentary on function.
 			<para>
-				To get the actual state of the momentary task, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOn()"/>, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOff()"/> and <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.State()"/> properties are available.
+				To get the actual state of the momentary task, <see cref="PlcDocu.TcoCore.TcoMomentaryTask.IsOn()"/>, <see cref="PlcDocu.TcoCore.TcoMomentaryTask.IsOff()"/> and <see cref="PlcDocu.TcoCore.TcoMomentaryTask.State()"/> properties are available.
 			</para>
 		</summary>
 	</docu>	
@@ -30,7 +30,7 @@ VAR
 	<docu>
 		<summary>
 			Use to determine if the manipulation is enabled for example from the HMI application. 
-			This value is read only, to modify it use the property <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Enabled()"/>		
+			This value is read only, to modify it use the property <see cref="PlcDocu.TcoCore.TcoMomentaryTask.Enabled()"/>		
 		</summary>		
 	</docu>	
 ~*)	
@@ -80,7 +80,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
 	<docu>
 		<summary>
 			Gets whether the any manipulation with this instance is enabled.
-			The change state could be triggered with <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.On()"/> or <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Off()"/> method call only when this property si '''TRUE'''. 
+			The change state could be triggered with <see cref="PlcDocu.TcoCore.TcoMomentaryTask.On()"/> or <see cref="PlcDocu.TcoCore.TcoMomentaryTask.Off()"/> method call only when this property si '''TRUE'''. 
 		</summary>			
 	</docu>	
 ~*)

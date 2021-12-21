@@ -9,14 +9,19 @@
 					<note type="important">
 						Each messenger has a single placeholder for the message; it stores the most important message from the last context cycle. 
 						If there are more messages in a single cycle for the same messenger then less important messages are discarded and replaced by 
-						the message with the category of higher severity.	
+						the message with the category of higher severity.							
 					</note>
+					<note type="important">
+						Messenger can send the data to context logger. There is a maximum limit of 10 different messages per messenger in 2 consecutive context cycles.
+						The messages that exceed this limit won't be logged when `OnEventRisen` logging is set. 
+					    Take this behaviour into account when designing your system.				
+					</note>					
 				</remarks>			 
 			</summary>			
 		
 		</docu>
 ~*)
-FUNCTION_BLOCK PUBLIC TcoMessenger IMPLEMENTS ITcoMessenger, ITcoMessageProperties
+FUNCTION_BLOCK PUBLIC TcoMessenger IMPLEMENTS ITcoMessenger, ITcoMessageProperties, ITcoMessageTextBuilder, ITcoMessageCategorize
 VAR			
 	(*~
 		<docu>
@@ -39,16 +44,207 @@ END_VAR
 
 VAR
 	{attribute 'hide'}
-	tmpMessageText : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	tmpMessageText : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+	{attribute 'hide'}
+	refStringBuilder : REFERENCE TO StringBuilder;	
 END_VAR
 
 VAR CONSTANT
 	MDS_MAX_INDEX : INT := 10;
+END_VAR
+
+VAR_STAT
+	{attribute 'hide'}
+	_conflictingStringBuilder : StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="AsCategory" Id="{5e652e11-5ec7-0558-355e-a541dc07128e}" />
     <Folder Name="Messages" Id="{56442304-2644-4fe1-b5d1-eb5248dd12e5}" />
+    <Folder Name="MessageTextBuilder" Id="{84becd26-58f3-0433-37df-29b8ef02e286}" />
+    <Method Name="Append" Id="{c1ccc337-ea54-00a4-1ba1-6c6567af5ea4}" FolderPath="MessageTextBuilder\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Appends string to the message text. 
+		</summary>
+		<remarks>
+			<note type="warning">
+				The size of the resulting string should not be more than '160' characters. The characters exceeding this size will be truncated.
+			</note>
+		</remarks>
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageTextBuilder interface'} 
+METHOD Append : ITcoMessageTextBuilder
+VAR_INPUT
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.StringBuilder.Append(Text);
+Append := THIS^;
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendAny" Id="{0a142272-dc83-0b4b-1516-3181619f1e79}" FolderPath="MessageTextBuilder\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Appends any value to the message text. 
+		</summary>
+		<remarks>
+			<note type="warning">
+				The size of the resulting string should not be more than '160' characters. The characters exceeding this size will be truncated.
+			</note>
+		</remarks>
+	</docu>	
+~*)
+METHOD AppendAny : ITcoMessageTextBuilder
+VAR_INPUT
+	Data : ANY;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.StringBuilder.AppendAny(Data);
+AppendAny := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="As" Id="{4c9973fd-22fb-0755-0689-dcf3cb571511}" FolderPath="MessageTextBuilder\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Gets categorization methods for fluent message builder.
+		</summary>		
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageTextBuilder interface'} 
+METHOD As : ITcoMessageCategorize
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[As := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsDebug" Id="{9a15fab6-7d2d-0a2a-2268-2662b67885b9}" FolderPath="AsCategory\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as  'debug'.								 
+			</summary>		
+		</docu>
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageCategorize interface'} 
+METHOD PUBLIC AsDebug : ITcoMessageProperties
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AsDebug := Post(THIS^.StringBuilder.ToString(), eMessageCategory.Debug);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsError" Id="{ac55723d-e0c1-0cbc-0399-d1c7dedda6ed}" FolderPath="AsCategory\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as  'error'.								 
+			</summary>		
+		</docu>
+~*)
+
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageCategorize interface'} 
+METHOD PUBLIC AsError : ITcoMessageProperties
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AsError := Post(THIS^.StringBuilder.ToString(), eMessageCategory.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsFatal" Id="{4a4ed82a-2ebf-0f89-3ade-833a0f25d7e7}" FolderPath="AsCategory\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as  'fatal'.								 
+			</summary>		
+		</docu>
+~*)
+
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageCategorize interface'} 
+METHOD PUBLIC AsFatal : ITcoMessageProperties
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AsFatal := Post(THIS^.StringBuilder.ToString(), eMessageCategory.Fatal);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsInfo" Id="{4609573e-f820-0eb5-286d-ad5f41802b14}" FolderPath="AsCategory\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as  'information'.								 
+			</summary>		
+		</docu>
+~*)
+
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageCategorize interface'} 
+METHOD PUBLIC AsInfo : ITcoMessageProperties
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AsInfo := Post(THIS^.StringBuilder.ToString(), eMessageCategory.Info);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsTrace" Id="{c619e331-47c0-0a43-09f7-4b71655e3245}" FolderPath="AsCategory\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as  'trace'.								 
+			</summary>		
+		</docu>
+~*)
+
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageCategorize interface'} 
+METHOD PUBLIC AsTrace : ITcoMessageProperties
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AsTrace := Post(THIS^.StringBuilder.ToString(), eMessageCategory.Trace);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AsWarning" Id="{b28d1072-2a77-093a-33e6-3e8a6557022d}" FolderPath="AsCategory\">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Categotizes and creates the message as 'warning'.								 
+			</summary>		
+		</docu>
+~*)
+
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be accessed ITcoMessageCategorize interface'} 
+METHOD PUBLIC AsWarning : ITcoMessageProperties
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AsWarning := Post(THIS^.StringBuilder.ToString(), eMessageCategory.Warning);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Build" Id="{5eccd1dc-e984-03df-06f9-afb4e2349f53}" FolderPath="MessageTextBuilder\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>			
+			Initiates new message text building for this messenger in fluent-like fashion.
+		</summary>		
+	</docu>	
+~*)
+METHOD Build : ITcoMessageTextBuilder
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.StringBuilder.Clear();
+Build := THIS^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Catastrophic" Id="{3ead99e7-d4fa-03f6-3060-81990c2076df}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -67,7 +263,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -105,7 +301,7 @@ _mime.Pinned := FALSE;
     <Method Name="Compose" Id="{3447ad14-6768-48d6-b294-87e00174ef1e}">
       <Declaration><![CDATA[METHOD PROTECTED Compose : TcoMessage
 VAR_INPUT
-	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 	Category : eMessageCategory;
 END_VAR]]></Declaration>
       <Implementation>
@@ -142,7 +338,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -168,7 +364,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -216,7 +412,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -258,7 +454,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -329,7 +525,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -353,16 +549,22 @@ OnCondition := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Pin" Id="{03e6fdf6-0b38-029d-1385-1c4ef7329d4e}">
-      <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'} 
-(*
+      <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Pins this message that no other message will override it. The messenger won't accept new messages until acknowledged in diagnostics view by user, unipenned by `Unpin()` methods or cleared by `Clear()` method
+			Pins this message that no other message will override it. 
+			The messenger won't accept new messages until acknowledged in diagnostics view by user, unipenned by `Unpin()` methods or cleared by `Clear()` method
 			of this messenger.						
 		</summary>
+		<note type="important">
+			Pinned messages do no accept incomming messages on the same messenger. The incomming messages will be though the context logger when active.
+		</note>
 	</docu>
-*)
+~*)
+//~
+{attribute 'hide'}
+{attribute 'obsolete' := 'This method must be called exclusively over ITcoMessageProperties interface'}
+//~ 
 METHOD Pin : ITcoMessageProperties
 
 ]]></Declaration>
@@ -378,13 +580,13 @@ Pin := THIS^;
       </Implementation>
     </Method>
     <Property Name="Pinned" Id="{2b9d6a13-0120-0ade-1711-eabdfe133e7e}">
-      <Declaration><![CDATA[(*
+      <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets true when this messanger is pinned (awaiting acknowledgement in diagnostics view).
+			Gets `true` when this messanger is pinned (awaiting acknowledgement in diagnostics view).
 		</summary>
 	</docu>
-*)
+~*)
 PROPERTY Pinned : BOOL]]></Declaration>
       <Get Name="Get" Id="{922308b3-7383-055d-30c5-1612ea638ab3}">
         <Declaration><![CDATA[]]></Declaration>
@@ -410,7 +612,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 	(*~
 		<docu>
 			<summary>
@@ -496,7 +698,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -504,6 +706,26 @@ END_VAR
         <ST><![CDATA[Programming := THIS^.Post(Message, eMessageCategory.ProgrammingError);]]></ST>
       </Implementation>
     </Method>
+    <Property Name="StringBuilder" Id="{a28ba21a-3e8e-0432-3e41-e8c00eb1332b}">
+      <Declaration><![CDATA[PROPERTY StringBuilder : REFERENCE TO StringBuilder]]></Declaration>
+      <Get Name="Get" Id="{534e9e44-3b1f-00eb-2516-5f0d53690ccd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+
+VAR_INST
+	_lastCycleAccess : ULINT;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF(__ISVALIDREF(refStringBuilder)) THEN
+	StringBuilder REF= refStringBuilder;
+ELSE
+	StringBuilder REF= _conflictingStringBuilder;
+END_IF
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Trace" Id="{5a17dee2-c171-4127-9ee1-30d4a06a53bf}" FolderPath="Messages\">
       <Declaration><![CDATA[(*~
 		<docu>
@@ -523,7 +745,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>
@@ -532,13 +754,13 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="UnPin" Id="{648f9a53-8d9f-0466-2e58-e936e7aff424}">
-      <Declaration><![CDATA[(*
+      <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
 			Unpins this messenger.
 		</summary>
 	</docu>
-*) 
+~*) 
 METHOD UnPin 
 
 ]]></Declaration>
@@ -573,7 +795,7 @@ VAR_INPUT
 			</summary>			
 		</docu>
 	~*)
-	Message : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 END_VAR
 
 ]]></Declaration>

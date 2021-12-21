@@ -9,6 +9,7 @@ namespace TcoDataTests
 {
     public static class Entry
     {
+
         readonly static string AmdId = Environment.GetEnvironmentVariable("Tc3Target");
 
         public static TcoDataTestsTwinController TcoDataTests 
