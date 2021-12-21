@@ -8,7 +8,12 @@
 			This function block is abstract and must be implemented in a derived block.
 			```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
 			```TcoObjects``` that belong to same ```TcoContext``` share the same context. 
-			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).            			
+			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).    
+			<note type="warning">
+				Whenever it is required to pass function block parameters of a block type that derives from `TcoObject` it should be passed as **reference**. 
+				This means either via appropriate interface or as `REFERENCE TO` in VAR_INPUT and VAR_OUTPUT sections or as VAR_IN_OUT. 
+				Be aware the VAR_INPUT and VAR_OUTPUT create a copy of the variable.			
+			</note>        			
 			<para>
 				<example>
 				<note type="Example">
@@ -174,7 +179,7 @@ _Parent := Parent;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets the identity of this <see cref ="TcoObject.PlcTcoObject()"/>. 
+			Gets the identity of this <see cref ="PlcDocu.TcoCore.TcoObject()"/>. 
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			This variable is used in the higher level applications.  
 		</summary>			
@@ -195,7 +200,7 @@ END_VAR
 		<docu>
 			<summary>
 				Gets messenger of this object.
-				See <see cref="TcoMessenger.PlcTcoMessenger()"/> for more details.
+				See <see cref="PlcDocu.TcoCore.TcoMessenger()"/> for more details.
 			</summary>			
 		</docu>
 ~*)

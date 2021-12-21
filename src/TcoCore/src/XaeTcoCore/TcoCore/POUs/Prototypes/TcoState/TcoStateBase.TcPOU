@@ -5,7 +5,7 @@
 	<docu>
 		<summary>
 			Provides basic state controller. It could be implemented using <c>IF</c>, <c>IF</c> <c>ELSIF</c> or <c>CASE</c> statement. The transition to the different state needs to be perfromed by calling 
-			<see cref="TcoState.PlcTcoState.ChangeState(Object)"/> method. This method ensures also calling the <see cref="TcoState.PlcTcoState.OnStateChange(Object,Object)"/> every time that state is changed. The 
+			<see cref="PlcDocu.TcoCore.TcoStateBase.ChangeState(Object)"/> method. This method ensures also calling the <see cref="PlcDocu.TcoCore.TcoStateBase.OnStateChange(Object,Object)"/> every time that state is changed. The 
 		  	<c>OnStateChange()</c>could be overloaded and some custom code that needs to be executed on each change of the state could be placed here. The TcoState could be used like this:
 			<para>
 				<example>
@@ -59,7 +59,7 @@
 				 </note>
 				</example>
 				<para>
-					See <see cref="TcoState.PlcTcoState.RestoreObject(Object)"/> for more details.
+					See <see cref="PlcDocu.TcoCore.TcoState.RestoreObject(Object)"/> for more details.
 				</para>
 			</para>			
 		</summary>		
@@ -96,15 +96,15 @@ END_VAR
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> of the parent object and cannot be changed during runtime.
 			The <c>AutoRestorable</c> property of this objects is retrieved from the <c>EnableAutoRestore</c> property of the parent object.
 			This is done by calling the <c>CheckIfAutoRestoreEnabledByParent()</c> method inside the implicit method <c>FB_init()</c> after download.
-			If this instance is the auto restorable it will call the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
+			If this instance is the auto restorable it will call the <see cref="PlcDocu.TcoCore.TcoState.Restore()"/> method if:
 			<para>
-				1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
+				1.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="PlcDocu.TcoCore.TcoState.State()"/> property).
 			</para>
 			<para>
 				2.)	Parent object of this instance changes its state.
 			</para>
 			<para>
-				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoState.EnableAutoRestore()"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -123,7 +123,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Private method called each time that State property is asked for. If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if:
+			Private method called each time that State property is asked for. If this instance is auto restorable, this method ensures calling the <see cref="PlcDocu.TcoCore.TcoState.Restore()"/> method if:
 			<para>
 				1.)	Parent object of this instance changes its state in this Plc cycle.
 			</para>
@@ -131,13 +131,13 @@ END_VAR
 				2.)	Parent object of this instance changes its state no mather when and this instance has not yet process this change.
 			</para>
 			<para>
-				3.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="TcoState.PlcTcoState.State()"/> property).
+				3.) This instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property <see cref="PlcDocu.TcoCore.TcoState.State()"/> property).
 			</para>
 			<para>
-				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoState.AutoRestorable()"/>
 			</para>
 			<para>
-				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoState.EnableAutoRestore()"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -179,7 +179,7 @@ END_IF]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Use to change the State property of this instance to the new value. This method is final, so it cannot be overloaded. However there is a <see cref="TcoState.PlcTcoState.OnStateChange(Object,Object)"/> 
+			Use to change the State property of this instance to the new value. This method is final, so it cannot be overloaded. However there is a <see cref="PlcDocu.TcoCore.TcoState.OnStateChange(Object,Object)"/> 
 			method that is called on each change of the <c>State</c> and could be overloaded.
 			<para>
 				<example>
@@ -218,7 +218,7 @@ ChangeStateProtected := THIS^;]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method ensures reading out the parent's <see cref="TcoState.PlcTcoState.EnableAutoRestore()/> property and writing it into the <see cref="TcoState.PlcTcoState.AutoRestorable()"/> of this instance.
+			This method ensures reading out the parent's <see cref="PlcDocu.TcoCore.TcoStateBase.EnableAutoRestore()/> property and writing it into the <see cref="PlcDocu.TcoCore.TcoStateBase.AutoRestorable()"/> of this instance.
 			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
 		</summary>			
 	</docu>	
@@ -240,14 +240,14 @@ END_IF;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Private method called each time that the <see cref="TcoState.PlcTcoState.State()"/> property is asked for. 
-			If this instance is auto restorable, this method ensures calling the <see cref="TcoState.PlcTcoState.Restore()"/> method if
+			Private method called each time that the <see cref="PlcDocu.TcoCore.TcoStateBase.State()"/> property is asked for. 
+			If this instance is auto restorable, this method ensures calling the <see cref="PlcDocu.TcoCore.TcoStateBase.Restore()"/> method if
 			this instance has not been called for one or more cycles and starts to be called again. (By calling the instance means asking for its property State).
 			<para>
-				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoStateBase.AutoRestorable"/>
 			</para>
 			<para>
-				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoStateBase.EnableAutoRestore"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -317,7 +317,7 @@ CheckIfAutoRestoreEnabledByParent();
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the own identity of the <see cref ="TcoState.PlcTcoState()"/>. This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+			Returns the identity of the this object. 
 			This variable is used in the higher level packages.  
 		</summary>			
 	</docu>	
@@ -346,7 +346,7 @@ END_VAR
 			</para>
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			<para>
-				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoStateBase.AutoRestorable()"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -402,7 +402,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Restore this instance to the state -1. Could be called explicitly so as using auto restore mechanism.
+			Restores this instance to the state -1.
 			<para>
 				<example>
 					<note type="Example">
@@ -416,10 +416,10 @@ END_VAR
 				</example>
 			</para>				
 			<para>
-				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoState.AutoRestorable()"/>
 			</para>
 			<para>
-				See also <see cref="TcoState.PlcTcoState.EnableAutoRestore()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoState.EnableAutoRestore()"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -436,7 +436,7 @@ Restore := THIS^;]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Ensures calling the <c>Restore()</c> method on the object entered.	
+			Ensures the call of the <c>Restore()</c> method in fluent-like fashion.	
 			<para>
 				<example>
 				<note type="Example">
@@ -466,7 +466,7 @@ RestoreObject := THIS^;]]></ST>
 		<summary>
 			Return actual state of this instance. Needs to be asked for cyclically in case of this instance is auto restorable.
 			<para>
-				See also <see cref="TcoState.PlcTcoState.AutoRestorable()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoStateBase.AutoRestorable()"/>
 			</para>
 		</summary>			
 	</docu>	
