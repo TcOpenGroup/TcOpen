@@ -7,18 +7,18 @@
 		<summary>
 			Root construction container, provides context information for <c>TcoObjects</c> declared within its scope.
 			This function block is ```abstract``` and cannot be instantiated. 
-			Use <see cref="TcoContext.PlcTcoContext.Run()"/> to run this context, ```Run``` method must be called only once per PLC Task cycle.
+			Use <see cref="PlcDocu.TcoCore.TcoContext.Run()"/> to run this context, ```Run``` method must be called only once per PLC Task cycle.
 			Several 'TcoContext' instances can be declared and called inside one TwinCAT PlcTask, but only once per PLC cycle. 
 			The instance should not be accessed from several Twincat PlcTasks.
-			Default implemenation of the 'TcoContext' allows its child members access properties <see cref="TcoContext.PlcTcoContext.StartCycleCount()"/> 
-			and <see cref="TcoContext.PlcTcoContext.EndCycleCount()"/>, messenger settings, rtc and other information related to the context of the running logic.			 			 			
+			Default implemenation of the 'TcoContext' allows its child members access properties <see cref="PlcDocu.TcoCore.TcoContext.StartCycleCount()"/> 
+			and <see cref="PlcDocu.TcoCore.TcoContext.EndCycleCount()"/>, messenger settings, rtc and other information related to the context of the running logic.			 			 			
 			<note type="tip">
 				 A <c>TcoContext</c> can contain objects, components and PLC logic of one independent station of the machine, 
 				 while the another one can cover the same for another station.			
 			</note>
 			<remarks>			
 				<note type="tip">
-					TwinCAT PlcTask and <see cref="TcoTask.PlcTcoTask()"/> refer to two different concepts. 
+					TwinCAT PlcTask and <see cref="PlcDocu.TcoCore.TcoTask()"/> refer to two different concepts. 
 				</note>
 			</remarks>
 		</summary>	
@@ -60,8 +60,8 @@ VAR
 	{attribute clr [RenderIgnore()]}
     _settings : TcoContextEnvironment;	
 	{attribute clr [RenderIgnore()]}
-	_logger : TcoLogger(THIS^);
-		
+	_logger : TcoLogger(THIS^);	
+	_timeSychnMessenger : TcoMessenger(THIS^);	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -70,7 +70,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method is called implicitly at the entry point of this context (<see cref="TcoContext.PlcTcoContext.Run()"/>).
+			This method is called implicitly at the entry point of this context (<see cref="PlcDocu.TcoCore.TcoContext.Run()"/>).
 			<remarks>			
 				<note type="important">
 					Do not call this method explicitly!
@@ -89,7 +89,7 @@ METHOD INTERNAL FINAL Close]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns reference to this instance of the <see cref="TcoContext.PlcTcoContext()"/>.
+			Returns reference to this instance of the <see cref="PlcDocu.TcoCore.TcoContext()"/>.
 		</summary>			
 	</docu>	
 ~*)
@@ -107,7 +107,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-		    Gets the value of the counter incrememented by '1' at the end of each execution of this <see cref="TcoContext.PlcTcoContext()"/>.			
+		    Gets the value of the counter incrememented by '1' at the end of each execution of this <see cref="PlcDocu.TcoCore.TcoContext()"/>.			
 		</summary>			
 	</docu>	
 ~*)
@@ -149,7 +149,7 @@ END_VAR
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Returns the identity of this <see cref ="TcoContext.PlcTcoContext()"/>. 
+			Returns the identity of this <see cref ="PlcDocu.TcoCore.TcoContext()"/>. 
 			This value is assigned when instantiated and cannot be changed at runtime.
 			This member is used in the higher level applications.  
 		</summary>			
@@ -236,7 +236,7 @@ METHOD PROTECTED OnEntry
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method is called implicitly at the entry point of this context (<see cref="TcoContext.PlcTcoContext.Run()"/>).
+			This method is called implicitly at the entry point of this context (<see cref="PlcDocu.TcoCore.TcoContext.Run()"/>).
 			<remarks>			
 				<note type="important">
 					Do not call this method explicitly.
@@ -312,7 +312,10 @@ _RtcSynchParams.syncAmsId				:=	inSyncAmsId;
 _RtcSynchParams.syncPeriod				:=	inSyncPeriod;
 _RtcSynchParams.synchContextIdentity	:=	THIS^._Identity;
 RtcPrg.Synchronize(_RtcSynchParams);
-RtcSynchronize REF= THIS^;]]></ST>
+RtcSynchronize REF= THIS^;
+
+_timeSychnMessenger.OnCondition(NOT THIS^.RealTimeClock.IsValid).Error('Real time clock is invalid').Pin();
+_timeSychnMessenger.OnCondition(THIS^.RealTimeClock.IsValid AND NOT THIS^.RealTimeClock.IsSynchronized).Warning('Real time clock is not sychronized');]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">
@@ -320,7 +323,7 @@ RtcSynchronize REF= THIS^;]]></ST>
 	<docu>
 		<summary>
 			<para>
-				This method executes of this context. It provided correct order of execution order of inner methods. Any logic of this context must be called within <see cref="TcoContext.PlcTcoContext.Main()"/>
+				This method executes of this context. It provided correct order of execution order of inner methods. Any logic of this context must be called within <see cref="PlcDocu.TcoCore.TcoContext.Main()"/>
 				method. This method is final, so it cannot be overriden. The <c>InstanceName.Run()</c> needs to be called cyclically.
 			</para>
 		</summary>			
@@ -340,7 +343,7 @@ THIS^.OnExit();
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-		    Gets number of executions of this context. Value of this property is incremented by '1' at the beginning of the <see cref="TcoContext.PlcTcoContext()"/>. 			 			
+		    Gets number of executions of this context. Value of this property is incremented by '1' at the beginning of the <see cref="PlcDocu.TcoCore.TcoContext()"/>. 			 			
 		</summary>			
 	</docu>	
 ~*)

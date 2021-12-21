@@ -179,7 +179,7 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
 		<summary>
 			Executes when task reaches the ```Error``` state.
 			<para>
-				Do not confuse with <see cref="TcoTask.PlcTcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
 			</para>
 		</summary>			
 	</docu>	
@@ -255,7 +255,7 @@ _mcHome(Axis := _axisRef, Execute := FALSE);]]></ST>
 		<summary>
 			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
 			<para>
-				See also <see cref="TcoTask.PlcTcoTask.AutoRestorable()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
 			</para>
 		</summary>			
 	</docu>	

@@ -7,8 +7,20 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data.Json
 {
+    /// <summary>
+    /// Provides repository for storing data in files with `Json` format.
+    /// <note type="warning">
+    /// This repository type is not suitable for large data collections.   
+    /// Use this repository for settings, recipes or data persistence with limited number of records.
+    /// </note>
+    /// </summary>
+    /// <typeparam name="T">POCO twin type</typeparam>
     public class JsonRepository<T> : RepositoryBase<T> where T : IBrowsableDataObject
     {
+        /// <summary>
+        /// Creates new instance of <see cref="JsonRepository{T}"/>
+        /// </summary>
+        /// <param name="parameters">Repository parameters</param>
         public JsonRepository(JsonRepositorySettings<T> parameters)
         {
             Location = parameters.Location;
@@ -28,6 +40,9 @@ namespace TcOpen.Inxton.Data.Json
             }
         }
 
+        /// <summary>
+        /// Get the location (directory) where the entries of this repository are placed.
+        /// </summary>
         public string Location { get; private set; }
         protected override void CreateNvi(string identifier, T data)
         {

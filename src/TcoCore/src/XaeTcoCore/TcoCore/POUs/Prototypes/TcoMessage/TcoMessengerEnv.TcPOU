@@ -24,13 +24,13 @@ END_VAR
 		<summary>
 			Gets whether the messaging is suspended at this point in program.					
 			<para>
-				See also <see cref="TcoMessengerSettings.Resume()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.Resume()"/>
 			</para>
 			<para>
-				See also <see cref="TcoMessengerSettings.Suspend()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.Suspend()"/>
 			</para>
 			<para>
-				See also <see cref="TcoMessengerSettings.MinLevel"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.MinLevel"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -106,13 +106,13 @@ END_VAR
 		<summary>
 			Gets or set minimal messaging level, the objects will post only messages for the levels of this or superior severity.					
 			<para>
-				See also <see cref="TcoMessengerSettings.Resume()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.Resume()"/>
 			</para>
 			<para>
-				See also <see cref="TcoMessengerSettings.Suspend()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.Suspend()"/>
 			</para>
 			<para>
-				See also <see cref="TcoMessengerSettings.MinLevel"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.MinLevel"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -141,10 +141,10 @@ END_VAR
 		<summary>
 			Resumes messaging from the all objects of this context, when the messaging was previously suspended by ```Suspend``` method.					
 			<para>
-				See also <see cref="TcoMessengerSettings.Suspend()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.Suspend()"/>
 			</para>
 			<para>
-				See also <see cref="TcoMessengerSettings.MinLevel"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.MinLevel"/>
 			</para>
 		</summary>			
 	</docu>	
@@ -172,10 +172,10 @@ END_VAR
 		<summary>
 			Suspends messaging from the all objects of this context that would occur from this point in the call tree.						
 			<para>
-				See also <see cref="TcoMessengerSettings.Resume()"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.Resume()"/>
 			</para>
 			<para>
-				See also <see cref="TcoMessengerSettings.MinLevel"/>
+				See also <see cref="PlcDocu.TcoCore.TcoMessengerSettings.MinLevel"/>
 			</para>
 		</summary>			
 	</docu>	

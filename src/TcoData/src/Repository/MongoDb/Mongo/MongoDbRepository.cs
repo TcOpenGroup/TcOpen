@@ -33,6 +33,10 @@ namespace TcOpen.Inxton.Data.MongoDb
         private IMongoCollection<T> collection;
         private readonly string location;
 
+        /// <summary>
+        /// Creates new instance of <see cref="MongoDbRepository{T}"/>.
+        /// </summary>
+        /// <param name="parameters">Repository settings</param>
         public MongoDbRepository(MongoDbRepositorySettings<T> parameters)
         {
             location = parameters.GetConnectionInfo();
@@ -139,6 +143,9 @@ namespace TcOpen.Inxton.Data.MongoDb
 
         protected override long CountNvi => collection.CountDocuments(p => true);
 
+        /// <summary>
+        /// Gets the <see cref="IMongoCollection{T}"/> of this repository.
+        /// </summary>
         public IMongoCollection<T> Collection => this.collection;
 
         public override IQueryable<T> Queryable => this.collection.AsQueryable();

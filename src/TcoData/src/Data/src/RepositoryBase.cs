@@ -212,6 +212,9 @@ namespace TcOpen.Inxton.Data
 
         long IRepository.Count => this.Count;
 
+        /// <summary>
+        /// Gets <see cref="IEnumerable{T}"/> of repository entries that match the identifier.
+        /// </summary>
         public IEnumerable<T> GetRecords(string identifier, int limit = 10, int skip = 0)
         {
             try

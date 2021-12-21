@@ -17,7 +17,7 @@ VAR
 (*~
 	<docu>
 		<summary>
-			When '''TRUE''', disables changing between the modes of the sequencer.
+			When `TRUE`, disables changing between the modes of the sequencer.
 		</summary>			
 	</docu>	
 ~*)
@@ -27,7 +27,7 @@ VAR
 (*~
 	<docu>
 		<summary>
-			When '''TRUE''' skipping steps of the sequencer using methods '''StepBackward()''' and '''StepForward()''' is disabled.
+			When `TRUE` skipping steps of the sequencer using methods `StepBackward()` and `StepForward()` is disabled.
 		</summary>			
 	</docu>	
 ~*)	
@@ -68,7 +68,7 @@ VAR
 		<summary>
 			Toggles between cyclic mode and step mode if not disabled.
 			<para>
-				See <see cref="TcoSequencerModeController.DisableModeChanging()"/> for detailed description.
+				See <see cref="PlcDocu.TcoCore.TcoSequencerModeController.DisableModeChanging()"/> for detailed description.
 			</para>		
 		</summary>	
 	</docu>	

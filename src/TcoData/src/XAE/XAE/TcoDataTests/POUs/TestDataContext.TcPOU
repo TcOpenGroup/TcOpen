@@ -36,9 +36,9 @@ CASE THIS^._testId OF
 		DataTests.DataManager._updateTask.Restore();
 		DataTests.DataManager._deleteTask.Restore();
 		DataTests.DataManager._idExistsTask.Restore();
-		DataTests.DataManager._createOrUpdateTask.Restore();
+		DataTests.DataManager._createOrUpdateTask.Restore();		
     eDataTests.CreateData:
-        _createDataDone := DataTests.Create(_identifier);
+        _createDataDone := DataTests.Create(_identifier);		
     eDataTests.UpdateData:
         _updateDataDone := DataTests.Update(_identifier);
     eDataTests.ReadData:

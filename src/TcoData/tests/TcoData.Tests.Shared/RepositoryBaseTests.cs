@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using TcOpen.Inxton.Data;
-using TcOpen.Inxton.Data;
 
 namespace TcoDataUnitTests
 {

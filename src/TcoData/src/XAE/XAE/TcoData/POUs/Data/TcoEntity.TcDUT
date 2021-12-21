@@ -1,7 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoEntity" Id="{f069f222-e1bc-03a7-1526-9ed15ce4c7c1}">
-    <Declaration><![CDATA[TYPE
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Base strucure of any data entity used in TcoDataExchange.
+			<remarks>			
+		   		<note type="information">
+					Inxton is required for this feature to work.
+		   		</note>	
+			</remarks>	 	
+		</summary>			
+		
+		<example>										
+			[!code-pas[Declarations](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxData.TcDUT?name=SandboxData)]			
+		</example>
+	</docu>	
+~*)
+TYPE
     TcoEntity :
     STRUCT
         {attribute wpf [Container(Layout.Stack)]}
