@@ -77,7 +77,7 @@ namespace TcoDataExamples.Tests
             System.Threading.Thread.Sleep(interStateDelay*3);
             var plain = Entry.TcoDataTests.MAIN.sandbox.DataManager._messenger._mime.PlainMessage;
 
-            Assert.AreEqual("", plain.Text);
+            Assert.AreEqual("Checking existence of data item with id: knight", plain.Text);
         }
     }
 }
