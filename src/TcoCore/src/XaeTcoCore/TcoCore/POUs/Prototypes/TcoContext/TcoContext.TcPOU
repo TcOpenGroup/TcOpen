@@ -60,8 +60,8 @@ VAR
 	{attribute clr [RenderIgnore()]}
     _settings : TcoContextEnvironment;	
 	{attribute clr [RenderIgnore()]}
-	_logger : TcoLogger(THIS^);
-		
+	_logger : TcoLogger(THIS^);	
+	_timeSychnMessenger : TcoMessenger(THIS^);	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -312,7 +312,10 @@ _RtcSynchParams.syncAmsId				:=	inSyncAmsId;
 _RtcSynchParams.syncPeriod				:=	inSyncPeriod;
 _RtcSynchParams.synchContextIdentity	:=	THIS^._Identity;
 RtcPrg.Synchronize(_RtcSynchParams);
-RtcSynchronize REF= THIS^;]]></ST>
+RtcSynchronize REF= THIS^;
+
+_timeSychnMessenger.OnCondition(NOT THIS^.RealTimeClock.IsValid).Error('Real time clock is invalid').Pin();
+_timeSychnMessenger.OnCondition(THIS^.RealTimeClock.IsValid AND NOT THIS^.RealTimeClock.IsSynchronized).Warning('Real time clock is not sychronized');]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">
