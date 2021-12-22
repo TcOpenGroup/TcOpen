@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoBlinkerTestContext" Id="{b677d84f-276d-0df9-099e-9e058cea661d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoBlinkerTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_tcoBlinker : TcoUtilities.TcoBlinker(THIS^);
+	_tcoBlinkerOnTime : TIME;
+	_tcoBlinkerOffTime : TIME;
+	_tcoBlinkerOnTimeDuration : TIME;
+	_tcoBlinkerOffTimeDuration : TIME;
+	_tcoBlinkerTestTimerOn : Tc2_Standard.TON;
+	_tcoBlinkerTestTimerOff : Tc2_Standard.TON;
+	_tcoBlinkerTestTimerOverall : Tc2_Standard.TON;
+	_tcoBlinkerTestDone : BOOL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{988fb3f4-c942-052e-17e4-e1f5f3a0fbaf}">
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE THIS^._testId OF
+	eTcoBlinkerTestList.None :
+	eTcoBlinkerTestList.Init :
+		_tcoBlinkerTestTimerOn(IN := FALSE);
+		_tcoBlinkerTestTimerOff(IN := FALSE);
+		_tcoBlinkerTestTimerOverall(IN := FALSE);
+		_tcoBlinkerTestDone := FALSE;
+	eTcoBlinkerTestList.TcoBlinker :			
+		_tcoBlinker(inOnTime := _tcoBlinkerOnTime, inOffTime := _tcoBlinkerOffTime);			
+				
+		_tcoBlinkerTestTimerOn(IN := _tcoBlinker.outQ, PT := T#10D);
+		_tcoBlinkerTestTimerOff(IN := NOT _tcoBlinker.outQ, PT := T#10D);
+				
+		IF(_tcoBlinker.IsOn) THEN
+			_tcoBlinkerOnTimeDuration := _tcoBlinkerTestTimerOn.ET;	
+		END_IF
+		
+		IF(_tcoBlinker.IsOff) THEN
+			_tcoBlinkerOffTimeDuration := _tcoBlinkerTestTimerOff.ET;	
+		END_IF		
+		
+		
+		
+		_tcoBlinkerTestTimerOverall(IN := TRUE, PT := _tcoBlinkerOnTime + _tcoBlinkerOffTime + T#10MS, Q => _tcoBlinkerTestDone);
+		
+		IF(_tcoBlinkerTestDone) THEN
+			THIS^._testId := 0;
+		END_IF
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
