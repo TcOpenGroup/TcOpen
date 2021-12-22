@@ -72,6 +72,21 @@ IF(_state = 2) THEN
  		END_IF;		
 END_IF]]></ST>
     </Implementation>
+    <Method Name="FB_init" Id="{4e9dc28a-9d8a-0a67-3ac0-4df02a74b393}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// I am a bit sick of this for some reason from time to time the build fails without this!
+SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="IsOff" Id="{167d1e7c-561a-05d1-044a-99279f4a13a8}">
       <Declaration><![CDATA[(*~
 	<docu>
