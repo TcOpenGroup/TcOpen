@@ -1,67 +1,87 @@
 ﻿using MQTTnet;
-using MQTTnet.Client.Receiving;
+using MQTTnet.Client;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using TcOpen.Inxton.Mqtt;
 
 namespace TcOpen.Inxton.Logging.Tests
 {
-
-    class RelayHandler : IMqttApplicationMessageReceivedHandler
-    {
-        public Func<MqttApplicationMessageReceivedEventArgs, string> OnMessage;
-        public bool MessageNotDelivered { get; private set; } = true;
-
-        public RelayHandler(Func<MqttApplicationMessageReceivedEventArgs, string> onMessage)
-        {
-            OnMessage = onMessage;
-        }
-
-        public Task HandleApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs eventArgs)
-        {
-            if (MessageNotDelivered)
-            {
-                MessageNotDelivered = false;
-                return Task.FromResult(OnMessage(eventArgs));
-            }
-            else
-                throw new Exception("Only one message per handler");
-        }
-
-
-    }
     [TestFixture]
     public class LocalMqttTest
     {
+        MQTTnet.Server.IMqttServer MqttServer;
+        MqttFactory MqttFactory;
+
+        int MqttPort = 1883;
+
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+
+            MqttFactory = new MqttFactory();
+            MqttServer = MqttFactory.CreateMqttServer();
+            var mqttServerOptions = MqttFactory
+                    .CreateServerOptionsBuilder()
+                    .WithDefaultEndpointPort(MqttPort)
+                    .Build();
+            MqttServer.StartAsync(mqttServerOptions);
+
+            //var adapter = new Vortex.Connector.ConnectorAdapter(typeof(Vortex.Connector.DummyConnectorFactory));
+            //Plc = new PlcHammer.PlcHammerTwinController(adapter);
+            //Plc.Connector.BuildAndStart();
+        }
+
+
+
+
+
+        private IMqttClient CreateClientAndConnect()
+        {
+            var c = MqttFactory.CreateMqttClient();
+            var mqttClientOptions = MqttFactory.CreateClientOptionsBuilder().WithTcpServer("localhost", MqttPort).Build();
+            c.ConnectAsync(mqttClientOptions, CancellationToken.None).Wait();
+            return c;
+        }
+        private void Disconnect(IMqttClient c)
+        {
+            c.DisconnectAsync(new MQTTnet.Client.Disconnecting.MqttClientDisconnectOptions(), CancellationToken.None);
+        }
         [Test]
-        public void DummyLoggerTest()
+        public void PublishDataTest()
         {
             //arrange
-            var mqttFactory = new MqttFactory();
-            var port = 1337;
-            var mqttServer = mqttFactory.CreateMqttServer();
-            var mqttServerOptions = mqttFactory
-                    .CreateServerOptionsBuilder()
-                    .WithClientId("clientId")
-                    .WithDefaultEndpointPort(port)
-                    .Build();
 
-            var mqttClient = mqttFactory.CreateMqttClient();
-            var mqttClientOptions = mqttFactory.CreateClientOptionsBuilder().WithTcpServer("localhost", port).Build();
+            var client = CreateClientAndConnect();
+            var mqtt = new TcoMqtt(client);
 
-            mqttServer.StartAsync(mqttServerOptions);
-            mqttClient.ConnectAsync(mqttClientOptions, System.Threading.CancellationToken.None);
-            var mqtt = new MqttClientxx(mqttClient);
+            var objectToPublish = new { data = "hello", number = 10, doubleNumber = 10.2, nestedObject = new { hello = "i'm nested" } };
+            var objectJson = JsonConvert.SerializeObject(objectToPublish);
             //act
-            string messg = "";
-            var messageHandler = new RelayHandler((msg) => messg = msg.ApplicationMessage.ConvertPayloadToString());
-            mqttServer.ApplicationMessageReceivedHandler = messageHandler;
-            mqtt.PublishAsync(new { a = "bitch" }, "/topic").Wait();
+            string deliveredMessage = "no_message";
+            var messageHandler = new RelayHandler((msg) => deliveredMessage = msg.ApplicationMessage.ConvertPayloadToString());
+            MqttServer.ApplicationMessageReceivedHandler = messageHandler;
+            mqtt.PublishAsync(objectToPublish, "/topic").Wait();
+            Disconnect(client);
             while (messageHandler.MessageNotDelivered) { Thread.Sleep(10); }
-            Assert.That(messg.Equals(JsonConvert.SerializeObject(new { a = "bitch" })));
+
+            //assert
+            Assert.That(deliveredMessage.Equals(objectJson));
+
+        }
+
+        [Test]
+        public void RecieveDataTest()
+        {
+
+            var publisherMqtt = new TcoMqtt(CreateClientAndConnect());
+            var observeMqtt = new TcoMqtt(CreateClientAndConnect());
+
+            observeMqtt.Subsribe("topic", (message) => Console.WriteLine(message)); ;
+            publisherMqtt.PublishAsync(new { some = "data" },"topic").Wait();
+    
+            Assert.Pass();
         }
 
 

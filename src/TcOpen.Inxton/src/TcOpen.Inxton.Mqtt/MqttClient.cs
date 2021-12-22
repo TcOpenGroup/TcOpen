@@ -1,12 +1,14 @@
 ﻿using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Publishing;
+using MQTTnet.Client.Receiving;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Vortex.Connector;
+using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Mqtt
 {
@@ -19,17 +21,20 @@ namespace TcOpen.Inxton.Mqtt
     {
         public string Format(object plain) => JsonConvert.SerializeObject(plain);
     }
-    public class MqttClientxx : IDisposable
+    public class TcoMqtt : IDisposable
     {
         public IMqttClient Client { get; }
         public IStringPayloadFormatter PayloadFormatter { get; set; } = new JsonStringPayloadFormatter();
+        public IMqttApplicationMessageReceivedHandler MessageHandler { get; set; }
 
         private IDictionary<string, Action<string>> TopicHooks;
-        public MqttClientxx(IMqttClient Client)
+        public TcoMqtt(IMqttClient Client)
         {
             this.Client = Client;
-            Client.UseApplicationMessageReceivedHandler((msg) => TopicHooks[msg.ApplicationMessage.Topic](msg.ApplicationMessage.ConvertPayloadToString()));
+            MessageHandler = new TopicMessageRelay();
+            Client.UseApplicationMessageReceivedHandler(MessageHandler);
         }
+
         public Task<MqttClientPublishResult> PublishAsync(object plain, string topic)
         {
             return Client.PublishAsync(topic, PayloadFormatter.Format(plain));
@@ -38,7 +43,8 @@ namespace TcOpen.Inxton.Mqtt
         public void Subsribe(string topic, Action<string> OnMessage)
         {
             Client.SubscribeAsync(topic);
-            TopicHooks[topic] = OnMessage;
+            if (MessageHandler is TopicMessageRelay topicMessageRelay)
+                topicMessageRelay.Subscribe(topic, OnMessage);
         }
         public void Dispose() => Client.Dispose();
     }
