@@ -127,6 +127,27 @@
     <Compile Include="Tests\TcoSequencer\_TcoSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\eTcoSequenceTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\TcoSequenceTestChildState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\TcoSequenceTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\TcoSequenceTestType.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\TcoSequenceAutoRestorableTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\TcoSequenceNonAutoRestorableTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\_TcoSequence.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoState\TcoStateTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -173,6 +194,8 @@
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />
     <Folder Include="Tests\TcoSequencer\PlcExecuted" />
+    <Folder Include="Tests\TcoSequence" />
+    <Folder Include="Tests\TcoSequence\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
     <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />

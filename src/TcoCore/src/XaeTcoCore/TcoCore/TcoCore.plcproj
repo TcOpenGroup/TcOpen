@@ -191,10 +191,16 @@
     <Compile Include="POUs\Prototypes\TcoSequencer\ITcoSequencerModeController.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerModeController.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequence.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerModeController.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\ITcoSequencer.TcIO">
@@ -247,6 +253,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TestFixtures\_internals_TcoSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TestFixtures\_internals_TcoSequence.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Utilities\TcoCRC_16.TcPOU">

@@ -9,4 +9,8 @@ namespace TcoCoreTests
     public partial class TcoSequencerAutoRestorableTest : ITestTcoSequencerAutoRestorable
     {
     }
+
+    public partial class TcoSequenceAutoRestorableTest : ITestTcoSequencerAutoRestorable
+    {
+    }
 }

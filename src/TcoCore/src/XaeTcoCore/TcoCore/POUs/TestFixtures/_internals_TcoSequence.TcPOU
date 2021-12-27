@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="_internals_TcoSequencer" Id="{8431c992-8d9f-09ad-1c50-56c92dc951c0}" SpecialFunc="None">
+  <POU Name="_internals_TcoSequence" Id="{9ae15687-3f70-0cd0-06b5-b751e2c0a9a9}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'hide'}
 {attribute clr [ExcludeFromApiDocumentation()]}
-FUNCTION_BLOCK ABSTRACT _internals_TcoSequencer EXTENDS TcoSequencer]]></Declaration>
+FUNCTION_BLOCK ABSTRACT _internals_TcoSequence EXTENDS TcoSequence]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="_Close" Id="{824aa06c-2eed-03ad-38e1-2b6360af64a5}">
+    <Method Name="_Close" Id="{367823d8-9f00-02a0-1a79-3cdd45e38f9e}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PROTECTED FINAL _Close
 
@@ -16,7 +16,7 @@ METHOD PROTECTED FINAL _Close
         <ST><![CDATA[THIS^.i_Close();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="_Open" Id="{b37d3c58-1c1c-0875-2c6f-fc22d4441f2e}">
+    <Method Name="_Open" Id="{5b3be7a2-ec53-05d4-26ee-6936a7488631}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PROTECTED FINAL _Open
 ]]></Declaration>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Station002" Id="{2a496ceb-c223-085a-04d9-177082471bc3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station002 EXTENDS TcoCore.TcoContext
+VAR	
+	{attribute addProperty Name "Horizontal cyclinder A1"}
+	_horizontal : fbPiston(THIS^);
+	{attribute addProperty Name "Vertical cyclinder A2"}
+	_vertical : fbPiston(THIS^);
+	{attribute addProperty Name "Gripper A3"}
+	_gripper : fbPiston(THIS^);			
+END_VAR
+VAR				
+	_s : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+	_failedToLoad : BOOL;
+END_VAR
+
+
+				
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cdaca8ff-01ce-07ba-0f6a-b85ca01bbfd3}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_s.Open();
+
+THIS^._s.Messenger.Info('Stations two sequencer is running.');
+
+IF(_s.Step(100, 
+		TRUE, 
+		'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_vertical.MoveUp().Done AND_THEN 
+					 	_horizontal.MoveLeft().Done AND_THEN 
+					    _gripper.Open().Done);
+//-----------------------------------------------------	
+END_IF
+
+
+IF(_s.Step(200, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER DOWN')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_vertical.MoveDown().Done);
+//-----------------------------------------------------	
+END_IF
+
+
+IF(_s.Step(300, 
+		TRUE, 
+		'CLOSE GRIPPER')) THEN
+//-----------------------------------------------------
+	IF(_gripper.Close().Done) THEN
+		IF(_failedToLoad) THEN
+			_s.RequestStep(100);
+		ELSE
+			_s.StepCompleteWhen(TRUE);	
+		END_IF;	
+		
+	END_IF;		
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(400, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER UP')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_vertical.MoveUp().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(500, 
+		TRUE, 
+		'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_horizontal.MoveRight().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(600, 
+		TRUE, 
+		'MOVE VERTICAL CYLINDER DOWN')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_vertical.MoveDown().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(700, 
+		TRUE, 
+		'OPEN GRIPPER')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_gripper.Open().Done);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(800, 
+		TRUE, 
+		'CLOSE SEQUENCE')) THEN
+//-----------------------------------------------------	
+	_s.CompleteSequence();
+//-----------------------------------------------------	
+END_IF
+
+_s.Close();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
