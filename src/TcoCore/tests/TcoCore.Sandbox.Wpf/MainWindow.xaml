@@ -138,13 +138,19 @@
                     </materialDesign:Card>
                 </Grid>
             </TabItem>
+            <TabItem Header="ST002">
+                <StackPanel>
+                    
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._s}" PresentationType="Base"></vortex:RenderableContentControl>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Sequence recorder">
                 <vortex:SwiftRecorderView x:Name="swiftRecorder"></vortex:SwiftRecorderView>
             </TabItem>
             <TabItem Header="Object tree viewer">
                 <ScrollViewer>
                     <UniformGrid>
-                        <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN._station001, Mode=OneWay}" />
+                        <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN, Mode=OneWay}" />
 
                         <vortex:ObservableContentControl DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}"  />
                     </UniformGrid>
