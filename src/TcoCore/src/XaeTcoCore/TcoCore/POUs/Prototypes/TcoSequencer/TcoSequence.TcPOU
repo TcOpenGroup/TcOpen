@@ -1,12 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="TcoSequencer" Id="{03531370-df53-0f48-07d7-74697cf5ca67}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoSequencer EXTENDS TcoSequencerBase
-]]></Declaration>
+  <POU Name="TcoSequence" Id="{1dc16e35-9676-012b-08e6-85dbca5c82ff}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequence EXTENDS TcoSequencerBase
+VAR
+	_openingClosingErrorMessenger : TcoMessenger(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="CompleteSequence" Id="{7b9a5947-2221-033a-2322-9c67c837a319}">
+    <Method Name="Close" Id="{ddb4d677-6de6-0ae5-17b2-abea5f59cbd1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			In this `TcoSequence` implementation this method must be called after the last step of the sequence.
+		</summary>			
+	</docu>	
+~*)
+METHOD Close
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CompleteSequence" Id="{60a8e2af-0cd4-04cb-22b7-8cc7c0c50d10}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -17,7 +35,7 @@
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL CompleteSequence
+METHOD PUBLIC FINAL CompleteSequence
 
 ]]></Declaration>
       <Implementation>
@@ -35,7 +53,7 @@ _modeController._stepIn.Restore();
 Context.Environment.Messaging.Resume();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="CompleteStep" Id="{e2e383b2-f66e-039d-3184-62ed20ccc73c}">
+    <Method Name="CompleteStep" Id="{d654d70a-67d0-06b7-08f2-4ef46639a73a}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -45,7 +63,7 @@ Context.Environment.Messaging.Resume();]]></ST>
 		<returns></returns>	
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
+METHOD PUBLIC FINAL CompleteStep : ITcoObjectRestorer
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
@@ -59,7 +77,39 @@ CompleteStep := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="RequestStep" Id="{29cecf3d-5c32-0f65-1ffa-a20cfbf27c51}">
+    <Method Name="Main" Id="{1181bf18-f44c-05c3-2a17-87758c21520b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'Do not call this method explicitelly.'}
+METHOD PROTECTED  Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Open" Id="{974895d3-5f13-0147-128a-53762ad931e7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			In this `TcoSequence` implementation this method must be called prior to first step call of the sequence.
+		</summary>			
+	</docu>	
+~*)
+METHOD Open
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_Open();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RequestStep" Id="{fa91cc78-ebf7-0426-3a90-48d92ccbfb18}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -75,7 +125,7 @@ CompleteStep := THIS^;
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED FINAL RequestStep : ITcoSequencer
+METHOD PUBLIC FINAL RequestStep : ITcoSequencer
 VAR_INPUT
 	(*~
 		<docu>
@@ -93,7 +143,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[RequestStep := i_RequestStep(inRequestedStepID := inRequestedStepID);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Run" Id="{e35de821-81d9-0fd6-11de-d557d919f4d9}">
+    <Method Name="Run" Id="{46870b03-8424-0fc8-1632-ff3d0f46c099}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -104,15 +154,15 @@ END_VAR]]></Declaration>
 		</summary>			
 	</docu>	
 ~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'Call of `Run` method does not have effect in this implementation.'}
 METHOD PUBLIC FINAL Run]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.i_Open();
-THIS^.Main();
-THIS^.i_Close();]]></ST>
+        <ST><![CDATA[Messenger.Programming('Run method should not be called in this implementation of sequencer');]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Step" Id="{42bbf235-d06f-01e3-2c8e-d4ef8cdb0205}">
-      <Declaration><![CDATA[METHOD PROTECTED Step : BOOL
+    <Method Name="Step" Id="{5bca9b88-4aa2-09b2-12c6-71a214dc7f7c}">
+      <Declaration><![CDATA[METHOD PUBLIC Step : BOOL
 VAR_INPUT
 (*~
 	<docu>
@@ -147,10 +197,18 @@ VAR_INPUT
 END_VAR	
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Step := i_Step(inStepID := inStepID, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
+        <ST><![CDATA[IF(_lastOpeningCycle <> Context.StartCycleCount) THEN
+	_openingClosingErrorMessenger.Programming('Sequencer is not opened. You must call `Open` method before any step.');	
+END_IF
+
+IF((_lastOpeningCycle - _lastClosingCycle) > 1) THEN
+	_openingClosingErrorMessenger.Programming('Sequencer is not closed. You must call `Close` method after last step call.');	
+END_IF
+
+Step := i_Step(inStepID := inStepID, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="StepCompleteWhen" Id="{e6dae52c-7dc5-0791-0a05-6b708995c690}">
+    <Method Name="StepCompleteWhen" Id="{84ca9a9f-8073-0ef9-3e1f-ae35a23af514}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -159,7 +217,7 @@ END_VAR
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL StepCompleteWhen 
+METHOD PUBLIC FINAL StepCompleteWhen 
 VAR_INPUT
 (*~
 	<docu>

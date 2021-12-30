@@ -5,9 +5,9 @@ namespace TcoCore
     /// <summary>
     /// Interaction logic for TcoTask.xaml
     /// </summary>
-    public partial class TcoSequencerView : UserControl
+    public partial class TcoSequencerBaseView : UserControl
     {
-        public TcoSequencerView()
+        public TcoSequencerBaseView()
         {
             InitializeComponent();
         }
