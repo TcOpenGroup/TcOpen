@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AC1C53D6-D001-42F1-B0C8-672C47585821}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.MQTT", "src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.csproj", "{88509D44-5058-4032-BA7D-D52A97E42A94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2998E2D0-134C-4885-ACA0-A9264C65A637}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.Unit.MQTTTests", "tests\Serilog.Sinks.MQTTTests\Serilog.Sinks.Unit.MQTTTests.csproj", "{CDF46F80-0873-44F3-BD52-03D69E319983}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88509D44-5058-4032-BA7D-D52A97E42A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88509D44-5058-4032-BA7D-D52A97E42A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88509D44-5058-4032-BA7D-D52A97E42A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88509D44-5058-4032-BA7D-D52A97E42A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF46F80-0873-44F3-BD52-03D69E319983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF46F80-0873-44F3-BD52-03D69E319983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF46F80-0873-44F3-BD52-03D69E319983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF46F80-0873-44F3-BD52-03D69E319983}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88509D44-5058-4032-BA7D-D52A97E42A94} = {AC1C53D6-D001-42F1-B0C8-672C47585821}
+		{CDF46F80-0873-44F3-BD52-03D69E319983} = {2998E2D0-134C-4885-ACA0-A9264C65A637}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1667DA4F-0847-492F-8889-F173A89B1C05}
+	EndGlobalSection
+EndGlobal
