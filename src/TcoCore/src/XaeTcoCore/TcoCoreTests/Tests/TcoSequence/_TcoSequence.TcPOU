@@ -39,6 +39,17 @@ END_VAR
         <ST><![CDATA[THIS^.RequestStep(inRequestedStepId);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="_RunExecutionSubstitute" Id="{b4bf6879-f257-0cef-3de1-77387a9b129b}">
+      <Declaration><![CDATA[METHOD _RunExecutionSubstitute
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Open();
+THIS^.Main();
+THIS^.Close();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="_SequenceComplete" Id="{76fa3e54-f0d3-0ab3-25bb-7fddc5d6c99a}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _SequenceComplete]]></Declaration>
       <Implementation>
