@@ -214,7 +214,7 @@ We do not adopt any document describing conduct at this point. However, there ar
 
 Go through [conventions](https://docs.tcopengroup.org/articles/Conventions/Conventions.html).
 
-Meet the [framework](https://docs.tcopengroup.org/articles/TcOpenFramework/application.html).
+Meet the [framework](https://docs.tcopengroup.org/articles/intro.html).
 
 Submit your ideas as [PullRequests](https://github.com/TcOpenGroup/TcOpen/pulls).
 

@@ -225,7 +225,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[THIS^._sequencer.SetTestParams(	_runOneStep , _runAllSteps , _finishStep , inStepId , inEnabled , inStepDescription);
 
-THIS^._sequencer.Run();
+THIS^._sequencer._RunExecutionSubstitute();
 ]]></ST>
       </Implementation>
     </Method>
