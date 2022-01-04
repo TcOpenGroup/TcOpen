@@ -1,6 +1,9 @@
 # SeriLog MQTT sink
 
-This sink was primarily developed to be used in TcOpen framework.
+This is an initial implementation of MQTT sink
+For details about the configuration of MQTT client see [here](https://github.com/chkr1011/MQTTnet/wiki/Client).
+
+This sink is primarily developed to be used in TcOpen framework with TcoLogger.
 
 ## Sink configuration
 
