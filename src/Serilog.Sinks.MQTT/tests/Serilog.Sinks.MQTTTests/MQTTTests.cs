@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using MQTTnet.Client;
+using MQTTnet.Protocol;
 
 namespace Serilog.Sinks.MQTTTests
 {
@@ -35,10 +36,12 @@ namespace Serilog.Sinks.MQTTTests
         public void contructor_test()
         {
             var topic = "this is my topic";
+            var qos = MqttQualityOfServiceLevel.AtMostOnce;
             var options = new MqttClientOptionsBuilder().WithTcpServer("localhost").Build();
             var actual = new MQTTSink(options, topic);
 
-            Assert.AreEqual(topic, actual.Topic);            
+            Assert.AreEqual(topic, actual.Topic);
+            Assert.AreEqual(qos, actual.QoS);            
         }
 
         [Test]

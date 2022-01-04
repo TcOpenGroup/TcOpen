@@ -1,6 +1,7 @@
 ﻿using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Options;
+using MQTTnet.Protocol;
 using Serilog.Events;
 using System;
 using System.IO;
@@ -21,12 +22,15 @@ namespace Serilog.Sinks
         /// </summary>
         /// <param name="clientOptions">MQTT client options <seealso cref="https://github.com/chkr1011/MQTTnet/wiki/Client"/></param>
         /// <param name="topic">Topic under which the logs are to be published.</param>
+        /// <param name="qoS">Quality of service level. <see cref="MqttQualityOfServiceLevel"/></param>
         /// <param name="formatter">Custom log formatter.</param>
         public MQTTSink(IMqttClientOptions clientOptions,
                     string topic,
+                    MqttQualityOfServiceLevel qoS = MqttQualityOfServiceLevel.AtMostOnce,
                     Formatting.ITextFormatter formatter = null)
         {
             Topic = topic;
+            QoS = qoS;
             Formatter = formatter ?? Formatter;
             MqttClientOptions = clientOptions;
             MqttClient.ConnectAsync(MqttClientOptions).Wait();
@@ -36,6 +40,8 @@ namespace Serilog.Sinks
         /// Gets `Topic` name under which the logs are published in this MQTT sink.
         /// </summary>
         public string Topic { get; }
+
+        public MqttQualityOfServiceLevel QoS { get; }
 
         /// <summary>
         /// Emits (publishes) the event to the configured MQTT broker.
@@ -49,9 +55,11 @@ namespace Serilog.Sinks
             var applicationMessage = new MqttApplicationMessageBuilder()
                             .WithPayload(stringWriter.ToString())
                             .WithPayloadFormatIndicator(MQTTnet.Protocol.MqttPayloadFormatIndicator.CharacterData)
-                            .WithTopic(Topic)
+                            .WithTopic(Topic)                            
                             .Build();
-
+            
+            applicationMessage.QualityOfServiceLevel = QoS;
+            
             await MqttClient.PublishAsync(applicationMessage);
         }
 
