@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Logging.Tests
     [TestFixture]
     public class LocalMqttTest
     {
-        MQTTnet.Server.IMqttServer MqttServer;
+        MQTTnet.Server.IMqttServer Broker;
         MqttFactory MqttFactory;
 
         int MqttPort = 1883;
@@ -21,21 +21,13 @@ namespace TcOpen.Inxton.Logging.Tests
         {
 
             MqttFactory = new MqttFactory();
-            MqttServer = MqttFactory.CreateMqttServer();
+            Broker = MqttFactory.CreateMqttServer();
             var mqttServerOptions = MqttFactory
                     .CreateServerOptionsBuilder()
                     .WithDefaultEndpointPort(MqttPort)
                     .Build();
-            MqttServer.StartAsync(mqttServerOptions);
-
-            //var adapter = new Vortex.Connector.ConnectorAdapter(typeof(Vortex.Connector.DummyConnectorFactory));
-            //Plc = new PlcHammer.PlcHammerTwinController(adapter);
-            //Plc.Connector.BuildAndStart();
+            Broker.StartAsync(mqttServerOptions);
         }
-
-
-
-
 
         private IMqttClient CreateClientAndConnect()
         {
@@ -54,14 +46,14 @@ namespace TcOpen.Inxton.Logging.Tests
             //arrange
 
             var client = CreateClientAndConnect();
-            var mqtt = new TcoMqtt(client);
+            var mqtt = new TcoMqtt<object>(client);
 
             var objectToPublish = new { data = "hello", number = 10, doubleNumber = 10.2, nestedObject = new { hello = "i'm nested" } };
             var objectJson = JsonConvert.SerializeObject(objectToPublish);
             //act
             string deliveredMessage = "no_message";
             var messageHandler = new RelayHandler((msg) => deliveredMessage = msg.ApplicationMessage.ConvertPayloadToString());
-            MqttServer.ApplicationMessageReceivedHandler = messageHandler;
+            Broker.ApplicationMessageReceivedHandler = messageHandler;
             mqtt.PublishAsync(objectToPublish, "/topic").Wait();
             Disconnect(client);
             while (messageHandler.MessageNotDelivered) { Thread.Sleep(10); }
@@ -72,18 +64,17 @@ namespace TcOpen.Inxton.Logging.Tests
         }
 
         [Test]
-        public void RecieveDataTest()
+        public void PublishAndRecieveTest()
         {
-
-            var publisherMqtt = new TcoMqtt(CreateClientAndConnect());
-            var observeMqtt = new TcoMqtt(CreateClientAndConnect());
-
-            observeMqtt.Subsribe("topic", (message) => Console.WriteLine(message)); ;
-            publisherMqtt.PublishAsync(new { some = "data" },"topic").Wait();
-    
-            Assert.Pass();
+            var publisherMqtt = new TcoMqtt<object>(CreateClientAndConnect());
+            var observeMqtt = new TcoMqtt<object>(CreateClientAndConnect());
+            var msg = new { Lorem = "Ipsum" };
+            var msgJson = JsonConvert.SerializeObject(msg);
+            string recievedMsg = "no_msg";
+            observeMqtt.Subsribe("topic", (message) => recievedMsg = message);
+            publisherMqtt.PublishAsync(msg, "topic").Wait();
+            Assert.That(() => recievedMsg, Is.EqualTo(msgJson).After(200).PollEvery(10).MilliSeconds);
         }
-
 
     }
 }

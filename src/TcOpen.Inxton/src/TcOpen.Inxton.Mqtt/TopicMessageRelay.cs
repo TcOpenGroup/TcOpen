@@ -25,16 +25,26 @@ namespace TcOpen.Inxton.Mqtt
         }
         public Task HandleApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs eventArgs)
         {
-            ;
+            var topic = eventArgs.ApplicationMessage.Topic;
+            var payload = eventArgs.ApplicationMessage.ConvertPayloadToString();
             if (TopicHandles.ContainsKey(eventArgs.ApplicationMessage.Topic))
-                return Task.Run(() => TopicHandles[eventArgs.ApplicationMessage.Topic].Invoke(eventArgs.ApplicationMessage.ConvertPayloadToString()));
+            {
+                return Task.Run(() => TopicHandles[topic].Invoke(payload));
+            }
             else
-                return Task.Run(() => DefaultHandle.Invoke(eventArgs.ApplicationMessage.ConvertPayloadToString()));
+            {
+                return Task.Run(() => DefaultHandle($"{topic} : {payload}"));
+            }
         }
 
         public void Subscribe(string topic, Action<string> OnMessageRecieved)
         {
             TopicHandles[topic] = OnMessageRecieved;
+        }
+
+        public void Unsubscribe(string topic)
+        {
+            TopicHandles.Remove(topic);
         }
     }
 }
