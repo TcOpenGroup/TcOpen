@@ -66,16 +66,19 @@
     <Compile Include="POUs\Data\_dummyData\stProcessData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Examples\eExamplesStates.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Sandbox\Data.TcDUT">
+    <Compile Include="POUs\Examples\SandboxData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Sandbox\SandboxContext.TcPOU">
+    <Compile Include="POUs\Examples\SandboxContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Sandbox\TcoDataManager.TcPOU">
+    <Compile Include="POUs\Examples\TcoDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TestDataContext.TcPOU">
@@ -87,7 +90,7 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Data" />
     <Folder Include="POUs\Data\_dummyData" />
-    <Folder Include="POUs\Sandbox" />
+    <Folder Include="POUs\Examples" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

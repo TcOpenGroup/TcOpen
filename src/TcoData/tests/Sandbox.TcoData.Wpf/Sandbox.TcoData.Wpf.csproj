@@ -7,6 +7,7 @@
 	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\src\Repository\Json\TcOpen.Inxton.Data.Json.csproj" />
     <ProjectReference Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
     <ProjectReference Include="..\..\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj" />

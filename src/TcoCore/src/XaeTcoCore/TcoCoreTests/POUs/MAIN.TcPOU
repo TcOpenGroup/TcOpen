@@ -10,6 +10,8 @@ VAR
 	_tcoContextTest_B					:	TcoContextTest;
 	_tcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_tcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
+	_tcoSequenceAutoRestorableTest		:	TcoSequenceAutoRestorableTest;
+	_tcoSequenceNonAutoRestorableTest	:	TcoSequenceNonAutoRestorableTest;
 	_tcoMessengerContextTest			:	TcoMessengerContextTest;
 	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 	_tcoComponentTest					:	TcoComponentTest;
@@ -22,6 +24,7 @@ VAR
 	_tcoComponentTestContext			:   TcoComponentTestContext;
 	_tcoRemoteTaskTestContext			:	TcoRemoteTaskTestContext;
 	_tcoSequencerTestContext			:	TcoSequencerTestContext;
+	_tcoSequenceTestContext				:	TcoSequenceTestContext;
 	_tcoLoggerTestContext				:	TcoLoggerTestContext;
 END_VAR]]></Declaration>
     <Implementation>
@@ -37,6 +40,10 @@ _tcoContextTest_B();
 _tcoSequencerAutoRestorableTest();
 
 _tcoSequencerNonAutoRestorableTest();
+
+_tcoSequenceAutoRestorableTest();		
+
+_tcoSequenceNonAutoRestorableTest();
 
 _tcoMessengerContextTest();
 
@@ -56,6 +63,8 @@ _tcoComponentTestContext.ProbeRun();
 _tcoRemoteTaskTestContext.ProbeRun();
 
 _tcoSequencerTestContext.ProbeRun();
+
+_tcoSequenceTestContext.ProbeRun();
 
 _tcoLoggerTestContext.ProbeRun();]]></ST>
     </Implementation>

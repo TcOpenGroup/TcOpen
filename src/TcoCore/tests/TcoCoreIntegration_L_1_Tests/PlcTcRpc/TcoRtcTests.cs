@@ -41,7 +41,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //and immediately start the synchronization sequence.
             //So for all the other test runs waiting for the "falling edge" of the tc_A.RtcIsValid() is skipped, otherwise the test should take a lot time based on the SyncPeriod value and
             //time of the test start.
-            string synchAmsId = TwinCAT.Ads.AmsNetId.Local.ToString();
+            string synchAmsId = Environment.GetEnvironmentVariable("Tc3Target");//TwinCAT.Ads.AmsNetId.Local.ToString();
             ushort SyncPeriod = 60;
             bool isFirstTestRunAfterPlcDownload = false;
             tc_A.GetSynchParams();

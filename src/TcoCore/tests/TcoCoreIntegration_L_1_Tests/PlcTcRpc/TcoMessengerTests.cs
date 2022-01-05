@@ -16,7 +16,8 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
         TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._tcoMessengerContextTest._tcoMessangerTests;
         TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._tcoMessengerContextTest;
-
+        TimeSpan offsetPlcLocal = new TimeSpan();
+        double allowedMessageTimeDeviation;
 
         [OneTimeSetUp]
         public void OneSetup()
@@ -24,6 +25,10 @@ namespace TcoCoreUnitTests.PlcTcRpc
             suc._callMyPlcInstanceRtcUpdate.Synchron = true;
             sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
             sut.SingleCycleRun(() => sut.Resume());
+            offsetPlcLocal = DateTime.Now - ConnectorFixture.Connector.MAIN._tcoContextTest_A._rtc._LocalTimeDT.Synchron;
+
+            allowedMessageTimeDeviation = offsetPlcLocal.Add(new TimeSpan(0, 0, 0, 0, 1000)).TotalMilliseconds;
+
         }
 
 
@@ -57,7 +62,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(200)]
@@ -80,7 +85,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(300)]
@@ -102,7 +107,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(400)]
@@ -124,7 +129,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
 
@@ -147,7 +152,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(600)]
@@ -169,7 +174,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(700)]
@@ -191,7 +196,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(800)]
@@ -213,7 +218,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(900)]
@@ -237,7 +242,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(950)]
@@ -261,7 +266,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
 
             sut._messenger.Clear();
             Assert.AreEqual(string.Empty, sut._messenger._mime.Text.Synchron);
@@ -309,7 +314,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
                     DateTime _dotNetTime = DateTime.Now;
                     TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-                    Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+                    Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
                 }
             });
         }

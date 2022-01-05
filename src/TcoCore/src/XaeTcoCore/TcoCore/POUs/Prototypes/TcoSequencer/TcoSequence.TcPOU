@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoSequence" Id="{1dc16e35-9676-012b-08e6-85dbca5c82ff}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequence EXTENDS TcoSequencerBase
+VAR
+	_openingClosingErrorMessenger : TcoMessenger(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Close" Id="{ddb4d677-6de6-0ae5-17b2-abea5f59cbd1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			In this `TcoSequence` implementation this method must be called after the last step of the sequence.
+		</summary>			
+	</docu>	
+~*)
+METHOD Close
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CompleteSequence" Id="{60a8e2af-0cd4-04cb-22b7-8cc7c0c50d10}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Completes the sequencer, and return the sequencer pointer to the first step in the seuqence.
+				Method is typically called inside the last step of the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL CompleteSequence
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_theOrderOfTheCurrentlyExecutedStep := 0;
+_LastCycleTime := _SequenceElapsedTime;
+_cycleTimer(IN:= FALSE, PT:= T#0S);	
+
+_currentStep.Status := eStepStatus.Done;
+
+OnSequenceCompleted();
+Context.Environment.Messaging.Suspend();
+_modeController._stepForward.Restore();
+_modeController._stepBackward.Restore();
+_modeController._stepIn.Restore(); 	
+Context.Environment.Messaging.Resume();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CompleteStep" Id="{d654d70a-67d0-06b7-08f2-4ef46639a73a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Completes the execution of the current step and moves the sequencer pointer to the next step in order of execution.
+			The call returns `ITcoObjectRestorer` that allows to restore object upon step completition.
+		</summary>		
+		<returns></returns>	
+	</docu>	
+~*)
+METHOD PUBLIC FINAL CompleteStep : ITcoObjectRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+
+_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
+_currentStep.Status := eStepStatus.Done;
+OnStepCompleted();
+_modeController._stepIn.DoneWhen(_modeController._stepIn.Execute());
+CompleteStep := THIS^;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{1181bf18-f44c-05c3-2a17-87758c21520b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'Do not call this method explicitelly.'}
+METHOD PROTECTED  Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Open" Id="{974895d3-5f13-0147-128a-53762ad931e7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			In this `TcoSequence` implementation this method must be called prior to first step call of the sequence.
+		</summary>			
+	</docu>	
+~*)
+METHOD Open
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_Open();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RequestStep" Id="{fa91cc78-ebf7-0426-3a90-48d92ccbfb18}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Terminates the currently executed step and set the sequencer's pointer to the step with Id that corresponds to ```inRequestedStepID``` parameter.
+			When the order of the requested step is higher than the order of the currently finished step (the requested step is "after" the current one)
+			the requested step is started in the same context cycle.
+			When the order of the requested step is lower than the order of the currently finished step (the requested step is "before" the current one)
+			the requested step is started in the next context cycle.
+			If the requested step is not found even in the next context cycle, the sequencer enters error state ```StepWithRequestedIdDoesNotExists```.
+			<para>
+				See <see cref="TcoCore.eSequencerError"/> for detailed description.
+			</para>
+		</summary>
+	</docu>
+~*)
+METHOD PUBLIC FINAL RequestStep : ITcoSequencer
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				StepId of the step to be executed.
+			</summary>
+		</docu>
+	~*)
+	inRequestedStepID : INT := MinStepID-1;
+END_VAR
+VAR
+	_message : STRING(254);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RequestStep := i_RequestStep(inRequestedStepID := inRequestedStepID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Run" Id="{46870b03-8424-0fc8-1632-ff3d0f46c099}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Ensures calling the Open(), Main() and Close() methods in the desired order.
+				This method is final, so it cannot be overloaded. The **Instance.Run()** needs to be called cyclically inside the appropriate context.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'Call of `Run` method does not have effect in this implementation.'}
+METHOD PUBLIC FINAL Run]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Messenger.Programming('Run method should not be called in this implementation of sequencer');]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Step" Id="{5bca9b88-4aa2-09b2-12c6-71a214dc7f7c}">
+      <Declaration><![CDATA[METHOD PUBLIC Step : BOOL
+VAR_INPUT
+(*~
+	<docu>
+		<summary>
+			StepId of the current step.
+			<remarks>			
+				<note type="important">
+					This number must be unique throughout the complete sequence.
+					It must be a constant or numerical literal and it must not change during the life-time of the sequencer. 
+				</note>
+			</remarks>
+		</summary>		
+	</docu>	
+~*)
+	inStepID				: 	INT;
+(*~
+	<docu>
+		<summary>
+			If this value is false, step body is not executed and execution is moved to the next enabled step.
+		</summary>				
+	</docu>	
+~*)
+	inEnabled				: 	BOOL;
+(*~
+	<docu>
+		<summary>
+			Step description text.
+		</summary>				
+	</docu>	
+~*)
+	inStepDescription		: 	STRING(254);
+END_VAR	
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_lastOpeningCycle <> Context.StartCycleCount) THEN
+	_openingClosingErrorMessenger.Programming('Sequencer is not opened. You must call `Open` method before any step.');	
+END_IF
+
+IF((_lastOpeningCycle - _lastClosingCycle) > 1) THEN
+	_openingClosingErrorMessenger.Programming('Sequencer is not closed. You must call `Close` method after last step call.');	
+END_IF
+
+Step := i_Step(inStepID := inStepID, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepCompleteWhen" Id="{84ca9a9f-8073-0ef9-3e1f-ae35a23af514}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Completes the actually running step, when the `inCondition` parameter is `TRUE`.
+			Method is typically called inside a step as the transition method.
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL StepCompleteWhen 
+VAR_INPUT
+(*~
+	<docu>
+		<summary>
+			The condition under which the step is completed.
+		</summary>			
+	</docu>	
+~*)
+	inCondition : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_StepCompleteWhen(inCondition := inCondition);
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

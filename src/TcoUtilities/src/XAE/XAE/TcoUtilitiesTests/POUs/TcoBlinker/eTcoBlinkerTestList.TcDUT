@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eTcoBlinkerTestList" Id="{666028e8-d485-0792-3707-49b6de06b629}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoBlinkerTestList :
+(
+	None := 0,
+	Init := 10,
+	TcoBlinker := 20
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

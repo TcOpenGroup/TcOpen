@@ -29,7 +29,7 @@
                 xml:space="preserve">
                 # Use of component without TcOpen framework
                 This example demostrates the use of TcOpen component outside TcOpen Framework.
-                The single requirement is to have a [Context](https://docs.tcopengroup.org/api/TcoCore/TcoCore.TcoContext.PlcTcoContext.html) defined, as demostrated in `NF_MAIN` PRG block.
+                The single requirement is to have a [Context](https://docs.tcopengroup.org/api/TcoCore/PlcDocu.TcoCore.TcoContext.html) defined, as demostrated in `NF_MAIN` PRG block.
                 The instance of this context is then passed into FB_init of a TcOpen component (in the example piston).
                 Context must be opened at the beginning of the PLC cycle and closed at the end in our example `_context.VolatileOpen()`
                 and `_context.VolatileClose()`. Between the these two methods must be places all application logic.
