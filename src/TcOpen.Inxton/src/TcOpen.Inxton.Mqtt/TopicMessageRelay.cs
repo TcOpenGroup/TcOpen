@@ -1,14 +1,8 @@
 ﻿using MQTTnet;
-using MQTTnet.Client;
-using MQTTnet.Client.Publishing;
 using MQTTnet.Client.Receiving;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
-using Vortex.Connector;
-using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Mqtt
 {
@@ -46,5 +40,5 @@ namespace TcOpen.Inxton.Mqtt
         {
             TopicHandles.Remove(topic);
         }
-    }
+    }s
 }

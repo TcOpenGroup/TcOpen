@@ -13,6 +13,7 @@ namespace TcOpen.Inxton.Mqtt
         public IPayloadFormatterFor<T> PayloadFormatter { get; set; }
         public IMqttApplicationMessageReceivedHandler MessageHandler { get; set; }
         private IList<string> SubscribedTopics;
+
         public TcoMqtt(IMqttClient Client)
         {
             this.Client = Client;
