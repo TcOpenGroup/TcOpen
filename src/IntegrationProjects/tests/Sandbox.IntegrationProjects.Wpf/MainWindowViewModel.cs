@@ -21,19 +21,15 @@ namespace Sandbox.IntegrationProjects.Wpf
             var client = CreateClientAndConnect();
 
             IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._startCycleCount.PublishChanges(client, "fun_with_TcOpen_Hammer",
-                publishCondition: (lastPublished, toPublish) => (toPublish - lastPublished) >= 100);
+                publishCondition: (lastPublished, toPublish) => true);
 
+            IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._mirrorStartCycle.Subscribe(client, "fun_with_TcOpen_Hammer");
 
-            IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._components.PublishChanges(client, "fun_with_TcOpen_Hammer", publishCondition: ComponentsCondition);
+           // IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._components.PublishChanges(client, "fun_with_TcOpen_Hammer");
+           //  IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._mqttMirrorComponents.Subscribe<PlainST001_ComponentsHandler>(client, "fun_with_TcOpen_Hammer");
 
         }
 
-        private bool ComponentsCondition(object LastPublished, object ToPublish)
-        {
-            var lastPublihed = (PlainST001_ComponentsHandler)LastPublished;
-            var toPublihed = (PlainST001_ComponentsHandler)ToPublish;
-            return lastPublihed._drive._power != toPublihed._drive._power;
-        }
 
         private static IMqttClient CreateClientAndConnect()
         {

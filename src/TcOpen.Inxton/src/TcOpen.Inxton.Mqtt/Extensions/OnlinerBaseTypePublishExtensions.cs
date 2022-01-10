@@ -1,10 +1,9 @@
 ﻿using MQTTnet.Client;
-using System.Threading.Tasks;
 using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Mqtt
 {
-    public static class OnlinerBaseTypeExtensions
+    public static class OnlinerBaseTypePublishExtensions
     {
         /// <summary>
         /// Used to publish primitive values from PLC to a MQTT topic.
@@ -24,16 +23,13 @@ namespace TcOpen.Inxton.Mqtt
         /// <returns>The same onliner</returns>
         public static OnlinerBaseType<T> PublishChanges<T>(this OnlinerBaseType<T> onliner, IMqttClient client, string topic, PublishConditionDelegate<T> publishCondition = null)
         {
-            var mqttWrapper = new TcoMqttPublisher<T>(client, new OnlinerFormatter<T>(onliner));
+            var mqttWrapper = new TcoMqttPublisher<T>(client, new OnlinerSerializer<T>(onliner));
             onliner.Subscribe((valueTag, valueChangedArgs) =>
             {
-                Task.Run(() =>
-                {
-                    if (publishCondition == null)
-                        mqttWrapper.PublishAsync(onliner.Cyclic, topic);
-                    else
-                        mqttWrapper.PublishAsync(onliner.Cyclic, topic, publishCondition);
-                });
+                if (publishCondition == null)
+                    mqttWrapper.PublishAsync(onliner.Cyclic, topic);
+                else
+                    mqttWrapper.PublishAsync(onliner.Cyclic, topic, publishCondition);
             });
             return onliner;
         }

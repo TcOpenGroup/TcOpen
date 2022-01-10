@@ -6,7 +6,7 @@ using Vortex.Connector;
 
 namespace TcOpen.Inxton.Mqtt
 {
-    public static class VortexObjectExtensions
+    public static class VortexObjectPublishExtension
     {
         /// <summary>
         /// Extension for publishing IVortexObjects via MQTT.
@@ -29,7 +29,7 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="vortexObject">PLC Twin object to be published</param>
         /// <param name="client">MQTT Client</param>
         /// <param name="topic">Topic to publish to</param>
-        /// <param name="sampleRate">Frequency at which the changes will be published. Defaults to 50ms</param>
+        /// <param name="sampleRate">Frequency at which the changes will be published. Defaults to 100ms</param>
         /// <param name="publishCondition">Delegate which accepts two parameters - last published and latest value and returns a boolean</param>
         /// <returns></returns>
         public static IVortexObject PublishChanges(this IVortexObject vortexObject,
@@ -38,7 +38,7 @@ namespace TcOpen.Inxton.Mqtt
                 TimeSpan? sampleRate = null,
                 PublishConditionDelegate<object> publishCondition = null)
         {
-            var sampleRateValue = sampleRate ?? TimeSpan.FromMilliseconds(50);
+            var sampleRateValue = sampleRate ?? TimeSpan.FromMilliseconds(1000);
             var mqttWrapper = new TcoMqttPublisher<object>(client);
             Task.Run(async () =>
             {
