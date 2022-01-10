@@ -46,7 +46,7 @@ namespace TcOpen.Inxton.Logging.Tests
             //arrange
 
             var client = CreateClientAndConnect();
-            var mqtt = new TcoMqtt<object>(client);
+            var mqtt = new TcoMqttPublisher<object>(client);
 
             var objectToPublish = new { data = "hello", number = 10, doubleNumber = 10.2, nestedObject = new { hello = "i'm nested" } };
             var objectJson = JsonConvert.SerializeObject(objectToPublish);
@@ -55,26 +55,13 @@ namespace TcOpen.Inxton.Logging.Tests
             var messageHandler = new RelayHandler((msg) => deliveredMessage = msg.ApplicationMessage.ConvertPayloadToString());
             Broker.ApplicationMessageReceivedHandler = messageHandler;
             mqtt.PublishAsync(objectToPublish, "/topic").Wait();
+            while (messageHandler.MessageNotDelivered) { Thread.Sleep(20); }
             Disconnect(client);
-            while (messageHandler.MessageNotDelivered) { Thread.Sleep(10); }
-
             //assert
-            Assert.That(deliveredMessage.Equals(objectJson));
-
+            Assert.That(deliveredMessage, Is.EqualTo(objectJson));
         }
 
-        [Test]
-        public void PublishAndRecieveTest()
-        {
-            var publisherMqtt = new TcoMqtt<object>(CreateClientAndConnect());
-            var observeMqtt = new TcoMqtt<object>(CreateClientAndConnect());
-            var msg = new { Lorem = "Ipsum" };
-            var msgJson = JsonConvert.SerializeObject(msg);
-            string recievedMsg = "no_msg";
-            observeMqtt.Subsribe("topic", (message) => recievedMsg = message);
-            publisherMqtt.PublishAsync(msg, "topic").Wait();
-            Assert.That(() => recievedMsg, Is.EqualTo(msgJson).After(200).PollEvery(10).MilliSeconds);
-        }
+
 
     }
 }
