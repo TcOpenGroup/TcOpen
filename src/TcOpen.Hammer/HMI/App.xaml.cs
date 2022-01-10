@@ -10,7 +10,7 @@ using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
-using Serilog;
+using Serilog.Sinks;
 
 namespace HMI
 {
@@ -57,6 +57,8 @@ namespace HMI
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
                                         .WriteTo.Console()        // This will write log into application console.  
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
+                                        // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
+                                        // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
@@ -64,8 +66,7 @@ namespace HMI
 
             // Initialize logger
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
-
-
+            
             // Set up data exchange
             switch (answer)
             {
