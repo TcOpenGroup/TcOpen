@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Mqtt
 {
-    public class TcoMqttSubscriber<T> 
+    public class TcoMqttSubscriber<T>
     {
         public IMqttClient Client { get; }
 
         public IMqttApplicationMessageReceivedHandler MessageReceivedHandler { get; }
+
 
         public TcoMqttSubscriber(IMqttClient Client, IPayloadDeserializer<T> deserializer)
         {
@@ -20,11 +21,13 @@ namespace TcOpen.Inxton.Mqtt
             Client.UseApplicationMessageReceivedHandler(MessageReceivedHandler);
         }
 
+        public TcoMqttSubscriber(IMqttClient Client) : this(Client, new JsonStringPayloadDeserializer<T>()) { }
+
         public Task<MqttClientSubscribeResult> SubscribeAsync(string topic, Action<T> OnMessageRecieved)
         {
             var mqttClientSubscribeResult = Client.SubscribeAsync(topic);
             if (MessageReceivedHandler is TopicHandleRelay<T> topicMessageRelay)
-                topicMessageRelay.Subscribe(topic, OnMessageRecieved);
+                topicMessageRelay.AddHandle(topic, OnMessageRecieved);
             return mqttClientSubscribeResult;
         }
 

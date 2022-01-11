@@ -20,13 +20,18 @@ namespace TcOpen.Inxton.Mqtt
             TopicHandles = new Dictionary<string, Action<T>>();
             DefaultHandle = (msg) => Console.WriteLine(msg);
         }
+
         public Task HandleApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs eventArgs)
         {
             var topic = eventArgs.ApplicationMessage.Topic;
             var payload = eventArgs.ApplicationMessage.ConvertPayloadToString();
             if (TopicHandles.ContainsKey(eventArgs.ApplicationMessage.Topic))
             {
-                return Task.Run(() => TopicHandles[topic].Invoke(Deserializer.Deserialize(payload)));
+                return Task.Run(() =>
+                {
+                    T deserialized = Deserializer.Deserialize(payload);
+                    TopicHandles[topic].Invoke(deserialized);
+                });
             }
             else
             {
@@ -34,7 +39,7 @@ namespace TcOpen.Inxton.Mqtt
             }
         }
 
-        public void Subscribe(string topic, Action<T> OnMessageRecieved)
+        public void AddHandle(string topic, Action<T> OnMessageRecieved)
         {
             TopicHandles[topic] = OnMessageRecieved;
         }

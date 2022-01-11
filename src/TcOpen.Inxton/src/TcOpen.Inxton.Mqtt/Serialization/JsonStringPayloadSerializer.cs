@@ -6,9 +6,4 @@ namespace TcOpen.Inxton.Mqtt
     {
         public string Serialize(T plain) => JsonConvert.SerializeObject(plain);
     }
-
-    public class JsonStringPayloadDeserializer<T> : IPayloadDeserializer<T>
-    {
-        public T Deserialize(string message) => JsonConvert.DeserializeObject<T>(message);
-    }
 }
