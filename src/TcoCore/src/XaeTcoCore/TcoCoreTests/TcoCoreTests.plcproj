@@ -106,6 +106,12 @@
     <Compile Include="Tests\TcoRtc\TcoRtcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoSequenceObserver\eTcoSequenceObserverTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequenceObserver\TcoSequenceObserverTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoSequencer\PlcExecuted\eTcoSequencerTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -188,6 +194,7 @@
   <ItemGroup>
     <Folder Include="Components" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoSequenceObserver" />
     <Folder Include="Tests\TcoLogger" />
     <Folder Include="Tests\TcoLogger\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask" />

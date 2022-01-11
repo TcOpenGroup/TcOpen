@@ -12,7 +12,8 @@ VAR
 END_VAR
 VAR				
 	_s : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
-	_failedToLoad : BOOL;
+	_sObserver : TcoCore.TcoSequencerObserver(THIS^);
+	_failedToLoad : BOOL;	
 END_VAR
 
 
@@ -34,6 +35,8 @@ END_VAR
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_s.Open();
+
+THIS^._s.Observer := _sObserver;
 
 THIS^._s.Messenger.Info('Stations two sequencer is running.');
 

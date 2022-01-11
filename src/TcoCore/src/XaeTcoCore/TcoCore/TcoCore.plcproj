@@ -197,6 +197,15 @@
     <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver\ITcoSequencerObserver.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver\TcoSequencerObserver.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver\TcoTcoSequencerObserverDummy.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerModeController.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -279,6 +288,7 @@
     <Folder Include="POUs\Prototypes\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
+    <Folder Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver" />
     <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
