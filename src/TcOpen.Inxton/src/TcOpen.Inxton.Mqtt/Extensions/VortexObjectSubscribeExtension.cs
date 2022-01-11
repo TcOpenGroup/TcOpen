@@ -27,9 +27,7 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="client"></param>
         /// <param name="topic"></param>
         /// <returns></returns>
-        public static TcoMqttSubscriber<T> Subscribe<T>(this IVortexObject vortexObject,
-                IMqttClient client,
-                string topic) where T : IPlain
+        public static TcoMqttSubscriber<T> Subscribe<T>(this IVortexObject vortexObject, IMqttClient client, string topic) where T : IPlain
         {
             var mqttWrapper = new TcoMqttSubscriber<T>(client, new JsonStringPayloadDeserializer<T>());
             mqttWrapper.SubscribeAsync(topic, newData => vortexObject.FlushPlainToOnline(newData));
