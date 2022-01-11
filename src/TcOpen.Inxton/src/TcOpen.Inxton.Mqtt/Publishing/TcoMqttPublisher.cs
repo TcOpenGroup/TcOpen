@@ -1,6 +1,8 @@
 ﻿using MQTTnet.Client;
 using MQTTnet.Client.Publishing;
+using System.Threading;
 using System.Threading.Tasks;
+using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Mqtt
 {
@@ -11,10 +13,15 @@ namespace TcOpen.Inxton.Mqtt
 
         private T LastPublished;
 
+        public CancellationTokenSource CancellationToken { get; }
+
+        public ValueChangedEventHandlerDelegate PrimitiveSubscribeDelegate { get; set; }
+
         public TcoMqttPublisher(IMqttClient Client, IPayloadSerializer<T> Serializer)
         {
             this.Client = Client;
             PayloadSerializer = Serializer;
+            CancellationToken = new CancellationTokenSource();
         }
 
         public TcoMqttPublisher(IMqttClient Client) : this(Client, new JsonStringPayloadSerializer<T>())

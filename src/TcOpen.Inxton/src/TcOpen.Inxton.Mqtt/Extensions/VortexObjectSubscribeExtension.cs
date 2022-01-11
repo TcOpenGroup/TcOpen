@@ -22,11 +22,11 @@ namespace TcOpen.Inxton.Mqtt
         /// 
 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="vortexObject"></param>
-        /// <param name="client"></param>
-        /// <param name="topic"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The plain type of a VortexObject</typeparam>
+        /// <param name="vortexObject">Online PLC twin</param>
+        /// <param name="client">MQTT Client</param>
+        /// <param name="topic">Topic name</param>
+        /// <returns>TcoMqttSubscriber for unbsubscribing</returns>
         public static TcoMqttSubscriber<T> Subscribe<T>(this IVortexObject vortexObject, IMqttClient client, string topic) where T : IPlain
         {
             var mqttWrapper = new TcoMqttSubscriber<T>(client, new JsonStringPayloadDeserializer<T>());

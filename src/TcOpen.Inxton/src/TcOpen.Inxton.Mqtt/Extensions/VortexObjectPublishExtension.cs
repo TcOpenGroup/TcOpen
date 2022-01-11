@@ -1,5 +1,6 @@
 ﻿using MQTTnet.Client;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using TcoCore;
 using Vortex.Connector;
@@ -31,8 +32,8 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="topic">Topic to publish to</param>
         /// <param name="sampleRate">Frequency at which the changes will be published. Defaults to 100ms</param>
         /// <param name="publishCondition">Delegate which accepts two parameters - last published and latest value and returns a boolean</param>
-        /// <returns></returns>
-        public static IVortexObject PublishChanges(this IVortexObject vortexObject,
+        /// <returns>TcoMqttPublisher for unsubscribing</returns>
+        public static TcoMqttPublisher<object> PublishChanges(this IVortexObject vortexObject,
                 IMqttClient client,
                 string topic,
                 TimeSpan? sampleRate = null,
@@ -51,8 +52,8 @@ namespace TcOpen.Inxton.Mqtt
                         _ = mqttWrapper.PublishAsync(plainer, topic, publishCondition);
                     await Task.Delay(sampleRateValue);
                 }
-            });
-            return vortexObject;
+            },mqttWrapper.CancellationToken.Token);
+            return mqttWrapper;
         }
     }
 

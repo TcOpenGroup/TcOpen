@@ -13,11 +13,11 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="client">MQTT Client</param>
         /// <param name="topic">Topic which will be observed</param>
         /// <returns></returns>
-        public static OnlinerBaseType<T> Subscribe<T>(this OnlinerBaseType<T> onliner, IMqttClient client, string topic)
+        public static TcoMqttSubscriber<T> Subscribe<T>(this OnlinerBaseType<T> onliner, IMqttClient client, string topic)
         {
             var mqttWrapper = new TcoMqttSubscriber<T>(client, new OnlinerDeserializer<T>());
             mqttWrapper.SubscribeAsync(topic, newValue => onliner.Cyclic = newValue);
-            return onliner;
+            return mqttWrapper;
         }
     }
 }

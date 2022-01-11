@@ -13,7 +13,6 @@ namespace TcOpen.Inxton.Mqtt
 
         public IMqttApplicationMessageReceivedHandler MessageReceivedHandler { get; }
 
-
         public TcoMqttSubscriber(IMqttClient Client, IPayloadDeserializer<T> deserializer)
         {
             this.Client = Client;
@@ -38,5 +37,7 @@ namespace TcOpen.Inxton.Mqtt
                 topicMessageRelay.Unsubscribe(topic);
             return mqttClientUnsubscribeResult;
         }
+
+        public void SetTopicHandle(string topic, Action<T> handle) => (MessageReceivedHandler as TopicHandleRelay<T>).TopicHandles[topic] = handle ?? null;
     }
 }

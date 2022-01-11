@@ -20,18 +20,23 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="client">MQTT Client</param>
         /// <param name="topic">Topic</param>
         /// <param name="publishCondition">Delegate which accepts two parameters - last published and latest value and returns a boolean</param>
-        /// <returns>The same onliner</returns>
-        public static OnlinerBaseType<T> PublishChanges<T>(this OnlinerBaseType<T> onliner, IMqttClient client, string topic, PublishConditionDelegate<T> publishCondition = null)
+        /// <returns>The delegate used for subscribing, which can be used to unsubscribe later</returns>
+        public static TcoMqttPublisher<T> PublishChanges<T>(this OnlinerBaseType<T> onliner, IMqttClient client, string topic, PublishConditionDelegate<T> publishCondition = null)
         {
             var mqttWrapper = new TcoMqttPublisher<T>(client, new OnlinerSerializer<T>(onliner));
-            onliner.Subscribe((valueTag, valueChangedArgs) =>
-            {
-                if (publishCondition == null)
-                    mqttWrapper.PublishAsync(onliner.Cyclic, topic);
-                else
-                    mqttWrapper.PublishAsync(onliner.Cyclic, topic, publishCondition);
-            });
-            return onliner;
+            mqttWrapper.PrimitiveSubscribeDelegate = (valueTag, valueChangedArgs) =>
+                {
+                    if (mqttWrapper.CancellationToken.IsCancellationRequested)
+                        onliner.UnSubscribe(mqttWrapper.PrimitiveSubscribeDelegate);
+
+                    if (publishCondition == null)
+                        mqttWrapper.PublishAsync(onliner.Cyclic, topic);
+                    else
+                        mqttWrapper.PublishAsync(onliner.Cyclic, topic, publishCondition);
+                    
+                };
+            onliner.Subscribe(mqttWrapper.PrimitiveSubscribeDelegate);
+            return mqttWrapper;
         }
     }
 }
