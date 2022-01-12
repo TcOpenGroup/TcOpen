@@ -2,6 +2,40 @@
 
 Please note that you need use Inxton connector and compiler in order to use the extension functions.
 
+## Creating the MQTT Client
+
+Create an MQTT client according to your needs. See following example with a public broker.
+
+```csharp
+private static IMqttClient CreateClientAndConnect()
+{
+    int MqttPort = 1883;
+    var MqttFactory = new MqttFactory();
+    var Broker = MqttFactory.CreateMqttServer();
+    var mqttServerOptions = MqttFactory
+            .CreateServerOptionsBuilder()
+            .WithDefaultEndpointPort(MqttPort)
+            .Build();
+    Broker.StartAsync(mqttServerOptions);
+
+    var c = MqttFactory.CreateMqttClient();
+    var mqttClientOptions = MqttFactory.CreateClientOptionsBuilder().WithTcpServer("broker.emqx.io")                
+        .Build();
+    c.UseApplicationMessageReceivedHandler(new TcoAppMqttHandler());
+    c.ConnectAsync(mqttClientOptions, CancellationToken.None).Wait();
+    return c;
+}
+```
+
+The most important line here is 
+
+```csharp
+ c.UseApplicationMessageReceivedHandler(new TcoAppMqttHandler());
+```
+
+Without this line you won't be able to use extensions bellow.
+
+
 ## How to publish primitives
 
 Access the C# Twin of a PLC variable and use the `PublishChanges` extension from `TcOpen.Inxton.Mqtt` namespace.
