@@ -2,7 +2,6 @@
 using MQTTnet.Client.Publishing;
 using System.Threading;
 using System.Threading.Tasks;
-using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Mqtt
 {
@@ -11,11 +10,9 @@ namespace TcOpen.Inxton.Mqtt
         public IMqttClient Client { get; }
         public IPayloadSerializer<T> PayloadSerializer { get; }
 
-        private T LastPublished;
-
         public CancellationTokenSource CancellationToken { get; }
-
-        public ValueChangedEventHandlerDelegate PrimitiveSubscribeDelegate { get; set; }
+                
+        private T LastPublished;
 
         public TcoMqttPublisher(IMqttClient Client, IPayloadSerializer<T> Serializer)
         {
@@ -31,7 +28,8 @@ namespace TcOpen.Inxton.Mqtt
 
         public Task<MqttClientPublishResult> PublishAsync(T data, string topic)
         {
-            var publishResult = Client.PublishAsync(topic, PayloadSerializer.Serialize(data));
+            var serialized = PayloadSerializer.Serialize(data);
+            var publishResult = Client.PublishAsync(topic, serialized);
             LastPublished = data;
             return publishResult;
         }
@@ -50,6 +48,11 @@ namespace TcOpen.Inxton.Mqtt
             {
                 return Task.FromResult(new MqttClientPublishResult() { ReasonString = "PublishCondition was false" });
             }
+        }
+
+        public void StopPublishing()
+        {
+            CancellationToken.Cancel();
         }
 
     }

@@ -1,52 +1,48 @@
 ﻿using MQTTnet;
 using MQTTnet.Client.Receiving;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Mqtt
 {
+
     public class TopicHandleRelay<T> : IMqttApplicationMessageReceivedHandler
     {
-        public IDictionary<string, Action<T>> TopicHandles;
+        public Action<T> TopicHandle;
 
-        public Action<string> DefaultHandle { get; set; }
+        public string Topic { get; }
+        public IPayloadDeserializer<T> Deserializer { get; }
 
-        public IPayloadDeserializer<T> Deserializer { get;}
+        public TcoAppMqttHandler TcoAppHandler { get; }
 
-        public TopicHandleRelay(IPayloadDeserializer<T> Deserializer)
+        public TopicHandleRelay(string Topic,IPayloadDeserializer<T> Deserializer, TcoAppMqttHandler TcoAppHandler)
         {
+            this.Topic = Topic;
             this.Deserializer = Deserializer;
-            TopicHandles = new Dictionary<string, Action<T>>();
-            DefaultHandle = (msg) => Console.WriteLine(msg);
+            this.TcoAppHandler = TcoAppHandler;
+            this.TcoAppHandler.TryAdd(Topic,this);
         }
 
         public Task HandleApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs eventArgs)
         {
             var topic = eventArgs.ApplicationMessage.Topic;
             var payload = eventArgs.ApplicationMessage.ConvertPayloadToString();
-            if (TopicHandles.ContainsKey(eventArgs.ApplicationMessage.Topic))
+            return Task.Run(() =>
             {
-                return Task.Run(() =>
-                {
                     T deserialized = Deserializer.Deserialize(payload);
-                    TopicHandles[topic].Invoke(deserialized);
-                });
-            }
-            else
-            {
-                return Task.Run(() => DefaultHandle($"{topic} : {payload}"));
-            }
+                    TopicHandle.Invoke(deserialized);
+            });
         }
 
-        public void AddHandle(string topic, Action<T> OnMessageRecieved)
+        public void AddHandle(Action<T> OnMessageRecieved)
         {
-            TopicHandles[topic] = OnMessageRecieved;
+            TopicHandle = OnMessageRecieved;
         }
 
-        public void Unsubscribe(string topic)
+        public void Unsubscribe()
         {
-            TopicHandles.Remove(topic);
+            TopicHandle = null;
+            TcoAppHandler.TryRemove(Topic);
         }
 
     }

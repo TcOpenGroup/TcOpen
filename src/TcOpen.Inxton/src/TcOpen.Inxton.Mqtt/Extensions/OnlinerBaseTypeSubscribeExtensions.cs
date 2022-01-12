@@ -15,9 +15,9 @@ namespace TcOpen.Inxton.Mqtt
         /// <returns></returns>
         public static TcoMqttSubscriber<T> Subscribe<T>(this OnlinerBaseType<T> onliner, IMqttClient client, string topic)
         {
-            var mqttWrapper = new TcoMqttSubscriber<T>(client, new OnlinerDeserializer<T>());
-            mqttWrapper.SubscribeAsync(topic, newValue => onliner.Cyclic = newValue);
-            return mqttWrapper;
+            var mqttSubscriber = new TcoMqttSubscriber<T>(client, topic,new OnlinerDeserializer<T>());
+            mqttSubscriber.SubscribeAsync(newValue => onliner.Cyclic = newValue);
+            return mqttSubscriber;
         }
     }
 }

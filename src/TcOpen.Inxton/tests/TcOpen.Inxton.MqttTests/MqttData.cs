@@ -124,9 +124,9 @@ namespace TcOpen.Inxton
     class MqttOtherData
     {
         public short Short { get; set; }
-        public long Long { get; set; }
+        public string Long { get; set; }
         public char Character{ get; set; }
-        public int Int { get; set; }
+        public string Int { get; set; }
         public ulong ULong2 { get; set; }
         public bool Bool2 { get; set; }
 
@@ -134,9 +134,9 @@ namespace TcOpen.Inxton
         public MqttOtherData()
         {
             Short = short.MinValue;
-            Long = long.MinValue;
+            Long = "abc";
             Character = 'j';
-            Int = int.MaxValue;
+            Int = "asdas";
             ULong2 = ulong.MaxValue;
             Bool2 = true;
         }

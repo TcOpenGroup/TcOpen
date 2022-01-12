@@ -16,7 +16,7 @@ namespace TcOpen.Inxton.Mqtt
         /// <code>
         ///    IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001._components.PublishChanges(client, "fun_with_TcOpen_Hammer", publishCondition: ComponentsCondition);                
         /// </code>
-        /// PublishCondition delegate defined as a method. If you're publishing a certain PLC twin, the tyope of objects inside the will always be a prefixed with "Plain".
+        /// PublishCondition delegate defined as a method. If you're publishing a certain PLC twin, the type of objects inside the will always be a prefixed with "Plain".
         /// <code>
         ///     private bool ComponentsCondition(object LastPublished, object ToPublish)
         ///     {
@@ -30,7 +30,7 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="vortexObject">PLC Twin object to be published</param>
         /// <param name="client">MQTT Client</param>
         /// <param name="topic">Topic to publish to</param>
-        /// <param name="sampleRate">Frequency at which the changes will be published. Defaults to 100ms</param>
+        /// <param name="sampleRate">Frequency at which the changes will be published. Defaults to 500ms</param>
         /// <param name="publishCondition">Delegate which accepts two parameters - last published and latest value and returns a boolean</param>
         /// <returns>TcoMqttPublisher for unsubscribing</returns>
         public static TcoMqttPublisher<object> PublishChanges(this IVortexObject vortexObject,
@@ -39,12 +39,14 @@ namespace TcOpen.Inxton.Mqtt
                 TimeSpan? sampleRate = null,
                 PublishConditionDelegate<object> publishCondition = null)
         {
-            var sampleRateValue = sampleRate ?? TimeSpan.FromMilliseconds(1000);
+            var sampleRateValue = sampleRate ?? TimeSpan.FromMilliseconds(500);
             var mqttWrapper = new TcoMqttPublisher<object>(client);
             Task.Run(async () =>
             {
                 while (true)
                 {
+                    if (mqttWrapper.CancellationToken.IsCancellationRequested)
+                        return;
                     var plainer = vortexObject.CreatePlain();
                     if (publishCondition == null)
                         _ = mqttWrapper.PublishAsync(plainer, topic);

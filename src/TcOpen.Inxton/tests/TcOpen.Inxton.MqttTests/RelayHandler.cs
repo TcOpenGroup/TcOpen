@@ -1,13 +1,9 @@
 ﻿using MQTTnet;
 using MQTTnet.Client.Receiving;
-using Newtonsoft.Json;
-using NUnit.Framework;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
-using TcOpen.Inxton.Mqtt;
 
-namespace TcOpen.Inxton.Logging.Tests
+namespace TcOpen.Inxton.MqttTests
 {
 
     class RelayHandler : IMqttApplicationMessageReceivedHandler

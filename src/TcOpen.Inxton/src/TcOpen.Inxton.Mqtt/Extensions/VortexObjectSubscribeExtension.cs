@@ -29,8 +29,8 @@ namespace TcOpen.Inxton.Mqtt
         /// <returns>TcoMqttSubscriber for unbsubscribing</returns>
         public static TcoMqttSubscriber<T> Subscribe<T>(this IVortexObject vortexObject, IMqttClient client, string topic) where T : IPlain
         {
-            var mqttWrapper = new TcoMqttSubscriber<T>(client, new JsonStringPayloadDeserializer<T>());
-            mqttWrapper.SubscribeAsync(topic, newData => vortexObject.FlushPlainToOnline(newData));
+            var mqttWrapper = new TcoMqttSubscriber<T>(client, topic, new JsonStringPayloadDeserializer<T>());
+            mqttWrapper.SubscribeAsync(newData => vortexObject.FlushPlainToOnline(newData));
             return mqttWrapper;
         }
 
