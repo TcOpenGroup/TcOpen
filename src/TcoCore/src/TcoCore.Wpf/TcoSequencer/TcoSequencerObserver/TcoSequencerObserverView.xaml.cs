@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,28 +8,32 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TcoCore;
 using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace TcoCore
 {
     /// <summary>
-    /// Simple indicator of <see cref="TcoObject"/> status.    
+    /// Interaction logic for TcoSequencerObserverView.xaml
     /// </summary>
-    public partial class HealthIndicatorView : UserControl
+    public partial class TcoSequencerObserverView : UserControl
     {
-        /// <summary>
-        /// Creates new instance of <see cref="HealthIndicatorView"/>
-        /// </summary>
-        public HealthIndicatorView()
+        public TcoSequencerObserverView()
         {
             InitializeComponent();
             SetTimer();
+            this.DataContextChanged += TcoSequencerObserverView_DataContextChanged;
+        }
+
+        private void TcoSequencerObserverView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(!(this.DataContext is TcoSequencerObserverViewModel) && (this.DataContext is TcoSequencerObserver))
+            {
+                this.DataContext = new TcoSequencerObserverViewModel() { Model = this.DataContext };
+            }
         }
 
         private System.Timers.Timer messageUpdateTimer;
@@ -38,27 +41,28 @@ namespace TcoCore
         {
             if (messageUpdateTimer == null)
             {
-                messageUpdateTimer = new System.Timers.Timer(2500);
+                messageUpdateTimer = new System.Timers.Timer(1000);
                 messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
                 messageUpdateTimer.AutoReset = true;
                 messageUpdateTimer.Enabled = true;
             }
         }
 
+
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var isInSight = false;
-            TcoObjectMessageHandler MessageHandler = null;
+            TcoSequencerObserverViewModel VM = null;
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
-                isInSight = UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this);
-                MessageHandler = this.DataContext as TcoObjectMessageHandler;
+                isInSight = UIElementAccessibilityHelper.IsInSight<UserControl>(this, this);
+                VM = this.DataContext as TcoSequencerObserverViewModel;
             });
 
             if (isInSight)
             {
-                MessageHandler?.UpdateHealthInfo();
+                VM?.UpdateStepsTable();
             }
-        }                             
+        }
     }
 }

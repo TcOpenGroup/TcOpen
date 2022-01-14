@@ -47,7 +47,7 @@ namespace TcOpen.Inxton.Mqtt
                 {
                     if (mqttWrapper.CancellationToken.IsCancellationRequested)
                         return;
-                    var plainer = vortexObject.CreatePlain();
+                    var plainer = vortexObject.GetPlainFromOnline();
                     if (publishCondition == null)
                         _ = mqttWrapper.PublishAsync(plainer, topic);
                     else
