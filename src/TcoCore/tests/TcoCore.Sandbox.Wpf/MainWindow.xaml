@@ -140,8 +140,8 @@
             </TabItem>
             <TabItem Header="ST002">
                 <StackPanel>
-                    
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._s}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._sObserver}" PresentationType="Base"></vortex:RenderableContentControl>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Sequence recorder">

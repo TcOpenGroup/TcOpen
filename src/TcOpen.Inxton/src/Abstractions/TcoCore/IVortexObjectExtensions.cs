@@ -135,7 +135,24 @@ namespace TcoCore
         /// </remarks>
         /// <param name="obj">Onliner from which the plain is created.</param>        
         /// <returns>Plain (POCO) object populated with current online data.</returns>
-        public static object CreatePlain(this IVortexObject obj)
+        public static T GetPlainFromOnline<T>(this IVortexObject obj)
+        {
+            dynamic o = obj;
+            var plain = o.CreatePlainerType();
+            o.FlushOnlineToPlain(plain);
+            return plain;
+        }
+
+
+        /// <summary>
+        /// Get the Plain (POCO) object populated with current online data.
+        /// </summary>
+        /// <remarks> 
+        /// This method uses dynamic casting, which may impact the performance of the data exchange.
+        /// </remarks>
+        /// <param name="obj">Onliner from which the plain is created.</param>        
+        /// <returns>Plain (POCO) object populated with current online data.</returns>
+        public static object GetPlainFromOnline(this IVortexObject obj)
         {
             dynamic o = obj;
             var plain = o.CreatePlainerType();

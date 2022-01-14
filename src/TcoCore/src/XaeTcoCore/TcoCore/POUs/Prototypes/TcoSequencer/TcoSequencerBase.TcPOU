@@ -152,6 +152,12 @@ VAR
 	{attribute 'hide'}
 	_lastClosingCycle : ULINT;
 END_VAR
+
+VAR
+	_observer : ITcoSequencerObserver;
+	{attribute 'hide'}
+	_observerDummy : TcoTcoSequencerObserverDummy(THIS^); 
+END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -505,7 +511,17 @@ ELSIF  inStepID > MaxStepID THEN
 		_sequencerHasError := TRUE;
 ELSIF NOT _sequencerHasError THEN
 	i_Step := StepInternal(inStepID,inEnabled,inStepDescription);
-END_IF;		
+END_IF;	
+
+Observer.Observe(
+	inIsStepActive := i_Step,
+	inCurrentStepOrder := _theOrderOfTheCurrentlyExecutedStep + 1,
+	inID:= inStepID, 
+	inOrder:= _theOrderOfTheCurrentlyEvaluatedStep, 
+	inEnabled:= inEnabled, 
+	inDescription:= inStepDescription, 
+	inStatus:= _currentStep.Status, 
+	inDuration:= _currentStep.Duration); 	
 
 
 		
@@ -704,6 +720,36 @@ END_VAR
           <ST><![CDATA[ModeController := _modeController;]]></ST>
         </Implementation>
       </Get>
+    </Property>
+    <Property Name="Observer" Id="{510f76aa-a88b-0a73-08d3-555b6456f468}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Get or sets the observer for this instance of the sequencer.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Observer : ITcoSequencerObserver]]></Declaration>
+      <Get Name="Get" Id="{a5036ad8-a3cc-0a6d-0d76-78334351d9f1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF(_observer <> 0) THEN
+	Observer := _observer;
+ELSE
+	Observer := _observerDummy;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{abfd9f1c-ba0f-0fd2-1b03-ecdd439e2729}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_observer := Observer;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
     <Method Name="OnlineChange" Id="{a5a4982d-e04b-07ef-2655-37dd53a95e28}">
       <Declaration><![CDATA[(*~
