@@ -13,16 +13,16 @@ namespace TcoDrivesBeckhoff
     {
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {            
-            this._stopTask.LogPayloadDecoration = () => this.CreatePlain();
-            this._haltTask.LogPayloadDecoration = () => this.CreatePlain();
-            this._setPositionTask.LogPayloadDecoration = () => this._setPositionTask.CreatePlain();
-            this._soEResetTask.LogPayloadDecoration = () => this.CreatePlain();
-            this._resetTask.LogPayloadDecoration = () => this.CreatePlain();
-            this._homeTask.LogPayloadDecoration = () => this._homeTask.CreatePlain();
-            this._moveAbsoluteTask.LogPayloadDecoration = () => this._moveAbsoluteTask.CreatePlain();
-            this._moveRelativeTask.LogPayloadDecoration = () => this._moveRelativeTask.CreatePlain();
-            this._moveModuloTask.LogPayloadDecoration = () => this._moveModuloTask.CreatePlain();
-            this._moveVelocityTask.LogPayloadDecoration = () => this._moveVelocityTask.CreatePlain();
+            this._stopTask.LogPayloadDecoration = () => this.GetPlainFromOnline();
+            this._haltTask.LogPayloadDecoration = () => this.GetPlainFromOnline();
+            this._setPositionTask.LogPayloadDecoration = () => this._setPositionTask.GetPlainFromOnline();
+            this._soEResetTask.LogPayloadDecoration = () => this.GetPlainFromOnline();
+            this._resetTask.LogPayloadDecoration = () => this.GetPlainFromOnline();
+            this._homeTask.LogPayloadDecoration = () => this._homeTask.GetPlainFromOnline();
+            this._moveAbsoluteTask.LogPayloadDecoration = () => this._moveAbsoluteTask.GetPlainFromOnline();
+            this._moveRelativeTask.LogPayloadDecoration = () => this._moveRelativeTask.GetPlainFromOnline();
+            this._moveModuloTask.LogPayloadDecoration = () => this._moveModuloTask.GetPlainFromOnline();
+            this._moveVelocityTask.LogPayloadDecoration = () => this._moveVelocityTask.GetPlainFromOnline();
 
             this._moveAbsoluteTask.CodeProvider = new MoveAbsoluteTaskCodeProvider(this);
             this._moveRelativeTask.CodeProvider = new MoveRelativeTaskCodeProvider(this);

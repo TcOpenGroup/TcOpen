@@ -5,18 +5,23 @@ using Vortex.Connector;
 namespace PlcHammerConnector
 {
     public class Entry
-    {        
-        public static readonly string AmsId = "192.168.3.23.1.1";
+    {
+        public static readonly string AmsId = "192.168.1.5.1.1";
 
-        public static PlcHammer.PlcHammerTwinController PlcHammer { get; }
+        public static PlcHammer.PlcHammerTwinController PlcHammer
+        {
+            get;
+        }
             = new PlcHammer.PlcHammerTwinController(Tc3ConnectorAdapter.Create(AmsId, 851, true));
 
         private static PlcHammer.PlcHammerTwinController _plcHammerDesign;
+
         public static PlcHammer.PlcHammerTwinController PlcHammerDesign
         {
             get
             {
-                if (_plcHammerDesign == null) _plcHammerDesign = new PlcHammer.PlcHammerTwinController(new ConnectorAdapter(typeof(DummyConnector)));
+                if (_plcHammerDesign == null)
+                    _plcHammerDesign = new PlcHammer.PlcHammerTwinController(new ConnectorAdapter(typeof(DummyConnector)));
                 return _plcHammerDesign;
             }
         }

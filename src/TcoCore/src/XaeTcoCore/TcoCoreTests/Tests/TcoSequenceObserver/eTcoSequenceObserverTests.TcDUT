@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eTcoSequenceObserverTests" Id="{cac41862-e368-087a-0ce3-b9c4c34c619a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoSequenceObserverTests :
+(
+	RestoreSequencer := 1,
+	RunSequenceWithObserverTest := 10,
+	RunSequenceWithoutObserverTest := 20
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -13,6 +13,9 @@ VAR
 	{attribute clr [Container(Layout.Stack)]}
 	_components : ST001_ComponentsHandler(THIS^);
 	
+	{attribute clr [RenderIgnore()]}
+	_mqttMirrorComponents : ST001_ComponentsHandler(THIS^);
+	
 	{attribute clr [Container(Layout.Stack)]}
 	_groundPositionSequence : ST001_GroundSequence(THIS^,eRestoreMode.None);
 	_automatPositionSequence : ST001_AutomatSequence(THIS^,eRestoreMode.None);

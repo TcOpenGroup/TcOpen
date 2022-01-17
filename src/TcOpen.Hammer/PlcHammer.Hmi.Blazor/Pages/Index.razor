@@ -5,10 +5,6 @@
     TcOpen.Hammer
 </h1>
 
-
-
-
-
 <div class="d-flex flex-row">
     @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
     {
@@ -20,21 +16,17 @@
     }
 </div>
 
-
-@if (TcoTasksExtensions.TaskStateToVisibility(Station._groundModeTask))
-{
-    <RenderableContentControl Context="Station._groundMode" Presentation="Base" />
-}
+@*@if (TcoTasksExtensions.TaskStateToVisibility(Station._groundModeTask))
+    {
+        <RenderableContentControl Context="Station._groundMode" Presentation="Base" />
+    }*@
 @if (TcoTasksExtensions.TaskStateToVisibility(Station._automatModeTask))
 {
     <RenderableContentControl Context="Station._automatMode" Presentation="Base" />
 }
 
-
-
 <RenderableContentControl Presentation="Display"
                           Context="@Station._groundMode._currentStep.Description" />
-
 
 <RenderableContentControl Presentation="Display"
                           Context="@Station._groundMode._currentStep.Description" />
@@ -44,9 +36,6 @@
 
 <RenderableContentControl Presentation="Display"
                           Context="@Station._processTraceabilty._data" />
-
-
-
 
 @code{
 
