@@ -248,9 +248,19 @@
             get { return this.GetRecords("*").AsQueryable(); }
         }
 
-        public OnCreateDelegate<T> OnCreate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public OnUpdateDelegate<T> OnUpdate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ValidateDataDelegate<T> OnRecordUpdateValidation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public OnCreateDelegate<T> OnCreate { get; set; } = null;
+        public OnUpdateDelegate<T> OnUpdate { get; set; } = null;
+        public ValidateDataDelegate<T> OnRecordUpdateValidation { get; set; } = null;
+        public OnReadDelegate OnRead { get; set; } = null;
+        public OnDeleteDelegate OnDelete { get; set; } = null;
+        public OnCreateDoneDelegate<T> OnCreateDone { get; set; } = null;
+        public OnReadDoneDelegate<T> OnReadDone { get; set; } = null;
+        public OnUpdateDoneDelegate<T> OnUpdateDone { get; set; } = null;
+        public OnDeleteDoneDelegate OnDeleteDone { get; set; } = null;
+        public OnCreateFailedDelegate<T> OnCreateFailed { get; set; } = null;
+        public OnReadFailedDelegate OnReadFailed { get; set; } = null;
+        public OnUpdateFailedDelegate<T> OnUpdateFailed { get; set; } = null;
+        public OnDeleteFailedDelegate OnDeleteFailed { get; set; } = null;
     }
 }
 
