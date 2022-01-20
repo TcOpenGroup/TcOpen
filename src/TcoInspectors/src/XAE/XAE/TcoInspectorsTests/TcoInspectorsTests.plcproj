@@ -27,16 +27,20 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="POUs\DigitalInspector\DigitalInspectorTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SampleComponentTests.TcPOU">
+    <Compile Include="POUs\DigitalInspector\eDigitalInspectorTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\DigitalInspector" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

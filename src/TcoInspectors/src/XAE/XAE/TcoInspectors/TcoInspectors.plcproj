@@ -36,32 +36,22 @@
     <Compile Include="POUs\DigitalInspector\TcoDigitalInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DigitalInspector\TcoDigitalInspectionTask.TcPOU">
+    <Compile Include="POUs\eInspectorResult.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\eInspectorResult.TcDUT">
+    <Compile Include="POUs\IInspector.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SampleComponent\SampleComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskFunctionBuffer.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskIteration.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleContext.TcPOU">
+    <Compile Include="POUs\TcoInspectionGroup.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
     <Folder Include="POUs\DigitalInspector" />
-    <Folder Include="POUs\SampleComponent" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

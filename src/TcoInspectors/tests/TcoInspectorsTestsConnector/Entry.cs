@@ -9,7 +9,7 @@ namespace TcoInspectorsTests
 {
     public static class Entry
     {
-        const string AmdId = "172.20.10.2.1.1";
+        static string AmdId = Environment.GetEnvironmentVariable("Tc3Target");
 
         public static TcoInspectorsTestsTwinController TcoInspectorsTests 
             = new TcoInspectorsTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));

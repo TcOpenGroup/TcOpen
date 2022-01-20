@@ -1,19 +1,137 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDigitalInspector" Id="{b1413ab6-cf32-03b8-31af-46a8ec8720ab}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoCore.TcoObject]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoCore.TcoTask IMPLEMENTS IInspector
+VAR
+	SignalState : BOOL;
+	_data : TcoDigitalInspectorData;
+	_checkSteps : eCheckSteps;
+	_passedTimer : Tc2_Standard.TON;
+	_failedTimer : Tc2_Standard.TON;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Inspect" Id="{304a74e1-ec39-09fd-0ecf-8a74644a243b}">
-      <Declaration><![CDATA[METHOD Inspect : BOOL
+      <Declaration><![CDATA[METHOD Inspect : IInspector
 VAR_INPUT
-	inValue : BOOL;
+	Status : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Inspect := THIS^;
+
+Invoke();
+
+IF(Execute()) THEN
+	IF(_data.IsByPassed) THEN
+		_data.Result := eInspectorResult.Bypassed;
+		_data.TimeStamp := Context.RealTimeClock.NowLocal();	
+		DoneWhen(TRUE);	
+		RETURN;
+	END_IF
+		
+	SignalState := Status;
+		
+	_data.Result := eInspectorResult.Running;
+	_failedTimer(IN:= TRUE, PT:=_data.FailedTime);
+	_passedTimer(IN:=Status = _data.RequiredStatus,PT:=_data.PassedTime);
+	_data.DetectedStatus := Status;
+	IF(_failedTimer.Q OR _passedTimer.Q) THEN			
+		DoneWhen(TRUE);
+	END_IF;												
+END_IF;	]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnDone" Id="{43aa6ba3-c55d-0859-25a9-24eb083056e8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnDone();
+
+IF(_data.Result = eInspectorResult.Bypassed) THEN RETURN; END_IF;
+
+_data.TimeStamp := Context.RealTimeClock.NowLocal();
+_data.Result := eInspectorResult.Failed;
+IF(NOT _failedTimer.Q AND _passedTimer.Q)THEN
+	_data.Result := eInspectorResult.Passed;					
+END_IF
+
+IF(_data.Result = eInspectorResult.Failed) THEN
+	_data.DetectedStatus := NOT _data.RequiredStatus;
+END_IF
+
+IF(_data.IsExcluded) THEN
+	_data.Result := eInspectorResult.Excluded;
+END_IF
+
+_data.RetryAttemptsCount := _data.RetryAttemptsCount + 1;
+
+_checkSteps := eCheckSteps.Reporting;
+
+IF(_data.Result = eInspectorResult.Failed) THEN
+	
+	;
+//	IF(_evaluator <> 0) THEN
+//		_evaluator.AddFailureDescription(ProcessedData.FailureDescription);
+//	END_IF;	 	
+END_IF;		]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{e650f529-4e67-0027-185e-0518bcbd4721}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnStart();
+_checkSteps := eCheckSteps.Initialisation;
+IF(_data.PassedTime = T#0S) THEN
+	_data.PassedTime := T#50MS;
+END_IF;
+		
+IF(_data.FailedTime = T#0S) THEN
+	_data.FailedTime := T#100MS;
+END_IF;
+
+_data.Result := eInspectorResult.NoAction;
+_passedTimer(IN:=FALSE,PT:=T#0MS);
+_failedTimer(IN:=FALSE,PT:=T#0MS);
+_checkSteps := eCheckSteps.WatingForStart;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{214352c6-868b-0eb6-102f-c5a86531690b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_checkSteps := eCheckSteps.Initialisation;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Result" Id="{3bfa3a4a-7888-017e-224d-3476f4ea51b3}">
+      <Declaration><![CDATA[PROPERTY Result : eInspectorResult]]></Declaration>
+      <Get Name="Get" Id="{eeb8a9f3-dd81-00da-387c-cf883f7fc24b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Result := _data.Result;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

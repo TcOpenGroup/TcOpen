@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="IInspector" Id="{0cbe9e39-d5a4-05af-17ce-7965efd20de3}">
+    <Declaration><![CDATA[INTERFACE IInspector EXTENDS TcoCore.ITcoTaskStatus
+]]></Declaration>
+    <Property Name="Result" Id="{059b95a9-368b-016b-1e77-bc829a9a2a15}">
+      <Declaration><![CDATA[PROPERTY Result : eInspectorResult]]></Declaration>
+      <Get Name="Get" Id="{11bcb09e-df05-0600-3fcc-c1e8eab49bfc}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>
