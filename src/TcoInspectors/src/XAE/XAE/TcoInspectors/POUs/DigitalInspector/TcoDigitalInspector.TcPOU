@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDigitalInspector" Id="{b1413ab6-cf32-03b8-31af-46a8ec8720ab}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoCore.TcoObject]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Inspect" Id="{304a74e1-ec39-09fd-0ecf-8a74644a243b}">
+      <Declaration><![CDATA[METHOD Inspect : BOOL
+VAR_INPUT
+	inValue : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
