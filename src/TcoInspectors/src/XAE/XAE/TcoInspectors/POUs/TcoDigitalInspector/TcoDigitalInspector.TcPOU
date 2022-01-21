@@ -8,6 +8,17 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="Data" Id="{b0f00037-c485-0f58-3a2e-35a438d55d1b}">
+      <Declaration><![CDATA[PROPERTY Data : REFERENCE TO TcoDigitalInspectorData]]></Declaration>
+      <Get Name="Get" Id="{9d81d3dd-148f-0c90-116b-61d78b860286}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Data REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Inspect" Id="{304a74e1-ec39-09fd-0ecf-8a74644a243b}">
       <Declaration><![CDATA[METHOD Inspect : IInspector
 VAR_INPUT

@@ -22,7 +22,7 @@ END_VAR]]></Declaration>
         _result         := 0;
         _isOverIspected := FALSE;
     eDigitalInspectorTests.Inspect:
-        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).UpdateComprehensiveResult(_overallResult).Done);
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).UpdateComprehensiveResult(_overallResult).Done);	
     eDigitalInspectorTests.GetResult:
         _result         := _sut.Inspect(_inspectedValue).Result;
         _isOverIspected := _sut.Inspect(_inspectedValue).OverInspected;						

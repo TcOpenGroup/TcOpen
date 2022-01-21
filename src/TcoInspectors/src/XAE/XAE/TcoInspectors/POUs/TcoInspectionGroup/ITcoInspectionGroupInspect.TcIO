@@ -16,5 +16,14 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="UpdateComprehensiveResult" Id="{314d0d81-94ff-01e5-3a9e-477f7a44f2d1}">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inquire` method.'}
+METHOD UpdateComprehensiveResult : ITcoInspectionGroupInspect
+VAR_IN_OUT
+    inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>

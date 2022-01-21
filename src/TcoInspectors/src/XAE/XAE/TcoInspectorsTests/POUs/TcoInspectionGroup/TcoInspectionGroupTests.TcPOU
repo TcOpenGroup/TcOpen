@@ -5,7 +5,8 @@
 VAR
 	_sut : TcoInspectors.TcoInspectionGroup(THIS^);
 	_diis : ARRAY[0..5] OF TcoInspectors.TcoDigitalInspector(THIS^);
-	_dii_inspectedValues : ARRAY[0..5] OF BOOL;			
+	_dii_inspectedValues : ARRAY[0..5] OF BOOL;	
+    _overallResult  : TcoInspectors.TcoComprehensiveResult;		
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -19,7 +20,8 @@ END_VAR]]></Declaration>
 	eInspectionGroupTests.Inspect:		
 		THIS^.ProbeDoneWhen(_sut.Act()
 								.Inquire(_diis[0].Inspect(_dii_inspectedValues[0]))
-								.Inquire(_diis[1].Inspect(_dii_inspectedValues[1])).Done);			
+								.Inquire(_diis[1].Inspect(_dii_inspectedValues[1]))
+								.UpdateComprehensiveResult(_overallResult).Done);			
 END_CASE]]></ST>
       </Implementation>
     </Method>
