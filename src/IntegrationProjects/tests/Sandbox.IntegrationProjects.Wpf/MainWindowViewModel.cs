@@ -42,7 +42,7 @@ namespace Sandbox.IntegrationProjects.Wpf
                     .Build();
             Broker.StartAsync(mqttServerOptions);
 
-            var c = MqttFactory.CreateMqttClient();
+            var c = MqttFactory.CreateMqttClient().UseApplicationMessageReceivedHandler(new TcoAppMqttHandler());
             var mqttClientOptions = MqttFactory.CreateClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build();
             c.ConnectAsync(mqttClientOptions, CancellationToken.None).Wait();
             return c;
