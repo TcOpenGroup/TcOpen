@@ -1,0 +1,243 @@
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
+using TcoInspectorsTests;
+using Tc.Prober.Runners;
+using TcoInspectors;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace TcoInspectorsUnitTests
+{
+    public class TcoDigitalInspectorTests
+    {
+        TcoInspectorsTests.TcoDigitalInspectorTests container;
+
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            Entry.TcoInspectorsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
+            container = Entry.TcoInspectorsTests.MAIN._digitalInspectorTests;
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            var plain = container._sut._data.CreatePlainerType();
+            container._sut._data.FlushPlainToOnline(plain);
+            container.ExecuteProbeRun(1, 0);
+        }
+
+
+        [Test]
+        [TestCase(true, false)]
+        [TestCase(false, true)]
+        public void inspect_must_fail(bool required, bool actualSignal)
+        {
+            container._sut._data.RequiredStatus.Synchron = required;
+            container._inspectedValue.Synchron = actualSignal;
+
+            container.ExecuteProbeRun(1, 0);
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+        }
+
+        [Test]
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void inspect_must_pass(bool required, bool actualSignal)
+        {
+            container._sut._data.RequiredStatus.Synchron = required;
+            container._inspectedValue.Synchron = actualSignal;
+            
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+        }
+
+        [Test]     
+        public void inspect_bypassed()
+        {
+            container._sut._data.IsByPassed.Synchron = true;
+
+            container.ExecuteProbeRun(1, 0);
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Bypassed, container._sut.ResultAsEnum);
+        }
+
+        [Test]
+        [TestCase(true, true)]
+        [TestCase(false, false)]     
+        public void inspect_excluded(bool required, bool actualSignal)
+        {
+            container._sut._data.RequiredStatus.Synchron = required;
+            container._inspectedValue.Synchron = actualSignal;
+            container._sut._data.IsExcluded.Synchron = true;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Excluded, container._sut.ResultAsEnum);
+
+            Assert.AreEqual(actualSignal, container._sut._data.DetectedStatus.Synchron);
+        }
+
+        [Test]
+        public void inspect_get_result_passed()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            container.ExecuteProbeRun(1, (int)eDigitalInspectorTests.GetResult);
+
+            Assert.AreEqual((short)eInspectorResult.Passed, container._result.Synchron);           
+        }
+
+        [Test]
+        public void inspect_get_result_failed()
+        {
+            container._sut._data.RequiredStatus.Synchron = false;
+            container._inspectedValue.Synchron = true;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            container.ExecuteProbeRun(1, (int)eDigitalInspectorTests.GetResult);
+
+            Assert.AreEqual((short)eInspectorResult.Failed, container._result.Synchron);
+        }
+
+        [Test]       
+        public void inspect_pass_time_more_than_file_time_must_fail()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;
+            container._sut._data.PassTime.Synchron = System.TimeSpan.FromMilliseconds(1000);
+            container._sut._data.FailTime.Synchron = System.TimeSpan.FromMilliseconds(500);            
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);            
+        }
+
+        [Test]
+        public void inspect_jitter_signal_must_fail()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;
+            container._sut._data.PassTime.Synchron = System.TimeSpan.FromMilliseconds(250);
+            container._sut._data.FailTime.Synchron = System.TimeSpan.FromMilliseconds(700);
+
+            var run = true;
+            var task = Task.Run(() => { while (run) { Thread.Sleep(10); container._inspectedValue.Synchron = !container._inspectedValue.Synchron; } });
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+            run = false;
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+
+            while (!task.IsCompleted) { }
+
+            Assert.IsTrue(task.IsCompleted);
+        }
+
+        [Test]
+        public void inspect_with_over_inspection_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = false;
+            container._sut._data.NumberOfAllowedRetries.Synchron = 10;
+
+            for (int i = 0; i < 9; i++)
+            {
+                container.ExecuteProbeRun(1, 0);
+                container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);               
+            }
+
+            Assert.AreEqual(9, container._sut._data.RetryAttemptsCount.Synchron);
+
+            container.ExecuteProbeRun(1, 0);
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+
+            container._inspectedValue.Synchron = true;
+            container.ExecuteProbeRun(1, 0);
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+            container.ExecuteProbeRun(1,(int)eDigitalInspectorTests.GetResult);
+
+            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+            Assert.AreEqual(true, container._isOverIspected.Synchron);
+
+        }
+
+        [Test]        
+        public void inspect_store_over_all_no_action_and_inspect_failed_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = false;
+            container._overallResult.Result.Synchron = (short)eOverallResult.NoAction;            
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+            Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_store_over_all_failed_and_inspect_failed_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;
+            container._overallResult.Result.Synchron = (short)eOverallResult.Failed;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+            Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_store_over_all_in_progress_and_inspect_failed_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = false;
+            container._overallResult.Result.Synchron = (short)eOverallResult.InProgress;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+            Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_store_over_all_in_failed_and_inspect_bypassed_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._sut._data.IsByPassed.Synchron = true;
+            container._inspectedValue.Synchron = false;
+            container._overallResult.Result.Synchron = (short)eOverallResult.Failed;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Bypassed, container._sut.ResultAsEnum);
+            Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_store_over_all_in_failed_and_inspect_excluded_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._sut._data.IsExcluded.Synchron = true;
+            container._inspectedValue.Synchron = false;
+            container._overallResult.Result.Synchron = (short)eOverallResult.Failed;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
+
+            Assert.AreEqual(eInspectorResult.Excluded, container._sut.ResultAsEnum);
+            Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
+        }
+    }
+}

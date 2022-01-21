@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoInspectorData" Id="{434cc4c1-8bb2-0788-1dec-8e2efdacb9f3}">
+    <Declaration><![CDATA[{attribute 'qlik_entity:Checks'}
+{attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
+{attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
+TYPE
+    TcoInspectorData :
+    STRUCT
+
+        (*~
+		<docu>
+		<summary>
+			Inspection timestamp.	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#TIME STAMP#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:TimeStamp'}
+        TimeStamp : DT;
+
+        (*~
+		<docu>
+		<summary>
+			Pass time, elapses when the measured value has required value (see `ReuiredStatus`). 
+			The signal must have required value continuosly for this time span for the check to pass.  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#STAB. TIME#>"}
+        {attribute 'qlik_load:PassedTime'}
+        PassTime : TIME;
+
+        (*~
+		<docu>
+		<summary>
+			Fail time. Is the maximum test duration (or timeout). If the condition for the successul test is not met within this time, the test fails.			  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#TIMEOUT FAIL#>"}
+        {attribute 'qlik_load:FailedTime'}
+        FailTime : TIME;
+
+        (*~
+		<docu>
+		<summary>
+			Test result.		  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#RESULT#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:Result'}
+        Result : eInspectorResult;
+
+        (*~
+		<docu>
+		<summary>
+			Test is exclusion from evaluation. If TRUE the check is excluded, the test will run and provided detected value. 
+			Evaluation of excluded test should be handled by user code.		  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#EXCLUDE CHECK#>"}
+        {attribute 'qlik_load:IsExcluded'}
+        IsExcluded : BOOL;
+
+        (*~
+		<docu>
+		<summary>
+			Test is bypassed, no eveluation occurs.  
+			Evaluation of excluded test should be handled by user code.		  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#BYPASS PROCESS#>"}
+        {attribute 'qlik_load:IsByPassed'}
+        IsByPassed : BOOL;
+
+        (*~
+		<docu>
+		<summary>
+			Verbatim description of the failure.				  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#FAILURE DESCRIPTION#>"}
+        {attribute 'qlik_ignore'}
+        FailureDescription : STRING(100);
+
+        (*~
+		<docu>
+		<summary>
+			Counter of allowed inspections.				  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#MAX.RETRY COUNT#>"}
+        {attribute 'qlik_load:NumberOfAllowedRetries'}
+        NumberOfAllowedRetries : UINT;
+
+        (*~
+		<docu>
+		<summary>
+			Counter inspections.				  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#RETRIES#>"}
+        {attribute 'qlik_load:RetryAttemptsCount'}
+        RetryAttemptsCount : UINT;
+
+        (*~
+		<docu>
+		<summary>
+			Error code.			  	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#ERROR CODE#>"}
+        {attribute 'qlik_load:ErrorCode'}
+        ErrorCode : STRING(20);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

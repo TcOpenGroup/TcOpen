@@ -27,31 +27,45 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DigitalInspector\eCheckSteps.TcDUT">
+    <Compile Include="POUs\Abstractions\IInspector.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DigitalInspector\TcoDigitalInspector.TcPOU">
+    <Compile Include="POUs\Abstractions\TcoComprehensiveResult.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DigitalInspector\TcoDigitalInspectorData.TcDUT">
+    <Compile Include="POUs\Abstractions\TcoInspector.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Abstractions\TcoInspectorData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\eOverallResult.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDigitalInspector\TcoDigitalInspector.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDigitalInspector\TcoDigitalInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\eInspectorResult.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\IInspector.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoInspectionGroup.TcPOU">
+    <Compile Include="POUs\TcoInspectionGroup\ITcoInspectionGroupInspect.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInspectionGroup\TcoInspectionGroup.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
-    <Folder Include="POUs\DigitalInspector" />
+    <Folder Include="POUs\Abstractions" />
+    <Folder Include="POUs\TcoDigitalInspector" />
+    <Folder Include="POUs\TcoInspectionGroup" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

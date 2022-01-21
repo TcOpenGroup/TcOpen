@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDigitalInspectorTests" Id="{8e88c5fb-6b37-0ee0-1dee-44bcdb0de8e4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalInspectorTests EXTENDS TcoCore._internals_TcoContext
+VAR
+    _sut            : TcoInspectors.TcoDigitalInspector(THIS^);
+    _inspectedValue : BOOL;
+    _result         : TcoInspectors.eInspectorResult;
+    _isOverIspected : BOOL;
+    _overallResult  : TcoInspectors.TcoComprehensiveResult;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{2386eb08-ae25-07fa-0ae2-18bdce87e272}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+    0:
+        _result         := 0;
+        _isOverIspected := FALSE;
+    eDigitalInspectorTests.Inspect:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).UpdateComprehensiveResult(_overallResult).Done);
+    eDigitalInspectorTests.GetResult:
+        _result         := _sut.Inspect(_inspectedValue).Result;
+        _isOverIspected := _sut.Inspect(_inspectedValue).OverInspected;						
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

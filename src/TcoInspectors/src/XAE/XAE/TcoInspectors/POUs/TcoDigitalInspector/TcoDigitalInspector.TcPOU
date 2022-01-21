@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDigitalInspector" Id="{b1413ab6-cf32-03b8-31af-46a8ec8720ab}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoInspector
+VAR
+    _data : TcoDigitalInspectorData;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Inspect" Id="{304a74e1-ec39-09fd-0ecf-8a74644a243b}">
+      <Declaration><![CDATA[METHOD Inspect : IInspector
+VAR_INPUT
+    Status : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Inspect := THIS^;
+
+_inspectionData REF= _data;
+
+Invoke();
+
+IF (Execute()) THEN
+    IF (_data.IsByPassed) THEN
+        _data.Result    := eInspectorResult.Bypassed;
+        _data.TimeStamp := Context.RealTimeClock.NowLocal();
+        DoneWhen(TRUE);
+        RETURN;
+    END_IF
+
+    _data.Result := eInspectorResult.Running;
+    _failTimer(IN := TRUE, PT := _data.FailTime);
+    _passTimer(IN := Status = _data.RequiredStatus, PT := _data.PassTime);
+    _data.DetectedStatus := Status;
+    IF (_failTimer.Q OR _passTimer.Q) THEN
+        IF (_data.Result = eInspectorResult.Failed) THEN
+            _data.DetectedStatus := NOT _data.RequiredStatus;
+        END_IF
+
+        DoneWhen(TRUE);
+    END_IF;
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

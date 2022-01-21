@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoInspectionGroupTests" Id="{982692a5-9906-0157-21ab-dccd4c43da53}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroupTests EXTENDS TcoCore._internals_TcoContext
+VAR
+	_sut : TcoInspectors.TcoInspectionGroup(THIS^);
+	_diis : ARRAY[0..5] OF TcoInspectors.TcoDigitalInspector(THIS^);
+	_dii_inspectedValues : ARRAY[0..5] OF BOOL;			
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{50a6684e-9742-0c51-2cf7-ef891467b3d3}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+	eInspectionGroupTests.Inspect:		
+		THIS^.ProbeDoneWhen(_sut.Act()
+								.Inquire(_diis[0].Inspect(_dii_inspectedValues[0]))
+								.Inquire(_diis[1].Inspect(_dii_inspectedValues[1])).Done);			
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

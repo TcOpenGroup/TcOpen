@@ -3,11 +3,13 @@
   <POU Name="MAIN" Id="{773bf874-b264-48a0-a352-092af4113065}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_digitalInspectorTests : DigitalInspectorTests;
+	_digitalInspectorTests : TcoDigitalInspectorTests;
+	_inspectionGroupTests : TcoInspectionGroupTests;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_digitalInspectorTests.ProbeRun();]]></ST>
+      <ST><![CDATA[_digitalInspectorTests.ProbeRun();
+_inspectionGroupTests.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

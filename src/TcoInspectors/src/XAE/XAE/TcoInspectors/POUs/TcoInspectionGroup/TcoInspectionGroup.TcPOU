@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoInspectionGroupInspect
+VAR
+    _done   : BOOL;
+    _result : TcoComprehensiveResult;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Act" Id="{35f139a3-c8e1-0dfe-09ea-5e112c3b9b62}">
+      <Declaration><![CDATA[(*~
+	<summary>
+		Initiates grouped inspection.
+	</summary>
+~*)
+METHOD Act : ITcoInspectionGroupInspect
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Act   := THIS^;
+_done := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Done" Id="{5d8b674b-9e76-0be3-1a04-7b0897c7e892}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{11835c00-ed30-04c2-28e0-db016edb13b4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Done := _done;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Inquire" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `Inquire` property via `Act()` method.'}
+METHOD Inquire : ITcoInspectionGroupInspect
+VAR_INPUT
+    Inspector : IInspector;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Inquire := THIS^;
+
+IF (NOT Inspector.Done) THEN
+    _done := FALSE;
+ELSE
+    IF (Inspector.Result >= eInspectorResult.Failed) THEN
+         Inspector.UpdateComprehensiveResult(_result);
+    END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateComprehensiveResult" Id="{2750fed5-0e89-0a81-1a9c-ccbe6a52e0ef}">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inquire` method.'}
+METHOD UpdateComprehensiveResult : ITcoInspectionGroupInspect
+VAR_IN_OUT
+    inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[UpdateComprehensiveResult := THIS^;
+
+inoResult := _result;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

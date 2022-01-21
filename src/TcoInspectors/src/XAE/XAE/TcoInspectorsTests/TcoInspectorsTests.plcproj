@@ -27,10 +27,16 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DigitalInspector\DigitalInspectorTests.TcPOU">
+    <Compile Include="POUs\TcoDigitalInspector\TcoDigitalInspectorTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DigitalInspector\eDigitalInspectorTests.TcDUT">
+    <Compile Include="POUs\TcoDigitalInspector\eDigitalInspectorTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInspectionGroup\TcoInspectionGroupTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInspectionGroup\eInspectionGroupTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -40,7 +46,8 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="POUs\DigitalInspector" />
+    <Folder Include="POUs\TcoDigitalInspector" />
+    <Folder Include="POUs\TcoInspectionGroup" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
