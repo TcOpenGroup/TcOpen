@@ -12,6 +12,7 @@ namespace TcoCore
         protected override void OnInitialized()
         {
             UpdateValuesOnChange(ViewModel._tcoObject);
+            DiagnosticsUpdateTimer();
         }
 
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
