@@ -12,26 +12,35 @@
 [![NuGet](https://img.shields.io/nuget/v/TcOpen.Group.svg?style=flat)](https://www.nuget.org/packages/TcOpen.Group/)
 
 
-**Documentation in progress [here](https://docs.tcopengroup.org/)** 
-
 # TcOpen
 
-* [Why?](#why)
-* [Goals](#goals)
-* [What is TwinCAT?](#what-is-twincat)
-* [Where are we - Development process](#where-are-we---development-process)
-* [What does TcOpen contain at this point](#what-does-tcopen-contain-at-this-point)
-
+## Introduction
 
 **Open Source TwinCAT 3 code by Automation Professionals for Automation Professionals.**
 
-TcOpen aims to provide standard classes to start building any **real deployable application**. TcOpen will help you by providing well-tested components you can use in your project free of charge.  
+TcOpen aims to provide standard classes to start building any **real deployable application**. TcOpen happend to develop into a application framework that addresses several pains of PLC programming (coordination, composition, componentization, connecting to IT technologies).
 
-## Why?
+The software in industrial automation developed historically on very different trajectory then traditional software. We introduce modern software development practices to the PLC world so developers can shift from low-value work to high-value work. Open-source offers a solid ground upon which many can build and bring ideas from all over the world. 
 
-We want to introduce modern software development practices to the PLC world so developers can shift from low-value work to high-value work. Open-source offers a solid ground upon which many can build and bring ideas from all over the world.
+TcOpen is **object oriented** framework capitalizing on OOP extension as defined in [IEC 61131-3](https://webstore.iec.ch/publication/4552) ST (structured text) and implemented by CoDeSys and [TwinCAT3](https://www.beckhoff.com/en-us/products/automation/twincat/te1xxx-twincat-3-engineering/te1000.html). 
 
-## Goals
+TwinCAT turns almost any compatible PC into a real-time controller with a multi-PLC system, NC axis control, programming environment, and operating station. TwinCAT replaces conventional PLC and NC/CNC controllers.
+
+
+* [Where are we - Development process](#where-are-we---development-process)
+* [What does TcOpen contain at this point](#what-does-tcopen-contain-at-this-point)
+* [Documentation](https://docs.tcopengroup.org/)** 
+
+## Features
+
+Full list of accessible features is kept up to date [here](https://docs.tcopengroup.org/articles/intro.html#features).
+
+### PLC libraries for basic project organisation, coordination
+- TcoCore (Application contextualization, tasks, sequencer)
+- TcoElements ()
+- TcoData (IRepository that works form PLC with an arbitrary repository)
+
+### Extensions
 
 - Introduce software engineering patterns to PLC development.
 - Modular, extensible, and observable code and applications.
@@ -41,7 +50,7 @@ We want to introduce modern software development practices to the PLC world so d
 
 ## What is TwinCAT?
 
-TwinCAT software system turns almost any compatible PC into a real-time controller with a multi-PLC system, NC axis control, programming environment, and operating station. TwinCAT replaces conventional PLC and NC/CNC controllers. It runs in Visual Studio with CodeSys.
+
 
 # Where are we - Development process 
 
