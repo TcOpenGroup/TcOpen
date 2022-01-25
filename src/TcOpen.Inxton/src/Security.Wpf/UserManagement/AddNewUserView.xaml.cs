@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TcOpen.Inxton.Local.Security.Wpf
 {
@@ -23,7 +14,14 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         public AddNewUserView()
         {
             InitializeComponent();
+            AllRolesCollectionView = CollectionViewSource.GetDefaultView(AllRoles.ItemsSource);
+            AssignedRolesCollectionView = CollectionViewSource.GetDefaultView(AssignedRoles.ItemsSource);
+            AllRolesCollectionView.Filter = AllRolesFilter;
+            AssignedRolesCollectionView.Filter = AssignedRolesFilter;
         }
+
+        ICollectionView AllRolesCollectionView { get; set; }
+        ICollectionView AssignedRolesCollectionView { get; set; }
 
         private double MaxRolesListBoxHeight = int.MinValue;
         private void AvailibleRoles_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -34,5 +32,32 @@ namespace TcOpen.Inxton.Local.Security.Wpf
                 (sender as Control).MinHeight = MaxRolesListBoxHeight;
             }
         }
+        private void TextFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AllRolesCollectionView?.Refresh();
+            AssignedRolesCollectionView?.Refresh();
+        }
+
+        private void ClearAllRolesFilter_Click(object sender, RoutedEventArgs e)
+        {
+            AllRolesTextFilter.Text = "";
+        }
+
+        private void ClearAssignedFilter_Click(object sender, RoutedEventArgs e)
+        {
+            AssignedRolesTextFilter.Text = "";
+        }
+        private bool RoleFilter(object roleNameTocompare, string filter)
+        {
+            if (roleNameTocompare is string roleName)
+            {
+                return roleName.ToLower().Contains(filter.ToLower());
+            }
+            return true;
+        }
+
+        private bool AllRolesFilter(object obj) => RoleFilter(obj, AllRolesTextFilter.Text);
+
+        private bool AssignedRolesFilter(object obj) => RoleFilter(obj, AssignedRolesTextFilter.Text);
     }
 }
