@@ -24,7 +24,8 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             AvailibleRolesCollectionView = CollectionViewSource.GetDefaultView(AvailibleRoles.ItemsSource);
             UserRolesCollectionView = CollectionViewSource.GetDefaultView(CurrentRoles.ItemsSource);
             AvailibleRolesCollectionView.Filter = AvailibleRolesFilter;
-            UserRolesCollectionView.Filter = UserRolesFilter;
+            if(UserRolesCollectionView != null)
+                UserRolesCollectionView.Filter = UserRolesFilter;
         }
 
         private bool RoleFilter(object roleNameTocompare, string filter)
