@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,14 +9,14 @@ namespace TcOpen.Inxton.Local.Security.Wpf
     /// <summary>
     /// Interaction logic for AllUsersView.xaml
     /// </summary>
-    public partial class AllUsersView : UserControl
+    public partial class AllUsersView : UserControl, IDisposable
     {
         public AllUsersView()
         {
             InitializeComponent();
             UsersList.SelectionChanged += SelectionChanged;
-
         }
+
         ICollectionView AvailibleRolesCollectionView { get; set; }
         ICollectionView UserRolesCollectionView { get; set; }
         private void SelectionChanged(object sender, RoutedEventArgs e)
@@ -24,7 +25,6 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             UserRolesCollectionView = CollectionViewSource.GetDefaultView(CurrentRoles.ItemsSource);
             AvailibleRolesCollectionView.Filter = AvailibleRolesFilter;
             UserRolesCollectionView.Filter = UserRolesFilter;
-            UsersList.SelectionChanged -= SelectionChanged;
         }
 
         private bool RoleFilter(object roleNameTocompare, string filter)
@@ -54,6 +54,11 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         private void ClearAssignedFilter_Click(object sender, RoutedEventArgs e)
         {
             CurrentRolesTextFilter.Text = "";
+        }
+
+        public void Dispose()
+        {
+            UsersList.SelectionChanged -= SelectionChanged;
         }
     }
 }
