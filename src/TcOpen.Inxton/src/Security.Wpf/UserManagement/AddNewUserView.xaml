@@ -13,6 +13,19 @@
     <UserControl.DataContext>
         <local:AddNewUserViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="12" Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -125,14 +138,51 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Content="{x:Static p:strings.AvailableRoles}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="2"
-                Content="{x:Static p:strings.AssignedRoles}" />
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{x:Static p:strings.AvailableRoles}" />
+                <TextBox
+                    x:Name="AllRolesTextFilter"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    TextChanged="TextFilter_TextChanged" />
+                <Button
+                    x:Name="ClearAllRolesFilter"
+                    Grid.Column="1"
+                    Margin="0,0,0,2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="ClearAllRolesFilter_Click"
+                    Style="{StaticResource TransparentStyle}">
+                    ✖
+                </Button>
+
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{x:Static p:strings.AssignedRoles}" />
+                <TextBox
+                    x:Name="AssignedRolesTextFilter"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    TextChanged="TextFilter_TextChanged" />
+                <Button
+                    x:Name="ClearAssignedFilter"
+                    Grid.Column="1"
+                    Margin="0,0,0,2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="ClearAssignedFilter_Click"
+                    Style="{StaticResource TransparentStyle}">
+                    ✖
+                </Button>
+            </Grid>
             <Border
                 Grid.Row="1"
                 Grid.Column="0"
@@ -143,7 +193,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     MaxHeight="{Binding ElementName=RolesRow, Path=MaxHeight}"
-                    Margin="0,0,10,0"
+                    Margin="0,0,0,0"
                     ItemsSource="{Binding AllRolesFiltered, Mode=TwoWay}"
                     SelectionMode="Extended">
                     <i:Interaction.Triggers>
