@@ -7,7 +7,7 @@
     @if (IsTaskRunning)
     {
         <button class="btn @ButtonClass " type="button" @onclick="@ExecuteTask">
-            <span class="far fa-times-circle"></span>
+            <span class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="true"></span>
             <span>@ButtonCaption</span>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         </button>
@@ -15,7 +15,7 @@
     else
     {
         <button class="btn @ButtonClass" type="button" disabled="@ViewModel.IsDisabled" @onclick="@ExecuteTask">
-            <span class="far fa-times-circle invisible"></span>
+            <span class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="true"></span>
             <span>@ButtonCaption</span>
             <span class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="true"></span>
         </button>
@@ -36,7 +36,8 @@
         (short)eTaskState.Ready => () => ViewModel.Component.Execute(null),
         (short)eTaskState.Error => () => ViewModel.Component.Restore.Execute(null),
         (short)eTaskState.Busy => () => ViewModel.Component.Abort.Execute(null),
-        (short)eTaskState.Requested => () => { },
+        (short)eTaskState.Requested => () => { }
+        ,
         (short)eTaskState.Done => () => { }
     };
 }
