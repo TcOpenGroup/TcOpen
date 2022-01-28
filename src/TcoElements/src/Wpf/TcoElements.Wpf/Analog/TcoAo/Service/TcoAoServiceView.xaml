@@ -1,0 +1,36 @@
+<UserControl
+    x:Class="TcoElements.TcoAoServiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoElements"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoCore="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
+    xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:vortex="http://vortex.mts/xaml"
+    mc:Ignorable="d"
+    d:DesignWidth="800">
+    <d:UserControl.DataContext>
+        <TcoElements:TcoAo />
+    </d:UserControl.DataContext>
+    <vortex:TcoComponentView>
+        <vortex:TcoComponentView.ComponentHeader>
+            <vortex:RenderableContentControl DataContext="{Binding _status.Unscaled}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+        </vortex:TcoComponentView.ComponentHeader>
+        <vortex:TcoComponentView.ComponentDetails>
+            <StackPanel >
+                <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <UniformGrid>
+                 <GroupBox Margin="2" Header="{Binding _config.AttributeName}">
+                    <vortex:RenderableContentControl DataContext="{Binding _config}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </GroupBox>
+                <GroupBox  Margin="2" Header="{Binding _status.AttributeName}">
+                    <vortex:RenderableContentControl DataContext="{Binding _status}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </GroupBox>
+                </UniformGrid>
+            </StackPanel>
+        </vortex:TcoComponentView.ComponentDetails>
+    </vortex:TcoComponentView>
+</UserControl>
