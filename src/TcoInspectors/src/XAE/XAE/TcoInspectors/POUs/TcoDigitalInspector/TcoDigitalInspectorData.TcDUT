@@ -12,7 +12,7 @@ TYPE
 			Required status for the check to Pass.	
 		</summary>
 		</docu>
-	~*)
+		~*)
         {attribute addProperty Name "<#REQUIRED STATUS#>"}
         {attribute 'qlik_load:RequiredStatus'}
         RequiredStatus : BOOL;

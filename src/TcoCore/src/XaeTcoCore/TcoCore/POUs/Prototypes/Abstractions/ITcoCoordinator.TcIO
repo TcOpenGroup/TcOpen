@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoCoordinator" Id="{7e9d8dd7-8258-0db9-2f48-d239f9350708}">
+    <Declaration><![CDATA[INTERFACE ITcoCoordinator
+]]></Declaration>
+    <Method Name="MoveNext" Id="{cb4af035-e41b-0478-18b7-dacf0755afa8}">
+      <Declaration><![CDATA[METHOD MoveNext : BOOL
+]]></Declaration>
+    </Method>
+    <Method Name="Retry" Id="{8d8f4ae5-b94a-0914-01c6-6cb6d5246300}">
+      <Declaration><![CDATA[METHOD Retry : BOOL
+VAR_INPUT
+	inFromState : INT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Terminate" Id="{07bad117-907a-0eee-1668-f0c7019a392a}">
+      <Declaration><![CDATA[METHOD Terminate : BOOL
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

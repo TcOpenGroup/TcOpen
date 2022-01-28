@@ -27,27 +27,47 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDigitalInspector\TcoDigitalInspectorTests.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDigitalInspector\eDigitalInspectorTests.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoInspectionGroup\TcoInspectionGroupTests.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoInspectionGroup\eInspectionGroupTests.TcDUT">
+    <Compile Include="POUs\Examples\ExampleContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Mocks\MockCoordinator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoAnalogueInspector\TcoAnalogueInspectorTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoDigitalInspector\eDigitalInspectorTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoDigitalInspector\TcoDigitalInspectorTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoInspectionGroup\eInspectionGroupTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoInspectionGroup\TcoInspectionGroupTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoInspector\eInspectorTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoInspector\TcoInspectorTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="POUs\TcoDigitalInspector" />
-    <Folder Include="POUs\TcoInspectionGroup" />
+    <Folder Include="POUs\Examples" />
+    <Folder Include="POUs\Mocks" />
+    <Folder Include="POUs\Tests" />
+    <Folder Include="POUs\Tests\TcoAnalogueInspector" />
+    <Folder Include="POUs\Tests\TcoInspector" />
+    <Folder Include="POUs\Tests\TcoDigitalInspector" />
+    <Folder Include="POUs\Tests\TcoInspectionGroup" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

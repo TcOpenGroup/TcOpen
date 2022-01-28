@@ -68,6 +68,9 @@
     <Compile Include="POUs\ImplicitChecks\CheckRangeUnsigned.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\Abstractions\ITcoCoordinator.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -285,6 +288,7 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\ImplicitChecks" />
+    <Folder Include="POUs\Prototypes\Abstractions" />
     <Folder Include="POUs\Prototypes\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />

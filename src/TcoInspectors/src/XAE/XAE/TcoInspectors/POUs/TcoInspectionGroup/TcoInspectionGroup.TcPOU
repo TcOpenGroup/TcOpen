@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoInspectionGroupInspect
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroupInspect
 VAR
     _done   : BOOL;
     _result : TcoComprehensiveResult;
@@ -33,22 +33,22 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Inquire" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
+    <Method Name="Inspect" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Inquire` property via `Act()` method.'}
-METHOD Inquire : ITcoInspectionGroupInspect
+METHOD Inspect : ITcoInspectionGroupInspect
 VAR_INPUT
     Inspector : IInspector;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Inquire := THIS^;
+        <ST><![CDATA[Inspect := THIS^;
 
 IF (NOT Inspector.Done) THEN
     _done := FALSE;
 ELSE
     IF (Inspector.Result >= eInspectorResult.Failed) THEN
-         Inspector.UpdateComprehensiveResult(_result);
+        Inspector.UpdateComprehensiveResult(_result);
     END_IF
 END_IF]]></ST>
       </Implementation>
@@ -56,7 +56,7 @@ END_IF]]></ST>
     <Method Name="UpdateComprehensiveResult" Id="{2750fed5-0e89-0a81-1a9c-ccbe6a52e0ef}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inquire` method.'}
-METHOD UpdateComprehensiveResult : ITcoInspectionGroupInspect
+METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
     inoResult : TcoComprehensiveResult;
 END_VAR

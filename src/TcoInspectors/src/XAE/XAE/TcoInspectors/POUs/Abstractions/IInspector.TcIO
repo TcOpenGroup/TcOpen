@@ -1,8 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <Itf Name="IInspector" Id="{0cbe9e39-d5a4-05af-17ce-7965efd20de3}">
-    <Declaration><![CDATA[INTERFACE IInspector EXTENDS TcoCore.ITcoTaskStatus
+    <Declaration><![CDATA[INTERFACE IInspector 
 ]]></Declaration>
+    <Property Name="Busy" Id="{b32bf15d-c374-0d51-2e79-45bad14701d4}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ebd05d89-2b98-0f79-0951-70a8ea77ee5c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Done" Id="{619d20fa-40bc-0c73-013c-9ce9a7b16b05}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{dda1cead-ae16-0ba2-2984-226a50200b84}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="OnFail" Id="{ac3abd9c-363c-070f-178a-504f9b7741ff}">
+      <Declaration><![CDATA[METHOD OnFail : IOnFail
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+    </Method>
     <Property Name="OverInspected" Id="{8def8039-9580-0717-1f67-557c2ea921c0}">
       <Declaration><![CDATA[PROPERTY OverInspected : BOOL]]></Declaration>
       <Get Name="Get" Id="{7ec14b78-0f82-0a30-2aad-7349dddb37bc}">

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="TcoDigitalInspector" Id="{b1413ab6-cf32-03b8-31af-46a8ec8720ab}" SpecialFunc="None">
+  <POU Name="TcoAnalogueInspector" Id="{ed836f0b-3319-05d9-1710-05ac209c74d2}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 <docu>
 <summary>
@@ -8,14 +8,16 @@
 </summary>
 </docu>
 ~*)
-FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoInspector
+FUNCTION_BLOCK TcoAnalogueInspector EXTENDS TcoInspector
 VAR
-    _data : TcoDigitalInspectorData;
+    _data : TcoAnalogueInspectorData;
+	{attribute 'hide'}
+	_lastOutValue : LREAL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Property Name="Data" Id="{b0f00037-c485-0f58-3a2e-35a438d55d1b}">
+    <Property Name="Data" Id="{130749e8-fcf6-0744-3fe0-87dc486f505f}">
       <Declaration><![CDATA[(*~
 <docu>
 <summary>
@@ -23,8 +25,8 @@ END_VAR]]></Declaration>
 </summary>
 </docu>
 ~*)
-PROPERTY Data : REFERENCE TO TcoDigitalInspectorData]]></Declaration>
-      <Get Name="Get" Id="{9d81d3dd-148f-0c90-116b-61d78b860286}">
+PROPERTY Data : REFERENCE TO TcoAnalogueInspectorData]]></Declaration>
+      <Get Name="Get" Id="{526cbef3-3b72-0ac9-38bd-c119084cf8c0}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -33,7 +35,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Inspect" Id="{304a74e1-ec39-09fd-0ecf-8a74644a243b}">
+    <Method Name="Inspect" Id="{c118bb5d-5c06-0c92-0167-b09658df5a96}">
       <Declaration><![CDATA[(*~
 <docu>
 <summary>
@@ -46,9 +48,20 @@ END_VAR
 ~*)
 METHOD Inspect : IInspector
 VAR_INPUT
-    Status : BOOL;
+    Status : LREAL;
 END_VAR
-]]></Declaration>
+
+VAR
+	tmpResult : BOOL;
+	_minimum : LREAL;
+	_value : LREAL;
+	_maximum : LREAL;
+	_lastOutValue : LREAL;
+END_VAR
+
+VAR CONSTANT
+    epsilon : REAL := 1;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
 
@@ -66,15 +79,28 @@ IF (Execute()) THEN
         RETURN;
     END_IF
 
-    _data.Result := eInspectorResult.Running;
-    _failTimer(IN := TRUE, PT := _data.FailTime);
-    _passTimer(IN := Status = _data.RequiredStatus, PT := _data.PassTime);
-    _data.DetectedStatus := Status;      
+	_data.Result := eInspectorResult.Running;
+	
+	_minimum := (Data.RequiredMin * epsilon);
+	_value := (Status * epsilon);
+	_maximum := (Data.RequiredMax * epsilon);
+	
+     Data.DetectedStatus := Status;
+	
+	 tmpResult := (_minimum <= _value) AND (_maximum >= _value);
+		
+	 IF(NOT tmpResult) THEN
+		_lastOutValue := Status;
+	  END_IF
+		
+	 _failTimer(IN := TRUE, PT := _data.FailTime);
+     _passTimer(IN := tmpResult, PT := _data.PassTime);
+		  
      DoneWhen(_failTimer.Q OR _passTimer.Q);
 END_IF;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnDone" Id="{a41dc408-1e34-0f67-0765-b3b3943d0f0d}">
+    <Method Name="OnDone" Id="{bb771705-c5a7-01ce-0fed-8852b88b3c08}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -87,7 +113,7 @@ METHOD PROTECTED OnDone
       <Implementation>
         <ST><![CDATA[SUPER^.OnDone();
 IF (_data.Result = eInspectorResult.Failed) THEN
-     _data.DetectedStatus := NOT _data.RequiredStatus;
+     _data.DetectedStatus := _lastOutValue;
 END_IF]]></ST>
       </Implementation>
     </Method>

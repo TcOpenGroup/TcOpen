@@ -30,6 +30,9 @@
     <Compile Include="POUs\Abstractions\IInspector.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Abstractions\IOnFail.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Abstractions\TcoComprehensiveResult.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\eOverallResult.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoAnalogueInspector\TcoAnalogueInspectorData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoAnalogueInspector\TcoAnalogueInspector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoDigitalInspector\TcoDigitalInspector.TcPOU">
@@ -64,6 +73,7 @@
   <ItemGroup>
     <Folder Include="POUs" />
     <Folder Include="POUs\Abstractions" />
+    <Folder Include="POUs\TcoAnalogueInspector" />
     <Folder Include="POUs\TcoDigitalInspector" />
     <Folder Include="POUs\TcoInspectionGroup" />
   </ItemGroup>

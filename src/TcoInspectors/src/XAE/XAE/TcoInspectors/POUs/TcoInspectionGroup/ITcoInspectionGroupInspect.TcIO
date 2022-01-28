@@ -1,27 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <Itf Name="ITcoInspectionGroupInspect" Id="{0107fc9a-abbf-041f-04a8-2d57c254b027}">
-    <Declaration><![CDATA[INTERFACE ITcoInspectionGroupInspect
+    <Declaration><![CDATA[INTERFACE ITcoInspectionGroupInspect EXTENDS IInspector
 ]]></Declaration>
-    <Property Name="Done" Id="{bbd4e50c-3d30-0b55-2a3c-7a40333ecee4}">
-      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
-      <Get Name="Get" Id="{20caca4f-60e1-0c7f-2a60-8a62bda3d952}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
-    <Method Name="Inquire" Id="{4c025f4a-bace-0217-36db-8dbb6ef5791f}">
-      <Declaration><![CDATA[METHOD Inquire : ITcoInspectionGroupInspect
+    <Method Name="Inspect" Id="{4c025f4a-bace-0217-36db-8dbb6ef5791f}">
+      <Declaration><![CDATA[METHOD Inspect : ITcoInspectionGroupInspect
 VAR_INPUT
     Inspector : IInspector;
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="UpdateComprehensiveResult" Id="{314d0d81-94ff-01e5-3a9e-477f7a44f2d1}">
-      <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inquire` method.'}
-METHOD UpdateComprehensiveResult : ITcoInspectionGroupInspect
-VAR_IN_OUT
-    inoResult : TcoComprehensiveResult;
 END_VAR
 ]]></Declaration>
     </Method>

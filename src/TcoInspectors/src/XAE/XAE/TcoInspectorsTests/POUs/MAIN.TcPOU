@@ -4,11 +4,13 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	_digitalInspectorTests : TcoDigitalInspectorTests;
+	_analogueInspectorTests : TcoAnalogueInspectorTests;
 	_inspectionGroupTests : TcoInspectionGroupTests;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_digitalInspectorTests.ProbeRun();
+_analogueInspectorTests.ProbeRun();
 _inspectionGroupTests.ProbeRun();]]></ST>
     </Implementation>
   </POU>

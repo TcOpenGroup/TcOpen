@@ -6,9 +6,12 @@
 TYPE
     eDigitalInspectorTests :
     (
-        Inspect       := 10,
-        GetResult     := 20,
-        UpdateOverall := 30
+        Inspect         := 10,
+        GetResult       := 20,
+        UpdateOverall   := 30,
+        OnFailCarryOn   := 40,
+        OnFailRetry     := 50,
+        OnFailTerminate := 60
     );
 END_TYPE
 ]]></Declaration>

@@ -239,5 +239,92 @@ namespace TcoInspectorsUnitTests
             Assert.AreEqual(eInspectorResult.Excluded, container._sut.ResultAsEnum);
             Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
         }
+
+        [Test]
+        public void inspect_on_fail_failed_carry_on_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;            
+            container._inspectedValue.Synchron = false;
+            container._overallResult.Result.Synchron = (short)eOverallResult.Failed;
+            var initialState = container._coordinator._state.Synchron;
+            var expectedState = initialState + 1;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailCarryOn);
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+            Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
+
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);            
+        }
+
+        [Test]
+        public void inspect_on_fail_passed_carry_on_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;            
+            var initialState = container._coordinator._state.Synchron;
+            var expectedState = initialState + 1;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailCarryOn);
+            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+           
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
+        }
+
+        [Test]
+        public void inspect_on_fail_failed_terminate_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = false;
+            
+            var expectedState = 8005;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailTerminate);
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
+        }
+
+        [Test]
+        public void inspect_on_fail_passed_terminate_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;
+            var initialState = container._coordinator._state.Synchron;
+            var expectedState = initialState + 1;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailTerminate);
+            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
+        }
+
+        [Test]
+        public void inspect_on_fail_passed_retry_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = true;
+            var initialState = container._coordinator._state.Synchron;
+            var expectedState = initialState + 1;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailRetry);
+            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
+        }
+
+        [Test]
+        public void inspect_on_fail_failed_retry_test()
+        {
+            container._sut._data.RequiredStatus.Synchron = true;
+            container._inspectedValue.Synchron = false;            
+            var initialState = container._coordinator._state.Synchron; 
+            var expectedState = (short)(initialState - 10);
+            container._retryState.Synchron = expectedState;
+
+            container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailRetry);
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
+
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
+        }
     }
 }

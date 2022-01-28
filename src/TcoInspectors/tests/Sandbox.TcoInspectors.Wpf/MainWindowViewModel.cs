@@ -5,6 +5,7 @@ using System.ComponentModel;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 using System.Linq;
+using TcoInspectorsPlc;
 
 namespace Sandbox.TcoInspectors.Wpf
 {    

@@ -8,6 +8,8 @@ VAR
     _result         : TcoInspectors.eInspectorResult;
     _isOverIspected : BOOL;
     _overallResult  : TcoInspectors.TcoComprehensiveResult;
+    _coordinator    : MockCoordinator;
+    _retryState     : INT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -22,10 +24,16 @@ END_VAR]]></Declaration>
         _result         := 0;
         _isOverIspected := FALSE;
     eDigitalInspectorTests.Inspect:
-        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).UpdateComprehensiveResult(_overallResult).Done);	
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).UpdateComprehensiveResult(_overallResult).Done);
     eDigitalInspectorTests.GetResult:
         _result         := _sut.Inspect(_inspectedValue).Result;
-        _isOverIspected := _sut.Inspect(_inspectedValue).OverInspected;						
+        _isOverIspected := _sut.Inspect(_inspectedValue).OverInspected;
+    eDigitalInspectorTests.OnFailCarryOn:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).OnFail(_coordinator).CarryOn());
+    eDigitalInspectorTests.OnFailRetry:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).OnFail(_coordinator).Retry(_retryState));
+    eDigitalInspectorTests.OnFailTerminate:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).OnFail(_coordinator).Terminate());
 END_CASE]]></ST>
       </Implementation>
     </Method>
