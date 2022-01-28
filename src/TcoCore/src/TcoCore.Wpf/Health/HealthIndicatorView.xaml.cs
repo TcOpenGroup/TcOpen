@@ -44,6 +44,7 @@ namespace TcoCore
                 messageUpdateTimer.Enabled = true;
             }
         }
+
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var isInSight = false;

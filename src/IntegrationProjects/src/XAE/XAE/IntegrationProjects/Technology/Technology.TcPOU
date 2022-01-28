@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
 VAR
 	_ST001 : ST001(THIS^);
+	_mirrorStartCycle : ULINT;
 END_VAR
 ]]></Declaration>
     <Implementation>

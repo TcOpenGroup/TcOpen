@@ -3,6 +3,7 @@
   <POU Name="ST001_ComponentsHandler" Id="{e26fa0d3-d3d7-028e-3078-514e2e8d1a78}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001_ComponentsHandler EXTENDS TcoCore.TcoObject
 VAR
+	ToMirror:STRING;
 	{attribute addProperty Name "<#PART PRESENCE SENSOR#>"}
 	_partPresent : TcoElements.TcoDi(THIS^);
 	{attribute addProperty Name "<#START BUTTON#>"}

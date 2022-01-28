@@ -7,7 +7,7 @@ namespace IntegrationProjectTests
     public class ExecuteWpfIntegrationProject
     {       
         [Test]
-        [Timeout(10000)]
+        [Timeout(15000)]
         public void OpenApplicationTest()
         {
             var someAssemblyType = new Sandbox.IntegrationProjects.Wpf.App();
@@ -15,8 +15,8 @@ namespace IntegrationProjectTests
             var app = FlaUI.Core.Application.Launch(assembly.Location);
             using (var automation = new UIA3Automation())
             {
-                var window = app.GetMainWindow(automation);              
-                System.Threading.Thread.Sleep(2000);
+                var window = app.GetMainWindow(automation);
+                System.Threading.Thread.Sleep(5000);
                 window.Close();
             }
         }

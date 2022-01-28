@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoSequenceObserverTests" Id="{031e84f0-129a-00ae-272d-2f4b1c1c0910}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceObserverTests EXTENDS TcoCore._internals_TcoContext
+VAR				
+	_s : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+	_sObserver : TcoCore.TcoSequencerObserver(THIS^);		
+END_VAR
+
+
+				
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cc96ad88-e531-0253-3850-8de33117f9a5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+	eTcoSequenceObserverTests.RestoreSequencer:
+		_s.Restore();
+		_sObserver.Clear();		
+	eTcoSequenceObserverTests.RunSequenceWithObserverTest:
+		RunSequencerWithObserver();
+	eTcoSequenceObserverTests.RunSequenceWithoutObserverTest:
+		RunSequencerWithoutObserver();	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunSequencerWithObserver" Id="{a0c2b2b1-6da4-0597-1477-816fefac11a2}">
+      <Declaration><![CDATA[METHOD RunSequencerWithObserver
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_s.Open();
+
+THIS^._s.Observer := _sObserver;
+
+THIS^._s.Messenger.Info('Stations two sequencer is running.');
+
+IF(_s.Step(100, 
+		TRUE, 
+		'100')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#10MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(200, 
+		TRUE, 
+		'200')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#20MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(300, 
+		TRUE, 
+		'300')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#30MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(400, 
+		TRUE, 
+		'400')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#40MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(500, 
+		TRUE, 
+		'500')) THEN
+//-----------------------------------------------------
+	THIS^.ProbeDoneWhen(TRUE);
+	_s.Restore();
+//-----------------------------------------------------	
+END_IF
+
+_s.Close();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunSequencerWithoutObserver" Id="{c8b17968-2047-0c9c-1faa-e93685ccc195}">
+      <Declaration><![CDATA[METHOD RunSequencerWithoutObserver
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_s.Open();
+
+THIS^._s.Observer := 0;
+
+THIS^._s.Messenger.Info('Stations two sequencer is running.');
+
+IF(_s.Step(100, 
+		TRUE, 
+		'100')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#250MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(200, 
+		TRUE, 
+		'200')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#100MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(300, 
+		TRUE, 
+		'300')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#50MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(400, 
+		TRUE, 
+		'400')) THEN
+//-----------------------------------------------------
+	_s.StepCompleteWhen(_s.CurrentStep.Duration >= T#25MS);
+//-----------------------------------------------------	
+END_IF
+
+IF(_s.Step(500, 
+		TRUE, 
+		'500')) THEN
+//-----------------------------------------------------
+	THIS^.ProbeDoneWhen(TRUE);
+	_s.Restore();
+//-----------------------------------------------------	
+END_IF
+
+_s.Close();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
