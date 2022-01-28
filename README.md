@@ -46,7 +46,7 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 
 *Data framework requires inxton framework.*
 
-- [CeateReadUpadateDelete (CRUD) operations directly from the plc](https://docs.tcopengroup.org/api/TcoData/PlcDocu.TcoData.TcoDataExchange.html)
+- [CeateReadUpdateDelete (CRUD) operations directly from the plc](https://docs.tcopengroup.org/api/TcoData/PlcDocu.TcoData.TcoDataExchange.html)
 - [Generic interface for implementation of any repository](https://docs.tcopengroup.org/api/TcOpen.Inxton/TcOpen.Inxton.Abstractions/TcOpen.Inxton.Data.IRepository-1.html)
 - TcOpen contains implementation for [MongoDB](https://docs.tcopengroup.org/api/TcoData/TcOpen.Inxton.Data.MongoDb.html), [Json](https://docs.tcopengroup.org/api/TcoData/TcOpen.Inxton.Data.Json.html), [InMemory](https://docs.tcopengroup.org/api/TcoData/TcOpen.Inxton.Data.InMemory.html) 
 
