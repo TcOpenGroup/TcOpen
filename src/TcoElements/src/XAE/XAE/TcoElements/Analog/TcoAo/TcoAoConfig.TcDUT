@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoAoConfig" Id="{1ebf84b8-fca2-08b7-1e0c-0be1a3bc934d}">
+    <Declaration><![CDATA[TYPE TcoAoConfig :
+STRUCT
+	IsBetweenTimeOut : TIME := T#10S;
+	RawLow:DINT;
+	RawHigh:DINT;
+	RealLow:REAL;
+	RealHigh:REAL;
+	Gain: REAL := 1.0;
+	Offset: REAL := 0.0;  	
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

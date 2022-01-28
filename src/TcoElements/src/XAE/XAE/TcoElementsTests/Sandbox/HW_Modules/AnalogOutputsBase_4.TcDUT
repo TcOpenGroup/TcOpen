@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="AnalogOutputsBase_4" Id="{1f5df5c0-06ac-06b4-17af-572af7c50394}">
+    <Declaration><![CDATA[TYPE AnalogOutputsBase_4 :
+STRUCT
+	{attribute addProperty Name "1"}
+	_1 AT %Q* : DINT;
+	{attribute addProperty Name "2"}
+	_2 AT %Q* : DINT;
+	{attribute addProperty Name "3"}
+	_3 AT %Q* : DINT;
+	{attribute addProperty Name "4"}
+	_4 AT %Q* : DINT;
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

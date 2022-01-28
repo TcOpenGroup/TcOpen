@@ -20,4 +20,10 @@
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\TcoElementsConnector\TcoElementsConnector.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Analog\TcoAi\Service\TcoAiServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
 </Project>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoAiConfig" Id="{2721b2a7-c7c9-03ad-1a7e-ab7e6e58d9e4}">
+    <Declaration><![CDATA[TYPE TcoAiConfig :
+STRUCT
+	RawLow:DINT;
+	RawHigh:DINT;
+	RealLow:REAL;
+	RealHigh:REAL;
+	Gain: REAL := 1.0;
+	Offset: REAL := 0.0;  	
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

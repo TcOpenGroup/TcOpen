@@ -7,6 +7,11 @@ VAR
 	_do : TcoElements.TcoDo(THIS^);
 	_diSignal : BOOL;
 	_doSignal : BOOL;
+	
+	_ai : TcoElements.TcoAi(THIS^);
+	_ao : TcoElements.TcoAo(THIS^);
+	_aiSignal : DINT;
+	_aoSignal : DINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -18,7 +23,11 @@ END_VAR]]></Declaration>
         <ST><![CDATA[_di.Service();
 _do.Service();
 _di(inoSignal := IO.A1._1);
-_do(inoSignal := IO.A2._1);]]></ST>
+_do(inoSignal := IO.A2._1);
+_Ai.Service();
+_Ao.Service();
+_Ai(inoSignal := IO.A3._1);
+_Ao(inoSignal := IO.A4._1);]]></ST>
       </Implementation>
     </Method>
   </POU>

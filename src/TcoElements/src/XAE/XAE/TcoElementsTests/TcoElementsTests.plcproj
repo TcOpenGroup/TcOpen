@@ -30,7 +30,13 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Sandbox\HW_Modules\AnalogOutputsBase_4.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Sandbox\HW_Modules\InputsBase_8.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sandbox\HW_Modules\AnalogInputsBase_4.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sandbox\HW_Modules\OutputsBase_8.TcDUT">
@@ -46,7 +52,13 @@
     <Compile Include="Tests\TcoDiTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoAiTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoDoTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoAoTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
