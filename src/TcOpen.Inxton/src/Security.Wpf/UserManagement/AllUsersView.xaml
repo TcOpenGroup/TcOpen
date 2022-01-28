@@ -15,6 +15,19 @@
         <local:AllUsersViewModel />
     </UserControl.DataContext>
 
+    <UserControl.Resources>
+        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid
         x:Name="RootGrid"
         Width="Auto"
@@ -224,14 +237,52 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="2"
-                            Content="{x:Static p:strings.AssignedRoles}" />
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Content="{x:Static p:strings.AvailableRoles}" />
+                        <Grid Grid.Row="0" Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{x:Static p:strings.AssignedRoles}" />
+                            <TextBox
+                                x:Name="CurrentRolesTextFilter"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                TextChanged="AvailableRolesTextFilter_TextChanged" />
+                            <Button
+                                x:Name="ClearAssignedFilter"
+                                Click="ClearAssignedFilter_Click"
+                                Grid.Column="1"
+                                Margin="0,0,0,2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource TransparentStyle}">
+                                ✖
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{x:Static p:strings.AvailableRoles}" />
+                            <TextBox
+                                x:Name="AvailableRolesTextFilter"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                TextChanged="AvailableRolesTextFilter_TextChanged" />
+                            <Button
+                                x:Name="ClearAvailableFilter"
+                                Click="ClearAvailableFilter_Click"
+                                Grid.Column="1"
+                                Margin="0,0,0,2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource TransparentStyle}">
+                                ✖
+                            </Button>
+
+                        </Grid>
                         <Border
                             Grid.Row="2"
                             Grid.Column="2"
@@ -260,7 +311,7 @@
                             Padding="0"
                             BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}"
                             BorderThickness=".5">
-                            <ListBox
+                            <ListView
                                 x:Name="AvailibleRoles"
                                 Grid.Row="2"
                                 Grid.Column="0"
@@ -274,7 +325,7 @@
                                         <i:InvokeCommandAction Command="{Binding AvailableToCurrentRoleCommand}" CommandParameter="{Binding SelectedItem, ElementName=AvailibleRoles}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                            </ListBox>
+                            </ListView>
                         </Border>
                         <StackPanel
                             Grid.Row="2"
