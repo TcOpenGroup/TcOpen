@@ -70,7 +70,7 @@ As you may notice, TcOpen is under development, and no stable version has been r
 
 ## Maturity of the framework
 
-At this time the we channel our efforts into building and testing of the PLC libraries and WPF GUI and extensions based on Inxton platform. You will also find Blazor based components in this repository. Blazor is considered experimental (by Inxton) as well as by TcOpen. There is a limited effort we put into the Blazor platform; however, we believe it to be the future of TcOpen UI.
+At this time we channel our efforts into building and testing of the PLC libraries and WPF GUI and extensions based on Inxton platform. You will also find Blazor based components in this repository. Blazor is considered experimental (by Inxton) as well as by TcOpen. There is a limited effort we put into the Blazor platform; however, we believe it to be the future of TcOpen UI.
 
 
 ## The role of Inxton.Vortex.Framework (IVF)
@@ -115,7 +115,7 @@ git clone https://github.com/TcOpenGroup/TcOpen.git
 
 **Environment variables**
 
-You should setup Windows environment variable ```Tc3Target``` with the value of AMS ID of you testing target system.
+You should set up Windows environment variable ```Tc3Target``` with the value of AMS ID of your testing target system.
 
 ![Environment](assets/pics/environment.png)
 
@@ -160,13 +160,13 @@ Switch profile to Debug|TwinCAT RT (x64)
 
 ![Profile set](assets/pics/compile_profile.png)
 
-**The build process might be susceptible to some issues due to configuration and evnironment differences. Should you encounter a problem please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)**
+**The build process might be susceptible to some issues due to configuration and environment differences. Should you encounter a problem, please report the issue [here](https://github.com/TcOpenGroup/TcOpen/issues)**
 
 
 ## Code format 
-TcOpen is powered by STweep for TwinCAT a source code formatter for Structured Text.
+TcOpen is powered by STweep for TwinCAT, a source code formatter for Structured Text.
 
-When contributing to TcOpen please use this set of settings for STweep: [TCOpen.zip](https://github.com/Barteling/TcOpen/files/6455049/TCOpen.zip)
+When contributing to TcOpen, please use this set of settings for STweep: [TCOpen.zip](https://github.com/Barteling/TcOpen/files/6455049/TCOpen.zip)
 
 STweep is free of charge for active contributors to this project.
 
