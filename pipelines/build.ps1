@@ -186,6 +186,7 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore_L1_Tests.slnf","", 1, "TcoCore_L1"),
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore_L2_Tests.slnf","", 2, "TcoCore_L2"),
                       [System.Tuple]::Create(".\src\TcoUtilities\TcoUtilities.slnf", "\src\TcoUtilities\src\XAE\XAE\", 1, "TcoUtilities"),
+                      [System.Tuple]::Create(".\src\TcoInspectors\TcoInspectors.slnf", "\src\TcoInspectors\src\XAE\XAE\", 1, "TcoInspectors"),                      
                       [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", 1, "TcoElements"),
                       [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", 1, "TcoIoBeckhoff"),
                       [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "\src\TcoPneumatics\src\XaeTcoPneumatics\", 1, "TcoPneumatics"),
