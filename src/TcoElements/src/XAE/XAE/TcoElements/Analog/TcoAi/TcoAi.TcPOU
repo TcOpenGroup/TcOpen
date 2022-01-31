@@ -46,8 +46,6 @@ VAR
 	_rawRange             : REAL;
 	_realRange            : REAL;
 	_scaled               : REAL;
-	_scaledWithCorrection : REAL;
-
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
@@ -71,11 +69,12 @@ END_IF
 
 
 
-_scaled:=DINT_TO_REAL(_signal)*( _realRange/_rawRange) - (DINT_TO_REAL(_config.RawLow)/_rawRange);
+_scaled:=(DINT_TO_REAL(_signal - _config.RawLow))/_rawRange;
 
+_scaled:=_scaled *_realRange;
 _scaled:=_scaled + _config.RealLow;
 
-_scaledWithCorrection:=_scaled * _config.Gain + _config.Offset;
+_scaled:=_scaled * _config.Gain + _config.Offset;
 //------------------------------------------------
 
 

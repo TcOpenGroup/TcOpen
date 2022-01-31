@@ -30,6 +30,7 @@ END_VAR
 		_sutNotInitialized.Restore();
 	100:
 		_sut(inoSignal := _signal);
+		
 		_ScaledResult := _sut.Status.Scaled;
 
 	
