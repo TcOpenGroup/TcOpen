@@ -3,7 +3,6 @@
   <DUT Name="TcoAoConfig" Id="{1ebf84b8-fca2-08b7-1e0c-0be1a3bc934d}">
     <Declaration><![CDATA[TYPE TcoAoConfig :
 STRUCT
-	IsBetweenTimeOut : TIME := T#10S;
 	RawLow:DINT;
 	RawHigh:DINT;
 	RealLow:REAL;

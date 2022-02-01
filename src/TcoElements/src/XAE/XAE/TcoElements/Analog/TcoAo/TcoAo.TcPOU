@@ -38,20 +38,19 @@ VAR
 
 	_config : TcoAoConfig;	
 	_status : TcoAoStatus;	
-
+	
 	_requiredValue: REAL;
 	
 
 	_rawRange: REAL;
 	_realRange: REAL;
 	_unscaled: REAL;
-	_unscaledWithCorrection: REAL;
 
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
 	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
-	_signal := inoSignal;	
+	inoSignal := _signal;		 
 END_IF;	
 
 
@@ -78,11 +77,16 @@ _unscaled := _unscaled*_rawRange;
 
 _unscaled := _unscaled + DINT_TO_REAL(_config.RawLow);
 
-_unscaledWithCorrection:=_unscaled * _config.Gain + _config.Offset;
+_unscaled:=_unscaled * _config.Gain + _config.Offset;
 //------------------------------------------------
 
-
+IF (_unscaled>_config.RawHigh) AND (_config.Gain<>1 OR _config.Offset<>0)   THEN
+	Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>'); 
+ELSIF (_unscaled<_config.RawLow) AND (_config.Gain<>1 OR _config.Offset<>0)   THEN
+	Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>'); 
+END_IF
 _signal:=REAL_TO_DINT(_unscaled);
+
 
 
 _status.RawRange:=_rawRange;
@@ -90,7 +94,9 @@ _status.RealRange:=_realRange;
 _status.Unscaled:=_unscaled;
 
 
-
+IF(__ISVALIDREF(inoSignal)) THEN
+	inoSignal := _signal;		 
+END_IF;	
 
 
 ]]></ST>

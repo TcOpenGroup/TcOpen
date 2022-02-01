@@ -78,7 +78,11 @@ _scaled:=_scaled * _config.Gain + _config.Offset;
 //------------------------------------------------
 
 
-
+IF (_scaled>_config.RealHigh) AND (_config.Gain<>1 OR _config.Offset<>0)   THEN
+	Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>'); 
+ELSIF (_scaled<_config.RealLow) AND (_config.Gain<>1 OR _config.Offset<>0)   THEN
+	Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>'); 
+END_IF
 
 _status.RawRange:=_rawRange;
 _status.RealRange:=_realRange;
