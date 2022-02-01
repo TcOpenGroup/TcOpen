@@ -39,7 +39,13 @@
     <Compile Include="POUs\Tests\TcoAnalogueInspector\TcoAnalogueInspectorTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tests\TcoDigitalInspector\eDigitalInspectorTests.TcDUT">
+    <Compile Include="POUs\Tests\TcoDataInspector\TcoDataInspectorTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoDigitalInspector\Legacy\eDigitalInspectorTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\TcoDigitalInspector\Legacy\LegacyTcoDigitalInspectorTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Tests\TcoDigitalInspector\TcoDigitalInspectorTests.TcPOU">
@@ -64,7 +70,9 @@
     <Folder Include="POUs\Examples" />
     <Folder Include="POUs\Mocks" />
     <Folder Include="POUs\Tests" />
+    <Folder Include="POUs\Tests\TcoDataInspector" />
     <Folder Include="POUs\Tests\TcoAnalogueInspector" />
+    <Folder Include="POUs\Tests\TcoDigitalInspector\Legacy" />
     <Folder Include="POUs\Tests\TcoInspector" />
     <Folder Include="POUs\Tests\TcoDigitalInspector" />
     <Folder Include="POUs\Tests\TcoInspectionGroup" />

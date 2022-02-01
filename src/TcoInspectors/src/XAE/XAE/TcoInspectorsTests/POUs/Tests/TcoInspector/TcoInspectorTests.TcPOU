@@ -2,8 +2,8 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoInspectorTests" Id="{23a7de36-f9c4-0b82-3e65-65f0a2b87059}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoInspectorTests EXTENDS TcoCore._internals_TcoContext
-VAR	
-    _result         : TcoInspectors.eInspectorResult;    
+VAR
+    _result         : TcoInspectors.eInspectorResult;
     _isOverIspected : BOOL;
     _overallResult  : TcoInspectors.TcoComprehensiveResult;
     _coordinator    : MockCoordinator;
@@ -15,7 +15,6 @@ END_VAR]]></Declaration>
     </Implementation>
     <Method Name="Inspect" Id="{0a3b37f7-9710-0dae-1c6d-f079d88f81a5}">
       <Declaration><![CDATA[METHOD ABSTRACT Inspect : TcoInspectors.IInspector
-
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

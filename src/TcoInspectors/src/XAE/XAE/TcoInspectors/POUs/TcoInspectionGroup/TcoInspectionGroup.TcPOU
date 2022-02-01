@@ -9,6 +9,7 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="OnFail" Id="{6587d444-c4c8-0ba3-0430-72f2e8ae8a7c}" />
     <Method Name="Act" Id="{35f139a3-c8e1-0dfe-09ea-5e112c3b9b62}">
       <Declaration><![CDATA[(*~
 	<summary>
@@ -45,26 +46,96 @@ END_VAR
         <ST><![CDATA[Inspect := THIS^;
 
 IF (NOT Inspector.Done) THEN
-    _done := FALSE;
-ELSE
-    IF (Inspector.Result >= eInspectorResult.Failed) THEN
-        Inspector.UpdateComprehensiveResult(_result);
-    END_IF
-END_IF]]></ST>
+    _done := FALSE;		
+END_IF
+
+Inspector.UpdateComprehensiveResult(_result);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="UpdateComprehensiveResult" Id="{2750fed5-0e89-0a81-1a9c-ccbe6a52e0ef}">
+    <Method Name="Retry" Id="{35486965-61f5-0154-3790-1cbb7d6396ad}" FolderPath="OnFail\">
       <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inquire` method.'}
+{attribute 'obsolete' := 'You should access `Retry` method via `OnFail()` method.'}
+METHOD Retry : BOOL
+VAR_INPUT
+	inFromState : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_coordinator = 0) THEN
+	RETURN;	
+END_IF
+
+
+
+IF(THIS^.Done) THEN
+	IF(THIS^._result.Result = eOverallResult.Failed) THEN
+		_coordinator.Retry(inFromState);
+	ELSE
+		_coordinator.MoveNext();
+	END_IF;	
+END_IF;	
+
+
+Retry := THIS^.Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Terminate" Id="{ef8afc1b-48c1-0d87-3e46-8fe826fdd29c}" FolderPath="OnFail\">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `Terminate` method via `OnFail()` method.'}
+METHOD Terminate : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_coordinator = 0) THEN
+	RETURN;	
+END_IF
+
+IF(THIS^.Done) THEN
+	IF(THIS^._result.Result = eOverallResult.Failed) THEN
+		_coordinator.Terminate();
+	ELSE
+		_coordinator.MoveNext();
+	END_IF;	
+END_IF;	
+
+Terminate := THIS^.Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateComprehensiveResult" Id="{84f70c65-26b9-0040-3478-66f5894d8644}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Updates comprehensive result. The comprehensive result is set to `Failed` when any inspection fails or is inconclusive.
+			Any bypassed or excluded inspection are not taken in the account.			
+		</summary>			
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inspect` method.'}
 METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Comprehensive result data structure to be updated.	
+		</summary>			
+	</docu>	
+	~*)
     inoResult : TcoComprehensiveResult;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
 
-inoResult := _result;]]></ST>
+IF(_done) THEN 	
+	CASE _result.Result OF
+		eOverallResult.NoAction :
+			_result.Result := eOverallResult.InProgress; 
+	END_CASE
+	
+ 	inoResult := _result;
+END_IF
+
+
+]]></ST>
       </Implementation>
     </Method>
   </POU>

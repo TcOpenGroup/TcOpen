@@ -35,7 +35,7 @@ namespace TcoInspectorsUnitTests
             container._sut._data.RequiredMax.Synchron = 11.0;
         }
 
-        protected override double set_to_fail_above_threshold()
+        protected override dynamic set_to_fail_above_threshold()
         {
             container._sut._data.RequiredMin.Synchron = 10.0;
             container._inspectedValue.Synchron = 11.1;
@@ -44,7 +44,7 @@ namespace TcoInspectorsUnitTests
             return container._inspectedValue.Synchron;
         }
 
-        protected override double set_to_pass_at_bottom_threshold()
+        protected override dynamic set_to_pass_at_bottom_threshold()
         {
             container._sut._data.RequiredMin.Synchron = 10.0;
             container._inspectedValue.Synchron = 10.0;
@@ -52,7 +52,7 @@ namespace TcoInspectorsUnitTests
             return container._inspectedValue.Synchron;
         }
 
-        protected override double set_to_pass_at_mid()
+        protected override dynamic set_to_pass_at_mid()
         {
             container._sut._data.RequiredMin.Synchron = 9.0;
             container._inspectedValue.Synchron = 10.0;
@@ -67,7 +67,7 @@ namespace TcoInspectorsUnitTests
             container._sut._data.RequiredMax.Synchron = 11.0;
         }
 
-        protected override double set_introduce_jitter()
+        protected override dynamic set_introduce_jitter()
         {
             container._sut._data.RequiredMin.Synchron = 10.0;
             container._inspectedValue.Synchron = 9.0;

@@ -168,7 +168,9 @@ PROPERTY Result : eInspectorResult]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Result := _inspectionData.Result;]]></ST>
+          <ST><![CDATA[IF(__ISVALIDREF(_inspectionData)) THEN
+	Result := _inspectionData.Result;	
+END_IF;	]]></ST>
         </Implementation>
       </Get>
     </Property>

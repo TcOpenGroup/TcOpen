@@ -42,6 +42,12 @@
     <Compile Include="POUs\Abstractions\TcoInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\DataInspector\TcoDataInspectorData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\DataInspector\TcoDataInspector.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\eOverallResult.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -73,6 +79,7 @@
   <ItemGroup>
     <Folder Include="POUs" />
     <Folder Include="POUs\Abstractions" />
+    <Folder Include="POUs\DataInspector" />
     <Folder Include="POUs\TcoAnalogueInspector" />
     <Folder Include="POUs\TcoDigitalInspector" />
     <Folder Include="POUs\TcoInspectionGroup" />
@@ -85,6 +92,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

@@ -19,11 +19,11 @@ namespace TcoInspectorsUnitTests
         public abstract void SetUp();
       
         protected abstract void set_to_fail_below_threshold();
-        protected abstract double set_to_fail_above_threshold();
-        protected abstract double set_to_pass_at_bottom_threshold();
-        protected abstract double set_to_pass_at_mid();
+        protected abstract dynamic set_to_fail_above_threshold();
+        protected abstract dynamic set_to_pass_at_bottom_threshold();
+        protected abstract dynamic set_to_pass_at_mid();
         protected abstract void set_to_pass_at_top_threshold();
-        protected abstract double set_introduce_jitter();
+        protected abstract dynamic set_introduce_jitter();
 
         [Test]
         public void inspect_must_fail_below_threshold()
