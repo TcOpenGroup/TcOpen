@@ -113,6 +113,21 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="FB_init" Id="{4ffc22f1-5c3b-0f10-1db7-3567903d591e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	Parent : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// I regret doing this but I get comiler errors... for no reason in my opinion
+SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{b627d9fb-1a0c-0d2f-00d4-aea6871df039}">
       <Declaration><![CDATA[(*~
 	<docu>
