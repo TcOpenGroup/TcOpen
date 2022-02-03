@@ -14,6 +14,18 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <Grid Grid.Row="0">
-        <vortex:TcoDigitalInspectorShadowControlView DataContext="{Binding TcoInspectorsPlc.MAIN._digitalInspectorTests._sut, Mode=OneWay}"/>
+        <TabControl>
+            <TabItem>
+                <vortex:DynamicTreeView DataContext="{Binding TcoInspectorsPlc.MAIN, Mode=OneWay}" />
+            </TabItem>
+            <TabItem Header="Manually">
+                <StackPanel DataContext="{Binding TcoInspectorsPlc.MAIN._digitalInspectorTests._sut, Mode=OneWay}">
+                    <vortex:TcoDigitalInspectorShadowControlView/>
+                    <vortex:TcoDigitalInspectorShadowDisplayView/>
+                    <vortex:TcoDigitalInspectorControlView/>
+                    <vortex:TcoDigitalInspectorDisplayView/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

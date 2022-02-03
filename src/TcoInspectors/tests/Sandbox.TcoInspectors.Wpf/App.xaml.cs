@@ -22,7 +22,7 @@ namespace Sandbox.TcoInspectors.Wpf
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             
-            Entry.TcoInspectorsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+            Plc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
         }
 
         private static string AMS_ID = Environment.GetEnvironmentVariable("Tc3Target");
@@ -61,7 +61,7 @@ namespace Sandbox.TcoInspectors.Wpf
         {
             if (!IsInDesign)
             {
-                return new TcoInspectorsTestsTwinController(Tc3ConnectorAdapter.Create(AMS_ID, 851, true));
+                return new TcoInspectorsTestsTwinController(Tc3ConnectorAdapter.Create(AMS_ID, 852, true));
             }
             else
             {

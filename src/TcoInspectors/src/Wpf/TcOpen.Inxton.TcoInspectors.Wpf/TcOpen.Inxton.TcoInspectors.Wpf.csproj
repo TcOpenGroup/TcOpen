@@ -22,4 +22,31 @@
     <ProjectReference Include="..\..\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDigitalInspector\Online\TcoDigitalInspectorDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowControlView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDigitalInspector\Online\TcoDigitalInspectorDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
