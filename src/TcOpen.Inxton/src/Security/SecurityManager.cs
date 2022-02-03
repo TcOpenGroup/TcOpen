@@ -37,6 +37,22 @@ namespace TcOpen.Inxton.Local.Security
         {
             UserRepository = repository;
             Service = new AuthenticationService(repository);
+
+            Principal = new AppIdentity.AppPrincipal();
+            SecurityProvider.Create(Service);
+
+            if (System.Threading.Thread.CurrentPrincipal?.GetType() != typeof(AppIdentity.AppPrincipal))
+            {
+                System.Threading.Thread.CurrentPrincipal = Principal;
+                AppDomain.CurrentDomain.SetThreadPrincipal(Principal);
+            }
+        }
+
+        private SecurityManager(IAuthenticationService service)
+        {
+            UserRepository = new AnonymousRepository();
+            Service = service;
+
             Principal = new AppIdentity.AppPrincipal();
             SecurityProvider.Create(Service);
 
@@ -58,7 +74,17 @@ namespace TcOpen.Inxton.Local.Security
             {
                 _manager = new SecurityManager(repository);
             }
-            
+
+            return _manager.Service;
+        }
+
+        public static IAuthenticationService Create(IAuthenticationService authenticationService)
+        {
+            if (_manager == null)
+            {
+                _manager = new SecurityManager(authenticationService);
+            }
+
             return _manager.Service;
         }
 
@@ -101,7 +127,7 @@ namespace TcOpen.Inxton.Local.Security
 
         public AppIdentity.AppPrincipal Principal { get; private set; }
 
-        public IAuthenticationService Service { get; private set; }
+        public IAuthenticationService Service { get; set; }
 
         private static SecurityManager _manager;
         public static SecurityManager Manager
