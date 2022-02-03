@@ -60,7 +60,7 @@ VAR
 END_VAR
 
 VAR CONSTANT
-    epsilon : REAL := 1;
+    epsilon : REAL := 100000;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;

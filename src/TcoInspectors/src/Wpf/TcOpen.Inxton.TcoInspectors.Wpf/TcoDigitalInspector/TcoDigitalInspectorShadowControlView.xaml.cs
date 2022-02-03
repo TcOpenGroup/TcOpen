@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TcoInspectors
 {
     /// <summary>
-    /// Interaction logic for fbSampleComponentView.xaml
+    /// Interaction logic for TcoDigitalInspectorShadowControlView.xaml
     /// </summary>
-    public partial class fbSampleComponentManualView : UserControl
+    public partial class TcoDigitalInspectorShadowControlView : UserControl
     {
-        public fbSampleComponentManualView()
+        public TcoDigitalInspectorShadowControlView()
         {
             InitializeComponent();
         }

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 using System.Linq;
-using TcoInspectorsPlc;
+using TcoInspectorsTests;
 
 namespace Sandbox.TcoInspectors.Wpf
 {    
@@ -16,6 +16,6 @@ namespace Sandbox.TcoInspectors.Wpf
         
         }
         
-        public TcoInspectorsTwinController TcoInspectorsPlc { get; } = Entry.TcoInspectorsPlc;       
+        public TcoInspectorsTestsTwinController TcoInspectorsPlc { get; } = App.Plc;       
     }
 }

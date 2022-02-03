@@ -42,10 +42,10 @@
     <Compile Include="POUs\Abstractions\TcoInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DataInspector\TcoDataInspectorData.TcDUT">
+    <Compile Include="POUs\TcoDataInspector\TcoDataInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\DataInspector\TcoDataInspector.TcPOU">
+    <Compile Include="POUs\TcoDataInspector\TcoDataInspector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\eOverallResult.TcDUT">
@@ -79,7 +79,7 @@
   <ItemGroup>
     <Folder Include="POUs" />
     <Folder Include="POUs\Abstractions" />
-    <Folder Include="POUs\DataInspector" />
+    <Folder Include="POUs\TcoDataInspector" />
     <Folder Include="POUs\TcoAnalogueInspector" />
     <Folder Include="POUs\TcoDigitalInspector" />
     <Folder Include="POUs\TcoInspectionGroup" />
