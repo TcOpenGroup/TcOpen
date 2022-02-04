@@ -24,7 +24,7 @@ namespace TcOpen.Inxton.Local.Security.LDAP
     public class LdapService : IAuthenticationService
     {
         public LdapConfig LdapConfig { get; }
-        
+
         public OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get; set; }
         public IExternalAuthorization ExternalAuthorization { get; set; }
 
@@ -32,6 +32,13 @@ namespace TcOpen.Inxton.Local.Security.LDAP
         public event OnUserAuthentication OnUserAuthenticateFailed;
         public event OnUserAuthentication OnDeAuthenticating;
         public event OnUserAuthentication OnDeAuthenticated;
+
+        /// <summary>
+        /// This function is used if it's not possible to create a user from LDAP response.
+        /// When this function is invoked, username and ldapconnection are passed through to create a new user.
+        /// Use the search method of ldapconnection to query for user data.
+        /// </summary>
+        public Func<string, ILdapConnection, IUser> CreateUserOnBound;
 
         public LdapService(LdapConfig LdapConfig)
         {
@@ -42,12 +49,11 @@ namespace TcOpen.Inxton.Local.Security.LDAP
         {
             using (var ldapConnection = new LdapConnection() { SecureSocketLayer = LdapConfig.UseSsl })
             {
-                ldapConnection.Connect(LdapConfig.Host, LdapConfig.Port);
-                ldapConnection.Bind(username, password);
+                ConnectAndBind(ldapConnection, username, password);
                 if (ldapConnection.Connected && ldapConnection.Bound)
                 {
-                    var userEntry = SearchForUserEntry(username, ldapConnection);
-                    var user = CreateUserFromEntity(userEntry);
+                    //over here is user authorized. All I have to do is to create an IUser from the DB
+                    var user = TryToCreateActiveDirectoryUser(username, ldapConnection) ?? CreateUserOnBound(username, ldapConnection);
                     ldapConnection.Disconnect();
                     SetPrincipal(user);
                     OnUserAuthenticateSuccess(username);
@@ -57,17 +63,36 @@ namespace TcOpen.Inxton.Local.Security.LDAP
                 {
                     ldapConnection.Disconnect();
                     OnUserAuthenticateFailed(username);
-                    throw new Exception("Cannot bind, verify LDAP credentials");
+                    throw new UnauthorizedAccessException("Cannot bind, verify LDAP credentials");
                 }
             }
         }
-        private void SetPrincipal(IUser ldapUser)
+        private void ConnectAndBind(ILdapConnection ldapConnection, string username, string password)
         {
-            AppIdentity.AppPrincipal customPrincipal = (Thread.CurrentPrincipal as AppIdentity.AppPrincipal) ?? throw new ArgumentException();
-            //Authenticate the user
-            customPrincipal.Identity = new AppIdentity(ldapUser.UserName, ldapUser.Email, ldapUser.Roles, ldapUser.CanUserChangePassword, ldapUser.Level);
-            UserAccessor.Instance.Identity = customPrincipal.Identity;
+            try
+            {
+                ldapConnection.Connect(LdapConfig.Host, LdapConfig.Port);
+                ldapConnection.Bind(username, password);
+            }
+            catch (LdapException e)
+            {
+                OnUserAuthenticateFailed(username);
+                throw new UnauthorizedAccessException("Cannot connect or bind, verify LDAP credentials,host,port.", e);
+            }
         }
+        private IUser TryToCreateActiveDirectoryUser(string username, LdapConnection ldapConnection)
+        {
+            try
+            {
+                var userEntry = SearchForUserEntry(username, ldapConnection);
+                return CreateUserFromEntity(userEntry);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         private LdapEntry SearchForUserEntry(string username, ILdapConnection ldapConnection)
         {
             var filter = $"{FILTER_ATTRIBUTE_EMAIL}={username}";
@@ -89,6 +114,13 @@ namespace TcOpen.Inxton.Local.Security.LDAP
             var email = userEntry.getAttribute(EMAIL_ATTRIBUTE)?.StringValue;
             return new LdapUser { UserName = username, Roles = memberOf };
         }
+        private void SetPrincipal(IUser ldapUser)
+        {
+            AppIdentity.AppPrincipal customPrincipal = (Thread.CurrentPrincipal as AppIdentity.AppPrincipal) ?? throw new ArgumentException();
+            //Authenticate the user
+            customPrincipal.Identity = new AppIdentity(ldapUser.UserName, ldapUser.Email, ldapUser.Roles, ldapUser.CanUserChangePassword, ldapUser.Level);
+            UserAccessor.Instance.Identity = customPrincipal.Identity;
+        }
 
         public void DeAuthenticateCurrentUser()
         {
@@ -103,14 +135,11 @@ namespace TcOpen.Inxton.Local.Security.LDAP
             }
         }
         public string CalculateHash(string clearTextPassword, string salt)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotImplementedException();
+
 
         public void ChangePassword(string userName, string password, string newPassword1, string newPassword2)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotImplementedException();
 
         const string FILTER_ATTRIBUTE_USERNAME = "sAMAccountName";
         const string FILTER_ATTRIBUTE_EMAIL = "userPrincipalName";
