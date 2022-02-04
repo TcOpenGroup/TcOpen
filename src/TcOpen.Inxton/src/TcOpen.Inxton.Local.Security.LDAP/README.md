@@ -19,3 +19,8 @@ https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server
 To get it, you need to install 
 "WindowsTH-KB2693643-x64"  -  Remote Server Administration Tools for Windows 10 
 win+r  -  "ldp.exe" 
+
+
+This LDAP service will create a user based on the structure in Active Directory. 
+If you wish to override the creation of user implement `CreateUserOnBound` function.
+This function will be invoked after user is authenticated with his credentials.
