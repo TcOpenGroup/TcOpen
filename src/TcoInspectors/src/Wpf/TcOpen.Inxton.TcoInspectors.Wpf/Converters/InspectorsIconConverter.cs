@@ -3,36 +3,36 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
-using TcoCore.Wpf;
 using TcoInspectors;
 
 namespace TcOpen.Inxton.TcoInspectors.Wpf
 {
-    public class InspectorsResultColorConverter : MarkupExtension, IValueConverter
+    public class InspectorsIconConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 var result = (eInspectorResult)Enum.ToObject(typeof(eInspectorResult), value);
-                //(VortexCore.enumCheckResult)((int)value);
+
+
 
                 switch (result)
                 {
                     case eInspectorResult.NoAction:
-                        return Brushes.Gray;
+                        return MaterialDesignThemes.Wpf.PackIconKind.Minus;
                     case eInspectorResult.Running:
-                        return TcoColors.Accent;
+                        return MaterialDesignThemes.Wpf.PackIconKind.Run;
                     case eInspectorResult.Passed:
-                        return Brushes.Green;
+                        return MaterialDesignThemes.Wpf.PackIconKind.Check;
                     case eInspectorResult.Failed:
-                        return Brushes.Red;
+                        return MaterialDesignThemes.Wpf.PackIconKind.AlphabetXCircle;
                     case eInspectorResult.Inconclusive:
-                        return Brushes.OrangeRed;
+                        return MaterialDesignThemes.Wpf.PackIconKind.AlertCircle;
                     case eInspectorResult.Excluded:
-                        return Brushes.Orange;
+                        return MaterialDesignThemes.Wpf.PackIconKind.Exclusion;
                     case eInspectorResult.Bypassed:
-                        return Brushes.DarkOrange;
+                        return MaterialDesignThemes.Wpf.PackIconKind.TransitSkip;
                     default:
                         break;
                 }
@@ -57,4 +57,5 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
             return this;
         }
     }
+    
 }

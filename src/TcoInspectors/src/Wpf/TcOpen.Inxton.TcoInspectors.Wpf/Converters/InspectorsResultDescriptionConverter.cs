@@ -16,7 +16,25 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
                 var result = (eInspectorResult)Enum.ToObject(typeof(eInspectorResult), value);
                 //(VortexCore.enumCheckResult)((int)value);
 
-                return result.ToString();
+                switch (result)
+                {
+                    case eInspectorResult.NoAction:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.NotInspected;
+                    case eInspectorResult.Running:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionIsRunning;
+                    case eInspectorResult.Passed:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionPassed;
+                    case eInspectorResult.Failed:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionFailed;
+                    case eInspectorResult.Inconclusive:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionInconclusive;
+                    case eInspectorResult.Excluded:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionDidRunButIsExcludedFromTheEvaluation;
+                    case eInspectorResult.Bypassed:
+                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionWasBypassed;
+                    default:
+                        break;
+                }
 
             }
             catch (Exception)
@@ -25,7 +43,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
                 // swallow
             }
 
-            return string.Empty;
+            return Brushes.Gray;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

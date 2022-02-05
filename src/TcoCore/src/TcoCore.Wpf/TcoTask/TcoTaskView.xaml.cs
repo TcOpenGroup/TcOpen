@@ -25,6 +25,18 @@ namespace TcoCore
         public TcoTaskView()
         {
             InitializeComponent();
+            this.DataContextChanged += TcoTaskView_DataContextChanged;
+        }
+
+        private void TcoTaskView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(!(this.DataContext is TcoTaskViewModel))
+            {
+                if(this.DataContext is TcoTask)
+                {
+                    this.DataContext = new TcoTaskViewModel() { Model = this.DataContext };
+                }
+            }
         }
     }
 }
