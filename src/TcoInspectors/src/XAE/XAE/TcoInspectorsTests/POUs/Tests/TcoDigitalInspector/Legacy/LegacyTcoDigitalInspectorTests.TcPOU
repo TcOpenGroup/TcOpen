@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="LegacyTcoDigitalInspectorTests" Id="{1c051af3-3134-0bbf-1262-4c56487a703f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LegacyTcoDigitalInspectorTests EXTENDS TcoCore._internals_TcoContext
+VAR
+    _sut            : TcoInspectors.TcoDigitalInspector(THIS^);
+    _inspectedValue : BOOL;
+    _result         : TcoInspectors.eInspectorResult;
+    _isOverIspected : BOOL;
+    _overallResult  : TcoInspectors.TcoComprehensiveResult;
+    _coordinator    : MockCoordinator;
+    _retryState     : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{ab876c59-4f7b-017b-0dd6-1196df7ac0c8}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+    0:
+        _result         := 0;
+        _isOverIspected := FALSE;
+    eDigitalInspectorTests.Inspect:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).UpdateComprehensiveResult(_overallResult).Done);
+    eDigitalInspectorTests.GetResult:
+        _result         := _sut.Inspect(_inspectedValue).Result;
+        _isOverIspected := _sut.Inspect(_inspectedValue).OverInspected;
+    eDigitalInspectorTests.OnFailCarryOn:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).OnFail(_coordinator).CarryOn());
+    eDigitalInspectorTests.OnFailRetry:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).OnFail(_coordinator).Retry(_retryState));
+    eDigitalInspectorTests.OnFailTerminate:
+        THIS^.ProbeDoneWhen(_sut.Inspect(_inspectedValue).OnFail(_coordinator).Terminate());
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

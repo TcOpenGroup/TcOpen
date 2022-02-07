@@ -8,7 +8,7 @@
 			</summary>
 		</docu>		
 ~*)
-FUNCTION_BLOCK ABSTRACT TcoSequencerBase EXTENDS TcoStateExtendible IMPLEMENTS ITcoSequencer
+FUNCTION_BLOCK ABSTRACT TcoSequencerBase EXTENDS TcoStateExtendible IMPLEMENTS ITcoSequencer, ITcoCoordinator
 VAR CONSTANT 
     MinStepID : INT := -32767;
     MaxStepID : INT := 32766;
@@ -162,6 +162,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="Coordinator" Id="{6e79da0d-1661-0d9c-3168-a50e384391b9}" />
     <Method Name="CheckStepId" Id="{1a28ae7e-3f08-026b-3c6f-6ecb440861d3}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -652,8 +653,8 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 					IF (_pNewSteps <> 0) THEN
 						__DELETE(_pNewSteps);
 					END_IF
-					_sequencerErrorId := eSequencerError.NotUniqueStepId;
-					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));
+					_sequencerErrorId := eSequencerError.NotUniqueStepId;					
+					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));					 
 					_currentStep.Description := _message;
 					_currentStep.Status := eStepStatus.Error;
 					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
@@ -689,8 +690,7 @@ IF _stepIdUniquenessChecked THEN
 	IF (_pNewSteps <> 0) THEN
 		__DELETE(_pNewSteps);
 	END_IF
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{01b00980-fd7a-0b03-1d6e-84d1519f2b7c}">
@@ -726,6 +726,16 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="MoveNext" Id="{2a75d1b2-2313-00ca-0b7f-ca8389b46acd}" FolderPath="Coordinator\">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `MoveNext` via `ITcoCoordinator` interface.'}
+METHOD PUBLIC MoveNext : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_CompleteStep();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Observer" Id="{510f76aa-a88b-0a73-08d3-555b6456f468}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -918,6 +928,18 @@ Context.Environment.Messaging.Resume();
 _checkStepIdRequestedInStepMode := FALSE;
 
 OnRestore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Retry" Id="{8a23b412-1867-05d2-0ba1-19984d0dfd1c}" FolderPath="Coordinator\">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `Retry` via `ITcoCoordinator` interface.'}
+METHOD PUBLIC Retry : BOOL
+VAR_INPUT
+	inFromState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_RequestStep(inFromState);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{c6fbf00b-db87-087f-2ed2-350a1d2bec1d}">
@@ -1267,6 +1289,17 @@ END_IF
 _numberOfStepsInSequence := _stepCounter;
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Terminate" Id="{891406c3-dc43-0f05-194d-d0dd319d16ad}" FolderPath="Coordinator\">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `Terminate` via `ITcoCoordinator` interface.'}
+METHOD PUBLIC Terminate : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

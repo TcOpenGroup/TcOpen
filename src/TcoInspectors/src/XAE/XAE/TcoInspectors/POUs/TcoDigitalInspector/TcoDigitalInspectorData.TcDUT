@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoDigitalInspectorData" Id="{cd575c1e-dcb1-0a06-301a-c160533158aa}">
+    <Declaration><![CDATA[{attribute addProperty Name "LogicCheckerData"}
+{attribute 'qlik_value_field:CheckType = Logic'}
+TYPE
+    TcoDigitalInspectorData EXTENDS TcoInspectorData :
+    STRUCT
+        (*~
+		<docu>
+		<summary>
+			Required status for the check to Pass.	
+		</summary>
+		</docu>
+		~*)
+        {attribute addProperty Name "<#Required#>"}
+		{attribute addProperty ToolTip "<#Set the required status for the inspection to pass.#>"}
+        {attribute 'qlik_load:RequiredStatus'}
+        RequiredStatus : BOOL;
+
+        (*~
+		<docu>
+		<summary>
+			Detected status.	
+		</summary>
+		</docu>
+	~*)
+        {attribute addProperty Name "<#Detected#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+		{attribute addProperty ToolTip "<#Displays detected status of this check.#>"}
+        {attribute 'qlik_load:DetectedStatus'}
+        DetectedStatus : BOOL;
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoAnalogueInspectorData" Id="{e7419db1-2050-0230-2b63-3f89596ed2cc}">
+    <Declaration><![CDATA[{attribute addProperty Name "AnalogueCheckerData"}
+{attribute 'qlik_entity:Checks'}
+{attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
+{attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
+{attribute 'qlik_value_field:CheckType = Analogue'}
+TYPE
+    TcoAnalogueInspectorData EXTENDS TcoInspectorData :
+    STRUCT
+        (*~
+		<docu>
+		<summary>
+			Required minimum value for the inspection to pass.
+		</summary>
+		</docu>
+		~*)
+        {attribute addProperty  Name "<#MIN.#>"}
+        {attribute 'qlik_load:Minimum'}
+        RequiredMin : LREAL;
+
+        (*~
+		<docu>
+		<summary>
+			Detected status.	
+		</summary>
+		</docu>
+		~*)
+        {attribute addProperty  Name "<#MEASURED#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:Measured'}
+        DetectedStatus : LREAL;
+
+        (*~
+		<docu>
+		<summary>
+			Required maximum value for the inspection to pass.
+		</summary>
+		</docu>
+		~*)
+        {attribute addProperty  Name "<#MAX.#>"}
+        {attribute 'qlik_load:Maximum'}
+        RequiredMax : LREAL;
+
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

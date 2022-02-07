@@ -1,0 +1,124 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--NuGet properties-->   
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
+    <ProjectReference Include="..\..\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
+  </ItemGroup>
+
+		
+	
+  <ItemGroup>
+    <Compile Update="Properties\strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>strings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="TcoAnalogueInpector\Online\TcoAnalogueInspectorControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoAnalogueInpector\Online\TcoAnalogueInspectorDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoAnalogueInpector\Shadow\TcoAnalogueInspectorShadowControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoAnalogueInpector\Shadow\TcoAnalogueInspectorShadowDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDataInspector\Online\TcoDataInspectorControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDataInspector\Online\TcoDataInspectorDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDataInspector\Shadow\TcoDataInspectorShadowControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDataInspector\Shadow\TcoDataInspectorShadowDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowControlView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TcoDigitalInspector\Online\TcoDigitalInspectorDisplayView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+		
+	
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="TcoAnalogueInpector\Online\TcoAnalogueInspectorControlView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoAnalogueInpector\Online\TcoAnalogueInspectorDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoAnalogueInpector\Shadow\TcoAnalogueInspectorShadowControlView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoAnalogueInpector\Shadow\TcoAnalogueInspectorShadowDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDataInspector\Online\TcoDataInspectorControlView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDataInspector\Online\TcoDataInspectorDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDataInspector\Shadow\TcoDataInspectorShadowControlView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDataInspector\Shadow\TcoDataInspectorShadowDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowControlView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDigitalInspector\Shadow\TcoDigitalInspectorShadowDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoDigitalInspector\Online\TcoDigitalInspectorDisplayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

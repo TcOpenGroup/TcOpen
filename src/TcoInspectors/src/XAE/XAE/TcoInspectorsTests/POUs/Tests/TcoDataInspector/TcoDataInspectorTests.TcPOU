@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDataInspectorTests" Id="{7f0258dd-41d3-0c35-2a13-53089ff9ceff}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataInspectorTests EXTENDS TcoInspectorTests
+VAR
+    _sut            : TcoInspectors.TcoDataInspector(THIS^);
+    _inspectedValue : STRING;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Inspect" Id="{acc0c6bd-2e0e-0f04-3abe-e981b7b5da0f}">
+      <Declaration><![CDATA[METHOD Inspect : TcoInspectors.IInspector]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Inspect := _sut.Inspect(_inspectedValue);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{98deef78-b00e-0980-0e31-8ab8d1c5e533}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Main();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
