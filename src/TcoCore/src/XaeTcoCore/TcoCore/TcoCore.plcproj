@@ -159,6 +159,9 @@
     <Compile Include="POUs\Prototypes\TcoMomentaryTask\TcoMomentaryTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoNothing\NO.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoObject\ITcoObject.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -244,6 +247,9 @@
     <Compile Include="POUs\Prototypes\TcoState\TcoStateExtendible.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\eTaskState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -295,6 +301,8 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\ImplicitChecks" />
+    <Folder Include="POUs\Prototypes\TcoNothing" />
+    <Folder Include="POUs\Prototypes\TcoStruct" />
     <Folder Include="POUs\Prototypes\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />

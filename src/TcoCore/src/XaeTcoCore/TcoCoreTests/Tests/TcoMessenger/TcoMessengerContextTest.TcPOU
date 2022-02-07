@@ -10,7 +10,7 @@ VAR
 	_rtcIsValid					:	BOOL := FALSE;
 	_rtcIsSynchronized			:	BOOL := FALSE;
 	{attribute addProperty Name "this is the name of messenger test"}
-	_tcoMessangerTests			:	TcoMessengerTests(THIS^);
+	_tcoMessangerTests			:	TcoMessengerTests(THIS^, NO.Structure);
 END_VAR
 ]]></Declaration>
     <Implementation>

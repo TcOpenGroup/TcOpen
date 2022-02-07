@@ -9,8 +9,8 @@ VAR
     _myContextEndCount : ULINT;
     _myParentIdentity : ULINT;
     _myState : INT;
-    _tTt_A : TcoTaskPlcTest(THIS^);
-    _tTt_B : TcoTaskPlcTest(THIS^);
+    _tTt_A : TcoTaskPlcTest(THIS^, NO.Structure);
+    _tTt_B : TcoTaskPlcTest(THIS^, NO.Structure);
     _onStateChangeCounter : INT;
     _autoRestoreToMyChildsEnabled : BOOL;
     _autoRestoreByMyParentEnabled : BOOL;
@@ -58,7 +58,7 @@ METHOD INTERNAL ReadOutIdentities]]></Declaration>
 
 _myContextIdentity	:=	THIS^.Context.Identity;
 
-_myParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^.Parent.Identity;
 		
 _myContextStartCount :=	THIS^.Context.StartCycleCount;
 

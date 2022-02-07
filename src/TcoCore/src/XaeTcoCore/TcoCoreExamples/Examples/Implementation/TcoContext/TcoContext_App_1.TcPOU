@@ -10,11 +10,11 @@ VAR
 	ResetToZero : BOOL := TRUE;
 	C1	:	LINT	:= 100;
 	C2	:	LINT	:= 200;
-	TcoObject_Counter_1 : TcoObject_Counter(THIS^);
-	TcoObject_Counter_2 : TcoObject_Counter(THIS^);
+	TcoObject_Counter_1 : TcoObject_Counter(THIS^, NO.Structure);
+	TcoObject_Counter_2 : TcoObject_Counter(THIS^, NO.Structure);
 	Cycle	:	LINT:=-1;
-	TcoTask_DownCounter_1	: TcoTask_DownCounter(THIS^);
-	TcoTask_DownCounter_2	: TcoTask_DownCounter(THIS^);
+	TcoTask_DownCounter_1	: TcoTask_DownCounter(THIS^, NO.Structure);
+	TcoTask_DownCounter_2	: TcoTask_DownCounter(THIS^, NO.Structure);
 	TcoObject_Counter_1_CountUp_Done_RTRIG : R_TRIG;
 	TcoObject_Counter_1_CountDown_Done_RTRIG : R_TRIG;
 	TcoObject_Counter_2_CountUp_Done_RTRIG : R_TRIG;

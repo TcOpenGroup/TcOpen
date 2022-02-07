@@ -3,8 +3,8 @@
   <POU Name="TcoSequenceObserverTests" Id="{031e84f0-129a-00ae-272d-2f4b1c1c0910}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceObserverTests EXTENDS TcoCore._internals_TcoContext
 VAR				
-	_s : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
-	_sObserver : TcoCore.TcoSequencerObserver(THIS^);		
+	_s : TcoCore.TcoSequence(THIS^, NO.Structure, eRestoreMode.None);
+	_sObserver : TcoCore.TcoSequencerObserver(THIS^, NO.Structure);		
 END_VAR
 
 

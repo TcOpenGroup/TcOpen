@@ -7,9 +7,9 @@ VAR
 	_startCycles			:	ULINT;
 	_endCycles				:	ULINT;	
 	_mainCycles				:	ULINT;
-	_tcoObjectTest_A		:	TcoObjectTest(THIS^);
-	_tcoObjectTest_B		:	TcoObjectTest(THIS^);
-	_tcoObjectTest_Misc		:	TcoObjectTest(THIS^);
+	_tcoObjectTest_A		:	TcoObjectTest(THIS^, NO.Structure);
+	_tcoObjectTest_B		:	TcoObjectTest(THIS^, NO.Structure);
+	_tcoObjectTest_Misc		:	TcoObjectTest(THIS^, NO.Structure);
 	_myIdentity				:	ULINT;	
 	_onEntryCount			:	ULINT;
 	_onExitCount			:	ULINT;

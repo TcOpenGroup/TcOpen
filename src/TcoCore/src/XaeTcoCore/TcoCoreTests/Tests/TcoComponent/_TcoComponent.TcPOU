@@ -3,7 +3,7 @@
   <POU Name="_TcoComponent" Id="{b8956c28-5b21-0376-1161-3d340b13164a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK _TcoComponent EXTENDS TcoCore.TcoComponent
 VAR
-	_task	: TcoTaskTest(THIS^);
+	_task	: TcoTaskTest(THIS^, NO.Structure);
 	_serviceModeCount : ULINT;
 END_VAR
 ]]></Declaration>

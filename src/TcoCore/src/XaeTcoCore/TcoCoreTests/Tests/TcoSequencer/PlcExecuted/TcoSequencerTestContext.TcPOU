@@ -3,8 +3,8 @@
   <POU Name="TcoSequencerTestContext" Id="{4e7acbde-4743-0cad-2bb0-27aaf0a30196}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut_A : TcoSequencerTestType(THIS^,eRestoreMode.AutoRestoreMembers);
-    _sut_N : TcoSequencerTestType(THIS^,eRestoreMode.None);
+    _sut_A : TcoSequencerTestType(THIS^, NO.Structure,eRestoreMode.AutoRestoreMembers);
+    _sut_N : TcoSequencerTestType(THIS^, NO.Structure,eRestoreMode.None);
 
     _elapsedTimeETA : TIME;
     _elapsedTime : TIME;

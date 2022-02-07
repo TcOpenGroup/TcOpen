@@ -40,20 +40,6 @@ END_VAR]]></Declaration>
 _inServiceMode := _serviceContexCycle = _myContextCycleCount OR (_serviceContexCycle + 1) = _myContextCycleCount;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{85de5686-5b6c-0496-3ce9-dba560b52906}">
-      <Declaration><![CDATA[{attribute 'hide'}
-METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="GetSignalInfo" Id="{8a2c62ad-97e0-04b2-078e-47bb9ffb547c}">
       <Declaration><![CDATA[(*~
 	<docu>

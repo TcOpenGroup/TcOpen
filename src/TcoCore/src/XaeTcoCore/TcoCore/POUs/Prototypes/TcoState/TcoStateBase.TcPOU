@@ -155,7 +155,7 @@ END_VAR
 //of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
 //after each download.
 IF _AutoRestorable THEN		
-	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+	IF __QUERYINTERFACE(THIS^.Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.LastStateChangeCycle;
 		_MyParent_LastChangeState := _MyParent_TcoState.State;
 	END_IF;	
@@ -230,7 +230,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+        <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent,_MyParent_TcoState) THEN 
 	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
 END_IF;	
 ]]></ST>
@@ -291,7 +291,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+          <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -299,14 +299,17 @@ END_VAR
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	bInitRetains 	: BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode 	: BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject 	: ITcoObject;	
+	ParentStruct : REFERENCE TO TcoStruct;
 	AutoRestoreMode : eRestoreMode; 
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Identity 		:=	ADR(THIS^);
-_Parent			:=	Parent;
+_ParentObject	:=	ParentObject;
+_ParentStruct	:=	ParentStruct;
 _enableAutoRestore	:=	AutoRestoreMode = eRestoreMode.AutoRestoreMembers;
 
 CheckIfAutoRestoreEnabledByParent();

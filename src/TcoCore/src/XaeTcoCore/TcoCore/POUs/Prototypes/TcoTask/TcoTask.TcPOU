@@ -199,7 +199,7 @@ END_VAR
 // of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
 // after each download.
 IF _AutoRestorable THEN		
-	IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+	IF __QUERYINTERFACE(THIS^.Parent,_MyParent_TcoState) THEN 
 		_MyParent_ChangeStateCycle := _MyParent_TcoState.LastStateChangeCycle;
 		_MyParent_LastChangeState := _MyParent_TcoState.State;
 	END_IF;	
@@ -252,7 +252,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent,_MyParent_TcoState) THEN 
+        <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent,_MyParent_TcoState) THEN 
 	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
 END_IF;	]]></ST>
       </Implementation>
@@ -311,7 +311,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{f1e70fbb-551e-45b2-82da-a9b2ed85bad0}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+          <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -443,9 +443,9 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
-IF(THIS^._Parent <> 0 )THEN
+IF(THIS^.Parent <> 0 )THEN
 	_isServiceable := TRUE;	
-	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+	IF(__QUERYINTERFACE(THIS^.Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._invokeRequest := FALSE;
 			_isServiceable := FALSE;
@@ -453,8 +453,8 @@ IF(THIS^._Parent <> 0 )THEN
 	END_IF
 END_IF;
 
-IF(THIS^._Parent.Context <> 0) THEN
-	_exectuteCallCycle := THIS^._Parent.Context.StartCycleCount;
+IF(THIS^.Parent.Context <> 0) THEN
+	_exectuteCallCycle := THIS^.Parent.Context.StartCycleCount;
 END_IF;	
  
 //Triggering Invoke from remote system
@@ -518,12 +518,13 @@ METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
+	ParentStruct : REFERENCE TO TcoStruct;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Parent := Parent;
-
+        <ST><![CDATA[_ParentObject := ParentObject;
+_ParentStruct := ParentStruct;
 CheckIfAutoRestoreEnabledByParent();
 ]]></ST>
       </Implementation>
@@ -561,7 +562,7 @@ VAR
 	_newInvokeCall	:	BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_newInvokeCall := THIS^._Parent.Context.StartCycleCount > _nextExpectedCycle;
+        <ST><![CDATA[_newInvokeCall := THIS^.Parent.Context.StartCycleCount > _nextExpectedCycle;
 
 IF(THIS^._taskState = eTaskState.Ready OR (THIS^._taskState = eTaskState.Done AND _newInvokeCall)) THEN
 	IF _enabled THEN
@@ -572,7 +573,7 @@ IF(THIS^._taskState = eTaskState.Ready OR (THIS^._taskState = eTaskState.Done AN
 	END_IF	
 END_IF	
 
-_nextExpectedCycle := THIS^._Parent.Context.StartCycleCount + 1;
+_nextExpectedCycle := THIS^.Parent.Context.StartCycleCount + 1;
 
 Invoke := THIS^;
 ]]></ST>
@@ -635,7 +636,7 @@ METHOD PROTECTED OnError
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Messenger.OnCondition(THIS^._Parent.Context.StartCycleCount > _exectuteCallCycle + 1)
+        <ST><![CDATA[THIS^.Messenger.OnCondition(THIS^.Parent.Context.StartCycleCount > _exectuteCallCycle + 1)
 			   .Programming('Cyclic execution of the task not called. Make sure you are calling Execute() method cyclically in the call tree of the context.');
 ]]></ST>
       </Implementation>

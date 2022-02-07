@@ -6,9 +6,9 @@ VAR
 	CounterValue : LINT;
 	UpperLimit : LINT;
 	LowerLimit : LINT;
-	TcoTask_CountUp : TcoCore.TcoTask(THIS^);
-	TcoTask_CountDown : TcoCore.TcoTask(THIS^);
-	TcoTask_ResetToZero : TcoCore.TcoTask(THIS^);
+	TcoTask_CountUp : TcoCore.TcoTask(THIS^, NO.Structure);
+	TcoTask_CountDown : TcoCore.TcoTask(THIS^, NO.Structure);
+	TcoTask_ResetToZero : TcoCore.TcoTask(THIS^, NO.Structure);
 	CountUp_InvokeTrigCounter : LINT;
 	CountUp_DoneTrigCounter : LINT;
 	CountDown_InvokeTrigCounter : LINT;

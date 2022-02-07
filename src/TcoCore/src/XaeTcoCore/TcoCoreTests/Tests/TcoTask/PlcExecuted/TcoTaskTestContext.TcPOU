@@ -3,9 +3,9 @@
   <POU Name="TcoTaskTestContext" Id="{da10e4d9-b59b-03b6-048b-8b4e8d7fd81e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut : TcoCore.TcoTask(THIS^);
-	_to_A : TcoTaskPlcTestObject(THIS^);
-	_to_B : TcoTaskPlcTestObject(THIS^);
+    _sut : TcoCore.TcoTask(THIS^, NO.Structure);
+	_to_A : TcoTaskPlcTestObject(THIS^, NO.Structure);
+	_to_B : TcoTaskPlcTestObject(THIS^, NO.Structure);
     _elapsedTimeETA : TIME;
     _elapsedTime : TIME;
     _runElapsedTimer : BOOL;

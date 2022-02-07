@@ -3,7 +3,7 @@
   <POU Name="TcoContextMessagingPerf" Id="{c6f5081f-eab3-028a-022e-e9b133fadbef}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoContextMessagingPerf EXTENDS TcoContextTest
 VAR	
-	_lot_of_messages : ARRAY[0.._messagesUpperBound] OF TcoCore.TcoMessenger(THIS^);
+	_lot_of_messages : ARRAY[0.._messagesUpperBound] OF TcoCore.TcoMessenger(THIS^, NO.Structure);
 	_numberOfTestMessages : INT;	
 END_VAR
 

@@ -15,11 +15,11 @@ END_VAR
 
 VAR
 	{attribute addProperty Activity "moves to home position"}
-	_moveHomeTask : fbPistonMoveTask(THIS^);
+	_moveHomeTask : fbPistonMoveTask(THIS^, NO.Structure);
 	{attribute addProperty Activity "moves to work position"}
-	_moveWorkTask : fbPistonMoveTask(THIS^);
-	_moveHomeMomentaryTask : TcoCore.TcoMomentaryTask(THIS^);	
-	_moveHomeToggleTask : TcoCore.TcoToggleTask(THIS^, FALSE);
+	_moveWorkTask : fbPistonMoveTask(THIS^, NO.Structure);
+	_moveHomeMomentaryTask : TcoCore.TcoMomentaryTask(THIS^, NO.Structure);	
+	_moveHomeToggleTask : TcoCore.TcoToggleTask(THIS^, NO.Structure, FALSE);
 	
 	_config : fbPistonConfig;
 	_status : fbPistonStatus;

@@ -65,7 +65,7 @@ VAR
 		</summary>		
 	</docu>	
 ~*)	
-	_modeController : TcoSequencerModeController(THIS^);
+	_modeController : TcoSequencerModeController(THIS^, NO.Structure);
 (*~
 	<docu>
 		<summary>
@@ -156,7 +156,7 @@ END_VAR
 VAR
 	_observer : ITcoSequencerObserver;
 	{attribute 'hide'}
-	_observerDummy : TcoTcoSequencerObserverDummy(THIS^); 
+	_observerDummy : TcoTcoSequencerObserverDummy(THIS^, NO.Structure); 
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -222,11 +222,16 @@ METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
+	ParentStruct : REFERENCE TO TcoStruct;
 	AutoRestoreMode : eRestoreMode; 
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent, AutoRestoreMode);
+        <ST><![CDATA[//SUPER^.FB_init(bInitRetains := bInitRetains, 
+//			   bInCopyCode := bInCopyCode, 
+//               ParentObject := ParentObject, 
+//			   ParentStruct := ParentStructure,
+//               AutoRestoreMode := AutoRestoreMode);
 ]]></ST>
       </Implementation>
     </Method>

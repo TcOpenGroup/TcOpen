@@ -3,8 +3,8 @@
   <POU Name="TcoState_WaveformSequence" Id="{e84437c2-fe38-0f88-230c-d152e59d16b4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoState_WaveformSequence EXTENDS TcoState
 VAR
-	_TcoTask_Transition_1	:	TcoTask_Transition(THIS^);
-	_TcoTask_Transition_2	:	TcoTask_Transition(THIS^);
+	_TcoTask_Transition_1	:	TcoTask_Transition(THIS^, NO.Structure);
+	_TcoTask_Transition_2	:	TcoTask_Transition(THIS^, NO.Structure);
 	_WaveformPointTable		:	ARRAY[0..10]	OF 	WaveformPoint;
 	_WaveformPointsCount	:	UINT;
 	_ActualTransitionNumber	:	UINT;

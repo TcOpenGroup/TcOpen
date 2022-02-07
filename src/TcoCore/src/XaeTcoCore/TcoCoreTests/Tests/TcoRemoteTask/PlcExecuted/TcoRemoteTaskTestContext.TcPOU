@@ -3,7 +3,7 @@
   <POU Name="TcoRemoteTaskTestContext" Id="{e0205570-0107-044a-09e9-3ba686b39cfb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoRemoteTaskTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut : TcoRemoteTaskTest(THIS^);
+	_sut : TcoRemoteTaskTest(THIS^, NO.Structure);
     _invokeInitializedCSharpMethodDone : BOOL;
     _invokeNotInitializedCSharpMethodDone : BOOL;
     _exceptionInMethodWillResultInExceptionDone : BOOL;

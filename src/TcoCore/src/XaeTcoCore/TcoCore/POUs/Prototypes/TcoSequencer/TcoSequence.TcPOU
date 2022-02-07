@@ -3,7 +3,7 @@
   <POU Name="TcoSequence" Id="{1dc16e35-9676-012b-08e6-85dbca5c82ff}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequence EXTENDS TcoSequencerBase
 VAR
-	_openingClosingErrorMessenger : TcoMessenger(THIS^);
+	_openingClosingErrorMessenger : TcoMessenger(THIS^, NO.Structure);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

@@ -3,7 +3,7 @@
   <POU Name="TcoLoggerTestContext" Id="{ce23ff7a-efb3-08f3-330f-5b5da7b34243}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut : TcoLoggerTest(THIS^);
+	_sut : TcoLoggerTest(THIS^, NO.Structure);
 	_msg : TcoCore.TcoMessage;  
     _multiplesCount : INT;	
 END_VAR

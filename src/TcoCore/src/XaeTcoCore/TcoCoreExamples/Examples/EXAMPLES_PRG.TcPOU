@@ -6,12 +6,16 @@ VAR
 	_context : fbContext;
 	_recordableStations : RecordableStation001;
 	_loggerContext : LoggerContext;
+	_strucuredContext : StrucuredContext;
+	a : TcoCore.ITcoObject;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_context.Run();
 _recordableStations.Run();
-_loggerContext.Run();]]></ST>
+_loggerContext.Run();
+
+a := _strucuredContext._structuredData._o1.Parent;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceNonAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_callMyPlcInstance	:	BOOL := FALSE;
-	_sequencer : _TcoSequence(THIS^, eRestoreMode.None);
+	_sequencer : _TcoSequence(THIS^, NO.Structure, eRestoreMode.None);
 	_runPLCinstanceOnce : BOOL := FALSE;
 	_runPLCinstanceCyclicaly : BOOL := FALSE;
 	_stepID : INT := 32764;

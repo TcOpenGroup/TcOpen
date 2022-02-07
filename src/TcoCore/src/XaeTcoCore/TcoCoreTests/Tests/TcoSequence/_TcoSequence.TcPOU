@@ -15,7 +15,7 @@ VAR
 	_currentStepDescription				:	STRING(254);
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
-	_myTcoState							: 	TcoState(THIS^ ,eRestoreMode.None);
+	_myTcoState							: 	TcoState(THIS^, NO.Structure ,eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
 	_onSequencerErrorCount	 			: 	ULINT;

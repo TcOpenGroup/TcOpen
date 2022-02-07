@@ -6,9 +6,9 @@ VAR
 	ResetToZero : BOOL := TRUE;
 	C1	:	LINT	:= 100;
 	C2	:	LINT	:= 200;
-	TcoObject_Counter_1 : TcoObject_Counter(THIS^);
-	TcoObject_Counter_2 : TcoObject_Counter(THIS^);
-	TcoState_1	: TcoCore.TcoState(THIS^,TRUE);
+	TcoObject_Counter_1 : TcoObject_Counter(THIS^, NO.Structure);
+	TcoObject_Counter_2 : TcoObject_Counter(THIS^, NO.Structure);
+	TcoState_1	: TcoCore.TcoState(THIS^, NO.Structure, TcoCore.eRestoreMode.None);
 //	TcoState_Counter_2	: TcoState(THIS^,TRUE);
 
 END_VAR]]></Declaration>

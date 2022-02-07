@@ -75,7 +75,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{ac5dc4c9-3bb4-0e8d-1613-6fb24f14d879}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+          <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -108,12 +108,13 @@ METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
+	ParentStruct : REFERENCE TO TcoStruct;
 	InitState : BOOL;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Parent := Parent;
+        <ST><![CDATA[_ParentObject := ParentObject;
+_ParentStruct := ParentStruct;
 _state := InitState;
 
 ]]></ST>
@@ -278,9 +279,9 @@ END_VAR]]></Declaration>
 _StartCycleCount := THIS^.Context.StartCycleCount;
 
 // Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
-IF(THIS^._Parent <> 0 )THEN
+IF(THIS^.Parent <> 0 )THEN
 	_isServiceable := TRUE;
-	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+	IF(__QUERYINTERFACE(THIS^.Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._toggleRequest := FALSE;
 			_isServiceable := FALSE;
