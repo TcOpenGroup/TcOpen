@@ -52,3 +52,9 @@ jobs:
         with:
           name: nugets
           path: ${{ github.workspace }}/nugets/*.nupkg
+      - name: Upload PLC libraries
+        uses: actions/upload-artifact@v2 
+        if: success() 
+        with:
+          name: plcLibs
+          path: ${{ github.workspace }}\plcLibs\*.library
