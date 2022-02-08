@@ -3,7 +3,7 @@
   <POU Name="Technology" Id="{f5d907bb-c69e-0cce-3445-38466ba70424}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
 VAR
-	_ST001 : ST001(THIS^);
+	_ST001 : ST001(THIS^, TcoCore.NO.Structure);
 	_mirrorStartCycle : ULINT;
 END_VAR
 ]]></Declaration>

@@ -3,7 +3,7 @@
   <POU Name="TestDataContext" Id="{84826b8f-78be-0c2b-210a-e7483d252490}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TestDataContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    DataTests : TcoDataExchangeTests(THIS^);
+    DataTests : TcoDataExchangeTests(THIS^, TcoCore.NO.Structure);
     _identifier : STRING;
     _restoreTasksDone : BOOL;
     _createDataDone : BOOL;

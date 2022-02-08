@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDoTests" Id="{0e553b88-9244-02c7-04d0-b9980a3fe668}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDoTests EXTENDS TcoCore._internals_TcoContext
 VAR
 	_signal : BOOL;
-	_sut : TcoElements.TcoDo(THIS^);
-	_sutNotInitialized : TcoElements.TcoDo(THIS^);
+	_sut : TcoElements.TcoDo(THIS^, TcoCore.NO.Structure);
+	_sutNotInitialized : TcoElements.TcoDo(THIS^, TcoCore.NO.Structure);
 END_VAR
 
 VAR

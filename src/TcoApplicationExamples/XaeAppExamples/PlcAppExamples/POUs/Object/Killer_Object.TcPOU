@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Killer_Object" Id="{6cf1f058-fc3f-01f7-18ab-723f0f024201}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Killer_Object EXTENDS Person_Object
 VAR_INPUT
@@ -8,7 +8,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	_isAlive	:	BOOL:=	TRUE;
-	_Kill		:	Kill_Task(THIS^);
+	_Kill		:	Kill_Task(THIS^, TcoCore.NO.Structure);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

@@ -3,7 +3,7 @@
   <POU Name="TcoDataExchangeTests" Id="{05624285-4d40-0327-337b-d10ea2e36bbb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataExchangeTests EXTENDS TcoCore.TcoObject
 VAR
-	DataManager : DataManager(THIS^);
+	DataManager : DataManager(THIS^, TcoCore.NO.Structure);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[DataManager();]]></ST>

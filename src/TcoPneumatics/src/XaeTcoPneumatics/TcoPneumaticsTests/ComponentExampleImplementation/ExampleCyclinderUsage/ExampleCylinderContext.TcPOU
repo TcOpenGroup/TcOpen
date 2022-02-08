@@ -3,7 +3,7 @@
   <POU Name="ExampleCylinderContext" Id="{2523d206-5a7d-0210-0e34-213aff8e3a3d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleCylinderContext EXTENDS TcoCore.TcoContext
 VAR
-	_exampleCylinder : ExampleCylinder(THIS^);
+	_exampleCylinder : ExampleCylinder(THIS^, TcoCore.NO.Structure);
 	_atHome : BOOL;
 	_atWork : BOOL;
 	_toHome : BOOL;

@@ -32,7 +32,7 @@ END_IF
     _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
+          <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent, _drive) THEN
     DriveRef REF= _drive.DriveRef;
 END_IF]]></ST>
         </Implementation>
@@ -43,10 +43,11 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-    Parent : ITcoObject;
+  	ParentObject : ITcoObject;
+	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject, ParentStruct := ParentStruct);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{72d4d2a3-5082-0045-31b5-fff519bd5b2b}">

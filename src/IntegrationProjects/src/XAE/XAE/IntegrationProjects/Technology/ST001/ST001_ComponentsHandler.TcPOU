@@ -5,15 +5,15 @@
 VAR
 	ToMirror:STRING;
 	{attribute addProperty Name "<#PART PRESENCE SENSOR#>"}
-	_partPresent : TcoElements.TcoDi(THIS^);
+	_partPresent : TcoElements.TcoDi(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty Name "<#START BUTTON#>"}
-    _startButton : TcoElements.TcoDi(THIS^);
+    _startButton : TcoElements.TcoDi(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty Name "<#PRESS PISTON#>"}
-    _press : TcoPneumatics.TcoCylinder(THIS^);
+    _press : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty Name "<#ALARM OUTPUT#>"}
-	_alarmOutput : TcoElements.TcoDo(THIS^);
+	_alarmOutput : TcoElements.TcoDo(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty Name "<#DRIVE#>"}
-	_drive : TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+	_drive : TcoDrivesBeckhoff.TcoDriveSimple(THIS^, TcoCore.NO.Structure);
 END_VAR
 ]]></Declaration>
     <Implementation>

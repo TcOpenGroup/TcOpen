@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001_Components" Id="{8b14ec5b-9847-472b-9d17-41640e0e6ee8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_Components EXTENDS TcoCore.TcoObject
 VAR	
 	{attribute addProperty Name "Horizontal cyclinder A1"}
-	_horizontal : fbPiston(THIS^);
+	_horizontal : fbPiston(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty Name "Vertical cyclinder A2"}
-	_vertical : fbPiston(THIS^);
+	_vertical : fbPiston(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty Name "Gripper A3"}
-	_gripper : fbPiston(THIS^);			
+	_gripper : fbPiston(THIS^, TcoCore.NO.Structure);			
 END_VAR
 
 VAR

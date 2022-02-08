@@ -5,13 +5,13 @@
 VAR
 	_serviceModeActive		:	BOOL;
 	{attribute addProperty Name "<#Test axis 1#>"}
-	_axis1					:	TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+	_axis1					:	TcoDrivesBeckhoff.TcoDriveSimple(THIS^, TcoCore.NO.Structure);
 	_enable1				:	BOOL;			
 	_enablePositive1		:	BOOL;				
 	_enableNegative1		:	BOOL;        	
 	_calibrationCam1 		:	BOOL;        
 	{attribute addProperty Name "<#Test axis 2#>"}
-	_axis2	: TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+	_axis2	: TcoDrivesBeckhoff.TcoDriveSimple(THIS^, TcoCore.NO.Structure);
 	_enable2				:	BOOL;			
 	_enablePositive2		:	BOOL;				
 	_enableNegative2		:	BOOL;        	

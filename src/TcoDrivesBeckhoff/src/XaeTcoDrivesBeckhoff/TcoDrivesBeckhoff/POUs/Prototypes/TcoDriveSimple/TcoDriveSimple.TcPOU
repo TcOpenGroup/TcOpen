@@ -18,7 +18,7 @@ VAR
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
     _mcReadStatus : Tc2_MC2.MC_ReadStatus;
-    _power : Power(THIS^);
+    _power : Power(THIS^, TcoCore.NO.Structure);
     {attribute 'hide'}
     _override : LREAL := 100.0;
     {attribute clr [ReadOnly()]}
@@ -28,29 +28,29 @@ END_VAR
 VAR
     {attribute addProperty Name "<#Movement state#>"}
     {attribute clr [ReadOnly()]}
-    _movementState : TcoMovementState(THIS^,TcoCore.eRestoreMode.None);
+    _movementState : TcoMovementState(THIS^, TcoCore.NO.Structure,TcoCore.eRestoreMode.None);
     {attribute addProperty Name "<#Reset#>"}
-    _resetTask : ResetTask(THIS^);
+    _resetTask : ResetTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#SoE reset#>"}
-    _soEResetTask : SoEResetTask(THIS^);
+    _soEResetTask : SoEResetTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Set position#>"}
-    _setPositionTask : SetPositionTask(THIS^);
+    _setPositionTask : SetPositionTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Homing#>"}
-    _homeTask : HomeTask(THIS^);
+    _homeTask : HomeTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Jogging#>"}
-    _jog : Jog(THIS^);
+    _jog : Jog(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Move velocity#>"}
-    _moveVelocityTask : MoveVelocityTask(THIS^);
+    _moveVelocityTask : MoveVelocityTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Stop#>"}
-    _stopTask : StopTask(THIS^);
+    _stopTask : StopTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Halt#>"}
-    _haltTask : HaltTask(THIS^);
+    _haltTask : HaltTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Move relative#>"}
-    _moveRelativeTask : MoveRelativeTask(THIS^);
+    _moveRelativeTask : MoveRelativeTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Move absolute#>"}
-    _moveAbsoluteTask : MoveAbsoluteTask(THIS^);
+    _moveAbsoluteTask : MoveAbsoluteTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "<#Move modulo#>"}
-    _moveModuloTask : MoveModuloTask(THIS^);
+    _moveModuloTask : MoveModuloTask(THIS^, TcoCore.NO.Structure);
 END_VAR
 
 VAR
@@ -136,12 +136,13 @@ _axisStatus.ErrorId := 0;
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+  	ParentObject : ITcoObject;
+	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject, ParentStruct := ParentStruct);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Halt" Id="{06b4c873-3aa4-03d0-22c1-6924d11db75b}" FolderPath="Motion\">

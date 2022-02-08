@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="VitoCorleone_Context" Id="{6d11b071-a8fb-0da4-121f-f03cc1d5b01d}" SpecialFunc="None">
     <Declaration><![CDATA[//--
 // <ContextExampleDeclarations>
@@ -17,11 +17,11 @@ VAR
 	These are Don Corleone's children. When you look inside definitions you' find 
 	Don Corleone's grand-childrend (whole family shares the same context).
 *)
-	_santino : Santino_Object(THIS^);
-	_thomas : Thomas_Object(THIS^);
-	_frederico : Frederico_Object(THIS^);
-	_michael : Michael_Object(THIS^);
-	_costanzia : Constanzia_Object(THIS^);
+	_santino : Santino_Object(THIS^, TcoCore.NO.Structure);
+	_thomas : Thomas_Object(THIS^, TcoCore.NO.Structure);
+	_frederico : Frederico_Object(THIS^, TcoCore.NO.Structure);
+	_michael : Michael_Object(THIS^, TcoCore.NO.Structure);
+	_costanzia : Constanzia_Object(THIS^, TcoCore.NO.Structure);
 END_VAR
 
 VAR
@@ -36,7 +36,7 @@ END_VAR
 
 VAR
 	_JohnyFontaneCaseDone	:	BOOL := FALSE;
-	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^, eRestoreMode.None);
+	_MakeAnOfferThatCantBeRefused	:	MakeAnOfferThatCantBeRefused(THIS^, TcoCore.NO.Structure, eRestoreMode.None);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

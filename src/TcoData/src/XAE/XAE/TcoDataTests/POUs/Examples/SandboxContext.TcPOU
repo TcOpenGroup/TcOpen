@@ -5,7 +5,7 @@
 //<Declaration>
 FUNCTION_BLOCK SandboxContext EXTENDS TcoCore.TcoContext
 VAR
-    DataManager : TcoDataManager(THIS^);
+    DataManager : TcoDataManager(THIS^, TcoCore.NO.Structure);
 END_VAR
 //</Declaration>
 VAR

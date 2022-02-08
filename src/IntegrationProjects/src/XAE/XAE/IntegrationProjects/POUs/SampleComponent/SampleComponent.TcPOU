@@ -41,7 +41,7 @@ VAR
 END_VAR
 
 VAR	
-	_sampleTask : SampleTaskIteration(THIS^);
+	_sampleTask : SampleTaskIteration(THIS^, TcoCore.NO.Structure);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_addResult := THIS^.AddTwoNumbers(_addNumberOne, _addNumberTwo);
@@ -84,7 +84,8 @@ END_VAR
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
+	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
 END_VAR
 
 ]]></Declaration>

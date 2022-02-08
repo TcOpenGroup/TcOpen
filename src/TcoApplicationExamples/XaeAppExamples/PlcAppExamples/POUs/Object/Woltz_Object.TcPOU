@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Woltz_Object" Id="{5f3c91dc-f440-03e0-2cf3-ff1d155e00ef}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Woltz_Object EXTENDS Person_Object
 VAR
-	_Khartoum		:	Horse_Object(THIS^);
+	_Khartoum		:	Horse_Object(THIS^, TcoCore.NO.Structure);
 END_VAR
 ]]></Declaration>
     <Implementation>

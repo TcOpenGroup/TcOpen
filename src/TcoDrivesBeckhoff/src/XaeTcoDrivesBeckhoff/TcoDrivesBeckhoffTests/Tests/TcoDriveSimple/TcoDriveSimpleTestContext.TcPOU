@@ -3,7 +3,7 @@
   <POU Name="TcoDriveSimpleTestContext" Id="{eb079fb3-48a6-04a2-0434-bd84aa928492}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimpleTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut : TcoDriveSimpleTest(THIS^);
+    _sut : TcoDriveSimpleTest(THIS^, TcoCore.NO.Structure);
     _callMyPlcInstance : BOOL := FALSE;
     _enable : BOOL;
     _enablePositive : BOOL;

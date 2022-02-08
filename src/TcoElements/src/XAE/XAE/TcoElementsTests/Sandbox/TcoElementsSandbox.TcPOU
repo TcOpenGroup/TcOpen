@@ -3,8 +3,8 @@
   <POU Name="TcoElementsSandbox" Id="{c46022e7-7bf1-0c54-0deb-015ecc103f2a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoElementsSandbox EXTENDS TcoCore.TcoContext
 VAR
-	_di : TcoElements.TcoDi(THIS^);
-	_do : TcoElements.TcoDo(THIS^);
+	_di : TcoElements.TcoDi(THIS^, TcoCore.NO.Structure);
+	_do : TcoElements.TcoDo(THIS^, TcoCore.NO.Structure);
 	_diSignal : BOOL;
 	_doSignal : BOOL;
 END_VAR]]></Declaration>

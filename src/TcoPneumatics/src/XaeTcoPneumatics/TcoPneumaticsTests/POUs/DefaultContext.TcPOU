@@ -6,13 +6,13 @@ VAR
 	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME a#>"}
 	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK a#>"}
 	{attribute addProperty _stopDefaultName "<#STOP a#>"}
-    _wpfCyclinder : TcoPneumatics.TcoCylinder(THIS^);
+    _wpfCyclinder : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty NameMoveHomeTask "<#In task#>"}
-    _wpfCyclinder_1 : TcoPneumatics.TcoCylinder(THIS^);
+    _wpfCyclinder_1 : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty NameMoveHomeTask "<#In task#>"}
-    _wpfCyclinder_2 : TcoPneumatics.TcoCylinder(THIS^);
+    _wpfCyclinder_2 : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
 	{attribute addProperty NameMoveHomeTask "<#In task#>"}
-    _wpfCyclinder_3 : TcoPneumatics.TcoCylinder(THIS^);
+    _wpfCyclinder_3 : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

@@ -3,7 +3,7 @@
   <POU Name="NF_Logic" Id="{a15ad3d6-c3ee-43f1-a95a-15ff90bf4019}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK NF_Logic
 VAR
-	_piston : TcoPneumatics.TcoCylinder(NF_MAIN.Context);
+	_piston : TcoPneumatics.TcoCylinder(NF_MAIN.Context, TcoCore.NO.Structure);
 	_signals : ARRAY[0..3] OF BOOL;
 END_VAR
 ]]></Declaration>

@@ -7,11 +7,11 @@
 FUNCTION_BLOCK TcoCylinder EXTENDS TcoCylinderBase
 VAR
     {attribute addProperty Name "|[[1]Attribute_moveHomeDefaultName]|"}
-    _moveHomeDefault : TcoCylinderMoveTask(THIS^);
+    _moveHomeDefault : TcoCylinderMoveTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "|[[1]Attribute_moveWorkDefaultName]|"}
-    _moveWorkDefault : TcoCylinderMoveTask(THIS^);
+    _moveWorkDefault : TcoCylinderMoveTask(THIS^, TcoCore.NO.Structure);
     {attribute addProperty Name "|[[1]Attribute_stopDefaultName]|"}
-    _stopDefault : TcoCore.TcoTask(THIS^);
+    _stopDefault : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
 END_VAR
 VAR
     _config : TcoCylinderConfig;
