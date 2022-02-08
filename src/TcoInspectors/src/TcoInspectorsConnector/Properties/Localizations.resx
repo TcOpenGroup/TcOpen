@@ -123,23 +123,26 @@
   <data name="___Stab_Time__" xml:space="preserve">
     <value>Stab.Time</value>
   </data>
-  <data name="___Stabilisation_time__The_inspection_will_pass_when_the_condition_is_met_for_the_duration_of_this_time___" xml:space="preserve">
-    <value>Stabilisation time. The inspection will pass when the condition is met for the duration of this time.</value>
+  <data name="___Stabilisation_time__The_inspection_will_pass_when_the_condition_is_met_continuously_for_the_duration_of_this_timespan___" xml:space="preserve">
+    <value>Stabilisation time. The inspection will pass when the condition is met continuously for the duration of this timespan.</value>
   </data>
   <data name="___Timeout__" xml:space="preserve">
     <value>Timeout</value>
   </data>
-  <data name="___Timeout__Max_duration_of_the_inspection_within_which_the_condition_must_be_met__over_this_time_span_the_test_will_fail___" xml:space="preserve">
-    <value>Timeout. Max duration of the inspection within which the condition must be met; over this time span the test will fail.</value>
+  <data name="___Timeout__Maximal_duration_of_the_inspection_within_which_the_condition_must_be_met___" xml:space="preserve">
+    <value>Timeout. Maximal duration of the inspection within which the condition must be met.</value>
   </data>
   <data name="___Result__" xml:space="preserve">
     <value>Result</value>
   </data>
+  <data name="___Result_of_the_inspection___" xml:space="preserve">
+    <value>Result of the inspection.</value>
+  </data>
   <data name="___Exclude__" xml:space="preserve">
     <value>Exclude</value>
   </data>
-  <data name="___Test_is_exclusion_from_evaluation__The_test_will_however_run_and_provide_detected_value___" xml:space="preserve">
-    <value>Test is exclusion from evaluation. The test will however run and provide detected value.</value>
+  <data name="___Inspection_is_excluded_from_the_evaluation__The_test_will_however_run_and_provide_detected_value___" xml:space="preserve">
+    <value>Inspection is excluded from the evaluation. The test will however run and provide detected value.</value>
   </data>
   <data name="___Bypass__" xml:space="preserve">
     <value>Bypass</value>
@@ -150,6 +153,9 @@
   <data name="___Failure_description__" xml:space="preserve">
     <value>Failure description</value>
   </data>
+  <data name="___Brief_failure_desciption__" xml:space="preserve">
+    <value>Brief failure desciption</value>
+  </data>
   <data name="___Re_tries__" xml:space="preserve">
     <value>Re-tries</value>
   </data>
@@ -159,38 +165,29 @@
   <data name="___Attempts__" xml:space="preserve">
     <value>Attempts</value>
   </data>
-  <data name="___Counter_of_re_tries___" xml:space="preserve">
-    <value>Counter of re-tries.</value>
+  <data name="___Re_tries_counter__count_the_number_of_times_the_inspection_run_on_this_inspector_instance___" xml:space="preserve">
+    <value>Re-tries counter, count the number of times the inspection run on this inspector instance.</value>
   </data>
   <data name="___Code__" xml:space="preserve">
     <value>Code</value>
   </data>
-  <data name="___Arbitrary_code_for_this_inspection__" xml:space="preserve">
-    <value>Arbitrary code for this inspection</value>
-  </data>
-  <data name="___REQUIRED_STATUS__" xml:space="preserve">
-    <value>REQUIRED STATUS</value>
-  </data>
-  <data name="___MEASURED__" xml:space="preserve">
-    <value>MEASURED</value>
-  </data>
-  <data name="___STAR_NOTATION__" xml:space="preserve">
-    <value>STAR NOTATION</value>
-  </data>
-  <data name="___MIN___" xml:space="preserve">
-    <value>MIN.</value>
-  </data>
-  <data name="___MAX___" xml:space="preserve">
-    <value>MAX.</value>
+  <data name="___Arbitrary_error_code_for_this_inspection__" xml:space="preserve">
+    <value>Arbitrary error code for this inspection</value>
   </data>
   <data name="___Required__" xml:space="preserve">
     <value>Required</value>
   </data>
-  <data name="___Set_the_required_status_for_the_inspection_to_pass___" xml:space="preserve">
-    <value>Set the required status for the inspection to pass.</value>
-  </data>
   <data name="___Detected__" xml:space="preserve">
     <value>Detected</value>
+  </data>
+  <data name="___Min___" xml:space="preserve">
+    <value>Min.</value>
+  </data>
+  <data name="___Max___" xml:space="preserve">
+    <value>Max.</value>
+  </data>
+  <data name="___Set_the_required_status_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Set the required status for the inspection to pass.</value>
   </data>
   <data name="___Displays_detected_status_of_this_check___" xml:space="preserve">
     <value>Displays detected status of this check.</value>

@@ -3,10 +3,99 @@
   <POU Name="ExampleContext" Id="{1aa2a6c1-d36a-0374-1754-fb6150365769}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleContext EXTENDS TcoCore.TcoContext
 VAR
-
+    Data            : ExampleInspectorsStruct := (Parent := THIS^);
+    Components      : ExampleComponents       := (Parent := THIS^);
+    _sequence1      : TcoCore.TcoSequence(THIS^, TcoCore.NO.Structure, eRestoreMode.None);
+    GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^, TcoCore.NO.Structure);
+    _observer       : TcoCore.TcoSequencerObserver(THIS^, TcoCore.NO.Structure);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="Main" Id="{f951dcde-2a62-0b5b-22de-91190916af80}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Sequence1();
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Sequence1" Id="{fef70385-7bed-099c-3214-bed4b6f98420}">
+      <Declaration><![CDATA[METHOD Sequence1
+VAR
+	seq : REFERENCE TO TcoCore.TcoSequence;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[seq REF= _sequence1;
+
+seq.Open();
+seq.Observer := _observer;
+
+IF (seq.Step(inStepID := 50,
+    inEnabled := TRUE,
+    inStepDescription := 'INIT')) THEN
+    //--------------------------------------------------------    
+	 	Data.OverallResult.Result     := eOverallResult.NoAction;
+        Data.OverallResult.Failures   := '';
+        Data.OverallResult.ErrorCodes := '';
+		seq.CompleteStep();
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 100,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT DMC CODE')) THEN
+    //--------------------------------------------------------
+    Data.DmcInspector.Inspect(Components.DmcReader)
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .OnFail(seq)
+        .CarryOn();
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 200,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT BOLT PRESENCE')) THEN
+    //--------------------------------------------------------
+    Data.BoltPresenceInspector.Inspect(Components.BoltPresenceSensor)
+		.UpdateComprehensiveResult(Data.OverallResult)
+        .OnFail(seq)
+        .CarryOn();
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 300,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT DIMENSIONS')) THEN
+    //--------------------------------------------------------
+    GroupInspection.Act(Data.OverallResult)
+        .Inspect(Data.DimX_Inspector.Inspect(Components.DimX_Sensor))
+        .Inspect(Data.DimY_Inspector.Inspect(Components.DimY_Sensor))
+        .Inspect(Data.DimZ_Inspector.Inspect(Components.DimZ_Sensor))
+		.UpdateComprehensiveResult(Data.OverallResult)
+        .OnFail(seq).CarryOn();
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 400,
+    inEnabled := TRUE,
+    inStepDescription := '')) THEN
+    //--------------------------------------------------------
+    seq.CompleteSequence();
+    //--------------------------------------------------------			
+END_IF;
+
+seq.Close();]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

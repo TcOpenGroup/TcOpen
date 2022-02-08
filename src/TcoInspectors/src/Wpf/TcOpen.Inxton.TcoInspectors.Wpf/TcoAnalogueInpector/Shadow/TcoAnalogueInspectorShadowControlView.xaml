@@ -39,25 +39,7 @@
                 </Grid>
             </Expander.Header>
 
-            <Grid Margin="2.5">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.IsSharedSizeScope="True">
-                    <WrapPanel>
-                        <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.PassTime}" PresentationType="ShadowControlSlim"/>
-                        <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.FailTime}" PresentationType="ShadowControlSlim"/>
-                        <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.ErrorCode}" PresentationType="ShadowControlSlim"/>
-                        <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.FailureDescription}" PresentationType="ShadowControlSlim"/>
-                    </WrapPanel>
-                </StackPanel>
-                <!--<controls:HelpProviderView Grid.Row="1">
-                    <controls:HelpProviderView.DataContext>
-                        <controls:HelpProviderViewModel ComponentName="TcoDigitalInspectorShadowControlView" />
-                    </controls:HelpProviderView.DataContext>
-                </controls:HelpProviderView>-->
-            </Grid>
+            <local:GenericTcoInspectorDataView DataContext="{Binding _data}" PresentationType="ShadowControlSlim"></local:GenericTcoInspectorDataView>
         </Expander>
         
     </StackPanel>

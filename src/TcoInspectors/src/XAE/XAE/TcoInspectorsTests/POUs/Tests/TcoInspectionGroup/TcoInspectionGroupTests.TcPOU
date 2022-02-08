@@ -3,12 +3,12 @@
   <POU Name="TcoInspectionGroupTests" Id="{982692a5-9906-0157-21ab-dccd4c43da53}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroupTests EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut                 : TcoInspectors.TcoInspectionGroup(THIS^);
-    _diis                : ARRAY[0..1] OF TcoInspectors.TcoDigitalInspector(THIS^);
+    _sut                 : TcoInspectors.TcoInspectionGroup(THIS^, TcoCore.NO.Structure);
+    _diis                : ARRAY[0..1] OF TcoInspectors.TcoDigitalInspector(THIS^, TcoCore.NO.Structure);
     _dii_inspectedValues : ARRAY[0..1] OF BOOL;
-    _dais                : ARRAY[0..1] OF TcoInspectors.TcoAnalogueInspector(THIS^);
+    _dais                : ARRAY[0..1] OF TcoInspectors.TcoAnalogueInspector(THIS^, TcoCore.NO.Structure);
     _dai_inspectedValues : ARRAY[0..1] OF REAL;
-    _ddis                : ARRAY[0..1] OF TcoInspectors.TcoDataInspector(THIS^);
+    _ddis                : ARRAY[0..1] OF TcoInspectors.TcoDataInspector(THIS^, TcoCore.NO.Structure);
     _ddi_inspectedValues : ARRAY[0..1] OF STRING;
     _overallResult       : TcoInspectors.TcoComprehensiveResult;
     _coordinator         : MockCoordinator;
@@ -24,7 +24,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF
     eInspectionGroupTests.Inspect:
-         THIS^.ProbeDoneWhen(_sut.Act()
+         THIS^.ProbeDoneWhen(_sut.Act(_overallResult)
                  .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
                  .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
                  .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
@@ -33,7 +33,7 @@ END_VAR]]></Declaration>
                  .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1]))
                  .UpdateComprehensiveResult(_overallResult).Done);
     eInspectionGroupTests.OnFailCarryOn:
-        THIS^.ProbeDoneWhen(_sut.Act()
+        THIS^.ProbeDoneWhen(_sut.Act(_overallResult)
                 .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
                 .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
                 .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
@@ -44,7 +44,7 @@ END_VAR]]></Declaration>
                 .OnFail(_coordinator)
                 .CarryOn());
     eInspectionGroupTests.OnFailRetry:
-        THIS^.ProbeDoneWhen(_sut.Act()
+        THIS^.ProbeDoneWhen(_sut.Act(_overallResult)
                 .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
                 .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
                 .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
@@ -55,7 +55,7 @@ END_VAR]]></Declaration>
                 .OnFail(_coordinator)
                 .Retry(_retryState));
     eInspectionGroupTests.OnFailTerminate:
-        THIS^.ProbeDoneWhen(_sut.Act()
+        THIS^.ProbeDoneWhen(_sut.Act(_overallResult)
                 .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
                 .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
                 .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))

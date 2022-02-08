@@ -16,7 +16,7 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty Name "<#REQUIRED STATUS#>"}
+        {attribute addProperty Name "<#Required#>"}
         {attribute 'qlik_load:RequiredStatus'}
         RequiredStatus : STRING(255);
 
@@ -27,7 +27,7 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MEASURED#>"}
+        {attribute addProperty  Name "<#Detected#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:Measured'}
         DetectedStatus : STRING(255);  
@@ -40,7 +40,7 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#STAR NOTATION#>"}
+        {attribute addProperty  Name "<*>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:Measured'}
 		StarNotationEnabled : BOOL;      

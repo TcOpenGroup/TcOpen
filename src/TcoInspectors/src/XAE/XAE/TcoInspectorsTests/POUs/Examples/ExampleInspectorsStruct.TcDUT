@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ExampleInspectorsStruct" Id="{f953be94-8717-0ec0-0454-eb9938928522}">
+    <Declaration><![CDATA[TYPE
+    ExampleInspectorsStruct EXTENDS TcoCore.TcoStruct :
+    STRUCT
+        OverallResult         : TcoInspectors.TcoComprehensiveResult;
+        DmcInspector          : TcoInspectors.TcoDataInspector(TcoCore.NO.Obj, THIS^);
+        BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(TcoCore.NO.Obj, THIS^);
+        DimX_Inspector        : TcoInspectors.TcoAnalogueInspector(TcoCore.NO.Obj, THIS^);
+        DimY_Inspector        : TcoInspectors.TcoAnalogueInspector(TcoCore.NO.Obj, THIS^);
+        DimZ_Inspector        : TcoInspectors.TcoAnalogueInspector(TcoCore.NO.Obj, THIS^);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -3,7 +3,7 @@
   <POU Name="LegacyTcoDigitalInspectorTests" Id="{1c051af3-3134-0bbf-1262-4c56487a703f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK LegacyTcoDigitalInspectorTests EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut            : TcoInspectors.TcoDigitalInspector(THIS^);
+    _sut            : TcoInspectors.TcoDigitalInspector(THIS^, TcoCore.NO.Structure);
     _inspectedValue : BOOL;
     _result         : TcoInspectors.eInspectorResult;
     _isOverIspected : BOOL;

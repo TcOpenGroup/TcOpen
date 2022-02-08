@@ -61,7 +61,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inspection did run but is excluded from the evaluation.
+        ///   Looks up a localized string similar to Excluded.
         /// </summary>
         public static string InspectionDidRunButIsExcludedFromTheEvaluation {
             get {
@@ -70,7 +70,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inspection failed.
+        ///   Looks up a localized string similar to Failed.
         /// </summary>
         public static string InspectionFailed {
             get {
@@ -79,7 +79,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inspection inconclusive.
+        ///   Looks up a localized string similar to Inconclusive.
         /// </summary>
         public static string InspectionInconclusive {
             get {
@@ -88,7 +88,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inspection is running.
+        ///   Looks up a localized string similar to Running.
         /// </summary>
         public static string InspectionIsRunning {
             get {
@@ -97,7 +97,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inspection passed.
+        ///   Looks up a localized string similar to Passed.
         /// </summary>
         public static string InspectionPassed {
             get {
@@ -106,7 +106,7 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inspection was bypassed.
+        ///   Looks up a localized string similar to Bypassed.
         /// </summary>
         public static string InspectionWasBypassed {
             get {

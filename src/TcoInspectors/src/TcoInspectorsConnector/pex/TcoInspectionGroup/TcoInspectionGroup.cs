@@ -8,7 +8,7 @@ namespace TcoInspectors
 {
     public partial class TcoInspectionGroup
     {
-        public eOverallResult ResultAsEnum { get { return (eOverallResult)this._result.Result.Synchron; } }
+        public eOverallResult ResultAsEnum { get { return (eOverallResult)this._sharedResult.Result.Synchron; } }
        
     }
 }

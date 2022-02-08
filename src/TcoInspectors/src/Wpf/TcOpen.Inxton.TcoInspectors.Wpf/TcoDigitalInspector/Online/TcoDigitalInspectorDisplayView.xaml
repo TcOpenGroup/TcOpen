@@ -24,15 +24,17 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorName"/>
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorNameGroup" />
                         <ColumnDefinition Width="33*" />
                         <ColumnDefinition Width="33*" />
                         <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
                     <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
                     <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredStatus}" PresentationType="DisplaySlim"/>
                     <controls:RenderableContentControl Grid.Column="2" DataContext="{Binding _data.DetectedStatus}" PresentationType="DisplaySlim"/>
-                    <StackPanel Grid.Column="3">
+                    <StackPanel Grid.Column="5">
                         <materialDesign:PackIcon HorizontalAlignment="Stretch" 
                                                  VerticalAlignment="Stretch"                                                  
                                                  Width="20"
@@ -40,31 +42,12 @@
                                                  Kind="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsIconConverter}}" 
                                                  Background="WhiteSmoke"
                                                  Foreground="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsResultColorConverter}}"/>
-                        <TextBlock FontSize="10" HorizontalAlignment="Center" Text="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsResultDescriptionConverter}}"></TextBlock>
+                        <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Text="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsResultDescriptionConverter}}"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Expander.Header>
 
-            <Grid Margin="2.5">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <WrapPanel>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.TimeStamp}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.PassTime}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.FailTime}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.NumberOfAllowedRetries}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.RetryAttemptsCount}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.ErrorCode}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.FailureDescription}" PresentationType="DisplaySlim"/>
-                </WrapPanel>
-                <!--<controls:HelpProviderView Grid.Row="1">
-                    <controls:HelpProviderView.DataContext>
-                        <controls:HelpProviderViewModel ComponentName="TcoDigitalInspectorShadowControlView" />
-                    </controls:HelpProviderView.DataContext>
-                </controls:HelpProviderView>-->
-            </Grid>
+            <local:GenericTcoInspectorDataView DataContext="{Binding _data}" PresentationType="DisplaySlim"></local:GenericTcoInspectorDataView>
         </Expander>
 
     </StackPanel>

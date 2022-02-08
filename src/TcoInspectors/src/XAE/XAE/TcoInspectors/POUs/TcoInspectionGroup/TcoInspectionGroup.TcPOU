@@ -3,8 +3,11 @@
   <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroupInspect
 VAR
+	{attribute 'hide'}
     _done   : BOOL;
-    _result : TcoComprehensiveResult;
+	{attribute 'hide'}
+    _result : REFERENCE TO TcoComprehensiveResult;
+	_sharedResult : TcoComprehensiveResult;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -17,9 +20,13 @@ END_VAR]]></Declaration>
 	</summary>
 ~*)
 METHOD Act : ITcoInspectionGroupInspect
-]]></Declaration>
+VAR_IN_OUT
+	inoResult : TcoComprehensiveResult;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Act   := THIS^;
+_result REF=inoResult;
+_sharedResult := _result;
 _done := TRUE;]]></ST>
       </Implementation>
     </Method>
@@ -46,10 +53,13 @@ END_VAR
         <ST><![CDATA[Inspect := THIS^;
 
 IF (NOT Inspector.Done) THEN
-    _done := FALSE;		
+    _done := FALSE;					
 END_IF
 
-Inspector.UpdateComprehensiveResult(_result);]]></ST>
+Inspector.UpdateComprehensiveResult(_result);
+	
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Retry" Id="{35486965-61f5-0154-3790-1cbb7d6396ad}" FolderPath="OnFail\">
@@ -124,15 +134,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
-
-IF(_done) THEN 	
-	CASE _result.Result OF
-		eOverallResult.NoAction :
-			_result.Result := eOverallResult.InProgress; 
-	END_CASE
-	
- 	inoResult := _result;
-END_IF
+_sharedResult := _result;
 
 
 ]]></ST>

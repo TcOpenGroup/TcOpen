@@ -44,7 +44,7 @@ namespace TcoInspectorsUnitTests
 
             container.ExecuteProbeRun(1, 0);
             InspectorContainer._overallResult.Result.Synchron = 0;
-            container._sut._result.Result.Synchron = 0;
+            container._sut._sharedResult.Result.Synchron = 0;
         }
 
 
@@ -55,11 +55,13 @@ namespace TcoInspectorsUnitTests
 
             container.ExecuteProbeRun((int)eInspectionGroupTests.Inspect);
 
-            Assert.AreEqual((short)eOverallResult.Failed, container._sut._result.Result.Synchron);
+            Assert.AreEqual((short)eOverallResult.Failed, container._sut._sharedResult.Result.Synchron);
         }
 
         private void set_to_fail()
         {
+            container._diis[0]._data.PassTime.Synchron = System.TimeSpan.FromSeconds(1);
+            container._diis[0]._data.FailTime.Synchron = System.TimeSpan.FromSeconds(2);
             container._diis[0]._data.RequiredStatus.Synchron = true;
             container._dii_inspectedValues[0].Synchron = true;
 
@@ -88,7 +90,7 @@ namespace TcoInspectorsUnitTests
 
             container.ExecuteProbeRun((int)eInspectionGroupTests.Inspect);
 
-            Assert.AreEqual((short)eOverallResult.InProgress, container._sut._result.Result.Synchron);
+            Assert.AreEqual((short)eOverallResult.NoAction, container._sut._sharedResult.Result.Synchron);
         }
 
         private void set_to_pass()
@@ -137,7 +139,7 @@ namespace TcoInspectorsUnitTests
             var expectedState = initialState + 1;
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.OnFailCarryOn);
-            Assert.AreEqual(eOverallResult.InProgress, InspectorContainer._sut.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.NoAction, InspectorContainer._sut.ResultAsEnum);
 
             Assert.AreEqual(expectedState, InspectorContainer._coordinator._state.Synchron);
         }
@@ -163,7 +165,7 @@ namespace TcoInspectorsUnitTests
             var expectedState = initialState + 1;
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.OnFailTerminate);
-            Assert.AreEqual(eOverallResult.InProgress, InspectorContainer._sut.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.NoAction, InspectorContainer._sut.ResultAsEnum);
 
             Assert.AreEqual(expectedState, InspectorContainer._coordinator._state.Synchron);
         }
@@ -176,7 +178,7 @@ namespace TcoInspectorsUnitTests
             var expectedState = initialState + 1;
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.OnFailRetry);
-            Assert.AreEqual(eOverallResult.InProgress, InspectorContainer._sut.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.NoAction, InspectorContainer._sut.ResultAsEnum);
 
             Assert.AreEqual(expectedState, InspectorContainer._coordinator._state.Synchron);
         }

@@ -15,11 +15,32 @@
     </Window.DataContext>
     <Grid Grid.Row="0">
         <TabControl>
-            <TabItem>
-                <StackPanel>
-                    <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._examplesContext._exampleData}" PresentationType="Control"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._examplesContext._exampleCompnents}" PresentationType="Control"></vortex:RenderableContentControl>
-                </StackPanel>
+            <TabItem Header="Examples">
+                <ScrollViewer>
+                    <StackPanel  Grid.IsSharedSizeScope="True">
+                        <TabControl MaxHeight="600">
+                            <TabItem Header="Online">
+                                <Viewbox>
+                                    <UniformGrid>
+                                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ControlSlim-Control"></vortex:RenderableContentControl>
+                                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="DisplaySlim-Display"></vortex:RenderableContentControl>
+                                    </UniformGrid>
+                                </Viewbox>
+                            </TabItem>
+                            <TabItem Header="Shadow">
+                                <Viewbox>
+                                    <UniformGrid>
+                                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ShadowControlSlim-ShadowControl"></vortex:RenderableContentControl>
+                                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ShadowDisplaySlim-ShadowDisplay"></vortex:RenderableContentControl>
+                                    </UniformGrid>
+                                </Viewbox>
+                            </TabItem>
+                        </TabControl>
+                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
+                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Manually">
                 <StackPanel>

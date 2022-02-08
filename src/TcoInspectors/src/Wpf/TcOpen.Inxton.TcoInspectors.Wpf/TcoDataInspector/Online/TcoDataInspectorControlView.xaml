@@ -23,37 +23,23 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorName"/>
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorNameGroup" />
                         <ColumnDefinition Width="33*" />
                         <ColumnDefinition Width="33*" />
                         <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*"/>
                         <ColumnDefinition Width="33*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
                     <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredStatus}" PresentationType="ControlSlim"/>
                     <controls:RenderableContentControl Grid.Column="2" DataContext="{Binding _data.DetectedStatus}" PresentationType="ControlSlim"/>
-                    <controls:RenderableContentControl Grid.Column="3" DataContext="{Binding _data.IsByPassed}" PresentationType="ControlSlim"/>
-                    <controls:RenderableContentControl Grid.Column="4" DataContext="{Binding _data.IsExcluded}" PresentationType="ControlSlim"/>
+                    <controls:RenderableContentControl Grid.Column="4" DataContext="{Binding _data.IsByPassed}" PresentationType="ControlSlim"/>
+                    <controls:RenderableContentControl Grid.Column="5" DataContext="{Binding _data.IsExcluded}" PresentationType="ControlSlim"/>
                   
                 </Grid>
             </Expander.Header>
 
-            <Grid Margin="2.5">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <WrapPanel Grid.IsSharedSizeScope="True">
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.PassTime}" PresentationType="ControlSlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.FailTime}" PresentationType="ControlSlim"/>
-                    <controls:RenderableContentControl Margin="5" DataContext="{Binding _data.NumberOfAllowedRetries}" PresentationType="ControlSlim"/>
-                </WrapPanel>
-                <!--<controls:HelpProviderView Grid.Row="1">
-                    <controls:HelpProviderView.DataContext>
-                        <controls:HelpProviderViewModel ComponentName="TcoDigitalInspectorShadowControlView" />
-                    </controls:HelpProviderView.DataContext>
-                </controls:HelpProviderView>-->
-            </Grid>
+            <local:GenericTcoInspectorDataView DataContext="{Binding _data}" PresentationType="ControlSlim"></local:GenericTcoInspectorDataView>
         </Expander>
 
     </StackPanel>

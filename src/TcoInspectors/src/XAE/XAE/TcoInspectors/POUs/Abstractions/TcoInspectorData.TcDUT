@@ -29,7 +29,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Stab.Time#>"}
-		{attribute addProperty ToolTip "<#Stabilisation time. The inspection will pass when the condition is met for the duration of this time.#>"}
+		{attribute addProperty ToolTip "<#Stabilisation time. The inspection will pass when the condition is met continuously for the duration of this timespan.#>"}
         {attribute 'qlik_load:PassedTime'}
         PassTime : TIME;
 
@@ -41,7 +41,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Timeout#>"}
-		{attribute addProperty ToolTip "<#Timeout. Max duration of the inspection within which the condition must be met; over this time span the test will fail.#>"}
+		{attribute addProperty ToolTip "<#Timeout. Maximal duration of the inspection within which the condition must be met.#>"}
         {attribute 'qlik_load:FailedTime'}
         FailTime : TIME;
 
@@ -54,6 +54,7 @@ TYPE
 	~*)
         {attribute addProperty Name "<#Result#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+		{attribute addProperty ToolTip "<#Result of the inspection.#>"}
         {attribute 'qlik_load:Result'}
         Result : eInspectorResult;
 
@@ -66,7 +67,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Exclude#>"}
-		{attribute addProperty ToolTip "<#Test is exclusion from evaluation. The test will however run and provide detected value.#>"}
+		{attribute addProperty ToolTip "<#Inspection is excluded from the evaluation. The test will however run and provide detected value.#>"}
         {attribute 'qlik_load:IsExcluded'}
         IsExcluded : BOOL;
 
@@ -91,6 +92,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Failure description#>"}
+		{attribute addProperty ToolTip "<#Brief failure desciption#>"}
         {attribute 'qlik_ignore'}
         FailureDescription : STRING(100);
 
@@ -114,7 +116,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Attempts#>"}
-		{attribute addProperty ToolTip "<#Counter of re-tries.#>"}
+		{attribute addProperty ToolTip "<#Re-tries counter, count the number of times the inspection run on this inspector instance.#>"}
         {attribute 'qlik_load:RetryAttemptsCount'}
         RetryAttemptsCount : UINT;
 
@@ -126,7 +128,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Code#>"}
-		{attribute addProperty ToolTip "<#Arbitrary code for this inspection#>"}
+		{attribute addProperty ToolTip "<#Arbitrary error code for this inspection#>"}
         {attribute 'qlik_load:ErrorCode'}
         ErrorCode : STRING(20);
     END_STRUCT

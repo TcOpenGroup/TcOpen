@@ -16,7 +16,7 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MIN.#>"}
+        {attribute addProperty  Name "<#Min.#>"}
         {attribute 'qlik_load:Minimum'}
         RequiredMin : LREAL;
 
@@ -27,7 +27,7 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MEASURED#>"}
+        {attribute addProperty  Name "<#Detected#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:Measured'}
         DetectedStatus : LREAL;
@@ -39,7 +39,7 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MAX.#>"}
+        {attribute addProperty  Name "<#Max.#>"}
         {attribute 'qlik_load:Maximum'}
         RequiredMax : LREAL;
 

@@ -27,7 +27,13 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Examples\ExampleComponents.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Examples\ExampleContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Examples\ExampleInspectorsStruct.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
