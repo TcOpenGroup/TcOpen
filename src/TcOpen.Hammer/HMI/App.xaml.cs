@@ -48,7 +48,7 @@ namespace HMI
                     authenticationService = SecurityManager.Create(SetUpJsonRepository());
                     break;
             }
-                        
+
             ISecurityManager securityManager = SecurityManager.Manager;
             securityManager.GetOrCreateRole(new Role("Service", "Maintenance"));
 
@@ -57,8 +57,8 @@ namespace HMI
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
                                         .WriteTo.Console()        // This will write log into application console.  
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
-                                        // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
-                                        // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
+                                                                  // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
+                                                                  // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
@@ -66,7 +66,7 @@ namespace HMI
 
             // Initialize logger
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
-            
+
             // Set up data exchange
             switch (answer)
             {
@@ -80,8 +80,14 @@ namespace HMI
                     SetUpJsonRepositories();
                     break;
             }
+            ObserveModes();
 
+        }
 
+        private static IRepository<enumModesObservedValue> StationModesRepository { get; set; }
+        private static void ObserveModes()
+        {
+            Entry.PlcHammer.TECH_MAIN._app._station001._currentMode.PublishChanges((IRepository)StationModesRepository, x => new enumModesObservedValue(x));
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
@@ -98,7 +104,7 @@ namespace HMI
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
         }
 
-      
+
         private static IRepository<UserData> SetUpJsonRepository()
         {
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
@@ -138,8 +144,10 @@ namespace HMI
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
             var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
+            StationModesRepository = new MongoDbRepository<enumModesObservedValue>(new MongoDbRepositorySettings<enumModesObservedValue>(mongoUri, databaseName, "Station001_Modes"));
 
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
         }
     }
+
 }
