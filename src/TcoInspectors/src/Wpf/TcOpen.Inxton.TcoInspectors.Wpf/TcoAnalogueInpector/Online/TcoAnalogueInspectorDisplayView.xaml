@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="33*" />
                         <ColumnDefinition Width="33*" />
                         <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="33*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
                     <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredMin}" PresentationType="DisplaySlim"/>
@@ -42,9 +42,9 @@
                                                  Width="20"
                                                  Height="20"                                             
                                                  Kind="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsIconConverter}}" 
-                                                 Background="WhiteSmoke"
+                                                 Background="Transparent"
                                                  Foreground="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsResultColorConverter}}"/>
-                        <TextBlock FontSize="10"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Text="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsResultDescriptionConverter}}"></TextBlock>
+                        <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Text="{Binding _data.Result.Cyclic, Converter={wpf:InspectorsResultDescriptionConverter}}"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Expander.Header>

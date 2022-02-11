@@ -42,6 +42,12 @@
     <Compile Include="POUs\Abstractions\TcoInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TcoAnalogueInspector\ITcoAnalogueInspector.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataInspector\ITcoDataInspector.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TcoDataInspector\TcoDataInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -57,6 +63,9 @@
     <Compile Include="POUs\TcoAnalogueInspector\TcoAnalogueInspector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TcoDigitalInspector\ITcoDigitalInspector.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TcoDigitalInspector\TcoDigitalInspector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -69,7 +78,10 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoInspectionGroup\ITcoInspectionGroupInspect.TcIO">
+    <Compile Include="POUs\TcoInspectionGroup\ITcoInspectionGroup.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInspectionGroup\ITcoInspectionGroupAct.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoInspectionGroup\TcoInspectionGroup.TcPOU">

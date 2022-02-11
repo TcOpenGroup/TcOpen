@@ -17,6 +17,7 @@ TYPE
 		</docu>
 		~*)
         {attribute addProperty Name "<#Required#>"}
+		{attribute addProperty ToolTip "<#Required status for inspection to pass. Can contain pattern string when `Star notation is enabled`#>"}
         {attribute 'qlik_load:RequiredStatus'}
         RequiredStatus : STRING(255);
 
@@ -28,7 +29,8 @@ TYPE
 		</docu>
 		~*)
         {attribute addProperty  Name "<#Detected#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+		{attribute addProperty ToolTip "<#Detected data#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
         {attribute 'qlik_load:Measured'}
         DetectedStatus : STRING(255);  
 
@@ -40,8 +42,8 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<*>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty  Name "<*>"}  
+	    {attribute addProperty ToolTip "<#Required status for inspection to pass. Can contain pattern string when `Star notation is enabled`#>"}      
         {attribute 'qlik_load:Measured'}
 		StarNotationEnabled : BOOL;      
     END_STRUCT

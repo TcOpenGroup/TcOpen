@@ -563,6 +563,24 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="IsFreshState" Id="{459f46c2-28dc-0a61-39b7-19966f84e1e4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets `true` on the first entry into new state.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY IsFreshState : BOOL]]></Declaration>
+      <Get Name="Get" Id="{cf6057cc-0f52-00e1-14f6-a94a3ff96a60}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsFreshState := _isFirstStepEntry;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="IsStepIdUnique" Id="{2d2ec03e-06c8-0428-1481-3570b6299e7b}">
       <Declaration><![CDATA[(*~
 	<docu>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoInspectionGroupAct" Id="{4b55223e-07c6-07e2-1b54-43e08a7f842a}">
+    <Declaration><![CDATA[INTERFACE ITcoInspectionGroupAct
+]]></Declaration>
+    <Method Name="Act" Id="{42eb1b1c-426c-08e2-3972-a1db564e67f7}">
+      <Declaration><![CDATA[(*~
+	<summary>
+		Initiates grouped inspection.
+	</summary>
+~*)
+METHOD Act : ITcoInspectionGroup
+VAR_IN_OUT
+	inoResult : TcoComprehensiveResult;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

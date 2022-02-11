@@ -7,6 +7,7 @@ VAR
     _isOverIspected : BOOL;
     _overallResult  : TcoInspectors.TcoComprehensiveResult;
     _coordinator    : MockCoordinator;
+	i_coordinator    : TcoCore.ITcoCoordinator;
     _retryState     : INT;
 END_VAR]]></Declaration>
     <Implementation>
@@ -24,7 +25,9 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD PROTECTED Main
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE _testId OF
+        <ST><![CDATA[i_coordinator := _coordinator;
+
+CASE _testId OF
     0:
         _result         := 0;
         _isOverIspected := FALSE;
@@ -34,12 +37,22 @@ END_VAR]]></Declaration>
         _result         := Inspect().Result;
         _isOverIspected := Inspect().OverInspected;
     eInspectorTests.OnFailCarryOn:
-        THIS^.ProbeDoneWhen(Inspect().OnFail(_coordinator).CarryOn());
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().CarryOn());
     eInspectorTests.OnFailRetry:
-        THIS^.ProbeDoneWhen(Inspect().OnFail(_coordinator).Retry(_retryState));
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Retry(_retryState));
     eInspectorTests.OnFailTerminate:
-        THIS^.ProbeDoneWhen(Inspect().OnFail(_coordinator).Terminate());
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Terminate());
 END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{b8dd4de1-67da-007e-2884-ea72dd5478e5}">
+      <Declaration><![CDATA[METHOD ABSTRACT WithCoordinator : REFERENCE TO TcoInspectorTests
+VAR_INPUT
+	inoCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

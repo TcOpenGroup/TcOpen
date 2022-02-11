@@ -8,7 +8,7 @@
 </summary>
 </docu>
 ~*)
-FUNCTION_BLOCK TcoDataInspector EXTENDS TcoInspector
+FUNCTION_BLOCK TcoDataInspector EXTENDS TcoInspector IMPLEMENTS ITcoDataInspector
 VAR
     _data : TcoDataInspectorData;
 	{attribute 'hide'}
@@ -64,9 +64,14 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
 
+_inspectionData REF= _data;
+
 OnEnterInspection();
 
-_inspectionData REF= _data;
+IF(IsOverinspected())THEN
+	RETURN;
+END_IF
+
 
 Invoke();
 
@@ -122,7 +127,9 @@ IF (Execute()) THEN
 		_passTimer(IN:= tmpResult,PT:=_data.PassTime);
 									  
      	DoneWhen(_failTimer.Q OR _passTimer.Q);
-END_IF;]]></ST>
+END_IF;
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsNumber" Id="{06fdee84-4be9-0485-30d1-946d69a2763b}">
@@ -168,6 +175,17 @@ METHOD PROTECTED OnDone
 IF (_data.Result = eInspectorResult.Failed) THEN
      _data.DetectedStatus := _lastOutValue;
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{35d412e4-3f0e-0c32-180a-703e03107006}">
+      <Declaration><![CDATA[METHOD WithCoordinator : ITcoDataInspector
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WithCoordinator(inCoordinator);
+WithCoordinator := THIS^;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -33,6 +33,7 @@
                     <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
                     <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowControlSlim"/>
                     <controls:RenderableContentControl Grid.Column="2" DataContext="{Binding _data.DetectedStatus}" PresentationType="ShadowControlSlim"/>
+                    <controls:RenderableContentControl Grid.Column="3" DataContext="{Binding _data.StarNotationEnabled}" PresentationType="ShadowControlSlim"/>
                     <controls:RenderableContentControl Grid.Column="4" DataContext="{Binding _data.IsByPassed}" PresentationType="ShadowControlSlim"/>
                     <controls:RenderableContentControl Grid.Column="5" DataContext="{Binding _data.IsExcluded}" PresentationType="ShadowControlSlim"/>
                 </Grid>

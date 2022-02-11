@@ -14,7 +14,7 @@ TYPE
 		</docu>
 		~*)
         {attribute addProperty Name "<#Required#>"}
-		{attribute addProperty ToolTip "<#Set the required status for the inspection to pass.#>"}
+		{attribute addProperty ToolTip "<#Sets the required status for the inspection to pass.#>"}
         {attribute 'qlik_load:RequiredStatus'}
         RequiredStatus : BOOL;
 
@@ -26,7 +26,7 @@ TYPE
 		</docu>
 	~*)
         {attribute addProperty Name "<#Detected#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
 		{attribute addProperty ToolTip "<#Displays detected status of this check.#>"}
         {attribute 'qlik_load:DetectedStatus'}
         DetectedStatus : BOOL;

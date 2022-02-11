@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroupInspect
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
 	{attribute 'hide'}
     _done   : BOOL;
@@ -19,7 +19,7 @@ END_VAR]]></Declaration>
 		Initiates grouped inspection.
 	</summary>
 ~*)
-METHOD Act : ITcoInspectionGroupInspect
+METHOD Act : ITcoInspectionGroup
 VAR_IN_OUT
 	inoResult : TcoComprehensiveResult;
 END_VAR]]></Declaration>
@@ -37,14 +37,17 @@ _done := TRUE;]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Done := _done;]]></ST>
+          <ST><![CDATA[Done := _done;
+
+
+]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Inspect" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Inquire` property via `Act()` method.'}
-METHOD Inspect : ITcoInspectionGroupInspect
+METHOD Inspect : ITcoInspectionGroup
 VAR_INPUT
     Inspector : IInspector;
 END_VAR
@@ -73,8 +76,6 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF(_coordinator = 0) THEN
 	RETURN;	
 END_IF
-
-
 
 IF(THIS^.Done) THEN
 	IF(THIS^._result.Result = eOverallResult.Failed) THEN
@@ -138,6 +139,17 @@ _sharedResult := _result;
 
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{c31bd8b7-9661-0564-2449-159a318fede9}">
+      <Declaration><![CDATA[METHOD WithCoordinator : ITcoInspectionGroupAct
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WithCoordinator(inCoordinator);
+WithCoordinator := THIS^;]]></ST>
       </Implementation>
     </Method>
   </POU>

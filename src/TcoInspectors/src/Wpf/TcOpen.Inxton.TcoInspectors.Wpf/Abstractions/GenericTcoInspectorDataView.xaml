@@ -12,8 +12,9 @@
         <tcoinspectors:TcoInspectorData></tcoinspectors:TcoInspectorData> 
     </d:UserControl.DataContext>
     <materialDesign:Card
-        Margin="100,0,0,10"
-  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+        Margin="100,5,10,10"
+  materialDesign:ShadowAssist.ShadowDepth="Depth3"
+  materialDesign:ShadowAssist.ShadowEdges="Top"
   Padding="32">
         <Grid>
             <Grid.ColumnDefinitions>

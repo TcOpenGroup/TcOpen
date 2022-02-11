@@ -17,9 +17,6 @@
     </Property>
     <Method Name="OnFail" Id="{ac3abd9c-363c-070f-178a-504f9b7741ff}">
       <Declaration><![CDATA[METHOD OnFail : IOnFail
-VAR_INPUT
-	inCoordinator : TcoCore.ITcoCoordinator;
-END_VAR
 ]]></Declaration>
     </Method>
     <Property Name="OverInspected" Id="{8def8039-9580-0717-1f67-557c2ea921c0}">

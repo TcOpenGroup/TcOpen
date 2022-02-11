@@ -33,8 +33,7 @@
                         <ColumnDefinition Width="33*"/>
                         <ColumnDefinition Width="33*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="1"
+                    <TextBlock                
                         Grid.Column="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -44,6 +43,10 @@
                     <controls:RenderableContentControl
                         Grid.Column="1"
                         DataContext="{Binding _data.RequiredStatus}"
+                        PresentationType="ControlSlim" />
+                    <controls:RenderableContentControl
+                        Grid.Column="2"
+                        DataContext="{Binding _data.DetectedStatus}"
                         PresentationType="ControlSlim" />
                     <controls:RenderableContentControl
                         Grid.Column="4"

@@ -40,6 +40,14 @@ END_VAR]]></Declaration>
 seq.Open();
 seq.Observer := _observer;
 
+IF (seq.Step(inStepID := 0,
+    inEnabled := TRUE,
+    inStepDescription := 'INIT')) THEN
+    //--------------------------------------------------------    	 	
+		seq.CompleteStep();
+    //--------------------------------------------------------			
+END_IF;
+
 IF (seq.Step(inStepID := 50,
     inEnabled := TRUE,
     inStepDescription := 'INIT')) THEN
@@ -53,12 +61,13 @@ END_IF;
 
 IF (seq.Step(inStepID := 100,
     inEnabled := TRUE,
-    inStepDescription := 'INSPECT DMC CODE')) THEN
+    inStepDescription := 'INSPECT DMC CODE - WHEN FAILED RETRY')) THEN
     //--------------------------------------------------------
-    Data.DmcInspector.Inspect(Components.DmcReader)
+    Data.DmcInspector.WithCoordinator(seq)
+		.Inspect(Components.DmcReader)		
         .UpdateComprehensiveResult(Data.OverallResult)
-        .OnFail(seq)
-        .CarryOn();
+        .OnFail()
+        .Retry(50);
     //--------------------------------------------------------			
 END_IF;
 
@@ -66,9 +75,11 @@ IF (seq.Step(inStepID := 200,
     inEnabled := TRUE,
     inStepDescription := 'INSPECT BOLT PRESENCE')) THEN
     //--------------------------------------------------------
-    Data.BoltPresenceInspector.Inspect(Components.BoltPresenceSensor)
+    Data.BoltPresenceInspector
+		.WithCoordinator(seq)
+		.Inspect(Components.BoltPresenceSensor)
 		.UpdateComprehensiveResult(Data.OverallResult)
-        .OnFail(seq)
+        .OnFail()
         .CarryOn();
     //--------------------------------------------------------			
 END_IF;
@@ -77,12 +88,14 @@ IF (seq.Step(inStepID := 300,
     inEnabled := TRUE,
     inStepDescription := 'INSPECT DIMENSIONS')) THEN
     //--------------------------------------------------------
-    GroupInspection.Act(Data.OverallResult)
-        .Inspect(Data.DimX_Inspector.Inspect(Components.DimX_Sensor))
-        .Inspect(Data.DimY_Inspector.Inspect(Components.DimY_Sensor))
-        .Inspect(Data.DimZ_Inspector.Inspect(Components.DimZ_Sensor))
-		.UpdateComprehensiveResult(Data.OverallResult)
-        .OnFail(seq).CarryOn();
+    GroupInspection
+		.WithCoordinator(seq)
+		.Act(Data.OverallResult)	
+        .Inspect(Data.DimX_Inspector.WithCoordinator(seq).Inspect(Components.DimX_Sensor))
+        .Inspect(Data.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor))
+        .Inspect(Data.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))		
+        .OnFail()
+		.Retry(50);
     //--------------------------------------------------------			
 END_IF;
 

@@ -8,7 +8,7 @@
 </summary>
 </docu>
 ~*)
-FUNCTION_BLOCK TcoAnalogueInspector EXTENDS TcoInspector
+FUNCTION_BLOCK TcoAnalogueInspector EXTENDS TcoInspector IMPLEMENTS ITcoAnalogueInspector
 VAR
     _data : TcoAnalogueInspectorData;
 	{attribute 'hide'}
@@ -65,9 +65,14 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
 
-OnEnterInspection();
 
 _inspectionData REF= _data;
+
+OnEnterInspection();
+
+IF(IsOverinspected())THEN
+	RETURN;
+END_IF
 
 Invoke();
 
@@ -115,6 +120,17 @@ METHOD PROTECTED OnDone
 IF (_data.Result = eInspectorResult.Failed) THEN
      _data.DetectedStatus := _lastOutValue;
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{ed4b79f2-1409-0b85-3501-740ca7aca530}">
+      <Declaration><![CDATA[METHOD WithCoordinator : ITcoAnalogueInspector
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WithCoordinator(inCoordinator);
+WithCoordinator := THIS^;]]></ST>
       </Implementation>
     </Method>
   </POU>
