@@ -63,16 +63,16 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum - 0.5,
-        inMaxValue := Station.ProductionData.DimX.Maximum + 0.5,
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum + 50 ,
+        inMaxValue := Station.ProductionData.DimX.Maximum -50 ,
         inoutValue := Station.Components._dimX);
 
-    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum - 0.5,
-        inMaxValue := Station.ProductionData.DimY.Maximum + 0.5,
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum + 50 ,
+        inMaxValue := Station.ProductionData.DimY.Maximum -50,
         inoutValue := Station.Components._dimY);
 
-    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum - 0.5,
-        inMaxValue := Station.ProductionData.DimZ.Maximum + 0.5,
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum  + 50 ,
+        inMaxValue := Station.ProductionData.DimZ.Maximum -50 ,
         inoutValue := Station.Components._dimZ);
 
     StepCompleteWhen(TRUE);
@@ -87,7 +87,7 @@ IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
         .CheckAnalogue(Signal := Station.Components._dimY, pData := ADR(Station.ProcessTraceabilty._data.DimY))
         .CheckAnalogue(Signal := Station.Components._dimZ, pData := ADR(Station.ProcessTraceabilty._data.DimZ))
         .HasPassed();
-
+	Station.ProcessTraceabilty.SetDataResult( _partPassedChecks);
     StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;

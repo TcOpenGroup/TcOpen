@@ -3,6 +3,8 @@
   <DUT Name="Station001_ProductionData" Id="{148e1532-fd36-4606-a278-36ddc44c44a7}">
     <Declaration><![CDATA[TYPE Station001_ProductionData EXTENDS TcoData.TcoEntity:
 STRUCT
+	Result : BOOL;
+	RecipeName : STRING;
 	DimX : AnalogueValueCheck;
 	DimY : AnalogueValueCheck;
 	DimZ : AnalogueValueCheck;
