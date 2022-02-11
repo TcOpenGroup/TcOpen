@@ -51,7 +51,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_data.rec]]></ST>
+        <ST><![CDATA[_data.RecipeName := RecipeName;]]></ST>
       </Implementation>
     </Method>
   </POU>
