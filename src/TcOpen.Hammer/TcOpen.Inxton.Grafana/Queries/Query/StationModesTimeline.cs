@@ -10,7 +10,7 @@ namespace Grafana.Backend.Queries
     {
         public ITable Query(IQueryable<enumModesObservedValue> production, DateTime from, DateTime to)
         {
-            // vsetky eventy, zgroupene podla casu - mali by byt zaokruhlene na sekundy.
+            // Group events by time.
             var query = production
                  .AsQueryable()
                  .Select(x => new { Time = x.Timestamp, Name = x.Name, Mode = x.ValueDescription })
@@ -19,12 +19,12 @@ namespace Grafana.Backend.Queries
                  .Select(x => new { Time = x.Key, StationStates = x })
                  .AsEnumerable();
 
-            // najdsi vsetky mena stanic.
+            // find station names
             var stationCount = query.Max(max => max.StationStates.Count());
             var resultWithAllStations = query.First(x => x.StationStates.Count() == stationCount);
             var stationNames = resultWithAllStations.StationStates.Select(x => x.Name).OrderBy(x => x);
             
-            //vytvor tabulku so stlpcom Time, ptm pridaj stlpce s menom kazdej stanice
+            //table with time column and adding a column for every station name
             var table = new Table();
             table.AddColumn(new Column { Text = "Time", Type = "time" });
             stationNames.ForEach(name => table.AddColumn(new Column { Text = name, Type = "text" }));

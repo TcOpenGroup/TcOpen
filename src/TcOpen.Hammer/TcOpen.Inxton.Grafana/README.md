@@ -1,11 +1,15 @@
 ﻿# TcOpenHammer.Grafana.API
 
+![TcOpen Beckhoff Inxton Grafana PLC TwinCAT](assets/TcOpen_Grafana.png)
+
 This is project is an API between Grafana and MongoDB which uses SimpleJson plugin for Grafana as an interface.
 
 The way it works, is that if you store an object from a PLC `stYourDataObject` to DB, you can generate C# Twin of this object by Inxton (or write your own) and use the structure of the object to access the data in DB via MongoDriver.
 It's very easy to query and process the data. Thanks to the strict type system you will always catch errors very soon!
 
 Be aware that when you query huge amounts of data, and call `ToList()` on the result, it may affect the perfomance. Serialization of big list can also take some time. 
+
+There's a sample dashboard in `.\assets` folder
 
 ## Installation of Grafana and SimpleJson plugin
 

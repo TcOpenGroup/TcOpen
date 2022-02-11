@@ -80,14 +80,16 @@ namespace HMI
                     SetUpJsonRepositories();
                     break;
             }
-            ObserveModes();
+            ObserveChanges();
 
         }
 
         private static IRepository<enumModesObservedValue> StationModesRepository { get; set; }
-        private static void ObserveModes()
+        private static IRepository<ObservedValue<string>> ProductionRecipeHistoryRepository { get; set; }
+        private static void ObserveChanges()
         {
             Entry.PlcHammer.TECH_MAIN._app._station001._currentMode.PublishChanges((IRepository)StationModesRepository, x => new enumModesObservedValue(x));
+            Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies._data._EntityId.PublishChanges((IRepository)ProductionRecipeHistoryRepository, recipeName => new ObservedValue<string>(recipeName));
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
@@ -145,7 +147,7 @@ namespace HMI
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
             var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
             StationModesRepository = new MongoDbRepository<enumModesObservedValue>(new MongoDbRepositorySettings<enumModesObservedValue>(mongoUri, databaseName, "Station001_Modes"));
-
+            ProductionRecipeHistoryRepository = new MongoDbRepository<ObservedValue<string>>(new MongoDbRepositorySettings<ObservedValue<string>>(mongoUri, databaseName, "Station001_RecipeHistory"));
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
         }
     }

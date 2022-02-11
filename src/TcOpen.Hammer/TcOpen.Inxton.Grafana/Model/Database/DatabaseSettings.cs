@@ -6,6 +6,7 @@
         public string StationModesCollection { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
+        public string Station001RecipeHistoryCollection { get; set; }
     }
 
 }

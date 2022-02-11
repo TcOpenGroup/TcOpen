@@ -20,16 +20,29 @@ namespace TcOpenHammer.Grafana.API.Model.Mongo
     {
         internal readonly IMongoCollection<PlainStation001_ProductionData> ProcessData;
         internal readonly IMongoCollection<enumModesObservedValue> StationModes;
+        internal readonly IMongoCollection<ObservedValue<string>> RecipeHistory;
         private readonly ILogger<MongoService> _logger;
 
         public MongoService(DatabaseSettings settings, ILogger<MongoService> logger)
         {
             _logger = logger;
             SetupSerialisationAndMapping();
+            SerializionObservedValue();
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             ProcessData = database.GetCollection<PlainStation001_ProductionData>(settings.ProductionCollectionName);
             StationModes = database.GetCollection<enumModesObservedValue>(settings.StationModesCollection);
+            RecipeHistory = database.GetCollection<ObservedValue<string>>(settings.Station001RecipeHistoryCollection);
+        }
+
+        private void SerializionObservedValue()
+        {
+            BsonClassMap.RegisterClassMap<ObservedValue<string>>(cm =>
+            {
+                cm.AutoMap();
+                cm.SetIgnoreExtraElements(true);
+                cm.SetIdMember(cm.GetMemberMap(c => c._recordId));
+            });
         }
 
         /// <summary>
@@ -46,6 +59,7 @@ namespace TcOpenHammer.Grafana.API.Model.Mongo
                     cm.SetIdMember(cm.GetMemberMap(c => c._EntityId));
                 });
             }
+
 
             var usedTypes = GetContainingTypes(typeof(PlainStation001_ProductionData));
 
