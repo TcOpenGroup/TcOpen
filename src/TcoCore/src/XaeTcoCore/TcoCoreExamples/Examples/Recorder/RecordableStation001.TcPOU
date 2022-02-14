@@ -3,10 +3,10 @@
   <POU Name="RecordableStation001" Id="{d8716088-3f58-05d3-3548-fce641607337}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK RecordableStation001 EXTENDS TcoCore.TcoContext
 VAR		
-	_components : RecordableStation001_Components(THIS^, NO.Structure);	
-	_sequence : RecordableStation001_Sequencer(THIS^, NO.Structure, eRestoreMode.None);
-	_serviceModeTask : TcoCore.TcoTask(THIS^, NO.Structure);
-	_automatModeTask : TcoCore.TcoTask(THIS^, NO.Structure);
+	_components : RecordableStation001_Components(THIS^);	
+	_sequence : RecordableStation001_Sequencer(THIS^, eRestoreMode.None);
+	_serviceModeTask : TcoCore.TcoTask(THIS^);
+	_automatModeTask : TcoCore.TcoTask(THIS^);
 END_VAR
 
 

@@ -35,7 +35,6 @@
                     <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredMin}" PresentationType="DisplaySlim"/>
                     <controls:RenderableContentControl Grid.Column="2" DataContext="{Binding _data.DetectedStatus}" PresentationType="DisplaySlim"/>
                     <controls:RenderableContentControl Grid.Column="3" DataContext="{Binding _data.RequiredMax}" PresentationType="DisplaySlim"/>
-                    <controls:RenderableContentControl Grid.Column="4" DataContext="{Binding _data.DetectedStatus}" PresentationType="DisplaySlim"/>
                     <StackPanel Grid.Column="5">
                         <materialDesign:PackIcon HorizontalAlignment="Stretch" 
                                                  VerticalAlignment="Stretch"                                                  

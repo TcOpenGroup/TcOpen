@@ -4,8 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDiTests EXTENDS TcoCore._internals_TcoContext
 VAR
 	_signal : BOOL;
-	_sut : TcoElements.TcoDi(THIS^, TcoCore.NO.Structure);
-	_sutNotInitialized : TcoElements.TcoDi(THIS^, TcoCore.NO.Structure);
+	_sut : TcoElements.TcoDi(THIS^);
+	_sutNotInitialized : TcoElements.TcoDi(THIS^);
 END_VAR
 
 VAR

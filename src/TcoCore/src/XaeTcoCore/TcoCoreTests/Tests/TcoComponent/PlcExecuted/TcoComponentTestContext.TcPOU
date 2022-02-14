@@ -3,7 +3,7 @@
   <POU Name="TcoComponentTestContext" Id="{d9b91383-f3ba-02bf-3371-fb3da801fc57}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoComponentTestContext EXTENDS TcoCore._internals_TcoContext
 VAR	
-    _sut : TestComponent(THIS^, NO.Structure);
+    _sut : TestComponent(THIS^);
 	{attribute addProperty Name "--Some IO signal"}
 	_signal : BOOL;	
 END_VAR]]></Declaration>

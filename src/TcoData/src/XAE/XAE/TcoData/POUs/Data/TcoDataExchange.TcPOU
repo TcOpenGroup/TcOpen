@@ -35,7 +35,7 @@ VAR
 			</summary>
 		</docu>
 	~*)
-    _createTask : TcoDataTask(THIS^, TcoCore.NO.Structure);
+    _createTask : TcoDataTask(THIS^);
 	(*~
 		<docu>
 			<summary>
@@ -43,7 +43,7 @@ VAR
 			</summary>
 		</docu>
 	~*)
-    _readTask : TcoDataTask(THIS^,TcoCore.NO.Structure);
+    _readTask : TcoDataTask(THIS^);
 	(*~
 		<docu>
 			<summary>
@@ -51,7 +51,7 @@ VAR
 			</summary>
 		</docu>
 	~*)
-    _updateTask : TcoDataTask(THIS^,TcoCore.NO.Structure);
+    _updateTask : TcoDataTask(THIS^);
 	(*~
 		<docu>
 			<summary>
@@ -59,7 +59,7 @@ VAR
 			</summary>
 		</docu>
 	~*)
-    _deleteTask : TcoDataTask(THIS^,TcoCore.NO.Structure);
+    _deleteTask : TcoDataTask(THIS^);
 	(*~
 		<docu>
 			<summary>
@@ -67,7 +67,7 @@ VAR
 			</summary>
 		</docu>
 	~*)
-	_idExistsTask : TcoExistsTask(THIS^, TcoCore.NO.Structure);
+	_idExistsTask : TcoExistsTask(THIS^);
 	(*~
 		<docu>
 			<summary>
@@ -75,7 +75,7 @@ VAR
 			</summary>
 		</docu>
 	~*)
-	_createOrUpdateTask : TcoDataTask(THIS^, TcoCore.NO.Structure);
+	_createOrUpdateTask : TcoDataTask(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -243,13 +243,12 @@ Exists REF=	_idExistsTask;
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : TcoCore.ITcoObject;
-	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
+	ParentObject : TcoCore.ITcoObject;	
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := Parent, ParentStruct := ParentStruct);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Read" Id="{05052219-e02c-06a1-02d0-9241bf3dd3ff}">

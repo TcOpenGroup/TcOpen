@@ -9,10 +9,10 @@ VAR
 	_myContextEndCount				:	ULINT;
 	_myParentIdentity				:	ULINT;
 	_myState						:	INT;	
-	_tcoTaskTest_A					:	TcoTaskTest(THIS^, NO.Structure);
-	_tcoTaskTest_B					:	TcoTaskTest(THIS^, NO.Structure);
-	_tcoStateTest_A					:	TcoStateAutoRestoreTest(THIS^, NO.Structure, eRestoreMode.None);
-	_tcoStateTest_B					:	TcoStateAutoRestoreTest(THIS^, NO.Structure, eRestoreMode.None);
+	_tcoTaskTest_A					:	TcoTaskTest(THIS^);
+	_tcoTaskTest_B					:	TcoTaskTest(THIS^);
+	_tcoStateTest_A					:	TcoStateAutoRestoreTest(THIS^, eRestoreMode.None);
+	_tcoStateTest_B					:	TcoStateAutoRestoreTest(THIS^, eRestoreMode.None);
 	_onStateChangeCounter			:	INT;	
 	_autoRestoreToMyChildsEnabled	: 	BOOL;
 	_autoRestoreByMyParentEnabled	: 	BOOL;	

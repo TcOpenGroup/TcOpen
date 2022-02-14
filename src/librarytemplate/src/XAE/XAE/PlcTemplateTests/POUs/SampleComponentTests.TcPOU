@@ -3,7 +3,7 @@
   <POU Name="SampleComponentTests" Id="{8e88c5fb-6b37-0ee0-1dee-44bcdb0de8e4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SampleComponentTests EXTENDS _internals_TcoContext
 VAR
-	_sut : PlcTemplate.SampleComponent(THIS^, TcoCore.NO.Structure);
+	_sut : PlcTemplate.SampleComponent(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[

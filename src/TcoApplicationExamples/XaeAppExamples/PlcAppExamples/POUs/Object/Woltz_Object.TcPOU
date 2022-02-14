@@ -3,7 +3,7 @@
   <POU Name="Woltz_Object" Id="{5f3c91dc-f440-03e0-2cf3-ff1d155e00ef}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Woltz_Object EXTENDS Person_Object
 VAR
-	_Khartoum		:	Horse_Object(THIS^, TcoCore.NO.Structure);
+	_Khartoum		:	Horse_Object(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

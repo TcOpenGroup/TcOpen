@@ -13,11 +13,11 @@ VAR
     {attribute addProperty Name "<#Jog forward#>"}
     {attribute addProperty StateOnDesc "<#Running#>"}
     {attribute addProperty StateOffDesc "<#Stopped#>"}
-    _jogForwardTask : TcoCore.TcoMomentaryTask(THIS^, TcoCore.NO.Structure);
+    _jogForwardTask : TcoCore.TcoMomentaryTask(THIS^);
     {attribute addProperty Name "<#Jog backwards#>"}
     {attribute addProperty StateOnDesc "<#Running#>"}
     {attribute addProperty StateOffDesc "<#Stopped#>"}
-    _jogBackwardsTask : TcoCore.TcoMomentaryTask(THIS^, TcoCore.NO.Structure);
+    _jogBackwardsTask : TcoCore.TcoMomentaryTask(THIS^);
     {attribute addProperty Name "<#Jog mode#>"}
     _jogMode : eJogMode;
     {attribute addProperty Name "<#Position#>"}
@@ -112,13 +112,12 @@ END_IF]]></ST>
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;
-	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
+  	ParentObject : ITcoObject;	
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject, ParentStruct := ParentStruct);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
     <Property Name="IsService" Id="{cf1024cb-ad94-05f4-12ee-2470c3c88234}">

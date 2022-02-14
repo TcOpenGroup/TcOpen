@@ -3,7 +3,7 @@
   <POU Name="ST_01_Ground" Id="{1ddd18cd-709e-0f65-0cb2-7280de74d03d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Ground EXTENDS TcoCore.TcoSequencer
 VAR
-	_components : ST_01_Components(THIS^, TcoCore.NO.Structure);
+	_components : ST_01_Components(THIS^);
 	_await : fbAwait;
 END_VAR
 ]]></Declaration>

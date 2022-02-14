@@ -29,12 +29,11 @@ END_VAR]]></Declaration>
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : TcoCore.ITcoObject;
-	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
+	ParentObject : TcoCore.ITcoObject;	
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := Parent, ParentStruct := ParentStruct);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithId" Id="{73957c41-6f21-008e-2bf1-1954b1beab89}">

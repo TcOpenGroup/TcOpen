@@ -3,7 +3,7 @@
   <POU Name="TcoToggleTaskTestContext" Id="{39bf1920-3e0b-0df2-2185-07e16dbdb8fc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoToggleTaskTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut 		:	TcoToggleTaskTests(THIS^, NO.Structure,TRUE);
+    _sut 		:	TcoToggleTaskTests(THIS^, TRUE);
 	_bool		:	BOOL;
 	_string		:	STRING;
 	_done		:	BOOL;
@@ -19,7 +19,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF
 	eTcoToggleTaskTests.Reinit:
-		_sut.FB_init(TRUE, FALSE, THIS^, NO.Structure,_bool);
+		_sut.FB_init(TRUE, FALSE, THIS^,_bool);
 		_done := TRUE;
 		
 	eTcoToggleTaskTests.CleanUp:

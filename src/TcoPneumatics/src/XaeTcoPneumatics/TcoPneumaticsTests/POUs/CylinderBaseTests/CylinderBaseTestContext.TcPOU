@@ -3,8 +3,8 @@
   <POU Name="CylinderBaseTestContext" Id="{e41369b8-4146-091a-3fca-553a7f936fbe}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut			: CylinderBaseImplemented(THIS^, TcoCore.NO.Structure);
-	_sutInvalid		: CylinderBaseImplemented(THIS^, TcoCore.NO.Structure);
+	_sut			: CylinderBaseImplemented(THIS^);
+	_sutInvalid		: CylinderBaseImplemented(THIS^);
 	_atHomeSignal	: BOOL;	
 	_atWorkSignal	: BOOL;	
 	_toHomeSignal	: BOOL;	

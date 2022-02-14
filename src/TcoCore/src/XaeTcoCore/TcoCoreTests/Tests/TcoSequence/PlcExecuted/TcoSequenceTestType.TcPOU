@@ -11,7 +11,7 @@ VAR
 	_stepDescription					:	STRING(254);	
 	_currentStepId						:	INT;
 	_currentStepDescription				:	STRING(254);
-	_myTcoChildState					: 	TcoSequencerTestChildState(THIS^, NO.Structure, eRestoreMode.None);
+	_myTcoChildState					: 	TcoSequencerTestChildState(THIS^, eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
 	_onSequencerErrorCount	 			: 	ULINT;

@@ -36,10 +36,10 @@ VAR
 	_signalInfo : TcoCore.TcoSignalInfo;
 	{attribute addProperty Name "<#Check On#>"}
 	{attribute addProperty ToolTip "<#Checks that the input is on#>"}
-	_isTrueTask : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
+	_isTrueTask : TcoCore.TcoTask(THIS^);
 	{attribute addProperty ToolTip "<#Checks that the input is off#>"}
 	{attribute addProperty Name "<#Check Off#>"}
-	_isFalseTask : TcoCore.TcoTask(THIS^,TcoCore.NO.Structure);
+	_isFalseTask : TcoCore.TcoTask(THIS^);
 
 	_config : TcoDiConfig;
 
@@ -79,7 +79,6 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	ParentObject : ITcoObject;
-	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
 END_VAR
 
 ]]></Declaration>

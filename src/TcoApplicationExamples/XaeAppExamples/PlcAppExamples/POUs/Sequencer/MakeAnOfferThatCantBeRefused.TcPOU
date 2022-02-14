@@ -13,7 +13,7 @@ VAR
 	_FirstOfferAccepted	:	BOOL := FALSE;
 	_FirstOfferRefused	:	BOOL := FALSE;
 	{attribute 'hide'}
-	_Killer				:	Killer_Object(THIS^, TcoCore.NO.Structure);
+	_Killer				:	Killer_Object(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

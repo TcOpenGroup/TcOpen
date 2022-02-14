@@ -6,8 +6,8 @@ VAR
 	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME SWEET HOME#>"}
 	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK HARD WORK#>"}
 	{attribute addProperty _stopDefaultName "<#STOP AND THINK#>"}
-	_sut			: TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
-	_sutInvalid 	: TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
+	_sut			: TcoPneumatics.TcoCylinder(THIS^);
+	_sutInvalid 	: TcoPneumatics.TcoCylinder(THIS^);
 	_atHomeSignal	: BOOL;
 	_moveHomeSignal : BOOL;
 	_atWorkSignal	: BOOL;

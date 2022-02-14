@@ -89,10 +89,9 @@ VAR
 	//{attribute 'hide'}
 	_ParentObject : ITcoObject;
 	//{attribute 'hide'}
-    _ParentStruct : REFERENCE TO TcoStruct;	
-	j : BOOL;
+    _ParentStruct : REFERENCE TO TcoStruct;		
 	{attribute clr [RenderIgnore()]}
-	_messenger : TcoMessenger(THIS^, NO.Structure);
+	_messenger : TcoMessenger(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -168,7 +167,6 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	ParentObject : ITcoObject;	
-	ParentStruct : REFERENCE TO TcoStruct;
 END_VAR
 
 
@@ -176,7 +174,6 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_Identity := ADR(THIS^);
 _ParentObject := ParentObject;
-_ParentStruct REF= ParentStruct;
 
 
 ]]></ST>
@@ -236,9 +233,7 @@ END_IF;
 IF(__ISVALIDREF(_ParentStruct) AND_THEN _ParentStruct.Parent <> 0) THEN
 	Parent := _ParentStruct.Parent;
 	RETURN;
-END_IF;	
-
-]]></ST>
+END_IF;	]]></ST>
         </Implementation>
       </Get>
     </Property>

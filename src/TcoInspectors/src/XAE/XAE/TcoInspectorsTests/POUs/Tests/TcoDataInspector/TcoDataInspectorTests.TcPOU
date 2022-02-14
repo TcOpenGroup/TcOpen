@@ -3,7 +3,7 @@
   <POU Name="TcoDataInspectorTests" Id="{7f0258dd-41d3-0c35-2a13-53089ff9ceff}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataInspectorTests EXTENDS TcoInspectorTests
 VAR
-    _sut            : TcoInspectors.TcoDataInspector(THIS^, TcoCore.NO.Structure);
+    _sut            : TcoInspectors.TcoDataInspector(THIS^);
     _inspectedValue : STRING;
 END_VAR]]></Declaration>
     <Implementation>

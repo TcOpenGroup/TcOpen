@@ -3,7 +3,7 @@
   <POU Name="TcoBlinkerTestContext" Id="{b677d84f-276d-0df9-099e-9e058cea661d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoBlinkerTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_tcoBlinker : TcoUtilities.TcoBlinker(THIS^, TcoCore.NO.Structure);
+	_tcoBlinker : TcoUtilities.TcoBlinker(THIS^);
 	_tcoBlinkerOnTime : TIME;
 	_tcoBlinkerOffTime : TIME;
 	_tcoBlinkerOnTimeDuration : TIME;

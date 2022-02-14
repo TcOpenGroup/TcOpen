@@ -15,9 +15,9 @@ END_VAR
 
 VAR
 	{attribute addProperty Activity "moves to home position"}
-	_moveHomeTask : fbPistonMoveTask(THIS^, TcoCore.NO.Structure);
+	_moveHomeTask : fbPistonMoveTask(THIS^);
 	{attribute addProperty Activity "moves to work position"}
-	_moveWorkTask : fbPistonMoveTask(THIS^, TcoCore.NO.Structure);
+	_moveWorkTask : fbPistonMoveTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_moveHomeTask(PositionSensor := iHomePositionSensor, MoveToPositionSignal := qHomePositionActuator, InverseSignal := qWorkPositionActuator);

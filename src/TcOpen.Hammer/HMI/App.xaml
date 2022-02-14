@@ -15,8 +15,10 @@
                     SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <wpf:TcoResources></wpf:TcoResources>
+                <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/VortexStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/MDOverrides.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type TabItem}">
+            <!--<Style TargetType="{x:Type TabItem}">
                 <Setter Property="Margin" Value="0,0,0,0" />
                 <Setter Property="MinWidth" Value="80" />
                 <Setter Property="Height" Value="40" />
@@ -80,7 +82,7 @@
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Background" Value="{DynamicResource Background}" />
                 <Setter Property="Padding" Value="8" />
-            </Style>
+            </Style>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

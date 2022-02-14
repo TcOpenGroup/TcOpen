@@ -3,10 +3,10 @@
   <POU Name="TcoObject_Waveform" Id="{16e804d2-e51d-0572-0685-a766962843d1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoObject_Waveform EXTENDS TcoObject
 VAR
-	_TcoTask_Waveform				:	TcoCore.TcoTask(THIS^, NO.Structure);								
-	_TcoState_Waveform				:	TcoCore.TcoState(THIS^, NO.Structure, TcoCore.eRestoreMode.None);	
-	_TcoState_WaveformSequence_1	:	TcoState_WaveformSequence(THIS^, NO.Structure, TcoCore.eRestoreMode.None);
-	_TcoState_WaveformSequence_2	:	TcoState_WaveformSequence(THIS^, NO.Structure, TcoCore.eRestoreMode.None);
+	_TcoTask_Waveform				:	TcoCore.TcoTask(THIS^);								
+	_TcoState_Waveform				:	TcoCore.TcoState(THIS^, TcoCore.eRestoreMode.None);	
+	_TcoState_WaveformSequence_1	:	TcoState_WaveformSequence(THIS^, TcoCore.eRestoreMode.None);
+	_TcoState_WaveformSequence_2	:	TcoState_WaveformSequence(THIS^, TcoCore.eRestoreMode.None);
 	_Value1							:	LREAL;
 	_Value2							:	LREAL;
 	_Value							:	LREAL;

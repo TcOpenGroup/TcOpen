@@ -3,10 +3,10 @@
   <POU Name="fbManipulatorAutomat" Id="{e3bf80e0-2686-0576-2ba1-7979512bbe7c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbManipulatorAutomat EXTENDS TcoCore.TcoState
 VAR
-	_horizontalPiston : fbPiston(THIS^, NO.Structure);
-	_verticalPiston : fbPiston(THIS^, NO.Structure);
-	_gripperPiston : fbPiston(THIS^, NO.Structure);
-	_persistentMessage : TcoCore.TcoMessenger(THIS^, NO.Structure);
+	_horizontalPiston : fbPiston(THIS^);
+	_verticalPiston : fbPiston(THIS^);
+	_gripperPiston : fbPiston(THIS^);
+	_persistentMessage : TcoCore.TcoMessenger(THIS^);
 END_VAR
 VAR
 	ar : ARRAY[0..2] OF BOOL;

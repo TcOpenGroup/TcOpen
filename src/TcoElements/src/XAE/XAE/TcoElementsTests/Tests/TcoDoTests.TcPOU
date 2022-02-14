@@ -4,8 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDoTests EXTENDS TcoCore._internals_TcoContext
 VAR
 	_signal : BOOL;
-	_sut : TcoElements.TcoDo(THIS^, TcoCore.NO.Structure);
-	_sutNotInitialized : TcoElements.TcoDo(THIS^, TcoCore.NO.Structure);
+	_sut : TcoElements.TcoDo(THIS^);
+	_sutNotInitialized : TcoElements.TcoDo(THIS^);
 END_VAR
 
 VAR

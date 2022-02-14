@@ -3,12 +3,12 @@
   <POU Name="TcoInspectionGroupTests" Id="{982692a5-9906-0157-21ab-dccd4c43da53}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroupTests EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut                 : TcoInspectors.TcoInspectionGroup(THIS^, TcoCore.NO.Structure);
-    _diis                : ARRAY[0..1] OF TcoInspectors.TcoDigitalInspector(THIS^, TcoCore.NO.Structure);
+    _sut                 : TcoInspectors.TcoInspectionGroup(THIS^);
+    _diis                : ARRAY[0..1] OF TcoInspectors.TcoDigitalInspector(THIS^);
     _dii_inspectedValues : ARRAY[0..1] OF BOOL;
-    _dais                : ARRAY[0..1] OF TcoInspectors.TcoAnalogueInspector(THIS^, TcoCore.NO.Structure);
+    _dais                : ARRAY[0..1] OF TcoInspectors.TcoAnalogueInspector(THIS^);
     _dai_inspectedValues : ARRAY[0..1] OF REAL;
-    _ddis                : ARRAY[0..1] OF TcoInspectors.TcoDataInspector(THIS^, TcoCore.NO.Structure);
+    _ddis                : ARRAY[0..1] OF TcoInspectors.TcoDataInspector(THIS^);
     _ddi_inspectedValues : ARRAY[0..1] OF STRING;
     _overallResult       : TcoInspectors.TcoComprehensiveResult;
     _coordinator         : MockCoordinator;

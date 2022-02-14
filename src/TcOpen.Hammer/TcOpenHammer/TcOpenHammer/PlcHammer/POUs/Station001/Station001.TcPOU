@@ -3,23 +3,23 @@
   <POU Name="Station001" Id="{3d3ca50a-cd66-4945-a21d-285298b2ba20}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoObject 
 VAR
-	_components : Station001_Components(THIS^, TcoCore.NO.Structure);
+	_components : Station001_Components(THIS^);
 	
-	_groundMode : Station001_GroundMode(THIS^, TcoCore.NO.Structure, eRestoreMode.None);
-	_automatMode : Station001_AutomatMode(THIS^, TcoCore.NO.Structure, eRestoreMode.None);
-	_swiftSequence   : Station001_Swift(THIS^, TcoCore.NO.Structure, eRestoreMode.None);
+	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None);
+	_automatMode : Station001_AutomatMode(THIS^, eRestoreMode.None);
+	_swiftSequence   : Station001_Swift(THIS^, eRestoreMode.None);
 	
-	_groundModeTask : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
-	_automatModeTask : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
-	_serviceModeTask : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
-	_swiftModeTask : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
+	_groundModeTask : TcoCore.TcoTask(THIS^);
+	_automatModeTask : TcoCore.TcoTask(THIS^);
+	_serviceModeTask : TcoCore.TcoTask(THIS^);
+	_swiftModeTask : TcoCore.TcoTask(THIS^);
 	
 	
-	_processRecipies : ProcessDataManager(THIS^, TcoCore.NO.Structure); 
-  _processTraceabilty : ProcessDataManager(THIS^, TcoCore.NO.Structure);
-	_technologicalDataManager : TechnologicalDataManager(THIS^, TcoCore.NO.Structure);
+	_processRecipies : ProcessDataManager(THIS^); 
+    _processTraceabilty : ProcessDataManager(THIS^);
+	_technologicalDataManager : TechnologicalDataManager(THIS^);
 	_currentMode : enumModes := enumModes.Idle;
-	_checkers : Checkers(THIS^, TcoCore.NO.Structure);
+	_checkers : Checkers(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_components();

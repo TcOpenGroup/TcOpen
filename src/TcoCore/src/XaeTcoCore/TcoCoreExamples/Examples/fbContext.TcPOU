@@ -6,11 +6,11 @@ VAR
 	{attribute addProperty Name "Toggle task example"}
 	{attribute addProperty StateOnDesc "<#Enabled#>"}
 	{attribute addProperty StateOffDesc "<#Disabled#>"}
-	_toggleTaskExample : TcoCore.TcoToggleTask(THIS^, NO.Structure,FALSE);
+	_toggleTaskExample : TcoCore.TcoToggleTask(THIS^, FALSE);
 	{attribute addProperty Name "Momentary task example"}
 	{attribute addProperty StateOnDesc "<#Running#>"}
 	{attribute addProperty StateOffDesc "<#Stopped#>"}
-	_momentaryTaskExample : TcoCore.TcoMomentaryTask(THIS^, NO.Structure);
+	_momentaryTaskExample : TcoCore.TcoMomentaryTask(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

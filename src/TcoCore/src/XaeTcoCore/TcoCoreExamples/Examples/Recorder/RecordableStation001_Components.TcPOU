@@ -4,11 +4,11 @@
     <Declaration><![CDATA[FUNCTION_BLOCK RecordableStation001_Components EXTENDS TcoCore.TcoObject
 VAR	
 	{attribute addProperty Name "Horizontal cyclinder A1"}
-	_horizontal : fbPiston(THIS^, NO.Structure);
+	_horizontal : fbPiston(THIS^);
 	{attribute addProperty Name "Vertical cyclinder A2"}
-	_vertical : fbPiston(THIS^, NO.Structure);
+	_vertical : fbPiston(THIS^);
 	{attribute addProperty Name "Gripper A3"}
-	_gripper : fbPiston(THIS^, NO.Structure);		
+	_gripper : fbPiston(THIS^);		
 	
 END_VAR
 

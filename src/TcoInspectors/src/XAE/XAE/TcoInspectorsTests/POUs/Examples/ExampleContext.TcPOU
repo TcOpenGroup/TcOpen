@@ -5,9 +5,9 @@
 VAR
     Data            : ExampleInspectorsStruct := (Parent := THIS^);
     Components      : ExampleComponents       := (Parent := THIS^);
-    _sequence1      : TcoCore.TcoSequence(THIS^, TcoCore.NO.Structure, eRestoreMode.None);
-    GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^, TcoCore.NO.Structure);
-    _observer       : TcoCore.TcoSequencerObserver(THIS^, TcoCore.NO.Structure);
+    _sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+    GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
+    _observer       : TcoCore.TcoSequencerObserver(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -91,9 +91,9 @@ IF (seq.Step(inStepID := 300,
     GroupInspection
 		.WithCoordinator(seq)
 		.Act(Data.OverallResult)	
-        .Inspect(Data.DimX_Inspector.WithCoordinator(seq).Inspect(Components.DimX_Sensor))
-        .Inspect(Data.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor))
-        .Inspect(Data.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))		
+        .Inspect(Data.Dimensions.DimX_Inspector.WithCoordinator(seq).Inspect(Components.DimX_Sensor))
+        .Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor))
+        .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))		
         .OnFail()
 		.Retry(50);
     //--------------------------------------------------------			

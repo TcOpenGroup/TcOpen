@@ -3,14 +3,14 @@
   <POU Name="Thomas_Object" Id="{69d01a44-cebd-0fff-162d-7a59f62e3932}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Thomas_Object EXTENDS TcoCore.TcoObject
 VAR
-	_frank 		:	AKid_Object(THIS^, TcoCore.NO.Structure);
-	_andrew 	:	AKid_Object(THIS^, TcoCore.NO.Structure);
-	_christina 	:	AKid_Object(THIS^, TcoCore.NO.Structure);
-	_gianna 	:	AKid_Object(THIS^, TcoCore.NO.Structure);
+	_frank 		:	AKid_Object(THIS^);
+	_andrew 	:	AKid_Object(THIS^);
+	_christina 	:	AKid_Object(THIS^);
+	_gianna 	:	AKid_Object(THIS^);
 END_VAR
 
 VAR
-	_AskForTheFavor			:	AskForTheFavor_Task(THIS^, TcoCore.NO.Structure);
+	_AskForTheFavor			:	AskForTheFavor_Task(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

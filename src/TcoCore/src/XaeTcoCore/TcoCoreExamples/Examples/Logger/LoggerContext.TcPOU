@@ -3,7 +3,7 @@
   <POU Name="LoggerContext" Id="{c46f76b3-06bd-0840-1299-159c746bcd7b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK LoggerContext EXTENDS TcoCore.TcoContext
 VAR
-	_loggerUsage : LoggerUsage(THIS^, NO.Structure);
+	_loggerUsage : LoggerUsage(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

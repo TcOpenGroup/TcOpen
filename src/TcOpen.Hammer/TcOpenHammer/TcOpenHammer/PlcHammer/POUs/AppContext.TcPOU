@@ -3,7 +3,7 @@
   <POU Name="AppContext" Id="{e82506b0-90bc-42b7-916c-c4162fa94076}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK AppContext EXTENDS TcoCore.TcoContext
 VAR
-	_station001 : Station001(THIS^, TcoCore.NO.Structure);
+	_station001 : Station001(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

@@ -13,15 +13,15 @@ VAR
     {attribute addProperty Name "<#Power enable#>"}
 	{attribute addProperty StateOnDesc "<#Enabled#>"}
 	{attribute addProperty StateOffDesc "<#Disabled#>"}
-    _driveEnableLocalTask : TcoCore.TcoToggleTask(THIS^, TcoCore.NO.Structure,FALSE);
+    _driveEnableLocalTask : TcoCore.TcoToggleTask(THIS^, FALSE);
     {attribute addProperty Name "<#Enable positive#>"}
 	{attribute addProperty StateOnDesc "<#Enabled#>"}
 	{attribute addProperty StateOffDesc "<#Disabled#>"}
-    _driveEnablePositiveLocalTask : TcoCore.TcoToggleTask(THIS^, TcoCore.NO.Structure,FALSE);
+    _driveEnablePositiveLocalTask : TcoCore.TcoToggleTask(THIS^, FALSE);
     {attribute addProperty Name "<#Enable negative#>"}
 	{attribute addProperty StateOnDesc "<#Enabled#>"}
 	{attribute addProperty StateOffDesc "<#Disabled#>"}
-    _driveEnableNegativeLocalTask : TcoCore.TcoToggleTask(THIS^, TcoCore.NO.Structure,FALSE);
+    _driveEnableNegativeLocalTask : TcoCore.TcoToggleTask(THIS^, FALSE);
 END_VAR
 VAR
     {attribute 'hide'}
@@ -31,7 +31,7 @@ VAR
     {attribute addProperty Name "<#Drive power override#>"}
 	{attribute addProperty StateOnDesc "<#Local control#>"}
 	{attribute addProperty StateOffDesc "<#Global control#>"}
-    _drivePowerOverrideTask : TcoCore.TcoToggleTask(THIS^, TcoCore.NO.Structure,FALSE);
+    _drivePowerOverrideTask : TcoCore.TcoToggleTask(THIS^, FALSE);
     {attribute 'hide'}
     _powerOverride : ePowerOverride;
     {attribute 'hide'}
@@ -169,13 +169,12 @@ END_IF]]></ST>
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;
-	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
+  	ParentObject : ITcoObject;	
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject, ParentStruct := ParentStruct);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoComponentTest EXTENDS TcoCore._internals_TcoContext
 VAR
 	_callMyPlcInstance	:	BOOL := FALSE;
-	_component : _TcoComponent(THIS^, NO.Structure);
+	_component : _TcoComponent(THIS^);
 	_runPLCinstanceOnce : BOOL := FALSE;
 	_runPLCinstanceCyclicaly : BOOL := FALSE;
 	_restore : BOOL;

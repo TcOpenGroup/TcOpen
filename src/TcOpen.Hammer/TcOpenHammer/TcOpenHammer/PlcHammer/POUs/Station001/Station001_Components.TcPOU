@@ -6,17 +6,17 @@ FUNCTION_BLOCK Station001_Components EXTENDS TcoCore.TcoObject
 VAR	
 //	_horizontalAxis : DriveSim(THIS^);
 	{attribute addProperty Name "Horizontal axis"}
-	_horizontalNcAxis : TcoDrivesBeckhoff.TcoDriveSimple(THIS^, TcoCore.NO.Structure); 
+	_horizontalNcAxis : TcoDrivesBeckhoff.TcoDriveSimple(THIS^); 
 	{attribute addProperty Name "Vertical piston"}
 	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME#>"}
 	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK#>"}
 	{attribute addProperty _stopDefaultName "<#STOP#>"}
-	_verticalPiston : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
+	_verticalPiston : TcoPneumatics.TcoCylinder(THIS^);
 	{attribute addProperty Name "Gripper piston"}
 	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME#>"}
 	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK#>"}
 	{attribute addProperty _stopDefaultName "<#STOP#>"}	
-	_gripperPiston : TcoPneumatics.TcoCylinder(THIS^, TcoCore.NO.Structure);
+	_gripperPiston : TcoPneumatics.TcoCylinder(THIS^);
 END_VAR
 (* Simulation variables *)
 VAR

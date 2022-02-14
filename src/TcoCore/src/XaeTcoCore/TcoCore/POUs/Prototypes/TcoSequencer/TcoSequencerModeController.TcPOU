@@ -42,7 +42,7 @@ VAR
 	</docu>	
 ~*)
 	{attribute addProperty Name "<#Step backward#>"}
-	_stepBackward : TcoTask(THIS^, NO.Structure);	
+	_stepBackward : TcoTask(THIS^);	
 (*~
 	<docu>
 		<summary>
@@ -52,7 +52,7 @@ VAR
 	</docu>	
 ~*)
 	{attribute addProperty Name "<#Step in#>"}
-	_stepIn : TcoTask(THIS^, NO.Structure);	
+	_stepIn : TcoTask(THIS^);	
 (*~
 	<docu>
 		<summary>
@@ -62,7 +62,7 @@ VAR
 	</docu>	
 ~*)
 	{attribute addProperty Name "<#Step forward#>"}
-	_stepForward : TcoTask(THIS^, NO.Structure);
+	_stepForward : TcoTask(THIS^);
 (*~
 	<docu>
 		<summary>
@@ -74,7 +74,7 @@ VAR
 	</docu>	
 ~*)
 	{attribute addProperty Name "<#Change mode#>"}
-	_changeMode	: TcoTask(THIS^, NO.Structure);
+	_changeMode	: TcoTask(THIS^);
 (*~
 	<docu>
 		<summary>

@@ -7,14 +7,7 @@
     <IsPackable>false</IsPackable>  	
   </PropertyGroup> 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\mts\ivf\vortex.connectors\src\protection\inxton.licencing\src\Inxton.Licencing\Inxton.Licencing.csproj" />
-    <ProjectReference Include="..\..\..\..\..\..\..\mts\ivf\vortex.framework.abstractions\src\Vortex.Framework.Abstractions\Vortex.Framework.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\..\..\..\..\mts\ivf\vortex.framework.presentation\src\wpf\Vortex.Presentation.Controls.Wpf\Vortex.Presentation.Controls.Wpf.csproj" />
-    <ProjectReference Include="..\..\..\..\..\..\..\mts\ivf\vortex.framework.presentation\src\wpf\Vortex.Presentation.Styling.Wpf\Vortex.Presentation.Styling.Wpf.csproj" />
     <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
     <ProjectReference Include="..\TcoInspectorsTestsConnector\TcoInspectorsTestsConnector.csproj" />
-  </ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Babel.Licensing" Version="2.8.7" PrivateAssets="All" />
-	</ItemGroup>
+  </ItemGroup>	
 </Project>

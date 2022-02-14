@@ -3,7 +3,7 @@
   <POU Name="SampleContext" Id="{17b40f53-8ddf-02a7-0c48-23be770b6c32}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SampleContext EXTENDS TcoCore.TcoContext
 VAR
-	_sampleComponent : SampleComponent(THIS^, TcoCore.NO.Structure);
+	_sampleComponent : SampleComponent(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

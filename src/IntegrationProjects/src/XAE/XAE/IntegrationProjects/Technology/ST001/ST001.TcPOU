@@ -4,24 +4,24 @@
     <Declaration><![CDATA[FUNCTION_BLOCK ST001 EXTENDS TcoCore.TcoObject
 VAR	
 	{attribute addProperty Name "<#MANUAL#>"}
-	_serviceModeTask : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
+	_serviceModeTask : TcoCore.TcoTask(THIS^);
     {attribute addProperty Name "<#GROUND#>"}	
-	_groundSequenceTask  : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
+	_groundSequenceTask  : TcoCore.TcoTask(THIS^);
 	{attribute addProperty Name "<#AUTOMAT#>"}	
-	_automatSequenceTask  : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
+	_automatSequenceTask  : TcoCore.TcoTask(THIS^);
 	
 	{attribute clr [Container(Layout.Stack)]}
-	_components : ST001_ComponentsHandler(THIS^, TcoCore.NO.Structure);
+	_components : ST001_ComponentsHandler(THIS^);
 	
 	{attribute clr [RenderIgnore()]}
-	_mqttMirrorComponents : ST001_ComponentsHandler(THIS^, TcoCore.NO.Structure);
+	_mqttMirrorComponents : ST001_ComponentsHandler(THIS^);
 	
 	{attribute clr [Container(Layout.Stack)]}
-	_groundPositionSequence : ST001_GroundSequence(THIS^, TcoCore.NO.Structure,eRestoreMode.None);
-	_automatPositionSequence : ST001_AutomatSequence(THIS^, TcoCore.NO.Structure,eRestoreMode.None);
+	_groundPositionSequence : ST001_GroundSequence(THIS^, eRestoreMode.None);
+	_automatPositionSequence : ST001_AutomatSequence(THIS^, eRestoreMode.None);
 	
-	_settings 	: ST001_ProcessDataManager(THIS^, TcoCore.NO.Structure);
-	_repository : ST001_ProcessDataManager(THIS^, TcoCore.NO.Structure);
+	_settings 	: ST001_ProcessDataManager(THIS^);
+	_repository : ST001_ProcessDataManager(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

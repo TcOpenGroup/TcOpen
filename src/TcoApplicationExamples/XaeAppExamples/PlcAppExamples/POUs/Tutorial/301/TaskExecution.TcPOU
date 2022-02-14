@@ -3,8 +3,8 @@
   <POU Name="TaskExecution" Id="{4822b8a3-73e8-03f9-109e-c2dfb282b463}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TaskExecution  EXTENDS TcoCore.TcoContext
 VAR
-	FastTask : FastCounter(THIS^, TcoCore.NO.Structure);
-	SlowTask : SlowCounter(THIS^, TcoCore.NO.Structure);
+	FastTask : FastCounter(THIS^);
+	SlowTask : SlowCounter(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

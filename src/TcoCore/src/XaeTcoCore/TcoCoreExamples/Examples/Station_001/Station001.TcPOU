@@ -5,11 +5,11 @@
 VAR
 	
 	{attribute addProperty Name "Long running example"}
-	LongRunningTask : TcoCore.TcoTask(THIS^, NO.Structure);
+	LongRunningTask : TcoCore.TcoTask(THIS^);
 	i :int;
-	_components : Station001_Components(THIS^, NO.Structure);
+	_components : Station001_Components(THIS^);
 	
-	_sequence : Station001_Sequencer(THIS^, NO.Structure, eRestoreMode.None, _components);
+	_sequence : Station001_Sequencer(THIS^, eRestoreMode.None, _components);
 END_VAR
 
 

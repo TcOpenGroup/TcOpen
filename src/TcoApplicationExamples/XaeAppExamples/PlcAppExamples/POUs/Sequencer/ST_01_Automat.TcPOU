@@ -3,7 +3,7 @@
   <POU Name="ST_01_Automat" Id="{6f848ece-b1d4-09dc-33fb-e8ab42728345}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST_01_Automat EXTENDS TcoCore.TcoSequencer
 VAR
-	_components : ST_01_Components(THIS^, TcoCore.NO.Structure);
+	_components : ST_01_Components(THIS^);
 	_await : fbAwait;
 END_VAR
 ]]></Declaration>

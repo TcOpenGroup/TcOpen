@@ -8,10 +8,10 @@ VAR
 	_myContextStartCount 	:	ULINT;
 	_myContextEndCount		:	ULINT;
 	_myParentIdentity		:	ULINT;
-    _sut_A : TcoTaskPlcTest(THIS^, NO.Structure);
-    _sut_B : TcoTaskPlcTest(THIS^, NO.Structure);
-	_tSt_A:TcoTaskPlcTestState(THIS^, NO.Structure,eRestoreMode.AutoRestoreMembers);
-	_tSt_B:TcoTaskPlcTestState(THIS^, NO.Structure, eRestoreMode.None);
+    _sut_A : TcoTaskPlcTest(THIS^);
+    _sut_B : TcoTaskPlcTest(THIS^);
+	_tSt_A:TcoTaskPlcTestState(THIS^, eRestoreMode.AutoRestoreMembers);
+	_tSt_B:TcoTaskPlcTestState(THIS^, eRestoreMode.None);
 END_VAR
 ]]></Declaration>
     <Implementation>

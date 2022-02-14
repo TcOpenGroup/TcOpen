@@ -8,7 +8,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	_isAlive	:	BOOL:=	TRUE;
-	_Kill		:	Kill_Task(THIS^, TcoCore.NO.Structure);
+	_Kill		:	Kill_Task(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

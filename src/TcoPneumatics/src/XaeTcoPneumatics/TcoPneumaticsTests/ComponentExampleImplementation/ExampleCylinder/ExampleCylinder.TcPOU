@@ -95,11 +95,11 @@ END_VAR
 
 VAR
     {attribute addProperty Name "<#Move Home#>"}
-    _moveHomeDefault : ExampleCylinderMoveTask(THIS^, TcoCore.NO.Structure);
+    _moveHomeDefault : ExampleCylinderMoveTask(THIS^);
     {attribute addProperty Name "<#Move to Work#>"}
-    _moveWorkDefault : ExampleCylinderMoveTask(THIS^, TcoCore.NO.Structure);
+    _moveWorkDefault : ExampleCylinderMoveTask(THIS^);
     {attribute addProperty Name "<#Stop#>"}
-    _stopDefault : TcoCore.TcoTask(THIS^, TcoCore.NO.Structure);
+    _stopDefault : TcoCore.TcoTask(THIS^);
 END_VAR
 VAR
     _config : TcoCylinderConfig;

@@ -61,12 +61,11 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 	ParentObject : ITcoObject;
-	ParentStruct : REFERENCE TO TcoCore.TcoStruct;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Hate to do this guys but I get compile error, seems to be a bug in tc
-SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject, ParentStruct := ParentStruct);]]></ST>
+SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsOverinspected" Id="{bf935660-5c6a-0837-027f-4224797b29a0}">
