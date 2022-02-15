@@ -16,7 +16,7 @@ VAR
     // myObject : TcoObject(THIS^);
 
     // Now
-    myObject : TcoObject(THIS^, TcoCore.NO.Struct);
+    myObject : TcoObject(THIS^);
 END_VAR    
 ~~~
 
@@ -28,7 +28,7 @@ TYPE
     STRUCT
         // Before not possible         
         // Now
-        myObject : TcoObject(TcoCore.NO.Obj, THIS^);
+        myObject : TcoObject(THISSTRUCT);
     END_STRUCT
 END_TYPE
 ~~~
