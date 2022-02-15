@@ -1,19 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="TcoInspector" Id="{8bf66c65-f052-03bb-1601-1a9df2821913}" SpecialFunc="None">
-    <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Base block for inspectors.		
-		</summary>			
-	</docu>	
-~*)
-FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoTask IMPLEMENTS IInspector, IOnFail
+  <POU Name="TcoInspector" Id="{cdcabed1-7ff8-095e-24f6-ca93f0ca4004}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoObject IMPLEMENTS IInspector, IOnFail
 VAR
-    _inspectionData : REFERENCE TO TcoInspectorData;
-    _passTimer      : Tc2_Standard.TON;
-    _failTimer      : Tc2_Standard.TON;
+	{attribute clr [CompilerOmits("BuilderPlainer")]}
+	_dialogueTask : TcoCore.TcoRemoteTask(THIS^);
+	{attribute clr [CompilerOmits("BuilderPlainer")]}
+	_inspectorTask : TcoInspectorTask(THIS^);
+	{attribute clr [CompilerOmits("BuilderPlainer")]}	
 	_coordinator    : TcoCore.ITcoCoordinator;
+	{attribute 'hide'}
 	_nextCallCycle  : ULINT;
 END_VAR]]></Declaration>
     <Implementation>
@@ -30,12 +26,23 @@ END_VAR
         <ST><![CDATA[_coordinator := inCoordinator;
 
 IF(_coordinator.IsFreshState) THEN
-	Restore();
+	_inspectorTask.Restore();
 END_IF
 
 _WithCoordinator := THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Busy" Id="{60182645-a16f-0ee1-06e2-bb45e9b084a5}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{077f6869-8179-04ae-0f24-65bb3b85fcaf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _inspectorTask.Busy;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="CarryOn" Id="{a840d4ae-4cf4-0c7c-37d8-3cfa8a027ffe}" FolderPath="OnFail\">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `CarryOn` method via `OnFail()` method.'}
@@ -54,7 +61,18 @@ END_IF;
 CarryOn := THIS^.Done;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{710c74ec-32a3-0d74-17b6-a5feae9c9f39}">
+    <Property Name="Done" Id="{58f0e3f3-593f-0a1d-332c-f3d91115dd9c}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6661bda9-b017-0d7c-0a73-0c7eec03da8b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Done := _inspectorTask.Done;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{4d0b0479-ae7b-014d-3a0f-a4c44c542102}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
@@ -68,48 +86,17 @@ END_VAR
 SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="IsOverinspected" Id="{bf935660-5c6a-0837-027f-4224797b29a0}">
+    <Method Name="IsOverinspected" Id="{aad1e11e-ec79-08e0-1e07-69f2014dc971}">
       <Declaration><![CDATA[METHOD PROTECTED IsOverinspected : BOOL
 
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(OverInspected) THEN
-	THIS^.DoneWhen(TRUE);
-	THIS^._inspectionData.Result := eInspectorResult.Inconclusive;
+	THIS^._inspectorTask.DoneWhen(TRUE);
+	THIS^._inspectorTask.InspectionData.Result := eInspectorResult.Inconclusive;
 END_IF
 
 IsOverinspected := OverInspected;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="OnDone" Id="{43aa6ba3-c55d-0859-25a9-24eb083056e8}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
-~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.OnDone();
-
-_inspectionData.RetryAttemptsCount := _inspectionData.RetryAttemptsCount + 1;
-
-IF (_inspectionData.Result = eInspectorResult.Bypassed) THEN
-    RETURN;
-END_IF;
-
-_inspectionData.TimeStamp := Context.RealTimeClock.NowLocal();
-_inspectionData.Result    := eInspectorResult.Failed;
-
-IF (NOT _failTimer.Q AND _passTimer.Q) THEN
-    _inspectionData.Result := eInspectorResult.Passed;
-END_IF
-
-IF (_inspectionData.IsExcluded) THEN
-    _inspectionData.Result := eInspectorResult.Excluded;
-END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnEnterInspection" Id="{fa4970f2-2c3a-0e7f-05d4-46651b249942}">
@@ -126,12 +113,14 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(OverInspected) THEN
-	THIS^.DoneWhen(TRUE);	
-	THIS^._inspectionData.Result := eInspectorResult.Inconclusive;
+	THIS^._inspectorTask.DoneWhen(TRUE);	
+	THIS^._inspectorTask.InspectionData.Result := eInspectorResult.Inconclusive;
 	OnEnterInspection := FALSE;
 ELSE
 	OnEnterInspection := TRUE;	
 END_IF
+
+
 
  ]]></ST>
       </Implementation>
@@ -144,32 +133,6 @@ END_IF
 END_IF
 
 OnFail := THIS^;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="OnStart" Id="{e650f529-4e67-0027-185e-0518bcbd4721}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes once when inspection starts.
-		</summary>			
-	</docu>	
-~*)
-METHOD PROTECTED OnStart
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.OnStart();
-
-IF (_inspectionData.PassTime = T#0S) THEN
-    _inspectionData.PassTime := T#50MS;
-END_IF;
-
-IF (_inspectionData.FailTime = T#0S) THEN
-    _inspectionData.FailTime := T#100MS;
-END_IF;
-
-_inspectionData.Result := eInspectorResult.NoAction;
-_passTimer(IN := FALSE, PT := T#0MS);
-_failTimer(IN := FALSE, PT := T#0MS);]]></ST>
       </Implementation>
     </Method>
     <Property Name="OverInspected" Id="{b4fb4777-567e-0765-037d-7f6c709b975e}">
@@ -187,26 +150,11 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[
-OverInspected := (_inspectionData.RetryAttemptsCount >= _inspectionData.NumberOfAllowedRetries) AND (_inspectionData.NumberOfAllowedRetries <> 0);]]></ST>
+OverInspected := (_inspectorTask._inspectionData.RetryAttemptsCount >= _inspectorTask._inspectionData.NumberOfAllowedRetries) 
+				 AND (_inspectorTask._inspectionData.NumberOfAllowedRetries <> 0);]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Restore" Id="{214352c6-868b-0eb6-102f-c5a86531690b}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
-~*)
-METHOD Restore : ITcoRestorable]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.Restore();]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Result" Id="{3bfa3a4a-7888-017e-224d-3476f4ea51b3}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -221,8 +169,8 @@ PROPERTY Result : eInspectorResult]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF(__ISVALIDREF(_inspectionData)) THEN
-	Result := _inspectionData.Result;	
+          <ST><![CDATA[IF(__ISVALIDREF(_inspectorTask._inspectionData)) THEN
+	Result := _inspectorTask._inspectionData.Result;	
 END_IF;	]]></ST>
         </Implementation>
       </Get>
@@ -299,12 +247,12 @@ END_VAR
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
 
-IF (NOT __ISVALIDREF(_inspectionData)) THEN
+IF (NOT __ISVALIDREF(_inspectorTask.InspectionData)) THEN
     inoResult.Result := eOverallResult.NoAction;
     RETURN;
 END_IF
 
-CASE _inspectionData.Result OF
+CASE _inspectorTask.InspectionData.Result OF
     eInspectorResult.NoAction:
         ;
     eInspectorResult.Running:
@@ -316,13 +264,13 @@ CASE _inspectionData.Result OF
         inoResult.Failures := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
             .Append(inoResult.Failures)
             .Append(';')
-            .Append(THIS^._inspectionData.FailureDescription)
+            .Append(_inspectorTask.InspectionData.FailureDescription)
             .ToString();
 
         inoResult.ErrorCodes := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
             .Append(inoResult.ErrorCodes)
             .Append(';')
-            .Append(THIS^._inspectionData.ErrorCode)
+            .Append(_inspectorTask.InspectionData.ErrorCode)
             .ToString();
     eInspectorResult.Inconclusive:
         inoResult.Result := eOverallResult.Failed;

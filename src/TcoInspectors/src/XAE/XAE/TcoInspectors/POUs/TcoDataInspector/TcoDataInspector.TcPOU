@@ -64,7 +64,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
 
-_inspectionData REF= _data;
+_inspectorTask.InspectionData REF= _data;
 
 OnEnterInspection();
 
@@ -73,13 +73,13 @@ IF(IsOverinspected())THEN
 END_IF
 
 
-Invoke();
+_inspectorTask.Invoke();
 
-IF (Execute()) THEN
+IF (_inspectorTask.Execute()) THEN
     IF (_data.IsByPassed) THEN
         _data.Result    := eInspectorResult.Bypassed;
         _data.TimeStamp := Context.RealTimeClock.NowLocal();
-        DoneWhen(TRUE);
+        _inspectorTask.DoneWhen(TRUE);
         RETURN;
     END_IF
 
@@ -123,10 +123,13 @@ IF (Execute()) THEN
 			_lastOutValue := Status;
 		END_IF
 		
-		_failTimer(IN:= TRUE, PT:=_data.FailTime);
-		_passTimer(IN:= tmpResult,PT:=_data.PassTime);
+		_inspectorTask._failTimer(IN:= TRUE, PT:=_data.FailTime);
+		_inspectorTask._passTimer(IN:= tmpResult,PT:=_data.PassTime);
 									  
-     	DoneWhen(_failTimer.Q OR _passTimer.Q);
+     	IF(_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN	  
+     		_inspectorTask.DoneWhen(TRUE);
+			OnDone();
+	 	END_IF;	
 END_IF;
 
 ]]></ST>
@@ -171,8 +174,7 @@ IsNumber := FALSE;]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.OnDone();
-IF (_data.Result = eInspectorResult.Failed) THEN
+        <ST><![CDATA[IF (_data.Result = eInspectorResult.Failed) THEN
      _data.DetectedStatus := _lastOutValue;
 END_IF]]></ST>
       </Implementation>
