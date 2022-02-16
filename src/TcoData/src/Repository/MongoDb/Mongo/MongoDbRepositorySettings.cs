@@ -28,7 +28,6 @@ namespace TcOpen.Inxton.Data.MongoDb
         /// <param name="databaseName">Database name</param>
         /// <param name="collectionName">Collection name</param>
         /// <param name="credentials">Credentials</param>
-        [Obsolete("It's not recommended to use MongoDB without any authentication in place.",false)]
         public MongoDbRepositorySettings(string connectionString, string databaseName, string collectionName)
         {            
             SetupSerialisationAndMapping();

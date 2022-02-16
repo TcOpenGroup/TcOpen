@@ -19,9 +19,7 @@
 ~*)
 TYPE
     TcoEntity :
-    STRUCT
-        {attribute wpf [Container(Layout.Stack)]}
-        {attribute wpf [Group(Layout.GroupBox)]}
+    STRUCT      
         {attribute addProperty Name "<#ID#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         _EntityId : STRING(254);

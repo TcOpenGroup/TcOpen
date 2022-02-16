@@ -24,6 +24,16 @@
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
     <CombineIds>true</CombineIds>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MAIN.TcPOU">
@@ -332,6 +342,12 @@
     <PlaceholderReference Include="Tc2_Utilities">
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
+      <Parameters>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>CMAXCHARACTERS</Key>
+          <Value>10000</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_JsonXml">
       <DefaultResolution>Tc3_JsonXml, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -353,7 +369,7 @@
       <Resolution>Tc2_System, 3.4.24.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Utilities">
-      <Resolution>Tc2_Utilities, 3.3.38.0 (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_Utilities, 3.3.47.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_JsonXml">
       <Resolution>Tc3_JsonXml, 3.3.15.0 (Beckhoff Automation GmbH)</Resolution>

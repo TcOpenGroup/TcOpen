@@ -34,7 +34,7 @@ VAR
 	{attribute clr [RenderIgnore()]}
 	_doneSignarure : STRING;
 	{attribute clr [RenderIgnore()]}
-	_exceptionMessage : STRING;
+	_exceptionMessage : STRING(255);
 END_VAR
 ]]></Declaration>
     <Implementation>

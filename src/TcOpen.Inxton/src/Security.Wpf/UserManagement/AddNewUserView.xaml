@@ -4,15 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+    xmlns:local="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
-    xmlns:local="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
     d:DesignHeight="800"
     d:DesignWidth="850"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <local:AddNewUserViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="12" Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -115,33 +128,74 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition
+                    x:Name="RolesRow"
+                    Height="*"
+                    MaxHeight="250" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Content="{x:Static p:strings.AvailableRoles}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="2"
-                Content="{x:Static p:strings.AssignedRoles}" />
-            <Border Grid.Row="1"
-                Grid.Column="0"
-                            Padding="5"
-                            BorderThickness=".5"
-                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
-                <ListBox
-                x:Name="AllRoles"
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{x:Static p:strings.AvailableRoles}" />
+                <TextBox
+                    x:Name="AllRolesTextFilter"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    TextChanged="TextFilter_TextChanged" />
+                <Button
+                    x:Name="ClearAllRolesFilter"
+                    Grid.Column="1"
+                    Margin="0,0,0,2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="ClearAllRolesFilter_Click"
+                    Style="{StaticResource TransparentStyle}">
+                    ✖
+                </Button>
+
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{x:Static p:strings.AssignedRoles}" />
+                <TextBox
+                    x:Name="AssignedRolesTextFilter"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    TextChanged="TextFilter_TextChanged" />
+                <Button
+                    x:Name="ClearAssignedFilter"
+                    Grid.Column="1"
+                    Margin="0,0,0,2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="ClearAssignedFilter_Click"
+                    Style="{StaticResource TransparentStyle}">
+                    ✖
+                </Button>
+            </Grid>
+            <Border
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="0,0,10,0"
-                ItemsSource="{Binding AllRolesFiltered, Mode=TwoWay}"
-                SelectionMode="Extended">
+                BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}"
+                BorderThickness=".5">
+                <ListBox
+                    x:Name="AllRoles"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    MaxHeight="{Binding ElementName=RolesRow, Path=MaxHeight}"
+                    Margin="0,0,0,0"
+                    ItemsSource="{Binding AllRolesFiltered, Mode=TwoWay}"
+                    SelectionMode="Extended">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding AddRoleCommand}" CommandParameter="{Binding ElementName=AllRoles, Path=SelectedItem}" />
@@ -165,17 +219,18 @@
                     CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItems}"
                     Content="←" />
             </StackPanel>
-            <Border Grid.Row="1"
-                    Grid.Column="3"
-                    Padding="5"
-                    BorderThickness=".5"
-                    BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}">
-                <ListBox
-                x:Name="AssignedRoles"
+            <Border
                 Grid.Row="1"
                 Grid.Column="3"
-                ItemsSource="{Binding NewUser.Roles}"
-                SelectionMode="Extended">
+                BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}"
+                BorderThickness=".5">
+                <ListBox
+                    x:Name="AssignedRoles"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    MaxHeight="{Binding ElementName=RolesRow, Path=MaxHeight}"
+                    ItemsSource="{Binding NewUser.Roles}"
+                    SelectionMode="Extended">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding RemoveRoleCommand}" CommandParameter="{Binding ElementName=AssignedRoles, Path=SelectedItem}" />
@@ -185,7 +240,7 @@
             </Border>
         </Grid>
         <Button
-            Margin="10"            
+            Margin="10"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Command="{Binding StartCreateNewCommand}"
