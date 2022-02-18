@@ -19,7 +19,7 @@ using TcOpen.Inxton.Input;
 
 namespace TcoData
 {
-    public class DataViewModel<T> : Vortex.Presentation.Wpf.BindableBase, FunctionAvailability where T : IBrowsableDataObject, new()
+    public class DataViewModel<T> : Vortex.Presentation.Wpf.BindableBase, FunctionAvailability, IDataExchangeOperations where T : IBrowsableDataObject, new()
     {
         string filterByID;
 
@@ -40,6 +40,7 @@ namespace TcoData
         {
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
+            this.DataExchange.DataExchangeOperations = this;
 
             StartCreateNewCommand = new RelayCommand(p => StartCreatingNew(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateNewCommand)));
             CreateNewCommand = new RelayCommand(p => this.CreateNew(), _ => this.RecordIdentifier != string.Empty, () => LogCommand(nameof(CreateNewCommand)));
@@ -321,11 +322,11 @@ namespace TcoData
 
         internal void FillObservableRecords()
         {
-            ObservableRecords.Clear();
+            TcoAppDomain.Current.Dispatcher.Invoke(() => ObservableRecords.Clear());
             DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit);
             foreach (var item in DataBrowser.Records)
             {
-                ObservableRecords.Add(item);
+                TcoAppDomain.Current.Dispatcher.Invoke(() => ObservableRecords.Add(item));
             }
         }
         void LoadFromPlc()
@@ -343,6 +344,8 @@ namespace TcoData
                 this.Mode = ViewMode.Edit;
             }, "", () => MessageBox.Show($"{strings.WouldYouLikeToGetFromPLC}", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
         }
+
+        public void InvokeSearch() => Filter();
 
         public ICommand ExportCommand { get; }
         public ICommand ImportCommand { get; }

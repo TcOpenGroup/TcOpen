@@ -57,6 +57,8 @@ namespace TcoData
         public void InitializeRepository<T>(IRepository<T> repository) where T : IBrowsableDataObject
             => _repository = repository as IRepository;
 
+        /// <summary>An interaface which grants access to certain operations in DataExchange viewmodel, like searching by id, invoking search or filling the searchbox</summary>
+        public IDataExchangeOperations DataExchangeOperations { get; set; }
 
         public void InitializeRemoteDataExchange()
         {
