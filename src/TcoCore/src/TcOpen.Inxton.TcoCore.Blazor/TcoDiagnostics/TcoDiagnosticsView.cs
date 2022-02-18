@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Vortex.Connector;
 
 namespace TcoCore
@@ -12,8 +13,10 @@ namespace TcoCore
         protected override void OnInitialized()
         {
             UpdateValuesOnChange(ViewModel._tcoObject);
+            this.DiagnosticsUpdateTimer();
         }
 
+        public string DiagnosticsStatus { get; set; } = "Diagnostics is not running!";
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
         private string Symbol { get; set; }
         public void OnSelectedMessage(PlainTcoMessage message)
@@ -27,28 +30,24 @@ namespace TcoCore
 
       
 
-        private System.Timers.Timer messageUpdateTimer;
+        private Timer messageUpdateTimer;
         private void DiagnosticsUpdateTimer()
         {
             if (messageUpdateTimer == null)
             {
-                messageUpdateTimer = new System.Timers.Timer(2500);
+                messageUpdateTimer = new Timer(2500);
                 messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
                 messageUpdateTimer.AutoReset = true;
                 messageUpdateTimer.Enabled = true;
+             
             }
         }
+ 
+        
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-
-            if ((ViewModel != null) && !ViewModel.AutoUpdate)
-            {
-                return;
-            }
-
             ViewModel.UpdateMessages();
             InvokeAsync(StateHasChanged);
-
             
         }
     }
