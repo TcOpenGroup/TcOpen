@@ -1,3 +1,4 @@
+using Blazm.Components;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -25,6 +26,7 @@ using TcOpen.Inxton.Local.Security.Blazor;
 using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
+using TcOpen.Inxton.TcoCore.Blazor.Extensions;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -47,13 +49,13 @@ namespace PlcHammer.Hmi.Blazor
             services.AddServerSideBlazor();
           
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<WeatherForecastService>();
             services.AddVortexBlazorServices();
+            services.AddTcoCoreExtensions();
 
             /*MongoDb repositories for security*/
             //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
             //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "Hammer", "Roles"));
-            
+
             /*Json repositories for security*/
             var userRepo = SetUpUserRepositoryJson();
             var roleRepo = SetUpRoleRepositoryJson();
