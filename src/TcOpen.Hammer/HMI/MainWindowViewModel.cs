@@ -19,7 +19,7 @@ namespace PlcHammer.Hmi
             Users = new UserManagementViewModel();
         }
 
-        private bool IsDesignTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
+        private readonly bool IsDesignTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
         public PlcHammer.PlcHammerTwinController PlcHammer { get { return IsDesignTime ? Entry.PlcHammerDesign : Entry.PlcHammer; } }     
         
