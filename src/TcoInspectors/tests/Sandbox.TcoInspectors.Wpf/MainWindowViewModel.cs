@@ -7,6 +7,7 @@ using Vortex.Connector.ValueTypes;
 using System.Linq;
 using TcoInspectorsTests;
 using TcOpen.Inxton.Input;
+using TcOpen.Inxton.TcoInspectors;
 
 namespace Sandbox.TcoInspectors.Wpf
 {    
@@ -14,6 +15,9 @@ namespace Sandbox.TcoInspectors.Wpf
     {
         public MainWindowViewModel()
         {
+            // InspectorProxyService.Create(App.Plc.MAIN._exampleContext);
+            TcOpen.Inxton.TcoCore.Wpf.DialogProxyService.Create(App.Plc.MAIN._exampleContext);
+                
             this.FromOnlineToShadowCommand = new RelayCommand(a => FromOnlineToShadow());
             this.FromShadowToOnlineCommand = new RelayCommand(a => FromShadowToOnline());
         }

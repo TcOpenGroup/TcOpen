@@ -3,17 +3,19 @@
   <POU Name="EXAMPLES_PRG" Id="{ce53afe8-e524-0dc9-2ef6-f4e12a5dd130}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM EXAMPLES_PRG
 VAR
-	_context : fbContext;
-	_recordableStations : RecordableStation001;
-	_loggerContext : LoggerContext;
-	_strucuredContext : StrucuredContext;
-	a : TcoCore.ITcoObject;
+    _context            : fbContext;
+    _recordableStations : RecordableStation001;
+    _loggerContext      : LoggerContext;
+    _strucuredContext   : StrucuredContext;
+    _diaglogsContext    : DiaglogsContext;
+    a                   : TcoCore.ITcoObject;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_context.Run();
 _recordableStations.Run();
 _loggerContext.Run();
+_diaglogsContext.Run();
 
 a := _strucuredContext._structuredData._o1.Parent;]]></ST>
     </Implementation>

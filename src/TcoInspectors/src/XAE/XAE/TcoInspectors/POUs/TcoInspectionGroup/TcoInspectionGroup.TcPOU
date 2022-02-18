@@ -8,6 +8,12 @@ VAR
 	{attribute 'hide'}
     _result : REFERENCE TO TcoComprehensiveResult;
 	_sharedResult : TcoComprehensiveResult;
+	_inspections : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
+	_inspectionIndex : INT;
+END_VAR
+
+VAR CONSTANT
+	LAST_INSPECTION_INDEX : INT := 15;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -24,10 +30,45 @@ VAR_IN_OUT
 	inoResult : TcoComprehensiveResult;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Act   := THIS^;
-_result REF=inoResult;
-_sharedResult := _result;
-_done := TRUE;]]></ST>
+        <ST><![CDATA[Act              := THIS^;
+_inspectionIndex := 0;
+_result          REF= inoResult;
+_sharedResult    := _result;
+_done            := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Dialog" Id="{74a2f6ff-2257-0b1f-0c44-f3b62d0819e8}" FolderPath="OnFail\">
+      <Declaration><![CDATA[METHOD Dialog : BOOL
+VAR_INPUT
+	inRetryStep : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(THIS^.Done) THEN		
+	IF(THIS^._sharedResult.Result = eOverallResult.Failed) THEN
+		THIS^._tcoInspectorDialogue.Invoke();
+		_tcoInspectorDialogue();	
+		
+		IF(_tcoInspectorDialogue._dialogueRetryTask.Execute()) THEN
+			_tcoInspectorDialogue._dialogueRetryTask.DoneWhen(Retry(inRetryStep));
+		END_IF
+		
+		IF(_tcoInspectorDialogue._dialogueTerminateTask.Execute()) THEN
+			_tcoInspectorDialogue._dialogueTerminateTask.DoneWhen(Terminate());
+		END_IF
+		
+		IF(_tcoInspectorDialogue._dialogueOverrideTask.Execute()) THEN
+			_tcoInspectorDialogue._dialogueOverrideTask.DoneWhen(CarryOn());
+		END_IF
+	ELSE
+		IF(Coordinator <> 0) THEN
+			Coordinator.MoveNext();
+		END_IF;	
+	END_IF;	
+END_IF;
+
+
+
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Done" Id="{5d8b674b-9e76-0be3-1a04-7b0897c7e892}">
@@ -46,23 +87,41 @@ END_VAR
     </Property>
     <Method Name="Inspect" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
       <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `Inquire` property via `Act()` method.'}
+{attribute 'obsolete' := 'You should access `Inspect` property via `Act()` method.'}
 METHOD Inspect : ITcoInspectionGroup
 VAR_INPUT
     Inspector : IInspector;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Inspect := THIS^;
+        <ST><![CDATA[OnEnterInspection();
+
+Inspect := THIS^;
 
 IF (NOT Inspector.Done) THEN
     _done := FALSE;					
 END_IF
 
 Inspector.UpdateComprehensiveResult(_result);
+
+IF(_inspectionIndex <= LAST_INSPECTION_INDEX)THEN
+	_inspections[_inspectionIndex] :=  Inspector.Identity;
+	_inspectionIndex := _inspectionIndex + 1;
+END_IF
 	
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnFail" Id="{ad5daf18-5adf-0409-3fbe-22acf686dffa}" FolderPath="OnFail\">
+      <Declaration><![CDATA[METHOD OnFail : IOnFail
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._tcoInspectorDialogue.SetInspector(THIS^);
+_sharedResult := _result;
+OnFail := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Retry" Id="{35486965-61f5-0154-3790-1cbb7d6396ad}" FolderPath="OnFail\">

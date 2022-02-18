@@ -4,9 +4,12 @@
     <Declaration><![CDATA[TYPE
     ExampleInspectorsStruct EXTENDS TcoCore.TcoStruct :
     STRUCT
+		{attribute addProperty Name "Overall result"}
         OverallResult         : TcoInspectors.TcoComprehensiveResult;
+		{attribute addProperty Name "DMC code inspection"}
         DmcInspector          : TcoInspectors.TcoDataInspector(THISSTRUCT);
-        BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);
+		{attribute addProperty Name "Bolt presence inspection"}
+        BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);		
         Dimensions            : ExampleDimensionsInspectors := (Parent := THISSTRUCT);
     END_STRUCT
 END_TYPE

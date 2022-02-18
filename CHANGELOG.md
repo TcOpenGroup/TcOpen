@@ -20,7 +20,7 @@ VAR
 END_VAR    
 ~~~
 
-**FB_init when object is in another STRUCTURE**
+*FB_init when object is in another STRUCTURE*
 
 ~~~
 TYPE

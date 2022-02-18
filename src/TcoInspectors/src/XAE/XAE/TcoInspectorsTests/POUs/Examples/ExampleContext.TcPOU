@@ -3,11 +3,16 @@
   <POU Name="ExampleContext" Id="{1aa2a6c1-d36a-0374-1754-fb6150365769}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleContext EXTENDS TcoCore.TcoContext
 VAR
-    Data            : ExampleInspectorsStruct := (Parent := THIS^);
+    Data            : ExampleInspectorsStruct := (Parent := THIS^);	
     Components      : ExampleComponents       := (Parent := THIS^);
-    _sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
-    GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
-    _observer       : TcoCore.TcoSequencerObserver(THIS^);
+	GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
+    _sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);    
+    _observer       : TcoCore.TcoSequencerObserver(THIS^);	
+	{attribute addProperty Name "Start sequence"}
+	_sequence1Task	: Sequence1Task(THIS^);
+	_dialog			: TcoCore.TcoDialog(THIS^);	
+	{attribute 'hide'}
+	EmptyData       : ExampleInspectorsStruct := (Parent := THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -24,7 +29,12 @@ END_VAR]]></Declaration>
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Sequence1();
+        <ST><![CDATA[
+_sequence1Task(Sequence := _sequence1);
+
+IF(_sequence1Task.Execute())THEN
+	Sequence1();
+END_IF;	
 
 ]]></ST>
       </Implementation>
@@ -32,7 +42,8 @@ METHOD PROTECTED  Main]]></Declaration>
     <Method Name="Sequence1" Id="{fef70385-7bed-099c-3214-bed4b6f98420}">
       <Declaration><![CDATA[METHOD Sequence1
 VAR
-	seq : REFERENCE TO TcoCore.TcoSequence;
+    seq    : REFERENCE TO TcoCore.TcoSequence;
+    answer : TcoCore.eDialogAnswer;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[seq REF= _sequence1;
@@ -42,8 +53,53 @@ seq.Observer := _observer;
 
 IF (seq.Step(inStepID := 0,
     inEnabled := TRUE,
-    inStepDescription := 'INIT')) THEN
-    //--------------------------------------------------------    	 	
+    inStepDescription := 'ASKING SOME QUESTION')) THEN
+    //--------------------------------------------------------
+	answer := _dialog.Show()
+			.WithCaption('Ready to go?')
+			.WithText('We are about to start the inspection sequence. Do we go ahead?')
+			.WithYesNo().Answer;
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 25,
+    inEnabled := TRUE,
+    inStepDescription := 'SETUP DATA')) THEN
+    //--------------------------------------------------------    
+	 	Data := EmptyData;
+		
+		Data.DmcInspector.Data.RequiredStatus := 'A#*';
+		Data.DmcInspector.Data.StarNotationEnabled := TRUE;
+		Data.DmcInspector.Data.RequiredStatus := 'A#*';
+		Data.DmcInspector.Data.PassTime := T#1500MS;    
+		Data.DmcInspector.Data.FailTime := T#2S;
+		
+		Data.BoltPresenceInspector.Data.RequiredStatus := TRUE;
+		Data.BoltPresenceInspector.Data.PassTime := T#1500MS;    
+		Data.BoltPresenceInspector.Data.FailTime := T#2S;	
+
+		Data.Dimensions.DimX_Inspector.Data.PassTime := T#1500MS;    
+		Data.Dimensions.DimX_Inspector.Data.FailTime := T#2S;
+		Data.Dimensions.DimX_Inspector.Data.RequiredMin := 9.75;
+		Data.Dimensions.DimX_Inspector.Data.RequiredMax := 10.25;
+		
+		Data.Dimensions.DimY_Inspector.Data.PassTime := T#1500MS;    
+		Data.Dimensions.DimY_Inspector.Data.FailTime := T#2S;
+		Data.Dimensions.DimY_Inspector.Data.RequiredMin := 9.75;
+		Data.Dimensions.DimY_Inspector.Data.RequiredMax := 10.25;
+
+		Data.Dimensions.DimZ_Inspector.Data.PassTime := T#1500MS;    
+		Data.Dimensions.DimZ_Inspector.Data.FailTime := T#2S;
+		Data.Dimensions.DimZ_Inspector.Data.RequiredMin := 9.75;
+		Data.Dimensions.DimZ_Inspector.Data.RequiredMax := 10.25;		
+		
+		Data.DmcInspector.Data.NumberOfAllowedRetries := 5;    
 		seq.CompleteStep();
     //--------------------------------------------------------			
 END_IF;
@@ -51,10 +107,7 @@ END_IF;
 IF (seq.Step(inStepID := 50,
     inEnabled := TRUE,
     inStepDescription := 'INIT')) THEN
-    //--------------------------------------------------------    
-	 	Data.OverallResult.Result     := eOverallResult.NoAction;
-        Data.OverallResult.Failures   := '';
-        Data.OverallResult.ErrorCodes := '';
+    //--------------------------------------------------------    	 	       
 		seq.CompleteStep();
     //--------------------------------------------------------			
 END_IF;
@@ -67,7 +120,7 @@ IF (seq.Step(inStepID := 100,
 		.Inspect(Components.DmcReader)		
         .UpdateComprehensiveResult(Data.OverallResult)
         .OnFail()
-        .Retry(50);
+		.Dialog(50);
     //--------------------------------------------------------			
 END_IF;
 
@@ -80,9 +133,11 @@ IF (seq.Step(inStepID := 200,
 		.Inspect(Components.BoltPresenceSensor)
 		.UpdateComprehensiveResult(Data.OverallResult)
         .OnFail()
-        .CarryOn();
+        .Dialog(50);
     //--------------------------------------------------------			
 END_IF;
+
+
 
 IF (seq.Step(inStepID := 300,
     inEnabled := TRUE,
@@ -93,17 +148,17 @@ IF (seq.Step(inStepID := 300,
 		.Act(Data.OverallResult)	
         .Inspect(Data.Dimensions.DimX_Inspector.WithCoordinator(seq).Inspect(Components.DimX_Sensor))
         .Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor))
-        .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))		
-        .OnFail()
-		.Retry(50);
+        .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))
+		.OnFail()
+		.Dialog(300);				        		
     //--------------------------------------------------------			
 END_IF;
 
-IF (seq.Step(inStepID := 400,
+IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
     inEnabled := TRUE,
     inStepDescription := '')) THEN
-    //--------------------------------------------------------
-    seq.CompleteSequence();
+    //--------------------------------------------------------	
+    	seq.CompleteSequence();
     //--------------------------------------------------------			
 END_IF;
 

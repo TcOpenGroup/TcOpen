@@ -39,12 +39,15 @@
                             </Grid>
                         </TabItem>
                     </TabControl>
-                    <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+                    <GroupBox Header="Inputs">
+                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+                    </GroupBox>
                     <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
                     <WrapPanel HorizontalAlignment="Center">
                         <Button Command="{Binding FromOnlineToShadowCommand}">From online to shadow</Button>
                         <Button Command="{Binding FromShadowToOnlineCommand}">From shadow to online</Button>
+                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1Task}" PresentationType="Base" Width="200"></vortex:RenderableContentControl>
                     </WrapPanel>
                 </StackPanel>
             </TabItem>

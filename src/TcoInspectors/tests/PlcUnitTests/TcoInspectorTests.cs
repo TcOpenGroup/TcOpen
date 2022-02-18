@@ -185,7 +185,7 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             InspectorContainer.ExecuteProbeRun(1, (int)eInspectorTests.GetResult);
 
-            Assert.AreEqual(eInspectorResult.Inconclusive, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
             Assert.AreEqual(true, InspectorContainer._isOverIspected.Synchron);
 
         }

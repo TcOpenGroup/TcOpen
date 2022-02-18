@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <Itf Name="IInspector" Id="{0cbe9e39-d5a4-05af-17ce-7965efd20de3}">
-    <Declaration><![CDATA[INTERFACE IInspector 
+    <Declaration><![CDATA[INTERFACE IInspector EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
     <Property Name="Busy" Id="{b32bf15d-c374-0d51-2e79-45bad14701d4}">
       <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
@@ -9,9 +9,21 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="Coordinator" Id="{53464262-388f-0508-055a-3695c0743081}">
+      <Declaration><![CDATA[PROPERTY Coordinator : TcoCore.ITcoCoordinator]]></Declaration>
+      <Get Name="Get" Id="{e54c0b21-129c-0276-1867-e027cd67689d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="Done" Id="{619d20fa-40bc-0c73-013c-9ce9a7b16b05}">
       <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{dda1cead-ae16-0ba2-2984-226a50200b84}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Identity" Id="{30ca9dd1-1e56-01cf-3dbc-58c99beb7408}">
+      <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
+      <Get Name="Get" Id="{275ba232-6810-0478-08ce-630296e4e874}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
@@ -31,9 +43,26 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Method Name="UpdateComprehensiveResult" Id="{5d6cf906-2212-0e3f-182f-3c47b27fe0e1}">
-      <Declaration><![CDATA[METHOD UpdateComprehensiveResult : IInspector
+    <Method Name="UpdateComprehensiveResult" Id="{91a1c4e6-d695-0902-3533-5110a9d88e30}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Updates comprehensive result. The comprehensive result is set to `Failed` when any inspection fails or is inconclusive.
+			Any bypassed or excluded inspection are not taken in the account.			
+		</summary>			
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inspect` method.'}
+METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Comprehensive result data structure to be updated.	
+		</summary>			
+	</docu>	
+	~*)
     inoResult : TcoComprehensiveResult;
 END_VAR
 ]]></Declaration>

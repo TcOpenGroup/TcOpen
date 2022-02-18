@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TcoInspectorsTests;
 using Vortex.Adapters.Connector.Tc3.Adapter;
+using TcOpen.Inxton.Local.Security;
 
 namespace Sandbox.TcoInspectors.Wpf
 {
@@ -17,11 +18,12 @@ namespace Sandbox.TcoInspectors.Wpf
     public partial class App : Application
     {
         public App()
-        {
+        {         
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
-            
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetSecurity(SecurityManager.CreateDefault());
+                            
             Plc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
         }
 

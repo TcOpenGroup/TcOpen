@@ -4,8 +4,11 @@
     <Declaration><![CDATA[TYPE
     ExampleDimensionsInspectors EXTENDS TcoCore.TcoStruct :
     STRUCT
+		{attribute addProperty Name "Dimension X inspection"}
         DimX_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension Y inspection"}
         DimY_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension Z inspection"}
         DimZ_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
     END_STRUCT
 END_TYPE
