@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{CBB44910-D138-4D2E-8A51-F7350E5E822D}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{CBB44910-D138-4D2E-8A51-F7350E5E822D}" TargetNetId="172.20.10.104.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -20,7 +20,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcAppExamples\PlcAppExamples.tmc">
 					<Name>PlcAppExamples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

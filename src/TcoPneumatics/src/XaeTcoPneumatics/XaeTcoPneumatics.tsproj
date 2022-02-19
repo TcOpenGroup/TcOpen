@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" TargetNetId="172.20.10.2.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="4"/>
 			<Tasks>
@@ -24,7 +24,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{37585681-C225-40E0-832C-EB8E077A5CE7}" Name="TcoPneumatics" PrjFilePath="TcoPneumatics\TcoPneumatics.plcproj" TmcFilePath="TcoPneumatics\TcoPneumatics.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{37585681-C225-40E0-832C-EB8E077A5CE7}" Name="TcoPneumatics" PrjFilePath="TcoPneumatics\TcoPneumatics.plcproj" TmcFilePath="TcoPneumatics\TcoPneumatics.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoPneumatics\TcoPneumatics.tmc">
 					<Name>TcoPneumatics Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -36,7 +36,7 @@
 					</Contexts>
 				</Instance>
 			</Project>
-			<Project GUID="{7DB1F25E-9FE8-42FD-A45E-F8FD0ACF6EA7}" Name="TcoPneumaticsTests" PrjFilePath="TcoPneumaticsTests\TcoPneumaticsTests.plcproj" TmcFilePath="TcoPneumaticsTests\TcoPneumaticsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{7DB1F25E-9FE8-42FD-A45E-F8FD0ACF6EA7}" Name="TcoPneumaticsTests" PrjFilePath="TcoPneumaticsTests\TcoPneumaticsTests.plcproj" TmcFilePath="TcoPneumaticsTests\TcoPneumaticsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoPneumaticsTests\TcoPneumaticsTests.tmc">
 					<Name>TcoPneumaticsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

@@ -16,17 +16,35 @@
     <Grid Grid.Row="0">
         <TabControl>
             <TabItem Header="Examples">
-                <StackPanel  Grid.IsSharedSizeScope="True">
+                <ScrollViewer>
+                    <StackPanel  Grid.IsSharedSizeScope="True">
                     <TabControl MaxHeight="600">
                         <TabItem Header="Online">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ControlSlim-Control"></vortex:RenderableContentControl>
-                                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="DisplaySlim-Display"></vortex:RenderableContentControl>
-                            </Grid>
+                                <TabControl>
+                                    <TabItem Header="Sequence">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <vortex:RenderableContentControl Grid.Row="1"  Grid.Column="0" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="DisplaySlim-Display"></vortex:RenderableContentControl>
+                                            <GroupBox Header="Inputs" Grid.Row="1" Grid.Column="1">
+                                                <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+                                            </GroupBox>
+                                            <WrapPanel HorizontalAlignment="Center">
+                                                <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1Task}" PresentationType="Base" Width="200"></vortex:RenderableContentControl>
+                                            </WrapPanel>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Settings">
+                                        <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ControlSlim-Control"></vortex:RenderableContentControl>
+                                    </TabItem>
+                                </TabControl>
+                          
                         </TabItem>
                         <TabItem Header="Shadow">
                             <Grid>
@@ -35,21 +53,19 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ShadowControlSlim-ShadowControl"></vortex:RenderableContentControl>
-                                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ShadowDisplaySlim-ShadowDisplay"></vortex:RenderableContentControl>
-                            </Grid>
+                                    <WrapPanel HorizontalAlignment="Center" Grid.Column="1">
+                                        <Button Command="{Binding FromOnlineToShadowCommand}">From online to shadow</Button>
+                                        <Button Command="{Binding FromShadowToOnlineCommand}">From shadow to online</Button>
+                                    </WrapPanel>
+                                </Grid>
                         </TabItem>
                     </TabControl>
-                    <GroupBox Header="Inputs">
-                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
-                    </GroupBox>
+                  
                     <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Button Command="{Binding FromOnlineToShadowCommand}">From online to shadow</Button>
-                        <Button Command="{Binding FromShadowToOnlineCommand}">From shadow to online</Button>
-                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1Task}" PresentationType="Base" Width="200"></vortex:RenderableContentControl>
-                    </WrapPanel>
+                    
                 </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Manually">
                 <StackPanel>

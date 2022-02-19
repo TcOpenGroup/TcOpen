@@ -119,20 +119,16 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="TcoCore">
+    <PlaceholderReference Include=",,">
       <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoCore" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoInspectors.tmc">
       <SubType>Content</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 1.18.6.1495 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

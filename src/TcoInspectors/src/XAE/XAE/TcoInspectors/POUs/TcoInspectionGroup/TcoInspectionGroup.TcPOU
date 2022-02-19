@@ -7,7 +7,9 @@ VAR
     _done   : BOOL;
 	{attribute 'hide'}
     _result : REFERENCE TO TcoComprehensiveResult;
-	_sharedResult : TcoComprehensiveResult;
+	_sharedResult : TcoComprehensiveResult;	
+	_currentRunResult : TcoComprehensiveResult;	
+	_expectedCycle : ULINT;
 	_inspections : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
 	_inspectionIndex : INT;
 END_VAR
@@ -34,7 +36,13 @@ END_VAR]]></Declaration>
 _inspectionIndex := 0;
 _result          REF= inoResult;
 _sharedResult    := _result;
-_done            := TRUE;]]></ST>
+_done            := TRUE;
+
+IF(Context.StartCycleCount <> _expectedCycle) THEN
+	_currentRunResult.Result := eOverallResult.NoAction;
+END_IF
+	
+_expectedCycle := Context.StartCycleCount + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Dialog" Id="{74a2f6ff-2257-0b1f-0c44-f3b62d0819e8}" FolderPath="OnFail\">
@@ -44,7 +52,7 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(THIS^.Done) THEN		
-	IF(THIS^._sharedResult.Result = eOverallResult.Failed) THEN
+	IF(THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
 		THIS^._tcoInspectorDialogue.Invoke();
 		_tcoInspectorDialogue();	
 		
@@ -100,9 +108,12 @@ Inspect := THIS^;
 
 IF (NOT Inspector.Done) THEN
     _done := FALSE;					
+ELSE
+	Inspector.UpdateComprehensiveResult(_result);
 END_IF
 
-Inspector.UpdateComprehensiveResult(_result);
+
+Inspector.UpdateComprehensiveResult(_currentRunResult);
 
 IF(_inspectionIndex <= LAST_INSPECTION_INDEX)THEN
 	_inspections[_inspectionIndex] :=  Inspector.Identity;
@@ -120,7 +131,6 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._tcoInspectorDialogue.SetInspector(THIS^);
-_sharedResult := _result;
 OnFail := THIS^;]]></ST>
       </Implementation>
     </Method>
