@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoDialogBase" Id="{b361351b-637d-0485-12e4-25b8c4bb42be}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoDialogBase EXTENDS TcoRemoteTask
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Method Name="OnStart" Id="{05c1ce12-e48b-0c1d-3ab0-55659aef6070}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnStart();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

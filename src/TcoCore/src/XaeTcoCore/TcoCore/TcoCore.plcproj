@@ -78,6 +78,9 @@
     <Compile Include="POUs\ImplicitChecks\CheckRangeUnsigned.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\Abstractions\ITcoCoordinator.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +94,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\eDialogAnswer.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\ITcoDialogAnswer.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\ITcoDialogFormat.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoDialog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoDialogBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoLogger\ITcoLogger.TcIO">
@@ -157,6 +175,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMomentaryTask\TcoMomentaryTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoNothing\NO.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoObject\ITcoObject.TcIO">
@@ -244,6 +265,12 @@
     <Compile Include="POUs\Prototypes\TcoState\TcoStateExtendible.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoParentedStructure.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\eTaskState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -295,6 +322,10 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\ImplicitChecks" />
+    <Folder Include="POUs\Prototypes\TcoDialog" />
+    <Folder Include="POUs\Prototypes\TcoNothing" />
+    <Folder Include="POUs\Prototypes\TcoStruct" />
+    <Folder Include="POUs\Prototypes\Abstractions" />
     <Folder Include="POUs\Prototypes\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />

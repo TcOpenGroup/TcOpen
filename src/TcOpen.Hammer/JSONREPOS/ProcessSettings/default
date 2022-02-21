@@ -1,21 +1,413 @@
 {
+  "RecipeName": "default",
   "DimX": {
-    "Mininum": 8.0,
-    "Measured": 0.0,
-    "Maximum": 9.5
+    "_data": {
+      "RequiredMin": 100.0,
+      "DetectedStatus": 0.0,
+      "RequiredMax": 110.0,
+      "TimeStamp": "0001-01-01T00:00:00",
+      "PassTime": "00:00:02",
+      "FailTime": "00:00:01",
+      "Result": 0,
+      "IsExcluded": false,
+      "IsByPassed": false,
+      "FailureDescription": "",
+      "NumberOfAllowedRetries": 0,
+      "RetryAttemptsCount": 0,
+      "ErrorCode": ""
+    },
+    "_inspectionData": {
+      "TimeStamp": "0001-01-01T00:00:00",
+      "PassTime": "00:00:00",
+      "FailTime": "00:00:00",
+      "Result": 0,
+      "IsExcluded": false,
+      "IsByPassed": false,
+      "FailureDescription": "",
+      "NumberOfAllowedRetries": 0,
+      "RetryAttemptsCount": 0,
+      "ErrorCode": ""
+    },
+    "_nextCallCycle": 0,
+    "_taskState": 0,
+    "_restoreRequest": false,
+    "_invokeRequest": false,
+    "_abortRequest": false,
+    "_enabled": false,
+    "_isServiceable": false,
+    "_elapsedTime": "00:00:00",
+    "_Identity": 0,
+    "_ParentStruct": {},
+    "j": false,
+    "_messenger": {
+      "_mime": {
+        "CategoryAsEnum": 0,
+        "Text": "",
+        "Location": null,
+        "PerCycleCount": 0,
+        "Pinned": false,
+        "TimeStamp": "0001-01-01T00:00:00",
+        "Source": null,
+        "SubCategory": 0,
+        "ParentsObjectSymbol": null,
+        "ParentsHumanReadable": null,
+        "Raw": null,
+        "Identity": 0,
+        "Category": 0,
+        "Cycle": 0,
+        "ExpectDequeing": false,
+        "MessageDigest": 0
+      },
+      "_contextIdentity": 0,
+      "MDS_MAX_INDEX": 0
+    }
   },
   "DimY": {
-    "Mininum": 8.0,
-    "Measured": 0.0,
-    "Maximum": 10.0
+    "_data": {
+      "RequiredMin": 100.0,
+      "DetectedStatus": 0.0,
+      "RequiredMax": 110.0,
+      "TimeStamp": "0001-01-01T00:00:00",
+      "PassTime": "00:00:02",
+      "FailTime": "00:00:01",
+      "Result": 0,
+      "IsExcluded": false,
+      "IsByPassed": false,
+      "FailureDescription": "",
+      "NumberOfAllowedRetries": 0,
+      "RetryAttemptsCount": 0,
+      "ErrorCode": ""
+    },
+    "_inspectionData": {
+      "TimeStamp": "0001-01-01T00:00:00",
+      "PassTime": "00:00:00",
+      "FailTime": "00:00:00",
+      "Result": 0,
+      "IsExcluded": false,
+      "IsByPassed": false,
+      "FailureDescription": "",
+      "NumberOfAllowedRetries": 0,
+      "RetryAttemptsCount": 0,
+      "ErrorCode": ""
+    },
+    "_nextCallCycle": 0,
+    "_taskState": 0,
+    "_restoreRequest": false,
+    "_invokeRequest": false,
+    "_abortRequest": false,
+    "_enabled": false,
+    "_isServiceable": false,
+    "_elapsedTime": "00:00:00",
+    "_Identity": 0,
+    "_ParentStruct": {},
+    "j": false,
+    "_messenger": {
+      "_mime": {
+        "CategoryAsEnum": 0,
+        "Text": "",
+        "Location": null,
+        "PerCycleCount": 0,
+        "Pinned": false,
+        "TimeStamp": "0001-01-01T00:00:00",
+        "Source": null,
+        "SubCategory": 0,
+        "ParentsObjectSymbol": null,
+        "ParentsHumanReadable": null,
+        "Raw": null,
+        "Identity": 0,
+        "Category": 0,
+        "Cycle": 0,
+        "ExpectDequeing": false,
+        "MessageDigest": 0
+      },
+      "_contextIdentity": 0,
+      "MDS_MAX_INDEX": 0
+    }
   },
   "DimZ": {
-    "Mininum": 8.0,
-    "Measured": 0.0,
-    "Maximum": 10.5
+    "_data": {
+      "RequiredMin": 100.0,
+      "DetectedStatus": 0.0,
+      "RequiredMax": 110.0,
+      "TimeStamp": "0001-01-01T00:00:00",
+      "PassTime": "00:00:02",
+      "FailTime": "00:00:01",
+      "Result": 0,
+      "IsExcluded": false,
+      "IsByPassed": false,
+      "FailureDescription": "",
+      "NumberOfAllowedRetries": 0,
+      "RetryAttemptsCount": 0,
+      "ErrorCode": ""
+    },
+    "_inspectionData": {
+      "TimeStamp": "0001-01-01T00:00:00",
+      "PassTime": "00:00:00",
+      "FailTime": "00:00:00",
+      "Result": 0,
+      "IsExcluded": false,
+      "IsByPassed": false,
+      "FailureDescription": "",
+      "NumberOfAllowedRetries": 0,
+      "RetryAttemptsCount": 0,
+      "ErrorCode": ""
+    },
+    "_nextCallCycle": 0,
+    "_taskState": 0,
+    "_restoreRequest": false,
+    "_invokeRequest": false,
+    "_abortRequest": false,
+    "_enabled": false,
+    "_isServiceable": false,
+    "_elapsedTime": "00:00:00",
+    "_Identity": 0,
+    "_ParentStruct": {},
+    "j": false,
+    "_messenger": {
+      "_mime": {
+        "CategoryAsEnum": 0,
+        "Text": "",
+        "Location": null,
+        "PerCycleCount": 0,
+        "Pinned": false,
+        "TimeStamp": "0001-01-01T00:00:00",
+        "Source": null,
+        "SubCategory": 0,
+        "ParentsObjectSymbol": null,
+        "ParentsHumanReadable": null,
+        "Raw": null,
+        "Identity": 0,
+        "Category": 0,
+        "Cycle": 0,
+        "ExpectDequeing": false,
+        "MessageDigest": 0
+      },
+      "_contextIdentity": 0,
+      "MDS_MAX_INDEX": 0
+    }
   },
   "_recordId": null,
   "Changes": [
+    {
+      "DateTime": "2022-02-11T16:46:58.0353365+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.RecipeName"
+      },
+      "OldValue": "",
+      "NewValue": "default"
+    },
+    {
+      "DateTime": "2022-02-11T16:40:29.4978086+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Stab.Time",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.PassTime"
+      },
+      "OldValue": "00:00:00",
+      "NewValue": "00:00:02"
+    },
+    {
+      "DateTime": "2022-02-11T16:40:32.8755587+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Timeout",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.FailTime"
+      },
+      "OldValue": "00:00:00",
+      "NewValue": "00:00:01"
+    },
+    {
+      "DateTime": "2022-02-11T16:40:45.6187627+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Stab.Time",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.PassTime"
+      },
+      "OldValue": "00:00:00",
+      "NewValue": "00:00:02"
+    },
+    {
+      "DateTime": "2022-02-11T16:40:56.7111897+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Stab.Time",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.PassTime"
+      },
+      "OldValue": "00:00:00",
+      "NewValue": "00:00:02"
+    },
+    {
+      "DateTime": "2022-02-11T16:41:06.3634125+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Timeout",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.FailTime"
+      },
+      "OldValue": "00:00:00",
+      "NewValue": "00:00:01"
+    },
+    {
+      "DateTime": "2022-02-11T16:41:07.9275502+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Timeout",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.FailTime"
+      },
+      "OldValue": "00:00:00",
+      "NewValue": "00:00:01"
+    },
+    {
+      "DateTime": "2022-02-11T16:39:44.7798674+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.RequiredMin"
+      },
+      "OldValue": 0.0,
+      "NewValue": 100.0
+    },
+    {
+      "DateTime": "2022-02-11T16:39:49.1332988+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Max.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.RequiredMax"
+      },
+      "OldValue": 20.0,
+      "NewValue": 110.0
+    },
+    {
+      "DateTime": "2022-02-11T16:39:51.1466384+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.RequiredMin"
+      },
+      "OldValue": 0.0,
+      "NewValue": 100.0
+    },
+    {
+      "DateTime": "2022-02-11T16:39:53.4645102+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.RequiredMin"
+      },
+      "OldValue": 0.0,
+      "NewValue": 100.0
+    },
+    {
+      "DateTime": "2022-02-11T16:39:55.5071398+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Max.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.RequiredMax"
+      },
+      "OldValue": 20.0,
+      "NewValue": 110.0
+    },
+    {
+      "DateTime": "2022-02-11T16:39:57.1432373+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Max.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.RequiredMax"
+      },
+      "OldValue": 20.0,
+      "NewValue": 110.0
+    },
+    {
+      "DateTime": "2022-02-11T16:01:49.3538269+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.RequiredMin"
+      },
+      "OldValue": 10.0,
+      "NewValue": 0.0
+    },
+    {
+      "DateTime": "2022-02-11T16:01:50.2759567+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.RequiredMin"
+      },
+      "OldValue": 10.0,
+      "NewValue": 0.0
+    },
+    {
+      "DateTime": "2022-02-11T16:01:51.7048029+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.RequiredMin"
+      },
+      "OldValue": 10.0,
+      "NewValue": 0.0
+    },
+    {
+      "DateTime": "2022-02-11T14:22:01.1729394+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.RequiredMin"
+      },
+      "OldValue": 0.0,
+      "NewValue": 10.0
+    },
+    {
+      "DateTime": "2022-02-11T14:22:03.4064523+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Max.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimX._data.RequiredMax"
+      },
+      "OldValue": 0.0,
+      "NewValue": 20.0
+    },
+    {
+      "DateTime": "2022-02-11T14:22:06.347362+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.RequiredMin"
+      },
+      "OldValue": 0.0,
+      "NewValue": 10.0
+    },
+    {
+      "DateTime": "2022-02-11T14:22:08.5300323+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Min.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.RequiredMin"
+      },
+      "OldValue": 0.0,
+      "NewValue": 10.0
+    },
+    {
+      "DateTime": "2022-02-11T14:22:10.4653074+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Max.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimY._data.RequiredMax"
+      },
+      "OldValue": 0.0,
+      "NewValue": 20.0
+    },
+    {
+      "DateTime": "2022-02-11T14:22:13.8059803+01:00",
+      "UserName": "",
+      "ValueTag": {
+        "HumanReadable": "Max.",
+        "Symbol": "TECH_MAIN._app._station001._processRecipies._data.DimZ._data.RequiredMax"
+      },
+      "OldValue": 0.0,
+      "NewValue": 20.0
+    },
     {
       "DateTime": "2021-12-16T10:46:27.7565357+01:00",
       "UserName": "",

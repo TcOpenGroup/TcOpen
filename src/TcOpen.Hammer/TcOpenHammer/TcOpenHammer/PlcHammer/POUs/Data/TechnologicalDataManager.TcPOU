@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TechnologicalDataManager EXTENDS TcoData.TcoDataExchange
 VAR
 	//this variable has to called "_data" - PC app will access this variable by its name.
-	_data : Station001_TechnologicalSettings;
+	_data : Station001_TechnologicalSettings := (Parent := THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

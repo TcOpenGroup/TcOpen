@@ -136,12 +136,12 @@ _axisStatus.ErrorId := 0;
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+  	ParentObject : ITcoObject;	
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Halt" Id="{06b4c873-3aa4-03d0-22c1-6924d11db75b}" FolderPath="Motion\">

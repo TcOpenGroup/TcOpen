@@ -1406,188 +1406,6 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">AI_ChannelStatus</Name>
-			<BitSize>128</BitSize>
-			<SubItem>
-				<Name>UnderRange</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>64</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>OverRange</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>65</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>Limit_1_Greater</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>66</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>Limit_1_Smaller</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>67</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>Limit_2_Greater</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>68</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>Limit_2_Smaller</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>69</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>Error</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>70</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>TxPdoState</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>78</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<SubItem>
-				<Name>TxPdoToggle</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>79</BitOffs>
-				<Properties>
-					<Property>
-						<Name>TcAddressType</Name>
-						<Value>Input</Value>
-					</Property>
-				</Properties>
-			</SubItem>
-			<Properties>
-				<Property>
-					<Name>PouType</Name>
-					<Value>FunctionBlock</Value>
-				</Property>
-			</Properties>
-		</DataType>
-		<DataType>
-			<Name GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">StatusStructBasic</Name>
-			<BitSize>32</BitSize>
-			<SubItem>
-				<Name>Enabled</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Tripped</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>1</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>HWProtection</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>4</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>CurrentLevelWarning</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>7</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>CoolDownLock</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>8</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Diag</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>12</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TxPDOState</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>13</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Error</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>18</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>StateReset</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>19</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>StateSwitch</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>20</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
 			<Name GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
 			<BitSize>64</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
@@ -1596,24 +1414,8 @@ External Setpoint Generation:
 				<Elements>8</Elements>
 			</ArrayInfo>
 		</DataType>
-		<DataType>
-			<Name GUID="{B3DBDAA3-7425-BD69-E9C4-F3DD082260EF}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">OutputStruct</Name>
-			<BitSize>16</BitSize>
-			<SubItem>
-				<Name>Reset</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Switch</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-				<BitSize>1</BitSize>
-				<BitOffs>1</BitOffs>
-			</SubItem>
-		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="39.118.139.190.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -1799,44 +1601,12 @@ External Setpoint Generation:
 			</NC>
 		</Motion>
 		<Plc>
-			<Project GUID="{266FDC45-DB60-4534-88C6-BE73DD0A5D11}" Name="PlcHammer" PrjFilePath="PlcHammer\PlcHammer.plcproj" TmcFilePath="PlcHammer\PlcHammer.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{266FDC45-DB60-4534-88C6-BE73DD0A5D11}" Name="PlcHammer" PrjFilePath="PlcHammer\PlcHammer.plcproj" TmcFilePath="PlcHammer\PlcHammer.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcHammer\PlcHammer.tmc">
 					<Name>PlcHammer Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Value</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Status</Name>
-							<Type GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.WcState._WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.WcState._InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.InfoData._WcState</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._EL3001.InfoData._InputToggle</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._channel_1._Chn.Status</Name>
-							<Type GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff">StatusStructBasic</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._channel_2._Chn.Status</Name>
-							<Type GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff">StatusStructBasic</Type>
-						</Var>
 						<Var>
 							<Name>IO.iA1</Name>
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
@@ -1852,14 +1622,6 @@ External Setpoint Generation:
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._channel_1._Chn.Control</Name>
-							<Type GUID="{B3DBDAA3-7425-BD69-E9C4-F3DD082260EF}" Namespace="TcoIoBeckhoff">OutputStruct</Type>
-						</Var>
-						<Var>
-							<Name>TcoIoBeckhoff.IO._channel_2._Chn.Control</Name>
-							<Type GUID="{B3DBDAA3-7425-BD69-E9C4-F3DD082260EF}" Namespace="TcoIoBeckhoff">OutputStruct</Type>
-						</Var>
 						<Var>
 							<Name>IO.qA1</Name>
 							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
@@ -1890,10 +1652,8 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 		</Plc>
-		<Io/>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030010" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TIPC^PlcHammer^PlcHammer Instance">
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
 				<Link VarA="PlcTask Inputs^IO.Axis1.NcToPlc" VarB="Outputs^ToPlc"/>

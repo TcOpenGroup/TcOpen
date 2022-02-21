@@ -18,7 +18,7 @@
 	</docu>	
 ~*)
 TYPE
-    TcoEntity :
+    TcoEntity EXTENDS TcoCore.TcoStruct:
     STRUCT      
         {attribute addProperty Name "<#ID#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}

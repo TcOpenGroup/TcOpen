@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoInspectionGroup" Id="{7f243c2f-5aff-01ef-3624-3e0e55da2759}">
+    <Declaration><![CDATA[INTERFACE ITcoInspectionGroup
+]]></Declaration>
+    <Property Name="Done" Id="{1402ecd4-756b-0fcd-2a3a-20232213443c}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{06a38439-173f-0037-3ba4-3e9af676c0fb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Inspect" Id="{931905af-6dab-03f5-1869-a259456451b0}">
+      <Declaration><![CDATA[METHOD Inspect : ITcoInspectionGroup
+VAR_INPUT
+    Inspector : IInspector;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="OnFail" Id="{03a3e801-0b28-07eb-2efc-56c061775b72}">
+      <Declaration><![CDATA[METHOD OnFail : IOnFail
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

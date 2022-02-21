@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_AutomatMode EXTENDS TcoCore.TcoSequencer
 VAR
 	_partPassedChecks : BOOL;
+	GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -22,7 +23,7 @@ VAR CONSTANT
 	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;	
 END_VAR
 VAR_INST
-	_id : STRING;
+	_id : STRING;	
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
@@ -63,16 +64,16 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Mininum + 50 ,
-        inMaxValue := Station.ProductionData.DimX.Maximum -50 ,
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Data.RequiredMin,
+        inMaxValue := Station.ProductionData.DimX.Data.RequiredMax,
         inoutValue := Station.Components._dimX);
 
-    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Mininum + 50 ,
-        inMaxValue := Station.ProductionData.DimY.Maximum -50,
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Data.RequiredMin + 50 ,
+        inMaxValue := Station.ProductionData.DimY.Data.RequiredMax -50,
         inoutValue := Station.Components._dimY);
 
-    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Mininum  + 50 ,
-        inMaxValue := Station.ProductionData.DimZ.Maximum -50 ,
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Data.RequiredMin  + 50 ,
+        inMaxValue := Station.ProductionData.DimZ.Data.RequiredMax -50 ,
         inoutValue := Station.Components._dimZ);
 
     StepCompleteWhen(TRUE);
@@ -82,13 +83,21 @@ END_IF;
 IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
 
-    _partPassedChecks := Station.Checkers.StartChecks()
-        .CheckAnalogue(Signal := Station.Components._dimX, pData := ADR(Station.ProcessTraceabilty._data.DimX))
-        .CheckAnalogue(Signal := Station.Components._dimY, pData := ADR(Station.ProcessTraceabilty._data.DimY))
-        .CheckAnalogue(Signal := Station.Components._dimZ, pData := ADR(Station.ProcessTraceabilty._data.DimZ))
-        .HasPassed();
-	Station.ProcessTraceabilty.SetDataResult( _partPassedChecks);
-    StepCompleteWhen(TRUE);
+	GroupInspection.WithCoordinator(THIS^)
+				   .Act(Station.ProcessTraceabilty._data.Result)
+				   .Inspect(Station.ProcessTraceabilty._data.DimX.Inspect(Station.Components._dimX))
+				   .Inspect(Station.ProcessTraceabilty._data.DimY.Inspect(Station.Components._dimY))
+				   .Inspect(Station.ProcessTraceabilty._data.DimZ.Inspect(Station.Components._dimZ))
+				   .OnFail()
+				   .CarryOn();		   
+						   
+//    _partPassedChecks := Station.Checkers.StartChecks()
+//        .CheckAnalogue(Signal := Station.Components._dimX, pData := ADR(Station.ProcessTraceabilty._data.DimX))
+//        .CheckAnalogue(Signal := Station.Components._dimY, pData := ADR(Station.ProcessTraceabilty._data.DimY))
+//        .CheckAnalogue(Signal := Station.Components._dimZ, pData := ADR(Station.ProcessTraceabilty._data.DimZ))
+//        .HasPassed();
+//	Station.ProcessTraceabilty.SetDataResult( _partPassedChecks);
+//    StepCompleteWhen(TRUE);
     //--------------------------------------------	
 END_IF;
 
@@ -206,7 +215,7 @@ METHOD PROTECTED OnStepCompleted
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(_Parent,_station) THEN // Check if _Parent is Station001
+          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
 	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>
