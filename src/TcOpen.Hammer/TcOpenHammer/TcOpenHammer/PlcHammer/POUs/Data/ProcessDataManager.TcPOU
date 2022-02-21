@@ -35,5 +35,24 @@ END_VAR
 //        0.05 * MAIN._app._station001._components._dimZsim.inMinValue + 0.95 * MAIN._app._station001._components._dimZsim.inMaxValue;
 //END_IF]]></ST>
     </Implementation>
+    <Method Name="SetDataResult" Id="{18eeae59-e657-0c7b-3528-07fbaa61af6f}">
+      <Declaration><![CDATA[METHOD SetDataResult
+VAR_INPUT
+	Result : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_data.Result := Result;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetRecipe" Id="{311d426e-c67b-0715-0737-1237a18f8640}">
+      <Declaration><![CDATA[METHOD SetRecipe
+VAR_INPUT
+	RecipeName:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_data.RecipeName := RecipeName;]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

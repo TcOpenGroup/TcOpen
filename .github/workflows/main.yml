@@ -41,3 +41,9 @@ jobs:
         with:
           name: test-results
           path: ${{ github.workspace }}\**\TestResults\*.xml
+      - name: Upload PLC libraries
+        uses: actions/upload-artifact@v2 
+        if: success() 
+        with:
+          name: plcLibs
+          path: ${{ github.workspace }}\plcLibs\*.library
