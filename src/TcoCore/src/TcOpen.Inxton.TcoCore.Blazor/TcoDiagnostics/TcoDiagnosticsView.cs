@@ -13,7 +13,7 @@ namespace TcoCore
         protected override void OnInitialized()
         {
             UpdateValuesOnChange(ViewModel._tcoObject);
-            this.DiagnosticsUpdateTimer();
+            DiagnosticsUpdateTimer();
         }
 
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running!";
