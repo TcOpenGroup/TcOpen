@@ -123,12 +123,20 @@
       <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="TcoCore" />
+    <PlaceholderReference Include="TcoCore">
+      <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoCore</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoInspectors.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcoCore">
+      <Resolution>TcoCore, 1.18.6.1495 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

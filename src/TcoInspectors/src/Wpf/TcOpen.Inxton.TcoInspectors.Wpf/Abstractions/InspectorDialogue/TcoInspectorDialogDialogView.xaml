@@ -78,7 +78,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <vortex:RenderableContentControl Margin="10" PresentationType="Display" />
+                                        <vortex:RenderableContentControl Margin="10" DataContext="{Binding }"  PresentationType="Display" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
 

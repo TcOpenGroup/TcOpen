@@ -24,15 +24,17 @@
                                     <TabItem Header="Sequence">
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="50*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <vortex:RenderableContentControl Grid.Row="1"  Grid.Column="0" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="DisplaySlim-Display"></vortex:RenderableContentControl>
-                                            <GroupBox Header="Inputs" Grid.Row="1" Grid.Column="1">
+                                            <ScrollViewer Grid.Row="1"  Grid.Column="0">
+                                            <vortex:RenderableContentControl  DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="DisplaySlim-Display"></vortex:RenderableContentControl>
+                                            </ScrollViewer>
+                                                <GroupBox Header="Inputs" Grid.Row="1" Grid.Column="1">
                                                 <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
                                             </GroupBox>
                                             <WrapPanel HorizontalAlignment="Center">
