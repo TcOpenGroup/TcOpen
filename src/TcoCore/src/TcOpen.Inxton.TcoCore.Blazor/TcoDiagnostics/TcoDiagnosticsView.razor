@@ -77,9 +77,12 @@
         <GridColumn Field="@nameof(PlainTcoMessage.ParentsObjectSymbol)" Title="Symbol" />
         <GridColumn Title="Action">
             <Template>
+                
                 @{
                     var message = context as PlainTcoMessage;
                 }
+                @if(message != null)
+                {
                 <div style="white-space: nowrap">
                     <button @onclick="() => OnSelectedMessage(message)">
                         <i class="fas fa-plus"></i>
@@ -95,6 +98,7 @@
                         }
                     </button>
                 </div>
+                }
             </Template>
         </GridColumn>
 

@@ -141,7 +141,10 @@ namespace TcoCore
         }
         public void RogerMessage(PlainTcoMessage msg)
         {
-            msg.OnlinerMessage.Pinned.Cyclic = false;
+            if (msg != null)
+            {
+                msg.OnlinerMessage.Pinned.Cyclic = false;
+            }
         }
 
         public void RogerAllMessages()
