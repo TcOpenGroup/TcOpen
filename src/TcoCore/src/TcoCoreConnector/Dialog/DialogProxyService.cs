@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -10,18 +11,21 @@ namespace TcOpen.Inxton.TcoCore
 {
     public abstract class DialogProxyServiceBase
     {
-        protected DialogProxyServiceBase(IVortexObject observedObject)
+        protected DialogProxyServiceBase(IEnumerable<IVortexObject> observedObjects)
         {           
-            UpdateDialogs(observedObject);
+            UpdateDialogs(observedObjects);
         }
-        void UpdateDialogs(IVortexObject rootObject)
+        void UpdateDialogs(IEnumerable<IVortexObject> observedObjects)
         {
-            if (rootObject == null) return;
-
-            foreach (var dialog in rootObject.GetDescendants<TcoDialogBase>())
+            if (observedObjects == null || observedObjects.Count() ==  0) return;
+            foreach (var observedObject in observedObjects)
             {
-                dialog.Initialize(() => Queue(dialog));
+                foreach (var dialog in observedObject.GetDescendants<TcoDialogBase>())
+                {
+                    dialog.Initialize(() => Queue(dialog));
+                }
             }
+            
         }
         protected abstract void Queue(TcoDialogBase dialog);        
     }

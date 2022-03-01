@@ -18,10 +18,11 @@
 	</docu>	
 ~*)
 TYPE
-    TcoEntity EXTENDS TcoCore.TcoStruct:
+    TcoEntity EXTENDS TcoCore.TcoStruct :
     STRUCT      
+		{attribute wpf [Container(Layout.Stack)]}
         {attribute addProperty Name "<#ID#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
         _EntityId : STRING(254);
     END_STRUCT
 END_TYPE

@@ -81,14 +81,15 @@
 	</docu>	
 ~*)
 {attribute addProperty ToolTip ""}
+{attribute 'no_assign'}
 FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject 
 VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
 	_Identity : ULINT;
-	//{attribute 'hide'}
+	{attribute 'hide'}
 	_ParentObject : ITcoObject;
-	//{attribute 'hide'}
+	{attribute 'hide'}
     _ParentStruct : REFERENCE TO TcoStruct;		
 	{attribute clr [RenderIgnore()]}
 	_messenger : TcoMessenger(THIS^);
@@ -195,7 +196,8 @@ PROPERTY Identity : ULINT]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Identity := _Identity;]]></ST>
+          <ST><![CDATA[_Identity := ADR(THIS^);
+Identity := _Identity;]]></ST>
         </Implementation>
       </Get>
     </Property>

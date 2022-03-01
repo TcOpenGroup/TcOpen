@@ -4,8 +4,10 @@
     <Declaration><![CDATA[TYPE
     ABSTRACT TcoStruct :
     STRUCT
+		{attribute clr [ReadOnly()]}		
         Parent : ITcoObject;
         {attribute 'hide'}
+		{attribute clr [ReadOnly()]}
         THISSTRUCT : TcoParentedStructure(NO.Obj, THIS^);
     END_STRUCT
 END_TYPE

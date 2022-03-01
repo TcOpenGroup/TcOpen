@@ -10,7 +10,8 @@ TYPE
         GetResult       := 20,
         OnFailCarryOn   := 40,
         OnFailRetry     := 50,
-        OnFailTerminate := 60
+        OnFailTerminate := 60,
+		OnFailDiaglog   := 70
     );
 END_TYPE
 ]]></Declaration>

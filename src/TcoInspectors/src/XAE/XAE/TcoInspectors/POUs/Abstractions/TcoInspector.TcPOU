@@ -3,13 +3,20 @@
   <POU Name="TcoInspector" Id="{cdcabed1-7ff8-095e-24f6-ca93f0ca4004}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoObject IMPLEMENTS IInspector, IOnFail
 VAR
-	{attribute clr [CompilerOmits("BuilderPlainer")]}
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}
 	_tcoInspectorDialogue : TcoInspectorDialog(THIS^);
-	{attribute clr [CompilerOmits("BuilderPlainer")]}
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}
 	_inspectorTask : TcoInspectorTask(THIS^);
-	{attribute clr [CompilerOmits("BuilderPlainer")]}	
-	_coordinator    : TcoCore.ITcoCoordinator;	
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}	
+	_coordinator    : TcoCore.ITcoCoordinator;
+	{attribute 'hide'}		
 	_isOverInspected : BOOL;
+	{attribute 'hide'}	
+	_tierUpdateOverall : TcoTier(THIS^);	
+	{attribute 'hide'}	
+	_originalOverallResult : TcoComprehensiveResult;
+	{attribute 'hide'}	
+	_refOverallResult : REFERENCE TO TcoComprehensiveResult;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -78,30 +85,8 @@ VAR_INPUT
 	inRetryStep : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-_tcoInspectorDialogue.Show(inRetryStep);
-//IF(THIS^.Done) THEN
-//	IF(THIS^.Result = eInspectorResult.Failed) THEN
-//		_dialogueTask.Invoke();
-//		_dialogueTask();
-		
-//		IF(_dialogueRetryTask.Execute()) THEN
-//			_dialogueRetryTask.DoneWhen(Retry(inRetryStep));
-//		END_IF
-		
-//		IF(_dialogueTerminateTask.Execute()) THEN
-//			_dialogueTerminateTask.DoneWhen(Terminate());
-//		END_IF
-		
-//		IF(_dialogueOverrideTask.Execute()) THEN
-//			_dialogueOverrideTask.DoneWhen(CarryOn());
-//		END_IF
-//	ELSE
-//		IF(_coordinator <> 0) THEN
-//			_coordinator.MoveNext();
-//		END_IF;	
-//	END_IF;	
-//END_IF;
+        <ST><![CDATA[_tcoInspectorDialogue.Show(inRetryStep);
+
 
 ]]></ST>
       </Implementation>
@@ -235,6 +220,9 @@ END_IF
 
 IF(THIS^.Done) THEN
 	IF(THIS^.Result = eInspectorResult.Failed) THEN
+		IF(__ISVALIDREF(_refOverallResult)) THEN
+			_refOverallResult := _originalOverallResult;
+		END_IF
 		_coordinator.Retry(inFromState);
 	ELSE
 		_coordinator.MoveNext();
@@ -291,6 +279,12 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
+
+IF(_tierUpdateOverall.IsNewTier()) THEN	
+	_refOverallResult REF= inoResult;
+	_originalOverallResult := inoResult;
+END_IF
+
 
 IF (NOT __ISVALIDREF(_inspectorTask.InspectionData)) THEN
     inoResult.Result := eOverallResult.NoAction;

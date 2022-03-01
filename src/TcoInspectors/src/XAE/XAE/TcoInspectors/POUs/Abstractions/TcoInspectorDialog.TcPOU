@@ -17,6 +17,19 @@ END_VAR
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
+    <Method Name="FB_init" Id="{1eeabd82-0765-01f0-1e37-da5161467ea2}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SetInspector" Id="{59f6bb8e-40b5-01f0-1137-0e38be5ca644}">
       <Declaration><![CDATA[METHOD SetInspector
 VAR_INPUT 

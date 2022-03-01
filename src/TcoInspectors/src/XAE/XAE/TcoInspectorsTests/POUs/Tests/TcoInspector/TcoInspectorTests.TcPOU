@@ -42,6 +42,8 @@ CASE _testId OF
         THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Retry(_retryState));
     eInspectorTests.OnFailTerminate:
         THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Terminate());
+	eInspectorTests.OnFailDialog:
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Dialog(100));
 END_CASE]]></ST>
       </Implementation>
     </Method>

@@ -145,12 +145,14 @@ IF (seq.Step(inStepID := 300,
     //--------------------------------------------------------
     GroupInspection
 		.WithCoordinator(seq)
-		.Act(Data.OverallResult)	
+		.Act()	
         .Inspect(Data.Dimensions.DimX_Inspector.WithCoordinator(seq).Inspect(Components.DimX_Sensor))
         .Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor))
-        .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))
+        .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))	
+		.UpdateComprehensiveResult(Data.OverallResult)		
 		.OnFail()
-		.Dialog(300);				        		
+		.Dialog(300);
+				        		
     //--------------------------------------------------------			
 END_IF;
 

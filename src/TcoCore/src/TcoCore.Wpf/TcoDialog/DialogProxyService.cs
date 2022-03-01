@@ -12,7 +12,7 @@ namespace TcOpen.Inxton.TcoCore.Wpf
 {
     public class DialogProxyService : DialogProxyServiceBase
     {
-        protected DialogProxyService(IVortexObject observedObject) : base(observedObject)
+        protected DialogProxyService(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
 
         }
@@ -35,9 +35,9 @@ namespace TcOpen.Inxton.TcoCore.Wpf
                 );
         }
 
-        public static DialogProxyServiceBase Create(IVortexObject tcoObject)
+        public static DialogProxyServiceBase Create(IEnumerable<IVortexObject> observedObjects)
         {
-            var dialogProxyService = new DialogProxyService(tcoObject);
+            var dialogProxyService = new DialogProxyService(observedObjects);
             return dialogProxyService;
         }
 }

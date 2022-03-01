@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
@@ -16,7 +16,7 @@
     <Implicit_KindOfTask>{9e043602-d04b-4bad-a430-da5af12d78c0}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{dabf9726-d858-4310-8141-a41d6af9daf4}</Implicit_Jitter_Distribution>
     <LibraryReferences>{3a520cf7-05d0-466c-951c-17721d4f2164}</LibraryReferences>
-    <ProjectVersion>1.18.6.1495</ProjectVersion>
+    <ProjectVersion>1.19.0.1730</ProjectVersion>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoInspectors</DefaultNamespace>
     <Title>TcoInspectors</Title>
@@ -93,10 +93,14 @@
     <Compile Include="POUs\TcoInspectionGroup\TcoInspectionGroup.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\_TcoCore\TcoTier.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
     <Folder Include="POUs\Abstractions" />
+    <Folder Include="POUs\_TcoCore" />
     <Folder Include="POUs\TcoDataInspector" />
     <Folder Include="POUs\TcoAnalogueInspector" />
     <Folder Include="POUs\TcoDigitalInspector" />
@@ -119,12 +123,8 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include=",,">
-      <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoCore</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 1.19.0.1730 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 1.18.6.1495 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 1.19.0.1730 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

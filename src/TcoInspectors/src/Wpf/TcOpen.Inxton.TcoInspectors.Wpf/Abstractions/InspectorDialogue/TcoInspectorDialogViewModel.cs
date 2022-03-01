@@ -55,7 +55,6 @@ namespace TcoInspectors
                 return _inspectorsList;
             }
         }
-
         public string Description
         {
             get
@@ -70,7 +69,6 @@ namespace TcoInspectors
                 return sb.ToString();
             }
         }
-
         public TcoInspectorDialog Dialog { get; private set; } = new TcoInspectorDialog();
         public override object Model { get => Dialog; set => Dialog = (TcoInspectorDialog)value; }
         public RelayCommand RetryCommand { get; }

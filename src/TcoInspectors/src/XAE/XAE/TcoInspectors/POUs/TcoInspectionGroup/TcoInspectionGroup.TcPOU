@@ -3,19 +3,17 @@
   <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
-	{attribute 'hide'}
-    _done   : BOOL;
-	{attribute 'hide'}
-    _result : REFERENCE TO TcoComprehensiveResult;
-	_sharedResult : TcoComprehensiveResult;	
-	_currentRunResult : TcoComprehensiveResult;	
-	_expectedCycle : ULINT;
-	_inspections : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
-	_inspectionIndex : INT;
+    {attribute 'hide'}
+    _done             : BOOL;
+    _overallResult    : TcoComprehensiveResult;
+    _currentRunResult : TcoComprehensiveResult;
+    _inspections      : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
+    _inspectionIndex  : INT;
+    _tierAct          : TcoTier(THIS^);
 END_VAR
 
 VAR CONSTANT
-	LAST_INSPECTION_INDEX : INT := 15;
+    LAST_INSPECTION_INDEX : INT := 15;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -28,21 +26,33 @@ END_VAR]]></Declaration>
 	</summary>
 ~*)
 METHOD Act : ITcoInspectionGroup
-VAR_IN_OUT
-	inoResult : TcoComprehensiveResult;
-END_VAR]]></Declaration>
+//VAR_IN_OUT
+//	inoResult : TcoComprehensiveResult;
+//END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Act              := THIS^;
-_inspectionIndex := 0;
-_result          REF= inoResult;
-_sharedResult    := _result;
+        <ST><![CDATA[_inspectionIndex := 0;
+// True then set to false if any inspector not done.
 _done            := TRUE;
 
-IF(Context.StartCycleCount <> _expectedCycle) THEN
-	_currentRunResult.Result := eOverallResult.NoAction;
+Act              := THIS^;
+
+IF(_tierAct.IsNewTier()) THEN
+	ClearResult(_currentRunResult);	
 END_IF
-	
-_expectedCycle := Context.StartCycleCount + 1;]]></ST>
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClearResult" Id="{f7b2a68e-e38b-05d5-0a30-07f805d8c74c}">
+      <Declaration><![CDATA[METHOD ClearResult
+VAR_IN_OUT
+	inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[inoResult.ErrorCodes := '';
+inoResult.Failures := '';
+inoResult.Result := eOverallResult.NoAction;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Dialog" Id="{74a2f6ff-2257-0b1f-0c44-f3b62d0819e8}" FolderPath="OnFail\">
@@ -106,14 +116,12 @@ END_VAR
 
 Inspect := THIS^;
 
-IF (NOT Inspector.Done) THEN
-    _done := FALSE;					
+IF (Inspector.Done) THEN
+    Inspector.UpdateComprehensiveResult(_currentRunResult);					
 ELSE
-	Inspector.UpdateComprehensiveResult(_result);
+	_done := FALSE;	
 END_IF
 
-
-Inspector.UpdateComprehensiveResult(_currentRunResult);
 
 IF(_inspectionIndex <= LAST_INSPECTION_INDEX)THEN
 	_inspections[_inspectionIndex] :=  Inspector.Identity;
@@ -131,7 +139,9 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._tcoInspectorDialogue.SetInspector(THIS^);
-OnFail := THIS^;]]></ST>
+OnFail := THIS^;
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="Retry" Id="{35486965-61f5-0154-3790-1cbb7d6396ad}" FolderPath="OnFail\">
@@ -147,7 +157,11 @@ END_VAR]]></Declaration>
 END_IF
 
 IF(THIS^.Done) THEN
-	IF(THIS^._result.Result = eOverallResult.Failed) THEN
+	IF(THIS^._currentRunResult.Result = eOverallResult.Failed) THEN		
+		IF(__ISVALIDREF(_refOverallResult)) THEN
+			_refOverallResult := _originalOverallResult;
+		END_IF	 
+		ClearResult(_currentRunResult);	   	
 		_coordinator.Retry(inFromState);
 	ELSE
 		_coordinator.MoveNext();
@@ -169,7 +183,7 @@ METHOD Terminate : BOOL
 END_IF
 
 IF(THIS^.Done) THEN
-	IF(THIS^._result.Result = eOverallResult.Failed) THEN
+	IF(THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
 		_coordinator.Terminate();
 	ELSE
 		_coordinator.MoveNext();
@@ -204,9 +218,29 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
-_sharedResult := _result;
+
+_refOverallResult REF= inoResult;
+
+IF(_tierUpdateOverall.IsNewTier()) THEN	
+	_originalOverallResult := inoResult;
+END_IF
+
+		
+CASE _currentRunResult.Result OF
+	eOverallResult.NoAction:
+		;
+	eOverallResult.Passed:
+		;
+	eOverallResult.Failed:
+		 
+		_refOverallResult.Result   := eOverallResult.Failed;
+		UpdateDescriptions(inoResult);		       			   
+END_CASE
 
 
+IF(_done) THEN
+	_overallResult := _refOverallResult;
+END_IF;	
 ]]></ST>
       </Implementation>
     </Method>

@@ -20,5 +20,27 @@ END_VAR
       <Declaration><![CDATA[METHOD OnFail : IOnFail
 ]]></Declaration>
     </Method>
+    <Method Name="UpdateComprehensiveResult" Id="{32521df5-a25c-0de0-0ada-c2c005b112c3}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Updates comprehensive result. The comprehensive result is set to `Failed` when any inspection fails or is inconclusive.
+			Any bypassed or excluded inspection are not taken in the account.			
+		</summary>			
+	</docu>	
+~*)
+METHOD UpdateComprehensiveResult : IInspector
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Comprehensive result data structure to be updated.	
+		</summary>			
+	</docu>	
+	~*)
+    inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>
