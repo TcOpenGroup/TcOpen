@@ -93,7 +93,9 @@ END_IF]]></ST>
     </Method>
     <Method Name="Update" Id="{0bf459e2-db45-0e5b-3d87-31081b5a02e2}">
       <Declaration><![CDATA[METHOD PROTECTED Update
-]]></Declaration>
+VAR
+	_diffToLastSyncInSeconds : LINT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _state = 0 THEN
 	_isValid := FALSE;
@@ -116,10 +118,15 @@ IF _state = 20 THEN
 	_PDT := _NT_GetLocalTime.TIMESTR;
 
 	_isValid := TRUE;
-//	_state := 0;
 END_IF
 
 _RTC_EX2(EN := _isValid, PDT := _PDT);
+
+_diffToLastSyncInSeconds := ABS(ULINT_TO_LINT(Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_RTC_EX2.CDT,0,0) - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(RtcPrg._LastSyncTimeStampInLocalTime,0,0)))/1000000000;
+
+IF _state >= 20 AND _diffToLastSyncInSeconds >=60 THEN
+	_state := 0;
+END_IF
 
 _LocalTime := _RTC_EX2.CDT;
 _LocalTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_LocalTime);
@@ -129,7 +136,6 @@ IF RtcPrg._isSynchronized THEN
 										tzInfo 	:=	RtcPrg._TimeZoneInformation,
 										out		=>	_UTCTime,
 										eTzID	=>	_TimeZoneID);
-
 	_UTCTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_UTCTime);
 END_IF]]></ST>
       </Implementation>

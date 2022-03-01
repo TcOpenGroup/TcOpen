@@ -85,7 +85,7 @@ namespace TcoCore
         /// Executes this task.
         /// </summary>
         /// <param name="parameter"></param>
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
             if (CanExecute(new object()))
             {

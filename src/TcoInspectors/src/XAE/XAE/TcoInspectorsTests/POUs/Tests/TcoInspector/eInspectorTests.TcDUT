@@ -11,7 +11,8 @@ TYPE
         UpdateOverall   := 30,
         OnFailCarryOn   := 40,
         OnFailRetry     := 50,
-        OnFailTerminate := 60
+        OnFailTerminate := 60,
+		OnFailDialog	:= 70
     );
 END_TYPE
 ]]></Declaration>

@@ -8,7 +8,7 @@
 </summary>
 </docu>
 ~*)
-FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoInspector
+FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoInspector IMPLEMENTS ITcoDigitalInspector
 VAR
     _data : TcoDigitalInspectorData;
 END_VAR]]></Declaration>
@@ -52,25 +52,34 @@ END_VAR
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
 
+_inspectorTask.InspectionData REF= _data;
+
 OnEnterInspection();
 
-_inspectionData REF= _data;
+IF(IsOverinspected())THEN
+	RETURN;
+END_IF
 
-Invoke();
 
-IF (Execute()) THEN
+_inspectorTask.Invoke();
+
+IF (_inspectorTask.Execute()) THEN
     IF (_data.IsByPassed) THEN
         _data.Result    := eInspectorResult.Bypassed;
         _data.TimeStamp := Context.RealTimeClock.NowLocal();
-        DoneWhen(TRUE);
+        _inspectorTask.DoneWhen(TRUE);
         RETURN;
     END_IF
 
     _data.Result := eInspectorResult.Running;
-    _failTimer(IN := TRUE, PT := _data.FailTime);
-    _passTimer(IN := Status = _data.RequiredStatus, PT := _data.PassTime);
-    _data.DetectedStatus := Status;      
-     DoneWhen(_failTimer.Q OR _passTimer.Q);
+    _inspectorTask._failTimer(IN := TRUE, PT := _data.FailTime);
+    _inspectorTask._passTimer(IN := Status = _data.RequiredStatus, PT := _data.PassTime);
+    _data.DetectedStatus := Status;    
+  
+    IF(_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN	  
+     		_inspectorTask.DoneWhen(TRUE);
+			OnDone();
+	END_IF;	
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -85,10 +94,20 @@ END_IF;]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.OnDone();
-IF (_data.Result = eInspectorResult.Failed) THEN
+        <ST><![CDATA[IF (_data.Result = eInspectorResult.Failed) THEN
      _data.DetectedStatus := NOT _data.RequiredStatus;
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{943d74b5-be94-00d9-004e-ca370a1acdd8}">
+      <Declaration><![CDATA[METHOD WithCoordinator : ITcoDigitalInspector
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WithCoordinator(inCoordinator);
+WithCoordinator := THIS^;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -20,7 +20,7 @@
 
 
 
-task default -depends Init, CopyInxton, CloseVs, Build, Tests, CreatePackages, Finish
+task default -depends Init, CopyInxton, CloseVs, Build, CopyPlcLibs, Tests, CreatePackages, Finish
 
 
 FormatTaskName (("="*25) + " [ {0} ] " + ("="*25))
@@ -171,6 +171,28 @@ task CloseVs -depends Build {
   }
 }
 
+task CopyPlcLibs -depends CloseVs {
+  $slnfPath = ".\TcOpen.plc.slnf"
+  $slnf = Get-Content $slnfPath | ConvertFrom-Json
+  $slnfDir = [System.IO.Path]::GetDirectoryName($slnfPath)
+  $tcoLibraries = $slnf.solution.projects  `
+    | Where-Object { $_.Contains("Connector") }  `
+    | Where-Object { -Not $_.Contains("Test") }  `
+    | Where-Object { -Not $_.Contains("Example") }  `
+    | Where-Object { -Not $_.Contains("Integration") }  `
+    | Where-Object { -Not $_.Contains("Hammer") }  `
+    | Where-Object { -Not $_.Contains("Template") } `
+    | ForEach-Object { [System.IO.Path]::GetDirectoryName( (Join-Path ($slnfDir) $_)) }`
+    | ForEach-Object { Join-Path $_ "_meta" }  `
+    | ForEach-Object { @(Get-ChildItem $_ -Filter "*.library" )[0].FullName }
+
+  $destinationFolder = ".\plcLibs"
+  mkdir $destinationFolder -ErrorAction SilentlyContinue | Out-Null
+  foreach($library in $tcoLibraries)
+  {
+      Copy-Item $library $destinationFolder
+  }
+}
 
 task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
 

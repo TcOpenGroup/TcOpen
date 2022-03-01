@@ -6,6 +6,7 @@
     using TcOpen.Inxton.App.Logging;
     using TcOpen.Inxton.Threading;
     using Vortex.Connector;
+    using System;
 
     /// <summary>
     /// TcOpen application configuration builder.
@@ -71,6 +72,11 @@
             return this;
         }
 
+        public TcoAppBuilder SetDialogs(Func<object, bool> showaction)
+        {
+
+            return this;
+        }
        
     }
 }
