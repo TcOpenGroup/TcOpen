@@ -31,8 +31,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.18.6.0")]
-[assembly: AssemblyVersion("1.18.6.0")]
-[assembly: AssemblyFileVersion("1.18.6.0")]
+// [assembly: AssemblyVersion("1.19.0.0")]
+[assembly: AssemblyVersion("1.19.0.0")]
+[assembly: AssemblyFileVersion("1.19.0.0")]
 
-[assembly: AssemblyInformationalVersion("1.18.6-tc-open-data-3.1+1495.Branch.tc-open-data-3.Sha.4620f6ce2ed2c8c1064c47d0e7ea8e5403661434")]
+[assembly: AssemblyInformationalVersion("1.19.0-update-eagle.1+1730.Branch.update-eagle.Sha.336adabb2768d57b682a05c2ced9d3a94422cac3")]

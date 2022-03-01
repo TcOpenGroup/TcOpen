@@ -69,7 +69,7 @@ namespace TcoInspectorsUnitTests
             Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
         }
 
-        [Test]
+        [Test]        
         public void inspect_bypassed()
         {
             InspectorContainer.Inspector.InspectorData.IsByPassed.Synchron = true;
@@ -146,6 +146,9 @@ namespace TcoInspectorsUnitTests
         [Test]
         public void inspect_jitter_signal_must_fail()
         {
+#if DEBUG    
+    
+
             InspectorContainer.Inspector.InspectorData.PassTime.Synchron = System.TimeSpan.FromMilliseconds(250);
             InspectorContainer.Inspector.InspectorData.FailTime.Synchron = System.TimeSpan.FromMilliseconds(700);
 
@@ -159,6 +162,7 @@ namespace TcoInspectorsUnitTests
             while (!task.IsCompleted) { }
 
             Assert.IsTrue(task.IsCompleted);
+#endif
         }
 
         [Test]
@@ -185,7 +189,7 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             InspectorContainer.ExecuteProbeRun(1, (int)eInspectorTests.GetResult);
 
-            Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
             Assert.AreEqual(true, InspectorContainer._isOverIspected.Synchron);
 
         }
@@ -334,5 +338,71 @@ namespace TcoInspectorsUnitTests
 
             Assert.AreEqual(expectedState, InspectorContainer._coordinator._state.Synchron);
         }
+
+        [Test]
+        public void inspect_previous_failed_now_pass()
+        {
+            this.set_to_pass_at_mid();                     
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.Failed;
+            
+            InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
+            Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_previous_inprogress_now_pass()
+        {
+            this.set_to_pass_at_mid();
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.InProgress;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
+            Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.InProgress, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_previous_passed_no_action_now_pass()
+        {
+            this.set_to_pass_at_mid();
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.NoAction;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
+            Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.NoAction, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_previous_in_progress_now_failed()
+        {
+            this.set_to_fail_below_threshold();
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.InProgress;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
+            Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_previous_no_action_now_failed()
+        {
+            this.set_to_fail_below_threshold();
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.NoAction;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
+            Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+        }
+
+        [Test]
+        public void inspect_previous_passed_now_failed()
+        {
+            this.set_to_fail_below_threshold();
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.Passed;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
+            Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
+            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+        }        
     }
 }

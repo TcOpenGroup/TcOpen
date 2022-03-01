@@ -168,7 +168,7 @@ namespace Legacy.TcoInspectorsUnitTests
             container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
             container.ExecuteProbeRun(1,(int)eDigitalInspectorTests.GetResult);
 
-            Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
             Assert.AreEqual(true, container._isOverIspected.Synchron);
 
         }

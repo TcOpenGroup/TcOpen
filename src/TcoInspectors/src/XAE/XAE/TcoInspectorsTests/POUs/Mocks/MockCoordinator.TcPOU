@@ -8,6 +8,17 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="IsFreshState" Id="{98d6edf6-1ef1-0cc7-2af3-ef3a9cdd0096}">
+      <Declaration><![CDATA[PROPERTY IsFreshState : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f898c3ff-7f15-0fc2-0e75-e22d323bcf35}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="MoveNext" Id="{44166f8a-8614-0309-3e0c-75242e506fe1}">
       <Declaration><![CDATA[METHOD MoveNext : BOOL
 ]]></Declaration>

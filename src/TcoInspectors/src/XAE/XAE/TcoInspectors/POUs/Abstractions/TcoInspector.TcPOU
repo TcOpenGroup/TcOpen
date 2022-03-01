@@ -1,24 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="TcoInspector" Id="{8bf66c65-f052-03bb-1601-1a9df2821913}" SpecialFunc="None">
-    <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Base block for inspectors.		
-		</summary>			
-	</docu>	
-~*)
-FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoTask IMPLEMENTS IInspector, IOnFail
+  <POU Name="TcoInspector" Id="{cdcabed1-7ff8-095e-24f6-ca93f0ca4004}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoObject IMPLEMENTS IInspector, IOnFail
 VAR
-    _inspectionData : REFERENCE TO TcoInspectorData;
-    _passTimer      : Tc2_Standard.TON;
-    _failTimer      : Tc2_Standard.TON;
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}
+	_tcoInspectorDialogue : TcoInspectorDialog(THIS^);
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}
+	_inspectorTask : TcoInspectorTask(THIS^);
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}	
 	_coordinator    : TcoCore.ITcoCoordinator;
+	{attribute 'hide'}		
+	_isOverInspected : BOOL;
+	{attribute 'hide'}	
+	_tierUpdateOverall : TcoTier(THIS^);	
+	{attribute 'hide'}	
+	_originalOverallResult : TcoComprehensiveResult;
+	{attribute 'hide'}	
+	_refOverallResult : REFERENCE TO TcoComprehensiveResult;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="OnFail" Id="{05ba37aa-b801-0c06-39b0-ca96036b97e1}" />
+    <Method Name="_WithCoordinator" Id="{f4255b2d-06fa-07d1-2be9-8f80453ebfb7}">
+      <Declaration><![CDATA[METHOD PROTECTED _WithCoordinator : IInspector
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_coordinator := inCoordinator;
+
+IF(_coordinator.IsFreshState) THEN
+	_inspectorTask.Restore();
+	_tcoInspectorDialogue.Restore();
+END_IF
+
+_WithCoordinator := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Busy" Id="{60182645-a16f-0ee1-06e2-bb45e9b084a5}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{077f6869-8179-04ae-0f24-65bb3b85fcaf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _inspectorTask.Busy;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="CarryOn" Id="{a840d4ae-4cf4-0c7c-37d8-3cfa8a027ffe}" FolderPath="OnFail\">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `CarryOn` method via `OnFail()` method.'}
@@ -27,7 +58,7 @@ METHOD CarryOn : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_coordinator = 0) THEN
-	RETURN;	
+	RETURN;			
 END_IF
 
 IF(THIS^.Done) THEN
@@ -37,49 +68,69 @@ END_IF;
 CarryOn := THIS^.Done;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{710c74ec-32a3-0d74-17b6-a5feae9c9f39}">
+    <Property Name="Coordinator" Id="{d6c5d29a-186c-0f57-2b81-a21c82deb947}">
+      <Declaration><![CDATA[PROPERTY Coordinator : TcoCore.ITcoCoordinator]]></Declaration>
+      <Get Name="Get" Id="{a1abb008-36db-020c-3883-0da433a80afc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Coordinator := _coordinator;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Dialog" Id="{5b149765-bdef-0167-3dae-165b725f86ae}" FolderPath="OnFail\">
+      <Declaration><![CDATA[METHOD Dialog : BOOL
+VAR_INPUT
+	inRetryStep : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_tcoInspectorDialogue.Show(inRetryStep);
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Done" Id="{58f0e3f3-593f-0a1d-332c-f3d91115dd9c}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6661bda9-b017-0d7c-0a73-0c7eec03da8b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Done := _inspectorTask.Done;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{4d0b0479-ae7b-014d-3a0f-a4c44c542102}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Hate to do this guys but I get compile error, seems to be a bug in tc
-SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnDone" Id="{43aa6ba3-c55d-0859-25a9-24eb083056e8}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
-~*)
-METHOD PROTECTED OnDone
+    <Method Name="IsOverinspected" Id="{aad1e11e-ec79-08e0-1e07-69f2014dc971}">
+      <Declaration><![CDATA[METHOD PROTECTED IsOverinspected : BOOL
+
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.OnDone();
-
-_inspectionData.RetryAttemptsCount := _inspectionData.RetryAttemptsCount + 1;
-
-IF (_inspectionData.Result = eInspectorResult.Bypassed) THEN
-    RETURN;
-END_IF;
-
-_inspectionData.TimeStamp := Context.RealTimeClock.NowLocal();
-_inspectionData.Result    := eInspectorResult.Failed;
-
-IF (NOT _failTimer.Q AND _passTimer.Q) THEN
-    _inspectionData.Result := eInspectorResult.Passed;
+        <ST><![CDATA[_isOverInspected := THIS^.OverInspected;
+IF(OverInspected) THEN			
+	THIS^._inspectorTask.Invoke();
+	IF(THIS^._inspectorTask.Execute()) THEN		
+		THIS^._inspectorTask.InspectionData.Result := eInspectorResult.Failed;
+		THIS^._inspectorTask.DoneWhen(TRUE);	
+	END_IF	
 END_IF
 
-IF (_inspectionData.IsExcluded) THEN
-    _inspectionData.Result := eInspectorResult.Excluded;
-END_IF]]></ST>
+IsOverinspected := OverInspected;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnEnterInspection" Id="{fa4970f2-2c3a-0e7f-05d4-46651b249942}">
@@ -90,48 +141,27 @@ END_IF]]></ST>
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL OnEnterInspection
+METHOD PROTECTED FINAL OnEnterInspection : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_coordinator := 0;]]></ST>
+        <ST><![CDATA[THIS^._tcoInspectorDialogue.SetInspector(THIS^);
+
+
+
+
+ ]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnFail" Id="{2b84cb88-5da8-07d6-2e7b-61f2e0d3c73e}" FolderPath="OnFail\">
-      <Declaration><![CDATA[METHOD OnFail : IOnFail
-VAR_INPUT
-	inCoordinator : TcoCore.ITcoCoordinator;
-END_VAR]]></Declaration>
+      <Declaration><![CDATA[METHOD OnFail : IOnFail]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_coordinator := inCoordinator;
+        <ST><![CDATA[IF(_coordinator = 0) THEN
+	Messenger.Programming('Missing `coordinator`. You will need to call inspector `WithCoordinator` method.');			
+END_IF
+
 OnFail := THIS^;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="OnStart" Id="{e650f529-4e67-0027-185e-0518bcbd4721}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes once when inspection starts.
-		</summary>			
-	</docu>	
-~*)
-METHOD PROTECTED OnStart
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.OnStart();
-
-IF (_inspectionData.PassTime = T#0S) THEN
-    _inspectionData.PassTime := T#50MS;
-END_IF;
-
-IF (_inspectionData.FailTime = T#0S) THEN
-    _inspectionData.FailTime := T#100MS;
-END_IF;
-
-_inspectionData.Result := eInspectorResult.NoAction;
-_passTimer(IN := FALSE, PT := T#0MS);
-_failTimer(IN := FALSE, PT := T#0MS);]]></ST>
       </Implementation>
     </Method>
     <Property Name="OverInspected" Id="{b4fb4777-567e-0765-037d-7f6c709b975e}">
@@ -148,26 +178,13 @@ PROPERTY OverInspected : BOOL]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[OverInspected := _inspectionData.RetryAttemptsCount >= _inspectionData.NumberOfAllowedRetries;]]></ST>
+          <ST><![CDATA[IF(__ISVALIDREF(_inspectorTask._inspectionData)) THEN
+	OverInspected := (_inspectorTask._inspectionData.RetryAttemptsCount >= _inspectorTask._inspectionData.NumberOfAllowedRetries) 
+					 AND (_inspectorTask._inspectionData.NumberOfAllowedRetries <> 0);
+END_IF;					 ]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Restore" Id="{214352c6-868b-0eb6-102f-c5a86531690b}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
-~*)
-METHOD Restore : ITcoRestorable]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.Restore();]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Result" Id="{3bfa3a4a-7888-017e-224d-3476f4ea51b3}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -182,8 +199,8 @@ PROPERTY Result : eInspectorResult]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF(__ISVALIDREF(_inspectionData)) THEN
-	Result := _inspectionData.Result;	
+          <ST><![CDATA[IF(__ISVALIDREF(_inspectorTask._inspectionData)) THEN
+	Result := _inspectorTask._inspectionData.Result;	
 END_IF;	]]></ST>
         </Implementation>
       </Get>
@@ -203,6 +220,9 @@ END_IF
 
 IF(THIS^.Done) THEN
 	IF(THIS^.Result = eInspectorResult.Failed) THEN
+		IF(__ISVALIDREF(_refOverallResult)) THEN
+			_refOverallResult := _originalOverallResult;
+		END_IF
 		_coordinator.Retry(inFromState);
 	ELSE
 		_coordinator.MoveNext();
@@ -260,12 +280,18 @@ END_VAR
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
 
-IF (NOT __ISVALIDREF(_inspectionData)) THEN
+IF(_tierUpdateOverall.IsNewTier()) THEN	
+	_refOverallResult REF= inoResult;
+	_originalOverallResult := inoResult;
+END_IF
+
+
+IF (NOT __ISVALIDREF(_inspectorTask.InspectionData)) THEN
     inoResult.Result := eOverallResult.NoAction;
     RETURN;
 END_IF
 
-CASE _inspectionData.Result OF
+CASE _inspectorTask.InspectionData.Result OF
     eInspectorResult.NoAction:
         ;
     eInspectorResult.Running:
@@ -274,24 +300,37 @@ CASE _inspectionData.Result OF
         ;
     eInspectorResult.Failed:
         inoResult.Result   := eOverallResult.Failed;
-        inoResult.Failures := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
-            .Append(inoResult.Failures)
-            .Append(';')
-            .Append(THIS^._inspectionData.FailureDescription)
-            .ToString();
-
-        inoResult.ErrorCodes := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
-            .Append(inoResult.ErrorCodes)
-            .Append(';')
-            .Append(THIS^._inspectionData.ErrorCode)
-            .ToString();
+		UpdateDescriptions(inoResult);		       			
     eInspectorResult.Inconclusive:
         inoResult.Result := eOverallResult.Failed;
+		UpdateDescriptions(inoResult);
     eInspectorResult.Excluded:
         ;
     eInspectorResult.Bypassed:
         ;
 END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateDescriptions" Id="{5bf8bf48-85f6-0716-2800-f1811bbbe4d3}">
+      <Declaration><![CDATA[METHOD PROTECTED UpdateDescriptions
+VAR_IN_OUT
+	inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_inspectorTask.OnDoneFlag) THEN
+	inoResult.Failures := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
+				.Append(inoResult.Failures)				
+				.Append(_inspectorTask.InspectionData.FailureDescription)
+				.Append(';')
+				.ToString();
+	
+	inoResult.ErrorCodes := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
+				.Append(inoResult.ErrorCodes)				
+				.Append(_inspectorTask.InspectionData.ErrorCode)
+				.Append(';')
+				.ToString();	
+END_IF;			]]></ST>
       </Implementation>
     </Method>
   </POU>

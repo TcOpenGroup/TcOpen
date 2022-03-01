@@ -3940,5 +3940,23 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual("Sequencer is not closed. You must call `Close` method after last step call.", tc._sut_A._openingClosingErrorMessenger._mime.PlainMessage.Text);
             Assert.AreEqual(eMessageCategory.ProgrammingError, tc._sut_A._openingClosingErrorMessenger._mime.PlainMessage.CategoryAsEnum);
         }
+
+        [Test, Order((int)eTcoSequenceTests.FreshStateEntry)]
+        public void FreshStateEntry()
+        {
+            tc._sut_A._messenger.Clear();
+
+            tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.Initialize);
+            tc.ExecuteProbeRun((int)eTcoSequenceTests.FreshStateEntry);
+
+
+            Assert.AreEqual(true, tc.FreshStateEntry_enter_and_leave_must_be_true.Synchron);
+            Assert.AreEqual(true, tc.FreshStateEntry_enter_and_two_cycles_on_first_must_be_true.Synchron);
+            Assert.AreEqual(false, tc.FreshStateEntry_enter_and_two_cycles_on_second_must_be_false.Synchron);
+            Assert.AreEqual(false, tc.FreshStateEntry_on_multiple_calls_but_not_first_must_be_false.Synchron);
+            Assert.AreEqual(true, tc.FreshStateEntry_on_request_step_single_call_must_be_true.Synchron);
+
+
+        }
     }
 }

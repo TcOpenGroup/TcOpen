@@ -171,7 +171,7 @@ METHOD PROTECTED OnStepCompleted
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(_Parent,_station) THEN // Check if _Parent is Station001
+          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
 	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>

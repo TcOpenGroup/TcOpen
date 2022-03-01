@@ -2,6 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoAnalogueInspectorData" Id="{e7419db1-2050-0230-2b63-3f89596ed2cc}">
     <Declaration><![CDATA[{attribute addProperty Name "AnalogueCheckerData"}
+{attribute addProperty Units ""}
 {attribute 'qlik_entity:Checks'}
 {attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
 {attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
@@ -16,8 +17,9 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MIN.#>"}
+        {attribute addProperty  Name "<#Min.#>"}
         {attribute 'qlik_load:Minimum'}
+		{attribute addProperty ToolTip "<#Min. value for the inspection to pass.#>"}
         RequiredMin : LREAL;
 
         (*~
@@ -27,8 +29,9 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MEASURED#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty  Name "<#Detected#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
+		{attribute addProperty ToolTip "<#Detected value#>"}
         {attribute 'qlik_load:Measured'}
         DetectedStatus : LREAL;
 
@@ -39,8 +42,9 @@ TYPE
 		</summary>
 		</docu>
 		~*)
-        {attribute addProperty  Name "<#MAX.#>"}
+        {attribute addProperty  Name "<#Max.#>"}
         {attribute 'qlik_load:Maximum'}
+		{attribute addProperty ToolTip "<#Max. value for the inspection to pass.#>"}
         RequiredMax : LREAL;
 
     END_STRUCT

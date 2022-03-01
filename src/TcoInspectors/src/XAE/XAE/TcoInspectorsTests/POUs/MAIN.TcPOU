@@ -8,6 +8,7 @@ VAR
     _analogueInspectorTests      : TcoAnalogueInspectorTests;
     _dataInspectorTests          : TcoDataInspectorTests;
     _inspectionGroupTests        : TcoInspectionGroupTests;
+    _exampleContext              : ExampleContext;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -15,7 +16,8 @@ END_VAR
 _digitalInspectorTests.ProbeRun();
 _analogueInspectorTests.ProbeRun();
 _dataInspectorTests.ProbeRun();
-_inspectionGroupTests.ProbeRun();]]></ST>
+_inspectionGroupTests.ProbeRun();
+_exampleContext.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

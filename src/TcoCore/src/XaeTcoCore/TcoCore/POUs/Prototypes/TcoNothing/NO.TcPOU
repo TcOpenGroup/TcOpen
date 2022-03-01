@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="NO" Id="{380c2f10-c4c6-0df0-0cc6-318b9b23bdbf}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM NO
+VAR
+	Obj : ITcoObject;
+	Structure : TcoStruct;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

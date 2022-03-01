@@ -24,5 +24,16 @@ END_VAR]]></Declaration>
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="WithCoordinator" Id="{9d0edf65-b764-0fe1-0ea6-c44ac1de6e92}">
+      <Declaration><![CDATA[METHOD  WithCoordinator : REFERENCE TO TcoInspectorTests
+VAR_INPUT
+	inoCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_sut.WithCoordinator(_coordinator);
+WithCoordinator REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

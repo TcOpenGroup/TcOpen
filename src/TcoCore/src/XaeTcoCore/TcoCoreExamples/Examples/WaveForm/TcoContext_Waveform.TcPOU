@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoContext_Waveform" Id="{76c1cbb5-02cf-02d0-2e44-70ab9bc25555}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoContext_Waveform EXTENDS TcoContextTest
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContext_Waveform EXTENDS TcoCore._internals_TcoContext
 VAR
 	_TcoObject_Waveform		:	TcoObject_Waveform(THIS^);
 END_VAR

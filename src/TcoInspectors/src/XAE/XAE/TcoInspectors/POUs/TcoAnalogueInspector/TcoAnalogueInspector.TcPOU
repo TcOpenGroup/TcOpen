@@ -8,7 +8,7 @@
 </summary>
 </docu>
 ~*)
-FUNCTION_BLOCK TcoAnalogueInspector EXTENDS TcoInspector
+FUNCTION_BLOCK TcoAnalogueInspector EXTENDS TcoInspector IMPLEMENTS ITcoAnalogueInspector
 VAR
     _data : TcoAnalogueInspectorData;
 	{attribute 'hide'}
@@ -55,27 +55,31 @@ VAR
 	tmpResult : BOOL;
 	_minimum : LREAL;
 	_value : LREAL;
-	_maximum : LREAL;
-	_lastOutValue : LREAL;
+	_maximum : LREAL;	
 END_VAR
 
 VAR CONSTANT
-    epsilon : REAL := 1;
+    epsilon : REAL := 100000;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
 
+
+_inspectorTask.InspectionData REF= _data;
+
 OnEnterInspection();
 
-_inspectionData REF= _data;
+IF(IsOverinspected())THEN
+	RETURN;
+END_IF
 
-Invoke();
+_inspectorTask.Invoke();
 
-IF (Execute()) THEN
+IF (_inspectorTask.Execute()) THEN
     IF (_data.IsByPassed) THEN
         _data.Result    := eInspectorResult.Bypassed;
         _data.TimeStamp := Context.RealTimeClock.NowLocal();
-        DoneWhen(TRUE);
+        _inspectorTask.DoneWhen(TRUE);
         RETURN;
     END_IF
 
@@ -91,12 +95,14 @@ IF (Execute()) THEN
 		
 	 IF(NOT tmpResult) THEN
 		_lastOutValue := Status;
-	  END_IF
+	 END_IF
 		
-	 _failTimer(IN := TRUE, PT := _data.FailTime);
-     _passTimer(IN := tmpResult, PT := _data.PassTime);
-		  
-     DoneWhen(_failTimer.Q OR _passTimer.Q);
+	 _inspectorTask._failTimer(IN := TRUE, PT := _data.FailTime);
+     _inspectorTask._passTimer(IN := tmpResult, PT := _data.PassTime);
+	 IF(_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN	  
+     	_inspectorTask.DoneWhen(TRUE);
+		OnDone();
+	 END_IF;	
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -111,10 +117,20 @@ END_IF;]]></ST>
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.OnDone();
-IF (_data.Result = eInspectorResult.Failed) THEN
+        <ST><![CDATA[IF (_data.Result = eInspectorResult.Failed) THEN
      _data.DetectedStatus := _lastOutValue;
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{ed4b79f2-1409-0b85-3501-740ca7aca530}">
+      <Declaration><![CDATA[METHOD WithCoordinator : ITcoAnalogueInspector
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WithCoordinator(inCoordinator);
+WithCoordinator := THIS^;]]></ST>
       </Implementation>
     </Method>
   </POU>

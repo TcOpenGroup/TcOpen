@@ -57,17 +57,17 @@ IF(THIS^._hasException) THEN
 	Messenger.Error(THIS^._exceptionMessage);
 END_IF;]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{1a44b54a-1c12-0ff2-33c6-1d29da8e202f}">
+    <Method Name="FB_init" Id="{1c41a892-4db9-04b6-37e3-d013817c3bb7}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{2f23f300-6ca2-0121-34ff-d733f0ca0af9}">

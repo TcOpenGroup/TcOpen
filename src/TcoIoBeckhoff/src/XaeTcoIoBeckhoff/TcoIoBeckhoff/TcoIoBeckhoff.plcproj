@@ -18,12 +18,21 @@
     <LibraryReferences>{03f8892c-d1d0-44d2-9e9d-b9c1ad614a91}</LibraryReferences>
     <Released>false</Released>
     <Title>TcoIoBeckhoff</Title>
-    <ProjectVersion>1.18.6.1495</ProjectVersion>
-    <Author>
-    </Author>
+    <ProjectVersion>1.19.0.1730</ProjectVersion>
+    <Author></Author>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoIoBeckhoff</DefaultNamespace>
     <CombineIds>true</CombineIds>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Abstractions\AI\AI_1_Module.TcPOU">
