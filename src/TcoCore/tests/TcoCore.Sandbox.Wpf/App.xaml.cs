@@ -30,7 +30,7 @@ namespace TcoCore.Sandbox.Wpf
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
 
-            TcOpen.Inxton.TcoCore.Wpf.DialogProxyService.Create(PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext);
+            TcOpen.Inxton.TcoCore.Wpf.DialogProxyService.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext });
 
             PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);
             PlcTcoCoreExamples.EXAMPLES_PRG._context._logger.StartLoggingMessages(eMessageCategory.All);
