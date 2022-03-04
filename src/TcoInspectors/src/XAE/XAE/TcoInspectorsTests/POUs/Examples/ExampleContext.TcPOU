@@ -120,7 +120,7 @@ IF (seq.Step(inStepID := 100,
 		.Inspect(Components.DmcReader)		
         .UpdateComprehensiveResult(Data.OverallResult)
         .OnFail()
-		.Dialog(50);
+		.Dialog(0);
     //--------------------------------------------------------			
 END_IF;
 
