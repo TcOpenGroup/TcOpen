@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoInspectorDialog" Id="{c6c9fa75-2ded-0851-0bf8-095f61987545}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides dialog with the user to allow for deciding how to proceed in case of failure.	
+		</summary>	
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
+VAR  
+    {attribute clr [CompilerOmits("BuilderPlainer")]}
+    _dialogueRetryTask : TcoCore.TcoTask(THIS^);
+    {attribute clr [CompilerOmits("BuilderPlainer")]}
+    _dialogueTerminateTask : TcoCore.TcoTask(THIS^);
+    {attribute clr [CompilerOmits("BuilderPlainer")]}
+    _dialogueOverrideTask : TcoCore.TcoTask(THIS^);
+    _isOverInspected      : BOOL;
+    {attribute 'hide'}
+    _refInspector : REFERENCE TO TcoInspector;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{1eeabd82-0765-01f0-1e37-da5161467ea2}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetInspector" Id="{59f6bb8e-40b5-01f0-1137-0e38be5ca644}">
+      <Declaration><![CDATA[METHOD SetInspector
+VAR_INPUT 
+	refInspector : REFERENCE TO TcoInspector;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refInspector REF= refInspector;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Show" Id="{409527dd-7ec4-05bd-0a53-372d7df86c62}">
+      <Declaration><![CDATA[METHOD Show
+VAR_INPUT
+	inRetryStep : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_isOverInspected := _refInspector.OverInspected;
+
+ IF(_refInspector.Done) THEN		
+	IF(_refInspector.Result = eInspectorResult.Failed) THEN
+		THIS^.Invoke();
+		SUPER^();	
+		
+		IF(_dialogueRetryTask.Execute()) THEN
+			_dialogueRetryTask.DoneWhen(_refInspector.Retry(inRetryStep));
+		END_IF
+		
+		IF(_dialogueTerminateTask.Execute()) THEN
+			_dialogueTerminateTask.DoneWhen(_refInspector.Terminate());
+		END_IF
+		
+		IF(_dialogueOverrideTask.Execute()) THEN
+			_dialogueOverrideTask.DoneWhen(_refInspector.CarryOn());
+		END_IF
+	ELSE
+		IF(_refInspector.Coordinator <> 0) THEN
+			_refInspector.Coordinator.MoveNext();
+		END_IF;	
+	END_IF;	
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

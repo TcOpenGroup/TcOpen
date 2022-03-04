@@ -55,6 +55,7 @@ IF (seq.Step(inStepID := 0,
     inEnabled := TRUE,
     inStepDescription := 'ASKING SOME QUESTION')) THEN
     //--------------------------------------------------------
+//<StandardDialog>	
 	answer := _dialog.Show()
 			.WithCaption('Ready to go?')
 			.WithText('We are about to start the inspection sequence. Do we go ahead?')
@@ -65,6 +66,7 @@ IF (seq.Step(inStepID := 0,
 	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
 		_sequence1Task.Restore();
 	 END_IF;	
+//</StandardDialog>	 
     //--------------------------------------------------------			
 END_IF;
 

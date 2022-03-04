@@ -1,26 +1,9 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsViewModel>
-@using Blazm.Components
 @namespace TcoCore
 
 <div class="container">
     <div class="row">
-        <div class="col-1 ">
-            @if (ViewModel._tcoObject.MessageHandler.ActiveMessagesCount > 0)
-            {
-
-                <div style="white-space: nowrap ; padding-top: 2px">
-                    <div class="spinner-grow spinner-grow-sm text-info" role="status">
-                        <span class="visually-hidden"></span>
-
-                    </div>
-
-                    <span class="badge bg-info text-dark">@ViewModel._tcoObject.MessageHandler.ActiveMessagesCount</span>
-
-                </div>
-
-            }
-        </div>
-        <div class="col-7">
+        <div class="col-6">
             <select class="w-100 form-select"
                     @bind="@ViewModel.MinMessageCategoryFilter">
                 @foreach (var item in eMessageCategories)
@@ -32,16 +15,15 @@
             </select>
         </div>
 
-
-        <div class="col-2">
+        <div class="col-2 d-flex d">
             <button @onclick="() => ViewModel.RogerAllMessages()"
                     type="button"
                     class="btn btn-secondary">
-                Acknowledge all
+                Roger all messages
             </button>
 
         </div>
-        <div class="col-2">
+        <div class="col-2 d-flex d">
 
             <button @onclick="() => ViewModel.UpdateMessagesCommand.Execute(null)"
                     type="button"
@@ -51,70 +33,103 @@
 
         </div>
 
+
+
+
     </div>
-  
     <div class="d-flex flex-row">
-        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
-        <span class="mx-3">@DiagnosticsMessage()</span>
-    </div>
-</div>
+        <div>
+            @if (ViewModel._tcoObject.MessageHandler.ActiveMessagesCount > 0)
+            {
 
+                <div class="spinner-grow spinner-grow-sm text-info" role="status">
+                    <span class="visually-hidden"></span>
 
-<BlazmGrid Data="ViewModel.MessageDisplay" PageSize="10" Sortable="true" UseVirtualize="false">
-    <NullGridTemplate>
-        No messages found.
-    </NullGridTemplate>
-    <EmptyGridTemplate>
-        No messages found.
-    </EmptyGridTemplate>
-    <GridColumns>
-        
-        <GridColumn Field="@nameof(PlainTcoMessage.TimeStamp)" />
-    
-        <GridColumn Field="@nameof(PlainTcoMessage.Text)" Title="Message" />
-        <GridColumn Field="@nameof(PlainTcoMessage.Location)" />
-        <GridColumn Field="@nameof(PlainTcoMessage.PerCycleCount)" />
-        <GridColumn Field="@nameof(PlainTcoMessage.ParentsObjectSymbol)" Title="Symbol" />
-        <GridColumn Title="Action">
-            <Template>
-                
-                @{
-                    var message = context as PlainTcoMessage;
-                }
-                @if(message != null)
-                {
-                <div style="white-space: nowrap">
-                    <button @onclick="() => OnSelectedMessage(message)">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <button class="btn btn-secondary" @onclick="() => ViewModel.RogerMessage(message)">
-                        @if (message.OnlinerMessage.Pinned.Cyclic)
-                        {
-                            <span>Acknowledge</span>
-                        }
-                        else
-                        {
-                            <span>Acknowledged</span>
-                        }
-                    </button>
                 </div>
-                }
-            </Template>
-        </GridColumn>
 
-    </GridColumns>
+                <div>
+                    <p>Active messages: <span class="badge bg-info text-dark">@ViewModel._tcoObject.MessageHandler.ActiveMessagesCount</span></p>
+                </div>
 
-</BlazmGrid>
-
-
-@if (ViewModel.AffectedObject != null)
-{
-    <button @onclick="@(() => { ViewModel.AffectedObject = null; })"><i class="fas fa-times"></i></button>
-    
-    <div class="card">
-        <RenderableContentControl Context="ViewModel.AffectedObject" Presentation="Service" />
+            }
+        </div>
+        </div>
+        <div class="d-flex flex-row">
+            <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
+            <span class="mx-3">@DiagnosticsMessage()</span>
+        </div>
     </div>
-}
 
+
+
+    @code{
+
+
+
+
+
+        public string DiagnosticsMessage() => "Diag depth : " + DepthValue;
+        public int MaxDiagnosticsDepth { get; set; } = 20;
+        private int _depthValue;
+        public int DepthValue
+        {
+            get
+            {
+                if (_depthValue == 0)
+                    _depthValue = ViewModel._tcoObject.MessageHandler.DiagnosticsDepth;
+                return _depthValue;
+            }
+            set
+            {
+                _depthValue = value;
+                ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
+            }
+        }
+
+    }
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Message</th>
+                <th scope="col">Location</th>
+                <th scope="col">PerCycleCount</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in ViewModel.MessageDisplay)
+            {
+                <tr @onclick="() => OnSelectedMessage(message)">
+                    <td>@message.TimeStamp</td>
+                    <td>@message.Text</td>
+                    <td>@message.Location</td>
+                    <td>@message.PerCycleCount</td>
+                    <td>@message.ParentsObjectSymbol</td>
+                    <td>
+
+                        <button class="btn btn-secondary" @onclick="()=>ViewModel.RogerMessage(message)">
+                            @if (message.OnlinerMessage.Pinned.Cyclic)
+                            {
+                                <span>Roger</span>
+                            }
+                            else
+                            {
+                                <span>Rogered</span>
+                            }
+                        </button>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    @if (ViewModel.AffectedObject != null)
+    {
+        <RenderableContentControl Context="ViewModel.AffectedObject" Presentation="Service" />
+    }
 
 

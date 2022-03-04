@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoTier" Id="{72b3e36c-9fb0-02aa-297b-3c33600c687a}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'hide'}
+FUNCTION_BLOCK TcoTier EXTENDS TcoObject
+VAR
+	{attribute 'hide'}
+	_nextExpectedCycle : ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{5c61873f-ff6d-026c-1d03-8c583edfb363}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;	
+END_VAR
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="IsNewTier" Id="{2a34a065-ff45-0b48-32a5-c0e71a5c55c9}">
+      <Declaration><![CDATA[METHOD IsNewTier : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IsNewTier := THIS^.Context.StartCycleCount <> _nextExpectedCycle;
+_nextExpectedCycle := THIS^.Context.StartCycleCount + 1;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
