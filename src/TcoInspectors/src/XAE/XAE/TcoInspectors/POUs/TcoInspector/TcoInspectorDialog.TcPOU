@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoInspectorDialog" Id="{c6c9fa75-2ded-0851-0bf8-095f61987545}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides dialog with the user to allow for deciding how to proceed in case of failure.	
+		</summary>	
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
 VAR  
     {attribute clr [CompilerOmits("BuilderPlainer")]}
     _dialogueRetryTask : TcoCore.TcoTask(THIS^);
