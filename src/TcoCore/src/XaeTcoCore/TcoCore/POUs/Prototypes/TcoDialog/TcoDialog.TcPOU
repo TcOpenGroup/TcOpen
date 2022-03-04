@@ -1,7 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoDialog" Id="{bc7600eb-cc99-0e0c-2ff6-dcdca22ab5d8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDialog EXTENDS TcoDialogBase IMPLEMENTS ITcoDialogFormat, ITcoDialogAnswer
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides standard dialog to interact with the user.		    			 					
+ 		</summary>
+		<example>										
+			[!code-pas[StandardDialog](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoInspectorsTests/POUs/Examples/ExampleContext.TcPOU?name=StandardDialog)]		
+			[!code-csharp[DialogInitialization](~/../TcOpen/src/TcoInspectors/tests/Sandbox.TcoInspectors.Wpf/MainWindowViewModel.cs?name=DialogProxyServiceInitialization)]
+		</example>					
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoDialog EXTENDS TcoDialogBase IMPLEMENTS ITcoDialogFormat, ITcoDialogAnswer
 VAR
     _text      : STRING(500);
     _caption   : STRING(255);
@@ -19,6 +30,13 @@ END_VAR
     <Property Name="Answer" Id="{0dc2ad34-f12f-0475-2e9e-47acff8b3ab7}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access the property via `ITcoDialogAnswer)` interface.'}
+(*~
+	<docu>
+		<summary>
+			Gets the answer from the dialog. 			 					
+ 		</summary>					
+	</docu>	
+~*)
 PROPERTY Answer : eDialogAnswer]]></Declaration>
       <Get Name="Get" Id="{4bbfee3b-9674-0bb1-0d39-17fce0ea4024}">
         <Declaration><![CDATA[VAR
@@ -50,7 +68,18 @@ _answer := eDialogAnswer.NoAnswer;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Show" Id="{052bdc3b-8ff1-0bbd-0fbb-d25a0348416f}">
-      <Declaration><![CDATA[METHOD Show : ITcoDialogFormat
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Shows the dialog.
+			<note type="important">
+				In order for the dialog to be displayed to the user user application must initialized in the user application.
+				How to set up the observer in a WPF see `TcOpen.Inxton.TcoCore.Wpf.DialogProxyService`.
+			</note> 			 					
+ 		</summary>					
+	</docu>	
+~*)
+METHOD Show : ITcoDialogFormat
 
 ]]></Declaration>
       <Implementation>
@@ -68,7 +97,14 @@ Show := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithCaption" Id="{e74b3d9a-c845-0bc5-27de-0a52b6eb9b30}" FolderPath="Format\">
-      <Declaration><![CDATA[{attribute 'hide'}
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the caption of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
 {attribute 'obsolete' := 'You should access the method via `Show()` method.'}
 METHOD WithCaption : ITcoDialogAnswer
 VAR_INPUT
@@ -81,7 +117,14 @@ WithCaption := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithOk" Id="{c52dd3cb-da74-062c-2ff2-a375c59030c1}" FolderPath="Format\">
-      <Declaration><![CDATA[{attribute 'hide'}
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `OK` button should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
 {attribute 'obsolete' := 'You should access the method via `Show()` method.'}
 METHOD WithOk : ITcoDialogAnswer
 VAR_INPUT
@@ -93,7 +136,14 @@ WithOk := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithText" Id="{b4168086-36a7-0b45-302c-c63e929b4cfa}" FolderPath="Format\">
-      <Declaration><![CDATA[{attribute 'hide'}
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the text of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
 {attribute 'obsolete' := 'You should access the method via `Show()` method.'}
 METHOD WithText : ITcoDialogAnswer
 VAR_INPUT
@@ -106,7 +156,14 @@ WithText := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithYesNo" Id="{97fb4a7f-33e1-0bb9-1e9b-67e28ca02e2d}" FolderPath="Format\">
-      <Declaration><![CDATA[{attribute 'hide'}
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Yes` and `No` buttons should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
 {attribute 'obsolete' := 'You should access the method via `Show()` method.'}
 METHOD WithYesNo : ITcoDialogAnswer
 VAR_INPUT
@@ -119,7 +176,14 @@ WithYesNo := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithYesNoCancel" Id="{366a959f-b453-0846-1871-58dde82bbbb0}" FolderPath="Format\">
-      <Declaration><![CDATA[{attribute 'hide'}
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Yes`, `No` and `Cancel` buttons should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
 {attribute 'obsolete' := 'You should access the method via `Show()` method.'}
 METHOD WithYesNoCancel : ITcoDialogAnswer
 

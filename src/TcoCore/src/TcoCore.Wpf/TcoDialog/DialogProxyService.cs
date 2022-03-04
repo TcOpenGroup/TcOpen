@@ -10,6 +10,9 @@ using Vortex.Presentation.Wpf;
 
 namespace TcOpen.Inxton.TcoCore.Wpf
 {
+    /// <summary>
+    /// Provides management for the PLC dialogs.
+    /// </summary>
     public class DialogProxyService : DialogProxyServiceBase
     {
         protected DialogProxyService(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
@@ -35,6 +38,11 @@ namespace TcOpen.Inxton.TcoCore.Wpf
                 );
         }
 
+        /// <summary>
+        /// Creates observer for plc dialogs for given objects.
+        /// </summary>
+        /// <param name="observedObjects">Object for which the dialogs must be handled in this application.</param>
+        /// <returns></returns>
         public static DialogProxyServiceBase Create(IEnumerable<IVortexObject> observedObjects)
         {
             var dialogProxyService = new DialogProxyService(observedObjects);
