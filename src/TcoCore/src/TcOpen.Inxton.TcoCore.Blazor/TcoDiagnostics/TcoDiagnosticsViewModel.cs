@@ -141,8 +141,10 @@ namespace TcoCore
         }
         public void RogerMessage(PlainTcoMessage msg)
         {
-            msg.OnlinerMessage.Pinned.Cyclic = false;
-            UpdateMessages();
+            if (msg != null)
+            {
+                msg.OnlinerMessage.Pinned.Cyclic = false;
+            }
         }
 
         public void RogerAllMessages()
@@ -156,7 +158,6 @@ namespace TcoCore
                 }
             }
 
-            UpdateMessages();
         }
         public IVortexObject AffectedObject { get; set; }
        
