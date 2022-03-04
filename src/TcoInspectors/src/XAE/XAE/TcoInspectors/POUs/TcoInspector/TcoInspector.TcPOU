@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoInspector" Id="{cdcabed1-7ff8-095e-24f6-ca93f0ca4004}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoObject IMPLEMENTS IInspector, IOnFail
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Base block for signal and data inspectors. This block is abstract and must be inherited in derived block.
+			Inspector provide a mechanism for detection and evaluation of various signals. The inspection is settable by a series of 
+			settings, like stabilisation times, timeouts, repeats counts, etc.
+		</summary>	
+	</docu>	
+~*)
+FUNCTION_BLOCK ABSTRACT TcoInspector EXTENDS TcoCore.TcoObject IMPLEMENTS IInspector, IOnFail
 VAR
 	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}
 	_tcoInspectorDialogue : TcoInspectorDialog(THIS^);
@@ -12,7 +21,7 @@ VAR
 	{attribute 'hide'}		
 	_isOverInspected : BOOL;
 	{attribute 'hide'}	
-	_tierUpdateOverall : TcoTier(THIS^);	
+	_tierUpdateOverall : TcoCore.TcoTier(THIS^);	
 	{attribute 'hide'}	
 	_originalOverallResult : TcoComprehensiveResult;
 	{attribute 'hide'}	

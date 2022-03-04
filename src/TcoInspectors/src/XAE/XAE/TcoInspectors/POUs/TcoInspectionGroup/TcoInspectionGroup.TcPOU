@@ -9,7 +9,7 @@ VAR
     _currentRunResult : TcoComprehensiveResult;
     _inspections      : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
     _inspectionIndex  : INT;
-    _tierAct          : TcoTier(THIS^);
+    _tierAct          : TcoCore.TcoTier(THIS^);
 END_VAR
 
 VAR CONSTANT
