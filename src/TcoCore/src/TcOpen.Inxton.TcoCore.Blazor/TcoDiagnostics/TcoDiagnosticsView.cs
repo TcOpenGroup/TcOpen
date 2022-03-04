@@ -13,7 +13,7 @@ namespace TcoCore
         protected override void OnInitialized()
         {
             UpdateValuesOnChange(ViewModel._tcoObject);
-            DiagnosticsUpdateTimer();
+            this.DiagnosticsUpdateTimer();
         }
 
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running!";
@@ -26,9 +26,9 @@ namespace TcoCore
             {
                 ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(ViewModel.SelectedMessage.Identity);
             }
-           
-           
         }
+
+      
 
         private Timer messageUpdateTimer;
         private void DiagnosticsUpdateTimer()
@@ -44,29 +44,11 @@ namespace TcoCore
         }
  
         
-        private async void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-           ViewModel.UpdateMessages();
-           await InvokeAsync(StateHasChanged);
+            ViewModel.UpdateMessages();
+            InvokeAsync(StateHasChanged);
+            
         }
-
-        public string DiagnosticsMessage() => "Diag depth : " + DepthValue;
-        public int MaxDiagnosticsDepth { get; set; } = 20;
-        private int _depthValue;
-        public int DepthValue
-        {
-            get
-            {
-                if (_depthValue == 0)
-                    _depthValue = ViewModel._tcoObject.MessageHandler.DiagnosticsDepth;
-                return _depthValue;
-            }
-            set
-            {
-                _depthValue = value;
-                ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
-            }
-        }
-        
     }
 }

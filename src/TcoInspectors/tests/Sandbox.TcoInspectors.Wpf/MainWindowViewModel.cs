@@ -15,9 +15,9 @@ namespace Sandbox.TcoInspectors.Wpf
     {
         public MainWindowViewModel()
         {
-            // InspectorProxyService.Create(App.Plc.MAIN._exampleContext);
-            TcOpen.Inxton.TcoCore.Wpf.DialogProxyService.Create(new[] { App.Plc.MAIN._exampleContext });
-                
+            #region DialogProxyServiceInitialization
+                TcOpen.Inxton.TcoCore.Wpf.DialogProxyService.Create(new[] { App.Plc.MAIN._exampleContext });
+            #endregion
             this.FromOnlineToShadowCommand = new RelayCommand(a => FromOnlineToShadow());
             this.FromShadowToOnlineCommand = new RelayCommand(a => FromShadowToOnline());
         }
