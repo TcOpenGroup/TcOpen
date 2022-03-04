@@ -15,7 +15,7 @@
     </Window.DataContext>
     <Grid Grid.Row="0">
         <TabControl>
-            <TabItem Header="Examples">
+            <TabItem Header="Examples-1">
                 <ScrollViewer>
                     <StackPanel  Grid.IsSharedSizeScope="True">
                     <TabControl MaxHeight="600">
@@ -68,6 +68,18 @@
                     
                 </StackPanel>
                 </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Examples-2">
+                <Grid DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._examples_2}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="0">
+                        <vortex:RenderableContentControl PresentationType="Base-Control"></vortex:RenderableContentControl>
+                    </ScrollViewer>
+                    <vortex:RenderableContentControl Grid.Row="1" PresentationType="Diagnostics" ></vortex:RenderableContentControl>
+                </Grid>
             </TabItem>
             <TabItem Header="Manually">
                 <StackPanel>

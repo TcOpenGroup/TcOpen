@@ -17,7 +17,15 @@
 	  <!--Set to TRUE or remove this attribute if you want to crate a package of this project-->
 	  <IsPackable>false</IsPackable>
   </PropertyGroup>
-
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>TRACE;PLC_DOCU</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>PLC_DOCU</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DefineConstants>PLC_DOCU</DefineConstants>
+	</PropertyGroup>
   <ItemGroup>
     <Content Include="_meta\TcoInspectors.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="_meta\TcoInspectors.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
