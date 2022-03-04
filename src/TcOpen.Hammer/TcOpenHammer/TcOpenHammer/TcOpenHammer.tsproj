@@ -1802,7 +1802,7 @@ External Setpoint Generation:
 			</NC>
 		</Motion>
 		<Plc>
-			<Project Disabled="true" GUID="{266FDC45-DB60-4534-88C6-BE73DD0A5D11}" Name="PlcHammer" PrjFilePath="PlcHammer\PlcHammer.plcproj" TmcFilePath="PlcHammer\PlcHammer.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{266FDC45-DB60-4534-88C6-BE73DD0A5D11}" Name="PlcHammer" PrjFilePath="PlcHammer\PlcHammer.plcproj" TmcFilePath="PlcHammer\PlcHammer.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcHammer\PlcHammer.tmc">
 					<Name>PlcHammer Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -1893,8 +1893,10 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 		</Plc>
+		<Io/>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030010" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TIPC^PlcHammer^PlcHammer Instance">
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
 				<Link VarA="PlcTask Inputs^IO.Axis1.NcToPlc" VarB="Outputs^ToPlc"/>
