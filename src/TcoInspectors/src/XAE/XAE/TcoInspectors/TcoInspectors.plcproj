@@ -27,25 +27,25 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\IInspector.TcIO">
+    <Compile Include="POUs\TcoInspector\IInspector.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\IOnFail.TcIO">
+    <Compile Include="POUs\TcoInspector\IOnFail.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\TcoComprehensiveResult.TcDUT">
+    <Compile Include="POUs\TcoInspector\TcoComprehensiveResult.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\TcoInspector.TcPOU">
+    <Compile Include="POUs\TcoInspector\TcoInspector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\TcoInspectorDialog.TcPOU">
+    <Compile Include="POUs\TcoInspector\TcoInspectorDialog.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\TcoInspectorTask.TcPOU">
+    <Compile Include="POUs\TcoInspector\TcoInspectorTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Abstractions\TcoInspectorData.TcDUT">
+    <Compile Include="POUs\TcoInspector\TcoInspectorData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoAnalogueInspector\ITcoAnalogueInspector.TcIO">
@@ -93,14 +93,10 @@
     <Compile Include="POUs\TcoInspectionGroup\TcoInspectionGroup.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\_TcoCore\TcoTier.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
-    <Folder Include="POUs\Abstractions" />
-    <Folder Include="POUs\_TcoCore" />
+    <Folder Include="POUs\TcoInspector" />
     <Folder Include="POUs\TcoDataInspector" />
     <Folder Include="POUs\TcoAnalogueInspector" />
     <Folder Include="POUs\TcoDigitalInspector" />

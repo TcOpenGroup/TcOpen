@@ -52,8 +52,6 @@
 		</summary>			
 	</docu>	
 ~*)
-{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inspect` method.'}
 METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
 	(*~

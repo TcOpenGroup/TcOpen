@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoDialogBase" Id="{b361351b-637d-0485-12e4-25b8c4bb42be}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoDialogBase EXTENDS TcoRemoteTask
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Base block for interactive dialogs.		    			 					
+ 		</summary>					
+	</docu>	
+~*)
+FUNCTION_BLOCK ABSTRACT TcoDialogBase EXTENDS TcoRemoteTask
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
