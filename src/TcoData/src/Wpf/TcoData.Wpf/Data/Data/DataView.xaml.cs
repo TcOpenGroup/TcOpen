@@ -17,7 +17,7 @@ namespace TcoData
         {
            
             InitializeComponent();
-            this.DataGrid.Columns.Add(new DataGridTextColumn() { Binding = new Binding() { Path = new PropertyPath("_EntityId") }, Header = "ID" });
+            //this.DataGrid.Columns.Add(new DataGridTextColumn() { Binding = new Binding() { Path = new PropertyPath("_EntityId") }, Header = "ID" });
         }
 
         private dynamic _context
@@ -82,5 +82,6 @@ namespace TcoData
                 }
             }
         }
+
     }
 }
