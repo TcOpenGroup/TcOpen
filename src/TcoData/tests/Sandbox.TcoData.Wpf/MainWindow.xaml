@@ -18,7 +18,7 @@
             <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManager}" PresentationType="Control">

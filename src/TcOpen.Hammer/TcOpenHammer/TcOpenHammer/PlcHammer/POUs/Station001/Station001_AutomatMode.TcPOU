@@ -84,10 +84,11 @@ IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
 
 	GroupInspection.WithCoordinator(THIS^)
-				   .Act(Station.ProcessTraceabilty._data.Result)
+				   .Act()
 				   .Inspect(Station.ProcessTraceabilty._data.DimX.Inspect(Station.Components._dimX))
 				   .Inspect(Station.ProcessTraceabilty._data.DimY.Inspect(Station.Components._dimY))
 				   .Inspect(Station.ProcessTraceabilty._data.DimZ.Inspect(Station.Components._dimZ))
+				   .UpdateComprehensiveResult(Station.ProcessTraceabilty._data.Result)
 				   .OnFail()
 				   .CarryOn();		   
 						   
