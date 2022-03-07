@@ -11353,6 +11353,8 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
+_StepIdUniquenessState := eStepIdUniquenessState.Done;
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -11360,7 +11362,9 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
       <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
+        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;
+_StepIdUniquenessState := eStepIdUniquenessState.NotYetStarted;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{76cbfb8d-0c45-0ccb-352d-3090bd4ad755}" FolderPath="_Tests\">

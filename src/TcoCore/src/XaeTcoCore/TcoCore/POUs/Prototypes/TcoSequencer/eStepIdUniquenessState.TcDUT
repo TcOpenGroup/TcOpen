@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eStepIdUniquenessState" Id="{ecef0eb3-894e-0915-1b29-3f2f3dd28029}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eStepIdUniquenessState :
+(
+	NotYetStarted := 0,
+	Requested := 10,
+	Started := 20,
+	Running := 40,
+	Done := 200,
+	Error := 255
+);
+END_TYPE
+ ]]></Declaration>
+  </DUT>
+</TcPlcObject>

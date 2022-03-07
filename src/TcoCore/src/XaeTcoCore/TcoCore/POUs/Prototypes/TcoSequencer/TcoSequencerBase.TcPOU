@@ -136,6 +136,10 @@ VAR
 	{attribute 'hide'}
 	_stepIdUniquenessChecked : BOOL := FALSE;
 	{attribute 'hide'}
+	_StepIdUniquenessState : eStepIdUniquenessState;
+	{attribute 'hide'}
+	_StepIdUniquenessStartCycleCount : ULINT;
+	{attribute 'hide'}
 	_checkStepIdRequestedInStepMode : BOOL;
 	{attribute 'hide'}
 	_restoringSequence : BOOL;	
@@ -356,15 +360,10 @@ IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
 	_sequencerHasError := TRUE;
 END_IF
 
-//???? Check if needs to be here.
-IF _sequencerHasError AND (_sequencerErrorId = eSequencerError.NotUniqueStepId) THEN
-	_sequencerErrorId := eSequencerError.noerror;	
-	_sequencerHasError := FALSE;
-	_stepIdUniquenessChecked := FALSE;
-	_numberOfStepsInSequence := 0;
-	_stepCounter := 0;
-	_previousNumberOfStepsInSequence := 0;
-END_IF
+IF _StepIdUniquenessState = eStepIdUniquenessState.NotYetStarted  OR 
+	_StepIdUniquenessState = eStepIdUniquenessState.Requested THEN
+	_StepIdUniquenessState := eStepIdUniquenessState.Started;
+END_IF;
 
 _restoringSequence := FALSE;
 
@@ -589,14 +588,14 @@ VAR
 	_message : STRING(254);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF ((_numberOfStepsInSequence <> _previousNumberOfStepsInSequence) AND _previousNumberOfStepsInSequence > 0) AND _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
-	_stepIdUniquenessChecked := FALSE;
-	_previousNumberOfStepsInSequence := 0;
-	_stepCounter := 0;
-	_numberOfStepsInSequence := 0;
+        <ST><![CDATA[//Change number of the steps in sequence detected
+IF (_numberOfStepsInSequence <> _previousNumberOfStepsInSequence) AND 
+	_previousNumberOfStepsInSequence > 0 AND _stepIdUniquenessChecked AND  
+	(_StepIdUniquenessState = eStepIdUniquenessState.NotYetStarted OR _StepIdUniquenessState = eStepIdUniquenessState.Done) THEN
+	_StepIdUniquenessState := eStepIdUniquenessState.Requested;
 END_IF
 
-IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
+IF (_StepIdUniquenessState >= eStepIdUniquenessState.Started AND _StepIdUniquenessState < eStepIdUniquenessState.Done) THEN
 
 	// Increment order of the currently controlled step
 	_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
@@ -608,28 +607,45 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 	
 	_numberOfStepsInSequence := _stepCounter;
 	
-	IF (_numberOfStepsInSequence = _previousNumberOfStepsInSequence) AND (_numberOfStepsInSequence > 0) AND NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
+	//If new PLC cycle was performed, step id uniqueness control is done
+	IF _StepIdUniquenessState = eStepIdUniquenessState.Running AND 
+  		THIS^.Context.StartCycleCount >= _StepIdUniquenessStartCycleCount + 1 THEN
+
+		_stepIdUniquenessChecked := TRUE;
+		_theOrderOfTheCurrentlyEvaluatedStep := 0;
+		_theOrderOfTheCurrentlyExecutedStep := 0;
+
+		_StepIdUniquenessState := eStepIdUniquenessState.Done;
+	END_IF
+	
+	//If step id uniqueness control is finished, clear dynamic arrays 
+	IF _StepIdUniquenessState >= eStepIdUniquenessState.Done THEN 
 		IF (_pPreviusSteps <> 0) THEN
 			__DELETE(_pPreviusSteps);
 		END_IF
 		IF (_pNewSteps <> 0) THEN
 			__DELETE(_pNewSteps);
 		END_IF	
-		_stepIdUniquenessChecked := TRUE;
-		_theOrderOfTheCurrentlyEvaluatedStep := 0;
-		_theOrderOfTheCurrentlyExecutedStep := 0;
 		RETURN;		
 	END_IF
 	
-	//Stores first StepId		
-	IF (_numberOfStepsInSequence = 0) THEN
+	//First call with the very first step of the sequence
+	IF _StepIdUniquenessState = eStepIdUniquenessState.Started THEN
+		_StepIdUniquenessStartCycleCount := THIS^.Context.StartCycleCount;
+		_previousNumberOfStepsInSequence := 0;
+		_stepCounter := 0;
+		_numberOfStepsInSequence := 0;
+
 		//It should not exists, if yes delete and create again
 		IF (_pPreviusSteps <> 0) THEN
 			__DELETE(_pPreviusSteps);
 		END_IF
 		_pPreviusSteps := __NEW(UINT, 1);
+		//Stores first StepId		
 		_pPreviusSteps[0] := inStepID;
-	ELSE
+		
+		_StepIdUniquenessState := eStepIdUniquenessState.Running;
+	ELSIF _StepIdUniquenessState = eStepIdUniquenessState.Running THEN
 		IF (_pNewSteps <> 0) THEN
 			__DELETE(_pNewSteps);
 		END_IF
@@ -641,18 +657,13 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 			_pUid := _pPreviusSteps[_i];
 			IF inStepID = _pUid THEN
 				IF NOT _sequencerHasError THEN
-					IF (_pPreviusSteps <> 0) THEN
-						__DELETE(_pPreviusSteps);
-					END_IF	
-					IF (_pNewSteps <> 0) THEN
-						__DELETE(_pNewSteps);
-					END_IF
 					_sequencerErrorId := eSequencerError.NotUniqueStepId;
 					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));
 					_currentStep.Description := _message;
 					_currentStep.Status := eStepStatus.Error;
 					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
 					_sequencerHasError := TRUE;
+					_StepIdUniquenessState := eStepIdUniquenessState.Error;
 					RETURN;					
 				END_IF
 			ELSE
@@ -676,14 +687,6 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 			__DELETE(_pNewSteps);
 		END_IF
 	END_IF	
-END_IF
-IF _stepIdUniquenessChecked THEN
-	IF (_pPreviusSteps <> 0) THEN
-		__DELETE(_pPreviusSteps);
-	END_IF
-	IF (_pNewSteps <> 0) THEN
-		__DELETE(_pNewSteps);
-	END_IF
 END_IF
 ]]></ST>
       </Implementation>
@@ -768,12 +771,9 @@ END_VAR
 METHOD PRIVATE OnlineChange
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepIdUniquenessChecked := FALSE;
-
-_stepCounter := 0;
-_numberOfStepsInSequence := 0;
-_previousNumberOfStepsInSequence := 0;
-]]></ST>
+        <ST><![CDATA[IF _stepIdUniquenessChecked THEN
+	_StepIdUniquenessState := eStepIdUniquenessState.Requested;
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnRestore" Id="{fb23f6fa-464b-04ea-13eb-416f2589cb92}">
@@ -891,7 +891,7 @@ _previousNumberOfStepsInSequence := 0;
 _theOrderOfTheCurrentlyExecutedStep := 0;
 _theOrderOfThePreviouslyExecutedStep := 0;
 _stepIdUniquenessChecked := FALSE;
-
+_StepIdUniquenessState := eStepIdUniquenessState.NotYetStarted;
 _StepIdChanged := FALSE;
 _StepOrderChanged := FALSE;
 _ChangeStepIdFrom := 0;
@@ -1037,8 +1037,11 @@ _isFirstStepEntry := FALSE;
 IF _restoringSequence THEN
 	RETURN;
 END_IF
+
 IsStepIDUnique(inStepID);
+
 IF NOT _stepIdUniquenessChecked THEN
+	//Produce StepChanged after first run of the first step
 	_theOrderOfThePreviouslyExecutedStep := -1;
 	RETURN;
 END_IF
