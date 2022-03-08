@@ -1,560 +1,558 @@
 <?xml version="1.0"?>
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
-  <DataTypes>
-    <DataType>
-      <Name GUID="{5E1AAC2F-D9A1-968B-5561-0F6A525DBF00}" AutoDeleteType="true">AI_ChannelStatus</Name>
-      <BitSize>128</BitSize>
-      <SubItem>
-        <Name>UnderRange</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>64</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>OverRange</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>65</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>Limit_1_Greater</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>66</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>Limit_1_Smaller</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>67</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>Limit_2_Greater</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>68</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>Limit_2_Smaller</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>69</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>Error</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>70</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>TxPdoState</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>78</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>TxPdoToggle</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>79</BitOffs>
-        <Properties>
-          <Property>
-            <Name>TcAddressType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <Properties>
-        <Property>
-          <Name>PouType</Name>
-          <Value>FunctionBlock</Value>
-        </Property>
-      </Properties>
-    </DataType>
-    <DataType>
-      <Name GUID="{9C4E351A-2140-503B-1609-725945B21645}" AutoDeleteType="true">StatusStructBasic</Name>
-      <BitSize>32</BitSize>
-      <SubItem>
-        <Name>Enabled</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>Tripped</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>1</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>HWProtection</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>4</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>CurrentLevelWarning</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>7</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>CoolDownLock</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>8</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>Diag</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>12</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>TxPDOState</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>13</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>Error</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>18</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>StateReset</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>19</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>StateSwitch</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>20</BitOffs>
-      </SubItem>
-    </DataType>
-    <DataType>
-      <Name GUID="{FB823056-4D1E-8176-D315-C6FDFF390905}" AutoDeleteType="true">OutputStruct</Name>
-      <BitSize>16</BitSize>
-      <SubItem>
-        <Name>Reset</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>Switch</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>1</BitOffs>
-      </SubItem>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
-      <BitSize>1</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>1</Elements>
-      </ArrayInfo>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-002000000006}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..5] OF BIT</Name>
-      <BitSize>6</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>6</Elements>
-      </ArrayInfo>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
-      <BitSize>2</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>2</Elements>
-      </ArrayInfo>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-002000000003}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..2] OF BIT</Name>
-      <BitSize>3</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>3</Elements>
-      </ArrayInfo>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-00200000000B}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..10] OF BIT</Name>
-      <BitSize>11</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>11</Elements>
-      </ArrayInfo>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-00200000000E}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..13] OF BIT</Name>
-      <BitSize>14</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>14</Elements>
-      </ArrayInfo>
-    </DataType>
-    <DataType>
-      <Name GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}" BitType="true" PersistentType="true">DIGDiagInput</Name>
-      <BitSize>4</BitSize>
-      <SubItem>
-        <Name>Overtemperature</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>OpenLoad</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>1</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>Overcurrent</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>2</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>ShortCircuitTo24V</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>3</BitOffs>
-      </SubItem>
-    </DataType>
-    <DataType>
-      <Name GUID="{0B52BD81-A20C-4572-9E72-BE6D057EE8D9}" BitType="true" PersistentType="true">AI_Limit</Name>
-      <BitSize>2</BitSize>
-      <SubItem>
-        <Name>LowerOrEqual</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>HigherOrEqual</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>1</BitOffs>
-      </SubItem>
-    </DataType>
-    <DataType>
-      <Name GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}" BitType="true" PersistentType="true">DIGOutput</Name>
-      <BitSize>1</BitSize>
-      <SubItem>
-        <Name>Output</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
-        <BitSize>1</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-    </DataType>
-  </DataTypes>
-  <ImageDatas>
-    <ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-    <ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-    <ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff000000000000000000000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ffff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ffff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ff007fff007fff000000000000000000000000000000000000000000000000000000000000000000000000ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-  </ImageDatas>
-  <Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" Target64Bit="true" ShowHideConfigurations="#x106">
-    <System>
-      <Settings MaxCpus="2" NonWinCpus="1">
-        <Cpu CpuId="1" />
-      </Settings>
-      <Tasks>
-        <Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
-          <Name>PlcTask</Name>
-        </Task>
-      </Tasks>
-    </System>
-    <Plc>
-      <Project GUID="{DB3B2462-5D2B-4A75-B045-8AD45758239C}" Name="TcoIoBeckhoff" PrjFilePath="TcoIoBeckhoff\TcoIoBeckhoff.plcproj" TmcFilePath="TcoIoBeckhoff\TcoIoBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-        <Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoIoBeckhoff\TcoIoBeckhoff.tmc">
-          <Name>TcoIoBeckhoff Instance</Name>
-          <CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-          <Vars VarGrpType="1">
-            <Name>PlcTask Inputs</Name>
-            <Var>
-              <Name>IO._EL3001.iCHANNEL_1.Value</Name>
-              <Type>INT</Type>
-            </Var>
-            <Var>
-              <Name>IO._EL3001.iCHANNEL_1.Status</Name>
-              <Type GUID="{5E1AAC2F-D9A1-968B-5561-0F6A525DBF00}">AI_ChannelStatus</Type>
-            </Var>
-            <Var>
-              <Name>IO._EL3001.WcState._WcState</Name>
-              <Type>BOOL</Type>
-            </Var>
-            <Var>
-              <Name>IO._EL3001.WcState._InputToggle</Name>
-              <Type>BOOL</Type>
-            </Var>
-            <Var>
-              <Name>IO._EL3001.InfoData._WcState</Name>
-              <Type>BOOL</Type>
-            </Var>
-            <Var>
-              <Name>IO._EL3001.InfoData._InputToggle</Name>
-              <Type>BOOL</Type>
-            </Var>
-            <Var>
-              <Name>IO._channel_1._Chn.Status</Name>
-              <Type GUID="{9C4E351A-2140-503B-1609-725945B21645}">StatusStructBasic</Type>
-            </Var>
-            <Var>
-              <Name>IO._channel_2._Chn.Status</Name>
-              <Type GUID="{9C4E351A-2140-503B-1609-725945B21645}">StatusStructBasic</Type>
-            </Var>
-          </Vars>
-          <Vars VarGrpType="2" AreaNo="1">
-            <Name>PlcTask Outputs</Name>
-            <Var>
-              <Name>IO._channel_1._Chn.Control</Name>
-              <Type GUID="{FB823056-4D1E-8176-D315-C6FDFF390905}">OutputStruct</Type>
-            </Var>
-            <Var>
-              <Name>IO._channel_2._Chn.Control</Name>
-              <Type GUID="{FB823056-4D1E-8176-D315-C6FDFF390905}">OutputStruct</Type>
-            </Var>
-          </Vars>
-          <Contexts>
-            <Context>
-              <Id NeedCalleeCall="true">0</Id>
-              <Name>PlcTask</Name>
-              <ManualConfig>
-                <OTCID>#x02010030</OTCID>
-              </ManualConfig>
-              <Priority>20</Priority>
-              <CycleTime>10000000</CycleTime>
-            </Context>
-          </Contexts>
-          <TaskPouOids>
-            <TaskPouOid Prio="20" OTCID="#x08502001" />
-          </TaskPouOids>
-        </Instance>
-      </Project>
-    </Plc>
-    <Io>
-      <Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
-        <Name>Device 1 (EtherCAT)</Name>
-        <AddressInfo>
-          <Pnp>
-            <DeviceDesc>
-            </DeviceDesc>
-            <DeviceName>
-            </DeviceName>
-            <DeviceData>000000000000</DeviceData>
-          </Pnp>
-        </AddressInfo>
-        <Image Id="1" AddrType="9" ImageType="3">
-          <Name>Image</Name>
-        </Image>
-        <Box Id="1" BoxType="9099">
-          <Name>Term 1 (EK1100)</Name>
-          <ImageId>1000</ImageId>
-          <EtherCAT SlaveType="1" PdiType="#x0d00" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044c2c52" RevisionNo="#x00120000" PortPhys="305" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1100 EtherCAT Coupler (2A E-Bus)" Desc="EK1100" PortABoxInfo="#x00ffffff" />
-          <Box Id="2" BoxType="9099" BoxFlags="#x00000020">
-            <Name>Term 2 (EL3001)</Name>
-            <ImageId>1001</ImageId>
-            <EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x0bb93052" RevisionNo="#x00150000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3001 1Ch. Ana. Input +/-10V" Desc="EL3001" PortABoxInfo="#x01000001">
-              <SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
-              <SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
-              <SyncMan>001100000400000003000000000000000000001104000000</SyncMan>
-              <SyncMan>801104002000010004000000000000000400801120010000</SyncMan>
-              <Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
-              <Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-              <BootStrapData>0010f400f410f400</BootStrapData>
-              <Pdo Name="AI Standard" Index="#x1a00" Flags="#x0010" SyncMan="3">
-                <ExcludePdo>#x1a01</ExcludePdo>
-                <Entry Name="Status__Underrange" Index="#x6000" Sub="#x01" Flags="#x00008020">
-                  <Type>BIT</Type>
-                  <Comment><![CDATA[Underrange event active]]></Comment>
-                </Entry>
-                <Entry Name="Status__Overrange" Index="#x6000" Sub="#x02" Flags="#x00008020">
-                  <Type>BIT</Type>
-                  <Comment><![CDATA[Overrange event active]]></Comment>
-                </Entry>
-                <Entry Name="Status__Limit 1" Index="#x6000" Sub="#x03" Flags="#x00008020">
-                  <Type>BIT2</Type>
-                  <Comment><![CDATA[Bit0: Value smaller/equal Limit1
+	<DataTypes>
+		<DataType>
+			<Name GUID="{5E1AAC2F-D9A1-968B-5561-0F6A525DBF00}" AutoDeleteType="true">AI_ChannelStatus</Name>
+			<BitSize>128</BitSize>
+			<SubItem>
+				<Name>UnderRange</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>64</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>OverRange</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>65</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>Limit_1_Greater</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>66</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>Limit_1_Smaller</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>67</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>Limit_2_Greater</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>68</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>Limit_2_Smaller</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>69</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>Error</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>70</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>TxPdoState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>78</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<SubItem>
+				<Name>TxPdoToggle</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>79</BitOffs>
+				<Properties>
+					<Property>
+						<Name>TcAddressType</Name>
+						<Value>Input</Value>
+					</Property>
+				</Properties>
+			</SubItem>
+			<Properties>
+				<Property>
+					<Name>PouType</Name>
+					<Value>FunctionBlock</Value>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
+			<Name GUID="{9C4E351A-2140-503B-1609-725945B21645}" AutoDeleteType="true">StatusStructBasic</Name>
+			<BitSize>32</BitSize>
+			<SubItem>
+				<Name>Enabled</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Tripped</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>HWProtection</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>CurrentLevelWarning</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>CoolDownLock</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Diag</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>12</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TxPDOState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>13</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Error</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>18</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>StateReset</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>19</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>StateSwitch</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>20</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{FB823056-4D1E-8176-D315-C6FDFF390905}" AutoDeleteType="true">OutputStruct</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>Reset</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Switch</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
+			<BitSize>1</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>1</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000006}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..5] OF BIT</Name>
+			<BitSize>6</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
+			<BitSize>2</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>2</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000003}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..2] OF BIT</Name>
+			<BitSize>3</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000B}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..10] OF BIT</Name>
+			<BitSize>11</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>11</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000E}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..13] OF BIT</Name>
+			<BitSize>14</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>14</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{6BA83360-9A06-44DD-BA56-D80AE08949B6}" BitType="true" PersistentType="true">DIGDiagInput</Name>
+			<BitSize>4</BitSize>
+			<SubItem>
+				<Name>Overtemperature</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>OpenLoad</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Overcurrent</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ShortCircuitTo24V</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{0B52BD81-A20C-4572-9E72-BE6D057EE8D9}" BitType="true" PersistentType="true">AI_Limit</Name>
+			<BitSize>2</BitSize>
+			<SubItem>
+				<Name>LowerOrEqual</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>HigherOrEqual</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{CD83B0E1-AE62-4FB2-BB63-BCD959198F87}" BitType="true" PersistentType="true">DIGOutput</Name>
+			<BitSize>1</BitSize>
+			<SubItem>
+				<Name>Output</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+	</DataTypes>
+	<ImageDatas>
+		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff000000000000000000000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ffff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ffff00ffff00ff000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff00ffff00ff007fff007fff000000000000000000000000000000000000000000000000000000000000000000000000ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+	</ImageDatas>
+	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Settings MaxCpus="2" NonWinCpus="1">
+				<Cpu CpuId="1"/>
+			</Settings>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{DB3B2462-5D2B-4A75-B045-8AD45758239C}" Name="TcoIoBeckhoff" PrjFilePath="TcoIoBeckhoff\TcoIoBeckhoff.plcproj" TmcFilePath="TcoIoBeckhoff\TcoIoBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoIoBeckhoff\TcoIoBeckhoff.tmc">
+					<Name>TcoIoBeckhoff Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>IO._EL3001.iCHANNEL_1.Value</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL3001.iCHANNEL_1.Status</Name>
+							<Type GUID="{5E1AAC2F-D9A1-968B-5561-0F6A525DBF00}">AI_ChannelStatus</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL3001.WcState._WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL3001.WcState._InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL3001.InfoData._WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._EL3001.InfoData._InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO._channel_1._Chn.Status</Name>
+							<Type GUID="{9C4E351A-2140-503B-1609-725945B21645}">StatusStructBasic</Type>
+						</Var>
+						<Var>
+							<Name>IO._channel_2._Chn.Status</Name>
+							<Type GUID="{9C4E351A-2140-503B-1609-725945B21645}">StatusStructBasic</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>IO._channel_1._Chn.Control</Name>
+							<Type GUID="{FB823056-4D1E-8176-D315-C6FDFF390905}">OutputStruct</Type>
+						</Var>
+						<Var>
+							<Name>IO._channel_2._Chn.Control</Name>
+							<Type GUID="{FB823056-4D1E-8176-D315-C6FDFF390905}">OutputStruct</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+				<Name>Device 1 (EtherCAT)</Name>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc></DeviceDesc>
+						<DeviceName></DeviceName>
+						<DeviceData>000000000000</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Image Id="1" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="9099">
+					<Name>Term 1 (EK1100)</Name>
+					<ImageId>1000</ImageId>
+					<EtherCAT SlaveType="1" PdiType="#x0d00" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044c2c52" RevisionNo="#x00120000" PortPhys="305" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1100 EtherCAT Coupler (2A E-Bus)" Desc="EK1100" PortABoxInfo="#x00ffffff"/>
+					<Box Id="2" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 2 (EL3001)</Name>
+						<ImageId>1001</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x0bb93052" RevisionNo="#x00150000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3001 1Ch. Ana. Input +/-10V" Desc="EL3001" PortABoxInfo="#x01000001">
+							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
+							<SyncMan>001100000400000003000000000000000000001104000000</SyncMan>
+							<SyncMan>801104002000010004000000000000000400801120010000</SyncMan>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<Pdo Name="AI Standard" Index="#x1a00" Flags="#x0010" SyncMan="3">
+								<ExcludePdo>#x1a01</ExcludePdo>
+								<Entry Name="Status__Underrange" Index="#x6000" Sub="#x01" Flags="#x00008020">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Underrange event active]]></Comment>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6000" Sub="#x02" Flags="#x00008020">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Overrange event active]]></Comment>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6000" Sub="#x03" Flags="#x00008020">
+									<Type>BIT2</Type>
+									<Comment><![CDATA[Bit0: Value smaller/equal Limit1
 Bit1: Value bigger/equal Limit1]]></Comment>
-                </Entry>
-                <Entry Name="Status__Limit 2" Index="#x6000" Sub="#x05" Flags="#x00008020">
-                  <Type>BIT2</Type>
-                  <Comment><![CDATA[Bit0: Value smaller/equal Limit2
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6000" Sub="#x05" Flags="#x00008020">
+									<Type>BIT2</Type>
+									<Comment><![CDATA[Bit0: Value smaller/equal Limit2
 Bit1: Value bigger/equal Limit2]]></Comment>
-                </Entry>
-                <Entry Name="Status__Error" Index="#x6000" Sub="#x07" Flags="#x00008020">
-                  <Type>BIT</Type>
-                  <Comment><![CDATA[Bit set when Over- or Underrange]]></Comment>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
-                </Entry>
-                <Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0f" Flags="#x00008020">
-                  <Type>BIT</Type>
-                  <Comment><![CDATA[TRUE when this TxPDO is not valid]]></Comment>
-                </Entry>
-                <Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10" Flags="#x00008020">
-                  <Type>BIT</Type>
-                  <Comment><![CDATA[Bit toggles everytime when new value available]]></Comment>
-                </Entry>
-                <Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00010000">
-                  <Type>INT</Type>
-                </Entry>
-              </Pdo>
-              <Pdo Name="AI Compact" Index="#x1a01" Flags="#x0010">
-                <ExcludePdo>#x1a00</ExcludePdo>
-                <Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00010000">
-                  <Type>INT</Type>
-                </Entry>
-              </Pdo>
-              <CoeProfile ProfileNo="19665801" />
-            </EtherCAT>
-          </Box>
-          <Box Id="3" BoxType="9099" BoxFlags="#x00000020">
-            <Name>Term 3 (EL9221-4030)</Name>
-            <ImageId>1002</ImageId>
-            <EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x24053052" RevisionNo="#x00120fbe" InfoDataAddr="true" RepeatSupport="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9221-4030 Overcurrent protection 24V DC, 1Ch., 3A" Desc="EL9221-4030" PortABoxInfo="#x01000002">
-              <SyncMan>001080002600010001000000400080008000001026010000</SyncMan>
-              <SyncMan>801080002200010002000000400080008000801022010000</SyncMan>
-              <SyncMan>001102002400010003000000000000000200001124010000</SyncMan>
-              <SyncMan>801104002000010004000000000000000400801120010000</SyncMan>
-              <Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
-              <Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
-              <Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-              <BootStrapData>0010f400f410f400</BootStrapData>
-              <SuName>Term 3 (EL9221-4030)</SuName>
-              <MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
-              <Pdo Name="OCP Inputs" Index="#x1a00" Flags="#x0010" SyncMan="3">
-                <Entry Name="Status__Enabled" Index="#x6000" Sub="#x01">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__Tripped" Index="#x6000" Sub="#x02">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
-                </Entry>
-                <Entry Name="Status__Hardware Protection" Index="#x6000" Sub="#x05">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
-                </Entry>
-                <Entry Name="Status__Current Level Warning" Index="#x6000" Sub="#x08">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__Cool Down Lock" Index="#x6000" Sub="#x09">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
-                </Entry>
-                <Entry Name="Status__Diag" Index="#x6000" Sub="#x0d">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0e">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__Input cycle counter" Index="#x6000" Sub="#x0f">
-                  <Type>BIT2</Type>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
-                </Entry>
-                <Entry Name="Status__Error" Index="#x6000" Sub="#x13">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__State Reset" Index="#x6000" Sub="#x14">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__State Switch" Index="#x6000" Sub="#x15">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Status__">
-                  <Type GUID="{18071995-0000-0000-0000-00200000000B}">ARRAY [0..10] OF BIT</Type>
-                </Entry>
-              </Pdo>
-              <Pdo Name="OCP Outputs" Index="#x1600" InOut="1" Flags="#x0010" SyncMan="2">
-                <Entry Name="Control__Reset" Index="#x7000" Sub="#x01">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Control__Switch" Index="#x7000" Sub="#x02">
-                  <Type>BIT</Type>
-                </Entry>
-                <Entry Name="Control__">
-                  <Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
-                </Entry>
-              </Pdo>
-              <CoeProfile ProfileNo="60429193" />
-              <CoeProfile ProfileNo="18355081" />
-            </EtherCAT>
-          </Box>
-        </Box>
-        <EtherCAT />
-      </Device>
-    </Io>
-  </Project>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6000" Sub="#x07" Flags="#x00008020">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Bit set when Over- or Underrange]]></Comment>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0f" Flags="#x00008020">
+									<Type>BIT</Type>
+									<Comment><![CDATA[TRUE when this TxPDO is not valid]]></Comment>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10" Flags="#x00008020">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Bit toggles everytime when new value available]]></Comment>
+								</Entry>
+								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00010000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AI Compact" Index="#x1a01" Flags="#x0010">
+								<ExcludePdo>#x1a00</ExcludePdo>
+								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00010000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="19665801"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="3" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 3 (EL9221-4030)</Name>
+						<ImageId>1002</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x24053052" RevisionNo="#x00120fbe" InfoDataAddr="true" RepeatSupport="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9221-4030 Overcurrent protection 24V DC, 1Ch., 3A" Desc="EL9221-4030" PortABoxInfo="#x01000002">
+							<SyncMan>001080002600010001000000400080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000400080008000801022010000</SyncMan>
+							<SyncMan>001102002400010003000000000000000200001124010000</SyncMan>
+							<SyncMan>801104002000010004000000000000000400801120010000</SyncMan>
+							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<SuName>Term 3 (EL9221-4030)</SuName>
+							<MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<Pdo Name="OCP Inputs" Index="#x1a00" Flags="#x0010" SyncMan="3">
+								<Entry Name="Status__Enabled" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Tripped" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__Hardware Protection" Index="#x6000" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__Current Level Warning" Index="#x6000" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Cool Down Lock" Index="#x6000" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__Diag" Index="#x6000" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Input cycle counter" Index="#x6000" Sub="#x0f">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6000" Sub="#x13">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__State Reset" Index="#x6000" Sub="#x14">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__State Switch" Index="#x6000" Sub="#x15">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000B}">ARRAY [0..10] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="OCP Outputs" Index="#x1600" InOut="1" Flags="#x0010" SyncMan="2">
+								<Entry Name="Control__Reset" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Control__Switch" Index="#x7000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Control__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="60429193"/>
+							<CoeProfile ProfileNo="18355081"/>
+						</EtherCAT>
+					</Box>
+				</Box>
+				<EtherCAT/>
+			</Device>
+		</Io>
+	</Project>
 </TcSmProject>
