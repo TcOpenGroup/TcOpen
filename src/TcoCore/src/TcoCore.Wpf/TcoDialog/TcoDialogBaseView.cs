@@ -14,7 +14,7 @@ namespace TcoCore
         {           
             this.DataContextChanged += TcoDialogBaseView_DataContextChanged;
             this.MouseLeftButtonDown += OnMouseLeftButtonDown;
-            this.TouchDown += Window_TouchDown;
+            this.PreviewTouchDown += Window_TouchDown;
         }
 
        
@@ -35,7 +35,7 @@ namespace TcoCore
 
         private void Window_TouchDown(object sender, TouchEventArgs e)
         {
-            DragMove();
+            this.CaptureTouch(e.TouchDevice);
         }
     }
 }

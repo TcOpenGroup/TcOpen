@@ -44,7 +44,7 @@ namespace TcoInspectors
 
         private void Window_TouchDown(object sender, TouchEventArgs e)
         {
-            DragMove();
+            this.CaptureTouch(e.TouchDevice);
         }
     }    
 }
