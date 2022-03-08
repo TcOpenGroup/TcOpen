@@ -44,7 +44,7 @@ namespace TcOpen.Inxton.Data.MongoDb
         }
 
         private bool RecordExists(string identifier)
-        { return collection.Find(p => p._EntityId == identifier).CountDocuments() >= 1; }
+        { return collection.Find(p => p._EntityId == identifier).Count() >= 1; }
 
         protected override void CreateNvi(string identifier, T data)
         {
