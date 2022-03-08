@@ -15,6 +15,7 @@ VAR
     EmptyData 		: ExampleInspectorsStruct := (Parent := THIS^);
 
     _examples_2 	: Examples_2(THIS^);
+	_examplesImplementationWithDone : ExamplesImplementationWithDone(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -37,6 +38,7 @@ IF(_sequence1Task.Execute())THEN
 END_IF;
 
 _examples_2();
+_examplesImplementationWithDone();
 
 ]]></ST>
       </Implementation>
@@ -124,7 +126,7 @@ IF (seq.Step(inStepID := 100,
 		.Inspect(Components.DmcReader)		
         .UpdateComprehensiveResult(Data.OverallResult)
         .OnFail()
-		.Dialog(0);
+		.CarryOn();
     //--------------------------------------------------------			
 END_IF;
 
@@ -157,7 +159,7 @@ IF (seq.Step(inStepID := 300,
         .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))	
 		.UpdateComprehensiveResult(Data.OverallResult)		
 		.OnFail()
-		.Dialog(300);
+		.Terminate();
 				        		
     //--------------------------------------------------------			
 END_IF;
