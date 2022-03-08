@@ -72,7 +72,9 @@ END_VAR]]></Declaration>
     _testDoneCounter := _testDoneCounter + 1;
     _probeRunRequiredCycles := 0;
     _probeCurrentCycleCount := 0;
+	{warning disable C0195}
     _testId := -1;
+	{warning enable C0195}
 END_IF]]></ST>
       </Implementation>
     </Method>

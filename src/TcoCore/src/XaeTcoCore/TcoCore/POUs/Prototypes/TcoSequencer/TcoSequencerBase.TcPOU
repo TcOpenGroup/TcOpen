@@ -354,7 +354,7 @@ END_IF
 
 IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
 	_sequencerErrorId := eSequencerError.StepWithRequestedIdDoesNotExists;
-	_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(_requestedStepId));
+	_message := CONCAT('REQUESTED STEP_ID: ',INT_TO_STRING(_requestedStepId));
 	_message := CONCAT(_message, ' DOES NOT EXIST');
 	_currentStep.Description := _message;
 	_currentStep.Status := eStepStatus.Error;
@@ -419,9 +419,9 @@ IF(inRequestedStepID <> (MinStepID-1)) THEN
 	IF _requestedStepId <> (MinStepID-1) THEN
 		IF NOT  _sequencerHasError THEN
 			_sequencerErrorId := eSequencerError.MultipleRequestStepMethodCall;
-			_message := CONCAT('REQUESTED STEP_ID: ',UINT_TO_STRING(inRequestedStepID));
+			_message := CONCAT('REQUESTED STEP_ID: ',INT_TO_STRING(inRequestedStepID));
 			_message := CONCAT(_message, ' HAS BEEN REQUIRED, WHILE PREVIOUS REQUESTED STEP_ID: ');
-			_message := CONCAT(_message,UINT_TO_STRING(_requestedStepId));
+			_message := CONCAT(_message,INT_TO_STRING(_requestedStepId));
 			_message := CONCAT(_message, ' HAS NOT BEEN YET PERFORMED!');
 			_currentStep.Description := _message;
 			_currentStep.Status := eStepStatus.Error;
@@ -678,7 +678,7 @@ IF NOT _stepIdUniquenessChecked AND NOT _sequencerHasError THEN
 						__DELETE(_pNewSteps);
 					END_IF
 					_sequencerErrorId := eSequencerError.NotUniqueStepId;					
-					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));					 
+					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',INT_TO_STRING(inStepID));					 
 					_currentStep.Description := _message;
 					_currentStep.Status := eStepStatus.Error;
 					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
@@ -1090,7 +1090,9 @@ IF _restoringSequence THEN
 END_IF
 IsStepIDUnique(inStepID);
 IF NOT _stepIdUniquenessChecked THEN
+	{warning disable C0195}
 	_theOrderOfThePreviouslyExecutedStep := -1;
+	{warning enable C0195}
 	RETURN;
 END_IF
 //-------------------------------------------------------------------------------------------------
@@ -1189,7 +1191,9 @@ IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR 
 		_currentStep.Status := eStepStatus.Error;
 		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.OrderOfTheStepHasBeenChanged;
+	{warning disable C0196}	
 	ELSIF _StepOrderChanged AND _StepIdChanged AND (_ChangeStepOrderFrom = _ChangeStepIdTo)  AND (_ChangeStepOrderTo = _ChangeStepIdFrom) THEN
+	{warning enable C0196}
 		_message := CONCAT('ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepOrderFrom));
 		_message := CONCAT(_message, '=>');
 		_message := CONCAT(_message, UINT_TO_STRING(_ChangeStepOrderTo));
@@ -1199,18 +1203,18 @@ IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR 
 		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.OrderOfTheStepHasBeenChanged;
 	ELSIF NOT _StepOrderChanged AND _StepIdChanged THEN
-		_message := CONCAT('ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepIdFrom));
+		_message := CONCAT('ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: ',INT_TO_STRING(_ChangeStepIdFrom));
 		_message := CONCAT(_message, '=>');
-		_message := CONCAT(_message, UINT_TO_STRING(_ChangeStepIdTo));
+		_message := CONCAT(_message, INT_TO_STRING(_ChangeStepIdTo));
 		_currentStep.Description := _message;
 		_currentStep.Status := eStepStatus.Error;
 
 		THIS^.Messenger.Post(_currentStep.Description, eMessageCategory.ProgrammingError);
 		_sequencerErrorId := eSequencerError.StepIdHasBeenChanged;
 	ELSIF _StepOrderChanged AND _StepIdChanged AND (_ChangeStepOrderFrom = _ChangeStepIdFrom)  AND (_ChangeStepOrderTo = _ChangeStepIdTo) THEN
-		_message := CONCAT('ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepIdFrom));
+		_message := CONCAT('ERROR STEP_ID CHANGED DURING STEP EXECUTION FROM: ',INT_TO_STRING(_ChangeStepIdFrom));
 		_message := CONCAT(_message, '=>');
-		_message := CONCAT(_message, UINT_TO_STRING(_ChangeStepIdTo));
+		_message := CONCAT(_message, INT_TO_STRING(_ChangeStepIdTo));
 		_currentStep.Description := _message;
 		_currentStep.Status := eStepStatus.Error;
 
