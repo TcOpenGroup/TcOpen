@@ -8571,8 +8571,7 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
-_StepIdUniquenessState := eStepIdUniquenessState.Done;
-
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.Done;
 ]]></ST>
       </Implementation>
     </Method>
@@ -8581,7 +8580,7 @@ _StepIdUniquenessState := eStepIdUniquenessState.Done;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := FALSE;
-_StepIdUniquenessState := eStepIdUniquenessState.NotYetStarted;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.NotYetStarted;
 ]]></ST>
       </Implementation>
     </Method>

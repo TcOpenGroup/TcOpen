@@ -18,7 +18,8 @@ VAR
 END_VAR
 
 VAR 
-	stepIdChange : INT := 400;
+	_stepIdChange : INT := 400;
+	_stepsCountChange : BOOL := FALSE;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -81,35 +82,37 @@ IF(Step(200,
 END_IF
 
 
-IF(Step(300, 
-		TRUE, 
-		'CLOSE GRIPPER')) THEN
-//-----------------------------------------------------
-	IF(components.Gripper.Close().Done) THEN
-		IF(_failedToLoad) THEN
-			RequestStep(100);
-		ELSE
-			StepCompleteWhen(TRUE);	
-		END_IF;	
-		
-	END_IF;		
-//-----------------------------------------------------	
-END_IF
-
-IF(Step(stepIdChange, 
-		TRUE, 
-		'MOVE VERTICAL CYLINDER UP')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveUp().Done);
-//-----------------------------------------------------	
-END_IF
-
-IF(Step(500, 
-		TRUE, 
-		'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Horizontal.MoveRight().Done);
-//-----------------------------------------------------	
+IF NOT _stepsCountChange THEN
+	IF(Step(300, 
+			TRUE, 
+			'CLOSE GRIPPER')) THEN
+	//-----------------------------------------------------
+		IF(components.Gripper.Close().Done) THEN
+			IF(_failedToLoad) THEN
+				RequestStep(100);
+			ELSE
+				StepCompleteWhen(TRUE);	
+			END_IF;	
+			
+		END_IF;		
+	//-----------------------------------------------------	
+	END_IF
+	
+	IF(Step(_stepIdChange, 
+			TRUE, 
+			'MOVE VERTICAL CYLINDER UP')) THEN
+	//-----------------------------------------------------
+		StepCompleteWhen(components.Vertical.MoveUp().Done);
+	//-----------------------------------------------------	
+	END_IF
+	
+	IF(Step(500, 
+			TRUE, 
+			'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
+	//-----------------------------------------------------
+		StepCompleteWhen(components.Horizontal.MoveRight().Done);
+	//-----------------------------------------------------	
+	END_IF
 END_IF
 
 IF(Step(600, 
