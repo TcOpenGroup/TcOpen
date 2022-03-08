@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace TcoCore
 {
@@ -12,7 +13,11 @@ namespace TcoCore
         public TcoDialogBaseView()
         {           
             this.DataContextChanged += TcoDialogBaseView_DataContextChanged;
+            this.MouseLeftButtonDown += OnMouseLeftButtonDown;
+            this.TouchDown += Window_TouchDown;
         }
+
+       
 
         private void TcoDialogBaseView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
@@ -21,6 +26,16 @@ namespace TcoCore
             {
                 context.CloseRequestEventHandler += (s, ev) => this.Close();
             }
+        }
+
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Window_TouchDown(object sender, TouchEventArgs e)
+        {
+            DragMove();
         }
     }
 }

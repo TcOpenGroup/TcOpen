@@ -9,11 +9,7 @@
 	</docu>	
 ~*)
 FUNCTION_BLOCK PUBLIC TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
-VAR  
-//    _dialogueRetryTask 		: TcoCore.TcoTask(THIS^);
-//    _dialogueTerminateTask 	: TcoCore.TcoTask(THIS^);    
-//    _dialogueOverrideTask 	: TcoCore.TcoTask(THIS^);
-	
+VAR  	
 	_dialogueRetry	    	: BOOL;	
 	_dialogueTerminate  	: BOOL;	
 	_dialogueOverride   	: BOOL;
@@ -81,7 +77,7 @@ END_IF
 	IF(_refInspector.Result = eInspectorResult.Failed) THEN
 		THIS^.Invoke();
 		SUPER^();	
-		
+		{warning disable C0357}
 		IF(_dialogueRetry) THEN
 			_refInspector.Retry(inRetryStep);
 		END_IF
@@ -93,6 +89,7 @@ END_IF
 		IF(_dialogueOverride) THEN
 			_refInspector.CarryOn();
 		END_IF
+		{warning enable C0357}
 	ELSE
 		IF(_refInspector.Coordinator <> 0) THEN
 			_refInspector.Coordinator.MoveNext();

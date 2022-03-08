@@ -36,5 +36,15 @@ namespace TcoInspectors
                 context.CloseRequestEventHandler += (s, ev) => this.Close();
             }
         }
+
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Window_TouchDown(object sender, TouchEventArgs e)
+        {
+            DragMove();
+        }
     }    
 }

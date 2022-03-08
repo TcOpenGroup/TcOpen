@@ -120,7 +120,7 @@ END_IF;
 
 IF (seq.Step(inStepID := 100,
     inEnabled := TRUE,
-    inStepDescription := 'INSPECT DMC CODE - WHEN FAILED RETRY')) THEN
+    inStepDescription := 'INSPECT DMC CODE - WHEN CARRY ON')) THEN
     //--------------------------------------------------------
     Data.DmcInspector.WithCoordinator(seq)
 		.Inspect(Components.DmcReader)		
@@ -133,7 +133,7 @@ END_IF;
 //<TcoDigitalInspector>	
 IF (seq.Step(inStepID := 200,
     inEnabled := TRUE,
-    inStepDescription := 'INSPECT BOLT PRESENCE')) THEN
+    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
     //--------------------------------------------------------	
     Data.BoltPresenceInspector
 		.WithCoordinator(seq)
@@ -149,7 +149,7 @@ END_IF;
 
 IF (seq.Step(inStepID := 300,
     inEnabled := TRUE,
-    inStepDescription := 'INSPECT DIMENSIONS')) THEN
+    inStepDescription := 'INSPECT DIMENSIONS - TERMINATE')) THEN
     //--------------------------------------------------------
     GroupInspection
 		.WithCoordinator(seq)
@@ -159,14 +159,13 @@ IF (seq.Step(inStepID := 300,
         .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))	
 		.UpdateComprehensiveResult(Data.OverallResult)		
 		.OnFail()
-		.Terminate();
-				        		
+		.Terminate();				        		
     //--------------------------------------------------------			
 END_IF;
 
 IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
     inEnabled := TRUE,
-    inStepDescription := '')) THEN
+    inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
     //--------------------------------------------------------	
     	seq.CompleteSequence();
     //--------------------------------------------------------			

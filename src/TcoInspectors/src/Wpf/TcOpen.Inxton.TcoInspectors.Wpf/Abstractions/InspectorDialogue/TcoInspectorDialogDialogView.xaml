@@ -12,13 +12,15 @@
     Width="Auto"
     Height="Auto"
     mc:Ignorable="d"
-    ResizeMode="NoResize"
+    ResizeMode="NoResize"    
     ShowInTaskbar="False"
     SizeToContent="WidthAndHeight"
     Title="InspectorDialogueWindow"
-    Topmost="True"
+    Topmost="True"    
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None">
+    WindowStyle="None"
+    MouseLeftButtonDown="OnMouseLeftButtonDown"
+    TouchDown="Window_TouchDown">
     <d:Window.DataContext>
         <local:TcoInspectorDialogDialogViewModel />
     </d:Window.DataContext>
