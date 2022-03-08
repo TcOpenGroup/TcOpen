@@ -20,7 +20,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     MouseLeftButtonDown="OnMouseLeftButtonDown"
-    TouchDown="Window_TouchDown">
+    PreviewTouchDown="Window_TouchDown">
     <d:Window.DataContext>
         <local:TcoInspectorDialogDialogViewModel />
     </d:Window.DataContext>
