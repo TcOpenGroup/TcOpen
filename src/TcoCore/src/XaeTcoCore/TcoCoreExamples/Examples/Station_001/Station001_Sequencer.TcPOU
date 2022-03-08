@@ -16,7 +16,10 @@ VAR
 	_sequenceCompleteCount	:	LREAL;
 	_stepsPerSequence	:	LREAL;
 END_VAR
-]]></Declaration>
+
+VAR 
+	stepIdChange : INT := 400;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 ]]></ST>
@@ -73,7 +76,7 @@ IF(Step(200,
 		TRUE, 
 		'MOVE VERTICAL CYLINDER DOWN')) THEN
 //-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveDown().Done);
+	StepCompleteWhen(components.Vertical.MoveDown().Done );
 //-----------------------------------------------------	
 END_IF
 
@@ -93,7 +96,7 @@ IF(Step(300,
 //-----------------------------------------------------	
 END_IF
 
-IF(Step(400, 
+IF(Step(stepIdChange, 
 		TRUE, 
 		'MOVE VERTICAL CYLINDER UP')) THEN
 //-----------------------------------------------------

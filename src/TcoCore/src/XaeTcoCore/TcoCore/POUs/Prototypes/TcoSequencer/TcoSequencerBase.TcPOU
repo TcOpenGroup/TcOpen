@@ -143,6 +143,10 @@ VAR
 	_checkStepIdRequestedInStepMode : BOOL;
 	{attribute 'hide'}
 	_restoringSequence : BOOL;	
+	{attribute 'hide'}
+	_controlledStepIndex : UINT;	
+	{attribute 'hide'}
+	_stepCounterForControl : UINT;	
 END_VAR
 
 VAR
@@ -597,25 +601,12 @@ END_IF
 
 IF (_StepIdUniquenessState >= eStepIdUniquenessState.Started AND _StepIdUniquenessState < eStepIdUniquenessState.Done) THEN
 
-	// Increment order of the currently controlled step
-	_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
-	
-	IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
-		_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
-		_stepCounter := _stepCounter - 1; 
-	END_IF
-	
-	_numberOfStepsInSequence := _stepCounter;
-	
 	//If new PLC cycle was performed, step id uniqueness control is done
 	IF _StepIdUniquenessState = eStepIdUniquenessState.Running AND 
   		THIS^.Context.StartCycleCount >= _StepIdUniquenessStartCycleCount + 1 THEN
-
 		_stepIdUniquenessChecked := TRUE;
-		_theOrderOfTheCurrentlyEvaluatedStep := 0;
-		_theOrderOfTheCurrentlyExecutedStep := 0;
-
 		_StepIdUniquenessState := eStepIdUniquenessState.Done;
+		_numberOfStepsInSequence := _controlledStepIndex + 1;
 	END_IF
 	
 	//If step id uniqueness control is finished, clear dynamic arrays 
@@ -632,9 +623,7 @@ IF (_StepIdUniquenessState >= eStepIdUniquenessState.Started AND _StepIdUniquene
 	//First call with the very first step of the sequence
 	IF _StepIdUniquenessState = eStepIdUniquenessState.Started THEN
 		_StepIdUniquenessStartCycleCount := THIS^.Context.StartCycleCount;
-		_previousNumberOfStepsInSequence := 0;
-		_stepCounter := 0;
-		_numberOfStepsInSequence := 0;
+		_controlledStepIndex := 0;
 
 		//It should not exists, if yes delete and create again
 		IF (_pPreviusSteps <> 0) THEN
@@ -646,13 +635,16 @@ IF (_StepIdUniquenessState >= eStepIdUniquenessState.Started AND _StepIdUniquene
 		
 		_StepIdUniquenessState := eStepIdUniquenessState.Running;
 	ELSIF _StepIdUniquenessState = eStepIdUniquenessState.Running THEN
+		// Increment order of the currently controlled step
+		_controlledStepIndex := _controlledStepIndex + 1;
+
 		IF (_pNewSteps <> 0) THEN
 			__DELETE(_pNewSteps);
 		END_IF
-		_pNewSteps := __NEW(UINT, (_numberOfStepsInSequence+1));
+		_pNewSteps := __NEW(UINT, (_controlledStepIndex + 1));
 
 		//Compare with previous Steps and copy previous Steps to new array
-		_hiIndex := _numberOfStepsInSequence-1;
+		_hiIndex := _controlledStepIndex - 1;
 		FOR _i := 0 TO _hiIndex DO
 			_pUid := _pPreviusSteps[_i];
 			IF inStepID = _pUid THEN
@@ -671,14 +663,14 @@ IF (_StepIdUniquenessState >= eStepIdUniquenessState.Started AND _StepIdUniquene
 			END_IF
 		END_FOR
 		//Store new StepId
-		_pNewSteps[_numberOfStepsInSequence] := inStepID;
+		_pNewSteps[_controlledStepIndex] := inStepID;
 		//Delete and create again
 		IF (_pPreviusSteps <> 0) THEN
 			__DELETE(_pPreviusSteps);
 		END_IF		
-		_pPreviusSteps :=  __NEW(UINT, (_numberOfStepsInSequence+1));
+		_pPreviusSteps :=  __NEW(UINT, (_controlledStepIndex+1));
 		//Copy
-		_hiIndex := _hiIndex+1;
+		_hiIndex := _controlledStepIndex;
 		FOR _i := 0 TO _hiIndex DO
 			_pPreviusSteps[_i] := _pNewSteps[_i];			
 		END_FOR
@@ -686,8 +678,10 @@ IF (_StepIdUniquenessState >= eStepIdUniquenessState.Started AND _StepIdUniquene
 		IF (_pNewSteps <> 0) THEN
 			__DELETE(_pNewSteps);
 		END_IF
+		
 	END_IF	
 END_IF
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -1123,6 +1117,7 @@ _isInOrderOfExecution := (_theOrderOfTheCurrentlyExecutedStep =_theOrderOfTheCur
 //     		SINGLE PER STEP CALL REGION
 //-----------------------------------------------
 //Check if the order of the last executed step, has been changed  
+IF _StepIdUniquenessState = eStepIdUniquenessState.Done THEN
 IF(NOT _isInOrderOfExecution AND inStepID = _IdOfThePreviouslyExecutedStep) THEN
 	IF _theOrderOfThePreviouslyExecutedStep <>_theOrderOfTheCurrentlyEvaluatedStep AND NOT _StepOrderChanged THEN
 		_StepOrderChanged := TRUE;
@@ -1178,6 +1173,7 @@ END_IF
 
 IF (_StepOrderChanged OR _StepIdChanged OR _sequencerHasError) THEN
 	RETURN;
+END_IF
 END_IF
 
 IF(_isInOrderOfExecution  AND NOT(_currentStep.Status = eStepStatus.Error)) THEN
@@ -1258,11 +1254,21 @@ END_IF
 _theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
 
 IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
-	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
-	_stepCounter := _stepCounter - 1; 
+	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep - 1;
 END_IF
 
-_numberOfStepsInSequence := _stepCounter;
+_numberOfStepsInSequence := _stepCounter + 1;
+
+
+//// Increment flow number
+//_theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
+
+//IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
+//	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
+//	_stepCounter := _stepCounter - 1; 
+//END_IF
+
+//_numberOfStepsInSequence := _stepCounter;
 
 ]]></ST>
       </Implementation>
