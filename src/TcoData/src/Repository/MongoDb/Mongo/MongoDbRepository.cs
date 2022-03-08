@@ -73,7 +73,7 @@ namespace TcOpen.Inxton.Data.MongoDb
 
         protected override long FilteredCountNvi(string id)
         {
-            var filter = Builders<T>.Filter.Regex(p => p._Id, new BsonRegularExpression($"^{id}", ""));
+            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{id}", ""));
             if (id == "*" || string.IsNullOrWhiteSpace(id))
             {
 #pragma warning disable CS0618 // CountDocuments is very slow compared to Count() even though Count is obsolete. 
@@ -94,7 +94,7 @@ namespace TcOpen.Inxton.Data.MongoDb
         protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
         {
             var filetered = new List<T>();
-            var filter = Builders<T>.Filter.Regex(p => p._Id, new BsonRegularExpression($"^{identifier}", ""));
+            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{identifier}", ""));
 
             if (identifier == "*" || string.IsNullOrWhiteSpace(identifier))
             {
