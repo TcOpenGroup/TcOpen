@@ -66,16 +66,29 @@ END_VAR]]></Declaration>
 		THIS^._tcoInspectorDialogue.Invoke();
 		_tcoInspectorDialogue();	
 		
-		IF(_tcoInspectorDialogue._dialogueRetryTask.Execute()) THEN
-			_tcoInspectorDialogue._dialogueRetryTask.DoneWhen(Retry(inRetryStep));
+//		IF(_tcoInspectorDialogue._dialogueRetryTask.Execute()) THEN
+//			_tcoInspectorDialogue._dialogueRetryTask.DoneWhen(Retry(inRetryStep));
+//		END_IF
+		
+//		IF(_tcoInspectorDialogue._dialogueTerminateTask.Execute()) THEN
+//			_tcoInspectorDialogue._dialogueTerminateTask.DoneWhen(Terminate());
+//		END_IF
+		
+//		IF(_tcoInspectorDialogue._dialogueOverrideTask.Execute()) THEN
+//			_tcoInspectorDialogue._dialogueOverrideTask.DoneWhen(CarryOn());
+//		END_IF
+
+
+		IF(_tcoInspectorDialogue._dialogueRetry) THEN
+			Retry(inRetryStep);
 		END_IF
 		
-		IF(_tcoInspectorDialogue._dialogueTerminateTask.Execute()) THEN
-			_tcoInspectorDialogue._dialogueTerminateTask.DoneWhen(Terminate());
+		IF(_tcoInspectorDialogue._dialogueTerminate) THEN
+			Terminate();
 		END_IF
 		
-		IF(_tcoInspectorDialogue._dialogueOverrideTask.Execute()) THEN
-			_tcoInspectorDialogue._dialogueOverrideTask.DoneWhen(CarryOn());
+		IF(_tcoInspectorDialogue._dialogueOverride) THEN
+			CarryOn();
 		END_IF
 	ELSE
 		IF(Coordinator <> 0) THEN

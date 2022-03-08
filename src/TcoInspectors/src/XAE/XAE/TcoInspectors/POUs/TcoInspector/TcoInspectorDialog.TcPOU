@@ -8,17 +8,21 @@
 		</summary>	
 	</docu>	
 ~*)
-FUNCTION_BLOCK TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
+FUNCTION_BLOCK PUBLIC TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
 VAR  
-    {attribute clr [CompilerOmits("BuilderPlainer")]}
-    _dialogueRetryTask : TcoCore.TcoTask(THIS^);
-    {attribute clr [CompilerOmits("BuilderPlainer")]}
-    _dialogueTerminateTask : TcoCore.TcoTask(THIS^);
-    {attribute clr [CompilerOmits("BuilderPlainer")]}
-    _dialogueOverrideTask : TcoCore.TcoTask(THIS^);
-    _isOverInspected      : BOOL;
+//    _dialogueRetryTask 		: TcoCore.TcoTask(THIS^);
+//    _dialogueTerminateTask 	: TcoCore.TcoTask(THIS^);    
+//    _dialogueOverrideTask 	: TcoCore.TcoTask(THIS^);
+	
+	_dialogueRetry	    	: BOOL;	
+	_dialogueTerminate  	: BOOL;	
+	_dialogueOverride   	: BOOL;
+	
+    _isOverInspected      	: BOOL;
     {attribute 'hide'}
     _refInspector : REFERENCE TO TcoInspector;
+	{attribute 'hide'}
+	_tierAct          : TcoCore.TcoTier(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -35,6 +39,19 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{f6a8b19c-7de2-0d61-29e8-f9ef96a63093}">
+      <Declaration><![CDATA[METHOD Restore : TcoCore.ITcoRestorable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+
+_dialogueRetry	    	:=  FALSE;	
+_dialogueTerminate  	:=  FALSE;	
+_dialogueOverride   	:=  FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetInspector" Id="{59f6bb8e-40b5-01f0-1137-0e38be5ca644}">
@@ -56,21 +73,25 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_isOverInspected := _refInspector.OverInspected;
 
+IF(_tierAct.IsNewTier()) THEN
+	THIS^.Restore();
+END_IF
+
  IF(_refInspector.Done) THEN		
 	IF(_refInspector.Result = eInspectorResult.Failed) THEN
 		THIS^.Invoke();
 		SUPER^();	
 		
-		IF(_dialogueRetryTask.Execute()) THEN
-			_dialogueRetryTask.DoneWhen(_refInspector.Retry(inRetryStep));
+		IF(_dialogueRetry) THEN
+			_refInspector.Retry(inRetryStep);
 		END_IF
 		
-		IF(_dialogueTerminateTask.Execute()) THEN
-			_dialogueTerminateTask.DoneWhen(_refInspector.Terminate());
+		IF(_dialogueTerminate) THEN
+			_refInspector.Terminate();
 		END_IF
 		
-		IF(_dialogueOverrideTask.Execute()) THEN
-			_dialogueOverrideTask.DoneWhen(_refInspector.CarryOn());
+		IF(_dialogueOverride) THEN
+			_refInspector.CarryOn();
 		END_IF
 	ELSE
 		IF(_refInspector.Coordinator <> 0) THEN

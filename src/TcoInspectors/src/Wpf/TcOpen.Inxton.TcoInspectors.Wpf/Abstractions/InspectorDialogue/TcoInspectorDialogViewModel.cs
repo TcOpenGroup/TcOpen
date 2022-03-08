@@ -16,9 +16,15 @@ namespace TcoInspectors
         public TcoInspectorDialogDialogViewModel()
         {            
            
-           RetryCommand = new RelayCommand((a) => { Dialog._dialogueRetryTask.Execute(); CloseRequestEventHandler(this, new EventArgs()); }, (b) => Dialog != null && !Dialog._isOverInspected.Synchron);
-           TerminateCommand = new RelayCommand((a) => { Dialog._dialogueTerminateTask.Execute(); CloseRequestEventHandler(this, new EventArgs()); });
-           OverrideCommand = new RelayCommand((a) => { Dialog._dialogueOverrideTask.Execute(); CloseRequestEventHandler(this, new EventArgs()); });           
+            RetryCommand = new RelayCommand((a) => { Dialog._dialogueRetry.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); }, 
+                                            (b) => Dialog != null && !Dialog._isOverInspected.Synchron,
+                                            () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(RetryCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
+            TerminateCommand = new RelayCommand((a) => { Dialog._dialogueTerminate.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); }, 
+                                                (b) => true,
+                                                () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(TerminateCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
+            OverrideCommand = new RelayCommand((a) => { Dialog._dialogueOverride.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); }, 
+                                               (b) => true,
+                                                () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(OverrideCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));           
         }       
       
         List<IVortexObject> _inspectorsList;
