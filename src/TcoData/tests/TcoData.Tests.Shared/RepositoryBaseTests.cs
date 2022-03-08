@@ -394,9 +394,9 @@ namespace TcoDataUnitTests
             }
 
             //-- Act
-            repository.Create("testToFilter1", testObject);
-            repository.Create("testToFilter2", new DataTestObject());
-            repository.Create("testToFilter3", new DataTestObject());
+            repository.Create("ToFilter1", testObject);
+            repository.Create("ToFilter2", new DataTestObject());
+            repository.Create("ToFilter3", new DataTestObject());
 
 
             //-- Act
