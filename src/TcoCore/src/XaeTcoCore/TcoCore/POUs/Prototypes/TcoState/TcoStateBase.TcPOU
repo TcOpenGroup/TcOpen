@@ -208,7 +208,7 @@ THIS^._State := NewState;
 IF NewState <> PreviousState THEN
 	_ChangeStateCycle := THIS^.Context.StartCycleCount;
 	_LastChangedState  := NewState;
-	OnStateChange(PreviousState,NewState);
+	THIS^.OnStateChange(PreviousState,NewState);
 END_IF;
 
 ChangeStateProtected := THIS^;]]></ST>

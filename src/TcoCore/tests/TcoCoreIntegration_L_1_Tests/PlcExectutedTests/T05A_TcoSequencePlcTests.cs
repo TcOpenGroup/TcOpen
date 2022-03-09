@@ -122,13 +122,13 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         public void T501_ExecutionInOnePLCcycle()
         {
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.ExecutionInOnePLCcycle);
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId of the last executed step is equal to numberOfSteps 
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId of the last executed step is equal to numberOfSteps - 1 
                 tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription of the last executed step is equal to "Step "+value of the variable numberOfSteps
+            Assert.AreEqual("Step " + (numberOfSteps-1).ToString(),         //Check if StepDescription of the last executed step is equal to "Step "+value of the variable numberOfSteps - 1
                 tc._sut_A._currentStep.Description.Synchron);
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId of the last executed step is equal to numberOfSteps 
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId of the last executed step is equal to numberOfSteps  - 1
                 tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription of the last executed step is equal to "Step "+value of the variable numberOfSteps
+            Assert.AreEqual("Step " + (numberOfSteps-1).ToString(),         //Check if StepDescription of the last executed step is equal to "Step "+value of the variable numberOfSteps - 1
                 tc._sut_N._currentStep.Description.Synchron);
         }
 
@@ -191,8 +191,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.RestoreChildBetweenSteps);
             Assert.IsTrue(tc._done.Synchron);
 
-            Assert.AreEqual(childStateChangeCount_A+ numberOfSteps+1, tc._sut_A._myTcoChildState._requestedStateCount.Synchron);
-            Assert.AreEqual(childRestoreCount_A+ numberOfSteps , tc._sut_A._myTcoChildState._restoreCount.Synchron);
+            Assert.AreEqual(childStateChangeCount_A + numberOfSteps, tc._sut_A._myTcoChildState._requestedStateCount.Synchron);
+            Assert.AreEqual(childRestoreCount_A + numberOfSteps - 1 , tc._sut_A._myTcoChildState._restoreCount.Synchron);
             Assert.AreEqual(childStateChangeCount_N+1, tc._sut_N._myTcoChildState._requestedStateCount.Synchron);
             Assert.AreEqual(childRestoreCount_N, tc._sut_N._myTcoChildState._restoreCount.Synchron);
 
@@ -1739,21 +1739,20 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(20,                                         //Check if current step status is ReadyToRun.
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            tc.ExecuteProbeRun((ulong)numberOfSteps + 1, (int)eTcoSequenceTests.StepMode);
-            Assert.AreEqual(numberOfSteps + 2, tc._plcCycleCounter.Synchron);
+            tc.ExecuteProbeRun((ulong)numberOfSteps, (int)eTcoSequencerTests.StepMode);
+            Assert.AreEqual(numberOfSteps + 1, tc._plcCycleCounter.Synchron);
             Assert.IsTrue(tc._done.Synchron);
 
-
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes to numberOfSteps.  
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes to numberOfSteps - 1.  
                tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps. 
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps - 1. 
                 tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(40,                                         //Check if current step status is ReadyToRun.
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
- 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes to numberOfSteps.  
+
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes to numberOfSteps - 1.  
                tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps. 
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(),         //Check if StepDescription changes to "Step " + numberOfSteps - 1. 
                 tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(40,                                         //Check if current step status is ReadyToRun.
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
@@ -3396,68 +3395,68 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(20,                                         //Check if current step status changes to ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            //After running this method, sequencer should stay in StepId numberOfSteps, that is the last step of the sequence
-            //with StepDescription "(>Step + numberOfSteps<)"
+            //After running this method, sequencer should stay in StepId numberOfSteps - 1, that is the last step of the sequence
+            //with StepDescription "(>Step + numberOfSteps - 1<)"
             //Step status should be ReadyToRun
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.StepModeStepForwardBackward);
             Assert.AreEqual(4, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 2 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes from 2 to numberOfSteps - 1
                 tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " + numberOfSteps.ToString()        //Check if StepDescription changes from "(>Step 2<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("(>Step " + (numberOfSteps - 1).ToString()        //Check if StepDescription changes from "(>Step 2<)" to "(>Step + numberOfSteps - 1<)"
                 + "<)", tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 2 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes from 2 to numberOfSteps - 1
                 tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " + numberOfSteps.ToString()        //Check if StepDescription changes from "(>Step 2<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("(>Step " + (numberOfSteps - 1).ToString()        //Check if StepDescription changes from "(>Step 2<)" to "(>Step + numberOfSteps - 1<)"
                 + "<)", tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            //After running this method, sequencer should stay in StepId numberOfSteps, that is the last step of the sequence
-            //with StepDescription "(>Step + numberOfSteps<)" as it is last step of the sequence and step forwards is not possible
+            //After running this method, sequencer should stay in StepId numberOfSteps - 1, that is the last step of the sequence
+            //with StepDescription "(>Step + numberOfSteps - 1<)" as it is last step of the sequence and step forwards is not possible
             //Step status should be ReadyToRun
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.StepModeStepForwardBackward);
             Assert.AreEqual(5, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 2 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId stays at numberOfSteps - 1
                 tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " + numberOfSteps.ToString()        //Check if StepDescription changes from "(>Step 2<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("(>Step " + (numberOfSteps - 1).ToString()        //Check if StepDescription stays at "(>Step + numberOfSteps - 1<)"
                 + "<)", tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 2 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId stays at numberOfSteps - 1
                 tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " + numberOfSteps.ToString()        //Check if StepDescription changes from "(>Step 2<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("(>Step " + (numberOfSteps - 1).ToString()        //Check if StepDescription stays at "(>Step + numberOfSteps - 1<)"
                 + "<)", tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
 
-            //After running this method, sequencer should stay in StepId numberOfSteps - 1, that is the before last step 
-            //of the sequence, with StepDescription "(>Step + numberOfSteps - 1<)" as it is before last step of the sequence
+            //After running this method, sequencer should stay in StepId numberOfSteps - 2, that is the before last step 
+            //of the sequence, with StepDescription "(>Step + numberOfSteps - 2<)" as it is before last step of the sequence
             //Step status should be ReadyToRun
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.StepModeStepForwardBackward);
             Assert.AreEqual(6, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
 
-            Assert.AreEqual(numberOfSteps - 1,                          //Check if StepId changes from numberOfSteps to  numberOfSteps - 1
+            Assert.AreEqual(numberOfSteps - 2,                          //Check if StepId changes from numberOfSteps - 1 to  numberOfSteps - 2
                 tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " +                                 //Check if StepDescription changes from "(>Step + numberOfSteps<)" to  "(>Step + numberOfSteps - 1<)"
-                (numberOfSteps - 1).ToString() + "<)",
+            Assert.AreEqual("(>Step " +                                 //Check if StepDescription changes from "(>Step + numberOfSteps - 1 <)" to  "(>Step + numberOfSteps - 2<)"
+                (numberOfSteps - 2).ToString() + "<)",
                 tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            Assert.AreEqual(numberOfSteps - 1,                          //Check if StepId changes from numberOfSteps to  numberOfSteps - 1
+            Assert.AreEqual(numberOfSteps - 2,                          //Check if StepId changes from numberOfSteps - 1 to  numberOfSteps - 2
                 tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " +                                 //Check if StepDescription changes from "(>Step + numberOfSteps<)" to  "(>Step + numberOfSteps - 1<)"
-                (numberOfSteps - 1).ToString() + "<)",
+            Assert.AreEqual("(>Step " +                                 //Check if StepDescription changes from "(>Step + numberOfSteps - 1<)" to  "(>Step + numberOfSteps - 2<)"
+                (numberOfSteps - 2).ToString() + "<)",
                 tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
@@ -3470,14 +3469,14 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             Assert.AreEqual(1,                                          //Check if StepId changes from numberOfSteps - 1 to 1
                     tc._sut_A._currentStep.ID.Synchron);
-                Assert.AreEqual("(>Step 1<)",                               //Check if StepDescription changes from "(>Step + numberOfSteps - 1<)" to  "(>Step 1<)"
-                    tc._sut_A._currentStep.Description.Synchron);
-                Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
-                    tc._sut_A._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
+            Assert.AreEqual("(>Step 1<)",                               //Check if StepDescription changes from "(>Step + numberOfSteps - 2<)" to  "(>Step 1<)"
+                tc._sut_A._currentStep.Description.Synchron);
+            Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
+                tc._sut_A._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
             Assert.AreEqual(1,                                          //Check if StepId changes from numberOfSteps - 1 to 1
                     tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step 1<)",                               //Check if StepDescription changes from "(>Step + numberOfSteps - 1<)" to  "(>Step 1<)"
+            Assert.AreEqual("(>Step 1<)",                               //Check if StepDescription changes from "(>Step + numberOfSteps - 2<)" to  "(>Step 1<)"
                 tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
@@ -3556,8 +3555,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(20,                                         //Check if current step status changes to ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            //After running this method, sequencer should stay in StepId 0, with StepDescription ""(>Step 0<)"
-            //Step status should be ReadyToRun      tc.SequencerSingleCycleRun(() =>                            
+            //After running this method, sequencer should stay in StepId 1, with StepDescription ""(>Step 1<)"
+            //Step status should be ReadyToRun                                
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.StepModeStepInDetailed);
             Assert.AreEqual(2, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
@@ -3576,43 +3575,43 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(20,                                         //Check if current step status changes to ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            //After running this method, sequencer should stay in StepId numberOfSteps, that is the last step of the sequence
-            //with StepDescription "(>Step + numberOfSteps<)"
+            //After running this method, sequencer should stay in StepId numberOfSteps - 1, that is the last step of the sequence
+            //with StepDescription "(>Step + numberOfSteps - 1<)"
             //Step status should be ReadyToRun
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.StepModeStepInDetailed);
             Assert.AreEqual(3, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 1 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes from 1 to numberOfSteps - 1
                 tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " + numberOfSteps.ToString()        //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("(>Step " + (numberOfSteps - 1).ToString()        //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps - 1<)"
                 + "<)", tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 1 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes from 1 to numberOfSteps - 1
                 tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("(>Step " + numberOfSteps.ToString()        //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("(>Step " + (numberOfSteps - 1).ToString()        //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps - 1<)"
                 + "<)", tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step status stays at ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            //After running this method, sequencer should stay in StepId numberOfSteps
-            //with StepDescription "(>Step + numberOfSteps<)" with step status Done as CloseSequence() method has been called
+            //After running this method, sequencer should stay in StepId numberOfSteps - 1
+            //with StepDescription "(>Step + numberOfSteps - 1<)" with step status Done as CloseSequence() method has been called
             tc.ExecuteProbeRun(1, (int)eTcoSequenceTests.StepModeStepInDetailed);
             Assert.AreEqual(4, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 1 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes from 1 to numberOfSteps-1
                 tc._sut_A._currentStep.ID.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(),         //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps-1<)"
                 tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(40,                                         //Check if current step changes to Done
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId changes from 1 to numberOfSteps
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId changes from 1 to numberOfSteps-1
                 tc._sut_N._currentStep.ID.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps<)"
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(),         //Check if StepDescription changes from "(>Step 1<)" to "(>Step + numberOfSteps-1<)"
                 tc._sut_N._currentStep.Description.Synchron);
             Assert.AreEqual(40,                                         //Check if current step changes to Done
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
@@ -3724,7 +3723,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 tc._sut_A._currentStep.Description.Synchron);
             Assert.AreEqual(20,                                         //Check if current step changes from Running to ReadyToRun
                 tc._sut_A._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
-            
+
             Assert.AreEqual(3,                                          //Check if StepId changes from 2 to 3
                 tc._sut_N._currentStep.ID.Synchron);
             Assert.AreEqual("(>Step 3<)",                               //Check if StepDescription changes from "Step 2" to "(>Step 3<)"
@@ -3776,7 +3775,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(20,                                         //Check if current step changes from Running to ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);                 //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
         }
-        
+
         [Test, Order((int)eTcoSequenceTests.SwitchStepModeStepOffFromReadyToRun)]
         public void T696_SwitchStepModeStepOffFromReadyToRun()
         {
@@ -3855,8 +3854,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             //This test runs the whole sequence several times in cyclic mode then swith to step mode and performs StepIn several times, and then switch back to cyclic mode 
             //and check if the number of the OnStateChange method calls, so as the PostStepComplete and PostSequenceComplete method calls was as expected.
-            tc.ExecuteProbeRun((int)eTcoSequenceTests.RestoreAlreadyCheckedSequence,()=>tc._done.Synchron);
-            tc._arranged.Synchron =false;
+            tc.ExecuteProbeRun((int)eTcoSequenceTests.RestoreAlreadyCheckedSequence, () => tc._done.Synchron);
+            tc._arranged.Synchron = false;
             tc._done.Synchron = false;
 
             numberOfSteps = 11;
@@ -3886,14 +3885,14 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(0, tc._sut_N._modeController._mode.Synchron);
 
             ulong onStateChangeCount_A = tc._sut_A._onStateChangeCount.Synchron;
-            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, onStateChangeCount_A);
+            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * numberOfSteps - 1, onStateChangeCount_A);
 
             ulong onStateChangeCount_N = tc._sut_N._onStateChangeCount.Synchron;
-            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, onStateChangeCount_A);
+            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * numberOfSteps - 1, onStateChangeCount_A);
 
             //Step mode
             tc.ExecuteProbeRun((ulong)stepInEvents + 1, (int)eTcoSequenceTests.OnStateChangeWhenChangingModes);
-            Assert.AreEqual(cyclicCycles+stepInEvents +1, tc._plcCycleCounter.Synchron);
+            Assert.AreEqual(cyclicCycles + stepInEvents + 1, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
             Assert.AreEqual(10, tc._sut_A._modeController._mode.Synchron);
             Assert.AreEqual(10, tc._sut_N._modeController._mode.Synchron);
@@ -3906,18 +3905,18 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             //Cyclic mode
             tc.ExecuteProbeRun(cyclicCycles, (int)eTcoSequenceTests.OnStateChangeWhenChangingModes);
-            Assert.AreEqual(2*cyclicCycles + stepInEvents+1, tc._plcCycleCounter.Synchron);
+            Assert.AreEqual(2 * cyclicCycles + stepInEvents + 1, tc._plcCycleCounter.Synchron);
             Assert.IsTrue(tc._done.Synchron);
             Assert.AreEqual(0, tc._sut_A._modeController._mode.Synchron);
             Assert.AreEqual(0, tc._sut_N._modeController._mode.Synchron);
 
-            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, tc._sut_A._onStateChangeCount.Synchron);
+            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * numberOfSteps - 1, tc._sut_A._onStateChangeCount.Synchron);
             ulong PostStepCompleteCount_A = 2 * (ulong)cyclicCycles * numberOfSteps + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1))) * numberOfSteps;
             Assert.AreEqual(PostStepCompleteCount_A, tc._sut_A._onCompleteStepCount.Synchron);
             ulong PostSequenceCompleteCount_A = 2 * (ulong)cyclicCycles + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1)));
             Assert.AreEqual(PostSequenceCompleteCount_A, tc._sut_A._onSequenceCompleteCount.Synchron);
 
-            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, tc._sut_N._onStateChangeCount.Synchron);
+            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * numberOfSteps - 1, tc._sut_N._onStateChangeCount.Synchron);
             ulong PostStepCompleteCount_N = 2 * (ulong)cyclicCycles * numberOfSteps + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1))) * numberOfSteps;
             Assert.AreEqual(PostStepCompleteCount_N, tc._sut_N._onCompleteStepCount.Synchron);
             ulong PostSequenceCompleteCount_N = 2 * (ulong)cyclicCycles + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1)));

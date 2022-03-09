@@ -887,11 +887,11 @@ CASE _testId OF
                     _sut_A._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 1 TO _totalStepNumber - 1 DO
+                FOR i := 1 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
@@ -902,11 +902,11 @@ CASE _testId OF
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 1 TO _totalStepNumber - 1 DO
+                FOR i := 1 TO _totalStepNumber - 2 DO
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
 
@@ -936,21 +936,21 @@ CASE _testId OF
             END_IF
 
             IF _plcCycleCounter = 3 THEN
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
                 _sut_A.SequencerClose();
 
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
 
@@ -1112,16 +1112,16 @@ CASE _testId OF
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
             END_IF
@@ -1169,7 +1169,7 @@ CASE _testId OF
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
 
-        _done := _plcCycleCounter >= _totalStepNumber + 2;
+        _done := _plcCycleCounter >= _totalStepNumber + 1;
         ProbeDoneWhen(_done);
     {endregion}
     {region "T582_InvalidMode"}
@@ -2031,8 +2031,7 @@ CASE _testId OF
         END_IF
 
         _done := _plcCycleCounter >= 5;
-        ProbeDoneWhen(_done);
-    {endregion}
+        ProbeDoneWhen(_done);		 
     {region "T691_SwitchStepModeOnDuringStepExecution"}
     eTcoSequenceTests.SwitchStepModeOnDuringStepExecution:
         IF NOT _arranged THEN
