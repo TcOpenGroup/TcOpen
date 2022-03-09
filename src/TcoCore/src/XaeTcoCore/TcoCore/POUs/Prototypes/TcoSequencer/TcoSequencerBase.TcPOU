@@ -174,7 +174,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated THEN
+        <ST><![CDATA[IF (_StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated) THEN
 	_StepIdUniquenessControlState := eStepIdUniquenessControlState.Requested;	
 END_IF
 ]]></ST>
@@ -203,7 +203,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CheckStepID := TRUE;
 
-IF _StepIdUniquenessControlState = eStepIdUniquenessControlState.Done THEN
+IF (_StepIdUniquenessControlState = eStepIdUniquenessControlState.Done) THEN
 	IF((_IdOfThePreviouslyExecutedStep <> inStepID) AND NOT _isFirstStepEntry AND (NOT inStepModeActive OR inStepInRunning)) THEN
 		IF (_theOrderOfTheCurrentlyExecutedStep =0) AND (_theOrderOfTheCurrentlyEvaluatedStep = 0) AND (_IdOfThePreviouslyExecutedStep =0) THEN
 			_IdOfThePreviouslyExecutedStep := inStepID;
@@ -317,6 +317,7 @@ _cycleTimer(IN:= FALSE, PT:= T#0S);
 _currentStep.Status := eStepStatus.Done;
 
 OnSequenceCompleted();
+OnStepCompleted();
 Context.Environment.Messaging.Suspend();
 _modeController._stepForward.Restore();
 _modeController._stepBackward.Restore();
@@ -700,8 +701,10 @@ IF (_StepIdUniquenessControlState >= eStepIdUniquenessControlState.Started AND _
 		IF (_pNewSteps <> 0) THEN
 			__DELETE(_pNewSteps);
 		END_IF
-		
 	END_IF	
+
+	_numberOfStepsInSequence := _controlledStepIndex + 1;
+
 END_IF
 
 ]]></ST>
@@ -787,7 +790,7 @@ END_VAR
 METHOD PRIVATE OnlineChange
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _stepIdUniquenessChecked  AND NOT _StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated THEN
+        <ST><![CDATA[IF _stepIdUniquenessChecked  AND (_StepIdUniquenessControlState <> eStepIdUniquenessControlState.Deactivated) THEN
 	_StepIdUniquenessControlState := eStepIdUniquenessControlState.Requested;
 END_IF;]]></ST>
       </Implementation>
@@ -1056,7 +1059,7 @@ END_IF
 
 IsStepIDUnique(inStepID);
 
-IF NOT _stepIdUniquenessChecked AND NOT _StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated THEN
+IF NOT _stepIdUniquenessChecked AND (_StepIdUniquenessControlState <> eStepIdUniquenessControlState.Deactivated) THEN
 	//Produce StepChanged after first run of the first step
 	_theOrderOfThePreviouslyExecutedStep := -1;
 	RETURN;
@@ -1138,7 +1141,7 @@ _isInOrderOfExecution := (_theOrderOfTheCurrentlyExecutedStep =_theOrderOfTheCur
 //-----------------------------------------------
 //     		SINGLE PER STEP CALL REGION
 //-----------------------------------------------
-IF _StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated THEN
+IF(_StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated) THEN
 	_StepOrderChanged := FALSE;
 	_StepIdChanged := FALSE;
 	_sequencerHasError := FALSE;
@@ -1154,7 +1157,7 @@ IF _StepIdUniquenessControlState = eStepIdUniquenessControlState.Done THEN
 	END_IF
 	
 	//Distinguish if StepId or step order has been changed 
-	IF (_theOrderOfTheCurrentlyEvaluatedStep >= _stepCounter) AND _StepIdChanged OR _StepOrderChanged THEN
+	IF (_theOrderOfTheCurrentlyEvaluatedStep >= (_stepCounter - 1)) AND _StepIdChanged OR _StepOrderChanged THEN
 		IF _StepOrderChanged AND NOT _StepIdChanged THEN
 			_message := CONCAT('ERROR, STEP ORDER CHANGED DURING STEP EXECUTION FROM: ',UINT_TO_STRING(_ChangeStepOrderFrom));
 			_message := CONCAT(_message , '=>');
@@ -1246,7 +1249,7 @@ IF(_isInOrderOfExecution  AND NOT(_currentStep.Status = eStepStatus.Error)) THEN
 			StepChanged(inStepID);						
 			//In case of call Restore() in OnStateChange(), this method must exits
 			//otherwise we get page fault
-			IF NOT _stepIdUniquenessChecked AND NOT _StepIdUniquenessControlState = eStepIdUniquenessControlState.Deactivated THEN
+			IF NOT _stepIdUniquenessChecked AND (_StepIdUniquenessControlState <> eStepIdUniquenessControlState.Deactivated) THEN
 				StepInternal := FALSE;
 				RETURN;
 			END_IF								
@@ -1281,10 +1284,10 @@ END_IF
 _theOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep + 1;
 
 IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
-	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep - 1;
+	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
 END_IF
 
-_numberOfStepsInSequence := _stepCounter + 1;]]></ST>
+_numberOfStepsInSequence := _stepCounter;]]></ST>
       </Implementation>
     </Method>
   </POU>

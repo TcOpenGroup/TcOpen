@@ -21,18 +21,21 @@ METHOD PROTECTED FINAL CompleteSequence
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_theOrderOfTheCurrentlyExecutedStep := 0;
-_LastCycleTime := _SequenceElapsedTime;
-_cycleTimer(IN:= FALSE, PT:= T#0S);	
+        <ST><![CDATA[//_theOrderOfTheCurrentlyExecutedStep := 0;
+//_LastCycleTime := _SequenceElapsedTime;
+//_cycleTimer(IN:= FALSE, PT:= T#0S);	
 
-_currentStep.Status := eStepStatus.Done;
+//_currentStep.Status := eStepStatus.Done;
 
-OnSequenceCompleted();
-Context.Environment.Messaging.Suspend();
-_modeController._stepForward.Restore();
-_modeController._stepBackward.Restore();
-_modeController._stepIn.Restore(); 	
-Context.Environment.Messaging.Resume();]]></ST>
+//OnSequenceCompleted();
+//OnStepCompleted();
+//Context.Environment.Messaging.Suspend();
+//_modeController._stepForward.Restore();
+//_modeController._stepBackward.Restore();
+//_modeController._stepIn.Restore(); 	
+//Context.Environment.Messaging.Resume();
+
+i_CompleteSequence();]]></ST>
       </Implementation>
     </Method>
     <Method Name="CompleteStep" Id="{e2e383b2-f66e-039d-3184-62ed20ccc73c}">
@@ -48,15 +51,15 @@ Context.Environment.Messaging.Resume();]]></ST>
 METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+        <ST><![CDATA[//Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
 
-_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
-_currentStep.Status := eStepStatus.Done;
-OnStepCompleted();
-_modeController._stepIn.DoneWhen(_modeController._stepIn.Execute());
-CompleteStep := THIS^;
+//_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
+//_currentStep.Status := eStepStatus.Done;
+//OnStepCompleted();
+//_modeController._stepIn.DoneWhen(_modeController._stepIn.Execute());
+//CompleteStep := THIS^;
 
-]]></ST>
+CompleteStep := i_CompleteStep();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RequestStep" Id="{29cecf3d-5c32-0f65-1ffa-a20cfbf27c51}">
