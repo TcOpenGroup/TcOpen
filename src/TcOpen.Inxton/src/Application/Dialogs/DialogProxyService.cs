@@ -5,9 +5,10 @@ using System.Linq;
 using System.Windows;
 using TcoCore;
 using TcOpen.Inxton;
+using TcOpen.Inxton.Dialogs;
 using Vortex.Connector;
 
-namespace TcOpen.Inxton.TcoCore
+namespace TcOpen.Inxton.App.Dialogs
 {
     public abstract class DialogProxyServiceBase
     {
@@ -20,13 +21,13 @@ namespace TcOpen.Inxton.TcoCore
             if (observedObjects == null || observedObjects.Count() ==  0) return;
             foreach (var observedObject in observedObjects)
             {
-                foreach (var dialog in observedObject.GetDescendants<TcoDialogBase>())
+                foreach (var dialog in observedObject.GetDescendants<IsDialog>())
                 {
                     dialog.Initialize(() => Queue(dialog));
                 }
             }
             
         }
-        protected abstract void Queue(TcoDialogBase dialog);        
+        protected abstract void Queue(IsDialog dialog);        
     }
 }

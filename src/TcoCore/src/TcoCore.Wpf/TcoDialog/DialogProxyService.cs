@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TcoCore;
+using TcOpen.Inxton.App.Dialogs;
+using TcOpen.Inxton.Dialogs;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
@@ -13,15 +15,17 @@ namespace TcOpen.Inxton.TcoCore.Wpf
     /// <summary>
     /// Provides management for the PLC dialogs.
     /// </summary>
-    public class DialogProxyService : DialogProxyServiceBase
+    public class DialogProxyServiceWpf : DialogProxyServiceBase
     {
-        protected DialogProxyService(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
+        protected DialogProxyServiceWpf(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
 
         }
 
-        protected async override void Queue(TcoDialogBase dialog)
+        protected async override void Queue(IsDialog dialog)
         {
+            dialog.Read();
+
             await TcoAppDomain.Current.Dispatcher.InvokeAsync(
                 () =>
                 {
@@ -45,7 +49,7 @@ namespace TcOpen.Inxton.TcoCore.Wpf
         /// <returns></returns>
         public static DialogProxyServiceBase Create(IEnumerable<IVortexObject> observedObjects)
         {
-            var dialogProxyService = new DialogProxyService(observedObjects);
+            var dialogProxyService = new DialogProxyServiceWpf(observedObjects);
             return dialogProxyService;
         }
 }

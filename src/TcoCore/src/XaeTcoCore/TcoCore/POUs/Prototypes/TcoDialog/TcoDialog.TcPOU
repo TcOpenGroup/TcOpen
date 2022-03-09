@@ -8,19 +8,20 @@
  		</summary>
 		<example>										
 			[!code-pas[StandardDialog](~/../TcOpen/src/TcoInspectors/src/XAE/XAE/TcoInspectorsTests/POUs/Examples/ExampleContext.TcPOU?name=StandardDialog)]		
-			[!code-csharp[DialogInitialization](~/../TcOpen/src/TcoInspectors/tests/Sandbox.TcoInspectors.Wpf/MainWindowViewModel.cs?name=DialogProxyServiceInitialization)]
+			[!code-csharp[DialogInitialization](~/../TcOpen/src/TcoInspectors/tests/Sandbox.TcoInspectors.Wpf/App.xaml.cs?name=DialogProxyServiceInitialization)]
 		</example>					
 	</docu>	
 ~*)
 FUNCTION_BLOCK TcoDialog EXTENDS TcoDialogBase IMPLEMENTS ITcoDialogFormat, ITcoDialogAnswer
 VAR
-    _text      : STRING(500);
-    _caption   : STRING(255);
-    _hasOK     : BOOL;
-    _hasYes    : BOOL;
-    _hasNo     : BOOL;
-    _hasCancel : BOOL;
-    _answer    : eDialogAnswer;
+    _text       : STRING(500);
+    _caption    : STRING(255);
+    _hasOK      : BOOL;
+    _hasYes     : BOOL;
+    _hasNo      : BOOL;
+    _hasCancel  : BOOL;
+    _answer     : eDialogAnswer;
+    _dialogType : eDialogType;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -92,6 +93,7 @@ _hasNo       := FALSE;
 _hasCancel   := FALSE;
 _text        := '';
 _caption     := '';
+_dialogType  := eDialogType.Undefined;
 
 Show := THIS^;]]></ST>
       </Implementation>
@@ -153,6 +155,18 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_text := inText;
 WithText := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithType" Id="{8371ef68-745f-059d-039b-804e722e0a09}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithType : ITcoDialogAnswer
+VAR_INPUT
+	inDialogType : eDialogType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_dialogType := inDialogType;
+WithType := THIS^;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithYesNo" Id="{97fb4a7f-33e1-0bb9-1e9b-67e28ca02e2d}" FolderPath="Format\">

@@ -8,20 +8,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector"
     xmlns:vortex="http://vortex.mts/xaml"
-    mc:Ignorable="d"
     Width="Auto"
-    Height="Auto"      
+    Height="Auto"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
     ResizeMode="NoResize"
     ShowInTaskbar="False"
     SizeToContent="WidthAndHeight"
     Title="InspectorDialogueWindow"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
-    d:DesignHeight="450"
-    d:DesignWidth="800">
+    WindowStyle="None">
     <d:Window.DataContext>
-        <local:TcoDialogDialogViewModel/>
+        <local:TcoDialogDialogViewModel />
     </d:Window.DataContext>
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="1" />
@@ -35,19 +35,34 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="80*" />
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon
+                Margin="20"
+                Grid.RowSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="{Binding Dialog._dialogType.LastValue, Converter={local:DialogTypeToColorConverter}}" 
+                Kind="{Binding Dialog._dialogType.LastValue, Converter={local:DialogTypeToIconConverter}}" 
+                Width="75" Height="75"/>
+            <StackPanel Grid.Row="0" Grid.Column="1">
                 <TextBlock
-                    Margin="10"
+                    Margin="0,10,10,10"
                     HorizontalAlignment="Center"
-                    Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                    Text="{Binding Dialog._caption.Cyclic}" />
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                    Text="{Binding Dialog._caption.LastValue}" />
                 <TextBlock
-                    Margin="10"
+                    Margin="0,10,10,10"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                    Text="{Binding Dialog._text.Cyclic}" />
+                    Text="{Binding Dialog._text.LastValue}" />
             </StackPanel>
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
+            <WrapPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Center">
                 <WrapPanel.Resources>
                     <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
                         <Setter Property="Width" Value="150" />
@@ -57,19 +72,19 @@
                 <Button
                     Command="{Binding YesCommand, Mode=OneWay}"
                     Content="Yes"
-                    Visibility="{Binding Dialog._hasYes.Cyclic, Converter={local:AnswerButtonVisibility}}" />
+                    Visibility="{Binding Dialog._hasYes.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
                 <Button
                     Command="{Binding NoCommand, Mode=OneWay}"
                     Content="No"
-                    Visibility="{Binding Dialog._hasNo.Cyclic, Converter={local:AnswerButtonVisibility}}" />
+                    Visibility="{Binding Dialog._hasNo.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
                 <Button
                     Command="{Binding CancelCommand, Mode=OneWay}"
                     Content="Cancel"
-                    Visibility="{Binding Dialog._hasCancel.Cyclic, Converter={local:AnswerButtonVisibility}}" />
+                    Visibility="{Binding Dialog._hasCancel.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
                 <Button
                     Command="{Binding OkCommand, Mode=OneWay}"
                     Content="OK"
-                    Visibility="{Binding Dialog._hasOK.Cyclic, Converter={local:AnswerButtonVisibility}}" />
+                    Visibility="{Binding Dialog._hasOK.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
             </WrapPanel>
         </Grid>
     </materialDesign:Card>

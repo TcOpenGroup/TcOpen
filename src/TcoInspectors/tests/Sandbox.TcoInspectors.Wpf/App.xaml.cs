@@ -9,6 +9,7 @@ using System.Windows;
 using TcoInspectorsTests;
 using Vortex.Adapters.Connector.Tc3.Adapter;
 using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace Sandbox.TcoInspectors.Wpf
 {
@@ -18,12 +19,16 @@ namespace Sandbox.TcoInspectors.Wpf
     public partial class App : Application
     {
         public App()
-        {         
+        {
+            #region DialogProxyServiceInitialization
             TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { App.Plc.MAIN._exampleContext }))
+            #endregion
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetSecurity(SecurityManager.CreateDefault());
-                            
+                .SetSecurity(SecurityManager.CreateDefault());                    
+            
+
             Plc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
         }
 
