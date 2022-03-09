@@ -191,8 +191,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.RestoreChildBetweenSteps);
             Assert.IsTrue(tc._done.Synchron);
 
-            Assert.AreEqual(childStateChangeCount_A+ numberOfSteps+1, tc._sut_A._myTcoChildState._requestedStateCount.Synchron);
-            Assert.AreEqual(childRestoreCount_A+ numberOfSteps , tc._sut_A._myTcoChildState._restoreCount.Synchron);
+            Assert.AreEqual(childStateChangeCount_A+ numberOfSteps, tc._sut_A._myTcoChildState._requestedStateCount.Synchron);
+            Assert.AreEqual(childRestoreCount_A+ numberOfSteps-1 , tc._sut_A._myTcoChildState._restoreCount.Synchron);
             Assert.AreEqual(childStateChangeCount_N+1, tc._sut_N._myTcoChildState._requestedStateCount.Synchron);
             Assert.AreEqual(childRestoreCount_N, tc._sut_N._myTcoChildState._restoreCount.Synchron);
 
@@ -3675,8 +3675,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(20,                                         //Check if current step status changes to ReadyToRun
                 tc._sut_N._currentStep.Status.Synchron);             //None := 0 , Disabled:= 10 , ReadyToRun:= 20 , Running:= 30 , Done:= 40, Error := 50
 
-            //After running this method, sequencer should stay in StepId 0, with StepDescription ""(>Step 0<)"
-            //Step status should be ReadyToRun      tc.SequencerSingleCycleRun(() =>                            
+            //After running this method, sequencer should stay in StepId 1, with StepDescription ""(>Step 1<)"
+            //Step status should be ReadyToRun                                
             tc.ExecuteProbeRun(1, (int)eTcoSequencerTests.StepModeStepInDetailed);
             Assert.AreEqual(2, tc._plcCycleCounter.Synchron);
             Assert.IsFalse(tc._done.Synchron);
@@ -4005,10 +4005,10 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(0, tc._sut_N._modeController._mode.Synchron);
 
             ulong onStateChangeCount_A = tc._sut_A._onStateChangeCount.Synchron;
-            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, onStateChangeCount_A);
+            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * numberOfSteps - 1, onStateChangeCount_A);
 
             ulong onStateChangeCount_N = tc._sut_N._onStateChangeCount.Synchron;
-            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, onStateChangeCount_A);
+            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * numberOfSteps - 1, onStateChangeCount_A);
 
             //Step mode
             tc.ExecuteProbeRun((ulong)stepInEvents + 1, (int)eTcoSequencerTests.OnStateChangeWhenChangingModes);
@@ -4030,18 +4030,17 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             Assert.AreEqual(0, tc._sut_A._modeController._mode.Synchron);
             Assert.AreEqual(0, tc._sut_N._modeController._mode.Synchron);
 
-            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, tc._sut_A._onStateChangeCount.Synchron);
+            Assert.AreEqual(tc._sut_A._sequenceCycles.Synchron * numberOfSteps - 1, tc._sut_A._onStateChangeCount.Synchron);
             ulong PostStepCompleteCount_A = 2 * (ulong)cyclicCycles * numberOfSteps + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1))) * numberOfSteps;
             Assert.AreEqual(PostStepCompleteCount_A, tc._sut_A._onCompleteStepCount.Synchron);
             ulong PostSequenceCompleteCount_A = 2 * (ulong)cyclicCycles + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1)));
             Assert.AreEqual(PostSequenceCompleteCount_A, tc._sut_A._onSequenceCompleteCount.Synchron);
 
-            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * (numberOfSteps + 1) - 1, tc._sut_N._onStateChangeCount.Synchron);
+            Assert.AreEqual(tc._sut_N._sequenceCycles.Synchron * numberOfSteps - 1, tc._sut_N._onStateChangeCount.Synchron);
             ulong PostStepCompleteCount_N = 2 * (ulong)cyclicCycles * numberOfSteps + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1))) * numberOfSteps;
             Assert.AreEqual(PostStepCompleteCount_N, tc._sut_N._onCompleteStepCount.Synchron);
             ulong PostSequenceCompleteCount_N = 2 * (ulong)cyclicCycles + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1)));
             Assert.AreEqual(PostSequenceCompleteCount_N, tc._sut_N._onSequenceCompleteCount.Synchron);
         }
-
     }
 }

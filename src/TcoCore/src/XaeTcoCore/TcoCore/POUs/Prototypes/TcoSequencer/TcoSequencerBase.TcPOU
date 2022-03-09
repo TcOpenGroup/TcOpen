@@ -1105,7 +1105,7 @@ IF(_stepModeActive) THEN
 	IF _modeController._stepForward.Execute() THEN
 		_modeController._stepIn.Restore();
 		_modeController._stepBackward.Restore();
-		IF _theOrderOfTheCurrentlyExecutedStep < _numberOfStepsInSequence THEN
+		IF _theOrderOfTheCurrentlyExecutedStep < _numberOfStepsInSequence - 1 THEN
 			_theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;
 			_modeController._stepForward.DoneWhen(TRUE);
 		ELSE
