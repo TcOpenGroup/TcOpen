@@ -1342,7 +1342,7 @@ END_IF
 _numberOfStepsInSequence := _stepCounter;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Terminate" Id="{891406c3-dc43-0f05-194d-d0dd319d16ad}" FolderPath="Coordinator\">
+	<Method Name="Terminate" Id="{891406c3-dc43-0f05-194d-d0dd319d16ad}" FolderPath="Coordinator\">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Terminate` via `ITcoCoordinator` interface.'}
 METHOD PUBLIC Terminate : BOOL
