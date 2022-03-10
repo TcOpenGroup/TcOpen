@@ -169,8 +169,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="ActivateSequenceControl" Id="{6ba084a7-d139-0f47-1327-e65f11a3a542}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL ActivateSequenceControl 
+    <Method Name="ActivateDeveloperChecks" Id="{6ba084a7-d139-0f47-1327-e65f11a3a542}">
+      <Declaration><![CDATA[METHOD PUBLIC FINAL ActivateDeveloperChecks 
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -237,8 +237,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="DeactivateSequenceControl" Id="{4345a431-6e1f-0398-0294-6b2df1302715}">
-      <Declaration><![CDATA[METHOD PUBLIC FINAL DeactivateSequenceControl 
+    <Method Name="DeactivateDeveloperChecks" Id="{4345a431-6e1f-0398-0294-6b2df1302715}">
+      <Declaration><![CDATA[METHOD PUBLIC FINAL DeactivateDeveloperChecks 
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -552,13 +552,14 @@ END_IF;
 
 Observer.Observe(
 	inIsStepActive := i_Step,
-	inCurrentStepOrder := _theOrderOfTheCurrentlyExecutedStep + 1,
+	inCurrentStepOrder := _theOrderOfTheCurrentlyExecutedStep,
 	inID:= inStepID, 
-	inOrder:= _theOrderOfTheCurrentlyEvaluatedStep, 
+	inOrder:= _theOrderOfTheCurrentlyEvaluatedStep - 1, 
 	inEnabled:= inEnabled, 
 	inDescription:= inStepDescription, 
 	inStatus:= _currentStep.Status, 
-	inDuration:= _currentStep.Duration); 	
+	inDuration:= _currentStep.Duration,
+	inStepCount := _numberOfStepsInSequence); 	
 
 
 		
@@ -772,7 +773,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="MoveNext" Id="{2a75d1b2-2313-00ca-0b7f-ca8389b46acd}" FolderPath="Coordinator\">
+    <Method Name="MoveNext" Id="{2a75d1b2-2313-00ca-0b7f-ca8389b46acd}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `MoveNext` via `ITcoCoordinator` interface.'}
 METHOD PUBLIC MoveNext : BOOL
@@ -973,7 +974,7 @@ _checkStepIdRequestedInStepMode := FALSE;
 OnRestore();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Retry" Id="{8a23b412-1867-05d2-0ba1-19984d0dfd1c}" FolderPath="Coordinator\">
+    <Method Name="Retry" Id="{8a23b412-1867-05d2-0ba1-19984d0dfd1c}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Retry` via `ITcoCoordinator` interface.'}
 METHOD PUBLIC Retry : BOOL
@@ -1342,7 +1343,7 @@ END_IF
 _numberOfStepsInSequence := _stepCounter;]]></ST>
       </Implementation>
     </Method>
-	<Method Name="Terminate" Id="{891406c3-dc43-0f05-194d-d0dd319d16ad}" FolderPath="Coordinator\">
+    <Method Name="Terminate" Id="{891406c3-dc43-0f05-194d-d0dd319d16ad}">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Terminate` via `ITcoCoordinator` interface.'}
 METHOD PUBLIC Terminate : BOOL
