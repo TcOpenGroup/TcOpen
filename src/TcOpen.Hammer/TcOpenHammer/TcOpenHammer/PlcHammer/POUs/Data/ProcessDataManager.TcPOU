@@ -4,7 +4,9 @@
     <Declaration><![CDATA[FUNCTION_BLOCK ProcessDataManager EXTENDS TcoData.TcoDataExchange
 VAR
 	//this variable has to called "_data" - PC app will access this variable by its name.
-	_data : Station001_ProductionData;
+	 {attribute clr [Container(Layout.Tabs)]}
+     {attribute clr [Group(Layout.Scroll)]}
+	_data : Station001_ProductionData := (Parent := THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -38,7 +40,7 @@ END_VAR
     <Method Name="SetDataResult" Id="{18eeae59-e657-0c7b-3528-07fbaa61af6f}">
       <Declaration><![CDATA[METHOD SetDataResult
 VAR_INPUT
-	Result : BOOL;
+	Result : TcoComprehensiveResult;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_data.Result := Result;]]></ST>

@@ -134,7 +134,7 @@ _gTimer_1(IN := FALSE);]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF(__QUERYPOINTER(_Parent,  refStation)) THEN
+          <ST><![CDATA[IF(__QUERYPOINTER(Parent,  refStation)) THEN
 	Station := refStation;
 END_IF;	]]></ST>
         </Implementation>

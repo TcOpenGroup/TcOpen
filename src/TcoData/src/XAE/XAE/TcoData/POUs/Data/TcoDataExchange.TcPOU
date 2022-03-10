@@ -243,12 +243,12 @@ Exists REF=	_idExistsTask;
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : TcoCore.ITcoObject;
+	ParentObject : TcoCore.ITcoObject;	
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Read" Id="{05052219-e02c-06a1-02d0-9241bf3dd3ff}">

@@ -2,55 +2,45 @@
   "solution": {
     "path": "TcOpen.sln",
     "projects": [
-            
-      "src\\TcoAbstractions\\src\\TcoAbstractionsConnector\\TcoAbstractionsConnector.csproj",    
-      "src\\TcoAbstractions\\tests\\TcoAbstractionsTestsConnector\\TcoAbstractionsTestsConnector.csproj",  
-      "src\\TcoAbstractions\\src\\XAE\\XAE\\XAETcoAbstractions.tsproj",  
-
+      "src\\IntegrationProjects\\src\\IntegrationProjectsConnector\\IntegrationProjectsConnector.csproj",
+      "src\\IntegrationProjects\\src\\XAE\\XAE\\XAEIntegrationProjects.tsproj",
+      "src\\Tc.Prober\\tests\\PlcTcProberTestsConnector\\PlcTcProberTestsConnector.csproj",
+      "src\\Tc.Prober\\tests\\TcProber\\TcProber.tsproj",
+      "src\\TcOpen.Hammer\\PlcHammerConnector\\PlcHammerConnector.csproj",
+      "src\\TcOpen.Hammer\\TcOpenHammer\\TcOpenHammer\\TcOpenHammer.tsproj",
+      "src\\TcoAbstractions\\src\\TcoAbstractionsConnector\\TcoAbstractionsConnector.csproj",
+      "src\\TcoAbstractions\\src\\XAE\\XAE\\XAETcoAbstractions.tsproj",
+      "src\\TcoAbstractions\\tests\\TcoAbstractionsTestsConnector\\TcoAbstractionsTestsConnector.csproj",
+      "src\\TcoApplicationExamples\\PlcAppExamplesConnector\\PlcAppExamplesConnector.csproj",
+      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj",
       "src\\TcoCore\\src\\TcoCoreConnector\\TcoCoreConnector.csproj",
       "src\\TcoCore\\src\\XaeTcoCore\\XaeTcoCore.tsproj",
       "src\\TcoCore\\tests\\TcoCoreExamplesConnector\\TcoCoreExamplesConnector.csproj",
       "src\\TcoCore\\tests\\TcoCoreTestsConnector\\TcoCoreTestsConnector.csproj",
-      
-      "src\\Tc.Prober\\tests\\PlcTcProberTestsConnector\\PlcTcProberTestsConnector.csproj",
-      "src\\Tc.Prober\\tests\\TcProber\\TcProber.tsproj",     
-
+      "src\\TcoData\\src\\TcoDataConnector\\TcoDataConnector.csproj",
+      "src\\TcoData\\src\\XAE\\XAE\\XAETcoData.tsproj",
+      "src\\TcoData\\tests\\TcoDataTestsConnector\\TcoDataTestsConnector.csproj",
       "src\\TcoDrivesBeckhoff\\src\\TcoDrivesBeckhoffConnector\\TcoDrivesBeckhoffConnector.csproj",
       "src\\TcoDrivesBeckhoff\\src\\XaeTcoDrivesBeckhoff\\XaeTcoDrivesBeckhoff.tsproj",
       "src\\TcoDrivesBeckhoff\\tests\\TcoDrivesBeckhoffTestsConnector\\TcoDrivesBeckhoffTestsConnector.csproj",
-      
       "src\\TcoElements\\src\\TcoElementsConnector\\TcoElementsConnector.csproj",
       "src\\TcoElements\\src\\XAE\\XAE\\XAETcoElements.tsproj",
       "src\\TcoElements\\tests\\TcoElementsTestsConnector\\TcoElementsTestsConnector.csproj",
-      
+      "src\\TcoInspectors\\src\\TcoInspectorsConnector\\TcoInspectorsConnector.csproj",
+      "src\\TcoInspectors\\src\\XAE\\XAE\\XAETcoInspectors.tsproj",
+      "src\\TcoInspectors\\tests\\TcoInspectorsTestsConnector\\TcoInspectorsTestsConnector.csproj",
       "src\\TcoIoBeckhoff\\src\\TcoIoBeckhoffConnector\\TcoIoBeckhoffConnector.csproj",
       "src\\TcoIoBeckhoff\\src\\XaeTcoIoBeckhoff\\XaeTcoIoBeckhoff.tsproj",
-      
       "src\\TcoPneumatics\\src\\TcoPneumaticsConnector\\TcoPneumaticsConnector.csproj",
       "src\\TcoPneumatics\\src\\XaeTcoPneumatics\\XaeTcoPneumatics.tsproj",
       "src\\TcoPneumatics\\tests\\TcoPneumaticsTestsConnector\\TcoPneumaticsTestsConnector.csproj",
-      
-      "src\\librarytemplate\\src\\PlcTemplateConnector\\PlcTemplateConnector.csproj",
-      "src\\librarytemplate\\src\\XAE\\XAE\\XAEPlcTemplate.tsproj",
-      "src\\librarytemplate\\tests\\PlcTemplateTestsConnector\\PlcTemplateTestsConnector.csproj",
-      
-      "src\\TcoApplicationExamples\\PlcAppExamplesConnector\\PlcAppExamplesConnector.csproj",
-      "src\\TcoApplicationExamples\\XaeAppExamples\\XaeAppExamples.tsproj",
-
-      "src\\TcoData\\src\\TcoDataConnector\\TcoDataConnector.csproj",
-      "src\\TcoData\\src\\XAE\\XAE\\XAETcoData.tsproj",  
-      "src\\TcoData\\tests\\TcoDataTestsConnector\\TcoDataTestsConnector.csproj",
-
       "src\\TcoUtilities\\src\\TcoUtilitiesConnector\\TcoUtilitiesConnector.csproj",
       "src\\TcoUtilities\\src\\XAE\\XAE\\XAETcoUtilities.tsproj",
       "src\\TcoUtilities\\tests\\TcoUtilitiesTestsConnector\\TcoUtilitiesTestsConnector.csproj",
-
-      "src\\IntegrationProjects\\src\\IntegrationProjectsConnector\\IntegrationProjectsConnector.csproj",
-      "src\\IntegrationProjects\\tests\\IntegrationProjectsTestsConnector\\IntegrationProjectsTestsConnector.csproj",
-      "src\\IntegrationProjects\\src\\XAE\\XAE\\XAEIntegrationProjects.tsproj",      
-
-      "src\\TcOpen.Hammer\\PlcHammerConnector\\PlcHammerConnector.csproj",
-      "src\\TcOpen.Hammer\\TcOpenHammer\\TcOpenHammer\\TcOpenHammer.tsproj"
+      "src\\_packaging\\TcOpen.Group\\TcOpen.Group.csproj",
+      "src\\librarytemplate\\src\\PlcTemplateConnector\\PlcTemplateConnector.csproj",
+      "src\\librarytemplate\\src\\XAE\\XAE\\XAEPlcTemplate.tsproj",
+      "src\\librarytemplate\\tests\\PlcTemplateTestsConnector\\PlcTemplateTestsConnector.csproj"
     ]
   }
 }

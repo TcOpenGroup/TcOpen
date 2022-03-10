@@ -10,7 +10,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[EXAMPLES_PRG();
 MANIPULATOR();
-_station001._sequence.DeactivateSequenceControl();
+_station001._sequence.DeactivateDeveloperChecks();
 
 _station001.Run();
 _station002.Run();

@@ -15,12 +15,14 @@ namespace TcoCore
     {      
         public void UpdateStepsTable()
         {
-            Steps = Observer.GetPlainFromOnline<PlainTcoSequencerObserver>()._steps.Where(p => p.ID != 0);
-            var activeStep = Steps.Where(p => p.Order == this.Observer._currentStepOrder.LastValue).FirstOrDefault();
-            if(activeStep != null)
-            {
-                activeStep.IsActive = true;
-            }
+            Observer.Read();            
+            Steps = Observer._steps.Take(Observer._stepsCount.LastValue).Select(p => 
+                        { 
+                            var plain = p.CreatePlainerType(); 
+                            plain.CopyCyclicToPlain(p); 
+                            plain.IsActive = plain.Order == this.Observer._currentStepOrder.LastValue; 
+                            return plain; 
+                        });           
         }
                       
         IEnumerable<PlainStepDetails> steps;

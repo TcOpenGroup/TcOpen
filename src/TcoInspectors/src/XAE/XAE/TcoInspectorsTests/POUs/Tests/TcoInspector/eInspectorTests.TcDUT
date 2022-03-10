@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eInspectorTests" Id="{372a5fd9-4fa4-0b0e-0ffe-a28795189853}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eInspectorTests :
+    (
+        Inspect         := 10,
+        GetResult       := 20,
+        UpdateOverall   := 30,
+        OnFailCarryOn   := 40,
+        OnFailRetry     := 50,
+        OnFailTerminate := 60,
+		OnFailDialog	:= 70
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

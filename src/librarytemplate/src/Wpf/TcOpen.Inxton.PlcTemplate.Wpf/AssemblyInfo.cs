@@ -8,9 +8,9 @@ using Vortex.Presentation.Wpf;
 [assembly: XmlnsPrefix("http://vortex.mts/xaml", "vortex")]
 [assembly: XmlnsDefinition("http://vortex.mts/xaml", "PlcTemplate")]
 
-[assembly: AssemblyVersion("1.18.6.0")]
-[assembly: AssemblyFileVersion("1.18.6.0")]
-[assembly: AssemblyInformationalVersion("1.18.6-tc-open-data-3.1+1495.Branch.tc-open-data-3.Sha.4620f6ce2ed2c8c1064c47d0e7ea8e5403661434")]
+[assembly: AssemblyVersion("1.19.1.0")]
+[assembly: AssemblyFileVersion("1.19.1.0")]
+[assembly: AssemblyInformationalVersion("1.19.1-update-eagle.1+1780.Branch.update-eagle.Sha.8c5fbf414d74d43374f14ead64f8f30c90308870")]
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
                                      //(used if a resource is not found in the page,

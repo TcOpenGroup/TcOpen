@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="fbPiston" Id="{c4094ed5-4fe0-0f6e-24e6-4cc0fa53181e}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute addProperty Name "Pneumatic cyclinder"}
 FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoComponent IMPLEMENTS IPistonGripper, IPistonHorizontal, IPistonVertical
