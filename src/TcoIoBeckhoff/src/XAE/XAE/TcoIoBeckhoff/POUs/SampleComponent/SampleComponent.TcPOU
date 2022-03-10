@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="SampleComponent" Id="{f5b54980-122a-09a0-011f-b4a378dc6442}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>Sample component for inspiration</summary>				
+	</docu>
+~*)
+FUNCTION_BLOCK SampleComponent EXTENDS TcoCore.TcoComponent
+VAR
+	(*~
+		<docu>
+			<summary>Counter</summary>
+			<remarks>
+				> [!IMPORTANT]
+				> This member is ignored when rendering.	
+			</remarks>			
+		</docu>
+	~*)
+	{attribute clr [RenderIgnore()]}
+	_counter : INT;	
+END_VAR
+
+VAR
+	(*~
+		<docu>
+			<summary>Counter</summary>
+			<remarks>
+				> [!IMPORTANT]
+				> This member is readonly.
+			</remarks>		
+		</docu>
+	~*)
+	{attribute addProperty Name "Add Result"}
+	{attribute clr [ReadOnly()]}
+	_addResult : INT;
+	{attribute addProperty Name "A"}
+	_addNumberOne : INT;
+	{attribute addProperty Name "B"}
+	_addNumberTwo : INT;
+END_VAR
+
+VAR	
+	_sampleTask : SampleTaskIteration(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_addResult := THIS^.AddTwoNumbers(_addNumberOne, _addNumberTwo);
+_sampleTask();
+]]></ST>
+    </Implementation>
+    <Folder Name="_tests" Id="{75c4418b-a189-07bb-3edf-eca813e18967}" />
+    <Method Name="AddTwoNumbers" Id="{9546a6c5-c124-0854-089a-b7616df2a45d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>Adds two numbers</summary>		
+		<returns>Sum of two numbers</returns>
+	</docu>
+~*)
+
+METHOD AddTwoNumbers : INT
+VAR_INPUT
+	NumberOne : INT;
+	NumberTwo : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AddTwoNumbers := NumberOne + NumberTwo;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddTwoNumbersTest" Id="{bc69c87c-8b49-0ee3-3926-3e251360609f}" FolderPath="_tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL AddTwoNumbersTest : INT
+VAR_INPUT
+	NumberOne : INT;
+	NumberTwo : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AddTwoNumbersTest := THIS^.AddTwoNumbers(NumberOne, NumberTwo);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{672a490f-dd33-0ec8-2d88-acc88f08b2ef}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{87902963-605a-0772-3a95-9738e771a169}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WaitForModulo" Id="{9c4f24df-3540-0661-3cbf-78190ae201fa}">
+      <Declaration><![CDATA[METHOD WaitForModulo : BOOL
+VAR_INPUT
+	Modulo : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_counter := _counter + 1;
+WaitForModulo := _counter MOD Modulo = 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WaitForModuloTest" Id="{acb8468e-806d-0cd0-14e4-5717d7866f03}" FolderPath="_tests\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD INTERNAL WaitForModuloTest : BOOL
+VAR_INPUT
+	Modulo : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[WaitForModuloTest := THIS^.WaitForModulo(Modulo);
+	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
