@@ -84,7 +84,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
@@ -113,22 +113,22 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
                         tc.StepCompleteWhen(true);
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
             });
             tc.UpdateCurrentStepDetails();
-            Assert.AreEqual(numberOfSteps,                              //Check if StepId of the last executed step is equal to numberOfSteps 
+            Assert.AreEqual(numberOfSteps - 1,                              //Check if StepId of the last executed step is equal to numberOfSteps -1
                 tc._sequencer._currentStepId.Synchron);
-            Assert.AreEqual("Step " + numberOfSteps.ToString(),         //Check if StepDescription of the last executed step is equal to "Step "+value of the variable numberOfSteps
+            Assert.AreEqual("Step " + (numberOfSteps - 1).ToString(),         //Check if StepDescription of the last executed step is equal to "Step "+value of the variable numberOfSteps -1
                 tc._sequencer._currentStepDescription.Synchron);
         }
 
@@ -143,7 +143,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
@@ -161,7 +161,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     Assert.AreEqual("Step " + i.ToString(), plain.Description);
                     Assert.AreEqual(true, plain.Enabled);
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -181,14 +181,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
                         tc.StepCompleteWhen(true);
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -221,7 +221,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     Assert.AreEqual(childState, tc.GetChildState());    //Check if the child state has been changed to desired state.
                     tc.StepCompleteWhen(true);                          //Complete step casuse that at the next Step() method call, Sequencer change its state from 0 to 1. Child state should be restored frm the value of childState to -1. 
                 }
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
@@ -231,7 +231,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                         tc.StepCompleteWhen(true);                      //Complete step casuse that at the next Step() method call, Sequencer change its state from i to i + 1. Child state should be restored frm the value of childState to -1. 
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -256,7 +256,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
@@ -282,7 +282,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps; i++)
                 {
                     if(tc.Step((short)i, true, "Step " + i.ToString()))
                     {
@@ -320,7 +320,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
@@ -349,7 +349,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     tc.StepCompleteWhen(true);
                 }
 
-                for (short i = 1; i <= numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
@@ -897,11 +897,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {
                     tc.StepCompleteWhen(true);
                 }
-                for (short i = 1; i < numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -1339,11 +1339,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {
                     tc.StepCompleteWhen(true);
                 }
-                for (ushort i = 1; i < numberOfSteps; i++)
+                for (ushort i = 1; i < numberOfSteps - 1; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -1593,11 +1593,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {
                     tc.StepCompleteWhen(true);
                 }
-                for (short i = 1; i < numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -1762,11 +1762,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {                                                       //as it is number of the calls of the sequencer method Step()
                     tc.StepCompleteWhen(true);                          //Actual step should stay in status ReadyToRun
                 }
-                for (short i = 1; i < numberOfSteps; i++)
+                for (short i = 1; i < numberOfSteps - 1; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -1805,11 +1805,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {
                     tc.StepCompleteWhen(true);
                 }
-                for (ushort i = 2; i < numberOfSteps; i++)
+                for (ushort i = 2; i < numberOfSteps - 1; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -1835,14 +1835,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {
                     tc.StepCompleteWhen(true);
                 }
-                for (ushort i = 1; i < numberOfSteps; i++)
+                for (ushort i = 1; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
                         tc.StepCompleteWhen(true);
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -1870,14 +1870,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
         //        {
         //            tc.StepCompleteWhen(true);
         //        }
-        //        for (ushort i = 1; i < numberOfSteps; i++)
+        //        for (ushort i = 1; i < numberOfSteps - 1; i++)
         //        {
         //            if (tc.Step((short)i, true, "Step " + i.ToString()))
         //            {
         //                tc.StepCompleteWhen(true);
         //            }
         //        }
-        //        if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+        //        if (tc.Step((short)(numberOfSteps-1), true, "Step " + (numberOfSteps-1).ToString()))
         //        {
         //            tc.SequenceComplete();
         //        }
@@ -1908,14 +1908,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
         //        {
         //            tc.StepCompleteWhen(true);
         //        }
-        //        for (ushort i = 1; i < numberOfSteps; i++)
+        //        for (ushort i = 1; i < numberOfSteps - 1; i++)
         //        {
         //            if (tc.Step((short)i, true, "Step " + i.ToString()))
         //            {
         //                tc.StepCompleteWhen(true);
         //            }
         //        }
-        //        if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+        //        if (tc.Step((short)(numberOfSteps-1), true, "Step " + (numberOfSteps-1).ToString()))
         //        {
         //            tc.SequenceComplete();
         //        }
@@ -1953,11 +1953,11 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 {                                                       //as it is number of the calls of the sequencer method Step()
                     tc.StepCompleteWhen(true);                          //Actual step should stay in status ReadyToRun
                 }
-                for (ushort i = 1; i < numberOfSteps; i++)
+                for (ushort i = 1; i < numberOfSteps - 1; i++)
                 {
                     tc.Step((short)i, true, "Step " + i.ToString());
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                 }
@@ -4443,21 +4443,21 @@ namespace TcoCoreUnitTests.PlcTcRpc
             tc.SetCyclicMode();                                         //This set sequence to cyclic mode
             tc.SequencerMultipleCyclesRun(() =>                         //Performs cyclicCycles of the complete sequence. OnStateChange should be called cyclicCycles * numberOfSteps + numberOfSteps - 1 times.
             {                                                           
-                for (ushort i = 0; i < numberOfSteps; i++)
+                for (ushort i = 0; i < numberOfSteps - 1; i++)
                 {
                     if(tc.Step((short)i, true, "Step " + i.ToString()))
                     {
                         tc.StepCompleteWhen(true);
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                     cycle++;
                 }
             }, cyclicCycles);
             ulong onStateChangeCount = tc._sequencer._onStateChangeCount.Synchron;
-            Assert.AreEqual(cycle * (numberOfSteps +1) -1, onStateChangeCount);
+            Assert.AreEqual(cycle * numberOfSteps - 1, onStateChangeCount);
             //Step mode
             tc.SequencerSingleCycleRun(() =>
             {
@@ -4467,14 +4467,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
             tc.SequencerMultipleCyclesRun(() =>                         //After running this method, sequencer should stay in StepId 1, with StepDescription "Step 1"
             {                                                           //Step status should be Running
                 tc.StepIn();
-                for (ushort i = 0; i < numberOfSteps; i++)
+                for (ushort i = 0; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
                         tc.StepCompleteWhen(true);
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                     cycle++;
@@ -4488,20 +4488,20 @@ namespace TcoCoreUnitTests.PlcTcRpc
             tc.SetCyclicMode();                                         //This set sequence to cyclic mode
             tc.SequencerMultipleCyclesRun(() =>                         //After running this method, sequencer should stay in StepId 1, with StepDescription "Step 1"
             {                                                           //Step status should be Running
-                for (ushort i = 0; i < numberOfSteps; i++)
+                for (ushort i = 0; i < numberOfSteps - 1; i++)
                 {
                     if (tc.Step((short)i, true, "Step " + i.ToString()))
                     {
                         tc.StepCompleteWhen(true);
                     }
                 }
-                if (tc.Step((short)numberOfSteps, true, "Step " + numberOfSteps.ToString()))
+                if (tc.Step((short)(numberOfSteps - 1), true, "Step " + (numberOfSteps - 1).ToString()))
                 {
                     tc.SequenceComplete();
                     cycle++;
                 }
             }, cyclicCycles);
-            Assert.AreEqual(cycle * (numberOfSteps + 1) - 1, tc._sequencer._onStateChangeCount.Synchron);
+            Assert.AreEqual(cycle * numberOfSteps - 1, tc._sequencer._onStateChangeCount.Synchron);
 
             ulong PostStepCompleteCount = 2 * (ulong)cyclicCycles * numberOfSteps + (ulong)Math.Ceiling((decimal)(stepInEvents / (numberOfSteps + 1))) * numberOfSteps;
             Assert.AreEqual(PostStepCompleteCount, tc._sequencer._onCompleteStepCount.Synchron);
