@@ -1967,6 +1967,9 @@ External Setpoint Generation:
 	</ImageDatas>
 	<Project ProjectGUID="{9BFBEFCD-1854-47BE-9BE2-2F97411A783B}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
+			<Settings MaxCpus="2" NonWinCpus="1">
+				<Cpu CpuId="1"/>
+			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -2788,7 +2791,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 												<Data type="uint16">0.0130</Data>
 											</Parameter>
 											<Parameter>
-												<Comment>Winding resistance Ph-Ph 20°C</Comment>
+												<Comment>Winding resistance Ph-Ph 20Ã‚Â°C</Comment>
 												<Name>R</Name>
 												<Data type="uint16">1.50</Data>
 											</Parameter>
@@ -2868,7 +2871,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 											<Parameter>
 												<Comment>Motor temp sensor R(T)</Comment>
 												<Name>TempSensorR(T)</Name>
-												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="°C">
+												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="Ã‚Â°C">
 													<item>-29.5</item>
 													<item>2.3</item>
 													<item>31.4</item>

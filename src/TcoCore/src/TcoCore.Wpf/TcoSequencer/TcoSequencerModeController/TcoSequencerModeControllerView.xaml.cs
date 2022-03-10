@@ -29,4 +29,25 @@ namespace TcoCore
             return enumValue == VisibleInMode ? Visibility.Visible : Visibility.Collapsed;
         }
     }
+
+    public class SequenceModeDescriptionInConverter : BaseConverter
+    {
+
+        public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            eSequencerMode mode = (eSequencerMode)Enum.Parse(typeof(eSequencerMode), value.ToString());
+
+            switch (mode)
+            {
+                case eSequencerMode.Invalid:
+                    return string.Empty;
+                case eSequencerMode.CyclicMode:
+                    return "Enter step mode";
+                case eSequencerMode.StepMode:
+                    return "Abandon step mode";
+                default:
+                    return string.Empty;
+            }          
+        }
+    }
 }

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MAIN" Id="{0e1505e0-974d-0b61-1a31-18a914ff2a51}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+    _legacyDigitalInspectorTests : LegacyTcoDigitalInspectorTests;
+    _digitalInspectorTests       : TcoDigitalInspectorTests;
+    _analogueInspectorTests      : TcoAnalogueInspectorTests;
+    _dataInspectorTests          : TcoDataInspectorTests;
+    _inspectionGroupTests        : TcoInspectionGroupTests;
+    _exampleContext              : ExampleContext;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_legacyDigitalInspectorTests.ProbeRun();
+_digitalInspectorTests.ProbeRun();
+_analogueInspectorTests.ProbeRun();
+_dataInspectorTests.ProbeRun();
+_inspectionGroupTests.ProbeRun();
+_exampleContext.Run();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
