@@ -60,10 +60,13 @@ IF (seq.Step(inStepID := 0,
     inStepDescription := 'ASKING SOME QUESTION')) THEN
     //--------------------------------------------------------
 //<StandardDialog>	
-	answer := _dialog.Show()
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
-			.WithText('We are about to start the inspection sequence. Do we go ahead?')
-			.WithYesNo().Answer;
+			.WithText('We are about to start the inspection sequence. Do we go ahead?')				
+			.WithYesNo()
+			.Answer;
 			
 	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
 		seq.CompleteStep();

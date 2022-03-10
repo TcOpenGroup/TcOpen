@@ -3,12 +3,13 @@
   <POU Name="TcoSequencerObserver" Id="{f27504d5-efcf-0874-3ed6-b558033f733c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerObserver EXTENDS TcoObject IMPLEMENTS ITcoSequencerObserver
 VAR
-	_steps : ARRAY [0..MAX_STEPS] OF StepDetails;
-	_currentStepOrder : UINT;
+    _steps            : ARRAY[0..MAX_STEPS] OF StepDetails;
+    _currentStepOrder : UINT;
+    _stepsCount       : UINT;
 END_VAR
 
 VAR CONSTANT
-	MAX_STEPS : UINT := 150;
+    MAX_STEPS : UINT := 150;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -126,11 +127,22 @@ VAR_INPUT
 		</docu>	
 	~*)	
 		{attribute addProperty Name "<#Step duration#>"}
-		inDuration : TIME;		
+		inDuration : TIME;	
+
+			(*~
+		<docu>
+			<summary>
+				Total steps count;
+			</summary>				
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step count#>"}
+		inStepCount : UINT;	
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_currentStepOrder := inCurrentStepOrder;
+_stepsCount := inStepCount;
 IF(inOrder <= MAX_STEPS) THEN
 	_steps[inOrder].ID := inID;
 	_steps[inOrder].Order := inOrder;

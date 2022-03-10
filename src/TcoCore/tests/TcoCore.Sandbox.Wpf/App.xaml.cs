@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TcoCoreExamples;
 using TcOpen.Inxton;
+using TcOpen.Inxton.TcoCore.Wpf;
 using Vortex.Adapters.Connector.Tc3.Adapter;
 
 namespace TcoCore.Sandbox.Wpf
@@ -27,11 +28,10 @@ namespace TcoCore.Sandbox.Wpf
                                                         .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose)
                                                         .WriteTo.Notepad()
                                                         .MinimumLevel.Verbose()))
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext }));
 
-
-            TcOpen.Inxton.TcoCore.Wpf.DialogProxyService.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext });
-
+            
             PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);
             PlcTcoCoreExamples.EXAMPLES_PRG._context._logger.StartLoggingMessages(eMessageCategory.All);
             PlcTcoCoreExamples.MAIN._station001._logger.StartLoggingMessages(eMessageCategory.All);
