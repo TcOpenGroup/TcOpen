@@ -1,13 +1,12 @@
 # v0.5.x
 
-# From version 0.5 there are notable breaking changes.
+# From version 0.5 there are notable changes in the way we initialize structures and nested TcoObjects.
 
 ## TcoCore
 
 ### TcoObject.FB_init 
 
 **FB_init when object is in another FUNCTION_BLOCK**
-
 
 ~~~
 FUNCTION_BLOCK myFunctionBlock : EXTENDS TcoCore.TcoObject
@@ -42,3 +41,13 @@ Data : ExampleInspectorsStruct := (Parent := THIS^);
 ~~~
 
 **IMPORTANT!!!** The compiler will not warn you missing parent assignment. Missing parent assignment may result in invalid pointer/reference exceptions.
+
+## Enchancements
+
+### TcoCore
+
+- [Dialogs](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoDialogs.html)
+
+### TcoInspectors
+-  [Introduction](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoInspectors/Introduction.html)
+
