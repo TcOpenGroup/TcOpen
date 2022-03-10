@@ -37,7 +37,7 @@ task Init {
 
 task BuildScripts -continueOnError {  
   Push-Location .\pipelines
-  Import-Module .\tcobuildutils.psm1 -Force -Verbose 
+  Import-Module .\tcobuildutils.psm1 -Force -DisableNameChecking 
   Pop-Location
 }
 
@@ -97,7 +97,6 @@ task CopyInxton -continueOnError {
 }
 
 task SetPlcCpuCores `
-  -depends GetBuilder `
   -description "Will set 1 shared 1 isolated core to every tsproj" `
   -precondition { Is-AMS-Id-Local $testTargetAmsId } `
 {
