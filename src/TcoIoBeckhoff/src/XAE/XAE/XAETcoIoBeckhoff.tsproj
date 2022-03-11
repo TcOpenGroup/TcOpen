@@ -15,7 +15,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{711D4247-A0B7-46C4-92AB-BEA8CAD07A56}" Name="TcoIoBeckhoff" PrjFilePath="TcoIoBeckhoff\TcoIoBeckhoff.plcproj" TmcFilePath="TcoIoBeckhoff\TcoIoBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{FDA3EF9A-4EFF-4450-8B41-A03BD3F0D043}" Name="TcoIoBeckhoff" PrjFilePath="TcoIoBeckhoff\TcoIoBeckhoff.plcproj" TmcFilePath="TcoIoBeckhoff\TcoIoBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoIoBeckhoff\TcoIoBeckhoff.tmc">
 					<Name>TcoIoBeckhoff Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -35,7 +35,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{CFBC043B-C3FB-403E-B3EC-38B73B6C9F17}" Name="TcoIoBeckhoffTests" PrjFilePath="TcoIoBeckhoffTests\TcoIoBeckhoffTests.plcproj" TmcFilePath="TcoIoBeckhoffTests\TcoIoBeckhoffTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{ACC15569-A043-4BAB-BB81-6AF48B41871C}" Name="TcoIoBeckhoffTests" PrjFilePath="TcoIoBeckhoffTests\TcoIoBeckhoffTests.plcproj" TmcFilePath="TcoIoBeckhoffTests\TcoIoBeckhoffTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoIoBeckhoffTests\TcoIoBeckhoffTests.tmc">
 					<Name>TcoIoBeckhoffTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="SampleTaskIteration" Id="{ff8ab0ff-7eb0-0983-34f1-16de82b1c941}" SpecialFunc="None">
+  <POU Name="SampleTaskIteration" Id="{d1ab64f5-1332-0075-0062-208284e70814}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SampleTaskIteration EXTENDS TcoCore.TcoTask
 VAR	
 	_x : LREAL;
@@ -19,7 +19,7 @@ END_VAR]]></Declaration>
 	DoneWhen(_currentIteration >= _iterations);
 END_IF]]></ST>
     </Implementation>
-    <Method Name="Restore" Id="{1d66f1bc-4fc9-0e1d-2089-a2db366a8b62}">
+    <Method Name="Restore" Id="{418ca9c4-083f-0907-23e2-93b0ad7066ce}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

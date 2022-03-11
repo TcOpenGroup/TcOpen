@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="SampleContext" Id="{17b40f53-8ddf-02a7-0c48-23be770b6c32}" SpecialFunc="None">
+  <POU Name="SampleContext" Id="{1f86152d-4972-03a3-3260-0644f5027317}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SampleContext EXTENDS TcoCore.TcoContext
 VAR
 	_sampleComponent : SampleComponent(THIS^);
@@ -8,7 +8,7 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{b16c1f30-7567-0482-3818-51b562bd8312}">
+    <Method Name="Main" Id="{f6b177a9-ba06-0204-3447-456dc9e8882a}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

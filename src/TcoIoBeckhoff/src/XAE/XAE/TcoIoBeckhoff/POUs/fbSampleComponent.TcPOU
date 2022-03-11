@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="fbSampleComponent" Id="{58312ee6-e99b-4afb-aa9c-8c05761b5535}" SpecialFunc="None">
+  <POU Name="fbSampleComponent" Id="{739e8926-10b5-0b13-0711-251db1ceaa50}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>Sample component for inspiration</summary>				
@@ -42,8 +42,8 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Folder Name="_tests" Id="{5b8331b0-0029-4e78-a009-bf2eb8712373}" />
-    <Method Name="AddTwoNumbers" Id="{2ee747c8-6af4-41fb-afed-608159322163}">
+    <Folder Name="_tests" Id="{53b1d204-5066-0e21-0a5b-4a936c612db0}" />
+    <Method Name="AddTwoNumbers" Id="{4c7820d3-a32f-0bc6-2dc2-0f0e79a18de7}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>Adds two numbers</summary>		
@@ -61,7 +61,7 @@ END_VAR
         <ST><![CDATA[AddTwoNumbers := NumberOne + NumberTwo;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="AddTwoNumbersTest" Id="{41574bed-82b4-4fb9-b188-7c2e9e506655}" FolderPath="_tests\">
+    <Method Name="AddTwoNumbersTest" Id="{9e259eee-97c0-0e79-150a-ff0f5592b3a4}" FolderPath="_tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL AddTwoNumbersTest : INT
 VAR_INPUT
@@ -73,7 +73,7 @@ END_VAR
         <ST><![CDATA[AddTwoNumbersTest := THIS^.AddTwoNumbers(NumberOne, NumberTwo);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Cyclic" Id="{bfe4b4a2-960e-417c-877e-2e6fa12b6282}">
+    <Method Name="Cyclic" Id="{335a197f-7846-43e8-9e94-30fcb80bc897}">
       <Declaration><![CDATA[METHOD Cyclic
 VAR_INPUT
 END_VAR
@@ -82,7 +82,7 @@ END_VAR
         <ST><![CDATA[_addResult := THIS^.AddTwoNumbers(_addNumberOne, _addNumberTwo);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="WaitForModulo" Id="{a1a1a029-7058-41f7-bac9-8a1faef1cdae}">
+    <Method Name="WaitForModulo" Id="{9ac59de1-6772-0dab-3522-5cede99bf359}">
       <Declaration><![CDATA[METHOD WaitForModulo : BOOL
 VAR_INPUT
 	Modulo : INT;
@@ -93,7 +93,7 @@ END_VAR
 WaitForModulo := _counter MOD Modulo = 0;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="WaitForModuloTest" Id="{be1c6e3d-fd9c-4e5d-a883-97b08c7f82b3}" FolderPath="_tests\">
+    <Method Name="WaitForModuloTest" Id="{b8a3a096-5b27-0534-1ae8-5ac7062643a1}" FolderPath="_tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL WaitForModuloTest : BOOL
 VAR_INPUT

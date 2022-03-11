@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="SampleComponent" Id="{f5b54980-122a-09a0-011f-b4a378dc6442}" SpecialFunc="None">
+  <POU Name="SampleComponent" Id="{790be45d-fc62-0b34-18f5-aa3061fcce57}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>Sample component for inspiration</summary>				
@@ -48,8 +48,8 @@ END_VAR]]></Declaration>
 _sampleTask();
 ]]></ST>
     </Implementation>
-    <Folder Name="_tests" Id="{75c4418b-a189-07bb-3edf-eca813e18967}" />
-    <Method Name="AddTwoNumbers" Id="{9546a6c5-c124-0854-089a-b7616df2a45d}">
+    <Folder Name="_tests" Id="{f97aec56-4fc1-052f-2735-f23b0ac12372}" />
+    <Method Name="AddTwoNumbers" Id="{19f80b18-2f6c-0ac0-1170-a9f274d20e48}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>Adds two numbers</summary>		
@@ -67,7 +67,7 @@ END_VAR
         <ST><![CDATA[AddTwoNumbers := NumberOne + NumberTwo;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="AddTwoNumbersTest" Id="{bc69c87c-8b49-0ee3-3926-3e251360609f}" FolderPath="_tests\">
+    <Method Name="AddTwoNumbersTest" Id="{30d765a1-6501-0c77-20cc-20b60a40ca8a}" FolderPath="_tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL AddTwoNumbersTest : INT
 VAR_INPUT
@@ -79,7 +79,7 @@ END_VAR
         <ST><![CDATA[AddTwoNumbersTest := THIS^.AddTwoNumbers(NumberOne, NumberTwo);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Restore" Id="{672a490f-dd33-0ec8-2d88-acc88f08b2ef}">
+    <Method Name="Restore" Id="{e1e1a9b7-5ec5-045d-13c3-0091a3848751}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -95,7 +95,7 @@ METHOD  Restore : ITcoRestorable
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ServiceMode" Id="{87902963-605a-0772-3a95-9738e771a169}">
+    <Method Name="ServiceMode" Id="{67781177-e614-05af-3b7e-2c31cdded9c0}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -110,7 +110,7 @@ METHOD PROTECTED  ServiceMode
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="WaitForModulo" Id="{9c4f24df-3540-0661-3cbf-78190ae201fa}">
+    <Method Name="WaitForModulo" Id="{10f18902-db08-04f5-2555-668a13c2abef}">
       <Declaration><![CDATA[METHOD WaitForModulo : BOOL
 VAR_INPUT
 	Modulo : INT;
@@ -121,7 +121,7 @@ END_VAR
 WaitForModulo := _counter MOD Modulo = 0;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="WaitForModuloTest" Id="{acb8468e-806d-0cd0-14e4-5717d7866f03}" FolderPath="_tests\">
+    <Method Name="WaitForModuloTest" Id="{2006eb53-6e25-0e44-0d0e-4984cea6c516}" FolderPath="_tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL WaitForModuloTest : BOOL
 VAR_INPUT
