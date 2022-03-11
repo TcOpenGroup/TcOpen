@@ -37,28 +37,12 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\fbSampleComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskFunctionBuffer.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskIteration.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
-    <Folder Include="POUs\SampleComponent" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
