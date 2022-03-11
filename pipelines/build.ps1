@@ -308,7 +308,7 @@ task Tests -precondition { return $isTestingEnabled } {
 
 
 task ClearPackages `
-  -precondition { $publishNugets } ` 
+  -precondition { $publishNugets } `
 {
   mkdir nugets -ErrorAction SilentlyContinue
   mkdir nugets\dependants -ErrorAction SilentlyContinue
@@ -316,7 +316,7 @@ task ClearPackages `
 }
 
 task CreatePackages `
-  -precondition { $packNugets } `  
+  -precondition { $packNugets } `
 {
   $semVer = $script:gitVersion.SemVer
   exec { 
