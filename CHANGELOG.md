@@ -24,7 +24,7 @@ END_VAR
 Data : ExampleInspectorsStruct := (Parent := THIS^);
 ~~~
 
-**IMPORTANT!!!** The compiler will not warn you missing parent assignment. Missing parent assignment may result in invalid pointer/reference exceptions.
+**IMPORTANT!!!** The compiler will not warn you about missing parent assignment. Missing parent assignment may result in invalid pointer/reference exceptions.
 
 **FB_init when object is in another STRUCTURE**
 
