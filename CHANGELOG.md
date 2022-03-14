@@ -7,19 +7,26 @@
 ### TcoObject.FB_init 
 
 **FB_init when object is in another FUNCTION_BLOCK**
+(**No change just reminder**)
 
 ~~~
 FUNCTION_BLOCK myFunctionBlock : EXTENDS TcoCore.TcoObject
-VAR
-    // Before
-    // myObject : TcoObject(THIS^);
-
-    // Now
-    myObject : TcoObject(THIS^);
+VAR    
+    myObject : SomeTcoObject(THIS^); 
 END_VAR    
 ~~~
 
-*FB_init when object is in another STRUCTURE*
+### TcoStruct initialization
+
+`TcoStruct` has been added to allow structure and inner objects to access `TcoContext` and take advantage of the framework features.
+
+~~~
+Data : ExampleInspectorsStruct := (Parent := THIS^);
+~~~
+
+**IMPORTANT!!!** The compiler will not warn you about missing parent assignment. Missing parent assignment may result in invalid pointer/reference exceptions.
+
+**FB_init when object is in another STRUCTURE**
 
 ~~~
 TYPE
@@ -32,15 +39,7 @@ TYPE
 END_TYPE
 ~~~
 
-### TcoStruct initialization
 
-`TcoStruct` has been added to allow structure and inner objects to access `TcoContext` and take advantage of the framework features.
-
-~~~
-Data : ExampleInspectorsStruct := (Parent := THIS^);
-~~~
-
-**IMPORTANT!!!** The compiler will not warn you missing parent assignment. Missing parent assignment may result in invalid pointer/reference exceptions.
 
 ## Enchancements
 
