@@ -3,8 +3,9 @@
   <POU Name="Station001_AutomatMode" Id="{edeef130-3aa0-4734-859e-5913facf0752}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_AutomatMode EXTENDS TcoCore.TcoSequencer
 VAR
-	_partPassedChecks : BOOL;
-	GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
+    _partPassedChecks : BOOL;
+    _groupInspection   : TcoInspectors.TcoInspectionGroup(THIS^);
+    _dialog           : TcoCore.TcoDialog(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -26,8 +27,19 @@ VAR_INST
 	_id : STRING;	
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-IF (Step(0, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
+        <ST><![CDATA[IF (Step(0, TRUE, 'DIALOG - DO WE CONTINUE')) THEN
+    //--------------------------------------------
+    IF(_dialog.Show()
+			.WithOk()
+			.WithCaption('What`s next?')
+			.WithText('To continue click OK?').Answer = TcoCore.eDialogAnswer.OK) THEN
+			CompleteStep();
+	END_IF;			
+    //--------------------------------------------	
+END_IF;
+
+
+IF (Step(10, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNCAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
@@ -64,8 +76,8 @@ END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
     //--------------------------------------------
-    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Data.RequiredMin,
-        inMaxValue := Station.ProductionData.DimX.Data.RequiredMax,
+    Station.Components._dimXsim(inMinValue := Station.ProductionData.DimX.Data.RequiredMin + 50,
+        inMaxValue := Station.ProductionData.DimX.Data.RequiredMax - 50,
         inoutValue := Station.Components._dimX);
 
     Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Data.RequiredMin + 50 ,
@@ -82,23 +94,14 @@ END_IF;
 
 IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
-
-	GroupInspection.WithCoordinator(THIS^)
+	_groupInspection.WithCoordinator(THIS^)
 				   .Act()
 				   .Inspect(Station.ProcessTraceabilty._data.DimX.Inspect(Station.Components._dimX))
 				   .Inspect(Station.ProcessTraceabilty._data.DimY.Inspect(Station.Components._dimY))
 				   .Inspect(Station.ProcessTraceabilty._data.DimZ.Inspect(Station.Components._dimZ))
 				   .UpdateComprehensiveResult(Station.ProcessTraceabilty._data.Result)
 				   .OnFail()
-				   .CarryOn();		   
-						   
-//    _partPassedChecks := Station.Checkers.StartChecks()
-//        .CheckAnalogue(Signal := Station.Components._dimX, pData := ADR(Station.ProcessTraceabilty._data.DimX))
-//        .CheckAnalogue(Signal := Station.Components._dimY, pData := ADR(Station.ProcessTraceabilty._data.DimY))
-//        .CheckAnalogue(Signal := Station.Components._dimZ, pData := ADR(Station.ProcessTraceabilty._data.DimZ))
-//        .HasPassed();
-//	Station.ProcessTraceabilty.SetDataResult( _partPassedChecks);
-//    StepCompleteWhen(TRUE);
+				   .Dialog(200);		   						   
     //--------------------------------------------	
 END_IF;
 
@@ -156,7 +159,8 @@ END_IF;
 
 IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
     //--------------------------------------------
-    Station.Components.HorizontalNCAxis.DriveRef.MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
+    Station.Components.HorizontalNCAxis.DriveRef.MoveAbsolute
+		(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
         THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
         THIS^.Station.TechnologicalDataManager._data.AxisAcc,
         THIS^.Station.TechnologicalDataManager._data.AxisDcc,
@@ -183,6 +187,27 @@ END_IF;
 IF (Step(900, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
     //--------------------------------------------    
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.MoveAbsoluteTask.Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(THIS^.RESTORE_STEP_ID, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
+    //--------------------------------------------	
+END_IF;
+
+
+IF (Step(37000, TRUE, 'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
+    //--------------------------------------------
+    IF (Station.Components.HorizontalNcAxis.DriveRef.MoveAbsolute
+	   (THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
+        THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+        THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+        THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+        THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done AND
+        Station.Components.Gripper.MoveToHome().Done) THEN
+        CompleteStep();
+    END_IF;
     //--------------------------------------------	
 END_IF;
 

@@ -1,4 +1,5 @@
-﻿using PlcHammerConnector;
+﻿using HMI;
+using PlcHammerConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace PlcHammer.Hmi
 
         public OpenLoginWindowCommand OpenLoginWindowCommand { get; } = new OpenLoginWindowCommand();
 
+        public object LogBox { get { return App.LogTextBox; } }
 
     }
 }
