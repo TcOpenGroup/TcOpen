@@ -257,5 +257,8 @@
 
             </StackPanel>
         </TabItem>
+        <TabItem Header="Log">
+            <ContentControl Content="{Binding LogBox}"></ContentControl>
+        </TabItem>
     </TabControl>
 </Window>
