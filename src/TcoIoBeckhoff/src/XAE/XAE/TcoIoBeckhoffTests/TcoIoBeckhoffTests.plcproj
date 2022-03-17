@@ -16,7 +16,6 @@
     <Implicit_KindOfTask>{c1aa83b6-797c-4334-a45f-e59eef5853e9}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{84b54c4a-fd5f-41bc-b7e6-00a11eaf9b6c}</Implicit_Jitter_Distribution>
     <LibraryReferences>{a6ab06da-ae52-412d-8a71-94584bc92312}</LibraryReferences>
-    <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
@@ -52,13 +51,10 @@
     <Compile Include="DUTs\IO\PDOs\WcState_98A4DF75.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PDOs\InfoData_BC63D37F.TcDUT">
+    <Compile Include="DUTs\IO\PDOs\InfoData_FC4995DF.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\Channel_E4AEF59E.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\PDOs\InfoData_192954DE.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\Channel_7F374EB0.TcDUT">
@@ -82,10 +78,13 @@
     <Compile Include="DUTs\IO\PDOs\Outputs_C46FA7B3.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PDOs\COM_ext_inputs_8F480395.TcDUT">
+    <Compile Include="DUTs\IO\PDOs\PM_Inputs_Channel_D07DCD53.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PDOs\COM_ext_outputs_90351B78.TcDUT">
+    <Compile Include="DUTs\IO\PDOs\PM_Status_data_F5918FB9.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\PDOs\PM_Outputs_Channel_A1108FBB.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\AI_Standard_Channel_087F71C7.TcDUT">
@@ -94,37 +93,46 @@
     <Compile Include="DUTs\IO\PDOs\AI_Standard_F16A160D.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL6002_CC591D2E.TcDUT">
+    <Compile Include="DUTs\IO\PDOs\AI_Standard_Channel_F16A160D.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL1809_248EAA34.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL6002_FE8542D0.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL2809_859F43D2.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL1809_55831E18.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL4004_9786CACB.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL2809_8483F7BD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL6001_57492581.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL4004_728EC7B6.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EK1100_179A0949.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL6001_E0EB1D2F.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL6001_7CCA9C49.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EK1100_EBF24152.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EK1110_179A0949.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EK1110_EBF24152.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL3174_B7B53025.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL3403_5A9AA707.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL3011_79E8C96E.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EK1122_EBF24152.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL2008_A854BE6D.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL3174_D9579F56.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\Boxes\EL3011_E5AAE4C5.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\Boxes\EL2008_322B3944.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\Boxes\EL3024_DB7F7732.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\Devices\SyncUnitTask_B4157F22.TcDUT">
@@ -136,25 +144,25 @@
     <Compile Include="DUTs\IO\Devices\SyncUnits_235333EF.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_1_EK1200_134F3039.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_1_EK1200_32F8F830.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Device_1_EtherCAT_75B0F6AE.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Device_1_EtherCAT_02E4139D.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_9_EK1100_B12C454B.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_9_EK1100_1BA03404.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_14_EK1100_7D535E9F.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_17_EK1100_A8117E2D.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Device_4_EtherCAT_CDFBCD8E.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_16_EK1122_822026B4.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_19_EK1100_7F12583F.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_14_EK1100_6F8E6BBB.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Device_2_EtherCAT_09308A23.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Device_4_EtherCAT_96B672B2.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL_iXlinker.TcGVL">
@@ -163,9 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
-    <Folder Include="GVLs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
+    <Folder Include="GVLs" />
     <Folder Include="DUTs\IO" />
     <Folder Include="DUTs\IO\PdoEntries" />
     <Folder Include="DUTs\IO\PDOs" />
@@ -200,14 +208,7 @@
       <SubType>Content</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoIoBeckhoff">
-      <Resolution>TcoIoBeckhoff, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>

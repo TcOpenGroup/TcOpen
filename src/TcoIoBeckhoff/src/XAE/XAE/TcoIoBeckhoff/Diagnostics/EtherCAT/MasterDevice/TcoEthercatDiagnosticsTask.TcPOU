@@ -122,7 +122,7 @@ END_VAR]]></Declaration>
 						_name := _SlaveConfigDataBuffer[_i].sName;
 						_type := Tc2_EtherCAT.F_ConvProductCodeToString(_SlaveConfigDataBuffer[_i].stSlaveIdentity);
 						_state :=  Tc2_EtherCAT.F_ConvSlaveStateToString(state := _SlaveStateBuffer[_i]);
-						_DiagnosticsMessengers.Messengers[_DiagnosticsMessengerIndex].Build().AppendAny(_name).Append('{').AppendAny(_type).Append('} ').Append( _state).As().AsError().Pin();
+						_DiagnosticsMessengers.Messengers[_DiagnosticsMessengerIndex].Build().AppendAny(_name).Append('[').AppendAny(_type).Append(']').Append( _state).As().AsError().Pin();
 						_DiagnosticsMessengerIndex := _DiagnosticsMessengerIndex + 1;
 					END_IF
 				END_IF

@@ -13,56 +13,13 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <TabControl DataContext="{Binding TcoIoBeckhoffTests.MAIN._tcc, Mode=OneWay}">
-        <TabItem DataContext="{Binding Device_1}" Header="{Binding AttributeName}">
-            <ScrollViewer >
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <vortex:RenderableContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding _acknowledge}" />
-                    <vortex:RenderableContentControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding  _TcoEthercatDiagnosticsTask._DiagnosticsMessengers.Messengers[0]}" PresentationType="ControlSlim"/>
-                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <vortex:RenderableContentControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding  _TcoEthercatDiagnosticsTask._DiagnosticsMessengers.Messengers[1]}" PresentationType="ControlSlim"/>
-                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <vortex:RenderableContentControl Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding  _TcoEthercatDiagnosticsTask._DiagnosticsMessengers.Messengers[2]}" PresentationType="ControlSlim"/>
-                </Grid>
-            </ScrollViewer>
+    <Grid DataContext="{Binding TcoIoBeckhoffTests.MAIN._tcc, Mode=OneWay}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
+        <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
+    </Grid>
 
-        </TabItem>
-        <TabItem DataContext="{Binding Device_4}" Header="{Binding AttributeName}">
-            <ScrollViewer >
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <vortex:RenderableContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding _acknowledge}" />
-                    <vortex:RenderableContentControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding  _TcoEthercatDiagnosticsTask._DiagnosticsMessengers.Messengers[0]}" PresentationType="ControlSlim"/>
-                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <vortex:RenderableContentControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding  _TcoEthercatDiagnosticsTask._DiagnosticsMessengers.Messengers[1]}" PresentationType="ControlSlim"/>
-                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <vortex:RenderableContentControl Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding  _TcoEthercatDiagnosticsTask._DiagnosticsMessengers.Messengers[2]}" PresentationType="ControlSlim"/>
-                </Grid>
-
-            </ScrollViewer>
-        </TabItem>        
-    </TabControl>
 </Window>

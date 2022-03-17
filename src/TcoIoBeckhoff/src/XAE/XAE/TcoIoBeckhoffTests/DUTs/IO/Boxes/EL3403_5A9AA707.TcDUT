@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3403_5A9AA707" Id="{190881a7-9364-0a22-210c-90c7683c029a}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL3403-0000-0023"}
+{attribute addProperty Id "PM_Inputs_ChannelAT %I*ARRAY[0..12] OF PM_Inputs_Channel_D07DCD53432540PM_Status_dataAT %I*PM_Status_data_F5918FB93240PM_Outputs_ChannelAT %Q*ARRAY[0..2] OF PM_Outputs_Channel_A1108FBB2430WcStateAT %I*WcState_98A4DF7520.250InfoDataAT %I*InfoData_FC4995DF112140"}
+{attribute addProperty CRC "2721004541"}
+{attribute addProperty SizeInBites "602"}
+{attribute addProperty SizeInBytes "75.25"}
+TYPE EL3403_5A9AA707 :
+STRUCT
+	{attribute addProperty Name "PM_Inputs_Channel"}
+	PM_Inputs_Channel : ARRAY[0..12] OF PM_Inputs_Channel_D07DCD53;
+	{attribute addProperty Name "PM_Status_data"}
+	PM_Status_data : PM_Status_data_F5918FB9;
+	{attribute addProperty Name "PM_Outputs_Channel"}
+	PM_Outputs_Channel : ARRAY[0..2] OF PM_Outputs_Channel_A1108FBB;
+	{attribute addProperty Name "WcState"}
+	WcState : WcState_98A4DF75;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_FC4995DF;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

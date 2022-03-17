@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="PM_Outputs_Channel_A1108FBB" Id="{cb18554a-2888-08b4-1fea-16ccb6ba52b4}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL3403-0000-0023"}
+{attribute addProperty Id "IndexAT %Q*USINT81"}
+{attribute addProperty CRC "2702217147"}
+{attribute addProperty SizeInBites "8"}
+{attribute addProperty SizeInBytes "1"}
+TYPE PM_Outputs_Channel_A1108FBB :
+STRUCT
+	{attribute addProperty Name "Index"}
+	Index AT %Q* : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

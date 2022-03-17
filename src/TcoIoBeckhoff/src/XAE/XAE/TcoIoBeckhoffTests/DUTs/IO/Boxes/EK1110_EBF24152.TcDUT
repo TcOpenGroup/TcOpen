@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EK1110_EBF24152" Id="{d50680db-d62d-0342-25bc-fa7dd8e43f5d}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EK1110-0000-0017"}
+{attribute addProperty Id "InfoDataInfoData_FC4995DF11214"}
+{attribute addProperty CRC "3958522194"}
+{attribute addProperty SizeInBites "112"}
+{attribute addProperty SizeInBytes "14"}
+TYPE EK1110_EBF24152 :
+STRUCT
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_FC4995DF;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL6002_CC591D2E" Id="{1989f308-071b-0047-232b-729d6f43a36c}">
+  <DUT Name="EL6002_FE8542D0" Id="{bd26a568-9075-0c33-1e99-60d6f4195c96}">
     <Declaration><![CDATA[{attribute addProperty BoxType "EL6002-0000-0019"}
-{attribute addProperty Id "COM_TxPDO_Map_Inputs_ChannelAT %I*ARRAY[0..23] OF COM_TxPDO_Map_Inputs_Channel_85D1D733384480COM_RxPDO_Map_Outputs_ChannelAT %Q*ARRAY[0..23] OF COM_RxPDO_Map_Outputs_Channel_85BCA431384480WcStateAT %I*WcState_98A4DF7520.250InfoDataAT %I*InfoData_BC63D37F80100"}
-{attribute addProperty CRC "3311090797"}
-{attribute addProperty SizeInBites "850"}
-{attribute addProperty SizeInBytes "106.25"}
-TYPE EL6002_CC591D2E :
+{attribute addProperty Id "COM_TxPDO_Map_Inputs_ChannelAT %I*ARRAY[0..23] OF COM_TxPDO_Map_Inputs_Channel_85D1D733384480COM_RxPDO_Map_Outputs_ChannelAT %Q*ARRAY[0..23] OF COM_RxPDO_Map_Outputs_Channel_85BCA431384480WcStateAT %I*WcState_98A4DF7520.250InfoDataAT %I*InfoData_FC4995DF112140"}
+{attribute addProperty CRC "2383500915"}
+{attribute addProperty SizeInBites "882"}
+{attribute addProperty SizeInBytes "110.25"}
+TYPE EL6002_FE8542D0 :
 STRUCT
 	{attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel"}
 	COM_TxPDO_Map_Inputs_Channel : ARRAY[0..23] OF COM_TxPDO_Map_Inputs_Channel_85D1D733;
@@ -15,7 +15,7 @@ STRUCT
 	{attribute addProperty Name "WcState"}
 	WcState : WcState_98A4DF75;
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_BC63D37F;
+	InfoData : InfoData_FC4995DF;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Diagnostics\EtherCAT\MasterDevice\" />
+    <Page Update="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDeviceServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>
