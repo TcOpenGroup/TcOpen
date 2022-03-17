@@ -4,13 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HmiTemplate.Wpf" 
-        xmlns:mainview="clr-namespace:HmiTemplate.Wpf.Views.MainView"
+        xmlns:mainview="clr-namespace:HmiTemplate.Wpf.Views.MainView" xmlns:vortex="http://vortex.mts/xaml"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <local:MainWindowViewModel></local:MainWindowViewModel>
     </Window.DataContext>
     <Grid>
-        <mainview:MainView />
+        <TabControl>
+            <!--<TabItem>
+                <mainview:MainView />
+            </TabItem>-->
+            <TabItem>
+                <ItemsControl ItemsSource="{Binding Sequencers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <GroupBox Header="{Binding Symbol}">
+                                <StackPanel>
+                                    <vortex:RenderableContentControl DataContext="{Binding _task, Mode=OneWay}" PresentationType="Base"/>
+                                    <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Base"/>
+                                    <vortex:RenderableContentControl DataContext="{Binding _o, Mode=OneWay}" PresentationType="Base"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

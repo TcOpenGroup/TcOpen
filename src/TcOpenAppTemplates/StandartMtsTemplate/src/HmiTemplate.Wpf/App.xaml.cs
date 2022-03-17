@@ -46,10 +46,11 @@ namespace HmiTemplate.Wpf
         {
             repository.OnCreate = (id, data) => { data._Created = DateTime.Now; data._Modified = DateTime.Now; data.qlikId = id; };
             repository.OnUpdate = (id, data) => { data._Modified = DateTime.Now; };
-            processData.InitializeRemoteDataExchange(repository);
+            processData.InitializeRepository(repository);
+            // processData.InitializeRemoteDataExchange(repository);
         }
 
-        public static MainPlc.MainPlcTwinController MainPlc 
+        public static MainPlcTwinController MainPlc 
         {  
             get
             {

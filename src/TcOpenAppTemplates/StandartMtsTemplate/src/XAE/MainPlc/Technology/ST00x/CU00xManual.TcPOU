@@ -6,7 +6,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[IF(THIS^.Execute())THEN
+	;
+END_IF]]></ST>
     </Implementation>
     <Property Name="Station" Id="{400a1f67-80cb-4f9f-a632-be597ac0ffc5}">
       <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>

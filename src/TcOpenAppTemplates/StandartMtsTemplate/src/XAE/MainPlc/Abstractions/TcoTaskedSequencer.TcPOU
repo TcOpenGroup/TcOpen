@@ -3,7 +3,8 @@
   <POU Name="TcoTaskedSequencer" Id="{c1209b3d-cbe5-0fa4-2d35-bd4f0cc6d1e3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTaskedSequencer EXTENDS TcoCore.TcoSequencerBase
 VAR
-	_task : TcoCore.TcoTask(THIS^);
+    _task     : TcoCore.TcoTask(THIS^);
+    _o : TcoCore.TcoSequencerObserver(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -170,8 +171,9 @@ VAR
 	_message : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_task.Execute()) THEN
+        <ST><![CDATA[IF(_task.Execute()) THEN	
 	THIS^.pr_Open();
+	THIS^.Observer := _o;
 	THIS^.Main();
 	THIS^.pr_Close();	
 END_IF;	]]></ST>

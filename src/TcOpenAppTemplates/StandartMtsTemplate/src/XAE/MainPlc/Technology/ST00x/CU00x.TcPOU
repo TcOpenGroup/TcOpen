@@ -3,15 +3,20 @@
   <POU Name="CU00x" Id="{c8fb8f62-fa26-41d3-a5d2-3cc70d4e8555}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS TcoCore.TcoObject
 VAR
-	_processData : CU00xProcessData  := (Parent := THIS^);
-	_components : CU00xComponents := (Parent := THIS^); 
-    _automat : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
-    _group   : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
-    _manual  : CU00xManual(THIS^);
+    _processData : ProcessDataManager(THIS^);
+    _cuData      : REFERENCE TO CU00xProcessData;
+    _components  : CU00xComponents := (Parent := THIS^);
+    _automat     : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
+    _ground      : CU00xGround(THIS^, TcoCore.eRestoreMode.None);
+    _manual      : CU00xManual(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[_processData();
+_ground();
+_automat.Task.Enabled := _ground.Task.Done;
+_automat();
+_manual();]]></ST>
     </Implementation>
     <Property Name="Components" Id="{7133061c-46ce-4913-b91f-5deb41132b8c}">
       <Declaration><![CDATA[PROPERTY Components : REFERENCE TO CU00xComponents]]></Declaration>
@@ -31,6 +36,17 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="ProcessDataManager" Id="{967febbc-2607-43c8-9452-dea493eda308}">
+      <Declaration><![CDATA[PROPERTY ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{85f37d4b-2562-4cca-8cdb-14565cdbf654}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessDataManager REF= _processData;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Technology" Id="{fe5c11e3-6681-4d3e-8213-e01f121b79c9}">
       <Declaration><![CDATA[PROPERTY Technology : REFERENCE TO Technology]]></Declaration>
       <Get Name="Get" Id="{9117850f-5027-4ee2-8c44-2894279299d6}">

@@ -3,7 +3,8 @@
   <POU Name="Technology" Id="{20d051ba-8e3a-4d8b-9fb7-71f6957f3a63}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
 VAR
-	_processSettings :  ProcessDataManager(THIS^);
+    _processSettings : ProcessDataManager(THIS^);
+    _cu00x           : CU00x(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -21,7 +22,7 @@ END_VAR
 ~*)
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_cu00x();]]></ST>
       </Implementation>
     </Method>
     <Property Name="ProcessSettings" Id="{5f876a71-a280-42cf-9f33-fc8ef671f9a2}">

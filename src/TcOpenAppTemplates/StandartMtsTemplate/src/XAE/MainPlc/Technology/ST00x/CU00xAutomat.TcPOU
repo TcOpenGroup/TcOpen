@@ -6,7 +6,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[Run();]]></ST>
     </Implementation>
     <Method Name="Main" Id="{65c64653-c354-4e9f-878f-19a4b135c641}">
       <Declaration><![CDATA[(*~
@@ -20,12 +20,28 @@ END_VAR
 METHOD PROTECTED   Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Step(100, TRUE, 'FIRST STEP')) THEN
+        <ST><![CDATA[IF(Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
+//-------------------------------------
+	Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;	
+//-------------------------------------
+END_IF
+
+IF(Step(200, TRUE, 'LOAD PROCESS SETTING')) THEN
+//-------------------------------------
+  StepCompleteWhen(Station.ProcessDataManager.Create('ABC').Done);	
+//-------------------------------------
+END_IF
+
+IF(Step(RESTORE_STEP_ID, TRUE, 'FIRST RESTORE STEP')) THEN
+//-------------------------------------
 	StepCompleteWhen(TRUE);
+//-------------------------------------	
 END_IF
 
 IF(Step(10000, TRUE, 'LAST STEP')) THEN
+//-------------------------------------
 	CompleteSequence();
+//-------------------------------------	
 END_IF]]></ST>
       </Implementation>
     </Method>

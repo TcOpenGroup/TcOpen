@@ -6,13 +6,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(Step(100, TRUE, 'FIRST STEP')) THEN
-	StepCompleteWhen(TRUE);
-END_IF
-
-IF(Step(10000, TRUE, 'LAST STEP')) THEN
-	_task.DoneWhen(TRUE);
-END_IF]]></ST>
+      <ST><![CDATA[Run();]]></ST>
     </Implementation>
     <Method Name="Main" Id="{0f44b6c1-dae2-4888-a3a0-6a44fd813a80}">
       <Declaration><![CDATA[(*~
@@ -26,7 +20,13 @@ END_IF]]></ST>
 METHOD PROTECTED   Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF(Step(100, TRUE, 'FIRST STEP')) THEN
+	StepCompleteWhen(TRUE);
+END_IF
+
+IF(Step(10000, TRUE, 'LAST STEP')) THEN
+	_task.DoneWhen(TRUE);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Station" Id="{f5f158e7-8f54-483b-8ef9-070bf6fa1248}">

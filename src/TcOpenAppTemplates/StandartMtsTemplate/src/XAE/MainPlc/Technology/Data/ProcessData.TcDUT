@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="ProcessData" Id="{113396d1-0fe0-4862-b140-87fe92cd116d}">
-    <Declaration><![CDATA[TYPE ProcessData EXTENDS TcoData.TcoEntity :
+    <Declaration><![CDATA[{attribute clr [Container(Layout.Tabs)]}
+TYPE ProcessData EXTENDS TcoData.TcoEntity :
 STRUCT
-	{attribute wpf [Container(Layout.Stack)]}
-    {attribute wpf [Group(Layout.GroupBox)]}
+	{attribute clr [Container(Layout.Stack)]}
+    {attribute clr [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#ID#>"}
 	{attribute clr [RenderIgnore()]}	
 	{attribute 'qlik_association_field'}
