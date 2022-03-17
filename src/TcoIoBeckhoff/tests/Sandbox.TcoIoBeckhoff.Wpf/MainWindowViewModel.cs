@@ -1,4 +1,4 @@
-using TcoIoBeckhoff;
+using TcoIoBeckhoffTests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,6 @@ namespace Sandbox.TcoIoBeckhoff.Wpf
         {            
         
         }
-        
-        public TcoIoBeckhoffTwinController TcoIoBeckhoffPlc { get; } = Entry.TcoIoBeckhoffPlc;       
+        public TcoIoBeckhoffTestsTwinController TcoIoBeckhoffTests { get; } = Entry.TcoIoBeckhoffTests;       
     }
 }

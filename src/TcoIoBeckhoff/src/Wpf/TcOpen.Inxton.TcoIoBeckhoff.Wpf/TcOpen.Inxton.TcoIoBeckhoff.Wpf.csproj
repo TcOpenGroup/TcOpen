@@ -22,4 +22,8 @@
     <ProjectReference Include="..\..\TcoIoBeckhoffConnector\TcoIoBeckhoffConnector.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice\" />
+  </ItemGroup>
+
 </Project>

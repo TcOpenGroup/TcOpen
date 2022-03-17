@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="AI_Standard_F16A160D" Id="{565404f8-f8a5-04b9-2443-ca5e51da6b94}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL3011-0000-0020"}
+{attribute addProperty Id "StatusAT %I*Status_F0C7FE3C1621ValueAT %I*INT16217"}
+{attribute addProperty CRC "4050261517"}
+{attribute addProperty SizeInBites "32"}
+{attribute addProperty SizeInBytes "4"}
+TYPE AI_Standard_F16A160D :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : Status_F0C7FE3C;
+	{attribute addProperty Name "Value"}
+	Value AT %I* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

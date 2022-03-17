@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="COM_Inputs_85D1D733" Id="{d90fc265-817e-0edd-3dba-ab7bfde4a614}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL6001-0000-0020"}
+{attribute addProperty Id "StatusAT %I*Status_0CBEDEF81621Data_InAT %I*ARRAY[0 ..21] OF USINT176220"}
+{attribute addProperty CRC "3699519399"}
+{attribute addProperty SizeInBites "192"}
+{attribute addProperty SizeInBytes "24"}
+TYPE COM_Inputs_85D1D733 :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : Status_0CBEDEF8;
+	{attribute addProperty Name "Data_In"}
+	Data_In AT %I* : ARRAY[0 ..21] OF USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

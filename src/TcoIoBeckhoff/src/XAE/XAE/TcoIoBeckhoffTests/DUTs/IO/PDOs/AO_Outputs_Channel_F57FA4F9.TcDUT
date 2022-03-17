@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="AO_Outputs_Channel_F57FA4F9" Id="{28e7bc4e-61ef-0f87-1908-3f7d44fcc887}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL4004-0000-0020"}
+{attribute addProperty Id "Analog_outputAT %Q*INT162"}
+{attribute addProperty CRC "4118783225"}
+{attribute addProperty SizeInBites "16"}
+{attribute addProperty SizeInBytes "2"}
+TYPE AO_Outputs_Channel_F57FA4F9 :
+STRUCT
+	{attribute addProperty Name "Analog_output"}
+	Analog_output AT %Q* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

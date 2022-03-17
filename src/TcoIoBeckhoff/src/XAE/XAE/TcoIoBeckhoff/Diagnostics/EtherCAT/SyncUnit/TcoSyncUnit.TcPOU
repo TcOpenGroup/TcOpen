@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoSyncUnit" Id="{f4f14717-b774-0e82-342f-cbda1f3ba97a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSyncUnit EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoSyncUnit
+VAR
+    {attribute addProperty Name "WcState"}
+    WcState : WcState_28A86775;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_BD06A15F;
+    {attribute addProperty Name "Status"}
+    _State : SyncUnitState;
+    {attribute 'hide'}
+    _hasSomeIssue : BOOL;
+    {attribute 'hide'}
+    _dataValid : BOOL;
+    {attribute 'hide'}
+    _dataInvalid : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="DataInvalid" Id="{230a0d1e-9f37-0355-2782-535eb42517f6}">
+      <Declaration><![CDATA[PROPERTY DataInvalid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1dca9274-52b0-0cd5-042f-67a03ab03a38}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_dataInvalid := WcState.WcState;
+DataInvalid := _dataInvalid;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DataValid" Id="{24a7921d-da2f-04e4-30f8-baec42a9815a}">
+      <Declaration><![CDATA[PROPERTY DataValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f53f1f6d-1245-01b8-2378-526860edab03}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_dataValid := NOT WcState.WcState;
+DataValid := _dataValid;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HasSomeIssue" Id="{80ebc04c-c6cb-0937-1d27-aa7801f8cfa3}">
+      <Declaration><![CDATA[PROPERTY HasSomeIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{86537c5b-5cee-0eed-152f-0f44ef2593d5}">
+        <Declaration><![CDATA[VAR
+	_syncUnitStatus : SyncUnitState;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_syncUnitStatus := State;
+
+_hasSomeIssue := _syncUnitStatus.AtLeastOneSlaveInInitState OR
+			_syncUnitStatus.AtLeastOneSlaveInPreopState OR
+			_syncUnitStatus.AtLeastOneSlaveInBootState OR
+			_syncUnitStatus.AtLeastOneSlaveInSafeOpState OR
+			_syncUnitStatus.AtLeastOneSlaveSignalsError OR
+			_syncUnitStatus.InvalidVendoridOrProductcodeRead OR
+			_syncUnitStatus.InitializationErrorOccurred OR
+			_syncUnitStatus.AtLeastOneSlaveNotPresent OR
+			_syncUnitStatus.AtLeastOneSlaveSignalsLinkError OR
+			_syncUnitStatus.AtLeastOneSlaveSignalsMissingLink OR
+			_syncUnitStatus.AtLeastOneSlaveSignalsUnexpectedLink;
+	
+HasSomeIssue := _hasSomeIssue;
+
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="State" Id="{7d2a5653-9265-0fa6-0d13-6d88033e2d06}">
+      <Declaration><![CDATA[PROPERTY State : SyncUnitState]]></Declaration>
+      <Get Name="Get" Id="{b39f15dd-1185-0fbb-2f46-4db5714488a4}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_State.AtLeastOneSlaveInInitState := InfoData.State.0 AND NOT InfoData.State.1;
+_State.AtLeastOneSlaveInPreopState := InfoData.State.0 AND InfoData.State.1;
+_State.AtLeastOneSlaveInBootState := InfoData.State.0 AND InfoData.State.1;
+_State.AtLeastOneSlaveInSafeOpState := InfoData.State.2;
+_State.AtLeastOneSlaveInOpState := InfoData.State.3;
+_State.AtLeastOneSlaveSignalsError := InfoData.State.4;
+_State.InvalidVendoridOrProductcodeRead := InfoData.State.5;
+_State.InitializationErrorOccurred := InfoData.State.6;
+_State.AtLeastOneSlaveDisabled := InfoData.State.7;
+_State.AtLeastOneSlaveNotPresent := InfoData.State.8;
+_State.AtLeastOneSlaveSignalsLinkError := InfoData.State.9;
+_State.AtLeastOneSlaveSignalsMissingLink := InfoData.State.10;
+_State.AtLeastOneSlaveSignalsUnexpectedLink := InfoData.State.11;
+
+State := _State;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

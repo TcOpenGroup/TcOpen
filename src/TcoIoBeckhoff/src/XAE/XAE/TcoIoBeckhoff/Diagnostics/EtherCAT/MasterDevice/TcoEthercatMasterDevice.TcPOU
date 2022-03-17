@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoEthercatMasterDevice" Id="{2c5733bf-b0c9-0df1-398a-03fa7f389f8e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoEthercatMasterDevice EXTENDS TcoComponent IMPLEMENTS ITcoEthercatMasterDevice
+VAR_INPUT
+    Inputs   		:	Inputs_5FC39E3C;
+    InfoData		:	InfoData_45F98C50;
+	SyncUnits		:	POINTER TO SyncUnitTask_B4157F22;
+	SyncUnitsSize	:	UINT;
+END_VAR
+
+VAR
+    _someSyncUnitHasSomeIssue	: BOOL;
+    _allDataValid          		: BOOL;
+    _someDataInvalid       		: BOOL;
+    _State                		: TcoEthercatMasterDeviceState;
+    _NetId                 		: Tc2_System.T_AmsNetID;
+    _DeviceHasSomeIssue    		: BOOL;
+    _TcoEthercatDiagnosticsTask	: TcoEthercatDiagnosticsTask(THIS^);
+
+    _InfoDataChangeCountPV 		: UINT;
+
+	_numberOfSyncUnits			: UINT;
+
+	{attribute addProperty Name "Acknowledge"}
+	_acknowledge				:	TcoCore.TcoTask(THIS^);
+	
+	_DiagnosticsAvailable : BOOL;
+END_VAR
+VAR_OUTPUT
+    Outputs  : Outputs_C46FA7B3;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[UpdateSyncUnitsStatus(SyncUnits,SyncUnitsSize);
+Diagnostics();
+
+
+]]></ST>
+    </Implementation>
+    <Property Name="AllDataValid" Id="{0a087200-a53d-0df6-151d-99c7b8fb4585}">
+      <Declaration><![CDATA[PROPERTY AllDataValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{44accabf-6dc2-0c49-0079-7deb6cfe5ea6}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AllDataValid := _allDataValid;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DeviceHasSomeIssue" Id="{d92bb7ed-2dfd-0ccf-05e1-825ee624f64e}">
+      <Declaration><![CDATA[PROPERTY DeviceHasSomeIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{248c438b-c2f4-0eff-096d-6a37651e4620}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_DeviceHasSomeIssue		:=	_State.LinkError							 	OR
+							_State.IOLockedAfterLinkError 					OR
+							_State.LinkErrorRedundancyAdapter	 			OR
+							_State.MissingOneFrame 							OR
+							_State.OutOfSendResources 						OR
+							_State.WatchdogTriggered 						OR
+							_State.EthernetDriverNotFound 					OR
+							_State.IOResetActive 							OR
+							_State.AtLeastOneDeviceInInitState 				OR
+							_State.AtLeastOneDeviceInPreOpState 			OR
+							_State.AtLeastOneDeviceInSafeOpState 			OR
+							_State.AtLeastOneDeviceIndicatesAnErrorState 	OR
+							_State.DcNotInSync 								;
+							
+DeviceHasSomeIssue := _DeviceHasSomeIssue;						]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Diagnostics" Id="{fb3f5859-587b-09e0-1a47-fcd102657d2c}">
+      <Declaration><![CDATA[METHOD Diagnostics
+VAR
+    _i : UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_NetId := Tc2_System.F_CreateAmsNetId(InfoData.AmsNetId);
+
+_TcoEthercatDiagnosticsTask(inNetId := _NetId, outDiagnosticsAvailable => _DiagnosticsAvailable);
+
+Service();
+
+IF _acknowledge.Execute() THEN
+	Restore();	
+END_IF
+
+IF (DeviceHasSomeIssue OR SomeSyncUnitHasSomeIssue OR SomeDataInvalid OR _InfoDataChangeCountPV <> InfoData.ChangeCount) (*OR _manualDiagnosticStart.Execute()*) THEN
+	IF _TcoEthercatDiagnosticsTask.Ready THEN
+		_InfoDataChangeCountPV := InfoData.ChangeCount;
+		_TcoEthercatDiagnosticsTask.Invoke();
+	END_IF
+	IF _TcoEthercatDiagnosticsTask.Done AND NOT _DiagnosticsAvailable THEN
+		_TcoEthercatDiagnosticsTask.Restore();
+	END_IF;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{1f3f21f3-3927-05fa-3e68-d519f92b8ad6}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Messenger.Clear();
+THIS^._DiagnosticsAvailable := FALSE;
+THIS^._acknowledge.Restore();
+THIS^._TcoEthercatDiagnosticsTask.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{cf7b333b-7329-06db-0dfd-8157e793c5ef}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_acknowledge();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SomeDataInvalid" Id="{9e9acc26-8049-0409-1704-f7624e80bb37}">
+      <Declaration><![CDATA[PROPERTY SomeDataInvalid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c8af2711-4acd-09c1-2b9e-f24056a9dd45}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SomeDataInvalid := _someDataInvalid;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="SomeSyncUnitHasSomeIssue" Id="{df1d4159-3a82-004d-0ea5-d7d14a4980e4}">
+      <Declaration><![CDATA[PROPERTY SomeSyncUnitHasSomeIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{17649207-cbd7-0b3b-3219-4713dac0be5c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SomeSyncUnitHasSomeIssue := _someSyncUnitHasSomeIssue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="State" Id="{78285bf9-3768-06a6-24e4-252d28232b6c}">
+      <Declaration><![CDATA[PROPERTY State : TcoEthercatMasterDeviceState]]></Declaration>
+      <Get Name="Get" Id="{36a432bc-70f8-0b72-0752-1d9e3e837926}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_State.LinkError							 	:= Inputs.DevState.0;
+_State.IOLockedAfterLinkError 					:= Inputs.DevState.1;
+_State.LinkErrorRedundancyAdapter	 			:= Inputs.DevState.2;
+_State.MissingOneFrame 							:= Inputs.DevState.3;
+_State.OutOfSendResources 						:= Inputs.DevState.4;
+_State.WatchdogTriggered 						:= Inputs.DevState.5;
+_State.EthernetDriverNotFound 					:= Inputs.DevState.6;
+_State.IOResetActive 							:= Inputs.DevState.7;
+_State.AtLeastOneDeviceInInitState 				:= Inputs.DevState.8;
+_State.AtLeastOneDeviceInPreOpState 			:= Inputs.DevState.9;
+_State.AtLeastOneDeviceInSafeOpState 			:= Inputs.DevState.10;
+_State.AtLeastOneDeviceIndicatesAnErrorState 	:= Inputs.DevState.11;
+_State.DcNotInSync 								:= Inputs.DevState.12;
+
+State := _State;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SyncUnitHasSomeIssue" Id="{98457e9c-54cb-0096-3a97-52a239cea709}">
+      <Declaration><![CDATA[METHOD SyncUnitHasSomeIssue : BOOL
+VAR_INPUT
+	inState : UINT;
+END_VAR
+VAR
+	_state : SyncUnitState;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_state.AtLeastOneSlaveInInitState 				:=	inState.0 AND NOT	inState.1;
+_state.AtLeastOneSlaveInPreopState 				:=	inState.0 AND 		inState.1;
+_state.AtLeastOneSlaveInBootState 				:=	inState.0 AND		inState.1;
+_state.AtLeastOneSlaveInSafeOpState 			:=	inState.2;
+_state.AtLeastOneSlaveInOpState 				:=	inState.3;
+_state.AtLeastOneSlaveSignalsError 				:=	inState.4;
+_state.InvalidVendoridOrProductcodeRead 		:=	inState.5;
+_state.InitializationErrorOccurred				:=	inState.6;
+_state.AtLeastOneSlaveDisabled					:=	inState.7;
+_state.AtLeastOneSlaveNotPresent				:=	inState.8;
+_state.AtLeastOneSlaveSignalsLinkError			:=	inState.9;
+_state.AtLeastOneSlaveSignalsMissingLink		:=	inState.10;
+_state.AtLeastOneSlaveSignalsUnexpectedLink		:=	inState.11;
+
+SyncUnitHasSomeIssue :=	_state.AtLeastOneSlaveInInitState OR
+						_state.AtLeastOneSlaveInPreopState OR
+						_state.AtLeastOneSlaveInBootState OR
+						_state.AtLeastOneSlaveInSafeOpState OR
+						_state.AtLeastOneSlaveSignalsError OR
+						_state.InvalidVendoridOrProductcodeRead OR
+						_state.InitializationErrorOccurred OR
+						_state.AtLeastOneSlaveNotPresent OR
+						_state.AtLeastOneSlaveSignalsLinkError OR
+						_state.AtLeastOneSlaveSignalsMissingLink OR
+						_state.AtLeastOneSlaveSignalsUnexpectedLink;
+	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateSyncUnitsStatus" Id="{b79c3bb4-6046-0a3d-3133-c7754b8cddb5}">
+      <Declaration><![CDATA[METHOD UpdateSyncUnitsStatus
+VAR_INPUT
+	SyncUnits			:	POINTER TO SyncUnitTask_B4157F22;
+	SyncUnitsSize		:	UINT;
+END_VAR
+VAR
+    _i					:	UINT;
+	_pSyncUnit			:	POINTER TO SyncUnitTask_B4157F22;
+	_SyncUnit			:	SyncUnitTask_B4157F22;
+	_SyncUnitState		:	UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_someSyncUnitHasSomeIssue := FALSE;
+_allDataValid := TRUE;
+_someDataInvalid := FALSE;
+
+IF SyncUnits<>0 THEN
+	_numberOfSyncUnits := SyncUnitsSize / SIZEOF(SyncUnitTask_B4157F22);
+	FOR _i := 0 TO _numberOfSyncUnits - 1 DO
+		_pSyncUnit					:=	SyncUnits + _i * SIZEOF(SyncUnitTask_B4157F22);
+		_SyncUnit					:=	_pSyncUnit^;	
+		_someSyncUnitHasSomeIssue 	:=	_someSyncUnitHasSomeIssue OR SyncUnitHasSomeIssue(_SyncUnit.InfoData.State);
+		_allDataValid				:=	_allDataValid AND NOT _SyncUnit.WcState.WcState;
+		_someDataInvalid			:=	_someDataInvalid OR _SyncUnit.WcState.WcState;
+	END_FOR
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="tcc" Id="{e080c9bb-bd0c-0413-089e-5010da0ed8e6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK tcc EXTENDS TcoCore.TcoContext
+VAR
+	{attribute addProperty Name "Device 1 (EtherCAT)"}
+	Device_1 : TcoIoBeckhoff.TcoEthercatMasterDevice(THIS^);
+	{attribute addProperty Name "Device 4 (EtherCAT)"}
+	Device_4 : TcoIoBeckhoff.TcoEthercatMasterDevice(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cae54242-7157-0c7b-3a57-550e091f822a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Device_1(	Inputs			:=			GVL_iXlinker.Device_1_EtherCAT.Inputs,
+			InfoData		:=			GVL_iXlinker.Device_1_EtherCAT.InfoData,
+			SyncUnits		:= ADR(		GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
+			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_1_EtherCAT.SyncUnits));	
+
+			
+			
+Device_4(	Inputs			:=			GVL_iXlinker.Device_4_EtherCAT.Inputs,
+			InfoData		:=			GVL_iXlinker.Device_4_EtherCAT.InfoData,
+			SyncUnits		:= ADR(		GVL_iXlinker.Device_4_EtherCAT.SyncUnits),
+			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_4_EtherCAT.SyncUnits));	
+			
+			
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

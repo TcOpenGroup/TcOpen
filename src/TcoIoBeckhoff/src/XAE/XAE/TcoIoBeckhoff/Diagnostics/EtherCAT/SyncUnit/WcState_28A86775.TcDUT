@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="WcState_28A86775" Id="{016fca49-dfe0-05a1-22f6-c1421b8d7d10}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL2809-0000-0018"}
+{attribute addProperty Id "WcStateAT %I*BIT10.1250"}
+{attribute addProperty CRC "682125173"}
+{attribute addProperty SizeInBites "1"}
+{attribute addProperty SizeInBytes "0.125"}
+TYPE WcState_28A86775 :
+STRUCT
+	{attribute addProperty Name "WcState"}
+	WcState AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

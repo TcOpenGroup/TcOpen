@@ -34,6 +34,55 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_45F98C50.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Inputs_5FC39E3C.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Messenger\DiagnosticsMessenger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Messenger\DiagnosticsMessengers.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Outputs_C46FA7B3.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatDiagnosticsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDeviceState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\ITcoEthercatMasterDevice.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDevice.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitTask_B4157F22.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\TcoSyncUnit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\InfoData_BD06A15F.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\ITcoSyncUnit.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\WcState_28A86775.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\TcoEthercat.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -42,9 +91,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Diagnostics" />
+    <Folder Include="Diagnostics\EtherCAT" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />
+    <Folder Include="Diagnostics\EtherCAT\SyncUnit" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_EtherCAT">
+      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_EtherCAT</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>

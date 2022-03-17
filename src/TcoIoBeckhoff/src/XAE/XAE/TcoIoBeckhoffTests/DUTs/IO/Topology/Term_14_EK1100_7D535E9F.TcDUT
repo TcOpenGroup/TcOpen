@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Term_14_EK1100_7D535E9F" Id="{3304c919-fbd6-08a7-0239-871d3d328875}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "Term_15_EL3174_0002EL3174_B7B5302521026.25TotuKartuSomPridal_EL6001EL6001_5749258146658.25Term_18_EL3011EL3011_79E8C96E11414.25"}
+{attribute addProperty CRC "2102615711"}
+{attribute addProperty SizeInBites "790"}
+{attribute addProperty SizeInBytes "98.75"}
+TYPE Term_14_EK1100_7D535E9F EXTENDS EK1100_179A0949 :
+STRUCT
+	{attribute addProperty Name "Term_15_EL3174_0002"}
+	Term_15_EL3174_0002 : EL3174_B7B53025;
+	{attribute addProperty Name "TotuKartuSomPridal_EL6001"}
+	TotuKartuSomPridal_EL6001 : EL6001_57492581;
+	{attribute addProperty Name "Term_18_EL3011"}
+	Term_18_EL3011 : EL3011_79E8C96E;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

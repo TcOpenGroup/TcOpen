@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Ctrl_9717E367" Id="{8eb491c4-8a99-0506-222f-589a3259d99b}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL6002-0000-0019"}
+{attribute addProperty Id "Transmit_requestBIT10.1251Receive_acceptedBIT10.1252Init_requestBIT10.1253Send_continuousBIT10.1254Output_lengthUSINT819"}
+{attribute addProperty CRC "2534925159"}
+{attribute addProperty SizeInBites "16"}
+{attribute addProperty SizeInBytes "2"}
+TYPE Ctrl_9717E367 :
+STRUCT
+	{attribute addProperty Name "Transmit_request"}
+	Transmit_request : BOOL;
+	{attribute addProperty Name "Receive_accepted"}
+	Receive_accepted : BOOL;
+	{attribute addProperty Name "Init_request"}
+	Init_request : BOOL;
+	{attribute addProperty Name "Send_continuous"}
+	Send_continuous : BOOL;
+	{attribute 'hide'}
+	reserve_1_BIT_0 : BOOL;
+	{attribute 'hide'}
+	reserve_1_BIT_1 : BOOL;
+	{attribute 'hide'}
+	reserve_1_BIT_2 : BOOL;
+	{attribute 'hide'}
+	reserve_1_BIT_3 : BOOL;
+	{attribute addProperty Name "Output_length"}
+	Output_length : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

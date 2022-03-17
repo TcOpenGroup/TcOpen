@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoSyncUnit" Id="{c1b89f76-922c-088d-334c-ef80de38bd6f}">
+    <Declaration><![CDATA[INTERFACE ITcoSyncUnit
+]]></Declaration>
+    <Property Name="DataInvalid" Id="{bbc3ff26-73c9-0418-3842-defd4a48f483}">
+      <Declaration><![CDATA[PROPERTY DataInvalid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6f0ddb17-4b82-0639-16ec-779db907ab1e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="DataValid" Id="{ae325923-0c82-09dc-32de-eed0138c389b}">
+      <Declaration><![CDATA[PROPERTY DataValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f4e5e7ab-dc12-028c-2002-4947562258b6}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="HasSomeIssue" Id="{dd8ca02c-dd6a-01a2-243d-537f2629f408}">
+      <Declaration><![CDATA[PROPERTY HasSomeIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{adcd6f78-6310-0e9e-33e9-98cc5e4eb673}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="State" Id="{572e58cc-87a0-0880-0b2b-92ab534973c4}">
+      <Declaration><![CDATA[PROPERTY State : SyncUnitState]]></Declaration>
+      <Get Name="Get" Id="{b08ac7bf-dabc-0f62-14d7-61c94010bd7a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

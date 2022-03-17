@@ -1,4 +1,4 @@
-using TcoIoBeckhoff;
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TcoIoBeckhoffTests;
 
 namespace Sandbox.TcoIoBeckhoff.Wpf
 {
@@ -20,7 +21,7 @@ namespace Sandbox.TcoIoBeckhoff.Wpf
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             
-            Entry.TcoIoBeckhoffPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+            Entry.TcoIoBeckhoffTests.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
         }
     }
 }
