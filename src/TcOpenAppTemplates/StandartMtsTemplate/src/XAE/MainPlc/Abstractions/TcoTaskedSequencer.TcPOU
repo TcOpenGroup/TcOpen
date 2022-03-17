@@ -3,8 +3,8 @@
   <POU Name="TcoTaskedSequencer" Id="{c1209b3d-cbe5-0fa4-2d35-bd4f0cc6d1e3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTaskedSequencer EXTENDS TcoCore.TcoSequencerBase
 VAR
-    _task     : TcoCore.TcoTask(THIS^);
-    _o : TcoCore.TcoSequencerObserver(THIS^);
+    _task : TcoCore.TcoTask(THIS^);
+    _o    : TcoCore.TcoSequencerObserver(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -21,7 +21,6 @@ END_VAR]]></Declaration>
 	</docu>	
 ~*)
 METHOD PROTECTED FINAL CompleteSequence
-
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[i_CompleteSequence();]]></ST>
@@ -52,7 +51,7 @@ METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED ABSTRACT  Main : BOOL
+METHOD PROTECTED ABSTRACT Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -85,7 +84,7 @@ _restoringSequence := FALSE;]]></ST>
     <Method Name="pr_Open" Id="{8c53ec29-7192-431b-a895-8408067229d4}">
       <Declaration><![CDATA[METHOD pr_Open
 VAR
-	_message : STRING(255);
+    _message : STRING(255);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -139,17 +138,17 @@ _lastOpeningCycle := Context.StartCycleCount;
 ~*)
 METHOD PROTECTED FINAL RequestStep : ITcoSequencer
 VAR_INPUT
-	(*~
+    (*~
 		<docu>
 			<summary>
 				StepId of the step to be executed.
 			</summary>
 		</docu>
 	~*)
-	inRequestedStepID : INT := MinStepID-1;
+    inRequestedStepID : INT := MinStepID - 1;
 END_VAR
 VAR
-	_message : STRING(254);
+    _message : STRING(254);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[RequestStep := i_RequestStep(inRequestedStepID := inRequestedStepID);]]></ST>
@@ -168,21 +167,21 @@ END_VAR]]></Declaration>
 ~*)
 METHOD PUBLIC FINAL Run
 VAR
-	_message : STRING;
+    _message : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_task.Execute()) THEN	
-	THIS^.pr_Open();
-	THIS^.Observer := _o;
-	THIS^.Main();
-	THIS^.pr_Close();	
-END_IF;	]]></ST>
+        <ST><![CDATA[IF (_task.Execute()) THEN
+    THIS^.pr_Open();
+    THIS^.Observer := _o;
+    THIS^.Main();
+    THIS^.pr_Close();
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Step" Id="{c3c5f2f3-742a-0ae5-3d6d-5a15b5bc9906}">
       <Declaration><![CDATA[METHOD PROTECTED Step : BOOL
 VAR_INPUT
-(*~
+    (*~
 	<docu>
 		<summary>
 			StepId of the current step.
@@ -195,24 +194,24 @@ VAR_INPUT
 		</summary>		
 	</docu>	
 ~*)
-	inStepID				: 	INT;
-(*~
+    inStepID : INT;
+    (*~
 	<docu>
 		<summary>
 			If this value is false, step body is not executed and execution is moved to the next enabled step.
 		</summary>				
 	</docu>	
 ~*)
-	inEnabled				: 	BOOL;
-(*~
+    inEnabled : BOOL;
+    (*~
 	<docu>
 		<summary>
 			Step description text.
 		</summary>				
 	</docu>	
 ~*)
-	inStepDescription		: 	STRING(254);
-END_VAR	
+    inStepDescription : STRING(254);
+END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Step := i_Step(inStepID := inStepID, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
@@ -227,21 +226,20 @@ END_VAR
 		</summary>			
 	</docu>	
 ~*)
-METHOD PROTECTED FINAL StepCompleteWhen 
+METHOD PROTECTED FINAL StepCompleteWhen
 VAR_INPUT
-(*~
+    (*~
 	<docu>
 		<summary>
 			The condition under which the step is completed.
 		</summary>			
 	</docu>	
 ~*)
-	inCondition : BOOL;
+    inCondition : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[i_StepCompleteWhen(inCondition := inCondition);
-
 ]]></ST>
       </Implementation>
     </Method>

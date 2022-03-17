@@ -1,23 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00x" Id="{c8fb8f62-fa26-41d3-a5d2-3cc70d4e8555}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS TcoCore.TcoObject
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS TcoCore.TcoObject IMPLEMENTS ICuBase
 VAR
-    _processData : ProcessDataManager(THIS^);
     _cuData      : REFERENCE TO CU00xProcessData;
+    _processData : ProcessDataManager(THIS^);
     _components  : CU00xComponents := (Parent := THIS^);
     _automat     : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
     _ground      : CU00xGround(THIS^, TcoCore.eRestoreMode.None);
-    _manual      : CU00xManual(THIS^);
+    _manual      : CU00xManual(THIS^, TcoCore.eRestoreMode.None);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_processData();
-_ground();
-_automat.Task.Enabled := _ground.Task.Done;
 _automat();
-_manual();]]></ST>
+_ground();
+_manual();
+]]></ST>
     </Implementation>
+    <Property Name="Automat" Id="{395ce4fa-38ae-46a5-9c91-86a9f1bcbbc2}">
+      <Declaration><![CDATA[PROPERTY Automat : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{ca2cc00e-064b-48f3-a4fa-26832ebfc11a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Automat REF= _automat.Task;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Components" Id="{7133061c-46ce-4913-b91f-5deb41132b8c}">
       <Declaration><![CDATA[PROPERTY Components : REFERENCE TO CU00xComponents]]></Declaration>
       <Get Name="Get" Id="{d34691d4-caf0-4f1c-9ccf-b26a123c3f8f}">
@@ -29,6 +40,17 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="Ground" Id="{49f8c54b-7096-4ee9-be7f-1b5b62c4c097}">
+      <Declaration><![CDATA[PROPERTY Ground : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{8480f5d4-4535-49b0-b4be-60aa7bf89b76}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Ground REF= _automat.Task;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="InitializeComponents" Id="{5a5fba3f-8ac9-4756-a6a5-163b8c66ad67}">
       <Declaration><![CDATA[METHOD InitializeComponents : BOOL
 ]]></Declaration>
@@ -36,9 +58,20 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="ProcessDataManager" Id="{967febbc-2607-43c8-9452-dea493eda308}">
+    <Property Name="Manual" Id="{3362f8a1-5828-47e8-a58f-b7a215df59dc}">
+      <Declaration><![CDATA[PROPERTY Manual : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{e78cfa35-d5c6-462d-8720-3fee9ea9f425}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Manual REF= _manual.Task;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProcessDataManager" Id="{9c871fab-0088-44ca-b24f-778dec392de1}">
       <Declaration><![CDATA[PROPERTY ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
-      <Get Name="Get" Id="{85f37d4b-2562-4cca-8cdb-14565cdbf654}">
+      <Get Name="Get" Id="{95b32202-bc09-4e9e-9cf9-08fc5dcf9bf8}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -47,16 +80,16 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="Technology" Id="{fe5c11e3-6681-4d3e-8213-e01f121b79c9}">
+    <Property Name="Technology" Id="{0e688a71-683a-45e9-ad1b-4b5b04f7d71e}">
       <Declaration><![CDATA[PROPERTY Technology : REFERENCE TO Technology]]></Declaration>
-      <Get Name="Get" Id="{9117850f-5027-4ee2-8c44-2894279299d6}">
+      <Get Name="Get" Id="{6127ba68-461c-4b3d-aa46-b1cbb1962cc4}">
         <Declaration><![CDATA[VAR
     _technology : POINTER TO Technology;
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent,_technology) THEN // Check if _Parent is Station001
-	Technology REF= _technology^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _technology) THEN // Check if _Parent is Station001
+    Technology REF= _technology^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>
       </Get>

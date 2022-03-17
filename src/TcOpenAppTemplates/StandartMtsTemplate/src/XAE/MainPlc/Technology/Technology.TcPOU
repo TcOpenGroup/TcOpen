@@ -20,7 +20,7 @@ END_VAR
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_cu00x();]]></ST>
       </Implementation>
@@ -36,5 +36,14 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="Serve" Id="{eaedade0-0217-4718-adac-7921b4483f32}">
+      <Declaration><![CDATA[METHOD Serve
+VAR
+	Cu : ICUBase;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

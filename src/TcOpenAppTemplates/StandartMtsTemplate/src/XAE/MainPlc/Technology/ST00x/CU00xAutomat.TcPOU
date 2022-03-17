@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00xAutomat" Id="{7d4ccf14-fbfb-4c7b-8fab-cda3fabc0370}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00xAutomat EXTENDS TcoTaskedSequencer
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xAutomat EXTENDS TcoTaskedSequencer IMPLEMENTS ICUTask
 VAR
 END_VAR
 ]]></Declaration>
@@ -17,31 +17,31 @@ END_VAR
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED   Main : BOOL
+METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
-//-------------------------------------
-	Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;	
-//-------------------------------------
+        <ST><![CDATA[IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
+    //-------------------------------------
+    Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;
+    //-------------------------------------
 END_IF
 
-IF(Step(200, TRUE, 'LOAD PROCESS SETTING')) THEN
-//-------------------------------------
-  StepCompleteWhen(Station.ProcessDataManager.Create('ABC').Done);	
-//-------------------------------------
+IF (Step(200, TRUE, 'LOAD PROCESS SETTING')) THEN
+    //-------------------------------------
+    StepCompleteWhen(Station.ProcessDataManager.Create('ABC').Done);
+    //-------------------------------------
 END_IF
 
-IF(Step(RESTORE_STEP_ID, TRUE, 'FIRST RESTORE STEP')) THEN
-//-------------------------------------
-	StepCompleteWhen(TRUE);
-//-------------------------------------	
+IF (Step(RESTORE_STEP_ID, TRUE, 'FIRST RESTORE STEP')) THEN
+    //-------------------------------------
+    StepCompleteWhen(TRUE);
+    //-------------------------------------	
 END_IF
 
-IF(Step(10000, TRUE, 'LAST STEP')) THEN
-//-------------------------------------
-	CompleteSequence();
-//-------------------------------------	
+IF (Step(10000, TRUE, 'LAST STEP')) THEN
+    //-------------------------------------
+    CompleteSequence();
+    //-------------------------------------	
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -53,8 +53,8 @@ END_IF]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
-	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
+    Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>
       </Get>

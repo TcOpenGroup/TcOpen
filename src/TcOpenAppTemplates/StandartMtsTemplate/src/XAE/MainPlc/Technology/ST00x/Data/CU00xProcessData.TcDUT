@@ -3,10 +3,11 @@
   <DUT Name="CU00xProcessData" Id="{3cde27d5-efc5-4d61-b268-7d32d11d85fc}">
     <Declaration><![CDATA[{attribute clr [Container(Layout.Stack)]}
 {attribute clr [Group(Layout.Scroll)]}
-TYPE CU00xProcessData EXTENDS TcoCore.TcoStruct :
-STRUCT
-	BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);
-END_STRUCT
+TYPE
+    CU00xProcessData EXTENDS TcoCore.TcoStruct :
+    STRUCT
+        BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);
+    END_STRUCT
 END_TYPE
 ]]></Declaration>
   </DUT>

@@ -3,7 +3,7 @@
   <POU Name="ProcessDataManager" Id="{2c1ab05b-163f-4701-a4e6-85eef79998c1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ProcessDataManager EXTENDS TcoData.TcoDataExchange
 VAR
-	_data : ProcessData := (Parent := THIS^);
+    _data : ProcessData := (Parent := THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>

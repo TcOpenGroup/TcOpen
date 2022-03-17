@@ -1,15 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00xManual" Id="{4da1dfbc-4c0a-47a8-95b6-4f0ca8024493}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManual EXTENDS TcoCore.TcoTask
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManual EXTENDS TcoTaskedSequencer IMPLEMENTS ICUTask
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(THIS^.Execute())THEN
-	;
-END_IF]]></ST>
+      <ST><![CDATA[Run();]]></ST>
     </Implementation>
+    <Method Name="Main" Id="{b59a2119-19eb-4289-9c0b-227b833546df}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Station" Id="{400a1f67-80cb-4f9f-a632-be597ac0ffc5}">
       <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>
       <Get Name="Get" Id="{e3aceaef-61ff-438d-83cd-a8c6edd964ba}">
@@ -18,8 +31,8 @@ END_IF]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
-	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
+    Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>
       </Get>

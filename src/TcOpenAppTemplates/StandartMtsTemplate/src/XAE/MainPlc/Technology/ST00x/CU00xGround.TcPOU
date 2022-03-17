@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00xGround" Id="{ea798b9b-c255-4bc1-bc0e-66e2dbced7d9}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00xGround EXTENDS TcoTaskedSequencer
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xGround EXTENDS TcoTaskedSequencer IMPLEMENTS ICUTask
 VAR
 END_VAR
 ]]></Declaration>
@@ -17,15 +17,17 @@ END_VAR
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED   Main : BOOL
+METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Step(100, TRUE, 'FIRST STEP')) THEN
-	StepCompleteWhen(TRUE);
+        <ST><![CDATA[IF (Step(100, TRUE, 'STOPPING OTHER MODES')) THEN
+	Station.Automat.Restore();
+	Station.Manual.Restore();
+    CompleteStep();
 END_IF
 
-IF(Step(10000, TRUE, 'LAST STEP')) THEN
-	_task.DoneWhen(TRUE);
+IF (Step(10000, TRUE, 'LAST STEP')) THEN
+    _task.DoneWhen(TRUE);
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -37,8 +39,8 @@ END_IF]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
-	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
+    Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>
       </Get>
