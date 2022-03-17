@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="TcOpen.Inxton.MongoDb" Version="0.5.0-alpha.822" />
+    <PackageReference Include="TcOpen.TcoCoreConnector" Version="0.5.0-alpha.822" />
+    <PackageReference Include="TcOpen.TcoInspectorsConnector" Version="0.5.0-alpha.822" />
+    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.5.0-alpha.822" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Localizations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Localizations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Localizations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Technology" Id="{20d051ba-8e3a-4d8b-9fb7-71f6957f3a63}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
+VAR
+	_processSettings :  ProcessDataManager(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{d1d0e200-21d1-4642-b4c8-2fd801b60f39}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ProcessSettings" Id="{5f876a71-a280-42cf-9f33-fc8ef671f9a2}">
+      <Declaration><![CDATA[PROPERTY ProcessSettings : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{4cb3435a-d869-4802-9d86-6466a1c918f7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessSettings REF= _processSettings;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

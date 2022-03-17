@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="CU00xManual" Id="{4da1dfbc-4c0a-47a8-95b6-4f0ca8024493}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManual EXTENDS TcoCore.TcoTask
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Station" Id="{400a1f67-80cb-4f9f-a632-be597ac0ffc5}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>
+      <Get Name="Get" Id="{e3aceaef-61ff-438d-83cd-a8c6edd964ba}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO CU00x;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
+	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

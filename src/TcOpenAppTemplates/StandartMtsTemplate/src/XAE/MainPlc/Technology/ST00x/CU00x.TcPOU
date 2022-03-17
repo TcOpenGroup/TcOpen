@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="CU00x" Id="{c8fb8f62-fa26-41d3-a5d2-3cc70d4e8555}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS TcoCore.TcoObject
+VAR
+	_processData : CU00xProcessData  := (Parent := THIS^);
+	_components : CU00xComponents := (Parent := THIS^); 
+    _automat : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
+    _group   : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
+    _manual  : CU00xManual(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Components" Id="{7133061c-46ce-4913-b91f-5deb41132b8c}">
+      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO CU00xComponents]]></Declaration>
+      <Get Name="Get" Id="{d34691d4-caf0-4f1c-9ccf-b26a123c3f8f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="InitializeComponents" Id="{5a5fba3f-8ac9-4756-a6a5-163b8c66ad67}">
+      <Declaration><![CDATA[METHOD InitializeComponents : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Technology" Id="{fe5c11e3-6681-4d3e-8213-e01f121b79c9}">
+      <Declaration><![CDATA[PROPERTY Technology : REFERENCE TO Technology]]></Declaration>
+      <Get Name="Get" Id="{9117850f-5027-4ee2-8c44-2894279299d6}">
+        <Declaration><![CDATA[VAR
+    _technology : POINTER TO Technology;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent,_technology) THEN // Check if _Parent is Station001
+	Technology REF= _technology^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
