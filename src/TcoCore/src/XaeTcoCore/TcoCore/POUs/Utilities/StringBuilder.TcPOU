@@ -24,7 +24,7 @@
 FUNCTION_BLOCK StringBuilder
 VAR
 	{attribute 'hide'}
-    _workString:STRING;
+    _workString:STRING(255);
 END_VAR
 
 ]]></Declaration>
@@ -151,7 +151,7 @@ END_IF]]></ST>
     <Method Name="Append" Id="{a9cd2d8b-8145-0c23-206c-ae933c3ebe7f}">
       <Declaration><![CDATA[METHOD Append : REFERENCE TO StringBuilder
 VAR_INPUT
-    Text :STRING; 
+    Text :STRING(255); 
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_workString := Concat(_workString,text);
@@ -178,7 +178,7 @@ Clear REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ToString" Id="{dd6389b5-b5c9-06d5-0b23-bf4eff042e8b}">
-      <Declaration><![CDATA[METHOD ToString : STRING]]></Declaration>
+      <Declaration><![CDATA[METHOD ToString : STRING(255)]]></Declaration>
       <Implementation>
         <ST><![CDATA[ToString := _workString;]]></ST>
       </Implementation>
