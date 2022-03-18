@@ -19,6 +19,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;PLC_DOCU</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DefineConstants>PLC_DOCU</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="_meta\TcoPneumatics.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
@@ -26,8 +30,8 @@
     <Content Include="_meta\TcoPneumatics.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.12.0-nightly.596" />
+  <ItemGroup>    
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.6-nightly.704" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />

@@ -3,7 +3,7 @@ using TcOpen.Inxton.Data;
 
 namespace TcoData
 {
-    public partial class PlainTcoEntity : IBrowsableDataObject, IPlainCrudDataObject
+    public partial class PlainTcoEntity : IBrowsableDataObject, IPlainTcoEntity
     {
         public dynamic _recordId { get; set; }
 

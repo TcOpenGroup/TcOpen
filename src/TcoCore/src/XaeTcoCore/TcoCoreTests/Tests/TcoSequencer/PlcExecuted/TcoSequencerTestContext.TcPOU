@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoSequencerTestContext" Id="{4e7acbde-4743-0cad-2bb0-27aaf0a30196}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut_A : TcoSequencerTestType(THIS^,eRestoreMode.AutoRestoreMembers);
-    _sut_N : TcoSequencerTestType(THIS^,eRestoreMode.None);
+    _sut_A : TcoSequencerTestType(THIS^, eRestoreMode.AutoRestoreMembers);
+    _sut_N : TcoSequencerTestType(THIS^, eRestoreMode.None);
 
     _elapsedTimeETA : TIME;
     _elapsedTime : TIME;
@@ -46,12 +46,11 @@ METHOD _ClearPlcCycleCounter
         <ST><![CDATA[ClearPlcCycleCounter();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Main" Id="{7bce61db-8c18-0228-0437-a852b9614763}">
+    <Method Name="Main" Id="{c1d61886-3629-0fd2-1402-0b24f4e226fe}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 VAR
 	i:INT;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
 
@@ -852,11 +851,11 @@ CASE _testId OF
                     _sut_A._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 1 TO _totalStepNumber - 1 DO
+                FOR i := 1 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
@@ -867,11 +866,11 @@ CASE _testId OF
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 1 TO _totalStepNumber - 1 DO
+                FOR i := 1 TO _totalStepNumber - 2 DO
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
 
@@ -1077,16 +1076,16 @@ CASE _testId OF
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
             END_IF
@@ -1134,7 +1133,7 @@ CASE _testId OF
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
 
-        _done := _plcCycleCounter >= _totalStepNumber + 2;
+        _done := _plcCycleCounter >= _totalStepNumber + 1;
         ProbeDoneWhen(_done);
     {endregion}
     {region "T582_InvalidMode"}

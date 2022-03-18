@@ -12,12 +12,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="NUnit" Version="3.13.2" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+		<PackageReference Include="JunitXml.TestLogger" Version="2.1.10" />
+	<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
+	  <ProjectReference Include="..\..\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
 	</ItemGroup>
 
 </Project>

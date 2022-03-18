@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoMomentaryTask" Id="{2b3dea90-2b25-0f42-3297-e3bc662ebad1}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
 			Provides basic momentary on function.
 			<para>
-				To get the actual state of the momentary task, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOn()"/>, <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.IsOff()"/> and <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.State()"/> properties are available.
+				To get the actual state of the momentary task, <see cref="PlcDocu.TcoCore.TcoMomentaryTask.IsOn()"/>, <see cref="PlcDocu.TcoCore.TcoMomentaryTask.IsOff()"/> and <see cref="PlcDocu.TcoCore.TcoMomentaryTask.State()"/> properties are available.
 			</para>
 		</summary>
 	</docu>	
@@ -30,7 +30,7 @@ VAR
 	<docu>
 		<summary>
 			Use to determine if the manipulation is enabled for example from the HMI application. 
-			This value is read only, to modify it use the property <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Enabled()"/>		
+			This value is read only, to modify it use the property <see cref="PlcDocu.TcoCore.TcoMomentaryTask.Enabled()"/>		
 		</summary>		
 	</docu>	
 ~*)	
@@ -71,7 +71,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{a9eff097-c6d4-0344-309d-4b7dae3c6476}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+          <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -80,7 +80,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
 	<docu>
 		<summary>
 			Gets whether the any manipulation with this instance is enabled.
-			The change state could be triggered with <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.On()"/> or <see cref="TcoMomentaryTask.PlcTcoMomentaryTask.Off()"/> method call only when this property si '''TRUE'''. 
+			The change state could be triggered with <see cref="PlcDocu.TcoCore.TcoMomentaryTask.On()"/> or <see cref="PlcDocu.TcoCore.TcoMomentaryTask.Off()"/> method call only when this property si '''TRUE'''. 
 		</summary>			
 	</docu>	
 ~*)
@@ -102,19 +102,6 @@ END_IF]]></ST>
         </Implementation>
       </Set>
     </Property>
-    <Method Name="FB_init" Id="{d9769011-a07b-00b0-2f60-b29a706c7238}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_Parent := Parent;
-]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Identity" Id="{5ac2e2d0-3c45-0329-2a94-30acf57b113b}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -269,9 +256,9 @@ END_VAR]]></Declaration>
 _StartCycleCount := THIS^.Context.StartCycleCount;
 
 // Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
-IF(THIS^._Parent <> 0 )THEN
+IF(THIS^.Parent <> 0 )THEN
 	_isServiceable := TRUE;
-	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+	IF(__QUERYINTERFACE(THIS^.Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._setOnRequest := FALSE;
 			_isServiceable := FALSE;

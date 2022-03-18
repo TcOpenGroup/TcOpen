@@ -6,7 +6,7 @@
     <ProjectGuid>{3f433f3d-9648-4fac-aafd-9fa134bfd44d}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcoCore</Name>
     <ProgramVersion>3.1.4024.12</ProgramVersion>
@@ -19,13 +19,26 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>0.4.2.535</ProjectVersion>
+    <ProjectVersion>1.19.1.1780</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
     <CombineIds>true</CombineIds>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -35,9 +48,38 @@
     <Compile Include="POUs\Compatibility\TcoContextNfCompatibility.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="POUs\ImplicitChecks\CheckBounds.TcPOU">
       <SubType>Code</SubType>
-      <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckDivDInt.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckDivLInt.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckDivLReal.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckDivReal.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckLRangeSigned.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckLRangeUnsigned.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckPointer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckRangeSigned.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ImplicitChecks\CheckRangeUnsigned.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Abstractions\ITcoCoordinator.TcIO">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
       <SubType>Code</SubType>
@@ -54,13 +96,64 @@
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\eDialogAnswer.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\eDialogType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\ITcoDialogAnswer.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\ITcoDialogFormat.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoDialog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoDialogBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoLogger\ITcoLogger.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoLogger\TcoLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoLogger\TcoLogItem.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\eMessageCategory.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\eMessageCondition.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\eMessageDigestMethod.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\eMessengerLogMethod.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessageTextBuilder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessageProperties.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessageCategorize.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessenger.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessengerSettings.TcIO">
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessengerEnv.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\ITcoMessages.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessageDigest.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMessage\TcoMessenger.TcPOU">
@@ -78,13 +171,16 @@
     <Compile Include="POUs\Prototypes\TcoContext\ITcoContext.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessengerSettings.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoMessage\TcoMessengerEnv.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMomentaryTask\ITcoMomentaryTask.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoMomentaryTask\TcoMomentaryTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoNothing\NO.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoObject\ITcoObject.TcIO">
@@ -117,6 +213,9 @@
     <Compile Include="POUs\Prototypes\TcoSelector\ITcoSelector.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\eStepIdUniquenessControlState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\eSequencerMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -129,10 +228,25 @@
     <Compile Include="POUs\Prototypes\TcoSequencer\ITcoSequencerModeController.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerModeController.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequence.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver\ITcoSequencerObserver.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver\TcoSequencerObserver.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver\TcoTcoSequencerObserverDummy.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerModeController.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\TcoSequencerBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\ITcoSequencer.TcIO">
@@ -157,6 +271,12 @@
     <Compile Include="POUs\Prototypes\TcoState\TcoStateExtendible.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoParentedStructure.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\eTaskState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -175,6 +295,9 @@
     <Compile Include="POUs\Prototypes\TcoTask\TcoTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoTier\TcoTier.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoToggleTask\ITcoToggleTask.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -187,6 +310,18 @@
     <Compile Include="POUs\TestFixtures\_internals_TcoSequencer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TestFixtures\_internals_TcoSequence.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Utilities\TcoCRC_16.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Utilities\TcoCRC_32.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Utilities\TcoCRC_8.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Utilities\StringBuilder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -195,8 +330,16 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
+    <Folder Include="POUs\ImplicitChecks" />
+    <Folder Include="POUs\Prototypes\TcoTier" />
+    <Folder Include="POUs\Prototypes\TcoDialog" />
+    <Folder Include="POUs\Prototypes\TcoNothing" />
+    <Folder Include="POUs\Prototypes\TcoStruct" />
+    <Folder Include="POUs\Prototypes\Abstractions" />
+    <Folder Include="POUs\Prototypes\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
+    <Folder Include="POUs\Prototypes\TcoSequencer\TcoSequencerObserver" />
     <Folder Include="POUs\Prototypes\TcoToggleTask" />
     <Folder Include="POUs\Utilities" />
     <Folder Include="POUs\Prototypes\TcoRtc" />
@@ -240,6 +383,12 @@
     <PlaceholderReference Include="Tc2_Utilities">
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
+      <Parameters>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>CMAXCHARACTERS</Key>
+          <Value>10000</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_JsonXml">
       <DefaultResolution>Tc3_JsonXml, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -251,6 +400,9 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="Tc2_EtherCAT">
+      <Resolution>Tc2_EtherCAT, 3.3.16.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Standard">
       <Resolution>Tc2_Standard, 3.3.3.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
@@ -258,7 +410,10 @@
       <Resolution>Tc2_System, 3.4.24.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Utilities">
-      <Resolution>Tc2_Utilities, 3.3.41.0 (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_Utilities, 3.3.47.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_JsonXml">
+      <Resolution>Tc3_JsonXml, 3.3.15.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, 3.3.21.0 (Beckhoff Automation GmbH)</Resolution>
@@ -272,8 +427,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
@@ -2576,15 +2731,15 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="Int32">System.Int32</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="Int32">System.Int32</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

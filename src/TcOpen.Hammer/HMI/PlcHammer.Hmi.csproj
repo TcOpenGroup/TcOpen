@@ -3,8 +3,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.Notepad" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.RichTextBox.Wpf" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Serilog.Sinks.MQTT\src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.csproj" />
+    <ProjectReference Include="..\..\TcoInspectors\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
     <ProjectReference Include="..\..\_packaging\TcOpen.Group.Wpf\TcOpen.Group.Wpf.csproj" />
     <ProjectReference Include="..\PlcHammerConnector\PlcHammerConnector.csproj" />
   </ItemGroup>

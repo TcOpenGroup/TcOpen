@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <!--NuGet properties-->
     <Authors>TcOpenGroup contributors</Authors>
     <Company>TcOpenGroup</Company>
@@ -20,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.12.0-nightly.554" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.6-nightly.704" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
   </ItemGroup>
 

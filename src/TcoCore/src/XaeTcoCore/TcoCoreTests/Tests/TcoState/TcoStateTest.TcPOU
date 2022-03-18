@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoStateTest" Id="{efe977d1-c2f8-4084-8704-172d8704be2b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoStateTest EXTENDS TcoState
 VAR
@@ -100,7 +100,7 @@ METHOD INTERNAL ReadOutIdentities]]></Declaration>
 
 _myContextIdentity	:=	THIS^.Context.Identity;
 
-_myParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^.Parent.Identity;
 		
 _myContextStartCount :=	THIS^.Context.StartCycleCount;
 

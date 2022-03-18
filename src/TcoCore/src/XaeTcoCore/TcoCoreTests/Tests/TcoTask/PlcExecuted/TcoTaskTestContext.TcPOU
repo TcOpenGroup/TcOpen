@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoTaskTestContext" Id="{da10e4d9-b59b-03b6-048b-8b4e8d7fd81e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
@@ -527,8 +527,13 @@ CASE _testId OF
         _to_A._sut_A.DoneWhen(TRUE);
         _to_A._sut_A.ReadOutState();
         _done := _to_A._sut_A.Done;
-        ProbeDoneWhen(_done);
+        ProbeDoneWhen(_done);			 
 {endregion}
+	 eTcoTaskTests.TaskExecuteMethodNotCalled:
+	 	_to_A._sut_A.Invoke().Done;
+	eTcoTaskTests.TaskExecuteMethodCalled :
+		_to_A._sut_A.Invoke().Done;
+		_to_A._sut_A.Execute();
 END_CASE]]></ST>
       </Implementation>
     </Method>

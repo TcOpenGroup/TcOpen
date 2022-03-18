@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <Itf Name="ITcoSequencerModeController" Id="{7bf0fb73-1ee3-0492-27e7-17c8d1ca6b66}">
     <Declaration><![CDATA[INTERFACE ITcoSequencerModeController
 ]]></Declaration>
@@ -10,7 +10,7 @@
 			Gets or sets sequencer mode.
 			<remarks>			
 				<para>
-					See <see cref="eSequencerMode"/> for detailed description.
+					See <see cref="TcoCore.eSequencerMode"/> for detailed description.
 				</para>
 			</remarks>		
 		</summary>			

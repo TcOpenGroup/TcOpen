@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoObjectTest" Id="{e84228ff-9c33-47a4-a38e-640688a82a88}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoObjectTest EXTENDS TcoCore.TcoObject
 VAR
@@ -78,7 +78,7 @@ _myContextStartCount :=	THIS^.Context.StartCycleCount;
 
 _myContextEndCount	:=	THIS^.Context.EndCycleCount;
 
-_myParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^.Parent.Identity;
 ]]></ST>
       </Implementation>
     </Method>

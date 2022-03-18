@@ -3,9 +3,15 @@
   <POU Name="DefaultContext" Id="{9566aeb0-f006-4c52-ace4-7824786d839b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DefaultContext EXTENDS TcoCore.TcoContext
 VAR
+	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME a#>"}
+	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK a#>"}
+	{attribute addProperty _stopDefaultName "<#STOP a#>"}
     _wpfCyclinder : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty NameMoveHomeTask "<#In task#>"}
     _wpfCyclinder_1 : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty NameMoveHomeTask "<#In task#>"}
     _wpfCyclinder_2 : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty NameMoveHomeTask "<#In task#>"}
     _wpfCyclinder_3 : TcoPneumatics.TcoCylinder(THIS^);
 END_VAR]]></Declaration>
     <Implementation>

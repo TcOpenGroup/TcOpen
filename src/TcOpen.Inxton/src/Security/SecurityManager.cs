@@ -31,8 +31,14 @@ namespace TcOpen.Inxton.Local.Security
     ///  
     /// To limit execution of methods for privileged user use <see cref="   "/>
     ///</summary>       
-    public class SecurityManager : ISecurityManager
+    public class SecurityManager : ISecurityManager, ISecurityManagerUserInfo
     {
+
+        /// <summary>
+        /// Gets the name of current user.
+        /// </summary>
+        public string UserName { get { return this.Principal.Identity.Name; } }
+
         private SecurityManager(IRepository<UserData> repository)
         {
             UserRepository = repository;
@@ -58,7 +64,7 @@ namespace TcOpen.Inxton.Local.Security
             {
                 _manager = new SecurityManager(repository);
             }
-
+            
             return _manager.Service;
         }
 
@@ -145,6 +151,11 @@ namespace TcOpen.Inxton.Local.Security
         }
 
         public IRepository<UserData> UserRepository { get; }
+
+        /// <summary>
+        /// Gets weather the security manager is initialized.
+        /// </summary>
+        public static bool IsInitialized { get { return _manager != null; } }
     }
 
     public class SecurityManagerNotInitializedException : Exception

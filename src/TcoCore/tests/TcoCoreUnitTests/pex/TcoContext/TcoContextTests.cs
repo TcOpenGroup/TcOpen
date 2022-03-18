@@ -26,7 +26,8 @@ namespace TcoCore.PexTests
             context.AddMessage(new TcoMessage(new MockRootObject(), string.Empty, string.Empty));
             context.AddMessage(new TcoMessage(new MockRootObject(), string.Empty, string.Empty));
 
-            Assert.AreEqual(2, context.Messages.Count());
+            // Additional message on context may arise when the RtcIsNot synchronized.
+            Assert.IsTrue(context.Messages.Count() == 4 || context.Messages.Count() == 3);
         }
 
         [Test()]
@@ -43,7 +44,7 @@ namespace TcoCore.PexTests
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
 
-            var actual = context.GetActiveMessages();
+            var actual = context.MessageHandler.GetActiveMessages();
 
             Assert.AreEqual(1, actual.Count());
         }
@@ -62,7 +63,7 @@ namespace TcoCore.PexTests
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
             context.AddMessage(new TcoMessage(context, string.Empty, string.Empty));
 
-            var actual = context.ActiveMessages;
+            var actual = context.MessageHandler.GetActiveMessages();
 
             Assert.AreEqual(1, actual.Count());
         }

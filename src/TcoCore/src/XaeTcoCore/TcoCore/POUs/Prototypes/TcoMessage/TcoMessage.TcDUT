@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Text : STRING(125);
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 (*~
 	<docu>
 		<summary>
@@ -40,7 +40,7 @@ STRUCT
 (*~
 	<docu>
 		<summary>
-			Message category of this message. See <see cref="eMessageCategory"/> for detailed informations. 
+			Message category of this message. See <see cref="TcoCore.eMessageCategory"/> for detailed informations. 
 		</summary>				
 	</docu>	
 ~*)
@@ -64,6 +64,33 @@ STRUCT
 ~*)
 	{attribute clr [ReadOnly()]}
 	PerCycleCount : BYTE;
+
+(*~
+	<docu>
+		<summary>			
+			Indicates that the message is expected to be dequeed from the buffer.
+		</summary>				
+	</docu>	
+~*)	
+	ExpectDequeing : BOOL;
+	
+	(*~
+	<docu>
+		<summary>			
+			Indicates that the message must be persisted in the alarm view until acknowledged.
+		</summary>				
+	</docu>	
+	~*)	
+	Pinned : BOOL;
+	
+	(*~
+	<docu>
+		<summary>		
+			Stores message digest of this message text.
+		</summary>				
+	</docu>	
+	~*)
+	MessageDigest : DWORD;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

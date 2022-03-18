@@ -44,19 +44,20 @@ namespace TcoCore
                 messageUpdateTimer.Enabled = true;
             }
         }
+
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var isInSight = false;
             TcoObjectMessageHandler MessageHandler = null;
-            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
-            {                
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            {
                 isInSight = UIElementAccessibilityHelper.IsInSight<Grid>(this.Element, this);
                 MessageHandler = this.DataContext as TcoObjectMessageHandler;
             });
 
             if (isInSight)
             {
-                MessageHandler?.UpdateHealthInfo();                
+                MessageHandler?.UpdateHealthInfo();
             }
         }                             
     }

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoSequencerObserver" Id="{f27504d5-efcf-0874-3ed6-b558033f733c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSequencerObserver EXTENDS TcoObject IMPLEMENTS ITcoSequencerObserver
+VAR
+    _steps            : ARRAY[0..MAX_STEPS] OF StepDetails;
+    _currentStepOrder : UINT;
+    _stepsCount       : UINT;
+END_VAR
+
+VAR CONSTANT
+    MAX_STEPS : UINT := 150;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Clear" Id="{a27cadfb-2a73-02a5-04a2-9cc56ea280fe}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD Clear : BOOL
+VAR 
+	i : INT;
+	blank : StepDetails;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[{warning disable C0196}
+FOR i := 0 TO MAX_STEPS DO
+{warning enable C0196}
+	_steps[i] := blank;	
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Observe" Id="{2d56f22f-aa2d-0e1c-2ee2-efae6fd99a06}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides the mechanism to observe steps in the sequence and to gather basic infomation about step status and perfomance.
+		</summary>			
+	</docu>	
+~*)
+METHOD Observe
+VAR_INPUT
+	
+	(*~
+	<docu>
+		<summary>
+			Indicates that a step is active.
+		</summary>			
+	</docu>	
+	~*)
+	 
+	inIsStepActive : BOOL;
+		(*~
+	<docu>
+		<summary>
+			Currently running step order.
+		</summary>			
+	</docu>	
+	~*)
+	 
+	inCurrentStepOrder : UINT;
+	(*~
+	<docu>
+		<summary>
+			Step identification number.
+		</summary>	
+		<remarks>			
+ 			<note type="important">
+				This number must be unique throughout the complete sequence. It is required to uniquely identify the step of the sequence.
+			</note>
+			<para>
+				The <see cref="PlcDocu.TcoCore.TcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+			</para>
+		</remarks>
+	</docu>	
+	~*)
+		{attribute addProperty Name "<#Step ID#>"}
+		inID: INT;
+	(*~
+		<docu>
+			<summary>
+				Order of the step in the sequence.
+			</summary>	
+		</docu>	
+	~*)
+		{attribute addProperty Name "<#Step Order#>"}
+		inOrder: UINT;
+	(*~
+		<docu>
+			<summary>
+				If this value is false, step body is not executed and execution is moved to the next enabled step in the sequence.
+			</summary>				
+		</docu>	
+	~*)
+		{attribute addProperty Name "<#Enabled#>"}
+		inEnabled: BOOL;
+	(*~
+		<docu>
+			<summary>
+				Step description text.
+			</summary>				
+		</docu>	
+	~*)
+		{attribute addProperty Name "<#Step description#>"}
+		inDescription: STRING(254);
+	(*~
+		<docu>
+			<summary>
+				Describes step status.
+			</summary>				
+			<remarks>			
+				<para>
+					See <see cref="TcoCore.eStepStatus"/> for detailed description.
+				</para>
+			</remarks>		
+			enumStepStatus
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step status#>"}
+		inStatus : eStepStatus;
+	(*~
+		<docu>
+			<summary>
+				Step duration time.
+			</summary>				
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step duration#>"}
+		inDuration : TIME;	
+
+			(*~
+		<docu>
+			<summary>
+				Total steps count;
+			</summary>				
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step count#>"}
+		inStepCount : UINT;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_currentStepOrder := inCurrentStepOrder;
+_stepsCount := inStepCount;
+IF(inOrder <= MAX_STEPS) THEN
+	_steps[inOrder].ID := inID;
+	_steps[inOrder].Order := inOrder;
+	_steps[inOrder].Enabled := inEnabled;
+	_steps[inOrder].Description := inDescription;
+	
+	IF(inCurrentStepOrder = inOrder) AND inIsStepActive THEN	
+	_steps[inOrder].Status := inStatus;
+	_steps[inOrder].Duration := inDuration;
+	END_IF;		
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

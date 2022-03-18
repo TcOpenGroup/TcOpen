@@ -19,9 +19,19 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>PlcTcProberTests</Title>
-    <ProjectVersion>0.4.2.535</ProjectVersion>
+    <ProjectVersion>1.19.1.1780</ProjectVersion>
     <DefaultNamespace>PlcTcProberTests</DefaultNamespace>
     <Placeholder>PlcTcProberTests</Placeholder>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GVLs\Tests.TcGVL">

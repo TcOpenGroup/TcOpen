@@ -45,7 +45,7 @@ namespace TcoCore
 
         private IEnumerable<TcoMessage> GetObjectMessages()
         {
-            return _obj.GetDescendants<TcoMessage>();
+            return _obj.GetDescendants<TcoMessage>(this.DiagnosticsDepth);
         }
 
         private void ReadCategories()
@@ -79,8 +79,9 @@ namespace TcoCore
                 if (_cycleTags == null)
                 {
                     _cycleTags = new List<IValueTag>();
-                    _cycleTags.Add(_context.StartCycleCount);
+                    if (_context != null) { _cycleTags.Add(_context.StartCycleCount); }
                     _cycleTags.AddRange(DescendingMessages.Select(p => p.Cycle));
+                    _cycleTags.AddRange(DescendingMessages.Select(p => p.Pinned));
                 }
 
                 return _cycleTags;
@@ -104,11 +105,14 @@ namespace TcoCore
         {
             get
             {
-                return DescendingMessages.Where(p => p.IsActive);                
+                return DescendingMessages.Where(p => p.IsActive);
             }
         }
-
+      
         string highestSeverityMessage;
+        private int diagnosticsDepth = 15;
+        
+
         public string HighestSeverityMessage
         {
             get => highestSeverityMessage; set
@@ -134,8 +138,8 @@ namespace TcoCore
             if (refreshTags == null)
             {
                 refreshTags = new List<IValueTag>();
-                refreshTags.AddRange(CycleTags);
-                refreshTags.AddRange(CategoryTags);
+                refreshTags?.AddRange(CycleTags);
+                refreshTags?.AddRange(CategoryTags);
             }
 
             // We must check that the connector did start R/W operations loop, due to possible dead lock at start-up
@@ -146,7 +150,7 @@ namespace TcoCore
                 _obj.GetConnector().ReadBatch(refreshTags);
             }
 
-            return DescendingMessages.Where(p => p.IsActive).Select(p => p.PlainMessage);
+            return DescendingMessages?.Where(p => p.IsActive).Select(p => p.PlainMessage);
         }
 
         /// <summary>
@@ -155,7 +159,7 @@ namespace TcoCore
         /// </summary>
         public void UpdateHealthInfo()
         {
-            ReadCycles();            
+            ReadCycles();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ActiveMessagesCount)));
             if (ActiveMessagesCount > 0)
             {
@@ -177,7 +181,7 @@ namespace TcoCore
         public int ActiveMessagesCount
         {
             get
-            {              
+            {
                 return ActiveMessages.Count();
             }
         }
@@ -193,11 +197,16 @@ namespace TcoCore
                 if (ActiveMessagesCount > 0)
                 {
                     return (eMessageCategory)ActiveMessages.Max(p => p.Category.LastValue);
-                    
+
                 }
 
                 return eMessageCategory.None;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the diagnostics depth for this object. The object's tree will be searched for messaging objects up to diagnostics depth set in this property.
+        /// </summary>
+        public int DiagnosticsDepth { get => diagnosticsDepth; set { diagnosticsDepth = value;  this._descendingMessages = null;  _categoryTags = null; _cycleTags = null; refreshTags = null; } }
     }
 }

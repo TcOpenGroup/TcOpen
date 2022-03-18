@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoComponent" Id="{8eb0512f-b833-4c04-bec5-9d60e2cb723b}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -38,19 +38,6 @@ END_VAR]]></Declaration>
 //otherwise _serviceContexCycle should be lower then Context.StartCycleCount until Context.StartCycleCount overflow its range
 //which should occur cca every 585 mil years at 1ms PLC task.    
 _inServiceMode := _serviceContexCycle = _myContextCycleCount OR (_serviceContexCycle + 1) = _myContextCycleCount;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="FB_init" Id="{85de5686-5b6c-0496-3ce9-dba560b52906}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetSignalInfo" Id="{8a2c62ad-97e0-04b2-078e-47bb9ffb547c}">
@@ -93,7 +80,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets whether the component is in serviceable state. Serviceable state is when ```Service``` method is called cyclicaly.   
+			Gets whether the component is in serviceable state. Serviceable state is when `Service` method is called cyclicaly.   
 		</summary>			
 	</docu>	
 ~*)

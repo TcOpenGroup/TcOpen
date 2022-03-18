@@ -20,6 +20,17 @@ namespace TcOpen.Inxton.Local.Security
         {
             Roles = new ObservableCollection<string>();
         }
+        public UserData(User user)
+        {
+            Username = user.UserName;
+            Email = user.Email;
+            HashedPassword = user.PasswordHash;
+            SecurityStamp = user.SecurityStamp;
+            Roles = user.Roles == null ? new ObservableCollection<string>() : new ObservableCollection<string>(user.Roles.ToList());
+            Email = user.Email;
+            CanUserChangePassword = user.CanUserChangePassword;
+            
+        }
         public UserData(string username, string email, string password, IEnumerable<string> roles, string level, string authenticationToken)
         {
             Username = username;
@@ -30,8 +41,7 @@ namespace TcOpen.Inxton.Local.Security
             Level = CalculateHash(level, username);
             AuthenticationToken = CalculateHash(authenticationToken, string.Empty);
         }
-
-
+             
         public UserData(string username, string password, IEnumerable<string> roles)
         {
             Username = username;
@@ -39,7 +49,7 @@ namespace TcOpen.Inxton.Local.Security
             Roles = new ObservableCollection<string>(roles);
             RoleHash = CalculateRoleHash(roles, username);
         }
-
+        public string SecurityStamp { get; set; }
         public dynamic _recordId { get; set; }
         public string Username
         {

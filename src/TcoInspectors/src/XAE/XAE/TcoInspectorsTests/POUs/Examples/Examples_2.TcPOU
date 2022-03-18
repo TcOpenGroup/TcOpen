@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Examples_2" Id="{d9593155-ba39-06ab-3ec8-ab2cd28442af}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Examples_2 EXTENDS TcoCore.TcoObject
+VAR
+	_diSignal 		: BOOL;
+	_di 			: TcoInspectors.TcoDigitalInspector(THIS^);
+	_diTask			: TcoCore.TcoTask(THIS^);		
+	
+	_daSignal 		: LREAL;
+	_da 			: TcoInspectors.TcoAnalogueInspector(THIS^);
+	_daTask			: TcoCore.TcoTask(THIS^);
+	
+	_ddSignal 		: STRING;
+	_dd 			: TcoInspectors.TcoDataInspector(THIS^);
+	_ddTask			: TcoCore.TcoTask(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(_diTask.Execute()) THEN	
+	IF(_di.Inspect(_diSignal).Done) THEN
+		IF(_di.Result = TcoInspectors.eInspectorResult.Failed) THEN
+			_di.Messenger.Build().Append('I failed').As().AsInfo().Pin();
+		ELSIF(_di.Result = TcoInspectors.eInspectorResult.Passed) THEN
+			_di.Messenger.Build().Append('I passed').As().AsInfo().Pin();
+		END_IF
+	END_IF;		
+END_IF;
+
+IF(_daTask.Execute()) THEN
+	IF(_da.Inspect(_daSignal).Done) THEN
+		IF(_da.Result = TcoInspectors.eInspectorResult.Failed) THEN
+			_da.Messenger.Build().Append('I failed').As().AsInfo().Pin();
+		ELSIF(_da.Result = TcoInspectors.eInspectorResult.Passed) THEN
+			_da.Messenger.Build().Append('I passed').As().AsInfo().Pin();
+		END_IF
+	END_IF;	
+END_IF;
+
+IF(_ddTask.Execute()) THEN
+	IF(_dd.Inspect(_ddSignal).Done) THEN
+		IF(_dd.Result = TcoInspectors.eInspectorResult.Failed) THEN
+			_dd.Messenger.Build().Append('I failed').As().AsInfo().Pin();
+		ELSIF(_dd.Result = TcoInspectors.eInspectorResult.Passed) THEN
+			_dd.Messenger.Build().Append('I passed').As().AsInfo().Pin();
+		END_IF
+	END_IF;	
+END_IF;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

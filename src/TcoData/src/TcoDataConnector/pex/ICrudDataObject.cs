@@ -4,10 +4,8 @@ using Vortex.Connector.ValueTypes;
 namespace TcoData
 {
     public interface ICrudDataObject
-    {
-        OnlinerDateTime _Created { get; }
-        OnlinerString _EntityId { get; }
-        OnlinerDateTime _Modified { get; }
+    {       
+        OnlinerString _EntityId { get; }        
         ValueChangeTracker ChangeTracker { get; }
         List<ValueChangeItem> Changes { get; set; }
     }

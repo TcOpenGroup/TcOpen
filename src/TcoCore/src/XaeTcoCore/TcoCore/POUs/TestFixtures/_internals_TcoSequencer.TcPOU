@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="_internals_TcoSequencer" Id="{8431c992-8d9f-09ad-1c50-56c92dc951c0}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'hide'}
 {attribute clr [ExcludeFromApiDocumentation()]}
@@ -13,7 +13,7 @@ METHOD PROTECTED FINAL _Close
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Close();]]></ST>
+        <ST><![CDATA[THIS^.i_Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="_Open" Id="{b37d3c58-1c1c-0875-2c6f-fc22d4441f2e}">
@@ -21,7 +21,7 @@ METHOD PROTECTED FINAL _Close
 METHOD PROTECTED FINAL _Open
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Open();]]></ST>
+        <ST><![CDATA[THIS^.i_Open();]]></ST>
       </Implementation>
     </Method>
   </POU>

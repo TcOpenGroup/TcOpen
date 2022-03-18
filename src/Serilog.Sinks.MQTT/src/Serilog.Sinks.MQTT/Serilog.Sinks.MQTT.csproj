@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageId>TcOpen.Inxton.$(AssemblyName)</PackageId>
+    <Authors>Inxton team</Authors>
+    <Company>TcOpenGroup</Company>
+    <Product>TcOpen.Inxton.$(AssemblyName)</Product>
+    <Description>Serilog sink to publish logs to MQTT broker</Description>
+    <Copyright>Inxton team</Copyright>
+    <PackageIcon>ProfileImage.png</PackageIcon>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>serilog, MQTT</PackageTags>
+    <PackageReleaseNotes>This is initial implementation of MQTT serilog sink</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\assets\logov2\ProfileImage.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MQTTnet" Version="3.1.1" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+  </ItemGroup>
+</Project>

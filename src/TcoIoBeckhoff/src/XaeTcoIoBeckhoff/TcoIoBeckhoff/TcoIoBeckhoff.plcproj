@@ -18,12 +18,21 @@
     <LibraryReferences>{03f8892c-d1d0-44d2-9e9d-b9c1ad614a91}</LibraryReferences>
     <Released>false</Released>
     <Title>TcoIoBeckhoff</Title>
-    <ProjectVersion>0.4.2.535</ProjectVersion>
-    <Author>
-    </Author>
+    <ProjectVersion>1.19.1.1780</ProjectVersion>
+    <Author></Author>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoIoBeckhoff</DefaultNamespace>
     <CombineIds>true</CombineIds>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Abstractions\AI\AI_1_Module.TcPOU">
@@ -106,26 +115,17 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.4.1.375 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoCore</Namespace>
-    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoIoBeckhoff.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.4.1.375 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
@@ -2428,15 +2428,15 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="Int32">System.Int32</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="Int32">System.Int32</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

@@ -66,6 +66,42 @@ namespace TcoCore
             return children;
         }
 
+        /// <summary>
+        /// Gets descendant objects of given type up to given tree depth.
+        /// </summary>
+        /// <remarks> 
+        /// Take into consideration possible performance degradation due to use of reflections in this method.
+        /// </remarks>
+        /// <typeparam name="T">Descendant type</typeparam>
+        /// <param name="obj">Root object</param>
+        /// <param name="depth">Depth to search for descendant objects</param>
+        /// <param name="children">[optional] Pre-existing descendants.</param>
+        /// <param name="currentDepth">[optional] Current depth</param>
+        /// <returns>Descendant of given type up to given depth.</returns>
+        public static IEnumerable<T> GetDescendants<T>(this IVortexObject obj, int depth, IList<T> children = null, int currentDepth = 0) where T : class
+        {
+            children = children != null ? children : new List<T>();
+           
+            currentDepth++;
+            
+            if (obj != null && currentDepth < depth)
+            {
+                foreach (var child in obj.GetChildren())
+                {
+                    var ch = child as T;
+                    if (ch != null)
+                    {
+                        children.Add(ch);
+                    }
+
+                    GetDescendants<T>(child, depth, children, currentDepth);
+                }
+            }
+
+            currentDepth--;
+
+            return children;
+        }
 
         /// <summary>
         /// Get the children of given type of this <see cref="IVortexObject"/>         
@@ -99,7 +135,24 @@ namespace TcoCore
         /// </remarks>
         /// <param name="obj">Onliner from which the plain is created.</param>        
         /// <returns>Plain (POCO) object populated with current online data.</returns>
-        public static object CreatePlain(this IVortexObject obj)
+        public static T GetPlainFromOnline<T>(this IVortexObject obj)
+        {
+            dynamic o = obj;
+            var plain = o.CreatePlainerType();
+            o.FlushOnlineToPlain(plain);
+            return plain;
+        }
+
+
+        /// <summary>
+        /// Get the Plain (POCO) object populated with current online data.
+        /// </summary>
+        /// <remarks> 
+        /// This method uses dynamic casting, which may impact the performance of the data exchange.
+        /// </remarks>
+        /// <param name="obj">Onliner from which the plain is created.</param>        
+        /// <returns>Plain (POCO) object populated with current online data.</returns>
+        public static object GetPlainFromOnline(this IVortexObject obj)
         {
             dynamic o = obj;
             var plain = o.CreatePlainerType();

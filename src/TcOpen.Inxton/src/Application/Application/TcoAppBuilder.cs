@@ -6,6 +6,9 @@
     using TcOpen.Inxton.App.Logging;
     using TcOpen.Inxton.Threading;
     using Vortex.Connector;
+    using System;
+    using System.Collections.Generic;
+    using TcOpen.Inxton.App.Dialogs;
 
     /// <summary>
     /// TcOpen application configuration builder.
@@ -27,7 +30,7 @@
         /// </summary>
         /// <param name="logger">Instance of a logger.</param>
         /// <returns>Application builder.</returns>
-        public TcoAppBuilder SetUpLogger(ITcoLogger logger)
+        public TcoAppBuilder SetUpLogger(ILogger logger)
         {
             Domain.Logger = logger;
             return this;
@@ -51,12 +54,10 @@
         /// <returns>AppBuilder</returns>
         public TcoAppBuilder SetSecurity(IAuthenticationService authenticationService)
         {
-            AuthenticationService = authenticationService;            
+            Domain.AuthenticationService = authenticationService;            
             return this;
         }
-
-        public IAuthenticationService AuthenticationService { get; private set; }
-
+        
 
         /// <summary>
         /// Sets the logging for the 'Edit' -> 'Online' value change.
@@ -71,9 +72,12 @@
             }
             
             return this;
+        }         
+        
+        public TcoAppBuilder SetPlcDialogs(DialogProxyServiceBase dialogProxy)
+        {            
+            return this;
         }
-
-       
     }
 }
  

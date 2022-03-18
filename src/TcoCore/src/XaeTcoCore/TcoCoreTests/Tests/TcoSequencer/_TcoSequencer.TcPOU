@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="_TcoSequencer" Id="{ac19fe4f-0c0e-08e9-3df5-0840192e4ee2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK _TcoSequencer EXTENDS TcoCore._internals_TcoSequencer
 VAR
@@ -15,7 +15,7 @@ VAR
 	_currentStepDescription				:	STRING(254);
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
-	_myTcoState							: 	TcoState(THIS^ ,eRestoreMode.None);
+	_myTcoState							: 	TcoState(THIS^, eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
 	_onSequencerErrorCount	 			: 	ULINT;
@@ -8560,6 +8560,8 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.Done;
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -8567,7 +8569,9 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
       <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
+        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.NotYetStarted;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{03d14d20-a375-0456-1afe-147a68ccc6ff}" FolderPath="_Tests\">

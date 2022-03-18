@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Vortex.Presentation.Wpf;
 
 namespace TcoData
@@ -12,7 +15,9 @@ namespace TcoData
     {
         public DataView()
         {
+           
             InitializeComponent();
+            //this.DataGrid.Columns.Add(new DataGridTextColumn() { Binding = new Binding() { Path = new PropertyPath("_EntityId") }, Header = "ID" });
         }
 
         private dynamic _context
@@ -57,5 +62,26 @@ namespace TcoData
         {
             ResizableGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Auto);
         }
+
+
+
+        
+        public ObservableCollection<DataGridColumn> DataListColumns
+        {
+            get => this.DataGrid.Columns;
+            set
+            {
+                if (value.Count > 0)
+                {
+                    this.DataGrid.Columns.Clear();
+
+                    foreach (var column in value)
+                    {
+                        this.DataGrid.Columns.Add(column);
+                    }
+                }
+            }
+        }
+
     }
 }

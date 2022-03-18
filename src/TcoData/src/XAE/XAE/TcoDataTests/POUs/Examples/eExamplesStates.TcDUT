@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eExamplesStates" Id="{304d5eef-a5cc-0d16-2fcf-66f39e987a74}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eExamplesStates :
+(
+	Initialize_1 := 1,
+	Initialize_2 := 5,
+	Create := 10,
+	Update := 20,
+	CreateOrUpdate := 30,
+	Read := 40,
+	Delete := 50,
+	Exists := 60
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

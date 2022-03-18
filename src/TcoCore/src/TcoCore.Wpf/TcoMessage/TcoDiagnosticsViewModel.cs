@@ -10,52 +10,93 @@
     using TcOpen.Inxton;
     using TcOpen.Inxton.Input;
     using Vortex.Connector;
-   
+
 
     public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
-    
+
+        /// <summary>
+        /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
+        /// </summary>
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);            
+            CreateCommands();
         }
 
+        private void CreateCommands()
+        {
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            this.RogerSelectedMessageCommand = new RelayCommand(a => this.RogerSelectedMessage(), b => true, () => TcoAppDomain.Current.Logger.Information("Message acknowledged {@payload}", new { Text = SelectedMessage.Text, Category = SelectedMessage.CategoryAsEnum, Cycle = SelectedMessage.Cycle }));
+            this.RogerAllMessagesCommand = new RelayCommand(a => this.RogerAllMessages(), b => true, () => TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol }));
+        }
+
+        /// <summary>
+        /// Creates new instance of <see cref="TcoDiagnosticsViewModel"/>
+        /// </summary>
+        /// <param name="tcoObject">TcoObject to be observed by this diagnostics</param>
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
-            _tcoObject = tcoObject;            
-             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            _tcoObject = tcoObject;
+            CreateCommands();
         }
-      
+
+
+        /// <summary>
+        /// Sets the <see cref="TcoObject"/> to be observed.
+        /// </summary>
+        public IsTcoObject TcoObject { set { _tcoObject = value; } }
+
         protected IsTcoObject _tcoObject { get; set; }
-      
+
         private volatile object updatemutex = new object();
 
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
         internal void UpdateMessages()
-        {   
-            if(DiagnosticsRunning)
+        {
+            if (DiagnosticsRunning)
             {
                 return;
             }
 
-            lock(updatemutex)
+            lock (updatemutex)
             {
                 DiagnosticsRunning = true;
-                                    
+
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages()
+                                             .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)                                             
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
-                
+
                 }).Wait();
 
                 DiagnosticsRunning = false;
-            }            
+            }
+        }
+        void RogerSelectedMessage()
+        {
+            this.SelectedMessage.OnlinerMessage.Pinned.Cyclic = false;
+            UpdateMessages();
+
+        }
+
+        void RogerAllMessages()
+        {
+            lock (updatemutex)
+            {
+                foreach (var item in MessageDisplay.Where(p => p.Pinned))
+                {                    
+                    item.OnlinerMessage.Pinned.Cyclic = false;
+                    TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                }
+            }
+
+            UpdateMessages();
         }
 
         bool diagnosticsRunning;
@@ -65,7 +106,7 @@
         /// </summary>
         public bool DiagnosticsRunning
         {
-            get => diagnosticsRunning; 
+            get => diagnosticsRunning;
             internal set
             {
                 if (diagnosticsRunning == value)
@@ -76,7 +117,7 @@
                 SetProperty(ref diagnosticsRunning, value);
             }
         }
-            
+
         bool autoUpdate;
         /// <summary>
         /// Gets or sets whether the diagnostics view should auto refresh.
@@ -97,7 +138,7 @@
                 SetProperty(ref autoUpdate, value);
             }
         }
-      
+
         /// <summary>
         /// Gets list of available standard message categories.
         /// </summary>
@@ -108,7 +149,7 @@
                 return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
             }
         }
-       
+
         IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
         /// <summary>
         /// Gets list of messages to be displayed in message list of the view.
@@ -138,7 +179,7 @@
             set;
         } = eMessageCategory.Info;
 
-        
+
         /// <summary>
         ///  Gets or sets currently selected message from the list of messages.
         /// </summary>
@@ -164,47 +205,71 @@
                 this.OnPropertyChanged(nameof(AffectedObjectPresentation));
             }
         }
-       
+
         /// <summary>
         /// Gets the command that executes update of messages on demand.
         /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
-        
+
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
 
+        private static string NoFurtherInfo = TcOpen.Inxton.TcoCore.Wpf.Properties.Localization.WeHaveNoFurtherInfoAboutThisMessage;
 
         private ulong lastSelectedMessageIdentity = 0;
-        private object affectedObjectPresenation = null;
+        private object affectedObjectPresenation = NoFurtherInfo;
+        private int diagnosticsDepth = 15;
+
         public object AffectedObjectPresentation
         {
             get
             {
                 if (this.SelectedMessage == null)
-                    return null;
+                    return TcOpen.Inxton.TcoCore.Wpf.Properties.Localization.NoMessageSelected;
 
-                if(this.SelectedMessage.Identity == lastSelectedMessageIdentity)
+                if (this.SelectedMessage.Identity == lastSelectedMessageIdentity)
                 {
                     return affectedObjectPresenation;
                 }
-                
+
+                affectedObjectPresenation = NoFurtherInfo;
+
                 if (SelectedMessage != null)
                 {
-                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity);
+                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity) as IVortexObject;
+                    IVortexObject affectedObjectsParent = null;
+
+                    switch (affectedObject)
+                    {
+                        case TcoComponent c:
+                            break;
+                        case TcoObject c:
+                            affectedObjectsParent = affectedObject?.GetParent<TcoComponent>();
+                            break;
+                        default:
+                            break;
+                    }                   
 
                     if (affectedObject != null)
                     {
                         try
                         {
-                            TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+                            TcoAppDomain.Current.Dispatcher.Invoke(() =>
                             {
-                                affectedObjectPresenation = Vortex.Presentation.Wpf.Renderer.Get.CreatePresentation("Service", (IVortexObject)affectedObject);
+                                if (Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObject?.GetType()) != null)
+                                {
+                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObject);
+                                }
+                                else if(Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObjectsParent?.GetType()) != null)
+                                {
+                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObjectsParent);
+                                }
+
                             });
-                            
+
                         }
                         catch (Exception)
                         {
-
-                            //throw;
+                            //!swallow
                         }
                     }
                 }
@@ -213,5 +278,36 @@
                 return affectedObjectPresenation;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the diagnostics depth for observed object.
+        /// </summary>
+        public int DiagnosticsDepth
+        {
+            get
+            {
+                return diagnosticsDepth;
+            }
+            set
+            {
+                if (diagnosticsDepth == value)
+                {
+                    return;
+                }
+                
+                SetProperty(ref diagnosticsDepth, value);
+                this._tcoObject.MessageHandler.DiagnosticsDepth = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets command to roger selected persisted message
+        /// </summary>
+        public RelayCommand RogerSelectedMessageCommand { get; private set; }
+
+        /// <summary>
+        /// Gets command to roger all persisted messages
+        /// </summary>
+        public RelayCommand RogerAllMessagesCommand { get; private set; }
     }
 }

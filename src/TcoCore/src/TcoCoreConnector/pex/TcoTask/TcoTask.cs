@@ -85,7 +85,7 @@ namespace TcoCore
         /// Executes this task.
         /// </summary>
         /// <param name="parameter"></param>
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
             if (CanExecute(new object()))
             {
@@ -97,7 +97,7 @@ namespace TcoCore
 
                 this._invokeRequest.Synchron = true;
 
-                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' executed. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' invoked. {{@sender}}", LogInfo.Create(this));
 
                 RecordTaskAction?.Invoke(this.CodeProvider);
             }

@@ -59,5 +59,142 @@ namespace TcoPneumaticsConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string ___Home__ {
+            get {
+                return ResourceManager.GetString("___Home__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home and work position sensors are both active. Check the position of sensors!.
+        /// </summary>
+        public static string ___Home_and_work_position_sensors_are_both_active__Check_the_position_of_sensors___ {
+            get {
+                return ResourceManager.GetString("___Home_and_work_position_sensors_are_both_active__Check_the_position_of_sensors_" +
+                        "__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home position sensor.
+        /// </summary>
+        public static string ___Home_position_sensor__ {
+            get {
+                return ResourceManager.GetString("___Home_position_sensor__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home sensor signal.
+        /// </summary>
+        public static string ___Home_sensor_signal__ {
+            get {
+                return ResourceManager.GetString("___Home_sensor_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Home 11.
+        /// </summary>
+        public static string ___Move_Home_11__ {
+            get {
+                return ResourceManager.GetString("___Move_Home_11__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to home position actuator.
+        /// </summary>
+        public static string ___Move_to_home_position_actuator__ {
+            get {
+                return ResourceManager.GetString("___Move_to_home_position_actuator__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to home position signal.
+        /// </summary>
+        public static string ___Move_to_home_position_signal__ {
+            get {
+                return ResourceManager.GetString("___Move_to_home_position_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to Work.
+        /// </summary>
+        public static string ___Move_to_Work__ {
+            get {
+                return ResourceManager.GetString("___Move_to_Work__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to work position actuator.
+        /// </summary>
+        public static string ___Move_to_work_position_actuator__ {
+            get {
+                return ResourceManager.GetString("___Move_to_work_position_actuator__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to work position signal.
+        /// </summary>
+        public static string ___Move_to_work_position_signal__ {
+            get {
+                return ResourceManager.GetString("___Move_to_work_position_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None of the proximity sensors is active. Check the compressed air pressure and supply!.
+        /// </summary>
+        public static string ___None_of_the_proximity_sensors_is_active__Check_the_compressed_air_pressure_and_supply___ {
+            get {
+                return ResourceManager.GetString("___None_of_the_proximity_sensors_is_active__Check_the_compressed_air_pressure_and" +
+                        "_supply___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string ___Stop__ {
+            get {
+                return ResourceManager.GetString("___Stop__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work.
+        /// </summary>
+        public static string ___Work__ {
+            get {
+                return ResourceManager.GetString("___Work__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work position sensor.
+        /// </summary>
+        public static string ___Work_position_sensor__ {
+            get {
+                return ResourceManager.GetString("___Work_position_sensor__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work sensor signal.
+        /// </summary>
+        public static string ___Work_sensor_signal__ {
+            get {
+                return ResourceManager.GetString("___Work_sensor_signal__", resourceCulture);
+            }
+        }
     }
 }

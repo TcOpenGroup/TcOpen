@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data.InMemory
 {
+    /// <summary>
+    /// Provides in memory data repository.
+    /// <note type="important">
+    /// The data in this repository persist only during the run of the application.
+    /// </note>
+    /// </summary>
+    /// <typeparam name="T">POCO twin type</typeparam>
     public class InMemoryRepository<T> : RepositoryBase<T> where T : IBrowsableDataObject
     {
-
+        /// <summary>
+        /// Creates new instance of <see cref="InMemoryRepository{T}"/>
+        /// </summary>
+        /// <param name="parameters">Repository settings</param>
         public InMemoryRepository(InMemoryRepositorySettings<T> parameters)
         {
 
         }
 
+        /// <summary>
+        /// Creates new instance of <see cref="InMemoryRepository{T}"/>
+        /// </summary>
         public InMemoryRepository()
         {
 
@@ -104,6 +116,11 @@ namespace TcOpen.Inxton.Data.InMemory
             return this.Records.Where(p => p.Key.Contains(id)).LongCount();
         }
 
+        protected override bool ExistsNvi(string identifier)
+        {
+            return this.Records.Any(p => p.Key == identifier);
+        }
+        
         public override IQueryable<T> Queryable { get { return this._repository.AsQueryable().Select(p => p.Value); } }
     }    
 }

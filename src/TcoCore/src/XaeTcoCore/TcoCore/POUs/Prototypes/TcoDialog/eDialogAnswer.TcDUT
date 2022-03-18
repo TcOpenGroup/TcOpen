@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eDialogAnswer" Id="{ad0c95f8-cac1-07f0-37b4-7e14b4b70031}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eDialogAnswer :
+    (
+        NoAnswer := 0,
+        OK       := 10,
+        Yes      := 20,
+        No       := 30,
+        Cancel   := 40
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

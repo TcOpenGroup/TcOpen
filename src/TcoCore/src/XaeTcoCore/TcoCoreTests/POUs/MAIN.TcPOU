@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -10,6 +10,8 @@ VAR
 	_tcoContextTest_B					:	TcoContextTest;
 	_tcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
 	_tcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
+	_tcoSequenceAutoRestorableTest		:	TcoSequenceAutoRestorableTest;
+	_tcoSequenceNonAutoRestorableTest	:	TcoSequenceNonAutoRestorableTest;
 	_tcoMessengerContextTest			:	TcoMessengerContextTest;
 	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
 	_tcoComponentTest					:	TcoComponentTest;
@@ -22,6 +24,9 @@ VAR
 	_tcoComponentTestContext			:   TcoComponentTestContext;
 	_tcoRemoteTaskTestContext			:	TcoRemoteTaskTestContext;
 	_tcoSequencerTestContext			:	TcoSequencerTestContext;
+	_tcoSequenceTestContext				:	TcoSequenceTestContext;
+	_tcoLoggerTestContext				:	TcoLoggerTestContext;	
+	_tcoSequenceObserverTests			: 	TcoSequenceObserverTests;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//TcRpc tests
@@ -36,6 +41,10 @@ _tcoContextTest_B();
 _tcoSequencerAutoRestorableTest();
 
 _tcoSequencerNonAutoRestorableTest();
+
+_tcoSequenceAutoRestorableTest();		
+
+_tcoSequenceNonAutoRestorableTest();
 
 _tcoMessengerContextTest();
 
@@ -54,7 +63,13 @@ _tcoComponentTestContext.ProbeRun();
 
 _tcoRemoteTaskTestContext.ProbeRun();
 
-_tcoSequencerTestContext.ProbeRun();]]></ST>
+_tcoSequencerTestContext.ProbeRun();
+
+_tcoSequenceTestContext.ProbeRun();
+
+_tcoLoggerTestContext.ProbeRun();
+
+_tcoSequenceObserverTests.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

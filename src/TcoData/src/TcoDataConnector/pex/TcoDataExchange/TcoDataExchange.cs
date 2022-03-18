@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using TcOpen.Inxton.Data;
-using TcOpen.Inxton.Data;
 using Vortex.Connector;
 
 namespace TcoData
@@ -27,16 +26,16 @@ namespace TcoData
                     if (dataProperty != null)
                     {
                         var exchangableObject = dataProperty.GetValue(this);
-                        if (!(exchangableObject is Entity || exchangableObject is IEntity))
+                        if (!(exchangableObject is TcoEntity || exchangableObject is ITcoEntity))
                         {
-                            throw new Exception($"Data exchange member '_data' in {this.Symbol}  must inherit from {nameof(Entity)} (for structures) or  {nameof(IEntity)} (for function blocks)");
+                            throw new Exception($"Data exchange member '_data' in {this.Symbol}  must inherit from {nameof(TcoEntity)}");
                         }
 
                         _onliner = exchangableObject;
                     }
                     else
                     {
-                        throw new Exception($"Data exchange member '_data' is not member of {this.Symbol}. '_data'  must inherit from {nameof(Entity)} (for structures) or  {nameof(IEntity)} (for function blocks)");
+                        throw new Exception($"Data exchange member '_data' is not member of {this.Symbol}. '_data'  must inherit from {nameof(TcoEntity)}");
                     }
                 }
 
@@ -65,6 +64,14 @@ namespace TcoData
             _readTask.InitializeExclusively(Read);
             _updateTask.InitializeExclusively(Update);
             _deleteTask.InitializeExclusively(Delete);
+            _idExistsTask.InitializeExclusively(Exists);
+            _createOrUpdateTask.Initialize(CreateOrUpdate);
+        }
+
+        public void InitializeRemoteDataExchange<T>(IRepository<T> repository) where T : IBrowsableDataObject
+        {
+            this.InitializeRepository(repository);
+            this.InitializeRemoteDataExchange();
         }
 
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
@@ -89,6 +96,34 @@ namespace TcoData
             }
         }
 
+
+        private bool CreateOrUpdate()
+        {
+            _createOrUpdateTask.Read();
+            var id = _createOrUpdateTask._identifier.LastValue;
+            Onliner._EntityId.Synchron = id;
+            if (!this._repository.Exists(id))
+            {                
+                var cloned = this.Onliner.CreatePlainerType();
+                this.Onliner.FlushOnlineToPlain(cloned);
+                try
+                {
+                    _repository.Create(id, cloned);
+                    return true;
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+            }
+            else
+            {
+                var cloned = this.Onliner.CreatePlainerType();
+                this.Onliner.FlushOnlineToPlain(cloned);
+                _repository.Update(id, cloned);
+                return true;
+            }            
+        }
 
 
         private bool Read()
@@ -137,6 +172,19 @@ namespace TcoData
             }
         }
 
+        private bool Exists()
+        {
+            _idExistsTask.Read();
+            try
+            {
+                _idExistsTask._exists.Synchron = _repository.Exists(_idExistsTask._identifier.Cyclic);                
+                return true;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
 
         private IVortexObject _onlinerVortex;
         protected IVortexObject OnlinerVortex

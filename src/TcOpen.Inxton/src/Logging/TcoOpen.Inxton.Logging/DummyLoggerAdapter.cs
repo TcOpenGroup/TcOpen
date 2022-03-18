@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TcOpen.Inxton.Logging;
 
 namespace TcOpen.Inxton.Logging
@@ -7,15 +8,28 @@ namespace TcOpen.Inxton.Logging
     /// Default logger implementation with no real logging capability. 
     /// Provides an empty implementation of logging for the framework when no other logger created.    
     /// </summary>
-    public class DummyLoggerAdapter : ITcoLogger
+    public class DummyLoggerAdapter : ILogger
     {
-        public (string message, object payload, string serverity) LastMessage { get; private set; }
+        [Obsolete("This property is only for testing. Do not queue messages in production!")]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Collections.Concurrent.ConcurrentQueue<(string message, object payload, string serverity)> MessageQueue;
+
+        [Obsolete("This method is only for testing. Do not queue messages in production!")]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void QueueMessages()
+        {
+            MessageQueue = new System.Collections.Concurrent.ConcurrentQueue<(string message, object payload, string serverity)>();
+        }
+
+        private (string message, object payload, string serverity) lastMessage;
+
+        public (string message, object payload, string serverity) LastMessage { get => lastMessage; private set { lastMessage = value; MessageQueue?.Enqueue(lastMessage); } }
 
         public DummyLoggerAdapter()
         {
             
         }
-        
+
         public void ClearLastMessage()
         {
             LastMessage = (string.Empty, null, string.Empty);

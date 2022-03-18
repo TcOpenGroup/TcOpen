@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="Station001_Sequencer" Id="{4061f3f0-4d5d-0916-3f62-6782fe6fbe6d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_Sequencer EXTENDS TcoCore.TcoSequencer
 VAR
@@ -16,7 +16,11 @@ VAR
 	_sequenceCompleteCount	:	LREAL;
 	_stepsPerSequence	:	LREAL;
 END_VAR
-]]></Declaration>
+
+VAR 
+	_stepIdChange : INT := 400;
+	_stepsCountChange : BOOL := FALSE;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 ]]></ST>
@@ -26,7 +30,7 @@ END_VAR
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
 	AutoRestoreMode : eRestoreMode; 
 	refComponents : REFERENCE TO Station001_Components;
 END_VAR]]></Declaration>
@@ -57,7 +61,7 @@ METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Init();
-
+THIS^.Messenger.Info('Stations one sequencer is running.');
 IF(Step(100, 
 		TRUE, 
 		'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
@@ -73,40 +77,42 @@ IF(Step(200,
 		TRUE, 
 		'MOVE VERTICAL CYLINDER DOWN')) THEN
 //-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveDown().Done);
+	StepCompleteWhen(components.Vertical.MoveDown().Done );
 //-----------------------------------------------------	
 END_IF
 
 
-IF(Step(300, 
-		TRUE, 
-		'CLOSE GRIPPER')) THEN
-//-----------------------------------------------------
-	IF(components.Gripper.Close().Done) THEN
-		IF(_failedToLoad) THEN
-			RequestStep(100);
-		ELSE
-			StepCompleteWhen(TRUE);	
-		END_IF;	
-		
-	END_IF;		
-//-----------------------------------------------------	
-END_IF
-
-IF(Step(400, 
-		TRUE, 
-		'MOVE VERTICAL CYLINDER UP')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveUp().Done);
-//-----------------------------------------------------	
-END_IF
-
-IF(Step(500, 
-		TRUE, 
-		'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Horizontal.MoveRight().Done);
-//-----------------------------------------------------	
+IF NOT _stepsCountChange THEN
+	IF(Step(300, 
+			TRUE, 
+			'CLOSE GRIPPER')) THEN
+	//-----------------------------------------------------
+		IF(components.Gripper.Close().Done) THEN
+			IF(_failedToLoad) THEN
+				RequestStep(100);
+			ELSE
+				StepCompleteWhen(TRUE);	
+			END_IF;	
+			
+		END_IF;		
+	//-----------------------------------------------------	
+	END_IF
+	
+	IF(Step(_stepIdChange, 
+			TRUE, 
+			'MOVE VERTICAL CYLINDER UP')) THEN
+	//-----------------------------------------------------
+		StepCompleteWhen(components.Vertical.MoveUp().Done);
+	//-----------------------------------------------------	
+	END_IF
+	
+	IF(Step(500, 
+			TRUE, 
+			'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
+	//-----------------------------------------------------
+		StepCompleteWhen(components.Horizontal.MoveRight().Done);
+	//-----------------------------------------------------	
+	END_IF
 END_IF
 
 IF(Step(600, 
@@ -146,9 +152,12 @@ VAR_INPUT
 	PreviousState	: INT;
 	NewState 		: INT;
 END_VAR
-]]></Declaration>
+VAR
+	sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_onStateChangeCount := _onStateChangeCount + 1;
+        <ST><![CDATA[THIS^.Messenger.Trace(INT_TO_STRING(PreviousState));
+_onStateChangeCount := _onStateChangeCount + 1;
 components._simTimer(IN := FALSE);
 ]]></ST>
       </Implementation>

@@ -1,0 +1,111 @@
+<Window
+    x:Class="Sandbox.TcoInspectors.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Sandbox.TcoInspectors.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+    xmlns:vortex="http://vortex.mts/xaml"
+    Width="1000"
+    Height="1000"
+    mc:Ignorable="d"
+    Title="MainWindow">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid Grid.Row="0">
+        <TabControl>
+            <TabItem Header="Examples-1">
+                <ScrollViewer>
+                    <StackPanel  Grid.IsSharedSizeScope="True">
+                    <TabControl MaxHeight="600">
+                        <TabItem Header="Online">
+                                <TabControl>
+                                    <TabItem Header="Sequence">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="50*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ScrollViewer Grid.Row="1"  Grid.Column="0">
+                                            <vortex:RenderableContentControl  DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="DisplaySlim-Display"></vortex:RenderableContentControl>
+                                            </ScrollViewer>
+                                                <GroupBox Header="Inputs" Grid.Row="1" Grid.Column="1">
+                                                <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Components}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+                                            </GroupBox>
+                                            <WrapPanel HorizontalAlignment="Center">
+                                                <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1Task}" PresentationType="Base" Width="200"></vortex:RenderableContentControl>
+                                            </WrapPanel>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Settings">
+                                        <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ControlSlim-Control"></vortex:RenderableContentControl>
+                                    </TabItem>
+                                </TabControl>
+                          
+                        </TabItem>
+                        <TabItem Header="Shadow">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.Data}" PresentationType="ShadowControlSlim-ShadowControl"></vortex:RenderableContentControl>
+                                    <WrapPanel HorizontalAlignment="Center" Grid.Column="1">
+                                        <Button Command="{Binding FromOnlineToShadowCommand}">From online to shadow</Button>
+                                        <Button Command="{Binding FromShadowToOnlineCommand}">From shadow to online</Button>
+                                    </WrapPanel>
+                                </Grid>
+                        </TabItem>
+                    </TabControl>
+                  
+                    <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
+                    
+                </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Examples-2">
+                <Grid DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._examples_2}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="0">
+                        <vortex:RenderableContentControl PresentationType="Base-Control"></vortex:RenderableContentControl>
+                    </ScrollViewer>
+                    <vortex:RenderableContentControl Grid.Row="1" PresentationType="Diagnostics" ></vortex:RenderableContentControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Manually">
+                <StackPanel>
+                <StackPanel DataContext="{Binding TcoInspectorsPlc.MAIN._digitalInspectorTests._sut, Mode=OneWay}">
+                    <vortex:TcoDigitalInspectorShadowControlView/>
+                    <vortex:TcoDigitalInspectorShadowDisplayView/>
+                    <vortex:TcoDigitalInspectorControlView/>
+                    <vortex:TcoDigitalInspectorDisplayView/>
+                </StackPanel>
+                <StackPanel DataContext="{Binding TcoInspectorsPlc.MAIN._analogueInspectorTests._sut, Mode=OneWay}">
+                    <vortex:TcoAnalogueInspectorShadowControlView/>
+                    <vortex:TcoAnalogueInspectorShadowDisplayView/>
+                    <vortex:TcoAnalogueInspectorControlView/>
+                    <vortex:TcoAnalogueInspectorDisplayView/>
+                </StackPanel>
+                    <StackPanel DataContext="{Binding TcoInspectorsPlc.MAIN._dataInspectorTests._sut, Mode=OneWay}">
+                        <vortex:TcoDataInspectorShadowControlView/>
+                        <vortex:TcoDataInspectorShadowDisplayView/>
+                        <vortex:TcoDataInspectorControlView/>
+                        <vortex:TcoDataInspectorDisplayView/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Dynamic tree">
+                <vortex:DynamicTreeView DataContext="{Binding TcoInspectorsPlc.MAIN, Mode=OneWay}" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

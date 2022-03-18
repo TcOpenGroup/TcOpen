@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="_internals_TcoContext" Id="{0c059046-c7d3-0372-268c-dca3da778e0c}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'hide'}
 {attribute clr [ExcludeFromApiDocumentation()]}
@@ -45,7 +45,7 @@ METHOD PROTECTED FINAL _rtcUpdate
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._rtc.Update();]]></ST>
+        <ST><![CDATA[THIS^._rtc.UpdateInternal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearPlcCycleCounter" Id="{c583d8a3-29fc-0453-3825-9f103d525599}">
@@ -72,7 +72,9 @@ END_VAR]]></Declaration>
     _testDoneCounter := _testDoneCounter + 1;
     _probeRunRequiredCycles := 0;
     _probeCurrentCycleCount := 0;
+	{warning disable C0195}
     _testId := -1;
+	{warning enable C0195}
 END_IF]]></ST>
       </Implementation>
     </Method>

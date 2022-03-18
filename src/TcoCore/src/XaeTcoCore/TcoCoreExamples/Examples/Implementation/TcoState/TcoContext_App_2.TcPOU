@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcoContext_App_2" Id="{ce1d884b-4210-0146-16ab-4fb79198ab7f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoContext_App_2 EXTENDS TcoCore.TcoContext
 VAR
@@ -8,7 +8,7 @@ VAR
 	C2	:	LINT	:= 200;
 	TcoObject_Counter_1 : TcoObject_Counter(THIS^);
 	TcoObject_Counter_2 : TcoObject_Counter(THIS^);
-	TcoState_1	: TcoCore.TcoState(THIS^,TRUE);
+	TcoState_1	: TcoCore.TcoState(THIS^, TcoCore.eRestoreMode.None);
 //	TcoState_Counter_2	: TcoState(THIS^,TRUE);
 
 END_VAR]]></Declaration>

@@ -138,17 +138,32 @@
                     </materialDesign:Card>
                 </Grid>
             </TabItem>
+            <TabItem Header="ST002">
+                <StackPanel>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._s}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._sObserver}" PresentationType="Base"></vortex:RenderableContentControl>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Sequence recorder">
                 <vortex:SwiftRecorderView x:Name="swiftRecorder"></vortex:SwiftRecorderView>
             </TabItem>
             <TabItem Header="Object tree viewer">
                 <ScrollViewer>
                     <UniformGrid>
-                        <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN._station001, Mode=OneWay}" />
+                        <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN, Mode=OneWay}" />
 
                         <vortex:ObservableContentControl DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}"  />
                     </UniformGrid>
                 </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Diagnostics">
+                <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR._context }" PresentationType="Diagnostics"/>
+            </TabItem>
+            <TabItem Header="Dialogs">
+                <StackPanel>
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}" PresentationType="ControlSlim"/>
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }" PresentationType="ControlSlim"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>

@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoLogger" Id="{e93d64b3-7935-00d0-1165-0e260b788c79}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Default implementation of Logger.	
+				<note type="tip">
+					 This type is partially extended by IVF to retrieve messages from the logger in IVF application.			
+				</note>												 
+			</summary>		
+			<code>
+			   // Intializes message retrieval into applications logger
+				..._logger.StartLoggingMessages(eMessageCategory.All);
+			</code>
+			<code>
+				FUNCTION_BLOCK LoggerUsage EXTENDS TcoCore.TcoObject
+				VAR
+					_logger : TcoCore.TcoLogger(THIS^);
+					_counter : INT;
+				END_VAR
+				//---------------------------------------------
+				_counter := _counter + 1;
+				IF((_counter MOD 100) = 0) THEN
+					_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
+				END_IF;	
+			</code>		
+		</docu>
+~*)
+FUNCTION_BLOCK TcoLogger EXTENDS TcoObject IMPLEMENTS ITcoLogger
+VAR
+	 (*~
+		<docu>
+			<summary>
+				Circural buffer for this logger.					 
+			</summary>				
+		</docu>
+    ~*)
+	_buffer : ARRAY[0..MAX_MESSAGE_BUFFER_INDEX] OF TcoLogItem;
+	(*~
+		<docu>
+			<summary>
+				Circular carret of of the message buffer. 					 
+			</summary>				
+		</docu>
+    ~*)
+	_plcCarret : INT;
+	(*~
+		<docu>
+			<summary>
+				Minimal log level. Only messages with higher serverity than this will be logged.				 
+			</summary>				
+		</docu>
+    ~*)
+	_minLoggingLevel : eMessageCategory := eMessageCategory.Notification;
+END_VAR
+
+VAR CONSTANT
+	(*~
+		<docu>
+			<summary>
+				Max number of buffered log entries. 				 
+			</summary>				
+		</docu>
+    ~*)
+	MAX_MESSAGE_BUFFER_INDEX : INT := 1000;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Push" Id="{62e64ee2-abb0-0506-3e90-8aa51249918c}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `PushMessage`
+				<note:important>When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Push
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Message/log entry text.				 
+			</summary>				
+		</docu>
+	~*)
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+	(*~
+		<docu>
+			<summary>
+				Message/log entry category.				 
+			</summary>				
+		</docu>
+	~*)
+	Category : eMessageCategory;
+END_VAR
+VAR
+	_tmpMessage : TcoMessage;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(Parent <> 0 AND_THEN Parent.Context <> 0 AND_THEN Parent.Context.RealTimeClock <> 0) THEN
+	_tmpMessage.TimeStamp :=  Parent.Context.RealTimeClock.NowLocal();	
+	_tmpMessage.Cycle := Parent.Context.StartCycleCount;	
+END_IF;	
+		
+_tmpMessage.Text := Text;
+_tmpMessage.Identity := 0;
+_tmpMessage.Category := Category;		
+_tmpMessage.MessageDigest := 0;
+	
+
+PushMessage(_tmpMessage);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PushMessage" Id="{fc2f2ea9-87af-0452-32db-ced92ed04c01}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the message to logging buffer.
+				See also `Push`
+				<note type="important">
+						This method is typically invoked from a `TcoMessenger`. 
+						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
+						For details see `TcoMessengerSettings`.
+				</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PushMessage 
+VAR_INPUT
+	inMessage : TcoMessage;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(inMessage.Category < THIS^._minLoggingLevel OR (THIS^._minLoggingLevel = eMessageCategory.None)) THEN
+	RETURN;
+END_IF
+
+IF(_plcCarret > MAX_MESSAGE_BUFFER_INDEX) THEN
+		_plcCarret := 1;
+END_IF
+
+IF(NOT _buffer[_plcCarret].ExpectDequeing) THEN
+		
+	_buffer[_plcCarret].Category := inMessage.Category;
+	_buffer[_plcCarret].Cycle := inMessage.Cycle;	
+	_buffer[_plcCarret].ExpectDequeing := TRUE;
+	_buffer[_plcCarret].Identity := inMessage.Identity;
+	_buffer[_plcCarret].MessageDigest := inMessage.MessageDigest;
+	_buffer[_plcCarret].PerCycleCount := inMessage.PerCycleCount;
+	_buffer[_plcCarret].Text := inMessage.Text;	
+	_buffer[_plcCarret].TimeStamp := inMessage.TimeStamp;
+			
+	_plcCarret := _plcCarret + 1;
+ELSE
+	_buffer[0].Text := 'Logging buffer is full we are loosing messages!!!';
+	_buffer[0].Category := eMessageCategory.Critical;
+	_buffer[0].ExpectDequeing := TRUE;
+	_buffer[0].Cycle := THIS^.Context.StartCycleCount;	
+    _buffer[0].PerCycleCount := _buffer[0].PerCycleCount + 1;	
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

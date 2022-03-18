@@ -27,14 +27,13 @@ namespace TcoDataUnitTests
 
             try
             {
-                sut.DataTests.DataManager.InitializeRemoteDataExchange();
+                sut.DataTests.DataManager.InitializeRemoteDataExchange();           
             }
             catch (Exception)
             {
                 //throw;
             }
-            
-
+          
             Entry.TcoDataTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
 
             sut.ExecuteProbeRun(10, (int)eDataTests.RestoreTasks);
@@ -210,5 +209,86 @@ namespace TcoDataUnitTests
             Assert.True(sut.DataTests.DataManager._deleteTask._taskState.Synchron == (int) eTaskState.Done);
         }
 
-    }
+
+        [Test, Order((int)eDataTests.DataExist)]
+        public void Data_exists_with_valid_id()
+        {
+            //-- Arrange
+            sut._dataExistsDone.Synchron = false;
+            sut._identifier.Synchron = "Idoexist";
+
+            sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Create(sut._identifier.Synchron, new PlainstProcessData());
+
+            //-- Act
+            sut.ExecuteProbeRun(
+                testId: (int)eDataTests.DataExist,
+                endCondition: () => sut._dataExistsDone.Synchron);
+
+            //-- Assert            
+            Assert.True(sut.DataTests.DataManager._idExistsTask._exists.Synchron);
+        }
+
+        [Test, Order((int)eDataTests.DataExist)]
+        public void Data_exists_with_invalid_id()
+        {
+            //-- Arrange
+            sut._dataExistsDone.Synchron = false;
+            sut._identifier.Synchron = "Idonotexist";            
+
+            //-- Act
+            sut.ExecuteProbeRun(
+                testId: (int)eDataTests.DataExist,
+                endCondition: () => sut._dataExistsDone.Synchron);
+
+            //-- Assert            
+            Assert.IsFalse(sut.DataTests.DataManager._idExistsTask._exists.Synchron);
+        }
+
+        [Test, Order((int)eDataTests.CreateOrUpdate)]
+        public void CreateOrUpdate_non_existing_id()
+        {
+            //-- Arrange
+            sut._createOrUpdateDone.Synchron = false;
+            sut._identifier.Synchron = "CreateUpdateNonExisting";
+
+            Assert.IsFalse(sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Exists(sut._identifier.Synchron));
+
+            //-- Act
+            sut.ExecuteProbeRun(
+                testId: (int)eDataTests.CreateOrUpdate,
+                endCondition: () => sut._createOrUpdateDone.Synchron);
+
+            //-- Assert            
+            Assert.IsTrue(sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Exists(sut._identifier.Synchron));
+        }
+
+        [Test, Order((int)eDataTests.CreateOrUpdate)]
+        public void CreateOrUpdate_existing_id()
+        {
+            //-- Arrange
+            sut._createOrUpdateDone.Synchron = false;
+            sut._identifier.Synchron = "CreateUpdateExisting";
+
+            sut.DataTests.DataManager._data.EntityHeader.Synchron = false;
+            sut.DataTests.DataManager._data.Cu_1.A_Check_1.ProcessedData.Maximum.Synchron = 0;
+            var plain = sut.DataTests.DataManager._data.CreatePlainerType();
+            sut.DataTests.DataManager._data.FlushOnlineToPlain(plain);
+            sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Create(sut._identifier.Synchron, plain);
+
+            Assert.IsTrue(sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Exists(sut._identifier.Synchron));
+
+            sut.DataTests.DataManager._data.EntityHeader.Synchron = true;
+            sut.DataTests.DataManager._data.Cu_1.A_Check_1.ProcessedData.Maximum.Synchron = 784.0f;
+
+            //-- Act
+            sut.ExecuteProbeRun(
+                testId: (int)eDataTests.CreateOrUpdate,
+                endCondition: () => sut._createOrUpdateDone.Synchron);
+
+            //-- Assert            
+            Assert.IsTrue(sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Exists(sut._identifier.Synchron));
+            Assert.IsTrue(sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Read(sut._identifier.Synchron).EntityHeader);
+            Assert.AreEqual(784.0f, sut.DataTests.DataManager.GetRepository<PlainstProcessData>().Read(sut._identifier.Synchron).Cu_1.A_Check_1.ProcessedData.Maximum);
+        }
+    }   
 }

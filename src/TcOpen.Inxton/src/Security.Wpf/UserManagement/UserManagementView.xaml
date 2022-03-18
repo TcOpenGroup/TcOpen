@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
     xmlns:local="TcOpen.Inxton.Local.Security.Wpf"
+    xmlns:vortex="http://vortex.mts/xaml"
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch"
     HorizontalContentAlignment="Stretch"
@@ -23,22 +24,33 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
-    <controls:PermissionBox Permissions="Administrator">
-        <TabControl>
-        <TabItem Header="{x:Static p:strings.CurrentUsers}">
-            <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
-                <Grid Margin="12" Style="{DynamicResource Card}">
-                    <controls:AllUsersView/>
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="{x:Static p:strings.NewUser}">
-            <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
-                <Grid Margin="12" Style="{DynamicResource Card}">
-                    <controls:AddNewUserView />
-                </Grid>
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
-    </controls:PermissionBox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <controls:PermissionBox Permissions="Administrator">
+            <TabControl>
+                <TabItem Header="{x:Static p:strings.CurrentUsers}">
+                    <!--<ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">-->
+                        <Grid Margin="12" Style="{DynamicResource Card}">
+                            <controls:AllUsersView/>
+                        </Grid>
+                    <!--</ScrollViewer>-->
+                </TabItem>
+                <TabItem Header="{x:Static p:strings.NewUser}">
+                    <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="12" Style="{DynamicResource Card}">
+                            <controls:AddNewUserView />
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </controls:PermissionBox>
+        <vortex:HelpProviderView Grid.Row="1">
+            <vortex:HelpProviderView.DataContext>
+                <vortex:HelpProviderViewModel ComponentName="(TcOpen)UserManagement" />
+            </vortex:HelpProviderView.DataContext>
+        </vortex:HelpProviderView>
+    </Grid>
 </UserControl>

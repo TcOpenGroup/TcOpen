@@ -25,12 +25,16 @@
 
 
     <Grid x:Name="RootContainer">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
         <TabControl>
             <TabItem Header="Data">
                 <Grid Name="ResizableGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="auto" MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight, Converter={wpf:PercentageConverter}, ConverterParameter=0.7}" />
+                        <RowDefinition Height="auto" MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight, Converter={wpf:PercentageConverter}, ConverterParameter=0.5}" />
 
                         <RowDefinition x:Name="GridSplitterRow" Height="Auto" />
                         <RowDefinition />
@@ -38,69 +42,70 @@
                     </Grid.RowDefinitions>
                     <GridSplitter
                         Grid.Row="2"
-                        Height="5"
+                        Height="15"
                         Margin="0,5,0,5"
+                        Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
                         HorizontalAlignment="Stretch" />
                     <Grid Grid.Row="0">
-                        <StackPanel
-                            Height="Auto"
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Right"
-                            Orientation="Horizontal">
+                        <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+    
+                            <UniformGrid Grid.Column="1" Columns="3" HorizontalAlignment="Center" Margin="0,5" VerticalAlignment="Center">
+
+                                <Button Command="{Binding PageDownCommand}" Content="&lt;&lt;"  Margin=" 5,0"/>
+                                <Button Command="{Binding FindByCriteriaCommand}" Content="{x:Static p:strings.Documents}" Margin=" 5,0" />
+                                <Button Command="{Binding PageUpCommand}" Content="&gt;&gt;"  Margin=" 5,0"/>
+                            </UniformGrid>
+
                             <StackPanel
-                                x:Name="dropdown"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="10,0,10,0"
-                                    VerticalAlignment="Center"
-                                    Text="" />
-                                <ComboBox
-                                    x:Name="PerPageFilterComboBox"
-                                    VerticalAlignment="Center"
-                                    Background="{Binding ElementName=DataGrid, Path=Background}"
-                                    ItemsSource="{Binding PerPageFilter}"
-                                    SelectedItem="{Binding Limit, Mode=TwoWay}" />
-                            </StackPanel>
-                            <StackPanel
-                                Margin="0,0,10,0"
+                                Grid.Column="2"
+                                Height="Auto"
+                                Margin="0,0,0,0"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-                                <TextBox
-                                    x:Name="FilterField"
-                                    Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
-                                    MinWidth="200"
-                                    Margin="0"
-                                    VerticalContentAlignment="Center"
-                                    BorderBrush="{DynamicResource OnSecondary}"
-                                    Text="{Binding FilterByID}" />
-                                <Button
-                                    Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
-                                    Margin="0"
-                                    Command="{Binding FindByCriteriaCommand}"
-                                    Content="🔍"
-                                    Style="{x:Null}">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border
-                                                Width="30"
-                                                Margin="-1,0,0,0"
-                                                BorderBrush="{DynamicResource Primary}"
-                                                BorderThickness="1,1,1,1"
-                                                CornerRadius="1,1,1,1"
-                                                Style="{x:Null}">
-                                                <TextBlock
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    FontSize="15"
-                                                    Text="{TemplateBinding Content}" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
+                                <StackPanel
+                                    x:Name="dropdown"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="10,0,10,0"
+                                        VerticalAlignment="Center"
+                                        Text="" />
+                                    <ComboBox
+                                        x:Name="PerPageFilterComboBox"
+                                        VerticalAlignment="Center"
+                                        Background="{Binding ElementName=DataGrid, Path=Background}"
+                                        ItemsSource="{Binding PerPageFilter}"
+                                        SelectedItem="{Binding Limit, Mode=TwoWay}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Margin="0,0,10,0"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                    <TextBox
+                                        x:Name="FilterField"
+                                        Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
+                                        MinWidth="200"
+                                        Margin="0"
+                                        VerticalContentAlignment="Center"
+                                        BorderBrush="{DynamicResource OnSecondary}"
+                                        Text="{Binding FilterByID}" />
+                                    <Button
+                                        Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
+                                        Margin="2,0"
+                                        Command="{Binding FindByCriteriaCommand}"
+                                        Content="🔍">
+
+                                    </Button>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
+                        </Grid>
                     </Grid>
                     <Grid Grid.Row="1" Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
                         <Grid.ColumnDefinitions>
@@ -124,12 +129,15 @@
                             SelectionUnit="FullRow">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding _EntityId}" Header="ID" />
-                                <DataGridTextColumn Binding="{Binding _Created, Converter={wpf:HumanizeDateConverter}}" Header="{x:Static p:strings.Created}" />
+                                <!--<DataGridTextColumn Binding="{Binding _Created, Converter={wpf:HumanizeDateConverter}}" Header="{x:Static p:strings.Created}" />
                                 <DataGridTextColumn
                                     Width="*"
                                     Binding="{Binding _Modified, Converter={wpf:HumanizeDateConverter}}"
-                                    Header="{x:Static p:strings.Modified}" />
+                                    Header="{x:Static p:strings.Modified}" />-->
 
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Header="" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -147,14 +155,13 @@
                                 Grid.Row="1"
                                 Padding="10"
                                 Header="{Binding DataExchange._data._EntityId.Shadow}">
-                                <ScrollViewer
+                                <ContentControl
                                     x:Name="EditData"
-                                    Padding="10"
-                                    IsVisibleChanged="ControlDataVisibilityChanged"
-                                    VerticalScrollBarVisibility="Auto"
+                                    Margin="10"
+                                    IsVisibleChanged="ControlDataVisibilityChanged"                                    
                                     Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}">
                                     <!--<vortex:RenderableContentControl DataContext="{Binding DataExchange._data}" PresentationType="ShadowControl"/>-->
-                                </ScrollViewer>
+                                </ContentControl>
                             </GroupBox>
                             <GroupBox
                                 Grid.Row="1"
@@ -162,7 +169,7 @@
                                 Header="{Binding DataExchange._data._EntityId.Shadow}"
                                 IsVisibleChanged="DisplayDataVisibilityChanged"
                                 Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-                                <ScrollViewer x:Name="DisplayData" VerticalScrollBarVisibility="Auto" />
+                                <ContentControl x:Name="DisplayData"/>
                             </GroupBox>
                         </Grid>
                         <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=NewCopy}">
@@ -204,85 +211,67 @@
                             <RowDefinition Height="50*" />
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0">
-                            <Expander Header="Data" IsExpanded="True">
-                                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Button
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button
+                                        Margin="2,0"
                                         Command="{Binding StartCreateNewCommand}"
                                         Content="{x:Static p:strings.New}"
                                         Visibility="{Binding StartCreateNewCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <Button
+                                <Button
+                                        Margin="2,0"
                                         Command="{Binding StartCreateCopyOfExisting}"
                                         Content="{x:Static p:strings.Copy}"
                                         Visibility="{Binding StartCreateCopyOfExistingAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <Button
+                                <Button
+                                        Margin="2,0"
                                         Command="{Binding UpdateCommand}"
                                         Content="{x:Static p:strings.Update}"
                                         Visibility="{Binding UpdateCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
 
-                                    <Button
+                                <Button
+                                        Margin="2,0"
                                         Click="Button_Click"
                                         Command="{Binding EditCommand}"
                                         Content="{x:Static p:strings.Edit}"
                                         Visibility="{Binding EditCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <StackPanel>
-                                        <Button
-                                            Command="{Binding SendToPlcCommand}"
-                                            Content="{x:Static p:strings.SendToPlc}"
-                                            Visibility="{Binding SendToPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                        <Button
-                                            Command="{Binding LoadFromPlcCommand}"
-                                            Content="{x:Static p:strings.FromPlc}"
-                                            Visibility="{Binding LoadFromPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <Button
-                                            Command="{Binding ImportCommand}"
-                                            Content="Import"
-                                            Visibility="{Binding ImportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                        <Button
-                                            Command="{Binding ExportCommand}"
-                                            Content="Export"
-                                            Visibility="{Binding ExportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    </StackPanel>
-                                    <Button
+
+                                <Button
+                                        Margin="2,0"
+                                        Command="{Binding SendToPlcCommand}"
+                                        Content="{x:Static p:strings.SendToPlc}"
+                                        Visibility="{Binding SendToPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <Button
+                                        Margin="2,0"
+                                        Command="{Binding LoadFromPlcCommand}"
+                                        Content="{x:Static p:strings.FromPlc}"
+                                        Visibility="{Binding LoadFromPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+
+                                <Button
+                                        Margin="2,0"
+                                        Command="{Binding ImportCommand}"
+                                        Content="Import"
+                                        Visibility="{Binding ImportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <Button
+                                        Margin="2,0"
+                                        Command="{Binding ExportCommand}"
+                                        Content="Export"
+                                        Visibility="{Binding ExportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                                <Button
+                                        Margin="2,0"
                                         Command="{Binding CancelEditCommand}"
                                         Content="{x:Static p:strings.Cancel}"
                                         Visibility="{Binding CancelEditCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <Button
+                                <Button
+                                        Margin="2,0"
                                         Command="{Binding DeleteCommand}"
                                         Content="{x:Static p:strings.Delete}"
                                         Visibility="{Binding DeleteCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </WrapPanel>
-                            </Expander>
+                            </WrapPanel>
                         </Border>
-                        <Border Grid.Row="1">
-
-                            <Expander Header="Filter" IsExpanded="False">
-                                <StackPanel Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-
-                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <Button Command="{Binding PageDownCommand}" Content="&lt;&lt;" />
-                                        <WrapPanel
-                                            Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                                            <Button Command="{Binding FindByCriteriaCommand}" Content="{x:Static p:strings.Documents}" />
-                                        </WrapPanel>
-                                        <Button
-                                            Grid.Column="2"
-                                            Command="{Binding PageUpCommand}"
-                                            Content="&gt;&gt;" />
-                                    </Grid>
-
-                                </StackPanel>
-                            </Expander>
-                        </Border>
+        
 
                     </Grid>
                 </Grid>
@@ -306,6 +295,11 @@
                 </DataGrid>
             </TabItem>
         </TabControl>
+        <vortex:HelpProviderView Grid.Row="1">
+            <vortex:HelpProviderView.DataContext>
+                <vortex:HelpProviderViewModel ComponentName="(TcOpen)DataView" />
+            </vortex:HelpProviderView.DataContext>
+        </vortex:HelpProviderView>
     </Grid>
 
 </UserControl>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Logging;
-using TcOpen.Inxton.Logging;
+using TcOpen.Inxton.Security;
 using TcOpen.Inxton.Threading;
 
 namespace TcOpen.Inxton
@@ -51,7 +51,7 @@ namespace TcOpen.Inxton
         /// <summary>
         /// Gets logger for this application.
         /// </summary>
-        public ITcoLogger Logger { get; internal set; } = new DummyLoggerAdapter();
+        public ILogger Logger { get; internal set; } = new DummyLoggerAdapter();
 
         /// <summary>
         /// Gets dispatcher for this application.
@@ -63,5 +63,7 @@ namespace TcOpen.Inxton
         /// Gets application builder.
         /// </summary>
         public TcoAppBuilder Builder { get; private set; }
+
+        public IAuthenticationService AuthenticationService { get; internal set; }
     }
 }

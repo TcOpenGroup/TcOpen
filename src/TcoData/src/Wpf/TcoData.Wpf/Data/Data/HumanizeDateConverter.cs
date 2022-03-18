@@ -42,7 +42,7 @@ namespace TcoData
             if (timeSpan.Minutes > 0)
             {
                 sb.AppendFormat("{0}{1} {2}", (sb.Length > 0) ? ", " : string.Empty,
-                  timeSpan.Minutes, (timeSpan.Minutes > 1) ? localized.Minute : localized.Minute);
+                  timeSpan.Minutes, (timeSpan.Minutes > 1) ? localized.Minutes : localized.Minute);
                 if (approximate) return sb.ToString() + suffix;
             }
             if (timeSpan.Seconds > 0)

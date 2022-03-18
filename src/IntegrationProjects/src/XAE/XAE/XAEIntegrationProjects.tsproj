@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{C4F42FBB-B167-8971-725D-0086D85856A4}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">AI_ChannelStatus</Name>
+			<Name GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">AI_ChannelStatus</Name>
 			<BitSize>128</BitSize>
 			<SubItem>
 				<Name>UnderRange</Name>
@@ -112,31 +112,6 @@
 					</Property>
 				</Properties>
 			</SubItem>
-			<Method>
-				<Name>__GetInterfaceReference</Name>
-				<ReturnType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</ReturnType>
-				<ReturnBitSize>8</ReturnBitSize>
-				<Parameter>
-					<Name>nInterfaceId</Name>
-					<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-					<BitSize>32</BitSize>
-				</Parameter>
-				<Parameter>
-					<Name>pRef</Name>
-					<Type GUID="{18071995-0000-0000-0000-000000000007}" PointerTo="2">DWORD</Type>
-					<BitSize>64</BitSize>
-				</Parameter>
-			</Method>
-			<Method>
-				<Name>__GetInterfacePointer</Name>
-				<ReturnType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</ReturnType>
-				<ReturnBitSize>8</ReturnBitSize>
-				<Parameter>
-					<Name>pRef</Name>
-					<Type GUID="{18071995-0000-0000-0000-000000000007}" PointerTo="2">DWORD</Type>
-					<BitSize>64</BitSize>
-				</Parameter>
-			</Method>
 			<Properties>
 				<Property>
 					<Name>PouType</Name>
@@ -229,8 +204,11 @@
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000120b0000120b00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.104.1.1" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
+			<Settings MaxCpus="2" NonWinCpus="1">
+				<Cpu CpuId="1"/>
+			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -241,7 +219,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project Disabled="true" GUID="{F2EE7FEF-C378-46BC-BB6A-865036F0C8ED}" Name="IntegrationProjects" PrjFilePath="IntegrationProjects\IntegrationProjects.plcproj" TmcFilePath="IntegrationProjects\IntegrationProjects.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{F2EE7FEF-C378-46BC-BB6A-865036F0C8ED}" Name="IntegrationProjects" PrjFilePath="IntegrationProjects\IntegrationProjects.plcproj" TmcFilePath="IntegrationProjects\IntegrationProjects.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="IntegrationProjects\IntegrationProjects.tmc">
 					<Name>IntegrationProjects Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -253,7 +231,7 @@
 						</Var>
 						<Var>
 							<Name>TcoIoBeckhoff.IO._EL3001.iCHANNEL_1.Status</Name>
-							<Type GUID="{C4F42FBB-B167-8971-725D-0086D85856A4}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
+							<Type GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}" Namespace="TcoIoBeckhoff">AI_ChannelStatus</Type>
 						</Var>
 						<Var>
 							<Name>TcoIoBeckhoff.IO._EL3001.WcState._WcState</Name>

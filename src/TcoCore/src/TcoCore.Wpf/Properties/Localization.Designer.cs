@@ -61,6 +61,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acknowledgement.
+        /// </summary>
+        public static string Acknowledgement {
+            get {
+                return ResourceManager.GetString("Acknowledgement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Affected Object.
         /// </summary>
         public static string AffectedObject {
@@ -106,11 +115,29 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diagnostics depth.
+        /// </summary>
+        public static string DiagnosticsDepth {
+            get {
+                return ResourceManager.GetString("DiagnosticsDepth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Diagnostics is running... wait please....
         /// </summary>
         public static string DiagnosticsRunnig {
             get {
                 return ResourceManager.GetString("DiagnosticsRunnig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discarting messeges.
+        /// </summary>
+        public static string DiscartingMessages {
+            get {
+                return ResourceManager.GetString("DiscartingMessages", resourceCulture);
             }
         }
         
@@ -169,6 +196,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No message selected.
+        /// </summary>
+        public static string NoMessageSelected {
+            get {
+                return ResourceManager.GetString("NoMessageSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Per cycle count.
         /// </summary>
         public static string PerCycleCount {
@@ -183,6 +219,24 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         public static string PeripheryDetailsView_FullName {
             get {
                 return ResourceManager.GetString("PeripheryDetailsView_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACKN.
+        /// </summary>
+        public static string Roger {
+            get {
+                return ResourceManager.GetString("Roger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACKN ALL.
+        /// </summary>
+        public static string RogerAll {
+            get {
+                return ResourceManager.GetString("RogerAll", resourceCulture);
             }
         }
         
@@ -228,6 +282,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         public static string UpdateMessages {
             get {
                 return ResourceManager.GetString("UpdateMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We have no further info about this message.
+        /// </summary>
+        public static string WeHaveNoFurtherInfoAboutThisMessage {
+            get {
+                return ResourceManager.GetString("WeHaveNoFurtherInfoAboutThisMessage", resourceCulture);
             }
         }
     }

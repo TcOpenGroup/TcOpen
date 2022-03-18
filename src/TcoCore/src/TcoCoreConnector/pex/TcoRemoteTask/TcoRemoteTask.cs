@@ -11,9 +11,9 @@ namespace TcoCore
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Initializes this  <see cref="RemoteTask"/>.
+        /// Initializes this  <see cref="TcoRemoteTask"/>.
         /// </summary>
-        /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
+        /// <param name="deferredAction">Action to be executed on this <see cref="TcoRemoteTask"/> call.</param>
         public void Initialize(Action deferredAction)
         {
             DeferredAction = deferredAction;
@@ -25,7 +25,7 @@ namespace TcoCore
         /// <summary>
         /// Initializes this  <see cref="RemoteTask"/>.
         /// </summary>
-        /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
+        /// <param name="deferredAction">Action to be executed on this <see cref="TcoRemoteTask"/> call.</param>
         public void Initialize(Func<bool> deferredAction)
         {
             DeferredAction = new Action(() => deferredAction());
@@ -40,7 +40,7 @@ namespace TcoCore
         /// Initializes this  <see cref="RemoteTask"/> exclusively for this <see cref="DeferredAction"/>. Any following attempt
         /// to initialize this <see cref="RemoteTask"/> will throw an exception.
         /// </summary>
-        /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
+        /// <param name="deferredAction">Action to be executed on this <see cref="TcoRemoteTask"/> call.</param>
         public void InitializeExclusively(Action deferredAction)
         {
 
@@ -104,7 +104,8 @@ namespace TcoCore
                 {
                     this._hasException.Synchron = true;
                     this._exceptionMessage.Synchron = ex.ToString().Substring(0, 244);
-                    RemoteExecutionException = ex;                   
+                    RemoteExecutionException = ex;
+                    RemoteExceptionDetails = ex.ToString();
                     TcOpen.Inxton.TcoAppDomain.Current.Logger.Error($"Remote execution failure '{ex.ToString()}'", Logging.LogInfo.Create(this));
                     return;
                 }
@@ -137,6 +138,21 @@ namespace TcoCore
 
                 remoteExecutionException = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemoteExecutionException)));
+            }
+        }
+
+        string remoteExceptionDetails;
+
+        /// <summary>
+        /// Gets string representation of the current exception on this remote task.
+        /// </summary>
+        public string RemoteExceptionDetails
+        {
+            get => remoteExceptionDetails; 
+            private set
+            {
+                remoteExceptionDetails = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemoteExceptionDetails)));
             }
         }
 

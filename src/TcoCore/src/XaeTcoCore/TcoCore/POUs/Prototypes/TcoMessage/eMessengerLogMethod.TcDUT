@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eMessengerLogMethod" Id="{534a491b-21ad-0416-3d46-870a256ca6e4}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Message logging method. Determines how the messages will be pushed to the log buffer.							
+		</summary>			
+	</docu>	
+~*)
+{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eMessengerLogMethod :
+(	
+	(*~
+	<docu>
+		<summary>
+			Logs message when the occurence of the message content arises. 
+			If the message with the same content occurs in the n+1 cycle such message is not pushed. 									
+		</summary>			
+	</docu>	
+	~*)
+	OnEventRisen := 100,
+	
+	(*~
+	<docu>
+		<summary>
+			Logs message continuosly with not filtering.
+			<note type="important">This method may easily overrun the circular message buffer.</note> 									
+		</summary>			
+	</docu>	
+	~*)
+	Continuous := 200,
+	
+	(*~
+	<docu>
+		<summary>
+			No logging.	 									
+		</summary>			
+	</docu>	
+	~*)
+	NoLogging := 300
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
