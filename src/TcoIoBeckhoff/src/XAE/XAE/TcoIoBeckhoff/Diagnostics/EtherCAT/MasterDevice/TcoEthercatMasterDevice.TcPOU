@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoEthercatMasterDevice" Id="{2c5733bf-b0c9-0df1-398a-03fa7f389f8e}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoEthercatMasterDevice EXTENDS TcoComponent IMPLEMENTS ITcoEthercatMasterDevice
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoEthercatMasterDevice EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoEthercatMasterDevice
 VAR_INPUT
     Inputs   		:	Inputs_5FC39E3C;
     InfoData		:	InfoData_45F98C50;
