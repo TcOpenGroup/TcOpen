@@ -105,8 +105,9 @@ namespace TcOpen.Inxton.RavenDb
                 }
                 else
                 {
-                    return session.Query<T>()
-                    .Search(x => x._EntityId, "*" + identifier + "*")
+                    return session.Query<T>()                        
+                    //.Search(x => x._EntityId, "*" + identifier + "*")
+                    .Where(x => x._EntityId.StartsWith(identifier))
                     .Skip(skip)
                     .Take(limit)
                     .ToArray();                    
@@ -128,6 +129,15 @@ namespace TcOpen.Inxton.RavenDb
                         .Search(x => x._EntityId, "*" + identifier + "*")
                         .Count();
                 }
+            }
+        }
+
+        protected override bool ExistsNvi(string identifier)
+        {
+            using (var session = _store.OpenSession())
+            {
+                T entity = session.Load<T>(identifier);               
+                return entity != null;
             }
         }
 

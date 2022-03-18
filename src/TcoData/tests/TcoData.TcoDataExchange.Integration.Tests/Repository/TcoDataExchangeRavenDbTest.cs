@@ -9,7 +9,7 @@ using TcoDataUnitTests;
 using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.RavenDb;
 
-namespace TcoData.TcoDataExchange.Integration.Tests.Repository
+namespace TcoDataUnitTests
 {
     [TestFixture, Timeout(5000)]
     public class TcoDataExchangeRavenDbTest : TcoDataExchangeBaseTest
