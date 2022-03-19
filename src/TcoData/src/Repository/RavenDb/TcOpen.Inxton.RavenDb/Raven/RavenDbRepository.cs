@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Operations;
+using Raven.Client.Exceptions;
+using Raven.Client.Exceptions.Database;
+using Raven.Client.ServerWide;
+using Raven.Client.ServerWide.Operations;
 using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.RavenDb
@@ -17,8 +21,36 @@ namespace TcOpen.Inxton.RavenDb
     {
         private readonly IDocumentStore _store;
 
-        public RavenDbRepository(RavenDbRepositorySettingsBase<T> parameters)
+
+        protected void EnsureDatabaseExists(IDocumentStore store, string database = null, bool createDatabaseIfNotExists = true)
         {
+            database = database ?? store.Database;
+
+            if (string.IsNullOrWhiteSpace(database))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(database));
+
+            try
+            {
+                store.Maintenance.ForDatabase(database).Send(new GetStatisticsOperation());
+            }
+            catch (DatabaseDoesNotExistException)
+            {
+                if (createDatabaseIfNotExists == false)
+                    throw;
+
+                try
+                {
+                    store.Maintenance.Server.Send(new CreateDatabaseOperation(new DatabaseRecord(database)));
+                }
+                catch (ConcurrencyException)
+                {
+                    // The database was already created before calling CreateDatabaseOperation
+                }
+            }
+        }
+
+        public RavenDbRepository(RavenDbRepositorySettingsBase<T> parameters)
+        {           
             var existing = SharedData.Stores.SingleOrDefault(x => x.Database == parameters.Store.Database);
 
             if (existing != null)
@@ -30,6 +62,8 @@ namespace TcOpen.Inxton.RavenDb
                 SharedData.Stores.Add(parameters.Store);
                 _store = parameters.Store;
             }
+
+            EnsureDatabaseExists(_store, parameters.Store.Database);
         }
 
         protected override void CreateNvi(string identifier, T data)
