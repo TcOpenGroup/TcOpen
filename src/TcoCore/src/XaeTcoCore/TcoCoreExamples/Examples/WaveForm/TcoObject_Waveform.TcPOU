@@ -4,9 +4,9 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoObject_Waveform EXTENDS TcoObject
 VAR
 	_TcoTask_Waveform				:	TcoCore.TcoTask(THIS^);								
-	_TcoState_Waveform				:	TcoCore.TcoState(THIS^,TRUE);	
-	_TcoState_WaveformSequence_1	:	TcoState_WaveformSequence(THIS^,TRUE);
-	_TcoState_WaveformSequence_2	:	TcoState_WaveformSequence(THIS^,FALSE);
+	_TcoState_Waveform				:	TcoCore.TcoState(THIS^, TcoCore.eRestoreMode.None);	
+	_TcoState_WaveformSequence_1	:	TcoState_WaveformSequence(THIS^, TcoCore.eRestoreMode.None);
+	_TcoState_WaveformSequence_2	:	TcoState_WaveformSequence(THIS^, TcoCore.eRestoreMode.None);
 	_Value1							:	LREAL;
 	_Value2							:	LREAL;
 	_Value							:	LREAL;

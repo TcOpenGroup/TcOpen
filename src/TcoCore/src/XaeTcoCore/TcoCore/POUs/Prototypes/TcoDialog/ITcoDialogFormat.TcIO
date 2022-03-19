@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoDialogFormat" Id="{c2d6a20f-376b-0b37-309b-4fbaea25ba73}">
+    <Declaration><![CDATA[INTERFACE ITcoDialogFormat
+]]></Declaration>
+    <Folder Name="Format" Id="{ef2bd4fc-2ef1-02f5-28b3-bdea702f0ebe}" />
+    <Method Name="WithCaption" Id="{256464fc-5542-0c19-1dbe-d5ab79664f30}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithCaption : ITcoDialogAnswer
+VAR_INPUT
+	inCaption : STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithOk" Id="{e2f96920-7b83-023e-28d1-33a200d8eadf}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithOk : ITcoDialogAnswer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithText" Id="{0aefd627-5574-002d-1f07-a884440c512d}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithText : ITcoDialogAnswer
+VAR_INPUT
+	inText : STRING(500);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithType" Id="{d667ad0c-6ea5-0e13-2aeb-6846cfea3886}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithType : ITcoDialogAnswer
+VAR_INPUT
+	inDialogType : eDialogType;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithYesNo" Id="{65f97506-e622-06fa-3050-66f1ebb81bab}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithYesNo : ITcoDialogAnswer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithYesNoCancel" Id="{64016aeb-0530-0115-02e5-e4e68fe22a83}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithYesNoCancel : ITcoDialogAnswer
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

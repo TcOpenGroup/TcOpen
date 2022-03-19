@@ -5,7 +5,9 @@
 {attribute 'strict'}
 TYPE eTcoSequenceTests :
 (
+	
     none := -1,
+	Initialize := 10,
     CallSequencerBodiesOnly := 100,
     RestoreSequencers,
     NumberOfStepsCount := 500,
@@ -61,7 +63,8 @@ TYPE eTcoSequenceTests :
 	SwitchStepModeStepOffFromRunning := 698,
     OnStateChangeWhenChangingModes := 699,
 	MissedSequenceOpening := 6100,
-	MissedSequenceClosing := 6200
+	MissedSequenceClosing := 6200,
+	FreshStateEntry := 6300
 );
 END_TYPE														]]></Declaration>
   </DUT>

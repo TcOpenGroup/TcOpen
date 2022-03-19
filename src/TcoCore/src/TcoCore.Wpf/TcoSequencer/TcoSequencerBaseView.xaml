@@ -10,16 +10,20 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:TcoSequencerViewModel />
+        <local:TcoSequencerBaseViewModel />
     </d:UserControl.DataContext>
     <Grid>
         <StackPanel>
-            <TextBlock DataContext="{Binding TcoSequencer._currentStep}">
-                <Run FontWeight="Light" Text="{Binding ID.Cyclic, StringFormat={}#{0}, Mode=OneWay}" />
-                <Run FontWeight="SemiBold" Text="{Binding Description.Cyclic, Mode=OneWay}" />
-                <LineBreak />
-                <Run FontWeight="Light" Text="{Binding Duration.Cyclic, Mode=OneWay}" />
-            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="10,0,0,0" Text="{Binding TcoSequencer._currentStep.ID.Cyclic}" Style="{DynamicResource MaterialDesignHeadline8TextBlock}"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding TcoSequencer._currentStep.Description.Cyclic}" Style="{DynamicResource MaterialDesignHeadline6TextBlock}"/>
+                <TextBlock Grid.Column="2" Margin="0,0,30,0" Text="{Binding TcoSequencer._currentStep.Duration.Cyclic,  StringFormat={}{0:hh\\:mm\\:ss\\:f}}" Style="{DynamicResource MaterialDesignHeadline8TextBlock}"/>
+            </Grid>
             <vortex:RenderableContentControl DataContext="{Binding TcoSequencer._modeController}" />
         </StackPanel>
     </Grid>

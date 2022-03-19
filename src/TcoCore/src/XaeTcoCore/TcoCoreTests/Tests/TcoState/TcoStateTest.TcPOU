@@ -100,7 +100,7 @@ METHOD INTERNAL ReadOutIdentities]]></Declaration>
 
 _myContextIdentity	:=	THIS^.Context.Identity;
 
-_myParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^.Parent.Identity;
 		
 _myContextStartCount :=	THIS^.Context.StartCycleCount;
 

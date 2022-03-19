@@ -9,7 +9,7 @@ namespace TcoCore.Wpf
 {
     /// <summary>
     /// Base color pallete is inspired by https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Brush-Names
-    /// It's a faceade of MaterialDesigngXaml color system.
+    /// It's a facade of MaterialDesignXaml color system.
     /// </summary>
     public class TcoColors
     {        

@@ -3,8 +3,8 @@
   <POU Name="TcoSequenceTestContext" Id="{356b8118-7b52-0b5a-1d80-284c7dd3d13f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-    _sut_A : TcoSequenceTestType(THIS^,eRestoreMode.AutoRestoreMembers);
-    _sut_N : TcoSequenceTestType(THIS^,eRestoreMode.None);
+    _sut_A : TcoSequenceTestType(THIS^, eRestoreMode.AutoRestoreMembers);
+    _sut_N : TcoSequenceTestType(THIS^, eRestoreMode.None);
 
     _elapsedTimeETA : TIME;
     _elapsedTime : TIME;
@@ -33,6 +33,13 @@ VAR
 	_cyclicCycles :	UINT;
     _stepInEvents :	UINT;
 
+	//eTcoSequenceTests.FreshStateEntry:
+	FreshStateEntry_counter : INT;
+	FreshStateEntry_enter_and_leave_must_be_true : BOOL;
+	FreshStateEntry_enter_and_two_cycles_on_first_must_be_true : BOOL;
+	FreshStateEntry_enter_and_two_cycles_on_second_must_be_false : BOOL;
+	FreshStateEntry_on_multiple_calls_but_not_first_must_be_false : BOOL;	
+	FreshStateEntry_on_request_step_single_call_must_be_true : BOOL;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -56,6 +63,14 @@ END_VAR
         <ST><![CDATA[_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
 
 CASE _testId OF
+	eTcoSequenceTests.Initialize:
+		_sut_A.Restore();
+		_sut_N.Restore();
+		FreshStateEntry_counter := 0;		
+		FreshStateEntry_enter_and_leave_must_be_true := FALSE;
+		FreshStateEntry_enter_and_two_cycles_on_first_must_be_true := FALSE;
+		FreshStateEntry_enter_and_two_cycles_on_second_must_be_false := TRUE;
+		FreshStateEntry_on_multiple_calls_but_not_first_must_be_false := TRUE;	
     {region "CallSequencerBodiesOnly"}
     eTcoSequenceTests.CallSequencerBodiesOnly:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.CallSequencerBodiesOnly;
@@ -872,11 +887,11 @@ CASE _testId OF
                     _sut_A._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 1 TO _totalStepNumber - 1 DO
+                FOR i := 1 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
@@ -887,11 +902,11 @@ CASE _testId OF
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 1 TO _totalStepNumber - 1 DO
+                FOR i := 1 TO _totalStepNumber - 2 DO
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
 
@@ -921,21 +936,21 @@ CASE _testId OF
             END_IF
 
             IF _plcCycleCounter = 3 THEN
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
                 _sut_A.SequencerClose();
 
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
 
@@ -1097,16 +1112,16 @@ CASE _testId OF
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
 
-                FOR i := 2 TO _totalStepNumber - 1 DO
+                FOR i := 2 TO _totalStepNumber - 2 DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                 END_FOR
 
-                IF _sut_A._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_A._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_A._SequenceComplete();
                 END_IF
 
-                IF _sut_N._Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+                IF _sut_N._Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
                     _sut_N._SequenceComplete();
                 END_IF
             END_IF
@@ -1154,7 +1169,7 @@ CASE _testId OF
             _sut_N.SaveNumberOfStepsInSequence();
         END_IF
 
-        _done := _plcCycleCounter >= _totalStepNumber + 2;
+        _done := _plcCycleCounter >= _totalStepNumber + 1;
         ProbeDoneWhen(_done);
     {endregion}
     {region "T582_InvalidMode"}
@@ -2016,8 +2031,7 @@ CASE _testId OF
         END_IF
 
         _done := _plcCycleCounter >= 5;
-        ProbeDoneWhen(_done);
-    {endregion}
+        ProbeDoneWhen(_done);		 
     {region "T691_SwitchStepModeOnDuringStepExecution"}
     eTcoSequenceTests.SwitchStepModeOnDuringStepExecution:
         IF NOT _arranged THEN
@@ -2190,6 +2204,47 @@ CASE _testId OF
 		 _sut_A.Open();
 		_sut_A.Step(10, TRUE, '');
 		THIS^.ProbeDoneWhen(TRUE);
+	eTcoSequenceTests.FreshStateEntry:
+		
+		THIS^._sut_A.Open();
+		IF(_sut_A.Step(10, TRUE, 'ENTER AND LEAVE')) THEN
+			THIS^.FreshStateEntry_enter_and_leave_must_be_true := _sut_A.IsFreshState;
+			_sut_A.CompleteStep(); 			 
+		END_IF;
+		
+		IF(_sut_A.Step(20, TRUE, 'ENTER MULTIPLE CYCLES')) THEN 
+			IF(FreshStateEntry_counter = 0) THEN
+				THIS^.FreshStateEntry_enter_and_two_cycles_on_first_must_be_true := _sut_A.IsFreshState;
+			END_IF;				
+			THIS^.FreshStateEntry_enter_and_two_cycles_on_second_must_be_false := _sut_A.IsFreshState;
+			_sut_A.StepCompleteWhen(FreshStateEntry_counter = 1);
+			FreshStateEntry_counter := FreshStateEntry_counter + 1;
+		END_IF;
+		
+		IF(_sut_A.Step(40, TRUE, 'ENTER MULTIPLE CYCLES')) THEN 						
+			FreshStateEntry_on_multiple_calls_but_not_first_must_be_false := _sut_A.IsFreshState;											
+			FreshStateEntry_counter := FreshStateEntry_counter + 1;
+			_sut_A.StepCompleteWhen(FreshStateEntry_counter = 100);
+		END_IF;
+		
+		IF(_sut_A.Step(50, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
+			FreshStateEntry_on_request_step_single_call_must_be_true :=	_sut_A.IsFreshState;		 			
+			_sut_A.CompleteStep();
+			IF(FreshStateEntry_counter = 0) THEN
+				_sut_A.RequestStep(70);
+			END_IF
+		END_IF;
+		
+		IF(_sut_A.Step(60, TRUE, 'ENTER MULTIPLE CYCLES')) THEN					 			
+			_sut_A.RequestStep(50);
+			FreshStateEntry_counter := 0;
+		END_IF;
+		
+		IF(_sut_A.Step(70, TRUE, 'ENTER MULTIPLE CYCLES')) THEN					 			
+			THIS^.ProbeDoneWhen(TRUE);
+		END_IF;
+		
+		THIS^._sut_A.Close();
 END_CASE]]></ST>
       </Implementation>
     </Method>

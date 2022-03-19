@@ -11,7 +11,7 @@ VAR
 	_stepDescription					:	STRING(254);	
 	_currentStepId						:	INT;
 	_currentStepDescription				:	STRING(254);
-	_myTcoChildState					: 	TcoSequencerTestChildState(THIS^ ,eRestoreMode.None);
+	_myTcoChildState					: 	TcoSequencerTestChildState(THIS^, eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
 	_onSequencerErrorCount	 			: 	ULINT;
@@ -22,7 +22,7 @@ VAR
 
 	_numberOfSteps						:	UINT;
 	_previousNumberOfSteps						:	UINT;
-	_tcoSequencerTest : eTcoSequenceTests;
+	_tcoSequenceTest : eTcoSequenceTests;
     _totalStepNumber : UINT;
 	_sequenceRun : ULINT;
 	_reqStep : INT;
@@ -275,77 +275,77 @@ METHOD INTERNAL IsAutoRestorable : BOOL
     <Method Name="Main" Id="{7cd483d4-4c79-0cb8-3ef2-900b7113f4aa}">
       <Declaration><![CDATA[METHOD PROTECTED Main : BOOL ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE _tcoSequencerTest OF
-    eTcoSequencerTests.NumberOfStepsCount, eTcoSequencerTests.OnStateChangeWithRestoreCallInside:
+        <ST><![CDATA[CASE _tcoSequenceTest OF
+    eTcoSequenceTests.NumberOfStepsCount, eTcoSequenceTests.OnStateChangeWithRestoreCallInside:
         MAIN_NumberOfStepsCount();
-    eTcoSequencerTests.ExecutionInOnePLCcycle, eTcoSequencerTests.OnStepCompleted, eTcoSequencerTests.OnSequenceCompleted:
+    eTcoSequenceTests.ExecutionInOnePLCcycle, eTcoSequenceTests.OnStepCompleted, eTcoSequenceTests.OnSequenceCompleted:
         MAIN_ExecutionInOnePLCcycle();
-    eTcoSequencerTests.RestoreChildBetweenSteps:
+    eTcoSequenceTests.RestoreChildBetweenSteps:
         MAIN_RestoreChildBetweenSteps();
-    eTcoSequencerTests.MinStepId:
+    eTcoSequenceTests.MinStepId:
         MAIN_MinStepId();
-    eTcoSequencerTests.MaxStepId:
+    eTcoSequenceTests.MaxStepId:
         MAIN_MaxStepId();
-    eTcoSequencerTests.RequestStepToFirstStepWithStepId0:
+    eTcoSequenceTests.RequestStepToFirstStepWithStepId0:
         MAIN_RequestStepToFirstStepWithStepId0();
-    eTcoSequencerTests.RequestStep:
+    eTcoSequenceTests.RequestStep:
         MAIN_RequestStep();
-    eTcoSequencerTests.CheckStepIdUniqueness, eTcoSequencerTests.RestoreAlreadyCheckedSequence, eTcoSequencerTests.NotUniqueStepId,
-        eTcoSequencerTests.AfterErrorRestore, eTcoSequencerTests.CheckStepIdUniquenessStepMode, eTcoSequencerTests.NotUniqueStepIdInStepMode,
-        eTcoSequencerTests.InvalidModeDetailed, eTcoSequencerTests.StepInErrorDetailed:
+    eTcoSequenceTests.CheckStepIdUniqueness, eTcoSequenceTests.RestoreAlreadyCheckedSequence, eTcoSequenceTests.NotUniqueStepId,
+        eTcoSequenceTests.AfterErrorRestore, eTcoSequenceTests.CheckStepIdUniquenessStepMode, eTcoSequenceTests.NotUniqueStepIdInStepMode,
+        eTcoSequenceTests.InvalidModeDetailed, eTcoSequenceTests.StepInErrorDetailed:
         MAIN_CheckStepIdUniqueness();
-    eTcoSequencerTests.ChangeStepIdDuringExecution:
+    eTcoSequenceTests.ChangeStepIdDuringExecution:
         MAIN_ChangeStepIdDuringExecution();
-    eTcoSequencerTests.CommentOutPartOfRunningSequencer:
+    eTcoSequenceTests.CommentOutPartOfRunningSequencer:
         MAIN_CommentOutPartOfRunningSequencer();
-    eTcoSequencerTests.UncommentPartOfRunningSequencer:
+    eTcoSequenceTests.UncommentPartOfRunningSequencer:
         MAIN_UncommentPartOfRunningSequencer();
-    eTcoSequencerTests.RequestStepFromLowerToHigher:
+    eTcoSequenceTests.RequestStepFromLowerToHigher:
         MAIN_RequestStepFromLowerToHigher();
-    eTcoSequencerTests.RequestStepFromHigherToLower:
+    eTcoSequenceTests.RequestStepFromHigherToLower:
         MAIN_RequestStepFromHigherToLower();
-    eTcoSequencerTests.RequestStepToNotExistingStep, eTcoSequencerTests.StepModeRequestStepToNotExistingStep:
+    eTcoSequenceTests.RequestStepToNotExistingStep, eTcoSequenceTests.StepModeRequestStepToNotExistingStep:
         MAIN_RequestStepToNotExistingStep();
-    eTcoSequencerTests.RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed,
-        eTcoSequencerTests.StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed:
+    eTcoSequenceTests.RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed,
+        eTcoSequenceTests.StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed:
         MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed();
-    eTcoSequencerTests.SetStepMode:
+    eTcoSequenceTests.SetStepMode:
         MAIN_SetStepMode();
-    eTcoSequencerTests.StepMode:
+    eTcoSequenceTests.StepMode:
         MAIN_StepMode();
-    eTcoSequencerTests.StepModeStepIn:
+    eTcoSequenceTests.StepModeStepIn:
         MAIN_StepModeStepIn();
-    eTcoSequencerTests.StepModeChangeStepIdDuringExecution:
+    eTcoSequenceTests.StepModeChangeStepIdDuringExecution:
         MAIN_StepModeChangeStepIdDuringExecution();
-    eTcoSequencerTests.StepModeChangeStepOrder:
+    eTcoSequenceTests.StepModeChangeStepOrder:
         MAIN_StepModeChangeStepOrder();
-    eTcoSequencerTests.StepModeCommentOutPartOfRunningSequencer:
+    eTcoSequenceTests.StepModeCommentOutPartOfRunningSequencer:
         MAIN_StepModeCommentOutPartOfRunningSequencer();
-    eTcoSequencerTests.StepModeUncommentPartOfRunningSequencer:
+    eTcoSequenceTests.StepModeUncommentPartOfRunningSequencer:
         MAIN_StepModeUncommentPartOfRunningSequencer();
-    eTcoSequencerTests.StepModeRequestStepFromLowerToHigher:
+    eTcoSequenceTests.StepModeRequestStepFromLowerToHigher:
         MAIN_StepModeRequestStepFromLowerToHigher();
-    eTcoSequencerTests.StepModeRequestStepFromHigherToLower:
+    eTcoSequenceTests.StepModeRequestStepFromHigherToLower:
         MAIN_StepModeRequestStepFromHigherToLower();
-    eTcoSequencerTests.StepModeDisabledStep:
+    eTcoSequenceTests.StepModeDisabledStep:
         MAIN_StepModeDisabledStep();
-    eTcoSequencerTests.StepModeStepForwardBackward:
+    eTcoSequenceTests.StepModeStepForwardBackward:
         MAIN_StepModeStepForwardBackward();
-    eTcoSequencerTests.StepModeStepInDetailed:
+    eTcoSequenceTests.StepModeStepInDetailed:
         MAIN_StepModeStepInDetailed();
-    eTcoSequencerTests.SwitchStepModeOnDuringStepExecution:
+    eTcoSequenceTests.SwitchStepModeOnDuringStepExecution:
         MAIN_SwitchStepModeOnDuringStepExecution();
-    eTcoSequencerTests.StepModeStepForwardFromRunningStep:
+    eTcoSequenceTests.StepModeStepForwardFromRunningStep:
         MAIN_StepModeStepForwardFromRunningStep();
-    eTcoSequencerTests.StepModeStepBackwardFromRunningStep:
+    eTcoSequenceTests.StepModeStepBackwardFromRunningStep:
         MAIN_StepModeStepBackwardFromRunningStep();
-    eTcoSequencerTests.SwitchStepModeStepOffFromReadyToRun:
+    eTcoSequenceTests.SwitchStepModeStepOffFromReadyToRun:
         MAIN_SwitchStepModeStepOffFromReadyToRun();
-    eTcoSequencerTests.SwitchStepModeStepOffFromRunning:
+    eTcoSequenceTests.SwitchStepModeStepOffFromRunning:
         MAIN_SwitchStepModeStepOffFromRunning();
-    eTcoSequencerTests.SwitchStepModeStepOnFromRunning:
+    eTcoSequenceTests.SwitchStepModeStepOnFromRunning:
         MAIN_SwitchStepModeStepOnFromRunning();
-    eTcoSequencerTests.OnStateChangeWhenChangingModes:
+    eTcoSequenceTests.OnStateChangeWhenChangingModes:
         MAIN_OnStateChangeWhenChangingModes();
 END_CASE]]></ST>
       </Implementation>
@@ -361,13 +361,13 @@ END_VAR]]></Declaration>
 	   StepCompleteWhen(TRUE);
 	END_IF
 	
-	FOR i := 1 TO _totalStepNumber-1 DO
+	FOR i := 1 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -389,13 +389,13 @@ IF _sequenceRun =2 THEN
 	   StepCompleteWhen(FALSE);
 	END_IF
 
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -417,13 +417,13 @@ IF _sequenceRun =3 THEN
 	   StepCompleteWhen(FALSE);
 	END_IF
 
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF]]></ST>
@@ -9684,13 +9684,13 @@ END_VAR]]></Declaration>
 			StepCompleteWhen(FALSE);
 	END_IF
 	
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -9712,13 +9712,13 @@ IF _sequenceRun >=2 THEN
 	   StepCompleteWhen(FALSE);
 	END_IF
 	
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -9731,13 +9731,13 @@ VAR
 	i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-1 DO
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-2 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(TRUE);
     END_IF
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
    	_SequenceComplete();
 END_IF]]></ST>
       </Implementation>
@@ -9748,7 +9748,7 @@ VAR
 	i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO _totalStepNumber DO
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9770,7 +9770,7 @@ END_VAR]]></Declaration>
     StepCompleteWhen(TRUE);
 END_IF
 
-FOR i := 1 TO _totalStepNumber DO
+FOR i := 1 TO _totalStepNumber-1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9787,7 +9787,7 @@ END_VAR]]></Declaration>
     StepCompleteWhen(TRUE);
 END_IF
 
-FOR i := 1 TO _totalStepNumber DO
+FOR i := 1 TO _totalStepNumber-1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9803,13 +9803,13 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF _sequenceRun <= _cyclicCycles OR _sequenceRun > _cyclicCycles + _stepInEvents + 1 THEN
     SetCyclicMode();
 
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             _StepCompleteWhen(TRUE);
         END_IF
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber-1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber-1))) THEN
         CompleteSequence();
 		_sequenceCycles := _sequenceCycles + 1;
     END_IF
@@ -9821,13 +9821,13 @@ END_IF
 IF _sequenceRun > _cyclicCycles+1  AND _sequenceRun <= _cyclicCycles + _stepInEvents +1 THEN
     SetStepMode();
 	_StepIn();
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             _StepCompleteWhen(TRUE);
         END_IF
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
 		_sequenceCycles := _sequenceCycles + 1;
     END_IF
@@ -9892,23 +9892,23 @@ END_VAR]]></Declaration>
         END_IF
     END_FOR
 
-    FOR i := _reqStep + 5 TO _totalStepNumber - 1 DO
+    FOR i := _reqStep + 5 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
     RequestStep(_reqStep);
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
 
 IF _sequenceRun = 2 THEN
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -9925,11 +9925,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -9941,11 +9941,11 @@ IF _sequenceRun = 2 THEN
 
     RequestStep(_reqStep);
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber- 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -9967,7 +9967,7 @@ IF Step(5, TRUE, 'Step 5') THEN
     RequestStep(0);
 END_IF
 
-FOR i := 6 TO _totalStepNumber DO
+FOR i := 6 TO _totalStepNumber -1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9983,21 +9983,21 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
     RequestStep(_reqStepNotExists);
 
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
 
 IF _sequenceRun >= 2 THEN
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10017,13 +10017,13 @@ END_FOR
 
 RequestStep(_reqStep);
 
-FOR i := _reqStep + 5 TO _totalStepNumber - 1 DO
+FOR i := _reqStep + 5 TO _totalStepNumber - 2 DO
     Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
 END_FOR
 
 RequestStep(_reqStep + 10);
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
     _SequenceComplete();
 END_IF]]></ST>
       </Implementation>
@@ -10035,7 +10035,7 @@ VAR
 	_childState : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-1 DO
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-2 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 		_childState := _myTcoChildState.State;
 		_myTcoChildState.ChangeState(_myTcoChildState._requestedState);
@@ -10043,7 +10043,7 @@ END_VAR]]></Declaration>
     END_IF
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
    	_SequenceComplete();
 END_IF]]></ST>
       </Implementation>
@@ -10059,11 +10059,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10073,13 +10073,13 @@ IF _sequenceRun =4 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 	        StepCompleteWhen(TRUE);
 		END_IF
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10097,11 +10097,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10113,13 +10113,13 @@ IF _sequenceRun > 1 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             StepCompleteWhen(TRUE);
         END_IF
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10156,11 +10156,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step  ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10189,11 +10189,11 @@ IF _sequenceRun = 2 THEN
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step  ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10230,15 +10230,15 @@ END_VAR]]></Declaration>
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step  ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
-IF _sequenceRun = _totalStepNumber+2 THEN
+IF _sequenceRun = _totalStepNumber + 2 THEN
     IF _currentStep.Status = 20 THEN
        _StepIn();
     END_IF
@@ -10263,11 +10263,11 @@ IF _sequenceRun = _totalStepNumber+2 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step  ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10300,13 +10300,13 @@ END_VAR]]></Declaration>
 			StepCompleteWhen(FALSE);
 	END_IF
 	
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -10332,13 +10332,13 @@ IF _sequenceRun >=2 THEN
 	   StepCompleteWhen(FALSE);
 	END_IF
 	
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -10352,7 +10352,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
-    FOR i := 0 TO _totalStepNumber DO
+    FOR i := 0 TO _totalStepNumber - 1 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 END_IF
@@ -10366,11 +10366,11 @@ IF _sequenceRun = 2 OR _sequenceRun = 3 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10384,11 +10384,11 @@ IF _sequenceRun = 4 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 2 TO _totalStepNumber - 1 DO
+    FOR i := 2 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10404,11 +10404,11 @@ IF _sequenceRun >= 5 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 2 TO _totalStepNumber - 1 DO
+    FOR i := 2 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF]]></ST>
@@ -10428,12 +10428,12 @@ END_VAR]]></Declaration>
         END_IF
     END_FOR
 
-    FOR i := _reqStep + 5 TO _totalStepNumber - 1 DO
+    FOR i := _reqStep + 5 TO _totalStepNumber - 2 DO
        _StepIn();
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10446,14 +10446,14 @@ IF _sequenceRun =_reqStep + 6 THEN
         END_IF
     END_FOR
 
-    FOR i := _reqStep + 5 TO _totalStepNumber - 1 DO
+    FOR i := _reqStep + 5 TO _totalStepNumber - 2 DO
        _StepIn();
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
     RequestStep(_reqStep);
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10485,11 +10485,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10504,11 +10504,11 @@ IF _sequenceRun = 2 THEN
 
     RequestStep(_reqStep);
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10539,11 +10539,11 @@ IF Step(3, TRUE, 'Step 3') THEN
     _StepCompleteWhen(_sequenceRun >= 20);
 END_IF
 
-FOR i := 4 TO _totalStepNumber - 1 DO
+FOR i := 4 TO _totalStepNumber - 2 DO
     Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
     CompleteSequence();
 END_IF]]></ST>
       </Implementation>
@@ -10555,11 +10555,11 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10571,11 +10571,11 @@ IF _sequenceRun = 2 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10587,27 +10587,27 @@ IF _sequenceRun = 3 OR _sequenceRun = 5 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
 
 IF _sequenceRun = 4 THEN
-    RequestStep(_totalStepNumber);
+    RequestStep(_totalStepNumber - 1);
 
     IF Step(0, TRUE, 'Step 0') THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10619,11 +10619,11 @@ IF _sequenceRun = 6 OR _sequenceRun = 8 OR _sequenceRun = 9 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10635,11 +10635,11 @@ IF _sequenceRun = 7 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10672,11 +10672,11 @@ IF Step(3, TRUE, 'Step 3') THEN
     _StepCompleteWhen(_sequenceRun >= 20);
 END_IF
 
-FOR i := 4 TO _totalStepNumber - 1 DO
+FOR i := 4 TO _totalStepNumber - 2 DO
     Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
     CompleteSequence();
 END_IF]]></ST>
       </Implementation>
@@ -10692,11 +10692,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10726,11 +10726,11 @@ IF _sequenceRun > 1 THEN
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step  ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step  ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10743,11 +10743,11 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 OR _sequenceRun = 5 THEN
-    FOR i := 0 TO _totalStepNumber - 1 DO
+    FOR i := 0 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10759,11 +10759,11 @@ IF _sequenceRun = 2 THEN
         StepCompleteWhen(TRUE);
     END_IF
 
-    FOR i := 1 TO _totalStepNumber - 1 DO
+    FOR i := 1 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10776,14 +10776,14 @@ IF _sequenceRun = 3 OR _sequenceRun = 4 THEN
     END_IF
 
     IF Step(1, TRUE, 'Step 1') THEN
-        RequestStep(_totalStepNumber);
+        RequestStep(_totalStepNumber - 1);
     END_IF
 
-    FOR i := 2 TO _totalStepNumber - 1 DO
+    FOR i := 2 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10816,13 +10816,13 @@ END_VAR]]></Declaration>
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             StepCompleteWhen(FALSE);
         END_IF
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF
@@ -10848,13 +10848,13 @@ IF _sequenceRun = 2 THEN
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 4 TO _totalStepNumber - 1 DO
+    FOR i := 4 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             StepCompleteWhen(FALSE);
         END_IF
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
@@ -10875,11 +10875,11 @@ END_VAR]]></Declaration>
         StepCompleteWhen(FALSE);
     END_IF
 
-    FOR i := 2 TO _totalStepNumber - 1 DO
+    FOR i := 2 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10896,11 +10896,11 @@ IF _sequenceRun > 1 THEN
         StepCompleteWhen(_sequenceRun >=10);
     END_IF
 
-    FOR i := 2 TO _totalStepNumber - 1 DO
+    FOR i := 2 TO _totalStepNumber - 2 DO
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
 END_IF
@@ -10925,11 +10925,11 @@ IF Step(3, TRUE, 'Step 3') THEN
     _StepCompleteWhen(_sequenceRun >= 20);
 END_IF
 
-FOR i := 4 TO _totalStepNumber - 1 DO
+FOR i := 4 TO _totalStepNumber - 2 DO
     Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
     CompleteSequence();
 END_IF]]></ST>
       </Implementation>
@@ -10952,11 +10952,11 @@ IF Step(3, TRUE, 'Step 3') THEN
     _StepCompleteWhen(_sequenceRun >= 20);
 END_IF
 
-FOR i := 4 TO _totalStepNumber - 1 DO
+FOR i := 4 TO _totalStepNumber - 2 DO
     Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
     CompleteSequence();
 END_IF]]></ST>
       </Implementation>
@@ -10979,11 +10979,11 @@ IF Step(3, TRUE, 'Step 3') THEN
     _StepCompleteWhen(_sequenceRun >= 20);
 END_IF
 
-FOR i := 4 TO _totalStepNumber - 1 DO
+FOR i := 4 TO _totalStepNumber - 2 DO
     Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
 END_FOR
 
-IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
     CompleteSequence();
 END_IF]]></ST>
       </Implementation>
@@ -11011,13 +11011,13 @@ END_VAR]]></Declaration>
 	   StepCompleteWhen(FALSE);
 	END_IF
 	
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -11039,13 +11039,13 @@ IF _sequenceRun =2 THEN
 			StepCompleteWhen(FALSE);
 	END_IF
 	
-	FOR i := 4 TO _totalStepNumber-1 DO
+	FOR i := 4 TO _totalStepNumber-2 DO
 		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
 			StepCompleteWhen(FALSE);
 		END_IF
 	END_FOR
 	
-	IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
+	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
 	  _SequenceComplete();
 	END_IF
 END_IF
@@ -11364,6 +11364,8 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.Done;
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -11371,7 +11373,9 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
       <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
+        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.NotYetStarted;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{6c94eaba-bcb8-0e97-34d9-b3ee7c3ee17e}" FolderPath="_Tests\">
@@ -11447,13 +11451,13 @@ END_VAR
       <Get Name="Get" Id="{cde7a63e-f575-0470-307f-5600c34f9837}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[TcoSequencerTest := _tcoSequencerTest;]]></ST>
+          <ST><![CDATA[TcoSequencerTest := _tcoSequenceTest;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{6db9ec71-8905-0610-1059-e92e549ed779}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_tcoSequencerTest := TcoSequencerTest;]]></ST>
+          <ST><![CDATA[_tcoSequenceTest := TcoSequencerTest;]]></ST>
         </Implementation>
       </Set>
     </Property>

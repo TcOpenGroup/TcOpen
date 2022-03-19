@@ -44,7 +44,7 @@ namespace TcOpen.Inxton.Data.MongoDb
         }
 
         private bool RecordExists(string identifier)
-        { return collection.Find(p => p._EntityId == identifier).CountDocuments() >= 1; }
+        { return collection.Find(p => p._EntityId == identifier).Count() >= 1; }
 
         protected override void CreateNvi(string identifier, T data)
         {
@@ -73,29 +73,45 @@ namespace TcOpen.Inxton.Data.MongoDb
 
         protected override long FilteredCountNvi(string id)
         {
-            if (id == "*")
+            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{id}", ""));
+            if (id == "*" || string.IsNullOrWhiteSpace(id))
             {
-                return collection.Find(p => true).CountDocuments();
+#pragma warning disable CS0618 // CountDocuments is very slow compared to Count() even though Count is obsolete. 
+                return collection
+                    .Find(new BsonDocument())
+                    .Count();
             }
             else
             {
-                return collection.Find(p => p._EntityId.Contains(id)).CountDocuments();
+                return collection
+                    .Find(filter)
+                    .Count();
             }
         }
+#pragma warning restore CS0618 
+
 
         protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
         {
             var filetered = new List<T>();
+            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{identifier}", ""));
 
-            if (identifier == "*")
+            if (identifier == "*" || string.IsNullOrWhiteSpace(identifier))
             {
-                return collection.Find(p => true)
-                    .Limit(limit).Skip(skip).ToList();
+                return collection
+                    .Find(new BsonDocument())
+                    .Sort(new SortDefinitionBuilder<T>().Descending("$natural"))
+                    .Limit(limit)
+                    .Skip(skip)
+                    .ToList();
             }
             else
             {
-                return collection.Find(p => p._EntityId.Contains(identifier))
-                    .Limit(limit).Skip(skip).ToList();
+                return collection
+                    .Find(filter)
+                    .Limit(limit)
+                    .Skip(skip)
+                    .ToList();
             }
         }
 
@@ -141,7 +157,7 @@ namespace TcOpen.Inxton.Data.MongoDb
             return RecordExists(identifier);
         }
 
-        protected override long CountNvi => collection.CountDocuments(p => true);
+        protected override long CountNvi => collection.Count(new BsonDocument());
 
         /// <summary>
         /// Gets the <see cref="IMongoCollection{T}"/> of this repository.

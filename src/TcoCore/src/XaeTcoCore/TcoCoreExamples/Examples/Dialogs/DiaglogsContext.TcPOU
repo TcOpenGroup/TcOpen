@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="DiaglogsContext" Id="{2177bf19-3e21-07f9-0795-125a88ec3524}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DiaglogsContext EXTENDS TcoCore.TcoContext
+VAR
+    _invokeDiaglog1 : BOOL;
+    _dialog1        : TcoCore.TcoDialog(THIS^);
+    _dialog2        : TcoCore.TcoDialog(THIS^);
+    _dialog3        : TcoCore.TcoDialog(THIS^);
+
+    _invokeDiaglogsConsequential : BOOL;
+    _dialog1Consequential        : TcoCore.TcoDialog(THIS^);
+    _dialog2Consequential        : TcoCore.TcoDialog(THIS^);
+    _dialog3Consequential        : TcoCore.TcoDialog(THIS^);
+
+    _state : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{e7316bfc-71e9-02be-0fac-515246b2a0e2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _state OF
+	0:
+		IF(_invokeDiaglog1) THEN _state := 10; END_IF;
+	10:
+		_dialog1.Show()
+			.WithType(eDialogType.Question)
+			.WithYesNoCancel()
+			.WithCaption('Hey')
+			.WithText('Do we go ahead?');
+			
+		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN _state := 20; END_IF;
+		IF(_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN _state := 1000; END_IF;
+		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Cancel) THEN _state := 0; _invokeDiaglog1 := FALSE; END_IF;
+	20:
+		IF(_dialog2.Show()
+			.WithType(eDialogType.Info)
+			.WithOk()
+			.WithCaption('Hey')
+			.WithText('We go ahead.')
+			.Answer = TcoCore.eDialogAnswer.OK) THEN
+			_state := 30;			
+		END_IF
+	30:
+			_state := 0;			
+ 	1000:
+		IF(_dialog3.Show()
+					.WithType(eDialogType.Warning)
+				  	.WithOk()
+					.WithCaption('Hey')
+					.WithText('We don`t go ahead.')
+					.Answer = TcoCore.eDialogAnswer.OK) THEN
+			_state := 0;
+		END_IF	
+END_CASE
+
+//IF(_invokeDiaglog1) THEN
+ 	
+			
+//	IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
+//		IF(_dialog2.Show()
+//			.WithType(eDialogType.Info)
+//			.WithOk()
+//			.WithCaption('Hey')
+//			.WithText('We go ahead.')
+//			.Answer = TcoCore.eDialogAnswer.OK) THEN
+//			_invokeDiaglog1 := FALSE;
+//		END_IF
+//	ELSIF(_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN
+//		IF(_dialog3.Show()
+//				  	.WithOk()
+//					.WithCaption('Hey')
+//					.WithText('We don`t go ahead.')
+//					.Answer = TcoCore.eDialogAnswer.OK) THEN
+//			_invokeDiaglog1 := FALSE;
+//		END_IF
+//	END_IF			
+//END_IF;	
+
+IF(_invokeDiaglogsConsequential) THEN
+	_dialog1Consequential.Show().WithYesNoCancel().WithCaption('Hey D1').WithText('D1');
+	_dialog2Consequential.Show().WithYesNoCancel().WithCaption('Hey D2').WithText('D2');
+	_dialog3Consequential.Show().WithYesNoCancel().WithCaption('Hey D3').WithText('D3');
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

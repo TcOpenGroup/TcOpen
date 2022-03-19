@@ -1,0 +1,73 @@
+﻿<UserControl
+    x:Class="TcoInspectors.TcoAnalogueInspectorControlView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://vortex.mts/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoInspectors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoinspectors="clr-namespace:TcoInspectors;assembly=TcoInspectorsConnector"
+    xmlns:wpf="clr-namespace:TcOpen.Inxton.TcoInspectors.Wpf"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/TcOpen.Inxton.TcoInspectors.Wpf;component/Converters/InspectorResourceDictionary.xaml" />
+    </UserControl.Resources>
+    <d:UserControl.DataContext>
+        <tcoinspectors:TcoAnalogueInspector />
+    </d:UserControl.DataContext>
+    <StackPanel>
+        <Expander>
+            <Expander.Header>
+                <Grid Margin="5" Grid.IsSharedSizeScope="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorNameGroup" />
+                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Margin="0,0,20,0"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="{Binding Converter={controls:NameOrSymbolConverter}}"
+                        TextWrapping="WrapWithOverflow" />
+                    <controls:RenderableContentControl
+                        Grid.Column="1"
+                        DataContext="{Binding _data.RequiredMin}"
+                        PresentationType="ControlSlim" />
+                    <controls:RenderableContentControl
+                        Grid.Column="2"
+                        DataContext="{Binding _data.DetectedStatus}"
+                        PresentationType="ControlSlim" />
+                    <controls:RenderableContentControl
+                        Grid.Column="3"
+                        DataContext="{Binding _data.RequiredMax}"
+                        PresentationType="ControlSlim" />
+                    <controls:RenderableContentControl
+                        Grid.Column="4"
+                        DataContext="{Binding _data.IsByPassed}"
+                        PresentationType="ControlSlim" />
+                    <controls:RenderableContentControl
+                        Grid.Column="5"
+                        DataContext="{Binding _data.IsExcluded}"
+                        PresentationType="ControlSlim" />
+
+                </Grid>
+            </Expander.Header>
+
+            <local:GenericTcoInspectorDataView DataContext="{Binding _data}" PresentationType="ControlSlim"></local:GenericTcoInspectorDataView>
+        </Expander>
+
+    </StackPanel>
+</UserControl>

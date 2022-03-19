@@ -159,6 +159,12 @@
             <TabItem Header="Diagnostics">
                 <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR._context }" PresentationType="Diagnostics"/>
             </TabItem>
+            <TabItem Header="Dialogs">
+                <StackPanel>
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}" PresentationType="ControlSlim"/>
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }" PresentationType="ControlSlim"/>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

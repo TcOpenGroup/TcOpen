@@ -47,11 +47,16 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var observer = tc._sObserver.GetPlainFromOnline<PlainTcoSequencerObserver>();
 
-            for (int i = 1; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                Assert.AreEqual(((i) * 100).ToString(), observer._steps[i].Description);
-                Assert.AreEqual(((i) * 100), observer._steps[i].ID);
-                Assert.AreEqual(new TimeSpan(0,0,0,0,((i) * 10)), observer._steps[i].Duration);              
+                Assert.AreEqual(((i+1) * 100).ToString(), observer._steps[i].Description);
+                Assert.AreEqual(((i+1) * 100), observer._steps[i].ID);
+                if(i < 4)
+                {
+                    Assert.AreEqual(new TimeSpan(0,0,0,0,((i+1) * 10)), observer._steps[i].Duration);              
+                }
+
+                //Console.WriteLine(observer._steps[i].Duration);
             }            
         }
 
