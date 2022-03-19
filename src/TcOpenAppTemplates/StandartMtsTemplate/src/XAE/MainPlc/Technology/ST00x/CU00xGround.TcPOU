@@ -31,6 +31,13 @@ IF (Step(10000, TRUE, 'LAST STEP')) THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnStart" Id="{81ba5eb0-f935-4736-a619-b5f4155759ce}">
+      <Declaration><![CDATA[METHOD PUBLIC OnStart]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Station.Automat.Restore();
+Station.Manual.Restore();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Station" Id="{f5f158e7-8f54-483b-8ef9-070bf6fa1248}">
       <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>
       <Get Name="Get" Id="{fecf57ba-7b86-4b09-b4c9-79cd0e6e6559}">

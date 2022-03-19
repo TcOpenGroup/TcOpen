@@ -1,31 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00x" Id="{c8fb8f62-fa26-41d3-a5d2-3cc70d4e8555}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS TcoCore.TcoObject IMPLEMENTS ICuBase
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS CUBase
 VAR
     _cuData      : REFERENCE TO CU00xProcessData;
     _processData : ProcessDataManager(THIS^);
     _components  : CU00xComponents := (Parent := THIS^);
+	{attribute addProperty Name "<#AUTOMAT#>"}
     _automat     : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
+	{attribute addProperty Name "<#GROUND#>"}
     _ground      : CU00xGround(THIS^, TcoCore.eRestoreMode.None);
-    _manual      : CU00xManual(THIS^, TcoCore.eRestoreMode.None);
+	{attribute addProperty Name "<#MANUAL#>"}
+    _manual      : CU00xManual(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_processData();
+
+
+_automat.Task.Enabled := _ground.Task.Done;
 _automat();
+
+
+_ground.Task.Enabled := TRUE;
 _ground();
+
+_manual.Task.Enabled := TRUE;
 _manual();
 ]]></ST>
     </Implementation>
     <Property Name="Automat" Id="{395ce4fa-38ae-46a5-9c91-86a9f1bcbbc2}">
-      <Declaration><![CDATA[PROPERTY Automat : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Automat : REFERENCE TO TcoTaskedSequencer]]></Declaration>
       <Get Name="Get" Id="{ca2cc00e-064b-48f3-a4fa-26832ebfc11a}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Automat REF= _automat.Task;]]></ST>
+          <ST><![CDATA[Automat REF= _automat;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -36,18 +47,18 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[Components REF= _components;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="Ground" Id="{49f8c54b-7096-4ee9-be7f-1b5b62c4c097}">
-      <Declaration><![CDATA[PROPERTY Ground : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Ground : REFERENCE TO TcoTaskedSequencer]]></Declaration>
       <Get Name="Get" Id="{8480f5d4-4535-49b0-b4be-60aa7bf89b76}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Ground REF= _automat.Task;]]></ST>
+          <ST><![CDATA[Ground REF= _ground;]]></ST>
         </Implementation>
       </Get>
     </Property>

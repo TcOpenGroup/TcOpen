@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="CUBase" Id="{7de2193c-318e-4c64-a9a6-ba23fb2e4da1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT CUBase EXTENDS TcoCore.TcoObject IMPLEMENTS ICuBase
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Automat" Id="{9a1989f3-7511-4b12-80ce-78bb1add06c6}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT Automat : REFERENCE TO TcoTaskedSequencer]]></Declaration>
+      <Get Name="Get" Id="{86426d31-47b7-4512-bf28-f740d21d447d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Ground" Id="{6cf29f50-dec8-49c6-a97a-8a93927ca757}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT Ground : REFERENCE TO TcoTaskedSequencer]]></Declaration>
+      <Get Name="Get" Id="{41f5a2de-fade-47b5-8a6c-d888d0eac9c5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProcessDataManager" Id="{95e82431-3124-4f70-be63-551f0ca81c55}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{75873f97-0e26-4094-bf28-402fb0488241}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

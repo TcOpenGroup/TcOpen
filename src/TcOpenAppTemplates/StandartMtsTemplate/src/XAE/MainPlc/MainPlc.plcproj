@@ -23,13 +23,25 @@
     <Placeholder>MainPlc</Placeholder>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\CUComponentsBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstractions\CUBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Abstractions\ICUBase.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Abstractions\ICUTask.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Abstractions\TcoInnerTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Abstractions\TcoTaskedSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstractions\TcoTaskedService.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MAIN.TcPOU">

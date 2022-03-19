@@ -12,7 +12,17 @@ namespace HmiTemplate.Wpf
     {
         public MainPlcTwinController MainPlc { get { return App.MainPlc; } }
 
-        public IEnumerable<TcoTaskedSequencer> Sequencers { get { return MainPlc.MAIN._technology._cu00x.GetChildren<TcoTaskedSequencer>(); } }
+        public IEnumerable<object> Sequencers 
+        { 
+            get 
+            {
+                List<object> retval = new List<object>();
+                retval.AddRange(MainPlc.MAIN._technology._cu00x.GetChildren<TcoTaskedSequencer>());
+                retval.AddRange(MainPlc.MAIN._technology._cu00x.GetChildren<TcoTaskedService>());
+
+                return retval;
+            } 
+        }
 
     }
 }

@@ -23,6 +23,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>strings.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Libs\TcoTaskedSequencer\Sequence\TcoTaskedSequencerSequenceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Libs\TcoTaskedService\Sequence\TcoTaskedServiceComponentsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Libs\TcoTaskedService\Task\TcoTaskedServiceTaskView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +39,21 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Libs\TcoTaskedSequencer\Sequence\TcoTaskedSequencerSequenceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Libs\TcoTaskedService\Sequence\TcoTaskedServiceComponentsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Libs\TcoTaskedService\Task\TcoTaskedServiceTaskView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

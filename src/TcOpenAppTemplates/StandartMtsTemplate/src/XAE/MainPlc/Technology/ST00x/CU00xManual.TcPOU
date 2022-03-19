@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00xManual" Id="{4da1dfbc-4c0a-47a8-95b6-4f0ca8024493}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManual EXTENDS TcoTaskedSequencer IMPLEMENTS ICUTask
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManual EXTENDS TcoTaskedService IMPLEMENTS ICUTask
 VAR
 END_VAR
 ]]></Declaration>
@@ -20,7 +20,14 @@ END_VAR
 METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Station.Components.horizontalCylinder.Service();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{9e5b3c71-1f5b-4076-a710-81816a9a4500}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Station.Automat.Restore();
+Station.Ground.Restore();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Station" Id="{400a1f67-80cb-4f9f-a632-be597ac0ffc5}">

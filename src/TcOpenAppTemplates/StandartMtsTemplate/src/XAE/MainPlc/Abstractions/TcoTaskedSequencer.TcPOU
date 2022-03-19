@@ -3,12 +3,14 @@
   <POU Name="TcoTaskedSequencer" Id="{c1209b3d-cbe5-0fa4-2d35-bd4f0cc6d1e3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTaskedSequencer EXTENDS TcoCore.TcoSequencerBase
 VAR
-    _task : TcoCore.TcoTask(THIS^);
+	{attribute addProperty Name "|[[1]AttributeName]|"}
+    _task : TcoInnerTask(THIS^);
     _o    : TcoCore.TcoSequencerObserver(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="TaskRelay" Id="{afc41ea2-70b7-46a4-8ba7-73e4b0574c74}" />
     <Method Name="CompleteSequence" Id="{e660dda5-e822-0795-15da-43df1875907c}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -52,6 +54,36 @@ METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
 	</docu>
 ~*)
 METHOD PROTECTED ABSTRACT Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{4a8dbf93-63ad-425f-a385-076450b1741f}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnAbort : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{30fb0e8a-1cb0-4f9e-a2ec-ea455b994447}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnDone : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{0ad4a5a1-079e-4d8c-ab31-9475260ad3db}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnError : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{3f6df8fb-4ab1-4f1c-90a2-1116dcabff12}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnStart
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -152,6 +184,24 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[RequestStep := i_RequestStep(inRequestedStepID := inRequestedStepID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{a3c44169-c865-41a7-b04d-fb6593fd4c0f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				This method resets the sequencer. 
+				Method is typically called before starting the sequence or after error has occured in the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+Task.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{18d5420d-14f4-0ac5-255d-8d8a78d1e1c6}">

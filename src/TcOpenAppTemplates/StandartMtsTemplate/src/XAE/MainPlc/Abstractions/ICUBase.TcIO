@@ -4,13 +4,13 @@
     <Declaration><![CDATA[INTERFACE ICUBase
 ]]></Declaration>
     <Property Name="Automat" Id="{0973134a-28ab-409f-89d6-09a89d3c2b07}">
-      <Declaration><![CDATA[PROPERTY Automat : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Automat : REFERENCE TO TcoTaskedSequencer]]></Declaration>
       <Get Name="Get" Id="{875b00fc-90da-4e77-90bf-2b8bbd7567de}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
     <Property Name="Ground" Id="{1d3de518-7983-4b14-bc52-cecc3a9f28ce}">
-      <Declaration><![CDATA[PROPERTY Ground : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Ground : REFERENCE TO TcoTaskedSequencer]]></Declaration>
       <Get Name="Get" Id="{aeb7dbf2-8845-4132-943f-b1517c4d10de}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
