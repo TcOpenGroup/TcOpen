@@ -15,7 +15,7 @@ VAR
 	_currentStepDescription				:	STRING(254);
 	_currentStepStatus					:	INT;
 	_currentStepDuration				:	TIME;
-	_myTcoState							: 	TcoState(THIS^ ,eRestoreMode.None);
+	_myTcoState							: 	TcoState(THIS^, eRestoreMode.None);
 	_onCompleteStepCount 				: 	INT;
 	_onSequenceCompleteCount 			: 	INT;
 	_onSequencerErrorCount	 			: 	ULINT;
@@ -8560,6 +8560,8 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.Done;
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -8567,7 +8569,9 @@ _previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
       <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;]]></ST>
+        <ST><![CDATA[_stepIDUniquenessChecked := FALSE;
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.NotYetStarted;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{03d14d20-a375-0456-1afe-147a68ccc6ff}" FolderPath="_Tests\">

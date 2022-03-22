@@ -97,6 +97,15 @@ VAR_INPUT
 	~*)	
 		{attribute addProperty Name "<#Step duration#>"}
 		inDuration : TIME;	
+			(*~
+		<docu>
+			<summary>
+				Total steps count;
+			</summary>				
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step count#>"}
+		inStepCount : UINT;	
 END_VAR
 ]]></Declaration>
       <Implementation>

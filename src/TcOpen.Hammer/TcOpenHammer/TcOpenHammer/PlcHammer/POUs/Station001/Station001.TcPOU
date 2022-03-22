@@ -18,7 +18,7 @@ VAR
 	_processRecipies : ProcessDataManager(THIS^); 
     _processTraceabilty : ProcessDataManager(THIS^);
 	_technologicalDataManager : TechnologicalDataManager(THIS^);
-	
+	_currentMode : enumModes := enumModes.Idle;
 	_checkers : Checkers(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
@@ -40,6 +40,7 @@ IF(_swiftModeTask.Execute()) THEN
 	_automatMode.Restore();
 	_serviceModeTask.Restore();
 	_swiftSequence.Run();
+	_currentMode := enumModes.Idle;
 END_IF
 
 
@@ -58,6 +59,7 @@ IF(_automatModeTask.Execute()) THEN
 	Messenger.Trace('Automat mode active');
 	_serviceModeTask.Abort();
 	_automatMode.Run();
+	_currentMode := enumModes.Automat;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -99,6 +101,7 @@ END_VAR
 	IF _groundModeTask.Done THEN
 		_groundMode.Restore();
 	END_IF
+	_currentMode := enumModes.Ground;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -148,6 +151,7 @@ END_VAR
 	_groundMode.Restore();
 	_automatMode.Restore();
 	_components.Service();
+	_currentMode := enumModes.Service;
 END_IF]]></ST>
       </Implementation>
     </Method>

@@ -242,3 +242,105 @@ function GitVersionToPlcVersion{
 
 # [END] clean.ps1 
 
+# Isolated core functions 
+
+function Has-Isolated-Core($tcproj)
+{
+    $settingsNode = Select-Xml -Path $tcproj -XPath "TcSmProject/Project/System/Settings"
+    return $settingsNode.Node.NonWinCpus -gt 0
+}
+
+function Shared-Cores($tcproj)
+{
+    $settingsNode = Select-Xml -Path $tcproj -XPath "TcSmProject/Project/System/Settings"
+    if($settingsNode -eq $null){ return 1 }
+    $isolated = $settingsNode.Node.NonWinCpus
+    $max = $settingsNode.Node.MaxCpus
+    return $max - $isolated
+}
+
+function Has-RT-Isolated-Core($tcproj)
+{
+    $cpuNodes = Select-Xml -Path $tcproj -XPath "TcSmProject/Project/System/Settings/Cpu"
+    if($cpuNodes -eq $null){ return $false }
+    $firstIsolatedCoreId = Shared-Cores $tcproj 
+    foreach($cpuNode in $cpuNodes)
+    {
+        if($cpuNode.Node.CpuId -ige $firstIsolatedCoreId){ return $true;}
+    }
+    return $false
+
+}
+
+function Set-CPU-Cores($tcproj, $shared, $isolated)
+{
+    $xml = [System.Xml.XmlDocument](Get-Content $tcproj);
+    $settingsNode = $xml.SelectSingleNode("TcSmProject/Project/System/Settings")
+    if($settingsNode -eq $null)
+    {
+        $settingsNode = $xml.CreateElement('Settings')
+        $settingsNode.SetAttribute("MaxCpus", "-1")
+        $settingsNode.SetAttribute("NonWinCpus", "-1")
+        $xml.SelectSingleNode("TcSmProject/Project/System").PrependChild($settingsNode)
+    }
+    $settingsNode.MaxCpus= ($shared + $isolated).ToString()
+    if(-Not $settingsNode.HasAttribute("NonWinCpus"))
+    {
+    $settingsNode.SetAttribute("NonWinCpus", "-1")
+    }
+    $settingsNode.NonWinCpus= ($isolated).ToString()
+
+    $isolatedCoreXmlNode = $xml.CreateElement('Cpu')
+    $isolatedCoreXmlNode.SetAttribute("CpuId", ($shared).ToString())
+    
+    $settingsCpuNodes= $xml.SelectNodes("TcSmProject/Project/System/Settings/Cpu")
+    foreach($cpuNode in $settingsCpuNodes)
+    {
+        $settingsNode.RemoveChild($cpuNode)
+    }
+    
+    $settingsNode.AppendChild($isolatedCoreXmlNode)
+    
+    $xml.Save($tcproj)
+}
+
+function Is-AMS-Id-Local($TargetAmsId)
+{
+    Import-Module "C:\TwinCAT\AdsApi\Powershell\TcXaeMgmt\TcXaeMgmt.psd1" -Scope Local
+    $route2local = Get-AdsRoute -Local
+    $LocalAmsId = $route2local.NetId.ToString()
+    $IsLocal = -Not $TargetAmsId -or ($TargetAmsId -eq "127.0.0.1.1.1") -or ($TargetAmsId -eq $LocalAmsId)
+    return $IsLocal
+}
+
+function Remove-TargetNetId($tcproj)
+{
+    $xml = [System.Xml.XmlDocument](Get-Content $tcproj);
+    $projectNode = $xml.SelectSingleNode("TcSmProject/Project")
+    if($projectNode.HasAttribute("TargetNetId"))
+    {
+        $projectNode.RemoveAttribute("TargetNetId")
+        $xml.save($tcproj)
+    }
+}
+
+function Is-License-Valid($targetAmsId)
+{
+    Import-Module "C:\TwinCAT\AdsApi\Powershell\TcXaeMgmt\TcXaeMgmt.psd1" -Scope Local
+    $licenses = Get-TcLicense -Address $targetAmsId  -OrderId TC1200
+    $result = $false
+    foreach($licence in $licenses )
+    {
+        $result = $licence.Valid -or $result 
+    }
+    if ($result)
+    {
+        return $result
+    }
+    else
+    {
+        $licenses
+        return $result
+    }
+}
+

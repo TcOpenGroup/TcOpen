@@ -41,6 +41,8 @@ VAR
 	{attribute 'hide'}
 	_remote2localDiff					:	Tc2_EtherCAT.T_DCTIME64;
 	{attribute 'hide'}
+	_local2SyncDiff_nanoseconds			:	LINT;
+	{attribute 'hide'}
 	_offset								:	ULINT;
 	{attribute 'hide'}
 	_syncCounter						:	ULINT;
@@ -52,6 +54,12 @@ VAR
 	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
 	{attribute 'hide'}
 	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
+	{attribute 'hide'}
+	_syncStartLocalTime					:	Tc2_Utilities.TIMESTRUCT;
+	{attribute 'hide'}
+	_LastSyncTimeStampInLocalTime		:	Tc2_Utilities.TIMESTRUCT;
+	{attribute 'hide'}
+	_LastSyncDiff_seconds				:	LINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -62,13 +70,15 @@ END_VAR
 METHOD PUBLIC Synchronize
 VAR_INPUT
 	inRtcSynchParams	: RtcSynchParams;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _RtcSynchParams.synchContextIdentity = 0 AND inRtcSynchParams.synchContextIdentity <> 0 THEN
+        <ST><![CDATA[//If there is no synchronization context identity already set, the value of this identity is used.
+//So first TcoContext that calls this method set the synchronization parameters.    
+IF _RtcSynchParams.synchContextIdentity = 0 AND inRtcSynchParams.synchContextIdentity <> 0 THEN
 	_RtcSynchParams.synchContextIdentity := inRtcSynchParams.synchContextIdentity;
 END_IF
 
+//In case that another TcoContest calls this method, it is ignored as only one could set the synchronization parameters. 
 IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIdentity = inRtcSynchParams.synchContextIdentity THEN
 	_RtcSynchParams.doSynch := inRtcSynchParams.doSynch;
 	_RtcSynchParams.syncAmsId := inRtcSynchParams.syncAmsId;
@@ -90,6 +100,7 @@ IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIden
 	END_IF
 	
 	IF _state = 10 THEN
+		_syncStartLocalTime := _NT_GetLocalTime.TIMESTR;
 		_FB_GetLocalAmsNetId(bExecute := TRUE);
 		IF _FB_GetLocalAmsNetId.bBusy AND NOT _FB_GetLocalAmsNetId.bError THEN
 			_state := _state + 10;
@@ -105,9 +116,9 @@ IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIden
 	END_IF
 	
 	IF _state = 30 THEN
-		_syncAmsIdIsLocale := 	_RtcSynchParams.syncAmsId = _FB_GetLocalAmsNetId.AddrString OR 
-								_RtcSynchParams.syncAmsId = '127.0.0.1.1.1' OR 
-								_RtcSynchParams.syncAmsId = '';
+		_syncAmsIdIsLocale := _RtcSynchParams.syncAmsId = _FB_GetLocalAmsNetId.AddrString OR 
+							  _RtcSynchParams.syncAmsId = '127.0.0.1.1.1' OR 
+							  _RtcSynchParams.syncAmsId = '';
 		_state := _state + 10;
 	END_IF
 	
@@ -228,8 +239,10 @@ IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIden
 	END_IF
 	
 	IF _state = 200 THEN
-		_remote2localDiff := Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetSyncTime.TIMESTR,0,0) -  Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetLocalTime.TIMESTR,0,0);
-	
+		_LastSyncTimeStampInLocalTime := _NT_GetLocalTime.TIMESTR;
+		_LastSyncDiff_seconds := ULINT_TO_LINT(Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_LastSyncTimeStampInLocalTime,0,0) - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_syncStartLocalTime,0,0))/1000000000;
+		_local2SyncDiff_nanoseconds := ULINT_TO_LINT(Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetLocalTime.TIMESTR,0,0) - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_NT_GetSyncTime.TIMESTR,0,0));
+
 		_NT_GetSyncTime(START := FALSE);
 		_NT_GetLocalTime(START := FALSE);
 		_NT_SetLocalTime(START := FALSE);
@@ -269,7 +282,7 @@ IF _RtcSynchParams.synchContextIdentity <>0 AND _RtcSynchParams.synchContextIden
 		_timeTick :=Tc2_EtherCAT.F_GetActualDcTime64(); 	
 		
 		IF _RtcSynchParams.doSynch THEN
-			IF (_timeTick - _lastSyncTick) / 1000000000  >= _RtcSynchParams.syncPeriod THEN
+			IF (_timeTick - _lastSyncTick) / 1000000000  >= _RtcSynchParams.syncPeriod THEN //Ticks are in nanoseconds, sync period is in seconds
 				_state := 0;
 			ELSE
 				_state := 210;

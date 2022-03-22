@@ -311,7 +311,9 @@ END_VAR]]></Declaration>
 _RtcSynchParams.syncAmsId				:=	inSyncAmsId;
 _RtcSynchParams.syncPeriod				:=	inSyncPeriod;
 _RtcSynchParams.synchContextIdentity	:=	THIS^._Identity;
+{warning disable C0357}
 RtcPrg.Synchronize(_RtcSynchParams);
+{warning enable C0357}
 RtcSynchronize REF= THIS^;
 
 _timeSychnMessenger.OnCondition(NOT THIS^.RealTimeClock.IsValid).Error('Real time clock is invalid').Pin();

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoInspectorTests" Id="{23a7de36-f9c4-0b82-3e65-65f0a2b87059}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoInspectorTests EXTENDS TcoCore._internals_TcoContext
+VAR
+    _result         : TcoInspectors.eInspectorResult;
+    _isOverIspected : BOOL;
+    _overallResult  : TcoInspectors.TcoComprehensiveResult;
+    _coordinator    : MockCoordinator;
+	i_coordinator    : TcoCore.ITcoCoordinator;
+    _retryState     : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Inspect" Id="{0a3b37f7-9710-0dae-1c6d-f079d88f81a5}">
+      <Declaration><![CDATA[METHOD ABSTRACT Inspect : TcoInspectors.IInspector
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{d3b8a8a4-7806-07ca-3474-7884aa0d6670}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_coordinator := _coordinator;
+
+CASE _testId OF
+    0:
+        _result         := 0;
+        _isOverIspected := FALSE;
+    eInspectorTests.Inspect:
+        THIS^.ProbeDoneWhen(Inspect().UpdateComprehensiveResult(_overallResult).Done);
+    eInspectorTests.GetResult:
+        _result         := Inspect().Result;
+        _isOverIspected := Inspect().OverInspected;
+    eInspectorTests.OnFailCarryOn:
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().CarryOn());
+    eInspectorTests.OnFailRetry:
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Retry(_retryState));
+    eInspectorTests.OnFailTerminate:
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Terminate());
+	eInspectorTests.OnFailDialog:
+        THIS^.ProbeDoneWhen(WithCoordinator(inoCoordinator := i_coordinator).Inspect().OnFail().Dialog(100));
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{b8dd4de1-67da-007e-2884-ea72dd5478e5}">
+      <Declaration><![CDATA[METHOD ABSTRACT WithCoordinator : REFERENCE TO TcoInspectorTests
+VAR_INPUT
+	inoCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -24,8 +24,8 @@ namespace TcoCore.Sandbox.Wpf
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = TcoCoreExamples.Entry.PlcTcoCoreExamples;
-            swiftRecorder.DataContext = new TcOpen.Inxton.Swift.Wpf.SwiftRecorderViewModel(TcoCoreExamples.Entry.PlcTcoCoreExamples.EXAMPLES_PRG._recordableStations);
+            //this.DataContext = TcoCore.Sandbox.Wpf.App.PlcTcoCoreExamples;
+            swiftRecorder.DataContext = new TcOpen.Inxton.Swift.Wpf.SwiftRecorderViewModel(TcoCoreExamples.Entry.PlcTcoCoreExamples.EXAMPLES_PRG._recordableStations);          
         }
     }
 }

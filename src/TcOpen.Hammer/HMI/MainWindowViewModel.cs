@@ -1,4 +1,5 @@
-﻿using PlcHammerConnector;
+﻿using HMI;
+using PlcHammerConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace PlcHammer.Hmi
             Users = new UserManagementViewModel();
         }
 
-        private bool IsDesignTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
+        private readonly bool IsDesignTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
         public PlcHammer.PlcHammerTwinController PlcHammer { get { return IsDesignTime ? Entry.PlcHammerDesign : Entry.PlcHammer; } }     
         
@@ -29,6 +30,7 @@ namespace PlcHammer.Hmi
 
         public OpenLoginWindowCommand OpenLoginWindowCommand { get; } = new OpenLoginWindowCommand();
 
+        public object LogBox { get { return App.LogTextBox; } }
 
     }
 }

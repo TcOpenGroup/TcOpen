@@ -6,6 +6,9 @@
     using TcOpen.Inxton.App.Logging;
     using TcOpen.Inxton.Threading;
     using Vortex.Connector;
+    using System;
+    using System.Collections.Generic;
+    using TcOpen.Inxton.App.Dialogs;
 
     /// <summary>
     /// TcOpen application configuration builder.
@@ -69,9 +72,12 @@
             }
             
             return this;
+        }         
+        
+        public TcoAppBuilder SetPlcDialogs(DialogProxyServiceBase dialogProxy)
+        {            
+            return this;
         }
-
-       
     }
 }
  

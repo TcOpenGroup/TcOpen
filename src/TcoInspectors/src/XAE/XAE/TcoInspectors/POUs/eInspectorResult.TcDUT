@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="eInspectorResult" Id="{0144af4b-8ed9-0285-0c54-d5d7e851b8e5}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eInspectorResult :
+    (
+        NoAction     := 0,
+        Running      := 10,
+        Passed       := 20,
+        Failed       := 30,
+        Inconclusive := 35,
+        Excluded     := 40,
+        Bypassed     := 50
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

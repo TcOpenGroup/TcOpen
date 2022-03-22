@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TcoStruct" Id="{ed0cd97c-0c84-053d-1273-5475387e48d0}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Basic structure block from which most of the structures in TcOpen derive. `TcoStruct` provides construction mechanism to allow for access to the 
+			parent function block and the context. 			    
+			<note type="important">
+					The derived structure must be initialized in the declaration of the function block `mystruct : MyCustomStructure := (Parent := THIS^)`, 
+					when nested in another structure `mystruct : MyCustomStructure := (Parent := THISSTRUCT)`. This will provide access to the `TcoContext` 
+					and parent `TcoObject`.
+			</note> 					
+ 		</summary>	
+				
+	</docu>	
+~*)
+TYPE
+    ABSTRACT TcoStruct :
+    STRUCT
+		{attribute 'hide'}
+		{attribute clr [ReadOnly()]}		
+        Parent : ITcoObject;
+		(*~
+		<docu>
+			<summary>
+				Provides access to parent object of this structure.					    			
+			</summary>						
+		</docu>	
+		~*)	
+        {attribute 'hide'}
+		{attribute clr [ReadOnly()]}
+        THISSTRUCT : TcoParentedStructure(NO.Obj, THIS^);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

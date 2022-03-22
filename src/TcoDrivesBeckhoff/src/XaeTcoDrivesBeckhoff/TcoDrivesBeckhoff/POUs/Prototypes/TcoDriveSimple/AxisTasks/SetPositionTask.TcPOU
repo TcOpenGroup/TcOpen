@@ -49,7 +49,7 @@ END_IF]]></ST>
     _drive : ITcoDriveSimple := 0;
 END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYINTERFACE(THIS^._Parent, _drive) THEN
+          <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent, _drive) THEN
     DriveRef REF= _drive.DriveRef;
 END_IF]]></ST>
         </Implementation>
@@ -60,10 +60,10 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-    Parent : ITcoObject;
+  	ParentObject : ITcoObject;	
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{67797632-85c3-0d01-2507-e70b095630da}">

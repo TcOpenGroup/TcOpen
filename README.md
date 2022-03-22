@@ -38,6 +38,10 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 
 ![](assets/readme/TcOpen101-1.gif)
 
+- [Plc Dialogs](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoDialogs.html)
+
+![](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/assets/dialog_example.png)
+
 - [Sequenced coordination](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoSequencer.html)
 
 ![](assets/readme/TcOpen101-4-0.gif)
@@ -46,9 +50,15 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 
 *Data framework requires inxton framework.*
 
-- [CeateReadUpdateDelete (CRUD) operations directly from the plc](https://docs.tcopengroup.org/api/TcoData/PlcDocu.TcoData.TcoDataExchange.html)
+- [CreateReadUpdateDelete (CRUD) operations directly from the plc](https://docs.tcopengroup.org/api/TcoData/PlcDocu.TcoData.TcoDataExchange.html)
 - [Generic interface for implementation of any repository](https://docs.tcopengroup.org/api/TcOpen.Inxton/TcOpen.Inxton.Abstractions/TcOpen.Inxton.Data.IRepository-1.html)
 - TcOpen contains implementation for [MongoDB](https://docs.tcopengroup.org/api/TcoData/TcOpen.Inxton.Data.MongoDb.html), [Json](https://docs.tcopengroup.org/api/TcoData/TcOpen.Inxton.Data.Json.html), [InMemory](https://docs.tcopengroup.org/api/TcoData/TcOpen.Inxton.Data.InMemory.html) 
+
+### [Inspectors](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoInspectors/Introduction.html)
+
+*Advanced handling of singal inspections*
+
+![](https://user-images.githubusercontent.com/61538034/156205362-9e21f32f-5d3a-4790-9f28-b9ecd3fb346c.png)
 
 ### Components
 
@@ -103,7 +113,7 @@ Details about contribution [here](CONTRIBUTING.md)
 1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
 1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.17+
 1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
-1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) 
+1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) (5.0.7)
 1. [Get free inxton developer licence](https://inxton.com/register)
 1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
 

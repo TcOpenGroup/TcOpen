@@ -33,7 +33,7 @@ _max := inMaxValue * _ex;
 _pm := (_max - _min);
 _x1 := _min + (Tc2_Math.LMOD((_x0 * _p1 + _p2), _pm));
 
-inoutValue := _x1 / _ex;]]></ST>
+inoutValue := Tc2_Math.LTRUNC(_x1 / _ex);]]></ST>
     </Implementation>
     <Property Name="Dc" Id="{d7693bd9-f557-4a6e-8e36-74e7243b7b57}">
       <Declaration><![CDATA[PROPERTY Dc : LREAL]]></Declaration>

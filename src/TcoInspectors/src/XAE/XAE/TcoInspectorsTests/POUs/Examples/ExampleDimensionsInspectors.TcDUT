@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ExampleDimensionsInspectors" Id="{5a368506-a378-05ee-0f7a-1980d3c20bc5}">
+    <Declaration><![CDATA[TYPE
+    ExampleDimensionsInspectors EXTENDS TcoCore.TcoStruct :
+    STRUCT
+		{attribute addProperty Name "Dimension X inspection"}
+        DimX_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension Y inspection"}
+        DimY_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension Z inspection"}
+        DimZ_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
