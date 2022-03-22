@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoData\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoInspectors\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj" />
+    <ProjectReference Include="..\MainPlcConnector\MainPlcConnector.csproj" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Babel.Licensing" Version="2.8.7" PrivateAssets="All" />
+		<!--<PackageReference Include="Babel.Obfuscator" Version="9.6.0" PrivateAssets="All" />-->
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ApplicationDefinition Update="App.xaml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </ApplicationDefinition>
+	</ItemGroup>
+	
+  <ItemGroup>
+    <Compile Update="Properties\strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>strings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Data\CUBaseDataView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Diagnostics\CUBaseDiagView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\CUBaseTasksView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Sequence\TcoTaskedSequencerSequenceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Task\TcoTaskedSequencerTaskView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Sevice\TcoTaskedServiceComponentsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Task\TcoTaskedServiceTaskView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Data\CUBaseDataView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Diagnostics\CUBaseDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\CUBaseTasksView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Sequence\TcoTaskedSequencerSequenceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Task\TcoTaskedSequencerTaskView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Sevice\TcoTaskedServiceComponentsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Task\TcoTaskedServiceTaskView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Diagnostics\Simplified\CUBaseMiniDiagnosticsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Data\DataView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\Data\TechnologicalSettings\TechnologicalSettingsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+</Project>

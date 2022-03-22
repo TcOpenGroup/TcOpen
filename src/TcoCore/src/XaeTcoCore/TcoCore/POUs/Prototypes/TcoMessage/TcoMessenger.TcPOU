@@ -39,7 +39,9 @@ VAR
 	{attribute 'hide'}
 	_mds : ARRAY[0..MDS_MAX_INDEX] OF TcoMessageDigest;	
 	{attribute 'hide'}
-	_condition : eMessageCondition;		
+	_condition : eMessageCondition;
+	{attribute 'hide'}
+	_pinnable : BOOL;		
 END_VAR
 
 VAR
@@ -570,7 +572,7 @@ METHOD Pin : ITcoMessageProperties
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0) THEN
-	IF(_mime.Cycle = _Parent.Context.StartCycleCount)THEN
+	IF(_pinnable AND_THEN _mime.Cycle = _Parent.Context.StartCycleCount)THEN
 		_mime.Pinned := TRUE;
 	END_IF;
 END_IF;
@@ -630,14 +632,17 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Post := THIS^;
+
 tmpMessageText := Message;
-IF(_condition > eMessageCondition.Active) THEN
+
+_pinnable := FALSE;
+
+IF(_condition = eMessageCondition.Inactive) THEN
 	_condition := eMessageCondition.Unconditional;	
 	RETURN;
 END_IF
 
 _condition := eMessageCondition.Unconditional;
-
 
 
 IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environment <> 0 AND_THEN _Parent.Context.Environment.Messaging <> 0) THEN
@@ -672,6 +677,7 @@ IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.Environme
 		END_IF;
 	END_IF;	
 
+	_pinnable := TRUE;
 	LogMessage(_wouldBeMime);		
 END_IF;	
 

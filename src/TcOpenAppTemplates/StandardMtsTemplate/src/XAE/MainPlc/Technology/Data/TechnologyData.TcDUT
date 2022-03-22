@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TechnologyData" Id="{117cc65d-87e4-0834-348f-298728a9d5a3}">
+    <Declaration><![CDATA[{attribute clr [Container(Layout.Tabs)]}
+TYPE
+    TechnologyData EXTENDS TcoData.TcoEntity :
+    STRUCT
+		{attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty Name "<#Created#>"}
+        {attribute 'qlik_time_partition:Shift:[Morning]06:00:00-14:00:00;[Afternoon]14:00:00-22:00:00;[Night]22:00:00-06:00:00'}
+        _Created : DT;
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty Name "<#Modified#>"}
+        _Modified : DT;
+        CU00x : CU00xTechnologicalData := (Parent := THISSTRUCT);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

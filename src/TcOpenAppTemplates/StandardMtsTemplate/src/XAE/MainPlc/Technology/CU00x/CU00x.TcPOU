@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CU00x" Id="{c8fb8f62-fa26-41d3-a5d2-3cc70d4e8555}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute addProperty ShortName "CU00x"}
+{attribute addProperty Name "Controlled unit template"}
+FUNCTION_BLOCK CU00x EXTENDS CUBase
+VAR
+    _cuProcessData       : REFERENCE TO CU00xProcessData;
+    _cuTechnologicalData : REFERENCE TO CU00xTechnologicalData;
+    _components          : CU00xComponents := (Parent := THIS^);
+	{attribute addProperty Name "<#MANUAL#>"}
+    {attribute addProperty ToolTip "<#Start manual/Service mode#>"}
+    _manualTask : CU00xManualTask(THIS^);
+	{attribute addProperty Name "<#GROUND#>"}
+    {attribute addProperty ToolTip "<#Brings the device into basic position.#>"}
+    _groundTask : CU00xGroundTask(THIS^, TcoCore.eRestoreMode.None);
+    {attribute addProperty Name "<#AUTOMAT#>"}
+    {attribute addProperty ToolTip "<#Starts automatic sequence. Before start you need to perform grounding sequence.#>"}
+    _automatTask : CU00xAutomatTask(THIS^, TcoCore.eRestoreMode.None);       
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[THIS^.CuId := eStations.NONE;
+_cuProcessData REF= THIS^.ProcessDataManager.Data.CU00x;
+_cuTechnologicalData REF=  THIS^.Technology.TechnologicalSettings.Data.CU00x;
+
+THIS^.InitializeComponents();
+
+_processData();
+
+Automat();
+Ground();
+Manual();
+
+UpdateInfo();
+
+IF(_statusInfo.Mode = eCUMode.NoMode) THEN
+	NoMode();
+END_IF
+
+]]></ST>
+    </Implementation>
+    <Folder Name="Modes" Id="{f2e5cf24-1514-087a-1cf3-de6536a0a637}" />
+    <Folder Name="Tasks" Id="{302f9569-31ae-0533-24c6-3275279929c8}" />
+    <Method Name="Automat" Id="{70658337-2958-0404-37fd-9b138cbacdfa}" FolderPath="Modes\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Controls `automatic` mode of `CU00x`.
+		</summary>
+	</docu>
+~*)
+METHOD Automat
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(*
+	Enable condition to start `automatTask`.
+	Modify according your needs.
+	[! 
+	THIS IS NOT SAFETY CONDITION. THE SAFETY OF PRESONNEL AND EQUIPMENT MUST BE ENSURED BY ADDITIONAL MEANS 
+	TO COMPLY WITH REGULATIONS
+	]
+*)
+
+
+_automatTask.Task.Enabled := _groundTask.GroundDone AND THIS^.Technology.AllowAutomat();
+
+(*
+	Invokes `groundTask` from technology object.
+*)
+
+IF(Technology.AutomatAllTask.Execute()) THEN _automatTask.Task.Invoke(); END_IF;
+
+
+(*
+
+	Executes sequence of automatic mode.
+
+*)
+
+_automatTask();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AutomatTask" Id="{395ce4fa-38ae-46a5-9c91-86a9f1bcbbc2}" FolderPath="Tasks\">
+      <Declaration><![CDATA[PROPERTY AutomatTask : REFERENCE TO CUBaseAutomat]]></Declaration>
+      <Get Name="Get" Id="{ca2cc00e-064b-48f3-a4fa-26832ebfc11a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AutomatTask REF= _automatTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Components" Id="{7133061c-46ce-4913-b91f-5deb41132b8c}">
+      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO CU00xComponents]]></Declaration>
+      <Get Name="Get" Id="{d34691d4-caf0-4f1c-9ccf-b26a123c3f8f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Components REF= _components;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Ground" Id="{7656a7d5-b5cf-0112-2af9-f331cc560782}" FolderPath="Modes\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Controls `ground` mode of `CU00x`.
+		</summary>
+	</docu>
+~*)
+METHOD Ground : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(*
+	Enable condition to start `groundTask`.
+	Modify according your needs.
+	[! 
+	THIS IS NOT SAFETY CONDITION. THE SAFETY OF PRESONNEL AND EQUIPMENT MUST BE ENSURED BY ADDITIONAL MEANS 
+	TO COMPLY WITH REGULATIONS
+	]
+*)
+
+_groundTask.Task.Enabled := NOT _groundTask.Task.Done AND THIS^.Technology.AllowGround();
+
+(*
+	Invokes `groundTask` from technology object.
+*)
+
+IF(Technology.GroundAllTask.Execute()) THEN _groundTask.Task.Invoke(); END_IF;
+
+(*
+
+	Executes sequence of groundTask.
+
+*)
+_groundTask();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="GroundTask" Id="{49f8c54b-7096-4ee9-be7f-1b5b62c4c097}" FolderPath="Tasks\">
+      <Declaration><![CDATA[PROPERTY GroundTask : REFERENCE TO CUBaseGround]]></Declaration>
+      <Get Name="Get" Id="{8480f5d4-4535-49b0-b4be-60aa7bf89b76}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[GroundTask REF= _groundTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="InitializeComponents" Id="{5a5fba3f-8ac9-4756-a6a5-163b8c66ad67}">
+      <Declaration><![CDATA[METHOD InitializeComponents : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_components.horizontalCylinder(inoAtHomePos:=IO.IN[0] , inoAtWorkPos:=IO.IN[1], inoToHomePos:=IO.OUT[0], inoToWorkPos:=IO.OUT[1] );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Manual" Id="{f43c6193-c9c5-0244-248c-08c5ef114438}" FolderPath="Modes\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Controls `manual` mode of `CU00x`.
+		</summary>
+	</docu>
+~*)
+METHOD Manual : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(*
+	Enable condition to start `automatTask`.
+	Modify according your needs.
+	[! 
+	THIS IS NOT SAFETY CONDITION. THE SAFETY OF PRESONNEL AND EQUIPMENT MUST BE ENSURED BY ADDITIONAL MEANS 
+	TO COMPLY WITH REGULATIONS
+	]
+*)
+
+_manualTask.Task.Enabled := THIS^.Technology.AllowManual();
+
+
+(*
+
+	Executes sequence of manualTask.
+
+*)
+_manualTask();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ManualTask" Id="{3362f8a1-5828-47e8-a58f-b7a215df59dc}" FolderPath="Tasks\">
+      <Declaration><![CDATA[PROPERTY ManualTask : REFERENCE TO TcoTaskedService]]></Declaration>
+      <Get Name="Get" Id="{e78cfa35-d5c6-462d-8720-3fee9ea9f425}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ManualTask REF= _manualTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="NoMode" Id="{83cfb354-866f-0f83-2445-735ead10a56a}" FolderPath="Modes\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Code to be called cylically when `CU00x` idle; no other mode is active.
+		</summary>
+	</docu>
+~*)
+METHOD NoMode : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Technology" Id="{0e688a71-683a-45e9-ad1b-4b5b04f7d71e}">
+      <Declaration><![CDATA[PROPERTY Technology : REFERENCE TO Technology]]></Declaration>
+      <Get Name="Get" Id="{6127ba68-461c-4b3d-aa46-b1cbb1962cc4}">
+        <Declaration><![CDATA[VAR
+    _technology : POINTER TO Technology;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _technology) THEN // Check if _Parent is Station001
+    Technology REF= _technology^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

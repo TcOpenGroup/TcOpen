@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="CU00xProcessData" Id="{3cde27d5-efc5-4d61-b268-7d32d11d85fc}">
+    <Declaration><![CDATA[TYPE
+    CU00xProcessData EXTENDS CUProcessDataBase :
+    STRUCT		
+        BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

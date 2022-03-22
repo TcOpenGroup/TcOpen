@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ProcessDataManager" Id="{2c1ab05b-163f-4701-a4e6-85eef79998c1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ProcessDataManager EXTENDS TcoData.TcoDataExchange
+VAR
+    _data : ProcessData := (Parent := THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Property Name="Data" Id="{40710a68-4852-4e7f-af06-13ca5d713a1b}">
+      <Declaration><![CDATA[PROPERTY Data : REFERENCE TO ProcessData]]></Declaration>
+      <Get Name="Get" Id="{7ffb2cbf-81a9-4de7-9388-60f1b13fbd72}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Data REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

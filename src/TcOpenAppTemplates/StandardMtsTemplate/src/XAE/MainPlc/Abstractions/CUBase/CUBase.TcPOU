@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CUBase" Id="{7de2193c-318e-4c64-a9a6-ba23fb2e4da1}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute addProperty ShortName ""}
+FUNCTION_BLOCK ABSTRACT CUBase EXTENDS TcoCore.TcoObject IMPLEMENTS ICuBase
+VAR
+    _cuId        : eStations;
+    _processData : ProcessDataManager(THIS^);
+    _statusInfo  : CUBaseStatusInfo := (Parent := THIS^);
+	_operatorInfo : OperatorInfo := (Parent := THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="ProcessData" Id="{1a8aa84b-31e4-41aa-b103-fbb20e0c7128}">
+      <Folder Name="DataFlaging" Id="{aed3d7b3-4fd1-0c13-2eed-417fc6b5b252}" />
+      <Folder Name="ExternalData" Id="{8389998d-539c-07b7-2bed-035331c1a0d8}" />
+    </Folder>
+    <Property Name="AutomatTask" Id="{9a1989f3-7511-4b12-80ce-78bb1add06c6}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT AutomatTask : REFERENCE TO CUBaseAutomat]]></Declaration>
+      <Get Name="Get" Id="{86426d31-47b7-4512-bf28-f740d21d447d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CuId" Id="{65aa5bdf-9849-470a-831e-c3ba5e79392e}">
+      <Declaration><![CDATA[PROPERTY CuId : eStations]]></Declaration>
+      <Get Name="Get" Id="{c66b2e7b-b895-4144-891c-99fd374ac89f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CuId := _cuId;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{07920021-9ea4-4f22-9984-168c54ee5866}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_cuId := CuId;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="EntityFlowCloseForOperations" Id="{8bf49847-55ad-09e2-18b7-e269b9aac41c}" FolderPath="ProcessData\ExternalData\">
+      <Declaration><![CDATA[METHOD EntityFlowCloseForOperations : TcoCore.ITcoTaskStatus
+VAR_IN_OUT
+	Header : CuHeader; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.FlagCloseEntity(Header);
+EntityFlowCloseForOperations := THIS^.ProcessDataManager.Update(ProcessDataManager.Data._EntityId);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EntityFlowCreateNew" Id="{def96a3d-be60-022c-22e1-cec3782e9b03}" FolderPath="ProcessData\ExternalData\">
+      <Declaration><![CDATA[METHOD EntityFlowCreateNew : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);	
+END_VAR
+VAR_IN_OUT
+	Header : CuHeader;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.FlagCreateNewEntity(Identifier, Header);
+EntityFlowCreateNew := THIS^.ProcessDataManager.Create(Identifier);
+	 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EntityFlowDiscard" Id="{e706bdf6-bfe5-0d86-0aa7-1e9e631ad7f3}" FolderPath="ProcessData\ExternalData\">
+      <Declaration><![CDATA[METHOD EntityFlowDiscard : TcoCore.ITcoTaskStatus
+VAR_IN_OUT	
+	Header : CuHeader; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.FlagThrowAwayEntity(Header);
+EntityFlowDiscard := THIS^.ProcessDataManager.Update(THIS^.ProcessDataManager.Data._EntityId);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EntityFlowFinalize" Id="{d334eb15-8a45-08f2-3686-ad4133f632f2}" FolderPath="ProcessData\ExternalData\">
+      <Declaration><![CDATA[METHOD EntityFlowFinalize : TcoCore.ITcoTaskStatus
+VAR_IN_OUT
+	Header : CuHeader; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.FlagFinishEntity(Header);
+EntityFlowFinalize := THIS^.ProcessDataManager.Update(ProcessDataManager.Data._EntityId);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EntityFlowOpenForOperations" Id="{9ce16e44-9451-0ab8-22fc-14904cbb8438}" FolderPath="ProcessData\ExternalData\">
+      <Declaration><![CDATA[METHOD EntityFlowOpenForOperations : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	Identifier : STRING(255);	
+END_VAR
+VAR_IN_OUT
+	Header : CuHeader;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[EntityFlowOpenForOperations := THIS^.ProcessDataManager.Read(Identifier);
+THIS^.FlagOpenEntity(Identifier, Header);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlagCloseEntity" Id="{f071be0b-9fd5-042e-3314-968c40af4466}" FolderPath="ProcessData\DataFlaging\">
+      <Declaration><![CDATA[METHOD PRIVATE FlagCloseEntity : BOOL
+VAR_IN_OUT
+	Header : CuHeader; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ProcessDataManager.Data.EntityHeader.LastStation := THIS^.CuId;
+
+IF(THIS^.ProcessDataManager.Data.EntityHeader.Results.Result = TcoInspectors.eOverallResult.Failed) THEN	
+	THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnFailed;
+ELSIF(THIS^.ProcessDataManager.Data.EntityHeader.Results.Result = TcoInspectors.eOverallResult.Passed) THEN
+	THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnPassed;
+ELSIF(THIS^.ProcessDataManager.Data.EntityHeader.Results.Result = TcoInspectors.eOverallResult.InProgress) THEN
+	THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnPassed;
+END_IF
+
+THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := eStations.NONE;
+Header.CycleTime := THIS^._statusInfo.CurrentCycleTime;
+Header.CleanLoopTime := THIS^._statusInfo.CurrentCleanCycleTime;
+Header.OperationsEnded := Context.RealTimeClock.NowLocal();
+Header.Operator := _operatorInfo.UserName;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlagCreateNewEntity" Id="{f5c3e5fb-7bd4-04c3-3dc2-2885f9b6d068}" FolderPath="ProcessData\DataFlaging\">
+      <Declaration><![CDATA[METHOD PRIVATE FlagCreateNewEntity : BOOL
+VAR_INPUT
+	Identifier : STRING(255);	
+END_VAR
+VAR_IN_OUT
+	Header : CuHeader;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Header.Operator := _operatorInfo.UserName;
+Header.OperationsStarted := Context.RealTimeClock.NowLocal();
+THIS^.ProcessDataManager.Data.EntityHeader.LastStation := THIS^.CuId;
+THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnPassed;
+THIS^.ProcessDataManager.Data.EntityHeader.Results.Result := TcoInspectors.eOverallResult.InProgress;
+THIS^.ProcessDataManager.Data._EntityId := Identifier;
+THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := THIS^.CuId;
+THIS^.ProcessDataManager.Data.EntityHeader.WasReset := FALSE;
+Header.Operator := _operatorInfo.UserName;
+	 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlagFinishEntity" Id="{a410cec9-47a6-0ae5-021f-0adac5adedb9}" FolderPath="ProcessData\DataFlaging\">
+      <Declaration><![CDATA[METHOD PRIVATE FlagFinishEntity : BOOL
+VAR_IN_OUT
+	Header : CuHeader; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ProcessDataManager.Data.EntityHeader.LastStation := THIS^.CuId;
+
+IF(THIS^.ProcessDataManager.Data.EntityHeader.Results.Result = TcoInspectors.eOverallResult.InProgress) THEN
+	THIS^.ProcessDataManager.Data.EntityHeader.Results.Result := TcoInspectors.eOverallResult.Passed;
+END_IF
+
+IF(THIS^.ProcessDataManager.Data.EntityHeader.Results.Result = TcoInspectors.eOverallResult.Failed) THEN	
+	THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnFailed;
+ELSIF(THIS^.ProcessDataManager.Data.EntityHeader.Results.Result = TcoInspectors.eOverallResult.Passed) THEN
+	THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnPassed;
+END_IF
+
+THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := eStations.NONE;
+
+Header.CycleTime := THIS^._statusInfo.CurrentCycleTime;
+Header.CleanLoopTime := THIS^._statusInfo.CurrentCleanCycleTime;
+Header.OperationsEnded := Context.RealTimeClock.NowLocal();
+Header.Operator := _operatorInfo.UserName;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlagOpenEntity" Id="{f1aa0c9c-4f3a-0a38-0281-19b168846e2a}" FolderPath="ProcessData\DataFlaging\">
+      <Declaration><![CDATA[METHOD PRIVATE FlagOpenEntity : BOOL
+VAR_INPUT
+	Identifier : STRING(255);	
+END_VAR
+VAR_IN_OUT
+	Header : CuHeader;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Header.Operator := _operatorInfo.UserName;
+Header.OperationsStarted := Context.RealTimeClock.NowLocal();
+THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := THIS^.CuId;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlagThrowAwayEntity" Id="{ab780eac-b9e9-0133-03b0-8c9a606ed51c}" FolderPath="ProcessData\DataFlaging\">
+      <Declaration><![CDATA[METHOD PRIVATE FlagThrowAwayEntity : BOOL
+VAR_IN_OUT	
+	CuHeader : CuHeader; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(THIS^.ProcessDataManager.Data.EntityHeader.OpenOn <> eStations.NONE) THEN
+	THIS^.ProcessDataManager.Data.EntityHeader.LastStation := THIS^.CuId;
+	THIS^.ProcessDataManager.Data.EntityHeader.NextStation := CuHeader.NextOnFailed;
+	THIS^.ProcessDataManager.Data.EntityHeader.Results.Result := TcoInspectors.eOverallResult.Failed;
+	THIS^.ProcessDataManager.Data.EntityHeader.WasReset := TRUE;
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="GroundTask" Id="{6cf29f50-dec8-49c6-a97a-8a93927ca757}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT GroundTask : REFERENCE TO CUBaseGround]]></Declaration>
+      <Get Name="Get" Id="{41f5a2de-fade-47b5-8a6c-d888d0eac9c5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ManualTask" Id="{a2025997-47b5-45e1-80f0-0c1e8cce860d}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT ManualTask : REFERENCE TO TcoTaskedService]]></Declaration>
+      <Get Name="Get" Id="{c93ae827-0df1-40b0-b0fa-7bfc00959641}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProcessDataManager" Id="{95e82431-3124-4f70-be63-551f0ca81c55}">
+      <Declaration><![CDATA[PROPERTY FINAL ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{75873f97-0e26-4094-bf28-402fb0488241}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessDataManager REF= _processData;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="UpdateInfo" Id="{d2563fa9-29cd-48cb-9533-a53a49a45068}">
+      <Declaration><![CDATA[METHOD UpdateInfo : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF AutomatTask.Task.Busy THEN
+    _statusInfo.Mode                   := eCUMode.AutomatMode;
+    _statusInfo.CurrentTaskDescription := '<#AUTOMAT#>';
+    _statusInfo.CurrentCycleTime       := AutomatTask._SequenceElapsedTime;
+    _statusInfo.CurrentUid             := AutomatTask.CurrentStep.ID;
+    _statusInfo.CurrentOperation       := AutomatTask.CurrentStep.Description;
+    _statusInfo.CurrentIsInStepMode    := AutomatTask._modeController._mode = eSequencerMode.StepMode;
+ELSIF GroundTask.Task.Busy THEN
+    _statusInfo.Mode := eCUMode.GroundMode;
+	_statusInfo.CurrentTaskDescription := '<#GROUND#>';
+    _statusInfo.CurrentCycleTime       := GroundTask._SequenceElapsedTime;
+    _statusInfo.CurrentUid             := GroundTask.CurrentStep.ID;
+    _statusInfo.CurrentOperation       := GroundTask.CurrentStep.Description;
+    _statusInfo.CurrentIsInStepMode    := GroundTask._modeController._mode = eSequencerMode.StepMode;
+ELSIF THIS^.ManualTask.Busy THEN
+    _statusInfo.Mode := eCUMode.ManualMode;
+	_statusInfo.CurrentTaskDescription := '<#MANUAL#>';
+ELSIF THIS^.GroundTask.Task.Done THEN
+	_statusInfo.CurrentTaskDescription := '<#READY TO START#>';
+	_statusInfo.Mode := eCUMode.GroundModeDone;
+	_statusInfo.CurrentCycleTime       := GroundTask._SequenceElapsedTime;
+    _statusInfo.CurrentUid             := GroundTask.CurrentStep.ID;
+    _statusInfo.CurrentOperation       := GroundTask.CurrentStep.Description;
+    _statusInfo.CurrentIsInStepMode    := GroundTask._modeController._mode = eSequencerMode.StepMode;
+ELSE
+    _statusInfo.Mode := eCUMode.NoMode;	
+	_statusInfo.CurrentTaskDescription := '<#IDLE#>';
+	_statusInfo.CurrentCycleTime       := T#0S;
+    _statusInfo.CurrentUid             := 0;
+    _statusInfo.CurrentOperation       := '';
+    _statusInfo.CurrentIsInStepMode    := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

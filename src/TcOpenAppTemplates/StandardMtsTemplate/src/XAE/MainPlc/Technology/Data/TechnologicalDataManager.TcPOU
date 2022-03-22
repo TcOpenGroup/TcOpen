@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TechnologicalDataManager" Id="{06b46b93-bcf9-022c-0edf-e96bd18e6660}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TechnologicalDataManager EXTENDS TcoData.TcoDataExchange
+VAR
+    _data : TechnologyData := (Parent := THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Property Name="Data" Id="{61dc4c74-76bd-0bcc-1193-82087be92c90}">
+      <Declaration><![CDATA[PROPERTY Data : REFERENCE TO TechnologyData]]></Declaration>
+      <Get Name="Get" Id="{9c2f366a-846c-0abb-3224-43f8841e354b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Data REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

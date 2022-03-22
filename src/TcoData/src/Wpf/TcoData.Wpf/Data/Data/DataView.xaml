@@ -159,7 +159,8 @@
                                     x:Name="EditData"
                                     Margin="10"
                                     IsVisibleChanged="ControlDataVisibilityChanged"                                    
-                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}">
+                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}"
+                                    Grid.IsSharedSizeScope="True">
                                     <!--<vortex:RenderableContentControl DataContext="{Binding DataExchange._data}" PresentationType="ShadowControl"/>-->
                                 </ContentControl>
                             </GroupBox>
@@ -169,7 +170,7 @@
                                 Header="{Binding DataExchange._data._EntityId.Shadow}"
                                 IsVisibleChanged="DisplayDataVisibilityChanged"
                                 Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-                                <ContentControl x:Name="DisplayData"/>
+                                <ContentControl x:Name="DisplayData" Grid.IsSharedSizeScope="True"/>
                             </GroupBox>
                         </Grid>
                         <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=NewCopy}">

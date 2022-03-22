@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eCUMode" Id="{95533cd7-3a00-4614-8cf9-ed41b8c0fc55}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eCUMode :
+    (
+        NoMode         := 0,
+        GroundMode     := 10,
+        GroundModeDone := 15,
+        AutomatMode    := 20,
+        ManualMode     := 30
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -287,6 +287,20 @@ END_VAR]]></Declaration>
 THIS^.Messenger.Build().Append('<#Reading data item with id:#> ').Append(Identifier).As().AsInfo();	]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Restore" Id="{fdef7670-b22a-01d4-2833-7a2ee73e3c09}">
+      <Declaration><![CDATA[METHOD Restore : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_createTask.Restore();
+_readTask.Restore();
+_updateTask.Restore();
+_deleteTask.Restore();
+_idExistsTask.Restore();
+_createOrUpdateTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Update" Id="{d5409d9d-f931-0f6c-095c-9c419d838664}">
       <Declaration><![CDATA[(*~
 	<docu>

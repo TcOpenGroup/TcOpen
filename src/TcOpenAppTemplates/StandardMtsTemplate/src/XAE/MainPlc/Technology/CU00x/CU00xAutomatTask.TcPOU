@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CU00xAutomatTask" Id="{7d4ccf14-fbfb-4c7b-8fab-cda3fabc0370}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xAutomatTask EXTENDS CUBaseAutomat IMPLEMENTS ICUTask
+VAR
+	_dialog : TcoCore.TcoDialog(THIS^);
+	_tick : ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Run();]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{65c64653-c354-4e9f-878f-19a4b135c641}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
+    //-------------------------------------
+	
+	THIS^.Messenger.OnCondition(Station.Technology.ProcessSettings.Data._EntityId = '')
+				   .Build()
+				   .Append('No process data. Please load setting')
+				   .As()				   
+				   .AsError()
+                   .Pin();
+					   
+				   
+	IF(Station.Technology.ProcessSettings.Data._EntityId <> '') THEN
+		Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;
+		_tick := Context.RealTimeClock.TickClock();
+		Station.ProcessDataManager.Data._EntityId := ULINT_TO_STRING(_tick);
+		CompleteStep();
+	ELSE
+		_dialog.Show()
+	       .WithCaption('<#Process data not selected#>')
+		   .WithText('<#Please select process data#>')
+		   .WithOk();	
+	END_IF		    				
+    //-------------------------------------
+END_IF
+
+IF (Step(200, TRUE, 'CREATE NEW DATA SET')) THEN
+    //-------------------------------------
+    StepCompleteWhen(Station.EntityFlowCreateNew(Station.ProcessDataManager.Data._EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);				
+    //-------------------------------------
+END_IF
+
+IF (Step(300, TRUE, 'SINGLE INSPECTION')) THEN
+    //-------------------------------------    
+	Station.ProcessDataManager.Data.CU00x.BoltPresenceInspector
+					.WithCoordinator(THIS^)
+					.Inspect(TRUE)
+					.UpdateComprehensiveResult(Station.ProcessDataManager.Data.EntityHeader.Results)
+					.OnFail().Dialog(100);	
+    //-------------------------------------
+END_IF
+
+IF (Step(RESTORE_STEP_ID, TRUE, 'FIRST RESTORE STEP')) THEN
+    //-------------------------------------
+    StepCompleteWhen(%MX0.0);
+    //-------------------------------------	
+END_IF
+
+IF (Step(9000, TRUE, 'UPDATE DATA')) THEN
+    //-------------------------------------
+    StepCompleteWhen(Station.EntityFlowCloseForOperations(Station.ProcessDataManager.Data.CU00x.Header).Done);				
+    //-------------------------------------
+END_IF
+
+
+IF (Step(10000, TRUE, 'LAST STEP')) THEN
+    //-------------------------------------
+    CompleteSequence();
+    //-------------------------------------	
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{8fe4788f-029c-4df9-a93a-9297bee7e169}">
+      <Declaration><![CDATA[METHOD PUBLIC OnStart
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Station.GroundTask.Restore();
+Station.ManualTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Station" Id="{c497129d-26cb-43ef-a7d7-df3034f001ea}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>
+      <Get Name="Get" Id="{9ded1606-ebd7-4887-8d53-88dc18528dcd}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO CU00x;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
+    Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
