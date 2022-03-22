@@ -182,7 +182,8 @@ userPassword: {CRYPT}$6$WSXDmysJ$lgHccUgPW83WueHPz.S9lY41feMyqZFPcVYpo3ycskIAz37
 </details>
 
 
-In C# app you can then write
+In TcOpen.Inxton C# app you can then write
+
 ```csharp
  SecurityManager.Create(new LdapService(
                 new LdapConfig("10.10.23.232", 389, false, "cn=users,dc=inxton")));
