@@ -4,8 +4,9 @@
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTaskedSequencer EXTENDS TcoCore.TcoSequencerBase
 VAR
 	{attribute addProperty Name "|[[1]AttributeName]|"}
+	{attribute addProperty ToolTip "|[[1]AttributeToolTip]|"}
     _task : TcoInnerTask(THIS^);
-    _o    : TcoCore.TcoSequencerObserver(THIS^);
+    _o    : TcoCore.TcoSequencerObserver(THIS^);	 	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

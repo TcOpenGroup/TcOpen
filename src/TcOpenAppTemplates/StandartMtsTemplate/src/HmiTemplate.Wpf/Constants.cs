@@ -14,8 +14,8 @@ namespace HmiProjectTemplate.Wpf
         // DB
         public const string CONNECTION_STRING_DB = DEPLOY_MODE==DeployMode.Plc ? PRODUCTION_CONNECTION_STRING_DB : LOCAL_CONNECTION_STRING_DB;
 
-        public const string PRODUCTION_CONNECTION_STRING_DB = @"mongodb://mts:servis@localhost:27017";
-        public const string LOCAL_CONNECTION_STRING_DB = @"mongodb://localhost:27017";//@"mongodb://mts:servis@localhost:27017";        
+        public const string PRODUCTION_CONNECTION_STRING_DB = @"http://localhost:8080";
+        public const string LOCAL_CONNECTION_STRING_DB = @"http://localhost:8080";
         public const string DB_NAME = "tcomtstemplate";
         public const string MONGODB_PATH = @"C:\Program Files\MongoDB\Server\5.0\bin\mongod.exe";
         public const string MONGODB_ARGS = "--dbpath D:\\DATA\\DB\\ --bind_ip_all";

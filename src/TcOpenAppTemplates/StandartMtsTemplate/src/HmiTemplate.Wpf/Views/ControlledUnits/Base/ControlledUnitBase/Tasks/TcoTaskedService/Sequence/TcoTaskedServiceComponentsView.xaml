@@ -11,9 +11,7 @@
     <d:UserControl.DataContext>
         <local:TcoTaskedServiceComponentsViewModel/>
     </d:UserControl.DataContext>
-    <Grid>
-        <Grid Visibility="{Binding Component._taskState.Cyclic, Converter={local:TaskStateToVisibilityConverter}}">
-            <vortex:RenderableContentControl DataContext="{Binding Serviceable}" PresentationType="Service-Manual"/>
-        </Grid>
+    <Grid Style="{DynamicResource Card}" Visibility="{Binding Component._taskState.Cyclic, Converter={local:TaskStateToVisibilityConverter}}">
+        <vortex:RenderableContentControl DataContext="{Binding Serviceable}" PresentationType="Service-Manual"/>
     </Grid>
 </UserControl>

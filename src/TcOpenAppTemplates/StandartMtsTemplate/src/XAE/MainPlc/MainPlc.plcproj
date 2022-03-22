@@ -23,10 +23,16 @@
     <Placeholder>MainPlc</Placeholder>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\CUBaseStatusInfo.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Abstractions\CUComponentsBase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Abstractions\CUBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstractions\eCUMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Abstractions\ICUBase.TcIO">
@@ -62,22 +68,22 @@
     <Compile Include="Technology\Data\ProcessDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST00x\Components\CU00xComponents.TcDUT">
+    <Compile Include="Technology\CU00x\Components\CU00xComponents.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST00x\CU00x.TcPOU">
+    <Compile Include="Technology\CU00x\CU00x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST00x\CU00xAutomat.TcPOU">
+    <Compile Include="Technology\CU00x\CU00xAutomat.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST00x\CU00xGround.TcPOU">
+    <Compile Include="Technology\CU00x\CU00xGround.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST00x\CU00xManual.TcPOU">
+    <Compile Include="Technology\CU00x\CU00xManual.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Technology\ST00x\Data\CU00xProcessData.TcDUT">
+    <Compile Include="Technology\CU00x\Data\CU00xProcessData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Technology\Technology.TcPOU">
@@ -88,9 +94,9 @@
     <Folder Include="Abstractions" />
     <Folder Include="Technology" />
     <Folder Include="Technology\Data" />
-    <Folder Include="Technology\ST00x" />
-    <Folder Include="Technology\ST00x\Components" />
-    <Folder Include="Technology\ST00x\Data" />
+    <Folder Include="Technology\CU00x" />
+    <Folder Include="Technology\CU00x\Components" />
+    <Folder Include="Technology\CU00x\Data" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -106,40 +112,40 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 0.5.0.822 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.5.0.829 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoData">
-      <DefaultResolution>TcoData, 0.5.0.822 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoData, 0.5.0.829 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoData</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoInspectors">
-      <DefaultResolution>TcoInspectors, 0.5.0.822 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoInspectors, 0.5.0.829 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoInspectors</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoPneumatics">
-      <DefaultResolution>TcoPneumatics, 0.5.0.822 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoPneumatics, 0.5.0.829 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoPneumatics</Namespace>
     </PlaceholderReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 0.5.0.822 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoData">
-      <Resolution>TcoData, 0.5.0.822 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoInspectors">
-      <Resolution>TcoInspectors, 0.5.0.822 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoPneumatics">
-      <Resolution>TcoPneumatics, 0.5.0.822 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
     <None Include="MainPlc.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcoCore">
+      <Resolution>TcoCore, 0.5.0.829 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoData">
+      <Resolution>TcoData, 0.5.0.829 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoInspectors">
+      <Resolution>TcoInspectors, 0.5.0.829 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoPneumatics">
+      <Resolution>TcoPneumatics, 0.5.0.829 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

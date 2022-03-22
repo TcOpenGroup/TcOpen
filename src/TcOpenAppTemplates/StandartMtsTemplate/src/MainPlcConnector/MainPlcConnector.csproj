@@ -4,10 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="TcOpen.Inxton.MongoDb" Version="0.5.0-alpha.822" />
-    <PackageReference Include="TcOpen.TcoCoreConnector" Version="0.5.0-alpha.822" />
-    <PackageReference Include="TcOpen.TcoInspectorsConnector" Version="0.5.0-alpha.822" />
-    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.5.0-alpha.822" />
+    <PackageReference Include="TcOpen.Inxton.RavenDb" Version="0.5.0-alpha.829" />
+    <PackageReference Include="TcOpen.TcoCoreConnector" Version="0.5.0-alpha.829" />
+    <PackageReference Include="TcOpen.TcoInspectorsConnector" Version="0.5.0-alpha.829" />
+    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.5.0-alpha.829" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
@@ -21,5 +21,8 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_meta\echac\" />
   </ItemGroup>
 </Project>

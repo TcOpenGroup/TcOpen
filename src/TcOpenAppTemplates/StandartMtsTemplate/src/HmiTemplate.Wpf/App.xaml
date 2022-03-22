@@ -17,6 +17,145 @@
                 <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/VortexStyle.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/MDOverrides.xaml" />
             </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
+
+            <Color x:Key="MtsGreenColor">#FF20A024</Color>
+            <Color x:Key="MtsYellowColor">#FFFFD917</Color>
+            <Color x:Key="MtsRedColor">#FFE54E31</Color>
+            <Color x:Key="MtsLightBlueColor">#FF2195F2</Color>
+            <Color x:Key="MtsBlueColor">#FF2043A6</Color>
+            <Color x:Key="MtsLightGrayColor">#FFE6E6E8</Color>
+            <Color x:Key="MtsGrayColor">#FF808080</Color>
+            <Color x:Key="MtsDarkGrayColor">#FF34373F</Color>
+            <Color x:Key="MtsBlackColor">#FF2D2D30</Color>
+            <Color x:Key="MtsOrangeColor">#FFE54E31</Color>
+
+            <SolidColorBrush x:Key="MtsGreen" Color="{DynamicResource MtsGreenColor}" />
+            <SolidColorBrush x:Key="MtsYellow" Color="{DynamicResource MtsYellowColor}" />
+            <SolidColorBrush x:Key="MtsRed" Color="{DynamicResource MtsRedColor}" />
+            <SolidColorBrush x:Key="MtsLightBlue" Color="{DynamicResource MtsLightBlueColor}" />
+            <SolidColorBrush x:Key="MtsBlue" Color="{DynamicResource MtsBlueColor}" />
+            <SolidColorBrush x:Key="MtsLightGray" Color="{DynamicResource MtsLightGrayColor}" />
+            <SolidColorBrush x:Key="MtsGray" Color="{DynamicResource MtsGrayColor}" />
+            <SolidColorBrush x:Key="MtsDarkGray" Color="{DynamicResource MtsDarkGrayColor}" />
+            <SolidColorBrush x:Key="MtsBlack" Color="{DynamicResource MtsBlackColor}" />
+            <SolidColorBrush x:Key="MtsOrange" Color="{DynamicResource MtsOrangeColor}" />
+
+            <Color x:Key="OnMtsGreenColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsYellowColor">#FF2D2D30</Color>
+            <Color x:Key="OnMtsRedColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsLightBlueColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsBlueColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsLightGrayColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsGrayColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsDarkGrayColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsBlackColor">#FFFFFFFF</Color>
+            <Color x:Key="OnMtsOrangeColor">#FFFFFFFF</Color>
+
+            <SolidColorBrush x:Key="OnMtsGreen" Color="{DynamicResource OnMtsGreenColor}" />
+            <SolidColorBrush x:Key="OnMtsYellow" Color="{DynamicResource OnMtsYellowColor}" />
+            <SolidColorBrush x:Key="OnMtsRed" Color="{DynamicResource OnMtsRedColor}" />
+            <SolidColorBrush x:Key="OnMtsLightBlue" Color="{DynamicResource OnMtsLightBlueColor}" />
+            <SolidColorBrush x:Key="OnMtsBlue" Color="{DynamicResource OnMtsBlueColor}" />
+            <SolidColorBrush x:Key="OnMtsLightGray" Color="{DynamicResource OnMtsLightGrayColor}" />
+            <SolidColorBrush x:Key="OnMtsGray" Color="{DynamicResource OnMtsGrayColor}" />
+            <SolidColorBrush x:Key="OnMtsDarkGray" Color="{DynamicResource OnMtsDarkGrayColor}" />
+            <SolidColorBrush x:Key="OnMtsBlack" Color="{DynamicResource OnMtsBlackColor}" />
+            <SolidColorBrush x:Key="OnMtsOrange" Color="{DynamicResource OnMtsOrangeColor}" />
+       
+
+            <Color x:Key="PrimaryColor">#FFE54E31</Color>
+            <Color x:Key="OnPrimaryColor">White</Color>
+
+            <SolidColorBrush x:Key="Primary" Color="{StaticResource MtsOrangeColor}" />
+            <SolidColorBrush x:Key="OnPrimary" Color="{StaticResource OnPrimaryColor}" />
+
+            <Color x:Key="SecondaryColor">#FF2043A6</Color>
+            <Color x:Key="OnSecondaryColor">#ffffff</Color>
+            <SolidColorBrush x:Key="Secondary" Color="{StaticResource MtsBlueColor}" />
+            <SolidColorBrush x:Key="OnSecondary" Color="{StaticResource OnSecondaryColor}" />
+
+            <Color x:Key="BackgroundColor">White</Color>
+            <Color x:Key="OnBackgroundColor">Black</Color>
+            <SolidColorBrush x:Key="Background" Color="{StaticResource BackgroundColor}" />
+            <SolidColorBrush x:Key="OnBackground" Color="{StaticResource OnBackgroundColor}" />
+
+            <Color x:Key="SurfaceColor">#f0f0f0</Color>
+            <Color x:Key="OnSurfaceColor">Black</Color>
+            <SolidColorBrush x:Key="Surface" Color="{StaticResource SurfaceColor}" />
+            <SolidColorBrush x:Key="OnSurface" Color="{StaticResource OnSurfaceColor}" />
+
+            <Color x:Key="ErrorColor">#ff4b27</Color>
+            <Color x:Key="OnErrorColor">#ffffff</Color>
+            <SolidColorBrush x:Key="Error" Color="{StaticResource ErrorColor}" />
+            <SolidColorBrush x:Key="OnError" Color="{StaticResource OnPrimaryColor}" />
+
+            <Color x:Key="ShadowColor">Black</Color>
+
+            <Color x:Key="AccentColor">#ff4b27</Color>
+            <Color x:Key="OnAccentColor">#ffffff</Color>
+            <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
+            <SolidColorBrush x:Key="OnAccent" Color="{StaticResource OnAccentColor}" />
+
+            <Color x:Key="AlertColor">#ca2f14</Color>
+            <Color x:Key="OnAlertColor">#FFFF00</Color>
+            <SolidColorBrush x:Key="Alert" Color="{StaticResource AlertColor}" />
+            <SolidColorBrush x:Key="OnAlert" Color="{StaticResource OnAlertColor}" />
+
+            <Color x:Key="WarningColor">#ff4b27</Color>
+            <Color x:Key="OnWarningColor">White</Color>
+            <SolidColorBrush x:Key="Warning" Color="{StaticResource MtsYellowColor}" />
+            <SolidColorBrush x:Key="OnWarning" Color="{StaticResource OnMtsYellowColor}" />
+
+            <Color x:Key="SignalOffColor">#5f6371</Color>
+            <Color x:Key="OnSignalOffColor">White</Color>
+            <SolidColorBrush x:Key="SignalOff" Color="{StaticResource MtsGrayColor}" />
+            <SolidColorBrush x:Key="OnSignalOff" Color="{StaticResource OnSignalOffColor}" />
+
+            <Color x:Key="SignalOnColor">#c4d93f</Color>
+            <Color x:Key="OnSignalOnColor">White</Color>
+            <SolidColorBrush x:Key="SignalOn" Color="{StaticResource SignalOnColor}" />
+            <SolidColorBrush x:Key="OnSignalOn" Color="{StaticResource OnSignalOnColor}" />
+
+            <Color x:Key="IntermediateColor">SteelBlue</Color>
+            <Color x:Key="OnIntermediateColor">White</Color>
+
+            <!--
+                eMessageCategory.Debug:
+                eMessageCategory.Trace:
+                eMessageCategory.Info:
+            -->
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{DynamicResource PrimaryColor}" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{DynamicResource OnPrimaryColor}" />
+
+            <!--<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{DynamicResource PrimaryColor}"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{DynamicResource OnPrimaryColor}"/>-->
+            <!--
+                eMessageCategory.TimedOut:
+                eMessageCategory.Notification:
+            -->
+            <!--<SolidColorBrush x:Key="SecondaryHueLightBrush" Color="{DynamicResource SecondaryColor}"/>
+            <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="{DynamicResource OnSecondaryColor}"/>-->
+
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="{DynamicResource SecondaryColor}" />
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="{DynamicResource OnSecondaryColor}" />
+
+            <!--<SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="{DynamicResource SecondaryColor}"/>
+            <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="{DynamicResource OnSecondaryColor}"/>-->
+            <!--
+                eMessageCategory.Warning
+            -->
+            <!--  Warning Color differs from global settings, it's applied directly in the diagnostic view  -->
+            <!--  CustomCuDiagnostics and DiagnosticsView  -->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{DynamicResource WarningColor}" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{DynamicResource OnWarningColor}" />
+            <!--
+                eMessageCategory.Error:
+                eMessageCategory.Critical:
+                eMessageCategory.Catastrophic:
+                eMessageCategory.ProgrammingError:
+            -->
+            <SolidColorBrush x:Key="MaterialDesignValidationErrorBrush" Color="{DynamicResource AlertColor}" />
+            <SolidColorBrush x:Key="MaterialDesignDarkForeground" Color="{DynamicResource OnAlertColor}" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

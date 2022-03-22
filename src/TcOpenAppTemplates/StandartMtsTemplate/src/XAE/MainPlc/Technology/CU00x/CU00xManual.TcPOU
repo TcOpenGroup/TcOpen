@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="CU00xGround" Id="{ea798b9b-c255-4bc1-bc0e-66e2dbced7d9}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00xGround EXTENDS TcoTaskedSequencer IMPLEMENTS ICUTask
+  <POU Name="CU00xManual" Id="{4da1dfbc-4c0a-47a8-95b6-4f0ca8024493}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManual EXTENDS TcoTaskedService IMPLEMENTS ICUTask
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[Run();]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{0f44b6c1-dae2-4888-a3a0-6a44fd813a80}">
+    <Method Name="Main" Id="{b59a2119-19eb-4289-9c0b-227b833546df}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -20,27 +20,20 @@ END_VAR
 METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(100, TRUE, 'STOPPING OTHER MODES')) THEN
-	Station.Automat.Restore();
-	Station.Manual.Restore();
-    CompleteStep();
-END_IF
-
-IF (Step(10000, TRUE, 'LAST STEP')) THEN
-    _task.DoneWhen(TRUE);
-END_IF]]></ST>
+        <ST><![CDATA[Station.Components.horizontalCylinder.Service();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnStart" Id="{81ba5eb0-f935-4736-a619-b5f4155759ce}">
-      <Declaration><![CDATA[METHOD PUBLIC OnStart]]></Declaration>
+    <Method Name="OnStart" Id="{9e5b3c71-1f5b-4076-a710-81816a9a4500}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[Station.Automat.Restore();
-Station.Manual.Restore();]]></ST>
+Station.Ground.Restore();
+Station.CancelGround();]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Station" Id="{f5f158e7-8f54-483b-8ef9-070bf6fa1248}">
+    <Property Name="Station" Id="{400a1f67-80cb-4f9f-a632-be597ac0ffc5}">
       <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>
-      <Get Name="Get" Id="{fecf57ba-7b86-4b09-b4c9-79cd0e6e6559}">
+      <Get Name="Get" Id="{e3aceaef-61ff-438d-83cd-a8c6edd964ba}">
         <Declaration><![CDATA[VAR
     _station : POINTER TO CU00x;
 END_VAR

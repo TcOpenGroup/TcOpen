@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CUBase" Id="{7de2193c-318e-4c64-a9a6-ba23fb2e4da1}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT CUBase EXTENDS TcoCore.TcoObject IMPLEMENTS ICuBase
-]]></Declaration>
+    <Declaration><![CDATA[{attribute addProperty ShortName ""}
+FUNCTION_BLOCK ABSTRACT CUBase EXTENDS TcoCore.TcoObject IMPLEMENTS ICuBase
+VAR
+    _statusInfo : CUBaseStatusInfo := (Parent := THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -28,6 +31,17 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="Manual" Id="{a2025997-47b5-45e1-80f0-0c1e8cce860d}">
+      <Declaration><![CDATA[PROPERTY ABSTRACT Manual : REFERENCE TO TcoTaskedService]]></Declaration>
+      <Get Name="Get" Id="{c93ae827-0df1-40b0-b0fa-7bfc00959641}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="ProcessDataManager" Id="{95e82431-3124-4f70-be63-551f0ca81c55}">
       <Declaration><![CDATA[PROPERTY ABSTRACT ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
       <Get Name="Get" Id="{75873f97-0e26-4094-bf28-402fb0488241}">
@@ -39,5 +53,46 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="UpdateInfo" Id="{d2563fa9-29cd-48cb-9533-a53a49a45068}">
+      <Declaration><![CDATA[METHOD UpdateInfo : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Automat.Task.Busy THEN
+    _statusInfo.Mode                   := eCUMode.AutomatMode;
+    _statusInfo.CurrentTaskDescription := '<#AUTOMAT#>';
+    _statusInfo.CurrentCycleTime       := Automat._SequenceElapsedTime;
+    _statusInfo.CurrentUid             := Automat.CurrentStep.ID;
+    _statusInfo.CurrentOperation       := Automat.CurrentStep.Description;
+    _statusInfo.CurrentIsInStepMode    := Automat._modeController._mode = eSequencerMode.StepMode;
+ELSIF Ground.Task.Busy THEN
+    _statusInfo.Mode := eCUMode.GroundMode;
+	_statusInfo.CurrentTaskDescription := '<#GROUND#>';
+    _statusInfo.CurrentCycleTime       := Ground._SequenceElapsedTime;
+    _statusInfo.CurrentUid             := Ground.CurrentStep.ID;
+    _statusInfo.CurrentOperation       := Ground.CurrentStep.Description;
+    _statusInfo.CurrentIsInStepMode    := Ground._modeController._mode = eSequencerMode.StepMode;
+ELSIF THIS^.Manual.Busy THEN
+    _statusInfo.Mode := eCUMode.ManualMode;
+	_statusInfo.CurrentTaskDescription := '<#MANUAL#>';
+ELSIF THIS^.Ground.Task.Done THEN
+	_statusInfo.CurrentTaskDescription := '<#READY TO START#>';
+	_statusInfo.Mode := eCUMode.GroundModeDone;
+	_statusInfo.CurrentCycleTime       := Ground._SequenceElapsedTime;
+    _statusInfo.CurrentUid             := Ground.CurrentStep.ID;
+    _statusInfo.CurrentOperation       := Ground.CurrentStep.Description;
+    _statusInfo.CurrentIsInStepMode    := Ground._modeController._mode = eSequencerMode.StepMode;
+ELSE
+    _statusInfo.Mode := eCUMode.NoMode;	
+	_statusInfo.CurrentTaskDescription := '<#IDLE#>';
+	_statusInfo.CurrentCycleTime       := T#0S;
+    _statusInfo.CurrentUid             := 0;
+    _statusInfo.CurrentOperation       := '';
+    _statusInfo.CurrentIsInStepMode    := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

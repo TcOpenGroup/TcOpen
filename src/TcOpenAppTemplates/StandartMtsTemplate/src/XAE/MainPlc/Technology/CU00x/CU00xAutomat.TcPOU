@@ -23,18 +23,23 @@ METHOD PROTECTED Main : BOOL
         <ST><![CDATA[IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
     //-------------------------------------
     Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;
+	CompleteStep();
     //-------------------------------------
 END_IF
 
-IF (Step(200, TRUE, 'LOAD PROCESS SETTING')) THEN
-    //-------------------------------------
-    StepCompleteWhen(Station.ProcessDataManager.Create('ABC').Done);
+IF (Step(200, TRUE, 'SINGLE INSPECTION')) THEN
+    //-------------------------------------    
+	Station.ProcessDataManager.Data.CU00x.BoltPresenceInspector
+					.WithCoordinator(THIS^)
+					.Inspect(FALSE)
+					.UpdateComprehensiveResult(Station.ProcessDataManager.Data._entityHeader.Results)
+					.OnFail().Dialog(100);	
     //-------------------------------------
 END_IF
 
 IF (Step(RESTORE_STEP_ID, TRUE, 'FIRST RESTORE STEP')) THEN
     //-------------------------------------
-    StepCompleteWhen(TRUE);
+    StepCompleteWhen(%MX0.0);
     //-------------------------------------	
 END_IF
 
@@ -42,7 +47,18 @@ IF (Step(10000, TRUE, 'LAST STEP')) THEN
     //-------------------------------------
     CompleteSequence();
     //-------------------------------------	
-END_IF]]></ST>
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{8fe4788f-029c-4df9-a93a-9297bee7e169}">
+      <Declaration><![CDATA[METHOD PUBLIC OnStart
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Station.Ground.Restore();
+Station.Manual.Restore();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Station" Id="{2f34bbe0-ae77-4424-96f8-d75571b12d83}">

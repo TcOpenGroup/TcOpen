@@ -1,33 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CU00x" Id="{c8fb8f62-fa26-41d3-a5d2-3cc70d4e8555}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CU00x EXTENDS CUBase
+    <Declaration><![CDATA[{attribute addProperty ShortName "CU00x"}
+{attribute addProperty Name "Controlled unit template"}
+FUNCTION_BLOCK CU00x EXTENDS CUBase
 VAR
     _cuData      : REFERENCE TO CU00xProcessData;
     _processData : ProcessDataManager(THIS^);
     _components  : CU00xComponents := (Parent := THIS^);
 	{attribute addProperty Name "<#AUTOMAT#>"}
-    _automat     : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);
+	{attribute addProperty ToolTip "<#Starts automatic sequence. Before start you need to perform grounding sequence.#>"}
+    _automat     : CU00xAutomat(THIS^, TcoCore.eRestoreMode.None);	
 	{attribute addProperty Name "<#GROUND#>"}
+	{attribute addProperty ToolTip "<#Brings the device into basic position.#>"}
     _ground      : CU00xGround(THIS^, TcoCore.eRestoreMode.None);
 	{attribute addProperty Name "<#MANUAL#>"}
+	{attribute addProperty ToolTip "<#Start manual/Service mode#>"}
     _manual      : CU00xManual(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_processData();
 
-
-_automat.Task.Enabled := _ground.Task.Done;
+_automat.Task.Enabled := _ground.GroundDone;
 _automat();
 
-
-_ground.Task.Enabled := TRUE;
+_ground.Task.Enabled := NOT _ground.Task.Done;
 _ground();
 
 _manual.Task.Enabled := TRUE;
 _manual();
-]]></ST>
+
+UpdateInfo();]]></ST>
     </Implementation>
     <Property Name="Automat" Id="{395ce4fa-38ae-46a5-9c91-86a9f1bcbbc2}">
       <Declaration><![CDATA[PROPERTY Automat : REFERENCE TO TcoTaskedSequencer]]></Declaration>
@@ -40,6 +44,15 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="CancelGround" Id="{2a6a329c-2fd1-4101-9cbb-b4d390744e07}">
+      <Declaration><![CDATA[METHOD CancelGround
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_ground.CancelGround();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Components" Id="{7133061c-46ce-4913-b91f-5deb41132b8c}">
       <Declaration><![CDATA[PROPERTY Components : REFERENCE TO CU00xComponents]]></Declaration>
       <Get Name="Get" Id="{d34691d4-caf0-4f1c-9ccf-b26a123c3f8f}">
@@ -70,13 +83,13 @@ END_VAR
       </Implementation>
     </Method>
     <Property Name="Manual" Id="{3362f8a1-5828-47e8-a58f-b7a215df59dc}">
-      <Declaration><![CDATA[PROPERTY Manual : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Manual : REFERENCE TO TcoTaskedService]]></Declaration>
       <Get Name="Get" Id="{e78cfa35-d5c6-462d-8720-3fee9ea9f425}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Manual REF= _manual.Task;]]></ST>
+          <ST><![CDATA[Manual REF= _manual;]]></ST>
         </Implementation>
       </Get>
     </Property>

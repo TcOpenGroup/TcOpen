@@ -5,8 +5,8 @@ using Serilog;
 using System;
 using System.Windows;
 using TcOpen.Inxton.Data;
-using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.RavenDb;
 using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace HmiTemplate.Wpf
@@ -20,25 +20,32 @@ namespace HmiTemplate.Wpf
         {
             MainPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 150;
 
-            var authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
-
+            var authenticationService = SecurityManager
+                .Create(new RavenDbRepository<UserData>(new RavenDbRepositorySettings<UserData>(new string[] { Constants.CONNECTION_STRING_DB }, "Users", "", "")));
+            
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
-                .SetEditValueChangeLogging(Entry.PlcHammer.Connector)
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector)              
                 .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { MainPlc.MAIN }));
 
+            if (SecurityManager.Manager.UserRepository.Count == 0)
+            {
+                SecurityManager.Manager.UserRepository.Create("default", new UserData("default", "", new string[] { "Administrator" }));
+            }
+          
+            SecurityManager.Manager.Service.AuthenticateUser("default", "");
 
             SetUpRepositories();
         }
 
         private void SetUpRepositories()
         {
-            var ProcessDataRepoSettings = new MongoDbRepositorySettings<PlainProcessData>(Constants.CONNECTION_STRING_DB, Constants.DB_NAME, "ProcessSettings");
-            IntializeProcessDataRepositoryWithDataExchange(MainPlc.MAIN._technology._processSettings, new MongoDbRepository<PlainProcessData>(ProcessDataRepoSettings));
+            var ProcessDataRepoSettings = new RavenDbRepositorySettings<PlainProcessData>(new string[] { Constants.CONNECTION_STRING_DB }, "ProcessSettings", "", "");
+            IntializeProcessDataRepositoryWithDataExchange(MainPlc.MAIN._technology._processSettings, new RavenDbRepository<PlainProcessData>(ProcessDataRepoSettings));
         }
 
         

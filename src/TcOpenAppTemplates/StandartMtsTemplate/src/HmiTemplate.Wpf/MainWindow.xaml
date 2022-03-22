@@ -16,44 +16,11 @@
     </Window.DataContext>
     <Grid>
         <TabControl>
-            <!--<TabItem>
+            <TabItem>
                 <mainview:MainView />
-            </TabItem>-->
+            </TabItem>
             <TabItem Header="Control">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <ItemsControl Grid.Row="0" ItemsSource="{Binding Sequencers}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl MinWidth="200" Margin="10">
-                                    <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Task" />
-                                </ContentControl>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Sequencers}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl MinWidth="200">
-                                    <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Sequence-Components" />
-                                </ContentControl>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
+                <vortex:RenderableContentControl DataContext="{Binding MainPlc.MAIN._technology._cu00x}" PresentationType="Control"></vortex:RenderableContentControl>
             </TabItem>
             <TabItem Header="Data">
                 <vortex:RenderableContentControl DataContext="{Binding MainPlc.MAIN._technology._cu00x._processData._data}" PresentationType="ShadowDisplay"></vortex:RenderableContentControl>

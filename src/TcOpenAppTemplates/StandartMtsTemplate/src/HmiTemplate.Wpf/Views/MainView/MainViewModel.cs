@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TcOpen.Inxton.Local.Security.Wpf;
 using Vortex.Presentation.Wpf;
 
 namespace HmiTemplate.Wpf.Views.MainView
@@ -15,7 +16,8 @@ namespace HmiTemplate.Wpf.Views.MainView
         public MainViewModel()
         {
             this.OpenCommand(this.AddCommand(typeof(OperatorView), strings.Operator));
-            this.AddCommand(typeof(ProcessSettingsView), strings.Data);
+            this.AddCommand(typeof(ProcessSettingsView), strings.Data); 
+            this.AddCommand(typeof(UserManagementView), strings.UserManagement);
         }
     }
 }

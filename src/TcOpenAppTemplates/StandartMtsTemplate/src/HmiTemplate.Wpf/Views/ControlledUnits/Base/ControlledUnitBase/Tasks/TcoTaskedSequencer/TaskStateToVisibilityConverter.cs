@@ -17,8 +17,8 @@ namespace MainPlc
             {
                 case TcoCore.eTaskState.Ready:
                 case TcoCore.eTaskState.Requested:
-                case TcoCore.eTaskState.Done:
                     return Visibility.Collapsed;
+                case TcoCore.eTaskState.Done:                    
                 case TcoCore.eTaskState.Busy:
                 case TcoCore.eTaskState.Error:
                     return Visibility.Visible;
