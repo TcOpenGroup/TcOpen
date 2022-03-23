@@ -29,7 +29,9 @@ namespace TcOpen.Inxton.Input
         {
             Dispatcher.Get.Invoke(() =>
             {
+#if NET5_0_OR_GREATER
                 CanExecuteChanged?.Invoke(sender, args);
+#endif
             });
         }
 
@@ -38,10 +40,12 @@ namespace TcOpen.Inxton.Input
             return _canExecute == null ? true : _canExecute.Invoke(parameter);
         }
 
+#if NET5_0_OR_GREATER
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
+#endif
 
         public void Execute(object parameter)
         {
@@ -51,7 +55,15 @@ namespace TcOpen.Inxton.Input
                 _execute.Invoke(parameter);
             }
         }
+#if NET48
 
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+#else
         public event EventHandler CanExecuteChanged;
+#endif
     }
 }
