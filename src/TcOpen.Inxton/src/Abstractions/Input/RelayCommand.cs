@@ -40,12 +40,16 @@ namespace TcOpen.Inxton.Input
             return _canExecute == null ? true : _canExecute.Invoke(parameter);
         }
 
-#if NET5_0_OR_GREATER
+        /// <summary>
+        /// RaiseCanExecuteChanged method should be called when using .net 5.0 or greater.
+        /// </summary>
         public void RaiseCanExecuteChanged()
         {
+#if NET5_0_OR_GREATER
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
 #endif
+        }
+
 
         public void Execute(object parameter)
         {
