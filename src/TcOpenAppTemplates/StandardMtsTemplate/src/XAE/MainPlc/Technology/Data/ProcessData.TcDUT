@@ -22,7 +22,7 @@ TYPE
         _Modified : DT;
         {attribute addProperty Name "<#Entity header#>"}
         EntityHeader : EntityHeader     := (Parent := THISSTRUCT);
-        CU00x         : CU00xProcessData := (Parent := THISSTRUCT);
+        CU00x : CU00xProcessData := (Parent := THISSTRUCT);
     END_STRUCT
 END_TYPE
 ]]></Declaration>
