@@ -156,6 +156,9 @@
             -->
             <SolidColorBrush x:Key="MaterialDesignValidationErrorBrush" Color="{DynamicResource AlertColor}" />
             <SolidColorBrush x:Key="MaterialDesignDarkForeground" Color="{DynamicResource OnAlertColor}" />
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Padding" Value="0,0,0,0"></Setter>
+            </Style>
         </ResourceDictionary>
 
     </Application.Resources>
