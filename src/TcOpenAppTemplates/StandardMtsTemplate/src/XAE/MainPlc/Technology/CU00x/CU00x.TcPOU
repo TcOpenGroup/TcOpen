@@ -20,23 +20,56 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[THIS^.CuId := eStations.NONE;
+      <ST><![CDATA[
+THIS^.CuId := eStations.NONE;
 _cuProcessData REF= THIS^.ProcessDataManager.Data.CU00x;
 _cuTechnologicalData REF=  THIS^.Technology.TechnologicalSettings.Data.CU00x;
 
+
+(*
+	This controlled unit's component initialization.
+*)
+
 THIS^.InitializeComponents();
 
+(*
+	This controlled unit process data crud operations handler.
+	Control exchange of process data between this controlled unit and the data repository.
+*)
+
 _processData();
+
+(*
+	
+	Cu's Modes
+	
+*)
 
 Automat();
 Ground();
 Manual();
 
-UpdateInfo();
 
-IF(_statusInfo.Mode = eCUMode.NoMode) THEN
+(*
+	When no mode is active 'NoMode' method should be called.
+	'NoMode' method shouls contain code that renders this cu idle. 
+*)
+
+IF NOT (AutomatTask.Task.Busy 
+		OR GroundTask.Task.Busy
+		OR ManualTask.Task.Busy) 
+THEN
 	NoMode();
 END_IF
+
+
+
+(*
+	Updates this controlled unit's information for the UI.
+*)
+
+UpdateInfo();
+
 
 ]]></ST>
     </Implementation>

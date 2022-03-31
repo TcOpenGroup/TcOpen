@@ -15,15 +15,17 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Canvas>
+        <vortex:TcoDataExchangeSimpleSelectorView DataContext="{Binding MainPlc.MAIN._technology._processSettings, Mode=OneWay}" />
+        <Canvas Grid.Row="1">
             <mainplc:CUBaseSpotView DataContext="{Binding Cu, Mode=OneWay}"/>
         </Canvas>
-        <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
-            <vortex:RenderableContentControl DataContext="{Binding MainPlc.MAIN._technology._automatAllTask}" PresentationType="Base" />
-            <vortex:RenderableContentControl DataContext="{Binding MainPlc.MAIN._technology._groundAllTask}" PresentationType="Base" />
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+          <vortex:TcoTaskView DataContext="{Binding MainPlc.MAIN._technology._automatAllTask, Mode=OneWay}"/>
+          <vortex:TcoTaskView DataContext="{Binding MainPlc.MAIN._technology._groundAllTask, Mode=OneWay}"/>
         </WrapPanel>
     </Grid>
 </UserControl>

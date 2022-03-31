@@ -26,16 +26,17 @@ namespace MainPlc
             Vortex.Presentation.Wpf.NavigableViewModelBase.Current.OpenView(detailsView as FrameworkElement);
         }
 
+        public IEnumerable<object> _tasks = new List<object>();
         public IEnumerable<object> Tasks
         {
             get
             {
                 if (Component != null)
-                {                    
-                    return Component.GetChildren<ITcoTasked>();                 
+                {
+                    _tasks = Component.GetChildren<ITcoTasked>();                 
                 }
 
-                return null;
+                return _tasks;
             }
         }
 

@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcOpen.Inxton.Wpf;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
@@ -27,48 +28,17 @@ namespace MainPlc
     {
         public CUBaseSpotView()
         {
-            InitializeComponent();
-            DataContextChanged += a;
-            
+            InitializeComponent();                      
         }
 
-       
-
-        private void a(object sender, DependencyPropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            if (!(this.DataContext is CUBaseSpotViewModel))
-            {
-                if (this.DataContext is CUBase)
-                {
-                    this.DataContext = new CUBaseSpotViewModel() { Model = this.DataContext };
-                }
+            base.OnPropertyChanged(e);
+
+            if (e.Property == DataContextProperty)
+            {               
+                this.DataContext = this.DataContext.ViewModelizeDataContext<CUBaseSpotViewModel, CUBase>();
             }
-
-            
-            Console.WriteLine($"Data context: {this.DataContext.GetType().ToString()}");
-
-            var bb = this.DataContext as RenderableViewModel;
-
-            if (bb != null)
-            {
-                Console.WriteLine($"Data context model: {bb.Model.GetType()}");
-            }
-
-            //this.DataContext = FixDataContext<CUBaseSpotViewModel, CUBase>(this.DataContext);
-        }
-
-
-        private object FixDataContext<VM,M>(object currentContext) where VM : RenderableViewModel, new() where M : IVortexObject
-        {
-            if(!(currentContext is VM))
-            {
-                if(currentContext is M)
-                {
-                    return new VM() { Model = currentContext };
-                }
-            }
-
-            return currentContext;
         }
     }
 }

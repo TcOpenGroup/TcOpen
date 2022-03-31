@@ -19,7 +19,7 @@ namespace TcOpen.Inxton.TcoCore.Wpf
     {
         protected DialogProxyServiceWpf(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
-
+            LazyRenderer.Get.CreatePresentation("Any", new object()); // I need this to load reference assemblies prior to query View and ViewModels.
         }
 
         protected async override void Queue(IsDialog dialog)
@@ -28,7 +28,7 @@ namespace TcOpen.Inxton.TcoCore.Wpf
 
             await TcoAppDomain.Current.Dispatcher.InvokeAsync(
                 () =>
-                {
+                {                                                                                                   
                     var view = Renderer.Get.GetView("Dialog", dialog.GetType());
                     var viewInstance = Activator.CreateInstance(view);
                     var viewModel = Renderer.Get.GetViewModel("Dialog", dialog.GetType(), dialog);
