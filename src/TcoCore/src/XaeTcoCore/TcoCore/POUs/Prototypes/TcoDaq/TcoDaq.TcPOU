@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoDaq" Id="{8fe8c386-5d63-07cd-3c39-fabdbfd58ac3}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Default implementation of Logger.	
+				<note type="tip">
+					 This type is partially extended by IVF to retrieve messages from the logger in IVF application.			
+				</note>												 
+			</summary>		
+			<code>
+			   // Intializes message retrieval into applications logger
+				..._logger.StartLoggingMessages(eMessageCategory.All);
+			</code>
+			<code>
+				FUNCTION_BLOCK LoggerUsage EXTENDS TcoCore.TcoObject
+				VAR
+					_logger : TcoCore.TcoLogger(THIS^);
+					_counter : INT;
+				END_VAR
+				//---------------------------------------------
+				_counter := _counter + 1;
+				IF((_counter MOD 100) = 0) THEN
+					_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
+				END_IF;	
+			</code>		
+		</docu>
+~*)
+FUNCTION_BLOCK TcoDaq EXTENDS TcoObject IMPLEMENTS ITcoDaq
+VAR
+	 (*~
+		<docu>
+			<summary>
+				Circural buffer for this DAQ.					 
+			</summary>				
+		</docu>
+    ~*)
+	_buffer : ARRAY[0..MAX_DAQ_BUFFER_INDEX] OF TcoDaqItem;
+	(*~
+		<docu>
+			<summary>
+				Circular carret of of the DAQ buffer. 					 
+			</summary>				
+		</docu>
+    ~*)
+	_plcCarret : INT;
+END_VAR
+
+VAR CONSTANT
+	(*~
+		<docu>
+			<summary>
+				Max number of buffered DAQ entries in bytes. 				 
+			</summary>				
+		</docu>
+    ~*)
+	MAX_DAQ_BUFFER_INDEX : INT := 5000;
+    
+
+	MAX_DAQ_BYTE_LENGHT : INT := 500; 
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Push" Id="{25f40a70-ac72-03b6-026a-0e415c9bfaa5}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the data to DAQ buffer.
+				See also `PushData`
+				<note type="important">When using this method in a cyclical environment the data will be push each time it is called. You may easily overrun the DAQ buffer.</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PUBLIC Push
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				DAQ entry.				 
+			</summary>				
+		</docu>
+	~*)
+	Data : ARRAY[0..TcoDaq.MAX_DAQ_BYTE_LENGHT] OF BYTE;
+	(*~
+		<docu>
+			<summary>
+				DAQ size entry in byte.				 
+			</summary>				
+		</docu>
+	~*)
+    DataSize : INT;
+END_VAR
+VAR
+	_tmpDaqMessage : TcoDaqMessage;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(Parent <> 0 AND_THEN Parent.Context <> 0 AND_THEN Parent.Context.RealTimeClock <> 0) THEN
+	_tmpDaqMessage.TimeStamp :=  Parent.Context.RealTimeClock.NowLocal();	
+	_tmpDaqMessage.Cycle := Parent.Context.StartCycleCount;	
+END_IF;	
+
+Tc2_System.MEMCPY(
+    destAddr := _tmpDaqMessage.Data, 
+    srcAddr  := Data,
+    n        := TO_UDINT(DataSize)
+);		
+
+_tmpDaqMessage.DataSize := DataSize;
+_tmpDaqMessage.Identity := 0;
+_tmpDaqMessage.MessageDigest := 0;
+	
+
+PushData(_tmpDaqMessage);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PushData" Id="{e0b3ca52-7de2-01ac-312e-a838125297f2}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Pushes the data to DAQ buffer.
+				See also `Push`
+				<note:important>
+						TODO: This method is typically invoked from a `TcoMessenger`. 
+						TODO: Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
+						TODO: For details see `TcoMessengerSettings`.
+				</note>				 
+			</summary>				
+		</docu>
+~*)
+METHOD PushData
+VAR_INPUT
+	inDaqMessage	: TcoDaqMessage;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Check enough free space  for a new DAQ entry
+IF((_plcCarret + inDaqMessage.DataSize) > MAX_DAQ_BUFFER_INDEX) THEN
+		_plcCarret := 1;
+END_IF
+
+
+IF(NOT _buffer[_plcCarret].ExpectDequeing) THEN
+
+    Tc2_System.MEMCPY(
+        destAddr := _buffer[_plcCarret].Data, 
+        srcAddr  := inDaqMessage.Data,
+        n        := TO_UDINT(inDaqMessage.DataSize)
+    );
+
+	_buffer[_plcCarret].Cycle := inDaqMessage.Cycle;	
+	_buffer[_plcCarret].ExpectDequeing := TRUE;
+	_buffer[_plcCarret].Identity := inDaqMessage.Identity;
+	_buffer[_plcCarret].MessageDigest := inDaqMessage.MessageDigest;
+	_buffer[_plcCarret].TimeStamp := inDaqMessage.TimeStamp;
+
+    _plcCarret := _plcCarret + inDaqMessage.DataSize;
+ELSE
+    // Need to inform buffer is full
+	// _buffer[0].Data := ???;
+	_buffer[0].ExpectDequeing := TRUE;
+	_buffer[0].Cycle := THIS^.Context.StartCycleCount;	
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

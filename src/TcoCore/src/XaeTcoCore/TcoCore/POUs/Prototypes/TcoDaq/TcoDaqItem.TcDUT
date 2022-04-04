@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TcoDaqItem" Id="{c4753db6-466a-0573-0838-290d752247a3}">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			DAQ object contains complete data details including time stamp, data, identity of the message provider, context cycle in which the DAQ was posted.			
+		</summary>				
+	</docu>	
+~*)
+TYPE TcoDaqItem :
+STRUCT
+(*~
+	<docu>
+		<summary>
+			Time when the DAQ was posted.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}
+	TimeStamp : DT;
+(*~
+	<docu>
+		<summary>
+			Data of the DAQ.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}		
+	Data : ARRAY[0..TcoDaq.MAX_DAQ_BYTE_LENGHT] OF BYTE;
+(*~
+	<docu>
+		<summary>
+			Identity of the TcoObject that posted this DAQ. 
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}	
+	Identity : ULINT;	
+(*~
+	<docu>
+		<summary>
+			Context cycle in which the DAQ was posted.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}
+	Cycle : ULINT;
+(*~
+	<docu>
+		<summary>			
+			Indicates that the message is expected to be dequeed from the buffer.
+		</summary>				
+	</docu>	
+~*)	
+	ExpectDequeing : BOOL;	
+(*~
+<docu>
+    <summary>		
+        Stores message digest of this message text.
+    </summary>				
+</docu>	
+~*)
+	MessageDigest : DWORD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

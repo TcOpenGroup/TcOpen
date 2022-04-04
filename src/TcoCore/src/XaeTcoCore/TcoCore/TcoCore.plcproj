@@ -96,6 +96,18 @@
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoDaq\ITcoDaq.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDaq\TcoDaq.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDaq\TcoDaqItem.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDaq\TcoDaqMessage.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoDialog\eDialogAnswer.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -331,6 +343,7 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\ImplicitChecks" />
+    <Folder Include="POUs\Prototypes\TcoDaq" />
     <Folder Include="POUs\Prototypes\TcoTier" />
     <Folder Include="POUs\Prototypes\TcoDialog" />
     <Folder Include="POUs\Prototypes\TcoNothing" />
