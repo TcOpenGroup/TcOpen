@@ -3,7 +3,7 @@
   <Itf Name="ITcoDaq" Id="{44914170-3a7e-0221-2ee3-bc00f3a31b8f}">
     <Declaration><![CDATA[INTERFACE ITcoDaq
 ]]></Declaration>
-    <Method Name="Push" Id="{a6b9cc4b-89cc-03a9-36d7-0b2658ac104c}">
+    <Method Name="Push" Id="{9a306495-92e1-01ef-2879-218a478784a3}">
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
@@ -18,39 +18,41 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				DAQ entry.				 
+				Pointer on DAQ entry.				 
 			</summary>				
 		</docu>
 	~*)
-	Data : ARRAY[0..TcoDaq.MAX_DAQ_BYTE_LENGHT] OF BYTE;
+    pData : PVOID;
 	(*~
 		<docu>
 			<summary>
-				Size of the DAQ entry.				 
+				Size of DAQ entry in byte.				 
 			</summary>				
 		</docu>
 	~*)
-    DataSize : UINT;
+    DataSize : INT;
 END_VAR
-]]></Declaration>
+VAR
+	_tmpDaqEntry : TcoDaqEntry;
+END_VAR]]></Declaration>
     </Method>
     <Method Name="PushData" Id="{9b414184-c739-0885-2429-362bac491a46}">
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Pushes the data to logging buffer.
+				Pushes the data to DAQ buffer.
 				See also `Push`
 				<note:important>
-						This method is typically invoked from a `TcoMessenger`. 
-						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
-						For details see `TcoMessengerSettings`.
+						TODO: This method is typically invoked from a `TcoMessenger`. 
+						TODO: Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
+						TODO: For details see `TcoMessengerSettings`.
 				</note>				 
 			</summary>				
 		</docu>
 ~*)
-METHOD PushData 
+METHOD PushData
 VAR_INPUT
-	inDaqMessage	: TcoDaqMessage;;
+	inDaqEntry	: TcoDaqEntry;
 END_VAR
 
 ]]></Declaration>

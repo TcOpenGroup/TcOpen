@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <DUT Name="TcoDaqMessage" Id="{c774f479-b779-0fac-1688-72bbb5a5729f}">
+  <DUT Name="TcoDaqEntry" Id="{c774f479-b779-0fac-1688-72bbb5a5729f}">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -8,7 +8,7 @@
 		</summary>				
 	</docu>	
 ~*)
-TYPE TcoDaqMessage :
+TYPE TcoDaqEntry :
 STRUCT
 (*~
 	<docu>
@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Data : ARRAY[0..TcoDaq.MAX_DAQ_BYTE_LENGHT] OF BYTE;
+    pData : PVOID;
 (*~
 	<docu>
 		<summary>

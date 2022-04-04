@@ -27,7 +27,7 @@ STRUCT
 	</docu>	
 ~*)
 	{attribute clr [ReadOnly()]}		
-	Data : ARRAY[0..TcoDaq.MAX_DAQ_BYTE_LENGHT] OF BYTE;
+	Data : ARRAY[0..TcoDaq.MAX_DAQ_BUFFER_INDEX] OF BYTE;
 (*~
 	<docu>
 		<summary>
@@ -49,7 +49,7 @@ STRUCT
 (*~
 	<docu>
 		<summary>			
-			Indicates that the message is expected to be dequeed from the buffer.
+			Indicates that the DAQ data is expected to be dequeed from the buffer.
 		</summary>				
 	</docu>	
 ~*)	

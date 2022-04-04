@@ -4,26 +4,25 @@
     <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Default implementation of Logger.	
+				Default implementation of DAQ.	
 				<note type="tip">
-					 This type is partially extended by IVF to retrieve messages from the logger in IVF application.			
+					 This type is partially extended by IVF to retrieve data from the DAQ in IVF application.			
 				</note>												 
 			</summary>		
 			<code>
-			   // Intializes message retrieval into applications logger
-				..._logger.StartLoggingMessages(eMessageCategory.All);
+			   // Intializes DAQ retrieval into applications logger
+				..._daq.StartDaq();
 			</code>
 			<code>
-				FUNCTION_BLOCK LoggerUsage EXTENDS TcoCore.TcoObject
+				FUNCTION_BLOCK DaqUsage EXTENDS TcoCore.TcoObject
 				VAR
-					_logger : TcoCore.TcoLogger(THIS^);
+					_daq : TcoCore.TcoDaq(THIS^);
 					_counter : INT;
+                    _myData : MyDataStruct;
 				END_VAR
 				//---------------------------------------------
 				_counter := _counter + 1;
-				IF((_counter MOD 100) = 0) THEN
-					_logger.Push('hey friend! we got a problem', eMessageCategory.Critical);
-				END_IF;	
+			    _daq.PushData(ADR(_myData), SIZEOF(MyDataStruct));
 			</code>		
 		</docu>
 ~*)
@@ -36,7 +35,8 @@ VAR
 			</summary>				
 		</docu>
     ~*)
-	_buffer : ARRAY[0..MAX_DAQ_BUFFER_INDEX] OF TcoDaqItem;
+	_buffer : TcoDaqItem;
+
 	(*~
 		<docu>
 			<summary>
@@ -57,7 +57,13 @@ VAR CONSTANT
     ~*)
 	MAX_DAQ_BUFFER_INDEX : INT := 5000;
     
-
+	(*~
+		<docu>
+			<summary>
+				Max number of buffered DAQ entries in bytes before set a dequeuing request. 				 
+			</summary>				
+		</docu>
+    ~*)
 	MAX_DAQ_BYTE_LENGHT : INT := 500; 
 
 END_VAR
@@ -80,41 +86,38 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				DAQ entry.				 
+				Pointer on DAQ entry.				 
 			</summary>				
 		</docu>
 	~*)
-	Data : ARRAY[0..TcoDaq.MAX_DAQ_BYTE_LENGHT] OF BYTE;
+    pData : PVOID;
 	(*~
 		<docu>
 			<summary>
-				DAQ size entry in byte.				 
+				Size of DAQ entry in byte.				 
 			</summary>				
 		</docu>
 	~*)
     DataSize : INT;
 END_VAR
 VAR
-	_tmpDaqMessage : TcoDaqMessage;
+	_tmpDaqEntry : TcoDaqEntry;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF(Parent <> 0 AND_THEN Parent.Context <> 0 AND_THEN Parent.Context.RealTimeClock <> 0) THEN
-	_tmpDaqMessage.TimeStamp :=  Parent.Context.RealTimeClock.NowLocal();	
-	_tmpDaqMessage.Cycle := Parent.Context.StartCycleCount;	
+	_tmpDaqEntry.TimeStamp :=  Parent.Context.RealTimeClock.NowLocal();	
+	_tmpDaqEntry.Cycle := Parent.Context.StartCycleCount;	
 END_IF;	
 
-Tc2_System.MEMCPY(
-    destAddr := _tmpDaqMessage.Data, 
-    srcAddr  := Data,
-    n        := TO_UDINT(DataSize)
-);		
-
-_tmpDaqMessage.DataSize := DataSize;
-_tmpDaqMessage.Identity := 0;
-_tmpDaqMessage.MessageDigest := 0;
+_tmpDaqEntry.pData := pData;
+_tmpDaqEntry.DataSize := DataSize;
+_tmpDaqEntry.Identity := 0;
+_tmpDaqEntry.MessageDigest := 0;
 	
 
-PushData(_tmpDaqMessage);]]></ST>
+PushData(_tmpDaqEntry);
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="PushData" Id="{e0b3ca52-7de2-01ac-312e-a838125297f2}">
@@ -133,36 +136,30 @@ PushData(_tmpDaqMessage);]]></ST>
 ~*)
 METHOD PushData
 VAR_INPUT
-	inDaqMessage	: TcoDaqMessage;
-END_VAR]]></Declaration>
+	inDaqEntry	: TcoDaqEntry;
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Check enough free space  for a new DAQ entry
-IF((_plcCarret + inDaqMessage.DataSize) > MAX_DAQ_BUFFER_INDEX) THEN
+IF((_plcCarret + inDaqEntry.DataSize) > MAX_DAQ_BUFFER_INDEX) THEN
 		_plcCarret := 1;
 END_IF
 
+IF((_plcCarret + inDaqEntry.DataSize) > MAX_DAQ_BYTE_LENGHT) THEN
+		_buffer.ExpectDequeing := TRUE;
+END_IF
 
-IF(NOT _buffer[_plcCarret].ExpectDequeing) THEN
 
-    Tc2_System.MEMCPY(
-        destAddr := _buffer[_plcCarret].Data, 
-        srcAddr  := inDaqMessage.Data,
-        n        := TO_UDINT(inDaqMessage.DataSize)
-    );
+Tc2_System.MEMCPY(
+    destAddr := _buffer.Data[_plcCarret], 
+    srcAddr  := inDaqEntry.pData,
+    n        := TO_UDINT(inDaqEntry.DataSize)
+);
 
-	_buffer[_plcCarret].Cycle := inDaqMessage.Cycle;	
-	_buffer[_plcCarret].ExpectDequeing := TRUE;
-	_buffer[_plcCarret].Identity := inDaqMessage.Identity;
-	_buffer[_plcCarret].MessageDigest := inDaqMessage.MessageDigest;
-	_buffer[_plcCarret].TimeStamp := inDaqMessage.TimeStamp;
+_plcCarret := _plcCarret + inDaqEntry.DataSize;
 
-    _plcCarret := _plcCarret + inDaqMessage.DataSize;
-ELSE
-    // Need to inform buffer is full
-	// _buffer[0].Data := ???;
-	_buffer[0].ExpectDequeing := TRUE;
-	_buffer[0].Cycle := THIS^.Context.StartCycleCount;	
-END_IF;	]]></ST>
+
+]]></ST>
       </Implementation>
     </Method>
   </POU>
