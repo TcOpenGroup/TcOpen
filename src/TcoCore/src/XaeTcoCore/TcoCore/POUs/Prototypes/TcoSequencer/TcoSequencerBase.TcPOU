@@ -959,6 +959,7 @@ _ChangeStepOrderFrom := 0;
 _ChangeStepOrderTo := 0;
 
 _StepTimer(IN:= FALSE);
+_cycleTimer(IN:= FALSE);
 
 IF _modeController.Mode = eSequencerMode.Invalid THEN
 	_modeController.Mode := eSequencerMode.CyclicMode;
