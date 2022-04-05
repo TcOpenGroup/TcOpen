@@ -7,6 +7,8 @@ using Vortex.Presentation.Wpf;
 using TcoCore;
 using System.Windows.Controls;
 using System.Windows;
+using TcOpen.Inxton.Local.Security;
+using HmiTemplate.Wpf;
 
 namespace MainPlc
 {
@@ -21,9 +23,12 @@ namespace MainPlc
         }
 
         private void OpenDetails()
-        {            
-            var detailsView = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Control", Component, new Grid(), false);
-            Vortex.Presentation.Wpf.NavigableViewModelBase.Current.OpenView(detailsView as FrameworkElement);
+        {
+            if (AuthorizationChecker.HasAuthorization(Roles.controlled_unit_can_open_details))
+            {
+                var detailsView = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Control", Component, new Grid(), false);
+                Vortex.Presentation.Wpf.NavigableViewModelBase.Current.OpenView(detailsView as FrameworkElement);
+            }
         }
 
         public IEnumerable<object> _tasks = new List<object>();
@@ -31,9 +36,9 @@ namespace MainPlc
         {
             get
             {
-                if (Component != null)
-                {
-                    _tasks = Component.GetChildren<ITcoTasked>();                 
+                if (Component != null && Component.GetChildren() != null)
+                {                                         
+                    _tasks = Component.GetChildren<ITcoTasked>();                    
                 }
 
                 return _tasks;

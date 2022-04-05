@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TcoCore;
-using TcOpen.Inxton.App.Dialogs;
+using TcOpen.Inxton.App;
 using TcOpen.Inxton.Dialogs;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;

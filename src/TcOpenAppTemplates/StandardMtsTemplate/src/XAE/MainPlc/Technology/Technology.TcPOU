@@ -3,13 +3,14 @@
   <POU Name="Technology" Id="{20d051ba-8e3a-4d8b-9fb7-71f6957f3a63}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
 VAR
-    _processSettings    : ProcessDataManager(THIS^);
-    _technologySettings : TechnologicalDataManager(THIS^);
-	{attribute addProperty Name "<#AUTOMAT ALL#>"}
-	_automatAllTask 	: TcoCore.TcoTask(THIS^);
-	{attribute addProperty Name "<#GROUND ALL#>"}
-	_groundAllTask 		: TcoCore.TcoTask(THIS^);
-    _cu00x              : CU00x(THIS^);
+    _processSettings     : ProcessDataManager(THIS^);
+    _technologySettings  : TechnologicalDataManager(THIS^);
+    _processTraceability : ProcessDataManager(THIS^);
+    {attribute addProperty Name "<#AUTOMAT ALL#>"}
+    _automatAllTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty Name "<#GROUND ALL#>"}
+    _groundAllTask : TcoCore.TcoTask(THIS^);
+    _cu00x         : CU00x(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -53,6 +54,14 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ForceStepMode" Id="{703a4ad0-e2bf-0a26-02d9-59b6c1ce971e}">
+      <Declaration><![CDATA[METHOD ForceStepMode : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ForceStepMode := FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="GroundAllTask" Id="{517b8e00-2011-0b98-35b3-4181b5529b5d}">
       <Declaration><![CDATA[PROPERTY GroundAllTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
       <Get Name="Get" Id="{ac972d75-9264-065d-3fee-04e760569681}">

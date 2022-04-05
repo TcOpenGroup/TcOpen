@@ -20,9 +20,9 @@ namespace MainPlc
     /// <summary>
     /// Interaction logic for TcoTaskedSequencerView.xaml
     /// </summary>
-    public partial class TcoTaskedSequencerTaskView : UserControl
+    public partial class TcoTaskedSequencerTaskCommandView : UserControl
     {
-        public TcoTaskedSequencerTaskView()
+        public TcoTaskedSequencerTaskCommandView()
         {
             InitializeComponent();
         }

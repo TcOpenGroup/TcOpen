@@ -3,9 +3,9 @@ using Vortex.Presentation.Wpf;
 
 namespace MainPlc
 {
-    public class TcoTaskedServiceTaskViewModel : RenderableViewModel
+    public class TcoTaskedServiceTaskCommandViewModel : RenderableViewModel
     {
-        public TcoTaskedServiceTaskViewModel()
+        public TcoTaskedServiceTaskCommandViewModel()
         {
             
         }

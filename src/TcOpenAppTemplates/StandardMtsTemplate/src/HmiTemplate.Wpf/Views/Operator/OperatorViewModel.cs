@@ -14,8 +14,6 @@ namespace HmiTemplate.Wpf.Views.Operator
             
         }
 
-        public MainPlcTwinController MainPlc { get { return App.MainPlc; } }
-
-        public CUBaseSpotViewModel Cu { get; } = new CUBaseSpotViewModel() { Model = App.MainPlc.MAIN._technology._cu00x };
+        public MainPlcTwinController MainPlc { get { return App.MainPlc; } }       
     }
 }

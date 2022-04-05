@@ -10,12 +10,15 @@ VAR
     _components          : CU00xComponents := (Parent := THIS^);
 	{attribute addProperty Name "<#MANUAL#>"}
     {attribute addProperty ToolTip "<#Start manual/Service mode#>"}
+	{attribute clr [RenderAuthorized("controlled_unit_can_manual")]}
     _manualTask : CU00xManualTask(THIS^);
 	{attribute addProperty Name "<#GROUND#>"}
     {attribute addProperty ToolTip "<#Brings the device into basic position.#>"}
+	{attribute clr [RenderAuthorized("controlled_unit_can_ground_position")]}
     _groundTask : CU00xGroundTask(THIS^, TcoCore.eRestoreMode.None);
     {attribute addProperty Name "<#AUTOMAT#>"}
     {attribute addProperty ToolTip "<#Starts automatic sequence. Before start you need to perform grounding sequence.#>"}
+	{attribute clr [RenderAuthorized("controlled_unit_can_automat")]}
     _automatTask : CU00xAutomatTask(THIS^, TcoCore.eRestoreMode.None);       
 END_VAR
 ]]></Declaration>
@@ -106,6 +109,9 @@ _automatTask.Task.Enabled := _groundTask.GroundDone AND THIS^.Technology.AllowAu
 
 IF(Technology.AutomatAllTask.Execute()) THEN _automatTask.Task.Invoke(); END_IF;
 
+IF(Technology.ForceStepMode()) THEN
+ 	_automatTask.ModeController.Mode := eSequencerMode.StepMode;
+END_IF 
 
 (*
 

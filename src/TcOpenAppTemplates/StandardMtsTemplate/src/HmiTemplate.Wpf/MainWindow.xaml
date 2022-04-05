@@ -19,12 +19,6 @@
             <TabItem>
                 <mainview:MainView />
             </TabItem>
-            <TabItem Header="Control">
-                <vortex:RenderableContentControl DataContext="{Binding MainPlc.MAIN._technology._cu00x}" PresentationType="Control"></vortex:RenderableContentControl>
-            </TabItem>
-            <TabItem Header="Data">
-                <vortex:RenderableContentControl DataContext="{Binding MainPlc.MAIN._technology._cu00x._processData._data}" PresentationType="ShadowDisplay"></vortex:RenderableContentControl>
-            </TabItem>
         </TabControl>
     </Grid>
 </Window>

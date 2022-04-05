@@ -2,7 +2,7 @@
 
 namespace MainPlc
 {
-    public class TcoTaskedSequencerTaskViewModel : RenderableViewModel
+    public class TcoTaskedSequencerTaskCommandViewModel : RenderableViewModel
     {      
         TcoTaskedSequencer component;
         public TcoTaskedSequencer Component

@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:HmiTemplate.Wpf.Views.Operator"
     xmlns:mainplc="clr-namespace:MainPlc"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:vortexs="http://vortex.security.mts/xaml"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
@@ -21,11 +21,15 @@
         </Grid.RowDefinitions>
         <vortex:TcoDataExchangeSimpleSelectorView DataContext="{Binding MainPlc.MAIN._technology._processSettings, Mode=OneWay}" />
         <Canvas Grid.Row="1">
-            <mainplc:CUBaseSpotView DataContext="{Binding Cu, Mode=OneWay}"/>
+            <mainplc:CUBaseSpotView DataContext="{Binding MainPlc.MAIN._technology._cu00x, Mode=OneWay}"/>
         </Canvas>
         <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
-          <vortex:TcoTaskView DataContext="{Binding MainPlc.MAIN._technology._automatAllTask, Mode=OneWay}"/>
-          <vortex:TcoTaskView DataContext="{Binding MainPlc.MAIN._technology._groundAllTask, Mode=OneWay}"/>
+            <vortexs:PermissionBox Grid.Row="1" Permissions="Administrator|technology_can_start_automat_all" SecurityMode="Disabled">
+                <vortex:TcoTaskView DataContext="{Binding MainPlc.MAIN._technology._automatAllTask, Mode=OneWay}"/>
+            </vortexs:PermissionBox>
+            <vortexs:PermissionBox Grid.Row="1" Permissions="Administrator|technology_can_start_ground_all" SecurityMode="Disabled">
+                <vortex:TcoTaskView DataContext="{Binding MainPlc.MAIN._technology._groundAllTask, Mode=OneWay}"/>
+            </vortexs:PermissionBox>
         </WrapPanel>
     </Grid>
 </UserControl>

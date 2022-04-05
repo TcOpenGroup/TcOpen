@@ -10,21 +10,14 @@ END_VAR
     <Implementation>
       <ST><![CDATA[Run();]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{65c64653-c354-4e9f-878f-19a4b135c641}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
-~*)
-METHOD PROTECTED Main : BOOL
+    <Folder Name="Abstractions" Id="{d77a8e00-2872-034f-1865-d779c1d38e60}" />
+    <Method Name="LoadProcessSettings" Id="{31612bac-ea85-0141-34e0-d7b2a3994f8e}" FolderPath="Abstractions\">
+      <Declaration><![CDATA[METHOD LoadProcessSettings : BOOL
+VAR_INPUT
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-
-IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
+        <ST><![CDATA[IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
     //-------------------------------------
 	
 	THIS^.Messenger.OnCondition(Station.Technology.ProcessSettings.Data._EntityId = '')
@@ -47,7 +40,24 @@ IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
 		   .WithOk();	
 	END_IF		    				
     //-------------------------------------
-END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{65c64653-c354-4e9f-878f-19a4b135c641}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+LoadProcessSettings();
 
 IF (Step(200, TRUE, 'CREATE NEW DATA SET')) THEN
     //-------------------------------------

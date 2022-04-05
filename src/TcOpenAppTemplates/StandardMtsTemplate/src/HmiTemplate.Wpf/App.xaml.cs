@@ -6,8 +6,10 @@ using System;
 using System.Windows;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.Local.Security.Wpf;
 using TcOpen.Inxton.RavenDb;
 using TcOpen.Inxton.TcoCore.Wpf;
+using Vortex.Presentation.Wpf;
 
 namespace HmiTemplate.Wpf
 {
@@ -30,18 +32,28 @@ namespace HmiTemplate.Wpf
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector)              
+                .SetLogin(() => { var login = new LoginWindow(); login.ShowDialog(); })
                 .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { MainPlc.MAIN }));
 
             if (SecurityManager.Manager.UserRepository.Count == 0)
             {
                 SecurityManager.Manager.UserRepository.Create("default", new UserData("default", "", new string[] { "Administrator" }));
             }
-          
-            SecurityManager.Manager.Service.AuthenticateUser("default", "");
+
+            
+            LazyRenderer.Get.CreateSecureContainer = (permissions) => new PermissionBox { Permissions = permissions, SecurityMode = SecurityModeEnum.Invisible };
 
             SetUpRepositories();
-        }
 
+            new Roles();
+
+            SecurityManager.Manager.Service.AuthenticateUser("default", "");
+
+           
+
+           
+        }
+        
         private void SetUpRepositories()
         {
             var ProcessDataRepoSettings = new RavenDbRepositorySettings<PlainProcessData>(new string[] { Constants.CONNECTION_STRING_DB }, "ProcessSettings", "", "");
@@ -51,9 +63,9 @@ namespace HmiTemplate.Wpf
             IntializeTechnologyDataRepositoryWithDataExchange(MainPlc.MAIN._technology._technologySettings, new RavenDbRepository<PlainTechnologyData>(TechnologicalDataRepoSettings));
 
             var Traceability = new RavenDbRepositorySettings<PlainProcessData>(new string[] { Constants.CONNECTION_STRING_DB }, "Traceability", "", "");
+            IntializeProcessDataRepositoryWithDataExchange(MainPlc.MAIN._technology._processTraceability, new RavenDbRepository<PlainProcessData>(Traceability));            
             IntializeProcessDataRepositoryWithDataExchange(MainPlc.MAIN._technology._cu00x._processData, new RavenDbRepository<PlainProcessData>(Traceability));
         }
-
         
         private static void IntializeProcessDataRepositoryWithDataExchange(ProcessDataManager processData, IRepository<PlainProcessData> repository)
         {

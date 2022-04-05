@@ -65,5 +65,7 @@ namespace TcOpen.Inxton
         public TcoAppBuilder Builder { get; private set; }
 
         public IAuthenticationService AuthenticationService { get; internal set; }
+
+        public Action LoginAction { get; internal set; } = () => {  };
     }
 }

@@ -9,7 +9,7 @@ namespace MainPlc
 
         }
 
-        TcoTaskedSequencer component;
+        TcoTaskedSequencer component = new TcoTaskedSequencer();
         public TcoTaskedSequencer Component
         {
             get => component;

@@ -15,11 +15,6 @@
   </ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Babel.Licensing" Version="2.8.7" PrivateAssets="All" />
-		<!--<PackageReference Include="Babel.Obfuscator" Version="9.6.0" PrivateAssets="All" />-->
-	</ItemGroup>
-	
-	<ItemGroup>
 	  <ApplicationDefinition Update="App.xaml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </ApplicationDefinition>
@@ -43,13 +38,13 @@
     <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Sequence\TcoTaskedSequencerSequenceView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Task\TcoTaskedSequencerTaskView.xaml.cs">
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Task\TcoTaskedSequencerTaskCommandView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Sevice\TcoTaskedServiceComponentsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Task\TcoTaskedServiceTaskView.xaml.cs">
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Task\TcoTaskedServiceTaskCommandView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -78,7 +73,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Task\TcoTaskedSequencerTaskView.xaml">
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedSequencer\Task\TcoTaskedSequencerTaskCommandView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -86,7 +81,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Task\TcoTaskedServiceTaskView.xaml">
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\TcoTaskedService\Task\TcoTaskedServiceTaskCommandView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -95,6 +90,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Data\DataView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\Data\ProcessTraceability\ProcessTraceabilityView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Views\Data\TechnologicalSettings\TechnologicalSettingsView.xaml">
