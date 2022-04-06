@@ -13,17 +13,7 @@
     Background="{DynamicResource Surface}"
     IsVisibleChanged="UserControl_IsVisibleChanged"
     mc:Ignorable="d">
-    <!--  xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  -->
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <vortex:RenderContentConverter x:Key="RenderContentConverter" />
-    </UserControl.Resources>
-
-    <!--<d:UserControl.DataContext>
-        <VortexCore:DataViewModel />
-    </d:UserControl.DataContext>-->
-
-
+    
     <Grid x:Name="RootContainer">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -112,8 +102,6 @@
                             <ColumnDefinition Width="1787*" />
                             <ColumnDefinition Width="127*" />
                         </Grid.ColumnDefinitions>
-
-                        <!--  CellStyle="{DynamicResource TouchCell}"  -->
                         <DataGrid
                             x:Name="DataGrid"
                             Grid.Row="0"
@@ -161,7 +149,6 @@
                                     IsVisibleChanged="ControlDataVisibilityChanged"                                    
                                     Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}"
                                     Grid.IsSharedSizeScope="True">
-                                    <!--<vortex:RenderableContentControl DataContext="{Binding DataExchange._data}" PresentationType="ShadowControl"/>-->
                                 </ContentControl>
                             </GroupBox>
                             <GroupBox

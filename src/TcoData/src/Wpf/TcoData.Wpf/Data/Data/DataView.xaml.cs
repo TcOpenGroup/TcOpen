@@ -39,7 +39,7 @@ namespace TcoData
         private void DisplayDataVisibilityChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (DisplayData.Visibility == Visibility.Visible && _context != null && DisplayData.Content == null)
-                DisplayData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowDisplaySlim-ShadowControl" };
+                DisplayData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowDisplaySlim-ShadowDisplay" };
         }
      
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
