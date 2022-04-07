@@ -1,3 +1,5 @@
+Param([Parameter(Mandatory=$true)][string]$newCuName)
+
 function Copy-Template($newName)
 {
     $templateFolder = "CU00x"
@@ -104,6 +106,5 @@ function Create-New-Controlled-Unit($name)
    Pop-Location
 }
 
-Write-Host "New CU Name"
-$newName = Read-Host
-Create-New-Controlled-Unit $newName
+
+Create-New-Controlled-Unit $newCuName

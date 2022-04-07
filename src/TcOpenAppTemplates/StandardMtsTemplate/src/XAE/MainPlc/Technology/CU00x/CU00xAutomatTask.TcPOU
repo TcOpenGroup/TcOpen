@@ -4,40 +4,172 @@
     <Declaration><![CDATA[FUNCTION_BLOCK CU00xAutomatTask EXTENDS CUBaseAutomat IMPLEMENTS ICUTask
 VAR
 	_dialog : TcoCore.TcoDialog(THIS^);
-	_tick : ULINT;
+	_missingProcessSettingMessage : TcoCore.TcoMessenger(THIS^);	
+END_VAR
+
+VAR
+	_dataLoadProcessSettings : BOOL;
+	_dataCreateNew : BOOL;
+	_dataOpen : BOOL;
+	_dataClose : BOOL;
+	_dataFinalize : BOOL;
+	_continueRestore : BOOL;
+	_loop : BOOL;	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[Run();]]></ST>
     </Implementation>
-    <Folder Name="Abstractions" Id="{d77a8e00-2872-034f-1865-d779c1d38e60}" />
-    <Method Name="LoadProcessSettings" Id="{31612bac-ea85-0141-34e0-d7b2a3994f8e}" FolderPath="Abstractions\">
-      <Declaration><![CDATA[METHOD LoadProcessSettings : BOOL
+    <Folder Name="DataOperations" Id="{d77a8e00-2872-034f-1865-d779c1d38e60}" />
+    <Method Name="DataEntityClose" Id="{65dbdc57-6dde-0eb3-3a0a-897900d1dc61}" FolderPath="DataOperations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Stores the data from this controlled unit into the repository. In addition modifies entity header and controlled unit header.									
+		</summary>
+	</docu>
+~*)
+METHOD DataEntityClose
 VAR_INPUT
+	inStepID : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(100, TRUE, 'LOAD PROCESS SETTING')) THEN
+        <ST><![CDATA[IF (Step(inStepID, TRUE, 'CLOSE ENTITY DATA')) THEN
+    //-------------------------------------		
+	StepCompleteWhen(THIS^.Station.EntityFlowCloseForOperations(Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
+    //-------------------------------------
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DataEntityCreateNew" Id="{9e2f7443-a3ef-00b1-04ba-0d7ad4df4909}" FolderPath="DataOperations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Creates new record in the repository with given EntityId and populates with the current controlled units data.
+			In addition modifies entity header and controlled unit header.									
+		</summary>
+	</docu>
+~*)
+METHOD DataEntityCreateNew
+VAR_INPUT	
+	inStepID : INT;
+	EntityId : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Step(inStepID, TRUE, 'CREATE NEW ENTITY DATA')) THEN
+    //-------------------------------------		
+	StepCompleteWhen(THIS^.Station.EntityFlowCreateNew(EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
+    //-------------------------------------
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DataEntityDiscard" Id="{26fee496-eec5-0bba-3872-bb6505714284}" FolderPath="DataOperations\">
+      <Declaration><![CDATA[METHOD DataEntityDiscard
+VAR_INPUT	
+	inStepID : INT;
+	EntityId : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Step(inStepID, TRUE, 'DISCARD ENTITY DATA')) THEN
+    //-------------------------------------		
+	StepCompleteWhen(THIS^.Station.EntityFlowDiscard(Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
+    //-------------------------------------
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DataEntityFinalize" Id="{fc434b4c-829b-0eb9-1ac8-82aeac5d6d44}" FolderPath="DataOperations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Stores data of this controlled unit into the repository.
+			In addition modifies entity header and controlled unit header.
+			Finalize will set the comprehensive result from InProgress to Passed. 
+			If the comprehensive result is Failed the finalizing will not modify the result.									
+		</summary>
+	</docu>
+~*)
+METHOD DataEntityFinalize : BOOL
+VAR_INPUT
+	inStepID : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Step(inStepID, TRUE, 'FINALIZE ENTITY DATA')) THEN
+    //-------------------------------------		
+	StepCompleteWhen(THIS^.Station.EntityFlowFinalize(Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
+    //-------------------------------------
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DataEntityOpen" Id="{1f521133-eeef-04b8-11d0-9d229914442b}" FolderPath="DataOperations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Retrieves the data with given EntityId from the repository. In addition modifies entity header and controlled unit header.									
+		</summary>
+	</docu>
+~*)
+METHOD DataEntityOpen
+VAR_INPUT
+	inStepID : INT;
+	EntityId : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Step(inStepID, TRUE, 'OPEN ENTITY DATA')) THEN
+    //-------------------------------------		
+	StepCompleteWhen(THIS^.Station.EntityFlowOpenForOperations(EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
+    //-------------------------------------
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DataLoadProcessSettings" Id="{31612bac-ea85-0141-34e0-d7b2a3994f8e}" FolderPath="DataOperations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Loads process settings from the current process receipe into this controlled unit.
+			The `StationProcessDataManager.Data` is populated by data from process settings.						
+		</summary>
+	</docu>
+~*)
+METHOD DataLoadProcessSettings : BOOL
+VAR_INPUT
+	inStepID : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (Step(inStepID, TRUE, 'LOAD PROCESS SETTING')) THEN
     //-------------------------------------
 	
-	THIS^.Messenger.OnCondition(Station.Technology.ProcessSettings.Data._EntityId = '')
-				   .Build()
-				   .Append('No process data. Please load setting')
-				   .As()				   
-				   .AsError()
-                   .Pin();
+	THIS^._missingProcessSettingMessage.OnCondition(Station.Technology.ProcessSettings.Data._EntityId = '')
+									   .Build()
+									   .Append('No process data. Please load setting')
+									   .As()				   
+									   .AsError()
+									   .Pin();
 					   
 				   
-	IF(Station.Technology.ProcessSettings.Data._EntityId <> '') THEN
-		Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;
-		_tick := Context.RealTimeClock.TickClock();
-		Station.ProcessDataManager.Data._EntityId := ULINT_TO_STRING(_tick);
-		CompleteStep();
+	IF(Station.Technology.ProcessSettings.Data._EntityId <> '' AND NOT THIS^._missingProcessSettingMessage.Pinned) THEN
+		IF(Station.Technology.ProcessSettings.Read(Station.Technology.ProcessSettings.Data._EntityId).Done) THEN
+			Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;
+			Station.ProcessDataManager.Data.EntityHeader.ReciepeCreated := Station.Technology.ProcessSettings.Data._Created;
+			Station.ProcessDataManager.Data.EntityHeader.ReciepeLastModified  := Station.Technology.ProcessSettings.Data._Modified;
+			Station.ProcessDataManager.Data.EntityHeader.Reciepe  := Station.Technology.ProcessSettings.Data._EntityId;				
+			Station.ProcessDataManager.Data._EntityId := ULINT_TO_STRING(Context.RealTimeClock.TickClock());
+			CompleteStep();
+		END_IF;	
 	ELSE
-		_dialog.Show()
+		IF(_dialog.Show()
 	       .WithCaption('<#Process data not selected#>')
-		   .WithText('<#Please select process data#>')
-		   .WithOk();	
+		   .WithText('<#Would you like to load default settings?#>')
+		   .WithYesNoCancel().Answer = TcoCore.eDialogAnswer.Yes) THEN
+		   
+		   	Station.Technology.ProcessSettings.Data._EntityId := 'default';
+		END_IF; 
+
+			
 	END_IF		    				
     //-------------------------------------
 END_IF]]></ST>
@@ -55,42 +187,77 @@ END_IF]]></ST>
 METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
+        <ST><![CDATA[(*
 
-LoadProcessSettings();
+	OPENING DATA OPERATIONS
+	Following methods provide process data manipulation for this controlled unit.
+	Remove `IF` statement and comment or uncomment according to your need.
+*)
 
-IF (Step(200, TRUE, 'CREATE NEW DATA SET')) THEN
-    //-------------------------------------
-    StepCompleteWhen(Station.EntityFlowCreateNew(Station.ProcessDataManager.Data._EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);				
-    //-------------------------------------
-END_IF
 
-IF (Step(300, TRUE, 'SINGLE INSPECTION')) THEN
+// Loads process settings. 
+// Typically used in the first station of the technology to load process settings that will be used trough out the production
+IF(_dataLoadProcessSettings) THEN THIS^.DataLoadProcessSettings(100); END_IF;	
+
+// Creates new data entity (new part/item) 
+// Typically used in the first station of the technology to create new document/record to be persited in the repository.
+// Sets the status of the entity to 'InProgress'
+IF(_dataCreateNew) THEN THIS^.DataEntityCreateNew(200, Station.ProcessDataManager.Data._EntityId); END_IF;
+
+// Populates the information in the data header of this controlled unit (operation start time stamp, user info, etc)
+// Typically used prior to starting operation within a controlled unit.
+IF(_dataOpen) THEN THIS^.DataEntityOpen(300, Station.ProcessDataManager.Data._EntityId); END_IF;
+
+(*
+
+		STEPS OF THE SEQUENCE
+		Here we would place steps to perfom the operations of this controlled unit.
+
+*)
+
+
+IF (Step(1000, TRUE, 'SINGLE INSPECTION')) THEN
     //-------------------------------------    
 	Station.ProcessDataManager.Data.CU00x.BoltPresenceInspector
 					.WithCoordinator(THIS^)
 					.Inspect(TRUE)
 					.UpdateComprehensiveResult(Station.ProcessDataManager.Data.EntityHeader.Results)
-					.OnFail().Dialog(100);	
+					.OnFail()
+					.CarryOn();	
     //-------------------------------------
 END_IF
+
+(*
+
+		RECOVERY STEPS
+		This step and the following steps should bring the controlled unit in a state from which 
+		the sequence can be safely restarted from the beginning of the this sequencer. 		
+*)
 
 IF (Step(RESTORE_STEP_ID, TRUE, 'FIRST RESTORE STEP')) THEN
     //-------------------------------------
-    StepCompleteWhen(%MX0.0);
+    StepCompleteWhen(_continueRestore);
     //-------------------------------------	
 END_IF
 
-IF (Step(9000, TRUE, 'UPDATE DATA')) THEN
-    //-------------------------------------
-    StepCompleteWhen(Station.EntityFlowCloseForOperations(Station.ProcessDataManager.Data.CU00x.Header).Done);				
-    //-------------------------------------
-END_IF
+(*
 
+	CLOSING DATA OPERATIONS
+	Following methods provide process data manipulation for this controlled unit.
+	Comment or uncomment according to your need.
+*)
+
+// Populates the information in the data header of this controlled unit (operations end time stamp, user info, etc)
+// Typically used after all steps within the controlled unit are completed.
+IF(_dataClose) THEN THIS^.DataEntityClose(5000); END_IF;
+
+// Populates the information in the data header of this controlled unit (operations end time stamp, user info, etc)
+// Typically used after all operation on the technology are completed.
+IF(_dataFinalize) THEN THIS^.DataEntityFinalize(5500); END_IF;
 
 IF (Step(10000, TRUE, 'LAST STEP')) THEN
     //-------------------------------------
-    CompleteSequence();
+    IF(_loop) THEN CompleteSequence(); END_IF;
     //-------------------------------------	
 END_IF
 

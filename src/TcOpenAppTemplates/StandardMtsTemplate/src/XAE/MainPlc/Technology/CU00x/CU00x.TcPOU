@@ -24,7 +24,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-THIS^.CuId := eStations.NONE;
+THIS^.CuId := eStations.CU00x;
 _cuProcessData REF= THIS^.ProcessDataManager.Data.CU00x;
 _cuTechnologicalData REF=  THIS^.Technology.TechnologicalSettings.Data.CU00x;
 

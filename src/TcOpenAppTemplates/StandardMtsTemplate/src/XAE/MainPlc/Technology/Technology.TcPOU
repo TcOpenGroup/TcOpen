@@ -85,7 +85,8 @@ END_VAR
 ~*)
 METHOD PROTECTED Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.RtcSynchronize(true, '', 60);
+        <ST><![CDATA[_processSettings();
+THIS^.RtcSynchronize(true, '', 60);
 _cu00x();]]></ST>
       </Implementation>
     </Method>

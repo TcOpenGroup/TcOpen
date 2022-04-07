@@ -70,6 +70,15 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AUTOMAT ALL.
+        /// </summary>
+        public static string ___AUTOMAT_ALL__ {
+            get {
+                return ResourceManager.GetString("___AUTOMAT_ALL__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brings the device into basic position..
         /// </summary>
         public static string ___Brings_the_device_into_basic_position___ {
@@ -129,6 +138,15 @@ namespace MainPlcConnector.Properties {
         public static string ___GROUND__ {
             get {
                 return ResourceManager.GetString("___GROUND__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GROUND ALL.
+        /// </summary>
+        public static string ___GROUND_ALL__ {
+            get {
+                return ResourceManager.GetString("___GROUND_ALL__", resourceCulture);
             }
         }
         
@@ -268,15 +286,6 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select process data.
-        /// </summary>
-        public static string ___Please_select_process_data__ {
-            get {
-                return ResourceManager.GetString("___Please_select_process_data__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Process data not selected.
         /// </summary>
         public static string ___Process_data_not_selected__ {
@@ -373,6 +382,15 @@ namespace MainPlcConnector.Properties {
         public static string ___Was_Reworked__ {
             get {
                 return ResourceManager.GetString("___Was_Reworked__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to load default settings?.
+        /// </summary>
+        public static string ___Would_you_like_to_load_default_settings___ {
+            get {
+                return ResourceManager.GetString("___Would_you_like_to_load_default_settings___", resourceCulture);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace HmiTemplate.Wpf
     {
         public App()
         {
-            MainPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 10;
+            MainPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 150;
 
             var authenticationService = SecurityManager
                 .Create(new RavenDbRepository<UserData>(new RavenDbRepositorySettings<UserData>(new string[] { Constants.CONNECTION_STRING_DB }, "Users", "", "")));
@@ -28,10 +28,11 @@ namespace HmiTemplate.Wpf
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                        .WriteTo.Console()                                          
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
-                .SetEditValueChangeLogging(Entry.PlcHammer.Connector)              
+                .SetEditValueChangeLogging(Entry.Plc.Connector)              
                 .SetLogin(() => { var login = new LoginWindow(); login.ShowDialog(); })
                 .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { MainPlc.MAIN }));
 
@@ -46,6 +47,8 @@ namespace HmiTemplate.Wpf
             SetUpRepositories();
 
             new Roles();
+
+            MainPlc.MAIN._technology._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
 
             SecurityManager.Manager.Service.AuthenticateUser("default", "");
 
@@ -87,7 +90,7 @@ namespace HmiTemplate.Wpf
         {  
             get
             {
-                return designTime ? Entry.PlcHammerDesign : Entry.PlcHammer;                
+                return designTime ? Entry.PlcDesign : Entry.Plc;                
             }
         }
 

@@ -144,15 +144,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Header.Operator := _operatorInfo.UserName;
-Header.OperationsStarted := Context.RealTimeClock.NowLocal();
-THIS^.ProcessDataManager.Data.EntityHeader.LastStation := THIS^.CuId;
-THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnPassed;
-THIS^.ProcessDataManager.Data.EntityHeader.Results.Result := TcoInspectors.eOverallResult.InProgress;
-THIS^.ProcessDataManager.Data._EntityId := Identifier;
-THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := THIS^.CuId;
-THIS^.ProcessDataManager.Data.EntityHeader.WasReset := FALSE;
-Header.Operator := _operatorInfo.UserName;
+        <ST><![CDATA[
 	 ]]></ST>
       </Implementation>
     </Method>
@@ -194,6 +186,16 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Header.Operator := _operatorInfo.UserName;
+Header.OperationsStarted := Context.RealTimeClock.NowLocal();
+THIS^.ProcessDataManager.Data.EntityHeader.LastStation := THIS^.CuId;
+THIS^.ProcessDataManager.Data.EntityHeader.NextStation := Header.NextOnPassed;
+THIS^.ProcessDataManager.Data.EntityHeader.Results.Result := TcoInspectors.eOverallResult.InProgress;
+THIS^.ProcessDataManager.Data._EntityId := Identifier;
+THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := THIS^.CuId;
+THIS^.ProcessDataManager.Data.EntityHeader.WasReset := FALSE;
+Header.Operator := _operatorInfo.UserName;
+
+Header.Operator := _operatorInfo.UserName;
 Header.OperationsStarted := Context.RealTimeClock.NowLocal();
 THIS^.ProcessDataManager.Data.EntityHeader.OpenOn := THIS^.CuId;]]></ST>
       </Implementation>

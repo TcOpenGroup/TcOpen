@@ -8,19 +8,5 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Property Name="BaseStation" Id="{2f34bbe0-ae77-4424-96f8-d75571b12d83}">
-      <Declaration><![CDATA[PROPERTY PRIVATE BaseStation : REFERENCE TO CUBase]]></Declaration>
-      <Get Name="Get" Id="{5ff633c4-e770-483e-b525-87fa0c0de322}">
-        <Declaration><![CDATA[VAR
-    _station : POINTER TO CUBase;
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
-    BaseStation REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
-END_IF]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
   </POU>
 </TcPlcObject>

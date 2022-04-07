@@ -8,16 +8,16 @@ namespace MainPlcConnector
     {
         public static readonly string AmsId = Environment.GetEnvironmentVariable("Tc3Target");
 
-        public static MainPlc.MainPlcTwinController PlcHammer { get; }
+        public static MainPlc.MainPlcTwinController Plc { get; }
             = new MainPlc.MainPlcTwinController(Tc3ConnectorAdapter.Create(AmsId, 851, true));
 
-        private static MainPlc.MainPlcTwinController _plcHammerDesign;
-        public static MainPlc.MainPlcTwinController PlcHammerDesign
+        private static MainPlc.MainPlcTwinController _plcDesign;
+        public static MainPlc.MainPlcTwinController PlcDesign
         {
             get
             {
-                if (_plcHammerDesign == null) _plcHammerDesign = new MainPlc.MainPlcTwinController(new ConnectorAdapter(typeof(DummyConnector)));
-                return _plcHammerDesign;
+                if (_plcDesign == null) _plcDesign = new MainPlc.MainPlcTwinController(new ConnectorAdapter(typeof(DummyConnector)));
+                return _plcDesign;
             }
         }
     }
