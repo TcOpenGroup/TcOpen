@@ -21,7 +21,10 @@ METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Messenger.Notify('Running manual mode');
-Station.Components.horizontalCylinder.Service();]]></ST>
+Station.Components.horizontalCylinder.Service();
+Station.Components.verticalCylinder.Service();
+Station.Components.gripperCylinder.Service();
+Station.Components.boltPresenceSensor.Service();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{9e5b3c71-1f5b-4076-a710-81816a9a4500}">

@@ -60,7 +60,7 @@ EntityFlowCloseForOperations := THIS^.ProcessDataManager.Update(ProcessDataManag
     <Method Name="EntityFlowCreateNew" Id="{def96a3d-be60-022c-22e1-cec3782e9b03}" FolderPath="ProcessData\ExternalData\">
       <Declaration><![CDATA[METHOD EntityFlowCreateNew : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	Identifier : STRING(255);	
+	EntityId : STRING(255);	
 END_VAR
 VAR_IN_OUT
 	Header : CuHeader;
@@ -68,20 +68,23 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.FlagCreateNewEntity(Identifier, Header);
-EntityFlowCreateNew := THIS^.ProcessDataManager.Create(Identifier);
+        <ST><![CDATA[THIS^.FlagCreateNewEntity(EntityId, Header);
+EntityFlowCreateNew := THIS^.ProcessDataManager.Create(EntityId);
 	 ]]></ST>
       </Implementation>
     </Method>
     <Method Name="EntityFlowDiscard" Id="{e706bdf6-bfe5-0d86-0aa7-1e9e631ad7f3}" FolderPath="ProcessData\ExternalData\">
       <Declaration><![CDATA[METHOD EntityFlowDiscard : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	EntityId : STRING(255);	
+END_VAR
 VAR_IN_OUT	
 	Header : CuHeader; 
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.FlagThrowAwayEntity(Header);
-EntityFlowDiscard := THIS^.ProcessDataManager.Update(THIS^.ProcessDataManager.Data._EntityId);]]></ST>
+EntityFlowDiscard := THIS^.ProcessDataManager.Update(EntityId);]]></ST>
       </Implementation>
     </Method>
     <Method Name="EntityFlowFinalize" Id="{d334eb15-8a45-08f2-3686-ad4133f632f2}" FolderPath="ProcessData\ExternalData\">

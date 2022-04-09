@@ -4,7 +4,14 @@
     <Declaration><![CDATA[TYPE
     CU00xComponents EXTENDS CUComponentsBase :
     STRUCT
+		{attribute addProperty Name "(A1)Horizontal Axis"}
         horizontalCylinder : TcoPneumatics.TcoCylinder(THISSTRUCT);
+		{attribute addProperty Name "(A2)Vertical Axis"}
+		verticalCylinder : TcoPneumatics.TcoCylinder(THISSTRUCT);
+		{attribute addProperty Name "(A3)Gripper"}
+		gripperCylinder : TcoPneumatics.TcoCylinder(THISSTRUCT);
+		{attribute addProperty Name "Bolt presence sensor"}
+		boltPresenceSensor : TcoElements.TcoDi(THISSTRUCT); 		
     END_STRUCT
 END_TYPE
 ]]></Declaration>
