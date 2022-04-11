@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoTaskedSequencer" Id="{c1209b3d-cbe5-0fa4-2d35-bd4f0cc6d1e3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTaskedSequencer EXTENDS TcoCore.TcoSequencerBase
+VAR
+	{attribute addProperty Name "|[[1]AttributeName]|"}
+	{attribute addProperty ToolTip "|[[1]AttributeToolTip]|"}
+    _task : TcoInnerTask(THIS^);
+    _o    : TcoCore.TcoSequencerObserver(THIS^);	 	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="TaskRelay" Id="{afc41ea2-70b7-46a4-8ba7-73e4b0574c74}" />
+    <Method Name="CompleteSequence" Id="{e660dda5-e822-0795-15da-43df1875907c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Completes the sequencer, and return the sequencer pointer to the first step in the seuqence.
+				Method is typically called inside the last step of the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED FINAL CompleteSequence
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_CompleteSequence();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CompleteStep" Id="{16b3254b-2a28-0fb6-2f25-afa0bf333f87}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Completes the execution of the current step and moves the sequencer pointer to the next step in order of execution.
+			The call returns `ITcoObjectRestorer` that allows to restore object upon step completition.
+		</summary>		
+		<returns></returns>	
+	</docu>	
+~*)
+METHOD PROTECTED FINAL CompleteStep : ITcoObjectRestorer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CompleteStep := i_CompleteStep();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{7c01205d-3a68-04f8-3158-3c7d48d004e6}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED ABSTRACT Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{4a8dbf93-63ad-425f-a385-076450b1741f}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnAbort : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{30fb0e8a-1cb0-4f9e-a2ec-ea455b994447}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnDone : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{0ad4a5a1-079e-4d8c-ab31-9475260ad3db}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnError : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{3f6df8fb-4ab1-4f1c-90a2-1116dcabff12}" FolderPath="TaskRelay\">
+      <Declaration><![CDATA[METHOD PUBLIC OnStart
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="pr_Close" Id="{f8eb2d85-b3ce-4599-b36f-51273583184e}">
+      <Declaration><![CDATA[METHOD pr_Close
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_lastClosingCycle := Context.StartCycleCount;
+
+IF _sequencerHasError THEN
+    OnSequencerError(_sequencerErrorId);
+END_IF
+
+_previousNumberOfStepsInSequence := _numberOfStepsInSequence;
+Context.Environment.Messaging.Suspend();
+
+IF _modeController._stepIn.Done THEN
+    _modeController._stepIn.Restore();
+END_IF
+
+Context.Environment.Messaging.Resume();
+
+_restoringSequence := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="pr_Open" Id="{8c53ec29-7192-431b-a895-8408067229d4}">
+      <Declaration><![CDATA[METHOD pr_Open
+VAR
+    _message : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_theOrderOfTheCurrentlyEvaluatedStep := 0;
+
+IF _requestStepActive AND
+    _requestedStepId <> (MinStepID - 1) AND
+    (_modeController.Mode <> eSequencerMode.StepMode OR _modeController._stepIn.Busy OR _checkStepIdRequestedInStepMode) THEN
+    _requestStepCycle := _requestStepCycle + 1;
+ELSE
+    _requestStepCycle := 0;
+END_IF
+
+IF _requestStepCycle > 1 AND NOT _sequencerHasError THEN
+    _sequencerErrorId        := eSequencerError.StepWithRequestedIdDoesNotExists;
+    _message                 := CONCAT('REQUESTED STEP_ID: ', INT_TO_STRING(_requestedStepId));
+    _message                 := CONCAT(_message, ' DOES NOT EXIST');
+    _currentStep.Description := _message;
+    _currentStep.Status      := eStepStatus.Error;
+    THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
+    _sequencerHasError := TRUE;
+END_IF
+
+IF _StepIdUniquenessControlState = eStepIdUniquenessControlState.NotYetStarted OR
+    _StepIdUniquenessControlState = eStepIdUniquenessControlState.Requested THEN
+    _StepIdUniquenessControlState := eStepIdUniquenessControlState.Started;
+END_IF;
+
+_restoringSequence := FALSE;
+
+_lastOpeningCycle := Context.StartCycleCount;
+;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RequestStep" Id="{05e23ca1-6a4e-00c5-0fd4-d50792c02a3f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Terminates the currently executed step and set the sequencer's pointer to the step with Id that corresponds to ```inRequestedStepID``` parameter.
+			When the order of the requested step is higher than the order of the currently finished step (the requested step is "after" the current one)
+			the requested step is started in the same context cycle.
+			When the order of the requested step is lower than the order of the currently finished step (the requested step is "before" the current one)
+			the requested step is started in the next context cycle.
+			If the requested step is not found even in the next context cycle, the sequencer enters error state ```StepWithRequestedIdDoesNotExists```.
+			<para>
+				See <see cref="TcoCore.eSequencerError"/> for detailed description.
+			</para>
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED FINAL RequestStep : ITcoSequencer
+VAR_INPUT
+    (*~
+		<docu>
+			<summary>
+				StepId of the step to be executed.
+			</summary>
+		</docu>
+	~*)
+    inRequestedStepID : INT := MinStepID - 1;
+END_VAR
+VAR
+    _message : STRING(254);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RequestStep := i_RequestStep(inRequestedStepID := inRequestedStepID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{a3c44169-c865-41a7-b04d-fb6593fd4c0f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				This method resets the sequencer. 
+				Method is typically called before starting the sequence or after error has occured in the sequence.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+Task.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Run" Id="{18d5420d-14f4-0ac5-255d-8d8a78d1e1c6}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Ensures calling the Open(), Main() and Close() methods in the desired order.
+				This method is final, so it cannot be overloaded. The **Instance.Run()** needs to be called cyclically inside the appropriate context.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL Run
+VAR
+    _message : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_task.Execute()) THEN
+    THIS^.pr_Open();
+    THIS^.Observer := _o;
+    THIS^.Main();
+    THIS^.pr_Close();
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Step" Id="{c3c5f2f3-742a-0ae5-3d6d-5a15b5bc9906}">
+      <Declaration><![CDATA[METHOD PROTECTED Step : BOOL
+VAR_INPUT
+    (*~
+	<docu>
+		<summary>
+			StepId of the current step.
+			<remarks>			
+				<note type="important">
+					This number must be unique throughout the complete sequence.
+					It must be a constant or numerical literal and it must not change during the life-time of the sequencer. 
+				</note>
+			</remarks>
+		</summary>		
+	</docu>	
+~*)
+    inStepID : INT;
+    (*~
+	<docu>
+		<summary>
+			If this value is false, step body is not executed and execution is moved to the next enabled step.
+		</summary>				
+	</docu>	
+~*)
+    inEnabled : BOOL;
+    (*~
+	<docu>
+		<summary>
+			Step description text.
+		</summary>				
+	</docu>	
+~*)
+    inStepDescription : STRING(254);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Step := i_Step(inStepID := inStepID, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StepCompleteWhen" Id="{bd441a6f-affd-05d6-027c-c88ec0339cbb}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Completes the actually running step, when the `inCondition` parameter is `TRUE`.
+			Method is typically called inside a step as the transition method.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED FINAL StepCompleteWhen
+VAR_INPUT
+    (*~
+	<docu>
+		<summary>
+			The condition under which the step is completed.
+		</summary>			
+	</docu>	
+~*)
+    inCondition : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[i_StepCompleteWhen(inCondition := inCondition);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Task" Id="{31b22691-83dc-0d45-2152-2f03cc6b6a6e}">
+      <Declaration><![CDATA[PROPERTY Task : REFERENCE TO TcoTask]]></Declaration>
+      <Get Name="Get" Id="{6c191508-6ada-00b4-2005-7e4c80b0377a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Task REF= _task;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

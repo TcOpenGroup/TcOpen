@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="CUProcessDataBase" Id="{5f471120-52ab-4133-bd13-00db205800fd}">
+    <Declaration><![CDATA[{attribute clr [Container(Layout.Stack)]}
+{attribute clr [Group(Layout.Scroll)]}
+TYPE CUProcessDataBase EXTENDS TcoCore.TcoStruct :
+STRUCT
+	Header : CuHeader := (Parent := THISSTRUCT);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

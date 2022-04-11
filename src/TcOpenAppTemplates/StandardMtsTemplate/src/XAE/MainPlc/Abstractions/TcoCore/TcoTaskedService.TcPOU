@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoTaskedService" Id="{204f6525-deb4-48a5-ab6d-4e0c7c871eb4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTaskedService EXTENDS TcoCore.TcoTask
+VAR
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{cc5b8a36-a081-4438-80ce-668a9dfebbe4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED ABSTRACT Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Run" Id="{3909f63a-de90-44dc-9203-0a4aa4366df2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			<para>
+				Ensures calling the Open(), Main() and Close() methods in the desired order.
+				This method is final, so it cannot be overloaded. The **Instance.Run()** needs to be called cyclically inside the appropriate context.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC FINAL Run
+VAR
+    _message : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (THIS^.Execute()) THEN
+    THIS^.Main();    
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Task" Id="{31dc550d-fc4c-4312-b06a-80f3f9ff5603}">
+      <Declaration><![CDATA[PROPERTY Task : REFERENCE TO TcoTask]]></Declaration>
+      <Get Name="Get" Id="{26cb66eb-7f7f-4986-99db-29f80495fea7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Task REF= THIS^;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

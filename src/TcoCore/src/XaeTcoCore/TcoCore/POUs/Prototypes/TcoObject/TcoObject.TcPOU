@@ -86,12 +86,14 @@ FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject
 VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
 	_Identity : ULINT;
 	{attribute 'hide'}
 	_ParentObject : ITcoObject;
 	{attribute 'hide'}
     _ParentStruct : REFERENCE TO TcoStruct;		
 	{attribute clr [RenderIgnore()]}
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
 	_messenger : TcoMessenger(THIS^);
 END_VAR
 ]]></Declaration>

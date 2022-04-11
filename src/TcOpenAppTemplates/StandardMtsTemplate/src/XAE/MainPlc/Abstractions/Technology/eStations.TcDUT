@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eStations" Id="{7908e759-7967-476f-a8b7-697c4e931dc9}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eStations :
+    (
+		CU00x := 100,
+        ST_1  := 1,
+        ST_2  := 2,
+        ST_3  := 3,
+        ST_4  := 4,
+        ST_5  := 5,
+        ST_6  := 6,
+        ST_7  := 7,
+        ST_8  := 8,
+        ST_9  := 9,
+        ST_10 := 10,
+        ST_11 := 11,
+        ST_12 := 12,
+        ST_13 := 13,
+        ST_14 := 14,
+        ST_15 := 15,
+        ST_16 := 16,
+        ST_17 := 17,
+        ST_18 := 18,
+        ST_19 := 19,
+        ST_20 := 20,
+        NONE  := 32767
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

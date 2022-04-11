@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CU00xManualTask" Id="{4da1dfbc-4c0a-47a8-95b6-4f0ca8024493}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xManualTask EXTENDS TcoTaskedService IMPLEMENTS ICUTask
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Run();]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{b59a2119-19eb-4289-9c0b-227b833546df}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Messenger.Notify('Running manual mode');
+Station.Components.horizontalCylinder.Service();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{9e5b3c71-1f5b-4076-a710-81816a9a4500}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Station.AutomatTask.Restore();
+Station.GroundTask.Restore();
+Station.GroundTask.CancelGround();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Station" Id="{400a1f67-80cb-4f9f-a632-be597ac0ffc5}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO CU00x]]></Declaration>
+      <Get Name="Get" Id="{e3aceaef-61ff-438d-83cd-a8c6edd964ba}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO CU00x;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
+    Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

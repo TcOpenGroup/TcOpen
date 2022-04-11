@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="EntityHeader" Id="{a65d1b87-5fe3-4e6b-b5aa-ebdc5c118dd6}">
+    <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
+{attribute wpf [Group(Layout.Scroll)]}
+{attribute addProperty Name "<#Entity header#>"}
+TYPE
+    EntityHeader EXTENDS TcoCore.TcoStruct :
+    STRUCT
+        {attribute addProperty Name "<#Reciepe#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:Reciepe'}
+        Reciepe : STRING(255);
+        {attribute addProperty Name "<#Reciepe created#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:ReciepeCreated'}
+        ReciepeCreated : DT;
+        {attribute addProperty Name "<#Reciepe modified#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:ReciepeLastModified'}
+        ReciepeLastModified : DT;
+        {attribute addProperty Name "<#Carrier#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:Carrier'}
+        Carrier : STRING;
+        {attribute addProperty Name "<#Reset or ground position performed#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:WasReset'}
+        {attribute 'qlikmap:Bool:0,No;1,Yes'}
+        WasReset : BOOL;
+        {attribute addProperty Name "<#Is Master#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:IsMaster'}
+        {attribute 'qlikmap:Bool:0,No;1,Yes'}
+        IsMaster : BOOL;
+        {attribute addProperty Name "<#Is empty#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:IsEmpty'}
+        {attribute 'qlikmap:Bool:0,No;1,Yes'}
+        IsEmpty : BOOL;
+        {attribute addProperty Name "<#Last station#>"}
+        {attribute 'qlik_load:LastStation'}
+        LastStation : eStations;
+        {attribute addProperty Name "<#Next station#>"}
+        {attribute 'qlik_load:NextStation'}
+        NextStation : eStations;
+        {attribute addProperty Name "<#Operations Opened#>"}
+        {attribute 'qlik_load:OpenOn'}
+        OpenOn : eStations;
+        {attribute addProperty Name "<#Results#>"}
+        Results : TcoInspectors.TcoComprehensiveResult;
+
+        {attribute addProperty Name "<#Was Reworked#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:WasReworked'}
+        WasReworked : BOOL;
+
+        {attribute addProperty Name "<#Last Rework Name#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:LastReworkName'}
+        LastReworkName : STRING;
+
+        {attribute addProperty Name "<#Rework Count#>"}
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute 'qlik_load:ReworkCount'}
+        ReworkCount : SINT;
+
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

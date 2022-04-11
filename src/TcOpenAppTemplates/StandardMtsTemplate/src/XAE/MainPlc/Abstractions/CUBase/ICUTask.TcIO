@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ICUTask" Id="{343605ca-9899-4f92-af75-d6c9f6962b10}">
+    <Declaration><![CDATA[INTERFACE ICUTask
+]]></Declaration>
+    <Property Name="Task" Id="{79c92659-cce6-4fd1-8646-993eb5b2eb99}">
+      <Declaration><![CDATA[PROPERTY Task : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{4770c50c-d51e-4d68-855b-885130702611}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

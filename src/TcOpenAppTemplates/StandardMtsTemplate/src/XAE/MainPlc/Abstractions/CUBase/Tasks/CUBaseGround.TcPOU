@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CUBaseGround" Id="{6f1d9fb3-575b-4879-af87-70bd5e814ef6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT CUBaseGround EXTENDS TcoTaskedSequencer
+VAR
+	_groundDone : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CancelGround" Id="{46466624-8a95-0eaf-1b09-e1122d31ffd8}">
+      <Declaration><![CDATA[METHOD INTERNAL CancelGround
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_groundDone := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="GroundDone" Id="{b43649aa-3f30-0aae-3ddc-98b2bbcd0dfa}">
+      <Declaration><![CDATA[PROPERTY GroundDone : BOOL]]></Declaration>
+      <Get Name="Get" Id="{09aa944f-9da0-05e5-356c-dfbcbf966722}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[GroundDone := _groundDone;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

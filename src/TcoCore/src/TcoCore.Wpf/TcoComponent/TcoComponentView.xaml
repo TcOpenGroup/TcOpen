@@ -29,7 +29,7 @@
                             Margin="5,0,5,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+                            Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
                             Text="{Binding ., Converter={tcoCore:NameOrSymbolConverter}}"
                             TextAlignment="Left"
                             TextWrapping="WrapWithOverflow" />
@@ -42,10 +42,10 @@
                     </Grid>
                 </Expander.Header>
                 <Grid>
-                    <ContentControl Content="{Binding ComponentDetails, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                    <ContentControl Margin="5,0,0,0" Content="{Binding ComponentDetails, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
                 </Grid>
             </Expander>
-            <Separator Margin="5" />
+            <!--<Separator Margin="5" />-->
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="HmiTemplate.Wpf.Views.Data.ProcessTraceability.ProcessTraceabilityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HmiTemplate.Wpf.Views.Data.ProcessTraceability"
+             xmlns:s="clr-namespace:HmiTemplate.Wpf.Properties"   
+             xmlns:vortexs="http://vortex.security.mts/xaml" 
+             xmlns:vortex="http://vortex.mts/xaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:ProcessTraceabilityViewModel></local:ProcessTraceabilityViewModel>
+    </UserControl.DataContext>
+    <Grid>
+        <vortexs:PermissionBox Grid.Row="1" Permissions="Administrator|can_user_open_process_traceability" SecurityMode="Disabled">
+            <vortex:TcoDataExchangeDisplayView DataContext="{Binding ProcessData}" x:Name="fu">
+                <vortex:TcoDataExchangeDisplayView.DataListColumns>
+                    <DataGridTextColumn Binding="{Binding _Created, Converter={vortex:HumanizeDateConverter}}" Header="{x:Static s:strings.Created}"/>
+                    <DataGridTextColumn Binding="{Binding _Modified, Converter={vortex:HumanizeDateConverter}}" Header="{x:Static s:strings.Modified}"/>
+                    <DataGridTextColumn
+                                        Width="*"
+                                        Binding="{Binding EntityHeader.IsMaster}" Header="Master"/>
+                </vortex:TcoDataExchangeDisplayView.DataListColumns>
+            </vortex:TcoDataExchangeDisplayView>
+        </vortexs:PermissionBox>
+    </Grid>
+</UserControl>

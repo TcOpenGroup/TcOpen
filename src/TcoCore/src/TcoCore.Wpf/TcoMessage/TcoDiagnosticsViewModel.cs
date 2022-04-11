@@ -54,29 +54,29 @@
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
-        internal void UpdateMessages()
-        {
-            if (DiagnosticsRunning)
-            {
-                return;
-            }
-
+        public void UpdateMessages()
+        {           
             lock (updatemutex)
             {
+                if (DiagnosticsRunning)
+                {
+                    return;
+                }
+            
                 DiagnosticsRunning = true;
 
-                Task.Run(() =>
-                {
+                //Task.Run(() =>
+                //{
                     MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages()
                                              .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)                                             
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
 
-                }).Wait();
+                //}).Wait();
 
                 DiagnosticsRunning = false;
-            }
+            }       
         }
         void RogerSelectedMessage()
         {

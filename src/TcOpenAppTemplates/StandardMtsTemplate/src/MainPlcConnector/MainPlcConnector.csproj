@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>net48;net5.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Localizations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Localizations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Localizations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_meta\echac\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoData\src\TcoDataConnector\TcoDataConnector.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+  </ItemGroup>
+</Project>

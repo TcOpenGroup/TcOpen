@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoInnerTask" Id="{32a077ba-f7ce-468a-bbb2-acb8a4aa0725}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInnerTask EXTENDS TcoCore.TcoTask
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="OnAbort" Id="{70f4f2ae-6a57-40c1-b734-eb9af2c62b0e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ParentSequencer.OnAbort();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{fd0f4399-f0e7-45df-9cf8-b68b28ed33db}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ParentSequencer.OnDone();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{6522d2db-df2e-4f47-b9af-69a66764140b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ParentSequencer.OnError();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{75a1bee8-a5b6-42e9-98a9-f2a262c15e14}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ParentSequencer.OnStart();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ParentSequencer" Id="{b47d7ee8-2db9-4d5c-a6d3-e6e81bf68ba3}">
+      <Declaration><![CDATA[PROPERTY PRIVATE ParentSequencer : REFERENCE TO TcoTaskedSequencer]]></Declaration>
+      <Get Name="Get" Id="{31cee498-99ed-475a-b7ab-379b9d48137a}">
+        <Declaration><![CDATA[VAR
+	_sequencer : POINTER TO TcoTaskedSequencer;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _sequencer) THEN // Check if _Parent is Station001
+    ParentSequencer REF= _sequencer^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

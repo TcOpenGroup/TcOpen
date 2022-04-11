@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="OperatorInfo" Id="{e8f1a1f6-3458-4107-ab96-c9cf5a6b2384}">
+    <Declaration><![CDATA[TYPE OperatorInfo EXTENDS TcoCore.TcoStruct :
+STRUCT
+	UserName : STRING(255);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

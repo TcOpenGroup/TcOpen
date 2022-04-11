@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ICUBase" Id="{e0435234-64f6-47a6-80fd-c2b672a20857}">
+    <Declaration><![CDATA[INTERFACE ICUBase
+]]></Declaration>
+    <Property Name="AutomatTask" Id="{0973134a-28ab-409f-89d6-09a89d3c2b07}">
+      <Declaration><![CDATA[PROPERTY AutomatTask : REFERENCE TO CUBaseAutomat]]></Declaration>
+      <Get Name="Get" Id="{875b00fc-90da-4e77-90bf-2b8bbd7567de}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="GroundTask" Id="{1d3de518-7983-4b14-bc52-cecc3a9f28ce}">
+      <Declaration><![CDATA[PROPERTY GroundTask : REFERENCE TO CUBaseGround]]></Declaration>
+      <Get Name="Get" Id="{aeb7dbf2-8845-4132-943f-b1517c4d10de}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="ProcessDataManager" Id="{a36eb78f-c57b-4cc6-9daa-ad73e6b1ba37}">
+      <Declaration><![CDATA[PROPERTY ProcessDataManager : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{7ae5dbe0-0c01-41d7-9272-ab0df9e64885}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

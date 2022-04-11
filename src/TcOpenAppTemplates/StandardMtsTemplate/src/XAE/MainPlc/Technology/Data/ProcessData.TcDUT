@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ProcessData" Id="{113396d1-0fe0-4862-b140-87fe92cd116d}">
+    <Declaration><![CDATA[{attribute clr [Container(Layout.Tabs)]}
+TYPE
+    ProcessData EXTENDS TcoData.TcoEntity :
+    STRUCT
+        {attribute clr [Container(Layout.Stack)]}
+        {attribute clr [Group(Layout.GroupBox)]}
+        {attribute addProperty Name "<#ID#>"}
+        {attribute clr [RenderIgnore()]}
+        {attribute 'qlik_association_field'}
+        {attribute 'qlik_load:Id'}
+        {attribute 'qlik_select:_Id_1'}
+        qlikId : STRING(254);
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty Name "<#Created#>"}
+        {attribute 'qlik_time_partition:Shift:[Morning]06:00:00-14:00:00;[Afternoon]14:00:00-22:00:00;[Night]22:00:00-06:00:00'}
+        _Created : DT;
+        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+        {attribute addProperty Name "<#Modified#>"}
+        _Modified : DT;
+        {attribute addProperty Name "<#Entity header#>"}
+        EntityHeader : EntityHeader     := (Parent := THISSTRUCT);
+        CU00x : CU00xProcessData := (Parent := THISSTRUCT);
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

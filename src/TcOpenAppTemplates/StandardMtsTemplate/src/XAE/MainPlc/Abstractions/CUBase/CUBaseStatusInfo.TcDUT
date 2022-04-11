@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="CUBaseStatusInfo" Id="{0c2cb051-bd9e-41fb-9ccd-015b2464ed4a}">
+    <Declaration><![CDATA[TYPE
+    CUBaseStatusInfo EXTENDS TcoCore.TcoStruct :
+    STRUCT
+        Mode                   : eCUMode;
+        CurrentTaskDescription : STRING;
+        CurrentUid             : INT;
+        CurrentOperation       : STRING(255);
+        CurrentCycleTime       : TIME;
+        CurrentIsInStepMode    : BOOL;
+        CurrentCleanCycleTime  : TIME;
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

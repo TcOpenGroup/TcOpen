@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Technology" Id="{20d051ba-8e3a-4d8b-9fb7-71f6957f3a63}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
+VAR
+    _processSettings     : ProcessDataManager(THIS^);
+    _technologySettings  : TechnologicalDataManager(THIS^);
+    _processTraceability : ProcessDataManager(THIS^);
+    {attribute addProperty Name "<#AUTOMAT ALL#>"}
+    _automatAllTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty Name "<#GROUND ALL#>"}
+    _groundAllTask : TcoCore.TcoTask(THIS^);
+    _cu00x         : CU00x(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AllowAutomat" Id="{0aa54757-4c4d-0cde-13e5-b7414e695af4}">
+      <Declaration><![CDATA[METHOD AllowAutomat : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AllowAutomat := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AllowGround" Id="{858f08f9-14d3-065d-1aa4-279cc3111ba4}">
+      <Declaration><![CDATA[METHOD AllowGround : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AllowGround := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AllowManual" Id="{b0df765b-d61a-0a9e-2201-2c76ce14ddcf}">
+      <Declaration><![CDATA[METHOD AllowManual :  BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AllowManual := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AutomatAllTask" Id="{af39f865-7b9c-0790-2b3f-049d4170441c}">
+      <Declaration><![CDATA[PROPERTY AutomatAllTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{8b138ea6-eaf2-064a-001d-c0652c900632}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AutomatAllTask REF= _automatAllTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ForceStepMode" Id="{703a4ad0-e2bf-0a26-02d9-59b6c1ce971e}">
+      <Declaration><![CDATA[METHOD ForceStepMode : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ForceStepMode := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="GroundAllTask" Id="{517b8e00-2011-0b98-35b3-4181b5529b5d}">
+      <Declaration><![CDATA[PROPERTY GroundAllTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{ac972d75-9264-065d-3fee-04e760569681}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[GroundAllTask REF= _groundAllTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Main" Id="{d1d0e200-21d1-4642-b4c8-2fd801b60f39}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_processSettings();
+THIS^.RtcSynchronize(true, '', 60);
+_cu00x();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnExit" Id="{29dbb73f-9a28-0fe3-31dc-e1185889822b}">
+      <Declaration><![CDATA[
+(*~
+	<docu>
+		<summary>
+			Called upon exit from the context. When overridden in derived class allows to execute an arbitrary logic after closing the context cycle.	
+		</summary>			
+	</docu>	
+~*)METHOD PROTECTED OnExit
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_automatAllTask.DoneWhen(TRUE);
+_groundAllTask.DoneWhen(TRUE);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ProcessSettings" Id="{5f876a71-a280-42cf-9f33-fc8ef671f9a2}">
+      <Declaration><![CDATA[PROPERTY ProcessSettings : REFERENCE TO ProcessDataManager]]></Declaration>
+      <Get Name="Get" Id="{4cb3435a-d869-4802-9d86-6466a1c918f7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessSettings REF= _processSettings;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TechnologicalSettings" Id="{c5ffbe54-7294-04ed-3bd7-73d2651f9af8}">
+      <Declaration><![CDATA[PROPERTY TechnologicalSettings : REFERENCE TO TechnologicalDataManager]]></Declaration>
+      <Get Name="Get" Id="{7029ad92-6154-0241-2993-9cb7de1fadac}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TechnologicalSettings REF= _technologySettings;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

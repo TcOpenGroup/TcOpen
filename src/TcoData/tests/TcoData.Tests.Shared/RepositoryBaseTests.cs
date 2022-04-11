@@ -20,7 +20,7 @@ namespace TcoDataUnitTests
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
             repository.OnCreate = null;
             repository.OnRead = null;
@@ -415,9 +415,7 @@ namespace TcoDataUnitTests
                 return;
 #endif
             //-- Arrange
-
             var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
-
             var testObjectAltered = new DataTestObjectAlteredStructure() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
 
 
@@ -426,7 +424,6 @@ namespace TcoDataUnitTests
             repository.Create("test1", testObject);
             repository_altered_structure.Create("test2", testObjectAltered);
             repository.Create("test3", testObject);
-
 
             //-- Act
 
