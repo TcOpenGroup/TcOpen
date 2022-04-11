@@ -208,7 +208,7 @@ namespace TemplateTests
 
             Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
-            Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);
+            Assert.AreEqual(rec.CU00x.Header.NextOnPassed, cuData.EntityHeader.NextStation.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(MainPlc.eStations.CU00x, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);
             Assert.AreEqual(false, cuData.EntityHeader.WasReset.Synchron);
@@ -245,7 +245,7 @@ namespace TemplateTests
 
             Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
-            Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);
+            Assert.AreEqual(rec.CU00x.Header.NextOnPassed, cuData.EntityHeader.NextStation.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(MainPlc.eStations.NONE, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);
             Assert.AreEqual(false, cuData.EntityHeader.WasReset.Synchron);
@@ -283,10 +283,49 @@ namespace TemplateTests
 
             Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.Passed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
-            Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);
+            Assert.AreEqual(rec.CU00x.Header.NextOnPassed, cuData.EntityHeader.NextStation.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.Passed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(MainPlc.eStations.NONE, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);
             Assert.AreEqual(false, cuData.EntityHeader.WasReset.Synchron);
+        }
+
+        [Test]
+        [Timeout(5000)]
+        public void run_automat_mode_load_open_entity_then_ground()
+        {
+            var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
+            var data = Entry.Plc.MAIN._technology._processSettings._data;
+            data._EntityId.Synchron = "default";
+            var cu = Entry.Plc.MAIN._technology._cu00x;
+            var automat = cu._automatTask;
+            var cuData = cu._processData._data;
+
+            automat._dataLoadProcessSettings.Synchron = true;
+            automat._dataCreateNew.Synchron = true;
+            automat._dataOpen.Synchron = true;
+
+            cu._manualTask.Execute(); // Reset other tasks
+
+            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
+
+            cu._groundTask._task.Execute();
+
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
+
+            cu._automatTask._task.Execute();
+
+            while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
+
+
+            cu._groundTask._task.Execute();
+
+            while (cu._groundTask._currentStep.ID.Synchron != 10000) ;
+
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(true, cuData.EntityHeader.WasReset.Synchron);
+            Assert.AreEqual(TcoInspectors.eOverallResult.Failed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
+            Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);          
+            Assert.AreEqual(MainPlc.eStations.CU00x, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);           
         }
     }
 }

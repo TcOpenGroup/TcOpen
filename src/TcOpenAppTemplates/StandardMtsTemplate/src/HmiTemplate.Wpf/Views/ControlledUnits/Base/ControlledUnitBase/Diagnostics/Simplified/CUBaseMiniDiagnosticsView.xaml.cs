@@ -70,7 +70,7 @@ namespace MainPlc
 
                 sw.Stop();
                 updateRate = (updateRate + sw.ElapsedMilliseconds) / ++updateCount;
-                messageUpdateTimer.Interval = updateRate < 100 ? 100 : updateRate + 100;               
+                messageUpdateTimer.Interval = updateRate < 300 ? 300 : updateRate + 300;                    
             }
 
           

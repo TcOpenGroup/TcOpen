@@ -75,7 +75,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF (Step(inStepID, TRUE, 'DISCARD ENTITY DATA')) THEN
     //-------------------------------------		
-	StepCompleteWhen(THIS^.Station.EntityFlowDiscard(Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
+	StepCompleteWhen(THIS^.Station.EntityFlowDiscard(EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);				   		    				
     //-------------------------------------
 END_IF]]></ST>
       </Implementation>

@@ -20,7 +20,7 @@ END_VAR
     //-------------------------------------		
 	IF(Station.ProcessDataManager.Exists(EntityId).Done) THEN
 		IF(Station.ProcessDataManager._idExistsTask.Exists) THEN
-			StepCompleteWhen(THIS^.Station.EntityFlowOpenForOperations(EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);
+			StepCompleteWhen(THIS^.Station.EntityFlowDiscard(EntityId, Station.ProcessDataManager.Data.CU00x.Header).Done);
 		ELSE
 			CompleteStep();
 		END_IF
