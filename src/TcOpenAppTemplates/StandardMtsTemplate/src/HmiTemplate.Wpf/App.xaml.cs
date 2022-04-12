@@ -20,7 +20,7 @@ namespace HmiTemplate.Wpf
     {
         public App()
         {
-            MainPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 150;
+            MainPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
 
             var authenticationService = SecurityManager
                 .Create(new RavenDbRepository<UserData>(new RavenDbRepositorySettings<UserData>(new string[] { Constants.CONNECTION_STRING_DB }, "Users", "", "")));

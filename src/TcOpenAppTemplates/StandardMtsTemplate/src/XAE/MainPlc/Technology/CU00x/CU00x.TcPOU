@@ -23,8 +23,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-THIS^.CuId := eStations.CU00x;
+      <ST><![CDATA[THIS^.CuId := eStations.CU00x;
 _cuProcessData REF= THIS^.ProcessDataManager.Data.CU00x;
 _cuTechnologicalData REF=  THIS^.Technology.TechnologicalSettings.Data.CU00x;
 
@@ -62,7 +61,7 @@ IF NOT (AutomatTask.Task.Busy
 		OR GroundTask.Task.Busy
 		OR ManualTask.Task.Busy) 
 THEN
-	NoMode();
+	Idle();
 END_IF
 
 
@@ -193,6 +192,21 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="Idle" Id="{83cfb354-866f-0f83-2445-735ead10a56a}" FolderPath="Modes\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Code to be called cylically when `CU00x` idle; no other mode is active.
+		</summary>
+	</docu>
+~*)
+METHOD Idle : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="InitializeComponents" Id="{5a5fba3f-8ac9-4756-a6a5-163b8c66ad67}">
       <Declaration><![CDATA[METHOD InitializeComponents : BOOL
 ]]></Declaration>
@@ -247,21 +261,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="NoMode" Id="{83cfb354-866f-0f83-2445-735ead10a56a}" FolderPath="Modes\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Code to be called cylically when `CU00x` idle; no other mode is active.
-		</summary>
-	</docu>
-~*)
-METHOD NoMode : BOOL
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Technology" Id="{0e688a71-683a-45e9-ad1b-4b5b04f7d71e}">
       <Declaration><![CDATA[PROPERTY Technology : REFERENCE TO Technology]]></Declaration>
       <Get Name="Get" Id="{6127ba68-461c-4b3d-aa46-b1cbb1962cc4}">

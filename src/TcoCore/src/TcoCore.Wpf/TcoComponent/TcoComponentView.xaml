@@ -38,7 +38,7 @@
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"
                                         Margin="5"/>
-                        <tcoCore:HealthIndicatorView Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding MessageHandler}" />
+                        <!--<tcoCore:HealthIndicatorView Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding MessageHandler}" />-->
                     </Grid>
                 </Expander.Header>
                 <Grid>

@@ -54,7 +54,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="10"
-                        ItemsSource="{Binding Tasks}">
+                        ItemsSource="{Binding TaskControls}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel HorizontalAlignment="Right" />
@@ -77,7 +77,7 @@
                 HorizontalScrollBarVisibility="Auto"
                 VerticalScrollBarVisibility="Auto">
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Tasks}">
+                    <ItemsControl ItemsSource="{Binding TaskControls}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel />
