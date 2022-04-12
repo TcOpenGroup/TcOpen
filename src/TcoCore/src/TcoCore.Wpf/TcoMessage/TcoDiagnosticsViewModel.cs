@@ -54,7 +54,7 @@
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
-        public void UpdateMessages()
+        public void UpdateMessages(eMessageCategory category = eMessageCategory.All)
         {           
             lock (updatemutex)
             {
@@ -67,7 +67,7 @@
 
                 //Task.Run(() =>
                 //{
-                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages()
+                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages(category)
                                              .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)                                             
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);

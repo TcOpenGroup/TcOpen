@@ -43,7 +43,7 @@ namespace MainPlc
 
         private void UpdateMessages()
         {
-           
+            
             var inSight = false;
             TcoDiagnosticsViewModel MessageHandler = null;
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
@@ -61,20 +61,18 @@ namespace MainPlc
             });
             bool isAutoUpdate = MessageHandler == null ? false : MessageHandler.AutoUpdate;
 
+            
             if (inSight && isAutoUpdate)
             {
                 var sw = new System.Diagnostics.Stopwatch();
                 sw.Start();
                 
-                MessageHandler?.UpdateMessages();
+                MessageHandler?.UpdateMessages(eMessageCategory.Notification);
 
                 sw.Stop();
                 updateRate = (updateRate + sw.ElapsedMilliseconds) / ++updateCount;
-                messageUpdateTimer.Interval = updateRate < 300 ? 300 : updateRate + 300;                    
-            }
-
-          
-
+                messageUpdateTimer.Interval = updateRate < 300 ? 300 : (updateRate * 2) + 300;                    
+            }          
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

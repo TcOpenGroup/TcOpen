@@ -31,17 +31,17 @@ namespace MainPlc
             }
         }
 
-        public IEnumerable<object> _tasks = new List<object>();
-        public IEnumerable<object> Tasks
+        public IEnumerable<object> _taskControls = new List<object>();
+        public IEnumerable<object> TaskControls
         {
             get
             {
                 if (Component != null && Component.GetChildren() != null)
-                {                                         
-                    _tasks = Component.GetChildren<ITcoTasked>();                    
+                {
+                    _taskControls = Component.GetChildren<ITcoTasked>();                    
                 }
 
-                return _tasks;
+                return _taskControls;
             }
         }
 

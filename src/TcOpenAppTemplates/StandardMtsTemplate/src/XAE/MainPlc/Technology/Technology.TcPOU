@@ -2,14 +2,14 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="Technology" Id="{20d051ba-8e3a-4d8b-9fb7-71f6957f3a63}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
-VAR
-    _processSettings     : ProcessDataManager(THIS^);
-    _technologySettings  : TechnologicalDataManager(THIS^);
-    _processTraceability : ProcessDataManager(THIS^);
+VAR	
+    _processSettings     : ProcessDataManager(THIS^);  			//a.k.a receipe
+    _technologySettings  : TechnologicalDataManager(THIS^);		//a.k.a machine settings
+    _processTraceability : ProcessDataManager(THIS^);			//the same structure as process setting but filled with actual production data (measurements, inspection results, etc)
     {attribute addProperty Name "<#AUTOMAT ALL#>"}
-    _automatAllTask : TcoCore.TcoTask(THIS^);
+    _automatAllTask : TcoCore.TcoTask(THIS^);					// Commmand-like taks to execute automation mode on whole technology. Handled in controlled units.
     {attribute addProperty Name "<#GROUND ALL#>"}
-    _groundAllTask : TcoCore.TcoTask(THIS^);
+    _groundAllTask : TcoCore.TcoTask(THIS^);					// Commmand-like taks to execute ground mode on whole technology. Handled in controlled units.
     _cu00x         : CU00x(THIS^);
 END_VAR
 ]]></Declaration>
@@ -85,8 +85,34 @@ END_VAR
 ~*)
 METHOD PROTECTED Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_processSettings();
-THIS^.RtcSynchronize(true, '', 60);
+        <ST><![CDATA[(*
+	Context settings 
+*)
+
+// RTC Synchronisation
+THIS^.RtcSynchronize(TRUE,  
+					 '',    // Provide AMS ID of the time source, leave blank if local. 
+					 60);
+
+// Messenger logger settings
+_settings.Messaging.MessageDigestMethod := eMessageDigestMethod.CRC32;
+_settings.Messaging.MessengerLoggingMethod := eMessengerLogMethod.OnEventRisen;
+
+(*
+	
+	Data managers
+
+*)
+
+_processSettings();
+_technologySettings();
+
+(*
+
+	Controlled units
+	
+*)
+
 _cu00x();]]></ST>
       </Implementation>
     </Method>
