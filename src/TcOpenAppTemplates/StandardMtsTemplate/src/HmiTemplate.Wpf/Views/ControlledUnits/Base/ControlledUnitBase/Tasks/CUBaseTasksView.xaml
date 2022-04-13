@@ -13,8 +13,12 @@
     <d:UserControl.DataContext>
         <local:CUBaseControlViewModel />
     </d:UserControl.DataContext>
-    <DockPanel>
-        <Grid DockPanel.Dock="Top">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition MaxHeight="250"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -97,9 +101,11 @@
         <!-- Diagnostics card -->
         <materialDesign:Card
             VerticalAlignment="Bottom"
-            DockPanel.Dock="Bottom"
+            Grid.Row="1"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <vortex:RenderableContentControl DataContext="{Binding Component}" PresentationType="MiniDiagnostics" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <vortex:RenderableContentControl DataContext="{Binding Component}" PresentationType="MiniDiagnostics" />
+            </ScrollViewer>
         </materialDesign:Card>
-    </DockPanel>
+    </Grid>
 </UserControl>
