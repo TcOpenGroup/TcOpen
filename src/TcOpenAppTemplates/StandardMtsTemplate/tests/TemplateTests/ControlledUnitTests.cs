@@ -29,6 +29,10 @@ namespace TemplateTests
             TraceabilityRepository.OnUpdate = (id, data) => { data._Modified = DateTime.Now; };
             Entry.Plc.MAIN._technology._cu00x._processData.InitializeRepository(TraceabilityRepository);
             //Entry.Plc.MAIN._technology._cu00x._processData.InitializeRemoteDataExchange(TraceabilityRepository);
+
+            //var a= Entry.Plc.MAIN._technology._cu00x._automatTask._task._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._automatTask._task._isServiceable.Cyclic;
+            //var b = Entry.Plc.MAIN._technology._cu00x._groundTask._task._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._groundTask._task._isServiceable.Cyclic;
+            //var c = Entry.Plc.MAIN._technology._cu00x._manualTask._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._manualTask._isServiceable.Cyclic;            
         }
 
         [SetUp]
@@ -92,15 +96,12 @@ namespace TemplateTests
         public void run_automat_mode_ground_done()
         {
             var cu = Entry.Plc.MAIN._technology._cu00x;
-            cu._manualTask.Execute(); // Reset other tasks
+           
+            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) cu._manualTask.Execute(); 
 
-            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy);
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
 
-            cu._groundTask._task.Execute();
-
-            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
-
-            cu._automatTask._task.Execute();
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
            
             Assert.AreEqual(eTaskState.Busy, (eTaskState)cu._automatTask._task._taskState.Synchron);
         }
@@ -125,7 +126,7 @@ namespace TemplateTests
 
             automat._dataLoadProcessSettings.Synchron = true;
 
-            automat._task.Execute();
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
@@ -155,14 +156,17 @@ namespace TemplateTests
             automat._dataCreateNew.Synchron = true;
 
             cu._manualTask.Execute(); // Reset other tasks
+          
 
             while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy);
 
-            cu._groundTask._task.Execute();
+            
 
-            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done);
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
 
-            cu._automatTask._task.Execute();
+
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute(); 
+            
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766);
 
@@ -200,9 +204,9 @@ namespace TemplateTests
 
             cu._groundTask._task.Execute();
 
-            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Busy) cu._groundTask._task.Execute();
 
-            cu._automatTask._task.Execute();
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
@@ -239,7 +243,7 @@ namespace TemplateTests
 
             while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
 
-            cu._automatTask._task.Execute();
+            while((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 10000) ;
 
@@ -273,11 +277,11 @@ namespace TemplateTests
 
             while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
 
-            cu._groundTask._task.Execute();
+            
 
-            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute(); 
 
-            cu._automatTask._task.Execute();
+            while((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 10000) ;
 
@@ -308,11 +312,11 @@ namespace TemplateTests
 
             while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
 
-            cu._groundTask._task.Execute();
+            
 
-            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
 
-            cu._automatTask._task.Execute();
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
@@ -326,6 +330,49 @@ namespace TemplateTests
             Assert.AreEqual(TcoInspectors.eOverallResult.Failed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);          
             Assert.AreEqual(MainPlc.eStations.CU00x, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);           
+        }
+
+
+        [Test]       
+        [Repeat(100)]
+        public void run_automat_mode_load_create_new_entity_many_times()
+        {
+            return;
+            var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
+            var data = Entry.Plc.MAIN._technology._processSettings._data;
+            data._EntityId.Synchron = "default";
+            var cu = Entry.Plc.MAIN._technology._cu00x;
+            var automat = cu._automatTask;
+            var cuData = cu._processData._data;
+
+            automat._dataLoadProcessSettings.Synchron = true;
+            automat._dataCreateNew.Synchron = true;
+
+            cu._manualTask.Execute(); // Reset other tasks
+
+
+            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
+
+            System.Threading.Thread.Sleep(1000);
+
+            cu._groundTask._task.Execute();
+
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done || !cu._groundTask._groundDone.Synchron) ;
+
+            while((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
+
+            while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
+
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Console.WriteLine(rec._Created.ToString().Substring(0, 19));
+            Console.WriteLine(cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
+#if NET5_0_OR_GREATER
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
+#else
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.ToString().Substring(0, 19));
+#endif
         }
     }
 }

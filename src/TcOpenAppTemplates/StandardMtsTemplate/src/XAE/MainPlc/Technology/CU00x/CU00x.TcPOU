@@ -214,7 +214,12 @@ METHOD Idle : BOOL
         <ST><![CDATA[_components.horizontalCylinder(inoAtHomePos:=IO.IN[0] , inoAtWorkPos:=IO.IN[1], inoToHomePos:=IO.OUT[0], inoToWorkPos:=IO.OUT[1] );
 _components.verticalCylinder(inoAtHomePos:=IO.IN[2] , inoAtWorkPos:=IO.IN[3], inoToHomePos:=IO.OUT[2], inoToWorkPos:=IO.OUT[3] );
 _components.gripperCylinder(inoAtHomePos:=IO.IN[4] , inoAtWorkPos:=IO.IN[5], inoToHomePos:=IO.OUT[4], inoToWorkPos:=IO.OUT[5] );
-_components.boltPresenceSensor(inoSignal := IO.IN[6]);]]></ST>
+_components.boltPresenceSensor(inoSignal := IO.IN[6]);
+
+_components.horizontalCylinder1(inoAtHomePos:=IO.IN[0] , inoAtWorkPos:=IO.IN[1], inoToHomePos:=IO.OUT[0], inoToWorkPos:=IO.OUT[1] );
+_components.verticalCylinder1(inoAtHomePos:=IO.IN[2] , inoAtWorkPos:=IO.IN[3], inoToHomePos:=IO.OUT[2], inoToWorkPos:=IO.OUT[3] );
+_components.gripperCylinder1(inoAtHomePos:=IO.IN[4] , inoAtWorkPos:=IO.IN[5], inoToHomePos:=IO.OUT[4], inoToWorkPos:=IO.OUT[5] );
+_components.boltPresenceSensor1(inoSignal := IO.IN[6]);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Manual" Id="{f43c6193-c9c5-0244-248c-08c5ef114438}" FolderPath="Modes\">

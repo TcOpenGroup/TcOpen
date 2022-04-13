@@ -11,7 +11,16 @@
 		{attribute addProperty Name "(A3)Gripper"}
 		gripperCylinder : TcoPneumatics.TcoCylinder(THISSTRUCT);
 		{attribute addProperty Name "Bolt presence sensor"}
-		boltPresenceSensor : TcoElements.TcoDi(THISSTRUCT); 		
+		boltPresenceSensor : TcoElements.TcoDi(THISSTRUCT); 
+
+		{attribute addProperty Name "(A1)Horizontal Axis"}
+        horizontalCylinder1 : TcoPneumatics.TcoCylinder(THISSTRUCT);
+		{attribute addProperty Name "(A2)Vertical Axis"}
+		verticalCylinder1 : TcoPneumatics.TcoCylinder(THISSTRUCT);
+		{attribute addProperty Name "(A3)Gripper"}
+		gripperCylinder1 : TcoPneumatics.TcoCylinder(THISSTRUCT);
+		{attribute addProperty Name "Bolt presence sensor"}
+		boltPresenceSensor1 : TcoElements.TcoDi(THISSTRUCT); 		
     END_STRUCT
 END_TYPE
 ]]></Declaration>

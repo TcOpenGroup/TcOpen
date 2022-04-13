@@ -24,7 +24,12 @@ METHOD PROTECTED Main : BOOL
 Station.Components.horizontalCylinder.Service();
 Station.Components.verticalCylinder.Service();
 Station.Components.gripperCylinder.Service();
-Station.Components.boltPresenceSensor.Service();]]></ST>
+Station.Components.boltPresenceSensor.Service();
+
+Station.Components.horizontalCylinder1.Service();
+Station.Components.verticalCylinder1.Service();
+Station.Components.gripperCylinder1.Service();
+Station.Components.boltPresenceSensor1.Service();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{9e5b3c71-1f5b-4076-a710-81816a9a4500}">
