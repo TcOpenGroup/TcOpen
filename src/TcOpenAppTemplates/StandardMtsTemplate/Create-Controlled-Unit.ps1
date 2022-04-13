@@ -1,14 +1,17 @@
-Param([Parameter(Mandatory=$true)][string]$newCuName)
+Param( [Parameter(Mandatory=$true)]
+       [string]$newCuName,
+       [Parameter(Mandatory=$true , HelpMessage="Use CU00x as the default template")]
+       [string]$CuTemplateName )
 
 function Copy-Template($newName)
 {
-    $templateFolder = "CU00x"
+    $templateFolder = $CuTemplateName
     Copy-Item  $templateFolder $newName -Recurse
 }
 
 function Rename-Files($newName)
 {
-    Get-ChildItem -File -Recurse | Rename-Item -NewName { $_.Name -Replace "CU00x", $newName }
+    Get-ChildItem -File -Recurse | Rename-Item -NewName { $_.Name -Replace $CuTemplateName, $newName }
 }
 
 function Rename-Function-Blocks($newName)
@@ -16,7 +19,7 @@ function Rename-Function-Blocks($newName)
     $files = Get-ChildItem -File -Recurse 
     foreach($file in $files)
     {
-        $newContent = (Get-Content $file.FullName ).Replace("CU00x",$newName) 
+        $newContent = (Get-Content $file.FullName ).Replace($CuTemplateName,$newName) 
         Set-Content $file.FullName $newContent
     }
 }
@@ -35,8 +38,8 @@ function Remove-Tc-Id
 
 function Add-ProcessData-Instance($name, $processDataDutPath)
 {
-    $processDataTemplate = "`n`t`tCU00x : CU00xProcessData := (Parent := THISSTRUCT);"
-    $newProcessData = $processDataTemplate.Replace("CU00x",$name)
+    $processDataTemplate = "`n`t`t$CuTemplateName : $CuTemplateNameProcessData := (Parent := THISSTRUCT);"
+    $newProcessData = $processDataTemplate.Replace($CuTemplateName,$name)
     $startOfProcessDataRegion = (Get-Content $processDataDutPath | Select-String "END_STRUCT" ).LineNumber
     $processDataDUT = Get-Content $processDataDutPath
     $processDataDUT[$startOfProcessDataRegion -2] += $newProcessData
@@ -45,8 +48,8 @@ function Add-ProcessData-Instance($name, $processDataDutPath)
 
 function Add-TechnologyData-Instance($name, $processDataDutPath)
 {
-    $techDataTemplate = "`n`t`tCU00x : CU00xTechnologicalData := (Parent := THISSTRUCT);"
-    $newProcessData = $techDataTemplate.Replace("CU00x",$name)
+    $techDataTemplate = "`n`t`t$CuTemplateName : $CuTemplateNameTechnologicalData := (Parent := THISSTRUCT);"
+    $newProcessData = $techDataTemplate.Replace($CuTemplateName,$name)
     $startOfProcessDataRegion = (Get-Content $processDataDutPath | Select-String "END_STRUCT" ).LineNumber
     $processDataDUT = Get-Content $processDataDutPath
     $processDataDUT[$startOfProcessDataRegion -2] += $newProcessData
@@ -89,10 +92,20 @@ function Link-Files-With-Project($name, $plcProjPath)
     Set-Content $plcProjPath $plcProjContent
 }
 
+function Template-Exits($templateName)
+{
+    return (Test-Path $templateName)
+}
 
 function Create-New-Controlled-Unit($name)
 {
-   Push-Location ".\src\XAE\MainPlc\Technology"   
+   Push-Location ".\src\XAE\MainPlc\Technology"
+   if (-Not (Template-Exits $CuTemplateName))
+   {
+    Write-Host "Template does not exits"
+    Pop-Location
+    return
+   }
    Copy-Template $name
    Push-Location $name  
    Rename-Files $name
@@ -107,4 +120,4 @@ function Create-New-Controlled-Unit($name)
 }
 
 
-Create-New-Controlled-Unit $newCuName
+Create-New-Controlled-Unit $newCuName 
