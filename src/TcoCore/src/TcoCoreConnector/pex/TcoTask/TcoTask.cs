@@ -27,11 +27,11 @@ namespace TcoCore
 
         private bool CanAbortTask()
         {
-            return this._isServiceable.Synchron;
+            return this._isServiceable.Cyclic;
         }
         private bool CanRestoreTask()
         {
-            return this._isServiceable.Synchron;
+            return this._isServiceable.Cyclic;
         }
 
         private void InitCommands()
@@ -78,7 +78,7 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Synchron && this._isServiceable.Synchron;
+            return this._enabled.CyclicReading ? this._enabled.Cyclic : this._enabled.Synchron  && this._isServiceable.CyclicReading ? this._isServiceable.Cyclic : this._isServiceable.Synchron;
         }
 
         /// <summary>
