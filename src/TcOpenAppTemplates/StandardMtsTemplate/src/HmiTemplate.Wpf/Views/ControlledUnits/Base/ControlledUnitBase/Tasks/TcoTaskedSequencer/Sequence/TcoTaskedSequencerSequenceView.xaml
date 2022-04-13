@@ -21,15 +21,17 @@
             <Expander.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition Width="600"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Component._currentStep.Description.Cyclic}"></TextBlock>
+                    <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Component._currentStep.ID.Cyclic}"></TextBlock>
+                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Component._currentStep.Description.Cyclic}"></TextBlock>
                     <WrapPanel Grid.Column="1" HorizontalAlignment="Left"
                                                VerticalAlignment="Center" >
                     </WrapPanel>
-                    <TextBlock FontSize="10" Style="{DynamicResource MaterialDesignBody2TextBlock}" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Component, Converter={vortex:NameOrSymbolConverter}}"></TextBlock>
+                    <TextBlock FontSize="10" Style="{DynamicResource MaterialDesignBody2TextBlock}" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Component, Converter={vortex:NameOrSymbolConverter}}"></TextBlock>
                 </Grid>
             </Expander.Header>
             <Grid>
