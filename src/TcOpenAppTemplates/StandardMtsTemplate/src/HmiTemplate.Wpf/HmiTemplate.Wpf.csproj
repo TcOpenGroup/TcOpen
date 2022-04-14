@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.RichTextBox.Wpf" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoData\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoElements\src\Wpf\TcoElements.Wpf\TcOpen.Inxton.TcoElements.Wpf.csproj" />
@@ -26,6 +30,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>strings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Components\CUBaseComponentsView.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Data\CUBaseDataView.xaml.cs">
       <SubType>Code</SubType>
@@ -58,6 +65,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Components\CUBaseComponentsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Data\CUBaseDataView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

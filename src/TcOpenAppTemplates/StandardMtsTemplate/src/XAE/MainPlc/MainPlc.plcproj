@@ -77,6 +77,12 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Technology\CU00x\Automat\CU00xAutomatParalell_1_Task.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Technology\CU00x\Automat\CU00xAutomatTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Technology\CU00x\Data\CU00xTechnologicalData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -90,9 +96,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Technology\CU00x\CU00x.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\CU00x\CU00xAutomatTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Technology\CU00x\CU00xGroundTask.TcPOU">
@@ -126,6 +129,7 @@
     <Folder Include="Abstractions\Technology" />
     <Folder Include="Abstractions\TcoCore" />
     <Folder Include="Technology" />
+    <Folder Include="Technology\CU00x\Automat" />
     <Folder Include="Technology\Data" />
     <Folder Include="Technology\CU00x" />
     <Folder Include="Technology\CU00x\Components" />

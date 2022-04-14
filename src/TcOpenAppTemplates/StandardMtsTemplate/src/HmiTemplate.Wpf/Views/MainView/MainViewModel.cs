@@ -1,5 +1,6 @@
 ﻿using HmiTemplate.Wpf.Data;
 using HmiTemplate.Wpf.Properties;
+using HmiTemplate.Wpf.Views.Logs;
 using HmiTemplate.Wpf.Views.Operator;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace HmiTemplate.Wpf.Views.MainView
             this.OpenCommand(this.AddCommand(typeof(OperatorView), strings.Operator));
             this.AddCommand(typeof(DataView), strings.Data); 
             this.AddCommand(typeof(UserManagementView), strings.UserManagement);
-
+            this.AddCommand(typeof(LogsView), "Logs");
             this.OpenLoginWindowCommand = new TcOpen.Inxton.Input.RelayCommand(a => OpenLoginWindow());
             this.LogOutWindowCommand = new TcOpen.Inxton.Input.RelayCommand(a => TcOpen.Inxton.TcoAppDomain.Current.AuthenticationService.DeAuthenticateCurrentUser() );
         }

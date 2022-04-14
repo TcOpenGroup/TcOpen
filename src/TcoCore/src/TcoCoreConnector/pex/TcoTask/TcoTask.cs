@@ -78,7 +78,11 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.CyclicReading ? this._enabled.Cyclic : this._enabled.Synchron  && this._isServiceable.CyclicReading ? this._isServiceable.Cyclic : this._isServiceable.Synchron;
+            var isEnabled = this._enabled.CyclicReading ? this._enabled.Cyclic : this._enabled.Synchron;
+            var isServiceable = this._isServiceable.CyclicReading ? this._isServiceable.Cyclic : this._isServiceable.Synchron;
+
+            return isEnabled && isServiceable;
+                
         }
 
         /// <summary>

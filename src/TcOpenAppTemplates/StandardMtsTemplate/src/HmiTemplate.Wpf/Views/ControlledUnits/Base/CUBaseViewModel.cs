@@ -16,9 +16,12 @@ namespace MainPlc
     {
         public CUBaseViewModel()
         {           
-            this.OpenCommand(this.AddCommand(typeof(CUBaseTasksView), "Control", this ));       
+            this.OpenCommand(this.AddCommand(typeof(CUBaseTasksView), "Control", this));       
             this.AddCommand(typeof(CUBaseDataView), "Data", this);
+            this.AddCommand(typeof(CUBaseComponentsView), "Components", this);
             this.AddCommand(typeof(CUBaseDiagView), "Diagnostics", this);
+            
+            
             this.OpenDetailsCommand = new TcOpen.Inxton.Input.RelayCommand((a) => OpenDetails());
         }
 
@@ -50,6 +53,8 @@ namespace MainPlc
         public ProcessData OnlineData { get { return Component.GetChildren<TcoData.TcoDataExchange>().FirstOrDefault()?.GetChildren<TcoData.TcoEntity>().FirstOrDefault() as ProcessData; } }
 
         public EntityHeader EntityHeader { get { return OnlineData.EntityHeader; } }
+
+        public object Components { get { return Component.GetChildren<CUComponentsBase>().FirstOrDefault(); } }
 
         void Update()
         {

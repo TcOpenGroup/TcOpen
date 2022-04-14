@@ -334,10 +334,9 @@ namespace TemplateTests
 
 
         [Test]       
-        [Repeat(100)]
+        [Repeat(10000000)]
         public void run_automat_mode_load_create_new_entity_many_times()
-        {
-            return;
+        {           
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
             var data = Entry.Plc.MAIN._technology._processSettings._data;
             data._EntityId.Synchron = "default";
@@ -353,7 +352,7 @@ namespace TemplateTests
 
             while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(250);
 
             cu._groundTask._task.Execute();
 

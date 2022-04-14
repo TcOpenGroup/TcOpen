@@ -5,8 +5,8 @@
 {attribute addProperty Name "Controlled unit template"}
 FUNCTION_BLOCK CU00x EXTENDS CUBase
 VAR
-    _cuProcessData       : REFERENCE TO CU00xProcessData;
-    _cuTechnologicalData : REFERENCE TO CU00xTechnologicalData;
+    _cuProcessDataDisplay       :  CU00xProcessData;
+    _cuTechnologicalDataDisplay :  CU00xTechnologicalData;
     _components          : CU00xComponents := (Parent := THIS^);
 	{attribute addProperty Name "<#MANUAL#>"}
     {attribute addProperty ToolTip "<#Start manual/Service mode#>"}
@@ -19,13 +19,12 @@ VAR
     {attribute addProperty Name "<#AUTOMAT#>"}
     {attribute addProperty ToolTip "<#Starts automatic sequence. Before start you need to perform grounding sequence.#>"}
 	{attribute clr [RenderAuthorized("controlled_unit_can_automat")]}
-    _automatTask : CU00xAutomatTask(THIS^, TcoCore.eRestoreMode.None);       
+    _automatTask : CU00xAutomatTask(THIS^, TcoCore.eRestoreMode.None);       	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[THIS^.CuId := eStations.CU00x;
-_cuProcessData REF= THIS^.ProcessDataManager.Data.CU00x;
-_cuTechnologicalData REF=  THIS^.Technology.TechnologicalSettings.Data.CU00x;
+
 
 
 (*
@@ -53,7 +52,7 @@ Manual();
 
 
 (*
-	When no mode is active 'NoMode' method should be called.
+	When no mode is active 'Idle' method should be called.
 	'NoMode' method shouls contain code that renders this cu idle. 
 *)
 
@@ -71,6 +70,9 @@ END_IF
 *)
 
 UpdateInfo();
+
+_cuProcessDataDisplay := ProcessDataManager.Data.CU00x;
+_cuTechnologicalDataDisplay := Technology.TechnologicalSettings.Data.CU00x;
 
 
 ]]></ST>

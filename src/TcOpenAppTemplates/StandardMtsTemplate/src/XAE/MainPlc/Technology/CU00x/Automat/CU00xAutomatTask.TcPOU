@@ -5,6 +5,7 @@
 VAR
 	_dialog : TcoCore.TcoDialog(THIS^);
 	_missingProcessSettingMessage : TcoCore.TcoMessenger(THIS^);	
+	_paralellTask : CU00xAutomatParalell_1_Task(THIS^, TcoCore.eRestoreMode.None);
 END_VAR
 
 VAR
@@ -261,7 +262,7 @@ IF (Step(10000, TRUE, 'LAST STEP')) THEN
     //-------------------------------------	
 END_IF
 
-]]></ST>
+_paralellTask();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{8fe4788f-029c-4df9-a93a-9297bee7e169}">
@@ -270,7 +271,9 @@ END_IF
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Station.GroundTask.Restore();
-Station.ManualTask.Restore();]]></ST>
+Station.ManualTask.Restore();
+_paralellTask.Restore();
+_paralellTask._task.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Station" Id="{c497129d-26cb-43ef-a7d7-df3034f001ea}">

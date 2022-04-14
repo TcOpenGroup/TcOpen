@@ -1,4 +1,6 @@
-﻿using Vortex.Presentation.Wpf;
+﻿using System.Collections.Generic;
+using Vortex.Presentation.Wpf;
+using TcoCore;
 
 namespace MainPlc
 {
@@ -25,5 +27,20 @@ namespace MainPlc
         }
 
         public override object Model { get => Component; set => Component = (TcoTaskedSequencer)value; }
+
+        public IEnumerable<object> _parallelTasks = new List<object>();
+        public IEnumerable<object> ParallelTasks
+        {
+            get
+            {
+                if (Component != null && Component.GetChildren() != null)
+                {
+                    _parallelTasks = Component.GetChildren<TcoSequencerBase>();
+                }
+
+                return _parallelTasks;
+            }
+        }
+
     }
 }

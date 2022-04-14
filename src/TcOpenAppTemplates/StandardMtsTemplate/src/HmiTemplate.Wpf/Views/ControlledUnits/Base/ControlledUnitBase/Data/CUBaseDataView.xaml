@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="Element" Grid.IsSharedSizeScope="True">
-        <vortex:RenderableContentControl DataContext="{Binding OnlineData}" PresentationType="ShadowDisplaySlim-ShadowDisplay"></vortex:RenderableContentControl>
+        <TabControl>
+            <TabItem Header="{Binding AttributeName}" DataContext="{Binding Component}">
+                <vortex:RenderableContentControl DataContext="{Binding _cuProcessDataDisplay}" PresentationType="ShadowDisplaySlim-ShadowDisplay"></vortex:RenderableContentControl>
+            </TabItem>
+            <TabItem Header="Entity data">
+                <vortex:RenderableContentControl DataContext="{Binding OnlineData}" PresentationType="ShadowDisplaySlim-ShadowDisplay"></vortex:RenderableContentControl>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

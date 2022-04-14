@@ -41,8 +41,9 @@ namespace MainPlc
         }
 
         private ProcessData ProcessData { get; set; }
-        
+        private dynamic CuProcessData { get; set; }
 
+        private int c = 0;
         private void UpdateDataTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var isInSight = false;
@@ -55,8 +56,11 @@ namespace MainPlc
 
             if (isInSight)
             {
-                if(ProcessData == null) ProcessData = context?.Component.GetDescendants<ProcessData>().FirstOrDefault();
-                ProcessData.FlushOnlineToShadow();
+                if (ProcessData == null) ProcessData = context?.Component.GetDescendants<ProcessData>().FirstOrDefault();
+                if (CuProcessData == null) CuProcessData = context?.Component.GetChildren<CUProcessDataBase>().FirstOrDefault();
+                               
+                CuProcessData.FlushOnlineToShadow();                
+                ProcessData.FlushOnlineToShadow();               
             }
         }
     }

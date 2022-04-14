@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CU00xAutomatParalell_1_Task" Id="{9100e615-15b9-0e46-102a-be6dd0540361}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CU00xAutomatParalell_1_Task EXTENDS TcoTaskedSequencer 
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Run();]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{738e56f5-b180-0d7a-3d4b-e023b5347a06}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of **Instance.Run()** method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+THIS^.ModeController.Mode := ParentSequence.ModeController.Mode;
+
+
+IF (Step(1000, TRUE, 'PARALELL STEP')) THEN
+    //-------------------------------------    
+		StepCompleteWhen(CurrentStep.Duration >= T#3S);	
+    //-------------------------------------
+END_IF
+
+
+IF (Step(10000, TRUE, 'PARALELL TASK DONE')) THEN
+    //-------------------------------------
+    _task.DoneWhen(TRUE);
+    //-------------------------------------	
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ParentSequence" Id="{7ac2da96-928d-01d5-3f41-19bf6253f5f8}">
+      <Declaration><![CDATA[PROPERTY ParentSequence : REFERENCE TO CU00xAutomatTask]]></Declaration>
+      <Get Name="Get" Id="{ede87723-a00e-0288-0152-dfa30b58e0ee}">
+        <Declaration><![CDATA[VAR
+    _parentSequence : POINTER TO CU00xAutomatTask;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _parentSequence) THEN // Check if _Parent is Station001
+    ParentSequence REF= _parentSequence^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
