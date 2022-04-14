@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Markup;
+
 
 [assembly: AssemblyVersion("1.19.1.0")]
 [assembly: AssemblyFileVersion("1.19.1.0")]
