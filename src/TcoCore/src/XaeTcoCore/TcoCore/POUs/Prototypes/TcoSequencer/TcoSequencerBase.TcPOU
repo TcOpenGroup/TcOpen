@@ -703,7 +703,7 @@ IF (_StepIdUniquenessControlState >= eStepIdUniquenessControlState.Started AND _
 			IF inStepID = _pUid THEN
 				IF NOT _sequencerHasError THEN
 					_sequencerErrorId := eSequencerError.NotUniqueStepId;
-					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',UINT_TO_STRING(inStepID));
+					_message := CONCAT('ERROR NOT UNIQUE STEP_ID ',INT_TO_STRING(inStepID));
 					_currentStep.Description := _message;
 					_currentStep.Status := eStepStatus.Error;
 					THIS^.Messenger.Post(_message, eMessageCategory.ProgrammingError);
@@ -1081,7 +1081,9 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _modeController.Mode = eSequencerMode.Invalid THEN
+        <ST><![CDATA[{warning disable C0195}
+{warning disable C0196}
+IF _modeController.Mode = eSequencerMode.Invalid THEN
 	IF NOT _sequencerHasError THEN
 		_currentStep.Description := 'INVALID MODE OF THE SEQUENCER!!!';
 		_currentStep.Status := eStepStatus.Error;
@@ -1114,6 +1116,7 @@ IsStepIDUnique(inStepID);
 
 IF NOT _stepIdUniquenessChecked AND (_StepIdUniquenessControlState <> eStepIdUniquenessControlState.Deactivated) THEN
 	//Produce StepChanged after first run of the first step
+	{warning disable C0195}
 	_theOrderOfThePreviouslyExecutedStep := -1;
 	{warning enable C0195}
 	RETURN;
@@ -1341,7 +1344,9 @@ IF(_stepCounter < _theOrderOfTheCurrentlyEvaluatedStep) THEN
 	_stepCounter := _theOrderOfTheCurrentlyEvaluatedStep;
 END_IF
 
-_numberOfStepsInSequence := _stepCounter;]]></ST>
+_numberOfStepsInSequence := _stepCounter;
+{warning enable C0195}
+{warning enable C0196}]]></ST>
       </Implementation>
     </Method>
     <Method Name="Terminate" Id="{891406c3-dc43-0f05-194d-d0dd319d16ad}">
