@@ -23,7 +23,9 @@ namespace TcoCore
         /// <returns>Parent object of given type.</returns>
         public static T GetParent<T>(this IVortexObject obj, T parent = null) where T : class
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             if (obj is Vortex.Connector.RootVortexerObject || obj is Vortex.Connector.IConnector || obj == null)
+#pragma warning restore CS0618 // Type or member is obsolete
                 return parent;
 
             if (obj is T)

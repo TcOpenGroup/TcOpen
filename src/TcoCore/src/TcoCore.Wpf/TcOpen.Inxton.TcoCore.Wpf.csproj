@@ -32,6 +32,9 @@
 		<Content Include="VisualStudioToolsManifest.xml" IncludeInPackage="true" Pack="true" PackagePath="tools" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Include="..\..\..\..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+	<ItemGroup>
 		<Compile Update="Properties\Localization.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>

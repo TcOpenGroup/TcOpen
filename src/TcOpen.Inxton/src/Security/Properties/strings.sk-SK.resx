@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,82 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelsTheExectionOfThisAction" xml:space="preserve">
-    <value>Zruší akci.</value>
+  <data name="AccessDeniedCredentials" xml:space="preserve">
+    <value>Prístup bol odmietnutý. Prosím, uveďte niektoré platné poverenia.</value>
   </data>
-  <data name="TimeStamp" xml:space="preserve">
-    <value>Časové razítko</value>
+  <data name="AccessDeniedEmptyToken" xml:space="preserve">
+    <value>Prístup bol odmietnutý. Neplatný token autorizácie. Token je prázdny.</value>
   </data>
-  <data name="Message" xml:space="preserve">
-    <value>Zpráva</value>
+  <data name="AccessDeniedInvalidToken" xml:space="preserve">
+    <value>Prístup bol odmietnutý. Neplatný autorizačný token.</value>
   </data>
-  <data name="Location" xml:space="preserve">
-    <value>Umístění</value>
+  <data name="AccessDeniedPermissions" xml:space="preserve">
+    <value>Prístup bol odmietnutý. Vaše prístupové povolenia sú neplatné.</value>
   </data>
-  <data name="Category" xml:space="preserve">
-    <value>Kategorie</value>
+  <data name="CustomPrincipalError" xml:space="preserve">
+    <value>Predvolený princíp vlákna aplikácie musí byť pri spustení nastavený na objekt CustomPrincipal.</value>
   </data>
-  <data name="Symbol" xml:space="preserve">
-    <value>Symbol</value>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Heslá sa nezhodujú.</value>
   </data>
-  <data name="SubCategory" xml:space="preserve">
-    <value>Podkategorie</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Zdroj</value>
-  </data>
-  <data name="AffectedObject" xml:space="preserve">
-    <value>Podrobnosti ovlivněného objektu</value>
-  </data>
-  <data name="AutoUpdate" xml:space="preserve">
-    <value>Auto-obnova</value>
-  </data>
-  <data name="NoMessages" xml:space="preserve">
-    <value>Žádné hlásení</value>
-  </data>
-  <data name="Messages" xml:space="preserve">
-    <value>Zprávy</value>
-  </data>
-  <data name="MinCategoryFilter" xml:space="preserve">
-    <value>Filter kategorie</value>
-  </data>
-  <data name="UpdateMessages" xml:space="preserve">
-    <value>Obnovit hlášení</value>
-  </data>
-  <data name="FullName" xml:space="preserve">
-    <value>Jméno a příjmení</value>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>Podrobnosti</value>
-  </data>
-  <data name="PeripheryDetailsView_FullName" xml:space="preserve">
-    <value>Jméno a příjmení</value>
-  </data>
-  <data name="DiagnosticsRunnig" xml:space="preserve">
-    <value>Diagnostika běží... Čekejte prosim...</value>
-  </data>
-  <data name="PerCycleCount" xml:space="preserve">
-    <value>Počet hlásení na cyklus</value>
-  </data>
-  <data name="WeHaveNoFurtherInfoAboutThisMessage" xml:space="preserve">
-    <value>Žádne další informace</value>
-  </data>
-  <data name="NoMessageSelected" xml:space="preserve">
-    <value>Není vybraná žádná zpráva</value>
-  </data>
-  <data name="DiagnosticsDepth" xml:space="preserve">
-    <value>Hloubka diagnostiky</value>
-  </data>
-  <data name="Roger" xml:space="preserve">
-    <value>POTVRZENÍ</value>
-  </data>
-  <data name="RogerAll" xml:space="preserve">
-    <value>POTVRZENÍ VŠE</value>
-  </data>
-  <data name="Acknowledgement" xml:space="preserve">
-    <value>Potvrzení</value>
-  </data>
-  <data name="DiscartingMessages" xml:space="preserve">
-    <value>Nespracouvá zprávy</value>
+  <data name="TokenAssigned" xml:space="preserve">
+    <value>Token je už priradený inému používateľovi. Autorizačný token sa nezmenil.</value>
   </data>
 </root>
