@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using System.Windows;
+
 
 [assembly: AssemblyVersion("1.19.1.0")]
 [assembly: AssemblyFileVersion("1.19.1.0")]

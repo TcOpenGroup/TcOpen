@@ -1,3 +1,9 @@
+## Enchancements
+
+### TcoData
+
+- Implementation of IRepository for RavenDB. [More here](https://github.com/TcOpenGroup/TcOpen/tree/dev/src/TcoData/src/Repository/RavenDb#readme)
+
 # v0.5.x
 
 # From version 0.5 there are notable changes in the way we initialize structures and nested TcoObjects.
