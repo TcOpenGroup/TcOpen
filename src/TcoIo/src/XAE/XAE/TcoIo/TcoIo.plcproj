@@ -1,113 +1,108 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{f2ee7fef-c378-46bc-bb6a-865036f0c8ed}</ProjectGuid>
+    <ProjectGuid>{fda3ef9a-4eff-4450-8b41-a03bd3f0d043}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>IntegrationProjects</Name>
+    <Name>TcoIo</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
-    <Application>{1e4a9044-5d85-4876-b202-aea24ba3a973}</Application>
-    <TypeSystem>{f82e3398-0408-472f-99a6-28020d7251c5}</TypeSystem>
-    <Implicit_Task_Info>{e8ea90ff-0b9f-4b11-82a4-a5033b91d7c0}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{d8ff2022-c5cf-4efa-96e4-4f0a31cfe1f4}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{b27da154-04cb-40f1-890e-5dbe5aac3fb3}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{0a6c84fc-04f2-4cf6-90e0-8d0b4223219b}</LibraryReferences>
+    <Application>{5bf1b28c-99ca-4120-a06c-f8637314058c}</Application>
+    <TypeSystem>{639dc520-c20a-4c07-82df-548861cb9a76}</TypeSystem>
+    <Implicit_Task_Info>{3f7548d3-207f-4905-a7ce-9cfd0e2e9644}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{af6f445f-aaa5-4146-b49d-df6781ed34d0}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{cfacfea3-0452-45b2-9594-67637754fe0b}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{a8cd9a6b-9212-4c38-8cf3-aa3f2cb9a084}</LibraryReferences>
     <ProjectVersion>1.19.1.1780</ProjectVersion>
     <Company>Vortex.Library</Company>
-    <DefaultNamespace>IntegrationProjects</DefaultNamespace>
-    <Title>IntegrationProjects</Title>
+    <DefaultNamespace>TcoIo</DefaultNamespace>
+    <Title>TcoIo</Title>
     <Released>false</Released>
     <CombineIds>true</CombineIds>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_E68C61CD.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Inputs_A65FACA4.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Messenger\DiagnosticsMessenger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Messenger\DiagnosticsMessengers.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Outputs_23C0ED1D.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatDiagnosticsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDeviceState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\ITcoEthercatMasterDevice.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDevice.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitTask_2D604ED5.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\TcoSyncUnit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\InfoData_2A97D6CF.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\ITcoSyncUnit.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SyncUnit\WcState_0B2B16F9.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\TcoEthercat.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\SampleComponent\SampleComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskFunctionBuffer.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskIteration.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\IO\EC001.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\IO\IO.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="Technology\MAIN_TECHNOLOGY.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\Data\ST001_ProcessData.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\Data\ST001_ProcessDataManager.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\ST001.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\ST001_Components.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\ST001_ComponentsHandler.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\ST001_GroundSequence.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\ST001\ST001_AutomatSequence.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Technology\Technology.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToLibs\BeckhoffIo\EL1008\EL1008.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToLibs\BeckhoffIo\EL1008\EL1008_Data.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToLibs\BeckhoffIo\EL2008\EL2008.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToLibs\BeckhoffIo\EL2008\EL2008_Data.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToLibs\BeckhoffIo\WcState.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ToLibs\BeckhoffIo\InfoData.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Technology\IO" />
-    <Folder Include="Technology\ST001\Data" />
-    <Folder Include="ToLibs" />
-    <Folder Include="Technology" />
+    <Folder Include="Diagnostics" />
+    <Folder Include="Diagnostics\EtherCAT" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />
+    <Folder Include="Diagnostics\EtherCAT\SyncUnit" />
     <Folder Include="POUs" />
-    <Folder Include="POUs\SampleComponent" />
-    <Folder Include="Technology\ST001" />
-    <Folder Include="ToLibs\BeckhoffIo\EL1008" />
-    <Folder Include="ToLibs\BeckhoffIo" />
-    <Folder Include="ToLibs\BeckhoffIo\EL2008" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_EtherCAT">
+      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_EtherCAT</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -124,50 +119,15 @@
       <DefaultResolution>TcoCore, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="TcoData">
-      <DefaultResolution>TcoData, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoData</Namespace>
-    </PlaceholderReference>
-    <PlaceholderReference Include="TcoDrivesBeckhoff">
-      <DefaultResolution>TcoDrivesBeckhoff, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoDrivesBeckhoff</Namespace>
-    </PlaceholderReference>
-    <PlaceholderReference Include="TcoElements">
-      <DefaultResolution>TcoElements, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoElements</Namespace>
-    </PlaceholderReference>
-    <PlaceholderReference Include="TcoIo">
-      <DefaultResolution>TcoIo, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoIo</Namespace>
-    </PlaceholderReference>
-    <PlaceholderReference Include="TcoPneumatics">
-      <DefaultResolution>TcoPneumatics, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoPneumatics</Namespace>
-    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="IntegrationProjects.tmc">
+    <None Include="TcoIo.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoData">
-      <Resolution>TcoData, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoDrivesBeckhoff">
-      <Resolution>TcoDrivesBeckhoff, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoElements">
-      <Resolution>TcoElements, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoIo">
-      <Resolution>TcoIo, 1.19.1.1780 (Vortex.Library)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="TcoPneumatics">
-      <Resolution>TcoPneumatics, 1.19.1.1780 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
