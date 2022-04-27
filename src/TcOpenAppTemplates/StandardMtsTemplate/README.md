@@ -1,4 +1,4 @@
-<iframe src="https://giphy.com/embed/fVeAI9dyD5ssIFyOyM" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/OctoNation-work-construction-fVeAI9dyD5ssIFyOyM">via GIPHY</a></p>
+#!!! WORING ON IT !!!
 
 # MTS standard application template
 
@@ -21,7 +21,8 @@ If you are not familiar with the architecture of the TcOpen framework `context` 
 [here](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoContext.html) or more generic overview [here](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/Introduction.html).
 
 *Following video introduces the application context*
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Nr8Y-5GHSxE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[![TcoContext-Into](http://img.youtube.com/vi/Nr8Y-5GHSxE/0.jpg)](http://www.youtube.com/watch?v=Nr8Y-5GHSxE)
 
 # Technology object
 
