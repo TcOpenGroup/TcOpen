@@ -42,5 +42,7 @@ namespace MainPlc
             }
         }
 
+
+        public object StepController { get { return this.Component._modeController; } }
     }
 }
