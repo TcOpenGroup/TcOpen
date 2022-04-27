@@ -30,9 +30,12 @@ namespace HmiTemplate.Wpf
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
-                                        .WriteTo.Console()
-                                        //.WriteTo.RichTextBox(LogTextBox)
-                                        .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
+                                        .WriteTo.Console()     
+                                        .WriteTo.File(new Serilog.Formatting.Compact.RenderedCompactJsonFormatter(), "logs\\logs.log")
+                                        .MinimumLevel.Verbose()
+                                        .Enrich.WithEnvironmentName()
+                                        .Enrich.WithEnvironmentUserName()
+                                        .Enrich.WithEnrichedProperties()))
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
                 .SetEditValueChangeLogging(Entry.Plc.Connector)              
@@ -56,17 +59,7 @@ namespace HmiTemplate.Wpf
             SecurityManager.Manager.Service.AuthenticateUser("default", "");
             
         }
-
-       
-
-        public static System.Windows.Controls.RichTextBox LogTextBox { get; } = new System.Windows.Controls.RichTextBox()
-        {
-            Background = Brushes.Black,
-            Foreground = Brushes.LightGray,
-            FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New, monospace"),
-            VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto,            
-        };
-
+             
         private void SetUpRepositories()
         {
             var ProcessDataRepoSettings = new RavenDbRepositorySettings<PlainProcessData>(new string[] { Constants.CONNECTION_STRING_DB }, "ProcessSettings", "", "");
