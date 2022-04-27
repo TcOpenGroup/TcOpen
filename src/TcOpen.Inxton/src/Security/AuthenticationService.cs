@@ -34,7 +34,6 @@ namespace TcOpen.Inxton.Local.Security
 
         private List<UserData> GetAllUsers() => UserRepository.GetRecords("*", Convert.ToInt32(UserRepository.Count + 1), 0).ToList();
 
-#pragma warning disable CS1591
         public OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get; set; }
 
         public event OnUserAuthentication OnDeAuthenticating;
@@ -97,6 +96,7 @@ namespace TcOpen.Inxton.Local.Security
             {
                 OnUserAuthenticateFailed?.Invoke(username);
                 this.DeAuthenticateCurrentUser();
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{username}' has failed to authenticate with a password.{{payload}}", new { });
                 throw new UnauthorizedAccessException(strings.AccessDeniedCredentials);
             }
 
@@ -118,6 +118,7 @@ namespace TcOpen.Inxton.Local.Security
             UserAccessor.Instance.Identity = customPrincipal.Identity;
             OnUserAuthenticateSuccess?.Invoke(user.UserName);
             SetUserTimedOutDeAuthentication(userData.LogoutTime);
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{user.UserName}' has authenticated.{{payload}}", new { UserName = user.UserName, CanChangePassword = user.CanUserChangePassword, Roles = string.Join(",", user.Roles), Id = user.Id });
             return user;
         }
 
@@ -148,6 +149,7 @@ namespace TcOpen.Inxton.Local.Security
             {
                 OnUserAuthenticateFailed?.Invoke("empty token");
                 this.DeAuthenticateCurrentUser();
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User has failed to authenticate with a token (empty token).{{payload}}", new { });
                 throw new UnauthorizedAccessException(strings.AccessDeniedEmptyToken);
             }
 
@@ -156,6 +158,7 @@ namespace TcOpen.Inxton.Local.Security
             {
                 OnUserAuthenticateFailed?.Invoke("unknown token");
                 this.DeAuthenticateCurrentUser();
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User has failed to authenticate with a token (non-existing token).{{payload}}", new { });
                 throw new UnauthorizedAccessException(strings.AccessDeniedInvalidToken);
             }
 
@@ -174,6 +177,7 @@ namespace TcOpen.Inxton.Local.Security
                 customPrincipal.Identity = new AppIdentity.AnonymousIdentity();
                 UserAccessor.Instance.Identity = customPrincipal.Identity;
                 OnDeAuthenticated?.Invoke(userName);
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{userName}' has de-authenticated.{{payload}}", new { UserName = userName });
             }
         }
 
@@ -189,6 +193,8 @@ namespace TcOpen.Inxton.Local.Security
                 var user = this.UserRepository.Read(userName);
                 user.HashedPassword = this.CalculateHash(newPassword1, userName);
                 this.UserRepository.Update(userName, user);
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{authenticated.UserName}' has changed password.{{payload}}", 
+                    new { UserName = authenticated.UserName, CanChangePassword = authenticated.CanUserChangePassword, Roles = string.Join(",", authenticated.Roles) });
             }
         }
 
