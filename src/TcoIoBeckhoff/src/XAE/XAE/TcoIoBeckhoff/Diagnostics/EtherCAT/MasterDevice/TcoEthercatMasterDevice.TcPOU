@@ -100,6 +100,18 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="FB_init" Id="{22f82f09-19ce-024c-3a79-8b18f8715c1b}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : TcoCore.ITcoObject;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{1f3f21f3-3927-05fa-3e68-d519f92b8ad6}">
       <Declaration><![CDATA[(*~
 	<docu>

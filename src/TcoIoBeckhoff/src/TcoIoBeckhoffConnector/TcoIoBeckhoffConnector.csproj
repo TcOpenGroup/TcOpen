@@ -23,18 +23,10 @@
     <DefineConstants>PLC_DOCU</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="_meta\TcoIoBeckhoff.json" />
-    <None Remove="_meta\TcoIoBeckhoff.library" />
-    <None Remove="_meta\version.info" />
-  </ItemGroup>
-  <ItemGroup>    
-    <Content Include="_meta\TcoIoBeckhoff.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\TcoIoBeckhoff.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />      
-    <Content Include="_meta\TcoIoBeckhoff.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.7-alpha.695" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.7-alpha.695" />
+    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

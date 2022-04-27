@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EL4004_9786CACB" Id="{27de99e9-7a78-0aca-0286-1621403bd680}">
+    <Declaration><![CDATA[{attribute addProperty BoxType "EL4004-0000-0020"}
+{attribute addProperty Id "AO_Outputs_ChannelAT %Q*ARRAY[0..3] OF AO_Outputs_Channel_F57FA4F96480WcStateAT %I*WcState_28A8677510.1250InfoDataAT %I*InfoData_BC63D37F80100"}
+{attribute addProperty CRC "854605201"}
+{attribute addProperty SizeInBites "145"}
+{attribute addProperty SizeInBytes "18.125"}
+TYPE EL4004_9786CACB :
+STRUCT
+	{attribute addProperty Name "AO_Outputs_Channel"}
+	AO_Outputs_Channel : ARRAY[0..3] OF AO_Outputs_Channel_F57FA4F9;
+	{attribute addProperty Name "WcState"}
+	WcState : WcState_28A86775;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_BC63D37F;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

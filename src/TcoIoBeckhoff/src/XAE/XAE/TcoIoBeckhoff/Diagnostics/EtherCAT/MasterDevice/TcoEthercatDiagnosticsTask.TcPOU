@@ -139,6 +139,18 @@ END_VAR]]></Declaration>
 	ThrowWhen(_EcGetAllSlaveStates.bError OR _EcGetConfSlaves.bError);
 END_IF]]></ST>
     </Implementation>
+    <Method Name="FB_init" Id="{41043196-9647-0163-2843-1128e4796acb}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : TcoCore.ITcoObject;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="OnAbort" Id="{1d34a2b1-dc05-0e5d-0c9e-ab6bd89862de}">
       <Declaration><![CDATA[(*~
 	<docu>

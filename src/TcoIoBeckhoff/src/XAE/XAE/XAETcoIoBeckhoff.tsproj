@@ -6880,7 +6880,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel[8].Data_In[6]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 6"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel[9].Data_In[7]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 7"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.WcState.WcState" VarB="WcState^WcState"/>
@@ -6948,15 +6947,11 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel[7].Input" VarB="Channel 8^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel[8].Input" VarB="Channel 9^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel[9].Input" VarB="Channel 10^Input"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.WcState.WcState" VarB="WcState^WcState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 4 (EL2809)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.WcState.WcState" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel[0].Output" VarB="Channel 1^Output"/>
@@ -6978,7 +6973,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 5 (EL4004)">
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.WcState.WcState" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.AO_Outputs_Channel[0].Analog_output" VarB="AO Outputs Channel 1^Analog output"/>
@@ -6987,8 +6981,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.AO_Outputs_Channel[3].Analog_output" VarB="AO Outputs Channel 4^Analog output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 6 (EL2809)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.WcState.WcState" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel[0].Output" VarB="Channel 1^Output"/>
@@ -7033,7 +7025,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[9]" VarB="COM Inputs^Data In 9"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status" VarB="COM Inputs^Status"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.WcState.WcState" VarB="WcState^WcState"/>
@@ -7078,13 +7069,10 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Outputs.Frm0WcCtrl" VarB="Outputs^Frm0WcCtrl"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.InfoData.State" VarB="InfoData^State"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 15 (EL3403)">
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel[0].Active_power" VarB="PM Inputs Channel 1^Active power"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel[0].Current" VarB="PM Inputs Channel 1^Current"/>
@@ -7115,13 +7103,9 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Outputs_Channel[2].Index" VarB="PM Outputs Channel 3^Index"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.InfoData.State" VarB="InfoData^State"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.InfoData.State" VarB="InfoData^State"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 18 (EL3174-0002)">
@@ -7134,7 +7118,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel[5].Status" VarB="AI Standard Channel 4^Status"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel[6].Value" VarB="AI Standard Channel 4^Value"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.WcState.WcState" VarB="WcState^WcState"/>
@@ -7164,7 +7147,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[9]" VarB="COM Inputs^Data In 9"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status" VarB="COM Inputs^Status"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.WcState.WcState" VarB="WcState^WcState"/>
@@ -7196,14 +7178,11 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status" VarB="AI Standard^Status"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Value" VarB="AI Standard^Value"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.WcState.WcState" VarB="WcState^WcState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 21 (EL2008)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.WcState.WcState" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel[0].Output" VarB="Channel 1^Output"/>
@@ -7216,8 +7195,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel[7].Output" VarB="Channel 8^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 22 (EL2008)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.WcState.WcState" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel[0].Output" VarB="Channel 1^Output"/>
@@ -7239,14 +7216,11 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel[5].Status" VarB="AI Standard Channel 4^Status"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel[6].Value" VarB="AI Standard Channel 4^Value"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.WcState.WcState" VarB="WcState^WcState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.InfoData.State" VarB="InfoData^State"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 10 (EL6001)">
@@ -7274,7 +7248,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[9]" VarB="COM Inputs^Data In 9"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status" VarB="COM Inputs^Status"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.WcState.WcState" VarB="WcState^WcState"/>
@@ -7319,15 +7292,11 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel[7].Input" VarB="Channel 8^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel[8].Input" VarB="Channel 9^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel[9].Input" VarB="Channel 10^Input"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.WcState.InputToggle" VarB="WcState^InputToggle"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.WcState.WcState" VarB="WcState^WcState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 12 (EL2809)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.InfoData.State" VarB="InfoData^State"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.WcState.WcState" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel[0].Output" VarB="Channel 1^Output"/>
@@ -7348,8 +7317,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel[9].Output" VarB="Channel 10^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 13 (EK1110)">
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_13_EK1110.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
-				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_13_EK1110.InfoData.ObjectId" VarB="InfoData^ObjectId"/>
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_13_EK1110.InfoData.State" VarB="InfoData^State"/>
 			</OwnerB>
 		</OwnerA>
