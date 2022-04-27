@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Device_1_EtherCAT_B6FFA96B" Id="{7af72954-d464-0bb8-12ec-6eec4129bb7f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
+{attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
+{attribute addProperty Id "Term_1_EK1200Term_1_EK1200_368123D9320SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_E68C61CD28"}
+{attribute addProperty CRC "3070208363"}
+{attribute addProperty Size "400"}
+TYPE Device_1_EtherCAT_B6FFA96B :
+STRUCT
+	{attribute addProperty Name "Term_1_EK1200"}
+	Term_1_EK1200 : Term_1_EK1200_368123D9;
+	{attribute addProperty Name "SyncUnits"}
+	SyncUnits : SyncUnits_13973095;
+	{attribute addProperty Name "Inputs"}
+	Inputs : TcoIoBeckhoff.Inputs_A65FACA4;
+	{attribute addProperty Name "Outputs"}
+	Outputs : TcoIoBeckhoff.Outputs_23C0ED1D;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIoBeckhoff.InfoData_E68C61CD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

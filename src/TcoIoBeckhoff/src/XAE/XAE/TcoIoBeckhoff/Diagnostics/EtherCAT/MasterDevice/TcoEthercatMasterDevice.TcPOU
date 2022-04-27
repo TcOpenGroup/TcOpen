@@ -3,9 +3,9 @@
   <POU Name="TcoEthercatMasterDevice" Id="{2c5733bf-b0c9-0df1-398a-03fa7f389f8e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoEthercatMasterDevice EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoEthercatMasterDevice
 VAR_INPUT
-    Inputs   		:	Inputs_5FC39E3C;
-    InfoData		:	InfoData_45F98C50;
-	SyncUnits		:	POINTER TO SyncUnitTask_B4157F22;
+    Inputs   		:	Inputs_A65FACA4;
+    InfoData		:	InfoData_E68C61CD;
+	SyncUnits		:	POINTER TO SyncUnitTask_2D604ED5;
 	SyncUnitsSize	:	UINT;
 END_VAR
 
@@ -28,7 +28,7 @@ VAR
 	_DiagnosticsAvailable : BOOL;
 END_VAR
 VAR_OUTPUT
-    Outputs  : Outputs_C46FA7B3;
+    Outputs  : Outputs_23C0ED1D;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -230,13 +230,13 @@ SyncUnitHasSomeIssue :=	_state.AtLeastOneSlaveInInitState OR
     <Method Name="UpdateSyncUnitsStatus" Id="{b79c3bb4-6046-0a3d-3133-c7754b8cddb5}">
       <Declaration><![CDATA[METHOD UpdateSyncUnitsStatus
 VAR_INPUT
-	SyncUnits			:	POINTER TO SyncUnitTask_B4157F22;
+	SyncUnits			:	POINTER TO SyncUnitTask_2D604ED5;
 	SyncUnitsSize		:	UINT;
 END_VAR
 VAR
     _i					:	UINT;
-	_pSyncUnit			:	POINTER TO SyncUnitTask_B4157F22;
-	_SyncUnit			:	SyncUnitTask_B4157F22;
+	_pSyncUnit			:	POINTER TO SyncUnitTask_2D604ED5;
+	_SyncUnit			:	SyncUnitTask_2D604ED5;
 	_SyncUnitState		:	UINT;
 END_VAR
 ]]></Declaration>
@@ -246,9 +246,9 @@ _allDataValid := TRUE;
 _someDataInvalid := FALSE;
 
 IF SyncUnits<>0 THEN
-	_numberOfSyncUnits := SyncUnitsSize / SIZEOF(SyncUnitTask_B4157F22);
+	_numberOfSyncUnits := SyncUnitsSize / SIZEOF(SyncUnitTask_2D604ED5);
 	FOR _i := 0 TO _numberOfSyncUnits - 1 DO
-		_pSyncUnit					:=	SyncUnits + _i * SIZEOF(SyncUnitTask_B4157F22);
+		_pSyncUnit					:=	SyncUnits + _i * SIZEOF(SyncUnitTask_2D604ED5);
 		_SyncUnit					:=	_pSyncUnit^;	
 		_someSyncUnitHasSomeIssue 	:=	_someSyncUnitHasSomeIssue OR SyncUnitHasSomeIssue(_SyncUnit.InfoData.State);
 		_allDataValid				:=	_allDataValid AND NOT _SyncUnit.WcState.WcState;

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EL1809_7E2AAA64" Id="{f77e59c8-2d48-0b64-3402-ca18d417be9c}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL1809-0000-0018'}
+{attribute addProperty BoxType "EL1809-0000-0018"}
+{attribute addProperty Id "Channel_1AT %I*Channel_830843C11Channel_2AT %I*Channel_830843C11Channel_3AT %I*Channel_830843C11Channel_4AT %I*Channel_830843C11Channel_5AT %I*Channel_830843C11Channel_6AT %I*Channel_830843C11Channel_7AT %I*Channel_830843C11Channel_8AT %I*Channel_830843C11Channel_9AT %I*Channel_830843C11Channel_10AT %I*Channel_830843C11Channel_11AT %I*Channel_830843C11Channel_12AT %I*Channel_830843C11Channel_13AT %I*Channel_830843C11Channel_14AT %I*Channel_830843C11Channel_15AT %I*Channel_830843C11Channel_16AT %I*Channel_830843C11WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_102E2E2114"}
+{attribute addProperty CRC "2116725348"}
+{attribute addProperty Size "32"}
+TYPE EL1809_7E2AAA64 :
+STRUCT
+	{attribute addProperty Name "Channel_1"}
+	Channel_1 : Channel_830843C1;
+	{attribute addProperty Name "Channel_2"}
+	Channel_2 : Channel_830843C1;
+	{attribute addProperty Name "Channel_3"}
+	Channel_3 : Channel_830843C1;
+	{attribute addProperty Name "Channel_4"}
+	Channel_4 : Channel_830843C1;
+	{attribute addProperty Name "Channel_5"}
+	Channel_5 : Channel_830843C1;
+	{attribute addProperty Name "Channel_6"}
+	Channel_6 : Channel_830843C1;
+	{attribute addProperty Name "Channel_7"}
+	Channel_7 : Channel_830843C1;
+	{attribute addProperty Name "Channel_8"}
+	Channel_8 : Channel_830843C1;
+	{attribute addProperty Name "Channel_9"}
+	Channel_9 : Channel_830843C1;
+	{attribute addProperty Name "Channel_10"}
+	Channel_10 : Channel_830843C1;
+	{attribute addProperty Name "Channel_11"}
+	Channel_11 : Channel_830843C1;
+	{attribute addProperty Name "Channel_12"}
+	Channel_12 : Channel_830843C1;
+	{attribute addProperty Name "Channel_13"}
+	Channel_13 : Channel_830843C1;
+	{attribute addProperty Name "Channel_14"}
+	Channel_14 : Channel_830843C1;
+	{attribute addProperty Name "Channel_15"}
+	Channel_15 : Channel_830843C1;
+	{attribute addProperty Name "Channel_16"}
+	Channel_16 : Channel_830843C1;
+	{attribute addProperty Name "WcState"}
+	WcState : WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_102E2E21;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

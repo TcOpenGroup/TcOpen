@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EK1122_023FEC57" Id="{ea0d109d-4c6a-023a-3463-3d945aa5161c}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "InfoDataAT %I*InfoData_102E2E2114"}
+{attribute addProperty CRC "37743703"}
+{attribute addProperty Size "14"}
+TYPE EK1122_023FEC57 :
+STRUCT
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_102E2E21;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
