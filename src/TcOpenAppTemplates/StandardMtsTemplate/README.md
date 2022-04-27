@@ -1,24 +1,23 @@
-# !!!UNDER CONTSTUCTION!!!
+<iframe src="https://giphy.com/embed/fVeAI9dyD5ssIFyOyM" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/OctoNation-work-construction-fVeAI9dyD5ssIFyOyM">via GIPHY</a></p>
 
 # MTS standard application template
 
 ## Preliminary note
 
-This application template was developed for MTS company. We are making it available to the community for use or inspiration.
+The TcOpen group develops this application template in and for the MTS company. We are making it available to the community for use or inspiration.
 
-This application template will be further developed to meet the needs of the MTS. We will accept the input from the community. 
-There will be though some limits imposed to the changes of this particular template. 
-TcOpen will include different application templates that will be more open to the change from the community.
+The application template will develop to meet the needs of the MTS. We will accept the input from the community. 
+There are, though, some limits imposed on the changes of this particular template. 
+TcOpen will develop different application templates that will be more open to change.
 
 -------------------------------------------
 
 # Application template architecture
 
-The entry point of the application is the MAIN program cyclally called from the PLC task. 
-MAIN declares the instance of the `Technology` type that is the context of the whole application. All your code should be placed within the `Main` method of technology object (`_technology.Main()`) that will properly contextualize all your code.
+The application's entry point is the `MAIN` program called cyclically from the PLC task. 
+`MAIN` declares the instance of the `Technology` type that is the context of the whole application. You should place all your code within the `Main` method of technology object (`_technology.Main()`) that will contextualize all your code.
 
-
-If you are not familiar with the architecture of TcOpen framework context concept you can find more 
+If you are not familiar with the architecture of the TcOpen framework `context` concept, you can find more 
 [here](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoContext.html) or more generic overview [here](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/Introduction.html).
 
 *Following video introduces the application context*
@@ -26,37 +25,55 @@ If you are not familiar with the architecture of TcOpen framework context concep
 
 # Technology object
 
-Technology object contains additional object that relate to the technology as whole and so called `controlled units` that represent sufficiently autonomous parts of the technology (e.g. stations).
+`Technology` is **top/root object** of a comprehensive whole (production line, series of devices chained in an orderly fashion) that controls one PLC. The `technology` contains `controlled units` representing sufficiently autonomous parts of the technology (e.g., stations, devices, etc.).
 
-## ProcessData
+## Technology commands
 
-This application template aims to provide versastile model to allow for the extendend control of the program flow from manageble data set. Process data represent the set infomation that will be followed and processed during the production. One way of thinkig about the process data is the reciepe. Process data contain beside the instruction also data that arise during the production. Production data are being filled into the data set during the production operations.
+### GroundAll
 
-Typically at the beginning of the production the process data are loaded into the first controlled unit (station) an Id of the production entity is assigned and stored into data repository. Each controlled unit (station) later retrives the data for the given produciton entity at the beginning of the process and returns the data (enriched by additional information about the production) to the repository at the end of the process.
+The task that provides execution of ground task all controlled units within the technology. The ground task of each controlled unit should contain the control logic that brings the respective controlled unit into its initial state.
 
-## TechnologicalData
+### AutomatAll
 
-Technological data contain managable set of data that relate to the technology as a whole, such as drives settings, limits, global timers, etc. 
+The task that provides execution of automatic task all controlled units within the technology. Automat task provides each controlled unit's nominal (automatic) cycle logic.
 
-## ProcessTraceability
-
-Is PLC placeholder for accessing the production data repostitory. This object points to the same traceability repository as the `ProcessData` of any controlled unit.
-
-## GroundAll
-
-Task that provides execution of ground task all controlled units within the the technology. Ground task of each should contain the control logic that brings the respective controlled unit into initial state.
-
-## AutomatAll
-
-Task that provides execution of automatic task all controlled units within the the technology. Automat task provides the nominal automatic cycle logic of each contolled unit.
 
 ## Controlled units
 
-The technology can contain multiple controlled units. Controlled unit `CU00X` is a template from which other controlle units can derive.
+The technology can contain multiple controlled units. The controlled unit has different `modes`: 
+- **Ground**: brings the device into initial states (home position, state resets, etc.). The ground mode can contain subsequences for parallelization or organization of logic.
+- **Automat**: represents the standard run of the unit. Automat mode if of sequence type. The ground mode can contain subsequences for parallelization or organization of logic.
+- **Manual**: provides access to a series of tools to manipulate single components of the controlled unit.
+
+>More about sequences: [formal explanation](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoSequencer.html), [informal explanation](https://docs.tcopengroup.org/articles/TcOpenFramework/howtos/How_to_write_a_sequence/article.html)
+
+>More about tasks: [formal explanation](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoTask.html).
+
+Controlled units also contains two main structures:
+
+- **Components** encapsulates components (drives, sensors, pneumatical cylinders, etc.)
+- [**ProcessData**](#processdata) is a PLCs' working copy of combined receipe and tracebility data, that is persisted in a repository ([TcoData](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoData/Introduction.html)).
+
+![TechnologyOverview](assets/technology_overview.png)
+
+
+## ProcessData
+
+This application template provides a versatile model to allow for the extended control of the program flow from a manageable data set. Process data represent the set of information to follow and process during production. One way of thinking about the process data is the recipe that, besides the instructive data, contains information that arises during the production process. Production data are filled into the data set during the production operations.
+
+Typically, the process data are loaded at the beginning of the production into the first controlled unit (station). Then, an Id of the production entity is assigned and stored in the data repository. Each controlled unit (station) later retrieves the data for the given entity at the beginning of the process and returns the data (enriched by additional information about the production) to the repository at the end of the process.
+
+## TechnologicalData
+
+Technological data contain a manageable set of data related to the technology, such as drives settings, limits, global timers, etc. 
+
+## ProcessTraceability
+
+Process traceability is a PLC placeholder for accessing the production data repository. This object points to the same traceability repository as the `ProcessData` of any controlled unit.
 
 # Controlled unit template
-
-`CU00X` folder contains a template from which any controlled unit can be scaffolded. At this moment there is powershell script `Create-Controlled-Unit` located in the root of solution directory.
+Controlled unit `CU00X` is a template from which other controlle units can derive.
+`CU00X` folder contains a template from which any controlled unit can be scaffolded. At this moment, there is PowerShell script `Create-Controlled-Unit` located in the root of the solution directory.
 
 ~~~
 .\Create-Controlled-Unit.ps1 NEWCU
@@ -64,7 +81,7 @@ The technology can contain multiple controlled units. Controlled unit `CU00X` is
 
 > The script may not work as expected when the solution is opened as filtered solution (slnf).
 
-Running the script will modify the PLC project files; if the project is opened in the visual studio project reload will be required. You will need to add the call of the newly added controlled unit in the `Technology` manually.
+Running the script will modify the PLC project files; if the project is opened in the visual studio project reload will be required. In addition, you will need to add the call of the newly added controlled unit in the `Technology` manually.
 
 ~~~
 FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
@@ -92,11 +109,6 @@ _NEWCU();  <------ NEWLY ADDED
 
 //----------------------------------------------------
 ~~~
-
-
-
-
-
 
 
 

@@ -7,7 +7,7 @@ FUNCTION_BLOCK CU00x EXTENDS CUBase
 VAR
     _cuProcessDataDisplay       :  CU00xProcessData;
     _cuTechnologicalDataDisplay :  CU00xTechnologicalData;
-    _components          : CU00xComponents := (Parent := THIS^);
+    _components          		: CU00xComponents := (Parent := THIS^);
 	{attribute addProperty Name "<#MANUAL#>"}
     {attribute addProperty ToolTip "<#Start manual/Service mode#>"}
 	{attribute clr [RenderAuthorized("controlled_unit_can_manual")]}
