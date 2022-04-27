@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL3403_CC8150E3" Id="{821cd4c6-fbce-0f07-08d1-a2eee44a1c6e}">
+  <DUT Name="EL3403_200C4240" Id="{eb7d0d0c-e76d-0ad5-36c1-9544ef3be67c}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3403-0000-0023'}
 {attribute addProperty BoxType "EL3403-0000-0023"}
-{attribute addProperty Id "PM_Inputs_Channel_1AT %I*PM_Inputs_Channel_2F86808618PM_Inputs_Channel_2AT %I*PM_Inputs_Channel_2F86808618PM_Inputs_Channel_3AT %I*PM_Inputs_Channel_2F86808618PM_Status_dataAT %I*PM_Status_data_2A9514CB4PM_Outputs_Channel_1AT %Q*PM_Outputs_Channel_E5FBDE301PM_Outputs_Channel_2AT %Q*PM_Outputs_Channel_E5FBDE301PM_Outputs_Channel_3AT %Q*PM_Outputs_Channel_E5FBDE301WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_102E2E2114"}
-{attribute addProperty CRC "3431026915"}
-{attribute addProperty Size "77"}
-TYPE EL3403_CC8150E3 :
+{attribute addProperty Id "PM_Inputs_Channel_1AT %I*PM_Inputs_Channel_2F86808618PM_Inputs_Channel_2AT %I*PM_Inputs_Channel_2F86808618PM_Inputs_Channel_3AT %I*PM_Inputs_Channel_2F86808618PM_Status_dataAT %I*PM_Status_data_2A9514CB4PM_Outputs_Channel_1AT %Q*PM_Outputs_Channel_E5FBDE301PM_Outputs_Channel_2AT %Q*PM_Outputs_Channel_E5FBDE301PM_Outputs_Channel_3AT %Q*PM_Outputs_Channel_E5FBDE301WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
+{attribute addProperty CRC "537674304"}
+{attribute addProperty Size "73"}
+TYPE EL3403_200C4240 :
 STRUCT
 	{attribute addProperty Name "PM_Inputs_Channel_1"}
 	PM_Inputs_Channel_1 : PM_Inputs_Channel_2F868086;
@@ -25,7 +25,7 @@ STRUCT
 	{attribute addProperty Name "WcState"}
 	WcState : WcState_9091E0EB;
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_102E2E21;
+	InfoData : InfoData_32EB74EA;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

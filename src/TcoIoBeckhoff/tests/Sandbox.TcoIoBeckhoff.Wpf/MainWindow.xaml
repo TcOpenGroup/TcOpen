@@ -13,13 +13,26 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid DataContext="{Binding TcoIoBeckhoffTests.MAIN._tcc, Mode=OneWay}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
-        <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
-    </Grid>
-
+    <TabControl>
+        <TabItem>
+            <Grid DataContext="{Binding TcoIoBeckhoffTests.MAIN._tcc, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
+                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
+            </Grid>
+        </TabItem>
+        <TabItem>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding TcoIoBeckhoffTests.GVL_iXlinker}" RenderTransformOrigin="0.5,0.5"/>
+                <vortex:ObservableContentControl Grid.Column="1" PresentationType="ControlSlim" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}"></vortex:ObservableContentControl>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

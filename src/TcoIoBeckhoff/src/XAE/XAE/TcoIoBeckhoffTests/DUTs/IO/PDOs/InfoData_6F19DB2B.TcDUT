@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Channel_830843C1" Id="{997fcc86-3b9c-08d2-004f-4e6338ba60b6}">
+  <DUT Name="InfoData_6F19DB2B" Id="{f3c8dc9c-236a-08f8-2a89-96d1caf15302}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL1809-0000-0018'}
 {attribute addProperty BoxType "EL1809-0000-0018"}
-{attribute addProperty Id "InputAT %I*BOOL1"}
-{attribute addProperty CRC "2198356929"}
-{attribute addProperty Size "1"}
-TYPE Channel_830843C1 :
+{attribute addProperty Id "StateAT %I*UINT2"}
+{attribute addProperty CRC "1863965483"}
+{attribute addProperty Size "2"}
+TYPE InfoData_6F19DB2B :
 STRUCT
-	{attribute addProperty Name "Input"}
-	Input AT %I* : BOOL;
+	{attribute addProperty Name "State"}
+	State AT %I* : UINT;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

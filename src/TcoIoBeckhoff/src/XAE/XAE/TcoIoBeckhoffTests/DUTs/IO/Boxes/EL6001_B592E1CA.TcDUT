@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL6001_591FF369" Id="{1dda508e-fe67-0b4f-1dca-ad9173f87b8b}">
+  <DUT Name="EL6001_B592E1CA" Id="{5b7a10e2-3459-0d88-1e3c-ec35435de8e7}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6001-0000-0020'}
 {attribute addProperty BoxType "EL6001-0000-0020"}
-{attribute addProperty Id "COM_InputsAT %I*COM_Inputs_3801C95E30COM_OutputsAT %Q*COM_Outputs_DEF408EC27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_102E2E2114"}
-{attribute addProperty CRC "1495266153"}
-{attribute addProperty Size "73"}
-TYPE EL6001_591FF369 :
+{attribute addProperty Id "COM_InputsAT %I*COM_Inputs_3801C95E30COM_OutputsAT %Q*COM_Outputs_DEF408EC27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
+{attribute addProperty CRC "3046302154"}
+{attribute addProperty Size "69"}
+TYPE EL6001_B592E1CA :
 STRUCT
 	{attribute addProperty Name "COM_Inputs"}
 	COM_Inputs : COM_Inputs_3801C95E;
@@ -15,7 +15,7 @@ STRUCT
 	{attribute addProperty Name "WcState"}
 	WcState : WcState_9091E0EB;
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_102E2E21;
+	InfoData : InfoData_32EB74EA;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

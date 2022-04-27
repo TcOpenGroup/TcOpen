@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EK1100_023FEC57" Id="{12fe7d00-8d5a-0d96-1e10-800a160192bd}">
+  <DUT Name="EK1100_1FC0878B" Id="{87c34e18-42b6-0c79-1709-873be1df3924}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
-{attribute addProperty Id "InfoDataAT %I*InfoData_102E2E2114"}
-{attribute addProperty CRC "37743703"}
-{attribute addProperty Size "14"}
-TYPE EK1100_023FEC57 :
+{attribute addProperty Id "InfoDataAT %I*InfoData_6F19DB2B2"}
+{attribute addProperty CRC "532711307"}
+{attribute addProperty Size "2"}
+TYPE EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_102E2E21;
+	InfoData : InfoData_6F19DB2B;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
