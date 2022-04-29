@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,18 +8,34 @@
 
   <ItemGroup>
     <PackageReference Include="Serilog.Enrichers.EnrichedProperties" Version="1.0.63" />
-    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" /> 
   </ItemGroup>
-  
+
+	<ItemGroup>
+		<ProjectReference Include="..\MainPlcConnector\MainPlcConnector.csproj" />
+	</ItemGroup>
+
+	<!--PROJ-START-->
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoData\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoElements\src\Wpf\TcoElements.Wpf\TcOpen.Inxton.TcoElements.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoInspectors\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
-    <ProjectReference Include="..\..\..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj" />
-    <ProjectReference Include="..\MainPlcConnector\MainPlcConnector.csproj" />
+    <ProjectReference Include="..\..\..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj" />    
   </ItemGroup>
-	
+	<!--PROJ-END-->
+
+  <!--PCKG-START
+  <ItemGroup>
+    <PackageReference Include="TcOpen.Inxton.Data.Wpf" Version="0.5.0-alpha.834" />
+    <PackageReference Include="TcOpen.Inxton.TcoCore.Wpf" Version="0.5.0-alpha.834" />
+    <PackageReference Include="TcOpen.Inxton.TcoElements.Wpf" Version="0.5.0-alpha.834" />
+    <PackageReference Include="TcOpen.Inxton.TcoPneumatics.Wpf" Version="0.5.0-alpha.834" />
+    <PackageReference Include="TcOpen.Inxton.Local.Security.Wpf" Version="0.5.0-alpha.834" />
+    <PackageReference Include="TcOpen.Inxton.TcoInspectors.Wpf" Version="0.5.0-alpha.834" />
+  </ItemGroup>
+  PCKG-END-->
+
 	<ItemGroup>
 	  <ApplicationDefinition Update="App.xaml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
