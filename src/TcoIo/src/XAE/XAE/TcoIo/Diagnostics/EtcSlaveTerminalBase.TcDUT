@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="EtcSlaveTerminalBase" Id="{b93e26cd-5441-0782-1f60-5eb68061b724}">
+    <Declaration><![CDATA[{attribute clr [Container(Layout.Stack)]}
+{attribute clr [Group(Layout.GroupBox)]}
+{attribute addProperty PreviousPort "Unknown"}
+TYPE EtcSlaveTerminalBase :
+STRUCT
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

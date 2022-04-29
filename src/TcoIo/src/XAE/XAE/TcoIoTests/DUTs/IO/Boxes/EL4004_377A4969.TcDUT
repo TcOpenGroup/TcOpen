@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL4004_D2A7C9B7" Id="{5b9040df-40cc-0742-09f1-fde001838f71}">
+  <DUT Name="EL4004_377A4969" Id="{5e491f5f-160f-01bd-1bdf-5566bf111858}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL4004-0000-0020'}
 {attribute addProperty BoxType "EL4004-0000-0020"}
-{attribute addProperty Id "AO_Outputs_Channel_1AT %Q*AO_Outputs_Channel_BA7EBB7C2AO_Outputs_Channel_2AT %Q*AO_Outputs_Channel_BA7EBB7C2AO_Outputs_Channel_3AT %Q*AO_Outputs_Channel_BA7EBB7C2AO_Outputs_Channel_4AT %Q*AO_Outputs_Channel_BA7EBB7C2WcStateAT %I*WcState_0B2B16F91InfoDataAT %I*InfoData_32EB74EA10"}
-{attribute addProperty CRC "3534211511"}
+{attribute addProperty Id "TcoIo.EtcSlaveTerminalBaseAO_Outputs_Channel_1AT %Q*AO_Outputs_Channel_BA7EBB7C2AO_Outputs_Channel_2AT %Q*AO_Outputs_Channel_BA7EBB7C2AO_Outputs_Channel_3AT %Q*AO_Outputs_Channel_BA7EBB7C2AO_Outputs_Channel_4AT %Q*AO_Outputs_Channel_BA7EBB7C2WcStateAT %I*WcState_0B2B16F91InfoDataAT %I*InfoData_32EB74EA10"}
+{attribute addProperty CRC "930761065"}
 {attribute addProperty Size "19"}
-TYPE EL4004_D2A7C9B7 :
+TYPE EL4004_377A4969 EXTENDS TcoIo.EtcSlaveTerminalBase :
 STRUCT
 	{attribute addProperty Name "AO_Outputs_Channel_1"}
 	AO_Outputs_Channel_1 : AO_Outputs_Channel_BA7EBB7C;

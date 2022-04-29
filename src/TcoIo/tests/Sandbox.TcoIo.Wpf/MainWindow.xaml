@@ -14,7 +14,7 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem>
+        <TabItem Header="Diagnostic messages">
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -24,14 +24,18 @@
                 <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
             </Grid>
         </TabItem>
-        <TabItem>
+        <TabItem Header="Topology view">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding TcoIoTests.GVL_iXlinker}" RenderTransformOrigin="0.5,0.5"/>
-                <vortex:ObservableContentControl Grid.Column="1" PresentationType="ControlSlim" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}"></vortex:ObservableContentControl>
+                <!--<vortex:ObservableContentControl Grid.Column="1" PresentationType="ControlSlim" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}"></vortex:ObservableContentControl>-->
+                <ScrollViewer Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}">
+                    <vortex:ObservableContentControl PresentationType="Service" ></vortex:ObservableContentControl>
+                </ScrollViewer>
+
             </Grid>
         </TabItem>
     </TabControl>

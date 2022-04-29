@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Device_4_EtherCAT_7DA382B8" Id="{c3e39221-8d25-059e-22df-d46b14c4dd9e}">
+  <DUT Name="Device_4_EtherCAT_A14723B6" Id="{b38d1257-654f-068a-04f4-56fe138c8958}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
 {attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
-{attribute addProperty Id "Term_9_EK1100Term_9_EK1100_B6B701E6110Term_14_EK1100Term_14_EK1100_ED6DF06D285SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_E68C61CD28"}
-{attribute addProperty CRC "2107867832"}
+{attribute addProperty Id "Term_9_EK1100Term_9_EK1100_00369A35110Term_14_EK1100Term_14_EK1100_023262FB285SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_E68C61CD28"}
+{attribute addProperty CRC "2705793974"}
 {attribute addProperty Size "475"}
-TYPE Device_4_EtherCAT_7DA382B8 :
+TYPE Device_4_EtherCAT_A14723B6 :
 STRUCT
 	{attribute addProperty Name "Term_9_EK1100"}
-	Term_9_EK1100 : Term_9_EK1100_B6B701E6;
+	{attribute addProperty PreviousPort "Device 4 (EtherCAT) : Master"}
+	Term_9_EK1100 : Term_9_EK1100_00369A35;
 	{attribute addProperty Name "Term_14_EK1100"}
-	Term_14_EK1100 : Term_14_EK1100_ED6DF06D;
+	{attribute addProperty PreviousPort "Term 13 (EK1110) : B"}
+	Term_14_EK1100 : Term_14_EK1100_023262FB;
 	{attribute addProperty Name "SyncUnits"}
 	SyncUnits : SyncUnits_13973095;
 	{attribute addProperty Name "Inputs"}

@@ -801,6 +801,10 @@
 							<Type>LINT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status</Name>
 							<Type GUID="{35A61A0E-BDCA-1F30-1C38-5549D1C65DDA}">Status_3D84275F</Type>
 						</Var>
@@ -1727,7 +1731,7 @@
 					<Box Id="2" BoxType="9101" BoxFlags="#x00000020">
 						<Name>Term 2 (EL6002)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x17723052" RevisionNo="#x00130000" InfoDataAddr="true" InfoDataObjectId="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6002 Interface 2Ch. (RS232)" Desc="EL6002" PortABoxInfo="#x01000001">
+						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x17723052" RevisionNo="#x00130000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6002 Interface 2Ch. (RS232)" Desc="EL6002" PortABoxInfo="#x01000001">
 							<SyncMan>001080002600010001000000400080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000400080008000801022010000</SyncMan>
 							<SyncMan>001130002400010003000000000000003000001124010000</SyncMan>
@@ -2397,7 +2401,7 @@
 					<Box Id="3" BoxType="9099">
 						<Name>Term 3 (EL1809)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07113052" RevisionNo="#x00120000" InfoDataAddr="true" InfoDataObjectId="true" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1809 16Ch. Dig. Input 24V, 3ms" Desc="EL1809" PortABoxInfo="#x01000002">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07113052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1809 16Ch. Dig. Input 24V, 3ms" Desc="EL1809" PortABoxInfo="#x01000002">
 							<SyncMan>001002000000010004000000000000000200001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -2485,7 +2489,7 @@
 					<Box Id="4" BoxType="9099">
 						<Name>Term 4 (EL2809)</Name>
 						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0af93052" RevisionNo="#x00120000" InfoDataAddr="true" InfoDataObjectId="true" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2809 16Ch. Dig. Output 24V, 0.5A" Desc="EL2809" PortABoxInfo="#x01000003">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0af93052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2809 16Ch. Dig. Output 24V, 0.5A" Desc="EL2809" PortABoxInfo="#x01000003">
 							<SyncMan>000f01004400010003000000000000000100000f44090000</SyncMan>
 							<SyncMan>010f01004400010003000000000000000100010f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
@@ -2574,7 +2578,7 @@
 					<Box Id="5" BoxType="9099" BoxFlags="#x00000020">
 						<Name>Term 5 (EL4004)</Name>
 						<ImageId>1003</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0fa43052" RevisionNo="#x00140000" InfoDataAddr="true" InfoDataObjectId="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL4004 4Ch. Ana. Output 0-10V, 12bit" Desc="EL4004" PortABoxInfo="#x01000004">
+						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0fa43052" RevisionNo="#x00140000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL4004 4Ch. Ana. Output 0-10V, 12bit" Desc="EL4004" PortABoxInfo="#x01000004">
 							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
 							<SyncMan>001108002400010003000000000000000800001124010000</SyncMan>
@@ -2613,7 +2617,7 @@
 					<Box Id="6" BoxType="9099">
 						<Name>Term 6 (EL2809)</Name>
 						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0af93052" RevisionNo="#x00120000" InfoDataAddr="true" InfoDataObjectId="true" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2809 16Ch. Dig. Output 24V, 0.5A" Desc="EL2809" PortABoxInfo="#x01000005">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0af93052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2809 16Ch. Dig. Output 24V, 0.5A" Desc="EL2809" PortABoxInfo="#x01000005">
 							<SyncMan>000f01004400010003000000000000000100000f44090000</SyncMan>
 							<SyncMan>010f01004400010003000000000000000100010f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
@@ -2702,7 +2706,7 @@
 					<Box Id="7" BoxType="9101" BoxFlags="#x00000020">
 						<Name>Term 7 (EL6001)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" CycleMBoxPolling="true" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x17713052" RevisionNo="#x00140000" InfoDataAddr="true" InfoDataObjectId="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6001 Interface (RS232)" Desc="EL6001" PortABoxInfo="#x01000006">
+						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" CycleMBoxPolling="true" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x17713052" RevisionNo="#x00140000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6001 Interface (RS232)" Desc="EL6001" PortABoxInfo="#x01000006">
 							<SyncMan>0018f6002600010001000000f600f600f600001826010000</SyncMan>
 							<SyncMan>f618f6002200010002000000f600f600f600f61822010000</SyncMan>
 							<SyncMan>001018002400010003000000000000001800001024010000</SyncMan>
@@ -3500,7 +3504,7 @@
 						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000007"/>
 					</Box>
 				</Box>
-				<EtherCAT InfoDataDcTimeOffsets="true"/>
+				<EtherCAT/>
 			</Device>
 			<Device Id="4" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="3">
 				<Name>Device 4 (EtherCAT)</Name>
@@ -6035,4 +6039,632 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			</Device>
 		</Io>
 	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500821000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500831000403}" Id="#x02030040"/>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500840000403}" Id="#x02030030"/>
+		<OwnerA Name="TIPC^TcoIoTests^TcoIoTests Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.InfoData.AmsNetId" VarB="InfoData^AmsNetId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.InfoData.CfgSlaveCount" VarB="InfoData^CfgSlaveCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.InfoData.ChangeCount" VarB="InfoData^ChangeCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.InfoData.DevId" VarB="InfoData^DevId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Inputs.DevState" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Inputs.Frm0InputToggle" VarB="Inputs^Frm0InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Inputs.Frm0State" VarB="Inputs^Frm0State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Inputs.Frm0WcState" VarB="Inputs^Frm0WcState"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Inputs.SlaveCount" VarB="Inputs^SlaveCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1.InfoData.ObjectId" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^ObjectId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1.InfoData.SlaveCount" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^SlaveCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1.InfoData.State" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1.WcState.WcState" VarB="SyncUnits^&lt;default&gt;^PlcTask1^WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Outputs.DevCtrl" VarB="Outputs^DevCtrl"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Outputs.Frm0Ctrl" VarB="Outputs^Frm0Ctrl"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Outputs.Frm0WcCtrl" VarB="Outputs^Frm0WcCtrl"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL6002)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[0]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 0"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[10]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 10"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[11]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 11"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[12]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 12"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[13]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 13"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[14]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 14"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[15]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 15"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[16]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 16"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[17]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 17"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[18]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 18"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[19]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 19"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[1]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[20]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 20"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[21]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 21"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[2]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[3]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 3"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[4]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 4"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[5]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 5"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[6]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 6"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[7]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 7"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[8]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 8"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Data_In[9]" VarB="COM TxPDO-Map Inputs Channel 1^Data In 9"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Buffer_full" VarB="COM TxPDO-Map Inputs Channel 1^Status^Buffer full"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Framing_error" VarB="COM TxPDO-Map Inputs Channel 1^Status^Framing error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Init_accepted" VarB="COM TxPDO-Map Inputs Channel 1^Status^Init accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Input_length" VarB="COM TxPDO-Map Inputs Channel 1^Status^Input length"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Overrun_error" VarB="COM TxPDO-Map Inputs Channel 1^Status^Overrun error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Parity_error" VarB="COM TxPDO-Map Inputs Channel 1^Status^Parity error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Receive_request" VarB="COM TxPDO-Map Inputs Channel 1^Status^Receive request"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_1.Status^Transmit_accepted" VarB="COM TxPDO-Map Inputs Channel 1^Status^Transmit accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[0]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 0"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[10]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 10"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[11]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 11"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[12]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 12"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[13]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 13"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[14]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 14"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[15]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 15"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[16]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 16"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[17]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 17"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[18]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 18"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[19]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 19"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[1]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[20]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 20"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[21]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 21"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[2]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[3]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 3"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[4]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 4"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[5]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 5"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[6]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 6"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[7]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 7"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[8]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 8"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Data_In[9]" VarB="COM TxPDO-Map Inputs Channel 2^Data In 9"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Buffer_full" VarB="COM TxPDO-Map Inputs Channel 2^Status^Buffer full"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Framing_error" VarB="COM TxPDO-Map Inputs Channel 2^Status^Framing error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Init_accepted" VarB="COM TxPDO-Map Inputs Channel 2^Status^Init accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Input_length" VarB="COM TxPDO-Map Inputs Channel 2^Status^Input length"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Overrun_error" VarB="COM TxPDO-Map Inputs Channel 2^Status^Overrun error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Parity_error" VarB="COM TxPDO-Map Inputs Channel 2^Status^Parity error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Receive_request" VarB="COM TxPDO-Map Inputs Channel 2^Status^Receive request"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_TxPDO_Map_Inputs_Channel_2.Status^Transmit_accepted" VarB="COM TxPDO-Map Inputs Channel 2^Status^Transmit accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Ctrl^Init_request" VarB="COM RxPDO-Map Outputs Channel 1^Ctrl^Init request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Ctrl^Output_length" VarB="COM RxPDO-Map Outputs Channel 1^Ctrl^Output length"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Ctrl^Receive_accepted" VarB="COM RxPDO-Map Outputs Channel 1^Ctrl^Receive accepted"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Ctrl^Send_continuous" VarB="COM RxPDO-Map Outputs Channel 1^Ctrl^Send continuous"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Ctrl^Transmit_request" VarB="COM RxPDO-Map Outputs Channel 1^Ctrl^Transmit request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[0]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 0"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[10]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 10"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[11]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 11"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[12]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 12"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[13]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 13"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[14]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 14"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[15]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 15"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[16]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 16"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[17]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 17"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[18]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 18"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[19]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 19"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[1]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 1"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[20]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 20"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[21]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 21"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[2]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 2"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[3]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 3"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[4]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 4"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[5]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 5"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[6]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 6"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[7]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 7"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[8]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 8"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_1.Data_Out[9]" VarB="COM RxPDO-Map Outputs Channel 1^Data Out 9"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Ctrl^Init_request" VarB="COM RxPDO-Map Outputs Channel 2^Ctrl^Init request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Ctrl^Output_length" VarB="COM RxPDO-Map Outputs Channel 2^Ctrl^Output length"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Ctrl^Receive_accepted" VarB="COM RxPDO-Map Outputs Channel 2^Ctrl^Receive accepted"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Ctrl^Send_continuous" VarB="COM RxPDO-Map Outputs Channel 2^Ctrl^Send continuous"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Ctrl^Transmit_request" VarB="COM RxPDO-Map Outputs Channel 2^Ctrl^Transmit request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[0]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 0"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[10]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 10"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[11]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 11"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[12]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 12"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[13]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 13"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[14]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 14"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[15]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 15"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[16]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 16"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[17]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 17"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[18]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 18"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[19]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 19"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[1]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 1"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[20]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 20"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[21]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 21"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[2]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 2"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[3]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 3"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[4]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 4"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[5]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 5"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[6]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 6"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[7]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 7"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[8]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 8"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.COM_RxPDO_Map_Outputs_Channel_2.Data_Out[9]" VarB="COM RxPDO-Map Outputs Channel 2^Data Out 9"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 3 (EL1809)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_1.Input" VarB="Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_10.Input" VarB="Channel 10^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_11.Input" VarB="Channel 11^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_12.Input" VarB="Channel 12^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_13.Input" VarB="Channel 13^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_14.Input" VarB="Channel 14^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_15.Input" VarB="Channel 15^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_16.Input" VarB="Channel 16^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_2.Input" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_3.Input" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_4.Input" VarB="Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_5.Input" VarB="Channel 5^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_6.Input" VarB="Channel 6^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_7.Input" VarB="Channel 7^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_8.Input" VarB="Channel 8^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.Channel_9.Input" VarB="Channel 9^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809.WcState.WcState" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 4 (EL2809)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_10.Output" VarB="Channel 10^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_11.Output" VarB="Channel 11^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_12.Output" VarB="Channel 12^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_13.Output" VarB="Channel 13^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_14.Output" VarB="Channel 14^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_15.Output" VarB="Channel 15^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_16.Output" VarB="Channel 16^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_8.Output" VarB="Channel 8^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809.Channel_9.Output" VarB="Channel 9^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 5 (EL4004)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.AO_Outputs_Channel_1.Analog_output" VarB="AO Outputs Channel 1^Analog output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.AO_Outputs_Channel_2.Analog_output" VarB="AO Outputs Channel 2^Analog output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.AO_Outputs_Channel_3.Analog_output" VarB="AO Outputs Channel 3^Analog output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.AO_Outputs_Channel_4.Analog_output" VarB="AO Outputs Channel 4^Analog output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 6 (EL2809)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_10.Output" VarB="Channel 10^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_11.Output" VarB="Channel 11^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_12.Output" VarB="Channel 12^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_13.Output" VarB="Channel 13^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_14.Output" VarB="Channel 14^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_15.Output" VarB="Channel 15^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_16.Output" VarB="Channel 16^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_8.Output" VarB="Channel 8^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809.Channel_9.Output" VarB="Channel 9^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL6001)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[0]" VarB="COM Inputs^Data In 0"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[10]" VarB="COM Inputs^Data In 10"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[11]" VarB="COM Inputs^Data In 11"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[12]" VarB="COM Inputs^Data In 12"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[13]" VarB="COM Inputs^Data In 13"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[14]" VarB="COM Inputs^Data In 14"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[15]" VarB="COM Inputs^Data In 15"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[16]" VarB="COM Inputs^Data In 16"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[17]" VarB="COM Inputs^Data In 17"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[18]" VarB="COM Inputs^Data In 18"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[19]" VarB="COM Inputs^Data In 19"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[1]" VarB="COM Inputs^Data In 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[20]" VarB="COM Inputs^Data In 20"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[21]" VarB="COM Inputs^Data In 21"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[2]" VarB="COM Inputs^Data In 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[3]" VarB="COM Inputs^Data In 3"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[4]" VarB="COM Inputs^Data In 4"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[5]" VarB="COM Inputs^Data In 5"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[6]" VarB="COM Inputs^Data In 6"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[7]" VarB="COM Inputs^Data In 7"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[8]" VarB="COM Inputs^Data In 8"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Data_In[9]" VarB="COM Inputs^Data In 9"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Buffer_full" VarB="COM Inputs^Status^Buffer full"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Framing_error" VarB="COM Inputs^Status^Framing error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Init_accepted" VarB="COM Inputs^Status^Init accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Input_length" VarB="COM Inputs^Status^Input length"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Overrun_error" VarB="COM Inputs^Status^Overrun error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Parity_error" VarB="COM Inputs^Status^Parity error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Receive_request" VarB="COM Inputs^Status^Receive request"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Inputs.Status^Transmit_accepted" VarB="COM Inputs^Status^Transmit accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Ctrl^Init_request" VarB="COM Outputs^Ctrl^Init request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Ctrl^Output_length" VarB="COM Outputs^Ctrl^Output length"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Ctrl^Receive_accepted" VarB="COM Outputs^Ctrl^Receive accepted"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Ctrl^Send_continues" VarB="COM Outputs^Ctrl^Send continues"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Ctrl^Transmit_request" VarB="COM Outputs^Ctrl^Transmit request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[0]" VarB="COM Outputs^Data Out 0"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[10]" VarB="COM Outputs^Data Out 10"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[11]" VarB="COM Outputs^Data Out 11"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[12]" VarB="COM Outputs^Data Out 12"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[13]" VarB="COM Outputs^Data Out 13"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[14]" VarB="COM Outputs^Data Out 14"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[15]" VarB="COM Outputs^Data Out 15"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[16]" VarB="COM Outputs^Data Out 16"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[17]" VarB="COM Outputs^Data Out 17"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[18]" VarB="COM Outputs^Data Out 18"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[19]" VarB="COM Outputs^Data Out 19"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[1]" VarB="COM Outputs^Data Out 1"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[20]" VarB="COM Outputs^Data Out 20"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[21]" VarB="COM Outputs^Data Out 21"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[2]" VarB="COM Outputs^Data Out 2"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[3]" VarB="COM Outputs^Data Out 3"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[4]" VarB="COM Outputs^Data Out 4"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[5]" VarB="COM Outputs^Data Out 5"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[6]" VarB="COM Outputs^Data Out 6"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[7]" VarB="COM Outputs^Data Out 7"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[8]" VarB="COM Outputs^Data Out 8"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.COM_Outputs.Data_Out[9]" VarB="COM Outputs^Data Out 9"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.InfoData.AmsNetId" VarB="InfoData^AmsNetId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.InfoData.CfgSlaveCount" VarB="InfoData^CfgSlaveCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.InfoData.ChangeCount" VarB="InfoData^ChangeCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.InfoData.DevId" VarB="InfoData^DevId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Inputs.DevState" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Inputs.Frm0InputToggle" VarB="Inputs^Frm0InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Inputs.Frm0State" VarB="Inputs^Frm0State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Inputs.Frm0WcState" VarB="Inputs^Frm0WcState"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Inputs.SlaveCount" VarB="Inputs^SlaveCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.SyncUnits._default.PlcTask1.InfoData.ObjectId" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^ObjectId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.SyncUnits._default.PlcTask1.InfoData.SlaveCount" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^SlaveCount"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.SyncUnits._default.PlcTask1.InfoData.State" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.SyncUnits._default.PlcTask1.WcState.WcState" VarB="SyncUnits^&lt;default&gt;^PlcTask1^WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Outputs.DevCtrl" VarB="Outputs^DevCtrl"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Outputs.Frm0Ctrl" VarB="Outputs^Frm0Ctrl"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Outputs.Frm0WcCtrl" VarB="Outputs^Frm0WcCtrl"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.InfoData.State" VarB="InfoData^State"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 15 (EL3403)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_1.Active_power" VarB="PM Inputs Channel 1^Active power"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_1.Current" VarB="PM Inputs Channel 1^Current"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_1.Index" VarB="PM Inputs Channel 1^Index"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_1.TxPDO_Toggle" VarB="PM Inputs Channel 1^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_1.Variant_value" VarB="PM Inputs Channel 1^Variant value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_1.Voltage" VarB="PM Inputs Channel 1^Voltage"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_2.Active_power" VarB="PM Inputs Channel 2^Active power"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_2.Current" VarB="PM Inputs Channel 2^Current"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_2.Index" VarB="PM Inputs Channel 2^Index"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_2.TxPDO_Toggle" VarB="PM Inputs Channel 2^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_2.Variant_value" VarB="PM Inputs Channel 2^Variant value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_2.Voltage" VarB="PM Inputs Channel 2^Voltage"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_3.Active_power" VarB="PM Inputs Channel 3^Active power"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_3.Current" VarB="PM Inputs Channel 3^Current"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_3.Index" VarB="PM Inputs Channel 3^Index"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_3.TxPDO_Toggle" VarB="PM Inputs Channel 3^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_3.Variant_value" VarB="PM Inputs Channel 3^Variant value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Inputs_Channel_3.Voltage" VarB="PM Inputs Channel 3^Voltage"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Status_data.Missing_zero_crossing_A" VarB="PM Status data^Missing zero crossing A"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Status_data.Missing_zero_crossing_B" VarB="PM Status data^Missing zero crossing B"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Status_data.Missing_zero_crossing_C" VarB="PM Status data^Missing zero crossing C"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Status_data.Phase_sequence_error" VarB="PM Status data^Phase sequence error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Outputs_Channel_1.Index" VarB="PM Outputs Channel 1^Index"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Outputs_Channel_2.Index" VarB="PM Outputs Channel 2^Index"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.PM_Outputs_Channel_3.Index" VarB="PM Outputs Channel 3^Index"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.InfoData.State" VarB="InfoData^State"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.InfoData.State" VarB="InfoData^State"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 18 (EL3174-0002)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^Error" VarB="AI Standard Channel 1^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^Limit_1" VarB="AI Standard Channel 1^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^Limit_2" VarB="AI Standard Channel 1^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^Overrange" VarB="AI Standard Channel 1^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^Sync_error" VarB="AI Standard Channel 1^Status^Sync error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^TxPDO_State" VarB="AI Standard Channel 1^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^TxPDO_Toggle" VarB="AI Standard Channel 1^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Status^Underrange" VarB="AI Standard Channel 1^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_1.Value" VarB="AI Standard Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^Error" VarB="AI Standard Channel 2^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^Limit_1" VarB="AI Standard Channel 2^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^Limit_2" VarB="AI Standard Channel 2^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^Overrange" VarB="AI Standard Channel 2^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^Sync_error" VarB="AI Standard Channel 2^Status^Sync error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^TxPDO_State" VarB="AI Standard Channel 2^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^TxPDO_Toggle" VarB="AI Standard Channel 2^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Status^Underrange" VarB="AI Standard Channel 2^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_2.Value" VarB="AI Standard Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^Error" VarB="AI Standard Channel 3^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^Limit_1" VarB="AI Standard Channel 3^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^Limit_2" VarB="AI Standard Channel 3^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^Overrange" VarB="AI Standard Channel 3^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^Sync_error" VarB="AI Standard Channel 3^Status^Sync error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^TxPDO_State" VarB="AI Standard Channel 3^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^TxPDO_Toggle" VarB="AI Standard Channel 3^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Status^Underrange" VarB="AI Standard Channel 3^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_3.Value" VarB="AI Standard Channel 3^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^Error" VarB="AI Standard Channel 4^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^Limit_1" VarB="AI Standard Channel 4^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^Limit_2" VarB="AI Standard Channel 4^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^Overrange" VarB="AI Standard Channel 4^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^Sync_error" VarB="AI Standard Channel 4^Status^Sync error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^TxPDO_State" VarB="AI Standard Channel 4^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^TxPDO_Toggle" VarB="AI Standard Channel 4^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Status^Underrange" VarB="AI Standard Channel 4^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.AI_Standard_Channel_4.Value" VarB="AI Standard Channel 4^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.WcState.WcState" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 19 (EL6001)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[0]" VarB="COM Inputs^Data In 0"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[10]" VarB="COM Inputs^Data In 10"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[11]" VarB="COM Inputs^Data In 11"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[12]" VarB="COM Inputs^Data In 12"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[13]" VarB="COM Inputs^Data In 13"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[14]" VarB="COM Inputs^Data In 14"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[15]" VarB="COM Inputs^Data In 15"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[16]" VarB="COM Inputs^Data In 16"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[17]" VarB="COM Inputs^Data In 17"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[18]" VarB="COM Inputs^Data In 18"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[19]" VarB="COM Inputs^Data In 19"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[1]" VarB="COM Inputs^Data In 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[20]" VarB="COM Inputs^Data In 20"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[21]" VarB="COM Inputs^Data In 21"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[2]" VarB="COM Inputs^Data In 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[3]" VarB="COM Inputs^Data In 3"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[4]" VarB="COM Inputs^Data In 4"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[5]" VarB="COM Inputs^Data In 5"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[6]" VarB="COM Inputs^Data In 6"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[7]" VarB="COM Inputs^Data In 7"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[8]" VarB="COM Inputs^Data In 8"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Data_In[9]" VarB="COM Inputs^Data In 9"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Buffer_full" VarB="COM Inputs^Status^Buffer full"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Framing_error" VarB="COM Inputs^Status^Framing error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Init_accepted" VarB="COM Inputs^Status^Init accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Input_length" VarB="COM Inputs^Status^Input length"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Overrun_error" VarB="COM Inputs^Status^Overrun error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Parity_error" VarB="COM Inputs^Status^Parity error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Receive_request" VarB="COM Inputs^Status^Receive request"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Inputs.Status^Transmit_accepted" VarB="COM Inputs^Status^Transmit accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Ctrl^Init_request" VarB="COM Outputs^Ctrl^Init request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Ctrl^Output_length" VarB="COM Outputs^Ctrl^Output length"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Ctrl^Receive_accepted" VarB="COM Outputs^Ctrl^Receive accepted"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Ctrl^Send_continues" VarB="COM Outputs^Ctrl^Send continues"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Ctrl^Transmit_request" VarB="COM Outputs^Ctrl^Transmit request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[0]" VarB="COM Outputs^Data Out 0"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[10]" VarB="COM Outputs^Data Out 10"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[11]" VarB="COM Outputs^Data Out 11"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[12]" VarB="COM Outputs^Data Out 12"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[13]" VarB="COM Outputs^Data Out 13"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[14]" VarB="COM Outputs^Data Out 14"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[15]" VarB="COM Outputs^Data Out 15"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[16]" VarB="COM Outputs^Data Out 16"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[17]" VarB="COM Outputs^Data Out 17"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[18]" VarB="COM Outputs^Data Out 18"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[19]" VarB="COM Outputs^Data Out 19"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[1]" VarB="COM Outputs^Data Out 1"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[20]" VarB="COM Outputs^Data Out 20"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[21]" VarB="COM Outputs^Data Out 21"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[2]" VarB="COM Outputs^Data Out 2"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[3]" VarB="COM Outputs^Data Out 3"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[4]" VarB="COM Outputs^Data Out 4"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[5]" VarB="COM Outputs^Data Out 5"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[6]" VarB="COM Outputs^Data Out 6"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[7]" VarB="COM Outputs^Data Out 7"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[8]" VarB="COM Outputs^Data Out 8"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.COM_Outputs.Data_Out[9]" VarB="COM Outputs^Data Out 9"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 20 (EL3011)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^Error" VarB="AI Standard^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^Limit_1" VarB="AI Standard^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^Limit_2" VarB="AI Standard^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^Overrange" VarB="AI Standard^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^TxPDO_State" VarB="AI Standard^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^TxPDO_Toggle" VarB="AI Standard^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status^Underrange" VarB="AI Standard^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Value" VarB="AI Standard^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.WcState.WcState" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 21 (EL2008)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_21_EL2008.Channel_8.Output" VarB="Channel 8^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 16 (EK1122)^Term 17 (EK1100)^Term 22 (EL2008)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_22_EL2008.Channel_8.Output" VarB="Channel 8^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 14 (EK1100)^Term 23 (EL3024)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^Error" VarB="AI Standard Channel 1^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^Limit_1" VarB="AI Standard Channel 1^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^Limit_2" VarB="AI Standard Channel 1^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^Overrange" VarB="AI Standard Channel 1^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^TxPDO_State" VarB="AI Standard Channel 1^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^TxPDO_Toggle" VarB="AI Standard Channel 1^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status^Underrange" VarB="AI Standard Channel 1^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Value" VarB="AI Standard Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^Error" VarB="AI Standard Channel 2^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^Limit_1" VarB="AI Standard Channel 2^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^Limit_2" VarB="AI Standard Channel 2^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^Overrange" VarB="AI Standard Channel 2^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^TxPDO_State" VarB="AI Standard Channel 2^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^TxPDO_Toggle" VarB="AI Standard Channel 2^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status^Underrange" VarB="AI Standard Channel 2^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Value" VarB="AI Standard Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^Error" VarB="AI Standard Channel 3^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^Limit_1" VarB="AI Standard Channel 3^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^Limit_2" VarB="AI Standard Channel 3^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^Overrange" VarB="AI Standard Channel 3^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^TxPDO_State" VarB="AI Standard Channel 3^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^TxPDO_Toggle" VarB="AI Standard Channel 3^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status^Underrange" VarB="AI Standard Channel 3^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Value" VarB="AI Standard Channel 3^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^Error" VarB="AI Standard Channel 4^Status^Error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^Limit_1" VarB="AI Standard Channel 4^Status^Limit 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^Limit_2" VarB="AI Standard Channel 4^Status^Limit 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^Overrange" VarB="AI Standard Channel 4^Status^Overrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^TxPDO_State" VarB="AI Standard Channel 4^Status^TxPDO State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^TxPDO_Toggle" VarB="AI Standard Channel 4^Status^TxPDO Toggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status^Underrange" VarB="AI Standard Channel 4^Status^Underrange"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Value" VarB="AI Standard Channel 4^Value"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.WcState.WcState" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.InfoData.State" VarB="InfoData^State"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 10 (EL6001)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[0]" VarB="COM Inputs^Data In 0"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[10]" VarB="COM Inputs^Data In 10"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[11]" VarB="COM Inputs^Data In 11"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[12]" VarB="COM Inputs^Data In 12"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[13]" VarB="COM Inputs^Data In 13"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[14]" VarB="COM Inputs^Data In 14"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[15]" VarB="COM Inputs^Data In 15"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[16]" VarB="COM Inputs^Data In 16"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[17]" VarB="COM Inputs^Data In 17"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[18]" VarB="COM Inputs^Data In 18"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[19]" VarB="COM Inputs^Data In 19"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[1]" VarB="COM Inputs^Data In 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[20]" VarB="COM Inputs^Data In 20"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[21]" VarB="COM Inputs^Data In 21"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[2]" VarB="COM Inputs^Data In 2"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[3]" VarB="COM Inputs^Data In 3"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[4]" VarB="COM Inputs^Data In 4"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[5]" VarB="COM Inputs^Data In 5"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[6]" VarB="COM Inputs^Data In 6"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[7]" VarB="COM Inputs^Data In 7"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[8]" VarB="COM Inputs^Data In 8"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Data_In[9]" VarB="COM Inputs^Data In 9"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Buffer_full" VarB="COM Inputs^Status^Buffer full"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Framing_error" VarB="COM Inputs^Status^Framing error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Init_accepted" VarB="COM Inputs^Status^Init accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Input_length" VarB="COM Inputs^Status^Input length"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Overrun_error" VarB="COM Inputs^Status^Overrun error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Parity_error" VarB="COM Inputs^Status^Parity error"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Receive_request" VarB="COM Inputs^Status^Receive request"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Inputs.Status^Transmit_accepted" VarB="COM Inputs^Status^Transmit accepted"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.AdsAddr" VarB="InfoData^AdsAddr"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Ctrl^Init_request" VarB="COM Outputs^Ctrl^Init request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Ctrl^Output_length" VarB="COM Outputs^Ctrl^Output length"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Ctrl^Receive_accepted" VarB="COM Outputs^Ctrl^Receive accepted"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Ctrl^Send_continues" VarB="COM Outputs^Ctrl^Send continues"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Ctrl^Transmit_request" VarB="COM Outputs^Ctrl^Transmit request"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[0]" VarB="COM Outputs^Data Out 0"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[10]" VarB="COM Outputs^Data Out 10"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[11]" VarB="COM Outputs^Data Out 11"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[12]" VarB="COM Outputs^Data Out 12"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[13]" VarB="COM Outputs^Data Out 13"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[14]" VarB="COM Outputs^Data Out 14"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[15]" VarB="COM Outputs^Data Out 15"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[16]" VarB="COM Outputs^Data Out 16"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[17]" VarB="COM Outputs^Data Out 17"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[18]" VarB="COM Outputs^Data Out 18"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[19]" VarB="COM Outputs^Data Out 19"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[1]" VarB="COM Outputs^Data Out 1"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[20]" VarB="COM Outputs^Data Out 20"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[21]" VarB="COM Outputs^Data Out 21"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[2]" VarB="COM Outputs^Data Out 2"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[3]" VarB="COM Outputs^Data Out 3"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[4]" VarB="COM Outputs^Data Out 4"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[5]" VarB="COM Outputs^Data Out 5"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[6]" VarB="COM Outputs^Data Out 6"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[7]" VarB="COM Outputs^Data Out 7"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[8]" VarB="COM Outputs^Data Out 8"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.COM_Outputs.Data_Out[9]" VarB="COM Outputs^Data Out 9"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 11 (EL1809)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_1.Input" VarB="Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_10.Input" VarB="Channel 10^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_11.Input" VarB="Channel 11^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_12.Input" VarB="Channel 12^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_13.Input" VarB="Channel 13^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_14.Input" VarB="Channel 14^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_15.Input" VarB="Channel 15^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_16.Input" VarB="Channel 16^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_2.Input" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_3.Input" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_4.Input" VarB="Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_5.Input" VarB="Channel 5^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_6.Input" VarB="Channel 6^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_7.Input" VarB="Channel 7^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_8.Input" VarB="Channel 8^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.Channel_9.Input" VarB="Channel 9^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_11_EL1809.WcState.WcState" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 12 (EL2809)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_10.Output" VarB="Channel 10^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_11.Output" VarB="Channel 11^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_12.Output" VarB="Channel 12^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_13.Output" VarB="Channel 13^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_14.Output" VarB="Channel 14^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_15.Output" VarB="Channel 15^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_16.Output" VarB="Channel 16^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_8.Output" VarB="Channel 8^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_12_EL2809.Channel_9.Output" VarB="Channel 9^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^Term 9 (EK1100)^Term 13 (EK1110)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_13_EK1110.InfoData.State" VarB="InfoData^State"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
 </TcSmProject>

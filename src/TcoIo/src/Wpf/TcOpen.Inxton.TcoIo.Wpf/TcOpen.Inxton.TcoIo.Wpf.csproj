@@ -26,4 +26,10 @@
     <ProjectReference Include="..\..\TcoIoConnector\TcoIoConnector.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTerminalBaseServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

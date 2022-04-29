@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL2008_E2806B95" Id="{c4ca0688-1df8-097b-31bf-bef61f7fa1b6}">
+  <DUT Name="EL2008_2D31DDED" Id="{1beb0813-8607-0715-1647-ec47d91451c8}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL2008-0000-0017'}
 {attribute addProperty BoxType "EL2008-0000-0017"}
-{attribute addProperty Id "Channel_1AT %Q*Channel_42CA91F71Channel_2AT %Q*Channel_42CA91F71Channel_3AT %Q*Channel_42CA91F71Channel_4AT %Q*Channel_42CA91F71Channel_5AT %Q*Channel_42CA91F71Channel_6AT %Q*Channel_42CA91F71Channel_7AT %Q*Channel_42CA91F71Channel_8AT %Q*Channel_42CA91F71WcStateAT %I*WcState_0B2B16F91InfoDataAT %I*InfoData_6F19DB2B2"}
-{attribute addProperty CRC "3800066965"}
+{attribute addProperty Id "TcoIo.EtcSlaveTerminalBaseChannel_1AT %Q*Channel_42CA91F71Channel_2AT %Q*Channel_42CA91F71Channel_3AT %Q*Channel_42CA91F71Channel_4AT %Q*Channel_42CA91F71Channel_5AT %Q*Channel_42CA91F71Channel_6AT %Q*Channel_42CA91F71Channel_7AT %Q*Channel_42CA91F71Channel_8AT %Q*Channel_42CA91F71WcStateAT %I*WcState_0B2B16F91InfoDataAT %I*InfoData_6F19DB2B2"}
+{attribute addProperty CRC "758242797"}
 {attribute addProperty Size "11"}
-{attribute clr [Container(Layout.Stack)]}
-{attribute clr [Group(Layout.GroupBox)]}
-TYPE EL2008_E2806B95 :
+TYPE EL2008_2D31DDED EXTENDS TcoIo.EtcSlaveTerminalBase :
 STRUCT
 	{attribute addProperty Name "Channel_1"}
 	Channel_1 : Channel_42CA91F7;
