@@ -18,9 +18,8 @@
 METHOD PROTECTED Main : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
+        <ST><![CDATA[// Takes mode (step/continous) from the parent controller
 THIS^.ModeController.Mode := ParentSequence.ModeController.Mode;
-
 
 IF (Step(1000, TRUE, 'PARALELL STEP')) THEN
     //-------------------------------------    
@@ -46,8 +45,8 @@ END_IF
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent, _parentSequence) THEN // Check if _Parent is Station001
-    ParentSequence REF= _parentSequence^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _parentSequence) THEN 
+    ParentSequence REF= _parentSequence^;              
 END_IF]]></ST>
         </Implementation>
       </Get>
