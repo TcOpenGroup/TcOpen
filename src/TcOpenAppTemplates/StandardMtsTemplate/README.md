@@ -1,5 +1,3 @@
-#!!! WORING ON IT !!!
-
 # MTS standard application template
 
 ## Preliminary note
