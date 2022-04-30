@@ -2,6 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	  <TargetFrameworks>net48;net5.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
