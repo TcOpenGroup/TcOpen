@@ -228,7 +228,7 @@ IF (Step(1000, TRUE, 'SINGLE INSPECTION')) THEN
     //-------------------------------------
 END_IF
 
-IF (Step(2000, TRUE, 'START PARALELL TASK')) THEN
+IF (Step(2000, FALSE, 'START PARALELL TASK')) THEN
     //-------------------------------------    
 		StepCompleteWhen(_paralellTask.Task.Invoke().Busy);
     //-------------------------------------
@@ -262,15 +262,16 @@ IF(_dataClose) THEN THIS^.DataEntityClose(5000); END_IF;
 // Typically used after all operation on the technology are completed.
 IF(_dataFinalize) THEN THIS^.DataEntityFinalize(5500); END_IF;
 
-IF (Step(30000, TRUE, 'WAIT FOR PARALELL TASK TO FINISH')) THEN
+
+IF (Step(10000, TRUE, 'WAIT FOR PARALELL TASK TO FINISH')) THEN
     //-------------------------------------
-    IF(_loop) THEN CompleteSequence(); END_IF;
+    StepCompleteWhen(_paralellTask.Task.Done);
     //-------------------------------------	
 END_IF
 
-IF (Step(10000, TRUE, 'LAST STEP')) THEN
+IF (Step(30000, TRUE, 'LAST STEP')) THEN
     //-------------------------------------
-    StepCompleteWhen(_paralellTask.Task.Done);
+    IF(_loop) THEN CompleteSequence(); END_IF;
     //-------------------------------------	
 END_IF
 

@@ -2,6 +2,8 @@ using MainPlc;
 using MainPlcConnector;
 using NUnit.Framework;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using TcoCore;
 using TcOpen.Inxton.RavenDb;
@@ -10,6 +12,14 @@ namespace TemplateTests
 {
     public class ControlledUnitTests
     {
+       
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            TemplateApp.Get.KillApp();
+        }
+
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
@@ -23,6 +33,21 @@ namespace TemplateTests
             //Entry.Plc.MAIN._technology._processSettings.InitializeRemoteDataExchange(ProcessSettingsRepository);
 
 
+            if(!ProcessSettingsRepository.Queryable.Where(p => p._EntityId == "default").Any())
+            {
+                ProcessSettingsRepository.Create("default", new PlainProcessData()
+                {
+                    CU00x = new PlainCU00xProcessData()
+                    {
+                        BoltPresenceInspector = new TcoInspectors.PlainTcoDigitalInspector()
+                        {
+                            _data = new TcoInspectors.PlainTcoDigitalInspectorData()
+                            { RequiredStatus = true }
+                        }
+                    }
+                });
+            }
+
             var TraceabilityRepoSettings = new RavenDbRepositorySettings<PlainProcessData>(new string[] { @"http://localhost:8080" }, "Traceability", "", "");
             var TraceabilityRepository = new RavenDbRepository<PlainProcessData>(TraceabilityRepoSettings);
             TraceabilityRepository.OnCreate = (id, data) => { data._Created = DateTime.Now; data._Modified = DateTime.Now; data.qlikId = id; };
@@ -32,7 +57,9 @@ namespace TemplateTests
 
             //var a= Entry.Plc.MAIN._technology._cu00x._automatTask._task._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._automatTask._task._isServiceable.Cyclic;
             //var b = Entry.Plc.MAIN._technology._cu00x._groundTask._task._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._groundTask._task._isServiceable.Cyclic;
-            //var c = Entry.Plc.MAIN._technology._cu00x._manualTask._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._manualTask._isServiceable.Cyclic;            
+            //var c = Entry.Plc.MAIN._technology._cu00x._manualTask._enabled.Cyclic && Entry.Plc.MAIN._technology._cu00x._manualTask._isServiceable.Cyclic;
+
+            var a = TemplateApp.Get;
         }
 
         [SetUp]
@@ -334,9 +361,10 @@ namespace TemplateTests
 
 
         [Test]       
-        [Repeat(10000000)]
+        [Repeat(5)]
         public void run_automat_mode_load_create_new_entity_many_times()
-        {           
+        {
+            return;        
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
             var data = Entry.Plc.MAIN._technology._processSettings._data;
             data._EntityId.Synchron = "default";

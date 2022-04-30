@@ -14,6 +14,19 @@ namespace TemplateTests
             Entry.Plc.Connector.BuildAndStart();
         }
 
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            TemplateApp.Get.KillApp();
+        }
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            var a = TemplateApp.Get;
+        }
+
         [Test]
         public void run_ground_mode()
         {                        
