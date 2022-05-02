@@ -34,9 +34,6 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Diagnostics\EtcSlaveTerminalBase.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_E68C61CD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +89,15 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TopologyView\DigitalInputs\Channel_830843C1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TopologyView\DigitalInputs\DigitalInputBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TopologyView\EtcSlaveTerminalBase.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics" />
@@ -99,7 +105,9 @@
     <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />
     <Folder Include="Diagnostics\EtherCAT\SyncUnit" />
+    <Folder Include="TopologyView" />
     <Folder Include="POUs" />
+    <Folder Include="TopologyView\DigitalInputs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_EtherCAT">

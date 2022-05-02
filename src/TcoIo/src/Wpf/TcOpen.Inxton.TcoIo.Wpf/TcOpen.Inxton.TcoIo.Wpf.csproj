@@ -27,7 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Diagnostics\EtherCAT\EtcSlaveTerminalBaseServiceView.xaml">
+    <Page Update="Diagnostics\EtherCAT\DigitalInputBase\DigitalInputBaseHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTerminalBase\EtcSlaveTerminalBaseServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

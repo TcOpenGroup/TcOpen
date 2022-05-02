@@ -14,9 +14,12 @@
         <TcoIo:EtcSlaveTerminalBase/>
     </UserControl.DataContext>
     <StackPanel>
-        <TextBlock Text="{Binding Symbol}"></TextBlock>
-        <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
-        <vortex:RenderableContentControl Margin="10,0,10,5" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" DataContext="{Binding }" PresentationType="ControlSlim" />
+        <!--<TextBlock Text="{Binding Symbol}"></TextBlock>-->
+        <WrapPanel>
+            <TextBlock Text="PreviosPort: "/>
+            <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
+        </WrapPanel>
+        <vortex:RenderableContentControl Margin="10,0,10,5" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" DataContext="{Binding }" PresentationType="HWDiag-ControlSlim" />
         <Grid Grid.IsSharedSizeScope="True">
             <!--<ItemsControl x:Name="ItemsList">
                 <ItemsControl.ItemsPanel>
