@@ -1694,7 +1694,7 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
 				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -3506,7 +3506,7 @@
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="4" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="3">
+			<Device Id="4" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="3">
 				<Name>Device 4 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -6040,10 +6040,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500821000403}" Id="#x02030020"/>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500831000403}" Id="#x02030040"/>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500840000403}" Id="#x02030030"/>
 		<OwnerA Name="TIPC^TcoIoTests^TcoIoTests Instance">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)">
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.InfoData.AmsNetId" VarB="InfoData^AmsNetId"/>
