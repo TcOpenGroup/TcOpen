@@ -98,6 +98,9 @@
     <Compile Include="TopologyView\EtcSlaveTerminalBase_947E5A46.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TopologyView\WcState\WcStateInputToggleBase_F68C23A9.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics" />
@@ -109,6 +112,7 @@
     <Folder Include="POUs" />
     <Folder Include="TopologyView\DigitalInputs" />
     <Folder Include="TopologyView\DigitalOutputs" />
+    <Folder Include="TopologyView\WcState" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_EtherCAT">
