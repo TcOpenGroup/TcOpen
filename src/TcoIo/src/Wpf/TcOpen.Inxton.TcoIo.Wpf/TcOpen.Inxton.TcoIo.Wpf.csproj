@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\DigitalOutputBase\DigitalOutputBase_1FE0D5EEHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\DigitalInputBase\DigitalInputBase_50022E7BHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

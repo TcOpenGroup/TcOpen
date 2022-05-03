@@ -92,6 +92,9 @@
     <Compile Include="TopologyView\DigitalInputs\DigitalInputBase_50022E7B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TopologyView\DigitalOutputs\DigitalOutputBase_1FE0D5EE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TopologyView\EtcSlaveTerminalBase_947E5A46.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -105,6 +108,7 @@
     <Folder Include="TopologyView" />
     <Folder Include="POUs" />
     <Folder Include="TopologyView\DigitalInputs" />
+    <Folder Include="TopologyView\DigitalOutputs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_EtherCAT">
