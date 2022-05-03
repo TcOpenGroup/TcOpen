@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL6001_0CE69961" Id="{3762120d-f9eb-0fc7-0237-856bb9f90bb7}">
+  <DUT Name="EL6001_B592E1CA" Id="{4dbccdaa-2e71-0cff-0b81-334abaae718a}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6001-0000-0020'}
 {attribute addProperty BoxType "EL6001-0000-0020"}
-{attribute addProperty Id "TcoIo.EtcSlaveTerminalBaseCOM_InputsAT %I*COM_Inputs_3801C95E30COM_OutputsAT %Q*COM_Outputs_DEF408EC27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
-{attribute addProperty CRC "216439137"}
+{attribute addProperty Id "COM_InputsAT %I*COM_Inputs_3801C95E30COM_OutputsAT %Q*COM_Outputs_DEF408EC27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
+{attribute addProperty CRC "3046302154"}
 {attribute addProperty Size "69"}
-TYPE EL6001_0CE69961 EXTENDS TcoIo.EtcSlaveTerminalBase :
+TYPE EL6001_B592E1CA EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
 	{attribute addProperty Name "COM_Inputs"}
 	COM_Inputs : COM_Inputs_3801C95E;

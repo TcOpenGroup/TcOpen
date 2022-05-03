@@ -18,9 +18,9 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class EtcSlaveTerminalBaseServiceView : UserControl
+    public partial class EtcSlaveTerminalBase_947E5A46HWDiagView : UserControl
     {
-        public EtcSlaveTerminalBaseServiceView()
+        public EtcSlaveTerminalBase_947E5A46HWDiagView()
         {
             InitializeComponent();
         }

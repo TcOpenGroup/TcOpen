@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EK1122_2A90D53A" Id="{0dc08237-cd87-0948-260e-070c2f6216bf}">
+  <DUT Name="EK1122_1FC0878B" Id="{9a49e4a2-bd5f-0beb-3ce6-ff09730c9696}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
-{attribute addProperty Id "TcoIo.EtcSlaveTerminalBaseInfoDataAT %I*InfoData_6F19DB2B2"}
-{attribute addProperty CRC "714134842"}
+{attribute addProperty Id "InfoDataAT %I*InfoData_6F19DB2B2"}
+{attribute addProperty CRC "532711307"}
 {attribute addProperty Size "2"}
-TYPE EK1122_2A90D53A EXTENDS TcoIo.EtcSlaveTerminalBase :
+TYPE EK1122_1FC0878B EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
 	{attribute addProperty Name "InfoData"}
 	InfoData : InfoData_6F19DB2B;

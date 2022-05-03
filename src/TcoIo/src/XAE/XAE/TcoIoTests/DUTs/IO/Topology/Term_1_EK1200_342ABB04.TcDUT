@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Term_1_EK1200_4C6C2E50" Id="{cc39b6f7-16ba-02c3-21a9-5bc3a9a0e384}">
+  <DUT Name="Term_1_EK1200_342ABB04" Id="{f2eaef27-27d8-07a3-2395-906b47037d21}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1200-1388-0000'}
 {attribute addProperty BoxType "EK1200-1388-0000"}
-{attribute addProperty Id "Term_2_EL6002EL6002_29800697126Term_3_EL1809EL1809_6B66496520Term_4_EL2809EL2809_7217B62519Term_5_EL4004EL4004_377A496919Term_6_EL2809EL2809_7217B62519Term_7_EL6001EL6001_0CE6996169"}
-{attribute addProperty CRC "1282158160"}
+{attribute addProperty Id "Term_2_EL6002EL6002_81703A53126Term_3_EL1809EL1809_32157CFD20Term_4_EL2809EL2809_2B6483BD19Term_5_EL4004EL4004_D2A7C9B719Term_6_EL2809EL2809_2B6483BD19Term_7_EL6001EL6001_B592E1CA69"}
+{attribute addProperty CRC "875215620"}
 {attribute addProperty Size "272"}
-TYPE Term_1_EK1200_4C6C2E50 :
+TYPE Term_1_EK1200_342ABB04 :
 STRUCT
 	{attribute addProperty Name "Term_2_EL6002"}
 	{attribute addProperty PreviousPort "Term 1 (EK1200) : B"}
-	Term_2_EL6002 : EL6002_29800697;
+	Term_2_EL6002 : EL6002_81703A53;
 	{attribute addProperty Name "Term_3_EL1809"}
 	{attribute addProperty PreviousPort "Term 2 (EL6002) : B"}
-	Term_3_EL1809 : EL1809_6B664965;
+	Term_3_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "Term_4_EL2809"}
 	{attribute addProperty PreviousPort "Term 3 (EL1809) : B"}
-	Term_4_EL2809 : EL2809_7217B625;
+	Term_4_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "Term_5_EL4004"}
 	{attribute addProperty PreviousPort "Term 4 (EL2809) : B"}
-	Term_5_EL4004 : EL4004_377A4969;
+	Term_5_EL4004 : EL4004_D2A7C9B7;
 	{attribute addProperty Name "Term_6_EL2809"}
 	{attribute addProperty PreviousPort "Term 5 (EL4004) : B"}
-	Term_6_EL2809 : EL2809_7217B625;
+	Term_6_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "Term_7_EL6001"}
 	{attribute addProperty PreviousPort "Term 6 (EL2809) : B"}
-	Term_7_EL6001 : EL6001_0CE69961;
+	Term_7_EL6001 : EL6001_B592E1CA;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

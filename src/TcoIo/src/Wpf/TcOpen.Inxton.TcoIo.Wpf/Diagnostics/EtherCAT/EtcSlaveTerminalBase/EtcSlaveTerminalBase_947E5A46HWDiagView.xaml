@@ -1,0 +1,23 @@
+<UserControl
+    x:Class="TcoIo.EtcSlaveTerminalBase_947E5A46HWDiagView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoIo"
+    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <TcoIo:EtcSlaveTerminalBase_947E5A46/>
+    </UserControl.DataContext>
+    <StackPanel>
+        <WrapPanel>
+            <TextBlock Text="PreviosPort: "/>
+            <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
+        </WrapPanel>
+        <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="HWDiag-ControlSlim" />
+    </StackPanel>
+</UserControl>

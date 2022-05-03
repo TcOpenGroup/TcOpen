@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL3174_BA8E89D5" Id="{a5350b87-bfa0-0417-3ee2-9474abfebbd3}">
+  <DUT Name="EL3174_DCC78662" Id="{1c10aad4-7cb2-0516-1c8e-c6af870866a4}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3174-0002-0017'}
 {attribute addProperty BoxType "EL3174-0002-0017"}
-{attribute addProperty Id "TcoIo.EtcSlaveTerminalBaseAI_Standard_Channel_1AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_2AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_3AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_4AT %I*AI_Standard_Channel_A8DF64E310WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
-{attribute addProperty CRC "3129903573"}
+{attribute addProperty Id "AI_Standard_Channel_1AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_2AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_3AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_4AT %I*AI_Standard_Channel_A8DF64E310WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
+{attribute addProperty CRC "3704063586"}
 {attribute addProperty Size "52"}
-TYPE EL3174_BA8E89D5 EXTENDS TcoIo.EtcSlaveTerminalBase :
+TYPE EL3174_DCC78662 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
 	{attribute addProperty Name "AI_Standard_Channel_1"}
 	AI_Standard_Channel_1 : AI_Standard_Channel_A8DF64E3;
