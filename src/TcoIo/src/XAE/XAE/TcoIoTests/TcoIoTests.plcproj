@@ -61,6 +61,9 @@
     <Compile Include="DUTs\IO\PDOs\InfoData_32EB74EA.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\IO\PDOs\Channel_830843C1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\IO\PDOs\InfoData_6F19DB2B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -175,6 +178,7 @@
     <Folder Include="DUTs\IO\Boxes" />
     <Folder Include="DUTs\IO\Devices" />
     <Folder Include="DUTs\IO\Topology" />
+    <Folder Include="DUTs\IO\Base" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

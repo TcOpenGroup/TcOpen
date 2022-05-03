@@ -22,7 +22,7 @@
                 </Grid.ColumnDefinitions>
                 <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding TcoIoTests.GVL_iXlinker}" RenderTransformOrigin="0.5,0.5"/>
                 <ScrollViewer Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}">
-                    <vortex:ObservableContentControl PresentationType="HWDiag" ></vortex:ObservableContentControl>
+                    <vortex:ObservableContentControl PresentationType="Service" ></vortex:ObservableContentControl>
                 </ScrollViewer>
 
             </Grid>

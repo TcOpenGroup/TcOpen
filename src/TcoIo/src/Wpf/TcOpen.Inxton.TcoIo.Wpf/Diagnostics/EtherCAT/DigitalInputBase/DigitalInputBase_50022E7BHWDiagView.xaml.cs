@@ -18,9 +18,9 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class DigitalInputBaseHWDiagView : UserControl
+    public partial class DigitalInputBase_50022E7BHWDiagView : UserControl
     {
-        public DigitalInputBaseHWDiagView()
+        public DigitalInputBase_50022E7BHWDiagView()
         {
             InitializeComponent();
         }
