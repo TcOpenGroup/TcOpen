@@ -27,12 +27,13 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"></TextBlock>
-                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding AdsAddr.netId[0]}" PresentationType="DisplaySlim" />
+                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding AdsAddr.netId}" PresentationType="DisplaySlim" />
+                <!--<vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding AdsAddr.netId[0]}" PresentationType="DisplaySlim" />
                 <vortex:RenderableContentControl Grid.Column="2" DataContext="{Binding AdsAddr.netId[1]}" PresentationType="DisplaySlim" />
                 <vortex:RenderableContentControl Grid.Column="3" DataContext="{Binding AdsAddr.netId[2]}" PresentationType="DisplaySlim" />
                 <vortex:RenderableContentControl Grid.Column="4" DataContext="{Binding AdsAddr.netId[3]}" PresentationType="DisplaySlim" />
                 <vortex:RenderableContentControl Grid.Column="5" DataContext="{Binding AdsAddr.netId[4]}" PresentationType="DisplaySlim" />
-                <vortex:RenderableContentControl Grid.Column="6" DataContext="{Binding AdsAddr.netId[5]}" PresentationType="DisplaySlim" />
+                <vortex:RenderableContentControl Grid.Column="6" DataContext="{Binding AdsAddr.netId[5]}" PresentationType="DisplaySlim" />-->
                 <vortex:RenderableContentControl Grid.Column="7" DataContext="{Binding AdsAddr.port}" PresentationType="DisplaySlim" />
                 <vortex:RenderableContentControl Grid.Column="8" DataContext="{Binding State}" PresentationType="DisplaySlim" />
             </Grid>

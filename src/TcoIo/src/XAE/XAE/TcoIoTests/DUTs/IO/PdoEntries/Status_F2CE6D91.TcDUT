@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Status_F2CE6D91" Id="{a4732913-c65b-06c0-11e6-4ed5678db16d}">
+  <DUT Name="Status_F2CE6D91" Id="{e1361b4a-28e5-0f5a-0212-d5e56d4e804f}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3011-0000-0018'}
 {attribute addProperty BoxType "EL3011-0000-0018"}
 {attribute addProperty Id "UnderrangeBOOL1OverrangeBOOL1Limit_1BYTE1Limit_2BYTE1ErrorBOOL1TxPDO_StateBOOL1TxPDO_ToggleBOOL1"}
 {attribute addProperty CRC "4073614737"}
 {attribute addProperty Size "7"}
-TYPE Status_F2CE6D91 EXTENDS DigitalInputBase_50022E7B :
+TYPE Status_F2CE6D91 :
 STRUCT
 	{attribute addProperty Name "Underrange"}
 	Underrange : BOOL;

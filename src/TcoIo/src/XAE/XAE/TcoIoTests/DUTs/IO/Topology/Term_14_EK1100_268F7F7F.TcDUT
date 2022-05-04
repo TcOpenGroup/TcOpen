@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Term_14_EK1100_ED6DF06D" Id="{86af2e48-3120-06af-3d47-c42dd0da32e7}">
+  <DUT Name="Term_14_EK1100_268F7F7F" Id="{b0ee38c0-4ac6-062e-0453-5705a8ac4159}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
-{attribute addProperty Id "Term_15_EL3403EL3403_200C424073Term_16_EK1122Term_16_EK1122_E3300954164Term_23_EL3024EL3024_C4269E3248"}
-{attribute addProperty CRC "3983405165"}
-{attribute addProperty Size "285"}
-TYPE Term_14_EK1100_ED6DF06D EXTENDS EK1100_1FC0878B :
+{attribute addProperty Id "Term_15_EL3403EL3403_812980A665Term_16_EK1122Term_16_EK1122_50B0E770140Term_23_EL3024EL3024_C6E76B5A40"}
+{attribute addProperty CRC "646938495"}
+{attribute addProperty Size "245"}
+TYPE Term_14_EK1100_268F7F7F EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "Term_15_EL3403"}
 	{attribute addProperty PreviousPort "Term 14 (EK1100) : B"}
-	Term_15_EL3403 : EL3403_200C4240;
+	Term_15_EL3403 : EL3403_812980A6;
 	{attribute addProperty Name "Term_16_EK1122"}
 	{attribute addProperty PreviousPort "Term 15 (EL3403) : B"}
-	Term_16_EK1122 : Term_16_EK1122_E3300954;
+	Term_16_EK1122 : Term_16_EK1122_50B0E770;
 	{attribute addProperty Name "Term_23_EL3024"}
 	{attribute addProperty PreviousPort "Term 16 (EK1122) : C"}
-	Term_23_EL3024 : EL3024_C4269E32;
+	Term_23_EL3024 : EL3024_C6E76B5A;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

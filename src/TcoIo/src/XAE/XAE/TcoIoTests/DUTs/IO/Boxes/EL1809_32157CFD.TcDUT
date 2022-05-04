@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL1809_32157CFD" Id="{fac0920a-8c4a-0d17-336b-6d0be9beadff}">
+  <DUT Name="EL1809_32157CFD" Id="{e9d7c16d-79a7-00a5-3c8a-f3033f145c2e}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL1809-0000-0018'}
 {attribute addProperty BoxType "EL1809-0000-0018"}
 {attribute addProperty Id "Channel_1AT %I*Channel_830843C11Channel_2AT %I*Channel_830843C11Channel_3AT %I*Channel_830843C11Channel_4AT %I*Channel_830843C11Channel_5AT %I*Channel_830843C11Channel_6AT %I*Channel_830843C11Channel_7AT %I*Channel_830843C11Channel_8AT %I*Channel_830843C11Channel_9AT %I*Channel_830843C11Channel_10AT %I*Channel_830843C11Channel_11AT %I*Channel_830843C11Channel_12AT %I*Channel_830843C11Channel_13AT %I*Channel_830843C11Channel_14AT %I*Channel_830843C11Channel_15AT %I*Channel_830843C11Channel_16AT %I*Channel_830843C11WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_6F19DB2B2"}
@@ -41,7 +41,7 @@ STRUCT
 	{attribute addProperty Name "Channel_16"}
 	Channel_16 : Channel_830843C1;
 	{attribute addProperty Name "WcState"}
-	WcState : WcState_9091E0EB;
+	WcState : TcoIo.WcState_9091E0EB;
 	{attribute addProperty Name "InfoData"}
 	InfoData : InfoData_6F19DB2B;
 END_STRUCT

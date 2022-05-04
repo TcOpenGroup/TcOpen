@@ -2,22 +2,13 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
+			<Name GUID="{66F6944F-3F3B-8BE7-B37C-1DF4B775A15E}" Namespace="TcoIo" AutoDeleteType="true">TcoAmsNetId</Name>
 			<BitSize>48</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
 				<Elements>6</Elements>
 			</ArrayInfo>
-			<Format>
-				<Printf>%d.%d.%d.%d.%d.%d</Printf>
-				<Parameter>[0]</Parameter>
-				<Parameter>[1]</Parameter>
-				<Parameter>[2]</Parameter>
-				<Parameter>[3]</Parameter>
-				<Parameter>[4]</Parameter>
-				<Parameter>[5]</Parameter>
-			</Format>
 		</DataType>
 		<DataType>
 			<Name GUID="{35A61A0E-BDCA-1F30-1C38-5549D1C65DDA}" AutoDeleteType="true">Status_3D84275F</Name>
@@ -86,11 +77,15 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-000000000042}" TcBaseType="true" CName="AmsAddr">AMSADDR</Name>
+			<Name GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo" AutoDeleteType="true">TcoAmsAddr</Name>
 			<BitSize>64</BitSize>
 			<SubItem>
 				<Name>netId</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
 				<BitSize>48</BitSize>
 				<BitOffs>0</BitOffs>
 			</SubItem>
@@ -100,26 +95,6 @@
 				<BitSize>16</BitSize>
 				<BitOffs>48</BitOffs>
 			</SubItem>
-			<Format>
-				<Printf>%d.%d.%d.%d.%d.%d:%d</Printf>
-				<Parameter>.netId[0]</Parameter>
-				<Parameter>.netId[1]</Parameter>
-				<Parameter>.netId[2]</Parameter>
-				<Parameter>.netId[3]</Parameter>
-				<Parameter>.netId[4]</Parameter>
-				<Parameter>.netId[5]</Parameter>
-				<Parameter>.port</Parameter>
-			</Format>
-			<Format Name="Iec">
-				<Printf>(netId:=[%d.%d.%d.%d.%d.%d], port :=%d)</Printf>
-				<Parameter>.netId[0]</Parameter>
-				<Parameter>.netId[1]</Parameter>
-				<Parameter>.netId[2]</Parameter>
-				<Parameter>.netId[3]</Parameter>
-				<Parameter>.netId[4]</Parameter>
-				<Parameter>.netId[5]</Parameter>
-				<Parameter>.port</Parameter>
-			</Format>
 		</DataType>
 		<DataType>
 			<Name GUID="{37ED5435-CF5D-3255-F238-12C4E0FB4358}" AutoDeleteType="true">Status_B0753356</Name>
@@ -179,14 +154,8 @@
 			</Properties>
 		</DataType>
 		<DataType>
-			<Name GUID="{1B83BF4E-A50C-A919-8090-80518B105797}" Namespace="TcoIo" AutoDeleteType="true">DigitalInputBase_50022E7B</Name>
-			<BitSize>0</BitSize>
-			<BaseType GUID="{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}"/>
-		</DataType>
-		<DataType>
-			<Name GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}" AutoDeleteType="true">Status_F2CE6D91</Name>
+			<Name GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}" AutoDeleteType="true">Status_F2CE6D91</Name>
 			<BitSize>56</BitSize>
-			<ExtendsType GUID="{1B83BF4E-A50C-A919-8090-80518B105797}" Namespace="TcoIo">DigitalInputBase_50022E7B</ExtendsType>
 			<SubItem>
 				<Name>Underrange</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
@@ -480,7 +449,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN._tcc.Device_1.InfoData.AmsNetId</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+							<Type GUID="{66F6944F-3F3B-8BE7-B37C-1DF4B775A15E}" Namespace="TcoIo">TcoAmsNetId</Type>
 						</Var>
 						<Var>
 							<Name>MAIN._tcc.Device_1.InfoData.CfgSlaveCount</Name>
@@ -524,7 +493,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN._tcc.Device_4.InfoData.AmsNetId</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+							<Type GUID="{66F6944F-3F3B-8BE7-B37C-1DF4B775A15E}" Namespace="TcoIo">TcoAmsNetId</Type>
 						</Var>
 						<Var>
 							<Name>MAIN._tcc.Device_4.InfoData.CfgSlaveCount</Name>
@@ -564,7 +533,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_2_EL6002.InfoData.State</Name>
@@ -660,7 +629,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004.InfoData.State</Name>
@@ -692,7 +661,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_7_EL6001.InfoData.State</Name>
@@ -792,7 +761,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.InfoData.AmsNetId</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+							<Type GUID="{66F6944F-3F3B-8BE7-B37C-1DF4B775A15E}" Namespace="TcoIo">TcoAmsNetId</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.InfoData.CfgSlaveCount</Name>
@@ -828,7 +797,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EL6001.InfoData.State</Name>
@@ -1024,7 +993,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_15_EL3403.InfoData.State</Name>
@@ -1080,7 +1049,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_18_EL3174_0002.InfoData.State</Name>
@@ -1104,7 +1073,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_19_EL6001.InfoData.State</Name>
@@ -1112,7 +1081,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status</Name>
-							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
+							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Value</Name>
@@ -1128,7 +1097,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.InfoData.State</Name>
@@ -1152,7 +1121,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status</Name>
-							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
+							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Value</Name>
@@ -1160,7 +1129,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status</Name>
-							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
+							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Value</Name>
@@ -1168,7 +1137,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status</Name>
-							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
+							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Value</Name>
@@ -1176,7 +1145,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status</Name>
-							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
+							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Value</Name>
@@ -1192,7 +1161,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.AdsAddr</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000042}">AMSADDR</Type>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.InfoData.State</Name>
@@ -1292,7 +1261,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.InfoData.AmsNetId</Name>
-							<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+							<Type GUID="{66F6944F-3F3B-8BE7-B37C-1DF4B775A15E}" Namespace="TcoIo">TcoAmsNetId</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.InfoData.CfgSlaveCount</Name>

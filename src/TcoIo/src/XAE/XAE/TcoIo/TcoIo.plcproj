@@ -34,7 +34,34 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_E68C61CD.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\InfoData_2A97D6CF.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\ITcoSyncUnit.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitTask_2D604ED5.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\TcoSyncUnit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\DigitalInputs\DigitalInputBase_50022E7B.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\DigitalOutputs\DigitalOutputBase_1FE0D5EE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\EtcSlaveTerminalBase_947E5A46.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\InfoData\InfoDataAdsAddrStateBase_1916E49F.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_84133AC9.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\Inputs_A65FACA4.TcDUT">
@@ -61,22 +88,16 @@
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDevice.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitTask_2D604ED5.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcStateInputToggleBase_F68C23A9.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\TcoSyncUnit.TcPOU">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcStateBase_A2171C4E.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\InfoData_2A97D6CF.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcState_0B2B16F9.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\ITcoSyncUnit.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitState.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\WcState_0B2B16F9.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcState_9091E0EB.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\TcoEthercat.TcGVL">
@@ -89,34 +110,26 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TopologyView\DigitalInputs\DigitalInputBase_50022E7B.TcDUT">
+    <Compile Include="SpecialPlcTypes\TcoAmsAddr.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TopologyView\DigitalOutputs\DigitalOutputBase_1FE0D5EE.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TopologyView\EtcSlaveTerminalBase_947E5A46.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TopologyView\InfoData\InfoDataAdsAddrStateBase_1916E49F.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TopologyView\WcState\WcStateInputToggleBase_F68C23A9.TcDUT">
+    <Compile Include="SpecialPlcTypes\TcoAmsNetId.TcDUT">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics" />
     <Folder Include="Diagnostics\EtherCAT" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\DigitalInputs" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\DigitalOutputs" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\InfoData" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />
-    <Folder Include="Diagnostics\EtherCAT\SyncUnit" />
-    <Folder Include="TopologyView" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\WcState" />
+    <Folder Include="SpecialPlcTypes" />
     <Folder Include="POUs" />
-    <Folder Include="TopologyView\DigitalInputs" />
-    <Folder Include="TopologyView\DigitalOutputs" />
-    <Folder Include="TopologyView\InfoData" />
-    <Folder Include="TopologyView\WcState" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_EtherCAT">

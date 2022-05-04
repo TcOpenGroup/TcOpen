@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL6002_81703A53" Id="{6bbdcf6f-5a39-0885-2c9a-def8d6b291eb}">
+  <DUT Name="EL6002_CD897635" Id="{a7035ddd-ae77-0c4c-258f-c20b3508cf3f}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6002-0000-0019'}
 {attribute addProperty BoxType "EL6002-0000-0019"}
-{attribute addProperty Id "COM_TxPDO_Map_Inputs_Channel_1AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_TxPDO_Map_Inputs_Channel_2AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_RxPDO_Map_Outputs_Channel_1AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27COM_RxPDO_Map_Outputs_Channel_2AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_32EB74EA10"}
-{attribute addProperty CRC "2171615827"}
-{attribute addProperty Size "126"}
-TYPE EL6002_81703A53 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+{attribute addProperty Id "COM_TxPDO_Map_Inputs_Channel_1AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_TxPDO_Map_Inputs_Channel_2AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_RxPDO_Map_Outputs_Channel_1AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27COM_RxPDO_Map_Outputs_Channel_2AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "3448337973"}
+{attribute addProperty Size "118"}
+TYPE EL6002_CD897635 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
 	{attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_1"}
 	COM_TxPDO_Map_Inputs_Channel_1 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
@@ -17,9 +17,9 @@ STRUCT
 	{attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_2"}
 	COM_RxPDO_Map_Outputs_Channel_2 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
 	{attribute addProperty Name "WcState"}
-	WcState : WcState_9091E0EB;
+	WcState : TcoIo.WcState_9091E0EB;
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_32EB74EA;
+	InfoData : InfoData_23CBA837;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
