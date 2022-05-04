@@ -12,8 +12,11 @@ namespace TemplateTests
 {
     public class ControlledUnitTests
     {
-       
-
+#if DEBUG
+    private const int timeOut = 5000;
+#else
+    private const int timeOut = 70000;
+#endif
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
@@ -33,7 +36,7 @@ namespace TemplateTests
             //Entry.Plc.MAIN._technology._processSettings.InitializeRemoteDataExchange(ProcessSettingsRepository);
 
 
-            if(!ProcessSettingsRepository.Queryable.Where(p => p._EntityId == "default").Any())
+            if (!ProcessSettingsRepository.Queryable.Where(p => p._EntityId == "default").Any())
             {
                 ProcessSettingsRepository.Create("default", new PlainProcessData()
                 {
@@ -75,9 +78,9 @@ namespace TemplateTests
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_manual_mode()
-        {                        
+        {
             var cu = Entry.Plc.MAIN._technology._cu00x;
             cu._manualTask.Execute();
 
@@ -86,14 +89,14 @@ namespace TemplateTests
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_ground_mode()
         {
             var cu = Entry.Plc.MAIN._technology._cu00x;
             cu._manualTask.Execute(); // Reset other tasks
             cu._groundTask._task.Execute();
 
-           
+
 
             Assert.AreEqual(eTaskState.Ready, (eTaskState)cu._manualTask._taskState.Synchron);
             Assert.AreEqual(eTaskState.Ready, (eTaskState)cu._automatTask._task._taskState.Synchron);
@@ -105,7 +108,7 @@ namespace TemplateTests
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_ground_not_done()
         {
             var cu = Entry.Plc.MAIN._technology._cu00x;
@@ -114,27 +117,27 @@ namespace TemplateTests
             cu._automatTask._task.Execute();
 
             System.Threading.Thread.Sleep(250);
-            
+
             Assert.AreEqual(eTaskState.Ready, (eTaskState)cu._automatTask._task._taskState.Synchron);
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_ground_done()
         {
             var cu = Entry.Plc.MAIN._technology._cu00x;
-           
-            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) cu._manualTask.Execute(); 
+
+            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) cu._manualTask.Execute();
 
             while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
 
             while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
-           
+
             Assert.AreEqual(eTaskState.Busy, (eTaskState)cu._automatTask._task._taskState.Synchron);
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_load_process_data()
         {
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
@@ -169,9 +172,9 @@ namespace TemplateTests
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_load_create_new_entity()
-        {            
+        {
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
             var data = Entry.Plc.MAIN._technology._processSettings._data;
             data._EntityId.Synchron = "default";
@@ -183,19 +186,19 @@ namespace TemplateTests
             automat._dataCreateNew.Synchron = true;
 
             cu._manualTask.Execute(); // Reset other tasks
-          
 
-            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy);
 
-            
+            while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
+
+
 
             while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
 
 
-            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute(); 
-            
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
-            while (cu._automatTask._currentStep.ID.Synchron != 32766);
+
+            while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
             Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
             Console.WriteLine(rec._Created.ToString().Substring(0, 19));
@@ -211,7 +214,7 @@ namespace TemplateTests
 
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_load_open_entity()
         {
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
@@ -246,7 +249,7 @@ namespace TemplateTests
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_load_open_close_entity()
         {
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
@@ -270,7 +273,7 @@ namespace TemplateTests
 
             while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) ;
 
-            while((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 10000) ;
 
@@ -284,7 +287,7 @@ namespace TemplateTests
 
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_load_open_finalize_entity()
         {
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
@@ -304,11 +307,11 @@ namespace TemplateTests
 
             while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
 
-            
 
-            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute(); 
 
-            while((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
+            while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
+
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 10000) ;
 
@@ -321,7 +324,7 @@ namespace TemplateTests
         }
 
         [Test]
-        [Timeout(5000)]
+        [Timeout(timeOut)]
         public void run_automat_mode_load_open_entity_then_ground()
         {
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
@@ -339,7 +342,7 @@ namespace TemplateTests
 
             while ((eTaskState)cu._manualTask._taskState.Synchron != eTaskState.Busy) ;
 
-            
+
 
             while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done) cu._groundTask._task.Execute();
 
@@ -355,16 +358,16 @@ namespace TemplateTests
             Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
             Assert.AreEqual(true, cuData.EntityHeader.WasReset.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.Failed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
-            Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);          
-            Assert.AreEqual(MainPlc.eStations.CU00x, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);           
+            Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);
+            Assert.AreEqual(MainPlc.eStations.CU00x, (MainPlc.eStations)cuData.EntityHeader.OpenOn.Synchron);
         }
 
 
-        [Test]       
+        [Test]
         [Repeat(5)]
         public void run_automat_mode_load_create_new_entity_many_times()
         {
-            return;        
+            return;
             var rec = Entry.Plc.MAIN._technology._processSettings.GetRepository<PlainProcessData>().Read("default");
             var data = Entry.Plc.MAIN._technology._processSettings._data;
             data._EntityId.Synchron = "default";
@@ -386,7 +389,7 @@ namespace TemplateTests
 
             while ((eTaskState)cu._groundTask._task._taskState.Synchron != eTaskState.Done || !cu._groundTask._groundDone.Synchron) ;
 
-            while((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
+            while ((eTaskState)cu._automatTask._task._taskState.Synchron != eTaskState.Busy) cu._automatTask._task.Execute();
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
