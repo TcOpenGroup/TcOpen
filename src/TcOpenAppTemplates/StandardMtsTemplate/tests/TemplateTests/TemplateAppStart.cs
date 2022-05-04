@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,14 +14,12 @@ namespace TemplateTests
         private Process appProcess;
         private void StartApp()
         {
-            //var applicationDirectory = TestContext.CurrentContext.TestDirectory;
-
-            var slnFolder = Environment.GetEnvironmentVariable("slnFolder") ?? @"..\";
+            var slnFolder = Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "..\\..\\..\\..\\..\\..\\..\\..\\..\\")); //Environment.GetEnvironmentVariable("slnFolder") ?? @"..\";
 
 #if DEBUG
-            var templateFolder = @"StandardMtsTemplate\src\HmiTemplate.Wpf\bin\Debug\net48";
+            var templateFolder = @"src\TcOpenAppTemplates\StandardMtsTemplate\src\HmiTemplate.Wpf\bin\Debug\net48";
 #else
-            var templateFolder = @"StandardMtsTemplate\src\HmiTemplate.Wpf\bin\Release\net48";
+            var templateFolder = @"src\TcOpenAppTemplates\StandardMtsTemplate\src\HmiTemplate.Wpf\bin\Release\net48";
 #endif
             var templateExe = "HmiTemplate.Wpf.exe";
             var applicationPath = Path.GetFullPath(Path.Combine(slnFolder, templateFolder, templateExe));
