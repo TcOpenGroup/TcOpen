@@ -18,12 +18,11 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class DigitalInputBase_50022E7BHWDiagView : UserControl
+    public partial class InfoDataAdsAddrStateBase_1916E49FHWDiagView : UserControl
     {
-        public DigitalInputBase_50022E7BHWDiagView()
+        public InfoDataAdsAddrStateBase_1916E49FHWDiagView()
         {
             InitializeComponent();
         }
     }
-
 }

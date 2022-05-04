@@ -179,8 +179,14 @@
 			</Properties>
 		</DataType>
 		<DataType>
-			<Name GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}" AutoDeleteType="true">Status_F2CE6D91</Name>
+			<Name GUID="{1B83BF4E-A50C-A919-8090-80518B105797}" Namespace="TcoIo" AutoDeleteType="true">DigitalInputBase_50022E7B</Name>
+			<BitSize>0</BitSize>
+			<BaseType GUID="{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}"/>
+		</DataType>
+		<DataType>
+			<Name GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}" AutoDeleteType="true">Status_F2CE6D91</Name>
 			<BitSize>56</BitSize>
+			<ExtendsType GUID="{1B83BF4E-A50C-A919-8090-80518B105797}" Namespace="TcoIo">DigitalInputBase_50022E7B</ExtendsType>
 			<SubItem>
 				<Name>Underrange</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
@@ -1106,7 +1112,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Status</Name>
-							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
+							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_16_EK1122.Term_17_EK1100.Term_20_EL3011.AI_Standard.Value</Name>
@@ -1146,7 +1152,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Status</Name>
-							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
+							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_1.Value</Name>
@@ -1154,7 +1160,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Status</Name>
-							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
+							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_2.Value</Name>
@@ -1162,7 +1168,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Status</Name>
-							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
+							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_3.Value</Name>
@@ -1170,7 +1176,7 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Status</Name>
-							<Type GUID="{79CFF479-40B7-5C53-DE54-CFBC61DB53BC}">Status_F2CE6D91</Type>
+							<Type GUID="{48118174-ACE9-F5F8-138C-17449DABE27F}">Status_F2CE6D91</Type>
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_4_EtherCAT.Term_14_EK1100.Term_23_EL3024.AI_Standard_Channel_4.Value</Name>

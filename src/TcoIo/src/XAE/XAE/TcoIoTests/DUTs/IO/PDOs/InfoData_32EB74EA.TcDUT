@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="InfoData_32EB74EA" Id="{26cdbc11-96d5-0cf2-3b15-dd35f59d7b23}">
+  <DUT Name="InfoData_32EB74EA" Id="{b1b65d30-3b84-0e70-0cd8-2c1d40fea45d}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6002-0000-0019'}
 {attribute addProperty BoxType "EL6002-0000-0019"}
 {attribute addProperty Id "AdsAddrAT %I*AMSADDR8StateAT %I*UINT2"}
 {attribute addProperty CRC "854291690"}
 {attribute addProperty Size "10"}
-TYPE InfoData_32EB74EA :
+TYPE InfoData_32EB74EA EXTENDS TcoIo.InfoDataAdsAddrStateBase_1916E49F :
 STRUCT
 	{attribute addProperty Name "AdsAddr"}
 	AdsAddr AT %I* : AMSADDR;
