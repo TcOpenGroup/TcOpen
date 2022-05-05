@@ -105,8 +105,6 @@ namespace TcoCore
         LogMessagesDelegate<PlainTcoDaqItem> LogMessages;
         
         public delegate void LogMessagesDelegate<T>(IEnumerable<T> messages) where T : PlainTcoDaqItem;
-                
-            }
-        }       
+                                           
     }
 }
