@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TcoDaqData" Id="{92e7033b-5043-0e97-09b7-ad1688754aec}">
+    <Declaration><![CDATA[TYPE TcoDaqData :
+STRUCT
+	_s : STRING;
+	_i : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

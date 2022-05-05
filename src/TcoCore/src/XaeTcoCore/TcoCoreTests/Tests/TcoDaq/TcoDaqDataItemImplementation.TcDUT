@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TcoDaqDataItemImplementation" Id="{e0905e98-2f17-0a1e-3144-14af9c8203d1}">
+    <Declaration><![CDATA[TYPE TcoDaqDataItemImplementation EXTENDS TcoCore.TcoDaqItem :
+STRUCT
+	Data : TcoDaqData; 
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

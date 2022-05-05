@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoDaqImplementationTest" Id="{f0d29d74-6462-0d14-1e80-438473a70eba}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDaqImplementationTest EXTENDS TcoCore.TcoDaq
+VAR
+	_buffer : ARRAY[0..MAX_DAQ_BUFFER_INDEX] OF TcoDaqDataItemImplementation;
+END_VAR
+
+VAR CONSTANT
+	(*~
+		<docu>
+			<summary>
+				Max number of buffered DAQ entries in bytes. 				 
+			</summary>				
+		</docu>
+    ~*)
+	MAX_DAQ_BUFFER_INDEX : INT := 100;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Push" Id="{da34304e-829e-0f30-0d54-c9e335a5f217}">
+      <Declaration><![CDATA[METHOD Push : BOOL
+VAR_INPUT
+	pData : PVOID;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(_plcCarret > MAX_DAQ_BUFFER_INDEX) THEN
+	_plcCarret := 1;
+END_IF
+
+IF(NOT _buffer[_plcCarret].ExpectDequeing) THEN		
+	Tc2_System.MEMCPY(ADR(_buffer[_plcCarret].Data), pData, SIZEOF(_buffer[_plcCarret].Data));		
+	_buffer[_plcCarret].ExpectDequeing := TRUE;	
+	_plcCarret := _plcCarret + 1;
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

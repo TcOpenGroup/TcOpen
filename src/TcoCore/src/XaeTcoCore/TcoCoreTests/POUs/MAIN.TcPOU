@@ -27,6 +27,7 @@ VAR
 	_tcoSequenceTestContext				:	TcoSequenceTestContext;
 	_tcoLoggerTestContext				:	TcoLoggerTestContext;	
 	_tcoSequenceObserverTests			: 	TcoSequenceObserverTests;
+	_tcoDaqTestContext 					: 	TcoDaqTestContext;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//TcRpc tests
@@ -69,7 +70,9 @@ _tcoSequenceTestContext.ProbeRun();
 
 _tcoLoggerTestContext.ProbeRun();
 
-_tcoSequenceObserverTests.ProbeRun();]]></ST>
+_tcoSequenceObserverTests.ProbeRun();
+
+_tcoDaqTestContext.ProbeRun();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

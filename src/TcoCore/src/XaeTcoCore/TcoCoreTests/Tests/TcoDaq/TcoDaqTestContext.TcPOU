@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoDaqTestContext" Id="{4b623250-6d62-0909-057c-b6bc6710b45c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDaqTestContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_sut : TcoDaqImplementationTest(THIS^);
+	_msg : TcoDaqData;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{a93cd5b9-c57e-0b8b-0495-ebbc2998977f}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+VAR 
+	_index : INT;
+	_sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF     
+    eTcoDaqTests.Push:
+		_sut.Push(ADR(_msg));			 		
+END_CASE
+
+_sut();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

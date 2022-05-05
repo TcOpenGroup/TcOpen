@@ -26,17 +26,8 @@
 			</code>		
 		</docu>
 ~*)
-FUNCTION_BLOCK TcoDaq EXTENDS TcoObject IMPLEMENTS ITcoDaq
-VAR
-	 (*~
-		<docu>
-			<summary>
-				Circural buffer for this DAQ.					 
-			</summary>				
-		</docu>
-    ~*)
-	_buffer : TcoDaqItem;
-
+FUNCTION_BLOCK ABSTRACT TcoDaq EXTENDS TcoObject 
+VAR	
 	(*~
 		<docu>
 			<summary>
@@ -46,120 +37,18 @@ VAR
     ~*)
 	_plcCarret : INT;
 END_VAR
-
-VAR CONSTANT
-	(*~
-		<docu>
-			<summary>
-				Max number of buffered DAQ entries in bytes. 				 
-			</summary>				
-		</docu>
-    ~*)
-	MAX_DAQ_BUFFER_INDEX : INT := 5000;
-    
-	(*~
-		<docu>
-			<summary>
-				Max number of buffered DAQ entries in bytes before set a dequeuing request. 				 
-			</summary>				
-		</docu>
-    ~*)
-	MAX_DAQ_BYTE_LENGHT : INT := 500; 
-
-END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Push" Id="{25f40a70-ac72-03b6-026a-0e415c9bfaa5}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Pushes the data to DAQ buffer.
-				See also `PushData`
-				<note type="important">When using this method in a cyclical environment the data will be push each time it is called. You may easily overrun the DAQ buffer.</note>				 
-			</summary>				
-		</docu>
-~*)
-METHOD PUBLIC Push
+    <Method Name="Push" Id="{e510aa33-5ec3-0c2a-3bf2-b12b6de4083a}">
+      <Declaration><![CDATA[METHOD ABSTRACT Push : BOOL
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Pointer on DAQ entry.				 
-			</summary>				
-		</docu>
-	~*)
-    pData : PVOID;
-	(*~
-		<docu>
-			<summary>
-				Size of DAQ entry in byte.				 
-			</summary>				
-		</docu>
-	~*)
-    DataSize : INT;
-END_VAR
-VAR
-	_tmpDaqEntry : TcoDaqEntry;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF(Parent <> 0 AND_THEN Parent.Context <> 0 AND_THEN Parent.Context.RealTimeClock <> 0) THEN
-	_tmpDaqEntry.TimeStamp :=  Parent.Context.RealTimeClock.NowLocal();	
-	_tmpDaqEntry.Cycle := Parent.Context.StartCycleCount;	
-END_IF;	
-
-_tmpDaqEntry.pData := pData;
-_tmpDaqEntry.DataSize := DataSize;
-_tmpDaqEntry.Identity := 0;
-_tmpDaqEntry.MessageDigest := 0;
-	
-
-PushData(_tmpDaqEntry);
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="PushData" Id="{e0b3ca52-7de2-01ac-312e-a838125297f2}">
-      <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Pushes the data to DAQ buffer.
-				See also `Push`
-				<note:important>
-						TODO: This method is typically invoked from a `TcoMessenger`. 
-						TODO: Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
-						TODO: For details see `TcoMessengerSettings`.
-				</note>				 
-			</summary>				
-		</docu>
-~*)
-METHOD PushData
-VAR_INPUT
-	inDaqEntry	: TcoDaqEntry;
+	pData : PVOID;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Check enough free space  for a new DAQ entry
-IF((_plcCarret + inDaqEntry.DataSize) > MAX_DAQ_BUFFER_INDEX) THEN
-		_plcCarret := 1;
-END_IF
-
-IF((_plcCarret + inDaqEntry.DataSize) > MAX_DAQ_BYTE_LENGHT) THEN
-		_buffer.ExpectDequeing := TRUE;
-END_IF
-
-
-Tc2_System.MEMCPY(
-    destAddr := _buffer.Data[_plcCarret], 
-    srcAddr  := inDaqEntry.pData,
-    n        := TO_UDINT(inDaqEntry.DataSize)
-);
-
-_plcCarret := _plcCarret + inDaqEntry.DataSize;
-
-
-]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

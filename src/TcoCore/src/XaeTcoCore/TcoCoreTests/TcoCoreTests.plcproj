@@ -70,6 +70,21 @@
     <Compile Include="Tests\TcoContext\TcoContextTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoDaq\eTcoDaqTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoDaq\TcoDaqData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoDaq\TcoDaqDataItemImplementation.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoDaq\TcoDaqImplementationTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoDaq\TcoDaqTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoLogger\PlcExecuted\eTcoLoggerTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -194,6 +209,7 @@
   <ItemGroup>
     <Folder Include="Components" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoDaq" />
     <Folder Include="Tests\TcoSequenceObserver" />
     <Folder Include="Tests\TcoLogger" />
     <Folder Include="Tests\TcoLogger\PlcExecuted" />
