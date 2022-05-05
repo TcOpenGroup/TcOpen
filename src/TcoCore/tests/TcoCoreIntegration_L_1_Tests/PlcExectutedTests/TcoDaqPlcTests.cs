@@ -47,14 +47,16 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             //Act
             tc.ExecuteProbeRun(1, (int)eTcoDaqTests.Push);
-            
+
+            //var actual = tc._sut.Pop<TcoDaqDataItemImplementation>();
+
             var buffer = tc._sut.Buffer.Select(p => p as TcoDaqDataItemImplementation).ToArray();
 
             //Assert
 
             Assert.AreEqual(tc._msg._s .Synchron, buffer[index].Data._s.Synchron);
             Assert.AreEqual(tc._msg._i.Synchron, buffer[index].Data._i.Synchron);                        
-        }
+        }                
 
 
         [Test]

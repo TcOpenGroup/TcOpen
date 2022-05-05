@@ -38,8 +38,8 @@ namespace TcoCore
                     System.Threading.Thread.Sleep(interLoopDelay);
                     if (LogMessages != null)
                     {
-                        LogMessages(Pop<T>());
-                    }
+                    LogMessages(Pop<T>());
+                }
                 }
             });
         }
@@ -105,6 +105,8 @@ namespace TcoCore
         LogMessagesDelegate<PlainTcoDaqItem> LogMessages;
         
         public delegate void LogMessagesDelegate<T>(IEnumerable<T> messages) where T : PlainTcoDaqItem;
-          
+                
+            }
+        }       
     }
 }
