@@ -13,7 +13,7 @@
         <local:ProcessTraceabilityViewModel></local:ProcessTraceabilityViewModel>
     </UserControl.DataContext>
     <Grid>
-        <vortexs:PermissionBox Grid.Row="1" Permissions="Administrator|can_user_open_process_traceability" SecurityMode="Disabled">
+        <vortexs:PermissionBox Grid.Row="1" Permissions="process_traceability_access" SecurityMode="Disabled">
             <vortex:TcoDataExchangeDisplayView DataContext="{Binding ProcessData}" x:Name="fu">
                 <vortex:TcoDataExchangeDisplayView.DataListColumns>
                     <DataGridTextColumn Binding="{Binding _Created, Converter={vortex:HumanizeDateConverter}}" Header="{x:Static s:strings.Created}"/>

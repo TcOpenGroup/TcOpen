@@ -13,7 +13,7 @@
         <local:TechnologicalSettingsViewModel></local:TechnologicalSettingsViewModel>
     </UserControl.DataContext>
     <Grid>
-        <vortexs:PermissionBox Grid.Row="1" Permissions="Administrator|can_user_open_technological_settings" SecurityMode="Disabled">
+        <vortexs:PermissionBox Grid.Row="1" Permissions="technology_settings_access" SecurityMode="Disabled">
             <vortex:TcoDataExchangeView DataContext="{Binding TechnologicalData}" x:Name="fu">
                     <vortex:TcoDataExchangeView.DataListColumns>
                         <DataGridTextColumn Binding="{Binding _Created, Converter={vortex:HumanizeDateConverter}}" Header="{x:Static s:strings.Created}"/>

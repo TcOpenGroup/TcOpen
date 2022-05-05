@@ -1,14 +1,12 @@
-﻿using System;
+﻿using HmiTemplate.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vortex.Presentation.Wpf;
-using TcoCore;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
+using TcoCore;
 using TcOpen.Inxton.Local.Security;
-using HmiTemplate.Wpf;
+using Vortex.Presentation.Wpf;
 
 namespace MainPlc
 {
@@ -20,14 +18,13 @@ namespace MainPlc
             this.AddCommand(typeof(CUBaseDataView), "Data", this);
             this.AddCommand(typeof(CUBaseComponentsView), "Components", this);
             this.AddCommand(typeof(CUBaseDiagView), "Diagnostics", this);
-            
-            
+        
             this.OpenDetailsCommand = new TcOpen.Inxton.Input.RelayCommand((a) => OpenDetails());
         }
 
         private void OpenDetails()
         {
-            if (AuthorizationChecker.HasAuthorization(Roles.controlled_unit_can_open_details))
+            if (AuthorizationChecker.HasAuthorization(Roles.station_details))
             {
                 var detailsView = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Control", Component, new Grid(), false);
                 Vortex.Presentation.Wpf.NavigableViewModelBase.Current.OpenView(detailsView as FrameworkElement);
@@ -60,6 +57,35 @@ namespace MainPlc
         {
             var symbolOrName = new NameOrSymbolConverter();
             this.Title = (string)symbolOrName.Convert(Component, typeof(string), null, System.Globalization.CultureInfo.InvariantCulture);
+
+            
+                var automatTask = Component.GetType().GetProperty("_automatTask")?.GetValue(Component) as TcoTaskedSequencer;
+                if (automatTask != null)
+                {
+                    automatTask._task.ExecuteDialog = () =>
+                    {
+                        return MessageBox.Show(HmiTemplate.Wpf.Properties.strings.AutomatWarning, "Automat", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
+                    };
+                }
+
+                var groundTask = Component.GetType().GetProperty("_groundTask")?.GetValue(Component) as TcoTaskedSequencer;
+                if (groundTask != null)
+                {
+                    groundTask._task.ExecuteDialog = () =>
+                    {
+                        return MessageBox.Show(HmiTemplate.Wpf.Properties.strings.GroundWarning, "Ground", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
+                    };
+                }
+
+                var manualTask = Component.GetType().GetProperty("_manualTask")?.GetValue(Component) as TcoTaskedService;
+                if (manualTask != null)
+                {
+                    manualTask.ExecuteDialog = () =>
+                    {
+                        return MessageBox.Show(HmiTemplate.Wpf.Properties.strings.ManualWarning, "Manual", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
+                    };
+                }
+           
         }
 
         public override object Model { get => Component; set { Component = (CUBase)value; this.Update(); } }        

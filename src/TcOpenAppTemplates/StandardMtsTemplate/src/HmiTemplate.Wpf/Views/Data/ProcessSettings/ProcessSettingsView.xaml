@@ -13,7 +13,7 @@
         <local:ProcessSettingsViewModel></local:ProcessSettingsViewModel>
     </UserControl.DataContext>
     <Grid>
-        <vortexs:PermissionBox Grid.Row="1" Permissions="Administrator|can_user_open_process_settings" SecurityMode="Disabled">
+        <vortexs:PermissionBox Grid.Row="1" Permissions="process_settings_access" SecurityMode="Disabled">
             <vortex:TcoDataExchangeView DataContext="{Binding ProcessData}" x:Name="fu">
                 <vortex:TcoDataExchangeView.DataListColumns>
                     <DataGridTextColumn Binding="{Binding _Created, Converter={vortex:HumanizeDateConverter}}" Header="{x:Static s:strings.Created}"/>
