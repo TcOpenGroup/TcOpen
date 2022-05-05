@@ -7,7 +7,7 @@ using TcoCoreTests;
 namespace TcoCoreUnitTests.PlcExecutedTests
 {
 
-    public class T12_TcoSequencerObserverPlcTests
+    public class T13_TcoSequencerObserverPlcTests
     {
 
         TcoSequenceObserverTests tc = ConnectorFixture.Connector.MAIN._tcoSequenceObserverTests;

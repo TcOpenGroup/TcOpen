@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eTcoDaqTests" Id="{26de48e7-e83b-0fca-07ab-ee65941e6af0}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoDaqTests :
+(
+	Push := 10
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

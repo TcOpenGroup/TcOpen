@@ -8,60 +8,35 @@
 		</summary>				
 	</docu>	
 ~*)
-TYPE TcoDaqItem :
+TYPE ABSTRACT TcoDaqItem :
 STRUCT
-(*~
-	<docu>
-		<summary>
-			Time when the DAQ was posted.
-		</summary>				
-	</docu>	
-~*)
+	(*~
+		<docu>
+			<summary>
+				Time when the DAQ was posted.
+			</summary>				
+		</docu>	
+	~*)
 	{attribute clr [ReadOnly()]}
 	TimeStamp : DT;
-(*~
-	<docu>
-		<summary>
-			Data of the DAQ.
-		</summary>				
-	</docu>	
-~*)
-	{attribute clr [ReadOnly()]}		
-	Data : ARRAY[0..TcoDaq.MAX_DAQ_BUFFER_INDEX] OF BYTE;
-(*~
-	<docu>
-		<summary>
-			Identity of the TcoObject that posted this DAQ. 
-		</summary>				
-	</docu>	
-~*)
-	{attribute clr [ReadOnly()]}	
-	Identity : ULINT;	
-(*~
-	<docu>
-		<summary>
-			Context cycle in which the DAQ was posted.
-		</summary>				
-	</docu>	
-~*)
+			
+	(*~
+		<docu>
+			<summary>
+				Context cycle in which the DAQ was posted.
+			</summary>				
+		</docu>	
+	~*)
 	{attribute clr [ReadOnly()]}
 	Cycle : ULINT;
-(*~
-	<docu>
-		<summary>			
-			Indicates that the DAQ data is expected to be dequeed from the buffer.
-		</summary>				
-	</docu>	
-~*)	
+	(*~
+		<docu>
+			<summary>			
+				Indicates that the DAQ data is expected to be dequeed from the buffer.
+			</summary>				
+		</docu>	
+	~*)	
 	ExpectDequeing : BOOL;	
-(*~
-<docu>
-    <summary>		
-        Stores message digest of this message text.
-    </summary>				
-</docu>	
-~*)
-	MessageDigest : DWORD;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
