@@ -85,14 +85,31 @@ namespace TcoCore
                 
         }
 
+        public string Roles { get; set; }
+        public ExecuteDialogDelegate ExecuteDialog;
+        public delegate bool ExecuteDialogDelegate();
+
         /// <summary>
         /// Executes this task.
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter = null)
-        {
+        {            
             if (CanExecute(new object()))
             {
+                if(!string.IsNullOrEmpty(Roles))
+                {
+                    if(!TcoAppDomain.Current.AuthenticationService.HasAuthorization(Roles))
+                    {
+                        return;
+                    }
+                }
+
+                if(ExecuteDialog != null && !ExecuteDialog())
+                {
+                    return;
+                }
+
                 if (this._taskState.Synchron == (short)(eTaskState.Done))
                 {
                     this._restoreRequest.Synchron = true;
