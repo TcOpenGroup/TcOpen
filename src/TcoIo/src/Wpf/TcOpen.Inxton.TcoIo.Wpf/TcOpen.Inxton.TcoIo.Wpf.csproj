@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.7-alpha.695" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.703" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,15 +27,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoDataAdsAddrStateBase_1916E49FHWDiagView.xaml">
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoDataStateHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Diagnostics\EtherCAT\WcStateBase\WcStateBase_A2171C4EHWDiagView.xaml">
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_6F19DB2BHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Diagnostics\EtherCAT\WcStateBase\WcStateInputToggleBase_F68C23A9HWDiagView.xaml">
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\TcoAmsAddrHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_23CBA837HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\WcStateBase\WcState_0B2B16F9HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\WcStateBase\WcState_9091E0EBHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

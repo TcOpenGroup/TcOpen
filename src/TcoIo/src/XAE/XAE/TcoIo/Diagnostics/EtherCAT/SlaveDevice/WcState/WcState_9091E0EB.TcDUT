@@ -6,7 +6,7 @@
 {attribute addProperty Id "WcStateAT %I*BOOL1InputToggleAT %I*BOOL1"}
 {attribute addProperty CRC "2425479403"}
 {attribute addProperty Size "2"}
-TYPE WcState_9091E0EB EXTENDS WcStateInputToggleBase_F68C23A9 :
+TYPE WcState_9091E0EB :
 STRUCT
 	{attribute addProperty Name "WcState"}
 	WcState AT %I* : BOOL;

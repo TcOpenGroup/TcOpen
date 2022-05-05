@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL6001_0DE01E7E" Id="{c3d39262-fa6c-033b-11f5-6cf3f5f5cf6d}">
+  <DUT Name="EL6001_0DE01E7E" Id="{5f8a1e95-ebfc-03e6-1f1c-f5cbc70d81c0}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6001-0000-0020'}
 {attribute addProperty BoxType "EL6001-0000-0020"}
 {attribute addProperty Id "COM_InputsAT %I*COM_Inputs_3801C95E30COM_OutputsAT %Q*COM_Outputs_DEF408EC27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
@@ -15,7 +15,7 @@ STRUCT
 	{attribute addProperty Name "WcState"}
 	WcState : TcoIo.WcState_9091E0EB;
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_23CBA837;
+	InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

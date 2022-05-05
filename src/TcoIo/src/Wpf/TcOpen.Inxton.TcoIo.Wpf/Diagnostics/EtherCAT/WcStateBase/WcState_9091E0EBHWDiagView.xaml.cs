@@ -18,9 +18,9 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class InfoDataAdsAddrStateBase_1916E49FHWDiagView : UserControl
+    public partial class WcState_9091E0EBHWDiagView : UserControl
     {
-        public InfoDataAdsAddrStateBase_1916E49FHWDiagView()
+        public WcState_9091E0EBHWDiagView()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EK1100_1FC0878B" Id="{caab40dd-e2d4-0ae4-160e-6006e6fbabd7}">
+  <DUT Name="EK1100_1FC0878B" Id="{be9e5e61-dbad-0b16-35bc-12adb9ccafe9}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "InfoDataAT %I*InfoData_6F19DB2B2"}
@@ -9,7 +9,7 @@
 TYPE EK1100_1FC0878B EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_6F19DB2B;
+	InfoData : TcoIo.InfoData_6F19DB2B;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

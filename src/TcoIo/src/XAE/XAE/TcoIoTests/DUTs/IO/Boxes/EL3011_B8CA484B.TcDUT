@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL3011_B8CA484B" Id="{5da3ccaa-19c2-0293-3d0b-71dec7551672}">
+  <DUT Name="EL3011_B8CA484B" Id="{07e1af33-c4d6-05ee-3663-38cf044f18af}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3011-0000-0018'}
 {attribute addProperty BoxType "EL3011-0000-0018"}
 {attribute addProperty Id "AI_StandardAT %I*AI_Standard_4A3944819WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
@@ -13,7 +13,7 @@ STRUCT
 	{attribute addProperty Name "WcState"}
 	WcState : TcoIo.WcState_9091E0EB;
 	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_23CBA837;
+	InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
