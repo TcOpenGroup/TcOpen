@@ -1,4 +1,5 @@
-﻿using TcOpen.Inxton.Data;
+﻿using System;
+using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security
@@ -31,6 +32,11 @@ namespace TcOpen.Inxton.Local.Security
         }
 
         public void DeAuthenticateCurrentUser()
+        {
+            throw new AuthenticationServiceNotActiveException();
+        }
+
+        public bool HasAuthorization(string roles, Action notAuthorizedAction = null)
         {
             throw new AuthenticationServiceNotActiveException();
         }

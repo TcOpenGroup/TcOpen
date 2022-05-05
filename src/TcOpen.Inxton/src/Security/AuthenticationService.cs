@@ -250,5 +250,10 @@ namespace TcOpen.Inxton.Local.Security
                 this.DeAuthenticateCurrentUser();
             }
         }
+
+        public bool HasAuthorization(string roles, Action notAuthorizedAction = null)
+        {
+            return AuthorizationChecker.HasAuthorization(roles, notAuthorizedAction);
+        }
     }
 }
