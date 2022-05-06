@@ -27,6 +27,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\OutputBase\OutputBase_10CEE7DEHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\Limit\OnlinerByteHWDiagLimitView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InputBase\InputBase_8311D824HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoDataStateHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

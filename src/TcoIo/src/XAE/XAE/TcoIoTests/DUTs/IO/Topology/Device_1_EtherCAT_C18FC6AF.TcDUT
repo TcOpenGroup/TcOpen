@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Device_1_EtherCAT_12D51B15" Id="{9dea9d3b-e298-0897-3cbc-e3dfd7d61183}">
+  <DUT Name="Device_1_EtherCAT_C18FC6AF" Id="{757ebdb6-b6ac-06b7-12d4-cc07b4aaaecc}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
 {attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
-{attribute addProperty Id "Term_1_EK1200Term_1_EK1200_19D5475C248SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
-{attribute addProperty CRC "315955989"}
+{attribute addProperty Id "Term_1_EK1200Term_1_EK1200_F6996830248SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
+{attribute addProperty CRC "3247425199"}
 {attribute addProperty Size "322"}
-TYPE Device_1_EtherCAT_12D51B15 :
+TYPE Device_1_EtherCAT_C18FC6AF :
 STRUCT
 	{attribute addProperty Name "Term_1_EK1200"}
 	{attribute addProperty PreviousPort "Device 1 (EtherCAT) : Master"}
-	Term_1_EK1200 : Term_1_EK1200_19D5475C;
+	Term_1_EK1200 : Term_1_EK1200_F6996830;
 	{attribute addProperty Name "SyncUnits"}
 	SyncUnits : SyncUnits_13973095;
 	{attribute addProperty Name "Inputs"}

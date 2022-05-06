@@ -91,6 +91,12 @@
     <Compile Include="Diagnostics\EtherCAT\SlaveDevice\InfoData\InfoData_6F19DB2B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Inputs\InputBase_8311D824.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Outputs\OutputBase_10CEE7DE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcState_0B2B16F9.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +130,8 @@
     <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Inputs" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Outputs" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\WcState" />
     <Folder Include="SpecialPlcTypes" />
     <Folder Include="POUs" />

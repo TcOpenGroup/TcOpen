@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="AO_Outputs_Channel_BA7EBB7C" Id="{a0bb0f4f-df99-07c8-1cb8-31cf7bc1b2ff}">
+  <DUT Name="AO_Output_Channel_BA7EBB7C" Id="{f291fe92-48ca-02fd-09fc-cb4b9d815ac6}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL4004-0000-0020'}
 {attribute addProperty BoxType "EL4004-0000-0020"}
 {attribute addProperty Id "Analog_outputAT %Q*INT2"}
 {attribute addProperty CRC "3128867708"}
 {attribute addProperty Size "2"}
-TYPE AO_Outputs_Channel_BA7EBB7C :
+TYPE AO_Output_Channel_BA7EBB7C EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
 	{attribute addProperty Name "Analog_output"}
 	Analog_output AT %Q* : INT;

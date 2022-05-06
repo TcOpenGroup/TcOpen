@@ -1669,7 +1669,7 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
 				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -3481,7 +3481,7 @@
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="4" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="3">
+			<Device Id="4" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="3">
 				<Name>Device 4 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
