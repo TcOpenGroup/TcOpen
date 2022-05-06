@@ -13,7 +13,8 @@ namespace MainPlc
     public class CUBaseViewModel : MenuRenderableControlViewModel
     {
         public CUBaseViewModel()
-        {           
+        {
+            this.AddCommand(typeof(CUBaseOverviewView), "Overview", this);
             this.OpenCommand(this.AddCommand(typeof(CUBaseTasksView), "Control", this));       
             this.AddCommand(typeof(CUBaseDataView), "Data", this);
             this.AddCommand(typeof(CUBaseComponentsView), "Components", this);

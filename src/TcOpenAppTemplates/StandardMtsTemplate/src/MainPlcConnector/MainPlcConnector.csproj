@@ -22,21 +22,21 @@
     <Folder Include="_meta\echac\" />
   </ItemGroup>
 
-  <!--PCKG-START
+  <!--PCKG-START-->
   <ItemGroup>
-    <PackageReference Include="TcOpen.Inxton.App" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.Local.Security" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.RavenDb" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.TcoCoreConnector" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.TcoDataConnector" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.TcoElementsConnector" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.TcoInspectorsConnector" Version="0.6.0-386-Create-application-template.905" />
+    <PackageReference Include="TcOpen.Inxton.App" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.Local.Security" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.RavenDb" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.TcoCoreConnector" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.TcoDataConnector" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.TcoElementsConnector" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.TcoInspectorsConnector" Version="0.6.0-386-Create-application-template.912" />
     <PackageReference Include="TcOpen.TcoIoBeckhoffConnector" Version="0.5.0-alpha.834" />
-    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.6.0-386-Create-application-template.905" />
+    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.6.0-386-Create-application-template.912" />
   </ItemGroup>
-  PCKG-END-->  
+  <!--PCKG-END-->  
   
-  <!--PROJ-START-->
+  <!--PROJ-START
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
     <ProjectReference Include="..\..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
@@ -45,7 +45,9 @@
     <ProjectReference Include="..\..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
     <ProjectReference Include="..\..\..\..\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
   </ItemGroup>
-  <!--PROJ-END-->
+  PROJ-END-->
 
-
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="$(SolutionDir)_Vortex\builder\vortex.compiler.console.exe -s $(SolutionPath) &gt; $(SolutionDir)jojo.log" ContinueOnError="true" />
+	</Target>
 </Project>

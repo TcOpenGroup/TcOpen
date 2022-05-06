@@ -18,7 +18,7 @@
 		<ProjectReference Include="..\MainPlcConnector\MainPlcConnector.csproj" />
 	</ItemGroup>
 
-	<!--PROJ-START-->
+	<!--PROJ-START
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoData\src\Wpf\TcoData.Wpf\TcOpen.Inxton.Data.Wpf.csproj" />
@@ -26,18 +26,18 @@
     <ProjectReference Include="..\..\..\..\TcoInspectors\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj" />    
   </ItemGroup>
-	<!--PROJ-END-->
+	PROJ-END-->
 
-  <!--PCKG-START
+  <!--PCKG-START-->
   <ItemGroup>
-    <PackageReference Include="TcOpen.Inxton.Data.Wpf" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.TcoCore.Wpf" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.TcoElements.Wpf" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.TcoPneumatics.Wpf" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.Local.Security.Wpf" Version="0.6.0-386-Create-application-template.905" />
-    <PackageReference Include="TcOpen.Inxton.TcoInspectors.Wpf" Version="0.6.0-386-Create-application-template.905" />
+    <PackageReference Include="TcOpen.Inxton.Data.Wpf" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.TcoCore.Wpf" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.TcoElements.Wpf" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.TcoPneumatics.Wpf" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.Local.Security.Wpf" Version="0.6.0-386-Create-application-template.912" />
+    <PackageReference Include="TcOpen.Inxton.TcoInspectors.Wpf" Version="0.6.0-386-Create-application-template.912" />
   </ItemGroup>
-  PCKG-END-->
+  <!--PCKG-END-->
 
 	<ItemGroup>
 	  <ApplicationDefinition Update="App.xaml">
@@ -58,6 +58,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Diagnostics\CUBaseDiagView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Overview\CUBaseOverviewView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ControlledUnits\Base\ControlledUnitBase\Tasks\CUBaseTasksView.xaml.cs">
@@ -94,6 +97,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Diagnostics\CUBaseDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlledUnits\Base\ControlledUnitBase\Overview\CUBaseOverviewView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
