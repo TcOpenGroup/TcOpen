@@ -124,6 +124,15 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        public static string ___Empty__ {
+            get {
+                return ResourceManager.GetString("___Empty__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entity header.
         /// </summary>
         public static string ___Entity_header__ {
@@ -169,24 +178,6 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is empty.
-        /// </summary>
-        public static string ___Is_empty__ {
-            get {
-                return ResourceManager.GetString("___Is_empty__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Is Master.
-        /// </summary>
-        public static string ___Is_Master__ {
-            get {
-                return ResourceManager.GetString("___Is_Master__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Last Rework Name.
         /// </summary>
         public static string ___Last_Rework_Name__ {
@@ -210,6 +201,15 @@ namespace MainPlcConnector.Properties {
         public static string ___MANUAL__ {
             get {
                 return ResourceManager.GetString("___MANUAL__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master.
+        /// </summary>
+        public static string ___Master__ {
+            get {
+                return ResourceManager.GetString("___Master__", resourceCulture);
             }
         }
         
@@ -250,11 +250,11 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation end.
+        ///   Looks up a localized string similar to Operation ended.
         /// </summary>
-        public static string ___Operation_end__ {
+        public static string ___Operation_ended__ {
             get {
-                return ResourceManager.GetString("___Operation_end__", resourceCulture);
+                return ResourceManager.GetString("___Operation_ended__", resourceCulture);
             }
         }
         
@@ -268,20 +268,20 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations Opened.
+        ///   Looks up a localized string similar to Operations opened.
         /// </summary>
-        public static string ___Operations_Opened__ {
+        public static string ___Operations_opened__ {
             get {
-                return ResourceManager.GetString("___Operations_Opened__", resourceCulture);
+                return ResourceManager.GetString("___Operations_opened__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operatod id.
+        ///   Looks up a localized string similar to Operator.
         /// </summary>
-        public static string ___Operatod_id__ {
+        public static string ___Operator__ {
             get {
-                return ResourceManager.GetString("___Operatod_id__", resourceCulture);
+                return ResourceManager.GetString("___Operator__", resourceCulture);
             }
         }
         
@@ -304,38 +304,38 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reciepe.
+        ///   Looks up a localized string similar to Recipe.
         /// </summary>
-        public static string ___Reciepe__ {
+        public static string ___Recipe__ {
             get {
-                return ResourceManager.GetString("___Reciepe__", resourceCulture);
+                return ResourceManager.GetString("___Recipe__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reciepe created.
+        ///   Looks up a localized string similar to Recipe created.
         /// </summary>
-        public static string ___Reciepe_created__ {
+        public static string ___Recipe_created__ {
             get {
-                return ResourceManager.GetString("___Reciepe_created__", resourceCulture);
+                return ResourceManager.GetString("___Recipe_created__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reciepe modified.
+        ///   Looks up a localized string similar to Recipe modified.
         /// </summary>
-        public static string ___Reciepe_modified__ {
+        public static string ___Recipe_modified__ {
             get {
-                return ResourceManager.GetString("___Reciepe_modified__", resourceCulture);
+                return ResourceManager.GetString("___Recipe_modified__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset or ground position performed.
+        ///   Looks up a localized string similar to Reset.
         /// </summary>
-        public static string ___Reset_or_ground_position_performed__ {
+        public static string ___Reset__ {
             get {
-                return ResourceManager.GetString("___Reset_or_ground_position_performed__", resourceCulture);
+                return ResourceManager.GetString("___Reset__", resourceCulture);
             }
         }
         
@@ -358,6 +358,15 @@ namespace MainPlcConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reworked.
+        /// </summary>
+        public static string ___Reworked__ {
+            get {
+                return ResourceManager.GetString("___Reworked__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start manual/Service mode.
         /// </summary>
         public static string ___Start_manual_Service_mode__ {
@@ -373,15 +382,6 @@ namespace MainPlcConnector.Properties {
             get {
                 return ResourceManager.GetString("___Starts_automatic_sequence__Before_start_you_need_to_perform_grounding_sequence" +
                         "___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Was Reworked.
-        /// </summary>
-        public static string ___Was_Reworked__ {
-            get {
-                return ResourceManager.GetString("___Was_Reworked__", resourceCulture);
             }
         }
         

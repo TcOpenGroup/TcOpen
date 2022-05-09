@@ -155,9 +155,9 @@ END_VAR
 	IF(Station.Technology.ProcessSettings.Data._EntityId <> '' AND NOT THIS^._missingProcessSettingMessage.Pinned) THEN
 		IF(Station.Technology.ProcessSettings.Read(Station.Technology.ProcessSettings.Data._EntityId).Done) THEN
 			Station.ProcessDataManager.Data := Station.Technology.ProcessSettings.Data;
-			Station.ProcessDataManager.Data.EntityHeader.ReciepeCreated := Station.Technology.ProcessSettings.Data._Created;
-			Station.ProcessDataManager.Data.EntityHeader.ReciepeLastModified  := Station.Technology.ProcessSettings.Data._Modified;
-			Station.ProcessDataManager.Data.EntityHeader.Reciepe  := Station.Technology.ProcessSettings.Data._EntityId;				
+			Station.ProcessDataManager.Data.EntityHeader.RecipeCreated := Station.Technology.ProcessSettings.Data._Created;
+			Station.ProcessDataManager.Data.EntityHeader.RecipeLastModified  := Station.Technology.ProcessSettings.Data._Modified;
+			Station.ProcessDataManager.Data.EntityHeader.Recipe  := Station.Technology.ProcessSettings.Data._EntityId;				
 			Station.ProcessDataManager.Data._EntityId := ULINT_TO_STRING(Context.RealTimeClock.TickClock());
 			CompleteStep();
 		END_IF;	

@@ -160,7 +160,7 @@ namespace HmiTemplate.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time lef to complete operations:.
+        ///   Looks up a localized string similar to Time left to complete operations:.
         /// </summary>
         public static string CoutdownDescription {
             get {

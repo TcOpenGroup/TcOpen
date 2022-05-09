@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="CUTechnologicalDataBase" Id="{7f1b525b-56fa-09a1-1f2d-f6d3ae7fbaf7}">
+    <Declaration><![CDATA[{attribute clr [Container(Layout.Stack)]}
+{attribute clr [Group(Layout.Scroll)]}
+TYPE CUTechnologicalDataBase EXTENDS TcoCore.TcoStruct :
+STRUCT
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

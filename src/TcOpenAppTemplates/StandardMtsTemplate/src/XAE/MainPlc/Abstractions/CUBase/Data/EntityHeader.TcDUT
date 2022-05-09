@@ -7,33 +7,33 @@
 TYPE
     EntityHeader EXTENDS TcoCore.TcoStruct :
     STRUCT
-        {attribute addProperty Name "<#Reciepe#>"}
+        {attribute addProperty Name "<#Recipe#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
-        {attribute 'qlik_load:Reciepe'}
-        Reciepe : STRING(255);
-        {attribute addProperty Name "<#Reciepe created#>"}
+        {attribute 'qlik_load:Recipe'}
+        Recipe : STRING(255);
+        {attribute addProperty Name "<#Recipe created#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:ReciepeCreated'}
-        ReciepeCreated : DT;
-        {attribute addProperty Name "<#Reciepe modified#>"}
+        RecipeCreated : DT;
+        {attribute addProperty Name "<#Recipe modified#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:ReciepeLastModified'}
-        ReciepeLastModified : DT;
+        RecipeLastModified : DT;
         {attribute addProperty Name "<#Carrier#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:Carrier'}
         Carrier : STRING;
-        {attribute addProperty Name "<#Reset or ground position performed#>"}
+        {attribute addProperty Name "<#Reset#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:WasReset'}
         {attribute 'qlikmap:Bool:0,No;1,Yes'}
         WasReset : BOOL;
-        {attribute addProperty Name "<#Is Master#>"}
+        {attribute addProperty Name "<#Master#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:IsMaster'}
         {attribute 'qlikmap:Bool:0,No;1,Yes'}
         IsMaster : BOOL;
-        {attribute addProperty Name "<#Is empty#>"}
+        {attribute addProperty Name "<#Empty#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:IsEmpty'}
         {attribute 'qlikmap:Bool:0,No;1,Yes'}
@@ -44,13 +44,13 @@ TYPE
         {attribute addProperty Name "<#Next station#>"}
         {attribute 'qlik_load:NextStation'}
         NextStation : eStations;
-        {attribute addProperty Name "<#Operations Opened#>"}
+        {attribute addProperty Name "<#Operations opened#>"}
         {attribute 'qlik_load:OpenOn'}
         OpenOn : eStations;
         {attribute addProperty Name "<#Results#>"}
         Results : TcoInspectors.TcoComprehensiveResult;
 
-        {attribute addProperty Name "<#Was Reworked#>"}
+        {attribute addProperty Name "<#Reworked#>"}
         {attribute clr [RenderIgnore("Control", "ShadowControl")]}
         {attribute 'qlik_load:WasReworked'}
         WasReworked : BOOL;

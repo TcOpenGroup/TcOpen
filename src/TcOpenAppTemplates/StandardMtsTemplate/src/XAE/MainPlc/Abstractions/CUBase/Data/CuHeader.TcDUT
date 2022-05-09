@@ -22,11 +22,11 @@ STRUCT
 	{attribute 'qlik_load:OperationsStarted'}
 	OperationsStarted : DT;
 	{attribute clr [RenderIgnore("Control", "ShadowControl")]}
-	{attribute addProperty Name "<#Operation end#>"}
+	{attribute addProperty Name "<#Operation ended#>"}
 	{attribute 'qlik_load:OperationsEnded'}
 	OperationsEnded : DT;	
 	{attribute clr [RenderIgnore("Control", "ShadowControl")]}
-	{attribute addProperty Name "<#Operatod id#>"}
+	{attribute addProperty Name "<#Operator#>"}
 	{attribute 'qlik_load:Operator'}
 	Operator :STRING;	
 END_STRUCT

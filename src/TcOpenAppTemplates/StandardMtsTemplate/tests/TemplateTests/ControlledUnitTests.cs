@@ -160,14 +160,14 @@ namespace TemplateTests
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.NoAction, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
 #if NET5_0_OR_GREATER
-            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
-            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.RecipeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.RecipeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
 #else
-            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
-            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.RecipeCreated.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.RecipeLastModified.Synchron.ToString().Substring(0, 19));
 #endif
         }
 
@@ -200,15 +200,15 @@ namespace TemplateTests
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Console.WriteLine(rec._Created.ToString().Substring(0, 19));
-            Console.WriteLine(cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
+            Console.WriteLine(cuData.EntityHeader.RecipeCreated.Synchron.ToString().Substring(0, 19));
 #if NET5_0_OR_GREATER
-            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
-            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.RecipeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.RecipeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
 #else
-            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
-            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.RecipeCreated.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.RecipeLastModified.Synchron.ToString().Substring(0, 19));
 #endif
         }
 
@@ -240,7 +240,7 @@ namespace TemplateTests
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(rec.CU00x.Header.NextOnPassed, cuData.EntityHeader.NextStation.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
@@ -277,7 +277,7 @@ namespace TemplateTests
 
             while (cu._automatTask._currentStep.ID.Synchron != 10000) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(rec.CU00x.Header.NextOnPassed, cuData.EntityHeader.NextStation.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.InProgress, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
@@ -315,7 +315,7 @@ namespace TemplateTests
 
             while (cu._automatTask._currentStep.ID.Synchron != 10000) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.Passed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(rec.CU00x.Header.NextOnPassed, cuData.EntityHeader.NextStation.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.Passed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
@@ -355,7 +355,7 @@ namespace TemplateTests
 
             while (cu._groundTask._currentStep.ID.Synchron != 10000) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Assert.AreEqual(true, cuData.EntityHeader.WasReset.Synchron);
             Assert.AreEqual(TcoInspectors.eOverallResult.Failed, (TcoInspectors.eOverallResult)cuData.EntityHeader.Results.Result.Synchron);
             Assert.AreEqual(rec.CU00x.Header.NextOnFailed, cuData.EntityHeader.NextStation.Synchron);
@@ -393,15 +393,15 @@ namespace TemplateTests
 
             while (cu._automatTask._currentStep.ID.Synchron != 32766) ;
 
-            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Reciepe.Synchron);
+            Assert.AreEqual(rec._EntityId, cuData.EntityHeader.Recipe.Synchron);
             Console.WriteLine(rec._Created.ToString().Substring(0, 19));
-            Console.WriteLine(cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
+            Console.WriteLine(cuData.EntityHeader.RecipeCreated.Synchron.ToString().Substring(0, 19));
 #if NET5_0_OR_GREATER
-            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
-            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.RecipeCreated.Synchron.AddHours(-1).ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.RecipeLastModified.Synchron.AddHours(-1).ToString().Substring(0, 19));
 #else
-            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeCreated.Synchron.ToString().Substring(0, 19));
-            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.ReciepeLastModified.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Created.ToString().Substring(0, 19), cuData.EntityHeader.RecipeCreated.Synchron.ToString().Substring(0, 19));
+            Assert.AreEqual(rec._Modified.ToString().Substring(0, 19), cuData.EntityHeader.RecipeLastModified.Synchron.ToString().Substring(0, 19));
 #endif
         }
     }
