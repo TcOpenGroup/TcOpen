@@ -250,8 +250,7 @@ task Tests -precondition { return $isTestingEnabled } {
                       [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", 1, "TcoDrivesBeckhoff"),
                       [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "\src\TcoData\src\XAE\XAE\", 1, "TcoData"),
                       [System.Tuple]::Create(".\src\IntegrationProjects\IntegrationProjects.slnf", "\src\IntegrationProjects\src\XAE\XAE\", 0, "Integration"),
-                      [System.Tuple]::Create(".\src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.slnf", "", 1, "Serilog.Sinks.MQTT"),
-                      [System.Tuple]::Create(".\src\TcOpenAppTemplates\StandardMtsTemplate\XAE-tests.slnf", "\src\TcOpenAppTemplates\StandardMtsTemplate\src\XAE\", 1, "MTS-Standard-Template")                       
+                      [System.Tuple]::Create(".\src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.slnf", "", 1, "Serilog.Sinks.MQTT")                      
                     )
                     # removed due to missing hardware  
                     # [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", -1, "TcoDrivesBeckhoff"),
