@@ -1,19 +1,27 @@
 # v0.6.x
 
-## Mts template prototype
-
-`src\TcOpenAppTemplates\StandardMtsTemplate\`
-
-- Template solution including HMI and TwinConnector projects
-- Template controlled unit (CU00X) + script to replicate (Ground, Automat, Manual modes, parallel task) 
-
 ## TcoCore
 
 ### Changes
 - WPF Update MaterialDesign 4.4.0
 - TcoTask now accesses the PLC data via cyclic or lastvalue instead of synchron due to performance degradation.
 - Clears sequencers cycle timer on `Restore`
+- TcoTask now accesses the PLC data via cyclic or lastvalue instead of synchron due to performance degradation.
+- `TcoTask` has `ExecuteDialog` delegate that is executed prior to actual task execution when called from UI it can contain arbitrary logic to prevent or allow the execution of the task.
+- `TcoTask` Checks for authentication when `Roles` property is assigned.
 - WPF `ViewModelizer` simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
+- ViewModelizer simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
+~~~
+protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+{
+       base.OnPropertyChanged(e);
+
+       if (e.Property == DataContextProperty)
+       {                
+           this.DataContext = this.DataContext.ViewModelizeDataContext<TcoTaskViewModel, TcoTask>();
+       }
+}
+~~~
 
 ### Breaking
 - `GetSignal` is now an FB the symbol is retrieved only when the pointer changes (performance issue)
@@ -21,7 +29,8 @@
 
 ## TcOpen.Inxton.Local.Security
 
-- User login and logout are not logged
+- User login and logout are now logged
+- `IAuthenticationService` now includes `HasAuthorization` method to allow access to check the user roles from `ApplicationDomain`
 
 ## TcoData
 
