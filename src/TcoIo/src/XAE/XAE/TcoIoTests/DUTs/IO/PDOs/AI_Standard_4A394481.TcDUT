@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="AI_Standard_4A394481" Id="{b864b45f-9c82-0dc1-32b4-fde31c3a2801}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3011-0000-0018'}
+{attribute addProperty BoxType "EL3011-0000-0018"}
+{attribute addProperty Id "StatusAT %I*Status_F2CE6D917ValueAT %I*INT2"}
+{attribute addProperty CRC "1245267073"}
+{attribute addProperty Size "9"}
+TYPE AI_Standard_4A394481 :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : Status_F2CE6D91;
+	{attribute addProperty Name "Value"}
+	Value AT %I* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

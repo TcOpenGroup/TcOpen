@@ -11,8 +11,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
         ushort cycles_A = 7;
         ushort cycles_B = 19;
-        bool finished = false;
-        ushort i = 0;
+        bool finished = false;     
 
         TcoContextTest tc = ConnectorFixture.Connector.MAIN._tcoContextTest_A;
 
@@ -52,8 +51,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
         [SetUp]
         public void Setup()
         {
-            finished = false;
-            i = 0;
+            finished = false;           
 
             tc._tcoObjectTest_A._tcoTaskTest_A.Enable();
             tc._tcoObjectTest_A._tcoTaskTest_A.Enable();
