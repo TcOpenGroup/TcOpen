@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="R3A2_EK1122_636D1031" Id="{73d2e255-dee1-05a4-3a78-24fee28154ee}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "VI4_AES_D_BC_ECAT_Gen2AES_BF30F89A88VI7_AES_D_BC_ECAT_Gen2AES_BF30F89A88_359U1_EPP1322_0001EPP1322_1FC0878B2AB360_EPP1809_0021EPP1809_32157CFD20AB361_EPP1809_0021EPP1809_32157CFD20AB362_EPP1809_0021EPP1809_32157CFD20AB363_EPP1809_0021EPP1809_32157CFD20AB364_EPP1809_0021EPP1809_32157CFD20_646U1_EPP1332_0001EPP1332_1FC0878B2AB365_EPP1809_0021EPP1809_32157CFD20AB366_EPP1809_0021EPP1809_32157CFD20AB367_EPP1809_0021EPP1809_32157CFD20FFT_Drive_IndraDrive_MPB20IndraDrive_MPB20_0D8C06E929U16_CMMT_ASCMMT_F160324F49U17_CMMT_ASCMMT_F160324F49"}
+{attribute addProperty CRC "1668091953"}
+{attribute addProperty Size "467"}
+TYPE R3A2_EK1122_636D1031 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "VI4_AES_D_BC_ECAT_Gen2"}
+	{attribute addProperty PreviousPort "R3A2 (EK1122) : D"}
+	VI4_AES_D_BC_ECAT_Gen2 : AES_BF30F89A;
+	{attribute addProperty Name "VI7_AES_D_BC_ECAT_Gen2"}
+	{attribute addProperty PreviousPort "VI4 (AES-D-BC-ECAT Gen2) : B"}
+	VI7_AES_D_BC_ECAT_Gen2 : AES_BF30F89A;
+	{attribute addProperty Name "_359U1_EPP1322_0001"}
+	{attribute addProperty PreviousPort "VI7 (AES-D-BC-ECAT Gen2) : B"}
+	_359U1_EPP1322_0001 : EPP1322_1FC0878B;
+	{attribute addProperty Name "AB360_EPP1809_0021"}
+	{attribute addProperty PreviousPort "359U1 (EPP1322-0001) : C"}
+	AB360_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "AB361_EPP1809_0021"}
+	{attribute addProperty PreviousPort "AB360 (EPP1809-0021) : B"}
+	AB361_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "AB362_EPP1809_0021"}
+	{attribute addProperty PreviousPort "AB361 (EPP1809-0021) : B"}
+	AB362_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "AB363_EPP1809_0021"}
+	{attribute addProperty PreviousPort "AB362 (EPP1809-0021) : B"}
+	AB363_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "AB364_EPP1809_0021"}
+	{attribute addProperty PreviousPort "AB363 (EPP1809-0021) : B"}
+	AB364_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "_646U1_EPP1332_0001"}
+	{attribute addProperty PreviousPort "AB364 (EPP1809-0021) : B"}
+	_646U1_EPP1332_0001 : EPP1332_1FC0878B;
+	{attribute addProperty Name "AB365_EPP1809_0021"}
+	{attribute addProperty PreviousPort "646U1 (EPP1332-0001) : C"}
+	AB365_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "AB366_EPP1809_0021"}
+	{attribute addProperty PreviousPort "AB365 (EPP1809-0021) : B"}
+	AB366_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "AB367_EPP1809_0021"}
+	{attribute addProperty PreviousPort "AB366 (EPP1809-0021) : B"}
+	AB367_EPP1809_0021 : EPP1809_32157CFD;
+	{attribute addProperty Name "FFT_Drive_IndraDrive_MPB20"}
+	{attribute addProperty PreviousPort "R3A2 (EK1122) : B"}
+	FFT_Drive_IndraDrive_MPB20 : IndraDrive_MPB20_0D8C06E9;
+	{attribute addProperty Name "U16_CMMT_AS"}
+	{attribute addProperty PreviousPort "FFT Drive (IndraDrive MPB20) : B"}
+	U16_CMMT_AS : CMMT_F160324F;
+	{attribute addProperty Name "U17_CMMT_AS"}
+	{attribute addProperty PreviousPort "U16 (CMMT-AS) : B"}
+	U17_CMMT_AS : CMMT_F160324F;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

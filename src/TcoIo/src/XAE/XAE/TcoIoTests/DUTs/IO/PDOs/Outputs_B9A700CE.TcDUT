@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Outputs_B9A700CE" Id="{9df41400-667c-03e0-0259-f7bbf7c863df}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: CMMT-AS-0000'}
+{attribute addProperty BoxType "CMMT-AS-0000"}
+{attribute addProperty Id "ControlwordAT %Q*UINT2Modes_of_operationAT %Q*SINT1Target_positionAT %Q*DINT4Profile_velocityAT %Q*UDINT4Target_velocityAT %Q*DINT4Target_torqueAT %Q*INT2Velocity_offsetAT %Q*DINT4Torque_offsetAT %Q*INT2"}
+{attribute addProperty CRC "3114729678"}
+{attribute addProperty Size "23"}
+TYPE Outputs_B9A700CE EXTENDS TcoIo.OutputBase_10CEE7DE :
+STRUCT
+	{attribute addProperty Name "Controlword"}
+	Controlword AT %Q* : UINT;
+	{attribute addProperty Name "Modes_of_operation"}
+	Modes_of_operation AT %Q* : SINT;
+	{attribute addProperty Name "Target_position"}
+	Target_position AT %Q* : DINT;
+	{attribute addProperty Name "Profile_velocity"}
+	Profile_velocity AT %Q* : UDINT;
+	{attribute addProperty Name "Target_velocity"}
+	Target_velocity AT %Q* : DINT;
+	{attribute addProperty Name "Target_torque"}
+	Target_torque AT %Q* : INT;
+	{attribute addProperty Name "Velocity_offset"}
+	Velocity_offset AT %Q* : DINT;
+	{attribute addProperty Name "Torque_offset"}
+	Torque_offset AT %Q* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

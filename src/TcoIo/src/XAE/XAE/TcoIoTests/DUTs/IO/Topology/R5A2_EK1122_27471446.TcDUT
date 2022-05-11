@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="R5A2_EK1122_27471446" Id="{44a36ff1-069f-03c1-0f73-6b78d5d80e81}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "VI5_AES_D_BC_ECAT_Gen2AES_BF30F89A88Rexroth_st160_IMecat_xIMecat_x_190275BC210"}
+{attribute addProperty CRC "658969670"}
+{attribute addProperty Size "298"}
+TYPE R5A2_EK1122_27471446 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "VI5_AES_D_BC_ECAT_Gen2"}
+	{attribute addProperty PreviousPort "R5A2 (EK1122) : D"}
+	VI5_AES_D_BC_ECAT_Gen2 : AES_BF30F89A;
+	{attribute addProperty Name "Rexroth_st160_IMecat_x"}
+	{attribute addProperty PreviousPort "VI5 (AES-D-BC-ECAT Gen2) : B"}
+	Rexroth_st160_IMecat_x : IMecat_x_190275BC;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

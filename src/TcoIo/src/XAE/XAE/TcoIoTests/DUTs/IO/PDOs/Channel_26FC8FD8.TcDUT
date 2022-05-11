@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Channel_26FC8FD8" Id="{8ebc5ca4-cfb4-0918-3308-6e5de071559f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: KL2284'}
+{attribute addProperty BoxType "KL2284"}
+{attribute addProperty Id "CWAT %Q*BOOL0CCWAT %Q*BOOL0"}
+{attribute addProperty CRC "654086104"}
+{attribute addProperty Size "0"}
+TYPE Channel_26FC8FD8 EXTENDS TcoIo.OutputBase_10CEE7DE :
+STRUCT
+	{attribute addProperty Name "CW"}
+	CW AT %Q* : BOOL;
+	{attribute addProperty Name "CCW"}
+	CCW AT %Q* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="R3_EK1100_0213442E" Id="{92de0cb4-7d08-0c2f-2dbf-d7be048f05bb}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "R3A2_EK1122R3A2_EK1122_636D1031467R3A3_EL1809EL1809_32157CFD20R3A4_EL1809EL1809_32157CFD20R3A5_EL1809EL1809_32157CFD20R3A6_EL1809EL1809_32157CFD20R3A6_1_EL1809EL1809_32157CFD20R3A6_2_EL1809EL1809_32157CFD20R3A7_EL2809EL2809_2B6483BD19R3A8_EL2809EL2809_2B6483BD19R3A9_EL1809EL1809_32157CFD20R3A10EL1809_32157CFD20R3A11EL1809_32157CFD20R3A12_EL2809EL2809_2B6483BD19R3A13_EL2809EL2809_2B6483BD19R3A14_EL3104EL3104_B71BFF4244R3A15_EL2809EL2809_2B6483BD19"}
+{attribute addProperty CRC "34817070"}
+{attribute addProperty Size "786"}
+TYPE R3_EK1100_0213442E EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R3A2_EK1122"}
+	{attribute addProperty PreviousPort "R3 (EK1100) : B"}
+	R3A2_EK1122 : R3A2_EK1122_636D1031;
+	{attribute addProperty Name "R3A3_EL1809"}
+	{attribute addProperty PreviousPort "R3A2 (EK1122) : C"}
+	R3A3_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A4_EL1809"}
+	{attribute addProperty PreviousPort "R3A3  (EL1809) : B"}
+	R3A4_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A5_EL1809"}
+	{attribute addProperty PreviousPort "R3A4 (EL1809) : B"}
+	R3A5_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A6_EL1809"}
+	{attribute addProperty PreviousPort "R3A5 (EL1809) : B"}
+	R3A6_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A6_1_EL1809"}
+	{attribute addProperty PreviousPort "R3A6 (EL1809) : B"}
+	R3A6_1_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A6_2_EL1809"}
+	{attribute addProperty PreviousPort "R3A6_1 (EL1809) : B"}
+	R3A6_2_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A7_EL2809"}
+	{attribute addProperty PreviousPort "R3A6_2 (EL1809) : B"}
+	R3A7_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R3A8_EL2809"}
+	{attribute addProperty PreviousPort "R3A7 (EL2809) : B"}
+	R3A8_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R3A9_EL1809"}
+	{attribute addProperty PreviousPort "R3A8 (EL2809) : B"}
+	R3A9_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A10"}
+	{attribute addProperty PreviousPort "R3A9 (EL1809) : B"}
+	R3A10 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A11"}
+	{attribute addProperty PreviousPort "R3A10 : B"}
+	R3A11 : EL1809_32157CFD;
+	{attribute addProperty Name "R3A12_EL2809"}
+	{attribute addProperty PreviousPort "R3A11 : B"}
+	R3A12_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R3A13_EL2809"}
+	{attribute addProperty PreviousPort "R3A12 (EL2809) : B"}
+	R3A13_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R3A14_EL3104"}
+	{attribute addProperty PreviousPort "R3A13 (EL2809) : B"}
+	R3A14_EL3104 : EL3104_B71BFF42;
+	{attribute addProperty Name "R3A15_EL2809"}
+	{attribute addProperty PreviousPort "R3A14 (EL3104) : B"}
+	R3A15_EL2809 : EL2809_2B6483BD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

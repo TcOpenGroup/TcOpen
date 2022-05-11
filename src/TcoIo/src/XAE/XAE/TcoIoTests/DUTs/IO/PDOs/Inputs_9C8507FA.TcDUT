@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Inputs_9C8507FA" Id="{6dce1e0f-a0df-0927-147e-f36e15add4e2}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: CMMT-AS-0000'}
+{attribute addProperty BoxType "CMMT-AS-0000"}
+{attribute addProperty Id "StatuswordAT %I*UINT2Modes_of_operation_displayAT %I*SINT1Position_actual_valueAT %I*DINT4Velocity_actual_valueAT %I*DINT4Torque_actual_valueAT %I*INT2"}
+{attribute addProperty CRC "2625964026"}
+{attribute addProperty Size "13"}
+TYPE Inputs_9C8507FA EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Statusword"}
+	Statusword AT %I* : UINT;
+	{attribute addProperty Name "Modes_of_operation_display"}
+	Modes_of_operation_display AT %I* : SINT;
+	{attribute addProperty Name "Position_actual_value"}
+	Position_actual_value AT %I* : DINT;
+	{attribute addProperty Name "Velocity_actual_value"}
+	Velocity_actual_value AT %I* : DINT;
+	{attribute addProperty Name "Torque_actual_value"}
+	Torque_actual_value AT %I* : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

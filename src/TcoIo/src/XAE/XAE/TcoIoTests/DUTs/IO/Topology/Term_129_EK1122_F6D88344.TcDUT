@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Term_129_EK1122_F6D88344" Id="{78b566a1-8744-05c2-09c8-9ef725a80fa6}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "VI6_AES_D_BC_ECAT_Gen2AES_BF30F89A88"}
+{attribute addProperty CRC "4141384516"}
+{attribute addProperty Size "88"}
+TYPE Term_129_EK1122_F6D88344 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "VI6_AES_D_BC_ECAT_Gen2"}
+	{attribute addProperty PreviousPort "Term 129 (EK1122) : D"}
+	VI6_AES_D_BC_ECAT_Gen2 : AES_BF30F89A;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

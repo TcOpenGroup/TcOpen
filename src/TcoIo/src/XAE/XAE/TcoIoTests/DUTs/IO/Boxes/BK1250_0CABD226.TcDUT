@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="BK1250_0CABD226" Id="{4d2bb0a8-c688-0525-3810-ab17cbcbdf8a}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: BK1250-0000-0019'}
+{attribute addProperty BoxType "BK1250-0000-0019"}
+{attribute addProperty Id "InputsAT %I*Inputs_CC16D1F40OutputsAT %I*Outputs_D8BAB3B30WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_8F85596B2"}
+{attribute addProperty CRC "212587046"}
+{attribute addProperty Size "4"}
+TYPE BK1250_0CABD226 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "Inputs"}
+	Inputs : Inputs_CC16D1F4;
+	{attribute addProperty Name "Outputs"}
+	Outputs : Outputs_D8BAB3B3;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_8F85596B;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

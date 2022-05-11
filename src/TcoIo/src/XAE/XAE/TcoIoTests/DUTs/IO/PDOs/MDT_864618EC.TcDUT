@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="MDT_864618EC" Id="{f02cb577-b17d-0710-1dec-16c3fd2f8eac}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IndraDrive MPB20-0003-0000'}
+{attribute addProperty BoxType "IndraDrive MPB20-0003-0000"}
+{attribute addProperty Id "Master_control_wordAT %Q*UINT2Position_command_valueAT %Q*DINT4"}
+{attribute addProperty CRC "2252740844"}
+{attribute addProperty Size "6"}
+TYPE MDT_864618EC EXTENDS TcoIo.OutputBase_10CEE7DE :
+STRUCT
+	{attribute addProperty Name "Master_control_word"}
+	Master_control_word AT %Q* : UINT;
+	{attribute addProperty Name "Position_command_value"}
+	Position_command_value AT %Q* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

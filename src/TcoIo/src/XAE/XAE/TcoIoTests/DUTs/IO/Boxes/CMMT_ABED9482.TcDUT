@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="CMMT_ABED9482" Id="{8fc1f401-1ac2-0e9c-1580-0e5b4bd7953a}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: CMMT-AS-0000'}
+{attribute addProperty BoxType "CMMT-AS-0000"}
+{attribute addProperty Id "InputsAT %I*Inputs_9C8507FA13OutputsAT %Q*Outputs_B9A700CE23WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_D50C85453"}
+{attribute addProperty CRC "2884473986"}
+{attribute addProperty Size "41"}
+TYPE CMMT_ABED9482 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "Inputs"}
+	Inputs : Inputs_9C8507FA;
+	{attribute addProperty Name "Outputs"}
+	Outputs : Outputs_B9A700CE;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_D50C8545;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

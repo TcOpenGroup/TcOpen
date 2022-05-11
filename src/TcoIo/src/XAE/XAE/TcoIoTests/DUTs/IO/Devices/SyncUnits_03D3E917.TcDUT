@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="SyncUnits_03D3E917" Id="{826e5ecd-ef85-08eb-374d-e7d0f76ab84b}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: '}
+{attribute addProperty BoxType ""}
+{attribute addProperty Id "_defaultAT %I*SyncUnitTasks_1988CF1B36R2AT %I*SyncUnitTasks_1988CF1B36R3AT %I*SyncUnitTasks_1988CF1B36R4AT %I*SyncUnitTasks_1988CF1B36R5AT %I*SyncUnitTasks_1988CF1B36R6AT %I*SyncUnitTasks_1988CF1B36R7AT %I*SyncUnitTasks_1988CF1B36R7_MOTIONAT %I*SyncUnitTasks_1988CF1B36R6_1AT %I*SyncUnitTasks_1988CF1B36DriveAT %I*SyncUnitTasks_1988CF1B36"}
+{attribute addProperty CRC "64219415"}
+{attribute addProperty Size "360"}
+TYPE SyncUnits_03D3E917 :
+STRUCT
+	{attribute addProperty Name "_default"}
+	_default : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R2"}
+	R2 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R3"}
+	R3 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R4"}
+	R4 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R5"}
+	R5 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R6"}
+	R6 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R7"}
+	R7 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R7_MOTION"}
+	R7_MOTION : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "R6_1"}
+	R6_1 : SyncUnitTasks_1988CF1B;
+	{attribute addProperty Name "Drive"}
+	Drive : SyncUnitTasks_1988CF1B;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

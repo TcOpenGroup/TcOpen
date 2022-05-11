@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="KL2284_008A18FD" Id="{acd3e333-2b5c-0e8a-081c-15057d1029a5}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: KL2284'}
+{attribute addProperty BoxType "KL2284"}
+{attribute addProperty Id "Channel_1AT %Q*Channel_26FC8FD80Channel_2AT %Q*Channel_26FC8FD80Channel_3AT %Q*Channel_26FC8FD80Channel_4AT %Q*Channel_26FC8FD80"}
+{attribute addProperty CRC "9050365"}
+{attribute addProperty Size "0"}
+TYPE KL2284_008A18FD :
+STRUCT
+	{attribute addProperty Name "Channel_1"}
+	Channel_1 : Channel_26FC8FD8;
+	{attribute addProperty Name "Channel_2"}
+	Channel_2 : Channel_26FC8FD8;
+	{attribute addProperty Name "Channel_3"}
+	Channel_3 : Channel_26FC8FD8;
+	{attribute addProperty Name "Channel_4"}
+	Channel_4 : Channel_26FC8FD8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

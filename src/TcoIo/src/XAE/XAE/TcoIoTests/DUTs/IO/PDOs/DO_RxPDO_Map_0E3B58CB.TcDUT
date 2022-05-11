@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="DO_RxPDO_Map_0E3B58CB" Id="{a92cbd9a-7a6d-07be-27a1-57b128cc27b2}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IMecat-0007-0001'}
+{attribute addProperty BoxType "IMecat-0007-0001"}
+{attribute addProperty Id "Pdo_EntryAT %Q*ARRAY[0..67] OF USINT68"}
+{attribute addProperty CRC "677061342"}
+{attribute addProperty Size "68"}
+TYPE DO_RxPDO_Map_0E3B58CB EXTENDS TcoIo.OutputBase_10CEE7DE :
+STRUCT
+	{attribute addProperty Name "Pdo_Entry"}
+	Pdo_Entry AT %Q* : ARRAY[0..67] OF USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -7,22 +7,52 @@
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
+    xmlns:conv="clr-namespace:TcoIo.Converters"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <TcoIo:OutputBase_10CEE7DE/>
+        <local:OutputBase_10CEE7DEHWDiagViewModel/>
     </d:UserControl.DataContext>
-    <StackPanel>
-        <Grid Grid.IsSharedSizeScope="True">
+     <StackPanel>
+        <Grid Grid.IsSharedSizeScope="True" DataContext="{Binding Component}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="80"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"></TextBlock>
-                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding }" PresentationType="ControlSlim" />
+                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding }" PresentationType="ControlSlim"/>
             </Grid>
         </Grid>
+        <Expander Visibility="{Binding Outputs, Converter={conv:NonEmptyArrayToVisibleConverter}}">
+            <Expander.Header>
+                <Grid Grid.IsSharedSizeScope="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="80"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Margin="0,0,5,0" Text="{Binding Component.AttributeName}"/>
+                    <TextBlock Grid.Column="1" Text="Expand to view all items"/>
+                </Grid>
+            </Expander.Header>
+            <ScrollViewer MaxHeight="400">
+                <ItemsControl ItemsSource="{Binding Outputs}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" MinWidth="80"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding }" PresentationType="ControlSlim"/>
+                                </Grid>
+                            </ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Expander>
     </StackPanel>
 </UserControl>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="R7_EK1100_541C839D" Id="{1e5e4e39-d1d2-06e6-3439-1c43dab38d7d}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "Term_146_EK1122Term_146_EK1122_FDD338DD90R7A3_EL1809EL1809_32157CFD20R7A4_EL1809EL1809_32157CFD20R7A5_EL1809EL1809_32157CFD20R7A6_EL1809EL1809_32157CFD20R7A7_EL2809EL2809_2B6483BD19R7A8_EL2809EL2809_2B6483BD19R7A9_EL2809EL2809_2B6483BD19R7A10_EL1809EL1809_32157CFD20R7A11_EL1809EL1809_32157CFD20R7A12_EL2809EL2809_2B6483BD19"}
+{attribute addProperty CRC "1411154845"}
+{attribute addProperty Size "286"}
+TYPE R7_EK1100_541C839D EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Term_146_EK1122"}
+	{attribute addProperty PreviousPort "R7 (EK1100) : B"}
+	Term_146_EK1122 : Term_146_EK1122_FDD338DD;
+	{attribute addProperty Name "R7A3_EL1809"}
+	{attribute addProperty PreviousPort "Term 146 (EK1122) : C"}
+	R7A3_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R7A4_EL1809"}
+	{attribute addProperty PreviousPort "R7A3 (EL1809) : B"}
+	R7A4_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R7A5_EL1809"}
+	{attribute addProperty PreviousPort "R7A4 (EL1809) : B"}
+	R7A5_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R7A6_EL1809"}
+	{attribute addProperty PreviousPort "R7A5 (EL1809) : B"}
+	R7A6_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R7A7_EL2809"}
+	{attribute addProperty PreviousPort "R7A6 (EL1809) : B"}
+	R7A7_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R7A8_EL2809"}
+	{attribute addProperty PreviousPort "R7A7 (EL2809) : B"}
+	R7A8_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R7A9_EL2809"}
+	{attribute addProperty PreviousPort "R7A8 (EL2809) : B"}
+	R7A9_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R7A10_EL1809"}
+	{attribute addProperty PreviousPort "R7A9 (EL2809) : B"}
+	R7A10_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R7A11_EL1809"}
+	{attribute addProperty PreviousPort "R7A10 (EL1809) : B"}
+	R7A11_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R7A12_EL2809"}
+	{attribute addProperty PreviousPort "R7A11 (EL1809) : B"}
+	R7A12_EL2809 : EL2809_2B6483BD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

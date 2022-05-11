@@ -10,14 +10,14 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <TcoIo:EtcSlaveTerminalBase_947E5A46/>
-    </UserControl.DataContext>
-    <StackPanel>
-        <WrapPanel>
-            <TextBlock Text="PreviosPort: "/>
-            <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
-        </WrapPanel>
-        <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="HWDiag-ControlSlim" />
-    </StackPanel>
+    <d:UserControl.DataContext>
+        <local:EtcSlaveTerminalBase_947E5A46ServiceViewModel/>
+    </d:UserControl.DataContext>
+    <StackPanel DataContext="{Binding Component}">
+            <WrapPanel>
+                <TextBlock Text="PreviousPort: "/>
+                <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
+            </WrapPanel>
+            <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="HWDiag-ControlSlim" />
+        </StackPanel>
 </UserControl>

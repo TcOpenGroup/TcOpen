@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="IMecat_x_C377F9A5" Id="{a3a33491-82e2-0b4d-1274-252d8bd999d3}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IMecat-0007-0001'}
+{attribute addProperty BoxType "IMecat-0007-0001"}
+{attribute addProperty Id "DI_TxPDO_MapAT %I*DI_TxPDO_Map_DF955083132DO_RxPDO_MapAT %Q*DO_RxPDO_Map_0E3B58CB68WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "3279419813"}
+{attribute addProperty Size "204"}
+TYPE IMecat_x_C377F9A5 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "DI_TxPDO_Map"}
+	DI_TxPDO_Map : DI_TxPDO_Map_DF955083;
+	{attribute addProperty Name "DO_RxPDO_Map"}
+	DO_RxPDO_Map : DO_RxPDO_Map_0E3B58CB;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_23CBA837;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

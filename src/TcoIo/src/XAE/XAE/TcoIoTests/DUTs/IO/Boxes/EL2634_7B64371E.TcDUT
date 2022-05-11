@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EL2634_7B64371E" Id="{407c97f9-0362-07fa-186d-d6ee923623e8}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL2634-0000-0016'}
+{attribute addProperty BoxType "EL2634-0000-0016"}
+{attribute addProperty Id "Channel_1AT %Q*Channel_42CA91F71Channel_2AT %Q*Channel_42CA91F71Channel_3AT %Q*Channel_42CA91F71Channel_4AT %Q*Channel_42CA91F71WcStateAT %I*WcState_0B2B16F91InfoDataAT %I*InfoData_6F19DB2B2"}
+{attribute addProperty CRC "2070165278"}
+{attribute addProperty Size "7"}
+TYPE EL2634_7B64371E EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "Channel_1"}
+	Channel_1 : Channel_42CA91F7;
+	{attribute addProperty Name "Channel_2"}
+	Channel_2 : Channel_42CA91F7;
+	{attribute addProperty Name "Channel_3"}
+	Channel_3 : Channel_42CA91F7;
+	{attribute addProperty Name "Channel_4"}
+	Channel_4 : Channel_42CA91F7;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_0B2B16F9;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_6F19DB2B;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
