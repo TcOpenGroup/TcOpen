@@ -1,4 +1,5 @@
 ﻿using System;
+using TcOpen.Inxton.Input;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
@@ -10,8 +11,8 @@ namespace TcoCore
 
         public TcoMomentaryTaskViewModel()
         {
-            ButtonDown = new Vortex.Presentation.Wpf.RelayCommand(action => OnButtonDown());
-            ButtonUp = new Vortex.Presentation.Wpf.RelayCommand(action => OnButtonUp());
+            ButtonDown = new RelayCommand(action => OnButtonDown());
+            ButtonUp = new RelayCommand(action => OnButtonUp());
         }
 
 
@@ -46,8 +47,8 @@ namespace TcoCore
 
         public override object Model { get => TcoMomentaryTask; set { TcoMomentaryTask = value as TcoMomentaryTask; ModeUpdate(); } }
 
-        public Vortex.Presentation.Wpf.RelayCommand ButtonDown { get; }
-        public Vortex.Presentation.Wpf.RelayCommand ButtonUp { get; }
+        public RelayCommand ButtonDown { get; }
+        public RelayCommand ButtonUp { get; }
 
         public string ButtonState { get; set; } = "btn-primary";
         private void OnButtonUp()

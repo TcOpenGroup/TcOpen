@@ -20,8 +20,8 @@ namespace TcoCore.Wpf.Threading
         /// </summary>
         /// <param name="action">Action to execute</param>
         public void Invoke(Action action)
-        {
-            dispatcher.Invoke(action);
+        {         
+             dispatcher.Invoke(action);          
         }
 
         /// <summary>

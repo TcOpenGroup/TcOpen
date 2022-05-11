@@ -27,11 +27,11 @@ namespace TcoCore
 
         private bool CanAbortTask()
         {
-            return this._isServiceable.Synchron;
+            return this._isServiceable.Cyclic;
         }
         private bool CanRestoreTask()
         {
-            return this._isServiceable.Synchron;
+            return this._isServiceable.Cyclic;
         }
 
         private void InitCommands()
@@ -78,17 +78,38 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            return this._enabled.Synchron && this._isServiceable.Synchron;
+            var isEnabled = this._enabled.CyclicReading ? this._enabled.Cyclic : this._enabled.Synchron;
+            var isServiceable = this._isServiceable.CyclicReading ? this._isServiceable.Cyclic : this._isServiceable.Synchron;
+
+            return isEnabled && isServiceable;
+                
         }
+
+        public string Roles { get; set; }
+        public ExecuteDialogDelegate ExecuteDialog;
+        public delegate bool ExecuteDialogDelegate();
 
         /// <summary>
         /// Executes this task.
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter = null)
-        {
+        {            
             if (CanExecute(new object()))
             {
+                if(!string.IsNullOrEmpty(Roles))
+                {
+                    if(!TcoAppDomain.Current.AuthenticationService.HasAuthorization(Roles))
+                    {
+                        return;
+                    }
+                }
+
+                if(ExecuteDialog != null && !ExecuteDialog())
+                {
+                    return;
+                }
+
                 if (this._taskState.Synchron == (short)(eTaskState.Done))
                 {
                     this._restoreRequest.Synchron = true;

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoSignalInfo" Id="{2908ad69-6810-088f-1dd5-7140f83eee3a}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides symbol information about a I/O signal.
+			<note type="important">
+				 `SymbolPath` can only contain string of 255 characters.			
+			</note>
+			<note type="tip">
+				 This block is partially extended by IVF to provide more information about the symbol.			
+			</note>
+		</summary>				
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoSignalInfo
+VAR
+	(*~
+	<docu>
+		<summary>
+			Symbol path of the Signal.
+			<note type="important">
+				 SymbolPath can only contain string of 255 characters.			
+			</note>			
+		</summary>				
+	</docu>	
+	~*)
+	SymbolPath : STRING[255];
+	{attribute 'hide'}
+	pLast : POINTER TO ULINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetSignalInfo" Id="{6daa7151-751a-038c-3f5e-a84f38f01801}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets symbol path of the variable that is associated to hardware I/O.
+		</summary>				
+	</docu>	
+~*)
+METHOD PUBLIC GetSignalInfo 
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			Size of the variable. Is typicaly determined by `SIZEOF` opreator: SIZEOF(Variable)
+		</summary>				
+	</docu>	
+	~*)
+	ioSIZE : UDINT;
+	(*~
+	<docu>
+		<summary>
+			Pointer to the variable is typically determined by `ADR` operator ADR(Variable)
+		</summary>				
+	</docu>	
+	~*)
+	pVARIABLE : POINTER TO ULINT;
+END_VAR
+
+VAR_STAT
+	{attribute 'hide'}
+	json : Tc3_JsonXml.FB_JsonReadWriteDatatype;		
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(pLast <> pVARIABLE) THEN
+	SymbolPath := json.GetSymbolNameByAddress(nData := ioSIZE, pData := pVARIABLE);
+	pLast := pVARIABLE;
+END_IF;	
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

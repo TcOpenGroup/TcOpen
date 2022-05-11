@@ -8,7 +8,7 @@ using TcOpen.Inxton;
 using TcOpen.Inxton.Dialogs;
 using Vortex.Connector;
 
-namespace TcOpen.Inxton.App.Dialogs
+namespace TcOpen.Inxton
 {
     public abstract class DialogProxyServiceBase
     {

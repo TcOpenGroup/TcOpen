@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Controls;
-using Vortex.Presentation.Wpf;
+using TcOpen.Inxton.Input;
 
 namespace TcoCore
 {
-    public class TcoRemoteTaskViewModel : RenderableViewModel
+    public class TcoRemoteTaskViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         public TcoRemoteTaskViewModel()
         {

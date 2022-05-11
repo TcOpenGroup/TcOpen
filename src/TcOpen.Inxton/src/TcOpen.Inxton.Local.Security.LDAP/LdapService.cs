@@ -141,6 +141,11 @@ namespace TcOpen.Inxton.Local.Security.LDAP
         public void ChangePassword(string userName, string password, string newPassword1, string newPassword2)
             => throw new NotImplementedException();
 
+        public bool HasAuthorization(string roles, Action notAuthorizedAction = null)
+        {
+            return AuthorizationChecker.HasAuthorization(roles, notAuthorizedAction);
+        }
+
         const string FILTER_ATTRIBUTE_USERNAME = "sAMAccountName";
         const string FILTER_ATTRIBUTE_EMAIL = "userPrincipalName";
         const string EMAIL_ATTRIBUTE = "userPrincipalName";
