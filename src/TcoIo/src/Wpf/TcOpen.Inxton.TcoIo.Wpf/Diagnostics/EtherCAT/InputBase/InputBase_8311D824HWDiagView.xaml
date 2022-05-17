@@ -21,18 +21,18 @@
                     <ColumnDefinition Width="Auto" MinWidth="80"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"></TextBlock>
+                <TextBlock  Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"/>
                 <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding }" PresentationType="HWDiagLimit-DisplaySlim"/>
             </Grid>
         </Grid>
-        <Expander Visibility="{Binding Inputs, Converter={conv:NonEmptyArrayToVisibleConverter}}">
+        <Expander Visibility="{Binding Inputs, Converter={conv:NonEmptyArrayToVisibleConverter}, FallbackValue=Collapsed}">
             <Expander.Header>
                 <Grid Grid.IsSharedSizeScope="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="80"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="0,0,5,0" Text="{Binding Component.AttributeName}"/>
+                    <TextBlock Grid.Column="0" Margin="0,0,10,0" Text="{Binding Component.AttributeName}"/>
                     <TextBlock Grid.Column="1" Text="Expand to view all items"/>
                 </Grid>
             </Expander.Header>

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="IndraDrive_MPB20_0D8C06E9" Id="{47d04298-45c7-00ae-2313-7aac49b60c04}">
+  <DUT Name="IndraDrive_MPB20_0D8C06E9" Id="{f7b20259-4e5e-0fbe-12c0-32381d79c374}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IndraDrive MPB20-0003-0000'}
 {attribute addProperty BoxType "IndraDrive MPB20-0003-0000"}
 {attribute addProperty Id "AT_xAT %I*AT_x_475C3D7410MDTAT %Q*MDT_864618EC6WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_F60A43AC11"}
 {attribute addProperty CRC "227280617"}
 {attribute addProperty Size "29"}
-TYPE IndraDrive_MPB20_0D8C06E9 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+TYPE IndraDrive_MPB20_0D8C06E9 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
 STRUCT
 	{attribute addProperty Name "AT_x"}
 	AT_x : AT_x_475C3D74;

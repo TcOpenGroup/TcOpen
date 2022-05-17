@@ -27,6 +27,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveTerminalBase_947E5A46TerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBoxBase_77A0E4A7BoxView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InputBase\InputBase_8311D824HWDiagStructView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\OutputBase\OutputBase_10CEE7DEHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -63,15 +74,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Diagnostics\EtherCAT\DigitalOutputBase\DigitalOutputBase_1FE0D5EEHWDiagView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Diagnostics\EtherCAT\DigitalInputBase\DigitalInputBase_50022E7BHWDiagView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Diagnostics\EtherCAT\EtcSlaveTerminalBase\EtcSlaveTerminalBase_947E5A46ServiceView.xaml">
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBase_82538BE2ServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

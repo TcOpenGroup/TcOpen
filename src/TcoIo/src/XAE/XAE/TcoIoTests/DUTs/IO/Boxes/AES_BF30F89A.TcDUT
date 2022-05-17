@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="AES_BF30F89A" Id="{42fd3edd-156d-0f05-36f8-670c223880bc}">
+  <DUT Name="AES_BF30F89A" Id="{df106507-4b5d-0b57-36df-6eaea20af9ff}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: AES-D-BC-ECAT Gen2-0001'}
 {attribute addProperty BoxType "AES-D-BC-ECAT Gen2-0001"}
 {attribute addProperty Id "Module_1_32_Byte_Valve_Unit_0x7FModule_1_32_Byte_Valve_Unit_0x7F_85784B2764Device_StateAT %I*Device_State_F04921C216Device_ControlAT %Q*Device_Control_6258066A4WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3207657626"}
 {attribute addProperty Size "88"}
-TYPE AES_BF30F89A EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+TYPE AES_BF30F89A EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
 STRUCT
 	{attribute addProperty Name "Module_1_32_Byte_Valve_Unit_0x7F"}
 	Module_1_32_Byte_Valve_Unit_0x7F : Module_1_32_Byte_Valve_Unit_0x7F_85784B27;

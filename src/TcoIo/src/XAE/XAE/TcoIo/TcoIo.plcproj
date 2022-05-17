@@ -49,13 +49,13 @@
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\TcoSyncUnit.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\DigitalInputs\DigitalInputBase_50022E7B.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Base\EtcSlaveBase_82538BE2.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\DigitalOutputs\DigitalOutputBase_1FE0D5EE.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Base\EtcSlaveBoxBase_77A0E4A7.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\EtcSlaveTerminalBase_947E5A46.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Base\EtcSlaveTerminalBase_947E5A46.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_84133AC9.TcDUT">
@@ -124,8 +124,7 @@
     <Folder Include="Diagnostics" />
     <Folder Include="Diagnostics\EtherCAT" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit" />
-    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\DigitalInputs" />
-    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\DigitalOutputs" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Base" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\InfoData" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />

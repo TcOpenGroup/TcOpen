@@ -15,6 +15,10 @@ namespace TcoIo
         {
             var arrays = obj.GetType().GetProperties().Where(p => p.PropertyType.IsArray).Select(p => p.GetValue(obj));
 
+            if (arrays.Count() > 1)
+            {
+
+            }
             var listOfArrayedMembers = new List<IVortexElement>();
 
             foreach (IEnumerable<IVortexElement> array in arrays.Where(p => p is IEnumerable<IVortexElement>))
