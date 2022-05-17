@@ -17,7 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>	  
-	  <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.7-alpha.695" />	  
+	  <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.699" />
+	  <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
 	  <ProjectReference Include="..\..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
 	  <ProjectReference Include="..\..\TcoDataConnector\TcoDataConnector.csproj" />
   </ItemGroup>

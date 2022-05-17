@@ -30,6 +30,7 @@ TYPE
 		~*)	
         {attribute 'hide'}
 		{attribute clr [ReadOnly()]}
+		{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
         THISSTRUCT : TcoParentedStructure(NO.Obj, THIS^);
     END_STRUCT
 END_TYPE

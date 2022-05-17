@@ -8,7 +8,8 @@
     using Vortex.Connector;
     using System;
     using System.Collections.Generic;
-    using TcOpen.Inxton.App.Dialogs;
+    using TcOpen.Inxton.App;
+
 
     /// <summary>
     /// TcOpen application configuration builder.
@@ -78,6 +79,14 @@
         {            
             return this;
         }
+
+        public TcoAppBuilder SetLogin(Action loginAction)
+        {
+            Domain.LoginAction = loginAction;
+            return this;
+        }
+
+
     }
 }
  

@@ -32,7 +32,9 @@
 
         private IsTcoContext GetContext()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             return _context != null ? _context : OrphanedMessageContext;
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         /// <summary>

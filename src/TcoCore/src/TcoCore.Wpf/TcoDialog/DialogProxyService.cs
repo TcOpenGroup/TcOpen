@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TcoCore;
-using TcOpen.Inxton.App.Dialogs;
+using TcOpen.Inxton.App;
 using TcOpen.Inxton.Dialogs;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
@@ -19,7 +19,7 @@ namespace TcOpen.Inxton.TcoCore.Wpf
     {
         protected DialogProxyServiceWpf(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
-
+            LazyRenderer.Get.CreatePresentation("Any", new object()); // I need this to load reference assemblies prior to query View and ViewModels.
         }
 
         protected async override void Queue(IsDialog dialog)
@@ -28,7 +28,7 @@ namespace TcOpen.Inxton.TcoCore.Wpf
 
             await TcoAppDomain.Current.Dispatcher.InvokeAsync(
                 () =>
-                {
+                {                                                                                                   
                     var view = Renderer.Get.GetView("Dialog", dialog.GetType());
                     var viewInstance = Activator.CreateInstance(view);
                     var viewModel = Renderer.Get.GetViewModel("Dialog", dialog.GetType(), dialog);

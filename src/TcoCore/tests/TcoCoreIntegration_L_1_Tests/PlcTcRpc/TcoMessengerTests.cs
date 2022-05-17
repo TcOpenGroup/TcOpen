@@ -711,14 +711,18 @@ namespace TcoCoreUnitTests.PlcTcRpc
             }
 
             var dummyLogger = TcOpen.Inxton.TcoAppDomain.Current.Logger as TcOpen.Inxton.Logging.DummyLoggerAdapter;
+#pragma warning disable CS0618 // Type or member is obsolete
             dummyLogger.QueueMessages();
+#pragma warning restore CS0618 // Type or member is obsolete
 
             suc._logger.LogMessages(messages);
             
 
             (string message, object payload, string serverity) result;
             IList<(string message, object payload, string serverity)> dequeuedMessages = new List<(string message, object payload, string serverity)>();
+#pragma warning disable CS0618 // Type or member is obsolete
             while (dummyLogger.MessageQueue.TryDequeue(out result))
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 dequeuedMessages.Add(result);
             }
@@ -1180,7 +1184,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 sut.Pin(true, messageText));
 
             sut.SingleCycleRun(
-                () => { var a = 1; }) ;
+                () => {  }) ;
 
             sut.SingleCycleRun(
                 () =>
@@ -1193,7 +1197,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             sut._messenger._mime.Pinned.Synchron = false;
 
             sut.SingleCycleRun(
-               () => { var a = 1; });
+               () => {  });
 
             sut.SingleCycleRun(
                 () =>
@@ -1231,7 +1235,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 sut.Pin(true, messageText));
 
             sut.SingleCycleRun(
-                () => { var a = 1; });
+                () => {  });
 
             sut.SingleCycleRun(
                 () =>

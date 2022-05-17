@@ -55,5 +55,10 @@ namespace TcoData
                 //++ Ignore
             }         
         }
+
+        private void FilterField_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
