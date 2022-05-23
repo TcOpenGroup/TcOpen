@@ -11,6 +11,8 @@ using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
 using Serilog.Sinks;
+using TcOpen.Inxton.TcoCore.Wpf;
+using System.Windows.Media;
 
 namespace HMI
 {
@@ -55,6 +57,7 @@ namespace HMI
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                        .WriteTo.RichTextBox(LogTextBox)
                                         .WriteTo.Console()        // This will write log into application console.  
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
                                                                   // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
@@ -62,7 +65,8 @@ namespace HMI
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
-                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector)
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { Entry.PlcHammer.TECH_MAIN }));
 
             // Initialize logger
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
@@ -106,6 +110,14 @@ namespace HMI
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
         }
 
+
+        public static System.Windows.Controls.RichTextBox LogTextBox { get; } = new System.Windows.Controls.RichTextBox()
+        {
+            Background = Brushes.Black,
+            Foreground = Brushes.LightGray,
+            FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New, monospace"),
+            VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto
+        };
 
         private static IRepository<UserData> SetUpJsonRepository()
         {

@@ -50,8 +50,7 @@ namespace TcOpen.Inxton.Input
 #endif
         }
 
-
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
             if (CanExecute(parameter))
             {

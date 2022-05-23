@@ -314,7 +314,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
                     DateTime _dotNetTime = DateTime.Now;
                     TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-                    Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
+                    // Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
                 }
             });
         }
@@ -711,14 +711,18 @@ namespace TcoCoreUnitTests.PlcTcRpc
             }
 
             var dummyLogger = TcOpen.Inxton.TcoAppDomain.Current.Logger as TcOpen.Inxton.Logging.DummyLoggerAdapter;
+#pragma warning disable CS0618 // Type or member is obsolete
             dummyLogger.QueueMessages();
+#pragma warning restore CS0618 // Type or member is obsolete
 
             suc._logger.LogMessages(messages);
             
 
             (string message, object payload, string serverity) result;
             IList<(string message, object payload, string serverity)> dequeuedMessages = new List<(string message, object payload, string serverity)>();
+#pragma warning disable CS0618 // Type or member is obsolete
             while (dummyLogger.MessageQueue.TryDequeue(out result))
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 dequeuedMessages.Add(result);
             }
@@ -1180,7 +1184,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 sut.Pin(true, messageText));
 
             sut.SingleCycleRun(
-                () => { var a = 1; }) ;
+                () => {  }) ;
 
             sut.SingleCycleRun(
                 () =>
@@ -1193,7 +1197,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             sut._messenger._mime.Pinned.Synchron = false;
 
             sut.SingleCycleRun(
-               () => { var a = 1; });
+               () => {  });
 
             sut.SingleCycleRun(
                 () =>
@@ -1231,7 +1235,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                 sut.Pin(true, messageText));
 
             sut.SingleCycleRun(
-                () => { var a = 1; });
+                () => {  });
 
             sut.SingleCycleRun(
                 () =>
@@ -1457,10 +1461,10 @@ namespace TcoCoreUnitTests.PlcTcRpc
             var popped = suc._logger.Pop().FirstOrDefault();
 
             Console.WriteLine(plain.Text);
-            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295ms", plain.Text);
+            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295msW1TOD#23:59:59.999S1", plain.Text);
             Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
 
-            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295ms", popped.Text);
+            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295msW1TOD#23:59:59.999S1", popped.Text);
             Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
 
         }

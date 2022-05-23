@@ -20,8 +20,8 @@
 		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.6-nightly.704" />
-		<PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.699" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
 	</ItemGroup>
 	<ItemGroup>
@@ -30,6 +30,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="VisualStudioToolsManifest.xml" IncludeInPackage="true" Pack="true" PackagePath="tools" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\..\..\..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Localization.Designer.cs">
@@ -51,6 +54,9 @@
 		<Page Update="TcoComponent\TcoComponentSpotView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
+		</Page>
+		<Page Update="TcoMessage\Health\HealthIndicatorView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>
 		<Page Update="TcoTask\TcoTaskProgressBarView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

@@ -95,7 +95,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND inoDisableCondition THEN
-	_signalInfo := GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
 	Messenger.Error(CONCAT('<#Movement aborted due to#> : ' , _signalInfo.SymbolPath));
 	_toHomePos := FALSE;
 	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
@@ -132,7 +132,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
-	_signalInfo := GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
 	Messenger.Error(CONCAT('<#Movement aborted due to#> : ' , _signalInfo.SymbolPath));
 	_toWorkPos := FALSE;
 	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
