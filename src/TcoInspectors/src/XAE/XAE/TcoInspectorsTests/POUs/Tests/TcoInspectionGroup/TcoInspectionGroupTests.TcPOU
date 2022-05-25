@@ -77,7 +77,29 @@ END_VAR]]></Declaration>
                 .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1])) 
 				.UpdateComprehensiveResult(_overallResult)               
                 .OnFail()
-                .Dialog(100));			
+                .Dialog(100));		
+eInspectionGroupTests.InspectWithNormalizedNumberOfRetries:
+
+_sut.WithCoordinator(_coordinator).Act().NormalizeRetries(_diis[0]);
+//.Inspect(_diis[0].Inspect(_dii_inspectedValues[0]));
+
+//	 THIS^.ProbeDoneWhen(_sut.WithCoordinator(_coordinator)
+//				.Act()
+//		 		.NormalizeRetries(_diis[0])
+//                .NormalizeRetries(_diis[1])
+//                .NormalizeRetries(_dais[0])
+//                .NormalizeRetries(_dais[1])
+//                .NormalizeRetries(_ddis[0])
+//                .NormalizeRetries(_ddis[1]) 				
+//                .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+//                .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+//                .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+//                .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+//                .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+//                .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1])) 
+//				.UpdateComprehensiveResult(_overallResult)               
+//                .OnFail()
+//                .Dialog(100));		
 END_CASE]]></ST>
       </Implementation>
     </Method>

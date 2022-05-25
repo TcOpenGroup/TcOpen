@@ -9,6 +9,12 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="CommonData" Id="{042544e7-f282-06f0-051b-e2f8bd92dc63}">
+      <Declaration><![CDATA[PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Get Name="Get" Id="{9b5ef77f-71b0-07b1-3bad-27c8bab87325}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="Coordinator" Id="{53464262-388f-0508-055a-3695c0743081}">
       <Declaration><![CDATA[PROPERTY Coordinator : TcoCore.ITcoCoordinator]]></Declaration>
       <Get Name="Get" Id="{e54c0b21-129c-0276-1867-e027cd67689d}">

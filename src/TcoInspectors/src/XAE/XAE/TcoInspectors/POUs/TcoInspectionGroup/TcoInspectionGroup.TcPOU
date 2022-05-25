@@ -4,16 +4,18 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
     {attribute 'hide'}
-    _done             : BOOL;
-    _overallResult    : TcoComprehensiveResult;
-    _currentRunResult : TcoComprehensiveResult;
-    _inspections      : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
-    _inspectionIndex  : INT;
-    _tierAct          : TcoCore.TcoTier(THIS^);
+    _done                     : BOOL;
+    _overallResult            : TcoComprehensiveResult;
+    _currentRunResult         : TcoComprehensiveResult;
+    _inspections              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
+    _inspectionIndex          : INT;
+    _tierAct                  : TcoCore.TcoTier(THIS^);
+    _normalizedAllowedRetries : UINT;
 END_VAR
 
 VAR CONSTANT
     LAST_INSPECTION_INDEX : INT := 15;
+	MAX_NORMALIZED_RETRIES : UINT := 65535;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -30,14 +32,14 @@ METHOD Act : ITcoInspectionGroup
 //	inoResult : TcoComprehensiveResult;
 //END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_inspectionIndex := 0;
-// True then set to false if any inspector not done.
-_done            := TRUE;
+        <ST><![CDATA[_inspectionIndex          := 0;
+_done                     := TRUE; // True then set to false if any inspector not done.
+_normalizedAllowedRetries := MAX_NORMALIZED_RETRIES;
 
-Act              := THIS^;
+Act := THIS^;
 
-IF(_tierAct.IsNewTier()) THEN
-	ClearResult(_currentRunResult);	
+IF (_tierAct.IsNewTier()) THEN
+    ClearResult(_currentRunResult);
 END_IF
 ]]></ST>
       </Implementation>
@@ -55,6 +57,18 @@ inoResult.Result := eOverallResult.NoAction;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="CommonData" Id="{36a6e3dd-6add-0a42-3ea4-eeae0ddbf08c}">
+      <Declaration><![CDATA[PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Get Name="Get" Id="{cf4f926b-9654-03bf-18da-2882eac3e99a}">
+        <Declaration><![CDATA[VAR
+	_data : TcoInspectorData; 
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CommonData REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Dialog" Id="{74a2f6ff-2257-0b1f-0c44-f3b62d0819e8}" FolderPath="OnFail\">
       <Declaration><![CDATA[METHOD Dialog : BOOL
 VAR_INPUT
@@ -116,6 +130,11 @@ END_VAR
       <Implementation>
         <ST><![CDATA[OnEnterInspection();
 
+//IF(_normalizedAllowedRetries <> 0 
+//AND _normalizedAllowedRetries <> MAX_NORMALIZED_RETRIES) THEN
+//	Inspector.CommonData.NumberOfAllowedRetries := _normalizedAllowedRetries;
+//END_IF;
+
 Inspect := THIS^;
 
 IF (Inspector.Done) THEN
@@ -131,6 +150,21 @@ IF(_inspectionIndex <= LAST_INSPECTION_INDEX)THEN
 END_IF
 	
 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NormalizeRetries" Id="{ded8cb66-c7fe-0d86-039b-c79bf8c6c339}">
+      <Declaration><![CDATA[METHOD NormalizeRetries : ITcoInspectionGroup
+VAR_INPUT
+	inoInspection : IInspector;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Determine lowest number of retries
+//IF( inoInspection.CommonData.NumberOfAllowedRetries <> 0 
+//AND_THEN inoInspection.CommonData.NumberOfAllowedRetries < _normalizedAllowedRetries) THEN
+//	_normalizedAllowedRetries := inoInspection.CommonData.NumberOfAllowedRetries;
+//END_IF
 ]]></ST>
       </Implementation>
     </Method>

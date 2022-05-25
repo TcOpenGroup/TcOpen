@@ -19,6 +19,17 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="CommonData" Id="{b45e0a39-37d2-0d84-323d-7324b429b3a2}">
+      <Declaration><![CDATA[PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Get Name="Get" Id="{2673f909-9f9c-0376-1ac6-0f51ac4a44b2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CommonData REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Data" Id="{b0f00037-c485-0f58-3a2e-35a438d55d1b}">
       <Declaration><![CDATA[(*~
 <docu>
