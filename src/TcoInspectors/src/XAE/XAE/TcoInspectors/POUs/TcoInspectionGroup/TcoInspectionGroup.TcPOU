@@ -58,7 +58,14 @@ inoResult.Result := eOverallResult.NoAction;
       </Implementation>
     </Method>
     <Property Name="CommonData" Id="{36a6e3dd-6add-0a42-3ea4-eeae0ddbf08c}">
-      <Declaration><![CDATA[PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets common data settings of inspectors.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
       <Get Name="Get" Id="{cf4f926b-9654-03bf-18da-2882eac3e99a}">
         <Declaration><![CDATA[VAR
 	_data : TcoInspectorData; 
@@ -130,10 +137,10 @@ END_VAR
       <Implementation>
         <ST><![CDATA[OnEnterInspection();
 
-//IF(_normalizedAllowedRetries <> 0 
-//AND _normalizedAllowedRetries <> MAX_NORMALIZED_RETRIES) THEN
-//	Inspector.CommonData.NumberOfAllowedRetries := _normalizedAllowedRetries;
-//END_IF;
+IF(_normalizedAllowedRetries <> 0 
+AND _normalizedAllowedRetries <> MAX_NORMALIZED_RETRIES) THEN
+	Inspector.CommonData.NumberOfAllowedRetries := _normalizedAllowedRetries;
+END_IF;
 
 Inspect := THIS^;
 
@@ -154,17 +161,29 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="NormalizeRetries" Id="{ded8cb66-c7fe-0d86-039b-c79bf8c6c339}">
-      <Declaration><![CDATA[METHOD NormalizeRetries : ITcoInspectionGroup
+      <Declaration><![CDATA[(*~
+	<summary>
+		Sets lower `number of allowed retries` for this call of inspection group.
+		Invoke this method multiple times if you want to check for the inspection for lowest numebr of retries.
+		<note type="important">
+			The inspections will run at least once before allowed entries is normalized.
+		</note>
+	</summary>
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `NormalizeRetries` property via `Act` method.'}
+METHOD NormalizeRetries : ITcoInspectionGroup
 VAR_INPUT
 	inoInspection : IInspector;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Determine lowest number of retries
-//IF( inoInspection.CommonData.NumberOfAllowedRetries <> 0 
-//AND_THEN inoInspection.CommonData.NumberOfAllowedRetries < _normalizedAllowedRetries) THEN
-//	_normalizedAllowedRetries := inoInspection.CommonData.NumberOfAllowedRetries;
-//END_IF
+NormalizeRetries := THIS^;
+IF( inoInspection.CommonData.NumberOfAllowedRetries <> 0 
+AND_THEN inoInspection.CommonData.NumberOfAllowedRetries < _normalizedAllowedRetries) THEN
+	_normalizedAllowedRetries := inoInspection.CommonData.NumberOfAllowedRetries;
+END_IF
 ]]></ST>
       </Implementation>
     </Method>

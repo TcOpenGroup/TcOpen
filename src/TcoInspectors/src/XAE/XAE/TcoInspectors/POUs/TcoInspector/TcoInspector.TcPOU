@@ -93,7 +93,14 @@ CarryOn := THIS^.Done;]]></ST>
       </Implementation>
     </Method>
     <Property Name="CommonData" Id="{36fa2ba8-4056-0778-188a-b4cd0d458287}">
-      <Declaration><![CDATA[PROPERTY ABSTRACT CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets common data settings of inspectors.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ABSTRACT CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
       <Get Name="Get" Id="{0667236f-af28-0f5f-0024-364977840d88}">
         <Declaration><![CDATA[VAR
 END_VAR

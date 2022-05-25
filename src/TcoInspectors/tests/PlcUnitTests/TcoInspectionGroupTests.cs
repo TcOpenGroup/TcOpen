@@ -278,12 +278,12 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectionGroupTests.InspectWithNormalizedNumberOfRetries);
 
-            Assert.AreEqual(expected, container._diis[0]._data.NumberOfAllowedRetries.Synchron = 3);
-            Assert.AreEqual(expected, container._diis[1]._data.NumberOfAllowedRetries.Synchron = 0);
-            Assert.AreEqual(expected, container._dais[0]._data.NumberOfAllowedRetries.Synchron = 100);
-            Assert.AreEqual(expected, container._dais[1]._data.NumberOfAllowedRetries.Synchron = 5);
-            Assert.AreEqual(expected, container._ddis[0]._data.NumberOfAllowedRetries.Synchron = 4);
-            Assert.AreEqual(expected, container._ddis[1]._data.NumberOfAllowedRetries.Synchron = 8);
+            Assert.AreEqual(expected, container._diis[0]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._diis[1]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._dais[0]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._dais[1]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._ddis[0]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._ddis[1]._data.NumberOfAllowedRetries.Synchron);
 
         }
     }
