@@ -7,9 +7,6 @@
     <IsPackable>false</IsPackable>  	
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="iXlinker" Version="0.1.0-alpha.50" />
-  </ItemGroup> 
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoIo.Wpf\TcOpen.Inxton.TcoIo.Wpf.csproj" />
     <ProjectReference Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj" />
   </ItemGroup>
