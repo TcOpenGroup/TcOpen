@@ -23,7 +23,9 @@ namespace TcOpen.Inxton.Logging
 
         private (string message, object payload, string serverity) lastMessage;
 
+#pragma warning disable CS0618 // Type or member is obsolete
         public (string message, object payload, string serverity) LastMessage { get => lastMessage; private set { lastMessage = value; MessageQueue?.Enqueue(lastMessage); } }
+#pragma warning restore CS0618 // Type or member is obsolete
 
         public DummyLoggerAdapter()
         {

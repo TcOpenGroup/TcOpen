@@ -43,7 +43,7 @@ namespace TcOpen.Inxton.Input
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
             if (CanExecute(parameter))
             {

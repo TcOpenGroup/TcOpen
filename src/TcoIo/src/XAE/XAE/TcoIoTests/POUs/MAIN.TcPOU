@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MAIN" Id="{18959407-38bc-0c60-272f-7f97dd416956}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	_tcc : tcc;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_tcc.Run();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -114,7 +114,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         {
             // Arrange
             var dummyLogger = TcOpen.Inxton.TcoAppDomain.Current.Logger as DummyLoggerAdapter;
+#pragma warning disable CS0618 // Type or member is obsolete
             dummyLogger.QueueMessages();
+#pragma warning restore CS0618 // Type or member is obsolete
 
 
             // for (int i = 0; i < 10; i++)
@@ -133,7 +135,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             (string message, object payload, string serverity) result;
             IList<(string message, object payload, string serverity)> dequeuedMessages = new List<(string message, object payload, string serverity)>();
+#pragma warning disable CS0618 // Type or member is obsolete
             while (dummyLogger.MessageQueue.TryDequeue(out result))
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 dequeuedMessages.Add(result);
             }

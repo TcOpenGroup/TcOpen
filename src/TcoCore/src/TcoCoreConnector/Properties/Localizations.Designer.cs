@@ -223,6 +223,15 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Step count.
+        /// </summary>
+        public static string ___Step_count__ {
+            get {
+                return ResourceManager.GetString("___Step_count__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step description.
         /// </summary>
         public static string ___Step_description__ {
@@ -282,6 +291,60 @@ namespace TcoCoreConnector.Properties {
         public static string ___Step_status__ {
             get {
                 return ResourceManager.GetString("___Step_status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task aborted..
+        /// </summary>
+        public static string ___Task_aborted___ {
+            get {
+                return ResourceManager.GetString("___Task_aborted___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task done..
+        /// </summary>
+        public static string ___Task_done___ {
+            get {
+                return ResourceManager.GetString("___Task_done___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task error thrown..
+        /// </summary>
+        public static string ___Task_error_thrown___ {
+            get {
+                return ResourceManager.GetString("___Task_error_thrown___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task requested..
+        /// </summary>
+        public static string ___Task_requested___ {
+            get {
+                return ResourceManager.GetString("___Task_requested___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task restored..
+        /// </summary>
+        public static string ___Task_restored___ {
+            get {
+                return ResourceManager.GetString("___Task_restored___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task started..
+        /// </summary>
+        public static string ___Task_started___ {
+            get {
+                return ResourceManager.GetString("___Task_started___", resourceCulture);
             }
         }
         
