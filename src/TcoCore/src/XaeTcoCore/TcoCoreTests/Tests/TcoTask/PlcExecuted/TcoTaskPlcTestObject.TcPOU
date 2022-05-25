@@ -10,7 +10,7 @@ VAR
 	_myParentIdentity		:	ULINT;
     _sut_A : TcoTaskPlcTest(THIS^);
     _sut_B : TcoTaskPlcTest(THIS^);
-	_tSt_A:TcoTaskPlcTestState(THIS^,eRestoreMode.AutoRestoreMembers);
+	_tSt_A:TcoTaskPlcTestState(THIS^, eRestoreMode.AutoRestoreMembers);
 	_tSt_B:TcoTaskPlcTestState(THIS^, eRestoreMode.None);
 END_VAR
 ]]></Declaration>
@@ -61,7 +61,7 @@ _myContextStartCount :=	THIS^.Context.StartCycleCount;
 
 _myContextEndCount	:=	THIS^.Context.EndCycleCount;
 
-_myParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^.Parent.Identity;
 ]]></ST>
       </Implementation>
     </Method>

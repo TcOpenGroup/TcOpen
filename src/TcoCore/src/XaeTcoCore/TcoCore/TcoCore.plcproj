@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCore</Title>
-    <ProjectVersion>1.18.6.1495</ProjectVersion>
+    <ProjectVersion>0.6.0.913</ProjectVersion>
     <DefaultNamespace>TcoCore</DefaultNamespace>
     <Placeholder>TcoCore</Placeholder>
     <Author>Inxton</Author>
@@ -78,19 +78,40 @@
     <Compile Include="POUs\ImplicitChecks\CheckRangeUnsigned.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\Abstractions\ITcoCoordinator.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\ITcoComponent.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoComponent\TcoComponent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoComponent\TcoSignalInfo.TcDUT">
+    <Compile Include="POUs\Prototypes\TcoComponent\TcoSignalInfo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoContext\ITcoContextEnvironment.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\eDialogAnswer.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\eDialogType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\ITcoDialogAnswer.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\ITcoDialogFormat.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoDialog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoDialogBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoLogger\ITcoLogger.TcIO">
@@ -159,6 +180,9 @@
     <Compile Include="POUs\Prototypes\TcoMomentaryTask\TcoMomentaryTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoNothing\NO.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoObject\ITcoObject.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -187,6 +211,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSelector\ITcoSelector.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoSequencer\eStepIdUniquenessControlState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoSequencer\eSequencerMode.TcDUT">
@@ -244,6 +271,12 @@
     <Compile Include="POUs\Prototypes\TcoState\TcoStateExtendible.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoParentedStructure.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoStruct\TcoStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\eTaskState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -260,6 +293,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoTask\TcoTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoTier\TcoTier.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoToggleTask\ITcoToggleTask.TcIO">
@@ -295,6 +331,11 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\ImplicitChecks" />
+    <Folder Include="POUs\Prototypes\TcoTier" />
+    <Folder Include="POUs\Prototypes\TcoDialog" />
+    <Folder Include="POUs\Prototypes\TcoNothing" />
+    <Folder Include="POUs\Prototypes\TcoStruct" />
+    <Folder Include="POUs\Prototypes\Abstractions" />
     <Folder Include="POUs\Prototypes\TcoLogger" />
     <Folder Include="POUs\Prototypes\TcoRemoteTask" />
     <Folder Include="POUs\Prototypes\TcoMomentaryTask" />
@@ -377,11 +418,6 @@
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, 3.3.21.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <LibraryReference Include="Base Interfaces,3.5.2.0,System">
-      <Namespace>IBaseLibrary</Namespace>
-    </LibraryReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoCore.tmc">

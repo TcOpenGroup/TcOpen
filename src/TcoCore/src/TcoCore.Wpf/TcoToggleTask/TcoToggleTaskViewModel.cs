@@ -1,11 +1,12 @@
 ﻿using System;
+using TcOpen.Inxton.Input;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
-using Vortex.Presentation.Wpf;
+
 
 namespace TcoCore
 {
-    public class TcoToggleTaskViewModel : RenderableViewModel
+    public class TcoToggleTaskViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         private string caption;
 

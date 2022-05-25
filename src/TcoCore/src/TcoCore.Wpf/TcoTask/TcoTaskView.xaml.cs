@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcOpen.Inxton.Wpf;
 
 namespace TcoCore
 {
@@ -24,7 +25,17 @@ namespace TcoCore
     {
         public TcoTaskView()
         {
-            InitializeComponent();
+            InitializeComponent();           
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (e.Property == DataContextProperty)
+            {                
+                this.DataContext = this.DataContext.ViewModelizeDataContext<TcoTaskViewModel, TcoTask>();
+            }
         }
     }
 }

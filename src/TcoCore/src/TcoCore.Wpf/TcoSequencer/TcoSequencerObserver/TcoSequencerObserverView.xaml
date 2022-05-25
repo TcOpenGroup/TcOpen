@@ -9,13 +9,18 @@
     <d:UserControl.DataContext>
         <local:TcoSequencerObserverViewModel></local:TcoSequencerObserverViewModel>
     </d:UserControl.DataContext>
-    <Grid x:Name="Element" Visibility="{Binding Visibility}">
+    <Grid x:Name="Element" 
+          Visibility="{Binding Visibility}"
+          Height="250">
         <DataGrid ItemsSource="{Binding Steps}" AutoGenerateColumns="False">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Path=IsActive, Mode=OneWay}" Value="True">
                             <Setter Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsActive, Mode=OneWay}" Value="False">
+                            <Setter Property="FontWeight" Value="Normal"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

@@ -23,7 +23,9 @@ namespace TcoCore
         /// <returns>Parent object of given type.</returns>
         public static T GetParent<T>(this IVortexObject obj, T parent = null) where T : class
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             if (obj is Vortex.Connector.RootVortexerObject || obj is Vortex.Connector.IConnector || obj == null)
+#pragma warning restore CS0618 // Type or member is obsolete
                 return parent;
 
             if (obj is T)
@@ -112,12 +114,12 @@ namespace TcoCore
         /// <typeparam name="T"></typeparam>
         /// <param name="obj">Searched object</param>       
         /// <returns>Children of this object.</returns>
-        public static IEnumerable<T> GetChildren<T>(this IVortexObject obj) where T : IVortexObject
+        public static IEnumerable<T> GetChildren<T>(this IVortexObject obj) 
         {
             var children = obj.GetChildren().Where(p => p is T).Select(p => (T)p);
             return children;
         }
-
+        
         public static IEnumerable<T> GetChildren<T>(this IVortexObject obj, IEnumerable<object> excluding) where T : IVortexObject
         {
             if (excluding == null)

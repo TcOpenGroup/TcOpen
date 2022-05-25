@@ -1,4 +1,6 @@
-﻿namespace TcOpen.Inxton.Security
+﻿using System;
+
+namespace TcOpen.Inxton.Security
 {
     /// <summary>
     /// Provides abstraction for authentication service in a vortex application.
@@ -64,5 +66,7 @@
         /// Get or set external authentication device handling.
         /// </summary>
         IExternalAuthorization ExternalAuthorization { get; set; }
+
+        bool HasAuthorization(string roles, Action notAuthorizedAction = null);
     }
 }

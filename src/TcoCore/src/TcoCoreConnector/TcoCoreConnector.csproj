@@ -28,8 +28,8 @@
     <DefineConstants>PLC_DOCU</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.5-nightly.667" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.5-nightly.667" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.9-alpha.699" />
+    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.9-alpha.699" />
   </ItemGroup>
     <ItemGroup>    
     <Content Include="_meta\TcoCore.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />

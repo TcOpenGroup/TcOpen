@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>  	
+  </PropertyGroup> 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoData\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
+    <ProjectReference Include="..\TcoInspectorsTestsConnector\TcoInspectorsTestsConnector.csproj" />
+  </ItemGroup>	
+</Project>

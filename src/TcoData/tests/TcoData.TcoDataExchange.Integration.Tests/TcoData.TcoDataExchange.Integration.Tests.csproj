@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="nunit" Version="3.13.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="JunitXml.TestLogger" Version="2.1.10" />
+	<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="TcOpen.Tc.Prober" Version="0.3.0-alpha.1" />
   </ItemGroup>
@@ -16,6 +18,7 @@
 	  <ProjectReference Include="..\..\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj" />
 	  <ProjectReference Include="..\..\src\Repository\Json\TcOpen.Inxton.Data.Json.csproj" />
 	  <ProjectReference Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
+	  <ProjectReference Include="..\..\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
 	  <ProjectReference Include="..\TcoDataTestsConnector\TcoDataTestsConnector.csproj" />
   </ItemGroup>
 

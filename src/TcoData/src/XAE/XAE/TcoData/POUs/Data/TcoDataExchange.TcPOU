@@ -120,7 +120,7 @@ END_VAR]]></Declaration>
     .WithId(Identifier)
     .Invoke();
 	
-THIS^.Messenger.Build().Append('<#Creating data item with id:#> ').Append(Identifier).As().AsInfo();	]]></ST>
+THIS^.Messenger.Build().Append('<#Creating data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
       </Implementation>
     </Method>
     <Method Name="CreateOrUpdate" Id="{9e6a9de9-7f41-0de9-0ac9-c27c65910ff9}">
@@ -158,7 +158,7 @@ END_VAR
     			  .WithId(Identifier)
                   .Invoke();
 				  
-THIS^.Messenger.Build().Append('<#Creating or updating data item with id:#> ').Append(Identifier).As().AsInfo();				  ]]></ST>
+THIS^.Messenger.Build().Append('<#Creating or updating data item with id:#> ').Append(Identifier).As().AsTrace();				  ]]></ST>
       </Implementation>
     </Method>
     <Method Name="Delete" Id="{fbf2b4c4-ddcf-0054-1f59-9460c96d51d6}">
@@ -195,7 +195,7 @@ END_VAR]]></Declaration>
     .WithId(Identifier)
     .Invoke();
 	
-THIS^.Messenger.Build().Append('<#Deleting data item with id:#> ').Append(Identifier).As().AsInfo();	]]></ST>
+THIS^.Messenger.Build().Append('<#Deleting data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
       </Implementation>
     </Method>
     <Method Name="Exists" Id="{027fb448-351a-0f9b-128f-8e14c974683e}">
@@ -232,7 +232,7 @@ END_VAR
     .WithId(Identifier)
     .Invoke();
 
-THIS^.Messenger.Build().Append('<#Checking existence of data item with id:#> ').Append(Identifier).As().AsInfo();
+THIS^.Messenger.Build().Append('<#Checking existence of data item with id:#> ').Append(Identifier).As().AsTrace();
 	
 Exists REF=	_idExistsTask;
 ]]></ST>
@@ -243,12 +243,12 @@ Exists REF=	_idExistsTask;
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : TcoCore.ITcoObject;
+	ParentObject : TcoCore.ITcoObject;	
 END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, Parent := Parent);]]></ST>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := Parent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Read" Id="{05052219-e02c-06a1-02d0-9241bf3dd3ff}">
@@ -284,7 +284,21 @@ END_VAR]]></Declaration>
     .WithId(Identifier)
     .Invoke();
 	
-THIS^.Messenger.Build().Append('<#Reading data item with id:#> ').Append(Identifier).As().AsInfo();	]]></ST>
+THIS^.Messenger.Build().Append('<#Reading data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{fdef7670-b22a-01d4-2833-7a2ee73e3c09}">
+      <Declaration><![CDATA[METHOD Restore : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_createTask.Restore();
+_readTask.Restore();
+_updateTask.Restore();
+_deleteTask.Restore();
+_idExistsTask.Restore();
+_createOrUpdateTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Update" Id="{d5409d9d-f931-0f6c-095c-9c419d838664}">
@@ -320,7 +334,7 @@ END_VAR]]></Declaration>
     .WithId(Identifier)
     .Invoke();
 
-THIS^.Messenger.Build().Append('<#Updating data item with id:#> ').Append(Identifier).As().AsInfo();	]]></ST>
+THIS^.Messenger.Build().Append('<#Updating data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
       </Implementation>
     </Method>
   </POU>

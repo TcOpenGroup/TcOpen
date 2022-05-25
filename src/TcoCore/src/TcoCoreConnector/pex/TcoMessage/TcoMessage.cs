@@ -32,7 +32,9 @@
 
         private IsTcoContext GetContext()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             return _context != null ? _context : OrphanedMessageContext;
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         /// <summary>
@@ -133,7 +135,10 @@
                 }
                 else
                 {
-                    plain.Text = TranslatorPersistence.Translate(StringInterpolator.Interpolate(plain.Text, IndentityPersistence));
+                    if(plain.Text != null)
+                    { 
+                        plain.Text = TranslatorPersistence.Translate(StringInterpolator.Interpolate(plain.Text, IndentityPersistence));
+                    }
                 }
                 plain.Source = plain.ParentsObjectSymbol;
                 plain.Location = plain.ParentsHumanReadable;

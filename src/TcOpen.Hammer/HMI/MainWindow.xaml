@@ -22,8 +22,9 @@
         <TabItem VerticalAlignment="Top" Header="Station">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="250" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -36,7 +37,6 @@
                             <ContentControl Visibility="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask._taskState.Cyclic, Converter={vortex:TaskStateToVisibilityConverter}}">
                                 <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatMode}" PresentationType="Base" />
                             </ContentControl>
-                           
                         </Grid>
                     </TabItem>
                     <TabItem Header="Components">
@@ -64,10 +64,7 @@
                             Width="700"
                             Height="450"
                             Background="{DynamicResource MaterialDesignLightBackground}">
-                            <Viewbox Canvas.Left="525" Canvas.Top="178" Height="225" Width="165">
-                                <vortex:RenderableContentControl 
-                                    DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._processTraceabilty._data, Mode=OneWay}"/>
-                            </Viewbox>
+                           
                             <Border
                                 Width="696"
                                 Height="38"
@@ -136,8 +133,12 @@
                         </Canvas>
                     </Viewbox>
                 </Grid>
+                
+                <vortex:RenderableContentControl Grid.Row="2"
+                                    DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._processTraceabilty._data, Mode=OneWay}" PresentationType="Display"/>
+                
                 <UniformGrid
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Columns="4"
                     Rows="0">
                     <UniformGrid.Resources>
@@ -153,7 +154,7 @@
                     </vortexs:PermissionBox>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._swiftModeTask}" />
                 </UniformGrid>
-                <Button Command="{Binding OpenLoginWindowCommand}" Grid.Row="3">Login</Button>
+                <Button Command="{Binding OpenLoginWindowCommand}" Grid.Row="4">Login</Button>
             </Grid>
         </TabItem>
         <TabItem Header="Data">
@@ -255,6 +256,9 @@
                         Content="Error"/>
 
             </StackPanel>
+        </TabItem>
+        <TabItem Header="Log">
+            <ContentControl Content="{Binding LogBox}"></ContentControl>
         </TabItem>
     </TabControl>
 </Window>

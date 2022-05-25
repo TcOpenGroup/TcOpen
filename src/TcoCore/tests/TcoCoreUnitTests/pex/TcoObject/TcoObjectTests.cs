@@ -34,10 +34,14 @@ namespace TcoCore.PexTests
             var tcoObjectParent = new TcoObject(tcoObjectGreatParent, string.Empty, string.Empty);
             var tcoObject = new TcoObject(tcoObjectParent, string.Empty, string.Empty);
 
+#pragma warning disable CS0618 // Type or member is obsolete
             context._startCycleCount.SetLastValue = 1875;
+#pragma warning restore CS0618 // Type or member is obsolete
 
             var activeMessage = new TcoMessage(tcoObject, string.Empty, string.Empty);
+#pragma warning disable CS0618 // Type or member is obsolete
             activeMessage.Cycle.SetLastValue = 1875;
+#pragma warning restore CS0618 // Type or member is obsolete
 
             tcoObjectGreatParent.MessageHandler.DiagnosticsDepth = 1000;
 
