@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="DiagnosticsMessenger" Id="{e684ca87-0f89-0cba-1e5e-d6d2a5a1bd39}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DiagnosticsMessenger EXTENDS TcoCore.TcoMessenger
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{a359b823-8468-0a5f-1ab9-d516cb67f173}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.FB_init(bInitRetains,bInCopyCode,ParentObject);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

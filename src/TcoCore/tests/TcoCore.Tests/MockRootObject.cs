@@ -51,7 +51,9 @@ namespace TcoCore.Tests
             return _kids;
         }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         private IVortexObject _root = new Vortex.Connector.RootVortexerObject();
+#pragma warning restore CS0618 // Type or member is obsolete
 
         public IVortexObject GetParent()
         {

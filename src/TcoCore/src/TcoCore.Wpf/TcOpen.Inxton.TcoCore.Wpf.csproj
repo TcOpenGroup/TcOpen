@@ -20,7 +20,7 @@
 		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.7-alpha.690" />
+		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.699" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
 	</ItemGroup>
@@ -30,6 +30,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="VisualStudioToolsManifest.xml" IncludeInPackage="true" Pack="true" PackagePath="tools" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\..\..\..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Localization.Designer.cs">

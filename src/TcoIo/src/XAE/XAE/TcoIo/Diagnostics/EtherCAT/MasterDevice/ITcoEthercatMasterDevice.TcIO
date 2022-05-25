@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoEthercatMasterDevice" Id="{da9fd16c-1d6e-03e6-3cbe-f6bc17dd6168}">
+    <Declaration><![CDATA[INTERFACE ITcoEthercatMasterDevice
+]]></Declaration>
+    <Property Name="AllDataValid" Id="{1859ac70-6c32-02cd-2ba0-460b02301642}">
+      <Declaration><![CDATA[PROPERTY AllDataValid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3e35ef17-d2fe-01cb-2cf0-d66d2c72d094}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="DeviceHasSomeIssue" Id="{40065bea-8268-0c34-00d5-cb2329162aca}">
+      <Declaration><![CDATA[PROPERTY DeviceHasSomeIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ad4e8e61-3413-0e48-28bc-e5cd44fe4cc4}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="SomeDataInvalid" Id="{f4e422c5-45f7-0bbc-37e3-dc0f899b801a}">
+      <Declaration><![CDATA[PROPERTY SomeDataInvalid : BOOL]]></Declaration>
+      <Get Name="Get" Id="{97daddac-6bfb-0211-05c0-f8e057e382da}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="SomeSyncUnitHasSomeIssue" Id="{a8cb1f5f-0e38-0872-383d-988009353fc9}">
+      <Declaration><![CDATA[PROPERTY SomeSyncUnitHasSomeIssue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b9969bc2-273c-0941-2bc5-604ee8c5c77d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="State" Id="{99bff1c0-5401-07ba-06c1-9a3fa3cd9c18}">
+      <Declaration><![CDATA[PROPERTY State : TcoEthercatMasterDeviceState]]></Declaration>
+      <Get Name="Get" Id="{10aaa00b-83e1-091d-2949-098cf7ebc563}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>
