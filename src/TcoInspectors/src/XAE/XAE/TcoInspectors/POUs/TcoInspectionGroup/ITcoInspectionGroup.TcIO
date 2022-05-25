@@ -16,6 +16,13 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="NormalizeRetries" Id="{b1d374db-5315-00fd-05a0-0934b06627c2}">
+      <Declaration><![CDATA[METHOD NormalizeRetries : ITcoInspectionGroup
+VAR_INPUT
+	inoInspection : IInspector;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="OnFail" Id="{03a3e801-0b28-07eb-2efc-56c061775b72}">
       <Declaration><![CDATA[METHOD OnFail : IOnFail
 ]]></Declaration>
