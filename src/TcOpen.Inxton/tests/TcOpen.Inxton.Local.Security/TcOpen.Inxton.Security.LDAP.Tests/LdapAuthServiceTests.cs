@@ -3,7 +3,7 @@ using System;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Local.Security.LDAP;
 
-namespace TcOpen.Inxton.Security.Tests
+namespace TcOpen.Inxton.Security.LDAP.Tests
 {
     [TestFixture]
     public class LdapAuthServiceTests
@@ -12,7 +12,7 @@ namespace TcOpen.Inxton.Security.Tests
 
         [OneTimeSetUp]
         public void SetUp()
-        {
+        {            
             SecurityManager.Create(new LdapService(
                 new LdapConfig("ldap.forumsys.com", 389, false, "dc=example,dc=com")));
             NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal = SecurityManager.Manager.Principal;
