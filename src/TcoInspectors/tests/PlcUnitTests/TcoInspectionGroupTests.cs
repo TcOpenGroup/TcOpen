@@ -254,5 +254,37 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eOverallResult.Failed, InspectorContainer._sut.ResultAsEnum);
         }
+
+        [Test]
+        public void should_inspect_with_retries_normalization()
+        {
+            this.set_to_fail();
+
+            var expected = 3;
+
+            container._diis[0]._data.NumberOfAllowedRetries.Synchron = 3;            
+            container._diis[1]._data.NumberOfAllowedRetries.Synchron = 0;            
+            container._dais[0]._data.NumberOfAllowedRetries.Synchron = 100;            
+            container._dais[1]._data.NumberOfAllowedRetries.Synchron = 5;            
+            container._ddis[0]._data.NumberOfAllowedRetries.Synchron = 4;            
+            container._ddis[1]._data.NumberOfAllowedRetries.Synchron = 8;
+            
+
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.Passed;
+
+            var initialState = InspectorContainer._coordinator._state.Synchron;
+            var expectedState = (short)(initialState - 10);
+            InspectorContainer._retryState.Synchron = expectedState;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectionGroupTests.InspectWithNormalizedNumberOfRetries);
+
+            Assert.AreEqual(expected, container._diis[0]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._diis[1]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._dais[0]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._dais[1]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._ddis[0]._data.NumberOfAllowedRetries.Synchron);
+            Assert.AreEqual(expected, container._ddis[1]._data.NumberOfAllowedRetries.Synchron);
+
+        }
     }
 }
