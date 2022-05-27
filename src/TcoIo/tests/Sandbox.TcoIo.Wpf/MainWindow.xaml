@@ -14,7 +14,7 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem Header="Topology view">
+        <TabItem Header="Topology view" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MaxWidth="300"></ColumnDefinition>
@@ -27,7 +27,7 @@
 
             </Grid>
         </TabItem>
-        <TabItem Header="Diagnostic messages">
+        <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
