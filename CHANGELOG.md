@@ -1,3 +1,9 @@
+# v0.7.x
+
+## TcoIo
+
+Added TcoIo library for details see [here](src\TcoIo\README.md)
+
 # v0.6.x
 
 ## TcoCore
@@ -11,6 +17,7 @@
 - `TcoTask` Checks for authentication when `Roles` property is assigned.
 - WPF `ViewModelizer` simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
 - ViewModelizer simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
+
 ~~~
 protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 {

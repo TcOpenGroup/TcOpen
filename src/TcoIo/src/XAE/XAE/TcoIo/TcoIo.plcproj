@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
@@ -16,7 +16,7 @@
     <Implicit_KindOfTask>{af6f445f-aaa5-4146-b49d-df6781ed34d0}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{cfacfea3-0452-45b2-9594-67637754fe0b}</Implicit_Jitter_Distribution>
     <LibraryReferences>{a8cd9a6b-9212-4c38-8cf3-aa3f2cb9a084}</LibraryReferences>
-    <ProjectVersion>0.6.0.913</ProjectVersion>
+    <ProjectVersion>1.19.1.1780</ProjectVersion>
     <Company>Vortex.Library</Company>
     <DefaultNamespace>TcoIo</DefaultNamespace>
     <Title>TcoIo</Title>
@@ -34,7 +34,31 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_E68C61CD.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\InfoData_2A97D6CF.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\ITcoSyncUnit.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitTask_2D604ED5.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\TcoSyncUnit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Base\EtcSlaveBase_82538BE2.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Base\EtcSlaveBoxBase_77A0E4A7.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Base\EtcSlaveTerminalBase_947E5A46.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\InfoData_84133AC9.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\Inputs_A65FACA4.TcDUT">
@@ -61,22 +85,22 @@
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\TcoEthercatMasterDevice.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitTask_2D604ED5.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\InfoData\InfoData_23CBA837.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\TcoSyncUnit.TcPOU">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\InfoData\InfoData_6F19DB2B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\InfoData_2A97D6CF.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Inputs\InputBase_8311D824.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\ITcoSyncUnit.TcIO">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\Outputs\OutputBase_10CEE7DE.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\SyncUnitState.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcState_0B2B16F9.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\SyncUnit\WcState_0B2B16F9.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\SlaveDevice\WcState\WcState_9091E0EB.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\TcoEthercat.TcGVL">
@@ -89,13 +113,26 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SpecialPlcTypes\TcoAmsAddr.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpecialPlcTypes\TcoAmsNetId.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics" />
     <Folder Include="Diagnostics\EtherCAT" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Base" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\InfoData" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\Messenger" />
-    <Folder Include="Diagnostics\EtherCAT\SyncUnit" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Inputs" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Outputs" />
+    <Folder Include="Diagnostics\EtherCAT\SlaveDevice\WcState" />
+    <Folder Include="SpecialPlcTypes" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>

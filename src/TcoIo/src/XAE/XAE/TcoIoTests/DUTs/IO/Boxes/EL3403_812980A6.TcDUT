@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EL3403_812980A6" Id="{f34b390b-ad56-049f-29f8-91cbc3b85577}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3403-0000-0023'}
+{attribute addProperty BoxType "EL3403-0000-0023"}
+{attribute addProperty Id "PM_Inputs_Channel_1AT %I*PM_Inputs_Channel_2F86808618PM_Inputs_Channel_2AT %I*PM_Inputs_Channel_2F86808618PM_Inputs_Channel_3AT %I*PM_Inputs_Channel_2F86808618PM_Status_dataAT %I*PM_Status_data_2A9514CB4PM_Outputs_Channel_1AT %Q*PM_Outputs_Channel_E5FBDE301PM_Outputs_Channel_2AT %Q*PM_Outputs_Channel_E5FBDE301PM_Outputs_Channel_3AT %Q*PM_Outputs_Channel_E5FBDE301WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "2166980774"}
+{attribute addProperty Size "65"}
+TYPE EL3403_812980A6 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "PM_Inputs_Channel_1"}
+	PM_Inputs_Channel_1 : PM_Inputs_Channel_2F868086;
+	{attribute addProperty Name "PM_Inputs_Channel_2"}
+	PM_Inputs_Channel_2 : PM_Inputs_Channel_2F868086;
+	{attribute addProperty Name "PM_Inputs_Channel_3"}
+	PM_Inputs_Channel_3 : PM_Inputs_Channel_2F868086;
+	{attribute addProperty Name "PM_Status_data"}
+	PM_Status_data : PM_Status_data_2A9514CB;
+	{attribute addProperty Name "PM_Outputs_Channel_1"}
+	PM_Outputs_Channel_1 : PM_Outputs_Channel_E5FBDE30;
+	{attribute addProperty Name "PM_Outputs_Channel_2"}
+	PM_Outputs_Channel_2 : PM_Outputs_Channel_E5FBDE30;
+	{attribute addProperty Name "PM_Outputs_Channel_3"}
+	PM_Outputs_Channel_3 : PM_Outputs_Channel_E5FBDE30;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_23CBA837;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
