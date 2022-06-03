@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Security.Wpf\TcOpen.Inxton.Local.Security.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\src\TcOpen.Inxton.Local.Security.Externals\TcOpen.Inxton.Local.Security.Readers.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO.Ports;
-using System.Linq;
+using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security
 {
-    internal class ComPortTokenProvider : ITokenProvider
+    public class ComPortTokenProvider : IExternalAuthorization
     {
         private readonly SerialPort port;
 
@@ -36,9 +36,16 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
+        public string AuthorizationErrorMessage { get; set; }
+
+        public bool WillChangeToken { get; set; }
+
         public delegate string GetDataDelegate(string recievedData);
 
         public GetDataDelegate GetDataHandler;
+
+        public event AuthorizationRequestDelegate AuthorizationRequest;
+        public event AuthorizationTokenChangeRequestDelegate AuthorizationTokenChange;
 
         void PortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -57,6 +64,16 @@ namespace TcOpen.Inxton.Local.Security
             {
                 throw;
             }
-        }        
+        }
+
+        public IUser RequestAuthorization()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestTokenChange()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

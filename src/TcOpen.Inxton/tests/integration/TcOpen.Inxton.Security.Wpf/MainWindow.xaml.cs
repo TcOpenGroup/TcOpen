@@ -33,6 +33,8 @@ namespace integration.Security.Wpf.netcore
 
             userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()));
 
+            authService.ExternalAuthorization = new ComPortTokenProvider("COM3", 9600, 8, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None);
+
             authService.DeAuthenticateCurrentUser();
 
             InitializeComponent();
