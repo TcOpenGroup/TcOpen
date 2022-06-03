@@ -8,8 +8,8 @@ namespace TcOpen.Inxton.Security
 {
     public interface IExternalAuthorization
     {
-        IUser RequestAuthorization();
-        void RequestTokenChange();
+        IUser RequestAuthorization(string token);
+        void RequestTokenChange(string token);
 
         string AuthorizationErrorMessage { get; }
         bool WillChangeToken { get; set; }

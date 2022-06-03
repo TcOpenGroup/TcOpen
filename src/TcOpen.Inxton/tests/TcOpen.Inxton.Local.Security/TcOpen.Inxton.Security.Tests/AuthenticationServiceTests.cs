@@ -340,11 +340,11 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.AuthenticateUser(userName, password);
 
-            authService.ExternalAuthorization.RequestTokenChange();
+            authService.ExternalAuthorization.RequestTokenChange(token);
 
             authService.DeAuthenticateCurrentUser();
 
-            var actual = authService.ExternalAuthorization.RequestAuthorization();
+            var actual = authService.ExternalAuthorization.RequestAuthorization(token);
 
             Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
@@ -368,14 +368,14 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.AuthenticateUser(userName, password);
 
-            authService.ExternalAuthorization.RequestTokenChange();
+            authService.ExternalAuthorization.RequestTokenChange(token);
 
             authService.DeAuthenticateCurrentUser();
 
             externalAuthorization.Token = "fjalsdjl";
            
 
-            authService.ExternalAuthorization.RequestAuthorization();
+            authService.ExternalAuthorization.RequestAuthorization(token);
 
             AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppPrincipal;
 
@@ -401,14 +401,14 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.AuthenticateUser(userName, password);
 
-            authService.ExternalAuthorization.RequestTokenChange();
+            authService.ExternalAuthorization.RequestTokenChange(token);
 
             authService.DeAuthenticateCurrentUser();
 
             externalAuthorization.Token = string.Empty;
 
 
-            authService.ExternalAuthorization.RequestAuthorization();
+            authService.ExternalAuthorization.RequestAuthorization(token);
 
             AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppPrincipal;
 
@@ -430,25 +430,20 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.AuthenticateUser("ExistingToken1", "halabala");
 
-            authService.ExternalAuthorization.RequestTokenChange();
+            authService.ExternalAuthorization.RequestTokenChange(token);
 
             authService.DeAuthenticateCurrentUser();
 
             authService.AuthenticateUser("ExistingToken2", "halabala");
 
-            Assert.Throws(typeof(ExistingTokenException), () => authService.ExternalAuthorization.RequestTokenChange());            
+            Assert.Throws(typeof(ExistingTokenException), () => authService.ExternalAuthorization.RequestTokenChange(token));            
 
         }
 
         public class ExternalAuthenticator : ExternalAuthorization
         {
 
-            public string Token { get; set; }
-
-            protected override string GetToken()
-            {
-                return Token;
-            }
+            public string Token { get; set; }            
         }
     }
 }

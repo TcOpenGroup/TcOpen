@@ -4,13 +4,13 @@ using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security
 {
-    public class ComPortTokenProvider : IExternalAuthorization
+    public class ComPortTokenProvider : ITokenProvider
     {
         private readonly SerialPort port;
 
-        private string recieved;
+        private string _tokenData;
 
-        public ComPortTokenProvider(string portName, int baudRate, int dataBits, StopBits stopBits, Parity parity)
+        public ComPortTokenProvider(string portName, int baudRate = 9600, int dataBits = 8, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
         {
             port = new SerialPort();
             port.BaudRate = baudRate;
@@ -22,43 +22,20 @@ namespace TcOpen.Inxton.Local.Security
             port.DataReceived += PortDataReceived;
         }
 
-        public void SetReceiveEventHandler(SerialDataReceivedEventHandler dataRecivedEventHandler)
+
+        public void SetTokenReceivedAction(Action<string> tokenReceivedAction)
         {
-            port.DataReceived -= PortDataReceived;
-            port.DataReceived += dataRecivedEventHandler;
+            IncomingTokenAction = tokenReceivedAction;
         }
-
-        public string Received
-        {
-            get
-            {
-                return recieved;
-            }
-        }
-
-        public string AuthorizationErrorMessage { get; set; }
-
-        public bool WillChangeToken { get; set; }
-
-        public delegate string GetDataDelegate(string recievedData);
-
-        public GetDataDelegate GetDataHandler;
-
-        public event AuthorizationRequestDelegate AuthorizationRequest;
-        public event AuthorizationTokenChangeRequestDelegate AuthorizationTokenChange;
-
+                
+        public Action<string> IncomingTokenAction;
+      
+        
         void PortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
-            {
-                recieved = port.ReadTo("\r");
-
-                if (GetDataHandler != null)
-                    GetDataHandler(recieved);
-
-                System.Threading.Thread.Sleep(1000);
-
-                recieved = port.ReadExisting();
+            {                             
+                IncomingTokenAction?.Invoke(port.ReadExisting());
             }
             catch (Exception)
             {
@@ -66,14 +43,6 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
-        public IUser RequestAuthorization()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RequestTokenChange()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
