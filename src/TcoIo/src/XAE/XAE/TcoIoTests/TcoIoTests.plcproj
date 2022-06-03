@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
@@ -19,11 +19,10 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoIoTests</Title>
-    <ProjectVersion>0.6.0.913</ProjectVersion>
+    <ProjectVersion>1.19.1.1780</ProjectVersion>
     <Placeholder>TcoIoTests</Placeholder>
     <CombineIds>false</CombineIds>
     <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
-    <DefaultNamespace>TcoIoTests</DefaultNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
@@ -56,28 +55,25 @@
     <Compile Include="DUTs\IO\PDOs\COM_RxPDO_Map_Outputs_Channel_EADA2E0D.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PDOs\WcState_9091E0EB.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\PDOs\InfoData_32EB74EA.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\IO\PDOs\Channel_830843C1.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\PDOs\InfoData_6F19DB2B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\Channel_42CA91F7.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PDOs\AO_Outputs_Channel_BA7EBB7C.TcDUT">
+    <Compile Include="DUTs\IO\PDOs\AO_Output_Channel_BA7EBB7C.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\COM_Inputs_3801C95E.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\COM_Outputs_DEF408EC.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\PDOs\AI_Standard_Channel_A8DF64E3.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\PDOs\AI_Standard_Channel_4A394481.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\PDOs\PM_Inputs_Channel_2F868086.TcDUT">
@@ -89,16 +85,7 @@
     <Compile Include="DUTs\IO\PDOs\PM_Outputs_Channel_E5FBDE30.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PDOs\AI_Standard_Channel_A8DF64E3.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\PDOs\AI_Standard_4A394481.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\PDOs\AI_Standard_Channel_4A394481.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL6002_81703A53.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL6002_CD897635.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\Boxes\EL1809_32157CFD.TcDUT">
@@ -107,34 +94,34 @@
     <Compile Include="DUTs\IO\Boxes\EL2809_2B6483BD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL4004_D2A7C9B7.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL4004_E203F875.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL6001_B592E1CA.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL6001_0DE01E7E.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\Boxes\EK1100_1FC0878B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EK1110_1FC0878B.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL3403_200C4240.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\IO\Boxes\EK1122_1FC0878B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL3174_DCC78662.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL3174_B71BFF42.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL3011_353F32DF.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EL3011_7A495228.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\Boxes\EL2008_E2806B95.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Boxes\EL3024_C4269E32.TcDUT">
+    <Compile Include="DUTs\IO\Boxes\EK1110_1FC0878B.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\Boxes\EL3403_812980A6.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\Boxes\EL3024_C6E76B5A.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\Devices\SyncUnitTasks_1988CF1B.TcDUT">
@@ -143,25 +130,25 @@
     <Compile Include="DUTs\IO\Devices\SyncUnits_13973095.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_1_EK1200_342ABB04.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_1_EK1200_F6996830.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Device_1_EtherCAT_4442729B.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Device_1_EtherCAT_C18FC6AF.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_9_EK1100_B6B701E6.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_11_EK1100_B6553301.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_17_EK1100_B932616E.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_18_EK1100_80291654.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_16_EK1122_E3300954.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_10_EK1122_5C11D1CC.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Term_14_EK1100_ED6DF06D.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Term_9_EK1100_BC2E3A93.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\Topology\Device_4_EtherCAT_7DA382B8.TcDUT">
+    <Compile Include="DUTs\IO\Topology\Device_4_EtherCAT_51653040.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL_iXlinker.TcGVL">
@@ -179,6 +166,7 @@
     <Folder Include="DUTs\IO\Boxes" />
     <Folder Include="DUTs\IO\Devices" />
     <Folder Include="DUTs\IO\Topology" />
+    <Folder Include="DUTs\IO\Base" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -198,7 +186,7 @@
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoIo">
-      <DefaultResolution>TcoIo, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoIo, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoIo</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -212,7 +200,7 @@
       <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoIo">
-      <Resolution>TcoIo, 0.6.0.913 (Vortex.Library)</Resolution>
+      <Resolution>TcoIo, 1.19.1.1780 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
