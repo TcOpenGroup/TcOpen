@@ -2,7 +2,7 @@
 
 ## TcoIo
 
-Added TcoIo library for details see [here](src\TcoIo\README.md)
+Added TcoIo library for details see [here](https://github.com/TcOpenGroup/TcOpen/tree/dev/src/TcoIo)
 
 # v0.6.x
 
