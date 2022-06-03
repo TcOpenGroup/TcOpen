@@ -176,8 +176,7 @@
                             Grid.Column="2"
                             Margin="5,5,5,5"
                             AutomationProperties.AutomationId="CanChangePassCheckBox"
-                            IsChecked="{Binding ElementName=UsersList, Path=SelectedItem.CanUserChangePassword, Mode=TwoWay}"
-                            IsEnabled="{Binding Source={x:Static security:UserAccessor.Instance}, Path=Identity.CanUserChangePassword}" />
+                            IsChecked="{Binding ElementName=UsersList, Path=SelectedItem.CanUserChangePassword, Mode=TwoWay}"/>
                         <Label
                             Grid.Row="4"
                             Grid.Column="0"

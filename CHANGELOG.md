@@ -1,5 +1,16 @@
 # v0.7.x
 
+## TcOpen.Inxton.Security
+
+Added posibility to provide authentication token via serial interface.
+
+Usage
+
+~~~C#
+SecurityProvider.Get.AuthenticationService;
+authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3");
+~~~
+
 ## TcoIo
 
 Added TcoIo library for details see [here](https://github.com/TcOpenGroup/TcOpen/tree/dev/src/TcoIo)
