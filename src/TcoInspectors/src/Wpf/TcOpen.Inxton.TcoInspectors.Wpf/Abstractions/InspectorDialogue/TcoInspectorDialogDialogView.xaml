@@ -58,9 +58,9 @@
                 </WrapPanel.Resources>
                 <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="Retry" />
                 <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="Terminate" />
-                <!--<vortexs:PermissionBox Permissions="can_override_test">-->
-                <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="Override" />
-                <!--</vortexs:PermissionBox>-->
+                <vortexs:PermissionBox Permissions="can_override_inspection">
+                    <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="Override" />
+                </vortexs:PermissionBox>
             </WrapPanel>
             <Expander
                 Grid.Row="2"               
