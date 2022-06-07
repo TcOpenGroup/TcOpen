@@ -37,6 +37,25 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="OverInspected" Id="{c039d7c8-ebe8-06e7-0a4c-2c6e9d3b65b1}">
+      <Declaration><![CDATA[PROPERTY INTERNAL OverInspected : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2cff58c9-26c6-058e-2a22-8b77b31102ff}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OverInspected := _isOverInspected;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{afe25584-5d3b-06f4-2804-c454f9d136dc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_isOverInspected := OverInspected;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="Restore" Id="{f6a8b19c-7de2-0d61-29e8-f9ef96a63093}">
       <Declaration><![CDATA[METHOD Restore : TcoCore.ITcoRestorable
 VAR_INPUT

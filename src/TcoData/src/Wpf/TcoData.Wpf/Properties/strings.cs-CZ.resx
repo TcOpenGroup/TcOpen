@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AffectedObject" xml:space="preserve">
+    <value>Ovlivněný objekt</value>
+  </data>
+  <data name="Ago" xml:space="preserve">
+    <value>před</value>
+  </data>
+  <data name="AutoUpdate" xml:space="preserve">
+    <value>Automatická aktualizace</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="CancelsTheExectionOfThisAction" xml:space="preserve">
+    <value>Zruší vyjmutí této akce.</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="CategoryFilter" xml:space="preserve">
+    <value>Filtr kategorie</value>
+  </data>
+  <data name="CloseApplication" xml:space="preserve">
+    <value>Zavřít aplikaci</value>
+  </data>
+  <data name="Components" xml:space="preserve">
+    <value>KOMPONENTY</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopírovat</value>
+  </data>
+  <data name="CreateCopy" xml:space="preserve">
+    <value>Vytvořit kopii</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Vytvořeno</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>DATA</value>
+  </data>
+  <data name="DataItemName" xml:space="preserve">
+    <value>Datová položka</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>den</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>dny</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Odstranit</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Podrobnosti na</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>DIAGNOSTIKA</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Dokumenty</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Doba trvání</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="EmptySearch" xml:space="preserve">
+    <value>Vaše vyhledávání neodpovídá žádným dokumentům.</value>
+  </data>
+  <data name="EvalutatorsList" xml:space="preserve">
+    <value>Hodnotitelé</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtr</value>
+  </data>
+  <data name="FilterId" xml:space="preserve">
+    <value>ID filtru</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="FromNow" xml:space="preserve">
+    <value>od nynějška</value>
+  </data>
+  <data name="FromPlc" xml:space="preserve">
+    <value>Od společnosti PLC</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Celé jméno</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>hodina</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>hodin</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Položky na stránku</value>
+  </data>
+  <data name="LoadToController" xml:space="preserve">
+    <value>Chcete načíst data do řadiče? Záznam:</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Umístění</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Zpráva</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Zprávy</value>
+  </data>
+  <data name="MinCategoryFilter" xml:space="preserve">
+    <value>Filtr min. kategorie</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>minuta</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minuty</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Upraveno</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>měsíc</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>měsíce</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nový</value>
+  </data>
+  <data name="NewValue" xml:space="preserve">
+    <value>Nová hodnota</value>
+  </data>
+  <data name="NoMessages" xml:space="preserve">
+    <value>Žádné zprávy</value>
+  </data>
+  <data name="NoSelected" xml:space="preserve">
+    <value>Žádné</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OldValue" xml:space="preserve">
+    <value>Stará hodnota</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>PŘEHLED</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Stránka</value>
+  </data>
+  <data name="ParallelSequencers" xml:space="preserve">
+    <value>Paralelní sekvencery</value>
+  </data>
+  <data name="PeripheryDetailsView_FullName" xml:space="preserve">
+    <value>Celé jméno</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Výsledek</value>
+  </data>
+  <data name="RightNow" xml:space="preserve">
+    <value>právě teď</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>druhý</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>sekundy</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Vybrané stránky</value>
+  </data>
+  <data name="SendToPlc" xml:space="preserve">
+    <value>Odeslat do PLC</value>
+  </data>
+  <data name="Severity" xml:space="preserve">
+    <value>Závažnost</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Zdroj:</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Stav</value>
+  </data>
+  <data name="SubCategory" xml:space="preserve">
+    <value>Podkategorie</value>
+  </data>
+  <data name="Symbol" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Časové razítko</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Na</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aktualizace</value>
+  </data>
+  <data name="UpdateMessages" xml:space="preserve">
+    <value>Aktualizace zpráv</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Uživatel</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Uživatelské jméno</value>
+  </data>
+  <data name="WouldYouLikeToCloseTheApplication" xml:space="preserve">
+    <value>Chcete aplikaci zavřít?</value>
+  </data>
+  <data name="WouldYouLikeToDeleteRecord" xml:space="preserve">
+    <value>Chcete odstranit záznam</value>
+  </data>
+  <data name="WouldYouLikeToGetFromPLC" xml:space="preserve">
+    <value>Chcete získat data z PLC?</value>
+  </data>
+  <data name="WouldYouLikeToUpdateRecord" xml:space="preserve">
+    <value>Chcete aktualizovat záznam</value>
+  </data>
+</root>

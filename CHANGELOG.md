@@ -1,3 +1,20 @@
+# v0.7.x
+
+## TcOpen.Inxton.Security
+
+Added posibility to provide authentication token via serial interface.
+
+Usage
+
+~~~C#
+SecurityProvider.Get.AuthenticationService;
+authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3");
+~~~
+
+## TcoIo
+
+Added TcoIo library for details see [here](https://github.com/TcOpenGroup/TcOpen/tree/dev/src/TcoIo)
+
 # v0.6.x
 
 ## TcoCore
@@ -11,6 +28,7 @@
 - `TcoTask` Checks for authentication when `Roles` property is assigned.
 - WPF `ViewModelizer` simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
 - ViewModelizer simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
+
 ~~~
 protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 {

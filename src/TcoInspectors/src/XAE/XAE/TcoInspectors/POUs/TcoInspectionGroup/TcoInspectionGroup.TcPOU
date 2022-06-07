@@ -4,16 +4,18 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
     {attribute 'hide'}
-    _done             : BOOL;
-    _overallResult    : TcoComprehensiveResult;
-    _currentRunResult : TcoComprehensiveResult;
-    _inspections      : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
-    _inspectionIndex  : INT;
-    _tierAct          : TcoCore.TcoTier(THIS^);
+    _done                     : BOOL;				
+    _overallResult            : TcoComprehensiveResult;
+    _currentRunResult         : TcoComprehensiveResult;
+    _inspections              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
+    _inspectionIndex          : INT;
+    _tierAct                  : TcoCore.TcoTier(THIS^);
+    _normalizedAllowedRetries : UINT;
 END_VAR
 
 VAR CONSTANT
     LAST_INSPECTION_INDEX : INT := 15;
+	MAX_NORMALIZED_RETRIES : UINT := 65535;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -30,14 +32,17 @@ METHOD Act : ITcoInspectionGroup
 //	inoResult : TcoComprehensiveResult;
 //END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_inspectionIndex := 0;
-// True then set to false if any inspector not done.
-_done            := TRUE;
+        <ST><![CDATA[OverInspected := FALSE;
+_inspectionIndex          := 0;
+_done                     := TRUE; // True then set to false if any inspector not done.
+_normalizedAllowedRetries := MAX_NORMALIZED_RETRIES;
 
-Act              := THIS^;
+Act := THIS^;
 
-IF(_tierAct.IsNewTier()) THEN
-	ClearResult(_currentRunResult);	
+
+
+IF (_tierAct.IsNewTier()) THEN
+    ClearResult(_currentRunResult);
 END_IF
 ]]></ST>
       </Implementation>
@@ -55,13 +60,33 @@ inoResult.Result := eOverallResult.NoAction;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="CommonData" Id="{36a6e3dd-6add-0a42-3ea4-eeae0ddbf08c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets common data settings of inspectors.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Get Name="Get" Id="{cf4f926b-9654-03bf-18da-2882eac3e99a}">
+        <Declaration><![CDATA[VAR
+	_data : TcoInspectorData; 
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CommonData REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Dialog" Id="{74a2f6ff-2257-0b1f-0c44-f3b62d0819e8}" FolderPath="OnFail\">
       <Declaration><![CDATA[METHOD Dialog : BOOL
 VAR_INPUT
 	inRetryStep : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(THIS^.Done) THEN		
+        <ST><![CDATA[IF(THIS^.Done) THEN
+	_tcoInspectorDialogue.OverInspected := THIS^.OverInspected;		
 	IF(THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
 		THIS^._tcoInspectorDialogue.Invoke();
 		_tcoInspectorDialogue();	
@@ -116,10 +141,19 @@ END_VAR
       <Implementation>
         <ST><![CDATA[OnEnterInspection();
 
+IF(_normalizedAllowedRetries <> 0 
+AND _normalizedAllowedRetries <> MAX_NORMALIZED_RETRIES) THEN
+	Inspector.CommonData.NumberOfAllowedRetries := _normalizedAllowedRetries;
+END_IF;
+
 Inspect := THIS^;
 
+IF(Inspector.OverInspected) THEN
+	THIS^.OverInspected := TRUE;
+END_IF;
+
 IF (Inspector.Done) THEN
-    Inspector.UpdateComprehensiveResult(_currentRunResult);					
+    Inspector.UpdateComprehensiveResult(_currentRunResult);							
 ELSE
 	_done := FALSE;	
 END_IF
@@ -131,6 +165,33 @@ IF(_inspectionIndex <= LAST_INSPECTION_INDEX)THEN
 END_IF
 	
 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NormalizeRetries" Id="{ded8cb66-c7fe-0d86-039b-c79bf8c6c339}">
+      <Declaration><![CDATA[(*~
+	<summary>
+		Sets lower `number of allowed retries` for this call of inspection group.
+		Invoke this method multiple times if you want to check for the inspection for lowest numebr of retries.
+		<note type="important">
+			The inspections will run at least once before allowed entries is normalized.
+		</note>
+	</summary>
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `NormalizeRetries` property via `Act` method.'}
+METHOD NormalizeRetries : ITcoInspectionGroup
+VAR_INPUT
+	inoInspection : IInspector;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Determine lowest number of retries
+NormalizeRetries := THIS^;
+IF( inoInspection.CommonData.NumberOfAllowedRetries <> 0 
+AND_THEN inoInspection.CommonData.NumberOfAllowedRetries < _normalizedAllowedRetries) THEN
+	_normalizedAllowedRetries := inoInspection.CommonData.NumberOfAllowedRetries;
+END_IF
 ]]></ST>
       </Implementation>
     </Method>
@@ -146,6 +207,34 @@ OnFail := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="OverInspected" Id="{e0f14d06-9cf8-02a2-1ed1-c4992364d32d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets `true` when the number of inspections excceds `NumberOfAllowedRetries`.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC OverInspected : BOOL]]></Declaration>
+      <Get Name="Get" Id="{e3256b18-3d99-064d-3cee-3418b265bdcd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OverInspected := _isOverInspected;
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{588b6ea8-8508-0f69-0956-a218a73d88ea}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_isOverInspected := OverInspected;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="Retry" Id="{35486965-61f5-0154-3790-1cbb7d6396ad}" FolderPath="OnFail\">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Retry` method via `OnFail()` method.'}
