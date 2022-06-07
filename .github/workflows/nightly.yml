@@ -54,8 +54,8 @@ jobs:
         with:
           name: plcLibs
           path: ${{ github.workspace }}\plcLibs\*.library
-	- name: Cake-Draft-Release-OrgsNugets
+	    - name: Cake-Draft-Release-OrgsNugets
         env:
-		TC_OPEN_GROUP_USER_PAT: ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
+		      TC_OPEN_GROUP_USER_PAT: ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
         run: >
-          	.\build.ps1       
+          .\build.ps1       
