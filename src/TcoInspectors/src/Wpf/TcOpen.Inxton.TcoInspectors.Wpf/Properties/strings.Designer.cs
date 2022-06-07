@@ -79,6 +79,15 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inspection failed, you will need to decide what&apos;s next....
+        /// </summary>
+        public static string InspectionFailedYouWillNeedToDecideWhatSNext {
+            get {
+                return ResourceManager.GetString("InspectionFailedYouWillNeedToDecideWhatSNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inconclusive.
         /// </summary>
         public static string InspectionInconclusive {
@@ -120,6 +129,33 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf.Properties {
         public static string NotInspected {
             get {
                 return ResourceManager.GetString("NotInspected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Override.
+        /// </summary>
+        public static string Override {
+            get {
+                return ResourceManager.GetString("Override", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        public static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminate.
+        /// </summary>
+        public static string Terminate {
+            get {
+                return ResourceManager.GetString("Terminate", resourceCulture);
             }
         }
     }
