@@ -19,36 +19,34 @@ public static class Program
     }
 }
 
-[TaskName("Clean task")]
-public sealed class Clean : FrostingTask<BuildContext>
-{
-    public override void Run(BuildContext context)
-    {
-        context.Clean();
-    }
-}
+//[TaskName("Clean task")]
+//public sealed class Clean : FrostingTask<BuildContext>
+//{
+//    public override void Run(BuildContext context)
+//    {
+//        context.Clean();
+//    }
+//}
 
-[TaskName("BuildLibraries task")]
-[IsDependentOn(typeof(Clean))]
-public sealed class BuildLibraries : FrostingTask<BuildContext>
-{
-    public override void Run(BuildContext context)
-    {
-        foreach (var solution in context.Libraries.Select(p => context.GetLibraryFilteredSolution(p)))
-        {            
-            context.MSBuild(solution, new MSBuildSettings() { Configuration = "Release" });
-        }
-    }
-}
+//[TaskName("BuildLibraries task")]
+//[IsDependentOn(typeof(Clean))]
+//public sealed class BuildLibraries : FrostingTask<BuildContext>
+//{
+//    public override void Run(BuildContext context)
+//    {
+//        foreach (var solution in context.Libraries.Select(p => context.GetLibraryFilteredSolution(p)))
+//        {            
+//            context.MSBuild(solution, new MSBuildSettings() { Configuration = "Release" });
+//        }
+//    }
+//}
 
 [TaskName("PushTcOpenGroupPackages task")]
-[IsDependentOn(typeof(BuildLibraries))]
+// [IsDependentOn(typeof(BuildLibraries))]
 public sealed class PushTcOpenGroupPackages : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext context)
-    {
-        return;
-
+    {        
         foreach (var nugetFile in Directory.EnumerateFiles(context.ArtifactsFolder, "*.nupkg").Select(p => new FileInfo(p)))
         {
             context.DotNetNuGetPush(nugetFile.FullName, new Cake.Common.Tools.DotNet.NuGet.Push.DotNetNuGetPushSettings()
@@ -65,8 +63,7 @@ public sealed class PushTcOpenGroupPackages : FrostingTask<BuildContext>
 public sealed class ReleaseTask : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext context)
-    {
-        return;
+    {        
         {
             var githubToken = context.Environment.GetEnvironmentVariable("TC_OPEN_GROUP_USER_PAT");
             var githubClient = new GitHubClient(new ProductHeaderValue("TcOpen"));
