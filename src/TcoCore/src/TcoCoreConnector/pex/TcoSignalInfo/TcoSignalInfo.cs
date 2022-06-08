@@ -32,7 +32,10 @@ namespace TcoCore
                                 var plc_signal_symbol = this.SymbolPath.Synchron;
                                 if (!string.IsNullOrEmpty(plc_signal_symbol))
                                 {
-                                    signal = this?.Connector?.OnlineTags?.Where(p => p.Symbol == plc_signal_symbol).FirstOrDefault();
+                                    //Search changed to StartsWith because `Tc3_JsonXml.FB_JsonReadWriteDatatype`
+                                    //in TcoSignalInfo  is unable to retrieve complete path in some instances.
+                                    // This can be a bug in `Tc3_JsonXml.FB_JsonReadWriteDatatype` that is outside our reach.
+                                    signal = this?.Connector?.OnlineTags?.Where(p => p.Symbol.StartsWith(plc_signal_symbol)).FirstOrDefault();
                                 }                           
                         }
                     }
