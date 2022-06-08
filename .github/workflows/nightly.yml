@@ -58,4 +58,4 @@ jobs:
         env:
           TC_OPEN_GROUP_USER_PAT : ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
         run: >
-          .\build.ps1      
+          .\pipelines\release-to-gh.ps1    
