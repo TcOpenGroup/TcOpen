@@ -9,6 +9,7 @@ using System.Linq;
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.MSBuild;
 
+
 public static class Program
 {
     public static int Main(string[] args)
@@ -52,7 +53,8 @@ public sealed class PushTcOpenGroupPackages : FrostingTask<BuildContext>
             context.DotNetNuGetPush(nugetFile.FullName, new Cake.Common.Tools.DotNet.NuGet.Push.DotNetNuGetPushSettings()
             {
                 Source = "https://nuget.pkg.github.com/TcOpenGroup/index.json",
-                ApiKey = System.Environment.GetEnvironmentVariable("TC_OPEN_GROUP_USER_PAT"),               
+                ApiKey = System.Environment.GetEnvironmentVariable("TC_OPEN_GROUP_USER_PAT"),  
+                SkipDuplicate = true
             });
         }
     }
@@ -63,24 +65,29 @@ public sealed class PushTcOpenGroupPackages : FrostingTask<BuildContext>
 public sealed class ReleaseTask : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext context)
-    {        
+    {
+        
         {
             var githubToken = context.Environment.GetEnvironmentVariable("TC_OPEN_GROUP_USER_PAT");
             var githubClient = new GitHubClient(new ProductHeaderValue("TcOpen"));
             githubClient.Credentials = new Credentials(githubToken);
 
-            var release = githubClient.Repository.Release.Create(
-                "TcOpenGroup",
-                "TcOpen",
-                new NewRelease($"{GitVersionInformation.SemVer}")
-                {
-                    Name = $"{GitVersionInformation.SemVer}",
-                    TargetCommitish = GitVersionInformation.Sha,
-                    Body = $"Release v{GitVersionInformation.SemVer}",
-                    Draft = true,
-                    Prerelease = true
-                }
-            ).Result;
+            var doesExists = githubClient.Repository.Release.GetAll("TcOpenGroup", "TcOpen", ApiOptions.None).Result.Any(p => p.Name == GitVersionInformation.SemVer);
+            if (!doesExists)
+            {
+                var release = githubClient.Repository.Release.Create(
+                    "TcOpenGroup",
+                    "TcOpen",
+                    new NewRelease($"{GitVersionInformation.SemVer}")
+                    {
+                        Name = $"{GitVersionInformation.SemVer}",
+                        TargetCommitish = GitVersionInformation.Sha,
+                        Body = $"Release v{GitVersionInformation.SemVer}",
+                        Draft = true,
+                        Prerelease = true
+                    }
+                ).Result;
+            }
 
             //foreach (var artifact in Directory.EnumerateFiles(context.ArtifactsFolder, "*.nupkg").Select(p => new FileInfo(p)))
             //{
