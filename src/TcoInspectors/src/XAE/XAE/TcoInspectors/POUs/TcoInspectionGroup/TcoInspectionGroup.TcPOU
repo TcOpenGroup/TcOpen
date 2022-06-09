@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
     {attribute 'hide'}
-    _done                     : BOOL;
+    _done                     : BOOL;				
     _overallResult            : TcoComprehensiveResult;
     _currentRunResult         : TcoComprehensiveResult;
     _inspections              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
@@ -32,11 +32,14 @@ METHOD Act : ITcoInspectionGroup
 //	inoResult : TcoComprehensiveResult;
 //END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_inspectionIndex          := 0;
+        <ST><![CDATA[OverInspected := FALSE;
+_inspectionIndex          := 0;
 _done                     := TRUE; // True then set to false if any inspector not done.
 _normalizedAllowedRetries := MAX_NORMALIZED_RETRIES;
 
 Act := THIS^;
+
+
 
 IF (_tierAct.IsNewTier()) THEN
     ClearResult(_currentRunResult);
@@ -82,7 +85,8 @@ VAR_INPUT
 	inRetryStep : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(THIS^.Done) THEN		
+        <ST><![CDATA[IF(THIS^.Done) THEN
+	_tcoInspectorDialogue.OverInspected := THIS^.OverInspected;		
 	IF(THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
 		THIS^._tcoInspectorDialogue.Invoke();
 		_tcoInspectorDialogue();	
@@ -144,8 +148,12 @@ END_IF;
 
 Inspect := THIS^;
 
+IF(Inspector.OverInspected) THEN
+	THIS^.OverInspected := TRUE;
+END_IF;
+
 IF (Inspector.Done) THEN
-    Inspector.UpdateComprehensiveResult(_currentRunResult);					
+    Inspector.UpdateComprehensiveResult(_currentRunResult);							
 ELSE
 	_done := FALSE;	
 END_IF
@@ -199,6 +207,34 @@ OnFail := THIS^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="OverInspected" Id="{e0f14d06-9cf8-02a2-1ed1-c4992364d32d}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets `true` when the number of inspections excceds `NumberOfAllowedRetries`.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC OverInspected : BOOL]]></Declaration>
+      <Get Name="Get" Id="{e3256b18-3d99-064d-3cee-3418b265bdcd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OverInspected := _isOverInspected;
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{588b6ea8-8508-0f69-0956-a218a73d88ea}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_isOverInspected := OverInspected;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="Retry" Id="{35486965-61f5-0154-3790-1cbb7d6396ad}" FolderPath="OnFail\">
       <Declaration><![CDATA[{attribute 'hide'}
 {attribute 'obsolete' := 'You should access `Retry` method via `OnFail()` method.'}
