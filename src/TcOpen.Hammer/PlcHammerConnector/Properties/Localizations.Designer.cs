@@ -22,7 +22,7 @@ namespace PlcHammerConnector.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Localizations {
+    public class Localizations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PlcHammerConnector.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PlcHammerConnector.Properties.Localizations", typeof(Localizations).Assembly);
@@ -51,7 +51,7 @@ namespace PlcHammerConnector.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace PlcHammerConnector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Current position.
         /// </summary>
-        internal static string ___Current_position__ {
+        public static string ___Current_position__ {
             get {
                 return ResourceManager.GetString("___Current_position__", resourceCulture);
             }
@@ -72,25 +72,52 @@ namespace PlcHammerConnector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Move absolute.
         /// </summary>
-        internal static string ___Move_absolute__ {
+        public static string ___Move_absolute__ {
             get {
                 return ResourceManager.GetString("___Move_absolute__", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MOVE HOME.
+        /// </summary>
+        public static string ___MOVE_HOME__ {
+            get {
+                return ResourceManager.GetString("___MOVE_HOME__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOVE TO WORK.
+        /// </summary>
+        public static string ___MOVE_TO_WORK__ {
+            get {
+                return ResourceManager.GetString("___MOVE_TO_WORK__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moves the drive to absolute position given by parameter &apos;Target Position&apos;.
         /// </summary>
-        internal static string ___Moves_the_drive_to_absolute_position_given_by_parameter__Target_Position___ {
+        public static string ___Moves_the_drive_to_absolute_position_given_by_parameter__Target_Position___ {
             get {
                 return ResourceManager.GetString("___Moves_the_drive_to_absolute_position_given_by_parameter__Target_Position___", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to STOP.
+        /// </summary>
+        public static string ___STOP__ {
+            get {
+                return ResourceManager.GetString("___STOP__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target position.
         /// </summary>
-        internal static string ___Target_position__ {
+        public static string ___Target_position__ {
             get {
                 return ResourceManager.GetString("___Target_position__", resourceCulture);
             }

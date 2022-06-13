@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--NuGet properties-->
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.703" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
+    <ProjectReference Include="..\..\TcoIoConnector\TcoIoConnector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveTerminalBase_947E5A46TerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBoxBase_77A0E4A7BoxView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InputBase\InputBase_8311D824HWDiagStructView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\OutputBase\OutputBase_10CEE7DEHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\Limit\OnlinerByteHWDiagLimitView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InputBase\InputBase_8311D824HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoDataStateHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_6F19DB2BHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\TcoAmsAddrHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_23CBA837HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\WcStateBase\WcState_0B2B16F9HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\WcStateBase\WcState_9091E0EBHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBase_82538BE2ServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+</Project>

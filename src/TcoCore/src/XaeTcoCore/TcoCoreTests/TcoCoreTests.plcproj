@@ -19,7 +19,7 @@
     <Company>Vortex.Library</Company>
     <Released>false</Released>
     <Title>TcoCoreTests</Title>
-    <ProjectVersion>1.18.6.1495</ProjectVersion>
+    <ProjectVersion>0.6.0.913</ProjectVersion>
     <DefaultNamespace>TcoCoreTests</DefaultNamespace>
     <Placeholder>TcoCoreTests</Placeholder>
     <CombineIds>true</CombineIds>
@@ -106,6 +106,12 @@
     <Compile Include="Tests\TcoRtc\TcoRtcTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoSequenceObserver\eTcoSequenceObserverTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequenceObserver\TcoSequenceObserverTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoSequencer\PlcExecuted\eTcoSequencerTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -125,6 +131,27 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoSequencer\_TcoSequencer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\eTcoSequenceTests.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\TcoSequenceTestChildState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\TcoSequenceTestContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\PlcExecuted\TcoSequenceTestType.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\TcoSequenceAutoRestorableTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\TcoSequenceNonAutoRestorableTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoSequence\_TcoSequence.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoState\TcoStateTest.TcPOU">
@@ -167,12 +194,15 @@
   <ItemGroup>
     <Folder Include="Components" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoSequenceObserver" />
     <Folder Include="Tests\TcoLogger" />
     <Folder Include="Tests\TcoLogger\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask" />
     <Folder Include="Tests\TcoComponent\PlcExecuted" />
     <Folder Include="Tests\TcoRemoteTask\PlcExecuted" />
     <Folder Include="Tests\TcoSequencer\PlcExecuted" />
+    <Folder Include="Tests\TcoSequence" />
+    <Folder Include="Tests\TcoSequence\PlcExecuted" />
     <Folder Include="Tests\TcoTask\PlcExecuted" />
     <Folder Include="Tests\TcoToggleTask" />
     <Folder Include="Tests\Utilities" />
@@ -210,7 +240,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -221,7 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 1.18.6.1495 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

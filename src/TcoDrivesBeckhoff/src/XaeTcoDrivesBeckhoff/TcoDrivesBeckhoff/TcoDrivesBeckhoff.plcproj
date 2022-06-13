@@ -19,11 +19,21 @@
     <Released>false</Released>
     <Company>Vortex.Library</Company>
     <Title>TcoDrivesBeckhoff</Title>
-    <ProjectVersion>1.18.6.1495</ProjectVersion>
+    <ProjectVersion>0.6.0.913</ProjectVersion>
     <DefaultNamespace>TcoDrivesBeckhoff</DefaultNamespace>
     <Placeholder>TcoDrivesBeckhoff</Placeholder>
     <CombineIds>true</CombineIds>
     <Author>TcOpenGroup</Author>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcOpen</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{f4ac9ad6-b898-40ba-9327-ae3ee59c6440}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\eAxisParameter.TcDUT">
@@ -190,7 +200,7 @@
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
-      <DefaultResolution>TcoCore, 1.18.6.1495 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
   </ItemGroup>
@@ -201,7 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
-      <Resolution>TcoCore, 1.18.6.1495 (Vortex.Library)</Resolution>
+      <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

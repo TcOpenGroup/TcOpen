@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Ctrl_71604E86" Id="{9338429d-c9e1-010f-00bc-138b0b47e17c}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6001-0000-0020'}
+{attribute addProperty BoxType "EL6001-0000-0020"}
+{attribute addProperty Id "Transmit_requestBOOL1Receive_acceptedBOOL1Init_requestBOOL1Send_continuesBOOL1Output_lengthUSINT1"}
+{attribute addProperty CRC "1902136966"}
+{attribute addProperty Size "5"}
+TYPE Ctrl_71604E86 :
+STRUCT
+	{attribute addProperty Name "Transmit_request"}
+	Transmit_request : BOOL;
+	{attribute addProperty Name "Receive_accepted"}
+	Receive_accepted : BOOL;
+	{attribute addProperty Name "Init_request"}
+	Init_request : BOOL;
+	{attribute addProperty Name "Send_continues"}
+	Send_continues : BOOL;
+	{attribute addProperty Name "Output_length"}
+	Output_length : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

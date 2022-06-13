@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoAnalogueInspector" Id="{ed836f0b-3319-05d9-1710-05ac209c74d2}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+<docu>
+<summary>
+	Provides a mechanism for inspecting status of discrete signal.	
+</summary>
+</docu>
+~*)
+FUNCTION_BLOCK TcoAnalogueInspector EXTENDS TcoInspector IMPLEMENTS ITcoAnalogueInspector
+VAR
+    _data : TcoAnalogueInspectorData;
+	{attribute 'hide'}
+	_lastOutValue : LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="CommonData" Id="{90e17698-9bab-0e90-3ce7-54c331eb4948}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets common data settings of inspectors.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Get Name="Get" Id="{c8789d27-bc11-0894-12d5-10e98ed45dda}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CommonData REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Data" Id="{130749e8-fcf6-0744-3fe0-87dc486f505f}">
+      <Declaration><![CDATA[(*~
+<docu>
+<summary>
+	Gets data of this inspector.
+</summary>
+</docu>
+~*)
+PROPERTY Data : REFERENCE TO TcoAnalogueInspectorData]]></Declaration>
+      <Get Name="Get" Id="{526cbef3-3b72-0ac9-38bd-c119084cf8c0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Data REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Inspect" Id="{c118bb5d-5c06-0c92-0167-b09658df5a96}">
+      <Declaration><![CDATA[(*~
+<docu>
+<summary>
+	Inspects the signal and evaluates that it matches the value set in `RequiredStatus`.
+</summary>
+<returns>
+	Returns the interface with information about the state of inspection.
+</returns>
+</docu>
+~*)
+METHOD Inspect : IInspector
+VAR_INPUT
+    Status : LREAL;
+END_VAR
+
+VAR
+	tmpResult : BOOL;
+	_minimum : LREAL;
+	_value : LREAL;
+	_maximum : LREAL;	
+END_VAR
+
+VAR CONSTANT
+    epsilon : REAL := 100000;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Inspect := THIS^;
+
+
+_inspectorTask.InspectionData REF= _data;
+
+OnEnterInspection();
+
+IF(IsOverinspected())THEN
+	RETURN;
+END_IF
+
+_inspectorTask.Invoke();
+
+IF (_inspectorTask.Execute()) THEN
+    IF (_data.IsByPassed) THEN
+        _data.Result    := eInspectorResult.Bypassed;
+        _data.TimeStamp := Context.RealTimeClock.NowLocal();
+        _inspectorTask.DoneWhen(TRUE);
+        RETURN;
+    END_IF
+
+	_data.Result := eInspectorResult.Running;
+	
+	_minimum := (Data.RequiredMin * epsilon);
+	_value := (Status * epsilon);
+	_maximum := (Data.RequiredMax * epsilon);
+	
+     Data.DetectedStatus := Status;
+	
+	 tmpResult := (_minimum <= _value) AND (_maximum >= _value);
+		
+	 IF(NOT tmpResult) THEN
+		_lastOutValue := Status;
+	 END_IF
+		
+	 _inspectorTask._failTimer(IN := TRUE, PT := _data.FailTime);
+     _inspectorTask._passTimer(IN := tmpResult, PT := _data.PassTime);
+	 IF(_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN	  
+     	_inspectorTask.DoneWhen(TRUE);
+		OnDone();
+	 END_IF;	
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{bb771705-c5a7-01ce-0fed-8852b88b3c08}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_data.Result = eInspectorResult.Failed) THEN
+     _data.DetectedStatus := _lastOutValue;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{ed4b79f2-1409-0b85-3501-740ca7aca530}">
+      <Declaration><![CDATA[METHOD WithCoordinator : ITcoAnalogueInspector
+VAR_INPUT
+	inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_WithCoordinator(inCoordinator);
+WithCoordinator := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

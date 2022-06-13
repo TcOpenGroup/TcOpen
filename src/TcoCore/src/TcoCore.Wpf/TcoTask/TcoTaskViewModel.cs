@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Controls;
-using Vortex.Presentation.Wpf;
+using TcOpen.Inxton.Input;
 
 namespace TcoCore
 {
@@ -10,7 +10,7 @@ namespace TcoCore
 
     }
 
-    public class TcoTaskViewModel : RenderableViewModel
+    public class TcoTaskViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         public TcoTaskViewModel()
         {

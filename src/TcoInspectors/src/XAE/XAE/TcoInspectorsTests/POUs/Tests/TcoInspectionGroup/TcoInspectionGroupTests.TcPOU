@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoInspectionGroupTests" Id="{982692a5-9906-0157-21ab-dccd4c43da53}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroupTests EXTENDS TcoCore._internals_TcoContext
+VAR
+    _sut                 : TcoInspectors.TcoInspectionGroup(THIS^);
+    _diis                : ARRAY[0..1] OF TcoInspectors.TcoDigitalInspector(THIS^);
+    _dii_inspectedValues : ARRAY[0..1] OF BOOL;
+    _dais                : ARRAY[0..1] OF TcoInspectors.TcoAnalogueInspector(THIS^);
+    _dai_inspectedValues : ARRAY[0..1] OF REAL;
+    _ddis                : ARRAY[0..1] OF TcoInspectors.TcoDataInspector(THIS^);
+    _ddi_inspectedValues : ARRAY[0..1] OF STRING;
+    _overallResult       : TcoInspectors.TcoComprehensiveResult;
+    _coordinator         : MockCoordinator;
+    _retryState          : INT;
+	_tmp 				 : ITcoInspectionGroupAct;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{50a6684e-9742-0c51-2cf7-ef891467b3d3}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _testId OF
+    eInspectionGroupTests.Inspect:
+         THIS^.ProbeDoneWhen(_sut.Act()
+                 .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+                 .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+                 .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+                 .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+                 .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+                 .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1]))
+				 .UpdateComprehensiveResult(_overallResult)
+			     .Done);
+    eInspectionGroupTests.OnFailCarryOn:
+        THIS^.ProbeDoneWhen(_sut.WithCoordinator(_coordinator).Act()
+                .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+                .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+                .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+                .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+                .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+                .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1]))	
+				.UpdateComprehensiveResult(_overallResult)			             
+                .OnFail()
+                .CarryOn());				
+    eInspectionGroupTests.OnFailRetry:
+        THIS^.ProbeDoneWhen(_sut.WithCoordinator(_coordinator).Act()
+                .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+                .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+                .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+                .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+                .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+                .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1]))   
+				.UpdateComprehensiveResult(_overallResult)             
+                .OnFail()
+                .Retry(_retryState));				
+    eInspectionGroupTests.OnFailTerminate:
+        THIS^.ProbeDoneWhen(_sut.WithCoordinator(_coordinator).Act()
+                .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+                .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+                .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+                .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+                .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+                .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1])) 
+				.UpdateComprehensiveResult(_overallResult)               
+                .OnFail()
+                .Terminate());	
+ eInspectionGroupTests.OnFailDiaglog :
+        THIS^.ProbeDoneWhen(_sut.WithCoordinator(_coordinator).Act()
+                .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+                .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+                .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+                .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+                .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+                .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1])) 
+				.UpdateComprehensiveResult(_overallResult)               
+                .OnFail()
+                .Dialog(100));		
+eInspectionGroupTests.InspectWithNormalizedNumberOfRetries:
+
+
+
+	 THIS^.ProbeDoneWhen(_sut.WithCoordinator(_coordinator)
+				.Act()
+		 		.NormalizeRetries(_diis[0])
+                .NormalizeRetries(_diis[1])
+                .NormalizeRetries(_dais[0])
+                .NormalizeRetries(_dais[1])
+                .NormalizeRetries(_ddis[0])
+                .NormalizeRetries(_ddis[1]) 				
+                .Inspect(_diis[0].Inspect(_dii_inspectedValues[0]))
+                .Inspect(_diis[1].Inspect(_dii_inspectedValues[1]))
+                .Inspect(_dais[0].Inspect(_dai_inspectedValues[0]))
+                .Inspect(_dais[1].Inspect(_dai_inspectedValues[1]))
+                .Inspect(_ddis[0].Inspect(_ddi_inspectedValues[0]))
+                .Inspect(_ddis[1].Inspect(_ddi_inspectedValues[1])) 
+				.UpdateComprehensiveResult(_overallResult).Done               
+                );		
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -88,7 +88,7 @@ VAR_INPUT
 			</summary>				
 		</docu>
 	~*)
-	Text : STRING(TcoMessengerSettings.MAX_MESSAGE_TEXT_LENGHT);
+	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 	(*~
 		<docu>
 			<summary>
@@ -102,9 +102,9 @@ VAR
 	_tmpMessage : TcoMessage;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_Parent <> 0 AND_THEN _Parent.Context <> 0 AND_THEN _Parent.Context.RealTimeClock <> 0) THEN
-	_tmpMessage.TimeStamp :=  _Parent.Context.RealTimeClock.NowLocal();	
-	_tmpMessage.Cycle := _Parent.Context.StartCycleCount;	
+        <ST><![CDATA[IF(Parent <> 0 AND_THEN Parent.Context <> 0 AND_THEN Parent.Context.RealTimeClock <> 0) THEN
+	_tmpMessage.TimeStamp :=  Parent.Context.RealTimeClock.NowLocal();	
+	_tmpMessage.Cycle := Parent.Context.StartCycleCount;	
 END_IF;	
 		
 _tmpMessage.Text := Text;

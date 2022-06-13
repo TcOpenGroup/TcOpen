@@ -61,6 +61,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acknowledgement.
+        /// </summary>
+        public static string Acknowledgement {
+            get {
+                return ResourceManager.GetString("Acknowledgement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Affected Object.
         /// </summary>
         public static string AffectedObject {
@@ -120,6 +129,15 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         public static string DiagnosticsRunnig {
             get {
                 return ResourceManager.GetString("DiagnosticsRunnig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discarding messeges.
+        /// </summary>
+        public static string DiscardingMessages {
+            get {
+                return ResourceManager.GetString("DiscardingMessages", resourceCulture);
             }
         }
         

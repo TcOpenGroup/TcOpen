@@ -18,13 +18,13 @@ namespace TcoCore
 
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
         }
 
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
+            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
         }
         /// <summary>
         /// Gets the command that executes update of messages on demand.
@@ -47,26 +47,7 @@ namespace TcoCore
             set;
         } = eMessageCategory.Info;
 
-        bool autoUpdate;
-        /// <summary>
-        /// Gets or sets whether the diagnostics view should auto refresh.
-        /// </summary>
-        public bool AutoUpdate
-        {
-            get
-            {
-                return autoUpdate;
-            }
-            set
-            {
-                if (autoUpdate == value)
-                {
-                    return;
-                }
-
-                SetProperty(ref autoUpdate, value);
-            }
-        }
+     
         bool diagnosticsRunning;
 
         /// <summary>
@@ -85,6 +66,7 @@ namespace TcoCore
                 SetProperty(ref diagnosticsRunning, value);
             }
         }
+       
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
@@ -94,9 +76,10 @@ namespace TcoCore
             {
                 return;
             }
-
+            
             lock (updatemutex)
             {
+
                 DiagnosticsRunning = true;
 
                 Task.Run(() =>
@@ -107,8 +90,9 @@ namespace TcoCore
                     
 
                 }).Wait();
-
+    
                 DiagnosticsRunning = false;
+
             }
         }
         IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
@@ -157,22 +141,23 @@ namespace TcoCore
         }
         public void RogerMessage(PlainTcoMessage msg)
         {
-            msg.OnlinerMessage.Persist.Cyclic = false;
-            UpdateMessages();
+            if (msg != null)
+            {
+                msg.OnlinerMessage.Pinned.Cyclic = false;
+            }
         }
 
         public void RogerAllMessages()
         {
             lock (updatemutex)
             {
-                foreach (var item in MessageDisplay.Where(p => p.Persist))
+                foreach (var item in MessageDisplay.Where(p => p.Pinned))
                 {
-                    item.OnlinerMessage.Persist.Cyclic = false;
+                    item.OnlinerMessage.Pinned.Cyclic = false;
                     TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                 }
             }
 
-            UpdateMessages();
         }
         public IVortexObject AffectedObject { get; set; }
        

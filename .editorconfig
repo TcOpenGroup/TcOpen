@@ -1,0 +1,6 @@
+﻿[*.g.cs]
+
+# CS0114: Member hides inherited member; missing override keyword
+dotnet_diagnostic.CS0114.severity = silent
+dotnet_diagnostic.CS0108.severity = silent
+dotnet_diagnostic.CS0067.severity = silent

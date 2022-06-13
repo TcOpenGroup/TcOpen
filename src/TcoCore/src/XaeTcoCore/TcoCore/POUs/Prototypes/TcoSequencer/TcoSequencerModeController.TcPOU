@@ -17,7 +17,7 @@ VAR
 (*~
 	<docu>
 		<summary>
-			When '''TRUE''', disables changing between the modes of the sequencer.
+			When `TRUE`, disables changing between the modes of the sequencer.
 		</summary>			
 	</docu>	
 ~*)
@@ -27,7 +27,7 @@ VAR
 (*~
 	<docu>
 		<summary>
-			When '''TRUE''' skipping steps of the sequencer using methods '''StepBackward()''' and '''StepForward()''' is disabled.
+			When `TRUE` skipping steps of the sequencer using methods `StepBackward()` and `StepForward()` is disabled.
 		</summary>			
 	</docu>	
 ~*)	
@@ -68,7 +68,7 @@ VAR
 		<summary>
 			Toggles between cyclic mode and step mode if not disabled.
 			<para>
-				See <see cref="TcoSequencerModeController.DisableModeChanging()"/> for detailed description.
+				See <see cref="PlcDocu.TcoCore.TcoSequencerModeController.DisableModeChanging()"/> for detailed description.
 			</para>		
 		</summary>	
 	</docu>	
@@ -116,11 +116,11 @@ END_IF
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _previousMode <> _mode THEN
-	//Restore all stepping task on mode change
+	//Restore all stepping task on mode change	
 	_stepForward.Restore();
 	_stepBackward.Restore();
 	_stepIn.Restore(); 	
-	_changeMode.Restore(); 	
+	_changeMode.Restore(); 		
 	//Mode change from cyclic to step, enabling stepping tasks according to settings.
 	IF _previousMode = eSequencerMode.CyclicMode AND _mode = eSequencerMode.StepMode THEN
 		_stepBackward.Enabled := NOT THIS^._DisableStepSkipping;

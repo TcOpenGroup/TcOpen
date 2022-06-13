@@ -10,7 +10,9 @@ using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Security;
-using Serilog;
+using Serilog.Sinks;
+using TcOpen.Inxton.TcoCore.Wpf;
+using System.Windows.Media;
 
 namespace HMI
 {
@@ -48,23 +50,26 @@ namespace HMI
                     authenticationService = SecurityManager.Create(SetUpJsonRepository());
                     break;
             }
-                        
+
             ISecurityManager securityManager = SecurityManager.Manager;
             securityManager.GetOrCreateRole(new Role("Service", "Maintenance"));
 
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                        .WriteTo.RichTextBox(LogTextBox)
                                         .WriteTo.Console()        // This will write log into application console.  
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
+                                                                  // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
+                                                                  // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
                 .SetSecurity(authenticationService)
-                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);              
-         
-            // Initialize logger
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector)
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { Entry.PlcHammer.TECH_MAIN }));
 
+            // Initialize logger
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
 
             // Set up data exchange
             switch (answer)
@@ -79,8 +84,16 @@ namespace HMI
                     SetUpJsonRepositories();
                     break;
             }
+            ObserveChanges();
 
+        }
 
+        private static IRepository<enumModesObservedValue> StationModesRepository { get; set; }
+        private static IRepository<ObservedValue<string>> ProductionRecipeHistoryRepository { get; set; }
+        private static void ObserveChanges()
+        {
+            Entry.PlcHammer.TECH_MAIN._app._station001._currentMode.PublishChanges((IRepository)StationModesRepository, x => new enumModesObservedValue(x));
+            Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies._data._EntityId.PublishChanges((IRepository)ProductionRecipeHistoryRepository, recipeName => new ObservedValue<string>(recipeName));
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
@@ -97,7 +110,15 @@ namespace HMI
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
         }
 
-      
+
+        public static System.Windows.Controls.RichTextBox LogTextBox { get; } = new System.Windows.Controls.RichTextBox()
+        {
+            Background = Brushes.Black,
+            Foreground = Brushes.LightGray,
+            FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New, monospace"),
+            VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto
+        };
+
         private static IRepository<UserData> SetUpJsonRepository()
         {
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
@@ -137,8 +158,10 @@ namespace HMI
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
             var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
-
+            StationModesRepository = new MongoDbRepository<enumModesObservedValue>(new MongoDbRepositorySettings<enumModesObservedValue>(mongoUri, databaseName, "Station001_Modes"));
+            ProductionRecipeHistoryRepository = new MongoDbRepository<ObservedValue<string>>(new MongoDbRepositorySettings<ObservedValue<string>>(mongoUri, databaseName, "Station001_RecipeHistory"));
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
         }
     }
+
 }

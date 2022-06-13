@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="TcoEthercat" Id="{70ccb30f-a686-0e63-2d40-73db5f7a8607}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+    C_MaxSyncUnits : UINT := 10;
+	C_MAX_LOCAL_ERROR_MESSAGES : UINT := 3;	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

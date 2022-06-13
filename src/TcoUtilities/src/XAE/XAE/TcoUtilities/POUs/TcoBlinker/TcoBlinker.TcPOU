@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoBlinker" Id="{dc1b06c9-efc0-045d-1c65-6266b8fdf34f}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides periodic on/off switcher.
+		</summary>
+	</docu>
+~*)
+FUNCTION_BLOCK TcoBlinker EXTENDS TcoCore.TcoObject
+VAR_INPUT
+	(*~
+		<docu>
+			<summary>
+				Time duration for on duty output.
+			</summary>
+		</docu>
+	~*)
+	inOnTime : TIME;
+	
+	(*~
+		<docu>
+			<summary>
+				Time duration for off duty output.
+			</summary>
+		</docu>
+	~*)
+	inOffTime : TIME;
+END_VAR
+VAR_OUTPUT	
+	outQ : BOOL;
+END_VAR
+VAR
+	{attribute 'hide'}
+	_onTimer : TON;
+	{attribute 'hide'}
+	_offTimer : TON;
+	{attribute 'hide'}
+	_nextExpectedCycle : ULINT;
+	{attribute 'hide'}
+	_state : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(THIS^.Context.StartCycleCount <>  _nextExpectedCycle) THEN
+	_state := 0;
+END_IF
+
+_nextExpectedCycle := THIS^.Context.StartCycleCount + 1;
+
+
+IF(_state = 0) THEN
+		_offTimer(IN := FALSE);	
+		_onTimer(IN := FALSE);
+		_state := 1;
+END_IF;		
+
+IF(_state = 1) THEN
+		_onTimer(IN := TRUE, PT:=inOnTime);
+		outQ := TRUE;
+		IF(_onTimer.Q) THEN
+			_state := 2;
+			RETURN;
+ 		END_IF;
+END_IF;		
+
+IF(_state = 2) THEN	
+		_offTimer(IN := TRUE, PT:=inOffTime);
+		outQ := FALSE;
+		IF(_offTimer.Q) THEN
+			_state := 0;
+ 		END_IF;		
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{4e9dc28a-9d8a-0a67-3ac0-4df02a74b393}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// I am a bit sick of this for some reason from time to time the build fails without this!
+SUPER^.FB_init(bInitRetains, bInCopyCode, ParentObject);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsOff" Id="{167d1e7c-561a-05d1-044a-99279f4a13a8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets `true` when the switcher is in off duty phase.
+		</summary>
+	</docu>
+~*)
+PROPERTY IsOff : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2a138f04-e4ec-0ab4-0c86-714c79df7f2f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsOff := NOT outQ;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsOn" Id="{a49d77bb-0a75-0b7e-0acc-be9f10cfaef4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets `true` when the switcher is in on duty phase.
+		</summary>
+	</docu>
+~*)
+PROPERTY IsOn : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b6f0d665-6b92-00fd-0178-34f668378e0d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsOn := outQ;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="Status_B0753356" Id="{60ff6765-bc2b-043c-1d05-f9dad0251f9f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3174-0002-0017'}
+{attribute addProperty BoxType "EL3174-0002-0017"}
+{attribute addProperty Id "UnderrangeBOOL1OverrangeBOOL1Limit_1BYTE1Limit_2BYTE1ErrorBOOL1Sync_errorBOOL1TxPDO_StateBOOL1TxPDO_ToggleBOOL1"}
+{attribute addProperty CRC "2960470870"}
+{attribute addProperty Size "8"}
+TYPE Status_B0753356 :
+STRUCT
+	{attribute addProperty Name "Underrange"}
+	Underrange : BOOL;
+	{attribute addProperty Name "Overrange"}
+	Overrange : BOOL;
+	{attribute addProperty Name "Limit_1"}
+	Limit_1 : BYTE;
+	{attribute addProperty Name "Limit_2"}
+	Limit_2 : BYTE;
+	{attribute addProperty Name "Error"}
+	Error : BOOL;
+	{attribute addProperty Name "Sync_error"}
+	Sync_error : BOOL;
+	{attribute addProperty Name "TxPDO_State"}
+	TxPDO_State : BOOL;
+	{attribute addProperty Name "TxPDO_Toggle"}
+	TxPDO_Toggle : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

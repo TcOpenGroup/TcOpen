@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoTcoSequencerObserverDummy" Id="{e55668d6-8dcb-0e1e-3d85-d538b6f55d7e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL TcoTcoSequencerObserverDummy EXTENDS TcoObject IMPLEMENTS ITcoSequencerObserver
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Observe" Id="{9e4de94d-fab5-04b9-0492-2aac3a00f4aa}">
+      <Declaration><![CDATA[METHOD Observe
+VAR_INPUT
+	
+	(*~
+	<docu>
+		<summary>
+			Indicates that a step is active.
+		</summary>			
+	</docu>	
+	~*)
+	 
+	inIsStepActive : BOOL;
+	(*~
+	<docu>
+		<summary>
+			Currently running step order.
+		</summary>			
+	</docu>	
+	~*)
+	 
+	inCurrentStepOrder : UINT;
+	(*~
+	<docu>
+		<summary>
+			Step identification number.
+		</summary>	
+		<remarks>			
+ 			<note type="important">
+				This number must be unique throughout the complete sequence. It is required to uniquely identify the step of the sequence.
+			</note>
+			<para>
+				The <see cref="PlcDocu.TcoCore.TcoSequencer.RequestStep"/> method is using this number to jump to the required step.
+			</para>
+		</remarks>
+	</docu>	
+	~*)
+		{attribute addProperty Name "<#Step ID#>"}
+		inID: INT;
+	(*~
+		<docu>
+			<summary>
+				Order of the step in the sequence.
+			</summary>	
+		</docu>	
+	~*)
+		{attribute addProperty Name "<#Step Order#>"}
+		inOrder: UINT;
+	(*~
+		<docu>
+			<summary>
+				If this value is false, step body is not executed and execution is moved to the next enabled step in the sequence.
+			</summary>				
+		</docu>	
+	~*)
+		{attribute addProperty Name "<#Enabled#>"}
+		inEnabled: BOOL;
+	(*~
+		<docu>
+			<summary>
+				Step description text.
+			</summary>				
+		</docu>	
+	~*)
+		{attribute addProperty Name "<#Step description#>"}
+		inDescription: STRING(254);
+	(*~
+		<docu>
+			<summary>
+				Describes step status.
+			</summary>				
+			<remarks>			
+				<para>
+					See <see cref="TcoCore.eStepStatus"/> for detailed description.
+				</para>
+			</remarks>		
+			enumStepStatus
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step status#>"}
+		inStatus : eStepStatus;
+	(*~
+		<docu>
+			<summary>
+				Step duration time.
+			</summary>				
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step duration#>"}
+		inDuration : TIME;	
+			(*~
+		<docu>
+			<summary>
+				Total steps count;
+			</summary>				
+		</docu>	
+	~*)	
+		{attribute addProperty Name "<#Step count#>"}
+		inStepCount : UINT;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -10,17 +10,13 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it. Dummy edit
       - uses: actions/checkout@v2
-      # Check if the action works
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Fetch unshallow
-        run: git fetch --unshallow
-      # Run psake
-      - name: Run a multi-line script
+        with :
+          path : '.'
+          fetch-depth: 0
+      - name: Run Psake
         run: >
           .\pipelines\runbuild.ps1 -properties 
           @{
@@ -38,16 +34,28 @@ jobs:
           $tag = "GH-${{github.run_id}}-${{env.BuildNumber}}"
           git tag $tag 
           git push --tags
-      - name: Upload test results
-        uses: actions/upload-artifact@v2 
-        if: success() || failure() 
+        continue-on-error: true
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
         with:
-          name: test-results
-          path: ${{ github.workspace }}\**\TestResults\*.xml     
-          
+          name: Test report
+          path: '**/TestResults/*.xml'   
+          reporter: dotnet-trx 
       - name: Upload NuGets artifacts
-        uses: actions/upload-artifact@v2  # upload test results
-        if: success()         # run this step even if previous step failed
+        uses: actions/upload-artifact@v2 
+        if: success()
         with:
           name: nugets
           path: ${{ github.workspace }}/nugets/*.nupkg
+      - name: Upload PLC libraries
+        uses: actions/upload-artifact@v2 
+        if: success() 
+        with:
+          name: plcLibs
+          path: ${{ github.workspace }}\plcLibs\*.library          
+      - name: Cake-Draft-Release-OrgsNugets
+        env:
+          TC_OPEN_GROUP_USER_PAT : ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
+        run: >
+          .\pipelines\release-to-gh.ps1    

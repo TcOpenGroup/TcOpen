@@ -12,12 +12,22 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data.MongoDb
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MongoDbRepositorySettings<T> : RepositorySettings  where T : IBrowsableDataObject 
     {
         private string _databaseName;
         private string _collectionName;
-        
-        [Obsolete("It's not recommended to use MongoDB without any authentication in place.",false)]
+
+        /// <summary>
+        /// Creates new instance of <see cref="MongoDbRepositorySettings{T}"/> for a <see cref="MongoDbRepository{T}"/> with NON-SECURED access.
+        /// </summary>
+        /// <param name="connectionString">Database connection string</param>
+        /// <param name="databaseName">Database name</param>
+        /// <param name="collectionName">Collection name</param>
+        /// <param name="credentials">Credentials</param>
         public MongoDbRepositorySettings(string connectionString, string databaseName, string collectionName)
         {            
             SetupSerialisationAndMapping();
@@ -26,6 +36,14 @@ namespace TcOpen.Inxton.Data.MongoDb
             Collection = GetCollection(collectionName);
         }
 
+
+        /// <summary>
+        /// Creates new instance of <see cref="MongoDbRepositorySettings{T}"/> for a <see cref="MongoDbRepository{T}"/> with secured access.
+        /// </summary>
+        /// <param name="connectionString">Database connection string</param>
+        /// <param name="databaseName">Database name</param>
+        /// <param name="collectionName">Collection name</param>
+        /// <param name="credentials">Credentials</param>
         public MongoDbRepositorySettings(string connectionString, string databaseName, string collectionName, MongoDbCredentials credentials)
         {
             SetupSerialisationAndMapping();

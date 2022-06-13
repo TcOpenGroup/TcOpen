@@ -4,12 +4,16 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	_station001	:	Station001;
+	_station002	:	Station002;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[EXAMPLES_PRG();
 MANIPULATOR();
+_station001._sequence.DeactivateDeveloperChecks();
+
 _station001.Run();
+_station002.Run();
 ]]></ST>
     </Implementation>
   </POU>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoInspectionGroup" Id="{7f243c2f-5aff-01ef-3624-3e0e55da2759}">
+    <Declaration><![CDATA[INTERFACE ITcoInspectionGroup
+]]></Declaration>
+    <Property Name="Done" Id="{1402ecd4-756b-0fcd-2a3a-20232213443c}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{06a38439-173f-0037-3ba4-3e9af676c0fb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Inspect" Id="{931905af-6dab-03f5-1869-a259456451b0}">
+      <Declaration><![CDATA[METHOD Inspect : ITcoInspectionGroup
+VAR_INPUT
+    Inspector : IInspector;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NormalizeRetries" Id="{b1d374db-5315-00fd-05a0-0934b06627c2}">
+      <Declaration><![CDATA[METHOD NormalizeRetries : ITcoInspectionGroup
+VAR_INPUT
+	inoInspection : IInspector;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="OnFail" Id="{03a3e801-0b28-07eb-2efc-56c061775b72}">
+      <Declaration><![CDATA[METHOD OnFail : IOnFail
+]]></Declaration>
+    </Method>
+    <Method Name="UpdateComprehensiveResult" Id="{32521df5-a25c-0de0-0ada-c2c005b112c3}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Updates comprehensive result. The comprehensive result is set to `Failed` when any inspection fails or is inconclusive.
+			Any bypassed or excluded inspection are not taken in the account.			
+		</summary>			
+	</docu>	
+~*)
+METHOD UpdateComprehensiveResult : IInspector
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Comprehensive result data structure to be updated.	
+		</summary>			
+	</docu>	
+	~*)
+    inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

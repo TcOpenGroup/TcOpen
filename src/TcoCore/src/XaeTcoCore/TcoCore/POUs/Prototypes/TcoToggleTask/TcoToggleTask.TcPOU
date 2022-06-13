@@ -4,9 +4,12 @@
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Provides basic toggling between two states. It could be triggered by calling the <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method.
+			Provides basic toggling between two states. The states are triggered by calling the <see cref="PlcDocu.TcoCore.TcoToggleTask.Toggle()"/> method.
 			<para>
-				To get the actual state of the toggle task, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOn()"/>, <see cref="TcoToggleTask.PlcTcoToggleTask.IsOff()"/> and <see cref="TcoToggleTask.PlcTcoToggleTask.State()"/> properties are available.
+				To get the actual state of the toggle task, 
+				<see cref="PlcDocu.TcoCore.TcoToggleTask.IsOn"/>, 
+				<see cref="PlcDocu.TcoCore.coToggleTask.IsOff"/> 
+				and <see cref="PlcDocu.TcoCore.TcoToggleTask.State"/> properties are available.
 			</para>
 		</summary>
 	</docu>	
@@ -30,7 +33,7 @@ VAR
 	<docu>
 		<summary>
 			Use to determine if the manipulation is enabled for example from the HMI application. 
-			This value is read only, to modify it use the property <see cref="TcoToggleTask.PlcTcoToggleTask.Enabled()"/>		
+			This value is read only, to modify it use the property <see cref="PlcDocu.TcoCore.TcoToggleTask.Enabled()"/>		
 		</summary>		
 	</docu>	
 ~*)	
@@ -72,7 +75,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{ac5dc4c9-3bb4-0e8d-1613-6fb24f14d879}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+          <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -80,8 +83,7 @@ PROPERTY Context : ITcoContext]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets whether the any manipulation with this instance is enabled.
-			The change state could be triggered with <see cref="TcoToggleTask.PlcTcoToggleTask.Toggle()"/> method call only when this property si '''TRUE'''. 
+			Gets whether the any manipulation with this instance is enabled.			 
 		</summary>			
 	</docu>	
 ~*)
@@ -101,16 +103,16 @@ PROPERTY Enabled : BOOL]]></Declaration>
       </Set>
     </Property>
     <Method Name="FB_init" Id="{ca6d7f7e-bbfe-0658-0e22-fa928997d28f}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
 	InitState : BOOL;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Parent := Parent;
+        <ST><![CDATA[_ParentObject := ParentObject;
 _state := InitState;
 
 ]]></ST>
@@ -120,7 +122,7 @@ _state := InitState;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets identity of this <see cref ="TcoTask.PlcTcoTask()"/>. 
+			Gets identity of this <see cref ="PlcDocu.TcoCore.TcoToggleTask()"/>. 
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			This variable is used in the higher level applications.  
 		</summary>			
@@ -275,9 +277,9 @@ END_VAR]]></Declaration>
 _StartCycleCount := THIS^.Context.StartCycleCount;
 
 // Detects if parent is in serviceable state to enable manual invoke of the task from the HMI/SCADA system.
-IF(THIS^._Parent <> 0 )THEN
+IF(THIS^.Parent <> 0 )THEN
 	_isServiceable := TRUE;
-	IF(__QUERYINTERFACE(THIS^._Parent, _serviceableParent)) THEN
+	IF(__QUERYINTERFACE(THIS^.Parent, _serviceableParent)) THEN
 		IF(NOT _serviceableParent.IsService) THEN
 			THIS^._toggleRequest := FALSE;
 			_isServiceable := FALSE;

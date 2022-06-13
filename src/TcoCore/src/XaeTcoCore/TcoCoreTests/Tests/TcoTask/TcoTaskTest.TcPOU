@@ -136,7 +136,7 @@ _myContextStartCount :=	THIS^.Context.StartCycleCount;
  
 _myContextEndCount	:=	THIS^.Context.EndCycleCount;
  
-_myParentIdentity	:=	THIS^._Parent.Identity;
+_myParentIdentity	:=	THIS^.Parent.Identity;
 
 ]]></ST>
       </Implementation>

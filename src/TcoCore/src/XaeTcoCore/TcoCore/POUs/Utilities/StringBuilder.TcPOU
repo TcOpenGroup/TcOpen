@@ -24,20 +24,149 @@
 FUNCTION_BLOCK StringBuilder
 VAR
 	{attribute 'hide'}
-    _workString:STRING;
+    _workString:STRING(255);
 END_VAR
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="AnyToString" Id="{0264a44a-03f7-0869-1a43-637bb231d8f4}">
+      <Declaration><![CDATA[(*
+	Thanks to https://github.com/bengeisler/TcLog
+*)
+
+METHOD PROTECTED AnyToString : STRING(255)
+VAR_INPUT
+	Data:	ANY;
+END_VAR
+VAR
+	pAnyBOOL		: POINTER TO BOOL; 
+	pAnyBYTE		: POINTER TO BYTE; 
+	pAnyWORD		: POINTER TO WORD; 
+	pAnyDWORD		: POINTER TO DWORD;
+	pAnyLWORD		: POINTER TO LWORD;
+	pAnySINT		: POINTER TO SINT; 
+	pAnyUSINT		: POINTER TO USINT;
+	pAnyINT			: POINTER TO INT;  
+	pAnyUINT		: POINTER TO UINT; 
+	pAnyDINT		: POINTER TO DINT; 
+	pAnyUDINT		: POINTER TO UDINT;
+	pAnyLINT		: POINTER TO LINT; 
+	pAnyULINT		: POINTER TO ULINT;
+	pAnyLTIME		: POINTER TO LTIME;	
+	pAnyReal 		: POINTER TO REAL;
+	pAnyLReal		: POINTER TO LREAL;	
+	pAnyDateAndTime : POINTER TO DATE_AND_TIME;
+	pAnyDate		: POINTER TO DATE;
+	pAnyTime		: POINTER TO TIME;
+	pAnyWString		: POINTER TO WSTRING;
+	pAnyTOD			: POINTER TO TOD;
+	pAnyString		: POINTER TO STRING;	
+	sString			: T_MAXSTRING;
+	wWString		: WSTRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_REAL THEN
+	pAnyReal := Data.pValue;
+	AnyToString := REAL_TO_STRING(pAnyReal^);
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LREAL THEN
+	pAnyLReal := Data.pValue;
+	AnyToString := LREAL_TO_STRING(pAnyLReal^);
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DATEANDTIME THEN
+	pAnyDateAndTime := Data.pValue;
+	AnyToString := DT_TO_STRING(pAnyDateAndTime^);	
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DATE THEN
+	pAnyDate := Data.pValue;
+	AnyToString := DATE_TO_STRING(pAnyDate^);
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIME THEN
+	pAnyTime := Data.pValue;
+	AnyToString := TIME_TO_STRING(pAnyTime^);
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_STRING THEN
+	pAnyString := Data.pValue;
+	AnyToString := pAnyString^;
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_WSTRING THEN
+	pAnyWString := Data.pValue;
+	wWString := pAnyWString^;
+	WSTRING_TO_STRING2(ADR(sString), ADR(wWstring), SIZEOF(wWString));
+	AnyToString := sString;
+	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIMEOFDAY THEN
+	pAnyTOD := Data.pValue;
+	AnyToString := TOD_TO_STRING(pAnyTOD^);
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_BOOL THEN 	
+	pAnyBOOL := Data.pValue;
+	AnyToString := BOOL_TO_STRING(pAnyBool^);
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_BYTE THEN
+	pAnyBYTE := Data.pValue;
+	AnyToString := BYTE_TO_STRING(pAnyBYTE^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_WORD THEN
+	pAnyWORD := Data.pValue;
+	AnyToString := WORD_TO_STRING(pAnyWORD^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DWORD THEN
+	pAnyDWORD := Data.pValue;	
+	AnyToString := DWORD_TO_STRING(pAnyDWORD^);
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LWORD THEN
+	pAnyLWORD := Data.pValue;	
+	AnyToString := LWORD_TO_STRING(pAnyLWORD^);
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_SINT THEN
+	pAnySINT := Data.pValue;	
+	AnyToString := SINT_TO_STRING(pAnySINT^);					
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_USINT THEN
+	pAnyUSINT := Data.pValue;	
+	AnyToString := USINT_TO_STRING(pAnyUSINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_INT THEN
+	pAnyINT := Data.pValue;	
+	AnyToString := INT_TO_STRING(pAnyINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_UINT THEN
+	pAnyUINT := Data.pValue;	
+	AnyToString := UINT_TO_STRING(pAnyUINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DINT THEN
+	pAnyDINT := Data.pValue;	
+	AnyToString := DINT_TO_STRING(pAnyDINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_UDINT THEN
+	pAnyUDINT := Data.pValue;	
+	AnyToString := UDINT_TO_STRING(pAnyUDINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LINT THEN
+	pAnyLINT := Data.pValue;	
+	AnyToString := LINT_TO_STRING(pAnyLINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_ULINT THEN
+	pAnyULINT := Data.pValue;	
+	AnyToString := ULINT_TO_STRING(pAnyULINT^);	
+ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LTIME THEN
+	pAnyLTIME := Data.pValue;	
+	AnyToString := LTIME_TO_STRING(pAnyLTIME^);		
+ELSE	
+	AnyToString := ANY_TO_STRING(Data.pValue^);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Append" Id="{a9cd2d8b-8145-0c23-206c-ae933c3ebe7f}">
       <Declaration><![CDATA[METHOD Append : REFERENCE TO StringBuilder
 VAR_INPUT
-    Text :STRING; 
+    Text :STRING(255); 
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_workString := Concat(_workString,text);
 Append REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendAny" Id="{778ef17a-b859-0b4c-2391-5393453e6412}">
+      <Declaration><![CDATA[METHOD INTERNAL AppendAny : REFERENCE TO StringBuilder
+VAR_INPUT
+	Data : ANY;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_workString := Concat(_workString,AnyToString(Data));
+AppendAny REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Clear" Id="{0378ca3b-d134-07c2-0629-05b04e8ddb79}">
@@ -49,7 +178,7 @@ Clear REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ToString" Id="{dd6389b5-b5c9-06d5-0b23-bf4eff042e8b}">
-      <Declaration><![CDATA[METHOD ToString : STRING]]></Declaration>
+      <Declaration><![CDATA[METHOD ToString : STRING(255)]]></Declaration>
       <Implementation>
         <ST><![CDATA[ToString := _workString;]]></ST>
       </Implementation>

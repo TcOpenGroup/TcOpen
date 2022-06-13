@@ -10,9 +10,9 @@
 
 
 
-<AuthorizeView Roles="administrator">
+<AuthorizeView>
     <Authorized>
-        <UserManagementView></UserManagementView>
+        <UserManagementView @ref="@UserMgmtView"></UserManagementView>
 
         <div class="m-1">
             <h4>Add new role</h4>
@@ -34,9 +34,12 @@
 
     public string RoleName { get; set; }
 
+    private UserManagementView UserMgmtView { get;set;}
+
     public async Task CreateRole(string roleName)
     {
-
+        if (string.IsNullOrWhiteSpace(roleName))
+            return;
         if (!await _roleManager.RoleExistsAsync(roleName))
         {
             var normalizer = new UpperInvariantLookupNormalizer();
@@ -44,6 +47,7 @@
             identityRole.NormalizedName = normalizer.NormalizeName(roleName);
             await _roleManager.CreateAsync(identityRole);
             StateHasChanged();
+            UserMgmtView.RoleAdded();
         }
 
     }

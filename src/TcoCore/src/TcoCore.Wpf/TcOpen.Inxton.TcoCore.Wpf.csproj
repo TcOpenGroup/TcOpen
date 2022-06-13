@@ -1,56 +1,65 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
-    <UseWPF>true</UseWPF>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <!--NuGet properties--> 
-    <Authors>TcOpenGroup contributors</Authors>
-    <Company>TcOpenGroup</Company>
-    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
-    <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.4-nightly.654" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
-    <ProjectReference Include="..\TcoCoreConnector\TcoCoreConnector.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Properties\Localization.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Localization.resx</DependentUpon>
-    </Compile>
-    <Compile Update="TcoComponent\TcoComponentSpotView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Localization.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Localization.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-   </ItemGroup>
-  <ItemGroup>
-    <Page Update="TcoComponent\TcoComponentSpotView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="TcoTask\TcoTaskProgressBarView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+		<UseWPF>true</UseWPF>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<!--NuGet properties-->
+		<Authors>TcOpenGroup contributors</Authors>
+		<Company>TcOpenGroup</Company>
+		<RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>TwinCAT3 Beckhoff</PackageTags>
+		<PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+		<PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+		<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.699" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
+		<ProjectReference Include="..\TcoCoreConnector\TcoCoreConnector.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="VisualStudioToolsManifest.xml" IncludeInPackage="true" Pack="true" PackagePath="tools" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\..\..\..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Localization.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Localization.resx</DependentUpon>
+		</Compile>
+		<Compile Update="TcoComponent\TcoComponentSpotView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Localization.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Localization.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<Page Update="TcoComponent\TcoComponentSpotView.xaml">
+			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+			<SubType>Designer</SubType>
+		</Page>
+		<Page Update="TcoMessage\Health\HealthIndicatorView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="TcoTask\TcoTaskProgressBarView.xaml">
+			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+	</ItemGroup>
 </Project>

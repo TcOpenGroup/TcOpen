@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoDigitalInspectorTests" Id="{006ccc7b-92fd-0f72-19d8-beb7c19c5ae1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDigitalInspectorTests EXTENDS TcoInspectorTests
+VAR
+    _sut            : TcoInspectors.TcoDigitalInspector(THIS^);
+    _inspectedValue : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Inspect" Id="{3859c7f2-f312-0dbb-12dd-249af68ea862}">
+      <Declaration><![CDATA[METHOD Inspect : TcoInspectors.IInspector]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Inspect := _sut.Inspect(_inspectedValue);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Main" Id="{0585db86-c979-0f41-16cb-a6ae8111e25a}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Main();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCoordinator" Id="{40f16ac7-8430-09d1-0ef0-083e86fb63ad}">
+      <Declaration><![CDATA[METHOD  WithCoordinator : REFERENCE TO TcoInspectorTests
+VAR_INPUT
+	inoCoordinator : TcoCore.ITcoCoordinator;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_sut.WithCoordinator(_coordinator);
+WithCoordinator REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

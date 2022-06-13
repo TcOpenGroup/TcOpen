@@ -14,7 +14,9 @@
 
         private TcoMessage _message;
 
+#pragma warning disable CS0067
         public event System.EventHandler CanExecuteChanged;
+#pragma warning restore CS0067
 
         public bool CanExecute(object parameter)
         {
@@ -25,7 +27,7 @@
         {
             if(_message != null)
             { 
-                _message.Persist.Cyclic = false;
+                _message.Pinned.Cyclic = false;
             }
         }
 

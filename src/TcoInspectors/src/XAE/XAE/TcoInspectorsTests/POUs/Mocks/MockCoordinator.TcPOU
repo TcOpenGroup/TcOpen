@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MockCoordinator" Id="{19596c80-18d9-089a-0b5b-3393ffeb1f11}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MockCoordinator IMPLEMENTS TcoCore.ITcoCoordinator
+VAR
+    _state : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="IsFreshState" Id="{98d6edf6-1ef1-0cc7-2af3-ef3a9cdd0096}">
+      <Declaration><![CDATA[PROPERTY IsFreshState : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f898c3ff-7f15-0fc2-0e75-e22d323bcf35}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveNext" Id="{44166f8a-8614-0309-3e0c-75242e506fe1}">
+      <Declaration><![CDATA[METHOD MoveNext : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_state := _state + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Retry" Id="{6fbc6b6e-4c7f-004b-06ff-d3ee62e52a24}">
+      <Declaration><![CDATA[METHOD Retry : BOOL
+VAR_INPUT
+    inFromState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_state := inFromState;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Terminate" Id="{1dc80674-a43d-0e17-16c2-90bfdbe85e81}">
+      <Declaration><![CDATA[METHOD Terminate : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_state := 8005;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

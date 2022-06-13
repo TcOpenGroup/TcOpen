@@ -54,33 +54,33 @@
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
-        internal void UpdateMessages()
-        {
-            if (DiagnosticsRunning)
-            {
-                return;
-            }
-
+        public void UpdateMessages(eMessageCategory category = eMessageCategory.All)
+        {           
             lock (updatemutex)
             {
+                if (DiagnosticsRunning)
+                {
+                    return;
+                }
+            
                 DiagnosticsRunning = true;
 
-                Task.Run(() =>
-                {
-                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages()
+                //Task.Run(() =>
+                //{
+                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages(category)
                                              .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)                                             
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
 
 
-                }).Wait();
+                //}).Wait();
 
                 DiagnosticsRunning = false;
-            }
+            }       
         }
         void RogerSelectedMessage()
         {
-            this.SelectedMessage.OnlinerMessage.Persist.Cyclic = false;
+            this.SelectedMessage.OnlinerMessage.Pinned.Cyclic = false;
             UpdateMessages();
 
         }
@@ -89,9 +89,9 @@
         {
             lock (updatemutex)
             {
-                foreach (var item in MessageDisplay.Where(p => p.Persist))
+                foreach (var item in MessageDisplay.Where(p => p.Pinned))
                 {                    
-                    item.OnlinerMessage.Persist.Cyclic = false;
+                    item.OnlinerMessage.Pinned.Cyclic = false;
                     TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                 }
             }

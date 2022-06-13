@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="_internals_TcoSequence" Id="{9ae15687-3f70-0cd0-06b5-b751e2c0a9a9}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'hide'}
+{attribute clr [ExcludeFromApiDocumentation()]}
+FUNCTION_BLOCK ABSTRACT _internals_TcoSequence EXTENDS TcoSequence]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="_Close" Id="{367823d8-9f00-02a0-1a79-3cdd45e38f9e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Close
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.i_Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_Open" Id="{5b3be7a2-ec53-05d4-26ee-6936a7488631}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PROTECTED FINAL _Open
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.i_Open();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -81,7 +81,7 @@ namespace TcoCore
                     _cycleTags = new List<IValueTag>();
                     if (_context != null) { _cycleTags.Add(_context.StartCycleCount); }
                     _cycleTags.AddRange(DescendingMessages.Select(p => p.Cycle));
-                    _cycleTags.AddRange(DescendingMessages.Select(p => p.Persist));
+                    _cycleTags.AddRange(DescendingMessages.Select(p => p.Pinned));
                 }
 
                 return _cycleTags;
@@ -133,7 +133,7 @@ namespace TcoCore
         /// Performs refresh of the messages of this <see cref="TcoObject"/> and all its child object.
         /// </summary>
         /// <returns>Enumerable of messages as POCO object.</returns>
-        public IEnumerable<PlainTcoMessage> GetActiveMessages()
+        public IEnumerable<PlainTcoMessage> GetActiveMessages(eMessageCategory  category = eMessageCategory.All)
         {
             if (refreshTags == null)
             {
@@ -150,7 +150,7 @@ namespace TcoCore
                 _obj.GetConnector().ReadBatch(refreshTags);
             }
 
-            return DescendingMessages?.Where(p => p.IsActive).Select(p => p.PlainMessage);
+            return DescendingMessages?.Where(p => p.IsActive && p.Category.LastValue >= (short)category).Select(p => p.PlainMessage);
         }
 
         /// <summary>

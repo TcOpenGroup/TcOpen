@@ -61,11 +61,38 @@ namespace TcoDataConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created.
+        ///   Looks up a localized string similar to Checking existence of data item with id:.
         /// </summary>
-        internal static string ___Created__ {
+        internal static string ___Checking_existence_of_data_item_with_id___ {
             get {
-                return ResourceManager.GetString("___Created__", resourceCulture);
+                return ResourceManager.GetString("___Checking_existence_of_data_item_with_id___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating data item with id:.
+        /// </summary>
+        internal static string ___Creating_data_item_with_id___ {
+            get {
+                return ResourceManager.GetString("___Creating_data_item_with_id___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating or updating data item with id:.
+        /// </summary>
+        internal static string ___Creating_or_updating_data_item_with_id___ {
+            get {
+                return ResourceManager.GetString("___Creating_or_updating_data_item_with_id___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting data item with id:.
+        /// </summary>
+        internal static string ___Deleting_data_item_with_id___ {
+            get {
+                return ResourceManager.GetString("___Deleting_data_item_with_id___", resourceCulture);
             }
         }
         
@@ -79,11 +106,20 @@ namespace TcoDataConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modified.
+        ///   Looks up a localized string similar to Reading data item with id:.
         /// </summary>
-        internal static string ___Modified__ {
+        internal static string ___Reading_data_item_with_id___ {
             get {
-                return ResourceManager.GetString("___Modified__", resourceCulture);
+                return ResourceManager.GetString("___Reading_data_item_with_id___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating data item with id:.
+        /// </summary>
+        internal static string ___Updating_data_item_with_id___ {
+            get {
+                return ResourceManager.GetString("___Updating_data_item_with_id___", resourceCulture);
             }
         }
     }

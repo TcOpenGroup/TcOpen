@@ -10,7 +10,7 @@ using System.Windows;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: AssemblyVersion("1.18.6.0")]
-[assembly: AssemblyFileVersion("1.18.6.0")]
-[assembly: AssemblyInformationalVersion("1.18.6-tc-open-data-3.1+1495.Branch.tc-open-data-3.Sha.4620f6ce2ed2c8c1064c47d0e7ea8e5403661434")]
+[assembly: AssemblyVersion("0.6.0.0")]
+[assembly: AssemblyFileVersion("0.6.0.0")]
+[assembly: AssemblyInformationalVersion("0.6.0-386-Create-application-template.913+Branch.386-Create-application-template.Sha.4c84548ce65902faf186e6b2f45c239f599f2d02")]
 

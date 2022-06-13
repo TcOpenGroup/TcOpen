@@ -20,7 +20,8 @@
 
 
 
-task default -depends Init, CopyInxton, CloseVs, Build, Tests, CreatePackages, Finish
+task default -depends Init, BuildScripts, Start, Clean, Check-Target-License, NugetRestore, CopyInxton, SetPlcCpuCores, GitVersion, `
+              OpenVisualStudio, BuildWithInxtonBuilder, Build, CloseVs, CopyPlcLibs, Tests, ClearPackages, CreatePackages, PublishPackages, Finish
 
 
 FormatTaskName (("="*25) + " [ {0} ] " + ("="*25))
@@ -34,17 +35,17 @@ task Init {
 
 
 
-task BuildScripts -continueOnError -depends Init {  
+task BuildScripts -continueOnError {  
   Push-Location .\pipelines
-  Import-Module .\tcobuildutils.psm1 -Force -Verbose 
+  Import-Module .\tcobuildutils.psm1 -Force -DisableNameChecking 
   Pop-Location
 }
 
-task Start -depends BuildScripts {
+task Start {
   #Assert $gitOK "[📩] Please commit your changes before running build"
 } 
 
-task Clean -depends Start {
+task Clean {
   Write-Host "Clean obj bin"
   CleanObjBin
   RemoveTcBins
@@ -63,7 +64,21 @@ task Clean -depends Start {
   mkdir .\nugets\dependants -ErrorAction SilentlyContinue
 }
  
-task NugetRestore -depends Clean {
+task Check-Target-License `
+  -precondition { $isTestingEnabled } `
+{
+  if(Is-License-Valid $testTargetAmsId)
+  {
+    # continue
+  }
+  else
+  {
+    throw "Target has probably invalid license"
+  }
+}
+
+ 
+task NugetRestore {
    EnsureNuget
 
    exec{
@@ -71,7 +86,7 @@ task NugetRestore -depends Clean {
    }
 } 
 
-task CopyInxton -depends NugetRestore -continueOnError {
+task CopyInxton -continueOnError {
   exec {
       & $dotnet build `
         .\src\TcoCore\tests\TcoDummyTest\TcoDummyTest.csproj `
@@ -81,9 +96,29 @@ task CopyInxton -depends NugetRestore -continueOnError {
   }
 }
 
+task SetPlcCpuCores `
+  -description "Will set 1 shared 1 isolated core to every tsproj" `
+  -precondition { Is-AMS-Id-Local $testTargetAmsId } `
+{
+  $tsProjects = (Get-ChildItem .\ -recurse "*.tsproj" |  % { $_.FullName })
+  foreach ($tsProject in $tsProjects)
+  {
+    Remove-TargetNetId($tsProject)
+    if (Has-RT-Isolated-Core $tsProject -or $tsProject.Contains("XAEVortexBase"))
+    {
+      Write-Host "Skip`t" $tsProject 
+    }
+    else
+    {
+      Write-Host "Setting`t" $tsProject
+      Set-CPU-Cores $tsProject 1 1
+    }
+  }
+}
+
+
 task GitVersion `
   -precondition { $updateAssemblyInfo } `
-  -depends CopyInxton `
 {
   EnsureGitVersion -pathToGitVersion ".\_toolz\gitversion.exe"
   $updateAssemblyInfoFlag = if( $updateAssemblyInfo)  {"/updateassemblyinfo"} else {""}
@@ -119,12 +154,12 @@ task GitVersion `
   if( $updateAssemblyInfo){.\_Vortex\builder\uvn.exe -v $plcversion}
 }
 
-task OpenVisualStudio -depends GitVersion {
+task OpenVisualStudio {
   # Start-Process .\TcOpen.plc.slnf
 }
 
 
-task BuildWithInxtonBuilder -depends OpenVisualStudio {
+task BuildWithInxtonBuilder {
 
   if($doesNeedVs)
   {
@@ -146,7 +181,7 @@ task BuildWithInxtonBuilder -depends OpenVisualStudio {
   }  -maxRetries 3       
 }
 
-task Build -depends BuildWithInxtonBuilder {
+task Build {
   #/consoleloggerparameters:ErrorsOnly  
   Write-Host $command
   exec{
@@ -165,14 +200,36 @@ task Build -depends BuildWithInxtonBuilder {
 }
 
 
-task CloseVs -depends Build {
+task CloseVs {
   exec{
    try{Get-Process devenv | Stop-Process -ErrorAction SilentlyContinue} catch{}
   }
 }
 
+task CopyPlcLibs {
+  $slnfPath = ".\TcOpen.plc.slnf"
+  $slnf = Get-Content $slnfPath | ConvertFrom-Json
+  $slnfDir = [System.IO.Path]::GetDirectoryName($slnfPath)
+  $tcoLibraries = $slnf.solution.projects  `
+    | Where-Object { $_.Contains("Connector") }  `
+    | Where-Object { -Not $_.Contains("Test") }  `
+    | Where-Object { -Not $_.Contains("Example") }  `
+    | Where-Object { -Not $_.Contains("Integration") }  `
+    | Where-Object { -Not $_.Contains("Hammer") }  `
+    | Where-Object { -Not $_.Contains("Template") } `
+    | ForEach-Object { [System.IO.Path]::GetDirectoryName( (Join-Path ($slnfDir) $_)) }`
+    | ForEach-Object { Join-Path $_ "_meta" }  `
+    | ForEach-Object { @(Get-ChildItem $_ -Filter "*.library" )[0].FullName }
 
-task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
+  $destinationFolder = ".\plcLibs"
+  mkdir $destinationFolder -ErrorAction SilentlyContinue | Out-Null
+  foreach($library in $tcoLibraries)
+  {
+      Copy-Item $library $destinationFolder
+  }
+}
+
+task Tests -precondition { return $isTestingEnabled } {
 
     Set-Location $baseDir 
 
@@ -185,12 +242,15 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
                       [System.Tuple]::Create(".\src\TcoCore\TcoCoreUnitTests.slnf", "\src\TcoCore\src\XaeTcoCore\", 0, "TcoCore_L0"),      
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore_L1_Tests.slnf","", 1, "TcoCore_L1"),
                       [System.Tuple]::Create(".\src\TcoCore\TcoCore_L2_Tests.slnf","", 2, "TcoCore_L2"),
+                      [System.Tuple]::Create(".\src\TcoUtilities\TcoUtilities.slnf", "\src\TcoUtilities\src\XAE\XAE\", 1, "TcoUtilities"),
+                      [System.Tuple]::Create(".\src\TcoInspectors\TcoInspectors.slnf", "\src\TcoInspectors\src\XAE\XAE\", 1, "TcoInspectors"),                      
                       [System.Tuple]::Create(".\src\TcoElements\TcoElements.slnf", ".\src\TcoElements\src\XAE\XAE\", 1, "TcoElements"),
-                      [System.Tuple]::Create(".\src\TcoIoBeckhoff\TcoIoBeckhoff.slnf", "\src\TcoIoBeckhoff\src\XaeTcoIoBeckhoff\", 1, "TcoIoBeckhoff"),
+                      [System.Tuple]::Create(".\src\TcoIo\TcoIo.slnf", "src\TcoIo\src\XAE\XAE\", 1, "TcoIo"),
                       [System.Tuple]::Create(".\src\TcoPneumatics\TcoPneumatics.slnf", "\src\TcoPneumatics\src\XaeTcoPneumatics\", 1, "TcoPneumatics"),
                       [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", 1, "TcoDrivesBeckhoff"),
                       [System.Tuple]::Create(".\src\TcoData\TcoData.slnf", "\src\TcoData\src\XAE\XAE\", 1, "TcoData"),
-                      [System.Tuple]::Create(".\src\IntegrationProjects\IntegrationProjects.slnf", "\src\IntegrationProjects\src\XAE\XAE\", 0, "Integration")                      
+                      [System.Tuple]::Create(".\src\IntegrationProjects\IntegrationProjects.slnf", "\src\IntegrationProjects\src\XAE\XAE\", 0, "Integration"),
+                      [System.Tuple]::Create(".\src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.slnf", "", 1, "Serilog.Sinks.MQTT")                      
                     )
                     # removed due to missing hardware  
                     # [System.Tuple]::Create(".\src\TcoDrivesBeckhoff\TcoDrivesBeckhoff.slnf", "\src\TcoDrivesBeckhoff\src\XaeTcoDrivesBeckhoff\", -1, "TcoDrivesBeckhoff"),
@@ -249,7 +309,6 @@ task Tests -depends CloseVs  -precondition { return $isTestingEnabled } {
 
 task ClearPackages `
   -precondition { $publishNugets } `
-  -depends Tests `
 {
   mkdir nugets -ErrorAction SilentlyContinue
   mkdir nugets\dependants -ErrorAction SilentlyContinue
@@ -258,7 +317,6 @@ task ClearPackages `
 
 task CreatePackages `
   -precondition { $packNugets } `
-  -depends ClearPackages `
 {
   $semVer = $script:gitVersion.SemVer
   exec { 
@@ -274,12 +332,12 @@ task CreatePackages `
     }
 }
 
-task PublishPackages -depends CreatePackages -precondition {return $publishNugets} {
+task PublishPackages -precondition {return $publishNugets} {
   Write-Host "About to" 
   PushNugets -folderWithNugets .\nugets -token $nugetToken -source $nugetSource
 }
 
-task Finish -depends PublishPackages {
+task Finish {
   Write-Host "Done"
 } 
 

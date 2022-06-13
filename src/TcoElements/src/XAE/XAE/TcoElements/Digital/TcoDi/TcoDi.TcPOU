@@ -48,7 +48,7 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+	_signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
 	_signal := inoSignal;	
 END_IF;	
 
@@ -78,7 +78,7 @@ END_VAR
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
 END_VAR
 
 ]]></Declaration>

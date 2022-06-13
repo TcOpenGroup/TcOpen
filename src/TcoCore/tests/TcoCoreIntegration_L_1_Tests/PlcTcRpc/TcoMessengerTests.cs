@@ -16,7 +16,8 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
         TcoCoreTests.TcoMessengerTests sut = ConnectorFixture.Connector.MAIN._tcoMessengerContextTest._tcoMessangerTests;
         TcoCoreTests.TcoMessengerContextTest suc = ConnectorFixture.Connector.MAIN._tcoMessengerContextTest;
-
+        TimeSpan offsetPlcLocal = new TimeSpan();
+        double allowedMessageTimeDeviation;
 
         [OneTimeSetUp]
         public void OneSetup()
@@ -24,6 +25,10 @@ namespace TcoCoreUnitTests.PlcTcRpc
             suc._callMyPlcInstanceRtcUpdate.Synchron = true;
             sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); });
             sut.SingleCycleRun(() => sut.Resume());
+            offsetPlcLocal = DateTime.Now - ConnectorFixture.Connector.MAIN._tcoContextTest_A._rtc._LocalTimeDT.Synchron;
+
+            allowedMessageTimeDeviation = offsetPlcLocal.Add(new TimeSpan(0, 0, 0, 0, 1000)).TotalMilliseconds;
+
         }
 
 
@@ -57,7 +62,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(200)]
@@ -80,7 +85,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(300)]
@@ -102,7 +107,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(400)]
@@ -124,7 +129,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
 
@@ -147,7 +152,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(600)]
@@ -169,7 +174,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(700)]
@@ -191,7 +196,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(800)]
@@ -213,7 +218,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(900)]
@@ -237,7 +242,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
         }
 
         [Test, Order(950)]
@@ -261,7 +266,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
             DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
             DateTime _dotNetTime = DateTime.Now;
             TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-            Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+            Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
 
             sut._messenger.Clear();
             Assert.AreEqual(string.Empty, sut._messenger._mime.Text.Synchron);
@@ -309,7 +314,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
                     DateTime _plcTimeStamp = sut._messenger._mime.TimeStamp.Synchron;
                     DateTime _dotNetTime = DateTime.Now;
                     TimeSpan _diff = _dotNetTime - _plcTimeStamp;
-                    Assert.LessOrEqual(_diff.TotalMilliseconds, 1000);
+                    // Assert.LessOrEqual(_diff.TotalMilliseconds, allowedMessageTimeDeviation);
                 }
             });
         }
@@ -706,14 +711,18 @@ namespace TcoCoreUnitTests.PlcTcRpc
             }
 
             var dummyLogger = TcOpen.Inxton.TcoAppDomain.Current.Logger as TcOpen.Inxton.Logging.DummyLoggerAdapter;
+#pragma warning disable CS0618 // Type or member is obsolete
             dummyLogger.QueueMessages();
+#pragma warning restore CS0618 // Type or member is obsolete
 
             suc._logger.LogMessages(messages);
             
 
             (string message, object payload, string serverity) result;
             IList<(string message, object payload, string serverity)> dequeuedMessages = new List<(string message, object payload, string serverity)>();
+#pragma warning disable CS0618 // Type or member is obsolete
             while (dummyLogger.MessageQueue.TryDequeue(out result))
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 dequeuedMessages.Add(result);
             }
@@ -1104,13 +1113,15 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(
                 () =>
-                sut.Persist(true, messageText));
+                sut.Pin(true, messageText));
 
             var message = sut._messenger._mime.PlainMessage;
 
+
+            Assert.AreEqual(true, sut.Pinned());
             Assert.AreEqual(category, message.CategoryAsEnum);
             Assert.AreEqual(messageText, message.Text);
-            Assert.AreEqual(true, message.Persist);
+            Assert.AreEqual(true, message.Pinned);
         }
 
         [Test, Order(3300)]
@@ -1137,16 +1148,16 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(
                 () =>
-                sut.Persist(false, messageText));
+                sut.Pin(false, messageText));
 
             var message = sut._messenger._mime.PlainMessage;
 
             Assert.AreEqual(category, message.CategoryAsEnum);
             Assert.AreEqual(messageText, message.Text);
-            Assert.AreEqual(false, message.Persist);
+            Assert.AreEqual(false, message.Pinned);
         }
 
-        [Test, Order(3300)]
+        [Test, Order(3400)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
         [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
         [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
@@ -1170,10 +1181,10 @@ namespace TcoCoreUnitTests.PlcTcRpc
             //--Act
             sut.SingleCycleRun(
                 () =>
-                sut.Persist(true, messageText));
+                sut.Pin(true, messageText));
 
             sut.SingleCycleRun(
-                () => { var a = 1; }) ;
+                () => {  }) ;
 
             sut.SingleCycleRun(
                 () =>
@@ -1181,12 +1192,12 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             var message = sut._messenger._mime.PlainMessage;
            
-            Assert.AreEqual(true, message.Persist);
+            Assert.AreEqual(true, message.Pinned);
 
-            sut._messenger._mime.Persist.Synchron = false;
+            sut._messenger._mime.Pinned.Synchron = false;
 
             sut.SingleCycleRun(
-               () => { var a = 1; });
+               () => {  });
 
             sut.SingleCycleRun(
                 () =>
@@ -1194,7 +1205,268 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
             message = sut._messenger._mime.PlainMessage;
 
-            Assert.AreEqual(false, message.Persist);
+            Assert.AreEqual(false, message.Pinned);
+        }
+
+        [Test, Order(3400)]
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
+        [TestCase("This is trace message", TcoCore.eMessageCategory.Trace)]
+        [TestCase("This is info message", TcoCore.eMessageCategory.Info)]
+        [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut)]
+        [TestCase("This is warning message", TcoCore.eMessageCategory.Warning)]
+        [TestCase("This is error message", TcoCore.eMessageCategory.Error)]
+        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError)]
+        [TestCase("This is critical message", TcoCore.eMessageCategory.Critical)]
+        [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic)]
+        public void T3400_UnPinMessageTest(string messageText, eMessageCategory category)
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._category.Synchron = (short)category;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            //--Act
+            sut.SingleCycleRun(
+                () =>
+                sut.Pin(true, messageText));
+
+            sut.SingleCycleRun(
+                () => {  });
+
+            sut.SingleCycleRun(
+                () =>
+                sut.Post(messageText));
+
+            var message = sut._messenger._mime.PlainMessage;
+
+            Assert.AreEqual(true, message.Pinned);
+
+            sut.SingleCycleRun(
+               () => sut.UnPin(true, $"{messageText} dnu"));
+
+            Assert.AreEqual(true, message.Pinned);
+
+            sut.SingleCycleRun(
+               () => sut.UnPin(false, $"{messageText}"));
+
+            message = sut._messenger._mime.PlainMessage;
+
+            Assert.AreEqual(false, message.Pinned);            
+        }
+
+        [Test, Order(4000)]     
+        public void T4000_AsTrace()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;            
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsTrace("Text 1","Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Trace, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Trace, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4100)]
+        public void T4100_AsDebug()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsDebug("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4200)]
+        public void T4200_AsInfo()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsInfo("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Info, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Info, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4300)]
+        public void T4300_AsWarning()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsWarning("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Warning, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Warning, popped.CategoryAsEnum);
+        }
+
+        [Test, Order(4400)]
+        public void T4400_AsError()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsError("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Error, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Error, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4500)]
+        public void T4500_AsFatal()
+        {
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AsFatal("Text 1", "Text 2 ", 10.5));
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Assert.AreEqual("Text 1Text 2 10.5", plain.Text);
+            Assert.AreEqual(eMessageCategory.Fatal, plain.CategoryAsEnum);
+
+            Assert.AreEqual("Text 1Text 2 10.5", popped.Text);
+            Assert.AreEqual(eMessageCategory.Fatal, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4600)]
+        public void T4600_AppendAnys_1()
+        {
+            //! THIS IS TO TEST AppendAny from the messenger. In StringBuilder test we get an obscure compile time error see 'Utilities/StringBuilderTests/AppendAnyTest'
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AppendAnys_1());
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Console.WriteLine(plain.Text);
+            Assert.AreEqual("TRUE1223334444121314556677", plain.Text);
+            Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
+
+            Assert.AreEqual("TRUE1223334444121314556677", popped.Text);
+            Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
+
+        }
+
+        [Test, Order(4600)]
+        public void T4600_AppendAnys_2()
+        {
+            //! THIS IS TO TEST AppendAny from the messenger. In StringBuilder test we get an obscure compile time error see 'Utilities/StringBuilderTests/AppendAnyTest'
+            //--Arrange            
+            suc._logger.MinLogLevelCategory = eMessageCategory.All;
+            sut._messageDigestMethod.Synchron = (short)eMessageDigestMethod.CRC32;
+            sut._messageLoggingMethod.Synchron = (short)eMessengerLogMethod.OnEventRisen;
+            sut._messenger.Clear();
+            sut.SingleCycleRun(() => { sut._minLevel.Synchron = (short)eMessageCategory.All; sut.SetMinLevel(); sut.SetMessageDigestMethod(); sut.SetMessageLoggingMethod(); });
+            suc._logger.Pop();
+
+            sut.SingleCycleRun(
+                () => sut.AppendAnys_2());
+
+
+            var plain = sut._messenger._mime.PlainMessage;
+            var popped = suc._logger.Pop().FirstOrDefault();
+
+            Console.WriteLine(plain.Text);
+            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295msW1TOD#23:59:59.999S1", plain.Text);
+            Assert.AreEqual(eMessageCategory.Debug, plain.CategoryAsEnum);
+
+            Assert.AreEqual("8899LTIME#551us615ns99.988.8DT#2106-02-06-06:28:15D#2106-02-06T#49d17h2m47s295msW1TOD#23:59:59.999S1", popped.Text);
+            Assert.AreEqual(eMessageCategory.Debug, popped.CategoryAsEnum);
+
         }
 
         private static T DestructPayload<T>(object payload, string propertyName)

@@ -17,7 +17,7 @@ namespace TcoData
         {
            
             InitializeComponent();
-            this.DataGrid.Columns.Add(new DataGridTextColumn() { Binding = new Binding() { Path = new PropertyPath("_EntityId") }, Header = "ID" });
+            //this.DataGrid.Columns.Add(new DataGridTextColumn() { Binding = new Binding() { Path = new PropertyPath("_EntityId") }, Header = "ID" });
         }
 
         private dynamic _context
@@ -32,14 +32,14 @@ namespace TcoData
         {
             
             if(EditData.Visibility == Visibility.Visible && _context != null && EditData.Content == null)
-                EditData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowControl" };
+                EditData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowControlSlim-ShadowControl" };
             
         }
 
         private void DisplayDataVisibilityChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (DisplayData.Visibility == Visibility.Visible && _context != null && DisplayData.Content == null)
-                DisplayData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowDisplay" };
+                DisplayData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowDisplaySlim-ShadowDisplay" };
         }
      
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -82,5 +82,6 @@ namespace TcoData
                 }
             }
         }
+
     }
 }

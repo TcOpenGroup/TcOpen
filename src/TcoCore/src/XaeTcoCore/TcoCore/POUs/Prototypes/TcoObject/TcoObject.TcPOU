@@ -8,7 +8,12 @@
 			This function block is abstract and must be implemented in a derived block.
 			```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
 			```TcoObjects``` that belong to same ```TcoContext``` share the same context. 
-			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).            			
+			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).    
+			<note type="warning">
+				Whenever it is required to pass function block parameters of a block type that derives from `TcoObject` it should be passed as **reference**. 
+				This means either via appropriate interface or as `REFERENCE TO` in VAR_INPUT and VAR_OUTPUT sections or as VAR_IN_OUT. 
+				Be aware the VAR_INPUT and VAR_OUTPUT create a copy of the variable.			
+			</note>        			
 			<para>
 				<example>
 				<note type="Example">
@@ -76,14 +81,19 @@
 	</docu>	
 ~*)
 {attribute addProperty ToolTip ""}
+{attribute 'no_assign'}
 FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject 
 VAR
 	{attribute clr [RenderIgnore()]}
 	{attribute clr [ReadOnly()]}
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
 	_Identity : ULINT;
 	{attribute 'hide'}
-	_Parent : ITcoObject;	
+	_ParentObject : ITcoObject;
+	{attribute 'hide'}
+    _ParentStruct : REFERENCE TO TcoStruct;		
 	{attribute clr [RenderIgnore()]}
+	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
 	_messenger : TcoMessenger(THIS^);
 END_VAR
 ]]></Declaration>
@@ -104,7 +114,7 @@ PROPERTY PUBLIC Context : ITcoContext]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Context := THIS^._Parent.Context;]]></ST>
+          <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -154,17 +164,20 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{2172d94e-c218-46fa-950d-f8cdb30a05bd}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;	
 END_VAR
+
 
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Identity := ADR(THIS^);
-_Parent := Parent;
+_ParentObject := ParentObject;
+
 
 ]]></ST>
       </Implementation>
@@ -173,7 +186,7 @@ _Parent := Parent;
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets the identity of this <see cref ="TcoObject.PlcTcoObject()"/>. 
+			Gets the identity of this <see cref ="PlcDocu.TcoCore.TcoObject()"/>. 
 			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
 			This variable is used in the higher level applications.  
 		</summary>			
@@ -185,7 +198,8 @@ PROPERTY Identity : ULINT]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Identity := _Identity;]]></ST>
+          <ST><![CDATA[_Identity := ADR(THIS^);
+Identity := _Identity;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -194,7 +208,7 @@ END_VAR
 		<docu>
 			<summary>
 				Gets messenger of this object.
-				See <see cref="TcoMessenger.PlcTcoMessenger()"/> for more details.
+				See <see cref="PlcDocu.TcoCore.TcoMessenger()"/> for more details.
 			</summary>			
 		</docu>
 ~*)
@@ -205,6 +219,25 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Parent" Id="{95a1533b-087d-0343-2e5c-86fbc8f49d2e}">
+      <Declaration><![CDATA[PROPERTY Parent : ITcoObject]]></Declaration>
+      <Get Name="Get" Id="{d088e776-5e4c-0f82-1586-cb416ae29f17}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF(_ParentObject <> 0) THEN
+	Parent := _ParentObject;
+	RETURN;
+END_IF;	
+
+IF(__ISVALIDREF(_ParentStruct) AND_THEN _ParentStruct.Parent <> 0) THEN
+	Parent := _ParentStruct.Parent;
+	RETURN;
+END_IF;	]]></ST>
         </Implementation>
       </Get>
     </Property>

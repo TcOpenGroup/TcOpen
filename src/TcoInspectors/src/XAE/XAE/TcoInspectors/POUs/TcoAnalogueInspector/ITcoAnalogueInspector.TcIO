@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="ITcoAnalogueInspector" Id="{7df2cfa4-e810-05a2-2931-9dc354df0c62}">
+    <Declaration><![CDATA[INTERFACE ITcoAnalogueInspector
+]]></Declaration>
+    <Method Name="Inspect" Id="{fa878bf0-8f5f-03f6-3b75-ba33769e65e0}">
+      <Declaration><![CDATA[(*~
+<docu>
+<summary>
+	Inspects the signal and evaluates that it matches the value set in `RequiredStatus`.
+</summary>
+<returns>
+	Returns the interface with information about the state of inspection.
+</returns>
+</docu>
+~*)
+METHOD Inspect : IInspector
+VAR_INPUT
+    Status : LREAL;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

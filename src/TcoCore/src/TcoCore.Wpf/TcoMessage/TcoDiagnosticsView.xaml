@@ -130,10 +130,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static loc:Localization.Category}">
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.Acknowledgement}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Visibility="{Binding Persist,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="{x:Static loc:Localization.Roger}" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignFlatAccentBgButton}" />
+                            <Button Visibility="{Binding Pinned,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="{x:Static loc:Localization.Roger}" Command="{Binding Path=DataContext.RogerSelectedMessageCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vtr:TcoDiagnosticsView}}}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -144,7 +144,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static loc:Localization.TimeStamp}">
+                <DataGridTemplateColumn Header="{x:Static loc:Localization.DiscardingMessages}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding PerCycleCount, Converter={vtr:PerCycleCountToWarningConverter}}" Foreground="{Binding CategoryAsEnum, Converter={vtr:MessageCategoryToForegroundBrushConverter}}"/>

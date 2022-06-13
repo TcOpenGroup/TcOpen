@@ -106,7 +106,10 @@ namespace TcoData
         {
             this.Mode = ViewMode.Display;
             // Clears canceled changes
-            ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)SelectedRecord);
+            if(SelectedRecord != null)
+            { 
+                ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)SelectedRecord);
+            }
         }
 
 

@@ -3,6 +3,22 @@
   <Itf Name="ITcoMessenger" Id="{feb2a157-bddb-4314-a4f2-ca2ae8c2472e}">
     <Declaration><![CDATA[INTERFACE ITcoMessenger EXTENDS ITcoMessages
 ]]></Declaration>
+    <Method Name="Clear" Id="{12f1708b-61e2-071c-0ade-a3cb699b4860}">
+      <Declaration><![CDATA[(*~
+		<docu>
+			<summary>
+				Clears the message content.
+				<remarks>			
+					<note type="important">
+						This method is exposed for Rpc calls, for testing purposes. Rpc calls of this method must not be used in production code
+					</note>
+				</remarks>								 
+			</summary>		
+		</docu>
+~*)
+METHOD Clear
+]]></Declaration>
+    </Method>
     <Method Name="OnCondition" Id="{f68c7961-0f11-054c-16d6-c1369d4548f2}">
       <Declaration><![CDATA[METHOD OnCondition : ITcoMessages
 VAR_INPUT
