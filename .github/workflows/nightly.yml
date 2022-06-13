@@ -53,4 +53,9 @@ jobs:
         if: success() 
         with:
           name: plcLibs
-          path: ${{ github.workspace }}\plcLibs\*.library
+          path: ${{ github.workspace }}\plcLibs\*.library          
+      - name: Cake-Draft-Release-OrgsNugets
+        env:
+          TC_OPEN_GROUP_USER_PAT : ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
+        run: >
+          .\pipelines\release-to-gh.ps1    
