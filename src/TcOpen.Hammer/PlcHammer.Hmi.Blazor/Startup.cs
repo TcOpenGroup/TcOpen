@@ -25,6 +25,7 @@ using TcOpen.Inxton.Local.Security.Blazor;
 using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
+using TcOpen.Inxton.TcoCore.Blazor.Extensions;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -59,6 +60,7 @@ namespace PlcHammer.Hmi.Blazor
             var roleRepo = SetUpRoleRepositoryJson();
                         
             services.AddVortexBlazorSecurity(userRepo, roleRepo);
+            services.AddTcoCoreExtensions();
 
             /*Json repositories for data*/
             SetUpJsonRepositories();

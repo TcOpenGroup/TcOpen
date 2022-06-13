@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,37 +117,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NotInspected" xml:space="preserve">
-    <value>Not inspected</value>
+  <data name="___Time_stamp__" xml:space="preserve">
+    <value>Časové razítko</value>
   </data>
-  <data name="InspectionIsRunning" xml:space="preserve">
-    <value>Running</value>
+  <data name="___Stab_Time__" xml:space="preserve">
+    <value>Stab.Time</value>
   </data>
-  <data name="InspectionPassed" xml:space="preserve">
-    <value>Passed</value>
+  <data name="___Stabilisation_time__The_inspection_will_pass_when_the_condition_is_met_continuously_for_the_duration_of_this_timespan___" xml:space="preserve">
+    <value>Doba stabilizace. Kontrola je úspěšná, pokud je podmínka splněna nepřetržitě po celou dobu trvání tohoto časového úseku.</value>
   </data>
-  <data name="InspectionFailed" xml:space="preserve">
-    <value>Failed</value>
+  <data name="___Timeout__" xml:space="preserve">
+    <value>Časový limit</value>
   </data>
-  <data name="InspectionInconclusive" xml:space="preserve">
-    <value>Inconclusive</value>
+  <data name="___Timeout__Maximal_duration_of_the_inspection_within_which_the_condition_must_be_met___" xml:space="preserve">
+    <value>Časový limit. Maximální doba trvání kontroly, během níž musí být podmínka splněna.</value>
   </data>
-  <data name="InspectionDidRunButIsExcludedFromTheEvaluation" xml:space="preserve">
-    <value>Excluded</value>
+  <data name="___Result__" xml:space="preserve">
+    <value>Výsledek</value>
   </data>
-  <data name="InspectionWasBypassed" xml:space="preserve">
-    <value>Bypassed</value>
+  <data name="___Result_of_the_inspection___" xml:space="preserve">
+    <value>Výsledek kontroly.</value>
   </data>
-  <data name="InspectionFailedYouWillNeedToDecideWhatSNext" xml:space="preserve">
-    <value>Inspection failed, you will need to decide what's next...</value>
+  <data name="___Exclude__" xml:space="preserve">
+    <value>Vyloučit</value>
   </data>
-  <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+  <data name="___Inspection_is_excluded_from_the_evaluation__The_test_will_however_run_and_provide_detected_value___" xml:space="preserve">
+    <value>Inspekce je z hodnocení vyloučena. Test však proběhne a poskytne zjištěnou hodnotu.</value>
   </data>
-  <data name="Terminate" xml:space="preserve">
-    <value>Terminate</value>
+  <data name="___Bypass__" xml:space="preserve">
+    <value>Bypass</value>
   </data>
-  <data name="Override" xml:space="preserve">
-    <value>Override</value>
+  <data name="___Test_is_bypassed__no_eveluation_occurs___" xml:space="preserve">
+    <value>Test je obejit, nedochází k eveluaci.</value>
+  </data>
+  <data name="___Failure_description__" xml:space="preserve">
+    <value>Popis selhání</value>
+  </data>
+  <data name="___Brief_failure_desciption__" xml:space="preserve">
+    <value>Stručný popis poruchy</value>
+  </data>
+  <data name="___Re_tries__" xml:space="preserve">
+    <value>Opakované pokusy</value>
+  </data>
+  <data name="___Inspection_will_repeat_given_number_of_times_when_inspection_fails___" xml:space="preserve">
+    <value>Při neúspěšné kontrole se kontrola opakuje daný početkrát.</value>
+  </data>
+  <data name="___Attempts__" xml:space="preserve">
+    <value>Pokusy</value>
+  </data>
+  <data name="___Re_tries_counter__count_the_number_of_times_the_inspection_run_on_this_inspector_instance___" xml:space="preserve">
+    <value>Čítač opakovaných pokusů, počítá počet pokusů o kontrolu provedených v této instanci inspektora.</value>
+  </data>
+  <data name="___Code__" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="___Arbitrary_error_code_for_this_inspection__" xml:space="preserve">
+    <value>Libovolný chybový kód pro tuto kontrolu</value>
+  </data>
+  <data name="___Required__" xml:space="preserve">
+    <value>Požadované</value>
+  </data>
+  <data name="___Required_status_for_inspection_to_pass__Can_contain_pattern_string_when__Star_notation_is_enabled___" xml:space="preserve">
+    <value>Požadovaný stav, aby kontrola proběhla úspěšně. Může obsahovat vzorový řetězec, pokud je povolen `Hvězdičkový zápis`.</value>
+  </data>
+  <data name="___Detected__" xml:space="preserve">
+    <value>Zjištěno</value>
+  </data>
+  <data name="___Detected_data__" xml:space="preserve">
+    <value>Zjištěná data</value>
+  </data>
+  <data name="___Min___" xml:space="preserve">
+    <value>Min.</value>
+  </data>
+  <data name="___Min__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Minimální hodnota, aby kontrola proběhla úspěšně.</value>
+  </data>
+  <data name="___Detected_value__" xml:space="preserve">
+    <value>Zjištěná hodnota</value>
+  </data>
+  <data name="___Max___" xml:space="preserve">
+    <value>Max.</value>
+  </data>
+  <data name="___Max__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Maximální hodnota, aby kontrola proběhla úspěšně.</value>
+  </data>
+  <data name="___Sets_the_required_status_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Nastaví požadovaný stav, aby kontrola proběhla úspěšně.</value>
+  </data>
+  <data name="___Displays_detected_status_of_this_check___" xml:space="preserve">
+    <value>Zobrazí zjištěný stav této kontroly.</value>
   </data>
 </root>

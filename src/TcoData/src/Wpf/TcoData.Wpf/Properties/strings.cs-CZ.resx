@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,197 +117,149 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Edit" xml:space="preserve">
-    <value>Upraviť</value>
+  <data name="AffectedObject" xml:space="preserve">
+    <value>Ovlivněný objekt</value>
   </data>
-  <data name="From" xml:space="preserve">
-    <value>Od</value>
+  <data name="Ago" xml:space="preserve">
+    <value>před</value>
+  </data>
+  <data name="AutoUpdate" xml:space="preserve">
+    <value>Automatická aktualizace</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="CancelsTheExectionOfThisAction" xml:space="preserve">
+    <value>Zruší vyjmutí této akce.</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="CategoryFilter" xml:space="preserve">
+    <value>Filtr kategorie</value>
+  </data>
+  <data name="CloseApplication" xml:space="preserve">
+    <value>Zavřít aplikaci</value>
+  </data>
+  <data name="Components" xml:space="preserve">
+    <value>KOMPONENTY</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopírovat</value>
+  </data>
+  <data name="CreateCopy" xml:space="preserve">
+    <value>Vytvořit kopii</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Vytvořeno</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>DATA</value>
+  </data>
+  <data name="DataItemName" xml:space="preserve">
+    <value>Datová položka</value>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>deň</value>
+    <value>den</value>
   </data>
   <data name="Days" xml:space="preserve">
-    <value>dní</value>
+    <value>dny</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Zmazať</value>
+    <value>Odstranit</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Detaily</value>
+    <value>Podrobnosti na</value>
   </data>
   <data name="Diagnostics" xml:space="preserve">
-    <value>Diagnostika</value>
+    <value>DIAGNOSTIKA</value>
   </data>
   <data name="Documents" xml:space="preserve">
     <value>Dokumenty</value>
   </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Doba trvání</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="EmptySearch" xml:space="preserve">
+    <value>Vaše vyhledávání neodpovídá žádným dokumentům.</value>
+  </data>
+  <data name="EvalutatorsList" xml:space="preserve">
+    <value>Hodnotitelé</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtr</value>
+  </data>
+  <data name="FilterId" xml:space="preserve">
+    <value>ID filtru</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="FromNow" xml:space="preserve">
+    <value>od nynějška</value>
+  </data>
   <data name="FromPlc" xml:space="preserve">
-    <value>Z PLC</value>
+    <value>Od společnosti PLC</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Celé jméno</value>
   </data>
   <data name="Hour" xml:space="preserve">
     <value>hodina</value>
   </data>
   <data name="Hours" xml:space="preserve">
-    <value>hodín</value>
+    <value>hodin</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Položky na stránku</value>
+  </data>
+  <data name="LoadToController" xml:space="preserve">
+    <value>Chcete načíst data do řadiče? Záznam:</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Umístění</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>Správa</value>
+    <value>Zpráva</value>
   </data>
   <data name="Messages" xml:space="preserve">
-    <value>Správy</value>
+    <value>Zprávy</value>
+  </data>
+  <data name="MinCategoryFilter" xml:space="preserve">
+    <value>Filtr min. kategorie</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>minuta</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minuty</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Upraveno</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>měsíc</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>měsíce</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Název</value>
   </data>
   <data name="New" xml:space="preserve">
     <value>Nový</value>
   </data>
-  <data name="Second" xml:space="preserve">
-    <value>sekunda</value>
-  </data>
-  <data name="Seconds" xml:space="preserve">
-    <value>sekúnd</value>
-  </data>
-  <data name="SendToPlc" xml:space="preserve">
-    <value>Poslať do PLC</value>
-  </data>
-  <data name="To" xml:space="preserve">
-    <value>Do</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>Užívateľ</value>
-  </data>
-  <data name="UserName" xml:space="preserve">
-    <value>Meno užívateľa</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Aktualizovať</value>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>mesiac</value>
-  </data>
-  <data name="Months" xml:space="preserve">
-    <value>mesiacov</value>
-  </data>
-  <data name="Minute" xml:space="preserve">
-    <value>minúta</value>
-  </data>
-  <data name="Minutes" xml:space="preserve">
-    <value>minút</value>
-  </data>
-  <data name="Copy" xml:space="preserve">
-    <value>Kopírovať</value>
-  </data>
-  <data name="CreateCopy" xml:space="preserve">
-    <value>Vytvoriť kópiu</value>
-  </data>
-  <data name="Created" xml:space="preserve">
-    <value>Vytvorené</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Zrušiť</value>
-  </data>
-  <data name="Page" xml:space="preserve">
-    <value>Strana</value>
-  </data>
-  <data name="RightNow" xml:space="preserve">
-    <value>práve teraz</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Meno</value>
-  </data>
-  <data name="Modified" xml:space="preserve">
-    <value>Zmenené</value>
-  </data>
-  <data name="ItemsPerPage" xml:space="preserve">
-    <value>Počet položiek na stranu</value>
-  </data>
-  <data name="FromNow" xml:space="preserve">
-    <value>od teraz</value>
-  </data>
-  <data name="FullName" xml:space="preserve">
-    <value>Celé meno</value>
-  </data>
-  <data name="EmptySearch" xml:space="preserve">
-    <value>Nepodarilo sa nájsť žiadny dokument.</value>
-  </data>
-  <data name="Duration" xml:space="preserve">
-    <value>Trvanie</value>
-  </data>
-  <data name="WouldYouLikeToCloseTheApplication" xml:space="preserve">
-    <value>Chcete zatvoriť aplikáciu?</value>
-  </data>
-  <data name="WouldYouLikeToDeleteRecord" xml:space="preserve">
-    <value>Chcete vymazať záznam</value>
-  </data>
-  <data name="WouldYouLikeToGetFromPLC" xml:space="preserve">
-    <value>Chcete načítať dáta z PLC?</value>
-  </data>
-  <data name="WouldYouLikeToUpdateRecord" xml:space="preserve">
-    <value>Chcete aktualizovať záznam</value>
-  </data>
-  <data name="OldValue" xml:space="preserve">
-    <value>Pôvodná hodnota</value>
-  </data>
-  <data name="PeripheryDetailsView_FullName" xml:space="preserve">
-    <value>Celé meno</value>
-  </data>
   <data name="NewValue" xml:space="preserve">
     <value>Nová hodnota</value>
   </data>
-  <data name="Ago" xml:space="preserve">
-    <value>dozadu</value>
-  </data>
-  <data name="LoadToController" xml:space="preserve">
-    <value>Chcete nahrať dáta do riadenia? Záznam:</value>
-  </data>
-  <data name="Timestamp" xml:space="preserve">
-    <value>Časová známka</value>
-  </data>
-  <data name="AffectedObject" xml:space="preserve">
-    <value>Ovplyvnený objekt</value>
-  </data>
-  <data name="AutoUpdate" xml:space="preserve">
-    <value>Automatická aktualizácia</value>
-  </data>
-  <data name="CancelsTheExectionOfThisAction" xml:space="preserve">
-    <value>Zruší zrušenie tejto akcie.</value>
-  </data>
-  <data name="Category" xml:space="preserve">
-    <value>Kategória</value>
-  </data>
-  <data name="CategoryFilter" xml:space="preserve">
-    <value>Filter kategórie</value>
-  </data>
-  <data name="CloseApplication" xml:space="preserve">
-    <value>Zatvoriť aplikáciu</value>
-  </data>
-  <data name="Components" xml:space="preserve">
-    <value>KOMPONENTY</value>
-  </data>
-  <data name="Data" xml:space="preserve">
-    <value>DÁTA</value>
-  </data>
-  <data name="DataItemName" xml:space="preserve">
-    <value>Položka údajov</value>
-  </data>
-  <data name="EvalutatorsList" xml:space="preserve">
-    <value>Hodnotitelia</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="FilterId" xml:space="preserve">
-    <value>ID filtra</value>
-  </data>
-  <data name="Location" xml:space="preserve">
-    <value>Umiestnenie</value>
-  </data>
-  <data name="MinCategoryFilter" xml:space="preserve">
-    <value>Filter min. kategórie</value>
-  </data>
   <data name="NoMessages" xml:space="preserve">
-    <value>Žiadne správy</value>
+    <value>Žádné zprávy</value>
   </data>
   <data name="NoSelected" xml:space="preserve">
-    <value>Žiadne</value>
+    <value>Žádné</value>
   </data>
   <data name="Of" xml:space="preserve">
     <value>Z</value>
@@ -315,34 +267,82 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="OldValue" xml:space="preserve">
+    <value>Stará hodnota</value>
+  </data>
   <data name="Overview" xml:space="preserve">
-    <value>PREHĽAD</value>
+    <value>PŘEHLED</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Stránka</value>
   </data>
   <data name="ParallelSequencers" xml:space="preserve">
-    <value>Paralelné sekvencéry</value>
+    <value>Paralelní sekvencery</value>
+  </data>
+  <data name="PeripheryDetailsView_FullName" xml:space="preserve">
+    <value>Celé jméno</value>
   </data>
   <data name="Result" xml:space="preserve">
-    <value>Výsledok</value>
+    <value>Výsledek</value>
+  </data>
+  <data name="RightNow" xml:space="preserve">
+    <value>právě teď</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>druhý</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>sekundy</value>
   </data>
   <data name="Selected" xml:space="preserve">
-    <value>Vybrané</value>
+    <value>Vybrané stránky</value>
+  </data>
+  <data name="SendToPlc" xml:space="preserve">
+    <value>Odeslat do PLC</value>
   </data>
   <data name="Severity" xml:space="preserve">
-    <value>Závažnosť</value>
+    <value>Závažnost</value>
   </data>
   <data name="Source" xml:space="preserve">
-    <value>Zdroj</value>
+    <value>Zdroj:</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Stav</value>
   </data>
   <data name="SubCategory" xml:space="preserve">
-    <value>Podkategória</value>
+    <value>Podkategorie</value>
   </data>
   <data name="Symbol" xml:space="preserve">
     <value>Symbol</value>
   </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Časové razítko</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Na</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aktualizace</value>
+  </data>
   <data name="UpdateMessages" xml:space="preserve">
-    <value>Aktualizácia správ</value>
+    <value>Aktualizace zpráv</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Uživatel</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Uživatelské jméno</value>
+  </data>
+  <data name="WouldYouLikeToCloseTheApplication" xml:space="preserve">
+    <value>Chcete aplikaci zavřít?</value>
+  </data>
+  <data name="WouldYouLikeToDeleteRecord" xml:space="preserve">
+    <value>Chcete odstranit záznam</value>
+  </data>
+  <data name="WouldYouLikeToGetFromPLC" xml:space="preserve">
+    <value>Chcete získat data z PLC?</value>
+  </data>
+  <data name="WouldYouLikeToUpdateRecord" xml:space="preserve">
+    <value>Chcete aktualizovat záznam</value>
   </data>
 </root>
