@@ -24,16 +24,15 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF
-	50:
+    50:
 
-		_sutNotInitialized.Service();
-		_sutNotInitialized.Restore();
-	100:
-		_sut(inoSignal := _signal);
-		
-		_ScaledResult := _sut.Status.Scaled;
+        _sutNotInitialized.Service();
+        _sutNotInitialized.Restore();
+    100:
+        _sut(inoSignal := _signal);
 
-	
+        _ScaledResult := _sut.Status.Scaled;
+
 END_CASE
 ]]></ST>
       </Implementation>

@@ -3,12 +3,16 @@
   <POU Name="TcoElementsSandbox" Id="{c46022e7-7bf1-0c54-0deb-015ecc103f2a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoElementsSandbox EXTENDS TcoCore.TcoContext
 VAR
+	{attribute addProperty Name "Digital input"}
 	_di : TcoElements.TcoDi(THIS^);
+	{attribute addProperty Name "Digital output"}
 	_do : TcoElements.TcoDo(THIS^);
 	_diSignal : BOOL;
 	_doSignal : BOOL;
 	
+	{attribute addProperty Name "Analogue input"}
 	_ai : TcoElements.TcoAi(THIS^);
+	{attribute addProperty Name "Analogue output"}
 	_ao : TcoElements.TcoAo(THIS^);
 	_aiSignal : DINT;
 	_aoSignal : DINT;
@@ -27,7 +31,13 @@ _do(inoSignal := IO.A2._1);
 _Ai.Service();
 _Ao.Service();
 _Ai(inoSignal := IO.A3._1);
-_Ao(inoSignal := IO.A4._1);]]></ST>
+_Ao(inoSignal := IO.A4._1);
+
+_ai.Config.RawLow := 0;
+_ai.Config.RawHigh := 65536;
+
+_ai.Config.RealLow := 0.0;
+_ai.Config.RealHigh := 100.0;]]></ST>
       </Implementation>
     </Method>
   </POU>
