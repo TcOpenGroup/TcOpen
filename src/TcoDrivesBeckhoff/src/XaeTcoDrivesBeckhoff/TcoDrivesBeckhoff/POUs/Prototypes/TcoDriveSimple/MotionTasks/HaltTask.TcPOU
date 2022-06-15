@@ -55,7 +55,7 @@ VAR_INPUT
     ParentObject : ITcoObject;	
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
+        <ST><![CDATA[//SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{e0f5b9d1-b2ab-028e-0981-014cb0964a83}">

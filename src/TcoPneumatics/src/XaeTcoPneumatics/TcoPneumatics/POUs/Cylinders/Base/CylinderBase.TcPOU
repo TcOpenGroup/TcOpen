@@ -99,7 +99,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// This is not clear to me... I from time to time the consumer code does not see 'FB_init' of 'TcoObject', that's why overridden here with super call...
-SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+//SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
       </Implementation>
     </Method>
     <Property Name="MoveHomeTask" Id="{fb0f0a8f-ab5f-0349-1e0f-f73ce363961c}" FolderPath="Tasks\">
