@@ -23,8 +23,8 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE _testId OF
 	50:
-	_sutNotInitialized.IsTrue;
-	_sutNotInitialized.IsFalse;
+		_sutNotInitialized.IsTrue;
+		_sutNotInitialized.IsFalse;
 		_sutNotInitialized.Service();
 		_sutNotInitialized.Restore();
 	100:
