@@ -7,98 +7,89 @@
 				Generic component for continious control of an output.(e. g. Continious analog sensor)								
 		</summary>				
 	</docu>	
-~*)	
+~*)
 FUNCTION_BLOCK TcoAo EXTENDS TcoCore.TcoComponent
 VAR_IN_OUT
-	(*~
+    (*~
 	<docu>
 		<summary>
 			Controlled signal. Typically an `%Q* : INT` ,`%Q* : DINT` variable. 												
 		</summary>				
 	</docu>	
 	~*)
-	inoSignal : DINT;
+    inoSignal : DINT;
 END_VAR
 
 VAR
-	(*~
+    (*~
 	<docu>
 		<summary>
 			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
 		</summary>				
 	</docu>	
 	~*)
-	_signal : DINT;	
+    _signal : DINT;
 END_VAR
 
 VAR
-	{attribute addProperty Name "<#Signal#>"}
-	_signalInfo : TcoCore.TcoSignalInfo;
-	
+    {attribute addProperty Name "<#Signal#>"}
+    _signalInfo : TcoCore.TcoSignalInfo;
 
-	_config : TcoAoConfig;	
-	_status : TcoAoStatus;	
-	
-	_requiredValue: REAL;
-	
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoAoConfig;
+	{attribute addProperty Name "<#Status#>"}
+    _status : TcoAoStatus;
 
-	_rawRange: REAL;
-	_realRange: REAL;
-	_unscaled: REAL;
+    _requiredValue : REAL;
 
+    _rawRange  : REAL;
+    _realRange : REAL;
+    _unscaled  : REAL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
-	inoSignal := _signal;		 
-END_IF;	
-
-
+      <ST><![CDATA[IF (__ISVALIDREF(inoSignal)) THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+    inoSignal := _signal;
+END_IF;
 
 //------------------unscale-------------------------
-_rawRange := DINT_TO_REAL(_config.RawHigh - _config.RawLow);
+_rawRange  := DINT_TO_REAL(_config.RawHigh - _config.RawLow);
 _realRange := config.RealHigh - Config.RealLow;
-_unscaled:=0;
+_unscaled  := 0;
 
 IF (_rawRange = 0) THEN
-	Messenger.Error('<#Division by zero: Verify values defined in config! (RawHigh,RawLow)#>');
-	RETURN;	
+    Messenger.Error('<#Division by zero: Verify values defined in config! (RawHigh,RawLow)#>');
+    RETURN;
 END_IF
 
 IF (Config.Gain = 0) THEN
-	Messenger.Warning('<#Invalid data: Gain is not defined!#>'); 
+    Messenger.Warning('<#Invalid data: Gain is not defined!#>');
 END_IF
 
+_unscaled := (_requiredValue - _config.RealLow) / _realRange;
 
-
-_unscaled :=(_requiredValue - _config.RealLow)/_realRange;
-
-_unscaled := _unscaled*_rawRange;
+_unscaled := _unscaled * _rawRange;
 
 _unscaled := _unscaled + DINT_TO_REAL(_config.RawLow);
 
-_unscaled:=_unscaled * _config.Gain + _config.Offset;
+_unscaled := _unscaled * _config.Gain + _config.Offset;
 //------------------------------------------------
 
-IF (_unscaled>_config.RawHigh) AND (_config.Gain<>1 OR _config.Offset<>0)   THEN
-	Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>'); 
-ELSIF (_unscaled<_config.RawLow) AND (_config.Gain<>1 OR _config.Offset<>0)   THEN
-	Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>'); 
+IF (_unscaled > DINT_TO_REAL(_config.RawHigh)) AND (_config.Gain <> 1 OR _config.Offset <> 0) THEN
+    Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>');
+ELSIF (_unscaled < DINT_TO_REAL(_config.RawLow)) AND (_config.Gain <> 1 OR _config.Offset <> 0) THEN
+    Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>');
 END_IF
-_signal:=REAL_TO_DINT(_unscaled);
 
+_signal := REAL_TO_DINT(_unscaled);
 
+_status.RawRange  := _rawRange;
+_status.RealRange := _realRange;
+_status.Unscaled  := _unscaled;
 
-_status.RawRange:=_rawRange;
-_status.RealRange:=_realRange;
-_status.Unscaled:=_unscaled;
-
-
-IF(__ISVALIDREF(inoSignal)) THEN
-	inoSignal := _signal;		 
-END_IF;	
-
-
+IF (__ISVALIDREF(inoSignal)) THEN
+    inoSignal := _signal;
+END_IF;
 ]]></ST>
     </Implementation>
     <Folder Name="Status" Id="{e69ac82f-2677-0e28-36ee-33773b25ab05}" />
@@ -119,7 +110,7 @@ METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
+	ParentObject : ITcoObject;
 END_VAR
 
 ]]></Declaration>

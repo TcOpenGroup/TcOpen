@@ -1,16 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoAoConfig" Id="{1ebf84b8-fca2-08b7-1e0c-0be1a3bc934d}">
-    <Declaration><![CDATA[TYPE TcoAoConfig :
-STRUCT
-	RawLow:DINT;
-	RawHigh:DINT;
-	RealLow:REAL;
-	RealHigh:REAL;
-	Gain: REAL := 1.0;
-	Offset: REAL := 0.0;  	
-
-END_STRUCT
+    <Declaration><![CDATA[(*~
+<docu>
+	<summary>
+		`TcoAo` settings/config structure.								
+	</summary>				
+</docu>	
+~*)
+TYPE
+    TcoAoConfig :
+    STRUCT
+       	(*~
+		<docu>
+			<summary>
+				Lowest possible value of the raw input.								
+			</summary>				
+		</docu>	
+		~*)
+        RawLow   : DINT;
+		(*~
+		<docu>
+			<summary>
+				Highest possible value of the raw input.								
+			</summary>				
+		</docu>	
+		~*)
+        RawHigh  : DINT;
+		(*~
+		<docu>
+			<summary>
+				Lowest threshold of scaled value.
+				`RealLow` and `RealHigh` should represent the real range of an continuous input. 								
+			</summary>				
+		</docu>	
+		~*)
+        RealLow  : REAL;
+		(*~
+		<docu>
+			<summary>
+				Highest threshold range of scaled value.
+				`RealLow` and `RealHigh` should represent the real range of an continuous input. 	 								
+			</summary>				
+		</docu>	
+		~*)
+        RealHigh : REAL;
+		(*~
+		<docu>
+			<summary>
+				Allows simple adjustment of the calculated value multiplying the value by factor of `Gain`.								 	 								
+			</summary>				
+		</docu>	
+		~*)
+        Gain     : REAL := 1.0;
+		(*~
+		<docu>
+			<summary>
+				Allows simple adjustment of the calculated value by adding `Offset` value.								 	 								
+			</summary>				
+		</docu>	
+		~*)
+        Offset   : REAL := 0.0;
+    END_STRUCT
 END_TYPE
 ]]></Declaration>
   </DUT>
