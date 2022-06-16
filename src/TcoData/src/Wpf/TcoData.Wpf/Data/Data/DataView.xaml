@@ -103,6 +103,7 @@
                                         Margin="2,0"
                                         Command="{Binding FindByCriteriaCommand}"
                                         Content="🔍"/>
+                                    <TextBlock Style="{DynamicResource MaterialDesignCaptionTextBlock}" Margin="10,0,0,0" VerticalAlignment="Center" Text="Criteria:"></TextBlock>
                                     <ComboBox              
                                          Margin="10,0,10,0"
                                         VerticalAlignment="Center"
