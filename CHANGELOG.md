@@ -1,3 +1,8 @@
+# This doument is not being maintaned!!!
+# IMPORTANT from 0.7.0-alpha.863 we will maintain release logs in Releases [here](https://github.com/TcOpenGroup/TcOpen/releases)
+# Please make sure you create commits with proper descripions and document your changes in respective PRs.
+
+
 # v0.7.x
 
 ## TcOpen.Inxton.Security
