@@ -21,19 +21,18 @@ namespace TcOpen.Inxton.Local.Security
         {
             AuthorizationTokenChange(token);
         }
-
-        protected abstract string GetToken();
-        public IUser RequestAuthorization()
+        
+        public IUser RequestAuthorization(string token)
         {
             AuthorizationErrorMessage = string.Empty;
             try
             {
                 if (WillChangeToken)
                 {
-                    RequestTokenChange();
+                    RequestTokenChange(token);
                 }
 
-                return Authorize(GetToken());
+                return Authorize(token);
             }
             catch (Exception ex)
             {
@@ -49,9 +48,9 @@ namespace TcOpen.Inxton.Local.Security
             private set;
         }
 
-        public void RequestTokenChange()
+        public void RequestTokenChange(string token)
         {
-            ChangeToken(GetToken());
+            ChangeToken(token);
             WillChangeToken = false;
         }
 

@@ -6,12 +6,13 @@
 TYPE
     eInspectionGroupTests :
     (
-        Inspect         := 10,
-        GetResult       := 20,
-        OnFailCarryOn   := 40,
-        OnFailRetry     := 50,
-        OnFailTerminate := 60,
-		OnFailDiaglog   := 70
+        Inspect                              := 10,
+        GetResult                            := 20,
+        OnFailCarryOn                        := 40,
+        OnFailRetry                          := 50,
+        OnFailTerminate                      := 60,
+        OnFailDiaglog                        := 70,
+        InspectWithNormalizedNumberOfRetries := 80
     );
 END_TYPE
 ]]></Declaration>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoAi" Id="{e3ac9b8a-3cec-08be-2ff4-bf54abc2c974}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+				Generic component for monitoring of a continuous signal input. (e.g. AnalogSensor).												
+		</summary>				
+	</docu>	
+~*)	
+FUNCTION_BLOCK TcoAi EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Input  continious signal. Typically an `%I* : INT` or `%I* : DINT`  variable. 												
+		</summary>				
+	</docu>	
+	~*)
+	inoSignal : DINT;
+END_VAR
+
+VAR
+	(*~
+	<docu>
+		<summary>
+			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
+		</summary>				
+	</docu>	
+	~*)
+	_signal : DINT;	
+END_VAR
+
+VAR
+	(*~
+	<docu>
+		<summary>
+			Provides information about the input signal of this instance of `TcoAi`.											
+		</summary>				
+	</docu>	
+	~*)
+	{attribute addProperty Name "<#Signal#>"}
+	_signalInfo : TcoCore.TcoSignalInfo;
+	
+	(*~
+	<docu>
+		<summary>
+			Contains information about the settings and configuration of this instance of `TcoAi`.								
+		</summary>				
+	</docu>	
+	~*)
+	{attribute addProperty Name "<#Config#>"}
+	_config : TcoAiConfig;
+
+	(*~
+	<docu>
+		<summary>
+			Contains information about the status if this instance of `TcoAi`.								
+		</summary>				
+	</docu>	
+	~*)	
+	{attribute addProperty Name "<#Status#>"}
+	_status : TcoAiStatus;	
+
+	
+	_rawRange             : REAL;
+	_realRange            : REAL;
+	_scaled               : REAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (__ISVALIDREF(inoSignal)) THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+    _signal := inoSignal;
+END_IF;
+
+//------------------scale-------------------------
+_rawRange  := DINT_TO_REAL(_config.RawHigh - _config.RawLow);
+_realRange := config.RealHigh - Config.RealLow;
+_scaled    := 0;
+
+IF (_rawRange = 0) THEN
+    Messenger.Warning('<#Division by zero: Verify values defined in config! (RawHigh,RawLow)#>');
+    RETURN;
+END_IF
+
+IF (Config.Gain = 0) THEN
+    Messenger.Warning('<#Invalid data: Gain is not defined!#>');
+END_IF
+
+_scaled := (DINT_TO_REAL(_signal - _config.RawLow)) / _rawRange;
+
+_scaled := _scaled * _realRange;
+_scaled := _scaled + _config.RealLow;
+
+_scaled := _scaled * _config.Gain + _config.Offset;
+//------------------------------------------------
+
+IF (_scaled > _config.RealHigh) AND (_config.Gain <> 1 OR _config.Offset <> 0) THEN
+    Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>');
+ELSIF (_scaled < _config.RealLow) AND (_config.Gain <> 1 OR _config.Offset <> 0) THEN
+    Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>');
+END_IF
+
+_status.RawRange  := _rawRange;
+_status.RealRange := _realRange;
+_status.Scaled    := _scaled;
+]]></ST>
+    </Implementation>
+    <Folder Name="Status" Id="{1e4772af-86a5-0cae-307a-a70a6814fc61}" />
+    <Property Name="Config" Id="{e75ac111-9669-00ff-3236-b8c69a927111}">
+      <Declaration><![CDATA[PROPERTY Config : REFERENCE TO TcoAiConfig]]></Declaration>
+      <Get Name="Get" Id="{9f73d41a-059b-0e84-252d-1ccc676ef94b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{bb10cc22-dfe4-0847-0777-2e0272d143ba}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// I regret doing this but I get comiler errors... for no reason in my opinion
+SUPER^.FB_init(bInitRetains, bInCopyCode, Parent);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{464e77c6-c039-0e58-17ca-0f427936fbe9}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// No implementation needed for this componet.]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{716081c8-73f5-09ca-1246-a9cc4f576fe2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{bec574a2-a2b5-0f76-1cf9-03583d988f99}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY Status : REFERENCE TO TcoAiStatus]]></Declaration>
+      <Get Name="Get" Id="{99728b0e-7e4e-02d6-09fd-fd15ef6161b7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

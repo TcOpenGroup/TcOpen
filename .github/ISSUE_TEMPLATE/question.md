@@ -1,7 +1,7 @@
 ---
 name: Question
 about: Ask question
-title: question
+title: "[QUESTION]"
 labels: question
 assignees: PTKu
 

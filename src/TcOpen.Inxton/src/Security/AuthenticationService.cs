@@ -225,15 +225,17 @@ namespace TcOpen.Inxton.Local.Security
             UserRepository.Create(newUser.Username, newUser);
         }
 
+        private readonly System.Timers.Timer deauthenticateTimer = new System.Timers.Timer();
         private void SetUserTimedOutDeAuthentication(TimeSpan deauthRequestTime)
         {
-            System.Timers.Timer aTimer = new System.Timers.Timer();
-            aTimer.Enabled = false;
+            deauthenticateTimer.AutoReset = true;
+            deauthenticateTimer.Enabled = false;
+            deauthenticateTimer.Stop();
             if (deauthRequestTime.TotalSeconds > 0)
             {
-                aTimer.Interval = deauthRequestTime.TotalMilliseconds;
-                aTimer.Elapsed += ATimer_Elapsed;
-                aTimer.Enabled = true;
+                deauthenticateTimer.Interval = deauthRequestTime.TotalMilliseconds;
+                deauthenticateTimer.Elapsed += ATimer_Elapsed;
+                deauthenticateTimer.Enabled = true;
             }
         }
 
@@ -242,12 +244,14 @@ namespace TcOpen.Inxton.Local.Security
             if (OnTimedLogoutRequest == null)
             {
                 this.DeAuthenticateCurrentUser();
+                deauthenticateTimer.Stop();
                 return;
             }
 
             if (OnTimedLogoutRequest != null && OnTimedLogoutRequest())
             {
                 this.DeAuthenticateCurrentUser();
+                deauthenticateTimer.Stop();
             }
         }
 

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="InfoData_6F19DB2B" Id="{9d927262-f18b-07b9-2788-3166f537bb75}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL1809-0000-0018'}
+{attribute addProperty BoxType "EL1809-0000-0018"}
+{attribute addProperty Id "StateAT %I*UINT2"}
+{attribute addProperty CRC "1863965483"}
+{attribute addProperty Size "2"}
+TYPE InfoData_6F19DB2B :
+STRUCT
+	{attribute addProperty Name "State"}
+	State AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

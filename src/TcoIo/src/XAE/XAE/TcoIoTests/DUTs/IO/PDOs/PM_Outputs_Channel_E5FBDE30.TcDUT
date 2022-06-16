@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="PM_Outputs_Channel_E5FBDE30" Id="{55f883d5-03b3-0fb8-0380-732aad9a1ead}">
+  <DUT Name="PM_Outputs_Channel_E5FBDE30" Id="{b31c8ac4-0c68-0406-0634-6e31c0b13cd7}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3403-0000-0023'}
 {attribute addProperty BoxType "EL3403-0000-0023"}
 {attribute addProperty Id "IndexAT %Q*USINT1"}
 {attribute addProperty CRC "3858488880"}
 {attribute addProperty Size "1"}
-TYPE PM_Outputs_Channel_E5FBDE30 :
+TYPE PM_Outputs_Channel_E5FBDE30 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
 	{attribute addProperty Name "Index"}
 	Index AT %Q* : USINT;
