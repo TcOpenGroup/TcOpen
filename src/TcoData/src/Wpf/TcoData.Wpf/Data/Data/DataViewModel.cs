@@ -322,7 +322,7 @@ namespace TcoData
         internal void FillObservableRecords()
         {
             ObservableRecords.Clear();
-            DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit);
+            DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit, SearchMode);
             foreach (var item in DataBrowser.Records)
             {
                 ObservableRecords.Add(item);
@@ -532,6 +532,8 @@ namespace TcoData
                 CrudDataObject?.ChangeTracker.StartObservingChanges();
             }
         }
+
+        public eSearchMode SearchMode { get; set; } = eSearchMode.Exact;
 
         public ICommand SendToPlcCommand { get; }
 

@@ -109,7 +109,7 @@ namespace TcOpen.Inxton.Data.Json
             get { return Directory.EnumerateFiles(Location).Count(); }
         }
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
+        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
         {
             var filetered = new List<T>();
 
@@ -122,8 +122,22 @@ namespace TcOpen.Inxton.Data.Json
             }
             else
             {
-                var files = Directory.EnumerateFiles(this.Location).Where(p => p.Contains(identifier));
+                IEnumerable<string> files;
 
+                switch (searchMode)
+                {                   
+                    case eSearchMode.StartsWith:
+                        files = Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.StartsWith(identifier));
+                        break;
+                    case eSearchMode.Contains:
+                        files = Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.Contains(identifier));
+                        break;
+                    case eSearchMode.Exact:
+                    default:
+                        files = Directory.EnumerateFiles(this.Location).Select(p => new FileInfo(p)).Where(p => p.Name == identifier).Select(p => p.FullName);
+                        break;
+                }
+                
                 foreach (var item in files)
                 {
                     filetered.Add(this.Load(new FileInfo(item).Name, typeof(T)));

@@ -40,7 +40,7 @@ namespace TcOpen.Inxton.Data
         void Delete(string identifier);
         bool Exists(string identifier);
         long FilteredCount(string id);
-        IEnumerable<T> GetRecords(string identifier = "*", int limit = 100, int skip = 0);
+        IEnumerable<T> GetRecords(string identifier = "*", int limit = 100, int skip = 0, eSearchMode searchMode = eSearchMode.Exact);
         T Read(string identifier);
         void Update(string identifier, T data);
         OnCreateDelegate<T> OnCreate { get; set; }
