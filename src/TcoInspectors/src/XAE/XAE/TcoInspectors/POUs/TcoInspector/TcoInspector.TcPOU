@@ -18,7 +18,7 @@ VAR
 	_inspectorTask : TcoInspectorTask(THIS^);
 	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadowerInterface")]}	
 	_coordinator    : TcoCore.ITcoCoordinator;
-	{attribute 'hide'}		
+	{attribute 'hide'}	
 	_isOverInspected : BOOL;
 	{attribute 'hide'}	
 	_tierUpdateOverall : TcoCore.TcoTier(THIS^);	
@@ -92,6 +92,24 @@ END_IF;
 CarryOn := THIS^.Done;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="CommonData" Id="{36fa2ba8-4056-0778-188a-b4cd0d458287}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets common data settings of inspectors.
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ABSTRACT CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
+      <Get Name="Get" Id="{0667236f-af28-0f5f-0024-364977840d88}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Coordinator" Id="{d6c5d29a-186c-0f57-2b81-a21c82deb947}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -158,7 +176,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[//// Hate to do this guys but I get compile error, seems to be a bug in tc
-//SUPER^.FB_init(bInitRetains := bInitRetains, bInCopyCode := bInCopyCode, ParentObject := ParentObject);]]></ST>
+//]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsOverinspected" Id="{aad1e11e-ec79-08e0-1e07-69f2014dc971}">

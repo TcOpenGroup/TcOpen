@@ -5,6 +5,7 @@ using System.Windows;
 using TcOpen.Inxton.Security;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Local.Security.Wpf;
+using TcOpen.Inxton.Local.Security.Readers;
 
 namespace integration.Security.Wpf.netcore
 {
@@ -25,13 +26,15 @@ namespace integration.Security.Wpf.netcore
             var userName = "Admin";
             var password = "AdminPassword";
             var roles = new string[] { "Administrator" };
-            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()));
+            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()) { CanUserChangePassword = true });
 
             userName = "Operator";
             password = "OperatorPassword";
             roles = new string[] { "Operator" };
 
-            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()));
+            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()) { CanUserChangePassword = true });
+
+            authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3");
 
             authService.DeAuthenticateCurrentUser();
 

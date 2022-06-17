@@ -20,7 +20,7 @@ TcOpen aims to provide standard classes to start building any **real deployable 
 
 The software in industrial automation developed historically on a very different trajectory than traditional software. We introduce modern software development practices to the PLC world so developers can shift from low-value work to high-value work. Open-source offers a solid ground upon which many can build and bring ideas from all over the world. 
 
-TcOpen is **object oriented** framework capitalizing on **OOP** extension as defined in [IEC 61131-3](https://webstore.iec.ch/publication/4552) **ST** (structured text) and implemented by CoDeSys and [TwinCAT3](https://www.beckhoff.com/en-us/products/automation/twincat/te1xxx-twincat-3-engineering/te1000.html). 
+TcOpen is an **object oriented** framework capitalizing on **OOP** extension as defined in [IEC 61131-3](https://webstore.iec.ch/publication/4552) **ST** (structured text) and implemented by CoDeSys and [TwinCAT3](https://www.beckhoff.com/en-us/products/automation/twincat/te1xxx-twincat-3-engineering/te1000.html). 
 
 TwinCAT turns almost any compatible PC into a real-time controller with a multi-PLC system, NC axis control, programming environment, and operating station. TwinCAT replaces conventional PLC and NC/CNC, controllers.
 
@@ -33,7 +33,7 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 
 ![](assets/readme/TcOpen101-2.gif)
 
-- [Logging plc events and any user action](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoLogger.html)
+- [Logging plc events and user action](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoLogger.html)
 
 ![](assets/readme/TcOpen101-1.gif)
 
@@ -70,16 +70,16 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 - [MQTT Sink](https://docs.tcopengroup.org/api/TcOpen.Inxton/TcOpen.Inxton.Logging/Serilog.Sinks.html) for TcoLogging.
 - [MQTT Change observer](https://github.com/TcOpenGroup/TcOpen/tree/dev/src/TcOpen.Inxton/src/TcOpen.Inxton.Mqtt)
 
-**Full list of accessible features is kept up to date [here](https://docs.tcopengroup.org/articles/intro.html#features).**
+**The full list of accessible features is kept up to date [here](https://docs.tcopengroup.org/articles/intro.html#features).**
 
-# Where are we
+# Where we are
 
 As you may notice, TcOpen is under development, and no stable version has been released yet. We expect the first release to see the light of the day in 2022. TcOpen aims to be a continuous development project in which we will be delivering small incremental features frequently. Substantial parts of the framework are being used by different companies and individuals at this time.
 
 
 ## Maturity of the framework
 
-At this time we channel our efforts into building and testing of the PLC libraries and WPF GUI and extensions based on Inxton platform. You will also find Blazor based components in this repository. Blazor is considered experimental (by Inxton) as well as by TcOpen. There is a limited effort we put into the Blazor platform; however, we believe it to be the future of TcOpen UI.
+At this time we channel our efforts into the building and testing of the PLC libraries, WPF GUI and extensions based on the Inxton platform. You will also find Blazor based components in this repository. Blazor is considered to be experimental by both Inxton and TcOpen. So far the resources dedicated to the Blazor platform has been limited; however, we believe it to be the future of TcOpen UI in the long run.
 
 
 ## The role of Inxton.Vortex.Framework (IVF)
@@ -95,26 +95,27 @@ Inxton and MTS teams will contribute to the development of PLC libraries. There 
 
 # Documentation
 
-There is a separate documentation repository for this project [here](https://github.com/TcOpenGroup/TcOpen.Documentation). In this moment we use [docfx](https://github.com/dotnet/docfx) to generate documentation. The ```docfx``` uses IVF twin objects of PLC code to generate the API documentation. There is room for improvement in generated documentation; we do plan - in the course of the development of TcOpen - to improve that. 
+There is a separate documentation repository for this project [here](https://github.com/TcOpenGroup/TcOpen.Documentation). At this moment we use [docfx](https://github.com/dotnet/docfx) to generate documentation. The ```docfx``` uses IVF twin objects of PLC code to generate the API documentation. There is room for improvement in generated documentation; we do plan - in the course of the development of TcOpen - to improve that. 
 
 ## Working with TcOpen
 
 ### If you just want to use TcOpen 
 
-If you want to use TcOpen in your application, you may prefer using the libraries delivered as NuGet packages instead of this repository. Have a look at this [video playlist](https://www.youtube.com/playlist?list=PL-0IxLiTmB6IMKKtGn5bDb9e35CSZZaB7) where you can find more about the structure of the TcOpen application.
+If you want to use TcOpen in your application you may prefer using the libraries delivered as NuGet packages instead of this repository. Have a look at this [video playlist](https://www.youtube.com/playlist?list=PL-0IxLiTmB6IMKKtGn5bDb9e35CSZZaB7) where you can find more about the structure of the TcOpen application.
 
 ### Contributing
 
 Details about contribution [here](CONTRIBUTING.md)
 
+----------------------------------
 #### Prerequisites
-
 1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
 1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.17+
 1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
-1. [.NET5 developer pack](https://dotnet.microsoft.com/download/dotnet/5.0) (5.0.7)
+1. [.NET6 developer pack](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) (6.0.5)
 1. [Get free inxton developer licence](https://inxton.com/register)
 1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
+----------------------------------
 
 **Clone this repository**
 

@@ -22,11 +22,11 @@ namespace TcOpen.Inxton.Data
 
         protected IRepository<T> Repository { get; set; }        
 
-        public void Filter(string identifier, int limit = 10, int skip = 0)
+        public void Filter(string identifier, int limit = 10, int skip = 0, eSearchMode searchMode = eSearchMode.Exact)
         {
             Records.Clear();
 
-            foreach (var item in this.Repository.GetRecords(identifier, limit: limit, skip: skip))
+            foreach (var item in this.Repository.GetRecords(identifier, limit: limit, skip: skip, searchMode))
             {
                 this.Records.Add(item);
             }
@@ -363,7 +363,7 @@ namespace TcOpen.Inxton.Data
     public interface IDataBrowser
     {
         IList<object> Records { get; }
-        void Filter(string identifier, int limit, int skip);
+        void Filter(string identifier, int limit, int skip, eSearchMode searchMode);
         object FindById(string id);
         IEnumerable<object> FindByCreatedRange(DateTime start, DateTime end);
         IEnumerable<object> FindByModifiedRange(DateTime start, DateTime end);

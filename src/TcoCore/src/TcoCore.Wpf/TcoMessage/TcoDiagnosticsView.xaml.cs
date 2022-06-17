@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using TcOpen.Inxton;
 using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace TcoCore
@@ -22,12 +23,16 @@ namespace TcoCore
         {
             if (messageUpdateTimer == null)
             {
-                messageUpdateTimer = new System.Timers.Timer(2500);
+                messageUpdateTimer = new System.Timers.Timer(updateRate);
                 messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
                 messageUpdateTimer.AutoReset = true;
                 messageUpdateTimer.Enabled = true;
             }
         }
+
+        float updateRate = 500;
+        int updateCount = 0;
+
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             UpdateMessages();
@@ -37,6 +42,7 @@ namespace TcoCore
 
         private void UpdateMessages()
         {
+           
             var inSight = false;
             TcoDiagnosticsViewModel MessageHandler = null;
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
@@ -56,8 +62,18 @@ namespace TcoCore
 
             if (inSight && isAutoUpdate)
             {
+                var sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+                
                 MessageHandler?.UpdateMessages();
+
+                sw.Stop();
+                updateRate = (updateRate + sw.ElapsedMilliseconds) / ++updateCount;
+                messageUpdateTimer.Interval = updateRate <= 300 ? 300 : (updateRate * 1.5) + 100;               
             }
+
+          
+
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

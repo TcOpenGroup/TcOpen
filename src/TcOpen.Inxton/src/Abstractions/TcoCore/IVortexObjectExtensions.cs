@@ -114,12 +114,12 @@ namespace TcoCore
         /// <typeparam name="T"></typeparam>
         /// <param name="obj">Searched object</param>       
         /// <returns>Children of this object.</returns>
-        public static IEnumerable<T> GetChildren<T>(this IVortexObject obj) where T : IVortexObject
+        public static IEnumerable<T> GetChildren<T>(this IVortexObject obj) 
         {
             var children = obj.GetChildren().Where(p => p is T).Select(p => (T)p);
             return children;
         }
-
+        
         public static IEnumerable<T> GetChildren<T>(this IVortexObject obj, IEnumerable<object> excluding) where T : IVortexObject
         {
             if (excluding == null)

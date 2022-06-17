@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="InfoData_23CBA837" Id="{ba601eac-cc60-0d8a-1e2a-a48c0d25e71e}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6002-0000-0019'}
+{attribute addProperty BoxType "EL6002-0000-0019"}
+{attribute addProperty Id "AdsAddrAT %I*TcoIo.TcoAmsAddr0StateAT %I*UINT2"}
+{attribute addProperty CRC "600549431"}
+{attribute addProperty Size "2"}
+TYPE InfoData_23CBA837 :
+STRUCT
+	{attribute addProperty Name "AdsAddr"}
+	AdsAddr AT %I* : TcoAmsAddr;
+	{attribute addProperty Name "State"}
+	State AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

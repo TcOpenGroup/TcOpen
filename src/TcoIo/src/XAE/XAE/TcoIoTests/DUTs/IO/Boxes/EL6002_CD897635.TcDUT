@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
+  <DUT Name="EL6002_CD897635" Id="{c2ec97a9-c94c-00fd-0d04-03d46192c8cf}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6002-0000-0019'}
+{attribute addProperty BoxType "EL6002-0000-0019"}
+{attribute addProperty Id "COM_TxPDO_Map_Inputs_Channel_1AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_TxPDO_Map_Inputs_Channel_2AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_RxPDO_Map_Outputs_Channel_1AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27COM_RxPDO_Map_Outputs_Channel_2AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "3448337973"}
+{attribute addProperty Size "118"}
+TYPE EL6002_CD897635 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_1"}
+	COM_TxPDO_Map_Inputs_Channel_1 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
+	{attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_2"}
+	COM_TxPDO_Map_Inputs_Channel_2 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
+	{attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_1"}
+	COM_RxPDO_Map_Outputs_Channel_1 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
+	{attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_2"}
+	COM_RxPDO_Map_Outputs_Channel_2 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_23CBA837;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

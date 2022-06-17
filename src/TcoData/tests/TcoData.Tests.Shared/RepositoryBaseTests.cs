@@ -454,6 +454,29 @@ namespace TcoDataUnitTests
             testObject.AllTypes.AssertEquality(actual.AllTypes);
         }
 
+        [Test()]
+        public void GetRecordsNviTest()
+        {
+            repository.Create("f123", new DataTestObject());
+            repository.Create("f1234", new DataTestObject());
+            repository.Create("abc", new DataTestObject());
+            repository.Create("abcd", new DataTestObject());
+            repository.Create("abcdf123", new DataTestObject());
+
+
+            Assert.AreEqual(0, repository.GetRecords("f12", searchMode : eSearchMode.Exact).Count());
+            Assert.AreEqual(1, repository.GetRecords("f123", searchMode: eSearchMode.Exact).Count());
+            Assert.AreEqual(1, repository.GetRecords("abc", searchMode: eSearchMode.Exact).Count());
+
+            Assert.AreEqual(1, repository.GetRecords("f1234", searchMode: eSearchMode.StartsWith).Count());
+            Assert.AreEqual(2, repository.GetRecords("f12", searchMode: eSearchMode.StartsWith).Count());
+
+            Assert.AreEqual(0, repository.GetRecords("z", searchMode: eSearchMode.Contains).Count());
+            Assert.AreEqual(3, repository.GetRecords("f123", searchMode: eSearchMode.Contains).Count());
+
+
+        }
+
         [Test(), Order(1000)]
         public void DateTimeProviderTest()
         {

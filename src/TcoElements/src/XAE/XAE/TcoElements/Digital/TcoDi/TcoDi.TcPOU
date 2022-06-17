@@ -48,7 +48,7 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	_signalInfo := THIS^.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+	_signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
 	_signal := inoSignal;	
 END_IF;	
 

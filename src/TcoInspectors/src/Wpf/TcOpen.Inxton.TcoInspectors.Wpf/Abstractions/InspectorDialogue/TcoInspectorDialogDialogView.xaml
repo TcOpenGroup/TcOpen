@@ -7,6 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tcoinspectors="clr-namespace:TcoInspectors;assembly=TcoInspectorsConnector"
+    xmlns:s="clr-namespace:TcOpen.Inxton.TcoInspectors.Wpf.Properties"
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:vortexs="http://vortex.security.mts/xaml"
     Width="Auto"
@@ -42,7 +43,7 @@
                     Margin="10"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                    Text="Inspection failed, you will need to decide what's next..." />
+                    Text="{x:Static s:strings.InspectionFailedYouWillNeedToDecideWhatSNext}" />
                 <TextBlock
                     Margin="10"
                     HorizontalAlignment="Center"
@@ -58,9 +59,9 @@
                 </WrapPanel.Resources>
                 <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="Retry" />
                 <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="Terminate" />
-                <!--<vortexs:PermissionBox Permissions="can_override_test">-->
-                <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="Override" />
-                <!--</vortexs:PermissionBox>-->
+                <vortexs:PermissionBox Permissions="can_override_inspection">
+                    <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="Override" />
+                </vortexs:PermissionBox>
             </WrapPanel>
             <Expander
                 Grid.Row="2"               

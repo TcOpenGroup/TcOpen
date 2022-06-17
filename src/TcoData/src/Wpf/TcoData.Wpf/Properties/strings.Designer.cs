@@ -169,6 +169,15 @@ namespace TcOpen.Inxton.Data.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Criteria:.
+        /// </summary>
+        public static string Criteria {
+            get {
+                return ResourceManager.GetString("Criteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DATA.
         /// </summary>
         public static string Data {
@@ -552,6 +561,15 @@ namespace TcOpen.Inxton.Data.Wpf.Properties {
         public static string PeripheryDetailsView_FullName {
             get {
                 return ResourceManager.GetString("PeripheryDetailsView_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per page:.
+        /// </summary>
+        public static string PerPage {
+            get {
+                return ResourceManager.GetString("PerPage", resourceCulture);
             }
         }
         

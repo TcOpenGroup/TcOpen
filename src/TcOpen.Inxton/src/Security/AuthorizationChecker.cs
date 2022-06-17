@@ -30,7 +30,9 @@ namespace TcOpen.Inxton.Local.Security
         }
 
         public static bool HasAuthorization(string roles, Action notAuthorizedAction = null)
-        {            
+        {
+            notAuthorizedAction = notAuthorizedAction == null ? TcOpen.Inxton.TcoAppDomain.Current.LoginAction : notAuthorizedAction;
+
             if (!IsAuthorized(roles) && notAuthorizedAction != null)
             {
                 try

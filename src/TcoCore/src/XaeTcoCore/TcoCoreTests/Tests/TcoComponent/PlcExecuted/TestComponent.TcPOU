@@ -10,7 +10,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_signalInfo := THIS^.GetSignalInfo(SIZEOF(_signal), ADR(_signal));]]></ST>
+      <ST><![CDATA[_signalInfo.GetSignalInfo(SIZEOF(_signal), ADR(_signal));]]></ST>
     </Implementation>
     <Method Name="Restore" Id="{6ab39057-f575-055f-1d06-109a6dd5fc68}">
       <Declaration><![CDATA[(*~

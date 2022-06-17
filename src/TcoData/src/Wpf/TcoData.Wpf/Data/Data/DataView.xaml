@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:TcOpen.Inxton.Data.Wpf.Properties"
     xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:data="clr-namespace:TcOpen.Inxton.Data;assembly=TcOpen.Inxton.Abstractions"
     xmlns:wpf="clr-namespace:TcoData"
     x:Name="DataRoot"
     d:DesignHeight="1080"
@@ -13,17 +15,7 @@
     Background="{DynamicResource Surface}"
     IsVisibleChanged="UserControl_IsVisibleChanged"
     mc:Ignorable="d">
-    <!--  xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  -->
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <vortex:RenderContentConverter x:Key="RenderContentConverter" />
-    </UserControl.Resources>
-
-    <!--<d:UserControl.DataContext>
-        <VortexCore:DataViewModel />
-    </d:UserControl.DataContext>-->
-
-
+    
     <Grid x:Name="RootContainer">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -54,7 +46,26 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-    
+                            <StackPanel
+                                    Margin="20,0,0,0"
+                                    x:Name="dropdown"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+
+                                <TextBlock
+                                        Margin="10,0,10,0"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Static p:strings.PerPage}" />
+                                <ComboBox
+                                         Margin="10,0,10,0"
+                                        MinWidth="50"
+                                        x:Name="PerPageFilterComboBox"
+                                        VerticalAlignment="Center"
+                                        Background="{Binding ElementName=DataGrid, Path=Background}"
+                                        ItemsSource="{Binding PerPageFilter}"
+                                        SelectedItem="{Binding Limit, Mode=TwoWay}" />
+                            </StackPanel>
                             <UniformGrid Grid.Column="1" Columns="3" HorizontalAlignment="Center" Margin="0,5" VerticalAlignment="Center">
 
                                 <Button Command="{Binding PageDownCommand}" Content="&lt;&lt;"  Margin=" 5,0"/>
@@ -68,41 +79,38 @@
                                 Margin="0,0,0,0"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-                                <StackPanel
-                                    x:Name="dropdown"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Orientation="Horizontal">
-                                    <TextBlock
-                                        Margin="10,0,10,0"
-                                        VerticalAlignment="Center"
-                                        Text="" />
-                                    <ComboBox
-                                        x:Name="PerPageFilterComboBox"
-                                        VerticalAlignment="Center"
-                                        Background="{Binding ElementName=DataGrid, Path=Background}"
-                                        ItemsSource="{Binding PerPageFilter}"
-                                        SelectedItem="{Binding Limit, Mode=TwoWay}" />
-                                </StackPanel>
+                                
                                 <StackPanel
                                     Margin="0,0,10,0"
                                     HorizontalAlignment="Right"
                                     Orientation="Horizontal">
+                                    <StackPanel.Resources>
+                                        <ObjectDataProvider x:Key="searchModeFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                                            <ObjectDataProvider.MethodParameters>
+                                                <x:Type TypeName="data:eSearchMode"/>
+                                            </ObjectDataProvider.MethodParameters>
+                                        </ObjectDataProvider>
+                                    </StackPanel.Resources>
+                                    <TextBlock Style="{DynamicResource MaterialDesignCaptionTextBlock}" Margin="10,0,0,0" VerticalAlignment="Center" Text="{x:Static p:strings.Criteria}"></TextBlock>
+                                    <ComboBox              
+                                         Margin="10,0,10,0"
+                                        Width="100"
+                                        Background="{Binding ElementName=DataGrid, Path=Background}"
+                                        ItemsSource="{Binding Source={StaticResource searchModeFromEnum}}"
+                                        SelectedItem="{Binding SearchMode, Mode=TwoWay}"/>
                                     <TextBox
-                                        x:Name="FilterField"
+                                        x:Name="FilterField"                                        
                                         Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
                                         MinWidth="200"
                                         Margin="0"
-                                        VerticalContentAlignment="Center"
-                                        BorderBrush="{DynamicResource OnSecondary}"
+                                        VerticalContentAlignment="Center"                                        
+                                        BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}"
                                         Text="{Binding FilterByID}" />
                                     <Button
                                         Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
                                         Margin="2,0"
                                         Command="{Binding FindByCriteriaCommand}"
-                                        Content="🔍">
-
-                                    </Button>
+                                        Content="🔍"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -112,8 +120,6 @@
                             <ColumnDefinition Width="1787*" />
                             <ColumnDefinition Width="127*" />
                         </Grid.ColumnDefinitions>
-
-                        <!--  CellStyle="{DynamicResource TouchCell}"  -->
                         <DataGrid
                             x:Name="DataGrid"
                             Grid.Row="0"
@@ -159,8 +165,8 @@
                                     x:Name="EditData"
                                     Margin="10"
                                     IsVisibleChanged="ControlDataVisibilityChanged"                                    
-                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}">
-                                    <!--<vortex:RenderableContentControl DataContext="{Binding DataExchange._data}" PresentationType="ShadowControl"/>-->
+                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}"
+                                    Grid.IsSharedSizeScope="True">
                                 </ContentControl>
                             </GroupBox>
                             <GroupBox
@@ -169,7 +175,7 @@
                                 Header="{Binding DataExchange._data._EntityId.Shadow}"
                                 IsVisibleChanged="DisplayDataVisibilityChanged"
                                 Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-                                <ContentControl x:Name="DisplayData"/>
+                                <ContentControl x:Name="DisplayData" Grid.IsSharedSizeScope="True"/>
                             </GroupBox>
                         </Grid>
                         <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=NewCopy}">

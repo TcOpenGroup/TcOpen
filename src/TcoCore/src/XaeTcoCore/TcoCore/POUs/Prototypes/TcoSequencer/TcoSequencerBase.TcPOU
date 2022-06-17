@@ -257,12 +257,7 @@ VAR_INPUT
 	AutoRestoreMode : eRestoreMode; 
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//SUPER^.FB_init(bInitRetains := bInitRetains, 
-//			   bInCopyCode := bInCopyCode, 
-//               ParentObject := ParentObject, 
-//			   ParentStruct := ParentStructure,
-//               AutoRestoreMode := AutoRestoreMode);
-]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="i_Close" Id="{6f2b0e9e-4363-07a8-0cc7-9827a477dd85}">
@@ -343,7 +338,7 @@ Context.Environment.Messaging.Resume();]]></ST>
 METHOD PROTECTED FINAL i_CompleteStep : ITcoObjectRestorer
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+        <ST><![CDATA[Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsTrace();
 
 _theOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep + 1;	
 _currentStep.Status := eStepStatus.Done;
@@ -460,7 +455,7 @@ IF(inRequestedStepID <> (MinStepID-1)) THEN
 	END_IF
 END_IF;	
 
-Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+Messenger.Build().Append('Leaving step id: ').AppendAny(_currentStep.ID).Append(' [').Append(_currentStep.Description).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsTrace();
 Messenger.Build().Append('Reqesting step id jump to: ').AppendAny(inRequestedStepID).As().AsTrace();
 
 i_RequestStep := THIS^;]]></ST>
@@ -959,6 +954,7 @@ _ChangeStepOrderFrom := 0;
 _ChangeStepOrderTo := 0;
 
 _StepTimer(IN:= FALSE);
+_cycleTimer(IN:= FALSE);
 
 IF _modeController.Mode = eSequencerMode.Invalid THEN
 	_modeController.Mode := eSequencerMode.CyclicMode;
@@ -1138,7 +1134,7 @@ IF(_requestStepActive) AND (_requestedStepId = inStepID) AND (_theOrderOfTheCurr
 	StepChanged(_requestedStepId);
 	
 	IF(inEnabled) THEN
-		Messenger.Build().Append('Entering step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+		Messenger.Build().Append('Entering step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsTrace();
 	END_IF
 	
 	//In case of call Restore() in OnStateChange(), this method must exits
@@ -1330,7 +1326,7 @@ IF(_isInOrderOfExecution  AND NOT(_currentStep.Status = eStepStatus.Error)) THEN
 		
 		_currentStep.Status := eStepStatus.Running; 
 		_currentStep.Order := _theOrderOfTheCurrentlyExecutedStep;
-		Messenger.Build().Append('Entering step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsInfo();
+		Messenger.Build().Append('Entering step id: ').AppendAny(inStepID).Append(' [').Append(inStepDescription).Append('] : ').AppendAny(_theOrderOfTheCurrentlyExecutedStep).As().AsTrace();
 	END_IF
 END_IF
 //-----------------------------------------------
