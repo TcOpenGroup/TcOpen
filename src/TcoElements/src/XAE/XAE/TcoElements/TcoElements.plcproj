@@ -44,6 +44,24 @@
     <Compile Include="Digital\TcoDo\TcoDo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Analog\TcoAi\TcoAi.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Analog\TcoAi\TcoAiConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Analog\TcoAi\TcoAiStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Analog\TcoAo\TcoAo.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Analog\TcoAo\TcoAoConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Analog\TcoAo\TcoAoStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +73,9 @@
     <Folder Include="Digital" />
     <Folder Include="Digital\TcoDo" />
     <Folder Include="Digital\TcoDi" />
+    <Folder Include="Analog" />
+    <Folder Include="Analog\TcoAo" />
+    <Folder Include="Analog\TcoAi" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>

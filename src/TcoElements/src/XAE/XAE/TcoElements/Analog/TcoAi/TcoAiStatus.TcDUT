@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="TcoAiStatus" Id="{4770b4bd-629a-0b04-102f-20faa737d5b4}">
+    <Declaration><![CDATA[(*~
+<docu>
+	<summary>
+		`TcoAi` status structure.								
+	</summary>				
+</docu>	
+~*)
+TYPE
+    TcoAiStatus :
+    STRUCT
+		(*~
+		<docu>
+			<summary>
+				Absolute range of raw value.								
+			</summary>				
+		</docu>	
+		~*)
+        {attribute addProperty Name "<#Raw range#>"}
+        RawRange : REAL;
+		(*~
+		<docu>
+			<summary>
+				Absolute range of real value.								
+			</summary>				
+		</docu>	
+		~*)
+        {attribute addProperty Name "<#Real range#>"}
+        RealRange : REAL;
+		(*~
+		<docu>
+			<summary>
+				Current real value.								
+			</summary>				
+		</docu>	
+		~*)
+        {attribute addProperty Name "<#Scaled value#>"}
+        Scaled : REAL;
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
