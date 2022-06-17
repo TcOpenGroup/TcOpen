@@ -73,6 +73,7 @@ namespace TcoData
             this.FillObservableRecords();
         }
 
+#if NET5_0_OR_GREATER
         private void RequeryCommands()
         {          
             ((RelayCommand)StartCreateNewCommand).RaiseCanExecuteChanged();
@@ -94,6 +95,7 @@ namespace TcoData
             ((RelayCommand)ExportCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ImportCommand).RaiseCanExecuteChanged();
         }
+#endif
 
         private void LogCommand(string commandName) => TcoAppDomain
             .Current?
@@ -327,6 +329,12 @@ namespace TcoData
             {
                 ObservableRecords.Add(item);
             }
+
+            filteredCount = this.DataBrowser.FilteredCount(this.FilterByID);
+
+#if NET5_0_OR_GREATER
+                    this.RequeryCommands();
+#endif
         }
         void LoadFromPlc()
         {
@@ -402,7 +410,9 @@ namespace TcoData
             set
             {                         
                 SetProperty(ref mode, value);
+#if NET5_0_OR_GREATER
                 this.RequeryCommands();
+#endif
             }
         }
 
@@ -432,6 +442,10 @@ namespace TcoData
                     SetProperty(ref limit, 100);
 
                 this.OnPropertyChanged(nameof(Pages));
+
+#if NET5_0_OR_GREATER
+                    this.RequeryCommands();
+#endif
             }
         }
 
@@ -453,11 +467,12 @@ namespace TcoData
             }
         }
 
+        private long filteredCount;
+
         public long Pages
         {
             get
             {
-                var filteredCount = this.DataBrowser.FilteredCount(this.FilterByID);
                 var divided = filteredCount * 1.0 / Limit * 1.0;
                 var ceiling = Math.Ceiling(divided);
                 return (long)ceiling;
@@ -484,7 +499,9 @@ namespace TcoData
                 {
                     return;
                 }
+#if NET5_0_OR_GREATER
                 RequeryCommands();
+#endif
                 SetProperty(ref recordIdentifier, value);
             }
         }
@@ -523,7 +540,9 @@ namespace TcoData
 
                 if (value != null)
                 {
+#if NET5_0_OR_GREATER
                     this.RequeryCommands();
+#endif
                     ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
                     ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainTcoEntity)selectedRecord).Changes;
                     Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
