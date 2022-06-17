@@ -91,11 +91,26 @@ namespace TcOpen.Inxton.Data.MongoDb
 #pragma warning restore CS0618 
 
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
+        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
         {
             var filetered = new List<T>();
-            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{identifier}", ""));
+            FilterDefinition<T> filter;
 
+            switch (searchMode)
+            {             
+                case eSearchMode.StartsWith:
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{identifier}", ""));
+                    break;
+                case eSearchMode.Contains:
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{identifier}", ""));
+                    break;
+                case eSearchMode.Exact:                    
+                default:
+                    filter = Builders<T>.Filter.Eq(p => p._EntityId, identifier);
+                    break;
+            }
+
+            
             if (identifier == "*" || string.IsNullOrWhiteSpace(identifier))
             {
                 return collection

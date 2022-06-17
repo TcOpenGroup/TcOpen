@@ -48,7 +48,7 @@ namespace TcoData
             DeleteCommand = new RelayCommand(p => Delete(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(DeleteCommand)));
             EditCommand = new RelayCommand(p => StartEdit(), _ => this.Mode == ViewMode.Display && SelectedRecord != null, () => LogCommand(nameof(EditCommand)));
             CancelEditCommand = new RelayCommand(p => this.CancelEdit(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(CancelEditCommand)));
-            FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(FindByCriteriaCommand)));
+            FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
             StartCreateCopyOfExisting = new RelayCommand(p => this.StartCreatingRecordCopy(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateCopyOfExisting)));
             CreateCopyOfExistingCommand = new RelayCommand(p => this.CreateCopyOfExisting(), _ => true, () => LogCommand(nameof(CreateCopyOfExistingCommand)));
             SendToPlcCommand = new RelayCommand(p => SendToPlc(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(SendToPlcCommand)));
@@ -324,7 +324,7 @@ namespace TcoData
         internal void FillObservableRecords()
         {
             ObservableRecords.Clear();
-            DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit);
+            DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit, SearchMode);
             foreach (var item in DataBrowser.Records)
             {
                 ObservableRecords.Add(item);
@@ -551,6 +551,8 @@ namespace TcoData
                 CrudDataObject?.ChangeTracker.StartObservingChanges();
             }
         }
+
+        public eSearchMode SearchMode { get; set; } = eSearchMode.Exact;
 
         public ICommand SendToPlcCommand { get; }
 
