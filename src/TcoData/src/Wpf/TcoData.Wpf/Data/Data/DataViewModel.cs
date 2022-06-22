@@ -48,7 +48,7 @@ namespace TcoData
             DeleteCommand = new RelayCommand(p => Delete(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(DeleteCommand)));
             EditCommand = new RelayCommand(p => StartEdit(), _ => this.Mode == ViewMode.Display && SelectedRecord != null, () => LogCommand(nameof(EditCommand)));
             CancelEditCommand = new RelayCommand(p => this.CancelEdit(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(CancelEditCommand)));
-            FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(FindByCriteriaCommand)));
+            FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
             StartCreateCopyOfExisting = new RelayCommand(p => this.StartCreatingRecordCopy(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateCopyOfExisting)));
             CreateCopyOfExistingCommand = new RelayCommand(p => this.CreateCopyOfExisting(), _ => true, () => LogCommand(nameof(CreateCopyOfExistingCommand)));
             SendToPlcCommand = new RelayCommand(p => SendToPlc(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(SendToPlcCommand)));
@@ -73,6 +73,7 @@ namespace TcoData
             this.FillObservableRecords();
         }
 
+#if NET5_0_OR_GREATER
         private void RequeryCommands()
         {          
             ((RelayCommand)StartCreateNewCommand).RaiseCanExecuteChanged();
@@ -94,6 +95,7 @@ namespace TcoData
             ((RelayCommand)ExportCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ImportCommand).RaiseCanExecuteChanged();
         }
+#endif
 
         private void LogCommand(string commandName) => TcoAppDomain
             .Current?
@@ -322,11 +324,17 @@ namespace TcoData
         internal void FillObservableRecords()
         {
             ObservableRecords.Clear();
-            DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit);
+            DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit, SearchMode);
             foreach (var item in DataBrowser.Records)
             {
                 ObservableRecords.Add(item);
             }
+
+            filteredCount = this.DataBrowser.FilteredCount(this.FilterByID);
+
+#if NET5_0_OR_GREATER
+                    this.RequeryCommands();
+#endif
         }
         void LoadFromPlc()
         {
@@ -402,7 +410,9 @@ namespace TcoData
             set
             {                         
                 SetProperty(ref mode, value);
+#if NET5_0_OR_GREATER
                 this.RequeryCommands();
+#endif
             }
         }
 
@@ -432,6 +442,10 @@ namespace TcoData
                     SetProperty(ref limit, 100);
 
                 this.OnPropertyChanged(nameof(Pages));
+
+#if NET5_0_OR_GREATER
+                    this.RequeryCommands();
+#endif
             }
         }
 
@@ -453,11 +467,12 @@ namespace TcoData
             }
         }
 
+        private long filteredCount;
+
         public long Pages
         {
             get
             {
-                var filteredCount = this.DataBrowser.FilteredCount(this.FilterByID);
                 var divided = filteredCount * 1.0 / Limit * 1.0;
                 var ceiling = Math.Ceiling(divided);
                 return (long)ceiling;
@@ -484,7 +499,9 @@ namespace TcoData
                 {
                     return;
                 }
+#if NET5_0_OR_GREATER
                 RequeryCommands();
+#endif
                 SetProperty(ref recordIdentifier, value);
             }
         }
@@ -523,7 +540,9 @@ namespace TcoData
 
                 if (value != null)
                 {
+#if NET5_0_OR_GREATER
                     this.RequeryCommands();
+#endif
                     ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
                     ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainTcoEntity)selectedRecord).Changes;
                     Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
@@ -532,6 +551,8 @@ namespace TcoData
                 CrudDataObject?.ChangeTracker.StartObservingChanges();
             }
         }
+
+        public eSearchMode SearchMode { get; set; } = eSearchMode.Exact;
 
         public ICommand SendToPlcCommand { get; }
 

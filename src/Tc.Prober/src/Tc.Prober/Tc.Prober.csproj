@@ -16,6 +16,7 @@
     <PackageIcon>TcOpenLogo128.png</PackageIcon>
     <PackageTags>twincat3 plc unit-testing</PackageTags>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<IsPackable>false</IsPackable>  
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.9-alpha.699" />
