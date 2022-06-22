@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Device_4_EtherCAT_51653040" Id="{26d42310-5456-0669-19c6-0166085a046b}">
+  <DUT Name="Device_4_EtherCAT_C3BCEEFA" Id="{47f28bff-8318-012c-3006-ffa6f2029b6b}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
 {attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
-{attribute addProperty Id "Term_9_EK1100Term_9_EK1100_BC2E3A93380SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
-{attribute addProperty CRC "1365585984"}
+{attribute addProperty Id "Term_9_EK1100Term_9_EK1100_781602EE380SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
+{attribute addProperty CRC "3283939066"}
 {attribute addProperty Size "454"}
-TYPE Device_4_EtherCAT_51653040 :
+TYPE Device_4_EtherCAT_C3BCEEFA EXTENDS EtcMasterBase_62654B43 :
 STRUCT
-	{attribute addProperty Name "Term_9_EK1100"}
+	{attribute addProperty Name "Term 9 (EK1100)"}
 	{attribute addProperty PreviousPort "Device 4 (EtherCAT) : Master"}
-	Term_9_EK1100 : Term_9_EK1100_BC2E3A93;
+	Term_9_EK1100 : Term_9_EK1100_781602EE;
 	{attribute addProperty Name "SyncUnits"}
 	SyncUnits : SyncUnits_13973095;
 	{attribute addProperty Name "Inputs"}

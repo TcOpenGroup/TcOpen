@@ -34,6 +34,9 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Base\EtcMasterBase_62654B43.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\InfoData_2A97D6CF.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -123,6 +126,7 @@
   <ItemGroup>
     <Folder Include="Diagnostics" />
     <Folder Include="Diagnostics\EtherCAT" />
+    <Folder Include="Diagnostics\EtherCAT\MasterDevice\Base" />
     <Folder Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Base" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\InfoData" />

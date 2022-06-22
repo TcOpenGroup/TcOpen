@@ -27,12 +27,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\EtcMasterBase_62654B43TopologyBaseView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveTerminalBase_947E5A46TerminalView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBoxBase_77A0E4A7BoxView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\EtcSlaveBase_82538BE2TopologyBaseView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\EtcSlaveBoxBase_77A0E4A7TopologyBoxView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\EtcSlaveTerminalBase_947E5A46TopologyTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\InputBase\InputBase_8311D824HWDiagStructView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

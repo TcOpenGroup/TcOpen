@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL3011_7A495228" Id="{179ff222-78da-00b5-3313-6e80f86d5214}">
+  <DUT Name="EL3011_7A495228" Id="{edc3ca1c-ccd0-0aa6-2774-fb02653a3bca}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3011-0000-0018'}
 {attribute addProperty BoxType "EL3011-0000-0018"}
+{attribute addProperty Description "EL3011 4Ch. Ana. Input 0-20mA DIFF"}
+{attribute addProperty Physics "KK"}
 {attribute addProperty Id "AI_StandardAT %I*AI_Standard_Channel_4A3944819WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "2051625512"}
 {attribute addProperty Size "13"}

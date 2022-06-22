@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL3024_C6E76B5A" Id="{5c48dc46-e179-0379-1ecf-d342a1279f40}">
+  <DUT Name="EL3024_C6E76B5A" Id="{59e68795-c5a2-0d55-1c61-b94c860a9371}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3024-0000-0018'}
 {attribute addProperty BoxType "EL3024-0000-0018"}
+{attribute addProperty Description "EL3024 4Ch. Ana. Input 4-20mA DIFF"}
+{attribute addProperty Physics "KK"}
 {attribute addProperty Id "AI_Standard_Channel_1AT %I*AI_Standard_Channel_4A3944819AI_Standard_Channel_2AT %I*AI_Standard_Channel_4A3944819AI_Standard_Channel_3AT %I*AI_Standard_Channel_4A3944819AI_Standard_Channel_4AT %I*AI_Standard_Channel_4A3944819WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3337055066"}
 {attribute addProperty Size "40"}
