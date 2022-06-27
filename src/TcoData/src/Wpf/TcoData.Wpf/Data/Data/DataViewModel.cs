@@ -49,6 +49,8 @@ namespace TcoData
             EditCommand = new RelayCommand(p => StartEdit(), _ => this.Mode == ViewMode.Display && SelectedRecord != null, () => LogCommand(nameof(EditCommand)));
             CancelEditCommand = new RelayCommand(p => this.CancelEdit(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(CancelEditCommand)));
             FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
+            FindContainsCommand = new RelayCommand(p => { this.SearchMode = eSearchMode.Contains;  this.FindById(); }, _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
+            CancelFilterCommand = new RelayCommand(p => { this.FilterByID = string.Empty; this.FindById(); }, _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
             StartCreateCopyOfExisting = new RelayCommand(p => this.StartCreatingRecordCopy(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateCopyOfExisting)));
             CreateCopyOfExistingCommand = new RelayCommand(p => this.CreateCopyOfExisting(), _ => true, () => LogCommand(nameof(CreateCopyOfExistingCommand)));
             SendToPlcCommand = new RelayCommand(p => SendToPlc(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(SendToPlcCommand)));
@@ -401,6 +403,11 @@ namespace TcoData
             get; private set;
         }
 
+        public ICommand FindContainsCommand
+        {
+            get; private set;
+        }
+
         public ViewMode Mode
         {
             get
@@ -574,6 +581,7 @@ namespace TcoData
         public bool LoadFromPlcCommandAvailable { get; set; }
         public bool ExportCommandAvailable { get; set; }
         public bool ImportCommandAvailable { get; set; }
+        public RelayCommand CancelFilterCommand { get; }
     }
 
     public interface FunctionAvailability
