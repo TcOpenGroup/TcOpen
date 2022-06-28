@@ -14,9 +14,9 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem Header="Topology renderer">
-            <ScrollViewer>
-                <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"></wpf:TopologyRenderer>
+        <TabItem Header="Topology renderer" >
+            <ScrollViewer HorizontalScrollBarVisibility="Visible"  VerticalScrollBarVisibility="Visible">
+                <wpf:TopologyRenderer PresentationType="TopologyDevice-TopologyBaseM90-TopologyBoxM90-TopologyTerminalM90" DataContext="{Binding TcoIoTests.GVL_iXlinker}"></wpf:TopologyRenderer>
             </ScrollViewer>
         </TabItem>
         <TabItem Header="Topology" >

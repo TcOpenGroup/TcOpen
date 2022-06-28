@@ -5,9 +5,9 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class EtcMasterBase_62654B43TopologyBaseView : UserControl
+    public partial class EtcSlaveTerminalBase_947E5A46TopologyTerminalM90View : UserControl
     {
-        public EtcMasterBase_62654B43TopologyBaseView()
+        public EtcSlaveTerminalBase_947E5A46TopologyTerminalM90View()
         {
             InitializeComponent();
         }

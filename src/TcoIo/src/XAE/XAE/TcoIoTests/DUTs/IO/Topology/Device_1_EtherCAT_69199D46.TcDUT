@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="Device_1_EtherCAT_69199D46" Id="{a63ca4c9-d1db-0630-37de-5ed0cd604642}">
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Device_1_EtherCAT_69199D46" Id="{f2dcad5b-b47b-0738-11de-43ae9b55656b}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
 {attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
 {attribute addProperty Id "Term_1_EK1200Term_1_EK1200_B38DC9A8248SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
 {attribute addProperty CRC "1763286342"}
 {attribute addProperty Size "322"}
-TYPE Device_1_EtherCAT_69199D46 EXTENDS EtcMasterBase_62654B43 :
+{attribute addProperty Name "Device 1 (EtherCAT)"}
+TYPE Device_1_EtherCAT_69199D46 EXTENDS TcoIo.EtcMasterBase_62654B43 :
 STRUCT
 	{attribute addProperty Name "Term 1 (EK1200)"}
 	{attribute addProperty PreviousPort "Device 1 (EtherCAT) : Master"}

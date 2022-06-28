@@ -59,7 +59,6 @@
                     <TextBlock Text="Connected to: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
                     <TextBlock Text="{Binding AttributePreviousPort}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
                 </WrapPanel>
-
                 <!--<vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="TopologyBox"/>-->
             </StackPanel>
         </Border>
