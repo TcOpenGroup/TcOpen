@@ -92,11 +92,13 @@ IF (seq.Step(inStepID := 25,
 		Data.BoltPresenceInspector.Data.RequiredStatus := TRUE;
 		Data.BoltPresenceInspector.Data.PassTime := T#1500MS;    
 		Data.BoltPresenceInspector.Data.FailTime := T#2S;	
+		Data.BoltPresenceInspector.Data.NumberOfAllowedRetries := 2;
 
 		Data.Dimensions.DimX_Inspector.Data.PassTime := T#1500MS;    
 		Data.Dimensions.DimX_Inspector.Data.FailTime := T#2S;
 		Data.Dimensions.DimX_Inspector.Data.RequiredMin := 9.75;
 		Data.Dimensions.DimX_Inspector.Data.RequiredMax := 10.25;
+		Data.Dimensions.DimX_Inspector.Data.NumberOfAllowedRetries := 3;
 		
 		Data.Dimensions.DimY_Inspector.Data.PassTime := T#1500MS;    
 		Data.Dimensions.DimY_Inspector.Data.FailTime := T#2S;
@@ -157,12 +159,15 @@ IF (seq.Step(inStepID := 300,
     GroupInspection
 		.WithCoordinator(seq)
 		.Act()	
+		.NormalizeRetries(Data.Dimensions.DimX_Inspector)
+		.NormalizeRetries(Data.Dimensions.DimY_Inspector)
+		.NormalizeRetries(Data.Dimensions.DimZ_Inspector)
         .Inspect(Data.Dimensions.DimX_Inspector.WithCoordinator(seq).Inspect(Components.DimX_Sensor))
         .Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor))
         .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))	
 		.UpdateComprehensiveResult(Data.OverallResult)		
 		.OnFail()
-		.Terminate();				        		
+		.Dialog(300);				        		
     //--------------------------------------------------------			
 END_IF;
 

@@ -21,7 +21,7 @@
             CornerRadius="2" />
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <UniformGrid  Rows="1">
+            <UniformGrid  Rows="1"  Margin="10,10,0,0">
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" />
                 <vortex:RenderableContentControl DataContext="{Binding _setTask}"></vortex:RenderableContentControl>
                 <vortex:RenderableContentControl DataContext="{Binding _resetTask}"></vortex:RenderableContentControl>

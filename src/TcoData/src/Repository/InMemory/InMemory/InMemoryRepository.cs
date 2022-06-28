@@ -96,14 +96,23 @@ namespace TcOpen.Inxton.Data.InMemory
             get { return this._repository.Count; }
         }
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
+        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
         {
             if(identifier == "*")
             {
                 return this.Records.Select(p => p.Value);
             }
-
-            return this.Records.Where(p => p.Key.Contains(identifier)).Select(p => p.Value);
+            
+            switch (searchMode)
+            {
+                case eSearchMode.StartsWith:
+                    return this.Records.Where(p => p.Key.StartsWith(identifier)).Select(p => p.Value);                    
+                case eSearchMode.Contains:
+                    return this.Records.Where(p => p.Key.Contains(identifier)).Select(p => p.Value);
+                case eSearchMode.Exact:
+                default:
+                    return this.Records.Where(p => p.Key == identifier).Select(p => p.Value);                    
+            }            
         }
 
         protected override long FilteredCountNvi(string id)

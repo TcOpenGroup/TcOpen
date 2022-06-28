@@ -143,7 +143,7 @@
         /// <param name="limit">Limit number of records.</param>
         /// <returns></returns>        
         [Obsolete("Use 'Queryable' instead")]
-        public IEnumerable<T> GetRecords(string identifier, int skip = 0, int limit = 1000)
+        public IEnumerable<T> GetRecords(string identifier, int skip = 0, int limit = 1000, eSearchMode searchMode = eSearchMode.Exact)
         {
             var filetered = new List<T>();
 

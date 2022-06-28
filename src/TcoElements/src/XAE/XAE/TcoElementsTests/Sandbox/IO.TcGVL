@@ -8,6 +8,12 @@ VAR_GLOBAL
 	A1 : InputsBase_8;
 	{attribute addProperty Name "A2"}
 	A2 : OutputsBase_8;
+	
+	{attribute addProperty Name "A3"}
+	A3 : AnalogInputsBase_4;
+	{attribute addProperty Name "A4"}
+	A4 : AnalogOutputsBase_4;
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

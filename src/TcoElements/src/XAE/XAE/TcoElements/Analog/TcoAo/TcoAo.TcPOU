@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="TcoAo" Id="{0c15facf-9c5f-04d3-1f55-4eac4a3427ef}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+				Generic component for continious control of an output.(e. g. Continious analog sensor)								
+		</summary>				
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoAo EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+    (*~
+	<docu>
+		<summary>
+			Controlled signal. Typically an `%Q* : INT` ,`%Q* : DINT` variable. 												
+		</summary>				
+	</docu>	
+	~*)
+    inoSignal : DINT;
+END_VAR
+
+VAR
+    (*~
+	<docu>
+		<summary>
+			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
+		</summary>				
+	</docu>	
+	~*)
+    _signal : DINT;
+END_VAR
+
+VAR
+    {attribute addProperty Name "<#Signal#>"}
+    _signalInfo : TcoCore.TcoSignalInfo;
+
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoAoConfig;
+	{attribute addProperty Name "<#Status#>"}
+    _status : TcoAoStatus;
+
+    _requiredValue : REAL;
+
+    _rawRange  : REAL;
+    _realRange : REAL;
+    _unscaled  : REAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (__ISVALIDREF(inoSignal)) THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+    inoSignal := _signal;
+END_IF;
+
+//------------------unscale-------------------------
+_rawRange  := DINT_TO_REAL(_config.RawHigh - _config.RawLow);
+_realRange := config.RealHigh - Config.RealLow;
+_unscaled  := 0;
+
+IF (_rawRange = 0) THEN
+    Messenger.Error('<#Division by zero: Verify values defined in config! (RawHigh,RawLow)#>');
+    RETURN;
+END_IF
+
+IF (Config.Gain = 0) THEN
+    Messenger.Warning('<#Invalid data: Gain is not defined!#>');
+END_IF
+
+_unscaled := (_requiredValue - _config.RealLow) / _realRange;
+
+_unscaled := _unscaled * _rawRange;
+
+_unscaled := _unscaled + DINT_TO_REAL(_config.RawLow);
+
+_unscaled := _unscaled * _config.Gain + _config.Offset;
+//------------------------------------------------
+
+IF (_unscaled > DINT_TO_REAL(_config.RawHigh)) AND (_config.Gain <> 1 OR _config.Offset <> 0) THEN
+    Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>');
+ELSIF (_unscaled < DINT_TO_REAL(_config.RawLow)) AND (_config.Gain <> 1 OR _config.Offset <> 0) THEN
+    Messenger.Warning('<#Out of boundaries,check correction parameters (Gain,Ofset) in config!#>');
+END_IF
+
+_signal := REAL_TO_DINT(_unscaled);
+
+_status.RawRange  := _rawRange;
+_status.RealRange := _realRange;
+_status.Unscaled  := _unscaled;
+
+IF (__ISVALIDREF(inoSignal)) THEN
+    inoSignal := _signal;
+END_IF;
+]]></ST>
+    </Implementation>
+    <Folder Name="Status" Id="{e69ac82f-2677-0e28-36ee-33773b25ab05}" />
+    <Property Name="Config" Id="{0a398476-d2fa-03c6-1a5a-3c31bd1cd07b}">
+      <Declaration><![CDATA[PROPERTY Config : REFERENCE TO TcoAoConfig]]></Declaration>
+      <Get Name="Get" Id="{fd1e305e-7566-003f-3851-0aca04c93f2c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{4ffc22f1-5c3b-0f10-1db7-3567903d591e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{b627d9fb-1a0c-0d2f-00d4-aea6871df039}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// No implementation needed for this componet.]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{d47accd1-e8c6-0457-2453-60bde752fe4f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{d514b5f9-ade1-0856-12c2-278f02fbb548}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY Status : REFERENCE TO TcoAoStatus]]></Declaration>
+      <Get Name="Get" Id="{f4aa105f-ed66-02ff-2f5d-3b2a2879c8ef}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
