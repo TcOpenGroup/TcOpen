@@ -66,5 +66,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 .Select(x => new RoleData(x.Name))
                 .ToList();
 
+        protected override void OnInitialized()
+        {
+            SelectedUser = _userManager.Users.FirstOrDefault();
+        }
+
     }
 }
