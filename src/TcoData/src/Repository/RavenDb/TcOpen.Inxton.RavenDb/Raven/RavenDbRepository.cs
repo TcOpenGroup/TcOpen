@@ -166,7 +166,7 @@ namespace TcOpen.Inxton.RavenDb
             }
         }
 
-        protected override long FilteredCountNvi(string identifier)
+        protected override long FilteredCountNvi(string identifier, eSearchMode searchMode)
         {
             if (identifier == "*")
             {
@@ -176,9 +176,22 @@ namespace TcOpen.Inxton.RavenDb
             {
                 using (var session = _store.OpenSession())
                 {
-                    return session.Query<T>()
-                        .Search(x => x._EntityId, "*" + identifier + "*")
-                        .Count();
+                    switch (searchMode)
+                    {                     
+                        case eSearchMode.StartsWith:
+                            return session.Query<T>()                             
+                                 .Where(x => x._EntityId.StartsWith(identifier))
+                                 .Count();
+                        case eSearchMode.Contains:                           
+                            return session.Query<T>()                            
+                                .Search(x => x._EntityId, $"*{identifier}*")
+                                .Count();
+                        case eSearchMode.Exact:
+                        default:
+                            return session.Query<T>()                               
+                                   .Where(x => x._EntityId == identifier)
+                                   .Count();
+                    }
                 }
             }
         }

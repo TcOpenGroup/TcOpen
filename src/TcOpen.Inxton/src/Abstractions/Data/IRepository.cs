@@ -27,7 +27,7 @@ namespace TcOpen.Inxton.Data
         void Create(string identifier, object data);
         void Delete(string identifier);
         bool Exists(string identifier);
-        long FilteredCount(string id);
+        long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact);
         dynamic Read(string identifier);
         void Update(string identifier, object data);
     }
@@ -39,7 +39,7 @@ namespace TcOpen.Inxton.Data
         void Create(string identifier, T data);
         void Delete(string identifier);
         bool Exists(string identifier);
-        long FilteredCount(string id);
+        long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact);
         IEnumerable<T> GetRecords(string identifier = "*", int limit = 100, int skip = 0, eSearchMode searchMode = eSearchMode.Exact);
         T Read(string identifier);
         void Update(string identifier, T data);

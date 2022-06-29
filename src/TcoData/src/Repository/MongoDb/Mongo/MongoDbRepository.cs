@@ -71,9 +71,27 @@ namespace TcOpen.Inxton.Data.MongoDb
 
         protected override void DeleteNvi(string identifier) { collection.DeleteOne(p => p._EntityId == identifier); }
 
-        protected override long FilteredCountNvi(string id)
+        protected override long FilteredCountNvi(string id, eSearchMode searchMode)
         {
-            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{id}", ""));
+            var filetered = new List<T>();
+            FilterDefinition<T> filter;
+
+            var filterExpresion = ParseIdentifierForRegularExpression(id);
+
+            switch (searchMode)
+            {
+                case eSearchMode.StartsWith:
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{filterExpresion}", ""));
+                    break;
+                case eSearchMode.Contains:
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{filterExpresion}", ""));
+                    break;
+                case eSearchMode.Exact:
+                default:
+                    filter = Builders<T>.Filter.Eq(p => p._EntityId, id);
+                    break;
+            }
+
             if (id == "*" || string.IsNullOrWhiteSpace(id))
             {
 #pragma warning disable CS0618 // CountDocuments is very slow compared to Count() even though Count is obsolete. 

@@ -112,17 +112,26 @@ namespace TcOpen.Inxton.Data.InMemory
                 case eSearchMode.Exact:
                 default:
                     return this.Records.Where(p => p.Key == identifier).Select(p => p.Value);                    
-            }            
+            }          
         }
 
-        protected override long FilteredCountNvi(string id)
+        protected override long FilteredCountNvi(string id, eSearchMode searchMode)
         {
             if (id == "*")
             {
                 return this.Records.Select(p => true).Count();
             }
 
-            return this.Records.Where(p => p.Key.Contains(id)).LongCount();
+            switch (searchMode)
+            {
+                case eSearchMode.StartsWith:
+                    return this.Records.Where(p => p.Key.StartsWith(id)).LongCount();
+                case eSearchMode.Contains:
+                    return this.Records.Where(p => p.Key.Contains(id)).LongCount();
+                case eSearchMode.Exact:
+                default:
+                    return this.Records.Where(p => p.Key == id).LongCount();
+            }
         }
 
         protected override bool ExistsNvi(string identifier)

@@ -332,7 +332,7 @@ namespace TcoData
                 ObservableRecords.Add(item);
             }
 
-            filteredCount = this.DataBrowser.FilteredCount(this.FilterByID);
+            filteredCount = this.DataBrowser.FilteredCount(this.FilterByID, SearchMode);
 
 #if NET5_0_OR_GREATER
                     this.RequeryCommands();
