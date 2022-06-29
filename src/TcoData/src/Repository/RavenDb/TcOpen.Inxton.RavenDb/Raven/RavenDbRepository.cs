@@ -127,10 +127,10 @@ namespace TcOpen.Inxton.RavenDb
         protected override long CountNvi => _store.Maintenance.Send(new GetStatisticsOperation()).CountOfDocuments;
 
         protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
-        {
+        {           
             using (var session = _store.OpenSession())
             {
-                if (identifier == "*")
+                if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
                 {
                     return session.Query<T>()
                         .Skip(skip)

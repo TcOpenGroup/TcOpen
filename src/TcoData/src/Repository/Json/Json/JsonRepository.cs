@@ -113,7 +113,7 @@ namespace TcOpen.Inxton.Data.Json
         {
             var filetered = new List<T>();
 
-            if (identifier == "*")
+            if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
             {
                 foreach (var item in Directory.EnumerateFiles(this.Location))
                 {

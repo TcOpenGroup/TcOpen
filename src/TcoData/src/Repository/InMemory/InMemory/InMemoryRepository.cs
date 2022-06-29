@@ -98,7 +98,7 @@ namespace TcOpen.Inxton.Data.InMemory
 
         protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
         {
-            if(identifier == "*")
+            if(string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
             {
                 return this.Records.Select(p => p.Value);
             }
