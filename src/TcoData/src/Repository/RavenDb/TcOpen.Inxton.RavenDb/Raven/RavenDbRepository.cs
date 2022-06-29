@@ -130,7 +130,7 @@ namespace TcOpen.Inxton.RavenDb
         {           
             using (var session = _store.OpenSession())
             {
-                if (if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
+                if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
                 {
                     return session.Query<T>()
                         .Skip(skip)

@@ -147,7 +147,7 @@
         {
             var filetered = new List<T>();
 
-            if (if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
+            if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
             {
                 foreach (var item in Directory.EnumerateFiles(this.Location))
                 {
