@@ -162,7 +162,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 throw new ArgumentNullException(nameof(user));
 
             var userEntity = new UserData(user);
-          
+
             try
             {
                 _unitOfWork.UserRepository.Create(user.NormalizedUserName, userEntity);
@@ -197,12 +197,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                     userData.HashedPassword = user.PasswordHash;
                     userData.SecurityStamp = user.SecurityStamp;
                     userData.Roles = new ObservableCollection<string>(user.Roles.ToList());
+                    userData.CanUserChangePassword = user.CanUserChangePassword;
                 }
                 else
                 {
                     return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
                 }
-            
+                
                 _unitOfWork.UserRepository.Update(user.NormalizedUserName, userData);
             }
             catch (UnableToLocateRecordId)

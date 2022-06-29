@@ -31,6 +31,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         private RoleManager<IdentityRole> _roleManager { get; set; }
 
         private User SelectedUser { get; set; }
+        private IQueryable<User> Users { get; set; }
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
 
@@ -52,12 +53,18 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             await RowClicked(SelectedUser);
         }
 
-
+       
         public async Task RowClicked(User user)
         {
             SelectedUser = user;
             AssignedRoles = (await _userManager.GetRolesAsync(user)).Select(x => new RoleData(x)).ToList();
             AvailableRoles = GetAvailableRoles();
+            StateHasChanged();
+        }
+
+        public void CloseUserDetail()
+        {
+            SelectedUser = null;
         }
 
         private IList<RoleData> GetAvailableRoles() =>
@@ -66,9 +73,43 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 .Select(x => new RoleData(x.Name))
                 .ToList();
 
-        protected override void OnInitialized()
+        public string RoleName { get; set; }
+        public async Task CreateRole(string roleName)
         {
-            SelectedUser = _userManager.Users.FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(roleName))
+                return;
+            if (!await _roleManager.RoleExistsAsync(roleName))
+            {
+                var normalizer = new UpperInvariantLookupNormalizer();
+                var identityRole = new IdentityRole(roleName);
+                identityRole.NormalizedName = normalizer.NormalizeName(roleName);
+                await _roleManager.CreateAsync(identityRole);
+                StateHasChanged();
+                if(SelectedUser != null) RoleAdded();
+            }
+
+        }
+
+       
+
+        public async Task DeleteUser(User user)
+        {
+            await _userManager.DeleteAsync(user);
+            SelectedUser = null;
+        }
+
+        public async Task DeleteRole(IdentityRole role)
+        {
+            await _roleManager.DeleteAsync(role);
+            StateHasChanged();
+            if (SelectedUser != null) RoleAdded();
+
+        }
+
+        public async Task UpdateUser(User user)
+        {
+            await _userManager.UpdateAsync(user);
+           
         }
 
     }

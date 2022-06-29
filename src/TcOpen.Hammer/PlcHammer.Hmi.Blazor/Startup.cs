@@ -60,6 +60,7 @@ namespace PlcHammer.Hmi.Blazor
 
 
             services.AddVortexBlazorSecurity(userRepo, roleRepo);
+
             services.AddTcoCoreExtensions();
 
             /*Json repositories for data*/

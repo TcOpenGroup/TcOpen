@@ -12,19 +12,9 @@
 
 <AuthorizeView Roles="Administrator">
     <Authorized>
-        <UserManagementView @ref="@UserMgmtView"></UserManagementView>
+        <UserManagementView  @ref="@UserMgmtView"></UserManagementView>
 
-        <div class="m-1">
-            <h4>Add new role</h4>
-            <input type="text" class="form-control m-1" @bind="RoleName" />
-            <button class="btn btn-primary m-1" @onclick="@(async () => await CreateRole(RoleName))">Create new role</button>
-        </div>
-
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button>
+   
     </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
@@ -36,46 +26,15 @@
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
 @code {
 
-    public string RoleName { get; set; }
+    
 
     private UserManagementView UserMgmtView { get; set; }
 
-    public async Task CreateRole(string roleName)
-    {
-        if (string.IsNullOrWhiteSpace(roleName))
-            return;
-        if (!await _roleManager.RoleExistsAsync(roleName))
-        {
-            var normalizer = new UpperInvariantLookupNormalizer();
-            var identityRole = new IdentityRole(roleName);
-            identityRole.NormalizedName = normalizer.NormalizeName(roleName);
-            await _roleManager.CreateAsync(identityRole);
-            StateHasChanged();
-            UserMgmtView.RoleAdded();
-        }
-
-    }
+    
 }
