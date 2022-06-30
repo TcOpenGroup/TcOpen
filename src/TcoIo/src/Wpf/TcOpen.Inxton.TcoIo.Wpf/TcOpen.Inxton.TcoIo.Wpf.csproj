@@ -27,6 +27,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplay.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplaySlim.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\EtcMasterBase_62654B43TopologyDeviceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -114,7 +126,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Diagnostics\_temp\" />
+    <Compile Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplay.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

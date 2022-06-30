@@ -12,6 +12,7 @@ using Vortex.Presentation.Wpf;
 using TcoIo;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using TcOpen.Inxton.TcoIo.Wpf.Topology;
 
 namespace TcOpen.Inxton.TcoIo.Wpf
 {
@@ -193,8 +194,8 @@ namespace TcOpen.Inxton.TcoIo.Wpf
                             //Add empty cell after master
                             column++;
                             UniformGrid emptyCell = new UniformGrid();
-                            emptyCell.Width = 64;
-                            emptyCell.Height = 200;
+                            emptyCell.Width = DimsDef.emptyCellWidth;
+                            emptyCell.Height = DimsDef.emptyCellHeight;
 
                             mainGrid.Children.Add(emptyCell);
                             Grid.SetColumn(emptyCell, column);
@@ -224,8 +225,8 @@ namespace TcOpen.Inxton.TcoIo.Wpf
                                 {
                                     //Add empty cell after extension box
                                     UniformGrid emptyCell = new UniformGrid();
-                                    emptyCell.Width = 64;
-                                    emptyCell.Height = 200;
+                                    emptyCell.Width = DimsDef.emptyCellWidth;
+                                    emptyCell.Height = DimsDef.emptyCellHeight;
 
                                     mainGrid.Children.Add(emptyCell);
                                     Grid.SetColumn(emptyCell, column);

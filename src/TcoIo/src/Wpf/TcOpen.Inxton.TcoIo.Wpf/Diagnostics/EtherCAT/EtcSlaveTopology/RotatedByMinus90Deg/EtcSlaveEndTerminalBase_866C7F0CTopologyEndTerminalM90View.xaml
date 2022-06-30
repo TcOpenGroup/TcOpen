@@ -7,6 +7,7 @@
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:dims="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Topology"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:disp="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -14,6 +15,13 @@
     <d:UserControl.DataContext>
         <local:EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalM90View/>
     </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Display\DefaultStyling.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Border BorderBrush="White" BorderThickness="0,0,5,0">
         <Border.LayoutTransform>
             <TransformGroup>
@@ -21,15 +29,13 @@
                 <ScaleTransform ScaleX="-1" ScaleY="-1"/>
             </TransformGroup>
         </Border.LayoutTransform>
-        <Border BorderBrush="Black" BorderThickness="5">
-            <!--<Grid Height="{Binding Path=(dims:TempDef.endTermWidth)}" Grid.IsSharedSizeScope="True" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">-->
-            <Grid Height="20" Grid.IsSharedSizeScope="True" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
+        <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
+            <Grid Height="{Binding Source={x:Static dims:DimsDef.endTermWidth}}" Grid.IsSharedSizeScope="True" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <!--<ColumnDefinition  Width="{Binding Path=(dims:TempDef.endTermHeight)}" SharedSizeGroup="true"/>-->
-                    <ColumnDefinition  Width="185" SharedSizeGroup="true"/>
+                    <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.endTermHeight}}" SharedSizeGroup="true"/>
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock Text="Name: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>

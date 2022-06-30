@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
+using Vortex.Connector;
+using Vortex.Connector.ValueTypes;
 
 namespace TcoIo
 {

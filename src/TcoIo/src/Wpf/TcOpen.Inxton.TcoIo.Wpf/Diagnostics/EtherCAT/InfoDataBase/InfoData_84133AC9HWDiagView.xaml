@@ -7,6 +7,7 @@
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
+    xmlns:disp="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -17,27 +18,20 @@
         <TcoIo:InfoData_84133AC9/>
     </d:UserControl.DataContext>
     <StackPanel >
-        <Grid Grid.IsSharedSizeScope="True">
+        <GroupBox Header="{Binding AttributeName}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="80"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"/>
-                <vortex:RenderableContentControl Grid.Row ="1" Grid.Column="1" DataContext="{Binding ChangeCount}" PresentationType="Display" />
-                <vortex:RenderableContentControl Grid.Row ="2" Grid.Column="1" DataContext="{Binding DevId}" PresentationType="Display" />
-                <vortex:RenderableContentControl Grid.Row ="3" Grid.Column="1" DataContext="{Binding AmsNetId}" PresentationType="HWDiag" />
-                <vortex:RenderableContentControl Grid.Row ="4" Grid.Column="1" DataContext="{Binding CfgSlaveCount}" PresentationType="Display" />
+                <disp:StringDisplaySlim Grid.Row ="0" DataContext="{Binding ChangeCount}"  />
+                <disp:StringDisplaySlim Grid.Row ="1" DataContext="{Binding DevId}"  />
+                <disp:AmsNetIdDisplaySlim Grid.Row ="2"  DataContext="{Binding AmsNetId}"/>
+                <disp:StringDisplaySlim Grid.Row ="3" DataContext="{Binding CfgSlaveCount}"  />
             </Grid>
-        </Grid>
+        </GroupBox>
     </StackPanel>
 </UserControl> 
     

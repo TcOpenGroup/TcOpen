@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL9011_D65D3D32" Id="{bb950170-a035-0deb-36aa-5c0a36ec8a68}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL9011--0000'}
+{attribute addProperty BoxType "EL9011--0000"}
+{attribute addProperty Description "EL9011 End Terminal"}
+{attribute addProperty Physics ""}
+{attribute addProperty Id "EL9011"}
+{attribute addProperty CRC "3596434738"}
+{attribute addProperty Size "0"}
+TYPE EL9011_D65D3D32 EXTENDS TcoIo.EtcSlaveEndTerminalBase_866C7F0C :
+STRUCT
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

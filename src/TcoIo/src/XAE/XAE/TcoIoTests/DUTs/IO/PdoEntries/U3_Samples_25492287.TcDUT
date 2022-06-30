@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="U3_Samples_25492287" Id="{041e1c33-237c-0a15-0f58-a409e8e7a61e}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3773-0000-0021'}
+{attribute addProperty BoxType "EL3773-0000-0021"}
+{attribute addProperty Id "ARRAY_0INT2ARRAY_1INT2ARRAY_2INT2ARRAY_3INT2ARRAY_4INT2ARRAY_5INT2ARRAY_6INT2ARRAY_7INT2ARRAY_8INT2ARRAY_9INT2"}
+{attribute addProperty CRC "625549959"}
+{attribute addProperty Size "20"}
+TYPE U3_Samples_25492287 :
+STRUCT
+	{attribute addProperty Name "ARRAY_0"}
+	ARRAY_0 : INT;
+	{attribute addProperty Name "ARRAY_1"}
+	ARRAY_1 : INT;
+	{attribute addProperty Name "ARRAY_2"}
+	ARRAY_2 : INT;
+	{attribute addProperty Name "ARRAY_3"}
+	ARRAY_3 : INT;
+	{attribute addProperty Name "ARRAY_4"}
+	ARRAY_4 : INT;
+	{attribute addProperty Name "ARRAY_5"}
+	ARRAY_5 : INT;
+	{attribute addProperty Name "ARRAY_6"}
+	ARRAY_6 : INT;
+	{attribute addProperty Name "ARRAY_7"}
+	ARRAY_7 : INT;
+	{attribute addProperty Name "ARRAY_8"}
+	ARRAY_8 : INT;
+	{attribute addProperty Name "ARRAY_9"}
+	ARRAY_9 : INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

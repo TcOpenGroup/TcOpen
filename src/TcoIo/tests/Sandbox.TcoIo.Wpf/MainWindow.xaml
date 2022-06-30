@@ -19,7 +19,7 @@
                 <wpf:TopologyRenderer PresentationType="TopologyDevice-TopologyBaseM90-TopologyBoxM90-TopologyTerminalM90-TopologyEndTerminalM90" DataContext="{Binding TcoIoTests.GVL_iXlinker}"></wpf:TopologyRenderer>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="Topology" >
+        <!--<TabItem Header="Topology" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -42,7 +42,7 @@
                 </ScrollViewer>
 
             </Grid>
-        </TabItem>
+        </TabItem>-->
         <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>

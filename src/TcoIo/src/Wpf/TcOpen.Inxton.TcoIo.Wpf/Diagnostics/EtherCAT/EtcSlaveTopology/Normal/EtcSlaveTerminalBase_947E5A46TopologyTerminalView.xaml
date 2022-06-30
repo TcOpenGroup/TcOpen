@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:TcoIo"
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:disp="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -13,8 +14,15 @@
     <d:UserControl.DataContext>
         <local:EtcSlaveTerminalBase_947E5A46TopologyTerminalView/>
     </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Display\DefaultStyling.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Border BorderBrush="White" BorderThickness="5">
-        <Border BorderBrush="Black" BorderThickness="5">
+        <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
             <StackPanel DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
                 <WrapPanel >
                     <TextBlock Text="Name: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>

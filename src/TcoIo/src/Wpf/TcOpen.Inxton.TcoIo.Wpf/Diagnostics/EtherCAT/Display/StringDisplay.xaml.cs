@@ -1,25 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display
 {
-    /// <summary>
-    /// Interaction logic for UserControl1.xaml
-    /// </summary>
-    public partial class StringDisplay
+    public partial class StringDisplay : INotifyPropertyChanged
     {
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(StringDisplay), new PropertyMetadata(OnDescriptionChangedCallBack));
+
+        public string Description
+        {
+            get { return (string)GetValue(DescriptionProperty); }
+            set { SetValue(DescriptionProperty, value); }
+        }
+
+        private static void OnDescriptionChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            StringDisplay c = sender as StringDisplay;
+            if (c != null)
+            {
+                c.OnDescriptionChanged();
+                c.DescriptionChange(sender, e);
+            }
+        }
+
+        protected virtual void OnDescriptionChanged()
+        {
+            OnPropertyChanged("Description");
+        }
         public StringDisplay()
         {
             InitializeComponent();
@@ -27,18 +37,91 @@ namespace TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display
         }
         private void DataContextChange(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Binding binding = tbStringDisplay.GetBindingExpression(TextBox.TextProperty).ParentBinding;
+            Binding binding = tbValue.GetBindingExpression(TextBox.TextProperty).ParentBinding;
 
-            var formatString = DataContext as string;
-            if (string.IsNullOrEmpty(formatString)) return;
-            var b = new Binding
+            string formatString = DataContext as string;
+            if (!string.IsNullOrEmpty(formatString))
             {
-                Source = DataContext,
-                Mode = binding.Mode,
-                StringFormat = formatString
-            };
-            tbStringDisplay.SetBinding(TextBox.TextProperty, b);
+                Binding b = new Binding
+                {
+                    Source = DataContext,
+                    Mode = binding.Mode,
+                    StringFormat = formatString
+                };
+                tbValue.SetBinding(TextBox.TextProperty, b);
+            }
+            else
+            {
+                dynamic dc;
+                if (DataContext != null)
+                {
+                    dc = DataContext;
+                    if (dc.Cyclic != null)
+                    {
+                        formatString = dc.Cyclic.ToString();
+                        Binding b = new Binding
+                        {
+                            Path = new PropertyPath("Cyclic"),
+                            Source = DataContext,
+                            Mode = binding.Mode,
+                            StringFormat = formatString
+                        };
+                        tbValue.SetBinding(TextBox.TextProperty, b);
+                    }
+                    if (dc.AttributeName != null)
+                    {
+                        formatString = dc.AttributeName;
+                        Binding b = new Binding
+                        {
+                            Path = new PropertyPath("AttributeName"),
+                            Source = DataContext,
+                            Mode = binding.Mode,
+                            StringFormat = formatString
+                        };
+                        gbDescription.SetBinding(GroupBox.HeaderProperty, b);
+                    }
+                }
+            }
         }
+
+        private void DescriptionChange(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Binding binding = gbDescription.GetBindingExpression(GroupBox.HeaderProperty).ParentBinding;
+            string formatString = Description as string;
+            if (!string.IsNullOrEmpty(formatString))
+            {
+                Binding b = new Binding
+                {
+                    Source = Description,
+                    Mode = binding.Mode,
+                    StringFormat = formatString
+                };
+                gbDescription.SetBinding(GroupBox.HeaderProperty, b);
+            }
+            else
+            {
+                dynamic dc;
+                if (DataContext != null)
+                {
+                    dc = DataContext;
+                    if (dc.AttributeName != null)
+                    {
+                        formatString = dc.AttributeName;
+                        Binding b = new Binding
+                        {
+                            Path = new PropertyPath("AttributeName"),
+                            Source = DataContext,
+                            Mode = binding.Mode,
+                            StringFormat = formatString
+                        };
+                        gbDescription.SetBinding(GroupBox.HeaderProperty, b);
+                    }
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     }
 }

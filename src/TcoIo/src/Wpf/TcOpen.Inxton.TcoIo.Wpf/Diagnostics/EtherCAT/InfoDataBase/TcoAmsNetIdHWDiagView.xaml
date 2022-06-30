@@ -28,9 +28,9 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <disp:StringDisplay Header="{Binding AttributeName}" DataContext="{Binding Converter={StaticResource AmsNetIdToString}}"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,5,0" Text="{Binding Converter={StaticResource AmsNetIdToString}}"/>
+                <StackPanel>
+                    <disp:AmsNetIdDisplaySlim DataContext="{Binding }"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </StackPanel>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="PM_Inputs_Channel_2F868086" Id="{5dfcfbbf-1807-03e9-3368-bc9d240475c9}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3403-0000-0023'}
+{attribute addProperty BoxType "EL3403-0000-0023"}
+{attribute addProperty Id "TxPDO_ToggleAT %I*BOOL1CurrentAT %I*DINT4VoltageAT %I*DINT4Active_powerAT %I*DINT4IndexAT %I*USINT1Variant_valueAT %I*DINT4"}
+{attribute addProperty CRC "797343878"}
+{attribute addProperty Size "18"}
+TYPE PM_Inputs_Channel_2F868086 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "TxPDO_Toggle"}
+	TxPDO_Toggle AT %I* : BOOL;
+	{attribute addProperty Name "Current"}
+	Current AT %I* : DINT;
+	{attribute addProperty Name "Voltage"}
+	Voltage AT %I* : DINT;
+	{attribute addProperty Name "Active_power"}
+	Active_power AT %I* : DINT;
+	{attribute addProperty Name "Index"}
+	Index AT %I* : USINT;
+	{attribute addProperty Name "Variant_value"}
+	Variant_value AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
