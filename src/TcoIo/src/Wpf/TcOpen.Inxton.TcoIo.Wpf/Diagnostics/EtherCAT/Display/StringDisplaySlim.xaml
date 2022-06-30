@@ -1,6 +1,6 @@
 ﻿<StackPanel 
     x:Name="gbDescription"
-    x:Class="TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display.StringDisplaySlim"
+    x:Class="TcoIo.Diagnostics.EtherCAT.Display.StringDisplaySlim"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,7 +18,7 @@
             <ColumnDefinition SharedSizeGroup="AttributeName"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" x:Name="tbDescription" Text="{Binding Description, Mode=OneWay}" IsReadOnly="True" FontWeight="Light"      Foreground="{Binding State}" Background ="{Binding State}"/>
-        <TextBox Grid.Column="1" x:Name="tbValue"       Text="{Binding _,           Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold"   Foreground="{Binding State}" Background ="{Binding State}"/>
+        <TextBox Grid.Column="0" x:Name="tbDescription" Text="{Binding Description, Mode=OneWay}" IsReadOnly="True" FontWeight="Light"   Background="Transparent"   />
+        <TextBox Grid.Column="1" x:Name="tbValue"       Text="{Binding _,           Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background="Transparent"  />
     </Grid>
 </StackPanel>

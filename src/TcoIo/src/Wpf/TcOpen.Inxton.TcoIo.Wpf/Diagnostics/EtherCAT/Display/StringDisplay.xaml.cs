@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display
+namespace TcoIo.Diagnostics.EtherCAT.Display
 {
     public partial class StringDisplay : INotifyPropertyChanged
     {

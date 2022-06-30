@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using TcoIo;
-using System.Reflection;
 using System.Collections.ObjectModel;
-using TcOpen.Inxton.TcoIo.Wpf.Topology;
+using TcoIo.Topology;
 
-namespace TcOpen.Inxton.TcoIo.Wpf
+namespace TcoIo
 {
     public class TopologyRenderer : UserControl
     {
@@ -42,100 +35,100 @@ namespace TcOpen.Inxton.TcoIo.Wpf
         private void TopologyRenderer_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             //this.Content = Render(this.DataContext as IVortexObject, ref row, ref column);
-            this.Content = Render2(this.DataContext as IVortexObject, ref row, ref column, ref previousTopologyObject);
+            this.Content = Render(this.DataContext as IVortexObject, ref row, ref column, ref previousTopologyObject);
         }
 
 
-        public object Render(IVortexObject obj, ref int row , ref int column , Grid mainGrid = null, UniformGrid cell = null, HardwareType previousType = HardwareType.Undefined)
-        {
+        //public object Render(IVortexObject obj, ref int row , ref int column , Grid mainGrid = null, UniformGrid cell = null, HardwareType previousType = HardwareType.Undefined)
+        //{
 
-            if (obj != null)
-            {
-                mainGrid = mainGrid == null ? new Grid() : mainGrid;
-                cell = cell == null ? new UniformGrid()  : cell;
+        //    if (obj != null)
+        //    {
+        //        mainGrid = mainGrid == null ? new Grid() : mainGrid;
+        //        cell = cell == null ? new UniformGrid()  : cell;
 
-                HardwareType currentType = new HardwareType();
+        //        HardwareType currentType = new HardwareType();
 
-                Type[] interfaces = obj.GetType().GetInterfaces();
-                foreach (Type item in interfaces)
-                {
-                    if (item.Name.Contains("EtcMasterBase"))
-                    {
-                        currentType = HardwareType.EtcMasterBase;
-                        break;
-                    }
-                    else if (item.Name.Contains("EtcSlaveBoxBase"))
-                    {
-                        currentType = HardwareType.EtcSlaveBoxBase;
-                        break;
-                    }
-                    else if (item.Name.Contains("EtcSlaveTerminalBase"))
-                    {
-                        currentType = HardwareType.EtcSlaveTerminalBase;
-                        break;
-                    }
-                    else if (item.Name.Contains("EtcSlaveEndTerminalBase"))
-                    {
-                        currentType = HardwareType.EtcSlaveEndTerminalBase;
-                        break;
-                    }
-                }
+        //        Type[] interfaces = obj.GetType().GetInterfaces();
+        //        foreach (Type item in interfaces)
+        //        {
+        //            if (item.Name.Contains("EtcMasterBase"))
+        //            {
+        //                currentType = HardwareType.EtcMasterBase;
+        //                break;
+        //            }
+        //            else if (item.Name.Contains("EtcSlaveBoxBase"))
+        //            {
+        //                currentType = HardwareType.EtcSlaveBoxBase;
+        //                break;
+        //            }
+        //            else if (item.Name.Contains("EtcSlaveTerminalBase"))
+        //            {
+        //                currentType = HardwareType.EtcSlaveTerminalBase;
+        //                break;
+        //            }
+        //            else if (item.Name.Contains("EtcSlaveEndTerminalBase"))
+        //            {
+        //                currentType = HardwareType.EtcSlaveEndTerminalBase;
+        //                break;
+        //            }
+        //        }
 
-                var presentation = LazyRenderer.Get.CreatePresentation(PresentationType, obj) as FrameworkElement;
-                presentation.HorizontalAlignment = HorizontalAlignment.Stretch;
-                presentation.VerticalAlignment = VerticalAlignment.Stretch;
+        //        var presentation = LazyRenderer.Get.CreatePresentation(PresentationType, obj) as FrameworkElement;
+        //        presentation.HorizontalAlignment = HorizontalAlignment.Stretch;
+        //        presentation.VerticalAlignment = VerticalAlignment.Stretch;
 
-                if (presentation != null && currentType != HardwareType.Undefined)
-                {
-                    cell.Children.Add(presentation);
+        //        if (presentation != null && currentType != HardwareType.Undefined)
+        //        {
+        //            cell.Children.Add(presentation);
 
-                    mainGrid.Children.Add(cell);
+        //            mainGrid.Children.Add(cell);
 
-                    if (currentType == HardwareType.EtcMasterBase /*&& (previousType == HardwareType.EtcSlaveBoxBase || previousType == HardwareType.EtcSlaveTerminalBase)*/)
-                    {
-                        column = 0;
-                        row++;
-                    }
-                    else if (currentType == HardwareType.EtcSlaveBoxBase && previousType == HardwareType.EtcMasterBase)
-                    {
-                        column++;
-                    }
-                    else if (currentType == HardwareType.EtcSlaveBoxBase && previousType == HardwareType.EtcSlaveTerminalBase)
-                    {
-                        row++;
-                    }
-                    else if (currentType == HardwareType.EtcSlaveTerminalBase /*&& previousType == HardwareType.EtcSlaveTerminalBase*/)
-                    {
-                        column++;
-                    }
-                    else if (currentType == HardwareType.EtcSlaveEndTerminalBase)
-                    {
-                        column++;
-                    }
-                    Grid.SetColumn(cell, column);
-                    Grid.SetRow(cell, row);
-                    Grid.SetIsSharedSizeScope(mainGrid, true);
-                    Grid.SetIsSharedSizeScope(cell, true);
-                    cell.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    cell.VerticalAlignment = VerticalAlignment.Stretch;
+        //            if (currentType == HardwareType.EtcMasterBase /*&& (previousType == HardwareType.EtcSlaveBoxBase || previousType == HardwareType.EtcSlaveTerminalBase)*/)
+        //            {
+        //                column = 0;
+        //                row++;
+        //            }
+        //            else if (currentType == HardwareType.EtcSlaveBoxBase && previousType == HardwareType.EtcMasterBase)
+        //            {
+        //                column++;
+        //            }
+        //            else if (currentType == HardwareType.EtcSlaveBoxBase && previousType == HardwareType.EtcSlaveTerminalBase)
+        //            {
+        //                row++;
+        //            }
+        //            else if (currentType == HardwareType.EtcSlaveTerminalBase /*&& previousType == HardwareType.EtcSlaveTerminalBase*/)
+        //            {
+        //                column++;
+        //            }
+        //            else if (currentType == HardwareType.EtcSlaveEndTerminalBase)
+        //            {
+        //                column++;
+        //            }
+        //            Grid.SetColumn(cell, column);
+        //            Grid.SetRow(cell, row);
+        //            Grid.SetIsSharedSizeScope(mainGrid, true);
+        //            Grid.SetIsSharedSizeScope(cell, true);
+        //            cell.HorizontalAlignment = HorizontalAlignment.Stretch;
+        //            cell.VerticalAlignment = VerticalAlignment.Stretch;
 
-                    mainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                    mainGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+        //            mainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+        //            mainGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
 
-                    var physics = obj.GetType().GetProperty("Physics")?.GetValue(obj);
-                }
+        //            var physics = obj.GetType().GetProperty("Physics")?.GetValue(obj);
+        //        }
 
-                foreach (var child in obj.GetChildren())
-                {
-                    // cell new
+        //        foreach (var child in obj.GetChildren())
+        //        {
+        //            // cell new
 
-                    Render(child, ref row, ref column, mainGrid, new UniformGrid(), currentType);
-                }
-            }
-            return mainGrid;
-        }
+        //            Render(child, ref row, ref column, mainGrid, new UniformGrid(), currentType);
+        //        }
+        //    }
+        //    return mainGrid;
+        //}
 
-        public object Render2(IVortexObject obj, ref int row, ref int column, ref TopologyObject previousTopologyObject, Grid mainGrid = null, UniformGrid cell = null)
+        public object Render(IVortexObject obj, ref int row, ref int column, ref TopologyObject previousTopologyObject, Grid mainGrid = null, UniformGrid cell = null)
         {
 
             if (obj != null)
@@ -145,6 +138,7 @@ namespace TcOpen.Inxton.TcoIo.Wpf
 
                 string currentPhysics = obj.GetType().GetProperty("AttributePhysics")?.GetValue(obj).ToString();
                 string currentConnection = obj.GetType().GetProperty("AttributePreviousPort")?.GetValue(obj).ToString();
+                string currentBoxType = obj.GetType().GetProperty("AttributeBoxType")?.GetValue(obj).ToString();
 
                 Type[] interfaces = obj.GetType().GetInterfaces();
 
@@ -191,15 +185,18 @@ namespace TcOpen.Inxton.TcoIo.Wpf
                         //First box after master
                         if (currentPhysics != null && currentConnection != null && currentPhysics.StartsWith("Y") && currentConnection.StartsWith(previousTopologyObject.Name) && currentConnection.EndsWith(previousTopologyObject.Physics))
                         {
-                            //Add empty cell after master
-                            column++;
-                            UniformGrid emptyCell = new UniformGrid();
-                            emptyCell.Width = DimsDef.emptyCellWidth;
-                            emptyCell.Height = DimsDef.emptyCellHeight;
+                            if (!(currentBoxType != null && currentBoxType.StartsWith("EK1200")))
+                            {
+                                //Add empty cell after master
+                                column++;
+                                UniformGrid emptyCell = new UniformGrid();
+                                emptyCell.Width = DimsDef.emptyCellWidth;
+                                emptyCell.Height = DimsDef.emptyCellHeight;
 
-                            mainGrid.Children.Add(emptyCell);
-                            Grid.SetColumn(emptyCell, column);
-                            Grid.SetRow(emptyCell, row);
+                                mainGrid.Children.Add(emptyCell);
+                                Grid.SetColumn(emptyCell, column);
+                                Grid.SetRow(emptyCell, row); 
+                            }
                         }
                         if (currentPhysics != null && currentConnection != null)
                         {
@@ -291,7 +288,7 @@ namespace TcOpen.Inxton.TcoIo.Wpf
                 {
                     // cell new
 
-                    Render2(child, ref row, ref column,ref previousTopologyObject, mainGrid, new UniformGrid());
+                    Render(child, ref row, ref column,ref previousTopologyObject, mainGrid, new UniformGrid());
                 }
             }
             return mainGrid;

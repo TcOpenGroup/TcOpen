@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TcoIo"
-    xmlns:dims="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Topology"
+    xmlns:conv="clr-namespace:TcoIo.Converters"
+    xmlns:dims="clr-namespace:TcoIo.Topology"
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:disp="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display"
+    xmlns:disp="clr-namespace:TcoIo.Diagnostics.EtherCAT.Display"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -34,40 +35,47 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
-                    <RowDefinition Height="Auto" MaxHeight="28"/>
+                    <RowDefinition Height="Auto" MaxHeight="18"/>
+                    <!--<RowDefinition Height="Auto" MaxHeight="28"/>-->
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.boxHeight}}" SharedSizeGroup="true"/>
                 </Grid.ColumnDefinitions>
-                <disp:StringDisplaySlim Grid.Row="0" Grid.Column="0" Description="Name:" DataContext="{Binding AttributeName}"/>
-
+                <WrapPanel Grid.Row="0" Grid.Column="0">
+                    <TextBlock Text="Name: "                  FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    <TextBlock Text="{Binding AttributeName}" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                </WrapPanel>
                 <Grid Grid.Row="1" Grid.Column="0" DataContext="{Binding InfoData}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0">
+                        <TextBlock Text="{Binding AttributeName}"       FontWeight="Light"  Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="."                             FontWeight="Light"  Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding State.AttributeName}" FontWeight="Light"  Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text=" : "                           FontWeight="Light"  Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>
+                    <TextBlock Grid.Column="1" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToOperationState}}" FontWeight="DemiBold" Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="0" DataContext="{Binding InfoData}">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0">
-                        <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                        <TextBlock Text=" : " Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                        <TextBlock Text="{Binding State.AttributeName}" Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                        <TextBlock Text=" : " Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    </WrapPanel>
-                    <TextBlock Grid.Column="1" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToOperationState}}"    Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                    <TextBlock Grid.Column="2" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToErrorState}}"        Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                    <TextBlock Grid.Column="3" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToLinkState}}"         Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                    <TextBlock Grid.Column="4" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToPort}}"              Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
+                    <TextBlock Grid.Column="0" Margin="0,0,0,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToErrorState}}"     FontWeight="DemiBold" Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                    <TextBlock Grid.Column="1" Margin="0,0,0,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToLinkStateShort}}" FontWeight="DemiBold" Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                    <TextBlock Grid.Column="2" Margin="0,0,0,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToPortShort}}"      FontWeight="DemiBold" Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
                 </Grid>
-                <Grid Height="28" Grid.Row="2" Grid.Column="0" DataContext="{Binding WcState}">
+                <!--<Grid Height="28" Grid.Row="2" Grid.Column="0" DataContext="{Binding WcState}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding WcState}" PresentationType="DisplaySlim"     Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
                     <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding InputToggle}" PresentationType="DisplaySlim" Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </Grid>
+                </Grid>-->
             </Grid>
         </Border>
     </Border>

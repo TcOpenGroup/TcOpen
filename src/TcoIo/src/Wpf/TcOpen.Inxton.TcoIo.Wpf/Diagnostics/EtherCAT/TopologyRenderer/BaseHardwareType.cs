@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcOpen.Inxton.TcoIo.Wpf
+namespace TcoIo
 {
     public class BaseHardwareType
     {
