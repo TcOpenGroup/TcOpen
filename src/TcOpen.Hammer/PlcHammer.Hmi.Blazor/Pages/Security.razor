@@ -4,25 +4,26 @@
 @using TcOpen.Inxton.Local.Security
 @inject UserManager<User> _userManager
 @inject SignInManager<User> _signInManager
-@inject RoleManager<IdentityRole> _roleManager
-
+@inject BlazorRoleManager _roleManager
 <h3>Security</h3>
 
 
 
-<AuthorizeView Roles="Administrator">
+<AuthorizeView Roles="Administrator" >
     <Authorized>
-        <UserManagementView  @ref="@UserMgmtView"></UserManagementView>
+        <UserManagementView @ref="@UserMgmtView"></UserManagementView>
 
-   
+
     </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
     </NotAuthorized>
 </AuthorizeView>
 
+<AuthorizeView Roles="@_roleManager.GetGroupRoleString("AdminGroup")">
 
-
+    <p>You can see this only and only if you have some role from AdminGroup</p>
+</AuthorizeView>
 
 
 
@@ -32,9 +33,9 @@
 
 @code {
 
-    
+
 
     private UserManagementView UserMgmtView { get; set; }
 
-    
+
 }

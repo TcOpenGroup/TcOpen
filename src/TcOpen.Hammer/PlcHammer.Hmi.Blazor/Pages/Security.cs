@@ -13,28 +13,28 @@ namespace PlcHammer.Hmi.Blazor.Pages
     public partial class Security
     {
 
-        public async Task AddToRole(string roleName, string userName)
-        {
-            var user = await _userManager.FindByNameAsync(userName.ToUpper());
+        //public async Task AddToRole(string roleName, string userName)
+        //{
+        //    var user = await _userManager.FindByNameAsync(userName.ToUpper());
 
 
-            if (user != null)
-            {
-                if (!await _roleManager.RoleExistsAsync(roleName))
-                {
-                    var normalizer = new UpperInvariantLookupNormalizer();
-                    var identityRole = new IdentityRole(roleName);
-                    identityRole.NormalizedName = normalizer.NormalizeName(roleName);
+        //    if (user != null)
+        //    {
+        //        if (!await _roleManager.RoleExistsAsync(roleName))
+        //        {
+        //            var normalizer = new UpperInvariantLookupNormalizer();
+        //            var identityRole = new IdentityRole(roleName);
+        //            identityRole.NormalizedName = normalizer.NormalizeName(roleName);
 
 
-                    await _roleManager.CreateAsync(identityRole);
-                }
+        //            await _roleManager.CreateAsync(identityRole);
+        //        }
 
 
-                await _userManager.AddToRoleAsync(user, roleName);
-                //await _userManager.AddToRolesAsync(user, roleName);
-                //await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
-            }
-        }
+        //        await _userManager.AddToRoleAsync(user, roleName);
+        //        //await _userManager.AddToRolesAsync(user, roleName);
+        //        //await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
+        //    }
+        //}
     }
 }
