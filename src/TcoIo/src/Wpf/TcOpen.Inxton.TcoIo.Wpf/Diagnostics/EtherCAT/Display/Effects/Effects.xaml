@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Colors/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DropShadowEffect
+        x:Key="ShadowUp"
+        BlurRadius="7"
+        Direction="330"
+        Opacity="0.5"
+        RenderingBias="Performance"
+        ShadowDepth="4"
+        Color="{DynamicResource ShadowColor}" />
+
+
+    <DropShadowEffect
+        x:Key="ShadowDown"
+        BlurRadius="7"
+        Direction="330"
+        Opacity="0.3"
+        RenderingBias="Performance"
+        ShadowDepth="4"
+        Color="{DynamicResource ShadowColor}" />
+
+    <Ellipse
+        x:Key="InteractionEllipse"
+        x:Name="InteractionEllipse"
+        Width="0"
+        Height="0"
+        Fill="{DynamicResource Secondary}"
+        IsHitTestVisible="False"
+        Opacity="0"
+        RenderTransformOrigin="0.5,0.5">
+        <Ellipse.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform />
+                <TranslateTransform />
+            </TransformGroup>
+        </Ellipse.RenderTransform>
+    </Ellipse>
+
+
+</ResourceDictionary>

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TcoIo"
+    xmlns:dims="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Topology"
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
@@ -13,7 +14,7 @@
     <d:UserControl.DataContext>
         <local:EtcSlaveBoxBase_77A0E4A7TopologyBoxM90View/>
     </d:UserControl.DataContext>
-    <Border BorderBrush="White" BorderThickness="5,5,5,0">
+    <Border BorderBrush="White" BorderThickness="0,0,5,0">
         <Border.LayoutTransform>
             <TransformGroup>
                 <RotateTransform Angle="90" />
@@ -21,35 +22,22 @@
             </TransformGroup>
         </Border.LayoutTransform>
         <Border BorderBrush="Black" BorderThickness="5">
-            <Grid Grid.IsSharedSizeScope="True" DataContext="{Binding Box}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
+            <!--<Grid Height="{Binding Path=(dims:TempDef.boxWidth)}" Grid.IsSharedSizeScope="True" DataContext="{Binding Box}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">-->
+            <Grid Height="64" Grid.IsSharedSizeScope="True" DataContext="{Binding Box}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" MaxHeight="18"/>
-                    <RowDefinition Height="Auto" MaxHeight="18"/>
-                    <RowDefinition Height="Auto" MaxHeight="18"/>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
                     <RowDefinition Height="Auto" MaxHeight="28"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="true"/>
+                    <!--<ColumnDefinition  Width="{Binding Path=(dims:TempDef.boxHeight)}" SharedSizeGroup="true"/>-->
+                    <ColumnDefinition  Width="185" SharedSizeGroup="true"/>
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="Connected to: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributePreviousPort}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <WrapPanel Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="Name: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
                     <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
                 </WrapPanel>
-                <WrapPanel Grid.Row="2" Grid.Column="0">
-                    <TextBlock Text="Type: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeBoxType}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <WrapPanel Grid.Row="3" Grid.Column="0">
-                    <TextBlock Text="Desc: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeDescription}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <Grid Grid.Row="4" Grid.Column="0" DataContext="{Binding InfoData}">
+                <Grid Grid.Row="1" Grid.Column="0" DataContext="{Binding InfoData}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -68,7 +56,7 @@
                     <TextBlock Grid.Column="3" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToLinkState}}"         Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
                     <TextBlock Grid.Column="4" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToPort}}"              Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
                 </Grid>
-                <Grid Grid.Row="5" Grid.Column="0" DataContext="{Binding WcState}">
+                <Grid Height="28" Grid.Row="2" Grid.Column="0" DataContext="{Binding WcState}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>

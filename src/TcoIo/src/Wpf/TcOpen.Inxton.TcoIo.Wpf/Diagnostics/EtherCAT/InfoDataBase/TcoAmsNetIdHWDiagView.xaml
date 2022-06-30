@@ -1,0 +1,38 @@
+<UserControl
+    x:Class="TcoIo.TcoAmsNetIdHWDiagView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoIo"
+    xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
+    xmlns:disp="clr-namespace:TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT.Display"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <local:AmsNetIdToString x:Key="AmsNetIdToString"/>
+    </UserControl.Resources>
+    <d:UserControl.DataContext>
+        <TcoIo:TcoAmsNetId/>
+    </d:UserControl.DataContext>
+    <StackPanel >
+        <Grid Grid.IsSharedSizeScope="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <disp:StringDisplay Header="{Binding AttributeName}" DataContext="{Binding Converter={StaticResource AmsNetIdToString}}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,5,0" Text="{Binding Converter={StaticResource AmsNetIdToString}}"/>
+            </Grid>
+        </Grid>
+    </StackPanel>
+</UserControl> 
+    

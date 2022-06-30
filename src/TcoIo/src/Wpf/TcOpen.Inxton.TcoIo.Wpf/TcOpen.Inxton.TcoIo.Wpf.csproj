@@ -38,10 +38,6 @@
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBoxBase_77A0E4A7BoxView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
-    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveBase_82538BE2TopologyBaseM90View.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveBase_82538BE2TopologyBaseView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
@@ -52,11 +48,23 @@
     <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveBoxBase_77A0E4A7TopologyBoxView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalM90View.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveTerminalBase_947E5A46TopologyTerminalM90View.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveTerminalBase_947E5A46TopologyTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_84133AC9HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\TcoAmsNetIdHWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -103,6 +111,10 @@
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBase_82538BE2ServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Diagnostics\_temp\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,67 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Colors/Colors.xaml" />
+        <ResourceDictionary Source="Font.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="PrimaryTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="Foreground" Value="{DynamicResource OnSurface}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="{DynamicResource PrimaryTextSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontRoboto}" />
+    </Style>
+
+
+    <ControlTemplate x:Key="TextBoxTemplate" TargetType="{x:Type TextBox}">
+        <Grid>
+            <Border
+                x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{DynamicResource Surface}"
+                BorderThickness="1"
+                CornerRadius="2"
+                SnapsToDevicePixels="True"
+                ToolTip="{Binding ElementName=PART_ContentHost, Path=ToolTip}">
+                <ScrollViewer
+                    x:Name="PART_ContentHost"
+                    Focusable="false"
+                    HorizontalScrollBarVisibility="Hidden"
+                    VerticalScrollBarVisibility="Hidden" />
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="border" Property="Opacity" Value="0.56" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Secondary}" />
+            </Trigger>
+
+            <Trigger Property="IsFocused" Value="true">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Secondary}" />
+            </Trigger>
+
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Primary}" />
+            </Trigger>
+
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style
+        x:Key="MaterialTextBox"
+        BasedOn="{StaticResource PrimaryTextBoxStyle}"
+        TargetType="{x:Type TextBox}">
+        <Setter Property="Template" Value="{DynamicResource TextBoxTemplate}" />
+
+    </Style>
+
+</ResourceDictionary>
