@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TcOpen.Inxton.Security;
 using Xunit;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Tests
@@ -17,41 +18,33 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             this._fixture = fixture;
 
         }
-        //[Fact]
-        //public async Task CreateNewRole_Successfull()
-        //{
-        //    //Arrange
-        //    var newRole = new IdentityRole("custom");
-        //    newRole.NormalizedName = "CUSTOM";
-        //    newRole.Id = Guid.NewGuid().ToString();
-        //    //Act
-        //    var result = await _fixture.RoleStore.CreateAsync(newRole);
-        //    //Assert
-        //    var role = _fixture.Repository.RoleRepository.Read(newRole.Id);
-        //    Assert.NotNull(role);
-        //    Assert.True(result.Succeeded);
-        //}
+        [Fact]
+        public void CreateNewRole_Successfull()
+        {
+            //Arrange
+            var newRole = new Role("TestRole", "TestGroup");
+            //Act
+           _fixture.Repository.RoleInAppRepository.CreateRole(newRole);
+            var createdRole = _fixture.Repository.RoleInAppRepository.InAppRoleCollection.Find(x=>x.Name  == newRole.Name);
+            //Assert
+            Assert.NotNull(createdRole);
+           
+        }
 
 
-        //[Fact]
-        //public async Task FindRoleById_Successfull()
-        //{
-        //    //Arrange
-        //    //Act
-        //    var role = await _fixture.RoleStore.FindByIdAsync(_fixture.SeedData.DefaultRole._EntityId);
-        //    //Assert
-        //    Assert.NotNull(role);
+        [Fact]
+        public void GetGroupString_Successfull()
+        {
+            //Arrange
+            var group = "AdminGroup";
+            var expected = "Admin,Default";
+            //Act
+            var groupString = _fixture.Repository.RoleInAppRepository.GetGroupRoleString(group);
+            
+            //Assert
+            Assert.Equal(expected,groupString);
 
-        //}
-        //[Fact]
-        //public async Task FindRoleByName_Successfull()
-        //{
-        //    //Arrange
-        //    //Act
-        //    var role = await _fixture.RoleStore.FindByNameAsync(_fixture.SeedData.DefaultRole.NormalizedName);
-        //    //Assert
-        //    Assert.NotNull(role);
+        }
 
-        //}
     }
 }

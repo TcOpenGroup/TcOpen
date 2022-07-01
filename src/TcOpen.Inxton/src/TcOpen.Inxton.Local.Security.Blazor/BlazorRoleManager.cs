@@ -14,18 +14,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public List<string> InAppGroupCollection { get; set; } = new List<string>();
 
-
-        ////create Administrator role
-        //var identityRole = new IdentityRole("Administrator");
-        //identityRole.NormalizedName = new UpperInvariantLookupNormalizer().NormalizeName("Administrator");
-        //var roleEntity = new RoleModel
-        //{
-        //    Name = identityRole.Name,
-        //    NormalizedName = identityRole.NormalizedName,
-        //    ConcurrencyStamp = identityRole.ConcurrencyStamp,
-        //    _EntityId = identityRole.Id
-        //};
-        //roleRepo.Create(identityRole.Id, roleEntity);
+        
         public string GetGroupRoleString(string groupString)
         {
             var roles = InAppRoleCollection.Where(x => x.DefaultGroup == groupString).Select(x=>x.Name);
@@ -36,5 +25,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             this.InAppRoleCollection.Add(role);
             if (!InAppGroupCollection.Contains(role.DefaultGroup)) this.InAppGroupCollection.Add(role.DefaultGroup);
         }
+
+        
     }
 }

@@ -36,6 +36,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         private IQueryable<User> Users { get; set; }
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
+        public bool IsUserUpdated { get; set; }
 
         public void RoleAdded()
         {
@@ -59,9 +60,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public async Task RowClicked(User user)
         {
             SelectedUser = user;
-            var userAssignedRoles = (await _userManager.GetRolesAsync(user));
+            var userAssignedRoles = await _userManager.GetRolesAsync(user);
             AssignedRoles = _roleManager.InAppRoleCollection.Where(p => userAssignedRoles.Any(p2 => p2 == p.Name)).Select(x=> new RoleData(x)).ToList(); 
             AvailableRoles = GetAvailableRoles();
+            IsUserUpdated = false;
             StateHasChanged();
         }
 
@@ -112,7 +114,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public async Task UpdateUser(User user)
         {
             await _userManager.UpdateAsync(user);
-           
+            IsUserUpdated = true;
         }
 
     }
