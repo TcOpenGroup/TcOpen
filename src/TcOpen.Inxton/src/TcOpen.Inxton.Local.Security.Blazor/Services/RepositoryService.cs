@@ -11,13 +11,12 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
     public class RepositoryService : IRepositoryService
     {
         private readonly IRepository<UserData>  _userRepository;
-        private readonly IRepository<RoleModel> _roleRepository;
+        private readonly BlazorRoleManager _roleInAppRepository;
         private bool _disposed;
-        public RepositoryService(IRepository<UserData> userRepository, 
-            IRepository<RoleModel> roleRepository)
+        public RepositoryService(IRepository<UserData> userRepository,BlazorRoleManager roleInAppRepository)
         {
             _userRepository = userRepository;
-            _roleRepository = roleRepository;
+            _roleInAppRepository = roleInAppRepository;
         }
         public IRepository<UserData> UserRepository
         {
@@ -27,11 +26,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
             }
         }
 
-        public IRepository<RoleModel> RoleRepository
+        public BlazorRoleManager RoleInAppRepository
         {
             get
             {
-                return _roleRepository;
+                return _roleInAppRepository;
             }
         }
 

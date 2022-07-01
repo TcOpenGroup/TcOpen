@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
     public interface IRepositoryService : IDisposable
     {
         IRepository<UserData> UserRepository { get; }
-        IRepository<RoleModel> RoleRepository { get; }
+        BlazorRoleManager RoleInAppRepository { get; }
 
     }
 }

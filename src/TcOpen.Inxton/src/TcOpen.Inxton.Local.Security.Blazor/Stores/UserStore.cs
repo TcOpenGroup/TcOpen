@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
+using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 {
@@ -44,11 +45,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <summary>
         /// Get all available roles from RoleRepository./>.
         /// </summary>
-        private IList<RoleModel> _roleCollection
+        private IList<Role> _roleCollection
         {
             get
             {
-                return _unitOfWork.RoleRepository.GetRecords("*").ToList();
+                return _unitOfWork.RoleInAppRepository.InAppRoleCollection;
             }
         }
        
@@ -162,7 +163,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 throw new ArgumentNullException(nameof(user));
 
             var userEntity = new UserData(user);
-          
+
             try
             {
                 _unitOfWork.UserRepository.Create(user.NormalizedUserName, userEntity);
@@ -197,12 +198,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                     userData.HashedPassword = user.PasswordHash;
                     userData.SecurityStamp = user.SecurityStamp;
                     userData.Roles = new ObservableCollection<string>(user.Roles.ToList());
+                    userData.CanUserChangePassword = user.CanUserChangePassword;
                 }
                 else
                 {
                     return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
                 }
-            
+                
                 _unitOfWork.UserRepository.Update(user.NormalizedUserName, userData);
             }
             catch (UnableToLocateRecordId)
@@ -363,13 +365,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             {
                 user.Roles = new List<string>
                 {
-                    role._EntityId
+                    role.Name
                 }.ToArray();
             }
             else
             {
                 List<string> userRolesClone = user.Roles.ToList();
-                userRolesClone.Add(role._EntityId);
+                userRolesClone.Add(role.Name);
                 user.Roles = userRolesClone.ToArray();
             }
 
@@ -392,11 +394,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
-            var roleId = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName)._EntityId;
-            if (roleId != null)
+            var roleName= _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName).Name;
+            if (roleName != null)
             {
                 var tempList  = user.Roles.ToList();
-                tempList.Remove(roleId);
+                tempList.Remove(roleName);
                 user.Roles = tempList.ToArray();
             }
 
@@ -415,9 +417,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            IList<string> roleNames = _roleCollection
-                .Where(x => user.Roles.Contains(x._EntityId))
-                .Select(x=> x.Name)
+            IList<string> roleNames = user.Roles
                 .ToList();
 
             return Task.FromResult(roleNames);
@@ -440,11 +440,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
+
             var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
-
-            if (blazorRole == null) return Task.FromResult(false);
-
-            return Task.FromResult(user.Roles.Contains(blazorRole._EntityId));
+            return Task.FromResult(user.Roles.Contains(blazorRole.Name));
         }
 
 
@@ -462,7 +460,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
 
-            IList<User> usersInRole = Users.Where(x => x.Roles.Contains(blazorRole._EntityId)).ToList();
+            IList<User> usersInRole = Users.Where(x => x.Roles.Contains(blazorRole.Name)).ToList();
             return Task.FromResult(usersInRole);
         }
         // <summary>

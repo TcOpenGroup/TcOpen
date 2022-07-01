@@ -9,34 +9,37 @@ using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
+using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 {
     public class RoleStore :
-        IRoleStore<IdentityRole>,
-        IQueryableRoleStore<IdentityRole>
+        IRoleStore<Role>,
+        IQueryableRoleStore<Role>
     {
         private readonly IRepositoryService _unitOfWork;
-        public RoleStore(IRepositoryService unitOfWork, IdentityErrorDescriber errorDescriber = null)
+        public RoleStore(IRepositoryService unitOfWork,IdentityErrorDescriber errorDescriber = null)
         {
             ErrorDescriber = errorDescriber;
             _unitOfWork = unitOfWork;
+            
         }
         /// <summary>
         /// Gets or sets the <see cref="IdentityErrorDescriber"/> for any error that occurred with the current operation.
         /// </summary>
         public IdentityErrorDescriber ErrorDescriber { get; set; }
-        public IList<RoleModel> _roleCollection {
+        public IList<Role> _roleCollection {
             get 
             {
-                return _unitOfWork.RoleRepository.GetRecords("*").ToList();
+                return _unitOfWork.RoleInAppRepository.InAppRoleCollection.ToList();
             }
         }
-        public IQueryable<IdentityRole> Roles
+        public IQueryable<Role> Roles
         {
             get
             {
-                return _unitOfWork.RoleRepository.GetRecords("*").Select(x => new IdentityRole(x.Name)).AsQueryable();
+                return _unitOfWork.RoleInAppRepository.InAppRoleCollection.AsQueryable();
+                //return _unitOfWork.RoleRepository.GetRecords("*").Select(x => new IdentityRole(x.Name)).AsQueryable();
             }
         }
         private bool _disposed;
@@ -53,23 +56,23 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// </summary>
         /// <param name="role">The role to create in the store.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-        public Task<IdentityResult> CreateAsync(IdentityRole role, CancellationToken cancellationToken = default)
+        public Task<IdentityResult> CreateAsync(Role role, CancellationToken cancellationToken = default)
         {
             
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (role == null)
-                throw new ArgumentNullException(nameof(role));
+            //if (role == null)
+            //    throw new ArgumentNullException(nameof(role));
 
-            var roleEntity = new RoleModel
-            {
-                Name = role.Name,
-                NormalizedName = role.NormalizedName,
-                ConcurrencyStamp = role.ConcurrencyStamp,
-                _EntityId = role.Id
-            };
+            //var roleEntity = new RoleModel
+            //{
+            //    Name = role.Name,
+            //    NormalizedName = role.NormalizedName,
+            //    ConcurrencyStamp = role.ConcurrencyStamp,
+            //    _EntityId = role.Id
+            //};
 
-            _unitOfWork.RoleRepository.Create(role.Id, roleEntity);
+            //_unitOfWork.RoleInAppRepository.InAppRoleCollection.Create(role.Id, roleEntity);
 
             return Task.FromResult(IdentityResult.Success);
         }
@@ -79,14 +82,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="role">The role to delete from the store.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous query.</returns>
-        public Task<IdentityResult> DeleteAsync(IdentityRole role, CancellationToken cancellationToken = default)
+        public Task<IdentityResult> DeleteAsync(Role role, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (role == null)
-                throw new ArgumentNullException(nameof(role));
+            //if (role == null)
+            //    throw new ArgumentNullException(nameof(role));
 
-            _unitOfWork.RoleRepository.Delete(role.NormalizedName);
+            //_unitOfWork.RoleRepository.Delete(role.NormalizedName);
 
             return Task.FromResult(IdentityResult.Success);
         }
@@ -97,27 +100,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="id">The role ID to look for.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that result of the look up.</returns>
-        public Task<IdentityRole> FindByIdAsync(string roleId, CancellationToken cancellationToken = default)
+        public Task<Role> FindByIdAsync(string roleId, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (string.IsNullOrWhiteSpace(roleId))
                 throw new ArgumentNullException(nameof(roleId));
-
-            IdentityRole identityRole = null;
           
-            var roleData = _roleCollection.FirstOrDefault(x => x._EntityId == roleId);
-            if (roleData != null)
-            {
-                identityRole = new IdentityRole
-                {
-                    Name = roleData.Name,
-                    ConcurrencyStamp = roleData.ConcurrencyStamp,
-                    Id = roleData._EntityId
-                };
-            }
+            var role = _roleCollection.FirstOrDefault(x => x.Id == roleId);
+          
             
-            return Task.FromResult(identityRole);
+            return Task.FromResult(role);
         }
         /// <summary>
         /// Finds the role who has the specified normalized name as an asynchronous operation.
@@ -125,33 +118,21 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="normalizedName">The normalized role name to look for.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that result of the look up.</returns>
-        public Task<IdentityRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken = default)
+        public Task<Role> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken = default)
         {
 
             cancellationToken.ThrowIfCancellationRequested();
 
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
-
-            IdentityRole identityRole = null;
           
             var roleData = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
-            if (roleData != null)
-            {
-                identityRole = new IdentityRole
-                {
-                    Name = roleData.Name,
-                    ConcurrencyStamp = roleData.ConcurrencyStamp,
-                    NormalizedName = roleData.Name.ToUpper(),
-                    Id = roleData._EntityId
-
-                };
-            }
+          
             
 
             
 
-            return Task.FromResult(identityRole);
+            return Task.FromResult(roleData);
         }
         /// <summary>
         /// Get a role's normalized name as an asynchronous operation.
@@ -159,7 +140,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="role">The role whose normalized name should be retrieved.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the name of the role.</returns>
-        public Task<string> GetNormalizedRoleNameAsync(IdentityRole role, CancellationToken cancellationToken = default)
+        public Task<string> GetNormalizedRoleNameAsync(Role role, CancellationToken cancellationToken = default)
         { 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -174,7 +155,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="role">The role whose ID should be returned.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the ID of the role.</returns>
-        public Task<string> GetRoleIdAsync(IdentityRole role, CancellationToken cancellationToken = default)
+        public Task<string> GetRoleIdAsync(Role role, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -189,7 +170,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="role">The role whose name should be returned.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the name of the role.</returns>
-        public Task<string> GetRoleNameAsync(IdentityRole role, CancellationToken cancellationToken = default)
+        public Task<string> GetRoleNameAsync(Role role, CancellationToken cancellationToken = default)
         {
             if (role == null)
                 throw new ArgumentNullException(nameof(role));
@@ -203,7 +184,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="normalizedName">The normalized name to set</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetNormalizedRoleNameAsync(IdentityRole role, string normalizedName, CancellationToken cancellationToken = default)
+        public Task SetNormalizedRoleNameAsync(Role role, string normalizedName, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -221,7 +202,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="roleName">The name of the role.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetRoleNameAsync(IdentityRole role, string roleName, CancellationToken cancellationToken = default)
+        public Task SetRoleNameAsync(Role role, string roleName, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -238,29 +219,16 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="role">The role to update in the store.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous query.</returns>
-        public Task<IdentityResult> UpdateAsync(IdentityRole role, CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
 
-            if (role == null)
-                throw new ArgumentNullException(nameof(role));
-
-            var roleEntity = _unitOfWork.RoleRepository.Read(role.NormalizedName);
-            roleEntity.Name = role.Name;
-            try
-            {
-                _unitOfWork.RoleRepository.Update(roleEntity._EntityId, roleEntity);
-                return Task.FromResult(IdentityResult.Success);
-            }
-            catch (Exception ex)
-            {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Code = ex.Message, Description = ex.Message }));
-            }
-        }
 
         public void Dispose()
         {
             _disposed = true;
+        }
+
+        public Task<IdentityResult> UpdateAsync(Role role, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
