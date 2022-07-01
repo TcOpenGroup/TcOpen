@@ -66,6 +66,25 @@ namespace TcoIo
                 this.column = value;
             }
         }
+
+        private double pos_X;
+        public double Pos_X
+        {
+            get { return this.pos_X; }
+            set
+            {
+                this.pos_X = value;
+            }
+        }
+        private double pos_Y;
+        public double Pos_Y
+        {
+            get { return this.pos_Y; }
+            set
+            {
+                this.pos_Y = value;
+            }
+        }
         public TopologyObject()
         {
             Name = "";
@@ -73,14 +92,19 @@ namespace TcoIo
             Connection = "";
             Row = 0;
             Column = 0;
+            Pos_X = 0;
+            Pos_Y = 0;
         }
-        public TopologyObject(string name, string physics, string connection, int row, int column)
+        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y)
         {
             Name = name;
             Physics = physics;
             Connection = connection;
             Row = row;
             Column = column;
+            Pos_X = pos_X;
+            Pos_Y = pos_Y;
+
         }
     }
 }

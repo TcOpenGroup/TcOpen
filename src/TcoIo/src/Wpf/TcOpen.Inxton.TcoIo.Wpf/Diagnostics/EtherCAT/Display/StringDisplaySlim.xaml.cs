@@ -11,7 +11,6 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
 {
     public partial class StringDisplaySlim : INotifyPropertyChanged
     {
-        /******************************************/
         public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(StringDisplaySlim), new PropertyMetadata(OnDescriptionChangedCallBack));
         public string Description
         {
@@ -69,101 +68,6 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             }
         }
 
-        /******************************************/
-        /******************************************/
-        public static readonly DependencyProperty StateProperty = DependencyProperty.Register("State", typeof(ushort), typeof(StringDisplaySlim), new PropertyMetadata(OnStateChangedCallBack));
-
-        public ushort State
-        {
-            get { return (ushort)GetValue(StateProperty); }
-            set { SetValue(StateProperty, value); }
-        }
-
-        private static void OnStateChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            StringDisplaySlim c = sender as StringDisplaySlim;
-            if (c != null)
-            {
-                c.OnStateChanged();
-                c.StateChange(sender, e);
-            }
-        }
-
-        protected virtual void OnStateChanged()
-        {
-            OnPropertyChanged("State");
-        }
-
-        private void StateChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            //Binding binding = tbValue.GetBindingExpression(TextBox.BackgroundProperty).ParentBinding;
-
-            //string formatString = DataContext as string;
-            //if (!string.IsNullOrEmpty(formatString))
-            //{
-            //    Binding b = new Binding
-            //    {
-            //        Source = DataContext,
-            //        Mode = binding.Mode,
-            //        StringFormat = formatString
-            //    };
-            //    tbValue.SetBinding(TextBox.TextProperty, b);
-            //}
-            //State = 8;
-            tbDescription.SetBinding(TextBox.ForegroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToForeground(), Mode = BindingMode.OneWay });
-            tbValue.SetBinding(TextBox.BackgroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToBackground(), Mode = BindingMode.OneWay });
-            tbDescription.SetBinding(TextBox.BackgroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToBackground(), Mode = BindingMode.OneWay });
-            tbValue.SetBinding(TextBox.ForegroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToForeground(), Mode = BindingMode.OneWay });
-        }
-
-        /******************************************/
-        /******************************************/
-        public static readonly DependencyProperty BackgroundColorProperty = DependencyProperty.Register("BackgroundColor", typeof(Brush), typeof(StringDisplaySlim), new PropertyMetadata(OnBackgroundColorChangedCallBack));
-        public Brush BackgroundColor
-        {
-            get { return (Brush)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
-        }
-
-        private static void OnBackgroundColorChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            StringDisplaySlim c = sender as StringDisplaySlim;
-            if (c != null)
-            {
-                c.OnBackgroundColorChanged();
-                c.BackgroundColorChange(sender, e);
-            }
-        }
-
-        protected virtual void OnBackgroundColorChanged()
-        {
-            OnPropertyChanged("BackgroundColor");
-        }
-
-        private void BackgroundColorChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            int x = 6;
-            //Binding binding = tbValue.GetBindingExpression(TextBox.BackgroundProperty).ParentBinding;
-
-            //string formatString = DataContext as string;
-            //if (!string.IsNullOrEmpty(formatString))
-            //{
-            //    Binding b = new Binding
-            //    {
-            //        Source = DataContext,
-            //        Mode = binding.Mode,
-            //        StringFormat = formatString
-            //    };
-            //    tbValue.SetBinding(TextBox.TextProperty, b);
-            //}
-            //State = 8;
-            //tbDescription.SetBinding(TextBox.ForegroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToForeground(), Mode = BindingMode.OneWay });
-            //tbValue.SetBinding(TextBox.BackgroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToBackground(), Mode = BindingMode.OneWay });
-            //tbDescription.SetBinding(TextBox.BackgroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToBackground(), Mode = BindingMode.OneWay });
-            //tbValue.SetBinding(TextBox.ForegroundProperty, new Binding() { Source = State, Converter = new Converters.InfoDataStateToForeground(), Mode = BindingMode.OneWay });
-        }
-
-        /******************************************/
         public StringDisplaySlim()
         {
             InitializeComponent();

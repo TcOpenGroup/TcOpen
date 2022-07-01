@@ -24,11 +24,11 @@
     </UserControl.Resources>
     <Border BorderBrush="White" BorderThickness="0,5,0,0">
         <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-            <StackPanel Height="{Binding Source={x:Static dims:DimsDef.devHeight}}"  DataContext="{Binding Device}">
+            <StackPanel Height="{Binding Source={x:Static dims:DimsDef.masterHeight}}"  Width="{Binding Source={x:Static dims:DimsDef.masterWidth}}"  DataContext="{Binding Device}">
                 <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>
                 <Border Margin="3,0" BorderThickness="1" BorderBrush="White" CornerRadius="3">
                     <Border Margin="1" BorderThickness="1" BorderBrush="White" CornerRadius="2">
-                        <disp:StringDisplaySlim Margin="5,3,5,2" Description="Device type" ToolTip="Type of the device" DataContext="{Binding AttributeBoxType}"/>
+                        <disp:StringDisplaySlim Margin="5,3,5,2" Description="Device type" ToolTip="Type of the device"  DataContext="{Binding AttributeBoxType}"/>
                     </Border>
                 </Border>
                 <vortex:RenderableContentControl DataContext="{Binding InfoData}" PresentationType="HWDiag" />

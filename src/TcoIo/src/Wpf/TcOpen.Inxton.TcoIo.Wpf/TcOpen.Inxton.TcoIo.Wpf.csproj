@@ -18,6 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\WarningIcon.png" />
+    <None Remove="Icons\WarningIconM90.png" />
+    <None Remove="Icons\WarningIconP90.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.703" />
   </ItemGroup>
 
@@ -135,6 +141,18 @@
     <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\WarningIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\WarningIconM90.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\WarningIconP90.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

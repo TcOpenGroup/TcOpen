@@ -17,8 +17,8 @@
         </ResourceDictionary>
     </Grid.Resources>
     <Grid.ColumnDefinitions>
-        <ColumnDefinition SharedSizeGroup="AttributeName"></ColumnDefinition>
-        <ColumnDefinition></ColumnDefinition>
+        <ColumnDefinition Width="80" />
+        <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
 
     <TextBox Grid.Column="0" x:Name="tbDescription" Text="{Binding Description, Mode=OneWay}" IsReadOnly="True" BorderBrush="Transparent" FontWeight="Light" Background ="{StaticResource InxtonGrayLight}"/>

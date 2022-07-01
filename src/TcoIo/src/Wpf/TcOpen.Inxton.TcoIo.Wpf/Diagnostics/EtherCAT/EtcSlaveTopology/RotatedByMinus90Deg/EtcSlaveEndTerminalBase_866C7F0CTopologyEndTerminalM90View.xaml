@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:TcoIo"
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:dims="clr-namespace:TcoIo.Topology"
+    xmlns:conv="clr-namespace:TcoIo.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:disp="clr-namespace:TcoIo.Diagnostics.EtherCAT.Display"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
@@ -30,16 +31,18 @@
             </TransformGroup>
         </Border.LayoutTransform>
         <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-            <Grid Height="{Binding Source={x:Static dims:DimsDef.endTermWidth}}" Grid.IsSharedSizeScope="True" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
+            <Grid Height="{Binding Source={x:Static dims:DimsDef.slaveWidth}}" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MaxHeight="18"/>
+                    <RowDefinition Height="Auto" MaxHeight="18"/>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.endTermHeight}}" SharedSizeGroup="true"/>
+                    <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.slaveHeight}}" SharedSizeGroup="true"/>
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="Name: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
+                    <TextBlock Text="Name: "                  FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    <TextBlock Text="{Binding AttributeName}" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
                 </WrapPanel>
             </Grid>
         </Border>

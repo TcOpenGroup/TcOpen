@@ -23,6 +23,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+
     <Border BorderBrush="White" BorderThickness="0,0,5,0">
         <Border.LayoutTransform>
             <TransformGroup>
@@ -31,7 +32,7 @@
             </TransformGroup>
         </Border.LayoutTransform>
         <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" >
-            <Grid Height="{Binding Source={x:Static dims:DimsDef.termWidth}}" Grid.IsSharedSizeScope="True" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToBackground}}" >
+            <Grid Height="{Binding Source={x:Static dims:DimsDef.slaveWidth}}" Grid.IsSharedSizeScope="True" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToBackground}}" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
                     <RowDefinition Height="Auto" MaxHeight="18"/>
@@ -39,13 +40,14 @@
                     <!--<RowDefinition Height="Auto" MaxHeight="28"/>-->
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.termHeight}}" SharedSizeGroup="true"/>
+                    <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.slaveHeight}}" SharedSizeGroup="true"/>
                 </Grid.ColumnDefinitions>
+                <Image HorizontalAlignment="Right" VerticalAlignment="Top" Height="16" Margin="1" Visibility="{Binding WcState.WcState.Cyclic, Converter={conv:BoolToVisibility}, FallbackValue=Collapsed}" Source="/TcOpen.Inxton.TcoIo.Wpf;component/Icons/WarningIconP90.png" />
+
                 <WrapPanel Grid.Row="0" Grid.Column="0">
                     <TextBlock Text="Name: "                  FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
                     <TextBlock Text="{Binding AttributeName}" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
                 </WrapPanel>
-                <Ellipse Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding WcState.WcState.Cyclic, Converter={conv:BoolToVisibility}, FallbackValue=Collapsed}" Margin="0,2,2,0" Height="10" Width="10" Fill="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToInputToggleBackground}}"/>
 
                 <Grid Grid.Row="1" Grid.Column="0" DataContext="{Binding InfoData}">
                     <Grid.ColumnDefinitions>

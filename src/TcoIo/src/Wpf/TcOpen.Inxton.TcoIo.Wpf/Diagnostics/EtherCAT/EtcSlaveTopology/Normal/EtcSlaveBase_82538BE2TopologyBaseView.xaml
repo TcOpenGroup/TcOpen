@@ -24,4 +24,5 @@
     <StackPanel DataContext="{Binding Component}">
         <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="TopologyBox-TopologyTerminal"/>
     </StackPanel>
+
 </UserControl>
