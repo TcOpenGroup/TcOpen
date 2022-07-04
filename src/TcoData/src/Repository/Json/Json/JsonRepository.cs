@@ -113,7 +113,7 @@ namespace TcOpen.Inxton.Data.Json
         {
             var filetered = new List<T>();
 
-            if (identifier == "*")
+            if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
             {
                 foreach (var item in Directory.EnumerateFiles(this.Location))
                 {
@@ -148,7 +148,7 @@ namespace TcOpen.Inxton.Data.Json
 
         }
 
-        protected override long FilteredCountNvi(string id)
+        protected override long FilteredCountNvi(string id, eSearchMode searchMode)
         {
             if (id == "*")
             {
@@ -156,7 +156,16 @@ namespace TcOpen.Inxton.Data.Json
             }
             else
             {
-                return Directory.EnumerateFiles(this.Location).Where(p => p.Contains(id)).Count();
+                switch (searchMode)
+                {
+                    case eSearchMode.StartsWith:
+                        return Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.StartsWith(id)).Count();
+                    case eSearchMode.Contains:
+                        return Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.Contains(id)).Count();
+                    case eSearchMode.Exact:
+                    default:
+                        return Directory.EnumerateFiles(this.Location).Select(p => new FileInfo(p)).Where(p => p.Name == id).Select(p => p.FullName).Count();
+                }
             }
         }
 

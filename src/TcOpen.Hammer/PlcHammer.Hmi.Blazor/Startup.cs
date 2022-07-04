@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlcHammer.Hmi.Blazor.Data;
+using PlcHammer.Hmi.Blazor.Security;
 using PlcHammerConnector;
 using System;
 using System.Collections.Generic;
@@ -48,18 +49,21 @@ namespace PlcHammer.Hmi.Blazor
             services.AddServerSideBlazor();
           
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<WeatherForecastService>();
             services.AddVortexBlazorServices();
 
             /*MongoDb repositories for security*/
-            //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
-            //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "Hammer", "Roles"));
-            
+            //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "HammerBlazor", "Users"));
+            //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
+
             /*Json repositories for security*/
             var userRepo = SetUpUserRepositoryJson();
-            var roleRepo = SetUpRoleRepositoryJson();
-                        
-            services.AddVortexBlazorSecurity(userRepo, roleRepo);
+           
+
+
+            var roleManager = Roles.Create();
+            services.AddVortexBlazorSecurity(userRepo,roleManager);
+
+
             services.AddTcoCoreExtensions();
 
             /*Json repositories for data*/
@@ -141,7 +145,7 @@ namespace PlcHammer.Hmi.Blazor
         private static void SetUpMongoDatabase()
         {
             var mongoUri = "mongodb://localhost:27017";
-            var databaseName = "Hammer";
+            var databaseName = "HammerBlazor";
 
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
@@ -160,19 +164,7 @@ namespace PlcHammer.Hmi.Blazor
                 Directory.CreateDirectory(repositoryDirectory);
             }
 
-            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));
-        }
-        private static IRepository<RoleModel> SetUpRoleRepositoryJson()
-        {
-            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
-            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
-
-            if (!Directory.Exists(repositoryDirectory))
-            {
-                Directory.CreateDirectory(repositoryDirectory);
-            }
-
-            return new JsonRepository<RoleModel>(new JsonRepositorySettings<RoleModel>(Path.Combine(repositoryDirectory, "Roles")));
+            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "UsersBlazor")));
         }
     }
 }

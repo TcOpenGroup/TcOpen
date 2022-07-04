@@ -71,9 +71,27 @@ namespace TcOpen.Inxton.Data.MongoDb
 
         protected override void DeleteNvi(string identifier) { collection.DeleteOne(p => p._EntityId == identifier); }
 
-        protected override long FilteredCountNvi(string id)
+        protected override long FilteredCountNvi(string id, eSearchMode searchMode)
         {
-            var filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{id}", ""));
+            var filetered = new List<T>();
+            FilterDefinition<T> filter;
+
+            var filterExpresion = ParseIdentifierForRegularExpression(id);
+
+            switch (searchMode)
+            {
+                case eSearchMode.StartsWith:
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{filterExpresion}", ""));
+                    break;
+                case eSearchMode.Contains:
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{filterExpresion}", ""));
+                    break;
+                case eSearchMode.Exact:
+                default:
+                    filter = Builders<T>.Filter.Eq(p => p._EntityId, id);
+                    break;
+            }
+
             if (id == "*" || string.IsNullOrWhiteSpace(id))
             {
 #pragma warning disable CS0618 // CountDocuments is very slow compared to Count() even though Count is obsolete. 
@@ -96,13 +114,15 @@ namespace TcOpen.Inxton.Data.MongoDb
             var filetered = new List<T>();
             FilterDefinition<T> filter;
 
+            var filterExpresion = ParseIdentifierForRegularExpression(identifier);
+
             switch (searchMode)
             {             
                 case eSearchMode.StartsWith:
-                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{identifier}", ""));
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{filterExpresion}", ""));
                     break;
                 case eSearchMode.Contains:
-                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{identifier}", ""));
+                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{filterExpresion}", ""));
                     break;
                 case eSearchMode.Exact:                    
                 default:
@@ -128,6 +148,32 @@ namespace TcOpen.Inxton.Data.MongoDb
                     .Skip(skip)
                     .ToList();
             }
+        }
+
+        /// <summary>
+        /// Parses input string, so it is evaluated as verbatim string and not as regular expression. All special ascii characters are prefixed with "\".
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        private string ParseIdentifierForRegularExpression(string identifier)
+        {
+            var result = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(identifier))
+            {
+                return result;
+            }
+
+            foreach (var character in identifier)
+            {
+                if (character <= 47 || (character >= 58 && character <= 64) || (character >= 91 && character <= 96) || (character >= 123 && character <= 126))
+                {
+                    result += @"\";
+                }
+                result += character.ToString();
+            }
+
+            return result;
         }
 
         protected override T ReadNvi(string identifier)
