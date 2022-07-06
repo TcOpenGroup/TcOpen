@@ -127,10 +127,10 @@ namespace TcOpen.Inxton.RavenDb
         protected override long CountNvi => _store.Maintenance.Send(new GetStatisticsOperation()).CountOfDocuments;
 
         protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
-        {
+        {           
             using (var session = _store.OpenSession())
             {
-                if (identifier == "*")
+                if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
                 {
                     return session.Query<T>()
                         .Skip(skip)
@@ -166,7 +166,7 @@ namespace TcOpen.Inxton.RavenDb
             }
         }
 
-        protected override long FilteredCountNvi(string identifier)
+        protected override long FilteredCountNvi(string identifier, eSearchMode searchMode)
         {
             if (identifier == "*")
             {
@@ -176,9 +176,22 @@ namespace TcOpen.Inxton.RavenDb
             {
                 using (var session = _store.OpenSession())
                 {
-                    return session.Query<T>()
-                        .Search(x => x._EntityId, "*" + identifier + "*")
-                        .Count();
+                    switch (searchMode)
+                    {                     
+                        case eSearchMode.StartsWith:
+                            return session.Query<T>()                             
+                                 .Where(x => x._EntityId.StartsWith(identifier))
+                                 .Count();
+                        case eSearchMode.Contains:                           
+                            return session.Query<T>()                            
+                                .Search(x => x._EntityId, $"*{identifier}*")
+                                .Count();
+                        case eSearchMode.Exact:
+                        default:
+                            return session.Query<T>()                               
+                                   .Where(x => x._EntityId == identifier)
+                                   .Count();
+                    }
                 }
             }
         }

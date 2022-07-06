@@ -18,12 +18,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Icons\WarningIcon.png" />
-    <None Remove="Icons\WarningIconM90.png" />
-    <None Remove="Icons\WarningIconP90.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.703" />
   </ItemGroup>
 

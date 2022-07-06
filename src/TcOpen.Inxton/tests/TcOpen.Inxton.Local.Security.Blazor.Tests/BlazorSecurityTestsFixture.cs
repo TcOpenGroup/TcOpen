@@ -15,11 +15,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
     public class BlazorSecurityTestsFixture : IDisposable
     {
         private InMemoryRepository<UserData> _inMemoryRepoUser;
-        private InMemoryRepository<RoleModel> _inMemoryRepoRole;
+        private BlazorRoleManager _inMemoryRepoRole;
         public BlazorSecurityTestsFixture()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
-            _inMemoryRepoRole = new InMemoryRepository<RoleModel>();
+            _inMemoryRepoRole = new BlazorRoleManager();
             Repository = new RepositoryService(_inMemoryRepoUser, _inMemoryRepoRole);
             UserStore = new UserStore(Repository);
             RoleStore = new RoleStore(Repository);
@@ -27,9 +27,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             Repository.UserRepository.Create(SeedData.DefaultUser.Id, new UserData(SeedData.DefaultUser));
             Repository.UserRepository.Create(SeedData.RemoveUser.Id, new UserData(SeedData.RemoveUser));
             Repository.UserRepository.Create(SeedData.UpdateUser.Id, new UserData(SeedData.UpdateUser));
+
+            _inMemoryRepoRole.CreateRole(new Inxton.Security.Role("Admin", "AdminGroup"));
+            _inMemoryRepoRole.CreateRole(new Inxton.Security.Role("Default", "AdminGroup"));
+         
            
-            Repository.RoleRepository.Create("75f2267f-eabd-4e9b-bdfa-28cf0cb42854", SeedData.AdminRole);
-            Repository.RoleRepository.Create("3fc7c8af-7ca7-46c4-b897-e11df6b6432f", SeedData.DefaultRole);
 
         }
 
@@ -45,7 +47,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         public void Dispose()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
-            _inMemoryRepoRole = new InMemoryRepository<RoleModel>();
+            _inMemoryRepoRole = new BlazorRoleManager();
             Repository = new RepositoryService(_inMemoryRepoUser, _inMemoryRepoRole);
         }
     }

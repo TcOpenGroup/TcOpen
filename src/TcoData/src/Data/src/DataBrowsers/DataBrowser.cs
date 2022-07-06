@@ -69,9 +69,9 @@ namespace TcOpen.Inxton.Data
         }
         public void Delete(T data) { Repository.Delete(((IBrowsableDataObject)data)._EntityId); }
         public long Count { get { return this.Repository.Count; } }        
-        public long FilteredCount(string id)
+        public long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact)
         {
-            return this.Repository.FilteredCount(id);
+            return this.Repository.FilteredCount(id, searchMode);
         }
         object IDataBrowser.FindById(string id)
         {
@@ -104,7 +104,7 @@ namespace TcOpen.Inxton.Data
         {
             return new T();
         }
-        long IDataBrowser.FilteredCount(string id) { return this.FilteredCount(id); }
+        long IDataBrowser.FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact) { return this.FilteredCount(id, searchMode); }
 
         public IQueryable<T> GetRecords(Expression<Func<T, bool>> expression)
         {
@@ -372,6 +372,6 @@ namespace TcOpen.Inxton.Data
         void Delete(object data);
         object CreateEmpty();              
         long Count { get; }
-        long FilteredCount(string id);
+        long FilteredCount(string id, eSearchMode searchMode);
     }
 }
