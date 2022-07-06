@@ -1,0 +1,213 @@
+﻿@namespace TcoData
+<h3>DataView</h3>
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="mb-3 col">
+            <label class="form-label">Per page</label>
+            <select class="w-100 form-select"
+                    @bind="@DataExchange.Limit">
+                <option class="form-control" value="5">5</option>
+                <option class="form-control" value="10">10</option>
+                <option class="form-control" value="15">15</option>
+                <option class="form-control" value="50">50</option>
+                <option class="form-control" value="100">100</option>
+                <option class="form-control" value="200">200</option>
+            </select>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Filter</label>
+            <input class="form-control col" type="text" @bind="@DataExchange.FilterById" />
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Search mode</label>
+
+            <select class="w-100 form-select"
+                    @bind="@DataExchange.SearchMode">
+                @foreach (var item in eSearchModes)
+                {
+
+                    <option class="form-control" value="@item">@item.ToString() </option>
+
+                }
+            </select>
+        </div>
+        <button  class="btn btn-primary" @onclick="() => Filter() ">Filter</button>
+    </div>
+    <div class="row">
+        @if (IsLoading)
+        {
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        }
+        else
+        {
+            <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in @DataExchange.ObservableRecords.ToList())
+                        {
+                            <tr>
+                                <td>@item._EntityId</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+             </div>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <button class="page-link" @onclick="() => PageChangedFirst()" aria-label="First">
+                                <span aria-hidden="true">&laquo;</span>
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentPage-1)" aria-label="Previous">
+                                <span aria-hidden="true">&lsaquo;</span>
+                            </button>
+                        </li>
+
+
+
+
+                        @for (var i = _visibleDownPage; i < _visibleUpPage; i++)
+                        {
+                            var current = i;
+                            @if (i == _currentPage)
+                            {
+                                <li class="page-item active"><button class="page-link" @onclick="() => PageChanged(current) ">@(current + 1)</button></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><button class="page-link" @onclick="() => PageChanged(current) ">@(current + 1)</button></li>
+                            }
+                        }
+
+                        <li class="page-item">
+                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentPage + 1)" aria-label="Next">
+                                <span aria-hidden="true">&rsaquo;</span>
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link" @onclick="() => PageChangedLast()" aria-label="Last">
+                                <span aria-hidden="true">&raquo;</span>
+                            </button>
+                        </li>
+
+                    </ul>
+                </nav>
+
+                }
+            </div>
+        </div>
+
+
+@code {
+
+
+
+        [Parameter]
+        public IDataViewModel DataExchange { get; set; }
+
+
+
+    public bool IsLoading { get; set; }
+    public int PageCount { get; set; }
+
+    private int _currentPage { get; set; }
+
+    private int _visibleDownPage { get; set; }
+    private int _visibleUpPage { get; set; }
+
+    //private string PaginationActive
+    private async Task Filter()
+    {
+        await Task.Run(DataExchange.FillObservableRecordsAsync);
+        PageCount = (int)Math.Ceiling(DataExchange.FilteredCount * 1.0 / DataExchange.Limit * 1.0);
+        StateHasChanged();
+    }
+
+
+    private async Task PageChangedFirst()
+    {
+
+        _visibleDownPage = 0;
+        if (PageCount > 3) _visibleUpPage = 3;
+        await PageChanged(0);
+    }
+    private async Task PageChangedLast()
+    {
+
+        if(PageCount > 3) _visibleDownPage = PageCount-3;
+        _visibleUpPage = PageCount;
+        await PageChanged(PageCount-1);
+    }
+
+    private async Task PageChanged(int pageNumber)
+    {
+        if (pageNumber < 0 || pageNumber >= PageCount) return;
+        _currentPage = pageNumber;
+        DataExchange.Page = pageNumber ;
+        await Filter();
+    }
+
+    private async Task PageChangedWithArrow(int pageNumber)
+    {
+        if (pageNumber < 0 || pageNumber >= PageCount) return;
+
+        if (pageNumber <= _visibleDownPage)
+        {
+            if (_visibleDownPage > 0)
+            {
+                _visibleDownPage -= 1;
+                _visibleUpPage -= 1;
+            }
+        }
+        if (pageNumber >= _visibleUpPage)
+        {
+            if (_visibleUpPage < PageCount)
+            {
+                _visibleUpPage += 1;
+                _visibleDownPage += 1;
+            }
+        }
+
+        _currentPage = pageNumber;
+        DataExchange.Page = pageNumber;
+        await Filter();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        IsLoading = true;
+        await Task.Run(DataExchange.FillObservableRecordsAsync);   //works fine
+        PageCount = (int)Math.Ceiling(DataExchange.FilteredCount * 1.0 / DataExchange.Limit * 1.0);
+        _visibleDownPage = 0;
+
+        _visibleUpPage = PageCount > 3 ? 3 : PageCount;
+
+        IsLoading = false;
+
+
+        base.OnInitializedAsync();
+    }
+
+
+    private IEnumerable<eSearchMode> eSearchModes => Enum.GetValues(typeof(eSearchMode)).Cast<eSearchMode>();
+
+
+}

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorPagination" Version="0.2.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.17" />
+	<PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.9-alpha.719" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TcoDataConnector\TcoDataConnector.csproj" />
+  </ItemGroup>
+
+</Project>

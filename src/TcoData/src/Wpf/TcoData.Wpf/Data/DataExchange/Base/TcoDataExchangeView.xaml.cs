@@ -40,6 +40,11 @@ namespace TcoData
             get => this.DataView.DataListColumns;
             set { this.DataView.DataListColumns = value; }
         }
+
+        private void DataView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 
