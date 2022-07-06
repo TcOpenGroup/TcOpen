@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC50_A2_EK1122_AE8686CC" Id="{bdef55c8-a11f-0029-0e99-6bc69f142a71}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "RC50_VI_AES_D_BC_ECAT_xAES_A3B0707168RC50_SAFETY_Flexi_Soft_EtherCAT_GatewayFlexi_Soft_EtherCAT_Gateway_DE394EDD5"}
+{attribute addProperty CRC "2928051916"}
+{attribute addProperty Size "73"}
+{attribute addProperty Name "RC50_A2 (EK1122)"}
+TYPE RC50_A2_EK1122_AE8686CC EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC50_VI (AES-D-BC-ECAT)"}
+	{attribute addProperty PreviousPort "RC50_A2 (EK1122) : D"}
+	RC50_VI_AES_D_BC_ECAT_x : AES_A3B07071;
+	{attribute addProperty Name "RC50_SAFETY (Flexi Soft EtherCAT Gateway)"}
+	{attribute addProperty PreviousPort "RC50_A2 (EK1122) : B"}
+	RC50_SAFETY_Flexi_Soft_EtherCAT_Gateway : Flexi_Soft_EtherCAT_Gateway_DE394EDD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

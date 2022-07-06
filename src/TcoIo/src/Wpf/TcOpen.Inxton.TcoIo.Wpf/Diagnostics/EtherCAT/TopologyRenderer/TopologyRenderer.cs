@@ -15,35 +15,38 @@ namespace TcoIo
 {
     public class TopologyRenderer : UserControl
     {
-        static int row = 0;
-        static int column = 0;
-        static double Pos_X = 0;
-        static double Pos_Y = 0;
-        static TopologyObject previousTopologyObject = new TopologyObject();
-        static ObservableCollection<TopologyObject> topologyObjects = new ObservableCollection<TopologyObject>();
+        static int row;
+        static int maxrow;
+        static int column;
+        static double Pos_X;
+        static double Pos_Y;
+        static double MaxPos_Y;
+        static TopologyObject previousTopologyObject;
+        static ObservableCollection<TopologyObject> topologyObjects;
+
 
         public TopologyRenderer() : base()
         {
+            row=0;
+            maxrow = 0;
+            column = 0;
+            Pos_X = 0;
+            Pos_Y = 0;
+            MaxPos_Y = 0;
+            previousTopologyObject = new TopologyObject();
+            topologyObjects = new ObservableCollection<TopologyObject>();
+            this.PresentationType = "TopologyDevice-TopologyBaseM90-TopologyBoxM90-TopologyTerminalM90-TopologyEndTerminalM90";
             this.DataContextChanged += TopologyRenderer_DataContextChanged;           
         }
 
         public string PresentationType { get; set; }
 
-        public enum HardwareType
-        {
-            Undefined,
-            EtcMasterBase,
-            EtcSlaveBoxBase,
-            EtcSlaveTerminalBase,
-            EtcSlaveEndTerminalBase
-        }
-
         private void TopologyRenderer_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            this.Content = Render(this.DataContext as IVortexObject, ref row, ref column, ref Pos_X, ref Pos_Y, ref previousTopologyObject);
+            this.Content = Render(this.DataContext as IVortexObject, ref row, ref maxrow, ref column, ref Pos_X, ref Pos_Y, ref MaxPos_Y, ref previousTopologyObject);
         }
 
-        public object Render(IVortexObject obj, ref int row, ref int column, ref double Pos_X, ref double Pos_Y, ref TopologyObject previousTopologyObject, Grid mainGrid = null, Grid subGrid = null, UniformGrid cell = null)
+        public object Render(IVortexObject obj, ref int row, ref int maxrow, ref int column, ref double Pos_X, ref double Pos_Y, ref double MaxPos_Y, ref TopologyObject previousTopologyObject, Grid mainGrid = null, Grid subGrid = null, UniformGrid cell = null)
         {
 
             if (obj != null)
@@ -98,15 +101,45 @@ namespace TcoIo
                         //Increment row only in case of new master device
                         if (!string.IsNullOrEmpty(previousTopologyObject.Name))
                         {
-                            row++;
-                            Pos_Y = Pos_Y + DimsDef.masterHeight + 15;
+                            maxrow++;
+                            row = maxrow;
+                            MaxPos_Y = MaxPos_Y + DimsDef.masterHeight + 15;
+                            Pos_Y = MaxPos_Y;
                         }
                         Pos_X = DimsDef.masterWidth + 10;
+                    }
+                    // slave is the first item in the view
+                    else if (isSlave && previousTopologyObject.Name == null) // slave is first in the view
+                    {
+                        //Add empty cell before slave
+                        column = 0;
+                        row = 0;
+                        Pos_X = DimsDef.slaveWidth + 10.0;
+                        UniformGrid emptyCell = new UniformGrid();
+                        emptyCell.Width = DimsDef.slaveWidth + 10;
+                        emptyCell.Height = DimsDef.slaveHeight + 15;
+
+                        mainGrid.Children.Add(emptyCell);
+                        Grid.SetColumn(emptyCell, column);
+                        Grid.SetRow(emptyCell, row);
+
+                        var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
+                        var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
+                        if (State != null)
+                        {
+                            Line line = new Line() { X1 = 0, X2 = DimsDef.slaveWidth + 10, Y1 = DimsDef.slaveInput + 5, Y2 = DimsDef.slaveInput + 5, StrokeThickness = 10 };
+                            Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
+                            line.SetBinding(Line.StrokeProperty, binding);
+
+                            subGrid.Children.Add(line);
+                        }
+                        column++;
+                        Pos_X = Pos_X + DimsDef.slaveWidth + 10.0;
                     }
                     else if (isSlave)
                     {
                         //First box after master
-                        if (currentPhysics != null && currentConnection != null && currentPhysics.StartsWith("Y") && currentConnection.StartsWith(previousTopologyObject.Name) && currentConnection.EndsWith(previousTopologyObject.Physics))
+                        if (currentPhysics != null && currentConnection != null && currentPhysics.StartsWith("Y") && previousTopologyObject.Name != null && currentConnection.StartsWith(previousTopologyObject.Name) && previousTopologyObject.Physics != null && currentConnection.EndsWith(previousTopologyObject.Physics))
                         {
                             //No empty cell in case of PLC backplane
                             if (!(currentBoxType != null && currentBoxType.StartsWith("EK1200")))
@@ -115,8 +148,8 @@ namespace TcoIo
                                 column++;
                                 Pos_X = Pos_X + DimsDef.slaveWidth + 10.0;
                                 UniformGrid emptyCell = new UniformGrid();
-                                emptyCell.Width = DimsDef.slaveWidth;
-                                emptyCell.Height = DimsDef.slaveHeight;
+                                emptyCell.Width = DimsDef.slaveWidth + 10;
+                                emptyCell.Height = DimsDef.slaveHeight + 15;
 
                                 mainGrid.Children.Add(emptyCell);
                                 Grid.SetColumn(emptyCell, column);
@@ -138,7 +171,7 @@ namespace TcoIo
                         if (currentPhysics != null && currentConnection != null)
                         {
                             //Check if previously added device box or terminal is that one the currently added is connected to
-                            if (currentConnection.StartsWith(previousTopologyObject.Name))
+                            if (previousTopologyObject.Name != null && currentConnection.StartsWith(previousTopologyObject.Name))
                             {
                                 column++;
                                 Pos_X = Pos_X + DimsDef.slaveWidth + 10;
@@ -202,8 +235,8 @@ namespace TcoIo
                                 {
                                     //Add empty cell after extension box
                                     UniformGrid emptyCell = new UniformGrid();
-                                    emptyCell.Width = DimsDef.slaveWidth;
-                                    emptyCell.Height = DimsDef.slaveHeight;
+                                    emptyCell.Width = DimsDef.slaveWidth + 10;
+                                    emptyCell.Height = DimsDef.slaveHeight + 15;
 
                                     mainGrid.Children.Add(emptyCell);
                                     Grid.SetColumn(emptyCell, column);
@@ -225,7 +258,7 @@ namespace TcoIo
                                 }
                             }
                             //First box after 2 port junction port C
-                            if (!currentConnection.StartsWith(previousTopologyObject.Name))
+                            if (previousTopologyObject.Name != null && !currentConnection.StartsWith(previousTopologyObject.Name))
                             {
                                 //Find the topology object the current one is connected to and use its row and column for proper placement
                                 foreach (TopologyObject topologyObject in topologyObjects)
@@ -283,7 +316,7 @@ namespace TcoIo
                                             {
                                                 //Connection to the X1 of the junction box
                                                 double x1 = topologyObject.Pos_X + DimsDef.juntionOutputX1 - 5 - DimsDef.slaveWidth - 15;
-                                                double x2 = topologyObject.Pos_X;
+                                                double x2 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
                                                 double y1 = topologyObject.Pos_Y + DimsDef.slaveOutputFront + 10;
                                                 double y2 = Pos_Y + DimsDef.slaveInput + 5;
                                                 Line line = new Line() { X1 = x2, X2 = x1-5, Y1 = y1, Y2 = y1, StrokeThickness = 10 };
@@ -320,7 +353,8 @@ namespace TcoIo
 
                     mainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
                     mainGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-
+                    maxrow = Math.Max(maxrow, row);
+                    MaxPos_Y = Math.Max(MaxPos_Y, Pos_Y);
                     previousTopologyObject = currentTopologyObject;
                 }
 
@@ -328,7 +362,7 @@ namespace TcoIo
                 {
                     // cell new
 
-                    Render(child, ref row, ref column, ref Pos_X, ref Pos_Y, ref previousTopologyObject, mainGrid, subGrid, new UniformGrid());
+                    Render(child, ref row, ref maxrow, ref column, ref Pos_X, ref Pos_Y, ref MaxPos_Y, ref previousTopologyObject, mainGrid, subGrid, new UniformGrid());
                 }
             }
             return mainGrid;

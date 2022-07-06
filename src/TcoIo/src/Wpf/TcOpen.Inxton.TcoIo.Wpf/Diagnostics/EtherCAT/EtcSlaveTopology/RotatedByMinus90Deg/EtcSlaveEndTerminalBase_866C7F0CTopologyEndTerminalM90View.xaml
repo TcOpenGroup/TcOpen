@@ -14,7 +14,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalM90View/>
+        <local:EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalM90ViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
@@ -23,29 +23,38 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border BorderBrush="White" BorderThickness="0,0,5,0">
-        <Border.LayoutTransform>
-            <TransformGroup>
-                <RotateTransform Angle="90" />
-                <ScaleTransform ScaleX="-1" ScaleY="-1"/>
-            </TransformGroup>
-        </Border.LayoutTransform>
-        <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-            <Grid Height="{Binding Source={x:Static dims:DimsDef.slaveWidth}}" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" MaxHeight="18"/>
-                    <RowDefinition Height="Auto" MaxHeight="18"/>
-                    <RowDefinition Height="Auto" MaxHeight="18"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.slaveHeight}}" SharedSizeGroup="true"/>
-                </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="Name: "                  FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeName}" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-            </Grid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Background="{StaticResource InxtonGrayLight}">
+            <Border.LayoutTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="90" />
+                    <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                </TransformGroup>
+            </Border.LayoutTransform>
+            <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" >
+                <Grid Height="{Binding Source={x:Static dims:DimsDef.slaveWidth}}" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToBackground}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MaxHeight="18"/>
+                        <RowDefinition Height="Auto" MaxHeight="18"/>
+                        <RowDefinition Height="Auto" MaxHeight="18"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.slaveHeight}}" SharedSizeGroup="true"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock Text="Name: "                FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock x:Name="tbName" Text="{Binding AttributeName , NotifyOnTargetUpdated=true}" MaxWidth="145" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}" VerticalAlignment="Center" TargetUpdated="tbName_TargetUpdated"/>
+                    </WrapPanel>
+                </Grid>
+            </Border>
         </Border>
-    </Border>
+        <Button Margin="0,5,0,0"  Background="Transparent" Foreground="Transparent" BorderThickness="0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="195" Click="OpenTerminalDetails"/>
+    </Grid>
 </UserControl>
 

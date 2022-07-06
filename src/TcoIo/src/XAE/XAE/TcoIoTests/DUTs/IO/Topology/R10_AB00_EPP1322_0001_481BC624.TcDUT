@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R10_AB00_EPP1322_0001_481BC624" Id="{be1dcaef-77f6-0070-29a5-cdcdd06c7954}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EPP1322-0001-0017'}
+{attribute addProperty BoxType "EPP1322-0001-0017"}
+{attribute addProperty Id "R10_AB9_EPP1008_0001EPP1008_78E8D3DD12R10_AB10_EPP1008_0001EPP1008_78E8D3DD12R10_AB01_EPP1332_0001R10_AB01_EPP1332_0001_D97A776760R10_ABT7_EPP1008_0001EPP1008_78E8D3DD12R10_ABT6_EPP1008_0001EPP1008_78E8D3DD12R10_ABT5_EPP1008_0001EPP1008_78E8D3DD12R10_ABT4_EPP1008_0001EPP1008_78E8D3DD12R10_ABT3_EPP1008_0001EPP1008_78E8D3DD12R10_ABT2_EPP1008_0001EPP1008_78E8D3DD12R10_ABT1_EPP1008_0001EPP1008_78E8D3DD12"}
+{attribute addProperty CRC "1209779748"}
+{attribute addProperty Size "168"}
+{attribute addProperty Name "R10-AB00 (EPP1322-0001)"}
+TYPE R10_AB00_EPP1322_0001_481BC624 EXTENDS EPP1322_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R10-AB9 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-AB00 (EPP1322-0001) : D"}
+	R10_AB9_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-AB10 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-AB9 (EPP1008-0001) : B"}
+	R10_AB10_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-AB01 (EPP1332-0001)"}
+	{attribute addProperty PreviousPort "R10-AB00 (EPP1322-0001) : B"}
+	R10_AB01_EPP1332_0001 : R10_AB01_EPP1332_0001_D97A7767;
+	{attribute addProperty Name "R10-ABT7 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-AB01 (EPP1332-0001) : C"}
+	R10_ABT7_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-ABT6 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-ABT7 (EPP1008-0001) : B"}
+	R10_ABT6_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-ABT5 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-ABT6 (EPP1008-0001) : B"}
+	R10_ABT5_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-ABT4 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-ABT5 (EPP1008-0001) : B"}
+	R10_ABT4_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-ABT3 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-ABT4 (EPP1008-0001) : B"}
+	R10_ABT3_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-ABT2 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-ABT3 (EPP1008-0001) : B"}
+	R10_ABT2_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R10-ABT1 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R10-ABT2 (EPP1008-0001) : B"}
+	R10_ABT1_EPP1008_0001 : EPP1008_78E8D3DD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

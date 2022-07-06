@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="Device_1_EtherCAT_69199D46" Id="{58dc6cd2-f339-0b54-1bed-217713707200}">
+  <DUT Name="Device_1_EtherCAT_52AA8118" Id="{5e3d276d-d291-0f5f-1b5c-d3eccffe8543}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
 {attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
-{attribute addProperty Id "Term_1_EK1200Term_1_EK1200_B38DC9A8248SyncUnitsSyncUnits_1397309536InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
-{attribute addProperty CRC "1763286342"}
-{attribute addProperty Size "322"}
+{attribute addProperty Id "Term_1_EK1200Term_1_EK1200_A5B00FC5248SyncUnitsSyncUnits_732A48E445InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
+{attribute addProperty CRC "1386905880"}
+{attribute addProperty Size "331"}
 {attribute addProperty Name "Device 1 (EtherCAT)"}
-TYPE Device_1_EtherCAT_69199D46 EXTENDS TcoIo.EtcMasterBase_62654B43 :
+TYPE Device_1_EtherCAT_52AA8118 EXTENDS TcoIo.EtcMasterBase_62654B43 :
 STRUCT
 	{attribute addProperty Name "Term 1 (EK1200)"}
 	{attribute addProperty PreviousPort "Device 1 (EtherCAT) : Master"}
-	Term_1_EK1200 : Term_1_EK1200_B38DC9A8;
+	Term_1_EK1200 : Term_1_EK1200_A5B00FC5;
 	{attribute addProperty Name "SyncUnits"}
-	SyncUnits : SyncUnits_13973095;
+	SyncUnits : SyncUnits_732A48E4;
 	{attribute addProperty Name "Inputs"}
 	Inputs : TcoIo.Inputs_A65FACA4;
 	{attribute addProperty Name "Outputs"}

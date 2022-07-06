@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL7332_DFB2BED7" Id="{b7d79eba-7433-0c57-3d8b-71b5e8af0ca1}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL7332-0000-0024'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL7332-0000-0024"}
+{attribute addProperty Description "EL7332 2Ch. DC motor output stage (24V, 1.5A)"}
+{attribute addProperty Physics "KK"}
+{attribute addProperty Id "DCM_Status_Channel_1AT %I*DCM_Status_Channel_36ED096F11DCM_Synchron_info_data_Channel_1AT %I*DCM_Synchron_info_data_Channel_6FB37C884DCM_Status_Channel_2AT %I*DCM_Status_Channel_36ED096F11DCM_Synchron_info_data_Channel_2AT %I*DCM_Synchron_info_data_Channel_6FB37C884DCM_Control_Channel_1AT %Q*DCM_Control_Channel_5A8B50163DCM_Velocity_Channel_1AT %Q*DCM_Velocity_Channel_A47A3F412DCM_Control_Channel_2AT %Q*DCM_Control_Channel_5A8B50163DCM_Velocity_Channel_2AT %Q*DCM_Velocity_Channel_A47A3F412WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_F38373C94"}
+{attribute addProperty CRC "3753033431"}
+{attribute addProperty Size "46"}
+TYPE EL7332_DFB2BED7 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "DCM_Status_Channel_1"}
+	DCM_Status_Channel_1 : DCM_Status_Channel_36ED096F;
+	{attribute addProperty Name "DCM_Synchron_info_data_Channel_1"}
+	DCM_Synchron_info_data_Channel_1 : DCM_Synchron_info_data_Channel_6FB37C88;
+	{attribute addProperty Name "DCM_Status_Channel_2"}
+	DCM_Status_Channel_2 : DCM_Status_Channel_36ED096F;
+	{attribute addProperty Name "DCM_Synchron_info_data_Channel_2"}
+	DCM_Synchron_info_data_Channel_2 : DCM_Synchron_info_data_Channel_6FB37C88;
+	{attribute addProperty Name "DCM_Control_Channel_1"}
+	DCM_Control_Channel_1 : DCM_Control_Channel_5A8B5016;
+	{attribute addProperty Name "DCM_Velocity_Channel_1"}
+	DCM_Velocity_Channel_1 : DCM_Velocity_Channel_A47A3F41;
+	{attribute addProperty Name "DCM_Control_Channel_2"}
+	DCM_Control_Channel_2 : DCM_Control_Channel_5A8B5016;
+	{attribute addProperty Name "DCM_Velocity_Channel_2"}
+	DCM_Velocity_Channel_2 : DCM_Velocity_Channel_A47A3F41;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_F38373C9;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

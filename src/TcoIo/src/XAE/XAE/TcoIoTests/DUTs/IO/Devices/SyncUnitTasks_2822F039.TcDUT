@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="SyncUnitTasks_1988CF1B" Id="{5d49fb09-bfa8-07a8-1a98-717c5f62b982}">
+  <DUT Name="SyncUnitTasks_2822F039" Id="{c004aac5-76d5-0d95-1cfa-b68c47ffd30a}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: '}
 {attribute addProperty BoxType ""}
-{attribute addProperty Id "unreferencedAT %I*SyncUnitTask_2D604ED59PlcTaskAT %I*SyncUnitTask_2D604ED59PlcTask1AT %I*SyncUnitTask_2D604ED59PlcTask2AT %I*SyncUnitTask_2D604ED59"}
-{attribute addProperty CRC "428396315"}
-{attribute addProperty Size "36"}
-TYPE SyncUnitTasks_1988CF1B :
+{attribute addProperty Id "unreferencedAT %I*SyncUnitTask_2D604ED59PlcTaskAT %I*SyncUnitTask_2D604ED59PlcTask1AT %I*SyncUnitTask_2D604ED59PlcTask2AT %I*SyncUnitTask_2D604ED59PlcAuxTaskAT %I*SyncUnitTask_2D604ED59"}
+{attribute addProperty CRC "673378361"}
+{attribute addProperty Size "45"}
+TYPE SyncUnitTasks_2822F039 :
 STRUCT
 	{attribute addProperty Name "unreferenced"}
 	unreferenced : TcoIo.SyncUnitTask_2D604ED5;
@@ -16,6 +16,8 @@ STRUCT
 	PlcTask1 : TcoIo.SyncUnitTask_2D604ED5;
 	{attribute addProperty Name "PlcTask2"}
 	PlcTask2 : TcoIo.SyncUnitTask_2D604ED5;
+	{attribute addProperty Name "PlcAuxTask"}
+	PlcAuxTask : TcoIo.SyncUnitTask_2D604ED5;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

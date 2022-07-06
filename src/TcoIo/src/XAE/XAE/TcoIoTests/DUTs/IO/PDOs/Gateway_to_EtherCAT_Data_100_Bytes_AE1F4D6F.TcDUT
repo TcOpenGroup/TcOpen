@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Gateway_to_EtherCAT_Data_100_Bytes_AE1F4D6F" Id="{e74367c2-87af-00aa-1082-9203eee5d16d}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: Flexi Gateway GETC1-0001-0000'}
+{attribute addProperty BoxType "Flexi Gateway GETC1-0001-0000"}
+{attribute addProperty Id "_100_Bytes_Input_Data_1_4AT %I*ARRAY [0..9] OF BYTE0_100_Bytes_Input_Data_2_4AT %I*ARRAY [0..29] OF BYTE0_100_Bytes_Input_Data_3_4AT %I*ARRAY [0..29] OF BYTE0_100_Bytes_Input_Data_4_4AT %I*ARRAY [0..29] OF BYTE0"}
+{attribute addProperty CRC "2921287023"}
+{attribute addProperty Size "0"}
+TYPE Gateway_to_EtherCAT_Data_100_Bytes_AE1F4D6F EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "_100_Bytes_Input_Data_1_4"}
+	_100_Bytes_Input_Data_1_4 AT %I* : ARRAY [0..9] OF BYTE;
+	{attribute addProperty Name "_100_Bytes_Input_Data_2_4"}
+	_100_Bytes_Input_Data_2_4 AT %I* : ARRAY [0..29] OF BYTE;
+	{attribute addProperty Name "_100_Bytes_Input_Data_3_4"}
+	_100_Bytes_Input_Data_3_4 AT %I* : ARRAY [0..29] OF BYTE;
+	{attribute addProperty Name "_100_Bytes_Input_Data_4_4"}
+	_100_Bytes_Input_Data_4_4 AT %I* : ARRAY [0..29] OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

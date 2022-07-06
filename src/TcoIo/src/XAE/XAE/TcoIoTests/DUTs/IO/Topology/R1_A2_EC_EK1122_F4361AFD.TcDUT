@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R1_A2_EC_EK1122_F4361AFD" Id="{1e2611ff-39ce-034e-1e3d-3ca1098341a9}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "Servo_A10_1_AX5106_0000_0203AX5106_1BD22F5129Servo_A10_2_AX5106_0000_0203AX5106_1BD22F5129Servo_A10_3_AX5106_0000_0203AX5106_1BD22F5129"}
+{attribute addProperty CRC "4097186557"}
+{attribute addProperty Size "87"}
+{attribute addProperty Name "R1_A2_EC (EK1122)"}
+TYPE R1_A2_EC_EK1122_F4361AFD EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Servo_A10_1 (AX5106-0000-0203)"}
+	{attribute addProperty PreviousPort "R1_A2_EC (EK1122) : D"}
+	Servo_A10_1_AX5106_0000_0203 : AX5106_1BD22F51;
+	{attribute addProperty Name "Servo_A10_2 (AX5106-0000-0203)"}
+	{attribute addProperty PreviousPort "Servo_A10_1 (AX5106-0000-0203) : B"}
+	Servo_A10_2_AX5106_0000_0203 : AX5106_1BD22F51;
+	{attribute addProperty Name "Servo_A10_3 (AX5106-0000-0203)"}
+	{attribute addProperty PreviousPort "Servo_A10_2 (AX5106-0000-0203) : B"}
+	Servo_A10_3_AX5106_0000_0203 : AX5106_1BD22F51;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

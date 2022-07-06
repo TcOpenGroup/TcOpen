@@ -22,12 +22,15 @@ namespace TcoIo.Converters
             //0x800_ = Communication port D    
             ResourceDictionary ColorResorce = new ResourceDictionary();
             ColorResorce.Source = new Uri("/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml", UriKind.RelativeOrAbsolute);
-            Brush ret = new SolidColorBrush((Color)ColorResorce["InxtonLimeColor"]);
-            
+            Brush lime = new SolidColorBrush((Color)ColorResorce["InxtonLimeColor"]);
+            Brush gray = new SolidColorBrush((Color)ColorResorce["InxtonGrayColor"]);
+            Brush ret = lime;
+
             if ((((int)(ushort)value) & 0x0100) != 0) ret = TcoCore.Wpf.TcoColors.Error;
             if ((((int)(ushort)value) & 0x0200) != 0) ret = TcoCore.Wpf.TcoColors.Error;
             if ((((int)(ushort)value) & 0x0400) != 0 && (((int)(ushort)value) & 0x1000) != 0) ret = TcoCore.Wpf.TcoColors.Error;
             //if ((((int)(ushort)value) & 0x0800) != 0) ret = TcoCore.Wpf.TcoColors.Error;
+            if ((ushort)value == 0) ret = gray;     // no data from slave
 
             return ret;
         }

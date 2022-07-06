@@ -7,12 +7,13 @@
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:disp="clr-namespace:TcoIo.Diagnostics.EtherCAT.Display"
+    xmlns:conv="clr-namespace:TcoIo.Converters"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:EtcSlaveBoxBase_77A0E4A7TopologyBoxView/>
+        <local:EtcSlaveBoxBase_77A0E4A7TopologyBoxViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
@@ -22,54 +23,64 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Border BorderBrush="White" BorderThickness="5">
-        <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-            <StackPanel DataContext="{Binding Box}" Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToBackground}}">
-                <WrapPanel >
-                    <TextBlock Text="Name: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <WrapPanel>
-                    <TextBlock Text="Type: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeBoxType}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <WrapPanel>
-                    <TextBlock Text="Desc: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributeDescription}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <Grid DataContext="{Binding InfoData}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <WrapPanel Grid.Column="0">
-                        <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                        <TextBlock Text=" : " Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                        <TextBlock Text="{Binding State.AttributeName}" Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                        <TextBlock Text=" : " Foreground ="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
+                <StackPanel DataContext="{Binding Box}" Background ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToBackground}}">
+                    <WrapPanel >
+                        <TextBlock Text="Name: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
                     </WrapPanel>
-                    <TextBlock Grid.Column="1" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToOperationState}}"    Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                    <TextBlock Grid.Column="2" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToErrorState}}"        Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                    <TextBlock Grid.Column="3" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToLinkState}}"         Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                    <TextBlock Grid.Column="4" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={local:InfoDataStateToPort}}"              Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}" />
-                </Grid>
-                <Grid DataContext="{Binding WcState}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding WcState}" PresentationType="DisplaySlim"     Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding InputToggle}" PresentationType="DisplaySlim" Foreground="{Binding State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </Grid>
-                <WrapPanel >
-                    <TextBlock Text="Connected to: " Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                    <TextBlock Text="{Binding AttributePreviousPort}" Foreground ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                </WrapPanel>
-                <!--<vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="TopologyTerminal"/>-->
-            </StackPanel>
-        </Border>
+                    <WrapPanel>
+                        <TextBlock Text="Manufacturer: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributeVendorId, Converter={conv:VendorIdToVendorName}}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>                    
+                    <WrapPanel>
+                        <TextBlock Text="Type: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributeBoxType}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Desc: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributeDescription}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>
+                    <Grid DataContext="{Binding InfoData}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <WrapPanel Grid.Column="0">
+                            <TextBlock Text="{Binding AttributeName}" Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                            <TextBlock Text=" : " Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                            <TextBlock Text="{Binding State.AttributeName}" Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                            <TextBlock Text=" : " Foreground ="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        </WrapPanel>
+                        <TextBlock Grid.Column="1" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToOperationState}}"    Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                        <TextBlock Grid.Column="2" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToErrorState}}"        Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                        <TextBlock Grid.Column="3" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToLinkState}}"         Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                        <TextBlock Grid.Column="4" Margin="0,0,5,0" Text="{Binding State.Cyclic, Converter={conv:InfoDataStateToPort}}"              Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}" />
+                    </Grid>
+                    <Grid DataContext="{Binding WcState}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding WcState}" PresentationType="DisplaySlim"     Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding InputToggle}" PresentationType="DisplaySlim" Foreground="{Binding State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </Grid>
+                    <WrapPanel >
+                        <TextBlock Text="Connected to: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributePreviousPort}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>
+                    <WrapPanel >
+                        <TextBlock Text="Physics: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributePhysics}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>
+                    <!--<vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="TopologyTerminal"/>-->
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
     </Border>
 </UserControl>
 

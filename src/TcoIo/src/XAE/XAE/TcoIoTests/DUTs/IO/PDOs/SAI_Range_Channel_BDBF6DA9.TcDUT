@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="SAI_Range_Channel_BDBF6DA9" Id="{05232057-e591-04d7-38db-55ef86500505}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3692-0000-0020'}
+{attribute addProperty BoxType "EL3692-0000-0020"}
+{attribute addProperty Id "SettingsAT %I*Settings_24C049402"}
+{attribute addProperty CRC "3183439273"}
+{attribute addProperty Size "2"}
+TYPE SAI_Range_Channel_BDBF6DA9 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Settings"}
+	Settings AT %I* : Settings_24C04940;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

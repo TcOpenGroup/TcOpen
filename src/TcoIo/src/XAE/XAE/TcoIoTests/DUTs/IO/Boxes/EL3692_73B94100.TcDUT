@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL3692_73B94100" Id="{7cdb990f-cbdb-08f3-0882-56648a358d88}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3692-0000-0020'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL3692-0000-0020"}
+{attribute addProperty Description "EL3692 2Ch. resistance measurement terminal"}
+{attribute addProperty Physics "KK"}
+{attribute addProperty Id "SAI_Inputs_Channel_1AT %I*SAI_Inputs_Channel_9DCD655714SAI_Range_Channel_1AT %I*SAI_Range_Channel_BDBF6DA92SAI_Inputs_Real_Channel_1AT %I*SAI_Inputs_Real_Channel_CCECF13D4SAI_Inputs_Channel_2AT %I*SAI_Inputs_Channel_9DCD655714SAI_Range_Channel_2AT %I*SAI_Range_Channel_BDBF6DA92SAI_Inputs_Real_Channel_2AT %I*SAI_Inputs_Real_Channel_CCECF13D4SAI_Range_Control_Channel_1AT %Q*SAI_Range_Control_Channel_F5D9BC224SAI_Range_Control_Channel_2AT %Q*SAI_Range_Control_Channel_F5D9BC224WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "1941520640"}
+{attribute addProperty Size "52"}
+TYPE EL3692_73B94100 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "SAI_Inputs_Channel_1"}
+	SAI_Inputs_Channel_1 : SAI_Inputs_Channel_9DCD6557;
+	{attribute addProperty Name "SAI_Range_Channel_1"}
+	SAI_Range_Channel_1 : SAI_Range_Channel_BDBF6DA9;
+	{attribute addProperty Name "SAI_Inputs_Real_Channel_1"}
+	SAI_Inputs_Real_Channel_1 : SAI_Inputs_Real_Channel_CCECF13D;
+	{attribute addProperty Name "SAI_Inputs_Channel_2"}
+	SAI_Inputs_Channel_2 : SAI_Inputs_Channel_9DCD6557;
+	{attribute addProperty Name "SAI_Range_Channel_2"}
+	SAI_Range_Channel_2 : SAI_Range_Channel_BDBF6DA9;
+	{attribute addProperty Name "SAI_Inputs_Real_Channel_2"}
+	SAI_Inputs_Real_Channel_2 : SAI_Inputs_Real_Channel_CCECF13D;
+	{attribute addProperty Name "SAI_Range_Control_Channel_1"}
+	SAI_Range_Control_Channel_1 : SAI_Range_Control_Channel_F5D9BC22;
+	{attribute addProperty Name "SAI_Range_Control_Channel_2"}
+	SAI_Range_Control_Channel_2 : SAI_Range_Control_Channel_F5D9BC22;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_23CBA837;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

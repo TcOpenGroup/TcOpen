@@ -15,9 +15,9 @@
     </d:UserControl.DataContext>
     <StackPanel DataContext="{Binding Terminal}">
         <WrapPanel>
-            <TextBlock Text="PreviousPort: "/>
+            <TextBlock Text="PreviousPort abcd: "/>
             <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
         </WrapPanel>
-        <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="Box-HWDiagStruct-HWDiag-ControlSlim" />
+        <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="HWDiagStruct-HWDiag-ControlSlim" />
     </StackPanel>
 </UserControl>

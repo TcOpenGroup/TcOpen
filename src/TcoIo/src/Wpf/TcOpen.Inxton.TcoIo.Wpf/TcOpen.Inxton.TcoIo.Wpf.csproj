@@ -45,6 +45,10 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\TcoEthercatMasterDeviceTopologyView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\EtcMasterBase_62654B43TopologyDeviceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -58,6 +62,14 @@
     </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveBase_82538BE2TopologyBaseView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveTerminalBase_947E5A46SingleTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveBoxBase_77A0E4A7TopologyBoxM90View.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

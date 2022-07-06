@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R8_A11_EK1122_3ED7E2A8" Id="{4288beda-abe9-0890-14d3-2566a8393098}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "RC70_1_EK1100RC70_1_EK1100_B905944A290RC70_2_EK1100RC70_2_EK1100_D5DD9671258RC80_1_EK1100RC80_1_EK1100_5DD08FF5302RC80_2_EK1100RC80_2_EK1100_DC1461B5258"}
+{attribute addProperty CRC "1054335656"}
+{attribute addProperty Size "1108"}
+{attribute addProperty Name "R8_A11 (EK1122)"}
+TYPE R8_A11_EK1122_3ED7E2A8 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC70_1 (EK1100)"}
+	{attribute addProperty PreviousPort "R8_A11 (EK1122) : D"}
+	RC70_1_EK1100 : RC70_1_EK1100_B905944A;
+	{attribute addProperty Name "RC70_2 (EK1100)"}
+	{attribute addProperty PreviousPort "RC70_1 (EK1100) : C"}
+	RC70_2_EK1100 : RC70_2_EK1100_D5DD9671;
+	{attribute addProperty Name "RC80_1 (EK1100)"}
+	{attribute addProperty PreviousPort "R8_A11 (EK1122) : B"}
+	RC80_1_EK1100 : RC80_1_EK1100_5DD08FF5;
+	{attribute addProperty Name "RC80_2 (EK1100)"}
+	{attribute addProperty PreviousPort "RC80_1 (EK1100) : C"}
+	RC80_2_EK1100 : RC80_2_EK1100_DC1461B5;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

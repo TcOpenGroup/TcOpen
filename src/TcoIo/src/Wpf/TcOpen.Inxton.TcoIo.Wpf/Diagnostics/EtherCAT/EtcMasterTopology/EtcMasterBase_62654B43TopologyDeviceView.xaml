@@ -13,7 +13,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:EtcMasterBase_62654B43TopologyDeviceView/>
+        <local:EtcMasterBase_62654B43TopologyDeviceViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
@@ -22,17 +22,28 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border BorderBrush="White" BorderThickness="0,5,0,0">
-        <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-            <StackPanel Height="{Binding Source={x:Static dims:DimsDef.masterHeight}}"  Width="{Binding Source={x:Static dims:DimsDef.masterWidth}}"  DataContext="{Binding Device}">
-                <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>
-                <Border Margin="3,0" BorderThickness="1" BorderBrush="White" CornerRadius="3">
-                    <Border Margin="1" BorderThickness="1" BorderBrush="White" CornerRadius="2">
-                        <disp:StringDisplaySlim Margin="5,3,5,2" Description="Device type" ToolTip="Type of the device"  DataContext="{Binding AttributeBoxType}"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,5,0,0">
+            <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
+                <StackPanel Height="{Binding Source={x:Static dims:DimsDef.masterHeight}}"  Width="{Binding Source={x:Static dims:DimsDef.masterWidth}}"  DataContext="{Binding Device}">
+                    <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>
+                    <Border Margin="3,0" BorderThickness="1" BorderBrush="White" CornerRadius="3">
+                        <Border Margin="1" BorderThickness="1" BorderBrush="White" CornerRadius="2">
+                            <disp:StringDisplaySlim Margin="5,3,5,2" Description="Device type" ToolTip="Type of the device"  DataContext="{Binding AttributeBoxType}"/>
+                        </Border>
                     </Border>
-                </Border>
-                <vortex:RenderableContentControl DataContext="{Binding InfoData}" PresentationType="HWDiag" />
-            </StackPanel>
+                    <vortex:RenderableContentControl DataContext="{Binding InfoData}" PresentationType="HWDiag" />
+                </StackPanel>
+            </Border>
         </Border>
-    </Border>
+        <Button Margin="0,5,0,0"  Background="Transparent" Foreground="Transparent" BorderThickness="0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="195" Click="OpenDeviceDetails">
+
+        </Button>
+    </Grid>
 </UserControl>

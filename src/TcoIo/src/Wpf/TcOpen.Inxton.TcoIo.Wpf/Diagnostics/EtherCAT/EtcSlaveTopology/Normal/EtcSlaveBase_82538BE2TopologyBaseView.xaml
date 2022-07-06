@@ -7,12 +7,13 @@
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:disp="clr-namespace:TcoIo.Diagnostics.EtherCAT.Display"
+    xmlns:conv="clr-namespace:TcoIo.Converters"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:EtcSlaveBase_82538BE2TopologyBaseView/>
+        <local:EtcSlaveBase_82538BE2TopologyBaseViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
