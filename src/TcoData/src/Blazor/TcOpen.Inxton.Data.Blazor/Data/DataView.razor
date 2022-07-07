@@ -1,4 +1,5 @@
 ﻿@namespace TcoData
+@using Vortex.Connector
 <h3>DataView</h3>
 
 
@@ -9,7 +10,7 @@
         <div class="mb-3 col">
             <label class="form-label">Per page</label>
             <select class="w-100 form-select"
-                    @bind="@DataExchange.Limit">
+                    @bind="@DataViewModel.Limit">
                 <option class="form-control" value="5">5</option>
                 <option class="form-control" value="10">10</option>
                 <option class="form-control" value="20">20</option>
@@ -19,13 +20,13 @@
         </div>
         <div class="mb-3 col">
             <label class="form-label">Filter</label>
-            <input class="form-control col" type="text" @bind="@DataExchange.FilterById" />
+            <input class="form-control col" type="text" @bind="@DataViewModel.FilterById" />
         </div>
         <div class="mb-3 col">
             <label class="form-label">Search mode</label>
 
             <select class="w-100 form-select"
-                    @bind="@DataExchange.SearchMode">
+                    @bind="@DataViewModel.SearchMode">
                 @foreach (var item in eSearchModes)
                 {
 
@@ -54,9 +55,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in @DataExchange.ObservableRecords.ToList())
+                        @foreach (var item in DataViewModel.ObservableRecords.ToList())
                         {
-                            <tr>
+                            <tr @onclick="@(() => RowClicked(item))">
                                 <td>@item._EntityId</td>
                             </tr>
                         }
@@ -66,8 +67,8 @@
                 </table>
              </div>
 
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-center">
                         <li class="page-item">
                             <button class="page-link" @onclick="() => PageChangedFirst()" aria-label="First">
                                 <span aria-hidden="true">&laquo;</span>
@@ -101,7 +102,7 @@
                             </button>
                         </li>
                         <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedLast()" aria-label="Last">
+                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage-1)" aria-label="Last">
                                 <span aria-hidden="true">&raquo;</span>
                             </button>
                         </li>
@@ -111,6 +112,16 @@
 
                 }
             </div>
+
+            @if (_isRowSelected)
+            {
+                <p>@DataViewModel.SelectedRecord._EntityId</p>
+                foreach (var item in DataViewModel.Changes)
+                {
+                    <p>@item.NewValue</p>
+                }
+                <RenderableContentControl Context="_data" Presentation="ShadowDisplay"></RenderableContentControl>
+            }
         </div>
 
 
@@ -119,9 +130,12 @@
 
 
     [Parameter]
-    public IDataViewModel DataExchange { get; set; }
+    public IDataViewModel DataViewModel { get; set; }
 
+    private bool _isRowSelected { get; set; }
+    //private IBrowsableDataObject _selectedItem { get; set; }
 
+    private IVortexElement _data {get; set;}
 
     public bool IsLoading { get; set; }
     public int PageCount { get; set; }
@@ -134,15 +148,24 @@
     //private string PaginationActive
     private async Task Filter()
     {
-        DataExchange.Page = 0;
+        DataViewModel.Page = 0;
         _visibleDownPage = 0;
         _currentActivePage = 0;
-        await Task.Run(DataExchange.FillObservableRecordsAsync);
-        PageCount = (int)Math.Ceiling(DataExchange.FilteredCount * 1.0 / DataExchange.Limit * 1.0);
+        await Task.Run(DataViewModel.FillObservableRecordsAsync);
+        PageCount = (int)Math.Ceiling(DataViewModel.FilteredCount * 1.0 / DataViewModel.Limit * 1.0);
         _visibleUpPage = PageCount > 3 ? 3 : PageCount;
         StateHasChanged();
     }
 
+    private void RowClicked(IBrowsableDataObject item)
+    {
+        DataViewModel.SelectedRecord = item;
+        dynamic dataExchange = DataViewModel.DataExchange;
+        _data = (IVortexElement)dataExchange._data;
+        _isRowSelected = true;
+        StateHasChanged();
+
+    }
 
     private async Task PageChanged(int pageNumber)
     {
@@ -150,9 +173,9 @@
         if (pageNumber < 0 || pageNumber >= PageCount) return;
 
         _currentActivePage = pageNumber;
-        DataExchange.Page = pageNumber;
+        DataViewModel.Page = pageNumber;
 
-        await Task.Run(DataExchange.FillObservableRecordsAsync);
+        await Task.Run(DataViewModel.FillObservableRecordsAsync);
         StateHasChanged();
     }
 

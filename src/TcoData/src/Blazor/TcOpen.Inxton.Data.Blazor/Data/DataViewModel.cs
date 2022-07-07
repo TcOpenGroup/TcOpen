@@ -18,8 +18,61 @@ namespace TcoData
         {
             return TcOpen.Inxton.Data.DataBrowser.Factory(repository);
         }
+       
         public DataBrowser<T> DataBrowser { get; set; }
         public TcoDataExchange DataExchange { get; }
+
+
+        IBrowsableDataObject selectedRecord;
+        public IBrowsableDataObject SelectedRecord
+        {
+            get
+            {
+                return selectedRecord;
+            }
+
+            set
+            {
+                if (selectedRecord == value)
+                {
+                    return;
+                }
+
+                CrudDataObject?.ChangeTracker.StopObservingChanges();
+                selectedRecord = value;
+                if (value != null)
+                {
+
+                    ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
+                    ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainTcoEntity)selectedRecord).Changes;
+                    Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
+                }
+
+                CrudDataObject?.ChangeTracker.StartObservingChanges();
+            }
+        }
+
+        private ICrudDataObject CrudDataObject
+        {
+            get
+            {
+                return ((dynamic)(this.DataExchange))._data as ICrudDataObject;
+            }
+        }
+
+        List<ValueChangeItem> changes;
+        public List<ValueChangeItem> Changes
+        {
+            get
+            {
+                return changes;
+            }
+            set
+            {
+                changes = value;
+            }
+        }
+
         public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
         {
 

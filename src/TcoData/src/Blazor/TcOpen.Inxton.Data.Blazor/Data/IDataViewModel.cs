@@ -12,12 +12,13 @@ namespace TcoData
 
         TcoDataExchange DataExchange { get; }
         Task FillObservableRecordsAsync();
-
+        List<ValueChangeItem> Changes { get; }
         List<IBrowsableDataObject> ObservableRecords { get;}
         int Limit { get; set; }
         int Page { get; set; }
         string FilterById { get; set; }
         eSearchMode SearchMode { get; set; }
         long FilteredCount { get; set; }
+        IBrowsableDataObject SelectedRecord { get; set; }
     }
 }
