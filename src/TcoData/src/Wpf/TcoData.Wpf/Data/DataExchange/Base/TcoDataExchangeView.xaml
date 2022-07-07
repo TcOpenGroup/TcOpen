@@ -15,5 +15,5 @@
     <d:UserControl.DataContext>
         <wpf:TcoDataExchangeViewModel />
     </d:UserControl.DataContext>
-    <wpf:DataView DataContext="{Binding DataViewModel}" x:Name="DataView" Loaded="DataView_Loaded" />
+    <wpf:DataView DataContext="{Binding DataViewModel}" x:Name="DataView"/>
 </UserControl>
