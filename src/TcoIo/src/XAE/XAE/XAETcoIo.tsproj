@@ -789,6 +789,18 @@
 							<Type>UINT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.WcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.unreferenced.WcState.WcState</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -1933,6 +1945,38 @@
 						</Var>
 						<Var>
 							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_23_EK1100.Term_25_EL2809.Channel_16.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_3.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_4.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_5.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_6.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_7.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_8.Output</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -3339,6 +3383,59 @@
 						</EtherCAT>
 					</Box>
 				</Box>
+				<Box Id="39" BoxType="9099">
+					<Name>Term 39 (EK1100)</Name>
+					<ImageId>1002</ImageId>
+					<EtherCAT SlaveType="1" PdiType="#x0d00" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044c2c52" RevisionNo="#x00120000" PortPhys="305" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1100 EtherCAT Coupler (2A E-Bus)" Desc="EK1100" PortABoxInfo="#x02000017"/>
+					<Box Id="40" BoxType="9099">
+						<Name>Term 40 (EL2008)</Name>
+						<ImageId>1003</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d83052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2008 8Ch. Dig. Output 24V, 0.5A" Desc="EL2008" PortABoxInfo="#x01000027">
+							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
+							<Fmmu>0000000000000000000000020000000001000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7040" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7050" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7060" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+				</Box>
 				<EtherCAT/>
 			</Device>
 			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="172.20.10.110.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="4">
@@ -4234,6 +4331,21 @@
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_23_EK1100.Term_25_EL2809.Channel_7.Output" VarB="Channel 7^Output"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_23_EK1100.Term_25_EL2809.Channel_8.Output" VarB="Channel 8^Output"/>
 				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_23_EK1100.Term_25_EL2809.Channel_9.Output" VarB="Channel 9^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 39 (EK1100)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.InfoData.State" VarB="InfoData^State"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 39 (EK1100)^Term 40 (EL2008)">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.Device_1_EtherCAT.Term_39_EK1100.Term_40_EL2008.Channel_8.Output" VarB="Channel 8^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.Device_2_EtherCAT.InfoData.AmsNetId" VarB="InfoData^AmsNetId"/>

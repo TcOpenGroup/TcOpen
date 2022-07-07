@@ -56,7 +56,7 @@ namespace TcoIo
             {
                 UniformGrid hardware = new UniformGrid();
                 WiringObject wiring = new WiringObject();
-                Line wire_line = new Line() { StrokeThickness = strokeThicknessDef };
+                Path path = new Path() { StrokeThickness = strokeThicknessDef };
 
                 string currentPhysics = obj.GetType().GetProperty("AttributePhysics")?.GetValue(obj).ToString();
                 string currentConnection = obj.GetType().GetProperty("AttributePreviousPort")?.GetValue(obj).ToString();
@@ -125,8 +125,8 @@ namespace TcoIo
                             {
                                 //Direct connection to the previous device that is not visible (Y20)
                                 Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                wire_line.SetBinding(Line.StrokeProperty, binding);
-                                wiring.Line = wire_line;
+                                path.SetBinding(Line.StrokeProperty, binding);
+                                wiring.Path = path;
                                 wiring.WiringType = WiringObject.ConectionType.Y20;
                             }
                         }
@@ -162,8 +162,8 @@ namespace TcoIo
                                         {
                                             //Direct connection to master (Y2Y)
                                             Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                            wire_line.SetBinding(Line.StrokeProperty, binding);
-                                            wiring.Line = wire_line;
+                                            path.SetBinding(Line.StrokeProperty, binding);
+                                            wiring.Path = path;
                                             wiring.WiringType = WiringObject.ConectionType.Y2Y;
                                         }
                                     }
@@ -211,24 +211,9 @@ namespace TcoIo
                                                 {
                                                     //Connection to the X1 of the junction box (Y2KYKY_X1)
                                                     Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    wire_line.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Line = wire_line;
+                                                    path.SetBinding(Line.StrokeProperty, binding);
+                                                    wiring.Path = path;
                                                     wiring.WiringType = WiringObject.ConectionType.Y2KYKY_X1;
-
-
-                                                    //    double x1 = previousTopologyObject.Pos_X + DimsDef.juntionOutputX1 - 5;
-                                                    //    double x2 = previousTopologyObject.Pos_X;
-                                                    //    double y1 = Pos_Y;
-                                                    //    double y2 = Pos_Y + DimsDef.slaveInput + 5;
-                                                    //    Line line = new Line() { X1 = x1, X2 = x1, Y1 = y1, Y2 = y2 + 5, StrokeThickness = 10 };
-                                                    //    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    //    line.SetBinding(Line.StrokeProperty, binding);
-                                                    //    subGrid.Children.Add(line);
-
-                                                    //    line = new Line() { X1 = x1 - 5, X2 = x2, Y1 = y2, Y2 = y2, StrokeThickness = 10 };
-                                                    //    binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    //    line.SetBinding(Line.StrokeProperty, binding);
-                                                    //    subGrid.Children.Add(line);
                                                 }
                                             }
                                         }
@@ -258,24 +243,9 @@ namespace TcoIo
                                                 {
                                                     //Connection to the X2 of the junction box (Y2KYKY_X2)
                                                     Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    wire_line.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Line = wire_line;
+                                                    path.SetBinding(Line.StrokeProperty, binding);
+                                                    wiring.Path = path;
                                                     wiring.WiringType = WiringObject.ConectionType.Y2KYKY_X2;
-
-                                                    ////Connection to the X1 of the junction box
-                                                    //double x1 = previousTopologyObject.Pos_X + DimsDef.juntionOutputX2 - 5;
-                                                    //double x2 = previousTopologyObject.Pos_X;
-                                                    //double y1 = Pos_Y;
-                                                    //double y2 = Pos_Y + DimsDef.slaveInput + 5;
-                                                    //Line line = new Line() { X1 = x1, X2 = x1, Y1 = y1, Y2 = y2 + 5, StrokeThickness = 10 };
-                                                    //Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    //line.SetBinding(Line.StrokeProperty, binding);
-                                                    //subGrid.Children.Add(line);
-
-                                                    //line = new Line() { X1 = x1 - 5, X2 = x2, Y1 = y2, Y2 = y2, StrokeThickness = 10 };
-                                                    //binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    //line.SetBinding(Line.StrokeProperty, binding);
-                                                    //subGrid.Children.Add(line);
                                                 }
                                             }
                                         }
@@ -301,8 +271,8 @@ namespace TcoIo
                                                 {
                                                     //Connection to the extension box (Y2Y)
                                                     Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    wire_line.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Line = wire_line;
+                                                    path.SetBinding(Line.StrokeProperty, binding);
+                                                    wiring.Path = path;
                                                     wiring.WiringType = WiringObject.ConectionType.Y2Y;
                                                 }
                                             }
@@ -329,8 +299,8 @@ namespace TcoIo
                                                 {
                                                     //Connection to the box (Y2Y)
                                                     Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    wire_line.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Line = wire_line;
+                                                    path.SetBinding(Line.StrokeProperty, binding);
+                                                    wiring.Path = path;
                                                     wiring.WiringType = WiringObject.ConectionType.Y2Y;
                                                 }
                                             }
@@ -351,7 +321,7 @@ namespace TcoIo
                                                     column = topologyObject.Column + 1;
                                                     Pos_X = topologyObject.Pos_X + DimsDef.slaveWidth + 10;
                                                     row = topologyObject.Row;
-                                                    Pos_Y = topologyObject.Pos_Y + 15;
+                                                    Pos_Y = topologyObject.Pos_Y;
                                                 }
                                                 //First box after 2-port junction box (port B) X2
                                                 else if (currentPhysics.StartsWith("Y") && topologyObject.Physics.Equals("KYKY") && currentConnection.EndsWith("B"))
@@ -373,6 +343,8 @@ namespace TcoIo
                                                             }
                                                         }
                                                     }
+                                                    //Connection to the X2 of the junction box (Y2KYKY_X2)
+
                                                     var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
                                                     if (InfoData != null)
                                                     {
@@ -381,24 +353,9 @@ namespace TcoIo
                                                         {
                                                             //Connection to the X2 of the junction box (Y2KYKY_X2)
                                                             Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            wire_line.SetBinding(Line.StrokeProperty, binding);
-                                                            wiring.Line = wire_line;
+                                                            path.SetBinding(Line.StrokeProperty, binding);
+                                                            wiring.Path = path;
                                                             wiring.WiringType = WiringObject.ConectionType.Y2KYKY_X2;
-
-                                                            ////Connection to the X1 of the junction box
-                                                            //double x1 = topologyObject.Pos_X + DimsDef.juntionOutputX2 - 5;
-                                                            //double x2 = topologyObject.Pos_X;
-                                                            //double y1 = topologyObject.Pos_Y + DimsDef.slaveHeight + 15;
-                                                            //double y2 = Pos_Y + DimsDef.slaveInput + 5;
-                                                            //Line line = new Line() { X1 = x1, X2 = x1, Y1 = y1, Y2 = y2 + 5, StrokeThickness = 10 };
-                                                            //Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            //line.SetBinding(Line.StrokeProperty, binding);
-                                                            //subGrid.Children.Add(line);
-
-                                                            //line = new Line() { X1 = x1 - 5, X2 = x2, Y1 = y2, Y2 = y2, StrokeThickness = 10 };
-                                                            //binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            //line.SetBinding(Line.StrokeProperty, binding);
-                                                            //subGrid.Children.Add(line);
                                                         }
                                                     }
                                                 }
@@ -409,41 +366,10 @@ namespace TcoIo
                                                     Pos_X = topologyObject.Pos_X;
                                                     row++;
                                                     Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
-
-                                                    var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                                    if (InfoData != null)
-                                                    {
-                                                        var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                                        if (State != null)
-                                                        {
-                                                            //Connection to the X2 of the coupler box (Y2YKY)
-                                                            Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            wire_line.SetBinding(Line.StrokeProperty, binding);
-                                                            wiring.Line = wire_line;
-                                                            wiring.WiringType = WiringObject.ConectionType.Y2YKY;
-
-
-                                                            ////Connection to the X1 of the junction box
-                                                            //double x1 = topologyObject.Pos_X + DimsDef.juntionOutputX1 - 5 - DimsDef.slaveWidth - 15;
-                                                            //double x2 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
-                                                            //double y1 = topologyObject.Pos_Y + DimsDef.slaveOutputFront + 10;
-                                                            //double y2 = Pos_Y + DimsDef.slaveInput + 5;
-                                                            //Line line = new Line() { X1 = x2, X2 = x1 - 5, Y1 = y1, Y2 = y1, StrokeThickness = 10 };
-                                                            //Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            //line.SetBinding(Line.StrokeProperty, binding);
-                                                            //subGrid.Children.Add(line);
-
-                                                            //line = new Line() { X1 = x1, X2 = x1, Y1 = y1, Y2 = y2 + 5, StrokeThickness = 10 };
-                                                            //binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            //line.SetBinding(Line.StrokeProperty, binding);
-                                                            //subGrid.Children.Add(line);
-
-                                                            //line = new Line() { X1 = x1 - 5, X2 = x2, Y1 = y2, Y2 = y2, StrokeThickness = 10 };
-                                                            //binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            //line.SetBinding(Line.StrokeProperty, binding);
-                                                            //subGrid.Children.Add(line);
-                                                        }
-                                                    }
+                                                    
+                                                    ShiftOthersDownIfNeccessary();
+                                                    //Connection to the X2 of the coupler box (Y2YKY)
+                                                    CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2YKY);
                                                 }
                                                 break;
                                             }
@@ -471,21 +397,49 @@ namespace TcoIo
         public object PrepareWiring(Grid wiringGrid = null)
         {
             wiringGrid = wiringGrid == null ? new Grid() : wiringGrid;
+            PathFigure pathFigure = new PathFigure();
+            LineSegment horizontal1 = new LineSegment();
+            LineSegment horizontal2 = new LineSegment();
+            LineSegment horizontal3 = new LineSegment();
+            LineSegment vertical1 = new LineSegment();
+            LineSegment vertical2 = new LineSegment();
+            PathSegmentCollection wiring = new PathSegmentCollection();
+            double x1, x2, x3, x4, x5, y1, y2, y3, y4, y5;
 
             foreach (TopologyObject topologyObject in topologyObjects)
             {
                 TopologyObject connectionPartner = new TopologyObject();
                 switch (topologyObject.Wiring.WiringType)
                 {
+                    ////////////////////K2K//////////////////////////
                     case WiringObject.ConectionType.K2K:
                         break;
+
+                    ////////////////////Y20//////////////////////////
                     case WiringObject.ConectionType.Y20:
-                        topologyObject.Wiring.Line.X1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
-                        topologyObject.Wiring.Line.Y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
-                        topologyObject.Wiring.Line.X2 = 0;
-                        topologyObject.Wiring.Line.Y2 = topologyObject.Wiring.Line.Y1;
-                        wiringGrid.Children.Add(topologyObject.Wiring.Line);
+                        x1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
+                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
+                        x2 = 0;
+                        pathFigure = new PathFigure() { StartPoint = new Point(x1, y1) };
+                        horizontal1 = new LineSegment() { Point =    new Point(x2, y1) };
+
+                        wiring = new PathSegmentCollection();
+                        wiring.Add(horizontal1);
+
+                        pathFigure.Segments = wiring;
+
+                        PathFigureCollection pathFigureCollection = new PathFigureCollection();
+                        pathFigureCollection.Add(pathFigure);
+
+                        PathGeometry pathGeometry = new PathGeometry();
+                        pathGeometry.Figures = pathFigureCollection;
+
+                        topologyObject.Wiring.Path.Data = pathGeometry;
+
+                        wiringGrid.Children.Add(topologyObject.Wiring.Path);
                         break;
+
+                    ////////////////////Y2Y//////////////////////////
                     case WiringObject.ConectionType.Y2Y:
                         foreach (TopologyObject connectionPartnerPossible in topologyObjects)
                         {
@@ -495,29 +449,29 @@ namespace TcoIo
                                 break;
                             }
                         }
-                        topologyObject.Wiring.Line.X1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
-                        topologyObject.Wiring.Line.Y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
-                        topologyObject.Wiring.Line.X2 = connectionPartner.Pos_X;
-                        topologyObject.Wiring.Line.Y2 = topologyObject.Wiring.Line.Y1;
-                        wiringGrid.Children.Add(topologyObject.Wiring.Line);
+                        x1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
+                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
+                        x2 = connectionPartner.Pos_X;
+                        pathFigure = new PathFigure() {StartPoint = new Point(x1, y1)};
+                        horizontal1 = new LineSegment(){ Point =    new Point(x2, y1)};
+
+                        wiring = new PathSegmentCollection();
+                        wiring.Add(horizontal1);
+
+                        pathFigure.Segments = wiring;
+
+                        pathFigureCollection = new PathFigureCollection();
+                        pathFigureCollection.Add(pathFigure);
+
+                        pathGeometry = new PathGeometry();
+                        pathGeometry.Figures = pathFigureCollection;
+
+
+                        topologyObject.Wiring.Path.Data = pathGeometry;
+                        wiringGrid.Children.Add(topologyObject.Wiring.Path);
                         break;
+
                     case WiringObject.ConectionType.Y2YKY:
-                        break;
-                    case WiringObject.ConectionType.Y2KYKY_X1:
-                        //    double x1 = previousTopologyObject.Pos_X + DimsDef.juntionOutputX1 - 5;
-                        //    double x2 = previousTopologyObject.Pos_X;
-                        //    double y1 = Pos_Y;
-                        //    double y2 = Pos_Y + DimsDef.slaveInput + 5;
-                        //    Line line = new Line() { X1 = x1, X2 = x1, Y1 = y1, Y2 = y2 + 5, StrokeThickness = 10 };
-                        //    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                        //    line.SetBinding(Line.StrokeProperty, binding);
-                        //    subGrid.Children.Add(line);
-
-                        //    line = new Line() { X1 = x1 - 5, X2 = x2, Y1 = y2, Y2 = y2, StrokeThickness = 10 };
-                        //    binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                        //    line.SetBinding(Line.StrokeProperty, binding);
-                        //    subGrid.Children.Add(line);
-
                         foreach (TopologyObject connectionPartnerPossible in topologyObjects)
                         {
                             if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
@@ -526,43 +480,96 @@ namespace TcoIo
                                 break;
                             }
                         }
-                        double x1 = connectionPartner.Pos_X;
-                        double y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
-                        double x2 = connectionPartner.Pos_X + DimsDef.juntionOutputX1 - 5;
-                        double y2 = connectionPartner.Pos_Y;
-                        topologyObject.Wiring.Line.X1 = x1;
-                        topologyObject.Wiring.Line.Y1 = y1;
-                        topologyObject.Wiring.Line.X2 = x2;
-                        topologyObject.Wiring.Line.Y2 = y1;
-                        wiringGrid.Children.Add(topologyObject.Wiring.Line);
+                        x1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
+                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
+                        x2 = topologyObject.Pos_X + DimsDef.juntionOutputX1 - 5 - DimsDef.slaveWidth - 15;
+                        y2 = connectionPartner.Pos_Y + DimsDef.slaveOutputFront + 10;
 
-                        double strokeThickness = (topologyObject.Wiring.Line.GetValue(Line.StrokeThicknessProperty) as IConvertible) != null ? (topologyObject.Wiring.Line.GetValue(Line.StrokeThicknessProperty) as IConvertible).ToDouble(null) : strokeThicknessDef;
-                        Line lineUp = new Line() { X1 = x2, X2 = x2, Y1 = y1, Y2 = y2, StrokeThickness = strokeThickness };
+                        pathFigure = new PathFigure()   { StartPoint =  new Point(x1, y1) };
+                        horizontal1 = new LineSegment() { Point =       new Point(x2, y1) };
+                        vertical1 = new LineSegment()   { Point =       new Point(x2, y2) };
+                        horizontal2 = new LineSegment() { Point =       new Point(x1, y2) };
 
-                        BindingExpression bindingExpresion = topologyObject.Wiring.Line.GetBindingExpression(Line.StrokeProperty);
+                        wiring = new PathSegmentCollection();
+                        wiring.Add(horizontal1);
+                        wiring.Add(vertical1);
+                        wiring.Add(horizontal2);
 
-                        Binding binding = new Binding { Source = bindingExpresion.ResolvedSource, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
+                        pathFigure.Segments = wiring;
+
+                        pathFigureCollection = new PathFigureCollection();
+                        pathFigureCollection.Add(pathFigure);
+
+                        pathGeometry = new PathGeometry();
+                        pathGeometry.Figures = pathFigureCollection;
 
 
-                        //Line line = new Line() { X1 = x2, X2 = x1 - 5, Y1 = y1, Y2 = y1, StrokeThickness = 10 };
-                        //Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                        //line.SetBinding(Line.StrokeProperty, binding);
-                        //subGrid.Children.Add(line);
-
-                        //line = new Line() { X1 = x1, X2 = x1, Y1 = y1, Y2 = y2 + 5, StrokeThickness = 10 };
-                        //binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                        //line.SetBinding(Line.StrokeProperty, binding);
-                        //subGrid.Children.Add(line);
-
-                        //line = new Line() { X1 = x1 - 5, X2 = x2, Y1 = y2, Y2 = y2, StrokeThickness = 10 };
-                        //binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                        //line.SetBinding(Line.StrokeProperty, binding);
-                        //subGrid.Children.Add(line);
-
-                        wiringGrid.Children.Add(lineUp);
+                        topologyObject.Wiring.Path.Data = pathGeometry;
+                        wiringGrid.Children.Add(topologyObject.Wiring.Path);
                         break;
+
+                    ////////////////////Y2KYKY_X1//////////////////////////
+                    case WiringObject.ConectionType.Y2KYKY_X1:
+                        foreach (TopologyObject connectionPartnerPossible in topologyObjects)
+                        {
+                            if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
+                            {
+                                connectionPartner = connectionPartnerPossible;
+                                break;
+                            }
+                        }
+                        pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidth - 10, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
+                        horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1 - 5, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
+                        vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1 - 5, connectionPartner.Pos_Y + DimsDef.slaveHeight + 15) };
+
+                        wiring = new PathSegmentCollection();
+                        wiring.Add(horizontal1);
+                        wiring.Add(vertical1);
+
+                        pathFigure.Segments = wiring;
+
+                        pathFigureCollection = new PathFigureCollection();
+                        pathFigureCollection.Add(pathFigure);
+
+                        pathGeometry = new PathGeometry();
+                        pathGeometry.Figures = pathFigureCollection;
+
+
+                        topologyObject.Wiring.Path.Data = pathGeometry;
+                        wiringGrid.Children.Add(topologyObject.Wiring.Path);
+                        break;
+
+                    ////////////////////Y2KYKY_X2//////////////////////////
                     case WiringObject.ConectionType.Y2KYKY_X2:
+                        foreach (TopologyObject connectionPartnerPossible in topologyObjects)
+                        {
+                            if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
+                            {
+                                connectionPartner = connectionPartnerPossible;
+                                break;
+                            }
+                        }
+                        pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidth - 10, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
+                        horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2 - 5, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
+                        vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2 - 5, connectionPartner.Pos_Y + DimsDef.slaveHeight + 15) };
+
+                        wiring = new PathSegmentCollection();
+                        wiring.Add(horizontal1);
+                        wiring.Add(vertical1);
+
+                        pathFigure.Segments = wiring;
+
+                        pathFigureCollection = new PathFigureCollection();
+                        pathFigureCollection.Add(pathFigure);
+
+                        pathGeometry = new PathGeometry();
+                        pathGeometry.Figures = pathFigureCollection;
+
+
+                        topologyObject.Wiring.Path.Data = pathGeometry;
+                        wiringGrid.Children.Add(topologyObject.Wiring.Path);
                         break;
+
                     default:
                         break;
                 }
@@ -960,6 +967,39 @@ namespace TcoIo
                 }
             }
             return mainGrid;
+        }
+
+        private void ShiftOthersDownIfNeccessary()
+        {
+            if (maxrow >= row)
+            {
+                foreach (TopologyObject topologyObj in topologyObjects)
+                {
+                    if (topologyObj.Row >= row)
+                    {
+                        topologyObj.Row++;
+                        topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
+                        maxrow = Math.Max(maxrow, topologyObj.Row);
+                        MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
+                    }
+                }
+            }
+        }
+
+        private void CreateWiring(IVortexObject obj, ref Path path, ref WiringObject wiring , WiringObject.ConectionType conection)
+        { 
+            var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
+            if (InfoData != null)
+            {
+                var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
+                if (State != null)
+                {
+                    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
+                    path.SetBinding(Line.StrokeProperty, binding);
+                    wiring.Path = path;
+                    wiring.WiringType = conection;
+                }
+            }
         }
     }
 

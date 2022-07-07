@@ -27,19 +27,19 @@ namespace TcoIo
             set { this.wiringType = value ; }
         }
 
-
-        private Line line;
-        public Line Line
+        
+        private Path path;
+        public Path Path
         {
-            get { return this.line ?? new Line(); }
-            set { this.line = value ?? new Line(); }
+            get { return this.path ?? new Path(); }
+            set { this.path = value ?? new Path(); }
         }
 
 
         public WiringObject()
         {
             WiringType = ConectionType.K2K;
-            Line = new Line();
+            Path = new Path();
         }
 
     }
