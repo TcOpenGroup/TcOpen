@@ -12,10 +12,9 @@
                     @bind="@DataExchange.Limit">
                 <option class="form-control" value="5">5</option>
                 <option class="form-control" value="10">10</option>
-                <option class="form-control" value="15">15</option>
+                <option class="form-control" value="20">20</option>
+                <option class="form-control" value="30">30</option>
                 <option class="form-control" value="50">50</option>
-                <option class="form-control" value="100">100</option>
-                <option class="form-control" value="200">200</option>
             </select>
         </div>
         <div class="mb-3 col">
@@ -75,7 +74,7 @@
                             </button>
                         </li>
                         <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentPage-1)" aria-label="Previous">
+                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage-1)" aria-label="Previous">
                                 <span aria-hidden="true">&lsaquo;</span>
                             </button>
                         </li>
@@ -86,18 +85,18 @@
                         @for (var i = _visibleDownPage; i < _visibleUpPage; i++)
                         {
                             var current = i;
-                            @if (i == _currentPage)
+                            @if (current == _currentActivePage)
                             {
-                                <li class="page-item active"><button class="page-link" @onclick="() => PageChanged(current) ">@(current + 1)</button></li>
+                                <li class="page-item active"><button class="page-link" @onclick="() => PageChanged(current) ">@(current+1)</button></li>
                             }
                             else
                             {
-                                <li class="page-item"><button class="page-link" @onclick="() => PageChanged(current) ">@(current + 1)</button></li>
+                                <li class="page-item"><button class="page-link" @onclick="() => PageChanged(current) ">@(current+1)</button></li>
                             }
                         }
 
                         <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentPage + 1)" aria-label="Next">
+                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage+1)" aria-label="Next">
                                 <span aria-hidden="true">&rsaquo;</span>
                             </button>
                         </li>
@@ -119,15 +118,15 @@
 
 
 
-        [Parameter]
-        public IDataViewModel DataExchange { get; set; }
+    [Parameter]
+    public IDataViewModel DataExchange { get; set; }
 
 
 
     public bool IsLoading { get; set; }
     public int PageCount { get; set; }
 
-    private int _currentPage { get; set; }
+    private int _currentActivePage { get; set; }
 
     private int _visibleDownPage { get; set; }
     private int _visibleUpPage { get; set; }
@@ -135,9 +134,50 @@
     //private string PaginationActive
     private async Task Filter()
     {
+        DataExchange.Page = 0;
+        _visibleDownPage = 0;
+        _currentActivePage = 0;
         await Task.Run(DataExchange.FillObservableRecordsAsync);
         PageCount = (int)Math.Ceiling(DataExchange.FilteredCount * 1.0 / DataExchange.Limit * 1.0);
+        _visibleUpPage = PageCount > 3 ? 3 : PageCount;
         StateHasChanged();
+    }
+
+
+    private async Task PageChanged(int pageNumber)
+    {
+
+        if (pageNumber < 0 || pageNumber >= PageCount) return;
+
+        _currentActivePage = pageNumber;
+        DataExchange.Page = pageNumber;
+
+        await Task.Run(DataExchange.FillObservableRecordsAsync);
+        StateHasChanged();
+    }
+
+    private async Task PageChangedWithArrow(int pageNumber)
+    {
+        if (pageNumber < 0 || pageNumber >= PageCount) return;
+
+        if (pageNumber < _visibleDownPage)
+        {
+            if (_visibleDownPage > 0)
+            {
+                _visibleDownPage -= 1;
+                _visibleUpPage -= 1;
+            }
+        }
+        if (pageNumber >= _visibleUpPage)
+        {
+            if (_visibleUpPage < PageCount)
+            {
+                _visibleUpPage += 1;
+                _visibleDownPage += 1;
+            }
+        }
+
+        await PageChanged(pageNumber);
     }
 
 
@@ -156,50 +196,15 @@
         await PageChanged(PageCount-1);
     }
 
-    private async Task PageChanged(int pageNumber)
-    {
-        if (pageNumber < 0 || pageNumber >= PageCount) return;
-        _currentPage = pageNumber;
-        DataExchange.Page = pageNumber ;
-        await Filter();
-    }
 
-    private async Task PageChangedWithArrow(int pageNumber)
-    {
-        if (pageNumber < 0 || pageNumber >= PageCount) return;
 
-        if (pageNumber <= _visibleDownPage)
-        {
-            if (_visibleDownPage > 0)
-            {
-                _visibleDownPage -= 1;
-                _visibleUpPage -= 1;
-            }
-        }
-        if (pageNumber >= _visibleUpPage)
-        {
-            if (_visibleUpPage < PageCount)
-            {
-                _visibleUpPage += 1;
-                _visibleDownPage += 1;
-            }
-        }
 
-        _currentPage = pageNumber;
-        DataExchange.Page = pageNumber;
-        await Filter();
-    }
     protected override async Task OnInitializedAsync()
     {
 
 
         IsLoading = true;
-        await Task.Run(DataExchange.FillObservableRecordsAsync);   //works fine
-        PageCount = (int)Math.Ceiling(DataExchange.FilteredCount * 1.0 / DataExchange.Limit * 1.0);
-        _visibleDownPage = 0;
-
-        _visibleUpPage = PageCount > 3 ? 3 : PageCount;
-
+        await Filter();
         IsLoading = false;
 
 

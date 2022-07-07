@@ -93,7 +93,7 @@ namespace TcoData
         public string FilterById { get; set; } = "";
         public eSearchMode SearchMode { get; set; } = eSearchMode.Exact;
         public long FilteredCount { get; set; }
-        public int Page { get; set; }
+        public int Page { get; set; } = 0;
         public async Task FillObservableRecordsAsync()
         {
             //let another thread to load records, we need main thread to show loading symbol in blazor page
