@@ -87,11 +87,11 @@ namespace TcoIo
             }
         }
 
-        private UniformGrid cell;
-        public UniformGrid Cell
+        private UniformGrid hardware;
+        public UniformGrid Hardware
         {
-            get { return this.cell ?? new UniformGrid(); }
-            set { this.cell = value ?? new UniformGrid(); }
+            get { return this.hardware ?? new UniformGrid(); }
+            set { this.hardware = value ?? new UniformGrid(); }
         }
 
         private WiringObject wiring;
@@ -110,7 +110,7 @@ namespace TcoIo
             Column = 0;
             Pos_X = 0;
             Pos_Y = 0;
-            Cell = new UniformGrid();
+            Hardware = new UniformGrid();
             Wiring = new WiringObject();
         }
         public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y)
@@ -122,9 +122,9 @@ namespace TcoIo
             Column = column;
             Pos_X = pos_X;
             Pos_Y = pos_Y;
-            Cell = new UniformGrid();
+            Hardware = new UniformGrid();
         }
-        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid cell)
+        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid harwdware)
         {
             Name = name;
             Physics = physics;
@@ -133,10 +133,10 @@ namespace TcoIo
             Column = column;
             Pos_X = pos_X;
             Pos_Y = pos_Y;
-            Cell = cell;
+            Hardware = harwdware;
             Wiring = new WiringObject();
         }
-        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid cell, WiringObject wiring)
+        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid harwdware, WiringObject wiring)
         {
             Name = name;
             Physics = physics;
@@ -145,7 +145,7 @@ namespace TcoIo
             Column = column;
             Pos_X = pos_X;
             Pos_Y = pos_Y;
-            Cell = cell;
+            Hardware = harwdware;
             Wiring = wiring;
         }
     }

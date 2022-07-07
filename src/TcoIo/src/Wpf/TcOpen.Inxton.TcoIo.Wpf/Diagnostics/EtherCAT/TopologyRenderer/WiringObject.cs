@@ -13,6 +13,7 @@ namespace TcoIo
         public enum ConectionType
         {
             K2K,        //direct E-bus connection to the previous E-Bus terminal (no wire)
+            Y20,        //direct EtherCAT connection to the previous EtherCAT device of type Y, KY or YY that is not visible (wire shape ----)
             Y2Y,        //direct EtherCAT connection to the previous EtherCAT device of type Y, KY or YY (wire shape ----)
             Y2YKY,      //EtherCAT connection to the previous EtherCAT device of type YKY (wire shape C)
             Y2KYKY_X1,  //EtherCAT connection to the previous EtherCAT device of type KYKY X1 (wire shape L)
