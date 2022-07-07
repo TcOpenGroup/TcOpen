@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 namespace TcoIo
 {
@@ -85,6 +86,21 @@ namespace TcoIo
                 this.pos_Y = value;
             }
         }
+
+        private UniformGrid cell;
+        public UniformGrid Cell
+        {
+            get { return this.cell ?? new UniformGrid(); }
+            set { this.cell = value ?? new UniformGrid(); }
+        }
+
+        private WiringObject wiring;
+        public WiringObject Wiring
+        {
+            get { return this.wiring ?? new WiringObject(); }
+            set { this.wiring = value ?? new WiringObject(); }
+        }
+
         public TopologyObject()
         {
             Name = "";
@@ -94,6 +110,8 @@ namespace TcoIo
             Column = 0;
             Pos_X = 0;
             Pos_Y = 0;
+            Cell = new UniformGrid();
+            Wiring = new WiringObject();
         }
         public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y)
         {
@@ -104,7 +122,31 @@ namespace TcoIo
             Column = column;
             Pos_X = pos_X;
             Pos_Y = pos_Y;
-
+            Cell = new UniformGrid();
+        }
+        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid cell)
+        {
+            Name = name;
+            Physics = physics;
+            Connection = connection;
+            Row = row;
+            Column = column;
+            Pos_X = pos_X;
+            Pos_Y = pos_Y;
+            Cell = cell;
+            Wiring = new WiringObject();
+        }
+        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid cell, WiringObject wiring)
+        {
+            Name = name;
+            Physics = physics;
+            Connection = connection;
+            Row = row;
+            Column = column;
+            Pos_X = pos_X;
+            Pos_Y = pos_Y;
+            Cell = cell;
+            Wiring = wiring;
         }
     }
 }
