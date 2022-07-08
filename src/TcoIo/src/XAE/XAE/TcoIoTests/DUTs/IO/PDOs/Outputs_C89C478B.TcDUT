@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Outputs_C89C478B" Id="{44af2d2a-1366-0c88-2e6b-a3ba905e2bf3}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
+{attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
+{attribute addProperty Id "DevCtrlAT %Q*UINT2Frm0CtrlAT %Q*UINT2Frm0WcCtrlAT %Q*UINT2Frm1CtrlAT %Q*UINT2Frm1WcCtrlAT %Q*UINT2Frm2CtrlAT %Q*UINT2Frm2WcCtrlAT %Q*UINT2Frm3CtrlAT %Q*UINT2Frm3WcCtrlAT %Q*UINT2Frm4CtrlAT %Q*UINT2Frm4WcCtrlAT %Q*UINT2Frm5CtrlAT %Q*UINT2Frm5WcCtrlAT %Q*UINT2"}
+{attribute addProperty CRC "3365685131"}
+{attribute addProperty Size "26"}
+TYPE Outputs_C89C478B EXTENDS TcoIo.OutputBase_10CEE7DE :
+STRUCT
+	{attribute addProperty Name "DevCtrl"}
+	DevCtrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm0Ctrl"}
+	Frm0Ctrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm0WcCtrl"}
+	Frm0WcCtrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm1Ctrl"}
+	Frm1Ctrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm1WcCtrl"}
+	Frm1WcCtrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm2Ctrl"}
+	Frm2Ctrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm2WcCtrl"}
+	Frm2WcCtrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm3Ctrl"}
+	Frm3Ctrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm3WcCtrl"}
+	Frm3WcCtrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm4Ctrl"}
+	Frm4Ctrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm4WcCtrl"}
+	Frm4WcCtrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm5Ctrl"}
+	Frm5Ctrl AT %Q* : UINT;
+	{attribute addProperty Name "Frm5WcCtrl"}
+	Frm5WcCtrl AT %Q* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

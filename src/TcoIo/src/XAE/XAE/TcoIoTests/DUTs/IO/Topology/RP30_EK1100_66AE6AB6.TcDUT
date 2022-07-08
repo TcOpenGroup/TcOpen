@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RP30_EK1100_66AE6AB6" Id="{a4c1c954-6372-059e-3a12-9991eab7716b}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "RP30_A2_EK1122RP30_A2_EK1122_C3CC9CB4123RP30_A4_EL7041_1000EL7041_86DE63E743RP30_A5_EL7041_1000EL7041_86DE63E743RP30_A6_EL1809EL1809_32157CFD20RP30_A7_EL2809EL2809_2B6483BD19RP30_EndTerminal_EL9010EL9010_D29C20850"}
+{attribute addProperty CRC "1722706614"}
+{attribute addProperty Size "248"}
+{attribute addProperty Name "RP30 (EK1100)"}
+TYPE RP30_EK1100_66AE6AB6 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RP30_A2 (EK1122)"}
+	{attribute addProperty PreviousPort "RP30 (EK1100) : B"}
+	RP30_A2_EK1122 : RP30_A2_EK1122_C3CC9CB4;
+	{attribute addProperty Name "RP30_A4 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RP30_A2 (EK1122) : C"}
+	RP30_A4_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RP30_A5 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RP30_A4 (EL7041-1000) : B"}
+	RP30_A5_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RP30_A6 (EL1809)"}
+	{attribute addProperty PreviousPort "RP30_A5 (EL7041-1000) : B"}
+	RP30_A6_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RP30_A7 (EL2809)"}
+	{attribute addProperty PreviousPort "RP30_A6 (EL1809) : B"}
+	RP30_A7_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RP30_EndTerminal (EL9010)"}
+	{attribute addProperty PreviousPort "RP30_A7 (EL2809) : B"}
+	RP30_EndTerminal_EL9010 : EL9010_D29C2085;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

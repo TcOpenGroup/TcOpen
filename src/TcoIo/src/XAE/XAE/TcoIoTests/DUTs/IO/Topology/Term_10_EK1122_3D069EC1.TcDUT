@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Term_10_EK1122_3D069EC1" Id="{001c879f-f708-0934-181f-108b43cfa1aa}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "Term_11_EK1100Term_11_EK1100_B6553301142Term_18_EK1100Term_18_EK1100_20659A8D72Term_23_EK1100Term_23_EK1100_DFBF0BE4971"}
+{attribute addProperty CRC "1023844033"}
+{attribute addProperty Size "1185"}
+{attribute addProperty Name "Term 10 (EK1122)"}
+TYPE Term_10_EK1122_3D069EC1 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Term 11 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 10 (EK1122) : D"}
+	Term_11_EK1100 : Term_11_EK1100_B6553301;
+	{attribute addProperty Name "Term 18 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 17 (EK1110) : B"}
+	Term_18_EK1100 : Term_18_EK1100_20659A8D;
+	{attribute addProperty Name "Term 23 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 10 (EK1122) : B"}
+	Term_23_EK1100 : Term_23_EK1100_DFBF0BE4;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Flexi_Soft_EtherCAT_Gateway_DE394EDD" Id="{2ba57294-caec-0872-3de3-d0135954e3a5}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: Flexi Soft EtherCAT Gateway-0000-0001'}
+{attribute addProperty VendorId "#x01000056"}
+{attribute addProperty BoxType "Flexi Soft EtherCAT Gateway-0000-0001"}
+{attribute addProperty Description "Flexi Soft EtherCAT Gateway"}
+{attribute addProperty Physics "YY"}
+{attribute addProperty Id "InAT %I*In_389F2F151OutAT %Q*Out_81AAEF2D0WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "3728297693"}
+{attribute addProperty Size "5"}
+TYPE Flexi_Soft_EtherCAT_Gateway_DE394EDD EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
+STRUCT
+	{attribute addProperty Name "In"}
+	In : In_389F2F15;
+	{attribute addProperty Name "Out"}
+	Out : Out_81AAEF2D;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_23CBA837;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

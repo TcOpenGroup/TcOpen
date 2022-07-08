@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL6001_0DE01E7E" Id="{cd4718db-4a29-0b1e-123f-1bff42f683e7}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6001-0000-0020'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL6001-0000-0020"}
+{attribute addProperty Description "EL6001 Interface (RS232)"}
+{attribute addProperty Physics "KK"}
+{attribute addProperty Id "COM_InputsAT %I*COM_Inputs_3801C95E30COM_OutputsAT %Q*COM_Outputs_DEF408EC27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
+{attribute addProperty CRC "232791678"}
+{attribute addProperty Size "61"}
+TYPE EL6001_0DE01E7E EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "COM_Inputs"}
+	COM_Inputs : COM_Inputs_3801C95E;
+	{attribute addProperty Name "COM_Outputs"}
+	COM_Outputs : COM_Outputs_DEF408EC;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_23CBA837;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

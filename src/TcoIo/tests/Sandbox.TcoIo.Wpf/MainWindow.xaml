@@ -18,7 +18,7 @@
         <TabItem Header="Topology renderer" >
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto">
                     <!--<wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_23_EK1100.Term_24_EK1122.Term_28_EK1100}"/>-->
-                <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>
+                <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_6424_EtherCAT.R10_EK1100}"/>
 
                 </ScrollViewer>
         </TabItem>

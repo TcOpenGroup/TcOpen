@@ -57,6 +57,10 @@ namespace TcoIo
                 UniformGrid hardware = new UniformGrid();
                 WiringObject wiring = new WiringObject();
                 Path path = new Path() { StrokeThickness = strokeThicknessDef };
+                if (obj.AttributeName.Contains("R10-ABT12"))
+                {
+
+                }
 
                 string currentPhysics = obj.GetType().GetProperty("AttributePhysics")?.GetValue(obj).ToString();
                 string currentConnection = obj.GetType().GetProperty("AttributePreviousPort")?.GetValue(obj).ToString();
@@ -101,7 +105,7 @@ namespace TcoIo
                             MaxPos_Y = MaxPos_Y + DimsDef.masterHeight + 15;
                             Pos_Y = MaxPos_Y;
                         }
-                        Pos_X = DimsDef.masterWidth + 10;
+                        Pos_X = DimsDef.masterWidth + 10;   
                     }
                     // slave is the first item in the view
                     else if (isSlave && previousTopologyObject.Name == null) // slave is first in the view
@@ -113,24 +117,10 @@ namespace TcoIo
                         UniformGrid emptyCell = new UniformGrid();
                         emptyCell.Width = DimsDef.slaveWidth + 10;
                         emptyCell.Height = DimsDef.slaveHeight + 15;
-
                         TopologyObject emptyTopologyObject = new TopologyObject("EmptyCellBefore" + obj.AttributeName, currentPhysics, currentConnection, row, column, Pos_X, Pos_Y, emptyCell);
                         topologyObjects.Add(emptyTopologyObject);
-
-                        var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                        if (InfoData != null)
-                        {
-                            var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                            if (State != null)
-                            {
-                                //Direct connection to the previous device that is not visible (Y20)
-                                Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                path.SetBinding(Line.StrokeProperty, binding);
-                                wiring.Path = path;
-                                wiring.WiringType = WiringObject.ConectionType.Y20;
-                            }
-                        }
-
+                        //Direct connection to the previous device that is not visible (Y20)
+                        CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y20);
                         column++;
                         Pos_X = Pos_X + DimsDef.slaveWidth + 10.0;
                     }
@@ -150,23 +140,10 @@ namespace TcoIo
                                     UniformGrid emptyCell = new UniformGrid();
                                     emptyCell.Width = DimsDef.slaveWidth + 10;
                                     emptyCell.Height = DimsDef.slaveHeight + 15;
-
                                     TopologyObject emptyTopologyObject = new TopologyObject("EmptyCellBefore" + obj.AttributeName, currentPhysics, currentConnection, row, column, Pos_X, Pos_Y, emptyCell);
                                     topologyObjects.Add(emptyTopologyObject);
-
-                                    var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                    if (InfoData != null)
-                                    {
-                                        var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                        if (State != null)
-                                        {
-                                            //Direct connection to master (Y2Y)
-                                            Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                            path.SetBinding(Line.StrokeProperty, binding);
-                                            wiring.Path = path;
-                                            wiring.WiringType = WiringObject.ConectionType.Y2Y;
-                                        }
-                                    }
+                                    //Direct connection to master (Y2Y)
+                                    CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2Y);
                                 }
                                 //Check if previously added device box or terminal is that one the currently added is connected to
                                 if (previousTopologyObject.Name != null && currentConnection.StartsWith(previousTopologyObject.Name))
@@ -192,62 +169,20 @@ namespace TcoIo
                                         {
                                             row++;
                                             Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
-                                            if (maxrow >= row)
-                                            {
-                                                foreach (TopologyObject topologyObj in topologyObjects)
-                                                {
-                                                    if (topologyObj.Row >= row)
-                                                    {
-                                                        topologyObj.Row++;
-                                                        topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
-                                                    }
-                                                }
-                                            }
-                                            var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                            if (InfoData != null)
-                                            {
-                                                var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                                if (State != null)
-                                                {
-                                                    //Connection to the X1 of the junction box (Y2KYKY_X1)
-                                                    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    path.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Path = path;
-                                                    wiring.WiringType = WiringObject.ConectionType.Y2KYKY_X1;
-                                                }
-                                            }
+
+                                            ShiftOthersDownIfNeccessary();
+                                            //Connection to the X1 of the junction box (Y2KYKY_X1)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X1);
                                         }
                                         //First box after 2-port junction box (port B) X2
                                         else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("KYKY") && currentConnection.StartsWith(previousTopologyObject.Name) && currentConnection.EndsWith("B"))
                                         {
                                             row++;
                                             Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
-                                            if (maxrow >= row)
-                                            {
-                                                foreach (TopologyObject topologyObj in topologyObjects)
-                                                {
-                                                    if (topologyObj.Row >= row)
-                                                    {
-                                                        topologyObj.Row++;
-                                                        topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
-                                                        maxrow = Math.Max(maxrow, topologyObj.Row);
-                                                        MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
-                                                    }
-                                                }
-                                            }
-                                            var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                            if (InfoData != null)
-                                            {
-                                                var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                                if (State != null)
-                                                {
-                                                    //Connection to the X2 of the junction box (Y2KYKY_X2)
-                                                    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    path.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Path = path;
-                                                    wiring.WiringType = WiringObject.ConectionType.Y2KYKY_X2;
-                                                }
-                                            }
+
+                                            ShiftOthersDownIfNeccessary();
+                                            //Connection to the X1 of the junction box (Y2KYKY_X2)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
                                         }
                                         //First box after extension
                                         else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("KY") && currentConnection.StartsWith(previousTopologyObject.Name))
@@ -262,20 +197,8 @@ namespace TcoIo
 
                                             column++;
                                             Pos_X = Pos_X + DimsDef.slaveWidth + 10;
-
-                                            var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                            if (InfoData != null)
-                                            {
-                                                var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                                if (State != null)
-                                                {
-                                                    //Connection to the extension box (Y2Y)
-                                                    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    path.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Path = path;
-                                                    wiring.WiringType = WiringObject.ConectionType.Y2Y;
-                                                }
-                                            }
+                                            //Connection to the extension box (Y2Y)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2Y);
                                         }
                                         //Box after box
                                         else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("YY") && currentConnection.StartsWith(previousTopologyObject.Name))
@@ -284,26 +207,60 @@ namespace TcoIo
                                             UniformGrid emptyCell = new UniformGrid();
                                             emptyCell.Width = DimsDef.slaveWidth + 10;
                                             emptyCell.Height = DimsDef.slaveHeight + 15;
-
                                             TopologyObject emptyTopologyObject = new TopologyObject("EmptyCellBefore" + obj.AttributeName, currentPhysics, currentConnection, row, column, Pos_X, Pos_Y, emptyCell);
                                             topologyObjects.Add(emptyTopologyObject);
-
                                             column++;
                                             Pos_X = Pos_X + DimsDef.slaveWidth + 10;
+                                            //Connection to the box (Y2Y)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2Y);
+                                        }
+                                        //Box after box
+                                        else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("YY_K") && currentConnection.StartsWith(previousTopologyObject.Name))
+                                        {
+                                            //Add empty cell after box
+                                            UniformGrid emptyCell = new UniformGrid();
+                                            emptyCell.Width = DimsDef.slaveWidth + 10;
+                                            emptyCell.Height = DimsDef.slaveHeight + 15;
+                                            TopologyObject emptyTopologyObject = new TopologyObject("EmptyCellBefore" + obj.AttributeName, currentPhysics, currentConnection, row, column, Pos_X, Pos_Y, emptyCell);
+                                            topologyObjects.Add(emptyTopologyObject);
+                                            column++;
+                                            Pos_X = Pos_X + DimsDef.slaveWidth + 10;
+                                            //Connection to the box (Y2Y)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2Y);
+                                        }
+                                        //First box after YYYY box (port D) X51
+                                        else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("YYYY") && currentConnection.StartsWith(previousTopologyObject.Name) && currentConnection.EndsWith("D"))
+                                        {
+                                            row++;
+                                            Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
 
-                                            var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                            if (InfoData != null)
-                                            {
-                                                var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                                if (State != null)
-                                                {
-                                                    //Connection to the box (Y2Y)
-                                                    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                    path.SetBinding(Line.StrokeProperty, binding);
-                                                    wiring.Path = path;
-                                                    wiring.WiringType = WiringObject.ConectionType.Y2Y;
-                                                }
-                                            }
+                                            ShiftOthersDownIfNeccessary();
+                                            //Connection to the X1 of the junction box (Y2KYKY_X1)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X1);
+                                        }
+                                        //First box after 2-port junction box (port B) X2
+                                        else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("YYYY") && currentConnection.StartsWith(previousTopologyObject.Name) && currentConnection.EndsWith("B"))
+                                        {
+                                            row++;
+                                            Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
+
+                                            ShiftOthersDownIfNeccessary();
+                                            //Connection to the X1 of the junction box (Y2KYKY_X2)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
+                                        }
+                                        //Box after box
+                                        else if (currentPhysics.StartsWith("Y") && previousTopologyObject.Physics.Equals("YYYY") && currentConnection.StartsWith(previousTopologyObject.Name) && currentConnection.EndsWith("C"))
+                                        {
+                                            //Add empty cell after box
+                                            UniformGrid emptyCell = new UniformGrid();
+                                            emptyCell.Width = DimsDef.slaveWidth + 10;
+                                            emptyCell.Height = DimsDef.slaveHeight + 15;
+                                            TopologyObject emptyTopologyObject = new TopologyObject("EmptyCellBefore" + obj.AttributeName, currentPhysics, currentConnection, row, column, Pos_X, Pos_Y, emptyCell);
+                                            topologyObjects.Add(emptyTopologyObject);
+                                            column++;
+                                            Pos_X = Pos_X + DimsDef.slaveWidth + 10;
+                                            //Connection to the box (Y2Y)
+                                            CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2Y);
                                         }
                                     }
                                     //First box after 2 port junction port C
@@ -330,34 +287,9 @@ namespace TcoIo
                                                     Pos_X = topologyObject.Pos_X + DimsDef.slaveWidth + 10;
                                                     row++;
                                                     Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
-                                                    if (maxrow >= row)
-                                                    {
-                                                        foreach (TopologyObject topologyObj in topologyObjects)
-                                                        {
-                                                            if (topologyObj.Row >= row)
-                                                            {
-                                                                topologyObj.Row++;
-                                                                topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
-                                                                maxrow = Math.Max(maxrow, topologyObj.Row);
-                                                                MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
-                                                            }
-                                                        }
-                                                    }
+                                                    ShiftOthersDownIfNeccessary();
                                                     //Connection to the X2 of the junction box (Y2KYKY_X2)
-
-                                                    var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
-                                                    if (InfoData != null)
-                                                    {
-                                                        var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
-                                                        if (State != null)
-                                                        {
-                                                            //Connection to the X2 of the junction box (Y2KYKY_X2)
-                                                            Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
-                                                            path.SetBinding(Line.StrokeProperty, binding);
-                                                            wiring.Path = path;
-                                                            wiring.WiringType = WiringObject.ConectionType.Y2KYKY_X2;
-                                                        }
-                                                    }
+                                                    CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
                                                 }
                                                 //First box after coupler of the YKY type (port C) X2
                                                 else if (currentPhysics.StartsWith("Y") && topologyObject.Physics.Equals("YKY") && currentConnection.EndsWith("C"))
@@ -366,11 +298,56 @@ namespace TcoIo
                                                     Pos_X = topologyObject.Pos_X;
                                                     row++;
                                                     Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
-                                                    
                                                     ShiftOthersDownIfNeccessary();
                                                     //Connection to the X2 of the coupler box (Y2YKY)
                                                     CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2YKY);
                                                 }
+
+                                                //First box after YYYY box (port D) X51
+                                                else if (currentPhysics.StartsWith("Y") && topologyObject.Physics.Equals("YYYY") && currentConnection.StartsWith(topologyObject.Name) && currentConnection.EndsWith("D"))
+                                                {
+                                                    column = topologyObject.Column + 1;
+                                                    Pos_X = topologyObject.Pos_X + DimsDef.slaveWidth + 10;
+                                                    row++;
+                                                    Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
+
+
+                                                    ShiftOthersDownIfNeccessary();
+                                                    //Connection to the X1 of the junction box (Y2KYKY_X1)
+                                                    CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X1);
+                                                }
+                                                //First box after YYYY box (port B) X52
+                                                else if (currentPhysics.StartsWith("Y") && topologyObject.Physics.Equals("YYYY") && currentConnection.StartsWith(topologyObject.Name) && currentConnection.EndsWith("B"))
+                                                {
+                                                    column = topologyObject.Column + 1;
+                                                    Pos_X = topologyObject.Pos_X + DimsDef.slaveWidth + 10;
+                                                    row++;
+                                                    Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
+
+                                                    ShiftOthersDownIfNeccessary();
+                                                    //Connection to the X1 of the junction box (Y2KYKY_X2)
+                                                    CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
+                                                }
+                                                //Box after box
+                                                else if (currentPhysics.StartsWith("Y") && topologyObject.Physics.Equals("YYYY") && currentConnection.StartsWith(topologyObject.Name) && currentConnection.EndsWith("C"))
+                                                {
+                                                    column = topologyObject.Column + 1;
+                                                    Pos_X = topologyObject.Pos_X + DimsDef.slaveWidth + 10;
+                                                    row = topologyObject.Row;
+                                                    Pos_Y = topologyObject.Pos_Y;
+
+                                                    //Add empty cell after box
+                                                    UniformGrid emptyCell = new UniformGrid();
+                                                    emptyCell.Width = DimsDef.slaveWidth + 10;
+                                                    emptyCell.Height = DimsDef.slaveHeight + 15;
+                                                    TopologyObject emptyTopologyObject = new TopologyObject("EmptyCellBefore" + obj.AttributeName, currentPhysics, currentConnection, row, column, Pos_X, Pos_Y, emptyCell);
+                                                    topologyObjects.Add(emptyTopologyObject);
+                                                    column++;
+                                                    Pos_X = Pos_X + DimsDef.slaveWidth + 10;
+                                                    //Connection to the box (Y2Y)
+                                                    CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2Y);
+                                                }
+
                                                 break;
                                             }
                                         }
@@ -598,8 +575,35 @@ namespace TcoIo
                 wiringGrid.SetValue(Grid.RowSpanProperty, 100);
                 wiringGrid.SetValue(Grid.ColumnSpanProperty, 100);
             }
+            ////////////////////////////////////////////
+            ///Temporary button just for debugging
+            ////////////////////////////////////////////
+            Button RefreshButton = new Button();
+            RefreshButton.Content = "Refresh";
+            RefreshButton.MaxWidth = 64;
+
+            RefreshButton.Click += RefreshButton_Click; ;
+
+            hardwareGrid.Children.Add(RefreshButton);
+            ////////////////////////////////////////////
+
             return hardwareGrid;
         }
+
+        ////////////////////////////////////////////
+        ///Temporary event just for debugging
+        ////////////////////////////////////////////
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            DependencyPropertyChangedEventArgs _e = new DependencyPropertyChangedEventArgs();
+            row = maxrow = column = 0;
+            Pos_X = Pos_Y = MaxPos_Y = 0;
+            previousTopologyObject = new TopologyObject();
+            topologyObjects = new ObservableCollection<TopologyObject>();
+            TopologyRenderer_DataContextChanged(sender,_e);
+        }
+        ////////////////////////////////////////////
+
 
         public object RenderHardware(IVortexObject obj, ref int row, ref int maxrow, ref int column, ref double Pos_X, ref double Pos_Y, ref double MaxPos_Y, ref TopologyObject previousTopologyObject, Grid mainGrid = null, Grid subGrid = null)
         {
@@ -973,15 +977,31 @@ namespace TcoIo
         {
             if (maxrow >= row)
             {
+                int minColumn = int.MaxValue;
                 foreach (TopologyObject topologyObj in topologyObjects)
                 {
                     if (topologyObj.Row >= row)
                     {
-                        topologyObj.Row++;
-                        topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
-                        maxrow = Math.Max(maxrow, topologyObj.Row);
-                        MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
+                        minColumn = Math.Min(minColumn, topologyObj.Column);
                     }
+                }
+                if (minColumn< column) //if there are already any objects left to "me" and lower then "me" or at "my" row at the same time, they have to be shifted down
+                {
+                    foreach (TopologyObject topologyObj in topologyObjects)
+                    {
+                        if (topologyObj.Row >= row)
+                        {
+                            topologyObj.Row++;
+                            topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
+                            maxrow = Math.Max(maxrow, topologyObj.Row);
+                            MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
+                        }
+                    }
+                }
+                else //if there are already any objects right to "me" and lower then "me" or at "my" row at the same time, that's me who has to be shift down
+                {
+                    row = maxrow + 1;
+                    Pos_Y = MaxPos_Y + DimsDef.slaveHeight + 15;
                 }
             }
         }
@@ -1002,5 +1022,4 @@ namespace TcoIo
             }
         }
     }
-
 }

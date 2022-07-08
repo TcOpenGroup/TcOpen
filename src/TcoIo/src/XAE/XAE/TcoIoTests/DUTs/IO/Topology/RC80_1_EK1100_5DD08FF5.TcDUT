@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC80_1_EK1100_5DD08FF5" Id="{b1232a90-86d8-068d-0edb-84540a36f723}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "RC80_A2_EK1122RC80_A2_EK1122_C346701285RC80_A3_EK1122RC80_A3_EK1122_B1484BA9120RC80_A5_EL1809EL1809_32157CFD20RC80_A6_EL1809EL1809_32157CFD20RC80_A7_EL2809EL2809_2B6483BD19RC80_A8_EL2809EL2809_2B6483BD19RC80_A9_EL2809EL2809_2B6483BD19Term_796_EL9010EL9010_D29C20850"}
+{attribute addProperty CRC "1573949429"}
+{attribute addProperty Size "302"}
+{attribute addProperty Name "RC80_1 (EK1100)"}
+TYPE RC80_1_EK1100_5DD08FF5 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC80_A2 (EK1122)"}
+	{attribute addProperty PreviousPort "RC80_1 (EK1100) : B"}
+	RC80_A2_EK1122 : RC80_A2_EK1122_C3467012;
+	{attribute addProperty Name "RC80_A3 (EK1122)"}
+	{attribute addProperty PreviousPort "RC80_A2 (EK1122) : C"}
+	RC80_A3_EK1122 : RC80_A3_EK1122_B1484BA9;
+	{attribute addProperty Name "RC80_A5 (EL1809)"}
+	{attribute addProperty PreviousPort "RC80_A3 (EK1122) : C"}
+	RC80_A5_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RC80_A6 (EL1809)"}
+	{attribute addProperty PreviousPort "RC80_A5 (EL1809) : B"}
+	RC80_A6_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RC80_A7 (EL2809)"}
+	{attribute addProperty PreviousPort "RC80_A6 (EL1809) : B"}
+	RC80_A7_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC80_A8 (EL2809)"}
+	{attribute addProperty PreviousPort "RC80_A7 (EL2809) : B"}
+	RC80_A8_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC80_A9 (EL2809)"}
+	{attribute addProperty PreviousPort "RC80_A8 (EL2809) : B"}
+	RC80_A9_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "Term 796 (EL9010)"}
+	{attribute addProperty PreviousPort "RC80_A9 (EL2809) : B"}
+	Term_796_EL9010 : EL9010_D29C2085;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

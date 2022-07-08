@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R8_A3_EK1122_71CA94BA" Id="{a07db38b-be42-06b7-1171-e57cff272528}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "VI_10_AES_D_BC_ECAT_xAES_A3B0707168VI_9_AES_D_BC_ECAT_xAES_A3B0707168"}
+{attribute addProperty CRC "1909101754"}
+{attribute addProperty Size "136"}
+{attribute addProperty Name "R8_A3 (EK1122)"}
+TYPE R8_A3_EK1122_71CA94BA EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "VI-10 (AES-D-BC-ECAT)"}
+	{attribute addProperty PreviousPort "R8_A3 (EK1122) : D"}
+	VI_10_AES_D_BC_ECAT_x : AES_A3B07071;
+	{attribute addProperty Name "VI-9 (AES-D-BC-ECAT)"}
+	{attribute addProperty PreviousPort "R8_A3 (EK1122) : B"}
+	VI_9_AES_D_BC_ECAT_x : AES_A3B07071;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

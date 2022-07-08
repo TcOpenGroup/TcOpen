@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="PM_Status_data_2A9514CB" Id="{6c9f048e-eb5d-0f2b-0438-5a4453a1adfe}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3403-0000-0023'}
+{attribute addProperty BoxType "EL3403-0000-0023"}
+{attribute addProperty Id "Missing_zero_crossing_AAT %I*BOOL1Missing_zero_crossing_BAT %I*BOOL1Missing_zero_crossing_CAT %I*BOOL1Phase_sequence_errorAT %I*BOOL1"}
+{attribute addProperty CRC "714413259"}
+{attribute addProperty Size "4"}
+TYPE PM_Status_data_2A9514CB EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Missing_zero_crossing_A"}
+	Missing_zero_crossing_A AT %I* : BOOL;
+	{attribute addProperty Name "Missing_zero_crossing_B"}
+	Missing_zero_crossing_B AT %I* : BOOL;
+	{attribute addProperty Name "Missing_zero_crossing_C"}
+	Missing_zero_crossing_C AT %I* : BOOL;
+	{attribute addProperty Name "Phase_sequence_error"}
+	Phase_sequence_error AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

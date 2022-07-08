@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="AI_Sample_Count_EA88CAD9" Id="{05d9513f-61ea-00fd-2184-f38b6b0538b6}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3773-0000-0021'}
+{attribute addProperty BoxType "EL3773-0000-0021"}
+{attribute addProperty Id "Sample_CountAT %I*UINT2"}
+{attribute addProperty CRC "3934833369"}
+{attribute addProperty Size "2"}
+TYPE AI_Sample_Count_EA88CAD9 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Sample_Count"}
+	Sample_Count AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL1819_32157CFD" Id="{2f2f74f2-2037-040e-3747-8f61f065ee28}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL1819-0000-0018'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL1819-0000-0018"}
+{attribute addProperty Description "EL1819 16Ch. Dig. Input 24V, 10µs"}
+{attribute addProperty Physics "KK"}
+{attribute addProperty Id "Channel_1AT %I*Channel_830843C11Channel_2AT %I*Channel_830843C11Channel_3AT %I*Channel_830843C11Channel_4AT %I*Channel_830843C11Channel_5AT %I*Channel_830843C11Channel_6AT %I*Channel_830843C11Channel_7AT %I*Channel_830843C11Channel_8AT %I*Channel_830843C11Channel_9AT %I*Channel_830843C11Channel_10AT %I*Channel_830843C11Channel_11AT %I*Channel_830843C11Channel_12AT %I*Channel_830843C11Channel_13AT %I*Channel_830843C11Channel_14AT %I*Channel_830843C11Channel_15AT %I*Channel_830843C11Channel_16AT %I*Channel_830843C11WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_6F19DB2B2"}
+{attribute addProperty CRC "840269053"}
+{attribute addProperty Size "20"}
+TYPE EL1819_32157CFD EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "Channel_1"}
+	Channel_1 : Channel_830843C1;
+	{attribute addProperty Name "Channel_2"}
+	Channel_2 : Channel_830843C1;
+	{attribute addProperty Name "Channel_3"}
+	Channel_3 : Channel_830843C1;
+	{attribute addProperty Name "Channel_4"}
+	Channel_4 : Channel_830843C1;
+	{attribute addProperty Name "Channel_5"}
+	Channel_5 : Channel_830843C1;
+	{attribute addProperty Name "Channel_6"}
+	Channel_6 : Channel_830843C1;
+	{attribute addProperty Name "Channel_7"}
+	Channel_7 : Channel_830843C1;
+	{attribute addProperty Name "Channel_8"}
+	Channel_8 : Channel_830843C1;
+	{attribute addProperty Name "Channel_9"}
+	Channel_9 : Channel_830843C1;
+	{attribute addProperty Name "Channel_10"}
+	Channel_10 : Channel_830843C1;
+	{attribute addProperty Name "Channel_11"}
+	Channel_11 : Channel_830843C1;
+	{attribute addProperty Name "Channel_12"}
+	Channel_12 : Channel_830843C1;
+	{attribute addProperty Name "Channel_13"}
+	Channel_13 : Channel_830843C1;
+	{attribute addProperty Name "Channel_14"}
+	Channel_14 : Channel_830843C1;
+	{attribute addProperty Name "Channel_15"}
+	Channel_15 : Channel_830843C1;
+	{attribute addProperty Name "Channel_16"}
+	Channel_16 : Channel_830843C1;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_6F19DB2B;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

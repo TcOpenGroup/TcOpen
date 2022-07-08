@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R1_A4_X1_EK1100_C601B400" Id="{2fab90a2-dfa4-0f56-0836-0494518322ce}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "R1_A4_X1_PN_EL6631EL6631_A0EC075C2R1_A4_X1_IA1_EL1809EL1809_32157CFD20R1_A4_X1_IA2_EL1809EL1809_32157CFD20R1_A4_X1_IA3_EL1809EL1809_32157CFD20R1_A4_X1_IA4_EL1809EL1809_32157CFD20R1_A4_X1_QA1_EL2809EL2809_2B6483BD19R1_A4_X1_QA2_EL2809EL2809_2B6483BD19R1_A4_X1_QA3_EL2809EL2809_2B6483BD19R1_A4_X1_EndTerminal_EL9010EL9010_D29C20850"}
+{attribute addProperty CRC "3322000384"}
+{attribute addProperty Size "139"}
+{attribute addProperty Name "R1_A4_X1 (EK1100)"}
+TYPE R1_A4_X1_EK1100_C601B400 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R1_A4_X1_PN (EL6631)"}
+	{attribute addProperty PreviousPort "R1_A4_X1 (EK1100) : B"}
+	R1_A4_X1_PN_EL6631 : EL6631_A0EC075C;
+	{attribute addProperty Name "R1_A4_X1_IA1 (EL1809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_PN (EL6631) : B"}
+	R1_A4_X1_IA1_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R1_A4_X1_IA2 (EL1809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_IA1 (EL1809) : B"}
+	R1_A4_X1_IA2_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R1_A4_X1_IA3 (EL1809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_IA2 (EL1809) : B"}
+	R1_A4_X1_IA3_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R1_A4_X1_IA4 (EL1809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_IA3 (EL1809) : B"}
+	R1_A4_X1_IA4_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R1_A4_X1_QA1 (EL2809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_IA4 (EL1809) : B"}
+	R1_A4_X1_QA1_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R1_A4_X1_QA2 (EL2809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_QA1 (EL2809) : B"}
+	R1_A4_X1_QA2_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R1_A4_X1_QA3 (EL2809)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_QA2 (EL2809) : B"}
+	R1_A4_X1_QA3_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R1_A4_X1_EndTerminal (EL9010)"}
+	{attribute addProperty PreviousPort "R1_A4_X1_QA3 (EL2809) : B"}
+	R1_A4_X1_EndTerminal_EL9010 : EL9010_D29C2085;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

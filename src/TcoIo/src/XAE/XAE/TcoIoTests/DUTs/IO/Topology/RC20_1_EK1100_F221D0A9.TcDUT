@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC20_1_EK1100_F221D0A9" Id="{1ebd1cac-ece9-0c25-07ad-771a32b68f11}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "RC20_A2_EK1122RC20_A2_EK1122_77321D6773RC20_A3_EK1122RC20_A3_EK1122_1263CE61120RC20_A5_EL1809EL1809_32157CFD20RC20_A6_EL1809EL1809_32157CFD20RC20_A7_EL2809EL2809_2B6483BD19RC20_A8_EL2809EL2809_2B6483BD19RC20_A9_EL2809EL2809_2B6483BD19RC20_1_EndTerminal_EL9010EL9010_D29C20850"}
+{attribute addProperty CRC "4062302377"}
+{attribute addProperty Size "290"}
+{attribute addProperty Name "RC20_1 (EK1100)"}
+TYPE RC20_1_EK1100_F221D0A9 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC20_A2 (EK1122)"}
+	{attribute addProperty PreviousPort "RC20_1 (EK1100) : B"}
+	RC20_A2_EK1122 : RC20_A2_EK1122_77321D67;
+	{attribute addProperty Name "RC20_A3 (EK1122)"}
+	{attribute addProperty PreviousPort "RC20_A2 (EK1122) : C"}
+	RC20_A3_EK1122 : RC20_A3_EK1122_1263CE61;
+	{attribute addProperty Name "RC20_A5 (EL1809)"}
+	{attribute addProperty PreviousPort "RC20_A3 (EK1122) : C"}
+	RC20_A5_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RC20_A6 (EL1809)"}
+	{attribute addProperty PreviousPort "RC20_A5 (EL1809) : B"}
+	RC20_A6_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RC20_A7 (EL2809)"}
+	{attribute addProperty PreviousPort "RC20_A6 (EL1809) : B"}
+	RC20_A7_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC20_A8 (EL2809)"}
+	{attribute addProperty PreviousPort "RC20_A7 (EL2809) : B"}
+	RC20_A8_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC20_A9 (EL2809)"}
+	{attribute addProperty PreviousPort "RC20_A8 (EL2809) : B"}
+	RC20_A9_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC20_1_EndTerminal (EL9010)"}
+	{attribute addProperty PreviousPort "RC20_A9 (EL2809) : B"}
+	RC20_1_EndTerminal_EL9010 : EL9010_D29C2085;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
