@@ -1,8 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+<PropertyGroup>
+	<TargetFramework>net5.0</TargetFramework>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<!--NuGet properties-->
+	<Authors>TcOpenGroup contributors</Authors>
+	<Company>TcOpenGroup</Company>
+	<RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>TwinCAT3 Beckhoff</PackageTags>
+	<PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+	<PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+	<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+</PropertyGroup>
+
 
   
   <ItemGroup>
@@ -10,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorPagination" Version="0.2.16" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.17" />
 	<PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.9-alpha.719" />
   </ItemGroup>
