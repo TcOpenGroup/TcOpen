@@ -8,9 +8,17 @@ using TcOpen.Inxton.Data;
 
 namespace TcoData
 {
-    public class DataViewModel<T> : FunctionAvailability, IDataViewModel where T : IBrowsableDataObject, new()
+    public enum ViewMode
     {
+        Display,
+        Edit,
+        New,
+        Copy
+    }
 
+    public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
+    {
+        
         public List<IBrowsableDataObject> ObservableRecords { get; private set; } = new List<IBrowsableDataObject>();
      
 
@@ -49,6 +57,9 @@ namespace TcoData
                 }
 
                 CrudDataObject?.ChangeTracker.StartObservingChanges();
+
+                SetRowSelectedButtonState();
+
             }
         }
 
@@ -78,6 +89,7 @@ namespace TcoData
 
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
+            SetDefaultButtonState();
             //FillObservableRecords();
             //Task.Run(FillObservableRecordsAsync);
             //this.DataExchange = dataExchange;
@@ -116,32 +128,25 @@ namespace TcoData
 
             //this.FillObservableRecords();
         }
-        //void FillObservableRecords()
-        //{
-        //    ObservableRecords.Clear();
-        //    DataBrowser.Filter("", 15, 0, eSearchMode.Exact);
-        //    //DataBrowser.Filter(this.FilterByID, this.Limit, this.page * this.Limit, SearchMode);
-        //    foreach (var item in DataBrowser.Records)
-        //    {
-        //        ObservableRecords.Add(item);
-        //    }
-
-        //    //filteredCount = this.DataBrowser.FilteredCount(this.FilterByID, SearchMode);
 
 
-        //}
-        //private int limit;
-        //public int Limit 
-        //{
-        //    get 
-        //    { 
-        //        return limit; 
-        //    }
-        //    set
-        //    {
+        private ViewMode mode;
 
-        //    }
-        //}
+        public ViewMode Mode
+        {
+            get 
+            {
+                return mode; 
+            }
+            set { mode = value; }
+        }
+
+     
+
+
+        public string RecordIdentifier { get; set; }
+
+
         public int Limit { get; set; } = 10;
         public string FilterById { get; set; } = "";
         public eSearchMode SearchMode { get; set; } = eSearchMode.Exact;
@@ -167,16 +172,87 @@ namespace TcoData
 
         }
 
-        public bool StartCreateNewCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool StartCreateCopyOfExistingAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool UpdateCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool CancelEditCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool DeleteCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool EditCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool SendToPlcCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool LoadFromPlcCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool ExportCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool ImportCommandAvailable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private void StartCreatingNew()
+        {
+            this.Mode = ViewMode.New; 
+            RecordIdentifier = string.Empty;
+        }
+
+        private void CreateNew()
+        {
+            var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
+            plainer._EntityId = RecordIdentifier;
+            DataBrowser.AddRecord(plainer);
+            var plain = DataBrowser.FindById(plainer._EntityId);
+            ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
+            FillObservableRecords();
+            SelectedRecord = plain;
+            Mode = ViewMode.Edit;
+            
+        }
+
+        public bool StartCreateNewCommandAvailable { get; set; }
+        public bool StartCreateCopyOfExistingAvailable { get; set; }
+        public bool UpdateCommandAvailable { get; set; }
+        public bool CancelEditCommandAvailable { get; set; }
+        public bool DeleteCommandAvailable { get; set; }
+        public bool EditCommandAvailable { get; set; }
+        public bool SendToPlcCommandAvailable { get; set; }
+        public bool LoadFromPlcCommandAvailable { get; set; }
+        public bool ExportCommandAvailable { get; set; }
+        public bool ImportCommandAvailable { get; set; }
+
+        public bool NewDisabled { get; set; }
+        public bool CopyDisabled { get; set; }
+        public bool UpdateDisabled { get; set; }
+        public bool EditDisabled { get; set; }
+        public bool SendToPlcDisabled { get; set; }
+        public bool FromPlcDisabled { get; set; }
+        public bool ImportDisabled { get; set; }
+        public bool ExportDisabled { get; set; }
+        public bool CancelDisabled { get; set; }
+        public bool DeleteDisabled { get; set; }
+
+        private void SetDefaultButtonState()
+        {
+            NewDisabled = false;
+            CopyDisabled = true;
+            UpdateDisabled = true;
+            EditDisabled = true;
+            SendToPlcDisabled = true;
+            FromPlcDisabled = true;
+            ImportDisabled = false;
+            ExportDisabled = false;
+            CancelDisabled = true;
+            DeleteDisabled = true;
+        }
+
+        private void SetRowSelectedButtonState()
+        {
+            NewDisabled = false;
+            CopyDisabled = false;
+            UpdateDisabled = true;
+            EditDisabled = false;
+            SendToPlcDisabled = false;
+            FromPlcDisabled = false;
+            ImportDisabled = false;
+            ExportDisabled = false;
+            CancelDisabled = true;
+            DeleteDisabled = false;
+        }
+        private void ViewModeNew()
+        {
+            NewDisabled = false;
+            CopyDisabled = true;
+            UpdateDisabled = true;
+            EditDisabled = true;
+            SendToPlcDisabled = true;
+            FromPlcDisabled = true;
+            ImportDisabled = false;
+            ExportDisabled = false;
+            CancelDisabled = true;
+            DeleteDisabled = true;
+        }
     }
 
    

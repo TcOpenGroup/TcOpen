@@ -7,7 +7,7 @@ using TcOpen.Inxton.Data;
 
 namespace TcoData
 {
-    public interface IDataViewModel
+    public interface IDataViewModel : FunctionAvailabilityBlazor
     {
 
         TcoDataExchange DataExchange { get; }
@@ -20,5 +20,32 @@ namespace TcoData
         eSearchMode SearchMode { get; set; }
         long FilteredCount { get; set; }
         IBrowsableDataObject SelectedRecord { get; set; }
+        public ViewMode Mode { get; set; }
+        public string RecordIdentifier { get; set; }
+    }
+
+    public interface FunctionAvailabilityBlazor
+    {
+        bool StartCreateNewCommandAvailable { get; set; }
+        bool StartCreateCopyOfExistingAvailable { get; set; }
+        bool UpdateCommandAvailable { get; set; }
+        bool CancelEditCommandAvailable { get; set; }
+        bool DeleteCommandAvailable { get; set; }
+        bool EditCommandAvailable { get; set; }
+        bool SendToPlcCommandAvailable { get; set; }
+        bool LoadFromPlcCommandAvailable { get; set; }
+        bool ExportCommandAvailable { get; set; }
+        bool ImportCommandAvailable { get; set; }
+
+        bool NewDisabled { get; set; }
+        bool CopyDisabled { get; set; }
+        bool UpdateDisabled { get; set; }
+        bool EditDisabled { get; set; }
+        bool SendToPlcDisabled { get; set; }
+        bool FromPlcDisabled { get; set; }
+        bool ImportDisabled { get; set; }
+        bool ExportDisabled { get; set; }
+        bool CancelDisabled { get; set; }
+        bool DeleteDisabled { get; set; }
     }
 }

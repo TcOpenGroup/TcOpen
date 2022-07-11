@@ -9,19 +9,7 @@ using Vortex.Presentation;
 namespace TcoData
 {
 
-    public interface FunctionAvailability
-    {
-        bool StartCreateNewCommandAvailable { get; set; }
-        bool StartCreateCopyOfExistingAvailable { get; set; }
-        bool UpdateCommandAvailable { get; set; }
-        bool CancelEditCommandAvailable { get; set; }
-        bool DeleteCommandAvailable { get; set; }
-        bool EditCommandAvailable { get; set; }
-        bool SendToPlcCommandAvailable { get; set; }
-        bool LoadFromPlcCommandAvailable { get; set; }
-        bool ExportCommandAvailable { get; set; }
-        bool ImportCommandAvailable { get; set; }
-    }
+   
     public class TcoDataExchangeViewModel : RenderableViewModelBase
     {
         public TcoDataExchangeViewModel() : base()
@@ -37,24 +25,18 @@ namespace TcoData
 
         protected virtual void UpdateAvailability()
         {
-            //try
-            //{
-            //    ((FunctionAvailability)this.DataViewModel).CancelEditCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).DeleteCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).EditCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).ExportCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).ImportCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).LoadFromPlcCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).SendToPlcCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).StartCreateCopyOfExistingAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).StartCreateNewCommandAvailable = true;
-            //    ((FunctionAvailability)this.DataViewModel).UpdateCommandAvailable = true;
-            //}
-            //catch (Exception)
-            //{
-               
-            //        throw;
-            //}
+            
+            DataViewModel.CancelEditCommandAvailable = true;
+            DataViewModel.DeleteCommandAvailable = true;
+            DataViewModel.EditCommandAvailable = true;
+            DataViewModel.ExportCommandAvailable = true;
+            DataViewModel.ImportCommandAvailable = true;
+            DataViewModel.LoadFromPlcCommandAvailable = true;
+            DataViewModel.SendToPlcCommandAvailable = true;
+            DataViewModel.StartCreateCopyOfExistingAvailable = true;
+            DataViewModel.StartCreateNewCommandAvailable = true;
+            DataViewModel.UpdateCommandAvailable = true;
+          
 
         }
 

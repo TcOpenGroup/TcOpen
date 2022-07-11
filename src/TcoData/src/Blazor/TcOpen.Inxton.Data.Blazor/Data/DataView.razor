@@ -46,73 +46,135 @@
         }
         else
         {
-            <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
+            switch (@DataViewModel.Mode)
+            {
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in DataViewModel.ObservableRecords.ToList())
-                        {
-                            <tr @onclick="@(() => RowClicked(item))">
-                                <td>@item._EntityId</td>
-                            </tr>
-                        }
+                case ViewMode.Display:
+                    {
+                        <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
 
-
-                    </tbody>
-                </table>
-             </div>
-
-                <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedFirst()" aria-label="First">
-                                <span aria-hidden="true">&laquo;</span>
-                            </button>
-                        </li>
-                        <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage-1)" aria-label="Previous">
-                                <span aria-hidden="true">&lsaquo;</span>
-                            </button>
-                        </li>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in DataViewModel.ObservableRecords.ToList())
+                                    {
+                                        <tr @onclick="@(() => RowClicked(item))">
+                                            <td>@item._EntityId</td>
+                                        </tr>
+                                    }
 
 
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <nav aria-label="Pagination">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <button class="page-link" @onclick="() => PageChangedFirst()" aria-label="First">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage-1)" aria-label="Previous">
+                                        <span aria-hidden="true">&lsaquo;</span>
+                                    </button>
+                                </li>
 
 
-                        @for (var i = _visibleDownPage; i < _visibleUpPage; i++)
-                        {
-                            var current = i;
-                            @if (current == _currentActivePage)
-                            {
-                                <li class="page-item active"><button class="page-link" @onclick="() => PageChanged(current) ">@(current+1)</button></li>
-                            }
-                            else
-                            {
-                                <li class="page-item"><button class="page-link" @onclick="() => PageChanged(current) ">@(current+1)</button></li>
-                            }
-                        }
 
-                        <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage+1)" aria-label="Next">
-                                <span aria-hidden="true">&rsaquo;</span>
-                            </button>
-                        </li>
-                        <li class="page-item">
-                            <button class="page-link" @onclick="() => PageChangedLast()" aria-label="Last">
-                                <span aria-hidden="true">&raquo;</span>
-                            </button>
-                        </li>
 
-                    </ul>
-                </nav>
+                                @for (var i = _visibleDownPage; i < _visibleUpPage; i++)
+                                {
+                                    var current = i;
+                                    @if (current == _currentActivePage)
+                                    {
+                                        <li class="page-item active"><button class="page-link" @onclick="() => PageChanged(current) ">@(current+1)</button></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><button class="page-link" @onclick="() => PageChanged(current) ">@(current+1)</button></li>
+                                    }
+                                }
 
-                }
-            </div>
+                                <li class="page-item">
+                                    <button class="page-link" @onclick="() => PageChangedWithArrow(_currentActivePage+1)" aria-label="Next">
+                                        <span aria-hidden="true">&rsaquo;</span>
+                                    </button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link" @onclick="() => PageChangedLast()" aria-label="Last">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </button>
+                                </li>
 
+                            </ul>
+                        </nav>
+                        break;
+                    }
+                case ViewMode.New:
+                    {
+                    
+                        <label for="newInput" class="form-label">Email address</label>
+                        <input type="text" class="form-control" id="newInput">
+                
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+
+        }
+    </div>
+
+    <div class="d-flex justify-content-center">
+        @if (DataViewModel.StartCreateNewCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.NewDisabled"> New </button>}
+
+        @if (DataViewModel.StartCreateCopyOfExistingAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.CopyDisabled"> Copy </button>}
+
+        @if (DataViewModel.UpdateCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.UpdateDisabled"> Update </button>}
+
+        @if (DataViewModel.EditCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.EditDisabled"> Edit </button>}
+
+        @if (DataViewModel.SendToPlcCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.SendToPlcDisabled"> Send to PLC </button>}
+
+        @if (DataViewModel.LoadFromPlcCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.FromPlcDisabled"> From PLC </button>}
+
+        @if (DataViewModel.ImportCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.ImportDisabled"> Import </button>}
+
+        @if (DataViewModel.ExportCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.ExportDisabled"> Export </button>}
+
+        @if (DataViewModel.CancelEditCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.CancelDisabled"> Cancel </button>}
+
+        @if (DataViewModel.DeleteCommandAvailable)
+        {<button class="btn btn-primary m-2" 
+                 disabled="@DataViewModel.DeleteDisabled"> Delete </button>}
+
+    </div>
+        
             @if (_isRowSelected)
             {
                 <p>@DataViewModel.SelectedRecord._EntityId</p>
@@ -125,9 +187,12 @@
         </div>
 
 
+
 @code {
 
+    
 
+    public bool IsDisabled { get; set; } = true;
 
     [Parameter]
     public IDataViewModel DataViewModel { get; set; }
@@ -229,7 +294,6 @@
         IsLoading = true;
         await Filter();
         IsLoading = false;
-
 
         base.OnInitializedAsync();
     }
