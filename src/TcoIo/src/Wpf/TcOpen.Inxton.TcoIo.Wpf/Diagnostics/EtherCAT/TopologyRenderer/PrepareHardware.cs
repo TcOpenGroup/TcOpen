@@ -106,6 +106,7 @@ namespace TcoIo
                     {
                         if (currentPhysics != null && currentConnection != null)
                         {
+                            TopologyObject connectionPartner = FindMyConnectionPartner(currentConnection , previousTopologyObject);
                             //First box after master
                             if (currentPhysics.StartsWith("Y") && previousTopologyObject.Name != null && currentConnection.StartsWith(previousTopologyObject.Name) && previousTopologyObject.Physics != null && currentConnection.EndsWith(previousTopologyObject.Physics))
                             {
@@ -273,9 +274,6 @@ namespace TcoIo
                                                     Pos_X = topologyObject.Pos_X + DimsDef.slaveWidth + 10;
                                                     row = row + 1;
                                                     Pos_Y = Pos_Y + DimsDef.slaveHeight + 15;
-                                                    ///////////////////////////////
-                                                    //rowsOccupied = 1;
-                                                    ///////////////////////////////
                                                     ShiftDownIfNeccessary("B", rowsOccupied);
                                                     //Connection to the X2 of the junction box (Y2KYKY_X2)
                                                     CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
