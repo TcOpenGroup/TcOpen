@@ -16,35 +16,17 @@
     </Window.DataContext>
     <TabControl>
         <TabItem Header="Topology renderer" >
-                <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto">
-                    <!--<wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_4_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_23_EK1100.Term_24_EK1122.Term_28_EK1100}"/>-->
-                <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_6424_EtherCAT.R10_EK1100}"/>
-
-                </ScrollViewer>
+            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}" />
         </TabItem>
-        <!--<TabItem Header="Topology" >
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <ScrollViewer Grid.Column="0" DataContext="{Binding TcoIoTests.GVL_iXlinker}" >
-                    <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="TopologyBase" RenderTransformOrigin="0.5,0.5"/>
-                </ScrollViewer>
-
-            </Grid>
-        </TabItem>
-        <TabItem Header="Topology view" >
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MaxWidth="300"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding TcoIoTests.GVL_iXlinker}" RenderTransformOrigin="0.5,0.5"/>
-                <ScrollViewer Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}">
-                    <vortex:ObservableContentControl PresentationType="Service" ></vortex:ObservableContentControl>
-                </ScrollViewer>
-
-            </Grid>
+        <!--<TabItem Header="Topology renderer" >
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="Stack" HorizontalAlignment="Left" VerticalAlignment="Top" PreviewMouseWheel="StackPanel_PreviewMouseWheel">
+                        <StackPanel.LayoutTransform >
+                            <ScaleTransform />
+                        </StackPanel.LayoutTransform>
+                    <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>-->
         <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">

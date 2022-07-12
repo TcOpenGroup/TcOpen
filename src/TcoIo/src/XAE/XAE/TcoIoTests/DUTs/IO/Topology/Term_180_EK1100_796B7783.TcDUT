@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Term_180_EK1100_796B7783" Id="{1f4b824a-9e30-0eba-228d-f8b515af671b}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "Term_181_EL1809EL1809_32157CFD20"}
+{attribute addProperty CRC "2037086083"}
+{attribute addProperty Size "20"}
+{attribute addProperty Name "Term 180 (EK1100)"}
+TYPE Term_180_EK1100_796B7783 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Term 181 (EL1809)"}
+	{attribute addProperty PreviousPort "Term 180 (EK1100) : B"}
+	Term_181_EL1809 : EL1809_32157CFD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

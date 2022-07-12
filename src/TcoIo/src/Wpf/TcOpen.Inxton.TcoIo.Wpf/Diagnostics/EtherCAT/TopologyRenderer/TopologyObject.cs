@@ -77,6 +77,7 @@ namespace TcoIo
                 this.pos_X = value;
             }
         }
+
         private double pos_Y;
         public double Pos_Y
         {
@@ -123,6 +124,7 @@ namespace TcoIo
             Pos_X = pos_X;
             Pos_Y = pos_Y;
             Hardware = new UniformGrid();
+            Wiring = new WiringObject();
         }
         public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid harwdware)
         {
