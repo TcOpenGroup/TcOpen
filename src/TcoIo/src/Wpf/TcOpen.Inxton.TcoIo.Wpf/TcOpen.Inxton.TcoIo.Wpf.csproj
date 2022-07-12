@@ -147,6 +147,15 @@
     <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\ShiftDownIfNeccessary.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\PrepareWiring.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\PrepareHardware.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
