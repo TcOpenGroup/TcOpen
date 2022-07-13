@@ -66,10 +66,6 @@ namespace TcoIo
 
                 if (presentation != null && (isMaster || isSlave))
                 {
-                    if(_name.Contains("RC70_SAFETY"))
-                    {
-
-                    }
                     hardware.Children.Add(presentation);
                     hardware.Name = ValidateFrameworkElement.Name(obj.AttributeName);
                     if (isMaster)
@@ -157,7 +153,7 @@ namespace TcoIo
                                             //Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
                                             row = connectionPartner.Row + 1;
                                             Pos_Y = connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders;
-                                            ShiftDownIfNeccessary("B", connectionPartner,1);
+                                            ShiftDownIfNeccessary("B", connectionPartner,0);
                                             //Connection to the X2 of the junction box (Y2KYKY_X2)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
                                         }
