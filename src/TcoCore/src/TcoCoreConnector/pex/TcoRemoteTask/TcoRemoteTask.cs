@@ -103,7 +103,7 @@ namespace TcoCore
                 catch (Exception ex)
                 {
                     this._hasException.Synchron = true;
-                    this._exceptionMessage.Synchron = ex.ToString().Substring(0, 244);
+                    this._exceptionMessage.Synchron = ex.Message;
                     RemoteExecutionException = ex;
                     RemoteExceptionDetails = ex.ToString();
                     TcOpen.Inxton.TcoAppDomain.Current.Logger.Error($"Remote execution failure '{ex.ToString()}'", Logging.LogInfo.Create(this));

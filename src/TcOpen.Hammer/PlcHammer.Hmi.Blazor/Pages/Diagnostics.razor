@@ -10,4 +10,10 @@
                           Presentation="Base" />*@
 @code {
 
+    protected override void OnInitialized()
+    {
+        TcoDiagnosticsViewModel.SetDefaultCategory(eMessageCategory.Fatal);
+        TcoDiagnosticsView.SetDefaultDepth(7);
+        base.OnInitialized();
+    }
 }
