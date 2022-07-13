@@ -63,16 +63,16 @@ namespace TcoIo
             PrepareHardware(this.DataContext as IVortexObject);
 
             Grid wiring = PrepareWiring() as Grid;
-            this.stackPanel.Children.Clear();
-            this.stackPanel.Children.Add(Render(wiring) as Grid);
+            this.grid.Children.Clear();
+            this.grid.Children.Add(Render(wiring) as Grid);
 
         }
 
-        private void stackPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void scrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.Modifiers != ModifierKeys.Control)
                 return;
-
+            e.Handled = true;
             if (e.Delta > 0)
             {
                 zoom.ZoomValue = zoom.ZoomValue * (1.0 + e.Delta / 1200.0);
@@ -83,61 +83,8 @@ namespace TcoIo
             }
             if (zoom.ZoomValue > 8.0) zoom.ZoomValue = 8.0;
             if (zoom.ZoomValue < 0.125) zoom.ZoomValue = 0.125;
-            (stackPanel.LayoutTransform as ScaleTransform).ScaleX = zoom.ZoomValue;
-            (stackPanel.LayoutTransform as ScaleTransform).ScaleY = zoom.ZoomValue;
-        }
-
-        public object Render(Grid wiringGrid = null)
-        {
-            Grid hardwareGrid = new Grid();
-            wiringGrid = wiringGrid == null ? new Grid() : wiringGrid;
-
-            if (!hardwareGrid.Children.Contains(wiringGrid))
-            {
-                hardwareGrid.Children.Add(wiringGrid);
-                wiringGrid.SetValue(Grid.RowSpanProperty, maxrow + 1);
-                wiringGrid.SetValue(Grid.ColumnSpanProperty, maxcolumn + 1);
-            }
-
-            foreach (TopologyObject topologyObject in topologyObjects)
-            {
-                UniformGrid hardware = topologyObject.Hardware;
-                hardwareGrid.Children.Add(hardware);
-                Grid.SetColumn(hardware, topologyObject.Column);
-                Grid.SetRow(hardware, topologyObject.Row);
-                hardwareGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                hardwareGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            }
-
-            ////////////////////////////////////////////
-            ///Test zoom value
-            ////////////////////////////////////////////
-
-            TextBlock textBlock = new TextBlock();
-            textBlock.SetBinding(TextBlock.TextProperty, new Binding() { Source = zoom, Path = new PropertyPath("ZoomValue"), Mode = BindingMode.OneWay });
-            Grid.SetColumn(textBlock, 0);
-            Grid.SetRow(textBlock, 1);
-            hardwareGrid.Children.Add(textBlock);
-
-            ////////////////////////////////////////////
-            ///Temporary button just for debugging
-            ////////////////////////////////////////////
-#if DEBUG
-            Button RefreshButton = new Button();
-            RefreshButton.Content = "Refresh";
-            RefreshButton.MaxWidth = 128;
-            Grid.SetColumn(RefreshButton, 0);
-            Grid.SetRow(RefreshButton, 0);
-            zoom.ZoomValue = 1.0;
-            (stackPanel.LayoutTransform as ScaleTransform).ScaleX = zoom.ZoomValue;
-            (stackPanel.LayoutTransform as ScaleTransform).ScaleY = zoom.ZoomValue;
-
-            RefreshButton.Click += RefreshButton_Click; ;
-
-            hardwareGrid.Children.Add(RefreshButton);
-#endif
-            ////////////////////////////////////////////
-            return hardwareGrid;
+            (grid.LayoutTransform as ScaleTransform).ScaleX = zoom.ZoomValue;
+            (grid.LayoutTransform as ScaleTransform).ScaleY = zoom.ZoomValue;
         }
 
         ////////////////////////////////////////////

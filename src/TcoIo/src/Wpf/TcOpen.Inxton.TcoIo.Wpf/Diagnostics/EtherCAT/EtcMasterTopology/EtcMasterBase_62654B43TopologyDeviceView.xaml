@@ -29,7 +29,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,5,0,0">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,5,0,0" Margin="0" Padding="0">
             <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
                 <StackPanel Height="{Binding Source={x:Static dims:DimsDef.masterHeight}}"  Width="{Binding Source={x:Static dims:DimsDef.masterWidth}}"  DataContext="{Binding Device}">
                     <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>

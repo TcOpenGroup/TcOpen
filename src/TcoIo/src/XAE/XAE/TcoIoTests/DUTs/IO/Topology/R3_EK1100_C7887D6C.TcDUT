@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R3_EK1100_C7887D6C" Id="{80793a13-a0dd-036e-2832-bdd096039806}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "R3_A2_EC_EK1122R3_A2_EC_EK1122_9D59CDC8105R3_A3_DI_EL1809EL1809_32157CFD20R3_A4_DI_EL1809EL1809_32157CFD20R3_A5_DI_EL1809EL1809_32157CFD20R3_A6_DI_EL1809EL1809_32157CFD20R3_A7_DI_EL1809EL1809_32157CFD20R3_A8_DI_EL1809EL1809_32157CFD20R3_A9_DO_EL2809EL2809_2B6483BD19R3_A10_DO_EL2809EL2809_2B6483BD19R3_EndTerminal_EL9011EL9011_D65D3D320"}
+{attribute addProperty CRC "3347610988"}
+{attribute addProperty Size "263"}
+{attribute addProperty Name "R3 (EK1100)"}
+TYPE R3_EK1100_C7887D6C EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R3_A2_EC (EK1122)"}
+	{attribute addProperty PreviousPort "R3 (EK1100) : B"}
+	R3_A2_EC_EK1122 : R3_A2_EC_EK1122_9D59CDC8;
+	{attribute addProperty Name "R3_A3_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R3_A2_EC (EK1122) : C"}
+	R3_A3_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3_A4_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R3_A3_DI (EL1809) : B"}
+	R3_A4_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3_A5_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R3_A4_DI (EL1809) : B"}
+	R3_A5_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3_A6_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R3_A5_DI (EL1809) : B"}
+	R3_A6_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3_A7_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R3_A6_DI (EL1809) : B"}
+	R3_A7_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3_A8_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R3_A7_DI (EL1809) : B"}
+	R3_A8_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R3_A9_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R3_A8_DI (EL1809) : B"}
+	R3_A9_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R3_A10_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R3_A9_DO (EL2809) : B"}
+	R3_A10_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R3_EndTerminal (EL9011)"}
+	{attribute addProperty PreviousPort "R3_A10_DO (EL2809) : B"}
+	R3_EndTerminal_EL9011 : EL9011_D65D3D32;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

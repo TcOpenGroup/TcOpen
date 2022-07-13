@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL7041_86DE63E7" Id="{e41308ba-410b-00d3-033f-434b2c6ea664}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL7041-1000-0021'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL7041-1000-0021"}
+{attribute addProperty Description "EL7041-1000 1Ch. Stepper motor output stage (50V, 5A, standard)"}
+{attribute addProperty Physics "KK"}
+{attribute addProperty Id "ENC_Status_compactAT %I*ENC_Status_compact_4D066E1A16STM_StatusAT %I*STM_Status_36ED096F11ENC_Control_compactAT %Q*ENC_Control_compact_21E2D14D6STM_ControlAT %Q*STM_Control_5A8B50163STM_VelocityAT %Q*STM_Velocity_A47A3F412WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_D50C85453"}
+{attribute addProperty CRC "2262721511"}
+{attribute addProperty Size "43"}
+TYPE EL7041_86DE63E7 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "ENC_Status_compact"}
+	ENC_Status_compact : ENC_Status_compact_4D066E1A;
+	{attribute addProperty Name "STM_Status"}
+	STM_Status : STM_Status_36ED096F;
+	{attribute addProperty Name "ENC_Control_compact"}
+	ENC_Control_compact : ENC_Control_compact_21E2D14D;
+	{attribute addProperty Name "STM_Control"}
+	STM_Control : STM_Control_5A8B5016;
+	{attribute addProperty Name "STM_Velocity"}
+	STM_Velocity : STM_Velocity_A47A3F41;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_D50C8545;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

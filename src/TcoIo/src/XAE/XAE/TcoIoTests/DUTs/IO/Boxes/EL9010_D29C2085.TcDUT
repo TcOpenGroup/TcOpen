@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL9010_D29C2085" Id="{8faae7fc-bd8e-07c9-1665-8d3324556af9}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL9010--0000'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL9010--0000"}
+{attribute addProperty Description "EL9010 End Terminal"}
+{attribute addProperty Physics "K"}
+{attribute addProperty Id "EL9010"}
+{attribute addProperty CRC "3533447301"}
+{attribute addProperty Size "0"}
+TYPE EL9010_D29C2085 EXTENDS TcoIo.EtcSlaveEndTerminalBase_866C7F0C :
+STRUCT
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

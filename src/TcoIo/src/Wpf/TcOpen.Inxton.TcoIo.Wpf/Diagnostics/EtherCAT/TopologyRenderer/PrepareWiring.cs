@@ -42,8 +42,8 @@ namespace TcoIo
 
                     ////////////////////Y20//////////////////////////
                     case WiringObject.ConectionType.Y20:
-                        x1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
-                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
+                        x1 = topologyObject.Pos_X - DimsDef.slaveWidthWithBorders;
+                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput;
                         x2 = 0;
                         pathFigure = new PathFigure() { StartPoint = new Point(x1, y1) };
                         horizontal1 = new LineSegment() { Point = new Point(x2, y1) };
@@ -74,8 +74,8 @@ namespace TcoIo
                                 break;
                             }
                         }
-                        x1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
-                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
+                        x1 = topologyObject.Pos_X - DimsDef.slaveWidthWithBorders;
+                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput;
                         x2 = connectionPartner.Pos_X;
                         pathFigure = new PathFigure() { StartPoint = new Point(x1, y1) };
                         horizontal1 = new LineSegment() { Point = new Point(x2, y1) };
@@ -105,9 +105,9 @@ namespace TcoIo
                                 break;
                             }
                         }
-                        x1 = topologyObject.Pos_X - DimsDef.slaveWidth - 10;
-                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput + 5;
-                        x2 = topologyObject.Pos_X + DimsDef.juntionOutputX1 - 5 - DimsDef.slaveWidth - 15;
+                        x1 = topologyObject.Pos_X - DimsDef.slaveWidthWithBorders;
+                        y1 = topologyObject.Pos_Y + DimsDef.slaveInput;
+                        x2 = topologyObject.Pos_X + DimsDef.juntionOutputX1 - DimsDef.slaveWidthWithBorders;
                         y2 = connectionPartner.Pos_Y + DimsDef.slaveOutputFront + 10;
 
                         pathFigure = new PathFigure() { StartPoint = new Point(x1, y1) };
@@ -143,9 +143,9 @@ namespace TcoIo
                                 break;
                             }
                         }
-                        pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidth - 10, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
-                        horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1 - 5, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
-                        vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1 - 5, connectionPartner.Pos_Y + DimsDef.slaveHeight + 15) };
+                        pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidthWithBorders, topologyObject.Pos_Y + DimsDef.slaveInput) };
+                        horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1, topologyObject.Pos_Y + DimsDef.slaveInput) };
+                        vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1, connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders) };
 
                         wiring = new PathSegmentCollection();
                         wiring.Add(horizontal1);
@@ -174,9 +174,9 @@ namespace TcoIo
                                 break;
                             }
                         }
-                        pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidth - 10, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
-                        horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2 - 5, topologyObject.Pos_Y + DimsDef.slaveInput + 5) };
-                        vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2 - 5, connectionPartner.Pos_Y + DimsDef.slaveHeight + 15) };
+                        pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidthWithBorders, topologyObject.Pos_Y + DimsDef.slaveInput) };
+                        horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2 , topologyObject.Pos_Y + DimsDef.slaveInput) };
+                        vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2 , connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders) };
 
                         wiring = new PathSegmentCollection();
                         wiring.Add(horizontal1);

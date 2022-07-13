@@ -30,7 +30,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Background="{StaticResource InxtonGrayLight}">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Margin="0" Padding="0" Background="{StaticResource InxtonGrayLight}">
             <Border.LayoutTransform>
                 <TransformGroup>
                     <RotateTransform Angle="90" />

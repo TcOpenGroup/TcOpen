@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC80_EPP_EPP1322_0001_828B97C8" Id="{6d6cb1a2-7936-08bc-286a-fb6797d0e168}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EPP1322-0001-0017'}
+{attribute addProperty BoxType "EPP1322-0001-0017"}
+{attribute addProperty Id "RC80_AB1_EPP1008_0001EPP1008_78E8D3DD12RC80_AB2_EPP1008_0001EPP1008_78E8D3DD12RC80_AB6_EPP1008_0001EPP1008_78E8D3DD12RC80_AB3_EPP1008_0001EPP1008_78E8D3DD12RC80_AB4_EPP1008_0001EPP1008_78E8D3DD12RC80_AB7_EPP1008_0001EPP1008_78E8D3DD12RC80_AB9_EPP1008_0001EPP1008_78E8D3DD12RC80_AB10_EPP1008_0001EPP1008_78E8D3DD12RC80_AB8_EPP1008_0001EPP1008_78E8D3DD12RC80_AB5_EPP1008_0001EPP1008_78E8D3DD12"}
+{attribute addProperty CRC "2190186440"}
+{attribute addProperty Size "120"}
+{attribute addProperty Name "RC80_EPP (EPP1322-0001)"}
+TYPE RC80_EPP_EPP1322_0001_828B97C8 EXTENDS EPP1322_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC80_AB1 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_EPP (EPP1322-0001) : D"}
+	RC80_AB1_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB2 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB1 (EPP1008-0001) : B"}
+	RC80_AB2_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB6 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB2 (EPP1008-0001) : B"}
+	RC80_AB6_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB3 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB6 (EPP1008-0001) : B"}
+	RC80_AB3_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB4 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB3 (EPP1008-0001) : B"}
+	RC80_AB4_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB7 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_EPP (EPP1322-0001) : B"}
+	RC80_AB7_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB9 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB7 (EPP1008-0001) : B"}
+	RC80_AB9_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB10 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB9 (EPP1008-0001) : B"}
+	RC80_AB10_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB8 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB10 (EPP1008-0001) : B"}
+	RC80_AB8_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "RC80_AB5 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "RC80_AB8 (EPP1008-0001) : B"}
+	RC80_AB5_EPP1008_0001 : EPP1008_78E8D3DD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

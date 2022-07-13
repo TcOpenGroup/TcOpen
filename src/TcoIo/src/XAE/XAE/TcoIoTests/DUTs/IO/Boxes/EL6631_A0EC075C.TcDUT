@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL6631_A0EC075C" Id="{07ec4d59-7838-024c-39f0-817d27759121}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL6631-0000-0018'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "EL6631-0000-0018"}
+{attribute addProperty Description "EL6631 PROFINET IO Controller"}
+{attribute addProperty Physics "KK"}
+{attribute addProperty Id "InfoDataAT %I*InfoData_8F85596B2"}
+{attribute addProperty CRC "2699822940"}
+{attribute addProperty Size "2"}
+TYPE EL6631_A0EC075C EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
+STRUCT
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_8F85596B;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

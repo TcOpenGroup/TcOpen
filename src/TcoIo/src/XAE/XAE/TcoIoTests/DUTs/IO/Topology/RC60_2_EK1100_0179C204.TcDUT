@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC60_2_EK1100_0179C204" Id="{e39e93dc-6552-018f-27cb-d655029727a7}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "RC60_B1_EL7041_1000EL7041_86DE63E743RC60_B2_EL7041_1000EL7041_86DE63E743RC60_C11_EL7041_1000EL7041_86DE63E743RC60_C12_EL7041_1000EL7041_86DE63E743RC60_C21_EL7041_1000EL7041_86DE63E743RC60_C22_EL7041_1000EL7041_86DE63E743RC60_2_EndTerminal_EL9010EL9010_D29C20850"}
+{attribute addProperty CRC "24756740"}
+{attribute addProperty Size "258"}
+{attribute addProperty Name "RC60_2 (EK1100)"}
+TYPE RC60_2_EK1100_0179C204 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC60_B1 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RC60_2 (EK1100) : B"}
+	RC60_B1_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RC60_B2 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RC60_B1 (EL7041-1000) : B"}
+	RC60_B2_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RC60_C11 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RC60_B2 (EL7041-1000) : B"}
+	RC60_C11_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RC60_C12 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RC60_C11 (EL7041-1000) : B"}
+	RC60_C12_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RC60_C21 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RC60_C12 (EL7041-1000) : B"}
+	RC60_C21_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RC60_C22 (EL7041-1000)"}
+	{attribute addProperty PreviousPort "RC60_C21 (EL7041-1000) : B"}
+	RC60_C22_EL7041_1000 : EL7041_86DE63E7;
+	{attribute addProperty Name "RC60_2_EndTerminal (EL9010)"}
+	{attribute addProperty PreviousPort "RC60_C22 (EL7041-1000) : B"}
+	RC60_2_EndTerminal_EL9010 : EL9010_D29C2085;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
