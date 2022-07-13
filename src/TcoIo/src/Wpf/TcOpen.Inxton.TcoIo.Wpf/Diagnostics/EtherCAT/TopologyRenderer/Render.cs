@@ -2,15 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Vortex.Connector;
-using Vortex.Presentation.Wpf;
-using System.Collections.ObjectModel;
 using TcoIo.Topology;
-using System.Windows.Shapes;
 using System.Windows.Media;
-using System.Windows.Data;
-using TcoIo.Converters;
-using System.Windows.Input;
 
 namespace TcoIo
 {
@@ -22,8 +15,7 @@ namespace TcoIo
             wiringGrid = wiringGrid == null ? new Grid() { Margin = new Thickness() } : wiringGrid;
             int gridRow = 0;
             int gridColumn = 0;
-            TopologyObject lastTopologyObject = new TopologyObject();
-            UniformGrid lastHardware = new UniformGrid();
+            TopologyObject firstTopologyObject = null;
             for (int i = 0; i <= maxrow; i++)
             {
                 GridLength RowHeight = new GridLength(DimsDef.masterHeightWithBorders, GridUnitType.Pixel);
@@ -42,8 +34,7 @@ namespace TcoIo
                 Grid.SetRow(hardware, topologyObject.Row);
                 gridRow = Math.Max(gridRow, topologyObject.Row);
                 gridColumn = Math.Max(gridColumn, topologyObject.Column);
-                lastTopologyObject = topologyObject;
-                lastHardware = hardware;
+                firstTopologyObject = firstTopologyObject == null ? topologyObject : firstTopologyObject;
             }
             if (!hardwareGrid.Children.Contains(wiringGrid))
             {
@@ -94,20 +85,18 @@ namespace TcoIo
             ////////////////////////////////////////////
             ///Temporary button just for debugging
             ////////////////////////////////////////////
-#if DEBUG
-            Button RefreshButton = new Button();
-            RefreshButton.Content = "Refresh";
-            RefreshButton.MaxWidth = 128;
-            Grid.SetColumn(RefreshButton, 0);
-            Grid.SetRow(RefreshButton, 0);
-            zoom = 1.0;
-            (grid.LayoutTransform as ScaleTransform).ScaleX = zoom;
-            (grid.LayoutTransform as ScaleTransform).ScaleY = zoom;
+            //Button RefreshButton = new Button();
+            //RefreshButton.Content = "Refresh";
+            //RefreshButton.MaxWidth = firstTopologyObject == null ? 128 : firstTopologyObject.Pos_X;
+            //Grid.SetColumn(RefreshButton, 0);
+            //Grid.SetRow(RefreshButton, 0);
+            //zoom = 1.0;
+            //(grid.LayoutTransform as ScaleTransform).ScaleX = zoom;
+            //(grid.LayoutTransform as ScaleTransform).ScaleY = zoom;
 
-            RefreshButton.Click += RefreshButton_Click; ;
+            //RefreshButton.Click += RefreshButton_Click; ;
 
-            hardwareGrid.Children.Add(RefreshButton);
-#endif
+            //hardwareGrid.Children.Add(RefreshButton);
             ////////////////////////////////////////////
             return hardwareGrid;
         }

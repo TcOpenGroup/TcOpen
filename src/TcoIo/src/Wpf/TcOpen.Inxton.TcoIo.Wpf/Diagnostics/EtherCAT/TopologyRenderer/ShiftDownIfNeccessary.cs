@@ -19,10 +19,19 @@ namespace TcoIo
     /// </summary>
     public partial class TopologyRenderer : UserControl
     {
-        private void ShiftDownIfNeccessary(string port, int offset)
+        private void ShiftDownIfNeccessary(string port, TopologyObject connectionPartner, int offset)
         {
             if (maxrow >= row)
             {
+                int parentIndex = topologyObjects.IndexOf(connectionPartner);
+                int topologyObjectsCount = topologyObjects.Count;
+                int shiftedRow = 0;
+                for (int i = parentIndex; i < topologyObjectsCount; i++)
+                {
+                    shiftedRow = Math.Max(shiftedRow, topologyObjects[i].Row);
+                }
+                shiftedRow = shiftedRow + offset;
+
                 int minColumnFromMyRowDown = int.MaxValue;
                 int maxColumnFromMyRowDown = 0;
                 int maxColumnInMyRow = 0;
@@ -49,7 +58,7 @@ namespace TcoIo
                         if (topologyObj.Row >= row)
                         {
                             topologyObj.Row++;
-                            topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
+                            topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeightWithBorders;
                             maxrow = Math.Max(maxrow, topologyObj.Row);
                             MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
                         }
@@ -63,14 +72,14 @@ namespace TcoIo
                     if (column <= maxColumnInMyRow && column <= minColumnInMyRow && column <= maxColumnFromMyRowDown && column <= minColumnFromMyRowDown)
                     {
                         row = maxrow + 1;
-                        Pos_Y = MaxPos_Y + DimsDef.slaveHeight + 15;
+                        Pos_Y = MaxPos_Y + DimsDef.slaveHeightWithBorders;
                         maxrow = Math.Max(maxrow, row);
                         MaxPos_Y = Math.Max(MaxPos_Y, Pos_Y);
                     }
                     else
                     {
-                        row = row + offset - 1;
-                        Pos_Y = Pos_Y + (offset - 1) * (DimsDef.slaveHeight + 15);
+                        row = shiftedRow;
+                        Pos_Y = shiftedRow * (DimsDef.slaveHeightWithBorders);
                         maxrow = Math.Max(maxrow, row);
                         MaxPos_Y = Math.Max(MaxPos_Y, Pos_Y);
                         foreach (TopologyObject topologyObj in topologyObjects)
@@ -78,7 +87,7 @@ namespace TcoIo
                             if (topologyObj.Row >= row)
                             {
                                 topologyObj.Row++;
-                                topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeight + 15;
+                                topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeightWithBorders;
                                 maxrow = Math.Max(maxrow, topologyObj.Row);
                                 MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
                             }
@@ -88,9 +97,10 @@ namespace TcoIo
             }
         }
 
-        private void ShiftDownIfNeccessary(string port)
+        private void ShiftDownIfNeccessary(string port, TopologyObject connectionPartner)
         {
-            ShiftDownIfNeccessary(port, 1);
+            //ShiftDownIfNeccessary(port, 1);
+            ShiftDownIfNeccessary(port, connectionPartner, 0);
         }
 
 

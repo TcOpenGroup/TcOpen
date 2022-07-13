@@ -66,7 +66,7 @@ namespace TcoIo
 
                 if (presentation != null && (isMaster || isSlave))
                 {
-                    if(_name.Contains("Term 153"))
+                    if(_name.Contains("RC70_SAFETY"))
                     {
 
                     }
@@ -144,7 +144,7 @@ namespace TcoIo
                                             row = connectionPartner.Row + 1;
                                             Pos_Y = connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders;
 
-                                            ShiftDownIfNeccessary("D");
+                                            ShiftDownIfNeccessary("D", connectionPartner, 1);
                                             //Connection to the X1 of the junction box (Y2KYKY_X1)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X1);
                                         }
@@ -153,9 +153,11 @@ namespace TcoIo
                                         {
                                             column = connectionPartner.Column + 1;
                                             Pos_X = connectionPartner.Pos_X + DimsDef.slaveWidthWithBorders;
-                                            row = row + 1;
-                                            Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
-                                            ShiftDownIfNeccessary("B", CountOccupiedRows(connectionPartner));
+                                            //row = row + 1;
+                                            //Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
+                                            row = connectionPartner.Row + 1;
+                                            Pos_Y = connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders;
+                                            ShiftDownIfNeccessary("B", connectionPartner,1);
                                             //Connection to the X2 of the junction box (Y2KYKY_X2)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
                                         }
@@ -214,7 +216,7 @@ namespace TcoIo
                                             row++;
                                             Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
 
-                                            ShiftDownIfNeccessary("D");
+                                            ShiftDownIfNeccessary("D", connectionPartner, 1);
                                             //Connection to the X1 of the junction box (Y2KYKY_X1)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X1);
                                         }
@@ -229,7 +231,7 @@ namespace TcoIo
                                             row++;
                                             Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
 
-                                            ShiftDownIfNeccessary("B");
+                                            ShiftDownIfNeccessary("B", connectionPartner, 1);
                                             //Connection to the X1 of the junction box (Y2KYKY_X2)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
                                         }
@@ -265,9 +267,12 @@ namespace TcoIo
                                         {
                                             column = connectionPartner.Column;
                                             Pos_X = connectionPartner.Pos_X;
-                                            row++;
-                                            Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
-                                            ShiftDownIfNeccessary("C", CountOccupiedRows(connectionPartner) + 1);
+                                            //row++;
+                                            //Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
+                                            row = connectionPartner.Row + 1;
+                                            Pos_Y = connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders;
+                                            //ShiftDownIfNeccessary("C", CountOccupiedRows(connectionPartner) + 1);
+                                            ShiftDownIfNeccessary("C", connectionPartner, 1);
                                             //Connection to the X2 of the coupler box (Y2YKY)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2YKY);
                                         }

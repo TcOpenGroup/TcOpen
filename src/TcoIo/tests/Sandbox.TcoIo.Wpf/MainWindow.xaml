@@ -16,7 +16,7 @@
     </Window.DataContext>
     <TabControl>
         <TabItem Header="Topology renderer" >
-            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}" />
+            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>
         </TabItem>
         <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
