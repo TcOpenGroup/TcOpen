@@ -18,16 +18,6 @@
         <TabItem Header="Topology renderer" >
             <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}" />
         </TabItem>
-        <!--<TabItem Header="Topology renderer" >
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="Stack" HorizontalAlignment="Left" VerticalAlignment="Top" PreviewMouseWheel="StackPanel_PreviewMouseWheel">
-                        <StackPanel.LayoutTransform >
-                            <ScaleTransform />
-                        </StackPanel.LayoutTransform>
-                    <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}" />
-                </StackPanel>
-            </ScrollViewer>
-        </TabItem>-->
         <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>

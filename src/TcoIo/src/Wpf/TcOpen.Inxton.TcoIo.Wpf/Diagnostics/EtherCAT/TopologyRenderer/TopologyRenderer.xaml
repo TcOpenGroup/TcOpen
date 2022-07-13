@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:TcoIo"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="scrollViewer_PreviewMouseWheel">
-            <Grid x:Name="grid" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                <Grid.LayoutTransform >
-                    <ScaleTransform />
-                </Grid.LayoutTransform>
-            </Grid>
-        </ScrollViewer>
+    <ScrollViewer x:Name="scrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="scrollViewer_PreviewMouseWheel">
+        <Grid x:Name="grid" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <Grid.LayoutTransform >
+                <ScaleTransform />
+            </Grid.LayoutTransform>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

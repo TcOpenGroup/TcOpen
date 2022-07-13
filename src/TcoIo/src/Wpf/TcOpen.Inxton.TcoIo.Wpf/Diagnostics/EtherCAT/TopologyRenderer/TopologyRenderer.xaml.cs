@@ -34,7 +34,7 @@ namespace TcoIo
         static string _conection;
         static string _boxtype;
         static string _physics;
-        public Zoom zoom = new Zoom();
+        public double zoom = 1.0;
         public string PresentationType { get; set; }
 
         public TopologyRenderer()
@@ -70,27 +70,40 @@ namespace TcoIo
 
         private void scrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (Keyboard.Modifiers != ModifierKeys.Control)
-                return;
-            e.Handled = true;
-            if (e.Delta > 0)
+            if (Keyboard.Modifiers == ModifierKeys.Control)
             {
-                zoom.ZoomValue = zoom.ZoomValue * (1.0 + e.Delta / 1200.0);
+                if (e.Delta > 0)
+                {
+                    zoom = zoom * (1.0 + e.Delta / 1200.0);
+                }
+                else if (e.Delta < 0)
+                {
+                    zoom = zoom / (1.0 - e.Delta / 1200.0);
+                }
+                if (zoom > 8.0) zoom = 8.0;
+                if (zoom < 0.125) zoom = 0.125;
+                (grid.LayoutTransform as ScaleTransform).ScaleX = zoom;
+                (grid.LayoutTransform as ScaleTransform).ScaleY = zoom;
+                e.Handled = true;
             }
-            else if (e.Delta < 0)
+            else if (Keyboard.Modifiers == ModifierKeys.Shift)
             {
-                zoom.ZoomValue = zoom.ZoomValue / (1.0 - e.Delta / 1200.0);
+                if (e.Delta > 0)
+                {
+                    scrollViewer.LineLeft();
+                }
+                else if (e.Delta < 0)
+                {
+                    scrollViewer.LineRight();
+                }
+                e.Handled = true;
             }
-            if (zoom.ZoomValue > 8.0) zoom.ZoomValue = 8.0;
-            if (zoom.ZoomValue < 0.125) zoom.ZoomValue = 0.125;
-            (grid.LayoutTransform as ScaleTransform).ScaleX = zoom.ZoomValue;
-            (grid.LayoutTransform as ScaleTransform).ScaleY = zoom.ZoomValue;
         }
 
-        ////////////////////////////////////////////
-        ///Temporary event just for debugging
-        ////////////////////////////////////////////
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+            ////////////////////////////////////////////
+            ///Temporary event just for debugging
+            ////////////////////////////////////////////
+            private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             DependencyPropertyChangedEventArgs _e = new DependencyPropertyChangedEventArgs();
             row = maxrow = column = 0;
