@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,21 @@ namespace TcoData
         eSearchMode SearchMode { get; set; }
         long FilteredCount { get; set; }
         IBrowsableDataObject SelectedRecord { get; set; }
-        public ViewMode Mode { get; set; }
-        public string RecordIdentifier { get; set; }
+        ViewMode Mode { get; set; }
+        string RecordIdentifier { get; set; }
+        void SetDefaultButtonState();
+        void StartCreatingNew();
+        void CreateNew();
+        void StartEdit();
+        void Update();
+        void CancelEdit();
+        void Delete();
+        void StartCreatingRecordCopy();
+        void CreateCopyOfExisting();
+        void ExportData();
+        void ImportData(string fileName);
+        MemoryStream ExportFileStream { get; set; }
+
     }
 
     public interface FunctionAvailabilityBlazor

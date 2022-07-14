@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
-
+using Vortex.Connector;
 
 namespace TcoData
 {
@@ -18,15 +20,22 @@ namespace TcoData
 
     public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
     {
-        
+
+        public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
+        {
+
+            this.DataExchange = dataExchange;
+            DataBrowser = CreateBrowsable(repository);
+        }
+
         public List<IBrowsableDataObject> ObservableRecords { get; private set; } = new List<IBrowsableDataObject>();
-     
+
 
         private DataBrowser<T> CreateBrowsable(IRepository<T> repository)
         {
             return TcOpen.Inxton.Data.DataBrowser.Factory(repository);
         }
-       
+
         public DataBrowser<T> DataBrowser { get; set; }
         public TcoDataExchange DataExchange { get; }
 
@@ -41,6 +50,7 @@ namespace TcoData
 
             set
             {
+                SetRowSelectedButtonState();
                 if (selectedRecord == value)
                 {
                     return;
@@ -50,7 +60,6 @@ namespace TcoData
                 selectedRecord = value;
                 if (value != null)
                 {
-
                     ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
                     ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainTcoEntity)selectedRecord).Changes;
                     Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
@@ -58,7 +67,7 @@ namespace TcoData
 
                 CrudDataObject?.ChangeTracker.StartObservingChanges();
 
-                SetRowSelectedButtonState();
+
 
             }
         }
@@ -84,66 +93,23 @@ namespace TcoData
             }
         }
 
-        public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
-        {
 
-            this.DataExchange = dataExchange;
-            DataBrowser = CreateBrowsable(repository);
-            SetDefaultButtonState();
-            //FillObservableRecords();
-            //Task.Run(FillObservableRecordsAsync);
-            //this.DataExchange = dataExchange;
-            //DataBrowser = CreateBrowsable(repository);
-
-            //StartCreateNewCommand = new RelayCommand(p => StartCreatingNew(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateNewCommand)));
-            //CreateNewCommand = new RelayCommand(p => this.CreateNew(), _ => this.RecordIdentifier != string.Empty, () => LogCommand(nameof(CreateNewCommand)));
-            //CancelCreateNewCommand = new RelayCommand(p => this.Mode = ViewMode.Display, _ => true, () => LogCommand(nameof(CancelCreateNewCommand)));
-            //UpdateCommand = new RelayCommand(p => Update(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(UpdateCommand)));
-            //DeleteCommand = new RelayCommand(p => Delete(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(DeleteCommand)));
-            //EditCommand = new RelayCommand(p => StartEdit(), _ => this.Mode == ViewMode.Display && SelectedRecord != null, () => LogCommand(nameof(EditCommand)));
-            //CancelEditCommand = new RelayCommand(p => this.CancelEdit(), _ => this.Mode == ViewMode.Edit, () => LogCommand(nameof(CancelEditCommand)));
-            //FindByCriteriaCommand = new RelayCommand(p => this.FindById(), _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
-            //FindContainsCommand = new RelayCommand(p => { this.SearchMode = eSearchMode.Contains; this.FindById(); }, _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
-            //CancelFilterCommand = new RelayCommand(p => { this.FilterByID = string.Empty; this.FindById(); }, _ => this.Mode == ViewMode.Display, () => LogCommand($"{nameof(FindByCriteriaCommand)} '{this.SearchMode} : {FilterByID}'"));
-            //StartCreateCopyOfExisting = new RelayCommand(p => this.StartCreatingRecordCopy(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateCopyOfExisting)));
-            //CreateCopyOfExistingCommand = new RelayCommand(p => this.CreateCopyOfExisting(), _ => true, () => LogCommand(nameof(CreateCopyOfExistingCommand)));
-            //SendToPlcCommand = new RelayCommand(p => SendToPlc(), _ => this.SelectedRecord != null && this.Mode == ViewMode.Display, () => LogCommand(nameof(SendToPlcCommand)));
-            //LoadFromPlcCommand = new RelayCommand(p => LoadFromPlc(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(LoadFromPlcCommand)));
-            //PageUpCommand = new RelayCommand(p => { this.Skip++; this.Filter(); }, PaginationUpEnabled, () => LogCommand(nameof(PageUpCommand)));
-            //PageDownCommand = new RelayCommand(p => { this.Skip--; this.Filter(); }, _ => this.Skip > 1, () => LogCommand(nameof(PageDownCommand)));
-            //ExportCommand = new RelayCommand(p => this.ExportData(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(ExportCommand)));
-            //ImportCommand = new RelayCommand(p => this.ImportData(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(ImportCommand)));
-
-
-            //CancelEditCommandAvailable = true;
-            //DeleteCommandAvailable = true;
-            //EditCommandAvailable = true;
-            //ExportCommandAvailable = true;
-            //ImportCommandAvailable = true;
-            //LoadFromPlcCommandAvailable = true;
-            //SendToPlcCommandAvailable = true;
-            //StartCreateCopyOfExistingAvailable = true;
-            //StartCreateNewCommandAvailable = true;
-            //UpdateCommandAvailable = true;
-
-            //this.FillObservableRecords();
-        }
 
 
         private ViewMode mode;
 
         public ViewMode Mode
         {
-            get 
+            get
             {
-                return mode; 
+                return mode;
             }
             set { mode = value; }
         }
+       
 
-     
-
-
+        [Required(ErrorMessage = "The Name field is required")]
+       
         public string RecordIdentifier { get; set; }
 
 
@@ -172,13 +138,14 @@ namespace TcoData
 
         }
 
-        private void StartCreatingNew()
+        public void StartCreatingNew()
         {
             this.Mode = ViewMode.New; 
             RecordIdentifier = string.Empty;
+            ViewModeNewCopy();
         }
 
-        private void CreateNew()
+        public void CreateNew()
         {
             var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
             plainer._EntityId = RecordIdentifier;
@@ -188,8 +155,118 @@ namespace TcoData
             FillObservableRecords();
             SelectedRecord = plain;
             Mode = ViewMode.Edit;
-            
+            ViewModeEdit();
         }
+
+        public void StartEdit()
+        {
+            this.Mode = ViewMode.Edit;
+            ViewModeEdit();
+        }
+
+
+        public void Update()
+        {
+            var a = ((dynamic)DataExchange)._data.CreatePlainerType();
+            a.CopyShadowToPlain(((dynamic)DataExchange)._data);
+            CrudDataObject?.ChangeTracker.SaveObservedChanges(a);
+            DataBrowser.UpdateRecord(a);
+            FillObservableRecords();
+            this.Mode = ViewMode.Display;
+            SetRowSelectedButtonState();
+        }
+
+        public void CancelEdit()
+        {
+            this.Mode = ViewMode.Display;
+            // Clears canceled changes
+            if (SelectedRecord != null)
+            {
+                ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)SelectedRecord);
+            }
+            SetRowSelectedButtonState();
+        }
+
+        public void Delete()
+        {
+            var a = ((dynamic)DataExchange)._data.CreatePlainerType();
+            a.CopyShadowToPlain(((dynamic)DataExchange)._data);
+            string id = $"{DataExchange.Symbol}.{a._EntityId}";
+            DataBrowser.Delete(a);
+            this.FilterById = "";
+            FillObservableRecords();
+            this.SelectedRecord = this.ObservableRecords.FirstOrDefault();
+            SetRowSelectedButtonState();
+        }
+
+        public void StartCreatingRecordCopy()
+        {
+
+            RecordIdentifier = $"Copy of {SelectedRecord._EntityId}";
+            this.Mode = ViewMode.Copy;
+            ViewModeNewCopy();
+
+        }
+
+        public void CreateCopyOfExisting()
+        {
+            var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
+            plainer.CopyShadowToPlain(((dynamic)DataExchange)._data);
+            plainer._EntityId = RecordIdentifier;
+            DataBrowser.AddRecord(plainer);
+            var plain = DataBrowser.FindById(plainer._EntityId);
+            ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
+            FillObservableRecords();
+            SelectedRecord = plain;
+            this.Mode = ViewMode.Edit;
+            ViewModeEdit();
+           
+        }
+        public MemoryStream ExportFileStream { get; set; }
+        public void ExportData()
+        {
+            //for a large files, this can be problem, becasue whole file is loaded to application, consider download from url
+            //https://docs.microsoft.com/en-us/aspnet/core/blazor/file-downloads?view=aspnetcore-6.0
+            var exports = DataBrowser.Export(p => true);
+            string dataString = string.Empty;
+            foreach (var item in exports)
+            {
+                dataString += item + "\r"; 
+            }
+            byte[] data = Encoding.ASCII.GetBytes(dataString);
+            ExportFileStream = new MemoryStream();
+            ExportFileStream.Write(data, 0, data.Length);
+        }
+
+        public void ImportData(string fileName)
+        {
+
+            var imports = new List<string>();
+            foreach (var item in File.ReadAllLines(fileName))
+            {
+                imports.Add(item);
+            }
+
+
+            this.DataBrowser.Import(imports);
+            this.FillObservableRecords();
+
+        }
+
+        //void LoadFromPlc()
+        //{
+
+        //    var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
+        //    ((dynamic)DataExchange)._data.FlushOnlineToPlain(plainer);
+        //    plainer._EntityId = $"{DataHelpers.CreateUid().ToString()}";
+        //    DataBrowser.AddRecord(plainer);
+        //    var plain = DataBrowser.FindById(plainer._EntityId);
+        //    ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
+        //    FillObservableRecords();
+        //    SelectedRecord = plain;
+        //    this.Mode = ViewMode.Edit;
+
+        //}
 
         public bool StartCreateNewCommandAvailable { get; set; }
         public bool StartCreateCopyOfExistingAvailable { get; set; }
@@ -213,7 +290,7 @@ namespace TcoData
         public bool CancelDisabled { get; set; }
         public bool DeleteDisabled { get; set; }
 
-        private void SetDefaultButtonState()
+        public void SetDefaultButtonState()
         {
             NewDisabled = false;
             CopyDisabled = true;
@@ -240,17 +317,31 @@ namespace TcoData
             CancelDisabled = true;
             DeleteDisabled = false;
         }
-        private void ViewModeNew()
+        private void ViewModeNewCopy()
         {
-            NewDisabled = false;
+            NewDisabled = true;
             CopyDisabled = true;
             UpdateDisabled = true;
             EditDisabled = true;
             SendToPlcDisabled = true;
             FromPlcDisabled = true;
-            ImportDisabled = false;
-            ExportDisabled = false;
+            ImportDisabled = true;
+            ExportDisabled = true;
             CancelDisabled = true;
+            DeleteDisabled = true;
+        }
+
+        private void ViewModeEdit()
+        {
+            NewDisabled = true;
+            CopyDisabled = true;
+            UpdateDisabled = false;
+            EditDisabled = true;
+            SendToPlcDisabled = true;
+            FromPlcDisabled = true;
+            ImportDisabled = true;
+            ExportDisabled = true;
+            CancelDisabled = false;
             DeleteDisabled = true;
         }
     }
