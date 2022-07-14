@@ -153,7 +153,7 @@ namespace TcoIo
                                             //Pos_Y = Pos_Y + DimsDef.slaveHeightWithBorders;
                                             row = connectionPartner.Row + 1;
                                             Pos_Y = connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders;
-                                            ShiftDownIfNeccessary("B", connectionPartner,0);
+                                            ShiftDownIfNeccessary("B", connectionPartner , 1);
                                             //Connection to the X2 of the junction box (Y2KYKY_X2)
                                             CreateWiring(obj, ref path, ref wiring, WiringObject.ConectionType.Y2KYKY_X2);
                                         }
