@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoEthercatMasterDevice" Id="{2c5733bf-b0c9-0df1-398a-03fa7f389f8e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoEthercatMasterDevice EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoEthercatMasterDevice
 VAR_INPUT
@@ -78,7 +78,7 @@ VAR
     _i : UINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_NetId := Tc2_System.F_CreateAmsNetId(InfoData.AmsNetId);
+        <ST><![CDATA[_NetId := Tc2_System.F_CreateAmsNetId(InfoData.AmsNetId.netId);
 
 _TcoEthercatDiagnosticsTask(inNetId := _NetId, outDiagnosticsAvailable => _DiagnosticsAvailable);
 
