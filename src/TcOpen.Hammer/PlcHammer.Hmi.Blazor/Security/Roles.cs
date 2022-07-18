@@ -14,19 +14,17 @@ namespace PlcHammer.Hmi.Blazor.Security
         private Roles()
         {
             _roleManager = new BlazorRoleManager();
-            _roleManager.CreateRole(new Role(process_settings_access, "AdminGroup"));
-            _roleManager.CreateRole(new Role(process_traceability_access, "AdminGroup"));
-            _roleManager.CreateRole(new Role(technology_settings_access, "Maintenance"));
-            _roleManager.CreateRole(new Role(manual_start, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(process_traceability_access, "Administrator"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(technology_settings_access, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(ground_position_start, "Operator"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(automat_start, "Operator"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(manual_start, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(station_details, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(sequencer_step, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(technology_ground_all, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(technology_automat_all, "Maintenance"));
+            _roleManager.CreateRole(new Role(process_settings_access));
+            _roleManager.CreateRole(new Role(process_traceability_access));
+            _roleManager.CreateRole(new Role(can_user_open_technological_settings));
+            _roleManager.CreateRole(new Role(ground_position_start));
+            _roleManager.CreateRole(new Role(automat_start));
+            _roleManager.CreateRole(new Role(station_details));
+            _roleManager.CreateRole(new Role(technology_settings_access));
+            _roleManager.CreateRole(new Role(manual_start));
+            _roleManager.CreateRole(new Role(sequencer_step));
+            _roleManager.CreateRole(new Role(technology_automat_all));
+            _roleManager.CreateRole(new Role(technology_ground_all));
         }
 
         public const string process_settings_access = nameof(process_settings_access);

@@ -1,178 +1,208 @@
 ﻿@namespace TcOpen.Inxton.Local.Security.Blazor
 
-
-
-
-
-
 <div class="container-fluid">
-
-
-
-    <div class="row ">
-        <h4>List of users:</h4>
-
-        <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">Can change password</th>
-                        <th scope="col">Created</th>
-                        <th scope="col">Modified</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in _userManager.Users)
-                    {
-                        <tr @onclick="@(() => RowClicked(user))">
-                            <th>@user.UserName</th>
-                            <td>@user.CanUserChangePassword</td>
-                            <td>Created</td>
-                            <td>Modified</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div id="myGroup">
+        <div class="row">
+            <button class="btn btn-primary col-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseUsers">Users</button>
+            <button class="btn btn-primary col-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGroups" aria-expanded="false" aria-controls="collapseGroups">Groups</button>
         </div>
 
-    </div>
-    <a href="Identity/Account/Register" class="btn btn-primary my-2" style="width:150px">
-        Create new user
-    </a>
-    @if (SelectedUser != null)
-    {
-        
-        <div class="row">
-       
-            <div class="card">
-                <h4>Selected user:</h4>
-                <div class="row card-body">
-
-                    <div style="display: flex; justify-content: flex-end">
-                        <button type="button" class="btn-close" style="float: right;" @onclick="@(() => CloseUserDetail())"></button>
-                    </div>
-
-
-                    <EditForm Model="@SelectedUser">
-                        <DataAnnotationsValidator />
-                        <div class="form-group">
-                            <label>Username</label>
-                            <p class="form-control">@SelectedUser.UserName</p>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Email</label>
-                            <InputText @bind-Value="SelectedUser.Email" class="form-control" />
-
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label>CanUserChangePassword</label>
-                            </div>
-                            <InputCheckbox @bind-Value="SelectedUser.CanUserChangePassword" class="form-check-input " />
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Group</label>
-                            <select class="form-select" aria-label="Default select example" @bind="@SelectedGroup">
-                                <option selected>Choose group</option>
-                                @foreach (var groupName in _roleManager.InAppGroupCollection)
+        <div class="accordion-group">
+            <div class="collapse show indent" id="collapseUsers" data-bs-parent="#myGroup">
+                <div class="row ">
+                    <h4>List of users:</h4>
+                    <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Can change password</th>
+                                    <th scope="col">Created</th>
+                                    <th scope="col">Modified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in _userManager.Users)
                                 {
-                                    <option value="@groupName">@groupName</option>
+                                    <tr @onclick="@(() => RowClicked(user))">
+                                        <th>@user.UserName</th>
+                                        <td>@user.CanUserChangePassword</td>
+                                        <td>Created</td>
+                                        <td>Modified</td>
+                                    </tr>
                                 }
-
-                            </select>
-                            <button class="btn btn-primary m-2" @onclick="@(() => OnAddGroupClicked(SelectedGroup))">Assign group of roles</button>
-                            <button class="btn btn-primary m-2" @onclick="@(() => OnRemoveGroupClicked(SelectedGroup))">Remove group of roles</button>
-                        </div>
-                    </EditForm>
-
-
-
-                </div>
-
-                <div class="row card-body  align-items-center">
-                    <div class="col">
-                        <h5>Available roles:</h5>
-                        <div class="card "
-                             style=" height: 300px !important; overflow: auto;">
-
-                            @if (AvailableRoles != null)
-                            {
-                                <div class="list-group p-2">
-                                    @foreach (var role in AvailableRoles)
-                                    {
-                                        <label class="list-group-item mx-2">
-                                            <input class="form-check-input me-1"
-                                                   type="checkbox"
-                                                   @bind="role.IsSelected">
-                                            @role.Role.Name
-                                        </label>
-                                    }
-
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div class="col-1 " style="width:70px">
-                        <div>
-                            <button class="btn btn-primary  m-1"
-                                    @onclick="@(() => AssignRoles())">
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </button>
-                            <button class="btn btn-primary  m-1"
-                                    @onclick="@(() => ReturnRoles())">
-                                <i class="fas fa-long-arrow-alt-left"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <h5>Assigned roles:</h5>
-                        <div class="card"
-                             style="height: 300px !important; overflow: auto;">
-
-                            @if (AssignedRoles != null)
-                            {
-                                <div class="list-group p-2">
-                                    @foreach (var role in AssignedRoles)
-                                    {
-                                        <label class="list-group-item mx-2">
-                                            <input class="form-check-input me-1"
-                                                   type="checkbox"
-                                                   @bind="role.IsSelected">
-                                            @role.Role.Name
-                                        </label>
-                                    }
-
-                                </div>
-                            }
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div class="row">
-                    <button type="button" class="btn btn-primary m-2 col-2" style="width:150px" @onclick="@(() => UpdateUser(SelectedUser))">
-                        Update
-                    </button>
-                    <button type="button" class="btn btn-danger m-2 col-2" style="width:150px" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        Delete
-                    </button>
-                </div>
-                @if (IsUserUpdated)
+                <a href="Identity/Account/Register" class="btn btn-primary my-2" style="width:150px">
+                    Create new user
+                </a>
+                @if (SelectedUser != null)
                 {
-                    <h4 style="color:green">User succesfully updated!</h4>
+                    <div class="row">
+                        <div class="card">
+                            <h4>Selected user:</h4>
+                            <div class="row card-body">
+                                <div style="display: flex; justify-content: flex-end">
+                                    <button type="button" class="btn-close" style="float: right;" @onclick="@(() => CloseUserDetail())"></button>
+                                </div>
+
+                                <EditForm Model="@SelectedUser">
+                                    <DataAnnotationsValidator />
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <p class="form-control">@SelectedUser.UserName</p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <InputText @bind-Value="SelectedUser.Email" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label>CanUserChangePassword</label>
+                                        </div>
+                                        <InputCheckbox @bind-Value="SelectedUser.CanUserChangePassword" class="form-check-input " />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Group</label>
+                                        <select class="form-select" aria-label="Default select example" @bind="@SelectedGroup">
+                                            <option selected>Choose group</option>
+                                            @foreach (var group in _groupManager.GetAllGroup())
+                                            {
+                                                <option value="@group.Name">@group.Name</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                </EditForm>
+                            </div>
+
+                            <div class="row">
+                                <button type="button" class="btn btn-primary m-2 col-2" style="width:150px" @onclick="@(() => UpdateUser(SelectedUser))">
+                                    Update
+                                </button>
+                                <button type="button" class="btn btn-danger m-2 col-2" style="width:150px" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    Delete
+                                </button>
+                            </div>
+                            @if (IsUserUpdated)
+                            {
+                                <h4 style="color:green">User succesfully updated!</h4>
+                            }
+                        </div>
+                    </div>
                 }
             </div>
 
+            <div class="collapse" id="collapseGroups" data-bs-parent="#myGroup">
+                <div class="row mt-5">
+                    <div class="card">
+                        <h5>Manage group:</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-2">
+                                    <h5>List of groups:</h5>
+                                    <div class="col card" style=" height: 200px !important; overflow: auto;">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Group name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var group in _groupManager.GetAllGroup())
+                                                {
+                                                    <tr @onclick="@(() => GroupClicked(group))">
+                                                        <th>@group.Name</th>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
+                                @if (SelectedGroupN != null)
+                                {
+                                    <div class="col">
+                                        <h5>Available roles:</h5>
+                                        <div class="card " style=" height: 300px !important; overflow: auto;">
+                                            @if (AvailableRoles != null)
+                                            {
+                                                <div class="list-group p-2">
+                                                    @foreach (var role in AvailableRoles)
+                                                    {
+                                                        <label class="list-group-item mx-2">
+                                                            <input class="form-check-input me-1"
+                                                                   type="checkbox"
+                                                                   @bind="role.IsSelected">
+                                                            @role.Role.Name
+                                                        </label>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-1 " style="width:70px">
+                                        <div>
+                                            <button class="btn btn-primary  m-1"
+                                                    @onclick="@(() => AssignRoles())">
+                                                <i class="fas fa-long-arrow-alt-right"></i>
+                                            </button>
+                                            <button class="btn btn-primary  m-1"
+                                                    @onclick="@(() => ReturnRoles())">
+                                                <i class="fas fa-long-arrow-alt-left"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Assigned roles:</h5>
+                                        <div class="card" style="height: 300px !important; overflow: auto;">
+                                            @if (AssignedRoles != null)
+                                            {
+                                                <div class="list-group p-2">
+                                                    @foreach (var role in AssignedRoles)
+                                                    {
+                                                        <label class="list-group-item mx-2">
+                                                            <input class="form-check-input me-1"
+                                                                   type="checkbox"
+                                                                   @bind="role.IsSelected">
+                                                            @role.Role.Name
+                                                        </label>
+                                                    }
 
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-danger m-2 col-2" style="width:150px" data-bs-toggle="modal" data-bs-target="#deleteGroupModal">
+                                            Delete
+                                        </button>
+                                    </div>
+                                }
+                            </div>
 
+                            <div class="col mt-2">
+                                <h5>Create new group</h5>
+                                <div class="card">
+                                    <div class="card-body row">
+                                        <div class="col-9">
+                                            <input type="text" class="form-control" @bind="newGroupName" placeholder="Group name">
+                                        </div>
+                                        <button class="btn btn-primary col-3" @onclick="@(() => CreateGroup())">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>
 
 @if (SelectedUser != null)
@@ -196,5 +226,28 @@
     </div>
 }
 
+@if (SelectedGroupN != null)
+{
+    <div class="modal fade " id="deleteGroupModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete group</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Do you want to delete group @SelectedGroupN.Name?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger m-2" data-bs-dismiss="modal" @onclick="@(() => DeleteGroup(SelectedGroupN))">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
-    <!-- Button trigger modal -->
+
+
+
+<!-- Button trigger modal -->

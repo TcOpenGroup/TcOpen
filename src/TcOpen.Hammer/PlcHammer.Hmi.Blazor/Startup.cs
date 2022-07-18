@@ -33,6 +33,8 @@ namespace PlcHammer.Hmi.Blazor
 {
     public class Startup
     {
+        private static BlazorGroupManager groupManager;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -57,11 +59,13 @@ namespace PlcHammer.Hmi.Blazor
 
             /*Json repositories for security*/
             var userRepo = SetUpUserRepositoryJson();
-           
+
+            var groupRepo = SetUpGroupRepositoryJson();
+            groupManager = new BlazorGroupManager(groupRepo);
 
 
             var roleManager = Roles.Create();
-            services.AddVortexBlazorSecurity(userRepo,roleManager);
+            services.AddVortexBlazorSecurity(userRepo,roleManager, groupRepo, groupManager);
 
 
             services.AddTcoCoreExtensions();
@@ -165,6 +169,19 @@ namespace PlcHammer.Hmi.Blazor
             }
 
             return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "UsersBlazor")));
+        }
+
+        private static IRepository<GroupData> SetUpGroupRepositoryJson()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<GroupData>(new JsonRepositorySettings<GroupData>(Path.Combine(repositoryDirectory, "GroupsBlazor")));
         }
     }
 }

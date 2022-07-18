@@ -12,20 +12,18 @@ namespace TcOpen.Inxton.Local.Security.Blazor
     {
         public List<Role> InAppRoleCollection { get; set; } = new List<Role>();
 
-        public List<string> InAppGroupCollection { get; set; } = new List<string>();
+        //public List<string> InAppGroupCollection { get; set; } = new List<string>();
 
         
-        public string GetGroupRoleString(string groupString)
-        {
-            var roles = InAppRoleCollection.Where(x => x.DefaultGroup == groupString).Select(x=>x.Name);
-            return String.Join(",", roles);
-        }
+        //public string GetGroupRoleString(string groupString)
+        //{
+        //    var roles = InAppRoleCollection.Where(x => x.DefaultGroup == groupString).Select(x => x.Name);
+        //    return String.Join(",", roles);
+        //}
         public void CreateRole(Role role)
         {
             this.InAppRoleCollection.Add(role);
-            if (!InAppGroupCollection.Contains(role.DefaultGroup)) this.InAppGroupCollection.Add(role.DefaultGroup);
+            //if (!InAppGroupCollection.Contains(role.DefaultGroup)) this.InAppGroupCollection.Add(role.DefaultGroup);
         }
-
-        
     }
 }

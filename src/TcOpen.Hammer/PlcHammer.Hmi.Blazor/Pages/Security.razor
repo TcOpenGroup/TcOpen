@@ -5,11 +5,12 @@
 @inject UserManager<User> _userManager
 @inject SignInManager<User> _signInManager
 @inject BlazorRoleManager _roleManager
+@inject BlazorGroupManager _groupManager
 <h3>Security</h3>
 
 
 
-<AuthorizeView Roles="Administrator" >
+<AuthorizeView Roles="Administrator">
     <Authorized>
         <UserManagementView @ref="@UserMgmtView"></UserManagementView>
 
@@ -20,7 +21,7 @@
     </NotAuthorized>
 </AuthorizeView>
 
-<AuthorizeView Roles="@_roleManager.GetGroupRoleString("AdminGroup")">
+<AuthorizeView Roles="@_groupManager.GetRolesString("AdminGroup")">
 
     <p>You can see this only and only if you have some role from AdminGroup</p>
 </AuthorizeView>
