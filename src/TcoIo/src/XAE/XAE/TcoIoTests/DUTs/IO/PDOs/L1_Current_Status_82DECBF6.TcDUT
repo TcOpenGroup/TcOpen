@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="L1_Current_Status_82DECBF6" Id="{ef4a3607-4c2c-01c6-0ad7-a5f0ebaa80eb}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3773-0000-0021'}
+{attribute addProperty BoxType "EL3773-0000-0021"}
+{attribute addProperty Id "I1_StatusAT %I*I1_Status_DC9039207"}
+{attribute addProperty CRC "2195639286"}
+{attribute addProperty Size "7"}
+TYPE L1_Current_Status_82DECBF6 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "I1_Status"}
+	I1_Status AT %I* : I1_Status_DC903920;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

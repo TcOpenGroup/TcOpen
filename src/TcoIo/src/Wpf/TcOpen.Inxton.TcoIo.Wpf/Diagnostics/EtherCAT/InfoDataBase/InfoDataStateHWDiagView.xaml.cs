@@ -1,9 +1,11 @@
 using System;
-using System.Drawing;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Media;
+
 
 namespace TcoIo
 {
@@ -133,12 +135,14 @@ namespace TcoIo
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((ushort)value != 8)
-            { 
+            {
                 return TcoCore.Wpf.TcoColors.Error;
             }
             else
             {
-                return Brushes.White;
+                ResourceDictionary ColorResorce = new ResourceDictionary();
+                ColorResorce.Source = new Uri("/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml", UriKind.RelativeOrAbsolute);
+                return new SolidColorBrush((Color)ColorResorce["InxtonGrayLightColor"]);
             }
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -172,4 +176,6 @@ namespace TcoIo
             return this;
         }
     }
+
+   
 }

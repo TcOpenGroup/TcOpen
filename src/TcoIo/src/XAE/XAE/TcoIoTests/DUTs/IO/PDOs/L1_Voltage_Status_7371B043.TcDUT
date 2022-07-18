@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="L1_Voltage_Status_7371B043" Id="{5c338914-904b-0526-31b8-8dbb1936ae6f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3773-0000-0021'}
+{attribute addProperty BoxType "EL3773-0000-0021"}
+{attribute addProperty Id "U1_StatusAT %I*U1_Status_DC9039207"}
+{attribute addProperty CRC "1936830531"}
+{attribute addProperty Size "7"}
+TYPE L1_Voltage_Status_7371B043 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "U1_Status"}
+	U1_Status AT %I* : U1_Status_DC903920;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
