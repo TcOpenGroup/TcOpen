@@ -392,18 +392,26 @@ function RemovePinVersion($tsproj)
     {
         $TcSmProjectNode.RemoveAttribute("TcVersionFixed")
         $xml.save($tsproj)
-        Write-Host "Pin version removed in`t" $tsProject 
+        Write-Host "Pin version removed in`t" $tsproj
     }
 }
+
 
 function DisableDevices($tsproj)
 {
     $xml = [System.Xml.XmlDocument](Get-Content $tsproj);
-    $TcSmProjectNode = $xml.SelectSingleNode("TcSmProject")
-    if($TcSmProjectNode.HasAttribute("TcVersionFixed"))
+    $ioNode = $xml.SelectSingleNode("TcSmProject/Project/Io")
+    if($ioNode -ne $null)
     {
-        $TcSmProjectNode.RemoveAttribute("TcVersionFixed")
-        $xml.save($tsproj)
-        Write-Host "Pinned to version removed in`t" $tsProject 
+        $devicesNodes= $xml.SelectNodes("TcSmProject/Project/Io/Device")
+        foreach($deviceNode in $devicesNodes)
+        {
+            if(-not $deviceNode.HasAttribute("Disabled"))
+            {
+                $deviceNode.SetAttribute("Disabled","true")
+                Write-Host "Disabled device`t" $deviceNode.RemoteName " in`t" $tsproj 
+            }
+        }
+        $xml.Save($tsproj)
     }
 }
