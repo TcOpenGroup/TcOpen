@@ -1,11 +1,7 @@
 ﻿@namespace TcoData
 @using Vortex.Connector
-<h3>DataView</h3>
 
-@inject IBlazorDownloadFileService BlazorDownloadFileService
-@inject IJSRuntime JS
 
-<div class="container">
     <div class="row">
 
         <div class="mb-3 col">
@@ -30,9 +26,7 @@
                     @bind="@DataViewModel.SearchMode">
                 @foreach (var item in eSearchModes)
                 {
-
                     <option class="form-control" value="@item">@item.ToString() </option>
-
                 }
             </select>
         </div>
@@ -182,7 +176,7 @@
         }
     </div>
 
-    @if (_isRowSelected)
+    @if (DataViewModel.SelectedRecord != null)
     {
         <div class="modal fade " id="deleteDataModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -219,110 +213,94 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="sendToPlcModal" tabindex="-1" aria-labelledby="sendToPlcModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="sendToPlcModalLabel">Send to Plc</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Do you want to send @DataViewModel.SelectedRecord._EntityId to Plc?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="() => DataViewModel.SendToPlc()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     }
 
-<div class="d-flex justify-content-center">
-    @if (DataViewModel.StartCreateNewCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.NewDisabled"
-             @onclick="() => DataViewModel.StartCreatingNew()">
-            New
-        </button>}
+    <div class="d-flex justify-content-center">
+        @if (DataViewModel.StartCreateNewCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.NewDisabled"
+                 @onclick="() => DataViewModel.StartCreatingNew()">
+                New
+            </button>}
 
-    @if (DataViewModel.StartCreateCopyOfExistingAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.CopyDisabled"
-             @onclick="() => DataViewModel.StartCreatingRecordCopy()">
-            Copy
-        </button>}
+        @if (DataViewModel.StartCreateCopyOfExistingAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.CopyDisabled"
+                 @onclick="() => DataViewModel.StartCreatingRecordCopy()">
+                Copy
+            </button>}
 
-    @if (DataViewModel.UpdateCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.UpdateDisabled"
-             data-bs-toggle="modal" data-bs-target="#updateDataModal">
-            Update
-        </button>}
+        @if (DataViewModel.UpdateCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.UpdateDisabled"
+                 data-bs-toggle="modal" data-bs-target="#updateDataModal">
+                Update
+            </button>}
 
-    @if (DataViewModel.EditCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.EditDisabled"
-             @onclick="() => DataViewModel.StartEdit()">
-            Edit
-        </button>}
+        @if (DataViewModel.EditCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.EditDisabled"
+                 @onclick="() => DataViewModel.StartEdit()">
+                Edit
+            </button>}
 
-    @if (DataViewModel.SendToPlcCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.SendToPlcDisabled">
-            Send to PLC
-        </button>}
+        @if (DataViewModel.SendToPlcCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.SendToPlcDisabled"
+                 data-bs-toggle="modal" data-bs-target="#sendToPlcModal">
+                Send to PLC
+            </button>}
 
-    @if (DataViewModel.LoadFromPlcCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.FromPlcDisabled">
-            From PLC
-        </button>}
+        @if (DataViewModel.LoadFromPlcCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.FromPlcDisabled"
+                 @onclick="() => DataViewModel.LoadFromPlc()">
+                From PLC
+            </button>}
 
-    @if (DataViewModel.ImportCommandAvailable)
-    {
-        @*<input type="file" id="selectedFile" style="display: none;" />
-        <input type="button" value="Browse..." onclick="document.getElementById('selectedFile').click();" />*@
+        @if (DataViewModel.CancelEditCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.CancelDisabled"
+                 @onclick="() => DataViewModel.CancelEdit()">
+                Cancel
+            </button>}
 
+        @if (DataViewModel.DeleteCommandAvailable)
+        {<button class="btn btn-primary m-2"
+                 disabled="@DataViewModel.DeleteDisabled"
+                 data-bs-toggle="modal" data-bs-target="#deleteDataModal">
+                Delete
+            </button>}
 
-        <InputFile id="filePicker" style="display: none;"  OnChange="@LoadFiles"></InputFile>
-
-        <label class="btn btn-primary m-2" for="filePicker" >
-            <a>Import</a>
-        </label>
-    } 
-
-    @if (DataViewModel.ExportCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.ExportDisabled"
-             @onclick="() => OnExport()">
-            Export
-
-        </button>}
-
-    @if (DataViewModel.CancelEditCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.CancelDisabled"
-             @onclick="() => DataViewModel.CancelEdit()">
-            Cancel
-        </button>}
-
-    @if (DataViewModel.DeleteCommandAvailable)
-    {<button class="btn btn-primary m-2"
-             disabled="@DataViewModel.DeleteDisabled"
-             data-bs-toggle="modal" data-bs-target="#deleteDataModal">
-            Delete
-        </button>}
-
-</div>
+    </div>
 
 
-</div>
+
 
 
 
 @code {
 
-
-    private async Task LoadFiles(InputFileChangeEventArgs e)
-    {
-        var path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory,"imported.txt");
-        await using FileStream fs = new(path, FileMode.Create);
-        await e.File.OpenReadStream().CopyToAsync(fs);
-        fs.Close();
-
-        DataViewModel.ImportData(path);
-        if (File.Exists(Path.Combine(path)))
-        {
-            // If file found, delete it    
-            File.Delete(Path.Combine(path));
-
-        }
-
-    }
 
     public bool IsDisabled { get; set; } = true;
 
@@ -342,21 +320,6 @@
     private int _visibleDownPage { get; set; }
     private int _visibleUpPage { get; set; }
 
-    private async Task OnExport()
-    {
-        var memoryStream = new MemoryStream();
-        DataViewModel.ExportData();
-        await BlazorDownloadFileService.DownloadFile("test2.txt", DataViewModel.ExportFileStream, "application/octet-stream");
-        DataViewModel.ExportFileStream.Close();
-    }
-
-    //private async Task OnImport()
-    //{
-    //    var memoryStream = new MemoryStream();
-    //    DataViewModel.ExportData();
-    //    await BlazorDownloadFileService.DownloadFile("test2.txt", DataViewModel.ExportFileStream, "application/octet-stream");
-    //    DataViewModel.ExportFileStream.Close();
-    //}
 
     private void OnNewCanceled()
     {
@@ -440,25 +403,14 @@
     }
 
 
-
-
     protected override async Task OnInitializedAsync()
     {
-
-
         IsLoading = true;
         await Filter();
         IsLoading = false;
         DataViewModel.SetDefaultButtonState();
-        base.OnInitializedAsync();
     }
-    //private IJSObjectReference Module;
-    //protected override async Task OnAfterRenderAsync(bool firstRender)
-    //{
-    //    Module = await JS.InvokeAsync<IJSObjectReference>(
-    //"import", "./example.js");
-    //    base.OnAfterRender(firstRender);
-    //}
+
 
     private IEnumerable<eSearchMode> eSearchModes => Enum.GetValues(typeof(eSearchMode)).Cast<eSearchMode>();
 

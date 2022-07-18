@@ -15,6 +15,10 @@
 	<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
 </PropertyGroup>
 
+<ItemGroup>
+  <Content Remove="wwwroot\DataView.razor.js" />
+</ItemGroup>
+
 
   
   <ItemGroup>
@@ -27,11 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\..\TcoDataConnector\TcoDataConnector.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TcoDataConnector\TcoDataConnector.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

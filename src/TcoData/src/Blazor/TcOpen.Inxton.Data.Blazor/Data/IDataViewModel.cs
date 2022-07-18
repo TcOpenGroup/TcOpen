@@ -32,9 +32,8 @@ namespace TcoData
         void Delete();
         void StartCreatingRecordCopy();
         void CreateCopyOfExisting();
-        void ExportData();
-        void ImportData(string fileName);
-        MemoryStream ExportFileStream { get; set; }
+        void SendToPlc();
+        void LoadFromPlc();
 
     }
 

@@ -1,15 +1,58 @@
 ﻿@page "/data"
-<h3>Data</h3>
+
+
+<div class="container">
+    <h1>Data management</h1>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary m-1" @onclick="() => OnProccessClicked()">Process Settings</button>
+        <button type="button" class="btn btn-primary m-1" @onclick="() => OnTechnologyClicked()">Technology</button>
+        <button type="button" class="btn btn-primary m-1" @onclick="() => OnTraceabilityClicked()">Traceability</button>
+    </div>
 
 
 
-<RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies" Presentation="Base"></RenderableContentControl>
-@*<div>----------------------------</div>
-<RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager" Presentation="Base"></RenderableContentControl>
-<div>----------------------------</div>
-<RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty" Presentation="Base"></RenderableContentControl>*@
 
+    @if (ShowProccesRecipies)
+    {
+        <h2>Process Settings</h2>
+        <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies" Presentation="Base"></RenderableContentControl>
+    }
 
-@code {
-  
-}
+    @if (ShowTechnology)
+    {
+        <h2>Technology</h2>
+        <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager" Presentation="Base"></RenderableContentControl>
+    }
+    @if (ShowTraceability)
+    {
+        <h2>Traceability</h2>
+        <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty" Presentation="Base"></RenderableContentControl>
+    }
+</div>
+    @code {
+        public bool ShowProccesRecipies { get; set; } = true;
+        public bool ShowTechnology { get; set; }
+        public bool ShowTraceability { get; set; }
+
+        private void OnProccessClicked()
+        {
+            ShowProccesRecipies = true;
+            ShowTechnology = false;
+            ShowTraceability = false;
+        }
+
+        private void OnTechnologyClicked()
+        {
+            ShowProccesRecipies = false;
+            ShowTechnology = true;
+            ShowTraceability = false;
+        }
+
+        private void OnTraceabilityClicked()
+        {
+            ShowProccesRecipies = false;
+            ShowTechnology = false;
+            ShowTraceability = true;
+        }
+    }

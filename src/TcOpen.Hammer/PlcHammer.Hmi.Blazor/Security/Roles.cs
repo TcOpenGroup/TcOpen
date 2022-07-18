@@ -18,6 +18,7 @@ namespace PlcHammer.Hmi.Blazor.Security
             _roleManager.CreateRole(new Role(process_traceability_access, "AdminGroup"));
             _roleManager.CreateRole(new Role(technology_settings_access, "Maintenance"));
             _roleManager.CreateRole(new Role(manual_start, "Maintenance"));
+            
             //SecurityManager.Manager.GetOrCreateRole(new Role(process_traceability_access, "Administrator"));
             //SecurityManager.Manager.GetOrCreateRole(new Role(technology_settings_access, "Maintenance"));
             //SecurityManager.Manager.GetOrCreateRole(new Role(ground_position_start, "Operator"));

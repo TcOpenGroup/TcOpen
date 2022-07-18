@@ -92,7 +92,7 @@ namespace TcoData
                     DataViewModel = (IDataViewModel)generic.Invoke(null, new object[] { dataExchangeObject.GetRepository(), dataExchangeObject });
 
                 }
-                catch (Exception ex)
+                catch 
                 {
                     throw ;//new BrowsableObjectCreationException("Unable to create browsable object for the view. For details see inner exception.", ex);
                 }

@@ -222,51 +222,27 @@ namespace TcoData
             ViewModeEdit();
            
         }
-        public MemoryStream ExportFileStream { get; set; }
-        public void ExportData()
+
+        public void LoadFromPlc()
         {
-            //for a large files, this can be problem, becasue whole file is loaded to application, consider download from url
-            //https://docs.microsoft.com/en-us/aspnet/core/blazor/file-downloads?view=aspnetcore-6.0
-            var exports = DataBrowser.Export(p => true);
-            string dataString = string.Empty;
-            foreach (var item in exports)
-            {
-                dataString += item + "\r"; 
-            }
-            byte[] data = Encoding.ASCII.GetBytes(dataString);
-            ExportFileStream = new MemoryStream();
-            ExportFileStream.Write(data, 0, data.Length);
-        }
-
-        public void ImportData(string fileName)
-        {
-
-            var imports = new List<string>();
-            foreach (var item in File.ReadAllLines(fileName))
-            {
-                imports.Add(item);
-            }
-
-
-            this.DataBrowser.Import(imports);
-            this.FillObservableRecords();
+            var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
+            ((dynamic)DataExchange)._data.FlushOnlineToPlain(plainer);
+            plainer._EntityId = $"{DataHelpers.CreateUid().ToString()}";
+            DataBrowser.AddRecord(plainer);
+            var plain = DataBrowser.FindById(plainer._EntityId);
+            ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
+            FillObservableRecords();
+            SelectedRecord = plain;
+            this.Mode = ViewMode.Edit;
+            ViewModeEdit();
 
         }
 
-        //void LoadFromPlc()
-        //{
-
-        //    var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
-        //    ((dynamic)DataExchange)._data.FlushOnlineToPlain(plainer);
-        //    plainer._EntityId = $"{DataHelpers.CreateUid().ToString()}";
-        //    DataBrowser.AddRecord(plainer);
-        //    var plain = DataBrowser.FindById(plainer._EntityId);
-        //    ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
-        //    FillObservableRecords();
-        //    SelectedRecord = plain;
-        //    this.Mode = ViewMode.Edit;
-
-        //}
+        public void SendToPlc()
+        {
+                ((dynamic)DataExchange)._data.FlushPlainToOnline((dynamic)this.SelectedRecord);
+            //}, $"{((dynamic)DataExchange)._data._EntityId}", () => MessageBox.Show($"{strings.LoadToController} '{((dynamic)this.SelectedRecord)._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+        }
 
         public bool StartCreateNewCommandAvailable { get; set; }
         public bool StartCreateCopyOfExistingAvailable { get; set; }
