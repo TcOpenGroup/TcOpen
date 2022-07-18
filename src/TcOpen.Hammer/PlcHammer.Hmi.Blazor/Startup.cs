@@ -56,8 +56,8 @@ namespace PlcHammer.Hmi.Blazor
             //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
 
             /*Json repositories for security*/
-            var userRepo = SetUpUserRepositoryJson();
-           
+            //var userRepo = SetUpUserRepositoryJson();
+            var userRepo = SetUpUserRepositoryMongo();
 
 
             var roleManager = Roles.Create();
@@ -67,10 +67,10 @@ namespace PlcHammer.Hmi.Blazor
             services.AddTcoCoreExtensions();
 
             /*Json repositories for data*/
-            SetUpJsonRepositories();
+            //SetUpJsonRepositories();
 
             /*Mongo repositories for data*/
-            //SetUpMongoDatabase();
+            SetUpMongoDatabase();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -145,7 +145,7 @@ namespace PlcHammer.Hmi.Blazor
         private static void SetUpMongoDatabase()
         {
             var mongoUri = "mongodb://localhost:27017";
-            var databaseName = "HammerBlazor";
+            var databaseName = "Hammer";
 
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
@@ -165,6 +165,13 @@ namespace PlcHammer.Hmi.Blazor
             }
 
             return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "UsersBlazor")));
+        }
+
+        private static IRepository<UserData> SetUpUserRepositoryMongo()
+        {
+           
+            return new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "BlazorUsers"));
+           
         }
     }
 }
