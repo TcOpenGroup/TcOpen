@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.29">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2316,7 +2316,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{C03634C4-AC7A-4A21-803F-218553AAE7F4}" Name="TcoDrivesBeckhoff" PrjFilePath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.plcproj" TmcFilePath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.tmc" TmcHash="{54CE2AC4-BCF6-E486-68F2-8A2674269F8E}">
 					<Name>TcoDrivesBeckhoff Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -2336,7 +2336,7 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 			<Project GUID="{4F0E1158-49EA-45D6-89E6-C1A4D3AF626F}" Name="TcoDrivesBeckhoffTests" PrjFilePath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.plcproj" TmcFilePath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.tmc">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.tmc" TmcHash="{11FC6EB5-1FD8-8051-98CC-68A01C4A70F6}">
 					<Name>TcoDrivesBeckhoffTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2781,7 +2781,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 												<Data type="uint16">0.0130</Data>
 											</Parameter>
 											<Parameter>
-												<Comment>Winding resistance Ph-Ph 20Ãƒâ€šÃ‚Â°C</Comment>
+												<Comment>Winding resistance Ph-Ph 20ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°C</Comment>
 												<Name>R</Name>
 												<Data type="uint16">1.50</Data>
 											</Parameter>
@@ -2861,7 +2861,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 											<Parameter>
 												<Comment>Motor temp sensor R(T)</Comment>
 												<Name>TempSensorR(T)</Name>
-												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="Ãƒâ€šÃ‚Â°C">
+												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°C">
 													<item>-29.5</item>
 													<item>2.3</item>
 													<item>31.4</item>
