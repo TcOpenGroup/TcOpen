@@ -11,7 +11,7 @@ using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
-    public class GroupData : IBrowsableDataObject, INotifyPropertyChanged
+    public class GroupData : IBrowsableDataObject
     {
         private string _name;
         public ObservableCollection<string> Roles { get; set; }
@@ -32,14 +32,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             get => _name; set
             {
                 _name = value;
-                OnPropertyChanged(nameof(Name));
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private List<string> _changes = new List<string>();
         public List<string> Changes

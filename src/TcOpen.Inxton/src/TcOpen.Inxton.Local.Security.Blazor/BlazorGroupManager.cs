@@ -54,12 +54,16 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public List<string> GetRoles(string group)
         {
+            if (group == null || !groupRepo.Exists(group))
+                return null;
             GroupData data = groupRepo.Read(group);
             return new List<string>(data.Roles);
         }
 
         public string GetRolesString(string group)
         {
+            if (group == null || !groupRepo.Exists(group))
+                return null;
             GroupData data = groupRepo.Read(group);
             return String.Join(",", data.Roles);
         }

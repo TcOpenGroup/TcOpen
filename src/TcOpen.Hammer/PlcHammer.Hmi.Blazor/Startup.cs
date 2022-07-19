@@ -34,6 +34,7 @@ namespace PlcHammer.Hmi.Blazor
     public class Startup
     {
         private static BlazorGroupManager groupManager;
+        private bool mongoDB = true;
 
         public Startup(IConfiguration configuration)
         {
@@ -46,35 +47,41 @@ namespace PlcHammer.Hmi.Blazor
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-          
             services.AddRazorPages();
             services.AddServerSideBlazor();
           
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
 
-            /*MongoDb repositories for security*/
-            //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "HammerBlazor", "Users"));
-            //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
-
-            /*Json repositories for security*/
-            var userRepo = SetUpUserRepositoryJson();
-
-            var groupRepo = SetUpGroupRepositoryJson();
-            groupManager = new BlazorGroupManager(groupRepo);
-
+            IRepository<UserData> userRepo;
+            IRepository<GroupData> groupRepo;
+            if(mongoDB) /*MongoDb repositories for security*/
+            {
+                userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "HammerBlazor", "Users"));
+                //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
+                groupRepo = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>("mongodb://localhost:27017", "HammerBlazor", "Groups"));
+            }
+            else /*Json repositories for security*/
+            {
+                userRepo = SetUpUserRepositoryJson();
+                groupRepo = SetUpGroupRepositoryJson();
+            }
 
             var roleManager = Roles.Create();
-            services.AddVortexBlazorSecurity(userRepo,roleManager, groupRepo, groupManager);
+            groupManager = new BlazorGroupManager(groupRepo);
 
+            services.AddVortexBlazorSecurity(userRepo, roleManager, groupRepo, groupManager);
 
             services.AddTcoCoreExtensions();
 
-            /*Json repositories for data*/
-            SetUpJsonRepositories();
-
-            /*Mongo repositories for data*/
-            //SetUpMongoDatabase();
+            if (mongoDB)/*Mongo repositories for data*/
+            {
+                SetUpMongoDatabase();
+            }
+            else /*Json repositories for data*/
+            {
+                SetUpJsonRepositories();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

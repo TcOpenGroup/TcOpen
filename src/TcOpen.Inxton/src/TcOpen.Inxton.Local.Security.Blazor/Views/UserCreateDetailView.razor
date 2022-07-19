@@ -2,6 +2,7 @@
 @inject SignInManager<User> SignInManager
 @inject NavigationManager _navigationManager
 @inject UserManager<User> UserManager
+@inject BlazorGroupManager _groupManager
 
 
 <AuthorizeView Roles="Administrator">
@@ -27,9 +28,19 @@
 
                     </div>
                     <div class="form-group">
-                        <label>CanUserChangePassword</label>
-                        <InputCheckbox @bind-Value="_model.CanUserChangePassword" class="form-check " />
+                        <InputCheckbox @bind-Value="_model.CanUserChangePassword" class="form-check-input " id="checkBoxCanUserChangePassword" />
+                        <label class="form-check-label" for="checkBoxCanUserChangePassword">CanUserChangePassword</label>
 
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <select class="form-select" aria-label="Default select example" @bind="@_model.Group">
+                            <option selected>Choose group</option>
+                            @foreach (var group in _groupManager.GetAllGroup())
+                            {
+                                <option value="@group.Name">@group.Name</option>
+                            }
+                        </select>
                     </div>
 
                     <button class="btn btn-primary">
@@ -43,7 +54,7 @@
                 }
             </div>
         </div>
-        </Authorized>
+    </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to create new users. Please log in as administrator.</p>
     </NotAuthorized>
@@ -63,11 +74,10 @@
     private async void OnValidSubmit()
     {
 
-        _user = new User(_model.Username, _model.Email, null, _model.CanUserChangePassword, null);
-
+        _user = new User(_model.Username, _model.Email, new string[1] { _model.Group }, _model.CanUserChangePassword, null);
 
         var result = await UserManager.CreateAsync(_user, _model.Password);
-      
+
         if (result.Succeeded)
         {
             UserCreated = true;

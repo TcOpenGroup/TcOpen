@@ -54,7 +54,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         //    StateHasChanged();
         //}
 
-        public async Task AssignRoles()
+        public void AssignRoles()
         {
             _groupManager.AddRoles(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
@@ -62,7 +62,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             //await RowClicked(SelectedUser);
         }
 
-        public async Task ReturnRoles()
+        public void ReturnRoles()
         {
             _groupManager.RemoveRoles(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
@@ -71,10 +71,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         }
 
         public string SelectedGroup { get; set; }
-        public async Task RowClicked(User user)
+        public void RowClicked(User user)
         {
             SelectedUser = user;
-            var userAssignedRoles = await _userManager.GetRolesAsync(user);
+            SelectedGroup = user.Roles[0];
+            //SelectedGroup = await _userManager.GetGroupAsync(user);
             //AssignedRoles = _roleManager.InAppRoleCollection.Where(p => userAssignedRoles.Any(p2 => p2 == p.Name)).Select(x => new RoleData(x)).ToList();
             //AvailableRoles = GetAvailableRoles();
             IsUserUpdated = false;
@@ -145,6 +146,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public async Task UpdateUser(User user)
         {
+            user.Roles = new string[1] { SelectedGroup };
             await _userManager.UpdateAsync(user);
             IsUserUpdated = true;
         }
