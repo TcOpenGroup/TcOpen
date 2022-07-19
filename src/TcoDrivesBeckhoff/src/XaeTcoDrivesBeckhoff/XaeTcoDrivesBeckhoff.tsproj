@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.29">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2781,7 +2781,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 												<Data type="uint16">0.0130</Data>
 											</Parameter>
 											<Parameter>
-												<Comment>Winding resistance Ph-Ph 20Ã‚Â°C</Comment>
+												<Comment>Winding resistance Ph-Ph 20Ãƒâ€šÃ‚Â°C</Comment>
 												<Name>R</Name>
 												<Data type="uint16">1.50</Data>
 											</Parameter>
@@ -2861,7 +2861,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 											<Parameter>
 												<Comment>Motor temp sensor R(T)</Comment>
 												<Name>TempSensorR(T)</Name>
-												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="Ã‚Â°C">
+												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="Ãƒâ€šÃ‚Â°C">
 													<item>-29.5</item>
 													<item>2.3</item>
 													<item>31.4</item>
