@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Status_439F40C3" Id="{e8c2ed69-2d78-0f56-3714-8aa45ebb7cda}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3692-0000-0020'}
+{attribute addProperty BoxType "EL3692-0000-0020"}
+{attribute addProperty Id "UnderrangeBOOL1OverrangeBOOL1Extended_rangeBOOL1Data_invalidBOOL1Range_invalidBOOL1Autorange_disabledBOOL1ErrorBOOL1Steady_stateBOOL1TxPDO_StateBOOL1TxPDO_ToggleBOOL1"}
+{attribute addProperty CRC "1134510275"}
+{attribute addProperty Size "10"}
+TYPE Status_439F40C3 :
+STRUCT
+	{attribute addProperty Name "Underrange"}
+	Underrange : BOOL;
+	{attribute addProperty Name "Overrange"}
+	Overrange : BOOL;
+	{attribute addProperty Name "Extended_range"}
+	Extended_range : BOOL;
+	{attribute addProperty Name "Data_invalid"}
+	Data_invalid : BOOL;
+	{attribute addProperty Name "Range_invalid"}
+	Range_invalid : BOOL;
+	{attribute addProperty Name "Autorange_disabled"}
+	Autorange_disabled : BOOL;
+	{attribute addProperty Name "Error"}
+	Error : BOOL;
+	{attribute addProperty Name "Steady_state"}
+	Steady_state : BOOL;
+	{attribute addProperty Name "TxPDO_State"}
+	TxPDO_State : BOOL;
+	{attribute addProperty Name "TxPDO_Toggle"}
+	TxPDO_Toggle : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
