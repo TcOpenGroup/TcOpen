@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.JSInterop;
 using PlcHammer.Hmi.Blazor.Data;
 using PlcHammer.Hmi.Blazor.Security;
 using PlcHammerConnector;
@@ -18,6 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using TcoCore;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
@@ -62,15 +64,20 @@ namespace PlcHammer.Hmi.Blazor
 
             var roleManager = Roles.Create();
             services.AddVortexBlazorSecurity(userRepo,roleManager);
-
-
+            //services.AddSingleton<DialogProxyServiceBlazor>();
             services.AddTcoCoreExtensions();
+           // services.AddScoped<DialogProxyServiceBlazor>();
+            services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN }));
 
+            //services.AddSingleton(DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN }));
             /*Json repositories for data*/
             //SetUpJsonRepositories();
 
             /*Mongo repositories for data*/
             SetUpMongoDatabase();
+            //services.AddTransient<JsDialogInterop>();
+            //TcOpen.Inxton.TcoAppDomain.Current.Builder
+            //  .SetPlcDialogs(DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,7 +94,7 @@ namespace PlcHammer.Hmi.Blazor
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -104,7 +111,8 @@ namespace PlcHammer.Hmi.Blazor
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
-            
+            //TcOpen.Inxton.TcoAppDomain.Current.Builder
+            // .SetPlcDialogs(DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN }, app.ApplicationServices.GetRequiredService<JsDialogInterop>()));
         }
 
 

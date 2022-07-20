@@ -36,6 +36,9 @@
 
 
     private UserManagementView UserMgmtView { get; set; }
-
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
 
 }

@@ -1,0 +1,83 @@
+﻿@namespace TcoCore
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@DialogService.Dialog._caption.Synchron</h5>
+            </div>
+            <div class="modal-body">
+                @DialogService.Dialog._text.Synchron
+            </div>
+            <div class="modal-footer">
+                @if (DialogService.Dialog._hasYes.Synchron)
+                {
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => DialogAnswerYes()">Yes</button>
+                }
+                @if (DialogService.Dialog._hasNo.Synchron)
+                {
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => DialogAnswerNo()">No</button>
+                }
+                @if (DialogService.Dialog._hasCancel.Synchron)
+                {
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => DialogAnswerCancel()">Cancel</button>
+                }
+
+                @if (DialogService.Dialog._hasOK.Synchron)
+                {
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => DialogAnswerOk()">Ok</button>
+                }
+
+                @*<button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="() => DialogAnswerOk()">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@code {
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+    [Inject]
+    public DialogProxyServiceBlazor DialogService { get; set; }
+
+
+    private void DialogAnswerOk()
+    {
+        DialogService.Dialog._answer.Synchron = (short)eDialogAnswer.OK;
+
+    }
+    private void DialogAnswerYes()
+    {
+        DialogService.Dialog._answer.Synchron = (short)eDialogAnswer.Yes;
+
+    }
+    private void DialogAnswerNo()
+    {
+        DialogService.Dialog._answer.Synchron = (short)eDialogAnswer.No;
+
+    }
+    private void DialogAnswerCancel()
+    {
+        DialogService.Dialog._answer.Synchron = (short)eDialogAnswer.Cancel;
+
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            DialogService.DialogInitializationCompleted += OnDialogRaised; // register with an event
+        }
+    }
+
+    public async void OnDialogRaised()
+    {
+        await InvokeAsync(StateHasChanged);
+        await JSRuntime.InvokeAsync<string>("OpenTcoDialog");
+    }
+
+}
