@@ -11,7 +11,8 @@
                     <DataAnnotationsValidator />
                     <div class="form-group">
                         <label>Username</label>
-                        <p class="form-control">@_model.Username</p>
+                        <InputText @bind-Value="_model.Username" type="text" class="form-control" disabled />
+                        <ValidationMessage For="@(() => _model.Username)" />
                     </div>
                     @if (_user.CanUserChangePassword)
                     {
@@ -67,6 +68,7 @@
         {
             _user.PasswordHash = _userManager.PasswordHasher.HashPassword(_user, _model.Password);
         }
+        _user.UserName = _model.Username;
         _user.Email = _model.Email;
         var result = await _userManager.UpdateAsync(_user);
         if (result.Succeeded)
