@@ -1,23 +1,48 @@
 ﻿@page "/security"
-@using System.Security.Claims;
 @using Microsoft.AspNetCore.Identity;
 @using TcOpen.Inxton.Local.Security
-@inject UserManager<User> _userManager
-@inject SignInManager<User> _signInManager
-@inject BlazorRoleManager _roleManager
-@inject BlazorGroupManager _groupManager
 
 <h3>Security</h3>
 
 <AuthorizeView Roles="Administrator">
     <Authorized>
-        <UserManagementView @ref="@UserMgmtView"></UserManagementView>
+        <div name="TabControl" class="w-100">
+            <ul class="nav nav-tabs mb-3">
+                @foreach (var item in types)
+                {
+                <li class="nav-item">
+                    @if (Array.IndexOf(types, item) == selected)
+                    {
+                    <button type="button" class="nav-link active"><b>@item.Name</b></button>
+                    }
+                    else
+                    {
+                    <button type="button" class="nav-link" @onclick="() => selected = Array.IndexOf(types, item)"><b>@item.Name</b></button>
+                    }
+                </li>
+                }
+            </ul>
+            <div class="content">
+                @GetRenderFragment(types[selected])
+            </div>
+        </div>
     </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
     </NotAuthorized>
 </AuthorizeView>
 
-@code {
-    private UserManagementView UserMgmtView { get; set; }
+@code{
+    RenderFragment GetRenderFragment(Type type)
+    {
+        RenderFragment renderFragment = renderTreeBuilder =>
+        {
+            renderTreeBuilder.OpenComponent(0, type);
+            renderTreeBuilder.CloseComponent();
+        };
+        return renderFragment;
+    }
+    int selected;
+    ComponentBase[] components = { new UserManagementView(), new GroupManagementView(), new ExampleView() };
+    Type[] types => components.Select(c => c.GetType()).ToArray();
 }

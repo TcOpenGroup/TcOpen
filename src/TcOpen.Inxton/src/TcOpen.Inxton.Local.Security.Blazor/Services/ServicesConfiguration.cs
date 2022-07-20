@@ -17,14 +17,12 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
 {
     public static class ServicesConfiguration
     {
-
         public static void AddVortexBlazorSecurity(this IServiceCollection services, 
             IRepository<UserData> userRepo,
             BlazorRoleManager roleManager,
             IRepository<GroupData> groupRepo,
             BlazorGroupManager groupManager)
         {
-
             services.AddIdentity<User, Role>(identity =>
             {
                 identity.Password.RequireDigit = false;
@@ -33,27 +31,22 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
                 identity.Password.RequireUppercase = false;
                 identity.Password.RequiredLength = 0;
                 identity.Password.RequiredUniqueChars = 0;
-                
-                
             }
             )
             .AddCustomStores()
             .AddDefaultTokenProviders();
 
-
             roleManager.CreateRole(new Role("Administrator", "AdminGroup"));
 
             if (!groupManager.GetAllGroup().Select(x => x.Name).Contains("AdminGroup"))
             {
-                groupManager.Create("AdminGroup");
-                groupManager.AddRole("AdminGroup", "Administrator");
+                groupManager.CreateAsync("AdminGroup");
+                groupManager.AddRoleAsync("AdminGroup", "Administrator");
             }
 
             var allUsers = userRepo.GetRecords("*", Convert.ToInt32(userRepo.Count + 1), 0).ToList();
             if (!allUsers.Any())
             {
-                
-               
                 string[] roles = { "Administrator" };
                 //create default admin user
                 var user = new User("admin", null, roles, false, null);
