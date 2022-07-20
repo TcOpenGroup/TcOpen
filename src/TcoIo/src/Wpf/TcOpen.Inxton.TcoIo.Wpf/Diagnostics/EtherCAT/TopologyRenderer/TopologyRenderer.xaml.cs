@@ -49,7 +49,7 @@ namespace TcoIo
             MaxPos_Y = 0;
             previousTopologyObject = new TopologyObject();
             topologyObjects = new ObservableCollection<TopologyObject>();
-            this.PresentationType = "TopologyDevice-TopologyBaseM90-TopologyBoxM90-TopologyTerminalM90-TopologyEndTerminalM90";
+            this.PresentationType = "TopologyDevice-TopologyBoxM90-TopologyTerminalM90-TopologyEndTerminalM90";
             this.HorizontalAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Top;
             this.DataContextChanged += TopologyRenderer_DataContextChanged;
