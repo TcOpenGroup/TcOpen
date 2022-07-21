@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
-	<Project ProjectGUID="{B128B7A5-E6F5-4544-9508-5F0028058086}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
+	<Project ProjectGUID="{B128B7A5-E6F5-4544-9508-5F0028058086}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="2" NonWinCpus="1">
 				<Cpu CpuId="1"/>
@@ -13,7 +13,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{69FD542B-8D82-415F-9189-1193D0B5F069}" Name="PlcTcProberTests" PrjFilePath="PlcTcProberTests\PlcTcProberTests.plcproj" TmcFilePath="PlcTcProberTests\PlcTcProberTests.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcTcProberTests\PlcTcProberTests.tmc" TmcHash="{3B1CDD58-7168-B83E-D281-DBF94FF5465E}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcTcProberTests\PlcTcProberTests.tmc">
 					<Name>PlcTcProberTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
