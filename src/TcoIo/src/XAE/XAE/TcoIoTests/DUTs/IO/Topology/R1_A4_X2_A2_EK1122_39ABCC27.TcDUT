@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R1_A4_X2_A2_EK1122_39ABCC27" Id="{d2a4cfb4-c03e-07d9-0324-329f0539691b}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "R1_A4_X2_A2_VI1_AES_D_BC_ECAT_xAES_B47A261080REX_350_IMecat_xIMecat_x_75C6CB6B170"}
+{attribute addProperty CRC "967560231"}
+{attribute addProperty Size "250"}
+{attribute addProperty Name "R1_A4_X2_A2 (EK1122)"}
+TYPE R1_A4_X2_A2_EK1122_39ABCC27 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R1_A4_X2_A2_VI1 (AES-D-BC-ECAT)"}
+	{attribute addProperty PreviousPort "R1_A4_X2_A2 (EK1122) : D"}
+	R1_A4_X2_A2_VI1_AES_D_BC_ECAT_x : AES_B47A2610;
+	{attribute addProperty Name "REX_350 (IMecat)"}
+	{attribute addProperty PreviousPort "R1_A4_X2_A2 (EK1122) : B"}
+	REX_350_IMecat_x : IMecat_x_75C6CB6B;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

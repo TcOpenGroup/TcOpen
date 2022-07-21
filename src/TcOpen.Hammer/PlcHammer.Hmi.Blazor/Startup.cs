@@ -156,7 +156,7 @@ namespace PlcHammer.Hmi.Blazor
         private static void SetUpMongoDatabase()
         {
             var mongoUri = "mongodb://localhost:27017";
-            var databaseName = "HammerBlazor";
+            var databaseName = "Hammer";
 
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));

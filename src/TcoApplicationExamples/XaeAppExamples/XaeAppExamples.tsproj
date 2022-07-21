@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.12">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{732480A7-5392-0A1F-50AB-897A82278634}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..15] OF BOOL</Name>
+			<Name GUID="{37DF1FA7-25A9-2180-5625-C9B3B7C20643}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..15] OF BOOL</Name>
 			<BitSize>128</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
 			<ArrayInfo>
@@ -23,22 +23,22 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project Disabled="true" GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcAppExamples\PlcAppExamples.tmc">
+			<Project GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcAppExamples\PlcAppExamples.tmc" TmcHash="{1B9721D3-A2A2-D6FF-86B9-3CBD400073F9}">
 					<Name>PlcAppExamples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>ST_01_IO.INs</Name>
-							<Type GUID="{732480A7-5392-0A1F-50AB-897A82278634}">ARRAY [0..15] OF BOOL</Type>
+							<Type GUID="{37DF1FA7-25A9-2180-5625-C9B3B7C20643}">ARRAY [0..15] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>ST_01_IO.OUTs</Name>
-							<Type GUID="{732480A7-5392-0A1F-50AB-897A82278634}">ARRAY [0..15] OF BOOL</Type>
+							<Type GUID="{37DF1FA7-25A9-2180-5625-C9B3B7C20643}">ARRAY [0..15] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Contexts>
