@@ -58,8 +58,8 @@ namespace PlcHammer.Hmi.Blazor
             //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
 
             /*Json repositories for security*/
-            //var userRepo = SetUpUserRepositoryJson();
-            var userRepo = SetUpUserRepositoryMongo();
+            var userRepo = SetUpUserRepositoryJson();
+            //var userRepo = SetUpUserRepositoryMongo();
 
 
             var roleManager = Roles.Create();
@@ -71,10 +71,10 @@ namespace PlcHammer.Hmi.Blazor
 
             //services.AddSingleton(DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN }));
             /*Json repositories for data*/
-            //SetUpJsonRepositories();
+            SetUpJsonRepositories();
 
             /*Mongo repositories for data*/
-            SetUpMongoDatabase();
+            //SetUpMongoDatabase();
             //services.AddTransient<JsDialogInterop>();
             //TcOpen.Inxton.TcoAppDomain.Current.Builder
             //  .SetPlcDialogs(DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN }));

@@ -11,13 +11,14 @@ using Vortex.Presentation.Controls.Blazor.RenderableContent;
 using Microsoft.AspNetCore.Components.Rendering;
 using TcoCore;
 using TcOpen.Inxton;
+using Vortex.Presentation.Blazor.Services;
 
 namespace TcoCore
 {
     public delegate void Notify();  // delegate
     public class DialogProxyServiceBlazor : DialogProxyServiceBase
     {
-        
+        private ComponentService componentService = new ComponentService();
         public event Notify DialogInitializationCompleted; // event
         
         public DialogProxyServiceBlazor(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
@@ -28,9 +29,21 @@ namespace TcoCore
         public TcoDialog Dialog { get; set; } = new TcoDialog();
         protected override async void Queue(IsDialog dialog) 
         {
-            
+
+            //dialog.GetType().FullName();
+            //var buildedComponentName = $"{name}{presentationName}View";
+            //componentService.GetComponent(buildedComponentName);
+            //consider other types of dialog
             dialog.Read();
-            Dialog = (TcoDialog)dialog;
+            try
+            {
+                Dialog = (TcoDialog)dialog;
+            }
+            catch 
+            {
+                //pass
+            }
+           
             OnProcessCompleted();
 
         }
