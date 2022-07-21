@@ -63,6 +63,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public async Task DeleteGroup(GroupData group)
         {
+            SelectedGroupN = null;
             await _groupManager.DeleteAsync(group.Name);
             StateHasChanged();
         }
