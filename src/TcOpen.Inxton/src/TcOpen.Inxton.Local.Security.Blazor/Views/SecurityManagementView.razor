@@ -1,0 +1,36 @@
+﻿@namespace TcOpen.Inxton.Local.Security.Blazor
+
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <div name="TabControl" class="w-100">
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                    <button type="button" class="nav-link @((selected == 0) ? "active" : "")" @onclick="() => selected = 0"><b>User Management</b></button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link @((selected == 1) ? "active" : "")" @onclick="() => selected = 1"><b>Group Management</b></button>
+                </li>
+            </ul>
+            <div class="content">
+                @switch (@selected)
+                {
+                    case 0:
+                        <UserManagementView @ref="@userManagementView"></UserManagementView>
+                        break;
+                    case 1:
+                        <GroupManagementView @ref="@groupManagementView"></GroupManagementView>
+                        break;
+                }
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    int selected = 0;
+    private UserManagementView userManagementView { get; set; }
+    private GroupManagementView groupManagementView { get; set; }
+}

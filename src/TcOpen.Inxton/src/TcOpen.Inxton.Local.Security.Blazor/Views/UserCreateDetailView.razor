@@ -1,7 +1,7 @@
 ﻿@page "/Identity/Account/Register"
 @inject NavigationManager _navigationManager
 @inject UserManager<User> _userManager
-@inject BlazorGroupManager _groupManager
+@inject BlazorRoleGroupManager _roleGroupManager
 
 <AuthorizeView Roles="Administrator">
     <Authorized Context="Auth">
@@ -38,7 +38,7 @@
                         <label>Group</label>
                         <select class="form-select" aria-label="Default select example" @bind="@_model.Group">
                             <option selected>Choose group</option>
-                            @foreach (var group in _groupManager.GetAllGroup())
+                            @foreach (var group in _roleGroupManager.GetAllGroup())
                             {
                                 <option value="@group.Name">@group.Name</option>
                             }

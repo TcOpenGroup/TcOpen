@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var group in _groupManager.GetAllGroup())
+                @foreach (var group in _roleGroupManager.GetAllGroup())
                 {
                 <tr @onclick="@(() => GroupClicked(group))" class="@((SelectedGroupN != null) ? ((SelectedGroupN.Name == group.Name) ? "table-active" : "") : "")">
                     <th>@group.Name</th>

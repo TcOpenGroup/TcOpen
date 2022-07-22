@@ -33,7 +33,7 @@ namespace PlcHammer.Hmi.Blazor
 {
     public class Startup
     {
-        private static BlazorGroupManager groupManager;
+        private BlazorRoleGroupManager roleGroupManager;
         private bool mongoDB = true;
 
         public Startup(IConfiguration configuration)
@@ -67,10 +67,10 @@ namespace PlcHammer.Hmi.Blazor
                 groupRepo = SetUpGroupRepositoryJson();
             }
 
-            var roleManager = Roles.Create();
-            groupManager = new BlazorGroupManager(groupRepo);
+            roleGroupManager = new BlazorRoleGroupManager(groupRepo);
+            Roles.Create(roleGroupManager);
 
-            services.AddVortexBlazorSecurity(userRepo, roleManager, groupRepo, groupManager);
+            services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
 

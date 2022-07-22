@@ -3,19 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
-    public class BlazorGroupManager
+    public class BlazorRoleGroupManager
     {
         private IRepository<GroupData> groupRepo;
+        public List<Role> inAppRoleCollection { get; set; } = new List<Role>();
 
-        public BlazorGroupManager(IRepository<GroupData> groupRepo)
+        public BlazorRoleGroupManager(IRepository<GroupData> groupRepo)
         {
             this.groupRepo = groupRepo;
         }
 
-        public Task<IdentityResult> CreateAsync(string name)
+        public void CreateRole(Role role)
+        {
+            this.inAppRoleCollection.Add(role);
+        }
+
+        public Task<IdentityResult> CreateGroupAsync(string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -34,7 +41,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             return Task.FromResult(IdentityResult.Success);
         }
 
-        public Task<IdentityResult> DeleteAsync(string name)
+        public Task<IdentityResult> DeleteGroupAsync(string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -44,7 +51,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             return Task.FromResult(IdentityResult.Success);
         }
 
-        public Task<IdentityResult> AddRoleAsync(string group, string role)
+        public Task<IdentityResult> AddRoleToGroupAsync(string group, string role)
         {
             if (group == null)
                 throw new ArgumentNullException(nameof(group));
@@ -74,7 +81,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             return Task.FromResult(IdentityResult.Success);
         }
 
-        public Task<IdentityResult> AddRolesAsync(string group, IEnumerable<string> roles)
+        public Task<IdentityResult> AddRolesToGroupAsync(string group, IEnumerable<string> roles)
         {
             if (group == null)
                 throw new ArgumentNullException(nameof(group));
@@ -107,7 +114,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             return Task.FromResult(IdentityResult.Success);
         }
 
-        public Task<IdentityResult> RemoveRolesAsync(string group, IEnumerable<string> roles)
+        public Task<IdentityResult> RemoveRolesFromGroupAsync(string group, IEnumerable<string> roles)
         {
             if (group == null)
                 throw new ArgumentNullException(nameof(group));
@@ -140,7 +147,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             return Task.FromResult(IdentityResult.Success);
         }
 
-        public List<string> GetRoles(string group)
+        public List<string> GetRolesFromGroup(string group)
         {
             if (group == null)
                 return null;
@@ -163,7 +170,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             return new List<string>(data.Roles);
         }
 
-        public string GetRolesString(string group)
+        public string GetRolesFromGroupString(string group)
         {
             if (group == null)
                 return null;

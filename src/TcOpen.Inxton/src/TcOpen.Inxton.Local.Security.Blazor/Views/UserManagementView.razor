@@ -74,7 +74,7 @@
                 <label>Group</label>
                 <select class="form-select" aria-label="Default select example" @bind="@_model.Group">
                     <option selected>Choose group</option>
-                    @foreach (var group in _groupManager.GetAllGroup())
+                    @foreach (var group in _roleGroupManager.GetAllGroup())
                     {
                         <option value="@group.Name">@group.Name</option>
                     }
