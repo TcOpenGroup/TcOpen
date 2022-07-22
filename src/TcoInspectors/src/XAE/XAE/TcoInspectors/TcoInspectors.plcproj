@@ -132,9 +132,6 @@
     <PlaceholderResolution Include="Tc2_System">
       <Resolution>Tc2_System, 3.4.24.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc2_Utilities">
-      <Resolution>Tc2_Utilities, 3.3.47.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, 3.3.21.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
@@ -143,7 +140,7 @@
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="Tc2_Utilities,3.3.41.0,Beckhoff Automation GmbH">
+    <LibraryReference Include="Tc2_Utilities,3.3.47.0,Beckhoff Automation GmbH">
       <Namespace>Tc2_Utilities</Namespace>
     </LibraryReference>
   </ItemGroup>
