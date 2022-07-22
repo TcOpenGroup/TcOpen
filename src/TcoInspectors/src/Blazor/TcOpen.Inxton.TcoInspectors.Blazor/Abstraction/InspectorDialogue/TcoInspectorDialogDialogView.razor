@@ -1,18 +1,19 @@
-﻿@inherits RenderableViewModelComponentBase<TcoDialogDialogViewModel>
-@namespace TcoCore
+﻿@namespace TcoInspectors
+@inherits RenderableViewModelComponentBase<TcoInspectorDialogViewModel>
+<h3>TcoInspectorDialogDialogView</h3>
 
-<h1>TcoDialogViewModel</h1>
+
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="@_labelId">@ViewModel.Dialog._caption.Synchron</h5>
+                <h5 class="modal-title" id="@_labelId">Dialog inspectors</h5>
             </div>
             <div class="modal-body">
-                @ViewModel.Dialog._text.Synchron
+                Dialog inspectors
             </div>
             <div class="modal-footer">
-                @if (ViewModel.Dialog._hasYes.Synchron)
+                @*@if (ViewModel.Dialog._hasYes.Synchron)
                 {
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerYes()">Yes</button>
                 }
@@ -28,17 +29,13 @@
                 @if (ViewModel.Dialog._hasOK.Synchron)
                 {
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerOk()">Ok</button>
-                }
+                }*@
             </div>
         </div>
     </div>
 </div>
 
-
 @code {
-
-
-
     public string DialogId { get; set; }
     private string _labelId;
     protected override void OnInitialized()
@@ -46,5 +43,4 @@
         _labelId = "TcOpenDialogIdLabel";
         DialogId = "TcOpenDialogId";
     }
-
 }

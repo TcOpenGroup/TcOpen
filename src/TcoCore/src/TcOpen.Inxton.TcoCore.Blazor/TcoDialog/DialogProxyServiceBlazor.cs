@@ -15,39 +15,27 @@ using Vortex.Presentation.Blazor.Services;
 
 namespace TcoCore
 {
-    public delegate void Notify();  // delegate
+    public delegate void Notify(); 
     public class DialogProxyServiceBlazor : DialogProxyServiceBase
     {
-        private ComponentService componentService = new ComponentService();
-        public event Notify DialogInitializationCompleted; // event
-        
+        public event Notify DialogInitializationCompleted; 
         public DialogProxyServiceBlazor(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
             UpdateDialogs(observedObjects);
         }
-
-        public TcoDialog Dialog { get; set; } = new TcoDialog();
+        public string DialogId { get; set; } = "TcOpenDialogId";
+    
+        public IsDialog DialogVortex { get; set; }
         protected override async void Queue(IsDialog dialog) 
         {
-
-            //dialog.GetType().FullName();
-            //var buildedComponentName = $"{name}{presentationName}View";
-            //componentService.GetComponent(buildedComponentName);
-            //consider other types of dialog
-            dialog.Read();
-            try
+            DialogVortex = dialog;
+            await Task.Run(() =>
             {
-                Dialog = (TcoDialog)dialog;
-            }
-            catch 
-            {
-                //pass
-            }
-           
-            OnProcessCompleted();
-
+                DialogVortex.Read();
+                OnProcessCompleted();
+            });
         }
-        protected virtual void OnProcessCompleted() //protected virtual method
+        protected virtual void OnProcessCompleted()
         {
             //if ProcessCompleted is not null then call delegate
             DialogInitializationCompleted?.Invoke();
