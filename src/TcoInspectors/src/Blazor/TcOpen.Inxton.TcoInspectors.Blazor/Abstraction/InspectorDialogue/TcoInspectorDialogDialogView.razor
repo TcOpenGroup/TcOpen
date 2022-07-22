@@ -1,35 +1,23 @@
 ﻿@namespace TcoInspectors
 @inherits RenderableViewModelComponentBase<TcoInspectorDialogViewModel>
-<h3>TcoInspectorDialogDialogView</h3>
-
 
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="@_labelId">Dialog inspectors</h5>
+                <h5 class="modal-title" id="@_labelId">Inspector dialogue</h5>
             </div>
             <div class="modal-body">
-                Dialog inspectors
+                Inspection failed, you will need to decide what's next...
             </div>
             <div class="modal-footer">
-                @*@if (ViewModel.Dialog._hasYes.Synchron)
-                {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerYes()">Yes</button>
-                }
-                @if (ViewModel.Dialog._hasNo.Synchron)
-                {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerNo()">No</button>
-                }
-                @if (ViewModel.Dialog._hasCancel.Synchron)
-                {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerCancel()">Cancel</button>
-                }
-
-                @if (ViewModel.Dialog._hasOK.Synchron)
-                {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerOk()">Ok</button>
-                }*@
+              
+                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.Retry()">Retry</button>
+            
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.Terminate()">Terminate</button>
+               
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.Override()">Override</button>
+             
             </div>
         </div>
     </div>

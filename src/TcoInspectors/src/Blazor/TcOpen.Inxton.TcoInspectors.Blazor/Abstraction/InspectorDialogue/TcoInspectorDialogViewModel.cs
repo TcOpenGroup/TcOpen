@@ -12,6 +12,21 @@ namespace TcoInspectors
         public TcoInspectorDialog Dialog { get; private set; } = new TcoInspectorDialog();
         public override object Model { get => Dialog; set => Dialog = (TcoInspectorDialog)value; }
 
+        public bool RetryDisabled { get; set; } = false;
+        public void Retry()
+        {
+            Dialog._dialogueRetry.Synchron = true;
+            if (Dialog != null && !Dialog._isOverInspected.Synchron) RetryDisabled = true;
+
+        }
+        public void Terminate()
+        {
+            Dialog._dialogueTerminate.Synchron = true;
+        }
+        public void Override()
+        {
+            Dialog._dialogueOverride.Synchron = true;
+        }
         //public string Description
         //{
         //    get
