@@ -1,4 +1,4 @@
-﻿export function OpenTcoDialog() {
-    $('#TcOpenDialogId').modal('show');
+﻿export function OpenTcoDialog(id) {
+    $(id).modal('show');
 
 }

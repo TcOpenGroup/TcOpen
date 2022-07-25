@@ -18,12 +18,13 @@ namespace TcoCore
     public delegate void Notify(); 
     public class DialogProxyServiceBlazor : DialogProxyServiceBase
     {
-        public event Notify DialogInitializationCompleted; 
+        public event Notify DialogInitializationCompleted;
+        private ComponentService _componentService { get; set; } = new ComponentService();
         public DialogProxyServiceBlazor(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
             UpdateDialogs(observedObjects);
         }
-        public string DialogId { get; set; } = "TcOpenDialogId";
+        //public string DialogId { get; set; } = "TcOpenDialogId";
     
         public IsDialog DialogVortex { get; set; }
         protected override async void Queue(IsDialog dialog) 

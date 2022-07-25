@@ -1,6 +1,6 @@
 ﻿@namespace TcoInspectors
+@using TcoCore
 @inherits RenderableViewModelComponentBase<TcoInspectorDialogViewModel>
-
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -29,6 +29,7 @@
     protected override void OnInitialized()
     {
         _labelId = "TcOpenDialogIdLabel";
-        DialogId = "TcOpenDialogId";
+        //DialogId = "TcOpenDialogId";
+        DialogId = "TcoInspectorDialogDialogView";
     }
 }

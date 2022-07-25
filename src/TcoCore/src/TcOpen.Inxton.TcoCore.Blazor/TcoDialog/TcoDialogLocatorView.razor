@@ -1,4 +1,5 @@
 ﻿@namespace TcoCore
+@using Vortex.Presentation.Blazor.Services
 @using TcOpen.Inxton.TcoCore.Blazor.TcoDialog;
 
 @if(DialogService.DialogVortex != null)
@@ -24,7 +25,18 @@
     public async void OnDialogRaised()
     {
         await InvokeAsync(StateHasChanged);
-        await jsInterop.ShowTcoDialog();
+        var nameOfType = DialogService.DialogVortex.GetType().Name;
+        //this can be done better, change it in future - find a way to identify vortex object and make that a ID
+        if (nameOfType == "TcoDialog")
+        {
+            await jsInterop.ShowTcoDialog(TcoBaseDialogId);
+        }
+        else if (nameOfType == "TcoInspectorDialog")
+        {
+            await jsInterop.ShowTcoDialog(TcoInspectorDialogId);
+        }
     }
+    private string TcoBaseDialogId = "#TcoDialogDialogView";
+    private string TcoInspectorDialogId = "#TcoInspectorDialogDialogView";
 
 }
