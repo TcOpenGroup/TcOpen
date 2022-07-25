@@ -16,6 +16,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog
 
     public class JsInteropDialog
     {
+        public bool firstRenderComplete;
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
         public JsInteropDialog(IJSRuntime jsRuntime)
@@ -36,8 +37,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog
         {
             if (moduleTask.IsValueCreated)
             {
-                var module = await moduleTask.Value;
-                await module.DisposeAsync();
+                if (firstRenderComplete == true)
+                {
+                    var module = await moduleTask.Value;
+                    await module.DisposeAsync();
+                }
             }
         }
     }

@@ -16,6 +16,7 @@
     {
         if (firstRender)
         {
+            jsInterop.firstRenderComplete = true;
             DialogService.DialogInitializationCompleted += OnDialogRaised; // register with an event
         }
         await base.OnAfterRenderAsync(firstRender);
