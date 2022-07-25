@@ -95,7 +95,7 @@ ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_STRING THEN
 ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_WSTRING THEN
 	pAnyWString := Data.pValue;
 	wWString := pAnyWString^;
-	WSTRING_TO_STRING2(ADR(sString), ADR(wWstring), SIZEOF(wWString));
+	Tc2_EtherCAT.Tc2_Utilities.WSTRING_TO_STRING2(ADR(sString), ADR(wWstring), SIZEOF(wWString));
 	AnyToString := sString;
 	
 ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIMEOFDAY THEN
