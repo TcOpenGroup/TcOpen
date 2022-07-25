@@ -51,11 +51,25 @@ namespace TcoIo
                     {
                         isMaster = true;
                         currentPhysics = "Master";
+                        PresentationType = "TopologyDevice";
                         break;
                     }
-                    else if (item.Name.Contains("EtcSlaveBase"))
+                    else if (item.Name.Contains("EtcSlaveBoxBase"))
                     {
                         isSlave = true;
+                        PresentationType = "TopologyBoxM90";
+                        break;
+                    }
+                    else if (item.Name.Contains("EtcSlaveTerminalBase"))
+                    {
+                        isSlave = true;
+                        PresentationType = "TopologyTerminalM90";
+                        break;
+                    }
+                    else if (item.Name.Contains("EtcSlaveEndTerminalBase"))
+                    {
+                        isSlave = true;
+                        PresentationType = "TopologyEndTerminalM90";
                         break;
                     }
                 }

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R8_A2_EK1122_E74C4B62" Id="{a25fc362-d554-0e5c-39e5-8911129dc0e1}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "R8_AB0_EPP1322_0001R8_AB0_EPP1322_0001_1BB6BCA8290"}
+{attribute addProperty CRC "3880536930"}
+{attribute addProperty Size "290"}
+{attribute addProperty Name "R8_A2 (EK1122)"}
+TYPE R8_A2_EK1122_E74C4B62 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R8_AB0 (EPP1322-0001)"}
+	{attribute addProperty PreviousPort "R8_A2 (EK1122) : D"}
+	R8_AB0_EPP1322_0001 : R8_AB0_EPP1322_0001_1BB6BCA8;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

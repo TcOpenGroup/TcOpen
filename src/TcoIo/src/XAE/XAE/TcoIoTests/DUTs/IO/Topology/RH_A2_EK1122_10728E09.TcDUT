@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RH_A2_EK1122_10728E09" Id="{ad4c631c-4173-0037-2f51-338ce78913ba}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "RH_SAFETY_Flexi_Gateway_GETC1Flexi_Gateway_GETC1_429ECB705RH_A2_X2_EK1100RH_A2_X2_EK1100_67419BB169"}
+{attribute addProperty CRC "275942921"}
+{attribute addProperty Size "74"}
+{attribute addProperty Name "RH_A2 (EK1122)"}
+TYPE RH_A2_EK1122_10728E09 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RH_SAFETY (Flexi Gateway GETC1)"}
+	{attribute addProperty PreviousPort "RH_A2 (EK1122) : D"}
+	RH_SAFETY_Flexi_Gateway_GETC1 : Flexi_Gateway_GETC1_429ECB70;
+	{attribute addProperty Name "RH_A2_X2 (EK1100)"}
+	{attribute addProperty PreviousPort "RH_A2 (EK1122) : B"}
+	RH_A2_X2_EK1100 : RH_A2_X2_EK1100_67419BB1;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
