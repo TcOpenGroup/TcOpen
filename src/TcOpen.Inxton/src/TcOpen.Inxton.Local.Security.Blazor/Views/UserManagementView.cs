@@ -21,7 +21,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private BlazorGroupManager _groupManager { get; set; }
+        private BlazorRoleGroupManager _roleGroupManager { get; set; }
 
         private User SelectedUser { get; set; }
         private RegisterUserModel _model { get; set; }

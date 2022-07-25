@@ -50,14 +50,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         {
             get
             {
-                return _unitOfWork.RoleInAppRepository.InAppRoleCollection;
+                return _unitOfWork.RoleGroupManager.inAppRoleCollection;
             }
         }
-        private BlazorGroupManager _groupManager
+        private BlazorRoleGroupManager _roleGroupManager
         {
             get
             {
-                return _unitOfWork.GroupManager;
+                return _unitOfWork.RoleGroupManager;
             }
         }
 
@@ -429,9 +429,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            string groupName = user.Roles[0];
+            string groupName = "";
+            if (user.Roles.Length > 0)
+            {
+                groupName = user.Roles[0];
+            }
 
-            IList<string> roles = _groupManager.GetRoles(groupName);
+            IList<string> roles = _roleGroupManager.GetRolesFromGroup(groupName);
 
             if(roles == null)
             {
@@ -461,7 +465,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             
             var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
-            return Task.FromResult(_groupManager.GetRoles(user.Roles[0]).Contains(blazorRole.Name));
+            return Task.FromResult(_roleGroupManager.GetRolesFromGroup(user.Roles[0]).Contains(blazorRole.Name));
         }
 
 
@@ -479,7 +483,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
 
-            IList<User> usersInRole = Users.Where(x => _groupManager.GetRoles(x.Roles[0]).Contains(blazorRole.Name)).ToList();
+            IList<User> usersInRole = Users.Where(x => _roleGroupManager.GetRolesFromGroup(x.Roles[0]).Contains(blazorRole.Name)).ToList();
             return Task.FromResult(usersInRole);
         }
         // <summary>
