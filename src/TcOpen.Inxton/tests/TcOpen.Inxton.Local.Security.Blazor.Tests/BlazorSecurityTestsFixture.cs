@@ -15,14 +15,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
     public class BlazorSecurityTestsFixture : IDisposable
     {
         private InMemoryRepository<UserData> _inMemoryRepoUser;
-        private BlazorRoleManager _inMemoryRepoRole;
+        private BlazorRoleGroupManager _inMemoryRepoRole;
         public BlazorSecurityTestsFixture()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
-            _inMemoryRepoRole = new BlazorRoleManager();
+            //var groupRepo = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>("mongodb://localhost:27017", "HammerBlazor", "Groups"));
+            //_inMemoryRepoRole = new BlazorRoleGroupManager(groupRepo);
             Repository = new RepositoryService(_inMemoryRepoUser, _inMemoryRepoRole);
             UserStore = new UserStore(Repository);
-            RoleStore = new RoleStore(Repository);
             SeedData = new Seed();
             Repository.UserRepository.Create(SeedData.DefaultUser.Id, new UserData(SeedData.DefaultUser));
             Repository.UserRepository.Create(SeedData.RemoveUser.Id, new UserData(SeedData.RemoveUser));
@@ -39,7 +39,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
 
 
         public UserStore UserStore { get; set; }
-        public RoleStore RoleStore { get; set; }
       
         public Seed SeedData { get; set; }
         public IRepositoryService Repository { get; set; }
@@ -47,7 +46,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         public void Dispose()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
-            _inMemoryRepoRole = new BlazorRoleManager();
+            //_inMemoryRepoRole = new BlazorRoleGroupManager();
             Repository = new RepositoryService(_inMemoryRepoUser, _inMemoryRepoRole);
         }
     }

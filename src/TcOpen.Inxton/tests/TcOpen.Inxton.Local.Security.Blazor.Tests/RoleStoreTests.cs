@@ -18,33 +18,29 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             this._fixture = fixture;
 
         }
+
         [Fact]
         public void CreateNewRole_Successfull()
         {
             //Arrange
             var newRole = new Role("TestRole", "TestGroup");
             //Act
-           _fixture.Repository.RoleInAppRepository.CreateRole(newRole);
-            var createdRole = _fixture.Repository.RoleInAppRepository.InAppRoleCollection.Find(x=>x.Name  == newRole.Name);
+            _fixture.Repository.RoleGroupManager.CreateRole(newRole);
+            var createdRole = _fixture.Repository.RoleGroupManager.inAppRoleCollection.Find(x=>x.Name  == newRole.Name);
             //Assert
             Assert.NotNull(createdRole);
-           
         }
-
 
         [Fact]
         public void GetGroupString_Successfull()
         {
             //Arrange
             var group = "AdminGroup";
-            var expected = "Admin,Default";
+            var expected = "Administrator";
             //Act
-            var groupString = _fixture.Repository.RoleInAppRepository.GetGroupRoleString(group);
-            
+            var groupString = _fixture.Repository.RoleGroupManager.GetRolesFromGroupString(group);
             //Assert
-            Assert.Equal(expected,groupString);
-
+            Assert.Equal(expected, groupString);
         }
-
     }
 }

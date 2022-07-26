@@ -2,6 +2,9 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
+			<Settings MaxCpus="2" NonWinCpus="1">
+				<Cpu CpuId="1"/>
+			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -13,7 +16,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{E1A3BB78-5E60-4D4D-945B-594757F57C84}" Name="TcoInspectors" PrjFilePath="TcoInspectors\TcoInspectors.plcproj" TmcFilePath="TcoInspectors\TcoInspectors.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoInspectors\TcoInspectors.tmc" TmcHash="{193C2207-DCD0-6A23-A073-A1B945D3135C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoInspectors\TcoInspectors.tmc" TmcHash="{3451460E-F761-1E25-3E68-079F2E646A94}">
 					<Name>TcoInspectors Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -33,7 +36,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{E673B74A-2441-4259-BB0C-1ACE02A8C111}" Name="TcoInspectorsTests" PrjFilePath="TcoInspectorsTests\TcoInspectorsTests.plcproj" TmcFilePath="TcoInspectorsTests\TcoInspectorsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoInspectorsTests\TcoInspectorsTests.tmc" TmcHash="{05FD2AF7-B5F7-0D0E-A077-CC2686EC1804}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoInspectorsTests\TcoInspectorsTests.tmc" TmcHash="{6A7B6949-0B1B-7BEF-0BCF-FE237F3DDEE4}">
 					<Name>TcoInspectorsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

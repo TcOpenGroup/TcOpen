@@ -33,6 +33,9 @@ namespace PlcHammer.Hmi.Blazor
 {
     public class Startup
     {
+        private BlazorRoleGroupManager roleGroupManager;
+        private bool mongoDB = true;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -44,33 +47,41 @@ namespace PlcHammer.Hmi.Blazor
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-          
             services.AddRazorPages();
             services.AddServerSideBlazor();
           
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
 
-            /*MongoDb repositories for security*/
-            //var userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "HammerBlazor", "Users"));
-            //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
+            IRepository<UserData> userRepo;
+            IRepository<GroupData> groupRepo;
+            if(mongoDB) /*MongoDb repositories for security*/
+            {
+                userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "HammerBlazor", "Users"));
+                //var roleRepo = new MongoDbRepository<RoleModel>(new MongoDbRepositorySettings<RoleModel>("mongodb://localhost:27017", "HammerBlazor", "Roles"));
+                groupRepo = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>("mongodb://localhost:27017", "HammerBlazor", "Groups"));
+            }
+            else /*Json repositories for security*/
+            {
+                userRepo = SetUpUserRepositoryJson();
+                groupRepo = SetUpGroupRepositoryJson();
+            }
 
-            /*Json repositories for security*/
-            //var userRepo = SetUpUserRepositoryJson();
-            var userRepo = SetUpUserRepositoryMongo();
+            roleGroupManager = new BlazorRoleGroupManager(groupRepo);
+            Roles.Create(roleGroupManager);
 
-
-            var roleManager = Roles.Create();
-            services.AddVortexBlazorSecurity(userRepo,roleManager);
-
+            services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
 
-            /*Json repositories for data*/
-            //SetUpJsonRepositories();
-
-            /*Mongo repositories for data*/
-            SetUpMongoDatabase();
+            if (mongoDB)/*Mongo repositories for data*/
+            {
+                SetUpMongoDatabase();
+            }
+            else /*Json repositories for data*/
+            {
+                SetUpJsonRepositories();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -167,11 +178,17 @@ namespace PlcHammer.Hmi.Blazor
             return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "UsersBlazor")));
         }
 
-        private static IRepository<UserData> SetUpUserRepositoryMongo()
+        private static IRepository<GroupData> SetUpGroupRepositoryJson()
         {
-           
-            return new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "BlazorUsers"));
-           
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<GroupData>(new JsonRepositorySettings<GroupData>(Path.Combine(repositoryDirectory, "GroupsBlazor")));
         }
     }
 }

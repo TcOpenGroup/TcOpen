@@ -20,7 +20,7 @@
 ]]></Declaration>
     </Method>
     <Method Name="NowLocalAsTIMESTRUCT" Id="{faf62912-5ac6-0765-13dd-eae44285ed7f}">
-      <Declaration><![CDATA[METHOD NowLocalAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+      <Declaration><![CDATA[METHOD NowLocalAsTIMESTRUCT : Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT
 ]]></Declaration>
     </Method>
     <Method Name="NowUTC" Id="{66b88e73-4408-05c1-18eb-a65390fa484d}">
@@ -28,7 +28,7 @@
 ]]></Declaration>
     </Method>
     <Method Name="NowUTCAsTIMESTRUCT" Id="{f75b99b9-fb58-07f6-0e63-76fe2d08bada}">
-      <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+      <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT
 ]]></Declaration>
     </Method>
     <Method Name="TickClock" Id="{317ccaa2-fed5-0818-37bf-03f24bf02b0d}">

@@ -368,10 +368,6 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="Tc2_EtherCAT">
-      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_EtherCAT</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -380,49 +376,34 @@
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc2_Utilities">
-      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_Utilities</Namespace>
-      <Parameters>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>CMAXCHARACTERS</Key>
-          <Value>10000</Value>
-        </Parameter>
-      </Parameters>
-    </PlaceholderReference>
-    <PlaceholderReference Include="Tc3_JsonXml">
-      <DefaultResolution>Tc3_JsonXml, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc3_JsonXml</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderResolution Include="Tc2_EtherCAT">
-      <Resolution>Tc2_EtherCAT, 3.3.16.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc2_Standard">
-      <Resolution>Tc2_Standard, 3.3.3.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_System">
-      <Resolution>Tc2_System, 3.4.24.0 (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_System, * (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Utilities">
       <Resolution>Tc2_Utilities, 3.3.47.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc3_JsonXml">
-      <Resolution>Tc3_JsonXml, 3.3.15.0 (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
-      <Resolution>Tc3_Module, 3.3.21.0 (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoCore.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="Tc2_EtherCAT,newest,Beckhoff Automation GmbH">
+      <Namespace>Tc2_EtherCAT</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="Tc3_JsonXml,newest,Beckhoff Automation GmbH">
+      <Namespace>Tc3_JsonXml</Namespace>
+    </LibraryReference>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

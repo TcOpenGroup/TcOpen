@@ -1,19 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages;
+using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
     public partial class UserManagementView
     {
-
         private class RoleData
         {
             public RoleData(Role role) 
@@ -22,48 +16,30 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             }
             public Role Role { get; set; }
             public bool IsSelected { get; set; }
-         
         }
 
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private SignInManager<User> _signInManager { get; set; }
-        [Inject]
-        private BlazorRoleManager _roleManager { get; set; }
+        private BlazorRoleGroupManager _roleGroupManager { get; set; }
 
         private User SelectedUser { get; set; }
-        private IQueryable<User> Users { get; set; }
-        private IList<RoleData> AvailableRoles { get; set; }
-        private IList<RoleData> AssignedRoles { get; set; }
+        private RegisterUserModel _model { get; set; }
         public bool IsUserUpdated { get; set; }
 
-        public void RoleAdded()
-        {
-            AvailableRoles = GetAvailableRoles();
-            StateHasChanged();
-        }
-
-        public async Task AssignRoles()
-        {
-            await _userManager.AddToRolesAsync(SelectedUser, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
-            await RowClicked(SelectedUser);
-        }
-
-        public async Task ReturnRoles()
-        {
-            await _userManager.RemoveFromRolesAsync(SelectedUser, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
-            await RowClicked(SelectedUser);
-        }
-
-        public string SelectedGroup { get; set; }
-        public async Task RowClicked(User user)
+        public void RowClicked(User user)
         {
             SelectedUser = user;
-            var userAssignedRoles = await _userManager.GetRolesAsync(user);
-            AssignedRoles = _roleManager.InAppRoleCollection.Where(p => userAssignedRoles.Any(p2 => p2 == p.Name)).Select(x=> new RoleData(x)).ToList(); 
-            AvailableRoles = GetAvailableRoles();
             IsUserUpdated = false;
+            //_model = new RegisterUserModel();
+
+            _model.Username = user.UserName;
+            _model.Password = "password";
+            _model.ConfirmPassword = "password";
+            _model.CanUserChangePassword = user.CanUserChangePassword;
+            _model.Email = user.Email;
+            _model.Group = user.Roles[0];
+
             StateHasChanged();
         }
 
@@ -72,50 +48,33 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             SelectedUser = null;
         }
 
-        private IList<RoleData> GetAvailableRoles() =>
-            _roleManager.InAppRoleCollection
-                .Where(x => !AssignedRoles.Select(x => x.Role.Name).Contains(x.Name))
-                .Select(x => new RoleData(x))
-                .ToList();
-
-        
-
         public async Task DeleteUser(User user)
         {
             await _userManager.DeleteAsync(user);
             SelectedUser = null;
         }
 
-        public async Task OnAddGroupClicked(string selectedGroup)
+        private async void OnValidUpdate()
         {
-            var filtered = AvailableRoles.Where(x => x.Role.DefaultGroup == selectedGroup);
-            foreach (var item in AvailableRoles)
+            if (_model.Password != "password")
             {
-                if(filtered.Contains(item))
-                    item.IsSelected = true;
+                SelectedUser.PasswordHash = _userManager.PasswordHasher.HashPassword(SelectedUser, _model.Password);
             }
-            await AssignRoles();
-            
-        }
-
-        public async Task OnRemoveGroupClicked(string selectedGroup)
-        {
-            var filtered = AssignedRoles.Where(x => x.Role.DefaultGroup == selectedGroup);
-            foreach (var item in AssignedRoles)
+            SelectedUser.UserName = _model.Username;
+            SelectedUser.CanUserChangePassword = _model.CanUserChangePassword;
+            SelectedUser.Email = _model.Email;
+            SelectedUser.Roles = new string[1] { _model.Group };
+            var result = await _userManager.UpdateAsync(SelectedUser);
+            if (result.Succeeded)
             {
-                if (filtered.Contains(item))
-                    item.IsSelected = true;
+                IsUserUpdated = true;
             }
-            await ReturnRoles();
-
         }
 
-
-        public async Task UpdateUser(User user)
+        protected override void OnInitialized()
         {
-            await _userManager.UpdateAsync(user);
-            IsUserUpdated = true;
+            IsUserUpdated = false;
+            _model = new RegisterUserModel();
         }
-
     }
 }
