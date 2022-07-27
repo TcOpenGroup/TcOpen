@@ -28,15 +28,15 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public GroupData SelectedGroupN { get; set; }
         public string newGroupName { get; set; }
 
-        public async Task AssignRoles()
+        public void AssignRoles()
         {
-            await _roleGroupManager.AddRolesToGroupAsync(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.AddRolesToGroup(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
         }
 
-        public async Task ReturnRoles()
+        public void ReturnRoles()
         {
-            await _roleGroupManager.RemoveRolesFromGroupAsync(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.RemoveRolesFromGroup(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
         }
 
@@ -53,16 +53,16 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             SelectedGroupN = null;
         }
 
-        public async Task CreateGroup()
+        public void CreateGroup()
         {
-            await _roleGroupManager.CreateGroupAsync(newGroupName);
+            _roleGroupManager.CreateGroup(newGroupName);
             StateHasChanged();
         }
 
-        public async Task DeleteGroup(GroupData group)
+        public void DeleteGroup(GroupData group)
         {
             SelectedGroupN = null;
-            await _roleGroupManager.DeleteGroupAsync(group.Name);
+            _roleGroupManager.DeleteGroup(group.Name);
             StateHasChanged();
         }
     }

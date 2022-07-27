@@ -15,7 +15,7 @@ using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 {
-    public class UserStore:
+    public class UserStore :
         IUserStore<User>,
         IUserPasswordStore<User>,
         IUserRoleStore<User>,
@@ -104,7 +104,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 throw new ArgumentNullException(nameof(user));
 
             return Task.FromResult(user.UserName);
-        }  
+        }
         /// <summary>
         /// Sets the given <paramref name="userName" /> for the specified <paramref name="user"/>.
         /// </summary>
@@ -179,7 +179,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             }
             catch (DuplicateIdException)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} already exists."}));
+                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} already exists." }));
             }
 
             return Task.FromResult(IdentityResult.Success);
@@ -214,7 +214,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 {
                     return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
                 }
-                
+
                 _unitOfWork.UserRepository.Update(user.NormalizedUserName, userData);
             }
             catch (UnableToLocateRecordId)
@@ -266,7 +266,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             {
                 user = null;
             }
-            
+
 
             return Task.FromResult(user);
         }
@@ -295,8 +295,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             {
                 user = null;
             }
-           
-            
+
+
             return Task.FromResult(user);
         }
         /// <summary>
@@ -437,7 +437,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             IList<string> roles = _roleGroupManager.GetRolesFromGroup(groupName);
 
-            if(roles == null)
+            if (roles == null)
             {
                 roles = new List<string>();
             }
@@ -463,8 +463,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
-            
+
             var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
+            if (blazorRole == null)
+                throw (new Exception("Role doesn't exists"));
             return Task.FromResult(_roleGroupManager.GetRolesFromGroup(user.Roles[0]).Contains(blazorRole.Name));
         }
 
@@ -483,7 +485,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
 
-            IList<User> usersInRole = Users.Where(x => _roleGroupManager.GetRolesFromGroup(x.Roles[0]).Contains(blazorRole.Name)).ToList();
+            IList<User> usersInRole = null;
+            usersInRole = Users.Where(x => x.Roles.Length > 0).Where(x => _roleGroupManager.GetAllGroup().Select(x => x.Name).Contains(x.Roles[0])).Where(x => _roleGroupManager.GetRolesFromGroup(x.Roles[0]).Contains(blazorRole.Name)).ToList();
             return Task.FromResult(usersInRole);
         }
         // <summary>
@@ -545,6 +548,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             return Task.FromResult((IList<User>)new List<User>());
         }
 
-        
+
     }
 }
