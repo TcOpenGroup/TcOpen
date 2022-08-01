@@ -21,6 +21,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         [Inject]
         private BlazorRoleGroupManager _roleGroupManager { get; set; }
+        [Inject]
+        private BlazorAlertManager _alertManager { get; set; }
 
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
@@ -55,14 +57,30 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public async Task CreateGroup()
         {
-            await _roleGroupManager.CreateGroupAsync(newGroupName);
+            var result = await _roleGroupManager.CreateGroupAsync(newGroupName);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully created!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not created!");
+            }
             StateHasChanged();
         }
 
         public async Task DeleteGroup(GroupData group)
         {
             SelectedGroupN = null;
-            await _roleGroupManager.DeleteGroupAsync(group.Name);
+            var result = await _roleGroupManager.DeleteGroupAsync(group.Name);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully deleted!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not deleted!");
+            }
             StateHasChanged();
         }
     }
