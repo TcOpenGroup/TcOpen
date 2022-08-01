@@ -1,200 +1,127 @@
 ﻿@namespace TcOpen.Inxton.Local.Security.Blazor
 
-
-
-
-
-
-<div class="container-fluid">
-
-
-
-    <div class="row ">
+<div class="card" style="min-height: 20vh; max-height: 40vh">
+    <div class="card-header">
         <h4>List of users:</h4>
-
-        <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">Can change password</th>
-                        <th scope="col">Created</th>
-                        <th scope="col">Modified</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in _userManager.Users)
-                    {
-                        <tr @onclick="@(() => RowClicked(user))">
-                            <th>@user.UserName</th>
-                            <td>@user.CanUserChangePassword</td>
-                            <td>Created</td>
-                            <td>Modified</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
     </div>
-    <a href="Identity/Account/Register" class="btn btn-primary my-2" style="width:150px">
-        Create new user
-    </a>
-    @if (SelectedUser != null)
-    {
-        
-        <div class="row">
-       
-            <div class="card">
-                <h4>Selected user:</h4>
-                <div class="row card-body">
-
-                    <div style="display: flex; justify-content: flex-end">
-                        <button type="button" class="btn-close" style="float: right;" @onclick="@(() => CloseUserDetail())"></button>
-                    </div>
-
-
-                    <EditForm Model="@SelectedUser">
-                        <DataAnnotationsValidator />
-                        <div class="form-group">
-                            <label>Username</label>
-                            <p class="form-control">@SelectedUser.UserName</p>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Email</label>
-                            <InputText @bind-Value="SelectedUser.Email" class="form-control" />
-
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label>CanUserChangePassword</label>
-                            </div>
-                            <InputCheckbox @bind-Value="SelectedUser.CanUserChangePassword" class="form-check-input " />
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Group</label>
-                            <select class="form-select" aria-label="Default select example" @bind="@SelectedGroup">
-                                <option selected>Choose group</option>
-                                @foreach (var groupName in _roleManager.InAppGroupCollection)
-                                {
-                                    <option value="@groupName">@groupName</option>
-                                }
-
-                            </select>
-                            <button class="btn btn-primary m-2" @onclick="@(() => OnAddGroupClicked(SelectedGroup))">Assign group of roles</button>
-                            <button class="btn btn-primary m-2" @onclick="@(() => OnRemoveGroupClicked(SelectedGroup))">Remove group of roles</button>
-                        </div>
-                    </EditForm>
-
-
-
-                </div>
-
-                <div class="row card-body  align-items-center">
-                    <div class="col">
-                        <h5>Available roles:</h5>
-                        <div class="card "
-                             style=" height: 300px !important; overflow: auto;">
-
-                            @if (AvailableRoles != null)
-                            {
-                                <div class="list-group p-2">
-                                    @foreach (var role in AvailableRoles)
-                                    {
-                                        <label class="list-group-item mx-2">
-                                            <input class="form-check-input me-1"
-                                                   type="checkbox"
-                                                   @bind="role.IsSelected">
-                                            @role.Role.Name
-                                        </label>
-                                    }
-
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div class="col-1 " style="width:70px">
-                        <div>
-                            <button class="btn btn-primary  m-1"
-                                    @onclick="@(() => AssignRoles())">
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </button>
-                            <button class="btn btn-primary  m-1"
-                                    @onclick="@(() => ReturnRoles())">
-                                <i class="fas fa-long-arrow-alt-left"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <h5>Assigned roles:</h5>
-                        <div class="card"
-                             style="height: 300px !important; overflow: auto;">
-
-                            @if (AssignedRoles != null)
-                            {
-                                <div class="list-group p-2">
-                                    @foreach (var role in AssignedRoles)
-                                    {
-                                        <label class="list-group-item mx-2">
-                                            <input class="form-check-input me-1"
-                                                   type="checkbox"
-                                                   @bind="role.IsSelected">
-                                            @role.Role.Name
-                                        </label>
-                                    }
-
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <button type="button" class="btn btn-primary m-2 col-2" style="width:150px" @onclick="@(() => UpdateUser(SelectedUser))">
-                        Update
-                    </button>
-                    <button type="button" class="btn btn-danger m-2 col-2" style="width:150px" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        Delete
-                    </button>
-                </div>
-                @if (IsUserUpdated)
+    <div class="card-body overflow-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Can change password</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in _userManager.Users)
                 {
-                    <h4 style="color:green">User succesfully updated!</h4>
+                <tr @onclick="@(() => RowClicked(user))" class="@((SelectedUser != null) ? ((SelectedUser.UserName == user.UserName) ? "table-active" : "") : "")">
+                    <th>@user.UserName</th>
+                    <td>@user.CanUserChangePassword</td>
+                    <td>Created</td>
+                    <td>Modified</td>
+                </tr>
                 }
-            </div>
-
-
-
-
-        </div>
-    }
+            </tbody>
+        </table>
+    </div>
 </div>
-
+<a class="btn btn-primary mt-4" role="button" href="Identity/Account/Register">Create new user</a>
 @if (SelectedUser != null)
 {
-    <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="card mt-4">
+    <div class="card-header">
+        <div class="d-flex">
+            <h4 class="me-auto">Selected user:</h4>
+            <button type="button" class="btn-close align-self-center" @onclick="@(() => CloseUserDetail())"></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <EditForm Model="@_model" OnValidSubmit="OnValidUpdate">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Username</label>
+                <InputText @bind-Value="_model.Username" type="text" class="form-control" disabled />
+                <ValidationMessage For="@(() => _model.Username)" />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <InputText @bind-Value="_model.Password" type="password" class="form-control" />
+                <ValidationMessage For="@(() => _model.Password)" />
+            </div>
+
+            <div class="form-group">
+                <label>Confirm password</label>
+                <InputText @bind-Value="_model.ConfirmPassword" type="password" class="form-control" />
+                <ValidationMessage For="@(() => _model.ConfirmPassword)" />
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <InputText @bind-Value="_model.Email" type="email" class="form-control" />
+                <ValidationMessage For="@(() => _model.Email)" />
+            </div>
+
+            <div class="form-check form-switch">
+                <InputCheckbox @bind-Value="_model.CanUserChangePassword" class="form-check-input" type="checkbox" id="checkBoxCanUserChangePassword" />
+                <label class="form-check-label" for="checkBoxCanUserChangePassword">Can User Change Password</label>
+            </div>
+
+            <div class="form-group">
+                <label>Group</label>
+                <select class="form-select" aria-label="Default select example" @bind="@_model.Group">
+                    <option selected>Choose group</option>
+                    @foreach (var group in _roleGroupManager.GetAllGroup())
+                    {
+                        <option value="@group.Name">@group.Name</option>
+                    }
+
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary m-2">Update</button>
+                <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+            </div>
+        </EditForm>
+        @if (IsUserUpdated)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </symbol>
+            </svg>
+            <div class="alert alert-success alert-dismissible d-flex align-items-center fade show" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+                <div>
+                    User succesfully updated!
                 </div>
-                <div class="modal-body">
-                    <h6>Do you want to delete user @SelectedUser.UserName?</h6>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger m-2" data-bs-dismiss="modal" @onclick="@(() => DeleteUser(SelectedUser))">Delete</button>
-                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+</div>
+}
+           
+@if (SelectedUser != null)
+{
+<div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Do you want to delete user @SelectedUser.UserName?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger m-2" data-bs-dismiss="modal" @onclick="@(() => DeleteUser(SelectedUser))">Delete</button>
             </div>
         </div>
     </div>
+</div>
 }
-
-
-    <!-- Button trigger modal -->
