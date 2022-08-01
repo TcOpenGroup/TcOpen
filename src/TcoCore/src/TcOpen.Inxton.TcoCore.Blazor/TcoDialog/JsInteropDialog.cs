@@ -25,12 +25,15 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog
                "import", "./_content/TcOpen.Inxton.TcoCore.Blazor/TcoDialog.js").AsTask());
         }
 
-        public async ValueTask<string> ShowTcoDialog(string dialogId)
+        public async ValueTask<bool> ShowTcoDialog(string dialogId)
         {
             var module = await moduleTask.Value;
-            //var id = "#TcoDialogDialogView";
-            var id =  dialogId;
-            return await module.InvokeAsync<string>("OpenTcoDialog", id);
+            return await module.InvokeAsync<bool>("OpenTcoDialog", dialogId);
+        }
+        public async ValueTask<bool> HideTcoDialog(string dialogId)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<bool>("HideTcoDialog", dialogId);
         }
 
         public async ValueTask DisposeAsync()

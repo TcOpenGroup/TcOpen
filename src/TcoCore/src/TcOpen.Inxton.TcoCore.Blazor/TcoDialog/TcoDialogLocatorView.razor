@@ -1,5 +1,4 @@
 ﻿@namespace TcoCore
-@using Vortex.Presentation.Blazor.Services
 @using TcOpen.Inxton.TcoCore.Blazor.TcoDialog;
 
 @if(DialogService.DialogVortex != null)
@@ -36,6 +35,7 @@
         {
             await jsInterop.ShowTcoDialog(TcoInspectorDialogId);
         }
+
     }
     private string TcoBaseDialogId = "#TcoDialogDialogView";
     private string TcoInspectorDialogId = "#TcoInspectorDialogDialogView";

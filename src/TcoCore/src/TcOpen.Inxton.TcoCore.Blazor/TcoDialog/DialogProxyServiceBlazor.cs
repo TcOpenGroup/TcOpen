@@ -29,7 +29,6 @@ namespace TcoCore
         public IsDialog DialogVortex { get; set; }
         protected override async void Queue(IsDialog dialog) 
         {
-            
             await Task.Run(() =>
             {
                 DialogVortex = dialog;

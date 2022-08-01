@@ -35,7 +35,7 @@ namespace PlcHammer.Hmi.Blazor
     public class Startup
     {
         private BlazorRoleGroupManager roleGroupManager;
-        private bool mongoDB = true;
+        private bool mongoDB = false;
 
         public Startup(IConfiguration configuration)
         {
