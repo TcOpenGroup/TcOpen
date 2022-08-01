@@ -18,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using TcoCore;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
@@ -73,7 +74,7 @@ namespace PlcHammer.Hmi.Blazor
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
-
+            services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN }));
             if (mongoDB)/*Mongo repositories for data*/
             {
                 SetUpMongoDatabase();
