@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +21,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         [Inject]
         private BlazorRoleGroupManager _roleGroupManager { get; set; }
+        [Inject]
+        private BlazorAlertManager _alertManager { get; set; }
 
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
@@ -53,16 +55,32 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             SelectedGroupN = null;
         }
 
-        public void CreateGroup()
+        public async Task CreateGroup()
         {
-            _roleGroupManager.CreateGroup(newGroupName);
+            var result = await _roleGroupManager.CreateGroupAsync(newGroupName);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully created!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not created!");
+            }
             StateHasChanged();
         }
 
-        public void DeleteGroup(GroupData group)
+        public async Task DeleteGroup(GroupData group)
         {
             SelectedGroupN = null;
-            _roleGroupManager.DeleteGroup(group.Name);
+            var result = await _roleGroupManager.DeleteGroupAsync(group.Name);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully deleted!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not deleted!");
+            }
             StateHasChanged();
         }
     }
