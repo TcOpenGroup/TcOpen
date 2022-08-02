@@ -60,6 +60,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
                 userRepo.Create(user.NormalizedUserName, userEntity);
             }
             services.AddScoped<BlazorRoleGroupManager>(p => roleGroupManager);
+            services.AddScoped<BlazorAlertManager>();
             services.AddScoped<IRepositoryService, RepositoryService>(provider => new RepositoryService(userRepo, roleGroupManager));
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
         }

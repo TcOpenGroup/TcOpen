@@ -55,9 +55,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             SelectedGroupN = null;
         }
 
-        public async Task CreateGroup()
+        public void CreateGroup()
         {
-            var result = await _roleGroupManager.CreateGroupAsync(newGroupName);
+            var result = _roleGroupManager.CreateGroup(newGroupName);
             if (result.Succeeded)
             {
                 _alertManager.addAlert("success", "Group succesfully created!");
@@ -69,10 +69,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             StateHasChanged();
         }
 
-        public async Task DeleteGroup(GroupData group)
+        public void DeleteGroup(GroupData group)
         {
             SelectedGroupN = null;
-            var result = await _roleGroupManager.DeleteGroupAsync(group.Name);
+            var result = _roleGroupManager.DeleteGroup(group.Name);
             if (result.Succeeded)
             {
                 _alertManager.addAlert("success", "Group succesfully deleted!");
