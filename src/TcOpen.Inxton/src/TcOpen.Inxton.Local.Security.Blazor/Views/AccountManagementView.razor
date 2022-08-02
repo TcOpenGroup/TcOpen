@@ -1,6 +1,7 @@
 ﻿@page "/Identity/Account/Manage"
 @inject UserManager<User> _userManager
 @inject SignInManager<User> _signInManager
+@inject BlazorAlertManager _alertManager
 
 <AuthorizeView>
     <Authorized>
@@ -16,16 +17,16 @@
                     </div>
                     @if (_user.CanUserChangePassword)
                     {
-                    <div class="form-group">
-                        <label>Password</label>
-                        <InputText @bind-Value="_model.Password" type="password" class="form-control" />
-                        <ValidationMessage For="@(() => _model.Password)" />
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm password</label>
-                        <InputText @bind-Value="_model.ConfirmPassword" type="password" class="form-control" />
-                        <ValidationMessage For="@(() => _model.ConfirmPassword)" />
-                    </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <InputText @bind-Value="_model.Password" type="password" class="form-control" />
+                            <ValidationMessage For="@(() => _model.Password)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <InputText @bind-Value="_model.ConfirmPassword" type="password" class="form-control" />
+                            <ValidationMessage For="@(() => _model.ConfirmPassword)" />
+                        </div>
                     }
                     <div class="form-group">
                         <label>Email</label>
@@ -34,21 +35,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary m-2">Update</button>
                 </EditForm>
-                @if (IsUserUpdated)
-                {
-                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </symbol>
-                </svg>
-                <div class="alert alert-success alert-dismissible d-flex align-items-center" role="alert">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
-                    <div>
-                        User succesfully updated!
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                }
             </div>
         </div>
     </Authorized>
@@ -60,7 +46,6 @@
 @code {
     private RegisterUserModel _model { get; set; }
     private User _user { get; set; }
-    private bool IsUserUpdated { get; set; }
 
     private async void OnValidUpdate()
     {
@@ -73,13 +58,15 @@
         var result = await _userManager.UpdateAsync(_user);
         if (result.Succeeded)
         {
-            IsUserUpdated = true;
+            _alertManager.addAlert("success", "User succesfully updated!");
+        } else
+        {
+            _alertManager.addAlert("warning", "User was not updated!");
         }
     }
 
     protected override async void OnInitialized()
     {
-        IsUserUpdated = false;
         _model = new RegisterUserModel();
 
         _user = await _userManager.GetUserAsync(_signInManager.Context.User);
