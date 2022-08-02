@@ -1,0 +1,16 @@
+﻿@namespace TcoInspectors
+@inherits RenderableComplexComponentBase<TcoAnalogueInspector>
+
+<h3>TcoAnalogueInspectorDisplaylView</h3>
+
+<div class="card" style="width: 18rem;">
+    <a data-bs-toggle="collapse" href="#collapseInspector" role="button" aria-expanded="false" aria-controls="collapseInspector">
+        <div class="card-header">
+            Featured
+        </div>
+    </a>
+    <div class="card-body collapse" id="collapseInspector">
+        <h5 class="card-title">Card title</h5>
+        <p>@Component._data.Result.Cyclic</p>
+    </div>
+</div>
