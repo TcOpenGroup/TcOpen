@@ -14,20 +14,20 @@
             <div class="modal-footer">
                 @if (ViewModel.Dialog._hasYes.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.DialogAnswerYes()">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerYes()">Yes</button>
                 }
                 @if (ViewModel.Dialog._hasNo.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.DialogAnswerNo()">No</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerNo()">No</button>
                 }
                 @if (ViewModel.Dialog._hasCancel.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.DialogAnswerCancel()">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerCancel()">Cancel</button>
                 }
 
                 @if (ViewModel.Dialog._hasOK.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.DialogAnswerOk()">Ok</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerOk()">Ok</button>
                 }
             </div>
         </div>
@@ -50,22 +50,22 @@
 
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            //ViewModel.Dialog._answer.CycliPropertyChanged += new PropertyChangedEventHandler(HandleAnswerChanged);
-            ViewModel.DialogCloseEvent += HandleAnswerChanged;
-        }
-        await base.OnAfterRenderAsync(firstRender);
-    }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        //ViewModel.Dialog._answer.CycliPropertyChanged += new PropertyChangedEventHandler(HandleAnswerChanged);
+    //        //ViewModel.DialogCloseEvent += HandleAnswerChanged;
+    //    }
+    //    await base.OnAfterRenderAsync(firstRender);
+    //}
 
-    protected async void HandleAnswerChanged()
-    {
-        await jsInterop.HideTcoDialog(_dialogCloseId);
-        await InvokeAsync(StateHasChanged);
-    }
+    //protected async void HandleAnswerChanged()
+    //{
+    //    await jsInterop.HideTcoDialog(_dialogCloseId);
+    //    await InvokeAsync(StateHasChanged);
+    //}
 
-   
+
 
 }

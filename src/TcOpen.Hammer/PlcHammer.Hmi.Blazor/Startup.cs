@@ -49,8 +49,9 @@ namespace PlcHammer.Hmi.Blazor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
-          
+            services.AddServerSideBlazor()
+                .AddHubOptions(hub => hub.MaximumReceiveMessageSize = 100 * 1024 * 1024);
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
 
