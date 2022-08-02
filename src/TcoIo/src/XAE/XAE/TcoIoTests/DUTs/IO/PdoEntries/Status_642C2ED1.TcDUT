@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Status_642C2ED1" Id="{eb07c28b-97d9-0a14-3aaa-c77d5e73c760}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL2258-0000-0017'}
+{attribute addProperty BoxType "EL2258-0000-0017"}
+{attribute addProperty Id "Output_short_circuitBOOL1Output_buffer_overflowBOOL1Output_stateBOOL1Input_cycle_counterBYTE1Output_order_feedbackUSINT1Events_in_output_bufferUSINT1"}
+{attribute addProperty CRC "1680617169"}
+{attribute addProperty Size "6"}
+TYPE Status_642C2ED1 :
+STRUCT
+	{attribute addProperty Name "Output_short_circuit"}
+	Output_short_circuit : BOOL;
+	{attribute addProperty Name "Output_buffer_overflow"}
+	Output_buffer_overflow : BOOL;
+	{attribute addProperty Name "Output_state"}
+	Output_state : BOOL;
+	{attribute addProperty Name "Input_cycle_counter"}
+	Input_cycle_counter : BYTE;
+	{attribute addProperty Name "Output_order_feedback"}
+	Output_order_feedback : USINT;
+	{attribute addProperty Name "Events_in_output_buffer"}
+	Events_in_output_buffer : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

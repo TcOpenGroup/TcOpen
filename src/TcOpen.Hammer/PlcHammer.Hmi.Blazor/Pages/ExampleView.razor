@@ -1,0 +1,55 @@
+﻿@inject BlazorRoleGroupManager _roleGroupManager
+
+<div class="container-fluid">
+    <div class="mt-2">
+        <AuthorizeView Roles="Administrator">
+            <Authorized>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>You can see this, only if you have role Administrator.</h4>
+                    </div>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Sorry, you dont have role Administrator.</h4>
+                    </div>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="@_roleGroupManager.GetRolesFromGroupString("AdminGroup")">
+            <div class="card">
+                <div class="card-body">
+                    <h4>You can see this, only if you have some role from AdminGroup</h4>
+                </div>
+            </div>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="automat_start, manual_start, process_settings_access">
+            <Authorized>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>You can see this, only if you have any of the roles: automat_start, manual_start, process_settings_access.</h4>
+                    </div>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Sorry, you dont have any of the roles: automat-start, manual-start, precess-settings-access.</h4>
+                    </div>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="@_roleGroupManager.GetRolesFromGroupString("Test")">
+            <div class="card">
+                <div class="card-body">
+                    <h4>You can see this, only if you have some role from Test</h4>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+</div>

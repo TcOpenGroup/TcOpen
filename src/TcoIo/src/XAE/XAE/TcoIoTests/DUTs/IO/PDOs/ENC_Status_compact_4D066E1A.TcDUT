@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="ENC_Status_compact_4D066E1A" Id="{4796a201-297b-0bb9-030a-bbd7c61fe0b9}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL7041-1000-0021'}
+{attribute addProperty BoxType "EL7041-1000-0021"}
+{attribute addProperty Id "StatusAT %I*Status_8CBE219F12Counter_valueAT %I*UINT2Latch_valueAT %I*UINT2"}
+{attribute addProperty CRC "1292267034"}
+{attribute addProperty Size "16"}
+TYPE ENC_Status_compact_4D066E1A EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : Status_8CBE219F;
+	{attribute addProperty Name "Counter_value"}
+	Counter_value AT %I* : UINT;
+	{attribute addProperty Name "Latch_value"}
+	Latch_value AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

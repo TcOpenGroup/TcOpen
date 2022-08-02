@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Inputs_23559BB0" Id="{c117b6b3-6023-0862-0523-4b5e335d641f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: AES-D-BC-ECAT-0000'}
+{attribute addProperty BoxType "AES-D-BC-ECAT-0000"}
+{attribute addProperty Id "digital_Data_IAT %I*ARRAY[0..31] OF USINT32"}
+{attribute addProperty CRC "1374483313"}
+{attribute addProperty Size "32"}
+TYPE Inputs_23559BB0 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "digital_Data_I"}
+	digital_Data_I AT %I* : ARRAY[0..31] OF USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

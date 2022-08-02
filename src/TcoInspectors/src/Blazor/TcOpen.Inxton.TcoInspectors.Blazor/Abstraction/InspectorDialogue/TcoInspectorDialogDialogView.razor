@@ -1,0 +1,35 @@
+﻿@namespace TcoInspectors
+@using TcoCore
+@inherits RenderableViewModelComponentBase<TcoInspectorDialogViewModel>
+<div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="@_labelId">Inspector dialogue</h5>
+            </div>
+            <div class="modal-body">
+                Inspection failed, you will need to decide what's next...
+            </div>
+            <div class="modal-footer">
+              
+                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.Retry()">Retry</button>
+            
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.Terminate()">Terminate</button>
+               
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.Override()">Override</button>
+             
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public string DialogId { get; set; }
+    private string _labelId;
+    protected override void OnInitialized()
+    {
+        _labelId = "TcOpenDialogIdLabel";
+        //DialogId = "TcOpenDialogId";
+        DialogId = "TcoInspectorDialogDialogView";
+    }
+}

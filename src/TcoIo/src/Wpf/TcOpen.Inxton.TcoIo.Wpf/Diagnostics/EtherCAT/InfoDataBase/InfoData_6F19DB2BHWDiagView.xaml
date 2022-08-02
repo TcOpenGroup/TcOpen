@@ -23,7 +23,7 @@
                     <ColumnDefinition Width="Auto" MinWidth="80"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"></TextBlock>
+                <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"/>
                 <local:InfoDataStateHWDiagView Grid.Column="1" DataContext="{Binding State}"/>
             </Grid>
         </Grid>

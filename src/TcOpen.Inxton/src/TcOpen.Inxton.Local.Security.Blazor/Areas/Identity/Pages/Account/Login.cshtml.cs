@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.Local.Security.Blazor.Stores;
+using Microsoft.AspNetCore.Components;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
 {
@@ -34,13 +35,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
         [BindProperty]
         public LoginUserModel Input { get; set; }
 
-
         public string ReturnUrl { get; set; }
 
         [TempData]
         public string ErrorMessage { get; set; }
-
-       
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -73,7 +71,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
-                
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
