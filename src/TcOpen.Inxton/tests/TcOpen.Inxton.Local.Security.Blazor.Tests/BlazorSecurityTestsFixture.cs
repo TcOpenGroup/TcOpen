@@ -49,7 +49,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         }
 
         public UserStore UserStore { get; set; }
-
         public Seed SeedData { get; set; }
 
         public IRepositoryService Repository { get; set; }

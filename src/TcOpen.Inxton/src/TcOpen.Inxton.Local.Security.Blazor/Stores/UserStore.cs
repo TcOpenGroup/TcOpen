@@ -463,7 +463,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
-
+            
             var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
