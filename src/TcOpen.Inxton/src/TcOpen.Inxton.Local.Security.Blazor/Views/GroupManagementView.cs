@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +20,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         }
 
         [Inject]
-        private BlazorRoleManager _roleManager { get; set; }
+        private BlazorRoleGroupManager _roleGroupManager { get; set; }
         [Inject]
-        private BlazorGroupManager _groupManager { get; set; }
+        private BlazorAlertManager _alertManager { get; set; }
 
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
@@ -30,23 +30,23 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public GroupData SelectedGroupN { get; set; }
         public string newGroupName { get; set; }
 
-        public async Task AssignRoles()
+        public void AssignRoles()
         {
-            await _groupManager.AddRolesAsync(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.AddRolesToGroup(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
         }
 
-        public async Task ReturnRoles()
+        public void ReturnRoles()
         {
-            await _groupManager.RemoveRolesAsync(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.RemoveRolesFromGroup(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
         }
 
         public void GroupClicked(GroupData group)
         {
             SelectedGroupN = group;
-            AssignedRoles = _groupManager.GetRoles(group.Name).Select(x => new RoleData(_roleManager.InAppRoleCollection.Where(x1 => x1.Name == x).FirstOrDefault())).ToList();
-            AvailableRoles = _roleManager.InAppRoleCollection.Where(x => !AssignedRoles.Select(x => x.Role.Name).Contains(x.Name)).Select(x => new RoleData(x)).ToList();
+            AssignedRoles = _roleGroupManager.GetRolesFromGroup(group.Name).Select(x => new RoleData(_roleGroupManager.inAppRoleCollection.Where(x1 => x1.Name == x).FirstOrDefault())).ToList();
+            AvailableRoles = _roleGroupManager.inAppRoleCollection.Where(x => !AssignedRoles.Select(x => x.Role.Name).Contains(x.Name)).Select(x => new RoleData(x)).ToList();
             StateHasChanged();
         }
 
@@ -55,16 +55,32 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             SelectedGroupN = null;
         }
 
-        public async Task CreateGroup()
+        public void CreateGroup()
         {
-            await _groupManager.CreateAsync(newGroupName);
+            var result = _roleGroupManager.CreateGroup(newGroupName);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully created!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not created!");
+            }
             StateHasChanged();
         }
 
-        public async Task DeleteGroup(GroupData group)
+        public void DeleteGroup(GroupData group)
         {
             SelectedGroupN = null;
-            await _groupManager.DeleteAsync(group.Name);
+            var result = _roleGroupManager.DeleteGroup(group.Name);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully deleted!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not deleted!");
+            }
             StateHasChanged();
         }
     }

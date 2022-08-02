@@ -1,48 +1,22 @@
 ﻿@page "/security"
-@using Microsoft.AspNetCore.Identity;
-@using TcOpen.Inxton.Local.Security
 
 <h3>Security</h3>
 
+<button class="btn btn-primary my-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Example</button>
+<div class="collapse my-3" id="collapseExample">
+    <ExampleView @ref="@exampleView"></ExampleView>
+</div>
+
 <AuthorizeView Roles="Administrator">
     <Authorized>
-        <div name="TabControl" class="w-100">
-            <ul class="nav nav-tabs mb-3">
-                @foreach (var item in types)
-                {
-                <li class="nav-item">
-                    @if (Array.IndexOf(types, item) == selected)
-                    {
-                    <button type="button" class="nav-link active"><b>@item.Name</b></button>
-                    }
-                    else
-                    {
-                    <button type="button" class="nav-link" @onclick="() => selected = Array.IndexOf(types, item)"><b>@item.Name</b></button>
-                    }
-                </li>
-                }
-            </ul>
-            <div class="content">
-                @GetRenderFragment(types[selected])
-            </div>
-        </div>
+        <SecurityManagementView @ref="@securityManagementView"></SecurityManagementView>
     </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
     </NotAuthorized>
 </AuthorizeView>
 
-@code{
-    RenderFragment GetRenderFragment(Type type)
-    {
-        RenderFragment renderFragment = renderTreeBuilder =>
-        {
-            renderTreeBuilder.OpenComponent(0, type);
-            renderTreeBuilder.CloseComponent();
-        };
-        return renderFragment;
-    }
-    int selected;
-    ComponentBase[] components = { new UserManagementView(), new GroupManagementView(), new ExampleView() };
-    Type[] types => components.Select(c => c.GetType()).ToArray();
+@code {
+    private SecurityManagementView securityManagementView { get; set; }
+    private ExampleView exampleView { get; set; }
 }

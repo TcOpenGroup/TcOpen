@@ -9,8 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.JSInterop;
 using PlcHammer.Hmi.Blazor.Data;
 using PlcHammer.Hmi.Blazor.Security;
+using PlcHammer.Hmi.Blazor.Shared;
 using PlcHammerConnector;
 using System;
 using System.Collections.Generic;
@@ -33,7 +35,7 @@ namespace PlcHammer.Hmi.Blazor
 {
     public class Startup
     {
-        private static BlazorGroupManager groupManager;
+        private BlazorRoleGroupManager roleGroupManager;
         private bool mongoDB = true;
 
         public Startup(IConfiguration configuration)
@@ -67,10 +69,10 @@ namespace PlcHammer.Hmi.Blazor
                 groupRepo = SetUpGroupRepositoryJson();
             }
 
-            var roleManager = Roles.Create();
-            groupManager = new BlazorGroupManager(groupRepo);
+            roleGroupManager = new BlazorRoleGroupManager(groupRepo);
+            Roles.Create(roleGroupManager);
 
-            services.AddVortexBlazorSecurity(userRepo, roleManager, groupRepo, groupManager);
+            services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
 

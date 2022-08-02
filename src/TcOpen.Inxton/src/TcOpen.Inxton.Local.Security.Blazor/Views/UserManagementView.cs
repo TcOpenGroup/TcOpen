@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.Security;
@@ -21,16 +22,16 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private BlazorGroupManager _groupManager { get; set; }
+        private BlazorRoleGroupManager _roleGroupManager { get; set; }
+        [Inject]
+        private BlazorAlertManager _alertManager { get; set; }
 
         private User SelectedUser { get; set; }
         private RegisterUserModel _model { get; set; }
-        public bool IsUserUpdated { get; set; }
 
         public void RowClicked(User user)
         {
             SelectedUser = user;
-            IsUserUpdated = false;
             //_model = new RegisterUserModel();
 
             _model.Username = user.UserName;
@@ -52,6 +53,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         {
             await _userManager.DeleteAsync(user);
             SelectedUser = null;
+            _alertManager.addAlert("success", "User succesfully deleted!");
         }
 
         private async void OnValidUpdate()
@@ -67,13 +69,16 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             var result = await _userManager.UpdateAsync(SelectedUser);
             if (result.Succeeded)
             {
-                IsUserUpdated = true;
+                _alertManager.addAlert("success", "User succesfully updated!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "User was not updated!");
             }
         }
 
         protected override void OnInitialized()
         {
-            IsUserUpdated = false;
             _model = new RegisterUserModel();
         }
     }

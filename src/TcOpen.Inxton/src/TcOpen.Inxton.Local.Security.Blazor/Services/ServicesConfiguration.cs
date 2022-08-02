@@ -17,11 +17,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
 {
     public static class ServicesConfiguration
     {
-        public static void AddVortexBlazorSecurity(this IServiceCollection services, 
+        public static void AddVortexBlazorSecurity(this IServiceCollection services,
             IRepository<UserData> userRepo,
-            BlazorRoleManager roleManager,
             IRepository<GroupData> groupRepo,
-            BlazorGroupManager groupManager)
+            BlazorRoleGroupManager roleGroupManager)
         {
             services.AddIdentity<User, Role>(identity =>
             {
@@ -36,33 +35,33 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
             .AddCustomStores()
             .AddDefaultTokenProviders();
 
-            roleManager.CreateRole(new Role("Administrator", "AdminGroup"));
+            roleGroupManager.CreateRole(new Role("Administrator"));
 
-            if (!groupManager.GetAllGroup().Select(x => x.Name).Contains("AdminGroup"))
+            if (!(roleGroupManager.GetAllGroup()).Select(x => x.Name).Contains("AdminGroup"))
             {
-                groupManager.CreateAsync("AdminGroup");
-                groupManager.AddRoleAsync("AdminGroup", "Administrator");
+                roleGroupManager.CreateGroup("AdminGroup");
+                roleGroupManager.AddRoleToGroup("AdminGroup", "Administrator");
             }
 
             var allUsers = userRepo.GetRecords("*", Convert.ToInt32(userRepo.Count + 1), 0).ToList();
             if (!allUsers.Any())
             {
-                string[] roles = { "Administrator" };
+                string[] roles = { "AdminGroup" };
                 //create default admin user
                 var user = new User("admin", null, roles, false, null);
                 user.SecurityStamp = Guid.NewGuid().ToString();
                 user.PasswordHash = new PasswordHasher<User>().HashPassword(user, "admin");
                 user.Roles = new List<string>
                 {
-                    "Administrator"
+                    "AdminGroup"
                 }.ToArray();
 
                 var userEntity = new UserData(user);
                 userRepo.Create(user.NormalizedUserName, userEntity);
             }
-            services.AddScoped<BlazorRoleManager>(p=>roleManager);
-            services.AddScoped<BlazorGroupManager>(p => groupManager);
-            services.AddScoped<IRepositoryService, RepositoryService>(provider => new RepositoryService(userRepo,roleManager, groupManager));
+            services.AddScoped<BlazorRoleGroupManager>(p => roleGroupManager);
+            services.AddScoped<BlazorAlertManager>();
+            services.AddScoped<IRepositoryService, RepositoryService>(provider => new RepositoryService(userRepo, roleGroupManager));
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
         }
     }

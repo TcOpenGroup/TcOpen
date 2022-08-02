@@ -13,15 +13,15 @@ VAR
 	{attribute 'hide'}
 	_syncAmsIdIsLocale					:	BOOL;
 	{attribute 'hide'}
-	_FB_GetLocalAmsNetId 				: 	Tc2_Utilities.FB_GetLocalAmsNetId;
+	_FB_GetLocalAmsNetId 				: 	Tc2_EtherCAT.Tc2_Utilities.FB_GetLocalAmsNetId;
 	{attribute 'hide'}
-	_FB_GetTimeZoneInformation			:	Tc2_Utilities.FB_GetTimeZoneInformation;
+	_FB_GetTimeZoneInformation			:	Tc2_EtherCAT.Tc2_Utilities.FB_GetTimeZoneInformation;
 	{attribute 'hide'}
-	_FB_SetTimeZoneInformation			:	Tc2_Utilities.FB_SetTimeZoneInformation;
+	_FB_SetTimeZoneInformation			:	Tc2_EtherCAT.Tc2_Utilities.FB_SetTimeZoneInformation;
 	{attribute 'hide'}
-	_TimeZoneInformation				:	Tc2_Utilities.ST_TimeZoneInformation;
+	_TimeZoneInformation				:	Tc2_EtherCAT.Tc2_Utilities.ST_TimeZoneInformation;
 	{attribute 'hide'}
-	_TimeZoneID							:	Tc2_Utilities.E_TimeZoneID;
+	_TimeZoneID							:	Tc2_EtherCAT.Tc2_Utilities.E_TimeZoneID;
 	{attribute 'hide'}
 	_startTime							:	Tc2_EtherCAT.T_DCTIME64;
 	{attribute 'hide'}
@@ -31,13 +31,13 @@ VAR
 	{attribute 'hide'}
 	_setOffset							:	Tc2_EtherCAT.T_DCTIME64;
 	{attribute 'hide'}
-	_NT_GetSyncTime						: 	Tc2_Utilities.NT_GetTime;
+	_NT_GetSyncTime						: 	Tc2_EtherCAT.Tc2_Utilities.NT_GetTime;
 	{attribute 'hide'}
-	_NT_SetLocalTime 					: 	Tc2_Utilities.NT_SetLocalTime;
+	_NT_SetLocalTime 					: 	Tc2_EtherCAT.Tc2_Utilities.NT_SetLocalTime;
 	{attribute 'hide'}
-	_NT_GetLocalTime					: 	Tc2_Utilities.NT_GetTime;
+	_NT_GetLocalTime					: 	Tc2_EtherCAT.Tc2_Utilities.NT_GetTime;
 	{attribute 'hide'}
-	_FB_TzSpecificLocalTimeToSystemTime :	Tc2_Utilities.FB_TzSpecificLocalTimeToSystemTime;
+	_FB_TzSpecificLocalTimeToSystemTime :	Tc2_EtherCAT.Tc2_Utilities.FB_TzSpecificLocalTimeToSystemTime;
 	{attribute 'hide'}
 	_remote2localDiff					:	Tc2_EtherCAT.T_DCTIME64;
 	{attribute 'hide'}
@@ -51,13 +51,13 @@ VAR
 	{attribute 'hide'}
 	_timeTick							: 	Tc2_EtherCAT.T_DCTIME64;
 	{attribute 'hide'}
-	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
+	_LocalTime 							:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;
 	{attribute 'hide'}
-	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
+	_UTCTime 							:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;
 	{attribute 'hide'}
-	_syncStartLocalTime					:	Tc2_Utilities.TIMESTRUCT;
+	_syncStartLocalTime					:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;
 	{attribute 'hide'}
-	_LastSyncTimeStampInLocalTime		:	Tc2_Utilities.TIMESTRUCT;
+	_LastSyncTimeStampInLocalTime		:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;
 	{attribute 'hide'}
 	_LastSyncDiff_seconds				:	LINT;
 END_VAR

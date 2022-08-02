@@ -1,5 +1,5 @@
 ﻿@namespace TcOpen.Inxton.Local.Security.Blazor
-@inject BlazorGroupManager _groupManager
+@inject BlazorRoleGroupManager _roleGroupManager
 
 <div class="container-fluid">
     <div class="mt-2">
@@ -20,7 +20,7 @@
             </NotAuthorized>
         </AuthorizeView>
 
-        <AuthorizeView Roles="@_groupManager.GetRolesString("AdminGroup")">
+        <AuthorizeView Roles="@_roleGroupManager.GetRolesFromGroupString("AdminGroup")">
             <div class="card">
                 <div class="card-body">
                     <h4>You can see this, only if you have some role from AdminGroup</h4>
@@ -28,11 +28,11 @@
             </div>
         </AuthorizeView>
 
-        <AuthorizeView Roles="automat-start, manual-start, precess-settings-access">
+        <AuthorizeView Roles="automat_start, manual_start, process_settings_access">
             <Authorized>
                 <div class="card">
                     <div class="card-body">
-                        <h4>You can see this, only if you have any of the roles: automat-start, manual-start, precess-settings-access.</h4>
+                        <h4>You can see this, only if you have any of the roles: automat_start, manual_start, process_settings_access.</h4>
                     </div>
                 </div>
             </Authorized>
@@ -45,7 +45,7 @@
             </NotAuthorized>
         </AuthorizeView>
 
-        <AuthorizeView Roles="@_groupManager.GetRolesString("Test")">
+        <AuthorizeView Roles="@_roleGroupManager.GetRolesFromGroupString("Test")">
             <div class="card">
                 <div class="card-body">
                     <h4>You can see this, only if you have some role from Test</h4>
