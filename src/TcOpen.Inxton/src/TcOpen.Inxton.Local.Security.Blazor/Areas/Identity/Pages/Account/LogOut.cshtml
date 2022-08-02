@@ -1,8 +1,10 @@
 ﻿@page
 @using Microsoft.AspNetCore.Identity
 @using TcOpen.Inxton.Local.Security
+@using TcOpen.Inxton.Local.Security.Blazor 
 @attribute [IgnoreAntiforgeryToken]
 @inject SignInManager<User> SignInManager
+@inject BlazorAlertManager _alertManager
 @functions {
     public async Task<IActionResult> OnPost()
     {

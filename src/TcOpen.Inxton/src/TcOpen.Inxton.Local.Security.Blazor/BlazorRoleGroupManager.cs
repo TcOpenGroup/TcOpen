@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Security;
+using System.Linq;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
@@ -17,14 +18,18 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             this.groupRepo = groupRepo;
         }
 
-        public void CreateRole(Role role)
+        public IdentityResult CreateRole(Role role)
         {
+            if (role == null)
+                throw new ArgumentNullException(nameof(role));
+
             this.inAppRoleCollection.Add(role);
+            return IdentityResult.Success;
         }
 
-        public Task<IdentityResult> CreateGroupAsync(string name)
+        public IdentityResult CreateGroup(string name)
         {
-            if (name == null)
+            if (name == null || name == "")
                 throw new ArgumentNullException(nameof(name));
 
             try
@@ -35,32 +40,33 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             }
             catch (DuplicateIdException)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {name} already exists." }));
+                return IdentityResult.Failed(new IdentityError { Description = $"Group with name {name} already exists." });
             }
 
-            return Task.FromResult(IdentityResult.Success);
+            return IdentityResult.Success;
         }
 
-        public Task<IdentityResult> DeleteGroupAsync(string name)
+        public IdentityResult DeleteGroup(string name)
         {
-            if (name == null)
+            if (name == null || name == "")
                 throw new ArgumentNullException(nameof(name));
 
             groupRepo.Delete(name);
 
-            return Task.FromResult(IdentityResult.Success);
+            return IdentityResult.Success;
         }
 
-        public Task<IdentityResult> AddRoleToGroupAsync(string group, string role)
+        public IdentityResult AddRoleToGroup(string group, string role)
         {
-            if (group == null)
+            if (group == null || group == "")
                 throw new ArgumentNullException(nameof(group));
-            if (role == null)
+            if (role == null || role == "")
                 throw new ArgumentNullException(nameof(role));
 
             try
             {
-                GroupData data = groupRepo.Read(group);
+                GroupData data = null;
+                data = groupRepo.Read(group);
                 if (data != null)
                 {
                     data.Roles.Add(role);
@@ -68,29 +74,30 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 }
                 else
                 {
-                    return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." }));
+                    return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
                 }
 
                 groupRepo.Update(group, data);
             }
             catch (UnableToLocateRecordId)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." }));
+                return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
             }
 
-            return Task.FromResult(IdentityResult.Success);
+            return IdentityResult.Success;
         }
 
-        public Task<IdentityResult> AddRolesToGroupAsync(string group, IEnumerable<string> roles)
+        public IdentityResult AddRolesToGroup(string group, IEnumerable<string> roles)
         {
-            if (group == null)
+            if (group == null || group == "")
                 throw new ArgumentNullException(nameof(group));
             if (roles == null)
                 throw new ArgumentNullException(nameof(roles));
 
             try
             {
-                GroupData data = groupRepo.Read(group);
+                GroupData data = null;
+                data = groupRepo.Read(group);
                 if (data != null)
                 {
                     foreach (var role in roles)
@@ -101,29 +108,30 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 }
                 else
                 {
-                    return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." }));
+                    return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
                 }
 
                 groupRepo.Update(group, data);
             }
             catch (UnableToLocateRecordId)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." }));
+                return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
             }
 
-            return Task.FromResult(IdentityResult.Success);
+            return IdentityResult.Success;
         }
 
-        public Task<IdentityResult> RemoveRolesFromGroupAsync(string group, IEnumerable<string> roles)
+        public IdentityResult RemoveRolesFromGroup(string group, IEnumerable<string> roles)
         {
-            if (group == null)
+            if (group == null || group == "")
                 throw new ArgumentNullException(nameof(group));
             if (roles == null)
                 throw new ArgumentNullException(nameof(roles));
 
             try
             {
-                GroupData data = groupRepo.Read(group);
+                GroupData data = null;
+                data = groupRepo.Read(group);
                 if (data != null)
                 {
                     foreach (var role in roles)
@@ -134,22 +142,22 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 }
                 else
                 {
-                    return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." }));
+                    return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
                 }
 
                 groupRepo.Update(group, data);
             }
             catch (UnableToLocateRecordId)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." }));
+                return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
             }
 
-            return Task.FromResult(IdentityResult.Success);
+            return IdentityResult.Success;
         }
 
         public List<string> GetRolesFromGroup(string group)
         {
-            if (group == null)
+            if (group == null || group == "")
                 return null;
 
             GroupData data = null;
@@ -172,7 +180,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public string GetRolesFromGroupString(string group)
         {
-            if (group == null)
+            if (group == null || group == "")
                 return null;
 
             GroupData data = null;
@@ -195,8 +203,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public List<GroupData> GetAllGroup()
         {
-            List<GroupData> data = (List<GroupData>)groupRepo.GetRecords();
-
+            List<GroupData> data = null;
+            data = groupRepo.GetRecords().ToList();
             return data;
         }
     }
