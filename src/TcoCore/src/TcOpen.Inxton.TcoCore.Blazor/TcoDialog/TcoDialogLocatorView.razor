@@ -26,18 +26,17 @@
     {
         await InvokeAsync(StateHasChanged);
         var nameOfType = DialogService.DialogVortex.GetType().Name;
-        //this can be done better, change it in future - find a way to identify vortex object and make that a ID
-        if (nameOfType == "TcoDialog")
+        var dialogId = "#" + nameOfType + "DialogView";
+        try
         {
-            await jsInterop.ShowTcoDialog(TcoBaseDialogId);
+            await jsInterop.ShowTcoDialog(dialogId);
         }
-        else if (nameOfType == "TcoInspectorDialog")
+        catch (TaskCanceledException)
         {
-            await jsInterop.ShowTcoDialog(TcoInspectorDialogId);
+            //swallow TaskCanceledException,
+            //throw;
         }
 
     }
-    private string TcoBaseDialogId = "#TcoDialogDialogView";
-    private string TcoInspectorDialogId = "#TcoInspectorDialogDialogView";
 
 }
