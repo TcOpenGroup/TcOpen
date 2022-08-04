@@ -13,38 +13,21 @@
                 <div class="col">
                     <div class="row">
                         <div class="col-1">
-                            <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Display" />
+                            <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Control" />
                         </div>
                         <div class="col-1">
-                            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
+                            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
                         </div>
                         <div class="col-1">
-                            <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Display" />
+                            <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Control" />
                         </div>
                         <div class="col">
                             <div class="progress mt-4">
-                                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: 38%"><div class="text-end me-2">@Component._data.RequiredMin.Cyclic</div></div>
-                                <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: 24%"></div>
-                                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: 38%"><div class="text-start ms-2">@Component._data.RequiredMax.Cyclic</div></div>
+                                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[0]; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Cyclic</div></div>
+                                <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[1]"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[2]; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Cyclic</div></div>
 
-                                <div class="progress-checkpoint" style="left: 50%;"></div>
-
-                                <div class="bar-step" style="left: 75%">
-                                    <div class="label-txt">Nice long text for test</div>
-                                    <div class="label-percent">75%</div>
-                                    <div class="label-line"></div>
-
-                                </div>
-                                <div class="bar-step" style="left: 10%">
-                                    <div class="label-txt">Adam Bray Mark</div>
-                                    <div class="label-percent">10%</div>
-                                    <div class="label-line"></div>
-                                </div>
-                                <div class="bar-step" style="left: 55%">
-                                    <div class="label-txt">Testing 123</div>
-                                    <div class="label-percent">55%</div>
-                                    <div class="label-line"></div>
-                                </div>
+                                <div class="progress-checkpoint" style="left: @getProgressBarValues()[3];"></div>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -120,10 +103,12 @@
 
 @code{
     private string ID = "-1";
-                            public string getNameOrSymbol()
-                            {
-                                return string.IsNullOrEmpty(Component.AttributeName) ? Component.GetSymbolTail() : Component.AttributeName;
-                            }
+
+    public string getNameOrSymbol()
+    {
+        return string.IsNullOrEmpty(Component.AttributeName) ? Component.GetSymbolTail() : Component.AttributeName;
+    }
+
     public string getID()
     {
         if(ID == "-1")
@@ -133,40 +118,61 @@
         }
         return ID;
     }
+
+    public string[] getProgressBarValues()
+    {
+        //Component._data.RequiredMin.Cyclic = -2;
+        //Component._data.DetectedStatus.Cyclic = -25;
+        //Component._data.RequiredMax.Cyclic = 5;
+
+        double[] ret = new double[4];
+
+        var stredMM = (Component._data.RequiredMin.Cyclic + Component._data.RequiredMax.Cyclic) / 2.0;
+        var stred = (stredMM + Component._data.DetectedStatus.Cyclic) / 2.0;
+        var con = Math.Max(Math.Max(Math.Abs(Component._data.RequiredMin.Cyclic), Math.Abs(Component._data.RequiredMax.Cyclic)), Math.Abs(Component._data.DetectedStatus.Cyclic));
+        var min = stred - con;
+        var max = stred + con;
+        if(min + max > 0)
+        {
+            ret[0] = Math.Abs((Component._data.RequiredMin.Cyclic / (min + max)) * 100.0);
+            ret[2] = 100 - Math.Abs((Component._data.RequiredMax.Cyclic / (min + max)) * 100.0);
+            ret[3] = Math.Abs((Component._data.DetectedStatus.Cyclic / (min + max)) * 100.0);
+        } else
+        {
+            ret[2] = Math.Abs((Component._data.RequiredMin.Cyclic / (min + max)) * 100.0);
+            ret[0] = 100 - Math.Abs((Component._data.RequiredMax.Cyclic / (min + max)) * 100.0);
+            ret[3] = Math.Abs((Component._data.DetectedStatus.Cyclic / (min + max)) * 100.0) - 100;
+        }
+        ret[1] = 100 - (ret[0] + ret[2]);
+
+        return new string[4] { (ret[0].ToString().Replace(',', '.') + "%"), (ret[1].ToString().Replace(',', '.') + "%"), (ret[2].ToString().Replace(',', '.') + "%"), (ret[3].ToString().Replace(',', '.') + "%") };
+    }
+
+    //private int min = Component._data.RequiredMin.Cyclic;
+    //private int res = 15;
+    //private int max = 20;
+
+    //Math.abs(max-min);
+
+    //private int bar1 = 0;
+    //private int bar2 = 0;
+    //private int bar3 = 0;
+    //private int checkpoint = 0;
 }
 
 
 <style>
+    .progress {
+        position: relative;
+        overflow: visible;
+    }
     .progress-checkpoint {
         position: absolute;
         margin-top: -10px;
-        z-index: 1;
+        z-index: 10;
         height: 40px;
-        width: 40px;
-        border-radius: 25px;
-    }
-
-    .bar-step {
-        position: absolute;
-        margin-top: -20px;
-        z-index: 1;
-        font-size: 12px;
-    }
-
-    .label-txt {
-        float: left;
-    }
-
-    .label-line {
-        float: right;
+        width: 4px;
         background: #000;
-        height: 50px;
-        width: 1px;
-        margin-left: 5px;
-    }
-
-    .label-percent {
-        float: right;
-        margin-left: 5px;
+        border-radius: 0.5rem;
     }
 </style>
