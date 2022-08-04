@@ -12,6 +12,5 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
     {
         IRepository<UserData> UserRepository { get; }
         BlazorRoleGroupManager RoleGroupManager { get; }
-
     }
 }
