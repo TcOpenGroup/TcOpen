@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +21,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         [Inject]
         private BlazorRoleGroupManager _roleGroupManager { get; set; }
+        [Inject]
+        private BlazorAlertManager _alertManager { get; set; }
 
         private IList<RoleData> AvailableRoles { get; set; }
         private IList<RoleData> AssignedRoles { get; set; }
@@ -28,15 +30,15 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public GroupData SelectedGroupN { get; set; }
         public string newGroupName { get; set; }
 
-        public async Task AssignRoles()
+        public void AssignRoles()
         {
-            await _roleGroupManager.AddRolesToGroupAsync(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.AddRolesToGroup(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
         }
 
-        public async Task ReturnRoles()
+        public void ReturnRoles()
         {
-            await _roleGroupManager.RemoveRolesFromGroupAsync(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.RemoveRolesFromGroup(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
             GroupClicked(SelectedGroupN);
         }
 
@@ -53,16 +55,32 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             SelectedGroupN = null;
         }
 
-        public async Task CreateGroup()
+        public void CreateGroup()
         {
-            await _roleGroupManager.CreateGroupAsync(newGroupName);
+            var result = _roleGroupManager.CreateGroup(newGroupName);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully created!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not created!");
+            }
             StateHasChanged();
         }
 
-        public async Task DeleteGroup(GroupData group)
+        public void DeleteGroup(GroupData group)
         {
             SelectedGroupN = null;
-            await _roleGroupManager.DeleteGroupAsync(group.Name);
+            var result = _roleGroupManager.DeleteGroup(group.Name);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "Group succesfully deleted!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "Group was not deleted!");
+            }
             StateHasChanged();
         }
     }
