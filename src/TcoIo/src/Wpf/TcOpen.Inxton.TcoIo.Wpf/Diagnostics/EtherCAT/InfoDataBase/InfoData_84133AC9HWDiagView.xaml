@@ -25,11 +25,15 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <disp:StringDisplaySlim Grid.Row ="0" DataContext="{Binding ChangeCount}"  />
                 <disp:StringDisplaySlim Grid.Row ="1" DataContext="{Binding DevId}"  />
                 <disp:AmsNetIdDisplaySlim Grid.Row ="2"  DataContext="{Binding AmsNetId}"/>
                 <disp:StringDisplaySlim Grid.Row ="3" DataContext="{Binding CfgSlaveCount}"  />
+                <disp:StringDisplaySlim Grid.Row ="4" DataContext="{Binding DcToTcTimeOffset}" />
+                <disp:StringDisplaySlim Grid.Row ="5" DataContext="{Binding DcToExtTimeOffset}" />
             </Grid>
         </GroupBox>
     </StackPanel>

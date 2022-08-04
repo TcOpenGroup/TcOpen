@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-
+using TcoIo.Converters.Utilities;
 
 namespace TcoIo.Diagnostics.EtherCAT.Display
 {
@@ -93,6 +93,7 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
                     StringFormat = formatString
                 };
                 tbValue.SetBinding(TextBox.TextProperty, b);
+                UpdateDesriptionFontSize();
             }
             else
             {
@@ -123,6 +124,7 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
                             StringFormat = formatString
                         };
                         tbDescription.SetBinding(TextBox.TextProperty, b);
+                        UpdateDesriptionFontSize();
                     }
                 }
             }
@@ -131,6 +133,16 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
  
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+
+        private void tbDescription_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            UpdateDesriptionFontSize();
+        }
+        private void UpdateDesriptionFontSize()
+        {
+            tbDescription.FontSize = TextBlockUtils.UpdateFontSizeToFitTheTextBoxMaxWidth(tbDescription);
+        }
 
     }
 }

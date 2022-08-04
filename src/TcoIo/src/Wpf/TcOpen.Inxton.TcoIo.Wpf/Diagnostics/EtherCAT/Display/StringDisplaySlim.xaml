@@ -15,10 +15,10 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" HorizontalAlignment="Left" x:Name="tbDescription" Text="{Binding Description, Mode=OneWay}" IsReadOnly="True" FontWeight="Light"   Background="Transparent"   />
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" x:Name="tbValue"       Text="{Binding _,           Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background="Transparent"  />
+        <TextBox Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="tbDescription" Margin="0" MaxWidth="80" Text="{Binding Description, Mode=OneWay}" IsReadOnly="True" FontWeight="Light"   Background="Transparent" TargetUpdated="tbDescription_TargetUpdated"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="tbValue"       Margin="0" Text="{Binding _,           Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background="Transparent"  />
     </Grid>
 </StackPanel>

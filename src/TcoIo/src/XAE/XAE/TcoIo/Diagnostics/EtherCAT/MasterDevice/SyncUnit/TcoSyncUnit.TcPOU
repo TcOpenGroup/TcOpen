@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoSyncUnit" Id="{f4f14717-b774-0e82-342f-cbda1f3ba97a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSyncUnit EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoSyncUnit
 VAR
     {attribute addProperty Name "WcState"}
     WcState : WcState_0B2B16F9;
     {attribute addProperty Name "InfoData"}
-    InfoData : InfoData_2A97D6CF;
+    InfoData : InfoData_8649EEEB;
     {attribute addProperty Name "Status"}
     _State : SyncUnitState;
     {attribute 'hide'}
