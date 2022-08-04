@@ -54,5 +54,50 @@ namespace TcoIo.Converters.Utilities
                 return defaultTextBlock.FontSize;
             }
         }
+
+        private static Size MeasureString(TextBox textBox)
+        {
+
+            var formattedText = new FormattedText(
+                textBox.Text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface(textBox.FontFamily, textBox.FontStyle, textBox.FontWeight, textBox.FontStretch),
+                textBox.FontSize,
+                Brushes.Black,
+                new NumberSubstitution(),
+                1);
+
+            return new Size(formattedText.Width, formattedText.Height);
+        }
+
+        public static double UpdateFontSizeToFitTheTextBoxMaxWidth(TextBox textBox)
+        {
+            TextBox defaultTextBox = new TextBox();
+
+            if (double.TryParse(textBox.MaxWidth.ToString(), out double width))
+            {
+                double origFontSize = textBox.FontSize;
+                Size size = MeasureString(textBox);
+
+                if (size.Width > width)
+                {
+                    double fontSize = (width - 5 ) / size.Width * origFontSize;
+                    //just to check the final dims after font change during debug
+                    //TextBox textBox2 = textBox as TextBox;
+                    //textBox2.FontSize = fontSize;
+                    //Size size2 = MeasureString(textBox2);
+                    return fontSize;
+                }
+                else
+                {
+                    return origFontSize;
+                }
+            }
+            else
+            {
+                return defaultTextBox.FontSize;
+            }
+        }
     }
 }
