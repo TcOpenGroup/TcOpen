@@ -37,7 +37,16 @@
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\Base\EtcMasterBase_62654B43.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\InfoData_2A97D6CF.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Base\SyncUnitsBase_AD6C35CE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Base\SyncUnitTaskBase_FCD3CBF3.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\Base\SyncUnitTasksBase_7C8711EB.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\InfoData_8649EEEB.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\ITcoSyncUnit.TcIO">
@@ -46,7 +55,7 @@
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitTask_2D604ED5.TcDUT">
+    <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\SyncUnitTask_AB2F5079.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Diagnostics\EtherCAT\MasterDevice\SyncUnit\TcoSyncUnit.TcPOU">
