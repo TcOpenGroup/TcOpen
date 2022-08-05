@@ -82,13 +82,11 @@
         </div>
     </a>
     <div class="card-body collapse" id="@getID()">
-        <GenericTcoInspectorDataView @ref="@genericTcoInspectorDataView" Data="@Component._data" Presentation="Control" />
+        <GenericTcoInspectorDataView Data="@Component._data" Presentation="Control" />
     </div>
 </div>
 
 @code{
-    private GenericTcoInspectorDataView genericTcoInspectorDataView { get; set; }
-
     private string ID = "-1";
 
     public string getNameOrSymbol()
