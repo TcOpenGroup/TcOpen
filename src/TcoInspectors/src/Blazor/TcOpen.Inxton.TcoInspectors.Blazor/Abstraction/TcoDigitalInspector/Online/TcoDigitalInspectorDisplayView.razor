@@ -1,5 +1,109 @@
-﻿<h3>TcoAnalogueInspectorControlView</h3>
+﻿@namespace TcoInspectors
+@inherits RenderableComplexComponentBase<TcoDigitalInspector>
 
-@code {
+@using Vortex.Connector
 
+<div class="card my-3">
+    <a data-bs-toggle="collapse" href="#@getID()" role="button" aria-expanded="false" aria-controls="@getID()" style="color: inherit; text-decoration: inherit;">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col-auto me-5">
+                    <h4>@getNameOrSymbol()</h4>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-auto">
+                            <RenderableContentControl Context="@Component._data.RequiredStatus" Presentation="Display" />
+                        </div>
+                        <div class="col-auto">
+                            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
+                        </div>
+                        <div class="col-auto ms-auto">
+                            <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Display" />
+                        </div>
+                        <div class="col-auto">
+                            <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Display" />
+                        </div>
+                        <div class="col-auto mt-3">
+                            @switch (@Component._data.Result.Cyclic)
+                            {
+                                case 0:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                    </svg>
+                                    break;
+                                case 10:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                                    </svg>
+                                    break;
+                                case 20:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    break;
+                                case 30:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                    </svg>
+                                    break;
+                                case 35:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                    </svg>
+                                    break;
+                                case 40:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                    break;
+                                case 50:
+                                    <svg width="32" height="32" fill="currentColor" class="bi bi-skip-end-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z" />
+                                    </svg>
+                                    break;
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div class="card-body collapse" id="@getID()">
+        <div class="row">
+            <div class="col me-5">
+                <RenderableContentControl Context="@Component._data.Result" Presentation="Display" />
+                <RenderableContentControl Context="@Component._data.ErrorCode" Presentation="Display" />
+                <RenderableContentControl Context="@Component._data.FailureDescription" Presentation="Display" />
+            </div>
+            <div class="col mx-5">
+                <RenderableContentControl Context="@Component._data.TimeStamp" Presentation="Display" />
+                <RenderableContentControl Context="@Component._data.FailTime" Presentation="Display" />
+                <RenderableContentControl Context="@Component._data.PassTime" Presentation="Display" />
+            </div>
+            <div class="col ms-5">
+                <RenderableContentControl Context="@Component._data.NumberOfAllowedRetries" Presentation="Display" />
+                <RenderableContentControl Context="@Component._data.RetryAttemptsCount" Presentation="Display" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    private string ID = "-1";
+
+    public string getNameOrSymbol()
+    {
+        return string.IsNullOrEmpty(Component.AttributeName) ? Component.GetSymbolTail() : Component.AttributeName;
+    }
+
+    public string getID()
+    {
+        if (ID == "-1")
+        {
+            Random rnd = new Random();
+            ID = getNameOrSymbol() + rnd.Next(0, 1000000);
+        }
+        return ID;
+    }
 }
