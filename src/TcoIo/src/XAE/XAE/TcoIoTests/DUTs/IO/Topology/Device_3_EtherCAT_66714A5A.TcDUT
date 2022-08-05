@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Device_3_EtherCAT_66714A5A" Id="{357f5841-b370-0bf2-040a-99f6822ff55b}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
+{attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
+{attribute addProperty Id "Term_146_EK1100Term_146_EK1100_4315FF0D501SyncUnitsSyncUnits_C3A34B5018InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
+{attribute addProperty CRC "1718700634"}
+{attribute addProperty Size "557"}
+{attribute addProperty Name "Device 3 (EtherCAT)"}
+TYPE Device_3_EtherCAT_66714A5A EXTENDS TcoIo.EtcMasterBase_62654B43 :
+STRUCT
+	{attribute addProperty Name "Term 146 (EK1100)"}
+	{attribute addProperty PreviousPort "Device 3 (EtherCAT) : Master"}
+	{attribute addProperty SyncUnit "default"}
+	Term_146_EK1100 : Term_146_EK1100_4315FF0D;
+	{attribute addProperty Name "SyncUnits"}
+	SyncUnits : SyncUnits_C3A34B50;
+	{attribute addProperty Name "Inputs"}
+	Inputs : TcoIo.Inputs_A65FACA4;
+	{attribute addProperty Name "Outputs"}
+	Outputs : TcoIo.Outputs_23C0ED1D;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_84133AC9;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

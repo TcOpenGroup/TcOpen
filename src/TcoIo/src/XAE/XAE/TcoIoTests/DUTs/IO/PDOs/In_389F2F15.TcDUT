@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="In_389F2F15" Id="{243a0201-c26e-074d-18d6-a0c13e984911}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: Flexi Soft EtherCAT Gateway-0000-0001'}
+{attribute addProperty BoxType "Flexi Soft EtherCAT Gateway-0000-0001"}
+{attribute addProperty Id "DiagAT %I*USINT1In_Dataset1AT %I*ARRAY [0..9] OF BYTE0In_Dataset2AT %I*ARRAY [0..9] OF BYTE0In_Dataset3AT %I*ARRAY [0..9] OF BYTE0In_Dataset4AT %I*ARRAY [0..9] OF BYTE0In_Dataset5AT %I*ARRAY [0..9] OF BYTE0"}
+{attribute addProperty CRC "949956373"}
+{attribute addProperty Size "1"}
+TYPE In_389F2F15 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Diag"}
+	Diag AT %I* : USINT;
+	{attribute addProperty Name "In_Dataset1"}
+	In_Dataset1 AT %I* : ARRAY [0..9] OF BYTE;
+	{attribute addProperty Name "In_Dataset2"}
+	In_Dataset2 AT %I* : ARRAY [0..9] OF BYTE;
+	{attribute addProperty Name "In_Dataset3"}
+	In_Dataset3 AT %I* : ARRAY [0..9] OF BYTE;
+	{attribute addProperty Name "In_Dataset4"}
+	In_Dataset4 AT %I* : ARRAY [0..9] OF BYTE;
+	{attribute addProperty Name "In_Dataset5"}
+	In_Dataset5 AT %I* : ARRAY [0..9] OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

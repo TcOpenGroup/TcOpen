@@ -36,6 +36,8 @@ namespace TcoIo
         static string _physics;
         public double zoom = 1.0;
         public string PresentationType { get; set; }
+        public ushort InfoDataState = 0;
+        private IVortexObject dt;
 
         public TopologyRenderer()
         {
@@ -47,6 +49,7 @@ namespace TcoIo
             Pos_Y = 0;
             MaxPos_X = 0;
             MaxPos_Y = 0;
+            InfoDataState = 0;
             previousTopologyObject = new TopologyObject();
             topologyObjects = new ObservableCollection<TopologyObject>();
             this.PresentationType = "TopologyDevice-TopologyBoxM90-TopologyTerminalM90-TopologyEndTerminalM90";
@@ -60,12 +63,16 @@ namespace TcoIo
 
         private void TopologyRenderer_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            PrepareHardware(this.DataContext as IVortexObject);
+            if (this.DataContext as IVortexObject != null)
+            {
+                dt = this.DataContext as IVortexObject;
 
-            Grid wiring = PrepareWiring() as Grid;
-            this.grid.Children.Clear();
-            this.grid.Children.Add(Render(wiring) as Grid);
+                PrepareHardware(dt);
 
+                Grid wiring = PrepareWiring() as Grid;
+                this.grid.Children.Clear();
+                this.grid.Children.Add(Render(wiring) as Grid);
+            }
         }
 
         private void scrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

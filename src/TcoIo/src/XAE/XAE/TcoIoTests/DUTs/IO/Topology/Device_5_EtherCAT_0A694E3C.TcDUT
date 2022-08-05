@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Device_5_EtherCAT_0A694E3C" Id="{d30ece7e-4eaa-0107-2611-bf7705cb351d}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
+{attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
+{attribute addProperty Id "Term_279_EK1100Term_279_EK1100_ED7D62722002Term_554_EK1100Term_554_EK1100_B580E2182002Term_748_EK1100Term_748_EK1100_BC4343B12002Term_881_EK1100Term_881_EK1100_F732F3702002Term_1047_EK1100Term_1047_EK1100_7ACEE53D2002SyncUnitsSyncUnits_C3A34B5018InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
+{attribute addProperty CRC "174673468"}
+{attribute addProperty Size "10066"}
+{attribute addProperty Name "Device 5 (EtherCAT)"}
+TYPE Device_5_EtherCAT_0A694E3C EXTENDS TcoIo.EtcMasterBase_62654B43 :
+STRUCT
+	{attribute addProperty Name "Term 279 (EK1100)"}
+	{attribute addProperty PreviousPort "Device 5 (EtherCAT) : Master"}
+	{attribute addProperty SyncUnit "default"}
+	Term_279_EK1100 : Term_279_EK1100_ED7D6272;
+	{attribute addProperty Name "Term 554 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 495 (EK1110) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_554_EK1100 : Term_554_EK1100_B580E218;
+	{attribute addProperty Name "Term 748 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 747 (EK1110) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_748_EK1100 : Term_748_EK1100_BC4343B1;
+	{attribute addProperty Name "Term 881 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 880 (EK1110) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_881_EK1100 : Term_881_EK1100_F732F370;
+	{attribute addProperty Name "Term 1047 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 1046 (EK1110) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1047_EK1100 : Term_1047_EK1100_7ACEE53D;
+	{attribute addProperty Name "SyncUnits"}
+	SyncUnits : SyncUnits_C3A34B50;
+	{attribute addProperty Name "Inputs"}
+	Inputs : TcoIo.Inputs_A65FACA4;
+	{attribute addProperty Name "Outputs"}
+	Outputs : TcoIo.Outputs_23C0ED1D;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_84133AC9;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

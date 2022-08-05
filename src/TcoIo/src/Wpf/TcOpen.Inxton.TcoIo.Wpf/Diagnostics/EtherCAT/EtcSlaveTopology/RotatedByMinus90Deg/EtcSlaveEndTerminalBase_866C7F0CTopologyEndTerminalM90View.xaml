@@ -30,7 +30,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Margin="0" Padding="0" Background="{StaticResource InxtonGrayLight}">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Margin="0" Padding="0">
             <Border.LayoutTransform>
                 <TransformGroup>
                     <RotateTransform Angle="90" />
@@ -38,7 +38,7 @@
                 </TransformGroup>
             </Border.LayoutTransform>
             <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" >
-                <Grid Height="{Binding Source={x:Static dims:DimsDef.slaveWidth}}" DataContext="{Binding Terminal}" Background ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToBackground}}">
+                <Grid Height="{Binding Source={x:Static dims:DimsDef.slaveWidth}}" DataContext="{Binding Terminal}"  Background="{StaticResource InxtonGrayLight}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" MaxHeight="18"/>
                         <RowDefinition Height="Auto" MaxHeight="18"/>
@@ -48,8 +48,8 @@
                         <ColumnDefinition  Width="{Binding Source={x:Static dims:DimsDef.slaveHeight}}" SharedSizeGroup="true"/>
                     </Grid.ColumnDefinitions>
                     <WrapPanel Grid.Row="0" Grid.Column="0">
-                        <TextBlock Text="Name: "                FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
-                        <TextBlock x:Name="tbName" Text="{Binding AttributeName , NotifyOnTargetUpdated=true}" MaxWidth="145" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}" VerticalAlignment="Center" TargetUpdated="tbName_TargetUpdated"/>
+                        <TextBlock Text="Name: " FontWeight="Light"    Background="{StaticResource InxtonGrayLight}"/>
+                        <TextBlock x:Name="tbName" Text="{Binding AttributeName , NotifyOnTargetUpdated=true}" MaxWidth="145" FontWeight="DemiBold" Background="{StaticResource InxtonGrayLight}" VerticalAlignment="Center" TargetUpdated="tbName_TargetUpdated"/>
                     </WrapPanel>
                 </Grid>
             </Border>

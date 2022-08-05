@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Device_4_EtherCAT_07442C6B" Id="{5923cb28-7ee9-08b2-37da-f97a531cd968}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
+{attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
+{attribute addProperty Id "R1_EK1100R1_EK1100_4AD22B7B1143R2_EK1100R2_EK1100_10D8A594458R3_EK1100R3_EK1100_C7887D6C263R4_EK1100R4_EK1100_46A1248C369R4A_EK1100R4A_EK1100_48316913274R5_EK1100R5_EK1100_0007A337146R6_EK1100R6_EK1100_8C41F5F2336R7_EK1100R7_EK1100_F50DDAC8306R8_EK1100R8_EK1100_9C7B3B675648R9_EK1100R9_EK1100_484053C0136R10_EK1100R10_EK1100_C5CE1D87649SyncUnitsSyncUnits_5BE71B8B288InputsInputs_A65FACA410OutputsOutputs_23C0ED1D6InfoDataInfoData_84133AC922"}
+{attribute addProperty CRC "121908331"}
+{attribute addProperty Size "10054"}
+{attribute addProperty Name "Device 4 (EtherCAT)"}
+TYPE Device_4_EtherCAT_07442C6B EXTENDS TcoIo.EtcMasterBase_62654B43 :
+STRUCT
+	{attribute addProperty Name "R1 (EK1100)"}
+	{attribute addProperty PreviousPort "Device 4 (EtherCAT) : Master"}
+	{attribute addProperty SyncUnit "default"}
+	R1_EK1100 : R1_EK1100_4AD22B7B;
+	{attribute addProperty Name "R2 (EK1100)"}
+	{attribute addProperty PreviousPort "R1 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R2_EK1100 : R2_EK1100_10D8A594;
+	{attribute addProperty Name "R3 (EK1100)"}
+	{attribute addProperty PreviousPort "R2 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R3_EK1100 : R3_EK1100_C7887D6C;
+	{attribute addProperty Name "R4 (EK1100)"}
+	{attribute addProperty PreviousPort "R3 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R4_EK1100 : R4_EK1100_46A1248C;
+	{attribute addProperty Name "R4A (EK1100)"}
+	{attribute addProperty PreviousPort "R4 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R4A_EK1100 : R4A_EK1100_48316913;
+	{attribute addProperty Name "R5 (EK1100)"}
+	{attribute addProperty PreviousPort "R4A (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R5_EK1100 : R5_EK1100_0007A337;
+	{attribute addProperty Name "R6 (EK1100)"}
+	{attribute addProperty PreviousPort "R5 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R6_EK1100 : R6_EK1100_8C41F5F2;
+	{attribute addProperty Name "R7 (EK1100)"}
+	{attribute addProperty PreviousPort "R6 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R7_EK1100 : R7_EK1100_F50DDAC8;
+	{attribute addProperty Name "R8 (EK1100)"}
+	{attribute addProperty PreviousPort "R7 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R8_EK1100 : R8_EK1100_9C7B3B67;
+	{attribute addProperty Name "R9 (EK1100)"}
+	{attribute addProperty PreviousPort "R8 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R9_EK1100 : R9_EK1100_484053C0;
+	{attribute addProperty Name "R10 (EK1100)"}
+	{attribute addProperty PreviousPort "R9 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R10_EK1100 : R10_EK1100_C5CE1D87;
+	{attribute addProperty Name "SyncUnits"}
+	SyncUnits : SyncUnits_5BE71B8B;
+	{attribute addProperty Name "Inputs"}
+	Inputs : TcoIo.Inputs_A65FACA4;
+	{attribute addProperty Name "Outputs"}
+	Outputs : TcoIo.Outputs_23C0ED1D;
+	{attribute addProperty Name "InfoData"}
+	InfoData : TcoIo.InfoData_84133AC9;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

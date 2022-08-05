@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="SyncUnits_5BE71B8B" Id="{0fb178f0-d117-0749-00b7-5bee7251c537}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: '}
+{attribute addProperty BoxType ""}
+{attribute addProperty Id "_defaultAT %I*SyncUnitTasks_5FDC977018N10AT %I*SyncUnitTasks_5FDC977018S10AT %I*SyncUnitTasks_5FDC977018P10AT %I*SyncUnitTasks_5FDC977018P20AT %I*SyncUnitTasks_5FDC977018P30AT %I*SyncUnitTasks_5FDC977018C10AT %I*SyncUnitTasks_5FDC977018C20AT %I*SyncUnitTasks_5FDC977018C30AT %I*SyncUnitTasks_5FDC977018C40AT %I*SyncUnitTasks_5FDC977018C50AT %I*SyncUnitTasks_5FDC977018C60AT %I*SyncUnitTasks_5FDC977018C70AT %I*SyncUnitTasks_5FDC977018C80AT %I*SyncUnitTasks_5FDC977018R10AT %I*SyncUnitTasks_5FDC977018RHAT %I*SyncUnitTasks_5FDC977018"}
+{attribute addProperty CRC "1541872523"}
+{attribute addProperty Size "288"}
+TYPE SyncUnits_5BE71B8B EXTENDS TcoIo.SyncUnitsBase_AD6C35CE :
+STRUCT
+	{attribute addProperty Name "_default"}
+	_default : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "N10"}
+	N10 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "S10"}
+	S10 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "P10"}
+	P10 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "P20"}
+	P20 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "P30"}
+	P30 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C10"}
+	C10 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C20"}
+	C20 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C30"}
+	C30 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C40"}
+	C40 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C50"}
+	C50 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C60"}
+	C60 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C70"}
+	C70 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "C80"}
+	C80 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "R10"}
+	R10 : SyncUnitTasks_5FDC9770;
+	{attribute addProperty Name "RH"}
+	RH : SyncUnitTasks_5FDC9770;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

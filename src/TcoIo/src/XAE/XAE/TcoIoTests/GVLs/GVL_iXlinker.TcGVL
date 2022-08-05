@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <GVL Name="GVL_iXlinker" Id="{d4a991a2-6aef-0263-3a8f-18a2fd4f086f}">
+  <GVL Name="GVL_iXlinker" Id="{62106fae-f923-0f9c-3a7c-b09e3ccfe695}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 		Device_1_EtherCAT : Device_1_EtherCAT_49C09C66;
 		Device_2_EtherCAT : Device_2_EtherCAT_22CD061B;
+		Device_3_EtherCAT : Device_3_EtherCAT_66714A5A;
+		Device_4_EtherCAT : Device_4_EtherCAT_07442C6B;
+		Device_5_EtherCAT : Device_5_EtherCAT_0A694E3C;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

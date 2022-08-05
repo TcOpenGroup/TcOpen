@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Device_State_B9CC7757" Id="{ae7977d5-1cc2-0759-0894-2b4885b15250}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: AES-D-BC-ECAT-0000'}
+{attribute addProperty BoxType "AES-D-BC-ECAT-0000"}
+{attribute addProperty Id "CouplerStateAT %I*UDINT4"}
+{attribute addProperty CRC "3117184855"}
+{attribute addProperty Size "4"}
+TYPE Device_State_B9CC7757 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "CouplerState"}
+	CouplerState AT %I* : UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="AT_x_26CC547D" Id="{885cc227-cf07-0220-0886-37e60ee996d3}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IndraDrive MPB20-0003-0000'}
+{attribute addProperty BoxType "IndraDrive MPB20-0003-0000"}
+{attribute addProperty Id "Drive_status_wordAT %I*UINT2Position_feedback_value_1AT %I*DINT4"}
+{attribute addProperty CRC "650925181"}
+{attribute addProperty Size "6"}
+TYPE AT_x_26CC547D EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Drive_status_word"}
+	Drive_status_word AT %I* : UINT;
+	{attribute addProperty Name "Position_feedback_value_1"}
+	Position_feedback_value_1 AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC40_A3_EK1122_E505EE87" Id="{08007936-3967-0f55-3f61-447194bd4789}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "RC40_EPP_EPP1322_0001RC40_EPP_EPP1322_0001_ECA1E6F9120"}
+{attribute addProperty CRC "3842371207"}
+{attribute addProperty Size "120"}
+{attribute addProperty Name "RC40_A3 (EK1122)"}
+TYPE RC40_A3_EK1122_E505EE87 EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC40_EPP (EPP1322-0001)"}
+	{attribute addProperty PreviousPort "RC40_A3 (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
+	RC40_EPP_EPP1322_0001 : RC40_EPP_EPP1322_0001_ECA1E6F9;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
