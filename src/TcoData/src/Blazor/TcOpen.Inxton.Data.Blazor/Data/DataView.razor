@@ -1,8 +1,7 @@
 ﻿@namespace TcoData
 @using Vortex.Connector
 
-    <div class="row">
-
+    <div class="row d-flex align-items-end">
         <div class="mb-3 col">
             <label class="form-label">Per page</label>
             <select class="w-100 form-select"
@@ -29,7 +28,9 @@
                 }
             </select>
         </div>
-        <button class="btn btn-primary" @onclick="() => Filter() ">Filter</button>
+        <div class="col-auto mb-3">
+            <button class="btn btn-primary" @onclick="() => Filter() ">Filter</button>
+        </div>
     </div>
     <div class="row">
         @if (IsLoading)
