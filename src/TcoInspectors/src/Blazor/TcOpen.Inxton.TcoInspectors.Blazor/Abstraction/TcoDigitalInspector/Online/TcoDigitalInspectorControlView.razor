@@ -70,22 +70,7 @@
         </div>
     </a>
     <div class="card-body collapse" id="@getID()">
-        <div class="row">
-            <div class="col me-5">
-                <RenderableContentControl Context="@Component._data.Result" Presentation="Control" />
-                <RenderableContentControl Context="@Component._data.ErrorCode" Presentation="Control" />
-                <RenderableContentControl Context="@Component._data.FailureDescription" Presentation="Control" />
-            </div>
-            <div class="col mx-5">
-                <RenderableContentControl Context="@Component._data.TimeStamp" Presentation="Control" />
-                <RenderableContentControl Context="@Component._data.FailTime" Presentation="Control" />
-                <RenderableContentControl Context="@Component._data.PassTime" Presentation="Control" />
-            </div>
-            <div class="col ms-5">
-                <RenderableContentControl Context="@Component._data.NumberOfAllowedRetries" Presentation="Control" />
-                <RenderableContentControl Context="@Component._data.RetryAttemptsCount" Presentation="Control" />
-            </div>
-        </div>
+        <GenericTcoInspectorDataView Data="@Component._data" Presentation="Control" />
     </div>
 </div>
 

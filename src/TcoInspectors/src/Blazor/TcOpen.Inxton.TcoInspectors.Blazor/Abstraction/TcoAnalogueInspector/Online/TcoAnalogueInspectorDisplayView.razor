@@ -13,13 +13,13 @@
                 <div class="col">
                     <div class="row">
                         <div class="col-1">
-                            <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Control" />
+                            <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Display" />
                         </div>
                         <div class="col-1">
-                            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
+                            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
                         </div>
                         <div class="col-1">
-                            <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Control" />
+                            <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Display" />
                         </div>
                         <div class="col">
                             <div class="progress mt-4">
@@ -82,22 +82,7 @@
         </div>
     </a>
     <div class="card-body collapse" id="@getID()">
-        <div class="row">
-            <div class="col me-5">
-                <RenderableContentControl Context="@Component._data.Result" Presentation="Display" />
-                <RenderableContentControl Context="@Component._data.ErrorCode" Presentation="Display" />
-                <RenderableContentControl Context="@Component._data.FailureDescription" Presentation="Display" />
-            </div>
-            <div class="col mx-5">
-                <RenderableContentControl Context="@Component._data.TimeStamp" Presentation="Display" />
-                <RenderableContentControl Context="@Component._data.FailTime" Presentation="Display" />
-                <RenderableContentControl Context="@Component._data.PassTime" Presentation="Display" />
-            </div>
-            <div class="col ms-5">
-                <RenderableContentControl Context="@Component._data.NumberOfAllowedRetries" Presentation="Display" />
-                <RenderableContentControl Context="@Component._data.RetryAttemptsCount" Presentation="Display" />
-            </div>
-        </div>
+        <GenericTcoInspectorDataView Data="@Component._data" Presentation="Display" />
     </div>
 </div>
 

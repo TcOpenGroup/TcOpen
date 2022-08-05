@@ -73,22 +73,7 @@
         </div>
     </a>
     <div class="card-body collapse" id="@getID()">
-        <div class="row">
-            <div class="col me-5">
-                <RenderableContentControl Context="@Component._data.Result" Presentation="ShadowDisplay" />
-                <RenderableContentControl Context="@Component._data.ErrorCode" Presentation="ShadowDisplay" />
-                <RenderableContentControl Context="@Component._data.FailureDescription" Presentation="ShadowDisplay" />
-            </div>
-            <div class="col mx-5">
-                <RenderableContentControl Context="@Component._data.TimeStamp" Presentation="ShadowDisplay" />
-                <RenderableContentControl Context="@Component._data.FailTime" Presentation="ShadowDisplay" />
-                <RenderableContentControl Context="@Component._data.PassTime" Presentation="ShadowDisplay" />
-            </div>
-            <div class="col ms-5">
-                <RenderableContentControl Context="@Component._data.NumberOfAllowedRetries" Presentation="ShadowDisplay" />
-                <RenderableContentControl Context="@Component._data.RetryAttemptsCount" Presentation="ShadowDisplay" />
-            </div>
-        </div>
+        <GenericTcoInspectorDataView Data="@Component._data" Presentation="ShadowDisplay" />
     </div>
 </div>
 
