@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="EtcSlaveEndTerminalBase_866C7F0C" Id="{7fb529b4-86fb-0d63-3da1-b0f01a603703}">
+    <Declaration><![CDATA[
+{attribute clr[Container(Layout.Stack)]}
+{attribute clr[Group(Layout.GroupBox)]}
+{attribute addProperty PreviousPort "Unknown"}
+{attribute addProperty SyncUnit "Unknown"}
+TYPE EtcSlaveEndTerminalBase_866C7F0C EXTENDS TcoIo.EtcSlaveBase_82538BE2 :
+STRUCT
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

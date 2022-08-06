@@ -20,7 +20,7 @@
 
 
 
-task default -depends Init, BuildScripts, Start, Clean, Check-Target-License, NugetRestore, CopyInxton, SetPlcCpuCores, GitVersion, `
+task default -depends Init, BuildScripts, Start, Clean, Check-Target-License, NugetRestore, CopyInxton, RemovePinnedVersion, DisableDevices, SetPlcCpuCores, GitVersion, `
               OpenVisualStudio, BuildWithInxtonBuilder, Build, CloseVs, CopyPlcLibs, Tests, ClearPackages, CreatePackages, PublishPackages, Finish
 
 
@@ -93,6 +93,26 @@ task CopyInxton -continueOnError {
         -v:$msbuildVerbosity `
         --nologo `
         /p:SolutionDir=$solutionDir
+  }
+}
+
+task RemovePinnedVersion `
+  -description "Remove pinned to version if found in any tsproj" `
+{
+  $tsProjects = (Get-ChildItem .\ -recurse "*.tsproj" |  % { $_.FullName })
+  foreach ($tsProject in $tsProjects)
+  {
+    RemovePinVersion($tsProject)
+  }
+}
+
+task DisableDevices `
+  -description "Disable any device if found in any tsproj" `
+{
+  $tsProjects = (Get-ChildItem .\ -recurse "*.tsproj" |  % { $_.FullName })
+  foreach ($tsProject in $tsProjects)
+  {
+    DisableDevices($tsProject)
   }
 }
 

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Ctrl_77460BD3" Id="{74b45ae1-2d78-0e60-1f00-20c9472b1f48}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL2258-0000-0017'}
+{attribute addProperty BoxType "EL2258-0000-0017"}
+{attribute addProperty Id "Output_buffer_resetBOOL1Manual_output_stateBOOL1Force_orderBOOL1Enable_manual_operationBOOL1Output_order_counterUSINT1No_of_output_eventsUSINT1"}
+{attribute addProperty CRC "2001079251"}
+{attribute addProperty Size "6"}
+TYPE Ctrl_77460BD3 :
+STRUCT
+	{attribute addProperty Name "Output_buffer_reset"}
+	Output_buffer_reset : BOOL;
+	{attribute addProperty Name "Manual_output_state"}
+	Manual_output_state : BOOL;
+	{attribute addProperty Name "Force_order"}
+	Force_order : BOOL;
+	{attribute addProperty Name "Enable_manual_operation"}
+	Enable_manual_operation : BOOL;
+	{attribute addProperty Name "Output_order_counter"}
+	Output_order_counter : USINT;
+	{attribute addProperty Name "No_of_output_events"}
+	No_of_output_events : USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

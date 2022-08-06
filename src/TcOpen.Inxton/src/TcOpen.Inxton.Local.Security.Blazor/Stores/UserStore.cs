@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +15,7 @@ using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 {
-    public class UserStore:
+    public class UserStore :
         IUserStore<User>,
         IUserPasswordStore<User>,
         IUserRoleStore<User>,
@@ -49,10 +50,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         {
             get
             {
-                return _unitOfWork.RoleInAppRepository.InAppRoleCollection;
+                return _unitOfWork.RoleGroupManager.inAppRoleCollection;
             }
         }
-       
+        private BlazorRoleGroupManager _roleGroupManager
+        {
+            get
+            {
+                return _unitOfWork.RoleGroupManager;
+            }
+        }
+
         private bool _disposed;
         protected void ThrowIfDisposed()
         {
@@ -96,7 +104,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 throw new ArgumentNullException(nameof(user));
 
             return Task.FromResult(user.UserName);
-        }  
+        }
         /// <summary>
         /// Sets the given <paramref name="userName" /> for the specified <paramref name="user"/>.
         /// </summary>
@@ -163,6 +171,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 throw new ArgumentNullException(nameof(user));
 
             var userEntity = new UserData(user);
+            userEntity._Created = DateTime.Now;
 
             try
             {
@@ -170,7 +179,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             }
             catch (DuplicateIdException)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} already exists."}));
+                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} already exists." }));
             }
 
             return Task.FromResult(IdentityResult.Success);
@@ -199,12 +208,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                     userData.SecurityStamp = user.SecurityStamp;
                     userData.Roles = new ObservableCollection<string>(user.Roles.ToList());
                     userData.CanUserChangePassword = user.CanUserChangePassword;
+                    userData._Modified = DateTime.Now;
                 }
                 else
                 {
                     return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
                 }
-                
+
                 _unitOfWork.UserRepository.Update(user.NormalizedUserName, userData);
             }
             catch (UnableToLocateRecordId)
@@ -256,7 +266,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             {
                 user = null;
             }
-            
+
 
             return Task.FromResult(user);
         }
@@ -285,8 +295,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             {
                 user = null;
             }
-           
-            
+
+
             return Task.FromResult(user);
         }
         /// <summary>
@@ -347,35 +357,36 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
         public Task AddToRoleAsync(User user, string normalizedRoleName, CancellationToken cancellationToken = default)
         {
-            cancellationToken.ThrowIfCancellationRequested();
+            //cancellationToken.ThrowIfCancellationRequested();
 
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
+            //if (user == null)
+            //    throw new ArgumentNullException(nameof(user));
 
-            if (string.IsNullOrWhiteSpace(normalizedRoleName))
-                throw new ArgumentNullException(nameof(normalizedRoleName));
+            //if (string.IsNullOrWhiteSpace(normalizedRoleName))
+            //    throw new ArgumentNullException(nameof(normalizedRoleName));
 
 
-            var role = _roleCollection.FirstOrDefault(x=>x.NormalizedName == normalizedRoleName);
-            if (role == null)
-            {
-                throw new InvalidOperationException(string.Format(System.Globalization.CultureInfo.CurrentCulture, $"Role {0} does not exist.", normalizedRoleName));
-            }
-            if (user.Roles == null)
-            {
-                user.Roles = new List<string>
-                {
-                    role.Name
-                }.ToArray();
-            }
-            else
-            {
-                List<string> userRolesClone = user.Roles.ToList();
-                userRolesClone.Add(role.Name);
-                user.Roles = userRolesClone.ToArray();
-            }
+            //var role = _roleCollection.FirstOrDefault(x=>x.NormalizedName == normalizedRoleName);
+            //if (role == null)
+            //{
+            //    throw new InvalidOperationException(string.Format(System.Globalization.CultureInfo.CurrentCulture, $"Role {0} does not exist.", normalizedRoleName));
+            //}
+            //if (user.Roles == null)
+            //{
+            //    user.Roles = new List<string>
+            //    {
+            //        role.Name
+            //    }.ToArray();
+            //}
+            //else
+            //{
+            //    List<string> userRolesClone = user.Roles.ToList();
+            //    userRolesClone.Add(role.Name);
+            //    user.Roles = userRolesClone.ToArray();
+            //}
 
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
+            throw new Exception("Not implemented!");
         }
         /// <summary>
         /// Removes the given <paramref name="normalizedRoleName"/> from the specified <paramref name="user"/>.
@@ -386,23 +397,24 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
         public Task RemoveFromRoleAsync(User user, string normalizedRoleName, CancellationToken cancellationToken = default)
         {
-            cancellationToken.ThrowIfCancellationRequested();
+            //cancellationToken.ThrowIfCancellationRequested();
 
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
+            //if (user == null)
+            //    throw new ArgumentNullException(nameof(user));
 
-            if (string.IsNullOrWhiteSpace(normalizedRoleName))
-                throw new ArgumentNullException(nameof(normalizedRoleName));
+            //if (string.IsNullOrWhiteSpace(normalizedRoleName))
+            //    throw new ArgumentNullException(nameof(normalizedRoleName));
 
-            var roleName= _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName).Name;
-            if (roleName != null)
-            {
-                var tempList  = user.Roles.ToList();
-                tempList.Remove(roleName);
-                user.Roles = tempList.ToArray();
-            }
+            //var roleName= _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName).Name;
+            //if (roleName != null)
+            //{
+            //    var tempList  = user.Roles.ToList();
+            //    tempList.Remove(roleName);
+            //    user.Roles = tempList.ToArray();
+            //}
 
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
+            throw new Exception("Not implemented!");
         }
         /// <summary>
         /// Retrieves the roles the specified <paramref name="user"/> is a member of.
@@ -417,11 +429,22 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            IList<string> roleNames = user.Roles
-                .ToList();
+            string groupName = "";
+            if (user.Roles.Length > 0)
+            {
+                groupName = user.Roles[0];
+            }
 
-            return Task.FromResult(roleNames);
+            IList<string> roles = _roleGroupManager.GetRolesFromGroup(groupName);
+
+            if (roles == null)
+            {
+                roles = new List<string>();
+            }
+
+            return Task.FromResult(roles);
         }
+
         /// <summary>
         /// Returns a flag indicating if the specified user is a member of the give <paramref name="normalizedRoleName"/>.
         /// </summary>
@@ -440,9 +463,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
-
+            
             var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
-            return Task.FromResult(user.Roles.Contains(blazorRole.Name));
+            if (blazorRole == null)
+                throw (new Exception("Role doesn't exists"));
+            return Task.FromResult(_roleGroupManager.GetRolesFromGroup(user.Roles[0]).Contains(blazorRole.Name));
         }
 
 
@@ -460,7 +485,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
 
-            IList<User> usersInRole = Users.Where(x => x.Roles.Contains(blazorRole.Name)).ToList();
+            IList<User> usersInRole = null;
+            usersInRole = Users.Where(x => x.Roles.Length > 0).Where(x => _roleGroupManager.GetAllGroup().Select(x => x.Name).Contains(x.Roles[0])).Where(x => _roleGroupManager.GetRolesFromGroup(x.Roles[0]).Contains(blazorRole.Name)).ToList();
             return Task.FromResult(usersInRole);
         }
         // <summary>
@@ -522,6 +548,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             return Task.FromResult((IList<User>)new List<User>());
         }
 
-        
+
     }
 }

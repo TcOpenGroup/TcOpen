@@ -10,23 +10,22 @@ namespace PlcHammer.Hmi.Blazor.Security
 {
     internal class Roles
     {
-        private static BlazorRoleManager _roleManager { get; set; }
+        private static BlazorRoleGroupManager _roleGroupManager { get; set; }
+        private static Roles _roles;
+
         private Roles()
         {
-            _roleManager = new BlazorRoleManager();
-            _roleManager.CreateRole(new Role(process_settings_access, "AdminGroup"));
-            _roleManager.CreateRole(new Role(process_traceability_access, "AdminGroup"));
-            _roleManager.CreateRole(new Role(technology_settings_access, "Maintenance"));
-            _roleManager.CreateRole(new Role(manual_start, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(process_traceability_access, "Administrator"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(technology_settings_access, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(ground_position_start, "Operator"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(automat_start, "Operator"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(manual_start, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(station_details, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(sequencer_step, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(technology_ground_all, "Maintenance"));
-            //SecurityManager.Manager.GetOrCreateRole(new Role(technology_automat_all, "Maintenance"));
+            _roleGroupManager.CreateRole(new Role(process_settings_access));
+            _roleGroupManager.CreateRole(new Role(process_traceability_access));
+            _roleGroupManager.CreateRole(new Role(can_user_open_technological_settings));
+            _roleGroupManager.CreateRole(new Role(ground_position_start));
+            _roleGroupManager.CreateRole(new Role(automat_start));
+            _roleGroupManager.CreateRole(new Role(station_details));
+            _roleGroupManager.CreateRole(new Role(technology_settings_access));
+            _roleGroupManager.CreateRole(new Role(manual_start));
+            _roleGroupManager.CreateRole(new Role(sequencer_step));
+            _roleGroupManager.CreateRole(new Role(technology_automat_all));
+            _roleGroupManager.CreateRole(new Role(technology_ground_all));
         }
 
         public const string process_settings_access = nameof(process_settings_access);
@@ -41,12 +40,10 @@ namespace PlcHammer.Hmi.Blazor.Security
         public const string technology_automat_all = nameof(technology_automat_all);
         public const string technology_ground_all = nameof(technology_ground_all);
 
-        private static Roles _roles;
-
-        public static BlazorRoleManager Create()
+        public static void Create(BlazorRoleGroupManager roleGroupManager)
         {
+            _roleGroupManager = roleGroupManager;
             _roles = new Roles();
-            return _roleManager;
         }
 
     }

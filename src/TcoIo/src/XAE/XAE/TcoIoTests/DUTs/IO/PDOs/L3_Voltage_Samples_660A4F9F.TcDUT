@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="L3_Voltage_Samples_660A4F9F" Id="{1e4e49ea-1592-0871-0a8a-d9089ec6744e}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3773-0000-0021'}
+{attribute addProperty BoxType "EL3773-0000-0021"}
+{attribute addProperty Id "U3_SamplesAT %I*U3_Samples_2549228720"}
+{attribute addProperty CRC "1711951775"}
+{attribute addProperty Size "20"}
+TYPE L3_Voltage_Samples_660A4F9F EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "U3_Samples"}
+	U3_Samples AT %I* : U3_Samples_25492287;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

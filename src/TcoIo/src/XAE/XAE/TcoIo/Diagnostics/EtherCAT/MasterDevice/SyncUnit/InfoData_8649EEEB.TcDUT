@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="InfoData_8649EEEB" Id="{5a2f817a-ab8e-073b-2189-4e24d0efa582}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: IODEVICETYPE_ETHERCATPROT'}
+{attribute addProperty BoxType "IODEVICETYPE_ETHERCATPROT"}
+{attribute addProperty Id "ObjectIdAT %I*DWORD4StateAT %I*UINT2SlaveCountAT %I*UINT2"}
+{attribute addProperty CRC "2252992235"}
+{attribute addProperty Size "8"}
+TYPE InfoData_8649EEEB :
+STRUCT
+	{attribute addProperty Name "ObjectId"}
+	ObjectId AT %I* : DWORD;
+	{attribute addProperty Name "State"}
+	State AT %I* : UINT;
+	{attribute addProperty Name "SlaveCount"}
+	SlaveCount AT %I* : UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
