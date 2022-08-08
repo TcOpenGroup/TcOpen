@@ -4,80 +4,71 @@
 @using Vortex.Connector
 
 <div class="card my-3">
-    <a data-bs-toggle="collapse" href="#@getID()" role="button" aria-expanded="false" aria-controls="@getID()" style="color: inherit; text-decoration: inherit;">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="row">
-                    <h4>@getNameOrSymbol()</h4>
-                </div>
-                <div class="row">
-                    <div class="col-1">
-                        <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Display" />
-                    </div>
-                    <div class="col-1">
-                        <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
-                    </div>
-                    <div class="col-1">
-                        <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Display" />
-                    </div>
-                    <div class="col">
-                        <div class="progress mt-4">
-                            <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[0]; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Cyclic</div></div>
-                            <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[1]"></div>
-                            <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[2]; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Cyclic</div></div>
+    <div class="card-header">
+        <a data-bs-toggle="collapse" href="#@ID" role="button" aria-expanded="false" aria-controls="@ID" style="color: inherit; text-decoration: inherit;">
+            <div class="row">
+                <h4 class="col-auto my-auto">@getNameOrSymbol()</h4>
+                <svg width="24" height="24" fill="currentColor" class="bi bi-chevron-down ms-auto col-auto my-auto" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </div>
+        </a>
+    </div>
+    <div class="card-body row align-items-center">
+        <div class="col-1">
+            <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Display" />
+        </div>
+        <div class="col-1">
+            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
+        </div>
+        <div class="col-1">
+            <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Display" />
+        </div>
+        <div class="col">
+            <div class="progress mt-4">
+                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[0]; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
+                <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[1]"></div>
+                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[2]; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Shadow</div></div>
 
-                            <div class="progress-checkpoint" style="left: @getProgressBarValues()[3];"></div>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Display" />
-                    </div>
-                    <div class="col-auto">
-                        <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Display" />
-                    </div>
-                    <div class="col-auto">
-                        <GenericIconView Result="@Component._data.Result.Cyclic" />
-                    </div>
-                </div>
+                <div class="progress-checkpoint" style="left: @getProgressBarValues()[3];"></div>
             </div>
         </div>
-    </a>
-    <div class="card-body collapse" id="@getID()">
+        <div class="col-auto">
+            <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Display" />
+        </div>
+        <div class="col-auto">
+            <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Display" />
+        </div>
+        <div class="col-auto">
+            <GenericIconView Result="@Component._data.Result.Shadow" />
+        </div>
+    </div>
+    <div class="card-body collapse" id="@ID">
         <GenericTcoInspectorDataView Data="@Component._data" Presentation="Display" />
     </div>
 </div>
 
 @code{
-    private string ID = "-1";
+    private string ID = "M" + Guid.NewGuid().ToString();
 
     public string getNameOrSymbol()
     {
         return string.IsNullOrEmpty(Component.AttributeName) ? Component.GetSymbolTail() : Component.AttributeName;
     }
 
-    public string getID()
-    {
-        if(ID == "-1")
-        {
-            Random rnd = new Random();
-            ID = getNameOrSymbol() + rnd.Next(0, 1000000);
-        }
-        return ID;
-    }
-
     public string[] getProgressBarValues()
     {
         double[] ret = new double[4];
 
-        var stredMM = (Component._data.RequiredMin.Cyclic + Component._data.RequiredMax.Cyclic) / 2.0;
-        var stred = (stredMM + Component._data.DetectedStatus.Cyclic) / 2.0;
-        var con = Math.Max(Math.Max(Math.Abs(Component._data.RequiredMin.Cyclic), Math.Abs(Component._data.RequiredMax.Cyclic)), Math.Abs(Component._data.DetectedStatus.Cyclic)) + 0.1;
+        var stredMM = (Component._data.RequiredMin.Shadow + Component._data.RequiredMax.Shadow) / 2.0;
+        var stred = (stredMM + Component._data.DetectedStatus.Shadow) / 2.0;
+        var con = Math.Max(Math.Max(Math.Abs(Component._data.RequiredMin.Shadow), Math.Abs(Component._data.RequiredMax.Shadow)), Math.Abs(Component._data.DetectedStatus.Shadow)) + 0.1;
         var min = stred - con;
         var max = stred + con;
         var minMax = max - min;
-        ret[0] = Math.Abs(((Component._data.RequiredMin.Cyclic - min) / minMax) * 100.0);
-        ret[2] = 100 - Math.Abs(((Component._data.RequiredMax.Cyclic - min) / minMax) * 100.0);
-        ret[3] = Math.Abs(((Component._data.DetectedStatus.Cyclic - min) / minMax) * 100.0);
+        ret[0] = Math.Abs(((Component._data.RequiredMin.Shadow - min) / minMax) * 100.0);
+        ret[2] = 100 - Math.Abs(((Component._data.RequiredMax.Shadow - min) / minMax) * 100.0);
+        ret[3] = Math.Abs(((Component._data.DetectedStatus.Shadow - min) / minMax) * 100.0);
 
         ret[1] = 100 - (ret[0] + ret[2]);
 

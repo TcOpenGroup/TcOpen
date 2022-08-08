@@ -4,57 +4,46 @@
 @using Vortex.Connector
 
 <div class="card my-3">
-    <a data-bs-toggle="collapse" href="#@getID()" role="button" aria-expanded="false" aria-controls="@getID()" style="color: inherit; text-decoration: inherit;">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col-auto me-5">
-                    <h4>@getNameOrSymbol()</h4>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col-auto">
-                            <RenderableContentControl Context="@Component._data.RequiredStatus" Presentation="Control" />
-                        </div>
-                        <div class="col-auto">
-                            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
-                        </div>
-                        <div class="col-auto ms-auto">
-                            <RenderableContentControl Context="@Component._data.StarNotationEnabled" Presentation="Control" />
-                        </div>
-                        <div class="col-auto">
-                            <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Control" />
-                        </div>
-                        <div class="col-auto">
-                            <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Control" />
-                        </div>
-                        <div class="col-auto">
-                            <GenericIconView Result="@Component._data.Result.Cyclic" />
-                        </div>
-                    </div>
-                </div>
+    <div class="card-header">
+        <a data-bs-toggle="collapse" href="#@ID" role="button" aria-expanded="false" aria-controls="@ID" style="color: inherit; text-decoration: inherit;">
+            <div class="row">
+                <h4 class="col-auto my-auto">@getNameOrSymbol()</h4>
+                <svg width="24" height="24" fill="currentColor" class="bi bi-chevron-down ms-auto col-auto my-auto" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>
             </div>
+        </a>
+    </div>
+    <div class="card-body row align-items-center">
+        <div class="col-auto">
+            <RenderableContentControl Context="@Component._data.RequiredStatus" Presentation="Control" />
         </div>
-    </a>
-    <div class="card-body collapse" id="@getID()">
+        <div class="col-auto">
+            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
+        </div>
+        <div class="col-auto ms-auto">
+            <RenderableContentControl Context="@Component._data.StarNotationEnabled" Presentation="Control" />
+        </div>
+        <div class="col-auto">
+            <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Control" />
+        </div>
+        <div class="col-auto">
+            <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Control" />
+        </div>
+        <div class="col-auto">
+            <GenericIconView Result="@Component._data.Result.Shadow" />
+        </div>
+    </div>
+    <div class="card-body collapse" id="@ID">
         <GenericTcoInspectorDataView Data="@Component._data" Presentation="Control" />
     </div>
 </div>
 
 @code{
-    private string ID = "-1";
+    private string ID = "M" + Guid.NewGuid().ToString();
 
     public string getNameOrSymbol()
     {
         return string.IsNullOrEmpty(Component.AttributeName) ? Component.GetSymbolTail() : Component.AttributeName;
-    }
-
-    public string getID()
-    {
-        if (ID == "-1")
-        {
-            Random rnd = new Random();
-            ID = getNameOrSymbol() + rnd.Next(0, 1000000);
-        }
-        return ID;
     }
 }
