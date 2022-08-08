@@ -59,5 +59,149 @@ namespace TcoPneumaticsTestsConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string ___Home__ {
+            get {
+                return ResourceManager.GetString("___Home__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home position sensor.
+        /// </summary>
+        public static string ___Home_position_sensor__ {
+            get {
+                return ResourceManager.GetString("___Home_position_sensor__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In task.
+        /// </summary>
+        public static string ___In_task__ {
+            get {
+                return ResourceManager.GetString("___In_task__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Home.
+        /// </summary>
+        public static string ___Move_Home__ {
+            get {
+                return ResourceManager.GetString("___Move_Home__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOVE HOME a.
+        /// </summary>
+        public static string ___MOVE_HOME_a__ {
+            get {
+                return ResourceManager.GetString("___MOVE_HOME_a__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOVE HOME SWEET HOME.
+        /// </summary>
+        public static string ___MOVE_HOME_SWEET_HOME__ {
+            get {
+                return ResourceManager.GetString("___MOVE_HOME_SWEET_HOME__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to home position actuator.
+        /// </summary>
+        public static string ___Move_to_home_position_actuator__ {
+            get {
+                return ResourceManager.GetString("___Move_to_home_position_actuator__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to Work.
+        /// </summary>
+        public static string ___Move_to_Work__ {
+            get {
+                return ResourceManager.GetString("___Move_to_Work__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOVE TO WORK a.
+        /// </summary>
+        public static string ___MOVE_TO_WORK_a__ {
+            get {
+                return ResourceManager.GetString("___MOVE_TO_WORK_a__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOVE TO WORK HARD WORK.
+        /// </summary>
+        public static string ___MOVE_TO_WORK_HARD_WORK__ {
+            get {
+                return ResourceManager.GetString("___MOVE_TO_WORK_HARD_WORK__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to work position actuator.
+        /// </summary>
+        public static string ___Move_to_work_position_actuator__ {
+            get {
+                return ResourceManager.GetString("___Move_to_work_position_actuator__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string ___Stop__ {
+            get {
+                return ResourceManager.GetString("___Stop__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to STOP a.
+        /// </summary>
+        public static string ___STOP_a__ {
+            get {
+                return ResourceManager.GetString("___STOP_a__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to STOP AND THINK.
+        /// </summary>
+        public static string ___STOP_AND_THINK__ {
+            get {
+                return ResourceManager.GetString("___STOP_AND_THINK__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work.
+        /// </summary>
+        public static string ___Work__ {
+            get {
+                return ResourceManager.GetString("___Work__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work position sensor.
+        /// </summary>
+        public static string ___Work_position_sensor__ {
+            get {
+                return ResourceManager.GetString("___Work_position_sensor__", resourceCulture);
+            }
+        }
     }
 }
