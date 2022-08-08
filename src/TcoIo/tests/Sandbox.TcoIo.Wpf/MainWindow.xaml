@@ -18,7 +18,7 @@
     <TabControl>
         <TabItem Header="Topology renderer" >
             <!--<wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>-->
-            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>
         </TabItem>
         <TabItem Header="Simulation" >
             <Grid>
@@ -32,9 +32,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <sim:SetAllToOPstate  Grid.Column="0" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+                <sim:SetAllToINITstate  Grid.Column="1" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
                 <sim:SetAllToINITstate  Grid.Column="0" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809}"/>
+                <sim:SetAllToINITstate  Grid.Column="1" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1}"/>
             </Grid>
         </TabItem>
         <TabItem Header="Diagnostic messages" >

@@ -68,6 +68,36 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             }
         }
 
+        public static readonly DependencyProperty ChildsForegroundProperty = DependencyProperty.Register("ChildsForeground", typeof(Brush), typeof(StringDisplaySlim), new PropertyMetadata(OnChildsForegroundCallBack));
+        public Brush ChildsForeground
+        {
+            get { return (Brush)GetValue(ChildsForegroundProperty); }
+            set
+            {
+                this.Dispatcher.Invoke(() => SetValue(ChildsForegroundProperty, value));
+            }
+        }
+
+        private static void OnChildsForegroundCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            StringDisplaySlim c = sender as StringDisplaySlim;
+            if (c != null)
+            {
+                c.OnChildsForegroundChanged();
+                c.ChildsForegroundChange(sender, e);
+            }
+        }
+
+        protected virtual void OnChildsForegroundChanged()
+        {
+            OnPropertyChanged("ChildsForeground");
+        }
+        private void ChildsForegroundChange(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            tbDescription.Foreground = e.NewValue as Brush;
+            tbValue.Foreground = e.NewValue as Brush;
+        }
+
         public StringDisplaySlim()
         {
             InitializeComponent();
@@ -75,12 +105,6 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         }
         private void DataContextChange(object sender, DependencyPropertyChangedEventArgs e)
         {
-            //StringDisplaySlim c = sender as StringDisplaySlim;
-            //if (c != null)
-            //{
-            //    c.OnStateChanged();
-            //    c.StateChange(sender, e);
-            //}
             Binding binding = tbValue.GetBindingExpression(TextBox.TextProperty).ParentBinding;
             
             string formatString = DataContext as string;
@@ -143,6 +167,5 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         {
             tbDescription.FontSize = TextBlockUtils.UpdateFontSizeToFitTheTextBoxMaxWidth(tbDescription);
         }
-
     }
 }

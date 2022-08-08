@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
+using TcoIo.Converters.Utilities;
+
 
 namespace TcoIo.Diagnostics.EtherCAT.Display
 {
@@ -30,6 +33,72 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         {
             OnPropertyChanged("Description");
         }
+        private void DescriptionChange(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Binding binding = gbDescription.GetBindingExpression(GroupBox.HeaderProperty).ParentBinding;
+            string formatString = Description as string;
+            if (!string.IsNullOrEmpty(formatString))
+            {
+                Binding b = new Binding
+                {
+                    Source = Description,
+                    Mode = binding.Mode,
+                    StringFormat = formatString
+                };
+                gbDescription.SetBinding(GroupBox.HeaderProperty, b);
+            }
+            else
+            {
+                dynamic dc;
+                if (DataContext != null)
+                {
+                    dc = DataContext;
+                    if (dc.AttributeName != null)
+                    {
+                        formatString = dc.AttributeName;
+                        Binding b = new Binding
+                        {
+                            Path = new PropertyPath("AttributeName"),
+                            Source = DataContext,
+                            Mode = binding.Mode,
+                            StringFormat = formatString
+                        };
+                        gbDescription.SetBinding(GroupBox.HeaderProperty, b);
+                    }
+                }
+            }
+        }
+
+        public static readonly DependencyProperty ChildsForegroundProperty = DependencyProperty.Register("ChildsForeground", typeof(Brush), typeof(StringDisplay), new PropertyMetadata(OnChildsForegroundCallBack));
+        public Brush ChildsForeground
+        {
+            get { return (Brush)GetValue(ChildsForegroundProperty); }
+            set
+            {
+                this.Dispatcher.Invoke(() => SetValue(ChildsForegroundProperty, value));
+            }
+        }
+
+        private static void OnChildsForegroundCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            StringDisplay c = sender as StringDisplay;
+            if (c != null)
+            {
+                c.OnChildsForegroundChanged();
+                c.ChildsForegroundChange(sender, e);
+            }
+        }
+
+        protected virtual void OnChildsForegroundChanged()
+        {
+            OnPropertyChanged("ChildsForeground");
+        }
+        private void ChildsForegroundChange(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            gbDescription.Foreground = e.NewValue as Brush;
+            tbValue.Foreground = e.NewValue as Brush;
+        }
+
         public StringDisplay()
         {
             InitializeComponent();
@@ -68,42 +137,6 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
                         };
                         tbValue.SetBinding(TextBox.TextProperty, b);
                     }
-                    if (dc.AttributeName != null)
-                    {
-                        formatString = dc.AttributeName;
-                        Binding b = new Binding
-                        {
-                            Path = new PropertyPath("AttributeName"),
-                            Source = DataContext,
-                            Mode = binding.Mode,
-                            StringFormat = formatString
-                        };
-                        gbDescription.SetBinding(GroupBox.HeaderProperty, b);
-                    }
-                }
-            }
-        }
-
-        private void DescriptionChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            Binding binding = gbDescription.GetBindingExpression(GroupBox.HeaderProperty).ParentBinding;
-            string formatString = Description as string;
-            if (!string.IsNullOrEmpty(formatString))
-            {
-                Binding b = new Binding
-                {
-                    Source = Description,
-                    Mode = binding.Mode,
-                    StringFormat = formatString
-                };
-                gbDescription.SetBinding(GroupBox.HeaderProperty, b);
-            }
-            else
-            {
-                dynamic dc;
-                if (DataContext != null)
-                {
-                    dc = DataContext;
                     if (dc.AttributeName != null)
                     {
                         formatString = dc.AttributeName;
