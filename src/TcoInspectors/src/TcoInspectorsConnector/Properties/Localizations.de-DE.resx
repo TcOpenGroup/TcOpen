@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,85 +117,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelsTheExectionOfThisAction" xml:space="preserve">
-    <value>Cancels the exection of this action.</value>
+  <data name="___Time_stamp__" xml:space="preserve">
+    <value>Zeitstempel</value>
   </data>
-  <data name="TimeStamp" xml:space="preserve">
-    <value>TimeStamp</value>
+  <data name="___Stab_Time__" xml:space="preserve">
+    <value>Stab.Zeit</value>
   </data>
-  <data name="Message" xml:space="preserve">
-    <value>Message</value>
+  <data name="___Stabilisation_time__The_inspection_will_pass_when_the_condition_is_met_continuously_for_the_duration_of_this_timespan___" xml:space="preserve">
+    <value>Stabilisierungszeit. Die Inspektion gilt als bestanden, wenn die Bedingung für die Dauer dieser Zeitspanne kontinuierlich erfüllt ist.</value>
   </data>
-  <data name="Location" xml:space="preserve">
-    <value>Location</value>
+  <data name="___Timeout__" xml:space="preserve">
+    <value>Zeitüberschreitung</value>
   </data>
-  <data name="Category" xml:space="preserve">
-    <value>Category</value>
+  <data name="___Timeout__Maximal_duration_of_the_inspection_within_which_the_condition_must_be_met___" xml:space="preserve">
+    <value>Zeitüberschreitung. Maximale Dauer der Inspektion, innerhalb derer die Bedingung erfüllt sein muss.</value>
   </data>
-  <data name="Symbol" xml:space="preserve">
-    <value>Symbol</value>
+  <data name="___Result__" xml:space="preserve">
+    <value>Ergebnis</value>
   </data>
-  <data name="SubCategory" xml:space="preserve">
-    <value>Sub-Category</value>
+  <data name="___Result_of_the_inspection___" xml:space="preserve">
+    <value>Ergebnis der Inspektion.</value>
   </data>
-  <data name="Source" xml:space="preserve">
-    <value>Source</value>
+  <data name="___Exclude__" xml:space="preserve">
+    <value>Auschluss</value>
   </data>
-  <data name="AffectedObject" xml:space="preserve">
-    <value>Affected Object</value>
+  <data name="___Inspection_is_excluded_from_the_evaluation__The_test_will_however_run_and_provide_detected_value___" xml:space="preserve">
+    <value>Die Inspektion ist von der Auswertung ausgeschlossen. Der Test wird jedoch durchgeführt und liefert einen ermittelten Wert.</value>
   </data>
-  <data name="AutoUpdate" xml:space="preserve">
-    <value>Auto Update</value>
+  <data name="___Bypass__" xml:space="preserve">
+    <value>Bypass</value>
   </data>
-  <data name="NoMessages" xml:space="preserve">
-    <value>NoMessages</value>
+  <data name="___Test_is_bypassed__no_eveluation_occurs___" xml:space="preserve">
+    <value>Der Test wird umgangen, es findet keine Auswertung statt.</value>
   </data>
-  <data name="Messages" xml:space="preserve">
-    <value>Messages</value>
+  <data name="___Failure_description__" xml:space="preserve">
+    <value>Beschreibung Fehler</value>
   </data>
-  <data name="MinCategoryFilter" xml:space="preserve">
-    <value>Min. category filter</value>
+  <data name="___Brief_failure_desciption__" xml:space="preserve">
+    <value>Kurze Fehlerbeschreibung</value>
   </data>
-  <data name="UpdateMessages" xml:space="preserve">
-    <value>Update messages</value>
+  <data name="___Re_tries__" xml:space="preserve">
+    <value>Wiederholungsversuche</value>
   </data>
-  <data name="FullName" xml:space="preserve">
-    <value>Full Name</value>
+  <data name="___Inspection_will_repeat_given_number_of_times_when_inspection_fails___" xml:space="preserve">
+    <value>Anzahl von Wiederholungen, wenn die Inspektion fehlschlägt.</value>
   </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
+  <data name="___Attempts__" xml:space="preserve">
+    <value>Versuche</value>
   </data>
-  <data name="PeripheryDetailsView_FullName" xml:space="preserve">
-    <value>Full name</value>
+  <data name="___Re_tries_counter__count_the_number_of_times_the_inspection_run_on_this_inspector_instance___" xml:space="preserve">
+    <value>Zähler der Wiederholungsversuche, wie oft die Inspektion bei dieser Inspektionsinstanz durchgeführt wurde.</value>
   </data>
-  <data name="DiagnosticsRunnig" xml:space="preserve">
-    <value>Diagnostics is running... wait please...</value>
+  <data name="___Code__" xml:space="preserve">
+    <value>Code</value>
   </data>
-  <data name="PerCycleCount" xml:space="preserve">
-    <value>Per cycle count</value>
+  <data name="___Arbitrary_error_code_for_this_inspection__" xml:space="preserve">
+    <value>Willkürlicher Fehlercode für diese Prüfung</value>
   </data>
-  <data name="WeHaveNoFurtherInfoAboutThisMessage" xml:space="preserve">
-    <value>We have no further info about this message</value>
+  <data name="___Required__" xml:space="preserve">
+    <value>Erforderlich</value>
   </data>
-  <data name="NoMessageSelected" xml:space="preserve">
-    <value>No message selected</value>
+  <data name="___Required_status_for_inspection_to_pass__Can_contain_pattern_string_when__Star_notation_is_enabled___" xml:space="preserve">
+    <value>Erforderlicher Status für das Bestehen der Prüfung. Kann eine Musterzeichenkette enthalten, wenn "Sternchen-Notation" aktiviert ist.</value>
   </data>
-  <data name="DiagnosticsDepth" xml:space="preserve">
-    <value>Diagnostics depth</value>
+  <data name="___Detected__" xml:space="preserve">
+    <value>Erkannt</value>
   </data>
-  <data name="Roger" xml:space="preserve">
-    <value>ACKN</value>
+  <data name="___Detected_data__" xml:space="preserve">
+    <value>Erkannte Daten</value>
   </data>
-  <data name="RogerAll" xml:space="preserve">
-    <value>ACKN ALL</value>
+  <data name="___Min___" xml:space="preserve">
+    <value>Min.</value>
   </data>
-  <data name="Acknowledgement" xml:space="preserve">
-    <value>Acknowledgement</value>
+  <data name="___Min__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Mindestwert für Bestehen der Prüfung.</value>
   </data>
-  <data name="DiscardingMessages" xml:space="preserve">
-    <value>Discarding messages</value>
+  <data name="___Detected_value__" xml:space="preserve">
+    <value>Ermittelter Wert</value>
   </data>
-  <data name="DiscartingMessages" xml:space="preserve">
-    <value>Discarding messages</value>
+  <data name="___Max___" xml:space="preserve">
+    <value>Max.</value>
+  </data>
+  <data name="___Max__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Maximalwert für Bestehen der Prüfung.</value>
+  </data>
+  <data name="___Sets_the_required_status_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Legt den erforderlichen Status für das Bestehen der Inspektion fest.</value>
+  </data>
+  <data name="___Displays_detected_status_of_this_check___" xml:space="preserve">
+    <value>Zeigt den Erkennungsstatus dieser Prüfung an.</value>
   </data>
 </root>
