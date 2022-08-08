@@ -133,11 +133,20 @@ namespace TcOpen.Inxton.TcoCore.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Discarding messeges.
+        ///   Looks up a localized string similar to Discarding messages.
         /// </summary>
         public static string DiscardingMessages {
             get {
                 return ResourceManager.GetString("DiscardingMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discarding messages.
+        /// </summary>
+        public static string DiscartingMessages {
+            get {
+                return ResourceManager.GetString("DiscartingMessages", resourceCulture);
             }
         }
         
