@@ -30,7 +30,6 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--<Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Background="{StaticResource InxtonGrayLight}">-->
         <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,0,5,0" Margin="0" Padding="0">
             <Border.LayoutTransform>
                 <TransformGroup>
@@ -52,7 +51,6 @@
 
                     <WrapPanel Grid.Row="0" Grid.Column="0">
                         <TextBlock Text="Name: "                  FontWeight="Light"    Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
-                        <!--<TextBlock Text="{Binding AttributeName}" FontSize="{Binding RelativeSource={RelativeSource Self}, Converter={conv:StringLengthToFontSize}, ConverterParameter=145}" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}" VerticalAlignment="Center"/>-->
                         <TextBlock x:Name="tbName" Text="{Binding AttributeName , NotifyOnTargetUpdated=true}" MaxWidth="145" FontWeight="DemiBold" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}" VerticalAlignment="Center" TargetUpdated="tbName_TargetUpdated"/>
                     </WrapPanel>
 

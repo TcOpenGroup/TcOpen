@@ -1,5 +1,7 @@
 using System;
+using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,7 +14,7 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class InfoDataSyncUnitStateHWDiagView : UserControl
+    public partial class InfoDataSyncUnitStateHWDiagView : UserControl/*, INotifyPropertyChanged*/
     {
         public InfoDataSyncUnitStateHWDiagView()
         {
@@ -192,6 +194,8 @@ namespace TcoIo
             return this;
         }
     }
+
+
 }
 
 
