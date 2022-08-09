@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Term_237_EK1122_86A8F7BD" Id="{ef39fb24-1352-00ae-1127-fa2ff6eaf008}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "Drive_238_AX5101_0000_0214AX5101_1BD22F5129"}
+{attribute addProperty CRC "2259220413"}
+{attribute addProperty Size "29"}
+{attribute addProperty Name "Term 237 (EK1122)"}
+TYPE Term_237_EK1122_86A8F7BD EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Drive 238 (AX5101-0000-0214)"}
+	{attribute addProperty PreviousPort "Term 237 (EK1122) : D"}
+	Drive_238_AX5101_0000_0214 : AX5101_1BD22F51;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

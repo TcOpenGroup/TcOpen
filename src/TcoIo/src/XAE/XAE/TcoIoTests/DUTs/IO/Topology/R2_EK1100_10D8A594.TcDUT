@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R2_EK1100_10D8A594" Id="{835941d7-900e-0992-0243-1cbf977a5ba3}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "R2_A2_EC_EK1122R2_A2_EC_EK1122_6D3594D497R2_A3_DI_EL1809EL1809_32157CFD20R2_A4_DI_EL1809EL1809_32157CFD20R2_A5_DI_EL1809EL1809_32157CFD20R2_A6_DI_EL1809EL1809_32157CFD20R2_A7_DI_EL1809EL1809_32157CFD20R2_A8_DI_EL1809EL1809_32157CFD20R2_A9_DI_EL1809EL1809_32157CFD20R2_A10_DI_EL1809EL1809_32157CFD20R2_A11_DC_EL7332EL7332_DFB2BED746R2_A12_DI_EL1809EL1809_32157CFD20R2_A13_DI_EL1809EL1809_32157CFD20R2_A14_DI_EL1809EL1809_32157CFD20R2_A15_DO_EL2809EL2809_2B6483BD19R2_A16_DO_EL2809EL2809_2B6483BD19R2_A17_DO_EL2809EL2809_2B6483BD19R2_A18_DO_EL2809EL2809_2B6483BD19R2_A19_DO_EL2809EL2809_2B6483BD19R2_EndTerminal_EL9011EL9011_D65D3D320"}
+{attribute addProperty CRC "282633620"}
+{attribute addProperty Size "458"}
+{attribute addProperty Name "R2 (EK1100)"}
+TYPE R2_EK1100_10D8A594 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R2_A2_EC (EK1122)"}
+	{attribute addProperty PreviousPort "R2 (EK1100) : B"}
+	R2_A2_EC_EK1122 : R2_A2_EC_EK1122_6D3594D4;
+	{attribute addProperty Name "R2_A3_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A2_EC (EK1122) : C"}
+	R2_A3_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A4_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A3_DI (EL1809) : B"}
+	R2_A4_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A5_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A4_DI (EL1809) : B"}
+	R2_A5_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A6_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A5_DI (EL1809) : B"}
+	R2_A6_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A7_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A6_DI (EL1809) : B"}
+	R2_A7_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A8_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A7_DI (EL1809) : B"}
+	R2_A8_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A9_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A8_DI (EL1809) : B"}
+	R2_A9_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A10_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A9_DI (EL1809) : B"}
+	R2_A10_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A11_DC (EL7332)"}
+	{attribute addProperty PreviousPort "R2_A10_DI (EL1809) : B"}
+	R2_A11_DC_EL7332 : EL7332_DFB2BED7;
+	{attribute addProperty Name "R2_A12_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A11_DC (EL7332) : B"}
+	R2_A12_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A13_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A12_DI (EL1809) : B"}
+	R2_A13_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A14_DI (EL1809)"}
+	{attribute addProperty PreviousPort "R2_A13_DI (EL1809) : B"}
+	R2_A14_DI_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "R2_A15_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R2_A14_DI (EL1809) : B"}
+	R2_A15_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R2_A16_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R2_A15_DO (EL2809) : B"}
+	R2_A16_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R2_A17_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R2_A16_DO (EL2809) : B"}
+	R2_A17_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R2_A18_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R2_A17_DO (EL2809) : B"}
+	R2_A18_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R2_A19_DO (EL2809)"}
+	{attribute addProperty PreviousPort "R2_A18_DO (EL2809) : B"}
+	R2_A19_DO_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "R2_EndTerminal (EL9011)"}
+	{attribute addProperty PreviousPort "R2_A19_DO (EL2809) : B"}
+	R2_EndTerminal_EL9011 : EL9011_D65D3D32;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.9">
-  <DUT Name="EL3174_B71BFF42" Id="{62f97017-e38a-079e-13d8-e5cede1c3da6}">
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="EL3174_B71BFF42" Id="{9d9ee962-dffa-00f0-0927-dce9d0c350b2}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3174-0002-0017'}
+{attribute addProperty VendorId "#x00000002"}
 {attribute addProperty BoxType "EL3174-0002-0017"}
+{attribute addProperty Description "EL3174-0002 4Ch. Ana. Input +/-10V, +/-20mA 16 Bit, Isolated Channels"}
+{attribute addProperty Physics "KK"}
 {attribute addProperty Id "AI_Standard_Channel_1AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_2AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_3AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_4AT %I*AI_Standard_Channel_A8DF64E310WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3072065346"}
 {attribute addProperty Size "44"}

@@ -1,41 +1,22 @@
 ﻿@page "/security"
-@using System.Security.Claims;
-@using Microsoft.AspNetCore.Identity;
-@using TcOpen.Inxton.Local.Security
-@inject UserManager<User> _userManager
-@inject SignInManager<User> _signInManager
-@inject BlazorRoleManager _roleManager
+
 <h3>Security</h3>
 
+<button class="btn btn-primary my-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Example</button>
+<div class="collapse my-3" id="collapseExample">
+    <ExampleView @ref="@exampleView"></ExampleView>
+</div>
 
-
-<AuthorizeView Roles="Administrator" >
+<AuthorizeView Roles="Administrator">
     <Authorized>
-        <UserManagementView @ref="@UserMgmtView"></UserManagementView>
-
-
+        <SecurityManagementView @ref="@securityManagementView"></SecurityManagementView>
     </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
     </NotAuthorized>
 </AuthorizeView>
 
-<AuthorizeView Roles="@_roleManager.GetGroupRoleString("AdminGroup")">
-
-    <p>You can see this only and only if you have some role from AdminGroup</p>
-</AuthorizeView>
-
-
-
-
-
-
-
 @code {
-
-
-
-    private UserManagementView UserMgmtView { get; set; }
-
-
+    private SecurityManagementView securityManagementView { get; set; }
+    private ExampleView exampleView { get; set; }
 }

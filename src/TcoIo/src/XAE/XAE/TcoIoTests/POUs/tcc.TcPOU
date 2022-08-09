@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="tcc" Id="{e080c9bb-bd0c-0413-089e-5010da0ed8e6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK tcc EXTENDS TcoCore.TcoContext
 VAR
@@ -39,16 +39,16 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
-Device_1(	SyncUnits		:= ADR(		GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
-			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
-			Inputs			:=			GVL_iXlinker.Device_1_EtherCAT.Inputs,
-			InfoData		:=			GVL_iXlinker.Device_1_EtherCAT.InfoData);	
+//Device_1(	SyncUnits		:= ADR(		GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
+//			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
+//			Inputs			:=			GVL_iXlinker.Device_1_EtherCAT.Inputs,
+//			InfoData		:=			GVL_iXlinker.Device_1_EtherCAT.InfoData);	
 
 			
-Device_4(	SyncUnits		:= ADR(		GVL_iXlinker.Device_4_EtherCAT.SyncUnits),
-			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_4_EtherCAT.SyncUnits),
-			Inputs			:=			GVL_iXlinker.Device_4_EtherCAT.Inputs,
-			InfoData		:=			GVL_iXlinker.Device_4_EtherCAT.InfoData);	
+//Device_4(	SyncUnits		:= ADR(		GVL_iXlinker.Device_4_EtherCAT.SyncUnits),
+//			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_4_EtherCAT.SyncUnits),
+//			Inputs			:=			GVL_iXlinker.Device_4_EtherCAT.Inputs,
+//			InfoData		:=			GVL_iXlinker.Device_4_EtherCAT.InfoData);	
 			
 
 ]]></ST>

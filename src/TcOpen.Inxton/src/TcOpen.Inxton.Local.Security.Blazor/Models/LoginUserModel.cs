@@ -9,7 +9,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Users
 {
     public class LoginUserModel
     {
-
         [Required]
         public string Username { get; set; }
 
@@ -19,6 +18,5 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Users
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-
     }
 }

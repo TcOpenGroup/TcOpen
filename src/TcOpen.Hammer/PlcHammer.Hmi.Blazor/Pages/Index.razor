@@ -1,13 +1,12 @@
 ﻿@page "/"
 @inherits RenderableComponentBase
 
+
 <h1>
     TcOpen.Hammer
 </h1>
 
-
-
-
+@*<RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._automatMode." Presentation="Dialog"></RenderableContentControl>*@
 
 <div class="d-flex flex-row">
     @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
@@ -15,7 +14,8 @@
 
         <div class="p-2">
             <RenderableContentControl Presentation="Base"
-                                      Context="@task" />
+                                      Context="@task"
+                                      Class="p-2"/>
         </div>
     }
 </div>
@@ -61,6 +61,6 @@
     {
         UpdateValuesOnChange(Station._groundModeTask);
         UpdateValuesOnChange(Station._automatModeTask);
+    
     }
-
 }

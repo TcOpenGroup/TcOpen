@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="AX5103_1BD22F51" Id="{677eb64b-8dcc-0185-3053-554cfe42dd79}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: AX5103-0000-0203-0203'}
+{attribute addProperty VendorId "#x00000002"}
+{attribute addProperty BoxType "AX5103-0000-0203-0203"}
+{attribute addProperty Description "AX5103-0000-0203 EtherCAT Drive (SoE, 1 Ch.)"}
+{attribute addProperty Physics "YY_K"}
+{attribute addProperty Id "AT_xAT %I*AT_x_4EC2E76810MDTAT %Q*MDT_864618EC6WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_F60A43AC11"}
+{attribute addProperty CRC "466759505"}
+{attribute addProperty Size "29"}
+TYPE AX5103_1BD22F51 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
+STRUCT
+	{attribute addProperty Name "AT_x"}
+	AT_x : AT_x_4EC2E768;
+	{attribute addProperty Name "MDT"}
+	MDT : MDT_864618EC;
+	{attribute addProperty Name "WcState"}
+	WcState : TcoIo.WcState_9091E0EB;
+	{attribute addProperty Name "InfoData"}
+	InfoData : InfoData_F60A43AC;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

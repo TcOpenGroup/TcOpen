@@ -15,40 +15,48 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
     public class BlazorSecurityTestsFixture : IDisposable
     {
         private InMemoryRepository<UserData> _inMemoryRepoUser;
-        private BlazorRoleManager _inMemoryRepoRole;
+        private InMemoryRepository<GroupData> _inMemoryRepoGroup;
+        private BlazorRoleGroupManager _roleGroupManager;
         public BlazorSecurityTestsFixture()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
-            _inMemoryRepoRole = new BlazorRoleManager();
-            Repository = new RepositoryService(_inMemoryRepoUser, _inMemoryRepoRole);
+            _inMemoryRepoGroup = new InMemoryRepository<GroupData>();
+            _roleGroupManager = new BlazorRoleGroupManager(_inMemoryRepoGroup);
+            Repository = new RepositoryService(_inMemoryRepoUser, _roleGroupManager);
             UserStore = new UserStore(Repository);
-            RoleStore = new RoleStore(Repository);
             SeedData = new Seed();
-            Repository.UserRepository.Create(SeedData.DefaultUser.Id, new UserData(SeedData.DefaultUser));
+
+            Repository.UserRepository.Create(SeedData.ExistUser.Id, new UserData(SeedData.ExistUser));
             Repository.UserRepository.Create(SeedData.RemoveUser.Id, new UserData(SeedData.RemoveUser));
             Repository.UserRepository.Create(SeedData.UpdateUser.Id, new UserData(SeedData.UpdateUser));
+            Repository.UserRepository.Create(SeedData.AdminUser.Id, new UserData(SeedData.AdminUser));
+            Repository.UserRepository.Create(SeedData.DefaultUser.Id, new UserData(SeedData.DefaultUser));
 
-            _inMemoryRepoRole.CreateRole(new Inxton.Security.Role("Admin", "AdminGroup"));
-            _inMemoryRepoRole.CreateRole(new Inxton.Security.Role("Default", "AdminGroup"));
-         
-           
+            _roleGroupManager.CreateRole(new Inxton.Security.Role("RemoveRole"));
+            _roleGroupManager.CreateRole(new Inxton.Security.Role("UpdateRole"));
+            _roleGroupManager.CreateRole(new Inxton.Security.Role("Administrator"));
+            _roleGroupManager.CreateRole(new Inxton.Security.Role("Default"));
 
+            _roleGroupManager.CreateGroup("RemoveGroup");
+            _roleGroupManager.CreateGroup("RemoveRolesGroup");
+            _roleGroupManager.CreateGroup("UpdateGroup");
+            _roleGroupManager.CreateGroup("AdminGroup");
+            _roleGroupManager.CreateGroup("DefaultGroup");
+
+            _roleGroupManager.AddRoleToGroup("AdminGroup", "Administrator");
+            _roleGroupManager.AddRolesToGroup("DefaultGroup", new string[] { "Administrator", "Default" });
+            _roleGroupManager.AddRolesToGroup("RemoveRolesGroup", new string[] { "Administrator", "Default" });
         }
 
-
-
-
         public UserStore UserStore { get; set; }
-        public RoleStore RoleStore { get; set; }
-      
         public Seed SeedData { get; set; }
+
         public IRepositoryService Repository { get; set; }
 
         public void Dispose()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
-            _inMemoryRepoRole = new BlazorRoleManager();
-            Repository = new RepositoryService(_inMemoryRepoUser, _inMemoryRepoRole);
+            Repository = new RepositoryService(_inMemoryRepoUser, _roleGroupManager);
         }
     }
 }

@@ -5,9 +5,17 @@
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPackable>false</IsPackable>  	
-  </PropertyGroup> 
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Icons\WarningIcon.png" />
+  </ItemGroup> 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoIo.Wpf\TcOpen.Inxton.TcoIo.Wpf.csproj" />
     <ProjectReference Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj" />
+  </ItemGroup> 
+  <ItemGroup>
+    <Resource Include="Icons\WarningIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 </Project>

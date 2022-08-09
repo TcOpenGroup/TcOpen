@@ -16,34 +16,46 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         }
         public void SeedData()
         {
-            AdminUser = new User
+            ExistUser = new User
             {
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                Email = "admin@admin.com",
-                NormalizedEmail = "ADMIN@ADMIN.COM",
-                Roles = new string[] { "Admin"},
-                Id = "ADMIN",
-                CanUserChangePassword = true,
+                UserName = "exist",
+                NormalizedUserName = "EXIST",
+                Email = "exist@exist.com",
+                NormalizedEmail = "EXIST@EXIST.COM",
+                Roles = new List<string>().ToArray(),
+                Id = "EXIST",
+                CanUserChangePassword = false,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 PasswordHash = "password"
-                
             };
 
-            DefaultUser = new User
+            NoExistUser = new User
             {
-                UserName = "default",
-                NormalizedUserName = "DEFAULT",
-                Email = "default@default.com",
-                NormalizedEmail = "DEFAULT@DEFAULT.COM",
-                Roles = new string[] { "Default" },
-                Id = "DEFAULT",
-                CanUserChangePassword = true,
+                UserName = "noexist",
+                NormalizedUserName = "NOEXIST",
+                Email = "noexist@noexist.com",
+                NormalizedEmail = "NOEXIST@NOEXIST.COM",
+                Roles = new List<string>().ToArray(),
+                Id = "NOEXIST",
+                CanUserChangePassword = false,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 PasswordHash = "password"
+            };
 
+            CreateUser = new User
+            {
+                UserName = "create",
+                NormalizedUserName = "CREATE",
+                Email = "create@create.com",
+                NormalizedEmail = "CREATE@CREATE.COM",
+                Roles = new List<string>().ToArray(),
+                Id = "CREATE",
+                CanUserChangePassword = false,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                PasswordHash = "password"
             };
 
             RemoveUser = new User
@@ -58,7 +70,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
                 SecurityStamp = Guid.NewGuid().ToString(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 PasswordHash = "password"
-
             };
 
             UpdateUser = new User
@@ -73,15 +84,43 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
                 SecurityStamp = Guid.NewGuid().ToString(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 PasswordHash = "password"
-
             };
 
-           
+            AdminUser = new User
+            {
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                Roles = new string[] { "AdminGroup" },
+                Id = "ADMIN",
+                CanUserChangePassword = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                PasswordHash = "password"
+            };
+
+            DefaultUser = new User
+            {
+                UserName = "default",
+                NormalizedUserName = "DEFAULT",
+                Email = "default@default.com",
+                NormalizedEmail = "DEFAULT@DEFAULT.COM",
+                Roles = new string[] { "DefaultGroup" },
+                Id = "DEFAULT",
+                CanUserChangePassword = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                PasswordHash = "password"
+            };
         }
-        public User AdminUser { get; set; }
-        public User DefaultUser { get; set; }
+
+        public User ExistUser { get; set; }
+        public User NoExistUser { get; set; }
+        public User CreateUser { get; set; }
         public User RemoveUser { get; set; }
         public User UpdateUser { get; set; }
-       
+        public User AdminUser { get; set; }
+        public User DefaultUser { get; set; }
     }
 }
