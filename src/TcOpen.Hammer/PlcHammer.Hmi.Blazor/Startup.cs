@@ -77,7 +77,6 @@ namespace PlcHammer.Hmi.Blazor
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
-            services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN }));
             if (mongoDB)/*Mongo repositories for data*/
             {
                 SetUpMongoDatabase();
