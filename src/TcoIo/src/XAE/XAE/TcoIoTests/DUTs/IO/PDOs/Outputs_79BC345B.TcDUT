@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Outputs_79BC345B" Id="{29e216e7-fca2-03fd-3ccc-689707c675a5}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: AES-D-BC-ECAT-0000'}
+{attribute addProperty BoxType "AES-D-BC-ECAT-0000"}
+{attribute addProperty Id "digital_Data_OAT %Q*ARRAY[0..27] OF USINT28"}
+{attribute addProperty CRC "3096397179"}
+{attribute addProperty Size "28"}
+TYPE Outputs_79BC345B EXTENDS TcoIo.OutputBase_10CEE7DE :
+STRUCT
+	{attribute addProperty Name "digital_Data_O"}
+	digital_Data_O AT %Q* : ARRAY[0..27] OF USINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

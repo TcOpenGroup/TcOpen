@@ -10,22 +10,23 @@
     xmlns:disp="clr-namespace:TcoIo.Diagnostics.EtherCAT.Display"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    x:Name="InfoData"
+    DataContextChanged="InfoData_DataContextChanged"    
     mc:Ignorable="d">
     <d:UserControl.DataContext>
         <TcoIo:InfoData_8649EEEB/>
     </d:UserControl.DataContext>
     <StackPanel >
-        <GroupBox Header="{Binding AttributeName}" Foreground="{Binding State.Cyclic, Converter={local:InfoDataSyncUnitStateToForeground}}" >
+        <GroupBox x:Name="groupBox" Header="{Binding AttributeName}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
-                <disp:StringDisplaySlim Grid.Row ="0" DataContext="{Binding ObjectId}" />
+                <disp:StringDisplaySlim x:Name="dispObjectId" Grid.Row ="0" DataContext="{Binding ObjectId}"/>
                 <local:InfoDataSyncUnitStateHWDiagView Grid.Row ="1" DataContext="{Binding State}"  />
-                <disp:StringDisplaySlim Grid.Row ="2"  DataContext="{Binding SlaveCount}"/>
+                <disp:StringDisplaySlim x:Name="dispSlaveCount" Grid.Row ="2" DataContext="{Binding SlaveCount}" />
             </Grid>
         </GroupBox>
     </StackPanel>

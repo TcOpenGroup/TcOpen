@@ -4,13 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using System.Collections.ObjectModel;
 using TcoIo.Topology;
 using System.Windows.Shapes;
-using System.Windows.Media;
-using System.Windows.Data;
-using TcoIo.Converters;
-using System.Windows.Input;
+using System.Linq;
 
 namespace TcoIo
 {
@@ -71,6 +67,24 @@ namespace TcoIo
                         isSlave = true;
                         PresentationType = "TopologyEndTerminalM90";
                         break;
+                    }
+                }
+                if (isSlave)
+                {
+                    if (obj != null)
+                    {
+                        IVortexObject InfoData = obj.GetKids().Where(i => i.AttributeName.Contains("InfoData")).FirstOrDefault() as IVortexObject;
+
+                        if (InfoData != null)
+                        {
+                            IVortexElement State = InfoData.GetKids().Where(i => i.AttributeName.Contains("State")).FirstOrDefault() as IVortexElement;
+
+                            if (State != null)
+                            {
+                                IValueTag StateTag = State as IValueTag;
+                                StateTag.Subscribe((sender,arg) => UpdateInfoDataState(sender, arg));
+                            }
+                        }
                     }
                 }
 

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="RC30_1_EK1100_B995809E" Id="{38ed6bd5-9e07-07b6-024c-c3d429dd959f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "RC30_A2_EK1122RC30_A2_EK1122_334E476373RC30_A3_EK1122RC30_A3_EK1122_482A08F6120RC30_A5_EL1809EL1809_32157CFD20RC30_A6_EL1809EL1809_32157CFD20RC30_A7_EL2809EL2809_2B6483BD19RC30_A8_EL2809EL2809_2B6483BD19RC30_A9_EL2809EL2809_2B6483BD19RC30_1_EndTerminal_EL9010EL9010_D29C20850"}
+{attribute addProperty CRC "3113582750"}
+{attribute addProperty Size "290"}
+{attribute addProperty Name "RC30_1 (EK1100)"}
+TYPE RC30_1_EK1100_B995809E EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "RC30_A2 (EK1122)"}
+	{attribute addProperty PreviousPort "RC30_1 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
+	RC30_A2_EK1122 : RC30_A2_EK1122_334E4763;
+	{attribute addProperty Name "RC30_A3 (EK1122)"}
+	{attribute addProperty PreviousPort "RC30_A2 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
+	RC30_A3_EK1122 : RC30_A3_EK1122_482A08F6;
+	{attribute addProperty Name "RC30_A5 (EL1809)"}
+	{attribute addProperty PreviousPort "RC30_A3 (EK1122) : C"}
+	{attribute addProperty SyncUnit "C30"}
+	RC30_A5_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RC30_A6 (EL1809)"}
+	{attribute addProperty PreviousPort "RC30_A5 (EL1809) : B"}
+	{attribute addProperty SyncUnit "C30"}
+	RC30_A6_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "RC30_A7 (EL2809)"}
+	{attribute addProperty PreviousPort "RC30_A6 (EL1809) : B"}
+	{attribute addProperty SyncUnit "C30"}
+	RC30_A7_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC30_A8 (EL2809)"}
+	{attribute addProperty PreviousPort "RC30_A7 (EL2809) : B"}
+	{attribute addProperty SyncUnit "C30"}
+	RC30_A8_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC30_A9 (EL2809)"}
+	{attribute addProperty PreviousPort "RC30_A8 (EL2809) : B"}
+	{attribute addProperty SyncUnit "C30"}
+	RC30_A9_EL2809 : EL2809_2B6483BD;
+	{attribute addProperty Name "RC30_1_EndTerminal (EL9010)"}
+	{attribute addProperty PreviousPort "RC30_A9 (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
+	RC30_1_EndTerminal_EL9010 : EL9010_D29C2085;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
