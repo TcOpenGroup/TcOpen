@@ -8,7 +8,7 @@ using TcoIo;
 
 namespace TcoIo.Diagnostics.EtherCAT.Display
 {
-    public partial class AmsNetIdDisplaySlim : Grid, INotifyPropertyChanged
+    public partial class AmsNetIdDisplaySlim 
     {
         public AmsNetIdDisplaySlim()
         {
@@ -37,38 +37,5 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             tbValue.SetBinding(TextBox.TextProperty, b);
             tbDescription.SetValue(TextBox.TextProperty, tcoAmsNetId.AttributeName);
         }
-
-        public static readonly DependencyProperty ChildsForegroundProperty = DependencyProperty.Register("ChildsForeground", typeof(Brush), typeof(AmsNetIdDisplaySlim), new PropertyMetadata(OnChildsForegroundCallBack));
-        public Brush ChildsForeground
-        {
-            get { return (Brush)GetValue(ChildsForegroundProperty); }
-            set
-            {
-                this.Dispatcher.Invoke(() => SetValue(ChildsForegroundProperty, value));
-            }
-        }
-
-        private static void OnChildsForegroundCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            AmsNetIdDisplaySlim c = sender as AmsNetIdDisplaySlim;
-            if (c != null)
-            {
-                c.OnChildsForegroundChanged();
-                c.ChildsForegroundChange(sender, e);
-            }
-        }
-
-        protected virtual void OnChildsForegroundChanged()
-        {
-            OnPropertyChanged("ChildsForeground");
-        }
-        private void ChildsForegroundChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            tbDescription.Foreground = e.NewValue as Brush;
-            tbValue.Foreground = e.NewValue as Brush;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

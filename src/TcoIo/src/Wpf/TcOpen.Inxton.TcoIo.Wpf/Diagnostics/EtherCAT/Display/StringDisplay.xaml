@@ -1,21 +1,28 @@
-﻿<GroupBox
-    x:Name="gbDescription"
+﻿<UserControl
+    x:Name="userControl"
     x:Class="TcoIo.Diagnostics.EtherCAT.Display.StringDisplay"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Header="{Binding Description, Mode=OneWay}"
-    FontWeight="Light"
     mc:Ignorable="d">
-        <GroupBox.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="DefaultStyling.xaml" />
+                <ResourceDictionary Source="DefaultStyling.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </GroupBox.Resources>
-    <TextBox x:Name="tbValue" Text="{Binding _, Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background="Transparent"/> 
-</GroupBox>
+    </UserControl.Resources>
+    <GroupBox x:Name="gbDescription" Header="{Binding Description, Mode=OneWay}" FontWeight="Light">
+        <TextBox x:Name="tbValue" Text="{Binding _, Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background="Transparent" >
+            <TextBox.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+    </GroupBox>
+</UserControl>
     
     

@@ -47,8 +47,8 @@ namespace TcoIo
                 {
                     bool hasError = dt.ObjectId.Synchron != 0 && dt.SlaveCount.Synchron > 0 && dt.State.Synchron != 8;
                     Brush foregroundBrush = new SyncUnitErrorToForeground().Convert(hasError, null, null, null) as Brush;
-                    dispObjectId.ChildsForeground = foregroundBrush;
-                    dispSlaveCount.ChildsForeground = foregroundBrush;
+                    dispObjectId.Foreground = foregroundBrush;
+                    dispSlaveCount.Foreground = foregroundBrush;
                     groupBox.Foreground = foregroundBrush;
                 }
             });

@@ -69,36 +69,6 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             }
         }
 
-        public static readonly DependencyProperty ChildsForegroundProperty = DependencyProperty.Register("ChildsForeground", typeof(Brush), typeof(StringDisplay), new PropertyMetadata(OnChildsForegroundCallBack));
-        public Brush ChildsForeground
-        {
-            get { return (Brush)GetValue(ChildsForegroundProperty); }
-            set
-            {
-                this.Dispatcher.Invoke(() => SetValue(ChildsForegroundProperty, value));
-            }
-        }
-
-        private static void OnChildsForegroundCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            StringDisplay c = sender as StringDisplay;
-            if (c != null)
-            {
-                c.OnChildsForegroundChanged();
-                c.ChildsForegroundChange(sender, e);
-            }
-        }
-
-        protected virtual void OnChildsForegroundChanged()
-        {
-            OnPropertyChanged("ChildsForeground");
-        }
-        private void ChildsForegroundChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            gbDescription.Foreground = e.NewValue as Brush;
-            tbValue.Foreground = e.NewValue as Brush;
-        }
-
         public StringDisplay()
         {
             InitializeComponent();

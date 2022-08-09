@@ -14,72 +14,12 @@ namespace TcoIo
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class InfoDataSyncUnitStateHWDiagView : UserControl, INotifyPropertyChanged
+    public partial class InfoDataSyncUnitStateHWDiagView : UserControl/*, INotifyPropertyChanged*/
     {
         public InfoDataSyncUnitStateHWDiagView()
         {
             InitializeComponent();
         }
-        public static readonly DependencyProperty ChildsBackgroundProperty = DependencyProperty.Register("ChildsBackground", typeof(Brush), typeof(InfoDataSyncUnitStateHWDiagView), new PropertyMetadata(OnChildsBackgroundCallBack));
-        public Brush ChildsBackground
-        {
-            get { return (Brush)GetValue(ChildsBackgroundProperty); }
-            set
-            {
-                this.Dispatcher.Invoke(() => SetValue(ChildsBackgroundProperty, value));
-            }
-        }
-
-        private static void OnChildsBackgroundCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            InfoDataSyncUnitStateHWDiagView c = sender as InfoDataSyncUnitStateHWDiagView;
-            if (c != null)
-            {
-                c.OnChildsBackgroundChanged();
-                c.ChildsBackgroundChange(sender, e);
-            }
-        }
-
-        protected virtual void OnChildsBackgroundChanged()
-        {
-            OnPropertyChanged("ChildsBackground");
-        }
-        private void ChildsBackgroundChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            stackPanel.Background = e.NewValue as Brush;
-        }
-
-        public static readonly DependencyProperty ChildsForegroundProperty = DependencyProperty.Register("ChildsForeground", typeof(Brush), typeof(InfoDataSyncUnitStateHWDiagView), new PropertyMetadata(OnChildsForegroundCallBack));
-        public Brush ChildsForeground
-        {
-            get { return (Brush)GetValue(ChildsForegroundProperty); }
-            set
-            {
-                this.Dispatcher.Invoke(() => SetValue(ChildsForegroundProperty, value));
-            }
-        }
-
-        private static void OnChildsForegroundCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            InfoDataSyncUnitStateHWDiagView c = sender as InfoDataSyncUnitStateHWDiagView;
-            if (c != null)
-            {
-                c.OnChildsForegroundChanged();
-                c.ChildsForegroundChange(sender, e);
-            }
-        }
-
-        protected virtual void OnChildsForegroundChanged()
-        {
-            OnPropertyChanged("ChildsForeground");
-        }
-        private void ChildsForegroundChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            tbAttribute.Foreground = e.NewValue as Brush;
-            tbCyclic.Foreground = e.NewValue as Brush;
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     public class InfoDataSyncUnitStateToOverallState : MarkupExtension, IValueConverter

@@ -15,11 +15,12 @@
     <UserControl.Resources>
         <local:AdsAddrToString x:Key="AdsAddrToString"/>
         <Style TargetType="disp:StringDisplaySlim">
-            <Setter Property="ChildsForeground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
+            <Setter Property="Foreground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
         </Style>
         <Style TargetType="disp:AmsNetIdDisplaySlim">
-            <Setter Property="ChildsForeground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
-        </Style>    </UserControl.Resources>
+            <Setter Property="Foreground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
+        </Style>    
+    </UserControl.Resources>
     <d:UserControl.DataContext>
         <TcoIo:InfoData_84133AC9/>
     </d:UserControl.DataContext>

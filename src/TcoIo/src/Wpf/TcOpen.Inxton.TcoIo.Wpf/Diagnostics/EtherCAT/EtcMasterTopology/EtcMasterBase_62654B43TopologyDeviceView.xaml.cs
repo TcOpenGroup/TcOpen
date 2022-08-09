@@ -70,9 +70,7 @@ namespace TcoIo
                 Brush DeviceBackgroundColor = new SyncUnitErrorToBackground().Convert(someSyncUnitHasError, null, null, null) as Brush;
                 Brush DeviceForegroundColor = new SyncUnitErrorToForeground().Convert(someSyncUnitHasError, null, null, null) as Brush;
                 border.Background = DeviceBackgroundColor;
-                dispDeviceName.ChildsForeground = DeviceForegroundColor;
-                dispDeviceType.ChildsForeground = DeviceForegroundColor;
-                rccInfoData.Foreground = DeviceForegroundColor;
+                userControl.Foreground = DeviceForegroundColor;
             });
         }
 
