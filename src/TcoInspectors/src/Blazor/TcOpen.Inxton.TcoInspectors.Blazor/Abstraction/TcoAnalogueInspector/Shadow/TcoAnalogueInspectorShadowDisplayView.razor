@@ -22,11 +22,11 @@
             </div>
             <div class="col">
                 <div class="progress mt-4">
-                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[0]; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
-                    <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[1]"></div>
-                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[2]; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Shadow</div></div>
+                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item1; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
+                    <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item2"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item3; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Shadow</div></div>
 
-                    <div class="progress-checkpoint" style="left: @getProgressBarValues()[3];"></div>
+                    <div class="progress-checkpoint" style="left: @getProgressBarValues().Item4;"></div>
                 </div>
             </div>
             <div class="col-auto">
@@ -55,9 +55,9 @@
         return string.IsNullOrEmpty(Component.AttributeName) ? Component.GetSymbolTail() : Component.AttributeName;
     }
 
-    public string[] getProgressBarValues()
+    public (string, string, string, string) getProgressBarValues()
     {
-        double[] ret = new double[4];
+        (double, double, double, double) ret;
 
         var stredMM = (Component._data.RequiredMin.Shadow + Component._data.RequiredMax.Shadow) / 2.0;
         var stred = (stredMM + Component._data.DetectedStatus.Shadow) / 2.0;
@@ -65,17 +65,17 @@
         var min = stred - con;
         var max = stred + con;
         var minMax = max - min;
-        ret[0] = Math.Abs(((Component._data.RequiredMin.Shadow - min) / minMax) * 100.0);
-        ret[2] = 100 - Math.Abs(((Component._data.RequiredMax.Shadow - min) / minMax) * 100.0);
-        ret[3] = Math.Abs(((Component._data.DetectedStatus.Shadow - min) / minMax) * 100.0);
+        ret.Item1 = Math.Abs(((Component._data.RequiredMin.Shadow - min) / minMax) * 100.0);
+        ret.Item3 = 100 - Math.Abs(((Component._data.RequiredMax.Shadow - min) / minMax) * 100.0);
+        ret.Item4 = Math.Abs(((Component._data.DetectedStatus.Shadow - min) / minMax) * 100.0);
 
-        ret[1] = 100 - (ret[0] + ret[2]);
+        ret.Item2 = 100 - (ret.Item1 + ret.Item3);
 
-        ret[0] = (ret[0] / 100.0 * 85.0) + 5;
-        ret[1] = (ret[1] / 100.0 * 85.0) + 5;
-        ret[2] = (ret[2] / 100.0 * 85.0) + 5;
+        ret.Item1 = (ret.Item1 / 100.0 * 85.0) + 5;
+        ret.Item2 = (ret.Item2 / 100.0 * 85.0) + 5;
+        ret.Item3 = (ret.Item3 / 100.0 * 85.0) + 5;
 
-        return new string[4] { (ret[0].ToString().Replace(',', '.') + "%"), (ret[1].ToString().Replace(',', '.') + "%"), (ret[2].ToString().Replace(',', '.') + "%"), (ret[3].ToString().Replace(',', '.') + "%") };
+        return (ret.Item1.ToString().Replace(',', '.') + "%", ret.Item2.ToString().Replace(',', '.') + "%", ret.Item3.ToString().Replace(',', '.') + "%", ret.Item4.ToString().Replace(',', '.') + "%");
     }
 }
 
