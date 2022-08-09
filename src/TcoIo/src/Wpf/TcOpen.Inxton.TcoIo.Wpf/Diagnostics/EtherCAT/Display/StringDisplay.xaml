@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Style="{DynamicResource MaterialFieldBox}"
     Header="{Binding Description, Mode=OneWay}"
     FontWeight="Light"
     mc:Ignorable="d">
@@ -16,7 +15,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </GroupBox.Resources>
-    <TextBox x:Name="tbValue" Text="{Binding _, Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background ="{StaticResource InxtonGrayLight}"/>
+    <TextBox x:Name="tbValue" Text="{Binding _, Mode=OneWay}" IsReadOnly="True" FontWeight="DemiBold" Background="Transparent"/> 
 </GroupBox>
     
     

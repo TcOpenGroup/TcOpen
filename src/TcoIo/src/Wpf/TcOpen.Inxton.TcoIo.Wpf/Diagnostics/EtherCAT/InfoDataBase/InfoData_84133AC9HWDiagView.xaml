@@ -1,4 +1,5 @@
 <UserControl
+    x:Name="userControl"
     x:Class="TcoIo.InfoData_84133AC9HWDiagView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,7 +14,12 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <local:AdsAddrToString x:Key="AdsAddrToString"/>
-    </UserControl.Resources>
+        <Style TargetType="disp:StringDisplaySlim">
+            <Setter Property="ChildsForeground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
+        </Style>
+        <Style TargetType="disp:AmsNetIdDisplaySlim">
+            <Setter Property="ChildsForeground" Value="{Binding Foreground, ElementName=userControl, Mode=OneWay}"/>
+        </Style>    </UserControl.Resources>
     <d:UserControl.DataContext>
         <TcoIo:InfoData_84133AC9/>
     </d:UserControl.DataContext>
@@ -28,12 +34,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <disp:StringDisplaySlim Grid.Row ="0" DataContext="{Binding ChangeCount}"  />
-                <disp:StringDisplaySlim Grid.Row ="1" DataContext="{Binding DevId}"  />
-                <disp:AmsNetIdDisplaySlim Grid.Row ="2"  DataContext="{Binding AmsNetId}"/>
-                <disp:StringDisplaySlim Grid.Row ="3" DataContext="{Binding CfgSlaveCount}"  />
-                <disp:StringDisplaySlim Grid.Row ="4" DataContext="{Binding DcToTcTimeOffset}" />
-                <disp:StringDisplaySlim Grid.Row ="5" DataContext="{Binding DcToExtTimeOffset}" />
+                <disp:StringDisplaySlim     x:Name="dispChangeCount" Grid.Row ="0" DataContext="{Binding ChangeCount}"  />
+                <disp:StringDisplaySlim     x:Name="dispDevId" Grid.Row ="1" DataContext="{Binding DevId}"  />
+                <disp:AmsNetIdDisplaySlim   x:Name="dispAmsNetId" Grid.Row ="2"  DataContext="{Binding AmsNetId}"/>
+                <disp:StringDisplaySlim     x:Name="dispCfgSlaveCount" Grid.Row ="3" DataContext="{Binding CfgSlaveCount}"  />
+                <disp:StringDisplaySlim     x:Name="dispDcToTcTimeOffset" Grid.Row ="4" DataContext="{Binding DcToTcTimeOffset}" />
+                <disp:StringDisplaySlim     x:Name="dispDcToExtTimeOffset" Grid.Row ="5" DataContext="{Binding DcToExtTimeOffset}" />
             </Grid>
         </GroupBox>
     </StackPanel>

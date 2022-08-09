@@ -17,7 +17,6 @@
     </Window.DataContext>
     <TabControl>
         <TabItem Header="Topology renderer" >
-            <!--<wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>-->
             <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>
         </TabItem>
         <TabItem Header="Simulation" >
@@ -48,7 +47,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
-                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
+                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_2}" PresentationType="Service"/>
             </Grid>
         </TabItem>
     </TabControl>
