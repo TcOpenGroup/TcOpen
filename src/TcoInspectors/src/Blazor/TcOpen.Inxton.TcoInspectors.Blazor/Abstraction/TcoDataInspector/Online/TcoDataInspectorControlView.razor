@@ -3,36 +3,38 @@
 
 @using Vortex.Connector
 
-<div class="card my-3">
-    <div class="card-header">
-        <a data-bs-toggle="collapse" href="#@ID" role="button" aria-expanded="false" aria-controls="@ID" style="color: inherit; text-decoration: inherit;">
-            <div class="row">
-                <h4 class="col-auto my-auto">@getNameOrSymbol()</h4>
+<div class="accordion my-3">
+    <div class="accordion-item">
+        <div class="accordion-header" style="border-bottom: 1px solid #dee2e6">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@ID" aria-expanded="false" aria-controls="@ID">
+                @getNameOrSymbol()
+            </button>
+        </div>
+        <div class="accordion-body row align-items-center py-1">
+            <div class="col-auto">
+                <RenderableContentControl Context="@Component._data.RequiredStatus" Presentation="Control" />
             </div>
-        </a>
-    </div>
-    <div class="card-body row align-items-center">
-        <div class="col-auto">
-            <RenderableContentControl Context="@Component._data.RequiredStatus" Presentation="Control" />
+            <div class="col-auto">
+                <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
+            </div>
+            <div class="col-auto ms-auto">
+                <RenderableContentControl Context="@Component._data.StarNotationEnabled" Presentation="Control" />
+            </div>
+            <div class="col-auto">
+                <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Control" />
+            </div>
+            <div class="col-auto">
+                <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Control" />
+            </div>
+            <div class="col-auto">
+                <GenericIconView Result="@Component._data.Result.Shadow" />
+            </div>
         </div>
-        <div class="col-auto">
-            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
+        <div id="@ID" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body py-1">
+                <GenericTcoInspectorDataView Data="@Component._data" Presentation="Display" />
+            </div>
         </div>
-        <div class="col-auto ms-auto">
-            <RenderableContentControl Context="@Component._data.StarNotationEnabled" Presentation="Control" />
-        </div>
-        <div class="col-auto">
-            <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Control" />
-        </div>
-        <div class="col-auto">
-            <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Control" />
-        </div>
-        <div class="col-auto">
-            <GenericIconView Result="@Component._data.Result.Shadow" />
-        </div>
-    </div>
-    <div class="card-body collapse" id="@ID">
-        <GenericTcoInspectorDataView Data="@Component._data" Presentation="Control" />
     </div>
 </div>
 

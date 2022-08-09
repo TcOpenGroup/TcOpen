@@ -3,45 +3,47 @@
 
 @using Vortex.Connector
 
-<div class="card my-3">
-    <div class="card-header">
-        <a data-bs-toggle="collapse" href="#@ID" role="button" aria-expanded="false" aria-controls="@ID" style="color: inherit; text-decoration: inherit;">
-            <div class="row">
-                <h4 class="col-auto my-auto">@getNameOrSymbol()</h4>
+<div class="accordion my-3">
+    <div class="accordion-item">
+        <div class="accordion-header" style="border-bottom: 1px solid #dee2e6">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@ID" aria-expanded="false" aria-controls="@ID">
+                @getNameOrSymbol()
+            </button>
+        </div>
+        <div class="accordion-body row align-items-center py-1">
+            <div class="col-1">
+                <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="ShadowDisplay" />
             </div>
-        </a>
-    </div>
-    <div class="card-body row align-items-center">
-        <div class="col-1">
-            <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="ShadowDisplay" />
-        </div>
-        <div class="col-1">
-            <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="ShadowDisplay" />
-        </div>
-        <div class="col-1">
-            <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="ShadowDisplay" />
-        </div>
-        <div class="col">
-            <div class="progress mt-4">
-                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[0]; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
-                <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[1]"></div>
-                <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[2]; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Shadow</div></div>
+            <div class="col-1">
+                <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="ShadowDisplay" />
+            </div>
+            <div class="col-1">
+                <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="ShadowDisplay" />
+            </div>
+            <div class="col">
+                <div class="progress mt-4">
+                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[0]; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
+                    <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[1]"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues()[2]; border-radius: 0px 0.4rem 0.4rem 0px; "><div class="text-start ms-2">@Component._data.RequiredMax.Shadow</div></div>
 
-                <div class="progress-checkpoint" style="left: @getProgressBarValues()[3];"></div>
+                    <div class="progress-checkpoint" style="left: @getProgressBarValues()[3];"></div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="ShadowDisplay" />
+            </div>
+            <div class="col-auto">
+                <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="ShadowDisplay" />
+            </div>
+            <div class="col-auto">
+                <GenericIconView Result="@Component._data.Result.Shadow" />
             </div>
         </div>
-        <div class="col-auto">
-            <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="ShadowDisplay" />
+        <div id="@ID" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body py-1">
+                <GenericTcoInspectorDataView Data="@Component._data" Presentation="Display" />
+            </div>
         </div>
-        <div class="col-auto">
-            <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="ShadowDisplay" />
-        </div>
-        <div class="col-auto">
-            <GenericIconView Result="@Component._data.Result.Shadow" />
-        </div>
-    </div>
-    <div class="card-body collapse" id="@ID">
-        <GenericTcoInspectorDataView Data="@Component._data" Presentation="ShadowDisplay" />
     </div>
 </div>
 
