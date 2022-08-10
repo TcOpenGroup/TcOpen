@@ -352,6 +352,37 @@ namespace TcOpen.Inxton.Security.Tests
         }
 
         [Test()]
+        public void DeAuthenticateWithToken()
+        {
+            //-- Arrange
+            var userName = "UserTokenAuthenticationDeauthWithToken";
+            var password = "token";
+            var roles = new string[] { "Tester" };
+            var token = "usersToken-UserTokenAuthenticationDeauthWithToken";
+
+            authService.ExternalAuthorization = new ExternalAuthenticator() { Token = token };
+
+            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+
+            authService.AuthenticateUser(userName, password);
+
+            authService.ExternalAuthorization.RequestTokenChange(token);
+
+            authService.DeAuthenticateCurrentUser();
+
+            var actual = authService.ExternalAuthorization.RequestAuthorization(token);
+
+            Assert.AreEqual(userName, actual.UserName);
+            Assert.AreEqual(1, roles.Length);
+            Assert.AreEqual(roles[0], actual.Roles[0]);
+
+            actual = authService.ExternalAuthorization.RequestAuthorization(token);
+
+            Assert.IsNull(actual);
+            Assert.AreEqual(typeof(AnonymousIdentity), TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.GetType());            
+        }
+
+        [Test()]
         public void AuthenticateWithInexistingToken()
         {
             //-- Arrange
@@ -372,10 +403,13 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.DeAuthenticateCurrentUser();
 
-            externalAuthorization.Token = "fjalsdjl";
+
+            var inexistingToken = "fjalsdjl";
+
+            externalAuthorization.Token = inexistingToken;
            
 
-            authService.ExternalAuthorization.RequestAuthorization(token);
+            authService.ExternalAuthorization.RequestAuthorization(inexistingToken);
 
             AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppPrincipal;
 
@@ -439,6 +473,7 @@ namespace TcOpen.Inxton.Security.Tests
             Assert.Throws(typeof(ExistingTokenException), () => authService.ExternalAuthorization.RequestTokenChange(token));            
 
         }
+
 
         public class ExternalAuthenticator : ExternalAuthorization
         {

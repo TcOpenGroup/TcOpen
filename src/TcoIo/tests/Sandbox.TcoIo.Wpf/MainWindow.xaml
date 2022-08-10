@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Sandbox.TcoIo.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
     xmlns:vortex="http://vortex.mts/xaml" 
+    xmlns:sim="clr-namespace:Sandbox.TcoIo.Wpf.Simulation"
     xmlns:wpf="clr-namespace:TcoIo;assembly=TcOpen.Inxton.TcoIo.Wpf"
     Width="2048"
     Height="1200"
@@ -18,6 +19,27 @@
         <TabItem Header="Topology renderer" >
             <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>
         </TabItem>
+        <TabItem Header="Simulation" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <sim:SetAllToOPstate  Grid.Column="0" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+                <sim:SetAllToINITstate  Grid.Column="1" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+                <sim:SetAllToINITstate  Grid.Column="0" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_4_EL2809}"/>
+                <sim:SetAllToINITstate  Grid.Column="1" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1}"/>
+            </Grid>
+        </TabItem>
         <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>
@@ -25,7 +47,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
-                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
+                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_2}" PresentationType="Service"/>
             </Grid>
         </TabItem>
     </TabControl>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="RC70_1_EK1100_B905944A" Id="{90c88048-efb5-050e-270f-f5018866a87c}">
+  <DUT Name="RC70_1_EK1100_B905944A" Id="{8062662f-2dbd-0620-35d5-6582b9fb4550}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "RC70_A2_EK1122RC70_A2_EK1122_267E32C473RC70_A3_EK1122RC70_A3_EK1122_27C9256F120RC70_A5_EL1809EL1809_32157CFD20RC70_A6_EL1809EL1809_32157CFD20RC70_A7_EL2809EL2809_2B6483BD19RC70_A8_EL2809EL2809_2B6483BD19RC70_A9_EL2809EL2809_2B6483BD19RC70_1_EndTerminal_EL9010EL9010_D29C20850"}
@@ -11,27 +11,35 @@ TYPE RC70_1_EK1100_B905944A EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RC70_A2 (EK1122)"}
 	{attribute addProperty PreviousPort "RC70_1 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
 	RC70_A2_EK1122 : RC70_A2_EK1122_267E32C4;
 	{attribute addProperty Name "RC70_A3 (EK1122)"}
 	{attribute addProperty PreviousPort "RC70_A2 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	RC70_A3_EK1122 : RC70_A3_EK1122_27C9256F;
 	{attribute addProperty Name "RC70_A5 (EL1809)"}
 	{attribute addProperty PreviousPort "RC70_A3 (EK1122) : C"}
+	{attribute addProperty SyncUnit "C70"}
 	RC70_A5_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "RC70_A6 (EL1809)"}
 	{attribute addProperty PreviousPort "RC70_A5 (EL1809) : B"}
+	{attribute addProperty SyncUnit "C70"}
 	RC70_A6_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "RC70_A7 (EL2809)"}
 	{attribute addProperty PreviousPort "RC70_A6 (EL1809) : B"}
+	{attribute addProperty SyncUnit "C70"}
 	RC70_A7_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "RC70_A8 (EL2809)"}
 	{attribute addProperty PreviousPort "RC70_A7 (EL2809) : B"}
+	{attribute addProperty SyncUnit "C70"}
 	RC70_A8_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "RC70_A9 (EL2809)"}
 	{attribute addProperty PreviousPort "RC70_A8 (EL2809) : B"}
+	{attribute addProperty SyncUnit "C70"}
 	RC70_A9_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "RC70_1_EndTerminal (EL9010)"}
 	{attribute addProperty PreviousPort "RC70_A9 (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	RC70_1_EndTerminal_EL9010 : EL9010_D29C2085;
 END_STRUCT
 END_TYPE

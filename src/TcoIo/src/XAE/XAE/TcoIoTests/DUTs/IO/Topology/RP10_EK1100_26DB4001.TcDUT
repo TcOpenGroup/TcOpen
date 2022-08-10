@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="RP10_EK1100_26DB4001" Id="{fcc5cba2-c95f-0558-143b-bd3eb6950f21}">
+  <DUT Name="RP10_EK1100_26DB4001" Id="{8bb4566a-2e1a-0f9e-0edb-06729569e0da}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "RP10_A2_EK1122RP10_A2_EK1122_55AC9C5A135RP10_A4_EL7041_1000EL7041_86DE63E743RP10_A5_EL7041_1000EL7041_86DE63E743RP10_A6_EL1809EL1809_32157CFD20RP10_A7_EL2809EL2809_2B6483BD19RP10_EndTerminal_EL9011EL9011_D65D3D320"}
@@ -11,21 +11,27 @@ TYPE RP10_EK1100_26DB4001 EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RP10_A2 (EK1122)"}
 	{attribute addProperty PreviousPort "RP10 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
 	RP10_A2_EK1122 : RP10_A2_EK1122_55AC9C5A;
 	{attribute addProperty Name "RP10_A4 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RP10_A2 (EK1122) : C"}
+	{attribute addProperty SyncUnit "P10"}
 	RP10_A4_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RP10_A5 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RP10_A4 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "P10"}
 	RP10_A5_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RP10_A6 (EL1809)"}
 	{attribute addProperty PreviousPort "RP10_A5 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "P10"}
 	RP10_A6_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "RP10_A7 (EL2809)"}
 	{attribute addProperty PreviousPort "RP10_A6 (EL1809) : B"}
+	{attribute addProperty SyncUnit "P10"}
 	RP10_A7_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "RP10_EndTerminal (EL9011)"}
 	{attribute addProperty PreviousPort "RP10_A7 (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	RP10_EndTerminal_EL9011 : EL9011_D65D3D32;
 END_STRUCT
 END_TYPE

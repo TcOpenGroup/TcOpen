@@ -78,9 +78,22 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
-        private User ExternalAuthorization_AuthorizationRequest(string token)
+        private IUser ExternalAuthorization_AuthorizationRequest(string token)
         {
-            return this.AuthenticateUser(token);
+            var userName = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name;
+            var currentUser = _users.FirstOrDefault(u => u.Username.Equals(userName));
+
+            // De authenticate when the token matches the token of currently authenticated user.
+            if (currentUser != null && this.CalculateHash(token, string.Empty) == currentUser.AuthenticationToken)
+            {
+                this.DeAuthenticateCurrentUser();
+                return null;
+            }
+            else
+            {
+                var authenticatedUser = this.AuthenticateUser(token);
+                return authenticatedUser;
+            }            
         }
 
         public IRepository<UserData> UserRepository { get; private set; }
@@ -163,7 +176,7 @@ namespace TcOpen.Inxton.Local.Security
             }
 
             VerifyRolesHash(userData);
-
+       
             return AuthenticateUser(userData);
         }
 

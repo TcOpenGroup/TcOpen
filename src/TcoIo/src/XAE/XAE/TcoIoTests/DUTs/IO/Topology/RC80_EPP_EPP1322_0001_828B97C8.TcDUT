@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="RC80_EPP_EPP1322_0001_828B97C8" Id="{7028469c-091e-0468-0cba-8a7f2be2ee3e}">
+  <DUT Name="RC80_EPP_EPP1322_0001_828B97C8" Id="{412a9b05-f200-076e-0d56-3fd647ebee4a}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EPP1322-0001-0017'}
 {attribute addProperty BoxType "EPP1322-0001-0017"}
 {attribute addProperty Id "RC80_AB1_EPP1008_0001EPP1008_78E8D3DD12RC80_AB2_EPP1008_0001EPP1008_78E8D3DD12RC80_AB6_EPP1008_0001EPP1008_78E8D3DD12RC80_AB3_EPP1008_0001EPP1008_78E8D3DD12RC80_AB4_EPP1008_0001EPP1008_78E8D3DD12RC80_AB7_EPP1008_0001EPP1008_78E8D3DD12RC80_AB9_EPP1008_0001EPP1008_78E8D3DD12RC80_AB10_EPP1008_0001EPP1008_78E8D3DD12RC80_AB8_EPP1008_0001EPP1008_78E8D3DD12RC80_AB5_EPP1008_0001EPP1008_78E8D3DD12"}
@@ -11,33 +11,43 @@ TYPE RC80_EPP_EPP1322_0001_828B97C8 EXTENDS EPP1322_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RC80_AB1 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_EPP (EPP1322-0001) : D"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB1_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB2 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB1 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB2_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB6 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB2 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB6_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB3 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB6 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB3_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB4 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB3 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB4_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB7 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_EPP (EPP1322-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB7_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB9 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB7 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB9_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB10 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB9 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB10_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB8 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB10 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB8_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "RC80_AB5 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "RC80_AB8 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "C80"}
 	RC80_AB5_EPP1008_0001 : EPP1008_78E8D3DD;
 END_STRUCT
 END_TYPE
