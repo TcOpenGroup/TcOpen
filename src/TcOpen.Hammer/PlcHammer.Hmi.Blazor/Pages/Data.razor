@@ -1,58 +1,40 @@
 ﻿@page "/data"
 
 
-<div class="container">
-    <h1>Data management</h1>
+<div class="container-fluid">
+    <h3>Data management</h3>
 
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary m-1" @onclick="() => OnProccessClicked()">Process Settings</button>
-        <button type="button" class="btn btn-primary m-1" @onclick="() => OnTechnologyClicked()">Technology</button>
-        <button type="button" class="btn btn-primary m-1" @onclick="() => OnTraceabilityClicked()">Traceability</button>
+    <div name="TabControl" class="w-100">
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <button type="button" class="nav-link @((selected == 0) ? "active" : "")" @onclick="() => selected = 0"><b>Process Settings</b></button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="nav-link @((selected == 1) ? "active" : "")" @onclick="() => selected = 1"><b>Technology</b></button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="nav-link @((selected == 2) ? "active" : "")" @onclick="() => selected = 2"><b>Traceability</b></button>
+            </li>
+        </ul>
+        <div class="content">
+            @switch (@selected)
+            {
+                case 0:
+                    <h2>Process Settings</h2>
+                    <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies" Presentation="Base"></RenderableContentControl>
+                    break;
+                case 1:
+                    <h2>Technology</h2>
+                    <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager" Presentation="Base"></RenderableContentControl>
+                    break;
+                case 2:
+                    <h2>Traceability</h2>
+                    <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty" Presentation="Base"></RenderableContentControl>
+                    break;
+            }
+        </div>
     </div>
-
-
-
-
-    @if (ShowProccesRecipies)
-    {
-        <h2>Process Settings</h2>
-        <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies" Presentation="Base"></RenderableContentControl>
-    }
-
-    @if (ShowTechnology)
-    {
-        <h2>Technology</h2>
-        <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager" Presentation="Base"></RenderableContentControl>
-    }
-    @if (ShowTraceability)
-    {
-        <h2>Traceability</h2>
-        <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty" Presentation="Base"></RenderableContentControl>
-    }
 </div>
-    @code {
-        public bool ShowProccesRecipies { get; set; } = true;
-        public bool ShowTechnology { get; set; }
-        public bool ShowTraceability { get; set; }
-
-        private void OnProccessClicked()
-        {
-            ShowProccesRecipies = true;
-            ShowTechnology = false;
-            ShowTraceability = false;
-        }
-
-        private void OnTechnologyClicked()
-        {
-            ShowProccesRecipies = false;
-            ShowTechnology = true;
-            ShowTraceability = false;
-        }
-
-        private void OnTraceabilityClicked()
-        {
-            ShowProccesRecipies = false;
-            ShowTechnology = false;
-            ShowTraceability = true;
-        }
-    }
+@code {
+    int selected = 0;
+}

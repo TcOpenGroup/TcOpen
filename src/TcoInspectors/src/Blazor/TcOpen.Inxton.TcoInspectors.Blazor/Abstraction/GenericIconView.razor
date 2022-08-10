@@ -1,0 +1,75 @@
+﻿@namespace TcoInspectors
+
+<div class="col">
+    <div class="row d-flex justify-content-center">
+        @switch (@Result)
+        {
+            case 0:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
+                </svg>
+                break;
+            case 10:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                </svg>
+                break;
+            case 20:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+                break;
+            case 30:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                </svg>
+                break;
+            case 35:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                </svg>
+                break;
+            case 40:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path d="M 16 8 A 8 8 0 1 1 0 8 a 8 8 0 0 1 16 0 z M 14 8 A 1 1 0 0 0 2 8 a 4 4 0 0 0 12 0 z M 4.588 4.5095 A 1 1 0 0 1 12.0582 10.5681 z M 3.9409 5.5095 A 1 1 0 0 0 11.4504 11.5484 z" />
+                </svg>
+                break;
+            case 50:
+                <svg width="32" height="32" fill="currentColor" class="bi bi-skip-end-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z" />
+                </svg>
+                break;
+        }
+    </div>
+    <div class="row d-flex justify-content-center">
+        @switch (@Result)
+        {
+            case 0:
+                <p>No Action</p>
+                break;
+            case 10:
+                <p>Running</p>
+                break;
+            case 20:
+                <p>Passed</p>
+                break;
+            case 30:
+                <p>Failed</p>
+                break;
+            case 35:
+                <p>Inconclusive</p>
+                break;
+            case 40:
+                <p>Excluded</p>
+                break;
+            case 50:
+                <p>Bypassed</p>
+                break;
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public short Result { get; set; }
+}

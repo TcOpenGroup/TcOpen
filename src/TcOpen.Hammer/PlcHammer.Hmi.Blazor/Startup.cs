@@ -20,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using TcoCore;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
 using TcOpen.Inxton.Data.MongoDb;
@@ -36,7 +37,7 @@ namespace PlcHammer.Hmi.Blazor
     public class Startup
     {
         private BlazorRoleGroupManager roleGroupManager;
-        private bool mongoDB = true;
+        private bool mongoDB = false;
 
         public Startup(IConfiguration configuration)
         {
@@ -50,8 +51,9 @@ namespace PlcHammer.Hmi.Blazor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
-          
+            services.AddServerSideBlazor()
+                .AddHubOptions(hub => hub.MaximumReceiveMessageSize = 100 * 1024 * 1024);
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
 
@@ -75,7 +77,6 @@ namespace PlcHammer.Hmi.Blazor
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
-
             if (mongoDB)/*Mongo repositories for data*/
             {
                 SetUpMongoDatabase();
