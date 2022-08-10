@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R7_A2_EC_EK1122_B7F046E4" Id="{578b4f84-6df8-0961-3d25-29de7de713e5}">
+  <DUT Name="R7_A2_EC_EK1122_B7F046E4" Id="{5fbe4616-d59c-07c9-308d-2d15e0557f7d}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
 {attribute addProperty Id "VI_6_AES_D_BC_ECAT_xAES_A3B0707168"}
@@ -11,6 +11,7 @@ TYPE R7_A2_EC_EK1122_B7F046E4 EXTENDS EK1122_1FC0878B :
 STRUCT
 	{attribute addProperty Name "VI-6 (AES-D-BC-ECAT)"}
 	{attribute addProperty PreviousPort "R7_A2_EC (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
 	VI_6_AES_D_BC_ECAT_x : AES_A3B07071;
 END_STRUCT
 END_TYPE

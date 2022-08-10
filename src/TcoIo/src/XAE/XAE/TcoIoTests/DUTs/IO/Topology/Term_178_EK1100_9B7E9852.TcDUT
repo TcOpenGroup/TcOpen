@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="Term_178_EK1100_9B7E9852" Id="{90fbd0dc-18bb-098f-2e8f-696127dea527}">
+  <DUT Name="Term_178_EK1100_9B7E9852" Id="{87956d69-966c-0645-3eec-98ef5ce41082}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "Term_179_EK1122Term_179_EK1122_2A33725A40Term_184_EL2008EL2008_E2806B9511Term_185_EL2008EL2008_E2806B9511"}
@@ -11,12 +11,15 @@ TYPE Term_178_EK1100_9B7E9852 EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "Term 179 (EK1122)"}
 	{attribute addProperty PreviousPort "Term 178 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
 	Term_179_EK1122 : Term_179_EK1122_2A33725A;
 	{attribute addProperty Name "Term 184 (EL2008)"}
 	{attribute addProperty PreviousPort "Term 179 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	Term_184_EL2008 : EL2008_E2806B95;
 	{attribute addProperty Name "Term 185 (EL2008)"}
 	{attribute addProperty PreviousPort "Term 184 (EL2008) : B"}
+	{attribute addProperty SyncUnit "default"}
 	Term_185_EL2008 : EL2008_E2806B95;
 END_STRUCT
 END_TYPE

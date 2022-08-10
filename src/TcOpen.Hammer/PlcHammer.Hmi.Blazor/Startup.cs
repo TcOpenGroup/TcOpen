@@ -51,7 +51,8 @@ namespace PlcHammer.Hmi.Blazor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor()
+                .AddHubOptions(hub => hub.MaximumReceiveMessageSize = 100 * 1024 * 1024);
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
@@ -76,7 +77,6 @@ namespace PlcHammer.Hmi.Blazor
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
 
             services.AddTcoCoreExtensions();
-            services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN }));
             if (mongoDB)/*Mongo repositories for data*/
             {
                 SetUpMongoDatabase();

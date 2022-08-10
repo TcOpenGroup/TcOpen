@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R9_A3_EK1122_C18C26F5" Id="{94c4fa5f-8895-05ad-11b9-8e3aef996771}">
+  <DUT Name="R9_A3_EK1122_C18C26F5" Id="{4dd1fab7-6746-0104-30eb-55285c0db8d8}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
 {attribute addProperty Id "R9_SERVO_IndraDrive_MPB20IndraDrive_MPB20_C66205C325"}
@@ -11,6 +11,7 @@ TYPE R9_A3_EK1122_C18C26F5 EXTENDS EK1122_1FC0878B :
 STRUCT
 	{attribute addProperty Name "R9_SERVO (IndraDrive MPB20)"}
 	{attribute addProperty PreviousPort "R9_A3 (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
 	R9_SERVO_IndraDrive_MPB20 : IndraDrive_MPB20_C66205C3;
 END_STRUCT
 END_TYPE

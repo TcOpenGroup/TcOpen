@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R8_A9_EK1122_3EDD8752" Id="{f3ea0a4f-0529-0d5d-1e61-9c4137c4386b}">
+  <DUT Name="R8_A9_EK1122_3EDD8752" Id="{14679069-b51d-0471-0ac0-d0b6c4b27b1a}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
 {attribute addProperty Id "RC30_1_EK1100RC30_1_EK1100_B995809E290RC30_2_EK1100RC30_2_EK1100_8A0FE17C258RC40_1_EK1100RC40_1_EK1100_B918F64D290RC40_2_EK1100RC40_2_EK1100_ACF07759258"}
@@ -11,15 +11,19 @@ TYPE R8_A9_EK1122_3EDD8752 EXTENDS EK1122_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RC30_1 (EK1100)"}
 	{attribute addProperty PreviousPort "R8_A9 (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
 	RC30_1_EK1100 : RC30_1_EK1100_B995809E;
 	{attribute addProperty Name "RC30_2 (EK1100)"}
 	{attribute addProperty PreviousPort "RC30_1 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
 	RC30_2_EK1100 : RC30_2_EK1100_8A0FE17C;
 	{attribute addProperty Name "RC40_1 (EK1100)"}
 	{attribute addProperty PreviousPort "R8_A9 (EK1122) : B"}
+	{attribute addProperty SyncUnit "default"}
 	RC40_1_EK1100 : RC40_1_EK1100_B918F64D;
 	{attribute addProperty Name "RC40_2 (EK1100)"}
 	{attribute addProperty PreviousPort "RC40_1 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
 	RC40_2_EK1100 : RC40_2_EK1100_ACF07759;
 END_STRUCT
 END_TYPE

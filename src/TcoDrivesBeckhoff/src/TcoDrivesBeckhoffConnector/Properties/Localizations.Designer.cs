@@ -59,5 +59,473 @@ namespace TcoDrivesBeckhoffConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acceleration.
+        /// </summary>
+        public static string ___Acceleration__ {
+            get {
+                return ResourceManager.GetString("___Acceleration__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual acceleration.
+        /// </summary>
+        public static string ___Actual_acceleration__ {
+            get {
+                return ResourceManager.GetString("___Actual_acceleration__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual modulo position.
+        /// </summary>
+        public static string ___Actual_modulo_position__ {
+            get {
+                return ResourceManager.GetString("___Actual_modulo_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual modulo turns.
+        /// </summary>
+        public static string ___Actual_modulo_turns__ {
+            get {
+                return ResourceManager.GetString("___Actual_modulo_turns__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual position.
+        /// </summary>
+        public static string ___Actual_position__ {
+            get {
+                return ResourceManager.GetString("___Actual_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual torque.
+        /// </summary>
+        public static string ___Actual_torque__ {
+            get {
+                return ResourceManager.GetString("___Actual_torque__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual velocity.
+        /// </summary>
+        public static string ___Actual_velocity__ {
+            get {
+                return ResourceManager.GetString("___Actual_velocity__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear position lag.
+        /// </summary>
+        public static string ___Clear_position_lag__ {
+            get {
+                return ResourceManager.GetString("___Clear_position_lag__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command number.
+        /// </summary>
+        public static string ___Command_number__ {
+            get {
+                return ResourceManager.GetString("___Command_number__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command state.
+        /// </summary>
+        public static string ___Command_state__ {
+            get {
+                return ResourceManager.GetString("___Command_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deceleration.
+        /// </summary>
+        public static string ___Deceleration__ {
+            get {
+                return ResourceManager.GetString("___Deceleration__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direction.
+        /// </summary>
+        public static string ___Direction__ {
+            get {
+                return ResourceManager.GetString("___Direction__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        public static string ___Disabled__ {
+            get {
+                return ResourceManager.GetString("___Disabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance.
+        /// </summary>
+        public static string ___Distance__ {
+            get {
+                return ResourceManager.GetString("___Distance__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive error no .
+        /// </summary>
+        public static string ___Drive_error_no___ {
+            get {
+                return ResourceManager.GetString("___Drive_error_no___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive power override.
+        /// </summary>
+        public static string ___Drive_power_override__ {
+            get {
+                return ResourceManager.GetString("___Drive_power_override__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable negative.
+        /// </summary>
+        public static string ___Enable_negative__ {
+            get {
+                return ResourceManager.GetString("___Enable_negative__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable positive.
+        /// </summary>
+        public static string ___Enable_positive__ {
+            get {
+                return ResourceManager.GetString("___Enable_positive__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ___Enabled__ {
+            get {
+                return ResourceManager.GetString("___Enabled__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ___Error__ {
+            get {
+                return ResourceManager.GetString("___Error__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error id.
+        /// </summary>
+        public static string ___Error_id__ {
+            get {
+                return ResourceManager.GetString("___Error_id__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global control.
+        /// </summary>
+        public static string ___Global_control__ {
+            get {
+                return ResourceManager.GetString("___Global_control__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Halt.
+        /// </summary>
+        public static string ___Halt__ {
+            get {
+                return ResourceManager.GetString("___Halt__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Homing.
+        /// </summary>
+        public static string ___Homing__ {
+            get {
+                return ResourceManager.GetString("___Homing__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jerk.
+        /// </summary>
+        public static string ___Jerk__ {
+            get {
+                return ResourceManager.GetString("___Jerk__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jog backwards.
+        /// </summary>
+        public static string ___Jog_backwards__ {
+            get {
+                return ResourceManager.GetString("___Jog_backwards__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jog forward.
+        /// </summary>
+        public static string ___Jog_forward__ {
+            get {
+                return ResourceManager.GetString("___Jog_forward__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jog mode.
+        /// </summary>
+        public static string ___Jog_mode__ {
+            get {
+                return ResourceManager.GetString("___Jog_mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jogging.
+        /// </summary>
+        public static string ___Jogging__ {
+            get {
+                return ResourceManager.GetString("___Jogging__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local control.
+        /// </summary>
+        public static string ___Local_control__ {
+            get {
+                return ResourceManager.GetString("___Local_control__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mode.
+        /// </summary>
+        public static string ___Mode__ {
+            get {
+                return ResourceManager.GetString("___Mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Motion state.
+        /// </summary>
+        public static string ___Motion_state__ {
+            get {
+                return ResourceManager.GetString("___Motion_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move absolute.
+        /// </summary>
+        public static string ___Move_absolute__ {
+            get {
+                return ResourceManager.GetString("___Move_absolute__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move modulo.
+        /// </summary>
+        public static string ___Move_modulo__ {
+            get {
+                return ResourceManager.GetString("___Move_modulo__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move relative.
+        /// </summary>
+        public static string ___Move_relative__ {
+            get {
+                return ResourceManager.GetString("___Move_relative__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move velocity.
+        /// </summary>
+        public static string ___Move_velocity__ {
+            get {
+                return ResourceManager.GetString("___Move_velocity__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Movement state.
+        /// </summary>
+        public static string ___Movement_state__ {
+            get {
+                return ResourceManager.GetString("___Movement_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Override.
+        /// </summary>
+        public static string ___Override__ {
+            get {
+                return ResourceManager.GetString("___Override__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        public static string ___Position__ {
+            get {
+                return ResourceManager.GetString("___Position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power enable.
+        /// </summary>
+        public static string ___Power_enable__ {
+            get {
+                return ResourceManager.GetString("___Power_enable__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference mode.
+        /// </summary>
+        public static string ___Reference_mode__ {
+            get {
+                return ResourceManager.GetString("___Reference_mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string ___Reset__ {
+            get {
+                return ResourceManager.GetString("___Reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running.
+        /// </summary>
+        public static string ___Running__ {
+            get {
+                return ResourceManager.GetString("___Running__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search direction.
+        /// </summary>
+        public static string ___Search_direction__ {
+            get {
+                return ResourceManager.GetString("___Search_direction__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search velocity.
+        /// </summary>
+        public static string ___Search_velocity__ {
+            get {
+                return ResourceManager.GetString("___Search_velocity__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set position.
+        /// </summary>
+        public static string ___Set_position__ {
+            get {
+                return ResourceManager.GetString("___Set_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SoE reset.
+        /// </summary>
+        public static string ___SoE_reset__ {
+            get {
+                return ResourceManager.GetString("___SoE_reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string ___Stop__ {
+            get {
+                return ResourceManager.GetString("___Stop__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        public static string ___Stopped__ {
+            get {
+                return ResourceManager.GetString("___Stopped__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronization direction.
+        /// </summary>
+        public static string ___Synchronization_direction__ {
+            get {
+                return ResourceManager.GetString("___Synchronization_direction__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronization velocity.
+        /// </summary>
+        public static string ___Synchronization_velocity__ {
+            get {
+                return ResourceManager.GetString("___Synchronization_velocity__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Velocity.
+        /// </summary>
+        public static string ___Velocity__ {
+            get {
+                return ResourceManager.GetString("___Velocity__", resourceCulture);
+            }
+        }
     }
 }

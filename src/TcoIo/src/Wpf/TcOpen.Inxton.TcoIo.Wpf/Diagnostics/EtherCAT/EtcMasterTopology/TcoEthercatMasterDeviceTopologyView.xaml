@@ -9,6 +9,7 @@
     xmlns:vortex="http://vortex.mts/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:TcoIo="clr-namespace:TcoIo;assembly=TcoIoConnector"
+    xmlns:conv="clr-namespace:TcoIo.Converters"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -30,21 +31,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,5,0,0">
-            <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-                <StackPanel Height="{Binding Source={x:Static dims:DimsDef.masterHeight}}"  Width="{Binding Source={x:Static dims:DimsDef.masterWidth}}"  DataContext="{Binding Device}">
-                    <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>
-                    <Border Margin="3,0" BorderThickness="1" BorderBrush="White" CornerRadius="3">
-                        <Border Margin="1" BorderThickness="1" BorderBrush="White" CornerRadius="2">
-                            <disp:StringDisplaySlim Margin="5,3,5,2" Description="Device type" ToolTip="Type of the device"  DataContext="{Binding AttributeBoxType}"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
+                    <StackPanel DataContext="{Binding Device}">
+                        <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>
+                        <Border Margin="3,0" BorderThickness="1" BorderBrush="White" CornerRadius="3">
+                            <Border Margin="1" BorderThickness="1" BorderBrush="White" CornerRadius="2">
+                                <disp:StringDisplaySlim Margin="5,3,5,2" Description="Device type" ToolTip="Type of the device"  DataContext="{Binding AttributeBoxType}"/>
+                            </Border>
                         </Border>
-                    </Border>
-                    <vortex:RenderableContentControl DataContext="{Binding InfoData}" PresentationType="HWDiag" />
-                    <vortex:RenderableContentControl DataContext="{Binding SyncUnits}" />
-                    <vortex:RenderableContentControl DataContext="{Binding Inputs}" />
-                    <vortex:RenderableContentControl DataContext="{Binding Outputs}" />
-                </StackPanel>
-            </Border>
+                        <vortex:RenderableContentControl DataContext="{Binding InfoData}" PresentationType="HWDiag" />
+                        <local:SyncUnitsBase_AD6C35CEView DataContext="{Binding SyncUnits}"/> 
+                        <vortex:RenderableContentControl DataContext="{Binding Inputs}" PresentationType="Display"/>
+                        <vortex:RenderableContentControl DataContext="{Binding Outputs}" PresentationType="Control"/>
+                    </StackPanel>
+                </Border>
+            </ScrollViewer>
         </Border>
-
     </Grid>
 </UserControl>

@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.725" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.10-alpha.735" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +84,18 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoDataSyncUnitStateHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_2A97D6CFHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_8649EEEBHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_84133AC9HWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -124,6 +136,18 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Diagnostics\EtherCAT\SyncUnits\SyncUnitsBase_AD6C35CEView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\SyncUnits\SyncUnitTasksBase_7C8711EBSyncUnitView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\SyncUnits\SyncUnitTask_AB2F5079SyncUnitTaskView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\WcStateBase\WcState_0B2B16F9HWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -145,6 +169,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateInfoDataState.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\Render.cs">
