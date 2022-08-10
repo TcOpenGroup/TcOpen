@@ -1,0 +1,24 @@
+﻿@page "/log"
+@using System.IO;
+
+<h3>Log</h3>
+
+<table class="table table-hover mt-3">
+    <tbody>
+        @while (LogMessages.Peek() > -1)
+        {
+            <tr>
+                <th>@LogMessages.ReadLine()</th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code{
+    public StringReader LogMessages;
+    protected override void OnInitialized()
+    {
+        LogMessages = new StringReader(Startup.logMessages.GetStringBuilder().ToString());
+    }
+}
