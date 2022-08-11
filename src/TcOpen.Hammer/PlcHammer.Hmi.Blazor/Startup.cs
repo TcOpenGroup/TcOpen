@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.JSInterop;
 using PlcHammer.Hmi.Blazor.Data;
+using PlcHammer.Hmi.Blazor.Hubs;
 using PlcHammer.Hmi.Blazor.Security;
 using PlcHammer.Hmi.Blazor.Shared;
 using PlcHammerConnector;
@@ -77,6 +79,11 @@ namespace PlcHammer.Hmi.Blazor
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
             services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN }));
             services.AddTcoCoreExtensions();
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "application/octet-stream" });
+            });
             if (mongoDB)/*Mongo repositories for data*/
             {
                 SetUpMongoDatabase();
@@ -114,6 +121,7 @@ namespace PlcHammer.Hmi.Blazor
             {
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<DialogHub>("/dialoghub");
                 endpoints.MapFallbackToPage("/_Host");
             });
 

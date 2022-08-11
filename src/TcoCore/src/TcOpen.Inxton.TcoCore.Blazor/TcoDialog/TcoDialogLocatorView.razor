@@ -1,15 +1,40 @@
 ﻿@namespace TcoCore
-@using TcOpen.Inxton.TcoCore.Blazor.TcoDialog;
-
-@if(DialogService.DialogVortex != null)
+@*@implements IAsyncDisposable*@
+@inject NavigationManager _navigationManager
+<h1>LOCATOR VIEW</h1>
+@if (IsConnected)
 {
-<RenderableContentControl Context="DialogService.DialogVortex" Presentation="Dialog" ></RenderableContentControl>
+<p>ClientID: @hubConnection.ConnectionId</p>
 }
+@if (DialogService.DialogVortex != null)
+{
+    <RenderableContentControl Context="DialogService.DialogVortex" Presentation="Dialog"></RenderableContentControl>
+}
+
+
+<p>Send message</p>
+<button id="sendDialogInvoke" @onclick="Send" disabled="@(!IsConnected)" style="display:none">Send</button>
+<button id="SendCloseButtonId" @onclick="SendClose" disabled="@(!IsConnected)" style="display:none">Send close</button>
+@*<p>Messages</p>
+<div>
+    @foreach (var item in messages)
+    {
+        <p>@item</p>
+    }
+</div>*@
+
+
 @code {
-    [Inject]
+    [Parameter]
     public DialogProxyServiceBlazor DialogService { get; set; }
     [Inject]
     public JsInteropDialog jsInterop { get; set; }
+
+
+    private List<string> messages = new List<string>();
+    private HubConnection hubConnection;
+    public bool IsConnected =>
+   hubConnection.State == HubConnectionState.Connected;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -18,25 +43,90 @@
             jsInterop.firstRenderComplete = true;
             DialogService.DialogInitializationCompleted += OnDialogRaised; // register with an event
         }
+
+
         await base.OnAfterRenderAsync(firstRender);
     }
 
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl(_navigationManager.ToAbsoluteUri("/dialoghub"))
+        .Build();
+
+
+        hubConnection.On<string, string>("ReceiveMessage", async (user, message) =>
+        {
+
+            var encodedMsg = $"{user}: {message}";
+            messages.Add(encodedMsg);
+            //await InvokeAsync(StateHasChanged);
+            var nameOfType = DialogService.DialogVortex.GetType().Name;
+            var dialogId = "#" + nameOfType + "DialogView";
+            try
+            {
+                await jsInterop.ShowTcoDialog(dialogId);
+            }
+            catch (TaskCanceledException)
+            {
+                //swallow TaskCanceledException,
+                //throw;
+            }
+            StateHasChanged();
+        });
+
+        hubConnection.On("ReceiveClose", async () =>
+        {
+
+            try
+            {
+                var nameOfType = DialogService.DialogVortex.GetType().Name;
+                var dialogId = "#" + nameOfType + "DialogView";
+                await jsInterop.HideTcoDialog(dialogId);
+            }
+            catch (TaskCanceledException)
+            {
+                //swallow TaskCanceledException,
+                //throw;
+            }
+            StateHasChanged();
+        });
+
+
+        await hubConnection.StartAsync();
+    }
+
+
+
+    async Task Send()
+    {
+        await hubConnection.SendAsync("SendMessage", hubConnection.ConnectionId, "testMessage");
+    }
+
+    async Task SendClose()
+    {
+        await hubConnection.SendAsync("SendClose");
+    }
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
 
     public async void OnDialogRaised()
     {
-        await InvokeAsync(StateHasChanged);
-        var nameOfType = DialogService.DialogVortex.GetType().Name;
-        var dialogId = "#" + nameOfType + "DialogView";
+        //await Send();
         try
         {
-            await jsInterop.ShowTcoDialog(dialogId);
+            await jsInterop.SendDialogInvoke();
         }
         catch (TaskCanceledException)
         {
             //swallow TaskCanceledException,
             //throw;
         }
-
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
 	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="2" NonWinCpus="1">
@@ -16,7 +16,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{BF3E9621-3F23-47E0-B5CF-D3280EF53276}" Name="TcoElements" PrjFilePath="TcoElements\TcoElements.plcproj" TmcFilePath="TcoElements\TcoElements.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElements\TcoElements.tmc" TmcHash="{EE70EFB3-4A11-D9F8-8A4A-B3EA850BAA02}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElements\TcoElements.tmc">
 					<Name>TcoElements Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -36,7 +36,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{84AF4B0E-F835-4083-910E-C0AA0BB9E50D}" Name="TcoElementsTests" PrjFilePath="TcoElementsTests\TcoElementsTests.plcproj" TmcFilePath="TcoElementsTests\TcoElementsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElementsTests\TcoElementsTests.tmc" TmcHash="{67312DEA-59D9-D2A3-DCCE-6B3E4BEDED64}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoElementsTests\TcoElementsTests.tmc">
 					<Name>TcoElementsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

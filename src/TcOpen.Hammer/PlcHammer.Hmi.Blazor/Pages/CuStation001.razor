@@ -1,0 +1,60 @@
+﻿@page "/custation001"
+@inherits RenderableComponentBase
+
+
+<h1>Station001</h1>
+
+<h2>Components</h2>
+<RenderableContentControl Context="@Entry.PlcHammer.TECH_MAIN._app._station001._components"
+                          Presentation="Service-Manual"></RenderableContentControl>
+
+
+<h2>Tasks</h2>>
+
+<div class="d-flex flex-row">
+    @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
+    {
+
+        <div class="p-2">
+            <RenderableContentControl Presentation="Base"
+                                      Context="@task"
+                                      Class="p-2" />
+        </div>
+    }
+</div>
+
+@if (TcoTasksExtensions.TaskStateToVisibility(Station._groundModeTask))
+{
+    <RenderableContentControl Context="Station._groundMode" Presentation="Base" />
+}
+@if (TcoTasksExtensions.TaskStateToVisibility(Station._automatModeTask))
+{
+    <RenderableContentControl Context="Station._automatMode" Presentation="Base" />
+}
+
+<p>Clients</p>
+<div>
+    @foreach (var item in UserHandler.ConnectedIds)
+    {
+        <p>@item</p>
+    }
+</div>
+@if (_dialogService != null)
+{
+    <TcoDialogLocatorView DialogService="_dialogService"></TcoDialogLocatorView>
+}
+
+@code {
+    [Inject]
+    public DialogProxyServiceBlazor _dialogService { get; set; }
+    public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
+    protected override void OnInitialized()
+    {
+
+        UpdateValuesOnChange(Station._groundModeTask);
+        UpdateValuesOnChange(Station._automatModeTask);
+        //_dialogService = new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN._app._station001 });
+
+    }
+
+}

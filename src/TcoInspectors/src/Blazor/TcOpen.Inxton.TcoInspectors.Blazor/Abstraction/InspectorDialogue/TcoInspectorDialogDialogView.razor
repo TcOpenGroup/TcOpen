@@ -1,6 +1,8 @@
 ﻿@namespace TcoInspectors
 @using TcoCore
-@inherits RenderableViewModelComponentBase<TcoInspectorDialogViewModel>
+
+@inherits RenderableViewModelComponentBase<TcoInspectorDialogDialogViewModel>
+@inject JsInteropDialog jsInterop
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,15 +11,30 @@
             </div>
             <div class="modal-body">
                 Inspection failed, you will need to decide what's next...
+
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Expand
+                </button>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        @foreach (var inspector in ViewModel.Inspectors)
+                        {
+                            <RenderableContentControl Context="inspector" Presentation="Display" />
+                        }
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-              
-                    <button type="button" class="btn btn-secondary" @onclick="() => ViewModel.Retry()">Retry</button>
-            
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.Terminate()">Terminate</button>
+
+                <button type="button" class="btn btn-secondary" @onclick=" async () => { ViewModel.Retry(); }">Retry</button>
+
+                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Terminate(); await jsInterop.SendDialogClose(); }">Terminate</button>
+
+                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Override(); await jsInterop.SendDialogClose(); }">Override</button>
+
                
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.Override()">Override</button>
-             
+
             </div>
         </div>
     </div>

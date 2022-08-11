@@ -19,20 +19,20 @@
             <div class="modal-footer">
                 @if (ViewModel.Dialog._hasYes.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerYes()">Yes</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerYes(); await jsInterop.SendDialogClose(); }">Yes</button>
                 }
                 @if (ViewModel.Dialog._hasNo.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerNo()">No</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerNo(); await jsInterop.SendDialogClose(); }">No</button>
                 }
                 @if (ViewModel.Dialog._hasCancel.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerCancel()">Cancel</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerCancel(); await jsInterop.SendDialogClose(); }">Cancel</button>
                 }
 
                 @if (ViewModel.Dialog._hasOK.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => ViewModel.DialogAnswerOk()">Ok</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerOk(); await jsInterop.SendDialogClose(); }">Ok</button>
                 }
             </div>
         </div>
@@ -55,14 +55,27 @@
         _dialogCloseId = "#TcoDialogDialogView";
 
     }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //jsInterop.firstRenderComplete = true;
+            ViewModel.DialogCloseEvent += OnDialogClosed;
+        }
+    }
 
+    public async void OnDialogClosed()
+    {
+        //await Send();
+        var x = "som tu";
+    }
 
 }
 
 @functions{
     private RenderFragment RenderDialogIcon() => __builder =>
     {
-        var parsedEnum = (eDialogType)Enum.Parse(typeof(eDialogType), ViewModel.Dialog._dialogType.Synchron.ToString());
+    var parsedEnum = (eDialogType)Enum.Parse(typeof(eDialogType), ViewModel.Dialog._dialogType.Synchron.ToString());
     @switch (parsedEnum)
         {
             case eDialogType.Undefined:

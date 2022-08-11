@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog
+namespace TcoCore
 {
     // This class provides an example of how JavaScript functionality can be wrapped
     // in a .NET class for easy consumption. The associated JavaScript module is
@@ -34,6 +34,18 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog
         {
             var module = await moduleTask.Value;
             return await module.InvokeAsync<bool>("HideTcoDialog", dialogId);
+        }
+
+        public async ValueTask<bool> SendDialogInvoke()
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<bool>("ClickSend");
+        }
+
+        public async ValueTask<bool> SendDialogClose()
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<bool>("ClickSendClose");
         }
 
         public async ValueTask DisposeAsync()

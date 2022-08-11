@@ -20,7 +20,7 @@
             <div class="col-1">
                 <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="ShadowDisplay" />
             </div>
-            <div class="col">
+            <div class="col d-none d-xl-block">
                 <div class="progress mt-4">
                     <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item1; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
                     <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item2"></div>
