@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="SAI_Inputs_Channel_9DCD6557" Id="{eed29c14-547f-0563-25f3-ce9f3318290e}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL3692-0000-0020'}
+{attribute addProperty BoxType "EL3692-0000-0020"}
+{attribute addProperty Id "StatusAT %I*Status_439F40C310ValueAT %I*DINT4"}
+{attribute addProperty CRC "2647483735"}
+{attribute addProperty Size "14"}
+TYPE SAI_Inputs_Channel_9DCD6557 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Status"}
+	Status AT %I* : Status_439F40C3;
+	{attribute addProperty Name "Value"}
+	Value AT %I* : DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -10,15 +10,15 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <StackPanel  Background ="{Binding Cyclic, Converter={local:InfoDataSyncUnitStateToBackground}}">
+    <StackPanel x:Name="stackPanel">
         <Grid Grid.IsSharedSizeScope="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,5,5,0" Text="{Binding AttributeName}" Foreground="{Binding Cyclic, Converter={local:InfoDataStateToForeground}}"/>
-                <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,5,5,0" Text="{Binding Cyclic, Converter={local:InfoDataSyncUnitStateToOverallState}}" Foreground="{Binding Cyclic, Converter={local:InfoDataSyncUnitStateToForeground}}"/>
+                <TextBlock x:Name="tbAttribute" Grid.Column="0" Grid.Row="0" Margin="0,5,5,0" Text="{Binding AttributeName}" FontWeight="Light" />
+                <TextBlock x:Name="tbCyclic" Grid.Column="1" Grid.Row="0" Margin="0,5,5,0" Text="{Binding Cyclic, Converter={local:InfoDataSyncUnitStateToOverallState}}" FontWeight="DemiBold" />
             </Grid>
         </Grid>
     </StackPanel>

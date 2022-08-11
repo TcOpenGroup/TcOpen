@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.725" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.10-alpha.735" />
   </ItemGroup>
 
   <ItemGroup>
@@ -169,6 +169,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateInfoDataState.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\Render.cs">

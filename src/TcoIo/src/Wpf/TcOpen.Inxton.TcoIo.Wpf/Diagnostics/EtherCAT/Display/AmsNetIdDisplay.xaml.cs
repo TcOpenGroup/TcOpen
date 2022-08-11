@@ -1,11 +1,14 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using TcoIo;
 
 namespace TcoIo.Diagnostics.EtherCAT.Display
 {
-    public partial class AmsNetIdDisplay
+    public partial class AmsNetIdDisplay 
     {
         public AmsNetIdDisplay()
         {

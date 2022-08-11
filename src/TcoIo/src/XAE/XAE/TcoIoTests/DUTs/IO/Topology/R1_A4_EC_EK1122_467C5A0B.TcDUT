@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R1_A4_EC_EK1122_467C5A0B" Id="{9e99bca8-44f6-031e-3f5c-ab815a7b1ad8}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "R1_A4_X1_EK1100R1_A4_X1_EK1100_C601B400139R1_A4_X2_EK1100R1_A4_X2_EK1100_6F5FB3BA407"}
+{attribute addProperty CRC "1182554635"}
+{attribute addProperty Size "546"}
+{attribute addProperty Name "R1_A4_EC (EK1122)"}
+TYPE R1_A4_EC_EK1122_467C5A0B EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R1_A4_X1 (EK1100)"}
+	{attribute addProperty PreviousPort "R1_A4_EC (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
+	R1_A4_X1_EK1100 : R1_A4_X1_EK1100_C601B400;
+	{attribute addProperty Name "R1_A4_X2 (EK1100)"}
+	{attribute addProperty PreviousPort "R1_A4_EC (EK1122) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R1_A4_X2_EK1100 : R1_A4_X2_EK1100_6F5FB3BA;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

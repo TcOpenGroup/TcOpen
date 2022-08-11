@@ -75,12 +75,6 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         }
         private void DataContextChange(object sender, DependencyPropertyChangedEventArgs e)
         {
-            //StringDisplaySlim c = sender as StringDisplaySlim;
-            //if (c != null)
-            //{
-            //    c.OnStateChanged();
-            //    c.StateChange(sender, e);
-            //}
             Binding binding = tbValue.GetBindingExpression(TextBox.TextProperty).ParentBinding;
             
             string formatString = DataContext as string;
@@ -143,6 +137,5 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         {
             tbDescription.FontSize = TextBlockUtils.UpdateFontSizeToFitTheTextBoxMaxWidth(tbDescription);
         }
-
     }
 }
