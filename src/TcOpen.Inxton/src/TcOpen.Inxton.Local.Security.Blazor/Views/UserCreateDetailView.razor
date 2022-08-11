@@ -69,6 +69,7 @@
         {
             _navigationManager.NavigateTo("security");
             _alertManager.addAlert("success", "User successfully created!");
+            TcoAppDomain.Current.Logger.Information($"New user '{_model.Username}' created. {{@sender}}", new { UserName = _model.Username, Group = _model.Group });
         }
         else
         {

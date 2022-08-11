@@ -20,6 +20,7 @@ namespace TcoData
 
     public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
     {
+        private void LogCommand(string commandName) => TcOpen.Inxton.TcoAppDomain.Current?.Logger?.Information<string>($"{DataExchange.Symbol}.{commandName}");
 
         public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
         {
@@ -143,6 +144,7 @@ namespace TcoData
             this.Mode = ViewMode.New; 
             RecordIdentifier = string.Empty;
             ViewModeNewCopy();
+            LogCommand("StartCreatingNew");
         }
 
         public void CreateNew()
@@ -156,12 +158,14 @@ namespace TcoData
             SelectedRecord = plain;
             Mode = ViewMode.Edit;
             ViewModeEdit();
+            LogCommand("CreateNew");
         }
 
         public void StartEdit()
         {
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
+            LogCommand("StartEdit");
         }
 
 
@@ -174,6 +178,7 @@ namespace TcoData
             FillObservableRecords();
             this.Mode = ViewMode.Display;
             SetRowSelectedButtonState();
+            LogCommand("Update");
         }
 
         public void CancelEdit()
@@ -185,6 +190,7 @@ namespace TcoData
                 ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)SelectedRecord);
             }
             SetRowSelectedButtonState();
+            LogCommand("CancelEdit");
         }
 
         public void Delete()
@@ -197,6 +203,7 @@ namespace TcoData
             FillObservableRecords();
             this.SelectedRecord = this.ObservableRecords.FirstOrDefault();
             SetRowSelectedButtonState();
+            LogCommand("Delete");
         }
 
         public void StartCreatingRecordCopy()
@@ -205,7 +212,7 @@ namespace TcoData
             RecordIdentifier = $"Copy of {SelectedRecord._EntityId}";
             this.Mode = ViewMode.Copy;
             ViewModeNewCopy();
-
+            LogCommand("StartCreatingRecordCopy");
         }
 
         public void CreateCopyOfExisting()
@@ -220,7 +227,7 @@ namespace TcoData
             SelectedRecord = plain;
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
-           
+            LogCommand("CreateCopyOfExisting");
         }
 
         public void LoadFromPlc()
@@ -235,6 +242,7 @@ namespace TcoData
             SelectedRecord = plain;
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
+            LogCommand("LoadFromPlc");
 
         }
 
@@ -242,6 +250,7 @@ namespace TcoData
         {
                 ((dynamic)DataExchange)._data.FlushPlainToOnline((dynamic)this.SelectedRecord);
             //}, $"{((dynamic)DataExchange)._data._EntityId}", () => MessageBox.Show($"{strings.LoadToController} '{((dynamic)this.SelectedRecord)._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+            LogCommand("SendToPlc");
         }
 
         public bool StartCreateNewCommandAvailable { get; set; }

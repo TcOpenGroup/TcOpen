@@ -59,6 +59,7 @@
         if (result.Succeeded)
         {
             _alertManager.addAlert("success", "User succesfully updated!");
+            TcoAppDomain.Current.Logger.Information($"User '{_user.UserName}' has changed password.{{payload}}", new { UserName = _user.UserName, Email = _user.Email, CanChangePassword = _user.CanUserChangePassword, Group = string.Join(",", _user.Roles) });
         } else
         {
             _alertManager.addAlert("warning", "User was not updated!");

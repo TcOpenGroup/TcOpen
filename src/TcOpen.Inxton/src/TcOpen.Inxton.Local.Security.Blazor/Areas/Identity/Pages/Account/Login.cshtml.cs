@@ -69,6 +69,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    TcoAppDomain.Current.Logger.Information($"User '{Input.Username}' logged in. {{@sender}}", new { UserName = Input.Username });
                     return LocalRedirect(returnUrl);
                 }
                 else

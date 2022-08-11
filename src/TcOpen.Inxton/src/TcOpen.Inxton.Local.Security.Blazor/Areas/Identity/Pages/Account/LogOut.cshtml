@@ -4,13 +4,13 @@
 @using TcOpen.Inxton.Local.Security.Blazor 
 @attribute [IgnoreAntiforgeryToken]
 @inject SignInManager<User> SignInManager
-@inject BlazorAlertManager _alertManager
 @functions {
     public async Task<IActionResult> OnPost()
     {
         if (SignInManager.IsSignedIn(User))
         {
             await SignInManager.SignOutAsync();
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{User.Identity.Name}' logged out. {{@sender}}", new { UserName = User.Identity.Name });
         }
 
         return Redirect("~/");

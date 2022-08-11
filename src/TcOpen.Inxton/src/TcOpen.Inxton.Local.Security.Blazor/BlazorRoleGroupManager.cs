@@ -43,6 +43,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 return IdentityResult.Failed(new IdentityError { Description = $"Group with name {name} already exists." });
             }
 
+            TcoAppDomain.Current.Logger.Information($"New Group '{name}' created. {{@sender}}", new { Name = name });
+
             return IdentityResult.Success;
         }
 
@@ -52,6 +54,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 throw new ArgumentNullException(nameof(name));
 
             groupRepo.Delete(name);
+
+            TcoAppDomain.Current.Logger.Information($"Group '{name}' deleted. {{@sender}}", new { Name = name });
 
             return IdentityResult.Success;
         }
@@ -118,6 +122,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
             }
 
+            TcoAppDomain.Current.Logger.Information($"Group '{group}' assign '{String.Join(",", roles)}'. {{@sender}}", new { Name = group, Roles = String.Join(",", roles) });
+
             return IdentityResult.Success;
         }
 
@@ -144,6 +150,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 {
                     return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
                 }
+
+                TcoAppDomain.Current.Logger.Information($"Group '{group}' remove '{String.Join(",", roles)}'. {{@sender}}", new { Name = group, Roles = String.Join(",", roles) });
 
                 groupRepo.Update(group, data);
             }

@@ -54,6 +54,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             await _userManager.DeleteAsync(user);
             SelectedUser = null;
             _alertManager.addAlert("success", "User succesfully deleted!");
+            TcoAppDomain.Current.Logger.Information($"User '{user.UserName}' deleted. {{@sender}}", new { UserName = user.UserName });
         }
 
         private async void OnValidUpdate()
@@ -70,6 +71,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             if (result.Succeeded)
             {
                 _alertManager.addAlert("success", "User succesfully updated!");
+                TcoAppDomain.Current.Logger.Information($"User '{SelectedUser.UserName}' updated. {{@sender}}", new { UserName = SelectedUser.UserName, Group = SelectedUser.Roles });
             }
             else
             {
