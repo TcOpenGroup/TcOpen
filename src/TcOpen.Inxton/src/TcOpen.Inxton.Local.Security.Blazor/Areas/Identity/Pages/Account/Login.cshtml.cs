@@ -22,14 +22,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private BlazorAlertManager _alertManager { get; set; }
 
         public LoginModel(SignInManager<User> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            BlazorAlertManager _alertManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this._alertManager = _alertManager;
         }
 
         [BindProperty]
@@ -70,6 +73,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     TcoAppDomain.Current.Logger.Information($"User '{Input.Username}' logged in. {{@sender}}", new { UserName = Input.Username });
+                    //_alertManager.addAlert("success", "User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 else

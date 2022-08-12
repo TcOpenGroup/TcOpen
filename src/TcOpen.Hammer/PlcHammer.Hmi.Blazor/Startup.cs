@@ -39,7 +39,7 @@ namespace PlcHammer.Hmi.Blazor
     public class Startup
     {
         private BlazorRoleGroupManager roleGroupManager;
-        private bool mongoDB = false;
+        private bool mongoDB = true;
 
         public Startup(IConfiguration configuration)
         {
@@ -75,7 +75,7 @@ namespace PlcHammer.Hmi.Blazor
                 groupRepo = SetUpGroupRepositoryJson();
             }
 
-            roleGroupManager = new BlazorRoleGroupManager(groupRepo);
+            roleGroupManager = new BlazorRoleGroupManager(groupRepo, userRepo);
             Roles.Create(roleGroupManager);
 
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
@@ -90,7 +90,7 @@ namespace PlcHammer.Hmi.Blazor
                 SetUpJsonRepositories();
             }
 
-            IAuthenticationService authenticationService = SecurityManager.Create(userRepo);
+            IAuthenticationService authenticationService = SecurityManager.Create(roleGroupManager);
 
             // App setup
             TcOpen.Inxton.TcoAppDomain.Current.Builder
@@ -100,8 +100,12 @@ namespace PlcHammer.Hmi.Blazor
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
                                                                   // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
                                                                   // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
+                                        .Enrich.WithProperty("user", TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name)
+                                        .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
+                                        .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
+                                        .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
-                .SetSecurity(authenticationService)
+                .SetSecurity(roleGroupManager)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
             // Initialize logger

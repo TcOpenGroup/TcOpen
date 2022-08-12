@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Local.Security.Blazor;
 using Vortex.Connector;
 
 namespace TcoData
@@ -21,10 +23,11 @@ namespace TcoData
     public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
     {
         private void LogCommand(string commandName) => TcOpen.Inxton.TcoAppDomain.Current?.Logger?.Information<string>($"{DataExchange.Symbol}.{commandName}");
+        [Inject]
+        private BlazorAlertManager _alertManager { get; set; }
 
         public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
         {
-
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
         }
@@ -151,7 +154,17 @@ namespace TcoData
         {
             var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
             plainer._EntityId = RecordIdentifier;
-            DataBrowser.AddRecord(plainer);
+            try
+            {
+                DataBrowser.AddRecord(plainer);
+            } catch (DuplicateIdException)
+            {
+                //_alertManager.addAlert("warning", "Data with id " + RecordIdentifier + " already exist in database!");
+                Mode = ViewMode.Display;
+                SetDefaultButtonState();
+                return;
+            }
+            
             var plain = DataBrowser.FindById(plainer._EntityId);
             ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
             FillObservableRecords();
