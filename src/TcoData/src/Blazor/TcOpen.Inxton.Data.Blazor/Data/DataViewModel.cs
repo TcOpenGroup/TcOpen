@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +24,6 @@ namespace TcoData
     public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
     {
         private void LogCommand(string commandName) => TcOpen.Inxton.TcoAppDomain.Current?.Logger?.Information<string>($"{DataExchange.Symbol}.{commandName}");
-        [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 
         public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
@@ -150,7 +150,7 @@ namespace TcoData
             LogCommand("StartCreatingNew");
         }
 
-        public void CreateNew()
+        public string CreateNew()
         {
             var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
             plainer._EntityId = RecordIdentifier;
@@ -159,10 +159,9 @@ namespace TcoData
                 DataBrowser.AddRecord(plainer);
             } catch (DuplicateIdException)
             {
-                //_alertManager.addAlert("warning", "Data with id " + RecordIdentifier + " already exist in database!");
                 Mode = ViewMode.Display;
                 SetDefaultButtonState();
-                return;
+                return "Data with id " + RecordIdentifier + " already exist in database!";
             }
             
             var plain = DataBrowser.FindById(plainer._EntityId);
@@ -172,6 +171,7 @@ namespace TcoData
             Mode = ViewMode.Edit;
             ViewModeEdit();
             LogCommand("CreateNew");
+            return "";
         }
 
         public void StartEdit()
