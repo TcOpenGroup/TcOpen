@@ -19,7 +19,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
     {
         public static void AddVortexBlazorSecurity(this IServiceCollection services,
             IRepository<UserData> userRepo,
-            IRepository<GroupData> groupRepo,
             BlazorRoleGroupManager roleGroupManager)
         {
             services.AddIdentity<User, Role>(identity =>
@@ -35,14 +34,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
             .AddCustomStores()
             .AddDefaultTokenProviders();
 
-            roleGroupManager.CreateRole(new Role("Administrator"));
-
-            if (!(roleGroupManager.GetAllGroup()).Select(x => x.Name).Contains("AdminGroup"))
-            {
-                roleGroupManager.CreateGroup("AdminGroup");
-                roleGroupManager.AddRoleToGroup("AdminGroup", "Administrator");
-            }
-
+            /*Create Default User*/
             var allUsers = userRepo.GetRecords("*", Convert.ToInt32(userRepo.Count + 1), 0).ToList();
             if (!allUsers.Any())
             {
@@ -59,6 +51,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
                 var userEntity = new UserData(user);
                 userRepo.Create(user.NormalizedUserName, userEntity);
             }
+
             services.AddScoped<BlazorRoleGroupManager>(p => roleGroupManager);
             services.AddScoped<BlazorAlertManager>();
             services.AddScoped<IRepositoryService, RepositoryService>(provider => new RepositoryService(userRepo, roleGroupManager));
