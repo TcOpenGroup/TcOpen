@@ -64,7 +64,7 @@ namespace TcoIo
         private static string ReplaceKeywords(string inStr)
         {
             string ret = inStr;
-            if (!string.IsNullOrEmpty(ret))
+            if (!string.IsNullOrEmpty(ret) && ret.Contains('['))
             {
                 string[] s = ret.Split('[');
                 if (s[0].ToUpper().EndsWith("LIMIT")

@@ -75,7 +75,7 @@ namespace TcoIo
         }
 
 
-        private bool SyncUnitsStateCalc(IVortexObject vortexObject)
+        public bool SyncUnitsStateCalc(IVortexObject vortexObject)
         {
             bool noSyncUnitHasError = false;
             if (vortexObject != null)

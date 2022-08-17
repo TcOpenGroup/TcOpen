@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using TcoIo.Topology;
 using System.Windows.Media;
+using System.Collections.ObjectModel;
 
 namespace TcoIo
 {
@@ -85,22 +86,42 @@ namespace TcoIo
             ////////////////////////////////////////////
             ///Temporary button just for debugging
             ////////////////////////////////////////////
-            //Button RefreshButton = new Button();
-            //RefreshButton.Content = "Refresh";
-            //RefreshButton.MaxWidth = firstTopologyObject == null ? 128 : firstTopologyObject.Pos_X;
-            //Grid.SetColumn(RefreshButton, 0);
-            //Grid.SetRow(RefreshButton, 0);
-            //zoom = 1.0;
-            //(grid.LayoutTransform as ScaleTransform).ScaleX = zoom;
-            //(grid.LayoutTransform as ScaleTransform).ScaleY = zoom;
+            Button RefreshButton = new Button();
+            RefreshButton.Content = "Refresh";
+            RefreshButton.MaxWidth = DimsDef.slaveWidth;
+            RefreshButton.Padding = new Thickness(0);
+            RefreshButton.Margin = new Thickness(0);
 
-            //RefreshButton.Click += RefreshButton_Click; ;
+            Grid.SetColumn(RefreshButton, 0);
+            Grid.SetRow(RefreshButton, 0);
+            zoom = 1.0;
+            (grid.LayoutTransform as ScaleTransform).ScaleX = zoom;
+            (grid.LayoutTransform as ScaleTransform).ScaleY = zoom;
+
+            RefreshButton.Click += RefreshButton_Click; ;
 
             //hardwareGrid.Children.Add(RefreshButton);
             ////////////////////////////////////////////
             return hardwareGrid;
         }
-
+        ////////////////////////////////////////////
+        ///Temporary event just for debugging
+        ////////////////////////////////////////////
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            DependencyPropertyChangedEventArgs _e = new DependencyPropertyChangedEventArgs();
+            FirstTopologyElementReached = false;
+            LastTopologyElementReached = false;
+            row = maxrow = column = 0;
+            Pos_X = Pos_Y = MaxPos_Y = 0;
+            FirstElementRow = LastElementRow = FirstElementColumn = LastElementColumn = -1;
+            previousTopologyObject = new TopologyObject();
+            topologyObjects = new ObservableCollection<TopologyObject>();
+            firstTopologyElement = lastTopologyElement = null;
+            dt = null;
+            RenderCompleteTopology();
+        }
+        ////////////////////////////////////////////
 
     }
 }
