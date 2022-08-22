@@ -14,12 +14,12 @@ namespace TcoIo
             get 
             {
                 string name = "";
-                this.Dispatcher.Invoke(() => { name = ValidateFrameworkElement.Name((string)GetValue(FirstTopologyElementNameProperty)); });
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { name = ValidateFrameworkElement.Name((string)GetValue(FirstTopologyElementNameProperty)); });
                 return name;
             }
             set 
             {
-                this.Dispatcher.Invoke(() => SetValue(FirstTopologyElementNameProperty, ValidateFrameworkElement.Name(value)));
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => SetValue(FirstTopologyElementNameProperty, ValidateFrameworkElement.Name(value)));
             }
         }
 

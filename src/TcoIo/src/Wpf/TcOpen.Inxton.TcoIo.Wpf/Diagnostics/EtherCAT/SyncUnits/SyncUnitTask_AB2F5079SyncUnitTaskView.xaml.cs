@@ -77,7 +77,7 @@ namespace TcoIo
 
         private void UpdateSyncUnitState(IValueTag sender, ValueChangedEventArgs args)
         {
-            this.Dispatcher.Invoke(() =>
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
             SyncUnitTask_AB2F5079 dt = this.DataContext as SyncUnitTask_AB2F5079;
             if (dt != null)

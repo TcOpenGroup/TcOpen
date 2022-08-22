@@ -13,13 +13,13 @@ namespace TcoIo
             get 
             {
                 bool _value = false;
-                this.Dispatcher.Invoke(() => 
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
                     {
                         _value = (bool)GetValue(GroupedViewProperty); 
                     });
                 return _value;
             }
-            set { this.Dispatcher.Invoke(() => { SetValue(GroupedViewProperty, value); }); }
+            set { TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { SetValue(GroupedViewProperty, value); }); }
         }
 
         // Using a DependencyProperty as the backing store for GroupedView.  This enables animation, styling, binding, etc...

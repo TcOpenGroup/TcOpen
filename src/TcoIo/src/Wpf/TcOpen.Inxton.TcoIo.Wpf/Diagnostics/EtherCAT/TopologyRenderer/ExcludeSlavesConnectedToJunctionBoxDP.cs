@@ -10,8 +10,13 @@ namespace TcoIo
     {
         public bool ExcludeSlavesConnectedToJunctionBox
         {
-            get {return (bool)GetValue(ExcludeSlavesConnectedToJunctionBoxProperty);  }
-            set {SetValue(ExcludeSlavesConnectedToJunctionBoxProperty, value); }
+            get 
+            {
+                bool ret = false;
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { ret = (bool)GetValue(ExcludeSlavesConnectedToJunctionBoxProperty); });
+                return ret;
+            }
+            set { TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(()=>SetValue(ExcludeSlavesConnectedToJunctionBoxProperty, value)); }
         }
 
         public static readonly DependencyProperty ExcludeSlavesConnectedToJunctionBoxProperty =

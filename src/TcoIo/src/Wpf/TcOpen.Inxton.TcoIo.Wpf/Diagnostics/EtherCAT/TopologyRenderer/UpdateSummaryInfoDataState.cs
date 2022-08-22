@@ -31,7 +31,7 @@ namespace TcoIo
             LastTopologyElementReached = false;
 
             CalculateInfoDataStates(dt, ref SummaryInfoDataState, ref groupedViewItems, ref syncUnitError);
-            this.Dispatcher.Invoke(() => 
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => 
             {
                 TopologyObject _topologyObject =  new TopologyObject();
                 int index = 0;
