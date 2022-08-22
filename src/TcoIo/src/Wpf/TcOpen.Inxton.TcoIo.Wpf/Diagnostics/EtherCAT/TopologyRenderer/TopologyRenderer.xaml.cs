@@ -34,7 +34,7 @@ namespace TcoIo
         private IVortexObject firstTopologyElement, lastTopologyElement;
         private System.Timers.Timer visibilityCheckTimer;
         private static System.Timers.Timer generatingWindowHideTimer;
-        private bool isVisible, alreadyRendered, alreadyRenderedAsGroupedView = false;
+        private bool isVisible, alreadyRendered = false;
         private static Generating generating;
         private static bool rendering = false;
         public static bool Rendering
@@ -96,7 +96,7 @@ namespace TcoIo
 
         private void RenderCompleteTopology()
         {
-            if (dt != null && (!GroupedView && !alreadyRendered) || (GroupedView && !alreadyRenderedAsGroupedView ))
+            if (dt != null && !alreadyRendered)
             {
                 TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
                 {
@@ -200,7 +200,7 @@ namespace TcoIo
             {
                 visibilityCheckTimer = new System.Timers.Timer(1000);
                 visibilityCheckTimer.Elapsed += VisibilityCheckTimer_Elapsed;
-                visibilityCheckTimer.AutoReset = (!GroupedView && !alreadyRendered) || (GroupedView && !alreadyRenderedAsGroupedView);
+                visibilityCheckTimer.AutoReset = true;
                 visibilityCheckTimer.Enabled = true;
             }
         }
@@ -237,17 +237,10 @@ namespace TcoIo
             {
                 if (IsVisible)
                 {
-                    if ((!GroupedView && !alreadyRendered) || (GroupedView && !alreadyRenderedAsGroupedView))
+                    if(!alreadyRendered)
                     {
                         RenderCompleteTopology();
-                        if (GroupedView)
-                        {
-                            alreadyRenderedAsGroupedView = true;
-                        }
-                        else
-                        {
-                            alreadyRendered = true;
-                        }
+                        alreadyRendered = true;
                     }
                 }
                 isVisible = IsVisible;
