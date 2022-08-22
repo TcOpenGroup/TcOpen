@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -43,26 +44,15 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
                 roleGroupManager.AddRoleToGroup("AdminGroup", "Administrator");
             }
 
-            var allUsers = userRepo.GetRecords("*", Convert.ToInt32(userRepo.Count + 1), 0).ToList();
-            if (!allUsers.Any())
-            {
-                string[] roles = { "AdminGroup" };
-                //create default admin user
-                var user = new User("admin", null, roles, false, null);
-                user.SecurityStamp = Guid.NewGuid().ToString();
-                user.PasswordHash = new PasswordHasher<User>().HashPassword(user, "admin");
-                user.Roles = new List<string>
-                {
-                    "AdminGroup"
-                }.ToArray();
+            BlazorAuthenticationStateProvider blazorAuthenticationStateProvider = new BlazorAuthenticationStateProvider(userRepo, roleGroupManager);
 
-                var userEntity = new UserData(user);
-                userRepo.Create(user.NormalizedUserName, userEntity);
-            }
+            SecurityManager.Create(blazorAuthenticationStateProvider);
+
             services.AddScoped<BlazorRoleGroupManager>(p => roleGroupManager);
             services.AddScoped<BlazorAlertManager>();
             services.AddScoped<IRepositoryService, RepositoryService>(provider => new RepositoryService(userRepo, roleGroupManager));
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+            //services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+            services.AddScoped<AuthenticationStateProvider, BlazorAuthenticationStateProvider>(p => blazorAuthenticationStateProvider);
         }
     }
 }

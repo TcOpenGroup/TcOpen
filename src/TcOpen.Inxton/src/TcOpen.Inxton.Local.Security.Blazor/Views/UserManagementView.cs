@@ -22,8 +22,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private BlazorRoleGroupManager _roleGroupManager { get; set; }
-        [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 
         private User SelectedUser { get; set; }
@@ -61,7 +59,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         {
             if (_model.Password != "password")
             {
-                SelectedUser.PasswordHash = _userManager.PasswordHasher.HashPassword(SelectedUser, _model.Password);
+                SelectedUser.PasswordHash = SecurityManager.Manager.Service.CalculateHash(_model.Password, _model.Username);
             }
             SelectedUser.UserName = _model.Username;
             SelectedUser.CanUserChangePassword = _model.CanUserChangePassword;

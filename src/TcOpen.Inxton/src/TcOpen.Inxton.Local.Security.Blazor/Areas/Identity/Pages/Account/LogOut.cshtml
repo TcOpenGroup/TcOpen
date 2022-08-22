@@ -5,13 +5,9 @@
 @attribute [IgnoreAntiforgeryToken]
 @inject SignInManager<User> SignInManager
 @functions {
-    public async Task<IActionResult> OnPost()
+    public IActionResult OnPost()
     {
-        if (SignInManager.IsSignedIn(User))
-        {
-            await SignInManager.SignOutAsync();
-            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{User.Identity.Name}' logged out. {{@sender}}", new { UserName = User.Identity.Name });
-        }
+        SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
 
         return Redirect("~/");
     }

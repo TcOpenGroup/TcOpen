@@ -1,8 +1,8 @@
 ﻿@page "/Identity/Account/Register"
-@inject NavigationManager _navigationManager
-@inject UserManager<User> _userManager
 @inject BlazorRoleGroupManager _roleGroupManager
 @inject BlazorAlertManager _alertManager
+@inject UserManager<User> _userManager
+@inject NavigationManager _navigationManager
 
 <AuthorizeView Roles="Administrator">
     <Authorized Context="Auth">
@@ -63,7 +63,10 @@
     {
         _user = new User(_model.Username, _model.Email, new string[1] { _model.Group }, _model.CanUserChangePassword, null);
 
-        var result = await _userManager.CreateAsync(_user, _model.Password);
+        _user.SecurityStamp = Guid.NewGuid().ToString();
+        _user.PasswordHash = SecurityManager.Manager.Service.CalculateHash(_model.Password, _model.Username);
+
+        var result = await _userManager.CreateAsync(_user);
 
         if (result.Succeeded)
         {
