@@ -9,6 +9,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
 using System.Windows.Controls.Primitives;
+using TcOpen.Inxton.TcoCore.Wpf;
+using TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT;
 
 namespace TcoIo
 {
@@ -17,8 +19,8 @@ namespace TcoIo
     /// </summary>
     public partial class TopologyRenderer : UserControl
     {
-        static int row, maxrow, column, maxcolumn = 0;
-        static double Pos_X , MaxPos_X , Pos_Y , MaxPos_Y = 0.0;
+        private int row, maxrow, column, maxcolumn = 0;
+        private double Pos_X, MaxPos_X, Pos_Y, MaxPos_Y = 0.0;
         TopologyObject previousTopologyObject;
         ObservableCollection<TopologyObject> topologyObjects;
         static double strokeThicknessDef = 10.0;
@@ -28,8 +30,36 @@ namespace TcoIo
         private IVortexObject dt;
         public List<GroupedViewItemObject> groupedViewItems = new List<GroupedViewItemObject>();
         public bool FirstTopologyElementReached , LastTopologyElementReached , syncUnitError = false;
-        static int FirstElementRow , LastElementRow , FirstElementColumn , LastElementColumn = -1;
-        IVortexObject firstTopologyElement, lastTopologyElement;
+        private int FirstElementRow, LastElementRow, FirstElementColumn, LastElementColumn = -1;
+        private IVortexObject firstTopologyElement, lastTopologyElement;
+        private System.Timers.Timer visibilityCheckTimer;
+        private static System.Timers.Timer generatingWindowHideTimer;
+        private bool isVisible, alreadyRendered, alreadyRenderedAsGroupedView = false;
+        private static Generating generating;
+        private static bool rendering = false;
+        public static bool Rendering
+        {
+            get { return rendering; }
+            set 
+            { 
+                rendering = value;
+                if (!rendering)
+                {
+                    SetGeneratingWindowHideTimer();
+                }
+                else
+                {
+                    ResetGeneratingWindowHideTimer();
+                }
+            }
+        }
+
+
+        public static Generating Generating
+        {
+            get { return generating; }
+            set { generating = value; }
+        }
 
         public TopologyRenderer()
         {
@@ -44,31 +74,54 @@ namespace TcoIo
             this.VerticalAlignment = VerticalAlignment.Top;
             this.DataContextChanged += TopologyRenderer_DataContextChanged;
             InitializeComponent();
+            SetVisibilityTimer();
+            this.Unloaded += TopologyRenderer_Unloaded;
+        }
+
+        private void TopologyRenderer_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (Generating != null)
+            {
+                Generating.Hide();
+            }
         }
 
         private void TopologyRenderer_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            RenderCompleteTopology();
+            if (this.DataContext as IVortexObject != null)
+            {
+                dt = this.DataContext as IVortexObject;
+            }
         }
 
         private void RenderCompleteTopology()
         {
-            if (this.DataContext as IVortexObject != null)
+            if (dt != null && (!GroupedView && !alreadyRendered) || (GroupedView && !alreadyRenderedAsGroupedView ))
             {
-                dt = this.DataContext as IVortexObject;
-                FirstTopologyElementReached = false;
-                LastTopologyElementReached = false;
-                groupedViewItems = new List<GroupedViewItemObject>();
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+                {
+                    Rendering = true;
+                    if (Generating == null)
+                    {
+                        Generating = new Generating();
+                        Generating.Owner = Application.Current.MainWindow;
+                    }
+                    Generating.Show();
+                    FirstTopologyElementReached = false;
+                    LastTopologyElementReached = false;
+                    groupedViewItems = new List<GroupedViewItemObject>();
 
-                FindObjectsAndSubscribeToInfoDataState(dt);
+                    FindObjectsAndSubscribeToInfoDataState(dt);
 
-                PrepareHardware(dt);
+                    PrepareHardware(dt);
 
-                FilterOutExcludedHardware();
+                    FilterOutExcludedHardware();
 
-                Grid wiring = PrepareWiring() as Grid;
-                this.grid.Children.Clear();
-                this.grid.Children.Add(Render(wiring) as Grid);
+                    Grid wiring = PrepareWiring() as Grid;
+                    this.grid.Children.Clear();
+                    this.grid.Children.Add(Render(wiring) as Grid);
+                    Rendering = false;
+                });
             }
         }
 
@@ -140,5 +193,65 @@ namespace TcoIo
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private void SetVisibilityTimer()
+        {
+            if (visibilityCheckTimer == null)
+            {
+                visibilityCheckTimer = new System.Timers.Timer(1000);
+                visibilityCheckTimer.Elapsed += VisibilityCheckTimer_Elapsed;
+                visibilityCheckTimer.AutoReset = (!GroupedView && !alreadyRendered) || (GroupedView && !alreadyRenderedAsGroupedView);
+                visibilityCheckTimer.Enabled = true;
+            }
+        }
+
+        private static void SetGeneratingWindowHideTimer()
+        {
+            if (generatingWindowHideTimer == null)
+            {
+                generatingWindowHideTimer = new System.Timers.Timer(1000);
+                generatingWindowHideTimer.Elapsed += GeneratingWindowHideTimer_Elapsed; ;
+                generatingWindowHideTimer.AutoReset = false;
+                generatingWindowHideTimer.Enabled = true;
+            }
+            generatingWindowHideTimer.Start();
+        }
+        private static void ResetGeneratingWindowHideTimer()
+        {
+            if (generatingWindowHideTimer != null)
+            {
+                generatingWindowHideTimer.Stop();
+            }
+        }
+        private static void GeneratingWindowHideTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            {
+                Generating.Hide();
+            });
+        }
+
+        private void VisibilityCheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            {
+                if (IsVisible)
+                {
+                    if ((!GroupedView && !alreadyRendered) || (GroupedView && !alreadyRenderedAsGroupedView))
+                    {
+                        RenderCompleteTopology();
+                        if (GroupedView)
+                        {
+                            alreadyRenderedAsGroupedView = true;
+                        }
+                        else
+                        {
+                            alreadyRendered = true;
+                        }
+                    }
+                }
+                isVisible = IsVisible;
+            });
+        }
     }
 }

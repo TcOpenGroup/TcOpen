@@ -65,7 +65,7 @@ namespace TcoIo
         public void UpdateSyncUnitsState(IVortexObject device)
         {
             bool someSyncUnitHasError = SyncUnitsStateCalc(device);
-            this.Dispatcher.Invoke(() =>
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
                 Brush DeviceBackgroundColor = new SyncUnitErrorToBackground().Convert(someSyncUnitHasError, null, null, null) as Brush;
                 Brush DeviceForegroundColor = new SyncUnitErrorToForeground().Convert(someSyncUnitHasError, null, null, null) as Brush;

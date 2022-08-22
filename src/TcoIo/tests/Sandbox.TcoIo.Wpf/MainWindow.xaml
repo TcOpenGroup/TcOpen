@@ -21,17 +21,17 @@
         <TabItem Header="Topology renderer-group" >
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <wpf:TopologyRenderer Grid.Row="0" Grid.Column="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}" GroupName="Station 10: Term 146 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 146 (EK1100)" LastTopologyElementName="Term 1163 (EL2008)" ExcludeSlavesConnectedToJunctionBox="True"/>
                 <wpf:TopologyRenderer Grid.Row="1" Grid.Column="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_288_EK1122}" GroupName="Station 20: Term 289 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 289 (EK1100)" LastTopologyElementName="Term 336 (EL2008)"/>
@@ -42,7 +42,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Topology renderer-complete" >
-            <wpf:TopologyRenderer Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}" />
+            <wpf:TopologyRenderer Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}" />
         </TabItem>
         <TabItem Header="Simulation" >
             <Grid>
@@ -59,11 +59,11 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <sim:SetAllToOPstate    Grid.Column="0" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SetAllToINITstate  Grid.Column="1" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SetAllToOPstate            Grid.Column="0" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
                 <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SetAllToINITstate  Grid.Column="0" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"/>
-                <sim:SetAllToINITstate  Grid.Column="1" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"/>
+                <sim:SetAllToINITstate          Grid.Column="0" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"/>
+                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"/>
                 <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100}"/>
                 <sim:SetAllToMissingConnection  Grid.Column="0" Grid.Row="4" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100}"/>
             </Grid>
