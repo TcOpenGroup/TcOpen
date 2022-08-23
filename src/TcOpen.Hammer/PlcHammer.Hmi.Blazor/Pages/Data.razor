@@ -1,0 +1,40 @@
+﻿@page "/data"
+
+
+<div class="container-fluid">
+    <h3>Data management</h3>
+
+    <div name="TabControl" class="w-100">
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <button type="button" class="nav-link @((selected == 0) ? "active" : "")" @onclick="() => selected = 0"><b>Process Settings</b></button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="nav-link @((selected == 1) ? "active" : "")" @onclick="() => selected = 1"><b>Technology</b></button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="nav-link @((selected == 2) ? "active" : "")" @onclick="() => selected = 2"><b>Traceability</b></button>
+            </li>
+        </ul>
+        <div class="content">
+            @switch (@selected)
+            {
+                case 0:
+                    <h2>Process Settings</h2>
+                    <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies" Presentation="Base"></RenderableContentControl>
+                    break;
+                case 1:
+                    <h2>Technology</h2>
+                    <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager" Presentation="Base"></RenderableContentControl>
+                    break;
+                case 2:
+                    <h2>Traceability</h2>
+                    <RenderableContentControl Context="Entry.PlcHammer.TECH_MAIN._app._station001._processTraceabilty" Presentation="Base"></RenderableContentControl>
+                    break;
+            }
+        </div>
+    </div>
+</div>
+@code {
+    int selected = 0;
+}

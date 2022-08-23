@@ -1,11 +1,10 @@
-﻿@page "/Identity/Account/Register"
-
-@inject SignInManager<User> SignInManager
+﻿@inject SignInManager<User> SignInManager
 @inject NavigationManager _navigationManager
 @inject UserManager<User> UserManager
+@inject BlazorAlertManager _alertManager
+
+
 <h3>Register</h3>
-
-
 
 <div class="card">
     <h4 class="card-header">Register</h4>
@@ -38,20 +37,19 @@
 
     private async void OnValidSubmit()
     {
-
         _user = new User(_model.Username, null, null, false, null);
-       
 
         var result = await UserManager.CreateAsync(_user, _model.Password);
 
         if (result.Succeeded)
         {
-
             _navigationManager.NavigateTo("/Identity/Account/Login", true);
+            _alertManager.addAlert("success", "User succesfully register!");
         }
         else
         {
             _navigationManager.NavigateTo("/");
+            _alertManager.addAlert("warning", "User was not register!");
         }
 
 

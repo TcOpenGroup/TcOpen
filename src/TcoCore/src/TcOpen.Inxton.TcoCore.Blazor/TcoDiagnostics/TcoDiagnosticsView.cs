@@ -52,7 +52,9 @@ namespace TcoCore
 
         public string DiagnosticsMessage() => "Diag depth : " + DepthValue;
         public int MaxDiagnosticsDepth { get; set; } = 20;
-        private int _depthValue;
+        public static int _depthValue;
+        public static int SetDefaultDepth(int item) => _depthValue = item; 
+        
         public int DepthValue
         {
             get

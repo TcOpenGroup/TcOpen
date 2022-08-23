@@ -13,7 +13,14 @@
     <UserControl.DataContext>
         <TcoIo:TcoEthercatMasterDevice/>
     </UserControl.DataContext>
-    <Border BorderThickness="4" CornerRadius="20" BorderBrush="Black">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Display\DefaultStyling.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border BorderThickness="5" CornerRadius="20" BorderBrush="{StaticResource InxtonBlue}" >
         
     <Grid>
         <Grid.RowDefinitions>

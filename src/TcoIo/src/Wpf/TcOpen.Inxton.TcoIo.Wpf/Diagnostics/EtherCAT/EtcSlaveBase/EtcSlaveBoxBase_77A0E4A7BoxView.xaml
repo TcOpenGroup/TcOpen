@@ -16,7 +16,7 @@
     <StackPanel DataContext="{Binding Box}">
         <WrapPanel>
             <TextBlock Text="PreviousPort: "/>
-            <TextBlock Text="{Binding AttributePreviousPort}"></TextBlock>
+            <TextBlock Text="{Binding AttributePreviousPort}"/>
         </WrapPanel>
         <vortex:RenderableContentControl Margin="10,0,10,5" DataContext="{Binding }" PresentationType="Terminal-HWDiagStruct-HWDiag-ControlSlim" />
     </StackPanel>

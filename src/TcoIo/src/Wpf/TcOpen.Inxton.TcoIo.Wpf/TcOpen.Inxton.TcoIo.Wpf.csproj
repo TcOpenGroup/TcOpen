@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.703" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.10-alpha.735" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,12 +27,86 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplay.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplaySlim.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcGroupedTopology\EtcGroupedView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\TcoEthercatMasterDeviceTopologyView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\EtcMasterBase_62654B43TopologyDeviceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveTerminalBase_947E5A46TerminalView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBoxBase_77A0E4A7BoxView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveBase_82538BE2TopologyBaseView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveTerminalBase_947E5A46SingleTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveBoxBase_77A0E4A7TopologyBoxM90View.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveBoxBase_77A0E4A7TopologyBoxView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveEndTerminalBase_866C7F0CTopologyEndTerminalM90View.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\RotatedByMinus90Deg\EtcSlaveTerminalBase_947E5A46TopologyTerminalM90View.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcSlaveTopology\Normal\EtcSlaveTerminalBase_947E5A46TopologyTerminalView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoDataSyncUnitStateHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_2A97D6CFHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_8649EEEBHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\InfoData_84133AC9HWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\InfoDataBase\TcoAmsNetIdHWDiagView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\InputBase\InputBase_8311D824HWDiagStructView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
@@ -66,6 +140,18 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Diagnostics\EtherCAT\SyncUnits\SyncUnitsBase_AD6C35CEView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\SyncUnits\SyncUnitTasksBase_7C8711EBSyncUnitView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\SyncUnits\SyncUnitTask_AB2F5079SyncUnitTaskView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\WcStateBase\WcState_0B2B16F9HWDiagView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -77,6 +163,66 @@
     <Page Update="Diagnostics\EtherCAT\EtcSlaveBase\EtcSlaveBase_82538BE2ServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplay.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\Display\AmsNetIdDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindObjectsAndSubscribeToInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\SubscribeToSyncUnits.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\SubscribeToInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FilterOutExcludedHardware.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindTopologyElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateSyncUnitsState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateSummaryInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\Render.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindMyConnectionPartner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\ShiftDownIfNeccessary.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\PrepareWiring.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\PrepareHardware.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\WarningIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\WarningIconM90.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\WarningIconP90.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

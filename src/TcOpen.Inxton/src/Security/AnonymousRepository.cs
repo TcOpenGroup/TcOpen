@@ -35,7 +35,7 @@ namespace TcOpen.Inxton.Local.Security
 
         public bool Exists(string identifier) => false;
 
-        public long FilteredCount(string id) => 0;
+        public long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact) => 0;
 
         public IEnumerable<UserData> GetRecords(string identifier = "*", int limit = 100, int skip = 0, eSearchMode searchMode = eSearchMode.Exact) => new List<UserData>();
 

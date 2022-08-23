@@ -1,54 +1,22 @@
 ﻿@page "/security"
-@using System.Security.Claims;
-@using Microsoft.AspNetCore.Identity;
-@using TcOpen.Inxton.Local.Security
-@inject UserManager<User> _userManager
-@inject SignInManager<User> _signInManager
-@inject RoleManager<IdentityRole> _roleManager
 
 <h3>Security</h3>
 
+<button class="btn btn-primary my-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Example</button>
+<div class="collapse my-3" id="collapseExample">
+    <ExampleView @ref="@exampleView"></ExampleView>
+</div>
 
-
-<AuthorizeView>
+<AuthorizeView Roles="Administrator">
     <Authorized>
-        <UserManagementView @ref="@UserMgmtView"></UserManagementView>
-
-        <div class="m-1">
-            <h4>Add new role</h4>
-            <input type="text" class="form-control m-1" @bind="RoleName" />
-            <button class="btn btn-primary m-1" @onclick="@(async () => await CreateRole(RoleName))">Create new role</button>
-        </div>
+        <SecurityManagementView @ref="@securityManagementView"></SecurityManagementView>
     </Authorized>
     <NotAuthorized>
         <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
     </NotAuthorized>
 </AuthorizeView>
 
-
-
-
-
-
 @code {
-
-    public string RoleName { get; set; }
-
-    private UserManagementView UserMgmtView { get;set;}
-
-    public async Task CreateRole(string roleName)
-    {
-        if (string.IsNullOrWhiteSpace(roleName))
-            return;
-        if (!await _roleManager.RoleExistsAsync(roleName))
-        {
-            var normalizer = new UpperInvariantLookupNormalizer();
-            var identityRole = new IdentityRole(roleName);
-            identityRole.NormalizedName = normalizer.NormalizeName(roleName);
-            await _roleManager.CreateAsync(identityRole);
-            StateHasChanged();
-            UserMgmtView.RoleAdded();
-        }
-
-    }
+    private SecurityManagementView securityManagementView { get; set; }
+    private ExampleView exampleView { get; set; }
 }

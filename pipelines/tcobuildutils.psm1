@@ -344,3 +344,74 @@ function Is-License-Valid($targetAmsId)
     }
 }
 
+function GetTwincat3Dir{
+    try 
+    {
+        $TC3DIR = Get-ChildItem -Path Env:\TWINCAT3DIR
+    }
+    catch 
+    {
+        Write-Host "Twincat 3 directory not discovered."
+    }
+    if($TC3DIR.Value)
+    {
+        return $TC3DIR.Value
+    }
+    else
+    {
+        Write-Host "Twincat 3 directory not discovered."
+    }
+}
+
+
+function GetInstalledBuilds{
+    $TC3DIR = GetTwincat3Dir
+    $MajorVersion = -join((get-item $TC3DIR ).Name,".")
+    $TC3BASEDIR = -join($TC3DIR ,"Components\Base")
+    $sBuilds = (Get-ChildItem -Path $TC3BASEDIR -Filter "Build_*" -Recurse -Directory).Name.Replace("Build_",$MajorVersion)
+    $Builds = New-Object Collections.Generic.List[Version]
+    foreach ($sBuild in $sBuilds)
+    {
+        $Build = [System.Version]::Parse($sBuild)
+        $Builds.Add($Build)
+    }
+    return $Builds
+}
+
+
+function GetInstalledTwincatVersion{
+    return Get-ItemProperty HKLM:\Software\Wow6432Node\Beckhoff\TwinCAT3\System | Select-Object TcVersion
+}
+
+
+function RemovePinVersion($tsproj)
+{
+    $xml = [System.Xml.XmlDocument](Get-Content $tsproj);
+    $TcSmProjectNode = $xml.SelectSingleNode("TcSmProject")
+    if($TcSmProjectNode.HasAttribute("TcVersionFixed"))
+    {
+        $TcSmProjectNode.RemoveAttribute("TcVersionFixed")
+        $xml.save($tsproj)
+        Write-Host "Pin version removed in`t" $tsproj
+    }
+}
+
+
+function DisableDevices($tsproj)
+{
+    $xml = [System.Xml.XmlDocument](Get-Content $tsproj);
+    $ioNode = $xml.SelectSingleNode("TcSmProject/Project/Io")
+    if($ioNode -ne $null)
+    {
+        $devicesNodes= $xml.SelectNodes("TcSmProject/Project/Io/Device")
+        foreach($deviceNode in $devicesNodes)
+        {
+            if(-not $deviceNode.HasAttribute("Disabled"))
+            {
+                $deviceNode.SetAttribute("Disabled","true")
+                Write-Host "Disabled device`t" $deviceNode.RemoteName " in`t" $tsproj 
+            }
+        }
+        $xml.Save($tsproj)
+    }
+}

@@ -8,21 +8,21 @@ VAR
 	{attribute 'hide'}
 	_state								:	UINT;
 	{attribute 'hide'}
-	_TimeZoneID							:	Tc2_Utilities.E_TimeZoneID;
+	_TimeZoneID							:	Tc2_EtherCAT.Tc2_Utilities.E_TimeZoneID;
 	{attribute 'hide'}
-	_NT_GetLocalTime					: 	Tc2_Utilities.NT_GetTime;
+	_NT_GetLocalTime					: 	Tc2_EtherCAT.Tc2_Utilities.NT_GetTime;
 	{attribute 'hide'}
-	_FB_TzSpecificLocalTimeToSystemTime :	Tc2_Utilities.FB_TzSpecificLocalTimeToSystemTime;
+	_FB_TzSpecificLocalTimeToSystemTime :	Tc2_EtherCAT.Tc2_Utilities.FB_TzSpecificLocalTimeToSystemTime;
 	{attribute 'hide'}
-	_RTC_EX2							:	RTC_EX2;
+	_RTC_EX2							:	Tc2_EtherCAT.Tc2_Utilities.RTC_EX2;
 	{attribute 'hide'}
-	_PDT	 							:	Tc2_Utilities.TIMESTRUCT;	
+	_PDT	 							:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;	
 	{attribute 'hide'}
-	_LocalTime 							:	Tc2_Utilities.TIMESTRUCT;
+	_LocalTime 							:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;
 	{attribute clr [ReadOnly()]}
 	_LocalTimeDT						:	DATE_AND_TIME;
 	{attribute 'hide'}
-	_UTCTime 							:	Tc2_Utilities.TIMESTRUCT;
+	_UTCTime 							:	Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT;
 	{attribute clr [ReadOnly()]}
 	_UTCTimeDT							:	DATE_AND_TIME;
 END_VAR]]></Declaration>
@@ -58,7 +58,7 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="NowLocalAsTIMESTRUCT" Id="{e9fe0ffa-a159-017e-3bd5-9e67f37e7fa9}">
-      <Declaration><![CDATA[METHOD NowLocalAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+      <Declaration><![CDATA[METHOD NowLocalAsTIMESTRUCT : Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _isValid THEN
@@ -76,7 +76,7 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="NowUTCAsTIMESTRUCT" Id="{6c922f94-0952-07e6-0cac-83326b01c28c}">
-      <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_Utilities.TIMESTRUCT
+      <Declaration><![CDATA[METHOD NowUTCAsTIMESTRUCT : Tc2_EtherCAT.Tc2_Utilities.TIMESTRUCT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _isValid THEN
@@ -129,14 +129,14 @@ IF _state >= 20 AND _diffToLastSyncInSeconds >=60 THEN
 END_IF
 
 _LocalTime := _RTC_EX2.CDT;
-_LocalTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_LocalTime);
+_LocalTimeDT := Tc2_EtherCAT.Tc2_Utilities.SYSTEMTIME_TO_DT(_LocalTime);
 
 IF RtcPrg._isSynchronized THEN
 	_FB_TzSpecificLocalTimeToSystemTime(in 		:=	_LocalTime,
 										tzInfo 	:=	RtcPrg._TimeZoneInformation,
 										out		=>	_UTCTime,
 										eTzID	=>	_TimeZoneID);
-	_UTCTimeDT := Tc2_Utilities.SYSTEMTIME_TO_DT(_UTCTime);
+	_UTCTimeDT := Tc2_EtherCAT.Tc2_Utilities.SYSTEMTIME_TO_DT(_UTCTime);
 END_IF]]></ST>
       </Implementation>
     </Method>

@@ -265,7 +265,7 @@ namespace TcOpen.Inxton.Data
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of the records/documents.</param>
         /// <returns></returns>
-        protected abstract long FilteredCountNvi(string identifierContent);
+        protected abstract long FilteredCountNvi(string identifierContent, eSearchMode searchMode);
 
         /// <summary>
         /// Gets the number of records/documents in the repository.
@@ -277,7 +277,7 @@ namespace TcOpen.Inxton.Data
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of the records/documents.</param>
         /// <returns></returns>
-        public long FilteredCount(string identifierContent) => FilteredCountNvi(identifierContent);
+        public long FilteredCount(string identifierContent, eSearchMode searchMode) => FilteredCountNvi(identifierContent, searchMode);
 
 
         private volatile object mutex = new object();

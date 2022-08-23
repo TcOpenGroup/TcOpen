@@ -23,19 +23,21 @@
     <DefineConstants>PLC_DOCU</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.iXlinker" Version="0.1.4-alpha.59">
+    <PackageReference Include="Inxton.iXlinker" Version="0.1.4-alpha.100">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.9-alpha.703" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.15.10-alpha.735" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
   </ItemGroup>
-	<ItemGroup>
-		<Content Include="_meta\TcoIo.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-		<Content Include="_meta\TcoIo.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-		<Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-	</ItemGroup>	
+ 
+  <ItemGroup>
+    <Content Include="_meta\TcoIo.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\TcoIo.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>

@@ -1,70 +1,85 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
-using TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages;
+using TcOpen.Inxton.Local.Security.Blazor.Users;
+using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
     public partial class UserManagementView
     {
-
         private class RoleData
         {
-            public RoleData(string roleName)
+            public RoleData(Role role) 
             {
-                RoleName = roleName;
+                Role = role;
             }
-            public string RoleName { get; set; }
+            public Role Role { get; set; }
             public bool IsSelected { get; set; }
         }
 
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private SignInManager<User> _signInManager { get; set; }
+        private BlazorRoleGroupManager _roleGroupManager { get; set; }
         [Inject]
-        private RoleManager<IdentityRole> _roleManager { get; set; }
+        private BlazorAlertManager _alertManager { get; set; }
 
         private User SelectedUser { get; set; }
-        private IList<RoleData> AvailableRoles { get; set; }
-        private IList<RoleData> AssignedRoles { get; set; }
+        private RegisterUserModel _model { get; set; }
 
-        public void RoleAdded()
+        public void RowClicked(User user)
         {
-            AvailableRoles = GetAvailableRoles();
+            SelectedUser = user;
+            //_model = new RegisterUserModel();
+
+            _model.Username = user.UserName;
+            _model.Password = "password";
+            _model.ConfirmPassword = "password";
+            _model.CanUserChangePassword = user.CanUserChangePassword;
+            _model.Email = user.Email;
+            _model.Group = user.Roles[0];
+
             StateHasChanged();
         }
 
-        public async Task AssignRoles()
+        public void CloseUserDetail()
         {
-            await _userManager.AddToRolesAsync(SelectedUser, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.RoleName));
-            await RowClicked(SelectedUser);
+            SelectedUser = null;
         }
 
-        public async Task ReturnRoles()
+        public async Task DeleteUser(User user)
         {
-            await _userManager.RemoveFromRolesAsync(SelectedUser, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.RoleName));
-            await RowClicked(SelectedUser);
+            await _userManager.DeleteAsync(user);
+            SelectedUser = null;
+            _alertManager.addAlert("success", "User succesfully deleted!");
         }
 
-
-        public async Task RowClicked(User user)
+        private async void OnValidUpdate()
         {
-            SelectedUser = user;
-            AssignedRoles = (await _userManager.GetRolesAsync(user)).Select(x => new RoleData(x)).ToList();
-            AvailableRoles = GetAvailableRoles();
+            if (_model.Password != "password")
+            {
+                SelectedUser.PasswordHash = _userManager.PasswordHasher.HashPassword(SelectedUser, _model.Password);
+            }
+            SelectedUser.UserName = _model.Username;
+            SelectedUser.CanUserChangePassword = _model.CanUserChangePassword;
+            SelectedUser.Email = _model.Email;
+            SelectedUser.Roles = new string[1] { _model.Group };
+            var result = await _userManager.UpdateAsync(SelectedUser);
+            if (result.Succeeded)
+            {
+                _alertManager.addAlert("success", "User succesfully updated!");
+            }
+            else
+            {
+                _alertManager.addAlert("warning", "User was not updated!");
+            }
         }
 
-        private IList<RoleData> GetAvailableRoles() =>
-            _roleManager.Roles
-                .Where(x => !AssignedRoles.Select(x => x.RoleName).Contains(x.Name))
-                .Select(x => new RoleData(x.Name))
-                .ToList();
-
+        protected override void OnInitialized()
+        {
+            _model = new RegisterUserModel();
+        }
     }
 }
