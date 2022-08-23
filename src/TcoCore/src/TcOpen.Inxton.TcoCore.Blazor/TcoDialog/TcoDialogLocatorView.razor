@@ -1,28 +1,15 @@
 ﻿@namespace TcoCore
-@*@implements IAsyncDisposable*@
 @inject NavigationManager _navigationManager
-<h1>LOCATOR VIEW</h1>
-@if (IsConnected)
-{
-<p>ClientID: @hubConnection.ConnectionId</p>
-}
+
+
 @if (DialogService.DialogVortex != null)
 {
     <RenderableContentControl Context="DialogService.DialogVortex" Presentation="Dialog"></RenderableContentControl>
 }
 
 
-<p>Send message</p>
-<button id="sendDialogInvoke" @onclick="Send" disabled="@(!IsConnected)" style="display:none">Send</button>
+@*<button id="sendDialogInvoke" @onclick="Send" disabled="@(!IsConnected)" style="display:none">Send</button>*@
 <button id="SendCloseButtonId" @onclick="SendClose" disabled="@(!IsConnected)" style="display:none">Send close</button>
-@*<p>Messages</p>
-<div>
-    @foreach (var item in messages)
-    {
-        <p>@item</p>
-    }
-</div>*@
-
 
 @code {
     [Parameter]
@@ -55,11 +42,8 @@
         .Build();
 
 
-        hubConnection.On<string, string>("ReceiveMessage", async (user, message) =>
+        hubConnection.On("ReceiveDialogOpen", async () =>
         {
-
-            var encodedMsg = $"{user}: {message}";
-            messages.Add(encodedMsg);
             //await InvokeAsync(StateHasChanged);
             var nameOfType = DialogService.DialogVortex.GetType().Name;
             var dialogId = "#" + nameOfType + "DialogView";
@@ -91,8 +75,6 @@
             }
             StateHasChanged();
         });
-
-
         await hubConnection.StartAsync();
     }
 
@@ -100,7 +82,7 @@
 
     async Task Send()
     {
-        await hubConnection.SendAsync("SendMessage", hubConnection.ConnectionId, "testMessage");
+        await hubConnection.SendAsync("SendDialogOpen");
     }
 
     async Task SendClose()
@@ -117,16 +99,7 @@
 
     public async void OnDialogRaised()
     {
-        //await Send();
-        try
-        {
-            await jsInterop.SendDialogInvoke();
-        }
-        catch (TaskCanceledException)
-        {
-            //swallow TaskCanceledException,
-            //throw;
-        }
+        await Send();
     }
 
 }

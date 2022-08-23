@@ -9,10 +9,10 @@ export function HideTcoDialog(id) {
     return true;
 }
 
-export function ClickSend() {
-    $("#sendDialogInvoke").click();
-    return true;
-}
+//export function ClickSend() {
+//    $("#sendDialogInvoke").click();
+//    return true;
+//}
 
 export function ClickSendClose() {
     $("#SendCloseButtonId").click();

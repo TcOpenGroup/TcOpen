@@ -19,20 +19,20 @@
             <div class="modal-footer">
                 @if (ViewModel.Dialog._hasYes.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerYes(); await jsInterop.SendDialogClose(); }">Yes</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerYes(); await jsInterop.SendCloseAllDialogs(); }">Yes</button>
                 }
                 @if (ViewModel.Dialog._hasNo.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerNo(); await jsInterop.SendDialogClose(); }">No</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerNo(); await jsInterop.SendCloseAllDialogs(); }">No</button>
                 }
                 @if (ViewModel.Dialog._hasCancel.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerCancel(); await jsInterop.SendDialogClose(); }">Cancel</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerCancel(); await jsInterop.SendCloseAllDialogs(); }">Cancel</button>
                 }
 
                 @if (ViewModel.Dialog._hasOK.Synchron)
                 {
-                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerOk(); await jsInterop.SendDialogClose(); }">Ok</button>
+                    <button type="button" class="btn btn-secondary"  @onclick="async () => { ViewModel.DialogAnswerOk(); await jsInterop.SendCloseAllDialogs(); }">Ok</button>
                 }
             </div>
         </div>

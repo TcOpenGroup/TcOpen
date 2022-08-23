@@ -4,7 +4,7 @@
 @inherits RenderableViewModelComponentBase<TcoInspectorDialogDialogViewModel>
 @inject JsInteropDialog jsInterop
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="@_labelId">Inspector dialogue</h5>
@@ -29,9 +29,9 @@
 
                 <button type="button" class="btn btn-secondary" @onclick=" async () => { ViewModel.Retry(); }">Retry</button>
 
-                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Terminate(); await jsInterop.SendDialogClose(); }">Terminate</button>
+                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Terminate(); await jsInterop.SendCloseAllDialogs(); }">Terminate</button>
 
-                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Override(); await jsInterop.SendDialogClose(); }">Override</button>
+                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Override(); await jsInterop.SendCloseAllDialogs(); }">Override</button>
 
                
 

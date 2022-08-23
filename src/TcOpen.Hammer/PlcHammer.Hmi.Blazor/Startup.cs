@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.JSInterop;
 using PlcHammer.Hmi.Blazor.Data;
-using PlcHammer.Hmi.Blazor.Hubs;
 using PlcHammer.Hmi.Blazor.Security;
 using PlcHammer.Hmi.Blazor.Shared;
 using PlcHammerConnector;
@@ -32,6 +31,7 @@ using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.TcoCore.Blazor.Extensions;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -53,8 +53,7 @@ namespace PlcHammer.Hmi.Blazor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor()
-                .AddHubOptions(hub => hub.MaximumReceiveMessageSize = 100 * 1024 * 1024);
+            services.AddServerSideBlazor();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
@@ -77,7 +76,7 @@ namespace PlcHammer.Hmi.Blazor
             Roles.Create(roleGroupManager);
 
             services.AddVortexBlazorSecurity(userRepo, groupRepo, roleGroupManager);
-            services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN }));
+            
             services.AddTcoCoreExtensions();
             services.AddResponseCompression(opts =>
             {
