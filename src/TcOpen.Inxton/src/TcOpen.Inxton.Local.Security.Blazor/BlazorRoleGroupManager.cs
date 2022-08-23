@@ -22,6 +22,18 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public BlazorRoleGroupManager(IRepository<GroupData> groupRepo)
         {
             this.groupRepo = groupRepo;
+            CreateDefaultRoleAndGroup();
+        }
+
+        private void CreateDefaultRoleAndGroup()
+        {
+            CreateRole(new Role("Administrator"));
+
+            if (!(GetAllGroup()).Select(x => x.Name).Contains("AdminGroup"))
+            {
+                CreateGroup("AdminGroup");
+                AddRoleToGroup("AdminGroup", "Administrator");
+            }
         }
 
         public IdentityResult CreateRole(Role role)

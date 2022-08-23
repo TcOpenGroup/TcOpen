@@ -14,7 +14,7 @@
         <TcoIo:SyncUnitTask_AB2F5079/>
     </d:UserControl.DataContext>
     <StackPanel x:Name="stackPanel">
-        <GroupBox> <!--x:Name="groupBox" Header="{Binding AttributeName}">-->
+        <GroupBox> 
             <GroupBox.Header>
                 <TextBlock x:Name="groupBoxHeader" Text="{Binding AttributeName}"/>
             </GroupBox.Header>

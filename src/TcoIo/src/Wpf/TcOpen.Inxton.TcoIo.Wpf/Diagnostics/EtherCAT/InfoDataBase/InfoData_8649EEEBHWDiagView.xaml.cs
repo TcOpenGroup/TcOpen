@@ -40,7 +40,7 @@ namespace TcoIo
 
         private void State_ValueChanged(IValueTag sender, ValueChangedEventArgs args)
         {
-            this.Dispatcher.Invoke(() =>
+            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
                 InfoData_8649EEEB dt = this.DataContext as InfoData_8649EEEB;
                 if (dt != null)
