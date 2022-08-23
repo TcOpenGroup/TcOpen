@@ -34,9 +34,13 @@
             _navigationManager.NavigateTo("", forceLoad: true);
             //_alertManager.addAlert("success", "User logged in.");
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            _alertManager.addAlert("warning", "Incorrect credentials!");
+        }
         catch (Exception ex)
         {
-            _alertManager.addAlert("danger", "User was not logged in.");
+            _alertManager.addAlert("warning", "User was not logged in.");
         }
     }
 
