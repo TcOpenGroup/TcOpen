@@ -1,0 +1,14 @@
+﻿@page "/Identity/Account/Logout"
+@inject NavigationManager _navigationManager
+@inject BlazorAlertManager _alertManager
+
+@code{
+    protected override void OnInitialized()
+    {
+        string name = SecurityManager.Manager.UserName;
+        SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
+        TcoAppDomain.Current.Logger.Information($"User '{name}' logged out. {{@sender}}", new { UserName = name });
+        _navigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+        //_alertManager.addAlert("success", "User logged out.");
+    }
+}

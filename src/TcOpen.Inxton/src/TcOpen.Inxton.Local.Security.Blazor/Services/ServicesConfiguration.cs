@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
-using TcOpen.Inxton.Local.Security.Blazor.Areas.Identity.Pages;
 using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Stores;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
