@@ -10,22 +10,19 @@ namespace PlcHammer.Hmi.Blazor.Security
 {
     internal class Roles
     {
-        private static BlazorRoleGroupManager _roleGroupManager { get; set; }
-        private static Roles _roles;
-
-        private Roles()
+        private Roles(BlazorRoleGroupManager roleGroupManager)
         {
-            _roleGroupManager.CreateRole(new Role(process_settings_access));
-            _roleGroupManager.CreateRole(new Role(process_traceability_access));
-            _roleGroupManager.CreateRole(new Role(can_user_open_technological_settings));
-            _roleGroupManager.CreateRole(new Role(ground_position_start));
-            _roleGroupManager.CreateRole(new Role(automat_start));
-            _roleGroupManager.CreateRole(new Role(station_details));
-            _roleGroupManager.CreateRole(new Role(technology_settings_access));
-            _roleGroupManager.CreateRole(new Role(manual_start));
-            _roleGroupManager.CreateRole(new Role(sequencer_step));
-            _roleGroupManager.CreateRole(new Role(technology_automat_all));
-            _roleGroupManager.CreateRole(new Role(technology_ground_all));
+            roleGroupManager.CreateRole(new Role(process_settings_access));
+            roleGroupManager.CreateRole(new Role(process_traceability_access));
+            roleGroupManager.CreateRole(new Role(can_user_open_technological_settings));
+            roleGroupManager.CreateRole(new Role(ground_position_start));
+            roleGroupManager.CreateRole(new Role(automat_start));
+            roleGroupManager.CreateRole(new Role(station_details));
+            roleGroupManager.CreateRole(new Role(technology_settings_access));
+            roleGroupManager.CreateRole(new Role(manual_start));
+            roleGroupManager.CreateRole(new Role(sequencer_step));
+            roleGroupManager.CreateRole(new Role(technology_automat_all));
+            roleGroupManager.CreateRole(new Role(technology_ground_all));
         }
 
         public const string process_settings_access = nameof(process_settings_access);
@@ -42,9 +39,7 @@ namespace PlcHammer.Hmi.Blazor.Security
 
         public static void Create(BlazorRoleGroupManager roleGroupManager)
         {
-            _roleGroupManager = roleGroupManager;
-            _roles = new Roles();
+            new Roles(roleGroupManager);
         }
-
     }
 }

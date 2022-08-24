@@ -39,6 +39,10 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcGroupedTopology\EtcGroupedView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Diagnostics\EtherCAT\EtcMasterTopology\TcoEthercatMasterDeviceTopologyView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -171,7 +175,25 @@
     <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateInfoDataState.cs">
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindObjectsAndSubscribeToInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\SubscribeToSyncUnits.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\SubscribeToInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FilterOutExcludedHardware.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindTopologyElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateSyncUnitsState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateSummaryInfoDataState.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\Render.cs">
