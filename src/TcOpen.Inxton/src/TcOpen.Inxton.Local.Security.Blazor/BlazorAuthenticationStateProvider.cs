@@ -60,8 +60,62 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         public event OnUserAuthentication OnDeAuthenticating;
         public event OnUserAuthentication OnDeAuthenticated;
 
-        public OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IExternalAuthorization ExternalAuthorization { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get; set; }
+        private IExternalAuthorization externalAuthorization;
+        public IExternalAuthorization ExternalAuthorization
+        {
+            get { return this.externalAuthorization; }
+            set
+            {
+                externalAuthorization = value;
+                externalAuthorization.AuthorizationRequest += ExternalAuthorization_AuthorizationRequest;
+                externalAuthorization.AuthorizationTokenChange += ExternalAuthorization_AuthorizationTokenChange;
+            }
+        }
+
+        private void ExternalAuthorization_AuthorizationTokenChange(string token)
+        {
+            ChangeToken(SecurityManager.Manager.Principal.Identity.Name, token);
+        }
+
+        public void ChangeToken(string userName, string token)
+        {
+
+            if (_users.Exists(p => !string.IsNullOrEmpty(p.AuthenticationToken)
+                                   && p.AuthenticationToken == this.CalculateHash(token, string.Empty)
+                                   && p.Username != userName))
+            {
+                throw new ExistingTokenException();
+            }
+
+
+            var authenticated = _users.FirstOrDefault(p => p.Username == userName);
+
+            if (authenticated != null)
+            {
+                var user = this.UserRepository.Read(userName);
+                user.AuthenticationToken = this.CalculateHash(token, string.Empty);
+                this.UserRepository.Update(userName, user);
+            }
+        }
+
+        private IUser ExternalAuthorization_AuthorizationRequest(string token)
+        {
+            var userName = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name;
+            var currentUser = _users.FirstOrDefault(u => u.Username.Equals(userName));
+
+            // De authenticate when the token matches the token of currently authenticated user.
+            if (currentUser != null && this.CalculateHash(token, string.Empty) == currentUser.AuthenticationToken)
+            {
+                this.DeAuthenticateCurrentUser();
+                return null;
+            }
+            else
+            {
+                var authenticatedUser = this.AuthenticateUser(token);
+                return authenticatedUser;
+            }
+        }
 
         private List<UserData> _users
         {
