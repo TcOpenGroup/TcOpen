@@ -14,7 +14,7 @@ namespace TcoCore
     // This class can be registered as scoped DI service and then injected into Blazor
     // components for use.
 
-    public class JsInteropDialog : IAsyncDisposable
+    public class JsInteropDialog /*: IAsyncDisposable*/
     {
         public bool firstRenderComplete;
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;

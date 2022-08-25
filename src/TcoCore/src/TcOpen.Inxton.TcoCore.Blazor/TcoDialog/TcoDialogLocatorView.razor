@@ -14,14 +14,14 @@
 <button type="button" id="SendCloseButtonId" @onclick="SendClose"  style="display:none">Send close</button>
 
 @code {
-        [Parameter]
-        public DialogProxyServiceBlazor DialogService { get; set; }
+    [Parameter]
+    public DialogProxyServiceBlazor DialogService { get; set; }
 
 
-        [Parameter]
-        public string DialogId { get; set; }
-        [Inject]
-        public JsInteropDialog jsInterop { get; set; }
+    [Parameter]
+    public string DialogId { get; set; }
+    [Inject]
+    public JsInteropDialog jsInterop { get; set; }
 
 
     private bool _showDialogHtml { get; set;}
@@ -80,7 +80,7 @@
                 await jsInterop.ShowTcoDialog("#" + DialogId);
                 await InvokeAsync(StateHasChanged);
             }
-            catch (TaskCanceledException)
+            catch 
             {
 
                 //swallow
@@ -92,21 +92,21 @@
     }
     public async ValueTask DisposeAsync()
     {
-        if (_dialogClient._hubConnection != null)
-        {
+        //if (_dialogClient._hubConnection != null)
+        //{
             //Console.WriteLine("ChatClient: trying to dispose");
             _showDialogHtml = false;
             await _dialogClient.StopAsync();
-        }
+        //}
     }
 
-    async Task SendClose()
+      
+    public async Task SendClose()
     {
         try
         {
             await _dialogClient.SendDialogClose(DialogId);
             await InvokeAsync(StateHasChanged);
-
         }
         catch (TaskCanceledException)
         {
