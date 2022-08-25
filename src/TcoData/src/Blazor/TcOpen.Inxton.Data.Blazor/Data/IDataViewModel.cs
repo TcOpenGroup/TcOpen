@@ -25,7 +25,7 @@ namespace TcoData
         string RecordIdentifier { get; set; }
         void SetDefaultButtonState();
         void StartCreatingNew();
-        void CreateNew();
+        string CreateNew();
         void StartEdit();
         void Update();
         void CancelEdit();

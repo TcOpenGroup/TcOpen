@@ -14,6 +14,7 @@ using PlcHammer.Hmi.Blazor.Data;
 using PlcHammer.Hmi.Blazor.Security;
 using PlcHammer.Hmi.Blazor.Shared;
 using PlcHammerConnector;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,13 +44,14 @@ namespace PlcHammer.Hmi.Blazor
 
         public IConfiguration Configuration { get; }
 
+        public static StringWriter logMessages = new StringWriter();
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             IRepository<UserData> userRepo;
             IRepository<GroupData> groupRepo;
-            BlazorRoleGroupManager roleGroupManager;
 
             services.AddRazorPages();
             services.AddServerSideBlazor()
@@ -69,10 +71,28 @@ namespace PlcHammer.Hmi.Blazor
                 (userRepo, groupRepo) = SetUpJsonRepositories();
             }
 
-            roleGroupManager = new BlazorRoleGroupManager(groupRepo);
+            BlazorRoleGroupManager roleGroupManager = new BlazorRoleGroupManager(groupRepo);
             Roles.Create(roleGroupManager);
 
             services.AddVortexBlazorSecurity(userRepo, roleGroupManager);
+
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                        //.WriteTo.TextWriter(logMessages)
+                                        .WriteTo.Console()        // This will write log into application console.  
+                                        .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
+                                                                  // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
+                                                                  // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
+                                        .Enrich.WithProperty("user",/*_signInManager.Context.User*/ TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name)
+                                        .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
+                                        .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
+                                        .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
+                                        .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
+                .SetSecurity(SecurityManager.Manager.Service)
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
+
+            // Initialize logger
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
