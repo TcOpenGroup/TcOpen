@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Sandbox.TcoIo.Wpf.UserViews.UserViewDevice3"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sandbox.TcoIo.Wpf.UserViews"
+             xmlns:wpf="clr-namespace:TcoIo;assembly=TcOpen.Inxton.TcoIo.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <wpf:TopologyRenderer Grid.Row="0" Grid.Column="0" DataContext="{Binding Term_146_EK1100}" GroupName="Station 310: Term 146 (EK1100)" GroupedView="True" ExcludeSlavesConnectedToJunctionBox="True"/>
+        <wpf:TopologyRenderer Grid.Row="1" Grid.Column="1" DataContext="{Binding Term_146_EK1100.Term_288_EK1122}" GroupName="Station 320: Term 289 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 289 (EK1100)" LastTopologyElementName="Term 305 (EL2008)"/>
+        <wpf:TopologyRenderer Grid.Row="1" Grid.Column="2" DataContext="{Binding Term_146_EK1100.Term_288_EK1122.Term_307_EK1100}" GroupName="Station 330: Term 307 (EK1100)" GroupedView="True" />
+        <wpf:TopologyRenderer Grid.Row="2" Grid.Column="1" DataContext="{Binding Term_146_EK1100.Term_186_EK1122.Term_187_EK1100}" GroupName="Station 340: Term 187 (EK1100)" GroupedView="True" />
+        <wpf:TopologyRenderer Grid.Row="3" Grid.Column="1" DataContext="{Binding Term_146_EK1100.Term_186_EK1122.Term_207_EK1100}" GroupName="Station 350: Term 207 (EK1100)" GroupedView="True" />
+        <wpf:TopologyRenderer Grid.Row="4" Grid.Column="1" DataContext="{Binding Term_146_EK1100.Term_147_EK1122.Term_153_EK1100}" GroupName="Station 360: Term 153 (EK1100)" GroupedView="True" />
+        <wpf:TopologyRenderer Grid.Row="5" Grid.Column="1" DataContext="{Binding Term_146_EK1100.Term_147_EK1122.Term_178_EK1100}" GroupName="Station 370: Term 178 (EK1100)" GroupedView="True" />
+    </Grid>
+</UserControl>

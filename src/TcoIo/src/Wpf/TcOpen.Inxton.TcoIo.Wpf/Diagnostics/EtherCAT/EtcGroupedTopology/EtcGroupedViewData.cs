@@ -62,20 +62,20 @@ namespace TcoIo
             }
         }
 
-        public EtcGroupedViewData(string groupName, List<GroupedViewItemObject> groupedViewItems, ushort infoDataState, bool isInErrorState)
+        public EtcGroupedViewData(string _groupName, List<GroupedViewItemObject> _groupedViewItems, ushort _infoDataState, bool _isInErrorState)
         {
-            GroupName = groupName;
-            GroupedViewItems = groupedViewItems;
-            InfoDataState = infoDataState;
-            IsInErrorState = isInErrorState;
+            GroupName = _groupName;
+            GroupedViewItems = _groupedViewItems;
+            InfoDataState = _infoDataState;
+            IsInErrorState = _isInErrorState;
         }
 
-        public void UpdateData(string groupName, List<GroupedViewItemObject> groupedViewItems, ushort infoDataState, bool isInErrorState)
+        public void UpdateData(string _groupName, List<GroupedViewItemObject> _groupedViewItems, ushort _infoDataState, bool _isInErrorState)
         {
-            GroupName = groupName;
-            GroupedViewItems = groupedViewItems;
-            InfoDataState = infoDataState;
-            IsInErrorState = isInErrorState;
+            GroupName = _groupName;
+            GroupedViewItems = _groupedViewItems;
+            InfoDataState = _infoDataState;
+            IsInErrorState = _isInErrorState;
         }
 
 

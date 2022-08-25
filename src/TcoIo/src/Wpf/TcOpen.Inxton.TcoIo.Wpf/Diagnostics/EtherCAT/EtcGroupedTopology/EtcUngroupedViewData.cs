@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
@@ -74,13 +76,30 @@ namespace TcoIo
             }
         }
 
-        public EtcUngroupedViewData(IVortexObject dataContext, bool groupedView, string firstTopologyElementName, string lastTopologyElementName, bool excludeSlavesConnectedToJunctionBox)
+        private Type userView;
+
+        public Type UserView
         {
-            DataContext = dataContext;
-            GroupedView = groupedView;
-            FirstTopologyElementName = firstTopologyElementName;
-            LastTopologyElementName = lastTopologyElementName;
-            ExcludeSlavesConnectedToJunctionBox = excludeSlavesConnectedToJunctionBox;
+            get { return userView; }
+            set 
+            {
+                if (value != null)
+                {
+                    userView = value;
+                    NotifyPropertyChanged(nameof(UserView));
+                }
+            }
+        }
+
+
+        public EtcUngroupedViewData(IVortexObject _dataContext, bool _groupedView, string _firstTopologyElementName, string _lastTopologyElementName, bool _excludeSlavesConnectedToJunctionBox, Type _userView)
+        {
+            DataContext = _dataContext;
+            GroupedView = _groupedView;
+            FirstTopologyElementName = _firstTopologyElementName;
+            LastTopologyElementName = _lastTopologyElementName;
+            ExcludeSlavesConnectedToJunctionBox = _excludeSlavesConnectedToJunctionBox;
+            UserView = _userView;
         }
 
 

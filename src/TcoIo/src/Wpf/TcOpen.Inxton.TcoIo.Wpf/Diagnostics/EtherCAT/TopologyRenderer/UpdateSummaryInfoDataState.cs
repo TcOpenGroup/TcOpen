@@ -58,7 +58,7 @@ namespace TcoIo
                                 context.GroupedViewItems = groupedViewItems;
                                 context.InfoDataState = SummaryInfoDataState;
                                 context.IsInErrorState = syncUnitError || SummaryInfoDataState != 8;
-                                topologyObjects.ElementAtOrDefault(index).Hardware.DataContext = context;
+                                topologyObjects.ElementAtOrDefault(index-1).Hardware.DataContext = context;
                             }
                         }
                     }
@@ -107,11 +107,11 @@ namespace TcoIo
                                 if (State != null)
                                 {
                                     ushort state = (State as IOnlineUInt).Synchron;
-                                    SummaryInfoDataState = (ushort)(SummaryInfoDataState | state);
                                     foreach (GroupedViewItemObject groupedViewItem in groupedViewItems)
                                     {
                                         if (vortexObject.AttributeName.Equals(groupedViewItem.Name)) 
                                         {
+                                            SummaryInfoDataState = (ushort)(SummaryInfoDataState | state);
                                             groupedViewItem.IsInErrorState = state != 8;
                                             break;
                                         }
@@ -128,7 +128,11 @@ namespace TcoIo
                 }
                 foreach (IVortexObject child in vortexObject.GetChildren())
                 {
-                    CalculateInfoDataStates(child, ref SummaryInfoDataState, ref groupedViewItems, ref syncUnitError);
+                    CheckIfIsEtcMasterOrEtcSlave(child, out isMaster, out isSlave);
+                    if (isSlave)
+                    {
+                        CalculateInfoDataStates(child, ref SummaryInfoDataState, ref groupedViewItems, ref syncUnitError);
+                    }
                 }
             }
         }
