@@ -18,7 +18,7 @@ namespace TcoCore
     public delegate void Notify(); 
     public class DialogProxyServiceBlazor : DialogProxyServiceBase
     {
-        public event Notify DialogInitializationCompleted;
+        public event Notify DialogInvoked;
         public DialogProxyServiceBlazor(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
         {
             UpdateDialogs(observedObjects);
@@ -27,17 +27,29 @@ namespace TcoCore
         public IsDialog DialogVortex { get; set; }
         protected override async void Queue(IsDialog dialog) 
         {
+            dialog.Read();
             await Task.Run(() =>
             {
                 DialogVortex = dialog;
                 DialogVortex.Read();
-                OnProcessCompleted();
+                //OnProcessCompleted();
             });
+
+            //dialog.Read();
+            //DialogVortex = dialog;
+            ////DialogVortex.DialogId = dialog.GetType().Name + dialog.GetSymbolTail() + "DialogView";
+            ////await Task.Run(() =>
+            ////{
+            ////    DialogVortex = dialog;
+            ////    DialogVortex.DialogId = dialog.GetType().Name + dialog.GetSymbolTail() + "DialogView";
+            ////});
+            OnProcessCompleted();
+
         }
         protected virtual void OnProcessCompleted()
         {
             //if ProcessCompleted is not null then call delegate
-            DialogInitializationCompleted?.Invoke();
+            DialogInvoked?.Invoke();
         }
 
 
@@ -51,7 +63,13 @@ namespace TcoCore
                     dialog.Initialize(() => Queue(dialog));
                 }
             }
+            
+        }
 
+        public static DialogProxyServiceBlazor Create(IEnumerable<IVortexObject> observedObjects)
+        {
+            var dialogProxyService = new DialogProxyServiceBlazor(observedObjects);
+            return dialogProxyService;
         }
 
     }

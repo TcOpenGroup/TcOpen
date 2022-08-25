@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,7 @@ using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.TcoCore.Blazor.Extensions;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -52,26 +54,30 @@ namespace PlcHammer.Hmi.Blazor
             BlazorRoleGroupManager roleGroupManager;
 
             services.AddRazorPages();
-            services.AddServerSideBlazor()
-                .AddHubOptions(hub => hub.MaximumReceiveMessageSize = 100 * 1024 * 1024);
+            services.AddServerSideBlazor();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddVortexBlazorServices();
-
+            
             services.AddTcoCoreExtensions();
-
-            if (true)/*Mongo database*/
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "application/octet-stream" });
+            });
+            if (false)/*Mongo database*/
             {
                 (userRepo, groupRepo) = SetUpMongoDatabase();
             }
             else /*Json repositories*/
             {
                 (userRepo, groupRepo) = SetUpJsonRepositories();
-            }
-
+            }   
+            
             roleGroupManager = new BlazorRoleGroupManager(groupRepo);
             Roles.Create(roleGroupManager);
-
+            // add an event handler for incoming messages
+            //services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN._app._station001, Entry.PlcHammer.TECH_MAIN._app._station002 }));
             services.AddVortexBlazorSecurity(userRepo, roleGroupManager);
         }
 
@@ -102,6 +108,7 @@ namespace PlcHammer.Hmi.Blazor
             {
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<DialogHub>("/dialoghub");
                 endpoints.MapFallbackToPage("/_Host");
             });
 

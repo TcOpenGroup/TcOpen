@@ -1,11 +1,20 @@
 ﻿@page "/"
 @inherits RenderableComponentBase
-
+@inject NavigationManager _navigationManager;
 
 <div class="p-2 mb-4 bg-light rounded-3 border">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">TcOpen.Hammer Blazor app</h1>
         <p class="col-md-8 fs-4">Example application to show TcOpen and Blazor in use.</p>
-        <a class="btn btn-primary btn-lg" href="/custation001">Go to station001</a>
+        <button class="btn btn-primary btn-lg" @onclick="() => OnButtonClick()">Go to station001</button>
     </div>
 </div>
+
+@code
+{
+    string path = "/custation001";
+    private void OnButtonClick()
+    {
+        _navigationManager.NavigateTo("/custation001");
+    }
+}

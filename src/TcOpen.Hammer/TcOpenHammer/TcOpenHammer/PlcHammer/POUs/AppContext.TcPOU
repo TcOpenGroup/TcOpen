@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK AppContext EXTENDS TcoCore.TcoContext
 VAR
 	_station001 : Station001(THIS^);
+	_station002 : Station001(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -21,8 +22,17 @@ END_VAR]]></Declaration>
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.RtcSynchronize(TRUE, '', 60);
-_station001();]]></ST>
+_station001();
+_station002();]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="AppContext">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="AppContext.Main">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

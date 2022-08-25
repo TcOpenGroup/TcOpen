@@ -1,6 +1,8 @@
 ﻿@page "/custation001"
 @inherits RenderableComponentBase
-
+@inject NavigationManager _navigationManager
+@using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
+@*@implements IAsyncDisposable*@
 
 
 
@@ -75,20 +77,33 @@
 
 
 
-@if (_dialogService != null)
+@if (_dialogService != null )
 {
-    <TcoDialogLocatorView DialogService="_dialogService"></TcoDialogLocatorView>
+    <TcoDialogLocatorView DialogService="_dialogService" DialogId="custation001"></TcoDialogLocatorView>
 }
-
+else
+{
+   <p>dialog service is null!!</p>
+}
 @code {
     int selected = 0;
-    private static DialogProxyServiceBlazor _dialogService { get; set; } = new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN._app._station001 });
+  
+    public static  DialogProxyServiceBlazor _dialogService { get; set; } = DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN._app._station001 });
     public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
-    protected override void OnInitialized()
+    //private DialogClient _dialogClient;
+
+    protected override async Task OnInitializedAsync()
     {
+        //_dialogClient = new DialogClient("custation001", _navigationManager.BaseUri);
+        //// add an event handler for incoming messages
+        //await _dialogClient.StartAsync();
         UpdateValuesOnChange(Station._groundModeTask);
         UpdateValuesOnChange(Station._automatModeTask);
 
     }
+    //public async ValueTask DisposeAsync()
+    //{
 
+    //    await _dialogClient.StopAsync();
+    //}
 }

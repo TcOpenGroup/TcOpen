@@ -1,12 +1,13 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoDialogDialogViewModel>
 @namespace TcoCore
 @inject JsInteropDialog jsInterop
+@inject NavigationManager _navigationManager
 @using System.ComponentModel;
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="@_labelId">@ViewModel.Dialog._caption.Synchron</h4>
+                <h4 class="modal-title" id="@_labelId">@ViewModel.Dialog._caption.Synchron @_navigationManager.Uri</h4>
             </div>
             <div class="modal-body row align-items-center">
                 <div class="col-3">
@@ -49,27 +50,11 @@
     private string _dialogCloseId;
     protected override void OnInitialized()
     {
-        _labelId = "TcOpenDialogIdLabel";
-        //DialogId = "TcoDialogDialogView";
-        DialogId = "TcoDialogDialogView";
-        _dialogCloseId = "#TcoDialogDialogView";
+        var id = ((IsDialog)ViewModel.Dialog).DialogId;
+        _labelId = id +"Label";
+        DialogId = id;
 
     }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            //jsInterop.firstRenderComplete = true;
-            ViewModel.DialogCloseEvent += OnDialogClosed;
-        }
-    }
-
-    public async void OnDialogClosed()
-    {
-        //await Send();
-        var x = "som tu";
-    }
-
 }
 
 @functions{

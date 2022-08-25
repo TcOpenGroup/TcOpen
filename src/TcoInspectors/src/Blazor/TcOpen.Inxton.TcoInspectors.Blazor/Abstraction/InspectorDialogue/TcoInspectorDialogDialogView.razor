@@ -1,10 +1,10 @@
 ﻿@namespace TcoInspectors
 @using TcoCore
-
+@using TcOpen.Inxton.Dialogs
 @inherits RenderableViewModelComponentBase<TcoInspectorDialogDialogViewModel>
 @inject JsInteropDialog jsInterop
 <div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="@_labelId">Inspector dialogue</h5>
@@ -45,8 +45,10 @@
     private string _labelId;
     protected override void OnInitialized()
     {
-        _labelId = "TcOpenDialogIdLabel";
-        //DialogId = "TcOpenDialogId";
-        DialogId = "TcoInspectorDialogDialogView";
+        var id = ((IsDialog)ViewModel.Dialog).DialogId;
+        _labelId = id + "Label";
+        DialogId = id;
+        //_labelId = "TcoInspectorDialog" + ViewModel.Dialog.GetSymbolTail() + "DialogViewLabel";
+        //DialogId = "TcoInspectorDialog" + ViewModel.Dialog.GetSymbolTail() + "DialogView";
     }
 }
