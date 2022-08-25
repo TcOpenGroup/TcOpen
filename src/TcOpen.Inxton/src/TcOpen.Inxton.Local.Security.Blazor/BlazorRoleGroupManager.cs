@@ -5,17 +5,35 @@ using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Security;
 using System.Linq;
+using System.Threading;
+using TcOpen.Inxton.Local.Security.Properties;
+using System.Text;
+using System.Security.Cryptography;
+using TcOpen.Inxton.Local.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
     public class BlazorRoleGroupManager
     {
         private IRepository<GroupData> groupRepo;
+
         public List<Role> inAppRoleCollection { get; set; } = new List<Role>();
 
         public BlazorRoleGroupManager(IRepository<GroupData> groupRepo)
         {
             this.groupRepo = groupRepo;
+            CreateDefaultRoleAndGroup();
+        }
+
+        private void CreateDefaultRoleAndGroup()
+        {
+            CreateRole(new Role("Administrator"));
+
+            if (!(GetAllGroup()).Select(x => x.Name).Contains("AdminGroup"))
+            {
+                CreateGroup("AdminGroup");
+                AddRoleToGroup("AdminGroup", "Administrator");
+            }
         }
 
         public IdentityResult CreateRole(Role role)
@@ -43,6 +61,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 return IdentityResult.Failed(new IdentityError { Description = $"Group with name {name} already exists." });
             }
 
+            TcoAppDomain.Current.Logger.Information($"New Group '{name}' created. {{@sender}}", new { Name = name });
+
             return IdentityResult.Success;
         }
 
@@ -52,6 +72,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 throw new ArgumentNullException(nameof(name));
 
             groupRepo.Delete(name);
+
+            TcoAppDomain.Current.Logger.Information($"Group '{name}' deleted. {{@sender}}", new { Name = name });
 
             return IdentityResult.Success;
         }
@@ -118,6 +140,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
             }
 
+            TcoAppDomain.Current.Logger.Information($"Group '{group}' assign '{String.Join(",", roles)}'. {{@sender}}", new { Name = group, Roles = String.Join(",", roles) });
+
             return IdentityResult.Success;
         }
 
@@ -144,6 +168,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor
                 {
                     return IdentityResult.Failed(new IdentityError { Description = $"Group with name {group} doesn't exists." });
                 }
+
+                TcoAppDomain.Current.Logger.Information($"Group '{group}' remove '{String.Join(",", roles)}'. {{@sender}}", new { Name = group, Roles = String.Join(",", roles) });
 
                 groupRepo.Update(group, data);
             }

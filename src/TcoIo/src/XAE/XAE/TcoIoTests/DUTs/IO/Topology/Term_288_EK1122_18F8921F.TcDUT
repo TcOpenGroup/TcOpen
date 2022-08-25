@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Term_288_EK1122_18F8921F" Id="{14d08c71-751b-0382-3e5e-f48fef38b90f}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
+{attribute addProperty BoxType "EK1122-0000-0018"}
+{attribute addProperty Id "Term_289_EK1100Term_289_EK1100_9C677E5049Term_294_EK1100Term_294_EK1100_DFE2A59E42Term_307_EK1100Term_307_EK1100_EB8FAA4162"}
+{attribute addProperty CRC "418943519"}
+{attribute addProperty Size "153"}
+{attribute addProperty Name "Term 288 (EK1122)"}
+TYPE Term_288_EK1122_18F8921F EXTENDS EK1122_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Term 289 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 288 (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
+	Term_289_EK1100 : Term_289_EK1100_9C677E50;
+	{attribute addProperty Name "Term 294 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 289 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	Term_294_EK1100 : Term_294_EK1100_DFE2A59E;
+	{attribute addProperty Name "Term 307 (EK1100)"}
+	{attribute addProperty PreviousPort "Term 294 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
+	Term_307_EK1100 : Term_307_EK1100_EB8FAA41;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

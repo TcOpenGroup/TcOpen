@@ -8,12 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.9-alpha.725" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.10-alpha.735" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
+    <PackageReference Include="Serilog.Sinks.Notepad" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.TextWriter" Version="2.1.0" />
+	<PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -33,7 +33,7 @@
         <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0,5,0,0">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Border BorderBrush="{StaticResource InxtonBlue}" BorderThickness="5" CornerRadius="5" Background="{StaticResource InxtonGrayLight}" >
-                    <StackPanel DataContext="{Binding Device}"  Background ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToBackground}}">
+                    <StackPanel DataContext="{Binding Device}">
                         <disp:StringDisplay Description="Device name" ToolTip="Name of the device in the hardware configuration" DataContext="{Binding AttributeName}"/>
                         <Border Margin="3,0" BorderThickness="1" BorderBrush="White" CornerRadius="3">
                             <Border Margin="1" BorderThickness="1" BorderBrush="White" CornerRadius="2">
@@ -42,8 +42,8 @@
                         </Border>
                         <vortex:RenderableContentControl DataContext="{Binding InfoData}" PresentationType="HWDiag" />
                         <local:SyncUnitsBase_AD6C35CEView DataContext="{Binding SyncUnits}"/> 
-                        <!--<vortex:RenderableContentControl DataContext="{Binding Inputs}" />
-                    <vortex:RenderableContentControl DataContext="{Binding Outputs}" />-->
+                        <vortex:RenderableContentControl DataContext="{Binding Inputs}" PresentationType="Display"/>
+                        <vortex:RenderableContentControl DataContext="{Binding Outputs}" PresentationType="Control"/>
                     </StackPanel>
                 </Border>
             </ScrollViewer>

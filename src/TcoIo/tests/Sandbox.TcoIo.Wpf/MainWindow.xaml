@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Sandbox.TcoIo.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
     xmlns:vortex="http://vortex.mts/xaml" 
+    xmlns:sim="clr-namespace:Sandbox.TcoIo.Wpf.Simulation"
     xmlns:wpf="clr-namespace:TcoIo;assembly=TcOpen.Inxton.TcoIo.Wpf"
     Width="2048"
     Height="1200"
@@ -15,8 +16,57 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem Header="Topology renderer" >
-            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}"/>
+        <TabItem Header="EmptyTab" >
+        </TabItem>
+        <TabItem Header="Topology renderer-group" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <wpf:TopologyRenderer Grid.Row="0" Grid.Column="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}" GroupName="Station 10: Term 146 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 146 (EK1100)" LastTopologyElementName="Term 1163 (EL2008)" ExcludeSlavesConnectedToJunctionBox="True"/>
+                <wpf:TopologyRenderer Grid.Row="1" Grid.Column="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_288_EK1122}" GroupName="Station 20: Term 289 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 289 (EK1100)" LastTopologyElementName="Term 336 (EL2008)"/>
+                <wpf:TopologyRenderer Grid.Row="2" Grid.Column="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_186_EK1122}" GroupName="Station 30: Term 187 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 187 (EK1100)" LastTopologyElementName="Term 205 (EL2008)"/>
+                <wpf:TopologyRenderer Grid.Row="3" Grid.Column="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_186_EK1122}" GroupName="Station 40: Term 207 (EK1100)" GroupedView="True" FirstTopologyElementName="Term 207 (EK1100)" LastTopologyElementName="Term 236 (EL2008)"/>
+                <wpf:TopologyRenderer Grid.Row="4" Grid.Column="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_153_EK1100}" GroupName="Station 50: Term 153 (EK1100)" GroupedView="True" />
+                <wpf:TopologyRenderer Grid.Row="5" Grid.Column="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100}" GroupName="Station 60: Term 178 (EK1100)" GroupedView="True" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="Topology renderer-complete" >
+            <wpf:TopologyRenderer Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}" />
+        </TabItem>
+        <TabItem Header="Simulation" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <sim:SetAllToOPstate            Grid.Column="0" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SetAllToINITstate          Grid.Column="0" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"/>
+                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"/>
+                <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100}"/>
+                <sim:SetAllToMissingConnection  Grid.Column="0" Grid.Row="4" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100}"/>
+            </Grid>
         </TabItem>
         <TabItem Header="Diagnostic messages" >
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
@@ -25,7 +75,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
-                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_4}" PresentationType="Service"/>
+                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_2}" PresentationType="Service"/>
             </Grid>
         </TabItem>
     </TabControl>

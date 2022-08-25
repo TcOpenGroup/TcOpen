@@ -52,7 +52,7 @@
         </div>
 
     </div>
-  
+
     <div class="d-flex flex-row">
         <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
         <span class="mx-3">@DiagnosticsMessage()</span>
@@ -68,36 +68,38 @@
         No messages found.
     </EmptyGridTemplate>
     <GridColumns>
-        
+
         <GridColumn Field="@nameof(PlainTcoMessage.TimeStamp)" />
-    
+
         <GridColumn Field="@nameof(PlainTcoMessage.Text)" Title="Message" />
         <GridColumn Field="@nameof(PlainTcoMessage.Location)" />
         <GridColumn Field="@nameof(PlainTcoMessage.PerCycleCount)" />
         <GridColumn Field="@nameof(PlainTcoMessage.ParentsObjectSymbol)" Title="Symbol" />
         <GridColumn Title="Action">
             <Template>
-                
+
                 @{
                     var message = context as PlainTcoMessage;
                 }
-                @if(message != null)
+                @if (message != null)
                 {
-                <div style="white-space: nowrap">
-                    <button @onclick="() => OnSelectedMessage(message)">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <button class="btn btn-secondary" @onclick="() => ViewModel.RogerMessage(message)">
-                        @if (message.OnlinerMessage.Pinned.Cyclic)
-                        {
-                            <span>Acknowledge</span>
-                        }
-                        else
-                        {
-                            <span>Acknowledged</span>
-                        }
-                    </button>
-                </div>
+                    <div style="white-space: nowrap">
+                        <button @onclick="() => OnSelectedMessage(message)" type="button" class="btn btn-secondary">
+                            <svg width="24" height="24" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                            </svg>
+                        </button>
+                        <button class="btn btn-secondary" @onclick="() => ViewModel.RogerMessage(message)">
+                            @if (message.OnlinerMessage.Pinned.Cyclic)
+                            {
+                                <span>Acknowledge</span>
+                            }
+                            else
+                            {
+                                <span>Acknowledged</span>
+                            }
+                        </button>
+                    </div>
                 }
             </Template>
         </GridColumn>
@@ -109,8 +111,8 @@
 
 @if (ViewModel.AffectedObject != null)
 {
-    <button @onclick="@(() => { ViewModel.AffectedObject = null; })"><i class="fas fa-times"></i></button>
-    
+    <button @onclick="@(() => { ViewModel.AffectedObject = null; })" type="button" class="btn-close" aria-label="Close"></button>
+
     <div class="card">
         <RenderableContentControl Context="ViewModel.AffectedObject" Presentation="Service" />
     </div>

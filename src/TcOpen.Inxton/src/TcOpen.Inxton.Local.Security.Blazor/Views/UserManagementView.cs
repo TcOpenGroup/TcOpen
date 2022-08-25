@@ -22,8 +22,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         [Inject]
         private UserManager<User> _userManager { get; set; }
         [Inject]
-        private BlazorRoleGroupManager _roleGroupManager { get; set; }
-        [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 
         private User SelectedUser { get; set; }
@@ -54,13 +52,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             await _userManager.DeleteAsync(user);
             SelectedUser = null;
             _alertManager.addAlert("success", "User succesfully deleted!");
+            TcoAppDomain.Current.Logger.Information($"User '{user.UserName}' deleted. {{@sender}}", new { UserName = user.UserName });
         }
 
         private async void OnValidUpdate()
         {
             if (_model.Password != "password")
             {
-                SelectedUser.PasswordHash = _userManager.PasswordHasher.HashPassword(SelectedUser, _model.Password);
+                SelectedUser.PasswordHash = SecurityManager.Manager.Service.CalculateHash(_model.Password, _model.Username);
             }
             SelectedUser.UserName = _model.Username;
             SelectedUser.CanUserChangePassword = _model.CanUserChangePassword;
@@ -70,6 +69,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             if (result.Succeeded)
             {
                 _alertManager.addAlert("success", "User succesfully updated!");
+                TcoAppDomain.Current.Logger.Information($"User '{SelectedUser.UserName}' updated. {{@sender}}", new { UserName = SelectedUser.UserName, Group = SelectedUser.Roles });
             }
             else
             {

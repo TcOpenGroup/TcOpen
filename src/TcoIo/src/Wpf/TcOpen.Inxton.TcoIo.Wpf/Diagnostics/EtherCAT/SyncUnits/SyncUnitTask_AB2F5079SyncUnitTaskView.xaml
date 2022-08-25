@@ -13,19 +13,22 @@
     <d:UserControl.DataContext>
         <TcoIo:SyncUnitTask_AB2F5079/>
     </d:UserControl.DataContext>
-    <StackPanel Background ="{Binding InfoData.State.Cyclic, Converter={local:InfoDataSyncUnitStateToBackground}}">
-        <GroupBox Header="{Binding AttributeName}" Foreground="{Binding InfoData.State.Cyclic, Converter={local:InfoDataSyncUnitStateToForeground}}" >
+    <StackPanel x:Name="stackPanel">
+        <GroupBox> 
+            <GroupBox.Header>
+                <TextBlock x:Name="groupBoxHeader" Text="{Binding AttributeName}"/>
+            </GroupBox.Header>
             <Grid Grid.IsSharedSizeScope="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <local:WcState_0B2B16F9HWDiagView Grid.Row="0" Margin="0,5,5,0" DataContext="{Binding WcState}" Foreground="{Binding Cyclic, Converter={local:InfoDataSyncUnitStateToForeground}}" />
-                    <local:InfoData_8649EEEBHWDiagView Grid.Row="1" Margin="0,5,5,0" DataContext="{Binding InfoData}" Foreground="{Binding Cyclic, Converter={local:InfoDataSyncUnitStateToForeground}}"/>
+                    <local:WcState_0B2B16F9HWDiagView  x:Name="WcState"  Grid.Row="0" Margin="0,5,5,0" DataContext="{Binding WcState}" />
+                    <local:InfoData_8649EEEBHWDiagView x:Name="InfoData" Grid.Row="1" Margin="0,5,5,0" DataContext="{Binding InfoData}" />
                 </Grid>
             </Grid>
         </GroupBox>
     </StackPanel>
 </UserControl>
-    
+        

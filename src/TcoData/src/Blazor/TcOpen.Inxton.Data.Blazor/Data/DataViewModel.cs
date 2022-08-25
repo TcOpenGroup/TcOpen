@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Local.Security.Blazor;
 using Vortex.Connector;
 
 namespace TcoData
@@ -20,10 +23,11 @@ namespace TcoData
 
     public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
     {
+        private void LogCommand(string commandName) => TcOpen.Inxton.TcoAppDomain.Current?.Logger?.Information<string>($"{DataExchange.Symbol}.{commandName}");
+        private BlazorAlertManager _alertManager { get; set; }
 
         public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
         {
-
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
         }
@@ -143,25 +147,38 @@ namespace TcoData
             this.Mode = ViewMode.New; 
             RecordIdentifier = string.Empty;
             ViewModeNewCopy();
+            LogCommand("StartCreatingNew");
         }
 
-        public void CreateNew()
+        public string CreateNew()
         {
             var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
             plainer._EntityId = RecordIdentifier;
-            DataBrowser.AddRecord(plainer);
+            try
+            {
+                DataBrowser.AddRecord(plainer);
+            } catch (DuplicateIdException)
+            {
+                Mode = ViewMode.Display;
+                SetDefaultButtonState();
+                return "Data with id " + RecordIdentifier + " already exist in database!";
+            }
+            
             var plain = DataBrowser.FindById(plainer._EntityId);
             ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
             FillObservableRecords();
             SelectedRecord = plain;
             Mode = ViewMode.Edit;
             ViewModeEdit();
+            LogCommand("CreateNew");
+            return "";
         }
 
         public void StartEdit()
         {
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
+            LogCommand("StartEdit");
         }
 
 
@@ -174,6 +191,7 @@ namespace TcoData
             FillObservableRecords();
             this.Mode = ViewMode.Display;
             SetRowSelectedButtonState();
+            LogCommand("Update");
         }
 
         public void CancelEdit()
@@ -185,6 +203,7 @@ namespace TcoData
                 ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)SelectedRecord);
             }
             SetRowSelectedButtonState();
+            LogCommand("CancelEdit");
         }
 
         public void Delete()
@@ -197,6 +216,7 @@ namespace TcoData
             FillObservableRecords();
             this.SelectedRecord = this.ObservableRecords.FirstOrDefault();
             SetRowSelectedButtonState();
+            LogCommand("Delete");
         }
 
         public void StartCreatingRecordCopy()
@@ -205,7 +225,7 @@ namespace TcoData
             RecordIdentifier = $"Copy of {SelectedRecord._EntityId}";
             this.Mode = ViewMode.Copy;
             ViewModeNewCopy();
-
+            LogCommand("StartCreatingRecordCopy");
         }
 
         public void CreateCopyOfExisting()
@@ -220,7 +240,7 @@ namespace TcoData
             SelectedRecord = plain;
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
-           
+            LogCommand("CreateCopyOfExisting");
         }
 
         public void LoadFromPlc()
@@ -235,6 +255,7 @@ namespace TcoData
             SelectedRecord = plain;
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
+            LogCommand("LoadFromPlc");
 
         }
 
@@ -242,6 +263,7 @@ namespace TcoData
         {
                 ((dynamic)DataExchange)._data.FlushPlainToOnline((dynamic)this.SelectedRecord);
             //}, $"{((dynamic)DataExchange)._data._EntityId}", () => MessageBox.Show($"{strings.LoadToController} '{((dynamic)this.SelectedRecord)._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+            LogCommand("SendToPlc");
         }
 
         public bool StartCreateNewCommandAvailable { get; set; }

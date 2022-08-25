@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.9-alpha.725" />
+    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.15.10-alpha.735" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +36,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Diagnostics\EtherCAT\EtcGroupedTopology\EtcGroupedView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -169,6 +173,27 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\Display\StringDisplaySlim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindObjectsAndSubscribeToInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\SubscribeToSyncUnits.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\SubscribeToInfoDataState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FilterOutExcludedHardware.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\FindTopologyElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateSyncUnitsState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\UpdateSummaryInfoDataState.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Diagnostics\EtherCAT\TopologyRenderer\Render.cs">
