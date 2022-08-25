@@ -11,25 +11,24 @@
                               ></RenderableContentControl>
 }
 
-<button id="SendCloseButtonId" @onclick="SendClose"  style="display:none">Send close</button>
-@*<button id="sendDialogInvoke" @onclick="Send" disabled="@(!IsConnected)" style="display:none">Send</button>*@
-@*<button id="SendCloseButtonId" @onclick="SendClose" disabled="@(!IsConnected)" style="display:none">Send close</button>
-<button id="AddToGroupButtonId" @onclick="() => AddToGroup(DialogId)" disabled="@(!IsConnected)" style="display:none">Add to group</button>*@
+<button type="button" id="SendCloseButtonId" @onclick="SendClose"  style="display:none">Send close</button>
 
 @code {
-    [Parameter]
-    public DialogProxyServiceBlazor DialogService { get; set; }
+        [Parameter]
+        public DialogProxyServiceBlazor DialogService { get; set; }
 
 
-    [Parameter]
-    public string DialogId { get; set; }
-    [Inject]
-    public JsInteropDialog jsInterop { get; set; }
+        [Parameter]
+        public string DialogId { get; set; }
+        [Inject]
+        public JsInteropDialog jsInterop { get; set; }
+
 
     private bool _showDialogHtml { get; set;}
-    public DialogClient _dialogClient { get; set; }
-
+    private DialogClient _dialogClient { get; set; }
     private IsDialog _actualDialog { get; set; }
+
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -37,7 +36,6 @@
             jsInterop.firstRenderComplete = true;
             string baseUrl = _navigationManager.BaseUri;
             _dialogClient = new DialogClient(DialogId, baseUrl);
-            // add an event handler for incoming messages
             //_dialogClient.MessageReceived += MessageReceived;
             _dialogClient.MessageReceivedDialogClose += OnCloseDialogMessage;
             DialogService.DialogInvoked += OnDialogInvoked; // register with an event
@@ -50,12 +48,13 @@
     {
         try
         {
-            //dialog close event, when multiple are closed!!!
-            var x = "received";
             var idOfSender = e.Message;
-
-            await jsInterop.HideTcoDialog("#" + idOfSender);
-           
+            if (idOfSender == _navigationManager.ToBaseRelativePath(_navigationManager.Uri))
+            {
+                await jsInterop.HideTcoDialog("#" + idOfSender);
+                _showDialogHtml = false;
+                _actualDialog = null;
+            }
             await InvokeAsync(StateHasChanged);
         }
         catch (TaskCanceledException)
@@ -64,109 +63,54 @@
             //throw;
         }
     }
-    private async void MessageReceived(object sender, MessageReceivedEventArgs e)
-    {
-        await InvokeAsync(StateHasChanged);
-        try
-        {
-            //_showDialogHtml = true;
 
-            _actualDialog = DialogService.DialogVortex;
-            var idOfSender = e.Message;
-            _showDialogHtml = true;
-            await InvokeAsync(StateHasChanged);
-
-            await jsInterop.ShowTcoDialog("#" + idOfSender);
-
-
-            //Console.WriteLine("message received");
-            //message = e.Message;
-            //var uri = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
-            //if (uri == DialogId)
-            //{
-            //    await jsInterop.ShowTcoDialog("#" + DialogId);
-            //    StateHasChanged();
-            //}
-        }
-        catch (TaskCanceledException)
-        {
-            //swallow TaskCanceledException,
-            //throw;
-        }
-    }
-
-    //on lcose set dialogVortex to null
     public async void OnDialogInvoked()
     {
         await InvokeAsync(StateHasChanged);
-        Console.WriteLine("*-----------------*");
-        Console.WriteLine("DIALOG INVOKE!");
-        Console.WriteLine("*-----------------*");
-        //tu viem, ze ma vyskocit dialog
-        var x = DialogService.DialogVortex;
+
         if (DialogService.DialogVortex != null)
         {
             _showDialogHtml = true;
             DialogService.DialogVortex.DialogId = DialogId;
             _actualDialog = DialogService.DialogVortex;
             await InvokeAsync(StateHasChanged);
-            //Console.WriteLine("message received");
-            //message = e.Message;
 
             try
             {
                 await jsInterop.ShowTcoDialog("#" + DialogId);
+                await InvokeAsync(StateHasChanged);
             }
-            catch (Exception)
+            catch (TaskCanceledException)
             {
 
-                //throw;
+                //swallow
             }
 
-            await InvokeAsync(StateHasChanged);
-
-            //await _dialogClient.SendDialogOpen("test message");
         }
 
-        //await InvokeAsync(StateHasChanged);
-        //if (DialogService.DialogVortex != null)
-        //{
-        //    DialogService.DialogVortex.DialogId = DialogId;
-        //    _actualDialog = DialogService.DialogVortex;
-        //    await InvokeAsync(StateHasChanged);
-
-        //    await _dialogClient.SendDialogOpen(DialogId);
-        //}
 
     }
     public async ValueTask DisposeAsync()
     {
-        Console.WriteLine("ChatClient: Disposing");
-        _showDialogHtml = false;
-        await InvokeAsync(StateHasChanged);
-        await _dialogClient.StopAsync();
+        if (_dialogClient._hubConnection != null)
+        {
+            //Console.WriteLine("ChatClient: trying to dispose");
+            _showDialogHtml = false;
+            await _dialogClient.StopAsync();
+        }
     }
-
-    //protected override async Task OnInitializedAsync()
-    //{
-
-    //}
 
     async Task SendClose()
     {
         try
         {
-            //await jsInterop.HideTcoDialog("#" + DialogId);
-            //_showDialogHtml = false;
             await _dialogClient.SendDialogClose(DialogId);
             await InvokeAsync(StateHasChanged);
-            //_actualDialog = null;
-            //_showDialogHtml = false;
-        }
-        catch (Exception)
-        {
 
-            throw;
+        }
+        catch (TaskCanceledException)
+        {
+            //swallow
         }
 
     }

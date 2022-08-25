@@ -81,13 +81,10 @@
 {
     <TcoDialogLocatorView DialogService="_dialogService" DialogId="custation001"></TcoDialogLocatorView>
 }
-else
-{
-   <p>dialog service is null!!</p>
-}
+
 @code {
     int selected = 0;
-  
+   
     public static  DialogProxyServiceBlazor _dialogService { get; set; } = DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN._app._station001 });
     public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
     //private DialogClient _dialogClient;
@@ -97,6 +94,7 @@ else
         //_dialogClient = new DialogClient("custation001", _navigationManager.BaseUri);
         //// add an event handler for incoming messages
         //await _dialogClient.StartAsync();
+      
         UpdateValuesOnChange(Station._groundModeTask);
         UpdateValuesOnChange(Station._automatModeTask);
 

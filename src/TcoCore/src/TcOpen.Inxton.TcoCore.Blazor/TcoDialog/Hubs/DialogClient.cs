@@ -12,7 +12,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         public const string HUBURL = "/dialoghub";
         public delegate void MessageReceivedEventHandler(object sender, MessageReceivedEventArgs e);
         private readonly string _hubUrl;
-        private HubConnection _hubConnection;
+        public HubConnection _hubConnection;
         private readonly string _username;
         private bool _isConnected = false;
 
@@ -51,10 +51,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
             if (!_isConnected)
             {
                 // create the connection using the .NET SignalR client
+
                 _hubConnection = new HubConnectionBuilder()
                     .WithUrl(_hubUrl)
                     .Build();
-                Console.WriteLine("ChatClient: calling Start()");
+                //Console.WriteLine("ChatClient: calling Start()");
 
                 // add handler for receiving messages
                 _hubConnection.On<string, string>(DialogMessages.RECEIVE_DIALOG_OPEN, (user, message) =>
@@ -69,7 +70,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
                 // start the connection
                 await _hubConnection.StartAsync();
 
-                Console.WriteLine("ChatClient: Start returned");
+                //Console.WriteLine("ChatClient: Start returned");
                 _isConnected = true;
 
                 // register user on hub to let other clients know they've joined
@@ -90,25 +91,23 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         public event MessageReceivedEventHandler MessageReceivedDialogClose;
         public async Task StopAsync()
         {
-            if (_isConnected)
+            if (_isConnected && _hubConnection != null)
             {
                 // disconnect the client
                 await _hubConnection.StopAsync();
-                // There is a bug in the mono/SignalR client that does not
-                // close connections even after stop/dispose
-                // see https://github.com/mono/mono/issues/18628
-                // this means the demo won't show "xxx left the chat" since 
-                // the connections are left open
                 await _hubConnection.DisposeAsync();
                 _hubConnection = null;
                 _isConnected = false;
-                Console.WriteLine("hub connection disposed");
+                //Console.WriteLine("hub connection disposed successfully");
             }
         }
         public async ValueTask DisposeAsync()
         {
-            Console.WriteLine("ChatClient: Disposing client");
-            await StopAsync();
+            if (_isConnected)
+            {
+                //Console.WriteLine("ChatClient: Disposing client");
+                await StopAsync();
+            }
         }
 
     }

@@ -1,11 +1,8 @@
 ﻿const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1);
 export function OpenTcoDialog(id) {
 
-   
     var currentUrl = window.location.href;
     var url = '#' + getLastItem(currentUrl) ;
-    console.log(url);
-    console.log(id);
     if (url === id) {
         $(id).modal('show');
     }
@@ -16,7 +13,6 @@ export function OpenTcoDialog(id) {
 export function HideTcoDialog(id) {
     var currentUrl = window.location.href;
     var url = '#' + getLastItem(currentUrl);
-   
     if (url === id) {
         console.log('close ' + url);
         console.log('close ' + id);
