@@ -27,9 +27,13 @@ namespace TcoIo
 
                     if (GroupedView)
                     {
+                        if (GroupName.Contains("310"))
+                        {
+
+                        }
                         CalculateInfoDataStates(dt, ref SummaryInfoDataState, ref groupedViewItems, ref syncUnitError);
                         EtcGroupedViewData groupedViewData = new EtcGroupedViewData(GroupName, groupedViewItems, SummaryInfoDataState, syncUnitError || SummaryInfoDataState != 8);
-                        EtcUngroupedViewData ungroupedViewData = new EtcUngroupedViewData(DataContext as IVortexObject, GroupedView, FirstTopologyElementName, LastTopologyElementName, ExcludeSlavesConnectedToJunctionBox);
+                        EtcUngroupedViewData ungroupedViewData = new EtcUngroupedViewData(DataContext as IVortexObject, GroupedView, FirstTopologyElementName, LastTopologyElementName, ExcludeSlavesConnectedToJunctionBox, UserView);
                         EtcGroupedDataContext groupedViewDataContext = new EtcGroupedDataContext(groupedViewData, ungroupedViewData);
                         EtcGroupedView groupView = new EtcGroupedView();
                         groupView.DataContext = groupedViewDataContext;

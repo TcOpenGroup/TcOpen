@@ -11,8 +11,8 @@ namespace TcoIo
     {
         public string GroupName
         {
-            get { return ValidateFrameworkElement.Name((string)GetValue(GroupNameProperty)); }
-            set { SetValue(GroupNameProperty, ValidateFrameworkElement.Name(value)); }
+            get { return (string)GetValue(GroupNameProperty); }
+            set { SetValue(GroupNameProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Group.  This enables animation, styling, binding, etc...
