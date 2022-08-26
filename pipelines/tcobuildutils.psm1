@@ -343,7 +343,7 @@ function Is-License-Valid($targetAmsId)
     foreach($licence in $licenses )
     {
         $result = $licence.Valid -or $result 
-        $dt2Expire = NEW-TIMESPAN –Start (Get-Date) –End $licence.ExpireTime 
+        $dt2Expire = NEW-TIMESPAN -Start (Get-Date) -End $licence.ExpireTime 
         $hrs2Expire = ($dt2Expire.Days ) * 24 + $dt2Expire.Hours
         if($hrs2Expire -lt 48)
         {
