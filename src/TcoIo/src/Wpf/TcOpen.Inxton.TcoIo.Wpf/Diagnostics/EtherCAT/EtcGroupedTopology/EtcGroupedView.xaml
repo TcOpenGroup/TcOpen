@@ -38,6 +38,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -47,8 +48,12 @@
                             </GroupBox.Header>
                             <TextBlock Text="{Binding GroupName}" Foreground="{Binding IsInErrorState, Converter={conv:ErrorToForeground}}"/>
                         </GroupBox>
-                        <TextBlock Grid.Row="1" Margin="0,5,5,0" Text="{Binding InfoDataState, Converter={local:InfoDataSyncUnitStateToOverallState}}" FontWeight="DemiBold"  FontSize="10" Foreground="{Binding IsInErrorState, Converter={conv:ErrorToForeground}}"/>
-                        <ScrollViewer MaxHeight="100" x:Name="groupViewScrollViewer" Grid.Row ="2" VerticalScrollBarVisibility="Visible" CanContentScroll="False">
+                        <WrapPanel Grid.Row="1" >
+                            <TextBlock Margin="0,5,5,0" Text="Number of slaves: " FontWeight="DemiBold"  FontSize="10" Foreground="{Binding IsInErrorState, Converter={conv:ErrorToForeground}}"/>
+                            <TextBlock Margin="0,5,5,0" Text="{Binding GroupedViewItems.Count}" FontWeight="DemiBold"  FontSize="10" Foreground="{Binding IsInErrorState, Converter={conv:ErrorToForeground}}"/>
+                        </WrapPanel>
+                        <TextBlock Grid.Row="2" Margin="0,5,5,0" Text="{Binding InfoDataState, Converter={local:InfoDataSyncUnitStateToOverallState}}" FontWeight="DemiBold"  FontSize="10" Foreground="{Binding IsInErrorState, Converter={conv:ErrorToForeground}}"/>
+                        <ScrollViewer Grid.Row ="3" MaxHeight="100" x:Name="groupViewScrollViewer"  VerticalScrollBarVisibility="Visible" CanContentScroll="False">
                             <ListView 
                                 Style="{x:Null}"
                                 Background="Transparent"

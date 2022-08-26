@@ -17,17 +17,26 @@ namespace TcoInspectors
         public bool RetryDisabled { get; set; } = false;
         public void Retry()
         {
-            Dialog._dialogueRetry.Synchron = true;
-            if (Dialog != null && !Dialog._isOverInspected.Synchron) RetryDisabled = true;
-
+            if (Dialog != null && !Dialog._isOverInspected.Synchron)
+            {
+                RetryDisabled = false;
+                Dialog._dialogueRetry.Synchron = true;
+            }
+            else
+            {
+                RetryDisabled = true;
+            }
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Retry)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
         }
         public void Terminate()
         {
             Dialog._dialogueTerminate.Synchron = true;
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Terminate)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
         }
         public void Override()
         {
             Dialog._dialogueOverride.Synchron = true;
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Override)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
         }
 
         List<IVortexObject> _inspectorsList;
@@ -64,34 +73,20 @@ namespace TcoInspectors
                 return _inspectorsList;
             }
         }
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        var sb = new System.Text.StringBuilder();
-        //        var cv = new NameOrSymbolConverter();
-        //        foreach (var inspector in Inspectors)
-        //        {
-        //            sb.Append(cv.Convert(inspector, typeof(string), null, System.Globalization.CultureInfo.InvariantCulture));
-        //        }
+        public string Description
+        {
+            get
+            {
+                var sb = new StringBuilder();
+                foreach (var inspector in Inspectors)
+                {
+                    var value = inspector != null ? string.IsNullOrEmpty(inspector.AttributeName) ? inspector.GetSymbolTail() : inspector.AttributeName : "Missing object information";
+                    sb.Append(value);
+                }
+                return sb.ToString();
+            }
+        }
 
-        //        return sb.ToString();
-        //    }
-        //}
-
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        var sb = new System.Text.StringBuilder();
-        //        var cv = new NameOrSymbolConverter();
-        //        foreach (var inspector in Inspectors)
-        //        {
-        //            sb.Append(cv.Convert(inspector, typeof(string), null, System.Globalization.CultureInfo.InvariantCulture));
-        //        }
-
-        //        return sb.ToString();
-        //    }
-        //}
+        
     }
 }

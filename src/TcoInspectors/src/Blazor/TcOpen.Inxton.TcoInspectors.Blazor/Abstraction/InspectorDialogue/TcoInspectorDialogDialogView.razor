@@ -7,11 +7,11 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="@_labelId">Inspector dialogue</h5>
+                <h4 class="modal-title" id="@_labelId">Inspector dialogue</h4>
             </div>
             <div class="modal-body">
-                Inspection failed, you will need to decide what's next...
-
+                <h5>Inspection failed, you will need to decide what's next...</h5>
+                <h5>@ViewModel.Description</h5>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Expand
                 </button>
@@ -27,13 +27,11 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-secondary" @onclick=" async () => { ViewModel.Retry(); }">Retry</button>
+                <button type="button" class="btn btn-secondary" disabled="@ViewModel.RetryDisabled" @onclick=" async () => { ViewModel.Retry(); await jsInterop.SendCloseAllDialogs();  }">Retry</button>
 
                 <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Terminate(); await jsInterop.SendCloseAllDialogs(); }">Terminate</button>
 
                 <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Override(); await jsInterop.SendCloseAllDialogs(); }">Override</button>
-
-               
 
             </div>
         </div>
@@ -48,7 +46,5 @@
         var id = ((IsDialog)ViewModel.Dialog).DialogId;
         _labelId = id + "Label";
         DialogId = id;
-        //_labelId = "TcoInspectorDialog" + ViewModel.Dialog.GetSymbolTail() + "DialogViewLabel";
-        //DialogId = "TcoInspectorDialog" + ViewModel.Dialog.GetSymbolTail() + "DialogView";
     }
 }

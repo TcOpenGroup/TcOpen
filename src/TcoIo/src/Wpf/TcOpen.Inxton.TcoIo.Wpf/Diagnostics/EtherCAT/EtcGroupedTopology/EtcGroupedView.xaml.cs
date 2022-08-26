@@ -12,28 +12,41 @@ namespace TcoIo
 {
     public partial class EtcGroupedView : UserControl
     {
+        private Window detailWindow;
+
+        public Window DetailWindow
+        {
+            get { return detailWindow; }
+            set { detailWindow = value; }
+        }
+
+        private Grid detailGrid;
+
+        public Grid DetailGrid
+        {
+            get { return detailGrid; }
+            set { detailGrid = value; }
+        }
+
+        private TopologyRenderer detailTopologyRenderer;
+
+        public TopologyRenderer DetailTopologyRenderer
+        {
+            get { return detailTopologyRenderer; }
+            set { detailTopologyRenderer = value; }
+        }
+
+        private FrameworkElement detailUserView;
+
+        public FrameworkElement DetailUserView
+        {
+            get { return detailUserView; }
+            set { detailUserView = value; }
+        }
+
         public EtcGroupedView()
         {
             InitializeComponent();
-        }
-        private void OpenDeviceDetails(object sender, RoutedEventArgs e)
-        {
-            Window window = new Window();
-            Grid grid = new Grid();
-            TopologyRenderer tr = new TopologyRenderer();
-            EtcUngroupedViewData ungroupedViewData = (this.DataContext as EtcGroupedDataContext).UngroupedViewData as EtcUngroupedViewData;
-            if(ungroupedViewData != null && ungroupedViewData.DataContext != null)
-            {
-                tr.GroupedView = false;
-                tr.FirstTopologyElementName= ungroupedViewData.FirstTopologyElementName;
-                tr.LastTopologyElementName = ungroupedViewData.LastTopologyElementName;
-                tr.ExcludeSlavesConnectedToJunctionBox = ungroupedViewData.ExcludeSlavesConnectedToJunctionBox;
-                tr.DataContext = ungroupedViewData.DataContext;
-                grid.Children.Add(tr);
-                window.Content = grid;
-                window.SizeToContent = SizeToContent.WidthAndHeight;
-                window.Show();
-            }
         }
     }
 }

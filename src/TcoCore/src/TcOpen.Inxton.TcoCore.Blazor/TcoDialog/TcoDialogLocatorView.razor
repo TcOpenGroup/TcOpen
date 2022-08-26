@@ -24,6 +24,11 @@
     /// </summary>
     [Parameter]
     public string DialogId { get; set; }
+    /// <summary>
+    /// Delay for dialog open, if you have problem with dialogs open on slower PC, increase dialog dealay (Default value is 500 ms).
+    /// </summary>
+    [Parameter]
+    public int DialogOpenDelay { get; set; }
 
     [Inject]
     public JsInteropDialog jsInterop { get; set; }
@@ -38,6 +43,7 @@
     {
         if (firstRender)
         {
+            if (DialogOpenDelay == 0) DialogOpenDelay = 500;
             jsInterop.firstRenderComplete = true;
             _dialogClient = new DialogClient(_navigationManager.BaseUri);
             _dialogClient.MessageReceivedDialogClose += OnCloseDialogMessage;
@@ -68,6 +74,7 @@
 
     public async void OnDialogInvoked()
     {
+        await Task.Delay(DialogOpenDelay);
         await InvokeAsync(StateHasChanged);
 
         if (DialogService.DialogVortex != null)
