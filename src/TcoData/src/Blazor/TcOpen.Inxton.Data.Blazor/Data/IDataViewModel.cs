@@ -31,7 +31,7 @@ namespace TcoData
         void CancelEdit();
         void Delete();
         void StartCreatingRecordCopy();
-        void CreateCopyOfExisting();
+        string CreateCopyOfExisting();
         void SendToPlc();
         void LoadFromPlc();
 
