@@ -228,12 +228,21 @@ namespace TcoData
             LogCommand("StartCreatingRecordCopy");
         }
 
-        public void CreateCopyOfExisting()
+        public string CreateCopyOfExisting()
         {
             var plainer = ((dynamic)DataExchange)._data.CreatePlainerType();
             plainer.CopyShadowToPlain(((dynamic)DataExchange)._data);
             plainer._EntityId = RecordIdentifier;
-            DataBrowser.AddRecord(plainer);
+            try
+            {
+                DataBrowser.AddRecord(plainer);
+            }
+            catch (DuplicateIdException)
+            {
+                Mode = ViewMode.Display;
+                SetDefaultButtonState();
+                return "Data with id " + RecordIdentifier + " already exist in database!";
+            }
             var plain = DataBrowser.FindById(plainer._EntityId);
             ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
             FillObservableRecords();
@@ -241,6 +250,7 @@ namespace TcoData
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
             LogCommand("CreateCopyOfExisting");
+            return "";
         }
 
         public void LoadFromPlc()
