@@ -326,12 +326,34 @@ function Remove-TargetNetId($tcproj)
 
 function Is-License-Valid($targetAmsId)
 {
+    $PK_PHOENY = ([System.Environment]::GetEnvironmentVariable('_PK_PHOENY_'))
+    $TK_PHOENY = ([System.Environment]::GetEnvironmentVariable('_TK_PHOENY_'))
+    $TW_PHOENY = ([System.Environment]::GetEnvironmentVariable('_TW_PHOENY'))
+    $TW_USER = ([System.Environment]::GetEnvironmentVariable('_TW_USER_'))
+    $TW_TOKEN = ConvertTo-SecureString -String ([System.Environment]::GetEnvironmentVariable('_TW_TOKEN_')) -AsPlainText -Force
     Import-Module "C:\TwinCAT\AdsApi\Powershell\TcXaeMgmt\TcXaeMgmt.psd1" -Scope Local
     $licenses = Get-TcLicense -Address $targetAmsId  -OrderId TC1200
     $result = $false
+    $recepients = New-Object Collections.Generic.List[string]
+    $recepients.Add($PK_PHOENY) 
+    $recepients.Add($TK_PHOENY) 
+    $url = "https://api.twilio.com/2010-04-01/Accounts/" + $TW_USER + "/Messages.json"
+    $credential = New-Object System.Management.Automation.PSCredential($TW_USER, $TW_TOKEN)
+
     foreach($licence in $licenses )
     {
         $result = $licence.Valid -or $result 
+        $dt2Expire = NEW-TIMESPAN –Start (Get-Date) –End $licence.ExpireTime 
+        $hrs2Expire = ($dt2Expire.Days ) * 24 + $dt2Expire.Hours
+        if($hrs2Expire -lt 48)
+        {
+            $details = "TwinCAT runtime licence on target: " + [System.Net.Dns]::GetHostName() + " with TargetAmsNetId: " + $targetAmsId + " is going to expire in " + $hrs2Expire + " hours!"
+            foreach($recepient in $recepients )
+            {
+                $params = @{ To = $recepient; From = $TW_PHOENY; Body = $details }
+                Invoke-WebRequest $url -Method Post -Credential $credential -Body $params -UseBasicParsing | ConvertFrom-Json | Select sid, body
+            }
+        }
     }
     if ($result)
     {
@@ -340,6 +362,12 @@ function Is-License-Valid($targetAmsId)
     else
     {
         $licenses
+        $details = "No valid TwinCAT runtime licence found on target: " + [System.Net.Dns]::GetHostName() + " with TargetAmsNetId: " + $targetAmsId + "!"
+        foreach($recepient in $recepients )
+        {
+            $params = @{ To = $recepient; From = $TW_PHOENY; Body = $details }
+            Invoke-WebRequest $url -Method Post -Credential $credential -Body $params -UseBasicParsing | ConvertFrom-Json | Select sid, body
+        }
         return $result
     }
 }
