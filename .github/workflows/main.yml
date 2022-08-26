@@ -20,6 +20,12 @@ jobs:
           path : '.'
           fetch-depth: 0
       - name: Run Psake
+        env:
+          _PK_PHOENY_ : ${{ secrets._PK_PHOENY_  }}
+          _TK_PHOENY_ : ${{ secrets._TK_PHOENY_  }}
+          _TW_PHOENY : ${{ secrets._TW_PHOENY  }}
+          _TW_TOKEN_ : ${{ secrets._TW_TOKEN_  }}
+          _TW_USER_ : ${{ secrets._TW_USER_  }}
         run: >
           .\pipelines\runbuild.ps1 -properties 
           @{
