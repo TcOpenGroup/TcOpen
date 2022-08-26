@@ -76,8 +76,6 @@ namespace PlcHammer.Hmi.Blazor
             
             roleGroupManager = new BlazorRoleGroupManager(groupRepo);
             Roles.Create(roleGroupManager);
-            // add an event handler for incoming messages
-            //services.AddSingleton(new DialogProxyServiceBlazor(new[] { Entry.PlcHammer.TECH_MAIN._app._station001, Entry.PlcHammer.TECH_MAIN._app._station002 }));
             services.AddVortexBlazorSecurity(userRepo, roleGroupManager);
         }
 

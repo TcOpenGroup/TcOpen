@@ -1,12 +1,6 @@
 ﻿@page "/custation001"
 @inherits RenderableComponentBase
 @inject NavigationManager _navigationManager
-@using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
-@*@implements IAsyncDisposable*@
-
-
-
-
 <h1>Station001</h1>
 
 
@@ -25,7 +19,6 @@
             case 0:
 
                 <h2>Tasks</h2>
-
                 <div class="d-flex flex-row">
                     @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
                     {
@@ -56,7 +49,6 @@
                 <RenderableContentControl Presentation="Display"
                                           Context="@Station._processRecipies._data" />
 
-
                 break;
 
             case 1:
@@ -84,18 +76,14 @@
 
 @code {
     int selected = 0;
-   
     public static  DialogProxyServiceBlazor _dialogService { get; set; } = DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN._app._station001 });
     public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
-    //private DialogClient _dialogClient;
 
     protected override async Task OnInitializedAsync()
     {
-      
-      
         UpdateValuesOnChange(Station._groundModeTask);
         UpdateValuesOnChange(Station._automatModeTask);
-
+        await base.OnInitializedAsync();
     }
-    
+
 }
