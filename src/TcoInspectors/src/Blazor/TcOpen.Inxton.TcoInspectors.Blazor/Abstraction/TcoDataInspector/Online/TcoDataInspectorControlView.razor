@@ -11,10 +11,10 @@
             </button>
         </div>
         <div class="accordion-body row align-items-center py-1">
-            <div class="col-auto">
+            <div class="col-xl-auto">
                 <RenderableContentControl Context="@Component._data.RequiredStatus" Presentation="Control" />
             </div>
-            <div class="col-auto">
+            <div class="col-xl-auto">
                 <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Control" />
             </div>
             <div class="col-auto ms-auto">
@@ -27,7 +27,7 @@
                 <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Control" />
             </div>
             <div class="col-auto">
-                <GenericIconView Result="@Component._data.Result.Cyclic" />
+                <GenericIconView Result="@Component._data.Result.Shadow" />
             </div>
         </div>
         <div id="@ID" class="accordion-collapse collapse">

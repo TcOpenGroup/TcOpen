@@ -45,11 +45,6 @@ namespace TcoCore
             var module = await moduleTask.Value;
             return await module.InvokeAsync<bool>("ClickSendClose");
         }
-        public async ValueTask<bool> SendAddToGroup()
-        {
-            var module = await moduleTask.Value;
-            return await module.InvokeAsync<bool>("AddToGroup");
-        }
 
         public async ValueTask DisposeAsync()
         {

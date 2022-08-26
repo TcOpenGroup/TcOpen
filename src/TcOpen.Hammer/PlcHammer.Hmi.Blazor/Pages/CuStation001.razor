@@ -91,17 +91,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //_dialogClient = new DialogClient("custation001", _navigationManager.BaseUri);
-        //// add an event handler for incoming messages
-        //await _dialogClient.StartAsync();
+      
       
         UpdateValuesOnChange(Station._groundModeTask);
         UpdateValuesOnChange(Station._automatModeTask);
 
     }
-    //public async ValueTask DisposeAsync()
-    //{
-
-    //    await _dialogClient.StopAsync();
-    //}
+    
 }

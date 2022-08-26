@@ -11,16 +11,13 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
 {
     public class DialogHub : Hub
     {
-        private static readonly Dictionary<string, string> userLookup = new Dictionary<string, string>();
-        public HubConnection hubConnection { get; set; }
-
-        public async Task SendDialogOpen(string username, string message)
+        public async Task SendDialogOpen(string message)
         {
-            await Clients.All.SendAsync(DialogMessages.RECEIVE_DIALOG_OPEN, username, message);
+            await Clients.All.SendAsync(DialogMessages.RECEIVE_DIALOG_OPEN, message);
         }
-        public async Task SendDialogClose(string username, string message)
+        public async Task SendDialogClose(string message)
         {
-            await Clients.All.SendAsync(DialogMessages.RECEIVE_DIALOG_CLOSE, username, message);
+            await Clients.All.SendAsync(DialogMessages.RECEIVE_DIALOG_CLOSE, message);
         }
        
     }

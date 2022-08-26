@@ -1,9 +1,8 @@
 ﻿@namespace TcoCore
 @inject NavigationManager _navigationManager
 @implements IAsyncDisposable
-@using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
 
-<h1>TCO LOCATOR</h1>
+
 @if (_showDialogHtml)
 {
     <RenderableContentControl Context="_actualDialog"
@@ -14,12 +13,18 @@
 <button type="button" id="SendCloseButtonId" @onclick="SendClose"  style="display:none">Send close</button>
 
 @code {
+    /// <summary>
+    /// Instance of DialogService type, which corresponds to actual page.
+    /// </summary>
     [Parameter]
     public DialogProxyServiceBlazor DialogService { get; set; }
 
-
+    /// <summary>
+    /// Pass unique value of last segment of URL, which will represent dialog id corresponding to actual page url.
+    /// </summary>
     [Parameter]
     public string DialogId { get; set; }
+
     [Inject]
     public JsInteropDialog jsInterop { get; set; }
 
@@ -34,11 +39,9 @@
         if (firstRender)
         {
             jsInterop.firstRenderComplete = true;
-            string baseUrl = _navigationManager.BaseUri;
-            _dialogClient = new DialogClient(DialogId, baseUrl);
-            //_dialogClient.MessageReceived += MessageReceived;
+            _dialogClient = new DialogClient(_navigationManager.BaseUri);
             _dialogClient.MessageReceivedDialogClose += OnCloseDialogMessage;
-            DialogService.DialogInvoked += OnDialogInvoked; // register with an event
+            DialogService.DialogInvoked += OnDialogInvoked;
             await _dialogClient.StartAsync();
         }
         await base.OnAfterRenderAsync(firstRender);
@@ -60,7 +63,6 @@
         catch (TaskCanceledException)
         {
             //swallow TaskCanceledException,
-            //throw;
         }
     }
 
@@ -79,8 +81,9 @@
             {
                 await jsInterop.ShowTcoDialog("#" + DialogId);
                 await InvokeAsync(StateHasChanged);
+
             }
-            catch 
+            catch
             {
 
                 //swallow
@@ -90,17 +93,8 @@
 
 
     }
-    public async ValueTask DisposeAsync()
-    {
-        //if (_dialogClient._hubConnection != null)
-        //{
-            //Console.WriteLine("ChatClient: trying to dispose");
-            _showDialogHtml = false;
-            await _dialogClient.StopAsync();
-        //}
-    }
 
-      
+
     public async Task SendClose()
     {
         try
@@ -115,7 +109,13 @@
 
     }
 
-
-
+    public async ValueTask DisposeAsync()
+    {
+        if (_dialogClient != null)
+        {
+            _showDialogHtml = false;
+            await _dialogClient.StopAsync();
+        }
+    }
 
 }

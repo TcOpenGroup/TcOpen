@@ -11,14 +11,14 @@
             </button>
         </div>
         <div class="accordion-body row align-items-center py-1">
-            <div class="col-1">
-                <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="ShadowDisplay" Class="p-1" />
+            <div class="col-xl-1 col-lg-2 col-md-2">
+                <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Display" />
             </div>
-            <div class="col-1">
-                <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="ShadowDisplay" Class="p-1" />
+            <div class="col-xl-1 col-lg-2 col-md-2">
+                <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
             </div>
-            <div class="col-1">
-                <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="ShadowDisplay" Class="p-1" />
+            <div class="col-xl-1 col-lg-2 col-md-2">
+                <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Display" />
             </div>
             <div class="col d-none d-xl-block">
                 <div class="progress mt-4">
@@ -29,7 +29,7 @@
                     <div class="progress-checkpoint" style="left: @getProgressBarValues().Item4;"></div>
                 </div>
             </div>
-            <div class="col-auto">
+            <div class="col-auto ms-auto">
                 <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="ShadowDisplay" />
             </div>
             <div class="col-auto">

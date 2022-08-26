@@ -13,79 +13,54 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         public delegate void MessageReceivedEventHandler(object sender, MessageReceivedEventArgs e);
         private readonly string _hubUrl;
         public HubConnection _hubConnection;
-        private readonly string _username;
         private bool _isConnected = false;
 
-        public DialogClient(string username, string siteUrl)
+        public DialogClient(string siteUrl)
         {
-            // check inputs
-            //if (string.IsNullOrWhiteSpace(username))
-            //    throw new ArgumentNullException(nameof(username));
-            //if (string.IsNullOrWhiteSpace(siteUrl))
-            //    throw new ArgumentNullException(nameof(siteUrl));
-            // save username
-            _username = username;
             // set the hub URL
             _hubUrl = siteUrl.TrimEnd('/') + HUBURL;
         }
 
         public async Task SendDialogOpen(string message)
         {
-            // check we are connected
-            //if (!_isConnected)
-            //    throw new InvalidOperationException("Client not started");
-            // send the message
-            await _hubConnection.SendAsync(DialogMessages.SEND_DIALOG_OPEN, _username, message);
+            await _hubConnection.SendAsync(DialogMessages.SEND_DIALOG_OPEN, message);
         }
         public async Task SendDialogClose(string message)
         {
-            // check we are connected
-            //if (!_isConnected)
-            //    throw new InvalidOperationException("Client not started");
-            // send the message
-            await _hubConnection.SendAsync(DialogMessages.SEND_DIALOG_CLOSE, _username, message);
+            await _hubConnection.SendAsync(DialogMessages.SEND_DIALOG_CLOSE, message);
         }
 
         public async Task StartAsync()
         {
             if (!_isConnected)
             {
-                // create the connection using the .NET SignalR client
-
                 _hubConnection = new HubConnectionBuilder()
                     .WithUrl(_hubUrl)
                     .Build();
-                //Console.WriteLine("ChatClient: calling Start()");
-
-                // add handler for receiving messages
-                _hubConnection.On<string, string>(DialogMessages.RECEIVE_DIALOG_OPEN, (user, message) =>
+                
+                _hubConnection.On<string>(DialogMessages.RECEIVE_DIALOG_OPEN, (message) =>
                 {
-                    HandleReceiveMessage(user, message);
+                    HandleReceiveMessage(message);
                 });
-                _hubConnection.On<string, string>(DialogMessages.RECEIVE_DIALOG_CLOSE, (user, message) =>
+                _hubConnection.On<string>(DialogMessages.RECEIVE_DIALOG_CLOSE, (message) =>
                 {
-                    HandleReceiveDialogClose(user, message);
+                    HandleReceiveDialogClose(message);
                 });
 
                 // start the connection
                 await _hubConnection.StartAsync();
-
-                //Console.WriteLine("ChatClient: Start returned");
                 _isConnected = true;
-
-                // register user on hub to let other clients know they've joined
-                //await _hubConnection.SendAsync(Messages.REGISTER, _username);
             }
         }
-        private void HandleReceiveMessage(string username, string message)
+        private void HandleReceiveMessage(string message)
         {
             // raise an event to subscribers
-            MessageReceived?.Invoke(this, new MessageReceivedEventArgs(username, message));
+            MessageReceived?.Invoke(this, new MessageReceivedEventArgs(message));
         }
-        private void HandleReceiveDialogClose(string username, string message)
+        private void HandleReceiveDialogClose(string message)
         {
             // raise an event to subscribers
-            MessageReceivedDialogClose?.Invoke(this, new MessageReceivedEventArgs(username, message));
+            MessageReceivedDialogClose?.Invoke(this, new MessageReceivedEventArgs(message));
         }
         public event MessageReceivedEventHandler MessageReceived;
         public event MessageReceivedEventHandler MessageReceivedDialogClose;
@@ -98,14 +73,12 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
                 await _hubConnection.DisposeAsync();
                 _hubConnection = null;
                 _isConnected = false;
-                //Console.WriteLine("hub connection disposed successfully");
             }
         }
         public async ValueTask DisposeAsync()
         {
             if (_isConnected)
             {
-                //Console.WriteLine("ChatClient: Disposing client");
                 await StopAsync();
             }
         }
@@ -113,20 +86,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
     }
     public class MessageReceivedEventArgs : EventArgs
     {
-        public MessageReceivedEventArgs(string username, string message)
+        public MessageReceivedEventArgs(string message)
         {
-            Username = username;
             Message = message;
         }
 
-        /// <summary>
-        /// Name of the message/event
-        /// </summary>
-        public string Username { get; set; }
-
-        /// <summary>
-        /// Message data items
-        /// </summary>
         public string Message { get; set; }
 
     }

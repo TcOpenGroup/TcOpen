@@ -32,17 +32,8 @@ namespace TcoCore
             {
                 DialogVortex = dialog;
                 DialogVortex.Read();
-                //OnProcessCompleted();
             });
-
-            //dialog.Read();
-            //DialogVortex = dialog;
-            ////DialogVortex.DialogId = dialog.GetType().Name + dialog.GetSymbolTail() + "DialogView";
-            ////await Task.Run(() =>
-            ////{
-            ////    DialogVortex = dialog;
-            ////    DialogVortex.DialogId = dialog.GetType().Name + dialog.GetSymbolTail() + "DialogView";
-            ////});
+           
             OnProcessCompleted();
 
         }
