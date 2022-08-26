@@ -31,6 +31,7 @@ using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.TcoCore.Blazor.Extensions;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs;
 using Vortex.Presentation.Blazor.Services;
 
 namespace PlcHammer.Hmi.Blazor
@@ -83,7 +84,7 @@ namespace PlcHammer.Hmi.Blazor
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
                                                                   // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
                                                                   // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
-                                        .Enrich.WithProperty("user",/*_signInManager.Context.User*/ TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name)
+                                        .Enrich.WithProperty("user",SecurityManager.Manager.Principal.Identity.Name)
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
@@ -91,8 +92,6 @@ namespace PlcHammer.Hmi.Blazor
                 .SetSecurity(SecurityManager.Manager.Service)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
-            // Initialize logger
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -122,10 +121,12 @@ namespace PlcHammer.Hmi.Blazor
             {
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<DialogHub>("/dialoghub");
                 endpoints.MapFallbackToPage("/_Host");
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,

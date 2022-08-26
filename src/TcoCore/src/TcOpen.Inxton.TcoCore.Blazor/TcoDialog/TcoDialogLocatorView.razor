@@ -1,0 +1,123 @@
+﻿@namespace TcoCore
+@inject NavigationManager _navigationManager
+@implements IAsyncDisposable
+
+
+@if (_showDialogHtml)
+{
+    <RenderableContentControl Context="_actualDialog"
+                              Presentation="Dialog"
+                              ></RenderableContentControl>
+}
+
+<button type="button" id="SendCloseButtonId" @onclick="SendClose"  style="display:none">Send close</button>
+
+@code {
+    /// <summary>
+    /// Instance of DialogService type, which corresponds to actual page.
+    /// </summary>
+    [Parameter]
+    public DialogProxyServiceBlazor DialogService { get; set; }
+
+    /// <summary>
+    /// Pass unique value of last segment of URL, which will represent dialog id corresponding to actual page url.
+    /// </summary>
+    [Parameter]
+    public string DialogId { get; set; }
+    /// <summary>
+    /// Delay for dialog open, if you have problem with dialogs open on slower PC, increase dialog dealay (Default value is 500 ms).
+    /// </summary>
+    [Parameter]
+    public int DialogOpenDelay { get; set; }
+
+    [Inject]
+    public JsInteropDialog jsInterop { get; set; }
+
+
+    private bool _showDialogHtml { get; set;}
+    private DialogClient _dialogClient { get; set; }
+    private IsDialog _actualDialog { get; set; }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (DialogOpenDelay == 0) DialogOpenDelay = 500;
+            jsInterop.firstRenderComplete = true;
+            _dialogClient = new DialogClient(_navigationManager.BaseUri);
+            _dialogClient.MessageReceivedDialogClose += OnCloseDialogMessage;
+            DialogService.DialogInvoked += OnDialogInvoked;
+            await _dialogClient.StartAsync();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async void OnCloseDialogMessage(object sender, MessageReceivedEventArgs e)
+    {
+        try
+        {
+            var idOfSender = e.Message;
+            if (idOfSender == _navigationManager.ToBaseRelativePath(_navigationManager.Uri))
+            {
+                await jsInterop.HideTcoDialog("#" + idOfSender);
+                _showDialogHtml = false;
+                _actualDialog = null;
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (TaskCanceledException)
+        {
+            //swallow TaskCanceledException,
+        }
+    }
+
+    public async void OnDialogInvoked()
+    {
+        await Task.Delay(DialogOpenDelay);
+        await InvokeAsync(StateHasChanged);
+
+        if (DialogService.DialogVortex != null)
+        {
+            _showDialogHtml = true;
+            DialogService.DialogVortex.DialogId = DialogId;
+            _actualDialog = DialogService.DialogVortex;
+            await InvokeAsync(StateHasChanged);
+
+            try
+            {
+                await jsInterop.ShowTcoDialog("#" + DialogId);
+                await InvokeAsync(StateHasChanged);
+            }
+            catch
+            {
+                //swallow
+            }
+        }
+    }
+
+
+    public async Task SendClose()
+    {
+        try
+        {
+            await _dialogClient.SendDialogClose(DialogId);
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (TaskCanceledException)
+        {
+            //swallow
+        }
+
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_dialogClient != null)
+        {
+            _showDialogHtml = false;
+            await _dialogClient.StopAsync();
+        }
+    }
+
+}

@@ -9,6 +9,8 @@ namespace TcOpen.Inxton.Dialogs
 {
     public interface IsDialog : IVortexObject
     {
+        string DialogId { get; set; }
         void Initialize(Action dialogAction);
+        
     }
 }

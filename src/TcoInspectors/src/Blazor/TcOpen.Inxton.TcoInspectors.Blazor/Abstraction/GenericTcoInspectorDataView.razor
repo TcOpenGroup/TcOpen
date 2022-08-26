@@ -1,17 +1,17 @@
 ﻿@namespace TcoInspectors
 
 <div class="row">
-    <div class="col me-5">
+    <div class="col-md me-2">
         <RenderableContentControl Context="@Data.Result" Presentation="@Presentation" />
         <RenderableContentControl Context="@Data.ErrorCode" Presentation="@Presentation" />
         <RenderableContentControl Context="@Data.FailureDescription" Presentation="@Presentation" />
     </div>
-    <div class="col mx-5">
+    <div class="col-md mx-2">
         <RenderableContentControl Context="@Data.TimeStamp" Presentation="@Presentation" />
         <RenderableContentControl Context="@Data.FailTime" Presentation="@Presentation" />
         <RenderableContentControl Context="@Data.PassTime" Presentation="@Presentation" />
     </div>
-    <div class="col ms-5">
+    <div class="col-md ms-2">
         <RenderableContentControl Context="@Data.NumberOfAllowedRetries" Presentation="@Presentation" />
         <RenderableContentControl Context="@Data.RetryAttemptsCount" Presentation="@Presentation" />
     </div>

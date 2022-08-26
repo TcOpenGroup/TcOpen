@@ -12,9 +12,11 @@ namespace TcoCore
 
         protected override void OnInitialized()
         {
-            UpdateValuesOnChange(ViewModel.Component);            
+            UpdateValuesOnChange(ViewModel.Component);
+            IsTaskRunning = ViewModel.Component.GetTaskState();
             ViewModel.Component._taskState.Subscribe(TaskStateChanged);
             ButtonState = ViewModel.Component.StateToButtonClass();
+
         }        
 
         public string ButtonState { get; set; } = "btn btn-secondary";
