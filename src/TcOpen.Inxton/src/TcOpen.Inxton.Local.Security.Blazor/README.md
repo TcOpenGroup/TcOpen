@@ -17,7 +17,7 @@ WARNING: TcOpen.Inxton.Local.Security.Blazor is still in experimental phase. Som
 
 ## Getting started
 
-Instal NuGet package TcOpen.Inxton.Local.Security.Blazor or add reference to this project.
+Install NuGet package TcOpen.Inxton.Local.Security.Blazor or add reference to this project.
 
 Add following lines in Startup.cs, in ConfigureServices() method, where you pass instances of created repositories:
 
@@ -89,7 +89,7 @@ Your application can look like TcHammer example from TcOpen repo.
 
 ## Alert
 
-Component of TcOpen.Inxton.Local.Security.Blazor library is alert messaging. It is used by authentication, and it is avaliable for everyone, everywhere in application.
+Library TcOpen.Inxton.Local.Security.Blazor includes alert messaging. It is used by authentication, and it is available for everyone, everywhere in application.
 
 For using them add following line in your main layout of your application.
 
