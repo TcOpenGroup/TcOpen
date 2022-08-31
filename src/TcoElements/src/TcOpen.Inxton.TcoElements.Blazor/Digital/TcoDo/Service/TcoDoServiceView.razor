@@ -1,16 +1,16 @@
 ﻿@namespace TcoElements
-@inherits RenderableComplexComponentBase<TcoDi>
-
+@inherits RenderableComplexComponentBase<TcoDo>
 
 <TcoComponentView Component="@Component">
     <TcoComponentHeader>
-        
-</TcoComponentHeader>
+
+    </TcoComponentHeader>
     <TcoComponentBody>
         <div class="container">
             <div class="row">
                 <div class="col">
 
+  
                 </div>
                 <div class="col">
                     @if (@Component._signal.Cyclic)
@@ -28,18 +28,16 @@
                 </div>
             </div>
             <div class="row">
-               
+                
                     <TcoSignalInfoView Component="@Component._signalInfo"></TcoSignalInfoView>
                 
                 <div class="col">
-                    <RenderableContentControl Context="@Component._isFalseTask"></RenderableContentControl>
+                    <RenderableContentControl Context="@Component._setTask"></RenderableContentControl>
                 </div>
                 <div class="col">
-                    <RenderableContentControl Context="@Component._isTrueTask"></RenderableContentControl>
+                    <RenderableContentControl Context="@Component._resetTask"></RenderableContentControl>
                 </div>
             </div>
         </div>
     </TcoComponentBody>
 </TcoComponentView>
-
-

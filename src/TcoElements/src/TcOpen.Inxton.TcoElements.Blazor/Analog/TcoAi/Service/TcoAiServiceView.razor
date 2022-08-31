@@ -1,0 +1,37 @@
+﻿@namespace TcoElements
+@inherits RenderableComplexComponentBase<TcoAi>
+
+@*<TcoSignalInfoView SignalInfo="Component._signalInfo"></TcoSignalInfoView>*@
+
+<TcoComponentView Component="@Component">
+    <TcoComponentHeader>
+    </TcoComponentHeader>
+    <TcoComponentBody>
+        <div class="container">
+            <div class="row">
+                <div class="row">
+                        <TcoSignalInfoView Component="@Component._signalInfo"></TcoSignalInfoView>
+                 
+                    <div class="col">
+                        <RenderableContentControl Context="@Component._status.Scaled" Presentation="Display"></RenderableContentControl>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card col p-0">
+                    <h5 class="card-header text-white bg-primary bg-gradient">@Component._config.AttributeName</h5>
+                    <div class="card-body">
+                        <p class="card-text"><RenderableContentControl Context="@Component._config" Presentation="Control"></RenderableContentControl></p>
+                    </div>
+                </div>
+                <div class="card col p-0">
+                    <h5 class="card-header text-white bg-primary bg-gradient">@Component._status.AttributeName</h5>
+                    <div class="card-body">
+                        <p class="card-text"><RenderableContentControl Context="@Component._status" Presentation="Display"></RenderableContentControl></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </TcoComponentBody>
+
+</TcoComponentView>
