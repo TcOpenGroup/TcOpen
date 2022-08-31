@@ -1,0 +1,69 @@
+﻿@namespace TcoData
+@inherits RenderableViewModelComponentBase<TcoDataExchangeSimpleSelectorViewModel>
+<h3>TcoDataExchangeSimpleSelectorView</h3>
+
+<div class="row">
+    <p>Selected</p>
+    <select class="col form-select" @bind="SelectedItemId" @onclick="() => LoadData()">
+        @if (ViewModel?.Model != null)
+        {
+            @*<option selected value="">Select data</option>*@
+            @foreach (var item in ViewModel.DataViewModel.ObservableRecords)
+            {
+                <option value="@item._EntityId">@item._EntityId</option>
+            }
+        }
+    </select>
+    <button class="btn btn-secondary" @onclick="() => ViewModel.DataViewModel.SendToPlc()">Send to PLC</button>
+</div> 
+    
+
+@code {
+    [Parameter]
+    public IVortexElement Context { get; set; }
+
+    private string _selectedItemId;
+
+    public string SelectedItemId
+    {
+        get
+        {
+            return _selectedItemId;
+        }
+        set
+        {
+           
+            _selectedItemId = value;
+            if (_selectedItemId != "")
+            {
+                ViewModel.DataViewModel.SelectedRecord = ViewModel.DataViewModel.ObservableRecords.Find(x => x._EntityId == _selectedItemId);
+            }
+        }
+    }
+
+
+    private void LoadData()
+    {
+        if (this.ViewModel?.DataViewModel == null) return;
+
+        var maxNumberOfRecipies = 50;
+        var currentLimit = ViewModel.DataViewModel.Limit;
+        ViewModel.DataViewModel.Limit = maxNumberOfRecipies;
+        ViewModel.DataViewModel.FillObservableRecords();
+        ViewModel.DataViewModel.Limit = currentLimit;
+        
+        StateHasChanged();
+    }
+
+
+    protected override void OnInitialized()
+    {
+        if (Context != null && !(Context is TcoDataExchangeSimpleSelectorViewModel) && Context is TcoDataExchange)
+        {
+            this.ViewModel = new TcoDataExchangeSimpleSelectorViewModel() { Model = Context };
+        }
+        //ViewModel.DataViewModel.SendToPlc()
+        base.OnInitialized();
+    }
+
+}

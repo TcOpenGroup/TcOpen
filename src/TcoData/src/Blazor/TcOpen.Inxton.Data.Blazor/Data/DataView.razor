@@ -26,7 +26,7 @@
                 @bind="@DataViewModel.SearchMode">
             @foreach (var item in eSearchModes)
             {
-                <option class="form-control" value="@item">@item.ToString() </option>
+                <option class="form-control" value="@item.">@item.ToString() </option>
             }
         </select>
     </div>
@@ -346,7 +346,6 @@
         DataViewModel.SelectedRecord = item;
         dynamic dataExchange = DataViewModel.DataExchange;
         _data = (IVortexElement)dataExchange._data;
-        _isRowSelected = true;
         StateHasChanged();
 
     }

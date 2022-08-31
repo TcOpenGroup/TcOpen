@@ -34,6 +34,7 @@ namespace TcoData
         string CreateCopyOfExisting();
         void SendToPlc();
         void LoadFromPlc();
+        void FillObservableRecords();
 
     }
 
