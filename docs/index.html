@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/buble.css" /> 
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>  
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    {
+      var num = 0;
+      mermaid.initialize({ startOnLoad: false });
+
+      window.$docsify = {
+        name: 'TcOpen',
+        repo: 'https://github.com/TcOpenGroup/TcOpen',        
+        themeColor: '#ed020e',  
+        relativePath: true,
+        autoHeader: true,     
+        coverpage: true,
+        loadNavbar: true,
+        loadSidebar: true,
+        depth: 3,  
+        markdown: {
+          renderer: {
+            code: function(code, lang) {
+              if (lang === "mermaid") {
+                return (
+                  '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+                );
+              }
+              return this.origin.code.apply(this, arguments);
+            }
+          }
+        },
+              
+      search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: 'auto',
+        placeholder: 'Type to search',        
+        depth: 6,
+      },
+      
+      plugins: [
+      EditOnGithubPlugin.create('https://github.com/TcOpenGroup/TcOpen/tree/dev/docs', 'https://github.com/TcOpenGroup/TcOpen/tree/dev/docs', 'Edit')]
+    }
+  }
+  </script>
+  <!-- Docsify v4 -->       
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>  
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>    
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>   
+</body>
+</html>
