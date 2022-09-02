@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R8_EK1100_9C7B3B67" Id="{e8f2d261-89c1-08e0-25dd-071183451875}">
+  <DUT Name="R8_EK1100_9C7B3B67" Id="{fbe00e16-783c-0d07-3659-1a16c9ab96db}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "R8_A2_EK1122R8_A2_EK1122_E74C4B62290R8_A3_EK1122R8_A3_EK1122_71CA94BA136R8_A5_EL1809EL1809_32157CFD20R8_A6_EL2809EL2809_2B6483BD19R8_A7_EL2809EL2809_2B6483BD19R8_A8_EK1122R8_A8_EK1122_2533F93A1096R8_A9_EK1122R8_A9_EK1122_3EDD87521096R8_A10_EK1122R8_A10_EK1122_484442E01096R8_A11_EK1122R8_A11_EK1122_3ED7E2A81108R8_A12_EK1122R8_A12_EK1122_5B843125520R8_A13_EK1122R8_A13_EK1122_C6957FFB248R8_Endterminal_EL9010EL9010_D29C20850"}
@@ -11,39 +11,51 @@ TYPE R8_EK1100_9C7B3B67 EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "R8_A2 (EK1122)"}
 	{attribute addProperty PreviousPort "R8 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A2_EK1122 : R8_A2_EK1122_E74C4B62;
 	{attribute addProperty Name "R8_A3 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A2 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A3_EK1122 : R8_A3_EK1122_71CA94BA;
 	{attribute addProperty Name "R8_A5 (EL1809)"}
 	{attribute addProperty PreviousPort "R8_A3 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A5_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R8_A6 (EL2809)"}
 	{attribute addProperty PreviousPort "R8_A5 (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A6_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R8_A7 (EL2809)"}
 	{attribute addProperty PreviousPort "R8_A6 (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A7_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R8_A8 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A7 (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A8_EK1122 : R8_A8_EK1122_2533F93A;
 	{attribute addProperty Name "R8_A9 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A8 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A9_EK1122 : R8_A9_EK1122_3EDD8752;
 	{attribute addProperty Name "R8_A10 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A9 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A10_EK1122 : R8_A10_EK1122_484442E0;
 	{attribute addProperty Name "R8_A11 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A10 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A11_EK1122 : R8_A11_EK1122_3ED7E2A8;
 	{attribute addProperty Name "R8_A12 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A11 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A12_EK1122 : R8_A12_EK1122_5B843125;
 	{attribute addProperty Name "R8_A13 (EK1122)"}
 	{attribute addProperty PreviousPort "R8_A12 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_A13_EK1122 : R8_A13_EK1122_C6957FFB;
 	{attribute addProperty Name "R8_Endterminal (EL9010)"}
 	{attribute addProperty PreviousPort "R8_A13 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R8_Endterminal_EL9010 : EL9010_D29C2085;
 END_STRUCT
 END_TYPE

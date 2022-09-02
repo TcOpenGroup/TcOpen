@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="RC20_A2_EK1122_77321D67" Id="{f0348f0b-eb80-05a3-1f48-7fd1651c8cf7}">
+  <DUT Name="RC20_A2_EK1122_77321D67" Id="{48b2abdb-aa0b-0b74-0c4a-3140f42c6255}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
 {attribute addProperty Id "RC20_VI_AES_D_BC_ECAT_xAES_A3B0707168RC20_SAFETY_Flexi_Soft_EtherCAT_GatewayFlexi_Soft_EtherCAT_Gateway_DE394EDD5"}
@@ -11,9 +11,11 @@ TYPE RC20_A2_EK1122_77321D67 EXTENDS EK1122_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RC20_VI (AES-D-BC-ECAT)"}
 	{attribute addProperty PreviousPort "RC20_A2 (EK1122) : D"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_VI_AES_D_BC_ECAT_x : AES_A3B07071;
 	{attribute addProperty Name "RC20_SAFETY (Flexi Soft EtherCAT Gateway)"}
 	{attribute addProperty PreviousPort "RC20_A2 (EK1122) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_SAFETY_Flexi_Soft_EtherCAT_Gateway : Flexi_Soft_EtherCAT_Gateway_DE394EDD;
 END_STRUCT
 END_TYPE

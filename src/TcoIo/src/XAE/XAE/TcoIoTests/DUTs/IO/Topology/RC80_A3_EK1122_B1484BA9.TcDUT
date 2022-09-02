@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="RC80_A3_EK1122_B1484BA9" Id="{2a424d24-821f-0a16-13d8-a8a7e28d7d46}">
+  <DUT Name="RC80_A3_EK1122_B1484BA9" Id="{88c83b78-40f5-076e-1a53-a2d178f50264}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
 {attribute addProperty Id "RC80_EPP_EPP1322_0001RC80_EPP_EPP1322_0001_828B97C8120"}
@@ -11,6 +11,7 @@ TYPE RC80_A3_EK1122_B1484BA9 EXTENDS EK1122_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RC80_EPP (EPP1322-0001)"}
 	{attribute addProperty PreviousPort "RC80_A3 (EK1122) : D"}
+	{attribute addProperty SyncUnit "default"}
 	RC80_EPP_EPP1322_0001 : RC80_EPP_EPP1322_0001_828B97C8;
 END_STRUCT
 END_TYPE

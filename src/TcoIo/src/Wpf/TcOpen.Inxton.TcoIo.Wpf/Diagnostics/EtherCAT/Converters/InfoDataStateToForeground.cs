@@ -21,8 +21,6 @@ namespace TcoIo.Converters
                 ColorResorce.Source = new Uri("/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml", UriKind.RelativeOrAbsolute);
                 return new SolidColorBrush((Color)ColorResorce["OnBackgroundColor"]);
             }
-
-            //return new SolidColorBrush(Colors.Black);
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

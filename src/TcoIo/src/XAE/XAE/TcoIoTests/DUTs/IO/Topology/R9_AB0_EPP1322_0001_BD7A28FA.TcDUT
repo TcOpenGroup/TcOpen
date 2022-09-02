@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R9_AB0_EPP1322_0001_BD7A28FA" Id="{7b913bed-2395-0376-3589-3ba056bf542c}">
+  <DUT Name="R9_AB0_EPP1322_0001_BD7A28FA" Id="{f101bbec-6987-0857-2be1-7b93c374c68e}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EPP1322-0001-0017'}
 {attribute addProperty BoxType "EPP1322-0001-0017"}
 {attribute addProperty Id "R9_AB1_EPP1008_0001EPP1008_78E8D3DD12R9_AB2_EPP1008_0001EPP1008_78E8D3DD12R9_AB3_EPP1008_0001EPP1008_78E8D3DD12R9_AB4_EPP1008_0001EPP1008_78E8D3DD12"}
@@ -11,15 +11,19 @@ TYPE R9_AB0_EPP1322_0001_BD7A28FA EXTENDS EPP1322_1FC0878B :
 STRUCT
 	{attribute addProperty Name "R9_AB1 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R9_AB0 (EPP1322-0001) : D"}
+	{attribute addProperty SyncUnit "default"}
 	R9_AB1_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R9_AB2 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R9_AB1 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R9_AB2_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R9_AB3 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R9_AB2 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R9_AB3_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R9_AB4 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R9_AB3 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R9_AB4_EPP1008_0001 : EPP1008_78E8D3DD;
 END_STRUCT
 END_TYPE

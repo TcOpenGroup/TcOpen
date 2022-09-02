@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="Term_24_EK1122_39E7B5CB" Id="{9dfceff3-b8e9-0d84-2a17-7ea48bae2da5}">
+  <DUT Name="Term_24_EK1122_39E7B5CB" Id="{ad03700e-7702-0642-14b2-9dadec846608}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1122-0000-0018'}
 {attribute addProperty BoxType "EK1122-0000-0018"}
 {attribute addProperty Id "Term_25_EK1100Term_25_EK1100_08217EB440Term_28_EK1100Term_28_EK1100_415F4A7E195"}
@@ -11,9 +11,11 @@ TYPE Term_24_EK1122_39E7B5CB EXTENDS EK1122_1FC0878B :
 STRUCT
 	{attribute addProperty Name "Term 25 (EK1100)"}
 	{attribute addProperty PreviousPort "Term 24 (EK1122) : B"}
+	{attribute addProperty SyncUnit "default"}
 	Term_25_EK1100 : Term_25_EK1100_08217EB4;
 	{attribute addProperty Name "Term 28 (EK1100)"}
 	{attribute addProperty PreviousPort "Term 25 (EK1100) : C"}
+	{attribute addProperty SyncUnit "default"}
 	Term_28_EK1100 : Term_28_EK1100_415F4A7E;
 END_STRUCT
 END_TYPE

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R1_EK1100_4AD22B7B" Id="{751b33e6-02fe-032a-3fd7-36e93f8a7ffa}">
+  <DUT Name="R1_EK1100_4AD22B7B" Id="{87f26507-c799-03c3-33b0-72db432d9452}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "R1_A2_EC_EK1122R1_A2_EC_EK1122_F4361AFD87R1_A3_EC_EK1122R1_A3_EC_EK1122_981C12E1136R1_A4_EC_EK1122R1_A4_EC_EK1122_467C5A0B546R1_A5_DI_EL1809EL1809_32157CFD20R1_A6_DI_EL1809EL1809_32157CFD20R1_A7_DI_EL1809EL1809_32157CFD20R1_A8_DI_EL1809EL1809_32157CFD20R1_A9_DI_EL1809EL1809_32157CFD20R1_A10_DI_EL1809EL1809_32157CFD20R1_A11_DI_EL1809EL1809_32157CFD20R1_A12_DI_EL1809EL1809_32157CFD20R1_A13_DI_EL1809EL1809_32157CFD20R1_A14_DI_EL1809EL1809_32157CFD20R1_A15_DI_EL1809EL1809_32157CFD20R1_A16_DI_EL1809EL1809_32157CFD20R1_A17_DI_EL1809EL1809_32157CFD20R1_A18_DO_EL2809EL2809_2B6483BD19R1_A19_DO_EL2809EL2809_2B6483BD19R1_A20_DO_EL2809EL2809_2B6483BD19R1_A21_DO_EL2809EL2809_2B6483BD19R1_A22_DO_EL2809EL2809_2B6483BD19R1_A23_DO_EL2809EL2809_2B6483BD19R1_EndTerminal_EL9011EL9011_D65D3D320"}
@@ -11,72 +11,95 @@ TYPE R1_EK1100_4AD22B7B EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "R1_A2_EC (EK1122)"}
 	{attribute addProperty PreviousPort "R1 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A2_EC_EK1122 : R1_A2_EC_EK1122_F4361AFD;
 	{attribute addProperty Name "R1_A3_EC (EK1122)"}
 	{attribute addProperty PreviousPort "R1_A2_EC (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A3_EC_EK1122 : R1_A3_EC_EK1122_981C12E1;
 	{attribute addProperty Name "R1_A4_EC (EK1122)"}
 	{attribute addProperty PreviousPort "R1_A3_EC (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A4_EC_EK1122 : R1_A4_EC_EK1122_467C5A0B;
 	{attribute addProperty Name "R1_A5_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A4_EC (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A5_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A6_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A5_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A6_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A7_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A6_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A7_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A8_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A7_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A8_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A9_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A8_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A9_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A10_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A9_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A10_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A11_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A10_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A11_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A12_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A11_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A12_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A13_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A12_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A13_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A14_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A13_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A14_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A15_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A14_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A15_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A16_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A15_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A16_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A17_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R1_A16_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A17_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R1_A18_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R1_A17_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A18_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R1_A19_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R1_A18_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A19_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R1_A20_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R1_A19_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A20_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R1_A21_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R1_A20_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A21_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R1_A22_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R1_A21_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A22_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R1_A23_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R1_A22_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_A23_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R1_EndTerminal (EL9011)"}
 	{attribute addProperty PreviousPort "R1_A23_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R1_EndTerminal_EL9011 : EL9011_D65D3D32;
 END_STRUCT
 END_TYPE

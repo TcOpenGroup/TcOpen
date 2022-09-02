@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="RC20_2_EK1100_5EABB509" Id="{1f35a039-3bbf-0a09-3118-f95b2d782d41}">
+  <DUT Name="RC20_2_EK1100_5EABB509" Id="{8b1fee15-e3a4-03be-0742-7d7d2289f67f}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "RC20_B1_EL7041_1000EL7041_86DE63E743RC20_B2_EL7041_1000EL7041_86DE63E743RC20_C11_EL7041_1000EL7041_86DE63E743RC20_C12_EL7041_1000EL7041_86DE63E743RC20_C21_EL7041_1000EL7041_86DE63E743RC20_C22_EL7041_1000EL7041_86DE63E743RC20_2_EndTerminal_EL9010EL9010_D29C20850"}
@@ -11,24 +11,31 @@ TYPE RC20_2_EK1100_5EABB509 EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "RC20_B1 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RC20_2 (EK1100) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_B1_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RC20_B2 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RC20_B1 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_B2_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RC20_C11 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RC20_B2 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_C11_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RC20_C12 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RC20_C11 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_C12_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RC20_C21 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RC20_C12 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_C21_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RC20_C22 (EL7041-1000)"}
 	{attribute addProperty PreviousPort "RC20_C21 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "C20"}
 	RC20_C22_EL7041_1000 : EL7041_86DE63E7;
 	{attribute addProperty Name "RC20_2_EndTerminal (EL9010)"}
 	{attribute addProperty PreviousPort "RC20_C22 (EL7041-1000) : B"}
+	{attribute addProperty SyncUnit "default"}
 	RC20_2_EndTerminal_EL9010 : EL9010_D29C2085;
 END_STRUCT
 END_TYPE

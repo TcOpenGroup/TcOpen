@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="___Time_stamp__" xml:space="preserve">
+    <value>Zeitstempel</value>
+  </data>
+  <data name="___Stab_Time__" xml:space="preserve">
+    <value>Stab.Zeit</value>
+  </data>
+  <data name="___Stabilisation_time__The_inspection_will_pass_when_the_condition_is_met_continuously_for_the_duration_of_this_timespan___" xml:space="preserve">
+    <value>Stabilisierungszeit. Die Inspektion gilt als bestanden, wenn die Bedingung für die Dauer dieser Zeitspanne kontinuierlich erfüllt ist.</value>
+  </data>
+  <data name="___Timeout__" xml:space="preserve">
+    <value>Zeitüberschreitung</value>
+  </data>
+  <data name="___Timeout__Maximal_duration_of_the_inspection_within_which_the_condition_must_be_met___" xml:space="preserve">
+    <value>Zeitüberschreitung. Maximale Dauer der Inspektion, innerhalb derer die Bedingung erfüllt sein muss.</value>
+  </data>
+  <data name="___Result__" xml:space="preserve">
+    <value>Ergebnis</value>
+  </data>
+  <data name="___Result_of_the_inspection___" xml:space="preserve">
+    <value>Ergebnis der Inspektion.</value>
+  </data>
+  <data name="___Exclude__" xml:space="preserve">
+    <value>Auschluss</value>
+  </data>
+  <data name="___Inspection_is_excluded_from_the_evaluation__The_test_will_however_run_and_provide_detected_value___" xml:space="preserve">
+    <value>Die Inspektion ist von der Auswertung ausgeschlossen. Der Test wird jedoch durchgeführt und liefert einen ermittelten Wert.</value>
+  </data>
+  <data name="___Bypass__" xml:space="preserve">
+    <value>Bypass</value>
+  </data>
+  <data name="___Test_is_bypassed__no_eveluation_occurs___" xml:space="preserve">
+    <value>Der Test wird umgangen, es findet keine Auswertung statt.</value>
+  </data>
+  <data name="___Failure_description__" xml:space="preserve">
+    <value>Beschreibung Fehler</value>
+  </data>
+  <data name="___Brief_failure_desciption__" xml:space="preserve">
+    <value>Kurze Fehlerbeschreibung</value>
+  </data>
+  <data name="___Re_tries__" xml:space="preserve">
+    <value>Wiederholungsversuche</value>
+  </data>
+  <data name="___Inspection_will_repeat_given_number_of_times_when_inspection_fails___" xml:space="preserve">
+    <value>Anzahl von Wiederholungen, wenn die Inspektion fehlschlägt.</value>
+  </data>
+  <data name="___Attempts__" xml:space="preserve">
+    <value>Versuche</value>
+  </data>
+  <data name="___Re_tries_counter__count_the_number_of_times_the_inspection_run_on_this_inspector_instance___" xml:space="preserve">
+    <value>Zähler der Wiederholungsversuche, wie oft die Inspektion bei dieser Inspektionsinstanz durchgeführt wurde.</value>
+  </data>
+  <data name="___Code__" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="___Arbitrary_error_code_for_this_inspection__" xml:space="preserve">
+    <value>Willkürlicher Fehlercode für diese Prüfung</value>
+  </data>
+  <data name="___Required__" xml:space="preserve">
+    <value>Erforderlich</value>
+  </data>
+  <data name="___Required_status_for_inspection_to_pass__Can_contain_pattern_string_when__Star_notation_is_enabled___" xml:space="preserve">
+    <value>Erforderlicher Status für das Bestehen der Prüfung. Kann eine Musterzeichenkette enthalten, wenn "Sternchen-Notation" aktiviert ist.</value>
+  </data>
+  <data name="___Detected__" xml:space="preserve">
+    <value>Erkannt</value>
+  </data>
+  <data name="___Detected_data__" xml:space="preserve">
+    <value>Erkannte Daten</value>
+  </data>
+  <data name="___Min___" xml:space="preserve">
+    <value>Min.</value>
+  </data>
+  <data name="___Min__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Mindestwert für Bestehen der Prüfung.</value>
+  </data>
+  <data name="___Detected_value__" xml:space="preserve">
+    <value>Ermittelter Wert</value>
+  </data>
+  <data name="___Max___" xml:space="preserve">
+    <value>Max.</value>
+  </data>
+  <data name="___Max__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Maximalwert für Bestehen der Prüfung.</value>
+  </data>
+  <data name="___Sets_the_required_status_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Legt den erforderlichen Status für das Bestehen der Inspektion fest.</value>
+  </data>
+  <data name="___Displays_detected_status_of_this_check___" xml:space="preserve">
+    <value>Zeigt den Erkennungsstatus dieser Prüfung an.</value>
+  </data>
+</root>

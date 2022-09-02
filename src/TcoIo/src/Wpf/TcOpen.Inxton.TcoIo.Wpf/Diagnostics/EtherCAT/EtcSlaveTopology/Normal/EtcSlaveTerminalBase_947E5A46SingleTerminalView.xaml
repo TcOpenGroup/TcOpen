@@ -77,7 +77,10 @@
                         <TextBlock Text="Physics: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
                         <TextBlock Text="{Binding AttributePhysics}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
                     </WrapPanel>
-                    <!--<vortex:RenderableContentControl DataContext="{Binding }" />-->
+                    <WrapPanel >
+                        <TextBlock Text="Sync Unit: " Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                        <TextBlock Text="{Binding AttributeSyncUnit}" Foreground ="{Binding InfoData.State.Cyclic, Converter={conv:InfoDataStateToForeground}}"/>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
         </ScrollViewer>

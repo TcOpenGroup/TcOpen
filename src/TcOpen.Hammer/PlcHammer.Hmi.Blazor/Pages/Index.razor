@@ -1,67 +1,20 @@
 ﻿@page "/"
 @inherits RenderableComponentBase
+@inject NavigationManager _navigationManager;
 
-<h1>
-    TcOpen.Hammer
-</h1>
-
-
-
-
-
-<div class="d-flex flex-row">
-    @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
-    {
-
-        <div class="p-2">
-            <RenderableContentControl Presentation="Base"
-                                      Context="@task"
-                                      Class="p-2"/>
-        </div>
-    }
+<div class="p-2 mb-4 bg-light rounded-3 border">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">TcOpen.Hammer Blazor app</h1>
+        <p class="col-md-8 fs-4">Example application to show TcOpen and Blazor in use.</p>
+        <button class="btn btn-primary btn-lg" @onclick="() => OnButtonClick()">Go to station001</button>
+    </div>
 </div>
 
-
-@if (TcoTasksExtensions.TaskStateToVisibility(Station._groundModeTask))
+@code
 {
-    <RenderableContentControl Context="Station._groundMode" Presentation="Base" />
-}
-@if (TcoTasksExtensions.TaskStateToVisibility(Station._automatModeTask))
-{
-    <RenderableContentControl Context="Station._automatMode" Presentation="Base" />
-}
-
-
-
-<RenderableContentControl Presentation="Display"
-                          Context="@Station._groundMode._currentStep.Description" />
-
-
-<RenderableContentControl Presentation="Display"
-                          Context="@Station._groundMode._currentStep.Description" />
-
-<RenderableContentControl Presentation="Display"
-                          Context="@Station._automatMode._currentStep.Description" />
-
-<RenderableContentControl Presentation="Display"
-                          Context="@Station._processTraceabilty._data" />
-
-
-
-
-
-
-
-
-@code{
-
-    public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
-    public IVortexObject TechMain => Entry.PlcHammer.TECH_MAIN;
-
-    protected override void OnInitialized()
+    string path = "/custation001";
+    private void OnButtonClick()
     {
-        UpdateValuesOnChange(Station._groundModeTask);
-        UpdateValuesOnChange(Station._automatModeTask);
+        _navigationManager.NavigateTo("/custation001");
     }
-
 }

@@ -25,15 +25,16 @@ namespace TcoData
         string RecordIdentifier { get; set; }
         void SetDefaultButtonState();
         void StartCreatingNew();
-        void CreateNew();
+        string CreateNew();
         void StartEdit();
         void Update();
         void CancelEdit();
         void Delete();
         void StartCreatingRecordCopy();
-        void CreateCopyOfExisting();
+        string CreateCopyOfExisting();
         void SendToPlc();
         void LoadFromPlc();
+        void FillObservableRecords();
 
     }
 

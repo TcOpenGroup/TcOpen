@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R10_AB01_EPP1332_0001_D97A7767" Id="{93f9f5e4-b2f3-0331-2b99-7cb2ff92b7e0}">
+  <DUT Name="R10_AB01_EPP1332_0001_D97A7767" Id="{ec704a14-9716-064a-2921-f9ea94e4a2b9}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EPP1332-0001-0017'}
 {attribute addProperty BoxType "EPP1332-0001-0017"}
 {attribute addProperty Id "R10_ABT8_EPP1008_0001EPP1008_78E8D3DD12R10_ABT9_EPP1008_0001EPP1008_78E8D3DD12R10_ABT10_EPP1008_0001EPP1008_78E8D3DD12R10_ABT11_EPP1008_0001EPP1008_78E8D3DD12R10_ABT12_EPP1008_0001EPP1008_78E8D3DD12"}
@@ -11,18 +11,23 @@ TYPE R10_AB01_EPP1332_0001_D97A7767 EXTENDS EPP1332_1FC0878B :
 STRUCT
 	{attribute addProperty Name "R10-ABT8 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R10-AB01 (EPP1332-0001) : D"}
+	{attribute addProperty SyncUnit "R10"}
 	R10_ABT8_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R10-ABT9 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R10-ABT8 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "R10"}
 	R10_ABT9_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R10-ABT10 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R10-ABT9 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "R10"}
 	R10_ABT10_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R10-ABT11 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R10-ABT10 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "R10"}
 	R10_ABT11_EPP1008_0001 : EPP1008_78E8D3DD;
 	{attribute addProperty Name "R10-ABT12 (EPP1008-0001)"}
 	{attribute addProperty PreviousPort "R10-ABT11 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "R10"}
 	R10_ABT12_EPP1008_0001 : EPP1008_78E8D3DD;
 END_STRUCT
 END_TYPE

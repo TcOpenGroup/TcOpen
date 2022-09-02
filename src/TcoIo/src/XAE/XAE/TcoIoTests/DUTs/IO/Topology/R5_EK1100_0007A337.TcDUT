@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
-  <DUT Name="R5_EK1100_0007A337" Id="{1a6ba621-d9bc-01ab-1b8e-64c03e129ad3}">
+  <DUT Name="R5_EK1100_0007A337" Id="{bc88b9e8-75b0-057a-02a4-984fa84dcbd0}">
     <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
 {attribute addProperty BoxType "EK1100-0000-0018"}
 {attribute addProperty Id "R5_A2_EC_EK1122R5_A2_EC_EK1122_D562526C68R5_A3_DI_EL1809EL1809_32157CFD20R5_A4_DI_EL1809EL1809_32157CFD20R5_A5_DO_EL2809EL2809_2B6483BD19R5_A6_DO_EL2809EL2809_2B6483BD19R5_EndTerminal_EL9011EL9011_D65D3D320"}
@@ -11,21 +11,27 @@ TYPE R5_EK1100_0007A337 EXTENDS EK1100_1FC0878B :
 STRUCT
 	{attribute addProperty Name "R5_A2_EC (EK1122)"}
 	{attribute addProperty PreviousPort "R5 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R5_A2_EC_EK1122 : R5_A2_EC_EK1122_D562526C;
 	{attribute addProperty Name "R5_A3_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R5_A2_EC (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
 	R5_A3_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R5_A4_DI (EL1809)"}
 	{attribute addProperty PreviousPort "R5_A3_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R5_A4_DI_EL1809 : EL1809_32157CFD;
 	{attribute addProperty Name "R5_A5_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R5_A4_DI (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R5_A5_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R5_A6_DO (EL2809)"}
 	{attribute addProperty PreviousPort "R5_A5_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R5_A6_DO_EL2809 : EL2809_2B6483BD;
 	{attribute addProperty Name "R5_EndTerminal (EL9011)"}
 	{attribute addProperty PreviousPort "R5_A6_DO (EL2809) : B"}
+	{attribute addProperty SyncUnit "default"}
 	R5_EndTerminal_EL9011 : EL9011_D65D3D32;
 END_STRUCT
 END_TYPE
