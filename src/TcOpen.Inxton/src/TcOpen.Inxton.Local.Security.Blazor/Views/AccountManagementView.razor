@@ -1,0 +1,88 @@
+﻿@page "/Identity/Account/Manage"
+@inject UserManager<User> _userManager
+@inject BlazorAlertManager _alertManager
+
+<AuthorizeView>
+    <Authorized>
+        <div class="card">
+            <h4 class="card-header">Account Manage</h4>
+            <div class="card-body">
+                <EditForm Model="@_model" OnValidSubmit="OnValidUpdate" Context="accountManagementContext">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label>Username</label>
+                        <InputText @bind-Value="_model.Username" type="text" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <InputText @bind-Value="_model.Group" type="text" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <InputText @bind-Value="_model.Email" type="email" class="form-control" />
+                        <ValidationMessage For="@(() => _model.Email)" />
+                    </div>
+                    @if (_model.CanUserChangePassword)
+                    {
+                        <div class="form-group">
+                            <label>Password</label>
+                            <InputText @bind-Value="_model.Password" type="password" class="form-control" />
+                            <ValidationMessage For="@(() => _model.Password)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <InputText @bind-Value="_model.ConfirmPassword" type="password" class="form-control" />
+                            <ValidationMessage For="@(() => _model.ConfirmPassword)" />
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary m-2">Update</button>
+                </EditForm>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <p>Sorry, you are not log in. Please log in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private RegisterUserModel _model { get; set; }
+
+    private async void OnValidUpdate()
+    {
+        User _user = await _userManager.FindByNameAsync(_model.Username);
+
+        if (_model.CanUserChangePassword && _model.Password != "password")
+        {
+            _user.PasswordHash = SecurityManager.Manager.Service.CalculateHash(_model.Password, _model.Username);
+        }
+        _user.Email = _model.Email;
+        var result = await _userManager.UpdateAsync(_user);
+        if (result.Succeeded)
+        {
+            _alertManager.addAlert("success", "User succesfully updated!");
+            TcoAppDomain.Current.Logger.Information($"User '{_user.UserName}' has changed.{{payload}}", new { UserName = _user.UserName, Email = _user.Email, CanChangePassword = _user.CanUserChangePassword, Group = string.Join(",", _user.Roles) });
+        }
+        else
+        {
+            _alertManager.addAlert("warning", "User was not updated!");
+        }
+    }
+
+    protected override async void OnInitialized()
+    {
+        _model = new RegisterUserModel();
+
+        User _user = await _userManager.FindByNameAsync(UserAccessor.Instance.Identity.Name);
+
+        _model.Username = _user.UserName;
+        if(_user.Roles.Length > 0)
+        {
+            _model.Group = _user.Roles[0];
+        }
+        _model.Email = _user.Email;
+        _model.CanUserChangePassword = _user.CanUserChangePassword;
+        _model.Password = "password";
+        _model.ConfirmPassword = "password";
+    }
+}

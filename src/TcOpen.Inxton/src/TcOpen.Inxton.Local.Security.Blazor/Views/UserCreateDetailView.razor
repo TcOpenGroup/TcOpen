@@ -1,0 +1,87 @@
+﻿@page "/Identity/Account/Register"
+@inject BlazorRoleGroupManager _roleGroupManager
+@inject BlazorAlertManager _alertManager
+@inject UserManager<User> _userManager
+@inject NavigationManager _navigationManager
+
+<AuthorizeView Roles="Administrator">
+    <Authorized Context="Auth">
+        <div class="card">
+            <h4 class="card-header">Create new user</h4>
+            <div class="card-body">
+                <EditForm Model="@_model" OnValidSubmit="OnValidSubmit">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label>Username</label>
+                        <InputText @bind-Value="_model.Username" class="form-control" />
+                        <ValidationMessage For="@(() => _model.Username)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <InputText @bind-Value="_model.Password" type="password" class="form-control" />
+                        <ValidationMessage For="@(() => _model.Password)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <InputText @bind-Value="_model.ConfirmPassword" type="password" class="form-control" />
+                        <ValidationMessage For="@(() => _model.ConfirmPassword)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <InputText @bind-Value="_model.Email" type="email" class="form-control" />
+                        <ValidationMessage For="@(() => _model.Email)" />
+                    </div>
+                    <div class="form-check form-switch">
+                        <InputCheckbox @bind-Value="_model.CanUserChangePassword" class="form-check-input" id="checkBoxCanUserChangePassword" />
+                        <label class="form-check-label" for="checkBoxCanUserChangePassword">CanUserChangePassword</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <select class="form-select" aria-label="Default select example" @bind="@_model.Group">
+                            <option selected>Choose group</option>
+                            @foreach (var group in _roleGroupManager.GetAllGroup())
+                            {
+                                <option value="@group.Name">@group.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="test">Create</button>
+                </EditForm>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <p>Sorry, you are not authorized to create new users. Please log in as administrator.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private RegisterUserModel _model { get; set; }
+    private User _user { get; set; }
+
+    private async void OnValidSubmit()
+    {
+        _user = new User(_model.Username, _model.Email, new string[1] { _model.Group }, _model.CanUserChangePassword, null);
+
+        _user.SecurityStamp = Guid.NewGuid().ToString();
+        _user.PasswordHash = SecurityManager.Manager.Service.CalculateHash(_model.Password, _model.Username);
+
+        var result = await _userManager.CreateAsync(_user);
+
+        if (result.Succeeded)
+        {
+            _navigationManager.NavigateTo("security");
+            _alertManager.addAlert("success", "User successfully created!");
+            TcoAppDomain.Current.Logger.Information($"New user '{_model.Username}' created. {{@sender}}", new { UserName = _model.Username, Group = _model.Group });
+        }
+        else
+        {
+            _alertManager.addAlert("warning", "User was not created!");
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        _model = new RegisterUserModel();
+    }
+}

@@ -143,11 +143,11 @@
         /// <param name="limit">Limit number of records.</param>
         /// <returns></returns>        
         [Obsolete("Use 'Queryable' instead")]
-        public IEnumerable<T> GetRecords(string identifier, int skip = 0, int limit = 1000)
+        public IEnumerable<T> GetRecords(string identifier, int skip = 0, int limit = 1000, eSearchMode searchMode = eSearchMode.Exact)
         {
             var filetered = new List<T>();
 
-            if (identifier == "*")
+            if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
             {
                 foreach (var item in Directory.EnumerateFiles(this.Location))
                 {
@@ -174,7 +174,7 @@
         /// <param name="id">Filter string</param>
         /// <returns></returns>
         [Obsolete("Use 'Queryable' instead")]
-        public long FilteredCount(string id)
+        public long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact)
         {
             if (id == "*")
             {

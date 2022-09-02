@@ -37,7 +37,8 @@
                                         Content="{Binding ComponentHeader, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"
-                                        Margin="5"/>
+                                        Margin="5"
+                                        MinHeight="30"/>
                         <!--<tcoCore:HealthIndicatorView Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding MessageHandler}" />-->
                     </Grid>
                 </Expander.Header>

@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.9-alpha.699" />
+    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="1.15.10-alpha.735" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
-  </ItemGroup>
-
+  </ItemGroup> 
+  
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcOpen.Hammer\PlcHammerConnector\PlcHammerConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcoCore\src\TcOpen.Inxton.TcoCore.Blazor\TcOpen.Inxton.TcoCore.Blazor.csproj" />
+    <ProjectReference Include="..\TcoElementsConnector\TcoElementsConnector.csproj" />
   </ItemGroup>
-
 </Project>

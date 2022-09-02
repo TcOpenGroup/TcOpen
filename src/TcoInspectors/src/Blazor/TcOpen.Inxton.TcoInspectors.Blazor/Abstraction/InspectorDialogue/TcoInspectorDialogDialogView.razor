@@ -1,0 +1,50 @@
+﻿@namespace TcoInspectors
+@using TcoCore
+@using TcOpen.Inxton.Dialogs
+@inherits RenderableViewModelComponentBase<TcoInspectorDialogDialogViewModel>
+@inject JsInteropDialog jsInterop
+<div class="modal fade" id="@DialogId" tabindex="-1" aria-labelledby="@_labelId" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="@_labelId">Inspector dialogue</h4>
+            </div>
+            <div class="modal-body">
+                <h5>Inspection failed, you will need to decide what's next...</h5>
+                <h5>@ViewModel.Description</h5>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Expand
+                </button>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        @foreach (var inspector in ViewModel.Inspectors)
+                        {
+                            <RenderableContentControl Context="inspector" Presentation="Display" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" disabled="@ViewModel.RetryDisabled" @onclick=" async () => { ViewModel.Retry(); await jsInterop.SendCloseAllDialogs();  }">Retry</button>
+
+                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Terminate(); await jsInterop.SendCloseAllDialogs(); }">Terminate</button>
+
+                <button type="button" class="btn btn-secondary"  @onclick=" async () => { ViewModel.Override(); await jsInterop.SendCloseAllDialogs(); }">Override</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public string DialogId { get; set; }
+    private string _labelId;
+    protected override void OnInitialized()
+    {
+        var id = ((IsDialog)ViewModel.Dialog).DialogId;
+        _labelId = id + "Label";
+        DialogId = id;
+    }
+}

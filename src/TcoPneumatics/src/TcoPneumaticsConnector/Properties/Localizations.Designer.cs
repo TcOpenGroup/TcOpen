@@ -98,11 +98,11 @@ namespace TcoPneumaticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move Home 11.
+        ///   Looks up a localized string similar to MOVE HOME.
         /// </summary>
-        public static string ___Move_Home_11__ {
+        public static string ___MOVE_HOME__ {
             get {
-                return ResourceManager.GetString("___Move_Home_11__", resourceCulture);
+                return ResourceManager.GetString("___MOVE_HOME__", resourceCulture);
             }
         }
         
@@ -125,11 +125,11 @@ namespace TcoPneumaticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move to Work.
+        ///   Looks up a localized string similar to MOVE TO WORK.
         /// </summary>
-        public static string ___Move_to_Work__ {
+        public static string ___MOVE_TO_WORK__ {
             get {
-                return ResourceManager.GetString("___Move_to_Work__", resourceCulture);
+                return ResourceManager.GetString("___MOVE_TO_WORK__", resourceCulture);
             }
         }
         
@@ -152,21 +152,20 @@ namespace TcoPneumaticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to None of the proximity sensors is active. Check the compressed air pressure and supply!.
+        ///   Looks up a localized string similar to Movement aborted due to.
         /// </summary>
-        public static string ___None_of_the_proximity_sensors_is_active__Check_the_compressed_air_pressure_and_supply___ {
+        public static string ___Movement_aborted_due_to__ {
             get {
-                return ResourceManager.GetString("___None_of_the_proximity_sensors_is_active__Check_the_compressed_air_pressure_and" +
-                        "_supply___", resourceCulture);
+                return ResourceManager.GetString("___Movement_aborted_due_to__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop.
+        ///   Looks up a localized string similar to STOP.
         /// </summary>
-        public static string ___Stop__ {
+        public static string ___STOP__ {
             get {
-                return ResourceManager.GetString("___Stop__", resourceCulture);
+                return ResourceManager.GetString("___STOP__", resourceCulture);
             }
         }
         

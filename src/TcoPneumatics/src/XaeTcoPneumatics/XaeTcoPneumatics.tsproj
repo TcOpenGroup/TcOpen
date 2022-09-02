@@ -2,7 +2,7 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
+			<Name GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
 			<BitSize>64</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
 			<ArrayInfo>
@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{2E6C2CE4-12CE-4A6F-A95F-B4C5E04FE0E4}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="2" NonWinCpus="1">
 				<Cpu CpuId="1"/>
@@ -46,14 +46,14 @@
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>IO.A1</Name>
-							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>IO.A2</Name>
-							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<Contexts>

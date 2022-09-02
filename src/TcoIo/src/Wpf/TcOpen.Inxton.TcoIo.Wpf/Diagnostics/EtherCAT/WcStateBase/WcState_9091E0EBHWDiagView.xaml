@@ -1,4 +1,5 @@
 <UserControl
+    x:Name="userControl"
     x:Class="TcoIo.WcState_9091E0EBHWDiagView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -22,9 +23,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"></TextBlock>
-                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding WcState}" PresentationType="DisplaySlim" />
-                <vortex:RenderableContentControl Grid.Column="2" DataContext="{Binding InputToggle}" PresentationType="DisplaySlim" />
+                <TextBlock Grid.Column="0" Margin="0,5,5,0" Text="{Binding AttributeName}"/>
+                <vortex:RenderableContentControl Grid.Column="1" DataContext="{Binding WcState}" PresentationType="DisplaySlim"/>
+                <vortex:RenderableContentControl Grid.Column="2" DataContext="{Binding InputToggle}" PresentationType="DisplaySlim"/>
             </Grid>
         </Grid>
     </StackPanel>

@@ -109,11 +109,11 @@ namespace TcOpen.Inxton.Data.Json
             get { return Directory.EnumerateFiles(Location).Count(); }
         }
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip)
+        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
         {
             var filetered = new List<T>();
 
-            if (identifier == "*")
+            if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
             {
                 foreach (var item in Directory.EnumerateFiles(this.Location))
                 {
@@ -122,8 +122,22 @@ namespace TcOpen.Inxton.Data.Json
             }
             else
             {
-                var files = Directory.EnumerateFiles(this.Location).Where(p => p.Contains(identifier));
+                IEnumerable<string> files;
 
+                switch (searchMode)
+                {                   
+                    case eSearchMode.StartsWith:
+                        files = Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.StartsWith(identifier));
+                        break;
+                    case eSearchMode.Contains:
+                        files = Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.Contains(identifier));
+                        break;
+                    case eSearchMode.Exact:
+                    default:
+                        files = Directory.EnumerateFiles(this.Location).Select(p => new FileInfo(p)).Where(p => p.Name == identifier).Select(p => p.FullName);
+                        break;
+                }
+                
                 foreach (var item in files)
                 {
                     filetered.Add(this.Load(new FileInfo(item).Name, typeof(T)));
@@ -134,7 +148,7 @@ namespace TcOpen.Inxton.Data.Json
 
         }
 
-        protected override long FilteredCountNvi(string id)
+        protected override long FilteredCountNvi(string id, eSearchMode searchMode)
         {
             if (id == "*")
             {
@@ -142,7 +156,16 @@ namespace TcOpen.Inxton.Data.Json
             }
             else
             {
-                return Directory.EnumerateFiles(this.Location).Where(p => p.Contains(id)).Count();
+                switch (searchMode)
+                {
+                    case eSearchMode.StartsWith:
+                        return Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.StartsWith(id)).Count();
+                    case eSearchMode.Contains:
+                        return Directory.EnumerateFiles(this.Location).Where(p => new FileInfo(p).Name.Contains(id)).Count();
+                    case eSearchMode.Exact:
+                    default:
+                        return Directory.EnumerateFiles(this.Location).Select(p => new FileInfo(p)).Where(p => p.Name == id).Select(p => p.FullName).Count();
+                }
             }
         }
 

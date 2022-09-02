@@ -24,5 +24,12 @@ METHOD PROTECTED  Main]]></Declaration>
 _station001();]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="AppContext">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="AppContext.Main">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

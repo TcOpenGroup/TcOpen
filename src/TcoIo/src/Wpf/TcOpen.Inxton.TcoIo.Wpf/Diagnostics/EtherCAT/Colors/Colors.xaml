@@ -1,0 +1,91 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+
+    <Color x:Key="InxtonLimeColor">#c4d93f</Color>
+    <Color x:Key="InxtonGrayColor">#5f6371</Color>
+    <Color x:Key="InxtonGrayLightColor">#C2C5CD</Color>
+    <Color x:Key="InxtonBlueColor">#DD0A319E</Color>
+    <Color x:Key="InxtonOrangeColor">#ff4b27</Color>
+    <SolidColorBrush x:Key="InxtonLime" Color="{StaticResource InxtonLimeColor}" />
+    <SolidColorBrush x:Key="InxtonGray" Color="{StaticResource InxtonGrayColor}" />
+    <SolidColorBrush x:Key="InxtonGrayLight" Color="{StaticResource InxtonGrayLightColor}" />
+    <SolidColorBrush x:Key="InxtonBlue" Color="{StaticResource InxtonBlueColor}" />
+    <SolidColorBrush x:Key="InxtonOrange" Color="{StaticResource InxtonOrangeColor}" />
+
+    <Color x:Key="PrimaryColor">#c4d93f</Color>
+    <Color x:Key="OnPrimaryColor">White</Color>
+    <SolidColorBrush x:Key="Primary" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="OnPrimary" Color="{StaticResource OnPrimaryColor}" />
+
+    <Color x:Key="SecondaryColor">#5f6371</Color>
+    <Color x:Key="OnSecondaryColor">#ffffff</Color>
+    <SolidColorBrush x:Key="Secondary" Color="{StaticResource SecondaryColor}" />
+    <SolidColorBrush x:Key="OnSecondary" Color="{StaticResource OnSecondaryColor}" />
+
+    <Color x:Key="BackgroundColor">White</Color>
+    <Color x:Key="OnBackgroundColor">Black</Color>
+    <SolidColorBrush x:Key="Background" Color="{StaticResource BackgroundColor}" />
+    <SolidColorBrush x:Key="OnBackground" Color="{StaticResource OnBackgroundColor}" />
+
+    <Color x:Key="SurfaceColor">#f1f1f1</Color>
+    <Color x:Key="OnSurfaceColor">Black</Color>
+    <SolidColorBrush x:Key="Surface" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="OnSurface" Color="{StaticResource OnSurfaceColor}" />
+
+    <Color x:Key="ErrorColor">#ff4b27</Color>
+    <Color x:Key="OnErrorColor">#ffffff</Color>
+    <SolidColorBrush x:Key="Error" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="OnError" Color="{StaticResource OnPrimaryColor}" />
+
+    <Color x:Key="ShadowColor">Black</Color>
+
+    <Color x:Key="AccentColor">#ff4b27</Color>
+    <Color x:Key="OnAccentColor">#ffffff</Color>
+    <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="OnAccent" Color="{StaticResource OnAccentColor}" />
+
+    <Color x:Key="AlertColor">#ca2f14</Color>
+    <Color x:Key="OnAlertColor">#FFFF00</Color>
+    <SolidColorBrush x:Key="Alert" Color="{StaticResource AlertColor}" />
+    <SolidColorBrush x:Key="OnAlert" Color="{StaticResource OnAlertColor}" />
+
+    <Color x:Key="WarningColor">#ff4b27</Color>
+    <Color x:Key="OnWarningColor">White</Color>
+    <SolidColorBrush x:Key="Warning" Color="{StaticResource WarningColor}" />
+    <SolidColorBrush x:Key="OnWarning" Color="{StaticResource OnWarningColor}" />
+
+    <Color x:Key="SignalOffColor">#5f6371</Color>
+    <Color x:Key="OnSignalOffColor">White</Color>
+    <SolidColorBrush x:Key="SignalOff" Color="{StaticResource SignalOffColor}" />
+    <SolidColorBrush x:Key="OnSignalOff" Color="{StaticResource OnSignalOffColor}" />
+
+    <Color x:Key="SignalOnColor">#c4d93f</Color>
+    <Color x:Key="OnSignalOnColor">White</Color>
+    <SolidColorBrush x:Key="SignalOn" Color="{StaticResource SignalOnColor}" />
+    <SolidColorBrush x:Key="OnSignalOn" Color="{StaticResource OnSignalOnColor}" />
+
+    <Color x:Key="IntermediateColor">SteelBlue</Color>
+    <Color x:Key="OnIntermediateColor">White</Color>
+    <LinearGradientBrush x:Key="Intermediate">
+        <GradientStop Offset=".5" Color="{StaticResource IntermediateColor}" />
+        <GradientStop Offset=".0" Color="{DynamicResource SurfaceColor}" />
+        <GradientStop Offset="1" Color="{DynamicResource SurfaceColor}" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="OnIntermediate" Color="{StaticResource OnIntermediateColor}" />
+
+    <Color x:Key="LightColor">#ffffff</Color>
+    <Color x:Key="DarkColor">#000000</Color>
+
+    <SolidColorBrush
+        x:Key="SecondaryWithOpacity"
+        Opacity=".3"
+        Color="{StaticResource SecondaryColor}" />
+
+    <!--<SolidColorBrush x:Key="Secondary" Color="{StaticResource AccentColor}" />-->
+    <System:Double x:Key="PrimaryTextSize">13</System:Double>
+    <System:Double x:Key="SecondaryTextSize">14.5</System:Double>
+</ResourceDictionary>

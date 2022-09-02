@@ -9,5 +9,26 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoIo.Wpf\TcOpen.Inxton.TcoIo.Wpf.csproj" />
     <ProjectReference Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj" />
+  </ItemGroup> 
+  <ItemGroup>
+    <Compile Update="Simulation\SetAllToINITstate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserViews\UserViewDevice3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup> 
+  <ItemGroup>
+    <Page Update="Simulation\SetAllToINITstate.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Simulation\SetAllToMissingConnection.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UserViews\UserViewDevice3.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

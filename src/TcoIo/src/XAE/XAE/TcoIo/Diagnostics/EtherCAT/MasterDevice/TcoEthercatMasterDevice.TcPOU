@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoEthercatMasterDevice" Id="{2c5733bf-b0c9-0df1-398a-03fa7f389f8e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoEthercatMasterDevice EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoEthercatMasterDevice
 VAR_INPUT
     Inputs   		:	Inputs_A65FACA4;
     InfoData		:	InfoData_84133AC9;
-	SyncUnits		:	POINTER TO SyncUnitTask_2D604ED5;
+	SyncUnits		:	POINTER TO SyncUnitTask_AB2F5079;
 	SyncUnitsSize	:	UINT;
 END_VAR
 
@@ -78,7 +78,7 @@ VAR
     _i : UINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_NetId := Tc2_System.F_CreateAmsNetId(InfoData.AmsNetId);
+        <ST><![CDATA[_NetId := Tc2_System.F_CreateAmsNetId(InfoData.AmsNetId.netId);
 
 _TcoEthercatDiagnosticsTask(inNetId := _NetId, outDiagnosticsAvailable => _DiagnosticsAvailable);
 
@@ -230,13 +230,13 @@ SyncUnitHasSomeIssue :=	_state.AtLeastOneSlaveInInitState OR
     <Method Name="UpdateSyncUnitsStatus" Id="{b79c3bb4-6046-0a3d-3133-c7754b8cddb5}">
       <Declaration><![CDATA[METHOD UpdateSyncUnitsStatus
 VAR_INPUT
-	SyncUnits			:	POINTER TO SyncUnitTask_2D604ED5;
+	SyncUnits			:	POINTER TO SyncUnitTask_AB2F5079;
 	SyncUnitsSize		:	UINT;
 END_VAR
 VAR
     _i					:	UINT;
-	_pSyncUnit			:	POINTER TO SyncUnitTask_2D604ED5;
-	_SyncUnit			:	SyncUnitTask_2D604ED5;
+	_pSyncUnit			:	POINTER TO SyncUnitTask_AB2F5079;
+	_SyncUnit			:	SyncUnitTask_AB2F5079;
 	_SyncUnitState		:	UINT;
 END_VAR
 ]]></Declaration>
@@ -246,9 +246,9 @@ _allDataValid := TRUE;
 _someDataInvalid := FALSE;
 
 IF SyncUnits<>0 THEN
-	_numberOfSyncUnits := SyncUnitsSize / SIZEOF(SyncUnitTask_2D604ED5);
+	_numberOfSyncUnits := SyncUnitsSize / SIZEOF(SyncUnitTask_AB2F5079);
 	FOR _i := 0 TO _numberOfSyncUnits - 1 DO
-		_pSyncUnit					:=	SyncUnits + _i * SIZEOF(SyncUnitTask_2D604ED5);
+		_pSyncUnit					:=	SyncUnits + _i * SIZEOF(SyncUnitTask_AB2F5079);
 		_SyncUnit					:=	_pSyncUnit^;	
 		_someSyncUnitHasSomeIssue 	:=	_someSyncUnitHasSomeIssue OR SyncUnitHasSomeIssue(_SyncUnit.InfoData.State);
 		_allDataValid				:=	_allDataValid AND NOT _SyncUnit.WcState.WcState;

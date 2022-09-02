@@ -1406,7 +1406,7 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
+			<Name GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
 			<BitSize>64</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
 			<ArrayInfo>
@@ -1415,9 +1415,9 @@ External Setpoint Generation:
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
-			<Settings MaxCpus="2" NonWinCpus="1">
+			<Settings MaxCpus="4">
 				<Cpu CpuId="1"/>
 			</Settings>
 			<Tasks>
@@ -1612,11 +1612,11 @@ External Setpoint Generation:
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>IO.iA1</Name>
-							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 						<Var>
 							<Name>IO.iA2</Name>
-							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 						<Var>
 							<Name>IO.Axis1.NcToPlc</Name>
@@ -1627,11 +1627,11 @@ External Setpoint Generation:
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>IO.qA1</Name>
-							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 						<Var>
 							<Name>IO.qA2</Name>
-							<Type GUID="{B06D26C8-71DC-62D0-9A93-9E8C7ADB9810}">ARRAY [0..7] OF BOOL</Type>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 						<Var>
 							<Name>IO.Axis1.PlcToNc</Name>

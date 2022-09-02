@@ -246,7 +246,7 @@ namespace TcOpen.Inxton.Data
         protected abstract long CountNvi { get; }
 
         /// <summary>
-        /// Checks that the record with given identifier exists in the repostory.
+        /// Checks that the record with given identifier exists in the repository.
         /// </summary>
         /// <param name="identifier">Entity id to check for existence.</param>
         protected abstract bool ExistsNvi(string identifier);
@@ -258,14 +258,14 @@ namespace TcOpen.Inxton.Data
         /// <param name="limit">Limit of documents to retrieve.</param>
         /// <param name="skip">Number of documents to be skipped.</param>
         /// <returns></returns>
-        protected abstract IEnumerable<T> GetRecordsNvi(string identifierContent, int limit, int skip);
+        protected abstract IEnumerable<T> GetRecordsNvi(string identifierContent, int limit, int skip, eSearchMode searchMode);
 
         /// <summary>
         /// Counts records that contain given string in the id. (Concrete implementation of given repository type)
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of the records/documents.</param>
         /// <returns></returns>
-        protected abstract long FilteredCountNvi(string identifierContent);
+        protected abstract long FilteredCountNvi(string identifierContent, eSearchMode searchMode);
 
         /// <summary>
         /// Gets the number of records/documents in the repository.
@@ -277,7 +277,7 @@ namespace TcOpen.Inxton.Data
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of the records/documents.</param>
         /// <returns></returns>
-        public long FilteredCount(string identifierContent) => FilteredCountNvi(identifierContent);
+        public long FilteredCount(string identifierContent, eSearchMode searchMode) => FilteredCountNvi(identifierContent, searchMode);
 
 
         private volatile object mutex = new object();
@@ -416,11 +416,11 @@ namespace TcOpen.Inxton.Data
         /// <summary>
         /// Gets <see cref="IEnumerable{T}"/> of repository entries that match the identifier.
         /// </summary>
-        public IEnumerable<T> GetRecords(string identifier, int limit = 10, int skip = 0)
+        public IEnumerable<T> GetRecords(string identifier, int limit = 10, int skip = 0, eSearchMode searchMode = eSearchMode.Exact)
         {
             try
             {
-                return GetRecordsNvi(identifier, limit, skip);
+                return GetRecordsNvi(identifier, limit, skip, searchMode);
             }
             catch (Exception e)
             {

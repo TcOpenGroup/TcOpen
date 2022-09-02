@@ -1,0 +1,93 @@
+﻿@page "/custation001"
+@inherits RenderableComponentBase
+@inject NavigationManager _navigationManager
+<h1>Station001</h1>
+
+
+<div name="TabControl" class="w-100">
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <button type="button" class="nav-link @((selected == 0) ? "active" : "")" @onclick="() => selected = 0"><b>Tasks</b></button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link @((selected == 1) ? "active" : "")" @onclick="() => selected = 1"><b>Components</b></button>
+        </li>
+    </ul>
+    <div class="content">
+
+
+        @switch (@selected)
+        {
+            case 0:
+
+                <h2>Data selector</h2>
+                <TcoData.TcoDataExchangeSimpleSelectorView Context="@Station._processRecipies"></TcoData.TcoDataExchangeSimpleSelectorView>
+                <h2>Tasks</h2>
+                <div class="d-flex flex-row">
+                    @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))
+                    {
+
+                        <div class="p-2">
+                            <RenderableContentControl Presentation="Base"
+                                                      Context="@task"
+                                                      Class="p-2" />
+                        </div>
+                    }
+                </div>
+
+                @if (TcoTasksExtensions.TaskStateToVisibility(Station._groundModeTask))
+                {
+                    <RenderableContentControl Context="Station._groundMode" Presentation="Base" />
+                }
+                @if (TcoTasksExtensions.TaskStateToVisibility(Station._automatModeTask))
+                {
+                    <RenderableContentControl Context="Station._automatMode" Presentation="Base" />
+                }
+
+                <RenderableContentControl Presentation="Display"
+                                          Context="@Station._groundMode._currentStep.Description" />
+                <RenderableContentControl Presentation="Display"
+                                          Context="@Station._automatMode._currentStep.Order" />
+                <RenderableContentControl Presentation="Display"
+                                          Context="@Station._automatMode._currentStep.Description" />
+                <RenderableContentControl Presentation="Display"
+                                          Context="@Station._processRecipies._data" />
+
+                break;
+
+            case 1:
+                <h2>Components</h2>
+                @if (Station._serviceModeTask.GetTaskState())
+                {
+                    <RenderableContentControl Context="@Entry.PlcHammer.TECH_MAIN._app._station001._components"
+                                              Presentation="Service-Manual"></RenderableContentControl>
+                }
+                else
+                {
+                    <p>Turn on Service Mode to show components</p>
+                }
+                break;
+        }
+    </div>
+</div>
+
+
+
+@if (_dialogService != null )
+{
+    <TcoDialogLocatorView DialogService="_dialogService" DialogId="custation001"></TcoDialogLocatorView>
+}
+
+@code {
+    int selected = 0;
+    public static  DialogProxyServiceBlazor _dialogService { get; set; } = DialogProxyServiceBlazor.Create(new[] { Entry.PlcHammer.TECH_MAIN._app._station001 });
+    public Station001 Station => Entry.PlcHammer.TECH_MAIN._app._station001;
+
+    protected override async Task OnInitializedAsync()
+    {
+        UpdateValuesOnChange(Station._groundModeTask);
+        UpdateValuesOnChange(Station._automatModeTask);
+        await base.OnInitializedAsync();
+    }
+
+}

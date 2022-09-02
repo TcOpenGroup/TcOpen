@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="R8_AB0_EPP1322_0001_1BB6BCA8" Id="{930b3d4d-d9f2-05f0-13ef-72e94aa03edc}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EPP1322-0001-0017'}
+{attribute addProperty BoxType "EPP1322-0001-0017"}
+{attribute addProperty Id "R8_AB24_EPP1008_0001EPP1008_78E8D3DD12R8_AB23_EPP1008_0001EPP1008_78E8D3DD12R8_AB22_EPP1008_0001EPP1008_78E8D3DD12R8_AB21_EPP1008_0001EPP1008_78E8D3DD12R8_AB20_EPP1008_0001EPP1008_78E8D3DD12R8_AB19_EPP1008_0001EPP1008_78E8D3DD12R8_AB18_EPP1008_0001EPP1008_78E8D3DD12R8_AB17_EPP1008_0001EPP1008_78E8D3DD12R8_AB16_EPP1008_0001EPP1008_78E8D3DD12R8_AB15_EPP1008_0001EPP1008_78E8D3DD12R8_AB14_EPP1008_0001EPP1008_78E8D3DD12R8_AB13_EPP1008_0001EPP1008_78E8D3DD12Box_379_EPP1332_0001EPP1332_1FC0878B2R8_AB12_EPP1008_0001EPP1008_78E8D3DD12R8_AB11_EPP1008_0001EPP1008_78E8D3DD12R8_AB10_EPP1008_0001EPP1008_78E8D3DD12R8_AB9_EPP1008_0001EPP1008_78E8D3DD12R8_AB8_EPP1008_0001EPP1008_78E8D3DD12R8_AB7_EPP1008_0001EPP1008_78E8D3DD12R8_AB6_EPP1008_0001EPP1008_78E8D3DD12R8_AB5_EPP1008_0001EPP1008_78E8D3DD12R8_AB4_EPP1008_0001EPP1008_78E8D3DD12R8_AB3_EPP1008_0001EPP1008_78E8D3DD12R8_AB2_EPP1008_0001EPP1008_78E8D3DD12R8_AB1_EPP1008_0001EPP1008_78E8D3DD12"}
+{attribute addProperty CRC "464960680"}
+{attribute addProperty Size "290"}
+{attribute addProperty Name "R8_AB0 (EPP1322-0001)"}
+TYPE R8_AB0_EPP1322_0001_1BB6BCA8 EXTENDS EPP1322_1FC0878B :
+STRUCT
+	{attribute addProperty Name "R8_AB24 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB0 (EPP1322-0001) : D"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB24_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB23 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB24 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB23_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB22 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB23 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB22_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB21 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB22 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB21_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB20 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB21 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB20_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB19 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB20 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB19_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB18 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB19 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB18_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB17 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB18 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB17_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB16 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB17 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB16_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB15 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB16 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB15_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB14 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB15 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB14_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB13 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB14 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB13_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "Box 379 (EPP1332-0001)"}
+	{attribute addProperty PreviousPort "R8_AB13 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Box_379_EPP1332_0001 : EPP1332_1FC0878B;
+	{attribute addProperty Name "R8_AB12 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "Box 379 (EPP1332-0001) : C"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB12_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB11 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB12 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB11_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB10 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB11 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB10_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB9 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB10 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB9_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB8 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB9 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB8_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB7 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB8 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB7_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB6 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB7 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB6_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB5 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB6 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB5_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB4 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB5 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB4_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB3 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB4 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB3_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB2 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB3 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB2_EPP1008_0001 : EPP1008_78E8D3DD;
+	{attribute addProperty Name "R8_AB1 (EPP1008-0001)"}
+	{attribute addProperty PreviousPort "R8_AB2 (EPP1008-0001) : B"}
+	{attribute addProperty SyncUnit "default"}
+	R8_AB1_EPP1008_0001 : EPP1008_78E8D3DD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -326,12 +326,34 @@ function Remove-TargetNetId($tcproj)
 
 function Is-License-Valid($targetAmsId)
 {
+    $PK_PHOENY = ([System.Environment]::GetEnvironmentVariable('_PK_PHOENY_'))
+    $TK_PHOENY = ([System.Environment]::GetEnvironmentVariable('_TK_PHOENY_'))
+    $TW_PHOENY = ([System.Environment]::GetEnvironmentVariable('_TW_PHOENY'))
+    $TW_USER = ([System.Environment]::GetEnvironmentVariable('_TW_USER_'))
+    $TW_TOKEN = ConvertTo-SecureString -String ([System.Environment]::GetEnvironmentVariable('_TW_TOKEN_')) -AsPlainText -Force
     Import-Module "C:\TwinCAT\AdsApi\Powershell\TcXaeMgmt\TcXaeMgmt.psd1" -Scope Local
     $licenses = Get-TcLicense -Address $targetAmsId  -OrderId TC1200
     $result = $false
+    $recepients = New-Object Collections.Generic.List[string]
+    $recepients.Add($PK_PHOENY) 
+    $recepients.Add($TK_PHOENY) 
+    $url = "https://api.twilio.com/2010-04-01/Accounts/" + $TW_USER + "/Messages.json"
+    $credential = New-Object System.Management.Automation.PSCredential($TW_USER, $TW_TOKEN)
+
     foreach($licence in $licenses )
     {
         $result = $licence.Valid -or $result 
+        $dt2Expire = NEW-TIMESPAN -Start (Get-Date) -End $licence.ExpireTime 
+        $hrs2Expire = ($dt2Expire.Days ) * 24 + $dt2Expire.Hours
+        if($hrs2Expire -lt 48)
+        {
+            $details = "TwinCAT runtime licence on target: " + [System.Net.Dns]::GetHostName() + " with TargetAmsNetId: " + $targetAmsId + " is going to expire in " + $hrs2Expire + " hours!"
+            foreach($recepient in $recepients )
+            {
+                $params = @{ To = $recepient; From = $TW_PHOENY; Body = $details }
+                Invoke-WebRequest $url -Method Post -Credential $credential -Body $params -UseBasicParsing | ConvertFrom-Json | Select sid, body
+            }
+        }
     }
     if ($result)
     {
@@ -340,7 +362,84 @@ function Is-License-Valid($targetAmsId)
     else
     {
         $licenses
+        $details = "No valid TwinCAT runtime licence found on target: " + [System.Net.Dns]::GetHostName() + " with TargetAmsNetId: " + $targetAmsId + "!"
+        foreach($recepient in $recepients )
+        {
+            $params = @{ To = $recepient; From = $TW_PHOENY; Body = $details }
+            Invoke-WebRequest $url -Method Post -Credential $credential -Body $params -UseBasicParsing | ConvertFrom-Json | Select sid, body
+        }
         return $result
     }
 }
 
+function GetTwincat3Dir{
+    try 
+    {
+        $TC3DIR = Get-ChildItem -Path Env:\TWINCAT3DIR
+    }
+    catch 
+    {
+        Write-Host "Twincat 3 directory not discovered."
+    }
+    if($TC3DIR.Value)
+    {
+        return $TC3DIR.Value
+    }
+    else
+    {
+        Write-Host "Twincat 3 directory not discovered."
+    }
+}
+
+
+function GetInstalledBuilds{
+    $TC3DIR = GetTwincat3Dir
+    $MajorVersion = -join((get-item $TC3DIR ).Name,".")
+    $TC3BASEDIR = -join($TC3DIR ,"Components\Base")
+    $sBuilds = (Get-ChildItem -Path $TC3BASEDIR -Filter "Build_*" -Recurse -Directory).Name.Replace("Build_",$MajorVersion)
+    $Builds = New-Object Collections.Generic.List[Version]
+    foreach ($sBuild in $sBuilds)
+    {
+        $Build = [System.Version]::Parse($sBuild)
+        $Builds.Add($Build)
+    }
+    return $Builds
+}
+
+
+function GetInstalledTwincatVersion{
+    return Get-ItemProperty HKLM:\Software\Wow6432Node\Beckhoff\TwinCAT3\System | Select-Object TcVersion
+}
+
+
+function RemovePinVersion($tsproj)
+{
+    $xml = [System.Xml.XmlDocument](Get-Content $tsproj);
+    $TcSmProjectNode = $xml.SelectSingleNode("TcSmProject")
+    if($TcSmProjectNode.HasAttribute("TcVersionFixed"))
+    {
+        $TcSmProjectNode.RemoveAttribute("TcVersionFixed")
+        $xml.save($tsproj)
+        Write-Host "Pin version removed in`t" $tsproj
+    }
+}
+
+
+function DisableDevices($tsproj)
+{
+    $xml = [System.Xml.XmlDocument](Get-Content $tsproj);
+    $ioNode = $xml.SelectSingleNode("TcSmProject/Project/Io")
+    if($ioNode -ne $null)
+    {
+        $devicesNodes= $xml.SelectNodes("TcSmProject/Project/Io/Device")
+        foreach($deviceNode in $devicesNodes)
+        {
+            if(-not $deviceNode.HasAttribute("Disabled"))
+            {
+                $deviceNode.SetAttribute("Disabled","true")
+                Write-Host "Disabled device`t" $deviceNode.RemoteName " in`t" $tsproj 
+            }
+        }
+        $xml.Save($tsproj)
+    }
+}

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.2.0.0" ProductVersion="3.1.4024.11">
+  <DUT Name="Term_146_EK1100_439F5464" Id="{a003beef-5733-0b1f-219b-b81cf07be773}">
+    <Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EK1100-0000-0018'}
+{attribute addProperty BoxType "EK1100-0000-0018"}
+{attribute addProperty Id "Term_147_EK1122Term_147_EK1122_CA6A5D16124Term_186_EK1122Term_186_EK1122_75C79D52124Term_148_EL1809EL1809_32157CFD20Term_149_EL1809EL1809_32157CFD20Term_150_EL1809EL1809_32157CFD20Term_151_EL1809EL1809_32157CFD20Term_152_EL1809EL1809_32157CFD20Term_288_EK1122Term_288_EK1122_18F8921F153Term_1158_EL2008EL2008_E2806B9511Term_1159_EL2008EL2008_E2806B9511Term_1160_EL2008EL2008_E2806B9511Term_1161_EL2008EL2008_E2806B9511Term_1162_EL2008EL2008_E2806B9511Term_1163_EL2008EL2008_E2806B9511"}
+{attribute addProperty CRC "1134515300"}
+{attribute addProperty Size "567"}
+{attribute addProperty Name "Term 146 (EK1100)"}
+TYPE Term_146_EK1100_439F5464 EXTENDS EK1100_1FC0878B :
+STRUCT
+	{attribute addProperty Name "Term 147 (EK1122)"}
+	{attribute addProperty PreviousPort "Term 146 (EK1100) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_147_EK1122 : Term_147_EK1122_CA6A5D16;
+	{attribute addProperty Name "Term 186 (EK1122)"}
+	{attribute addProperty PreviousPort "Term 147 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
+	Term_186_EK1122 : Term_186_EK1122_75C79D52;
+	{attribute addProperty Name "Term 148 (EL1809)"}
+	{attribute addProperty PreviousPort "Term 186 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
+	Term_148_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "Term 149 (EL1809)"}
+	{attribute addProperty PreviousPort "Term 148 (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_149_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "Term 150 (EL1809)"}
+	{attribute addProperty PreviousPort "Term 149 (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_150_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "Term 151 (EL1809)"}
+	{attribute addProperty PreviousPort "Term 150 (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_151_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "Term 152 (EL1809)"}
+	{attribute addProperty PreviousPort "Term 151 (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_152_EL1809 : EL1809_32157CFD;
+	{attribute addProperty Name "Term 288 (EK1122)"}
+	{attribute addProperty PreviousPort "Term 152 (EL1809) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_288_EK1122 : Term_288_EK1122_18F8921F;
+	{attribute addProperty Name "Term 1158 (EL2008)"}
+	{attribute addProperty PreviousPort "Term 288 (EK1122) : C"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1158_EL2008 : EL2008_E2806B95;
+	{attribute addProperty Name "Term 1159 (EL2008)"}
+	{attribute addProperty PreviousPort "Term 1158 (EL2008) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1159_EL2008 : EL2008_E2806B95;
+	{attribute addProperty Name "Term 1160 (EL2008)"}
+	{attribute addProperty PreviousPort "Term 1159 (EL2008) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1160_EL2008 : EL2008_E2806B95;
+	{attribute addProperty Name "Term 1161 (EL2008)"}
+	{attribute addProperty PreviousPort "Term 1160 (EL2008) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1161_EL2008 : EL2008_E2806B95;
+	{attribute addProperty Name "Term 1162 (EL2008)"}
+	{attribute addProperty PreviousPort "Term 1161 (EL2008) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1162_EL2008 : EL2008_E2806B95;
+	{attribute addProperty Name "Term 1163 (EL2008)"}
+	{attribute addProperty PreviousPort "Term 1162 (EL2008) : B"}
+	{attribute addProperty SyncUnit "default"}
+	Term_1163_EL2008 : EL2008_E2806B95;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

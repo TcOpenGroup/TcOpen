@@ -1,0 +1,130 @@
+﻿@namespace TcOpen.Inxton.Local.Security.Blazor
+
+<div class="card" style="min-height: 20vh; max-height: 40vh">
+    <div class="card-header">
+        <h4>List of groups:</h4>
+    </div>
+    <div class="card-body overflow-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Group name</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var group in _roleGroupManager.GetAllGroup())
+                {
+                <tr @onclick="@(() => GroupClicked(group))" class="@((SelectedGroupN != null) ? ((SelectedGroupN.Name == group.Name) ? "table-active" : "") : "")">
+                    <th>@group.Name</th>
+                    <th>@group._Created</th>
+                    <th>@group._Modified</th>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h5>Create new group:</h5>
+    </div>
+    <div class="card-body row">
+        <div class="col-9">
+            <input type="text" class="form-control" @bind="newGroupName" placeholder="Group name">
+        </div>
+        <button class="btn btn-primary col-3" @onclick="@(() => CreateGroup())">Create</button>
+    </div>
+</div>
+
+@if (SelectedGroupN != null)
+{
+<div class="card mt-4">
+    <div class="card-header">
+        <div class="d-flex">
+            <h4 class="me-auto">Selected group:</h4>
+            <button type="button" class="btn-close align-self-center" @onclick="@(() => CloseGroupDetail())"></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="min-height: 40vh">
+                    <div class="card-header">
+                        <h5>Available roles:</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (AvailableRoles != null)
+                        {
+                        <div class="list-group p-2">
+                            @foreach (var role in AvailableRoles)
+                            {
+                            <label class="list-group-item mx-2">
+                                <input class="form-check-input me-1" type="checkbox" @bind="role.IsSelected">
+                                @role.Role.Name
+                            </label>
+                            }
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-1" style="width: 70px">
+                <div>
+                    <button class="btn btn-primary m-1" @onclick="@(() => AssignRoles())"><svg width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+</svg></button>
+                    <button class="btn btn-primary m-1" @onclick="@(() => ReturnRoles())"><svg width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+</svg></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="min-height: 40vh">
+                    <div class="card-header">
+                        <h5>Assigned roles:</h5>
+                    </div>
+                    <div class="crad-body">
+                        @if (AssignedRoles != null)
+                        {
+                        <div class="list-group p-2">
+                            @foreach (var role in AssignedRoles)
+                            {
+                            <label class="list-group-item mx-2">
+                                <input class="form-check-input me-1" type="checkbox" @bind="role.IsSelected">
+                                @role.Role.Name
+                            </label>
+                            }
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#deleteGroupModal">Delete</button>
+    </div>
+</div>
+}
+
+@if (SelectedGroupN != null)
+{
+<div class="modal fade " id="deleteGroupModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete group</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Do you want to delete group @SelectedGroupN.Name?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger m-2" data-bs-dismiss="modal" @onclick="@(() => DeleteGroup(SelectedGroupN))">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+}

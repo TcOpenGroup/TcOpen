@@ -61,6 +61,114 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check Off.
+        /// </summary>
+        internal static string ___Check_Off__ {
+            get {
+                return ResourceManager.GetString("___Check_Off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check On.
+        /// </summary>
+        internal static string ___Check_On__ {
+            get {
+                return ResourceManager.GetString("___Check_On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checks that the input is off.
+        /// </summary>
+        internal static string ___Checks_that_the_input_is_off__ {
+            get {
+                return ResourceManager.GetString("___Checks_that_the_input_is_off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checks that the input is on.
+        /// </summary>
+        internal static string ___Checks_that_the_input_is_on__ {
+            get {
+                return ResourceManager.GetString("___Checks_that_the_input_is_on__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config.
+        /// </summary>
+        internal static string ___Config__ {
+            get {
+                return ResourceManager.GetString("___Config__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Division by zero: Verify values defined in config! (RawHigh,RawLow).
+        /// </summary>
+        internal static string ___Division_by_zero__Verify_values_defined_in_config___RawHigh_RawLow___ {
+            get {
+                return ResourceManager.GetString("___Division_by_zero__Verify_values_defined_in_config___RawHigh_RawLow___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid data: Gain is not defined!.
+        /// </summary>
+        internal static string ___Invalid_data__Gain_is_not_defined___ {
+            get {
+                return ResourceManager.GetString("___Invalid_data__Gain_is_not_defined___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string ___Off__ {
+            get {
+                return ResourceManager.GetString("___Off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        internal static string ___On__ {
+            get {
+                return ResourceManager.GetString("___On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out of boundaries,check correction parameters (Gain,Ofset) in config!.
+        /// </summary>
+        internal static string ___Out_of_boundaries_check_correction_parameters__Gain_Ofset__in_config___ {
+            get {
+                return ResourceManager.GetString("___Out_of_boundaries_check_correction_parameters__Gain_Ofset__in_config___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raw range.
+        /// </summary>
+        internal static string ___Raw_range__ {
+            get {
+                return ResourceManager.GetString("___Raw_range__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real range.
+        /// </summary>
+        internal static string ___Real_range__ {
+            get {
+                return ResourceManager.GetString("___Real_range__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reseting signal (off/false).
         /// </summary>
         internal static string ___Reseting_signal__off_false___ {
@@ -70,11 +178,65 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resets the output.
+        /// </summary>
+        internal static string ___Resets_the_output__ {
+            get {
+                return ResourceManager.GetString("___Resets_the_output__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scaled value.
+        /// </summary>
+        internal static string ___Scaled_value__ {
+            get {
+                return ResourceManager.GetString("___Scaled_value__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sets the output.
+        /// </summary>
+        internal static string ___Sets_the_output__ {
+            get {
+                return ResourceManager.GetString("___Sets_the_output__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Setting signal (on/true).
         /// </summary>
         internal static string ___Setting_signal__on_true___ {
             get {
                 return ResourceManager.GetString("___Setting_signal__on_true___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signal.
+        /// </summary>
+        internal static string ___Signal__ {
+            get {
+                return ResourceManager.GetString("___Signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string ___Status__ {
+            get {
+                return ResourceManager.GetString("___Status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unscaled value.
+        /// </summary>
+        internal static string ___Unscaled_value__ {
+            get {
+                return ResourceManager.GetString("___Unscaled_value__", resourceCulture);
             }
         }
     }

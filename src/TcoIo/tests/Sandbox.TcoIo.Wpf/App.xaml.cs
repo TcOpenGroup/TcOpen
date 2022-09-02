@@ -22,6 +22,14 @@ namespace Sandbox.TcoIo.Wpf
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
             
             Entry.TcoIoTests.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+
+            App.Current.Exit += Current_Exit;
+        }
+
+        private void Current_Exit(object sender, ExitEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
         }
     }
 }

@@ -45,9 +45,12 @@ namespace TcoCore
         {
             get;
             set;
-        } = eMessageCategory.Info;
+        } = DefaulCategory;
 
-     
+        public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaulCategory = item;
+
+        public static eMessageCategory DefaulCategory { get; set; } = eMessageCategory.Info;
+
         bool diagnosticsRunning;
 
         /// <summary>
@@ -144,6 +147,7 @@ namespace TcoCore
             if (msg != null)
             {
                 msg.OnlinerMessage.Pinned.Cyclic = false;
+                TcoAppDomain.Current.Logger.Information("Message acknowledged {@payload}", new { Text = msg.Text, Category = msg.CategoryAsEnum, Cycle = msg.Cycle });
             }
         }
 
@@ -151,6 +155,7 @@ namespace TcoCore
         {
             lock (updatemutex)
             {
+                TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
                 foreach (var item in MessageDisplay.Where(p => p.Pinned))
                 {
                     item.OnlinerMessage.Pinned.Cyclic = false;
