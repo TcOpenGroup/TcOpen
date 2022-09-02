@@ -103,6 +103,7 @@
         if (!string.IsNullOrEmpty(ViewModel.DataViewModel.FilterById))
         {
             _filteringMode = true;
+            ViewModel.DataViewModel.SearchMode = eSearchMode.StartsWith;
             await Task.Run(ViewModel.DataViewModel.FillObservableRecordsAsync);
             StateHasChanged();
         }
