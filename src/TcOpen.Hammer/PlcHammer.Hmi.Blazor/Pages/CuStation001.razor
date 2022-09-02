@@ -14,10 +14,14 @@
         </li>
     </ul>
     <div class="content">
+
+
         @switch (@selected)
         {
             case 0:
 
+                <h2>Data selector</h2>
+                <TcoData.TcoDataExchangeSimpleSelectorView Context="@Station._processRecipies"></TcoData.TcoDataExchangeSimpleSelectorView>
                 <h2>Tasks</h2>
                 <div class="d-flex flex-row">
                     @foreach (var task in @Station.GetChildren().Where(p => p is TcoCore.TcoTask))

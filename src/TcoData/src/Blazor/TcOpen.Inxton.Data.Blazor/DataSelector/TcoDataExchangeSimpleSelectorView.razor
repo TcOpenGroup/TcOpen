@@ -1,0 +1,183 @@
+﻿@namespace TcoData
+@inherits RenderableViewModelComponentBase<TcoDataExchangeSimpleSelectorViewModel>
+
+<div class="card">
+    <div class="d-flex flex-row">
+        <div class="p-2">
+            <p class="fw-bold">Selected</p>
+        </div>
+        <div class="p-2 flex-grow-1">
+            <select class="form-select" @bind="SelectedItemId" @onclick="LoadData">
+                @if (ViewModel?.Model != null && ViewModel.DataViewModel.ObservableRecords.Count != 0)
+                {
+                    <option value="" selected=""></option>
+                    @foreach (var item in ViewModel.DataViewModel.ObservableRecords)
+                    {
+                        <option value="@item._EntityId">@item._EntityId</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        <div class="p-2">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#selectorModal" disabled="@_sendButtonDisabled" >Send to PLC</button>
+        </div>
+        <div class="p-2">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showFilterId" aria-expanded="false" aria-controls="showFilterId" @onclick="FilterExpandButtonClicked">
+                @if (_filterIsClicked)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                    </svg>
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
+
+                    </svg>
+                }
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="collapse" id="showFilterId">
+        <div class="d-flex flex-row">
+
+            <div class="p-2 flex-grow-1">
+                <input type="text" class="p-2 form-control" @bind="ViewModel.DataViewModel.FilterById" />
+            </div>
+            <div class="p-2">
+                <button class=" btn btn-primary" @onclick="FilterObservableCollection">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-2">
+                <button class="btn btn-primary" @onclick="Reset">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="selectorModal" tabindex="-1" aria-labelledby="selectorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="selectorModalLabel">Send record to PLC</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to send record @SelectedItemId to controller?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @onclick="() => ViewModel.DataViewModel.SendToPlc()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public IVortexElement Context { get; set; }
+    private bool _sendButtonDisabled { get; set; } = true;
+    private string _selectedItemId;
+    private bool _filterIsClicked = false;
+    private bool _filteringMode = false;
+
+    private async Task FilterObservableCollection()
+    {
+        if (!string.IsNullOrEmpty(ViewModel.DataViewModel.FilterById))
+        {
+            _filteringMode = true;
+            ViewModel.DataViewModel.SearchMode = eSearchMode.StartsWith;
+            await Task.Run(ViewModel.DataViewModel.FillObservableRecordsAsync);
+            StateHasChanged();
+        }
+        else
+        {
+            Reset();
+        }
+    }
+
+    private void Reset()
+    {
+        ViewModel.DataViewModel.FilterById = string.Empty;
+        _filteringMode = false;
+        SelectedItemId = string.Empty;
+        LoadData();
+    }
+
+    private void FilterExpandButtonClicked()
+    {
+        if (_filterIsClicked == false)
+        {
+            _filterIsClicked = true;
+        }
+        else
+        {
+            _filterIsClicked = false;
+        }
+
+    }
+    public string SelectedItemId
+    {
+        get
+        {
+            return _selectedItemId;
+        }
+        set
+        {
+            _selectedItemId = value;
+            if (_selectedItemId == string.Empty)
+            {
+                ViewModel.DataViewModel.SelectedRecord = null;
+                _sendButtonDisabled = true;
+            }
+            else
+            {
+                ViewModel.DataViewModel.SelectedRecord = ViewModel.DataViewModel.ObservableRecords.Find(x => x._EntityId == _selectedItemId);
+                _sendButtonDisabled = false;
+            }
+        }
+    }
+
+
+    private void LoadData()
+    {
+        if (this.ViewModel?.DataViewModel == null || _filteringMode) return;
+
+        var maxNumberOfRecipies = 50;
+        var currentLimit = ViewModel.DataViewModel.Limit;
+        ViewModel.DataViewModel.Limit = maxNumberOfRecipies;
+        ViewModel.DataViewModel.FillObservableRecords();
+        ViewModel.DataViewModel.Limit = currentLimit;
+
+        StateHasChanged();
+    }
+
+
+    protected override void OnInitialized()
+    {
+        if (Context != null && !(Context is TcoDataExchangeSimpleSelectorViewModel) && Context is TcoDataExchange)
+        {
+            this.ViewModel = new TcoDataExchangeSimpleSelectorViewModel() { Model = Context };
+        }
+        _sendButtonDisabled = true;
+        base.OnInitialized();
+    }
+
+}
