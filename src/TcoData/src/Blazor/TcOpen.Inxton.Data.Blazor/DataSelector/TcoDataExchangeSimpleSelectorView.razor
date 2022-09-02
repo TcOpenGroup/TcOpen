@@ -1,6 +1,5 @@
 ﻿@namespace TcoData
 @inherits RenderableViewModelComponentBase<TcoDataExchangeSimpleSelectorViewModel>
-<h3>TcoDataExchangeSimpleSelectorView</h3>
 
 <div class="card">
     <div class="d-flex flex-row">
@@ -22,7 +21,7 @@
 
 
         <div class="p-2">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled="@_sendButtonDisabled" >Send to PLC</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#selectorModal" disabled="@_sendButtonDisabled" >Send to PLC</button>
         </div>
         <div class="p-2">
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showFilterId" aria-expanded="false" aria-controls="showFilterId" @onclick="FilterExpandButtonClicked">
@@ -66,20 +65,17 @@
                     </svg>
                 </button>
             </div>
-            @*Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.*@
         </div>
     </div>
-
 
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="selectorModal" tabindex="-1" aria-labelledby="selectorModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Send record to PLC</h5>
+                <h5 class="modal-title" id="selectorModalLabel">Send record to PLC</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -104,9 +100,16 @@
 
     private async Task FilterObservableCollection()
     {
-        _filteringMode = true;
-        await Task.Run(ViewModel.DataViewModel.FillObservableRecordsAsync);
-        StateHasChanged();
+        if (!string.IsNullOrEmpty(ViewModel.DataViewModel.FilterById))
+        {
+            _filteringMode = true;
+            await Task.Run(ViewModel.DataViewModel.FillObservableRecordsAsync);
+            StateHasChanged();
+        }
+        else
+        {
+            Reset();
+        }
     }
 
     private void Reset()
@@ -137,13 +140,11 @@
         }
         set
         {
-
             _selectedItemId = value;
             if (_selectedItemId == string.Empty)
             {
                 ViewModel.DataViewModel.SelectedRecord = null;
                 _sendButtonDisabled = true;
-
             }
             else
             {
@@ -172,9 +173,7 @@
     {
         if (Context != null && !(Context is TcoDataExchangeSimpleSelectorViewModel) && Context is TcoDataExchange)
         {
-
             this.ViewModel = new TcoDataExchangeSimpleSelectorViewModel() { Model = Context };
-
         }
         _sendButtonDisabled = true;
         base.OnInitialized();
