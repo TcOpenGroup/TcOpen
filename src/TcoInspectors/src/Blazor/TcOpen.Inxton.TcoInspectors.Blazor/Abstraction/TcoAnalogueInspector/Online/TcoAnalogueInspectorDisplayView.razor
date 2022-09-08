@@ -11,16 +11,16 @@
             </button>
         </div>
         <div class="accordion-body row align-items-center py-1">
-            <div class="col-1">
+            <div class="col-xl-1 col-lg-2 col-md-2">
                 <RenderableContentControl Context="@Component._data.RequiredMin" Presentation="Display" />
             </div>
-            <div class="col-1">
+            <div class="col-xl-1 col-lg-2 col-md-2">
                 <RenderableContentControl Context="@Component._data.DetectedStatus" Presentation="Display" />
             </div>
-            <div class="col-1">
+            <div class="col-xl-1 col-lg-2 col-md-2">
                 <RenderableContentControl Context="@Component._data.RequiredMax" Presentation="Display" />
             </div>
-            <div class="col">
+            <div class="col d-none d-xl-block">
                 <div class="progress mt-4">
                     <div class="progress-bar bg-danger" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item1; border-radius: 0.4rem 0px 0px 0.4rem; "><div class="text-end me-2">@Component._data.RequiredMin.Shadow</div></div>
                     <div class="progress-bar bg-sucess" role="progressbar" aria-label="Result" style="width: @getProgressBarValues().Item2"></div>
@@ -29,13 +29,13 @@
                     <div class="progress-checkpoint" style="left: @getProgressBarValues().Item4;"></div>
                 </div>
             </div>
-            <div class="col-auto">
+            <div class="col-md-auto ms-auto">
                 <RenderableContentControl Context="@Component._data.IsByPassed" Presentation="Display" />
             </div>
-            <div class="col-auto">
+            <div class="col-md-auto">
                 <RenderableContentControl Context="@Component._data.IsExcluded" Presentation="Display" />
             </div>
-            <div class="col-auto">
+            <div class="col-md-auto">
                 <GenericIconView Result="@Component._data.Result.Shadow" />
             </div>
         </div>

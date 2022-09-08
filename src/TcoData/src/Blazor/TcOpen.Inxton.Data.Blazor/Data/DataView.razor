@@ -26,7 +26,7 @@
                 @bind="@DataViewModel.SearchMode">
             @foreach (var item in eSearchModes)
             {
-                <option class="form-control" value="@item">@item.ToString() </option>
+                <option class="form-control" value="@item.">@item.ToString() </option>
             }
         </select>
     </div>
@@ -47,7 +47,7 @@
         {
             case ViewMode.Display:
                 {
-                    <div class="col card m-1" style=" height: 500px !important; overflow: auto;">
+                    <div class="col card m-1" style=" max-height: 500px !important; min-height: 262px; overflow: auto;">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -126,7 +126,7 @@
                 {
                     <div class="col card m-1">
 
-                        <EditForm Model="@DataViewModel" OnValidSubmit="() => AddAlert(DataViewModel.CreateNew())" >
+                        <EditForm Model="@DataViewModel" OnValidSubmit="() => AddAlert(DataViewModel.CreateNew())">
                             <DataAnnotationsValidator />
                             <ValidationSummary />
 
@@ -155,7 +155,7 @@
                 {
                     <div class="col card m-1">
 
-                        <EditForm Model="@DataViewModel" OnValidSubmit="() => DataViewModel.CreateCopyOfExisting()">
+                        <EditForm Model="@DataViewModel" OnValidSubmit="() => AddAlert(DataViewModel.CreateCopyOfExisting())">
                             <DataAnnotationsValidator />
                             <ValidationSummary />
 
@@ -346,7 +346,6 @@
         DataViewModel.SelectedRecord = item;
         dynamic dataExchange = DataViewModel.DataExchange;
         _data = (IVortexElement)dataExchange._data;
-        _isRowSelected = true;
         StateHasChanged();
 
     }
@@ -359,6 +358,23 @@
         _currentActivePage = pageNumber;
         DataViewModel.Page = pageNumber;
 
+        if (pageNumber < _visibleDownPage + 1)
+        {
+            if (_visibleDownPage > 0)
+            {
+                _visibleDownPage -= 1;
+                _visibleUpPage -= 1;
+            }
+        }
+        if (pageNumber >= _visibleUpPage - 1)
+        {
+            if (_visibleUpPage < PageCount)
+            {
+                _visibleUpPage += 1;
+                _visibleDownPage += 1;
+            }
+        }
+
         await Task.Run(DataViewModel.FillObservableRecordsAsync);
         StateHasChanged();
     }
@@ -367,7 +383,7 @@
     {
         if (pageNumber < 0 || pageNumber >= PageCount) return;
 
-        if (pageNumber < _visibleDownPage)
+        if (pageNumber < _visibleDownPage + 1)
         {
             if (_visibleDownPage > 0)
             {
@@ -375,7 +391,7 @@
                 _visibleUpPage -= 1;
             }
         }
-        if (pageNumber >= _visibleUpPage)
+        if (pageNumber >= _visibleUpPage - 1)
         {
             if (_visibleUpPage < PageCount)
             {
@@ -409,6 +425,7 @@
         IsLoading = true;
         await Filter();
         IsLoading = false;
+        DataViewModel.Mode = ViewMode.Display;
         DataViewModel.SetDefaultButtonState();
     }
 
@@ -417,7 +434,7 @@
 
     private void AddAlert(string text)
     {
-        if(text != "")
+        if (text != "")
         {
             _alertManager.addAlert("warning", text);
         }
