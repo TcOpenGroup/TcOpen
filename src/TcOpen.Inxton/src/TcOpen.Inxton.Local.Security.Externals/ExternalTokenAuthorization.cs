@@ -33,5 +33,18 @@ namespace TcOpen.Inxton.Local.Security.Readers
         {
            return new ExternalTokenAuthorization(new ComPortTokenProvider(portName, baudRate, dataBits, stopBits, parity));
         }
+
+        /// <summary>
+        /// Creates external authorization for token present in a string variable the PLC program.
+        /// </summary>
+        /// <param name="tokenValue">Onliner string containing the value of authentication token.</param>
+        /// <param name="tokenPresence">Onliner bool indicating presence of authentication token.</param>
+        /// <returns></returns>
+        public static ExternalAuthorization CreatePlcTokenReader(Vortex.Connector.ValueTypes.OnlinerString tokenValue,
+                                                                 Vortex.Connector.ValueTypes.OnlinerBool tokenPresence)
+        {
+            return new ExternalTokenAuthorization(new PlcTokenReader(tokenValue, tokenPresence));
+        }
+
     }
 }
