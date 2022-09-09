@@ -18,7 +18,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
     {
         public static void AddVortexBlazorSecurity(this IServiceCollection services,
             IRepository<UserData> userRepo,
-            BlazorRoleGroupManager roleGroupManager)
+            RoleGroupManager roleGroupManager)
         {
             services.AddIdentity<User, Role>(identity =>
             {
@@ -37,7 +37,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
 
             SecurityManager.Create(blazorAuthenticationStateProvider);
 
-            services.AddScoped<BlazorRoleGroupManager>(p => roleGroupManager);
+            services.AddScoped<RoleGroupManager>(p => roleGroupManager);
             services.AddScoped<BlazorAlertManager>();
             services.AddScoped<IRepositoryService, RepositoryService>(provider => new RepositoryService(userRepo, roleGroupManager));
             //services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();

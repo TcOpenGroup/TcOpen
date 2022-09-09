@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Local.Security.Blazor;
 
 using TcOpen.Inxton.Security;
@@ -10,7 +11,7 @@ namespace PlcHammer.Hmi.Blazor.Security
 {
     internal class Roles
     {
-        private Roles(BlazorRoleGroupManager roleGroupManager)
+        private Roles(RoleGroupManager roleGroupManager)
         {
             roleGroupManager.CreateRole(new Role(process_settings_access));
             roleGroupManager.CreateRole(new Role(process_traceability_access));
@@ -37,7 +38,7 @@ namespace PlcHammer.Hmi.Blazor.Security
         public const string technology_automat_all = nameof(technology_automat_all);
         public const string technology_ground_all = nameof(technology_ground_all);
 
-        public static void Create(BlazorRoleGroupManager roleGroupManager)
+        public static void Create(RoleGroupManager roleGroupManager)
         {
             new Roles(roleGroupManager);
         }

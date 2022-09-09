@@ -72,7 +72,7 @@ namespace PlcHammer.Hmi.Blazor
                 (userRepo, groupRepo) = SetUpJsonRepositories();
             }
 
-            BlazorRoleGroupManager roleGroupManager = new BlazorRoleGroupManager(groupRepo);
+            RoleGroupManager roleGroupManager = new RoleGroupManager(groupRepo);
             Roles.Create(roleGroupManager);
 
             services.AddVortexBlazorSecurity(userRepo, roleGroupManager);

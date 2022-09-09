@@ -69,6 +69,21 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
+        private SecurityManager(IRepository<UserData> repository, RoleGroupManager roleGroupManager)
+        {
+            UserRepository = repository;
+            Service = new AuthenticationService(repository, roleGroupManager);
+
+            Principal = new AppIdentity.AppPrincipal();
+            SecurityProvider.Create(Service);
+
+            if (System.Threading.Thread.CurrentPrincipal?.GetType() != typeof(AppIdentity.AppPrincipal))
+            {
+                System.Threading.Thread.CurrentPrincipal = Principal;
+                AppDomain.CurrentDomain.SetThreadPrincipal(Principal);
+            }
+        }
+
         /// <summary>
         /// Creates authentication service with given user data repository.
         /// </summary>
@@ -90,6 +105,17 @@ namespace TcOpen.Inxton.Local.Security
             {
                 _manager = new SecurityManager(authenticationService);
             }
+
+            return _manager.Service;
+        }
+
+        public static IAuthenticationService Create(IRepository<UserData> repository, RoleGroupManager roleGroupManager)
+        {
+            if (_manager == null)
+            {
+                _manager = new SecurityManager(repository, roleGroupManager);
+            }
+            _roleGroupManager = roleGroupManager;
 
             return _manager.Service;
         }
@@ -146,6 +172,20 @@ namespace TcOpen.Inxton.Local.Security
                 }
 
                 return _manager;
+            }
+        }
+
+        private static RoleGroupManager _roleGroupManager;
+        public static RoleGroupManager RoleGroupManager
+        {
+            get
+            {
+                if (_roleGroupManager == null)
+                {
+                    throw new Exception("RoleGroupManager was not created.");
+                }
+
+                return _roleGroupManager;
             }
         }
 

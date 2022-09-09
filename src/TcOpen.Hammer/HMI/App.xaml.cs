@@ -41,7 +41,12 @@ namespace HMI
             switch (answer)
             {
                 case 'M':
-                    authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+                    //authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+
+                    var users = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
+                    var groups = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>("mongodb://localhost:27017", "Hammer", "Groups"));
+                    var roleGroupManager = new RoleGroupManager(groups);
+                    authenticationService = SecurityManager.Create(users, roleGroupManager);
                     break;
                 case 'J':
                     authenticationService = SecurityManager.Create(SetUpJsonRepository());

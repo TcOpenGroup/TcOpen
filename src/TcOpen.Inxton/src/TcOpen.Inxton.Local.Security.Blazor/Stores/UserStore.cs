@@ -53,7 +53,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 return _unitOfWork.RoleGroupManager.inAppRoleCollection;
             }
         }
-        private BlazorRoleGroupManager _roleGroupManager
+        private RoleGroupManager _roleGroupManager
         {
             get
             {

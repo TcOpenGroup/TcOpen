@@ -12,9 +12,17 @@ namespace TcOpen.Inxton.Local.Security
 {
     public partial class AuthenticationService : IAuthenticationService
     {
+        private readonly RoleGroupManager roleGroupManager = null;
+
         public AuthenticationService(IRepository<UserData> repository)
         {
             this.UserRepository = repository;
+        }
+
+        public AuthenticationService(IRepository<UserData> repository, RoleGroupManager roleGroupManager)
+        {
+            this.UserRepository = repository;
+            this.roleGroupManager = roleGroupManager;
         }
 
         private List<UserData> _users
@@ -127,7 +135,19 @@ namespace TcOpen.Inxton.Local.Security
                 throw new ArgumentException(strings.CustomPrincipalError);
 
             //Authenticate the user
-            customPrincipal.Identity = new AppIdentity(user.UserName, user.Email, user.Roles, user.CanUserChangePassword, user.Level);
+            string[] roles = new string[] { };
+            if (roleGroupManager != null)
+            {
+                if (user.Roles.Length > 0 && user.Roles[0] != null) //TODO
+                {
+                    roles = roleGroupManager.GetRolesFromGroup(user.Roles[0]).ToArray();
+                }
+            } else
+            {
+                roles = user.Roles;
+            }
+
+            customPrincipal.Identity = new AppIdentity(user.UserName, user.Email, roles, user.CanUserChangePassword, user.Level);
             UserAccessor.Instance.Identity = customPrincipal.Identity;
             OnUserAuthenticateSuccess?.Invoke(user.UserName);
             SetUserTimedOutDeAuthentication(userData.LogoutTime);
@@ -229,11 +249,15 @@ namespace TcOpen.Inxton.Local.Security
 
         private void CreateDefaultUser()
         {
-            var newUser = new UserData(
-                   "default",
-                   string.Empty,
-                   string.Empty,
-                   new string[] { "Administrator" }, "Administrator", string.Empty);
+            UserData newUser = null;
+            if (roleGroupManager != null)
+            {
+                newUser = new UserData("admin", string.Empty, "admin", new string[] { "AdminGroup" }, "Administrator", string.Empty);
+            } else
+            {
+                newUser = new UserData("default", string.Empty, string.Empty, new string[] { "Administrator" }, "Administrator", string.Empty);
+            }
+            
             newUser.CanUserChangePassword = true;
             UserRepository.Create(newUser.Username, newUser);
         }

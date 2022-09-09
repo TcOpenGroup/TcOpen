@@ -25,9 +25,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor
     public class BlazorAuthenticationStateProvider : AuthenticationStateProvider, IAuthenticationService
     {
         private IRepository<UserData> UserRepository;
-        private BlazorRoleGroupManager roleGroupManager;
+        private RoleGroupManager roleGroupManager;
 
-        public BlazorAuthenticationStateProvider(IRepository<UserData> userRepo, BlazorRoleGroupManager roleGroupManager)
+        public BlazorAuthenticationStateProvider(IRepository<UserData> userRepo, RoleGroupManager roleGroupManager)
         {
             this.UserRepository = userRepo;
             this.roleGroupManager = roleGroupManager;
