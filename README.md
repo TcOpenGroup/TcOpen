@@ -90,9 +90,6 @@ All PLC libraries developed in TcOpen are under MIT license. [MIT](https://tldrl
 
 IVF will aid in the development of this project. It provides the infrastructure for testing, debugging, and tooling for the delivery pipeline (library compilation, version number updates, etc.).
 
-Inxton and MTS teams will contribute to the development of PLC libraries. There will also be a transfer of some existing codebases from MTS and Inxton internal repositories (WPF/Blazor UI components, data acquisition libraries); some may require Inxton commercial license when deployed in production. 
-
-
 # Documentation
 
 There is a separate documentation repository for this project [here](https://github.com/TcOpenGroup/TcOpen.Documentation). At this moment we use [docfx](https://github.com/dotnet/docfx) to generate documentation. The ```docfx``` uses IVF twin objects of PLC code to generate the API documentation. There is room for improvement in generated documentation; we do plan - in the course of the development of TcOpen - to improve that. 
