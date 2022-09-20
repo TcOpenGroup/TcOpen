@@ -179,8 +179,8 @@ namespace PlcHammer.Hmi.Blazor
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
 
             /*Security*/
-            IRepository<UserData> userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>(mongoUri, "HammerBlazor", "Users"));
-            IRepository<GroupData> groupRepo = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>(mongoUri, "HammerBlazor", "Groups"));
+            IRepository<UserData> userRepo = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>(mongoUri, "Hammer", "Users"));
+            IRepository<GroupData> groupRepo = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>(mongoUri, "Hammer", "Groups"));
             return (userRepo, groupRepo);
         }
     }

@@ -54,9 +54,16 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
-        private SecurityManager(IAuthenticationService service)
+        private SecurityManager(IAuthenticationService service, IRepository<UserData> repository = null)
         {
-            UserRepository = new AnonymousRepository();
+            if(repository != null){
+                UserRepository = repository;
+            }
+            else
+            {
+                UserRepository = new AnonymousRepository();
+            }
+            
             Service = service;
 
             Principal = new AppIdentity.AppPrincipal();
@@ -104,6 +111,16 @@ namespace TcOpen.Inxton.Local.Security
             if (_manager == null)
             {
                 _manager = new SecurityManager(authenticationService);
+            }
+
+            return _manager.Service;
+        }
+
+        public static IAuthenticationService Create(IAuthenticationService authenticationService, IRepository<UserData> repository)
+        {
+            if (_manager == null)
+            {
+                _manager = new SecurityManager(authenticationService, repository);
             }
 
             return _manager.Service;

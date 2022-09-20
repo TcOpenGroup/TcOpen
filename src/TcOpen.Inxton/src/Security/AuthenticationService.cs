@@ -138,7 +138,7 @@ namespace TcOpen.Inxton.Local.Security
             string[] roles = new string[] { };
             if (roleGroupManager != null)
             {
-                if (user.Roles.Length > 0 && user.Roles[0] != null) //TODO
+                if (user.Roles.Length > 0 && user.Roles[0] != null)
                 {
                     roles = roleGroupManager.GetRolesFromGroup(user.Roles[0]).ToArray();
                 }

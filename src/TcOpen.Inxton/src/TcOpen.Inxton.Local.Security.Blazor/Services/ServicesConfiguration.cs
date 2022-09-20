@@ -35,7 +35,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
 
             BlazorAuthenticationStateProvider blazorAuthenticationStateProvider = new BlazorAuthenticationStateProvider(userRepo, roleGroupManager);
 
-            SecurityManager.Create(blazorAuthenticationStateProvider);
+            SecurityManager.Create(blazorAuthenticationStateProvider, userRepo);
 
             services.AddScoped<RoleGroupManager>(p => roleGroupManager);
             services.AddScoped<BlazorAlertManager>();
