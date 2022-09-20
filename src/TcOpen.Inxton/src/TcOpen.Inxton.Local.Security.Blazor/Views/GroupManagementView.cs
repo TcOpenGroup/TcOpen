@@ -20,7 +20,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         }
 
         [Inject]
-        private BlazorRoleGroupManager _roleGroupManager { get; set; }
+        private RoleGroupManager _roleGroupManager { get; set; }
         [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 

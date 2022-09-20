@@ -1,4 +1,4 @@
-﻿@inject BlazorRoleGroupManager _roleGroupManager
+﻿@inject RoleGroupManager _roleGroupManager
 @namespace TcOpen.Inxton.Local.Security.Blazor
 
 <div class="card" style="min-height: 20vh; max-height: 40vh">
@@ -16,13 +16,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var user in _userManager.Users)
+                @foreach (UserData user in AllUsers)
                 {
-                    <tr @onclick="@(() => RowClicked(user))" class="@((SelectedUser != null) ? ((SelectedUser.UserName == user.UserName) ? "table-active" : "") : "")">
-                        <th>@user.UserName</th>
+                    <tr @onclick="@(() => RowClicked(user))" class="@((SelectedUser != null) ? ((SelectedUser.UserName == user.Username) ? "table-active" : "") : "")">
+                        <th>@user.Username</th>
                         <td>@user.CanUserChangePassword</td>
-                        <td>Created</td>
-                        <td>Modified</td>
+                        <td>@user._Created</td>
+                        <td>@user._Modified</td>
                     </tr>
                 }
             </tbody>
