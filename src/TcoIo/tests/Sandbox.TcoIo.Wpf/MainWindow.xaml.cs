@@ -9,7 +9,7 @@ namespace Sandbox.TcoIo.Wpf
     {
         public MainWindow()
         {
-            InitializeComponent();
+          InitializeComponent();
         }
     }
 }
