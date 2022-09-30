@@ -11,15 +11,15 @@ using System.Text;
 using System.Security.Cryptography;
 using TcOpen.Inxton.Local.Security;
 
-namespace TcOpen.Inxton.Local.Security.Blazor
+namespace TcOpen.Inxton.Local.Security
 {
-    public class BlazorRoleGroupManager
+    public class RoleGroupManager
     {
         private IRepository<GroupData> groupRepo;
 
         public List<Role> inAppRoleCollection { get; set; } = new List<Role>();
 
-        public BlazorRoleGroupManager(IRepository<GroupData> groupRepo)
+        public RoleGroupManager(IRepository<GroupData> groupRepo)
         {
             this.groupRepo = groupRepo;
             CreateDefaultRoleAndGroup();

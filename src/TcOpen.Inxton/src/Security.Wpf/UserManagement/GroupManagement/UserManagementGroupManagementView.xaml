@@ -1,0 +1,63 @@
+﻿<UserControl
+    x:Class="TcOpen.Inxton.Local.Security.Wpf.UserManagementGroupManagementView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:TcOpen.Inxton.Local.Security.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:TcOpen.Inxton.Local.Security.Wpf.Properties"
+    xmlns:local="TcOpen.Inxton.Local.Security.Wpf"
+    xmlns:vortex="http://vortex.mts/xaml"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    HorizontalContentAlignment="Stretch"
+    VerticalContentAlignment="Stretch"
+    d:DesignHeight="600"
+    d:DesignWidth="700"
+    mc:Ignorable="d">
+    <!--<d:UserControl.DataContext>
+        <local:UserManagementViewModel></local:UserManagementViewModel> 
+    </d:UserControl.DataContext>-->
+    <UserControl.Resources>
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <controls:PermissionBox Permissions="Administrator">
+            <TabControl>
+                <TabItem Header="{x:Static p:strings.CurrentUsers}">
+                    <!--<ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">-->
+                        <Grid Margin="12" Style="{DynamicResource Card}">
+                        <controls:AllUsersGroupManagementView/>
+                        </Grid>
+                    <!--</ScrollViewer>-->
+                </TabItem>
+                <TabItem Header="{x:Static p:strings.NewUser}">
+                    <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="12" Style="{DynamicResource Card}">
+                            <controls:AddNewUserGroupManagementView />
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Group management">
+                    <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="12" Style="{DynamicResource Card}">
+                            <controls:AllGroupsGroupManagementView />
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </controls:PermissionBox>
+        <vortex:HelpProviderView Grid.Row="1">
+            <vortex:HelpProviderView.DataContext>
+                <vortex:HelpProviderViewModel ComponentName="(TcOpen)UserManagement" />
+            </vortex:HelpProviderView.DataContext>
+        </vortex:HelpProviderView>
+    </Grid>
+</UserControl>

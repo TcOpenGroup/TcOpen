@@ -16,21 +16,21 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
     {
         private InMemoryRepository<UserData> _inMemoryRepoUser;
         private InMemoryRepository<GroupData> _inMemoryRepoGroup;
-        private BlazorRoleGroupManager _roleGroupManager;
+        private RoleGroupManager _roleGroupManager;
         public BlazorSecurityTestsFixture()
         {
             _inMemoryRepoUser = new InMemoryRepository<UserData>();
             _inMemoryRepoGroup = new InMemoryRepository<GroupData>();
-            _roleGroupManager = new BlazorRoleGroupManager(_inMemoryRepoGroup);
+            _roleGroupManager = new RoleGroupManager(_inMemoryRepoGroup);
             Repository = new RepositoryService(_inMemoryRepoUser, _roleGroupManager);
             UserStore = new UserStore(Repository);
             SeedData = new Seed();
 
-            Repository.UserRepository.Create(SeedData.ExistUser.Id, new UserData(SeedData.ExistUser));
-            Repository.UserRepository.Create(SeedData.RemoveUser.Id, new UserData(SeedData.RemoveUser));
-            Repository.UserRepository.Create(SeedData.UpdateUser.Id, new UserData(SeedData.UpdateUser));
-            Repository.UserRepository.Create(SeedData.AdminUser.Id, new UserData(SeedData.AdminUser));
-            Repository.UserRepository.Create(SeedData.DefaultUser.Id, new UserData(SeedData.DefaultUser));
+            Repository.UserRepository.Create(SeedData.ExistUser.UserName, new UserData(SeedData.ExistUser));
+            Repository.UserRepository.Create(SeedData.RemoveUser.UserName, new UserData(SeedData.RemoveUser));
+            Repository.UserRepository.Create(SeedData.UpdateUser.UserName, new UserData(SeedData.UpdateUser));
+            Repository.UserRepository.Create(SeedData.AdminUser.UserName, new UserData(SeedData.AdminUser));
+            Repository.UserRepository.Create(SeedData.DefaultUser.UserName, new UserData(SeedData.DefaultUser));
 
             _roleGroupManager.CreateRole(new Inxton.Security.Role("RemoveRole"));
             _roleGroupManager.CreateRole(new Inxton.Security.Role("UpdateRole"));
@@ -40,10 +40,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             _roleGroupManager.CreateGroup("RemoveGroup");
             _roleGroupManager.CreateGroup("RemoveRolesGroup");
             _roleGroupManager.CreateGroup("UpdateGroup");
-            _roleGroupManager.CreateGroup("AdminGroup");
             _roleGroupManager.CreateGroup("DefaultGroup");
 
-            _roleGroupManager.AddRoleToGroup("AdminGroup", "Administrator");
             _roleGroupManager.AddRolesToGroup("DefaultGroup", new string[] { "Administrator", "Default" });
             _roleGroupManager.AddRolesToGroup("RemoveRolesGroup", new string[] { "Administrator", "Default" });
         }

@@ -54,10 +54,32 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
-        private SecurityManager(IAuthenticationService service)
+        private SecurityManager(IAuthenticationService service, IRepository<UserData> repository = null)
         {
-            UserRepository = new AnonymousRepository();
+            if(repository != null){
+                UserRepository = repository;
+            }
+            else
+            {
+                UserRepository = new AnonymousRepository();
+            }
+            
             Service = service;
+
+            Principal = new AppIdentity.AppPrincipal();
+            SecurityProvider.Create(Service);
+
+            if (System.Threading.Thread.CurrentPrincipal?.GetType() != typeof(AppIdentity.AppPrincipal))
+            {
+                System.Threading.Thread.CurrentPrincipal = Principal;
+                AppDomain.CurrentDomain.SetThreadPrincipal(Principal);
+            }
+        }
+
+        private SecurityManager(IRepository<UserData> repository, RoleGroupManager roleGroupManager)
+        {
+            UserRepository = repository;
+            Service = new AuthenticationService(repository, roleGroupManager);
 
             Principal = new AppIdentity.AppPrincipal();
             SecurityProvider.Create(Service);
@@ -90,6 +112,27 @@ namespace TcOpen.Inxton.Local.Security
             {
                 _manager = new SecurityManager(authenticationService);
             }
+
+            return _manager.Service;
+        }
+
+        public static IAuthenticationService Create(IAuthenticationService authenticationService, IRepository<UserData> repository)
+        {
+            if (_manager == null)
+            {
+                _manager = new SecurityManager(authenticationService, repository);
+            }
+
+            return _manager.Service;
+        }
+
+        public static IAuthenticationService Create(IRepository<UserData> repository, RoleGroupManager roleGroupManager)
+        {
+            if (_manager == null)
+            {
+                _manager = new SecurityManager(repository, roleGroupManager);
+            }
+            _roleGroupManager = roleGroupManager;
 
             return _manager.Service;
         }
@@ -146,6 +189,20 @@ namespace TcOpen.Inxton.Local.Security
                 }
 
                 return _manager;
+            }
+        }
+
+        private static RoleGroupManager _roleGroupManager;
+        public static RoleGroupManager RoleGroupManager
+        {
+            get
+            {
+                if (_roleGroupManager == null)
+                {
+                    throw new Exception("RoleGroupManager was not created.");
+                }
+
+                return _roleGroupManager;
             }
         }
 
