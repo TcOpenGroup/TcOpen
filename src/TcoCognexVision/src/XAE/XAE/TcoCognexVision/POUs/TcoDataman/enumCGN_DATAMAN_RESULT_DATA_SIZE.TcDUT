@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="enumCGN_DATAMAN_RESULT_DATA_SIZE" Id="{006d19c8-f8c2-07d6-27b5-b295666befca}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE enumCGN_DATAMAN_RESULT_DATA_SIZE :
+(
+	RESULT_DATA_16B := 16,
+	RESULT_DATA_32B := 32,
+	RESULT_DATA_64B := 64,
+	RESULT_DATA_128B := 128,
+	RESULT_DATA_246B := 246	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

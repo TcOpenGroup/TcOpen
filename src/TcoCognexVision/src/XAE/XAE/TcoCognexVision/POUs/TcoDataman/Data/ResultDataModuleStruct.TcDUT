@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ResultDataModuleStruct" Id="{954f8228-2936-46c7-abc0-b5fa65b6601f}">
+    <Declaration><![CDATA[TYPE ResultDataModuleStruct :
+STRUCT
+	{attribute addProperty Name "<#ResultsID#>"}
+	{attribute clr [IoBinding ("API^Term 8 (Result Data - X bytes)^Subterm 1 (Result Data - X bytes)^Inputs^Result ID", "Value")]}
+	ResultsID :  UINT;
+	{attribute addProperty Name "<#ResultsCode#>"}
+	{attribute clr [IoBinding ("API^Term 8 (Result Data - X bytes)^Subterm 1 (Result Data - X bytes)^Inputs^Result Code", "Value")]}
+	ResultsCode  : UINT;
+	{attribute addProperty Name "<#ResultsExtended#>"}
+	{attribute clr [IoBinding ("API^Term 8 (Result Data - X bytes)^Subterm 1 (Result Data - X bytes)^Inputs^Result Extended", "Value")]}
+	ResultsExtended  : UINT;
+	{attribute addProperty Name "<#ResultsLength#>"}
+	{attribute clr [IoBinding ("API^Term 8 (Result Data - X bytes)^Subterm 1 (Result Data - X bytes)^Inputs^Result Length", "Value")]}
+	ResultsLength  : UINT;
+	{attribute addProperty Name "<#Results#>"}
+	{attribute clr [IoBinding ("API^Term 8 (Result Data - X bytes)^Subterm 1 (Result Data - X bytes)^Inputs^Result Data", "Value")]}
+	Results :  ARRAY [0..245]OF BYTE;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

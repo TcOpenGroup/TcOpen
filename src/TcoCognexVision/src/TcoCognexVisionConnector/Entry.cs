@@ -9,9 +9,10 @@ namespace TcoCognexVision
 {
     public static class Entry
     {
-        const string AmdId = "172.20.10.2.1.1";
+
+        static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
 
         public static TcoCognexVision.TcoCognexVisionTwinController TcoCognexVisionPlc 
-            = new TcoCognexVisionTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
+            = new TcoCognexVisionTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, 851, true));
     }
 }

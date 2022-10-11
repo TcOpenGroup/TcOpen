@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2010,7 +2010,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>In</Name>
 								<Type GUID="{901C2423-655B-45CE-B7E3-21F174F0F99F}" Namespace="MC">NCENCODERSTRUCT_IN2B</Type>
-								<BitOffs>1024</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataIn1</Name>
 								</SubVar>
@@ -2041,7 +2040,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>Out</Name>
 								<Type GUID="{9CC50AB2-5D79-4869-A3C2-1FA7761BAFEA}" Namespace="MC">NCENCODERSTRUCT_OUT2</Type>
-								<BitOffs>2048</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataOut1</Name>
 								</SubVar>
@@ -2073,7 +2071,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>In</Name>
 								<Type GUID="{F95C7C69-0C87-46C4-9559-1285CCA5B23A}" Namespace="MC">NCDRIVESTRUCT_IN2</Type>
-								<BitOffs>1344</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataIn1</Name>
 								</SubVar>
@@ -2099,7 +2096,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>Out</Name>
 								<Type GUID="{644DC4BD-3D15-4DCB-94C7-24F3A5D579AA}" Namespace="MC">NCDRIVESTRUCT_OUT2</Type>
-								<BitOffs>2368</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataOut1</Name>
 								</SubVar>
@@ -2171,7 +2167,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>In</Name>
 								<Type GUID="{901C2423-655B-45CE-B7E3-21F174F0F99F}" Namespace="MC">NCENCODERSTRUCT_IN2B</Type>
-								<BitOffs>2688</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataIn1</Name>
 								</SubVar>
@@ -2202,7 +2197,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>Out</Name>
 								<Type GUID="{9CC50AB2-5D79-4869-A3C2-1FA7761BAFEA}" Namespace="MC">NCENCODERSTRUCT_OUT2</Type>
-								<BitOffs>4736</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataOut1</Name>
 								</SubVar>
@@ -2234,7 +2228,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>In</Name>
 								<Type GUID="{F95C7C69-0C87-46C4-9559-1285CCA5B23A}" Namespace="MC">NCDRIVESTRUCT_IN2</Type>
-								<BitOffs>3008</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataIn1</Name>
 								</SubVar>
@@ -2260,7 +2253,6 @@ External Setpoint Generation:
 							<Var>
 								<Name>Out</Name>
 								<Type GUID="{644DC4BD-3D15-4DCB-94C7-24F3A5D579AA}" Namespace="MC">NCDRIVESTRUCT_OUT2</Type>
-								<BitOffs>5056</BitOffs>
 								<SubVar TypeFormatIndex="2">
 									<Name>nDataOut1</Name>
 								</SubVar>
@@ -2310,7 +2302,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>FromPlc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-							<BitOffs>1664</BitOffs>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" InsertType="1">
@@ -2318,7 +2309,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>ToPlc</Name>
 							<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF_OLD5</Type>
-							<BitOffs>2688</BitOffs>
 						</Var>
 					</Vars>
 				</Axis>
@@ -2326,7 +2316,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{C03634C4-AC7A-4A21-803F-218553AAE7F4}" Name="TcoDrivesBeckhoff" PrjFilePath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.plcproj" TmcFilePath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoff\TcoDrivesBeckhoff.tmc" TmcHash="{54CE2AC4-BCF6-E486-68F2-8A2674269F8E}">
 					<Name>TcoDrivesBeckhoff Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -2346,7 +2336,7 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 			<Project GUID="{4F0E1158-49EA-45D6-89E6-C1A4D3AF626F}" Name="TcoDrivesBeckhoffTests" PrjFilePath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.plcproj" TmcFilePath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.tmc">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoDrivesBeckhoffTests\TcoDrivesBeckhoffTests.tmc" TmcHash="{11FC6EB5-1FD8-8051-98CC-68A01C4A70F6}">
 					<Name>TcoDrivesBeckhoffTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2791,7 +2781,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 												<Data type="uint16">0.0130</Data>
 											</Parameter>
 											<Parameter>
-												<Comment>Winding resistance Ph-Ph 20Ä‚ÂĂ˘â‚¬ĹˇÄ‚â€šĂ‚Â°C</Comment>
+												<Comment>Winding resistance Ph-Ph 20ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¹Ã…â€œÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°C</Comment>
 												<Name>R</Name>
 												<Data type="uint16">1.50</Data>
 											</Parameter>
@@ -2871,7 +2861,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 											<Parameter>
 												<Comment>Motor temp sensor R(T)</Comment>
 												<Name>TempSensorR(T)</Name>
-												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="Ä‚ÂĂ˘â‚¬ĹˇÄ‚â€šĂ‚Â°C">
+												<DataTable type="int16[]" unitPrefix="-1" unitSiNumerator="ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¹Ã…â€œÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°C">
 													<item>-29.5</item>
 													<item>2.3</item>
 													<item>31.4</item>

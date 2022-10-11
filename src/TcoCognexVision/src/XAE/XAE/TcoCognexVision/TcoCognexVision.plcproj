@@ -34,6 +34,10 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -52,12 +56,82 @@
     <Compile Include="POUs\SampleContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TcoDataman\Data\AcquisitionControlModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\AcquisitionStatusModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\CGN_DATAMAN.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\ResultDataModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\ResultsControlModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\ResultsStatusModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\SoftEventControlModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Data\UserDataModuleStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\enumCGN_DATAMAN_RESULT_DATA_SIZE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\enumCGN_DATAMAN_USER_DATA_SIZE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\TcoDatamanConfig_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\TcoDatamanStatus_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\TcoDataman_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanAcquisitionControl_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanAcquisitionStatus_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanIO_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanResultData_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanResultsControl_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanResultsStatus_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanSoftEventControl_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanUserData_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
+    <Folder Include="POUs\TcoDataman" />
     <Folder Include="POUs\SampleComponent" />
+    <Folder Include="POUs\TcoDataman\Data" />
+    <Folder Include="POUs\TcoDataman\Hw" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_ProfinetDiag">
+      <DefaultResolution>Tc2_ProfinetDiag, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_ProfinetDiag</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -69,6 +143,10 @@
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcoAbstractions">
+      <DefaultResolution>TcoAbstractions, * (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoAbstractions</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>

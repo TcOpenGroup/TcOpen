@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ResultsStatusModuleStruct" Id="{e0ad8ce7-bfae-4db1-9088-12e09c514b42}">
+    <Declaration><![CDATA[TYPE ResultsStatusModuleStruct :
+STRUCT
+	{attribute addProperty Name "<#Decoding#>"}
+	{attribute clr [IoBinding ("API^Term 5 (Results Status)^Subterm 1 (Results Status)^Inputs^Results Status Register^Decoding", "Value")]}
+	Decoding :  BOOL;
+	{attribute addProperty Name "<#DecodeComplete#>"}
+	{attribute clr [IoBinding ("API^Term 5 (Results Status)^Subterm 1 (Results Status)^Inputs^Results Status Register^Decode Complete", "Value")]}
+	DecodeComplete :  BOOL;
+	{attribute addProperty Name "<#ResultBufferOverrun#>"}
+	{attribute clr [IoBinding ("API^Term 5 (Results Status)^Subterm 1 (Results Status)^Inputs^Results Status Register^Results Buffer Overrun", "Value")]}
+	ResultBufferOverrun :  BOOL;
+	{attribute addProperty Name "<#ResultsAvailable#>"}
+	{attribute clr [IoBinding ("API^Term 5 (Results Status)^Subterm 1 (Results Status)^Inputs^Results Status Register^Results Available", "Value")]}
+	ResultsAvailable :  BOOL;
+	{attribute addProperty Name "<#GeneralFault#>"}
+	{attribute clr [IoBinding ("API^Term 5 (Results Status)^Subterm 1 (Results Status)^Inputs^Results Status Register^Set when reader fault occurs", "Value")]}
+	GeneralFault :  BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

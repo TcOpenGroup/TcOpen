@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="AcquisitionStatusModuleStruct" Id="{b2e7b8df-45af-4b74-860a-ccafd81ce07a}">
+    <Declaration><![CDATA[TYPE AcquisitionStatusModuleStruct :
+STRUCT
+	{attribute addProperty Name "<#TriggerReady#>"}
+	{attribute clr [IoBinding ("API^Term 3 (Acquisition Status)^Subterm 1 (Acquisition Status)^Inputs^Acquisition Status Register^Trigger Ready", "Value")]}
+	TriggerReady :  BOOL;
+	{attribute addProperty Name "<#TriggerAck#>"}
+	{attribute clr [IoBinding ("API^Term 3 (Acquisition Status)^Subterm 1 (Acquisition Status)^Inputs^Acquisition Status Register^Trigger Acknowledge", "Value")]}
+	TriggerAck :  BOOL;
+	{attribute addProperty Name "<#Acquiring#>"}
+	{attribute clr [IoBinding ("API^Term 3 (Acquisition Status)^Subterm 1 (Acquisition Status)^Inputs^Acquisition Status Register^Acquiring", "Value")]}
+	Acquiring  :  BOOL;
+	{attribute addProperty Name "<#MissedAcquisition#>"}
+	{attribute clr [IoBinding ("API^Term 3 (Acquisition Status)^Subterm 1 (Acquisition Status)^Inputs^Acquisition Status Register^Missed Acquisition", "Value")]}
+	MissedAcquisition :  BOOL;
+	{attribute addProperty Name "<#TriggerID#>"}
+	{attribute clr [IoBinding ("API^Term 3 (Acquisition Status)^Subterm 1 (Acquisition Status)^Inputs^Trigger ID", "Value")]}
+	TriggerID :UINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
