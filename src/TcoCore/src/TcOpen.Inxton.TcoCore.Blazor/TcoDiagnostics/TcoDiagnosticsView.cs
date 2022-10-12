@@ -29,13 +29,14 @@ namespace TcoCore
            
            
         }
-
+        public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
+        private static int _diagnosticsUpdateInterval { get; set; } = 2500;
         private Timer messageUpdateTimer;
         private void DiagnosticsUpdateTimer()
         {
             if (messageUpdateTimer == null)
             {
-                messageUpdateTimer = new Timer(2500);
+                messageUpdateTimer = new Timer(_diagnosticsUpdateInterval);
                 messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
                 messageUpdateTimer.AutoReset = true;
                 messageUpdateTimer.Enabled = true;

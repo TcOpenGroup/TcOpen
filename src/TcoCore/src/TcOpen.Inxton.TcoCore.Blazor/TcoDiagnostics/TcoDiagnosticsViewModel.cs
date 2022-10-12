@@ -50,6 +50,7 @@ namespace TcoCore
         public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaulCategory = item;
 
         public static eMessageCategory DefaulCategory { get; set; } = eMessageCategory.Info;
+        
 
         bool diagnosticsRunning;
 
