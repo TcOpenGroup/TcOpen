@@ -26,7 +26,7 @@
                 @bind="@DataViewModel.SearchMode">
             @foreach (var item in eSearchModes)
             {
-                <option class="form-control" value="@item.">@item.ToString() </option>
+                <option class="form-control" value="@item">@item.ToString() </option>
             }
         </select>
     </div>
@@ -58,7 +58,12 @@
                             <tbody>
                                 @foreach (var item in DataViewModel.ObservableRecords.ToList())
                                 {
-                                    <tr @onclick="@(() => RowClicked(item))">
+                                    var color = "white";
+                                    @if (DataViewModel?.SelectedRecord?._EntityId == item._EntityId)
+                                    {
+                                        color = "#e9ecef";
+                                    }
+                                    <tr style="background-color: @color;" @onclick="@(() => RowClicked(item))">
                                         <td>@item._EntityId</td>
                                     </tr>
                                 }
@@ -346,8 +351,7 @@
         DataViewModel.SelectedRecord = item;
         dynamic dataExchange = DataViewModel.DataExchange;
         _data = (IVortexElement)dataExchange._data;
-        StateHasChanged();
-
+        _isRowSelected = true;
     }
 
     private async Task PageChanged(int pageNumber)
@@ -422,9 +426,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        IsLoading = true;
-        await Filter();
-        IsLoading = false;
         DataViewModel.Mode = ViewMode.Display;
         DataViewModel.SetDefaultButtonState();
     }
