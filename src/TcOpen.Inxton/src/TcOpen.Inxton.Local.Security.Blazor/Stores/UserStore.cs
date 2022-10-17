@@ -53,7 +53,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 return _unitOfWork.RoleGroupManager.inAppRoleCollection;
             }
         }
-        private BlazorRoleGroupManager _roleGroupManager
+        private RoleGroupManager _roleGroupManager
         {
             get
             {
@@ -175,7 +175,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             try
             {
-                _unitOfWork.UserRepository.Create(user.NormalizedUserName, userEntity);
+                _unitOfWork.UserRepository.Create(user.UserName, userEntity);
             }
             catch (DuplicateIdException)
             {
@@ -215,7 +215,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                     return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
                 }
 
-                _unitOfWork.UserRepository.Update(user.NormalizedUserName, userData);
+                _unitOfWork.UserRepository.Update(user.UserName, userData);
             }
             catch (UnableToLocateRecordId)
             {
@@ -238,7 +238,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            _unitOfWork.UserRepository.Delete(user.NormalizedUserName);
+            _unitOfWork.UserRepository.Delete(user.UserName);
 
             return Task.FromResult(IdentityResult.Success);
         }

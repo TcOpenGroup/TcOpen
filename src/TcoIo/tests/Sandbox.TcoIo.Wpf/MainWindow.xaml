@@ -55,30 +55,45 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <sim:SetAllToOPstate            Grid.Column="0" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
-                <sim:SetAllToINITstate          Grid.Column="0" Grid.Row="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="0" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
-                <sim:SetAllToINITstate          Grid.Column="0" Grid.Row="3" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004}"/>
-                <sim:SetAllToINITstate          Grid.Column="0" Grid.Row="4" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="0" Grid.Row="5" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="0" Grid.Row="6" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809}"/>
+ 
+                <sim:SimulateState Grid.Column="0" Grid.Row="0" SimulatedState="OP" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="0" Grid.Row="1" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="0" Grid.Row="2" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="0" Grid.Row="3" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004}"/>
+                <sim:SimulateState Grid.Column="0" Grid.Row="4" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1}"/>
+                <sim:SimulateState Grid.Column="0" Grid.Row="5" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809}"/>
+                <sim:SimulateState Grid.Column="0" Grid.Row="6" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809}"/>
 
-                <sim:SetAllToOPstate            Grid.Column="1" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
-                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="1" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
-                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="3" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_36_EL3024}"/>
-                <sim:SetAllToINITstate          Grid.Column="1" Grid.Row="4" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.SyncUnits._default.PlcTask1}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="1" Grid.Row="5" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_11_EK1100}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="1" Grid.Row="6" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_18_EK1100.Term_22_EL3011}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="0" SimulatedState="OP" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="1" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="2" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="3" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_36_EL3024}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="4" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.SyncUnits._default.PlcTask1}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="5" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_11_EK1100}"/>
+                <sim:SimulateState Grid.Column="1" Grid.Row="6" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_18_EK1100.Term_22_EL3011}"/>
 
-                <sim:SetAllToOPstate            Grid.Column="2" Grid.Row="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SetAllToINITstate          Grid.Column="2" Grid.Row="1" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="2" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SetAllToINITstate          Grid.Column="2" Grid.Row="3" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"/>
-                <sim:SetAllToINITstate          Grid.Column="2" Grid.Row="4" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="5" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100}"/>
-                <sim:SetAllToMissingConnection  Grid.Column="2" Grid.Row="6" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="0" SimulatedState="OP" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="1" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="2" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="3" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="4" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="5" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="6" SimulatedState="ERROR" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="7" SimulatedState="InvalidVendorId" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="8" SimulatedState="InitializationError" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="9" SimulatedState="SlaveDisabled" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="10" SimulatedState="SlaveNotPresent" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="11" SimulatedState="SlaveSignalsLinkError" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="12" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState Grid.Column="2" Grid.Row="13" SimulatedState="SlaveSignalsUnexpectedLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
             </Grid>
         </TabItem>
         <TabItem Header="Diagnostic messages" >
@@ -93,3 +108,4 @@
         </TabItem>
     </TabControl>
 </Window>
+

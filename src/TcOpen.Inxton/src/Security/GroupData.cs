@@ -9,7 +9,7 @@ using System.Text;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Security;
 
-namespace TcOpen.Inxton.Local.Security.Blazor
+namespace TcOpen.Inxton.Local.Security
 {
     public class GroupData : IBrowsableDataObject
     {

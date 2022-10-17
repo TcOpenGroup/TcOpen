@@ -23,7 +23,7 @@ namespace TcOpen.Inxton.Local.Security
         }
         
         public IUser RequestAuthorization(string token)
-        {
+        {            
             AuthorizationErrorMessage = string.Empty;
             try
             {

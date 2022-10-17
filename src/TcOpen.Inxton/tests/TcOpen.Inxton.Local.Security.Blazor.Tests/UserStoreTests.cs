@@ -26,7 +26,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             var result = await _fixture.UserStore.CreateAsync(_fixture.SeedData.CreateUser);
             //Assert
-            var user = _fixture.Repository.UserRepository.Read("CREATE");
+            var user = _fixture.Repository.UserRepository.Read("create");
             Assert.NotNull(user);
             Assert.True(result.Succeeded);
         }
@@ -179,7 +179,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             //Arrange
             //Act
-            var user = await _fixture.UserStore.FindByNameAsync(_fixture.SeedData.ExistUser.NormalizedUserName);
+            var user = await _fixture.UserStore.FindByNameAsync(_fixture.SeedData.ExistUser.UserName);
             //Assert
             Assert.NotNull(user);
         }
@@ -852,9 +852,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         public async Task UpdateAsync_Success()
         {
             //Arrange
-            var userData = _fixture.Repository.UserRepository.Read(_fixture.SeedData.UpdateUser.NormalizedUserName);
+            var userData = _fixture.Repository.UserRepository.Read(_fixture.SeedData.UpdateUser.UserName);
             var user = new User(userData);
-            user.UserName = "newUpdate";
             user.Email = "newupdate@newupdate.com";
             user.PasswordHash = "password";
             user.SecurityStamp = Guid.NewGuid().ToString();
@@ -864,7 +863,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             var result = await _fixture.UserStore.UpdateAsync(user);
             //Assert
             Assert.True(result.Succeeded);
-            var updatedUser = _fixture.Repository.UserRepository.Read(_fixture.SeedData.UpdateUser.NormalizedUserName);
+            var updatedUser = _fixture.Repository.UserRepository.Read(_fixture.SeedData.UpdateUser.UserName);
             Assert.Equal(user.UserName, updatedUser.Username);
             Assert.Equal(user.Email, updatedUser.Email);
             Assert.Equal(user.PasswordHash, updatedUser.HashedPassword);

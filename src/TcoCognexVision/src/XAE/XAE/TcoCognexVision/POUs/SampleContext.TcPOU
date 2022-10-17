@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="SampleContext" Id="{c96f4cb6-dc5b-0c8b-314d-51db619ff818}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SampleContext EXTENDS TcoCore.TcoContext
+VAR
+	_sampleComponent : SampleComponent(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{417543fe-86a7-0e39-3562-9a17532012cf}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_sampleComponent.Service();
+_sampleComponent();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

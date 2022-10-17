@@ -25,6 +25,8 @@
 </div>
 
 @code{
+    [Parameter]
+    public TcoTask Context { get; set; }
     public string StatusClass => ViewModel.Component._taskState.Synchron == 30 ? "btn-danger" : "btn-primary";
 
     public bool IsError => ViewModel.Component._taskState.Synchron == 30;
@@ -40,4 +42,13 @@
         ,
         (short)eTaskState.Done => () => { }
     };
+
+    protected override Task OnInitializedAsync()
+    {
+        if (ViewModel == null)
+        {
+            ViewModel = new TcoTaskViewModel() { Model = Context };
+        }
+        return base.OnInitializedAsync();
+    }
 }

@@ -50,12 +50,12 @@ namespace TcoCore
 
         private void ReadCategories()
         {
-            _obj.GetConnector().ReadBatch(CategoryTags);
+            _obj.GetConnector().ReadBatchFromUIThread(CategoryTags);
         }
 
         private void ReadCycles()
         {
-            _obj.GetConnector().ReadBatch(CycleTags);
+            _obj.GetConnector().ReadBatchFromUIThread(CycleTags);
         }
 
         private List<IValueTag> CategoryTags
@@ -147,7 +147,7 @@ namespace TcoCore
 
             if (_obj.GetConnector().RwCycleCount > 1)
             {
-                _obj.GetConnector().ReadBatch(refreshTags);
+                _obj.GetConnector().ReadBatchFromUIThread(refreshTags);
             }
 
             return DescendingMessages?.Where(p => p.IsActive && p.Category.LastValue >= (short)category).Select(p => p.PlainMessage);

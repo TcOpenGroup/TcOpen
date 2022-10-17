@@ -58,7 +58,12 @@
                             <tbody>
                                 @foreach (var item in DataViewModel.ObservableRecords.ToList())
                                 {
-                                    <tr @onclick="@(() => RowClicked(item))">
+                                    var color = "white";
+                                    @if (DataViewModel?.SelectedRecord?._EntityId == item._EntityId)
+                                    {
+                                        color = "#e9ecef";
+                                    }
+                                    <tr style="background-color: @color;" @onclick="@(() => RowClicked(item))">
                                         <td>@item._EntityId</td>
                                     </tr>
                                 }
@@ -347,8 +352,6 @@
         dynamic dataExchange = DataViewModel.DataExchange;
         _data = (IVortexElement)dataExchange._data;
         _isRowSelected = true;
-        StateHasChanged();
-
     }
 
     private async Task PageChanged(int pageNumber)
@@ -423,9 +426,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        IsLoading = true;
-        await Filter();
-        IsLoading = false;
         DataViewModel.Mode = ViewMode.Display;
         DataViewModel.SetDefaultButtonState();
     }
