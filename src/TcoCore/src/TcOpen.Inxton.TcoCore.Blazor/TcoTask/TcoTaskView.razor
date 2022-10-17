@@ -42,13 +42,4 @@
         ,
         (short)eTaskState.Done => () => { }
     };
-
-    protected override Task OnInitializedAsync()
-    {
-        if (ViewModel == null)
-        {
-            ViewModel = new TcoTaskViewModel() { Model = Context };
-        }
-        return base.OnInitializedAsync();
-    }
 }
