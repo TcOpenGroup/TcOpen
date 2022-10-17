@@ -57,6 +57,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public void CreateGroup()
         {
+            if(newGroupName == null || newGroupName == "")
+            {
+                _alertManager.addAlert("warning", "Wrong group name!");
+                return;
+            }
             var result = _roleGroupManager.CreateGroup(newGroupName);
             if (result.Succeeded)
             {

@@ -12,6 +12,11 @@ namespace TcoCore
 
         protected override void OnInitialized()
         {
+            if (ViewModel == null)
+            {
+                ViewModel = new TcoTaskViewModel() { Model = Context };
+            }
+
             UpdateValuesOnChange(ViewModel.Component);
             IsTaskRunning = ViewModel.Component.GetTaskState();
             ViewModel.Component._taskState.Subscribe(TaskStateChanged);
