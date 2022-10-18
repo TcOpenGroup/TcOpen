@@ -17,7 +17,7 @@ namespace TcoCore
         {
             get
             {
-                lock (this)
+                //lock (this)
                 { 
                     if (signal == null)
                     {
