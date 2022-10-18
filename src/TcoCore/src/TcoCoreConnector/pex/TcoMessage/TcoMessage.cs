@@ -66,7 +66,7 @@
         {
             get
             {
-                //lock (mutex)
+                lock (mutex)
                 {
                     if (_indentityPersistence == null)
                     {
@@ -84,7 +84,7 @@
         {
             get
             {
-                //lock (mutex)
+                lock (mutex)
                 {
                     if (_translatorPersistence == null)
                     {

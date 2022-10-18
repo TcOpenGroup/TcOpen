@@ -56,7 +56,7 @@
         /// </summary>
         public void UpdateMessages(eMessageCategory category = eMessageCategory.All)
         {           
-            //lock (updatemutex)
+            lock (updatemutex)
             {
                 if (DiagnosticsRunning)
                 {
@@ -87,7 +87,7 @@
 
         void RogerAllMessages()
         {
-            //lock (updatemutex)
+            lock (updatemutex)
             {
                 foreach (var item in MessageDisplay.Where(p => p.Pinned))
                 {                    
