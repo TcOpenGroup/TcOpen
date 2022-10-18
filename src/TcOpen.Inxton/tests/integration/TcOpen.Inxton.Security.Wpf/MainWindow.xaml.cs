@@ -34,7 +34,7 @@ namespace integration.Security.Wpf.netcore
 
             userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()) { CanUserChangePassword = true });
 
-            authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3");
+            authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3", deauthenticateWhenSame:true);
 
             authService.DeAuthenticateCurrentUser();
 

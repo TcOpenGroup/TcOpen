@@ -14,10 +14,10 @@ namespace TcOpen.Inxton.Local.Security.Readers
         /// Creates new instance of External token authentication.
         /// </summary>
         /// <param name="tokenProvider">Token provider.</param>
-        public ExternalTokenAuthorization(ITokenProvider tokenProvider)
+        public ExternalTokenAuthorization(ITokenProvider tokenProvider, bool deauthenticateWhenSame)
         {
             this._tokenProvider = tokenProvider;
-            this._tokenProvider.SetTokenReceivedAction((token) => this.RequestAuthorization(token));
+            this._tokenProvider.SetTokenReceivedAction((token) => this.RequestAuthorization(token, deauthenticateWhenSame));
         }
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace TcOpen.Inxton.Local.Security.Readers
         /// <param name="stopBits">Stop bits</param>
         /// <param name="parity">Parity</param>
         /// <returns>External authentication provider.</returns>
-        public static ExternalAuthorization CreateComReader(string portName, int baudRate = 9600, int dataBits = 8, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
+        public static ExternalAuthorization CreateComReader(string portName, int baudRate = 9600, int dataBits = 8, StopBits stopBits = StopBits.One, Parity parity = Parity.None, bool deauthenticateWhenSame = true)
         {
-           return new ExternalTokenAuthorization(new ComPortTokenProvider(portName, baudRate, dataBits, stopBits, parity));
+           return new ExternalTokenAuthorization(new ComPortTokenProvider(portName, baudRate, dataBits, stopBits, parity), deauthenticateWhenSame);
         }
 
         /// <summary>
@@ -41,9 +41,10 @@ namespace TcOpen.Inxton.Local.Security.Readers
         /// <param name="tokenPresence">Onliner bool indicating presence of authentication token.</param>
         /// <returns></returns>
         public static ExternalAuthorization CreatePlcTokenReader(Vortex.Connector.ValueTypes.OnlinerString tokenValue,
-                                                                 Vortex.Connector.ValueTypes.OnlinerBool tokenPresence)
+                                                                 Vortex.Connector.ValueTypes.OnlinerBool tokenPresence,
+                                                                 bool deauthenticateWhenSame = true)
         {
-            return new ExternalTokenAuthorization(new PlcTokenReader(tokenValue, tokenPresence));
+            return new ExternalTokenAuthorization(new PlcTokenReader(tokenValue, tokenPresence), deauthenticateWhenSame);
         }
 
     }
