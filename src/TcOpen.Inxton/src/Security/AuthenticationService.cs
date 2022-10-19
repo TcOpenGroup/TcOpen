@@ -86,7 +86,7 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
-        private IUser ExternalAuthorization_AuthorizationRequest(string token)
+        private void ExternalAuthorization_AuthorizationRequest(string token, bool deauthenticateWhenSame)
         {
             var userName = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name;
             var currentUser = _users.FirstOrDefault(u => u.Username.Equals(userName));
@@ -94,13 +94,18 @@ namespace TcOpen.Inxton.Local.Security
             // De authenticate when the token matches the token of currently authenticated user.
             if (currentUser != null && this.CalculateHash(token, string.Empty) == currentUser.AuthenticationToken)
             {
-                this.DeAuthenticateCurrentUser();
-                return null;
+                if (deauthenticateWhenSame)
+                {
+                    this.DeAuthenticateCurrentUser();
+                    // return null;
+                }
+
+                // return currentUser;
             }
             else
             {
                 var authenticatedUser = this.AuthenticateUser(token);
-                return authenticatedUser;
+                // return authenticatedUser;
             }            
         }
 
