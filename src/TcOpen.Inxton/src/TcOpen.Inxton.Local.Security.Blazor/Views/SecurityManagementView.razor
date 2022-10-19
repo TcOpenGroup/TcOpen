@@ -25,11 +25,12 @@
         </div>
     </Authorized>
     <NotAuthorized>
-        <p>Sorry, you are not authorized to see UserManagement. Please log in as administrator.</p>
+        <p>Sorry, you are not authorized to access user management. Please log in as administrator.</p>
     </NotAuthorized>
 </AuthorizeView>
 
 @code{
+
     int selected = 0;
     private UserManagementView userManagementView { get; set; }
     private GroupManagementView groupManagementView { get; set; }

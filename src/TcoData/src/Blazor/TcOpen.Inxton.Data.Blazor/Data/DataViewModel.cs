@@ -30,6 +30,7 @@ namespace TcoData
         {
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
+            FillObservableRecords();
         }
 
         public List<IBrowsableDataObject> ObservableRecords { get; private set; } = new List<IBrowsableDataObject>();

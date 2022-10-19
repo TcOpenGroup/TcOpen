@@ -1,0 +1,82 @@
+﻿@namespace TcoCore
+@inherits RenderableViewModelComponentBase<TcoSequencerObserverViewModel>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Order</th>
+            <th scope="col">ID</th>
+            <th scope="col">Description</th>
+            <th scope="col">Enabled</th>
+            <th scope="col">Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            @foreach (var step in Steps)
+            {
+                var rowActive = "";
+                @if (step.IsActive)
+                {
+                    rowActive = "fw-bolder";
+                }
+                <tr class="@rowActive">
+                    <th>@step.Order</th>
+                    <td>@step.ID</td>
+                    <td>@step.Description</td>
+                    <td>@step.Enabled</td>
+                    <td>@step.Duration</td>
+                </tr>
+            }
+        
+    </tbody>
+       
+</table>
+
+
+@code {
+
+    [Parameter]
+    public IVortexElement Context { get; set; }
+    private IEnumerable<PlainStepDetails> Steps { get; set; } = new List<PlainStepDetails>();
+    private IEnumerable<PlainStepDetails> PreviousSteps { get; set; } = new List<PlainStepDetails>();
+    protected override void OnInitialized()
+    {
+        if (ViewModel == null)
+        {
+            ViewModel = new TcoSequencerObserverViewModel();
+            ViewModel.Model = Context;
+        }
+        SetTimer();
+    }
+
+
+    private System.Timers.Timer messageUpdateTimer;
+    private void SetTimer()
+    {
+        if (messageUpdateTimer == null)
+        {
+            messageUpdateTimer = new System.Timers.Timer(1000);
+            messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
+            messageUpdateTimer.AutoReset = true;
+            messageUpdateTimer.Enabled = true;
+        }
+    }
+
+    private async void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+
+        ViewModel?.UpdateStepsTable();
+        if (ViewModel.Steps == null)
+        {
+            Steps = PreviousSteps;
+        }
+        else
+        {
+            Steps = ViewModel.Steps;
+            PreviousSteps = Steps;
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+}
