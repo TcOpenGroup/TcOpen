@@ -3,19 +3,12 @@
   <Itf Name="ITcoCodeReader" Id="{20e8eca5-ad98-0994-0a1f-244ff926d52d}">
     <Declaration><![CDATA[INTERFACE ITcoCodeReader EXTENDS __System.IQueryInterface
 ]]></Declaration>
-    <Folder Name="Actions" Id="{4433432c-54c1-0b18-0651-81d20a55bbd9}" />
-    <Folder Name="States" Id="{324ff694-1067-0b4c-2529-f3b527e7794b}" />
-    <Method Name="ClearResultData" Id="{3b5fd205-da52-04d1-30cf-1c3c24bc0135}" FolderPath="Actions\">
+    <Folder Name="Operations" Id="{4433432c-54c1-0b18-0651-81d20a55bbd9}" />
+    <Method Name="ClearResultData" Id="{3b5fd205-da52-04d1-30cf-1c3c24bc0135}" FolderPath="Operations\">
       <Declaration><![CDATA[METHOD ClearResultData : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
-    <Property Name="LastResultData" Id="{1480406f-0cfc-0fdd-3344-a65357f8aae9}" FolderPath="States\">
-      <Declaration><![CDATA[PROPERTY LastResultData : ARRAY[0..TcoVisionParams.MAX_BYTE_ARRAY] OF BYTE]]></Declaration>
-      <Get Name="Get" Id="{d5e8f9af-7d85-0cb6-0149-bcf4b003a53f}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
-    <Method Name="Read" Id="{e6ef27be-4d76-0c9a-1cb7-1307326132ec}" FolderPath="Actions\">
+    <Method Name="Read" Id="{e6ef27be-4d76-0c9a-1cb7-1307326132ec}" FolderPath="Operations\">
       <Declaration><![CDATA[METHOD Read : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>

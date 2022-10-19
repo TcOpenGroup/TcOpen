@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="TcoDatamanUserData_v_5_x_x" Id="{402103af-ceb8-4f65-9e53-bac7c593eb57}">
+    <Declaration><![CDATA[TYPE TcoDatamanUserData_v_5_x_x :
+STRUCT
+	UserDataOption 	AT %Q*:	UINT;
+	UserDataLength 	AT %Q*:	UINT;
+	UserData 		AT %Q*:	ARRAY [0..249]OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

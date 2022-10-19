@@ -22,4 +22,10 @@
     <ProjectReference Include="..\..\TcoCognexVisionConnector\TcoCognexVisionConnector.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="TcoDataman\v_5_x_x\TcoDataman_v_5_x_xServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -41,6 +41,27 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Conversion\eTcoDataFormat.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversion\FromBytes\TcoBytesToDint.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversion\FromBytes\TcoBytesToInt.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversion\FromBytes\TcoBytesToReal.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversion\ToBytes\TcoDintToBytes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversion\ToBytes\TcoIntToBytes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversion\ToBytes\TcoRealToBytes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -56,82 +77,70 @@
     <Compile Include="POUs\SampleContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\AcquisitionControlModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\eDatamanResultDataSize_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\AcquisitionStatusModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\eDatamanUserDataSize_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\CGN_DATAMAN.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanAcquisitionControl_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\ResultDataModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanAcquisitionStatus_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\ResultsControlModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanIO_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\ResultsStatusModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanResultData_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\SoftEventControlModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanResultsControl_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Data\UserDataModuleStruct.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanResultsStatus_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\enumCGN_DATAMAN_RESULT_DATA_SIZE.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanSoftEventControl_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\enumCGN_DATAMAN_USER_DATA_SIZE.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanUserData_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\TcoDatamanConfig_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanConfig_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\TcoDatamanStatus_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanStatus_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\TcoDataman_v_5_x_x.TcPOU">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanAcquisitionControl_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x_ClearResultData.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanAcquisitionStatus_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x_Read.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanIO_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoVisionData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanResultData_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoVisionParams.TcGVL">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanResultsControl_v_5_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanResultsStatus_v_5_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanSoftEventControl_v_5_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDataman\Hw\TcoDatamanUserData_v_5_x_x.TcDUT">
-      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
+    <Folder Include="POUs\Conversion" />
+    <Folder Include="POUs\Conversion\FromBytes" />
+    <Folder Include="POUs\Conversion\ToBytes" />
     <Folder Include="POUs\TcoDataman" />
     <Folder Include="POUs\SampleComponent" />
-    <Folder Include="POUs\TcoDataman\Data" />
-    <Folder Include="POUs\TcoDataman\Hw" />
+    <Folder Include="POUs\TcoDataman\v_5_x_x" />
+    <Folder Include="POUs\TcoDataman\v_5_x_x\IO" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="Tc2_ProfinetDiag">
-      <DefaultResolution>Tc2_ProfinetDiag, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_ProfinetDiag</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -151,6 +160,10 @@
     <PlaceholderReference Include="TcoCore">
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcoIo">
+      <DefaultResolution>TcoIo, * (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoIo</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>

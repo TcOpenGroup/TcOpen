@@ -40,10 +40,6 @@
     <Compile Include="Vision\CodeReader\ITcoCodeReader.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Vision\CodeReader\TcoVisionParams.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -69,13 +65,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Vision" />
+    <Folder Include="Vision\CodeReader" />
+  </ItemGroup>
+  <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Vision" />
-    <Folder Include="Vision\CodeReader" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
