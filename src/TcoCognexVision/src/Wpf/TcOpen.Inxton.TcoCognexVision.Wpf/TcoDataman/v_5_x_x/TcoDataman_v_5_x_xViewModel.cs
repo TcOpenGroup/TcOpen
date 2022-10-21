@@ -27,21 +27,33 @@ namespace TcoCognexVision
 
         public TcoDataman_v_5_x_xViewModel() : base()
         {
-            ResultData = new ObservableCollection<IndexedData<string>>();
-            Model = new TcoDataman_v_5_x_x();
+            //ResultData = new ObservableCollection<IndexedData<string>>();
+            Model = new TcoDataman_v_5_x_xEx();
         }
 
-        public TcoDataman_v_5_x_x Component { get; private set; }
+        //public TcoDataman_v_5_x_x Component { get; private set; }
+        public TcoDataman_v_5_x_xEx Component { get; private set; }
 
         public override object Model 
         { 
             get => Component; 
             set 
             {
-                Component = value as TcoDataman_v_5_x_x;
-                UpdateAndFormatResultData();
-                Component._resultData.Length.Subscribe((sender,arg) => UpdateAndFormatResultData());
-                Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                if(value.GetType().Equals(typeof(TcoDataman_v_5_x_xEx)))
+                {
+                    Component = value as TcoDataman_v_5_x_xEx;
+                    UpdateAndFormatResultData();
+                    Component._resultData.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                    Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                }
+                else if (value.GetType().Equals(typeof(TcoDataman_v_5_x_x)))
+                {
+                    Component = new TcoDataman_v_5_x_xEx(value as TcoDataman_v_5_x_x, ResultData);
+                    UpdateAndFormatResultData();
+                    Component._resultData.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                    Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                }
+
             }
         }
 
@@ -60,7 +72,7 @@ namespace TcoCognexVision
                         ResultData.Clear();
                     }
 
-                    if (Component._resultData.GetConnector() != null)
+                    if (Component != null && Component.GetConnector() != null && Component._resultData.GetConnector() != null)
                     {
                         Component._resultData.Read();
                         if (CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
@@ -113,15 +125,28 @@ namespace TcoCognexVision
 
     }
 
-    //public class TcoDataman_v_5_x_xEx : TcoDataman_v_5_x_x
-    //{
-    //    public ObservableCollection<IndexedData<OnlinerBaseType>> ResultData { get; private set; }
+    public class TcoDataman_v_5_x_xEx : TcoDataman_v_5_x_x
+    {
+        public ObservableCollection<IndexedData<string>> ResultData { get; private set; }
 
-    //    public TcoDataman_v_5_x_xEx()
-    //    {
-    //        ResultData = new ObservableCollection<IndexedData<OnlinerBaseType>>();
-    //    }
+        public TcoDataman_v_5_x_xEx()
+        {
+            ResultData = new ObservableCollection<IndexedData<string>>();
+        }
+        public TcoDataman_v_5_x_xEx(TcoDataman_v_5_x_x _component, ObservableCollection<IndexedData<string>> _resultData) 
+        {
+            var properties = _component.GetType().GetProperties();
+            properties.ToList().ForEach(property =>
+                {
+                    if (this.GetType().GetProperty(property.Name) != null && property.CanWrite)
+                    {
+                        var value = _component.GetType().GetProperty(property.Name).GetValue(_component, null);
+                        this.GetType().GetProperty(property.Name).SetValue(this, value, null);
+                    }
+                });
 
-    //}
-
+            ResultData = _resultData;
+        }
+    }
 }
+

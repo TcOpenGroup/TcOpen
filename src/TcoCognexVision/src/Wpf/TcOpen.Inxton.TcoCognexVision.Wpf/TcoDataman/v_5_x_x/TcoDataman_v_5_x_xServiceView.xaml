@@ -47,17 +47,17 @@
         </StackPanel>
         <!-->>>>>>>>>>Temporary list view until binding to ResultData inside TcoComponentView-->
 
-        <tcoCore:TcoComponentView x:Name="componentView" >
+        <tcoCore:TcoComponentView DataContext="{Binding ComponentEx.Model}">
             <tcoCore:TcoComponentView.ComponentHeader>
-                <WrapPanel HorizontalAlignment="Right" x:Name="componentViewWrap">
+                <WrapPanel HorizontalAlignment="Right" >
                 <WrapPanel.Resources>
                     <Style TargetType="StackPanel">
                         <Setter Property="MinWidth" Value="250"/>
                     </Style>
                 </WrapPanel.Resources>
-                    <StackPanel DataContext ="{Binding ElementName=datmanView, Path=DataContext}" x:Name="componentViewStack">
+                    <!--<StackPanel DataContext ="{Binding ElementName=datmanView, Path=DataContext}">-->
                         <WrapPanel>
-                            <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp" x:Name="componentViewList"   
+                            <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp"   
                                 MinWidth="200"                        
                                 Margin="10"
                                 HorizontalAlignment="Center"
@@ -84,7 +84,7 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </WrapPanel>
-                </StackPanel>
+                <!--</StackPanel>-->
             </WrapPanel>
         </tcoCore:TcoComponentView.ComponentHeader>
             <tcoCore:TcoComponentView.ComponentDetails>
