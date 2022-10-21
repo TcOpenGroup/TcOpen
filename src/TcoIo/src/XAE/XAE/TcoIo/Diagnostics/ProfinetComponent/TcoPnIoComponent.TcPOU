@@ -9,6 +9,10 @@ END_VAR
 VAR
 	{attribute 'hide'}
 	_profinetReady : BOOL;
+	{attribute 'hide'}
+	ioc_ar_is_established :BOOL;
+	{attribute 'hide'}
+	ioc_ar_was_not_yet_established :BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//PnIoBoxState
@@ -62,9 +66,10 @@ THIS^.Messenger.OnCondition(inPnIoBoxState=31).Error('<#EtherCAT gateway: WC-Sta
 //0x1000 = At least one OutputCR is invalid
 //0x2000 = At least one OutputCR Provider is in stop
 //0x4000 = At least one OutputCR Problemindicator is set
+ioc_ar_is_established := inPnIoBoxDiag.1;
 
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.0 ).Error('<#IOC-AR is not established!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.1 ).Error('<#IOC-AR is established!#>');
+THIS^.Messenger.OnCondition(ioc_ar_is_established AND ioc_ar_was_not_yet_established).Info('<#IOC-AR is established!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.2 ).Error('<#IOC-AR is established but no application ready!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.3 ).Error('<#IOC-AR is established but module difference!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.4 ).Error('<#AT least one AlarmCR got a diagnosis alarm!#>');
@@ -75,6 +80,7 @@ THIS^.Messenger.OnCondition(inPnIoBoxDiag.12).Error('<#AT least one OutputCR is 
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.13).Error('<#At least one OutputCR Provider is in stop!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.14).Error('<#AT least one OutputCR Problemindicator is set!#>');
 
+ioc_ar_was_not_yet_established := NOT inPnIoBoxDiag.1;
 
 _profinetReady := inPnIoBoxState = 0 AND inPnIoBoxDiag = 2;
 ]]></ST>

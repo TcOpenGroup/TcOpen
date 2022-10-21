@@ -60,8 +60,15 @@ END_VAR
 	END_IF
 	
 	IF _progress = 5 THEN
+		THIS^.inoResultData.Id := THIS^.inoIoData.ResultData.ResultID;
+		THIS^.inoResultData.Code := THIS^.inoIoData.ResultData.ResultCode;
+		THIS^.inoResultData.Extended := THIS^.inoIoData.ResultData.ResultExtended;
 		THIS^.inoResultData.Length := THIS^.inoIoData.ResultData.ResultLength;
 		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the ResultData copied!#>'); 
+		IF THIS^.inoResultData.Length > INT_TO_UINT(THIS^.inoConfig.ResultDataSize) THEN
+			THIS^.Messenger.Error('<#Length of the data sent by device exceeds the size of the hardware structure mapped!#>');
+			THIS^.ThrowWhen(TRUE);
+		END_IF
 		IF  Tc2_System.MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultData.ResultData) , destAddr:= ADR(THIS^.inoResultData.Data) ,  n:= THIS^.inoResultData.Length) > 0 AND 
 			Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoResultData.Data) + THIS^.inoResultData.Length, fillByte:= 0 , n:= SIZEOF(THIS^.inoResultData.Data) - THIS^.inoResultData.Length)>0 THEN
 			CallTimers(FALSE);
