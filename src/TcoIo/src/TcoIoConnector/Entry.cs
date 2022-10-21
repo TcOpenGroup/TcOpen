@@ -9,8 +9,6 @@ namespace TcoIo
 {
     public static class Entry
     {
-        //const string AmdId = "172.20.10.2.1.1";
-
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 851;
 

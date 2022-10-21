@@ -1,27 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TcoCognexVision.Converters;
+using Vortex.Connector.ValueTypes;
 
 namespace TcoCognexVision
-{   
+{
     public partial class TcoDataman_v_5_x_xServiceView : UserControl
     {
+
+        private eDisplayFormat _currentDisplayFormat;
+
+        //private List<String> _displayFormats = new List<string> { "array of decimal numbers", "array of hexadecimal numbers", "string" };
+        public eDisplayFormat CurrentDisplayFormat { get => _currentDisplayFormat; set => _currentDisplayFormat = value; }
+
         public TcoDataman_v_5_x_xServiceView()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+
+
+        private void ResultData_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DisplayFormatDialog displayFormatDialog = new DisplayFormatDialog(CurrentDisplayFormat);
+            displayFormatDialog.ShowDialog();
+            this.CurrentDisplayFormat = displayFormatDialog.CurrentDisplayFormat;
+            ((TcoDataman_v_5_x_xServiceViewModel)(this.DataContext)).CurrentDisplayFormat = this.CurrentDisplayFormat;
         }
     }
 }

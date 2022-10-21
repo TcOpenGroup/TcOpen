@@ -243,8 +243,28 @@
 		</System>
 		<Plc>
 			<Project GUID="{B057D1C0-C1A0-4E87-8DE3-42F28C9DD315}" Name="TcoCognexVision" PrjFilePath="TcoCognexVision\TcoCognexVision.plcproj" TmcFilePath="TcoCognexVision\TcoCognexVision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{E544F992-D97C-7402-8E85-97BA8C3D7DE9}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{163995FB-042F-F33A-5E67-E4197C0476CA}">
 					<Name>TcoCognexVision Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{7DB38443-B6E7-2A31-6F05-BE3800F1D02D}">
+					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
@@ -585,360 +605,6 @@
 							<Id NeedCalleeCall="true">0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
-								<OTCID>#x02010030</OTCID>
-							</ManualConfig>
-							<Priority>20</Priority>
-							<CycleTime>10000000</CycleTime>
-						</Context>
-					</Contexts>
-					<TaskPouOids>
-						<TaskPouOid Prio="20" OTCID="#x08502001"/>
-					</TaskPouOids>
-				</Instance>
-			</Project>
-			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{8C3146C1-418B-8942-520B-3C6CE64433E9}">
-					<Name>TcoCognexVisionTests Instance</Name>
-					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="1">
-						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.PnIoBoxState</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.PnIoBoxDiag</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionStatus.TriggerReady</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionStatus.TriggerAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionStatus.Acquiring</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionStatus.MissedAcquisition</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionStatus.TriggerID</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsStatus.Decoding</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsStatus.DecodeComplete</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsStatus.ResultsBufferOverrun</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsStatus.ResultsAvailable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsStatus.ErrorDetected</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainCodeAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainFocusAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainBrightnessAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.UntrainAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.Reserved05</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.ExecuteDMCCAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.SetMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultData.ResultID</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultData.ResultCode</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultData.ResultExtended</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultData.ResultLength</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultData.ResultData</Name>
-							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.PnIoBoxState</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.PnIoBoxDiag</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionStatus.TriggerReady</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionStatus.TriggerAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionStatus.Acquiring</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionStatus.MissedAcquisition</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionStatus.TriggerID</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsStatus.Decoding</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsStatus.DecodeComplete</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsStatus.ResultsBufferOverrun</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsStatus.ResultsAvailable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsStatus.ErrorDetected</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainCodeAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainFocusAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainBrightnessAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.UntrainAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.Reserved05</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.ExecuteDMCCAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.SetMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultData.ResultID</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultData.ResultCode</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultData.ResultExtended</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultData.ResultLength</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultData.ResultData</Name>
-							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.PnIoBoxCtrl</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionControl.TriggerEnable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.AcquisitionControl.Trigger</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsControl.EnableResultBuffering</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.ResultsControl.ResultsAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainCode</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainFocus</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.TrainBrightness</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.Untrain</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.Reserved15</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.ExecuteDMCC</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.SoftEventControl.SetMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.UserData.UserDataOption</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.UserData.UserDataLength</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm260.UserData.UserData</Name>
-							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.PnIoBoxCtrl</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionControl.TriggerEnable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.AcquisitionControl.Trigger</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsControl.EnableResultBuffering</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.ResultsControl.ResultsAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainCode</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainFocus</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.TrainBrightness</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.Untrain</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.Reserved15</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.ExecuteDMCC</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.SoftEventControl.SetMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.UserData.UserDataOption</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.UserData.UserDataLength</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>TcoCognexVision.IO.dm8700.UserData.UserData</Name>
-							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
-						</Var>
-					</Vars>
-					<Contexts>
-						<Context>
-							<Id NeedCalleeCall="true">0</Id>
-							<Name>PlcTask</Name>
-							<ManualConfig>
 								<OTCID>#x02010040</OTCID>
 							</ManualConfig>
 							<Priority>21</Priority>
@@ -952,10 +618,10 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
+			<Device Id="1" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
 				<Name>Device 1 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
+				<DevData>000000000000000000000000803801005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="148" SizeOut="168">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="1" BoxType="9121">
@@ -1800,7 +1466,8 @@ Submodule Info: Reads 64 bytes from DataMan
 		</Io>
 	</Project>
 	<Mappings>
-		<OwnerA Name="TIPC^TcoCognexVision^TcoCognexVision Instance">
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
+		<OwnerA Name="TIPC^TcoCognexVisionTests^TcoCognexVisionTests Instance">
 			<OwnerB Name="TIID^Device 1 (Profinet Controller)^dm260">
 				<Link VarA="PlcTask Inputs^IO.dm260.AcquisitionStatus.Acquiring" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquiring"/>
 				<Link VarA="PlcTask Inputs^IO.dm260.AcquisitionStatus.MissedAcquisition" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Missed_Acquisition"/>

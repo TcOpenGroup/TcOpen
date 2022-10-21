@@ -34,10 +34,6 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="IO.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -116,13 +112,16 @@
     <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x_ClearResultData.TcPOU">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanResults_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x_Read.TcPOU">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanClearResultData_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoVisionData.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanRead_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanUser_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoVisionParams.TcGVL">

@@ -5,25 +5,6 @@
 VAR
 	_sampleComponent : SampleComponent(THIS^);
 
-	_dm260 : TcoDataman_v_5_x_x(THIS^);
-	_dm8700 : TcoDataman_v_5_x_x(THIS^);
-	clear_dm260: BOOL;
-	read_dm260: BOOL;
-	restore_dm260: BOOL;
-	clear_dm8700: BOOL;
-	read_dm8700: BOOL;
-	restore_dm8700: BOOL;
-	
-	_acquiringRTRIG : R_TRIG;
-	_acquiringFTRIG : R_TRIG;
-	_acquiringRTRIGcount : ULINT;
-	_acquiringFTRIGcount : ULINT;
-	
-	_ResultAvailableRTRIG : R_TRIG;
-	_ResultAvailableFTRIG : R_TRIG;
-	_ResultAvailableRTRIGcount : ULINT;
-	_ResultAvailableFTRIGcount : ULINT;
-	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -42,72 +23,7 @@ METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sampleComponent.Service();
 _sampleComponent();
-
-
-_dm260(inoIoData:= IO.dm260);
-_dm8700(inoIoData:= IO.dm8700);
-
-_dm260.Config.ContinuousReading := TRUE;
-_dm8700.Config.ContinuousReading := TRUE;
-
-
-IF read_dm260 THEN
-	_dm260.Read();
-	read_dm260 := FALSE;
-END_IF
-
-IF clear_dm260 THEN
-	_dm260.ClearResultData();
-	clear_dm260 := FALSE;
-END_IF
-
-IF restore_dm260 THEN
-	_dm260.Restore();
-	restore_dm260 := FALSE;
-END_IF
-
-IF _dm260.ReadTask.Done THEN
-	read_dm260 := TRUE;
-END_IF
-
-IF read_dm8700 THEN
-	_dm8700.Read();
-	read_dm8700 := FALSE;
-END_IF
-
-IF clear_dm8700 THEN
-	_dm8700.ClearResultData();
-	clear_dm8700 := FALSE;
-END_IF
-
-IF restore_dm8700 THEN
-	_dm8700.Restore();
-	restore_dm8700 := FALSE;
-END_IF
-
-//IF _dm8700.ReadTask.Done THEN
-//	read_dm8700 := TRUE;
-//END_IF
-
-_acquiringRTRIG(CLK := IO.dm8700.AcquisitionStatus.Acquiring);
-_acquiringFTRIG(CLK := IO.dm8700.AcquisitionStatus.Acquiring);
-IF _acquiringRTRIG.Q THEN
-	_acquiringRTRIGcount := _acquiringRTRIGcount + 1;
-END_IF
-IF _acquiringFTRIG.Q THEN
-	_acquiringFTRIGcount := _acquiringFTRIGcount + 1;
-END_IF
-
-_ResultAvailableRTRIG(CLK := IO.dm8700.ResultsStatus.ResultsAvailable);
-_ResultAvailableFTRIG(CLK := IO.dm8700.ResultsStatus.ResultsAvailable);
-IF _ResultAvailableRTRIG.Q THEN
-	_ResultAvailableRTRIGcount := _ResultAvailableRTRIGcount + 1;
-END_IF
-IF _ResultAvailableFTRIG.Q THEN
-	_ResultAvailableFTRIGcount := _ResultAvailableFTRIGcount + 1;
-END_IF
-
-//IO.dm8700.ResultsControl.ResultsAcknowledge := IO.dm8700.ResultsStatus.ResultsAvailable;]]></ST>
+]]></ST>
       </Implementation>
     </Method>
   </POU>

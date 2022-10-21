@@ -24,6 +24,10 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GVLs\IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +35,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\SampleComponentTests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman_v_5_x_xTests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

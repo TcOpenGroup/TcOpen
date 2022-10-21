@@ -1,4 +1,4 @@
-using TcoCognexVision;
+using TcoCognexVisionTests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,6 @@ namespace Sandbox.TcoCognexVision.Wpf
         {            
         
         }
-        
-        public TcoCognexVisionTwinController TcoCognexVisionPlc { get; } = Entry.TcoCognexVisionPlc;       
+        public TcoCognexVisionTestsTwinController TcoCognexVisionTestPlc { get; } = Entry.TcoCognexVisionTestsPlc;       
     }
 }

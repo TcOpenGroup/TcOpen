@@ -1,18 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vortex.Adapters.Connector.Tc3.Adapter;
 
 namespace TcoCognexVision
 {
     public static class Entry
     {
-
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
+        static int TargetAmsPort = 851;
 
-        public static TcoCognexVision.TcoCognexVisionTwinController TcoCognexVisionPlc 
-            = new TcoCognexVisionTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, 851, true));
+        public static TcoCognexVisionTwinController TcoCognexVisionPlc 
+            = new TcoCognexVisionTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
     }
 }

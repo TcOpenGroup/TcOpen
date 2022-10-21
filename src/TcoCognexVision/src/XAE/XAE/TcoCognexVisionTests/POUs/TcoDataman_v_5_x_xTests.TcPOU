@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoDataman_v_5_x_xTests" Id="{802c992c-138b-01dc-1d08-36966d5f7699}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_xTests EXTENDS _internals_TcoContext
+VAR
+//	{attribute addProperty Name "<#Dataman 260#>"}
+	_dm260 : TcoCognexVision.TcoDataman_v_5_x_x(THIS^);
+//	{attribute addProperty Name "<#Dataman 8700#>"}
+	_dm8700 : TcoCognexVision.TcoDataman_v_5_x_x(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{48e4cb4c-415e-0c4b-094e-2037721a0dd2}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+_dm8700.Config.ContinuousReading := TRUE;
+
+_dm260(inoIoData:= IO.dm260);
+_dm8700(inoIoData:= IO.dm8700);
+
+_dm260.Service();
+_dm8700.Service();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoDataman_v_5_x_x" Id="{acfa500c-75b0-406d-8872-dce797f24ef6}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute addProperty Name "<#COGNEX DATAMAN#>"}
-FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
 
 VAR_IN_OUT
 //	{attribute 'hide'}
@@ -15,15 +14,15 @@ VAR
 END_VAR
 
 VAR
-	_userData 	: TcoVisionData;
-	_resultData : TcoVisionData;
+	_userData 	: TcoDatamanUser_v_5_x_x;
+	_resultData : TcoDatamanResults_v_5_x_x;
 END_VAR
 
 VAR
 	{attribute addProperty Name "<#Clear result data#>"}
-    _clearResultDataTask : TcoDataman_v_5_x_x_ClearResultData(THIS^);
+    _clearResultDataTask : TcoDatamanClearResultData_v_5_x_x(THIS^);
 	{attribute addProperty Name "<#Read#>"}
-    _readTask : TcoDataman_v_5_x_x_Read(THIS^);
+    _readTask : TcoDatamanRead_v_5_x_x(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF InvalidReference() THEN
@@ -34,6 +33,14 @@ SUPER^(inPnIoBoxState := THIS^.inoIoData.PnIoBoxState,inPnIoBoxDiag := THIS^.ino
 
 IF  THIS^._config.ContinuousReading THEN
 	ContinuousReading();
+END_IF
+
+IF NOT SUPER^.ProfinetReady THEN
+	THIS^._status.ActionDescription := '<#Not ready for operation by means of Profinet network!#>';	
+END_IF
+
+IF SUPER^.ProfinetReady AND THIS^._status.ActionDescription = '<#Not ready for operation by means of Profinet network!#>' THEN
+	THIS^._status.ActionDescription := '<#Ready for operation!#>';	
 END_IF
 
 _clearResultDataTask.Enabled := SUPER^.ProfinetReady;
@@ -105,6 +112,7 @@ PROPERTY Config : REFERENCE TO TcoDatamanConfig_v_5_x_x]]></Declaration>
 	THIS^._resultData.Length := THIS^.inoIoData.ResultData.ResultLength;
 	Tc2_System.MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultData.ResultData) , destAddr:= ADR(THIS^._resultData.Data) ,  n:= THIS^._resultData.Length);
 	Tc2_System.MEMSET(destAddr:= ADR(THIS^._resultData.Data) + THIS^._resultData.Length, fillByte:= 0 , n:= SIZEOF(THIS^._resultData.Data) - THIS^._resultData.Length);
+	THIS^._status.ActionDescription := '<#New data read.#>';
 END_IF
 
 THIS^.inoIoData.ResultsControl.ResultsAcknowledge := THIS^.inoIoData.ResultsStatus.ResultsAvailable;
@@ -261,13 +269,13 @@ GetResultAsString := _resultString;]]></ST>
       <Implementation>
         <ST><![CDATA[InvalidReference := FALSE;
 IF NOT __ISVALIDREF(inoIoData) THEN
-    Messenger.Post('Invalid reference', TcoCore.eMessageCategory.ProgrammingError);
+    Messenger.Post('<#Invalid reference#>', TcoCore.eMessageCategory.ProgrammingError);
     InvalidReference := TRUE;
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="LastResultData" Id="{b0f7ad24-7403-05e4-1ff1-c6fa31d9602a}" FolderPath="States\">
-      <Declaration><![CDATA[PROPERTY LastResultData : TcoVisionData]]></Declaration>
+      <Declaration><![CDATA[PROPERTY LastResultData : TcoDatamanResults_v_5_x_x]]></Declaration>
       <Get Name="Get" Id="{b30b1795-78e1-0def-180a-f2630d344914}">
         <Declaration><![CDATA[VAR
 END_VAR
