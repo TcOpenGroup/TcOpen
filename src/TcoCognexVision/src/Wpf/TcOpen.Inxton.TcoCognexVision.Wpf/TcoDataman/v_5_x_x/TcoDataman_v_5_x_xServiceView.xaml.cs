@@ -11,13 +11,11 @@ namespace TcoCognexVision
 
         private eDisplayFormat _currentDisplayFormat;
 
-        //private List<String> _displayFormats = new List<string> { "array of decimal numbers", "array of hexadecimal numbers", "string" };
         public eDisplayFormat CurrentDisplayFormat { get => _currentDisplayFormat; set => _currentDisplayFormat = value; }
 
         public TcoDataman_v_5_x_xServiceView()
         {
             InitializeComponent();
-            DataContext = this;
         }
 
 

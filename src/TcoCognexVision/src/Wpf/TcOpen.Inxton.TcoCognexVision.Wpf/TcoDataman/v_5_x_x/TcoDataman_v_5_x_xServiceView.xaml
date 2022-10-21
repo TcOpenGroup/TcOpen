@@ -10,32 +10,20 @@
     xmlns:tcoCore="http://vortex.mts/xaml"
     xmlns:tcocognexvision="clr-namespace:TcoCognexVision"
     xmlns:vortex="http://vortex.mts/xaml"
-    mc:Ignorable="d"
-    DataContext="{Binding}"
-    x:Name="datamanView">
-    
+    mc:Ignorable="d">
+
     <d:UserControl.DataContext>
         <tcocognexvision:TcoDataman_v_5_x_xViewModel />
     </d:UserControl.DataContext>
-    <vortex:TcoComponentView DataContext="{Binding Component}">
-        <vortex:TcoComponentView.ComponentHeader>
-            <WrapPanel HorizontalAlignment="Right">
-                <WrapPanel.Resources>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="MinWidth" Value="250"/>
-                    </Style>
-                </WrapPanel.Resources>
-                    <StackPanel>
-                    <WrapPanel>
-                        <TextBlock Text="{Binding DataContext.CurrentDisplayFormat , ElementName=datamanView}"/>
-                        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding DataContext.ResultData, ElementName=datamanView}"/>
+    <StackPanel>
+        <WrapPanel>
                         <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp"      
                             MinWidth="200"                        
                             Margin="10"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            ItemsSource="{Binding DataContext.ResultData, ElementName=datamanView}">
-                        <ListView.ItemsPanel>
+                            ItemsSource="{Binding ResultData}">
+                            <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
@@ -46,25 +34,54 @@
                                         <Label
                                     Margin="-5"
                                     HorizontalAlignment="Center"
-                                    Content="{Binding Data.Cyclic, Converter={conv:ByteToCharConverter}}" />
-                            <Label
+                                    Content="{Binding Index}" />
+                                        <Label
                                     Margin="-5"
                                     HorizontalAlignment="Center"
-                                    Content="{Binding Data.Cyclic}" />
-                            <Label
+                                    Content="{Binding Data}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </WrapPanel>
+        <vortex:TcoComponentView DataContext="{Binding Component}">
+        <vortex:TcoComponentView.ComponentHeader>
+            <WrapPanel HorizontalAlignment="Right">
+                <WrapPanel.Resources>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="MinWidth" Value="250"/>
+                    </Style>
+                </WrapPanel.Resources>
+                    <StackPanel>
+                    <WrapPanel>
+                        <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp"      
+                            MinWidth="200"                        
+                            Margin="10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding ResultData}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Label
                                     Margin="-5"
                                     HorizontalAlignment="Center"
                                     Content="{Binding Index}" />
-                </StackPanel>
-                </DataTemplate>
-                </ListView.ItemTemplate>
+                                        <Label
+                                    Margin="-5"
+                                    HorizontalAlignment="Center"
+                                    Content="{Binding Data}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </WrapPanel>
-
-                    <!--<vortex:RenderableContentControl Margin="10"
-                            MinWidth="200"    DataContext="{Binding Component._resultString}" PresentationType="Display" />-->
-                    </StackPanel>
-
+                </StackPanel>
             </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
@@ -77,4 +94,5 @@
             </StackPanel>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
+    </StackPanel>
 </UserControl>

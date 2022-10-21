@@ -4,6 +4,8 @@ using Vortex.Presentation.Wpf;
 using TcoCognexVision.Converters;
 using System.Linq;
 using TcoCore;
+using Vortex.Connector;
+using System.Text;
 
 namespace TcoCognexVision
 {
@@ -22,17 +24,15 @@ namespace TcoCognexVision
             }
         }
 
-        public ObservableCollection<IndexedData<OnlinerBaseType>> ResultData { get ; private set; }
+        public ObservableCollection<IndexedData<string>> ResultData { get ; private set; }
 
         public TcoDataman_v_5_x_xViewModel() : base()
         {
-            ResultData = new ObservableCollection<IndexedData<OnlinerBaseType>>();
+            ResultData = new ObservableCollection<IndexedData<string>>();
             Model = new TcoDataman_v_5_x_x();
-            
         }
 
-        //public TcoDataman_v_5_x_x Component { get; private set; }
-        public TcoDataman_v_5_x_xEx Component { get; private set; }
+        public TcoDataman_v_5_x_x Component { get; private set; }
 
         public override object Model 
         { 
@@ -41,43 +41,62 @@ namespace TcoCognexVision
             {
                 Component = value as TcoDataman_v_5_x_x;
                 UpdateAndFormatResultData();
-                Component._resultData.Length.ValueChangeEvent += ResultDataChangedEvent;
+                Component._resultData.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
             }
         }
 
-        private void ResultDataChangedEvent(Vortex.Connector.IValueTag sender, Vortex.Connector.ValueTypes.ValueChangedEventArgs args)
-        {
-            UpdateAndFormatResultData();
-        }
         private void UpdateAndFormatResultData()
         {
-            if(ResultData == null)
+            try
             {
-                ResultData = new ObservableCollection<IndexedData<OnlinerBaseType>>();
-            }
-            else
-            {
-                ResultData.Clear();
-            }
-            if(CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
-            {
-                for (int i = 0; i < Component._resultData.Length.Cyclic; i++)
+                if (ResultData == null)
                 {
-                    ResultData.Add(new IndexedData<OnlinerBaseType>(i, Component._resultData.Data[i]));
+                    ResultData = new ObservableCollection<IndexedData<string>>();
+                }
+                else
+                {
+                    ResultData.Clear();
+                }
+                if (Component != null && Component.GetConnector() != null && Component._resultData != null)
+                {
+                    Component._resultData.Read();
+                    if (CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
+                    {
+                        for (int i = 0; i < Component._resultData.Length.LastValue; i++)
+                        {
+                            ResultData.Add(new IndexedData<string>(i, Component._resultData.Data[i].LastValue.ToString()));
+                        }
+                    }
+                    else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
+                    {
+                        for (int i = 0; i < Component._resultData.Length.LastValue; i++)
+                        {
+                            ResultData.Add(new IndexedData<string>(i, Component._resultData.Data[i].LastValue.ToString("X")));
+                        }
+                    }
+                    else if (CurrentDisplayFormat == eDisplayFormat.String)
+                    {
+                        for (int i = 0; i < Component._resultData.Length.LastValue; i++)
+                        {
+                            byte _byte = Component._resultData.Data[i].LastValue;
+                            string _string = "";
+                            if (_byte > 0)
+                                _string = Encoding.UTF8.GetString(new byte[] { _byte });
+                            else _string = "N/A";
+
+                            ResultData.Add(new IndexedData<string>(i, _string));
+                        }
+                    }
                 }
             }
-            else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
+            catch (System.Exception ex)
             {
-                for (int i = 0; i < Component._resultData.Length.Cyclic; i++)
-                {
-                    ResultData.Add(new IndexedData<OnlinerBaseType>(i, Component._resultData.Data[i]));
-                }
+
+                throw;
             }
 
-            //Component._resultData.Data
-            //    .Select((data, index) => new IndexedData<OnlinerBaseType>(index, data))
-            //    .ToList()
-            //    .ForEach(x => { ResultData.Add(x); });
+
         }
 
     }
@@ -85,11 +104,6 @@ namespace TcoCognexVision
     public class TcoDataman_v_5_x_xServiceViewModel : TcoDataman_v_5_x_xViewModel
     {
 
-    }
-
-
-            ResultData = _resultData;
-        }
     }
 }
 
