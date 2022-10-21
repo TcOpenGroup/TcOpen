@@ -4,8 +4,7 @@ using Vortex.Presentation.Wpf;
 using TcoCognexVision.Converters;
 using System.Linq;
 using TcoCore;
-using System.Text;
-using Vortex.Connector;
+
 namespace TcoCognexVision
 {
 
@@ -23,12 +22,13 @@ namespace TcoCognexVision
             }
         }
 
-        public ObservableCollection<IndexedData<string>> ResultData { get ; private set; }
+        public ObservableCollection<IndexedData<OnlinerBaseType>> ResultData { get ; private set; }
 
         public TcoDataman_v_5_x_xViewModel() : base()
         {
-            //ResultData = new ObservableCollection<IndexedData<string>>();
-            Model = new TcoDataman_v_5_x_xEx();
+            ResultData = new ObservableCollection<IndexedData<OnlinerBaseType>>();
+            Model = new TcoDataman_v_5_x_x();
+            
         }
 
         //public TcoDataman_v_5_x_x Component { get; private set; }
@@ -39,79 +39,41 @@ namespace TcoCognexVision
             get => Component; 
             set 
             {
-                if(value.GetType().Equals(typeof(TcoDataman_v_5_x_xEx)))
-                {
-                    Component = value as TcoDataman_v_5_x_xEx;
-                    UpdateAndFormatResultData();
-                    Component._resultData.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
-                    Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
-                }
-                else if (value.GetType().Equals(typeof(TcoDataman_v_5_x_x)))
-                {
-                    Component = new TcoDataman_v_5_x_xEx(value as TcoDataman_v_5_x_x, ResultData);
-                    UpdateAndFormatResultData();
-                    Component._resultData.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
-                    Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
-                }
-
+                Component = value as TcoDataman_v_5_x_x;
+                UpdateAndFormatResultData();
+                Component._resultData.Length.ValueChangeEvent += ResultDataChangedEvent;
             }
         }
 
+        private void ResultDataChangedEvent(Vortex.Connector.IValueTag sender, Vortex.Connector.ValueTypes.ValueChangedEventArgs args)
+        {
+            UpdateAndFormatResultData();
+        }
         private void UpdateAndFormatResultData()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            if(ResultData == null)
             {
-                try
+                ResultData = new ObservableCollection<IndexedData<OnlinerBaseType>>();
+            }
+            else
+            {
+                ResultData.Clear();
+            }
+            if(CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
+            {
+                for (int i = 0; i < Component._resultData.Length.Cyclic; i++)
                 {
-                    if (ResultData == null)
-                    {
-                        ResultData = new ObservableCollection<IndexedData<string>>();
-                    }
-                    else
-                    {
-                        ResultData.Clear();
-                    }
-
-                    if (Component != null && Component.GetConnector() != null && Component._resultData.GetConnector() != null)
-                    {
-                        Component._resultData.Read();
-                        if (CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
-                        {
-                            for (int i = 0; i < Component._resultData.Length.LastValue; i++)
-                            {
-                                ResultData.Add(new IndexedData<string>(i, Component._resultData.Data[i].LastValue.ToString()));
-                            }
-                        }
-                        else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
-                        {
-                            for (int i = 0; i < Component._resultData.Length.LastValue; i++)
-                            {
-                                ResultData.Add(new IndexedData<string>(i, Component._resultData.Data[i].LastValue.ToString("X")));
-                            }
-                        }
-                        else if (CurrentDisplayFormat == eDisplayFormat.String)
-                        {
-                            for (int i = 0; i < Component._resultData.Length.LastValue; i++)
-                            {
-                                byte _byte = Component._resultData.Data[i].LastValue;
-                                string _string = "";
-                                if (_byte > 0)
-                                    _string = Encoding.UTF8.GetString(new byte[] { _byte });
-                                else _string = "N/A";
-                                ResultData.Add(new IndexedData<string>(i, _string));
-                            }
-                        }
-                    }
-
+                    ResultData.Add(new IndexedData<OnlinerBaseType>(i, Component._resultData.Data[i]));
                 }
-                catch (System.Exception ex)
+            }
+            else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
+            {
+                for (int i = 0; i < Component._resultData.Length.Cyclic; i++)
                 {
-                    return;
-                    //swallow
+                    ResultData.Add(new IndexedData<OnlinerBaseType>(i, Component._resultData.Data[i]));
                 }
-            });
+            }
 
-           
             //Component._resultData.Data
             //    .Select((data, index) => new IndexedData<OnlinerBaseType>(index, data))
             //    .ToList()
@@ -125,25 +87,6 @@ namespace TcoCognexVision
 
     }
 
-    public class TcoDataman_v_5_x_xEx : TcoDataman_v_5_x_x
-    {
-        public ObservableCollection<IndexedData<string>> ResultData { get; private set; }
-
-        public TcoDataman_v_5_x_xEx()
-        {
-            ResultData = new ObservableCollection<IndexedData<string>>();
-        }
-        public TcoDataman_v_5_x_xEx(TcoDataman_v_5_x_x _component, ObservableCollection<IndexedData<string>> _resultData) 
-        {
-            var properties = _component.GetType().GetProperties();
-            properties.ToList().ForEach(property =>
-                {
-                    if (this.GetType().GetProperty(property.Name) != null && property.CanWrite)
-                    {
-                        var value = _component.GetType().GetProperty(property.Name).GetValue(_component, null);
-                        this.GetType().GetProperty(property.Name).SetValue(this, value, null);
-                    }
-                });
 
             ResultData = _resultData;
         }

@@ -27,10 +27,7 @@ END_VAR
 		THIS^.inoIoData.AcquisitionControl.Trigger := FALSE;
 		THIS^.inoIoData.ResultsControl.ResultsAcknowledge := TRUE;
 		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the result data cleared!#>');
-		THIS^.inoResultData.Id := 0;
-		THIS^.inoResultData.Code := 0;
-		THIS^.inoResultData.Extended := 0;
-		THIS^.inoResultData.Length := 0;
+		THIS^.inoResultData.Length := 0; 
 		IF Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoResultData.Data) , fillByte:= 0 , n:= SIZEOF(THIS^.inoResultData.Data)) >0 THEN
 			CallTimers(FALSE);
 			_progress := _progress + 1;

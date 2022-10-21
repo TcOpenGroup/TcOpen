@@ -109,15 +109,7 @@ PROPERTY Config : REFERENCE TO TcoDatamanConfig_v_5_x_x]]></Declaration>
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF THIS^.inoIoData.ResultsStatus.ResultsAvailable AND NOT THIS^.inoIoData.ResultsControl.ResultsAcknowledge AND THIS^.inoIoData.ResultData.ResultCode>0 AND  THIS^.inoIoData.ResultData.ResultLength>0 THEN
-	THIS^._resultData.Id := THIS^.inoIoData.ResultData.ResultID;
-	THIS^._resultData.Code := THIS^.inoIoData.ResultData.ResultCode;
-	THIS^._resultData.Extended := THIS^.inoIoData.ResultData.ResultExtended;
 	THIS^._resultData.Length := THIS^.inoIoData.ResultData.ResultLength;
-	
-	IF THIS^._resultData.Length > INT_TO_UINT(THIS^._config.ResultDataSize) THEN
-		THIS^.Messenger.Error('<#Length of the data sent by device exceeds the size of the hardware structure mapped!#>');
-	END_IF
-	
 	Tc2_System.MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultData.ResultData) , destAddr:= ADR(THIS^._resultData.Data) ,  n:= THIS^._resultData.Length);
 	Tc2_System.MEMSET(destAddr:= ADR(THIS^._resultData.Data) + THIS^._resultData.Length, fillByte:= 0 , n:= SIZEOF(THIS^._resultData.Data) - THIS^._resultData.Length);
 	THIS^._status.ActionDescription := '<#New data read.#>';
