@@ -8,7 +8,7 @@ namespace TcOpen.Inxton.Security
 {
     public interface IExternalAuthorization
     {
-        IUser RequestAuthorization(string token);
+        void RequestAuthorization(string token, bool deauthenticateWhenSame);
         void RequestTokenChange(string token);
 
         string AuthorizationErrorMessage { get; }
@@ -17,6 +17,6 @@ namespace TcOpen.Inxton.Security
         event AuthorizationTokenChangeRequestDelegate AuthorizationTokenChange;
     }
 
-    public delegate IUser AuthorizationRequestDelegate(string token);
+    public delegate void AuthorizationRequestDelegate(string token, bool deauthenticateWhenSame);
     public delegate void AuthorizationTokenChangeRequestDelegate(string token);
 }
