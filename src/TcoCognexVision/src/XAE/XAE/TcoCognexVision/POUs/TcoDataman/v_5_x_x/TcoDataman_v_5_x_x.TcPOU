@@ -5,6 +5,7 @@
 
 VAR_IN_OUT
 //	{attribute 'hide'}
+	{attribute clr [ReadOnly()]}
 	inoIoData : TcoDatamanIO_v_5_x_x;
 END_VAR
 
@@ -23,6 +24,8 @@ VAR
     _clearResultDataTask : TcoDatamanClearResultData_v_5_x_x(THIS^);
 	{attribute addProperty Name "<#Read#>"}
     _readTask : TcoDatamanRead_v_5_x_x(THIS^);
+	{attribute addProperty Name "<#Restore#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF InvalidReference() THEN
@@ -31,7 +34,7 @@ END_IF
 
 SUPER^(inPnIoBoxState := THIS^.inoIoData.PnIoBoxState,inPnIoBoxDiag := THIS^.inoIoData.PnIoBoxDiag);
 
-IF  THIS^._config.ContinuousReading THEN
+IF THIS^._config.ContinuousReading THEN
 	ContinuousReading();
 END_IF
 
@@ -47,7 +50,11 @@ _clearResultDataTask.Enabled := SUPER^.ProfinetReady;
 _clearResultDataTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);
 
 _readTask.Enabled :=  SUPER^.ProfinetReady AND NOT _clearResultDataTask.Busy;
-_readTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);]]></ST>
+_readTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);
+
+IF _restoreTask.Execute() THEN
+	Restore();
+END_IF]]></ST>
     </Implementation>
     <Folder Name="_Internals" Id="{47118258-1e75-0d83-2424-b96990b60f3c}" />
     <Folder Name="Operations" Id="{6923fba1-4649-0a4c-228f-a3f1054bdceb}" />
@@ -329,9 +336,12 @@ METHOD Restore : ITcoRestorable]]></Declaration>
         <ST><![CDATA[_clearResultDataTask.Restore();
 _readTask.Restore();
 
-//_progress := 0;
-
 Tc2_System.MEMSET(destAddr:= ADR(THIS^._resultData.Data) , fillByte:= 0 , n:= SIZEOF(THIS^._resultData.Data));
+
+THIS^._resultData.Code := 0;
+THIS^._resultData.Extended := 0;
+THIS^._resultData.Id := 0;
+THIS^._resultData.Length := 0;
 	
 IF InvalidReference() THEN
     RETURN;
@@ -339,21 +349,8 @@ END_IF
 
 Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoIoData) , fillByte:= 0 , n:= SIZEOF(THIS^.inoIoData));
 
-
-//inoIoData.AcquisitionControl.Trigger				:=	FALSE;
-//inoIoData.AcquisitionControl.TriggerEnable		:=	FALSE;
-//inoIoData.ResultsControl.EnableResultBuffering	:=	FALSE;
-//inoIoData.ResultsControl.ResultsAcknowledge		:=	FALSE;
-//inoIoData.SoftEventControl.ExecuteDMCC			:=	FALSE;
-//inoIoData.SoftEventControl.SetMatchString			:=	FALSE;
-//inoIoData.SoftEventControl.TrainBrightness		:=	FALSE;
-//inoIoData.SoftEventControl.TrainCode				:=	FALSE;
-//inoIoData.SoftEventControl.TrainFocus				:=	FALSE;
-//inoIoData.SoftEventControl.TrainMatchString		:=	FALSE;
-//inoIoData.SoftEventControl.Untrain				:=	FALSE;
-
-
-]]></ST>
+_status.ActionDescription := 'Restore executed!';
+_restoreTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{3dddd403-ddc2-0ba6-14bc-8430595d31e2}">

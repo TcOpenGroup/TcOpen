@@ -16,31 +16,7 @@
         <tcocognexvision:TcoDataman_v_5_x_xViewModel />
     </d:UserControl.DataContext>
     <StackPanel>
-        <!--just for testing>>>>>>>>>>>>>>>>>>>>>>>>>-->
-        <WrapPanel>
-            <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp"      
-                            MinWidth="200"                        
-                            Margin="10"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            ItemsSource="{Binding Component.ResultData}">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Label Margin="-5,-5,-12,-5" HorizontalAlignment="Center" Content="{Binding Index}" />
-                            <Label Margin="-5,-5,-12,-5" HorizontalAlignment="Center" Content="{Binding Data}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </WrapPanel>
-        <!--<<<<<<<<<<<<<<<<<<<<<<<<<just for testing-->
-        <vortex:TcoComponentView DataContext="{Binding Component}">
+        <vortex:TcoComponentView>
             <vortex:TcoComponentView.ComponentHeader >
                 <WrapPanel HorizontalAlignment="Right">
                     <WrapPanel.Resources>
@@ -48,7 +24,7 @@
                             <Setter Property="MinWidth" Value="250"/>
                         </Style>
                     </WrapPanel.Resources>
-                    <StackPanel>
+                    <StackPanel >
                         <WrapPanel>
                             <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp"      
                             MinWidth="200"                        
@@ -75,11 +51,12 @@
                 </WrapPanel>
             </vortex:TcoComponentView.ComponentHeader>
             <vortex:TcoComponentView.ComponentDetails>
-                <StackPanel>
+                <StackPanel DataContext="{Binding Component}">
                     <vortex:RenderableContentControl DataContext="{Binding _status.ActionDescription}"/>
-                    <UniformGrid Rows="0" Columns="2">
+                    <UniformGrid Rows="1" Columns="3">
                         <vortex:RenderableContentControl Margin="10" MinWidth="200" DataContext="{Binding _readTask}" />
                         <vortex:RenderableContentControl Margin="10" MinWidth="200" DataContext="{Binding _clearResultDataTask}" />
+                        <vortex:RenderableContentControl Margin="10" MinWidth="200" DataContext="{Binding _restoreTask}" />
                     </UniformGrid>
                 </StackPanel>
             </vortex:TcoComponentView.ComponentDetails>
