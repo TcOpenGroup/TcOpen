@@ -4,8 +4,6 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
 
 VAR_IN_OUT
-//	{attribute 'hide'}
-	{attribute clr [ReadOnly()]}
 	inoIoData : TcoDatamanIO_v_5_x_x;
 END_VAR
 
@@ -26,6 +24,8 @@ VAR
     _readTask : TcoDatamanRead_v_5_x_x(THIS^);
 	{attribute addProperty Name "<#Restore#>"}
     _restoreTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty Name "<#Update signal states#>"}
+    _updateSignalStatesTask : TcoCore.TcoTask(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF InvalidReference() THEN
@@ -52,9 +52,19 @@ _clearResultDataTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,ino
 _readTask.Enabled :=  SUPER^.ProfinetReady AND NOT _clearResultDataTask.Busy;
 _readTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);
 
+IF _updateSignalStatesTask.Execute() THEN
+	UpdateSignalStates();
+END_IF
+
 IF _restoreTask.Execute() THEN
 	Restore();
-END_IF]]></ST>
+END_IF
+
+
+
+
+
+]]></ST>
     </Implementation>
     <Folder Name="_Internals" Id="{47118258-1e75-0d83-2424-b96990b60f3c}" />
     <Folder Name="Operations" Id="{6923fba1-4649-0a4c-228f-a3f1054bdceb}" />
@@ -335,6 +345,7 @@ METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[_clearResultDataTask.Restore();
 _readTask.Restore();
+_updateSignalStatesTask.Restore();
 
 Tc2_System.MEMSET(destAddr:= ADR(THIS^._resultData.Data) , fillByte:= 0 , n:= SIZEOF(THIS^._resultData.Data));
 
@@ -376,5 +387,35 @@ METHOD PROTECTED ServiceMode]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="UpdateSignalStates" Id="{e9c43e3c-778e-0ee7-0bc8-2a1f3784b904}" FolderPath="_Internals\">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateSignalStates
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_status.SignalStatus.TriggerEnable 			:=	inoIoData.AcquisitionControl.TriggerEnable; 
+_status.SignalStatus.Trigger				:=	inoIoData.AcquisitionControl.Trigger; 
+
+_status.SignalStatus.EnableResultBuffering	:=	inoIoData.ResultsControl.EnableResultBuffering;
+_status.SignalStatus.ResultsAcknowledge		:=	inoIoData.ResultsControl.ResultsAcknowledge;
+
+_status.SignalStatus.TriggerReady 			:= 	inoIoData.AcquisitionStatus.TriggerReady;
+_status.SignalStatus.TriggerAcknowledge 	:= 	inoIoData.AcquisitionStatus.TriggerAcknowledge;
+_status.SignalStatus.Acquiring 				:= 	inoIoData.AcquisitionStatus.Acquiring;
+_status.SignalStatus.MissedAcquisition 		:= 	inoIoData.AcquisitionStatus.MissedAcquisition;
+_status.SignalStatus.TriggerID 				:= 	inoIoData.AcquisitionStatus.TriggerID;
+
+_status.SignalStatus.Decoding 				:= 	inoIoData.ResultsStatus.Decoding;
+_status.SignalStatus.DecodeComplete 		:= 	inoIoData.ResultsStatus.DecodeComplete;
+_status.SignalStatus.ResultsBufferOverrun 	:= 	inoIoData.ResultsStatus.ResultsBufferOverrun;
+_status.SignalStatus.ResultsAvailable 		:= 	inoIoData.ResultsStatus.ResultsAvailable;
+_status.SignalStatus.ErrorDetected 			:= 	inoIoData.ResultsStatus.ErrorDetected;
+
+_status.SignalStatus.ResultID 				:= 	inoIoData.ResultData.ResultID;
+_status.SignalStatus.ResultCode  			:= 	inoIoData.ResultData.ResultCode;
+_status.SignalStatus.ResultExtended  		:= 	inoIoData.ResultData.ResultExtended;
+_status.SignalStatus.ResultLength  			:= 	inoIoData.ResultData.ResultLength;
+
+_updateSignalStatesTask.DoneWhen(TRUE);]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>
