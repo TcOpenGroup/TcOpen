@@ -10,14 +10,13 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme
-                    BaseTheme="Inherit"
-                    ColorAdjustment="{materialDesign:ColorAdjustment}"
-                    PrimaryColor="LightBlue"
-                    SecondaryColor="Lime" />
+                    BaseTheme="Light"
+                    PrimaryColor="BlueGrey"
+                    SecondaryColor="LightGreen" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <tcocore:TcoResources />
+                <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/VortexStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/MDOverrides.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             <!--<Color x:Key="MtsGreenColor">#FF20A024</Color>
             <Color x:Key="MtsYellowColor">#FFFFD917</Color>
             <Color x:Key="MtsRedColor">#FFE54E31</Color>

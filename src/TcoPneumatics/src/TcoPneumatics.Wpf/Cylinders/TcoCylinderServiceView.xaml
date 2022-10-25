@@ -13,9 +13,9 @@
     <d:UserControl.DataContext>
         <tcopneumatics:TcoCylinderServiceViewModel />
     </d:UserControl.DataContext>
-    <vortex:TcoComponentView DataContext="{Binding Component}">
+    <vortex:TcoComponentView >
         <vortex:TcoComponentView.ComponentHeader>
-            <WrapPanel HorizontalAlignment="Right">
+            <WrapPanel HorizontalAlignment="Right" >
                 <WrapPanel.Resources>
                     <Style TargetType="StackPanel">
                         <Setter Property="MinWidth" Value="250"></Setter>
@@ -24,7 +24,7 @@
                 <StackPanel>
                     <Border
                     Height="5"
-                    Background="{Binding _atHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
+                    Background="{Binding  _atHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
                     CornerRadius="2" />
                     <vortex:RenderableContentControl Grid.Column="0" DataContext="{Binding _moveHomeDefault}"/>
                 </StackPanel>
@@ -44,7 +44,7 @@
             </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <StackPanel>
+            <StackPanel  DataContext="{Binding Model}">
                 <UniformGrid Rows="0" Columns="2">
                     <tcoCore:TcoSignalInfoView DataContext="{Binding _atHomePosSignalInfo}"></tcoCore:TcoSignalInfoView>
                     <tcoCore:TcoSignalInfoView DataContext="{Binding _toHomePosSignalInfo}"></tcoCore:TcoSignalInfoView>
