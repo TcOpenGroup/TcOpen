@@ -52,6 +52,8 @@ _clearResultDataTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,ino
 _readTask.Enabled :=  SUPER^.ProfinetReady AND NOT _clearResultDataTask.Busy;
 _readTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);
 
+_updateSignalStatesTask.Enabled := SUPER^.ProfinetReady;
+
 IF _updateSignalStatesTask.Execute() THEN
 	UpdateSignalStates();
 END_IF

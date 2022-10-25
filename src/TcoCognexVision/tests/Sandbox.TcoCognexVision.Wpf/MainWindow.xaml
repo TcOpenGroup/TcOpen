@@ -13,18 +13,7 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid DataContext="{Binding TcoCognexVisionTestPlc.MAIN, Mode=OneWay}">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <!--<vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding _sampleContext._sampleComponent._sampleTask, Mode=OneWay}" PresentationType="Base" />
-        <vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding _sampleContext._sampleComponent._sampleTask, Mode=OneWay}" PresentationType="ControlSlim" />-->
-        <vortex:RenderableContentControl Grid.Row="2" DataContext="{Binding _tcoDataman_v_5_x_xTests._dm260, Mode=OneWay}" PresentationType="Service"/>
-        <vortex:RenderableContentControl Grid.Row="3" DataContext="{Binding _tcoDataman_v_5_x_xTests._dm8700, Mode=OneWay}" PresentationType="Service"/>
-    </Grid>
-    
+    <StackPanel DataContext="{Binding TcoCognexVisionTestPlc.MAIN}">
+        <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.myVeryFirstDataman}" PresentationType="Service"/>
+    </StackPanel>
 </Window>

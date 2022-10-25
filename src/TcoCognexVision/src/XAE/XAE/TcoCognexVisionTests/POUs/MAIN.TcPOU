@@ -6,11 +6,16 @@ VAR
 	_sampleContext 				: 	TcoCognexVision.SampleContext;
 	_sampleComponentTests 		:	SampleComponentTests;
 	_tcoDataman_v_5_x_xTests 	:	TcoDataman_v_5_x_xTests;
+	
+	myVeryFirstTcoContextInstance :	myVeryFirstTcoContext;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_sampleContext.Run();
 _sampleComponentTests.Run();
-_tcoDataman_v_5_x_xTests.Run();]]></ST>
+_tcoDataman_v_5_x_xTests.Run();
+
+
+myVeryFirstTcoContextInstance.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

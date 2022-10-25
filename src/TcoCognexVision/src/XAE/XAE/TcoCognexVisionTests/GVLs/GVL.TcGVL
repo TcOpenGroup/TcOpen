@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
-  <GVL Name="IO" Id="{d37be50e-c2b3-0888-2f29-ec0e6f116694}">
+  <GVL Name="GVL" Id="{da8cc0c7-7535-0851-1cda-a5d24616e132}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	dm260 	: TcoCognexVision.TcoDatamanIO_v_5_x_x;
-	dm8700 	: TcoCognexVision.TcoDatamanIO_v_5_x_x;
+	myVeryFirstDatamanGVL 	: TcoCognexVision.TcoDatamanIO_v_5_x_x;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
