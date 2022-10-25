@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="SampleTaskIteration" Id="{f01b15c5-d292-0f50-2e75-e8889776cc71}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SampleTaskIteration EXTENDS TcoCore.TcoTask
+VAR	
+	_x : LREAL;
+	_y : LREAL;
+	_d : LREAL;
+	{attribute addProperty Minimum 100}
+	{attribute addProperty Maximum 1000}
+	_iterations : INT;	
+	_currentIteration : INT;	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(Execute()) THEN
+	_y := SIN(_x);
+	_x := _x + _d;		
+	_currentIteration := _currentIteration + 1;	
+	DoneWhen(_currentIteration >= _iterations);
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{e4866707-d8f9-0743-0956-875d314ed8cf}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{583473e6-7f7b-0f9f-2f18-ffb7b85855a1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_x := 0.0;
+_y := 0.0;
+_currentIteration := 0;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="SampleTaskFunctionBuffer" Id="{14149362-5982-0c93-380d-e4fa348f8421}">
+    <Declaration><![CDATA[TYPE SampleTaskFunctionBuffer :
+STRUCT
+	x : LREAL;
+	y : LREAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

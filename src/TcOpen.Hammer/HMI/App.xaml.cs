@@ -13,6 +13,7 @@ using TcOpen.Inxton.Security;
 using Serilog.Sinks;
 using TcOpen.Inxton.TcoCore.Wpf;
 using System.Windows.Media;
+using TcOpen.Inxton.Local.Security.Readers;
 
 namespace HMI
 {
@@ -41,7 +42,12 @@ namespace HMI
             switch (answer)
             {
                 case 'M':
-                    authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+                    //authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+
+                    var users = new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users"));
+                    var groups = new MongoDbRepository<GroupData>(new MongoDbRepositorySettings<GroupData>("mongodb://localhost:27017", "Hammer", "Groups"));
+                    var roleGroupManager = new RoleGroupManager(groups);
+                    authenticationService = SecurityManager.Create(users, roleGroupManager);
                     break;
                 case 'J':
                     authenticationService = SecurityManager.Create(SetUpJsonRepository());
@@ -70,6 +76,11 @@ namespace HMI
 
             // Initialize logger
             Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
+
+            // Initialize external authentication
+            authenticationService.ExternalAuthorization = ExternalTokenAuthorization.CreatePlcTokenReader
+                                                            (Entry.PlcHammer.TECH_MAIN._app._station001._externalToken, 
+                                                            Entry.PlcHammer.TECH_MAIN._app._station001._externalTokenPresence);
 
             // Set up data exchange
             switch (answer)

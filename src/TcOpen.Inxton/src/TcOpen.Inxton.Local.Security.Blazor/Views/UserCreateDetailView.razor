@@ -1,5 +1,5 @@
 ﻿@page "/Identity/Account/Register"
-@inject BlazorRoleGroupManager _roleGroupManager
+@inject RoleGroupManager _roleGroupManager
 @inject BlazorAlertManager _alertManager
 @inject UserManager<User> _userManager
 @inject NavigationManager _navigationManager
@@ -70,7 +70,7 @@
 
         if (result.Succeeded)
         {
-            _navigationManager.NavigateTo("security");
+            _navigationManager.NavigateTo("");
             _alertManager.addAlert("success", "User successfully created!");
             TcoAppDomain.Current.Logger.Information($"New user '{_model.Username}' created. {{@sender}}", new { UserName = _model.Username, Group = _model.Group });
         }

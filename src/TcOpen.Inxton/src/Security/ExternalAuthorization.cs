@@ -12,9 +12,9 @@ namespace TcOpen.Inxton.Local.Security
         public event AuthorizationRequestDelegate AuthorizationRequest;
         public event AuthorizationTokenChangeRequestDelegate AuthorizationTokenChange;
 
-        private IUser Authorize(string token)
+        private void Authorize(string token, bool deauthenticateWhenSame)
         {
-            return AuthorizationRequest(token);
+            AuthorizationRequest(token, deauthenticateWhenSame);
         }
 
         private void ChangeToken(string token)
@@ -22,8 +22,8 @@ namespace TcOpen.Inxton.Local.Security
             AuthorizationTokenChange(token);
         }
         
-        public IUser RequestAuthorization(string token)
-        {
+        public void RequestAuthorization(string token, bool deauthenticateWhenSame)
+        {            
             AuthorizationErrorMessage = string.Empty;
             try
             {
@@ -32,14 +32,12 @@ namespace TcOpen.Inxton.Local.Security
                     RequestTokenChange(token);
                 }
 
-                return Authorize(token);
+                Authorize(token, deauthenticateWhenSame);
             }
             catch (Exception ex)
             {
                 AuthorizationErrorMessage = ex.Message;
-            }
-
-            return null;
+            }           
         }
 
         public string AuthorizationErrorMessage

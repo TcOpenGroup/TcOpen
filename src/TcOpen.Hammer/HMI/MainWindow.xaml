@@ -235,7 +235,8 @@
             <vortex:SwiftRecorderView DataContext="{Binding SwiftRecorderViewModel}"></vortex:SwiftRecorderView>
         </TabItem>
         <TabItem Header="Security">
-            <vortexs:UserManagementView DataContext="{Binding Users}"></vortexs:UserManagementView>
+            <vortexs:UserManagementGroupManagementView></vortexs:UserManagementGroupManagementView>
+            <!--<vortexs:UserManagementView DataContext="{Binding Users}"></vortexs:UserManagementView>-->
         </TabItem>
         <TabItem Header="Colors">
             <StackPanel>

@@ -25,9 +25,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor
     public class BlazorAuthenticationStateProvider : AuthenticationStateProvider, IAuthenticationService
     {
         private IRepository<UserData> UserRepository;
-        private BlazorRoleGroupManager roleGroupManager;
+        private RoleGroupManager roleGroupManager;
 
-        public BlazorAuthenticationStateProvider(IRepository<UserData> userRepo, BlazorRoleGroupManager roleGroupManager)
+        public BlazorAuthenticationStateProvider(IRepository<UserData> userRepo, RoleGroupManager roleGroupManager)
         {
             this.UserRepository = userRepo;
             this.roleGroupManager = roleGroupManager;
@@ -99,7 +99,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             }
         }
 
-        private IUser ExternalAuthorization_AuthorizationRequest(string token)
+        private void ExternalAuthorization_AuthorizationRequest(string token, bool deauthenticateWhenSame)
         {
             var userName = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name;
             var currentUser = _users.FirstOrDefault(u => u.Username.Equals(userName));
@@ -107,13 +107,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             // De authenticate when the token matches the token of currently authenticated user.
             if (currentUser != null && this.CalculateHash(token, string.Empty) == currentUser.AuthenticationToken)
             {
-                this.DeAuthenticateCurrentUser();
-                return null;
+                if (deauthenticateWhenSame)
+                {
+                    this.DeAuthenticateCurrentUser();
+                }
             }
             else
             {
-                var authenticatedUser = this.AuthenticateUser(token);
-                return authenticatedUser;
+                var authenticatedUser = this.AuthenticateUser(token);                
             }
         }
 
@@ -146,7 +147,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             user.PasswordHash = CalculateHash("admin", "admin");
 
             var userEntity = new UserData(user);
-            UserRepository.Create(user.NormalizedUserName, userEntity);
+            UserRepository.Create(userEntity.Username, userEntity);
         }
 
         private readonly System.Timers.Timer deauthenticateTimer = new System.Timers.Timer();
@@ -208,7 +209,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
             //Authenticate the user
             string[] roles = new string[] { };
-            if (user.Roles.Length > 0 && user.Roles[0] != null) //TODO
+            if (user.Roles.Length > 0 && user.Roles[0] != null)
             {
                 roles = roleGroupManager.GetRolesFromGroup(user.Roles[0]).ToArray();
             }

@@ -41,7 +41,7 @@
         </div>
     </Authorized>
     <NotAuthorized>
-        <p>Sorry, you are not log in. Please log in.</p>
+        <p>Sorry, you are not logged in. Please log in.</p>
     </NotAuthorized>
 </AuthorizeView>
 
@@ -50,7 +50,7 @@
 
     private async void OnValidUpdate()
     {
-        User _user = await _userManager.FindByNameAsync(_model.Username);
+        User _user = await _userManager.FindByIdAsync(_model.Username);
 
         if (_model.CanUserChangePassword && _model.Password != "password")
         {
@@ -73,7 +73,7 @@
     {
         _model = new RegisterUserModel();
 
-        User _user = await _userManager.FindByNameAsync(UserAccessor.Instance.Identity.Name);
+        User _user = await _userManager.FindByIdAsync(UserAccessor.Instance.Identity.Name);
 
         _model.Username = _user.UserName;
         if(_user.Roles.Length > 0)

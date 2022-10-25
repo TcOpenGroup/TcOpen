@@ -11,9 +11,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
     public class RepositoryService : IRepositoryService
     {
         private readonly IRepository<UserData>  _userRepository;
-        private readonly BlazorRoleGroupManager _roleGroupManager;
+        private readonly RoleGroupManager _roleGroupManager;
         private bool _disposed;
-        public RepositoryService(IRepository<UserData> userRepository, BlazorRoleGroupManager roleGroupManager)
+        public RepositoryService(IRepository<UserData> userRepository, RoleGroupManager roleGroupManager)
         {
             _userRepository = userRepository;
             _roleGroupManager = roleGroupManager;
@@ -26,7 +26,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Services
             }
         }
 
-        public BlazorRoleGroupManager RoleGroupManager
+        public RoleGroupManager RoleGroupManager
         {
             get
             {

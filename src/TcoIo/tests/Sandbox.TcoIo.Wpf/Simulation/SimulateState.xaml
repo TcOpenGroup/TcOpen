@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Sandbox.TcoIo.Wpf.Simulation.SetAllToINITstate"
+﻿<UserControl x:Class="Sandbox.TcoIo.Wpf.Simulation.SimulateState"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,14 +9,14 @@
              DataContext="{Binding }" DataContextChanged="UserControl_DataContextChanged">
     <Grid>
         <StackPanel x:Name="stPanel" DataContext="{Binding }" >
-            <Button x:Name="tbSetToInitState" DataContext="{Binding}" Click="SetToINITState_Click" Height="60">
+            <Button x:Name="btsSetState" DataContext="{Binding}" Click="btsSetState_Click" Height="60">
                 <Button.Content>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Set to INIT state:"/>
+                        <TextBlock Grid.Row="0" x:Name="tbStateDesc" FontSize="10"/>
                         <TextBlock Grid.Row="1" x:Name="tbSymbol" FontSize="10"/>
                     </Grid>
                 </Button.Content>

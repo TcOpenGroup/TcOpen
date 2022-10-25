@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.JSInterop;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.Security;
+using System.Linq;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
@@ -11,7 +13,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
     {
         private class RoleData
         {
-            public RoleData(Role role) 
+            public RoleData(Role role)
             {
                 Role = role;
             }
@@ -27,12 +29,18 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         private User SelectedUser { get; set; }
         private RegisterUserModel _model { get; set; }
 
-        public void RowClicked(User user)
+        private ObservableCollection<UserData> AllUsers {
+            get {
+                return new ObservableCollection<UserData>(SecurityManager.Manager.UserRepository.GetRecords());
+            }
+            }
+
+        public void RowClicked(UserData user)
         {
-            SelectedUser = user;
+            SelectedUser = new User(user);
             //_model = new RegisterUserModel();
 
-            _model.Username = user.UserName;
+            _model.Username = user.Username;
             _model.Password = "password";
             _model.ConfirmPassword = "password";
             _model.CanUserChangePassword = user.CanUserChangePassword;

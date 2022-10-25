@@ -20,7 +20,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
         }
 
         [Inject]
-        private BlazorRoleGroupManager _roleGroupManager { get; set; }
+        private RoleGroupManager _roleGroupManager { get; set; }
         [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 
@@ -57,6 +57,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public void CreateGroup()
         {
+            if(newGroupName == null || newGroupName == "")
+            {
+                _alertManager.addAlert("warning", "Wrong group name!");
+                return;
+            }
             var result = _roleGroupManager.CreateGroup(newGroupName);
             if (result.Succeeded)
             {
