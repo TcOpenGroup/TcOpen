@@ -14,7 +14,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
     ---
     - #### Implementation steps.
         #### 1. Declare the hardware structure in the Global Variable list (GVL).
-        ```TSX
+        ```Javascript
         VAR_GLOBAL
             myVeryFirstDatamanGVL 	: TcoCognexVision.TcoDatamanIO_v_5_x_x;
         END_VAR
@@ -27,7 +27,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
         #### 7. Link all items of the structure **`GVL.myVeryFirstDatamanGVL`** with the respective items of the Application Process Identifier (API) of the slave device, so as the items **`Inputs.PnIoBoxState`**, **`Inputs.PnIoBoxDiag`** and **`Outputs.PnIoBoxCtrl`**.
         #### 8. Create the Function Block that extends the **`TcoCore.TcoContext`** function block.
         #### 9. Inside the declaration part of the function block created, add an instance of the **`TcoCognexVision.TcoDataman_v_5_x_x`** function block with the initialization according to the example.  
-        ```TSX
+        ```Javascript
         FUNCTION_BLOCK myVeryFirstTcoContext EXTENDS TcoCore.TcoContext
         VAR
             {attribute addProperty Name "<#Enter the user friendly name of this instance here!!!#>"}
@@ -36,7 +36,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
         ```
         #### 10. Add the **`Main`** method to the function block created in the step 8, and insert the **`TcoDataman_v_5_x_x`** instance call with passing the mapped hardware structure.
         #### 11. Add call of the method **`Service()`** according to the example. By calling this method, all control elements of this component are accessible later in the visualization.
-        ```TSX
+        ```Javascript
         myVeryFirstDataman(inoIoData:= GVL.myVeryFirstDatamanGVL);
         myVeryFirstDataman.Service();
         ```
@@ -48,7 +48,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
         END_VAR
         ```
         #### 13. Into the body of the **`MAIN(PRG)`** add the call of the **`Run()`** method of the instance created in the previous step, according to the example.    
-        ```TSX
+        ```Javascript
         myVeryFirstTcoContextInstance.Run();
         ```
         #### 14. Build and save the XAE project.
