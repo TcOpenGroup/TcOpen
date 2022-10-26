@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..245] OF BYTE</Name>
@@ -246,7 +246,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B057D1C0-C1A0-4E87-8DE3-42F28C9DD315}" Name="TcoCognexVision" PrjFilePath="TcoCognexVision\TcoCognexVision.plcproj" TmcFilePath="TcoCognexVision\TcoCognexVision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{163995FB-042F-F33A-5E67-E4197C0476CA}">
 					<Name>TcoCognexVision Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -266,7 +266,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{47650727-4B4F-7C4D-0F88-699F63526B0C}">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -793,10 +793,7 @@
 				</Image>
 				<Box Id="1" BoxType="9121">
 					<Name>dm260</Name>
-					<Comment><![CDATA[
-The GSDML is not available!
-
-GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
+					<Comment><![CDATA[GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
 OrderNumber: DMR-260#-#0
@@ -854,7 +851,7 @@ SW Release Version: 5.5.0]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" Phase="1" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" SavePnIoBoxValues="0100" BoxTypeInfo="DataMan 260 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan260.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-260#-#0" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan260" SWVersion="5.5.0" HWVersion="not available" AltLanguage="7">
+					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" SavePnIoBoxValues="0100" Phase="1" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="DataMan 260 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan260.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-260#-#0" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan260" SWVersion="5.5.0" HWVersion="not available" AltLanguage="7">
 						<UsedGsdmlModule ModuleIdentNumber="27" ModuleName="DAP Module" InfoText="DataMan 260 ID Reader" OrderNumber="DMR-260#-#0">
 							<Slot>0</Slot>
 						</UsedGsdmlModule>
