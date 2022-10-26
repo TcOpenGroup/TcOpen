@@ -1,0 +1,131 @@
+﻿<UserControl
+    x:Class="TcoCognexVision.TcoDataman_v_5_x_xServiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoCognexVision"
+    xmlns:conv="clr-namespace:TcoCognexVision.Converters"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoCore="http://vortex.mts/xaml"
+    xmlns:tcocognexvision="clr-namespace:TcoCognexVision"
+    mc:Ignorable="d">
+
+    <d:UserControl.DataContext>
+        <tcocognexvision:TcoDataman_v_5_x_xViewModel />
+    </d:UserControl.DataContext>
+    <StackPanel>
+        <tcoCore:TcoComponentView>
+            <tcoCore:TcoComponentView.ComponentHeader >
+                <WrapPanel HorizontalAlignment="Right">
+                    <WrapPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="MinWidth" Value="250"/>
+                        </Style>
+                    </WrapPanel.Resources>
+                    <StackPanel >
+                        <WrapPanel>
+                            <ListView MouseRightButtonUp="ResultData_MouseRightButtonUp"      
+                            MinWidth="200"                        
+                            Margin="10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding ResultData}">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Margin="-5,-5,-12,-5" HorizontalAlignment="Center" Content="{Binding Index}" />
+                                            <Label Margin="-5,-5,-12,-5" HorizontalAlignment="Center" Content="{Binding Data}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </WrapPanel>
+                    </StackPanel>
+                </WrapPanel>
+            </tcoCore:TcoComponentView.ComponentHeader>
+            <tcoCore:TcoComponentView.ComponentDetails>
+                <StackPanel DataContext="{Binding Component}">
+                    <Grid Grid.IsSharedSizeScope="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="100*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <tcoCore:RenderableContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" DataContext="{Binding _status.ActionDescription}"/>
+                            <GroupBox Header="Outputs" Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
+                                    <StackPanel>
+                                        <GroupBox Header="Acquisition control" Margin="0,0,0,5">
+                                            <StackPanel >
+                                                <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.TriggerEnable}" PresentationType="DisplaySlim"/>
+                                                <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.Trigger}" PresentationType="DisplaySlim"/>
+                                            </StackPanel>
+                                        </GroupBox>
+                                        <GroupBox Header="Result control" Margin="0,5,0,0">
+                                            <StackPanel >
+                                                <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.EnableResultBuffering}" PresentationType="DisplaySlim"/>
+                                                <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultsAcknowledge}" PresentationType="DisplaySlim"/>
+                                            </StackPanel>
+                                        </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
+                            <GroupBox Header="Inputs"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5,0,0,0" >
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100*"/>
+                                        <ColumnDefinition Width="100*"/>
+                                        <ColumnDefinition Width="100*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <GroupBox Header="Acquisition status" Grid.Column="0" Margin="0,0,10,0">
+                                        <StackPanel>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.TriggerReady}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.TriggerAcknowledge}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.Acquiring}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.MissedAcquisition}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.TriggerID}" PresentationType="DisplaySlim"/>
+                                        </StackPanel>                                            
+                                    </GroupBox>
+                                    <GroupBox Header="Result status" Grid.Column="1" Margin="0,0,5,0">
+                                        <StackPanel>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.Decoding}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.DecodeComplete}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultsBufferOverrun}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultsAvailable}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ErrorDetected}" PresentationType="DisplaySlim"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    <GroupBox Header="Result data" Grid.Column="2" Margin="5,0,0,0">
+                                        <StackPanel>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultID}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultCode}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultExtended}" PresentationType="DisplaySlim"/>
+                                            <tcoCore:RenderableContentControl DataContext="{Binding _status.SignalStatus.ResultLength}" PresentationType="DisplaySlim"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </Grid>
+                            </GroupBox>
+                        <tcoCore:RenderableContentControl Grid.Row="2" Grid.Column="0" Margin="0,5,5,0" MinWidth="200" DataContext="{Binding _readTask}" />
+                        <tcoCore:RenderableContentControl Grid.Row="2" Grid.Column="1" Margin="5,5,5,0" MinWidth="200" DataContext="{Binding _clearResultDataTask}" />
+                        <tcoCore:RenderableContentControl Grid.Row="2" Grid.Column="2" Margin="5,5,5,0" MinWidth="200" DataContext="{Binding _updateSignalStatesTask}" />
+                        <tcoCore:RenderableContentControl Grid.Row="2" Grid.Column="3" Margin="5,5,0,0" MinWidth="200" DataContext="{Binding _restoreTask}" />                       
+                    </Grid>
+                 </StackPanel>
+            </tcoCore:TcoComponentView.ComponentDetails>
+        </tcoCore:TcoComponentView>
+    </StackPanel>
+</UserControl>

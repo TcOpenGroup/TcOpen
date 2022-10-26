@@ -37,6 +37,9 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Vision\CodeReader\ITcoCodeReader.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -60,6 +63,10 @@
     <None Include="TcoAbstractions.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Vision" />
+    <Folder Include="Vision\CodeReader" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">

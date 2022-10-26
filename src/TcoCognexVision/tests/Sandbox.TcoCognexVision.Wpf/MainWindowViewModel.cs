@@ -1,20 +1,13 @@
-using TcoCognexVision;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Vortex.Connector;
-using Vortex.Connector.ValueTypes;
-using System.Linq;
+using TcoCognexVisionTests;
 
 namespace Sandbox.TcoCognexVision.Wpf
-{    
+{
     public class MainWindowViewModel 
     {
         public MainWindowViewModel()
         {            
         
         }
-        
-        public TcoCognexVisionTwinController TcoCognexVisionPlc { get; } = Entry.TcoCognexVisionPlc;       
+        public TcoCognexVisionTestsTwinController TcoCognexVisionTestPlc { get; } = Entry.TcoCognexVisionTestsPlc;       
     }
 }

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoRealToBytes" Id="{74650cbf-3728-487a-9d40-6ad16b4c7aa6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION TcoRealToBytes : BOOL
+VAR_INPUT
+	inFormat : eTcoDataFormat;
+	inValue : REAL;
+END_VAR
+VAR_IN_OUT
+    outByte0: BYTE;
+    outByte1: BYTE;
+    outByte2: BYTE;
+    outByte3: BYTE;
+END_VAR
+VAR
+	_b0: BYTE;
+	_b1: BYTE;
+	_b2: BYTE;
+    _b3: BYTE;
+    
+	_tmpReal : REAL;
+	_tmpDINT : DINT; 
+	_exponent : DINT;
+	_fraction : DINT;
+	_rExponent : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF inValue<0 THEN
+	_tmpReal := ABS(inValue);
+	_rExponent := LOG(_tmpReal)/LOG(2);
+	IF _rExponent >=0 THEN
+		_exponent := TRUNC(_rExponent);
+	ELSE
+		_Exponent := TRUNC(_rExponent)-1;
+	END_IF
+	_fraction := REAL_TO_DINT((_tmpReal / EXPT(2,_exponent)-1)* 8388608);
+	_tmpDINT := ANY_TO_DINT(2147483648 + (_exponent+127) * 8388608 + _fraction);
+ELSIF inValue>0 THEN
+	_tmpReal := ABS(inValue);
+	_rExponent := LOG(_tmpReal)/LOG(2);
+	IF _rExponent >=0 THEN
+		_exponent := TRUNC(_rExponent);
+	ELSE
+		_exponent := TRUNC(_rExponent)-1;
+	END_IF
+	_fraction := REAL_TO_DINT((_tmpReal / EXPT(2,_exponent)-1)* 8388608);
+	_tmpDINT := ANY_TO_DINT((_exponent+127) * 8388608 + _fraction);
+ELSE
+	_tmpDINT := 0;
+END_IF
+
+_b3:=UDINT_TO_BYTE(_tmpDINT MOD 256);
+_tmpDINT:=SHR(_tmpDINT,8);
+_b2:=UDINT_TO_BYTE(_tmpDINT MOD 256);
+_tmpDINT:=SHR(_tmpDINT,8);
+_b1:=UDINT_TO_BYTE(_tmpDINT MOD 256);
+_tmpDINT:=SHR(_tmpDINT,8);
+_b0:=UDINT_TO_BYTE(_tmpDINT MOD 256);
+_tmpDINT:=SHR(_tmpDINT,8);
+
+IF inFormat=eTcoDataFormat.LittleEndian THEN
+	outByte0 := _b3;
+	outByte1 := _b2;	
+	outByte2 := _b1;
+	outByte3 := _b0;	
+ELSIF inFormat=eTcoDataFormat.BigEndian THEN
+	outByte0 := _b0;
+	outByte1 := _b1;	
+	outByte2 := _b2;
+	outByte3 := _b3;	
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

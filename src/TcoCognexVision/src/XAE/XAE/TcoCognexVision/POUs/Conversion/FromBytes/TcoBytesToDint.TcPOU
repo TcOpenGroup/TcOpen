@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoBytesToDint" Id="{41728869-aaa8-4f88-92d8-6394e53b2cce}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION TcoBytesToDint : DINT
+VAR_INPUT
+	inFormat : eTcoDataFormat;
+    inByte0: BYTE;
+    inByte1: BYTE;
+    inByte2: BYTE;
+    inByte3: BYTE;
+END_VAR
+VAR
+    _b0: BYTE;
+	_b1: BYTE;
+	_b2: BYTE;
+    _b3: BYTE;
+	_tmpDWORD : DWORD;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF inFormat=eTcoDataFormat.LittleEndian THEN
+	_b0 := inByte3;
+	_b1 := inByte2;	
+	_b2 := inByte1;
+	_b3 := inByte0;	
+ELSIF inFormat=eTcoDataFormat.BigEndian THEN
+	_b0 := inByte0;
+	_b1 := inByte1;	
+	_b2 := inByte2;
+	_b3 := inByte3;	
+END_IF
+
+_tmpDWORD := _b0;
+_tmpDWORD := SHL(_tmpDWORD,8);
+_tmpDWORD := _tmpDWORD + _b1;
+_tmpDWORD := SHL(_tmpDWORD,8);
+_tmpDWORD := _tmpDWORD + _b2;
+_tmpDWORD := SHL(_tmpDWORD,8);
+_tmpDWORD := _tmpDWORD + _b3;
+
+TcoBytesToDint := DWORD_TO_DINT(_tmpDWORD);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

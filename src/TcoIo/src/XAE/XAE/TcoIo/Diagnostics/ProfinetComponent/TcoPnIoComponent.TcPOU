@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoPnIoComponent" Id="{e730e25c-8334-0f49-19fd-f3042165d353}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoPnIoComponent EXTENDS TcoCore.TcoComponent
+VAR_INPUT
+	inPnIoBoxState : UINT;
+	inPnIoBoxDiag : UINT;
+END_VAR
+VAR
+	{attribute 'hide'}
+	_profinetReady : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//PnIoBoxState
+//0 = No error
+//1 = Profinet device state machine is in boot mode
+//2 = Device not found
+//3 = The stationname is not unique
+//4 = IP could not be set
+//5 = IP conflict
+//6 = DCP set was not successful
+//7 = Watchdog error
+//8 = Datahold error
+//9 = RTC3: Sync mode could not be initiated
+//10 = Profinet controller has a link error
+//11 = The aliasname is not unique
+//12 = The automatic name assignement isn't possible - wrong device type
+//13 = IOC-AR is established but no application ready
+//14 = IOC-AR is established but module difference
+//15 = At least one InputCR is invalid, provider in stop or problemindicator is set
+//16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
+//31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+
+THIS^.Messenger.OnCondition(inPnIoBoxState=1 ).Error('<#Profinet device state machine is in boot mode!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=2 ).Error('<#Device NOT found!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=3 ).Error('<#The stationname is not unique!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=4 ).Error('<#IP could NOT be set!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=5 ).Error('<#IP conflict!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=6 ).Error('<#DCP set was NOT successful!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=7 ).Error('<#Watchdog error!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=8 ).Error('<#Datahold error!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=9 ).Error('<#RTC3: Sync mode could not be initiated!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=10).Error('<#Profinet controller has a link error!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=11).Error('<#The aliasname is not unique!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=12).Error('<#The automatic name assignement is not possible - wrong device TYPE!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=13).Error('<#IOC-AR is established but no application ready!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=14).Error('<#IOC-AR is established but module difference!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=15).Error('<#AT least one InputCR is invalid, provider in stop OR problemindicator is set!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=16).Error('<#At least one OutputCR is invalid, provider in stop or problemindicator is set!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxState=31).Error('<#EtherCAT gateway: WC-State OF cyclic EtherCAT frame is 1!#>'); 
+
+//PnIoBoxDiag
+//0x0000 = No diagnosis
+//0x0001 = IOC-AR is not established
+//0x0002 = IOC-AR is established
+//0x0004 = IOC-AR is established but no application ready
+//0x0008 = IOC-AR is established but module difference
+//0x0010 = At least one AlarmCR got a diagnosis alarm
+//0x0100 = At least one InputCR is invalid
+//0x0200 = At least one InputCR Provider is in stop
+//0x0400 = At least one InputCR Problemindicator is set
+//0x1000 = At least one OutputCR is invalid
+//0x2000 = At least one OutputCR Provider is in stop
+//0x4000 = At least one OutputCR Problemindicator is set
+
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.0 ).Error('<#IOC-AR is not established!#>'); 
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.1 ).Error('<#IOC-AR is established!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.2 ).Error('<#IOC-AR is established but no application ready!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.3 ).Error('<#IOC-AR is established but module difference!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.4 ).Error('<#AT least one AlarmCR got a diagnosis alarm!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.8 ).Error('<#At least one InputCR is invalid!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.9 ).Error('<#AT least one InputCR Provider is in stop!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.10).Error('<#At least one InputCR Problemindicator is set!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.12).Error('<#AT least one OutputCR is invalid!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.13).Error('<#At least one OutputCR Provider is in stop!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.14).Error('<#AT least one OutputCR Problemindicator is set!#>');
+
+
+_profinetReady := inPnIoBoxState = 0 AND inPnIoBoxDiag = 2;
+]]></ST>
+    </Implementation>
+    <Property Name="ProfinetReady" Id="{66996268-ad69-0a4b-27de-dac45a04f4a2}">
+      <Declaration><![CDATA[PROPERTY ProfinetReady : BOOL]]></Declaration>
+      <Get Name="Get" Id="{26391e72-54e7-08c1-02db-cb1f5cfa6018}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProfinetReady := _profinetReady;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

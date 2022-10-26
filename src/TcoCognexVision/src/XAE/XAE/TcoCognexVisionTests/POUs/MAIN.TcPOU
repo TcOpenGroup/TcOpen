@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="MAIN" Id="{5b53fb17-cd82-0ea5-175c-64a7847dafcb}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_sampleComponentTests : SampleComponentTests;
-END_VAR
-]]></Declaration>
+	_sampleContext 				: 	TcoCognexVision.SampleContext;
+	_sampleComponentTests 		:	SampleComponentTests;
+	_tcoDataman_v_5_x_xTests 	:	TcoDataman_v_5_x_xTests;
+	
+	myVeryFirstTcoContextInstance :	myVeryFirstTcoContext;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[_sampleContext.Run();
+_sampleComponentTests.Run();
+_tcoDataman_v_5_x_xTests.Run();
+
+
+myVeryFirstTcoContextInstance.Run();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
