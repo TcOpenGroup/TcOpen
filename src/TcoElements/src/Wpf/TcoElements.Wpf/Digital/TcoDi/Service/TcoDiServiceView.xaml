@@ -16,14 +16,14 @@
     </d:UserControl.DataContext>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
-            <Border
+            <Border DataContext="{Binding Model}"
                         Grid.Column="1"
                         Margin="5,0,5,0"
                         Background="{Binding _signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
                         CornerRadius="2" />
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <UniformGrid Rows="1" Margin="10,10,0,0">
+            <UniformGrid Rows="1" Margin="10,10,0,0" DataContext="{Binding Model}">
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                 <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                 <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>

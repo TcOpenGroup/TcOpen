@@ -30,7 +30,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
-                            Text="{Binding ., Converter={tcoCore:NameOrSymbolConverter}}"
+                            Text="{Binding Model, Converter={tcoCore:NameOrSymbolConverter}}"
                             TextAlignment="Left"
                             TextWrapping="WrapWithOverflow" />
                         <ContentControl Grid.Column="1" 
@@ -39,7 +39,7 @@
                                         VerticalAlignment="Stretch"
                                         Margin="5"
                                         MinHeight="30"/>
-                        <!--<tcoCore:HealthIndicatorView Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding MessageHandler}" />-->
+                        <tcoCore:HealthIndicatorView  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding Model.MessageHandler}" />
                     </Grid>
                 </Expander.Header>
                 <Grid>
