@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..245] OF BYTE</Name>
@@ -246,7 +246,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B057D1C0-C1A0-4E87-8DE3-42F28C9DD315}" Name="TcoCognexVision" PrjFilePath="TcoCognexVision\TcoCognexVision.plcproj" TmcFilePath="TcoCognexVision\TcoCognexVision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{163995FB-042F-F33A-5E67-E4197C0476CA}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc">
 					<Name>TcoCognexVision Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -266,7 +266,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{7377541F-9D02-8E2D-7021-223812FE785F}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -785,15 +785,18 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
+			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
 				<Name>Device 1 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000803801005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000100681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="1" AddrType="1" ImageType="3" SizeIn="75" SizeOut="87">
+				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000100681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="1" BoxType="9121">
 					<Name>dm260</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
 OrderNumber: DMR-260#-#0
@@ -851,7 +854,7 @@ SW Release Version: 5.5.0]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" SavePnIoBoxValues="0100" Phase="1" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="DataMan 260 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan260.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-260#-#0" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan260" SWVersion="5.5.0" HWVersion="not available" AltLanguage="7">
+					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" Phase="1" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" SavePnIoBoxValues="0100" BoxTypeInfo="DataMan 260 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan260.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-260#-#0" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan260" SWVersion="5.5.0" HWVersion="not available" AltLanguage="7">
 						<UsedGsdmlModule ModuleIdentNumber="27" ModuleName="DAP Module" InfoText="DataMan 260 ID Reader" OrderNumber="DMR-260#-#0">
 							<Slot>0</Slot>
 						</UsedGsdmlModule>
@@ -1215,50 +1218,4 @@ Submodule Info: Reads 64 bytes from DataMan
 			</Device>
 		</Io>
 	</Project>
-	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
-		<OwnerA Name="TIPC^TcoCognexVisionTests^TcoCognexVisionTests Instance">
-			<OwnerB Name="TIID^Device 1 (Profinet Controller)^dm260">
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.Acquiring" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquiring"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.MissedAcquisition" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Missed_Acquisition"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerAcknowledge" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Trigger_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerID" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Trigger_ID"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerReady" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Trigger_Ready"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.PnIoBoxDiag" VarB="Inputs^PnIoBoxDiag"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.PnIoBoxState" VarB="Inputs^PnIoBoxState"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultCode" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Code"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultData" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Data"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultExtended" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Extended"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultID" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_ID"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultLength" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Length"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.DecodeComplete" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Decode_Complete"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.Decoding" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Decoding"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.ErrorDetected" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Set_when_reader_fault_occurs"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.ResultsAvailable" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Results_Available"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.ResultsBufferOverrun" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Results_Buffer_Overrun"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.ExecuteDMCCAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Execute_DMCC_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.SetMatchStringAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Set_Match_String_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainBrightnessAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Brightness_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainCodeAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Code_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainFocusAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Focus_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainMatchStringAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Match_String_Acknowledge"/>
-				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.UntrainAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Untrain_Acknowledge"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.AcquisitionControl.Trigger" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Trigger"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.AcquisitionControl.TriggerEnable" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Trigger_Enable"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.PnIoBoxCtrl" VarB="Outputs^PnIoBoxCtrl"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.ResultsControl.EnableResultBuffering" VarB="API^Results_Control^Results_Control^Outputs^Results_Control_Register^Enable_Result_Buffering"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.ResultsControl.ResultsAcknowledge" VarB="API^Results_Control^Results_Control^Outputs^Results_Control_Register^Results_Acknowledge"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.ExecuteDMCC" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Execute_DMCC"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.SetMatchString" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Set_Match_String"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainBrightness" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Brightness"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainCode" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Code"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainFocus" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Focus"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainMatchString" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Match_String"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.Untrain" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Untrain"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.UserData.UserData" VarB="API^User_Data_64_bytes^User_Data_64_bytes^Outputs^User_Data"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.UserData.UserDataLength" VarB="API^User_Data_64_bytes^User_Data_64_bytes^Outputs^User_Data_Length"/>
-				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.UserData.UserDataOption" VarB="API^User_Data_64_bytes^User_Data_64_bytes^Outputs^User_Data_Option"/>
-			</OwnerB>
-		</OwnerA>
-	</Mappings>
 </TcSmProject>

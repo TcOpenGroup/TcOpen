@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDataman_v_5_x_x" Id="{acfa500c-75b0-406d-8872-dce797f24ef6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
 
@@ -136,6 +136,18 @@ END_IF
 
 THIS^.inoIoData.ResultsControl.ResultsAcknowledge := THIS^.inoIoData.ResultsStatus.ResultsAvailable;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{6c6069b0-27ea-0751-14e1-60ce00510083}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetResultAsByte" Id="{bc25c8ac-726c-08c6-3620-83c7ab295f3b}" FolderPath="ResultData\">

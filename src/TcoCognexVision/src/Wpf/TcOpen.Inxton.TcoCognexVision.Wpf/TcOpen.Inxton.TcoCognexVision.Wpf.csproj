@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
@@ -14,8 +14,12 @@
     <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
     <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\README.md" Link="README.md" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />

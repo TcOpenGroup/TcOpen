@@ -67,6 +67,10 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoAbstractions">
+      <DefaultResolution>TcoAbstractions, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoAbstractions</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="TcoCognexVision">
       <DefaultResolution>TcoCognexVision, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCognexVision</Namespace>
@@ -81,6 +85,9 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="TcoAbstractions">
+      <Resolution>TcoAbstractions, 0.6.0.913 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="TcoCognexVision">
       <Resolution>TcoCognexVision, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>

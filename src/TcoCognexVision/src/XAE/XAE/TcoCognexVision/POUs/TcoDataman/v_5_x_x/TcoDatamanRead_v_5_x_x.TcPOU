@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDatamanRead_v_5_x_x" Id="{bbfbdcf8-58e6-0eb9-1267-89fca8b94731}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDatamanRead_v_5_x_x EXTENDS TcoCore.TcoTask
 VAR_IN_OUT
@@ -95,6 +95,19 @@ END_VAR
         <ST><![CDATA[_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
 _errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{332a4519-fd52-0dcc-3b76-6a8434ca4896}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnAbort" Id="{dc1bb021-ea15-063c-2539-0b643900f778}">

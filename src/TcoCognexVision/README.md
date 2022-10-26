@@ -1,11 +1,18 @@
 # TcoCognexVision
+
+## Introduction
+
 The **TcoCognexVision** is a set of libraries covering the product portfolio of the vision systems from the vendor [Cognex](https://www.cognex.com) for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
 
 The package consists of a PLC library providing control logic and its .NET twin counterpart aimed at the visualization part. This package currently covers following product range:
 
 1. Dataman firmware v5.x.x
-2. 2b added
-3. 2b added
+2. More enroute
+
+
+## General TcOpen Prerequisites
+
+**Check general requisits for TcOpen [here](https://github.com/TcOpenGroup/TcOpen#prerequisites).**
 
  ## Dataman v5.x.x
 - ### PLC enviroment
@@ -14,7 +21,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
     ---
     - #### Implementation steps.
         #### 1. Declare the hardware structure in the Global Variable list (GVL).
-        ```Javascript
+        ```Smalltalk
         VAR_GLOBAL
             myVeryFirstDatamanGVL 	: TcoCognexVision.TcoDatamanIO_v_5_x_x;
         END_VAR
@@ -27,7 +34,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
         #### 7. Link all items of the structure **`GVL.myVeryFirstDatamanGVL`** with the respective items of the Application Process Identifier (API) of the slave device, so as the items **`Inputs.PnIoBoxState`**, **`Inputs.PnIoBoxDiag`** and **`Outputs.PnIoBoxCtrl`**.
         #### 8. Create the Function Block that extends the **`TcoCore.TcoContext`** function block.
         #### 9. Inside the declaration part of the function block created, add an instance of the **`TcoCognexVision.TcoDataman_v_5_x_x`** function block with the initialization according to the example.  
-        ```Javascript
+        ```Smalltalk
         FUNCTION_BLOCK myVeryFirstTcoContext EXTENDS TcoCore.TcoContext
         VAR
             {attribute addProperty Name "<#Enter the user friendly name of this instance here!!!#>"}
@@ -36,19 +43,19 @@ The package consists of a PLC library providing control logic and its .NET twin 
         ```
         #### 10. Add the **`Main`** method to the function block created in the step 8, and insert the **`TcoDataman_v_5_x_x`** instance call with passing the mapped hardware structure.
         #### 11. Add call of the method **`Service()`** according to the example. By calling this method, all control elements of this component are accessible later in the visualization.
-        ```Javascript
+        ```Smalltalk
         myVeryFirstDataman(inoIoData:= GVL.myVeryFirstDatamanGVL);
         myVeryFirstDataman.Service();
         ```
         #### 12. In the declaration part of the **`MAIN(PRG)`** create an instance of the function block created in the step 8 according to the example. 
-        ```TSX
+        ```Smalltalk
         PROGRAM MAIN
         VAR
             myVeryFirstTcoContextInstance :	myVeryFirstTcoContext;
         END_VAR
         ```
         #### 13. Into the body of the **`MAIN(PRG)`** add the call of the **`Run()`** method of the instance created in the previous step, according to the example.    
-        ```Javascript
+        ```Smalltalk
         myVeryFirstTcoContextInstance.Run();
         ```
         #### 14. Build and save the XAE project.
@@ -81,10 +88,6 @@ The package consists of a PLC library providing control logic and its .NET twin 
    - #### How to video could be found here [TodoEnterLinkToVideo]()
 
 
-----------------------------------
-## Prerequisites
-1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.11.19+
-1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/en-en/products/automation/twincat/texxxx-twincat-3-engineering/te1000.html) TwinCAT 3.1 4024.32+
-1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
-1. [Get free Inxton developer licence](https://inxton.com/register)
-1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
+
+
+
