@@ -477,11 +477,11 @@ END_IF;
 
 IF NOT _enabled THEN
 	IF THIS^._taskState = eTaskState.Requested THEN		
-		THIS^.Messenger.Post('Task cannot start; Enabled property is FALSE.',eMessageCategory.Info);	
+		THIS^.Messenger.Post('<#Task cannot start; Enabled property is FALSE.#>',eMessageCategory.Info);	
 		THIS^.Restore();
 	END_IF
 	IF THIS^._taskState = eTaskState.Busy THEN
-		THIS^.Messenger.Post('Running task entered Error state when the Enabled property transitioned to FALSE during task execution.',eMessageCategory.Error);	
+		THIS^.Messenger.Post('<#Running task entered Error state when the Enabled property transitioned to FALSE during task execution.#>',eMessageCategory.Error);	
 		THIS^._taskState := eTaskState.Error;
 	END_IF
 END_IF;
@@ -623,7 +623,14 @@ METHOD PROTECTED OnError
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{ddc1c3c0-3bd2-0393-355d-edc7abe4115b}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes ones when the task starts (at the moment of transition from the ```Requested``` state into the ```Busy``` state).
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
