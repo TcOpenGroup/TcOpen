@@ -53,6 +53,9 @@
                     <tcoCore:TcoSignalInfoView DataContext="{Binding _atWorkPosSignalInfo}"></tcoCore:TcoSignalInfoView>
                     <tcoCore:TcoSignalInfoView DataContext="{Binding _toWorkPosSignalInfo}"></tcoCore:TcoSignalInfoView>
                 </UniformGrid>
+                <TextBlock Text="TEST"></TextBlock>
+                <vortex:RenderableContentControl DataContext="{Binding _config.}" PresentationType=""></vortex:RenderableContentControl>
+                 
             </StackPanel>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>

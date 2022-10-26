@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoCylinderMoveTask" Id="{36f82742-ef83-064d-3f82-8df2b1eb7a0b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoCylinderMoveTask EXTENDS TcoCore.TcoTask
 VAR_INPUT
 	PositionSensor		   : BOOL;
 	MaxTimeToReachPosition : TIME := T#10S;
+	TimeToRefill 		   : TIME := T#100MS;
 	PositionName		   : STRING(25);
 END_VAR
 VAR_IN_OUT
@@ -14,13 +15,26 @@ END_VAR
 
 VAR
 	_stringBuilder : TcoCore.StringBuilder;
+	_refillTimer :TON;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF (THIS^.Execute()) THEN
-	IF(THIS^.ElapsedTime > MaxTimeToReachPosition) THEN THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString()); END_IF;
-	InverseSignal		 := FALSE;
-	MoveToPositionSignal := TRUE;
-	THIS^.DoneWhen(PositionSensor);	
+	 IF TimeToRefill<>T#0MS THEN
+		_refillTimer(IN:=TRUE,PT:=TimeToRefill);
+
+		InverseSignal		 := TRUE;
+		MoveToPositionSignal := TRUE;
+	END_IF
+	
+	IF _refillTimer.ET >TimeToRefill XOR TimeToRefill=T#0MS THEN
+			
+		IF(THIS^.ElapsedTime > MaxTimeToReachPosition) THEN THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString()); END_IF;
+		InverseSignal		 := FALSE;
+		MoveToPositionSignal := TRUE;
+	
+	
+		THIS^.DoneWhen(PositionSensor);
+	END_IF;	
 END_IF
 ]]></ST>
     </Implementation>
@@ -56,6 +70,23 @@ METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{e7f01650-89d3-0bc5-17a1-230c301d4988}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResetRefillTimer();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ResetRefillTimer" Id="{98863379-ea76-0760-0cef-ddf4d17489e4}">
+      <Declaration><![CDATA[METHOD ResetRefillTimer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refillTimer(IN:=FALSE);]]></ST>
       </Implementation>
     </Method>
   </POU>
