@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="SampleComponentTests" Id="{8e88c5fb-6b37-0ee0-1dee-44bcdb0de8e4}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK SampleComponentTests EXTENDS _internals_TcoContext
+    <Declaration><![CDATA[FUNCTION_BLOCK SampleComponentTests EXTENDS TcoCore._internals_TcoContext
 VAR
 	_sut : PlcTemplate.SampleComponent(THIS^);
 END_VAR]]></Declaration>
