@@ -1,6 +1,233 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22">
-	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" Target64Bit="true" ShowHideConfigurations="#x106">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..245] OF BYTE</Name>
+			<BitSize>1968</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>246</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..249] OF BYTE</Name>
+			<BitSize>2000</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>250</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{5CA47292-3D6F-107A-0B1A-C75D1CD96DC7}">PN_Acquisition_Control_Register_D6748CEA</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Trigger_Enable</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{CB133ED8-810D-51DB-8DEF-29F6EAE5BC72}">PN_Acquisition_Status_Register_1E5DB5B2</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Trigger_Ready</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Acquiring</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Missed_Acquisition</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{EBE86058-7385-962F-519C-BAE4039B827D}">PN_Results_Control_Register_E4FF148F</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Enable_Result_Buffering</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Results_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{10FB0BCB-AF1B-67DB-6A9C-E9DAF47E6DA1}">PN_Results_Status_Register_0CA4464E</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Decoding</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Decode_Complete</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Results_Buffer_Overrun</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Results_Available</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Set_when_reader_fault_occurs</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{018F6539-D38F-5E4D-12D0-23C0F444F54F}">PN_Soft_Event_Acknowledge_Register_D0142250</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Train_Code_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Train_Match_String_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Train_Focus_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Train_Brightness_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Untrain_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Reserved</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Execute_DMCC_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Set_Match_String_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{539633D7-C428-D610-243F-F8F720E01CD1}">PN_Soft_Event_Control_Register_A36228FB</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Train_Code</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Train_Match_String</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Train_Focus</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Train_Brightness</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Untrain</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Reserved</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Execute_DMCC</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Set_Match_String</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000300000040}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..63] OF BYTE</Name>
+			<BitSize>512</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>64</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="2" NonWinCpus="1">
 				<Cpu CpuId="1"/>
@@ -9,14 +236,17 @@
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
-				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
+				<Task Id="4" Priority="21" CycleTime="80000" AmsPort="351" AdtTasks="true">
+					<Name>PNIO</Name>
+				</Task>
+				<Task Id="5" Priority="22" CycleTime="100000" AmsPort="352" AdtTasks="true">
 					<Name>PlcTask1</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{B057D1C0-C1A0-4E87-8DE3-42F28C9DD315}" Name="TcoCognexVision" PrjFilePath="TcoCognexVision\TcoCognexVision.plcproj" TmcFilePath="TcoCognexVision\TcoCognexVision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{163995FB-042F-F33A-5E67-E4197C0476CA}">
 					<Name>TcoCognexVision Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -36,9 +266,507 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{47650727-4B4F-7C4D-0F88-699F63526B0C}">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.PnIoBoxState</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.PnIoBoxDiag</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerReady</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionStatus.Acquiring</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionStatus.MissedAcquisition</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerID</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsStatus.Decoding</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsStatus.DecodeComplete</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsStatus.ResultsBufferOverrun</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsStatus.ResultsAvailable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsStatus.ErrorDetected</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainCodeAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainMatchStringAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainFocusAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainBrightnessAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.UntrainAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.Reserved05</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.ExecuteDMCCAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.SetMatchStringAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultData.ResultID</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultData.ResultCode</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultData.ResultExtended</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultData.ResultLength</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultData.ResultData</Name>
+							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.PnIoBoxState</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.PnIoBoxDiag</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionStatus.TriggerReady</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionStatus.TriggerAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionStatus.Acquiring</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionStatus.MissedAcquisition</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionStatus.TriggerID</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsStatus.Decoding</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsStatus.DecodeComplete</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsStatus.ResultsBufferOverrun</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsStatus.ResultsAvailable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsStatus.ErrorDetected</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainCodeAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainMatchStringAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainFocusAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainBrightnessAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.UntrainAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.Reserved05</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.ExecuteDMCCAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.SetMatchStringAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultData.ResultID</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultData.ResultCode</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultData.ResultExtended</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultData.ResultLength</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultData.ResultData</Name>
+							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.PnIoBoxState</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.PnIoBoxDiag</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionStatus.TriggerReady</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionStatus.TriggerAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionStatus.Acquiring</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionStatus.MissedAcquisition</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionStatus.TriggerID</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsStatus.Decoding</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsStatus.DecodeComplete</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsStatus.ResultsBufferOverrun</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsStatus.ResultsAvailable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsStatus.ErrorDetected</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainCodeAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainMatchStringAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainFocusAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainBrightnessAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.UntrainAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.Reserved05</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.ExecuteDMCCAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.SetMatchStringAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultData.ResultID</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultData.ResultCode</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultData.ResultExtended</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultData.ResultLength</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultData.ResultData</Name>
+							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.PnIoBoxCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionControl.TriggerEnable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.AcquisitionControl.Trigger</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsControl.EnableResultBuffering</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.ResultsControl.ResultsAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainCode</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainMatchString</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainFocus</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainBrightness</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.Untrain</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.Reserved15</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.ExecuteDMCC</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.SoftEventControl.SetMatchString</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.UserData.UserDataOption</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.UserData.UserDataLength</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstDatamanGVL.UserData.UserData</Name>
+							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.PnIoBoxCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionControl.TriggerEnable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.AcquisitionControl.Trigger</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsControl.EnableResultBuffering</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.ResultsControl.ResultsAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainCode</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainMatchString</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainFocus</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.TrainBrightness</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.Untrain</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.Reserved15</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.ExecuteDMCC</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.SoftEventControl.SetMatchString</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.UserData.UserDataOption</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.UserData.UserDataLength</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm260.UserData.UserData</Name>
+							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.PnIoBoxCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionControl.TriggerEnable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.AcquisitionControl.Trigger</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsControl.EnableResultBuffering</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.ResultsControl.ResultsAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainCode</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainMatchString</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainFocus</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.TrainBrightness</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.Untrain</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.Reserved15</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.ExecuteDMCC</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.SoftEventControl.SetMatchString</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.UserData.UserDataOption</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.UserData.UserDataLength</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>IO.dm8700.UserData.UserData</Name>
+							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
+						</Var>
+					</Vars>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
@@ -47,7 +775,7 @@
 								<OTCID>#x02010040</OTCID>
 							</ManualConfig>
 							<Priority>21</Priority>
-							<CycleTime>10000000</CycleTime>
+							<CycleTime>8000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>
@@ -56,5 +784,435 @@
 				</Instance>
 			</Project>
 		</Plc>
+		<Io>
+			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
+				<Name>Device 1 (Profinet Controller)</Name>
+				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000100681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="9121">
+					<Name>dm260</Name>
+					<Comment><![CDATA[GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Path: $(TWINCAT3DIR)Config\Io\Profinet\
+VendorName: Cognex
+OrderNumber: DMR-260#-#0
+HW Release Version: not available
+SW Release Version: 5.5.0]]></Comment>
+					<ImageId>121</ImageId>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>PnIoBoxState</Name>
+							<Comment><![CDATA[0 = No error
+1 = Profinet device state machine is in boot mode
+2 = Device not found
+3 = The stationname is not unique
+4 = IP could not be set
+5 = IP conflict
+6 = DCP set was not successful
+7 = Watchdog error
+8 = Datahold error
+9 = RTC3: Sync mode could not be initiated
+10 = Profinet controller has a link error
+11 = The aliasname is not unique
+12 = The automatic name assignement isn't possible - wrong device type
+13 = IOC-AR is established but no application ready
+14 = IOC-AR is established but module difference
+15 = At least one InputCR is invalid, provider in stop or problemindicator is set
+16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
+31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+]]></Comment>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>PnIoBoxDiag</Name>
+							<Comment><![CDATA[0x0000 = No diagnosis
+0x0001 = IOC-AR is not established
+0x0002 = IOC-AR is established
+0x0004 = IOC-AR is established but no application ready
+0x0008 = IOC-AR is established but module difference
+0x0010 = At least one AlarmCR got a diagnosis alarm
+0x0100 = At least one InputCR is invalid
+0x0200 = At least one InputCR Provider is in stop
+0x0400 = At least one InputCR Problemindicator is set
+0x1000 = At least one OutputCR is invalid
+0x2000 = At least one OutputCR Provider is in stop
+0x4000 = At least one OutputCR Problemindicator is set
+]]></Comment>
+							<Type>UINT</Type>
+							<BitOffs>16</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>PnIoBoxCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" SavePnIoBoxValues="0100" Phase="1" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="DataMan 260 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan260.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-260#-#0" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan260" SWVersion="5.5.0" HWVersion="not available" AltLanguage="7">
+						<UsedGsdmlModule ModuleIdentNumber="27" ModuleName="DAP Module" InfoText="DataMan 260 ID Reader" OrderNumber="DMR-260#-#0">
+							<Slot>0</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="257" Id="101" ModuleName="Acquisition Control" InfoText="Controls acquisition" ModuleCategory="DataMan Control Modules">
+							<Slot>1</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="513" Id="201" ModuleName="Acquisition Status" InfoText="Status of acquisition" ModuleCategory="DataMan Status Modules">
+							<Slot>2</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="258" Id="102" ModuleName="Results Control" InfoText="Controls the results" ModuleCategory="DataMan Control Modules">
+							<Slot>3</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="514" Id="202" ModuleName="Results Status" InfoText="Status of results" ModuleCategory="DataMan Status Modules">
+							<Slot>4</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="261" Id="105" ModuleName="Soft Event Control" InfoText="Controls the Soft Events" ModuleCategory="DataMan Control Modules">
+							<Slot>5</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="771" Id="303" ModuleName="User Data - 64 bytes" InfoText="Writes 64 bytes to DataMan" ModuleCategory="DataMan Data Modules">
+							<Slot>6</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="1027" Id="403" ModuleName="Result Data - 64 bytes" InfoText="Reads 64 bytes from DataMan" ModuleCategory="DataMan Data Modules">
+							<Slot>7</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="DIM12" SubModuleName="DataMan 260" InfoText="DataMan 260 ID Reader"/>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="1" SubModuleName="Acquisition Control" InfoText="Controls acquisition">
+							<DataItemOut>
+								<BitText Offset="0" Length="0">Trigger Enable</BitText>
+								<BitText Offset="0" Length="0">Trigger</BitText>
+							</DataItemOut>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="2" SubModuleName="Acquisition Status" InfoText="Status of acquisition">
+							<DataItemIn>
+								<BitText Offset="0" Length="0">Trigger Ready</BitText>
+								<BitText Offset="0" Length="0">Trigger Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Acquiring</BitText>
+								<BitText Offset="0" Length="0">Missed Acquisition</BitText>
+							</DataItemIn>
+							<DataItemIn/>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="3" SubModuleName="Results Control" InfoText="Controls the results">
+							<DataItemOut>
+								<BitText Offset="0" Length="0">Enable Result Buffering</BitText>
+								<BitText Offset="0" Length="0">Results Acknowledge</BitText>
+							</DataItemOut>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="4" SubModuleName="Results Status" InfoText="Status of results">
+							<DataItemIn>
+								<BitText Offset="0" Length="0">Decoding</BitText>
+								<BitText Offset="0" Length="0">Decode Complete</BitText>
+								<BitText Offset="0" Length="0">Results Buffer Overrun</BitText>
+								<BitText Offset="0" Length="0">Results Available</BitText>
+								<BitText Offset="0" Length="0">Set when reader fault occurs</BitText>
+							</DataItemIn>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="5" SubModuleName="Soft Event Control" InfoText="Controls the Soft Events">
+							<DataItemIn>
+								<BitText Offset="0" Length="0">Train Code Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Train Match String Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Train Focus Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Train Brightness Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Untrain Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Reserved</BitText>
+								<BitText Offset="0" Length="0">Execute DMCC Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Set Match String Acknowledge</BitText>
+							</DataItemIn>
+							<DataItemOut>
+								<BitText Offset="0" Length="0">Train Code</BitText>
+								<BitText Offset="0" Length="0">Train Match String</BitText>
+								<BitText Offset="0" Length="0">Train Focus</BitText>
+								<BitText Offset="0" Length="0">Train Brightness</BitText>
+								<BitText Offset="0" Length="0">Untrain</BitText>
+								<BitText Offset="0" Length="0">Reserved</BitText>
+								<BitText Offset="0" Length="0">Execute DMCC</BitText>
+								<BitText Offset="0" Length="0">Set Match String</BitText>
+							</DataItemOut>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="10" SubModuleName="User Data - 64 bytes" InfoText="Writes 64 bytes to DataMan">
+							<DataItemOut/>
+							<DataItemOut/>
+							<DataItemOut/>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="11" SubModuleName="Result Data - 64 bytes" InfoText="Reads 64 bytes from DataMan">
+							<DataItemIn/>
+							<DataItemIn/>
+							<DataItemIn/>
+							<DataItemIn/>
+							<DataItemIn/>
+						</UsedGsdmlSubModule>
+						<API Id="1">
+							<Name>API</Name>
+							<ImageId>4</ImageId>
+							<Module Id="#x031d0001" DAP="true" ModuleIdentNumber="27" ModuleInfo="DataMan 260 ID Reader">
+								<Name>DAP_Module</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: DataMan 260 ID Reader
+OrderNumber: DMR-260#-#0]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0001" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DIM12">
+									<Name>DataMan_260</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: DataMan 260 ID Reader
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0002" SubModuleIdentNumber="1" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS_DAP12I" InterfaceData="0100000000000000000000000000000000000000000000000200000000000000">
+									<Name>Interface</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0003" SubModuleIdentNumber="2" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS_DAP12P" PortData="00000000000000000000000000000000000000000000000000000000">
+									<Name>Port_1</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0002" ModuleIdentNumber="257" SlotNumber="1" ModuleInfo="Controls acquisition" ModuleID="101" DirectDeletable="true">
+								<Name>Acquisition_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Controls acquisition
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0004" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="1">
+									<Name>Acquisition_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Controls acquisition
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>Acquisition_Control_Register</Name>
+											<Type GUID="{5CA47292-3D6F-107A-0B1A-C75D1CD96DC7}">PN_Acquisition_Control_Register_D6748CEA</Type>
+											<BitOffs>16</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0003" ModuleIdentNumber="513" SlotNumber="2" ModuleInfo="Status of acquisition" ModuleID="201" DirectDeletable="true">
+								<Name>Acquisition_Status</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Status of acquisition
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0005" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="2">
+									<Name>Acquisition_Status</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Status of acquisition
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>Acquisition_Status_Register</Name>
+											<Type GUID="{CB133ED8-810D-51DB-8DEF-29F6EAE5BC72}">PN_Acquisition_Status_Register_1E5DB5B2</Type>
+											<BitOffs>32</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Trigger_ID</Name>
+											<Type>UINT</Type>
+											<BitOffs>40</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0004" ModuleIdentNumber="258" SlotNumber="3" ModuleInfo="Controls the results" ModuleID="102" DirectDeletable="true">
+								<Name>Results_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Controls the results
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0006" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="3">
+									<Name>Results_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Controls the results
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>Results_Control_Register</Name>
+											<Type GUID="{EBE86058-7385-962F-519C-BAE4039B827D}">PN_Results_Control_Register_E4FF148F</Type>
+											<BitOffs>24</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0005" ModuleIdentNumber="514" SlotNumber="4" ModuleInfo="Status of results" ModuleID="202" DirectDeletable="true">
+								<Name>Results_Status</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Status of results
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0007" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="4">
+									<Name>Results_Status</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Status of results
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>Results_Status_Register</Name>
+											<Type GUID="{10FB0BCB-AF1B-67DB-6A9C-E9DAF47E6DA1}">PN_Results_Status_Register_0CA4464E</Type>
+											<BitOffs>56</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0006" ModuleIdentNumber="261" SlotNumber="5" ModuleInfo="Controls the Soft Events" ModuleID="105" DirectDeletable="true">
+								<Name>Soft_Event_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Controls the Soft Events
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0008" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="5">
+									<Name>Soft_Event_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Controls the Soft Events
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>Soft_Event_Acknowledge_Register</Name>
+											<Type GUID="{018F6539-D38F-5E4D-12D0-23C0F444F54F}">PN_Soft_Event_Acknowledge_Register_D0142250</Type>
+											<BitOffs>64</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>Soft_Event_Control_Register</Name>
+											<Type GUID="{539633D7-C428-D610-243F-F8F720E01CD1}">PN_Soft_Event_Control_Register_A36228FB</Type>
+											<BitOffs>32</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0007" ModuleIdentNumber="771" SlotNumber="6" ModuleInfo="Writes 64 bytes to DataMan" ModuleID="303" DirectDeletable="true">
+								<Name>User_Data_64_bytes</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Writes 64 bytes to DataMan
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0009" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="10">
+									<Name>User_Data_64_bytes</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Writes 64 bytes to DataMan
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var Swapping="#x1">
+											<Name>User_Data_Option</Name>
+											<Type>UINT</Type>
+											<BitOffs>40</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>User_Data_Length</Name>
+											<Type>UINT</Type>
+											<BitOffs>56</BitOffs>
+										</Var>
+										<Var>
+											<Name>User_Data</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
+											<BitOffs>72</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0008" ModuleIdentNumber="1027" SlotNumber="7" ModuleInfo="Reads 64 bytes from DataMan" ModuleID="403" DirectDeletable="true">
+								<Name>Result_Data_64_bytes</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Module Info: Reads 64 bytes from DataMan
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c000a" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="11">
+									<Name>Result_Data_64_bytes</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
+Submodule Info: Reads 64 bytes from DataMan
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var Swapping="#x1">
+											<Name>Result_ID</Name>
+											<Type>UINT</Type>
+											<BitOffs>72</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Result_Code</Name>
+											<Type>UINT</Type>
+											<BitOffs>88</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Result_Extended</Name>
+											<Type>UINT</Type>
+											<BitOffs>104</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Result_Length</Name>
+											<Type>UINT</Type>
+											<BitOffs>120</BitOffs>
+										</Var>
+										<Var>
+											<Name>Result_Data</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
+											<BitOffs>136</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+						</API>
+					</Profinet>
+				</Box>
+				<Profinet PLCPortNr="851" AddPortCount="1">
+					<Ethernet DeviceDesc="X000_LAN (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) #2)" SpecialTask="true" TaskPort="351"/>
+					<PNController ClientPort="60000" ServerPort="61000" VendorId="288" DeviceId="35" IPData="00000000ac141e68ffffff0000000000" SystemName="tc-pncontroller" IRTSendClock="32">
+						<RTData CableLength="10"/>
+					</PNController>
+				</Profinet>
+			</Device>
+		</Io>
 	</Project>
 </TcSmProject>

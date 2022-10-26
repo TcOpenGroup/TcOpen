@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="TcoDatamanSoftEventControl_v_5_x_x" Id="{ceddc97c-cebe-4d47-b77a-37b6d9d3af17}">
+    <Declaration><![CDATA[TYPE TcoDatamanSoftEventControl_v_5_x_x :
+STRUCT
+	TrainCodeAcknowledge 			AT %I*:	BOOL; 
+	TrainMatchStringAcknowledge 	AT %I*:	BOOL;
+	TrainFocusAcknowledge 			AT %I*:	BOOL; 		
+	TrainBrightnessAcknowledge  	AT %I*:	BOOL;
+	UntrainAcknowledge  			AT %I*:	BOOL; 	
+	Reserved05 						AT %I*:	BOOL; 	
+	ExecuteDMCCAcknowledge 			AT %I*:	BOOL; 	
+	SetMatchStringAcknowledge  		AT %I*:	BOOL; 
+                                           	
+	TrainCode 						AT %Q*:	BOOL; 			
+	TrainMatchString 				AT %Q*:	BOOL;	
+	TrainFocus 						AT %Q*:	BOOL;			
+	TrainBrightness 				AT %Q*:	BOOL;	
+	Untrain 						AT %Q*:	BOOL;			
+	Reserved15 						AT %Q*:	BOOL; 	
+	ExecuteDMCC 					AT %Q*:	BOOL;		
+	SetMatchString 					AT %Q*:	BOOL;		
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
