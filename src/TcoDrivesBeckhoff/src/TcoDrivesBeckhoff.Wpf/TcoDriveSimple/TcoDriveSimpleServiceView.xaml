@@ -14,250 +14,158 @@
     <!--<d:UserControl.DataContext>
         <tcodrivesbeckhoff:TcoDriveSimpleMainViewModel/>
     </d:UserControl.DataContext>-->
-
-    <vortex:TcoComponentView DataContext="{Binding Component}">
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
+        
+    </UserControl.Resources>
+    <vortex:TcoComponentView >
         <vortex:TcoComponentView.ComponentDetails>
-            <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}, Path=DataContext}">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"
+            <ScrollViewer MaxHeight="1000">
+                <ItemsControl DataContext="{Binding  Model}">
+              
+                    <TextBlock Grid.Row="0"
             Margin="5,0,5,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
-            Text="{Binding Component, Converter={tcoCore:NameOrSymbolConverter}}"
+            Text="{Binding ., Converter={tcoCore:NameOrSymbolConverter}}"
             TextAlignment="Left"
             TextWrapping="WrapWithOverflow" />
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <vortex:RenderableContentControl Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.ActPos}"/>
-                    <vortex:RenderableContentControl Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActPos}"/>
-                    <vortex:RenderableContentControl Grid.Column="2" Margin="5" DataContext="{Binding Component._axisStatus.ModuloActTurns}"/>
-                    <vortex:RenderableContentControl Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.ActVelo}"/>
-                    <vortex:RenderableContentControl Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ActAcc}"/>
-                    <vortex:RenderableContentControl Grid.Column="5" Margin="5" DataContext="{Binding Component._axisStatus.ActTorque}"/>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                    <ItemsControl Padding="10" Grid.Row="1"  ItemsPanel="{StaticResource HorizontalWraped}">
 
-                    <vortex:RenderableContentControl Grid.Column="0" Margin="5" DataContext="{Binding Component._axisStatus.CmdNo}"/>
-                    <vortex:RenderableContentControl Grid.Column="1" Margin="5" DataContext="{Binding Component._axisStatus.CmdState}"/>
-                    <StackPanel  Grid.Column="2" Margin="5">
-                        <TextBlock Text="{Binding Component._axisStatus.MotionState.AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding Component._axisStatus.MotionState}"/>
-                    </StackPanel>
-                    <vortex:RenderableContentControl Grid.Column="3" Margin="5" DataContext="{Binding Component._axisStatus.Error}"/>
-                    <vortex:RenderableContentControl Grid.Column="4" Margin="5" DataContext="{Binding Component._axisStatus.ErrorId}"/>
-                    <StackPanel  Grid.Column="5" Margin="5">
-                        <TextBlock Text="Error description"/>
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Component._axisStatus.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="0"  DataContext="{Binding Component._power._drivePowerOverrideTask}"          />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="1"  DataContext="{Binding Component._power._driveEnableLocalTask}"          />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="2"  DataContext="{Binding Component._power._driveEnablePositiveLocalTask}"  />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="3"  DataContext="{Binding Component._power._driveEnableNegativeLocalTask}"  />
-                </Grid>
-                <Grid Grid.Row="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding Component._resetTask}"    />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="1" DataContext="{Binding Component._soEResetTask}" />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="2" DataContext="{Binding Component._haltTask}"     />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="3" DataContext="{Binding Component._stopTask}"     />
-                </Grid>
-                <Grid Grid.Row="5" DataContext="{Binding Component._homeTask}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="7"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" DataContext="{Binding }"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="0" Grid.Column="1" DataContext="{Binding _position}" PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="0" Grid.Column="2" DataContext="{Binding _homingOptions_SearchVelocity}" PresentationType="Control"/>
-                    <StackPanel Margin="5" Grid.Row="1" Grid.Column="2" DataContext="{Binding _homingOptions_SearchDirection}">
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="0" Grid.Column="3" DataContext="{Binding _homingOptions_SyncVelocity}" PresentationType="Control"/>
-                    <StackPanel Margin="5" Grid.Row="1" Grid.Column="3" DataContext="{Binding _homingOptions_SyncDirection}" >
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                    <StackPanel Margin="5" Grid.Row="0" Grid.Column="4" DataContext="{Binding _homingMode}">
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                    <StackPanel Margin="5" Grid.Row="1" Grid.Column="4" DataContext="{Binding _homingOptions_ReferenceMode}">
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                    <StackPanel Margin="5" Grid.Row="1" Grid.Column="5" DataContext="{Binding _homingOptions_ClearPositionLag}">
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <CheckBox IsChecked="{Binding Cyclic}"/>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="6" DataContext="{Binding Component._jog}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="7"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="0" Grid.Column="0" DataContext="{Binding _jogBackwardsTask}"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="0" Grid.Column="1" DataContext="{Binding _jogForwardTask}"/>
-                    <StackPanel Margin="5" Grid.Row="1" Grid.Column="0" DataContext="{Binding _jogMode}">
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="1" Grid.Column="1" DataContext="{Binding _position}" PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="1" Grid.Column="2" DataContext="{Binding _velocity}" PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="1" Grid.Column="3" DataContext="{Binding _acceleration}" PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="1" Grid.Column="4" DataContext="{Binding _deceleration}" PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Row="1" Grid.Column="5" DataContext="{Binding _jerk}" PresentationType="Control"/>
-                </Grid>
-                <Grid Grid.Row="7" DataContext="{Binding Component._moveRelativeTask}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding }" />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="1" DataContext="{Binding _distance}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="2" DataContext="{Binding _velocity}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="3" DataContext="{Binding _acceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="4" DataContext="{Binding _deceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="5" DataContext="{Binding _jerk}"           PresentationType="Control"/>
-                </Grid>
-                <Grid Grid.Row="8" DataContext="{Binding Component._moveAbsoluteTask}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding }" />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="1" DataContext="{Binding _position}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="2" DataContext="{Binding _velocity}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="3" DataContext="{Binding _acceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="4" DataContext="{Binding _deceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="5" DataContext="{Binding _jerk}"           PresentationType="Control"/>
-                </Grid>
-                <Grid Grid.Row="9" DataContext="{Binding Component._moveModuloTask}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding }" />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="1" DataContext="{Binding _position}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="2" DataContext="{Binding _velocity}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="3" DataContext="{Binding _acceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="4" DataContext="{Binding _deceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="5" DataContext="{Binding _jerk}"           PresentationType="Control"/>
-                    <StackPanel Margin="5" Grid.Column="6" DataContext="{Binding _direction}">
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="10" DataContext="{Binding Component._moveVelocityTask}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="0" DataContext="{Binding }" />
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="2" DataContext="{Binding _velocity}"       PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="3" DataContext="{Binding _acceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="4" DataContext="{Binding _deceleration}"   PresentationType="Control"/>
-                    <vortex:RenderableContentControl Margin="5" Grid.Column="5" DataContext="{Binding _jerk}"           PresentationType="Control"/>
-                    <StackPanel Margin="5" Grid.Column="6" DataContext="{Binding _direction}"  >
-                        <TextBlock Text="{Binding AttributeName}"/>
-                        <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
-                    </StackPanel>
-                </Grid>
-            </Grid>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ActPos}"/>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ModuloActPos}"/>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ModuloActTurns}"/>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ActVelo}"/>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ActAcc}"/>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ActTorque}"/>
+                    </ItemsControl>
+                    <ItemsControl Padding="10" Grid.Row="2"  ItemsPanel="{StaticResource HorizontalWraped}">
+
+                        <vortex:RenderableContentControl DataContext="{Binding _axisStatus.CmdNo}"/>
+                        <vortex:RenderableContentControl DataContext="{Binding _axisStatus.CmdState}"/>
+                        <StackPanel  Grid.Column="2" Margin="5">
+                            <TextBlock Text="{Binding Component._axisStatus.MotionState.AttributeName}"/>
+                            <vortex:RenderableContentControl DataContext="{Binding _axisStatus.MotionState}"/>
+                        </StackPanel>
+                        <vortex:RenderableContentControl DataContext="{Binding _axisStatus.Error}"/>
+                        <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ErrorId}"/>
+                        <StackPanel  Grid.Column="5" Margin="5">
+                            <TextBlock Text="Error description"/>
+                            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding _axisStatus.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
+                        </StackPanel>
+                    </ItemsControl>
+                    <ItemsControl Grid.Row="3"  Padding="10" ItemsPanel="{StaticResource HorizontalWraped}">
+
+                        <vortex:RenderableContentControl   DataContext="{Binding _power._drivePowerOverrideTask}"          />
+                        <vortex:RenderableContentControl   DataContext="{Binding _power._driveEnableLocalTask}"          />
+                        <vortex:RenderableContentControl   DataContext="{Binding _power._driveEnablePositiveLocalTask}"  />
+                        <vortex:RenderableContentControl   DataContext="{Binding _power._driveEnableNegativeLocalTask}"  />
+                    </ItemsControl>
+                    <ItemsControl Grid.Row="4" Padding="10" ItemsPanel="{StaticResource HorizontalWraped}">
+
+                        <vortex:RenderableContentControl  DataContext="{Binding _resetTask}"    />
+                        <vortex:RenderableContentControl  DataContext="{Binding _soEResetTask}" />
+                        <vortex:RenderableContentControl  DataContext="{Binding _haltTask}"     />
+                        <vortex:RenderableContentControl  DataContext="{Binding _stopTask}"     />
+                    </ItemsControl>
+                    <GroupBox Padding="10" Grid.Row="5" DataContext="{Binding _homeTask}" Header="{Binding AttributeName}">
+                        <ItemsControl   ItemsPanel="{StaticResource HorizontalWraped}">
+
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _position}" PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _homingOptions_SearchVelocity}" PresentationType="Control"/>
+                            <StackPanel Margin="5"  DataContext="{Binding _homingOptions_SearchDirection}">
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _homingOptions_SyncVelocity}" PresentationType="Control"/>
+                            <StackPanel Margin="5"  DataContext="{Binding _homingOptions_SyncDirection}" >
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                            <StackPanel Margin="5"  DataContext="{Binding _homingMode}">
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                            <StackPanel Margin="5"  DataContext="{Binding _homingOptions_ReferenceMode}">
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                            <StackPanel Margin="5" DataContext="{Binding _homingOptions_ClearPositionLag}">
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <CheckBox IsChecked="{Binding Cyclic}"/>
+                            </StackPanel>
+                        </ItemsControl>
+                    </GroupBox>
+                    <GroupBox Padding="10" Grid.Row="6" DataContext="{Binding _jog}" Header="{Binding AttributeName}">
+                        <ItemsControl   ItemsPanel="{StaticResource HorizontalWraped}">
+                            <vortex:RenderableContentControl Margin="5" DataContext="{Binding _jogBackwardsTask}"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jogForwardTask}"/>
+                            <StackPanel Margin="5" Grid.Row="1" Grid.Column="0" DataContext="{Binding _jogMode}">
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _position}" PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocity}" PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _acceleration}" PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _deceleration}" PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}" PresentationType="Control"/>
+                        </ItemsControl>
+                    </GroupBox>
+                    <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _moveRelativeTask}" Header="{Binding AttributeName}">
+                        <ItemsControl   ItemsPanel="{StaticResource HorizontalWraped}">
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _distance}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocity}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _acceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _deceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="Control"/>
+                        </ItemsControl>
+                    </GroupBox>
+                    <GroupBox Padding="10" Grid.Row="8" DataContext="{Binding _moveAbsoluteTask}" Header="{Binding AttributeName}">
+                        <ItemsControl   ItemsPanel="{StaticResource HorizontalWraped}">
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _position}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocity}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _acceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _deceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="Control"/>
+                        </ItemsControl>
+                    </GroupBox>
+                    <GroupBox Padding="10" Grid.Row="9" DataContext="{Binding _moveModuloTask}" Header="{Binding AttributeName}">
+                        <ItemsControl   ItemsPanel="{StaticResource HorizontalWraped}">
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _position}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocity}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _acceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _deceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="Control"/>
+                            <StackPanel Margin="5" Grid.Column="6" DataContext="{Binding _direction}">
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                        </ItemsControl>
+                    </GroupBox>
+                    <GroupBox Padding="10" Grid.Row="10" DataContext="{Binding _moveVelocityTask}" Header="{Binding AttributeName}">
+                        <ItemsControl   ItemsPanel="{StaticResource HorizontalWraped}">
+
+
+                            <vortex:RenderableContentControl  Margin="5" DataContext="{Binding }" />
+                            <vortex:RenderableContentControl  Margin="5" DataContext="{Binding _velocity}"       PresentationType="Control"/>
+                            <vortex:RenderableContentControl  Margin="5" DataContext="{Binding _acceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl  Margin="5" DataContext="{Binding _deceleration}"   PresentationType="Control"/>
+                            <vortex:RenderableContentControl  Margin="5" DataContext="{Binding _jerk}"           PresentationType="Control"/>
+                            <StackPanel Margin="5"  DataContext="{Binding _direction}"  >
+                                <TextBlock Text="{Binding AttributeName}"/>
+                                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Control"/>
+                            </StackPanel>
+                        </ItemsControl>
+                    </GroupBox>
+                </ItemsControl>
+            </ScrollViewer>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>

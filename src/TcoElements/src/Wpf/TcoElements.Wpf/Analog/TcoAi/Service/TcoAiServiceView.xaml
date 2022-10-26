@@ -16,10 +16,10 @@
     </d:UserControl.DataContext>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
-            <vortex:RenderableContentControl DataContext="{Binding _status.Scaled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="DisplaySlim"/>
+            <vortex:RenderableContentControl DataContext="{Binding Model._status.Scaled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="DisplaySlim"/>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <StackPanel Margin="10,0,0,0">
+            <StackPanel Margin="10,0,0,0" DataContext="{Binding Model}">
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                 <UniformGrid Rows="1" Columns="2">
                     <GroupBox Margin="2" Header="{Binding _config.AttributeName}" Grid.IsSharedSizeScope="True">
