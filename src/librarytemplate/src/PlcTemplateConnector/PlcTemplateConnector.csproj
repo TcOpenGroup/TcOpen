@@ -22,7 +22,11 @@
     <Content Include="_meta\PlcTemplate.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="_meta\PlcTemplate.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\README.md" IncludeInPackage="true" Pack="true" PackagePath="\" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\assets\**" Pack="true" PackagePath="assets" Link="assets\%(RecursiveDir)\%(Filename)%(Extension)" TargetPath="assets\%(RecursiveDir)\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
+
+
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
