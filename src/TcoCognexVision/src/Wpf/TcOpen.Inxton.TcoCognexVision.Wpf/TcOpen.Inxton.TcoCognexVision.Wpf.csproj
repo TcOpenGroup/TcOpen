@@ -14,11 +14,13 @@
     <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
     <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
     <IsPackable>true</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Include="..\..\..\README.md" Link="README.md" />
+    <Content Include="..\..\..\README.md" IncludeInPackage="true" Pack="true" PackagePath="\" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\..\assets\**" Pack="true" PackagePath="assets" Link="assets\%(RecursiveDir)\%(Filename)%(Extension)" TargetPath="assets\%(RecursiveDir)\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
 
   <ItemGroup>
