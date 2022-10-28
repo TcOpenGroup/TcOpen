@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="SampleContext" Id="{c96f4cb6-dc5b-0c8b-314d-51db619ff818}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SampleContext EXTENDS TcoCore.TcoContext
 VAR
 	_sampleComponent : SampleComponent(THIS^);
+
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -21,7 +22,8 @@ END_VAR]]></Declaration>
 METHOD PROTECTED  Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sampleComponent.Service();
-_sampleComponent();]]></ST>
+_sampleComponent();
+]]></ST>
       </Implementation>
     </Method>
   </POU>

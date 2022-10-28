@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="eDatamanUserDataSize_v_5_x_x" Id="{f7b2aa89-8363-0ab2-0770-b287172ded57}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eDatamanUserDataSize_v_5_x_x :
+(
+	USER_DATA_16B := 16,
+	USER_DATA_32B := 32,
+	USER_DATA_64B := 64,
+	USER_DATA_128B := 128,
+	USER_DATA_250B := 250	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

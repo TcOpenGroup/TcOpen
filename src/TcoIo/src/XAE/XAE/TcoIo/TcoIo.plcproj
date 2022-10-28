@@ -122,6 +122,9 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="Diagnostics\ProfinetComponent\TcoPnIoComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,7 @@
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Inputs" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\Outputs" />
     <Folder Include="Diagnostics\EtherCAT\SlaveDevice\WcState" />
+    <Folder Include="Diagnostics\ProfinetComponent" />
     <Folder Include="SpecialPlcTypes" />
     <Folder Include="POUs" />
   </ItemGroup>

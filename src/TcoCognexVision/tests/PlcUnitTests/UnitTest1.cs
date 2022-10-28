@@ -12,8 +12,8 @@ namespace TcoCognexVisionUnitTests
         [OneTimeSetUp]
         public void Setup()
         {
-            Entry.TcoCognexVisionTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
-            sut = Entry.TcoCognexVisionTests.MAIN._sampleComponentTests;
+            Entry.TcoCognexVisionTestsPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
+            sut = Entry.TcoCognexVisionTestsPlc.MAIN._sampleComponentTests;
         }
 
         [Test]

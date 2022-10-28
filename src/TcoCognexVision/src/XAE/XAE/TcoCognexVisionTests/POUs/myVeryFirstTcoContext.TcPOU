@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="myVeryFirstTcoContext" Id="{6a4dbc2d-6b21-0fcb-2bc4-0055ab5a286d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK myVeryFirstTcoContext EXTENDS TcoCore.TcoContext
+VAR
+	{attribute addProperty Name "<#Enter user friendly name of this instance here!!!#>"}
+	myVeryFirstDataman : TcoCognexVision.TcoDataman_v_5_x_x(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{62509618-e1c7-0fff-1ad6-21ea3ba2bca5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[myVeryFirstDataman(inoIoData:= GVL.myVeryFirstDatamanGVL);
+
+myVeryFirstDataman.Service();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
