@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoInsight_v_5_x_x" Id="{8062c1c6-49a7-0474-1587-a7cd96428cb1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoInsight_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
+
+VAR_IN_OUT
+	inoIoData : TcoDatamanIO_v_5_x_x;
+END_VAR
+
+VAR
+    _config : TcoDatamanConfig_v_5_x_x;
+	_status : TcoDatamanStatus_v_5_x_x;	
+END_VAR
+
+VAR
+	_userData 	: TcoDatamanUser_v_5_x_x;
+	_resultData : TcoDatamanResults_v_5_x_x;
+END_VAR
+
+VAR
+	{attribute addProperty Name "<#Clear result data#>"}
+    _clearResultDataTask : TcoDatamanClearResultData_v_5_x_x(THIS^);
+	{attribute addProperty Name "<#Read#>"}
+    _readTask : TcoDatamanRead_v_5_x_x(THIS^);
+	{attribute addProperty Name "<#Restore#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty Name "<#Update signal states#>"}
+    _updateSignalStatesTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF InvalidReference() THEN
+    RETURN;
+END_IF
+
+SUPER^(inPnIoBoxState := THIS^.inoIoData.PnIoBoxState,inPnIoBoxDiag := THIS^.inoIoData.PnIoBoxDiag);
+
+IF THIS^._config.ContinuousReading THEN
+	ContinuousReading();
+END_IF
+
+IF NOT SUPER^.ProfinetReady THEN
+	THIS^._status.ActionDescription := '<#Not ready for operation by means of Profinet network!#>';	
+END_IF
+
+IF SUPER^.ProfinetReady AND THIS^._status.ActionDescription = '<#Not ready for operation by means of Profinet network!#>' THEN
+	THIS^._status.ActionDescription := '<#Ready for operation!#>';	
+END_IF
+
+_clearResultDataTask.Enabled := SUPER^.ProfinetReady;
+_clearResultDataTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);
+
+_readTask.Enabled :=  SUPER^.ProfinetReady AND NOT _clearResultDataTask.Busy;
+_readTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResultData := THIS^._resultData);
+
+_updateSignalStatesTask.Enabled := SUPER^.ProfinetReady;
+
+IF _updateSignalStatesTask.Execute() THEN
+	UpdateSignalStates();
+END_IF
+
+IF _restoreTask.Execute() THEN
+	Restore();
+END_IF
+
+
+
+
+
+]]></ST>
+    </Implementation>
+    <Folder Name="_Internals" Id="{e7bcc9d0-011c-0b04-097c-0e986e9520c4}" />
+    <Folder Name="Operations" Id="{cfbaa28a-ef80-00fe-123d-b287f866e63a}" />
+    <Folder Name="ResultData" Id="{43e4cbc2-0cc7-0f8e-2001-aa5e04936059}" />
+    <Folder Name="States" Id="{fc1400d1-a7b2-02f5-171f-fc51dd3ed6c7}" />
+    <Folder Name="Tasks" Id="{a93bde3a-4c4e-0760-3172-ab811f417ee2}" />
+    <Method Name="ClearResultData" Id="{a1dc37aa-6aee-0106-02d9-15d235650d85}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Clear result data. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD ClearResultData : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ClearResultData := THIS^._clearResultDataTask.Invoke();
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ClearResultDataTask" Id="{99d88977-0526-0952-3a0c-62b2b49c1f3e}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ClearResultDataTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{a0bc409f-64f0-036f-38b6-cfb7bced6077}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ClearResultDataTask := _clearResultDataTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Config" Id="{721e7def-062c-0d11-15b2-d3ed53cc68d9}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the reader. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoDatamanConfig_v_5_x_x]]></Declaration>
+      <Get Name="Get" Id="{62f1e4ac-1943-0c10-1f8a-a802fb735494}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ContinuousReading" Id="{b4983873-fca5-0928-26e5-4102cebfeb1f}" FolderPath="_Internals\">
+      <Declaration><![CDATA[METHOD INTERNAL ContinuousReading
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^.inoIoData.ResultsStatus.ResultsAvailable AND NOT THIS^.inoIoData.ResultsControl.ResultsAcknowledge AND THIS^.inoIoData.ResultData.ResultCode>0 AND  THIS^.inoIoData.ResultData.ResultLength>0 THEN
+	THIS^._resultData.Length := THIS^.inoIoData.ResultData.ResultLength;
+	Tc2_System.MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultData.ResultData) , destAddr:= ADR(THIS^._resultData.Data) ,  n:= THIS^._resultData.Length);
+	Tc2_System.MEMSET(destAddr:= ADR(THIS^._resultData.Data) + THIS^._resultData.Length, fillByte:= 0 , n:= SIZEOF(THIS^._resultData.Data) - THIS^._resultData.Length);
+	THIS^._status.ActionDescription := '<#New data read.#>';
+END_IF
+
+THIS^.inoIoData.ResultsControl.ResultsAcknowledge := THIS^.inoIoData.ResultsStatus.ResultsAvailable;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{da8d77f3-9e25-0e89-0ae7-b0b1322b01db}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetResultAsByte" Id="{04fc0fd0-e6ed-0632-114c-606f3371e66d}" FolderPath="ResultData\">
+      <Declaration><![CDATA[METHOD GetResultAsByte : BYTE
+VAR_INPUT
+    inPosition : UINT;
+END_VAR
+VAR
+	_size : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_size := SIZEOF(GetResultAsByte);
+
+IF (inPosition +_size) > THIS^._resultData.Length THEN
+	Messenger.Info('<#Index of the ResultData in the method GetResultAsByte exceeds the length of the data received!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +_size) > THIS^._config.ResultDataSize THEN
+	Messenger.Warning('<#Index of the ResultData in the method GetResultAsByte exceeds the size hardware structure mapped!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +_size) > TcoVisionParams.MAX_BYTE_ARRAY THEN
+	Messenger.Programming('<#Index of the ResultData in the method GetResultAsByte exceeds the defined size!#>');
+	RETURN;
+END_IF
+
+GetResultAsByte := THIS^._resultData.Data[inPosition]; ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetResultAsDint" Id="{a316ef8c-5be9-0c2b-151b-cd09d27f0279}" FolderPath="ResultData\">
+      <Declaration><![CDATA[METHOD GetResultAsDint : DINT
+VAR_INPUT
+    inPosition : UINT;
+END_VAR
+VAR
+	_index : UINT;
+	_size : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_size := SIZEOF(GetResultAsDint);
+
+IF (inPosition +_size) > THIS^._resultData.Length THEN
+	Messenger.Info('<#Index of the ResultData in the method GetResultAsDint exceeds the length of the data received!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +_size) > THIS^._config.ResultDataSize THEN
+	Messenger.Warning('<#Index of the ResultData in the method GetResultAsDint exceeds the size hardware structure mapped!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +_size) > TcoVisionParams.MAX_BYTE_ARRAY THEN
+	Messenger.Programming('<#Index of the ResultData in the method GetResultAsDint exceeds the defined size!#>');
+	RETURN;
+END_IF
+
+GetResultAsDint := TcoBytesToDint(THIS^._config.DataFormat,	THIS^._resultData.Data[inPosition],
+															THIS^._resultData.Data[inPosition+1],
+															THIS^._resultData.Data[inPosition+2],
+															THIS^._resultData.Data[inPosition+3]);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetResultAsReal" Id="{7865e754-9f3b-0b0b-0a1d-176473dc6e39}" FolderPath="ResultData\">
+      <Declaration><![CDATA[METHOD GetResultAsReal : REAL
+VAR_INPUT
+    inPosition : UINT;
+END_VAR
+VAR
+	_index : UINT;
+	_size : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_size := SIZEOF(GetResultAsReal);
+
+IF (inPosition +_size) > THIS^._resultData.Length THEN
+	Messenger.Info('<#Index of the ResultData in the method GetResultAsReal exceeds the length of the data received!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +_size) > THIS^._config.ResultDataSize THEN
+	Messenger.Warning('<#Index of the ResultData in the method GetResultAsReal exceeds the size hardware structure mapped!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +_size) > TcoVisionParams.MAX_BYTE_ARRAY THEN
+	Messenger.Programming('<#Index of the ResultData in the method GetResultAsReal exceeds the defined size!#>');
+	RETURN;
+END_IF
+
+GetResultAsReal := TcoBytesToReal(THIS^._config.DataFormat,	THIS^._resultData.Data[inPosition],
+															THIS^._resultData.Data[inPosition+1],
+															THIS^._resultData.Data[inPosition+2],
+															THIS^._resultData.Data[inPosition+3]);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetResultAsString" Id="{e149eba9-3a94-051e-2f7b-a545fe309c4f}" FolderPath="ResultData\">
+      <Declaration><![CDATA[METHOD GetResultAsString : STRING
+VAR_INPUT
+    inPosition : UINT;
+	inLength : UINT;
+END_VAR
+VAR
+	_index : UINT;
+	_bufferSize : UINT; 
+	_resultString : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF (inPosition +inLength) > THIS^._resultData.Length THEN
+	Messenger.Info('<#Index of the ResultData in the method GetResultAsString exceeds the length of the data received!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +inLength) > THIS^._config.ResultDataSize THEN
+	Messenger.Warning('<#Index of the ResultData in the method GetResultAsString exceeds the size hardware structure mapped!#>');
+	RETURN;
+END_IF
+
+IF (inPosition +inLength) > TcoVisionParams.MAX_BYTE_ARRAY THEN
+	Messenger.Programming('<#Index of the ResultData in the method GetResultAsString exceeds the defined size!#>');
+	RETURN;
+END_IF
+
+_resultString:='';
+
+IF (inLength>0) THEN 
+	FOR	_index := 0 TO inLength-1 BY 1 DO	
+		IF(THIS^._resultData.Data[inPosition + _index] <> 0) THEN
+			_resultString := CONCAT(_resultString, F_ToCHR(THIS^._resultData.Data[inPosition + _index]));
+		ELSE
+			EXIT;	
+		END_IF		
+	END_FOR;
+END_IF
+
+GetResultAsString := _resultString;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvalidReference" Id="{768a8233-db21-07fd-3317-33d08d11c9a5}" FolderPath="_Internals\">
+      <Declaration><![CDATA[METHOD INTERNAL InvalidReference : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[InvalidReference := FALSE;
+IF NOT __ISVALIDREF(inoIoData) THEN
+    Messenger.Post('<#Invalid reference#>', TcoCore.eMessageCategory.ProgrammingError);
+    InvalidReference := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="LastResultData" Id="{955ff370-1329-0638-3c61-ba9494acf0a4}" FolderPath="States\">
+      <Declaration><![CDATA[PROPERTY LastResultData : TcoDatamanResults_v_5_x_x]]></Declaration>
+      <Get Name="Get" Id="{22f5c6b2-cb99-0d09-25cc-9694d3069e4c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastResultData := THIS^._resultData;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Read" Id="{feaf0fb9-c6b6-098f-0e66-2aea003103e3}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Trigger the reading sequence and wait for results. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD Read : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Read := THIS^._readTask.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ReadTask" Id="{55a30190-7651-0696-3edf-e7ac7caef4a1}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ReadTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{b15f1e57-843b-0bc4-0aa0-77d071b0df00}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ReadTask := _readTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{5a9b2df7-ea2a-037e-2359-862442a5d184}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_clearResultDataTask.Restore();
+_readTask.Restore();
+_updateSignalStatesTask.Restore();
+
+Tc2_System.MEMSET(destAddr:= ADR(THIS^._resultData.Data) , fillByte:= 0 , n:= SIZEOF(THIS^._resultData.Data));
+
+THIS^._resultData.Code := 0;
+THIS^._resultData.Extended := 0;
+THIS^._resultData.Id := 0;
+THIS^._resultData.Length := 0;
+	
+IF InvalidReference() THEN
+    RETURN;
+END_IF
+
+Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoIoData) , fillByte:= 0 , n:= SIZEOF(THIS^.inoIoData));
+
+_status.ActionDescription := 'Restore executed!';
+_restoreTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{fc81a599-4f70-0c18-0d1d-3b4fdafbd8a2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ServiceMode]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{80ac83ff-dd88-0772-02d6-15cbfc04fee1}">
+      <Declaration><![CDATA[PROPERTY Status : REFERENCE TO TcoDatamanStatus_v_5_x_x]]></Declaration>
+      <Get Name="Get" Id="{f64e3fd3-e0f3-0531-0043-336f9de00613}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="UpdateSignalStates" Id="{622a6ddd-1caa-09c4-2fd9-95fca003ff1c}" FolderPath="_Internals\">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateSignalStates
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_status.SignalStatus.TriggerEnable 			:=	inoIoData.AcquisitionControl.TriggerEnable; 
+_status.SignalStatus.Trigger				:=	inoIoData.AcquisitionControl.Trigger; 
+
+_status.SignalStatus.EnableResultBuffering	:=	inoIoData.ResultsControl.EnableResultBuffering;
+_status.SignalStatus.ResultsAcknowledge		:=	inoIoData.ResultsControl.ResultsAcknowledge;
+
+_status.SignalStatus.TriggerReady 			:= 	inoIoData.AcquisitionStatus.TriggerReady;
+_status.SignalStatus.TriggerAcknowledge 	:= 	inoIoData.AcquisitionStatus.TriggerAcknowledge;
+_status.SignalStatus.Acquiring 				:= 	inoIoData.AcquisitionStatus.Acquiring;
+_status.SignalStatus.MissedAcquisition 		:= 	inoIoData.AcquisitionStatus.MissedAcquisition;
+_status.SignalStatus.TriggerID 				:= 	inoIoData.AcquisitionStatus.TriggerID;
+
+_status.SignalStatus.Decoding 				:= 	inoIoData.ResultsStatus.Decoding;
+_status.SignalStatus.DecodeComplete 		:= 	inoIoData.ResultsStatus.DecodeComplete;
+_status.SignalStatus.ResultsBufferOverrun 	:= 	inoIoData.ResultsStatus.ResultsBufferOverrun;
+_status.SignalStatus.ResultsAvailable 		:= 	inoIoData.ResultsStatus.ResultsAvailable;
+_status.SignalStatus.ErrorDetected 			:= 	inoIoData.ResultsStatus.ErrorDetected;
+
+_status.SignalStatus.ResultID 				:= 	inoIoData.ResultData.ResultID;
+_status.SignalStatus.ResultCode  			:= 	inoIoData.ResultData.ResultCode;
+_status.SignalStatus.ResultExtended  		:= 	inoIoData.ResultData.ResultExtended;
+_status.SignalStatus.ResultLength  			:= 	inoIoData.ResultData.ResultLength;
+
+_updateSignalStatesTask.DoneWhen(TRUE);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
