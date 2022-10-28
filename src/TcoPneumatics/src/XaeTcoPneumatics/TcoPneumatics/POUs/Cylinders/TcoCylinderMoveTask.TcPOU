@@ -15,26 +15,13 @@ END_VAR
 
 VAR
 	_stringBuilder : TcoCore.StringBuilder;
-	_refillTimer :TON;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF (THIS^.Execute()) THEN
-	 IF TimeToRefill<>T#0MS THEN
-		_refillTimer(IN:=TRUE,PT:=TimeToRefill);
-
-		InverseSignal		 := TRUE;
-		MoveToPositionSignal := TRUE;
-	END_IF
-	
-	IF _refillTimer.ET >TimeToRefill XOR TimeToRefill=T#0MS THEN
-			
-		IF(THIS^.ElapsedTime > MaxTimeToReachPosition) THEN THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString()); END_IF;
-		InverseSignal		 := FALSE;
-		MoveToPositionSignal := TRUE;
-	
-	
-		THIS^.DoneWhen(PositionSensor);
-	END_IF;	
+	IF(THIS^.ElapsedTime > MaxTimeToReachPosition) THEN THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString()); END_IF;
+	InverseSignal		 := FALSE;
+	MoveToPositionSignal := TRUE;
+	THIS^.DoneWhen(PositionSensor);	
 END_IF
 ]]></ST>
     </Implementation>
@@ -61,7 +48,8 @@ END_VAR
 METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MoveToPositionSignal := FALSE;]]></ST>
+        <ST><![CDATA[MoveToPositionSignal := FALSE;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{c702604b-83ae-0ede-324b-55447818c6ba}">
@@ -76,17 +64,7 @@ METHOD PROTECTED OnAbort
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ResetRefillTimer();
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ResetRefillTimer" Id="{98863379-ea76-0760-0cef-ddf4d17489e4}">
-      <Declaration><![CDATA[METHOD ResetRefillTimer
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_refillTimer(IN:=FALSE);]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>
