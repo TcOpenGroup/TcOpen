@@ -124,7 +124,7 @@ _RTC_EX2(EN := _isValid, PDT := _PDT);
 
 _diffToLastSyncInSeconds := ABS(ULINT_TO_LINT(Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_RTC_EX2.CDT,0,0) - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(RtcPrg._LastSyncTimeStampInLocalTime,0,0)))/1000000000;
 
-IF _state >= 20 AND _diffToLastSyncInSeconds >=60 THEN
+IF _state >= 20 AND RtcPrg._RtcSynchParams.doSynch AND _diffToLastSyncInSeconds >=60 THEN
 	_state := 0;
 END_IF
 
