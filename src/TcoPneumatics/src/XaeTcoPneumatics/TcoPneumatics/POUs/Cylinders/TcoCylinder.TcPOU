@@ -100,8 +100,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Build().Append('<#Movement aborted due to#> :').Append(_signalInfo.SymbolPath).As().AsError().Pin();
-	//Messenger.Error(CONCAT('<#Movement aborted due to#> : ' , _signalInfo.SymbolPath));
+	Messenger.Build().Append('<#Movement aborted due to#> : ').Append(_signalInfo.SymbolPath).As().AsError().Pin();
 	_toHomePos := FALSE;
 	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
 	_moveHomeDefault.Abort();
@@ -138,8 +137,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Build().Append('<#Movement aborted due to#> :').Append(_signalInfo.SymbolPath).As().AsError().Pin();
-	//Messenger.Error(CONCAT('<#Movement aborted due to#> : ' , _signalInfo.SymbolPath));
+	Messenger.Build().Append('<#Movement aborted due to#> : ').Append(_signalInfo.SymbolPath).As().AsError().Pin();
 	_toWorkPos := FALSE;
 	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
 	_moveWorkDefault.Abort();
