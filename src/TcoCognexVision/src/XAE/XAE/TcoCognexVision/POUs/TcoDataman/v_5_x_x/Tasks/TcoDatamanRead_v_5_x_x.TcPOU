@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoDatamanRead_v_5_x_x" Id="{bbfbdcf8-58e6-0eb9-1267-89fca8b94731}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDatamanRead_v_5_x_x EXTENDS TcoCore.TcoTask
+VAR_IN_OUT
+	inoIoData 	: TcoDatamanIO_v_5_x_x;
+    inoConfig 	: TcoDatamanConfig_v_5_x_x;
+	inoStatus 	: TcoDatamanStatus_v_5_x_x;	
+	inoResults 	: TcoDatamanResults_v_5_x_x;
+END_VAR
+VAR
+    {attribute 'hide'} 
+	_progress : INT := 0;
+    {attribute 'hide'} 
+	_infoTimer :  TON;
+    {attribute 'hide'} 
+	_errorTimer :  TON;
+    {attribute 'hide'} 
+	_varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'} 
+	_sb : TcoCore.StringBuilder;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN
+	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoIoData) THEN
+			_varInfo :=__VARINFO(inoIoData);
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
+			_varInfo :=__VARINFO(inoConfig);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
+			_varInfo :=__VARINFO(inoStatus);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoResults) THEN                                              
+			_varInfo :=__VARINFO(inoResults);                                                
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSE
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 1 THEN
+		THIS^.inoStatus.ActionDescription := '<#Reading running.#>'; 
+		CallTimers(FALSE);
+		_progress := _progress + 1;
+	END_IF
+	
+	IF _progress = 2 THEN
+		THIS^.inoIoData.AcquisitionControl.TriggerEnable := TRUE;
+		THIS^.inoIoData.AcquisitionControl.Trigger := FALSE;
+		THIS^.inoIoData.ResultsControl.EnableResultBuffering := FALSE;
+		THIS^.inoIoData.ResultsControl.ResultsAcknowledge := THIS^.inoIoData.ResultsStatus.ResultsAvailable;
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ResultsAvailable to be reseted!#>').Pin(); 
+		IF NOT THIS^.inoIoData.ResultsStatus.ResultsAvailable THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 3 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal TriggerReady to be set!#>').Pin(); 
+		IF THIS^.inoIoData.AcquisitionStatus.TriggerReady THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 4 THEN
+		THIS^.inoIoData.AcquisitionControl.Trigger := TRUE;
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal TriggerAcknowledge to be set!#>').Pin(); 
+		IF THIS^.inoIoData.AcquisitionStatus.TriggerAcknowledge THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 5 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ResultsAvailable to be set!#>').Pin(); 
+		IF THIS^.inoIoData.ResultsStatus.ResultsAvailable THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 6 THEN
+		THIS^.inoResults.Length := THIS^.inoIoData.ResultData.ResultLength;
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the ResultData copied!#>').Pin(); 
+		IF  Tc2_System.MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultData.ResultData) , destAddr:= ADR(THIS^.inoResults.Data) ,  n:= THIS^.inoResults.Length) > 0 AND 
+			Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoResults.Data) + THIS^.inoResults.Length, fillByte:= 0 , n:= SIZEOF(THIS^.inoResults.Data) - THIS^.inoResults.Length)>0 THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 7 THEN
+		THIS^.inoIoData.AcquisitionControl.Trigger := FALSE;
+		THIS^.inoIoData.ResultsControl.EnableResultBuffering := FALSE;
+		THIS^.inoIoData.ResultsControl.ResultsAcknowledge := TRUE;
+		THIS^.ThrowWhen(THIS^.inoIoData.ResultData.ResultCode=0 OR THIS^.inoIoData.ResultData.ResultLength=0);
+		THIS^.DoneWhen(TRUE);
+		_progress := 0;
+	END_IF
+	
+	CallTimers(TRUE);
+	
+	THIS^.ThrowWhen(_errorTimer.Q);
+	
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="CallTimers" Id="{fe44bf2a-41b1-0036-2ff7-3c71ca913b03}">
+      <Declaration><![CDATA[METHOD CallTimers
+VAR_INPUT
+	inValue : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{332a4519-fd52-0dcc-3b76-6a8434ca4896}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ParentObject : ITcoObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{dc1bb021-ea15-063c-2539-0b643900f778}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Reading was aborted, while not yet completed!#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{967e6af2-8a80-0fd1-032f-4a8fa1f0de90}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Reading was completed successfully.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{c9648a71-225a-0f5c-2a0c-96ef9d7e736f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Reading finished with error.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{4897565b-7f96-0e88-026b-65aa04f41ba7}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Reading started.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{84a80bc1-f9a1-02f8-039f-6c297c2533d7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_progress := 0;
+CallTimers(FALSE);
+Messenger.UnPin();
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

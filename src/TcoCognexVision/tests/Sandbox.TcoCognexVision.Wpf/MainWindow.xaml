@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:Sandbox.TcoCognexVision.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
     xmlns:vortex="http://vortex.mts/xaml"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="800"
     mc:Ignorable="d"
     Title="MainWindow">
     <Window.DataContext>
@@ -15,5 +15,6 @@
     </Window.DataContext>
     <StackPanel DataContext="{Binding TcoCognexVisionTestPlc.MAIN}">
         <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.myVeryFirstDataman}" PresentationType="Service"/>
+        <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.myVeryFirstInsight}" PresentationType="Service"/>
     </StackPanel>
 </Window>

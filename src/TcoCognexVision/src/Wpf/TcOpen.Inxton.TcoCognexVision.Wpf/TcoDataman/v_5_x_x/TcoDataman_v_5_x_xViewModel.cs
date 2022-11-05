@@ -3,6 +3,7 @@ using Vortex.Presentation.Wpf;
 using TcoCognexVision.Converters;
 using Vortex.Connector;
 using System.Text;
+using TcoCore;
 
 namespace TcoCognexVision
 {
@@ -22,7 +23,8 @@ namespace TcoCognexVision
         public TcoDataman_v_5_x_xViewModel() : base()
         {
             ResultData = new ObservableCollection<IndexedData<string>>();
-            Model = new TcoDataman_v_5_x_x();
+            //Model = new TcoDataman_v_5_x_x(new EmptyIVortexObject(), "Root", "Root");
+             Model = new TcoDataman_v_5_x_x();
         }
         public TcoDataman_v_5_x_x Component { get; private set; }
         public override object Model 
@@ -32,8 +34,8 @@ namespace TcoCognexVision
             {
                 Component = value as TcoDataman_v_5_x_x ;
                 UpdateAndFormatResultData();
-                Component._resultData.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
-                Component._resultData.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                Component._results.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                Component._results.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
             }
         }
         private void UpdateAndFormatResultData()
@@ -50,28 +52,28 @@ namespace TcoCognexVision
                     {
                         ResultData.Clear();
                     }
-                    if (Component != null && Component.GetConnector() != null && Component._resultData != null)
+                    if (Component != null && Component.GetConnector() != null && Component._results != null)
                     {
-                        Component._resultData.Read();
+                        Component._results.Read();
                         if (CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
                         {
-                            for (int i = 0; i < Component._resultData.Length.LastValue; i++)
+                            for (int i = 0; i < Component._results.Length.LastValue; i++)
                             {
-                                ResultData.Add(new IndexedData<string>(i, Component._resultData.Data[i].LastValue.ToString()));
+                                ResultData.Add(new IndexedData<string>(i, Component._results.Data[i].LastValue.ToString()));
                             }
                         }
                         else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
                         {
-                            for (int i = 0; i < Component._resultData.Length.LastValue; i++)
+                            for (int i = 0; i < Component._results.Length.LastValue; i++)
                             {
-                                ResultData.Add(new IndexedData<string>(i, Component._resultData.Data[i].LastValue.ToString("X")));
+                                ResultData.Add(new IndexedData<string>(i, Component._results.Data[i].LastValue.ToString("X")));
                             }
                         }
                         else if (CurrentDisplayFormat == eDisplayFormat.String)
                         {
-                            for (int i = 0; i < Component._resultData.Length.LastValue; i++)
+                            for (int i = 0; i < Component._results.Length.LastValue; i++)
                             {
-                                byte _byte = Component._resultData.Data[i].LastValue;
+                                byte _byte = Component._results.Data[i].LastValue;
                                 string _string = "";
                                 if (_byte > 0)
                                     _string = Encoding.UTF8.GetString(new byte[] { _byte });

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoRealToBytes" Id="{74650cbf-3728-487a-9d40-6ad16b4c7aa6}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION TcoRealToBytes : BOOL
+    <Declaration><![CDATA[FUNCTION TcoRealToBytes 
 VAR_INPUT
 	inFormat : eTcoDataFormat;
 	inValue : REAL;

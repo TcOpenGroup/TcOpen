@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="eTcoInsightResultDataSize_v_5_x_x" Id="{4cada00b-b161-0cce-0e1f-2ac5c50c3739}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoInsightResultDataSize_v_5_x_x :
+(
+	RESULT_DATA_16B := 16,
+	RESULT_DATA_32B := 32,
+	RESULT_DATA_64B := 64,
+	RESULT_DATA_128B := 128,
+	RESULT_DATA_246B := 250	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoDintToBytes" Id="{05f9300c-f1a7-48fd-9e6f-5064ad4a2abd}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION TcoDintToBytes : BOOL
+    <Declaration><![CDATA[FUNCTION TcoDintToBytes
 VAR_INPUT
 	inFormat : eTcoDataFormat;
 	inValue : DINT;
