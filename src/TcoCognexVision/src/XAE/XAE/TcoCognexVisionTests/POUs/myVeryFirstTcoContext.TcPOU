@@ -3,8 +3,10 @@
   <POU Name="myVeryFirstTcoContext" Id="{6a4dbc2d-6b21-0fcb-2bc4-0055ab5a286d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK myVeryFirstTcoContext EXTENDS TcoCore.TcoContext
 VAR
-	{attribute addProperty Name "<#Enter user friendly name of this instance here!!!#>"}
+	{attribute addProperty Name "<#My very first DATAMAN#>"}
 	myVeryFirstDataman : TcoCognexVision.TcoDataman_v_5_x_x(THIS^);
+	{attribute addProperty Name "<#My very first INSIGHT#>"}
+	myVeryFirstInsight : TcoCognexVision.TcoInsight_v_5_x_x(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -19,11 +21,16 @@ END_VAR]]></Declaration>
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED  Main
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[myVeryFirstDataman(inoIoData:= GVL.myVeryFirstDatamanGVL);
-
 myVeryFirstDataman.Service();
+
+myVeryFirstInsight.Config.UserDataSize := eTcoInsightUserDataSize_v_5_x_x.USER_DATA_128B;
+myVeryFirstInsight.Config.ResultDataSize := eTcoInsightResultDataSize_v_5_x_x.RESULT_DATA_128B;
+myVeryFirstInsight(inoIoData:= GVL.myVeryFirstInsightGVL);
+myVeryFirstInsight.Service();
 ]]></ST>
       </Implementation>
     </Method>

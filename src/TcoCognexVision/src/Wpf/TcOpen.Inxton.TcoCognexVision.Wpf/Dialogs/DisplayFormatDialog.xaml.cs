@@ -45,5 +45,15 @@ namespace TcoCognexVision
         {
             this.Close();
         }
+
+        private void cbRequiredFormat_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (this.IsVisible) 
+            {             
+                int index = this.cbRequiredFormat.SelectedIndex;
+                CurrentDisplayFormat = (eDisplayFormat)index;
+                this.Close();
+            }
+        }
     }
 }

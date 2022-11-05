@@ -11,12 +11,30 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
+			<Name GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..249] OF BYTE</Name>
 			<BitSize>2000</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
 				<Elements>250</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{D753C2E1-3107-E7CE-854F-3E82FDAE9718}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..253] OF BYTE</Name>
+			<BitSize>2032</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>254</Elements>
 			</ArrayInfo>
 		</DataType>
 		<DataType>
@@ -226,6 +244,303 @@
 				<Elements>64</Elements>
 			</ArrayInfo>
 		</DataType>
+		<DataType>
+			<Name GUID="{CA7D55BB-4B6C-2669-D1FD-CC8FEC99FAC8}">PN_Acquisition_Control_Register_AB227AEA</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Acquisition_Trigger_Enable</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Acquisition_Trigger</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Clear_Exposure_Complete</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Set_Offline</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{43D5C520-7D4F-743C-9A7D-BC8B6FF0B7D6}">PN_Acquisition_Status_Register_6AE2359A</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Acquisition_Trigger_Ready</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Acquisition_Trigger_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Exposure_Complete</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Missed_Acquisition</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Offline_Reason_0</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Offline_Reason_1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Offline_Reason_2</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Online</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{612BDA39-4A79-7160-4A26-63F805D8AD47}">PN_Inspection_Control_Register_AF856E0F</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Enable_Results_Buffering</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Acknowledge_Inspection_Results</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Extended_User_Data_Set</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Execute_Command</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Clear_Error</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{6D5E763A-644F-97D2-B734-F56569A4057F}">PN_Inspection_Status_Register_E07C82AB</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>System_Busy</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Inspection_Completed</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Results_Buffer_Overrun</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Results_Valid</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Command_Executing</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Command_Complete</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Command_Failed</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Extended_User_Data_Set_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Set_when_last_inspection_passed,_based_on_the_Overall_Job_Pass_Fail_cell</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Test_Run_Ready</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>9</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Error</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>15</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{DB91492C-A6A7-3616-1640-64E988539659}">PN_SoftEvent_Status_5D75FC15</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Trigger_SoftEvent_0_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_1_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_2_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_3_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_4_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_5_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_6_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_7_Acknowledge</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{E85BA193-40FB-1C11-40D5-B2A8611DD5AC}">PN_SoftEvent_Control_F02D2949</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>Trigger_SoftEvent_0</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_2</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_3</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_4</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_5</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_6</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Trigger_SoftEvent_7</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000300000080}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..127] OF BYTE</Name>
+			<BitSize>1024</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>128</Elements>
+			</ArrayInfo>
+		</DataType>
 	</DataTypes>
 	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
@@ -236,7 +551,7 @@
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
-				<Task Id="4" Priority="21" CycleTime="80000" AmsPort="351" AdtTasks="true">
+				<Task Id="4" Priority="21" CycleTime="160000" AmsPort="351" AdtTasks="true">
 					<Name>PNIO</Name>
 				</Task>
 				<Task Id="5" Priority="22" CycleTime="100000" AmsPort="352" AdtTasks="true">
@@ -266,7 +581,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{9C2760B0-B52E-8281-E14E-553F2EB5D5A2}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{BADE86F9-7BFF-0719-4CA4-D1328DD823CB}">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -372,208 +687,140 @@
 							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.PnIoBoxState</Name>
+							<Name>GVL.myVeryFirstInsightGVL.PnIoBoxState</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.PnIoBoxDiag</Name>
+							<Name>GVL.myVeryFirstInsightGVL.PnIoBoxDiag</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionStatus.TriggerReady</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.AcquisitionTriggerReady</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionStatus.TriggerAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.AcquisitionTriggerAcknowledge</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionStatus.Acquiring</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.ExposureComplete</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionStatus.MissedAcquisition</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.MissedAcquisition</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionStatus.TriggerID</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.OfflineReason0</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.OfflineReason1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.OfflineReason2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.Online</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionStatus.AcquisitionID</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsStatus.Decoding</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.SystemBusy</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsStatus.DecodeComplete</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.InspectionCompleted</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsStatus.ResultsBufferOverrun</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.ResultsBufferOverrun</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsStatus.ResultsAvailable</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.ResultsValid</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsStatus.ErrorDetected</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.CommandExecuting</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainCodeAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.CommandComplete</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainMatchStringAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.CommandFailed</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainFocusAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.ExtendedUserDataSetAcknowledge</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainBrightnessAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.OverallJobPassFail</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.UntrainAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.TestRunReady</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.Reserved05</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.Error</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.ExecuteDMCCAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm260.SoftEventControl.SetMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm260.ResultData.ResultID</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionStatus.ErrorCode</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultData.ResultCode</Name>
+							<Name>GVL.myVeryFirstInsightGVL.CommandControl.CurrentJobID</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultData.ResultExtended</Name>
+							<Name>GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge</Name>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.myVeryFirstInsightGVL.ResultsData.InspectionID</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultData.ResultLength</Name>
+							<Name>GVL.myVeryFirstInsightGVL.ResultsData.ResultCode</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultData.ResultData</Name>
-							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.PnIoBoxState</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.PnIoBoxDiag</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionStatus.TriggerReady</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionStatus.TriggerAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionStatus.Acquiring</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionStatus.MissedAcquisition</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionStatus.TriggerID</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsStatus.Decoding</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsStatus.DecodeComplete</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsStatus.ResultsBufferOverrun</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsStatus.ResultsAvailable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsStatus.ErrorDetected</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainCodeAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainFocusAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainBrightnessAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.UntrainAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.Reserved05</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.ExecuteDMCCAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.SetMatchStringAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultData.ResultID</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultData.ResultCode</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultData.ResultExtended</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultData.ResultLength</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultData.ResultData</Name>
+							<Name>GVL.myVeryFirstInsightGVL.ResultsData.InspectionResults</Name>
 							<Type GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}">ARRAY [0..245] OF BYTE</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.EnableResultsBuffering</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.AcknowledgeInspectionResults</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExtendedUserDataSet</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExecuteCommand</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ClearError</Name>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>GVL.myVeryFirstDatamanGVL.PnIoBoxCtrl</Name>
 							<Type>UINT</Type>
@@ -639,132 +886,56 @@
 							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.PnIoBoxCtrl</Name>
+							<Name>GVL.myVeryFirstInsightGVL.PnIoBoxCtrl</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionControl.TriggerEnable</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionControl.AcquisitionTriggerEnable</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.AcquisitionControl.Trigger</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionControl.AcquisitionTrigger</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsControl.EnableResultBuffering</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionControl.ClearExposureComplete</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.ResultsControl.ResultsAcknowledge</Name>
+							<Name>GVL.myVeryFirstInsightGVL.AcquisitionControl.SetOffline</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainCode</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionControl.EnableResultsBuffering</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainMatchString</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionControl.AcknowledgeInspectionResults</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainFocus</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionControl.ExtendedUserDataSet</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.TrainBrightness</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionControl.ExecuteCommand</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.Untrain</Name>
+							<Name>GVL.myVeryFirstInsightGVL.InspectionControl.ClearError</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.SoftEventControl.Reserved15</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm260.SoftEventControl.ExecuteDMCC</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm260.SoftEventControl.SetMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm260.UserData.UserDataOption</Name>
+							<Name>GVL.myVeryFirstInsightGVL.CommandControl.Command</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.UserData.UserDataLength</Name>
-							<Type>UINT</Type>
+							<Name>GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent</Name>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO.dm260.UserData.UserData</Name>
-							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.PnIoBoxCtrl</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionControl.TriggerEnable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.AcquisitionControl.Trigger</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsControl.EnableResultBuffering</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.ResultsControl.ResultsAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainCode</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainFocus</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.TrainBrightness</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.Untrain</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.Reserved15</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.ExecuteDMCC</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.SoftEventControl.SetMatchString</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.UserData.UserDataOption</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.UserData.UserDataLength</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>IO.dm8700.UserData.UserData</Name>
-							<Type GUID="{BCF24EA7-0253-16F6-579C-6A096146D209}">ARRAY [0..249] OF BYTE</Type>
+							<Name>GVL.myVeryFirstInsightGVL.UserData.UserData</Name>
+							<Type GUID="{D753C2E1-3107-E7CE-854F-3E82FDAE9718}">ARRAY [0..253] OF BYTE</Type>
 						</Var>
 					</Vars>
 					<Contexts>
@@ -775,7 +946,7 @@
 								<OTCID>#x02010040</OTCID>
 							</ManualConfig>
 							<Priority>21</Priority>
-							<CycleTime>8000000</CycleTime>
+							<CycleTime>16000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>
@@ -785,20 +956,20 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
+			<Device Id="1" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
 				<Name>Device 1 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000100681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
+				<DevData>000000000000000000000000007102005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="210" SizeOut="233">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="1" BoxType="9121">
-					<Name>dm260</Name>
+					<Name>myveryfirstdataman</Name>
 					<Comment><![CDATA[GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
-OrderNumber: DMR-260#-#0
+OrderNumber: DMR-200#-00
 HW Release Version: not available
-SW Release Version: 5.5.0]]></Comment>
+SW Release Version: 5.2.0]]></Comment>
 					<ImageId>121</ImageId>
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
@@ -851,8 +1022,8 @@ SW Release Version: 5.5.0]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" SavePnIoBoxValues="0100" Phase="1" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="DataMan 260 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan260.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-260#-#0" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan260" SWVersion="5.5.0" HWVersion="not available" AltLanguage="7">
-						<UsedGsdmlModule ModuleIdentNumber="27" ModuleName="DAP Module" InfoText="DataMan 260 ID Reader" OrderNumber="DMR-260#-#0">
+					<Profinet DeviceId="5" VendorId="311" FrameOffset="49152" IPAdd="ac141e14" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="7" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" SavePnIoBoxValues="0100" Phase="1" WatchdogFaktor="3" ReductionRatio="16" SendClockFaktor="32" MaxInputLen="274" MaxOutputLen="274" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="DataMan 200 ID Reader" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.31-Cognex-DataMan-20170215.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0005-DataMan200.bmp" MainFamily="Sensors" ProductFamily="Cognex ID Readers" OrderNr="DMR-200#-00" DefaultDNSName="DataMan" VendorName="Cognex" FamDescription="DataMan ID Readers" GraphicFile="GSDML-0137-0005-DataMan200" SWVersion="5.2.0" HWVersion="not available" AltLanguage="7">
+						<UsedGsdmlModule ModuleIdentNumber="1" ModuleName="DAP Module" InfoText="DataMan 200 ID Reader" OrderNumber="DMR-200#-00">
 							<Slot>0</Slot>
 						</UsedGsdmlModule>
 						<UsedGsdmlModule ModuleIdentNumber="257" Id="101" ModuleName="Acquisition Control" InfoText="Controls acquisition" ModuleCategory="DataMan Control Modules">
@@ -876,7 +1047,7 @@ SW Release Version: 5.5.0]]></Comment>
 						<UsedGsdmlModule ModuleIdentNumber="1027" Id="403" ModuleName="Result Data - 64 bytes" InfoText="Reads 64 bytes from DataMan" ModuleCategory="DataMan Data Modules">
 							<Slot>7</Slot>
 						</UsedGsdmlModule>
-						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="DIM12" SubModuleName="DataMan 260" InfoText="DataMan 260 ID Reader"/>
+						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="DIM2" SubModuleName="DataMan 200" InfoText="DataMan 200 ID Reader"/>
 						<UsedGsdmlSubModule SubSlotNumber="1" TypeOfSubmodule="3" Id="1" SubModuleName="Acquisition Control" InfoText="Controls acquisition">
 							<DataItemOut>
 								<BitText Offset="0" Length="0">Trigger Enable</BitText>
@@ -944,16 +1115,16 @@ SW Release Version: 5.5.0]]></Comment>
 						<API Id="1">
 							<Name>API</Name>
 							<ImageId>4</ImageId>
-							<Module Id="#x031d0001" DAP="true" ModuleIdentNumber="27" ModuleInfo="DataMan 260 ID Reader">
+							<Module Id="#x031d0001" DAP="true" ModuleIdentNumber="1" ModuleInfo="DataMan 200 ID Reader">
 								<Name>DAP_Module</Name>
 								<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
-Module Info: DataMan 260 ID Reader
-OrderNumber: DMR-260#-#0]]></Comment>
+Module Info: DataMan 200 ID Reader
+OrderNumber: DMR-200#-00]]></Comment>
 								<ImageId>182</ImageId>
-								<SubModule Id="#x031c0001" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DIM12">
-									<Name>DataMan_260</Name>
+								<SubModule Id="#x031c0001" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DIM2">
+									<Name>DataMan_200</Name>
 									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
-Submodule Info: DataMan 260 ID Reader
+Submodule Info: DataMan 200 ID Reader
 ]]></Comment>
 									<ImageId>183</ImageId>
 									<Vars VarGrpType="1">
@@ -963,7 +1134,7 @@ Submodule Info: DataMan 260 ID Reader
 										<Name>Outputs</Name>
 									</Vars>
 								</SubModule>
-								<SubModule Id="#x031c0002" SubModuleIdentNumber="1" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS_DAP12I" InterfaceData="0100000000000000000000000000000000000000000000000200000000000000">
+								<SubModule Id="#x031c0002" SubModuleIdentNumber="1" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS_DAP2I" InterfaceData="0100000000000000000000000000000000000000000000000200000000000000">
 									<Name>Interface</Name>
 									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
 ]]></Comment>
@@ -975,7 +1146,7 @@ Submodule Info: DataMan 260 ID Reader
 										<Name>Outputs</Name>
 									</Vars>
 								</SubModule>
-								<SubModule Id="#x031c0003" SubModuleIdentNumber="2" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS_DAP12P" PortData="00000000000000000000000000000000000000000000000000000000">
+								<SubModule Id="#x031c0003" SubModuleIdentNumber="2" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS_DAP2P" PortData="00000000000000000000000000000000000000000000000000000000">
 									<Name>Port_1</Name>
 									<Comment><![CDATA[GSDML: GSDML-V2.31-Cognex-DataMan-20170215.xml
 ]]></Comment>
@@ -1206,6 +1377,458 @@ Submodule Info: Reads 64 bytes from DataMan
 						</API>
 					</Profinet>
 				</Box>
+				<Box Id="2" BoxType="9121">
+					<Name>myveryfirstinsight</Name>
+					<Comment><![CDATA[GSDML Name: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Path: $(TWINCAT3DIR)Config\Io\Profinet\
+VendorName: Cognex
+OrderNumber: IS85XXP
+HW Release Version: not available
+SW Release Version: 5.9.1]]></Comment>
+					<ImageId>121</ImageId>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>PnIoBoxState</Name>
+							<Comment><![CDATA[0 = No error
+1 = Profinet device state machine is in boot mode
+2 = Device not found
+3 = The stationname is not unique
+4 = IP could not be set
+5 = IP conflict
+6 = DCP set was not successful
+7 = Watchdog error
+8 = Datahold error
+9 = RTC3: Sync mode could not be initiated
+10 = Profinet controller has a link error
+11 = The aliasname is not unique
+12 = The automatic name assignement isn't possible - wrong device type
+13 = IOC-AR is established but no application ready
+14 = IOC-AR is established but module difference
+15 = At least one InputCR is invalid, provider in stop or problemindicator is set
+16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
+31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+]]></Comment>
+							<Type>UINT</Type>
+							<BitOffs>648</BitOffs>
+						</Var>
+						<Var>
+							<Name>PnIoBoxDiag</Name>
+							<Comment><![CDATA[0x0000 = No diagnosis
+0x0001 = IOC-AR is not established
+0x0002 = IOC-AR is established
+0x0004 = IOC-AR is established but no application ready
+0x0008 = IOC-AR is established but module difference
+0x0010 = At least one AlarmCR got a diagnosis alarm
+0x0100 = At least one InputCR is invalid
+0x0200 = At least one InputCR Provider is in stop
+0x0400 = At least one InputCR Problemindicator is set
+0x1000 = At least one OutputCR is invalid
+0x2000 = At least one OutputCR Provider is in stop
+0x4000 = At least one OutputCR Problemindicator is set
+]]></Comment>
+							<Type>UINT</Type>
+							<BitOffs>664</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>PnIoBoxCtrl</Name>
+							<Type>UINT</Type>
+							<BitOffs>584</BitOffs>
+						</Var>
+					</Vars>
+					<Profinet DeviceId="1" VendorId="311" FrameOffset="32768" Flags="16" IPAdd="ac141e1e" ProtocolType="3" BoxOnDeviceTyp="113" MaxPhysSlotNr="8" InstanceServerPort="61000" InstanceClientPort="60000" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="32" SavePnIoBoxValues="0100" MultipleWriteSupported="true" Phase="1" WatchdogFaktor="3" ReductionRatio="16" SendClockFaktor="32" MaxInputLen="300" MaxOutputLen="300" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="In-Sight IS85XXP Vision System" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.34-Cognex-InSightClassB-20200529.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-0137-0001-Micro.bmp" MainFamily="Sensors" ProductFamily="Cognex Vision Systems" OrderNr="IS85XXP" DefaultDNSName="InSight" VendorName="Cognex" FamDescription="In-Sight Vision Systems" GraphicFile="GSDML-0137-0001-Micro" SWVersion="5.9.1" HWVersion="not available" AltLanguage="7">
+						<GsdmlChannelDiag TypeInfo="Cyclic and Asynchronous writes to User Data are being performed. Please choose only one method." ErrorType="16"/>
+						<UsedGsdmlModule ModuleIdentNumber="27" ModuleName="DAP Module" InfoText="In-Sight IS85XXP Vision System" OrderNumber="IS85XXP">
+							<Slot>0</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="257" Id="101" ModuleName="Acquisition Control" InfoText="Controls acquisition and online/offline" ModuleCategory="In-Sight Control Modules">
+							<Slot>1</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="513" Id="201" ModuleName="Acquisition Status" InfoText="Status of acquisition and online/offline state" ModuleCategory="In-Sight Status Modules">
+							<Slot>2</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="258" Id="102" ModuleName="Inspection Control" InfoText="Controls the inspection" ModuleCategory="In-Sight Control Modules">
+							<Slot>3</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="515" Id="203" ModuleName="Inspection Status" InfoText="Status of the inspection" ModuleCategory="In-Sight Status Modules">
+							<Slot>4</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="263" Id="107" ModuleName="Command Control" InfoText="Controls Command Execution" ModuleCategory="In-Sight Control Modules">
+							<Slot>5</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="262" Id="106" ModuleName="SoftEvent Control" InfoText="Trigger SoftEvents" ModuleCategory="In-Sight Control Modules">
+							<Slot>6</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="772" Id="304" ModuleName="User Data - 128 bytes" InfoText="Writes 128 bytes to In-Sight spreadsheet" ModuleCategory="In-Sight Data Modules">
+							<Slot>7</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="1028" Id="404" ModuleName="Results - 128 bytes" InfoText="Reads 128 bytes from In-Sight spreadsheet" ModuleCategory="In-Sight Data Modules">
+							<Slot>8</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="DIM27" SubModuleName="In-Sight IS85XXP CC-B" InfoText="In-Sight IS85XXP Vision System"/>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="1" SubModuleName="Acquisition Control" InfoText="Controls acquisition and online/offline">
+							<DataItemOut>
+								<BitText Offset="0" Length="0">Acquisition Trigger Enable</BitText>
+								<BitText Offset="0" Length="0">Acquisition Trigger</BitText>
+								<BitText Offset="0" Length="0">Clear Exposure Complete</BitText>
+								<BitText Offset="0" Length="0">Set Offline</BitText>
+							</DataItemOut>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="6" SubModuleName="Acquisition Status" InfoText="Status of acquisition and online/offline state">
+							<DataItemIn>
+								<BitText Offset="0" Length="0">Acquisition Trigger Ready</BitText>
+								<BitText Offset="0" Length="0">Acquisition Trigger Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Exposure Complete</BitText>
+								<BitText Offset="0" Length="0">Missed Acquisition</BitText>
+								<BitText Offset="0" Length="0">Offline Reason</BitText>
+								<BitText Offset="0" Length="0">Offline Reason</BitText>
+								<BitText Offset="0" Length="0">Offline Reason</BitText>
+								<BitText Offset="0" Length="0">Online</BitText>
+							</DataItemIn>
+							<DataItemIn/>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="2" SubModuleName="Inspection Control" InfoText="Controls the inspection">
+							<DataItemOut>
+								<BitText Offset="0" Length="0">Enable Results Buffering</BitText>
+								<BitText Offset="0" Length="0">Acknowledge Inspection Results</BitText>
+								<BitText Offset="0" Length="0">Extended User Data Set</BitText>
+								<BitText Offset="0" Length="0">Execute Command</BitText>
+								<BitText Offset="0" Length="0">Clear Error</BitText>
+							</DataItemOut>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="19" SubModuleName="Inspection Status" InfoText="Status of the inspection">
+							<DataItemIn>
+								<BitText Offset="0" Length="0">System Busy</BitText>
+								<BitText Offset="0" Length="0">Inspection Completed</BitText>
+								<BitText Offset="0" Length="0">Results Buffer Overrun</BitText>
+								<BitText Offset="0" Length="0">Results Valid</BitText>
+								<BitText Offset="0" Length="0">Command Executing</BitText>
+								<BitText Offset="0" Length="0">Command Complete</BitText>
+								<BitText Offset="0" Length="0">Command Failed</BitText>
+								<BitText Offset="0" Length="0">Extended User Data Set Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Set when last inspection passed, based on the Overall Job Pass/Fail cell</BitText>
+								<BitText Offset="0" Length="0">Test Run Ready</BitText>
+								<BitText Offset="0" Length="0">Error</BitText>
+							</DataItemIn>
+							<DataItemIn/>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="20" SubModuleName="Command Control" InfoText="Controls Command Execution">
+							<DataItemIn/>
+							<DataItemOut/>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="18" SubModuleName="SoftEvent Control" InfoText="Trigger SoftEvents">
+							<DataItemIn>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 0 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 1 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 2 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 3 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 4 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 5 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 6 Acknowledge</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 7 Acknowledge</BitText>
+							</DataItemIn>
+							<DataItemOut>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 0</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 1</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 2</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 3</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 4</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 5</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 6</BitText>
+								<BitText Offset="0" Length="0">Trigger SoftEvent 7</BitText>
+							</DataItemOut>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="14" SubModuleName="User Data - 128 bytes" InfoText="Writes 128 bytes to In-Sight spreadsheet">
+							<DataItemOut/>
+						</UsedGsdmlSubModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="15" SubModuleName="Results - 128 bytes" InfoText="Reads 128 bytes from In-Sight spreadsheet">
+							<DataItemIn/>
+							<DataItemIn/>
+							<DataItemIn/>
+						</UsedGsdmlSubModule>
+						<API Id="1">
+							<Name>API</Name>
+							<ImageId>4</ImageId>
+							<Module Id="#x031d0009" DAP="true" ModuleIdentNumber="27" ModuleInfo="In-Sight IS85XXP Vision System">
+								<Name>DAP_Module</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: In-Sight IS85XXP Vision System
+OrderNumber: IS85XXP]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c000b" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DIM27" AddSubModFlags="28">
+									<Name>In-Sight IS8XXX CC-B</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: In-Sight IS85XXP Vision System
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c000c" SubModuleIdentNumber="32768" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS_DAP27I" AddSubModFlags="28" InterfaceData="0100000000000000000000000000000000000000000098000300000000000000">
+									<Name>Interface</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c000d" SubModuleIdentNumber="32769" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS_DAP27P" PortData="00000000000000000000000000000000000000000000000000000000">
+									<Name>Port_1</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d000a" ModuleIdentNumber="257" SlotNumber="1" ModuleInfo="Controls acquisition and online/offline" ModuleID="101" DirectDeletable="true">
+								<Name>Acquisition_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Controls acquisition and online/offline
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c000e" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="1" AddSubModFlags="28">
+									<Name>Acquisition_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Controls acquisition and online/offline
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>Acquisition_Control_Register</Name>
+											<Type GUID="{CA7D55BB-4B6C-2669-D1FD-CC8FEC99FAC8}">PN_Acquisition_Control_Register_AB227AEA</Type>
+											<BitOffs>600</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d000b" ModuleIdentNumber="513" SlotNumber="2" ModuleInfo="Status of acquisition and online/offline state" ModuleID="201" DirectDeletable="true">
+								<Name>Acquisition_Status</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Status of acquisition and online/offline state
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c000f" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="6">
+									<Name>Acquisition_Status</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Status of acquisition and online/offline state
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>Acquisition_Status_Register</Name>
+											<Type GUID="{43D5C520-7D4F-743C-9A7D-BC8B6FF0B7D6}">PN_Acquisition_Status_Register_6AE2359A</Type>
+											<BitOffs>680</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Acquisition_ID</Name>
+											<Type>UINT</Type>
+											<BitOffs>688</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d000c" ModuleIdentNumber="258" SlotNumber="3" ModuleInfo="Controls the inspection" ModuleID="102" DirectDeletable="true">
+								<Name>Inspection_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Controls the inspection
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0010" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="2" AddSubModFlags="28">
+									<Name>Inspection_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Controls the inspection
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>Inspection_Control_Register</Name>
+											<Type GUID="{612BDA39-4A79-7160-4A26-63F805D8AD47}">PN_Inspection_Control_Register_AF856E0F</Type>
+											<BitOffs>608</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d000d" ModuleIdentNumber="515" SlotNumber="4" ModuleInfo="Status of the inspection" ModuleID="203" DirectDeletable="true">
+								<Name>Inspection_Status</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Status of the inspection
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0011" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="19">
+									<Name>Inspection_Status</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Status of the inspection
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>Inspection_Status_Register</Name>
+											<Type GUID="{6D5E763A-644F-97D2-B734-F56569A4057F}">PN_Inspection_Status_Register_E07C82AB</Type>
+											<BitOffs>704</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Error_Code</Name>
+											<Type>UINT</Type>
+											<BitOffs>720</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d000e" ModuleIdentNumber="263" SlotNumber="5" ModuleInfo="Controls Command Execution" ModuleID="107" DirectDeletable="true">
+								<Name>Command_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Controls Command Execution
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0012" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="20">
+									<Name>Command_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Controls Command Execution
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var Swapping="#x1">
+											<Name>Current_Job_ID</Name>
+											<Type>UINT</Type>
+											<BitOffs>736</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var Swapping="#x1">
+											<Name>Command</Name>
+											<Type>UINT</Type>
+											<BitOffs>616</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d000f" ModuleIdentNumber="262" SlotNumber="6" ModuleInfo="Trigger SoftEvents" ModuleID="106" DirectDeletable="true">
+								<Name>SoftEvent_Control</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Trigger SoftEvents
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0013" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="18">
+									<Name>SoftEvent_Control</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Trigger SoftEvents
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>SoftEvent_Status</Name>
+											<Type GUID="{DB91492C-A6A7-3616-1640-64E988539659}">PN_SoftEvent_Status_5D75FC15</Type>
+											<BitOffs>752</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>SoftEvent_Control</Name>
+											<Type GUID="{E85BA193-40FB-1C11-40D5-B2A8611DD5AC}">PN_SoftEvent_Control_F02D2949</Type>
+											<BitOffs>632</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0010" ModuleIdentNumber="772" SlotNumber="7" ModuleInfo="Writes 128 bytes to In-Sight spreadsheet" ModuleID="304" DirectDeletable="true">
+								<Name>User_Data_128_bytes</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Writes 128 bytes to In-Sight spreadsheet
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0014" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="14">
+									<Name>User_Data_128 bytes</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Writes 128 bytes to In-Sight spreadsheet
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>User Data</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000080}">ARRAY [0..127] OF BYTE</Type>
+											<BitOffs>640</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0011" ModuleIdentNumber="1028" SlotNumber="8" ModuleInfo="Reads 128 bytes from In-Sight spreadsheet" ModuleID="404" DirectDeletable="true">
+								<Name>Results_128_bytes</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Module Info: Reads 128 bytes from In-Sight spreadsheet
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0015" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="15">
+									<Name>Results_128_bytes</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+Submodule Info: Reads 128 bytes from In-Sight spreadsheet
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var Swapping="#x1">
+											<Name>Inspection ID</Name>
+											<Type>UINT</Type>
+											<BitOffs>760</BitOffs>
+										</Var>
+										<Var Swapping="#x1">
+											<Name>Result Code</Name>
+											<Type>UINT</Type>
+											<BitOffs>776</BitOffs>
+										</Var>
+										<Var>
+											<Name>Inspection Results</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000080}">ARRAY [0..127] OF BYTE</Type>
+											<BitOffs>792</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+						</API>
+					</Profinet>
+				</Box>
 				<Profinet PLCPortNr="851" AddPortCount="1">
 					<Ethernet DeviceDesc="X000_LAN (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) #2)" SpecialTask="true" TaskPort="351"/>
 					<PNController ClientPort="60000" ServerPort="61000" VendorId="288" DeviceId="35" IPData="00000000ac141e68ffffff0000000000" SystemName="tc-pncontroller" IRTSendClock="32">
@@ -1215,4 +1838,107 @@ Submodule Info: Reads 64 bytes from DataMan
 			</Device>
 		</Io>
 	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
+		<OwnerA Name="TIPC^TcoCognexVisionTests^TcoCognexVisionTests Instance">
+			<OwnerB Name="TIID^Device 1 (Profinet Controller)^myveryfirstdataman">
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.Acquiring" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquiring"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.MissedAcquisition" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Missed_Acquisition"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerAcknowledge" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Trigger_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerID" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Trigger_ID"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.TriggerReady" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Trigger_Ready"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.PnIoBoxDiag" VarB="Inputs^PnIoBoxDiag"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.PnIoBoxState" VarB="Inputs^PnIoBoxState"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultCode" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Code"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultData" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Data"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultExtended" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Extended"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultID" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_ID"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultData.ResultLength" VarB="API^Result_Data_64_bytes^Result_Data_64_bytes^Inputs^Result_Length"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.DecodeComplete" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Decode_Complete"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.Decoding" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Decoding"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.ErrorDetected" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Set_when_reader_fault_occurs"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.ResultsAvailable" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Results_Available"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.ResultsStatus.ResultsBufferOverrun" VarB="API^Results_Status^Results_Status^Inputs^Results_Status_Register^Results_Buffer_Overrun"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.ExecuteDMCCAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Execute_DMCC_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.SetMatchStringAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Set_Match_String_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainBrightnessAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Brightness_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainCodeAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Code_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainFocusAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Focus_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainMatchStringAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Train_Match_String_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.UntrainAcknowledge" VarB="API^Soft_Event_Control^Soft_Event_Control^Inputs^Soft_Event_Acknowledge_Register^Untrain_Acknowledge"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.AcquisitionControl.Trigger" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Trigger"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.AcquisitionControl.TriggerEnable" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Trigger_Enable"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.PnIoBoxCtrl" VarB="Outputs^PnIoBoxCtrl"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.ResultsControl.EnableResultBuffering" VarB="API^Results_Control^Results_Control^Outputs^Results_Control_Register^Enable_Result_Buffering"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.ResultsControl.ResultsAcknowledge" VarB="API^Results_Control^Results_Control^Outputs^Results_Control_Register^Results_Acknowledge"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.ExecuteDMCC" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Execute_DMCC"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.SetMatchString" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Set_Match_String"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainBrightness" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Brightness"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainCode" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Code"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainFocus" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Focus"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.TrainMatchString" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Train_Match_String"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.SoftEventControl.Untrain" VarB="API^Soft_Event_Control^Soft_Event_Control^Outputs^Soft_Event_Control_Register^Untrain"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.UserData.UserData" VarB="API^User_Data_64_bytes^User_Data_64_bytes^Outputs^User_Data"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.UserData.UserDataLength" VarB="API^User_Data_64_bytes^User_Data_64_bytes^Outputs^User_Data_Length"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstDatamanGVL.UserData.UserDataOption" VarB="API^User_Data_64_bytes^User_Data_64_bytes^Outputs^User_Data_Option"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (Profinet Controller)^myveryfirstinsight">
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.AcquisitionID" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_ID"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.AcquisitionTriggerAcknowledge" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquisition_Trigger_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.AcquisitionTriggerReady" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquisition_Trigger_Ready"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.ExposureComplete" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Exposure_Complete"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.MissedAcquisition" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Missed_Acquisition"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.OfflineReason0" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Offline_Reason_0"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.OfflineReason1" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Offline_Reason_1"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.OfflineReason2" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Offline_Reason_2"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.AcquisitionStatus.Online" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Online"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.CommandControl.CurrentJobID" VarB="API^Command_Control^Command_Control^Inputs^Current_Job_ID"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.CommandComplete" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Command_Complete"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.CommandExecuting" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Command_Executing"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.CommandFailed" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Command_Failed"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.Error" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Error"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.ErrorCode" VarB="API^Inspection_Status^Inspection_Status^Inputs^Error_Code"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.ExtendedUserDataSetAcknowledge" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Extended_User_Data_Set_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.InspectionCompleted" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Inspection_Completed"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.OverallJobPassFail" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Set_when_last_inspection_passed,_based_on_the_Overall_Job_Pass_Fail_cell"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.ResultsBufferOverrun" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Results_Buffer_Overrun"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.ResultsValid" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Results_Valid"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.SystemBusy" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^System_Busy"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.InspectionStatus.TestRunReady" VarB="API^Inspection_Status^Inspection_Status^Inputs^Inspection_Status_Register^Test_Run_Ready"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.PnIoBoxDiag" VarB="Inputs^PnIoBoxDiag"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.PnIoBoxState" VarB="Inputs^PnIoBoxState"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.ResultsData.InspectionID" VarB="API^Results_128_bytes^Results_128_bytes^Inputs^Inspection ID"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.ResultsData.InspectionResults" VarB="API^Results_128_bytes^Results_128_bytes^Inputs^Inspection Results"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.ResultsData.ResultCode" VarB="API^Results_128_bytes^Results_128_bytes^Inputs^Result Code"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[0]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_0_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[1]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_1_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[2]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_2_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[3]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_3_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[4]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_4_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[5]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_5_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[6]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_6_Acknowledge"/>
+				<Link VarA="PlcTask Inputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEventAcknowledge[7]" VarB="API^SoftEvent_Control^SoftEvent_Control^Inputs^SoftEvent_Status^Trigger_SoftEvent_7_Acknowledge"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.AcquisitionControl.AcquisitionTrigger" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Acquisition_Trigger"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.AcquisitionControl.AcquisitionTriggerEnable" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Acquisition_Trigger_Enable"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.AcquisitionControl.ClearExposureComplete" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Clear_Exposure_Complete"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.AcquisitionControl.SetOffline" VarB="API^Acquisition_Control^Acquisition_Control^Outputs^Acquisition_Control_Register^Set_Offline"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.CommandControl.Command" VarB="API^Command_Control^Command_Control^Outputs^Command"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.InspectionControl.AcknowledgeInspectionResults" VarB="API^Inspection_Control^Inspection_Control^Outputs^Inspection_Control_Register^Acknowledge_Inspection_Results"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.InspectionControl.ClearError" VarB="API^Inspection_Control^Inspection_Control^Outputs^Inspection_Control_Register^Clear_Error"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.InspectionControl.EnableResultsBuffering" VarB="API^Inspection_Control^Inspection_Control^Outputs^Inspection_Control_Register^Enable_Results_Buffering"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.InspectionControl.ExecuteCommand" VarB="API^Inspection_Control^Inspection_Control^Outputs^Inspection_Control_Register^Execute_Command"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.InspectionControl.ExtendedUserDataSet" VarB="API^Inspection_Control^Inspection_Control^Outputs^Inspection_Control_Register^Extended_User_Data_Set"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.PnIoBoxCtrl" VarB="Outputs^PnIoBoxCtrl"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[0]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_0"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[1]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_1"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[2]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_2"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[3]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_3"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[4]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_4"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[5]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_5"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[6]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_6"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.SoftEventControl.TriggerSoftEvent[7]" VarB="API^SoftEvent_Control^SoftEvent_Control^Outputs^SoftEvent_Control^Trigger_SoftEvent_7"/>
+				<Link VarA="PlcTask Outputs^GVL.myVeryFirstInsightGVL.UserData.UserData" VarB="API^User_Data_128_bytes^User_Data_128 bytes^Outputs^User Data"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
 </TcSmProject>

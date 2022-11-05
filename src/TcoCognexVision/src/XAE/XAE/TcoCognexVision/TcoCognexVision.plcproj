@@ -58,27 +58,6 @@
     <Compile Include="POUs\Conversion\ToBytes\TcoRealToBytes.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleComponent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskFunctionBuffer.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleComponent\SampleTaskIteration.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\SampleContext.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\eDatamanResultDataSize_v_5_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\eDatamanUserDataSize_v_5_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanAcquisitionControl_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -103,28 +82,100 @@
     <Compile Include="POUs\TcoDataman\v_5_x_x\IO\TcoDatamanUserData_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanConfig_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\eDatamanResultDataSize_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanSignalStates_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\eDatamanUserDataSize_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanStatus_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\TcoDatamanConfig_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\TcoDatamanResults_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\TcoDatamanSignalStates_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\TcoDatamanStatus_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Structs\TcoDatamanUser_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Tasks\TcoDatamanClearResultData_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDataman\v_5_x_x\Tasks\TcoDatamanRead_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanResults_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightAcquisitionControl_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanClearResultData_v_5_x_x.TcPOU">
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightAcquisitionStatus_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanRead_v_5_x_x.TcPOU">
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightIO_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDatamanUser_v_5_x_x.TcDUT">
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightResultData_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightInspectionControl_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightInspectionStatus_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightSoftEventControl_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightCommandControl_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightUserData_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\eTcoInsightResultDataSize_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\eTcoInsightUserDataSize_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\TcoInsightConfig_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\TcoInsightResults_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\TcoInsightSignalStates_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\TcoInsightStatus_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Structs\TcoInsightUser_v_5_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Tasks\TcoInsightTrigger_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Tasks\TcoInsightChangeJobByName_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Tasks\TcoInsightChangeJobByNumber_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Tasks\TcoInsightClearInspectionResults_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\Tasks\TcoInsightSoftEvent_v_5_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoInsight\v_5_x_x\TcoInsight_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoVisionParams.TcGVL">
@@ -138,9 +189,15 @@
     <Folder Include="POUs\Conversion\FromBytes" />
     <Folder Include="POUs\Conversion\ToBytes" />
     <Folder Include="POUs\TcoDataman" />
-    <Folder Include="POUs\SampleComponent" />
     <Folder Include="POUs\TcoDataman\v_5_x_x" />
     <Folder Include="POUs\TcoDataman\v_5_x_x\IO" />
+    <Folder Include="POUs\TcoDataman\v_5_x_x\Structs" />
+    <Folder Include="POUs\TcoDataman\v_5_x_x\Tasks" />
+    <Folder Include="POUs\TcoInsight" />
+    <Folder Include="POUs\TcoInsight\v_5_x_x" />
+    <Folder Include="POUs\TcoInsight\v_5_x_x\IO" />
+    <Folder Include="POUs\TcoInsight\v_5_x_x\Tasks" />
+    <Folder Include="POUs\TcoInsight\v_5_x_x\Structs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

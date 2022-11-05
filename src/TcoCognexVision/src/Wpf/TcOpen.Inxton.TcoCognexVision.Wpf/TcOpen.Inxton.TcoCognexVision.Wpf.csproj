@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <Content Include="..\..\..\README.md" IncludeInPackage="true" Pack="true" PackagePath="\" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="..\..\..\assets\**" Pack="true" PackagePath="assets" Link="assets\%(RecursiveDir)\%(Filename)%(Extension)" TargetPath="assets\%(RecursiveDir)\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="..\..\..\assets\**" Pack="true" PackagePath="assets" Link="assets\%(RecursiveDir)\%(Filename)%(Extension)" TargetPath="assets\%(RecursiveDir)\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="TcoInsight\v_5_x_x\TcoInsight_v_5_x_xServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="TcoDataman\v_5_x_x\TcoDataman_v_5_x_xServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

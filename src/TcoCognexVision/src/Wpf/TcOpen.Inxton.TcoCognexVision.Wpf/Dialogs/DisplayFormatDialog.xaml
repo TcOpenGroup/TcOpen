@@ -19,9 +19,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Display data as:"/>
-        <ComboBox x:Name="cbRequiredFormat" Grid.Row="0" Grid.Column="1"/>
+        <ComboBox x:Name="cbRequiredFormat" Grid.Row="0" Grid.Column="1" SelectionChanged="cbRequiredFormat_SelectionChanged" />
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Margin="0,15,0,0">
-            <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" Width="80" Content="OK" Margin="0,0,30,0"/>
             <Button IsCancel="True" x:Name="btnDialogCancel" Width="80" Click="btnDialogCancel_Click" Content ="Cancel"/>
         </WrapPanel>
     </Grid>
