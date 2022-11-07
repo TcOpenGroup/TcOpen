@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,112 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="___In_service_mode__" xml:space="preserve">
-    <value>V servisnom režime</value>
+  <data name="___MANUAL__" xml:space="preserve">
+    <value>MANUAL</value>
   </data>
-  <data name="___On__" xml:space="preserve">
-    <value>Zapnuté</value>
+  <data name="___GROUND__" xml:space="preserve">
+    <value>SUELO</value>
   </data>
-  <data name="___Off__" xml:space="preserve">
-    <value>Vypnuté</value>
+  <data name="___AUTOMAT__" xml:space="preserve">
+    <value>AUTOMAT</value>
   </data>
-  <data name="___Set_on_request__" xml:space="preserve">
-    <value>Zapnúť</value>
+  <data name="___PART_PRESENCE_SENSOR__" xml:space="preserve">
+    <value>SENSOR DE PRESENCIA DE PIEZAS</value>
   </data>
-  <data name="___Enabled__" xml:space="preserve">
-    <value>Povolené</value>
+  <data name="___START_BUTTON__" xml:space="preserve">
+    <value>BOTÓN DE INICIO</value>
   </data>
-  <data name="___Serviceable__" xml:space="preserve">
-    <value>Servisovateľné</value>
+  <data name="___PRESS_PISTON__" xml:space="preserve">
+    <value>PISTÓN DE PRENSA</value>
   </data>
-  <data name="___Changing_mode_disabled__" xml:space="preserve">
-    <value>Zmena režimu je zakázaná</value>
+  <data name="___ALARM_OUTPUT__" xml:space="preserve">
+    <value>SALIDA DE ALARMA</value>
   </data>
-  <data name="___Skipping_steps_disabled__" xml:space="preserve">
-    <value>Kroky preskakovania sú zakázané</value>
+  <data name="___DRIVE__" xml:space="preserve">
+    <value>DRIVE</value>
   </data>
-  <data name="___Step_backward__" xml:space="preserve">
-    <value>Dozadu</value>
+  <data name="___PRESS_IN_BASE_POSITION__" xml:space="preserve">
+    <value>PRESIONAR EN LA POSICIÓN DE LA BASE</value>
   </data>
-  <data name="___Step_in__" xml:space="preserve">
-    <value>Spustiť</value>
+  <data name="___CHECK_PART_REMOVAL_FROM_THE_FIXTURE__" xml:space="preserve">
+    <value>COMPRUEBE LA EXTRACCIÓN DE LA PIEZA DEL ACCESORIO</value>
   </data>
-  <data name="___Step_forward__" xml:space="preserve">
-    <value>Dopredu</value>
+  <data name="___Remove_part_from_the_fixture_please__" xml:space="preserve">
+    <value>Retire la parte del accesorio por favor</value>
   </data>
-  <data name="___Change_mode__" xml:space="preserve">
-    <value>Zmeniť režim</value>
+  <data name="___GROUND_POSITION_COMPLETED__" xml:space="preserve">
+    <value>POSICIÓN DE TIERRA COMPLETADA</value>
   </data>
-  <data name="___Mode__" xml:space="preserve">
-    <value>Mód</value>
+  <data name="___Ground_position_completed__you_can_start_automat_sequence___" xml:space="preserve">
+    <value>Posición en el suelo completada; puede iniciar la secuencia automática.</value>
   </data>
-  <data name="___Current_step__" xml:space="preserve">
-    <value>Aktuálny krok</value>
+  <data name="___LOAD_PART_INTO_FIXTURE__" xml:space="preserve">
+    <value>CARGAR LA PIEZA EN EL DISPOSITIVO</value>
   </data>
-  <data name="___Sequencer_error__" xml:space="preserve">
-    <value>Chyba sekvencera</value>
+  <data name="___PRESS_START_BUTTON_TO_START_OPERATIONS__" xml:space="preserve">
+    <value>PULSE EL BOTÓN DE INICIO PARA INICIAR LAS OPERACIONES</value>
   </data>
-  <data name="___Sequencer_error_ID__" xml:space="preserve">
-    <value>ID chyby sekvencera</value>
+  <data name="___PRESSING__" xml:space="preserve">
+    <value>PRESIONANDO</value>
   </data>
-  <data name="___Sequence_cycle_elapsed_time__" xml:space="preserve">
-    <value>Uplynulý čas sekvenčného cyklu</value>
+  <data name="___MOVING_PRESS_TO_HOME_POSITION__" xml:space="preserve">
+    <value>MOVER LA PRENSA A LA POSICIÓN INICIAL</value>
   </data>
-  <data name="___Total_sequence_time__" xml:space="preserve">
-    <value>Celkový čas sekvencie</value>
+  <data name="___REMOVE_PART_FROM_THE_FIXTURE__" xml:space="preserve">
+    <value>RETIRAR LA PIEZA DE LA FIJACIÓN</value>
   </data>
-  <data name="___Restore_request__" xml:space="preserve">
-    <value>Obnoviť</value>
+  <data name="___SAVE_DATA__" xml:space="preserve">
+    <value>GUARDAR DATOS</value>
   </data>
-  <data name="___Invoke_request__" xml:space="preserve">
-    <value>Spustiť</value>
-  </data>
-  <data name="___Abort_request__" xml:space="preserve">
-    <value>Zrušiť</value>
-  </data>
-  <data name="___Toggle_request__" xml:space="preserve">
-    <value>Prepnúť</value>
-  </data>
-  <data name="___Step_ID__" xml:space="preserve">
-    <value>ID kroku</value>
-  </data>
-  <data name="___Step_Order__" xml:space="preserve">
-    <value>Poradie kroku</value>
-  </data>
-  <data name="___Step_description__" xml:space="preserve">
-    <value>Popis kroku</value>
-  </data>
-  <data name="___Step_status__" xml:space="preserve">
-    <value>Stav kroku</value>
-  </data>
-  <data name="___Step_duration__" xml:space="preserve">
-    <value>Trvanie</value>
-  </data>
-  <data name="___Step_count__" xml:space="preserve">
-    <value>Počet krokov</value>
-  </data>
-  <data name="___Task_aborted___" xml:space="preserve">
-    <value>Úloha prerušená.</value>
-  </data>
-  <data name="___Task_done___" xml:space="preserve">
-    <value>Úloha ukončená.</value>
-  </data>
-  <data name="___Task_error_thrown___" xml:space="preserve">
-    <value>Chyba úlohy.</value>
-  </data>
-  <data name="___Task_requested___" xml:space="preserve">
-    <value>Úloha spustená.</value>
-  </data>
-  <data name="___Task_restored___" xml:space="preserve">
-    <value>Úloha obnovená.</value>
-  </data>
-  <data name="___Task_started___" xml:space="preserve">
-    <value>Úloha beží.</value>
-  </data>
-  <data name="___Task_cannot_start__Enabled_property_is_FALSE___" xml:space="preserve">
-    <value>Úlohu nemožno spustiť; vlastnosť Enabled je FALSE.</value>
-  </data>
-  <data name="___Running_task_entered_Error_state_when_the_Enabled_property_transitioned_to_FALSE_during_task_execution___" xml:space="preserve">
-    <value>Spustená úloha vstúpila do stavu Error, keď vlastnosť Enabled počas vykonávania úlohy prešla na hodnotu FALSE.</value>
+  <data name="___OPERATIONS_COMPLETED__" xml:space="preserve">
+    <value>OPERACIONES REALIZADAS</value>
   </data>
 </root>

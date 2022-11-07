@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,112 +117,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="___In_service_mode__" xml:space="preserve">
-    <value>V servisnom režime</value>
+  <data name="___Time_stamp__" xml:space="preserve">
+    <value>Sello de tiempo</value>
   </data>
-  <data name="___On__" xml:space="preserve">
-    <value>Zapnuté</value>
+  <data name="___Stab_Time__" xml:space="preserve">
+    <value>Hora de la puñalada</value>
   </data>
-  <data name="___Off__" xml:space="preserve">
-    <value>Vypnuté</value>
+  <data name="___Stabilisation_time__The_inspection_will_pass_when_the_condition_is_met_continuously_for_the_duration_of_this_timespan___" xml:space="preserve">
+    <value>Tiempo de estabilización. La inspección se aprobará cuando la condición se cumpla de forma continuada durante este periodo de tiempo.</value>
   </data>
-  <data name="___Set_on_request__" xml:space="preserve">
-    <value>Zapnúť</value>
+  <data name="___Timeout__" xml:space="preserve">
+    <value>Tiempo de espera</value>
   </data>
-  <data name="___Enabled__" xml:space="preserve">
-    <value>Povolené</value>
+  <data name="___Timeout__Maximal_duration_of_the_inspection_within_which_the_condition_must_be_met___" xml:space="preserve">
+    <value>Tiempo de espera. Duración máxima de la inspección dentro de la cual debe cumplirse la condición.</value>
   </data>
-  <data name="___Serviceable__" xml:space="preserve">
-    <value>Servisovateľné</value>
+  <data name="___Result__" xml:space="preserve">
+    <value>Resultado</value>
   </data>
-  <data name="___Changing_mode_disabled__" xml:space="preserve">
-    <value>Zmena režimu je zakázaná</value>
+  <data name="___Result_of_the_inspection___" xml:space="preserve">
+    <value>Resultado de la inspección.</value>
   </data>
-  <data name="___Skipping_steps_disabled__" xml:space="preserve">
-    <value>Kroky preskakovania sú zakázané</value>
+  <data name="___Exclude__" xml:space="preserve">
+    <value>Excluye</value>
   </data>
-  <data name="___Step_backward__" xml:space="preserve">
-    <value>Dozadu</value>
+  <data name="___Inspection_is_excluded_from_the_evaluation__The_test_will_however_run_and_provide_detected_value___" xml:space="preserve">
+    <value>La inspección está excluida de la evaluación. No obstante, la prueba se ejecutará y proporcionará el valor detectado.</value>
   </data>
-  <data name="___Step_in__" xml:space="preserve">
-    <value>Spustiť</value>
+  <data name="___Bypass__" xml:space="preserve">
+    <value>Bypass</value>
   </data>
-  <data name="___Step_forward__" xml:space="preserve">
-    <value>Dopredu</value>
+  <data name="___Test_is_bypassed__no_eveluation_occurs___" xml:space="preserve">
+    <value>La prueba se salta, no se produce ninguna evelación.</value>
   </data>
-  <data name="___Change_mode__" xml:space="preserve">
-    <value>Zmeniť režim</value>
+  <data name="___Failure_description__" xml:space="preserve">
+    <value>Descripción del fallo</value>
   </data>
-  <data name="___Mode__" xml:space="preserve">
-    <value>Mód</value>
+  <data name="___Brief_failure_desciption__" xml:space="preserve">
+    <value>Breve descripción del fallo</value>
   </data>
-  <data name="___Current_step__" xml:space="preserve">
-    <value>Aktuálny krok</value>
+  <data name="___Re_tries__" xml:space="preserve">
+    <value>Reintentos</value>
   </data>
-  <data name="___Sequencer_error__" xml:space="preserve">
-    <value>Chyba sekvencera</value>
+  <data name="___Inspection_will_repeat_given_number_of_times_when_inspection_fails___" xml:space="preserve">
+    <value>La inspección se repetirá un número determinado de veces cuando la inspección falle.</value>
   </data>
-  <data name="___Sequencer_error_ID__" xml:space="preserve">
-    <value>ID chyby sekvencera</value>
+  <data name="___Attempts__" xml:space="preserve">
+    <value>Intentos</value>
   </data>
-  <data name="___Sequence_cycle_elapsed_time__" xml:space="preserve">
-    <value>Uplynulý čas sekvenčného cyklu</value>
+  <data name="___Re_tries_counter__count_the_number_of_times_the_inspection_run_on_this_inspector_instance___" xml:space="preserve">
+    <value>Contador de reintentos, cuenta el número de veces que se ejecuta la inspección en esta instancia del inspector.</value>
   </data>
-  <data name="___Total_sequence_time__" xml:space="preserve">
-    <value>Celkový čas sekvencie</value>
+  <data name="___Code__" xml:space="preserve">
+    <value>Código</value>
   </data>
-  <data name="___Restore_request__" xml:space="preserve">
-    <value>Obnoviť</value>
+  <data name="___Arbitrary_error_code_for_this_inspection__" xml:space="preserve">
+    <value>Código de error arbitrario para esta inspección</value>
   </data>
-  <data name="___Invoke_request__" xml:space="preserve">
-    <value>Spustiť</value>
+  <data name="___Required__" xml:space="preserve">
+    <value>Requerido</value>
   </data>
-  <data name="___Abort_request__" xml:space="preserve">
-    <value>Zrušiť</value>
+  <data name="___Required_status_for_inspection_to_pass__Can_contain_pattern_string_when__Star_notation_is_enabled___" xml:space="preserve">
+    <value>Estado requerido para pasar la inspección. Puede contener una cadena de patrones cuando la "notación de estrellas está activada".</value>
   </data>
-  <data name="___Toggle_request__" xml:space="preserve">
-    <value>Prepnúť</value>
+  <data name="___Detected__" xml:space="preserve">
+    <value>Detectado</value>
   </data>
-  <data name="___Step_ID__" xml:space="preserve">
-    <value>ID kroku</value>
+  <data name="___Detected_data__" xml:space="preserve">
+    <value>Datos detectados</value>
   </data>
-  <data name="___Step_Order__" xml:space="preserve">
-    <value>Poradie kroku</value>
+  <data name="___Min___" xml:space="preserve">
+    <value>Min.</value>
   </data>
-  <data name="___Step_description__" xml:space="preserve">
-    <value>Popis kroku</value>
+  <data name="___Min__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Valor mínimo para pasar la inspección.</value>
   </data>
-  <data name="___Step_status__" xml:space="preserve">
-    <value>Stav kroku</value>
+  <data name="___Detected_value__" xml:space="preserve">
+    <value>Valor detectado</value>
   </data>
-  <data name="___Step_duration__" xml:space="preserve">
-    <value>Trvanie</value>
+  <data name="___Max___" xml:space="preserve">
+    <value>Max.</value>
   </data>
-  <data name="___Step_count__" xml:space="preserve">
-    <value>Počet krokov</value>
+  <data name="___Max__value_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Valor máximo para pasar la inspección.</value>
   </data>
-  <data name="___Task_aborted___" xml:space="preserve">
-    <value>Úloha prerušená.</value>
+  <data name="___Sets_the_required_status_for_the_inspection_to_pass___" xml:space="preserve">
+    <value>Establece el estado requerido para que la inspección sea aprobada.</value>
   </data>
-  <data name="___Task_done___" xml:space="preserve">
-    <value>Úloha ukončená.</value>
-  </data>
-  <data name="___Task_error_thrown___" xml:space="preserve">
-    <value>Chyba úlohy.</value>
-  </data>
-  <data name="___Task_requested___" xml:space="preserve">
-    <value>Úloha spustená.</value>
-  </data>
-  <data name="___Task_restored___" xml:space="preserve">
-    <value>Úloha obnovená.</value>
-  </data>
-  <data name="___Task_started___" xml:space="preserve">
-    <value>Úloha beží.</value>
-  </data>
-  <data name="___Task_cannot_start__Enabled_property_is_FALSE___" xml:space="preserve">
-    <value>Úlohu nemožno spustiť; vlastnosť Enabled je FALSE.</value>
-  </data>
-  <data name="___Running_task_entered_Error_state_when_the_Enabled_property_transitioned_to_FALSE_during_task_execution___" xml:space="preserve">
-    <value>Spustená úloha vstúpila do stavu Error, keď vlastnosť Enabled počas vykonávania úlohy prešla na hodnotu FALSE.</value>
+  <data name="___Displays_detected_status_of_this_check___" xml:space="preserve">
+    <value>Muestra el estado detectado de esta comprobación.</value>
   </data>
 </root>

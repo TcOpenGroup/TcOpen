@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,112 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="___In_service_mode__" xml:space="preserve">
-    <value>V servisnom režime</value>
+  <data name="___Current_position__" xml:space="preserve">
+    <value>Posición actual</value>
   </data>
-  <data name="___On__" xml:space="preserve">
-    <value>Zapnuté</value>
+  <data name="___Move_absolute__" xml:space="preserve">
+    <value>Mover absoluto</value>
   </data>
-  <data name="___Off__" xml:space="preserve">
-    <value>Vypnuté</value>
+  <data name="___Moves_the_drive_to_absolute_position_given_by_parameter__Target_Position___" xml:space="preserve">
+    <value>Mueve el accionamiento a la posición absoluta dada por el parámetro 'Target Position'</value>
   </data>
-  <data name="___Set_on_request__" xml:space="preserve">
-    <value>Zapnúť</value>
+  <data name="___Target_position__" xml:space="preserve">
+    <value>Posición del objetivo</value>
   </data>
-  <data name="___Enabled__" xml:space="preserve">
-    <value>Povolené</value>
+  <data name="___MOVE_HOME__" xml:space="preserve">
+    <value>MUDARSE A CASA</value>
   </data>
-  <data name="___Serviceable__" xml:space="preserve">
-    <value>Servisovateľné</value>
+  <data name="___MOVE_TO_WORK__" xml:space="preserve">
+    <value>MOVERSE AL TRABAJO</value>
   </data>
-  <data name="___Changing_mode_disabled__" xml:space="preserve">
-    <value>Zmena režimu je zakázaná</value>
-  </data>
-  <data name="___Skipping_steps_disabled__" xml:space="preserve">
-    <value>Kroky preskakovania sú zakázané</value>
-  </data>
-  <data name="___Step_backward__" xml:space="preserve">
-    <value>Dozadu</value>
-  </data>
-  <data name="___Step_in__" xml:space="preserve">
-    <value>Spustiť</value>
-  </data>
-  <data name="___Step_forward__" xml:space="preserve">
-    <value>Dopredu</value>
-  </data>
-  <data name="___Change_mode__" xml:space="preserve">
-    <value>Zmeniť režim</value>
-  </data>
-  <data name="___Mode__" xml:space="preserve">
-    <value>Mód</value>
-  </data>
-  <data name="___Current_step__" xml:space="preserve">
-    <value>Aktuálny krok</value>
-  </data>
-  <data name="___Sequencer_error__" xml:space="preserve">
-    <value>Chyba sekvencera</value>
-  </data>
-  <data name="___Sequencer_error_ID__" xml:space="preserve">
-    <value>ID chyby sekvencera</value>
-  </data>
-  <data name="___Sequence_cycle_elapsed_time__" xml:space="preserve">
-    <value>Uplynulý čas sekvenčného cyklu</value>
-  </data>
-  <data name="___Total_sequence_time__" xml:space="preserve">
-    <value>Celkový čas sekvencie</value>
-  </data>
-  <data name="___Restore_request__" xml:space="preserve">
-    <value>Obnoviť</value>
-  </data>
-  <data name="___Invoke_request__" xml:space="preserve">
-    <value>Spustiť</value>
-  </data>
-  <data name="___Abort_request__" xml:space="preserve">
-    <value>Zrušiť</value>
-  </data>
-  <data name="___Toggle_request__" xml:space="preserve">
-    <value>Prepnúť</value>
-  </data>
-  <data name="___Step_ID__" xml:space="preserve">
-    <value>ID kroku</value>
-  </data>
-  <data name="___Step_Order__" xml:space="preserve">
-    <value>Poradie kroku</value>
-  </data>
-  <data name="___Step_description__" xml:space="preserve">
-    <value>Popis kroku</value>
-  </data>
-  <data name="___Step_status__" xml:space="preserve">
-    <value>Stav kroku</value>
-  </data>
-  <data name="___Step_duration__" xml:space="preserve">
-    <value>Trvanie</value>
-  </data>
-  <data name="___Step_count__" xml:space="preserve">
-    <value>Počet krokov</value>
-  </data>
-  <data name="___Task_aborted___" xml:space="preserve">
-    <value>Úloha prerušená.</value>
-  </data>
-  <data name="___Task_done___" xml:space="preserve">
-    <value>Úloha ukončená.</value>
-  </data>
-  <data name="___Task_error_thrown___" xml:space="preserve">
-    <value>Chyba úlohy.</value>
-  </data>
-  <data name="___Task_requested___" xml:space="preserve">
-    <value>Úloha spustená.</value>
-  </data>
-  <data name="___Task_restored___" xml:space="preserve">
-    <value>Úloha obnovená.</value>
-  </data>
-  <data name="___Task_started___" xml:space="preserve">
-    <value>Úloha beží.</value>
-  </data>
-  <data name="___Task_cannot_start__Enabled_property_is_FALSE___" xml:space="preserve">
-    <value>Úlohu nemožno spustiť; vlastnosť Enabled je FALSE.</value>
-  </data>
-  <data name="___Running_task_entered_Error_state_when_the_Enabled_property_transitioned_to_FALSE_during_task_execution___" xml:space="preserve">
-    <value>Spustená úloha vstúpila do stavu Error, keď vlastnosť Enabled počas vykonávania úlohy prešla na hodnotu FALSE.</value>
+  <data name="___STOP__" xml:space="preserve">
+    <value>STOP</value>
   </data>
 </root>

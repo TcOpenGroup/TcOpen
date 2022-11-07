@@ -59,5 +59,241 @@ namespace TcoIoConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AT least one AlarmCR got a diagnosis alarm!.
+        /// </summary>
+        public static string ___AT_least_one_AlarmCR_got_a_diagnosis_alarm___ {
+            get {
+                return ResourceManager.GetString("___AT_least_one_AlarmCR_got_a_diagnosis_alarm___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one InputCR is invalid!.
+        /// </summary>
+        public static string ___At_least_one_InputCR_is_invalid___ {
+            get {
+                return ResourceManager.GetString("___At_least_one_InputCR_is_invalid___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AT least one InputCR is invalid, provider in stop OR problemindicator is set!.
+        /// </summary>
+        public static string ___AT_least_one_InputCR_is_invalid__provider_in_stop_OR_problemindicator_is_set___ {
+            get {
+                return ResourceManager.GetString("___AT_least_one_InputCR_is_invalid__provider_in_stop_OR_problemindicator_is_set__" +
+                        "_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one InputCR Problemindicator is set!.
+        /// </summary>
+        public static string ___At_least_one_InputCR_Problemindicator_is_set___ {
+            get {
+                return ResourceManager.GetString("___At_least_one_InputCR_Problemindicator_is_set___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AT least one InputCR Provider is in stop!.
+        /// </summary>
+        public static string ___AT_least_one_InputCR_Provider_is_in_stop___ {
+            get {
+                return ResourceManager.GetString("___AT_least_one_InputCR_Provider_is_in_stop___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AT least one OutputCR is invalid!.
+        /// </summary>
+        public static string ___AT_least_one_OutputCR_is_invalid___ {
+            get {
+                return ResourceManager.GetString("___AT_least_one_OutputCR_is_invalid___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one OutputCR is invalid, provider in stop or problemindicator is set!.
+        /// </summary>
+        public static string ___At_least_one_OutputCR_is_invalid__provider_in_stop_or_problemindicator_is_set___ {
+            get {
+                return ResourceManager.GetString("___At_least_one_OutputCR_is_invalid__provider_in_stop_or_problemindicator_is_set_" +
+                        "__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AT least one OutputCR Problemindicator is set!.
+        /// </summary>
+        public static string ___AT_least_one_OutputCR_Problemindicator_is_set___ {
+            get {
+                return ResourceManager.GetString("___AT_least_one_OutputCR_Problemindicator_is_set___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one OutputCR Provider is in stop!.
+        /// </summary>
+        public static string ___At_least_one_OutputCR_Provider_is_in_stop___ {
+            get {
+                return ResourceManager.GetString("___At_least_one_OutputCR_Provider_is_in_stop___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datahold error!.
+        /// </summary>
+        public static string ___Datahold_error___ {
+            get {
+                return ResourceManager.GetString("___Datahold_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DCP set was NOT successful!.
+        /// </summary>
+        public static string ___DCP_set_was_NOT_successful___ {
+            get {
+                return ResourceManager.GetString("___DCP_set_was_NOT_successful___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device NOT found!.
+        /// </summary>
+        public static string ___Device_NOT_found___ {
+            get {
+                return ResourceManager.GetString("___Device_NOT_found___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EtherCAT gateway: WC-State OF cyclic EtherCAT frame is 1!.
+        /// </summary>
+        public static string ___EtherCAT_gateway__WC_State_OF_cyclic_EtherCAT_frame_is_1___ {
+            get {
+                return ResourceManager.GetString("___EtherCAT_gateway__WC_State_OF_cyclic_EtherCAT_frame_is_1___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IOC-AR is established!.
+        /// </summary>
+        public static string ___IOC_AR_is_established___ {
+            get {
+                return ResourceManager.GetString("___IOC_AR_is_established___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IOC-AR is established but module difference!.
+        /// </summary>
+        public static string ___IOC_AR_is_established_but_module_difference___ {
+            get {
+                return ResourceManager.GetString("___IOC_AR_is_established_but_module_difference___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IOC-AR is established but no application ready!.
+        /// </summary>
+        public static string ___IOC_AR_is_established_but_no_application_ready___ {
+            get {
+                return ResourceManager.GetString("___IOC_AR_is_established_but_no_application_ready___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IOC-AR is not established!.
+        /// </summary>
+        public static string ___IOC_AR_is_not_established___ {
+            get {
+                return ResourceManager.GetString("___IOC_AR_is_not_established___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP conflict!.
+        /// </summary>
+        public static string ___IP_conflict___ {
+            get {
+                return ResourceManager.GetString("___IP_conflict___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP could NOT be set!.
+        /// </summary>
+        public static string ___IP_could_NOT_be_set___ {
+            get {
+                return ResourceManager.GetString("___IP_could_NOT_be_set___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profinet controller has a link error!.
+        /// </summary>
+        public static string ___Profinet_controller_has_a_link_error___ {
+            get {
+                return ResourceManager.GetString("___Profinet_controller_has_a_link_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profinet device state machine is in boot mode!.
+        /// </summary>
+        public static string ___Profinet_device_state_machine_is_in_boot_mode___ {
+            get {
+                return ResourceManager.GetString("___Profinet_device_state_machine_is_in_boot_mode___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RTC3: Sync mode could not be initiated!.
+        /// </summary>
+        public static string ___RTC3__Sync_mode_could_not_be_initiated___ {
+            get {
+                return ResourceManager.GetString("___RTC3__Sync_mode_could_not_be_initiated___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The aliasname is not unique!.
+        /// </summary>
+        public static string ___The_aliasname_is_not_unique___ {
+            get {
+                return ResourceManager.GetString("___The_aliasname_is_not_unique___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The automatic name assignement is not possible - wrong device TYPE!.
+        /// </summary>
+        public static string ___The_automatic_name_assignement_is_not_possible___wrong_device_TYPE___ {
+            get {
+                return ResourceManager.GetString("___The_automatic_name_assignement_is_not_possible___wrong_device_TYPE___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stationname is not unique!.
+        /// </summary>
+        public static string ___The_stationname_is_not_unique___ {
+            get {
+                return ResourceManager.GetString("___The_stationname_is_not_unique___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watchdog error!.
+        /// </summary>
+        public static string ___Watchdog_error___ {
+            get {
+                return ResourceManager.GetString("___Watchdog_error___", resourceCulture);
+            }
+        }
     }
 }
