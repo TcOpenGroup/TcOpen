@@ -14,6 +14,11 @@
     <d:UserControl.DataContext>
         <TcoElements:TcoDi />
     </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
             <Border DataContext="{Binding Model}"
@@ -23,11 +28,14 @@
                         CornerRadius="2" />
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <UniformGrid Rows="1" Margin="10,10,0,0" DataContext="{Binding Model}">
+            <WrapPanel DataContext="{Binding Model}">
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            </UniformGrid>
+
+                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" Margin="10,10,0,0">
+                    <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </ItemsControl>
+            </WrapPanel>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>
