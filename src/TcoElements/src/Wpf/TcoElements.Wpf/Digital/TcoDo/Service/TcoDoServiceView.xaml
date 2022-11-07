@@ -12,6 +12,11 @@
     <d:UserControl.DataContext>
         <TcoElements:TcoDo/>
     </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
             <Border
@@ -21,11 +26,15 @@
             CornerRadius="2" />
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <UniformGrid  Rows="1"  Margin="10,10,0,0" DataContext="{Binding Model}">
-                <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" />
+            <WrapPanel DataContext="{Binding Model}">
+                <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" VerticalAlignment="Center"/>
+
+                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" Margin="10,10,0,0" >
                 <vortex:RenderableContentControl DataContext="{Binding _setTask}"></vortex:RenderableContentControl>
                 <vortex:RenderableContentControl DataContext="{Binding _resetTask}"></vortex:RenderableContentControl>
-            </UniformGrid>
+            </ItemsControl>
+            </WrapPanel>
+
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>

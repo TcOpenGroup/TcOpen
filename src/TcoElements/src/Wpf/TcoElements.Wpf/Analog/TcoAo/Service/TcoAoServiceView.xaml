@@ -14,14 +14,24 @@
     <d:UserControl.DataContext>
         <TcoElements:TcoAo />
     </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
-            <vortex:RenderableContentControl DataContext="{Binding _status.Unscaled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="DisplaySlim"/>
+            <vortex:RenderableContentControl DataContext="{Binding Model._status.Unscaled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="DisplaySlim"/>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <StackPanel DataContext="{Binding Model}" Margin="10,0,0,0" >
+            <WrapPanel DataContext="{Binding Model}" Margin="10,0,0,0" >
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                <UniformGrid Rows="1" Columns="2" >
+                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" >
+                    <GroupBox Margin="2" Header="{Binding _requiredValue.AttributeName}" Grid.IsSharedSizeScope="True">
+                        <vortexs:PermissionBox Permissions="can_change_hw_settings" SecurityMode="Disabled">
+                            <vortex:RenderableContentControl DataContext="{Binding _requiredValue}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="ControlSlim"/>
+                        </vortexs:PermissionBox>
+                    </GroupBox>
                     <GroupBox Margin="2" Header="{Binding _config.AttributeName}" Grid.IsSharedSizeScope="True">
                         <vortexs:PermissionBox Permissions="can_change_hw_settings" SecurityMode="Disabled">
                             <vortex:RenderableContentControl DataContext="{Binding _config}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="ControlSlim"/>
@@ -30,8 +40,8 @@
                     <GroupBox  Margin="2" Header="{Binding _status.AttributeName}" Grid.IsSharedSizeScope="True">
                         <vortex:RenderableContentControl DataContext="{Binding _status}" HorizontalAlignment="Stretch" VerticalAlignment="Center" PresentationType="DisplaySlim"/>
                 </GroupBox>
-                </UniformGrid>
-            </StackPanel>
+                </ItemsControl>
+            </WrapPanel>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>
