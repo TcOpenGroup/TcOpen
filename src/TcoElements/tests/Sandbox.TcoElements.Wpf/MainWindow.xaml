@@ -15,9 +15,13 @@
     </Window.DataContext>
     <TabControl>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}" Header="Elements">
-            <TabControl>
+            <ScrollViewer>
+                <TabControl>
+                
                 <TabItem Header="Service">
+                 
                     <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
+             
                 </TabItem>
                 <TabItem Header="Base">
                     <vortex:RenderableContentControl PresentationType="Base"></vortex:RenderableContentControl>
@@ -26,6 +30,7 @@
                     <vortex:RenderableContentControl PresentationType="Diagnostics"></vortex:RenderableContentControl>
                 </TabItem>
             </TabControl>
+            </ScrollViewer>
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="VariableTree">
             <ScrollViewer>

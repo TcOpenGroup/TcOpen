@@ -14,17 +14,27 @@
         <tcocore:TcoSignalInfo />
     </d:UserControl.DataContext>
 
-    <UniformGrid Columns="3" Rows="0">
-        <TextBlock Text="{Binding Converter={local:NameOrSymbolConverter}}" 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <TextBlock  VerticalAlignment="Center"
+                    Text="{Binding Converter={local:NameOrSymbolConverter}}" 
                    Style="{DynamicResource MaterialDesignBody2TextBlock}"
                    TextWrapping="WrapWithOverflow"/>
         <TextBlock
+            Grid.Column="1"
+            Margin="10,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Style="{DynamicResource MaterialDesignBody2TextBlock}"
             Text="{Binding Signal.HumanReadable}" 
             TextWrapping="WrapWithOverflow"/>
-        <vortex:RenderableContentControl DataContext="{Binding Signal}" PresentationType="DisplaySlim" />
-    </UniformGrid>
+        <vortex:RenderableContentControl Grid.Column="2" DataContext="{Binding Signal}" PresentationType="DisplaySlim" />
+    </Grid>
 
 </UserControl>

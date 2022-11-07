@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoAo" Id="{0c15facf-9c5f-04d3-1f55-4eac4a3427ef}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -40,6 +40,7 @@ VAR
 	{attribute addProperty Name "<#Status#>"}
     _status : TcoAoStatus;
 
+	{attribute addProperty Name "<#Setpoint#>"}
     _requiredValue : REAL;
 
     _rawRange  : REAL;
