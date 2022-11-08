@@ -119,6 +119,27 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="RequiredValue" Id="{cc876d19-e295-030b-1e1d-e6214d261f32}">
+      <Declaration><![CDATA[PROPERTY PUBLIC RequiredValue : REAL
+]]></Declaration>
+      <Get Name="Get" Id="{f30aaf96-39ec-0b86-0201-64c640110121}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RequiredValue:=_requiredValue;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a0cebda6-0201-0a6a-28eb-a3a7391110de}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_requiredValue:=RequiredValue;
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="Restore" Id="{b627d9fb-1a0c-0d2f-00d4-aea6871df039}">
       <Declaration><![CDATA[(*~
 	<docu>
