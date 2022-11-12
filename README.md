@@ -54,7 +54,7 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 
 ### [Inspectors](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoInspectors/Introduction.html)
 
-*Advanced handling of singal inspections*
+*Advanced handling of signal inspections*
 
 ![](https://user-images.githubusercontent.com/61538034/156205362-9e21f32f-5d3a-4790-9f28-b9ecd3fb346c.png)
 
