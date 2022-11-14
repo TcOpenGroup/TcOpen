@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,112 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="___In_service_mode__" xml:space="preserve">
-    <value>V servisnom režime</value>
+  <data name="___Profinet_device_state_machine_is_in_boot_mode___" xml:space="preserve">
+    <value>La máquina de estado del dispositivo Profinet está en modo de arranque.</value>
   </data>
-  <data name="___On__" xml:space="preserve">
-    <value>Zapnuté</value>
+  <data name="___Device_NOT_found___" xml:space="preserve">
+    <value>Dispositivo no encontrado.</value>
   </data>
-  <data name="___Off__" xml:space="preserve">
-    <value>Vypnuté</value>
+  <data name="___The_stationname_is_not_unique___" xml:space="preserve">
+    <value>El nombre de la estación no es único.</value>
   </data>
-  <data name="___Set_on_request__" xml:space="preserve">
-    <value>Zapnúť</value>
+  <data name="___IP_could_NOT_be_set___" xml:space="preserve">
+    <value>¡La IP NO pudo ser fijada!</value>
   </data>
-  <data name="___Enabled__" xml:space="preserve">
-    <value>Povolené</value>
+  <data name="___IP_conflict___" xml:space="preserve">
+    <value>¡Conflicto de IP!</value>
   </data>
-  <data name="___Serviceable__" xml:space="preserve">
-    <value>Servisovateľné</value>
+  <data name="___DCP_set_was_NOT_successful___" xml:space="preserve">
+    <value>¡El conjunto de DCP NO fue exitoso!</value>
   </data>
-  <data name="___Changing_mode_disabled__" xml:space="preserve">
-    <value>Zmena režimu je zakázaná</value>
+  <data name="___Watchdog_error___" xml:space="preserve">
+    <value>¡Error de vigilancia!</value>
   </data>
-  <data name="___Skipping_steps_disabled__" xml:space="preserve">
-    <value>Kroky preskakovania sú zakázané</value>
+  <data name="___Datahold_error___" xml:space="preserve">
+    <value>Error en la retención de datos.</value>
   </data>
-  <data name="___Step_backward__" xml:space="preserve">
-    <value>Dozadu</value>
+  <data name="___RTC3__Sync_mode_could_not_be_initiated___" xml:space="preserve">
+    <value>RTC3: ¡No se ha podido iniciar el modo de sincronización!</value>
   </data>
-  <data name="___Step_in__" xml:space="preserve">
-    <value>Spustiť</value>
+  <data name="___Profinet_controller_has_a_link_error___" xml:space="preserve">
+    <value>El controlador Profinet tiene un error de enlace.</value>
   </data>
-  <data name="___Step_forward__" xml:space="preserve">
-    <value>Dopredu</value>
+  <data name="___The_aliasname_is_not_unique___" xml:space="preserve">
+    <value>El nombre del alias no es único.</value>
   </data>
-  <data name="___Change_mode__" xml:space="preserve">
-    <value>Zmeniť režim</value>
+  <data name="___The_automatic_name_assignement_is_not_possible___wrong_device_TYPE___" xml:space="preserve">
+    <value>La asignación automática del nombre no es posible - ¡Tipo de dispositivo incorrecto!</value>
   </data>
-  <data name="___Mode__" xml:space="preserve">
-    <value>Mód</value>
+  <data name="___IOC_AR_is_established_but_no_application_ready___" xml:space="preserve">
+    <value>La IOC-AR está establecida, pero no está lista la aplicación.</value>
   </data>
-  <data name="___Current_step__" xml:space="preserve">
-    <value>Aktuálny krok</value>
+  <data name="___IOC_AR_is_established_but_module_difference___" xml:space="preserve">
+    <value>El COI-AR está establecido, pero el módulo es diferente.</value>
   </data>
-  <data name="___Sequencer_error__" xml:space="preserve">
-    <value>Chyba sekvencera</value>
+  <data name="___AT_least_one_InputCR_is_invalid__provider_in_stop_OR_problemindicator_is_set___" xml:space="preserve">
+    <value>Al menos un InputCR no es válido, el proveedor está parado o el indicador de problemas está activado.</value>
   </data>
-  <data name="___Sequencer_error_ID__" xml:space="preserve">
-    <value>ID chyby sekvencera</value>
+  <data name="___At_least_one_OutputCR_is_invalid__provider_in_stop_or_problemindicator_is_set___" xml:space="preserve">
+    <value>Al menos un OutputCR no es válido, el proveedor está parado o el indicador de problemas está activado.</value>
   </data>
-  <data name="___Sequence_cycle_elapsed_time__" xml:space="preserve">
-    <value>Uplynulý čas sekvenčného cyklu</value>
+  <data name="___EtherCAT_gateway__WC_State_OF_cyclic_EtherCAT_frame_is_1___" xml:space="preserve">
+    <value>Pasarela EtherCAT: El estado WC de la trama EtherCAT cíclica es 1.</value>
   </data>
-  <data name="___Total_sequence_time__" xml:space="preserve">
-    <value>Celkový čas sekvencie</value>
+  <data name="___IOC_AR_is_not_established___" xml:space="preserve">
+    <value>El COI-AR no está establecido.</value>
   </data>
-  <data name="___Restore_request__" xml:space="preserve">
-    <value>Obnoviť</value>
+  <data name="___IOC_AR_is_established___" xml:space="preserve">
+    <value>¡Se establece el COI-AR!</value>
   </data>
-  <data name="___Invoke_request__" xml:space="preserve">
-    <value>Spustiť</value>
+  <data name="___AT_least_one_AlarmCR_got_a_diagnosis_alarm___" xml:space="preserve">
+    <value>Al menos un AlarmCR tiene una alarma de diagnóstico.</value>
   </data>
-  <data name="___Abort_request__" xml:space="preserve">
-    <value>Zrušiť</value>
+  <data name="___At_least_one_InputCR_is_invalid___" xml:space="preserve">
+    <value>Al menos un InputCR no es válido.</value>
   </data>
-  <data name="___Toggle_request__" xml:space="preserve">
-    <value>Prepnúť</value>
+  <data name="___AT_least_one_InputCR_Provider_is_in_stop___" xml:space="preserve">
+    <value>¡Al menos un proveedor de InputCR está en parada!</value>
   </data>
-  <data name="___Step_ID__" xml:space="preserve">
-    <value>ID kroku</value>
+  <data name="___At_least_one_InputCR_Problemindicator_is_set___" xml:space="preserve">
+    <value>Al menos un indicador de problemas de InputCR está activado.</value>
   </data>
-  <data name="___Step_Order__" xml:space="preserve">
-    <value>Poradie kroku</value>
+  <data name="___AT_least_one_OutputCR_is_invalid___" xml:space="preserve">
+    <value>Al menos un OutputCR no es válido.</value>
   </data>
-  <data name="___Step_description__" xml:space="preserve">
-    <value>Popis kroku</value>
+  <data name="___At_least_one_OutputCR_Provider_is_in_stop___" xml:space="preserve">
+    <value>¡Al menos un proveedor de OutputCR está en parada!</value>
   </data>
-  <data name="___Step_status__" xml:space="preserve">
-    <value>Stav kroku</value>
-  </data>
-  <data name="___Step_duration__" xml:space="preserve">
-    <value>Trvanie</value>
-  </data>
-  <data name="___Step_count__" xml:space="preserve">
-    <value>Počet krokov</value>
-  </data>
-  <data name="___Task_aborted___" xml:space="preserve">
-    <value>Úloha prerušená.</value>
-  </data>
-  <data name="___Task_done___" xml:space="preserve">
-    <value>Úloha ukončená.</value>
-  </data>
-  <data name="___Task_error_thrown___" xml:space="preserve">
-    <value>Chyba úlohy.</value>
-  </data>
-  <data name="___Task_requested___" xml:space="preserve">
-    <value>Úloha spustená.</value>
-  </data>
-  <data name="___Task_restored___" xml:space="preserve">
-    <value>Úloha obnovená.</value>
-  </data>
-  <data name="___Task_started___" xml:space="preserve">
-    <value>Úloha beží.</value>
-  </data>
-  <data name="___Task_cannot_start__Enabled_property_is_FALSE___" xml:space="preserve">
-    <value>Úlohu nemožno spustiť; vlastnosť Enabled je FALSE.</value>
-  </data>
-  <data name="___Running_task_entered_Error_state_when_the_Enabled_property_transitioned_to_FALSE_during_task_execution___" xml:space="preserve">
-    <value>Spustená úloha vstúpila do stavu Error, keď vlastnosť Enabled počas vykonávania úlohy prešla na hodnotu FALSE.</value>
+  <data name="___AT_least_one_OutputCR_Problemindicator_is_set___" xml:space="preserve">
+    <value>Al menos un Indicador de Problema de SalidaCR está activado.</value>
   </data>
 </root>

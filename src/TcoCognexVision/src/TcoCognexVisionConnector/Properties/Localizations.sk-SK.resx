@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="___Invalid_reference____" xml:space="preserve">
+    <value>Neplatný odkaz:</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_running___" xml:space="preserve">
+    <value>Vymazanie údajov o výsledkoch.</value>
+  </data>
+  <data name="___Waiting_for_the_result_data_cleared___" xml:space="preserve">
+    <value>Čaká na vymazanie výsledných údajov!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsAvailable_to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na resetovanie signálu ResultsAvailable!</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Vymazanie výsledných údajov bolo prerušené, pričom ešte nebolo dokončené!</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_was_completed_successfully___" xml:space="preserve">
+    <value>Vymazanie výsledných údajov bolo úspešne dokončené.</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_finished_with_error___" xml:space="preserve">
+    <value>Vymazanie výsledných údajov sa skončilo chybou.</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_started___" xml:space="preserve">
+    <value>Začalo sa vymazávanie údajov o výsledkoch.</value>
+  </data>
+  <data name="___Reading_running___" xml:space="preserve">
+    <value>Čítanie v behu.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerReady_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu TriggerReady!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerAcknowledge_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu TriggerAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsAvailable_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu ResultsAvailable!</value>
+  </data>
+  <data name="___Waiting_for_the_ResultData_copied___" xml:space="preserve">
+    <value>Čakáme na skopírované ResultData!</value>
+  </data>
+  <data name="___Reading_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Čítanie bolo prerušené, pričom ešte nebolo dokončené!</value>
+  </data>
+  <data name="___Reading_was_completed_successfully___" xml:space="preserve">
+    <value>Čítanie bolo úspešne ukončené.</value>
+  </data>
+  <data name="___Reading_finished_with_error___" xml:space="preserve">
+    <value>Čítanie sa skončilo s chybou.</value>
+  </data>
+  <data name="___Reading_started___" xml:space="preserve">
+    <value>Začalo sa čítanie.</value>
+  </data>
+  <data name="___Not_ready_for_operation_by_means_of_Profinet_network___" xml:space="preserve">
+    <value>Nie je pripravený na prevádzku prostredníctvom siete Profinet!</value>
+  </data>
+  <data name="___Ready_for_operation___" xml:space="preserve">
+    <value>Pripravené na prevádzku!</value>
+  </data>
+  <data name="___Restore__" xml:space="preserve">
+    <value>Obnovenie</value>
+  </data>
+  <data name="___Update_signal_states__" xml:space="preserve">
+    <value>Aktualizácia stavov signálu</value>
+  </data>
+  <data name="___Clear_result_data__" xml:space="preserve">
+    <value>Vymazanie údajov o výsledkoch</value>
+  </data>
+  <data name="___Read__" xml:space="preserve">
+    <value>Prečítajte si</value>
+  </data>
+  <data name="___New_data_read___" xml:space="preserve">
+    <value>Nové údaje.</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsByte_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsByte presahuje dĺžku prijatých dát!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsByte_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsByte presahuje veľkosť mapovanej hardvérovej štruktúry!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsByte_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsByte prekračuje definovanú veľkosť!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsDint_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsDint presahuje dĺžku prijatých údajov!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsDint_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsDint presahuje veľkosť mapovanej hardvérovej štruktúry!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsDint_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsDint prekračuje definovanú veľkosť!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsReal_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsReal presahuje dĺžku prijatých údajov!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsReal_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsReal presahuje veľkosť mapovanej hardvérovej štruktúry!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsReal_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsReal prekračuje definovanú veľkosť!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsString_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsString presahuje dĺžku prijatých údajov!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsString_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsString presahuje veľkosť mapovanej hardvérovej štruktúry!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsString_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index ResultData v metóde GetResultAsString prekračuje definovanú veľkosť!</value>
+  </data>
+  <data name="___Restore_executed___" xml:space="preserve">
+    <value>Obnovenie vykonané!</value>
+  </data>
+  <data name="___Trigger_running___" xml:space="preserve">
+    <value>Spúšťací mechanizmus beží.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ExposureComplete_to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na resetovanie signálu ExposureComplete!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsValid_to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na resetovanie signálu ResultsValid!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_Error_to_be_reseted___" xml:space="preserve">
+    <value>Čakanie na resetovanie signálu Chyba!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_AcquisitionTriggerReady_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu AcquisitionTriggerReady!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_AcquisitionTriggerAcknowledge_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu AcquisitionTriggerAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_InspectionCompleted_to_be_toggled___" xml:space="preserve">
+    <value>Čaká sa na prepnutie signálu InspectionCompleted!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsValid_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu ResultsValid!</value>
+  </data>
+  <data name="___Waiting_for_the_InspectionResults_to_be_copied___" xml:space="preserve">
+    <value>Čaká sa na skopírovanie InspectionResults!</value>
+  </data>
+  <data name="___Trigger_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Spúšťač bol prerušený, pričom ešte nebol dokončený!</value>
+  </data>
+  <data name="___Trigger_was_completed_successfully___" xml:space="preserve">
+    <value>Spúšťanie bolo úspešne dokončené.</value>
+  </data>
+  <data name="___Trigger_finished_with_error___" xml:space="preserve">
+    <value>Spúšťanie sa skončilo s chybou.</value>
+  </data>
+  <data name="___Trigger_started___" xml:space="preserve">
+    <value>Spúšťač sa spustil.</value>
+  </data>
+  <data name="___Empty_job_name_inserted___" xml:space="preserve">
+    <value>Vložený prázdny názov úlohy!</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____is_running___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa názvu (").Append(THIS^.jobName).Append(') beží.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_CommandExecuting_to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na resetovanie signálu CommandExecuting!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_Online_to_be_reseted___" xml:space="preserve">
+    <value>Čakáme na resetovanie signálu Online!</value>
+  </data>
+  <data name="___Waiting_for_the_Job_name_to_be_written_to_the_User_data___" xml:space="preserve">
+    <value>Čaká sa na zapísanie názvu úlohy do údajov používateľa!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ExtendedUserDataSetAcknowledge_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu ExtendedUserDataSetAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ExtendedUserDataSetAcknowledge_to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na resetovanie signálu ExtendedUserDataSetAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_CommandComplete_to_be_set___" xml:space="preserve">
+    <value>Čaká sa na nastavenie signálu CommandComplete!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_CommandComplete_to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na resetovanie signálu CommandComplete!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_Online_to_be_set___" xml:space="preserve">
+    <value>Čakáme na nastavenie signálu Online!</value>
+  </data>
+  <data name="___Change_job_by_name_failed__Error_code___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa názvu sa nepodarilo. Kód chyby:</value>
+  </data>
+  <data name="___Job_name__" xml:space="preserve">
+    <value>Názov úlohy</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Zmena úlohy podľa názvu (").Append(THIS^.jobName).Append(') prerušená, zatiaľ nedokončená.</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____was_completed_succesfully___" xml:space="preserve">
+    <value>Zmena úlohy podľa názvu (').Append(THIS^.jobName).Append(') bola úspešne dokončená.</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____finished_with_error___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa názvu (").Append(THIS^.jobName).Append(') skončilo s chybou.</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____started___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa názvu (").Append(THIS^.jobName).Append(') spustené.</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsString presahuje veľkosť mapovanej hardvérovej štruktúry!</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsString prekračuje definovanú veľkosť!</value>
+  </data>
+  <data name="___Job_number_____Append_UINT_TO_STRING__jobNumber___Append____is_greater_than_the_maximal_value_of____Append_UINT_TO_STRING_inoConfig_MaxJobNumber___Append_____" xml:space="preserve">
+    <value>Číslo úlohy (").Append(UINTTOSTRING(jobNumber)).Append(') je väčšie ako maximálna hodnota ').Append(UINTTOSTRING(inoConfig.MaxJobNumber)).Append('!</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____is_running___" xml:space="preserve">
+    <value>Zmena úlohy podľa čísla (").Append(UINTTOSTRING(THIS^.jobNumber)).Append(') beží.</value>
+  </data>
+  <data name="___Change_job_by_number_failed__Error_code___" xml:space="preserve">
+    <value>Zmena úlohy podľa čísla sa nepodarila. Kód chyby:</value>
+  </data>
+  <data name="___Job_number__" xml:space="preserve">
+    <value>Číslo úlohy</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa čísla (").Append(UINTTOSTRING(THIS^.jobNumber)).Append(') prerušená, zatiaľ nedokončená.</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____was_completed_succesfully___" xml:space="preserve">
+    <value>Zmena úlohy podľa čísla (").Append(UINTTOSTRING(THIS^.jobNumber)).Append(') bola úspešne dokončená.</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____finished_with_error___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa čísla (").Append(UINTTOSTRING(THIS^.jobNumber)).Append(') skončilo s chybou.</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____started___" xml:space="preserve">
+    <value>Zmeniť úlohu podľa čísla (").Append(UINTTOSTRING(THIS^.jobNumber)).Append(') spustené.</value>
+  </data>
+  <data name="___Clearing_result_data_running___" xml:space="preserve">
+    <value>Vymazanie údajov o výsledku beží.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsValid_reseted___" xml:space="preserve">
+    <value>Čakanie na signál ResultsValid reseted!</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Vymazanie výsledkov kontroly sa prerušilo, pričom ešte nebolo dokončené.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_was_completed_succesfully___" xml:space="preserve">
+    <value>Zúčtovanie výsledkov kontroly bolo úspešne ukončené.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_finished_with_error___" xml:space="preserve">
+    <value>Vymazanie výsledkov kontroly sa skončilo chybou.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_started___" xml:space="preserve">
+    <value>Začalo sa vymazávanie výsledkov kontroly.</value>
+  </data>
+  <data name="___SoftEvent_number______Append_UINT_TO_STRING__softEventNumber___Append____is_greater_than_the_maximal_value_of_7___" xml:space="preserve">
+    <value>Číslo softEvent: (').Append(UINTTOSTRING(softEventNumber)).Append(') je väčšie ako maximálna hodnota 7!</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____is_running___" xml:space="preserve">
+    <value>SoftEvent (číslo: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') beží.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEventNumber___Append____to_be_set___" xml:space="preserve">
+    <value>Čakáme na nastavenie signálu TriggerSoftEvent[').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(']!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEventNumber___Append____to_be_reseted___" xml:space="preserve">
+    <value>Čaká sa na signál TriggerSoftEvent[').Append(UINTTOSTRING(THIS^.softEventNumber)).Append('], ktorý má byť resetovaný!</value>
+  </data>
+  <data name="___Soft_event_number__" xml:space="preserve">
+    <value>Číslo mäkkej udalosti</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>SoftEvent (číslo: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') bol prerušený, zatiaľ nebol dokončený.</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____was_completed_successfully___" xml:space="preserve">
+    <value>SoftEvent (číslo: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') bol úspešne dokončený.</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____finished_with_error___" xml:space="preserve">
+    <value>SoftEvent (číslo: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') skončil s chybou.</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____started___" xml:space="preserve">
+    <value>SoftEvent (číslo: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') started.</value>
+  </data>
+  <data name="___Change_job_by_number__" xml:space="preserve">
+    <value>Zmena úlohy podľa čísla</value>
+  </data>
+  <data name="___Change_job_by_name__" xml:space="preserve">
+    <value>Zmena úlohy podľa názvu</value>
+  </data>
+  <data name="___Clear_inspection_results__" xml:space="preserve">
+    <value>Jasné výsledky kontroly</value>
+  </data>
+  <data name="___Soft_event__" xml:space="preserve">
+    <value>Mäkká udalosť</value>
+  </data>
+  <data name="___Trigger__" xml:space="preserve">
+    <value>Spúšťač</value>
+  </data>
+  <data name="___Camera_offline_The_vision_system__s_job_is_being_modified___" xml:space="preserve">
+    <value>Kamera offline: Úloha systému videnia$ sa upravuje.</value>
+  </data>
+  <data name="___Camera_offline_A_discrete_signal_is_holding_the_vision_system_Offline___" xml:space="preserve">
+    <value>Kamera offline: Diskrétny signál drží systém videnia offline.</value>
+  </data>
+  <data name="___Camera_offline_A_communications_protocol_is_holding_the_vision_system_Offline___" xml:space="preserve">
+    <value>Kamera offline: Komunikačný protokol drží systém videnia offline.</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsByte_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsByte presahuje veľkosť mapovanej hardvérovej štruktúry</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsByte_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsByte prekračuje definovanú veľkosť</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsDint_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsDint presahuje veľkosť mapovanej hardvérovej štruktúry</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsDint_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsDint prekračuje definovanú veľkosť</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsReal_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsReal presahuje veľkosť mapovanej hardvérovej štruktúry</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsReal_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsReal prekračuje definovanú veľkosť</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsString presahuje veľkosť mapovanej hardvérovej štruktúry</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Index UserData v metóde SetUserDataAsString prekračuje definovanú veľkosť</value>
+  </data>
+  <data name="___Trigger_enable__" xml:space="preserve">
+    <value>Povolenie spúšťania</value>
+  </data>
+  <data name="___Enable_result_buffering__" xml:space="preserve">
+    <value>Povolenie vyrovnávacej pamäte výsledkov</value>
+  </data>
+  <data name="___Result_acknowledge__" xml:space="preserve">
+    <value>Výsledok potvrdzuje</value>
+  </data>
+  <data name="___Trigger_ready__" xml:space="preserve">
+    <value>Pripravenosť spúšte</value>
+  </data>
+  <data name="___Trigger_acknowledge__" xml:space="preserve">
+    <value>Potvrdenie spúšte</value>
+  </data>
+  <data name="___Acquiring__" xml:space="preserve">
+    <value>Získanie</value>
+  </data>
+  <data name="___Missed_acquisition__" xml:space="preserve">
+    <value>Zmeškaná akvizícia</value>
+  </data>
+  <data name="___Trigger_ID__" xml:space="preserve">
+    <value>ID spúšťača</value>
+  </data>
+  <data name="___Decoding__" xml:space="preserve">
+    <value>Dekódovanie</value>
+  </data>
+  <data name="___Decode_complete__" xml:space="preserve">
+    <value>Dekódovanie dokončené</value>
+  </data>
+  <data name="___Result_buffer_overrun__" xml:space="preserve">
+    <value>Prekročenie vyrovnávacej pamäte výsledku</value>
+  </data>
+  <data name="___Results_available__" xml:space="preserve">
+    <value>Dostupné výsledky</value>
+  </data>
+  <data name="___Error_detected__" xml:space="preserve">
+    <value>Zistená chyba</value>
+  </data>
+  <data name="___Result_ID__" xml:space="preserve">
+    <value>ID výsledku</value>
+  </data>
+  <data name="___Result_code__" xml:space="preserve">
+    <value>Výsledný kód</value>
+  </data>
+  <data name="___Result_extended__" xml:space="preserve">
+    <value>Výsledok rozšírený</value>
+  </data>
+  <data name="___Result_length__" xml:space="preserve">
+    <value>Dĺžka výsledku</value>
+  </data>
+  <data name="___Acquisition_trigger_enable__" xml:space="preserve">
+    <value>Povolenie spúšťania akvizície</value>
+  </data>
+  <data name="___Acquisition_trigger__" xml:space="preserve">
+    <value>Spúšťací mechanizmus akvizície</value>
+  </data>
+  <data name="___Clear_exposure_complete__" xml:space="preserve">
+    <value>Jasná expozícia dokončená</value>
+  </data>
+  <data name="___Set_offline__" xml:space="preserve">
+    <value>Nastavenie offline</value>
+  </data>
+  <data name="___Enable_results_buffering__" xml:space="preserve">
+    <value>Povolenie vyrovnávacej pamäte pre výsledky</value>
+  </data>
+  <data name="___Acknowledge_inspection_results__" xml:space="preserve">
+    <value>Potvrdenie výsledkov kontroly</value>
+  </data>
+  <data name="___Extended_user_data_set__" xml:space="preserve">
+    <value>Rozšírený súbor údajov používateľa</value>
+  </data>
+  <data name="___Execute_command__" xml:space="preserve">
+    <value>Vykonanie príkazu</value>
+  </data>
+  <data name="___Clear_error__" xml:space="preserve">
+    <value>Vymazanie chyby</value>
+  </data>
+  <data name="___Command__" xml:space="preserve">
+    <value>Príkaz</value>
+  </data>
+  <data name="___Trigger_soft_event__" xml:space="preserve">
+    <value>Spustenie mäkkej udalosti</value>
+  </data>
+  <data name="___Acquisition_trigger_ready__" xml:space="preserve">
+    <value>Akvizičný spúšťač pripravený</value>
+  </data>
+  <data name="___Acquisition_trigger_acknowledge__" xml:space="preserve">
+    <value>Potvrdenie spustenia akvizície</value>
+  </data>
+  <data name="___Exposure_complete__" xml:space="preserve">
+    <value>Expozícia dokončená</value>
+  </data>
+  <data name="___Offline_reason_0__" xml:space="preserve">
+    <value>Dôvod offline 0</value>
+  </data>
+  <data name="___Offline_reason_1__" xml:space="preserve">
+    <value>Dôvod offline 1</value>
+  </data>
+  <data name="___Offline_reason_2__" xml:space="preserve">
+    <value>Dôvod offline 2</value>
+  </data>
+  <data name="___Online__" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="___Acquisition_ID__" xml:space="preserve">
+    <value>ID akvizície</value>
+  </data>
+  <data name="___System_busy__" xml:space="preserve">
+    <value>Systém je obsadený</value>
+  </data>
+  <data name="___Inspection_completed__" xml:space="preserve">
+    <value>Ukončená kontrola</value>
+  </data>
+  <data name="___Results_buffer_overrun__" xml:space="preserve">
+    <value>Prekročenie vyrovnávacej pamäte výsledkov</value>
+  </data>
+  <data name="___Results_valid__" xml:space="preserve">
+    <value>Platné výsledky</value>
+  </data>
+  <data name="___Command_executing__" xml:space="preserve">
+    <value>Vykonávanie príkazu</value>
+  </data>
+  <data name="___Command_complete__" xml:space="preserve">
+    <value>Príkaz dokončený</value>
+  </data>
+  <data name="___Command_failed__" xml:space="preserve">
+    <value>Príkaz zlyhal</value>
+  </data>
+  <data name="___Extended_user_data_set_acknowledge__" xml:space="preserve">
+    <value>Potvrdenie rozšíreného súboru údajov používateľa</value>
+  </data>
+  <data name="___Overall_job_pass_fail__" xml:space="preserve">
+    <value>Celková práca prešla neúspechom</value>
+  </data>
+  <data name="___Test_run_ready__" xml:space="preserve">
+    <value>Testovacia prevádzka je pripravená</value>
+  </data>
+  <data name="___Error__" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="___Error_code__" xml:space="preserve">
+    <value>Kód chyby</value>
+  </data>
+  <data name="___Current_job_ID__" xml:space="preserve">
+    <value>ID aktuálneho pracovného miesta</value>
+  </data>
+  <data name="___Trigger_soft_event_acknowledge__" xml:space="preserve">
+    <value>Spustenie mäkkej udalosti potvrdenie</value>
+  </data>
+  <data name="___Inspection_ID__" xml:space="preserve">
+    <value>Identifikačné číslo inšpekcie</value>
+  </data>
+</root>

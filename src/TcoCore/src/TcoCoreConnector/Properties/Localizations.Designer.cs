@@ -160,6 +160,16 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Running task entered Error state when the Enabled property transitioned to FALSE during task execution..
+        /// </summary>
+        public static string ___Running_task_entered_Error_state_when_the_Enabled_property_transitioned_to_FALSE_during_task_execution___ {
+            get {
+                return ResourceManager.GetString("___Running_task_entered_Error_state_when_the_Enabled_property_transitioned_to_FAL" +
+                        "SE_during_task_execution___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sequence cycle elapsed time.
         /// </summary>
         public static string ___Sequence_cycle_elapsed_time__ {
@@ -300,6 +310,15 @@ namespace TcoCoreConnector.Properties {
         public static string ___Task_aborted___ {
             get {
                 return ResourceManager.GetString("___Task_aborted___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task cannot start; Enabled property is FALSE..
+        /// </summary>
+        public static string ___Task_cannot_start__Enabled_property_is_FALSE___ {
+            get {
+                return ResourceManager.GetString("___Task_cannot_start__Enabled_property_is_FALSE___", resourceCulture);
             }
         }
         
