@@ -98,7 +98,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _state = 0 THEN
-	_isValid := FALSE;
+//	_isValid := FALSE;
 	_NT_GetLocalTime(NETID := '127.0.0.1.1.1', START := TRUE);
 	IF _NT_GetLocalTime.BUSY AND NOT _NT_GetLocalTime.ERR THEN 
 		_state := _state + 10;
@@ -124,7 +124,7 @@ _RTC_EX2(EN := _isValid, PDT := _PDT);
 
 _diffToLastSyncInSeconds := ABS(ULINT_TO_LINT(Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(_RTC_EX2.CDT,0,0) - Tc2_EtherCAT.SYSTEMTIME_TO_DCTIME64(RtcPrg._LastSyncTimeStampInLocalTime,0,0)))/1000000000;
 
-IF _state >= 20 AND RtcPrg._RtcSynchParams.doSynch AND _diffToLastSyncInSeconds >=60 THEN
+IF _state >= 20 AND RtcPrg._RtcSynchParams.doSynch AND _diffToLastSyncInSeconds >=RtcPrg._RtcSynchParams.syncPeriod THEN
 	_state := 0;
 END_IF
 

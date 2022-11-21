@@ -316,8 +316,8 @@ RtcPrg.Synchronize(_RtcSynchParams);
 {warning enable C0357}
 RtcSynchronize REF= THIS^;
 
-_timeSychnMessenger.OnCondition(NOT THIS^.RealTimeClock.IsValid).Error('Real time clock is invalid').Pin();
-_timeSychnMessenger.OnCondition(THIS^.RealTimeClock.IsValid AND NOT THIS^.RealTimeClock.IsSynchronized).Warning('Real time clock is not sychronized');]]></ST>
+_timeSychnMessenger.OnCondition(NOT THIS^.RealTimeClock.IsValid).Error('<#Real time clock is invalid!#>').Pin();
+_timeSychnMessenger.OnCondition(THIS^.RealTimeClock.IsValid AND NOT THIS^.RealTimeClock.IsSynchronized).Warning('<#Real time clock is not sychronized.#>');]]></ST>
       </Implementation>
     </Method>
     <Method Name="Run" Id="{c20d2d3c-fd63-4a1d-8862-cb4f91ebaf8c}">
