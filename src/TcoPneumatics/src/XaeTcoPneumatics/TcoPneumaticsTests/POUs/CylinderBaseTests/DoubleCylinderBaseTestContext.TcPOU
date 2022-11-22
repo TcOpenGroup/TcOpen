@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
-  <POU Name="CylinderBaseTestContext" Id="{e41369b8-4146-091a-3fca-553a7f936fbe}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CylinderBaseTestContext EXTENDS TcoCore._internals_TcoContext
+  <POU Name="DoubleCylinderBaseTestContext" Id="{d872de45-e829-05c4-2cef-dfad02f8f7a2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DoubleCylinderBaseTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut			: CylinderBaseImplemented(THIS^);
-	_sutInvalid		: CylinderBaseImplemented(THIS^);
+	_sut			: DoubleCylinderBaseImplemented(THIS^);
+	_sutInvalid		: DoubleCylinderBaseImplemented(THIS^);
 	_atHomeSignal	: BOOL;	
 	_atWorkSignal	: BOOL;	
 	_toHomeSignal	: BOOL;	
@@ -18,13 +18,15 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{db7fc157-6cb2-07ea-2d1f-c582b98c42b0}">
+    <Method Name="Main" Id="{6480da05-d898-0bdf-317f-5e0e346c2889}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sut(inoAtHomePos := _atHomeSignal,
-    inoAtWorkPos := _atWorkSignal,
+        <ST><![CDATA[_sut(inoAtHomePos1 := _atHomeSignal,
+	inoAtHomePos2 := _atHomeSignal,
+    inoAtWorkPos1 := _atWorkSignal,
+    inoAtWorkPos2 := _atWorkSignal,
     inoToHomePos := _toHomeSignal,
     inoToWorkPos := _toWorkSignal);
 	

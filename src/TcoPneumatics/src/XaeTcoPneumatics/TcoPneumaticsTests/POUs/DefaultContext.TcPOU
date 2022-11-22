@@ -7,6 +7,10 @@ VAR
 	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK a#>"}
 	{attribute addProperty _stopDefaultName "<#STOP a#>"}
     _wpfCyclinder : TcoPneumatics.TcoCylinder(THIS^);
+	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME a#>"}
+	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK a#>"}
+	{attribute addProperty _stopDefaultName "<#STOPDOUBLE#>"}
+    _wpfDoubleCyclinder : TcoPneumatics.TcoDoubleCylinder(THIS^);
 	{attribute addProperty NameMoveHomeTask "<#In task#>"}
     _wpfCyclinder_1 : TcoPneumatics.TcoCylinder(THIS^);
 	{attribute addProperty NameMoveHomeTask "<#In task#>"}
@@ -38,6 +42,8 @@ _wpfCyclinder(inoAtHomePos := IO.A1[0],
 	inoToHomePos := IO.A2[0],
 	inoToWorkPos := IO.A2[1]);
 	
+
+	
 _wpfCyclinder.AbortMoveHome(disableSignalHome);
 _wpfCyclinder.AbortMoveWork(disableSignalWork);
 
@@ -45,6 +51,22 @@ _wpfCyclinder.SuspendMoveHome(suspendSignalHome);
 _wpfCyclinder.SuspendMoveWork(suspendSignalWork);
 
 _wpfCyclinder.Refill(T#200MS);
+
+_wpfDoubleCyclinder.Service();
+_wpfDoubleCyclinder(inoAtHomePos1 := IO.A1[0],
+	inoAtHomePos2 := IO.A1[1],
+	inoAtWorkPos1 := IO.A1[2],
+	inoAtWorkPos2 := IO.A1[3],
+	inoToHomePos := IO.A2[0],
+	inoToWorkPos := IO.A2[1]);
+	
+_wpfDoubleCyclinder.AbortMoveHome(disableSignalHome);
+_wpfDoubleCyclinder.AbortMoveWork(disableSignalWork);
+
+_wpfDoubleCyclinder.SuspendMoveHome(suspendSignalHome);
+_wpfDoubleCyclinder.SuspendMoveWork(suspendSignalWork);
+
+_wpfDoubleCyclinder.Refill(T#200MS);
 ]]></ST>
       </Implementation>
     </Method>
