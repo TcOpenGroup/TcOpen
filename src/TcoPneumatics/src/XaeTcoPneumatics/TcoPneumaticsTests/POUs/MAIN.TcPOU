@@ -1,17 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="MAIN" Id="{6d949533-a6b9-47e3-b85f-8c626bcf836e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	_defaultContext : DefaultContext;
 	_cylinderBaseTests : CylinderBaseTestContext;
+	_doubleCylinderBaseTests : DoubleCylinderBaseTestContext;
+		
+
 	_cylinderTests : CylinderTestContext;
+	_doubleCylinderTests : DoubleCylinderTestContext;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_defaultContext.Run();
 _cylinderTests.ProbeRun();
-_cylinderBaseTests.ProbeRun();]]></ST>
+_doubleCylinderTests.ProbeRun();
+
+_cylinderBaseTests.ProbeRun();
+_doublecylinderBaseTests.ProbeRun();
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

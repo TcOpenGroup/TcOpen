@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
-  <POU Name="CylinderTestContext" Id="{4f0e4024-4378-058d-21b2-dd1a5c077cb8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK CylinderTestContext EXTENDS TcoCore._internals_TcoContext
+  <POU Name="DoubleCylinderTestContext" Id="{67892a9f-aa9e-0430-052a-79d39f05e1de}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DoubleCylinderTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
 	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME SWEET HOME#>"}
 	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK HARD WORK#>"}
 	{attribute addProperty _stopDefaultName "<#STOP AND THINK#>"}
-	_sut			: TcoPneumatics.TcoCylinder(THIS^);
-	_sutInvalid 	: TcoPneumatics.TcoCylinder(THIS^);
+	_sut			: TcoPneumatics.TcoDoubleCylinder(THIS^);
+	_sutInvalid 	: TcoPneumatics.TcoDoubleCylinder(THIS^);
+
 	_atHomeSignal	: BOOL;
 	_moveHomeSignal : BOOL;
 	_atWorkSignal	: BOOL;
@@ -26,16 +27,18 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Main" Id="{d7464bf3-4a73-0bd9-1c20-65d4ea0101c4}">
+    <Method Name="Main" Id="{e4571505-b9d7-0720-3e12-d2591d986d27}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[
-_sut(inoAtHomePos := _atHomeSignal,
-    inoAtWorkPos := _atWorkSignal,
+	
+_sut(inoAtHomePos1 := _atHomeSignal,
+	inoAtHomePos2 := _atHomeSignal,
+    inoAtWorkPos1 := _atWorkSignal,
+    inoAtWorkPos2 := _atWorkSignal,
     inoToHomePos := _moveHomeSignal,
     inoToWorkPos := _moveWorkSignal);
-
 
 CASE _testId OF
 	eCyclinderTests.Invalid:

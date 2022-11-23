@@ -34,6 +34,20 @@
                 </GroupBox>
             </UniformGrid>
         </TabItem>
+        <TabItem Header="Double -Standard">
+            <UniformGrid Columns="1" Rows="2">
+                <GroupBox Header="Control">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}" PresentationType="Service" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Display">
+                    <Grid IsSharedSizeScope="true">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}" PresentationType="Display" />
+                    </Grid>
+                </GroupBox>
+            </UniformGrid>
+        </TabItem>
         <TabItem Header="Slim">
             <UniformGrid Columns="1" Rows="2">
                 <GroupBox Header="Control">

@@ -38,6 +38,9 @@
     <Compile Include="POUs\Cylinders\Base\TcoCylinderBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Cylinders\Base\TcoDoubleCylinderBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Cylinders\TcoCylinder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -51,6 +54,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Cylinders\ITcoCylinder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Cylinders\TcoDoubleCylinder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Version\Global_Version.TcGVL">

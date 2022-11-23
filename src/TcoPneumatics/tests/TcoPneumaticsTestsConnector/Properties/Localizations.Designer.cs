@@ -187,6 +187,15 @@ namespace TcoPneumaticsTestsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to STOPDOUBLE.
+        /// </summary>
+        public static string ___STOPDOUBLE__ {
+            get {
+                return ResourceManager.GetString("___STOPDOUBLE__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Work.
         /// </summary>
         public static string ___Work__ {

@@ -98,6 +98,24 @@ namespace TcoPneumaticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home sensor signal 1.
+        /// </summary>
+        public static string ___Home_sensor_signal_1__ {
+            get {
+                return ResourceManager.GetString("___Home_sensor_signal_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home sensor signal 2.
+        /// </summary>
+        public static string ___Home_sensor_signal_2__ {
+            get {
+                return ResourceManager.GetString("___Home_sensor_signal_2__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MOVE HOME.
         /// </summary>
         public static string ___MOVE_HOME__ {
@@ -161,6 +179,15 @@ namespace TcoPneumaticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Movement suspended due to.
+        /// </summary>
+        public static string ___Movement_suspended_due_to__ {
+            get {
+                return ResourceManager.GetString("___Movement_suspended_due_to__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to STOP.
         /// </summary>
         public static string ___STOP__ {
@@ -193,6 +220,24 @@ namespace TcoPneumaticsConnector.Properties {
         public static string ___Work_sensor_signal__ {
             get {
                 return ResourceManager.GetString("___Work_sensor_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work sensor signal 1.
+        /// </summary>
+        public static string ___Work_sensor_signal_1__ {
+            get {
+                return ResourceManager.GetString("___Work_sensor_signal_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work sensor signal 2.
+        /// </summary>
+        public static string ___Work_sensor_signal_2__ {
+            get {
+                return ResourceManager.GetString("___Work_sensor_signal_2__", resourceCulture);
             }
         }
     }
