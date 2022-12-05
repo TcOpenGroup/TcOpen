@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tcoCore="clr-namespace:TcoCore"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+               xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
              xmlns:local="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.TcoComponent" 
              xmlns:tcocorelocal="clr-namespace:Tco.Wpf"
              xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector" xmlns:vortex="http://vortex.mts/xaml"
@@ -11,34 +14,72 @@
     <d:UserControl.DataContext>
         <tcocore:TcoComponent></tcocore:TcoComponent>
     </d:UserControl.DataContext>
-    <local:TcoComponentView>
-        <local:TcoComponentView.ComponentDetails>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
+
+    </UserControl.Resources>
+
+
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
+                <Style.Triggers>
+                    <Trigger Property="componentModel:DesignerProperties.IsInDesignMode" Value="True">
+                        <Setter Property="IsExpanded" Value="True" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Resources>
+        <Expander
+                Margin="5,0,5,0"
+                Background="Transparent"
+                materialDesign:ExpanderAssist.HorizontalHeaderPadding="0"
+                materialDesign:ExpanderAssist.VerticalHeaderPadding="0"  >
+
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="200"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                            Grid.Column="0"
+                            Margin="5,0,5,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                            Text="{Binding . , Converter={tcoCore:NameOrSymbolConverter}}"
+                            TextAlignment="Left"
+                            TextWrapping="WrapWithOverflow" />
+                
+                    <tcoCore:HealthIndicatorView  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding MessageHandler}" />
+                </Grid>
+            </Expander.Header>
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition MaxHeight="260"/>
-                </Grid.RowDefinitions>
-                <ItemsControl ItemsSource="{Binding Tasks}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid></UniformGrid>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <vortex:RenderableContentControl DataContext="{Binding .}" Margin="5"></vortex:RenderableContentControl>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Expander Grid.Row="1" Header="Details">
+                                <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition MaxHeight="250"/>
+                    </Grid.RowDefinitions>
+                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Right" ItemsSource="{Binding Tasks}">
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <vortex:RenderableContentControl DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Expander Grid.Row="1" Header="Details">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <tcocorelocal:DynamicTreeView DataContext="{Binding .}" MaxHeight="250"></tcocorelocal:DynamicTreeView>
+                        <tcocorelocal:DynamicTreeView DataContext="{Binding}" MaxHeight="250"></tcocorelocal:DynamicTreeView>
                     </Grid>
                 </Expander>
             </Grid>
-        </local:TcoComponentView.ComponentDetails>
-    </local:TcoComponentView>
+        </Expander>
+    </StackPanel>
 </UserControl>
