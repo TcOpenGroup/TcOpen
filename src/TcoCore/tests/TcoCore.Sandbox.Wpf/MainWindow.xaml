@@ -9,13 +9,18 @@
     xmlns:vortex="http://vortex.mts/xaml"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="850"
     DataContext="{x:Static local:App.PlcTcoCoreExamples}"
     mc:Ignorable="d">
     <Grid>
         <TabControl>
             <TabItem Header="Sequencer">
+                <ScrollViewer>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="163*"/>
+                        <ColumnDefinition Width="623*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -28,9 +33,9 @@
                     </Grid.RowDefinitions>
                     <materialDesign:Card
                         Grid.Row="0"
-                        Margin="5"
+                        Margin="5,5,4.666,5"
                         Padding="3"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
                         <GroupBox Header="Current step info">
                             <Grid Grid.IsSharedSizeScope="true">
                                 <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._sequence._currentStep}" PresentationType="DisplaySlim" />
@@ -39,9 +44,9 @@
                     </materialDesign:Card>
                     <materialDesign:Card
                         Grid.Row="1"
-                        Margin="5"
+                        Margin="5,5,4.666,70.667"
                         Padding="3"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
                         <GroupBox Header="Sequencer step-by step controller">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
                                 <StackPanel>
@@ -80,9 +85,9 @@
                     </materialDesign:Card>
                     <materialDesign:Card
                         Grid.Row="2"
-                        Margin="5"
+                        Margin="5,108,4.666,134"
                         Padding="3"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <GroupBox Header="Sequencer counters">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
                                 <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._onStateChangeCount}">
@@ -102,9 +107,9 @@
                     </materialDesign:Card>
                     <materialDesign:Card
                         Grid.Row="3"
-                        Margin="5"
+              
                         Padding="2"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
                         <GroupBox Grid.Row="2" Header="Simulation delay">
                             <Slider
                                 Maximum="5000"
@@ -119,8 +124,8 @@
                     <CheckBox
                         Grid.Row="4"
                         Content="Simulate failed to load"
-                        IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}" />
-                    <materialDesign:Card Grid.Row="5">
+                        IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}" Grid.ColumnSpan="2" Margin="0,89.333,-0.334,50" />
+                    <materialDesign:Card Grid.Row="2" Grid.ColumnSpan="2" Margin="0,105.333,-0.334,27">
                         <StackPanel>
                             <Expander HorizontalAlignment="Stretch" Header="Messages">
                                 <StackPanel
@@ -133,10 +138,16 @@
                             </Expander>
                         </StackPanel>
                     </materialDesign:Card>
-                    <materialDesign:Card Grid.Row="6">
+            
+                            <materialDesign:Card Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="5">
                         <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Service" />
                     </materialDesign:Card>
+                    <!--<materialDesign:Card Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="5">
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Spot" />
+                    </materialDesign:Card>-->
+
                 </Grid>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="ST002">
                 <StackPanel>
@@ -162,6 +173,7 @@
             <TabItem Header="Dialogs">
                 <StackPanel>
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}" PresentationType="ControlSlim"/>
+
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }" PresentationType="ControlSlim"/>
                 </StackPanel>
             </TabItem>

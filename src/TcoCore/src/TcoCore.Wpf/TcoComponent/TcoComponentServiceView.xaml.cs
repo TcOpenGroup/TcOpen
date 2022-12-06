@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vortex.Presentation.Wpf;
 
 namespace TcoCore
 {
@@ -25,4 +26,6 @@ namespace TcoCore
             InitializeComponent();
         }
     }
+
+   
 }
