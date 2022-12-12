@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
     {attribute 'hide'}
     _done                     : BOOL;				
+    {attribute 'hide'}
+    _done_PV                  : BOOL;				
     _overallResult            : TcoComprehensiveResult;
     _currentRunResult         : TcoComprehensiveResult;
     _inspections              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
@@ -16,7 +18,13 @@ END_VAR
 VAR CONSTANT
     LAST_INSPECTION_INDEX : INT := 15;
 	MAX_NORMALIZED_RETRIES : UINT := 65535;
-END_VAR]]></Declaration>
+END_VAR
+
+VAR 
+	count : ULINT;
+END_VAR
+
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -148,6 +156,7 @@ END_IF;
 
 Inspect := THIS^;
 
+
 IF(Inspector.OverInspected) THEN
 	THIS^.OverInspected := TRUE;
 END_IF;
@@ -156,6 +165,7 @@ IF (Inspector.Done) THEN
     Inspector.UpdateComprehensiveResult(_currentRunResult);							
 ELSE
 	_done := FALSE;	
+	_done_PV := FALSE;	
 END_IF
 
 
@@ -324,14 +334,50 @@ CASE _currentRunResult.Result OF
 		;
 	eOverallResult.Failed:
 		 
-		_refOverallResult.Result   := eOverallResult.Failed;
-		UpdateDescriptions(inoResult);		       			   
+		_refOverallResult.Result		:= eOverallResult.Failed;
+		_refOverallResult.Failures		:= _currentRunResult.Failures;
+		_refOverallResult.ErrorCodes	:= _currentRunResult.ErrorCodes;
 END_CASE
 
 
 IF(_done) THEN
 	_overallResult := _refOverallResult;
 END_IF;	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateDescriptions" Id="{7760290a-e8d0-0302-18a7-ce0b9abf0e99}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Updates failure description. Adding `FailureDescription` do the overall result structure.
+		</summary>	
+	</docu>	
+~*)
+METHOD PROTECTED UpdateDescriptions
+VAR_IN_OUT
+	inoResult : TcoComprehensiveResult;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _done THEN
+	_done_PV := FALSE;	
+END_IF
+IF(_done AND NOT _done_PV) THEN
+	inoResult.Failures := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
+				.Append(inoResult.Failures)				
+				.Append(CommonData.FailureDescription)
+				.Append(';')
+				.ToString();
+	
+	inoResult.ErrorCodes := THIS^.Context.Environment.Messaging.StringBuilder.Clear()
+				.Append(inoResult.ErrorCodes)				
+				.Append(CommonData.ErrorCode)
+				.Append(';')
+				.ToString();			
+	_done_PV := TRUE;	
+END_IF;			
+
 ]]></ST>
       </Implementation>
     </Method>

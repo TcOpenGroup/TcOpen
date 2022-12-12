@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="ExampleContext" Id="{1aa2a6c1-d36a-0374-1754-fb6150365769}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleContext EXTENDS TcoCore.TcoContext
 VAR
@@ -82,33 +82,43 @@ IF (seq.Step(inStepID := 25,
     inStepDescription := 'SETUP DATA')) THEN
     //--------------------------------------------------------    
 	 	Data := EmptyData;
-		
+	
 		Data.DmcInspector.Data.RequiredStatus := 'A#*';
 		Data.DmcInspector.Data.StarNotationEnabled := TRUE;
-		Data.DmcInspector.Data.RequiredStatus := 'A#*';
 		Data.DmcInspector.Data.PassTime := T#1500MS;    
 		Data.DmcInspector.Data.FailTime := T#2S;
+		Data.DmcInspector.Data.FailureDescription := 'Data inspection failed';
+		Data.DmcInspector.Data.ErrorCode := '1';
+		
 		
 		Data.BoltPresenceInspector.Data.RequiredStatus := TRUE;
 		Data.BoltPresenceInspector.Data.PassTime := T#1500MS;    
 		Data.BoltPresenceInspector.Data.FailTime := T#2S;	
 		Data.BoltPresenceInspector.Data.NumberOfAllowedRetries := 2;
+		Data.BoltPresenceInspector.Data.FailureDescription := 'Bolt inspection failed';
+		Data.BoltPresenceInspector.Data.ErrorCode := '2';
 
 		Data.Dimensions.DimX_Inspector.Data.PassTime := T#1500MS;    
 		Data.Dimensions.DimX_Inspector.Data.FailTime := T#2S;
 		Data.Dimensions.DimX_Inspector.Data.RequiredMin := 9.75;
 		Data.Dimensions.DimX_Inspector.Data.RequiredMax := 10.25;
 		Data.Dimensions.DimX_Inspector.Data.NumberOfAllowedRetries := 3;
+		Data.Dimensions.DimX_Inspector.Data.FailureDescription := 'Dimx inspection failed';
+		Data.Dimensions.DimX_Inspector.Data.ErrorCode := '3';
 		
 		Data.Dimensions.DimY_Inspector.Data.PassTime := T#1500MS;    
 		Data.Dimensions.DimY_Inspector.Data.FailTime := T#2S;
 		Data.Dimensions.DimY_Inspector.Data.RequiredMin := 9.75;
 		Data.Dimensions.DimY_Inspector.Data.RequiredMax := 10.25;
+		Data.Dimensions.DimY_Inspector.Data.FailureDescription := 'Dimy inspection failed';
+		Data.Dimensions.DimY_Inspector.Data.ErrorCode := '4';
 
 		Data.Dimensions.DimZ_Inspector.Data.PassTime := T#1500MS;    
 		Data.Dimensions.DimZ_Inspector.Data.FailTime := T#2S;
 		Data.Dimensions.DimZ_Inspector.Data.RequiredMin := 9.75;
-		Data.Dimensions.DimZ_Inspector.Data.RequiredMax := 10.25;		
+		Data.Dimensions.DimZ_Inspector.Data.RequiredMax := 10.25;
+		Data.Dimensions.DimZ_Inspector.Data.FailureDescription := 'Dimz inspection failed';
+		Data.Dimensions.DimZ_Inspector.Data.ErrorCode := '5';		
 		
 		Data.DmcInspector.Data.NumberOfAllowedRetries := 5;    
 		seq.CompleteStep();
@@ -145,7 +155,7 @@ IF (seq.Step(inStepID := 200,
 		.Inspect(Components.BoltPresenceSensor)
 		.UpdateComprehensiveResult(Data.OverallResult)
         .OnFail()
-        .Dialog(50);
+        .Dialog(300);
     //--------------------------------------------------------			
 END_IF;
 //<TcoDigitalInspector>	
@@ -167,7 +177,7 @@ IF (seq.Step(inStepID := 300,
         .Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor))	
 		.UpdateComprehensiveResult(Data.OverallResult)		
 		.OnFail()
-		.Dialog(300);				        		
+		.Dialog(300);			
     //--------------------------------------------------------			
 END_IF;
 
