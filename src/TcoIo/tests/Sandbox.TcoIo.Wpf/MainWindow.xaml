@@ -106,6 +106,17 @@
                 <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_2}" PresentationType="Service"/>
             </Grid>
         </TabItem>
+
+        <TabItem Header="Ecat Compoennt" >
+            <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding EcatComponent}" PresentationType="Control-Base"/>
+                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding EcatComponent}" PresentationType="Service"/>
+            </Grid>
+        </TabItem>
     </TabControl>
 </Window>
 
