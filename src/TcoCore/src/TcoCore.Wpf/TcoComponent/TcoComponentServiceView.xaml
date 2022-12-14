@@ -59,9 +59,9 @@
                 </Grid>
             </Expander.Header>
             <Grid>
-                                <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition MaxHeight="250"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Right" ItemsSource="{Binding Tasks}">
 
@@ -72,12 +72,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <Expander Grid.Row="1" Header="Details">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <tcocorelocal:DynamicTreeView DataContext="{Binding}" MaxHeight="250"></tcocorelocal:DynamicTreeView>
-                    </Grid>
+                    <ScrollViewer MaxHeight="300">
+                        <tcocorelocal:DynamicTreeView DataContext="{Binding}" ></tcocorelocal:DynamicTreeView>
+                    </ScrollViewer>
                 </Expander>
             </Grid>
         </Expander>

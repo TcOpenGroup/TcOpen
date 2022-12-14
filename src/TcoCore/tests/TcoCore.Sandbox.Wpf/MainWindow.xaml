@@ -159,7 +159,7 @@
                 <vortex:SwiftRecorderView x:Name="swiftRecorder"></vortex:SwiftRecorderView>
             </TabItem>
             <TabItem Header="Object tree viewer">
-                <ScrollViewer>
+                <ScrollViewer MaxHeight="500">
                     <UniformGrid>
                         <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN, Mode=OneWay}" />
 
