@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="tcc" Id="{e080c9bb-bd0c-0413-089e-5010da0ed8e6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK tcc EXTENDS TcoCore.TcoContext
 VAR
@@ -7,6 +7,8 @@ VAR
 	Device_1 : TcoIo.TcoEthercatMasterDevice(THIS^);
 	{attribute addProperty Name "Device 2 (EtherCAT)"}
 	Device_2 : TcoIo.TcoEthercatMasterDevice(THIS^);
+	{attribute addProperty Name "EtherCAT component"}
+	EcatComponent : TestEcatComponent(THIS^);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -36,6 +38,7 @@ END_VAR
 ~*)
 METHOD PROTECTED  Main
 VAR
+	ams: AMSADDR;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
@@ -50,6 +53,7 @@ Device_2(	SyncUnits		:= ADR(		GVL_iXlinker.Device_2_EtherCAT.SyncUnits),
 			Inputs			:=			GVL_iXlinker.Device_2_EtherCAT.Inputs,
 			InfoData		:=			GVL_iXlinker.Device_2_EtherCAT.InfoData);	
 			
+EcatComponent(AdsAddr:=ams);
 
 ]]></ST>
       </Implementation>
