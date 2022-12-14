@@ -5,6 +5,7 @@ using Tc.Prober.Runners;
 using TcoInspectors;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace TcoInspectorsUnitTests
 {
@@ -256,6 +257,72 @@ namespace TcoInspectorsUnitTests
         }
 
         [Test]
+        public void inspect_failed_description_group_failed()
+        {
+            TimeSpan passTime = new TimeSpan(0, 0, 0, 0, 500);
+            TimeSpan failTime = new TimeSpan(0, 0, 0, 0, 1000);
+            string fDescII_0 = "Failure Description II 0";
+            string fDescII_1 = "Failure Description II 1";
+            string fDescAI_0 = "Failure Description AI 0";
+            string fDescAI_1 = "Failure Description AI 1";
+            string fDescDI_0 = "Failure Description DI 0";
+            string fDescDI_1 = "Failure Description DI 1";
+            string errCodeII_0 = "1010";
+            string errCodeII_1 = "1020";
+            string errCodeAI_0 = "2010";
+            string errCodeAI_1 = "2020";
+            string errCodeDI_0 = "3010";
+            string errCodeDI_1 = "3020";
+            this.set_to_fail();
+            this.container._diis[0].InspectorData.FailureDescription.Synchron = fDescII_0;
+            this.container._diis[0].InspectorData.ErrorCode.Synchron = errCodeII_0;
+            this.container._diis[0].InspectorData.PassTime.Synchron = passTime;
+            this.container._diis[0].InspectorData.FailTime.Synchron = failTime;
+
+            this.container._diis[1].InspectorData.FailureDescription.Synchron = fDescII_1;
+            this.container._diis[1].InspectorData.ErrorCode.Synchron = errCodeII_1;
+            this.container._diis[1].InspectorData.PassTime.Synchron = passTime;
+            this.container._diis[1].InspectorData.FailTime.Synchron = failTime;
+
+            this.container._dais[0].InspectorData.FailureDescription.Synchron = fDescAI_0;
+            this.container._dais[0].InspectorData.ErrorCode.Synchron = errCodeAI_0;
+            this.container._dais[0].InspectorData.PassTime.Synchron = passTime;
+            this.container._dais[0].InspectorData.FailTime.Synchron = failTime;
+
+            this.container._dais[1].InspectorData.FailureDescription.Synchron = fDescAI_1;
+            this.container._dais[1].InspectorData.ErrorCode.Synchron = errCodeAI_1;
+            this.container._dais[1].InspectorData.PassTime.Synchron = passTime;
+            this.container._dais[1].InspectorData.FailTime.Synchron = failTime;
+
+            this.container._ddis[0].InspectorData.FailureDescription.Synchron = fDescDI_0;
+            this.container._ddis[0].InspectorData.ErrorCode.Synchron = errCodeDI_0;
+            this.container._ddis[0].InspectorData.PassTime.Synchron = passTime;
+            this.container._ddis[0].InspectorData.FailTime.Synchron = failTime;
+
+            this.container._ddis[1].InspectorData.FailureDescription.Synchron = fDescDI_1;
+            this.container._ddis[1].InspectorData.ErrorCode.Synchron = errCodeDI_1;
+            this.container._ddis[1].InspectorData.PassTime.Synchron = passTime;
+            this.container._ddis[1].InspectorData.FailTime.Synchron = failTime;
+
+            InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.Passed;
+
+            var initialState = InspectorContainer._coordinator._state.Synchron;
+            var expectedState = (short)(initialState - 10);
+            InspectorContainer._retryState.Synchron = expectedState;
+
+            InspectorContainer.ExecuteProbeRun((int)eInspectionGroupTests.UpdateComprehensiveResultDescriptions, 
+                () => {
+                    Task.Delay(failTime).Wait();
+                    InspectorContainer._sut._tcoInspectorDialogue._dialogueTerminate.Synchron = true;
+                    return true;
+            });
+
+            Assert.AreEqual(eOverallResult.Failed, InspectorContainer._sut.ResultAsEnum);
+            Assert.AreEqual(fDescII_1 + ";" + fDescAI_1 + ";" + fDescDI_1 + ";", InspectorContainer._sut._overallResult.Failures.Synchron);
+            Assert.AreEqual(errCodeII_1 + ";" + errCodeAI_1 + ";" + errCodeDI_1 + ";", InspectorContainer._sut._overallResult.ErrorCodes.Synchron);
+        }
+
+        [Test]
         public void should_inspect_with_retries_normalization()
         {
             this.set_to_fail();
@@ -268,7 +335,6 @@ namespace TcoInspectorsUnitTests
             container._dais[1]._data.NumberOfAllowedRetries.Synchron = 5;            
             container._ddis[0]._data.NumberOfAllowedRetries.Synchron = 4;            
             container._ddis[1]._data.NumberOfAllowedRetries.Synchron = 8;
-            
 
             InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.Passed;
 
