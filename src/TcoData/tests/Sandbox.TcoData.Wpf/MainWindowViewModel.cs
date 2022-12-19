@@ -9,9 +9,15 @@ namespace Sandbox.TcoData.Wpf
     {
         public MainWindowViewModel()
         {
-           
 
 
+
+        }
+
+        public void ExternalInvokeSearchTest()
+        {
+            Plc.MAIN.sandbox.DataManager.DataExchangeOperations.FilterByID = "TEST";
+            Plc.MAIN.sandbox.DataManager.DataExchangeOperations.InvokeSearch();
         }
         
         public TcoDataTestsTwinController Plc { get; } = TcoDataTests.Entry.TcoDataTests;

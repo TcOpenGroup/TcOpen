@@ -19,7 +19,7 @@ using TcOpen.Inxton.Input;
 
 namespace TcoData
 {
-    public class DataViewModel<T> : Vortex.Presentation.Wpf.BindableBase, FunctionAvailability where T : IBrowsableDataObject, new()
+    public class DataViewModel<T> : Vortex.Presentation.Wpf.BindableBase, IDataExchangeOperations, FunctionAvailability where T : IBrowsableDataObject, new()
     {
         string filterByID;
 
@@ -39,6 +39,7 @@ namespace TcoData
         public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
         {
             this.DataExchange = dataExchange;
+            this.DataExchange.DataExchangeOperations = this;
             DataBrowser = CreateBrowsable(repository);
 
             StartCreateNewCommand = new RelayCommand(p => StartCreatingNew(), _ => this.Mode == ViewMode.Display, () => LogCommand(nameof(StartCreateNewCommand)));
@@ -352,6 +353,19 @@ namespace TcoData
                 SelectedRecord = plain;
                 this.Mode = ViewMode.Edit;
             }, "", () => MessageBox.Show($"{strings.WouldYouLikeToGetFromPLC}", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+        }
+
+        public void InvokeSearch() => ExternalSearch();
+        private void ExternalSearch()
+        {
+            Filter();
+
+            if (DataBrowser.GetRecords(p => p._EntityId == FilterByID).Any() && SearchMode== eSearchMode.Exact)
+            {
+                var plain = DataBrowser.FindById(FilterByID);
+                ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
+                SelectedRecord = plain;
+            }
         }
 
         public ICommand ExportCommand { get; }
