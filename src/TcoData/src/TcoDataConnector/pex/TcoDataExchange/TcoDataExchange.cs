@@ -8,6 +8,8 @@ namespace TcoData
 
     public partial class TcoDataExchange
     {
+        /// <summary>An interaface which grants access to certain operations in DataExchange viewmodel, like searching by id, invoking search or filling the searchbox</summary>
+        public IDataExchangeOperations DataExchangeOperations { get; set; }
         private dynamic _onliner;
 
         protected dynamic Onliner
@@ -199,5 +201,7 @@ namespace TcoData
                 return _onlinerVortex;
             }
         }
+
+
     }
 }

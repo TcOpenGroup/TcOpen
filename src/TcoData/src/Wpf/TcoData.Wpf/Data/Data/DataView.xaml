@@ -26,7 +26,7 @@
                 <Grid Name="ResizableGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="auto" MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight, Converter={wpf:PercentageConverter}, ConverterParameter=0.5}" />
+                        <RowDefinition  MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight, Converter={wpf:PercentageConverter}, ConverterParameter=0.5}" />
 
                         <RowDefinition x:Name="GridSplitterRow" Height="Auto" />
                         <RowDefinition />
@@ -38,82 +38,90 @@
                         Margin="0,5,0,5"
                         Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
                         HorizontalAlignment="Stretch" />
-                    <Grid Grid.Row="0">
-                        <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ItemsControl Margin="5" HorizontalContentAlignment="Center" Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
 
-                            <StackPanel
-                                    Margin="20,0,0,0"
+                            <WrapPanel
+                                    Margin="10,0"
                                     x:Name="dropdown"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
 
                                 <TextBlock
-                                        Margin="10,0,10,0"
                                         VerticalAlignment="Center"
                                         Text="{x:Static p:strings.PerPage}" />
                                 <ComboBox
-                                         Margin="10,0,10,0"
+                                         Margin="10,0"
                                         MinWidth="50"
                                         x:Name="PerPageFilterComboBox"
                                         VerticalAlignment="Center"
                                         Background="{Binding ElementName=DataGrid, Path=Background}"
                                         ItemsSource="{Binding PerPageFilter}"
                                         SelectedItem="{Binding Limit, Mode=TwoWay}" />
-                            </StackPanel>
-                            <UniformGrid Grid.Column="1" Columns="3" HorizontalAlignment="Center" Margin="0,5" VerticalAlignment="Center">
+                            </WrapPanel>
 
+                            <WrapPanel
+                                    Margin="10,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
                                 <Button Command="{Binding PageDownCommand}" Content="&lt;&lt;"  Margin=" 5,0"/>
                                 <Button Command="{Binding FindByCriteriaCommand}" Content="{x:Static p:strings.Documents}" Margin=" 5,0" />
                                 <Button Command="{Binding PageUpCommand}" Content="&gt;&gt;"  Margin=" 5,0"/>
-                            </UniformGrid>
+                            </WrapPanel>
 
-                            <StackPanel
-                                Grid.Column="2"
-                                Height="Auto"
-                                Margin="0,0,0,0"
+
+                            <WrapPanel
+                                Margin="10,0"
+                                VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-                                
-                                <StackPanel
-                                    Margin="0,0,10,0"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
-                                    <StackPanel.Resources>
-                                        <ObjectDataProvider x:Key="searchModeFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
-                                            <ObjectDataProvider.MethodParameters>
-                                                <x:Type TypeName="data:eSearchMode"/>
-                                            </ObjectDataProvider.MethodParameters>
-                                        </ObjectDataProvider>
-                                    </StackPanel.Resources>
-                                    <TextBlock Style="{DynamicResource MaterialDesignCaptionTextBlock}" Margin="10,0,0,0" VerticalAlignment="Center" Text="{x:Static p:strings.Criteria}"></TextBlock>
-                                    <ComboBox              
-                                         Margin="10,0,10,0"
-                                        Width="100"
-                                        Background="{Binding ElementName=DataGrid, Path=Background}"
-                                        ItemsSource="{Binding Source={StaticResource searchModeFromEnum}}"
-                                        SelectedItem="{Binding SearchMode, Mode=TwoWay}"/>
-                                    <TextBox
-                                        x:Name="FilterField"                                        
-                                        Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
-                                        MinWidth="200"
-                                        Margin="0"
-                                        VerticalContentAlignment="Center"                                        
-                                        BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-                                        Text="{Binding FilterByID}" />
-                                    <Button
-                                        Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
-                                        Margin="2,0"
-                                        Command="{Binding FindByCriteriaCommand}"
-                                        Content="🔍"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
+                                <WrapPanel.Resources>
+                                    <ObjectDataProvider x:Key="searchModeFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                                        <ObjectDataProvider.MethodParameters>
+                                            <x:Type TypeName="data:eSearchMode"/>
+                                        </ObjectDataProvider.MethodParameters>
+                                    </ObjectDataProvider>
+
+                                </WrapPanel.Resources>
+                                <TextBlock Style="{DynamicResource MaterialDesignCaptionTextBlock}" Margin="10,0,0,0" VerticalAlignment="Center" Text="{x:Static p:strings.Criteria}"></TextBlock>
+                                <ComboBox 
+                                    MinWidth="100"
+                                    Margin="10,0"
+                                    Background="{Binding ElementName=DataGrid, Path=Background}"
+                                    ItemsSource="{Binding Source={StaticResource searchModeFromEnum}}"
+                                    SelectedItem="{Binding SearchMode, Mode=TwoWay}"/>
+                              
+                            </WrapPanel>
+
+                            <WrapPanel
+                                Margin="10,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+
+                                <TextBox
+                                    x:Name="FilterField"                                        
+                                    Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
+                                    MinWidth="200"
+                                    Margin="0"
+                                    VerticalContentAlignment="Center"                                        
+                                    BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}"
+                                    Text="{Binding FilterByID}" />
+                                <Button
+                                    Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
+                                    Margin="2,0"
+                                    Command="{Binding FindByCriteriaCommand}"
+                                    Content="🔍"/>
+                            </WrapPanel>
+
+                        </ItemsControl>
                     </Grid>
                     <Grid Grid.Row="1" Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
                         <Grid.ColumnDefinitions>

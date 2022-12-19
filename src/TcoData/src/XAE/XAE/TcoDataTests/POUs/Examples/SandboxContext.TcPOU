@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="SandboxContext" Id="{ed8218eb-5f5f-0973-2882-9b75bfb2ad4d}" SpecialFunc="None">
     <Declaration><![CDATA[
 //<Declaration>
@@ -12,6 +12,8 @@ VAR
 	_state : eExamplesStates;
 	recordId_1 : STRING;
 	recordId_2 : STRING;
+	_invokeSearch : BOOL;
+	_filteringById :STRING;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

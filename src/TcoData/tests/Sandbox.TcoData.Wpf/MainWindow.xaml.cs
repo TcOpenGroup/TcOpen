@@ -24,5 +24,11 @@ namespace Sandbox.TcoData.Wpf
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dataContext = this.DataContext as MainWindowViewModel;
+            dataContext.ExternalInvokeSearchTest();
+        }
     }
 }
