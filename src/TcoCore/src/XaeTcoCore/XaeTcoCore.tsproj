@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.25">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
@@ -11,11 +11,8 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="172.20.10.110.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{39D84538-69DF-46F4-9E2F-272A81B72C66}" TargetNetId="192.168.4.1.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
-			<Settings MaxCpus="4" NonWinCpus="1">
-				<Cpu CpuId="3"/>
-			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -30,7 +27,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{3F433F3D-9648-4FAC-AAFD-9FA134BFD44D}" Name="TcoCore" PrjFilePath="TcoCore\TcoCore.plcproj" TmcFilePath="TcoCore\TcoCore.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCore\TcoCore.tmc" TmcHash="{9B5BEADF-1617-E825-0701-B8736BA309A0}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCore\TcoCore.tmc">
 					<Name>TcoCore Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -50,7 +47,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{6D5BD0DF-0C04-46C3-A05C-0FC422597B46}" Name="TcoCoreTests" PrjFilePath="TcoCoreTests\TcoCoreTests.plcproj" TmcFilePath="TcoCoreTests\TcoCoreTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreTests\TcoCoreTests.tmc" TmcHash="{E0FEEFC0-0AA3-69AC-DCAE-B70BEFA4B82B}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreTests\TcoCoreTests.tmc">
 					<Name>TcoCoreTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -70,7 +67,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{2266F99A-9250-4E68-A8BB-FC036A975355}" Name="TcoCoreExamples" PrjFilePath="TcoCoreExamples\TcoCoreExamples.plcproj" TmcFilePath="TcoCoreExamples\TcoCoreExamples.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreExamples\TcoCoreExamples.tmc" TmcHash="{76AAC43C-34F6-001C-4401-C3092F0081C7}">
+				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCoreExamples\TcoCoreExamples.tmc">
 					<Name>TcoCoreExamples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

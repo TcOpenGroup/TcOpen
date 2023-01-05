@@ -44,7 +44,7 @@
                     </materialDesign:Card>
                     <materialDesign:Card
                         Grid.Row="1"
-                        Margin="5,5,4.666,70.667"
+                        Margin="5"
                         Padding="3"
                         materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
                         <GroupBox Header="Sequencer step-by step controller">
@@ -85,7 +85,7 @@
                     </materialDesign:Card>
                     <materialDesign:Card
                         Grid.Row="2"
-                        Margin="5,108,4.666,134"
+                        Margin="5"
                         Padding="3"
                         materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <GroupBox Header="Sequencer counters">
@@ -110,7 +110,7 @@
               
                         Padding="2"
                         materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
-                        <GroupBox Grid.Row="2" Header="Simulation delay">
+                        <GroupBox  Header="Simulation delay">
                             <Slider
                                 Maximum="5000"
                                 Minimum="50"
@@ -125,21 +125,22 @@
                         Grid.Row="4"
                         Content="Simulate failed to load"
                         IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}" Grid.ColumnSpan="2" Margin="0,89.333,-0.334,50" />
-                    <materialDesign:Card Grid.Row="2" Grid.ColumnSpan="2" Margin="0,105.333,-0.334,27">
+                    <materialDesign:Card Grid.Row="5" Grid.ColumnSpan="2" Margin="5">
                         <StackPanel>
-                            <Expander HorizontalAlignment="Stretch" Header="Messages">
+                         
                                 <StackPanel
-                                    Margin="24,8,24,16"
+                                    Margin="10"
                                     Orientation="Vertical"
                                     TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                    <vortex:TcoDiagnosticsView x:Name="DiagnosticsView" />
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN }" PresentationType="Diagnostics"/>
+                                    <!--<vortex:TcoDiagnosticsView x:Name="DiagnosticsView" />-->
                                     <TextBlock Style="{DynamicResource HorizontalExpanderContentTextBlock}" />
                                 </StackPanel>
-                            </Expander>
+                      
                         </StackPanel>
                     </materialDesign:Card>
             
-                            <materialDesign:Card Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="5">
+                        <materialDesign:Card Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="5">
                         <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Service" />
                     </materialDesign:Card>
                     <!--<materialDesign:Card Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="5">

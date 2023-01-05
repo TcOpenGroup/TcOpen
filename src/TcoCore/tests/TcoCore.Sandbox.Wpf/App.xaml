@@ -8,44 +8,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme
-                    BaseTheme="Light"
-                    PrimaryColor="DeepPurple"
-                    SecondaryColor="Lime" />
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/VortexStyle.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/MDOverrides.xaml" />
-                <tcocore:TcoResources></tcocore:TcoResources>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+      
+                <!--<tcocore:TcoResources></tcocore:TcoResources>-->
             </ResourceDictionary.MergedDictionaries>
+        
+
         </ResourceDictionary>
-        <!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <Color x:Key="PrimaryColor">#5bc5f2</Color>
-            <Color x:Key="OnPrimaryColor">#000000</Color>
-            <Color x:Key="SecondaryColor">#0494bf</Color>
-            <Color x:Key="OnSecondaryColor">#ffffff</Color>
-            <Color x:Key="AccentColor">#93f8ff</Color>
-            <Color x:Key="OnAccentColor">#000000</Color>
-            <Color x:Key="AlertColor">#ff4b27</Color>
-            <Color x:Key="OnAlertColor">#000000</Color>
-
-            <SolidColorBrush x:Key="Primary" Color="{StaticResource PrimaryColor}" />
-            <SolidColorBrush x:Key="OnPrimary" Color="{StaticResource OnPrimaryColor}" />
-
-            <SolidColorBrush x:Key="Secondary" Color="{StaticResource SecondaryColor}" />
-            <SolidColorBrush x:Key="OnSecondary" Color="{StaticResource OnSecondaryColor}" />
-
-            <SolidColorBrush x:Key="Alert" Color="{StaticResource AlertColor}" />
-            <SolidColorBrush x:Key="OnAlert" Color="{StaticResource OnAlertColor}" />
-
-            <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
-            <SolidColorBrush x:Key="OnAccent" Color="{StaticResource OnAccentColor}" />
-        </ResourceDictionary>-->
     </Application.Resources>
 </Application>

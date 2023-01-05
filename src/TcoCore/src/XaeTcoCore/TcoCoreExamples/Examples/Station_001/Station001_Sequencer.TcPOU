@@ -62,87 +62,95 @@ METHOD PROTECTED Main : BOOL
       <Implementation>
         <ST><![CDATA[Init();
 THIS^.Messenger.Info('Stations one sequencer is running.');
-IF(Step(100, 
-		TRUE, 
-		'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveUp().Done AND_THEN 
-					 components.Horizontal.MoveLeft().Done AND_THEN 
-					 components.Gripper.Open().Done);
-//-----------------------------------------------------	
+
+IF (Step(100,
+    TRUE,
+    'MOVE ALL CYLINDERS TO GROUND POSITION')) THEN
+    //-----------------------------------------------------
+    StepCompleteWhen(components.Vertical.MoveUp().Done AND_THEN
+            components.Horizontal.MoveLeft().Done AND_THEN
+            components.Gripper.Open().Done);
+    //-----------------------------------------------------	
 END_IF
 
-
-IF(Step(200, 
-		TRUE, 
-		'MOVE VERTICAL CYLINDER DOWN')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveDown().Done );
-//-----------------------------------------------------	
+IF (Step(200,
+    TRUE,
+    'MOVE VERTICAL CYLINDER DOWN')) THEN
+    //-----------------------------------------------------
+    StepCompleteWhen(components.Vertical.MoveDown().Done);
+    //-----------------------------------------------------	
 END_IF
-
 
 IF NOT _stepsCountChange THEN
-	IF(Step(300, 
-			TRUE, 
-			'CLOSE GRIPPER')) THEN
-	//-----------------------------------------------------
-		IF(components.Gripper.Close().Done) THEN
-			IF(_failedToLoad) THEN
-				RequestStep(100);
-			ELSE
-				StepCompleteWhen(TRUE);	
-			END_IF;	
-			
-		END_IF;		
-	//-----------------------------------------------------	
-	END_IF
-	
-	IF(Step(_stepIdChange, 
-			TRUE, 
-			'MOVE VERTICAL CYLINDER UP')) THEN
-	//-----------------------------------------------------
-		StepCompleteWhen(components.Vertical.MoveUp().Done);
-	//-----------------------------------------------------	
-	END_IF
-	
-	IF(Step(500, 
-			TRUE, 
-			'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
-	//-----------------------------------------------------
-		StepCompleteWhen(components.Horizontal.MoveRight().Done);
-	//-----------------------------------------------------	
-	END_IF
+    IF (Step(300,
+        TRUE,
+        'CLOSE GRIPPER')) THEN
+        //-----------------------------------------------------
+        IF (components.Gripper.Close().Done) THEN
+            IF (_failedToLoad) THEN
+                RequestStep(100);
+            ELSE
+                StepCompleteWhen(TRUE);
+            END_IF;
+
+        END_IF;
+        //-----------------------------------------------------	
+    END_IF
+
+    IF (Step(_stepIdChange,
+        TRUE,
+        'MOVE VERTICAL CYLINDER UP')) THEN
+        //-----------------------------------------------------
+        StepCompleteWhen(components.Vertical.MoveUp().Done);
+        //-----------------------------------------------------	
+    END_IF
+
+    IF (Step(500,
+        TRUE,
+        'MOVE HORIZONTAL CYLINDER TO UNLOAD POSITION')) THEN
+        //-----------------------------------------------------
+        StepCompleteWhen(components.Horizontal.MoveRight().Done);
+        //-----------------------------------------------------	
+    END_IF
 END_IF
 
-IF(Step(600, 
-		TRUE, 
-		'MOVE VERTICAL CYLINDER DOWN')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Vertical.MoveDown().Done);
-//-----------------------------------------------------	
+IF (Step(600,
+    TRUE,
+    'MOVE VERTICAL CYLINDER DOWN')) THEN
+    //-----------------------------------------------------
+    StepCompleteWhen(components.Vertical.MoveDown().Done);
+    //-----------------------------------------------------	
 END_IF
 
-IF(Step(700, 
-		TRUE, 
-		'OPEN GRIPPER')) THEN
-//-----------------------------------------------------
-	StepCompleteWhen(components.Gripper.Open().Done);
-//-----------------------------------------------------	
+IF (Step(700,
+    TRUE,
+    'OPEN GRIPPER')) THEN
+    //-----------------------------------------------------
+    StepCompleteWhen(components.Gripper.Open().Done);
+    //-----------------------------------------------------	
 END_IF
 
-IF(Step(800, 
-		TRUE, 
-		'CLOSE SEQUENCE')) THEN
-//-----------------------------------------------------
-	_sequenceCompleteCount := _sequenceCompleteCount + 1;
-	_stepsPerSequence := (_onStateChangeCount - _sequenceCompleteCount + 1)/ _sequenceCompleteCount;
-	CompleteSequence();
-//-----------------------------------------------------	
+IF (Step(800,
+    TRUE,
+    'CLOSE SEQUENCE')) THEN
+    //-----------------------------------------------------
+    _sequenceCompleteCount := _sequenceCompleteCount + 1;
+    _stepsPerSequence := (_onStateChangeCount - _sequenceCompleteCount + 1) / _sequenceCompleteCount;
+    CompleteSequence();
+    //-----------------------------------------------------	
 END_IF
 
+THIS^.Messenger.Debug('THIS IS DEBUG DIAG MESSAGE ');
+THIS^.Messenger.Info('THIS IS INFO DIAG MESSAGE ');
+THIS^.Messenger.Notify('THIS IS NOTIFY DIAG MESSAGE ');
+THIS^.Messenger.Warning('THIS IS WARNING DIAG MESSAGE ');
+//THIS^.Messenger.Error('THIS IS ERROR DIAG MESSAGE ');
+//THIS^.Messenger.Programming('THIS IS PROGRAMMING DIAG MESSAGE ');
+//THIS^.Messenger.Post('THIS IS Fatal DIAG MESSAGE ', eMessageCategory.Fatal);
+//THIS^.Messenger.Post('THIS IS Critical DIAG MESSAGE ', eMessageCategory.Critical);
+//THIS^.Messenger.Post('THIS IS Catastrophic DIAG MESSAGE ', eMessageCategory.Catastrophic);
 
-
+THIS^.Messenger.Trace('THIS IS INFO DIAG MESSAGE ');
 ]]></ST>
       </Implementation>
     </Method>

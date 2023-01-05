@@ -15,17 +15,17 @@ namespace TcoCore
             switch (b)
             {
                 case eDialogType.Undefined:
-                    return Wpf.TcoColors.Secondary;
+                    return Wpf.TcoColors.Accent;
                 case eDialogType.Info:
-                    return Wpf.TcoColors.Secondary;
+                    return Wpf.TcoColors.Accent;
                 case eDialogType.Question:
                     return Wpf.TcoColors.Primary;
                 case eDialogType.Warning:
                     return Wpf.TcoColors.Alert;
                 case eDialogType.Error:
-                    return Wpf.TcoColors.Alert;
+                    return Wpf.TcoColors.Error;
                 default:
-                    return Wpf.TcoColors.Secondary;
+                    return Wpf.TcoColors.Accent;
             }
         }
 

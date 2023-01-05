@@ -1,11 +1,10 @@
-﻿using Serilog;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
+using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+
 using System.Windows;
+using System.Windows.Media;
 using TcoCoreExamples;
 using TcOpen.Inxton;
 using TcOpen.Inxton.TcoCore.Wpf;
@@ -18,8 +17,22 @@ namespace TcoCore.Sandbox.Wpf
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+         
+            Color primaryColor = SwatchHelper.Lookup[MaterialDesignColor.DeepPurple];
+            Color accentColor = SwatchHelper.Lookup[MaterialDesignColor.Lime];
+            ITheme theme = Theme.Create(new MaterialDesignLightTheme(), primaryColor, accentColor);
+            Resources.SetTheme(theme);
+
+
+
+
+            base.OnStartup(e);
+        }
         public App() : base()
         {
+           
             PlcTcoCoreExamples.Connector.ReadWriteCycleDelay = 250;
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
