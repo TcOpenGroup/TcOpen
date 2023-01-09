@@ -37,7 +37,6 @@
             HorizontalAlignment="Right"
             Background="Transparent"
             Command="{Binding TcoTask.Restore}"            
-            Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
             Style="{StaticResource MaterialDesignToolButton}"
             Visibility="{Binding TcoTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}"
             materialDesign:RippleAssist.IsDisabled="True">

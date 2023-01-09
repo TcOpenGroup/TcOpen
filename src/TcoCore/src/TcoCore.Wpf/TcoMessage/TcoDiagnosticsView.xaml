@@ -155,8 +155,7 @@
         </DataGrid>
         <GridSplitter
             Grid.Row="2"
-            HorizontalAlignment="Stretch"
-            Background="{DynamicResource Secondary}" />
+            HorizontalAlignment="Stretch" />
         <StackPanel Grid.Row="3" DataContext="{Binding SelectedMessage}">
             <GroupBox Header="{x:Static loc:Localization.Location}">
                 <TextBlock
@@ -192,7 +191,6 @@
                     <TextBlock
                         HorizontalAlignment="Left"
                         FontWeight="Medium"
-                        Foreground="{DynamicResource Secondary}"
                         Text="{Binding Text}"
                         TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -200,7 +198,6 @@
                     <TextBlock
                         HorizontalAlignment="Left"
                         FontWeight="Medium"
-                        Foreground="{DynamicResource Secondary}"
                         Text="{Binding CategoryAsEnum}"
                         TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -208,7 +205,6 @@
                     <TextBlock
                         HorizontalAlignment="Left"
                         FontWeight="Medium"
-                        Foreground="{DynamicResource Secondary}"
                         Text="{Binding SubCategory}"
                         TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -216,7 +212,6 @@
                     <TextBlock
                         HorizontalAlignment="Left"
                         FontWeight="Medium"
-                        Foreground="{DynamicResource Secondary}"
                         Text="{Binding Source}"
                         TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -235,8 +230,6 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
-                         Background="{DynamicResource OnSecondary}"
-                            Foreground="{DynamicResource Secondary}"
                             Text="{Binding CategoryAsEnum}"
                             TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -244,8 +237,6 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
-                         Background="{DynamicResource OnSecondary}"
-                            Foreground="{DynamicResource Secondary}"
                             Text="{Binding SubCategory}"
                             TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -253,8 +244,6 @@
                     <TextBlock
                             HorizontalAlignment="Left"
                             FontWeight="Medium"
-                            Background="{DynamicResource OnSecondary}"
-                            Foreground="{DynamicResource Secondary}"
                             Text="{Binding Source}"
                             TextWrapping="WrapWithOverflow" />
                 </GroupBox>
@@ -263,8 +252,6 @@
         <TextBlock
             Grid.Row="6"
             HorizontalAlignment="Stretch"
-            Background="{DynamicResource Primary}"
-            Foreground="{DynamicResource OnPrimary}"
             Padding="5"
             Text="{x:Static loc:Localization.DiagnosticsRunnig}"
             Visibility="{Binding DiagnosticsRunning, Converter={vtr:BoolToVisibilityConverter}}" />

@@ -38,7 +38,6 @@
             HorizontalAlignment="Right"
             Background="Transparent"
             Command="{Binding TcoRemoteTask.Restore}"
-            Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
             Padding="10,0,10,0"
             Style="{StaticResource MaterialDesignToolButton}"
             Visibility="{Binding TcoTcoRemoteTaskTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}">

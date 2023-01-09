@@ -65,6 +65,7 @@ IF Step(10,
 TRUE,
 'EXAMPLES_PRG._recordableStations._components._horizontal._moveHomeTask') THEN
 //-------------------------------------------------------
+
 	IF(EXAMPLES_PRG._recordableStations._components._horizontal._moveHomeTask.Invoke().Done)THEN
 		StepCompleteWhen(TRUE);
 	END_IF;
@@ -81,6 +82,7 @@ TRUE,
 //-------------------------------------------------------
 END_IF;
 
+
 IF Step(30,
 TRUE,
 'EXAMPLES_PRG._recordableStations._components._gripper._moveHomeTask') THEN
@@ -90,6 +92,8 @@ TRUE,
 	END_IF;
 //-------------------------------------------------------
 END_IF;
+
+
 
 
 

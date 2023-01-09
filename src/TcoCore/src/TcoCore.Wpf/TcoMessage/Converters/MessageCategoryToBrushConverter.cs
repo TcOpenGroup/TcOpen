@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignColors;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -16,23 +17,42 @@ namespace TcoCore
             {
                 var category = (eMessageCategory)value;
 
+                Color color = default;
                 switch (category)
-                {                    
+                {
+                  
                     case eMessageCategory.Debug:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green500, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.Trace:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green600, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.Info:
-                        return TcoCore.Wpf.TcoColors.OnSecondary;                    
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green700, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.TimedOut:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green800, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.Notification:
-                        return TcoCore.Wpf.TcoColors.OnPrimary;
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green900, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.Warning:
-                        return TcoCore.Wpf.TcoColors.OnAccent;
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Yellow700, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.Error:
-                    case eMessageCategory.Critical:
-                    case eMessageCategory.Catastrophic:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red600, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
                     case eMessageCategory.ProgrammingError:
-                        return TcoCore.Wpf.TcoColors.OnError;
-
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red700, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
+                    case eMessageCategory.Critical:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red800, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
+                    case eMessageCategory.Catastrophic:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red900, out color);
+                        return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
+                    default:
+                        break;
                 }
             }
             catch
@@ -56,28 +76,49 @@ namespace TcoCore
 
     public class MessageCategoryToBackgroundBrushConverter : MarkupExtension, IValueConverter
     {
+       
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 var category = (eMessageCategory)value;
 
+                Color color = default;
                 switch (category)
                 {
                     case eMessageCategory.Debug:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green400, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.Trace:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green500, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.Info:
-                        return TcoCore.Wpf.TcoColors.Secondary;
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green700, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.TimedOut:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green800, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.Notification:
-                        return TcoCore.Wpf.TcoColors.Primary;
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green900, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.Warning:
-                        return TcoCore.Wpf.TcoColors.Accent;
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Yellow700, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.Error:
-                    case eMessageCategory.Critical:
-                    case eMessageCategory.Catastrophic:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red600, out color);
+                        return new SolidColorBrush(color);
                     case eMessageCategory.ProgrammingError:
-                        return TcoCore.Wpf.TcoColors.Error;
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red700, out color);
+                        return new SolidColorBrush(color);
+                    case eMessageCategory.Critical:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red800, out color);
+                        return new SolidColorBrush(color);
+                    case eMessageCategory.Catastrophic:
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Red900, out color);
+                        return new SolidColorBrush(color);
+
+                    default:
+                        break;
                 }
             }
             catch
