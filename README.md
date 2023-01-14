@@ -83,7 +83,8 @@ At this time we channel our efforts into the building and testing of the PLC lib
 
 ## The role of Inxton.Vortex.Framework (IVF)
 
-IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. From Inxton v2 (that now being used in TcOpen) there no need for license registration as it was with previous versions.
+IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. From Inxton v2 (that now being used in TcOpen) there no need for license registration as it was with previous versions, here is the license to honor when using inxton libraries 
+[Inxton linense](https://docs.inxton.com/index.html#licencing).
 
 # Documentation
 
