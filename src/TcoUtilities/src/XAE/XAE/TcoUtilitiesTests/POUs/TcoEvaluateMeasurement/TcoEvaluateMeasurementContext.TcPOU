@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="TcoEvaluateMeasurementContext" Id="{d0fe2cbe-cf00-0658-3d1c-1456d9ead9a9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoEvaluateMeasurementContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_tcoMeasEvaluator : TcoUtilities.TcoEvaluateMeasurementTask(THIS^);
+	_tcoMeasEvaluatorConfig :TcoUtilities.TcoEvaluateMeasurementConfig;
+	_measData: ARRAY [0..1000] OF TcoUtilities.TcoEvaluateMeasurementDataItem;
+	_tcoEvaluateTestDone: BOOL;
+
+
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{f5d45085-1503-0fcc-0230-daaec2d9e720}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+VAR
+	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_tcoMeasEvaluator();
+CASE THIS^._testId OF
+    eTcoEvaluateMeasurementTestList.None:
+        ;
+    eTcoEvaluateMeasurementTestList.Init:
+        _tcoMeasEvaluator.Restore();
+    eTcoEvaluateMeasurementTestList.Evaluate:
+        _tcoEvaluateTestDone := _tcoMeasEvaluator.Run(inConfig := _tcoMeasEvaluatorConfig, inData := _measData).Invoke().Done;
+
+        IF (_tcoEvaluateTestDone) THEN
+            THIS^._testId := 0;
+        END_IF
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -34,12 +34,25 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="POUs\TcoEvaluvateMeasurement\TcoEvaluateMeasurementDataItem.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoEvaluvateMeasurement\TcoEvaluateMeasurementTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoEvaluvateMeasurement\TcoEvaluateMeasurementResults.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoEvaluvateMeasurement\TcoEvaluateMeasurementConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TcoBlinker\TcoBlinker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
+    <Folder Include="POUs\TcoEvaluvateMeasurement" />
     <Folder Include="POUs\TcoBlinker" />
   </ItemGroup>
   <ItemGroup>

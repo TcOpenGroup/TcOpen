@@ -36,11 +36,18 @@
     <Compile Include="POUs\TcoBlinker\TcoBlinkerTestContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TcoEvaluateMeasurement\eTcoEvaluateMeasurementTestList.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoEvaluateMeasurement\TcoEvaluateMeasurementContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\TcoBlinker" />
+    <Folder Include="POUs\TcoEvaluateMeasurement" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
