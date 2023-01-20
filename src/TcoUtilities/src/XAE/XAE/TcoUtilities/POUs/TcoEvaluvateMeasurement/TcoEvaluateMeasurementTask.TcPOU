@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="TcoEvaluateMeasurementTask" Id="{a7d31628-dd32-0371-02be-834276f1ff70}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoEvaluateMeasurementTask EXTENDS TcoCore.TcoRemoteTask
+VAR
+
+	_config:TcoEvaluateMeasurementConfig;
+
+	_data : ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;	
+	
+	_results:TcoEvaluateMeasurementResults;
+	_entityId: STRING;
+	{attribute 'hide'}
+	_cleanResultData: TcoEvaluateMeasurementResults;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Property Name="Config" Id="{f21403a9-4372-0fa8-354b-e0048f19bc3b}">
+      <Declaration><![CDATA[PROPERTY Config : TcoEvaluateMeasurementConfig]]></Declaration>
+      <Get Name="Get" Id="{66f5a70b-dd23-03c9-1a01-0dd236d1aa5e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config:=_config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DataSource" Id="{d9eaf964-d5df-0b2e-3c23-6b579777e692}">
+      <Declaration><![CDATA[PROPERTY DataSource : ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem]]></Declaration>
+      <Get Name="Get" Id="{46421f0e-7ec9-0319-3c86-eda9d8d6d9c2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DataSource:=_data;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{85989d64-f1f5-02ef-2043-50e6d81b9757}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_data:=DataSource;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Restore" Id="{d85ed7e5-3791-0916-3f74-32e2aeca06b8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_results:=_cleanResultData;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Results" Id="{27932ba0-4326-020e-1a79-4b1162db5f99}">
+      <Declaration><![CDATA[PROPERTY Results : TcoEvaluateMeasurementResults]]></Declaration>
+      <Get Name="Get" Id="{13c1d3cc-0611-0713-0c6f-6bc02c3eec61}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Results:=_results;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Run" Id="{be7634c6-026d-0c91-1e95-5f0249c2c852}">
+      <Declaration><![CDATA[METHOD Run : REFERENCE TO TcoEvaluateMeasurementTask
+VAR_INPUT
+	inEntityId:STRING;
+	inConfig:TcoEvaluateMeasurementConfig;
+	inData:ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;
+END_VAR
+VAR
+	_cleanResultData: TcoEvaluateMeasurementResults;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_config:=inConfig;
+_entityId:=inEntityId;
+_data:=inData;
+Run REF= THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
