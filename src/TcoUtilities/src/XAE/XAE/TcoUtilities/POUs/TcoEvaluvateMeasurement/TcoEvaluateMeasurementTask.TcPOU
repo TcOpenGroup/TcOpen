@@ -9,6 +9,9 @@ VAR
 	_data : ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;	
 	
 	_results:TcoEvaluateMeasurementResults;
+	_entityId: STRING;
+	{attribute 'hide'}
+	_cleanResultData: TcoEvaluateMeasurementResults;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -44,6 +47,24 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
+    <Method Name="Restore" Id="{d85ed7e5-3791-0916-3f74-32e2aeca06b8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_results:=_cleanResultData;
+]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Results" Id="{27932ba0-4326-020e-1a79-4b1162db5f99}">
       <Declaration><![CDATA[PROPERTY Results : TcoEvaluateMeasurementResults]]></Declaration>
       <Get Name="Get" Id="{13c1d3cc-0611-0713-0c6f-6bc02c3eec61}">
@@ -58,12 +79,16 @@ END_VAR
     <Method Name="Run" Id="{be7634c6-026d-0c91-1e95-5f0249c2c852}">
       <Declaration><![CDATA[METHOD Run : REFERENCE TO TcoEvaluateMeasurementTask
 VAR_INPUT
+	inEntityId:STRING;
 	inConfig:TcoEvaluateMeasurementConfig;
 	inData:ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;
+END_VAR
+VAR
+	_cleanResultData: TcoEvaluateMeasurementResults;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_config:=inConfig;
-
+_entityId:=inEntityId;
 _data:=inData;
 Run REF= THIS^;
 ]]></ST>

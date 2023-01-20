@@ -3,6 +3,7 @@ using NUnit.Framework.Constraints;
 using TcoUtilitiesTests;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TcoEvaluateMeasurement
 {
@@ -16,13 +17,42 @@ namespace TcoEvaluateMeasurement
             Entry.TcoUtilitiesTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
             sut = Entry.TcoUtilitiesTests.MAIN._testEvalueateMeasurementContext;
             Entry.TcoUtilitiesTests.MAIN._testEvalueateMeasurementContext._tcoMeasEvaluator.InitializeTask();
+
+            sut._entityId.Synchron = "TestId";
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron=false;
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfTimeBase.Synchron = false;
+
+            sut._tcoMeasEvaluatorConfig.FilterValue.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 20;
+            sut._tcoMeasEvaluatorConfig.FilterValue.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.TriggerNoise.Synchron = 0.3f;
+            sut._tcoMeasEvaluatorConfig.PeaksNoise.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.SmoothFactor.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = true;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundExtrems.Synchron = 10;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundTriggers.Synchron = 10;
+
+            //sut._tcoMeasEvaluatorConfig.ExportResultsLocation.Synchron = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            //sut._tcoMeasEvaluatorConfig.ExportRawLocation.Synchron = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var pathRaw = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + sut._entityId.Synchron + "_RawData.csv";
+            var pathResult = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + sut._entityId.Synchron + "_Results.csv";
+
+            if (System.IO.File.Exists(pathRaw))
+                System.IO.File.Delete(pathRaw);
+            if (System.IO.File.Exists(pathResult))
+                System.IO.File.Delete(pathResult);
+
+            sut._tcoMeasEvaluatorConfig.ExportResultsLocation.Synchron = string.Empty;
+            sut._tcoMeasEvaluatorConfig.ExportRawLocation.Synchron = string.Empty;
+
         }
+     
 
         [Test]
-        [TestCase(100, 200)]
-        [TestCase(200, 100)]
-        [TestCase(50, 20)]
-        public void check_found_number_of_peaks_equal(int onTimeMs, int offTimeMs)
+        [Repeat (4)]
+        public void check_found_number_of_peaks_triggers()
         {
 
             //-- Arrange  
@@ -51,10 +81,256 @@ namespace TcoEvaluateMeasurement
             sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
 
             //-- Assert
-            Assert.AreEqual(3, sut._tcoMeasEvaluator._results.FallingPeaksFound.Synchron );
+            Assert.AreEqual(3, sut._tcoMeasEvaluator._results.RisingPeaksFound.Synchron );
             Assert.AreEqual(3, sut._tcoMeasEvaluator._results.FallingPeaksFound.Synchron);
+            Assert.AreEqual(2, sut._tcoMeasEvaluator._results.TriggersFound.Synchron);
 
         }
+
+
+        [Test]
+        public void find_global_maximum()
+        {
+
+            //-- Arrange  
+            for (int i = 0; i < dummyDistanceData.Count; i++)
+            {
+                sut._measData[i].Distance.Synchron = dummyDistanceData[i];
+                sut._measData[i].ProcessValue.Synchron = dummyProcessValueData[i];
+                sut._measData[i].DiscreteValue.Synchron = dummyDiscreteValueData[i];
+            }
+
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 20;
+            sut._tcoMeasEvaluatorConfig.FilterValue.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.TriggerNoise.Synchron = 0.2f;
+            sut._tcoMeasEvaluatorConfig.PeaksNoise.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.SmoothFactor.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = true;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundExtrems.Synchron = 10;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundTriggers.Synchron = 10;
+
+
+            sut.ExecuteProbeRun(1, (int)eTcoEvaluateMeasurementTestList.Init);
+
+            var (maxValue, maxIndex) = dummyProcessValueData.Select((x, i) => (x, i)).Max();
+          
+
+
+            //-- Act
+            sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
+
+            //-- Assert
+            Assert.AreEqual(maxValue, sut._tcoMeasEvaluator._results.RisingPeaks[sut._tcoMeasEvaluator._results.RisingPeaksFound.Synchron-1].ProcessValue.Synchron);
+        
+
+        }
+
+
+        [Test]
+        public void find_local_max()
+        {
+
+            //-- Arrange  
+            for (int i = 0; i < dummyDistanceData.Count; i++)
+            {
+                sut._measData[i].Distance.Synchron = dummyDistanceData[i];
+                sut._measData[i].ProcessValue.Synchron = dummyProcessValueData[i];
+                sut._measData[i].DiscreteValue.Synchron = dummyDiscreteValueData[i];
+            }
+
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 10;
+
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 25;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = (short)(sut._measData.Length -75);
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = false;
+
+        
+            sut.ExecuteProbeRun(1, (int)eTcoEvaluateMeasurementTestList.Init);
+
+       
+            //-- Act
+            sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
+
+            //-- Assert
+            Assert.AreEqual(1, sut._tcoMeasEvaluator._results.RisingPeaksFound.Synchron);
+
+
+
+
+        }
+
+        [Test]
+        public void find_local_min()
+        {
+
+            //-- Arrange  
+            for (int i = 0; i < dummyDistanceData.Count; i++)
+            {
+                sut._measData[i].Distance.Synchron = dummyDistanceData[i];
+                sut._measData[i].ProcessValue.Synchron = dummyProcessValueData[i];
+                sut._measData[i].DiscreteValue.Synchron = dummyDiscreteValueData[i];
+            }
+
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 10;
+
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 60;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = (short)(sut._measData.Length - 85);
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = false;
+
+          
+            sut.ExecuteProbeRun(1, (int)eTcoEvaluateMeasurementTestList.Init);
+
+
+            //-- Act
+            sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
+
+            //-- Assert
+            Assert.AreEqual(1, sut._tcoMeasEvaluator._results.FallingPeaksFound.Synchron);
+
+
+
+
+        }
+
+        [Test]
+        public void find_global_minimum()
+        {
+
+            //-- Arrange  
+            for (int i = 0; i < dummyDistanceData.Count; i++)
+            {
+                sut._measData[i].Distance.Synchron = dummyDistanceData[i];
+                sut._measData[i].ProcessValue.Synchron = dummyProcessValueData[i];
+                sut._measData[i].DiscreteValue.Synchron = dummyDiscreteValueData[i];
+            }
+
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 20;
+            sut._tcoMeasEvaluatorConfig.FilterValue.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.TriggerNoise.Synchron = 0.2f;
+            sut._tcoMeasEvaluatorConfig.PeaksNoise.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.SmoothFactor.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = true;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundExtrems.Synchron = 10;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundTriggers.Synchron = 10;
+
+
+            sut.ExecuteProbeRun(1, (int)eTcoEvaluateMeasurementTestList.Init);
+
+            var minNonZeroValue = dummyProcessValueData.Where(x=>x!=0).Min();
+
+
+
+            //-- Act
+            sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
+
+            //-- Assert
+            Assert.AreEqual(minNonZeroValue, sut._tcoMeasEvaluator._results.FallingPeaks[0].ProcessValue.Synchron);
+
+
+        }
+
+        [Test]
+        public void check_if_raw_data_export_success()
+        {
+
+            //-- Arrange  
+            for (int i = 0; i < dummyDistanceData.Count; i++)
+            {
+                sut._measData[i].Distance.Synchron = dummyDistanceData[i];
+                sut._measData[i].ProcessValue.Synchron = dummyProcessValueData[i];
+                sut._measData[i].DiscreteValue.Synchron = dummyDiscreteValueData[i];
+            }
+            
+
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 20;
+            sut._tcoMeasEvaluatorConfig.FilterValue.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.TriggerNoise.Synchron = 0.2f;
+            sut._tcoMeasEvaluatorConfig.PeaksNoise.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.SmoothFactor.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = true;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundExtrems.Synchron = 10;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundTriggers.Synchron = 10;
+            sut._tcoMeasEvaluatorConfig.ExportResultsLocation.Synchron = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            sut._tcoMeasEvaluatorConfig.ExportRawLocation.Synchron = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            var pathRaw = sut._tcoMeasEvaluatorConfig.ExportRawLocation.Synchron + "\\" + sut._entityId.Synchron + "_RawData.csv";
+            var pathResult = sut._tcoMeasEvaluatorConfig.ExportResultsLocation.Synchron + "\\" + sut._entityId.Synchron + "_Results.csv";
+
+
+
+            sut.ExecuteProbeRun(1, (int)eTcoEvaluateMeasurementTestList.Init);
+
+            var minNonZeroValue = dummyProcessValueData.Where(x => x != 0).Min();
+
+         
+        
+
+
+            //-- Act
+            sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
+
+            //-- Assert
+            Assert.AreEqual(true, System.IO.File.Exists(pathRaw));
+            Assert.AreEqual(true, System.IO.File.Exists(pathResult));
+
+
+        }
+
+        [Test]
+        public void check_if_raw_data_export_not_provided()
+        {
+
+            //-- Arrange  
+            for (int i = 0; i < dummyDistanceData.Count; i++)
+            {
+                sut._measData[i].Distance.Synchron = dummyDistanceData[i];
+                sut._measData[i].ProcessValue.Synchron = dummyProcessValueData[i];
+                sut._measData[i].DiscreteValue.Synchron = dummyDiscreteValueData[i];
+            }
+
+
+            sut._tcoMeasEvaluatorConfig.SearchRange.Synchron = 20;
+            sut._tcoMeasEvaluatorConfig.FilterValue.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.TriggerNoise.Synchron = 0.2f;
+            sut._tcoMeasEvaluatorConfig.PeaksNoise.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.SmoothFactor.Synchron = 1;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromStart.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreSamplesFromEnd.Synchron = 0;
+            sut._tcoMeasEvaluatorConfig.IgnoreZeroSamplesIfDistance.Synchron = true;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundExtrems.Synchron = 10;
+            sut._tcoMeasEvaluatorConfig.LimitIndexFoundTriggers.Synchron = 10;
+           
+            var pathRaw = sut._tcoMeasEvaluatorConfig.ExportRawLocation.Synchron + "\\" + sut._entityId.Synchron + "_RawData.csv";
+            var pathResult = sut._tcoMeasEvaluatorConfig.ExportResultsLocation.Synchron + "\\" + sut._entityId.Synchron + "_Results.csv";
+
+
+
+            sut.ExecuteProbeRun(1, (int)eTcoEvaluateMeasurementTestList.Init);
+
+            var minNonZeroValue = dummyProcessValueData.Where(x => x != 0).Min();
+
+
+
+
+
+            //-- Act
+            sut.ExecuteProbeRun((int)eTcoEvaluateMeasurementTestList.Evaluate, () => sut._tcoEvaluateTestDone.Synchron);
+
+            //-- Assert
+            Assert.AreEqual(false, System.IO.File.Exists(pathRaw));
+            Assert.AreEqual(false, System.IO.File.Exists(pathResult));
+
+
+        }
+
+
+
 
         private static readonly List<float> dummyDistanceData = new List<float>()
         {0.0175f,
@@ -116,22 +392,22 @@ namespace TcoEvaluateMeasurement
         0.9974997f,
         1.015f,
         1.0325f,
-        45047f,
+        1.0425f,
         1.0675f,
         1.085f,
         1.1025f,
-        45261f,
+        1.1345261f,
         1.1375f,
         1.155f,
         1.1725f,
-        43466f,
-        63920f,
+        1.1825f,
+        1.1925f,
         1.225f,
-        191755f,
-        46023f,
-        319589f,
+        1.235f,
+        1.245f,
+        1.265f,
         1.295f,
-        447424f,
+        1.131f,
         1.330001f,
         1.347501f,
         1.365001f,
@@ -195,17 +471,17 @@ namespace TcoEvaluateMeasurement
         2.380001f,
         2.397501f,
         2.415f,
-        885746f,
-        16469f,
-        1013581f,
+        2.42885746f,
+        2.4416469f,
+        2.461013581f,
         2.485f,
-        1141416f,
-        19025f,
-        1269251f,
+        2.491141416f,
+        2.509025f,
+        2.51269251f,
         2.555f,
-        1397086f,
-        21582f,
-        1524921f,
+        2.56397086f,
+        2.5721582f,
+        2.591524921f,
         2.625f,
         2.642499f,
         2.659999f,
@@ -358,7 +634,6 @@ namespace TcoEvaluateMeasurement
         0f
 
         };
-
         private static readonly List<float> dummyProcessValueData = new List<float>()
         {   1.400277f,
             1.689494f,
@@ -570,7 +845,7 @@ namespace TcoEvaluateMeasurement
             10.32875f,
             10.57747f,
             10.79318f,
-            2197208f,
+            10.89318f,
             11.03826f,
             11.28845f,
             11.28905f,

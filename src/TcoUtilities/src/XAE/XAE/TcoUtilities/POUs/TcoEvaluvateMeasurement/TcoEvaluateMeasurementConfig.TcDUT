@@ -28,7 +28,14 @@ STRUCT
 	LimitIndexFoundExtrems : INT;
 	{attribute wpf [Container(Layout.Stack, "MAX FOUND LIMIT TRIGGERS (MAX 100) (DISCRETE DATA ROW)")]}
 	LimitIndexFoundTriggers : INT;
-	
+	{attribute wpf [Container(Layout.Stack, "PROCESS VALUE ROW NAME")]}
+	ProcessValueRowName : STRING;
+	{attribute wpf [Container(Layout.Stack, "DISCRETE VALUE ROW NAME")]}
+	DiscreteValueRowName : STRING;
+	{attribute wpf [Container(Layout.Stack, "EXPORT RAW DATA LOCATION")]}
+	ExportRawLocation : STRING(255);
+	{attribute wpf [Container(Layout.Stack, "EXPORT RESULTS LOCATION")]}
+	ExportResultsLocation : STRING(255);
 	
 END_STRUCT
 END_TYPE
