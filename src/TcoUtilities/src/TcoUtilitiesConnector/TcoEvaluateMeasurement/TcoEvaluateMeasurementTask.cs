@@ -113,7 +113,8 @@ namespace TcoUtilities
                 var fallingPeaksDistance = FindExtremsHelper.ElementsAt(DistanceValues, fallingPeaksIndex);
                 var triggerLinDistance = FindExtremsHelper.ElementsAt(DistanceValues, triggerIndex);
 
-                LimitIndex = limitIndexExtrems ;
+                LimitIndex = limitIndexExtrems == 0 ? 100 : limitIndexExtrems;
+
                 int itemIndex = 0;
 
                 _results.RisingPeaksFound.Synchron = (short)risingPeaks.Count();
@@ -132,7 +133,7 @@ namespace TcoUtilities
                 }
 
                 itemIndex = 0;
-                LimitIndex = limitIndexTriggers;
+     
 
                 foreach (var item in fallingPeaksIndex)
                 {
@@ -145,6 +146,7 @@ namespace TcoUtilities
                 }
 
                 itemIndex = 0;
+                LimitIndex = limitIndexTriggers == 0 ? 100 : limitIndexTriggers;
                 foreach (var item in triggerIndex)
                 {
                     if (itemIndex <= LimitIndex)
@@ -241,7 +243,8 @@ namespace TcoUtilities
 
             data.AppendLine("CONFIG");
 
-            data.AppendLine(string.Format("{0}={1}",nameof(config.FilterValue), config.FilterValue));
+            data.AppendLine(string.Format("{0}={1}",nameof(config.SearchRange), config.SearchRange));
+            data.AppendLine(string.Format("{0}={1}", nameof(config.FilterValue), config.FilterValue));
             data.AppendLine(string.Format("{0}={1}", nameof(config.PeaksNoise), config.PeaksNoise));
             data.AppendLine(string.Format("{0}={1}", nameof(config.TriggerNoise), config.TriggerNoise));
             data.AppendLine(string.Format("{0}={1}", nameof(config.SmoothFactor), config.SmoothFactor));
@@ -284,7 +287,7 @@ namespace TcoUtilities
 
             //falling peaks
             data.AppendLine("<<<<<<Falling Peaks>>>>>>");
-            foreach (var item in plainData._results.FallingPeaks.Where(x=>x.ProcessValue!=0))
+            foreach (var item in plainData._results.FallingPeaks.Where(x => x.Distance != 0))
             {
                 var listResults = string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\"",
                                                   item.TimeBase,
@@ -295,7 +298,7 @@ namespace TcoUtilities
                 data.AppendLine(listResults);
             }
             data.AppendLine("<<<<<<Triggers>>>>>>");
-            foreach (var item in plainData._results.Triggers.Where(x => x.DiscreteValue != 0))
+            foreach (var item in plainData._results.Triggers.Where(x => x.Distance != 0))
             {
                 var listResults = string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\"",
                                                   item.TimeBase,
