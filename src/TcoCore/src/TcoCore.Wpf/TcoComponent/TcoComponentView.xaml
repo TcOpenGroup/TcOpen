@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
-    <Grid>
+    <Grid  Grid.IsSharedSizeScope="True">
         <StackPanel>
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
@@ -29,28 +29,33 @@
                 materialDesign:ExpanderAssist.VerticalHeaderPadding="0"  >
 
                 <Expander.Header>
-                    <Grid>
+                    <Grid Grid.IsSharedSizeScope="True">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="200"/>
+                            <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
+                            <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto" />
+                            
                         </Grid.ColumnDefinitions>
                         <TextBlock
                             Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Margin="5,0,5,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                            
                             Text="{Binding Model, Converter={tcoCore:NameOrSymbolConverter}}"
                             TextAlignment="Left"
                             TextWrapping="WrapWithOverflow" />
-                        <ContentControl Grid.Column="1" 
+                        <ContentControl Grid.Column="2" 
                                         Content="{Binding ComponentHeader, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
+                                        VerticalAlignment="Center"
                                         Margin="5"
+                                        MinWidth="150"
                                         MinHeight="30"/>
-                        <tcoCore:HealthIndicatorView  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding Model.MessageHandler}" />
+                        <tcoCore:HealthIndicatorView  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding Model.MessageHandler}" />
                     </Grid>
                 </Expander.Header>
                 <Grid>

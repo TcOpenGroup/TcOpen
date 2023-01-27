@@ -72,16 +72,20 @@ namespace TcoUtilities
 
                 var len = plainData._data.Length;
 
-                IEnumerable<PlainTcoEvaluateMeasurementDataItem> data = ignoreSampleIfTimeBaseIsZero
-                  ? plainData._data.Skip(ignoreSamplesFromStart).Where(p => p.TimeBase != new TimeSpan()).Take(len - ignoreSamplesFromStart - 1)
-                  : plainData._data.Skip(ignoreSamplesFromStart).Take(len - ignoreSamplesFromStart - 1);
+                IEnumerable<PlainTcoEvaluateMeasurementDataItem> data = plainData._data;
 
-                data = ignoreSampleIfDistanceIsZero
-                    ? plainData._data.Skip(ignoreSamplesFromStart).Where(p => p.Distance != 0).Take(len-ignoreSamplesFromStart-1)
-                    : plainData._data.Skip(ignoreSamplesFromStart).Take(len - ignoreSamplesFromStart - 1);
+                if (ignoreSampleIfTimeBaseIsZero)
+                    data = data.Where(p => p.TimeBase != new TimeSpan());
 
-                len = data.Count();
-                data = data.Take(len - ignoreSamplesFromEnd);
+
+                if (ignoreSampleIfDistanceIsZero)
+                    data = data.Where(p => p.Distance != 0);
+
+
+
+                data = data.Skip(ignoreSamplesFromStart);
+             
+                data = data.Take(data.Count() - ignoreSamplesFromEnd);
 
 
                 DistanceValues = data.Select(p => p.Distance).Where((x, i) => i % filterValue == 0).ToList();
@@ -93,10 +97,12 @@ namespace TcoUtilities
 
                 if (smootFactor != 1)
                 {
-                    if (ProcessValues.Count !=0)
-                        ProcessValues = FindExtremsHelper.FilterByMovingAverage(ProcessValues,Convert.ToInt32(smootFactor));
-                    DistanceValues = DistanceValues.Take(ProcessValues.Count).ToArray();
-                    FindTriggersValues = FindTriggersValues.Take(ProcessValues.Count).ToArray();
+                    if (ProcessValues.Count != 0)
+                    {
+                        ProcessValues = FindExtremsHelper.FilterByMovingAverage(ProcessValues, Convert.ToInt32(smootFactor));
+                        DistanceValues = DistanceValues.Take(ProcessValues.Count).ToArray();
+                        FindTriggersValues = FindTriggersValues.Take(ProcessValues.Count).ToArray();
+                    }
                 }
 
 
@@ -127,8 +133,10 @@ namespace TcoUtilities
                     {
                         _results.RisingPeaks[itemIndex].ProcessValue.Synchron = ProcessValues.ElementAt(item);
                         _results.RisingPeaks[itemIndex].Distance.Synchron = DistanceValues.ElementAt(item);
+                        _results.RisingPeaks[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+
                     }
-                    
+
                     itemIndex++;
                 }
 
@@ -139,8 +147,11 @@ namespace TcoUtilities
                 {
                     if (itemIndex <= LimitIndex)
                     {
+                        
                         _results.FallingPeaks[itemIndex].ProcessValue.Synchron = ProcessValues.ElementAt(item);
                         _results.FallingPeaks[itemIndex].Distance.Synchron = DistanceValues.ElementAt(item);
+                        _results.FallingPeaks[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+
                     }
                     itemIndex++;
                 }
@@ -151,8 +162,10 @@ namespace TcoUtilities
                 {
                     if (itemIndex <= LimitIndex)
                     {
-                        _results.Triggers[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+                        _results.Triggers[itemIndex].ProcessValue.Synchron = ProcessValues.ElementAt(item);
                         _results.Triggers[itemIndex].Distance.Synchron = DistanceValues.ElementAt(item);
+                        _results.Triggers[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+
                     }
                     itemIndex++;
                 }

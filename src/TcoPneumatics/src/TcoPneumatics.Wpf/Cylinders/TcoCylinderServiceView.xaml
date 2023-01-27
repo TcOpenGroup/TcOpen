@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:TcOpen"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="http://vortex.mts/xaml"
+
     xmlns:tcopneumatics="clr-namespace:TcoPneumatics"
     xmlns:vortex="http://vortex.mts/xaml"
     mc:Ignorable="d">
@@ -31,7 +31,7 @@
                 <StackPanel>
                     <Border
                     Height="5"
-                    Background="{Binding  _atHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
+                    Background="{Binding  _atHomePos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
                     <vortex:RenderableContentControl  DataContext="{Binding _moveHomeDefault}"/>
                 </StackPanel>
@@ -44,7 +44,7 @@
                 <StackPanel>
                     <Border
                     Height="5"
-                    Background="{Binding _atWorkPos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
+                    Background="{Binding _atWorkPos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
                     <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
                 </StackPanel>
@@ -62,12 +62,12 @@
                             </Style>
                         </ItemsControl.Resources>
                         <StackPanel >
-                            <tcoCore:TcoSignalInfoView DataContext="{Binding _atHomePosSignalInfo}"></tcoCore:TcoSignalInfoView>
-                            <tcoCore:TcoSignalInfoView DataContext="{Binding _toHomePosSignalInfo}"></tcoCore:TcoSignalInfoView>
+                            <vortex:TcoSignalInfoView DataContext="{Binding _atHomePosSignalInfo}"></vortex:TcoSignalInfoView>
+                            <vortex:TcoSignalInfoView DataContext="{Binding _toHomePosSignalInfo}"></vortex:TcoSignalInfoView>
                         </StackPanel>
                         <StackPanel >
-                            <tcoCore:TcoSignalInfoView DataContext="{Binding _atWorkPosSignalInfo}"></tcoCore:TcoSignalInfoView>
-                            <tcoCore:TcoSignalInfoView DataContext="{Binding _toWorkPosSignalInfo}"></tcoCore:TcoSignalInfoView>
+                            <vortex:TcoSignalInfoView DataContext="{Binding _atWorkPosSignalInfo}"></vortex:TcoSignalInfoView>
+                            <vortex:TcoSignalInfoView DataContext="{Binding _toWorkPosSignalInfo}"></vortex:TcoSignalInfoView>
                         </StackPanel>
 
                       
