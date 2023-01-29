@@ -32,8 +32,8 @@
                     <Grid Grid.IsSharedSizeScope="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="Auto" />
                             
                         </Grid.ColumnDefinitions>
@@ -50,7 +50,7 @@
                             TextWrapping="WrapWithOverflow" />
                         <ContentControl Grid.Column="2" 
                                         Content="{Binding ComponentHeader, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                        HorizontalAlignment="Stretch"
+                                        HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         Margin="5"
                                         MinWidth="150"

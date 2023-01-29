@@ -34,7 +34,7 @@
             Style="{DynamicResource MaterialDesignBody2TextBlock}"
             Text="{Binding Signal.HumanReadable}" 
             TextWrapping="WrapWithOverflow"/>
-        <vortex:RenderableContentControl Grid.Column="3" DataContext="{Binding Signal}" PresentationType="DisplaySlim" />
+        <vortex:RenderableContentControl VerticalAlignment="Center" Grid.Column="3" DataContext="{Binding Signal}" PresentationType="DisplaySlim" />
     </Grid>
 
 </UserControl>
