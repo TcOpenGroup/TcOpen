@@ -20,7 +20,7 @@ END_VAR
     <Method Name="Main" Id="{f5d45085-1503-0fcc-0230-daaec2d9e720}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 VAR
-	
+	_cleanData:ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;	
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_tcoMeasEvaluator();
@@ -28,7 +28,8 @@ CASE THIS^._testId OF
     eTcoEvaluateMeasurementTestList.None:
         ;
     eTcoEvaluateMeasurementTestList.Init:
-		_tcoEvaluateTestDone:=false;
+		_tcoEvaluateTestDone:=FALSE;
+		_measData:=_cleanData;
         _tcoMeasEvaluator.Restore();
     eTcoEvaluateMeasurementTestList.Evaluate:
         _tcoEvaluateTestDone := _tcoMeasEvaluator.Run(inEntityId:=_entityId ,inConfig := _tcoMeasEvaluatorConfig, inData := _measData).Invoke().Done;

@@ -39,18 +39,20 @@
                 materialDesign:ExpanderAssist.VerticalHeaderPadding="0"  >
 
             <Expander.Header>
-                <Grid>
+                <Grid Grid.IsSharedSizeScope="True">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" MinWidth="200"/>
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+
                     </Grid.ColumnDefinitions>
                     <TextBlock
                             Grid.Column="0"
                             Margin="5,0,5,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
                             Text="{Binding . , Converter={tcoCore:NameOrSymbolConverter}}"
                             TextAlignment="Left"
                             TextWrapping="WrapWithOverflow" />

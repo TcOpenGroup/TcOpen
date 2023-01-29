@@ -31,7 +31,7 @@
                 <StackPanel>
                     <Border
                     Height="5"
-                    Background="{Binding  _atHomePos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
+                    Background="{Binding  _atHomePos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
                     <vortex:RenderableContentControl  DataContext="{Binding _moveHomeDefault}"/>
                 </StackPanel>
@@ -44,7 +44,7 @@
                 <StackPanel>
                     <Border
                     Height="5"
-                    Background="{Binding _atWorkPos.Cyclic, Converter={local:ActuatorToBrushConverter}}"
+                    Background="{Binding _atWorkPos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
                     <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
                 </StackPanel>

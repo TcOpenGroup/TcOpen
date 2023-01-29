@@ -12,6 +12,8 @@ VAR
 	_entityId: STRING;
 	{attribute 'hide'}
 	_cleanResultData: TcoEvaluateMeasurementResults;
+	{attribute 'hide'}
+	_cleanData:ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -61,6 +63,7 @@ END_VAR
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
+_data:=_cleanData;
 _results:=_cleanResultData;
 ]]></ST>
       </Implementation>

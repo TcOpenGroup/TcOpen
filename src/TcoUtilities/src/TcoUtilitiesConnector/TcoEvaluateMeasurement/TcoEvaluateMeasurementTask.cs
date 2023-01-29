@@ -72,16 +72,20 @@ namespace TcoUtilities
 
                 var len = plainData._data.Length;
 
-                IEnumerable<PlainTcoEvaluateMeasurementDataItem> data = ignoreSampleIfTimeBaseIsZero
-                  ? plainData._data.Skip(ignoreSamplesFromStart).Where(p => p.TimeBase != new TimeSpan()).Take(len - ignoreSamplesFromStart - 1)
-                  : plainData._data.Skip(ignoreSamplesFromStart).Take(len - ignoreSamplesFromStart - 1);
+                IEnumerable<PlainTcoEvaluateMeasurementDataItem> data = plainData._data;
 
-                data = ignoreSampleIfDistanceIsZero
-                    ? plainData._data.Skip(ignoreSamplesFromStart).Where(p => p.Distance != 0).Take(len-ignoreSamplesFromStart-1)
-                    : plainData._data.Skip(ignoreSamplesFromStart).Take(len - ignoreSamplesFromStart - 1);
+                if (ignoreSampleIfTimeBaseIsZero)
+                    data = data.Where(p => p.TimeBase != new TimeSpan());
 
-                len = data.Count();
-                data = data.Take(len - ignoreSamplesFromEnd);
+
+                if (ignoreSampleIfDistanceIsZero)
+                    data = data.Where(p => p.Distance != 0);
+
+
+
+                data = data.Skip(ignoreSamplesFromStart);
+             
+                data = data.Take(data.Count() - ignoreSamplesFromEnd);
 
 
                 DistanceValues = data.Select(p => p.Distance).Where((x, i) => i % filterValue == 0).ToList();
@@ -93,10 +97,12 @@ namespace TcoUtilities
 
                 if (smootFactor != 1)
                 {
-                    if (ProcessValues.Count !=0)
-                        ProcessValues = FindExtremsHelper.FilterByMovingAverage(ProcessValues,Convert.ToInt32(smootFactor));
-                    DistanceValues = DistanceValues.Take(ProcessValues.Count).ToArray();
-                    FindTriggersValues = FindTriggersValues.Take(ProcessValues.Count).ToArray();
+                    if (ProcessValues.Count != 0)
+                    {
+                        ProcessValues = FindExtremsHelper.FilterByMovingAverage(ProcessValues, Convert.ToInt32(smootFactor));
+                        DistanceValues = DistanceValues.Take(ProcessValues.Count).ToArray();
+                        FindTriggersValues = FindTriggersValues.Take(ProcessValues.Count).ToArray();
+                    }
                 }
 
 
@@ -113,7 +119,8 @@ namespace TcoUtilities
                 var fallingPeaksDistance = FindExtremsHelper.ElementsAt(DistanceValues, fallingPeaksIndex);
                 var triggerLinDistance = FindExtremsHelper.ElementsAt(DistanceValues, triggerIndex);
 
-                LimitIndex = limitIndexExtrems ;
+                LimitIndex = limitIndexExtrems == 0 ? 100 : limitIndexExtrems;
+
                 int itemIndex = 0;
 
                 _results.RisingPeaksFound.Synchron = (short)risingPeaks.Count();
@@ -126,31 +133,39 @@ namespace TcoUtilities
                     {
                         _results.RisingPeaks[itemIndex].ProcessValue.Synchron = ProcessValues.ElementAt(item);
                         _results.RisingPeaks[itemIndex].Distance.Synchron = DistanceValues.ElementAt(item);
+                        _results.RisingPeaks[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+
                     }
-                    
+
                     itemIndex++;
                 }
 
                 itemIndex = 0;
-                LimitIndex = limitIndexTriggers;
+     
 
                 foreach (var item in fallingPeaksIndex)
                 {
                     if (itemIndex <= LimitIndex)
                     {
+                        
                         _results.FallingPeaks[itemIndex].ProcessValue.Synchron = ProcessValues.ElementAt(item);
                         _results.FallingPeaks[itemIndex].Distance.Synchron = DistanceValues.ElementAt(item);
+                        _results.FallingPeaks[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+
                     }
                     itemIndex++;
                 }
 
                 itemIndex = 0;
+                LimitIndex = limitIndexTriggers == 0 ? 100 : limitIndexTriggers;
                 foreach (var item in triggerIndex)
                 {
                     if (itemIndex <= LimitIndex)
                     {
-                        _results.Triggers[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+                        _results.Triggers[itemIndex].ProcessValue.Synchron = ProcessValues.ElementAt(item);
                         _results.Triggers[itemIndex].Distance.Synchron = DistanceValues.ElementAt(item);
+                        _results.Triggers[itemIndex].DiscreteValue.Synchron = FindTriggersValues.ElementAt(item);
+
                     }
                     itemIndex++;
                 }
@@ -241,7 +256,8 @@ namespace TcoUtilities
 
             data.AppendLine("CONFIG");
 
-            data.AppendLine(string.Format("{0}={1}",nameof(config.FilterValue), config.FilterValue));
+            data.AppendLine(string.Format("{0}={1}",nameof(config.SearchRange), config.SearchRange));
+            data.AppendLine(string.Format("{0}={1}", nameof(config.FilterValue), config.FilterValue));
             data.AppendLine(string.Format("{0}={1}", nameof(config.PeaksNoise), config.PeaksNoise));
             data.AppendLine(string.Format("{0}={1}", nameof(config.TriggerNoise), config.TriggerNoise));
             data.AppendLine(string.Format("{0}={1}", nameof(config.SmoothFactor), config.SmoothFactor));
@@ -284,7 +300,7 @@ namespace TcoUtilities
 
             //falling peaks
             data.AppendLine("<<<<<<Falling Peaks>>>>>>");
-            foreach (var item in plainData._results.FallingPeaks.Where(x=>x.ProcessValue!=0))
+            foreach (var item in plainData._results.FallingPeaks.Where(x => x.Distance != 0))
             {
                 var listResults = string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\"",
                                                   item.TimeBase,
@@ -295,7 +311,7 @@ namespace TcoUtilities
                 data.AppendLine(listResults);
             }
             data.AppendLine("<<<<<<Triggers>>>>>>");
-            foreach (var item in plainData._results.Triggers.Where(x => x.DiscreteValue != 0))
+            foreach (var item in plainData._results.Triggers.Where(x => x.Distance != 0))
             {
                 var listResults = string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\"",
                                                   item.TimeBase,
