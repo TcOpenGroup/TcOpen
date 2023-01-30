@@ -23,9 +23,14 @@
         <TabItem Header="Standard">
             <UniformGrid Columns="1" Rows="2">
                 <GroupBox Header="Control">
-                    <Grid IsSharedSizeScope="true">
+                    <StackPanel>
                         <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Service" />
-                    </Grid>
+                      
+                        <ScrollViewer>
+                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Service" />
+                        </ScrollViewer>
+                   
+                    </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Display">
                     <Grid IsSharedSizeScope="true">
