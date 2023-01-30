@@ -13,21 +13,16 @@
     <d:UserControl.DataContext>
         <tcopneumatics:TcoCylinderServiceViewModel />
     </d:UserControl.DataContext>
-    <UserControl.Resources>
-        <ItemsPanelTemplate x:Key="HorizontalWraped">
-            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
-        </ItemsPanelTemplate>
 
-    </UserControl.Resources>
     <vortex:TcoComponentView >
         <vortex:TcoComponentView.ComponentHeader>
 
-            <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Right" DataContext="{Binding Model}" >
-                <ItemsControl.Resources>
+            <WrapPanel   HorizontalAlignment="Left" DataContext="{Binding Model}" >
+                <WrapPanel.Resources>
                     <Style TargetType="StackPanel">
-                        <Setter Property="MinWidth" Value="250"></Setter>
+                        <Setter Property="MinWidth" Value="200"></Setter>
                     </Style>
-                </ItemsControl.Resources>
+                </WrapPanel.Resources>
                 <StackPanel>
                     <Border
                     Height="5"
@@ -48,15 +43,14 @@
                     CornerRadius="2" />
                     <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
                 </StackPanel>
-            </ItemsControl>
+            </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails  >
             <ScrollViewer MaxHeight="200"  DataContext="{Binding Model}">
-                <StackPanel Orientation="Vertical">
-                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" >
+                    <ItemsControl  >
                         <ItemsControl.Resources>
                             <Style TargetType="StackPanel">
-                                <Setter Property="MinWidth" Value="250"></Setter>
+                                <Setter Property="MinWidth" Value="200"></Setter>
                                 <Setter Property="Margin" Value="10"></Setter>
 
                             </Style>
@@ -73,7 +67,6 @@
                       
 
                     </ItemsControl>
-                </StackPanel>
             </ScrollViewer>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>

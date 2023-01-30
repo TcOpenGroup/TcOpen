@@ -65,11 +65,11 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Right" ItemsSource="{Binding Tasks}">
+                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left" ItemsSource="{Binding Tasks}">
 
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <vortex:RenderableContentControl DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                            <DataTemplate> 
+                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
