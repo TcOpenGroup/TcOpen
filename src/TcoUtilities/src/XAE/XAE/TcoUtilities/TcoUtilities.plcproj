@@ -34,6 +34,27 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="POUs\Conversions\eTcoDataFormat.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\FromBytes\TcoBytesToDint.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\FromBytes\TcoBytesToInt.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\FromBytes\TcoBytesToReal.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\ToBytes\TcoDintToBytes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\ToBytes\TcoIntToBytes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Conversions\ToBytes\TcoRealToBytes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TcoEvaluvateMeasurement\TcoEvaluateMeasurementDataItem.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="POUs" />
+    <Folder Include="POUs\Conversions" />
+    <Folder Include="POUs\Conversions\FromBytes" />
+    <Folder Include="POUs\Conversions\ToBytes" />
     <Folder Include="POUs\TcoEvaluvateMeasurement" />
     <Folder Include="POUs\TcoBlinker" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoDataman_v_5_x_x" Id="{acfa500c-75b0-406d-8872-dce797f24ef6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
 VAR_IN_OUT
@@ -223,7 +223,7 @@ IF (inPosition +_size) > TcoVisionParams.MAX_BYTE_ARRAY THEN
 	RETURN;
 END_IF
 
-GetResultAsDint := TcoBytesToDint(THIS^._config.DataFormat,	THIS^._results.Data[inPosition],
+GetResultAsDint := TcoUtilities.TcoBytesToDint(THIS^._config.DataFormat,	THIS^._results.Data[inPosition],
 															THIS^._results.Data[inPosition+1],
 															THIS^._results.Data[inPosition+2],
 															THIS^._results.Data[inPosition+3]);
@@ -258,7 +258,7 @@ IF (inPosition +_size) > TcoVisionParams.MAX_BYTE_ARRAY THEN
 	RETURN;
 END_IF
 
-GetResultAsReal := TcoBytesToReal(THIS^._config.DataFormat,	THIS^._results.Data[inPosition],
+GetResultAsReal := TcoUtilities.TcoBytesToReal(THIS^._config.DataFormat,	THIS^._results.Data[inPosition],
 															THIS^._results.Data[inPosition+1],
 															THIS^._results.Data[inPosition+2],
 															THIS^._results.Data[inPosition+3]);

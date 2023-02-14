@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
-  <POU Name="TcoBytesToDint" Id="{41728869-aaa8-4f88-92d8-6394e53b2cce}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="TcoBytesToDint" Id="{7d0a114c-b504-4988-a035-6d4b85b17163}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION TcoBytesToDint : DINT
 VAR_INPUT
 	inFormat : eTcoDataFormat;
