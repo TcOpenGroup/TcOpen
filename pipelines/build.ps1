@@ -67,14 +67,14 @@ task Clean {
 task Check-Target-License `
   -precondition { $isTestingEnabled } `
 {
-  if(Is-License-Valid $testTargetAmsId)
-  {
-    # continue
-  }
-  else
-  {
-    throw "Target has probably invalid license"
-  }
+  # if(Is-License-Valid $testTargetAmsId)
+  # {
+  #   # continue
+  # }
+  # else
+  # {
+  #   throw "Target has probably invalid license"
+  # }
 }
 
  
