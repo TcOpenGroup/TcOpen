@@ -236,68 +236,6 @@ PROPERTY Busy : BOOL]]></Declaration>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="CheckIfAutoRestoreEnabledByParent" Id="{df452d79-7755-40fb-9a5e-9cf001ea97d0}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			This method ensures reading out the parent's <see cref="PlcDocu.TcoCore.TcoState.EnableAutoRestore()/> property and writing it into the <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/> of this instance.
-			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
-		</summary>			
-	</docu>	
-~*)
-{attribute 'call_after_online_change_slot' := '100'}
-METHOD PRIVATE CheckIfAutoRestoreEnabledByParent
-VAR
-	_MyParent_TcoState	: 	ITcoState := 0;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent,_MyParent_TcoState) THEN 
-	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
-END_IF;	]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="CheckIfCalledCyclically" Id="{8bed849a-6af0-4393-b698-13926e62e390}">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Private method called inside the <see cref="PlcDocu.TcoCore.TcoTask.Execute()"/> method checking the cyclicall calling of this method. 
-			If this instance is auto restorable, this method ensures calling the <see cref="PlcDocu.TcoCore.TcoTask.Restore()"/> method if
-			the <see cref="PlcDocu.TcoCore.TcoTask.Execute()"/> method has not been called for one or more cycles and starts to be called again.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.EnableAutoRestore()"/>
-			</para>
-		</summary>			
-	</docu>	
-~*)
-{attribute clr [ExcludeFromApiDocumentation()]}
-METHOD PRIVATE CheckIfCalledCyclically
-VAR 
-	_MyContextStartCycleCount : ULINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//If parent of this instance is TcoState type or its derived type and the parent
-//EnableAutoRestore property is set to TRUE, this instance determines the value
-//of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
-//after each download.
-IF _AutoRestorable THEN		
-	_MyContextStartCycleCount := THIS^.Context.StartCycleCount;
-	//If this instance is AutoRestorable, its body has to be called cyclically, 
-	//otherwise this instance is restored.
-	//This mechanism force the user to call this instance properly,
-	//in order to don't miss the OnStateChange() event of the parent
-	//in case of the body of this instance isn't called.
-	IF _MyContextStartCycleCount > _StartCycleCount + 1 THEN
-		Restore();
-	END_IF
-	_StartCycleCount := _MyContextStartCycleCount;
-END_IF]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Context" Id="{89ed1df2-40b6-4665-987f-6393770d5c32}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -525,6 +463,68 @@ END_VAR
         <ST><![CDATA[_ParentObject := ParentObject;
 CheckIfAutoRestoreEnabledByParent();
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckIfAutoRestoreEnabledByParent" Id="{df452d79-7755-40fb-9a5e-9cf001ea97d0}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method ensures reading out the parent's <see cref="PlcDocu.TcoCore.TcoState.EnableAutoRestore()/> property and writing it into the <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/> of this instance.
+			Calling this method is ensured by calling the implicit method <c>FB_init()</c> after download, or after online change.
+		</summary>			
+	</docu>	
+~*)
+{attribute 'call_after_online_change_slot' := '100'}
+METHOD PRIVATE CheckIfAutoRestoreEnabledByParent
+VAR
+	_MyParent_TcoState	: 	ITcoState := 0;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent,_MyParent_TcoState) THEN 
+	_AutoRestorable := _MyParent_TcoState.IsAutoRestoreEnabled;
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckIfCalledCyclically" Id="{8bed849a-6af0-4393-b698-13926e62e390}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Private method called inside the <see cref="PlcDocu.TcoCore.TcoTask.Execute()"/> method checking the cyclicall calling of this method. 
+			If this instance is auto restorable, this method ensures calling the <see cref="PlcDocu.TcoCore.TcoTask.Restore()"/> method if
+			the <see cref="PlcDocu.TcoCore.TcoTask.Execute()"/> method has not been called for one or more cycles and starts to be called again.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.EnableAutoRestore()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+{attribute clr [ExcludeFromApiDocumentation()]}
+METHOD PRIVATE CheckIfCalledCyclically
+VAR 
+	_MyContextStartCycleCount : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//If parent of this instance is TcoState type or its derived type and the parent
+//EnableAutoRestore property is set to TRUE, this instance determines the value
+//of its own AutoRestorable property by calling CheckIfAutoRestoreEnabledByParent 
+//after each download.
+IF _AutoRestorable THEN		
+	_MyContextStartCycleCount := THIS^.Context.StartCycleCount;
+	//If this instance is AutoRestorable, its body has to be called cyclically, 
+	//otherwise this instance is restored.
+	//This mechanism force the user to call this instance properly,
+	//in order to don't miss the OnStateChange() event of the parent
+	//in case of the body of this instance isn't called.
+	IF _MyContextStartCycleCount > _StartCycleCount + 1 THEN
+		Restore();
+	END_IF
+	_StartCycleCount := _MyContextStartCycleCount;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{50d5c151-1536-4b27-8f6d-91815baa7c03}">

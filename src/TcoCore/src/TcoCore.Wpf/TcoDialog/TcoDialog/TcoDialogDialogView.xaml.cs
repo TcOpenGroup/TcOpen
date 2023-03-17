@@ -24,7 +24,7 @@ namespace TcoCore
     {
         public TcoDialogDialogView() : base()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }
     }
 }

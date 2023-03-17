@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoInspectorDialog" Id="{c6c9fa75-2ded-0851-0bf8-095f61987545}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -13,12 +13,19 @@ VAR
 	_dialogueRetry	    	: BOOL;	
 	_dialogueTerminate  	: BOOL;	
 	_dialogueOverride   	: BOOL;
-	
+	_isActive				: BOOL;
+	_dialogIsClosed				: BOOL;
     _isOverInspected      	: BOOL;
     {attribute 'hide'}
     _refInspector : REFERENCE TO TcoInspector;
 	{attribute 'hide'}
 	_tierAct          : TcoCore.TcoTier(THIS^);
+	
+	_rTrigRetry		: R_TRIG;
+	_rTrigTerminate		: R_TRIG;
+	_externalCloseReq : BOOL;
+	_closeRetrySignal:BOOL;
+	_closeTerminateSignal:BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -63,10 +70,13 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-
 _dialogueRetry	    	:=  FALSE;	
 _dialogueTerminate  	:=  FALSE;	
-_dialogueOverride   	:=  FALSE;]]></ST>
+_dialogueOverride   	:=  FALSE;
+_closeRetrySignal:=FALSE;
+_closeTerminateSignal:=FALSE;
+_dialogIsClosed:=FALSE;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetInspector" Id="{59f6bb8e-40b5-01f0-1137-0e38be5ca644}">
@@ -115,6 +125,79 @@ END_IF
 		END_IF;	
 	END_IF;	
 END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShowWithExternalClose" Id="{e354156d-00e4-0400-3d3e-1803329c2fbb}">
+      <Declaration><![CDATA[METHOD ShowWithExternalClose
+VAR_INPUT
+	inRetryStep : INT;
+	inRetrySignal:BOOL;
+	inTerminateSignal : BOOL;
+	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^._taskState=eTaskState.Ready THEN
+	_dialogueRetry	    	:=  FALSE;	
+	_dialogueTerminate  	:=  FALSE;	
+	_dialogueOverride   	:=  FALSE;
+END_IF
+_isOverInspected := _refInspector.OverInspected;
+
+IF(_tierAct.IsNewTier()) THEN
+	THIS^.Restore();
+END_IF
+
+
+
+
+_rTrigRetry(CLK:=inRetrySignal);
+IF _rTrigRetry.q THEN
+	_closeRetrySignal:=TRUE;
+END_IF
+
+_rTrigRetry(CLK:=inTerminateSignal);
+IF _rTrigRetry.q THEN
+	_closeTerminateSignal:=TRUE;
+END_IF
+
+
+ IF(_refInspector.Done) THEN		
+	IF(_refInspector.Result = eInspectorResult.Failed) THEN
+		THIS^.Invoke();
+		SUPER^();	
+		{warning disable C0357}
+		_dialogueRetry:=_closeRetrySignal;
+		IF(_dialogueRetry) THEN
+			_refInspector.Retry(inRetryStep);
+				
+
+		END_IF
+		_dialogueTerminate:=_closeTerminateSignal;
+		IF(_dialogueTerminate ) THEN
+			_refInspector.Terminate();
+			
+
+		END_IF
+		
+		IF(_dialogueOverride) THEN
+			_refInspector.CarryOn();
+		END_IF
+		{warning enable C0357}
+	ELSE
+		IF(_refInspector.Coordinator <> 0) THEN
+			_refInspector.Coordinator.MoveNext();
+		END_IF;	
+	END_IF;	
+END_IF;
+
+IF THIS^._taskState=eTaskState.Done 
+		AND ( _dialogueRetry
+		OR _dialogueTerminate
+		OR _dialogueOverride)
+		and _dialogIsClosed  THEN	
+	THIS^.Restore();
+END_IF; ]]></ST>
       </Implementation>
     </Method>
   </POU>

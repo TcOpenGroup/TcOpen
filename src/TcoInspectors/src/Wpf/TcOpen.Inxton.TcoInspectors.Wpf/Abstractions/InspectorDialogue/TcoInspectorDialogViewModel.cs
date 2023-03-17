@@ -11,22 +11,29 @@ using Vortex.Connector.Identity;
 
 namespace TcoInspectors
 {
-    public class TcoInspectorDialogDialogViewModel : Vortex.Presentation.Wpf.RenderableViewModel, ICloseable
+    public class TcoInspectorDialogDialogViewModel : Vortex.Presentation.Wpf.RenderableViewModel, ICloseable, IDisposable
     {
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+
         public TcoInspectorDialogDialogViewModel()
-        {            
-           
-            RetryCommand = new RelayCommand((a) => { Dialog._dialogueRetry.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); }, 
+        {
+
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+
+            dispatcherTimer.Start();
+
+            RetryCommand = new RelayCommand((a) => { Dialog._dialogueRetry.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                             (b) => Dialog != null && !Dialog._isOverInspected.Synchron,
                                             () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(RetryCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
-            TerminateCommand = new RelayCommand((a) => { Dialog._dialogueTerminate.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); }, 
+            TerminateCommand = new RelayCommand((a) => { Dialog._dialogueTerminate.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                                 (b) => true,
                                                 () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(TerminateCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
-            OverrideCommand = new RelayCommand((a) => { Dialog._dialogueOverride.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); }, 
+            OverrideCommand = new RelayCommand((a) => { Dialog._dialogueOverride.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                                (b) => true,
-                                                () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(OverrideCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));           
-        }       
-      
+                                                () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(OverrideCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
+        }
+
         List<IVortexObject> _inspectorsList;
         public IEnumerable<IVortexObject> Inspectors
         {
@@ -49,7 +56,7 @@ namespace TcoInspectors
                                 break;
                             case TcoInspector i:
                                 _inspectorsList.Add(parent);
-                                break;                            
+                                break;
                         }
                     }
                     catch (Exception)
@@ -81,8 +88,37 @@ namespace TcoInspectors
         public RelayCommand TerminateCommand { get; }
         public RelayCommand OverrideCommand { get; }
         public event EventHandler CloseRequestEventHandler;
-    }
 
+        int _progress = 0;
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+
+            Dialog.Read();
+            if (Dialog._dialogueRetry.LastValue || Dialog._dialogueTerminate.LastValue)
+            {
+                Dialog._dialogIsClosed.Synchron = true;
+                CloseRequestEventHandler?.Invoke(sender, e);
+
+                if (dispatcherTimer != null)
+                {
+                    dispatcherTimer.Stop(); // stop timer
+                    dispatcherTimer.Tick -= dispatcherTimer_Tick;
+                }
+            }
+
+        }
+
+        public void Dispose()
+        {
+            if (dispatcherTimer != null)
+            {
+                dispatcherTimer.Stop();
+                dispatcherTimer.Tick -= dispatcherTimer_Tick;
+
+            }
+        }
+    }
     public interface ICloseable
     {
         event EventHandler CloseRequestEventHandler;

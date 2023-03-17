@@ -19,21 +19,20 @@
         <Expander>
             <Expander.Header>
                 <Grid Margin="5" Grid.IsSharedSizeScope="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorName"/>
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="Auto" />
+
                     </Grid.ColumnDefinitions>
-                    <TextBlock Margin="0,0,20,0" TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
-                    <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowControlSlim"/>
-                    <controls:RenderableContentControl Grid.Column="4" DataContext="{Binding _data.IsByPassed}" PresentationType="ShadowControlSlim"/>
-                    <controls:RenderableContentControl Grid.Column="5" DataContext="{Binding _data.IsExcluded}" PresentationType="ShadowControlSlim"/>
+                    <TextBlock Margin="0,0,20,0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
+
+                    <WrapPanel Grid.Column="2">
+                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowControlSlim"/>
+                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.IsByPassed}" PresentationType="ShadowControlSlim"/>
+                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.IsExcluded}" PresentationType="ShadowControlSlim"/>
+                    </WrapPanel>
                 </Grid>
             </Expander.Header>
 

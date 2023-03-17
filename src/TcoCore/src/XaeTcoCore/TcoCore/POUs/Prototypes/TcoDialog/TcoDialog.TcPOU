@@ -22,6 +22,9 @@ VAR
     _hasCancel  : BOOL;
     _answer     : eDialogAnswer;
     _dialogType : eDialogType;
+	_rTrig		: R_TRIG;
+	_externalCloseReq : BOOL;
+	_closeSignal: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -68,6 +71,17 @@ END_VAR
 _answer := eDialogAnswer.NoAnswer;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Restore" Id="{b1b04a3a-6e24-00f0-1f54-b5cc0b7efc8c}">
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_externalCloseReq := FALSE;
+_closeSignal:=FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Show" Id="{052bdc3b-8ff1-0bbd-0fbb-d25a0348416f}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -84,7 +98,11 @@ METHOD Show : ITcoDialogFormat
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Invoke();
+        <ST><![CDATA[IF THIS^._taskState=eTaskState.Ready THEN
+	_answer:=eDialogAnswer.NoAnswer;
+END_IF
+
+THIS^.Invoke();
 SUPER^();
 
 _hasOK       := FALSE;
@@ -95,7 +113,54 @@ _text        := '';
 _caption     := '';
 _dialogType  := eDialogType.Undefined;
 
-Show := THIS^;]]></ST>
+Show := THIS^;
+
+IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.NoAnswer THEN
+	THIS^.Restore();
+END_IF; 
+ ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShowWithExternalClose" Id="{43606d08-c3b6-0424-0c8d-256226f8f48d}">
+      <Declaration><![CDATA[METHOD ShowWithExternalClose : ITcoDialogFormat
+VAR_INPUT
+	inCloseSignal:BOOL;
+	inDialogAnswerType : eDialogAnswer;
+
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^._taskState=eTaskState.Ready THEN
+	_answer:=eDialogAnswer.NoAnswer;
+END_IF
+
+THIS^.Invoke();
+SUPER^();
+
+
+_hasOK       := FALSE;
+_hasYes      := FALSE;
+_hasNo       := FALSE;
+_hasCancel   := FALSE;
+_externalCloseReq := TRUE;
+_text        := '';
+_caption     := '';
+_dialogType  := eDialogType.Undefined;
+
+ShowWithExternalClose := THIS^;
+_rTrig(CLK:=inCloseSignal);
+IF _rTrig.q THEN
+	_closeSignal:=TRUE;
+END_IF
+
+IF	_closeSignal THEN
+	_answer:=inDialogAnswerType;		
+END_IF
+
+IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.NoAnswer THEN	
+	THIS^.Restore();
+END_IF; ]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithCaption" Id="{e74b3d9a-c845-0bc5-27de-0a52b6eb9b30}" FolderPath="Format\">

@@ -7,12 +7,14 @@ VAR
     _dialog1        : TcoCore.TcoDialog(THIS^);
     _dialog2        : TcoCore.TcoDialog(THIS^);
     _dialog3        : TcoCore.TcoDialog(THIS^);
+	_dialog4        : TcoCore.TcoDialog(THIS^);
 
     _invokeDiaglogsConsequential : BOOL;
     _dialog1Consequential        : TcoCore.TcoDialog(THIS^);
     _dialog2Consequential        : TcoCore.TcoDialog(THIS^);
     _dialog3Consequential        : TcoCore.TcoDialog(THIS^);
-
+		diag: ITcoDialogAnswer;
+	_tonDisposeDialog: TON;
     _state : INT;
 END_VAR
 ]]></Declaration>
@@ -29,16 +31,30 @@ END_VAR
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED  Main
+VAR
+
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE _state OF
+        <ST><![CDATA[
+CASE _state OF
 	0:
 		IF(_invokeDiaglog1) THEN _state := 10; END_IF;
 	10:
 		_dialog1.Show()
 			.WithType(eDialogType.Question)
 			.WithYesNoCancel()
-			.WithCaption('Hey')
+			.WithCaption('Hey 1')
+			.WithText('Do we go ahead to 2?');
+			
+		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN _state := 15; END_IF;
+		IF(_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN _state := 1000; END_IF;
+		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Cancel) THEN _state := 0; _invokeDiaglog1 := FALSE; END_IF;
+	15:
+		_dialog1.Show()
+			.WithType(eDialogType.Question)
+			.WithYesNoCancel()
+			.WithCaption('Hey 2')
 			.WithText('Do we go ahead?');
 			
 		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN _state := 20; END_IF;
@@ -54,7 +70,22 @@ METHOD PROTECTED  Main]]></Declaration>
 			_state := 30;			
 		END_IF
 	30:
+			_state := 40;	
+			_tonDisposeDialog(In:=FALSE);
+	40:
+		_tonDisposeDialog(IN:=TRUE,PT:=T#10S);
+		IF	 _dialog4.ShowWithExternalClose(_tonDisposeDialog.q,inDialogAnswerType:=eDialogAnswer.OK)		
+			.WithType(eDialogType.Info)
+			.WithOk()
+			.WithCaption('Hey')
+			.WithText('THIS WINDOW SHOULD BE DOWN AFTER 10sec.').Answer=TcoCore.eDialogAnswer.OK
+			  THEN
+			
+			
 			_state := 0;			
+		END_IF 
+		
+				
  	1000:
 		IF(_dialog3.Show()
 					.WithType(eDialogType.Warning)

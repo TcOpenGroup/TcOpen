@@ -20,31 +20,29 @@
         <Expander>
             <Expander.Header>
                 <Grid Margin="5" Grid.IsSharedSizeScope="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorNameGroup" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="Auto" />
+
                     </Grid.ColumnDefinitions>
-                    <TextBlock Margin="0,0,20,0" TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
-                    <controls:RenderableContentControl Grid.Column="1" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowDisplaySlim"/>
-                    <controls:RenderableContentControl Grid.Column="2" DataContext="{Binding _data.DetectedStatus}" PresentationType="ShadowDisplaySlim"/>
-                    <controls:RenderableContentControl Grid.Column="3" DataContext="{Binding _data.StarNotationEnabled}" PresentationType="ShadowDisplaySlim"/>
-                    <StackPanel Grid.Column="5">
-                        <materialDesign:PackIcon HorizontalAlignment="Stretch" 
+                    <TextBlock Margin="0,0,20,0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
+                    <WrapPanel Grid.Column="2">
+                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowDisplaySlim"/>
+                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.DetectedStatus}" PresentationType="ShadowDisplaySlim"/>
+                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.StarNotationEnabled}" PresentationType="ShadowDisplaySlim"/>
+                        <StackPanel Grid.Column="5" Margin="10,0">
+                            <materialDesign:PackIcon HorizontalAlignment="Stretch" 
                                                  VerticalAlignment="Stretch"                                                  
                                                  Width="20"
                                                  Height="20"                                             
                                                  Kind="{Binding _data.Result.Shadow, Converter={wpf:InspectorsIconConverter}}" 
                                                  Background="Transparent"
                                                  Foreground="{Binding _data.Result.Shadow, Converter={wpf:InspectorsResultColorConverter}}"/>
-                        <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Text="{Binding _data.Result.Shadow, Converter={wpf:InspectorsResultDescriptionConverter}}"></TextBlock>
-                    </StackPanel>
+                            <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Text="{Binding _data.Result.Shadow, Converter={wpf:InspectorsResultDescriptionConverter}}"></TextBlock>
+                        </StackPanel>
+                    </WrapPanel>
                 </Grid>
             </Expander.Header>
 

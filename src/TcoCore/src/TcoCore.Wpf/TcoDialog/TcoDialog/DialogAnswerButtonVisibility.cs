@@ -13,7 +13,7 @@ namespace TcoCore
         {
             var b = (bool)value;
 
-            return b ? Visibility.Visible : Visibility.Hidden;
+            return b ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -47,15 +47,15 @@
                 <controls:RenderableContentControl
                             Margin="5"
                             DataContext="{Binding TimeStamp}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+                             PresentationType="Display" />
                 <controls:RenderableContentControl
                             Margin="5"
                             DataContext="{Binding RetryAttemptsCount}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+                             PresentationType="Display" />
                 <controls:RenderableContentControl
                             Margin="5"
                             DataContext="{Binding Result}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+                             PresentationType="Display" />
             </StackPanel>
         </Grid>
     </materialDesign:Card>

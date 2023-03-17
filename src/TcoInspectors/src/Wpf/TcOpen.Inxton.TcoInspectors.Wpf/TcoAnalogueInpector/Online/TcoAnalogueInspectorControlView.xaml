@@ -22,47 +22,47 @@
         <Expander>
             <Expander.Header>
                 <Grid Margin="5" Grid.IsSharedSizeScope="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="InspectorNameGroup" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
-                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="Auto" />
+
                     </Grid.ColumnDefinitions>
+
                     <TextBlock
                         Margin="0,0,20,0"
-                        Grid.Row="1"
                         Grid.Column="0"
+                        Grid.ColumnSpan="2"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontWeight="Bold"
                         Text="{Binding Converter={controls:NameOrSymbolConverter}}"
                         TextWrapping="WrapWithOverflow" />
-                    <controls:RenderableContentControl
+
+                    <WrapPanel Grid.Column="2">
+                        <controls:RenderableContentControl Margin="10,0"
                         Grid.Column="1"
                         DataContext="{Binding _data.RequiredMin}"
                         PresentationType="ControlSlim" />
-                    <controls:RenderableContentControl
+                        <controls:RenderableContentControl Margin="10,0"
                         Grid.Column="2"
                         DataContext="{Binding _data.DetectedStatus}"
                         PresentationType="ControlSlim" />
-                    <controls:RenderableContentControl
+                        <controls:RenderableContentControl Margin="10,0"
                         Grid.Column="3"
                         DataContext="{Binding _data.RequiredMax}"
                         PresentationType="ControlSlim" />
-                    <controls:RenderableContentControl
+                        <controls:RenderableContentControl Margin="10,0"
                         Grid.Column="4"
                         DataContext="{Binding _data.IsByPassed}"
                         PresentationType="ControlSlim" />
-                    <controls:RenderableContentControl
+                        <controls:RenderableContentControl Margin="10,0"
                         Grid.Column="5"
                         DataContext="{Binding _data.IsExcluded}"
                         PresentationType="ControlSlim" />
 
+                    </WrapPanel>
                 </Grid>
             </Expander.Header>
 
