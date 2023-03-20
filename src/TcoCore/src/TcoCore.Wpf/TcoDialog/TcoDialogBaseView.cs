@@ -10,8 +10,7 @@ namespace TcoCore
     /// </summary>
     public partial class TcoDialogBaseView : Window
     {
-        public TcoDialogBaseView
-            ()
+        public TcoDialogBaseView()
         {           
             this.DataContextChanged += TcoDialogBaseView_DataContextChanged;
             this.MouseLeftButtonDown += OnMouseLeftButtonDown;

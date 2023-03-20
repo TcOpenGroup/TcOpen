@@ -122,10 +122,51 @@ END_IF;
       </Implementation>
     </Method>
     <Method Name="ShowWithExternalClose" Id="{43606d08-c3b6-0424-0c8d-256226f8f48d}">
-      <Declaration><![CDATA[METHOD ShowWithExternalClose : ITcoDialogFormat
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Shows the dialog , closig this dialog is possibe  by external signal such as HW button press. Only one answer exclusively in same time is evaluated
+			<note type="important">
+				In order for the dialog to be displayed to the user user application must initialized in the user application.
+				How to set up the observer in a WPF see `TcOpen.Inxton.TcoCore.Wpf.DialogProxyService`.
+			</note> 			 					
+ 		</summary>					
+	</docu>	
+~*)
+METHOD ShowWithExternalClose : ITcoDialogFormat
 VAR_INPUT
-	inCloseSignal:BOOL;
-	inDialogAnswerType : eDialogAnswer;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.Ok`
+		</summary>			
+	</docu>	
+	~*)
+    inOkAnswerSignal      : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.Yes`
+		</summary>			
+	</docu>	
+	~*)
+    inYesAnswerSignal     : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.No`
+		</summary>			
+	</docu>	
+	~*)
+    inNoAnswerSignal      : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.Cancel`
+		</summary>			
+	</docu>	
+	~*)
+    inCancelAnswerSignal  : BOOL:=FALSE;
 
 END_VAR
 
@@ -149,14 +190,18 @@ _caption     := '';
 _dialogType  := eDialogType.Undefined;
 
 ShowWithExternalClose := THIS^;
-_rTrig(CLK:=inCloseSignal);
+_rTrig(CLK:=inOkAnswerSignal XOR inYesAnswerSignal XOR inNoAnswerSignal XOR inCancelAnswerSignal );
 IF _rTrig.q THEN
 	_closeSignal:=TRUE;
+	IF	inOkAnswerSignal THEN; _answer:=eDialogAnswer.Ok;
+	ELSIF	inYesAnswerSignal THEN; _answer:=eDialogAnswer.Yes;
+	ELSIF	inNoAnswerSignal THEN; _answer:=eDialogAnswer.No;
+	ELSIF	inCancelAnswerSignal THEN; _answer:=eDialogAnswer.Cancel;END_IF;
+
+
+
 END_IF
 
-IF	_closeSignal THEN
-	_answer:=inDialogAnswerType;		
-END_IF
 
 IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.NoAnswer THEN	
 	THIS^.Restore();

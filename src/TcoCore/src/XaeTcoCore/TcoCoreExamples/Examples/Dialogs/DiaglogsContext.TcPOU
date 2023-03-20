@@ -38,68 +38,95 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 CASE _state OF
-	0:
-		IF(_invokeDiaglog1) THEN _state := 10; END_IF;
-	10:
-		_dialog1.Show()
-			.WithType(eDialogType.Question)
-			.WithYesNoCancel()
-			.WithCaption('Hey 1')
-			.WithText('Do we go ahead to 2?');
-			
-		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN _state := 15; END_IF;
-		IF(_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN _state := 1000; END_IF;
-		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Cancel) THEN _state := 0; _invokeDiaglog1 := FALSE; END_IF;
-	15:
-		_dialog1.Show()
-			.WithType(eDialogType.Question)
-			.WithYesNoCancel()
-			.WithCaption('Hey 2')
-			.WithText('Do we go ahead?');
-			
-		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN _state := 20; END_IF;
-		IF(_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN _state := 1000; END_IF;
-		IF(_dialog1.Answer = TcoCore.eDialogAnswer.Cancel) THEN _state := 0; _invokeDiaglog1 := FALSE; END_IF;
-	20:
-		IF(_dialog2.Show()
-			.WithType(eDialogType.Info)
-			.WithOk()
-			.WithCaption('Hey')
-			.WithText('We go ahead.')
-			.Answer = TcoCore.eDialogAnswer.OK) THEN
-			_state := 30;			
-		END_IF
-	30:
-			_state := 40;	
-			_tonDisposeDialog(In:=FALSE);
-	40:
-		_tonDisposeDialog(IN:=TRUE,PT:=T#10S);
-		IF	 _dialog4.ShowWithExternalClose(_tonDisposeDialog.q,inDialogAnswerType:=eDialogAnswer.OK)		
-			.WithType(eDialogType.Info)
-			.WithOk()
-			.WithCaption('Hey')
-			.WithText('THIS WINDOW SHOULD BE DOWN AFTER 10sec.').Answer=TcoCore.eDialogAnswer.OK
-			  THEN
-			
-			
-			_state := 0;			
-		END_IF 
-		
-				
- 	1000:
-		IF(_dialog3.Show()
-					.WithType(eDialogType.Warning)
-				  	.WithOk()
-					.WithCaption('Hey')
-					.WithText('We don`t go ahead.')
-					.Answer = TcoCore.eDialogAnswer.OK) THEN
-			_state := 0;
-		END_IF	
+    0:
+        IF (_invokeDiaglog1) THEN
+            _state := 10;
+        END_IF;
+    10:
+        _dialog1.Show()
+            .WithType(eDialogType.Question)
+            .WithYesNoCancel()
+            .WithCaption('Hey 1')
+            .WithText('Do we go ahead to 2?');
+
+        IF (_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
+            _state := 15;
+        END_IF;
+
+        IF (_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN
+            _state := 1000;
+        END_IF;
+
+        IF (_dialog1.Answer = TcoCore.eDialogAnswer.Cancel) THEN
+            _state := 0;
+            _invokeDiaglog1 := FALSE;
+        END_IF;
+    15:
+        _dialog1.Show()
+            .WithType(eDialogType.Question)
+            .WithYesNoCancel()
+            .WithCaption('Hey 2')
+            .WithText('Do we go ahead?');
+
+        IF (_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
+            _state := 20;
+        END_IF;
+
+        IF (_dialog1.Answer = TcoCore.eDialogAnswer.No) THEN
+            _state := 1000;
+        END_IF;
+
+        IF (_dialog1.Answer = TcoCore.eDialogAnswer.Cancel) THEN
+            _state := 0;
+            _invokeDiaglog1 := FALSE;
+        END_IF;
+    20:
+        IF (_dialog2.Show()
+            .WithType(eDialogType.Info)
+            .WithOk()
+            .WithCaption('Hey')
+            .WithText('We go ahead.')
+            .Answer =
+            TcoCore.eDialogAnswer.OK) THEN
+            _state := 30;
+        END_IF
+    30:
+        _state := 40;
+        _tonDisposeDialog(In := FALSE);
+    40:
+        _tonDisposeDialog(IN := TRUE, PT := T#4S);
+		_dialog4.ShowWithExternalClose(inOkAnswerSignal:=FALSE , inYesAnswerSignal:= _tonDisposeDialog.Q, inNoAnswerSignal:= FALSE, inCancelAnswerSignal:= FALSE)
+		    .WithType(eDialogType.Info)
+            .WithYesNoCancel()
+            .WithCaption('Hey')
+            .WithText('Do you wana retry it? Yes answer will be set in 4 sec?');
+
+        IF (_dialog4.Answer = TcoCore.eDialogAnswer.Yes) THEN
+            _state := 0;
+        END_IF;
+
+        IF (_dialog4.Answer = TcoCore.eDialogAnswer.No) THEN
+            _state := 1000;
+        END_IF;
+
+        IF (_dialog4.Answer = TcoCore.eDialogAnswer.Cancel) THEN
+            _state := 0;
+            _invokeDiaglog1 := FALSE;
+        END_IF;
+    1000:
+        IF (_dialog3.Show()
+            .WithType(eDialogType.Warning)
+            .WithOk()
+            .WithCaption('Hey')
+            .WithText('We don`t go ahead.')
+            .Answer =
+            TcoCore.eDialogAnswer.OK) THEN
+            _state := 0;
+        END_IF
 END_CASE
 
 //IF(_invokeDiaglog1) THEN
- 	
-			
+
 //	IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
 //		IF(_dialog2.Show()
 //			.WithType(eDialogType.Info)
@@ -120,11 +147,11 @@ END_CASE
 //	END_IF			
 //END_IF;	
 
-IF(_invokeDiaglogsConsequential) THEN
-	_dialog1Consequential.Show().WithYesNoCancel().WithCaption('Hey D1').WithText('D1');
-	_dialog2Consequential.Show().WithYesNoCancel().WithCaption('Hey D2').WithText('D2');
-	_dialog3Consequential.Show().WithYesNoCancel().WithCaption('Hey D3').WithText('D3');
-END_IF;	]]></ST>
+IF (_invokeDiaglogsConsequential) THEN
+    _dialog1Consequential.Show().WithYesNoCancel().WithCaption('Hey D1').WithText('D1');
+    _dialog2Consequential.Show().WithYesNoCancel().WithCaption('Hey D2').WithText('D2');
+    _dialog3Consequential.Show().WithYesNoCancel().WithCaption('Hey D3').WithText('D3');
+END_IF;]]></ST>
       </Implementation>
     </Method>
   </POU>
