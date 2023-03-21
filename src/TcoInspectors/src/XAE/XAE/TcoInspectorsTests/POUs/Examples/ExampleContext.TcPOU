@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="ExampleContext" Id="{1aa2a6c1-d36a-0374-1754-fb6150365769}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleContext EXTENDS TcoCore.TcoContext
 VAR
@@ -16,6 +16,9 @@ VAR
 
     _examples_2 	: Examples_2(THIS^);
 	_examplesImplementationWithDone : ExamplesImplementationWithDone(THIS^);
+	_tonRetry: TON;
+	_rtrigRetry: R_trig;
+	_tonTerminate: TON;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -64,9 +67,9 @@ IF (seq.Step(inStepID := 0,
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
-			.WithText('We are about to start the inspection sequence. Do we go ahead?')				
-			.WithYesNo()
-			.Answer;
+			.WithText('We are about to start the inspection sequence. Do we go ahead?')			
+			.WithYesNo().Answer;
+			//
 			
 	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
 		seq.CompleteStep();
@@ -147,7 +150,7 @@ END_IF;
 
 //<TcoDigitalInspector>	
 IF (seq.Step(inStepID := 200,
-    inEnabled := TRUE,
+    inEnabled := false,
     inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
     //--------------------------------------------------------	
     Data.BoltPresenceInspector
@@ -155,7 +158,53 @@ IF (seq.Step(inStepID := 200,
 		.Inspect(Components.BoltPresenceSensor)
 		.UpdateComprehensiveResult(Data.OverallResult)
         .OnFail()
-        .Dialog(300);
+        .Dialog(250);
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 249,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
+    //--------------------------------------------------------	
+    _tonRetry(IN:=	FALSE);
+	 _tonTerminate(IN:=	FALSE);
+	 IF seq.CurrentStep.Duration >= T#10MS THEN
+		seq.CompleteStep();
+	end_if;
+    //--------------------------------------------------------			
+END_IF;
+//<TcoDigitalInspector>	
+IF (seq.Step(inStepID := 250,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
+    //--------------------------------------------------------	
+     //_tonRetry(IN:=	Data.BoltPresenceInspector.Done,Pt:=T#1S);
+	 _tonTerminate(IN:=	Data.BoltPresenceInspector.Done,Pt:=T#10S);
+	 _rtrigRetry(clk:=_tonRetry.Q);
+	 _tonRetry(IN:=NOT _rtrigRetry.Q ,Pt:=T#1S);
+	Data.BoltPresenceInspector
+		.WithCoordinator(seq)
+		.Inspect(Components.BoltPresenceSensor)
+		.UpdateComprehensiveResult(Data.OverallResult)
+		
+        .OnFail()
+        .DialogWithExternalClose (249,inRetrySignal:=_rtrigRetry.Q,inTerminateSignal:=_tonTerminate.q);
+    //--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 260,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
+    //--------------------------------------------------------	
+    _tonRetry(IN:=	Data.BoltPresenceInspector.Done,Pt:=T#5S);
+	 _tonTerminate(IN:=	Data.BoltPresenceInspector.Done,Pt:=T#3S);
+	 _rtrigRetry(clk:=_tonRetry.Q);
+	 _tonRetry(IN:=NOT _rtrigRetry.Q);
+	Data.BoltPresenceInspector
+		.WithCoordinator(seq)
+		.Inspect(Components.BoltPresenceSensor)
+		.UpdateComprehensiveResult(Data.OverallResult)
+        .OnFail()
+        .DialogWithExternalClose (260,inRetrySignal:=_rtrigRetry.Q,inTerminateSignal:=_tonTerminate.q);
     //--------------------------------------------------------			
 END_IF;
 //<TcoDigitalInspector>	

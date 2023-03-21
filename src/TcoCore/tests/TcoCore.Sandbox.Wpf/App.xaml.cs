@@ -42,7 +42,7 @@ namespace TcoCore.Sandbox.Wpf
                                                         .WriteTo.Notepad()
                                                         .MinimumLevel.Verbose()))
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext }));
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));
 
             
             PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);

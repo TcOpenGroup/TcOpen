@@ -89,7 +89,7 @@
 
             if (string.IsNullOrEmpty(this.Permissions))
             {
-                this.Visibility = Visibility.Hidden;
+                this.Visibility = Visibility.Collapsed;
                 return;
             }
 
@@ -97,7 +97,7 @@
             {
                 case SecurityModeEnum.Invisible:
                     this.IsEnabled = HasPermission() ? true : false;
-                    this.Visibility = HasPermission() ? Visibility.Visible : Visibility.Hidden;
+                    this.Visibility = HasPermission() ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 case SecurityModeEnum.Disabled:
                     this.IsEnabled = HasPermission() ? true : false;

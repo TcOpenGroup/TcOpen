@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <Itf Name="IOnFail" Id="{64413ada-1c4e-0207-0dd6-42d79018c54f}">
     <Declaration><![CDATA[INTERFACE IOnFail EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
@@ -11,6 +11,14 @@
       <Declaration><![CDATA[METHOD Dialog : BOOL
 VAR_INPUT
 	inRetryStep : INT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="DialogWithExternalClose" Id="{1fb8e24c-a03a-0bc9-33ef-eafe45625661}">
+      <Declaration><![CDATA[METHOD DialogWithExternalClose : BOOL
+VAR_INPUT
+	inRetryStep : INT;
+	inRetrySignal:BOOL;
+	inTerminateSignal : BOOL;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="Retry" Id="{35cbf4b9-b3aa-0f5d-0000-a466366ca062}">

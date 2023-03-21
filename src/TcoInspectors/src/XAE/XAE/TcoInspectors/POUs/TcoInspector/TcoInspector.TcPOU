@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoInspector" Id="{cdcabed1-7ff8-095e-24f6-ca93f0ca4004}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -142,6 +142,27 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_tcoInspectorDialogue.Show(inRetryStep);
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DialogWithExternalClose" Id="{02e23383-9a89-0182-24df-7de392fa9495}" FolderPath="OnFail\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Upon failure displays dialogue for the user to take decision about the fate of the inspection.			
+		</summary>			
+	</docu>	
+~*)
+METHOD PUBLIC DialogWithExternalClose : BOOL
+VAR_INPUT
+	inRetryStep : INT;
+	inRetrySignal:BOOL;
+	inTerminateSignal : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_tcoInspectorDialogue.ShowWithExternalClose(inRetryStep,inRetrySignal,inTerminateSignal);
 
 
 ]]></ST>
