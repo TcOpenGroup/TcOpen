@@ -11,7 +11,9 @@
     <Grid>
         <Button             
             Background="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
-            Foreground="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"            
+            Foreground="{Binding TcoMomentaryTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            materialDesign:RippleAssist.IsDisabled="True"
             Command="{Binding TcoMomentaryTask}"
             Content="{Binding Caption}">
             <inter:Interaction.Triggers>

@@ -15,7 +15,9 @@
     <Grid>
         <Button
             Background="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
-            Foreground="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"            
+            Foreground="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            materialDesign:RippleAssist.IsDisabled="True"
             Command="{Binding TcoToggleTask}"
             Content="{Binding Caption}"/>
     </Grid>
