@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo" AutoDeleteType="true">TcoAmsAddr</Name>
+			<BitSize>64</BitSize>
+			<SubItem>
+				<Name>netId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>48</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>port</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="39.254.143.177.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="4" Priority="21" CycleTime="160000" AmsPort="351" AdtTasks="true">
+					<Name>PNIO</Name>
+				</Task>
+				<Task Id="5" Priority="22" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>PlcTask1</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{7056F838-A3A0-4803-B4E4-B49F60A1106B}" Name="TcoRexrothPress" PrjFilePath="TcoRexrothPress\TcoRexrothPress.plcproj" TmcFilePath="TcoRexrothPress\TcoRexrothPress.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoRexrothPress\TcoRexrothPress.tmc" TmcHash="{20DC780F-DEF8-E8A7-F05B-51A63B8DB51D}">
+					<Name>TcoRexrothPress Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project GUID="{1A3A997F-3A69-4755-9306-5A95A9AF73BF}" Name="TcoRexrothPressTests" PrjFilePath="TcoRexrothPressTests\TcoRexrothPressTests.plcproj" TmcFilePath="TcoRexrothPressTests\TcoRexrothPressTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoRexrothPressTests\TcoRexrothPressTests.tmc" TmcHash="{E1B4537E-7D2C-F6C1-496E-12310C8356E5}">
+					<Name>TcoRexrothPressTests Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL_iXlinker.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.Handle</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.Status</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.Value1</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.Value2</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.Value3</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.NotificationId</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.NotificationValue</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.NotificationStatus</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.NotificationPosition</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.NotificationVelocity</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.NotificationForce</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.DigitalIoMapping</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Response.VirtualIo</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.AdsAddr</Name>
+							<Type GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo">TcoAmsAddr</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Handle</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Command</Name>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value1</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value2</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value3</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value4</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value5</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value6</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.Value7</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.RexrothPress.Request.VirtualIo</Name>
+							<Type>WORD</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>21</Priority>
+							<CycleTime>16000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="21" OTCID="#x08502041"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="39.254.143.177.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+				<Name>Device 1 (EtherCAT)</Name>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc>em2 (TwinCAT Intel Ethernet Adapter)</DeviceDesc>
+						<DeviceName>em2</DeviceName>
+						<DeviceData>080027dfeb71</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Image Id="1" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="9" BoxType="9099" BoxFlags="#x00000020">
+					<Name>Press (IndraDrive MPC20 (1 CCD Master +0 CCD Slaves))</Name>
+					<ImageId>38</ImageId>
+					<EtherCAT SlaveType="2" PdiType="#x0006" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" EoeType="3" FoeType="1" SoeChannels="1" VendorId="#x00000024" ProductCode="#x00242806" RevisionNo="#x00000003" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" EnableWdDivider0400="true" EnableWdTime0420="true" TimeoutStateChange1="5000" TimeoutStateChange2="25000" TimeoutStateChange4="500" TimeoutMailbox2="10000" PortPhys="17" IdentificationAdo="18" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="IndraDrive MPC20 (1 CCD Master +0 CCD Slaves)" Desc="IndraDrive MPC20 (1 CCD Master +0 CCD Slaves)" PortABoxInfo="#x00ffffff">
+						<SyncMan>0018ea002600010001000000ea00ea00ea00001826010000</SyncMan>
+						<SyncMan>001aea002200010002000000ea00ea00ea00001a22010000</SyncMan>
+						<SyncMan>001024006400010003000000000000000000001064010000</SyncMan>
+						<SyncMan>00142a006200010004000000000000000000001462010000</SyncMan>
+						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000001000020100000001000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000001400010100000002000000000000000000000000000000</Fmmu>
+						<SwitchPortData>01000000e903fea90000ffff71ebfea90000000044726976655f315f5f496e647261440000000000000000000000000000000000000000000000000000000000</SwitchPortData>
+						<BootStrapData>0018ea00001aea00</BootStrapData>
+						<DcData>000500000000000020a107000000000001000000000000000000000000000000</DcData>
+						<DcMode>446353796e633530307573000000000044432d53796e6368726f6e202853796e633053686966742035303075732900000000000020a1070000000000000000050100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<DcMode>446353796e633130303075730000000044432d53796e6368726f6e202853796e633053686966742031303030757329000000000040420f0000000000000000050100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<DcMode>4672656552756e000000000000000000467265652052756e20286e6f2073796e6368726f6e697a6174696f6e29000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<MBoxUserCmdData>020005000a0000000d00000003000000000000000000000000000000000000000340010000000000803e4e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<Pdo Name="AT (CCD Master)" Index="#x0010" Flags="#x0001" SyncMan="3">
+							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="PLC output WORD4 AT %QB8" Index="#x8586">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="PLC output WORD5 AT %QB10 " Index="#x8587">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A20 " Index="#x850a">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A21 " Index="#x850b">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A22 " Index="#x850c">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC output WORD6 AT %QB12 " Index="#x8588">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A23 " Index="#x850d">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC output WORD7 AT %QB14 " Index="#x8589">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="Position feedback value 1" Index="#x0033">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="Velocity feedback value of encoder 1" Index="#x0028">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A24 " Index="#x850e">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC output WORD8 AT %QB16 " Index="#x858a">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="PLC output WORD9 AT %QB18 " Index="#x858b">
+								<Type>INT</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="MDT (CCD Master)" Index="#x0018" InOut="1" Flags="#x0001" SyncMan="2">
+							<Entry Name="Master control word" Index="#x0086" Flags="#x00000800">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="PLC input WORD4 AT %IB8 " Index="#x8572">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="PLC input WORD5 AT %IB10" Index="#x8573">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A17 " Index="#x8507">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A18 " Index="#x8508">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A19 " Index="#x8509">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A4" Index="#x84fa">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A5" Index="#x84fb">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A6" Index="#x84fc">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC Global Register A25 " Index="#x850f">
+								<Type>DINT</Type>
+							</Entry>
+							<Entry Name="PLC input WORD6 AT %IB12" Index="#x8574">
+								<Type>INT</Type>
+							</Entry>
+						</Pdo>
+					</EtherCAT>
+				</Box>
+				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120"/>
+			</Device>
+		</Io>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500821000403}" Id="#x02030020"/>
+		<OwnerA Name="TIPC^TcoRexrothPressTests^TcoRexrothPressTests Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Press (IndraDrive MPC20 (1 CCD Master +0 CCD Slaves))">
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.AdsAddr^netId" VarB="InfoData^AdsAddr^netId"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.AdsAddr^port" VarB="InfoData^AdsAddr^port"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.DigitalIoMapping" VarB="AT (CCD Master)^PLC output WORD8 AT %QB16 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.Handle" VarB="AT (CCD Master)^PLC output WORD4 AT %QB8"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.NotificationForce" VarB="AT (CCD Master)^PLC Global Register A24 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.NotificationId" VarB="AT (CCD Master)^PLC output WORD6 AT %QB12 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.NotificationPosition" VarB="AT (CCD Master)^Position feedback value 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.NotificationStatus" VarB="AT (CCD Master)^PLC output WORD7 AT %QB14 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.NotificationValue" VarB="AT (CCD Master)^PLC Global Register A23 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.NotificationVelocity" VarB="AT (CCD Master)^Velocity feedback value of encoder 1"/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.Status" VarB="AT (CCD Master)^PLC output WORD5 AT %QB10 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.Value1" VarB="AT (CCD Master)^PLC Global Register A20 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.Value2" VarB="AT (CCD Master)^PLC Global Register A22 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.Value3" VarB="AT (CCD Master)^PLC Global Register A21 "/>
+				<Link VarA="PlcTask Inputs^GVL_iXlinker.RexrothPress.Response.VirtualIo" VarB="AT (CCD Master)^PLC output WORD9 AT %QB18 "/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Command" VarB="MDT (CCD Master)^PLC input WORD5 AT %IB10"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Handle" VarB="MDT (CCD Master)^PLC input WORD4 AT %IB8 "/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value1" VarB="MDT (CCD Master)^PLC Global Register A17 "/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value2" VarB="MDT (CCD Master)^PLC Global Register A18 "/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value3" VarB="MDT (CCD Master)^PLC Global Register A19 "/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value4" VarB="MDT (CCD Master)^PLC Global Register A4"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value5" VarB="MDT (CCD Master)^PLC Global Register A5"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value6" VarB="MDT (CCD Master)^PLC Global Register A6"/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.Value7" VarB="MDT (CCD Master)^PLC Global Register A25 "/>
+				<Link VarA="PlcTask Outputs^GVL_iXlinker.RexrothPress.Request.VirtualIo" VarB="MDT (CCD Master)^PLC input WORD6 AT %IB12"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

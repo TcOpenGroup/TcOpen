@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="TcoContext" Id="{100467cb-41fc-04f8-123a-e16145c52332}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoContext EXTENDS TcoCore.TcoContext
+VAR
+	{attribute addProperty Name "<#My very first SFK#>"}
+	sfk : TcoRexrothPress.TcoSmartFunctionKit_v_4_x_x (THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{33e5ce88-2a2c-04ee-1250-e47f31292192}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main
+
+VAR
+
+	adsInfo: AMSADDR;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Sfk.Config.ErrorTime:=T#20S;
+Sfk.Config.InfoTime:=T#10S;
+sfk.Config.CurveExportLocation:='d:\expot\';	// if empty export not performed
+sfk.Config.IpAddress:='192.168.0.1';			// for rest comunication
+
+adsInfo.netId:=GVL_iXlinker.AdsAddr.netId;		//ads info from eCAT bus
+adsInfo.port:=GVL_iXlinker.AdsAddr.port;
+sfk(inoIoData:=GVL_iXlinker.RexrothPress,AdsAddr:=adsInfo);
+
+sfk.Service();
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

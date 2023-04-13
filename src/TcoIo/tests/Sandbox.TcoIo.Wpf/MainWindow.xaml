@@ -113,8 +113,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding EcatComponent}" PresentationType="Control-Base"/>
-                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding EcatComponent}" PresentationType="Service"/>
+                <TabControl>
+                    <TabItem Header="SlimDisplay">
+                        <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding EcatComponent}" PresentationType="Slim-Display"/>
+                    </TabItem>
+                    <TabItem Header="General">
+                        <UniformGrid Columns="2">
+                            <vortex:RenderableContentControl  DataContext="{Binding EcatComponent}" PresentationType="Service"/>
+                            <vortex:RenderableContentControl  DataContext="{Binding EcatComponent._ecatState}" PresentationType="Service"/>
+
+                        </UniformGrid>
+                    </TabItem>
+                </TabControl>
             </Grid>
         </TabItem>
     </TabControl>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="eTcoSmartFunctionKitStatusInformation_v_4_x_x" Id="{e1d66dda-47f9-4a07-b804-2ba97b90a880}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eTcoSmartFunctionKitStatusInformation_v_4_x_x :
+    (
+        ActiveProgramNumber := 301, //  The PROGRAM number active in the drive is read out.
+        RemainingStorageSpaceOnIPC := 302, // (PR21) The remaining storage space OF the IPC is transferred in MB.
+        CurrentPosition := 401, //The cyclically transmitted position is read out.
+        CurrentTravelSpeed := 402, // The cyclically transmitted travel speed is read out.
+        CurrentForce := 403 // The cyclically transmitted force is read out
+    );
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>
