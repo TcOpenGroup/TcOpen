@@ -1,0 +1,19 @@
+<Window
+    x:Class="Sandbox.TcoRexrothPress.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:wpf="clr-namespace:Sandbox.TcoRexrothPress.Wpf"
+    mc:Ignorable="d"
+    Title="MainWindow">
+    <Window.DataContext>
+        <wpf:MainWindowViewModel/>
+    </Window.DataContext>
+    <StackPanel DataContext="{Binding TcoRexrothPressTestPlc.MAIN}">
+        <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.StartCycleCount}" PresentationType="Service"/>
+
+        <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.sfk}" PresentationType="Service"/>
+        <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance }" PresentationType="Diagnostics"/>
+    </StackPanel>
+</Window>

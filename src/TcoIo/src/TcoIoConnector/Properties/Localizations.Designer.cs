@@ -61,6 +61,33 @@ namespace TcoIoConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual Link state.
+        /// </summary>
+        public static string ___Actual_Link_state__ {
+            get {
+                return ResourceManager.GetString("___Actual_Link_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual state.
+        /// </summary>
+        public static string ___Actual_state__ {
+            get {
+                return ResourceManager.GetString("___Actual_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ads address information is not defined!.
+        /// </summary>
+        public static string ___Ads_address_information_is_not_defined___ {
+            get {
+                return ResourceManager.GetString("___Ads_address_information_is_not_defined___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AT least one AlarmCR got a diagnosis alarm!.
         /// </summary>
         public static string ___AT_least_one_AlarmCR_got_a_diagnosis_alarm___ {
@@ -144,6 +171,15 @@ namespace TcoIoConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change State.
+        /// </summary>
+        public static string ___Change_State__ {
+            get {
+                return ResourceManager.GetString("___Change_State__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datahold error!.
         /// </summary>
         public static string ___Datahold_error___ {
@@ -171,11 +207,47 @@ namespace TcoIoConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ECAT Communication Ok.
+        /// </summary>
+        public static string ___ECAT_Communication_Ok__ {
+            get {
+                return ResourceManager.GetString("___ECAT_Communication_Ok__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ecat slave state.
+        /// </summary>
+        public static string ___Ecat_slave_state__ {
+            get {
+                return ResourceManager.GetString("___Ecat_slave_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Time.
+        /// </summary>
+        public static string ___Error_Time__ {
+            get {
+                return ResourceManager.GetString("___Error_Time__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EtherCAT gateway: WC-State OF cyclic EtherCAT frame is 1!.
         /// </summary>
         public static string ___EtherCAT_gateway__WC_State_OF_cyclic_EtherCAT_frame_is_1___ {
             get {
                 return ResourceManager.GetString("___EtherCAT_gateway__WC_State_OF_cyclic_EtherCAT_frame_is_1___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EtherCat masters Ams Net Id.
+        /// </summary>
+        public static string ___EtherCat_masters_Ams_Net_Id__ {
+            get {
+                return ResourceManager.GetString("___EtherCat_masters_Ams_Net_Id__", resourceCulture);
             }
         }
         
@@ -252,11 +324,38 @@ namespace TcoIoConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Required state.
+        /// </summary>
+        public static string ___Required_state__ {
+            get {
+                return ResourceManager.GetString("___Required_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        public static string ___Restore__ {
+            get {
+                return ResourceManager.GetString("___Restore__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RTC3: Sync mode could not be initiated!.
         /// </summary>
         public static string ___RTC3__Sync_mode_could_not_be_initiated___ {
             get {
                 return ResourceManager.GetString("___RTC3__Sync_mode_could_not_be_initiated___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State check Time(Period).
+        /// </summary>
+        public static string ___State_check_Time_Period___ {
+            get {
+                return ResourceManager.GetString("___State_check_Time_Period___", resourceCulture);
             }
         }
         
@@ -284,6 +383,15 @@ namespace TcoIoConnector.Properties {
         public static string ___The_stationname_is_not_unique___ {
             get {
                 return ResourceManager.GetString("___The_stationname_is_not_unique___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected state: .
+        /// </summary>
+        public static string ___Unexpected_state____ {
+            get {
+                return ResourceManager.GetString("___Unexpected_state____", resourceCulture);
             }
         }
         

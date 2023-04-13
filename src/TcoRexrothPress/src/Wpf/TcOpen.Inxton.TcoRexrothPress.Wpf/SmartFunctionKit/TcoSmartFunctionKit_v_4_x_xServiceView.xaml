@@ -1,0 +1,101 @@
+﻿<UserControl
+    x:Class="TcoRexrothPress.TcoSmartFunctionKit_v_4_x_xServiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoCore="http://vortex.mts/xaml" xmlns:converters="clr-namespace:TcoRexrothPress.Converters"
+    mc:Ignorable="d">
+
+    <d:UserControl.DataContext>
+        <tcoCore:TcoSmartFunctionKit_v_4_x_xViewModel />
+    </d:UserControl.DataContext>
+    
+    <tcoCore:TcoComponentView>
+        <tcoCore:TcoComponentView.ComponentHeader>
+
+            <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left" DataContext="{Binding Component}" >
+                <tcoCore:RenderableContentControl DataContext="{Binding _request.Command }" PresentationType="Control"/>
+                <StackPanel VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityDefaultConverter}}">
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value1 }" PresentationType="Control"/>
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value2 }" PresentationType="Control"/>
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value3 }" PresentationType="Control"/>
+
+                </StackPanel>
+                <StackPanel VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityStartProgramConverter}}">
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.SerialNumber }" PresentationType="Control"/>
+                 
+                </StackPanel>
+                <StackPanel  VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityJogTaraPositioningConverter}}">
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.PositionDistanceTara }" PresentationType="Control"/>
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.TravelSpeed }" PresentationType="Control"/>
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Acceleration }" PresentationType="Control"/>
+                </StackPanel>
+                <StackPanel  VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilitySetProgramConverter}}">
+                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.ProgramId }" PresentationType="Control"/>
+                </StackPanel>
+            
+                <tcoCore:RenderableContentControl  Margin="10,0" DataContext="{Binding _runCommandTask}"/>
+                <tcoCore:RenderableContentControl Margin="10,0" DataContext="{Binding _getResultsTask}"/>
+                <tcoCore:RenderableContentControl Margin="10,0" DataContext="{Binding _exportCurveTask}"/>
+                <tcoCore:RenderableContentControl Margin="10,0" DataContext="{Binding _restoreTask}"/>
+
+
+
+
+            </WrapPanel>
+     
+            </tcoCore:TcoComponentView.ComponentHeader>
+            
+            <tcoCore:TcoComponentView.ComponentDetails>
+            <ScrollViewer MaxHeight="600"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}">
+
+                <WrapPanel>
+                    <WrapPanel.Resources>
+                        <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
+                            <Setter Property="MinWidth" Value="250"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+                            
+                        </Style>
+                    </WrapPanel.Resources>
+             
+                    <GroupBox Header="{Binding _ecatState.AttributeName}" >
+                        <tcoCore:RenderableContentControl  DataContext="{Binding _ecatState}" PresentationType="Service-Control-Base"/>
+                    </GroupBox>
+     
+                    <GroupBox Header="{Binding _config.AttributeName}">
+                        <tcoCore:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
+                    </GroupBox>
+        
+                    <GroupBox Header="Raw data">
+                        <StackPanel VerticalAlignment="Top" Margin="5,0" Orientation="Vertical">
+
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value1 }" PresentationType="DisplaySlim"/>
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value2 }" PresentationType="DisplaySlim"/>
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value3 }" PresentationType="DisplaySlim"/>
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value4 }" PresentationType="DisplaySlim"/>
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value5 }" PresentationType="DisplaySlim"/>
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value6 }" PresentationType="DisplaySlim"/>
+                            <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value7 }" PresentationType="DisplaySlim"/>
+                        </StackPanel>
+                    </GroupBox>
+                
+                  
+                    <GroupBox Header="{Binding _status.AttributeName}" >
+                        <tcoCore:RenderableContentControl  DataContext="{Binding _status}" PresentationType="DisplaySlim" />
+                    </GroupBox>
+
+                    <GroupBox Header="{Binding _results.AttributeName}" >
+                        <tcoCore:RenderableContentControl  DataContext="{Binding _results}" PresentationType="DisplaySlim" />
+                    </GroupBox>
+    
+
+
+
+
+                </WrapPanel>
+            </ScrollViewer>
+        </tcoCore:TcoComponentView.ComponentDetails>
+        </tcoCore:TcoComponentView>
+   
+</UserControl>

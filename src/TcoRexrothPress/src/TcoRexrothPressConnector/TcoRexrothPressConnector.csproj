@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--NuGet properties-->
+    <PackageId>TcOpen.TcoRexrothPressConnector</PackageId>
+    <Authors>TcOpenGroup contributors</Authors>
+    <Company>TcOpenGroup</Company>
+    <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>TwinCAT3 Beckhoff</PackageTags>
+    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
+    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>   
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <!--Set to TRUE or remove this attribute if you want to crate a package of this project-->
+	  <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />    
+    <Content Include="..\..\README.md" IncludeInPackage="true" Pack="true" PackagePath="\" CopyToOutputDirectory="PreserveNewest" />    
+    <Content Include="..\..\assets\**" Pack="true" PackagePath="assets" Link="assets\%(RecursiveDir)\%(Filename)%(Extension)" TargetPath="assets\%(RecursiveDir)\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="..\..\assets\readme\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="..\..\assets\Press3 %28IndraDrive MPC20 %281 CCD Master +0 CCD Slaves%29%29_2.xti" />
+  </ItemGroup>
+
+
+    
+   
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoAbstractions\src\TcoAbstractionsConnector\TcoAbstractionsConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcoIo\src\TcoIoConnector\TcoIoConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcoUtilities\src\TcoUtilitiesConnector\TcoUtilitiesConnector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Localizations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Localizations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Localizations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_generated\" />
+  </ItemGroup>
+
+</Project>
+
+

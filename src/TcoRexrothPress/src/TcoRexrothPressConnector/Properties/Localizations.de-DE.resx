@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="___Invalid_reference____" xml:space="preserve">
+    <value>Ungültige Referenz:</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_running___" xml:space="preserve">
+    <value>Löschung der laufenden Ergebnisdaten.</value>
+  </data>
+  <data name="___Waiting_for_the_result_data_cleared___" xml:space="preserve">
+    <value>Warten auf das Ergebnis der Datenfreigabe!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsAvailable_to_be_reseted___" xml:space="preserve">
+    <value>Warten darauf, dass das Signal ResultsAvailable zurückgesetzt wird!</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Die Löschung der Ergebnisdaten wurde abgebrochen, obwohl sie noch nicht abgeschlossen ist!</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_was_completed_successfully___" xml:space="preserve">
+    <value>Die Löschung der Ergebnisdaten wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_finished_with_error___" xml:space="preserve">
+    <value>Die Löschung der Ergebnisdaten wurde mit einem Fehler beendet.</value>
+  </data>
+  <data name="___Clearing_of_the_result_data_started___" xml:space="preserve">
+    <value>Die Löschung der Ergebnisdaten hat begonnen.</value>
+  </data>
+  <data name="___Reading_running___" xml:space="preserve">
+    <value>Lesen läuft.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerReady_to_be_set___" xml:space="preserve">
+    <value>Warten auf das Setzen des Signals TriggerReady!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerAcknowledge_to_be_set___" xml:space="preserve">
+    <value>Warten auf das Setzen des Signals TriggerAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsAvailable_to_be_set___" xml:space="preserve">
+    <value>Warten, bis das Signal ResultsAvailable gesetzt ist!</value>
+  </data>
+  <data name="___Waiting_for_the_ResultData_copied___" xml:space="preserve">
+    <value>Warten auf die kopierten ResultData!</value>
+  </data>
+  <data name="___Reading_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Das Lesen wurde abgebrochen, obwohl es noch nicht abgeschlossen war!</value>
+  </data>
+  <data name="___Reading_was_completed_successfully___" xml:space="preserve">
+    <value>Das Lesen wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___Reading_finished_with_error___" xml:space="preserve">
+    <value>Das Lesen wurde mit einem Fehler beendet.</value>
+  </data>
+  <data name="___Reading_started___" xml:space="preserve">
+    <value>Das Lesen hat begonnen.</value>
+  </data>
+  <data name="___Not_ready_for_operation_by_means_of_Profinet_network___" xml:space="preserve">
+    <value>Nicht betriebsbereit für den Betrieb über das Profinet-Netzwerk!</value>
+  </data>
+  <data name="___Ready_for_operation___" xml:space="preserve">
+    <value>Bereit für den Einsatz!</value>
+  </data>
+  <data name="___Restore__" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="___Update_signal_states__" xml:space="preserve">
+    <value>Signalzustände aktualisieren</value>
+  </data>
+  <data name="___Clear_result_data__" xml:space="preserve">
+    <value>Ergebnisdaten löschen</value>
+  </data>
+  <data name="___Read__" xml:space="preserve">
+    <value>Lesen Sie</value>
+  </data>
+  <data name="___New_data_read___" xml:space="preserve">
+    <value>Neue Daten gelesen.</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsByte_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index des ResultData in der Methode GetResultAsByte überschreitet die Länge der empfangenen Daten!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsByte_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsByte überschreitet die Größe der gemappten Hardwarestruktur!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsByte_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsByte überschreitet die definierte Größe!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsDint_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index des ResultData in der Methode GetResultAsDint überschreitet die Länge der empfangenen Daten!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsDint_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsDint überschreitet die Größe der abgebildeten Hardwarestruktur!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsDint_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsDint überschreitet die definierte Größe!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsReal_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index des ResultData in der Methode GetResultAsReal überschreitet die Länge der empfangenen Daten!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsReal_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsReal überschreitet die Größe der abgebildeten Hardwarestruktur!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsReal_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsReal überschreitet die definierte Größe!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsString_exceeds_the_length_of_the_data_received___" xml:space="preserve">
+    <value>Index des ResultData in der Methode GetResultAsString überschreitet die Länge der empfangenen Daten!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsString_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsString überschreitet die Größe der abgebildeten Hardwarestruktur!</value>
+  </data>
+  <data name="___Index_of_the_ResultData_in_the_method_GetResultAsString_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Index der ResultData in der Methode GetResultAsString überschreitet die definierte Größe!</value>
+  </data>
+  <data name="___Restore_executed___" xml:space="preserve">
+    <value>Wiederherstellen ausgeführt!</value>
+  </data>
+  <data name="___Trigger_running___" xml:space="preserve">
+    <value>Auslöser läuft.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ExposureComplete_to_be_reseted___" xml:space="preserve">
+    <value>Warten Sie darauf, dass das Signal ExposureComplete zurückgesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsValid_to_be_reseted___" xml:space="preserve">
+    <value>Warten auf das Zurücksetzen des Signals ResultsValid!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_Error_to_be_reseted___" xml:space="preserve">
+    <value>Warten Sie darauf, dass das Signal Error zurückgesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_AcquisitionTriggerReady_to_be_set___" xml:space="preserve">
+    <value>Warte darauf, dass das Signal AcquisitionTriggerReady gesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_AcquisitionTriggerAcknowledge_to_be_set___" xml:space="preserve">
+    <value>Warten auf das Setzen des Signals AcquisitionTriggerAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_InspectionCompleted_to_be_toggled___" xml:space="preserve">
+    <value>Wartet darauf, dass das Signal InspectionCompleted umgeschaltet wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsValid_to_be_set___" xml:space="preserve">
+    <value>Warten auf das Setzen des Signals ResultsValid!</value>
+  </data>
+  <data name="___Waiting_for_the_InspectionResults_to_be_copied___" xml:space="preserve">
+    <value>Warten Sie darauf, dass die InspectionResults kopiert werden!</value>
+  </data>
+  <data name="___Trigger_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Die Auslösung wurde abgebrochen, obwohl sie noch nicht abgeschlossen ist!</value>
+  </data>
+  <data name="___Trigger_was_completed_successfully___" xml:space="preserve">
+    <value>Die Auslösung wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___Trigger_finished_with_error___" xml:space="preserve">
+    <value>Auslöser mit Fehler beendet.</value>
+  </data>
+  <data name="___Trigger_started___" xml:space="preserve">
+    <value>Auslöser gestartet.</value>
+  </data>
+  <data name="___Empty_job_name_inserted___" xml:space="preserve">
+    <value>Leerer Auftragsname eingefügt!</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____is_running___" xml:space="preserve">
+    <value>Auftrag nach Name ändern (').Append(THIS^.jobName).Append(') läuft.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_CommandExecuting_to_be_reseted___" xml:space="preserve">
+    <value>Warte darauf, dass das Signal CommandExecuting zurückgesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_Online_to_be_reseted___" xml:space="preserve">
+    <value>Warten Sie darauf, dass das Signal Online zurückgesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_Job_name_to_be_written_to_the_User_data___" xml:space="preserve">
+    <value>Wartet darauf, dass der Jobname in die Benutzerdaten geschrieben wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ExtendedUserDataSetAcknowledge_to_be_set___" xml:space="preserve">
+    <value>Warten auf das Setzen des Signals ExtendedUserDataSetAcknowledge!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ExtendedUserDataSetAcknowledge_to_be_reseted___" xml:space="preserve">
+    <value>Warte darauf, dass das Signal ExtendedUserDataSetAcknowledge zurückgesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_CommandComplete_to_be_set___" xml:space="preserve">
+    <value>Wartet auf das Setzen des Signals CommandComplete!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_CommandComplete_to_be_reseted___" xml:space="preserve">
+    <value>Warten auf das Signal CommandComplete, um zurückgesetzt zu werden!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_Online_to_be_set___" xml:space="preserve">
+    <value>Warten Sie darauf, dass das Signal Online eingestellt wird!</value>
+  </data>
+  <data name="___Change_job_by_name_failed__Error_code___" xml:space="preserve">
+    <value>Auftrag nach Name ändern ist fehlgeschlagen. Fehlercode:</value>
+  </data>
+  <data name="___Job_name__" xml:space="preserve">
+    <value>Name der Stelle</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Auftrag nach Name ändern (').Append(THIS^.jobName).Append(') abgebrochen, aber noch nicht beendet.</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____was_completed_succesfully___" xml:space="preserve">
+    <value>Auftrag nach Name ändern (').Append(THIS^.jobName).Append(') wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____finished_with_error___" xml:space="preserve">
+    <value>Auftrag nach Name ändern (').Append(THIS^.jobName).Append(') wurde mit Fehler beendet.</value>
+  </data>
+  <data name="___Change_job_by_name_____Append_THIS___jobName__Append____started___" xml:space="preserve">
+    <value>Auftrag nach Name ändern (').Append(THIS^.jobName).Append(') gestartet.</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_size_hardware_structure_mapped___" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsString überschreitet die Größe der abgebildeten Hardwarestruktur!</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_defined_size___" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsString überschreitet die definierte Größe!</value>
+  </data>
+  <data name="___Job_number_____Append_UINT_TO_STRING__jobNumber___Append____is_greater_than_the_maximal_value_of____Append_UINT_TO_STRING_inoConfig_MaxJobNumber___Append_____" xml:space="preserve">
+    <value>Jobnummer (').Append(UINTTOSTRING(jobNumber)).Append(') ist größer als der Maximalwert von ').Append(UINTTOSTRING(inoConfig.MaxJobNumber)).Append('!</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____is_running___" xml:space="preserve">
+    <value>Job nach Nummer ändern (').Append(UINTTOSTRING(THIS^.jobNumber)).Append(') läuft.</value>
+  </data>
+  <data name="___Change_job_by_number_failed__Error_code___" xml:space="preserve">
+    <value>Auftrag nach Nummer ändern ist fehlgeschlagen. Fehlercode:</value>
+  </data>
+  <data name="___Job_number__" xml:space="preserve">
+    <value>Auftragsnummer</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Auftrag nach Nummer ändern (').Append(UINTTOSTRING(THIS^.jobNumber)).Append(') abgebrochen, aber noch nicht beendet.</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____was_completed_succesfully___" xml:space="preserve">
+    <value>Auftrag nach Nummer ändern (').Append(UINTTOSTRING(THIS^.jobNumber)).Append(') wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____finished_with_error___" xml:space="preserve">
+    <value>Auftrag nach Nummer ändern (').Append(UINTTOSTRING(THIS^.jobNumber)).Append(') mit Fehler beendet.</value>
+  </data>
+  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____started___" xml:space="preserve">
+    <value>Job nach Nummer ändern (').Append(UINTTOSTRING(THIS^.jobNumber)).Append(') gestartet.</value>
+  </data>
+  <data name="___Clearing_result_data_running___" xml:space="preserve">
+    <value>Löschung der Ergebnisdaten läuft.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_ResultsValid_reseted___" xml:space="preserve">
+    <value>Warten auf das Signal ResultsValid zurückgesetzt!</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Die Löschung der Prüfergebnisse wurde abgebrochen, obwohl sie noch nicht abgeschlossen ist.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_was_completed_succesfully___" xml:space="preserve">
+    <value>Das Clearing der Inspektionsergebnisse wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_finished_with_error___" xml:space="preserve">
+    <value>Die Löschung der Inspektionsergebnisse wurde mit einem Fehler beendet.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_started___" xml:space="preserve">
+    <value>Die Löschung der Inspektionsergebnisse hat begonnen.</value>
+  </data>
+  <data name="___SoftEvent_number______Append_UINT_TO_STRING__softEventNumber___Append____is_greater_than_the_maximal_value_of_7___" xml:space="preserve">
+    <value>SoftEvent-Nummer: (').Append(UINTTOSTRING(softEventNumber)).Append(') ist größer als der Maximalwert von 7!</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____is_running___" xml:space="preserve">
+    <value>SoftEvent (Nummer: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') läuft.</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEventNumber___Append____to_be_set___" xml:space="preserve">
+    <value>Ich warte darauf, dass das Signal TriggerSoftEvent[').Append(UINTTOSTRING(THIS^.softEventNumber)).Append('] gesetzt wird!</value>
+  </data>
+  <data name="___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEventNumber___Append____to_be_reseted___" xml:space="preserve">
+    <value>Ich warte darauf, dass das Signal TriggerSoftEvent[').Append(UINTTOSTRING(THIS^.softEventNumber)).Append('] zurückgesetzt wird!</value>
+  </data>
+  <data name="___Soft_event_number__" xml:space="preserve">
+    <value>Soft-Ereignis-Nummer</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>SoftEvent (Nummer: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') wurde abgebrochen, aber noch nicht abgeschlossen.</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____was_completed_successfully___" xml:space="preserve">
+    <value>SoftEvent (Nummer: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') wurde erfolgreich abgeschlossen.</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____finished_with_error___" xml:space="preserve">
+    <value>SoftEvent (Nummer: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') mit Fehler beendet.</value>
+  </data>
+  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____started___" xml:space="preserve">
+    <value>SoftEvent (Nummer: ').Append(UINTTOSTRING(THIS^.softEventNumber)).Append(') gestartet.</value>
+  </data>
+  <data name="___Change_job_by_number__" xml:space="preserve">
+    <value>Stelle nach Nummer ändern</value>
+  </data>
+  <data name="___Change_job_by_name__" xml:space="preserve">
+    <value>Auftrag nach Name ändern</value>
+  </data>
+  <data name="___Clear_inspection_results__" xml:space="preserve">
+    <value>Klare Inspektionsergebnisse</value>
+  </data>
+  <data name="___Soft_event__" xml:space="preserve">
+    <value>Weiches Ereignis</value>
+  </data>
+  <data name="___Trigger__" xml:space="preserve">
+    <value>Auslöser</value>
+  </data>
+  <data name="___Camera_offline_The_vision_system__s_job_is_being_modified___" xml:space="preserve">
+    <value>Kamera offline: Die Aufgabe des Bildverarbeitungssystems$ wird gerade geändert.</value>
+  </data>
+  <data name="___Camera_offline_A_discrete_signal_is_holding_the_vision_system_Offline___" xml:space="preserve">
+    <value>Kamera offline: Ein diskretes Signal hält das Bildverarbeitungssystem offline.</value>
+  </data>
+  <data name="___Camera_offline_A_communications_protocol_is_holding_the_vision_system_Offline___" xml:space="preserve">
+    <value>Kamera offline: Ein Kommunikationsprotokoll hält das Bildverarbeitungssystem offline.</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsByte_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Index von UserData in der Methode SetUserDataAsByte überschreitet die Größe der abgebildeten Hardwarestruktur</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsByte_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Index der UserData in der Methode SetUserDataAsByte überschreitet die definierte Größe</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsDint_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsDint überschreitet die Größe der abgebildeten Hardwarestruktur</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsDint_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Index der UserData in der Methode SetUserDataAsDint überschreitet die definierte Größe</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsReal_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsReal überschreitet die Größe der abgebildeten Hardwarestruktur</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsReal_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsReal überschreitet die definierte Größe</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_size_hardware_structure_mapped__" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsString überschreitet die Größe der abgebildeten Hardwarestruktur</value>
+  </data>
+  <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_defined_size__" xml:space="preserve">
+    <value>Der Index von UserData in der Methode SetUserDataAsString überschreitet die definierte Größe</value>
+  </data>
+  <data name="___Trigger_enable__" xml:space="preserve">
+    <value>Auslöser aktivieren</value>
+  </data>
+  <data name="___Enable_result_buffering__" xml:space="preserve">
+    <value>Ergebnispufferung einschalten</value>
+  </data>
+  <data name="___Result_acknowledge__" xml:space="preserve">
+    <value>Ergebnis: Bestätigung</value>
+  </data>
+  <data name="___Trigger_ready__" xml:space="preserve">
+    <value>Auslöser bereit</value>
+  </data>
+  <data name="___Trigger_acknowledge__" xml:space="preserve">
+    <value>Auslöser quittieren</value>
+  </data>
+  <data name="___Acquiring__" xml:space="preserve">
+    <value>Erwerben Sie</value>
+  </data>
+  <data name="___Missed_acquisition__" xml:space="preserve">
+    <value>Verpasster Erwerb</value>
+  </data>
+  <data name="___Trigger_ID__" xml:space="preserve">
+    <value>Auslöser-ID</value>
+  </data>
+  <data name="___Decoding__" xml:space="preserve">
+    <value>Dekodierung</value>
+  </data>
+  <data name="___Decode_complete__" xml:space="preserve">
+    <value>Dekodierung abgeschlossen</value>
+  </data>
+  <data name="___Result_buffer_overrun__" xml:space="preserve">
+    <value>Ergebnis Pufferüberlauf</value>
+  </data>
+  <data name="___Results_available__" xml:space="preserve">
+    <value>Ergebnisse verfügbar</value>
+  </data>
+  <data name="___Error_detected__" xml:space="preserve">
+    <value>Fehler entdeckt</value>
+  </data>
+  <data name="___Result_ID__" xml:space="preserve">
+    <value>Ergebnis-ID</value>
+  </data>
+  <data name="___Result_code__" xml:space="preserve">
+    <value>Ergebnis-Code</value>
+  </data>
+  <data name="___Result_extended__" xml:space="preserve">
+    <value>Ergebnis erweitert</value>
+  </data>
+  <data name="___Result_length__" xml:space="preserve">
+    <value>Ergebnis Länge</value>
+  </data>
+  <data name="___Acquisition_trigger_enable__" xml:space="preserve">
+    <value>Erfassungsauslöser aktivieren</value>
+  </data>
+  <data name="___Acquisition_trigger__" xml:space="preserve">
+    <value>Auslöser für den Erwerb</value>
+  </data>
+  <data name="___Clear_exposure_complete__" xml:space="preserve">
+    <value>Freilegung abgeschlossen</value>
+  </data>
+  <data name="___Set_offline__" xml:space="preserve">
+    <value>Offline setzen</value>
+  </data>
+  <data name="___Enable_results_buffering__" xml:space="preserve">
+    <value>Ergebnispufferung aktivieren</value>
+  </data>
+  <data name="___Acknowledge_inspection_results__" xml:space="preserve">
+    <value>Bestätigen Sie die Inspektionsergebnisse</value>
+  </data>
+  <data name="___Extended_user_data_set__" xml:space="preserve">
+    <value>Erweiterter Benutzerdatensatz</value>
+  </data>
+  <data name="___Execute_command__" xml:space="preserve">
+    <value>Befehl ausführen</value>
+  </data>
+  <data name="___Clear_error__" xml:space="preserve">
+    <value>Fehler löschen</value>
+  </data>
+  <data name="___Command__" xml:space="preserve">
+    <value>Befehl</value>
+  </data>
+  <data name="___Trigger_soft_event__" xml:space="preserve">
+    <value>Soft-Ereignis auslösen</value>
+  </data>
+  <data name="___Acquisition_trigger_ready__" xml:space="preserve">
+    <value>Akquisitionsauslöser bereit</value>
+  </data>
+  <data name="___Acquisition_trigger_acknowledge__" xml:space="preserve">
+    <value>Akquisitionsauslöser-Bestätigung</value>
+  </data>
+  <data name="___Exposure_complete__" xml:space="preserve">
+    <value>Exposition abgeschlossen</value>
+  </data>
+  <data name="___Offline_reason_0__" xml:space="preserve">
+    <value>Offline-Grund 0</value>
+  </data>
+  <data name="___Offline_reason_1__" xml:space="preserve">
+    <value>Offline Grund 1</value>
+  </data>
+  <data name="___Offline_reason_2__" xml:space="preserve">
+    <value>Offline Grund 2</value>
+  </data>
+  <data name="___Online__" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="___Acquisition_ID__" xml:space="preserve">
+    <value>Erfassungs-ID</value>
+  </data>
+  <data name="___System_busy__" xml:space="preserve">
+    <value>System besetzt</value>
+  </data>
+  <data name="___Inspection_completed__" xml:space="preserve">
+    <value>Inspektion abgeschlossen</value>
+  </data>
+  <data name="___Results_buffer_overrun__" xml:space="preserve">
+    <value>Überlauf des Ergebnispuffers</value>
+  </data>
+  <data name="___Results_valid__" xml:space="preserve">
+    <value>Ergebnisse gültig</value>
+  </data>
+  <data name="___Command_executing__" xml:space="preserve">
+    <value>Befehl wird ausgeführt</value>
+  </data>
+  <data name="___Command_complete__" xml:space="preserve">
+    <value>Befehl abgeschlossen</value>
+  </data>
+  <data name="___Command_failed__" xml:space="preserve">
+    <value>Befehl fehlgeschlagen</value>
+  </data>
+  <data name="___Extended_user_data_set_acknowledge__" xml:space="preserve">
+    <value>Bestätigung des erweiterten Benutzerdatensatzes</value>
+  </data>
+  <data name="___Overall_job_pass_fail__" xml:space="preserve">
+    <value>Gesamtauftrag bestanden nicht bestanden</value>
+  </data>
+  <data name="___Test_run_ready__" xml:space="preserve">
+    <value>Testlauf bereit</value>
+  </data>
+  <data name="___Error__" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="___Error_code__" xml:space="preserve">
+    <value>Fehlercode</value>
+  </data>
+  <data name="___Current_job_ID__" xml:space="preserve">
+    <value>Aktuelle Job-ID</value>
+  </data>
+  <data name="___Trigger_soft_event_acknowledge__" xml:space="preserve">
+    <value>Soft-Event-Quittung auslösen</value>
+  </data>
+  <data name="___Inspection_ID__" xml:space="preserve">
+    <value>Inspektions-ID</value>
+  </data>
+</root>

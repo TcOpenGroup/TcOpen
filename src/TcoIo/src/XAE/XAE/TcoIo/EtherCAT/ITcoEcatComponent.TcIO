@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="ITcoEcatComponent" Id="{9fd5bf42-1e19-0f6a-2401-12a52f6ad02a}">
+    <Declaration><![CDATA[INTERFACE ITcoEcatComponent
+]]></Declaration>
+    <Property Name="EcatState" Id="{c6113f61-98ce-0c56-30b9-90eddbc9077e}">
+      <Declaration><![CDATA[PROPERTY EcatState : REFERENCE TO TcoEcatSlaveState]]></Declaration>
+      <Get Name="Get" Id="{b587e070-6c6d-0df9-320e-78ebeef1b5e3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>
