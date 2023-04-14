@@ -810,7 +810,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
 
         [Test, Order(1800)]
         [TestCase(eMessageDigestMethod.CRC8, (uint)139)]
-        [TestCase(eMessageDigestMethod.CRC16, (uint)16986)]
+        [TestCase(eMessageDigestMethod.CRC16, (uint)38100)]
         [TestCase(eMessageDigestMethod.CRC32, (uint)4257669427)]
         [TestCase(eMessageDigestMethod.NONE, (uint)0)]
         public void T1950_message_calulates_digest(eMessageDigestMethod mdMethod, uint md)
