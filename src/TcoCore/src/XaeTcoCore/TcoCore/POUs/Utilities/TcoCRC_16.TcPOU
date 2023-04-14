@@ -38,13 +38,14 @@ END_VAR
       <ST><![CDATA[TcoCRC_16 := crc;
 
 pDataArr := ADR(In);
-maxIndex := Tc2_Standard.LEN(In)+1;
+
+maxIndex := Tc2_Standard.LEN(In) - 1;
 
 IF ( pDataArr = 0 ) OR ( maxIndex < 0 ) THEN
-	RETURN;
+RETURN;
 END_IF
 
-FOR i := 2 TO maxIndex BY 1 DO
+FOR i := 0 TO maxIndex BY 1 DO
 	pByte := pDataArr + INT_TO_UINT(i);
 	bByte := pByte^;
 	crc := SHL(crc, 8) XOR CRC_TABLE[SHR(crc, 8) XOR bByte];

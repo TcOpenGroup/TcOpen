@@ -33,6 +33,14 @@
                         <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.RequiredStatus}" PresentationType="DisplaySlim"/>
                         <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.DetectedStatus}" PresentationType="DisplaySlim"/>
                         <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.StarNotationEnabled}" PresentationType="DisplaySlim"/>
+                        <controls:RenderableContentControl Margin="10,0"
+                        Grid.Column="4"
+                        DataContext="{Binding _data.IsByPassed}"
+                        PresentationType="DisplaySlim" />
+                        <controls:RenderableContentControl Margin="10,0"
+                        Grid.Column="5"
+                        DataContext="{Binding _data.IsExcluded}"
+                        PresentationType="DisplaySlim" />
                         <StackPanel Grid.Column="5" Margin="10,0">
                             <materialDesign:PackIcon HorizontalAlignment="Stretch" 
                                                  VerticalAlignment="Stretch"                                                  

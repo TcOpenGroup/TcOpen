@@ -32,6 +32,14 @@
                     <WrapPanel Grid.Column="2">
                         <controls:RenderableContentControl Grid.Column="1" Margin="10,0" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowDisplaySlim"/>
                         <controls:RenderableContentControl Grid.Column="2" Margin="10,0" DataContext="{Binding _data.DetectedStatus}" PresentationType="ShadowDisplaySlim"/>
+                        <controls:RenderableContentControl Margin="10,0"
+                        Grid.Column="4"
+                        DataContext="{Binding _data.IsByPassed}"
+                        PresentationType="DisplaySlim" />
+                        <controls:RenderableContentControl Margin="10,0"
+                        Grid.Column="5"
+                        DataContext="{Binding _data.IsExcluded}"
+                        PresentationType="DisplaySlim" />
                         <StackPanel Grid.Column="5" Margin="10,0">
                             <materialDesign:PackIcon HorizontalAlignment="Stretch" 
                                                  VerticalAlignment="Stretch"                                                  
