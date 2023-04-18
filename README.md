@@ -189,3 +189,4 @@ For requesting a license for STweep, visit www.stweep.com/Opensource
 - Unofficial TwinCAT function for HTTP requests with json conversion [Beckhoff Http Client ](https://github.com/fbarresi/BeckhoffHttpClient)
 - Opinionated code formatter for TwinCAT. [TcBlack](https://github.com/Roald87/TcBlack)
 - Bring the power of Json.Net to TwinCAT [TwinCAT.JsonExtension](https://github.com/fbarresi/TwinCAT.JsonExtension)
+- Use Python with ADS [pyads](https://github.com/stlehmann/pyads)
