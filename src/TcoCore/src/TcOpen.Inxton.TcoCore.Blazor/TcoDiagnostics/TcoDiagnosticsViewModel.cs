@@ -154,24 +154,26 @@ namespace TcoCore
 
         public void RogerAllMessages()
         {
-            try
+            lock (updatemutex)
             {
-                lock (updatemutex)
+                try
                 {
+
                     TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
                     foreach (var item in MessageDisplay.Where(p => p.Pinned))
                     {
                         item.OnlinerMessage.Pinned.Cyclic = false;
                         TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                     }
+
                 }
-            }
-            catch (Exception ex)
-            {
-                // Log the error message
-                TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
-                // Throw the exception to be handled by the caller
-                throw;
+                catch (Exception ex)
+                {
+                    // Log the error message
+                    TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
+                    // Throw the exception to be handled by the caller
+                    throw;
+                }
             }
         }
 
