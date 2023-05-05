@@ -50,7 +50,7 @@ namespace TcoCore
         public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaulCategory = item;
 
         public static eMessageCategory DefaulCategory { get; set; } = eMessageCategory.Info;
-        
+
 
         bool diagnosticsRunning;
 
@@ -70,7 +70,7 @@ namespace TcoCore
                 SetProperty(ref diagnosticsRunning, value);
             }
         }
-       
+
         /// <summary>
         /// Updates messages of diagnostics view.
         /// </summary>
@@ -80,7 +80,7 @@ namespace TcoCore
             {
                 return;
             }
-            
+
             lock (updatemutex)
             {
 
@@ -91,10 +91,10 @@ namespace TcoCore
                     MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
                                              .OrderByDescending(p => p.Category)
                                              .OrderBy(p => p.TimeStamp);
-                    
+
 
                 }).Wait();
-    
+
                 DiagnosticsRunning = false;
 
             }
@@ -154,19 +154,28 @@ namespace TcoCore
 
         public void RogerAllMessages()
         {
-            lock (updatemutex)
+            try
             {
-                TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
-                foreach (var item in MessageDisplay.Where(p => p.Pinned))
+                lock (updatemutex)
                 {
-                    item.OnlinerMessage.Pinned.Cyclic = false;
-                    TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                    TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
+                    foreach (var item in MessageDisplay.Where(p => p.Pinned))
+                    {
+                        item.OnlinerMessage.Pinned.Cyclic = false;
+                        TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                // Log the error message
+                TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
+                // Throw the exception to be handled by the caller
+                throw;
+            }
         }
+
         public IVortexObject AffectedObject { get; set; }
-       
 
     }
 
