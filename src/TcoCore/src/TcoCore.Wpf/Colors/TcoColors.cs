@@ -31,12 +31,50 @@ namespace TcoCore.Wpf
         public static Brush Error => GetDynamicBrush("MaterialDesignValidationErrorBrush", fallBackBrush: BrushFromHex("#dd2c00"));
         public static Brush OnError => GetDynamicBrush("MaterialDesignDarkForeground", fallBackBrush: BrushFromHex("#dd2c00"));
 
-    
+
+
+        public static Brush Debug => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green500);
+        public static Brush Trace => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green600);
+        public static Brush Info => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green700);
+        public static Brush TimedOut => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green800);
+        public static Brush Notification => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green900);
+        public static Brush Warning => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Yellow700);
+        public static Brush Errors => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red600);
+        public static Brush ProgrammingError => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red700);
+        public static Brush Critical => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red800);
+        public static Brush Catastrophic => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red900);
+
+        public static Brush OnDebug => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green500);
+        public static Brush OnTrace => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green600);
+        public static Brush OnInfo => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green700);
+        public static Brush OnTimedOut => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green800);
+        public static Brush OnNotification => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green900);
+        public static Brush OnWarning => GetMaterialDesignForegroundBrush(MaterialDesignColor.Yellow700);
+        public static Brush OnErrors => GetMaterialDesignForegroundBrush(MaterialDesignColor.Red600);
+        public static Brush OnProgrammingError => GetMaterialDesignForegroundBrush(MaterialDesignColor.Red700);
+        public static Brush OnCritical => GetMaterialDesignForegroundBrush(MaterialDesignColor.Red800);
+        public static Brush OnCatastrophic => GetMaterialDesignForegroundBrush(MaterialDesignColor.Red900);
+
+
+
         private static Brush GetDynamicBrush(string brushResourceKey, Brush fallBackBrush) =>
             Application.Current?.TryFindResource(brushResourceKey)?.As<Brush>() ?? fallBackBrush;
 
 
-      
+        private static Brush GetMaterialDesignForegroundBrush(MaterialDesignColor brushResourceKey)
+        {
+            Color color;
+            SwatchHelper.Lookup.TryGetValue(brushResourceKey, out color);
+            return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
+    }
+
+        private static Brush GetMaterialDesignBackgrondBrush(MaterialDesignColor brushResourceKey)
+        {
+            Color color;
+            SwatchHelper.Lookup.TryGetValue(brushResourceKey ,out color);
+            return new SolidColorBrush(color);
+        }
+
 
         private static Color GetDynamicColor(string colorKey, Color fallbackColor)
         {

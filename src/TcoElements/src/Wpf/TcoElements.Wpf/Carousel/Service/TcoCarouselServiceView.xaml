@@ -1,0 +1,91 @@
+<UserControl
+    x:Class="TcoElements.TcoCarouselServiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TcoElements"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tcoCore="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
+    xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:vortex="http://vortex.mts/xaml" xmlns:vortexs="http://vortex.security.mts/xaml"
+    mc:Ignorable="d"
+    d:DesignWidth="800">
+    <d:UserControl.DataContext>
+        <TcoElements:TcoCarousel />
+    </d:UserControl.DataContext>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
+    <vortex:TcoComponentView>
+        <vortex:TcoComponentView.ComponentHeader>
+            <WrapPanel DataContext="{Binding Model}">
+                <vortex:RenderableContentControl DataContext="{Binding _turnTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <vortex:RenderableContentControl DataContext="{Binding _abortTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <vortex:RenderableContentControl DataContext="{Binding _status.CurrentPosition}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+            </WrapPanel>
+        </vortex:TcoComponentView.ComponentHeader>
+        <vortex:TcoComponentView.ComponentDetails>
+            <ScrollViewer MaxHeight="600"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Model}">
+
+                <WrapPanel >
+                    <WrapPanel.Resources>
+                        <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
+                            <Setter Property="MinWidth" Value="250"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+
+                        </Style>
+                    </WrapPanel.Resources>
+
+                    <GroupBox Header="Signals Info">
+                        <WrapPanel>
+                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _InPositionSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _InPrecisePositionSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _EnableTurnSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _StartTurnSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </GroupBox>
+
+                    <vortexs:PermissionBox Permissions="can_change_hw_settings" SecurityMode="Disabled">
+                        <GroupBox Header="{Binding _config.AttributeName}">
+                            <vortex:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
+                        </GroupBox>
+                    </vortexs:PermissionBox>
+
+                    <GroupBox Header="{Binding _status.AttributeName}">
+                        <vortex:RenderableContentControl  DataContext="{Binding _status}" PresentationType="ControlSlim" />
+                    </GroupBox>
+
+                    <GroupBox Header="{Binding _positionsIdentifiers[0].AttributeName}">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding _positionsIdentifiers}" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Resources>
+                                <DataTemplate x:Key="PositionTemplate" >
+                                   
+
+                                </DataTemplate>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                     
+
+                                <DataGridTemplateColumn Header="">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <vortex:RenderableContentControl  DataContext="{Binding }" PresentationType="ControlSlim" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+
+
+                        </DataGrid>
+                    </GroupBox>
+
+                </WrapPanel>
+            </ScrollViewer>
+        </vortex:TcoComponentView.ComponentDetails>
+    </vortex:TcoComponentView>
+</UserControl>
+    

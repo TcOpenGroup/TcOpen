@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoElementsSandbox" Id="{c46022e7-7bf1-0c54-0deb-015ecc103f2a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoElementsSandbox EXTENDS TcoCore.TcoContext
 VAR
@@ -16,13 +16,20 @@ VAR
 	_ao : TcoElements.TcoAo(THIS^);
 	_aiSignal : DINT;
 	_aoSignal : DINT;
+	
+	{attribute addProperty Name "Carousel"}
+	_carousel : TcoElements.TcoCarousel(THIS^);
+	codedPosition: WORD;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{48365b4b-e057-0c37-2f7e-00090af8dacd}">
       <Declaration><![CDATA[METHOD PROTECTED Main 
-]]></Declaration>
+
+VAR
+	
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_di.Service();
 _do.Service();
@@ -37,7 +44,17 @@ _ai.Config.RawLow := 0;
 _ai.Config.RawHigh := 65536;
 
 _ai.Config.RealLow := 0.0;
-_ai.Config.RealHigh := 100.0;]]></ST>
+_ai.Config.RealHigh := 100.0;
+
+_carousel(
+	inoInPosition:=IO.A1._1 , 
+	inoInPrecisePosition:=IO.A1._2 , 
+	inoEnableTurn:= IO.A2._1, 
+	inoStartTurn:= IO.A2._2, 
+	inSafetyCondition:=IO.A2._3 , 
+	inBasePositionNumber:=codedPosition );
+	
+_carousel.Service();]]></ST>
       </Implementation>
     </Method>
   </POU>

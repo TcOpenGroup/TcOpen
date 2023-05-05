@@ -19,8 +19,11 @@
                 <TabControl>
                 
                 <TabItem Header="Service">
-                 
-                    <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
+                        <StackPanel>
+                            <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
+                            <vortex:RenderableContentControl DataContext="{Binding _carousel}" PresentationType="Base"></vortex:RenderableContentControl>
+                            <vortex:RenderableContentControl DataContext="{Binding codedPosition}" PresentationType="Control"></vortex:RenderableContentControl>
+                        </StackPanel>
              
                 </TabItem>
                 <TabItem Header="Base">

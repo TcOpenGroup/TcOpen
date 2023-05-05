@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoCarouselBase" Id="{571c422a-c609-0b64-1fef-a02a776dca84}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoCarouselBase EXTENDS TcoCore.TcoComponent
+
+VAR_IN_OUT
+	(*~
+		<docu>
+			<summary>
+				In position sensor.
+			</summary>	
+		</docu>
+	~*)
+	inoInPosition : BOOL;
+	(*~
+		<docu>
+			<summary>
+				In precise position sensor.
+			</summary>	
+		</docu>
+	~*)
+	inoInPrecisePosition : BOOL;
+END_VAR
+VAR_IN_OUT
+	(*~
+		<docu>
+			<summary>
+				Enable turn signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Enable turn#>"}
+	inoEnableTurn : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Start turn  signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Start turn#>"}
+	inoStartTurn : BOOL;
+END_VAR
+VAR
+
+	{attribute addProperty Name "<#In position sensor#>"}
+	_inPosition : BOOL;
+	{attribute addProperty Name "<#In precise position sensor#>"}
+	_inPrecisePosition : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Enable turn  signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Enable turn table#>"}
+	_enableTurn : BOOL;
+	(*~
+		<docu>
+			<summary>
+				Start trun signal.
+			</summary>	
+		</docu>
+	~*)
+	{attribute addProperty Name "<#Start turn table#>"}
+	_startTurn : BOOL;
+END_VAR
+
+VAR
+	{attribute addProperty Name "<#In position signal#>"}
+	_InPositionSignalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#In precise position signal#>"}
+    _InPrecisePositionSignalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Enable turn signal#>"}
+    _EnableTurnSignalInfo : TcoCore.TcoSignalInfo;
+	{attribute addProperty Name "<#Start turn signal#>"}
+    _StartTurnSignalInfo : TcoCore.TcoSignalInfo;
+END_VAR	]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF(__ISVALIDREF(inoInPosition)) THEN _inPosition := inoInPosition; _InPositionSignalInfo.GetSignalInfo(SIZEOF(inoInPosition), ADR(inoInPosition)); END_IF;
+IF(__ISVALIDREF(inoInPrecisePosition)) THEN _inPrecisePosition := inoInPrecisePosition; _InPrecisePositionSignalInfo.GetSignalInfo(SIZEOF(inoInPrecisePosition), ADR(inoInPrecisePosition)); END_IF;
+IF(__ISVALIDREF(inoEnableTurn)) THEN inoEnableTurn := _enableTurn; _EnableTurnSignalInfo.GetSignalInfo(SIZEOF(inoEnableTurn), ADR(inoEnableTurn)); END_IF;
+IF(__ISVALIDREF(inoStartTurn)) THEN inoStartTurn := _startTurn; _StartTurnSignalInfo.GetSignalInfo(SIZEOF(inoStartTurn), ADR(inoStartTurn)); END_IF;]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{3bae769a-4aca-0a30-1940-f1312a40fc2d}" />
+    <Folder Name="States" Id="{dfc95ad2-2cf9-032d-1a60-6015d0d43608}" />
+    <Folder Name="Tasks" Id="{2a40beee-6b4b-0667-29cc-3486b54c97cb}" />
+    <Method Name="Abort" Id="{33f4d290-ad59-0dc0-1a54-dceb2f6784b3}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Stops cyclinder movement.
+		 	<remarks>			
+				<note type="important">
+					This method switched off the signals for the rotating of the carousel.
+					However depending on the carousel configuration and electrical wiring the movement may contintue if designed in that way.
+					THIS IS NOT A SAFETY FUCTION!
+				</note>
+			</remarks>	 		
+		</summary>			
+	</docu>	
+~*)
+METHOD Abort : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(AbortTask <> 0) THEN
+	Abort := AbortTask.Invoke();
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AbortTask" Id="{17e6deca-eca0-0a1c-0786-5f73dad951c6}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `AbortTask` task that controls the stopping carousel rotation.
+			<remarks>			
+				<note type="important">
+					This is an abstract method and must be implemented in derived class.
+				</note>
+			</remarks>	 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC ABSTRACT AbortTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{aaedead3-ea75-0ff6-1885-d56a3005db4b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="InPosition" Id="{d69a896a-30ad-0e39-08ab-f27e02775f51}" FolderPath="States\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the carousel is in  position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY InPosition : bool]]></Declaration>
+      <Get Name="Get" Id="{89e9d104-d929-0928-1826-6a474fa40668}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InPosition := _inPosition;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="InPrecisePosition" Id="{8a98b7a0-30d2-09a8-009f-b8b23dc3285a}" FolderPath="States\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets whether the carousel is in precise position. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY InPrecisePosition : bool]]></Declaration>
+      <Get Name="Get" Id="{01253b06-3c1e-0c8a-13c7-a0ecc64d72e4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InPrecisePosition := _inPrecisePosition;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{368de314-cdb4-09a8-28ba-fffc6fc2c685}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restore all tasks of this instance into initial state.		 		 		
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(TurnTask <> 0) THEN TurnTask.Restore(); END_IF;
+IF(AbortTask <> 0) THEN AbortTask.Restore(); END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{f4c3e8b5-c7e8-01f9-1196-a938272c1efc}">
+      <Declaration><![CDATA[METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Turn" Id="{22e3e392-3f55-09ed-1c52-82d03f984974}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Starts movement into work position. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD Turn :TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(TurnTask <> 0) THEN
+	Turn := TurnTask.Invoke();
+END_IF;	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TurnTask" Id="{05f16e55-6df3-0265-3393-67ae5f28d889}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `TrunTask` task that controls the rotation from  position to next position in same direction.
+			<remarks>			
+				<note type="important">
+					This is an abstract method and must be implemented in derived class.
+				</note>
+			</remarks>	 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY PUBLIC ABSTRACT TurnTask : TcoCore.ITcoTask]]></Declaration>
+      <Get Name="Get" Id="{12ccf9f1-5c36-0900-2e92-fa85e5dea42d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
