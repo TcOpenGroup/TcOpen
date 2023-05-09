@@ -170,9 +170,8 @@ namespace TcoCore
                 catch (Exception ex)
                 {
                     // Log the error message
-                    TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
-                    // Throw the exception to be handled by the caller
-                    throw;
+                    TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);                  
+                    // Swallow
                 }
             }
         }
