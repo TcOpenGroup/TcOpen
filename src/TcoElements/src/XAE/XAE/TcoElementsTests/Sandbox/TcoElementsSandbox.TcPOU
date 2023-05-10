@@ -50,7 +50,12 @@ _ai.Config.RawHigh := 65536;
 _ai.Config.RealLow := 0.0;
 _ai.Config.RealHigh := 100.0;
 
-_carousel.Config.ErrorTime:=t#10s;
+_carousel.Config.ErrorTime:=T#10S;
+_carousel.Config.InfoTime:=T#2S;
+_carousel.Config.Direction:=eTcoCarouselDirection.Cw;
+_carousel.Config.NumberOfPositions:=8;
+_carousel.Config.Offset:=1;
+
 _carousel(
 	inoInPosition:=IO.A1._1 , 
 	inoInPrecisePosition:=IO.A1._2 , 
@@ -61,10 +66,10 @@ _carousel(
 
 _carousel.Suspend(inoDisableCondition:= _disableSignal1 ,Invert:=FALSE); //this might be signal from Light Curtain (safety is inerupted)
 _carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
+	
+_carousel.Service();
 
-	
-	
-_carousel.Service();]]></ST>
+]]></ST>
       </Implementation>
     </Method>
   </POU>
