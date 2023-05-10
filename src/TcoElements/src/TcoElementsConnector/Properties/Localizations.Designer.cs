@@ -61,6 +61,15 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calulate next expected Id position.
+        /// </summary>
+        internal static string ___Calulate_next_expected_Id_position__ {
+            get {
+                return ResourceManager.GetString("___Calulate_next_expected_Id_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Off.
         /// </summary>
         internal static string ___Check_Off__ {
@@ -106,6 +115,15 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current position.
+        /// </summary>
+        internal static string ___Current_position__ {
+            get {
+                return ResourceManager.GetString("___Current_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Division by zero: Verify values defined in config! (RawHigh,RawLow).
         /// </summary>
         internal static string ___Division_by_zero__Verify_values_defined_in_config___RawHigh_RawLow___ {
@@ -115,11 +133,128 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable turn.
+        /// </summary>
+        internal static string ___Enable_turn__ {
+            get {
+                return ResourceManager.GetString("___Enable_turn__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable turn signal.
+        /// </summary>
+        internal static string ___Enable_turn_signal__ {
+            get {
+                return ResourceManager.GetString("___Enable_turn_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable turn table.
+        /// </summary>
+        internal static string ___Enable_turn_table__ {
+            get {
+                return ResourceManager.GetString("___Enable_turn_table__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected next position.
+        /// </summary>
+        internal static string ___Expected_next_position__ {
+            get {
+                return ResourceManager.GetString("___Expected_next_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expecting table in position. .
+        /// </summary>
+        internal static string ___Expecting_table_in_position____ {
+            get {
+                return ResourceManager.GetString("___Expecting_table_in_position____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In position.
+        /// </summary>
+        internal static string ___In_position__ {
+            get {
+                return ResourceManager.GetString("___In_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In position sensor.
+        /// </summary>
+        internal static string ___In_position_sensor__ {
+            get {
+                return ResourceManager.GetString("___In_position_sensor__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In position signal.
+        /// </summary>
+        internal static string ___In_position_signal__ {
+            get {
+                return ResourceManager.GetString("___In_position_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In precise position.
+        /// </summary>
+        internal static string ___In_precise_position__ {
+            get {
+                return ResourceManager.GetString("___In_precise_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In precise position sensor.
+        /// </summary>
+        internal static string ___In_precise_position_sensor__ {
+            get {
+                return ResourceManager.GetString("___In_precise_position_sensor__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In precise position signal.
+        /// </summary>
+        internal static string ___In_precise_position_signal__ {
+            get {
+                return ResourceManager.GetString("___In_precise_position_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrectly coded current position. Check configuration of code bits! .
+        /// </summary>
+        internal static string ___Incorrectly_coded_current_position__Check_configuration_of_code_bits____ {
+            get {
+                return ResourceManager.GetString("___Incorrectly_coded_current_position__Check_configuration_of_code_bits____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid data: Gain is not defined!.
         /// </summary>
         internal static string ___Invalid_data__Gain_is_not_defined___ {
             get {
                 return ResourceManager.GetString("___Invalid_data__Gain_is_not_defined___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid reference: .
+        /// </summary>
+        internal static string ___Invalid_reference____ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference____", resourceCulture);
             }
         }
         
@@ -151,6 +286,25 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter number of positions is &lt;= 0. The paremeters must be grater than 0..
+        /// </summary>
+        internal static string ___Parameter_number_of_positions_is____0__The_paremeters_must_be_grater_than_0___ {
+            get {
+                return ResourceManager.GetString("___Parameter_number_of_positions_is____0__The_paremeters_must_be_grater_than_0___" +
+                        "", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positions.
+        /// </summary>
+        internal static string ___Positions__ {
+            get {
+                return ResourceManager.GetString("___Positions__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raw range.
         /// </summary>
         internal static string ___Raw_range__ {
@@ -165,6 +319,15 @@ namespace TcoElementsConnector.Properties {
         internal static string ___Real_range__ {
             get {
                 return ResourceManager.GetString("___Real_range__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required position must be in range 1 - 20 but was:.
+        /// </summary>
+        internal static string ___Required_position_must_be_in_range_1___20_but_was___ {
+            get {
+                return ResourceManager.GetString("___Required_position_must_be_in_range_1___20_but_was___", resourceCulture);
             }
         }
         
@@ -187,11 +350,38 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        internal static string ___Restore__ {
+            get {
+                return ResourceManager.GetString("___Restore__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safety conditions to turn the table are not met..
+        /// </summary>
+        internal static string ___Safety_conditions_to_turn_the_table_are_not_met___ {
+            get {
+                return ResourceManager.GetString("___Safety_conditions_to_turn_the_table_are_not_met___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scaled value.
         /// </summary>
         internal static string ___Scaled_value__ {
             get {
                 return ResourceManager.GetString("___Scaled_value__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setpoint.
+        /// </summary>
+        internal static string ___Setpoint__ {
+            get {
+                return ResourceManager.GetString("___Setpoint__", resourceCulture);
             }
         }
         
@@ -223,11 +413,156 @@ namespace TcoElementsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start turn.
+        /// </summary>
+        internal static string ___Start_turn__ {
+            get {
+                return ResourceManager.GetString("___Start_turn__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start turn signal.
+        /// </summary>
+        internal static string ___Start_turn_signal__ {
+            get {
+                return ResourceManager.GetString("___Start_turn_signal__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start turn table.
+        /// </summary>
+        internal static string ___Start_turn_table__ {
+            get {
+                return ResourceManager.GetString("___Start_turn_table__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         internal static string ___Status__ {
             get {
                 return ResourceManager.GetString("___Status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table after turn does not have expected coding. Expected id at position #1 is.
+        /// </summary>
+        internal static string ___Table_after_turn_does_not_have_expected_coding__Expected_id_at_position__1_is__ {
+            get {
+                return ResourceManager.GetString("___Table_after_turn_does_not_have_expected_coding__Expected_id_at_position__1_is_" +
+                        "_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table turning. Trying to leave sensor.
+        /// </summary>
+        internal static string ___Table_turning__Trying_to_leave_sensor__ {
+            get {
+                return ResourceManager.GetString("___Table_turning__Trying_to_leave_sensor__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table turning. Trying to reach sensor table in positon..
+        /// </summary>
+        internal static string ___Table_turning__Trying_to_reach_sensor_table_in_positon___ {
+            get {
+                return ResourceManager.GetString("___Table_turning__Trying_to_reach_sensor_table_in_positon___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Truning table  was completed successfully..
+        /// </summary>
+        internal static string ___Truning_table__was_completed_successfully___ {
+            get {
+                return ResourceManager.GetString("___Truning_table__was_completed_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn.
+        /// </summary>
+        internal static string ___Turn__ {
+            get {
+                return ResourceManager.GetString("___Turn__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn safety condition.
+        /// </summary>
+        internal static string ___Turn_safety_condition__ {
+            get {
+                return ResourceManager.GetString("___Turn_safety_condition__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table aborted due to.
+        /// </summary>
+        internal static string ___Turning_table_aborted_due_to__ {
+            get {
+                return ResourceManager.GetString("___Turning_table_aborted_due_to__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table aborted due to NOT .
+        /// </summary>
+        internal static string ___Turning_table_aborted_due_to_NOT___ {
+            get {
+                return ResourceManager.GetString("___Turning_table_aborted_due_to_NOT___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table finished with an error..
+        /// </summary>
+        internal static string ___Turning_table_finished_with_an_error___ {
+            get {
+                return ResourceManager.GetString("___Turning_table_finished_with_an_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table is suspended due to.
+        /// </summary>
+        internal static string ___Turning_table_is_suspended_due_to__ {
+            get {
+                return ResourceManager.GetString("___Turning_table_is_suspended_due_to__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table is suspended due to NOT .
+        /// </summary>
+        internal static string ___Turning_table_is_suspended_due_to_NOT___ {
+            get {
+                return ResourceManager.GetString("___Turning_table_is_suspended_due_to_NOT___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table started..
+        /// </summary>
+        internal static string ___Turning_table_started___ {
+            get {
+                return ResourceManager.GetString("___Turning_table_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turning table was aborted, while not yet completed!.
+        /// </summary>
+        internal static string ___Turning_table_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Turning_table_was_aborted__while_not_yet_completed___", resourceCulture);
             }
         }
         

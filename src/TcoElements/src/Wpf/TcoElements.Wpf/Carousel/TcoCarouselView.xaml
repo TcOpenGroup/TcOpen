@@ -16,7 +16,7 @@
         <TcoElements:TcoCarousel />
     </d:UserControl.DataContext>
     <UserControl.Resources>
-        <wpf:TcoResources></wpf:TcoResources>
+    
     </UserControl.Resources>
 
     <Grid>
@@ -70,10 +70,11 @@
                             HorizontalAlignment="Center"
                             Background="{StaticResource Error}"
                             Foreground="{StaticResource OnError}"
-                            MaxWidth="300"
+                            MaxWidth="350"
                             Margin="5,200,5,5"
-                            Visibility="{Binding _status.TurnSafetyCondition.Cyclic, Converter={vortex:BooleanToVisibilityConverter}, ConverterParameter=true}"
-                            Content="{x:Static p:Resources.CarouselNotSafeTurnCondition}" />  
+                            Visibility="{Binding _status.TurnSafetyCondition.Cyclic, Converter={vortex:BooleanToVisibilityConverter}, ConverterParameter=false}"
+                            Content="{x:Static p:Resources.CarouselNotSafeTurnCondition}" >
+                </Button>
 
         </Grid>
 

@@ -23,7 +23,7 @@
         <vortex:TcoComponentView.ComponentHeader>
             <WrapPanel DataContext="{Binding Model}">
                 <vortex:RenderableContentControl DataContext="{Binding _turnTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                <vortex:RenderableContentControl DataContext="{Binding _abortTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <vortex:RenderableContentControl DataContext="{Binding _restoreTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                 <vortex:RenderableContentControl DataContext="{Binding _status.CurrentPosition}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
             </WrapPanel>
@@ -41,26 +41,42 @@
                     </WrapPanel.Resources>
 
                     <GroupBox Header="Signals Info">
-                        <WrapPanel>
-                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _InPositionSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _InPrecisePositionSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _EnableTurnSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                            <tcoCore:TcoSignalInfoView  DataContext="{Binding _StartTurnSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                        </WrapPanel>
+                        <ItemsControl  >
+                            <ItemsControl.Resources>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="MinWidth" Value="200"></Setter>
+                                    <Setter Property="Margin" Value="10"></Setter>
+
+                                </Style>
+                            </ItemsControl.Resources>
+                            <StackPanel >
+                                <tcoCore:TcoSignalInfoView  DataContext="{Binding _InPositionSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                <tcoCore:TcoSignalInfoView  DataContext="{Binding _InPrecisePositionSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel >
+                                    <tcoCore:TcoSignalInfoView  DataContext="{Binding _EnableTurnSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                    <tcoCore:TcoSignalInfoView  DataContext="{Binding _StartTurnSignalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+
+                                </StackPanel>
+
+
+
+                        </ItemsControl>
+     
                     </GroupBox>
 
-                    <vortexs:PermissionBox Permissions="can_change_hw_settings" SecurityMode="Disabled">
+                    <!--<vortexs:PermissionBox Permissions="can_change_hw_settings" SecurityMode="Disabled">-->
                         <GroupBox Header="{Binding _config.AttributeName}">
                             <vortex:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
                         </GroupBox>
-                    </vortexs:PermissionBox>
+                    <!--</vortexs:PermissionBox>-->
 
                     <GroupBox Header="{Binding _status.AttributeName}">
                         <vortex:RenderableContentControl  DataContext="{Binding _status}" PresentationType="ControlSlim" />
                     </GroupBox>
 
-                    <GroupBox Header="{Binding _positionsIdentifiers[0].AttributeName}">
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding _positionsIdentifiers}" CanUserAddRows="False" CanUserDeleteRows="False">
+                    <GroupBox >
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding _status.Positions }" CanUserAddRows="False" CanUserDeleteRows="False">
                             <DataGrid.Resources>
                                 <DataTemplate x:Key="PositionTemplate" >
                                    

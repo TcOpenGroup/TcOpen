@@ -20,6 +20,10 @@ VAR
 	{attribute addProperty Name "Carousel"}
 	_carousel : TcoElements.TcoCarousel(THIS^);
 	codedPosition: WORD;
+	{attribute addProperty Name "Disable signal 1"}
+	_disableSignal1: BOOL;
+	{attribute addProperty Name "Disable signal 2"}
+	_disableSignal2: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -46,6 +50,7 @@ _ai.Config.RawHigh := 65536;
 _ai.Config.RealLow := 0.0;
 _ai.Config.RealHigh := 100.0;
 
+_carousel.Config.ErrorTime:=t#10s;
 _carousel(
 	inoInPosition:=IO.A1._1 , 
 	inoInPrecisePosition:=IO.A1._2 , 
@@ -53,6 +58,11 @@ _carousel(
 	inoStartTurn:= IO.A2._2, 
 	inSafetyCondition:=IO.A2._3 , 
 	inBasePositionNumber:=codedPosition );
+
+_carousel.Suspend(inoDisableCondition:= _disableSignal1 ,Invert:=FALSE); //this might be signal from Light Curtain (safety is inerupted)
+_carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
+
+	
 	
 _carousel.Service();]]></ST>
       </Implementation>

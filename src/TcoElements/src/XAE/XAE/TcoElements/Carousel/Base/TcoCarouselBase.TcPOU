@@ -86,53 +86,6 @@ IF(__ISVALIDREF(inoStartTurn)) THEN inoStartTurn := _startTurn; _StartTurnSignal
     <Folder Name="Operations" Id="{3bae769a-4aca-0a30-1940-f1312a40fc2d}" />
     <Folder Name="States" Id="{dfc95ad2-2cf9-032d-1a60-6015d0d43608}" />
     <Folder Name="Tasks" Id="{2a40beee-6b4b-0667-29cc-3486b54c97cb}" />
-    <Method Name="Abort" Id="{33f4d290-ad59-0dc0-1a54-dceb2f6784b3}" FolderPath="Operations\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Stops cyclinder movement.
-		 	<remarks>			
-				<note type="important">
-					This method switched off the signals for the rotating of the carousel.
-					However depending on the carousel configuration and electrical wiring the movement may contintue if designed in that way.
-					THIS IS NOT A SAFETY FUCTION!
-				</note>
-			</remarks>	 		
-		</summary>			
-	</docu>	
-~*)
-METHOD Abort : TcoCore.ITcoTaskStatus
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF(AbortTask <> 0) THEN
-	Abort := AbortTask.Invoke();
-END_IF;	]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="AbortTask" Id="{17e6deca-eca0-0a1c-0786-5f73dad951c6}" FolderPath="Tasks\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `AbortTask` task that controls the stopping carousel rotation.
-			<remarks>			
-				<note type="important">
-					This is an abstract method and must be implemented in derived class.
-				</note>
-			</remarks>	 		
-		</summary>			
-	</docu>	
-~*)
-PROPERTY PUBLIC ABSTRACT AbortTask : TcoCore.ITcoTask]]></Declaration>
-      <Get Name="Get" Id="{aaedead3-ea75-0ff6-1885-d56a3005db4b}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="InPosition" Id="{d69a896a-30ad-0e39-08ab-f27e02775f51}" FolderPath="States\">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -182,8 +135,7 @@ METHOD  Restore : ITcoRestorable
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(TurnTask <> 0) THEN TurnTask.Restore(); END_IF;
-IF(AbortTask <> 0) THEN AbortTask.Restore(); END_IF;]]></ST>
+        <ST><![CDATA[IF(TurnTask <> 0) THEN TurnTask.Restore(); END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{f4c3e8b5-c7e8-01f9-1196-a938272c1efc}">

@@ -62,23 +62,27 @@ END_VAR
 		
 		Messenger.Info('<#Calulate next expected Id position#>');
 		inoStatus.ExpectedNextPosition := GetIdentifierAtPosition( inoConfig.NumberOfPositions,inoStatus.Positions);	
-		
-		_progress := 10;		
+		Messenger.OnCondition(inoStatus.CurrentPosition=0  AND inoInPosition).Error('<#Incorrectly coded current position. Check configuration of code bits! #>').Pin();
+		IF	inoStatus.CurrentPosition <> 0 AND inoInPosition THEN
+			_progress := 10;
+		END_IF;		
 	END_IF;
 	
-	
+
 	
 	IF _progress=10 THEN	
-		Messenger.Info('<#Expecting start signal for table rotation#>');
-		IF inSafetyCondition AND inoInPosition THEN 
-			inoEnableTurn:=TRUE; 
-			inoStartTurn:=TRUE;	
+		Messenger.Warning('<#Expecting table in position. #>');
+		IF  inoInPosition THEN 
+		
 			_progress :=  _progress+10;				
 		END_IF
 	END_IF;
 	
 	IF _progress=20 THEN	
+		inoEnableTurn:=TRUE; 
+		inoStartTurn:=TRUE;	
 		Messenger.Info('<#Table turning. Trying to leave sensor#>');
+		
 		IF NOT inoInPosition THEN
 			inoEnableTurn:=FALSE;	
 			_progress :=  _progress+10;				
@@ -98,7 +102,7 @@ END_VAR
 	
 	IF _progress=40 THEN	
 		Messenger.OnCondition(inoStatus.CurrentPosition > 0 AND_THEN inoStatus.ExpectedNextPosition  <>  GetIdentifierAtPosition(1,inoStatus.Positions)).
-			Error(_sb.Clear().Append('<#Table after turn does not have expected coding. Expected id at position #1 is#> ').Append( UINT_TO_STRING(inoStatus.ExpectedNextPosition)).ToString());
+			Error(_sb.Clear().Append('<#Table after turn does not have expected coding. Expected id at position #1 is#> ').Append( UINT_TO_STRING(inoStatus.ExpectedNextPosition)).ToString()).Pin();
 	
 		IF(inoStatus.CurrentPosition > 0 AND inoStatus.ExpectedNextPosition = GetIdentifierAtPosition(1,inoStatus.Positions)) THEN
 			
@@ -109,10 +113,16 @@ END_VAR
 	
 	
 	CallTimers(TRUE);
-	
 	THIS^.ThrowWhen(_errorTimer.Q);	
+	
 END_IF
-]]></ST>
+
+
+IF NOT inSafetyCondition THEN
+	inoEnableTurn:=FALSE; 
+	inoStartTurn:=FALSE;	
+	Messenger.Error('<#Safety conditions to turn the table are not met.#>').Pin();
+END_IF]]></ST>
     </Implementation>
     <Method Name="CallTimers" Id="{817b00f3-1c92-4152-a33f-19342858ca0b}">
       <Declaration><![CDATA[METHOD CallTimers
@@ -201,6 +211,26 @@ METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Turning table started.#>'; END_IF; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{c347b644-4b95-0ebe-1f2f-4e6781dfc275}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_progress := 0;
+CallTimers(FALSE);
+Messenger.UnPin();
 ]]></ST>
       </Implementation>
     </Method>

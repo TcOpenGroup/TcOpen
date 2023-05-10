@@ -153,8 +153,11 @@
   <data name="___Calulate_next_expected_Id_position__" xml:space="preserve">
     <value>Calulate next expected Id position</value>
   </data>
-  <data name="___Expecting_start_signal_for_table_rotation__" xml:space="preserve">
-    <value>Expecting start signal for table rotation</value>
+  <data name="___Incorrectly_coded_current_position__Check_configuration_of_code_bits____" xml:space="preserve">
+    <value>Incorrectly coded current position. Check configuration of code bits! </value>
+  </data>
+  <data name="___Expecting_table_in_position____" xml:space="preserve">
+    <value>Expecting table in position. </value>
   </data>
   <data name="___Table_turning__Trying_to_leave_sensor__" xml:space="preserve">
     <value>Table turning. Trying to leave sensor</value>
@@ -164,6 +167,9 @@
   </data>
   <data name="___Table_after_turn_does_not_have_expected_coding__Expected_id_at_position__1_is__" xml:space="preserve">
     <value>Table after turn does not have expected coding. Expected id at position #1 is</value>
+  </data>
+  <data name="___Safety_conditions_to_turn_the_table_are_not_met___" xml:space="preserve">
+    <value>Safety conditions to turn the table are not met.</value>
   </data>
   <data name="___Required_position_must_be_in_range_1___20_but_was___" xml:space="preserve">
     <value>Required position must be in range 1 - 20 but was:</value>
@@ -186,14 +192,26 @@
   <data name="___Turn__" xml:space="preserve">
     <value>Turn</value>
   </data>
-  <data name="___Abort__" xml:space="preserve">
-    <value>Abort</value>
+  <data name="___Restore__" xml:space="preserve">
+    <value>Restore</value>
   </data>
-  <data name="___Turning_aborted_due_to__" xml:space="preserve">
-    <value>Turning aborted due to</value>
+  <data name="___Config__" xml:space="preserve">
+    <value>Config</value>
   </data>
-  <data name="___Rotating_is_suspended_due_to__" xml:space="preserve">
-    <value>Rotating is suspended due to</value>
+  <data name="___Status__" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="___Turning_table_aborted_due_to__" xml:space="preserve">
+    <value>Turning table aborted due to</value>
+  </data>
+  <data name="___Turning_table_aborted_due_to_NOT___" xml:space="preserve">
+    <value>Turning table aborted due to NOT </value>
+  </data>
+  <data name="___Turning_table_is_suspended_due_to__" xml:space="preserve">
+    <value>Turning table is suspended due to</value>
+  </data>
+  <data name="___Turning_table_is_suspended_due_to_NOT___" xml:space="preserve">
+    <value>Turning table is suspended due to NOT </value>
   </data>
   <data name="___Signal__" xml:space="preserve">
     <value>Signal</value>
@@ -236,12 +254,6 @@
   </data>
   <data name="___Out_of_boundaries_check_correction_parameters__Gain_Ofset__in_config___" xml:space="preserve">
     <value>Out of boundaries,check correction parameters (Gain,Ofset) in config!</value>
-  </data>
-  <data name="___Config__" xml:space="preserve">
-    <value>Config</value>
-  </data>
-  <data name="___Status__" xml:space="preserve">
-    <value>Status</value>
   </data>
   <data name="___Setpoint__" xml:space="preserve">
     <value>Setpoint</value>
