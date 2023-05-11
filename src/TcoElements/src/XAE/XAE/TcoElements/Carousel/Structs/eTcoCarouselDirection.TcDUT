@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoCarouselDirection" Id="{9cbf3192-0a0c-0c90-3ed6-152529611f1c}">
+    <Declaration><![CDATA[TYPE eTcoCarouselDirection :
+(
+	Cw := 0,
+	Ccw := 1
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

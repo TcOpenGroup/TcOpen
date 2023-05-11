@@ -19,8 +19,11 @@
                 <TabControl>
                 
                 <TabItem Header="Service">
-                 
-                    <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
+                        <StackPanel>
+                            <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
+                            <vortex:RenderableContentControl DataContext="{Binding _carousel}" PresentationType="Base"></vortex:RenderableContentControl>
+                            <vortex:RenderableContentControl DataContext="{Binding codedPosition}" PresentationType="Control"></vortex:RenderableContentControl>
+                        </StackPanel>
              
                 </TabItem>
                 <TabItem Header="Base">
@@ -32,9 +35,15 @@
             </TabControl>
             </ScrollViewer>
         </TabItem>
+        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}" Header="Diagnostic">
+            <ScrollViewer>
+                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+
+            </ScrollViewer>
+        </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="VariableTree">
             <ScrollViewer>
-                <vortex:DynamicTreeView></vortex:DynamicTreeView>
+                <vortex:DynamicTreeView DataContext="{Binding}"></vortex:DynamicTreeView>
             </ScrollViewer>
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.IO}" Header="IO">

@@ -35,6 +35,30 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Analog\TcoAo\TcoAoConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Analog\TcoAo\TcoAoStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Carousel\Base\TcoCarouselBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Carousel\Structs\eTcoCarouselDirection.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Carousel\Structs\TcoCarouselConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Carousel\Structs\TcoCarouselStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Carousel\Tasks\TcoTurnTableTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Carousel\TcoCarousel.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Digital\TcoDi\TcoDi.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -56,12 +80,6 @@
     <Compile Include="Analog\TcoAo\TcoAo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Analog\TcoAo\TcoAoConfig.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Analog\TcoAo\TcoAoStatus.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -70,12 +88,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Carousel\Base" />
+    <Folder Include="Carousel\Structs" />
+    <Folder Include="Carousel\Tasks" />
     <Folder Include="Digital" />
     <Folder Include="Digital\TcoDo" />
     <Folder Include="Digital\TcoDi" />
     <Folder Include="Analog" />
     <Folder Include="Analog\TcoAo" />
     <Folder Include="Analog\TcoAi" />
+    <Folder Include="Carousel" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +117,10 @@
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoUtilities">
+      <DefaultResolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoUtilities</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TcoElements.tmc">
@@ -104,6 +130,9 @@
   <ItemGroup>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoUtilities">
+      <Resolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
