@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoSingleAxisPositionsRootContainer" Id="{9450a862-e6ad-0399-1428-c975950add9f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSingleAxisPositionsRootContainer EXTENDS TcoCore.TcoObject
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

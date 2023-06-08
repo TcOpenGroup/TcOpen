@@ -124,6 +124,33 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Axis.
+        /// </summary>
+        public static string ___Axis__ {
+            get {
+                return ResourceManager.GetString("___Axis__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Axis config.
+        /// </summary>
+        public static string ___Axis_config__ {
+            get {
+                return ResourceManager.GetString("___Axis_config__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Axis status.
+        /// </summary>
+        public static string ___Axis_status__ {
+            get {
+                return ResourceManager.GetString("___Axis_status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear position lag.
         /// </summary>
         public static string ___Clear_position_lag__ {
@@ -277,6 +304,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Homing error no .
+        /// </summary>
+        public static string ___Homing_error_no___ {
+            get {
+                return ResourceManager.GetString("___Homing_error_no___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jerk.
         /// </summary>
         public static string ___Jerk__ {
@@ -318,6 +354,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___Jogging__ {
             get {
                 return ResourceManager.GetString("___Jogging__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load positions Task.
+        /// </summary>
+        public static string ___Load_positions_Task__ {
+            get {
+                return ResourceManager.GetString("___Load_positions_Task__", resourceCulture);
             }
         }
         
@@ -412,6 +457,24 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Positions.
+        /// </summary>
+        public static string ___Positions__ {
+            get {
+                return ResourceManager.GetString("___Positions__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power.
+        /// </summary>
+        public static string ___Power__ {
+            get {
+                return ResourceManager.GetString("___Power__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Power enable.
         /// </summary>
         public static string ___Power_enable__ {
@@ -444,6 +507,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___Running__ {
             get {
                 return ResourceManager.GetString("___Running__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save positions Task.
+        /// </summary>
+        public static string ___Save_positions_Task__ {
+            get {
+                return ResourceManager.GetString("___Save_positions_Task__", resourceCulture);
             }
         }
         

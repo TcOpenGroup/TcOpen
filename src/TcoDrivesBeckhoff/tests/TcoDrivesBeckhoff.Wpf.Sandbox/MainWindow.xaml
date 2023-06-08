@@ -22,6 +22,18 @@
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Service"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="SIMPLE AXIS">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._simpleAxis}" PresentationType="Service"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Diagnostic">
+                <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext }" PresentationType="Diagnostics"/>
+
+            </TabItem>
         </TabControl>
 
     </Grid>

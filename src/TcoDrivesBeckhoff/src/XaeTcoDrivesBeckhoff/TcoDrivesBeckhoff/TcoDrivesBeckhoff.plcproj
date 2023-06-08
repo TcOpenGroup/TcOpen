@@ -72,6 +72,9 @@
     <Compile Include="DUTs\TcoAxisStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\TcoAxisConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -115,6 +118,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\ITcoSingleAxis.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxis.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxisMoveParam.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxisPositionsRootContainer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoDriveSimple\DriveState\eTcoMovementState.TcDUT">
@@ -170,6 +185,9 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Conversions" />
+    <Folder Include="POUs\Prototypes\CartesianCoordinateSystem" />
+    <Folder Include="POUs\Prototypes\CartesianCoordinateSystem\MultiAxisSystem" />
+    <Folder Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem" />
     <Folder Include="POUs\Prototypes\TcoDriveSimple\MotionTasks" />
     <Folder Include="POUs\Prototypes\TcoDriveSimple\AxisTasks" />
     <Folder Include="POUs\Prototypes" />

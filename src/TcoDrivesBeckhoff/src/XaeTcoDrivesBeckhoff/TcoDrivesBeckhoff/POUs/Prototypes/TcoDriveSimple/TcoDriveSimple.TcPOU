@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDriveSimple" Id="{e1d88b92-8a8a-0e74-0555-7cc06fb367e3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimple EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoDriveSimple
 VAR_INPUT
@@ -18,17 +18,22 @@ VAR
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
     _mcReadStatus : Tc2_MC2.MC_ReadStatus;
-    _power : Power(THIS^);
+
     {attribute 'hide'}
     _override : LREAL := 100.0;
+	{attribute addProperty Name "<#Axis status#>"}
     {attribute clr [ReadOnly()]}
     _axisStatus : TcoAxisStatus;
+	{attribute addProperty Name "<#Axis config#>"}
+    _config : TcoAxisConfig;
 
 END_VAR
 VAR
     {attribute addProperty Name "<#Movement state#>"}
     {attribute clr [ReadOnly()]}
     _movementState : TcoMovementState(THIS^,TcoCore.eRestoreMode.None);
+	{attribute addProperty Name "<#Power#>"}
+    _power : Power(THIS^);
     {attribute addProperty Name "<#Reset#>"}
     _resetTask : ResetTask(THIS^);
     {attribute addProperty Name "<#SoE reset#>"}
@@ -86,7 +91,7 @@ _moveRelativeTask();
 _moveAbsoluteTask();
 _moveModuloTask();
 
-IF(_axisStatus.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_axisStatus.ErrorId)).Append('.').Append('For details see the service mode').ToString()); END_IF;
+IF(_axisStatus.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_axisStatus.ErrorId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
 
 ]]></ST>
     </Implementation>
@@ -392,7 +397,6 @@ _haltTask.Restore();
 _moveRelativeTask.Restore();
 _moveAbsoluteTask.Restore();
 _moveModuloTask.Restore();
-
 _movementState.Restore();]]></ST>
       </Implementation>
     </Method>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="ITcoSingleAxis" Id="{7cc6513b-a14f-0294-290b-9fff2a0f9ed3}">
+    <Declaration><![CDATA[INTERFACE ITcoSingleAxis
+]]></Declaration>
+    <Method Name="MoveAbsolute" Id="{d4ca899f-458b-057c-3584-49d30c509c40}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	MoveParams : TcoSingleAxisMoveParam;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

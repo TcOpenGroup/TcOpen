@@ -36,6 +36,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoContext\SomeTestPositions.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoContext\WpfContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -85,7 +88,6 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcoDrivesBeckhoff">
       <DefaultResolution>TcoDrivesBeckhoff, 0.6.0.913 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoDrivesBeckhoff</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>

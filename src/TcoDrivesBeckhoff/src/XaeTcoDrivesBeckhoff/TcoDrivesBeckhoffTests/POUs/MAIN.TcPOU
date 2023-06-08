@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="MAIN" Id="{6dac1541-74ba-49c0-be18-0d7d17fb8228}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -10,9 +10,9 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoDriveSimpleTestContext.ProbeRun();
 
-IF _wpfContextCall THEN
+//IF _wpfContextCall THEN
 	_wpfContext.Run();
-END_IF	
+//END_IF	
 ]]></ST>
     </Implementation>
   </POU>
