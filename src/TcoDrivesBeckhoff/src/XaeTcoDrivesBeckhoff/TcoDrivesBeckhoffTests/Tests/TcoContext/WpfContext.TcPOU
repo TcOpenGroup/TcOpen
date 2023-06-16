@@ -17,11 +17,18 @@ VAR
     _enableNegative2 : BOOL;
     _calibrationCam2 : BOOL;
 	
+	
 	{attribute addProperty Name "<#Test positions#>"}
     _positions : SomeTestPositions(THIS^);
 
-    {attribute addProperty Name "<#Test manipulator#>"}
-    _simpleAxis : TcoDrivesBeckhoff.TcoSingleAxis(THIS^);   
+    {attribute addProperty Name "<#Test single axis#>"}
+    _simpleAxis : TcoDrivesBeckhoff.TcoSingleAxis(THIS^);
+
+	{attribute addProperty Name "<#Test multi positions#>"}
+    _positionsMulti : SomeTestMultiPositions(THIS^);
+
+    {attribute addProperty Name "<#Test multi axis#>"}
+    _multiAxis : TcoDrivesBeckhoff.TcoMultiAxis(THIS^);   
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -64,6 +71,17 @@ _simpleAxis(inEnable := _enable1,
     inCalibrationCam := _calibrationCam1 or GVL._calibrationCam,
     inoAxisRef := GVL.Axis1,
 	inoPositions:= _positions);
+	
+	
+_multiAxis(inEnable := _enable1,
+    inEnablePositive := _enablePositive1,
+    inEnableNegative := _enableNegative1,
+    inCalibrationCam := _calibrationCam1 or GVL._calibrationCam,
+	inoAxis1Ref := GVL.Axis1,
+	inoAxis2Ref := GVL.Axis2,
+	inoAxis3Ref := GVL.Axis1,
+	inoAxis4Ref := GVL.Axis1,
+	inoPositions:= _positionsMulti);
 
 	]]></ST>
       </Implementation>

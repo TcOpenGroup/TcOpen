@@ -120,7 +120,22 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\MultiAxisSystem\ITcoMultiAxis.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\MultiAxisSystem\TcoMultiAxis.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\MultiAxisSystem\TcoMultiAxisMoveParam.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\MultiAxisSystem\TcoMultiAxisPositionsRootContainer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\ITcoSingleAxis.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxisDataTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxis.TcPOU">

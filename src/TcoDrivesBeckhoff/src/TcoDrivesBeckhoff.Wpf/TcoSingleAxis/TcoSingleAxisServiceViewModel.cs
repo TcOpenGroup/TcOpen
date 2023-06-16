@@ -20,10 +20,28 @@ namespace TcoDrivesBeckhoff
         {
             TeachPositionCommand = new RelayCommand(a => this.TeachPosition());
             MoveToPositionCommand = new RelayCommand(a => MoveToPosition());
+            CreateNewDataSetCommand = new RelayCommand(a => this.CreateNewDataSet());
+            DeleteDataSetCommand = new RelayCommand(a => this.DeleteDataSet());
             LoadPositionsCommand = new RelayCommand(a => this.LoadPositions());
             SavePositionsCommand = new RelayCommand(a => SavePositions());
             FillDefaultParamsCommand = new RelayCommand(a => FillDefaultParams());
 
+        }
+
+        private void DeleteDataSet()
+        {
+            if (Component.RepositoryHandler != null)
+                Component.Delete();
+            else
+                MessageBox.Show("Define Repository Handler first!");
+        }
+
+        private void CreateNewDataSet()
+        {
+            if (Component.RepositoryHandler != null)
+                Component.CreateSet();
+            else
+                MessageBox.Show("Define Repository Handler first!");
         }
 
         public PlainTcoSingleAxisMoveParam DefaultValues { get; set; } = new PlainTcoSingleAxisMoveParam();
@@ -32,10 +50,10 @@ namespace TcoDrivesBeckhoff
         {
             foreach (var item in Component.Positions)
             {
-                item.Velocity.Cyclic = DefaultValues.Velocity;
-                item.Acceleration.Cyclic = DefaultValues.Acceleration;
-                item.Deceleration.Cyclic = DefaultValues.Deceleration;
-                item.Jerk.Cyclic = DefaultValues.Jerk;
+                item.Axis1.Velocity.Cyclic = DefaultValues.Velocity;
+                item.Axis1.Acceleration.Cyclic = DefaultValues.Acceleration;
+                item.Axis1.Deceleration.Cyclic = DefaultValues.Deceleration;
+                item.Axis1.Jerk.Cyclic = DefaultValues.Jerk;
 
             }
 
@@ -81,9 +99,9 @@ namespace TcoDrivesBeckhoff
             if (answer == MessageBoxResult.Yes)
             {
                 this.SelectedItem.Position.Synchron = Math.Round(this.Component._axis._axisStatus.ActPos.Synchron, 3);
-                this.SelectedItem.Acceleration.Synchron = Math.Round(this.Component._axis._axisStatus.ActAcc.Synchron, 3);
-                this.SelectedItem.Deceleration.Synchron = Math.Round(this.Component._axis._axisStatus.ActAcc.Synchron, 3);
-                this.SelectedItem.Velocity.Synchron = Math.Round(this.Component._axis._axisStatus.ActVelo.Synchron, 3);
+                //this.SelectedItem.Acceleration.Synchron = Math.Round(this.Component._axis._axisStatus.ActAcc.Synchron, 3);
+                //this.SelectedItem.Deceleration.Synchron = Math.Round(this.Component._axis._axisStatus.ActAcc.Synchron, 3);
+                //this.SelectedItem.Velocity.Synchron = Math.Round(this.Component._axis._axisStatus.ActVelo.Synchron, 3);
 
             }
         }
@@ -108,6 +126,8 @@ namespace TcoDrivesBeckhoff
 
         public RelayCommand TeachPositionCommand { get; private set; }
         public RelayCommand MoveToPositionCommand { get; private set; }
+        public RelayCommand CreateNewDataSetCommand { get; private set; }
+        public RelayCommand DeleteDataSetCommand { get; private set; }
         public RelayCommand LoadPositionsCommand { get; private set; }
         public RelayCommand SavePositionsCommand { get; private set; }
         public RelayCommand FillDefaultParamsCommand { get; private set; }

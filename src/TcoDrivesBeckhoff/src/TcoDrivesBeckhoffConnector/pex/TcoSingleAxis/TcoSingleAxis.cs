@@ -25,14 +25,31 @@ namespace TcoDrivesBeckhoff
         public void InitializeRemoteDataExchange(RepositoryDataSetHandler<PositioningParamItem> handler)
         {
             repoHandler = new RepositoryHandler(handler);
-            _loadPositionTask.InitializeExclusively(Load);
-            _savePositionTask.InitializeExclusively(Save);
+            _loadPositionTask.InitializeExclusively(LoadFromPlc);
+            _savePositionTask.InitializeExclusively(SaveFromPlc);
 
         }
 
-        public ObservableCollection<TcoSingleAxisMoveParam> Positions { get { return Extensions.ToObservableCollection(((IVortexObject)_positions).GetChildren().OfType<TcoSingleAxisMoveParam>()); } }
+        private void SaveFromPlc()
+        {
+            _savePositionTask.Read();
+            SetId = _savePositionTask._identifier.Cyclic;
+            Save();
+        }
 
-     
+        private void LoadFromPlc()
+        {
+            _loadPositionTask.Read();
+            SetId = _loadPositionTask._identifier.Cyclic;
+            Load();
+        }
+
+        public ObservableCollection<TcoMultiAxisMoveParam> Positions { get { return Extensions.ToObservableCollection(((IVortexObject)_positions).GetChildren().OfType<TcoMultiAxisMoveParam>()); } }
+
+        public string SetId { get;  set; }
+        public string NewSetId { get; set; }
+
+    
 
         public void Save()
         {
@@ -44,12 +61,12 @@ namespace TcoDrivesBeckhoff
                     if (!any)
                     {
                         PlainTcoSingleAxisMoveParam plain = new PlainTcoSingleAxisMoveParam();
-                        item.FlushOnlineToPlain(plain);
+                        item.Axis1.FlushOnlineToPlain(plain);
                         RepositoryHandler.CurrentSet.Items.Add(new PositioningParamItem()
                         {
                             Key = item.Symbol,
                             Description = string.Empty,
-                            MoveParam = plain,
+                            MoveParam = new PlainTcoMultiAxisMoveParam() { Axis1 = plain},
 
                         });
                     }
@@ -59,20 +76,35 @@ namespace TcoDrivesBeckhoff
                         if (pos != null)
                         {
                             PlainTcoSingleAxisMoveParam plain = new PlainTcoSingleAxisMoveParam();
-                            item.FlushOnlineToPlain(plain);
-                            pos.MoveParam = plain;
+                            item.Axis1.FlushOnlineToPlain(plain);
+                            pos.MoveParam = new PlainTcoMultiAxisMoveParam() { Axis1 = plain };
                         }
                     }
                 }
-                RepositoryHandler.SaveDataSet(AttributeName);
+                RepositoryHandler.SaveDataSet(SetId);
             }
-            else
+        
+        }
+
+        public void Delete()
+        {
+            if (RepositoryHandler != null)
             {
-                if (RepositoryHandler != null)
+
+                RepositoryHandler.DeleteDataSet(SetId);
+            }
+
+        }
+
+        public void CreateSet()
+        {
+            if (RepositoryHandler != null &&  !string.IsNullOrEmpty(NewSetId))
+            {
+                if (!RepositoryHandler.ListOfDataSets.Contains(NewSetId))
                 {
-                    RepositoryHandler.LoadDataSet(AttributeName);
+                    RepositoryHandler.SaveDataSet(NewSetId);
+                    SetId = NewSetId;
                 }
-             
             }
         }
 
@@ -80,7 +112,7 @@ namespace TcoDrivesBeckhoff
         {
             if (RepositoryHandler != null)
             {
-                RepositoryHandler.LoadDataSet(AttributeName);
+                RepositoryHandler.LoadDataSet(SetId);
 
                 foreach (var item in Positions)
                 {

@@ -18,9 +18,9 @@ VAR
 	{attribute addProperty Name "<#Axis#>"}
 	_axis :   TcoDriveSimple(THIS^);
 	{attribute addProperty Name "<#Load positions Task#>"}
-	_loadPositionTask :   TcoCore.TcoRemoteTask(THIS^);
+	_loadPositionTask :   TcoSingleAxisDataTask(THIS^);
 	{attribute addProperty Name "<#Save positions Task#>"}
-	_savePositionTask :   TcoCore.TcoRemoteTask(THIS^);
+	_savePositionTask :   TcoSingleAxisDataTask(THIS^);
 	{attribute addProperty Name "<#Positions#>"}
 	{attribute clr [MemberByIdentity()]}
 	_positions : TcoSingleAxisPositionsRootContainer(THIS^);
@@ -61,7 +61,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[MoveAbsolute := THIS^._axis.MoveAbsolute(inPosition:=MoveParams.Position,
-										inVelocity:=MoveParams.Position,
+										inVelocity:=MoveParams.Velocity,
 										inAcceleration:=MoveParams.Acceleration,
 										inDeceleration:=MoveParams.Deceleration,		
 										inJerk:=MoveParams.Jerk);]]></ST>
@@ -75,7 +75,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[MoveRelative := THIS^._axis.MoveRelative(inDistance:=MoveParams.Position,
-										inVelocity:=MoveParams.Position,
+										inVelocity:=MoveParams.Velocity,
 										inAcceleration:=MoveParams.Acceleration,
 										inDeceleration:=MoveParams.Deceleration,		
 										inJerk:=MoveParams.Jerk);]]></ST>

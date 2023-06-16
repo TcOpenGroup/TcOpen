@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="SomeTestMultiPositions" Id="{8273acfc-9b9e-0909-3854-4c84a6bea50d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SomeTestMultiPositions EXTENDS TcoDrivesBeckhoff.TcoMultiAxisPositionsRootContainer
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute addProperty Name "<#Pick Position#>"}
+	PickPosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+	{attribute addProperty Name "<#Place  Position#>"}
+	PlacePosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+	{attribute addProperty Name "<#BlazkoPosition  Position#>"}
+	BlazkoPosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

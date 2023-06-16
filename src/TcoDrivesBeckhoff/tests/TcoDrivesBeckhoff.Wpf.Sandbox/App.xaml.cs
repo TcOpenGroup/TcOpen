@@ -23,10 +23,18 @@ namespace TcoDrivesBeckhoff.Wpf.Sandbox
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
-           var handler = RepositoryDataSetHandler<PositioningParamItem>.CreateSet(new MongoDbRepository<EntitySet<PositioningParamItem>>(new MongoDbRepositorySettings<EntitySet<PositioningParamItem>>(@"mongodb://localhost:27017", "TestPositions", "Positions")));
+           var handler = RepositoryDataSetHandler<PositioningParamItem>.CreateSet(new MongoDbRepository<EntitySet<PositioningParamItem>>
+                            (new MongoDbRepositorySettings<EntitySet<PositioningParamItem>>(@"mongodb://localhost:27017", "Positions", TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._simpleAxis.Symbol)));
+
 
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._simpleAxis.InitializeRemoteDataExchange(handler);
-            TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._simpleAxis.Load();
+
+            var handler2 = RepositoryDataSetHandler<PositioningParamItem>.CreateSet(new MongoDbRepository<EntitySet<PositioningParamItem>>
+                            (new MongoDbRepositorySettings<EntitySet<PositioningParamItem>>(@"mongodb://localhost:27017", "Positions", TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._multiAxis.Symbol)));
+
+
+            TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._multiAxis.InitializeRemoteDataExchange(handler2);
+
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.Connector.BuildAndStart();
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContextCall.Synchron = true;
             TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._serviceModeActive.Synchron = true;

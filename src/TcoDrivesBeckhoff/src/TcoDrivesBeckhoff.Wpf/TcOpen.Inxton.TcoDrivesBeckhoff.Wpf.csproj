@@ -30,6 +30,14 @@
  
 
   <ItemGroup>
+    <Page Update="TcoMultiAxisPositions\TcoMultiAxisPositionsRootContainerView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoMultiAxis\Service\TcoMultiAxisServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="TcoSingleAxis\Service\TcoSingleAxisServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoMultiAxis" Id="{1b6e4beb-3425-02bb-27ac-cfc0f6fcffd4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoMultiAxis EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoMultiAxis
+VAR_INPUT
+	inEnable : BOOL;
+    inEnablePositive : BOOL;
+    inEnableNegative : BOOL;
+    inCalibrationCam : BOOL;
+END_VAR
+VAR_IN_OUT
+    inoAxis1Ref : TcoAxisRef;
+	inoAxis2Ref : TcoAxisRef;
+	inoAxis3Ref : TcoAxisRef;
+	inoAxis4Ref : TcoAxisRef;
+	inoPositions:TcoMultiAxisPositionsRootContainer;
+END_VAR
+VAR
+	{attribute 'hide'}
+    _axis1Ref : REFERENCE TO TcoAxisRef;
+	{attribute addProperty Name "<#Axis 1#>"}
+	_axis1 :   TcoDriveSimple(THIS^);
+	{attribute 'hide'}
+    _axis2Ref : REFERENCE TO TcoAxisRef;
+	{attribute addProperty Name "<#Axis 2#>"}
+	_axis2 :   TcoDriveSimple(THIS^);
+	{attribute 'hide'}
+    _axis3Ref : REFERENCE TO TcoAxisRef;
+	{attribute addProperty Name "<#Axis 3#>"}
+	_axis3 :   TcoDriveSimple(THIS^);
+	{attribute 'hide'}
+    _axis4Ref : REFERENCE TO TcoAxisRef;
+	{attribute addProperty Name "<#Axis 4#>"}
+	_axis4 :   TcoDriveSimple(THIS^);
+	
+	{attribute addProperty Name "<#Load positions Task#>"}
+	_loadPositionTask :   TcoSingleAxisDataTask(THIS^);
+	{attribute addProperty Name "<#Save positions Task#>"}
+	_savePositionTask :   TcoSingleAxisDataTask(THIS^);
+	{attribute addProperty Name "<#Positions#>"}
+	{attribute clr [MemberByIdentity()]}
+	_positions : TcoMultiAxisPositionsRootContainer(THIS^);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_positions := inoPositions;
+
+_axis1Ref REF= inoAxis1Ref;
+
+_axis1(
+	inEnable:=inEnable , 
+	inEnablePositive:=inEnablePositive , 
+	inEnableNegative:=inEnableNegative , 
+	inCalibrationCam:=inCalibrationCam, 
+	inoAxisRef:= _axis1Ref);
+	
+_axis2Ref REF= inoAxis2Ref;
+
+_axis2(
+	inEnable:=inEnable , 
+	inEnablePositive:=inEnablePositive , 
+	inEnableNegative:=inEnableNegative , 
+	inCalibrationCam:=inCalibrationCam, 
+	inoAxisRef:= _axis2Ref);
+	
+_axis3Ref REF= inoAxis3Ref;
+
+_axis3(
+	inEnable:=inEnable , 
+	inEnablePositive:=inEnablePositive , 
+	inEnableNegative:=inEnableNegative , 
+	inCalibrationCam:=inCalibrationCam, 
+	inoAxisRef:= _axis3Ref);
+	
+_axis4Ref REF= inoAxis4Ref;
+
+_axis4(
+	inEnable:=inEnable , 
+	inEnablePositive:=inEnablePositive , 
+	inEnableNegative:=inEnableNegative , 
+	inCalibrationCam:=inCalibrationCam, 
+	inoAxisRef:= _axis4Ref);
+
+_savePositionTask();
+_loadPositionTask();	
+	
+ inoPositions :=_positions;]]></ST>
+    </Implementation>
+    <Property Name="Axis_1" Id="{84abd4a4-3274-07cb-00bb-919cb048f67d}">
+      <Declaration><![CDATA[PROPERTY Axis_1 : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{e9337e5f-c4ff-0cc7-3e9f-8b7fd388afe8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Axis_1 REF=_axis1;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Axis_2" Id="{e040d7d0-d25f-0c6a-39ca-81ce96423fc9}">
+      <Declaration><![CDATA[PROPERTY Axis_2 : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{181a605b-f35a-033d-2d75-7e4e47a86bfa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Axis_2 REF=_axis2;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Axis_3" Id="{1009d1eb-f6d4-048d-1ff6-7282f21f07a1}">
+      <Declaration><![CDATA[PROPERTY Axis_3 : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{a9f6ea67-9015-087e-364b-36f11d84b4b7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Axis_3 REF=_axis3;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Axis_4" Id="{0bcb0f47-3047-0511-335a-b3fd34dc9abc}">
+      <Declaration><![CDATA[PROPERTY Axis_4 : REFERENCE TO TcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{503885b3-6ce4-0613-116c-066e8c9d9224}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Axis_4 REF=_axis4;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveAbsolute" Id="{e43a55c5-43cf-051f-3670-6a768345e9d5}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : ITcoTaskStatus
+VAR_INPUT
+	MoveParams : TcoMultiAxisMoveParam;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+THIS^._axis1.MoveAbsolute(inPosition:=MoveParams.Axis1.Position,
+										inVelocity:=MoveParams.Axis1.Position,
+										inAcceleration:=MoveParams.Axis1.Acceleration,
+										inDeceleration:=MoveParams.Axis1.Deceleration,		
+										inJerk:=MoveParams.Axis1.Jerk);
+THIS^._axis2.MoveAbsolute(inPosition:=MoveParams.Axis2.Position,
+										inVelocity:=MoveParams.Axis2.Position,
+										inAcceleration:=MoveParams.Axis2.Acceleration,
+										inDeceleration:=MoveParams.Axis2.Deceleration,		
+										inJerk:=MoveParams.Axis2.Jerk);
+THIS^._axis3.MoveAbsolute(inPosition:=MoveParams.Axis3.Position,
+										inVelocity:=MoveParams.Axis3.Position,
+										inAcceleration:=MoveParams.Axis3.Acceleration,
+										inDeceleration:=MoveParams.Axis3.Deceleration,		
+										inJerk:=MoveParams.Axis3.Jerk);
+THIS^._axis4.MoveAbsolute(inPosition:=MoveParams.Axis4.Position,
+										inVelocity:=MoveParams.Axis4.Position,
+										inAcceleration:=MoveParams.Axis4.Acceleration,
+										inDeceleration:=MoveParams.Axis4.Deceleration,		
+										inJerk:=MoveParams.Axis4.Jerk);
+										
+//MoveAbsolute.Error := THIS^._axis1.MoveAbsoluteTask.Error 
+//					OR THIS^._axis2.MoveAbsoluteTask.Error 
+//					OR THIS^._axis3.MoveAbsoluteTask.Error 
+//					OR THIS^._axis4.MoveAbsoluteTask.Error ;
+//										
+//MoveAbsolute.Busy :=NOT MoveAbsolute.Error
+//					AND( THIS^._axis1.MoveAbsoluteTask.Busy 
+//					OR THIS^._axis2.MoveAbsoluteTask.Busy 
+//					OR THIS^._axis3.MoveAbsoluteTask.Busy 
+//					OR THIS^._axis4.MoveAbsoluteTask.Busy) ;
+//MoveAbsolute.Done := THIS^._axis1.MoveAbsoluteTask.Done 
+//					AND THIS^._axis2.MoveAbsoluteTask.Done 
+//					AND THIS^._axis3.MoveAbsoluteTask.Done 
+//					AND THIS^._axis4.MoveAbsoluteTask.Done ;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{fad6850c-749c-080e-1ff1-b31d79351934}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_axis1.Restore();
+_axis2.Restore();
+_axis3.Restore();
+_axis4.Restore();
+_savePositionTask.Restore();
+_loadPositionTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{09e54034-b7ee-0c28-1877-f895c8d43d1e}">
+      <Declaration><![CDATA[METHOD PROTECTED ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._axis1.Service();
+THIS^._axis2.Service();
+THIS^._axis3.Service();
+THIS^._axis4.Service();
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
