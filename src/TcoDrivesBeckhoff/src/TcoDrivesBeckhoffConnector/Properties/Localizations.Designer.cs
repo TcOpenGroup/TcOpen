@@ -133,6 +133,42 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Axis 1.
+        /// </summary>
+        public static string ___Axis_1__ {
+            get {
+                return ResourceManager.GetString("___Axis_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Axis 2.
+        /// </summary>
+        public static string ___Axis_2__ {
+            get {
+                return ResourceManager.GetString("___Axis_2__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Axis 3.
+        /// </summary>
+        public static string ___Axis_3__ {
+            get {
+                return ResourceManager.GetString("___Axis_3__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Axis 4.
+        /// </summary>
+        public static string ___Axis_4__ {
+            get {
+                return ResourceManager.GetString("___Axis_4__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Axis config.
         /// </summary>
         public static string ___Axis_config__ {
@@ -174,6 +210,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___Command_state__ {
             get {
                 return ResourceManager.GetString("___Command_state__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config.
+        /// </summary>
+        public static string ___Config__ {
+            get {
+                return ResourceManager.GetString("___Config__", resourceCulture);
             }
         }
         
@@ -313,6 +358,51 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid reference axis .
+        /// </summary>
+        public static string ___Invalid_reference_axis___ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference_axis___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid reference axis 1.
+        /// </summary>
+        public static string ___Invalid_reference_axis_1__ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference_axis_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid reference axis 2.
+        /// </summary>
+        public static string ___Invalid_reference_axis_2__ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference_axis_2__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid reference axis 3.
+        /// </summary>
+        public static string ___Invalid_reference_axis_3__ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference_axis_3__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid reference axis 4.
+        /// </summary>
+        public static string ___Invalid_reference_axis_4__ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference_axis_4__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jerk.
         /// </summary>
         public static string ___Jerk__ {
@@ -403,6 +493,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move absolute Task.
+        /// </summary>
+        public static string ___Move_absolute_Task__ {
+            get {
+                return ResourceManager.GetString("___Move_absolute_Task__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move modulo.
         /// </summary>
         public static string ___Move_modulo__ {
@@ -417,6 +516,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___Move_relative__ {
             get {
                 return ResourceManager.GetString("___Move_relative__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move relative Task.
+        /// </summary>
+        public static string ___Move_relative_Task__ {
+            get {
+                return ResourceManager.GetString("___Move_relative_Task__", resourceCulture);
             }
         }
         
@@ -502,6 +610,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore Task.
+        /// </summary>
+        public static string ___Restore_Task__ {
+            get {
+                return ResourceManager.GetString("___Restore_Task__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Running.
         /// </summary>
         public static string ___Running__ {
@@ -552,6 +669,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___SoE_reset__ {
             get {
                 return ResourceManager.GetString("___SoE_reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string ___Status__ {
+            get {
+                return ResourceManager.GetString("___Status__", resourceCulture);
             }
         }
         

@@ -17,13 +17,13 @@ namespace TcoDrivesBeckhoff
 
         }
 
-        public TcoSingleAxisPositionsRootContainer Component { get; private set; }
+        public TcoMultiAxisPositionsRootContainer Component { get; private set; }
 
         public ObservableCollection<TcoMultiAxisMoveParam> Positions { get { return Extensions.ToObservableCollection<TcoMultiAxisMoveParam>(((IVortexObject)Model).GetChildren().OfType<TcoMultiAxisMoveParam>()); } }
         public TcoMultiAxisMoveParam SelectedItem { get; set; }
 
 
-        public override object Model { get => this.Component; set { this.Component = value as TcoSingleAxisPositionsRootContainer; } }
+        public override object Model { get => this.Component; set { this.Component = value as TcoMultiAxisPositionsRootContainer; } }
     }
 
 

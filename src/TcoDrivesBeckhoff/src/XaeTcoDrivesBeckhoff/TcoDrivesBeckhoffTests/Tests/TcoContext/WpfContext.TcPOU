@@ -50,6 +50,8 @@ METHOD PROTECTED Main]]></Declaration>
     _axis1.Service();
     _axis2.Service();
     _simpleAxis.Service();
+	_multiAxis.Service();
+
 
 END_IF
 
@@ -65,22 +67,27 @@ _axis2(inEnable := _enable2,
     inCalibrationCam := _calibrationCam2,
     inoAxisRef := GVL.Axis2);
 
+_simpleAxis.Config.InfoTime:=T#4S;
+_simpleAxis.Config.ErrorTime:=T#10S;
+		
+	
 _simpleAxis(inEnable := _enable1,
     inEnablePositive := _enablePositive1,
     inEnableNegative := _enableNegative1,
     inCalibrationCam := _calibrationCam1 or GVL._calibrationCam,
-    inoAxisRef := GVL.Axis1,
+    refAxis := GVL.Axis1,
 	inoPositions:= _positions);
+// this means it is three axis cartesian system
+//_multiAxis.Config.Axis4Disabled:=TRUE;
+
+_multiAxis.Config.InfoTime:=T#4S;
+_multiAxis.Config.ErrorTime:=T#10S;
 	
-	
-_multiAxis(inEnable := _enable1,
-    inEnablePositive := _enablePositive1,
-    inEnableNegative := _enableNegative1,
-    inCalibrationCam := _calibrationCam1 or GVL._calibrationCam,
-	inoAxis1Ref := GVL.Axis1,
-	inoAxis2Ref := GVL.Axis2,
-	inoAxis3Ref := GVL.Axis1,
-	inoAxis4Ref := GVL.Axis1,
+_multiAxis(inEnableAxis1 := _enable1,
+    inEnablePositiveAxis1 := _enablePositive1,
+    inEnableNegativeAxis1 := _enableNegative1,
+    inCalibrationCamAxis1 := _calibrationCam1 OR GVL._calibrationCam,
+	refAxis1:=GVL.Axis1,
 	inoPositions:= _positionsMulti);
 
 	]]></ST>

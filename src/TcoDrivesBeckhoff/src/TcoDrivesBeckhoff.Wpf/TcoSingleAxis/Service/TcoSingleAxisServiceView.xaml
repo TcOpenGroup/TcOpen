@@ -7,6 +7,8 @@
     xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml" 
+    xmlns:p="clr-namespace:TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties"
+    
 
     xmlns:tcodrivesbeckhoff="clr-namespace:TcoDrivesBeckhoff;assembly=TcoDrivesBeckhoffConnector"
     mc:Ignorable="d">
@@ -24,26 +26,7 @@
                 <WrapPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}"/>
                 </WrapPanel.Resources>
-                <!--<WrapPanel  DataContext="{Binding _axisStatus.Disabled}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Disabled"  Foreground="{StaticResource Warning}"/>
-                </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Operational}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Ready"  Foreground="{StaticResource Notification}"/>
-                </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Homed"  Foreground="{StaticResource Notification}"/>
-                </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Not Homed!"  Foreground="{StaticResource Warning}"/>
-                </WrapPanel>
-                <WrapPanel  Visibility="{Binding _axisStatus.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                        <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding _axisStatus.ErrorId.Cyclic}" Foreground="{StaticResource Errors}"    Visibility="{Binding _axisStatus.Error.Cyclic, Converter={vortex:BoolToVisibilityConverter}}"/>
-                </WrapPanel>-->
+              
                
 
             </WrapPanel>
@@ -78,7 +61,7 @@
 
 
 
-                        <GroupBox Padding="10"   Header="POSITIONS" HorizontalAlignment="Stretch">
+                        <GroupBox Padding="10"   Header="{x:Static p:strings.Positions}" HorizontalAlignment="Stretch">
                             <!--<vortex:RenderableContentControl   DataContext="{Binding Component._positions}"   />-->
                             <Grid >
                                 <Grid.RowDefinitions>
@@ -91,17 +74,17 @@
                     
                                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
                                         <WrapPanel HorizontalAlignment="Center">
-                                            <TextBlock VerticalAlignment="Center" Text="Selected"></TextBlock>
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static p:strings.Selected}"></TextBlock>
                                             <ComboBox Margin="10,0"  MinWidth="150" VerticalAlignment="Center" ItemsSource="{Binding Component.RepositoryHandler.ListOfDataSets}" 
                                          SelectedItem="{Binding Component.SetId}"></ComboBox>
                                         </WrapPanel>
-                                        <WrapPanel Margin="5" HorizontalAlignment="Center">                                          
-                                            <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding DeleteDataSetCommand}" Content="DELETE SELECTED "></Button>
+                                        <WrapPanel Margin="5" HorizontalAlignment="Center">
+                                        <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding DeleteDataSetCommand}" Content="{x:Static p:strings.DeleteSelected}"></Button>
 
-                                
-                                        <TextBlock VerticalAlignment="Center"  Margin="5,0"  Text="SetId:"/>
+
+                                        <TextBlock VerticalAlignment="Center"  Margin="5,0"  Text="{x:Static p:strings.SetId}"/>
                                         <TextBox MinWidth="150"  VerticalAlignment="Center" IsEnabled="True" Text="{Binding Component.NewSetId, Mode=TwoWay}"></TextBox>
-                                        <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding CreateNewDataSetCommand}" Content="CREATE"></Button>
+                                        <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding CreateNewDataSetCommand}" Content="{x:Static p:strings.Create}"></Button>
                                             </WrapPanel>
 
                                         </StackPanel>
@@ -117,40 +100,18 @@
                                       SelectionMode="Single"
                                       SelectionUnit="FullRow"
                                       CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False">
-                                        <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding HumanReadable}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Position" IsReadOnly="False" Binding="{ Binding Position.Cyclic}"/>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="{x:Static p:strings.Name}" IsReadOnly="True" Binding="{Binding HumanReadable}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="{x:Static p:strings.Position}" IsReadOnly="False" Binding="{ Binding Axis1.Position.Cyclic}"/>
 
                                         <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Velocity" IsReadOnly="False" Binding="{ Binding Velocity.Cyclic}"/>
-                                        <DataGridTextColumn Header="Acc." IsReadOnly="False" Binding="{ Binding Acceleration.Cyclic}"/>
-                                        <DataGridTextColumn Header="Dec." IsReadOnly="False" Binding="{ Binding Deceleration.Cyclic}"/>
-                                        <DataGridTextColumn Header="Jerk" IsReadOnly="False" Binding="{ Binding Jerk.Cyclic}"/>
-
-                                        <DataGridTextColumn IsReadOnly="True" Header="Symbol" Binding="{Binding Symbol}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="{x:Static p:strings.Velocity}" IsReadOnly="False" Binding="{ Binding Axis1.Velocity.Cyclic}"/>
+                                        <DataGridTextColumn Header="{x:Static p:strings.Acceleration}" IsReadOnly="False" Binding="{ Binding Axis1.Acceleration.Cyclic}"/>
+                                        <DataGridTextColumn Header="{x:Static p:strings.Deceleration}" IsReadOnly="False" Binding="{ Binding Axis1.Deceleration.Cyclic}"/>
+                                        <DataGridTextColumn Header="{x:Static p:strings.Jerk}" IsReadOnly="False" Binding="{ Binding Axis1.Jerk.Cyclic}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <!--<DataGrid Grid.Column="1" ItemsSource="{Binding Component.RepositoryHandler.CurrentSet.Items}"
-                                          HorizontalAlignment="Stretch"
-                                            Margin="5"
-                                          AutoGenerateColumns="False" 
-                                          SelectionMode="Single"
-                                          SelectionUnit="FullRow"
-                                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Key}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Position" IsReadOnly="False" Binding="{ Binding MoveParam.Position}"/>
-
-                                        <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Velocity" IsReadOnly="False" Binding="{ Binding MoveParam.Velocity}"/>
-                                        <DataGridTextColumn Header="Acc." IsReadOnly="False" Binding="{ Binding MoveParam.Acceleration}"/>
-                                        <DataGridTextColumn Header="Dec." IsReadOnly="False" Binding="{ Binding MoveParam.Deceleration}"/>
-                                        <DataGridTextColumn Header="Jerk" IsReadOnly="False" Binding="{ Binding MoveParam.Jerk}"/>
-
-                                        <DataGridTextColumn IsReadOnly="True" Header="Symbol" Binding="{Binding Description}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>-->
-
+                           
                                 <WrapPanel Grid.Row="2"  HorizontalAlignment="Center">
                                     <WrapPanel.Resources>
                                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
@@ -169,24 +130,24 @@
 
                                         </Style>
                                     </WrapPanel.Resources>
-                                 
-                                    <Button Command="{Binding TeachPositionCommand}" Content="TEACH"></Button>
-                                    <Button Command="{Binding MoveToPositionCommand}" Content="MOVE TO POSITION"></Button>
-                                    <Button Command="{Binding LoadPositionsCommand}" Content="LOAD"></Button>
-                                    <Button Command="{Binding SavePositionsCommand}" Content="SAVE"></Button>
+
+                                    <Button Command="{Binding TeachPositionCommand}" Content="{x:Static p:strings.Teach}" ></Button>
+                                    <Button Command="{Binding MoveToPositionCommand}" Content="{x:Static p:strings.MoveToPosition}"></Button>
+                                    <Button Command="{Binding LoadPositionsCommand}" Content="{x:Static p:strings.Load}"></Button>
+                                    <Button Command="{Binding SavePositionsCommand}" Content="{x:Static p:strings.Save}"></Button>
                                     <WrapPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
                                         <WrapPanel.Resources>
 
                                         </WrapPanel.Resources>
-                                        <TextBlock Text="Vel:"/>
+                                        <TextBlock Text="{x:Static p:strings.Vel}"/>
                                         <TextBox IsEnabled="True" Text="{Binding DefaultValues.Velocity , Mode=TwoWay}"></TextBox>
-                                        <TextBlock Text="Acc:"/>
+                                        <TextBlock Text="{x:Static p:strings.Acc}"/>
                                         <TextBox Text="{Binding DefaultValues.Acceleration , Mode=TwoWay}"></TextBox>
-                                        <TextBlock Text="Dec:"/>
+                                        <TextBlock Text="{x:Static p:strings.Dec}"/>
                                         <TextBox Text="{Binding DefaultValues.Deceleration , Mode=TwoWay}"></TextBox>
-                                        <TextBlock Text="Jerk:"/>
+                                        <TextBlock Text="{x:Static p:strings.Jerk}"/>
                                         <TextBox Text="{Binding DefaultValues.Jerk, Mode=TwoWay}"></TextBox>
-                                        <Button Command="{Binding FillDefaultParamsCommand}" Content="WRITE DEFAULT VALUES"></Button>
+                                        <Button Command="{Binding FillDefaultParamsCommand}" Content="{x:Static p:strings.WriteDefaultValues}"></Button>
 
 
                                     </WrapPanel>

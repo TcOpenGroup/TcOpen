@@ -10,5 +10,12 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="MoveRelative" Id="{fd5ff396-57c2-075b-150e-d13745fc4ce2}">
+      <Declaration><![CDATA[METHOD MoveRelative : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	MoveParams : TcoSingleAxisMoveParam;
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>
