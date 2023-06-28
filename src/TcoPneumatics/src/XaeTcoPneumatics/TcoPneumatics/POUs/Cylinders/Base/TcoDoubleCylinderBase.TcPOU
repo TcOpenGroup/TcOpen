@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDoubleCylinderBase" Id="{e513df2e-4d68-037f-0b6b-689818632e69}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoDoubleCylinderBase EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoCylinder
 VAR_IN_OUT
@@ -114,8 +114,8 @@ VAR
     _toWorkPosSignalInfo : TcoCore.TcoSignalInfo;
 END_VAR	]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(__ISVALIDREF(inoAtHomePos1)) THEN _atHomePos := inoAtHomePos1 AND inoAtHomePos2; _atHomePos1SignalInfo.GetSignalInfo(SIZEOF(inoAtHomePos1), ADR(inoAtHomePos1));_atHomePos2SignalInfo.GetSignalInfo(SIZEOF(inoAtHomePos2), ADR(inoAtHomePos2)); END_IF;
-IF(__ISVALIDREF(inoAtWorkPos1)) THEN _atWorkPos := inoAtWorkPos1 AND inoAtWorkPos2; _atWorkPos1SignalInfo.GetSignalInfo(SIZEOF(inoAtWorkPos1), ADR(inoAtWorkPos1));_atWorkPos2SignalInfo.GetSignalInfo(SIZEOF(inoAtWorkPos2), ADR(inoAtWorkPos2)); END_IF;
+      <ST><![CDATA[IF(__ISVALIDREF(inoAtHomePos1) AND __ISVALIDREF(inoAtHomePos2)) THEN _atHomePos := inoAtHomePos1 AND inoAtHomePos2; _atHomePos1SignalInfo.GetSignalInfo(SIZEOF(inoAtHomePos1), ADR(inoAtHomePos1));_atHomePos2SignalInfo.GetSignalInfo(SIZEOF(inoAtHomePos2), ADR(inoAtHomePos2)); END_IF;
+IF(__ISVALIDREF(inoAtWorkPos1) AND __ISVALIDREF(inoAtWorkPos2)) THEN _atWorkPos := inoAtWorkPos1 AND inoAtWorkPos2; _atWorkPos1SignalInfo.GetSignalInfo(SIZEOF(inoAtWorkPos1), ADR(inoAtWorkPos1));_atWorkPos2SignalInfo.GetSignalInfo(SIZEOF(inoAtWorkPos2), ADR(inoAtWorkPos2)); END_IF;
 IF(__ISVALIDREF(inoToHomePos)) THEN inoToHomePos := _toHomePos; _toHomePosSignalInfo.GetSignalInfo(SIZEOF(inoToHomePos), ADR(inoToHomePos)); END_IF;
 IF(__ISVALIDREF(inoToWorkPos)) THEN inoToWorkPos := _toWorkPos; _toWorkPosSignalInfo.GetSignalInfo(SIZEOF(inoToWorkPos), ADR(inoToWorkPos)); END_IF;]]></ST>
     </Implementation>
