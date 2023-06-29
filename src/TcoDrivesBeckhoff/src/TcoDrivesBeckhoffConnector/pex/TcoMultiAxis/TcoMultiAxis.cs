@@ -32,16 +32,44 @@ namespace TcoDrivesBeckhoff
 
         private void SaveFromPlc()
         {
-            _savePositionTask.Read();
-            SetId = _savePositionTask._identifier.Cyclic;
-            Save();
+            try 
+            {
+                _savePositionTask.Read();
+                SetId = _savePositionTask._identifier.Cyclic;
+                Save();
+                _savePositionTask._exchangeSuccessfuly.Cyclic = true;
+                _savePositionTask.Write();
+
+            }
+            catch (Exception)
+            {
+                ;
+            }
         }
 
         private void LoadFromPlc()
         {
-            _loadPositionTask.Read();
-            SetId = _loadPositionTask._identifier.Cyclic;
-            Load();
+            try
+            {
+                _loadPositionTask.Read();
+                SetId = _loadPositionTask._identifier.Cyclic;
+                if (RepositoryHandler.ListOfDataSets.Contains(SetId))
+                {
+                    Load();
+                    _loadPositionTask._doesNotExist.Cyclic = false;
+                    _loadPositionTask._exchangeSuccessfuly.Cyclic = true;
+                }
+                else
+                    _loadPositionTask._doesNotExist.Cyclic = true;
+                
+                _loadPositionTask.Write();
+            }
+            catch (Exception)
+            {
+
+                ;
+            }
+         
         }
 
         public ObservableCollection<TcoMultiAxisMoveParam> Positions { get { return Extensions.ToObservableCollection(((IVortexObject)_positions).GetChildren().OfType<TcoMultiAxisMoveParam>()); } }

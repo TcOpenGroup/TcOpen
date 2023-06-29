@@ -18,9 +18,9 @@ VAR
 	{attribute addProperty Name "<#Axis#>"}
 	_axis :   TcoDriveSimple(THIS^);
 	{attribute addProperty Name "<#Load positions Task#>"}
-	_loadPositionTask :   TcoSingleAxisDataTask(THIS^);
+	_loadPositionTask :   TcoAxisExchangeDataTask(THIS^);
 	{attribute addProperty Name "<#Save positions Task#>"}
-	_savePositionTask :   TcoSingleAxisDataTask(THIS^);
+	_savePositionTask :   TcoAxisExchangeDataTask(THIS^);
 	{attribute addProperty Name "<#Positions#>"}
 	{attribute clr [MemberByIdentity()]}
 	_positions : TcoSingleAxisPositionsRootContainer(THIS^);
@@ -45,6 +45,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_positions := inoPositions;
+
 IF NOT __ISVALIDREF(refAxis)  THEN
     Messenger.Post('<#Invalid reference axis #>', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
@@ -65,7 +66,7 @@ IF _moveAbsoluteTask.Execute() THEN
 	IF _progress = 0 THEN
 		
 			THIS^._axis.MoveAbsolute(inPosition:=_moveParams.Position,
-												inVelocity:=_moveParams.Position,
+												inVelocity:=_moveParams.Velocity,
 												inAcceleration:=_moveParams.Acceleration,
 												inDeceleration:=_moveParams.Deceleration,		
 												inJerk:=_moveParams.Jerk);
@@ -95,7 +96,7 @@ IF _moveRelativeTask.Execute() THEN
 	IF _progress = 0 THEN
 		
 			THIS^._axis.MoveRelative(inDistance:=_moveParams.Position,
-												inVelocity:=_moveParams.Position,
+												inVelocity:=_moveParams.Velocity,
 												inAcceleration:=_moveParams.Acceleration,
 												inDeceleration:=_moveParams.Deceleration,		
 												inJerk:=_moveParams.Jerk);

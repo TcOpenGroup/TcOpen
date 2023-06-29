@@ -29,8 +29,13 @@
                 <WrapPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}"/>
                 </WrapPanel.Resources>
-          
+
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._resetDrivesTask }" PresentationType="Base" />
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._soeResetDrivesTask }" PresentationType="Base" />
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._restoreTask }" PresentationType="Base" />
+
             </WrapPanel>
+            
 
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
@@ -76,8 +81,40 @@
                         <GroupBox Header="{Binding Component._config.AttributeName}">
                             <vortex:RenderableContentControl  DataContext="{Binding Component._config}" PresentationType="ControlSlim" />
                         </GroupBox>
+                        <GroupBox Header="{Binding AttributeName}" DataContext="{Binding Component._loadPositionTask}">
+                            <StackPanel Orientation="Vertical">
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _identifier}" PresentationType="ControlSlim" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" PresentationType="Base" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding _doesNotExist}" PresentationType="DisplaySlim" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding _exchangeSuccessfuly}" PresentationType="DisplaySlim" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding AttributeName}" DataContext="{Binding Component._savePositionTask}">
+                            <StackPanel Orientation="Vertical">
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _identifier}" PresentationType="ControlSlim" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" PresentationType="Base" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding _exchangeSuccessfuly}" PresentationType="DisplaySlim" />
+                            </StackPanel>
+                        </GroupBox>
 
-                        <GroupBox Padding="10"   Header="POSITIONS" HorizontalAlignment="Stretch">
+                        <GroupBox Header="{Binding Component._moveAbsoluteTask.AttributeName}" >
+                            <StackPanel Orientation="Vertical">
+                                <GroupBox Header="{Binding Component._moveParams.Axis1.AttributeName}" Visibility="{Binding Component._config.Axis1Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
+                                    <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams.Axis1}" PresentationType="ControlSlim" />
+                                </GroupBox>
+                                <GroupBox Header="{Binding Component._moveParams.Axis2.AttributeName}" Visibility="{Binding Component._config.Axis2Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
+                                    <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams.Axis2}" PresentationType="ControlSlim" />
+                                </GroupBox>
+                                <GroupBox Header="{Binding Component._moveParams.Axis3.AttributeName}" Visibility="{Binding Component._config.Axis3Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
+                                    <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams.Axis3}" PresentationType="ControlSlim" />
+                                </GroupBox>
+                                <GroupBox Header="{Binding Component._moveParams.Axis4.AttributeName}" Visibility="{Binding Component._config.Axis4Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
+                                    <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams.Axis4}" PresentationType="ControlSlim" />
+                                </GroupBox>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._moveAbsoluteTask }" PresentationType="Base" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Padding="10"   Header="{x:Static p:strings.Positions}" HorizontalAlignment="Stretch">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"></RowDefinition>

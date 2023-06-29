@@ -53,16 +53,20 @@ VAR
     _config : TcoMultiAxisConfig;
 	
 	{attribute addProperty Name "<#Load positions Task#>"}
-	_loadPositionTask :   TcoSingleAxisDataTask(THIS^);
+	_loadPositionTask :   TcoAxisExchangeDataTask(THIS^);
 	{attribute addProperty Name "<#Save positions Task#>"}
-	_savePositionTask :   TcoSingleAxisDataTask(THIS^);
+	_savePositionTask :   TcoAxisExchangeDataTask(THIS^);
 	{attribute addProperty Name "<#Positions#>"}
 	{attribute clr [MemberByIdentity()]}
 	_positions : TcoMultiAxisPositionsRootContainer(THIS^);
 	
-	{attribute addProperty Name "<#Move absolute Task#>"}
+	{attribute addProperty Name "<#Move Absolute Task#>"}
 	_moveAbsoluteTask :   TcoCore.TcoTask (THIS^);
 
+	{attribute addProperty Name "<#Reset Drives Task#>"}
+	_resetDrivesTask :   TcoCore.TcoTask (THIS^);
+	{attribute addProperty Name "<#Soe Reset Drives Task#>"}
+	_soeResetDrivesTask :   TcoCore.TcoTask (THIS^);
 	{attribute addProperty Name "<#Restore Task#>"}
 	_restoreTask :   TcoCore.TcoTask (THIS^);
 	
@@ -81,8 +85,21 @@ END_VAR
 
 
 
+//****************************************
+	
+	
+_savePositionTask();
+_loadPositionTask();	
 
 
+
+//*************RESTORE********************
+
+_restoreTask.Enabled := TRUE;
+IF _restoreTask.Execute() THEN
+	Restore();
+END_IF
+//****************************************
 
 
 IF NOT __ISVALIDREF(refAxis1)  AND NOT _config.Axis1Disabled THEN
@@ -127,7 +144,7 @@ _axis3(
 	
 IF NOT __ISVALIDREF(refAxis4) AND NOT _config.Axis4Disabled THEN
     Messenger.Post('<#Invalid reference axis 4#>', TcoCore.eMessageCategory.ProgrammingError);
-    RETURN;
+
 END_IF
 _axis4Ref REF= refAxis4;
 
@@ -147,28 +164,28 @@ IF _moveAbsoluteTask.Execute() THEN
 	IF _progress = 0 THEN
 		IF  NOT _config.Axis1Disabled THEN 
 			THIS^._axis1.MoveAbsolute(inPosition:=_moveParams.Axis1.Position,
-												inVelocity:=_moveParams.Axis1.Position,
+												inVelocity:=_moveParams.Axis1.Velocity,
 												inAcceleration:=_moveParams.Axis1.Acceleration,
 												inDeceleration:=_moveParams.Axis1.Deceleration,		
 												inJerk:=_moveParams.Axis1.Jerk);
 		END_IF;
 		IF  NOT _config.Axis2Disabled THEN 										
 			THIS^._axis2.MoveAbsolute(inPosition:=_moveParams.Axis2.Position,
-												inVelocity:=_moveParams.Axis2.Position,
+												inVelocity:=_moveParams.Axis2.Velocity,
 												inAcceleration:=_moveParams.Axis2.Acceleration,
 												inDeceleration:=_moveParams.Axis2.Deceleration,		
 												inJerk:=_moveParams.Axis2.Jerk);
 		END_IF;
 		IF  NOT _config.Axis3Disabled THEN 
 			THIS^._axis3.MoveAbsolute(inPosition:=_moveParams.Axis3.Position,
-												inVelocity:=_moveParams.Axis3.Position,
+												inVelocity:=_moveParams.Axis3.Velocity,
 												inAcceleration:=_moveParams.Axis3.Acceleration,
 												inDeceleration:=_moveParams.Axis3.Deceleration,		
 												inJerk:=_moveParams.Axis3.Jerk);
 		END_IF;
 		IF  NOT _config.Axis4Disabled THEN 
 			THIS^._axis4.MoveAbsolute(inPosition:=_moveParams.Axis4.Position,
-												inVelocity:=_moveParams.Axis4.Position,
+												inVelocity:=_moveParams.Axis4.Velocity,
 												inAcceleration:=_moveParams.Axis4.Acceleration,
 												inDeceleration:=_moveParams.Axis4.Deceleration,		
 												inJerk:=_moveParams.Axis4.Jerk);
@@ -197,21 +214,95 @@ IF _moveAbsoluteTask.Execute() THEN
 	_moveAbsoluteTask.ThrowWhen(_errorTimer.Q OR _hasError);	
 	END_IF
 END_IF;
-//****************************************
+
+
+//*************Reset Drives********************
+IF _resetDrivesTask.Execute() THEN
 	
+	IF _progress = 0 THEN
+		IF  NOT _config.Axis1Disabled THEN 
+			THIS^._axis1.Reset();
+		END_IF;
+		IF  NOT _config.Axis2Disabled THEN 
+			THIS^._axis2.Reset();
+		END_IF;
+		IF  NOT _config.Axis3Disabled THEN 
+			THIS^._axis3.Reset();
+		END_IF;
+		IF  NOT _config.Axis4Disabled THEN 
+			THIS^._axis4.Reset();
+		END_IF;
+				
+
+		_progress:=_progress+10;
+		
+	ELSIF _progress = 10 THEN
+		
+		_hasError :=   (THIS^._axis1.ResetTask.Error AND NOT _config.Axis1Disabled)
+					OR (THIS^._axis2.ResetTask.Error AND NOT _config.Axis2Disabled)
+					OR (THIS^._axis3.ResetTask.Error AND NOT _config.Axis3Disabled) 
+					OR (THIS^._axis4.ResetTask.Error AND NOT _config.Axis4Disabled) ;
+				
+		IF  (THIS^._axis1.ResetTask.Done XOR _config.Axis1Disabled)
+			AND (THIS^._axis2.ResetTask.Done XOR _config.Axis2Disabled)
+			AND (THIS^._axis3.ResetTask.Done XOR _config.Axis3Disabled)
+			AND (THIS^._axis4.ResetTask.Done XOR _config.Axis4Disabled)  THEN
+			
+			_resetDrivesTask.DoneWhen(TRUE);
+			CallTimers(false);
+			_progress:=0;			
+		
+		END_IF;
+		
+	CallTimers(TRUE);
+	_resetDrivesTask.ThrowWhen(_errorTimer.Q OR _hasError);	
+	END_IF
+END_IF;
+
+//*************Soe Reset Drives********************
+IF _soeResetDrivesTask.Execute() THEN
 	
-_savePositionTask();
-_loadPositionTask();	
+	IF _progress = 0 THEN
+		IF  NOT _config.Axis1Disabled THEN 
+			THIS^._axis1.SoEReset();
+		END_IF;
+		IF  NOT _config.Axis2Disabled THEN 
+			THIS^._axis2.SoeReset();
+		END_IF;
+		IF  NOT _config.Axis3Disabled THEN 
+			THIS^._axis3.SoEReset();
+		END_IF;
+		IF  NOT _config.Axis4Disabled THEN 
+			THIS^._axis4.SoEReset();
+		END_IF;
+				
+
+		_progress:=_progress+10;
+		
+	ELSIF _progress = 10 THEN
+		
+		_hasError :=   (THIS^._axis1.SoEResetTask.Error AND NOT _config.Axis1Disabled)
+					OR (THIS^._axis2.SoEResetTask.Error AND NOT _config.Axis2Disabled)
+					OR (THIS^._axis3.SoEResetTask.Error AND NOT _config.Axis3Disabled) 
+					OR (THIS^._axis4.SoEResetTask.Error AND NOT _config.Axis4Disabled) ;
+				
+		IF  (THIS^._axis1.SoEResetTask.Done XOR _config.Axis1Disabled)
+			AND (THIS^._axis2.SoEResetTask.Done XOR _config.Axis2Disabled)
+			AND (THIS^._axis3.SoEResetTask.Done XOR _config.Axis3Disabled)
+			AND (THIS^._axis4.ResetTask.Done XOR _config.Axis4Disabled)  THEN
+			
+			_soeResetDrivesTask.DoneWhen(TRUE);
+			CallTimers(false);
+			_progress:=0;			
+		
+		END_IF;
+		
+	CallTimers(TRUE);
+	_soeResetDrivesTask.ThrowWhen(_errorTimer.Q OR _hasError);	
+	END_IF
+END_IF;
 
 
-
-//*************RESTORE********************
-
-_restoreTask.Enabled := TRUE;
-IF _restoreTask.Execute() THEN
-	Restore();
-END_IF
-//****************************************
 
 	
  inoPositions :=_positions;
@@ -293,7 +384,7 @@ PROPERTY Config : REFERENCE TO TcoMultiAxisConfig]]></Declaration>
       </Get>
     </Property>
     <Method Name="MoveAbsolute" Id="{e43a55c5-43cf-051f-3670-6a768345e9d5}">
-      <Declaration><![CDATA[METHOD MoveAbsolute : ITcoTaskStatus
+      <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
 VAR_INPUT
 	MoveParams : TcoMultiAxisMoveParam;
 END_VAR
@@ -318,6 +409,18 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ResetDrives" Id="{4a337d86-7a78-0e45-220e-9b8b32aadec7}">
+      <Declaration><![CDATA[METHOD ResetDrives : TcoCore.ITcoTaskStatus
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResetDrives:=THIS^._resetDrivesTask.Invoke();
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{fad6850c-749c-080e-1ff1-b31d79351934}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -331,14 +434,16 @@ METHOD  Restore : ITcoRestorable
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_axis2.Restore();
+        <ST><![CDATA[_axis1.Restore();
+_axis2.Restore();
 _axis3.Restore();
 _axis4.Restore();
-_axis1.Restore();
 _restoreTask.Restore();
 _savePositionTask.Restore();
 _loadPositionTask.Restore();
 _moveAbsoluteTask.Restore();
+_soeResetDrivesTask.Restore();
+_resetDrivesTask.Restore();
 _progress := 0;
 CallTimers(FALSE);
 Messenger.UnPin();]]></ST>
@@ -352,6 +457,18 @@ Messenger.UnPin();]]></ST>
 THIS^._axis2.Service();
 THIS^._axis3.Service();
 THIS^._axis4.Service();
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SoeReset" Id="{03d6ab2e-1877-0edf-3fb8-30d790ca6d96}">
+      <Declaration><![CDATA[METHOD SoeReset : TcoCore.ITcoTaskStatus
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SoeReset:=THIS^._soeResetDrivesTask.Invoke();
 
 
 ]]></ST>

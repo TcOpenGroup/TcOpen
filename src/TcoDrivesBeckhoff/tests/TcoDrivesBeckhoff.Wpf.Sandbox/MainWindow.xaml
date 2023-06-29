@@ -26,18 +26,30 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
                     </Grid.RowDefinitions>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._simpleAxis}" PresentationType="Service"/>
-                    <WrapPanel Grid.Row="1">
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._moveParams}"  PresentationType="Control" />
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._moveAbsoluteTask}"  PresentationType="Base" />
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._moveRelativeTask}"  PresentationType="Base" />
+                    <UniformGrid Grid.Row="1">
+                        <StackPanel Orientation="Vertical">
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._moveAbsoluteTask}"  PresentationType="Base" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._moveParams}"  PresentationType="Control" />
+                        </StackPanel>
                         <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._restoreTask}"  PresentationType="Base" />
+                        <StackPanel Orientation="Vertical">
 
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._loadPositionTask}"  PresentationType="Service" />
-                    <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._savePositionTask}"  PresentationType="Service" />
-                    </WrapPanel>
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._loadPositionTask._identifier}"  PresentationType="Control" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._loadPositionTask}"  PresentationType="Service" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._loadPositionTask._doesNotExist}"  PresentationType="Control" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._loadPositionTask._exchangeSuccessfuly}"  PresentationType="Control" />
+                              </StackPanel>
+                        <StackPanel Orientation="Vertical">
+
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._savePositionTask._identifier}"  PresentationType="Control" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._savePositionTask}"  PresentationType="Service" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._simpleAxis._savePositionTask._exchangeSuccessfuly}"  PresentationType="Control" />
+                      
+                        </StackPanel>
+                    </UniformGrid>
 
                 </Grid>
             </TabItem>
@@ -55,18 +67,36 @@
             <TabItem Header="MULTI AXIS">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
+                    <ScrollViewer>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._multiAxis}" PresentationType="Service"/>
-                    <WrapPanel Grid.Row="1">
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._moveParams}"  PresentationType="Control" />
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._moveAbsoluteTask}"  PresentationType="Base" />
+                    </ScrollViewer>
+                    <UniformGrid Grid.Row="1" Columns="4">
+                        <ScrollViewer>
+                            <StackPanel Orientation="Vertical">
+                                <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._moveAbsoluteTask}"  PresentationType="Base" />
+                                <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._moveParams}"  PresentationType="Control" />
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel Orientation="Vertical">
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._loadPositionTask._identifier}"  PresentationType="Control" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._loadPositionTask}"  PresentationType="Service" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._loadPositionTask._doesNotExist}"  PresentationType="DisplaySlim" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._loadPositionTask._exchangeSuccessfuly}"  PresentationType="DisplaySlim" />
+                       
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._savePositionTask._identifier}"  PresentationType="Control" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._savePositionTask}"  PresentationType="Service" />
+                            <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._savePositionTask._exchangeSuccessfuly}"  PresentationType="DisplaySlim" />
+                         
+
+                        </StackPanel>
                         <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._restoreTask}"  PresentationType="Base" />
 
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._loadPositionTask}"  PresentationType="Service" />
-                        <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._multiAxis._savePositionTask}"  PresentationType="Service" />
-                    </WrapPanel>
+                    </UniformGrid>
 
                 </Grid>
             </TabItem>

@@ -44,13 +44,10 @@ namespace TcoDrivesBeckhoff
             {
                 var result = DataHandler.Repository.Queryable.FirstOrDefault(p => p._EntityId == setid);
 
-                if (result == null)
-                {
-                    DataHandler.Create(setid, CurrentSet);
+                if (result != null)
+                    CurrentSet = DataHandler.Read(setid);
 
-                }
 
-                CurrentSet = DataHandler.Read(setid);
                 OnPropertyChanged(nameof(CurrentSet));
             }
             catch (Exception)

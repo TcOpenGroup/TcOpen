@@ -115,7 +115,7 @@ namespace TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to saave positions?.
+        ///   Looks up a localized string similar to Are you sure to save positions?.
         /// </summary>
         public static string AskSave {
             get {
@@ -223,7 +223,7 @@ namespace TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Meno.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
             get {

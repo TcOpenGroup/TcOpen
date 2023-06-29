@@ -153,13 +153,13 @@
     <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxis.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxisDataTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxisMoveParam.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\SingleAxisSystem\TcoSingleAxisPositionsRootContainer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\CartesianCoordinateSystem\TcoAxisExchangeDataTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoDriveSimple\DriveState\eTcoMovementState.TcDUT">

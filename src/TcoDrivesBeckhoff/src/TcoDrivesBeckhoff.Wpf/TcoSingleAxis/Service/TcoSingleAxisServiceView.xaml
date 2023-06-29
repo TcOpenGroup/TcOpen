@@ -22,12 +22,14 @@
     <vortex:TcoComponentView >
         <vortex:TcoComponentView.ComponentHeader>
 
-            <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left" DataContext="{Binding Component._axis}" >
+            <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left" >
                 <WrapPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}"/>
                 </WrapPanel.Resources>
-              
-               
+
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._axis._resetTask }" PresentationType="Base" />
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._axis._soEResetTask }" PresentationType="Base" />
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._restoreTask }" PresentationType="Base" />
 
             </WrapPanel>
 
@@ -59,7 +61,43 @@
                         </WrapPanel.Resources>
 
 
+                        <GroupBox Header="{Binding Component._config.AttributeName}">
+                            <vortex:RenderableContentControl  DataContext="{Binding Component._config}" PresentationType="ControlSlim" />
+                        </GroupBox>
+                        <GroupBox Header="{Binding AttributeName}" DataContext="{Binding Component._loadPositionTask}">
+                            <StackPanel Orientation="Vertical">
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _identifier}" PresentationType="ControlSlim" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" PresentationType="Base" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding _doesNotExist}" PresentationType="DisplaySlim" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding _exchangeSuccessfuly}" PresentationType="DisplaySlim" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding AttributeName}" DataContext="{Binding Component._savePositionTask}">
+                            <StackPanel Orientation="Vertical">
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _identifier}" PresentationType="ControlSlim" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" PresentationType="Base" />
+                                <vortex:RenderableContentControl Margin="5" DataContext="{Binding _exchangeSuccessfuly}" PresentationType="DisplaySlim" />
+                            </StackPanel>
+                        </GroupBox>
 
+                        <GroupBox Header="{Binding Component._moveAbsoluteTask.AttributeName}" >
+                            <StackPanel Orientation="Vertical">
+                                <GroupBox Header="{Binding Component._moveParams.AttributeName}" >
+                                    <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams}" PresentationType="ControlSlim" />
+                                </GroupBox>
+
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._moveAbsoluteTask }" PresentationType="Base" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding Component._moveRelativeTask.AttributeName}" >
+                            <StackPanel Orientation="Vertical">
+                                <GroupBox Header="{Binding Component._moveParams.AttributeName}" >
+                                    <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams}" PresentationType="ControlSlim" />
+                                </GroupBox>
+
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._moveRelativeTask }" PresentationType="Base" />
+                            </StackPanel>
+                        </GroupBox>
 
                         <GroupBox Padding="10"   Header="{x:Static p:strings.Positions}" HorizontalAlignment="Stretch">
                             <!--<vortex:RenderableContentControl   DataContext="{Binding Component._positions}"   />-->

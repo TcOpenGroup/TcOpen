@@ -457,6 +457,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading/saving data item with id:.
+        /// </summary>
+        public static string ___Loading_saving_data_item_with_id___ {
+            get {
+                return ResourceManager.GetString("___Loading_saving_data_item_with_id___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Local control.
         /// </summary>
         public static string ___Local_control__ {
@@ -493,11 +502,11 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move absolute Task.
+        ///   Looks up a localized string similar to Move Absolute Task.
         /// </summary>
-        public static string ___Move_absolute_Task__ {
+        public static string ___Move_Absolute_Task__ {
             get {
-                return ResourceManager.GetString("___Move_absolute_Task__", resourceCulture);
+                return ResourceManager.GetString("___Move_Absolute_Task__", resourceCulture);
             }
         }
         
@@ -610,6 +619,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset Drives Task.
+        /// </summary>
+        public static string ___Reset_Drives_Task__ {
+            get {
+                return ResourceManager.GetString("___Reset_Drives_Task__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore Task.
         /// </summary>
         public static string ___Restore_Task__ {
@@ -669,6 +687,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___SoE_reset__ {
             get {
                 return ResourceManager.GetString("___SoE_reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soe Reset Drives Task.
+        /// </summary>
+        public static string ___Soe_Reset_Drives_Task__ {
+            get {
+                return ResourceManager.GetString("___Soe_Reset_Drives_Task__", resourceCulture);
             }
         }
         

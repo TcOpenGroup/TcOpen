@@ -54,7 +54,7 @@ namespace TcoDrivesBeckhoff
                 MessageBox.Show(strings.ResourceManager.GetString("SetNewName"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskCreate")}  {this.Component.SetId.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskCreate")}  {this.Component.NewSetId.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
