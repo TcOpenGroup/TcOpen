@@ -10,9 +10,9 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoDriveSimpleTestContext.ProbeRun();
 
-//IF _wpfContextCall THEN
+IF _wpfContextCall THEN
 	_wpfContext.Run();
-//END_IF	
+END_IF	
 ]]></ST>
     </Implementation>
   </POU>

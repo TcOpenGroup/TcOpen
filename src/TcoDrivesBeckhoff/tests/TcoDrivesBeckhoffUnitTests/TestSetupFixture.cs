@@ -15,7 +15,7 @@ namespace TcoDrivesBeckhoffUnitTests
         [STAThread]
         public void OneTimeSetUp()
         {
-            TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");         
+            TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         }
         [OneTimeTearDown]
         public void OneTimeTearDown()
