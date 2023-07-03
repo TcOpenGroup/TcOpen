@@ -78,7 +78,7 @@ IF _moveAbsoluteTask.Execute() THEN
 		IF  (THIS^._axis.MoveAbsoluteTask.Done ) THEN
 			
 			_moveAbsoluteTask.DoneWhen(TRUE);
-			_progress:=0;			
+			_progress:=0;
 		
 		END_IF;
 		
@@ -204,7 +204,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_moveParams:=MoveParams;
-MoveRelative:=THIS^._moveAbsoluteTask.Invoke();]]></ST>
+MoveRelative:=THIS^._moveRelativeTask.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="MoveRelativeTask" Id="{4784ac79-7dd3-00da-368d-7b075008258b}" FolderPath="Tasks\">

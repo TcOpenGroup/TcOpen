@@ -4,11 +4,20 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
     _tcoDriveSimpleTestContext : TcoDriveSimpleTestContext;
+	 _tcoSingleAxisTestContext : TcoSingleAxisContext;
     _wpfContext : WpfContext;
     _wpfContextCall : BOOL := FALSE;
+	_singleAxisTestActive: BOOL;
+	_multiAxisTestActive: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_tcoDriveSimpleTestContext.ProbeRun();
+      <ST><![CDATA[IF _singleAxisTestActive THEN
+	_tcoSingleAxisTestContext.ProbeRun();
+ELSIF _multiAxisTestActive THEN
+	;
+ELSE
+	_tcoDriveSimpleTestContext.ProbeRun();
+END_IF
 
 IF _wpfContextCall THEN
 	_wpfContext.Run();
