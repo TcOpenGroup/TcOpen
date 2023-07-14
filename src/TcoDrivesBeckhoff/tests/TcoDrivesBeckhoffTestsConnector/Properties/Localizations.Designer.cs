@@ -106,11 +106,20 @@ namespace TcoDrivesBeckhoffTestsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Test manipulator.
+        ///   Looks up a localized string similar to Test multi axis.
         /// </summary>
-        public static string ___Test_manipulator__ {
+        public static string ___Test_multi_axis__ {
             get {
-                return ResourceManager.GetString("___Test_manipulator__", resourceCulture);
+                return ResourceManager.GetString("___Test_multi_axis__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test multi positions.
+        /// </summary>
+        public static string ___Test_multi_positions__ {
+            get {
+                return ResourceManager.GetString("___Test_multi_positions__", resourceCulture);
             }
         }
         
@@ -120,6 +129,15 @@ namespace TcoDrivesBeckhoffTestsConnector.Properties {
         public static string ___Test_positions__ {
             get {
                 return ResourceManager.GetString("___Test_positions__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test single axis.
+        /// </summary>
+        public static string ___Test_single_axis__ {
+            get {
+                return ResourceManager.GetString("___Test_single_axis__", resourceCulture);
             }
         }
     }

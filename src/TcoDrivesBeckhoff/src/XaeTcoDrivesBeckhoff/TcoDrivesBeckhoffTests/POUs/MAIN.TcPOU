@@ -5,6 +5,7 @@
 VAR
     _tcoDriveSimpleTestContext : TcoDriveSimpleTestContext;
 	 _tcoSingleAxisTestContext : TcoSingleAxisContext;
+	  _tcoMultiAxisTestContext : TcoMultiAxisContext;
     _wpfContext : WpfContext;
     _wpfContextCall : BOOL := FALSE;
 	_singleAxisTestActive: BOOL;
@@ -14,7 +15,7 @@ END_VAR]]></Declaration>
       <ST><![CDATA[IF _singleAxisTestActive THEN
 	_tcoSingleAxisTestContext.ProbeRun();
 ELSIF _multiAxisTestActive THEN
-	;
+	_tcoMultiAxisTestContext.ProbeRun();
 ELSE
 	_tcoDriveSimpleTestContext.ProbeRun();
 END_IF

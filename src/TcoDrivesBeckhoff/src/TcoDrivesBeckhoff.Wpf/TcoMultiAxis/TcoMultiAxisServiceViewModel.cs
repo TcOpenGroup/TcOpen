@@ -25,7 +25,7 @@ namespace TcoDrivesBeckhoff
             DeleteDataSetCommand = new RelayCommand(a => this.DeleteDataSet());
             LoadPositionsCommand = new RelayCommand(a => this.LoadPositions());
             SavePositionsCommand = new RelayCommand(a => SavePositions());
-            FillDefaultParamsCommand = new RelayCommand(a => FillDefaultParams());
+            FillDefaultParamsCommand = new RelayCommand(a => FillDefaultParams());           
 
         }
 

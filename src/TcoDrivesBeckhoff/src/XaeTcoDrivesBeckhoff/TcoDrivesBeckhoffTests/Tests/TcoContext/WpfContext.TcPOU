@@ -18,6 +18,12 @@ VAR
     _calibrationCam2 : BOOL;
 	
 	
+	_enableMulti : BOOL;
+    _enableMultiPositive : BOOL;
+    _enableMultiNegative : BOOL;
+    _calibrationMultiCam : BOOL;
+	
+	
 	{attribute addProperty Name "<#Test positions#>"}
     _positions : SomeTestPositions(THIS^);
 
@@ -83,11 +89,26 @@ _simpleAxis(inEnable := _enable1,
 _multiAxis.Config.InfoTime:=T#4S;
 _multiAxis.Config.ErrorTime:=T#10S;
 	
-_multiAxis(inEnableAxis1 := _enable1,
-    inEnablePositiveAxis1 := _enablePositive1,
-    inEnableNegativeAxis1 := _enableNegative1,
-    inCalibrationCamAxis1 := _calibrationCam1 OR GVL._calibrationCam,
-	refAxis1:=GVL.Axis1,
+_multiAxis(inEnableAxis1 := _enableMulti,
+    inEnablePositiveAxis1 := _enableMultiPositive,
+    inEnableNegativeAxis1 := _enableMultiNegative,
+    inCalibrationCamAxis1 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis1:=GVL.Axis1,	
+	inEnableAxis2 := _enableMulti,
+    inEnablePositiveAxis2 := _enableMultiPositive,
+    inEnableNegativeAxis2 := _enableMultiNegative,
+    inCalibrationCamAxis2 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis2:=GVL.Axis2,	
+	inEnableAxis3 := _enableMulti,
+    inEnablePositiveAxis3 := _enableMultiPositive,
+    inEnableNegativeAxis3 := _enableMultiNegative,
+    inCalibrationCamAxis3 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis3:=GVL.Axis3,
+	inEnableAxis4 := _enableMulti,
+    inEnablePositiveAxis4 := _enableMultiPositive,
+    inEnableNegativeAxis4 := _enableMultiNegative,
+    inCalibrationCamAxis4 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis4:=GVL.Axis4,
 	inoPositions:= _positionsMulti);
 
 

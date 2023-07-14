@@ -191,6 +191,15 @@ END_VAR]]></Declaration>
     inReferenceMode := inReferenceMode);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="HomeAbort" Id="{4537a791-8855-025c-060e-2c790ee5df28}" FolderPath="Motion\">
+      <Declaration><![CDATA[METHOD PUBLIC HomeAbort
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_homeTask.Abort();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="HomeTask" Id="{3ab56154-4a39-02f0-1548-06459fed21f1}" FolderPath="Motion\">
       <Declaration><![CDATA[PROPERTY HomeTask : TcoCore.ITcoTaskStatus]]></Declaration>
       <Get Name="Get" Id="{2bb3fbff-b440-0928-0b83-8952b6850e93}">
@@ -227,6 +236,15 @@ END_VAR]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="MoveAbosluteAbort" Id="{22adef0b-334f-070f-2eed-960e4031a590}" FolderPath="Motion\">
+      <Declaration><![CDATA[METHOD PUBLIC MoveAbosluteAbort
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_moveAbsoluteTask.Abort();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="MoveAbsolute" Id="{7c866b31-0c32-0194-3f88-7187373816e9}" FolderPath="Motion\">
       <Declaration><![CDATA[METHOD MoveAbsolute : ITcoTaskStatus
 VAR_INPUT

@@ -32,6 +32,8 @@
 
                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._resetDrivesTask }" PresentationType="Base" />
                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._soeResetDrivesTask }" PresentationType="Base" />
+                <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._abortTask }" PresentationType="Base" />
+
                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._restoreTask }" PresentationType="Base" />
 
             </WrapPanel>
@@ -57,13 +59,13 @@
                         <WrapPanel Visibility="{Binding Component._config.Axis2Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
                             <vortex:RenderableContentControl DataContext="{Binding Component._axis2}"  PresentationType="Service" />
                         </WrapPanel>
-                        <WrapPanel Visibility="{Binding Component._config.Axis4Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
-                            <vortex:RenderableContentControl DataContext="{Binding Component._axis4}"  PresentationType="Service" />
-                        </WrapPanel>
                         <WrapPanel Visibility="{Binding Component._config.Axis3Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
                             <vortex:RenderableContentControl DataContext="{Binding Component._axis3}"  PresentationType="Service" />
                         </WrapPanel>
-                       
+                        <WrapPanel Visibility="{Binding Component._config.Axis4Disabled.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}">
+                            <vortex:RenderableContentControl DataContext="{Binding Component._axis4}"  PresentationType="Service" />
+                        </WrapPanel>
+
                     </StackPanel>
 
                     <WrapPanel Grid.Column="1" Grid.Row="1">

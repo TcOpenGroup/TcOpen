@@ -5,6 +5,8 @@
 VAR_GLOBAL
 	Axis1	:	TcoDrivesBeckhoff.TcoAxisRef;
 	Axis2	:	TcoDrivesBeckhoff.TcoAxisRef;
+	Axis3	:	TcoDrivesBeckhoff.TcoAxisRef;
+	Axis4	:	TcoDrivesBeckhoff.TcoAxisRef;
 	_calibrationCam AT%I* :BOOL;
 END_VAR]]></Declaration>
   </GVL>

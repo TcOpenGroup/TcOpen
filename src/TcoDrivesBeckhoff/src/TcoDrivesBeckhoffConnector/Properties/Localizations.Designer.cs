@@ -61,6 +61,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abort Task.
+        /// </summary>
+        public static string ___Abort_Task__ {
+            get {
+                return ResourceManager.GetString("___Abort_Task__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Acceleration.
         /// </summary>
         public static string ___Acceleration__ {
