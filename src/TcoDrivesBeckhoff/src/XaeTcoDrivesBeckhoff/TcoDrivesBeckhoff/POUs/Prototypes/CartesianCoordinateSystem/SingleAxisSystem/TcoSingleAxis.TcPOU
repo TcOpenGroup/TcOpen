@@ -35,7 +35,6 @@ VAR
     _status : TcoSingleAxisStatus;
 	{attribute addProperty Name "<#Config#>"}
     _config : TcoSingleAxisConfig;
-	_progress: INT;
 	_moveParams: TcoSingleAxisMoveParam;
 	{attribute 'hide'} 
 	_infoTimer :  TON;
@@ -63,28 +62,21 @@ _axis(
 _moveAbsoluteTask.Enabled:=NOT _moveRelativeTask.Busy; 
 IF _moveAbsoluteTask.Execute() THEN
 	
-	IF _progress = 0 THEN
+
 		
-			THIS^._axis.MoveAbsolute(inPosition:=_moveParams.Position,
+	THIS^._axis.MoveAbsolute(inPosition:=_moveParams.Position,
 												inVelocity:=_moveParams.Velocity,
 												inAcceleration:=_moveParams.Acceleration,
 												inDeceleration:=_moveParams.Deceleration,		
 												inJerk:=_moveParams.Jerk);
 	
-		_progress:=_progress+10;
+
 		
-	ELSIF _progress = 10 THEN
-		
-		IF  (THIS^._axis.MoveAbsoluteTask.Done ) THEN
+
 			
-			_moveAbsoluteTask.DoneWhen(TRUE);
-			_progress:=0;
-		
-		END_IF;
-		
-	CallTimers(TRUE);
-	_moveAbsoluteTask.ThrowWhen(_errorTimer.Q OR THIS^._axis.MoveAbsoluteTask.Error);	
-	END_IF
+	_moveAbsoluteTask.DoneWhen(THIS^._axis.MoveAbsoluteTask.Done);
+	_moveAbsoluteTask.ThrowWhen(THIS^._axis.MoveAbsoluteTask.Error);	
+
 END_IF;
 //****************************************
 
@@ -93,28 +85,16 @@ END_IF;
 _moveRelativeTask.Enabled:=NOT _moveAbsoluteTask.Busy; 
 IF _moveRelativeTask.Execute() THEN
 	
-	IF _progress = 0 THEN
-		
-			THIS^._axis.MoveRelative(inDistance:=_moveParams.Position,
+	THIS^._axis.MoveRelative(inDistance:=_moveParams.Position,
 												inVelocity:=_moveParams.Velocity,
 												inAcceleration:=_moveParams.Acceleration,
 												inDeceleration:=_moveParams.Deceleration,		
 												inJerk:=_moveParams.Jerk);
 	
-		_progress:=_progress+10;
-		
-	ELSIF _progress = 10 THEN
-		
-		IF  (THIS^._axis.MoveRelativeTask.Done ) THEN
-			CallTimers(false);
-			_moveRelativeTask.DoneWhen(TRUE);
-			_progress:=0;			
-		
-		END_IF;
-		
-	CallTimers(TRUE);
+
+	_moveRelativeTask.DoneWhen(THIS^._axis.MoveRelativeTask.Done);
 	_moveRelativeTask.ThrowWhen(_errorTimer.Q OR THIS^._axis.MoveRelativeTask.Error);	
-	END_IF
+
 END_IF;
 //****************************************
 
@@ -237,7 +217,6 @@ _savePositionTask.Restore();
 _loadPositionTask.Restore();
 _moveAbsoluteTask.Restore();
 _moveRelativeTask.Restore();
-_progress := 0;
 CallTimers(FALSE);
 Messenger.UnPin();]]></ST>
       </Implementation>

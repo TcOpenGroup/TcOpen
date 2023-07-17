@@ -81,6 +81,7 @@ CASE _testId OF
 		_sut.ResetDrivesTask.Restore();
 		_sut.SoeResetDrivesTask.Restore();
 		_sut.MoveAbsoluteTask.Restore();
+		_sut.AbortTask.Restore();
 
     {region "T003_Message"}
     eTcoMultiAxisTests.Message:
@@ -434,19 +435,19 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
@@ -457,10 +458,11 @@ CASE _testId OF
 			
 
      
-        _done := (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_1.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error ))
-			 	AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_2.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_3.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_4.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error)) ; 
+        _done := (_sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error  OR _plcCycleCounter > 10 )
+			 	AND (_sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error OR _plcCycleCounter > 10 )
+				AND (_sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error OR _plcCycleCounter > 10 )
+				AND (_sut.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error OR _plcCycleCounter > 10 ) ; 
+					 
         ProbeDoneWhen(_done);
 
 	{endregion}
@@ -481,19 +483,19 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
@@ -522,19 +524,19 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
@@ -564,19 +566,19 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
@@ -605,19 +607,19 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
@@ -648,19 +650,19 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
@@ -686,31 +688,27 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
 		_moveParam.Axis4.Jerk :=  _jerk;		  
         _sut.MoveAbsolute(_moveParam);
 			 
-        _done := (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_1.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-			 	AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_2.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_3.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_4.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error)) ; 
+		_done := _sut.MoveAbsoluteTask.Done OR  _sut.MoveAbsoluteTask.Error ; 
         ProbeDoneWhen(_done);
-	{endregion}
     {region "T029_MoveAbsoluteAxisDisabledNegativeDirectionAxisDisabled"}
     eTcoMultiAxisTests.MoveAbsoluteAxisDisabledNegativeDirectionAxisDisabled:
         IF NOT _arranged THEN
@@ -728,29 +726,26 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
 		_moveParam.Axis4.Jerk :=  _jerk;		  
         _sut.MoveAbsolute(_moveParam);
 
-       _done := (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_1.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-			 	AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_2.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_3.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_4.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error)) ; 
+		_done := _sut.MoveAbsoluteTask.Done OR  _sut.MoveAbsoluteTask.Error ; 
         ProbeDoneWhen(_done);
 	{endregion}
     {region "T030_MoveAbsoluteAxisEnabledNegativeDirectionAxisDisabled"}
@@ -769,29 +764,26 @@ CASE _testId OF
 		_moveParam.Axis1.Deceleration := _deceleration;
 		_moveParam.Axis1.Jerk :=  _jerk;
 			 
-		_moveParam.Axis2.Position:= _positionAxis1;
+		_moveParam.Axis2.Position:= _positionAxis2;
 		_moveParam.Axis2.Velocity := _velocity;
 		_moveParam.Axis2.Acceleration := _acceleration;
 		_moveParam.Axis2.Deceleration := _deceleration;
 		_moveParam.Axis2.Jerk :=  _jerk;
 
-		_moveParam.Axis3.Position:= _positionAxis1;
+		_moveParam.Axis3.Position:= _positionAxis3;
 		_moveParam.Axis3.Velocity := _velocity;
 		_moveParam.Axis3.Acceleration := _acceleration;
 		_moveParam.Axis3.Deceleration := _deceleration;
 		_moveParam.Axis3.Jerk :=  _jerk;
 
-		_moveParam.Axis4.Position:= _positionAxis1;
+		_moveParam.Axis4.Position:= _positionAxis4;
 		_moveParam.Axis4.Velocity := _velocity;
 		_moveParam.Axis4.Acceleration := _acceleration;
 		_moveParam.Axis4.Deceleration := _deceleration;
 		_moveParam.Axis4.Jerk :=  _jerk;		  
         _sut.MoveAbsolute(_moveParam);
 
-        _done := (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_1.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-			 	AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_2.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_3.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error))
-				AND (_sut.MoveAbsoluteTask.Done OR (_sut.Axis_4.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error)) ; 
+ 		_done := _sut.MoveAbsoluteTask.Done OR  _sut.MoveAbsoluteTask.Error ; 
         ProbeDoneWhen(_done);
 	{endregion}
 

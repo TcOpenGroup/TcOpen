@@ -223,10 +223,10 @@ IF _moveAbsoluteTask.Execute() THEN
 					OR (THIS^._axis3.MoveAbsoluteTask.Error AND NOT _config.Axis3Disabled) 
 					OR (THIS^._axis4.MoveAbsoluteTask.Error AND NOT _config.Axis4Disabled) ;
 				
-		_done:= (THIS^._axis1.MoveAbsoluteTask.Done XOR _config.Axis1Disabled)
-			AND (THIS^._axis2.MoveAbsoluteTask.Done XOR _config.Axis2Disabled)
-			AND (THIS^._axis3.MoveAbsoluteTask.Done XOR _config.Axis3Disabled)
-			AND (THIS^._axis4.MoveAbsoluteTask.Done XOR _config.Axis4Disabled);
+		_done:= (THIS^._axis1.MoveAbsoluteTask.Done OR  _config.Axis1Disabled)
+			AND (THIS^._axis2.MoveAbsoluteTask.Done OR  _config.Axis2Disabled)
+			AND (THIS^._axis3.MoveAbsoluteTask.Done OR  _config.Axis3Disabled)
+			AND (THIS^._axis4.MoveAbsoluteTask.Done OR  _config.Axis4Disabled);
 			
 			
 
