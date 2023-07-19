@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+      <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<IsPackable>false</IsPackable>
@@ -15,8 +15,13 @@
   </PropertyGroup>
   
   <ItemGroup>
+   
     <ProjectReference Include="..\..\src\TcoDrivesBeckhoff.Wpf\TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.csproj" />
     <ProjectReference Include="..\TcoDrivesBeckhoffTestsConnector\TcoDrivesBeckhoffTestsConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcoData\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
+    <ProjectReference Include="..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
+    <ProjectReference Include="..\..\..\TcoData\src\Data\TcOpen.Inxton.Data.csproj" />
+    <PackageReference Include="RavenDB.Embedded" Version="5.3.102" />
   </ItemGroup>
 
 </Project>

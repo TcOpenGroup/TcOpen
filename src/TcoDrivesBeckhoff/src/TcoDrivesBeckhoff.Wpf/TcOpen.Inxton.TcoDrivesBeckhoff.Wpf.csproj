@@ -24,6 +24,38 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\strings.Designer.cs">
+      <DependentUpon>strings.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\strings.resx">
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+ 
+
+  <ItemGroup>
+    <Page Update="TcoMultiAxisPositions\TcoMultiAxisPositionsRootContainerView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoMultiAxis\Service\TcoMultiAxisServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TcoSingleAxis\Service\TcoSingleAxisServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="TcoDrivesBeckhoff.TcoSingleAxisPositionsRootContainerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:p="clr-namespace:TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:TcoDrivesBeckhoff"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300">
+    <d:UserControl.DataContext>
+        <local:TcoSingleAxisPositionsRootContainerViewModel />
+    </d:UserControl.DataContext>
+  
+    <DataGrid ItemsSource="{Binding Positions}" 
+              SelectedItem="{Binding SelectedItem}" 
+              AutoGenerateColumns="False" 
+              SelectionMode="Single"
+              CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="{x:Static p:strings.Name}" IsReadOnly="True" Binding="{Binding HumanReadable}"></DataGridTextColumn>
+            <DataGridTextColumn Header="{x:Static p:strings.Position}" IsReadOnly="False" Binding="{ Binding Axis1.Position.Cyclic}"/>
+
+            <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
+            <DataGridTextColumn Header="{x:Static p:strings.Velocity}" IsReadOnly="False" Binding="{ Binding Axis1.Velocity.Cyclic}"/>
+            <DataGridTextColumn Header="{x:Static p:strings.Acceleration}" IsReadOnly="False" Binding="{ Binding Axis1.Acceleration.Cyclic}"/>
+            <DataGridTextColumn Header="{x:Static p:strings.Deceleration}" IsReadOnly="False" Binding="{ Binding Axis1.Deceleration.Cyclic}"/>
+            <DataGridTextColumn Header="{x:Static p:strings.Jerk}" IsReadOnly="False" Binding="{ Binding Axis1.Jerk.Cyclic}"/>
+            <DataGridTextColumn IsReadOnly="True" Header="Symbol" Binding="{Binding Symbol}"></DataGridTextColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

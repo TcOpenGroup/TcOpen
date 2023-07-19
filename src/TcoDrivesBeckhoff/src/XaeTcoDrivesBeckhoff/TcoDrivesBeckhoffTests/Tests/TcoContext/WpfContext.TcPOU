@@ -1,21 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="WpfContext" Id="{1c2e461a-2a4c-0e99-1722-86b7ec79d9d1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
 VAR
-	_serviceModeActive		:	BOOL;
-	{attribute addProperty Name "<#Test axis 1#>"}
-	_axis1					:	TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
-	_enable1				:	BOOL;			
-	_enablePositive1		:	BOOL;				
-	_enableNegative1		:	BOOL;        	
-	_calibrationCam1 		:	BOOL;        
-	{attribute addProperty Name "<#Test axis 2#>"}
-	_axis2	: TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
-	_enable2				:	BOOL;			
-	_enablePositive2		:	BOOL;				
-	_enableNegative2		:	BOOL;        	
-	_calibrationCam2 		:	BOOL;        
+    _serviceModeActive : BOOL;
+    {attribute addProperty Name "<#Test axis 1#>"}
+    _axis1 : TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+    _enable1 : BOOL;
+    _enablePositive1 : BOOL;
+    _enableNegative1 : BOOL;
+    _calibrationCam1 : BOOL;
+    {attribute addProperty Name "<#Test axis 2#>"}
+    _axis2 : TcoDrivesBeckhoff.TcoDriveSimple(THIS^);
+    _enable2 : BOOL;
+    _enablePositive2 : BOOL;
+    _enableNegative2 : BOOL;
+    _calibrationCam2 : BOOL;
+	
+	
+	_enableMulti : BOOL;
+    _enableMultiPositive : BOOL;
+    _enableMultiNegative : BOOL;
+    _calibrationMultiCam : BOOL;
+	
+	
+	{attribute addProperty Name "<#Test positions#>"}
+    _positions : SomeTestPositions(THIS^);
+
+    {attribute addProperty Name "<#Test single axis#>"}
+    _singleAxis : TcoDrivesBeckhoff.TcoSingleAxis(THIS^);
+
+	{attribute addProperty Name "<#Test multi positions#>"}
+    _positionsMulti : SomeTestMultiPositions(THIS^);
+
+    {attribute addProperty Name "<#Test multi axis#>"}
+    _multiAxis : TcoDrivesBeckhoff.TcoMultiAxis(THIS^);   
+	
+	
+	_sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+    _observer       : TcoCore.TcoSequencerObserver(THIS^);
+    {attribute addProperty Name "Start sequence"}
+    _sequence1Task 	: Sequence1Task(THIS^);
+    _dialog        	: TcoCore.TcoDialog(THIS^);
+	_moveParam: TcoMultiAxisMoveParam;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -31,27 +59,637 @@ END_VAR
 		</summary>
 	</docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _serviceModeActive THEN
-	_axis1.Service();
-	_axis2.Service();
+    _axis1.Service();
+    _axis2.Service();
+    _singleAxis.Service();
+	_multiAxis.Service();
+
+
 END_IF
 
-_axis1(	inEnable			:=		_enable1, 
-		inEnablePositive	:=		_enablePositive1, 
-		inEnableNegative	:=		_enableNegative1, 
-		inCalibrationCam	:=		_calibrationCam1, 
-		inoAxisRef			:=		GVL.Axis1);
-                              	
-_axis2(	inEnable			:=		_enable2, 
-		inEnablePositive	:=		_enablePositive2, 
-		inEnableNegative	:=		_enableNegative2, 
-		inCalibrationCam	:=		_calibrationCam2, 
-		inoAxisRef			:=		GVL.Axis2);
+_axis1(inEnable := _enable1,
+    inEnablePositive := _enablePositive1,
+    inEnableNegative := _enableNegative1,
+    inCalibrationCam := _calibrationCam1 or GVL._calibrationCam,
+    inoAxisRef := GVL.SimpleAxis1);
+
+_axis2(inEnable := _enable2,
+    inEnablePositive := _enablePositive2,
+    inEnableNegative := _enableNegative2,
+    inCalibrationCam := _calibrationCam2,
+    inoAxisRef := GVL.SimpleAxis2);
+
+_singleAxis.Config.InfoTime:=T#4S;
+_singleAxis.Config.ErrorTime:=T#10S;
+		
+	
+_singleAxis(inEnable := _enable1,
+    inEnablePositive := _enablePositive1,
+    inEnableNegative := _enableNegative1,
+    inCalibrationCam := _calibrationCam1 or GVL._calibrationCam,
+    refAxis := GVL.SingleAxis,
+	inoPositions:= _positions);
+	
+	
+	
+	
+// this means it is three axis cartesian system
+//_multiAxis.Config.Axis4Disabled:=TRUE;
+
+_multiAxis.Config.InfoTime:=T#4S;
+_multiAxis.Config.ErrorTime:=T#10S;
+	
+_multiAxis(inEnableAxis1 := _enableMulti,
+    inEnablePositiveAxis1 := _enableMultiPositive,
+    inEnableNegativeAxis1 := _enableMultiNegative,
+    inCalibrationCamAxis1 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis1:=GVL.Axis1,	
+	inEnableAxis2 := _enableMulti,
+    inEnablePositiveAxis2 := _enableMultiPositive,
+    inEnableNegativeAxis2 := _enableMultiNegative,
+    inCalibrationCamAxis2 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis2:=GVL.Axis2,	
+	inEnableAxis3 := _enableMulti,
+    inEnablePositiveAxis3 := _enableMultiPositive,
+    inEnableNegativeAxis3 := _enableMultiNegative,
+    inCalibrationCamAxis3 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis3:=GVL.Axis3,
+	inEnableAxis4 := _enableMulti,
+    inEnablePositiveAxis4 := _enableMultiPositive,
+    inEnableNegativeAxis4 := _enableMultiNegative,
+    inCalibrationCamAxis4 := _calibrationMultiCam OR GVL._calibrationCam,
+	refAxis4:=GVL.Axis4,
+	inoPositions:= _positionsMulti);
 
 
-]]></ST>
+_sequence1Task(Sequence := _sequence1);
+IF(_sequence1Task.Execute())THEN
+	Sequence1();
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Sequence1" Id="{578aa597-1646-0e13-00fe-65be67fe275e}">
+      <Declaration><![CDATA[METHOD Sequence1
+VAR
+    seq    : REFERENCE TO TcoCore.TcoSequence;
+    answer : TcoCore.eDialogAnswer;
+	done: BOOL;
+	_jerk: LREAL;
+	_deceleration: LREAL;
+	_acceleration: LREAL;
+	_velocity: LREAL;
+	ProbeDoneWhen: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[seq REF= _sequence1;
+
+seq.Open();
+seq.Observer := _observer;
+
+
+
+
+ 
+		
+IF (seq.Step(inStepID := 0,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to start movements? Do we go ahead?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 10,
+    inEnabled := TRUE,
+    inStepDescription := 'MULTI AXIS  HOMING IF NECESSARY')) THEN
+    //--------------------------------------------------------    
+	 	_enableMulti:=TRUE;
+		_enableMultiNegative:=TRUE;
+		_enableMultiPositive:=TRUE;
+	
+		IF  _multiAxis.Axis_1._axisStatus.Operational AND _multiAxis.Axis_1._axisStatus.Homed 
+			 AND _multiAxis.Axis_2._axisStatus.Operational AND _multiAxis.Axis_2._axisStatus.Homed 
+			 AND _multiAxis.Axis_3._axisStatus.Operational AND _multiAxis.Axis_3._axisStatus.Homed 
+			 AND _multiAxis.Axis_4._axisStatus.Operational AND _multiAxis.Axis_4._axisStatus.Homed THEN
+       	seq.CompleteStep();
+		ELSIF
+			 _multiAxis.Axis_1._axisStatus.Operational 
+			 AND _multiAxis.Axis_2._axisStatus.Operational 
+			 AND _multiAxis.Axis_3._axisStatus.Operational 
+			 AND _multiAxis.Axis_4._axisStatus.Operational THEN
+			_multiAxis.Axis_1.Home(inPosition := 0,
+				inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
+				inClearPositionLag := FALSE,
+				inSearchDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSearchVelocity := _velocity,
+				inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSyncVelocity := _velocity,
+				inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT);
+					 
+			 _multiAxis.Axis_2.Home(inPosition := 0,
+				inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
+				inClearPositionLag := FALSE,
+				inSearchDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSearchVelocity := _velocity,
+				inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSyncVelocity := _velocity,
+				inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT);
+					 
+			 _multiAxis.Axis_3.Home(inPosition := 0,
+				inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
+				inClearPositionLag := FALSE,
+				inSearchDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSearchVelocity := _velocity,
+				inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSyncVelocity := _velocity,
+				inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT);
+			
+			_multiAxis.Axis_4.Home(inPosition := 0,
+				inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,
+				inClearPositionLag := FALSE,
+				inSearchDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSearchVelocity := _velocity,
+				inSyncDirection := TcoDrivesBeckhoff.eDirection.MC_Undefined_Direction,
+				inSyncVelocity := _velocity,
+				inReferenceMode := TcoDrivesBeckhoff.eEncoderReferenceMode.ENCODERREFERENCEMODE_DEFAULT);
+	
+			IF  (_multiAxis.Axis_1.HomeTask.Done OR _multiAxis.Axis_1.HomeTask.Error)
+				 AND (_multiAxis.Axis_2.HomeTask.Done OR _multiAxis.Axis_2.HomeTask.Error)
+				 AND (_multiAxis.Axis_3.HomeTask.Done OR _multiAxis.Axis_3.HomeTask.Error)
+				 AND (_multiAxis.Axis_4.HomeTask.Done OR _multiAxis.Axis_4.HomeTask.Error) THEN
+				seq.CompleteStep();
+			END_IF;
+		ELSE
+			answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('SOME ERROR')
+			.WithText('There are some errors, restore will be provided!').WithOk().Answer;	
+			 IF (answer = TcoCore.eDialogAnswer.OK) THEN    	 		
+				_multiAxis.Restore();
+				_sequence1Task.Restore();
+			END_IF;
+		
+		END_IF;
+		
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 11,
+    inEnabled := TRUE,
+    inStepDescription := 'LOAD POSITIONS')) THEN
+    //--------------------------------------------------------   
+	
+	 	IF _multiAxis.LoadPositionsTask.WithId('default').Invoke().Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 12,
+    inEnabled := _multiAxis.LoadPositionsTask.DoesNotExist,
+    inStepDescription := 'LOAD/CREATE POSITIONS')) THEN
+    //--------------------------------------------------------   
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Positions set missing!')
+			.WithText('Do you really want create default set?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+		
+    //--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 13,
+    inEnabled := _multiAxis.LoadPositionsTask.DoesNotExist,
+    inStepDescription := 'POSITION NOT EXIST NECESSARY TO CREATE POSITIONS')) THEN
+    //--------------------------------------------------------
+
+	_velocity:=1400;
+	_deceleration:=5000;
+	_acceleration:=5000;
+	_jerk:=15000;
+   
+	_positionsMulti.PickPos.Axis1.Position:= _multiAxis.Axis_1.AxisStatus.ActPos-1000;
+	_positionsMulti.PickPos.Axis1.Velocity := _velocity;
+	_positionsMulti.PickPos.Axis1.Acceleration := _acceleration;
+	_positionsMulti.PickPos.Axis1.Deceleration := _deceleration;		
+	_positionsMulti.PickPos.Axis1.Jerk :=  _jerk;
+	
+		 
+	_positionsMulti.PickPos.Axis2.Position:= _multiAxis.Axis_2.AxisStatus.ActPos-1000;
+	_positionsMulti.PickPos.Axis2.Velocity := _velocity;
+	_positionsMulti.PickPos.Axis2.Acceleration := _acceleration;
+	_positionsMulti.PickPos.Axis2.Deceleration := _deceleration;
+	_positionsMulti.PickPos.Axis2.Jerk :=  _jerk;
+
+	_positionsMulti.PickPos.Axis3.Position:= _multiAxis.Axis_3.AxisStatus.ActPos-1000;
+	_positionsMulti.PickPos.Axis3.Velocity := _velocity;
+	_positionsMulti.PickPos.Axis3.Acceleration := _acceleration;
+	_positionsMulti.PickPos.Axis3.Deceleration := _deceleration;
+	_positionsMulti.PickPos.Axis3.Jerk :=  _jerk;
+
+	_positionsMulti.PickPos.Axis4.Position:= _multiAxis.Axis_4.AxisStatus.ActPos-1000;
+	_positionsMulti.PickPos.Axis4.Velocity := _velocity;
+	_positionsMulti.PickPos.Axis4.Acceleration := _acceleration;
+	_positionsMulti.PickPos.Axis4.Deceleration := _deceleration;
+	_positionsMulti.PickPos.Axis4.Jerk :=  _jerk;		
+	
+	 	IF _multiAxis.SavePositionsTask.WithId('default').Invoke().Done 
+			AND	_multiAxis.SavePositionsTask.ReadSuccessfuly THEN
+			seq.CompleteStep();
+		END_IF
+		
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 14,
+    inEnabled := TRUE,
+    inStepDescription := 'LOAD CREATED POSITIONS')) THEN
+    //--------------------------------------------------------   
+	
+	 	IF _multiAxis.LoadPositionsTask.WithId('default').Invoke().Done 
+			AND	_multiAxis.LoadPositionsTask.ReadSuccessfuly THEN
+			seq.CompleteStep();
+		END_IF
+		
+    //--------------------------------------------------------			
+END_IF
+
+
+
+IF (seq.Step(inStepID := 25,
+    inEnabled := TRUE,
+    inStepDescription := 'MULTI AXIS  MOVEMENTS')) THEN
+    //--------------------------------------------------------    
+	 	_enableMulti:=TRUE;
+		_enableMultiNegative:=TRUE;
+		_enableMultiPositive:=TRUE;
+		
+
+//
+//		_moveParam.Axis1.Position:= _multiAxis.Axis_1.AxisStatus.ActPos-1000;
+//		_moveParam.Axis1.Velocity := _velocity;
+//		_moveParam.Axis1.Acceleration := _acceleration;
+//		_moveParam.Axis1.Deceleration := _deceleration;		
+//		_moveParam.Axis1.Jerk :=  _jerk;
+//		
+//			 
+//		_moveParam.Axis2.Position:= _multiAxis.Axis_2.AxisStatus.ActPos-1000;
+//		_moveParam.Axis2.Velocity := _velocity;
+//		_moveParam.Axis2.Acceleration := _acceleration;
+//		_moveParam.Axis2.Deceleration := _deceleration;
+//		_moveParam.Axis2.Jerk :=  _jerk;
+//
+//		_moveParam.Axis3.Position:= _multiAxis.Axis_3.AxisStatus.ActPos-1000;
+//		_moveParam.Axis3.Velocity := _velocity;
+//		_moveParam.Axis3.Acceleration := _acceleration;
+//		_moveParam.Axis3.Deceleration := _deceleration;
+//		_moveParam.Axis3.Jerk :=  _jerk;
+//
+//		_moveParam.Axis4.Position:= _multiAxis.Axis_4.AxisStatus.ActPos-1000;
+//		_moveParam.Axis4.Velocity := _velocity;
+//		_moveParam.Axis4.Acceleration := _acceleration;
+//		_moveParam.Axis4.Deceleration := _deceleration;
+//		_moveParam.Axis4.Jerk :=  _jerk;		  
+
+
+		
+
+		IF  _multiAxis.MoveAbsolute(_positionsMulti.PickPos).Done THEN
+			
+			seq.CompleteStep();
+		END_IF
+		
+		
+		
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 50,
+    inEnabled := TRUE,
+    inStepDescription := 'SIMULATE ERROR')) THEN
+    //--------------------------------------------------------
+//<StandardDialog>	
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Question?')
+			.WithText('Do you really want to simulate error?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 100,
+    inEnabled := TRUE,
+    inStepDescription := 'MULTI AXIS SIMULATE ERROR')) THEN
+    //--------------------------------------------------------    
+	 	_enableMulti:=TRUE;
+		_enableMultiNegative:=TRUE;
+		_enableMultiPositive:=TRUE;
+		
+		_velocity:=15000;
+		_deceleration:=-1;
+		_acceleration:=-1;
+		_jerk:=15000;
+
+		
+		_moveParam.Axis1.Position:= _multiAxis.Axis_1.AxisStatus.ActPos-1000;
+		_moveParam.Axis1.Velocity := _velocity;
+		_moveParam.Axis1.Acceleration := _acceleration;
+		_moveParam.Axis1.Deceleration := _deceleration;		
+		_moveParam.Axis1.Jerk :=  _jerk;
+		
+			 
+		_moveParam.Axis2.Position:= _multiAxis.Axis_2.AxisStatus.ActPos-1000;
+		_moveParam.Axis2.Velocity := _velocity;
+		_moveParam.Axis2.Acceleration := _acceleration;
+		_moveParam.Axis2.Deceleration := _deceleration;
+		_moveParam.Axis2.Jerk :=  _jerk;
+
+		_moveParam.Axis3.Position:= _multiAxis.Axis_3.AxisStatus.ActPos-1000;
+		_moveParam.Axis3.Velocity := _velocity;
+		_moveParam.Axis3.Acceleration := _acceleration;
+		_moveParam.Axis3.Deceleration := _deceleration;
+		_moveParam.Axis3.Jerk :=  _jerk;
+
+		_moveParam.Axis4.Position:= _multiAxis.Axis_4.AxisStatus.ActPos-1000;
+		_moveParam.Axis4.Velocity := _velocity;
+		_moveParam.Axis4.Acceleration := _acceleration;
+		_moveParam.Axis4.Deceleration := _deceleration;
+		_moveParam.Axis4.Jerk :=  _jerk;		  
+
+		IF  _multiAxis.MoveAbsolute(_moveParam).Error THEN
+			
+			seq.CompleteStep();
+		END_IF
+		
+    //--------------------------------------------------------			
+END_IF;
+
+//<TcoDigitalInspector>	
+IF (seq.Step(inStepID := 200,
+    inEnabled := TRUE,
+    inStepDescription := 'CLEAR ERROR')) THEN
+    //--------------------------------------------------------
+//<StandardDialog>	
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Question?')
+			.WithText('Do you want to reset error?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 249,
+    inEnabled := TRUE,
+    inStepDescription := 'RESET AXIS')) THEN
+    //--------------------------------------------------------	
+
+	 IF _multiAxis.ResetDrives().Done AND_THEN
+        NOT _multiAxis.Axis_1.AxisStatus.Error 
+		AND NOT _multiAxis.Axis_2.AxisStatus.Error
+		AND NOT _multiAxis.Axis_2.AxisStatus.Error
+		AND NOT _multiAxis.Axis_2.AxisStatus.Error THEN
+		seq.CompleteStep();
+	end_if;
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 300,
+    inEnabled := TRUE,
+    inStepDescription := 'ASKING FOR RESTORING')) THEN
+    //--------------------------------------------------------
+//<StandardDialog>	
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Question?')
+			.WithText('Do you want to restore MultiAxis component?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		_multiAxis.Restore();
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+    //--------------------------------------------------------			
+END_IF;
+
+
+
+
+IF (seq.Step(inStepID := 400,
+    inEnabled := TRUE,
+    inStepDescription := 'MOVE WITH ONLY ONE AXIS')) THEN
+    //--------------------------------------------------------
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('ONE AXIS EXAMPLE?')
+			.WithText('Do you  want to start movements with one axis?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 425,
+    inEnabled := TRUE,
+    inStepDescription := 'ONE AXIS EXAMPLE')) THEN
+    //--------------------------------------------------------    
+	 	_enableMulti:=TRUE;
+		_enableMultiNegative:=TRUE;
+		_enableMultiPositive:=TRUE;
+		
+		_velocity:=1400;
+		_deceleration:=5000;
+		_acceleration:=5000;
+		_jerk:=15000;
+
+	  
+
+		IF  _multiAxis.Axis_1.MoveAbsolute(
+				inPosition:=_multiAxis.Axis_1.AxisStatus.ActPos-1000,
+				inVelocity:=_velocity,
+				inAcceleration:=_acceleration,
+				inDeceleration:=_deceleration,
+				inJerk:=_jerk).Done THEN
+			
+			seq.CompleteStep();
+		END_IF
+		
+		
+		
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 500,
+    inEnabled := TRUE,
+    inStepDescription := 'EXAMPLE LONG RANGE MOVMENT ABORTED')) THEN
+    //--------------------------------------------------------
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Abort movement?')
+			.WithText('Do you  want to start movements and abort it?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 525,
+    inEnabled := TRUE,
+    inStepDescription := 'ABORT MOVEMENT AXIS EXAMPLE')) THEN
+    //--------------------------------------------------------    
+		_enableMulti:=TRUE;
+		_enableMultiNegative:=TRUE;
+		_enableMultiPositive:=TRUE;
+		
+		_velocity:=1400;
+		_deceleration:=5000;
+		_acceleration:=5000;
+		_jerk:=15000;
+
+		answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Movement running')
+			.WithText('Do you  want to abort movement?')			
+			.WithYesNo().Answer;
+			//
+			
+		 IF (answer = TcoCore.eDialogAnswer.Yes) THEN 
+			_multiAxis.AbortTask.Invoke();   	 	
+			seq.CompleteStep();
+		 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+			_sequence1Task.Restore();
+		 END_IF;	
+		
+		_moveParam.Axis1.Position:= _multiAxis.Axis_1.AxisStatus.ActPos+10000;
+		_moveParam.Axis1.Velocity := _velocity;
+		_moveParam.Axis1.Acceleration := _acceleration;
+		_moveParam.Axis1.Deceleration := _deceleration;		
+		_moveParam.Axis1.Jerk :=  _jerk;
+		
+			 
+		_moveParam.Axis2.Position:= _multiAxis.Axis_2.AxisStatus.ActPos-1000;
+		_moveParam.Axis2.Velocity := _velocity;
+		_moveParam.Axis2.Acceleration := _acceleration;
+		_moveParam.Axis2.Deceleration := _deceleration;
+		_moveParam.Axis2.Jerk :=  _jerk;
+
+		_moveParam.Axis3.Position:= _multiAxis.Axis_3.AxisStatus.ActPos-1000;
+		_moveParam.Axis3.Velocity := _velocity;
+		_moveParam.Axis3.Acceleration := _acceleration;
+		_moveParam.Axis3.Deceleration := _deceleration;
+		_moveParam.Axis3.Jerk :=  _jerk;
+
+		_moveParam.Axis4.Position:= _multiAxis.Axis_4.AxisStatus.ActPos-1000;
+		_moveParam.Axis4.Velocity := _velocity;
+		_moveParam.Axis4.Acceleration := _acceleration;
+		_moveParam.Axis4.Deceleration := _deceleration;
+		_moveParam.Axis4.Jerk :=  _jerk;		  
+
+		IF  _multiAxis.MoveAbsolute(_moveParam).Done THEN
+			
+			seq.CompleteStep();
+		END_IF
+		
+		
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 600,
+    inEnabled := TRUE,
+    inStepDescription := 'ASKING FOR RESTORING')) THEN
+    //--------------------------------------------------------
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Question?')
+			.WithText('Do you want to restore MultiAxis component?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		_multiAxis.Restore();
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+    //--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
+    inEnabled := TRUE,
+    inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
+    //--------------------------------------------------------	
+    	seq.CompleteSequence();
+    //--------------------------------------------------------			
+END_IF;
+
+seq.Close();]]></ST>
       </Implementation>
     </Method>
   </POU>

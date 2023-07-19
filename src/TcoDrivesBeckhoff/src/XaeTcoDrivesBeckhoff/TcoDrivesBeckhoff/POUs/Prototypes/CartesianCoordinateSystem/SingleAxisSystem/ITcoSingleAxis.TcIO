@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="ITcoSingleAxis" Id="{7cc6513b-a14f-0294-290b-9fff2a0f9ed3}">
+    <Declaration><![CDATA[INTERFACE ITcoSingleAxis
+]]></Declaration>
+    <Method Name="MoveAbsolute" Id="{d4ca899f-458b-057c-3584-49d30c509c40}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	MoveParams : TcoSingleAxisMoveParam;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="MoveAbsoluteTask" Id="{e01a9326-aeeb-0544-1f23-d59626f297ba}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MoveAbsoluteTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{e972d1a3-21fb-05b4-3677-c7a56875668a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="MoveRelative" Id="{fd5ff396-57c2-075b-150e-d13745fc4ce2}">
+      <Declaration><![CDATA[METHOD MoveRelative : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	MoveParams : TcoSingleAxisMoveParam;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="MoveRelativeTask" Id="{4ddbbb3e-7d6d-001f-247c-15a89a3751fd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MoveRelativeTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{ea1ee846-eef9-0907-37e1-e4947e308648}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

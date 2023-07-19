@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="HomeTask" Id="{7ecafe63-8f35-0724-200c-30974ec145e2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK HomeTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR
@@ -41,6 +41,10 @@ VAR
     _message : STRING(125);
     {attribute 'hide'}
     _dummyPreconditionOK : BOOL;
+END_VAR
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -63,14 +67,14 @@ IF Execute() THEN
         Messenger.Error('To be implemented');
         RETURN;
     END_IF
-
+	_calibrationCam:=DriveRef.inCalibrationCam;
     _mcHome(Axis := _axisRef,
         Execute := NOT _mcHome.Busy,
         Position := _position,
         HomingMode := _mc_homingMode,
         BufferMode := Tc2_MC2.MC_Aborting,
         Options := _mc_homingOptions,
-        bCalibrationCam := _CalibrationCam,
+        bCalibrationCam := _calibrationCam,
         Done =>,
         Busy =>,
         Active =>,
@@ -85,7 +89,9 @@ IF Execute() THEN
     DoneWhen(_mcHome.Done);
     ThrowWhen(_mcHome.Error);
 
-END_IF]]></ST>
+END_IF
+IF(_mcHome.Error) THEN Messenger.Error(_sb.Clear().Append('<#Homing error no #>').Append(UDINT_TO_STRING(_mcHome.ErrorId)).Append(' |[[1]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
+]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{e8364453-3188-0da4-2572-9954580193ec}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>

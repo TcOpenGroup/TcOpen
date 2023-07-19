@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="ITcoMultiAxis" Id="{2806ae3f-4ed0-01df-236d-2a72bef75673}">
+    <Declaration><![CDATA[INTERFACE ITcoMultiAxis
+]]></Declaration>
+    <Method Name="MoveAbsolute" Id="{3d93c280-34a3-0858-3005-13005fbeb679}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	MoveParams : TcoMultiAxisMoveParam;;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="MoveAbsoluteTask" Id="{eab7a3c0-bbcf-0162-2b43-cb974293fed7}">
+      <Declaration><![CDATA[PROPERTY MoveAbsoluteTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{eed0ea8e-ad14-0093-1a66-95b402c0db4d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="ResetDrives" Id="{7f0de09b-71f1-0d98-362c-975550baa88c}">
+      <Declaration><![CDATA[METHOD ResetDrives : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="SoeReset" Id="{f4881921-cdf0-0d8c-32a5-0fec87c316d9}">
+      <Declaration><![CDATA[METHOD SoeReset : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,224 @@
+﻿<UserControl
+    x:Class="TcoDrivesBeckhoff.TcoMultiAxisPositionsRootContainerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:TcoDrivesBeckhoff"
+    xmlns:p="clr-namespace:TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300">
+    <d:UserControl.DataContext>
+        <local:TcoMultiAxisPositionsRootContainerViewModel />
+    </d:UserControl.DataContext>
+  
+    <DataGrid ItemsSource="{Binding Positions}" 
+              SelectedItem="{Binding SelectedItem}" 
+              AutoGenerateColumns="False" 
+              SelectionMode="Single"
+              CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False">
+        <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding HumanReadable}"></DataGridTextColumn>
+
+            <DataGridTextColumn   IsReadOnly="False" Binding="{ Binding Axis1.Position.Cyclic}" >
+                <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Position}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="1"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="False" Binding="{ Binding Axis1.Velocity.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Vel}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="1"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="False" Binding="{ Binding Axis1.Acceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Acc}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="1"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis1.Deceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Dec}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="1"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis1.Jerk.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Jerk}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="1"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
+
+                <DataGridTextColumn IsReadOnly="False" Binding="{ Binding Axis2.Position.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Position}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="2"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn   IsReadOnly="False" Binding="{ Binding Axis2.Velocity.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Vel}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="2"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn   IsReadOnly="False" Binding="{ Binding Axis2.Acceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Acc}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="2"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis2.Deceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Dec}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="2"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn IsReadOnly="False" Binding="{ Binding Axis2.Jerk.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Jerk}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="2"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
+
+
+                <DataGridTextColumn   IsReadOnly="False" Binding="{ Binding Axis3.Position.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Position}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="3"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn   IsReadOnly="False" Binding="{ Binding Axis3.Velocity.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Vel}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="3"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis3.Acceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Acc}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="3"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="False" Binding="{ Binding Axis3.Deceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Dec}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="3"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis3.Jerk.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Jerk}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="3"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
+
+                <DataGridTextColumn   IsReadOnly="False" Binding="{ Binding Axis4.Position.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Position}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="4"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis4.Velocity.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Vel}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="4"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis4.Acceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Acc}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="4"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis4.Deceleration.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Dec}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="4"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn  IsReadOnly="False" Binding="{ Binding Axis4.Jerk.Cyclic}">
+                    <DataGridTextColumn.Header>
+                        <WrapPanel >
+                            <TextBlock Text="{x:Static p:strings.Jerk}"></TextBlock>
+                            <TextBlock Margin="5,0" Text="{x:Static p:strings.Axis}"></TextBlock>
+                            <TextBlock Text="4"></TextBlock>
+                        </WrapPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn IsReadOnly="True" Width="10"></DataGridTextColumn>
+            
+                <DataGridTextColumn IsReadOnly="True" Header="Symbol" Binding="{Binding Symbol}"></DataGridTextColumn>
+            </DataGrid.Columns>
+
+    </DataGrid>
+</UserControl>

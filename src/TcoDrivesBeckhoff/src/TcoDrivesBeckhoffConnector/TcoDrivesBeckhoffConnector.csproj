@@ -30,6 +30,8 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="_meta\TcoDrivesBeckhoff.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />

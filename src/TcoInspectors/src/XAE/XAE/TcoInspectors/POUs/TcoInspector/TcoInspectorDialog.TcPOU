@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoInspectorDialog" Id="{c6c9fa75-2ded-0851-0bf8-095f61987545}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -156,8 +156,8 @@ IF _rTrigRetry.q THEN
 	_closeRetrySignal:=TRUE;
 END_IF
 
-_rTrigRetry(CLK:=inTerminateSignal);
-IF _rTrigRetry.q THEN
+_rTrigTerminate(CLK:=inTerminateSignal);
+IF _rTrigTerminate.q THEN
 	_closeTerminateSignal:=TRUE;
 END_IF
 
@@ -167,13 +167,18 @@ END_IF
 		THIS^.Invoke();
 		SUPER^();	
 		{warning disable C0357}
-		_dialogueRetry:=_closeRetrySignal;
+		IF NOT ( _dialogueRetry) THEN
+			_dialogueRetry:=_closeRetrySignal;
+		END_IF;
+		
 		IF(_dialogueRetry) THEN
 			_refInspector.Retry(inRetryStep);
 				
 
 		END_IF
-		_dialogueTerminate:=_closeTerminateSignal;
+		IF NOT ( _dialogueTerminate) THEN
+			_dialogueTerminate:=_closeTerminateSignal;
+		END_IF;
 		IF(_dialogueTerminate ) THEN
 			_refInspector.Terminate();
 			

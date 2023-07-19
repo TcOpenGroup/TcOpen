@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoMultiAxisTests" Id="{b63f07f3-7b6f-0351-0105-ac9d5a8d894e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoMultiAxisTests :
+(
+    Restore := 1,
+    CleanUp,
+    Message,
+    PowerDisable,
+    PowerEnable,
+    Reset, 
+	HommingDirect,
+    Stop,
+	MoveAbsoluteDisabled,
+ 	MoveAbsoluteDisabledPositiveDirection,
+	MoveAbsoluteEnabledPositiveDirection,
+	MoveAbsoluteDisabledNegativeDirection,
+	MoveAbsoluteEnabledNegativeDirection,
+	MoveAbsoluteAxisDisabled,
+	MoveAbsoluteAxisDisabledPositiveDirection,
+	MoveAbsoluteAxisEnabledPositiveDirection,
+	MoveAbsoluteAxisDisabledNegativeDirection,
+	MoveAbsoluteAxisEnabledNegativeDirection,
+	MoveAbsoluteAxisDisabledPositiveDirectionAxisDisabled,
+	MoveAbsoluteAxisEnabledPositiveDirectionAxisDisabled,
+	MoveAbsoluteAxisDisabledNegativeDirectionAxisDisabled,
+	MoveAbsoluteAxisEnabledNegativeDirectionAxisDisabled,
+    Last
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -19,6 +19,8 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         public void OneTimeSetUp()
         {
             ConnectorFixture.Connector.MAIN._wpfContextCall.Synchron = false;
+            ConnectorFixture.Connector.MAIN._multiAxisTestActive.Synchron = false;
+            ConnectorFixture.Connector.MAIN._singleAxisTestActive.Synchron = false;
             tc.ExecuteProbeRun(2, (int)eTcoDriveSimpleTests.Restore);
             tc.ExecuteProbeRun(2, (int)eTcoDriveSimpleTests.CleanUp);
             tc.ExecuteProbeRun(2, (int)eTcoDriveSimpleTests.Reset);
@@ -46,6 +48,9 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         public void OneTimeTearDown()
         {
             ConnectorFixture.Connector.MAIN._wpfContextCall.Synchron = false;
+            ConnectorFixture.Connector.MAIN._multiAxisTestActive.Synchron = false;
+            ConnectorFixture.Connector.MAIN._singleAxisTestActive.Synchron = false;
+
             tc._done.Synchron = false;
             tc.ExecuteProbeRun(2, (int)eTcoDriveSimpleTests.Restore);
             tc.ExecuteProbeRun(2, (int)eTcoDriveSimpleTests.CleanUp);
