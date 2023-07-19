@@ -210,7 +210,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_turnTask.GetIdentifierAtPosition(inPosition:=inPosition,inPositions:=_status.Positions);
+        <ST><![CDATA[GetIdentifierAtPosition:=_turnTask.GetIdentifierAtPosition(inPosition:=inPosition,inPositions:=_status.Positions);
 
 ]]></ST>
       </Implementation>
