@@ -61,15 +61,6 @@ namespace TcoDrivesBeckhoffTestsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BlazkoPosition  Position.
-        /// </summary>
-        public static string ___BlazkoPosition__Position__ {
-            get {
-                return ResourceManager.GetString("___BlazkoPosition__Position__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pick Position.
         /// </summary>
         public static string ___Pick_Position__ {

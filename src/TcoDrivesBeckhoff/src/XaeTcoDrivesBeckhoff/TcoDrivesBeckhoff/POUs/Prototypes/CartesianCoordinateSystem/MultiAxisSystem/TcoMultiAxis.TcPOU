@@ -411,6 +411,17 @@ PROPERTY Config : REFERENCE TO TcoMultiAxisConfig]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Property Name="LoadPositionsTask" Id="{13db9002-6491-0709-0e6f-d8be42934d25}" FolderPath="Tasks\">
+      <Declaration><![CDATA[PROPERTY PUBLIC LoadPositionsTask : REFERENCE TO TcoAxisExchangeDataTask]]></Declaration>
+      <Get Name="Get" Id="{fff3357a-ad6e-0c2d-0f9b-e6817faa280b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LoadPositionsTask REF= _loadPositionTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="MoveAbsolute" Id="{e43a55c5-43cf-051f-3670-6a768345e9d5}">
       <Declaration><![CDATA[METHOD MoveAbsolute : TcoCore.ITcoTaskStatus
 VAR_INPUT
@@ -488,6 +499,17 @@ CallTimers(FALSE);
 Messenger.UnPin();]]></ST>
       </Implementation>
     </Method>
+    <Property Name="SavePositionsTask" Id="{776f3dac-07fb-0ac8-25a4-6cf6bb1b4a3f}" FolderPath="Tasks\">
+      <Declaration><![CDATA[PROPERTY PUBLIC SavePositionsTask : REFERENCE TO TcoAxisExchangeDataTask]]></Declaration>
+      <Get Name="Get" Id="{cf5d2cfa-9bc2-0d9d-313e-9046b8806485}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SavePositionsTask REF= _savePositionTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="ServiceMode" Id="{09e54034-b7ee-0c28-1877-f895c8d43d1e}">
       <Declaration><![CDATA[METHOD PROTECTED ServiceMode
 ]]></Declaration>

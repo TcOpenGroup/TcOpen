@@ -13,6 +13,7 @@ using Raven.Embedded;
 using TcOpen.Inxton.RavenDb;
 using System.IO;
 using System.Reflection;
+using TcOpen.Inxton.TcoCore.Wpf;
 
 namespace TcoDrivesBeckhoff.Wpf.Sandbox
 {
@@ -24,6 +25,7 @@ namespace TcoDrivesBeckhoff.Wpf.Sandbox
         public App() : base()
         {
             TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext }))
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
@@ -46,10 +48,10 @@ namespace TcoDrivesBeckhoff.Wpf.Sandbox
 
 
             var handler = RepositoryDataSetHandler<PositioningParamItem>.CreateSet(new RavenDbRepository<EntitySet<PositioningParamItem>>
-                             (new RavenDbRepositorySettings<EntitySet<PositioningParamItem>>(new string[] { @"http://localhost:8080" },$"Positions_{TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._simpleAxis.Symbol}", "", "")));
+                             (new RavenDbRepositorySettings<EntitySet<PositioningParamItem>>(new string[] { @"http://localhost:8080" },$"Positions_{TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._singleAxis.Symbol}", "", "")));
 
 
-            TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._simpleAxis.InitializeRemoteDataExchange(handler);
+            TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._singleAxis.InitializeRemoteDataExchange(handler);
 
             var handler2 = RepositoryDataSetHandler<PositioningParamItem>.CreateSet(new RavenDbRepository<EntitySet<PositioningParamItem>>
                             (new RavenDbRepositorySettings<EntitySet<PositioningParamItem>>(new string[] { @"http://localhost:8080" },$"Positions_{TcoDrivesBeckhoffTests.Entry.TcoDrivesBeckhoffTestsPlc.MAIN._wpfContext._multiAxis.Symbol}", "", "")));
