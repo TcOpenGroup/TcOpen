@@ -8,6 +8,7 @@ using TcoInspectors;
 using TcOpen.Inxton.Input;
 using Vortex.Connector;
 using Vortex.Connector.Identity;
+using Vortex.Connector.ValueTypes;
 
 namespace TcoInspectors
 {
@@ -23,6 +24,8 @@ namespace TcoInspectors
 
             dispatcherTimer.Start();
 
+
+
             RetryCommand = new RelayCommand((a) => { Dialog._dialogueRetry.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                             (b) => Dialog != null && !Dialog._isOverInspected.Synchron,
                                             () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(RetryCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
@@ -34,6 +37,7 @@ namespace TcoInspectors
                                                 () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(OverrideCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
         }
 
+       
         List<IVortexObject> _inspectorsList;
         public IEnumerable<IVortexObject> Inspectors
         {
@@ -98,7 +102,7 @@ namespace TcoInspectors
             if (Dialog._dialogueRetry.LastValue || Dialog._dialogueTerminate.LastValue)
             {
                 Dialog._dialogIsClosed.Synchron = true;
-                CloseRequestEventHandler?.Invoke(sender, e);
+                CloseRequestEventHandler?.Invoke(this, e);
 
                 if (dispatcherTimer != null)
                 {
@@ -115,6 +119,7 @@ namespace TcoInspectors
             {
                 dispatcherTimer.Stop();
                 dispatcherTimer.Tick -= dispatcherTimer_Tick;
+
 
             }
         }
