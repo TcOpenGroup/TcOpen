@@ -18,8 +18,10 @@ namespace TcoInspectors
     /// <summary>
     /// Interaction logic for InspectorDialogueWindow.xaml
     /// </summary>
-    public partial class TcoInspectorDialogDialogView : Window
+    public partial class TcoInspectorDialogDialogView : Window, IDisposable
     {
+        private TcoInspectorDialogDialogViewModel context;
+
         public TcoInspectorDialogDialogView()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace TcoInspectors
 
         private void TcoInspectorDialogView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
-            var context = this.DataContext as TcoInspectorDialogDialogViewModel;
+            context = this.DataContext as TcoInspectorDialogDialogViewModel;
             if (context != null)
             {
                 context.CloseRequestEventHandler += (s, ev) => this.Close();
@@ -46,5 +48,14 @@ namespace TcoInspectors
         {
             this.CaptureTouch(e.TouchDevice);
         }
-    }    
+
+        public void Dispose()
+        {
+            this.DataContextChanged -= TcoInspectorDialogView_DataContextChanged;
+            if (context != null)
+            {
+                context.CloseRequestEventHandler -= (s, ev) => this.Close();
+            }
+        }
+    }
 }

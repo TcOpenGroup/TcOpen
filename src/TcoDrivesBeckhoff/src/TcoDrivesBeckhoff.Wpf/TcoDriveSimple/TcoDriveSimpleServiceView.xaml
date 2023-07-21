@@ -6,10 +6,8 @@
     xmlns:local="clr-namespace:TcoDrivesBeckhoff"
     xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="http://vortex.mts/xaml"
     xmlns:tcodrivesbeckhoff="clr-namespace:TcoDrivesBeckhoff"
     xmlns:vortex="http://vortex.mts/xaml" 
-    xmlns:inxton="http://vortex.mts/xaml"    
     mc:Ignorable="d">
     <d:UserControl.DataContext>
         <local:TcoDriveSimpleServiceViewModel/>
@@ -19,38 +17,38 @@
         
     </UserControl.Resources>
     <vortex:TcoComponentView >
-        <tcoCore:TcoComponentView.ComponentHeader>
+        <vortex:TcoComponentView.ComponentHeader>
 
             <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left" DataContext="{Binding Component}" >
                 <WrapPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}"/>
                 </WrapPanel.Resources>
-          
-                <WrapPanel  DataContext="{Binding _axisStatus.Disabled}"  Visibility="{Binding Cyclic, Converter={tcoCore:BooleanToVisibilityConverter}}" Margin=" 5,0">
+
+                <WrapPanel  DataContext="{Binding _axisStatus.Disabled}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Disabled"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Operational}"  Visibility="{Binding Cyclic, Converter={tcoCore:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _axisStatus.Operational}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Ready"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={tcoCore:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Homed"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={tcoCore:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Not Homed!"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
-                <WrapPanel  Visibility="{Binding _axisStatus.Error.Cyclic, Converter={tcoCore:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel  Visibility="{Binding _axisStatus.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                         <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding _axisStatus.ErrorId.Cyclic}" Foreground="{StaticResource Errors}"    Visibility="{Binding _axisStatus.Error.Cyclic, Converter={tcoCore:BoolToVisibilityConverter}}"/>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding _axisStatus.ErrorId.Cyclic}" Foreground="{StaticResource Errors}"    Visibility="{Binding _axisStatus.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}"/>
                 </WrapPanel>
                
 
             </WrapPanel>
 
-        </tcoCore:TcoComponentView.ComponentHeader>
+        </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
             <ScrollViewer MaxHeight="1000"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}">
                 <Grid>
@@ -81,7 +79,7 @@
 
 
 
-                        <TextBlock  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding _axisStatus.Error.Cyclic ,Converter={tcoCore:BooleanToVisibilityConverter }}" Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _axisStatus.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
+                        <TextBlock  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding _axisStatus.Error.Cyclic ,Converter={vortex:BooleanToVisibilityConverter }}" Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _axisStatus.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
                             
                      </StackPanel>
                 
