@@ -99,15 +99,8 @@ namespace TcoCore.Wpf
         public TcoResources()
         {
             AddTcoColors();
-            UseDefaultGroupBox();
         }
 
-        private void UseDefaultGroupBox()
-        {
-            var groupbox = new GroupBox();
-            var defualtStyle = new Style(typeof(GroupBox), groupbox.Style);
-            Add(typeof(GroupBox), defualtStyle);
-        }
 
         private void AddTcoColors() => typeof(TcoColors)
                 .GetProperties()
