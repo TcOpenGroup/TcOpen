@@ -26,6 +26,8 @@ VAR
 	_varInfo : __SYSTEM.VAR_INFO;
     {attribute 'hide'} 
 	_sb : TcoCore.StringBuilder;
+	
+	_notInPositionMessage : TcoCore.TcoMessenger(THIS^);	
 END_VAR
 
 ]]></Declaration>
@@ -59,23 +61,28 @@ END_VAR
 
 	END_IF
 	IF _progress=1 THEN	
-		
-		Messenger.Info('<#Calulate next expected Id position#>');
-		inoStatus.ExpectedNextPosition := GetIdentifierAtPosition( inoConfig.NumberOfPositions,inoStatus.Positions);	
-		Messenger.OnCondition(inoStatus.CurrentPosition=0  AND inoInPosition).Error('<#Incorrectly coded current position. Check configuration of code bits! #>').Pin();
-		IF	inoStatus.CurrentPosition <> 0 AND inoInPosition THEN
-			_progress := 10;
-		END_IF;		
+		_notInPositionMessage.OnCondition(NOT inoInPosition).Error('<#Rotatiting started , but table is not in default position! Acknowledge this alarm if you still want to turn! #>').Pin();
+		_progress:=10;
+	
 	END_IF;
 	
 
 	
 	IF _progress=10 THEN	
-		Messenger.Warning('<#Expecting table in position. #>');
-		IF  inoInPosition THEN 
+		Messenger.Info('<#Calulate next expected Id position#>');
+		IF inoStatus.CurrentPosition <> 0 THEN
+			inoStatus.ExpectedNextPosition := GetIdentifierAtPosition( inoConfig.NumberOfPositions,inoStatus.Positions);	
+		END_IF;
 		
-			_progress :=  _progress+10;				
-		END_IF
+		Messenger.OnCondition(inoStatus.CurrentPosition=0  AND inoInPosition).Error('<#Incorrectly coded current position. Check configuration of code bits! #>').Pin();
+		
+		IF	inoStatus.CurrentPosition <> 0 AND inoInPosition THEN
+			_progress := 20;
+		ELSIF NOT 	_notInPositionMessage.Pinned THEN
+			_progress:=20;
+			_notInPositionMessage.UnPin();
+	
+		END_IF;		
 	END_IF;
 	
 	IF _progress=20 THEN	
@@ -231,6 +238,7 @@ METHOD Restore : ITcoRestorable]]></Declaration>
 _progress := 0;
 CallTimers(FALSE);
 Messenger.UnPin();
+_notInPositionMessage.UnPin();
 ]]></ST>
       </Implementation>
     </Method>
