@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoSingleAxisTests" Id="{1a5cfe5e-4556-06f7-0a0e-1558f0fb2af2}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoSingleAxisTests :
+(
+    Restore := 1,
+    CleanUp,
+    Message,
+    PowerDisable,
+    PowerEnable,
+    Reset,
+    MoveRelativePositiveWithDisabledPositiveDirection,
+    MoveRelativePositiveWithEnabledPositiveDirection,
+    MoveRelativeNegativeWithDisabledNegativeDirection,
+    MoveRelativeNegativeWithEnabledNegativeDirection,
+	HommingDirect,
+    MoveVelocityPositiveWithDisabledPositiveDirection,
+    MoveVelocityPositiveWithEnabledPositiveDirection,
+    Stop,
+    MoveVelocityNegativeWithDisabledNegativeDirection,
+    MoveVelocityNegativeWithEnabledNegativeDirection,
+	MoveAbsoluteDisabled,
+	MoveAbsoluteDisabledPositiveDirection,
+	MoveAbsoluteEnabledPositiveDirection,
+	MoveAbsoluteDisabledNegativeDirection,
+	MoveAbsoluteEnabledNegativeDirection,
+	MoveAbsoluteAxisDisabled,
+	MoveAbsoluteAxisDisabledPositiveDirection,
+	MoveAbsoluteAxisEnabledPositiveDirection,
+	MoveAbsoluteAxisDisabledNegativeDirection,
+	MoveAbsoluteAxisEnabledNegativeDirection,
+	MoveRelativeAxisDisabled,
+	MoveRelativeAxisDisabledPositiveDirection,
+	MoveRelativeAxisEnabledPositiveDirection,
+	MoveRelativeAxisDisabledNegativeDirection,
+	MoveRelativeAxisEnabledNegativeDirection,
+    Last
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

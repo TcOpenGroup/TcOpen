@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoIrc5_v_1_x_x" Id="{e1d88b92-8a8a-0e74-0555-7cc06fb367e3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoIrc5_v_1_x_x EXTENDS TcoCore.TcoComponent IMPLEMENTS TcoAbstractions.ITcoRobotics
+VAR_INPUT
+    inEnable : BOOL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+    inoData : TcoIrc5_IO_v_1_x_x;
+END_VAR
+VAR
+    
+
+	{attribute addProperty Name "<#Status#>"}
+    {attribute clr [ReadOnly()]}
+    _status : TcoIrc5_Status_v_1_x_x;
+	{attribute addProperty Name "<#Control#>"}
+	_control 	: TcoIrc5_Control_v_1_x_x;
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoIrc5_Config_v_1_x_x;
+
+END_VAR
+VAR
+	{attribute addProperty Name "<#Start at Main#>"}
+    _startAtMainTask : StartAtMainTask(THIS^);
+	
+	 {attribute addProperty Name "<#Start motors and program#>"}
+    _startMotorsAndProgramTask : StartMotorsAndProgramTask(THIS^);
+	
+  	{attribute addProperty Name "<#Start movements#>"}
+    _startMovementsTask : StartMovementsTask(THIS^);
+	
+	 {attribute addProperty Name "<#Stop movements#>"}
+    _stopMovementsTask : StopMovementsTask(THIS^);
+
+	 {attribute addProperty Name "<#Stop movenents and program#>"}
+    _stopMovementsAndProgramTask : StopMovementsAndProgramTask(THIS^);
+	
+	{attribute addProperty Name "<#Stop program#>"}
+    _stopProgramTask : StopMovementsAndProgramTask(THIS^);
+	
+	
+
+    
+
+  
+   
+
+  
+
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(inoData) THEN
+    Messenger.Post('Invalid reference', TcoCore.eMessageCategory.ProgrammingError);
+    RETURN;
+END_IF
+
+
+UpdateStatus();
+
+_startAtMainTask.Enabled:=NOT _startMotorsAndProgramTask.Busy AND NOT _stopMovementsTask AND NOT _stopMovementsAndProgramTask AND NOT _stopProgramTask;
+_startAtMainTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_startMotorsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_startMovementsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_stopMovementsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_stopMovementsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_stopProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+
+
+
+
+(*
+
+IF(_status.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.ErrorId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
+
+
+//messaging from initialize components
+IF(NOT _status.State.SafetyOk) THEN
+	Messenger.Post('<#Safety circuit open#>', enumMessageCategory.Error);
+END_IF;
+
+IF(_status.State.EmgStop) THEN
+	Messenger.Post('<#Emergency stop active#>', enumMessageCategory.Error);
+END_IF;
+
+IF(_status.State.Error) THEN                     
+	Messenger.Post('<#Unspecified error see robots panel for details#>', enumMessageCategory.Error);
+END_IF;
+
+IF(_status.State.ProgExecError) THEN
+	Messenger.Post('<#Program execution error see robot panel for details#>', enumMessageCategory.Error);
+END_IF;
+
+
+
+IF NOT _status.State.AutoOn THEN
+	Messenger.Warning('<#Robot not switched in auto mode#>');	
+end_if;
+
+IF _status.State.Error THEN
+	Messenger.Post('<#Controller error, see teach pendant#>', enumMessageCategory.Error);	
+END_IF
+  
+*)
+UpdateControl();]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{0a5889ec-b681-0577-1bc3-9067912d6ae1}" />
+    <Folder Name="Task" Id="{9515ec36-620f-055e-2ead-75815f8c7157}" />
+    <Method Name="ClearError" Id="{3a97540c-f593-0f1c-0120-f708057a61f1}">
+      <Declaration><![CDATA[METHOD INTERNAL ClearError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_status.Error := FALSE;
+_status.ErrorId := 0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Config" Id="{60f7667e-3d8f-4a6a-b9df-1321c8dd39cc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the IRC 5. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoIrc5_Config_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{40c6c354-c9a5-4f40-9262-c1766aa13786}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{aaf4eeef-09a9-063d-0c3a-bfe454d50e66}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+  	ParentObject : ITcoObject;	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{cb4df5d0-872f-0def-03a7-f8bfc3720272}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+RestoreTasks();
+_startAtMainTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RestoreTasks" Id="{dc495f00-8846-0615-3d49-5c05e9d2b4aa}">
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//_resetTask.Restore();
+_startMovementsTask.Restore();
+_stopMovementsTask.Restore();
+_startMotorsAndProgramTask.Restore();
+_startAtMainTask.Restore();
+_stopMovementsAndProgramTask.Restore();
+_stopProgramTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{f2dcab5e-74c4-0882-12e2-82e083006063}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ServiceMode]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartAtMainTask" Id="{721ccc2a-8cb6-094a-16a1-751262a37bc7}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartAtMainTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{7f728bc9-46dc-0a19-2179-b1de30aba7b0}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartAtMainTask := _startAtMainTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartMotorsAndProgram" Id="{06b4c873-3aa4-03d0-22c1-6924d11db75b}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartMotorsAndProgram : ITcoTaskStatus
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMotorsAndProgram := THIS^._startMotorsAndProgramTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartMotorsAndProgramTask" Id="{20b7ef96-b115-060b-3d45-010f69992f2e}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartMotorsAndProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{f0c683f2-41f9-0f29-23fe-1f439becbddf}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartMotorsAndProgramTask := _startMotorsAndProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartMovements" Id="{e1e108e7-7ad8-0771-0c7f-399a72ff9f35}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inData : TcoRoboticsMovementsParams;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMovements:=_startMovementsTask.InvokeWithParams(inData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartMovementsTask" Id="{540cc01c-f652-0632-29f6-354dc831965b}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartMovementsTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{a782dff3-7d28-0c61-1597-2dc6bca94aef}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartMovementsTask := _startMovementsTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Status" Id="{2f649483-230f-4ec5-a281-c0e5f85b4542}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the status of the IRC5. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Status : REFERENCE TO TcoIrc5_Status_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{15d86d2d-9263-4f25-8906-5eb67ad2a976}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StopMovements" Id="{3be86610-424b-0cba-1c64-0351de364cf3}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StopMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StopMovements:=_stopMovementsTask.InvokeWithParams(inStopType);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StopMovementsAndProgramTask" Id="{17ebba7a-d013-0a5a-3a28-1097559062ec}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StopMovementsAndProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{ded087e0-b1eb-0fc7-0ec1-7018b2b40a87}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopMovementsAndProgramTask := _stopMovementsAndProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StopMovementsTask" Id="{8caccdea-e800-07be-0faa-ea524d879ae5}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StopMovementsTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{1518a26a-d0f6-0ef4-19fc-8a061b698389}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopMovementsTask := _moveRelativeTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StopProgramTask" Id="{3ab56154-4a39-02f0-1548-06459fed21f1}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StopProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{2bb3fbff-b440-0928-0b83-8952b6850e93}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopProgramTask := _stopProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="UpdateControl" Id="{53aae298-ac53-0ccb-0c6d-4a4a99db6cd8}">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateControl
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//SYSTEM OUTPUTS
+    inoData.Out.Outputs[0].24	:=		_control.Interupt;    
+    inoData.Out.Outputs[0].25	:=		_control.LoadProg;    
+    inoData.Out.Outputs[0].26 	:= 		_control.LoadAndStartProg; 
+    inoData.Out.Outputs[0].27 	:= 		_control.MotorOff;
+    inoData.Out.Outputs[0].28 	:= 		_control.MotorOn;   
+    inoData.Out.Outputs[0].29 	:= 		_control.MotorOnAndStart; 
+    inoData.Out.Outputs[0].30 	:= 		_control.ResetEmgStop;    
+    inoData.Out.Outputs[0].31 	:= 		_control.ResetError; 
+
+    inoData.Out.Outputs[0].16 	:= 		_control.StartProgram;    
+    inoData.Out.Outputs[0].17 	:= 		_control.StartMain;    
+    inoData.Out.Outputs[0].18 	:= 		_control.StopProgram;    
+    inoData.Out.Outputs[0].19 	:= 		_control.QuickStop;    
+    inoData.Out.Outputs[0].20 	:= 		_control.SoftStop;    
+    inoData.Out.Outputs[0].21 	:= 		_control.StopCycle;    
+    inoData.Out.Outputs[0].22 	:= 		_control.StopInstruction;    
+    inoData.Out.Outputs[0].23 	:= 		_control.LimitSpeed;    
+
+//Area enable signals
+    inoData.Out.Outputs[0].8 	:= 		_control.Enable2Area_1;    
+    inoData.Out.Outputs[0].9 	:= 		_control.Enable2Area_2;    
+    inoData.Out.Outputs[0].10 	:= 		_control.Enable2Area_3;    
+    inoData.Out.Outputs[0].11 	:= 		_control.Enable2Area_4;    
+    inoData.Out.Outputs[0].12 	:= 		_control.Enable2Area_5;    
+    inoData.Out.Outputs[0].13 	:= 		_control.Enable2Area_6;    
+    inoData.Out.Outputs[0].14 	:= 		_control.Enable2Area_7;    
+    inoData.Out.Outputs[0].15 	:= 		_control.Enable2Area_8;    
+
+    inoData.Out.Outputs[0].0 	:= 		_control.ContinueFromArea_1;    
+    inoData.Out.Outputs[0].1 	:= 		_control.ContinueFromArea_2;    
+    inoData.Out.Outputs[0].2 	:= 		_control.ContinueFromArea_3;    
+    inoData.Out.Outputs[0].3 	:= 		_control.ContinueFromArea_4;    
+    inoData.Out.Outputs[0].4 	:= 		_control.ContinueFromArea_5;    
+    inoData.Out.Outputs[0].5 	:= 		_control.ContinueFromArea_6;    
+    inoData.Out.Outputs[0].6 	:= 		_control.ContinueFromArea_7;    
+    inoData.Out.Outputs[0].7 	:= 		_control.ContinueFromArea_8;    
+	
+//Tool signals
+    inoData.Out.Outputs[1].24 	:= 		_control.Tool_1_Retract;    
+    inoData.Out.Outputs[1].25 	:= 		_control.Tool_1_Extend;    
+    inoData.Out.Outputs[1].26	:= 		_control.Tool_2_Retract;    
+    inoData.Out.Outputs[1].27	:= 		_control.Tool_2_Extend;    
+    inoData.Out.Outputs[1].28	:= 		_control.Tool_3_Retract;    
+    inoData.Out.Outputs[1].29	:= 		_control.Tool_3_Extend;    
+    inoData.Out.Outputs[1].30 	:= 		_control.Tool_4_Retract;    
+    inoData.Out.Outputs[1].31	:= 		_control.Tool_4_Extend;    
+    inoData.Out.Outputs[1].16	:= 		_control.Tool_5_Retract;    
+    inoData.Out.Outputs[1].17	:= 		_control.Tool_5_Extend;    
+    inoData.Out.Outputs[1].18 	:= 		_control.Tool_6_Retract;    
+    inoData.Out.Outputs[1].19 	:= 		_control.Tool_6_Extend;    
+    inoData.Out.Outputs[1].20 	:= 		_control.Tool_7_Retract;    
+    inoData.Out.Outputs[1].21 	:= 		_control.Tool_7_Extend;    
+    inoData.Out.Outputs[1].22 	:= 		_control.Tool_8_Retract;    
+    inoData.Out.Outputs[1].23 	:= 		_control.Tool_8_Extend;    
+	
+//Movement parameters
+	inoData.Out.Outputs[4] := TcoUtilities.TcoBytesToUdint(
+					inFormat:= tcoUtilities.eTcoDataFormat.LittleEndian,  
+ 					inByte0:= _status.State.WorkobjectNo, 
+					inByte1:= _status.State.ToolNo, 
+					inByte2:= _status.State.GlobalSpeed, 
+					inByte3:= _status.State.ActionNo);
+	
+								
+	inoData.Out.Outputs[5] := TcoUtilities.TcoBytesToUdint(
+							inFormat:= tcoUtilities.eTcoDataFormat.LittleEndian,  
+								inByte0:= 0, 
+								inByte1:= 0, 
+								inByte2:= 0, 
+								inByte3:= _control.PointNo);
+											
+	
+
+								
+	(*inoData.Out.Outputs[4]		:=		_BYTES_TO_UDINT(_control.WorkobjectNo,
+														_control.ToolNo,
+														_control.GlobalSpeed,
+														_control.ActionNo);
+	inoData.Out.Outputs[5]		:=		_BYTES_TO_UDINT(0,0,0,_control.PointNo);*)
+	
+	// todo converions reference from VortexUtilities solution
+//	inoData.Out.Outputs[6]		:=		_UINTS_TO_UDINT(_control.UserSpecSpeed1,
+//														_control.UserSpecSpeed2);
+////Coordinates
+//
+//// todo converions reference from VortexUtilities solution
+//    inoData.Out.Outputs[7]		:= 		_REAL_TO_UDINT((_control.Coordinates.X+10000.0)*1000.0); 
+//    inoData.Out.Outputs[8]		:= 		_REAL_TO_UDINT((_control.Coordinates.Y+10000.0)*1000.0); 
+//    inoData.Out.Outputs[9]		:= 		_REAL_TO_UDINT((_control.Coordinates.Z+10000.0)*1000.0); 
+//    inoData.Out.Outputs[10]		:= 		_REAL_TO_UDINT((_control.Coordinates.Rx+360.0)*1000.0); 
+//    inoData.Out.Outputs[11]		:= 		_REAL_TO_UDINT((_control.Coordinates.Ry+360.0)*1000.0); 
+//    inoData.Out.Outputs[12]		:= 		_REAL_TO_UDINT((_control.Coordinates.Rz+360.0)*1000.0); 
+//
+//
+//]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateStatus" Id="{b151254e-094a-082e-0d80-afd3b3fd89f9}">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateStatus
+VAR
+    _message : STRING(125);
+
+	tempOut: BYTE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ //SYSTEM INPUTS
+_status.State.AutoOn := 				inoData.In.Inputs[0].24;     
+_status.State.CycleOn := 				inoData.In.Inputs[0].25;    
+_status.State.EmgStop := 				inoData.In.Inputs[0].26;    
+_status.State.Error := 					inoData.In.Inputs[0].27;    
+_status.State.MoveActive := 			inoData.In.Inputs[0].28;    
+_status.State.MoveInactive := 			inoData.In.Inputs[0].29;    
+_status.State.MotorOff := 				inoData.In.Inputs[0].30;    
+_status.State.MotorOn := 				inoData.In.Inputs[0].31;   
+
+_status.State.MotorOffState := 			inoData.In.Inputs[0].16;    
+_status.State.MotorOnState := 			inoData.In.Inputs[0].17;    
+_status.State.ProgExecError := 			inoData.In.Inputs[0].18;
+_status.State.SafetyOk := 				inoData.In.Inputs[0].19;    
+_status.State.InHomePos := 				inoData.In.Inputs[0].20;
+_status.State.OutOffHomePos := 			inoData.In.Inputs[0].21;   
+_status.State.InServicePos := 			inoData.In.Inputs[0].22;
+_status.State.OutOffServicePos := 		inoData.In.Inputs[0].23;   
+
+ //Area flags
+_status.State.InArea_1 := 				inoData.In.Inputs[0].8;   
+_status.State.InArea_2 := 				inoData.In.Inputs[0].9;   
+_status.State.InArea_3 := 				inoData.In.Inputs[0].10;   
+_status.State.InArea_4 := 				inoData.In.Inputs[0].11;   
+_status.State.InArea_5 := 				inoData.In.Inputs[0].12;   
+_status.State.InArea_6 := 				inoData.In.Inputs[0].13;   
+_status.State.InArea_7 := 				inoData.In.Inputs[0].14;   
+_status.State.InArea_8 := 				inoData.In.Inputs[0].15;   
+
+ //Position flags
+_status.State.InPosition_1 := 			inoData.In.Inputs[0].0;   
+_status.State.InPosition_2 := 			inoData.In.Inputs[0].1;   
+_status.State.InPosition_3 :=			inoData.In.Inputs[0].2;   
+_status.State.InPosition_4 := 			inoData.In.Inputs[0].3;   
+_status.State.InPosition_5 := 			inoData.In.Inputs[0].4;   
+_status.State.InPosition_6 := 			inoData.In.Inputs[0].5;   
+_status.State.InPosition_7 := 			inoData.In.Inputs[0].6;   
+_status.State.InPosition_8 := 			inoData.In.Inputs[0].7;   
+	
+//Tool signals
+_status.State.Tool_1_Retract := 		inoData.In.Inputs[1].24;   
+_status.State.Tool_1_Extend := 			inoData.In.Inputs[1].25;   
+_status.State.Tool_2_Retract := 		inoData.In.Inputs[1].26;   
+_status.State.Tool_2_Extend := 			inoData.In.Inputs[1].27;   
+_status.State.Tool_3_Retract := 		inoData.In.Inputs[1].28;   
+_status.State.Tool_3_Extend := 			inoData.In.Inputs[1].29;   
+_status.State.Tool_4_Retract := 		inoData.In.Inputs[1].30;   
+_status.State.Tool_4_Extend := 			inoData.In.Inputs[1].31;   
+
+_status.State.Tool_5_Retract := 		inoData.In.Inputs[1].16;   
+_status.State.Tool_5_Extend := 			inoData.In.Inputs[1].17;   
+_status.State.Tool_6_Retract := 		inoData.In.Inputs[1].18;   
+_status.State.Tool_6_Extend := 			inoData.In.Inputs[1].19;   
+_status.State.Tool_7_Retract := 		inoData.In.Inputs[1].20;   
+_status.State.Tool_7_Extend := 			inoData.In.Inputs[1].21;   
+_status.State.Tool_8_Retract := 		inoData.In.Inputs[1].22;   
+_status.State.Tool_8_Extend := 			inoData.In.Inputs[1].23;   
+
+//Safety signals
+_status.State.AutoStop_1 := 			inoData.In.Inputs[1].8;   
+_status.State.AutoStop_2 := 			inoData.In.Inputs[1].9;   
+_status.State.EmergencyStop_1 := 		inoData.In.Inputs[1].10;   
+_status.State.EmergencyStop_2 := 		inoData.In.Inputs[1].11;   
+_status.State.GeneralStop_1 := 			inoData.In.Inputs[1].12;   
+_status.State.GeneralStop_2 := 			inoData.In.Inputs[1].13;   
+_status.State.Enable_1 := 				inoData.In.Inputs[1].14;   
+_status.State.Enable_2 := 				inoData.In.Inputs[1].15;   
+	
+//Movement parameters
+TcoUtilities.TcoUdintToBytes(
+	inFormat:= tcoUtilities.eTcoDataFormat.LittleEndian,  
+	inValue:=  inoData.In.Inputs[4], 
+	outByte0:= _status.State.WorkobjectNo, 
+	outByte1:= _status.State.ToolNo, 
+	outByte2:= _status.State.GlobalSpeed, 
+	outByte3:= _status.State.ActionNo);
+	
+TcoUtilities.TcoUdintToBytes(
+	inFormat:= tcoUtilities.eTcoDataFormat.LittleEndian,  
+	inValue:=inoData.In.Inputs[5], 
+	outByte0:=tempOut , 
+	outByte1:= tempOut,
+	outByte2:= tempOut, 
+	outByte3:= _status.State.PointNo);
+	
+
+
+// todo converions reference from VortexUtilities solution
+//	_axisStatus.State.UserSpecSpeed1 :=			_UDINT_TO_UINT(inoData.In.Inputs[6],1);   
+//	_axisStatus.State.UserSpecSpeed2 :=			_UDINT_TO_UINT(inoData.In.Inputs[6],0);   
+//
+//    _axisStatus.State.Coordinates.X :=			(_UDINT_TO_REAL(inoData.In.Inputs[7])/1000.0)-10000.0;
+//    _axisStatus.State.Coordinates.Y :=			(_UDINT_TO_REAL(inoData.In.Inputs[8])/1000.0)-10000.0;
+//    _axisStatus.State.Coordinates.Z :=			(_UDINT_TO_REAL(inoData.In.Inputs[9])/1000.0)-10000.0;
+//    _axisStatus.State.Coordinates.Rx :=			(_UDINT_TO_REAL(inoData.In.Inputs[10])/1000.0)-360.0;
+//    _axisStatus.State.Coordinates.Ry :=			(_UDINT_TO_REAL(inoData.In.Inputs[11])/1000.0)-360.0;
+//    _axisStatus.State.Coordinates.Rz :=			(_UDINT_TO_REAL(inoData.In.Inputs[12])/1000.0)-360.0;
+//
+//    _axisStatus.State.CoordinatesWorld.X :=		(_UDINT_TO_REAL(inoData.In.Inputs[13])/1000.0)-10000.0;
+//    _axisStatus.State.CoordinatesWorld.Y :=		(_UDINT_TO_REAL(inoData.In.Inputs[14])/1000.0)-10000.0;
+//    _axisStatus.State.CoordinatesWorld.Z :=		(_UDINT_TO_REAL(inoData.In.Inputs[15])/1000.0)-10000.0;
+//    _axisStatus.State.CoordinatesWorld.Rx :=	(_UDINT_TO_REAL(inoData.In.Inputs[16])/1000.0)-360.0;
+//    _axisStatus.State.CoordinatesWorld.Ry :=	(_UDINT_TO_REAL(inoData.In.Inputs[17])/1000.0)-360.0;
+//    _axisStatus.State.CoordinatesWorld.Rz :=	(_UDINT_TO_REAL(inoData.In.Inputs[18])/1000.0)-360.0;
+//                                        
+//    _axisStatus.State.CoordinatesWobjTool.X :=	(_UDINT_TO_REAL(inoData.In.Inputs[19])/1000.0)-10000.0;
+//    _axisStatus.State.CoordinatesWobjTool.Y :=	(_UDINT_TO_REAL(inoData.In.Inputs[20])/1000.0)-10000.0;
+//    _axisStatus.State.CoordinatesWobjTool.Z :=	(_UDINT_TO_REAL(inoData.In.Inputs[21])/1000.0)-10000.0;
+//    _axisStatus.State.CoordinatesWobjTool.Rx :=	(_UDINT_TO_REAL(inoData.In.Inputs[22])/1000.0)-360.0;
+//    _axisStatus.State.CoordinatesWobjTool.Ry :=	(_UDINT_TO_REAL(inoData.In.Inputs[23])/1000.0)-360.0;
+//    _axisStatus.State.CoordinatesWobjTool.Rz :=	(_UDINT_TO_REAL(inoData.In.Inputs[24])/1000.0)-360.0;
+//
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

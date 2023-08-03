@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="CalculateDistance" Id="{3cfe9bdd-49a8-4e6b-9747-f76ff9a0885a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION CalculateDistance : REAL
+VAR_INPUT
+	inDistType : eTcoRoboticsDistance;
+	inP1 : TcoRoboticsCoordinates;
+	inP2 : TcoRoboticsCoordinates;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE inDistType OF
+	eTcoRoboticsDistance.X:
+		CalculateDistance := SQRT(EXPT((inP1.X-inP2.X),2));	
+	eTcoRoboticsDistance.Y:
+		CalculateDistance := SQRT(EXPT((inP1.Y-inP2.Y),2));	
+	eTcoRoboticsDistance.Z:
+		CalculateDistance := SQRT(EXPT((inP1.Z-inP2.Z),2));	
+	eTcoRoboticsDistance.XY:
+		CalculateDistance := SQRT(EXPT((inP1.X-inP2.X),2)+EXPT((inP1.Y-inP2.Y),2));	
+	eTcoRoboticsDistance.XZ:
+		CalculateDistance := SQRT(EXPT((inP1.X-inP2.X),2)+EXPT((inP1.Z-inP2.Z),2));	
+	eTcoRoboticsDistance.YZ:
+		CalculateDistance := SQRT(EXPT((inP1.Y-inP2.Y),2)+EXPT((inP1.Z-inP2.Z),2));	
+	eTcoRoboticsDistance.XYZ:
+		CalculateDistance := SQRT(EXPT((inP1.X-inP2.X),2)+EXPT((inP1.Y-inP2.Y),2)+EXPT((inP1.Z-inP2.Z),2));	
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

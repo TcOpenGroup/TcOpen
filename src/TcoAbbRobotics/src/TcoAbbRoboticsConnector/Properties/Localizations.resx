@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="___Invalid_reference____" xml:space="preserve">
+    <value>Invalid reference: </value>
+  </data>
+  <data name="___Moving_to_position_ID__" xml:space="preserve">
+    <value>Moving to position ID</value>
+  </data>
+  <data name="___Safety_interupted__" xml:space="preserve">
+    <value>Safety interupted</value>
+  </data>
+  <data name="___Movement_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Movement was aborted, while not yet completed!</value>
+  </data>
+  <data name="___Stopping_movements_was_completed_successfully___" xml:space="preserve">
+    <value>Stopping movements was completed successfully.</value>
+  </data>
+  <data name="___Stopping_movement_finished_with_error___" xml:space="preserve">
+    <value>Stopping movement finished with error.</value>
+  </data>
+  <data name="___Stopping_started___" xml:space="preserve">
+    <value>Stopping started.</value>
+  </data>
+  <data name="___Deceleration__" xml:space="preserve">
+    <value>Deceleration</value>
+  </data>
+  <data name="___Jerk__" xml:space="preserve">
+    <value>Jerk</value>
+  </data>
+  <data name="___Power_enable__" xml:space="preserve">
+    <value>Power enable</value>
+  </data>
+  <data name="___Enabled__" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="___Disabled__" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="___Enable_positive__" xml:space="preserve">
+    <value>Enable positive</value>
+  </data>
+  <data name="___Enable_negative__" xml:space="preserve">
+    <value>Enable negative</value>
+  </data>
+  <data name="___Drive_power_override__" xml:space="preserve">
+    <value>Drive power override</value>
+  </data>
+  <data name="___Local_control__" xml:space="preserve">
+    <value>Local control</value>
+  </data>
+  <data name="___Global_control__" xml:space="preserve">
+    <value>Global control</value>
+  </data>
+  <data name="___Override__" xml:space="preserve">
+    <value>Override</value>
+  </data>
+  <data name="___Drive_error_no___" xml:space="preserve">
+    <value>Drive error no </value>
+  </data>
+  <data name="___Status__" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="___Config__" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="___Start_movements__" xml:space="preserve">
+    <value>Start movements</value>
+  </data>
+  <data name="___Stop_movements__" xml:space="preserve">
+    <value>Stop movements</value>
+  </data>
+  <data name="___Power__" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="___Reset__" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="___Halt__" xml:space="preserve">
+    <value>Halt</value>
+  </data>
+  <data name="___Safety_circuit_open__" xml:space="preserve">
+    <value>Safety circuit open</value>
+  </data>
+  <data name="___Emergency_stop_active__" xml:space="preserve">
+    <value>Emergency stop active</value>
+  </data>
+  <data name="___Unspecified_error_see_robots_panel_for_details__" xml:space="preserve">
+    <value>Unspecified error see robots panel for details</value>
+  </data>
+  <data name="___Program_execution_error_see_robot_panel_for_details__" xml:space="preserve">
+    <value>Program execution error see robot panel for details</value>
+  </data>
+  <data name="___Robot_not_switched_in_auto_mode__" xml:space="preserve">
+    <value>Robot not switched in auto mode</value>
+  </data>
+  <data name="___Controller_error__see_teach_pendant__" xml:space="preserve">
+    <value>Controller error, see teach pendant</value>
+  </data>
+  <data name="___IN__" xml:space="preserve">
+    <value>IN</value>
+  </data>
+  <data name="___OUT__" xml:space="preserve">
+    <value>OUT</value>
+  </data>
+  <data name="___Interuption_actually_running_instruction__" xml:space="preserve">
+    <value>Interuption actually running instruction</value>
+  </data>
+  <data name="___Load_program__" xml:space="preserve">
+    <value>Load program</value>
+  </data>
+  <data name="___Load_and_run_program__" xml:space="preserve">
+    <value>Load and run program</value>
+  </data>
+  <data name="___Switch_off_the_motors__" xml:space="preserve">
+    <value>Switch off the motors</value>
+  </data>
+  <data name="___Switch_on_the_motors__" xml:space="preserve">
+    <value>Switch on the motors</value>
+  </data>
+  <data name="___Switch_on_the_motors_and_start_program__" xml:space="preserve">
+    <value>Switch on the motors and start program</value>
+  </data>
+  <data name="___Emergency_stop_acknowledge__" xml:space="preserve">
+    <value>Emergency stop acknowledge</value>
+  </data>
+  <data name="___Error_acknowledge__" xml:space="preserve">
+    <value>Error acknowledge</value>
+  </data>
+  <data name="___Program_start__" xml:space="preserve">
+    <value>Program start</value>
+  </data>
+  <data name="___Program_start_at_main__" xml:space="preserve">
+    <value>Program start at main</value>
+  </data>
+  <data name="___Program_stop__" xml:space="preserve">
+    <value>Program stop</value>
+  </data>
+  <data name="___Stop_movement_quick__" xml:space="preserve">
+    <value>Stop movement-quick</value>
+  </data>
+  <data name="___Stop_movement_soft__" xml:space="preserve">
+    <value>Stop movement-soft</value>
+  </data>
+  <data name="___Stop_program_at_the_end_of_the_cycle__" xml:space="preserve">
+    <value>Stop program at the end of the cycle</value>
+  </data>
+  <data name="___Stop_program_at_the_end_of_the_instruction__" xml:space="preserve">
+    <value>Stop program at the end of the instruction</value>
+  </data>
+  <data name="___Speed_limitation__" xml:space="preserve">
+    <value>Speed limitation</value>
+  </data>
+  <data name="___Enable_movement_to_area_1__" xml:space="preserve">
+    <value>Enable movement to area 1</value>
+  </data>
+  <data name="___Enable_movement_to_area_2__" xml:space="preserve">
+    <value>Enable movement to area 2</value>
+  </data>
+  <data name="___Enable_movement_to_area_3__" xml:space="preserve">
+    <value>Enable movement to area 3</value>
+  </data>
+  <data name="___Enable_movement_to_area_4__" xml:space="preserve">
+    <value>Enable movement to area 4</value>
+  </data>
+  <data name="___Enable_movement_to_area_5__" xml:space="preserve">
+    <value>Enable movement to area 5</value>
+  </data>
+  <data name="___Enable_movement_to_area_6__" xml:space="preserve">
+    <value>Enable movement to area 6</value>
+  </data>
+  <data name="___Enable_movement_to_area_7__" xml:space="preserve">
+    <value>Enable movement to area 7</value>
+  </data>
+  <data name="___Enable_movement_to_area_8__" xml:space="preserve">
+    <value>Enable movement to area 8</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_1__" xml:space="preserve">
+    <value>Enable movement out off area 1</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_2__" xml:space="preserve">
+    <value>Enable movement out off area 2</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_3__" xml:space="preserve">
+    <value>Enable movement out off area 3</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_4__" xml:space="preserve">
+    <value>Enable movement out off area 4</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_5__" xml:space="preserve">
+    <value>Enable movement out off area 5</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_6__" xml:space="preserve">
+    <value>Enable movement out off area 6</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_7__" xml:space="preserve">
+    <value>Enable movement out off area 7</value>
+  </data>
+  <data name="___Enable_movement_out_off_area_8__" xml:space="preserve">
+    <value>Enable movement out off area 8</value>
+  </data>
+  <data name="___Tool_1_retract__" xml:space="preserve">
+    <value>Tool 1 retract</value>
+  </data>
+  <data name="___Tool_1_extend__" xml:space="preserve">
+    <value>Tool 1 extend</value>
+  </data>
+  <data name="___Tool_2_retract__" xml:space="preserve">
+    <value>Tool 2 retract</value>
+  </data>
+  <data name="___Tool_2_extend__" xml:space="preserve">
+    <value>Tool 2 extend</value>
+  </data>
+  <data name="___Tool_3_retract__" xml:space="preserve">
+    <value>Tool 3 retract</value>
+  </data>
+  <data name="___Tool_3_extend__" xml:space="preserve">
+    <value>Tool 3 extend</value>
+  </data>
+  <data name="___Tool_4_retract__" xml:space="preserve">
+    <value>Tool 4 retract</value>
+  </data>
+  <data name="___Tool_4_extend__" xml:space="preserve">
+    <value>Tool 4 extend</value>
+  </data>
+  <data name="___Tool_5_retract__" xml:space="preserve">
+    <value>Tool 5 retract</value>
+  </data>
+  <data name="___Tool_5_extend__" xml:space="preserve">
+    <value>Tool 5 extend</value>
+  </data>
+  <data name="___Tool_6_retract__" xml:space="preserve">
+    <value>Tool 6 retract</value>
+  </data>
+  <data name="___Tool_6_extend__" xml:space="preserve">
+    <value>Tool 6 extend</value>
+  </data>
+  <data name="___Tool_7_retract__" xml:space="preserve">
+    <value>Tool 7 retract</value>
+  </data>
+  <data name="___Tool_7_extend__" xml:space="preserve">
+    <value>Tool 7 extend</value>
+  </data>
+  <data name="___Tool_8_retract__" xml:space="preserve">
+    <value>Tool 8 retract</value>
+  </data>
+  <data name="___Tool_8_extend__" xml:space="preserve">
+    <value>Tool 8 extend</value>
+  </data>
+  <data name="___Action_number__" xml:space="preserve">
+    <value>Action number</value>
+  </data>
+  <data name="___Global_robot_speed__" xml:space="preserve">
+    <value>Global robot speed</value>
+  </data>
+  <data name="___Tool_number__" xml:space="preserve">
+    <value>Tool number</value>
+  </data>
+  <data name="___Workobject_number__" xml:space="preserve">
+    <value>Workobject number</value>
+  </data>
+  <data name="___Point_number__" xml:space="preserve">
+    <value>Point number</value>
+  </data>
+  <data name="___User_specific_speed_1__" xml:space="preserve">
+    <value>User specific speed 1</value>
+  </data>
+  <data name="___User_specific_speed_2__" xml:space="preserve">
+    <value>User specific speed 2</value>
+  </data>
+  <data name="___Coordinates__" xml:space="preserve">
+    <value>Coordinates</value>
+  </data>
+  <data name="___Module_name__" xml:space="preserve">
+    <value>Module name</value>
+  </data>
+  <data name="___AutoOn__" xml:space="preserve">
+    <value>AutoOn</value>
+  </data>
+  <data name="___CycleOn__" xml:space="preserve">
+    <value>CycleOn</value>
+  </data>
+  <data name="___Emergency_stop__" xml:space="preserve">
+    <value>Emergency stop</value>
+  </data>
+  <data name="___Error__" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="___Move_active__" xml:space="preserve">
+    <value>Move active</value>
+  </data>
+  <data name="___Move_inactive__" xml:space="preserve">
+    <value>Move inactive</value>
+  </data>
+  <data name="___Motor_off__" xml:space="preserve">
+    <value>Motor off</value>
+  </data>
+  <data name="___Motor_on__" xml:space="preserve">
+    <value>Motor on</value>
+  </data>
+  <data name="___Motor_off_state__" xml:space="preserve">
+    <value>Motor off state</value>
+  </data>
+  <data name="___Motor_on_state__" xml:space="preserve">
+    <value>Motor on state</value>
+  </data>
+  <data name="___Program_execution_error__" xml:space="preserve">
+    <value>Program execution error</value>
+  </data>
+  <data name="___Safety_chanin_OK__" xml:space="preserve">
+    <value>Safety chanin OK</value>
+  </data>
+  <data name="___In_home_position__" xml:space="preserve">
+    <value>In home position</value>
+  </data>
+  <data name="___Out_off_home_position__" xml:space="preserve">
+    <value>Out off home position</value>
+  </data>
+  <data name="___In_service_position__" xml:space="preserve">
+    <value>In service position</value>
+  </data>
+  <data name="___Out_off_service_position__" xml:space="preserve">
+    <value>Out off service position</value>
+  </data>
+  <data name="___In_area_1__" xml:space="preserve">
+    <value>In area 1</value>
+  </data>
+  <data name="___In_area_2__" xml:space="preserve">
+    <value>In area 2</value>
+  </data>
+  <data name="___In_area_3__" xml:space="preserve">
+    <value>In area 3</value>
+  </data>
+  <data name="___In_area_4__" xml:space="preserve">
+    <value>In area 4</value>
+  </data>
+  <data name="___In_area_5__" xml:space="preserve">
+    <value>In area 5</value>
+  </data>
+  <data name="___In_area_6__" xml:space="preserve">
+    <value>In area 6</value>
+  </data>
+  <data name="___In_area_7__" xml:space="preserve">
+    <value>In area 7</value>
+  </data>
+  <data name="___In_area_8__" xml:space="preserve">
+    <value>In area 8</value>
+  </data>
+  <data name="___In_position_1__" xml:space="preserve">
+    <value>In position 1</value>
+  </data>
+  <data name="___In_position_2__" xml:space="preserve">
+    <value>In position 2</value>
+  </data>
+  <data name="___In_position_3__" xml:space="preserve">
+    <value>In position 3</value>
+  </data>
+  <data name="___In_position_4__" xml:space="preserve">
+    <value>In position 4</value>
+  </data>
+  <data name="___In_position_5__" xml:space="preserve">
+    <value>In position 5</value>
+  </data>
+  <data name="___In_position_6__" xml:space="preserve">
+    <value>In position 6</value>
+  </data>
+  <data name="___In_position_7__" xml:space="preserve">
+    <value>In position 7</value>
+  </data>
+  <data name="___In_position_8__" xml:space="preserve">
+    <value>In position 8</value>
+  </data>
+  <data name="___Auto_stop_1__" xml:space="preserve">
+    <value>Auto stop 1</value>
+  </data>
+  <data name="___Auto_stop_2__" xml:space="preserve">
+    <value>Auto stop 2</value>
+  </data>
+  <data name="___Emergency_stop_1__" xml:space="preserve">
+    <value>Emergency stop 1</value>
+  </data>
+  <data name="___Emergency_stop_2__" xml:space="preserve">
+    <value>Emergency stop 2</value>
+  </data>
+  <data name="___General_stop_1__" xml:space="preserve">
+    <value>General stop 1</value>
+  </data>
+  <data name="___General_stop_2__" xml:space="preserve">
+    <value>General stop 2</value>
+  </data>
+  <data name="___Enable_1__" xml:space="preserve">
+    <value>Enable 1</value>
+  </data>
+  <data name="___Enable_2__" xml:space="preserve">
+    <value>Enable 2</value>
+  </data>
+  <data name="___Global_speed__" xml:space="preserve">
+    <value>Global speed</value>
+  </data>
+  <data name="___PointNumber__" xml:space="preserve">
+    <value>PointNumber</value>
+  </data>
+  <data name="___Actual_coordinates_world__" xml:space="preserve">
+    <value>Actual coordinates world</value>
+  </data>
+  <data name="___Actual_coordinates_workobject_tool__" xml:space="preserve">
+    <value>Actual coordinates workobject tool</value>
+  </data>
+</root>
