@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TcoDrivesBeckhoffTests
+namespace TcoAbbRoboticsTests
 {
     public static class Entry
     {
@@ -15,7 +15,7 @@ namespace TcoDrivesBeckhoffTests
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 852;
 
-        public static TcoDrivesBeckhoffTestsTwinController TcoDrivesBeckhoffTestsPlc { get; }
-            = new TcoDrivesBeckhoffTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoAbbRoboticsTestsTwinController TcoAbbRoboticsTestsPlc { get; }
+            = new TcoAbbRoboticsTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
     }
 }

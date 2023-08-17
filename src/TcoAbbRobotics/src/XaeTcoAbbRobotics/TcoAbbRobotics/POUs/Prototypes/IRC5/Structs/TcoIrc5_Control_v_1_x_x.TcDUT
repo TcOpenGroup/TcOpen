@@ -3,7 +3,9 @@
   <DUT Name="TcoIrc5_Control_v_1_x_x" Id="{96f9f606-cede-444d-b6e8-91d0339d4204}">
     <Declaration><![CDATA[TYPE TcoIrc5_Control_v_1_x_x : 
 STRUCT	
+	
 
+	
 	{attribute addProperty Name "<#Interuption actually running instruction#>"}
 	Interupt : BOOL;
 
@@ -32,7 +34,7 @@ STRUCT
 	StartProgram : BOOL;	
 
 	{attribute addProperty Name "<#Program start at main#>"}
-	StartMain : BOOL; 	
+	StartAtMain : BOOL; 	
 
 	{attribute addProperty Name "<#Program stop#>"}
 	StopProgram : BOOL;	
@@ -51,55 +53,10 @@ STRUCT
 
 	{attribute addProperty Name "<#Speed limitation#>"}
 	LimitSpeed : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 1#>"}
-	Enable2Area_1 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 2#>"}
-	Enable2Area_2 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 3#>"}
-	Enable2Area_3 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 4#>"}
-	Enable2Area_4 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 5#>"}
-	Enable2Area_5 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 6#>"}
-	Enable2Area_6 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 7#>"}
-	Enable2Area_7 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement to area 8#>"}
-	Enable2Area_8 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 1#>"}
-	ContinueFromArea_1 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 2#>"}
-	ContinueFromArea_2 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 3#>"}
-	ContinueFromArea_3 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 4#>"}
-	ContinueFromArea_4 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 5#>"}
-	ContinueFromArea_5 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 6#>"}
-	ContinueFromArea_6 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 7#>"}
-	ContinueFromArea_7 : BOOL;
-
-	{attribute addProperty Name "<#Enable movement out off area 8#>"}
-	ContinueFromArea_8 : BOOL;
-
+	
+	{attribute addProperty Name "<#Master mode#>"}
+	MaterMode : byte;
+	
 	{attribute addProperty Name "<#Tool 1 retract#>"}
 	Tool_1_Retract : BOOL;
 
@@ -124,29 +81,11 @@ STRUCT
 	{attribute addProperty Name "<#Tool 4 extend#>"}
 	Tool_4_Extend : BOOL;
 
-	{attribute addProperty Name "<#Tool 5 retract#>"}
-	Tool_5_Retract : BOOL;
+	{attribute addProperty Name "<#Zones#>"}
+	Zone : BYTE;
 
-	{attribute addProperty Name "<#Tool 5 extend#>"}
-	Tool_5_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 6 retract#>"}
-	Tool_6_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 6 extend#>"}
-	Tool_6_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 7 retract#>"}
-	Tool_7_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 7 extend#>"}
-	Tool_7_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 8 retract#>"}
-	Tool_8_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 8 extend#>"}
-	Tool_8_Extend : BOOL;
+	{attribute addProperty Name "<#In position#>"}
+	InPosition : BYTE;
 
 	{attribute addProperty Name "<#Action number#>"}
 	ActionNo : BYTE; 
@@ -164,10 +103,13 @@ STRUCT
 	PointNo : BYTE; 		
 
 	{attribute addProperty Name "<#User specific speed 1#>"}
-	UserSpecSpeed1 : UINT; 
+	UserSpecSpeed1 : REAL; 
 
 	{attribute addProperty Name "<#User specific speed 2#>"}
-	UserSpecSpeed2 : UINT; 
+	UserSpecSpeed2 : REAL; 
+
+	
+
 
 	{attribute  addProperty Name "<#Coordinates#>"}     
 	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		

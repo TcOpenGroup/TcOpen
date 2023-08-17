@@ -37,7 +37,7 @@ _tmpDWORD := _tmpDWORD + _b2;
 _tmpDWORD := SHL(_tmpDWORD,8);
 _tmpDWORD := _tmpDWORD + _b3;
 
-TcoBytesToDint := DWORD_TO_UDINT(_tmpDWORD);
+TcoBytesToUdint := DWORD_TO_UDINT(_tmpDWORD);
 ]]></ST>
     </Implementation>
   </POU>

@@ -11,7 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TcoDrivesBeckhoffConnector\TcoDrivesBeckhoffConnector.csproj" />
-    <ProjectReference Include="..\TcoDrivesBeckhoffTestsConnector\TcoDrivesBeckhoffTestsConnector.csproj" />
+    <ProjectReference Include="..\..\src\TcoAbbRoboticsConnector\TcoAbbRoboticsConnector.csproj" />
+    <ProjectReference Include="..\TcoAbbRoboticsTestsConnector\TcoAbbRoboticsTestsConnector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="pex\" />
   </ItemGroup>
 </Project>

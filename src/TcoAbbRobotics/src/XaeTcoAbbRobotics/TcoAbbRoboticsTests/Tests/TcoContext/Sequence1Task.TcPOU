@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="Sequence1Task" Id="{9ca577a3-fab9-0e8f-3ad3-b338c0857701}" SpecialFunc="None">
+  <POU Name="Sequence1Task" Id="{a9831a89-d8c6-0c83-2b9d-5c1d414f8cbd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Sequence1Task EXTENDS TcoCore.TcoTask
 VAR_INPUT
 	Sequence : TcoCore.ITcoSequencer;
@@ -8,7 +8,7 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Restore" Id="{a30a6bcb-6e73-0d33-1d97-c339684551b5}">
+    <Method Name="Restore" Id="{f4732b74-dc6c-0c55-087d-903f4e16be7f}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

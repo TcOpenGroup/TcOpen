@@ -1,27 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="TcoDriveSimpleTest" Id="{830e1f40-136a-027f-3da2-53501fc572a7}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimpleTest EXTENDS TcoDrivesBeckhoff.TcoDriveSimple
+  <POU Name="TcoDriveSimpleTest" Id="{a0b286ed-8bfb-074f-019a-9e32adef0be7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDriveSimpleTest EXTENDS TcoAbbRobotics.TcoIrc5_v_1_x_x
 VAR
     _serviceModeCount : ULINT;
     _serviceModeOverride : LREAL;
 END_VAR
 VAR
-    _MC_ReadDriveAddress : MC_ReadDriveAddress;
-    _fbEcCoeSdoRead : FB_EcCoeSdoRead;
-    sNetId : T_AmsNetId;
-    nSlaveAddr : UINT;
-    _MotorType : STRING;
-    _ftrig : Tc2_Standard.F_TRIG;
-    _MC_ReadParameter : MC_ReadParameter;
+   
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(	inEnable 			:=	inEnable,
-		inEnablePositive	:=	inEnablePositive,
-		inEnableNegative	:=	inEnableNegative,
-		inCalibrationCam	:=	inCalibrationCam,
-		inoAxisRef			:=	inoAxisRef);
-		
+      <ST><![CDATA[//SUPER^(	inEnable 			:=	inEnable,
+//		inEnablePositive	:=	inEnablePositive,
+//		inEnableNegative	:=	inEnableNegative,
+//		inCalibrationCam	:=	inCalibrationCam,
+//		inoAxisRef			:=	inoAxisRef);
+//		
 ]]></ST>
     </Implementation>
   </POU>

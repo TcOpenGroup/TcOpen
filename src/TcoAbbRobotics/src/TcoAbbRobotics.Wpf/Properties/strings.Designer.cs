@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties {
+namespace TcOpen.Inxton.TcoAbbRobotics.Wpf.Properties {
     using System;
     
     

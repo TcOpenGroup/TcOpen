@@ -8,8 +8,8 @@
       <Declaration><![CDATA[METHOD StartAtMain : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
-    <Method Name="StartMotorsAndPrograms" Id="{f97f4746-dc86-05f2-25d6-03a7baaf43f9}" FolderPath="Operations\">
-      <Declaration><![CDATA[METHOD StartMotorsAndPrograms : TcoCore.ITcoTaskStatus
+    <Method Name="StartMotorsAndProgram" Id="{f97f4746-dc86-05f2-25d6-03a7baaf43f9}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartMotorsAndProgram : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
     <Method Name="StartMovements" Id="{bf62d065-423a-059f-2635-b3395a365bf0}" FolderPath="Operations\">
@@ -21,7 +21,13 @@ END_VAR]]></Declaration>
     <Method Name="StopMovements" Id="{4ab91db4-3107-074c-3b82-d32f9b392c09}" FolderPath="Operations\">
       <Declaration><![CDATA[METHOD StopMovements : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	StopType : eTcoRoboticsStopType;
+	inStopType : eTcoRoboticsStopType;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="StopMovementsAndProgram" Id="{9427d102-9495-0c02-0bb7-83a6e19acc2a}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StopMovementsAndProgram : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
 END_VAR]]></Declaration>
     </Method>
   </Itf>

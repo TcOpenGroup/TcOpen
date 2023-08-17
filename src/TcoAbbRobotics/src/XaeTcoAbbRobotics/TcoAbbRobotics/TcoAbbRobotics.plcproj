@@ -3,25 +3,25 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{c03634c4-ac7a-4a21-803f-218553aae7f4}</ProjectGuid>
+    <ProjectGuid>{66b028fc-1645-4333-bd8b-fd99cb41f267}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcoAbbRobotics</Name>
     <ProgramVersion>3.1.4024.12</ProgramVersion>
-    <Application>{97a87c66-c9e0-44fe-8189-02e8a98c2349}</Application>
-    <TypeSystem>{07987b61-9055-41fc-9fb1-430d1faa31e8}</TypeSystem>
-    <Implicit_Task_Info>{6fe50f2a-1eb8-4954-a817-e5b62f81f14d}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{3a52cbe0-5447-4bd4-a371-720d1a768cd7}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{7beed296-5f1a-41a6-997d-2fa4ac00fa95}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{5475c18c-6cb6-404d-aa10-bb6956c7b597}</LibraryReferences>
+    <Application>{cb2bed80-ab9b-400d-be24-c6e9804a2962}</Application>
+    <TypeSystem>{4fbf1837-51bb-4292-869a-dc807fac97e9}</TypeSystem>
+    <Implicit_Task_Info>{dc8d6621-5eee-42da-ae2d-29ad8d7595e2}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{d36fe2ed-0f72-471a-8769-669534248e01}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{9e7b5183-4b43-4110-8d5e-a4bcccafd43b}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{bd156c32-cc9c-48ff-a3a3-a319afc047f9}</LibraryReferences>
     <Released>false</Released>
     <Company>Vortex.Library</Company>
-    <Title>TcoDrivesBeckhoff</Title>
+    <Title>TcoAbbRobotics</Title>
     <ProjectVersion>0.6.0.913</ProjectVersion>
-    <DefaultNamespace>TcoDrivesBeckhoff</DefaultNamespace>
-    <Placeholder>TcoDrivesBeckhoff</Placeholder>
+    <DefaultNamespace>TcoAbbRobotics</DefaultNamespace>
+    <Placeholder>TcoAbbRobotics</Placeholder>
     <CombineIds>true</CombineIds>
     <Author>TcOpenGroup</Author>
     <LibraryCategories>
@@ -57,28 +57,40 @@
     <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_Status_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\StartAtMainTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_Control_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_State_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\StartMotorsAndProgramTask.TcPOU">
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartAtMainTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\StartMovementsTask.TcPOU">
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMotorsAndProgramTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\StopMovementsTask.TcPOU">
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMotorsProgramAndMovementsTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\StopMovementsAndProgramTask.TcPOU">
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMotorsTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\StopProgramTask.TcPOU">
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMovementsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartProgramTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopMotorsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopMovementsAndProgramTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopMovementsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopProgramTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\IRC5\TcoIrc5_v_1_x_x.TcPOU">
@@ -94,6 +106,8 @@
     <Folder Include="POUs\Prototypes" />
     <Folder Include="POUs\Prototypes\IRC5" />
     <Folder Include="POUs\Prototypes\IRC5\Structs" />
+    <Folder Include="POUs\Prototypes\IRC5\Tasks\Stops" />
+    <Folder Include="POUs\Prototypes\IRC5\Tasks\Starts" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

@@ -5,7 +5,7 @@
     <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <!--NuGet properties-->
-    <PackageId>TcOpen.TcoDrivesBeckhoffConnector</PackageId>
+    <PackageId>TcOpen.TcoAbbRoboticsConnector</PackageId>
     <Authors>TcOpenGroup contributors</Authors>
     <Company>TcOpenGroup</Company>
     <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
@@ -29,10 +29,10 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoAbstractions\src\TcoAbstractionsConnector\TcoAbstractionsConnector.csproj"/>
-    <ProjectReference Include="..\..\..\TcoUtilities\src\TcoUtilitiesConnector\TcoUtilitiesConnector.csproj"/>
+    <ProjectReference Include="..\..\..\TcoAbstractions\src\TcoAbstractionsConnector\TcoAbstractionsConnector.csproj" />
+    <ProjectReference Include="..\..\..\TcoUtilities\src\TcoUtilitiesConnector\TcoUtilitiesConnector.csproj" />
     <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj" />
+    <!--<ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj" />-->
 
   </ItemGroup>
   <ItemGroup>
@@ -52,5 +52,8 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localizations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_generated\" />
   </ItemGroup>
 </Project>

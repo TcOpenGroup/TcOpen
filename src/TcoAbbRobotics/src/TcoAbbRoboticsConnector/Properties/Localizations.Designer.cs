@@ -115,6 +115,15 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Battery Low.
+        /// </summary>
+        public static string ___Battery_Low__ {
+            get {
+                return ResourceManager.GetString("___Battery_Low__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config.
         /// </summary>
         public static string ___Config__ {
@@ -124,11 +133,11 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Controller error, see teach pendant.
+        ///   Looks up a localized string similar to Control.
         /// </summary>
-        public static string ___Controller_error__see_teach_pendant__ {
+        public static string ___Control__ {
             get {
-                return ResourceManager.GetString("___Controller_error__see_teach_pendant__", resourceCulture);
+                return ResourceManager.GetString("___Control__", resourceCulture);
             }
         }
         
@@ -151,38 +160,11 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deceleration.
-        /// </summary>
-        public static string ___Deceleration__ {
-            get {
-                return ResourceManager.GetString("___Deceleration__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disabled.
-        /// </summary>
-        public static string ___Disabled__ {
-            get {
-                return ResourceManager.GetString("___Disabled__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Drive error no .
         /// </summary>
         public static string ___Drive_error_no___ {
             get {
                 return ResourceManager.GetString("___Drive_error_no___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Drive power override.
-        /// </summary>
-        public static string ___Drive_power_override__ {
-            get {
-                return ResourceManager.GetString("___Drive_power_override__", resourceCulture);
             }
         }
         
@@ -250,177 +232,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 1.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_1__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_1__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 2.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_2__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_2__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 3.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_3__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_3__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 4.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_4__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_4__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 5.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_5__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_5__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 6.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_6__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_6__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 7.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_7__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_7__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement out off area 8.
-        /// </summary>
-        public static string ___Enable_movement_out_off_area_8__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_out_off_area_8__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 1.
-        /// </summary>
-        public static string ___Enable_movement_to_area_1__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_1__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 2.
-        /// </summary>
-        public static string ___Enable_movement_to_area_2__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_2__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 3.
-        /// </summary>
-        public static string ___Enable_movement_to_area_3__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_3__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 4.
-        /// </summary>
-        public static string ___Enable_movement_to_area_4__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_4__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 5.
-        /// </summary>
-        public static string ___Enable_movement_to_area_5__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_5__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 6.
-        /// </summary>
-        public static string ___Enable_movement_to_area_6__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_6__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 7.
-        /// </summary>
-        public static string ___Enable_movement_to_area_7__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_7__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable movement to area 8.
-        /// </summary>
-        public static string ___Enable_movement_to_area_8__ {
-            get {
-                return ResourceManager.GetString("___Enable_movement_to_area_8__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable negative.
-        /// </summary>
-        public static string ___Enable_negative__ {
-            get {
-                return ResourceManager.GetString("___Enable_negative__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable positive.
-        /// </summary>
-        public static string ___Enable_positive__ {
-            get {
-                return ResourceManager.GetString("___Enable_positive__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabled.
-        /// </summary>
-        public static string ___Enabled__ {
-            get {
-                return ResourceManager.GetString("___Enabled__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string ___Error__ {
@@ -435,6 +246,15 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___Error_acknowledge__ {
             get {
                 return ResourceManager.GetString("___Error_acknowledge__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error ID.
+        /// </summary>
+        public static string ___Error_ID__ {
+            get {
+                return ResourceManager.GetString("___Error_ID__", resourceCulture);
             }
         }
         
@@ -457,15 +277,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Global control.
-        /// </summary>
-        public static string ___Global_control__ {
-            get {
-                return ResourceManager.GetString("___Global_control__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Global robot speed.
         /// </summary>
         public static string ___Global_robot_speed__ {
@@ -480,15 +291,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___Global_speed__ {
             get {
                 return ResourceManager.GetString("___Global_speed__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Halt.
-        /// </summary>
-        public static string ___Halt__ {
-            get {
-                return ResourceManager.GetString("___Halt__", resourceCulture);
             }
         }
         
@@ -538,47 +340,11 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In area 5.
+        ///   Looks up a localized string similar to In position.
         /// </summary>
-        public static string ___In_area_5__ {
+        public static string ___In_position__ {
             get {
-                return ResourceManager.GetString("___In_area_5__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In area 6.
-        /// </summary>
-        public static string ___In_area_6__ {
-            get {
-                return ResourceManager.GetString("___In_area_6__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In area 7.
-        /// </summary>
-        public static string ___In_area_7__ {
-            get {
-                return ResourceManager.GetString("___In_area_7__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In area 8.
-        /// </summary>
-        public static string ___In_area_8__ {
-            get {
-                return ResourceManager.GetString("___In_area_8__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In home position.
-        /// </summary>
-        public static string ___In_home_position__ {
-            get {
-                return ResourceManager.GetString("___In_home_position__", resourceCulture);
+                return ResourceManager.GetString("___In_position__", resourceCulture);
             }
         }
         
@@ -619,51 +385,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In position 5.
-        /// </summary>
-        public static string ___In_position_5__ {
-            get {
-                return ResourceManager.GetString("___In_position_5__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In position 6.
-        /// </summary>
-        public static string ___In_position_6__ {
-            get {
-                return ResourceManager.GetString("___In_position_6__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In position 7.
-        /// </summary>
-        public static string ___In_position_7__ {
-            get {
-                return ResourceManager.GetString("___In_position_7__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In position 8.
-        /// </summary>
-        public static string ___In_position_8__ {
-            get {
-                return ResourceManager.GetString("___In_position_8__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to In service position.
-        /// </summary>
-        public static string ___In_service_position__ {
-            get {
-                return ResourceManager.GetString("___In_service_position__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Interuption actually running instruction.
         /// </summary>
         public static string ___Interuption_actually_running_instruction__ {
@@ -682,11 +403,11 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Jerk.
+        ///   Looks up a localized string similar to Invalid reference StartMotorAndProgramTask.
         /// </summary>
-        public static string ___Jerk__ {
+        public static string ___Invalid_reference_StartMotorAndProgramTask__ {
             get {
-                return ResourceManager.GetString("___Jerk__", resourceCulture);
+                return ResourceManager.GetString("___Invalid_reference_StartMotorAndProgramTask__", resourceCulture);
             }
         }
         
@@ -709,20 +430,20 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Local control.
+        ///   Looks up a localized string similar to Master mode.
         /// </summary>
-        public static string ___Local_control__ {
+        public static string ___Master_mode__ {
             get {
-                return ResourceManager.GetString("___Local_control__", resourceCulture);
+                return ResourceManager.GetString("___Master_mode__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Module name.
+        ///   Looks up a localized string similar to Motion supervision.
         /// </summary>
-        public static string ___Module_name__ {
+        public static string ___Motion_supervision__ {
             get {
-                return ResourceManager.GetString("___Module_name__", resourceCulture);
+                return ResourceManager.GetString("___Motion_supervision__", resourceCulture);
             }
         }
         
@@ -781,15 +502,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Movement was aborted, while not yet completed!.
-        /// </summary>
-        public static string ___Movement_was_aborted__while_not_yet_completed___ {
-            get {
-                return ResourceManager.GetString("___Movement_was_aborted__while_not_yet_completed___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Moving to position ID.
         /// </summary>
         public static string ___Moving_to_position_ID__ {
@@ -804,33 +516,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___OUT__ {
             get {
                 return ResourceManager.GetString("___OUT__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Out off home position.
-        /// </summary>
-        public static string ___Out_off_home_position__ {
-            get {
-                return ResourceManager.GetString("___Out_off_home_position__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Out off service position.
-        /// </summary>
-        public static string ___Out_off_service_position__ {
-            get {
-                return ResourceManager.GetString("___Out_off_service_position__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Override.
-        /// </summary>
-        public static string ___Override__ {
-            get {
-                return ResourceManager.GetString("___Override__", resourceCulture);
             }
         }
         
@@ -853,24 +538,6 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Power.
-        /// </summary>
-        public static string ___Power__ {
-            get {
-                return ResourceManager.GetString("___Power__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Power enable.
-        /// </summary>
-        public static string ___Power_enable__ {
-            get {
-                return ResourceManager.GetString("___Power_enable__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Program execution error.
         /// </summary>
         public static string ___Program_execution_error__ {
@@ -885,6 +552,15 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___Program_execution_error_see_robot_panel_for_details__ {
             get {
                 return ResourceManager.GetString("___Program_execution_error_see_robot_panel_for_details__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program pointer moved.
+        /// </summary>
+        public static string ___Program_pointer_moved__ {
+            get {
+                return ResourceManager.GetString("___Program_pointer_moved__", resourceCulture);
             }
         }
         
@@ -916,20 +592,38 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset.
+        ///   Looks up a localized string similar to Restore.
         /// </summary>
-        public static string ___Reset__ {
+        public static string ___Restore__ {
             get {
-                return ResourceManager.GetString("___Reset__", resourceCulture);
+                return ResourceManager.GetString("___Restore__", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Robot not switched in auto mode.
+        ///   Looks up a localized string similar to Robot Emergency Stop Reset.
         /// </summary>
-        public static string ___Robot_not_switched_in_auto_mode__ {
+        public static string ___Robot_Emergency_Stop_Reset__ {
             get {
-                return ResourceManager.GetString("___Robot_not_switched_in_auto_mode__", resourceCulture);
+                return ResourceManager.GetString("___Robot_Emergency_Stop_Reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Robot Error Reset.
+        /// </summary>
+        public static string ___Robot_Error_Reset__ {
+            get {
+                return ResourceManager.GetString("___Robot_Error_Reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Robot is not in Auto.
+        /// </summary>
+        public static string ___Robot_is_not_in_Auto__ {
+            get {
+                return ResourceManager.GetString("___Robot_is_not_in_Auto__", resourceCulture);
             }
         }
         
@@ -952,20 +646,191 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Safety interupted.
-        /// </summary>
-        public static string ___Safety_interupted__ {
-            get {
-                return ResourceManager.GetString("___Safety_interupted__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Speed limitation.
         /// </summary>
         public static string ___Speed_limitation__ {
             get {
                 return ResourceManager.GetString("___Speed_limitation__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start at Main.
+        /// </summary>
+        public static string ___Start_at_Main__ {
+            get {
+                return ResourceManager.GetString("___Start_at_Main__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start at Main finished with error..
+        /// </summary>
+        public static string ___Start_at_Main_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Start_at_Main_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start at Main started..
+        /// </summary>
+        public static string ___Start_at_Main_started___ {
+            get {
+                return ResourceManager.GetString("___Start_at_Main_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start at Main was aborted, while not yet completed!.
+        /// </summary>
+        public static string ___Start_at_Main_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Start_at_Main_was_aborted__while_not_yet_completed___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start at Main was completed successfully..
+        /// </summary>
+        public static string ___Start_at_Main_was_completed_successfully___ {
+            get {
+                return ResourceManager.GetString("___Start_at_Main_was_completed_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors.
+        /// </summary>
+        public static string ___Start_motors__ {
+            get {
+                return ResourceManager.GetString("___Start_motors__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors  finished successfully..
+        /// </summary>
+        public static string ___Start_motors__finished_successfully___ {
+            get {
+                return ResourceManager.GetString("___Start_motors__finished_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors, program and movements finished successfully..
+        /// </summary>
+        public static string ___Start_motors__program_and_movements_finished_successfully___ {
+            get {
+                return ResourceManager.GetString("___Start_motors__program_and_movements_finished_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors, program and movements finished with error..
+        /// </summary>
+        public static string ___Start_motors__program_and_movements_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Start_motors__program_and_movements_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors, program and movements stared..
+        /// </summary>
+        public static string ___Start_motors__program_and_movements_stared___ {
+            get {
+                return ResourceManager.GetString("___Start_motors__program_and_movements_stared___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors, program and movements was aborted, while not yet completed!.
+        /// </summary>
+        public static string ___Start_motors__program_and_movements_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Start_motors__program_and_movements_was_aborted__while_not_yet_completed___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors  was aborted..
+        /// </summary>
+        public static string ___Start_motors__was_aborted___ {
+            get {
+                return ResourceManager.GetString("___Start_motors__was_aborted___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors and program.
+        /// </summary>
+        public static string ___Start_motors_and_program__ {
+            get {
+                return ResourceManager.GetString("___Start_motors_and_program__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors and program finished successfully..
+        /// </summary>
+        public static string ___Start_motors_and_program_finished_successfully___ {
+            get {
+                return ResourceManager.GetString("___Start_motors_and_program_finished_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors and program finished with error..
+        /// </summary>
+        public static string ___Start_motors_and_program_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Start_motors_and_program_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors and program started..
+        /// </summary>
+        public static string ___Start_motors_and_program_started___ {
+            get {
+                return ResourceManager.GetString("___Start_motors_and_program_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors and program was aborted..
+        /// </summary>
+        public static string ___Start_motors_and_program_was_aborted___ {
+            get {
+                return ResourceManager.GetString("___Start_motors_and_program_was_aborted___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors finished with error..
+        /// </summary>
+        public static string ___Start_motors_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Start_motors_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors program and movements.
+        /// </summary>
+        public static string ___Start_motors_program_and_movements__ {
+            get {
+                return ResourceManager.GetString("___Start_motors_program_and_movements__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start motors started..
+        /// </summary>
+        public static string ___Start_motors_started___ {
+            get {
+                return ResourceManager.GetString("___Start_motors_started___", resourceCulture);
             }
         }
         
@@ -979,11 +844,92 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start movements finished successfully..
+        /// </summary>
+        public static string ___Start_movements_finished_successfully___ {
+            get {
+                return ResourceManager.GetString("___Start_movements_finished_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start movements finished with error..
+        /// </summary>
+        public static string ___Start_movements_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Start_movements_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start movements stared..
+        /// </summary>
+        public static string ___Start_movements_stared___ {
+            get {
+                return ResourceManager.GetString("___Start_movements_stared___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start movements was aborted, while not yet completed!.
+        /// </summary>
+        public static string ___Start_movements_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Start_movements_was_aborted__while_not_yet_completed___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start program.
+        /// </summary>
+        public static string ___Start_program__ {
+            get {
+                return ResourceManager.GetString("___Start_program__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string ___Status__ {
             get {
                 return ResourceManager.GetString("___Status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop motors.
+        /// </summary>
+        public static string ___Stop_motors__ {
+            get {
+                return ResourceManager.GetString("___Stop_motors__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop motors finished with error..
+        /// </summary>
+        public static string ___Stop_motors_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Stop_motors_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop motors started..
+        /// </summary>
+        public static string ___Stop_motors_started___ {
+            get {
+                return ResourceManager.GetString("___Stop_motors_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop motors was completed successfully..
+        /// </summary>
+        public static string ___Stop_motors_was_completed_successfully___ {
+            get {
+                return ResourceManager.GetString("___Stop_motors_was_completed_successfully___", resourceCulture);
             }
         }
         
@@ -1015,6 +961,60 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stop movements and program  was completed successfully..
+        /// </summary>
+        public static string ___Stop_movements_and_program__was_completed_successfully___ {
+            get {
+                return ResourceManager.GetString("___Stop_movements_and_program__was_completed_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop movements and program finished with error..
+        /// </summary>
+        public static string ___Stop_movements_and_program_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Stop_movements_and_program_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop movements and program started..
+        /// </summary>
+        public static string ___Stop_movements_and_program_started___ {
+            get {
+                return ResourceManager.GetString("___Stop_movements_and_program_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop movements and program was aborted, while not yet completed!.
+        /// </summary>
+        public static string ___Stop_movements_and_program_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Stop_movements_and_program_was_aborted__while_not_yet_completed___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop movenents and program.
+        /// </summary>
+        public static string ___Stop_movenents_and_program__ {
+            get {
+                return ResourceManager.GetString("___Stop_movenents_and_program__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop program.
+        /// </summary>
+        public static string ___Stop_program__ {
+            get {
+                return ResourceManager.GetString("___Stop_program__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop program at the end of the cycle.
         /// </summary>
         public static string ___Stop_program_at_the_end_of_the_cycle__ {
@@ -1033,11 +1033,47 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stop program was aborted, while not yet completed!.
+        /// </summary>
+        public static string ___Stop_program_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Stop_program_was_aborted__while_not_yet_completed___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop program was completed successfully..
+        /// </summary>
+        public static string ___Stop_program_was_completed_successfully___ {
+            get {
+                return ResourceManager.GetString("___Stop_program_was_completed_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stopping movement finished with error..
         /// </summary>
         public static string ___Stopping_movement_finished_with_error___ {
             get {
                 return ResourceManager.GetString("___Stopping_movement_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping movements started..
+        /// </summary>
+        public static string ___Stopping_movements_started___ {
+            get {
+                return ResourceManager.GetString("___Stopping_movements_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping movements was aborted, while not yet completed!.
+        /// </summary>
+        public static string ___Stopping_movements_was_aborted__while_not_yet_completed___ {
+            get {
+                return ResourceManager.GetString("___Stopping_movements_was_aborted__while_not_yet_completed___", resourceCulture);
             }
         }
         
@@ -1051,11 +1087,20 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stopping started..
+        ///   Looks up a localized string similar to Stopping program started..
         /// </summary>
-        public static string ___Stopping_started___ {
+        public static string ___Stopping_program_started___ {
             get {
-                return ResourceManager.GetString("___Stopping_started___", resourceCulture);
+                return ResourceManager.GetString("___Stopping_program_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping program with error..
+        /// </summary>
+        public static string ___Stopping_program_with_error___ {
+            get {
+                return ResourceManager.GetString("___Stopping_program_with_error___", resourceCulture);
             }
         }
         
@@ -1083,6 +1128,15 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___Switch_on_the_motors_and_start_program__ {
             get {
                 return ResourceManager.GetString("___Switch_on_the_motors_and_start_program__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System input busy.
+        /// </summary>
+        public static string ___System_input_busy__ {
+            get {
+                return ResourceManager.GetString("___System_input_busy__", resourceCulture);
             }
         }
         
@@ -1159,92 +1213,11 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tool 5 extend.
-        /// </summary>
-        public static string ___Tool_5_extend__ {
-            get {
-                return ResourceManager.GetString("___Tool_5_extend__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 5 retract.
-        /// </summary>
-        public static string ___Tool_5_retract__ {
-            get {
-                return ResourceManager.GetString("___Tool_5_retract__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 6 extend.
-        /// </summary>
-        public static string ___Tool_6_extend__ {
-            get {
-                return ResourceManager.GetString("___Tool_6_extend__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 6 retract.
-        /// </summary>
-        public static string ___Tool_6_retract__ {
-            get {
-                return ResourceManager.GetString("___Tool_6_retract__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 7 extend.
-        /// </summary>
-        public static string ___Tool_7_extend__ {
-            get {
-                return ResourceManager.GetString("___Tool_7_extend__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 7 retract.
-        /// </summary>
-        public static string ___Tool_7_retract__ {
-            get {
-                return ResourceManager.GetString("___Tool_7_retract__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 8 extend.
-        /// </summary>
-        public static string ___Tool_8_extend__ {
-            get {
-                return ResourceManager.GetString("___Tool_8_extend__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool 8 retract.
-        /// </summary>
-        public static string ___Tool_8_retract__ {
-            get {
-                return ResourceManager.GetString("___Tool_8_retract__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tool number.
         /// </summary>
         public static string ___Tool_number__ {
             get {
                 return ResourceManager.GetString("___Tool_number__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unspecified error see robots panel for details.
-        /// </summary>
-        public static string ___Unspecified_error_see_robots_panel_for_details__ {
-            get {
-                return ResourceManager.GetString("___Unspecified_error_see_robots_panel_for_details__", resourceCulture);
             }
         }
         
@@ -1272,6 +1245,15 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___Workobject_number__ {
             get {
                 return ResourceManager.GetString("___Workobject_number__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zones.
+        /// </summary>
+        public static string ___Zones__ {
+            get {
+                return ResourceManager.GetString("___Zones__", resourceCulture);
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcoDrivesBeckhoffUnitTests
+namespace TcoAbbRoboticsUnitTests
 {
     public class ConnectorFixture
     {
@@ -13,8 +13,8 @@ namespace TcoDrivesBeckhoffUnitTests
             StartConnector();
         }
 
-        private static TcoDrivesBeckhoffTests.TcoDrivesBeckhoffTestsTwinController _connector;
-        public static TcoDrivesBeckhoffTests.TcoDrivesBeckhoffTestsTwinController Connector
+        private static TcoAbbRoboticsTests.TcoAbbRoboticsTestsTwinController _connector;
+        public static TcoAbbRoboticsTests.TcoAbbRoboticsTestsTwinController Connector
         {
             get
             {
@@ -30,7 +30,7 @@ namespace TcoDrivesBeckhoffUnitTests
         public static void StartConnector()
         {
             var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TestSetupFixture.TargetAmsId, TestSetupFixture.TargetAmsPort, true);
-            _connector = new TcoDrivesBeckhoffTests.TcoDrivesBeckhoffTestsTwinController(adapter);
+            _connector = new TcoAbbRoboticsTests.TcoAbbRoboticsTestsTwinController(adapter);
             _connector.Connector.ReadWriteCycleDelay = 100;
             _connector.Connector.BuildAndStart();                        
         }

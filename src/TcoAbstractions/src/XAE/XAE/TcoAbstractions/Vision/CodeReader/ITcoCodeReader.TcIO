@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="ITcoCodeReader" Id="{20e8eca5-ad98-0994-0a1f-244ff926d52d}">
     <Declaration><![CDATA[INTERFACE ITcoCodeReader EXTENDS __System.IQueryInterface
 ]]></Declaration>
     <Folder Name="Operations" Id="{4433432c-54c1-0b18-0651-81d20a55bbd9}" />
-    <Method Name="ClearResultData" Id="{3b5fd205-da52-04d1-30cf-1c3c24bc0135}" FolderPath="Operations\">
-      <Declaration><![CDATA[METHOD ClearResultData : TcoCore.ITcoTaskStatus
+    <Method Name="StartAtMain" Id="{e6ef27be-4d76-0c9a-1cb7-1307326132ec}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartAtMain : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
-    <Method Name="Read" Id="{e6ef27be-4d76-0c9a-1cb7-1307326132ec}" FolderPath="Operations\">
-      <Declaration><![CDATA[METHOD Read : TcoCore.ITcoTaskStatus
+    <Method Name="StartMovements" Id="{3b5fd205-da52-04d1-30cf-1c3c24bc0135}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartMovements : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
   </Itf>

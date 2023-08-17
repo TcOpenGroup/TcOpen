@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vortex.Connector;
 
-namespace TcoDrivesBeckhoffUnitTests
+namespace TcoAbbroboticsUnitTests
 {
     public class MockRootObject : IVortexObject, ITwinObject, IVortexElement
     {

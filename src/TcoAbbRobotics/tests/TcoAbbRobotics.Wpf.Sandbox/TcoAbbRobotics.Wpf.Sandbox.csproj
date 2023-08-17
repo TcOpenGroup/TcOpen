@@ -13,15 +13,16 @@
     <DebugSymbols>true</DebugSymbols>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+  </ItemGroup>
   
   <ItemGroup>
    
-    <ProjectReference Include="..\..\src\TcoDrivesBeckhoff.Wpf\TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.csproj" />
-    <ProjectReference Include="..\TcoDrivesBeckhoffTestsConnector\TcoDrivesBeckhoffTestsConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcoData\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
-    <ProjectReference Include="..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
-    <ProjectReference Include="..\..\..\TcoData\src\Data\TcOpen.Inxton.Data.csproj" />
-    <PackageReference Include="RavenDB.Embedded" Version="5.3.102" />
+    <ProjectReference Include="..\..\src\TcoAbbRobotics.Wpf\TcOpen.Inxton.TcoAbbRobotics.Wpf.csproj" />
+    <ProjectReference Include="..\TcoAbbRoboticsTestsConnector\TcoAbbRoboticsTestsConnector.csproj" />
+
   </ItemGroup>
 
 </Project>

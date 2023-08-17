@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace TcoDrivesBeckhoffUnitTests
+namespace TcoAbbRoboticsUnitTests
 {
     [SetUpFixture]
     [Apartment(System.Threading.ApartmentState.STA)]
