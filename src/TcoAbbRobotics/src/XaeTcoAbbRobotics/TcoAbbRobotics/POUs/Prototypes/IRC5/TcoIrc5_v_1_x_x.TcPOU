@@ -285,6 +285,12 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="StartMotors" Id="{1e2f7d01-74ee-0757-3c16-047ec062c231}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartMotors : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMotors:=_startMotorsTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="StartMotorsAndProgram" Id="{a78c5de5-f9c0-0501-2765-147894ba1e9c}" FolderPath="Operations\">
       <Declaration><![CDATA[METHOD StartMotorsAndProgram : TcoCore.ITcoTaskStatus
 VAR_INPUT
@@ -349,6 +355,12 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="StartProgram" Id="{ca742134-d22b-05a7-2174-0f27c4d651ce}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartProgram : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartProgram:=_startProgramTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="StartProgramTask" Id="{c36152bc-0c0e-0fff-194c-46b4825c83b7}" FolderPath="Task\">
       <Declaration><![CDATA[PROPERTY StartProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
       <Get Name="Get" Id="{0d8982aa-d1df-087d-2bf6-385f91670ab2}">
@@ -374,6 +386,13 @@ PROPERTY Status : REFERENCE TO TcoIrc5_Status_v_1_x_x]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="StopMotors" Id="{7bbac84a-5f07-033a-18f8-61438ae0f90a}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StopMotors : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StopMotors:=_stopMotorsTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="StopMotorsTask" Id="{40a6e2f9-db0c-0dc7-030a-e8f76bb7d2f8}" FolderPath="Task\">
       <Declaration><![CDATA[PROPERTY StopMotorsTask : TcoCore.ITcoTaskStatus]]></Declaration>
       <Get Name="Get" Id="{e2bc3b5c-109d-0896-0bf8-cc028a62a837}">
@@ -421,6 +440,13 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="StopProgram" Id="{f3c6e01e-63d8-0565-146b-1b4e8c293eb5}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StopProgram : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StopProgram:=_stopProgramTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="StopProgramTask" Id="{693e064e-113f-0c6a-002b-e290101210a7}" FolderPath="Task\">
       <Declaration><![CDATA[PROPERTY StopProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
       <Get Name="Get" Id="{102b1b09-c6a6-0ca2-075a-6220b123dd29}">
