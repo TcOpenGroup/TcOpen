@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.44">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{A785EC7B-AB96-8684-F3EC-9323F60B420C}" Namespace="TcoIo" AutoDeleteType="true">TcoAmsAddr</Name>
@@ -37,7 +37,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{7056F838-A3A0-4803-B4E4-B49F60A1106B}" Name="TcoRexrothPress" PrjFilePath="TcoRexrothPress\TcoRexrothPress.plcproj" TmcFilePath="TcoRexrothPress\TcoRexrothPress.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{7056F838-A3A0-4803-B4E4-B49F60A1106B}" Name="TcoRexrothPress" PrjFilePath="TcoRexrothPress\TcoRexrothPress.plcproj" TmcFilePath="TcoRexrothPress\TcoRexrothPress.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoRexrothPress\TcoRexrothPress.tmc" TmcHash="{20DC780F-DEF8-E8A7-F05B-51A63B8DB51D}">
 					<Name>TcoRexrothPress Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -57,7 +57,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{1A3A997F-3A69-4755-9306-5A95A9AF73BF}" Name="TcoRexrothPressTests" PrjFilePath="TcoRexrothPressTests\TcoRexrothPressTests.plcproj" TmcFilePath="TcoRexrothPressTests\TcoRexrothPressTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{1A3A997F-3A69-4755-9306-5A95A9AF73BF}" Name="TcoRexrothPressTests" PrjFilePath="TcoRexrothPressTests\TcoRexrothPressTests.plcproj" TmcFilePath="TcoRexrothPressTests\TcoRexrothPressTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoRexrothPressTests\TcoRexrothPressTests.tmc" TmcHash="{E1B4537E-7D2C-F6C1-496E-12310C8356E5}">
 					<Name>TcoRexrothPressTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -302,8 +302,6 @@
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500821000403}" Id="#x02030020"/>
 		<OwnerA Name="TIPC^TcoRexrothPressTests^TcoRexrothPressTests Instance">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Press (IndraDrive MPC20 (1 CCD Master +0 CCD Slaves))">
 				<Link VarA="PlcTask Inputs^GVL_iXlinker.AdsAddr^netId" VarB="InfoData^AdsAddr^netId"/>

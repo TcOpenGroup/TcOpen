@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoInsight_v_5_x_x" Id="{b36dba41-65c9-09aa-02f5-2313aa683dc2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInsight_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent 
 VAR_IN_OUT
@@ -111,6 +111,93 @@ _triggerTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus :
     <Folder Name="States" Id="{ca86b13d-4f28-08bb-0f47-84f8e9caefcd}" />
     <Folder Name="Tasks" Id="{d3f1ba0f-6a94-07ad-145d-fad2bd01ca0e}" />
     <Folder Name="UserData" Id="{b6e57ac1-4435-0688-3216-e8d4a6b9f495}" />
+    <Method Name="ChangeJobByName" Id="{d060e258-4711-083f-2e5f-fd7e215506ca}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Changes the job by its name. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD ChangeJobByName : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inJobName : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ChangeJobByName := THIS^._changeJobByNameTask.InvokeWithParameters(inJobName);
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ChangeJobByNameTask" Id="{9f9bd787-b3c6-05f0-2f81-da95f621af15}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ChangeJobByNameTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{1067b79a-5a4c-0495-2e42-78a896e7d58d}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ChangeJobByNameTask := THIS^._changeJobByNameTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ChangeJobByNumber" Id="{93c62f60-5ccb-093f-1bf1-9b0ec816c0ed}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Changes the job by its identification number. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD ChangeJobByNumber : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inJobNumber : UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ChangeJobByNumber := THIS^._changeJobByNumberTask.InvokeWithParameters(inJobNumber);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ChangeJobByNumberTask" Id="{10ea4fd1-ba22-0bf8-0a0f-9b0dafc6afe3}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ChangeJobByNumberTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{e3790ba3-54b4-0e6d-1342-654760e5a841}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ChangeJobByNumberTask := THIS^._changeJobByNumberTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="CheckIfOnline" Id="{a259a5fe-26bc-40e7-aa53-de1642ff749d}" FolderPath="_Internals\">
+      <Declaration><![CDATA[METHOD INTERNAL CheckIfOnline
+VAR_INST
+	_onlineTimer : TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF NOT THIS^.inoIoData.AcquisitionStatus.Online THEN
+	THIS^._status.CurrentJobName := '';
+	THIS^._status.CurrentJobNumber := -1;
+END_IF
+
+_onlineTimer(IN:=NOT THIS^.inoIoData.AcquisitionControl.SetOffline AND NOT THIS^.inoIoData.AcquisitionStatus.Online,PT:=T#3S);
+
+Messenger.OnCondition(inoIoData.AcquisitionStatus.OfflineReason0 AND _onlineTimer.Q).Info('<#Camera offline:The vision system$'s job is being modified.#>');
+Messenger.OnCondition(inoIoData.AcquisitionStatus.OfflineReason0 AND _onlineTimer.Q).Info('<#Camera offline:A discrete signal is holding the vision system Offline.#>');
+Messenger.OnCondition(inoIoData.AcquisitionStatus.OfflineReason0 AND _onlineTimer.Q).Info('<#Camera offline:A communications protocol is holding the vision system Offline.#>');
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="ClearInspectionResults" Id="{ef8962fa-a233-06f4-2210-2d8af175709b}" FolderPath="Operations\">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -295,93 +382,6 @@ IF (inLength>0) THEN
 END_IF
 
 GetResultAsString := _resultString;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ChangeJobByName" Id="{d060e258-4711-083f-2e5f-fd7e215506ca}" FolderPath="Operations\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Changes the job by its name. 		
-		</summary>			
-	</docu>	
-~*)
-METHOD ChangeJobByName : TcoCore.ITcoTaskStatus
-VAR_INPUT
-	inJobName : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[ChangeJobByName := THIS^._changeJobByNameTask.InvokeWithParameters(inJobName);
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="ChangeJobByNameTask" Id="{9f9bd787-b3c6-05f0-2f81-da95f621af15}" FolderPath="Tasks\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
-		</summary>			
-	</docu>	
-~*)
-PROPERTY ChangeJobByNameTask : TcoCore.ITcoTaskStatus]]></Declaration>
-      <Get Name="Get" Id="{1067b79a-5a4c-0495-2e42-78a896e7d58d}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[ChangeJobByNameTask := THIS^._changeJobByNameTask;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Method Name="ChangeJobByNumber" Id="{93c62f60-5ccb-093f-1bf1-9b0ec816c0ed}" FolderPath="Operations\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Changes the job by its identification number. 		
-		</summary>			
-	</docu>	
-~*)
-METHOD ChangeJobByNumber : TcoCore.ITcoTaskStatus
-VAR_INPUT
-	inJobNumber : UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[ChangeJobByNumber := THIS^._changeJobByNumberTask.InvokeWithParameters(inJobNumber);]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="ChangeJobByNumberTask" Id="{10ea4fd1-ba22-0bf8-0a0f-9b0dafc6afe3}" FolderPath="Tasks\">
-      <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
-		</summary>			
-	</docu>	
-~*)
-PROPERTY ChangeJobByNumberTask : TcoCore.ITcoTaskStatus]]></Declaration>
-      <Get Name="Get" Id="{e3790ba3-54b4-0e6d-1342-654760e5a841}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[ChangeJobByNumberTask := THIS^._changeJobByNumberTask;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Method Name="CheckIfOnline" Id="{a259a5fe-26bc-40e7-aa53-de1642ff749d}" FolderPath="_Internals\">
-      <Declaration><![CDATA[METHOD INTERNAL CheckIfOnline
-VAR_INST
-	_onlineTimer : TON;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[
-IF NOT THIS^.inoIoData.AcquisitionStatus.Online THEN
-	THIS^._status.CurrentJobName := '';
-	THIS^._status.CurrentJobNumber := -1;
-END_IF
-
-_onlineTimer(IN:=NOT THIS^.inoIoData.AcquisitionControl.SetOffline AND NOT THIS^.inoIoData.AcquisitionStatus.Online,PT:=T#3S);
-
-Messenger.OnCondition(inoIoData.AcquisitionStatus.OfflineReason0 AND _onlineTimer.Q).Info('<#Camera offline:The vision system$'s job is being modified.#>');
-Messenger.OnCondition(inoIoData.AcquisitionStatus.OfflineReason0 AND _onlineTimer.Q).Info('<#Camera offline:A discrete signal is holding the vision system Offline.#>');
-Messenger.OnCondition(inoIoData.AcquisitionStatus.OfflineReason0 AND _onlineTimer.Q).Info('<#Camera offline:A communications protocol is holding the vision system Offline.#>');
-]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvalidReference" Id="{c3162119-b996-06e9-2dc7-59f699e9222b}" FolderPath="_Internals\">
@@ -760,5 +760,109 @@ _updateSignalStatesTask.DoneWhen(TRUE);]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <LineIds Name="TcoInsight_v_5_x_x">
+      <LineId Id="3" Count="60" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ChangeJobByName">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ChangeJobByNameTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ChangeJobByNumber">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ChangeJobByNumberTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.CheckIfOnline">
+      <LineId Id="3" Count="10" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ClearInspectionResults">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ClearInspectionResultsTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.Config.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.FB_init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.GetResultAsByte">
+      <LineId Id="3" Count="11" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.GetResultAsDint">
+      <LineId Id="3" Count="15" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.GetResultAsReal">
+      <LineId Id="3" Count="15" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.GetResultAsString">
+      <LineId Id="3" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.InvalidReference">
+      <LineId Id="3" Count="5" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.LastResultData.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.Restore">
+      <LineId Id="3" Count="18" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.ServiceMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.SetUserDataAsByte">
+      <LineId Id="3" Count="17" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.SetUserDataAsDint">
+      <LineId Id="3" Count="23" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.SetUserDataAsReal">
+      <LineId Id="3" Count="23" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.SetUserDataAsString">
+      <LineId Id="3" Count="23" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.SoftEvent">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.SoftEventTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.Status.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.Trigger">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.TriggerTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.UpdateSignalStates">
+      <LineId Id="3" Count="58" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoInsight_v_5_x_x.UserData.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
