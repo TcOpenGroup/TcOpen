@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace TcoAbbRobotics
 {
-    public partial class TcoAbbRobotics
+    public partial class TcoIrc5_v_1_x_x
     {
         private const string blank = " ";
         private string onlineMsg = string.Empty; string additionalInfo = " ";
