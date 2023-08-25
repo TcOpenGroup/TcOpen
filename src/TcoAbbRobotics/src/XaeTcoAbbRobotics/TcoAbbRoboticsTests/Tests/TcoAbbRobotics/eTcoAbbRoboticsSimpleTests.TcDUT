@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <DUT Name="eTcoDriveSimpleTests" Id="{26cff7c3-ed2f-0d10-13fa-9a594dd7a1c9}">
+  <DUT Name="eTcoAbbRoboticsSimpleTests" Id="{26cff7c3-ed2f-0d10-13fa-9a594dd7a1c9}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoDriveSimpleTests :
+TYPE eTcoAbbRoboticsSimpleTests :
 (
     Restore := 1,
     CleanUp,

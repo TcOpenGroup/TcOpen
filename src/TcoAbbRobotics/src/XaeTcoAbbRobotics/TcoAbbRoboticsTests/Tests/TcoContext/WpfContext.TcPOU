@@ -6,6 +6,8 @@ VAR
     _serviceModeActive : BOOL;
     {attribute addProperty Name "<#Abb IRC 5#>"}
     _robot1 : TcoAbbRobotics.TcoIrc5_v_1_x_x(THIS^);
+	{attribute addProperty Name "<#Abb Omnicore#>"}
+    _robot2 : TcoAbbRobotics.TcoOmnicore_v_1_x_x(THIS^);
 
 	
 	
@@ -35,18 +37,19 @@ METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _serviceModeActive THEN
    	_robot1.Service();
- 
+  	_robot2.Service();
  
 
 
 END_IF
-
 _robot1(
     inEnable := _enable,
     inoData := GVL.Robot1);
 
 
-
+_robot2(
+    inEnable := _enable,
+    inoData := GVL.Robot2);
 
 _sequence1Task(Sequence := _sequence1);
 IF(_sequence1Task.Execute())THEN
@@ -66,9 +69,13 @@ VAR
 	_velocity: LREAL;
 	ProbeDoneWhen: INT;
 	_param: TcoRoboticsMovementsParams;
+
+	_operations:eProcessSequence;
+END_VAR
+
+VAR_INST
 	_maxAllowedAttempts: INT;
 	_noOfAttmets: INT;
-	_operations:eProcessSequence;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[seq REF= _sequence1;
@@ -86,6 +93,8 @@ IF (seq.Step(inStepID := 0,
     inStepDescription := 'READY TO START')) THEN
     //--------------------------------------------------------
 	_param.GlobalSpeed :=100;
+		_noOfAttmets:=0;
+
 	answer := _dialog			
 			.Show()	
 			.WithType(eDialogType.Question)				
@@ -155,7 +164,6 @@ IF (seq.Step(inStepID := 14,
     inEnabled := TRUE,
     inStepDescription := 'START MOVEMENTS')) THEN
 //--------------------------------------------------------   
-	_noOfAttmets:=0;
 	_maxAllowedAttempts:=10;
 	
 	
@@ -165,32 +173,35 @@ IF (seq.Step(inStepID := 14,
 //--------------------------------------------------------			
 END_IF;
 
-IF (seq.Step(inStepID := 14,
+IF (seq.Step(inStepID := 15,
     inEnabled := TRUE,
     inStepDescription := 'START MOVEMENTS')) THEN
 //--------------------------------------------------------   
 	_param.ActionNo:=100;
 	
-	IF _robot1.StartMovements(inData:=_param).Done  THEN
+	IF _robot1.StartMovements(inData:=_param).Done   THEN
 		seq.CompleteStep();
+		_robot1.Restore();
 	END_IF
 	
 //--------------------------------------------------------			
 END_IF;
 
 
-IF (seq.Step(inStepID := 15,
+IF (seq.Step(inStepID := 16,
     inEnabled := TRUE,
     inStepDescription := 'START ANOTHER MOVE MOVEMENTS')) THEN
 //--------------------------------------------------------   
-	_param.ActionNo:=101;
-	
+	_param.ActionNo:=1;
+	_param.GlobalSpeed:=90;
 	IF _robot1.StartMovements(inData:=_param).Done  THEN
 		IF _noOfAttmets<_maxAllowedAttempts THEN
 			_noOfAttmets:=_noOfAttmets+1;
 			seq.RequestStep(14);
-		END_IF;
+			_robot1.Restore();
+		ELSE 
 		seq.CompleteStep();
+		end_if;
 	END_IF
 	
 //--------------------------------------------------------			

@@ -520,6 +520,15 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PN Error.
+        /// </summary>
+        public static string ___PN_Error__ {
+            get {
+                return ResourceManager.GetString("___PN_Error__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Point number.
         /// </summary>
         public static string ___Point_number__ {
@@ -1236,6 +1245,60 @@ namespace TcoAbbRoboticsConnector.Properties {
         public static string ___User_specific_speed_2__ {
             get {
                 return ResourceManager.GetString("___User_specific_speed_2__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for Auto signal! .
+        /// </summary>
+        public static string ___Waiting_for_Auto_signal____ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_Auto_signal____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for motors are On! .
+        /// </summary>
+        public static string ___Waiting_for_motors_are_On____ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_motors_are_On____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for program running signal! .
+        /// </summary>
+        public static string ___Waiting_for_program_running_signal____ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_program_running_signal____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for system is without errors! .
+        /// </summary>
+        public static string ___Waiting_for_system_is_without_errors____ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_system_is_without_errors____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for system ready signal! .
+        /// </summary>
+        public static string ___Waiting_for_system_ready_signal____ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_system_ready_signal____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting program pointer changed! .
+        /// </summary>
+        public static string ___Waiting_program_pointer_changed____ {
+            get {
+                return ResourceManager.GetString("___Waiting_program_pointer_changed____", resourceCulture);
             }
         }
         

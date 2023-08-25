@@ -117,8 +117,71 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="___Emergency_stop_active__" xml:space="preserve">
+    <value>Emergency stop active</value>
+  </data>
+  <data name="___Program_execution_error_see_robot_panel_for_details__" xml:space="preserve">
+    <value>Program execution error see robot panel for details</value>
+  </data>
+  <data name="___Safety_circuit_open__" xml:space="preserve">
+    <value>Safety circuit open</value>
+  </data>
+  <data name="___Drive_error_no___" xml:space="preserve">
+    <value>Drive error no </value>
+  </data>
+  <data name="___Status__" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="___Control__" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="___Config__" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="___PN_Error__" xml:space="preserve">
+    <value>PN Error</value>
+  </data>
+  <data name="___Start_at_Main__" xml:space="preserve">
+    <value>Start at Main</value>
+  </data>
+  <data name="___Start_motors_and_program__" xml:space="preserve">
+    <value>Start motors and program</value>
+  </data>
+  <data name="___Start_program__" xml:space="preserve">
+    <value>Start program</value>
+  </data>
+  <data name="___Start_motors__" xml:space="preserve">
+    <value>Start motors</value>
+  </data>
+  <data name="___Start_movements__" xml:space="preserve">
+    <value>Start movements</value>
+  </data>
+  <data name="___Start_motors_program_and_movements__" xml:space="preserve">
+    <value>Start motors program and movements</value>
+  </data>
+  <data name="___Stop_movements__" xml:space="preserve">
+    <value>Stop movements</value>
+  </data>
+  <data name="___Stop_movenents_and_program__" xml:space="preserve">
+    <value>Stop movenents and program</value>
+  </data>
+  <data name="___Stop_program__" xml:space="preserve">
+    <value>Stop program</value>
+  </data>
+  <data name="___Stop_motors__" xml:space="preserve">
+    <value>Stop motors</value>
+  </data>
+  <data name="___Restore__" xml:space="preserve">
+    <value>Restore</value>
+  </data>
   <data name="___Invalid_reference____" xml:space="preserve">
     <value>Invalid reference: </value>
+  </data>
+  <data name="___Waiting_program_pointer_changed____" xml:space="preserve">
+    <value>Waiting program pointer changed! </value>
+  </data>
+  <data name="___Waiting_for_system_ready_signal____" xml:space="preserve">
+    <value>Waiting for system ready signal! </value>
   </data>
   <data name="___Start_at_Main_was_aborted__while_not_yet_completed___" xml:space="preserve">
     <value>Start at Main was aborted, while not yet completed!</value>
@@ -131,6 +194,9 @@
   </data>
   <data name="___Start_at_Main_started___" xml:space="preserve">
     <value>Start at Main started.</value>
+  </data>
+  <data name="___Waiting_for_Auto_signal____" xml:space="preserve">
+    <value>Waiting for Auto signal! </value>
   </data>
   <data name="___Robot_is_not_in_Auto__" xml:space="preserve">
     <value>Robot is not in Auto</value>
@@ -182,6 +248,15 @@
   </data>
   <data name="___Start_motors_started___" xml:space="preserve">
     <value>Start motors started.</value>
+  </data>
+  <data name="___Waiting_for_program_running_signal____" xml:space="preserve">
+    <value>Waiting for program running signal! </value>
+  </data>
+  <data name="___Waiting_for_motors_are_On____" xml:space="preserve">
+    <value>Waiting for motors are On! </value>
+  </data>
+  <data name="___Waiting_for_system_is_without_errors____" xml:space="preserve">
+    <value>Waiting for system is without errors! </value>
   </data>
   <data name="___Start_movements_was_aborted__while_not_yet_completed___" xml:space="preserve">
     <value>Start movements was aborted, while not yet completed!</value>
@@ -239,66 +314,6 @@
   </data>
   <data name="___Stopping_movements_started___" xml:space="preserve">
     <value>Stopping movements started.</value>
-  </data>
-  <data name="___Emergency_stop_active__" xml:space="preserve">
-    <value>Emergency stop active</value>
-  </data>
-  <data name="___Program_execution_error_see_robot_panel_for_details__" xml:space="preserve">
-    <value>Program execution error see robot panel for details</value>
-  </data>
-  <data name="___Safety_circuit_open__" xml:space="preserve">
-    <value>Safety circuit open</value>
-  </data>
-  <data name="___Drive_error_no___" xml:space="preserve">
-    <value>Drive error no </value>
-  </data>
-  <data name="___Status__" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="___Control__" xml:space="preserve">
-    <value>Control</value>
-  </data>
-  <data name="___Config__" xml:space="preserve">
-    <value>Config</value>
-  </data>
-  <data name="___Start_at_Main__" xml:space="preserve">
-    <value>Start at Main</value>
-  </data>
-  <data name="___Start_motors_and_program__" xml:space="preserve">
-    <value>Start motors and program</value>
-  </data>
-  <data name="___Start_program__" xml:space="preserve">
-    <value>Start program</value>
-  </data>
-  <data name="___Start_motors__" xml:space="preserve">
-    <value>Start motors</value>
-  </data>
-  <data name="___Start_movements__" xml:space="preserve">
-    <value>Start movements</value>
-  </data>
-  <data name="___Start_motors_program_and_movements__" xml:space="preserve">
-    <value>Start motors program and movements</value>
-  </data>
-  <data name="___Stop_movements__" xml:space="preserve">
-    <value>Stop movements</value>
-  </data>
-  <data name="___Stop_movenents_and_program__" xml:space="preserve">
-    <value>Stop movenents and program</value>
-  </data>
-  <data name="___Stop_program__" xml:space="preserve">
-    <value>Stop program</value>
-  </data>
-  <data name="___Stop_motors__" xml:space="preserve">
-    <value>Stop motors</value>
-  </data>
-  <data name="___Restore__" xml:space="preserve">
-    <value>Restore</value>
-  </data>
-  <data name="___IN__" xml:space="preserve">
-    <value>IN</value>
-  </data>
-  <data name="___OUT__" xml:space="preserve">
-    <value>OUT</value>
   </data>
   <data name="___Interuption_actually_running_instruction__" xml:space="preserve">
     <value>Interuption actually running instruction</value>
@@ -515,5 +530,11 @@
   </data>
   <data name="___Actual_coordinates_workobject_tool__" xml:space="preserve">
     <value>Actual coordinates workobject tool</value>
+  </data>
+  <data name="___IN__" xml:space="preserve">
+    <value>IN</value>
+  </data>
+  <data name="___OUT__" xml:space="preserve">
+    <value>OUT</value>
   </data>
 </root>

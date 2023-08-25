@@ -36,6 +36,18 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\TcoAbbRobotics_Config_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoAbbRobotics_Control_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoAbbRobotics_State_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoAbbRobotics_Status_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -51,49 +63,52 @@
     <Compile Include="POUs\Prototypes\IRC5\IO\TcoIrc5_Outputs_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_Config_v_1_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_Status_v_1_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_Control_v_1_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Structs\TcoIrc5_State_v_1_x_x.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartAtMainTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMotorsAndProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMotorsProgramAndMovementsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMotorsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartMovementsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Starts\StartProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopMotorsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopMovementsAndProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopMovementsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\Tasks\Stops\StopProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\Prototypes\IRC5\TcoIrc5_v_1_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Omnicore\IO\TcoOmnicore_Inputs_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Omnicore\IO\TcoOmnicore_IO_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Omnicore\IO\TcoOmnicore_Outputs_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Omnicore\TcoOmnicore_v_1_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartAtMainTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMotorsAndProgramTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMotorsProgramAndMovementsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMotorsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMovementsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartProgramTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopMotorsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopMovementsAndProgramTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopMovementsTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopProgramTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\RoboticsTasks\TcoAbbRoboticsTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -102,12 +117,13 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Conversions" />
     <Folder Include="POUs\Prototypes\IRC5\IO" />
-    <Folder Include="POUs\Prototypes\IRC5\Tasks" />
     <Folder Include="POUs\Prototypes" />
     <Folder Include="POUs\Prototypes\IRC5" />
-    <Folder Include="POUs\Prototypes\IRC5\Structs" />
-    <Folder Include="POUs\Prototypes\IRC5\Tasks\Stops" />
-    <Folder Include="POUs\Prototypes\IRC5\Tasks\Starts" />
+    <Folder Include="POUs\Prototypes\Omnicore" />
+    <Folder Include="POUs\Prototypes\Omnicore\IO" />
+    <Folder Include="POUs\Prototypes\RoboticsTasks" />
+    <Folder Include="POUs\Prototypes\RoboticsTasks\Starts" />
+    <Folder Include="POUs\Prototypes\RoboticsTasks\Stops" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -140,6 +156,10 @@
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoIo">
+      <DefaultResolution>TcoIo, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoIo</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="TcoUtilities">
       <DefaultResolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoUtilities</Namespace>
@@ -156,6 +176,9 @@
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoIo">
+      <Resolution>TcoIo, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoUtilities">
       <Resolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</Resolution>

@@ -3,7 +3,7 @@
   <POU Name="MAIN" Id="{20e36e6a-1247-05bf-1677-012e31b12f3e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-    _tcoIrc5TestContext : TcoSimpleTestContext;
+    _tcoIrc5TestContext : TcoTestContext;
 
     _wpfContext : WpfContext;
     _wpfContextCall : BOOL := FALSE;

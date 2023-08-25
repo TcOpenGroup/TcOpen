@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <DUT Name="TcoIrc5_Config_v_1_x_x" Id="{09ee823c-827d-09a2-0957-86358139fdb8}">
+  <DUT Name="TcoAbbRobotics_Config_v_1_x_x" Id="{09ee823c-827d-09a2-0957-86358139fdb8}">
     <Declaration><![CDATA[TYPE
-    TcoIrc5_Config_v_1_x_x :
+    TcoAbbRobotics_Config_v_1_x_x :
     STRUCT
         InfoTime : TIME := T#2S;
-        ErrorTime : TIME := T#5S;
+        ErrorTime : TIME := T#0S;
 		IpAddress : STRING;
     END_STRUCT
 END_TYPE

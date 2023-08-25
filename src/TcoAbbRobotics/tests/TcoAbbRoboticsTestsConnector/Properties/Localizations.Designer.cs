@@ -68,5 +68,14 @@ namespace TcoAbbRoboticsTestsConnector.Properties {
                 return ResourceManager.GetString("___Abb_IRC_5__", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abb Omnicore.
+        /// </summary>
+        public static string ___Abb_Omnicore__ {
+            get {
+                return ResourceManager.GetString("___Abb_Omnicore__", resourceCulture);
+            }
+        }
     }
 }

@@ -1,31 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="StartMotorsAndProgramTask" Id="{342f1f3f-14e5-0206-1a0e-8d3dc471a65a}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsAndProgramTask EXTENDS TcoCore.TcoTask 
+    <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsAndProgramTask EXTENDS TcoAbbRoboticsTask
 
-VAR
-    {attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-	{attribute 'hide'} 
-	_timer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-	_programRunning: BOOL;
-	{attribute 'hide'}
-	_blink:TcoUtilities.TcoBlinker(THIS^);
-END_VAR
 
-VAR_IN_OUT
-    inoConfig 	: TcoIrc5_Config_v_1_x_x;
-	inoControl 	: TcoIrc5_Control_v_1_x_x;
-	inoStatus 	: TcoIrc5_Status_v_1_x_x;	
-END_VAR]]></Declaration>
+
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 
@@ -51,7 +31,8 @@ IF Execute() THEN
 	END_IF
 	IF _progress = 1 THEN
 	
-		_programRunning := FALSE;
+		_varInfo :=__VARINFO( inoStatus.State.AutoOn);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoOn).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
 		Messenger.Warning('<#Robot is not in Auto#>');
 		IF  inoStatus.State.AutoOn THEN
 			_progress := _progress + 1;
@@ -97,21 +78,12 @@ IF Execute() THEN
 	
 	THIS^.ThrowWhen(_errorTimer.Q);
 	
+END_IF
+
+IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
+	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="CallTimers" Id="{3dcea56e-bbe6-03f8-38bd-38cd5eeeaf3e}">
-      <Declaration><![CDATA[METHOD CallTimers
-VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) THEN  
-_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
-END_IF;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="FB_init" Id="{4e2a99be-fa2c-098d-228c-698e5da90eda}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
@@ -155,10 +127,14 @@ _progress:=0;]]></ST>
     </Method>
     <Method Name="OnError" Id="{c37e298c-792d-0733-0dca-3c466c4fb480}">
       <Declaration><![CDATA[METHOD PROTECTED OnError
-]]></Declaration>
+
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors and program finished with error.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[description := '<#Start motors and program finished with error.#>'; 
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{deef449b-964f-0742-165c-7f41dfe257c7}">
@@ -183,11 +159,7 @@ CallTimers(FALSE);
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_timer(In:=FALSE);
-SUPER^.Restore();
-_progress := 0;
-CallTimers(FALSE);
-Messenger.UnPin();]]></ST>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
   </POU>

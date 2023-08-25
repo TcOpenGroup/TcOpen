@@ -13,15 +13,26 @@
 
     <Grid>
         <TabControl>
-            <TabItem Header="Drives">
+            <TabItem Header="Robots">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
+                        <!--<RowDefinition/>-->
+
                     </Grid.RowDefinitions>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
-                </Grid>
+                    <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>-->
+             
+                </Grid>     
             </TabItem>
-       
+            <TabItem Header="SequenceTest">
+                <StackPanel Orientation="Vertical">
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1Task}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
+
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Diagnostic">
                 <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext }" PresentationType="Diagnostics"/>
 

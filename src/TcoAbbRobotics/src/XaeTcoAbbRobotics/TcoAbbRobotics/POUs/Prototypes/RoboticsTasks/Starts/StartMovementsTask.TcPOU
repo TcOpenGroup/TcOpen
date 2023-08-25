@@ -1,31 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="StartMovementsTask" Id="{b0107c4e-94ac-05bc-2132-5510701a53d6}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK StartMovementsTask EXTENDS TcoCore.TcoTask
+    <Declaration><![CDATA[FUNCTION_BLOCK StartMovementsTask  EXTENDS TcoAbbRoboticsTask
 VAR
      _moveParams:TcoAbstractions.TcoRoboticsMovementsParams;
 	 
 	 
 END_VAR
-VAR
-	_startMotorsAndProgramTask: REFERENCE TO StartMotorsAndProgramTask;
-    {attribute 'hide'}    
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-END_VAR
-
-VAR_IN_OUT
-    inoConfig 	: TcoIrc5_Config_v_1_x_x;
-	inoControl 	: TcoIrc5_Control_v_1_x_x;
-	inoStatus 	: TcoIrc5_Status_v_1_x_x;	
-END_VAR]]></Declaration>
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 IF Execute() THEN
@@ -46,6 +28,16 @@ IF Execute() THEN
 	END_IF
 	
 	IF _progress = 1 THEN
+		
+		_varInfo :=__VARINFO( inoStatus.State.CycleOn);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.CycleOn).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
+		
+		_varInfo :=__VARINFO( inoStatus.State.MotorOnState);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MotorOnState).Warning(_sb.Clear().Append('<#Waiting for motors are On! #>').Append(_varInfo.Symbol).ToString());	
+		
+		_varInfo :=__VARINFO( inoStatus.State.Error);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND inoStatus.State.Error).Warning(_sb.Clear().Append('<#Waiting for system is without errors! #>').Append(_varInfo.Symbol).ToString());
+		
 		IF inoStatus.State.CycleOn AND inoStatus.State.MotorOnState AND NOT inoStatus.State.Error THEN 
 			_progress := _progress + 1;
 		END_IF
@@ -64,7 +56,7 @@ IF Execute() THEN
 	
 		inoControl.ActionNo := 254;
 		IF inoControl.ActionNo = inoStatus.State.ActionNo THEN
-			inoControl.ActionNo := 255;
+			
 			_progress:=_progress + 1;
 		END_IF
 	END_IF;	
@@ -76,18 +68,13 @@ IF Execute() THEN
 			inoStatus.State.UserSpecSpeed1 = _moveParams.UserSpecSpeed1 AND
 			inoStatus.State.UserSpecSpeed2 =_moveParams.UserSpecSpeed2 AND
 			TcoAbstractions.CoordinatesAreEqual(inoStatus.State.Coordinates,_moveParams.Coordinates,0.01,0.01,0.01,0.01,0.01,0.01) THEN
+			inoControl.ActionNo := 255;
 			_progress:=_progress + 1;
 		END_IF
 	END_IF;	
 	
 	IF _progress = 4 THEN
-		IF 	inoStatus.State.GlobalSpeed = _moveParams.GlobalSpeed AND
-			inoStatus.State.ToolNo = _moveParams.ToolNo AND
-			inoStatus.State.WorkobjectNo = _moveParams.WorkobjectNo AND
-			inoStatus.State.PointNo = _moveParams.PointNo AND
-			inoStatus.State.UserSpecSpeed1 = _moveParams.UserSpecSpeed1 AND
-			inoStatus.State.UserSpecSpeed2 =_moveParams.UserSpecSpeed2 AND
-			TcoAbstractions.CoordinatesAreEqual(inoStatus.State.Coordinates,_moveParams.Coordinates,0.01,0.01,0.01,0.01,0.01,0.01) THEN
+		IF inoControl.ActionNo = inoStatus.State.ActionNo THEN
 			_progress:=_progress + 1;
 		END_IF
 	END_IF;	
@@ -114,21 +101,11 @@ IF Execute() THEN
 	
 	THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
-]]></ST>
+
+IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
+	THIS^.Restore();
+END_IF]]></ST>
     </Implementation>
-    <Method Name="CallTimers" Id="{ace12c70-035c-0941-1c50-b102ce87d9f6}">
-      <Declaration><![CDATA[METHOD CallTimers
-VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) THEN  
-_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
-END_IF;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="FB_init" Id="{d11b264b-6e98-0702-010b-458a7f68f1e5}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
@@ -185,17 +162,18 @@ _progress:=0;]]></ST>
 	<docu>
 		<summary>
 			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
+		
 		</summary>			
 	</docu>	
 ~*)
 METHOD PROTECTED OnError
-]]></Declaration>
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start movements finished with error.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[description := '<#Start movements finished with error.#>'; 
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{b6df76ed-4805-0c8a-3f4d-ad2c54651047}">
@@ -221,10 +199,7 @@ inoControl.SoftStop:=FALSE;]]></ST>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Restore();
-_progress := 0;
-CallTimers(FALSE);
-Messenger.UnPin();]]></ST>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
   </POU>

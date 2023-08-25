@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoAbbRoboticsTask" Id="{68c9f673-fffe-0fd7-2cab-2a2369eff9ff}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoAbbRoboticsTask EXTENDS TcoCore.TcoTask 
+VAR_IN_OUT
+    inoConfig 	: TcoAbbRobotics_Config_v_1_x_x;
+	inoControl 	: TcoAbbRobotics_Control_v_1_x_x;
+	inoStatus 	: TcoAbbRobotics_Status_v_1_x_x;	
+END_VAR
+VAR
+	_errorMessage:TcoCore.TcoMessenger(THIS^);
+    {attribute 'hide'} 
+	_progress : INT := 0;
+    {attribute 'hide'} 
+	_infoTimer :  TON;
+    {attribute 'hide'} 
+	_errorTimer :  TON;
+	{attribute 'hide'} 
+	_timer :  TON;
+    {attribute 'hide'} 
+	_varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'} 
+	_sb : TcoCore.StringBuilder;
+	{attribute 'hide'}
+	_blink:TcoUtilities.TcoBlinker(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CallTimers" Id="{f6e84ee4-75fc-06b0-24ef-0f736456b054}">
+      <Declaration><![CDATA[METHOD CallTimers
+VAR_INPUT
+	inValue : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.ErrorTime <> T#0S THEN  
+_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+END_IF;
+IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.InfoTime <>T#0S THEN  
+_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{87ac91d7-2fef-0a6f-3b38-22bc26af2047}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_progress := 0;
+_timer(In:=FALSE);
+CallTimers(FALSE);
+Messenger.UnPin();
+_errorMessage.UnPin();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

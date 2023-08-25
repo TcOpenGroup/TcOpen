@@ -20,7 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />    
+    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\TcoRexrothPress.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\..\README.md" IncludeInPackage="true" Pack="true" PackagePath="\" CopyToOutputDirectory="PreserveNewest" />    
     <Content Include="..\..\assets\**" Pack="true" PackagePath="assets" Link="assets\%(RecursiveDir)\%(Filename)%(Extension)" TargetPath="assets\%(RecursiveDir)\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
