@@ -19,6 +19,15 @@ STRUCT
 ~*)
 	{attribute clr [ReadOnly()]}
 	TimeStamp : DT;
+	(*~
+	<docu>
+		<summary>
+			Time when the message was acknowledged.
+		</summary>				
+	</docu>	
+~*)
+	{attribute clr [ReadOnly()]}
+	TimeStampAcknowledged : DT;
 (*~
 	<docu>
 		<summary>
@@ -37,7 +46,7 @@ STRUCT
 ~*)
 	{attribute clr [ReadOnly()]}	
 	Identity : ULINT;	
-(*~
+(*
 	<docu>
 		<summary>
 			Message category of this message. See <see cref="TcoCore.eMessageCategory"/> for detailed informations. 

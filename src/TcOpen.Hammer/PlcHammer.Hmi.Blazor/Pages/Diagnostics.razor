@@ -3,6 +3,8 @@
 <RenderableContentControl Context="@Entry.PlcHammer.TECH_MAIN._app"
                           Presentation="Diagnostics" />
 
+<RenderableContentControl Context="@Entry.PlcHammer.TECH_MAIN._app"
+                          Presentation="DiagnosticsExt" />
 
 @code {
 
@@ -10,7 +12,7 @@
     {
         TcoDiagnosticsViewModel.SetDefaultCategory(eMessageCategory.Trace);
         TcoDiagnosticsView.SetDefaultDepth(7);
-        TcoDiagnosticsView.SetDiagnosticsUpdateInterval(2500);
+        TcoDiagnosticsView.SetDiagnosticsUpdateInterval(500);
         base.OnInitialized();
     }
 }
