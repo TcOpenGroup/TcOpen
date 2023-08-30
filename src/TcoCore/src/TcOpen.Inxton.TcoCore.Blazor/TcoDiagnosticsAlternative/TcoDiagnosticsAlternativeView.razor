@@ -5,7 +5,8 @@
 <h1>Alternative Tco Diagnostics View</h1>
 
 <div>
-    <button @onclick="() => ViewModel.UpdateMessagesCommand.Execute(null)">Fetch Messages</button>
+
+     <button @onclick="() => ViewModel.AcknowledgeAllMessages()">Acknowledge All Messages</button> <!-- New Button -->
 </div>
 
 @if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
@@ -30,7 +31,7 @@
             {
                 <tr>
                     <td>@message.TimeStamp</td>
-                    <td>@(message.TimeStampAcknowledged == new DateTime(1970, 1, 1, 0, 0, 0) ? "" : message.TimeStampAcknowledged.ToString())</td>
+                    <td>@(message.TimeStampAcknowledged < new DateTime(1970, 1, 1, 0, 0, 0) ? "" : message.TimeStampAcknowledged.ToString())</td>
                     <td>@message.Text</td>
                     <td>@message.Identity</td>
                     <td>@message.CategoryAsEnum</td>

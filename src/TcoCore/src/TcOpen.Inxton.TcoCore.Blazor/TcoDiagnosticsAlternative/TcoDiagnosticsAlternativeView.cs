@@ -26,16 +26,17 @@ namespace TcoCore
         }
 
 
-        private static int _diagnosticsUpdateInterval { get; set; } = 500;
+        private static int _diagnosticsUpdateInterval { get; set; } = 100;
         private Timer messageUpdateTimer;
 
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             await InvokeAsync(() =>
             {
-                ViewModel.UpdateMessages();
+                ViewModel.UpdateAndFetchMessages();
                 StateHasChanged(); // Re-render the component
             });
+
         }
 
 
@@ -64,6 +65,7 @@ namespace TcoCore
         {
             ViewModel.UpdateMessages();
         }
+
 
         // Unsubscribe from the event when the component is disposed of
         public void Dispose()

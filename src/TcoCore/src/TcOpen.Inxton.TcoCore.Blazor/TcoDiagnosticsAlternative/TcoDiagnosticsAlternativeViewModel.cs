@@ -87,6 +87,8 @@ namespace TcoCore
 
         internal void UpdateMessages()
         {
+            isBusyLogging = true;
+
             if (DiagnosticsRunning)
             {
                 return;
@@ -106,12 +108,12 @@ namespace TcoCore
 
                 foreach (var message in MessageDisplay)
                 {
-                    if (!_logger.MessageExistsInDatabase(message.Identity, message.TimeStamp))
+                    if (!_logger.MessageExistsInDatabase(message.Identity, message.TimeStamp) || !isBusyLogging)
                     {
                         _logger.LogMessage(message);
                     }
                 }
-
+                isBusyLogging = false;
                 DiagnosticsRunning = false;
             }
         }
@@ -120,9 +122,10 @@ namespace TcoCore
         {
             foreach (var message in MessageDisplay)
             {
-                if (message.TimeStampAcknowledged == new DateTime(1970, 1, 1, 0, 0, 0)) // Or whatever condition you use to check if a message is not acknowledged
+                DateTime currentDateTime = DateTime.Now;
+                if (message.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0)) // Or whatever condition you use to check if a message is not acknowledged
                 {
-                    _logger.UpdateMessage(message.Identity, message.TimeStamp, DateTime.UtcNow);
+                    _logger.UpdateMessage(message.Identity, message.TimeStamp, currentDateTime);
                     RefreshMessageDisplay();
                 }
             }
@@ -155,14 +158,17 @@ namespace TcoCore
 
         }
 
-
         public void FetchMessagesFromDb()
         {
-            
-                var latestMessages = _logger.ReadMessages(); // Assuming _logger is an instance of MongoLogger
-            
+            var latestMessages = _logger.ReadMessages(); // Assuming _logger is an instance of MongoLogger
+            MessageDisplay = latestMessages; // Update the MessageDisplay
         }
 
+        public void UpdateAndFetchMessages()
+        {
+            UpdateMessages();
+            FetchMessagesFromDb();
+        }
 
     }
 

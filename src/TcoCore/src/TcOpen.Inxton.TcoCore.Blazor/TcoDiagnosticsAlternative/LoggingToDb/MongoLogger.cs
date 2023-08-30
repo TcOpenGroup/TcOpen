@@ -52,7 +52,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp))
             );
 
-            var update = Builders<BsonDocument>.Update.Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged));
+            var update = Builders<BsonDocument>.Update.Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(1)));
 
             _collection.UpdateOne(filter, update);
         }

@@ -10,5 +10,4 @@ db.createUser({
     ],
 });
 
-// Additional initialization commands if needed
-ata:
+
