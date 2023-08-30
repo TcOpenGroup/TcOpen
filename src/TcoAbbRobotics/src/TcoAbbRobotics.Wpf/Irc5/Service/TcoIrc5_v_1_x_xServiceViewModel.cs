@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using RelayCommand = TcOpen.Inxton.Input.RelayCommand;
 
 
 namespace TcoAbbRobotics
 {
-    public class TcoIrc5_v_1_x_xServiceViewModel : TcoAbbRoboticsBaseServiceViewModel<TcoAbbRobotics>
+    public class TcoIrc5_v_1_x_xServiceViewModel : TcoAbbRoboticsBaseServiceViewModel<TcoIrc5_v_1_x_x>
     {
 
         public TcoIrc5_v_1_x_xServiceViewModel():base()

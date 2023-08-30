@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using RelayCommand = TcOpen.Inxton.Input.RelayCommand;
 
 
 namespace TcoAbbRobotics
