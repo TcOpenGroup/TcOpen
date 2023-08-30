@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoSmartFunctionKit_v_4_x_x" Id="{1cad81cc-b410-0eea-0591-9e151b6f9de3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSmartFunctionKit_v_4_x_x  EXTENDS TcoIo.TcoEcatComponent 
 VAR_IN_OUT
@@ -169,7 +169,7 @@ tmpDWORD := tmpDWORD + b3;
 _BYTES_TO_DWORD := tmpDWORD;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Config" Id="{d097aa82-3255-4848-8d04-863bfbd6ce53}">
+    <Property Name="Config" Id="{49e8733c-e2ba-0aa1-32b1-1bce0d151205}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -178,7 +178,7 @@ _BYTES_TO_DWORD := tmpDWORD;]]></ST>
 	</docu>	
 ~*)
 PROPERTY Config : REFERENCE TO TcoSmartFunctionKitConfig_v_4_x_x]]></Declaration>
-      <Get Name="Get" Id="{f0a60fa8-c67f-4d62-a6b9-546c59aac019}">
+      <Get Name="Get" Id="{ac49cd93-ddbf-0b34-1874-52ffa6bfa055}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Config REF= _config;]]></ST>
@@ -363,7 +363,7 @@ METHOD PROTECTED ServiceMode]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Status" Id="{9f04587f-2cd5-4ce7-965a-55ffcb50b2dd}">
+    <Property Name="Status" Id="{85f42b91-6b82-0ac9-0cea-ffbe7045ea67}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -372,7 +372,7 @@ METHOD PROTECTED ServiceMode]]></Declaration>
 	</docu>	
 ~*)
 PROPERTY Status : REFERENCE TO TcoSmartFunctionKitStatus_v_4_x_x]]></Declaration>
-      <Get Name="Get" Id="{a5b8a1d1-9db9-4d07-bddd-cbac49d95ee9}">
+      <Get Name="Get" Id="{0bb0960e-23b5-0273-3e9c-cf3330a1b11f}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Status REF= _status;]]></ST>
@@ -425,5 +425,60 @@ _status.DigitalIoMapping:=inoIoData.Response.DigitalIoMapping;
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x">
+      <LineId Id="3" Count="71" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x._BYTES_TO_DWORD">
+      <LineId Id="3" Count="19" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.Config.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.ExportLastCurve">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.ExportLastCurveTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.FB_init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.GetResults">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.GetResultsTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.InvalidReference">
+      <LineId Id="3" Count="5" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.Request.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.Restore">
+      <LineId Id="3" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.RunCommand">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.RunCommandTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.ServiceMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.Status.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcoSmartFunctionKit_v_4_x_x.UpdateResponses">
+      <LineId Id="3" Count="35" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

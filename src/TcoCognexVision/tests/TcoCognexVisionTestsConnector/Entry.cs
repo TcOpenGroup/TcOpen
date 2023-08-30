@@ -8,9 +8,9 @@ namespace TcoCognexVisionTests
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 852;
 
-        //public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
-        //    = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
         public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
-            = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create("172.20.10.104.1.1", TargetAmsPort, true));
+            = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        //public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
+        //    = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create("172.20.10.104.1.1", TargetAmsPort, true));
     }
 }
