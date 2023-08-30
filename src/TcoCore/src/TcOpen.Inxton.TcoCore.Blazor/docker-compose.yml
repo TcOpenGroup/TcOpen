@@ -1,45 +1,34 @@
 ﻿version: "3.8"
-
 services:
-  mongodb:
-    image: mongo:4.4.12
+  mongo:
+    image: mongo:5.0
     container_name: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: 1234
-      MONGO_INITDB_DATABASE: admin
-    networks:
-      - mongo-compose-network
-    # Remove the command with --exec
-    ports:
-      - 27017:27017
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=1234
     restart: unless-stopped
+    ports:
+      - "27017:27017"
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
       interval: 30s
       timeout: 10s
       retries: 3
-    volumes:
-      # Mount the init script into the container
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
 
   mongo-express:
     image: mongo-express
-    container_name: mongo-express
-    restart: always
+    container_name: mexpress
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 1234
-      ME_CONFIG_MONGODB_SERVER: mongodb
-      ME_CONFIG_MONGODB_URL: mongodb://admin:1234@mongodb:27017/
-    networks:
-      - mongo-compose-network
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=1234
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:1234@mongo:27017/?authSource=admin
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=1234
+    links:
+      - mongo
+    restart: unless-stopped
     ports:
-      - 8081:8081
+      - "8081:8081"
     depends_on:
-      mongodb:
+      mongo:
         condition: service_healthy
-
-networks:
-  mongo-compose-network:
-    driver: bridge
