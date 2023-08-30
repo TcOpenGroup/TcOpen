@@ -30,7 +30,7 @@
             {
                 <tr>
                     <td>@message.TimeStamp</td>
-                    <td>@message.TimeStampAcknowledged</td>
+                    <td>@(message.TimeStampAcknowledged == new DateTime(1970, 1, 1, 0, 0, 0) ? "" : message.TimeStampAcknowledged.ToString())</td>
                     <td>@message.Text</td>
                     <td>@message.Identity</td>
                     <td>@message.CategoryAsEnum</td>

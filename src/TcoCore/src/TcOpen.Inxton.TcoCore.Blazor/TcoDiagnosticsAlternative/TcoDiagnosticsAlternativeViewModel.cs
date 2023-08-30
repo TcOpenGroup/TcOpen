@@ -83,6 +83,8 @@ namespace TcoCore
 
         private volatile object updatemutex = new object();
 
+        private bool isBusyLogging = false;
+
         internal void UpdateMessages()
         {
             if (DiagnosticsRunning)
@@ -92,30 +94,46 @@ namespace TcoCore
 
             lock (updatemutex)
             {
-
                 DiagnosticsRunning = true;
 
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                                             .OrderByDescending(p => p.Category)
-                                             .OrderBy(p => p.TimeStamp);
-
-
+                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages()
+                        .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                        .OrderByDescending(p => p.Category)
+                        .OrderBy(p => p.TimeStamp);
                 }).Wait();
 
                 foreach (var message in MessageDisplay)
                 {
-                    if (_logger != null)
+                    if (!_logger.MessageExistsInDatabase(message.Identity, message.TimeStamp))
                     {
-                    _logger.LogMessage(message);
+                        _logger.LogMessage(message);
                     }
                 }
 
                 DiagnosticsRunning = false;
-
             }
         }
+
+        public void AcknowledgeAllMessages()
+        {
+            foreach (var message in MessageDisplay)
+            {
+                if (message.TimeStampAcknowledged == new DateTime(1970, 1, 1, 0, 0, 0)) // Or whatever condition you use to check if a message is not acknowledged
+                {
+                    _logger.UpdateMessage(message.Identity, message.TimeStamp, DateTime.UtcNow);
+                    RefreshMessageDisplay();
+                }
+            }
+        }
+
+        public void RefreshMessageDisplay()
+        {
+            MessageDisplay = _logger.ReadMessages();
+        }
+
+
 
         public List<PlainTcoMessage> Messages { get; private set; } = new List<PlainTcoMessage>();
 
@@ -136,6 +154,16 @@ namespace TcoCore
             }
 
         }
+
+
+        public void FetchMessagesFromDb()
+        {
+            
+                var latestMessages = _logger.ReadMessages(); // Assuming _logger is an instance of MongoLogger
+            
+        }
+
+
     }
 
 }
