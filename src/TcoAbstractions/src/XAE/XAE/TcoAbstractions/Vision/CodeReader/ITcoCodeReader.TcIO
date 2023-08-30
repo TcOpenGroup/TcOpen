@@ -4,12 +4,12 @@
     <Declaration><![CDATA[INTERFACE ITcoCodeReader EXTENDS __System.IQueryInterface
 ]]></Declaration>
     <Folder Name="Operations" Id="{4433432c-54c1-0b18-0651-81d20a55bbd9}" />
-    <Method Name="StartAtMain" Id="{e6ef27be-4d76-0c9a-1cb7-1307326132ec}" FolderPath="Operations\">
-      <Declaration><![CDATA[METHOD StartAtMain : TcoCore.ITcoTaskStatus
+    <Method Name="ClearResultData" Id="{23f2deee-5a76-0f14-3707-2f268c2db54c}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD ClearResultData : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
-    <Method Name="StartMovements" Id="{3b5fd205-da52-04d1-30cf-1c3c24bc0135}" FolderPath="Operations\">
-      <Declaration><![CDATA[METHOD StartMovements : TcoCore.ITcoTaskStatus
+    <Method Name="Read" Id="{0654e8a4-a19a-02cf-0ca4-d5d15020cc7d}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD Read : TcoCore.ITcoTaskStatus
 ]]></Declaration>
     </Method>
   </Itf>
