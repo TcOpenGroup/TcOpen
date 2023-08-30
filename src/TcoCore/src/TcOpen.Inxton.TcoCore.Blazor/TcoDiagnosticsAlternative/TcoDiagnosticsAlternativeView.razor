@@ -1,0 +1,53 @@
+﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsAlternativeViewModel>
+@using Blazm.Components
+@namespace TcoCore
+
+<h1>Alternative Tco Diagnostics View</h1>
+
+<div>
+    <button @onclick="() => ViewModel.UpdateMessagesCommand.Execute(null)">Fetch Messages</button>
+</div>
+
+@if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Timestamp Acknowledged</th>
+                <th>Text</th>
+                <th>Identity</th>
+                <th>Category</th>
+                <th>Cycle</th>
+                <th>PFad</th>
+                <th>Expect Dequeing</th>
+                <th>Pinned</th>
+                <th>Message Digest</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in ViewModel.MessageDisplay)
+            {
+                <tr>
+                    <td>@message.TimeStamp</td>
+                    <td>@message.TimeStampAcknowledged</td>
+                    <td>@message.Text</td>
+                    <td>@message.Identity</td>
+                    <td>@message.CategoryAsEnum</td>
+                    <td>@message.Cycle</td>
+                    <td>@message.ParentsObjectSymbol</td>
+                    <td>@message.ExpectDequeing</td>
+                    <td>@message.Pinned</td>
+                    <td>@message.MessageDigest</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No messages found.</p>
+}
+
+
+
