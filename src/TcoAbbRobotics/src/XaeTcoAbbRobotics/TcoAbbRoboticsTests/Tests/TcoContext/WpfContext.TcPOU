@@ -81,7 +81,7 @@ VAR
 	ProbeDoneWhen: INT;
 	_param: TcoRoboticsMovementsParams;
 
-	_operations:eProcessSequence;
+
 END_VAR
 
 VAR_INST
@@ -332,8 +332,6 @@ VAR
 	_velocity: LREAL;
 	ProbeDoneWhen: INT;
 	_param: TcoRoboticsMovementsParams;
-
-	_operations:eProcessSequence;
 END_VAR
 
 VAR_INST
