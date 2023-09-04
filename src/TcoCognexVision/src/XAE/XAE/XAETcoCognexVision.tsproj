@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.44">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{06A8B08A-172A-D3FE-B359-EA3924B01CA5}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..245] OF BYTE</Name>
@@ -542,7 +542,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.110.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="172.20.10.104.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="2" NonWinCpus="1">
 				<Cpu CpuId="1"/>
@@ -561,7 +561,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B057D1C0-C1A0-4E87-8DE3-42F28C9DD315}" Name="TcoCognexVision" PrjFilePath="TcoCognexVision\TcoCognexVision.plcproj" TmcFilePath="TcoCognexVision\TcoCognexVision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{603E60C8-2DFD-E2B4-83E6-40D84C5D99FA}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVision\TcoCognexVision.tmc" TmcHash="{163995FB-042F-F33A-5E67-E4197C0476CA}">
 					<Name>TcoCognexVision Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -581,7 +581,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{64085C74-9FFC-3019-E14C-43E60F1F3BBA}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{BADE86F9-7BFF-0719-4CA4-D1328DD823CB}">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -956,18 +956,15 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.10.110.2.1" RemoteName="Device 1 (Profinet Controller)">
+			<Device Id="1" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
 				<Name>Device 1 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
+				<DevData>000000000000000000000000007102005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="210" SizeOut="233">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="1" BoxType="9121">
 					<Name>myveryfirstdataman</Name>
-					<Comment><![CDATA[
-The GSDML is not available!
-
-GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
+					<Comment><![CDATA[GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
 OrderNumber: DMR-200#-00
@@ -1382,10 +1379,7 @@ Submodule Info: Reads 64 bytes from DataMan
 				</Box>
 				<Box Id="2" BoxType="9121">
 					<Name>myveryfirstinsight</Name>
-					<Comment><![CDATA[
-The GSDML is not available!
-
-GSDML Name: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+					<Comment><![CDATA[GSDML Name: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
 OrderNumber: IS85XXP
@@ -1845,6 +1839,7 @@ Submodule Info: Reads 128 bytes from In-Sight spreadsheet
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^TcoCognexVisionTests^TcoCognexVisionTests Instance">
 			<OwnerB Name="TIID^Device 1 (Profinet Controller)^myveryfirstdataman">
 				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.Acquiring" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquiring"/>

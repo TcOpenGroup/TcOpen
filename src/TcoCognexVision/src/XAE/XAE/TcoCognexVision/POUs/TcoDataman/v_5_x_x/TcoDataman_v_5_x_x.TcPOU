@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoDataman_v_5_x_x" Id="{acfa500c-75b0-406d-8872-dce797f24ef6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
 VAR_IN_OUT
@@ -463,70 +463,5 @@ _status.SignalStatus.ResultLength  			:= 	inoIoData.ResultData.ResultLength;
 _updateSignalStatesTask.DoneWhen(TRUE);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcoDataman_v_5_x_x">
-      <LineId Id="3" Count="44" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.ClearResultData">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.ClearResultDataTask.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.Config.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.ContinuousReading">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.FB_init">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.GetResultAsByte">
-      <LineId Id="3" Count="16" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.GetResultAsDint">
-      <LineId Id="3" Count="20" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.GetResultAsReal">
-      <LineId Id="3" Count="20" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.GetResultAsString">
-      <LineId Id="3" Count="27" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.InvalidReference">
-      <LineId Id="3" Count="5" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.LastResultData.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.Read">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.ReadTask.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.Restore">
-      <LineId Id="3" Count="18" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.ServiceMode">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.Status.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcoDataman_v_5_x_x.UpdateSignalStates">
-      <LineId Id="3" Count="22" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
