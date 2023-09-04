@@ -152,14 +152,16 @@ IF _someTaskIsActive THEN
 	IF(_status.State.EmgStop) THEN
 		Messenger.Error('<#Emergency stop active#>');
 	END_IF;
-	
+	IF(NOT _status.State.SafetyOk) THEN
+		Messenger.Warning('<#Safety Error #>');
+	END_IF;
 	IF(_status.State.ProgExecError) THEN
 		Messenger.Error('<#Program execution error see robot panel for details#>');
 	END_IF;
   
 END_IF;
 
-IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.ErrorId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
+IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
 
 
 UpdateControl();]]></ST>
@@ -248,6 +250,7 @@ _startAtMainTask.Restore();
 _startMovementsTask.Restore();
 _startProgramTask.Restore();
 _startMotorsTask.Restore();
+_stopMotorsTask.Restore();
 _startMotorsProgramAndMovementsTask.Restore();
 _stopMovementsTask.Restore();
 _startMotorsAndProgramTask.Restore();
@@ -730,6 +733,13 @@ _bytes:=TcoUtilities.TcoBytesToDint (inFormat:=TcoUtilities.eTcoDataFormat.Littl
 															inByte3:= inoData.In.Inputs[index+3]);
 
 _status.State.Coordinates.Rz:=(DINT_TO_REAL(_bytes)/10000.0)-360.0;
+
+index:=44;
+_status.State.EventId:=TcoUtilities.TcoBytesToUDint (inFormat:=TcoUtilities.eTcoDataFormat.LittleEndian,
+															inByte0:= inoData.In.Inputs[index],
+															inByte1:= inoData.In.Inputs[index+1],
+															inByte2:= inoData.In.Inputs[index+2],
+															inByte3:= inoData.In.Inputs[index+3]);
 
 ]]></ST>
       </Implementation>

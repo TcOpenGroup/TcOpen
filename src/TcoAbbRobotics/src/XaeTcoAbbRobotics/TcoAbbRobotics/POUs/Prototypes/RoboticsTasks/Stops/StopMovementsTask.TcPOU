@@ -40,7 +40,11 @@ IF Execute() THEN
 			inoControl.QuickStop := FALSE;
 		END_IF
 	END_IF;
+			
+	_varInfo :=__VARINFO( inoStatus.State.MoveInactive);                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 	
+
     DoneWhen(inoStatus.State.MoveInactive);
     CallTimers(TRUE);
 	

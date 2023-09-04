@@ -43,10 +43,10 @@ IF Execute() THEN
 	
 	
 
-    DoneWhen(inoStatus.State.CycleOn AND NOT inoStatus.State.SystemInputBusy);
+    DoneWhen(inoStatus.State.CycleOn AND NOT inoStatus.State.Error);
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q);
+	THIS^.ThrowWhen(_errorTimer.Q OR inoStatus.State.Error);
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN

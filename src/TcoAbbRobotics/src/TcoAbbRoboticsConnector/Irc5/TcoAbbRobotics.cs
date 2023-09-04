@@ -36,8 +36,8 @@ namespace TcoAbbRobotics
                 uint errorCode;
 
                 UInt32.TryParse(numberFromString, out errorCode);
-                if (ControllerErrors.Errors.ContainsKey(errorCode))
-                    additionalInfo = ControllerErrors.Errors.Where(key => key.Key == errorCode).FirstOrDefault().Value;
+                if (ControlerEvents.Ids.ContainsKey(errorCode))
+                    additionalInfo = ControlerEvents.Ids.Where(key => key.Key == errorCode).FirstOrDefault().Value;
             
 
                 return additionalInfo;
@@ -72,8 +72,8 @@ namespace TcoAbbRobotics
                 uint errorCode;
 
                 UInt32.TryParse(numberFromString, out errorCode);
-                if (ControllerErrors.Errors.ContainsKey(errorCode))
-                    additionalInfo = ControllerErrors.Errors.Where(key => key.Key == errorCode).FirstOrDefault().Value;
+                if (ControlerEvents.Ids.ContainsKey(errorCode))
+                    additionalInfo = ControlerEvents.Ids.Where(key => key.Key == errorCode).FirstOrDefault().Value;
 
 
                 return additionalInfo;
@@ -82,14 +82,15 @@ namespace TcoAbbRobotics
         }
     }
 
-    public static class ControllerErrors
+    public static class ControlerEvents
     {
-        public static IDictionary<uint, string> Errors = new Dictionary<uint, string>()
+        public static IDictionary<uint, string> Ids = new Dictionary<uint, string>()
         {
             {0, "" },
-            {16384, @"'Internal error' Internal system error in the NC on ring 0, no further details."}
+            {90205, @"Auto stop."},
+            {50204, @"Colision detected."}
 
-            //todo errors fro irc5 controller
+            //todo errors from  controller waiting for list
         };
           
 

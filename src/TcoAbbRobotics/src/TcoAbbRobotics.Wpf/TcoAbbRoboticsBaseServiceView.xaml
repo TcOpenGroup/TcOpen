@@ -26,6 +26,7 @@
                     <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
                     </Style>
+   
                 </WrapPanel.Resources>
 
                 <WrapPanel  DataContext="{Binding _status.State.MotorOffState}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
@@ -58,7 +59,7 @@
                 </WrapPanel>
                 <WrapPanel  Visibility="{Binding _status.State.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding _status.State.ErrorId.Cyclic}" Foreground="{StaticResource Errors}"    Visibility="{Binding _status.State.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}"/>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding _status.State.EventId.Cyclic}" Foreground="{StaticResource Errors}"    Visibility="{Binding _status.State.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}"/>
                 </WrapPanel>
 
                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _restoreTask }" PresentationType="Base" />
@@ -70,6 +71,15 @@
         <vortex:TcoComponentView.ComponentDetails>
             <ScrollViewer MaxHeight="600" HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}" >
                 <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
+                            <Setter Property="Margin" Value="5,0,0,5"></Setter>
+                        </Style>
+                        <Style TargetType="WrapPanel">
+                            <Setter Property="MinWidth" Value="300"></Setter>
+
+                        </Style>
+                    </Grid.Resources>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -83,8 +93,8 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
                               <TextBlock  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding _status.State.Error.Cyclic ,Converter={vortex:BooleanToVisibilityConverter }}"
-                                Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _status.State.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
-
+                                Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _status.State.EventId.Cyclic, Converter={local:EventIdToDescriptionConverter}}"></TextBlock>
+                    
                     </StackPanel>
                     <GroupBox Grid.Column="0" Grid.RowSpan="2" Padding="10" Grid.Row="1" DataContext="{Binding _status}"  Header="{Binding AttributeName}">
                         <vortex:RenderableContentControl  DataContext="{Binding }" PresentationType="DisplaySlim"    />
@@ -92,21 +102,9 @@
                     </GroupBox>
 
                     <WrapPanel Grid.Column="1" Grid.Row="1">
-                        <WrapPanel.Resources>
-                            <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
-                                <Setter Property="MinWidth" Value="300"></Setter>
-                                <Setter Property="Margin" Value="5,0,0,5"></Setter>
-
-
-                            </Style>
-                        </WrapPanel.Resources>
-                        <GroupBox Header="{Binding _control.AttributeName}">
-                            <vortex:RenderableContentControl  DataContext="{Binding _control}" PresentationType="ControlSlim" />
-                        </GroupBox>
-                        <GroupBox Header="{Binding _config.AttributeName}">
+                         <GroupBox Header="{Binding _config.AttributeName}">
                             <vortex:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
                         </GroupBox>
-
                         <GroupBox Padding="10"   Header="{Binding _startMotorsAndProgramTask.AttributeName}">
                             <WrapPanel Orientation="Vertical">
 
@@ -126,10 +124,9 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _stopMovementsAndProgramTask}" />
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _stopMovementsAndProgramTask._stopType}"   PresentationType="ControlSlim"/>
 
-
                             </WrapPanel>
                         </GroupBox>
-          
+
                         <GroupBox Padding="10"  DataContext="{Binding _startMovementsTask}" Header="{Binding AttributeName}">
                             <WrapPanel Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
@@ -143,6 +140,13 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _moveParams}" PresentationType="ControlSlim" />
                             </WrapPanel>
                         </GroupBox>
+                        <GroupBox Padding="10" Header="{Binding _control.AttributeName}">
+                            <vortex:RenderableContentControl  DataContext="{Binding _control}" PresentationType="ControlSlim" />
+                        </GroupBox>
+          
+
+                    
+          
 
 
 

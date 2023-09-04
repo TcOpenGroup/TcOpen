@@ -54,7 +54,12 @@ IF Execute() THEN
 		inoControl.StopProgram:=FALSE;
 	END_IF;		
 		
-
+	_varInfo :=__VARINFO( inoStatus.State.MoveInactive);                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MoveInactive).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+	_varInfo :=__VARINFO( inoStatus.State.CycleOn);   
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.CycleOn)
+		.Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
+	
     DoneWhen( inoStatus.State.MoveInactive AND NOT inoStatus.State.CycleOn);
     CallTimers(TRUE);
 	

@@ -61,6 +61,24 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  is OFF .
+        /// </summary>
+        public static string ____is_OFF___ {
+            get {
+                return ResourceManager.GetString("____is_OFF___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Waiting for signal: .
+        /// </summary>
+        public static string ____Waiting_for_signal____ {
+            get {
+                return ResourceManager.GetString("____Waiting_for_signal____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action number.
         /// </summary>
         public static string ___Action_number__ {
@@ -250,11 +268,11 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error ID.
+        ///   Looks up a localized string similar to Event ID.
         /// </summary>
-        public static string ___Error_ID__ {
+        public static string ___Event_ID__ {
             get {
-                return ResourceManager.GetString("___Error_ID__", resourceCulture);
+                return ResourceManager.GetString("___Event_ID__", resourceCulture);
             }
         }
         
@@ -637,20 +655,29 @@ namespace TcoAbbRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Safety chanin OK.
-        /// </summary>
-        public static string ___Safety_chanin_OK__ {
-            get {
-                return ResourceManager.GetString("___Safety_chanin_OK__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Safety circuit open.
         /// </summary>
         public static string ___Safety_circuit_open__ {
             get {
                 return ResourceManager.GetString("___Safety_circuit_open__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safety Error .
+        /// </summary>
+        public static string ___Safety_Error___ {
+            get {
+                return ResourceManager.GetString("___Safety_Error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safety OK.
+        /// </summary>
+        public static string ___Safety_OK__ {
+            get {
+                return ResourceManager.GetString("___Safety_OK__", resourceCulture);
             }
         }
         

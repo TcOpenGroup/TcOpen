@@ -59,10 +59,14 @@ IF Execute() THEN
 		IF inoStatus.State.Error THEN 
 			_progress := 1;
 		END_IF
-		
+		_varInfo :=__VARINFO( inoStatus.State.MotorOnState);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MotorOnState).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+			_varInfo :=__VARINFO( inoStatus.State.Error);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Error).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+	
 		inoControl.MotorOn:=_blink.outQ;	
 		IF inoStatus.State.MotorOnState  AND NOT inoStatus.State.Error THEN
-			 inoControl.MotorOnAndStart:=FALSE;
+			 inoControl.MotorOn:=FALSE;
 			_progress := _progress + 1;
 		END_IF
 	END_IF;		
@@ -73,7 +77,7 @@ IF Execute() THEN
     DoneWhen(inoStatus.State.MotorOnState AND NOT inoStatus.State.Error);
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q);
+	THIS^.ThrowWhen(_errorTimer.Q or inoStatus.State.Error);
 	
 END_IF
 

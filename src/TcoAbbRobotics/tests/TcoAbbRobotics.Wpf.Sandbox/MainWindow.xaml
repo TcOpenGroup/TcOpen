@@ -13,7 +13,7 @@
 
     <Grid>
         <TabControl>
-            <TabItem Header="Robots">
+            <TabItem Header="Robot IRC5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -25,12 +25,24 @@
              
                 </Grid>     
             </TabItem>
-            <TabItem Header="SequenceTest">
+            <TabItem Header="Robot Omnicore">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <!--<RowDefinition/>-->
+
+                    </Grid.RowDefinitions>
+                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>
+                    <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>-->
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="SequenceTest ">
                 <StackPanel Orientation="Vertical">
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1Task}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
-
+                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Diagnostic">

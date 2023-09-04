@@ -17,8 +17,8 @@ STRUCT
 	{attribute addProperty Name "<#Error#>"}
 	Error : BOOL;
 
-	{attribute addProperty Name "<#Error ID#>"}
-	ErrorId : UDINT;
+	{attribute addProperty Name "<#Event ID#>"}
+	EventId : UDINT;
 	
 	{attribute addProperty Name "<#Move active#>"}
 	MoveActive : BOOL;
@@ -41,7 +41,7 @@ STRUCT
 	{attribute addProperty Name "<#Program execution error#>"}
 	ProgExecError : BOOL;
 
-	{attribute addProperty Name "<#Safety chanin OK#>"}
+	{attribute addProperty Name "<#Safety OK#>"}
 	SafetyOk : BOOL;
 	
 	{attribute addProperty Name "<#System input busy#>"}

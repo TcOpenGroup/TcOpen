@@ -30,7 +30,11 @@
 			_progress:=0;
 		END_IF
 	END_IF
-    DoneWhen(inoStatus.State.MotorOffState AND NOT inoStatus.State.SystemInputBusy);
+				
+	_varInfo :=__VARINFO( inoStatus.State.MotorOffState);                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+	
+    DoneWhen(inoStatus.State.MotorOffState);
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q);

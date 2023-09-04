@@ -14,9 +14,13 @@ VAR
 	_sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
     _observer       : TcoCore.TcoSequencerObserver(THIS^);
     {attribute addProperty Name "Start sequence"}
-    _sequence1Task 	: Sequence1Task(THIS^);
+    _sequence1Task 	: SequenceTask(THIS^);
     _dialog        	: TcoCore.TcoDialog(THIS^);
 
+	_sequence2     : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+    _observer2       : TcoCore.TcoSequencerObserver(THIS^);
+    {attribute addProperty Name "Start sequence"}
+    _sequence2Task 	: SequenceTask(THIS^);
 	_enable: BOOL;
 END_VAR
 ]]></Declaration>
@@ -51,9 +55,16 @@ _robot2(
     inEnable := _enable,
     inoData := GVL.Robot2);
 
+_sequence1Task.Enabled := NOT _sequence2Task.Busy;
 _sequence1Task(Sequence := _sequence1);
 IF(_sequence1Task.Execute())THEN
 	Sequence1();
+END_IF;
+
+_sequence2Task.Enabled := NOT _sequence1Task.Busy;
+_sequence2Task(Sequence := _sequence2);
+IF(_sequence2Task.Execute())THEN
+	Sequence2();
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -294,6 +305,246 @@ IF (seq.Step(inStepID := 600,
 		seq.CompleteStep();
 	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
 		_sequence1Task.Restore();
+	 END_IF;	
+//    --------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
+    inEnabled := TRUE,
+    inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
+    //--------------------------------------------------------	
+    	seq.CompleteSequence();
+    //--------------------------------------------------------			
+END_IF;
+
+seq.Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Sequence2" Id="{e0478696-488f-0bd1-139f-14d0e81b8038}">
+      <Declaration><![CDATA[METHOD Sequence2
+VAR
+    seq    : REFERENCE TO TcoCore.TcoSequence;
+    answer : TcoCore.eDialogAnswer;
+	done: BOOL;
+	_jerk: LREAL;
+	_deceleration: LREAL;
+	_acceleration: LREAL;
+	_velocity: LREAL;
+	ProbeDoneWhen: INT;
+	_param: TcoRoboticsMovementsParams;
+
+	_operations:eProcessSequence;
+END_VAR
+
+VAR_INST
+	_maxAllowedAttempts: INT;
+	_noOfAttmets: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[seq REF= _sequence2;
+
+seq.Open();
+seq.Observer := _observer;
+
+
+
+
+ 
+		
+IF (seq.Step(inStepID := 0,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+	_param.GlobalSpeed :=100;
+	_noOfAttmets:=0;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to start movements? Do we go ahead?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence2Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 10,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
+	
+	_robot2.Restore();
+	seq.CompleteStep();
+	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 11,
+    inEnabled := TRUE,
+    inStepDescription := 'STOP MOVEMENTS AND PROGRAM')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _robot2.StopMovementsAndProgram(inStopType:=eTcoRoboticsStopType.Soft).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 12,
+    inEnabled := TRUE,
+    inStepDescription := 'START AT MAIN')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _robot2.StartAtMain().Done  THEN
+			seq.CompleteStep();
+		END_IF;
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 13,
+    inEnabled := TRUE,
+    inStepDescription := 'START MOTORS AND PROGRAM')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _robot2.StartMotorsAndProgram().Done  THEN
+			seq.CompleteStep();
+		END_IF;
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 14,
+    inEnabled := TRUE,
+    inStepDescription := 'START MOVEMENTS')) THEN
+//--------------------------------------------------------   
+	_maxAllowedAttempts:=10;
+	
+	
+	seq.CompleteStep();
+	
+	
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 15,
+    inEnabled := TRUE,
+    inStepDescription := 'START MOVEMENTS')) THEN
+//--------------------------------------------------------   
+	_param.ActionNo:=100;
+	
+	IF _robot2.StartMovements(inData:=_param).Done   THEN
+		seq.CompleteStep();
+		_robot2.Restore();
+	END_IF
+	
+//--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 16,
+    inEnabled := TRUE,
+    inStepDescription := 'START ANOTHER MOVE MOVEMENTS')) THEN
+//--------------------------------------------------------   
+	_param.ActionNo:=1;
+	_param.GlobalSpeed:=90;
+	IF _robot2.StartMovements(inData:=_param).Done  THEN
+		IF _noOfAttmets<_maxAllowedAttempts THEN
+			_noOfAttmets:=_noOfAttmets+1;
+			seq.RequestStep(14);
+			_robot2.Restore();
+		ELSE 
+		seq.CompleteStep();
+		end_if;
+	END_IF
+	
+//--------------------------------------------------------			
+END_IF;
+
+
+
+//
+IF (seq.Step(inStepID := 500,
+    inEnabled := TRUE,
+    inStepDescription := 'EXAMPLE OF MOVMENT ABORTED')) THEN
+//    --------------------------------------------------------
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Abort movement?')
+			.WithText('Do you  want to start movements and abort it?')			
+			.WithYesNo().Answer;
+			
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence2Task.Restore();
+	 END_IF;	
+
+//    --------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 525,
+    inEnabled := TRUE,
+    inStepDescription := 'STOP MOVEMENT  EXAMPLE')) THEN
+//    --------------------------------------------------------    
+		
+
+		answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Movement running')
+			.WithText('Do you  want to abort movement?')			
+			.WithYesNo().Answer;
+			
+			
+		 IF (answer = TcoCore.eDialogAnswer.Yes) THEN 
+			_robot2.StopMovements(inStopType:=TcoAbstractions.eTcoRoboticsStopType.Quick);   	 	
+			seq.CompleteStep();
+		 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+			_sequence2Task.Restore();
+		 END_IF;	
+		
+	_param.ActionNo:=100;	
+	_param.GlobalSpeed :=20;
+	IF _robot2.StartMovements(inData:=_param).Done  THEN
+		seq.CompleteStep();
+	END_IF
+	
+		
+		
+//    --------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 600,
+    inEnabled := TRUE,
+    inStepDescription := 'ASKING FOR RESTORING')) THEN
+//    --------------------------------------------------------
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Question?')
+			.WithText('Do you want to restore TcoIrc5 component?')			
+			.WithYesNo().Answer;
+			
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		_robot2.Restore();
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence2Task.Restore();
 	 END_IF;	
 //    --------------------------------------------------------			
 END_IF;

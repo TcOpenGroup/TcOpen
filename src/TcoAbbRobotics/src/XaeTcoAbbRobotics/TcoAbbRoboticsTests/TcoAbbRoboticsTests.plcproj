@@ -36,10 +36,7 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\TcoContext\eProcessSequence.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\TcoContext\Sequence1Task.TcPOU">
+    <Compile Include="Tests\TcoContext\SequenceTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\TcoContext\WpfContext.TcPOU">
@@ -87,7 +84,6 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcoAbbRobotics">
       <DefaultResolution>TcoAbbRobotics, 0.6.0.913 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoAbbRobotics</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoAbstractions">
       <DefaultResolution>TcoAbstractions, 0.6.0.913 (Vortex.Library)</DefaultResolution>
@@ -99,6 +95,7 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcoIo">
       <DefaultResolution>TcoIo, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoIo</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoUtilities">
       <DefaultResolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</DefaultResolution>

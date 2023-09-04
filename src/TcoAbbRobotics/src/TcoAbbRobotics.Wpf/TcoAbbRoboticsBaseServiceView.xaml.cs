@@ -37,7 +37,7 @@ namespace TcoAbbRobotics
 
     }
 
-    public class ErrorIdToDescriptionConverter : MarkupExtension, IValueConverter
+    public class EventIdToDescriptionConverter : MarkupExtension, IValueConverter
     {
 
 
@@ -47,7 +47,7 @@ namespace TcoAbbRobotics
             try
             {
                 uint errorId = (uint)value;
-                return ControllerErrors.Errors.ContainsKey(errorId) ? ControllerErrors.Errors[errorId] : "No error description available.";
+                return ControlerEvents.Ids.ContainsKey(errorId) ? ControlerEvents.Ids[errorId] : "No error description available.";
             }
             catch (Exception)
             {
