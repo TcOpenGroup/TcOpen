@@ -57,10 +57,10 @@
                         <Setter Property="Margin" Value="10" />
                     </Style>
                 </WrapPanel.Resources>
-                <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="Retry" />
-                <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="Terminate" />
+                <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
+                <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
                 <vortexs:PermissionBox Permissions="can_override_inspection">
-                    <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="Override" />
+                    <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
                 </vortexs:PermissionBox>
             </WrapPanel>
             <Expander
