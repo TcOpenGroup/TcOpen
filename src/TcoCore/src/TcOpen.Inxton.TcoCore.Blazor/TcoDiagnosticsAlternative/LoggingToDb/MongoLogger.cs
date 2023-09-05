@@ -22,74 +22,86 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
 
         public void LogMessage(PlainTcoMessage message)
         {
-            var document = new BsonDocument
-    {
-        { "TimeStamp", BsonValue.Create(message.TimeStamp) },
-        { "TimeStampAcknowledged", BsonValue.Create(message.TimeStampAcknowledged) },
-        { "Identity", BsonValue.Create(message.Identity) },
-        { "Text", BsonValue.Create(message.Text) },
-        { "Category", BsonValue.Create(message.Category) },
-        { "Cycle", BsonValue.Create(message.Cycle) },
-        { "PerCycleCount", BsonValue.Create(message.PerCycleCount) },
-        { "ExpectDequeing", BsonValue.Create(message.ExpectDequeing) },
-        { "Pinned", BsonValue.Create(message.Pinned) },
-        { "Location", BsonValue.Create(message.Location) },
-        { "Source", BsonValue.Create(message.Source) },
-        { "ParentsHumanReadable", BsonValue.Create(message.ParentsHumanReadable) },
-        { "Raw", BsonValue.Create(message.Raw) },
-        { "MessageDigest", BsonValue.Create(message.MessageDigest) },
-        { "ParentsObjectSymbol", BsonValue.Create(message.ParentsObjectSymbol) }
-    };
-
-            _collection.InsertOne(document);
-        }
-
-
-        public void UpdateMessage(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged)
-        {
             var filter = Builders<BsonDocument>.Filter.And(
-                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(identity)),
-                Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp))
+                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(message.Identity)),
+                Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp))
             );
 
-            var update = Builders<BsonDocument>.Update.Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(1)));
+            var update = Builders<BsonDocument>.Update
+        .Set("Text", BsonValue.Create(message.Text))
+        .Set( "TimeStamp", BsonValue.Create(message.TimeStamp))
+        .Set( "TimeStampAcknowledged", BsonValue.Create(message.TimeStampAcknowledged.AddHours(1)) )
+        .Set( "Identity", BsonValue.Create(message.Identity) )
+        .Set( "Text", BsonValue.Create(message.Text) )
+        .Set( "Category", BsonValue.Create(message.Category) )
+        .Set( "Cycle", BsonValue.Create(message.Cycle) )
+        .Set( "PerCycleCount", BsonValue.Create(message.PerCycleCount) )
+        .Set( "ExpectDequeing", BsonValue.Create(message.ExpectDequeing) )
+        .Set( "Pinned", BsonValue.Create(message.Pinned) )
+        .Set( "Location", BsonValue.Create(message.Location))
+        .Set( "Source", BsonValue.Create(message.Source))
+        .Set( "ParentsHumanReadable", BsonValue.Create(message.ParentsHumanReadable))
+        .Set( "Raw", BsonValue.Create(message.Raw))
+        .Set( "MessageDigest", BsonValue.Create(message.MessageDigest))
+        .Set("ParentsObjectSymbol", BsonValue.Create(message.ParentsObjectSymbol));
 
-            _collection.UpdateOne(filter, update);
+
+            var options = new UpdateOptions { IsUpsert = true };
+
+            _collection.UpdateOne(filter, update, options);
         }
 
-
-        public bool MessageExistsInDatabase(ulong identity, DateTime timeStamp)
+        public void SaveNewMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("Identity", identity) & Builders<BsonDocument>.Filter.Eq("TimeStamp", timeStamp);
-            var result = _collection.Find(filter).FirstOrDefault();
+            // Check if the message already exists and if its TimeStampAcknowledged is older than 1980
+            var existingMessage = _collection.Find(Builders<BsonDocument>.Filter.Eq("Identity", identity)).FirstOrDefault();
+            if (existingMessage != null && existingMessage["TimeStampAcknowledged"].ToUniversalTime() < new DateTime(1980, 1, 1, 0, 0, 0))
+            {
+                var filter = Builders<BsonDocument>.Filter.And(
+                    Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(identity)),
+                    Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp))
+                );
 
+                var update = Builders<BsonDocument>.Update.
+                    Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(1))).
+                    Set("Pinned", BsonValue.Create(pinned));
+
+                _collection.UpdateOne(filter, update);
+            }
+        }
+
+        public bool MessageExistsInDatabase(ulong identity)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("Identity", identity);
+            var result = _collection.Find(filter).FirstOrDefault();
             return result != null;
         }
+
 
         public List<PlainTcoMessage> ReadMessages()
         {
             var sort = Builders<BsonDocument>.Sort.Descending("TimeStamp");
-            var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(100).ToList();
+            var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(40).ToList();
             return messages.Select(m => new PlainTcoMessage
             {
                 TimeStamp = m["TimeStamp"].ToUniversalTime(),
                 TimeStampAcknowledged = m["TimeStampAcknowledged"].ToUniversalTime(),
                 Identity = (ulong)m["Identity"].AsInt64,
                 Text = m["Text"].AsString,
-                ////Category = (short)m["Category"].AsInt32,
+                Category= (short)m["Category"].AsInt32,
                 //Cycle = (ulong)m["Cycle"].AsInt64,
-                //PerCycleCount = (byte)m["PerCycleCount"].AsInt32,
-                //ExpectDequeing = m["ExpectDequeing"].AsBoolean,
-                //Pinned = m["Pinned"].AsBoolean,
-                //Location = m["Location"].AsString,
-                //Source = m["Source"].AsString,
-                //ParentsHumanReadable = m["ParentsHumanReadable"].AsString,
-                //Raw = m["Raw"].AsString,
+                PerCycleCount = (byte)m["PerCycleCount"].AsInt32,
+                ExpectDequeing = m["ExpectDequeing"].AsBoolean,
+                Pinned = m["Pinned"].AsBoolean,
+                Location = m["Location"].AsString,
+               Source = m["Source"].AsString,
+                ParentsHumanReadable = m["ParentsHumanReadable"].AsString,
+                Raw = m["Raw"].AsString,
                 //MessageDigest = (uint)m["MessageDigest"].AsInt32,
-                //ParentsObjectSymbol = m["ParentsObjectSymbol"].AsString
+                ParentsObjectSymbol = m["ParentsObjectSymbol"].AsString
             }).ToList();
         }
     }
 }
 
-    
+

@@ -1,5 +1,6 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsAlternativeViewModel>
 @using Blazm.Components
+@using Vortex.Presentation.Controls.Blazor.RenderableContent
 @namespace TcoCore
 
 <h1>Alternative Tco Diagnostics View</h1>
@@ -9,7 +10,7 @@
      <button @onclick="() => ViewModel.AcknowledgeAllMessages()">Acknowledge All Messages</button> <!-- New Button -->
 </div>
 
-@if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
+@*@if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
 {
     <table class="table">
         <thead>
@@ -48,7 +49,47 @@
 else
 {
     <p>No messages found.</p>
+}*@
+
+
+
+@if (ViewModel.DbMessageDisplay != null && ViewModel.DbMessageDisplay.Any())
+{
+    <h2>Messages from Database</h2>
+    <table class="table">
+        <!-- Table headers -->
+        <thead>
+          <th>Timestamp</th>
+                <th>Timestamp Acknowledged</th>
+                <th>Text</th>
+                <th>Identity</th>
+                <th>Category</th>
+                <th>Cycle</th>
+                <th>PFad</th>
+                <th>Expect Dequeing</th>
+                <th>Pinned</th>
+                <th>Message Digest</th>
+        </thead>
+        <tbody>
+            @foreach (var message in ViewModel.DbMessageDisplay)
+            {
+                <tr>
+                   <td>@message.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@(message.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0) ? "" : message.TimeStampAcknowledged.ToString("yyyy-MM-dd HH:mm:ss"))</td>
+                    <td>@message.Text</td>
+                    <td>@message.Identity</td>
+                    <td>@message.CategoryAsEnum</td>
+                    <td>@message.Cycle</td>
+                    <td>@message.ParentsObjectSymbol</td>
+                    <td>@message.ExpectDequeing</td>
+                    <td>@message.Pinned</td>
+                    <td>@message.MessageDigest</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-
-
-
+else
+{
+    <p>No database messages found.</p>
+}

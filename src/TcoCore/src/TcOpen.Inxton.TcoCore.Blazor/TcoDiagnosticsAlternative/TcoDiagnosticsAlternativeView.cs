@@ -18,15 +18,15 @@ namespace TcoCore
         protected override void OnInitialized()
         {
             // If ViewModel is null, initialize it here
-                var logger = new MongoLogger(); // Or get this from DI
-                ViewModel = new TcoDiagnosticsAlternativeViewModel(logger, ViewModel._tcoObject);
+            var logger = new MongoLogger(); // Or get this from DI
+            ViewModel = new TcoDiagnosticsAlternativeViewModel(logger, ViewModel._tcoObject);
 
             UpdateValuesOnChange(ViewModel._tcoObject);
             DiagnosticsUpdateTimer();
         }
 
 
-        private static int _diagnosticsUpdateInterval { get; set; } = 100;
+        private static int _diagnosticsUpdateInterval { get; set; } = 400;
         private Timer messageUpdateTimer;
 
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -51,8 +51,8 @@ namespace TcoCore
             }
         }
 
-        private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
 
+        private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
 
         private void OnNewMessageReceived(PlainTcoMessage newMessage)
         {
@@ -63,7 +63,7 @@ namespace TcoCore
 
         private void FetchMessages()
         {
-            ViewModel.UpdateMessages();
+            ViewModel.SaveNewMessages();
         }
 
 

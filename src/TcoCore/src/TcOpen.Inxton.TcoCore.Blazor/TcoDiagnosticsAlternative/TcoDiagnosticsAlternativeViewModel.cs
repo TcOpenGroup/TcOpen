@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using PlcDocu.TcoCore;
+
 using TcoCore.TcoDiagnosticsAlternative.LoggingToDb;
+
+using TcOpen.Inxton;
 using TcOpen.Inxton.Input;
 using Vortex.Presentation;
 
@@ -34,8 +39,6 @@ namespace TcoCore
             _logger = logger;
             _tcoObject = tcoObject;
         }
-
-
 
         public RelayCommand UpdateMessagesCommand { get; private set; }
 
@@ -85,7 +88,8 @@ namespace TcoCore
 
         private bool isBusyLogging = false;
 
-        internal void UpdateMessages()
+
+        internal void SaveNewMessages()
         {
             isBusyLogging = true;
 
@@ -100,15 +104,15 @@ namespace TcoCore
 
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages()
-                        .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                        .OrderByDescending(p => p.Category)
-                        .OrderBy(p => p.TimeStamp);
+                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages();
+                        //.Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                        //.OrderByDescending(p => p.Category)
+                        //.OrderBy(p => p.TimeStamp);
                 }).Wait();
 
                 foreach (var message in MessageDisplay)
                 {
-                    if (!_logger.MessageExistsInDatabase(message.Identity, message.TimeStamp) || !isBusyLogging)
+                    if (!_logger.MessageExistsInDatabase(message.Identity))
                     {
                         _logger.LogMessage(message);
                     }
@@ -118,24 +122,48 @@ namespace TcoCore
             }
         }
 
+
         public void AcknowledgeAllMessages()
         {
-            foreach (var message in MessageDisplay)
+            try
             {
-                DateTime currentDateTime = DateTime.Now;
-                if (message.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0)) // Or whatever condition you use to check if a message is not acknowledged
+                lock (updatemutex)
                 {
-                    _logger.UpdateMessage(message.Identity, message.TimeStamp, currentDateTime);
+                    TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
+
+
+                    foreach (var item in MessageDisplay.Where(p => p.Pinned))
+                    {
+                        DateTime currentDateTime = DateTime.Now;
+
+                        // Update only if the TimeStampAcknowledged is older than 1980 and the message is not active
+                        if (item.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0))
+                        {
+                            _logger.SaveNewMessages(item.Identity, item.TimeStamp, currentDateTime, false);
+                            item.OnlinerMessage.Pinned.Cyclic = false;
+                            item.OnlinerMessage.TimeStampAcknowledged.Cyclic = currentDateTime;
+                            TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                        }
+                    }
                     RefreshMessageDisplay();
                 }
             }
+            catch (Exception ex)
+            {
+                // Log the exception here
+                TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
+            }
         }
+
+
+
+
+
 
         public void RefreshMessageDisplay()
         {
             MessageDisplay = _logger.ReadMessages();
         }
-
 
 
         public List<PlainTcoMessage> Messages { get; private set; } = new List<PlainTcoMessage>();
@@ -158,15 +186,17 @@ namespace TcoCore
 
         }
 
+        public IEnumerable<PlainTcoMessage> DbMessageDisplay { get; private set; } = new List<PlainTcoMessage>();
+
         public void FetchMessagesFromDb()
         {
-            var latestMessages = _logger.ReadMessages(); // Assuming _logger is an instance of MongoLogger
-            MessageDisplay = latestMessages; // Update the MessageDisplay
+            var latestMessages = _logger.ReadMessages();
+            DbMessageDisplay = latestMessages;
         }
 
         public void UpdateAndFetchMessages()
         {
-            UpdateMessages();
+            SaveNewMessages();
             FetchMessagesFromDb();
         }
 

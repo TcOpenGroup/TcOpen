@@ -22,6 +22,8 @@ namespace TcoCore
         public void OnSelectedMessage(PlainTcoMessage message)
         {
             ViewModel.SelectedMessage = message;
+
+
             if (ViewModel.SelectedMessage != null)
             {
                 ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(ViewModel.SelectedMessage.Identity);
@@ -30,7 +32,7 @@ namespace TcoCore
            
         }
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
-        private static int _diagnosticsUpdateInterval { get; set; } = 2500;
+        private static int _diagnosticsUpdateInterval { get; set; } = 200;
         private Timer messageUpdateTimer;
         private void DiagnosticsUpdateTimer()
         {
