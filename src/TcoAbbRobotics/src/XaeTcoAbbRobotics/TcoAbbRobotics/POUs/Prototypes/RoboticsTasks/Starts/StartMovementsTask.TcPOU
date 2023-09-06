@@ -99,7 +99,7 @@ IF Execute() THEN
 
    CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q);
+	THIS^.ThrowWhen(_errorTimer.Q OR inoStatus.State.Error);
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
@@ -173,7 +173,8 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[description := '<#Start movements finished with error.#>'; 
 IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
-THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{b6df76ed-4805-0c8a-3f4d-ad2c54651047}">

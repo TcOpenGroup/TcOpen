@@ -38,7 +38,7 @@
     DoneWhen(inoStatus.State.PpMoved );
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q OR  inoStatus.State.Error);
+	THIS^.ThrowWhen(_errorTimer.Q );
 	
 END_IF;
 

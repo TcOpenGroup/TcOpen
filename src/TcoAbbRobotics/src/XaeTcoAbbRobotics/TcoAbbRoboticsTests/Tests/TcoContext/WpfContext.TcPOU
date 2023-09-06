@@ -47,12 +47,10 @@ METHOD PROTECTED Main]]></Declaration>
 
 END_IF
 _robot1(
-    inEnable := _enable,
     inoData := GVL.Robot1);
 
 
 _robot2(
-    inEnable := _enable,
     inoData := GVL.Robot2);
 
 _sequence1Task.Enabled := NOT _sequence2Task.Busy;
@@ -342,7 +340,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[seq REF= _sequence2;
 
 seq.Open();
-seq.Observer := _observer;
+seq.Observer := _observer2;
 
 
 

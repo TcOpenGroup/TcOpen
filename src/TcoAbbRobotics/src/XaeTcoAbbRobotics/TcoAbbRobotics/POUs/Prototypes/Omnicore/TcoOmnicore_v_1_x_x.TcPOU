@@ -735,7 +735,12 @@ _bytes:=TcoUtilities.TcoBytesToDint (inFormat:=TcoUtilities.eTcoDataFormat.Littl
 
 _status.State.Coordinates.Rz:=(DINT_TO_REAL(_bytes)/10000.0)-360.0;
 
-]]></ST>
+index:=44;
+_status.State.EventId:=TcoUtilities.TcoBytesToUDint (inFormat:=TcoUtilities.eTcoDataFormat.LittleEndian,
+															inByte0:= inoData.In.Inputs[index],
+															inByte1:= inoData.In.Inputs[index+1],
+															inByte2:= inoData.In.Inputs[index+2],
+															inByte3:= inoData.In.Inputs[index+3]);]]></ST>
       </Implementation>
     </Method>
   </POU>

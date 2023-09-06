@@ -47,7 +47,7 @@ namespace TcoAbbRobotics
             try
             {
                 uint errorId = (uint)value;
-                return ControlerEvents.Ids.ContainsKey(errorId) ? ControlerEvents.Ids[errorId] : "No error description available.";
+                return ControllerEvents.Ids.ContainsKey(errorId) ? ControllerEvents.Ids[errorId] : "No error description available.";
             }
             catch (Exception)
             {

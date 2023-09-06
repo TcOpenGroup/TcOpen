@@ -34,10 +34,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.ErrorTime <> T#0S THEN  
+        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.ErrorTime <> T#0S OR NOT inValue THEN  
 _errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
 END_IF;
-IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.InfoTime <>T#0S THEN  
+IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.InfoTime <>T#0S OR NOT inValue THEN  
 _infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
 END_IF;]]></ST>
       </Implementation>

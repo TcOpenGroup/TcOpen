@@ -37,12 +37,20 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="SequenceTest ">
+            <TabItem Header="SequenceTest Irc5 ">
                 <StackPanel Orientation="Vertical">
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1Task}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="SequenceTest Omnicore ">
+                <StackPanel Orientation="Vertical">
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence2Task}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence2}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer2}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Diagnostic">

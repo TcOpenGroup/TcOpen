@@ -43,7 +43,7 @@ IF Execute() THEN
 	
 	
 
-    DoneWhen(inoStatus.State.CycleOn AND NOT inoStatus.State.Error);
+    DoneWhen(inoStatus.State.CycleOn );
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q OR inoStatus.State.Error);

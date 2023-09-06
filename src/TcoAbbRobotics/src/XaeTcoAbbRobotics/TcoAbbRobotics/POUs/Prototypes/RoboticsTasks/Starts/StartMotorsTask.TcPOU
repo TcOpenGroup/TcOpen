@@ -77,7 +77,7 @@ IF Execute() THEN
     DoneWhen(inoStatus.State.MotorOnState AND NOT inoStatus.State.Error);
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q or inoStatus.State.Error);
+	THIS^.ThrowWhen(_errorTimer.Q );
 	
 END_IF
 

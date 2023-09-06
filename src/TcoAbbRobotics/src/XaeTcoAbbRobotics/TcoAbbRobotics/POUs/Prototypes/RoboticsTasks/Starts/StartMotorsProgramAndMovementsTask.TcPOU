@@ -100,7 +100,7 @@ IF Execute() THEN
 
    CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q);
+	THIS^.ThrowWhen(_errorTimer.Q );
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
