@@ -48,6 +48,21 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 return;
             }
 
+            // Check if a similar message already exists in the database
+            // Check if a similar message already exists in the database
+            var existingMessages = _collection.Find(Builders<BsonDocument>.Filter.Eq("Identity", message.Identity)).ToList();
+            var similarMessage = existingMessages.FirstOrDefault(em =>
+                Math.Abs((long)em["Cycle"].AsInt64 - (long)message.Cycle) <= 20 &&
+                !em["Pinned"].AsBoolean &&
+                em["TimeStampAcknowledged"].ToUniversalTime() < new DateTime(1980, 1, 1, 0, 0, 0)
+            );
+
+            if (similarMessage != null)
+            {
+                // A similar message already exists and has not been acknowledged, so don't log this one
+                return;
+            }
+
             // If the message doesn't exist, then proceed with saving it
             var update = Builders<BsonDocument>.Update
                 .Set("Text", BsonValue.Create(message.Text))
@@ -68,10 +83,11 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 .Set("ParentsObjectSymbol", BsonValue.Create(message.ParentsObjectSymbol));
 
             UpdateOptions options = new UpdateOptions { IsUpsert = true };
-
             var filter = GetMessageFilter(message);
 
+            //Console.WriteLine("Before MongoDB operation.");
             _collection.UpdateOne(filter, update, options);
+            //Console.WriteLine("After MongoDB operation.");
         }
 
 
@@ -105,7 +121,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 Identity = (ulong)m["Identity"].AsInt64,
                 Text = m["Text"].AsString,
                 Category= (short)m["Category"].AsInt32,
-                //Cycle = (ulong)m["Cycle"].AsInt64,
+                Cycle = (ulong)m["Cycle"].AsInt64,
                 PerCycleCount = (byte)m["PerCycleCount"].AsInt32,
                 ExpectDequeing = m["ExpectDequeing"].AsBoolean,
                 Pinned = m["Pinned"].AsBoolean,

@@ -23,32 +23,41 @@ namespace TcoCore
 
             UpdateValuesOnChange(ViewModel._tcoObject);
             DiagnosticsUpdateTimer();
-            AckMessages();
+            StateHasChanged();
+            //AckMessages();
         }
 
-        private static int _diagnosticsUpdateInterval { get; set; } = 400;
+        public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
+        private static int _diagnosticsUpdateInterval { get; set; } = 500;
         private Timer messageUpdateTimer;
 
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            await InvokeAsync(() =>
-            {
-                ViewModel.UpdateAndFetchMessages();
-                StateHasChanged(); 
-            });
-
+                await InvokeAsync(() =>
+                {
+                    ViewModel.UpdateAndFetchMessages();
+                    StateHasChanged();
+                });
         }
+
+
 
         private void DiagnosticsUpdateTimer()
         {
             if (messageUpdateTimer == null)
             {
+                Console.WriteLine("Initializing timer.");
                 messageUpdateTimer = new Timer(_diagnosticsUpdateInterval);
                 messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
                 messageUpdateTimer.AutoReset = true;
                 messageUpdateTimer.Enabled = true;
             }
+            else
+            {
+                Console.WriteLine("Timer already initialized.");
+            }
         }
+
 
         private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
 
@@ -73,6 +82,7 @@ namespace TcoCore
         private void AckMessages()
         {
             ViewModel.AcknowledgeAllMessages();
+            StateHasChanged();
         }
     }
 }
