@@ -20,38 +20,62 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             _collection = database.GetCollection<BsonDocument>("mycollection");
         }
 
+
+        private FilterDefinition<BsonDocument> GetMessageFilter(PlainTcoMessage message)
+        {
+            return Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp)),
+                Builders<BsonDocument>.Filter.Eq("Raw", BsonValue.Create(message.Raw)),
+                Builders<BsonDocument>.Filter.Eq("Source", BsonValue.Create(message.Source)),
+                Builders<BsonDocument>.Filter.Eq("MessageDigest", BsonValue.Create(message.MessageDigest)),
+                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(message.Identity)),
+                Builders<BsonDocument>.Filter.Eq("Cycle", BsonValue.Create(message.Cycle))
+            );
+        }
+
+        public bool MessageExistsInDatabase(PlainTcoMessage message)
+        {
+            var filter = GetMessageFilter(message);
+            var result = _collection.Find(filter).FirstOrDefault();
+            return result != null;
+        }
+
         public void LogMessage(PlainTcoMessage message)
         {
-            var filter = Builders<BsonDocument>.Filter.And(
-                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(message.Identity)),
-                Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp))
-            );
+            // If the timestamp is earlier than 1980, do not save the message
+            if (message.TimeStamp < new DateTime(1980, 1, 1, 0, 0, 0))
+            {
+                return;
+            }
 
+            // If the message doesn't exist, then proceed with saving it
             var update = Builders<BsonDocument>.Update
-        .Set("Text", BsonValue.Create(message.Text))
-        .Set( "TimeStamp", BsonValue.Create(message.TimeStamp))
-        .Set( "TimeStampAcknowledged", BsonValue.Create(message.TimeStampAcknowledged.AddHours(1)) )
-        .Set( "Identity", BsonValue.Create(message.Identity) )
-        .Set( "Text", BsonValue.Create(message.Text) )
-        .Set( "Category", BsonValue.Create(message.Category) )
-        .Set( "Cycle", BsonValue.Create(message.Cycle) )
-        .Set( "PerCycleCount", BsonValue.Create(message.PerCycleCount) )
-        .Set( "ExpectDequeing", BsonValue.Create(message.ExpectDequeing) )
-        .Set( "Pinned", BsonValue.Create(message.Pinned) )
-        .Set( "Location", BsonValue.Create(message.Location))
-        .Set( "Source", BsonValue.Create(message.Source))
-        .Set( "ParentsHumanReadable", BsonValue.Create(message.ParentsHumanReadable))
-        .Set( "Raw", BsonValue.Create(message.Raw))
-        .Set( "MessageDigest", BsonValue.Create(message.MessageDigest))
-        .Set("ParentsObjectSymbol", BsonValue.Create(message.ParentsObjectSymbol));
+                .Set("Text", BsonValue.Create(message.Text))
+                .Set("TimeStamp", BsonValue.Create(message.TimeStamp))
+                .Set("TimeStampAcknowledged", BsonValue.Create(message.TimeStampAcknowledged))
+                .Set("Identity", BsonValue.Create(message.Identity))
+                .Set("Text", BsonValue.Create(message.Text))
+                .Set("Category", BsonValue.Create(message.Category))
+                .Set("Cycle", BsonValue.Create(message.Cycle))
+                .Set("PerCycleCount", BsonValue.Create(message.PerCycleCount))
+                .Set("ExpectDequeing", BsonValue.Create(message.ExpectDequeing))
+                .Set("Pinned", BsonValue.Create(message.Pinned))
+                .Set("Location", BsonValue.Create(message.Location))
+                .Set("Source", BsonValue.Create(message.Source))
+                .Set("ParentsHumanReadable", BsonValue.Create(message.ParentsHumanReadable))
+                .Set("Raw", BsonValue.Create(message.Raw))
+                .Set("MessageDigest", BsonValue.Create(message.MessageDigest))
+                .Set("ParentsObjectSymbol", BsonValue.Create(message.ParentsObjectSymbol));
 
+            UpdateOptions options = new UpdateOptions { IsUpsert = true };
 
-            var options = new UpdateOptions { IsUpsert = true };
+            var filter = GetMessageFilter(message);
 
             _collection.UpdateOne(filter, update, options);
         }
 
-        public void SaveNewMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned)
+
+        public void UpdateMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned)
         {
             // Check if the message already exists and if its TimeStampAcknowledged is older than 1980
             var existingMessage = _collection.Find(Builders<BsonDocument>.Filter.Eq("Identity", identity)).FirstOrDefault();
@@ -63,20 +87,12 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 );
 
                 var update = Builders<BsonDocument>.Update.
-                    Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(1))).
+                    Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(2))).
                     Set("Pinned", BsonValue.Create(pinned));
 
                 _collection.UpdateOne(filter, update);
             }
         }
-
-        public bool MessageExistsInDatabase(ulong identity)
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("Identity", identity);
-            var result = _collection.Find(filter).FirstOrDefault();
-            return result != null;
-        }
-
 
         public List<PlainTcoMessage> ReadMessages()
         {
@@ -103,5 +119,10 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
         }
     }
 }
+
+
+
+
+      
 
 

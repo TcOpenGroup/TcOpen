@@ -60,10 +60,7 @@ namespace TcoCore
         } = DefaulCategory;
 
         public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaulCategory = item;
-
         public static eMessageCategory DefaulCategory { get; set; } = eMessageCategory.Info;
-
-
       
         bool diagnosticsRunning;
 
@@ -76,23 +73,17 @@ namespace TcoCore
             {
                 return;
             }
-
             SetProperty(ref diagnosticsRunning, value);
         }
     }
 
         //========================
         public event Action<PlainTcoMessage> NewMessageReceived;
-
         private volatile object updatemutex = new object();
+        private HashSet<ulong> activeMessages = new HashSet<ulong>();
 
-        private bool isBusyLogging = false;
-
-
-        internal void SaveNewMessages()
+        internal void LogMessages()
         {
-            isBusyLogging = true;
-
             if (DiagnosticsRunning)
             {
                 return;
@@ -104,23 +95,43 @@ namespace TcoCore
 
                 Task.Run(() =>
                 {
-                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages();
-                        //.Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                        //.OrderByDescending(p => p.Category)
-                        //.OrderBy(p => p.TimeStamp);
+                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages()
+                        .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                        .OrderByDescending(p => p.Category)
+                        .OrderBy(p => p.TimeStamp);
                 }).Wait();
 
                 foreach (var message in MessageDisplay)
                 {
-                    if (!_logger.MessageExistsInDatabase(message.Identity))
+                    // Check if the message is active
+                    bool isActive = message.OnlinerMessage.IsActive;
+
+                    // Check if the message was previously active
+                    bool wasActive = activeMessages.Contains(message.Identity);
+
+                    // If the message is active now but was not active before, log it
+                    if (isActive && !wasActive)
                     {
-                        _logger.LogMessage(message);
+                        if (!_logger.MessageExistsInDatabase(message))
+                        {
+                            _logger.LogMessage(message);
+                        }
+
+                        // Add to active messages
+                        activeMessages.Add(message.Identity);
+                    }
+                    // If the message is not active now but was active before, remove it from active messages
+                    else if (!isActive && wasActive)
+                    {
+                        activeMessages.Remove(message.Identity);
                     }
                 }
-                isBusyLogging = false;
+
                 DiagnosticsRunning = false;
             }
         }
+
+
 
 
         public void AcknowledgeAllMessages()
@@ -131,16 +142,16 @@ namespace TcoCore
                 {
                     TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
 
-
-                    foreach (var item in MessageDisplay.Where(p => p.Pinned))
+                    foreach (var item in MessageDisplay)
                     {
-                        DateTime currentDateTime = DateTime.Now;
+                        DateTime currentDateTime = DateTime.UtcNow;
 
                         // Update only if the TimeStampAcknowledged is older than 1980 and the message is not active
                         if (item.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0))
                         {
-                            _logger.SaveNewMessages(item.Identity, item.TimeStamp, currentDateTime, false);
+                            _logger.UpdateMessages(item.Identity, item.TimeStamp, currentDateTime, false);
                             item.OnlinerMessage.Pinned.Cyclic = false;
+
                             item.OnlinerMessage.TimeStampAcknowledged.Cyclic = currentDateTime;
                             TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                         }
@@ -155,16 +166,10 @@ namespace TcoCore
             }
         }
 
-
-
-
-
-
         public void RefreshMessageDisplay()
         {
             MessageDisplay = _logger.ReadMessages();
         }
-
 
         public List<PlainTcoMessage> Messages { get; private set; } = new List<PlainTcoMessage>();
 
@@ -183,7 +188,6 @@ namespace TcoCore
 
                 SetProperty(ref messageDisplay, value);
             }
-
         }
 
         public IEnumerable<PlainTcoMessage> DbMessageDisplay { get; private set; } = new List<PlainTcoMessage>();
@@ -196,10 +200,8 @@ namespace TcoCore
 
         public void UpdateAndFetchMessages()
         {
-            SaveNewMessages();
+            LogMessages();
             FetchMessagesFromDb();
         }
-
     }
-
 }

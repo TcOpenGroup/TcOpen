@@ -23,8 +23,8 @@ namespace TcoCore
 
             UpdateValuesOnChange(ViewModel._tcoObject);
             DiagnosticsUpdateTimer();
+            AckMessages();
         }
-
 
         private static int _diagnosticsUpdateInterval { get; set; } = 400;
         private Timer messageUpdateTimer;
@@ -34,11 +34,10 @@ namespace TcoCore
             await InvokeAsync(() =>
             {
                 ViewModel.UpdateAndFetchMessages();
-                StateHasChanged(); // Re-render the component
+                StateHasChanged(); 
             });
 
         }
-
 
         private void DiagnosticsUpdateTimer()
         {
@@ -51,7 +50,6 @@ namespace TcoCore
             }
         }
 
-
         private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
 
         private void OnNewMessageReceived(PlainTcoMessage newMessage)
@@ -63,14 +61,18 @@ namespace TcoCore
 
         private void FetchMessages()
         {
-            ViewModel.SaveNewMessages();
+            ViewModel.LogMessages();
         }
-
 
         // Unsubscribe from the event when the component is disposed of
         public void Dispose()
         {
             ViewModel.NewMessageReceived -= OnNewMessageReceived;
+        }
+
+        private void AckMessages()
+        {
+            ViewModel.AcknowledgeAllMessages();
         }
     }
 }

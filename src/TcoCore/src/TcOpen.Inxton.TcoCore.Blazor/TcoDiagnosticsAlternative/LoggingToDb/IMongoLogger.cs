@@ -6,8 +6,8 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
     public interface IMongoLogger
     {
         void LogMessage(PlainTcoMessage message);
-        bool MessageExistsInDatabase(ulong identity);
+        bool MessageExistsInDatabase(PlainTcoMessage message);
         List<PlainTcoMessage> ReadMessages();
-        void SaveNewMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned);
+        void UpdateMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned);
     }
 }
