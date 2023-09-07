@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoRoboticsMovementsParams" Id="{80144daa-b66e-4785-89fd-b713561d40d0}">
+    <Declaration><![CDATA[TYPE TcoRoboticsMovementsParams :
+STRUCT
+	
+	{attribute addProperty Name "<#ActionNo#>"}
+	ActionNo:BYTE;  
+	{attribute addProperty Name "<#GlobalSpeed#>"}
+	GlobalSpeed:BYTE; 
+	{attribute addProperty Name "<#ToolNo#>"}
+	ToolNo:BYTE;  
+	{attribute addProperty Name "<#WorkobjectNo#>"}
+	WorkobjectNo:BYTE; 
+	{attribute addProperty Name "<#PointNo#>"}
+	PointNo:BYTE;  
+	{attribute addProperty Name "<#UserSpecSpeed1#>"}
+	UserSpecSpeed1:INT;  
+	{attribute addProperty Name "<#UserSpecSpeed2#>"}
+	UserSpecSpeed2:INT;  
+	{attribute  addProperty Name "<#Coordinates#>"}     
+	Coordinates :TcoRoboticsCoordinates; 		
+  
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

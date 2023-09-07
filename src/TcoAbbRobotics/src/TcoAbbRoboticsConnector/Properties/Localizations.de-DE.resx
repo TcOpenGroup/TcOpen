@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="___Position__" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="___Mode__" xml:space="preserve">
+    <value>Modus</value>
+  </data>
+  <data name="___Clear_position_lag__" xml:space="preserve">
+    <value>Positionsrückstand auflösen</value>
+  </data>
+  <data name="___Search_direction__" xml:space="preserve">
+    <value>Suchrichtung</value>
+  </data>
+  <data name="___Search_velocity__" xml:space="preserve">
+    <value>Suchgeschwindigkeit</value>
+  </data>
+  <data name="___Synchronization_direction__" xml:space="preserve">
+    <value>Richtung der Synchronisierung</value>
+  </data>
+  <data name="___Synchronization_velocity__" xml:space="preserve">
+    <value>Geschwindigkeit der Synchronisation</value>
+  </data>
+  <data name="___Reference_mode__" xml:space="preserve">
+    <value>Referenzmodus</value>
+  </data>
+  <data name="___Velocity__" xml:space="preserve">
+    <value>Geschwindigkeit</value>
+  </data>
+  <data name="___Acceleration__" xml:space="preserve">
+    <value>Beschleunigung</value>
+  </data>
+  <data name="___Deceleration__" xml:space="preserve">
+    <value>Abbremsung</value>
+  </data>
+  <data name="___Jerk__" xml:space="preserve">
+    <value>Ruck</value>
+  </data>
+  <data name="___Direction__" xml:space="preserve">
+    <value>Richtung</value>
+  </data>
+  <data name="___Distance__" xml:space="preserve">
+    <value>Distanz</value>
+  </data>
+  <data name="___Power_enable__" xml:space="preserve">
+    <value>Power aktivieren</value>
+  </data>
+  <data name="___Enabled__" xml:space="preserve">
+    <value>Aktiviert</value>
+  </data>
+  <data name="___Disabled__" xml:space="preserve">
+    <value>Deaktiviert</value>
+  </data>
+  <data name="___Enable_positive__" xml:space="preserve">
+    <value>Freigabe Positiv</value>
+  </data>
+  <data name="___Enable_negative__" xml:space="preserve">
+    <value>Freigabe Negativ</value>
+  </data>
+  <data name="___Drive_power_override__" xml:space="preserve">
+    <value>Override Power</value>
+  </data>
+  <data name="___Local_control__" xml:space="preserve">
+    <value>Lokale Kontrolle</value>
+  </data>
+  <data name="___Global_control__" xml:space="preserve">
+    <value>Globale Kontrolle</value>
+  </data>
+  <data name="___Override__" xml:space="preserve">
+    <value>Override</value>
+  </data>
+  <data name="___Jog_forward__" xml:space="preserve">
+    <value>Vorwärts joggen</value>
+  </data>
+  <data name="___Running__" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="___Stopped__" xml:space="preserve">
+    <value>Gestoppt</value>
+  </data>
+  <data name="___Jog_backwards__" xml:space="preserve">
+    <value>Rückwärts joggen</value>
+  </data>
+  <data name="___Jog_mode__" xml:space="preserve">
+    <value>Tippbetrieb</value>
+  </data>
+  <data name="___Drive_error_no___" xml:space="preserve">
+    <value>kein Antriebsfehler</value>
+  </data>
+  <data name="___Movement_state__" xml:space="preserve">
+    <value>Bewegungszustand</value>
+  </data>
+  <data name="___Reset__" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="___SoE_reset__" xml:space="preserve">
+    <value>SoE zurücksetzen</value>
+  </data>
+  <data name="___Set_position__" xml:space="preserve">
+    <value>Position festlegen</value>
+  </data>
+  <data name="___Homing__" xml:space="preserve">
+    <value>Grundstellungsfahrt</value>
+  </data>
+  <data name="___Jogging__" xml:space="preserve">
+    <value>Joggen</value>
+  </data>
+  <data name="___Move_velocity__" xml:space="preserve">
+    <value>Bewegungsgeschwindigkeit</value>
+  </data>
+  <data name="___Stop__" xml:space="preserve">
+    <value>Stopp</value>
+  </data>
+  <data name="___Halt__" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="___Move_relative__" xml:space="preserve">
+    <value>Bewegung Relativ</value>
+  </data>
+  <data name="___Move_absolute__" xml:space="preserve">
+    <value>Bewegung Absolut</value>
+  </data>
+  <data name="___Move_modulo__" xml:space="preserve">
+    <value>Bewegung Modulo</value>
+  </data>
+  <data name="___Actual_position__" xml:space="preserve">
+    <value>Aktuelle Position</value>
+  </data>
+  <data name="___Actual_modulo_position__" xml:space="preserve">
+    <value>Aktuelle Modulo-Position</value>
+  </data>
+  <data name="___Actual_modulo_turns__" xml:space="preserve">
+    <value>Aktuelle Modulo-Turns</value>
+  </data>
+  <data name="___Actual_velocity__" xml:space="preserve">
+    <value>Aktuelle Geschwindigkeit</value>
+  </data>
+  <data name="___Actual_acceleration__" xml:space="preserve">
+    <value>Aktuelle Beschleunigung</value>
+  </data>
+  <data name="___Actual_torque__" xml:space="preserve">
+    <value>Aktuelles Drehmoment</value>
+  </data>
+  <data name="___Command_number__" xml:space="preserve">
+    <value>Befehlsnummer</value>
+  </data>
+  <data name="___Command_state__" xml:space="preserve">
+    <value>Befehlsstatus</value>
+  </data>
+  <data name="___Motion_state__" xml:space="preserve">
+    <value>Bewegungszustand</value>
+  </data>
+  <data name="___Error__" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="___Error_id__" xml:space="preserve">
+    <value>Fehler-ID</value>
+  </data>
+</root>
