@@ -28,7 +28,7 @@ namespace TcoCore
         }
 
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
-        private static int _diagnosticsUpdateInterval { get; set; } = 500;
+        private static int _diagnosticsUpdateInterval { get; set; } = 50;
         private Timer messageUpdateTimer;
 
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -68,11 +68,6 @@ namespace TcoCore
             StateHasChanged();
         }
 
-        private void FetchMessages()
-        {
-            ViewModel.LogMessages();
-        }
-
         // Unsubscribe from the event when the component is disposed of
         public void Dispose()
         {
@@ -81,7 +76,7 @@ namespace TcoCore
 
         private void AckMessages()
         {
-            ViewModel.AcknowledgeAllMessages();
+            ViewModel.AckAllMessagesPinned();
             StateHasChanged();
         }
     }

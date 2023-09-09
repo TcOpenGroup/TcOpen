@@ -48,7 +48,14 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 return;
             }
 
-            // Check if a similar message already exists in the database
+            //if (MessageExistsInDatabase(message) == true)
+            //{
+            //    // A similar message already exists and has not been acknowledged, so don't log this one
+            //    return;
+            //}
+
+
+
             // Check if a similar message already exists in the database
             var existingMessages = _collection.Find(Builders<BsonDocument>.Filter.Eq("Identity", message.Identity)).ToList();
             var similarMessage = existingMessages.FirstOrDefault(em =>
@@ -90,30 +97,29 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             //Console.WriteLine("After MongoDB operation.");
         }
 
-
         public void UpdateMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned)
         {
-            // Check if the message already exists and if its TimeStampAcknowledged is older than 1980
-            var existingMessage = _collection.Find(Builders<BsonDocument>.Filter.Eq("Identity", identity)).FirstOrDefault();
-            if (existingMessage != null && existingMessage["TimeStampAcknowledged"].ToUniversalTime() < new DateTime(1980, 1, 1, 0, 0, 0))
-            {
-                var filter = Builders<BsonDocument>.Filter.And(
-                    Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(identity)),
-                    Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp))
-                );
+            // Define a filter to find messages with the given identity and where TimeStampAcknowledged is older than 1980
+            var filter = Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(identity)),
+                Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp)),
+                Builders<BsonDocument>.Filter.Lt("TimeStampAcknowledged", BsonValue.Create(new DateTime(1980, 1, 1, 0, 0, 0)))
+            );
 
-                var update = Builders<BsonDocument>.Update.
-                    Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(2))).
-                    Set("Pinned", BsonValue.Create(pinned));
+            // Define the update operation
+            var update = Builders<BsonDocument>.Update
+                .Set("TimeStampAcknowledged", BsonValue.Create(timeStampAcknowledged.AddHours(1)))
+                .Set("Pinned", BsonValue.Create(pinned));
 
-                _collection.UpdateOne(filter, update);
-            }
+            // Update all matching documents
+            _collection.UpdateMany(filter, update);
         }
+
 
         public List<PlainTcoMessage> ReadMessages()
         {
             var sort = Builders<BsonDocument>.Sort.Descending("TimeStamp");
-            var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(40).ToList();
+            var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(1000).ToList();
             return messages.Select(m => new PlainTcoMessage
             {
                 TimeStamp = m["TimeStamp"].ToUniversalTime(),

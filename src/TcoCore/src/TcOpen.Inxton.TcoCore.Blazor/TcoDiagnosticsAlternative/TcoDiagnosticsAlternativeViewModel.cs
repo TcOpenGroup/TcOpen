@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using PlcDocu.TcoCore;
@@ -61,28 +62,28 @@ namespace TcoCore
 
         public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaulCategory = item;
         public static eMessageCategory DefaulCategory { get; set; } = eMessageCategory.Info;
-      
+
         bool diagnosticsRunning;
 
         public bool DiagnosticsRunning
-    {
-        get => diagnosticsRunning;
-        internal set
         {
-            if (diagnosticsRunning == value)
+            get => diagnosticsRunning;
+            internal set
             {
-                return;
+                if (diagnosticsRunning == value)
+                {
+                    return;
+                }
+                SetProperty(ref diagnosticsRunning, value);
             }
-            SetProperty(ref diagnosticsRunning, value);
         }
-    }
 
         //========================
         public event Action<PlainTcoMessage> NewMessageReceived;
         private volatile object updatemutex = new object();
         private HashSet<ulong> activeMessages = new HashSet<ulong>();
 
-        internal void LogMessages()
+        internal void LogMessagesPinnend()
         {
             if (DiagnosticsRunning)
             {
@@ -108,7 +109,7 @@ namespace TcoCore
                 {
                     if (!activeMessages.Contains(message.Identity))
                     {
-                        Console.WriteLine($"Logging new message: {message.Identity}");
+                        //Console.WriteLine($"Logging new message: {message.Identity}");
                         if (!_logger.MessageExistsInDatabase(message))
                         {
                             _logger.LogMessage(message);
@@ -133,9 +134,7 @@ namespace TcoCore
             }
         }
 
-
-
-        public void AcknowledgeAllMessages()
+        public void AckAllMessagesPinned()
         {
             try
             {
@@ -143,19 +142,31 @@ namespace TcoCore
                 {
                     TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
 
-                    foreach (var item in MessageDisplay)
+                    foreach (var item in DbMessageDisplay.Where(p => p.Pinned && p.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0)))
                     {
-                        DateTime currentDateTime = DateTime.UtcNow;
+                            DateTime currentDateTime = DateTime.UtcNow;
+                            // Check the MessageDisplay for the same identity
+                            var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == item.Identity);
+                            bool isActive = false;
 
-                        // Update only if the TimeStampAcknowledged is older than 1980 and the message is not active
-                        if (item.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0))
-                        {
-                            _logger.UpdateMessages(item.Identity, item.TimeStamp, currentDateTime, false);
-                            item.OnlinerMessage.Pinned.Cyclic = false;
+                            if (activeMessage != null)
+                            {
+                                activeMessage.OnlinerMessage.Pinned.Cyclic = false;
+                                activeMessage.OnlinerMessage.TimeStampAcknowledged.Cyclic = DateTime.UtcNow;
+                                isActive = activeMessage.OnlinerMessage.IsActive;
+                                Thread.Sleep(10);
+                            }
 
-                            item.OnlinerMessage.TimeStampAcknowledged.Cyclic = currentDateTime;
-                            TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
-                        }
+                            if (!isActive)
+                            {
+                                _logger.UpdateMessages(item.Identity, item.TimeStamp, currentDateTime, false);
+                            }
+                            else
+                            {
+                                TcoAppDomain.Current.Logger.Information("Fehler scheint noch aktiv {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
+                            }
+
+                        TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                     }
                     RefreshMessageDisplay();
                 }
@@ -165,9 +176,10 @@ namespace TcoCore
                 // Log the exception here
                 TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
             }
-        }
 
-        public void AcknowledgeMessage(ulong identity)
+        } 
+
+            public void AcknowledgeMessage(ulong identity)
         {
             try
             {
@@ -187,17 +199,20 @@ namespace TcoCore
                         if (message.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0) && !message.Pinned)
                         {
                             _logger.UpdateMessages(message.Identity, message.TimeStamp, currentDateTime, false);
-
-                            // Assuming you have a way to update the OnlinerMessage object
-                            // message.OnlinerMessage.Pinned.Cyclic = false;
-                            // message.OnlinerMessage.TimeStampAcknowledged.Cyclic = currentDateTime;
-
                             TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = message.Text, Category = message.CategoryAsEnum });
                         }
                     }
                     else
                     {
                         TcoAppDomain.Current.Logger.Warning("No message found with identity: {@identity}", identity);
+                    }
+
+                    // Check the MessageDisplay for the same identity
+                    var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == identity);
+                    if (activeMessage != null)
+                    {
+                        activeMessage.Pinned = false;
+                        activeMessage.TimeStampAcknowledged = DateTime.UtcNow;
                     }
 
                     RefreshMessageDisplay();
@@ -260,7 +275,7 @@ namespace TcoCore
 
         public void UpdateAndFetchMessages()
         {
-            LogMessages();
+            LogMessagesPinnend();
             FetchMessagesFromDb();
         }
     }
