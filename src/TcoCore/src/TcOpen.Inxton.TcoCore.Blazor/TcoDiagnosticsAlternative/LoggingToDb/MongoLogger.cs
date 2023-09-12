@@ -78,6 +78,10 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
         {
             var existingMessage = GetSimilarMessage(message);
 
+            //if (MessageExistsInDatabase(message)) {
+            //    return;
+            //}
+
             if (existingMessage == null ||
                 (message.Category >= existingMessage.Category && message.Text != existingMessage.Text))
             {
@@ -90,7 +94,6 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
         {
             // Define a filter to find messages with the given identity and where TimeStampAcknowledged is older than 1980
             var filter = Builders<BsonDocument>.Filter.And(
-                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(identity)),
                 Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp)),
                 Builders<BsonDocument>.Filter.Lt("TimeStampAcknowledged", BsonValue.Create(new DateTime(1980, 1, 1, 0, 0, 0)))
             );

@@ -24,7 +24,7 @@ namespace TcoCore
             UpdateValuesOnChange(ViewModel._tcoObject);
             DiagnosticsUpdateTimer();
             StateHasChanged();
-            //AckMessages();
+            AckMessages();
         }
 
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;

@@ -97,40 +97,42 @@ namespace TcoCore
 
                 // Fetch the active messages
                 var newMessageDisplay = _tcoObject.MessageHandler.GetActiveMessages()
-                    //.Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                    //.OrderByDescending(p => p.Category)
-                    //.ThenBy(p => p.TimeStamp)
+                    .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    .OrderByDescending(p => p.Category)
+                    .ThenBy(p => p.TimeStamp)
                     .ToList();
 
                 // Create a set of message identities for easier lookup
                 var newMessageIdentities = new HashSet<ulong>(newMessageDisplay.Select(m => m.Identity));
 
-                // Log new messages that weren't active before
                 foreach (var message in newMessageDisplay)
                 {
-                    if (!activeMessages.Contains(message.Identity))
-                    {
-                        // Fetch the similar message from the database based on the identity.
-                        var existingMessage = _logger.GetSimilarMessage(message);
+                    // Fetch the similar message from the database based on the identity.
+                    var existingMessage = _logger.GetSimilarMessage(message);
 
-                        // Check if the message doesn't exist in the database or if the similar message's category is lower or the text is different.
-                        if (!_logger.MessageExistsInDatabase(message) ||
-                            (existingMessage != null &&
-                            (message.Category >= existingMessage.Category || message.Text != existingMessage.Text)))
-                        {
-                            _logger.LogMessage(message);
-                        }
-                        activeMessages.Add(message.Identity);
+                    // Check if the message doesn't exist in the database or if the similar message's category is lower, 
+                    // or if the text or source is different.
+                    if (!_logger.MessageExistsInDatabase(message) ||
+                        (existingMessage != null &&
+                        (message.Category >= existingMessage.Category ||
+                         message.Text != existingMessage.Text ||
+                         message.Source != existingMessage.Source)))
+                    {
+                        _logger.LogMessage(message);
                     }
+
+                    activeMessages.Add(message.Identity);
                 }
 
+            
 
-                // Remove or acknowledge messages that are no longer active
-                var messagesToRemove = activeMessages.Where(id => !newMessageIdentities.Contains(id)).ToList();
+
+            // Remove or acknowledge messages that are no longer active
+            var messagesToRemove = activeMessages.Where(id => !newMessageIdentities.Contains(id)).ToList();
                 foreach (var id in messagesToRemove)
                 {
                     Console.WriteLine($"Removing or acknowledging message: {id}");
-                    AcknowledgeMessage(id);
+                    AckAllMessagesPinned();
                     activeMessages.Remove(id);
                 }
 
@@ -149,7 +151,7 @@ namespace TcoCore
                 {
                     TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
 
-                    foreach (var item in DbMessageDisplay.Where(p => p.Pinned && p.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0)))
+                    foreach (var item in DbMessageDisplay.Where(p =>p.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0)))
                     {
                         DateTime currentDateTime = DateTime.UtcNow;
                         // Check the MessageDisplay for the same identity
