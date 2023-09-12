@@ -8,6 +8,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
         void LogMessage(PlainTcoMessage message);
         bool MessageExistsInDatabase(PlainTcoMessage message);
         List<PlainTcoMessage> ReadMessages();
+        PlainTcoMessage GetSimilarMessage(PlainTcoMessage message);
         void UpdateMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned);
     }
 }

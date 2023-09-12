@@ -79,5 +79,13 @@ namespace TcoCore
             ViewModel.AckAllMessagesPinned();
             StateHasChanged();
         }
+
+        // Method to get unique messages
+        public IEnumerable<PlainTcoMessage> GetUniqueMessages()
+        {
+            return ViewModel.DbMessageDisplay
+                .GroupBy(m => new { m.Identity, m.Text, m.TimeStamp, m.Cycle })
+                .Select(g => g.FirstOrDefault());
+        }
     }
 }

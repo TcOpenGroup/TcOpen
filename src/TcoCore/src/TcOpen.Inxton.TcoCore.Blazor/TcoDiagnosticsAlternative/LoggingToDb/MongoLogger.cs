@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,12 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
     public class MongoLogger : IMongoLogger
     {
         private readonly IMongoCollection<BsonDocument> _collection;
+        private readonly MongoClient _client;
 
         public MongoLogger()
         {
-            var client = new MongoClient("mongodb://admin:1234@localhost:27017");
-            var database = client.GetDatabase("mydatabase");
+            _client = new MongoClient("mongodb://admin:1234@localhost:27017");
+            var database = _client.GetDatabase("mydatabase");
             _collection = database.GetCollection<BsonDocument>("mycollection");
         }
 
@@ -33,6 +35,8 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             );
         }
 
+
+
         public bool MessageExistsInDatabase(PlainTcoMessage message)
         {
             var filter = GetMessageFilter(message);
@@ -40,36 +44,9 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             return result != null;
         }
 
-        public void LogMessage(PlainTcoMessage message)
+
+        private void InsertMessage(PlainTcoMessage message)
         {
-            // If the timestamp is earlier than 1980, do not save the message
-            if (message.TimeStamp < new DateTime(1980, 1, 1, 0, 0, 0))
-            {
-                return;
-            }
-
-            //if (MessageExistsInDatabase(message) == true)
-            //{
-            //    // A similar message already exists and has not been acknowledged, so don't log this one
-            //    return;
-            //}
-
-
-
-            // Check if a similar message already exists in the database
-            var existingMessages = _collection.Find(Builders<BsonDocument>.Filter.Eq("Identity", message.Identity)).ToList();
-            var similarMessage = existingMessages.FirstOrDefault(em =>
-                Math.Abs((long)em["Cycle"].AsInt64 - (long)message.Cycle) <= 20 &&
-                !em["Pinned"].AsBoolean &&
-                em["TimeStampAcknowledged"].ToUniversalTime() < new DateTime(1980, 1, 1, 0, 0, 0)
-            );
-
-            if (similarMessage != null)
-            {
-                // A similar message already exists and has not been acknowledged, so don't log this one
-                return;
-            }
-
             // If the message doesn't exist, then proceed with saving it
             var update = Builders<BsonDocument>.Update
                 .Set("Text", BsonValue.Create(message.Text))
@@ -86,7 +63,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 .Set("Source", BsonValue.Create(message.Source))
                 .Set("ParentsHumanReadable", BsonValue.Create(message.ParentsHumanReadable))
                 .Set("Raw", BsonValue.Create(message.Raw))
-                .Set("MessageDigest", BsonValue.Create(message.MessageDigest))
+                .Set("MessageDigest", BsonValue.Create((ulong)(message.MessageDigest)))
                 .Set("ParentsObjectSymbol", BsonValue.Create(message.ParentsObjectSymbol));
 
             UpdateOptions options = new UpdateOptions { IsUpsert = true };
@@ -94,8 +71,20 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
 
             //Console.WriteLine("Before MongoDB operation.");
             _collection.UpdateOne(filter, update, options);
-            //Console.WriteLine("After MongoDB operation.");
         }
+
+
+        public void LogMessage(PlainTcoMessage message)
+        {
+            var existingMessage = GetSimilarMessage(message);
+
+            if (existingMessage == null ||
+                (message.Category >= existingMessage.Category && message.Text != existingMessage.Text))
+            {
+                InsertMessage(message);
+            }
+        }
+
 
         public void UpdateMessages(ulong identity, DateTime timeStamp, DateTime timeStampAcknowledged, bool pinned)
         {
@@ -115,36 +104,48 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             _collection.UpdateMany(filter, update);
         }
 
+        private PlainTcoMessage MapBsonToPlainTcoMessage(BsonDocument bsonMessage)
+        {
+            return new PlainTcoMessage
+            {
+                TimeStamp = bsonMessage["TimeStamp"].ToUniversalTime(),
+                TimeStampAcknowledged = bsonMessage["TimeStampAcknowledged"].ToUniversalTime(),
+                Identity = (ulong)bsonMessage["Identity"].AsInt64,
+                Text = bsonMessage["Text"].AsString,
+                Category = (short)bsonMessage["Category"].AsInt32,
+                Cycle = (ulong)bsonMessage["Cycle"].AsInt64,
+                PerCycleCount = (byte)bsonMessage["PerCycleCount"].AsInt32,
+                ExpectDequeing = bsonMessage["ExpectDequeing"].AsBoolean,
+                Pinned = bsonMessage["Pinned"].AsBoolean,
+                Location = bsonMessage["Location"].AsString,
+                Source = bsonMessage["Source"].AsString,
+                ParentsHumanReadable = bsonMessage["ParentsHumanReadable"].AsString,
+                Raw = bsonMessage["Raw"].AsString,
+                MessageDigest = (uint)bsonMessage["MessageDigest"].AsInt64,
+                ParentsObjectSymbol = bsonMessage["ParentsObjectSymbol"].AsString
+            };
+        }
+
+        public PlainTcoMessage GetSimilarMessage(PlainTcoMessage message)
+        {
+            var filter = Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(message.Identity)),
+                Builders<BsonDocument>.Filter.Lte("Cycle", BsonValue.Create(message.Cycle + 20)),
+                Builders<BsonDocument>.Filter.Gte("Cycle", BsonValue.Create(message.Cycle - 20)),
+                Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp))
+            );
+
+            var existingMessageBson = _collection.Find(filter).FirstOrDefault();
+            return existingMessageBson != null ? MapBsonToPlainTcoMessage(existingMessageBson) : null;
+        }
+
 
         public List<PlainTcoMessage> ReadMessages()
         {
             var sort = Builders<BsonDocument>.Sort.Descending("TimeStamp");
             var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(1000).ToList();
-            return messages.Select(m => new PlainTcoMessage
-            {
-                TimeStamp = m["TimeStamp"].ToUniversalTime(),
-                TimeStampAcknowledged = m["TimeStampAcknowledged"].ToUniversalTime(),
-                Identity = (ulong)m["Identity"].AsInt64,
-                Text = m["Text"].AsString,
-                Category= (short)m["Category"].AsInt32,
-                Cycle = (ulong)m["Cycle"].AsInt64,
-                PerCycleCount = (byte)m["PerCycleCount"].AsInt32,
-                ExpectDequeing = m["ExpectDequeing"].AsBoolean,
-                Pinned = m["Pinned"].AsBoolean,
-                Location = m["Location"].AsString,
-               Source = m["Source"].AsString,
-                ParentsHumanReadable = m["ParentsHumanReadable"].AsString,
-                Raw = m["Raw"].AsString,
-                //MessageDigest = (uint)m["MessageDigest"].AsInt32,
-                ParentsObjectSymbol = m["ParentsObjectSymbol"].AsString
-            }).ToList();
+            return messages.Select(MapBsonToPlainTcoMessage).ToList();
         }
+
     }
 }
-
-
-
-
-      
-
-

@@ -10,7 +10,7 @@
      <button @onclick="() => ViewModel.AckAllMessagesPinned()">Acknowledge All Messages</button> <!-- New Button -->
 </div>
 
-@if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
+@*@if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
 {
     <table class="table">
         <thead>
@@ -50,7 +50,7 @@ else
 {
     <p>No messages found.</p>
 }
-
+*@
 
 
 @if (ViewModel.DbMessageDisplay != null && ViewModel.DbMessageDisplay.Any())
@@ -70,7 +70,7 @@ else
                 <th>Message Digest</th>
         </thead>
         <tbody>
-            @foreach (var message in ViewModel.DbMessageDisplay)
+            @foreach (var message in GetUniqueMessages())
             {
                 <tr>
                    <td>@message.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
