@@ -1969,15 +1969,6 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{41ED9519-F005-F75E-C949-7BAD9F19538C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..63] OF BYTE</Name>
-			<BitSize>512</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>64</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
 			<BitSize>1</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
@@ -2146,7 +2137,7 @@ External Setpoint Generation:
 		<ImageData Id="1008">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1009">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ff000000000000ff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ff000000ff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ff000000ff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ff000000000000ff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{9BFBEFCD-1854-47BE-9BE2-2F97411A783B}" TargetNetId="192.168.4.1.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{9BFBEFCD-1854-47BE-9BE2-2F97411A783B}" TargetNetId="192.168.4.1.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="16"/>
 			<Tasks>
@@ -2824,7 +2815,7 @@ External Setpoint Generation:
 			</NC>
 		</Motion>
 		<Plc>
-			<Project GUID="{20FEF108-471B-4D50-A210-154818B5D824}" Name="TcoAimTtiPowerSupply" PrjFilePath="TcoAimTtiPowerSupply\TcoAimTtiPowerSupply.plcproj" TmcFilePath="TcoAimTtiPowerSupply\TcoAimTtiPowerSupply.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{20FEF108-471B-4D50-A210-154818B5D824}" Name="TcoAimTtiPowerSupply" PrjFilePath="TcoAimTtiPowerSupply\TcoAimTtiPowerSupply.plcproj" TmcFilePath="TcoAimTtiPowerSupply\TcoAimTtiPowerSupply.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoAimTtiPowerSupply\TcoAimTtiPowerSupply.tmc" TmcHash="{2C0C6E05-0048-D10C-AF54-0A29A6DDD248}">
 					<Name>TcoAimTtiPowerSupply Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -2844,56 +2835,284 @@ External Setpoint Generation:
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{C4D9013E-3EDC-4D77-BD13-1437E40A0F72}" Name="TcoAimTtiPowerSupplyTests" PrjFilePath="TcoAimTtiPowerSupplyTests\TcoAimTtiPowerSupplyTests.plcproj" TmcFilePath="TcoAimTtiPowerSupplyTests\TcoAimTtiPowerSupplyTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoAimTtiPowerSupplyTests\TcoAimTtiPowerSupplyTests.tmc" TmcHash="{D5AF8EA3-B2E6-5544-7B9A-426831A21A2B}">
+			<Project Disabled="true" GUID="{C4D9013E-3EDC-4D77-BD13-1437E40A0F72}" Name="TcoAimTtiPowerSupplyTests" PrjFilePath="TcoAimTtiPowerSupplyTests\TcoAimTtiPowerSupplyTests.plcproj" TmcFilePath="TcoAimTtiPowerSupplyTests\TcoAimTtiPowerSupplyTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoAimTtiPowerSupplyTests\TcoAimTtiPowerSupplyTests.tmc" TmcHash="{08634CC9-0A7A-4E74-2496-A7E7429CBA16}">
 					<Name>TcoAimTtiPowerSupplyTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="1">
-						<Name>PlcTask1 Inputs</Name>
-						<Var>
-							<Name>GVL.Robot1.PnIoBoxState</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot1.PnIoBoxDiag</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot1.In.Inputs</Name>
-							<Type GUID="{41ED9519-F005-F75E-C949-7BAD9F19538C}">ARRAY [0..63] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot2.PnIoBoxState</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot2.PnIoBoxDiag</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot2.In.Inputs</Name>
-							<Type GUID="{41ED9519-F005-F75E-C949-7BAD9F19538C}">ARRAY [0..63] OF BYTE</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask1 Outputs</Name>
-						<Var>
-							<Name>GVL.Robot1.PnIoBoxCtrl</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot1.Out.Outputs</Name>
-							<Type GUID="{41ED9519-F005-F75E-C949-7BAD9F19538C}">ARRAY [0..63] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot2.PnIoBoxCtrl</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.Robot2.Out.Outputs</Name>
-							<Type GUID="{41ED9519-F005-F75E-C949-7BAD9F19538C}">ARRAY [0..63] OF BYTE</Type>
-						</Var>
-					</Vars>
+					<UnrestoredVarLinks ImportTime="2023-09-12T14:49:15">
+						<OwnerA Name="InputDst" Prefix="TIPC^TcoAimTtiPowerSupplyTests^TcoAimTtiPowerSupplyTests Instance" Type="1">
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
+								<Link VarA="GVL.Robot1.In.Inputs[0]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[10]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[11]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[12]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[13]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[14]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[15]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[16]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[17]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[18]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[19]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[1]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[20]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[21]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[22]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[23]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[24]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[25]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[26]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[27]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[28]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[29]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[2]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[30]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[31]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[32]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[33]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[34]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[35]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[36]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[37]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[38]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[39]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[3]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[40]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[41]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[42]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[43]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[44]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[45]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[46]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[47]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[48]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[49]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[4]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[50]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[51]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[52]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[53]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[54]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[55]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[56]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[57]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[58]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[59]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[5]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[60]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[61]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[62]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[63]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[6]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[7]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[8]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[9]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 9" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.PnIoBoxDiag" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxDiag" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.PnIoBoxState" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxState" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot2">
+								<Link VarA="GVL.Robot2.In.Inputs[0]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[10]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[11]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[12]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[13]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[14]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[15]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[16]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[17]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[18]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[19]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[1]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[20]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[21]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[22]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[23]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[24]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[25]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[26]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[27]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[28]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[29]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[2]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[30]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[31]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[32]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[33]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[34]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[35]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[36]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[37]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[38]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[39]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[3]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[40]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[41]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[42]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[43]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[44]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[45]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[46]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[47]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[48]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[49]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[4]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[50]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[51]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[52]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[53]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[54]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[55]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[56]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[57]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[58]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[59]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[5]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[60]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[61]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[62]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[63]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[6]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[7]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[8]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[9]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 9" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.PnIoBoxDiag" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxDiag" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.PnIoBoxState" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxState" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^TcoAimTtiPowerSupplyTests^TcoAimTtiPowerSupplyTests Instance" Type="2">
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
+								<Link VarA="GVL.Robot1.Out.Outputs[0]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[10]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[11]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[12]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[13]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[14]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[15]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[16]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[17]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[18]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[19]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[1]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[20]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[21]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[22]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[23]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[24]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[25]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[26]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[27]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[28]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[29]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[2]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[30]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[31]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[32]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[33]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[34]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[35]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[36]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[37]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[38]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[39]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[3]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[40]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[41]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[42]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[43]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[44]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[45]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[46]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[47]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[48]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[49]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[4]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[50]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[51]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[52]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[53]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[54]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[55]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[56]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[57]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[58]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[59]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[5]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[60]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[61]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[62]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[63]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[6]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[7]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[8]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[9]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 9" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot2">
+								<Link VarA="GVL.Robot2.Out.Outputs[0]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[10]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[11]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[12]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[13]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[14]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[15]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[16]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[17]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[18]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[19]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[1]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[20]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[21]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[22]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[23]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[24]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[25]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[26]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[27]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[28]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[29]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[2]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[30]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[31]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[32]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[33]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[34]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[35]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[36]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[37]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[38]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[39]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[3]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[40]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[41]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[42]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[43]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[44]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[45]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[46]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[47]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[48]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[49]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[4]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[50]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[51]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[52]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[53]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[54]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[55]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[56]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[57]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[58]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[59]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[5]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[60]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[61]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[62]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[63]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[6]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[7]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[8]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[9]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 9" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<UnrestoredVarLinks ImportTime="2023-08-07T09:39:45">
 						<OwnerA Name="InputDst" Prefix="TIPC^TcoAbbRoboticsTests^TcoAbbRoboticsTests Instance" Type="1">
 							<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1200)^Term 12 (EL1809)">
@@ -8142,272 +8361,4 @@ Submodule Info: DO 64 bytes
 			</Device>
 		</Io>
 	</Project>
-	<Mappings>
-		<OwnerA Name="TIPC^TcoAimTtiPowerSupplyTests^TcoAimTtiPowerSupplyTests Instance">
-			<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 0"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[10]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 10"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[11]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 11"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[12]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 12"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[13]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 13"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[14]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 14"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[15]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 15"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[16]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 16"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[17]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 17"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[18]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 18"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[19]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 19"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[1]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 1"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[20]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 20"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[21]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 21"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[22]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 22"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[23]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 23"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[24]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 24"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[25]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 25"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[26]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 26"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[27]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 27"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[28]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 28"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[29]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 29"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[2]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 2"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[30]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 30"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[31]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 31"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[32]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 32"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[33]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 33"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[34]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 34"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[35]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 35"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[36]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 36"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[37]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 37"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[38]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 38"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[39]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 39"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[3]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 3"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[40]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 40"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[41]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 41"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[42]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 42"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[43]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 43"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[44]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 44"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[45]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 45"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[46]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 46"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[47]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 47"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[48]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 48"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[49]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 49"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[4]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 4"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[50]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 50"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[51]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 51"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[52]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 52"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[53]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 53"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[54]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 54"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[55]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 55"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[56]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 56"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[57]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 57"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[58]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 58"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[59]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 59"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[5]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 5"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[60]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 60"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[61]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 61"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[62]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 62"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[63]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 63"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[6]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 6"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[7]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 7"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[8]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 8"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[9]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 9"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.PnIoBoxDiag" VarB="Inputs^PnIoBoxDiag"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.PnIoBoxState" VarB="Inputs^PnIoBoxState"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[0]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 0"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[10]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 10"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[11]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 11"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[12]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 12"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[13]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 13"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[14]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 14"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[15]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 15"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[16]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 16"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[17]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 17"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[18]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 18"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[19]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 19"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[1]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 1"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[20]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 20"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[21]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 21"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[22]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 22"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[23]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 23"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[24]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 24"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[25]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 25"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[26]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 26"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[27]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 27"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[28]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 28"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[29]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 29"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[2]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 2"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[30]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 30"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[31]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 31"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[32]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 32"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[33]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 33"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[34]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 34"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[35]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 35"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[36]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 36"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[37]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 37"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[38]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 38"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[39]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 39"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[3]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 3"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[40]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 40"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[41]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 41"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[42]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 42"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[43]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 43"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[44]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 44"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[45]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 45"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[46]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 46"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[47]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 47"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[48]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 48"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[49]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 49"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[4]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 4"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[50]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 50"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[51]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 51"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[52]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 52"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[53]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 53"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[54]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 54"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[55]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 55"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[56]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 56"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[57]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 57"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[58]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 58"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[59]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 59"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[5]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 5"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[60]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 60"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[61]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 61"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[62]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 62"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[63]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 63"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[6]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 6"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[7]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 7"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[8]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 8"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[9]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 9"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (EL6631)^robot2">
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[0]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 0"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[10]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 10"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[11]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 11"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[12]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 12"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[13]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 13"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[14]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 14"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[15]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 15"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[16]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 16"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[17]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 17"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[18]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 18"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[19]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 19"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[1]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 1"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[20]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 20"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[21]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 21"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[22]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 22"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[23]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 23"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[24]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 24"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[25]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 25"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[26]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 26"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[27]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 27"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[28]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 28"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[29]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 29"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[2]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 2"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[30]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 30"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[31]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 31"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[32]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 32"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[33]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 33"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[34]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 34"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[35]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 35"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[36]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 36"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[37]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 37"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[38]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 38"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[39]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 39"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[3]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 3"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[40]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 40"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[41]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 41"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[42]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 42"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[43]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 43"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[44]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 44"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[45]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 45"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[46]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 46"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[47]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 47"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[48]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 48"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[49]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 49"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[4]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 4"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[50]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 50"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[51]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 51"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[52]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 52"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[53]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 53"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[54]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 54"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[55]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 55"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[56]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 56"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[57]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 57"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[58]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 58"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[59]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 59"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[5]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 5"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[60]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 60"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[61]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 61"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[62]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 62"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[63]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 63"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[6]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 6"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[7]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 7"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[8]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 8"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.In.Inputs[9]" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 9"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.PnIoBoxDiag" VarB="Inputs^PnIoBoxDiag"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot2.PnIoBoxState" VarB="Inputs^PnIoBoxState"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[0]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 0"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[10]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 10"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[11]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 11"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[12]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 12"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[13]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 13"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[14]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 14"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[15]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 15"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[16]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 16"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[17]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 17"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[18]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 18"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[19]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 19"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[1]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 1"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[20]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 20"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[21]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 21"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[22]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 22"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[23]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 23"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[24]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 24"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[25]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 25"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[26]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 26"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[27]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 27"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[28]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 28"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[29]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 29"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[2]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 2"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[30]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 30"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[31]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 31"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[32]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 32"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[33]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 33"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[34]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 34"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[35]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 35"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[36]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 36"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[37]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 37"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[38]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 38"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[39]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 39"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[3]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 3"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[40]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 40"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[41]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 41"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[42]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 42"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[43]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 43"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[44]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 44"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[45]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 45"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[46]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 46"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[47]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 47"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[48]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 48"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[49]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 49"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[4]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 4"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[50]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 50"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[51]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 51"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[52]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 52"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[53]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 53"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[54]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 54"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[55]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 55"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[56]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 56"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[57]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 57"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[58]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 58"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[59]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 59"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[5]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 5"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[60]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 60"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[61]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 61"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[62]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 62"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[63]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 63"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[6]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 6"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[7]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 7"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[8]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 8"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot2.Out.Outputs[9]" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 9"/>
-			</OwnerB>
-		</OwnerA>
-	</Mappings>
 </TcSmProject>
