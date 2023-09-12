@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoIrc5_Inputs_v_1_x_x" Id="{c9847a36-5bfe-0585-1ccd-6eb22bff4591}">
+    <Declaration><![CDATA[TYPE TcoIrc5_Inputs_v_1_x_x :
+STRUCT
+	Inputs AT %I* : ARRAY[0..63] OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
