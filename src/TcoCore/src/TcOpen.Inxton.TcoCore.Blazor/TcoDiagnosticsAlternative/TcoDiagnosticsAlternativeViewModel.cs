@@ -110,17 +110,8 @@ namespace TcoCore
                     // Fetch the similar message from the database based on the identity.
                     var existingMessage = _logger.GetSimilarMessage(message);
 
-                    // Check if the message doesn't exist in the database or if the similar message's category is lower, 
-                    // or if the text or source is different.
-                    if (!_logger.MessageExistsInDatabase(message) ||
-                        (existingMessage != null &&
-                        (message.Category >= existingMessage.Category ||
-                         message.Text != existingMessage.Text ||
-                         message.Source != existingMessage.Source)))
-                    {
-                        _logger.LogMessage(message);
-                    }
-
+                    _logger.LogMessage(message);
+                    
                     activeMessages.Add(message.Identity);
                 }
 
@@ -131,8 +122,7 @@ namespace TcoCore
             var messagesToRemove = activeMessages.Where(id => !newMessageIdentities.Contains(id)).ToList();
                 foreach (var id in messagesToRemove)
                 {
-                    Console.WriteLine($"Removing or acknowledging message: {id}");
-                    AckAllMessagesPinned();
+                    AcknowledgeMessages();
                     activeMessages.Remove(id);
                 }
 
@@ -141,9 +131,10 @@ namespace TcoCore
 
                 DiagnosticsRunning = false;
             }
+           
         }
 
-        public void AckAllMessagesPinned()
+        public void AcknowledgeMessages()
         {
             try
             {
@@ -177,7 +168,7 @@ namespace TcoCore
 
                         TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                     }
-                    RefreshMessageDisplay();
+                    //RefreshMessageDisplay();
                 }
             }
             catch (Exception ex)
@@ -238,6 +229,8 @@ namespace TcoCore
 
         public void RefreshMessageDisplay()
         {
+            AcknowledgeMessages();
+            Console.WriteLine($"Refresh");
             MessageDisplay = _logger.ReadMessages();
         }
 

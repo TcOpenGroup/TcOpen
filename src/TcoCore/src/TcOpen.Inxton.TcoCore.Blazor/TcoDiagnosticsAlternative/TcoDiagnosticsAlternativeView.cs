@@ -76,7 +76,7 @@ namespace TcoCore
 
         private void AckMessages()
         {
-            ViewModel.AckAllMessagesPinned();
+            ViewModel.AcknowledgeMessages();
             StateHasChanged();
         }
 
