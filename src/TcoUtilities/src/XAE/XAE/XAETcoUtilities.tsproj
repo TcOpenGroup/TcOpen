@@ -15,7 +15,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project Disabled="true" GUID="{8C2F48E5-DE0C-4887-BF0E-4C2DEC178EB8}" Name="TcoUtilities" PrjFilePath="TcoUtilities\TcoUtilities.plcproj" TmcFilePath="TcoUtilities\TcoUtilities.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{8C2F48E5-DE0C-4887-BF0E-4C2DEC178EB8}" Name="TcoUtilities" PrjFilePath="TcoUtilities\TcoUtilities.plcproj" TmcFilePath="TcoUtilities\TcoUtilities.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoUtilities\TcoUtilities.tmc">
 					<Name>TcoUtilities Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -27,7 +27,7 @@
 					</Contexts>
 				</Instance>
 			</Project>
-			<Project Disabled="true" GUID="{47AF85FD-FC42-4B01-92A9-AD6521E891DE}" Name="TcoUtilitiesTests" PrjFilePath="TcoUtilitiesTests\TcoUtilitiesTests.plcproj" TmcFilePath="TcoUtilitiesTests\TcoUtilitiesTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{47AF85FD-FC42-4B01-92A9-AD6521E891DE}" Name="TcoUtilitiesTests" PrjFilePath="TcoUtilitiesTests\TcoUtilitiesTests.plcproj" TmcFilePath="TcoUtilitiesTests\TcoUtilitiesTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoUtilitiesTests\TcoUtilitiesTests.tmc">
 					<Name>TcoUtilitiesTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

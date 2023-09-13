@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoOmnicore_IO_v_1_x_x" Id="{73ac83ee-f74a-0848-3151-6db7d8e6f078}">
+    <Declaration><![CDATA[TYPE TcoOmnicore_IO_v_1_x_x :
+STRUCT
+	PnIoBoxState AT %I*	:	UINT;
+	PnIoBoxDiag AT %I*	:	UINT;
+	PnIoBoxCtrl AT %Q*	:	UINT;
+	{attribute addProperty Name "<#IN#>"}
+	In : TcoIrc5_Inputs_v_1_x_x;
+	{attribute addProperty Name "<#OUT#>"}
+	Out : TcoIrc5_Outputs_v_1_x_x;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

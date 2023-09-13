@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="ITcoRobotics" Id="{57e4b936-bbfb-0eb5-372b-c0d667db345a}">
+    <Declaration><![CDATA[INTERFACE ITcoRobotics EXTENDS __System.IQueryInterface
+]]></Declaration>
+    <Folder Name="Operations" Id="{d8109b4c-19cd-0811-29f7-671663a0afa6}" />
+    <Method Name="StartAtMain" Id="{bc65f8ac-592f-0a2b-0415-1514fa61fa09}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartAtMain : TcoCore.ITcoTaskStatus
+]]></Declaration>
+    </Method>
+    <Method Name="StartMotorsAndProgram" Id="{f97f4746-dc86-05f2-25d6-03a7baaf43f9}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartMotorsAndProgram : TcoCore.ITcoTaskStatus
+]]></Declaration>
+    </Method>
+    <Method Name="StartMovements" Id="{bf62d065-423a-059f-2635-b3395a365bf0}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inData : TcoRoboticsMovementsParams;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="StopMovements" Id="{4ab91db4-3107-074c-3b82-d32f9b392c09}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StopMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="StopMovementsAndProgram" Id="{9427d102-9495-0c02-0bb7-83a6e19acc2a}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StopMovementsAndProgram : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

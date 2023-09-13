@@ -15,7 +15,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project Disabled="true" GUID="{711D4247-A0B7-46C4-92AB-BEA8CAD07A56}" Name="PlcTemplate" PrjFilePath="PlcTemplate\PlcTemplate.plcproj" TmcFilePath="PlcTemplate\PlcTemplate.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{711D4247-A0B7-46C4-92AB-BEA8CAD07A56}" Name="PlcTemplate" PrjFilePath="PlcTemplate\PlcTemplate.plcproj" TmcFilePath="PlcTemplate\PlcTemplate.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcTemplate\PlcTemplate.tmc" TmcHash="{C0DBD37F-61D1-B9F2-AE1B-F4A24ADE82F1}">
 					<Name>PlcTemplate Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -35,7 +35,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project Disabled="true" GUID="{CFBC043B-C3FB-403E-B3EC-38B73B6C9F17}" Name="PlcTemplateTests" PrjFilePath="PlcTemplateTests\PlcTemplateTests.plcproj" TmcFilePath="PlcTemplateTests\PlcTemplateTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{CFBC043B-C3FB-403E-B3EC-38B73B6C9F17}" Name="PlcTemplateTests" PrjFilePath="PlcTemplateTests\PlcTemplateTests.plcproj" TmcFilePath="PlcTemplateTests\PlcTemplateTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcTemplateTests\PlcTemplateTests.tmc" TmcHash="{28B73C6A-C88C-9569-A940-4DA9862D1461}">
 					<Name>PlcTemplateTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

@@ -429,6 +429,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoRexrothPressTestsConnect
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoRexrothPressUnitTests", "src\TcoRexrothPress\tests\PlcUnitTests\TcoRexrothPressUnitTests.csproj", "{57EAEAB3-AE95-47C8-801E-DA536CBC631B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TcoAbbRobotics", "TcoAbbRobotics", "{0563F8DA-1340-4F2E-98DC-998FA7EC73A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoAbbRoboticsConnector", "src\TcoAbbRobotics\src\TcoAbbRoboticsConnector\TcoAbbRoboticsConnector.csproj", "{E3F5A18B-1406-408B-8358-059FD3305AFA}"
+EndProject
+Project("{B1E792BE-AA5F-4E3C-8C82-674BF9C0715B}") = "XaeTcoAbbRobotics", "src\TcoAbbRobotics\src\XaeTcoAbbRobotics\XaeTcoAbbRobotics.tsproj", "{7BF92B54-9870-426B-87AD-3F84C2DFD822}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoAbbRobotics.Wpf.Sandbox", "src\TcoAbbRobotics\tests\TcoAbbRobotics.Wpf.Sandbox\TcoAbbRobotics.Wpf.Sandbox.csproj", "{144514E0-0105-49E3-964C-3489783D6F00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoAbbRoboticsTestsConnector", "src\TcoAbbRobotics\tests\TcoAbbRoboticsTestsConnector\TcoAbbRoboticsTestsConnector.csproj", "{41E64D03-E2F0-444B-959F-B8510470D257}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcoAbbRoboticsUnitTests", "src\TcoAbbRobotics\tests\TcoAbbRoboticsUnitTests\TcoAbbRoboticsUnitTests.csproj", "{4607A15C-D7D7-4CF2-9F88-CE0B4719537E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpen.Inxton.TcoAbbRobotics.Wpf", "src\TcoAbbRobotics\src\TcoAbbRobotics.Wpf\TcOpen.Inxton.TcoAbbRobotics.Wpf.csproj", "{F52148D1-7BC7-4BC4-BE22-E16D505C4F12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{23A24C2A-80E3-4323-9B8C-A7791034F463}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9389A9BB-5CFA-44E1-8519-CDAEE91BEDA2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\TcoData\tests\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems*{3bf071a6-13a1-46a5-8fd5-87c8cee94896}*SharedItemsImports = 13
@@ -4465,6 +4483,14 @@ Global
 		{E4AABB0D-11C6-4F82-BBB8-7654DA93C9DC} = {8121FBD6-27D1-4CDC-A68B-E1D24C69920D}
 		{1858A382-4751-453F-8105-17B94930B9F7} = {8121FBD6-27D1-4CDC-A68B-E1D24C69920D}
 		{57EAEAB3-AE95-47C8-801E-DA536CBC631B} = {8121FBD6-27D1-4CDC-A68B-E1D24C69920D}
+		{E3F5A18B-1406-408B-8358-059FD3305AFA} = {23A24C2A-80E3-4323-9B8C-A7791034F463}
+		{7BF92B54-9870-426B-87AD-3F84C2DFD822} = {23A24C2A-80E3-4323-9B8C-A7791034F463}
+		{144514E0-0105-49E3-964C-3489783D6F00} = {9389A9BB-5CFA-44E1-8519-CDAEE91BEDA2}
+		{41E64D03-E2F0-444B-959F-B8510470D257} = {9389A9BB-5CFA-44E1-8519-CDAEE91BEDA2}
+		{4607A15C-D7D7-4CF2-9F88-CE0B4719537E} = {9389A9BB-5CFA-44E1-8519-CDAEE91BEDA2}
+		{F52148D1-7BC7-4BC4-BE22-E16D505C4F12} = {23A24C2A-80E3-4323-9B8C-A7791034F463}
+		{23A24C2A-80E3-4323-9B8C-A7791034F463} = {0563F8DA-1340-4F2E-98DC-998FA7EC73A0}
+		{9389A9BB-5CFA-44E1-8519-CDAEE91BEDA2} = {0563F8DA-1340-4F2E-98DC-998FA7EC73A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_TranslatorConfiguration = {"Azure":"{\"AutoDetectHtml\":true,\"MaxCharactersPerMinute\":33300,\"AuthenticationKey\":null,\"Region\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","Baidu":"{\"AppId\":null,\"SecretKey\":null,\"ApiUrl\":null,\"Domain\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","DeepL":"{\"ApiKey\":null,\"ApiUrl\":\"https://api-free.deepl.com/v2/translate\",\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}","Google":"{\"ApiKey\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","MSTerm":"{\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","MyMemory":"{\"Key\":null,\"Mail\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}"}

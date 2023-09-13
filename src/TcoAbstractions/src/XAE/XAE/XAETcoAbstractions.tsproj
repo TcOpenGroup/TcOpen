@@ -15,7 +15,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project Disabled="true" GUID="{EEFEC858-174D-48F4-9732-3552F7B89F90}" Name="TcoAbstractions" PrjFilePath="TcoAbstractions\TcoAbstractions.plcproj" TmcFilePath="TcoAbstractions\TcoAbstractions.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{EEFEC858-174D-48F4-9732-3552F7B89F90}" Name="TcoAbstractions" PrjFilePath="TcoAbstractions\TcoAbstractions.plcproj" TmcFilePath="TcoAbstractions\TcoAbstractions.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoAbstractions\TcoAbstractions.tmc" TmcHash="{309A3B04-7747-D110-003A-9C7167CB0D8E}">
 					<Name>TcoAbstractions Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -35,7 +35,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project Disabled="true" GUID="{ECD5921D-B7AC-4A17-8D1D-51AD0532630A}" Name="TcoAbstractionsTests" PrjFilePath="TcoAbstractionsTests\TcoAbstractionsTests.plcproj" TmcFilePath="TcoAbstractionsTests\TcoAbstractionsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{ECD5921D-B7AC-4A17-8D1D-51AD0532630A}" Name="TcoAbstractionsTests" PrjFilePath="TcoAbstractionsTests\TcoAbstractionsTests.plcproj" TmcFilePath="TcoAbstractionsTests\TcoAbstractionsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoAbstractionsTests\TcoAbstractionsTests.tmc" TmcHash="{E2D2740A-F14D-1CBB-3975-5A3386CBAFCC}">
 					<Name>TcoAbstractionsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

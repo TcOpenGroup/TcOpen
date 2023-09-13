@@ -956,18 +956,15 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.10.110.2.1" RemoteName="Device 1 (Profinet Controller)">
+			<Device Id="1" DevType="113" AmsPort="28673" AmsNetId="172.20.10.104.2.1" RemoteName="Device 1 (Profinet Controller)">
 				<Name>Device 1 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
+				<DevData>000000000000000000000000007102005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="210" SizeOut="233">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="1" BoxType="9121">
 					<Name>myveryfirstdataman</Name>
-					<Comment><![CDATA[
-The GSDML is not available!
-
-GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
+					<Comment><![CDATA[GSDML Name: GSDML-V2.31-Cognex-DataMan-20170215.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
 OrderNumber: DMR-200#-00
@@ -1382,10 +1379,7 @@ Submodule Info: Reads 64 bytes from DataMan
 				</Box>
 				<Box Id="2" BoxType="9121">
 					<Name>myveryfirstinsight</Name>
-					<Comment><![CDATA[
-The GSDML is not available!
-
-GSDML Name: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
+					<Comment><![CDATA[GSDML Name: GSDML-V2.34-Cognex-InSightClassB-20200529.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cognex
 OrderNumber: IS85XXP
@@ -1845,6 +1839,7 @@ Submodule Info: Reads 128 bytes from In-Sight spreadsheet
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500810000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^TcoCognexVisionTests^TcoCognexVisionTests Instance">
 			<OwnerB Name="TIID^Device 1 (Profinet Controller)^myveryfirstdataman">
 				<Link VarA="PlcTask Inputs^GVL.myVeryFirstDatamanGVL.AcquisitionStatus.Acquiring" VarB="API^Acquisition_Status^Acquisition_Status^Inputs^Acquisition_Status_Register^Acquiring"/>

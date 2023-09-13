@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{20e36e6a-1247-05bf-1677-012e31b12f3e}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+    _tcoIrc5TestContext : TcoTestContext;
+
+    _wpfContext : WpfContext;
+    _wpfContextCall : BOOL := FALSE;
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_tcoIrc5TestContext.ProbeRun();
+
+
+IF _wpfContextCall THEN
+	_wpfContext.Run();
+END_IF	
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
