@@ -1,29 +1,40 @@
 ﻿@page "/Identity/Account/Login"
 @inject NavigationManager _navigationManager
 @inject BlazorAlertManager _alertManager
+@inject Services.RepositoryService _services
 
 <div class="card">
     <h4 class="card-header">Log in</h4>
     <div class="card-body">
         <EditForm Model="@_model" OnValidSubmit="OnValidSubmit" Context="accountManagementContext">
             <DataAnnotationsValidator />
+
             <div class="form-group">
                 <label>Username</label>
-                <InputText @bind-Value="_model.Username" class="form-control" />
+                <select @bind="@_model.Username" @bind:event="oninput" class="form-control">
+                    <option value="">Choose user...</option>
+                    @foreach (var username in _usernames)
+                    {
+                        <option value="@username">@username</option>
+                    }
+                </select>
                 <ValidationMessage For="@(() => _model.Username)" />
             </div>
+
             <div class="form-group">
                 <label>Password</label>
                 <InputText @bind-Value="_model.Password" type="password" class="form-control" />
                 <ValidationMessage For="@(() => _model.Password)" />
             </div>
+
             <button type="submit" class="btn btn-primary m-2">Login</button>
         </EditForm>
     </div>
 </div>
 
-@code{
+@code {
     private LoginUserModel _model { get; set; }
+    private List<string> _usernames = new List<string>();
 
     private void OnValidSubmit()
     {
@@ -47,5 +58,16 @@
     protected override void OnInitialized()
     {
         _model = new LoginUserModel();
+        _model.Username = ""; // Set default username as empty to show "Choose user..." option
+        _usernames = GetUsers();
+    }
+
+    private List<string> GetUsers()
+    {
+        // Fetch all user records.
+        var users = _services.UserRepository.GetRecords("*").ToList();
+        
+        // Extract usernames from the user records.
+        return users.Select(u => u.Username).ToList();
     }
 }
