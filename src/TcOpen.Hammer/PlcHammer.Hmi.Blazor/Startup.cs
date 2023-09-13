@@ -63,7 +63,7 @@ namespace PlcHammer.Hmi.Blazor
 
             services.AddTcoCoreExtensions();
 
-            if (true)/*Mongo database*/
+            if (false)/*Mongo database*/
             {
                 (userRepo, groupRepo) = SetUpMongoDatabase();
             }

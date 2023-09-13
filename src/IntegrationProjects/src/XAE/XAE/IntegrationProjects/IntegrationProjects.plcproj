@@ -142,7 +142,10 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcoPneumatics">
       <DefaultResolution>TcoPneumatics, 0.6.0.913 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoPneumatics</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcoUtilities">
+      <DefaultResolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoUtilities</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +171,9 @@
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoPneumatics">
       <Resolution>TcoPneumatics, 0.6.0.913 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoUtilities">
+      <Resolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="ExampleContext" Id="{1aa2a6c1-d36a-0374-1754-fb6150365769}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleContext EXTENDS TcoCore.TcoContext
 VAR
@@ -46,7 +46,7 @@ _examplesImplementationWithDone();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Sequence1" Id="{fef70385-7bed-099c-3214-bed4b6f98420}">
+    <Method Name="Sequence1" Id="{bc135a6a-0108-0b8c-069e-a00ce783ca9f}">
       <Declaration><![CDATA[METHOD Sequence1
 VAR
     seq    : REFERENCE TO TcoCore.TcoSequence;
