@@ -4,10 +4,10 @@
     <Declaration><![CDATA[FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
 VAR
     _serviceModeActive : BOOL;
-   // {attribute addProperty Name "<#Abb IRC 5#>"}
-//    _robot1 : TcoAbbRobotics.TcoIrc5_v_1_x_x(THIS^);
-//
-//	
+    {attribute addProperty Name "<#QL355P SUPPLY#>"}
+    _supply : TcoAimTtiPowerSupply.TcoQl355P_v_1_x_x(THIS^);
+
+	
 	
 	_sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
     _observer       : TcoCore.TcoSequencerObserver(THIS^);
@@ -15,6 +15,7 @@ VAR
     _sequence1Task 	: SequenceTask(THIS^);
     _dialog        	: TcoCore.TcoDialog(THIS^);
 
+	
 	_enable: BOOL;
 END_VAR
 ]]></Declaration>
@@ -34,16 +35,19 @@ END_VAR
 METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _serviceModeActive THEN
-   //	_robot1.Service();
+	_supply.Service();
  
-
-
 END_IF
-//_robot1(
-//    inoData := GVL.Robot1);
+_supply.Config.IpAddress:='192.168.4.100';
+_supply.Config.Port:=9221;
+_supply.Config.Timeout:=10000;
+_supply.Config.InfoTime:=T#2S;
+_supply.Config.ErrorTime:=T#5S;
 
 
-_sequence1Task.Enabled := NOT _sequence1Task.Busy;
+_supply();
+
+_sequence1Task.Enabled := TRUE;
 _sequence1Task(Sequence := _sequence1);
 IF(_sequence1Task.Execute())THEN
 	Sequence1();
@@ -63,9 +67,14 @@ VAR
 	_acceleration: LREAL;
 	_velocity: LREAL;
 	ProbeDoneWhen: INT;
-	_param: TcoRoboticsMovementsParams;
 
 
+
+	cmd: TcoQlSeriesSupply_SetControl_v_1_x_x;
+	getCmd: TcoQlSeriesSupply_GetControl_v_1_x_x;
+	outVoltage: REAL;
+	outCurrent: REAL;
+	isOff: BOOL;
 END_VAR
 
 VAR_INST
@@ -87,14 +96,14 @@ IF (seq.Step(inStepID := 0,
     inEnabled := TRUE,
     inStepDescription := 'READY TO START')) THEN
     //--------------------------------------------------------
-	_param.GlobalSpeed :=100;
+
 		_noOfAttmets:=0;
 
 	answer := _dialog			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
-			.WithText('Do you really want to start movements? Do we go ahead?')			
+			.WithText('Do you really want to setup voltage?')			
 			.WithYesNo().Answer;
 			//
 			
@@ -107,13 +116,13 @@ IF (seq.Step(inStepID := 0,
     //--------------------------------------------------------			
 END_IF;
 
-(*
+
 IF (seq.Step(inStepID := 10,
     inEnabled := TRUE,
     inStepDescription := 'RESTORE')) THEN
 //--------------------------------------------------------   
 	
-	_robot1.Restore();
+	_supply.Restore();
 	seq.CompleteStep();
 	
 		
@@ -121,10 +130,12 @@ IF (seq.Step(inStepID := 10,
 END_IF;
 IF (seq.Step(inStepID := 11,
     inEnabled := TRUE,
-    inStepDescription := 'STOP MOVEMENTS AND PROGRAM')) THEN
+    inStepDescription := 'SET VOLTAGE')) THEN
 //--------------------------------------------------------   
-	
-	 	IF _robot1.StopMovementsAndProgram(inStopType:=eTcoRoboticsStopType.Soft).Done  THEN
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.V;
+	cmd.NrfValue:=5.0;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
 			seq.CompleteStep();
 		END_IF
 		
@@ -133,71 +144,325 @@ END_IF;
 
 IF (seq.Step(inStepID := 12,
     inEnabled := TRUE,
-    inStepDescription := 'START AT MAIN')) THEN
+    inStepDescription := 'GET VOLTAGE')) THEN
 //--------------------------------------------------------   
-	
-	 	IF _robot1.StartAtMain().Done  THEN
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.V;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
 			seq.CompleteStep();
-		END_IF;
+		END_IF
 		
 //--------------------------------------------------------			
 END_IF;
 
 IF (seq.Step(inStepID := 13,
     inEnabled := TRUE,
-    inStepDescription := 'START MOTORS AND PROGRAM')) THEN
+    inStepDescription := 'SET VOLTAGE ANOTHER WAY')) THEN
 //--------------------------------------------------------   
 	
-	 	IF _robot1.StartMotorsAndProgram().Done  THEN
+	 	IF _supply.SetVoltage(inVoltage:=4.0).Done  THEN
 			seq.CompleteStep();
-		END_IF;
+		END_IF
 		
 //--------------------------------------------------------			
 END_IF;
 
 IF (seq.Step(inStepID := 14,
     inEnabled := TRUE,
-    inStepDescription := 'START MOVEMENTS')) THEN
+    inStepDescription := 'GET VOLTAGE ANOTHER WAY')) THEN
 //--------------------------------------------------------   
-	_maxAllowedAttempts:=10;
+		IF _supply.GetVoltage(outVoltage=>outVoltage).Done  THEN
+			IF outVoltage=4.0 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 19,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+		_noOfAttmets:=0;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to setup current?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 20,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
 	
-	
+	_supply.Restore();
 	seq.CompleteStep();
 	
-	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 21,
+    inEnabled := TRUE,
+    inStepDescription := 'SET CURRENT')) THEN
+//--------------------------------------------------------   
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.I;
+	cmd.NrfValue:=0.5;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
 //--------------------------------------------------------			
 END_IF;
 
-IF (seq.Step(inStepID := 15,
+IF (seq.Step(inStepID := 22,
     inEnabled := TRUE,
-    inStepDescription := 'START MOVEMENTS')) THEN
+    inStepDescription := 'GET CURRENT')) THEN
 //--------------------------------------------------------   
-	_param.ActionNo:=100;
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.I;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			IF _supply.Status.State.Nr2Value=0.5 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 23,
+    inEnabled := TRUE,
+    inStepDescription := 'SET CURRENT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
 	
-	IF _robot1.StartMovements(inData:=_param).Done   THEN
+	 	IF _supply.SetCurrent(inCurrent:=0.2).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 24,
+    inEnabled := TRUE,
+    inStepDescription := 'GET CURRENT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetCurrent(outCurrent=>outCurrent).Done  THEN
+			IF outCurrent=0.2 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+
+IF (seq.Step(inStepID := 29,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+		_noOfAttmets:=0;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to set output?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
 		seq.CompleteStep();
-		_robot1.Restore();
-	END_IF
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 30,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
 	
+	_supply.Restore();
+	seq.CompleteStep();
+	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 31,
+    inEnabled := TRUE,
+    inStepDescription := 'SET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+	cmd.NrfValue:=1;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 32,
+    inEnabled := TRUE,
+    inStepDescription := 'GET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			IF _supply.Status.State.Nr1Value=1 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 33,
+    inEnabled := TRUE,
+    inStepDescription := 'SET OFF OUTPUT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _supply.SetOutputOff().Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 34,
+    inEnabled := TRUE,
+    inStepDescription := 'GET IF OUTPUT IS OFF ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetOutputIsOff(outIsOff=>isOff).Done  THEN
+			IF isOff=TRUE THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
 //--------------------------------------------------------			
 END_IF;
 
 
-IF (seq.Step(inStepID := 16,
+
+
+IF (seq.Step(inStepID := 40,
     inEnabled := TRUE,
-    inStepDescription := 'START ANOTHER MOVE MOVEMENTS')) THEN
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+	_noOfAttmets:=0;
+	_maxAllowedAttempts:=100;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to set output in cycle?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+
+IF (seq.Step(inStepID := 41,
+    inEnabled := TRUE,
+    inStepDescription := 'SET ON OUTPUT')) THEN
 //--------------------------------------------------------   
-	_param.ActionNo:=1;
-	_param.GlobalSpeed:=90;
-	IF _robot1.StartMovements(inData:=_param).Done  THEN
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+	cmd.NrfValue:=1;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 42,
+    inEnabled := TRUE,
+    inStepDescription := 'GET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			IF _supply.Status.State.Nr1Value=1 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 43,
+    inEnabled := TRUE,
+    inStepDescription := 'SET OFF OUTPUT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _supply.SetOutputOff().Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 44,
+    inEnabled := TRUE,
+    inStepDescription := 'GET IF OUTPUT IS OFF ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetOutputIsOff(outIsOff=>isOff).Done  THEN
+			IF isOff=TRUE THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+
+
+IF (seq.Step(inStepID := 45,
+    inEnabled := TRUE,
+    inStepDescription := 'REPEAT IT IF NECESSARY')) THEN
+//--------------------------------------------------------   
+	
+	
 		IF _noOfAttmets<_maxAllowedAttempts THEN
 			_noOfAttmets:=_noOfAttmets+1;
-			seq.RequestStep(14);
-			_robot1.Restore();
+			seq.RequestStep(41);
+			_supply.Restore();
 		ELSE 
 		seq.CompleteStep();
 		end_if;
-	END_IF
+
 	
 //--------------------------------------------------------			
 END_IF;
@@ -212,87 +477,6 @@ END_IF;
 
 
 
-
-
-
-
-//
-IF (seq.Step(inStepID := 500,
-    inEnabled := TRUE,
-    inStepDescription := 'EXAMPLE OF MOVMENT ABORTED')) THEN
-//    --------------------------------------------------------
-
-	answer := _dialog			
-			.Show()	
-			.WithType(eDialogType.Question)				
-			.WithCaption('Abort movement?')
-			.WithText('Do you  want to start movements and abort it?')			
-			.WithYesNo().Answer;
-			
-			
-	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
-		seq.CompleteStep();
-	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
-		_sequence1Task.Restore();
-	 END_IF;	
-
-//    --------------------------------------------------------			
-END_IF;
-
-IF (seq.Step(inStepID := 525,
-    inEnabled := TRUE,
-    inStepDescription := 'STOP MOVEMENT  EXAMPLE')) THEN
-//    --------------------------------------------------------    
-		
-
-		answer := _dialog			
-			.Show()	
-			.WithType(eDialogType.Question)				
-			.WithCaption('Movement running')
-			.WithText('Do you  want to abort movement?')			
-			.WithYesNo().Answer;
-			
-			
-		 IF (answer = TcoCore.eDialogAnswer.Yes) THEN 
-			_robot1.StopMovements(inStopType:=TcoAbstractions.eTcoRoboticsStopType.Quick);   	 	
-			seq.CompleteStep();
-		 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
-			_sequence1Task.Restore();
-		 END_IF;	
-		
-	_param.ActionNo:=100;	
-	_param.GlobalSpeed :=20;
-	IF _robot1.StartMovements(inData:=_param).Done  THEN
-		seq.CompleteStep();
-	END_IF
-	
-		
-		
-//    --------------------------------------------------------			
-END_IF;
-
-IF (seq.Step(inStepID := 600,
-    inEnabled := TRUE,
-    inStepDescription := 'ASKING FOR RESTORING')) THEN
-//    --------------------------------------------------------
-
-	answer := _dialog			
-			.Show()	
-			.WithType(eDialogType.Question)				
-			.WithCaption('Question?')
-			.WithText('Do you want to restore TcoIrc5 component?')			
-			.WithYesNo().Answer;
-			
-			
-	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
-		_robot1.Restore();
-		seq.CompleteStep();
-	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
-		_sequence1Task.Restore();
-	 END_IF;	
-//    --------------------------------------------------------			
-END_IF;
-*)
 IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
     inEnabled := TRUE,
     inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN

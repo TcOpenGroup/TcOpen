@@ -29,10 +29,11 @@ namespace TcoAimTtiPowerSupply.Wpf.Sandbox
             TcoAimTtiPowerSupplyTests.Entry.TcoAimTtiPowerSupplyTestsPlc.Connector.BuildAndStart();
             TcoAimTtiPowerSupplyTests.Entry.TcoAimTtiPowerSupplyTestsPlc.MAIN._wpfContextCall.Synchron = true;
             TcoAimTtiPowerSupplyTests.Entry.TcoAimTtiPowerSupplyTestsPlc.MAIN._wpfContext._serviceModeActive.Synchron = true;
+            TcoAimTtiPowerSupplyTests.Entry.TcoAimTtiPowerSupplyTestsPlc.MAIN._wpfContext._supply.Initialize();
             this.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
 
-     
-      
+    
+
     }
 }

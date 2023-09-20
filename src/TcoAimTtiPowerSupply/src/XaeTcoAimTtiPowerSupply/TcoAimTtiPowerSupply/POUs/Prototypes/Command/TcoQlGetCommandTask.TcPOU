@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoQlGetCommandTask" Id="{d192eb2d-381c-0a4d-3e16-ac238717f625}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoQlGetCommandTask EXTENDS TcoQlSeriesSupplyTask
+VAR
+	_command:TcoQlSeriesSupply_GetControl_v_1_x_x;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^(inoConfig:=inoConfig,inoStatus:=inoStatus);]]></ST>
+    </Implementation>
+    <Method Name="Restore" Id="{fdd81f34-a58a-040c-3d3f-ae8eebf31942}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithParams" Id="{a429d088-bf42-00af-02f6-26580c27f1ff}">
+      <Declaration><![CDATA[METHOD  WithParams : REFERENCE TO TcoQlGetCommandTask
+VAR_INPUT
+	inCommand:TcoQlSeriesSupply_GetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._command := inCommand;
+WithParams REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

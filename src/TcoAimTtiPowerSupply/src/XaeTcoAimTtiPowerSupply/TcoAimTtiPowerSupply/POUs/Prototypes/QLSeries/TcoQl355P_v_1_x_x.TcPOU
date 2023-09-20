@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoQl355P_v_1_x_x" Id="{3351a7f4-e4f1-04e8-3ae3-ec074b015e29}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoQl355P_v_1_x_x EXTENDS TcoCore.TcoComponent
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+    
+
+	{attribute addProperty Name "<#Status#>"}
+    _status : TcoQlSeriesSupply_Status_v_1_x_x;
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoQlSeriesSupply_Config_v_1_x_x;
+
+
+	_someTaskIsActive: BOOL;
+
+	
+END_VAR
+VAR
+	{attribute addProperty Name "<#Get Command#>"}
+    _getCommandTask : TcoQlGetCommandTask(THIS^);
+		
+	{attribute addProperty Name "<#Set Command#>"}
+    _setCommandTask : TcoQlSetCommandTask(THIS^);
+
+	
+    {attribute addProperty Name "<#Restore#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
+	
+
+  
+   
+
+  
+
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+_getCommandTask(inoConfig:=_config,inoStatus:=_status);
+_setCommandTask(inoConfig:=_config,inoStatus:=_status);
+
+
+
+//*************RESTORE********************
+
+_restoreTask.Enabled := TRUE;
+IF _restoreTask.Execute() THEN
+	Restore();
+	_restoreTask.DoneWhen(TRUE);
+	_status.ActionDescription:='Restored';
+END_IF
+//****************************************
+]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{e8b663f1-a9d8-0c21-2683-e7c53ff03299}">
+      <Folder Name="Common" Id="{c64fa824-d5e6-0c5f-3eca-9b18c97a84ef}" />
+      <Folder Name="Generic" Id="{0fa8a0b2-76c5-06be-2a99-52e67203b4f2}" />
+    </Folder>
+    <Folder Name="Task" Id="{1344c1b8-175a-02e2-1845-1a8160c3a7e2}" />
+    <Property Name="Config" Id="{0d394bbf-cc1c-00b2-245b-f6a4450329ff}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the IRC 5. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoQlSeriesSupply_Config_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{33cb4413-958b-0fea-2390-664c9ed1d18d}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{4b8fcfca-d923-0cb6-3a56-bb8a33d6e82e}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+  	ParentObject : ITcoObject;	
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetCommand" Id="{35ec3a2d-8699-088d-10ef-6b2159e77b4c}" FolderPath="Operations\Generic\">
+      <Declaration><![CDATA[METHOD PUBLIC GetCommand : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inCommand:TcoQlSeriesSupply_getControl_v_1_x_x;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetCommand:=  _getCommandTask.WithParams(inCommand).Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="GetCommandTask" Id="{e346ab33-8a9a-0ff9-2fb2-e1ab6d055417}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY GetCommandTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{ceb4c0e1-5052-02c1-1c87-038ae820f955}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[GetCommandTask := _getCommandTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="GetCurrent" Id="{ba6c7d04-667c-0e95-3448-f9bb8eda89bb}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC GetCurrent : TcoCore.ITcoTaskStatus
+VAR_OUTPUT
+	outCurrent:REAL;
+END_VAR
+VAR
+	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outCurrent:=0;
+command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.i;
+command.NValue:=1;
+GetCurrent:=GetCommand(inCommand:=command);
+IF GetCurrent.Done THEN
+	outCurrent:=Status.State.Nr2Value;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetOutputIsOff" Id="{e968a5b2-fa28-0d5c-3b64-b5eefa949a1a}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC GetOutputIsOff : TcoCore.ITcoTaskStatus
+VAR_OUTPUT
+	outIsOff:BOOL;
+END_VAR
+VAR
+	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outIsOff:=FALSE;
+command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+command.NValue:=1;
+GetOutputIsOff:=GetCommand(inCommand:=command);
+IF GetOutputIsOff.Done THEN
+	outIsOff:=Status.State.Nr2Value=0;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetOutputIsOn" Id="{64b4ff7a-12c4-0470-0a9e-d7c6710f1cdf}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC GetOutputIsOn : TcoCore.ITcoTaskStatus
+VAR_OUTPUT
+	outIsOn:BOOL;
+END_VAR
+VAR
+	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outIsOn:=FALSE;
+command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+command.NValue:=1;
+GetOutputIsOn:=GetCommand(inCommand:=command);
+IF GetOutputIsOn.Done THEN
+	outIsOn:=Status.State.Nr2Value=1;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetVoltage" Id="{7c7e5362-3d05-026d-0323-0042ae5c5c29}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC GetVoltage : TcoCore.ITcoTaskStatus
+VAR_OUTPUT
+	outVoltage:REAL;
+END_VAR
+VAR
+	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outVoltage:=0;
+command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.V;
+command.NValue:=1;
+GetVoltage:=GetCommand(inCommand:=command);
+IF GetVoltage.Done THEN
+	outVoltage:=Status.State.Nr2Value;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{1ec27197-5427-0672-1611-f2acf08d391e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RestoreTasks();
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RestoreTasks" Id="{c3387e7c-355a-01ce-0d66-89c8a763a695}">
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_getCommandTask.Restore();
+_setCommandTask.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{cd2e86cc-91dc-0db1-0291-9006d9ac836e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ServiceMode]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetCommand" Id="{e62ff0aa-6a20-0e6f-0576-73a9ca2a0ac5}" FolderPath="Operations\Generic\">
+      <Declaration><![CDATA[METHOD PUBLIC SetCommand : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inCommand:TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SetCommand:=  _setCommandTask.WithParams(inCommand).Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SetCommandTask" Id="{21ce3437-63d3-0c82-3862-eb42ebd61b67}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY SetCommandTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{858be8ab-d4a7-0feb-24c2-89f2d85cbe57}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetCommandTask := _setCommandTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SetCurrent" Id="{f95506f9-9fc9-0eaf-3be0-a3ceb792c9b3}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC SetCurrent : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inCurrent:REAL;
+END_VAR
+VAR
+	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.I;
+command.NValue:=1;
+command.NrfValue:=inCurrent;
+SetCurrent:=SetCommand(inCommand:=command);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetOutputOff" Id="{b26455cd-694a-0b9b-0807-30e3d64e4b48}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC SetOutputOff : TcoCore.ITcoTaskStatus
+
+VAR
+	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+command.NValue:=1;
+command.NrfValue:=0;
+SetOutputOff:=SetCommand(inCommand:=command);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetOutputOn" Id="{c3d7ecf8-26aa-0520-3c5f-0ce370da2941}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC SetOutputOn : TcoCore.ITcoTaskStatus
+
+VAR
+	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+command.NValue:=1;
+command.NrfValue:=1;
+SetOutputOn:=SetCommand(inCommand:=command);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetVoltage" Id="{74d1228e-8c5e-04da-1b2b-c71026f5b0d6}" FolderPath="Operations\Common\">
+      <Declaration><![CDATA[METHOD PUBLIC SetVoltage : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inVoltage:REAL;
+END_VAR
+VAR
+	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.V;
+command.NValue:=1;
+command.NrfValue:=inVoltage;
+SetVoltage:=SetCommand(inCommand:=command);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{a9200237-e208-0004-1b98-3d6bca21b7ff}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the status of the components. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Status : REFERENCE TO TcoQlSeriesSupply_Status_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{62c3e7b1-5416-07c9-1a04-46747a4aecb4}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

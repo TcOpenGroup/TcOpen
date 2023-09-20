@@ -36,16 +36,19 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\TcoAbbRobotics_Config_v_1_x_x.TcDUT">
+    <Compile Include="DUTs\TcoQlSeriesSupply_Config_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\TcoAbbRobotics_Control_v_1_x_x.TcDUT">
+    <Compile Include="DUTs\TcoQlSeriesSupply_GetControl_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\TcoAbbRobotics_State_v_1_x_x.TcDUT">
+    <Compile Include="DUTs\TcoQlSeriesSupply_SetControl_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\TcoAbbRobotics_Status_v_1_x_x.TcDUT">
+    <Compile Include="DUTs\TcoQlSeriesSupply_State_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoQlSeriesSupply_Status_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
@@ -54,49 +57,23 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\IO\TcoIrc5_Inputs_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\Command\TcoQlGetCommandTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\IO\TcoIrc5_IO_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\Command\TcoQlSetCommandTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\IO\TcoIrc5_Outputs_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\QLSeries\TcoQl355P_v_1_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\IRC5\TcoIrc5_v_1_x_x.TcPOU">
+    <Compile Include="POUs\Prototypes\Command\TcoQlSeriesSupplyTask.TcPOU">
+      <SubType>Code</SubType>
+      <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Structs\eTcoQWlSeriesSupplyGetCommands_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartAtMainTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMotorsAndProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMotorsProgramAndMovementsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMotorsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartMovementsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopMotorsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopMovementsAndProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopMovementsTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\Stops\StopProgramTask.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Prototypes\RoboticsTasks\TcoAbbRoboticsTask.TcPOU">
+    <Compile Include="POUs\Prototypes\Structs\eTcoQWlSeriesSupplySetCommands_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -104,12 +81,10 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Conversions" />
-    <Folder Include="POUs\Prototypes\IRC5\IO" />
     <Folder Include="POUs\Prototypes" />
-    <Folder Include="POUs\Prototypes\IRC5" />
-    <Folder Include="POUs\Prototypes\RoboticsTasks" />
-    <Folder Include="POUs\Prototypes\RoboticsTasks\Starts" />
-    <Folder Include="POUs\Prototypes\RoboticsTasks\Stops" />
+    <Folder Include="POUs\Prototypes\Structs" />
+    <Folder Include="POUs\Prototypes\QLSeries" />
+    <Folder Include="POUs\Prototypes\Command" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
