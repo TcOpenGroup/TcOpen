@@ -7,6 +7,8 @@ using System.Timers;
 
 using TcoCore.TcoDiagnosticsAlternative.LoggingToDb;
 
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
+
 using Vortex.Connector;
 
 using static TcoCore.TcoDiagnosticsAlternativeViewModel;
@@ -21,13 +23,16 @@ namespace TcoCore
             var logger = new MongoLogger(); // Or get this from DI
             ViewModel = new TcoDiagnosticsAlternativeViewModel(logger, ViewModel._tcoObject);
 
+            SetDefaultCategory(eMessageCategory.Warning);
             UpdateValuesOnChange(ViewModel._tcoObject);
             DiagnosticsUpdateTimer();
             StateHasChanged();
             AckMessages();
+            uniqueMessages = UniqueMessages().ToList();
         }
 
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
+        private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
         private static int _diagnosticsUpdateInterval { get; set; } = 50;
         private Timer messageUpdateTimer;
 
@@ -36,13 +41,37 @@ namespace TcoCore
                 await InvokeAsync(() =>
                 {
                     ViewModel.UpdateAndFetchMessages();
+                    uniqueMessages = UniqueMessages().ToList();
                     StateHasChanged();
                 });
         }
 
+        private int currentPage = 1;
+        private int itemsPerPage = 15;
+        private List<PlainTcoMessageExtended> uniqueMessages;
 
+        private int totalPages => (uniqueMessages.Count + itemsPerPage - 1) / itemsPerPage;
 
-        private void DiagnosticsUpdateTimer()
+        private bool IsPreviousDisabled => currentPage == 1;
+        private bool IsNextDisabled => currentPage == totalPages;
+
+        private void PreviousPage()
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+            }
+        }
+
+        private void NextPage()
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+            }
+        }
+
+           private void DiagnosticsUpdateTimer()
         {
             if (messageUpdateTimer == null)
             {
@@ -80,12 +109,52 @@ namespace TcoCore
             StateHasChanged();
         }
 
-        // Method to get unique messages
-        public IEnumerable<PlainTcoMessage> GetUniqueMessages()
+        public IEnumerable<PlainTcoMessageExtended> UniqueMessages()
         {
             return ViewModel.DbMessageDisplay
+                .Where(m => m.CategoryAsEnum >= MinMessageCategoryFilter)
                 .GroupBy(m => new { m.Identity, m.Text, m.TimeStamp, m.Cycle })
-                .Select(g => g.FirstOrDefault());
+                .Select(g => g.FirstOrDefault())
+                .OrderByDescending(m => m.TimeStamp)
+                .ThenByDescending(m => m.TimeStampAcknowledged.HasValue ? m.TimeStampAcknowledged.Value : DateTime.MinValue);
         }
+
+        public string DiagnosticsMessage() => "Diag depth : " + DepthValue;
+        public int MaxDiagnosticsDepth { get; set; } = 20;
+        public static int _depthValue;
+        public static int SetDefaultDepth(int item) => _depthValue = item;
+
+        public int DepthValue
+        {
+            get
+            {
+                if (_depthValue == 0)
+                    _depthValue = ViewModel._tcoObject.MessageHandler.DiagnosticsDepth;
+                return _depthValue;
+            }
+            set
+            {
+                _depthValue = value;
+                ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
+            }
+        }
+
+        public eMessageCategory MinMessageCategoryFilter
+        {
+            get
+            {
+                return _minMessageCategoryFilter;
+            }
+            set
+            {
+                _minMessageCategoryFilter = value;
+                ViewModel.MinMessageCategoryFilter = value;  // Update the ViewModel's property
+            }
+        }
+        private eMessageCategory _minMessageCategoryFilter = DefaultCategory;
+
+
+        public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
+        public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
     }
 }

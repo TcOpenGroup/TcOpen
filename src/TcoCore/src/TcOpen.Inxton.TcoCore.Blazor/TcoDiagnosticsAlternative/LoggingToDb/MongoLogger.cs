@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
+
 namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
 {
     public class MongoLogger : IMongoLogger
@@ -29,7 +31,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp)),
                 Builders<BsonDocument>.Filter.Eq("Raw", BsonValue.Create(message.Raw)),
                 Builders<BsonDocument>.Filter.Eq("Source", BsonValue.Create(message.Source)),
-                Builders<BsonDocument>.Filter.Lt("TimeStampAcknowledged", BsonValue.Create(new DateTime(1980, 1, 1, 0, 0, 0))),
+                Builders<BsonDocument>.Filter.Eq("TimeStampAcknowledged", BsonNull.Value),
                 Builders<BsonDocument>.Filter.Eq("Identity", BsonValue.Create(message.Identity)),
                 Builders<BsonDocument>.Filter.Eq("Cycle", BsonValue.Create(message.Cycle)),
                 Builders<BsonDocument>.Filter.Eq("Category", BsonValue.Create(message.Category))
@@ -52,7 +54,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             var update = Builders<BsonDocument>.Update
                 .Set("Text", BsonValue.Create(message.Text))
                 .Set("TimeStamp", BsonValue.Create(message.TimeStamp))
-                .Set("TimeStampAcknowledged", BsonValue.Create(message.TimeStampAcknowledged))
+                .Set("TimeStampAcknowledged", BsonNull.Value)
                 .Set("Identity", BsonValue.Create(message.Identity))
                 .Set("Text", BsonValue.Create(message.Text))
                 .Set("Category", BsonValue.Create(message.Category))
@@ -69,22 +71,22 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
 
             UpdateOptions options = new UpdateOptions { IsUpsert = true };
             var filter = GetMessageFilter(message);
-
-            //Console.WriteLine("Before MongoDB operation.");
             _collection.UpdateOne(filter, update, options);
         }
 
 
         public void LogMessage(PlainTcoMessage message)
         {
+
+            if (string.IsNullOrEmpty(message.Text) || string.IsNullOrEmpty(message.Source))
+            {
+                // Don't log the message
+                return;
+            }
+
             var existingMessage = GetSimilarMessage(message);
 
-            ////if (MessageExistsInDatabase(message)) {
-            ////    return;
-            ////}
-
             if (existingMessage == null)
-            //    (message.Category >= existingMessage.Category && message.Text != existingMessage.Text))
             {
                 InsertMessage(message);
             }
@@ -96,7 +98,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             // Define a filter to find messages with the given identity and where TimeStampAcknowledged is older than 1980
             var filter = Builders<BsonDocument>.Filter.And(
                 Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(timeStamp)),
-                Builders<BsonDocument>.Filter.Lt("TimeStampAcknowledged", BsonValue.Create(new DateTime(1980, 1, 1, 0, 0, 0)))
+                Builders<BsonDocument>.Filter.Eq("TimeStampAcknowledged", BsonNull.Value)
             );
 
             // Define the update operation
@@ -108,12 +110,12 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             _collection.UpdateMany(filter, update);
         }
 
-        private PlainTcoMessage MapBsonToPlainTcoMessage(BsonDocument bsonMessage)
+        private PlainTcoMessageExtended MapBsonToPlainTcoMessage(BsonDocument bsonMessage)
         {
-            return new PlainTcoMessage
+            return new PlainTcoMessageExtended
             {
-                TimeStamp = bsonMessage["TimeStamp"].ToUniversalTime(),
-                TimeStampAcknowledged = bsonMessage["TimeStampAcknowledged"].ToUniversalTime(),
+                TimeStamp = bsonMessage["TimeStamp"].IsBsonNull ? DateTime.MinValue : bsonMessage["TimeStamp"].ToUniversalTime(),
+                TimeStampAcknowledged = bsonMessage["TimeStampAcknowledged"].IsBsonNull ? (DateTime?)null : bsonMessage["TimeStampAcknowledged"].ToUniversalTime(),
                 Identity = (ulong)bsonMessage["Identity"].AsInt64,
                 Text = bsonMessage["Text"].AsString,
                 Category = (short)bsonMessage["Category"].AsInt32,
@@ -130,16 +132,13 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             };
         }
 
+
         public PlainTcoMessage GetSimilarMessage(PlainTcoMessage message)
         {
             var filter = Builders<BsonDocument>.Filter.And(
                 Builders<BsonDocument>.Filter.Eq("Text", BsonValue.Create(message.Text)),
                 Builders<BsonDocument>.Filter.Eq("Source", BsonValue.Create(message.Source)),
-                Builders<BsonDocument>.Filter.Lt("TimeStampAcknowledged", BsonValue.Create(new DateTime(1980, 1, 1, 0, 0, 0))),
-                Builders<BsonDocument>.Filter.Eq("Category", BsonValue.Create(message.Category))
-                //Builders<BsonDocument>.Filter.Lte("Cycle", BsonValue.Create(message.Cycle + 20)),
-                //Builders<BsonDocument>.Filter.Gte("Cycle", BsonValue.Create(message.Cycle - 20)),
-                //Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp))
+                Builders<BsonDocument>.Filter.Eq("TimeStampAcknowledged", BsonNull.Value)
             );
 
             var existingMessageBson = _collection.Find(filter).FirstOrDefault();
@@ -147,7 +146,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
         }
 
 
-        public List<PlainTcoMessage> ReadMessages()
+        public List<PlainTcoMessageExtended> ReadMessages()
         {
             var sort = Builders<BsonDocument>.Sort.Descending("TimeStamp");
             var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(1000).ToList();

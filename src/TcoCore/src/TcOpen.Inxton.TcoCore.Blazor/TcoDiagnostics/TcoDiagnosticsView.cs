@@ -29,7 +29,7 @@ namespace TcoCore
                 ViewModel.AffectedObject = (IVortexObject)ViewModel._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(ViewModel.SelectedMessage.Identity);
             }
            
-           
+            
         }
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
         private static int _diagnosticsUpdateInterval { get; set; } = 200;

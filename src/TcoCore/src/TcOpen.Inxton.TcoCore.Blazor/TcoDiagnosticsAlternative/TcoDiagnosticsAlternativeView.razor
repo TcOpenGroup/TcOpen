@@ -1,16 +1,29 @@
 ﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsAlternativeViewModel>
 @using Blazm.Components
+@using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 @using Vortex.Presentation.Controls.Blazor.RenderableContent
 @namespace TcoCore
 
-<h1>Alternative Tco Diagnostics View</h1>
-
-<div>
-
-     <button @onclick="() => ViewModel.AcknowledgeMessages()">Acknowledge All Messages</button> <!-- New Button -->
+<div class="d-flex justify-content-center align-items-center">
+    <div class="col-2 m-3"> <!-- Increased width for the select dropdown -->
+        <select class="w-100 form-select custom-dropdown" @bind="@MinMessageCategoryFilter">
+            @foreach (var item in eMessageCategories)
+            {
+                <option class="form-control" value="@item">@item.ToString() </option>
+            }
+        </select>
+    </div>
+    <div class="col-2"> <!-- Added margin-left to push the button to the right -->
+        <button class="form-control" @onclick="() => ViewModel.AcknowledgeMessages()">Acknowledge All Messages</button>
+    </div>
+    <div class="col-6 m-3"> 
+        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
+        <span class="mx-3">@DiagnosticsMessage()</span>
+    </div>
 </div>
 
-@*@if (ViewModel.MessageDisplay != null && ViewModel.MessageDisplay.Any())
+
+@if (ViewModel.DbMessageDisplay != null && ViewModel.DbMessageDisplay.Any())
 {
     <table class="table">
         <thead>
@@ -18,76 +31,49 @@
                 <th>Timestamp</th>
                 <th>Timestamp Acknowledged</th>
                 <th>Text</th>
-                <th>Identity</th>
+                @*<th>Identity</th>*@
                 <th>Category</th>
-                <th>Cycle</th>
-                <th>PFad</th>
-                <th>Expect Dequeing</th>
+                @*<th>Cycle</th>*@
+                <th>Pfad</th>
                 <th>Pinned</th>
-                <th>Message Digest</th>
+                <th>Action</th>
+                @*<th>Message Digest</th>*@
             </tr>
         </thead>
         <tbody>
-            @foreach (var message in ViewModel.MessageDisplay)
-            {
-                <tr>
-                    <td>@message.TimeStamp</td>
-                    <td>@(message.TimeStampAcknowledged < new DateTime(1970, 1, 1, 0, 0, 0) ? "" : message.TimeStampAcknowledged.ToString())</td>
-                    <td>@message.Text</td>
-                    <td>@message.Identity</td>
-                    <td>@message.CategoryAsEnum</td>
-                    <td>@message.Cycle</td>
-                    <td>@message.ParentsObjectSymbol</td>
-                    <td>@message.ExpectDequeing</td>
-                    <td>@message.Pinned</td>
-                    <td>@message.MessageDigest</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No messages found.</p>
-}
-*@
-
-
-@if (ViewModel.DbMessageDisplay != null && ViewModel.DbMessageDisplay.Any())
-{
-    <h2>Messages from Database</h2>
-    <table class="table">
-        <!-- Table headers -->
-        <thead>
-          <th>Timestamp</th>
-                <th>Timestamp Acknowledged</th>
-                <th>Text</th>
-                <th>Identity</th>
-                <th>Category</th>
-                <th>Cycle</th>
-                <th>PFad</th>
-                <th>Pinned</th>
-                <th>Message Digest</th>
-        </thead>
-        <tbody>
-            @foreach (var message in GetUniqueMessages())
+@foreach (var message in uniqueMessages.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage))
             {
                 <tr>
                    <td>@message.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    <td>@(message.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0) ? "" : message.TimeStampAcknowledged.ToString("yyyy-MM-dd HH:mm:ss"))</td>
+                    <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
                     <td>@message.Text</td>
-                    <td>@message.Identity</td>
+                    @*<td>@message.Identity</td>*@
                     <td>@message.CategoryAsEnum</td>
-                    <td>@message.Cycle</td>
+                    @*<td>@message.Cycle</td>*@
                     <td>@message.ParentsObjectSymbol</td>
                     <td>@message.Pinned</td>
-                    <td>@message.MessageDigest</td>
-                </tr>
-            }
+                   <td>
+    <button 
+        class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" 
+        @onclick="() => ViewModel.AcknowledgeMessage(message.Identity)">
+        Acknowledge
+    </button>
+</td>
+                                @*<td>@message.MessageDigest</td>*@
+                            </tr>
+                    }
         </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+    <button @onclick="PreviousPage" disabled="@IsPreviousDisabled">Previous</button>
+    <span class="mx-3">Page @currentPage of @totalPages</span>
+    <button @onclick="NextPage" disabled="@IsNextDisabled">Next</button>
+</div>
+
 }
 else
 {
     <p>No database messages found.</p>
 }
+

@@ -11,6 +11,7 @@ using TcoCore.TcoDiagnosticsAlternative.LoggingToDb;
 
 using TcOpen.Inxton;
 using TcOpen.Inxton.Input;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
 using Vortex.Presentation;
 
@@ -55,14 +56,14 @@ namespace TcoCore
                 return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
             }
         }
-        public eMessageCategory MinMessageCategoryFilter
-        {
-            get;
-            set;
-        } = DefaultCategory;
+        //public eMessageCategory MinMessageCategoryFilter
+        //{
+        //    get;
+        //    set;
+        //} = DefaultCategory;
 
-        public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
-        public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
+        //public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
+        //public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
 
         bool diagnosticsRunning;
 
@@ -105,24 +106,22 @@ namespace TcoCore
                 // Create a set of message identities for easier lookup
                 var newMessageIdentities = new HashSet<ulong>(newMessageDisplay.Select(m => m.Identity));
 
-                foreach (var message in newMessageDisplay)
+                foreach (var message in (newMessageDisplay))
                 {
-                    // Fetch the similar message from the database based on the identity.
-                    var existingMessage = _logger.GetSimilarMessage(message);
-
+                    if (_logger != null)
+                    {
                     _logger.LogMessage(message);
+                    }
                     
                     activeMessages.Add(message.Identity);
                 }
-
-            
-
 
             // Remove or acknowledge messages that are no longer active
             var messagesToRemove = activeMessages.Where(id => !newMessageIdentities.Contains(id)).ToList();
                 foreach (var id in messagesToRemove)
                 {
-                    AcknowledgeMessages();
+                    //AcknowledgeMessages();
+                    AcknowledgeMessage(id);
                     activeMessages.Remove(id);
                 }
 
@@ -142,9 +141,10 @@ namespace TcoCore
                 {
                     TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
 
-                    foreach (var item in DbMessageDisplay.Where(p =>p.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0)))
-                    {
-                        DateTime currentDateTime = DateTime.UtcNow;
+                    foreach (var item in DbMessageDisplay.Where(p => p.TimeStampAcknowledged == null))
+
+                        {
+                            DateTime currentDateTime = DateTime.UtcNow;
                         // Check the MessageDisplay for the same identity
                         var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == item.Identity);
                         bool isActive = false;
@@ -152,7 +152,6 @@ namespace TcoCore
                         if (activeMessage != null)
                         {
                             activeMessage.OnlinerMessage.Pinned.Cyclic = false;
-                            activeMessage.OnlinerMessage.TimeStampAcknowledged.Cyclic = DateTime.UtcNow;
                             Thread.Sleep(100);
                             isActive = activeMessage.OnlinerMessage.IsActive;
                         }
@@ -168,7 +167,6 @@ namespace TcoCore
 
                         TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
                     }
-                    //RefreshMessageDisplay();
                 }
             }
             catch (Exception ex)
@@ -179,49 +177,53 @@ namespace TcoCore
 
         }
 
+
         public void AcknowledgeMessage(ulong identity)
         {
             try
             {
                 lock (updatemutex)
                 {
-                    // Read messages from the database
-                    var messages = _logger.ReadMessages();
+                    // Find all messages with the given identity and where TimeStampAcknowledged is null
+                    var messagesToAcknowledge = DbMessageDisplay.Where(m => m.Identity == identity && m.TimeStampAcknowledged == null).ToList();
 
-                    // Find the message with the given identity
-                    var message = messages.FirstOrDefault(m => m.Identity == identity);
-
-                    if (message != null)
+                    if (messagesToAcknowledge.Any())
                     {
                         DateTime currentDateTime = DateTime.UtcNow;
 
-                        // Update only if the TimeStampAcknowledged is older than 1980 and the message is not pinned
-                        if (message.TimeStampAcknowledged < new DateTime(1980, 1, 1, 0, 0, 0) && !message.Pinned)
+                        foreach (var messageToAcknowledge in messagesToAcknowledge)
                         {
-                            _logger.UpdateMessages(message.Identity, message.TimeStamp, currentDateTime, false);
-                            TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = message.Text, Category = message.CategoryAsEnum });
+                            // Check the MessageDisplay for the same identity
+                            var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == messageToAcknowledge.Identity);
+                            bool isActive = false;
+
+                            if (activeMessage != null)
+                            {
+                                activeMessage.OnlinerMessage.Pinned.Cyclic = false;
+                                Thread.Sleep(100);
+                                isActive = activeMessage.OnlinerMessage.IsActive;
+                            }
+
+                            if (!isActive)
+                            {
+                                _logger.UpdateMessages(messageToAcknowledge.Identity, messageToAcknowledge.TimeStamp, currentDateTime, false);
+                                TcoAppDomain.Current.Logger.Information("Message with identity {@identity} acknowledged", identity);
+                            }
+                            else
+                            {
+                                TcoAppDomain.Current.Logger.Information("Fehler scheint noch aktiv {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
+                            }
                         }
                     }
                     else
                     {
-                        TcoAppDomain.Current.Logger.Warning("No message found with identity: {@identity}", identity);
+                        TcoAppDomain.Current.Logger.Warning("No message found with identity: {@identity} that has a null TimeStampAcknowledged", identity);
                     }
-
-                    // Check the MessageDisplay for the same identity
-                    var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == identity);
-                    if (activeMessage != null)
-                    {
-                        activeMessage.Pinned = false;
-                        activeMessage.TimeStampAcknowledged = DateTime.UtcNow;
-                    }
-
-                    RefreshMessageDisplay();
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception here
-                TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging message: {@error}", ex);
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -229,7 +231,7 @@ namespace TcoCore
 
         public void RefreshMessageDisplay()
         {
-            AcknowledgeMessages();
+            //AcknowledgeMessages();
             Console.WriteLine($"Refresh");
             MessageDisplay = _logger.ReadMessages();
         }
@@ -253,8 +255,8 @@ namespace TcoCore
             }
         }
 
-        IEnumerable<PlainTcoMessage> dbMessageDisplay = new List<PlainTcoMessage>();
-        public IEnumerable<PlainTcoMessage> DbMessageDisplay
+        IEnumerable<PlainTcoMessageExtended> dbMessageDisplay = new List<PlainTcoMessageExtended>();
+        public IEnumerable<PlainTcoMessageExtended> DbMessageDisplay
         {
             get => dbMessageDisplay;
 
@@ -280,5 +282,7 @@ namespace TcoCore
             LogMesssages();
             FetchMessagesFromDb();
         }
+        public eMessageCategory MinMessageCategoryFilter { get; set; }
+
     }
 }
