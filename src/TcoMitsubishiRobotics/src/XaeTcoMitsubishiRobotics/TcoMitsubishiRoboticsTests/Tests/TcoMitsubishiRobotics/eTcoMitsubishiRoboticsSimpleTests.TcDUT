@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoMitsubishiRoboticsSimpleTests" Id="{175cfec2-27d0-0a24-0958-a7809ba4f177}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoMitsubishiRoboticsSimpleTests :
+(
+    Restore := 1,
+    CleanUp,
+    Message,
+    PowerDisable,
+    PowerEnable,
+    Reset,
+    MoveRelativePositiveWithDisabledPositiveDirection,
+    MoveRelativePositiveWithEnabledPositiveDirection,
+    MoveRelativeNegativeWithDisabledNegativeDirection,
+    MoveRelativeNegativeWithEnabledNegativeDirection,
+    HommingDirect,
+    MoveVelocityPositiveWithDisabledPositiveDirection,
+    MoveVelocityPositiveWithEnabledPositiveDirection,
+    Stop,
+    MoveVelocityNegativeWithDisabledNegativeDirection,
+    MoveVelocityNegativeWithEnabledNegativeDirection,
+	MoveAbsoluteDisabled,
+	MoveAbsoluteDisabledPositiveDirection,
+	MoveAbsoluteEnabledPositiveDirection,
+	MoveAbsoluteDisabledNegativeDirection,
+	MoveAbsoluteEnabledNegativeDirection,
+	
+    Last
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

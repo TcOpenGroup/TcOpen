@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="WpfContext" Id="{f416bf56-8a98-0eae-282a-faf0c6664498}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
+VAR
+    _serviceModeActive : BOOL;
+    {attribute addProperty Name "<#QL355P SUPPLY#>"}
+    _supply : TcoAimTtiPowerSupply.TcoQl355P_v_1_x_x(THIS^);
+
+	
+	
+	_sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+    _observer       : TcoCore.TcoSequencerObserver(THIS^);
+    {attribute addProperty Name "Start sequence"}
+    _sequence1Task 	: SequenceTask(THIS^);
+    _dialog        	: TcoCore.TcoDialog(THIS^);
+
+	
+	_enable: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{7d54694a-d8fd-0187-27ec-a35600d521bf}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED Main]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _serviceModeActive THEN
+	_supply.Service();
+ 
+END_IF
+_supply.Config.IpAddress:='192.168.4.100';
+_supply.Config.Port:=9221;
+_supply.Config.Timeout:=10000;
+_supply.Config.InfoTime:=T#2S;
+_supply.Config.ErrorTime:=T#5S;
+
+
+_supply();
+
+_sequence1Task.Enabled := TRUE;
+_sequence1Task(Sequence := _sequence1);
+IF(_sequence1Task.Execute())THEN
+	Sequence1();
+END_IF;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Sequence1" Id="{53ada660-bdc9-03a0-3e20-882e665714f3}">
+      <Declaration><![CDATA[METHOD Sequence1
+VAR
+    seq    : REFERENCE TO TcoCore.TcoSequence;
+    answer : TcoCore.eDialogAnswer;
+	done: BOOL;
+	_jerk: LREAL;
+	_deceleration: LREAL;
+	_acceleration: LREAL;
+	_velocity: LREAL;
+	ProbeDoneWhen: INT;
+
+
+
+	cmd: TcoQlSeriesSupply_SetControl_v_1_x_x;
+	getCmd: TcoQlSeriesSupply_GetControl_v_1_x_x;
+	outVoltage: REAL;
+	outCurrent: REAL;
+	isOff: BOOL;
+END_VAR
+
+VAR_INST
+	_maxAllowedAttempts: INT;
+	_noOfAttmets: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[seq REF= _sequence1;
+
+seq.Open();
+seq.Observer := _observer;
+
+
+
+
+ 
+		
+IF (seq.Step(inStepID := 0,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+		_noOfAttmets:=0;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to setup voltage?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 10,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
+	
+	_supply.Restore();
+	seq.CompleteStep();
+	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 11,
+    inEnabled := TRUE,
+    inStepDescription := 'SET VOLTAGE')) THEN
+//--------------------------------------------------------   
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.V;
+	cmd.NrfValue:=5.0;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 12,
+    inEnabled := TRUE,
+    inStepDescription := 'GET VOLTAGE')) THEN
+//--------------------------------------------------------   
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.V;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 13,
+    inEnabled := TRUE,
+    inStepDescription := 'SET VOLTAGE ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _supply.SetVoltage(inNValue:=1,inVoltage:=4.0).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 14,
+    inEnabled := TRUE,
+    inStepDescription := 'GET VOLTAGE ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetVoltage(inNValue:=1,outVoltage=>outVoltage).Done  THEN
+			IF outVoltage=4.0 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 19,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+		_noOfAttmets:=0;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to setup current?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 20,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
+	
+	_supply.Restore();
+	seq.CompleteStep();
+	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 21,
+    inEnabled := TRUE,
+    inStepDescription := 'SET CURRENT')) THEN
+//--------------------------------------------------------   
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.I;
+	cmd.NrfValue:=0.5;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 22,
+    inEnabled := TRUE,
+    inStepDescription := 'GET CURRENT')) THEN
+//--------------------------------------------------------   
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.I;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			IF _supply.Status.State.Nr2Value=0.5 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 23,
+    inEnabled := TRUE,
+    inStepDescription := 'SET CURRENT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _supply.SetCurrent(inNValue:=1,inCurrent:=0.2).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 24,
+    inEnabled := TRUE,
+    inStepDescription := 'GET CURRENT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetCurrent(inNValue:=1, outCurrent=>outCurrent).Done  THEN
+			IF outCurrent=0.2 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+
+IF (seq.Step(inStepID := 29,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+		_noOfAttmets:=0;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to set output?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 30,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
+	
+	_supply.Restore();
+	seq.CompleteStep();
+	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 31,
+    inEnabled := TRUE,
+    inStepDescription := 'SET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+	cmd.NrfValue:=1;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 32,
+    inEnabled := TRUE,
+    inStepDescription := 'GET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			IF _supply.Status.State.Nr1Value=1 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 33,
+    inEnabled := TRUE,
+    inStepDescription := 'SET OFF OUTPUT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _supply.SetOutputOff(inNValue:=1).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 34,
+    inEnabled := TRUE,
+    inStepDescription := 'GET IF OUTPUT IS OFF ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetOutputIsOff(inNValue:=1,outIsOff=>isOff).Done  THEN
+			IF isOff=TRUE THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+
+
+IF (seq.Step(inStepID := 40,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+	_noOfAttmets:=0;
+	_maxAllowedAttempts:=10;
+
+	answer := _dialog			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to set output in cycle?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_sequence1Task.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+
+IF (seq.Step(inStepID := 41,
+    inEnabled := TRUE,
+    inStepDescription := 'SET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	cmd.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+	cmd.NrfValue:=1;
+	cmd.NValue:=1;
+	 	IF _supply.SetCommand(inCommand:=cmd).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 42,
+    inEnabled := TRUE,
+    inStepDescription := 'GET ON OUTPUT')) THEN
+//--------------------------------------------------------   
+	getCmd.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+	getCmd.NValue:=1;
+	 	IF _supply.GetCommand(inCommand:=getCmd).Done    THEN
+			IF _supply.Status.State.Nr1Value=1 THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 43,
+    inEnabled := TRUE,
+    inStepDescription := 'SET OFF OUTPUT ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _supply.SetOutputOff(inNValue:=1).Done  THEN
+			seq.CompleteStep();
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 44,
+    inEnabled := TRUE,
+    inStepDescription := 'GET IF OUTPUT IS OFF ANOTHER WAY')) THEN
+//--------------------------------------------------------   
+		IF _supply.GetOutputIsOff(inNValue:=1,outIsOff=>isOff).Done  THEN
+			IF isOff=TRUE THEN
+				seq.CompleteStep();
+			END_IF;
+		END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+
+
+IF (seq.Step(inStepID := 45,
+    inEnabled := TRUE,
+    inStepDescription := 'REPEAT IT IF NECESSARY')) THEN
+//--------------------------------------------------------   
+	
+	
+		IF _noOfAttmets<_maxAllowedAttempts THEN
+			_noOfAttmets:=_noOfAttmets+1;
+			seq.RequestStep(41);
+			_supply.Restore();
+		ELSE 
+		seq.CompleteStep();
+		end_if;
+
+	
+//--------------------------------------------------------			
+END_IF;
+
+
+
+
+
+
+
+
+
+
+
+IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
+    inEnabled := TRUE,
+    inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
+    //--------------------------------------------------------	
+    	seq.CompleteSequence();
+    //--------------------------------------------------------			
+END_IF;
+
+seq.Close();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
