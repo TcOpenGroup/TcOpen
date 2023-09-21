@@ -34,7 +34,8 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._command := inCommand;
-WithParams REF= THIS^;]]></ST>
+WithParams REF= THIS^;
+]]></ST>
       </Implementation>
     </Method>
   </POU>

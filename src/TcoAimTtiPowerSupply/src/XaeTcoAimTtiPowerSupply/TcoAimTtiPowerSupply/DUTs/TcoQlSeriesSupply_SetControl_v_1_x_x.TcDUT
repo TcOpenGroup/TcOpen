@@ -12,7 +12,7 @@ STRUCT
 						//consistent with the use then rounded up to obtain the value of the command.
 
 	{attribute addProperty Name "<#Nvalue#>"}
-	NValue : USINT;		//The number of the output or status register to which the command relates.
+	NValue : USINT :=1;		//The number of the output or status register to which the command relates.
 						//Note that on single output supplies <N>=1 always.
 						//Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote
 						//control functionality. For clarity, the commands where <N>= 3 can be used are

@@ -127,7 +127,7 @@ _wpfContext.Run();
             = new TcoAbbRoboticsTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
 ```
 
-#### 3. Into the container added, insert the **`RenderableContentControl`** and bind its **`DataContext`** to the **`   _tcoDriveSimpleTestContext : TcoDriveSimpleTestContext`**, using the **`PresentationType`** of the value **`Service`**.
+#### 3. Into the container added, insert the **`RenderableContentControl`** and bind its **`DataContext`** to the **`   _robot1 : TcoAbbRobotics.TcoIrc5_v_1_x_x(THIS^)`** or **` _robot2 : TcoAbbRobotics.TcoOmnicore_v_1_x_x(THIS^)`**, using the **`PresentationType`** of the value **`Service`**.
 ```XML
     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
 	<vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>

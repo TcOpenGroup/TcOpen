@@ -115,6 +115,19 @@ END_VAR
     </Property>
     <Method Name="GetCurrent" Id="{ba6c7d04-667c-0e95-3448-f9bb8eda89bb}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetCurrent : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
+END_VAR
 VAR_OUTPUT
 	outCurrent:REAL;
 END_VAR
@@ -124,7 +137,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[outCurrent:=0;
 command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.i;
-command.NValue:=1;
+command.NValue:=inNValue;
 GetCurrent:=GetCommand(inCommand:=command);
 IF GetCurrent.Done THEN
 	outCurrent:=Status.State.Nr2Value;
@@ -134,6 +147,19 @@ END_IF
     </Method>
     <Method Name="GetOutputIsOff" Id="{e968a5b2-fa28-0d5c-3b64-b5eefa949a1a}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetOutputIsOff : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
+END_VAR
 VAR_OUTPUT
 	outIsOff:BOOL;
 END_VAR
@@ -143,7 +169,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[outIsOff:=FALSE;
 command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
-command.NValue:=1;
+command.NValue:=inNValue;
 GetOutputIsOff:=GetCommand(inCommand:=command);
 IF GetOutputIsOff.Done THEN
 	outIsOff:=Status.State.Nr2Value=0;
@@ -153,6 +179,19 @@ END_IF
     </Method>
     <Method Name="GetOutputIsOn" Id="{64b4ff7a-12c4-0470-0a9e-d7c6710f1cdf}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetOutputIsOn : TcoCore.ITcoTaskStatus
+VAR_INPUT
+		(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
+END_VAR
 VAR_OUTPUT
 	outIsOn:BOOL;
 END_VAR
@@ -162,7 +201,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[outIsOn:=FALSE;
 command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
-command.NValue:=1;
+command.NValue:=inNValue;
 GetOutputIsOn:=GetCommand(inCommand:=command);
 IF GetOutputIsOn.Done THEN
 	outIsOn:=Status.State.Nr2Value=1;
@@ -172,6 +211,19 @@ END_IF
     </Method>
     <Method Name="GetVoltage" Id="{7c7e5362-3d05-026d-0323-0042ae5c5c29}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetVoltage : TcoCore.ITcoTaskStatus
+VAR_INPUT
+		(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
+END_VAR
 VAR_OUTPUT
 	outVoltage:REAL;
 END_VAR
@@ -181,7 +233,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[outVoltage:=0;
 command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.V;
-command.NValue:=1;
+command.NValue:=inNValue;
 GetVoltage:=GetCommand(inCommand:=command);
 IF GetVoltage.Done THEN
 	outVoltage:=Status.State.Nr2Value;
@@ -249,13 +301,24 @@ END_VAR
       <Declaration><![CDATA[METHOD PUBLIC SetCurrent : TcoCore.ITcoTaskStatus
 VAR_INPUT
 	inCurrent:REAL;
+		(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;	
 END_VAR
 VAR
 	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.I;
-command.NValue:=1;
+command.NValue:=inNValue;
 command.NrfValue:=inCurrent;
 SetCurrent:=SetCommand(inCommand:=command);
 ]]></ST>
@@ -263,13 +326,25 @@ SetCurrent:=SetCommand(inCommand:=command);
     </Method>
     <Method Name="SetOutputOff" Id="{b26455cd-694a-0b9b-0807-30e3d64e4b48}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC SetOutputOff : TcoCore.ITcoTaskStatus
-
+VAR_INPUT
+		(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
+END_VAR
 VAR
 	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
-command.NValue:=1;
+command.NValue:=inNValue;
 command.NrfValue:=0;
 SetOutputOff:=SetCommand(inCommand:=command);
 ]]></ST>
@@ -277,13 +352,25 @@ SetOutputOff:=SetCommand(inCommand:=command);
     </Method>
     <Method Name="SetOutputOn" Id="{c3d7ecf8-26aa-0520-3c5f-0ce370da2941}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC SetOutputOn : TcoCore.ITcoTaskStatus
-
+VAR_INPUT
+		(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
+END_VAR
 VAR
 	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
-command.NValue:=1;
+command.NValue:=inNValue;
 command.NrfValue:=1;
 SetOutputOn:=SetCommand(inCommand:=command);
 ]]></ST>
@@ -293,13 +380,24 @@ SetOutputOn:=SetCommand(inCommand:=command);
       <Declaration><![CDATA[METHOD PUBLIC SetVoltage : TcoCore.ITcoTaskStatus
 VAR_INPUT
 	inVoltage:REAL;
+	(*~
+	<docu>
+		<summary>
+			The number of the output or status register to which the command relates.
+			Note that on single output supplies <N>=1 always.
+			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
+			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
+		</summary>			
+	</docu>	
+	~*)
+	inNValue:USINT;
 END_VAR
 VAR
 	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.V;
-command.NValue:=1;
+command.NValue:=inNValue;
 command.NrfValue:=inVoltage;
 SetVoltage:=SetCommand(inCommand:=command);
 ]]></ST>

@@ -61,6 +61,24 @@ namespace TcoAimTtiPowerSupplyConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Command finished successfully..
+        /// </summary>
+        public static string ___Command_finished_sucessfully___ {
+            get {
+                return ResourceManager.GetString("___Command_finished_sucessfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command finished with error..
+        /// </summary>
+        public static string ___Command_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Command_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command started..
         /// </summary>
         public static string ___Command_started___ {

@@ -42,6 +42,37 @@ _infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
 END_IF;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnDone" Id="{433575e1-4fdf-0997-0a19-ba8af7815a79}">
+      <Declaration><![CDATA[METHOD PROTECTED OnDone ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnDone();
+IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Command finished sucessfully.#>'; END_IF; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{cc0bab42-968c-0b60-1959-3cbf27bfbcf2}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnError();
+description:= '<#Command finished with error.#>';
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="OnStart" Id="{4cd5829f-e14c-0387-2550-236221cfb22c}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>

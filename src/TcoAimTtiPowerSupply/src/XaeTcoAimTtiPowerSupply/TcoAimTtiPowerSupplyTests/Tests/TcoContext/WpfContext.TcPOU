@@ -160,7 +160,7 @@ IF (seq.Step(inStepID := 13,
     inStepDescription := 'SET VOLTAGE ANOTHER WAY')) THEN
 //--------------------------------------------------------   
 	
-	 	IF _supply.SetVoltage(inVoltage:=4.0).Done  THEN
+	 	IF _supply.SetVoltage(inNValue:=1,inVoltage:=4.0).Done  THEN
 			seq.CompleteStep();
 		END_IF
 		
@@ -171,7 +171,7 @@ IF (seq.Step(inStepID := 14,
     inEnabled := TRUE,
     inStepDescription := 'GET VOLTAGE ANOTHER WAY')) THEN
 //--------------------------------------------------------   
-		IF _supply.GetVoltage(outVoltage=>outVoltage).Done  THEN
+		IF _supply.GetVoltage(inNValue:=1,outVoltage=>outVoltage).Done  THEN
 			IF outVoltage=4.0 THEN
 				seq.CompleteStep();
 			END_IF;
@@ -250,7 +250,7 @@ IF (seq.Step(inStepID := 23,
     inStepDescription := 'SET CURRENT ANOTHER WAY')) THEN
 //--------------------------------------------------------   
 	
-	 	IF _supply.SetCurrent(inCurrent:=0.2).Done  THEN
+	 	IF _supply.SetCurrent(inNValue:=1,inCurrent:=0.2).Done  THEN
 			seq.CompleteStep();
 		END_IF
 		
@@ -261,7 +261,7 @@ IF (seq.Step(inStepID := 24,
     inEnabled := TRUE,
     inStepDescription := 'GET CURRENT ANOTHER WAY')) THEN
 //--------------------------------------------------------   
-		IF _supply.GetCurrent(outCurrent=>outCurrent).Done  THEN
+		IF _supply.GetCurrent(inNValue:=1, outCurrent=>outCurrent).Done  THEN
 			IF outCurrent=0.2 THEN
 				seq.CompleteStep();
 			END_IF;
@@ -342,7 +342,7 @@ IF (seq.Step(inStepID := 33,
     inStepDescription := 'SET OFF OUTPUT ANOTHER WAY')) THEN
 //--------------------------------------------------------   
 	
-	 	IF _supply.SetOutputOff().Done  THEN
+	 	IF _supply.SetOutputOff(inNValue:=1).Done  THEN
 			seq.CompleteStep();
 		END_IF
 		
@@ -353,7 +353,7 @@ IF (seq.Step(inStepID := 34,
     inEnabled := TRUE,
     inStepDescription := 'GET IF OUTPUT IS OFF ANOTHER WAY')) THEN
 //--------------------------------------------------------   
-		IF _supply.GetOutputIsOff(outIsOff=>isOff).Done  THEN
+		IF _supply.GetOutputIsOff(inNValue:=1,outIsOff=>isOff).Done  THEN
 			IF isOff=TRUE THEN
 				seq.CompleteStep();
 			END_IF;
@@ -371,7 +371,7 @@ IF (seq.Step(inStepID := 40,
     //--------------------------------------------------------
 
 	_noOfAttmets:=0;
-	_maxAllowedAttempts:=100;
+	_maxAllowedAttempts:=10;
 
 	answer := _dialog			
 			.Show()	
@@ -426,7 +426,7 @@ IF (seq.Step(inStepID := 43,
     inStepDescription := 'SET OFF OUTPUT ANOTHER WAY')) THEN
 //--------------------------------------------------------   
 	
-	 	IF _supply.SetOutputOff().Done  THEN
+	 	IF _supply.SetOutputOff(inNValue:=1).Done  THEN
 			seq.CompleteStep();
 		END_IF
 		
@@ -437,7 +437,7 @@ IF (seq.Step(inStepID := 44,
     inEnabled := TRUE,
     inStepDescription := 'GET IF OUTPUT IS OFF ANOTHER WAY')) THEN
 //--------------------------------------------------------   
-		IF _supply.GetOutputIsOff(outIsOff=>isOff).Done  THEN
+		IF _supply.GetOutputIsOff(inNValue:=1,outIsOff=>isOff).Done  THEN
 			IF isOff=TRUE THEN
 				seq.CompleteStep();
 			END_IF;
