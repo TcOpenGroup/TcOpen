@@ -12,20 +12,38 @@ using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
 namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
 {
-    public class MongoLogger : IMongoLogger
+    public class MongoLogger: IMongoLogger
     {
+        private readonly IMongoClient _client;
         private readonly IMongoCollection<BsonDocument> _collection;
-        private readonly MongoClient _client;
+        public int MaxEntries { get; set; }
 
         public MongoLogger()
         {
+            MaxEntries = TcoDiagnosticsAlternativeView.MaxDatabaseEntries;
             _client = new MongoClient("mongodb://admin:1234@localhost:27017");
             var database = _client.GetDatabase("mydatabase");
             _collection = database.GetCollection<BsonDocument>("mycollection");
+
+            EnsureIndexes();
         }
 
+        private void EnsureIndexes()
+        {
+            var indexExists = _collection.Indexes.List().ToList().Any(index => index["name"] == "Text_Source_Category_TimeStampAcknowledged");
+            if (!indexExists)
+            {
+                var keys = Builders<BsonDocument>.IndexKeys
+                    .Ascending("Text")
+                    .Ascending("Source")
+                    .Ascending("Category")
+                    .Ascending("TimeStampAcknowledged");
 
-        private FilterDefinition<BsonDocument> GetMessageFilter(PlainTcoMessage message)
+                _collection.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(keys));
+            }
+        }
+
+    private FilterDefinition<BsonDocument> GetMessageFilter(PlainTcoMessage message)
         {
             return Builders<BsonDocument>.Filter.And(
                 Builders<BsonDocument>.Filter.Eq("TimeStamp", BsonValue.Create(message.TimeStamp)),
@@ -37,8 +55,6 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
                 Builders<BsonDocument>.Filter.Eq("Category", BsonValue.Create(message.Category))
             );
         }
-
-
 
         public bool MessageExistsInDatabase(PlainTcoMessage message)
         {
@@ -89,6 +105,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             if (existingMessage == null)
             {
                 InsertMessage(message);
+                EnsureMaxEntries();
             }
         }
 
@@ -138,6 +155,7 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             var filter = Builders<BsonDocument>.Filter.And(
                 Builders<BsonDocument>.Filter.Eq("Text", BsonValue.Create(message.Text)),
                 Builders<BsonDocument>.Filter.Eq("Source", BsonValue.Create(message.Source)),
+                Builders<BsonDocument>.Filter.Eq("Category", BsonValue.Create(message.Category)),
                 Builders<BsonDocument>.Filter.Eq("TimeStampAcknowledged", BsonNull.Value)
             );
 
@@ -151,6 +169,27 @@ namespace TcoCore.TcoDiagnosticsAlternative.LoggingToDb
             var sort = Builders<BsonDocument>.Sort.Descending("TimeStamp");
             var messages = _collection.Find(new BsonDocument()).Sort(sort).Limit(1000).ToList();
             return messages.Select(MapBsonToPlainTcoMessage).ToList();
+        }
+
+        private void EnsureMaxEntries()
+        {
+            var currentCount = _collection.CountDocuments(new BsonDocument());
+
+            if (currentCount > MaxEntries)
+            {
+                var excessCount = currentCount - MaxEntries;
+
+                // Find the oldest entries based on TimeStamp or any other relevant field
+                var oldestEntries = _collection.Find(new BsonDocument())
+                                              .Sort(Builders<BsonDocument>.Sort.Ascending("TimeStamp")) // Assuming TimeStamp is the field you want to sort by
+                                              .Limit((int)excessCount)
+                                              .ToList();
+
+                foreach (var entry in oldestEntries)
+                {
+                    _collection.DeleteOne(Builders<BsonDocument>.Filter.Eq("_id", entry["_id"]));
+                }
+            }
         }
 
     }

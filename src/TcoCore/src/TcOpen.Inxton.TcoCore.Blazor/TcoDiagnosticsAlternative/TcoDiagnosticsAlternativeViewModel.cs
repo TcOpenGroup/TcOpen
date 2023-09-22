@@ -56,15 +56,6 @@ namespace TcoCore
                 return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
             }
         }
-        //public eMessageCategory MinMessageCategoryFilter
-        //{
-        //    get;
-        //    set;
-        //} = DefaultCategory;
-
-        //public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
-        //public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
-
         bool diagnosticsRunning;
 
         public bool DiagnosticsRunning
@@ -174,9 +165,7 @@ namespace TcoCore
                 // Log the exception here
                 TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
             }
-
         }
-
 
         public void AcknowledgeMessage(ulong identity)
         {
@@ -226,8 +215,6 @@ namespace TcoCore
                 Console.WriteLine(ex.ToString());
             }
         }
-
-
 
         public void RefreshMessageDisplay()
         {

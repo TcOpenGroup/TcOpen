@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 using TcoCore.TcoDiagnosticsAlternative.LoggingToDb;
 
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
-using Vortex.Connector;
-
-using static TcoCore.TcoDiagnosticsAlternativeViewModel;
-
 namespace TcoCore
 {
     public partial class TcoDiagnosticsAlternativeView
     {
+        public static int MaxDatabaseEntries { get; set; } = 1000;
+        public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
+        private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
+        private static int _diagnosticsUpdateInterval { get; set; } = 50;
+        private Timer messageUpdateTimer;
+        private static int itemsPerPage { get; set; } = 15;
+        private int currentPage = 1;
+        private List<PlainTcoMessageExtended> uniqueMessages;
+        private int totalPages => (uniqueMessages.Count + itemsPerPage - 1) / itemsPerPage;
+
+
         protected override void OnInitialized()
         {
             // If ViewModel is null, initialize it here
-            var logger = new MongoLogger(); // Or get this from DI
+            var logger = new MongoLogger();
             ViewModel = new TcoDiagnosticsAlternativeViewModel(logger, ViewModel._tcoObject);
 
             SetDefaultCategory(eMessageCategory.Warning);
@@ -31,10 +36,10 @@ namespace TcoCore
             uniqueMessages = UniqueMessages().ToList();
         }
 
-        public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
-        private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
-        private static int _diagnosticsUpdateInterval { get; set; } = 50;
-        private Timer messageUpdateTimer;
+        public static void SetMaxDatabaseEntries ( int value)
+        {
+            MaxDatabaseEntries = value;
+        }
 
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -45,15 +50,11 @@ namespace TcoCore
                     StateHasChanged();
                 });
         }
-
-        private int currentPage = 1;
-        private int itemsPerPage = 15;
-        private List<PlainTcoMessageExtended> uniqueMessages;
-
-        private int totalPages => (uniqueMessages.Count + itemsPerPage - 1) / itemsPerPage;
-
-        private bool IsPreviousDisabled => currentPage == 1;
-        private bool IsNextDisabled => currentPage == totalPages;
+   
+        public static void SetItemsPerPage(int value)
+        {
+            itemsPerPage = value;
+        }
 
         private void PreviousPage()
         {
@@ -71,7 +72,21 @@ namespace TcoCore
             }
         }
 
-           private void DiagnosticsUpdateTimer()
+        public void FirstPage()
+        {
+            currentPage = 1;
+        }
+
+        public void LastPage()
+        {
+            currentPage = totalPages;
+        }
+
+        public bool IsFirstDisabled => currentPage == 1;
+
+        public bool IsLastDisabled => currentPage == totalPages;
+
+        private void DiagnosticsUpdateTimer()
         {
             if (messageUpdateTimer == null)
             {
@@ -86,7 +101,6 @@ namespace TcoCore
                 Console.WriteLine("Timer already initialized.");
             }
         }
-
 
         private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
 
@@ -156,5 +170,10 @@ namespace TcoCore
 
         public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
         public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
+
+        public int UniqueMessagesCount => uniqueMessages?.Count ?? 0;
+
+        public int DbMessageDisplayCount => ViewModel.DbMessageDisplay?.Count() ?? 0;
+
     }
 }

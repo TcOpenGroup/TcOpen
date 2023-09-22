@@ -4,24 +4,29 @@
 @using Vortex.Presentation.Controls.Blazor.RenderableContent
 @namespace TcoCore
 
+
+<div class="d-flex justify-center">
+    <p>Count of Unique Messages: @UniqueMessagesCount</p>
+    <p>Count of DbMessageDisplay: @DbMessageDisplayCount</p>
+</div>
+
 <div class="d-flex justify-content-center align-items-center">
-    <div class="col-2 m-3"> <!-- Increased width for the select dropdown -->
+    <div class="col-2 m-3">
         <select class="w-100 form-select custom-dropdown" @bind="@MinMessageCategoryFilter">
             @foreach (var item in eMessageCategories)
             {
-                <option class="form-control" value="@item">@item.ToString() </option>
+                <option class="form-control" value="@item">@item.ToString()</option>
             }
         </select>
     </div>
-    <div class="col-2"> <!-- Added margin-left to push the button to the right -->
+    <div class="col-2">
         <button class="form-control" @onclick="() => ViewModel.AcknowledgeMessages()">Acknowledge All Messages</button>
     </div>
-    <div class="col-6 m-3"> 
+    <div class="col-6 m-3">
         <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
         <span class="mx-3">@DiagnosticsMessage()</span>
     </div>
 </div>
-
 
 @if (ViewModel.DbMessageDisplay != null && ViewModel.DbMessageDisplay.Any())
 {
@@ -31,49 +36,43 @@
                 <th>Timestamp</th>
                 <th>Timestamp Acknowledged</th>
                 <th>Text</th>
-                @*<th>Identity</th>*@
                 <th>Category</th>
-                @*<th>Cycle</th>*@
                 <th>Pfad</th>
                 <th>Pinned</th>
                 <th>Action</th>
-                @*<th>Message Digest</th>*@
             </tr>
         </thead>
         <tbody>
-@foreach (var message in uniqueMessages.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage))
+            @foreach (var message in uniqueMessages.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage))
             {
                 <tr>
-                   <td>@message.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@message.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
                     <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
                     <td>@message.Text</td>
-                    @*<td>@message.Identity</td>*@
                     <td>@message.CategoryAsEnum</td>
-                    @*<td>@message.Cycle</td>*@
                     <td>@message.ParentsObjectSymbol</td>
                     <td>@message.Pinned</td>
-                   <td>
-    <button 
-        class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" 
-        @onclick="() => ViewModel.AcknowledgeMessage(message.Identity)">
-        Acknowledge
-    </button>
-</td>
-                                @*<td>@message.MessageDigest</td>*@
-                            </tr>
-                    }
+                    <td>
+                        <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => ViewModel.AcknowledgeMessage(message.Identity)">
+                            Acknowledge
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 
-    <div class="d-flex justify-content-center">
-    <button @onclick="PreviousPage" disabled="@IsPreviousDisabled">Previous</button>
-    <span class="mx-3">Page @currentPage of @totalPages</span>
-    <button @onclick="NextPage" disabled="@IsNextDisabled">Next</button>
-</div>
+    <div class="d-flex justify-content-center my-3">
+        <button @onclick="FirstPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">First</button>
+        <button @onclick="PreviousPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">Previous</button>
+        <span class="mx-3">Page @currentPage of @totalPages</span>
+        <button @onclick="NextPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Next</button>
+        <button @onclick="LastPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Last</button>
+    </div>
+
 
 }
 else
 {
     <p>No database messages found.</p>
 }
-
