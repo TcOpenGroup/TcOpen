@@ -63,14 +63,21 @@ namespace PlcHammer.Hmi.Blazor
 
             services.AddTcoCoreExtensions();
 
-            if (true)/*Mongo database*/
+            if (false)/*Mongo database*/
             {
                 (userRepo, groupRepo) = SetUpMongoDatabase();
+                services.AddSingleton<IRepository<UserData>>(userRepo);
+                services.AddSingleton<IRepository<GroupData>>(groupRepo);
             }
             else /*Json repositories*/
             {
                 (userRepo, groupRepo) = SetUpJsonRepositories();
+                services.AddSingleton<IRepository<UserData>>(userRepo);
+                services.AddSingleton<IRepository<GroupData>>(groupRepo);
             }
+
+            //for DropdownService
+            services.AddScoped<TcOpen.Inxton.Local.Security.Blazor.Services.RepositoryService>();
 
             RoleGroupManager roleGroupManager = new RoleGroupManager(groupRepo);
             Roles.Create(roleGroupManager);
