@@ -1,0 +1,15 @@
+﻿@page "/diagnostics-from-logger"
+
+
+tag
+<RenderableContentControl Context="@Entry.PlcHammer.TECH_MAIN._app" Presentation="DiagnosticsFromLogger" />
+@code {
+
+    protected override void OnInitialized()
+    {
+       @* TcoDiagnosticsViewModel.SetDefaultCategory(eMessageCategory.Trace);
+        TcoDiagnosticsView.SetDefaultDepth(7);
+        TcoDiagnosticsView.SetDiagnosticsUpdateInterval(2500);*@
+        base.OnInitialized();
+    }
+}

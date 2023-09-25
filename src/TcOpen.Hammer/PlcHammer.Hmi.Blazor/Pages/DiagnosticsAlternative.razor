@@ -1,0 +1,15 @@
+﻿@page "/diagnostics-alternative"
+
+@*<RenderableContentControl Context="@Entry.PlcHammer.TECH_MAIN._app" Presentation="DiagnosticsAlternative" />
+*@
+
+@code {
+
+    protected override void OnInitialized()
+    {
+@*        TcoDiagnosticsViewModel.SetDefaultCategory(eMessageCategory.Trace);
+        TcoDiagnosticsView.SetDefaultDepth(7);
+        TcoDiagnosticsView.SetDiagnosticsUpdateInterval(2500);*@
+        base.OnInitialized();
+    }
+}

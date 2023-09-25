@@ -41,9 +41,15 @@ namespace PlcHammer.Hmi.Blazor
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MongoUri = Configuration["MongoDbSettings:MongoUri"];
+            DatabaseName = Configuration["MongoDbSettings:DatabaseName"];
         }
 
         public IConfiguration Configuration { get; }
+
+        //Uses Config from appsetings.Development.json, there the connection String etc. is configured
+        public static string MongoUri { get; private set; }
+        public static string DatabaseName { get; private set; }
 
         public static StringWriter logMessages = new StringWriter();
 
@@ -63,7 +69,7 @@ namespace PlcHammer.Hmi.Blazor
 
             services.AddTcoCoreExtensions();
 
-            if (true)/*Mongo database*/
+            if (false)/*Mongo database*/
             {
                 (userRepo, groupRepo) = SetUpMongoDatabase();
             }
@@ -84,7 +90,10 @@ namespace PlcHammer.Hmi.Blazor
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
                                                                   // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
                                                                   // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
-                                        .Enrich.WithProperty("user",SecurityManager.Manager.Principal.Identity.Name)
+                                        .WriteTo.MongoDBBson(
+                                                        databaseUrl: $"{MongoUri}/{DatabaseName}",
+                                                        collectionName: "log"
+                                                    ).Enrich.WithProperty("user",SecurityManager.Manager.Principal.Identity.Name)
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
@@ -168,8 +177,8 @@ namespace PlcHammer.Hmi.Blazor
 
         private static (IRepository<UserData> userRepo, IRepository<GroupData> groupRepo) SetUpMongoDatabase()
         {
-            var mongoUri = "mongodb://localhost:27017";
-            var databaseName = "Hammer";
+            var mongoUri = MongoUri;
+            var databaseName = DatabaseName;
 
             /*Data*/
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
