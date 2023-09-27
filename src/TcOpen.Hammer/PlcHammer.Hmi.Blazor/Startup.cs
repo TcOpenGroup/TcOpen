@@ -31,8 +31,12 @@ using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.TcoCore.Blazor.Extensions;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Configure;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs;
 using Vortex.Presentation.Blazor.Services;
+
+using static TcoCore.TcoDiagnosticsAlternativeViewModel;
 
 namespace PlcHammer.Hmi.Blazor
 {
@@ -43,6 +47,7 @@ namespace PlcHammer.Hmi.Blazor
             Configuration = configuration;
             MongoUri = Configuration["MongoDbSettings:MongoUri"];
             DatabaseName = Configuration["MongoDbSettings:DatabaseName"];
+            CollectionName = Configuration["MongoDbSettings:CollectionName"];
         }
 
         public IConfiguration Configuration { get; }
@@ -50,6 +55,7 @@ namespace PlcHammer.Hmi.Blazor
         //Uses Config from appsetings.Development.json, there the connection String etc. is configured
         public static string MongoUri { get; private set; }
         public static string DatabaseName { get; private set; }
+        public static string CollectionName { get; set; }
 
         public static StringWriter logMessages = new StringWriter();
 
@@ -92,7 +98,7 @@ namespace PlcHammer.Hmi.Blazor
                                                                   // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
                                         .WriteTo.MongoDBBson(
                                                         databaseUrl: $"{MongoUri}/{DatabaseName}",
-                                                        collectionName: "log"
+                                                        collectionName: $"{CollectionName}"
                                                     ).Enrich.WithProperty("user",SecurityManager.Manager.Principal.Identity.Name)
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
@@ -101,6 +107,10 @@ namespace PlcHammer.Hmi.Blazor
                 .SetSecurity(SecurityManager.Manager.Service)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
+            services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDbSettings"));
+            services.AddTransient<DataService>();
+            services.AddSingleton< DataCleanupService>();
+            services.AddTransient<TcoDiagnosticsAlternativeViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

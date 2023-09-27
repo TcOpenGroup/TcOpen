@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using TcoCore.TcoDiagnosticsAlternative.LoggingToDb;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 
 namespace TcoCore
 {
@@ -14,6 +13,6 @@ namespace TcoCore
     {
         public TcoObjectDiagnosticsAlternativeViewModel() : base() { }
 
-        public TcoObjectDiagnosticsAlternativeViewModel(IMongoLogger logger) : base(logger) { }
+        public TcoObjectDiagnosticsAlternativeViewModel(DataService dataService) : base(dataService) { }
     }
 }
