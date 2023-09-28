@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 using TcOpen.Inxton.Input;
-using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
+using PlcDocu.TcoCore;
+using Vortex.Connector;
 using Vortex.Presentation;
 
 
@@ -17,11 +18,12 @@ namespace TcoCore
 {
     public class TcoDiagnosticsAlternativeViewModel : RenderableViewModelBase
     {
-        private readonly DataService _dataService;
+
+
+        IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
 
         public TcoDiagnosticsAlternativeViewModel()
         {
-          
         }
 
         public TcoDiagnosticsAlternativeViewModel(DataService dataService)
@@ -29,10 +31,11 @@ namespace TcoCore
             _dataService = dataService;
         }
 
-        //public TcoDiagnosticsAlternativeViewModel(IMongoLogger logger)
-        //{
-        //    _logger = logger;
-        //}
+        public TcoDiagnosticsAlternativeViewModel(IsTcoObject tcoObject)
+        {
+            _tcoObject = tcoObject;
+        }
+
 
         public TcoDiagnosticsAlternativeViewModel(IsTcoObject tcoObject, DataService dataService)
         {
@@ -40,18 +43,16 @@ namespace TcoCore
             _dataService = dataService;
         }
 
-        //public TcoDiagnosticsAlternativeViewModel(IMongoLogger logger, IsTcoObject tcoObject)
-        //{
-        //    _logger = logger;
-        //    _tcoObject = tcoObject;
-        //}
+        //injected Service for Mongo Interaction
+        public readonly DataService _dataService;
 
-      
-        public RelayCommand UpdateMessagesCommand { get; private set; }
-
+        private volatile object updatemutex = new object();
         internal IsTcoObject _tcoObject { get; set; }
-
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
+
+        //public event Action<PlainTcoMessage> NewMessageReceived;
+
+        //public IVortexObject AffectedObject { get; set; }
 
         public object Categories
         {
@@ -60,29 +61,81 @@ namespace TcoCore
                 return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
             }
         }
-        bool diagnosticsRunning;
 
-        public bool DiagnosticsRunning
+        /// <summary>
+        /// Gets list of messages to be displayed in message list of the view.
+        /// </summary>
+        public IEnumerable<PlainTcoMessage> MessageDisplay
         {
-            get => diagnosticsRunning;
-            internal set
+            get => messageDisplay;
+
+            private set
             {
-                if (diagnosticsRunning == value)
+                if (messageDisplay == value)
                 {
                     return;
                 }
-                SetProperty(ref diagnosticsRunning, value);
+
+                SetProperty(ref messageDisplay, value);
+            }
+
+        }
+
+        /// <summary>
+        /// Updates messages of diagnostics view.
+        /// </summary>
+        internal void UpdateMessages()
+        {
+            if (DiagnosticsRunning)
+            {
+                return;
+            }
+
+            lock (updatemutex)
+            {
+                DiagnosticsRunning = true;
+
+                Task.Run(() =>
+                {
+                    if (_tcoObject != null && _tcoObject.MessageHandler != null)
+                    {
+                        MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages();
+                    }
+                    else
+                    {
+                        // Log an error or throw an exception indicating that _tcoObject or MessageHandler is null
+                    }
+                }).Wait();
+
+                DiagnosticsRunning = false;
             }
         }
 
-        ////========================
-        //public event Action<PlainTcoMessage> NewMessageReceived;
-        //private volatile object updatemutex = new object();
-        //private HashSet<ulong> activeMessages = new HashSet<ulong>();
+        public void RogerMessage(PlainTcoMessage msg)
+        {
+            if (msg != null)
+            {
+                msg.OnlinerMessage.Pinned.Cyclic = false;
+            }
+        }
 
-       
+        public void RogerAllMessages()
+        {
+            lock (updatemutex)
+            {
+                {
 
-        //public void AcknowledgeMessages()
+                    foreach (var item in MessageDisplay.Where(p => p.Pinned))
+                    {
+                        item.OnlinerMessage.Pinned.Cyclic = false;
+                    }
+
+                }
+                
+            }
+        }
+        public void AcknowledgeMessages()
+        { }
         //{
         //    try
         //    {
@@ -125,7 +178,8 @@ namespace TcoCore
         //    }
         //}
 
-        //public void AcknowledgeMessage(ulong identity)
+        public void AcknowledgeMessage(ulong? identity)
+        { }
         //{
         //    try
         //    {
@@ -216,6 +270,24 @@ namespace TcoCore
         //    }
         //}
 
-        
+
+        bool diagnosticsRunning;
+
+        /// <summary>
+        /// Gets or sets whether the diagnostic loop in running.
+        /// </summary>
+        public bool DiagnosticsRunning
+        {
+            get => diagnosticsRunning;
+            internal set
+            {
+                if (diagnosticsRunning == value)
+                {
+                    return;
+                }
+                SetProperty(ref diagnosticsRunning, value);
+            }
+        }
+
     }
 }

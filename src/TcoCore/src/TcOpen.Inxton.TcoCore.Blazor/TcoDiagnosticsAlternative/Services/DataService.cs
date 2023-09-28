@@ -14,7 +14,7 @@ using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 {
-    public class DataService
+    public class DataService 
     {
         private readonly IMongoDatabase _database;
         private readonly string _collectionName;
@@ -60,7 +60,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             }
         }
 
-
         public void OrderData()
         {
             CachedData = CachedData
@@ -70,6 +69,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
                 .ToList();
         }
 
+
+        public int GetCachedDataCount()
+        {
+            return CachedData?.Count() ?? 0;
+        }
 
     }
 
