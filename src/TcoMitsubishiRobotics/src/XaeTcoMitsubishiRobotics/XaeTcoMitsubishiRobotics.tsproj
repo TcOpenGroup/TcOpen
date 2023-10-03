@@ -2845,7 +2845,7 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 			<Project GUID="{974C1006-62D3-48EB-8124-17F82E1EB01C}" Name="TcoMitsubishiRoboticsTests" PrjFilePath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.plcproj" TmcFilePath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.tmc" TmcHash="{CFE0BADE-5460-D946-2290-325936D11CFF}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.tmc" TmcHash="{643DE005-ABB0-3665-2AA4-00BC7442DAD8}">
 					<Name>TcoMitsubishiRoboticsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -4459,7 +4459,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -4518,15 +4518,15 @@ Bit 8 - 15 : reserved]]></Comment>
 							<Fmmu>0000000000000000002400010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010000400140004</BootStrapData>
-							<Pdo Name="robot2_Inputs" Index="#x1a00" Flags="#x0001" SyncMan="3">
-								<Entry Name="robot2_PnIoBoxState" Index="#x6000" Sub="#x01" Flags="#x00000100">
+							<Pdo Name="st40xb1-tz535-pn1c47_Inputs" Index="#x1a00" Flags="#x0001" SyncMan="3">
+								<Entry Name="st40xb1-tz535-pn1c47_PnIoBoxState" Index="#x6000" Sub="#x01" Flags="#x00000100">
 									<DefaultDataMask>1f001f00</DefaultDataMask>
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="robot2_PnIoBoxDiag" Index="#x6000" Sub="#x02" Flags="#x00000100">
+								<Entry Name="st40xb1-tz535-pn1c47_PnIoBoxDiag" Index="#x6000" Sub="#x02" Flags="#x00000100">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="robot2_SubmoduleData_1" Index="#x6001" Sub="#x01" Flags="#x00000100">
+								<Entry Name="st40xb1-tz535-pn1c47_SubmoduleData_1" Index="#x6001" Sub="#x01" Flags="#x00000100">
 									<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
 								</Entry>
 								<Entry Name="SubIndex 002" Flags="#x00000100">
@@ -4536,11 +4536,11 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type GUID="{18071995-0000-0000-0000-000300000004}">ARRAY [0..3] OF BYTE</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="robot2_Outputs" Index="#x1600" InOut="1" Flags="#x0001" SyncMan="2">
-								<Entry Name="robot2_PnIoBoxCtrl" Index="#x7000" Sub="#x01" Flags="#x00000100">
+							<Pdo Name="st40xb1-tz535-pn1c47_Outputs" Index="#x1600" InOut="1" Flags="#x0001" SyncMan="2">
+								<Entry Name="st40xb1-tz535-pn1c47_PnIoBoxCtrl" Index="#x7000" Sub="#x01" Flags="#x00000100">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="robot2_SubmoduleData_1" Index="#x7001" Sub="#x01" Flags="#x00000100">
+								<Entry Name="st40xb1-tz535-pn1c47_SubmoduleData_1" Index="#x7001" Sub="#x01" Flags="#x00000100">
 									<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
 								</Entry>
 								<Entry Name="SubIndex 002" Flags="#x00000100">
@@ -6381,10 +6381,10 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="3" Disabled="true" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
+			<Device Id="3" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
 				<Name>Device 3 (EL6631)</Name>
-				<DevData>000000001600000000000000000000005465726d2031332028454c3636333129000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="8" AddrType="4" ImageType="3" SizeIn="4" SizeOut="8">
+				<DevData>000000001600000000000000a08601005465726d2031332028454c3636333129000000000000000000000000000000000000000000000000000000000000000000000000000003000101a8c000ffffff0001053676d2040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="8" AddrType="4" ImageType="3" SizeIn="70" SizeOut="76">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="11" Disabled="true" BoxType="9121">
@@ -7320,7 +7320,7 @@ Submodule Info: DO 64 bytes
 						</API>
 					</Profinet>
 				</Box>
-				<Box Id="21" BoxType="9121">
+				<Box Id="21" Disabled="true" BoxType="9121">
 					<Name>robot2</Name>
 					<Comment><![CDATA[GSDML Name: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
@@ -8253,6 +8253,233 @@ Submodule Info: DO 64 bytes
 						</API>
 					</Profinet>
 				</Box>
+				<Box Id="20" BoxType="9121">
+					<Name>st40xb1-tz535-pn1c47</Name>
+					<Comment><![CDATA[GSDML Name: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Path: $(TWINCAT3DIR)Config\Io\Profinet\
+VendorName: Mitsubishi Electric Corporation
+OrderNumber: 2D-TZ535-PN
+HW Release Version: 1
+SW Release Version: V1.00]]></Comment>
+					<ImageId>121</ImageId>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>PnIoBoxState</Name>
+							<Comment><![CDATA[0 = No error
+1 = Profinet device state machine is in boot mode
+2 = Device not found
+3 = The stationname is not unique
+4 = IP could not be set
+5 = IP conflict
+6 = DCP set was not successful
+7 = Watchdog error
+8 = Datahold error
+9 = RTC3: Sync mode could not be initiated
+10 = Profinet controller has a link error
+11 = The aliasname is not unique
+12 = The automatic name assignement isn't possible - wrong device type
+13 = IOC-AR is established but no application ready
+14 = IOC-AR is established but module difference
+15 = At least one InputCR is invalid, provider in stop or problemindicator is set
+16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
+31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+]]></Comment>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>PnIoBoxDiag</Name>
+							<Comment><![CDATA[0x0000 = No diagnosis
+0x0001 = IOC-AR is not established
+0x0002 = IOC-AR is established
+0x0004 = IOC-AR is established but no application ready
+0x0008 = IOC-AR is established but module difference
+0x0010 = At least one AlarmCR got a diagnosis alarm
+0x0100 = At least one InputCR is invalid
+0x0200 = At least one InputCR Provider is in stop
+0x0400 = At least one InputCR Problemindicator is set
+0x1000 = At least one OutputCR is invalid
+0x2000 = At least one OutputCR Provider is in stop
+0x4000 = At least one OutputCR Problemindicator is set
+]]></Comment>
+							<Type>UINT</Type>
+							<BitOffs>16</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>PnIoBoxCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<Profinet DeviceId="15105" VendorId="540" FrameOffset="49152" IPAdd="c0a80103" ProtocolType="3" BoxOnDeviceTyp="119" MaxPhysSlotNr="64" InstanceServerPort="50000" InstanceClientPort="50001" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="64" SavePnIoBoxValues="0100" Phase="3" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="324" MaxOutputLen="324" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="TZ535(PROFINET IO 2-Port)" MacAdd5="93" PDOmapping="1" OutputErrorBehavior="2" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-021C-3B01-TZ535_PN.bmp" MainFamily="General" ProductFamily="2D-TZ535-PN" OrderNr="2D-TZ535-PN" DefaultDNSName="TZ535-PN" VendorName="Mitsubishi Electric Corporation" FamDescription="TZ535(PROFINET IO 2-Port)" GraphicFile="GSDML-021C-3B01-TZ535_PN" SWVersion="V1.00" HWVersion="1" AltLanguage="7">
+						<UsedGsdmlModule ModuleIdentNumber="17" ModuleName="DAP Module" InfoText="TZ535(PROFINET IO 2-Port)" OrderNumber="2D-TZ535-PN">
+							<Slot>0</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlModule ModuleIdentNumber="17039360" Id="ID_MODULE_IN_OUT64B" ModuleName="In/Out  64 byte" InfoText="In/Out  64 byte" ModuleCategory="Input/Output">
+							<Slot>1</Slot>
+							<Slot>2</Slot>
+							<Slot>3</Slot>
+							<Slot>4</Slot>
+							<Slot>5</Slot>
+							<Slot>6</Slot>
+							<Slot>7</Slot>
+							<Slot>8</Slot>
+							<Slot>9</Slot>
+							<Slot>10</Slot>
+							<Slot>11</Slot>
+							<Slot>12</Slot>
+							<Slot>13</Slot>
+							<Slot>14</Slot>
+							<Slot>15</Slot>
+							<Slot>16</Slot>
+							<Slot>17</Slot>
+							<Slot>18</Slot>
+							<Slot>19</Slot>
+							<Slot>20</Slot>
+							<Slot>21</Slot>
+							<Slot>22</Slot>
+							<Slot>23</Slot>
+							<Slot>24</Slot>
+							<Slot>25</Slot>
+							<Slot>26</Slot>
+							<Slot>27</Slot>
+							<Slot>28</Slot>
+							<Slot>29</Slot>
+							<Slot>30</Slot>
+							<Slot>31</Slot>
+							<Slot>32</Slot>
+							<Slot>33</Slot>
+							<Slot>34</Slot>
+							<Slot>35</Slot>
+							<Slot>36</Slot>
+							<Slot>37</Slot>
+							<Slot>38</Slot>
+							<Slot>39</Slot>
+							<Slot>40</Slot>
+							<Slot>41</Slot>
+							<Slot>42</Slot>
+							<Slot>43</Slot>
+							<Slot>44</Slot>
+							<Slot>45</Slot>
+							<Slot>46</Slot>
+							<Slot>47</Slot>
+							<Slot>48</Slot>
+							<Slot>49</Slot>
+							<Slot>50</Slot>
+							<Slot>51</Slot>
+							<Slot>52</Slot>
+							<Slot>53</Slot>
+							<Slot>54</Slot>
+							<Slot>55</Slot>
+							<Slot>56</Slot>
+							<Slot>57</Slot>
+							<Slot>58</Slot>
+							<Slot>59</Slot>
+							<Slot>60</Slot>
+							<Slot>61</Slot>
+							<Slot>62</Slot>
+							<Slot>63</Slot>
+							<Slot>64</Slot>
+						</UsedGsdmlModule>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="DAP V2.0" SubModuleName="2D-TZ535-PN(PROFINET IO)" InfoText="TZ535(PROFINET IO 2-Port)"/>
+						<UsedGsdmlSubModule SubModuleIdentNumber="262145" SubSlotNumber="1" TypeOfSubmodule="3" Id="ID_SUBMOD_IN_OUT_64B" SubModuleName="In/Out  64 byte" InfoText="In/Out  64 byte">
+							<DataItemIn/>
+							<DataItemOut/>
+						</UsedGsdmlSubModule>
+						<API Id="1">
+							<Name>API</Name>
+							<ImageId>4</ImageId>
+							<Module Id="#x031d0004" DAP="true" ModuleIdentNumber="17" ModuleInfo="TZ535(PROFINET IO 2-Port)">
+								<Name>Term 4 (DAP Module)</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Module Info: TZ535(PROFINET IO 2-Port)
+OrderNumber: 2D-TZ535-PN]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c0006" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DAP V2.0" AddSubModFlags="60">
+									<Name>Subterm 6 (2D-TZ535-PN(PROFINET IO))</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Submodule Info: TZ535(PROFINET IO 2-Port)
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0007" SubModuleIdentNumber="2" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="Interface" InterfaceData="0100000000000000000000000000000000000000000000000300000000000000">
+									<Name>Subterm 7 (Interface)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0008" SubModuleIdentNumber="3" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="Port 1" PortData="00000000000000000000000000000000000000000000000000000000" RemPeerPort="el6631-pncontroller.port-002">
+									<Name>Subterm 8 (Port 1)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0009" SubModuleIdentNumber="4" TypeOfSubModule="2" SubSlotNumber="32770" IsFixSubmodule="true" SubModuleID="Port 2" PortData="00000000000000000000000000000000000000000000000000000000">
+									<Name>Subterm 9 (Port 2)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+							</Module>
+							<Module Id="#x031d0005" ModuleIdentNumber="17039360" SlotNumber="1" ModuleInfo="In/Out  64 byte" ModuleID="ID_MODULE_IN_OUT64B" DirectDeletable="true">
+								<Name>Term 5 (In/Out  64 byte)</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Module Info: In/Out  64 byte
+]]></Comment>
+								<ImageId>182</ImageId>
+								<SubModule Id="#x031c000a" SubModuleIdentNumber="262145" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="ID_SUBMOD_IN_OUT_64B">
+									<Name>Subterm 10 (In/Out  64 byte)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Submodule Info: In/Out  64 byte
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+										<Var>
+											<Name>Input</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
+											<BitOffs>32</BitOffs>
+										</Var>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+										<Var>
+											<Name>Output</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
+											<BitOffs>16</BitOffs>
+										</Var>
+									</Vars>
+								</SubModule>
+							</Module>
+						</API>
+					</Profinet>
+				</Box>
 				<Profinet PLCPortNr="851" AddPortCount="1">
 					<Ethernet DeviceDesc="EL6631 PROFINET IO Controller" SpecialTask="true" TaskPort="301"/>
 					<PNController ClientPort="60000" ServerPort="61000" VendorId="288" DeviceId="37" IPData="00000000c0a80101ffffff00c0a80101" SystemName="el6631-pncontroller" IRTSendClock="32">
@@ -8263,6 +8490,7 @@ Submodule Info: DO 64 bytes
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500880000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^TcoMitsubishiRoboticsTests^TcoMitsubishiRoboticsTests Instance">
 			<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 0"/>
@@ -8395,6 +8623,136 @@ Submodule Info: DO 64 bytes
 				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[7]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 7"/>
 				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[8]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 8"/>
 				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[9]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 9"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 3 (EL6631)^st40xb1-tz535-pn1c47">
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[0]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[10]" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[11]" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[12]" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[13]" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[14]" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[15]" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[16]" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[17]" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[18]" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[19]" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[1]" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[20]" Size="8" OffsA="160"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[21]" Size="8" OffsA="168"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[22]" Size="8" OffsA="176"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[23]" Size="8" OffsA="184"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[24]" Size="8" OffsA="192"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[25]" Size="8" OffsA="200"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[26]" Size="8" OffsA="208"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[27]" Size="8" OffsA="216"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[28]" Size="8" OffsA="224"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[29]" Size="8" OffsA="232"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[2]" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[30]" Size="8" OffsA="240"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[31]" Size="8" OffsA="248"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[32]" Size="8" OffsA="256"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[33]" Size="8" OffsA="264"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[34]" Size="8" OffsA="272"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[35]" Size="8" OffsA="280"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[36]" Size="8" OffsA="288"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[37]" Size="8" OffsA="296"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[38]" Size="8" OffsA="304"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[39]" Size="8" OffsA="312"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[3]" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[40]" Size="8" OffsA="320"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[41]" Size="8" OffsA="328"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[42]" Size="8" OffsA="336"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[43]" Size="8" OffsA="344"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[44]" Size="8" OffsA="352"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[45]" Size="8" OffsA="360"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[46]" Size="8" OffsA="368"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[47]" Size="8" OffsA="376"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[48]" Size="8" OffsA="384"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[49]" Size="8" OffsA="392"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[4]" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[50]" Size="8" OffsA="400"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[51]" Size="8" OffsA="408"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[52]" Size="8" OffsA="416"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[53]" Size="8" OffsA="424"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[54]" Size="8" OffsA="432"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[55]" Size="8" OffsA="440"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[56]" Size="8" OffsA="448"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[57]" Size="8" OffsA="456"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[58]" Size="8" OffsA="464"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[59]" Size="8" OffsA="472"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[5]" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[60]" Size="8" OffsA="480"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[61]" Size="8" OffsA="488"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[62]" Size="8" OffsA="496"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[63]" Size="8" OffsA="504"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[6]" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[7]" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[8]" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Inputs^Input[9]" Size="8" OffsA="72"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[0]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[10]" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[11]" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[12]" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[13]" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[14]" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[15]" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[16]" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[17]" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[18]" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[19]" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[1]" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[20]" Size="8" OffsA="160"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[21]" Size="8" OffsA="168"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[22]" Size="8" OffsA="176"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[23]" Size="8" OffsA="184"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[24]" Size="8" OffsA="192"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[25]" Size="8" OffsA="200"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[26]" Size="8" OffsA="208"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[27]" Size="8" OffsA="216"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[28]" Size="8" OffsA="224"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[29]" Size="8" OffsA="232"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[2]" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[30]" Size="8" OffsA="240"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[31]" Size="8" OffsA="248"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[32]" Size="8" OffsA="256"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[33]" Size="8" OffsA="264"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[34]" Size="8" OffsA="272"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[35]" Size="8" OffsA="280"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[36]" Size="8" OffsA="288"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[37]" Size="8" OffsA="296"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[38]" Size="8" OffsA="304"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[39]" Size="8" OffsA="312"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[3]" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[40]" Size="8" OffsA="320"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[41]" Size="8" OffsA="328"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[42]" Size="8" OffsA="336"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[43]" Size="8" OffsA="344"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[44]" Size="8" OffsA="352"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[45]" Size="8" OffsA="360"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[46]" Size="8" OffsA="368"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[47]" Size="8" OffsA="376"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[48]" Size="8" OffsA="384"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[49]" Size="8" OffsA="392"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[4]" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[50]" Size="8" OffsA="400"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[51]" Size="8" OffsA="408"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[52]" Size="8" OffsA="416"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[53]" Size="8" OffsA="424"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[54]" Size="8" OffsA="432"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[55]" Size="8" OffsA="440"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[56]" Size="8" OffsA="448"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[57]" Size="8" OffsA="456"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[58]" Size="8" OffsA="464"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[59]" Size="8" OffsA="472"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[5]" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[60]" Size="8" OffsA="480"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[61]" Size="8" OffsA="488"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[62]" Size="8" OffsA="496"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[63]" Size="8" OffsA="504"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[6]" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[7]" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[8]" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs" VarB="API^Term 5 (In/Out  64 byte)^Subterm 10 (In/Out  64 byte)^Outputs^Output[9]" Size="8" OffsA="72"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

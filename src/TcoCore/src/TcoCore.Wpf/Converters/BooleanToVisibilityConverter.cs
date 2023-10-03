@@ -11,27 +11,26 @@ namespace TcoCore
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool flag = false;
-            try
-            {
+            var flag = false;
+            try 
+            { 
                 if (value is bool)
-                    flag = (bool)value;
-                else
                 {
-                    if (value is bool?)
-                    {
-                        bool? flag2 = (bool?)value;
-                        flag = (flag2.HasValue && flag2.Value);
-                    }
+                    flag = (bool)value;
                 }
-
-                //If false is passed as a converter parameter then reverse the value of input value
+                else if (value is bool?)
+                {
+                    var nullable = (bool?)value;
+                    flag = nullable.GetValueOrDefault();
+                }
                 if (parameter != null)
                 {
-                    bool par = true;
-                    if ((bool.TryParse(parameter.ToString(), out par)) && (!par)) flag = !flag;
+                    if (bool.Parse((string)parameter))
+                    {
+                        flag = !flag;
+                    }
                 }
-            }
+        }
             catch 
             {
                 //swalow

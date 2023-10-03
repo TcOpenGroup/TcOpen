@@ -11,7 +11,7 @@ END_VAR
       <ST><![CDATA[
 
 IF Execute() THEN
-	IF _progress = 0 THEN
+(*	IF _progress = 0 THEN
 		IF NOT __ISVALIDREF(inoControl) THEN
 			_varInfo :=__VARINFO(inoControl);
 			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
@@ -42,8 +42,8 @@ IF Execute() THEN
 	END_IF;		
 
 	IF _progress = 2 THEN
-		inoControl.StopProgram:=TRUE;
-		IF NOT inoStatus.State.CycleOn THEN
+		inoControl.Stop:=TRUE;
+		IF NOT inoStatus.State.Stop THEN
 			_progress := _progress + 1;
 		END_IF
 	END_IF;		
@@ -51,7 +51,7 @@ IF Execute() THEN
 	IF _progress = 3 THEN	
 		inoControl.SoftStop := FALSE;
 		inoControl.QuickStop := FALSE;
-		inoControl.StopProgram:=FALSE;
+		inoControl.Stop:=FALSE;
 	END_IF;		
 		
 	_varInfo :=__VARINFO( inoStatus.State.MoveInactive);                                                
@@ -63,7 +63,7 @@ IF Execute() THEN
     DoneWhen( inoStatus.State.MoveInactive AND NOT inoStatus.State.CycleOn);
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q);
+	THIS^.ThrowWhen(_errorTimer.Q); *)
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
@@ -104,9 +104,9 @@ METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stop movements and program was aborted, while not yet completed!#>';END_IF; 
-inoControl.SoftStop := FALSE;
-inoControl.QuickStop := FALSE;
-inoControl.StopProgram:=FALSE;]]></ST>
+//inoControl.SoftStop := FALSE;
+//inoControl.QuickStop := FALSE;
+inoControl.Stop:=FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{39f91c6b-1edc-0685-3c5d-4083a85d6350}">
@@ -165,9 +165,9 @@ CallTimers(FALSE);]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-inoControl.SoftStop := FALSE;
-inoControl.QuickStop := FALSE;
-inoControl.StopProgram:=FALSE;
+//inoControl.SoftStop := FALSE;
+//inoControl.QuickStop := FALSE;
+inoControl.Stop:=FALSE;
 ]]></ST>
       </Implementation>
     </Method>

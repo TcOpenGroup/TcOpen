@@ -11,7 +11,7 @@ END_VAR
       <ST><![CDATA[
 
 IF Execute() THEN
-
+(*
 	IF _progress = 0 THEN
 		IF NOT __ISVALIDREF(inoControl) THEN
 			_varInfo :=__VARINFO(inoControl);
@@ -48,7 +48,7 @@ IF Execute() THEN
     DoneWhen(inoStatus.State.MoveInactive);
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q);
+	THIS^.ThrowWhen(_errorTimer.Q); *)
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
@@ -89,8 +89,8 @@ METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stopping movements was aborted, while not yet completed!#>';END_IF; 
-inoControl.SoftStop := FALSE;
-inoControl.QuickStop := FALSE;]]></ST>
+//inoControl.SoftStop := FALSE;
+//inoControl.QuickStop := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{282e7ad0-c321-06f7-2d6d-e423eb2ecca9}">
@@ -148,8 +148,8 @@ CallTimers(FALSE);]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-inoControl.SoftStop := FALSE;
-inoControl.QuickStop := FALSE;
+//inoControl.SoftStop := FALSE;
+//inoControl.QuickStop := FALSE;
 ]]></ST>
       </Implementation>
     </Method>

@@ -26,20 +26,42 @@ IF Execute() THEN
 		END_IF
 
 	END_IF
+	
 	IF _progress = 1 THEN
-		inoControl.StopProgram:=TRUE ;
+		inoControl.OpoerationEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.OperationEnable THEN
+			_progress := _progress + 1;
+		END_IF;
+	END_IF;
+	
+	IF _progress = 2 THEN
+	
+		inoControl.AutoEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.AutoEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.AutoEnable THEN
+			_progress := _progress + 1;
+		END_IF;
+	END_IF;
+	
+	IF _progress = 3 THEN
+		inoControl.Stop:=TRUE ;
+		inoControl.Start:=FALSE ;
 		
-		IF NOT inoStatus.State.CycleOn AND  NOT inoStatus.State.SystemInputBusy THEN
-				inoControl.StopProgram:=FALSE;
+		
+		IF  inoStatus.State.Stop  THEN
+				inoControl.Stop:=FALSE;
 		END_IF
 	END_IF;		
 	
 	
-	_varInfo :=__VARINFO( inoStatus.State.CycleOn);                                                
-	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.CycleOn)
+	_varInfo :=__VARINFO( inoStatus.State.Stop);                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Stop)
 		.Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
 	
-    DoneWhen(NOT inoStatus.State.CycleOn );
+    DoneWhen( inoStatus.State.Stop );
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q);
@@ -83,7 +105,7 @@ METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stop program was aborted, while not yet completed!#>';END_IF; 
-inoControl.StopProgram:=FALSE;]]></ST>
+inoControl.Stop:=FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{de5075e0-1242-019a-168a-c1a76ccb7474}">
@@ -142,7 +164,7 @@ CallTimers(FALSE);]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-inoControl.StopProgram:=FALSE;
+inoControl.Stop:=FALSE;
 ]]></ST>
       </Implementation>
     </Method>
