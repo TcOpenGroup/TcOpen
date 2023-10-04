@@ -27,6 +27,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         }
 
         public IEnumerable<MongoDbLogItem> CachedData { get; set; }
+        public IEnumerable<MongoDbLogItem> CachedDataEntriesToUpdate { get; set; }
 
         private async Task<IEnumerable<MongoDbLogItem>> GetDataAsync()
         {
@@ -37,6 +38,13 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         public async Task RefreshDataAsync()
         {
             CachedData = await GetDataAsync();
+        }
+
+        private void FilterDataEntriesToUpdate()
+        {
+            CachedDataEntriesToUpdate = CachedData
+                           .Where(item => item.TimeStampAcknowledged == null)
+                           .ToList();
         }
 
         public void ExtractIdentity()
@@ -60,15 +68,57 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             }
         }
 
-        public void OrderData()
+        public async Task UpdateAllMessagesInDb()
         {
-            CachedData = CachedData
-                .OrderByDescending(item => item.TimeStampAcknowledged.HasValue ? 0 : 1)  // Nulls first
-                .ThenByDescending(item => item.UtcTimeStamp)
-                .ThenByDescending(item => item.TimeStampAcknowledged)
-                .ToList();
+            // Filter the CachedData for entries where TimeStampAcknowledged is null
+            FilterDataEntriesToUpdate();
+
+             DateTime timeStampAcknowledged = DateTime.UtcNow;
+
+            // Get the collection
+            var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
+
+            // Build the update definition
+            var update = Builders<MongoDbLogItem>.Update
+                .Set(item => item.TimeStampAcknowledged, timeStampAcknowledged);
+
+            // Apply the update to all matching documents in the database
+            var filter = Builders<MongoDbLogItem>.Filter.Eq(item => item.TimeStampAcknowledged, null);
+            await collection.UpdateManyAsync(filter, update);
         }
 
+
+
+        public async Task UpdateMessageInDb(ulong? identity, int messageDigest)
+        {
+            FilterDataEntriesToUpdate();
+
+            var entriesToUpdate = CachedDataEntriesToUpdate
+                .Where(item => item.Properties.ExtractedIdentity == identity
+                            && item.Properties.sender.Payload.MessageDigest == messageDigest)
+                .ToList();
+
+            DateTime timeStampAcknowledged = DateTime.UtcNow;
+            // Update the TimeStampAcknowledged field for each matching entry
+            foreach (var entry in entriesToUpdate)
+            {
+                entry.TimeStampAcknowledged = timeStampAcknowledged;
+            }
+
+            // Get the collection
+            var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
+
+            // Build the update definition
+            var update = Builders<MongoDbLogItem>.Update
+                .Set(item => item.TimeStampAcknowledged, timeStampAcknowledged);
+
+            // Apply the update to each matching document in the database
+            foreach (var entry in entriesToUpdate)
+            {
+                var filter = Builders<MongoDbLogItem>.Filter.Eq(item => item.Id, entry.Id);
+                await collection.UpdateOneAsync(filter, update);
+            }
+        }
 
         public int GetCachedDataCount()
         {

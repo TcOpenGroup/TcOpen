@@ -12,39 +12,18 @@ using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 using PlcDocu.TcoCore;
 using Vortex.Connector;
 using Vortex.Presentation;
-
+using Microsoft.AspNetCore.Components;
 
 namespace TcoCore
 {
     public class TcoDiagnosticsAlternativeViewModel : RenderableViewModelBase
     {
-
-
         IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
 
         public TcoDiagnosticsAlternativeViewModel()
         {
+            //Console.WriteLine("Default constructor called");
         }
-
-        public TcoDiagnosticsAlternativeViewModel(DataService dataService)
-        {
-            _dataService = dataService;
-        }
-
-        public TcoDiagnosticsAlternativeViewModel(IsTcoObject tcoObject)
-        {
-            _tcoObject = tcoObject;
-        }
-
-
-        public TcoDiagnosticsAlternativeViewModel(IsTcoObject tcoObject, DataService dataService)
-        {
-            _tcoObject = tcoObject;
-            _dataService = dataService;
-        }
-
-        //injected Service for Mongo Interaction
-        public readonly DataService _dataService;
 
         private volatile object updatemutex = new object();
         internal IsTcoObject _tcoObject { get; set; }
@@ -134,8 +113,8 @@ namespace TcoCore
                 
             }
         }
-        public void AcknowledgeMessages()
-        { }
+        //public void AcknowledgeMessages()
+        //{ }
         //{
         //    try
         //    {
@@ -178,8 +157,10 @@ namespace TcoCore
         //    }
         //}
 
-        public void AcknowledgeMessage(ulong? identity)
-        { }
+        //public void AcknowledgeMessage(ulong? identity, int messageDigest)
+        //{
+        //    //_dataService.UpdateMessage(identity, messageDigest);
+        //}
         //{
         //    try
         //    {

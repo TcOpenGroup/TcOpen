@@ -18,14 +18,17 @@ namespace TcoCore
 
         public TcoDiagnosticsViewModel()
         {
+            Console.WriteLine("Default constructor called TcoDiagnosticsViewModel");
             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
         }
 
-        public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
-        {
-            _tcoObject = tcoObject;
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
-        }
+        //This is actually never called, so we could remove it
+        //public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
+        //{
+        //    _tcoObject = tcoObject;
+        //    Console.WriteLine("tcoObject constructor called TcoDiagnosticsViewModel");
+        //    this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
+        //}
         /// <summary>
         /// Gets the command that executes update of messages on demand.
         /// </summary>

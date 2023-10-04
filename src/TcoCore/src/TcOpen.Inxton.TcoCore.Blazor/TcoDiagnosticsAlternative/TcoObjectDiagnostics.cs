@@ -13,6 +13,5 @@ namespace TcoCore
     {
         public TcoObjectDiagnosticsAlternativeViewModel() : base() { }
 
-        public TcoObjectDiagnosticsAlternativeViewModel(DataService dataService) : base(dataService) { }
     }
 }

@@ -99,7 +99,7 @@ namespace PlcHammer.Hmi.Blazor
                                         .WriteTo.MongoDBBson(
                                                         databaseUrl: $"{MongoUri}/{DatabaseName}",
                                                         collectionName: $"{CollectionName}"
-                                                    ).Enrich.WithProperty("user",SecurityManager.Manager.Principal.Identity.Name)
+                                                    ).Enrich.WithProperty("user", SecurityManager.Manager.Principal.Identity.Name)
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
                                         .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
@@ -109,9 +109,9 @@ namespace PlcHammer.Hmi.Blazor
 
             services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDbSettings"));
             services.AddTransient<DataService>();
-            services.AddSingleton< DataCleanupService>();
-            services.AddTransient<TcoDiagnosticsAlternativeViewModel>();
+            services.AddSingleton<DataCleanupService>();
         }
+           
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -145,7 +145,7 @@ namespace PlcHammer.Hmi.Blazor
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,

@@ -1,13 +1,15 @@
-﻿@inherits RenderableViewModelComponentBase<TcoDiagnosticsAlternativeViewModel>
+﻿@*@inherits RenderableViewModelComponentBase<TcoDiagnosticsAlternativeViewModel>*@
+@inherits RenderableViewModelComponentBase<TcoObjectDiagnosticsAlternativeViewModel>
+
 @using Blazm.Components
 @using Vortex.Presentation.Controls.Blazor.RenderableContent
 @namespace TcoCore
 
-@*@inject TcoDiagnosticsAlternativeViewModel ViewModel*@
 
 @ViewModel._tcoObject.MessageHandler.ActiveMessagesCount
+<p>The current time is: @timetest.ToString(("MM/dd/yyyy HH:mm:ss"))</p>
 
-<BlazmGrid Data="ViewModel.MessageDisplay" PageSize="10" Sortable="true" UseVirtualize="false">
+@*<BlazmGrid Data="ViewModel.MessageDisplay" PageSize="10" Sortable="true" UseVirtualize="false">
     <NullGridTemplate>
         No messages found.
     </NullGridTemplate>
@@ -49,7 +51,25 @@
 
     </GridColumns>
 
-</BlazmGrid>
+</BlazmGrid>*@
+
+<div class="d-flex justify-content-center align-items-center">
+    @*<div class="col-2 m-3">
+        <select class="w-100 form-select custom-dropdown" @bind="@MinMessageCategoryFilter">
+            @foreach (var item in eMessageCategories)
+            {
+                <option class="form-control" value="@item">@item.ToString()</option>
+            }
+        </select>
+    </div>*@
+    <div class="col-2">
+        <button class="form-control" @onclick="() => AcknowledgeMessages()">Acknowledge All Messages</button>
+    </div>
+   @* <div class="col-6 m-3">
+        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
+        <span class="mx-3">@DiagnosticsMessage()</span>
+    </div>*@
+</div>
 
 <table class="table">
     <thead>
@@ -60,7 +80,7 @@
             <th>Rendered Message</th>
             <th>PLC Logger</th>
             <th>Message Digest (Unique Hash)</th>
-            <th>Idendity</th>
+            <th>Identity</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -68,15 +88,16 @@
     @foreach (var message in MongdoDbLogItemFiltered.Skip((currentPage -1)* itemsPerPage).Take(itemsPerPage).Take(itemsPerPage))
     {
         <tr>
+            @*1h behind date in summertime, 12.51 displayed, time shows on PC 13.51, utcnow 11.51*@
             <td>@message.Properties.sender.Payload.PlcTimeStamp.ToString("MM/dd/yyyy HH:mm:ss")</td>
-            <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
+            <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString(("MM/dd/yyyy HH:mm:ss")) : "")</td>
             <td>@message.Level</td>
             <td>@message.Properties.sender.Payload.Raw</td>
             <td>@message.Properties.sender.Payload.ParentSymbol</td>
             <td>@message.Properties.sender.Payload.MessageDigest</td>
             <td>@message.Properties.ExtractedIdentity</td>
              <td>
-                 <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => ViewModel.AcknowledgeMessage(message.Properties.ExtractedIdentity)">
+                 <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
                      Acknowledge
                  </button>
              </td>

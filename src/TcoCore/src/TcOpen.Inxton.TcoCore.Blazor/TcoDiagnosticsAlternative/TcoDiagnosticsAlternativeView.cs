@@ -30,17 +30,11 @@ namespace TcoCore
         [Inject]
         public DataCleanupService DataCleanupService { get; set; }
 
-        //protected override void OnInitialized()
-        //{
-        //    ViewModel = new TcoDiagnosticsAlternativeViewModel(ViewModel._tcoObject, DataService);
-        //    UpdateValuesOnChange(ViewModel._tcoObject);
-        //    DiagnosticsUpdateTimer();
-        //}
-
         protected override async Task OnInitializedAsync()
         {
-            //ViewModel = new TcoDiagnosticsAlternativeViewModel(ViewModel._tcoObject, DataService);
-
+           // IsTcoObject tcoObject;
+           //ViewModel = new TcoObjectDiagnosticsAlternativeViewModel(tcoObject, DataService);
+            
             if (!BsonClassMap.IsClassMapRegistered(typeof(SenderProperties)))
             {
                 BsonClassMap.RegisterClassMap<SenderProperties>(cm =>
@@ -55,6 +49,7 @@ namespace TcoCore
             DiagnosticsUpdateTimer();
         }
 
+        public DateTime timetest { get; set; } = DateTime.UtcNow;
         //SetsUpdate Intervall via Consuming App
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
         private static int _diagnosticsUpdateInterval { get; set; } = 100;
@@ -75,7 +70,6 @@ namespace TcoCore
         private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
         public int CachedDataCount { get; private set; }
 
-
         //public string DiagnosticsMessage() => "Diag depth : " + DepthValue;
         //public int MaxDiagnosticsDepth { get; set; } = 20;
         //public static int _depthValue;
@@ -92,17 +86,50 @@ namespace TcoCore
 
                 CachedDataCount = DataService.GetCachedDataCount();
                 DataService.ExtractIdentity();
-                DataService.OrderData();
-                MongdoDbLogItemFiltered = DataService.CachedData
-                     .Where(m => m.Properties?.sender?.Payload != null)
-                     .OrderByDescending(m => m.TimeStampAcknowledged.HasValue ? 0 : 1)
-                     .ThenByDescending(m => m.TimeStampAcknowledged)
-                     .ThenByDescending(m => m.UtcTimeStamp);
-
+                MongdoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData);
                 StateHasChanged();
             });
         }
-    
+
+        public async Task AcknowledgeAllMessages()
+        {
+            try
+            {
+
+                await DataService.UpdateAllMessagesInDb();
+
+                foreach (var item in DataService.CachedDataEntriesToUpdate)
+                {
+                TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = ViewModel._tcoObject.HumanReadable, rootSymbol = ViewModel._tcoObject.Symbol });
+                }
+                //await DataService.UpdateMessageInDb(identity, messageDigest);
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        public async Task AcknowledgeMessage(ulong? identity, int messageDigest)
+        {
+            try
+            {
+                await DataService.UpdateMessageInDb(identity, messageDigest);
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private IEnumerable<MongoDbLogItem> CheckActiveMessages()
+        {
+            foreach (var item in DataService.CachedDataEntriesToUpdate
+                .Where(item => item.Properties.ExtractedIdentity == ViewModel.MessageDisplay.Identity && item.MessageDig){
+
+            }
+        }
+
         public static void SetItemsPerPage(int value)
         {
             itemsPerPage = value;
@@ -140,6 +167,16 @@ namespace TcoCore
             messages.Add(newMessage);
             StateHasChanged();
         }
+
+        private IEnumerable<MongoDbLogItem> OrderMongoDbLogItems(IEnumerable<MongoDbLogItem> items)
+        {
+            return items
+                .Where(m => m.Properties?.sender?.Payload != null)
+                .OrderByDescending(m => m.TimeStampAcknowledged.HasValue ? 0 : 1)
+                .ThenByDescending(m => m.UtcTimeStamp)
+                .ThenByDescending(m => m.TimeStampAcknowledged);
+        }
+
 
         // Unsubscribe from the event when the component is disposed of
         //public void Dispose()
