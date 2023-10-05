@@ -20,13 +20,13 @@ using TcOpen.Inxton.Wpf;
 namespace TcoMitsubishiRobotics
 {
 
-    public partial class TcoIrc5_v_1_x_xServiceView : UserControl
+    public partial class TcoCr800_v_1_x_xServiceView : UserControl
     {
-        public TcoIrc5_v_1_x_xServiceView()
+        public TcoCr800_v_1_x_xServiceView()
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.DataContext = new TcoIrc5_v_1_x_xServiceViewModel();
+                this.DataContext = new TcoCr800_v_1_x_xServiceViewModel();
             }
 
             InitializeComponent();

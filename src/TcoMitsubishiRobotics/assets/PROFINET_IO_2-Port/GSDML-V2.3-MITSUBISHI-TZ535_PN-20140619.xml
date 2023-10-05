@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ISO15745Profile xmlns="http://www.profibus.com/GSDML/2003/11/DeviceProfile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.profibus.com/GSDML/2003/11/DeviceProfile ..\xsd\GSDML-DeviceProfile-V2.3.xsd">
+<!-- ============================================================================================== -->
+<!--   ProfileHeader Definition																		-->
+<!-- ============================================================================================== -->
+	<ProfileHeader>
+		<ProfileIdentification>PROFINET Device Profile</ProfileIdentification>
+		<ProfileRevision>1.00</ProfileRevision>
+		<ProfileName>Device Profile for PROFINET Devices</ProfileName>
+		<ProfileSource>PROFIBUS Nutzerorganisation e. V. (PNO)</ProfileSource>
+		<ProfileClassID>Device</ProfileClassID>
+		<ISO15745Reference>
+			<ISO15745Part>4</ISO15745Part>
+			<ISO15745Edition>1</ISO15745Edition>
+			<ProfileTechnology>GSDML</ProfileTechnology>
+		</ISO15745Reference>
+	</ProfileHeader>
+	<ProfileBody>
+		<DeviceIdentity VendorID="0x021C" DeviceID="0x3B01">
+			<InfoText TextId="T_ID_DEV_DESCRIPTION"/>
+			<VendorName Value="Mitsubishi Electric Corporation"/>
+		</DeviceIdentity>
+		<DeviceFunction>
+			<Family MainFamily="General" ProductFamily="2D-TZ535-PN"/>
+		</DeviceFunction>
+		<ApplicationProcess>
+
+<!-- ============================================================================================== -->
+<!--   List of Device Access Points (DAP)                 											-->
+<!-- ============================================================================================== -->
+			<DeviceAccessPointList>
+				<DeviceAccessPointItem ID="DAP V2.0" PhysicalSlots="0..64" ModuleIdentNumber="0x00000011" MinDeviceInterval="64" ImplementationType="TZ535-PN" DNS_CompatibleName="TZ535-PN" ExtendedAddressAssignmentSupported="false" FixedInSlots="0" ObjectUUID_LocalIndex="1" DeviceAccessSupported="true" NameOfStationNotTransferable="true" RequiredSchemaVersion="V2.25" ParameterizationSpeedupSupported="false" PNIO_Version="V2.2">
+					<ModuleInfo>
+						<Name TextId="T_ID_DAP_V2"/>
+						<InfoText TextId="T_ID_V2_DEV_DESCRIPTION"/>
+						<VendorName Value="Mitsubishi Electric Corporation"/>
+						<OrderNumber Value="2D-TZ535-PN"/>
+						<HardwareRelease Value="1"/>
+						<SoftwareRelease Value="V1.00"/>
+					</ModuleInfo>
+
+					<SubslotList>
+						<SubslotItem SubslotNumber="32768" TextId="T_ID_SS_INTERFACE"/>
+						<SubslotItem SubslotNumber="32769" TextId="T_ID_SS_PORT1"/>
+						<SubslotItem SubslotNumber="32770" TextId="T_ID_SS_PORT2"/>
+					</SubslotList>
+
+					<IOConfigData MaxInputLength="324" MaxOutputLength="324"/>
+
+					<UseableModules>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_IN_OUT8B" AllowedInSlots="1..64"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_IN_OUT16B" AllowedInSlots="1..64"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_IN_OUT32B" AllowedInSlots="1..64"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_IN_OUT64B" AllowedInSlots="1..64"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_IN_OUT128B" AllowedInSlots="1..64"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_IN_OUT255B" AllowedInSlots="1..64"/>
+					</UseableModules>
+
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="DAP V2.0" SubmoduleIdentNumber="0x00000001" API="0" Writeable_IM_Records="1 2 3 4">
+							<IOData IOPS_Length="1" IOCS_Length="1" />
+							<ModuleInfo>
+								<Name TextId="T_ID_DAP_V2"/>
+								<InfoText TextId="T_ID_V2_DEV_DESCRIPTION"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+
+					<SystemDefinedSubmoduleList>
+						<InterfaceSubmoduleItem ID="Interface" SubslotNumber="32768" SubmoduleIdentNumber="0x0002" SupportedRT_Classes="RT_CLASS_1" TextId="T_ID_DAP_INTERFACE_MODULE" DCP_HelloSupported="false" IsochroneModeSupported="false" SupportedMibs="MIB2" SupportedProtocols="SNMP;LLDP">
+							<ApplicationRelations NumberOfAdditionalInputCR="0" NumberOfAdditionalMulticastProviderCR="0" NumberOfAdditionalOutputCR="0" NumberOfMulticastConsumerCR="0" PullModuleAlarmSupported="false">
+								<TimingProperties SendClock="32 64 128" ReductionRatio="1 2 4 8 16 32 64 128 256 512"/>
+							</ApplicationRelations>
+						</InterfaceSubmoduleItem>
+						<PortSubmoduleItem ID="Port 1" SubslotNumber="32769" SubmoduleIdentNumber="0x0003" MAUType="100BASETXFD" TextId="T_ID_PORT1"/>
+						<PortSubmoduleItem ID="Port 2" SubslotNumber="32770" SubmoduleIdentNumber="0x0004" MAUType="100BASETXFD" TextId="T_ID_PORT2"/>
+					</SystemDefinedSubmoduleList>
+
+					<Graphics>
+						<GraphicItemRef Type="DeviceSymbol" GraphicItemTarget="IDG_1"/>
+					</Graphics>
+
+				</DeviceAccessPointItem>
+
+			</DeviceAccessPointList>
+
+<!-- ============================================================================================== -->
+<!--   List of modules																				-->
+<!-- ============================================================================================== -->
+      <ModuleList>
+
+				<!-- Digital In/Output 8 byte -->
+				<ModuleItem ID="ID_MODULE_IN_OUT8B" ModuleIdentNumber="0x01010000">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_IN_OUT_8B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_IN_OUT_8B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_IN_OUT_8B" SubmoduleIdentNumber="0x00010001" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="8" TextId="T_ID_INPUT" />
+								</Input>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="8" TextId="T_ID_OUTPUT" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+							<Name TextId="T_ID_SUBMOD_NAME_IN_OUT_8B"/>
+							<InfoText TextId="T_ID_SUBMOD_INFO_IN_OUT_8B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+
+				<!-- Digital In/Output 16 byte -->
+				<ModuleItem ID="ID_MODULE_IN_OUT16B" ModuleIdentNumber="0x01020000">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_IN_OUT_16B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_IN_OUT_16B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_IN_OUT_16B" SubmoduleIdentNumber="0x00020001" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="16" TextId="T_ID_INPUT" />
+								</Input>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="16" TextId="T_ID_OUTPUT" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+							<Name TextId="T_ID_SUBMOD_NAME_IN_OUT_16B"/>
+							<InfoText TextId="T_ID_SUBMOD_INFO_IN_OUT_16B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+
+				<!-- Digital In/Output 32 byte -->
+				<ModuleItem ID="ID_MODULE_IN_OUT32B" ModuleIdentNumber="0x01030000">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_IN_OUT_32B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_IN_OUT_32B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_IN_OUT_32B" SubmoduleIdentNumber="0x00030001" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="32" TextId="T_ID_INPUT" />
+								</Input>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="32" TextId="T_ID_OUTPUT" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+							<Name TextId="T_ID_SUBMOD_NAME_IN_OUT_32B"/>
+							<InfoText TextId="T_ID_SUBMOD_INFO_IN_OUT_32B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+
+				<!-- Digital In/Output 64 byte -->
+				<ModuleItem ID="ID_MODULE_IN_OUT64B" ModuleIdentNumber="0x01040000">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_IN_OUT_64B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_IN_OUT_64B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_IN_OUT_64B" SubmoduleIdentNumber="0x00040001" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="64" TextId="T_ID_INPUT" />
+								</Input>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="64" TextId="T_ID_OUTPUT" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+							<Name TextId="T_ID_SUBMOD_NAME_IN_OUT_64B"/>
+							<InfoText TextId="T_ID_SUBMOD_INFO_IN_OUT_64B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+
+				<!-- Digital In/Output 128 byte -->
+				<ModuleItem ID="ID_MODULE_IN_OUT128B" ModuleIdentNumber="0x01050000">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_IN_OUT_128B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_IN_OUT_128B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_IN_OUT_128B" SubmoduleIdentNumber="0x00050001" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="128" TextId="T_ID_INPUT" />
+								</Input>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="128" TextId="T_ID_OUTPUT" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+							<Name TextId="T_ID_SUBMOD_NAME_IN_OUT_128B"/>
+							<InfoText TextId="T_ID_SUBMOD_INFO_IN_OUT_128B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+
+				<!-- Digital In/Output 255 byte -->
+				<ModuleItem ID="ID_MODULE_IN_OUT255B" ModuleIdentNumber="0x01060000">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_IN_OUT_255B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_IN_OUT_255B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_IN_OUT_255B" SubmoduleIdentNumber="0x00060001" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="255" TextId="T_ID_INPUT" />
+								</Input>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" UseAsBits="false" Length="255" TextId="T_ID_OUTPUT" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+							<Name TextId="T_ID_SUBMOD_NAME_IN_OUT_255B"/>
+							<InfoText TextId="T_ID_SUBMOD_INFO_IN_OUT_255B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+			</ModuleList>
+
+<!-- ============================================================================================== -->
+<!--   List of values																				-->
+<!-- ============================================================================================== -->
+
+
+<!-- ============================================================================================== -->
+<!--   Bitmaps																						-->
+<!-- ============================================================================================== -->
+			<GraphicsList>
+				<GraphicItem ID="IDG_1" GraphicFile="GSDML-021C-3B01-TZ535_PN"/>
+			</GraphicsList>
+
+
+<!-- ============================================================================================== -->
+<!--   List of categorys																			-->
+<!-- ============================================================================================== -->
+			<CategoryList>
+				<CategoryItem ID="CAT_REF_MODULES" TextId="T_ID_CAT_REF_MODULES"/>
+			</CategoryList>
+
+<!-- ============================================================================================== -->
+<!--   List of texts																				-->
+<!-- ============================================================================================== -->
+			<ExternalTextList>
+				<PrimaryLanguage>
+					<!--Device Access Point information etc -->
+					<Text TextId="T_ID_DEV_DESCRIPTION" Value="TZ535(PROFINET IO 2-Port)"/>
+					<Text TextId="T_ID_V2_DEV_DESCRIPTION" Value="TZ535(PROFINET IO 2-Port)"/>
+
+					<Text TextId="T_ID_DAP_V2" Value="2D-TZ535-PN(PROFINET IO)"/>
+
+					<Text TextId="T_ID_SS_INTERFACE" Value="X1"/>
+					<Text TextId="T_ID_SS_PORT1" Value="P1"/>
+					<Text TextId="T_ID_SS_PORT2" Value="P2"/>
+					<Text TextId="T_ID_DAP_INTERFACE_MODULE" Value="Interface"/>
+					<Text TextId="T_ID_PORT1" Value="Port 1"/>
+					<Text TextId="T_ID_PORT2" Value="Port 2"/>
+
+					<!--Module category-->
+					<Text TextId="T_ID_CAT_REF_MODULES" Value="Input/Output"/>
+
+					<!-- Vendor module texts -->
+					<Text TextId="T_ID_INPUT" Value="Input"/>
+					<Text TextId="T_ID_OUTPUT" Value="Output"/>
+
+					<Text TextId="T_ID_MODULE_NAME_IN_OUT_8B" Value="In/Out   8 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_IN_OUT_8B" Value="In/Out   8 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_IN_OUT_8B" Value="In/Out   8 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_IN_OUT_8B" Value="In/Out   8 byte"/>
+
+					<Text TextId="T_ID_MODULE_NAME_IN_OUT_16B" Value="In/Out  16 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_IN_OUT_16B" Value="In/Out  16 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_IN_OUT_16B" Value="In/Out  16 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_IN_OUT_16B" Value="In/Out  16 byte"/>
+
+					<Text TextId="T_ID_MODULE_NAME_IN_OUT_32B" Value="In/Out  32 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_IN_OUT_32B" Value="In/Out  32 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_IN_OUT_32B" Value="In/Out  32 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_IN_OUT_32B" Value="In/Out  32 byte"/>
+
+					<Text TextId="T_ID_MODULE_NAME_IN_OUT_64B" Value="In/Out  64 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_IN_OUT_64B" Value="In/Out  64 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_IN_OUT_64B" Value="In/Out  64 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_IN_OUT_64B" Value="In/Out  64 byte"/>
+
+					<Text TextId="T_ID_MODULE_NAME_IN_OUT_128B" Value="In/Out 128 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_IN_OUT_128B" Value="In/Out 128 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_IN_OUT_128B" Value="In/Out 128 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_IN_OUT_128B" Value="In/Out 128 byte"/>
+
+					<Text TextId="T_ID_MODULE_NAME_IN_OUT_255B" Value="In/Out 255 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_IN_OUT_255B" Value="In/Out 255 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_IN_OUT_255B" Value="In/Out 255 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_IN_OUT_255B" Value="In/Out 255 byte"/>
+
+				</PrimaryLanguage>
+			</ExternalTextList>
+
+		</ApplicationProcess>
+	</ProfileBody>
+</ISO15745Profile>

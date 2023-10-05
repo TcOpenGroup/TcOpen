@@ -39,7 +39,7 @@ namespace TcOpen.Inxton.TcoAbbRobotics.Wpf.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TcOpen.Inxton.TcoAbbRobotics.Wpf.Properties.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,281 +61,65 @@ namespace TcOpen.Inxton.TcoAbbRobotics.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Acc..
+        ///   Looks up a localized string similar to Key not in Auto.
         /// </summary>
-        public static string Acc {
+        public static string KeyNotInAuto {
             get {
-                return ResourceManager.GetString("Acc", resourceCulture);
+                return ResourceManager.GetString("KeyNotInAuto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Acceleration.
+        ///   Looks up a localized string similar to Motors On.
         /// </summary>
-        public static string Acceleration {
+        public static string Motors_On {
             get {
-                return ResourceManager.GetString("Acceleration", resourceCulture);
+                return ResourceManager.GetString("Motors On", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to create new set?.
+        ///   Looks up a localized string similar to Motors Off.
         /// </summary>
-        public static string AskCreate {
+        public static string MotorsOff {
             get {
-                return ResourceManager.GetString("AskCreate", resourceCulture);
+                return ResourceManager.GetString("MotorsOff", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to delete set?.
+        ///   Looks up a localized string similar to Program is stoped.
         /// </summary>
-        public static string AskDelete {
+        public static string ProgramIsNotRunning {
             get {
-                return ResourceManager.GetString("AskDelete", resourceCulture);
+                return ResourceManager.GetString("ProgramIsNotRunning", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to load positions?.
+        ///   Looks up a localized string similar to Program is running.
         /// </summary>
-        public static string AskLoad {
+        public static string ProgramIsRunning {
             get {
-                return ResourceManager.GetString("AskLoad", resourceCulture);
+                return ResourceManager.GetString("ProgramIsRunning", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to move position:.
+        ///   Looks up a localized string similar to Safety Error!.
         /// </summary>
-        public static string AskMovePos {
+        public static string SafetyError {
             get {
-                return ResourceManager.GetString("AskMovePos", resourceCulture);
+                return ResourceManager.GetString("SafetyError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to save positions?.
+        ///   Looks up a localized string similar to Safety Ok.
         /// </summary>
-        public static string AskSave {
+        public static string SafetyOk {
             get {
-                return ResourceManager.GetString("AskSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure to change position:.
-        /// </summary>
-        public static string AskTeachPos {
-            get {
-                return ResourceManager.GetString("AskTeachPos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Attention.
-        /// </summary>
-        public static string Attention {
-            get {
-                return ResourceManager.GetString("Attention", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Axis.
-        /// </summary>
-        public static string Axis {
-            get {
-                return ResourceManager.GetString("Axis", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create.
-        /// </summary>
-        public static string Create {
-            get {
-                return ResourceManager.GetString("Create", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dec..
-        /// </summary>
-        public static string Dec {
-            get {
-                return ResourceManager.GetString("Dec", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deceleration.
-        /// </summary>
-        public static string Deceleration {
-            get {
-                return ResourceManager.GetString("Deceleration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Define Repository Handler first!.
-        /// </summary>
-        public static string DefineRepository {
-            get {
-                return ResourceManager.GetString("DefineRepository", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete selected.
-        /// </summary>
-        public static string DeleteSelected {
-            get {
-                return ResourceManager.GetString("DeleteSelected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Jerk.
-        /// </summary>
-        public static string Jerk {
-            get {
-                return ResourceManager.GetString("Jerk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Load.
-        /// </summary>
-        public static string Load {
-            get {
-                return ResourceManager.GetString("Load", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Move to position.
-        /// </summary>
-        public static string MoveToPosition {
-            get {
-                return ResourceManager.GetString("MoveToPosition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Position.
-        /// </summary>
-        public static string Position {
-            get {
-                return ResourceManager.GetString("Position", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Positions.
-        /// </summary>
-        public static string Positions {
-            get {
-                return ResourceManager.GetString("Positions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        public static string Save {
-            get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Selected.
-        /// </summary>
-        public static string Selected {
-            get {
-                return ResourceManager.GetString("Selected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select position first!.
-        /// </summary>
-        public static string SelectFirst {
-            get {
-                return ResourceManager.GetString("SelectFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select SetId first!.
-        /// </summary>
-        public static string SelectSetId {
-            get {
-                return ResourceManager.GetString("SelectSetId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set Id.
-        /// </summary>
-        public static string SetId {
-            get {
-                return ResourceManager.GetString("SetId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Write SetId first!.
-        /// </summary>
-        public static string SetNewName {
-            get {
-                return ResourceManager.GetString("SetNewName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Teach.
-        /// </summary>
-        public static string Teach {
-            get {
-                return ResourceManager.GetString("Teach", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vel..
-        /// </summary>
-        public static string Vel {
-            get {
-                return ResourceManager.GetString("Vel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Velocity.
-        /// </summary>
-        public static string Velocity {
-            get {
-                return ResourceManager.GetString("Velocity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Write default values.
-        /// </summary>
-        public static string WriteDefaultValues {
-            get {
-                return ResourceManager.GetString("WriteDefaultValues", resourceCulture);
+                return ResourceManager.GetString("SafetyOk", resourceCulture);
             }
         }
     }

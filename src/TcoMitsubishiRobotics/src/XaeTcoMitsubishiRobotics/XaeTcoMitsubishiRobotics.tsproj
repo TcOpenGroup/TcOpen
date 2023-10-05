@@ -2845,7 +2845,7 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 			<Project GUID="{974C1006-62D3-48EB-8124-17F82E1EB01C}" Name="TcoMitsubishiRoboticsTests" PrjFilePath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.plcproj" TmcFilePath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.tmc" TmcHash="{CFE0BADE-5460-D946-2290-325936D11CFF}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoMitsubishiRoboticsTests\TcoMitsubishiRoboticsTests.tmc" TmcHash="{874649FB-8C94-F796-CBB1-FA5D328C031F}">
 					<Name>TcoMitsubishiRoboticsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -4459,7 +4459,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -4518,15 +4518,15 @@ Bit 8 - 15 : reserved]]></Comment>
 							<Fmmu>0000000000000000002400010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010000400140004</BootStrapData>
-							<Pdo Name="robot2_Inputs" Index="#x1a00" Flags="#x0001" SyncMan="3">
-								<Entry Name="robot2_PnIoBoxState" Index="#x6000" Sub="#x01" Flags="#x00000100">
+							<Pdo Name="st40xb1-tz535-pn1c47_Inputs" Index="#x1a00" Flags="#x0001" SyncMan="3">
+								<Entry Name="st40xb1-tz535-pn1c47_PnIoBoxState" Index="#x6000" Sub="#x01" Flags="#x00000100">
 									<DefaultDataMask>1f001f00</DefaultDataMask>
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="robot2_PnIoBoxDiag" Index="#x6000" Sub="#x02" Flags="#x00000100">
+								<Entry Name="st40xb1-tz535-pn1c47_PnIoBoxDiag" Index="#x6000" Sub="#x02" Flags="#x00000100">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="robot2_SubmoduleData_1" Index="#x6001" Sub="#x01" Flags="#x00000100">
+								<Entry Name="st40xb1-tz535-pn1c47_SubmoduleData_1" Index="#x6001" Sub="#x01" Flags="#x00000100">
 									<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
 								</Entry>
 								<Entry Name="SubIndex 002" Flags="#x00000100">
@@ -4536,11 +4536,11 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type GUID="{18071995-0000-0000-0000-000300000004}">ARRAY [0..3] OF BYTE</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="robot2_Outputs" Index="#x1600" InOut="1" Flags="#x0001" SyncMan="2">
-								<Entry Name="robot2_PnIoBoxCtrl" Index="#x7000" Sub="#x01" Flags="#x00000100">
+							<Pdo Name="st40xb1-tz535-pn1c47_Outputs" Index="#x1600" InOut="1" Flags="#x0001" SyncMan="2">
+								<Entry Name="st40xb1-tz535-pn1c47_PnIoBoxCtrl" Index="#x7000" Sub="#x01" Flags="#x00000100">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="robot2_SubmoduleData_1" Index="#x7001" Sub="#x01" Flags="#x00000100">
+								<Entry Name="st40xb1-tz535-pn1c47_SubmoduleData_1" Index="#x7001" Sub="#x01" Flags="#x00000100">
 									<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
 								</Entry>
 								<Entry Name="SubIndex 002" Flags="#x00000100">
@@ -6381,20 +6381,20 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="3" Disabled="true" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
+			<Device Id="3" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
 				<Name>Device 3 (EL6631)</Name>
-				<DevData>000000001600000000000000000000005465726d2031332028454c3636333129000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="8" AddrType="4" ImageType="3" SizeIn="4" SizeOut="8">
+				<DevData>000000001600000000000000a08601005465726d2031332028454c3636333129000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="8" AddrType="4" ImageType="3" SizeIn="70" SizeOut="76">
 					<Name>Image</Name>
 				</Image>
-				<Box Id="11" Disabled="true" BoxType="9121">
-					<Name>robot1</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
+				<Box Id="23" BoxType="9121">
+					<Name>robot</Name>
+					<Comment><![CDATA[GSDML Name: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
-VendorName: ABB Robotics
-OrderNumber: 888-3
+VendorName: Mitsubishi Electric Corporation
+OrderNumber: 2D-TZ535-PN
 HW Release Version: 1
-SW Release Version: V1.4]]></Comment>
+SW Release Version: V1.00]]></Comment>
 					<ImageId>121</ImageId>
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
@@ -6447,174 +6447,94 @@ SW Release Version: V1.4]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Profinet DeviceId="1" VendorId="944" FrameOffset="32768" IPAdd="c0a80102" ProtocolType="3" BoxOnDeviceTyp="119" MaxPhysSlotNr="4" InstanceServerPort="50000" InstanceClientPort="50001" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" NrOfGsdmlDap="1" SavePnIoBoxValues="0100" MultipleWriteSupported="true" Phase="1" WatchdogFaktor="3" ReductionRatio="16" SendClockFaktor="32" MaxInputLen="1440" MaxOutputLen="1440" SendClockFactorData="2000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="The robot controller's internal PROFINET IO device." MacAdd5="146" PDOmapping="1" OutputErrorBehavior="2" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-03B8-0001-Robot-Device.bmp" MainFamily="I/O" ProductFamily="Robot Device" OrderNr="888-3" DefaultDNSName="RobotBasicIO" VendorName="ABB Robotics" FamDescription="The robot controller's internal PROFINET IO device." GraphicFile="GSDML-03B8-0001-Robot-Device" SWVersion="V1.4" HWVersion="1" AltLanguage="7">
-						<UsedGsdmlModule ModuleIdentNumber="769" ModuleName="DAP Module" InfoText="The robot controller's internal PROFINET IO device." OrderNumber="888-3">
+					<Profinet DeviceId="15105" VendorId="540" FrameOffset="49152" IPAdd="c0a80105" ProtocolType="3" BoxOnDeviceTyp="119" MaxPhysSlotNr="64" InstanceServerPort="50000" InstanceClientPort="50001" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="64" SavePnIoBoxValues="0100" Phase="3" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="324" MaxOutputLen="324" SendClockFactorData="200040008000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="TZ535(PROFINET IO 2-Port)" MacAdd5="93" PDOmapping="1" OutputErrorBehavior="2" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-021C-3B01-TZ535_PN.bmp" MainFamily="General" ProductFamily="2D-TZ535-PN" OrderNr="2D-TZ535-PN" DefaultDNSName="TZ535-PN" VendorName="Mitsubishi Electric Corporation" GraphicFile="GSDML-021C-3B01-TZ535_PN" SWVersion="V1.00" HWVersion="1" AltLanguage="7">
+						<UsedGsdmlModule ModuleIdentNumber="17" ModuleName="DAP Module" InfoText="TZ535(PROFINET IO 2-Port)" OrderNumber="2D-TZ535-PN">
 							<Slot>0</Slot>
 						</UsedGsdmlModule>
-						<UsedGsdmlModule ModuleIdentNumber="1" Id="1" ModuleName="DI 64 bytes" InfoText="DI 64 bytes">
+						<UsedGsdmlModule ModuleIdentNumber="17039360" Id="ID_MODULE_IN_OUT64B" ModuleName="In/Out  64 byte" InfoText="In/Out  64 byte" ModuleCategory="Input/Output">
 							<Slot>1</Slot>
-						</UsedGsdmlModule>
-						<UsedGsdmlModule ModuleIdentNumber="2" Id="2" ModuleName="DO 64 bytes" InfoText="DO 64 bytes">
 							<Slot>2</Slot>
+							<Slot>3</Slot>
+							<Slot>4</Slot>
+							<Slot>5</Slot>
+							<Slot>6</Slot>
+							<Slot>7</Slot>
+							<Slot>8</Slot>
+							<Slot>9</Slot>
+							<Slot>10</Slot>
+							<Slot>11</Slot>
+							<Slot>12</Slot>
+							<Slot>13</Slot>
+							<Slot>14</Slot>
+							<Slot>15</Slot>
+							<Slot>16</Slot>
+							<Slot>17</Slot>
+							<Slot>18</Slot>
+							<Slot>19</Slot>
+							<Slot>20</Slot>
+							<Slot>21</Slot>
+							<Slot>22</Slot>
+							<Slot>23</Slot>
+							<Slot>24</Slot>
+							<Slot>25</Slot>
+							<Slot>26</Slot>
+							<Slot>27</Slot>
+							<Slot>28</Slot>
+							<Slot>29</Slot>
+							<Slot>30</Slot>
+							<Slot>31</Slot>
+							<Slot>32</Slot>
+							<Slot>33</Slot>
+							<Slot>34</Slot>
+							<Slot>35</Slot>
+							<Slot>36</Slot>
+							<Slot>37</Slot>
+							<Slot>38</Slot>
+							<Slot>39</Slot>
+							<Slot>40</Slot>
+							<Slot>41</Slot>
+							<Slot>42</Slot>
+							<Slot>43</Slot>
+							<Slot>44</Slot>
+							<Slot>45</Slot>
+							<Slot>46</Slot>
+							<Slot>47</Slot>
+							<Slot>48</Slot>
+							<Slot>49</Slot>
+							<Slot>50</Slot>
+							<Slot>51</Slot>
+							<Slot>52</Slot>
+							<Slot>53</Slot>
+							<Slot>54</Slot>
+							<Slot>55</Slot>
+							<Slot>56</Slot>
+							<Slot>57</Slot>
+							<Slot>58</Slot>
+							<Slot>59</Slot>
+							<Slot>60</Slot>
+							<Slot>61</Slot>
+							<Slot>62</Slot>
+							<Slot>63</Slot>
+							<Slot>64</Slot>
 						</UsedGsdmlModule>
-						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="DIM IO" SubModuleName="Robot Basic Device" InfoText="The robot controller's internal PROFINET IO device." OrderNumber="888-3"/>
-						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="1" SubModuleName="DI 64 bytes" InfoText="DI 64 bytes">
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-						</UsedGsdmlSubModule>
-						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="2" SubModuleName="DO 64 bytes" InfoText="DO 64 bytes">
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
+						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="DAP V2.0" SubModuleName="2D-TZ535-PN(PROFINET IO)" InfoText="TZ535(PROFINET IO 2-Port)"/>
+						<UsedGsdmlSubModule SubModuleIdentNumber="262145" SubSlotNumber="1" TypeOfSubmodule="3" Id="ID_SUBMOD_IN_OUT_64B" SubModuleName="In/Out  64 byte" InfoText="In/Out  64 byte">
+							<DataItemIn Name="Input" VarSize="512" VarType="{18071995-0000-0000-0000-000300000040}"/>
+							<DataItemOut Name="Output" VarSize="512" VarType="{18071995-0000-0000-0000-000300000040}"/>
 						</UsedGsdmlSubModule>
 						<API Id="1">
 							<Name>API</Name>
 							<ImageId>4</ImageId>
-							<Module Id="#x031d0001" DAP="true" ModuleIdentNumber="769" ModuleInfo="The robot controller's internal PROFINET IO device.">
-								<Name>Term 1 (DAP Module)</Name>
-								<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
-Module Info: The robot controller's internal PROFINET IO device.
-OrderNumber: 888-3]]></Comment>
+							<Module Id="#x031d0006" DAP="true" ModuleIdentNumber="17" ModuleInfo="TZ535(PROFINET IO 2-Port)">
+								<Name>Term 6 (DAP Module)</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Module Info: TZ535(PROFINET IO 2-Port)
+OrderNumber: 2D-TZ535-PN]]></Comment>
 								<ImageId>182</ImageId>
-								<SubModule Id="#x031c0001" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DIM IO" AddSubModFlags="28">
-									<Name>Subterm 1 (Robot Basic Device)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
-Submodule Info: The robot controller's internal PROFINET IO device.
-OrderNumber: 888-3]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-									</Vars>
-								</SubModule>
-								<SubModule Id="#x031c0002" SubModuleIdentNumber="32768" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS1_1I" InterfaceData="0100000000000000000000000000000000000000000098000300000000000000">
-									<Name>Subterm 2 (Interface)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
+								<SubModule Id="#x031c0010" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DAP V2.0" AddSubModFlags="60">
+									<Name>Subterm 16 (2D-TZ535-PN(PROFINET IO))</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Submodule Info: TZ535(PROFINET IO 2-Port)
 ]]></Comment>
 									<ImageId>183</ImageId>
 									<Vars VarGrpType="1">
@@ -6624,9 +6544,33 @@ OrderNumber: 888-3]]></Comment>
 										<Name>Outputs</Name>
 									</Vars>
 								</SubModule>
-								<SubModule Id="#x031c0003" SubModuleIdentNumber="32769" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS1_1P" PortData="00000000000000000000000000000000000000000000000000000000">
-									<Name>Subterm 3 (Network Port)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
+								<SubModule Id="#x031c0011" SubModuleIdentNumber="2" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="Interface" InterfaceData="0100000000000000000000000000000000000000000000000300000000000000">
+									<Name>Subterm 17 (Interface)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0012" SubModuleIdentNumber="3" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="Port 1" PortData="00000000000000000000000000000000000000000000000000000000">
+									<Name>Subterm 18 (Port 1)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+]]></Comment>
+									<ImageId>183</ImageId>
+									<Vars VarGrpType="1">
+										<Name>Inputs</Name>
+									</Vars>
+									<Vars VarGrpType="2">
+										<Name>Outputs</Name>
+									</Vars>
+								</SubModule>
+								<SubModule Id="#x031c0013" SubModuleIdentNumber="4" TypeOfSubModule="2" SubSlotNumber="32770" IsFixSubmodule="true" SubModuleID="Port 2" PortData="00000000000000000000000000000000000000000000000000000000">
+									<Name>Subterm 19 (Port 2)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
 ]]></Comment>
 									<ImageId>183</ImageId>
 									<Vars VarGrpType="1">
@@ -6637,1615 +6581,32 @@ OrderNumber: 888-3]]></Comment>
 									</Vars>
 								</SubModule>
 							</Module>
-							<Module Id="#x031d0002" ModuleIdentNumber="1" SlotNumber="1" ModuleInfo="DI 64 bytes" ModuleID="1" DirectDeletable="true">
-								<Name>Term 2 (DI 64 bytes)</Name>
-								<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
-Module Info: DI 64 bytes
+							<Module Id="#x031d000a" ModuleIdentNumber="17039360" SlotNumber="1" ModuleInfo="In/Out  64 byte" ModuleID="ID_MODULE_IN_OUT64B" DirectDeletable="true">
+								<Name>Term 10 (In/Out  64 byte)</Name>
+								<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Module Info: In/Out  64 byte
 ]]></Comment>
 								<ImageId>182</ImageId>
-								<SubModule Id="#x031c0004" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="1">
-									<Name>Subterm 4 (DI 64 bytes)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
-Submodule Info: DI 64 bytes
+								<SubModule Id="#x031c0014" SubModuleIdentNumber="262145" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="ID_SUBMOD_IN_OUT_64B">
+									<Name>Subterm 20 (In/Out  64 byte)</Name>
+									<Comment><![CDATA[GSDML: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+Submodule Info: In/Out  64 byte
 ]]></Comment>
 									<ImageId>183</ImageId>
 									<Vars VarGrpType="1">
 										<Name>Inputs</Name>
 										<Var>
-											<Name>Input 0</Name>
-											<Type>BITARR8</Type>
+											<Name>Input</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
 											<BitOffs>32</BitOffs>
 										</Var>
-										<Var>
-											<Name>Input 1</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>40</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 2</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>48</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 3</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>56</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 4</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>64</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 5</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>72</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 6</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>80</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 7</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>88</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 8</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>96</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 9</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>104</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 10</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>112</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 11</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>120</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 12</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>128</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 13</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>136</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 14</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>144</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 15</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>152</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 16</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>160</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 17</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>168</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 18</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>176</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 19</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>184</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 20</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>192</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 21</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>200</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 22</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>208</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 23</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>216</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 24</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>224</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 25</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>232</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 26</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>240</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 27</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>248</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 28</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>256</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 29</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>264</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 30</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>272</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 31</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>280</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 32</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>288</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 33</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>296</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 34</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>304</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 35</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>312</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 36</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>320</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 37</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>328</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 38</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>336</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 39</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>344</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 40</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>352</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 41</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>360</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 42</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>368</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 43</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>376</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 44</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>384</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 45</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>392</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 46</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>400</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 47</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>408</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 48</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>416</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 49</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>424</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 50</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>432</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 51</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>440</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 52</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>448</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 53</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>456</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 54</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>464</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 55</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>472</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 56</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>480</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 57</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>488</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 58</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>496</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 59</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>504</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 60</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>512</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 61</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>520</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 62</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>528</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 63</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>536</BitOffs>
-										</Var>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-									</Vars>
-								</SubModule>
-							</Module>
-							<Module Id="#x031d0003" ModuleIdentNumber="2" SlotNumber="2" ModuleInfo="DO 64 bytes" ModuleID="2" DirectDeletable="true">
-								<Name>Term 3 (DO 64 bytes)</Name>
-								<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
-Module Info: DO 64 bytes
-]]></Comment>
-								<ImageId>182</ImageId>
-								<SubModule Id="#x031c0005" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="2">
-									<Name>Subterm 5 (DO 64 bytes)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
-Submodule Info: DO 64 bytes
-]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
 									</Vars>
 									<Vars VarGrpType="2">
 										<Name>Outputs</Name>
 										<Var>
-											<Name>Output 0</Name>
-											<Type>BITARR8</Type>
+											<Name>Output</Name>
+											<Type GUID="{18071995-0000-0000-0000-000300000040}">ARRAY [0..63] OF BYTE</Type>
 											<BitOffs>16</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 1</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>24</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 2</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>32</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 3</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>40</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 4</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>48</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 5</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>56</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 6</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>64</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 7</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>72</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 8</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>80</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 9</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>88</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 10</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>96</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 11</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>104</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 12</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>112</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 13</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>120</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 14</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>128</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 15</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>136</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 16</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>144</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 17</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>152</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 18</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>160</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 19</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>168</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 20</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>176</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 21</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>184</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 22</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>192</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 23</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>200</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 24</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>208</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 25</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>216</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 26</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>224</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 27</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>232</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 28</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>240</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 29</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>248</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 30</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>256</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 31</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>264</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 32</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>272</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 33</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>280</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 34</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>288</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 35</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>296</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 36</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>304</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 37</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>312</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 38</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>320</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 39</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>328</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 40</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>336</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 41</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>344</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 42</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>352</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 43</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>360</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 44</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>368</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 45</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>376</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 46</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>384</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 47</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>392</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 48</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>400</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 49</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>408</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 50</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>416</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 51</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>424</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 52</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>432</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 53</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>440</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 54</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>448</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 55</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>456</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 56</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>464</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 57</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>472</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 58</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>480</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 59</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>488</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 60</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>496</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 61</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>504</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 62</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>512</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 63</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>520</BitOffs>
-										</Var>
-									</Vars>
-								</SubModule>
-							</Module>
-						</API>
-					</Profinet>
-				</Box>
-				<Box Id="21" BoxType="9121">
-					<Name>robot2</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Path: $(TWINCAT3DIR)Config\Io\Profinet\
-VendorName: ABB Robotics
-OrderNumber: 3020-x
-HW Release Version: 1
-SW Release Version: V1.1]]></Comment>
-					<ImageId>121</ImageId>
-					<Vars VarGrpType="1">
-						<Name>Inputs</Name>
-						<Var>
-							<Name>PnIoBoxState</Name>
-							<Comment><![CDATA[0 = No error
-1 = Profinet device state machine is in boot mode
-2 = Device not found
-3 = The stationname is not unique
-4 = IP could not be set
-5 = IP conflict
-6 = DCP set was not successful
-7 = Watchdog error
-8 = Datahold error
-9 = RTC3: Sync mode could not be initiated
-10 = Profinet controller has a link error
-11 = The aliasname is not unique
-12 = The automatic name assignement isn't possible - wrong device type
-13 = IOC-AR is established but no application ready
-14 = IOC-AR is established but module difference
-15 = At least one InputCR is invalid, provider in stop or problemindicator is set
-16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
-31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
-]]></Comment>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>PnIoBoxDiag</Name>
-							<Comment><![CDATA[0x0000 = No diagnosis
-0x0001 = IOC-AR is not established
-0x0002 = IOC-AR is established
-0x0004 = IOC-AR is established but no application ready
-0x0008 = IOC-AR is established but module difference
-0x0010 = At least one AlarmCR got a diagnosis alarm
-0x0100 = At least one InputCR is invalid
-0x0200 = At least one InputCR Provider is in stop
-0x0400 = At least one InputCR Problemindicator is set
-0x1000 = At least one OutputCR is invalid
-0x2000 = At least one OutputCR Provider is in stop
-0x4000 = At least one OutputCR Problemindicator is set
-]]></Comment>
-							<Type>UINT</Type>
-							<BitOffs>16</BitOffs>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2">
-						<Name>Outputs</Name>
-						<Var>
-							<Name>PnIoBoxCtrl</Name>
-							<Type>UINT</Type>
-						</Var>
-					</Vars>
-					<Profinet DeviceId="2" VendorId="944" FrameOffset="32768" IPAdd="c0a80104" ProtocolType="3" BoxOnDeviceTyp="119" MaxPhysSlotNr="4" InstanceServerPort="50000" InstanceClientPort="50001" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="256" SavePnIoBoxValues="0100" MultipleWriteSupported="true" Phase="2" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="1440" MaxOutputLen="1440" SendClockFactorData="2000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="The OmniCore controller's internal PROFINET IO device." MacAdd5="141" PDOmapping="1" OutputErrorBehavior="2" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\GSDML-03B0-0002-OmniCore.bmp" MainFamily="I/O" ProductFamily="OmniCore" OrderNr="3020-x" DefaultDNSName="OmniCore" VendorName="ABB Robotics" GraphicFile="GSDML-03B0-0002-OmniCore" SWVersion="V1.1" HWVersion="1" AltLanguage="7">
-						<UsedGsdmlModule ModuleIdentNumber="1024" ModuleName="DAP Module" InfoText="The OmniCore controller's internal PROFINET IO device." OrderNumber="3020-x">
-							<Slot>0</Slot>
-						</UsedGsdmlModule>
-						<UsedGsdmlModule ModuleIdentNumber="1" Id="1" ModuleName="DI 64 bytes" InfoText="DI 64 bytes">
-							<Slot>1</Slot>
-						</UsedGsdmlModule>
-						<UsedGsdmlModule ModuleIdentNumber="2" Id="2" ModuleName="DO 64 bytes" InfoText="DO 64 bytes">
-							<Slot>2</Slot>
-						</UsedGsdmlModule>
-						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="DIM IO" SubModuleName="OmniCore Standard PROFINET Device" InfoText="The OmniCore controller's internal PROFINET IO device."/>
-						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="1" SubModuleName="DI 64 bytes" InfoText="DI 64 bytes">
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-							<DataItemIn/>
-						</UsedGsdmlSubModule>
-						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="2" SubModuleName="DO 64 bytes" InfoText="DO 64 bytes">
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-							<DataItemOut/>
-						</UsedGsdmlSubModule>
-						<API Id="1">
-							<Name>API</Name>
-							<ImageId>4</ImageId>
-							<Module Id="#x031d0007" DAP="true" ModuleIdentNumber="1024" ModuleInfo="The OmniCore controller's internal PROFINET IO device.">
-								<Name>Term 7 (DAP Module)</Name>
-								<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Module Info: The OmniCore controller's internal PROFINET IO device.
-OrderNumber: 3020-x]]></Comment>
-								<ImageId>182</ImageId>
-								<SubModule Id="#x031c000b" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="DIM IO" AddSubModFlags="28">
-									<Name>Subterm 11 (OmniCore Standard PROFINET Device)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Submodule Info: The OmniCore controller's internal PROFINET IO device.
-]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-									</Vars>
-								</SubModule>
-								<SubModule Id="#x031c000c" SubModuleIdentNumber="32768" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS1_1I" InterfaceData="0100000000000000000000000000000000000000000098000300000000000000">
-									<Name>Subterm 12 (Interface)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-									</Vars>
-								</SubModule>
-								<SubModule Id="#x031c000d" SubModuleIdentNumber="32769" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS1_1P" PortData="00000000000000000000000000000000000000000000000000000000" RemPeerPort="el6631-pncontroller.port-002">
-									<Name>Subterm 13 (Network Port 1)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-									</Vars>
-								</SubModule>
-							</Module>
-							<Module Id="#x031d0008" ModuleIdentNumber="1" SlotNumber="1" ModuleInfo="DI 64 bytes" ModuleID="1" DirectDeletable="true">
-								<Name>Term 8 (DI 64 bytes)</Name>
-								<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Module Info: DI 64 bytes
-]]></Comment>
-								<ImageId>182</ImageId>
-								<SubModule Id="#x031c000e" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="1">
-									<Name>Subterm 14 (DI 64 bytes)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Submodule Info: DI 64 bytes
-]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
-										<Var>
-											<Name>Input 0</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>32</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 1</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>40</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 2</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>48</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 3</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>56</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 4</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>64</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 5</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>72</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 6</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>80</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 7</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>88</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 8</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>96</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 9</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>104</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 10</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>112</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 11</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>120</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 12</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>128</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 13</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>136</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 14</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>144</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 15</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>152</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 16</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>160</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 17</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>168</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 18</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>176</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 19</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>184</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 20</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>192</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 21</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>200</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 22</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>208</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 23</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>216</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 24</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>224</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 25</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>232</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 26</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>240</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 27</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>248</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 28</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>256</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 29</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>264</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 30</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>272</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 31</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>280</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 32</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>288</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 33</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>296</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 34</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>304</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 35</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>312</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 36</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>320</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 37</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>328</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 38</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>336</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 39</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>344</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 40</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>352</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 41</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>360</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 42</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>368</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 43</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>376</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 44</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>384</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 45</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>392</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 46</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>400</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 47</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>408</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 48</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>416</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 49</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>424</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 50</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>432</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 51</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>440</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 52</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>448</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 53</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>456</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 54</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>464</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 55</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>472</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 56</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>480</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 57</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>488</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 58</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>496</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 59</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>504</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 60</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>512</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 61</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>520</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 62</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>528</BitOffs>
-										</Var>
-										<Var>
-											<Name>Input 63</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>536</BitOffs>
-										</Var>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-									</Vars>
-								</SubModule>
-							</Module>
-							<Module Id="#x031d0009" ModuleIdentNumber="2" SlotNumber="2" ModuleInfo="DO 64 bytes" ModuleID="2" DirectDeletable="true">
-								<Name>Term 9 (DO 64 bytes)</Name>
-								<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Module Info: DO 64 bytes
-]]></Comment>
-								<ImageId>182</ImageId>
-								<SubModule Id="#x031c000f" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="2">
-									<Name>Subterm 15 (DO 64 bytes)</Name>
-									<Comment><![CDATA[GSDML: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
-Submodule Info: DO 64 bytes
-]]></Comment>
-									<ImageId>183</ImageId>
-									<Vars VarGrpType="1">
-										<Name>Inputs</Name>
-									</Vars>
-									<Vars VarGrpType="2">
-										<Name>Outputs</Name>
-										<Var>
-											<Name>Output 0</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>16</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 1</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>24</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 2</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>32</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 3</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>40</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 4</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>48</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 5</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>56</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 6</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>64</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 7</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>72</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 8</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>80</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 9</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>88</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 10</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>96</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 11</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>104</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 12</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>112</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 13</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>120</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 14</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>128</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 15</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>136</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 16</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>144</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 17</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>152</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 18</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>160</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 19</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>168</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 20</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>176</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 21</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>184</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 22</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>192</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 23</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>200</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 24</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>208</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 25</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>216</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 26</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>224</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 27</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>232</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 28</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>240</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 29</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>248</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 30</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>256</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 31</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>264</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 32</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>272</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 33</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>280</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 34</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>288</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 35</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>296</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 36</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>304</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 37</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>312</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 38</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>320</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 39</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>328</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 40</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>336</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 41</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>344</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 42</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>352</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 43</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>360</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 44</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>368</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 45</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>376</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 46</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>384</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 47</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>392</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 48</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>400</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 49</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>408</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 50</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>416</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 51</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>424</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 52</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>432</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 53</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>440</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 54</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>448</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 55</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>456</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 56</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>464</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 57</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>472</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 58</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>480</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 59</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>488</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 60</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>496</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 61</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>504</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 62</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>512</BitOffs>
-										</Var>
-										<Var>
-											<Name>Output 63</Name>
-											<Type>BITARR8</Type>
-											<BitOffs>520</BitOffs>
 										</Var>
 									</Vars>
 								</SubModule>
@@ -8263,138 +6624,139 @@ Submodule Info: DO 64 bytes
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500880000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^TcoMitsubishiRoboticsTests^TcoMitsubishiRoboticsTests Instance">
-			<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 0"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[10]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 10"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[11]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 11"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[12]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 12"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[13]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 13"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[14]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 14"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[15]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 15"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[16]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 16"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[17]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 17"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[18]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 18"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[19]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 19"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[1]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 1"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[20]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 20"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[21]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 21"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[22]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 22"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[23]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 23"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[24]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 24"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[25]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 25"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[26]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 26"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[27]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 27"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[28]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 28"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[29]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 29"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[2]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 2"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[30]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 30"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[31]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 31"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[32]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 32"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[33]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 33"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[34]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 34"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[35]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 35"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[36]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 36"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[37]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 37"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[38]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 38"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[39]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 39"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[3]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 3"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[40]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 40"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[41]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 41"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[42]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 42"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[43]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 43"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[44]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 44"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[45]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 45"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[46]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 46"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[47]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 47"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[48]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 48"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[49]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 49"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[4]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 4"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[50]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 50"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[51]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 51"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[52]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 52"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[53]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 53"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[54]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 54"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[55]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 55"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[56]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 56"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[57]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 57"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[58]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 58"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[59]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 59"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[5]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 5"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[60]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 60"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[61]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 61"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[62]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 62"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[63]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 63"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[6]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 6"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[7]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 7"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[8]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 8"/>
-				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[9]" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 9"/>
+			<OwnerB Name="TIID^Device 3 (EL6631)^robot">
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[0]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[10]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[10]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[11]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[11]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[12]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[12]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[13]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[13]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[14]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[14]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[15]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[15]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[16]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[16]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[17]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[17]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[18]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[18]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[19]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[19]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[1]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[1]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[20]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[20]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[21]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[21]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[22]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[22]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[23]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[23]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[24]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[24]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[25]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[25]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[26]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[26]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[27]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[27]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[28]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[28]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[29]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[29]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[2]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[2]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[30]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[30]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[31]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[31]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[32]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[32]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[33]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[33]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[34]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[34]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[35]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[35]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[36]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[36]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[37]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[37]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[38]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[38]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[39]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[39]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[3]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[3]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[40]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[40]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[41]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[41]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[42]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[42]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[43]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[43]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[44]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[44]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[45]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[45]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[46]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[46]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[47]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[47]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[48]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[48]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[49]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[49]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[4]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[4]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[50]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[50]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[51]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[51]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[52]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[52]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[53]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[53]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[54]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[54]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[55]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[55]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[56]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[56]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[57]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[57]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[58]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[58]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[59]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[59]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[5]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[5]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[60]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[60]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[61]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[61]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[62]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[62]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[63]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[63]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[6]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[6]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[7]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[7]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[8]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[8]"/>
+				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[9]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[9]"/>
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.PnIoBoxDiag" VarB="Inputs^PnIoBoxDiag"/>
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.PnIoBoxState" VarB="Inputs^PnIoBoxState"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[0]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 0"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[10]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 10"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[11]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 11"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[12]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 12"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[13]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 13"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[14]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 14"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[15]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 15"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[16]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 16"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[17]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 17"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[18]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 18"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[19]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 19"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[1]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 1"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[20]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 20"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[21]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 21"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[22]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 22"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[23]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 23"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[24]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 24"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[25]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 25"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[26]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 26"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[27]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 27"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[28]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 28"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[29]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 29"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[2]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 2"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[30]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 30"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[31]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 31"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[32]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 32"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[33]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 33"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[34]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 34"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[35]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 35"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[36]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 36"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[37]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 37"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[38]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 38"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[39]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 39"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[3]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 3"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[40]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 40"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[41]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 41"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[42]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 42"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[43]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 43"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[44]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 44"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[45]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 45"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[46]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 46"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[47]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 47"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[48]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 48"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[49]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 49"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[4]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 4"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[50]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 50"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[51]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 51"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[52]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 52"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[53]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 53"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[54]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 54"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[55]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 55"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[56]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 56"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[57]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 57"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[58]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 58"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[59]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 59"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[5]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 5"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[60]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 60"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[61]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 61"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[62]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 62"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[63]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 63"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[6]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 6"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[7]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 7"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[8]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 8"/>
-				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[9]" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 9"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[0]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[0]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[10]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[10]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[11]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[11]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[12]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[12]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[13]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[13]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[14]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[14]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[15]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[15]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[16]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[16]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[17]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[17]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[18]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[18]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[19]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[19]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[1]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[1]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[20]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[20]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[21]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[21]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[22]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[22]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[23]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[23]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[24]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[24]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[25]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[25]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[26]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[26]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[27]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[27]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[28]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[28]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[29]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[29]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[2]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[2]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[30]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[30]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[31]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[31]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[32]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[32]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[33]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[33]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[34]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[34]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[35]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[35]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[36]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[36]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[37]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[37]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[38]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[38]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[39]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[39]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[3]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[3]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[40]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[40]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[41]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[41]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[42]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[42]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[43]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[43]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[44]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[44]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[45]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[45]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[46]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[46]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[47]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[47]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[48]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[48]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[49]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[49]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[4]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[4]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[50]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[50]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[51]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[51]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[52]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[52]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[53]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[53]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[54]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[54]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[55]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[55]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[56]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[56]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[57]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[57]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[58]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[58]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[59]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[59]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[5]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[5]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[60]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[60]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[61]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[61]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[62]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[62]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[63]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[63]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[6]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[6]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[7]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[7]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[8]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[8]"/>
+				<Link VarA="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[9]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Outputs^Output[9]"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

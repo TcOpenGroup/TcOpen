@@ -33,22 +33,22 @@ namespace TcoCore.Wpf
 
 
 
-        public static Brush Debug => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green500);
-        public static Brush Trace => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green600);
-        public static Brush Info => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green700);
-        public static Brush TimedOut => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green800);
-        public static Brush Notification => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Green900);
+        public static Brush Debug => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Indigo500);
+        public static Brush Trace => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Indigo600);
+        public static Brush Info => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Indigo700);
+        public static Brush TimedOut => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Indigo800);
+        public static Brush Notification => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Indigo900);
         public static Brush Warning => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Yellow700);
         public static Brush Errors => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red600);
         public static Brush ProgrammingError => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red700);
         public static Brush Critical => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red800);
         public static Brush Catastrophic => GetMaterialDesignBackgrondBrush(MaterialDesignColor.Red900);
 
-        public static Brush OnDebug => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green500);
-        public static Brush OnTrace => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green600);
-        public static Brush OnInfo => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green700);
-        public static Brush OnTimedOut => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green800);
-        public static Brush OnNotification => GetMaterialDesignForegroundBrush(MaterialDesignColor.Green900);
+        public static Brush OnDebug => GetMaterialDesignForegroundBrush(MaterialDesignColor.Indigo500);
+        public static Brush OnTrace => GetMaterialDesignForegroundBrush(MaterialDesignColor.Indigo600);
+        public static Brush OnInfo => GetMaterialDesignForegroundBrush(MaterialDesignColor.Indigo700);
+        public static Brush OnTimedOut => GetMaterialDesignForegroundBrush(MaterialDesignColor.Indigo800);
+        public static Brush OnNotification => GetMaterialDesignForegroundBrush(MaterialDesignColor.Indigo900);
         public static Brush OnWarning => GetMaterialDesignForegroundBrush(MaterialDesignColor.Yellow700);
         public static Brush OnErrors => GetMaterialDesignForegroundBrush(MaterialDesignColor.Red600);
         public static Brush OnProgrammingError => GetMaterialDesignForegroundBrush(MaterialDesignColor.Red700);

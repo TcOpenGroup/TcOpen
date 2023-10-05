@@ -7,11 +7,12 @@
     xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vortex="http://vortex.mts/xaml" 
-    
+    xmlns:p="clr-namespace:TcOpen.Inxton.TcoMitsubishiRobotics.Wpf.Properties"
+       
 
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:TcoIrc5_v_1_x_xServiceViewModel />
+        <local:TcoCr800_v_1_x_xServiceViewModel />
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
@@ -29,38 +30,48 @@
    
                 </WrapPanel.Resources>
 
-                <WrapPanel  DataContext="{Binding _status.State.MotorOffState}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _status.State.ServoOn}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter },ConverterParameter=true}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Motors Off"  Foreground="{StaticResource Warning}"/>
+                    <TextBlock   Text="{x:Static p:strings.MotorsOff}"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _status.State.AutoOn}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _status.State.ServoOn}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
+                    <TextBlock   Text="{x:Static p:strings.Motors_On}"  Foreground="{StaticResource Notification}"/>
+                </WrapPanel>
+                <WrapPanel  DataContext="{Binding _status.State.AutoEnable}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Key not in Auto"  Foreground="{StaticResource Warning}"/>
+                    <TextBlock  Text="{x:Static p:strings.KeyNotInAuto}"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _status.State.MotorOnState}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+               
+                <WrapPanel  DataContext="{Binding _status.State.Start}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Motors On"  Foreground="{StaticResource Notification}"/>
+                    <TextBlock   Text="{x:Static p:strings.ProgramIsRunning}"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _status.State.CycleOn}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Program is running"  Foreground="{StaticResource Notification}"/>
+                <WrapPanel  DataContext="{Binding _status.State.Start}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}"  Margin=" 5,0">
+                    <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
+                    <TextBlock   Text="{x:Static p:strings.ProgramIsNotRunning}"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _status.State.SafetyOk}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Sadfety Ok"  Foreground="{StaticResource Notification}"/>
+
+                <WrapPanel  DataContext="{Binding _status.State.HighLevelError}"  Visibility="{Binding Cyclic, Converter={vortex:BoolToVisibilityConverter}}" Margin=" 5,0">
+                    <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
+                    <TextBlock   Text="{x:Static p:strings.HighLevelError}" Foreground="{StaticResource Errors}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _status.State.SafetyOk}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
-                    <TextBlock  Text="Safety Error!"  Foreground="{StaticResource Warning}"/>
+                <WrapPanel  DataContext="{Binding _status.State.LowLevelError}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                    <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
+                    <TextBlock   Text="{x:Static p:strings.LowLevelError}" Foreground="{StaticResource Errors}"/>
+                </WrapPanel>
+                <WrapPanel  DataContext="{Binding _status.State.CautionLevelError}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                    <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
+                    <TextBlock   Text="{x:Static p:strings.WarningLevelError}" Foreground="{StaticResource Errors}"/>
                 </WrapPanel>
                 <WrapPanel DataContext="{Binding _pnError}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="{Binding AttributeName}" Foreground="{StaticResource Errors}"  />
                 </WrapPanel>
-                <WrapPanel  Visibility="{Binding _status.State.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <!--<WrapPanel  Visibility="{Binding _status.State.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="{Binding _status.State.EventId.Cyclic}" Foreground="{StaticResource Errors}"    Visibility="{Binding _status.State.Error.Cyclic, Converter={vortex:BooleanToVisibilityConverter}}"/>
-                </WrapPanel>
+                </WrapPanel>-->
 
                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _restoreTask }" PresentationType="Base" />
 
@@ -91,11 +102,11 @@
 
                         
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
+                    <!--<StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
                               <TextBlock  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding _status.State.Error.Cyclic ,Converter={vortex:BooleanToVisibilityConverter }}"
                                 Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _status.State.EventId.Cyclic, Converter={local:EventIdToDescriptionConverter}}"></TextBlock>
                     
-                    </StackPanel>
+                    </StackPanel>-->
                     <GroupBox Grid.Column="0" Grid.RowSpan="2" Padding="10" Grid.Row="1" DataContext="{Binding _status}"  Header="{Binding AttributeName}">
                         <vortex:RenderableContentControl  DataContext="{Binding }" PresentationType="DisplaySlim"    />
 

@@ -22,19 +22,19 @@ namespace TcoCore
                 switch (((eMessageCategory)value))
                 {
                     case eMessageCategory.Debug:
-                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green400, out color);
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Indigo400, out color);
                         return new SolidColorBrush(color);
                     case eMessageCategory.Trace:
-                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green500, out color);
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Indigo500, out color);
                         return new SolidColorBrush(color);
                     case eMessageCategory.Info:
-                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green700, out color);
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Indigo700, out color);
                         return new SolidColorBrush(color);
                     case eMessageCategory.TimedOut:
-                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green800, out color);
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Indigo800, out color);
                         return new SolidColorBrush(color);
                     case eMessageCategory.Notification:
-                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Green900, out color);
+                        SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Indigo900, out color);
                         return new SolidColorBrush(color);
                     case eMessageCategory.Warning:
                         SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Yellow700, out color);

@@ -120,11 +120,14 @@
   <data name="___Emergency_stop_active__" xml:space="preserve">
     <value>Emergency stop active</value>
   </data>
-  <data name="___Safety_Error___" xml:space="preserve">
-    <value>Safety Error </value>
+  <data name="___High_level_errror_occured___" xml:space="preserve">
+    <value>High level errror occured </value>
   </data>
-  <data name="___Program_execution_error_see_robot_panel_for_details__" xml:space="preserve">
-    <value>Program execution error see robot panel for details</value>
+  <data name="___Low_level_errror_occured___" xml:space="preserve">
+    <value>Low level errror occured </value>
+  </data>
+  <data name="___Warning_level_error_occured___" xml:space="preserve">
+    <value>Warning level error occured </value>
   </data>
   <data name="___Drive_error_no___" xml:space="preserve">
     <value>Drive error no </value>
@@ -177,8 +180,20 @@
   <data name="___Invalid_reference____" xml:space="preserve">
     <value>Invalid reference: </value>
   </data>
-  <data name="___Waiting_program_pointer_changed____" xml:space="preserve">
-    <value>Waiting program pointer changed! </value>
+  <data name="___Waiting_for_Auto_signal____" xml:space="preserve">
+    <value>Waiting for Auto signal! </value>
+  </data>
+  <data name="___Waiting_for_Operation_enable_signal____" xml:space="preserve">
+    <value>Waiting for Operation enable signal! </value>
+  </data>
+  <data name="___Robot_Error_Reset__" xml:space="preserve">
+    <value>Robot Error Reset</value>
+  </data>
+  <data name="___Robot_Emergency_Stop_Reset__" xml:space="preserve">
+    <value>Robot Emergency Stop Reset</value>
+  </data>
+  <data name="___Waiting_program_reset_changed____" xml:space="preserve">
+    <value>Waiting program reset changed! </value>
   </data>
   <data name="___Waiting_for_system_ready_signal____" xml:space="preserve">
     <value>Waiting for system ready signal! </value>
@@ -195,20 +210,11 @@
   <data name="___Start_at_Main_started___" xml:space="preserve">
     <value>Start at Main started.</value>
   </data>
-  <data name="___Waiting_for_Auto_signal____" xml:space="preserve">
-    <value>Waiting for Auto signal! </value>
-  </data>
-  <data name="___Robot_is_not_in_Auto__" xml:space="preserve">
-    <value>Robot is not in Auto</value>
-  </data>
-  <data name="___Robot_Error_Reset__" xml:space="preserve">
-    <value>Robot Error Reset</value>
-  </data>
-  <data name="___Robot_Emergency_Stop_Reset__" xml:space="preserve">
-    <value>Robot Emergency Stop Reset</value>
-  </data>
   <data name="____Waiting_for_signal____" xml:space="preserve">
     <value> Waiting for signal: </value>
+  </data>
+  <data name="___Waiting_for_program_running_signal____" xml:space="preserve">
+    <value>Waiting for program running signal! </value>
   </data>
   <data name="___Start_motors_and_program_was_aborted___" xml:space="preserve">
     <value>Start motors and program was aborted.</value>
@@ -252,8 +258,11 @@
   <data name="___Start_motors_started___" xml:space="preserve">
     <value>Start motors started.</value>
   </data>
-  <data name="___Waiting_for_program_running_signal____" xml:space="preserve">
-    <value>Waiting for program running signal! </value>
+  <data name="___Waiting_for_Operation_enable____" xml:space="preserve">
+    <value>Waiting for Operation enable! </value>
+  </data>
+  <data name="___Waiting_for_auto_enable____" xml:space="preserve">
+    <value>Waiting for auto enable! </value>
   </data>
   <data name="___Waiting_for_motors_are_On____" xml:space="preserve">
     <value>Waiting for motors are On! </value>
@@ -321,53 +330,38 @@
   <data name="___Stopping_movements_started___" xml:space="preserve">
     <value>Stopping movements started.</value>
   </data>
-  <data name="___Interuption_actually_running_instruction__" xml:space="preserve">
-    <value>Interuption actually running instruction</value>
+  <data name="___Operation_enablre__rights___" xml:space="preserve">
+    <value>Operation enablre (rights)</value>
   </data>
-  <data name="___Load_program__" xml:space="preserve">
-    <value>Load program</value>
+  <data name="___Automatic_operation_enabled__" xml:space="preserve">
+    <value>Automatic operation enabled</value>
   </data>
-  <data name="___Load_and_run_program__" xml:space="preserve">
-    <value>Load and run program</value>
+  <data name="___Start__" xml:space="preserve">
+    <value>Start</value>
   </data>
-  <data name="___Switch_off_the_motors__" xml:space="preserve">
-    <value>Switch off the motors</value>
+  <data name="___Stop__" xml:space="preserve">
+    <value>Stop</value>
   </data>
-  <data name="___Switch_on_the_motors__" xml:space="preserve">
-    <value>Switch on the motors</value>
+  <data name="___Program_reset__" xml:space="preserve">
+    <value>Program reset</value>
   </data>
-  <data name="___Switch_on_the_motors_and_start_program__" xml:space="preserve">
-    <value>Switch on the motors and start program</value>
+  <data name="___Error_Reset__" xml:space="preserve">
+    <value>Error Reset</value>
   </data>
-  <data name="___Emergency_stop_acknowledge__" xml:space="preserve">
-    <value>Emergency stop acknowledge</value>
+  <data name="___Cycle_Stop__" xml:space="preserve">
+    <value>Cycle Stop</value>
   </data>
-  <data name="___Error_acknowledge__" xml:space="preserve">
-    <value>Error acknowledge</value>
+  <data name="___Servo_Off__" xml:space="preserve">
+    <value>Servo Off</value>
   </data>
-  <data name="___Program_start__" xml:space="preserve">
-    <value>Program start</value>
+  <data name="___Servo_On__" xml:space="preserve">
+    <value>Servo On</value>
   </data>
-  <data name="___Program_start_at_main__" xml:space="preserve">
-    <value>Program start at main</value>
+  <data name="___General_Purpose_reset__" xml:space="preserve">
+    <value>General Purpose reset</value>
   </data>
-  <data name="___Program_stop__" xml:space="preserve">
-    <value>Program stop</value>
-  </data>
-  <data name="___Stop_movement_quick__" xml:space="preserve">
-    <value>Stop movement-quick</value>
-  </data>
-  <data name="___Stop_movement_soft__" xml:space="preserve">
-    <value>Stop movement-soft</value>
-  </data>
-  <data name="___Stop_program_at_the_end_of_the_cycle__" xml:space="preserve">
-    <value>Stop program at the end of the cycle</value>
-  </data>
-  <data name="___Stop_program_at_the_end_of_the_instruction__" xml:space="preserve">
-    <value>Stop program at the end of the instruction</value>
-  </data>
-  <data name="___Speed_limitation__" xml:space="preserve">
-    <value>Speed limitation</value>
+  <data name="___Overide_specification__" xml:space="preserve">
+    <value>Overide specification</value>
   </data>
   <data name="___Master_mode__" xml:space="preserve">
     <value>Master mode</value>
@@ -426,53 +420,23 @@
   <data name="___Coordinates__" xml:space="preserve">
     <value>Coordinates</value>
   </data>
-  <data name="___AutoOn__" xml:space="preserve">
-    <value>AutoOn</value>
+  <data name="___Operation_rights__" xml:space="preserve">
+    <value>Operation rights</value>
   </data>
-  <data name="___CycleOn__" xml:space="preserve">
-    <value>CycleOn</value>
+  <data name="___High_level_rrror__" xml:space="preserve">
+    <value>High level rrror</value>
+  </data>
+  <data name="___Low_level_error__" xml:space="preserve">
+    <value>Low level error</value>
+  </data>
+  <data name="___Warning_level_error__caution___" xml:space="preserve">
+    <value>Warning level error (caution)</value>
   </data>
   <data name="___Emergency_stop__" xml:space="preserve">
     <value>Emergency stop</value>
   </data>
-  <data name="___Error__" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="___Event_ID__" xml:space="preserve">
-    <value>Event ID</value>
-  </data>
-  <data name="___Move_active__" xml:space="preserve">
-    <value>Move active</value>
-  </data>
-  <data name="___Move_inactive__" xml:space="preserve">
-    <value>Move inactive</value>
-  </data>
-  <data name="___Motor_off__" xml:space="preserve">
-    <value>Motor off</value>
-  </data>
-  <data name="___Motor_on__" xml:space="preserve">
-    <value>Motor on</value>
-  </data>
-  <data name="___Motor_off_state__" xml:space="preserve">
-    <value>Motor off state</value>
-  </data>
-  <data name="___Motor_on_state__" xml:space="preserve">
-    <value>Motor on state</value>
-  </data>
-  <data name="___Program_execution_error__" xml:space="preserve">
-    <value>Program execution error</value>
-  </data>
-  <data name="___Safety_OK__" xml:space="preserve">
-    <value>Safety OK</value>
-  </data>
-  <data name="___System_input_busy__" xml:space="preserve">
-    <value>System input busy</value>
-  </data>
-  <data name="___Program_pointer_moved__" xml:space="preserve">
-    <value>Program pointer moved</value>
-  </data>
-  <data name="___Motion_supervision__" xml:space="preserve">
-    <value>Motion supervision</value>
+  <data name="___Rc_Ready__" xml:space="preserve">
+    <value>Rc Ready</value>
   </data>
   <data name="___Battery_Low__" xml:space="preserve">
     <value>Battery Low</value>
