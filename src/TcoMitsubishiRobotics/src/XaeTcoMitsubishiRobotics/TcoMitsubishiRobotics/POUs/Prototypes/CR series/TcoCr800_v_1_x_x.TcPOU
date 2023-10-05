@@ -215,12 +215,12 @@ _control.ActionNo:=255;
 _control.GlobalSpeed:=0;
 _control.ErrorReset:=FALSE;
 _control.CycleStop:=FALSE;
-_control.AutoEnable:=FALSE;
+//_control.AutoEnable:=FALSE;
 _control.ServoOff:=FALSE;
 _control.ServoOn:=FALSE;
 _control.GeneralPurposeReset:=FALSE;
 _control.PointNo:=0;
-_control.OpoerationEnable:=FALSE;
+//_control.OperationEnable:=FALSE;
 _control.OverideSpecifications:=FALSE;
 _control.ProgramReset:=FALSE;
 _control.Start:=FALSE;
@@ -470,7 +470,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//SYSTEM OUTPUTS
 index:=0;
-inoData.Out.Outputs[index].0	:=		_control.OpoerationEnable;    
+inoData.Out.Outputs[index].0	:=		_control.OperationEnable;    
 inoData.Out.Outputs[index].1	:=		_control.AutoEnable;    
 inoData.Out.Outputs[index].2 	:= 		_control.Start; 
 inoData.Out.Outputs[index].3 	:= 		_control.Stop;

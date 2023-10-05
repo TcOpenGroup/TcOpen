@@ -11,7 +11,7 @@ END_VAR
       <ST><![CDATA[
 
 IF Execute() THEN
-(*	IF _progress = 0 THEN
+	IF _progress = 0 THEN
 		IF NOT __ISVALIDREF(inoControl) THEN
 			_varInfo :=__VARINFO(inoControl);
 			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
@@ -26,44 +26,46 @@ IF Execute() THEN
 		END_IF
 
 	END_IF
+	
+	
 	IF _progress = 1 THEN
-		inoControl.SoftStop := TRUE;
-		inoControl.QuickStop := FALSE;
 	
-		IF _stopType = TcoAbstractions.eTcoRoboticsStopType.Quick THEN
-			inoControl.SoftStop := FALSE;
-			inoControl.QuickStop := TRUE;
-		END_IF
-	
-	
-		IF inoStatus.State.MoveInactive THEN
+		inoControl.AutoEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.AutoEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.AutoEnable THEN
 			_progress := _progress + 1;
-		END_IF
-	END_IF;		
-
+		END_IF;
+	END_IF;
+	
 	IF _progress = 2 THEN
-		inoControl.Stop:=TRUE;
-		IF NOT inoStatus.State.Stop THEN
+		inoControl.OperationEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.OperationEnable THEN
 			_progress := _progress + 1;
+		END_IF;
+	END_IF;
+	
+	IF _progress = 3 THEN
+		inoControl.Stop:=TRUE ;
+		inoControl.Start:=FALSE ;
+		
+		
+		IF  inoStatus.State.Stop  THEN
+				inoControl.Stop:=FALSE;
 		END_IF
 	END_IF;		
 	
-	IF _progress = 3 THEN	
-		inoControl.SoftStop := FALSE;
-		inoControl.QuickStop := FALSE;
-		inoControl.Stop:=FALSE;
-	END_IF;		
-		
-	_varInfo :=__VARINFO( inoStatus.State.MoveInactive);                                                
-	THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MoveInactive).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-	_varInfo :=__VARINFO( inoStatus.State.CycleOn);   
-	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.CycleOn)
+	
+	_varInfo :=__VARINFO( inoStatus.State.Stop);                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Stop)
 		.Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
 	
-    DoneWhen( inoStatus.State.MoveInactive AND NOT inoStatus.State.CycleOn);
+    DoneWhen( inoStatus.State.Stop );
     CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q); *)
+	THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN

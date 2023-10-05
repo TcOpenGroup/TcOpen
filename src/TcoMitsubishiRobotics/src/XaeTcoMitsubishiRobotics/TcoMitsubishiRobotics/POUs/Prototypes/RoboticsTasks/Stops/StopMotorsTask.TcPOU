@@ -20,21 +20,22 @@
 		END_IF
 
 	END_IF
-		IF _progress = 1 THEN
-		inoControl.OpoerationEnable:=TRUE;
-		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.OperationEnable THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
 	
-	IF _progress = 2 THEN
+	IF _progress = 1 THEN
 	
 		inoControl.AutoEnable:=TRUE;
 		_varInfo :=__VARINFO( inoStatus.State.AutoEnable);                                                
 		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
 		IF  inoStatus.State.AutoEnable THEN
+			_progress := _progress + 1;
+		END_IF;
+	END_IF;
+	
+	IF _progress = 2 THEN
+		inoControl.OperationEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.OperationEnable THEN
 			_progress := _progress + 1;
 		END_IF;
 	END_IF;

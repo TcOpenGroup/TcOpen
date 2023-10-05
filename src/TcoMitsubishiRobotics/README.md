@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The **TcoMitsubishiRobotics** is a set of libraries that cover two product platforms in ABB's manufacturing portfolio: the **IRC5** and the **Omnicore** platform." for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
+The **TcoMitsubishiRobotics** is a set of libraries that cover two product platforms in Mitsubishi's manufacturing portfolio: the **CR series**  for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
 
 The package consists of a PLC library providing control logic and its .NET twin counterpart aimed at the visualization part.
 
@@ -13,10 +13,10 @@ The package consists of a PLC library providing control logic and its .NET twin 
  ## TcoMitsubishiRobotics
 ### PLC enviroment
 --- 
-#### **_Preconditions:_** The **`gsdml`** file(s) should be copied into the subfolder ..\Config\Io\EtherCat\ of the TwinCAT3 instalation folder, before opening Visual Studio. The Profinet interface of the slave device is activated. The file depends on manufacturer of drive. Robot settings needs to by done in settings   by RobotStudio sfotware by ABB or directly via robot teach pendant. 
+#### **_Preconditions:_** The **`gsdml`** file(s) should be copied into the subfolder ..\Config\Io\EtherCat\ of the TwinCAT3 instalation folder, before opening Visual Studio. The Profinet interface of the slave device is activated. The file depends on manufacturer of drive. Robot settings needs to by done in settings   by RT ToolBox3  sfotware by Mitshubishi or directly via robot teach pendant. 
 ---
 
-#### **_Preconditions:_** The robot software is part of repository. Use **RobotStudio** to open project. And transfer it  to robot.
+#### **_Preconditions:_** The robot software is part of repository. Use **RT ToolBox3** to open project. And transfer it  to robot.
 ---
 
 #### Implementation steps.
@@ -24,31 +24,26 @@ The package consists of a PLC library providing control logic and its .NET twin 
 ```csharp
 
 VAR_GLOBAL
-  	Robot1	:	TcoMitsubishiRobotics.TcoIrc5_IO_v_1_x_x;
-	Robot2	:	TcoMitsubishiRobotics.TcoOmnicore_IO_v_1_x_x;
+Robot1	:	TcoMitsubishiRobotics.TcoCr800_IO_v_1_x_x;
 END_VAR
 ```
 #### 2. Build the XAE project.
 
 #### 3. Add Profinet master device, set its network adapter and network parameters.
 
-#### 4. Scann for new Profinet devices, or use already prepared `xti` files and  use `Add Existing`. This files are localized in `.\src\TcoMitsubishiRobotics\src\TcoMitsubishiRoboticsConnector\ddf\`. `Robot1.xti` is valid for Irc5 and `Robot2.xti` for `Omnicore` 
+#### 4. Scann for new Profinet devices, or use already prepared `xti` files and  use `Add Existing`. This files are localized in `.\src\TcoMitsubishiRobotics\src\TcoMitsubishiRoboticsConnector\ddf\`. `robot.xti` is valid for `CR series`` 
 
 #### 5. Connect your Gvl structures with  hardware. Refers to bechokff drives documentation if there are some issues, or for guidance how to mapping. 
 
 #### 6. Create the Function Block that extends the **`TcoCore.TcoContext`** function block.
 
-#### 7. Inside the declaration part of the function block created, add an instance of the **`TcoMitsubishiRobotics.TcoIrc5_v_1_x_x`** , **`TcoMitsubishiRobotics.TcoSingleAxis`** or **`TcoMitsubishiRobotics.TcoOmnicore_v_1_x_x`**. Add the **`Main`** method into this function block  and insert the instances. Call with passing the mapped hardware structure
+#### 7. Inside the declaration part of the function block created, add an instance of the **`TcoMitsubishiRobotics.TcoCr800_v_1_x_x`**. Add the **`Main`** method into this function block  and insert the instances. Call with passing the mapped hardware structure
 
 ```csharp
 FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
 VAR
-     {attribute addProperty Name "<#Abb IRC 5#>"}
-    _robot1 : TcoMitsubishiRobotics.TcoIrc5_v_1_x_x(THIS^);
-	{attribute addProperty Name "<#Abb Omnicore#>"}
-    _robot2 : TcoMitsubishiRobotics.TcoOmnicore_v_1_x_x(THIS^);
-
-
+   {attribute addProperty Name "<#Mitsubichi Cr800#>"}
+    _robot1 : TcoMitsubishiRobotics.TcoCr800_v_1_x_x(THIS^);
 END_VAR
 
 ```
@@ -58,17 +53,13 @@ END_VAR
 ```csharp
 /IF _serviceModeActive THEN
    	_robot1.Service();
-  	_robot2.Service();
- 
-
-
 END_IF
-_robot1(
+_robot1(inPnIoBoxDiag:=GVL.Robot1.PnIoBoxDiag,
+	inPnIoBoxState:=gvl.Robot1.PnIoBoxState,
     inoData := GVL.Robot1);
 
 
-_robot2(
-    inoData := GVL.Robot2);
+
 ```
 
 #### 9. In the declaration part of the **`MAIN(PRG)`** create an instance of the function block created in the step 7 according to the example. 
@@ -127,15 +118,15 @@ _wpfContext.Run();
             = new TcoMitsubishiRoboticsTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
 ```
 
-#### 3. Into the container added, insert the **`RenderableContentControl`** and bind its **`DataContext`** to the **`   _tcoDriveSimpleTestContext : TcoDriveSimpleTestContext`**, using the **`PresentationType`** of the value **`Service`**.
+#### 3. Into the container added, insert the **`RenderableContentControl`** and bind its **`DataContext`** to the **`     _tcoTestContext : TcoTestContext`**, using the **`PresentationType`** of the value **`Service`**.
 ```XML
     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
-	<vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>
-```
 
 ```
+
+
 #### 4. After starting the application and expanding the view, final view should look as follows:
-```
+
 
 
 Collapsed Service view 
@@ -150,7 +141,7 @@ Expanded (detailed info) view
 
 Service view report an error notification
 
-![](assets/robotEstopActive.png)
+![](assets/robotErrorActive.png)
 
 
 
@@ -288,19 +279,6 @@ IF (seq.Step(inStepID := 16,
 END_IF;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //
 IF (seq.Step(inStepID := 500,
     inEnabled := TRUE,
@@ -387,3 +365,4 @@ IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
 END_IF;
 
 seq.Close();
+```
