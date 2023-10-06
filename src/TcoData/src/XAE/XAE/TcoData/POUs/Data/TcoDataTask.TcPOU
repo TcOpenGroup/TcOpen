@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDataTask" Id="{7211395c-b0ba-0bf9-25be-0541f79b5876}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -24,18 +24,6 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{03c5aeaf-9a88-0e65-2886-43aec8e1a787}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : TcoCore.ITcoObject;	
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="WithId" Id="{73957c41-6f21-008e-2bf1-1954b1beab89}">
       <Declaration><![CDATA[(*~
 	<docu>
