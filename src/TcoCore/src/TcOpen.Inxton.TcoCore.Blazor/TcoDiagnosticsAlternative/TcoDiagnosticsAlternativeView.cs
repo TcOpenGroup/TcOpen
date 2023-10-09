@@ -23,18 +23,23 @@ namespace TcoCore
 {
     public partial class TcoDiagnosticsAlternativeView
     {
-
+        /// <summary>
+        /// DataService connects to the Mongo Database, given from the Blazor Context Manager
+        /// It is responsible for Fetching, Updating, Filtering and so on
+        /// </summary>
         [Inject]
         public DataService DataService { get; set; }
 
+        /// <summary>
+        /// DataCleanupService is responsible for limiting the entries to 5000 logs
+        /// </summary>
         [Inject]
         public DataCleanupService DataCleanupService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-           // IsTcoObject tcoObject;
-           //ViewModel = new TcoObjectDiagnosticsAlternativeViewModel(tcoObject, DataService);
-            
+            //Necessary for the Deserialization of the BSON Log Entries,
+            //because there are different structures of Json Objects, which are handled differently
             if (!BsonClassMap.IsClassMapRegistered(typeof(SenderProperties)))
             {
                 BsonClassMap.RegisterClassMap<SenderProperties>(cm =>
@@ -49,17 +54,20 @@ namespace TcoCore
             DiagnosticsUpdateTimer();
         }
 
-        public DateTime timetest { get; set; } = DateTime.UtcNow;
-        //SetsUpdate Intervall via Consuming App
+        public DateTime timetest { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// SetsUpdate Intervall via Consuming App
+        /// </summary>
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
-        private static int _diagnosticsUpdateInterval { get; set; } = 100;
+        private static int _diagnosticsUpdateInterval { get; set; } = 300;
         private Timer messageUpdateTimer;
 
         //private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";
 
         //Paging and Navigation
-        private static int itemsPerPage { get; set; } = 15;
+        private static int itemsPerPage { get; set; } = 20;
         private int currentPage = 1;
         private int totalPages => (CachedDataCount + itemsPerPage - 1) / itemsPerPage;
         public bool IsFirstDisabled => currentPage == 1;
@@ -85,24 +93,35 @@ namespace TcoCore
                 ViewModel.UpdateMessages();
 
                 CachedDataCount = DataService.GetCachedDataCount();
-                DataService.ExtractIdentity();
                 MongdoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData);
+                DataService.ExtractIdentity();
+                DataService.FilterDataEntriesToUpdate();
+                DataService.CategorizeMessages(ViewModel.MessageDisplay.ToList());
+                await DataService.PurgeNewerSimilarMessages();
+                await DataService.AutoAckNonPinnedMessages(ViewModel.MessageDisplay);
+
                 StateHasChanged();
             });
         }
+
+        //there is a big problem, which leads to alot of complicated stuff that
+        // there is not real possibility of knowing, when a Message is still active.
+        // Not the Property IsActive or anything else, in the TcoDiagnostics Component it gets solved without
+        // just setting Pinned to false, and displaying the new Message.
+        // i do not like that, several reasons. => then the origin Timestamp is wrong, Cycle is wrong.
+        // but my understanding is, as long as the Error Cause is active, the Messages shall remain untouched.
+        // Problem now, when i set pinned to false, and check which Messages still occur, the Logger creates new Logs.
+        // => my Solution is, to have a Purge Method(), which purges from my DB newer Messages, when the Origin Error Message is not Acknowledged
 
         public async Task AcknowledgeAllMessages()
         {
             try
             {
-
-                await DataService.UpdateAllMessagesInDb();
-
-                foreach (var item in DataService.CachedDataEntriesToUpdate)
-                {
-                TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = ViewModel._tcoObject.HumanReadable, rootSymbol = ViewModel._tcoObject.Symbol });
-                }
-                //await DataService.UpdateMessageInDb(identity, messageDigest);
+                await DataService.TryAcknowledgeAllMessages(ViewModel.MessageDisplay);
+                //foreach (var item in DataService.CachedDataEntriesToUpdate)
+                //{
+                //TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = ViewModel._tcoObject.HumanReadable, rootSymbol = ViewModel._tcoObject.Symbol });
+                //}
             }
             catch (System.Exception ex)
             {
@@ -119,14 +138,6 @@ namespace TcoCore
             catch (System.Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-            }
-        }
-
-        private IEnumerable<MongoDbLogItem> CheckActiveMessages()
-        {
-            foreach (var item in DataService.CachedDataEntriesToUpdate
-                .Where(item => item.Properties.ExtractedIdentity == ViewModel.MessageDisplay.Identity && item.MessageDig){
-
             }
         }
 
@@ -178,7 +189,7 @@ namespace TcoCore
         }
 
 
-        // Unsubscribe from the event when the component is disposed of
+        //Unsubscribe from the event when the component is disposed of
         //public void Dispose()
         //{
         //    ViewModel.NewMessageReceived -= OnNewMessageReceived;
@@ -217,10 +228,7 @@ namespace TcoCore
         //public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
         //public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.All;
 
-        //public int UniqueMessagesCount => uniqueMessages?.Count ?? 0;
-
-        //public int DbMessageDisplayCount => ViewModel.DbMessageDisplay?.Count() ?? 0;
-
+   
         private void DiagnosticsUpdateTimer()
         {
             if (messageUpdateTimer == null)

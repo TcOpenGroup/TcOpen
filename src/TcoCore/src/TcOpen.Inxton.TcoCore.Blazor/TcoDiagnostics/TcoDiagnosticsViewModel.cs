@@ -18,7 +18,6 @@ namespace TcoCore
 
         public TcoDiagnosticsViewModel()
         {
-            Console.WriteLine("Default constructor called TcoDiagnosticsViewModel");
             this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
         }
 

@@ -83,8 +83,9 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
     public class PayloadProperties
     {
         public string rootObject { get; set; }
-
         public string rootSymbol { get; set; }
+        [BsonExtraElements]
+        public IDictionary<string, object> ExtraElements { get; set; }
     }
 
     public class SenderProperties

@@ -63,7 +63,7 @@
         </select>
     </div>*@
     <div class="col-2">
-        <button class="form-control" @onclick="() => AcknowledgeMessages()">Acknowledge All Messages</button>
+        <button class="form-control" @onclick="() => AcknowledgeAllMessages()">Acknowledge All Messages</button>
     </div>
    @* <div class="col-6 m-3">
         <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
@@ -79,8 +79,8 @@
             <th>Fehler Category</th>
             <th>Rendered Message</th>
             <th>PLC Logger</th>
-            <th>Message Digest (Unique Hash)</th>
-            <th>Identity</th>
+           @* <th>Message Digest (Unique Hash)</th>
+            <th>Identity</th>*@
             <th>Action</th>
         </tr>
     </thead>
@@ -94,8 +94,8 @@
             <td>@message.Level</td>
             <td>@message.Properties.sender.Payload.Raw</td>
             <td>@message.Properties.sender.Payload.ParentSymbol</td>
-            <td>@message.Properties.sender.Payload.MessageDigest</td>
-            <td>@message.Properties.ExtractedIdentity</td>
+            @*<td>@message.Properties.sender.Payload.MessageDigest</td>
+            <td>@message.Properties.ExtractedIdentity</td>*@
              <td>
                  <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
                      Acknowledge
